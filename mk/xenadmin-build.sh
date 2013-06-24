@@ -49,8 +49,8 @@ mkdir_clean ${BUILD_ARCHIVE}
 rm -rf ${TEST_DIR}/* ${XENCENTER_LOGDIR}/XenCenter.log || true
 
 #the local revision numbers are the same as the local revision numbers on the remote repository;
-#also we know that xenadmin.hg is not a patch queue style repository
-CSET_NUMBER=$(cd ${REPO} && hg parents --template "{rev}" && echo "")
+#also we know that xenadmin.git is not a patch queue style repository
+CSET_NUMBER=$(cd ${REPO} && git parents --template "{rev}" && echo "")
 
 #bring in version and branding info from latest xe-phase-1
 wget ${WGET_OPT} ${WEB_XE_PHASE_1}/globals -P ${SCRATCH_DIR}
@@ -378,7 +378,7 @@ done
 
 #create manifest
 echo "@branch=${XS_BRANCH}" >> ${OUTPUT_DIR}/manifest
-echo "xenadmin xenadmin.hg" ${get_MERCURIAL_REVISION:0:12} >> ${OUTPUT_DIR}/manifest
+echo "xenadmin xenadmin.git" ${get_GIT_REVISION:0:12} >> ${OUTPUT_DIR}/manifest
 cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep xencenter-ovf >> ${OUTPUT_DIR}/manifest
 cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep chroot-lenny >> ${OUTPUT_DIR}/manifest
 cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep branding >> ${OUTPUT_DIR}/manifest

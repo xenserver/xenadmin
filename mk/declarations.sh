@@ -78,13 +78,15 @@ then
     echo "Warning: BUILD_URL env var not set, we will use 'n/a'"
 fi
 
-if [ -z "${MERCURIAL_REVISION+xxx}" ]
+get_GIT_REVISION=${GIT_COMMIT}
+
+if [ -z "${get_GIT_REVISION+xxx}" ]
 then 
-    MERCURIAL_REVISION="none"
-    echo "Warning: MERCURIAL_REVISION env var not set, we will use $MERCURIAL_REVISION"
+    get_GIT_REVISION="none"
+    echo "Warning: GIT_COMMIT env var not set, we will use $get_GIT_REVISION"
 fi
 
-XS_BRANCH=`cd $DIR;hg showconfig paths.default|sed -e 's@.*carbon/\(.*\)/xenadmin.hg.*@\1@'`
+XS_BRANCH=`cd $DIR;git config --get remote.origin.url|sed -e 's@.*carbon/\(.*\)/xenadmin.git.*@\1@'`
 echo Running on branch: $XS_BRANCH
 
 #rename Jenkins environment variables to distinguish them from ours; remember to use them as get only
@@ -92,7 +94,6 @@ get_JOB_NAME=${JOB_NAME}
 get_BUILD_NUMBER=${BUILD_NUMBER}
 get_BUILD_ID=${BUILD_ID}
 get_BUILD_URL=${BUILD_URL}
-get_MERCURIAL_REVISION=${MERCURIAL_REVISION}
 
 #do everything in place as jenkins runs a clean build, i.e. will delete previous artifacts on starting
 if [ -z "${WORKSPACE+xxx}" ]
@@ -109,7 +110,7 @@ else
 fi
 
 echo "Workspace located in: $ROOT"
-REPO=${ROOT}/xenadmin.hg
+REPO=${ROOT}/xenadmin.git
 REF_REPO=${ROOT}/xenadmin-ref.hg
 SCRATCH_DIR=${ROOT}/scratch
 OUTPUT_DIR=${ROOT}/output
