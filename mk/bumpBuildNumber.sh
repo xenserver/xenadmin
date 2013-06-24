@@ -52,8 +52,8 @@ ssh_key="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/id_dsa"
 PSQL="ssh -i ${ssh_key} -q xenbuild@xenbuilder.uk.xensource.com PGPASSWORD=xenadmindb psql -q -A -t xenbuilder xenadmin"
 
 MAX_BN=`${PSQL} << eof
-INSERT INTO xenadmin_builds (build_number,job,revision) SELECT ${get_BUILD_NUMBER},'${get_JOB_NAME}','${get_MERCURIAL_REVISION}' WHERE NOT EXISTS ( SELECT 1 FROM xenadmin_builds WHERE build_number = ${get_BUILD_NUMBER});
-UPDATE xenadmin_builds SET job='${get_JOB_NAME}',revision='${get_MERCURIAL_REVISION}' WHERE build_number=${get_BUILD_NUMBER};
+INSERT INTO xenadmin_builds (build_number,job,revision) SELECT ${get_BUILD_NUMBER},'${get_JOB_NAME}','${get_GIT_REVISION}' WHERE NOT EXISTS ( SELECT 1 FROM xenadmin_builds WHERE build_number = ${get_BUILD_NUMBER});
+UPDATE xenadmin_builds SET job='${get_JOB_NAME}',revision='${get_GIT_REVISION}' WHERE build_number=${get_BUILD_NUMBER};
 SELECT MAX(build_number) FROM xenadmin_builds;
 eof`
 
