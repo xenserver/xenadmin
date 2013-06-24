@@ -1,0 +1,424 @@
+<?xml version="1.0"?>
+<CIM CIMVERSION="2.3" DTDVERSION="2.2">
+  <DECLARATION>
+    <DECLGROUP>
+      <VALUE.OBJECT>
+        <CLASS SUPERCLASS="CIM_SettingData" NAME="CIM_ResourceAllocationSettingData">
+          <QUALIFIER TOSUBCLASS="false" NAME="Experimental" TYPE="boolean">
+            <VALUE>true</VALUE>
+          </QUALIFIER>
+          <QUALIFIER TOSUBCLASS="false" TRANSLATABLE="true" NAME="Version" TYPE="string">
+            <VALUE>2.21.0</VALUE>
+          </QUALIFIER>
+          <QUALIFIER NAME="UMLPackagePath" TYPE="string">
+            <VALUE>CIM::Core::Resource</VALUE>
+          </QUALIFIER>
+          <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+            <VALUE>The ResourceAllocationSettingData class represents settings specifically related to an allocated resource that are outside the scope of the CIM class typically used to represent the resource itself. These settings include information specific to the allocation that may not be visible to the consumer of the resource itself. For example, a virtual processor may look like a 2 ghz processor to the consumer (virtual computer system), however the virtualization system may use time-slicing to schedule the the virtual processor to only allow it to use 1 ghz.</VALUE>
+          </QUALIFIER>
+          <PROPERTY CLASSORIGIN="CIM_ResourceAllocationSettingData" PROPAGATED="false" NAME="ResourceType" TYPE="uint16">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>The type of resource this allocation setting represents.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ValueMap" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>1</VALUE>
+                <VALUE>2</VALUE>
+                <VALUE>3</VALUE>
+                <VALUE>4</VALUE>
+                <VALUE>5</VALUE>
+                <VALUE>6</VALUE>
+                <VALUE>7</VALUE>
+                <VALUE>8</VALUE>
+                <VALUE>9</VALUE>
+                <VALUE>10</VALUE>
+                <VALUE>11</VALUE>
+                <VALUE>12</VALUE>
+                <VALUE>13</VALUE>
+                <VALUE>14</VALUE>
+                <VALUE>15</VALUE>
+                <VALUE>16</VALUE>
+                <VALUE>17</VALUE>
+                <VALUE>18</VALUE>
+                <VALUE>19</VALUE>
+                <VALUE>20</VALUE>
+                <VALUE>21</VALUE>
+                <VALUE>22</VALUE>
+                <VALUE>23</VALUE>
+                <VALUE>24</VALUE>
+                <VALUE>25</VALUE>
+                <VALUE>26</VALUE>
+                <VALUE>27</VALUE>
+                <VALUE>28</VALUE>
+                <VALUE>29</VALUE>
+                <VALUE>30</VALUE>
+                <VALUE>31</VALUE>
+                <VALUE>32</VALUE>
+                <VALUE>33</VALUE>
+                <VALUE>..</VALUE>
+                <VALUE>0x8000..0xFFFF</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Values" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>Other</VALUE>
+                <VALUE>Computer System</VALUE>
+                <VALUE>Processor</VALUE>
+                <VALUE>Memory</VALUE>
+                <VALUE>IDE Controller</VALUE>
+                <VALUE>Parallel SCSI HBA</VALUE>
+                <VALUE>FC HBA</VALUE>
+                <VALUE>iSCSI HBA</VALUE>
+                <VALUE>IB HCA</VALUE>
+                <VALUE>Ethernet Adapter</VALUE>
+                <VALUE>Other Network Adapter</VALUE>
+                <VALUE>I/O Slot</VALUE>
+                <VALUE>I/O Device</VALUE>
+                <VALUE>Floppy Drive</VALUE>
+                <VALUE>CD Drive</VALUE>
+                <VALUE>DVD drive</VALUE>
+                <VALUE>Disk Drive</VALUE>
+                <VALUE>Tape Drive</VALUE>
+                <VALUE>Storage Extent</VALUE>
+                <VALUE>Other storage device</VALUE>
+                <VALUE>Serial port</VALUE>
+                <VALUE>Parallel port</VALUE>
+                <VALUE>USB Controller</VALUE>
+                <VALUE>Graphics controller</VALUE>
+                <VALUE>IEEE 1394 Controller</VALUE>
+                <VALUE>Partitionable Unit</VALUE>
+                <VALUE>Base Partitionable Unit</VALUE>
+                <VALUE>Power</VALUE>
+                <VALUE>Cooling Capacity</VALUE>
+                <VALUE>Ethernet Switch Port</VALUE>
+                <VALUE>Logical Disk</VALUE>
+                <VALUE>Storage Volume</VALUE>
+                <VALUE>Ethernet Connection</VALUE>
+                <VALUE>DMTF reserved</VALUE>
+                <VALUE>Vendor Reserved</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_ResourceAllocationSettingData.OtherResourceType</VALUE>
+                <VALUE>CIM_ResourceAllocationSettingData.ResourceSubType</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ResourceAllocationSettingData" PROPAGATED="false" NAME="OtherResourceType" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>A string that describes the resource type when a well defined value is not available and ResourceType has the value &quot;Other&quot;.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_ResourceAllocationSettingData.ResourceType</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ResourceAllocationSettingData" PROPAGATED="false" NAME="ResourceSubType" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>A string describing an implementation specific sub-type for this resource. For example, this may be used to distinguish different models of the same resource type.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_ResourceAllocationSettingData.ResourceType</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ResourceAllocationSettingData" PROPAGATED="false" NAME="PoolID" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>This property specifies which ResourcePool the resource is currently allocated from, or which ResourcePool the resource will be allocated from when the allocation occurs.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_ResourcePool.PoolId</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ResourceAllocationSettingData" PROPAGATED="false" NAME="ConsumerVisibility" TYPE="uint16">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                Describes the consumers visibility to the allocated resource.
+                A value of &quot;Passed-Through&quot; indicates the underlying or host resource is utilized and passed through to the consumer, possibly using partitioning. At least one item shall be present in the HostResource property.
+                A value of &quot;Virtualized&quot; indicates the resource is virtualized and may not map directly to an underlying/host resource. Some implementations may support specific assignment for virtualized resources, in which case the host resource(s) are exposed using the HostResource property.
+                A value of &quot;Not represented&quot; indicates a representation of the resource does not exist within the context of the resource consumer.
+              </VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ValueMap" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>0</VALUE>
+                <VALUE>2</VALUE>
+                <VALUE>3</VALUE>
+                <VALUE>4</VALUE>
+                <VALUE>..</VALUE>
+                <VALUE>32767..65535</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Values" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>Unknown</VALUE>
+                <VALUE>Passed-Through</VALUE>
+                <VALUE>Virtualized</VALUE>
+                <VALUE>Not represented</VALUE>
+                <VALUE>DMTF reserved</VALUE>
+                <VALUE>Vendor Reserved</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY.ARRAY CLASSORIGIN="CIM_ResourceAllocationSettingData" PROPAGATED="false" NAME="HostResource" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                This property exposes specific assignment of resources. Each non-null value of the HostResource property shall be formated as a URI per RFC3986.
+                If this resource is modeled then a value should be a WBEM URI (DSP0207). If the resource is not modeled then see the appropriate profile.
+                Profiles may further constrain the type of URI. A NULL value or empty array requests the implementation decide the kind of host resource.
+                If the virtual resource is mapped to more than oneunderlying resource, this property may be left NULL.
+                If NULL, the DeviceAllocatedFromPool or ResourceAllocationFromPool associations may be used to determine the pool of host resources this virtual resource may use. If specific assignment is utilized, all underlying resources used by this virtual resource should be listed.The kind of dependency is specified by the ConsumerVisibility and the MappingBehavior properties. Typically the array contains one item, however multiple host resources may be specified.
+                A client may set the value(s) to indicate that the requested virtual resource allocation be based on host resources that are identified by element values.
+              </VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_ResourceAllocationSettingData.ConsumerVisibility</VALUE>
+                <VALUE>CIM_ResourceAllocationSettingData.MappingBehavior</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY.ARRAY>
+          <PROPERTY CLASSORIGIN="CIM_ResourceAllocationSettingData" PROPAGATED="false" NAME="AllocationUnits" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                This property specifies the units of allocation used by the Reservation and Limit properties. For example, when ResourceType=Processor, AllocationUnits may be set to hertz*10^6 or percent. When ResourceType=Memory, AllocationUnits may be set to bytes*10^3.
+                It is expected that profiles constrain the units that apply in context of particular resource types.
+                The value of this property shall be a legal value of the Programmatic Units qualifier as defined in Annex C.1 of DSP0004 V2.5 or later.
+              </VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_ResourceAllocationSettingData.Reservation</VALUE>
+                <VALUE>CIM_ResourceAllocationSettingData.Limit</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER NAME="IsPUnit" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ResourceAllocationSettingData" PROPAGATED="false" NAME="VirtualQuantity" TYPE="uint64">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                This property specifies the quantity of resources presented to the consumer. For example, when ResourceType=Processor, this property would reflect the number of discrete Processors presented to the virtual computer system. When ResourceType=Memory, this property could reflect the number of MB reported to the virtual computer system.
+                The value of the VirtualQuantity property shall be expressed in units as defined by the value of the VirtualQuantityUnits property.
+              </VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_ResourceAllocationSettingData.VirtualQuantityUnits</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ResourceAllocationSettingData" PROPAGATED="false" NAME="Reservation" TYPE="uint64">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                This property specifies the amount of resource guaranteed to be available for this allocation. On system which support over-commitment of resources, this value is typically used for admission control to prevent an an allocation from being accepted thus preventing starvation.
+                The value of the Reservation property is expressed in the unit specified by the value of the AllocationUnits property.
+              </VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_ResourceAllocationSettingData.AllocationUnits</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ResourceAllocationSettingData" PROPAGATED="false" NAME="Limit" TYPE="uint64">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                This property specifies the upper bound, or maximum amount of resource that will be granted for this allocation. For example, a system which supports memory paging may support setting the Limit of a Memory allocation below that of the VirtualQuantity, thus forcing paging to occur for this allocation.
+                The value of the Limit property is expressed in the unit specified by the value of the AllocationUnits property.
+              </VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_ResourceAllocationSettingData.AllocationUnits</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ResourceAllocationSettingData" PROPAGATED="false" NAME="Weight" TYPE="uint32">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>This property specifies a relative priority for this allocation in relation to other allocations from the same ResourcePool. This property has no unit of measure, and is only relevant when compared to other allocations vying for the same host resources.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ResourceAllocationSettingData" PROPAGATED="false" NAME="AutomaticAllocation" TYPE="boolean">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>This property specifies if the resource will be automatically allocated. For example when set to true, when the consuming virtual computer system is powered on, this resource would be allocated. A value of false indicates the resource must be explicitly allocated. For example, the setting may represent removable media (cdrom, floppy, etc.) where at power on time, the media is not present. An explicit operation is required to allocate the resource.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ResourceAllocationSettingData" PROPAGATED="false" NAME="AutomaticDeallocation" TYPE="boolean">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>This property specifies if the resource will be automatically de-allocated. For example, when set to true, when the consuming virtual computer system is powered off, this resource would be de-allocated. When set to false, the resource will remain allocated and must be explicitly de-allocated.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ResourceAllocationSettingData" PROPAGATED="false" NAME="Parent" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>The Parent of the resource. For example, a controller for the current allocation</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY.ARRAY CLASSORIGIN="CIM_ResourceAllocationSettingData" PROPAGATED="false" NAME="Connection" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>The thing to which this resource is connected. For example, a named network or switch port.</VALUE>
+            </QUALIFIER>
+          </PROPERTY.ARRAY>
+          <PROPERTY CLASSORIGIN="CIM_ResourceAllocationSettingData" PROPAGATED="false" NAME="Address" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>The address of the resource. For example, the MAC address of a Ethernet port.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ResourceAllocationSettingData" PROPAGATED="false" NAME="MappingBehavior" TYPE="uint16">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Specifies how this resource maps to underlying resourcesIf the HostResource array contains any entries, this property reflects how the resource maps to those specific resources.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ValueMap" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>0</VALUE>
+                <VALUE>2</VALUE>
+                <VALUE>3</VALUE>
+                <VALUE>4</VALUE>
+                <VALUE>5</VALUE>
+                <VALUE>..</VALUE>
+                <VALUE>32767..65535</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Values" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>Unknown</VALUE>
+                <VALUE>Not Supported</VALUE>
+                <VALUE>Dedicated</VALUE>
+                <VALUE>Soft Affinity</VALUE>
+                <VALUE>Hard Affinity</VALUE>
+                <VALUE>DMTF Reserved</VALUE>
+                <VALUE>Vendor Reserved</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ResourceAllocationSettingData" PROPAGATED="false" NAME="AddressOnParent" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Describes the address of this resource in the context of the Parent. The Parent/AddressOnParent properties are used to describe the controller relationship as well the ordering of devices on a controller.For example, if the parent is a PCI Controller, this property would specify the PCI slot of this child device.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ResourceAllocationSettingData" PROPAGATED="false" NAME="VirtualQuantityUnits" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                This property specifies the units used by the VirtualQuantity property. For example
+                - if ResourceType=Processor, the value of the VirtualQuantityUnits property may be set to &quot;count&quot;, indicating that the value of the VirtualQuantity property is expressed as a count.
+                - if ResourceType=Memory, the value of the VirtualQuantityUnits property may be set to &quot;bytes*10^3&quot;, indicating that the value of the VirtualQuantity property is expressed in kilobyte.
+                It is expected that profiles constrain the units that apply in context of particular resource types.
+                The value of this property shall be a legal value of the Programmatic Units qualifier as defined in Annex C.1 of DSP0004 V2.5 or later.
+              </VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_ResourceAllocationSettingData.VirtualQuantity</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER NAME="IsPUnit" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <VALUE>count</VALUE>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_SettingData" PROPAGATED="true" NAME="InstanceID" TYPE="string">
+            <QUALIFIER OVERRIDABLE="false" NAME="Key" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TOSUBCLASS="false" NAME="Override" TYPE="string">
+              <VALUE>InstanceID</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                Within the scope of the instantiating Namespace, InstanceID opaquely and uniquely identifies an instance of this class. To ensure uniqueness within the NameSpace, the value of InstanceID should be constructed using the following &quot;preferred&quot; algorithm:
+                &lt;OrgID&gt;:&lt;LocalID&gt;
+                Where &lt;OrgID&gt; and &lt;LocalID&gt; are separated by a colon (:), and where &lt;OrgID&gt; must include a copyrighted, trademarked, or otherwise unique name that is owned by the business entity that is creating or defining the InstanceID or that is a registered ID assigned to the business entity by a recognized global authority. (This requirement is similar to the &lt;Schema Name&gt;_&lt;Class Name&gt; structure of Schema class names.) In addition, to ensure uniqueness, &lt;OrgID&gt; must not contain a colon (:). When using this algorithm, the first colon to appear in InstanceID must appear between &lt;OrgID&gt; and &lt;LocalID&gt;.
+                &lt;LocalID&gt; is chosen by the business entity and should not be reused to identify different underlying (real-world) elements. If the above &quot;preferred&quot; algorithm is not used, the defining entity must assure that the resulting InstanceID is not reused across any InstanceIDs produced by this or other providers for the NameSpace of this instance.
+                For DMTF-defined instances, the &quot;preferred&quot; algorithm must be used with the &lt;OrgID&gt; set to CIM.
+              </VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_SettingData" PROPAGATED="true" NAME="ElementName" TYPE="string">
+            <QUALIFIER OVERRIDABLE="false" NAME="Required" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TOSUBCLASS="false" NAME="Override" TYPE="string">
+              <VALUE>ElementName</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>The user-friendly name for this instance of SettingData. In addition, the user-friendly name can be used as an index property for a search or query. (Note: The name does not have to be unique within a namespace.)</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_SettingData" PROPAGATED="true" NAME="ConfigurationName" TYPE="string">
+            <QUALIFIER TOSUBCLASS="false" NAME="Experimental" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>An instance of CIM_SettingData may correspond to a well-known configuration that exists for an associated CIM_ManagedElement. If the ConfigurationName property is non-NULL, the instance of CIM_SettingData shall correspond to a well-known configuration for a Managed Element, the value of the ConfigurationName property shall be the name of the configuration, and the ChangeableType property shall have the value 0 or 2. A value of NULL for the ConfigurationName property shall mean that the instance of CIM_SettingData does not correspond to a well-known configuration for a Managed Element or that this information is unknown.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_SettingData" PROPAGATED="true" NAME="ChangeableType" TYPE="uint16">
+            <QUALIFIER TOSUBCLASS="false" NAME="Experimental" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Enumeration indicating the type of setting. 0 &quot;Not Changeable - Persistent&quot; indicates the instance of SettingData represents primordial settings and shall not be modifiable. 1 &quot;Changeable - Transient&quot; indicates the SettingData represents modifiable settings that are not persisted. Establishing persistent settings from transient settings may be supported. 2 &quot;Changeable - Persistent&quot; indicates the SettingData represents a persistent configuration that may be modified. 3 &quot;Not Changeable - Transient&quot; indicates the SettingData represents a snapshot of the settings of the associated ManagedElement and is not persistent.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ValueMap" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>0</VALUE>
+                <VALUE>1</VALUE>
+                <VALUE>2</VALUE>
+                <VALUE>3</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Values" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>Not Changeable - Persistent</VALUE>
+                <VALUE>Changeable - Transient</VALUE>
+                <VALUE>Changeable - Persistent</VALUE>
+                <VALUE>Not Changeable - Transient</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ManagedElement" PROPAGATED="true" NAME="Caption" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>The Caption property is a short textual description (one- line string) of the object.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="MaxLen" TYPE="uint32">
+              <VALUE>64</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ManagedElement" PROPAGATED="true" NAME="Description" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>The Description property provides a textual description of the object.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ManagedElement" PROPAGATED="true" NAME="Generation" TYPE="uint64">
+            <QUALIFIER TOSUBCLASS="false" NAME="Experimental" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                Generation is an optional, monotonically increasing property that may be used to identify a particular generation of the resource represented by this class.
+                If Generation is supported by the implementation, its value shall not be null.
+                Except as otherwise specified, a value (including null) of Generation specified at creation time shall be replaced by null if Generation is not supported by the implementation or shall be a, (possibly different), non-null value if the implementation does support Generation.
+                After creation and if supported, Generation shall be updated, at least once per access, whenever the represented resource is modified, regardless of the source of the modification.
+                Note: the Generation value only needs to be updated once between references, even if the resource is updated many times. The key point is to assure that it will be different if there have been updates, not to count each update.
+                Note: unless otherwise specified, the value of Generation within one instance is not required to be coordinated with the value of Generation in any other instance.
+                Note:the semantics of the instance, (as defined by its creation class), define the underlying resource. That underlying resource may be a collection or aggregation of resources. And, in that case, the semantics of the instance further define when updates to constituent resources also require updates to the Generation of the collective resource. Default behavior of composite aggregations should be to update the Generation of the composite whenever the Generation of a component is updated.
+                Subclasses may define additional requirements for updates on some or all of related instances.
+                For a particular instance, the value of Generation may wrap through zero, but the elapsed time between wraps shall be greater than 10&apos;s of years.
+                This class does not require Generation to be unique across instances of other classes nor across instances of the same class that have different keys. Generation shall be different across power cycles, resets, or reboots if any of those actions results in an update. Generation may be different across power cycles, resets, or reboots if those actions do not result in an update. If the Generation property of an instance is non-null, and if any attempt to update the instance includes the Generation property, then if it doesn&apos;t match the current value, the update shall fail.
+                The usage of this property is intended to be further specified by applicable management profiles.
+                Typically, a client will read the value of this property and then supply that value as input to an operation that modifies the instance in some means. This may be via an explicit parameter in an extrinsic method or via an embedded value in an extrinsic method or intrinsic operation.
+                For example: a profile may require that an intrinsic instance modification supply the Generation property and that it must match for the modification to succeed.
+              </VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+        </CLASS>
+      </VALUE.OBJECT>
+    </DECLGROUP>
+  </DECLARATION>
+</CIM>

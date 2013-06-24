@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AUTOGENERATED" xml:space="preserve">
+    <value>自动生成的 {0}</value>
+  </data>
+  <data name="CERTIFICATE_IS_INVALID" xml:space="preserve">
+    <value>证书无效。</value>
+  </data>
+  <data name="COMPRESS_FAILED" xml:space="preserve">
+    <value>无法压缩 {0}。</value>
+  </data>
+  <data name="COMPRESS_INVALID_METHOD" xml:space="preserve">
+    <value>不支持压缩方法 {0}。</value>
+  </data>
+  <data name="CONVERSION_FAILED" xml:space="preserve">
+    <value>无法将 OVF 转换为 OVA。</value>
+  </data>
+  <data name="CONVERSION_NO_DATA" xml:space="preserve">
+    <value>无法转换 HyperV 配置文件。</value>
+  </data>
+  <data name="CULTURE_AVAILABLE" xml:space="preserve">
+    <value>区域性</value>
+  </data>
+  <data name="EULA_ACCEPT_MESSAGE" xml:space="preserve">
+    <value>接受或拒绝此 EULA 协议。</value>
+  </data>
+  <data name="EULA_CLOSE_BUTTON" xml:space="preserve">
+    <value>关闭(&amp;C)</value>
+  </data>
+  <data name="EULA_RB_ACCEPT" xml:space="preserve">
+    <value>接受</value>
+  </data>
+  <data name="EULA_RB_REJECT" xml:space="preserve">
+    <value>拒绝</value>
+  </data>
+  <data name="EULA_TITLE" xml:space="preserve">
+    <value>Citrix OVF EULA</value>
+  </data>
+  <data name="FAILED_TO_ADD_OS_SECTION" xml:space="preserve">
+    <value>无法添加操作系统部分，因为虚拟系统集合无效。</value>
+  </data>
+  <data name="FAILED_TO_ADD_VIRTUAL_HARDWARE_SECTION" xml:space="preserve">
+    <value>无法添加虚拟硬件部分，因为虚拟系统集合无效。</value>
+  </data>
+  <data name="FILE_MISSING" xml:space="preserve">
+    <value>找不到 {0}。</value>
+  </data>
+  <data name="INVALID_DATA_IN_OVA" xml:space="preserve">
+    <value>无法获取 OVA 中的下一个文件。</value>
+  </data>
+  <data name="INVALID_DATA_IN_OVF" xml:space="preserve">
+    <value>无法反序列化 OVF 描述符。</value>
+  </data>
+  <data name="OVF_CANNOT_FIND_SECTION" xml:space="preserve">
+    <value>找不到类型为 {0} 且 ID 为 {1} 的部分。</value>
+  </data>
+  <data name="OVF_CANNOT_READ_EULA" xml:space="preserve">
+    <value>无法读取 EULA。</value>
+  </data>
+  <data name="OVF_CDROM_MISSING" xml:space="preserve">
+    <value>找不到 DVD 或 CD 驱动器资源。</value>
+  </data>
+  <data name="OVF_COMPRESSED_OVA_INVALID" xml:space="preserve">
+    <value>解压缩的 OVA 文件没有 ova 扩展名。</value>
+  </data>
+  <data name="OVF_CONTROLLER_MISSING" xml:space="preserve">
+    <value>找不到控制器 {0}。</value>
+  </data>
+  <data name="OVF_COULD_NOT_OPEN_STREAM" xml:space="preserve">
+    <value>无法打开 {0}。</value>
+  </data>
+  <data name="OVF_DEPLOYMENT_CFG_SECTION_MISSING" xml:space="preserve">
+    <value>找不到部署配置部分。</value>
+  </data>
+  <data name="OVF_DEPLOYMENT_SECTION_MISSING" xml:space="preserve">
+    <value>找不到部署部分。</value>
+  </data>
+  <data name="OVF_DEVICE_OUT_OF_RANGE" xml:space="preserve">
+    <value>设备编号 {0} 小于零或大于 15。</value>
+  </data>
+  <data name="OVF_DISK_SECTION_MISSING" xml:space="preserve">
+    <value>找不到磁盘部分。</value>
+  </data>
+  <data name="OVF_ENVELOPE_IS_INVALID" xml:space="preserve">
+    <value>OVF 信封无效。</value>
+  </data>
+  <data name="OVF_INSTALL_SECTION_MISSING" xml:space="preserve">
+    <value>找不到安装部分。</value>
+  </data>
+  <data name="OVF_POST_INSTALL_MISSING" xml:space="preserve">
+    <value>找不到安装后部分。</value>
+  </data>
+  <data name="OVF_POST_INSTALL_OPERATION_MISSING" xml:space="preserve">
+    <value>找不到安装后操作。</value>
+  </data>
+  <data name="OVF_PRODUCT_PROPERTY_MISSING" xml:space="preserve">
+    <value>找不到产品属性 {0}。</value>
+  </data>
+  <data name="OVF_PRODUCT_SECTION_MISSING" xml:space="preserve">
+    <value>找不到产品部分 {0}。</value>
+  </data>
+  <data name="OVF_RASD_MISSING" xml:space="preserve">
+    <value>找不到资源 {0}。</value>
+  </data>
+  <data name="OVF_REFERENCE_SECTION_MISSING" xml:space="preserve">
+    <value>找不到引用部分。</value>
+  </data>
+  <data name="OVF_STARTUP_SECTION_MISSING" xml:space="preserve">
+    <value>找不到启动部分。</value>
+  </data>
+  <data name="OVF_STRINGS_SECTION_MISSING" xml:space="preserve">
+    <value>找不到语言 {0} 的字符串部分。</value>
+  </data>
+  <data name="OVF_STRINGS_SECTION_MISSING_MSG" xml:space="preserve">
+    <value>找不到语言 {1} 的字符串 {0}。</value>
+  </data>
+  <data name="OVF_VHS_MISSING" xml:space="preserve">
+    <value>找不到虚拟硬件部分。</value>
+  </data>
+  <data name="OVF_VIRTUAL_SYSTEM_MISSING" xml:space="preserve">
+    <value>找不到虚拟系统。</value>
+  </data>
+  <data name="PASSWORD_EMPTY" xml:space="preserve">
+    <value>密码为空。</value>
+  </data>
+  <data name="PASSWORD_FAILED" xml:space="preserve">
+    <value>密码无效。</value>
+  </data>
+  <data name="PASSWORD_LABEL" xml:space="preserve">
+    <value>密码:</value>
+  </data>
+  <data name="PASSWORD_NOMATCH" xml:space="preserve">
+    <value>密码不匹配。</value>
+  </data>
+  <data name="PASSWORD_REENTER" xml:space="preserve">
+    <value>重新输入:</value>
+  </data>
+  <data name="PASSWORD_STRENGTH_FAIR" xml:space="preserve">
+    <value>一般；</value>
+  </data>
+  <data name="PASSWORD_STRENGTH_GOOD" xml:space="preserve">
+    <value>良好；</value>
+  </data>
+  <data name="PASSWORD_STRENGTH_LOW" xml:space="preserve">
+    <value>低；</value>
+  </data>
+  <data name="PASSWORD_STRENGTH_PROMPT" xml:space="preserve">
+    <value>密码强度: </value>
+  </data>
+  <data name="PASSWORD_STRENGTH_STRONG" xml:space="preserve">
+    <value>强；</value>
+  </data>
+  <data name="PASSWORD_SUCCESS" xml:space="preserve">
+    <value>密码有效。</value>
+  </data>
+  <data name="PASSWORD_TITLE" xml:space="preserve">
+    <value>输入密码；</value>
+  </data>
+  <data name="PASSWORD_TOO_WEAK" xml:space="preserve">
+    <value>密码强度不足。</value>
+  </data>
+  <data name="PRODUCT_INFO_PROMPT" xml:space="preserve">
+    <value>产品信息:</value>
+  </data>
+  <data name="PRODUCT_PROMPT" xml:space="preserve">
+    <value>产品:</value>
+  </data>
+  <data name="PRODUCT_URL_PROMPT" xml:space="preserve">
+    <value>产品 URL:</value>
+  </data>
+  <data name="RESOURCES_LOADED" xml:space="preserve">
+    <value>已加载。</value>
+  </data>
+  <data name="SECURITY_FAILURE" xml:space="preserve">
+    <value>安全故障</value>
+  </data>
+  <data name="SECURITY_FILE_MISSING" xml:space="preserve">
+    <value>找不到清单中所列的文件。请参阅日志获取缺少文件的列表。</value>
+  </data>
+  <data name="SECURITY_NOT_SUPPORTED" xml:space="preserve">
+    <value>不支持安全方法 {0}。</value>
+  </data>
+  <data name="SECURITY_SECTION_INVALID" xml:space="preserve">
+    <value>安全部分无效。</value>
+  </data>
+  <data name="SECURITY_SIGNATURE_FAILED" xml:space="preserve">
+    <value>文件 {0} 与原始文件不匹配。</value>
+  </data>
+  <data name="UNKNOWN" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="VALIDATION_FAILURE" xml:space="preserve">
+    <value>OVF 包 {0} 无效。</value>
+  </data>
+  <data name="VALIDATION_FILE_NOTFOUND" xml:space="preserve">
+    <value>找不到引用部分中所列的文件 {0}。</value>
+  </data>
+  <data name="VALIDATION_INVALID_CPU_EXCEEDS_LIMIT" xml:space="preserve">
+    <value>处理器数 {0} 超出上限 {1}。</value>
+  </data>
+  <data name="VALIDATION_INVALID_CPU_QUANTITY" xml:space="preserve">
+    <value>处理器数 {0} 无效。</value>
+  </data>
+  <data name="VALIDATION_INVALID_FILETYPE" xml:space="preserve">
+    <value>文件 {0} 的扩展名不受支持。</value>
+  </data>
+  <data name="VALIDATION_INVALID_INSTANCEID" xml:space="preserve">
+    <value>实例 ID 为空。</value>
+  </data>
+  <data name="VALIDATION_INVALID_MEMORY_ALLOCATIONUNITS" xml:space="preserve">
+    <value>内存分配单元无效。</value>
+  </data>
+  <data name="VALIDATION_INVALID_MEMORY_QUANTITY" xml:space="preserve">
+    <value>内存量无效。</value>
+  </data>
+  <data name="VALIDATION_INVALID_TYPE" xml:space="preserve">
+    <value>OVF 信封项目的类型未知。</value>
+  </data>
+  <data name="VALIDATION_INVALID_VERSION" xml:space="preserve">
+    <value>OVF 版本号 {0} 无效。</value>
+  </data>
+  <data name="VALIDATION_NETWORK_NO_DEVICE" xml:space="preserve">
+    <value>网络未连接设备。</value>
+  </data>
+  <data name="VALIDATION_REQUIRED_ELEMENT_NOT_RECOGNIZED" xml:space="preserve">
+    <value>无法识别 ID 为 {0} 且名称为 {1} 的必需资源。</value>
+  </data>
+  <data name="VALIDATION_SCHEMA_FAILED" xml:space="preserve">
+    <value>OVF 描述符无效。</value>
+  </data>
+  <data name="VALIDATION_UNKNOWN_HARDWARE_TYPE" xml:space="preserve">
+    <value>虚拟硬件类型 {0} 无效。</value>
+  </data>
+  <data name="VENDOR_PROMPT" xml:space="preserve">
+    <value>供应商:</value>
+  </data>
+  <data name="VENDOR_URL_PROMPT" xml:space="preserve">
+    <value>供应商 URL:</value>
+  </data>
+  <data name="VERSION_PROMPT" xml:space="preserve">
+    <value>版本:</value>
+  </data>
+</root>

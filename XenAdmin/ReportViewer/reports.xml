@@ -1,0 +1,44 @@
+<Reports>
+	<Report NameLabel="WLBREPORT_HOST_HEALTH_HISTORY" File="host_health_history.rdlc">
+		<QueryParameters>
+			<QueryParameter Name="Start"/>
+			<QueryParameter Name="End"/>
+			<QueryParameter Name="HostID"/>	
+		</QueryParameters>
+	</Report>
+	<Report NameLabel="WLBREPORT_OPTIMIZATION_PERFORMANCE_HISTORY"  File="optimization_performance_history.rdlc">
+		<QueryParameters>
+			<QueryParameter Name="Start"/>
+			<QueryParameter Name="End"/>
+			<QueryParameter Name="PoolID"/>
+		</QueryParameters>
+	</Report>
+	<Report NameLabel="WLBREPORT_POOL_HEALTH"  File="pool_health.rdlc">
+		<QueryParameters>
+			<QueryParameter Name="Start"/>
+			<QueryParameter Name="End"/>
+			<QueryParameter Name="PoolID"/>
+		</QueryParameters>
+	</Report>
+	<Report NameLabel="WLBREPORT_POOL_HEALTH_HISTORY"  File="pool_health_history.rdlc">
+		<QueryParameters>
+			<QueryParameter Name="Start"/>
+			<QueryParameter Name="End"/>
+			<QueryParameter Name="PoolID"/>
+		</QueryParameters>
+	</Report>
+	<Report NameLabel="WLBREPORT_VM_MOTION_HISTORY"  File="vm_movement_history.rdlc">
+		<QueryParameters>
+			<QueryParameter Name="Start"/>
+			<QueryParameter Name="End"/>
+			<QueryParameter Name="PoolID"/>
+		</QueryParameters>
+	</Report>
+	<Report NameLabel="WLBREPORT_VM_PERFORMANCE_HISTORY"  File="vm_performance_history.rdlc">
+		<QueryParameters>
+			<QueryParameter Name="Start"/>
+			<QueryParameter Name="End"/>
+			<QueryParameter Name="HostID"/>
+		</QueryParameters>
+	</Report>
+</Reports>

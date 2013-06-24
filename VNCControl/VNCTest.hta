@@ -1,0 +1,95 @@
+<html>
+ <body color=white>
+  <hr>  
+     <form name="frm" id="frm">
+       Server IP: <input type="text" name="server" value=""> 
+       Port: <input type="text" name="port" value="80"> 
+       <br />
+       VM UUID: <input type="text" name="vmuuid" value="">
+       <br />
+       Credentials: 
+	<input type="text" name="user" value="root">
+	<input type="password" name="pass" value="">
+       <br />
+        Width: <input type="text" name="wdth" value="1024">
+        Height: <input type="text" name="hgt" value="768">
+       <br />
+	Console URL: <input type="text" name="url" size="100">
+       <br />
+	Show Border: <select name="show_border"> <option value="true">true</option><option value="false">false</option></select>
+	<br />
+       Excercise Methods: 
+        <input type=button value="Connect" onClick="doConnect();">
+        <input type=button value="CanConnect" onClick="doCanConnect();">
+        <input type=button value="IsConnected" onClick="doIsConnected();">
+        <input type=button value="Disconnect" onClick="doDisconnect();">
+        <input type=button value="Send Ctrl+Alt+Del" onClick="doSendCtrlAltDel();">
+	<input type=button value="Connect Via URL" onClick="doURLConnect();">
+	<input type=button value="Get VM Resolution" onClick="doGetVMResolution();">
+      </form>
+      <font face=arial size=1>
+       <OBJECT classid="clsid:D52D9588-AB6E-425b-9D8C-74FBDA46C4F8" id="myControl1" name="myControl1" width=300 height=100 OnDisconnectedCallback="myDisconnectedCallback(eventid, msg);">
+       </OBJECT>
+     </font>  
+
+      <script for="myControl1" event="OnResolutionChangeCallbackEvent(msg)" language="javascript">
+	function myControl1::OnResolutionChangeCallbackEvent(msg)
+	{
+           alert("The VMs Resolution has been changed to " + msg);
+	}
+      </script>
+      
+      <script for="myControl1" event="OnDisconnectedCallbackEvent(id, msg)" language="javascript">
+	function myControl1::OnDisconnectedCallbackEvent(id, msg)
+	{
+          alert("Diconnect ID:" + id + " " + msg);
+	}
+	</script>
+  <hr>
+ </body> 
+<script language="javascript">
+      function doGetVMResolution()
+      {
+         fret = myControl1.GetVMResolution();
+         alert(fret);
+      }
+  
+      function myDisconnectedCallback(eventid, msg)
+      {
+         alert("error occured");
+      }
+      
+      function doConnect()
+      {
+          //myControl1.add_OnDisconnectedCallbackEvent(myDisconnectedCallback);
+          fret = myControl1.Connect(frm.server.value, frm.port.value, frm.vmuuid.value, frm.user.value, frm.pass.value, frm.wdth.value, frm.hgt.value, frm.show_border.value);
+          alert(fret);
+      }
+      function doURLConnect()
+      {
+       	fret = myControl1.ConnectConsole(frm.url.value, frm.wdth.value , frm.hgt.value, frm.show_border.value);
+ 	alert(fret);
+      }
+
+
+      function doCanConnect()
+      {
+          fret = myControl1.CanConnect();
+          alert(fret);
+      }
+      function doIsConnected()
+      {
+          fret = myControl1.IsConnected();
+          alert(fret);
+      }
+      function doDisconnect()
+      {
+          fret = myControl1.Disconnect();
+          alert(fret);
+      }
+      function doSendCtrlAltDel()
+      {
+	  myControl1.SendCtrlAltDel();
+      }
+</script>
+</html>

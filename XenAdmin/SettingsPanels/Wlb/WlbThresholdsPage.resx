@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="labelBlurb.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="labelBlurb.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelBlurb.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="labelBlurb.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="labelBlurb.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 12</value>
+  </data>
+  <data name="labelBlurb.Size" type="System.Drawing.Size, System.Drawing">
+    <value>500, 26</value>
+  </data>
+  <data name="labelBlurb.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="labelBlurb.Text" xml:space="preserve">
+    <value>When a resource's utilization reaches its critical threshold, it triggers an optimization recommendation and prevents Workload Balancing from placing additional workloads on that server.</value>
+  </data>
+  <data name="&gt;&gt;labelBlurb.Name" xml:space="preserve">
+    <value>labelBlurb</value>
+  </data>
+  <data name="&gt;&gt;labelBlurb.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelBlurb.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;labelBlurb.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="decentGroupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="decentGroupBox1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1DiskWrite.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1DiskWrite.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="label1DiskWrite.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label1DiskWrite.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 178</value>
+  </data>
+  <data name="label1DiskWrite.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 13</value>
+  </data>
+  <data name="label1DiskWrite.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="label1DiskWrite.Text" xml:space="preserve">
+    <value>Disk &amp;Write</value>
+  </data>
+  <data name="&gt;&gt;label1DiskWrite.Name" xml:space="preserve">
+    <value>label1DiskWrite</value>
+  </data>
+  <data name="&gt;&gt;label1DiskWrite.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1DiskWrite.Parent" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;label1DiskWrite.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="labelDiskRead.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelDiskRead.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelDiskRead.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelDiskRead.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 148</value>
+  </data>
+  <data name="labelDiskRead.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 13</value>
+  </data>
+  <data name="labelDiskRead.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="labelDiskRead.Text" xml:space="preserve">
+    <value>&amp;Disk Read</value>
+  </data>
+  <data name="&gt;&gt;labelDiskRead.Name" xml:space="preserve">
+    <value>labelDiskRead</value>
+  </data>
+  <data name="&gt;&gt;labelDiskRead.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDiskRead.Parent" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;labelDiskRead.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="labelNetworkWrite.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelNetworkWrite.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelNetworkWrite.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelNetworkWrite.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 118</value>
+  </data>
+  <data name="labelNetworkWrite.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 13</value>
+  </data>
+  <data name="labelNetworkWrite.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="labelNetworkWrite.Text" xml:space="preserve">
+    <value>N&amp;etwork Write</value>
+  </data>
+  <data name="&gt;&gt;labelNetworkWrite.Name" xml:space="preserve">
+    <value>labelNetworkWrite</value>
+  </data>
+  <data name="&gt;&gt;labelNetworkWrite.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelNetworkWrite.Parent" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;labelNetworkWrite.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="labelNetworkRead.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelNetworkRead.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelNetworkRead.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelNetworkRead.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 88</value>
+  </data>
+  <data name="labelNetworkRead.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 13</value>
+  </data>
+  <data name="labelNetworkRead.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="labelNetworkRead.Text" xml:space="preserve">
+    <value>&amp;Network Read</value>
+  </data>
+  <data name="&gt;&gt;labelNetworkRead.Name" xml:space="preserve">
+    <value>labelNetworkRead</value>
+  </data>
+  <data name="&gt;&gt;labelNetworkRead.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelNetworkRead.Parent" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;labelNetworkRead.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="labelFreeMemory.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelFreeMemory.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelFreeMemory.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelFreeMemory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 58</value>
+  </data>
+  <data name="labelFreeMemory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 13</value>
+  </data>
+  <data name="labelFreeMemory.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="labelFreeMemory.Text" xml:space="preserve">
+    <value>Free &amp;Memory</value>
+  </data>
+  <data name="&gt;&gt;labelFreeMemory.Name" xml:space="preserve">
+    <value>labelFreeMemory</value>
+  </data>
+  <data name="&gt;&gt;labelFreeMemory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelFreeMemory.Parent" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;labelFreeMemory.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="labelCPU.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelCPU.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelCPU.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelCPU.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 28</value>
+  </data>
+  <data name="labelCPU.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 13</value>
+  </data>
+  <data name="labelCPU.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelCPU.Text" xml:space="preserve">
+    <value>&amp;CPU Utilization</value>
+  </data>
+  <data name="&gt;&gt;labelCPU.Name" xml:space="preserve">
+    <value>labelCPU</value>
+  </data>
+  <data name="&gt;&gt;labelCPU.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelCPU.Parent" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;labelCPU.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="updownDiskWriteCriticalPoint.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 176</value>
+  </data>
+  <data name="updownDiskWriteCriticalPoint.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 20</value>
+  </data>
+  <data name="updownDiskWriteCriticalPoint.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;updownDiskWriteCriticalPoint.Name" xml:space="preserve">
+    <value>updownDiskWriteCriticalPoint</value>
+  </data>
+  <data name="&gt;&gt;updownDiskWriteCriticalPoint.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;updownDiskWriteCriticalPoint.Parent" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;updownDiskWriteCriticalPoint.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="labelNetworkReadUnits.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelNetworkReadUnits.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelNetworkReadUnits.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelNetworkReadUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>190, 88</value>
+  </data>
+  <data name="labelNetworkReadUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 13</value>
+  </data>
+  <data name="labelNetworkReadUnits.TabIndex" type="System.Int32, mscorlib">
+    <value>73</value>
+  </data>
+  <data name="labelNetworkReadUnits.Text" xml:space="preserve">
+    <value>MB per second ({0} - {1})</value>
+  </data>
+  <data name="&gt;&gt;labelNetworkReadUnits.Name" xml:space="preserve">
+    <value>labelNetworkReadUnits</value>
+  </data>
+  <data name="&gt;&gt;labelNetworkReadUnits.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelNetworkReadUnits.Parent" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;labelNetworkReadUnits.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="updownDiskReadCriticalPoint.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 146</value>
+  </data>
+  <data name="updownDiskReadCriticalPoint.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 20</value>
+  </data>
+  <data name="updownDiskReadCriticalPoint.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;updownDiskReadCriticalPoint.Name" xml:space="preserve">
+    <value>updownDiskReadCriticalPoint</value>
+  </data>
+  <data name="&gt;&gt;updownDiskReadCriticalPoint.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;updownDiskReadCriticalPoint.Parent" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;updownDiskReadCriticalPoint.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="labelFreeMemoryUnits.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelFreeMemoryUnits.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelFreeMemoryUnits.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelFreeMemoryUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>190, 58</value>
+  </data>
+  <data name="labelFreeMemoryUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 13</value>
+  </data>
+  <data name="labelFreeMemoryUnits.TabIndex" type="System.Int32, mscorlib">
+    <value>72</value>
+  </data>
+  <data name="labelFreeMemoryUnits.Text" xml:space="preserve">
+    <value>MB ({0} - {1})</value>
+  </data>
+  <data name="&gt;&gt;labelFreeMemoryUnits.Name" xml:space="preserve">
+    <value>labelFreeMemoryUnits</value>
+  </data>
+  <data name="&gt;&gt;labelFreeMemoryUnits.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelFreeMemoryUnits.Parent" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;labelFreeMemoryUnits.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="updownNetworkWriteCriticalPoint.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 116</value>
+  </data>
+  <data name="updownNetworkWriteCriticalPoint.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 20</value>
+  </data>
+  <data name="updownNetworkWriteCriticalPoint.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;updownNetworkWriteCriticalPoint.Name" xml:space="preserve">
+    <value>updownNetworkWriteCriticalPoint</value>
+  </data>
+  <data name="&gt;&gt;updownNetworkWriteCriticalPoint.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;updownNetworkWriteCriticalPoint.Parent" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;updownNetworkWriteCriticalPoint.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="labelCPUUnits.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelCPUUnits.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelCPUUnits.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelCPUUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>190, 28</value>
+  </data>
+  <data name="labelCPUUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 13</value>
+  </data>
+  <data name="labelCPUUnits.TabIndex" type="System.Int32, mscorlib">
+    <value>71</value>
+  </data>
+  <data name="labelCPUUnits.Text" xml:space="preserve">
+    <value>Percent ({0} - {1})</value>
+  </data>
+  <data name="&gt;&gt;labelCPUUnits.Name" xml:space="preserve">
+    <value>labelCPUUnits</value>
+  </data>
+  <data name="&gt;&gt;labelCPUUnits.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelCPUUnits.Parent" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;labelCPUUnits.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="updownNetworkReadCriticalPoint.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 86</value>
+  </data>
+  <data name="updownNetworkReadCriticalPoint.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 20</value>
+  </data>
+  <data name="updownNetworkReadCriticalPoint.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;updownNetworkReadCriticalPoint.Name" xml:space="preserve">
+    <value>updownNetworkReadCriticalPoint</value>
+  </data>
+  <data name="&gt;&gt;updownNetworkReadCriticalPoint.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;updownNetworkReadCriticalPoint.Parent" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;updownNetworkReadCriticalPoint.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="labelNetworkWriteUnits.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelNetworkWriteUnits.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelNetworkWriteUnits.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelNetworkWriteUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>190, 118</value>
+  </data>
+  <data name="labelNetworkWriteUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 13</value>
+  </data>
+  <data name="labelNetworkWriteUnits.TabIndex" type="System.Int32, mscorlib">
+    <value>74</value>
+  </data>
+  <data name="labelNetworkWriteUnits.Text" xml:space="preserve">
+    <value>MB per second ({0} - {1})</value>
+  </data>
+  <data name="&gt;&gt;labelNetworkWriteUnits.Name" xml:space="preserve">
+    <value>labelNetworkWriteUnits</value>
+  </data>
+  <data name="&gt;&gt;labelNetworkWriteUnits.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelNetworkWriteUnits.Parent" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;labelNetworkWriteUnits.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="updownMemoryCriticalPoint.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 56</value>
+  </data>
+  <data name="updownMemoryCriticalPoint.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 20</value>
+  </data>
+  <data name="updownMemoryCriticalPoint.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;updownMemoryCriticalPoint.Name" xml:space="preserve">
+    <value>updownMemoryCriticalPoint</value>
+  </data>
+  <data name="&gt;&gt;updownMemoryCriticalPoint.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;updownMemoryCriticalPoint.Parent" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;updownMemoryCriticalPoint.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="labelDiskReadUnits.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelDiskReadUnits.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelDiskReadUnits.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelDiskReadUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>190, 148</value>
+  </data>
+  <data name="labelDiskReadUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 13</value>
+  </data>
+  <data name="labelDiskReadUnits.TabIndex" type="System.Int32, mscorlib">
+    <value>75</value>
+  </data>
+  <data name="labelDiskReadUnits.Text" xml:space="preserve">
+    <value>MB per second ({0} - {1})</value>
+  </data>
+  <data name="&gt;&gt;labelDiskReadUnits.Name" xml:space="preserve">
+    <value>labelDiskReadUnits</value>
+  </data>
+  <data name="&gt;&gt;labelDiskReadUnits.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDiskReadUnits.Parent" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;labelDiskReadUnits.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="updownCPUCriticalPoint.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 26</value>
+  </data>
+  <data name="updownCPUCriticalPoint.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 20</value>
+  </data>
+  <data name="updownCPUCriticalPoint.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;updownCPUCriticalPoint.Name" xml:space="preserve">
+    <value>updownCPUCriticalPoint</value>
+  </data>
+  <data name="&gt;&gt;updownCPUCriticalPoint.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;updownCPUCriticalPoint.Parent" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;updownCPUCriticalPoint.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="labelDiskWriteUnits.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelDiskWriteUnits.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelDiskWriteUnits.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelDiskWriteUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>190, 178</value>
+  </data>
+  <data name="labelDiskWriteUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 13</value>
+  </data>
+  <data name="labelDiskWriteUnits.TabIndex" type="System.Int32, mscorlib">
+    <value>76</value>
+  </data>
+  <data name="labelDiskWriteUnits.Text" xml:space="preserve">
+    <value>MB per second ({0} - {1})</value>
+  </data>
+  <data name="&gt;&gt;labelDiskWriteUnits.Name" xml:space="preserve">
+    <value>labelDiskWriteUnits</value>
+  </data>
+  <data name="&gt;&gt;labelDiskWriteUnits.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDiskWriteUnits.Parent" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;labelDiskWriteUnits.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="decentGroupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 41</value>
+  </data>
+  <data name="decentGroupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 3, 6, 3</value>
+  </data>
+  <data name="decentGroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>494, 215</value>
+  </data>
+  <data name="decentGroupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="decentGroupBox1.Text" xml:space="preserve">
+    <value>Critical Thresholds</value>
+  </data>
+  <data name="&gt;&gt;decentGroupBox1.Name" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;decentGroupBox1.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;decentGroupBox1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;decentGroupBox1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>506, 322</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="decentGroupBox1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelBlurb" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>506, 322</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>WlbThresholdsPage</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>

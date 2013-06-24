@@ -1,0 +1,544 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B306FC59-4441-4A5F-9F54-D3F68D4EE38D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XenAdmin</RootNamespace>
+    <AssemblyName>XenModel</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CookComputing.XmlRpcV2, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\xml-rpc.net\obj\release\CookComputing.XmlRpcV2.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\log4net\build\bin\net\2.0\release\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Actions\Action.cs" />
+    <Compile Include="Actions\CancellingAction.cs" />
+    <Compile Include="Actions\DR\GetMetadataVDIsAction.cs" />
+    <Compile Include="Actions\DR\DrTaskCreateAction.cs" />
+    <Compile Include="Actions\DR\DrRecoverAction.cs" />
+    <Compile Include="Actions\DR\VdiLoadMetadataAction.cs" />
+    <Compile Include="Actions\Folders\FolderAction.cs" />
+    <Compile Include="Actions\Host\ApplyLicenseEditionAction.cs" />
+    <Compile Include="Actions\Host\DestroyHostAction.cs" />
+    <Compile Include="Actions\Host\EnableHostAction.cs" />
+    <Compile Include="Actions\Host\EvacuateHostAction.cs" />
+    <Compile Include="Actions\Host\HostAbstractAction.cs" />
+    <Compile Include="Actions\Host\HostWithStatus.cs" />
+    <Compile Include="Actions\Host\RebootHostAction.cs" />
+    <Compile Include="Actions\Host\RestartToolstackAction.cs" />
+    <Compile Include="Actions\Host\ShutdownHostAction.cs" />
+    <Compile Include="Actions\Host\SystemStatusAction.cs" />
+    <Compile Include="Actions\Host\TestLocationInstallerAction.cs" />
+    <Compile Include="Actions\Message\DestroyMessageAction.cs" />
+    <Compile Include="Actions\Host\HostBackupRestoreAction.cs" />
+    <Compile Include="Actions\Host\SingleHostStatusAction.cs" />
+    <Compile Include="Actions\MultipleAction.cs" />
+    <Compile Include="Actions\MultipleActionLauncher.cs" />
+    <Compile Include="Actions\ParallelAction.cs" />
+    <Compile Include="Actions\Pool\AddHostToPoolAction.cs" />
+    <Compile Include="Actions\Pool\CreatePoolAction.cs" />
+    <Compile Include="Actions\Pool\PoolAction.cs" />
+    <Compile Include="Actions\Pool_Patch\ApplyPatchAction.cs" />
+    <Compile Include="Actions\Pool_Patch\CopyPatchFromHostToOther.cs" />
+    <Compile Include="Actions\Pool_Patch\UploadPatchAction.cs" />
+    <Compile Include="Actions\ProduceConsumerQueue.cs" />
+    <Compile Include="Actions\StorageLink\SrCslgAdaptersScanAction.cs" />
+    <Compile Include="Actions\Updates\DownloadAndUnzipXenServerPatchAction.cs" />
+    <Compile Include="Actions\Updates\DownloadUpdatesXmlAction.cs" />
+    <Compile Include="Actions\Updates\XenCenterVersion.cs" />
+    <Compile Include="Actions\Updates\XenServerPatch.cs" />
+    <Compile Include="Actions\Updates\XenServerVersion.cs" />
+    <Compile Include="Actions\VBD\VbdEditAction.cs" />
+    <Compile Include="Actions\VBD\VbdSaveAndPlugAction.cs" />
+    <Compile Include="Actions\DR\VdiOpenDatabaseAction.cs" />
+    <Compile Include="Actions\VDI\BatchingMigrateVirtualDiskManager.cs" />
+    <Compile Include="Actions\VDI\CreateDiskAction.cs" />
+    <Compile Include="Actions\VDI\MigrateVirtualDiskAction.cs" />
+    <Compile Include="Actions\VMAppliances\AssignVMsToVMApplianceAction.cs" />
+    <Compile Include="Actions\VMAppliances\CreateVMApplianceAction.cs" />
+    <Compile Include="Actions\VMAppliances\DestroyVMApplianceAction.cs" />
+    <Compile Include="Actions\VMAppliances\ShutDownApplianceAction.cs" />
+    <Compile Include="Actions\VMAppliances\StartApplianceAction.cs" />
+    <Compile Include="Actions\VM\ChangeMemorySettingsAction.cs" />
+    <Compile Include="Actions\VM\CreateCdDriveAction.cs" />
+    <Compile Include="Actions\VM\CreateVMAction.cs" />
+    <Compile Include="Actions\VM\CreateVMFastAction.cs" />
+    <Compile Include="Actions\DR\ShutdownAndDestroyVmAppliancesAction.cs" />
+    <Compile Include="Actions\VM\ExportVmAction.cs" />
+    <Compile Include="Actions\VM\GpuAssignAction.cs" />
+    <Compile Include="Actions\VM\ImportVmAction.cs" />
+    <Compile Include="Actions\VM\ResumeAndStartVMsAction.cs" />
+    <Compile Include="Actions\VM\SetVMStartupOptionsAction.cs" />
+    <Compile Include="Actions\DR\StartVMsAndAppliancesAction.cs" />
+    <Compile Include="Actions\DR\ShutdownAndDestroyVMsAction.cs" />
+    <Compile Include="Actions\VM\VMCrossPoolMigrateAction.cs" />
+    <Compile Include="Actions\VM\VMSnapshotCreateAction.cs" />
+    <Compile Include="Actions\VM\VMStartAction.cs" />
+    <Compile Include="Actions\ZipStatusReportAction.cs" />
+    <Compile Include="Alerts\Types\Alert.cs" />
+    <Compile Include="CustomFields\CustomField.cs" />
+    <Compile Include="CustomFields\CustomFieldDefinition.cs" />
+    <Compile Include="CustomFields\CustomFieldsCache.cs" />
+    <Compile Include="CustomFields\CustomFieldsManager.cs" />
+    <Compile Include="Folders.cs" />
+    <Compile Include="InvokeHelper.cs" />
+    <Compile Include="Mappings\LiveMigrateOptionsVmMapping.cs" />
+    <Compile Include="Mappings\VmMapping.cs" />
+    <Compile Include="Network\Cache.cs" />
+    <Compile Include="Network\ConnectTask.cs" />
+    <Compile Include="Network\Heartbeat.cs" />
+    <Compile Include="Network\HTTPHelper.cs" />
+    <Compile Include="Network\ConnectionsManager.cs" />
+    <Compile Include="Network\SessionFactory.cs" />
+    <Compile Include="Network\XenConnection.cs" />
+    <Compile Include="OtherConfigWatcher.cs" />
+    <Compile Include="PoolJoinRules.cs" />
+    <Compile Include="ServerDBs\Db.cs" />
+    <Compile Include="ServerDBs\Db.Dictionaries.cs" />
+    <Compile Include="ServerDBs\DbProxy.cs" />
+    <Compile Include="ServerDBs\DbProxyInvokingEventArgs.cs" />
+    <Compile Include="ServerDBs\FakeAPI\ActivationKeyParser.cs" />
+    <Compile Include="ServerDBs\FakeAPI\fakeAuth.cs" />
+    <Compile Include="ServerDBs\FakeAPI\fakeEvent.cs" />
+    <Compile Include="ServerDBs\FakeAPI\fakeHost.cs" />
+    <Compile Include="ServerDBs\FakeAPI\fakeHost_Patch.cs" />
+    <Compile Include="ServerDBs\FakeAPI\fakeNetwork.cs" />
+    <Compile Include="ServerDBs\FakeAPI\fakePBD.cs" />
+    <Compile Include="ServerDBs\FakeAPI\fakePool.cs" />
+    <Compile Include="ServerDBs\FakeAPI\fakePool_Patch.cs" />
+    <Compile Include="ServerDBs\FakeAPI\fakeSecret.cs" />
+    <Compile Include="ServerDBs\FakeAPI\fakeSession.cs" />
+    <Compile Include="ServerDBs\FakeAPI\fakeSR.cs" />
+    <Compile Include="ServerDBs\FakeAPI\fakeTask.cs" />
+    <Compile Include="ServerDBs\FakeAPI\fakeUnknown.cs" />
+    <Compile Include="ServerDBs\FakeAPI\fakeVBD.cs" />
+    <Compile Include="ServerDBs\FakeAPI\fakeVDI.cs" />
+    <Compile Include="ServerDBs\FakeAPI\fakeVIF.cs" />
+    <Compile Include="ServerDBs\FakeAPI\fakeVM.cs" />
+    <Compile Include="ServerDBs\FakeAPI\fakeXenObject.cs" />
+    <Compile Include="ServerDBs\HighLoadEventGenerator.cs" />
+    <Compile Include="ServerDBs\Parser.cs" />
+    <Compile Include="ServerDBs\ProxyMethodNameParser.cs" />
+    <Compile Include="ServerDBs\SimulatorWebProxy.cs" />
+    <Compile Include="ServerDBs\SimulatorWebStream.cs" />
+    <Compile Include="ServerDBs\StatusReportXmlDocReader.cs" />
+    <Compile Include="ServerDBs\TypeCache.cs" />
+    <Compile Include="StorageLinkAPI\StorageLinkAdapterBoston.cs" />
+    <Compile Include="StringExtensions.cs" />
+    <Compile Include="Tags.cs" />
+    <Compile Include="TimeSpanExtensions.cs" />
+    <Compile Include="Utils\AsyncServerTime.cs" />
+    <Compile Include="WLB\RetrieveWlbConfigurationAction.cs" />
+    <Compile Include="WLB\WlbHostEvacuationRecommendation.cs" />
+    <Compile Include="WLB\WlbOptimizationRecommendation.cs" />
+    <Compile Include="WLB\WlbReportAction.cs" />
+    <Compile Include="XenAdminConfigManager.cs" />
+    <Compile Include="Actions\AD\AddRemoveRolesAction.cs" />
+    <Compile Include="Actions\AD\AddRemoveSubjectsAction.cs" />
+    <Compile Include="Actions\AD\DisableAdAction.cs" />
+    <Compile Include="Actions\AD\EnableAdAction.cs" />
+    <Compile Include="Actions\AsyncAction.cs" />
+    <Compile Include="Actions\DelegatedAsyncAction.cs" />
+    <Compile Include="Actions\GetDataSourcesAction.cs" />
+    <Compile Include="Actions\Host\ActivationProxy.cs" />
+    <Compile Include="Actions\Host\ActivationRequestAction.cs" />
+    <Compile Include="Actions\Host\ApplyLicenseAction.cs" />
+    <Compile Include="Actions\Host\ChangeHostPasswordAction.cs" />
+    <Compile Include="Actions\Host\DestroyHostCrashDumpAction.cs" />
+    <Compile Include="Actions\Host\DisableHostAction.cs" />
+    <Compile Include="Actions\Host\EditMultipathAction.cs" />
+    <Compile Include="Actions\Host\ExecutePluginAction.cs" />
+    <Compile Include="Actions\Host\FibreChannelProbeAction.cs" />
+    <Compile Include="Actions\Host\GetServerTimeAction.cs" />
+    <Compile Include="Actions\Host\GetSystemStatusCapabilities.cs" />
+    <Compile Include="Actions\Host\HostPowerOnAction.cs" />
+    <Compile Include="Actions\Host\LicensingHelper.cs" />
+    <Compile Include="Actions\Host\SavePowerOnSettingsAction.cs" />
+    <Compile Include="Actions\Host\VMsWhichCanBeMigratedAction.cs" />
+    <Compile Include="Actions\Network\CreateChinAction.cs" />
+    <Compile Include="Actions\Network\NetworkAction.cs" />
+    <Compile Include="Actions\Network\NetworkingActionHelpers.cs" />
+    <Compile Include="Actions\Network\ChangeNetworkingAction.cs" />
+    <Compile Include="Actions\Network\CreateBondAction.cs" />
+    <Compile Include="Actions\Network\DestroyBondAction.cs" />
+    <Compile Include="Actions\Network\RescanPIFsAction.cs" />
+    <Compile Include="Actions\Network\UnplugPlugNetworkAction.cs" />
+    <Compile Include="Actions\Perfmon\PerfmonDefinitionAction.cs" />
+    <Compile Include="Actions\Perfmon\PerfmonOptionsDefinitionAction.cs" />
+    <Compile Include="Actions\Pool\DestroyPoolAction.cs" />
+    <Compile Include="Actions\Pool\DisableHAAction.cs" />
+    <Compile Include="Actions\Pool\EjectHostFromPoolAction.cs" />
+    <Compile Include="Actions\Pool\EnableHAAction.cs" />
+    <Compile Include="Actions\Pool\GetHeartbeatSRsAction.cs" />
+    <Compile Include="Actions\Pool\SyncDatabaseAction.cs" />
+    <Compile Include="Actions\Pool_Patch\RemovePatchAction.cs" />
+    <Compile Include="Actions\PureAsyncAction.cs" />
+    <Compile Include="Actions\SaveChangesAction.cs" />
+    <Compile Include="Actions\SR\ISCSIPopulateIQNsAction.cs" />
+    <Compile Include="Actions\SR\ISCSIPopulateLunsAction.cs" />
+    <Compile Include="Actions\SR\SrAction.cs" />
+    <Compile Include="Actions\SR\SrIntroduceAction.cs" />
+    <Compile Include="Actions\SR\SrProbeAction.cs" />
+    <Compile Include="Actions\SR\SrReattachAction.cs" />
+    <Compile Include="Actions\SR\SrRefreshAction.cs" />
+    <Compile Include="Actions\SR\SrRepairAction.cs" />
+    <Compile Include="Actions\SR\SrScanAction.cs" />
+    <Compile Include="Actions\SR\SrShareAction.cs" />
+    <Compile Include="Actions\StorageLink\ChangeStorageLinkPasswordAction.cs" />
+    <Compile Include="Actions\StorageLink\RemoveStorageLinkSystemAction.cs" />
+    <Compile Include="Actions\StorageLink\SrCreateAction.cs" />
+    <Compile Include="Actions\StorageLink\SrCslgScanAction.cs" />
+    <Compile Include="Actions\StorageLink\SrCslgStoragePoolScanAction.cs" />
+    <Compile Include="Actions\StorageLink\SrCslgStorageSystemScanAction.cs" />
+    <Compile Include="Actions\StorageLink\SrCslgStorageVolumeScanAction.cs" />
+    <Compile Include="Actions\StorageLink\StorageLinkDelegatedAsyncAction.cs" />
+    <Compile Include="Actions\VDI\DestroyDiskAction.cs" />
+    <Compile Include="Actions\VDI\DetachVirtualDiskAction.cs" />
+    <Compile Include="Actions\VDI\MoveVirtualDiskAction.cs" />
+    <Compile Include="Actions\VIF\CreateVIFAction.cs" />
+    <Compile Include="Actions\VIF\UnplugVIFAction.cs" />
+    <Compile Include="Actions\VIF\DeleteVIFAction.cs" />
+    <Compile Include="Actions\VIF\PlugVIFAction.cs" />
+    <Compile Include="Actions\VIF\UpdateVIFAction.cs" />
+    <Compile Include="Actions\VMPP\ArchiveNowAction.cs" />
+    <Compile Include="Actions\VMPP\AssignVMsToPolicyAction.cs" />
+    <Compile Include="Actions\VMPP\ChangePolicyEnabledAction.cs" />
+    <Compile Include="Actions\VMPP\CreateVMPP.cs" />
+    <Compile Include="Actions\VMPP\DestroyPolicyAction.cs" />
+    <Compile Include="Actions\VMPP\GetVMPPAlertsAction.cs" />
+    <Compile Include="Actions\VMPP\RunPolicyNowAction.cs" />
+    <Compile Include="Actions\VMPP\TestArchiveTargetAction.cs" />
+    <Compile Include="Actions\VM\ChangeVCPUSettingsAction.cs" />
+    <Compile Include="Actions\VM\ChangeVMISOAction.cs" />
+    <Compile Include="Actions\VM\HAUnprotectVMAction.cs" />
+    <Compile Include="Actions\VM\HVMBootAction.cs" />
+    <Compile Include="Actions\VM\InstallPVToolsAction.cs" />
+    <Compile Include="Actions\VM\SetHaPrioritiesAction.cs" />
+    <Compile Include="Actions\VM\SetVMOtherConfigAction.cs" />
+    <Compile Include="Actions\VM\SuspendAndShutdownVMsAction.cs" />
+    <Compile Include="Actions\VM\VMCloneAction.cs" />
+    <Compile Include="Actions\VM\VMCopyAction.cs" />
+    <Compile Include="Actions\VM\VMDestroyAction.cs" />
+    <Compile Include="Actions\VM\VMMigrateAction.cs" />
+    <Compile Include="Actions\VM\VMMoveAction.cs" />
+    <Compile Include="Actions\VM\VMRebootAction.cs" />
+    <Compile Include="Actions\VM\VMShutdownAction.cs" />
+    <Compile Include="Actions\VM\VMSnapshotDeleteAction.cs" />
+    <Compile Include="Actions\VM\VMSnapshotRevertAction.cs" />
+    <Compile Include="Actions\VM\VMSuspendAction.cs" />
+    <Compile Include="Actions\VM\VMToTemplateAction.cs" />
+    <Compile Include="Actions\WLB\DisableWLBAction.cs" />
+    <Compile Include="Actions\WLB\EnableWLBAction.cs" />
+    <Compile Include="Actions\WLB\InitializeWLBAction.cs" />
+    <Compile Include="Actions\WLB\SendWlbConfigurationAction.cs" />
+    <Compile Include="Actions\WLB\WlbRetrieveRecommendationAction.cs" />
+    <Compile Include="Alerts\PerfmonDefinition.cs" />
+    <Compile Include="Alerts\PerfmonOptionsDefinition.cs" />
+    <Compile Include="InvisibleMessages.Designer.cs">
+      <DependentUpon>InvisibleMessages.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Network\CancelledException.cs" />
+    <Compile Include="Network\DisconnectionException.cs" />
+    <Compile Include="Folder.cs" />
+    <Compile Include="FriendlyNames.Designer.cs">
+      <DependentUpon>FriendlyNames.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Network\NetworkingHelper.cs" />
+    <Compile Include="Network\TaskPoller.cs" />
+    <Compile Include="WLB\WlbConfigurationBase.cs" />
+    <Compile Include="WLB\WlbHostConfiguration.cs" />
+    <Compile Include="WLB\WlbServerState.cs" />
+    <Compile Include="XenAPI-Extensions\Blob.cs" />
+    <Compile Include="XenAPI-Extensions\GPU_group.cs" />
+    <Compile Include="XenAPI-Extensions\VM_appliance.cs" />
+    <Compile Include="XenAPI-Extensions\vm_power_state.cs" />
+    <Compile Include="XenAPI\Bond2.cs" />
+    <Compile Include="XenAPI\bond_mode.cs" />
+    <Compile Include="XenAPI\Blob2.cs" />
+    <Compile Include="XenAPI\Proxy2.cs" />
+    <Compile Include="XenAPI\VM2.cs" />
+    <Compile Include="XenAPI\VDI2.cs" />
+    <Compile Include="XenAPI\SR2.cs" />
+    <Compile Include="XenAPI\Pool2.cs" />
+    <Compile Include="XenAPI\PIF2.cs" />
+    <Compile Include="XenAPI\Network2.cs" />
+    <Compile Include="XenAPI\Host2.cs" />
+    <Compile Include="XenAPI\DR_task.cs" />
+    <Compile Include="XenAPI\GPU_group.cs" />
+    <Compile Include="XenAPI\ipv6_configuration_mode.cs" />
+    <Compile Include="XenAPI\network_default_locking_mode.cs" />
+    <Compile Include="XenAPI\PCI.cs" />
+    <Compile Include="XenAPI\PGPU.cs" />
+    <Compile Include="XenAPI\primary_address_type.cs" />
+    <Compile Include="XenAPI\VGPU.cs" />
+    <Compile Include="XenAPI\vif_locking_mode.cs" />
+    <Compile Include="XenAPI\VM_appliance.cs" />
+    <Compile Include="XenAPI\vm_appliance_operation.cs" />
+    <Compile Include="XenSearch\Common.cs" />
+    <Compile Include="XenSearch\GroupAlg.cs" />
+    <Compile Include="XenSearch\GroupingTypes.cs" />
+    <Compile Include="XenSearch\MetricUpdater.cs" />
+    <Compile Include="XenSearch\OrganizationalView.cs" />
+    <Compile Include="XenSearch\PropertyAccessorHelper.cs" />
+    <Compile Include="XenSearch\Query.cs" />
+    <Compile Include="XenSearch\QueryScope.cs" />
+    <Compile Include="XenSearch\QueryTypes.cs" />
+    <Compile Include="XenSearch\Search.cs" />
+    <Compile Include="XenSearch\SearchMarshalling.cs" />
+    <Compile Include="XenSearch\Sort.cs" />
+    <Compile Include="XenServerPlugins.cs" />
+    <Compile Include="XenServerProxy\ClassGenerator.cs" />
+    <Compile Include="XenServerProxy\IInvocationHandler.cs" />
+    <Compile Include="XenServerProxy\InterfaceLister.cs" />
+    <Compile Include="XenServerProxy\ProxyMethodInfo.cs" />
+    <Compile Include="XenServerProxy\RbacCollectorProxy.cs" />
+    <Compile Include="XenServerProxy\SimpleProxyMethodParser.cs" />
+    <Compile Include="Utils\Helpers.cs" />
+    <Compile Include="I18NException.cs" />
+    <Compile Include="Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Network\ICache.cs" />
+    <Compile Include="Icons.cs" />
+    <Compile Include="Network\IXenConnection.cs" />
+    <Compile Include="ObjectChange.cs" />
+    <Compile Include="Alerts\PolicyAlert.cs" />
+    <Compile Include="Utils\PrettyTimeSpan.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\PropertyManager.cs" />
+    <Compile Include="RbacMethod.cs" />
+    <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkAdapter.cs" />
+    <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkCredentials.cs" />
+    <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkEnums.cs" />
+    <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkJobInfo.cs" />
+    <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkObject.cs" />
+    <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkPool.cs" />
+    <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkRepository.cs" />
+    <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkServer.cs" />
+    <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkSystem.cs" />
+    <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkVolume.cs" />
+    <Compile Include="Network\StorageLink\IStorageLinkWebService.cs" />
+    <Compile Include="Network\StorageLink\MockStorageLinkWebService.cs" />
+    <Compile Include="Network\StorageLink\StorageLinkCache.cs" />
+    <Compile Include="Network\StorageLink\StorageLinkConnection.cs" />
+    <Compile Include="Network\StorageLink\StorageLinkConnection.EventListener.cs" />
+    <Compile Include="Network\StorageLink\StorageLinkSSLWebService.cs" />
+    <Compile Include="Network\StorageLink\StorageLinkWebService.cs" />
+    <Compile Include="Utils\Util.cs" />
+    <Compile Include="XenAPI-Extensions\Auth.cs" />
+    <Compile Include="XenAPI-Extensions\BadServerResponse.cs" />
+    <Compile Include="XenAPI-Extensions\Bond.cs" />
+    <Compile Include="XenAPI-Extensions\Failure.cs" />
+    <Compile Include="XenAPI-Extensions\Host.cs" />
+    <Compile Include="XenAPI-Extensions\HTTP_actions.cs" />
+    <Compile Include="XenAPI-Extensions\IXenObject.cs" />
+    <Compile Include="XenAPI-Extensions\Message.cs" />
+    <Compile Include="XenAPI-Extensions\Network.cs" />
+    <Compile Include="XenAPI-Extensions\PBD.cs" />
+    <Compile Include="XenAPI-Extensions\PIF.cs" />
+    <Compile Include="XenAPI-Extensions\Pool.cs" />
+    <Compile Include="XenAPI-Extensions\Pool_patch.cs" />
+    <Compile Include="XenAPI-Extensions\Role.cs" />
+    <Compile Include="XenAPI-Extensions\Secret.cs" />
+    <Compile Include="XenAPI-Extensions\Session.cs" />
+    <Compile Include="XenAPI-Extensions\SM.cs" />
+    <Compile Include="XenAPI-Extensions\SR.cs" />
+    <Compile Include="XenAPI-Extensions\Subject.cs" />
+    <Compile Include="XenAPI-Extensions\Task.cs" />
+    <Compile Include="XenAPI-Extensions\VBD.cs" />
+    <Compile Include="XenAPI-Extensions\VDI.cs" />
+    <Compile Include="XenAPI-Extensions\VIF.cs" />
+    <Compile Include="XenAPI-Extensions\VM.cs" />
+    <Compile Include="XenAPI-Extensions\VMPP.cs" />
+    <Compile Include="XenAPI-Extensions\VM_guest_metrics.cs" />
+    <Compile Include="XenAPI-Extensions\XenObject.cs" />
+    <Compile Include="XenAPI\after_apply_guidance.cs" />
+    <Compile Include="XenAPI\Auth.cs" />
+    <Compile Include="XenAPI\Blob.cs" />
+    <Compile Include="XenAPI\Bond.cs" />
+    <Compile Include="XenAPI\cls.cs" />
+    <Compile Include="XenAPI\Console.cs" />
+    <Compile Include="XenAPI\console_protocol.cs" />
+    <Compile Include="XenAPI\Crashdump.cs" />
+    <Compile Include="XenAPI\Data_source.cs" />
+    <Compile Include="XenAPI\Event.cs" />
+    <Compile Include="XenAPI\EventHelpers.cs" />
+    <Compile Include="XenAPI\Failure.cs" />
+    <Compile Include="XenAPI\FriendlyErrorNames.Designer.cs">
+      <DependentUpon>FriendlyErrorNames.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="XenAPI\Helper.cs" />
+    <Compile Include="XenAPI\Host.cs" />
+    <Compile Include="XenAPI\host_allowed_operations.cs" />
+    <Compile Include="XenAPI\Host_cpu.cs" />
+    <Compile Include="XenAPI\Host_crashdump.cs" />
+    <Compile Include="XenAPI\Host_metrics.cs" />
+    <Compile Include="XenAPI\Host_patch.cs" />
+    <Compile Include="XenAPI\HTTP.cs" />
+    <Compile Include="XenAPI\HTTP_actions.cs" />
+    <Compile Include="XenAPI\IMockWebProxy.cs" />
+    <Compile Include="XenAPI\ip_configuration_mode.cs" />
+    <Compile Include="XenAPI\IXenObject.cs" />
+    <Compile Include="XenAPI\Maps.cs" />
+    <Compile Include="XenAPI\Marshalling.cs" />
+    <Compile Include="XenAPI\Message.cs" />
+    <Compile Include="XenAPI\Network.cs" />
+    <Compile Include="XenAPI\network_operations.cs" />
+    <Compile Include="XenAPI\on_boot.cs" />
+    <Compile Include="XenAPI\on_crash_behaviour.cs" />
+    <Compile Include="XenAPI\on_normal_exit.cs" />
+    <Compile Include="XenAPI\PBD.cs" />
+    <Compile Include="XenAPI\PIF.cs" />
+    <Compile Include="XenAPI\PIF_metrics.cs" />
+    <Compile Include="XenAPI\Pool.cs" />
+    <Compile Include="XenAPI\Pool_patch.cs" />
+    <Compile Include="XenAPI\Proxy.cs" />
+    <Compile Include="XenAPI\Relation.cs" />
+    <Compile Include="XenAPI\Response.cs" />
+    <Compile Include="XenAPI\Role.cs" />
+    <Compile Include="XenAPI\Secret.cs" />
+    <Compile Include="XenAPI\Session.cs" />
+    <Compile Include="XenAPI\SM.cs" />
+    <Compile Include="XenAPI\SR.cs" />
+    <Compile Include="XenAPI\storage_operations.cs" />
+    <Compile Include="XenAPI\Subject.cs" />
+    <Compile Include="XenAPI\Subject2.cs" />
+    <Compile Include="XenAPI\Task.cs" />
+    <Compile Include="XenAPI\task_allowed_operations.cs" />
+    <Compile Include="XenAPI\task_status_type.cs" />
+    <Compile Include="XenAPI\Tunnel.cs" />
+    <Compile Include="XenAPI\User.cs" />
+    <Compile Include="XenAPI\UserDetails.cs" />
+    <Compile Include="XenAPI\VBD.cs" />
+    <Compile Include="XenAPI\VBD_metrics.cs" />
+    <Compile Include="XenAPI\vbd_mode.cs" />
+    <Compile Include="XenAPI\vbd_operations.cs" />
+    <Compile Include="XenAPI\vbd_type.cs" />
+    <Compile Include="XenAPI\VDI.cs" />
+    <Compile Include="XenAPI\vdi_operations.cs" />
+    <Compile Include="XenAPI\vdi_type.cs" />
+    <Compile Include="XenAPI\VIF.cs" />
+    <Compile Include="XenAPI\VIF_metrics.cs" />
+    <Compile Include="XenAPI\vif_operations.cs" />
+    <Compile Include="XenAPI\VLAN.cs" />
+    <Compile Include="XenAPI\VM.cs" />
+    <Compile Include="XenAPI\VMPP.cs" />
+    <Compile Include="XenAPI\vmpp_archive_frequency.cs" />
+    <Compile Include="XenAPI\vmpp_archive_target_type.cs" />
+    <Compile Include="XenAPI\vmpp_backup_frequency.cs" />
+    <Compile Include="XenAPI\vmpp_backup_type.cs" />
+    <Compile Include="XenAPI\VM_guest_metrics.cs" />
+    <Compile Include="XenAPI\VM_metrics.cs" />
+    <Compile Include="XenAPI\vm_operations.cs" />
+    <Compile Include="XenAPI\vm_power_state.cs" />
+    <Compile Include="XenAPI\VTPM.cs" />
+    <Compile Include="XenAPI\XenObject.cs" />
+    <Compile Include="XenAPI\XenObjectDownloader.cs" />
+    <Compile Include="XenAPI\XenRef.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FriendlyNames.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FriendlyNames.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FriendlyNames.ja.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FriendlyNames.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FriendlyNames.zh-CN.resx" />
+    <EmbeddedResource Include="InvisibleMessages.ja.resx" />
+    <EmbeddedResource Include="InvisibleMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InvisibleMessages.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InvisibleMessages.zh-CN.resx" />
+    <EmbeddedResource Include="Messages.ja.resx" />
+    <EmbeddedResource Include="Messages.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Messages.zh-CN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XenAPI\FriendlyErrorNames.ja.resx" />
+    <EmbeddedResource Include="XenAPI\FriendlyErrorNames.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FriendlyErrorNames.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>XenAPI</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XenAPI\FriendlyErrorNames.zh-CN.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommandLib\CommandLib.csproj">
+      <Project>{6CE6A8FF-CF49-46B6-BEA4-6464A2F0A4D7}</Project>
+      <Name>CommandLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XenCenterLib\XenCenterLib.csproj">
+      <Project>{9861DFA1-B41F-432D-A43F-226257DEBBB9}</Project>
+      <Name>XenCenterLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

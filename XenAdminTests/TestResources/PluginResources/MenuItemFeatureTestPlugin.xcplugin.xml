@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XenCenterPlugin xmlns="http://www.citrix.com/XenCenter/Plugins/schema" version="1" plugin_name="ShellPlugin" plugin_version="1.0.0.0">
+  <MenuItem name="file_ShellTest1" menu="file" serialized="none" label="the label" description="the description" tooltip="the tooltip">
+    <Shell filename="TestResources\PluginResources\ShellTest.bat" window="true"/>
+  </MenuItem>
+  <MenuItem name="view_ShellTest1" menu="view" serialized="none">
+    <Shell filename="TestResources\PluginResources\ShellTest.bat" window="true"/>
+  </MenuItem>
+  <MenuItem name="pool_ShellTest1" menu="pool" serialized="none">
+    <Shell filename="TestResources\PluginResources\ShellTest.bat" window="true"/>
+  </MenuItem>
+  <MenuItem name="server_ShellTest1" menu="server" serialized="none">
+    <Shell filename="TestResources\PluginResources\ShellTest.bat" window="true"/>
+  </MenuItem>
+  <MenuItem name="vm_ShellTest1" menu="vm" serialized="none">
+    <Shell filename="TestResources\PluginResources\ShellTest.bat" window="true"/>
+  </MenuItem>
+  <MenuItem name="storage_ShellTest1" menu="storage" serialized="none">
+    <Shell filename="TestResources\PluginResources\ShellTest.bat" window="true"/>
+  </MenuItem>
+  <MenuItem name="templates_ShellTest1" menu="templates" serialized="none">
+    <Shell filename="TestResources\PluginResources\ShellTest.bat" window="true"/>
+  </MenuItem>
+  <MenuItem name="tools_ShellTest1" menu="tools" serialized="none">
+    <Shell filename="TestResources\PluginResources\ShellTest.bat" window="true"/>
+  </MenuItem>
+  <MenuItem name="window_ShellTest1" menu="window" serialized="none">
+    <Shell filename="TestResources\PluginResources\ShellTest.bat" window="true"/>
+  </MenuItem>
+  <MenuItem name="help_ShellTest1" menu="help" serialized="none">
+    <Shell filename="TestResources\PluginResources\ShellTest.bat" window="true"/>
+  </MenuItem>
+</XenCenterPlugin>

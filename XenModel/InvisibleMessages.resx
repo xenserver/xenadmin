@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ACTIVATION_FORM_URL" xml:space="preserve">
+    <value>https://{0}/index.html?transactionID={1}</value>
+  </data>
+  <data name="ACTIVATION_SERVER" xml:space="preserve">
+    <value>activate.vmd.citrix.com</value>
+  </data>
+  <data name="ACTIVATION_URL" xml:space="preserve">
+    <value>https://{0}/reactivation_server.php</value>
+  </data>
+  <data name="CHECK_FOR_UPDATES_URL" xml:space="preserve">
+    <value>http://updates.xensource.com/XenServer/{0}/XenCenter</value>
+  </data>
+  <data name="COMMUNITY_URL" xml:space="preserve">
+    <value>http://xenserver.org/</value>
+  </data>
+  <data name="DVSC_DEPRECATION_URL" xml:space="preserve">
+    <value>http://support.citrix.com/article/CTX137336</value>
+  </data>
+  <data name="HOMEPAGE" xml:space="preserve">
+    <value>http://www.citrix.com/xenserver</value>
+  </data>
+  <data name="HTTP_LICENSES" xml:space="preserve">
+    <value>www.citrix.com/xenserverenterprise</value>
+  </data>
+  <data name="ISL_DEPRECATION_URL" xml:space="preserve">
+    <value>http://support.citrix.com/article/CTX137337</value>
+  </data>
+  <data name="LICENSE_EXPIRY_WEBPAGE" xml:space="preserve">
+    <value>http://www.citrix.com/xenserverenterprise</value>
+  </data>
+  <data name="LICENSE_SERVER_DOWNLOAD_LINK" xml:space="preserve">
+    <value>http://www.citrix.com/xenserver/lsvirtualappliance</value>
+  </data>
+  <data name="LOCALE" xml:space="preserve">
+    <value>en-US</value>
+  </data>
+  <data name="MAINWINDOW_HELP_PARAMS" xml:space="preserve">
+    <value>-mapid {0} {1}</value>
+  </data>
+  <data name="MAINWINDOW_HELP_PATH" xml:space="preserve">
+    <value>Help\XenCenter.chm</value>
+  </data>
+  <data name="MAINWINDOW_HOME_PATH" xml:space="preserve">
+    <value>Home.htm</value>
+  </data>
+  <data name="OUT_OF_DATE_WEBSITE" xml:space="preserve">
+    <value>http://www.citrix.com/xenserverenterprise</value>
+  </data>
+  <data name="PARTNEROFFERS_URL" xml:space="preserve">
+    <value>http://www.citrix.com/xenserver/partneroffers</value>
+  </data>
+  <data name="PLUGINS_URL" xml:space="preserve">
+    <value>http://community.citrix.com/xencenter/plugins</value>
+  </data>
+  <data name="PRIVACY" xml:space="preserve">
+    <value>http://citrix.com/English/aboutCitrix/legal/privacyStatement.asp?ntref=hp_nav_US</value>
+  </data>
+  <data name="SUPPORT_URL" xml:space="preserve">
+    <value>http://support.citrix.com/</value>
+  </data>
+  <data name="UPSELL_LEARNMOREURL_ALERTS" xml:space="preserve">
+    <value>http://www.citrix.com/xenserver/le/features/alerts</value>
+  </data>
+  <data name="UPSELL_LEARNMOREURL_CPM" xml:space="preserve">
+    <value>http://www.citrix.com/xenserver/le/features/storagemigration</value>
+  </data>
+  <data name="UPSELL_LEARNMOREURL_CPUMASKING" xml:space="preserve">
+    <value>http://www.citrix.com/xenserver/le/features/cpus</value>
+  </data>
+  <data name="UPSELL_LEARNMOREURL_DMC" xml:space="preserve">
+    <value>http://www.citrix.com/xenserver/le/features/dmc</value>
+  </data>
+  <data name="UPSELL_LEARNMOREURL_DR" xml:space="preserve">
+    <value>http://www.citrix.com/xenserver/le/features/dr</value>
+  </data>
+  <data name="UPSELL_LEARNMOREURL_ENHANCEDSR" xml:space="preserve">
+    <value>http://www.citrix.com/xenserver/le/features/storage</value>
+  </data>
+  <data name="UPSELL_LEARNMOREURL_GENERAL" xml:space="preserve">
+    <value>http://www.citrix.com/xenserver/le/features</value>
+  </data>
+  <data name="UPSELL_LEARNMOREURL_GPU" xml:space="preserve">
+    <value>http://www.citrix.com/xenserver/le/features/gpu</value>
+  </data>
+  <data name="UPSELL_LEARNMOREURL_HA" xml:space="preserve">
+    <value>http://www.citrix.com/xenserver/le/features/ha</value>
+  </data>
+  <data name="UPSELL_LEARNMOREURL_PERFORMANCE" xml:space="preserve">
+    <value>http://www.citrix.com/xenserver/le/features/performance</value>
+  </data>
+  <data name="UPSELL_LEARNMOREURL_RBAC" xml:space="preserve">
+    <value>http://www.citrix.com/xenserver/le/features/rbac</value>
+  </data>
+  <data name="UPSELL_LEARNMOREURL_VM_APPLIANCES" xml:space="preserve">
+    <value>http://www.citrix.com/xenserver/le/features/vapps</value>
+  </data>
+  <data name="UPSELL_LEARNMOREURL_VM_PROTECTION" xml:space="preserve">
+    <value>http://www.citrix.com/xenserver/le/features/vmpr</value>
+  </data>
+  <data name="UPSELL_LEARNMOREURL_WLB" xml:space="preserve">
+    <value>http://www.citrix.com/xenserver/le/features/wlb</value>
+  </data>
+  <data name="UPSELL_SA" xml:space="preserve">
+    <value>http://store.citrix.com/XSInProduct</value>
+  </data>
+  <data name="VMPR_DEPRECATION_URL" xml:space="preserve">
+    <value>http://support.citrix.com/article/CTX137335</value>
+  </data>
+  <data name="WLB_DEPRECATION_URL" xml:space="preserve">
+    <value>http://support.citrix.com/article/CTX137333</value>
+  </data>
+  <data name="WSS_DEPRECATION_URL" xml:space="preserve">
+    <value>http://support.citrix.com/article/CTX137334</value>
+  </data>
+  <data name="XENDESKTOP_URL" xml:space="preserve">
+    <value>http://www.citrix.com/TryXenDesktop</value>
+  </data>
+</root>

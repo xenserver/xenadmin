@@ -1,0 +1,234 @@
+/*
+ * Copyright (c) Citrix Systems, Inc.
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 
+ *   1) Redistributions of source code must retain the above copyright
+ *      notice, this list of conditions and the following disclaimer.
+ * 
+ *   2) Redistributions in binary form must reproduce the above
+ *      copyright notice, this list of conditions and the following
+ *      disclaimer in the documentation and/or other materials
+ *      provided with the distribution.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ * COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+ * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+ * OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+using CookComputing.XmlRpc;
+
+
+namespace XenAPI
+{
+    public partial class VBD_metrics : XenObject<VBD_metrics>
+    {
+        public VBD_metrics()
+        {
+        }
+
+        public VBD_metrics(string uuid,
+            double io_read_kbs,
+            double io_write_kbs,
+            DateTime last_updated,
+            Dictionary<string, string> other_config)
+        {
+            this.uuid = uuid;
+            this.io_read_kbs = io_read_kbs;
+            this.io_write_kbs = io_write_kbs;
+            this.last_updated = last_updated;
+            this.other_config = other_config;
+        }
+
+        /// <summary>
+        /// Creates a new VBD_metrics from a Proxy_VBD_metrics.
+        /// </summary>
+        /// <param name="proxy"></param>
+        public VBD_metrics(Proxy_VBD_metrics proxy)
+        {
+            this.UpdateFromProxy(proxy);
+        }
+
+        public override void UpdateFrom(VBD_metrics update)
+        {
+            uuid = update.uuid;
+            io_read_kbs = update.io_read_kbs;
+            io_write_kbs = update.io_write_kbs;
+            last_updated = update.last_updated;
+            other_config = update.other_config;
+        }
+
+        internal void UpdateFromProxy(Proxy_VBD_metrics proxy)
+        {
+            uuid = proxy.uuid == null ? null : (string)proxy.uuid;
+            io_read_kbs = Convert.ToDouble(proxy.io_read_kbs);
+            io_write_kbs = Convert.ToDouble(proxy.io_write_kbs);
+            last_updated = proxy.last_updated;
+            other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
+        }
+
+        public Proxy_VBD_metrics ToProxy()
+        {
+            Proxy_VBD_metrics result_ = new Proxy_VBD_metrics();
+            result_.uuid = (uuid != null) ? uuid : "";
+            result_.io_read_kbs = io_read_kbs;
+            result_.io_write_kbs = io_write_kbs;
+            result_.last_updated = last_updated;
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            return result_;
+        }
+
+        /// <summary>
+        /// Creates a new VBD_metrics from a Hashtable.
+        /// </summary>
+        /// <param name="table"></param>
+        public VBD_metrics(Hashtable table)
+        {
+            uuid = Marshalling.ParseString(table, "uuid");
+            io_read_kbs = Marshalling.ParseDouble(table, "io_read_kbs");
+            io_write_kbs = Marshalling.ParseDouble(table, "io_write_kbs");
+            last_updated = Marshalling.ParseDateTime(table, "last_updated");
+            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+        }
+
+        public bool DeepEquals(VBD_metrics other)
+        {
+            if (ReferenceEquals(null, other))
+                return false;
+            if (ReferenceEquals(this, other))
+                return true;
+
+            return Helper.AreEqual2(this._uuid, other._uuid) &&
+                Helper.AreEqual2(this._io_read_kbs, other._io_read_kbs) &&
+                Helper.AreEqual2(this._io_write_kbs, other._io_write_kbs) &&
+                Helper.AreEqual2(this._last_updated, other._last_updated) &&
+                Helper.AreEqual2(this._other_config, other._other_config);
+        }
+
+        public override string SaveChanges(Session session, string opaqueRef, VBD_metrics server)
+        {
+            if (opaqueRef == null)
+            {
+                System.Diagnostics.Debug.Assert(false, "Cannot create instances of this type on the server");
+                return "";
+            }
+            else
+            {
+                if (!Helper.AreEqual2(_other_config, server._other_config))
+                {
+                    VBD_metrics.set_other_config(session, opaqueRef, _other_config);
+                }
+
+                return null;
+            }
+        }
+
+        public static VBD_metrics get_record(Session session, string _vbd_metrics)
+        {
+            return new VBD_metrics((Proxy_VBD_metrics)session.proxy.vbd_metrics_get_record(session.uuid, (_vbd_metrics != null) ? _vbd_metrics : "").parse());
+        }
+
+        public static XenRef<VBD_metrics> get_by_uuid(Session session, string _uuid)
+        {
+            return XenRef<VBD_metrics>.Create(session.proxy.vbd_metrics_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+        }
+
+        public static string get_uuid(Session session, string _vbd_metrics)
+        {
+            return (string)session.proxy.vbd_metrics_get_uuid(session.uuid, (_vbd_metrics != null) ? _vbd_metrics : "").parse();
+        }
+
+        public static double get_io_read_kbs(Session session, string _vbd_metrics)
+        {
+            return Convert.ToDouble(session.proxy.vbd_metrics_get_io_read_kbs(session.uuid, (_vbd_metrics != null) ? _vbd_metrics : "").parse());
+        }
+
+        public static double get_io_write_kbs(Session session, string _vbd_metrics)
+        {
+            return Convert.ToDouble(session.proxy.vbd_metrics_get_io_write_kbs(session.uuid, (_vbd_metrics != null) ? _vbd_metrics : "").parse());
+        }
+
+        public static DateTime get_last_updated(Session session, string _vbd_metrics)
+        {
+            return session.proxy.vbd_metrics_get_last_updated(session.uuid, (_vbd_metrics != null) ? _vbd_metrics : "").parse();
+        }
+
+        public static Dictionary<string, string> get_other_config(Session session, string _vbd_metrics)
+        {
+            return Maps.convert_from_proxy_string_string(session.proxy.vbd_metrics_get_other_config(session.uuid, (_vbd_metrics != null) ? _vbd_metrics : "").parse());
+        }
+
+        public static void set_other_config(Session session, string _vbd_metrics, Dictionary<string, string> _other_config)
+        {
+            session.proxy.vbd_metrics_set_other_config(session.uuid, (_vbd_metrics != null) ? _vbd_metrics : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+        }
+
+        public static void add_to_other_config(Session session, string _vbd_metrics, string _key, string _value)
+        {
+            session.proxy.vbd_metrics_add_to_other_config(session.uuid, (_vbd_metrics != null) ? _vbd_metrics : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+        }
+
+        public static void remove_from_other_config(Session session, string _vbd_metrics, string _key)
+        {
+            session.proxy.vbd_metrics_remove_from_other_config(session.uuid, (_vbd_metrics != null) ? _vbd_metrics : "", (_key != null) ? _key : "").parse();
+        }
+
+        public static List<XenRef<VBD_metrics>> get_all(Session session)
+        {
+            return XenRef<VBD_metrics>.Create(session.proxy.vbd_metrics_get_all(session.uuid).parse());
+        }
+
+        public static Dictionary<XenRef<VBD_metrics>, VBD_metrics> get_all_records(Session session)
+        {
+            return XenRef<VBD_metrics>.Create<Proxy_VBD_metrics>(session.proxy.vbd_metrics_get_all_records(session.uuid).parse());
+        }
+
+        private string _uuid;
+        public virtual string uuid {
+             get { return _uuid; }
+             set { if (!Helper.AreEqual(value, _uuid)) { _uuid = value; Changed = true; NotifyPropertyChanged("uuid"); } }
+         }
+
+        private double _io_read_kbs;
+        public virtual double io_read_kbs {
+             get { return _io_read_kbs; }
+             set { if (!Helper.AreEqual(value, _io_read_kbs)) { _io_read_kbs = value; Changed = true; NotifyPropertyChanged("io_read_kbs"); } }
+         }
+
+        private double _io_write_kbs;
+        public virtual double io_write_kbs {
+             get { return _io_write_kbs; }
+             set { if (!Helper.AreEqual(value, _io_write_kbs)) { _io_write_kbs = value; Changed = true; NotifyPropertyChanged("io_write_kbs"); } }
+         }
+
+        private DateTime _last_updated;
+        public virtual DateTime last_updated {
+             get { return _last_updated; }
+             set { if (!Helper.AreEqual(value, _last_updated)) { _last_updated = value; Changed = true; NotifyPropertyChanged("last_updated"); } }
+         }
+
+        private Dictionary<string, string> _other_config;
+        public virtual Dictionary<string, string> other_config {
+             get { return _other_config; }
+             set { if (!Helper.AreEqual(value, _other_config)) { _other_config = value; Changed = true; NotifyPropertyChanged("other_config"); } }
+         }
+
+
+    }
+}

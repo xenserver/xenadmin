@@ -1,0 +1,1760 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
+    <value>仅当版本设置为“免费”时，才能应用激活密钥。</value>
+  </data>
+  <data name="AUTH_ALREADY_ENABLED" xml:space="preserve">
+    <value>已对此服务器启用外部身份验证。</value>
+  </data>
+  <data name="AUTH_DISABLE_FAILED" xml:space="preserve">
+    <value>已禁用外部身份验证，出现以下错误: 未在 AD 服务器上成功禁用您的 AD 计算机帐户。</value>
+  </data>
+  <data name="AUTH_DISABLE_FAILED_PERMISSION_DENIED" xml:space="preserve">
+    <value>已禁用外部身份验证，出现以下错误: 因权限遭拒绝，未在 AD 服务器上禁用您的 AD 计算机帐户。</value>
+  </data>
+  <data name="AUTH_DISABLE_FAILED_WRONG_CREDENTIALS" xml:space="preserve">
+    <value>已禁用外部身份验证，错误消息如下: 由于凭据无效，因此未在 AD 服务器上禁用某些 AD 计算机帐户。</value>
+  </data>
+  <data name="AUTH_ENABLE_FAILED" xml:space="preserve">
+    <value>无法启用外部身份验证。</value>
+  </data>
+  <data name="AUTH_ENABLE_FAILED_DOMAIN_LOOKUP_FAILED" xml:space="preserve">
+    <value>XenServer 无法与域服务器联系以启用外部身份验证。请检查设置是否正确以及是否存在到服务器的路由。</value>
+  </data>
+  <data name="AUTH_ENABLE_FAILED_PERMISSION_DENIED" xml:space="preserve">
+    <value>无法启用外部身份验证，AD 服务器的权限遭拒绝。</value>
+  </data>
+  <data name="AUTH_ENABLE_FAILED_UNAVAILABLE" xml:space="preserve">
+    <value>无法启用外部身份验证，AD 服务器不可用。</value>
+  </data>
+  <data name="AUTH_ENABLE_FAILED_WRONG_CREDENTIALS" xml:space="preserve">
+    <value>无法启用外部身份验证，所提供的凭据无效。</value>
+  </data>
+  <data name="AUTH_IS_DISABLED" xml:space="preserve">
+    <value>已禁用外部身份验证，无法解析使用者名称。</value>
+  </data>
+  <data name="AUTH_SERVICE_ERROR" xml:space="preserve">
+    <value>查询外部目录服务时出错。</value>
+  </data>
+  <data name="AUTH_UNKNOWN_TYPE" xml:space="preserve">
+    <value>未知的外部身份验证类型。</value>
+  </data>
+  <data name="BACKUP_SCRIPT_FAILED" xml:space="preserve">
+    <value>无法执行备份，因为备份脚本失败。</value>
+  </data>
+  <data name="BOOTLOADER_FAILED" xml:space="preserve">
+    <value>此 VM 的引导加载程序返回错误 -- 是否已成功安装 VM? {1}</value>
+  </data>
+  <data name="CANNOT_ADD_TUNNEL_TO_BOND_SLAVE" xml:space="preserve">
+    <value>此 PIF 是绑定从属设备，不能带有隧道。</value>
+  </data>
+  <data name="CANNOT_ADD_VLAN_TO_BOND_SLAVE" xml:space="preserve">
+    <value>此 PIF 是绑定从属设备，不能带有 VLAN。</value>
+  </data>
+  <data name="CANNOT_CONTACT_HOST" xml:space="preserve">
+    <value>无法转发消息，因为无法与服务器联系。该服务器可能已关闭或者可能存在网络连接问题。</value>
+  </data>
+  <data name="CANNOT_CREATE_STATE_FILE" xml:space="preserve">
+    <value>无法创建高可用性状态文件，因为未找到具有相应功能的 SR。</value>
+  </data>
+  <data name="CANNOT_DESTROY_DISASTER_RECOVERY_TASK" xml:space="preserve">
+    <value>无法彻底销毁灾难恢复任务。</value>
+  </data>
+  <data name="CANNOT_DESTROY_SYSTEM_NETWORK" xml:space="preserve">
+    <value>您尝试销毁系统网络: 不能破坏这些网络。</value>
+  </data>
+  <data name="CANNOT_ENABLE_REDO_LOG" xml:space="preserve">
+    <value>无法启用恢复日志。</value>
+  </data>
+  <data name="CANNOT_EVACUATE_HOST" xml:space="preserve">
+    <value>无法撤离此服务器。</value>
+  </data>
+  <data name="CANNOT_FETCH_PATCH" xml:space="preserve">
+    <value>无法从主服务器获取请求的更新。</value>
+  </data>
+  <data name="CANNOT_FIND_OEM_BACKUP_PARTITION" xml:space="preserve">
+    <value>找不到用于通过流技术推送更新的备份分区</value>
+  </data>
+  <data name="CANNOT_FIND_PATCH" xml:space="preserve">
+    <value>找不到请求的更新。指定新的主服务器时，可能会发生此情况。请重新上载</value>
+  </data>
+  <data name="CANNOT_FIND_STATE_PARTITION" xml:space="preserve">
+    <value>无法执行还原，因为找不到状态分区</value>
+  </data>
+  <data name="CANNOT_PLUG_BOND_SLAVE" xml:space="preserve">
+    <value>此 PIF 为绑定从属设备，不能插入。</value>
+  </data>
+  <data name="CANNOT_PLUG_VIF" xml:space="preserve">
+    <value>无法启动此 VM，因为无法连接其网络接口。一个 NIC 正在其他位置使用。</value>
+  </data>
+  <data name="CANNOT_RESET_CONTROL_DOMAIN" xml:space="preserve">
+    <value>无法重置控制域的电源状态。</value>
+  </data>
+  <data name="CERTIFICATE_ALREADY_EXISTS" xml:space="preserve">
+    <value>已存在具有指定名称的证书。</value>
+  </data>
+  <data name="CERTIFICATE_CORRUPT" xml:space="preserve">
+    <value>指定的证书已损坏或无法读取。</value>
+  </data>
+  <data name="CERTIFICATE_DOES_NOT_EXIST" xml:space="preserve">
+    <value>指定的证书不存在。</value>
+  </data>
+  <data name="CERTIFICATE_LIBRARY_CORRUPT" xml:space="preserve">
+    <value>证书库已损坏或无法读取。</value>
+  </data>
+  <data name="CERTIFICATE_NAME_INVALID" xml:space="preserve">
+    <value>指定的证书名称无效。</value>
+  </data>
+  <data name="CHANGE_PASSWORD_REJECTED" xml:space="preserve">
+    <value>更改密码遭拒绝</value>
+  </data>
+  <data name="COULD_NOT_FIND_NETWORK_INTERFACE_WITH_SPECIFIED_DEVICE_NAME_AND_MAC_ADDRESS" xml:space="preserve">
+    <value>找不到具有指定设备名称和 MAC 地址的网络接口。</value>
+  </data>
+  <data name="COULD_NOT_IMPORT_DATABASE" xml:space="preserve">
+    <value>尝试从元数据 VDI 导入数据库时出错</value>
+  </data>
+  <data name="CPU_FEATURE_MASKING_NOT_SUPPORTED" xml:space="preserve">
+    <value>CPU 不支持功能屏蔽。</value>
+  </data>
+  <data name="CRL_ALREADY_EXISTS" xml:space="preserve">
+    <value>已存在具有指定名称的 CRL。</value>
+  </data>
+  <data name="CRL_CORRUPT" xml:space="preserve">
+    <value>指定的 CRL 已损坏或无法读取。</value>
+  </data>
+  <data name="CRL_DOES_NOT_EXIST" xml:space="preserve">
+    <value>指定的 CRL 不存在。</value>
+  </data>
+  <data name="CRL_NAME_INVALID" xml:space="preserve">
+    <value>指定的 CRL 名称无效。</value>
+  </data>
+  <data name="DB_UNIQUENESS_CONSTRAINT_VIOLATION" xml:space="preserve">
+    <value>您尝试执行的某项操作将导致数据库中出现重复键。表: {0}，字段: {1}，值: {2}</value>
+  </data>
+  <data name="DEFAULT_SR_NOT_FOUND" xml:space="preserve">
+    <value>未找到默认 SR</value>
+  </data>
+  <data name="DEVICE_ALREADY_ATTACHED" xml:space="preserve">
+    <value>设备 {0} 已连接到 VM</value>
+  </data>
+  <data name="DEVICE_ALREADY_DETACHED" xml:space="preserve">
+    <value>当前未连接设备 {0}</value>
+  </data>
+  <data name="DEVICE_ALREADY_EXISTS" xml:space="preserve">
+    <value>所选 VM 上的 {0} 位置已有磁盘</value>
+  </data>
+  <data name="DEVICE_ATTACH_TIMEOUT" xml:space="preserve">
+    <value>尝试将 {0} 类型的设备 {1} 连接到 VM 时发生超时</value>
+  </data>
+  <data name="DEVICE_DETACH_REJECTED" xml:space="preserve">
+    <value>VM 拒绝了分离 {0} 类型设备 {1} 的尝试。{2}</value>
+  </data>
+  <data name="DEVICE_DETACH_TIMEOUT" xml:space="preserve">
+    <value>尝试从 VM 中分离 {0} 类型的设备 {1} 时发生超时</value>
+  </data>
+  <data name="DEVICE_NOT_ATTACHED" xml:space="preserve">
+    <value>无法执行该操作，因为 VBD 未连接到 VM。</value>
+  </data>
+  <data name="DISK_VBD_MUST_BE_READWRITE_FOR_HVM" xml:space="preserve">
+    <value>HVM 来宾必须对类型为“磁盘”的所有 VBD 具有读写权限</value>
+  </data>
+  <data name="DOMAIN_BUILDER_ERROR" xml:space="preserve">
+    <value>域生成器生成内部错误。</value>
+  </data>
+  <data name="DOMAIN_EXISTS" xml:space="preserve">
+    <value>无法执行该操作，因为指定的 VM 仍存在域。</value>
+  </data>
+  <data name="DUPLICATE_PIF_DEVICE_NAME" xml:space="preserve">
+    <value>已存在具有此指定设备名称的 PIF。</value>
+  </data>
+  <data name="DUPLICATE_VM" xml:space="preserve">
+    <value>无法还原此 VM，因为它将创建重复项</value>
+  </data>
+  <data name="EVACUATE_NO_OTHER_HOSTS_FOR_MASTER" xml:space="preserve">
+    <value>没有其他服务器可指定为主服务器。请添加或启用其他一些服务器。</value>
+  </data>
+  <data name="EVENTS_LOST" xml:space="preserve">
+    <value>某些事件已从队列中丢失，无法检索。</value>
+  </data>
+  <data name="EVENT_FROM_TOKEN_PARSE_FAILURE" xml:space="preserve">
+    <value>无法解析 event.from 令牌。有效值包括: '' 以及从上一个 event.from 中返回的值。</value>
+  </data>
+  <data name="EVENT_SUBSCRIPTION_PARSE_FAILURE" xml:space="preserve">
+    <value>服务器无法解析您的事件订阅。有效值包括: *、class-name、class-name/object-reference。</value>
+  </data>
+  <data name="FEATURE_REQUIRES_HVM" xml:space="preserve">
+    <value>为 VM 设置了使用某项功能，而该功能要求将 VM 作为 HVM 启动。</value>
+  </data>
+  <data name="FEATURE_RESTRICTED" xml:space="preserve">
+    <value>此功能的使用受到限制。</value>
+  </data>
+  <data name="FIELD_TYPE_ERROR" xml:space="preserve">
+    <value>您提供的某个字段使用了错误类型。</value>
+  </data>
+  <data name="GPU_GROUP_CONTAINS_PGPU" xml:space="preserve">
+    <value>GPU 组包含活动的 PGPU，无法删除。</value>
+  </data>
+  <data name="GPU_GROUP_CONTAINS_VGPU" xml:space="preserve">
+    <value>GPU 组包含活动的 VGPU，无法删除。</value>
+  </data>
+  <data name="HANDLE_INVALID" xml:space="preserve">
+    <value>对象已删除。{0}:{1}</value>
+  </data>
+  <data name="HA_ABORT_NEW_MASTER" xml:space="preserve">
+    <value>此服务器此时无法接受建议的新主服务器设置。</value>
+  </data>
+  <data name="HA_CANNOT_BOND_MANAGEMENT_IFACE" xml:space="preserve">
+    <value>无法执行此操作，因为在高可用性处于启用状态时不允许创建与管理接口之间的绑定。要执行此操作，请禁用高可用性，创建绑定，然后重新启用高可用性。</value>
+  </data>
+  <data name="HA_CONSTRAINT_VIOLATION_NETWORK_NOT_SHARED" xml:space="preserve">
+    <value>无法执行该操作，因为引用的网络未正确共享。该网络必须完全虚拟，或者在每个服务器上通过当前连接的 PIF 而以物理形式存在。</value>
+  </data>
+  <data name="HA_CONSTRAINT_VIOLATION_SR_NOT_SHARED" xml:space="preserve">
+    <value>无法执行该操作，因为引用的 SR 未正确共享。SR 必须标记为共享模式并且每个服务器必须存在一个当前连接的 PBD。</value>
+  </data>
+  <data name="HA_FAILED_TO_FORM_LIVESET" xml:space="preserve">
+    <value>无法对该池启用高可用性，因为无法创建实时集: 请检查存储和网络检测信号路径。</value>
+  </data>
+  <data name="HA_HEARTBEAT_DAEMON_STARTUP_FAILED" xml:space="preserve">
+    <value>服务器无法加入实时集，因为高可用性后台程序无法启动。</value>
+  </data>
+  <data name="HA_HOST_CANNOT_ACCESS_STATEFILE" xml:space="preserve">
+    <value>服务器无法加入实时集，因为高可用性后台程序无法访问检测信号磁盘。</value>
+  </data>
+  <data name="HA_HOST_CANNOT_SEE_PEERS" xml:space="preserve">
+    <value>操作失败，因为指定服务器上的高可用性软件无法看到其他服务器的子集。请检查网络连接。</value>
+  </data>
+  <data name="HA_HOST_IS_ARMED" xml:space="preserve">
+    <value>服务器仍带有武装，无法执行该操作；必须首先对服务器解除武装</value>
+  </data>
+  <data name="HA_IS_ENABLED" xml:space="preserve">
+    <value>无法执行该操作，因为对池启用了高可用性</value>
+  </data>
+  <data name="HA_LOST_STATEFILE" xml:space="preserve">
+    <value>此服务器失去对高可用性状态文件的访问权限。</value>
+  </data>
+  <data name="HA_NOT_ENABLED" xml:space="preserve">
+    <value>无法执行该操作，因为未对池启用高可用性</value>
+  </data>
+  <data name="HA_NOT_INSTALLED" xml:space="preserve">
+    <value>无法执行该操作，因为此服务器上未安装高可用性软件。</value>
+  </data>
+  <data name="HA_NO_PLAN" xml:space="preserve">
+    <value>找不到 VM 的放置方案，因为没有其他可用的服务器。</value>
+  </data>
+  <data name="HA_OPERATION_WOULD_BREAK_FAILOVER_PLAN" xml:space="preserve">
+    <value>无法执行该操作，因为无法再保证此池的高可用性。如果仍要执行该操作，必须禁用或重新配置高可用性。</value>
+  </data>
+  <data name="HA_POOL_IS_ENABLED_BUT_HOST_IS_DISABLED" xml:space="preserve">
+    <value>此服务器无法加入池中，因为该池启用了高可用性，而服务器禁用了高可用性。</value>
+  </data>
+  <data name="HA_SHOULD_BE_FENCED" xml:space="preserve">
+    <value>服务器无法重新加入池中，因为应为其实施防护(不处于主服务器的分区中)</value>
+  </data>
+  <data name="HA_TOO_FEW_HOSTS" xml:space="preserve">
+    <value>只能对两个或更多的服务器启用高可用性。请注意，两个服务器需要使用一个预先配置的仲裁决胜脚本。</value>
+  </data>
+  <data name="HOSTS_NOT_COMPATIBLE" xml:space="preserve">
+    <value>此池中的主机不兼容。</value>
+  </data>
+  <data name="HOSTS_NOT_HOMOGENEOUS" xml:space="preserve">
+    <value>此池中的服务器不是同类服务器。{0}</value>
+  </data>
+  <data name="HOST_BROKEN" xml:space="preserve">
+    <value>此服务器在自动故障转移操作期间出现故障，需要重试故障转移操作</value>
+  </data>
+  <data name="HOST_CANNOT_ATTACH_NETWORK" xml:space="preserve">
+    <value>服务器无法连接网络(在使用 NIC 绑定的情况下，这可能是由于在此服务器上连接网络时需要关闭其他[当前处于活动状态的]网络)。</value>
+  </data>
+  <data name="HOST_CANNOT_ATTACH_NETWORK-SHORT" xml:space="preserve">
+    <value>无法连接网络</value>
+  </data>
+  <data name="HOST_CANNOT_DESTROY_SELF" xml:space="preserve">
+    <value>此服务器无法自我销毁。</value>
+  </data>
+  <data name="HOST_CANNOT_READ_METRICS" xml:space="preserve">
+    <value>无法读取此服务器的指标。</value>
+  </data>
+  <data name="HOST_CD_DRIVE_EMPTY" xml:space="preserve">
+    <value>无法启动该 VM，因为 CD 驱动器为空。</value>
+  </data>
+  <data name="HOST_DISABLED" xml:space="preserve">
+    <value>指定的服务器已禁用。</value>
+  </data>
+  <data name="HOST_DISABLED-SHORT" xml:space="preserve">
+    <value>已禁用</value>
+  </data>
+  <data name="HOST_DISABLED_UNTIL_REBOOT" xml:space="preserve">
+    <value>指定的服务器已禁用，在重新启动前无法重新启用。</value>
+  </data>
+  <data name="HOST_HAS_NO_MANAGEMENT_IP" xml:space="preserve">
+    <value>服务器无法获取其管理接口的 IP 地址，因此无法与主服务器联系。</value>
+  </data>
+  <data name="HOST_HAS_RESIDENT_VMS" xml:space="preserve">
+    <value>无法忘记此服务器，因为仍有一些用户 VM 在运行</value>
+  </data>
+  <data name="HOST_IN_EMERGENCY_MODE" xml:space="preserve">
+    <value>此服务器处于紧急模式</value>
+  </data>
+  <data name="HOST_IN_RECOVERY_MODE" xml:space="preserve">
+    <value>无法执行备份，因为此服务器处于恢复模式</value>
+  </data>
+  <data name="HOST_IN_USE" xml:space="preserve">
+    <value>无法完成该操作，因为服务器正在使用。</value>
+  </data>
+  <data name="HOST_IS_LIVE" xml:space="preserve">
+    <value>无法完成该操作，因为服务器仍处于活动状态。</value>
+  </data>
+  <data name="HOST_IS_SLAVE" xml:space="preserve">
+    <value>您正联系的服务器为从属服务器</value>
+  </data>
+  <data name="HOST_ITS_OWN_SLAVE" xml:space="preserve">
+    <value>主机为自身的从属服务器。请使用 pool-emergency-transition-to-master 或 pool-emergency-reset-master。</value>
+  </data>
+  <data name="HOST_MASTER_CANNOT_TALK_BACK" xml:space="preserve">
+    <value>主服务器报告其无法响应所提供管理 IP 地址处的从属服务器。</value>
+  </data>
+  <data name="HOST_NAME_INVALID" xml:space="preserve">
+    <value>服务器名称无效。</value>
+  </data>
+  <data name="HOST_NOT_DISABLED" xml:space="preserve">
+    <value>无法启用该服务器，因为其尚未禁用。</value>
+  </data>
+  <data name="HOST_NOT_ENOUGH_FREE_MEMORY" xml:space="preserve">
+    <value>没有足够的服务器内存可供执行此操作</value>
+  </data>
+  <data name="HOST_NOT_ENOUGH_FREE_MEMORY-SHORT" xml:space="preserve">
+    <value>可用内存不足</value>
+  </data>
+  <data name="HOST_NOT_IN_RECOVERY_MODE" xml:space="preserve">
+    <value>无法执行还原，因为服务器未处于恢复模式</value>
+  </data>
+  <data name="HOST_NOT_LIVE" xml:space="preserve">
+    <value>无法完成该操作，因为服务器未处于活动状态。</value>
+  </data>
+  <data name="HOST_NOT_LIVE-SHORT" xml:space="preserve">
+    <value>无法访问</value>
+  </data>
+  <data name="HOST_OFFLINE" xml:space="preserve">
+    <value>无法连接服务器</value>
+  </data>
+  <data name="HOST_POWER_ON_MODE_DISABLED" xml:space="preserve">
+    <value>无法完成该操作，因为已禁用服务器开机模式。</value>
+  </data>
+  <data name="HOST_STILL_BOOTING" xml:space="preserve">
+    <value>服务器仍在启动中。</value>
+  </data>
+  <data name="HOST_UNKNOWN_TO_MASTER" xml:space="preserve">
+    <value>主服务器报告该服务器为未知服务器。该服务器或许已从主服务器的数据库中删除?</value>
+  </data>
+  <data name="ILLEGAL_VBD_DEVICE" xml:space="preserve">
+    <value>无法识别指定的 VBD 设备: 请使用非负整数</value>
+  </data>
+  <data name="IMPORT_ERROR" xml:space="preserve">
+    <value>无法导入此文件</value>
+  </data>
+  <data name="IMPORT_ERROR_ATTACHED_DISKS_NOT_FOUND" xml:space="preserve">
+    <value>无法导入该 VM，因为找不到连接的磁盘。</value>
+  </data>
+  <data name="IMPORT_ERROR_CANNOT_HANDLE_CHUNKED" xml:space="preserve">
+    <value>无法使用块编码导入 VM。</value>
+  </data>
+  <data name="IMPORT_ERROR_FAILED_TO_FIND_OBJECT" xml:space="preserve">
+    <value>无法导入该 VM，因为找不到必需的对象。</value>
+  </data>
+  <data name="IMPORT_ERROR_PREMATURE_EOF" xml:space="preserve">
+    <value>无法导入该 VM；已提前到达文件尾。</value>
+  </data>
+  <data name="IMPORT_ERROR_SOME_CHECKSUMS_FAILED" xml:space="preserve">
+    <value>某些数据校验和不正确；VM 可能已损坏。</value>
+  </data>
+  <data name="IMPORT_ERROR_UNEXPECTED_FILE" xml:space="preserve">
+    <value>无法导入该 VM，因为 XVA 文件无效: 遇到意外文件。</value>
+  </data>
+  <data name="IMPORT_INCOMPATIBLE_VERSION" xml:space="preserve">
+    <value>无法在此服务器上导入，因为它是在不兼容版本中保存的</value>
+  </data>
+  <data name="INTERFACE_HAS_NO_IP" xml:space="preserve">
+    <value>无法使用指定的接口， 因为该接口没有 IP 地址</value>
+  </data>
+  <data name="INTERNAL_ERROR" xml:space="preserve">
+    <value>内部错误: {0}</value>
+  </data>
+  <data name="INVALID_DEVICE" xml:space="preserve">
+    <value>设备名称 {0} 无效</value>
+  </data>
+  <data name="INVALID_EDITION" xml:space="preserve">
+    <value>所提供的版本无效。有效版本为“免费”、“企业版”和“铂金版”。</value>
+  </data>
+  <data name="INVALID_FEATURE_STRING" xml:space="preserve">
+    <value>给定的功能字符串无效。</value>
+  </data>
+  <data name="INVALID_IP_ADDRESS_SPECIFIED" xml:space="preserve">
+    <value>必需的参数中包含无效的 IP 地址</value>
+  </data>
+  <data name="INVALID_PATCH" xml:space="preserve">
+    <value>上载的更新文件无效</value>
+  </data>
+  <data name="INVALID_PATCH_WITH_LOG" xml:space="preserve">
+    <value>上载的更新文件无效。</value>
+  </data>
+  <data name="INVALID_VALUE" xml:space="preserve">
+    <value>值“{1}”对于字段“{0}”无效。</value>
+  </data>
+  <data name="IS_TUNNEL_ACCESS_PIF" xml:space="preserve">
+    <value>您尝试在隧道访问 PIF 之上创建 VLAN 或隧道 - 请改用基础传输 PIF。</value>
+  </data>
+  <data name="JOINING_HOST_CANNOT_BE_MASTER_OF_OTHER_HOSTS" xml:space="preserve">
+    <value>加入池的服务器不能已经是另一个池的主服务器。</value>
+  </data>
+  <data name="JOINING_HOST_CANNOT_CONTAIN_SHARED_SRS" xml:space="preserve">
+    <value>加入池的服务器不能包含任何共享存储。</value>
+  </data>
+  <data name="JOINING_HOST_CANNOT_HAVE_RUNNING_OR_SUSPENDED_VMS" xml:space="preserve">
+    <value>加入池的服务器不能有任何正在运行或已挂起的 VM。</value>
+  </data>
+  <data name="JOINING_HOST_CANNOT_HAVE_RUNNING_VMS" xml:space="preserve">
+    <value>加入池的服务器不能有任何正在运行的 VM。</value>
+  </data>
+  <data name="JOINING_HOST_CANNOT_HAVE_VMS_WITH_CURRENT_OPERATIONS" xml:space="preserve">
+    <value>加入的服务器不能有包含任何当前操作的 VM</value>
+  </data>
+  <data name="JOINING_HOST_CONNECTION_FAILED" xml:space="preserve">
+    <value>连接加入的服务器失败</value>
+  </data>
+  <data name="JOINING_HOST_SERVICE_FAILED" xml:space="preserve">
+    <value>连接服务器时出错。所联系的服务未正确回复。</value>
+  </data>
+  <data name="LICENCE_RESTRICTION" xml:space="preserve">
+    <value>使用当前许可证不允许执行此操作</value>
+  </data>
+  <data name="LICENSE_CANNOT_DOWNGRADE_WHILE_IN_POOL" xml:space="preserve">
+    <value>不能将池中的许可证降级。请首先解散池，然后分别在服务器上将许可证降级。</value>
+  </data>
+  <data name="LICENSE_CHECKOUT_ERROR" xml:space="preserve">
+    <value>所请求版本的许可证不可用。</value>
+  </data>
+  <data name="LICENSE_DOES_NOT_SUPPORT_POOLING" xml:space="preserve">
+    <value>此服务器无法加入池中，因为其许可证不支持池</value>
+  </data>
+  <data name="LICENSE_DOES_NOT_SUPPORT_XHA" xml:space="preserve">
+    <value>无法启用高可用性，因为此服务器的许可证不允许执行该操作</value>
+  </data>
+  <data name="LICENSE_EXPIRED" xml:space="preserve">
+    <value>您的许可证已过期</value>
+  </data>
+  <data name="LICENSE_FILE_DEPRECATED" xml:space="preserve">
+    <value>此类型的许可证文件适用于早期版本的 XenServer。请升级到新的许可系统。</value>
+  </data>
+  <data name="LICENSE_PROCESSING_ERROR" xml:space="preserve">
+    <value>处理许可证时出错。请与支持代表联系</value>
+  </data>
+  <data name="LIKEWISE_WINERROR_0251E" xml:space="preserve">
+    <value>XenServer 无法与域服务器联系。请检查设置是否正确以及是否存在到服务器的路由。</value>
+  </data>
+  <data name="LOCATION_NOT_UNIQUE" xml:space="preserve">
+    <value>指定位置的 VDI 已存在于 SR 中</value>
+  </data>
+  <data name="MAC_DOES_NOT_EXIST" xml:space="preserve">
+    <value>此服务器上不存在指定的 MAC 地址。</value>
+  </data>
+  <data name="MAC_INVALID" xml:space="preserve">
+    <value>指定的 MAC 地址无效。</value>
+  </data>
+  <data name="MAC_STILL_EXISTS" xml:space="preserve">
+    <value>此服务器上仍存在指定的 MAC 地址。</value>
+  </data>
+  <data name="MAP_DUPLICATE_KEY" xml:space="preserve">
+    <value>内部错误: 已尝试设置 {0}.{1}:{3}={2}，但映射 {1} 中已存在密钥 {3}。</value>
+  </data>
+  <data name="MEM_MAX_ALLOWED" xml:space="preserve">
+    <value>已达到此虚拟机允许使用的最大内存量。</value>
+  </data>
+  <data name="MEM_MAX_ALLOWED_TITLE" xml:space="preserve">
+    <value>允许的最大内存量</value>
+  </data>
+  <data name="MESSAGE_DEPRECATED" xml:space="preserve">
+    <value>此消息已弃用。</value>
+  </data>
+  <data name="MESSAGE_METHOD_UNKNOWN" xml:space="preserve">
+    <value>您尝试调用的方法不存在。使用的方法名称为 {0}。</value>
+  </data>
+  <data name="MESSAGE_PARAMETER_COUNT_MISMATCH" xml:space="preserve">
+    <value>您尝试调用方法 {0} 时使用的参数数目 {2} 不正确。该方法需要 {1} 个参数。</value>
+  </data>
+  <data name="MIRROR_FAILED" xml:space="preserve">
+    <value>无法执行 VDI 镜像。</value>
+  </data>
+  <data name="MISSING_CONNECTION_DETAILS" xml:space="preserve">
+    <value>许可证服务器连接详细信息(地址或端口)缺少或不完整。</value>
+  </data>
+  <data name="NETWORK_ALREADY_CONNECTED" xml:space="preserve">
+    <value>您尝试创建 PIF，但尝试将其连接到的网络 {0} 已经连接了其他某个 PIF {1}，因此创建失败。</value>
+  </data>
+  <data name="NETWORK_CONTAINS_PIF" xml:space="preserve">
+    <value>网络包含活动的 PIF ({0})，无法删除。</value>
+  </data>
+  <data name="NETWORK_CONTAINS_VIF" xml:space="preserve">
+    <value>网络包含活动的 VIF ({0})，无法删除。</value>
+  </data>
+  <data name="NOT_ALLOWED_ON_OEM_EDITION" xml:space="preserve">
+    <value>OEM 版中不允许使用此命令。</value>
+  </data>
+  <data name="NOT_IMPLEMENTED" xml:space="preserve">
+    <value>未实现功能 {0}</value>
+  </data>
+  <data name="NOT_IN_EMERGENCY_MODE" xml:space="preserve">
+    <value>此池未处于紧急模式。</value>
+  </data>
+  <data name="NOT_SUPPORTED_DURING_UPGRADE" xml:space="preserve">
+    <value>升级期间不支持此操作</value>
+  </data>
+  <data name="NOT_SYSTEM_DOMAIN" xml:space="preserve">
+    <value>未将指定的 VM 注册为系统域。只能在注册的系统域中执行此操作。</value>
+  </data>
+  <data name="NO_HOSTS_AVAILABLE" xml:space="preserve">
+    <value>没有可用于完成指定操作的服务器。</value>
+  </data>
+  <data name="NO_MORE_REDO_LOGS_ALLOWED" xml:space="preserve">
+    <value>活动恢复日志实例数已达到上限。</value>
+  </data>
+  <data name="OBJECT_NOLONGER_EXISTS" xml:space="preserve">
+    <value>指定的对象不再存在。</value>
+  </data>
+  <data name="ONLY_ALLOWED_ON_OEM_EDITION" xml:space="preserve">
+    <value>此命令仅允许在 OEM 版中使用。</value>
+  </data>
+  <data name="OPENVSWITCH_NOT_ACTIVE" xml:space="preserve">
+    <value>此操作需要启用 OpenVSwitch 网络后端。</value>
+  </data>
+  <data name="OPERATION_BLOCKED" xml:space="preserve">
+    <value>您尝试执行的操作已明确被阻止(请参阅给定对象的 blocked_operations 字段)。</value>
+  </data>
+  <data name="OPERATION_NOT_ALLOWED" xml:space="preserve">
+    <value>您尝试执行的操作不被允许。{0}</value>
+  </data>
+  <data name="OPERATION_PARTIALLY_FAILED" xml:space="preserve">
+    <value>属于该设备的某些 VM 在执行指定的操作时引发异常</value>
+  </data>
+  <data name="OTHER_OPERATION_IN_PROGRESS" xml:space="preserve">
+    <value>涉及该对象的另一项操作当前正在进行</value>
+  </data>
+  <data name="OUT_OF_SPACE" xml:space="preserve">
+    <value>空间不足，无法上载更新</value>
+  </data>
+  <data name="PATCH_ALREADY_APPLIED" xml:space="preserve">
+    <value>已应用更新 {0}</value>
+  </data>
+  <data name="PATCH_ALREADY_EXISTS" xml:space="preserve">
+    <value>上载的更新已存在</value>
+  </data>
+  <data name="PATCH_APPLY_FAILED" xml:space="preserve">
+    <value>更新应用失败。有关更多详细信息，请查看输出。</value>
+  </data>
+  <data name="PATCH_IS_APPLIED" xml:space="preserve">
+    <value>指定的修补程序已应用，无法销毁。</value>
+  </data>
+  <data name="PATCH_PRECHECK_FAILED_PREREQUISITE_MISSING" xml:space="preserve">
+    <value>更新预检查阶段失败: 缺少必备的更新。</value>
+  </data>
+  <data name="PATCH_PRECHECK_FAILED_UNKNOWN_ERROR" xml:space="preserve">
+    <value>更新预检查阶段失败，出现未知错误。</value>
+  </data>
+  <data name="PATCH_PRECHECK_FAILED_VM_RUNNING" xml:space="preserve">
+    <value>更新预检查阶段失败: 服务器上仍有一个或多个 VM 正在运行。必须先关闭或挂起所有 VM，才能应用更新。</value>
+  </data>
+  <data name="PATCH_PRECHECK_FAILED_WRONG_SERVER_BUILD" xml:space="preserve">
+    <value>XenServer 的内部版本号({1})与更新的内部版本号({2})不兼容。</value>
+  </data>
+  <data name="PATCH_PRECHECK_FAILED_WRONG_SERVER_VERSION" xml:space="preserve">
+    <value>XenServer 的版本号({1})与更新的版本号({2})不兼容。</value>
+  </data>
+  <data name="PBD_EXISTS" xml:space="preserve">
+    <value>已存在 PBD，正在将 SR 连接到服务器</value>
+  </data>
+  <data name="PERMISSION_DENIED" xml:space="preserve">
+    <value>不允许调用方执行此操作。</value>
+  </data>
+  <data name="PIF_ALREADY_BONDED" xml:space="preserve">
+    <value>无法为已属于现有绑定的接口创建绑定。</value>
+  </data>
+  <data name="PIF_BOND_NEEDS_MORE_MEMBERS" xml:space="preserve">
+    <value>绑定必须至少由两个成员接口构成</value>
+  </data>
+  <data name="PIF_CANNOT_BOND_CROSS_HOST" xml:space="preserve">
+    <value>无法在不同服务器之间绑定接口。</value>
+  </data>
+  <data name="PIF_CONFIGURATION_ERROR" xml:space="preserve">
+    <value>尝试配置接口时发生未知错误。</value>
+  </data>
+  <data name="PIF_DEVICE_NOT_FOUND" xml:space="preserve">
+    <value>未找到指定的设备。</value>
+  </data>
+  <data name="PIF_DOES_NOT_ALLOW_UNPLUG" xml:space="preserve">
+    <value>无法执行请求的操作，因为指定的 PIF 不允许插拔。</value>
+  </data>
+  <data name="PIF_HAS_NO_NETWORK_CONFIGURATION" xml:space="preserve">
+    <value>PIF 没有网络配置</value>
+  </data>
+  <data name="PIF_HAS_NO_V6_NETWORK_CONFIGURATION" xml:space="preserve">
+    <value>PIF 没有 IPv6 配置(模式当前设置为“无”)</value>
+  </data>
+  <data name="PIF_INCOMPATIBLE_PRIMARY_ADDRESS_TYPE" xml:space="preserve">
+    <value>主地址类型不兼容</value>
+  </data>
+  <data name="PIF_IS_MANAGEMENT_INTERFACE" xml:space="preserve">
+    <value>PIF 为管理接口。</value>
+  </data>
+  <data name="PIF_IS_PHYSICAL" xml:space="preserve">
+    <value>您尝试销毁 PIF {0}，但其表示某一方面的物理服务器配置，因此无法破坏。</value>
+  </data>
+  <data name="PIF_IS_VLAN" xml:space="preserve">
+    <value>您尝试在另一个 VLAN 之上创建 VLAN - 请改用基础物理 PIF/绑定</value>
+  </data>
+  <data name="PIF_TUNNEL_STILL_EXISTS" xml:space="preserve">
+    <value>此接口上存在隧道时，无法继续执行操作。</value>
+  </data>
+  <data name="PIF_VLAN_EXISTS" xml:space="preserve">
+    <value>VLAN 标记已在使用</value>
+  </data>
+  <data name="PIF_VLAN_STILL_EXISTS" xml:space="preserve">
+    <value>此接口上存在 VLAN 时，无法继续执行操作。</value>
+  </data>
+  <data name="POOL_AUTH_ALREADY_ENABLED" xml:space="preserve">
+    <value>已为该池中至少一个服务器启用外部身份验证。</value>
+  </data>
+  <data name="POOL_AUTH_DISABLE_FAILED" xml:space="preserve">
+    <value>已禁用外部身份验证，出现以下错误: 未在 AD 服务器上成功禁用某些 AD 计算机帐户。</value>
+  </data>
+  <data name="POOL_AUTH_DISABLE_FAILED_PERMISSION_DENIED" xml:space="preserve">
+    <value>已禁用外部身份验证，出现以下错误: 由于权限遭拒绝，未在 AD 服务器上禁用某些 AD 计算机帐户。</value>
+  </data>
+  <data name="POOL_AUTH_DISABLE_FAILED_WRONG_CREDENTIALS" xml:space="preserve">
+    <value>已禁用外部身份验证，错误消息如下: 由于凭据无效，因此未在 AD 服务器上禁用某些 AD 计算机帐户。</value>
+  </data>
+  <data name="POOL_AUTH_ENABLE_FAILED" xml:space="preserve">
+    <value>无法启用外部身份验证: {1}</value>
+  </data>
+  <data name="POOL_AUTH_ENABLE_FAILED_DOMAIN_LOOKUP_FAILED" xml:space="preserve">
+    <value>XenServer 无法与域服务器联系以启用外部身份验证。请检查设置是否正确以及是否存在到服务器的路由。</value>
+  </data>
+  <data name="POOL_AUTH_ENABLE_FAILED_DUPLICATE_HOSTNAME" xml:space="preserve">
+    <value>无法启用外部身份验证，检测到重复的主机名。</value>
+  </data>
+  <data name="POOL_AUTH_ENABLE_FAILED_INVALID_OU" xml:space="preserve">
+    <value>池无法启用外部身份验证。</value>
+  </data>
+  <data name="POOL_AUTH_ENABLE_FAILED_PERMISSION_DENIED" xml:space="preserve">
+    <value>无法启用外部身份验证，AD 服务器的权限遭拒绝。</value>
+  </data>
+  <data name="POOL_AUTH_ENABLE_FAILED_UNAVAILABLE" xml:space="preserve">
+    <value>无法启用外部身份验证，AD 服务器不可用。</value>
+  </data>
+  <data name="POOL_AUTH_ENABLE_FAILED_WRONG_CREDENTIALS" xml:space="preserve">
+    <value>无法启用外部身份验证，所提供的凭据无效。</value>
+  </data>
+  <data name="POOL_JOINING_EXTERNAL_AUTH_MISMATCH" xml:space="preserve">
+    <value>加入池的服务器的外部身份验证配置必须与池自身的外部身份验证配置匹配。</value>
+  </data>
+  <data name="POOL_JOINING_HOST_MUST_HAVE_PHYSICAL_MANAGEMENT_NIC" xml:space="preserve">
+    <value>加入池的服务器必须有物理管理 NIC (就是说，管理 NIC 不能位于 VLAN 或绑定的 PIF 中)。</value>
+  </data>
+  <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_PRODUCT_VERSION" xml:space="preserve">
+    <value>加入池的服务器必须与池的主服务器具有相同的产品版本。</value>
+  </data>
+  <data name="PROVISION_FAILED_OUT_OF_SPACE" xml:space="preserve">
+    <value>置备调用因空间不足失败。</value>
+  </data>
+  <data name="PROVISION_ONLY_ALLOWED_ON_TEMPLATE" xml:space="preserve">
+    <value>只能对模板(而非常规 VM)调用置备调用。</value>
+  </data>
+  <data name="RBAC_PERMISSION_DENIED" xml:space="preserve">
+    <value>您的当前角色未获授权，无法执行此操作。
+操作: {0}</value>
+  </data>
+  <data name="RBAC_PERMISSION_DENIED_FRIENDLY" xml:space="preserve">
+    <value>您的当前角色未获授权，无法执行此操作。
+当前角色: {0}
+授权角色: {1}</value>
+  </data>
+  <data name="RBAC_PERMISSION_DENIED_FRIENDLY_CONNECTION" xml:space="preserve">
+    <value>您的当前角色未获授权，无法在 {2} 上执行此操作。
+当前角色: {0}
+授权角色: {1}</value>
+  </data>
+  <data name="REDO_LOG_IS_ENABLED" xml:space="preserve">
+    <value>无法执行该操作，因为对池启用了恢复日志。</value>
+  </data>
+  <data name="RESTORE_INCOMPATIBLE_VERSION" xml:space="preserve">
+    <value>无法在此服务器上还原，因为它是在不兼容版本中保存的。</value>
+  </data>
+  <data name="RESTORE_SCRIPT_FAILED" xml:space="preserve">
+    <value>无法执行还原，因为还原脚本失败。XenServer 备份文件可能已损坏。有关更多信息，请参阅日志。</value>
+  </data>
+  <data name="RESTORE_TARGET_MGMT_IF_NOT_IN_BACKUP" xml:space="preserve">
+    <value>无法执行还原，因为服务器的当前管理接口未在备份中。备份中提到的接口为:</value>
+  </data>
+  <data name="RESTORE_TARGET_MISSING_DEVICE" xml:space="preserve">
+    <value>无法执行还原，因为缺少网络接口</value>
+  </data>
+  <data name="ROLE_ALREADY_EXISTS" xml:space="preserve">
+    <value>角色已存在。</value>
+  </data>
+  <data name="ROLE_NOT_FOUND" xml:space="preserve">
+    <value>找不到角色。</value>
+  </data>
+  <data name="SESSION_AUTHENTICATION_FAILED" xml:space="preserve">
+    <value>无法对会话进行身份验证。请检查访问凭据并重试。</value>
+  </data>
+  <data name="SESSION_INVALID" xml:space="preserve">
+    <value>与服务器的连接丢失。</value>
+  </data>
+  <data name="SESSION_NOT_REGISTERED" xml:space="preserve">
+    <value>未注册此会话 {0} 来接收事件。您必须先调用 event.register，然后调用 event.next。所使用的会话句柄将回显。</value>
+  </data>
+  <data name="SLAVE_REQUIRES_MANAGEMENT_INTERFACE" xml:space="preserve">
+    <value>无法禁用该从属服务器上的管理接口，因为该从属服务器将进入紧急模式。</value>
+  </data>
+  <data name="SM_PLUGIN_COMMUNICATION_FAILURE" xml:space="preserve">
+    <value>SM 插件未响应查询。</value>
+  </data>
+  <data name="SR_ATTACH_FAILED" xml:space="preserve">
+    <value>连接此 SR 失败。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE" xml:space="preserve">
+    <value>SR 无法完成该操作</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_1" xml:space="preserve">
+    <value>参数无效</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_100" xml:space="preserve">
+    <value>找不到卷</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_101" xml:space="preserve">
+    <value>请求缺少服务器路径参数</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_102" xml:space="preserve">
+    <value>请求缺少服务器参数</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_103" xml:space="preserve">
+    <value>服务器路径参数无效</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_104" xml:space="preserve">
+    <value>无法打开 refcount 文件</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_105" xml:space="preserve">
+    <value>根系统设备不能用于 VM 存储</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_106" xml:space="preserve">
+    <value>所提供的 IQN 格式无效</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_107" xml:space="preserve">
+    <value>缺少 SCSIid 参数或该参数不正确</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_108" xml:space="preserve">
+    <value>无法在此目标上检测到 NFS 服务。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_109" xml:space="preserve">
+    <value>快照链过长</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_110" xml:space="preserve">
+    <value>VDI 大小调整失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_120" xml:space="preserve">
+    <value>Dconf 字符串中缺少 Netapp 目标参数 </value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_121" xml:space="preserve">
+    <value>Dconf 字符串中缺少 Netapp 用户名参数</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_122" xml:space="preserve">
+    <value>Dconf 字符串中缺少 Netapp 密码参数</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_123" xml:space="preserve">
+    <value>Dconf 字符串中缺少 Netapp 聚合参数</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_124" xml:space="preserve">
+    <value>无法连接 Netapp 目标</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_125" xml:space="preserve">
+    <value>身份验证凭据不正确</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_126" xml:space="preserve">
+    <value>身份验证凭据没有足够的访问权限</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_127" xml:space="preserve">
+    <value>目标上的 Flexvol 卷已达到最大数目。无法分配所请求的资源。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_128" xml:space="preserve">
+    <value>目标卷上的快照已达到最大数目。无法创建快照。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_129" xml:space="preserve">
+    <value>空间不足，无法创建快照。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_130" xml:space="preserve">
+    <value>不支持 Netapp 目标版本</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_131" xml:space="preserve">
+    <value>无法检索目标 IQN</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_132" xml:space="preserve">
+    <value>Netapp 目标上未运行 iSCSI 服务。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_133" xml:space="preserve">
+    <value>无法对 SR 启用 A-SIS。要求提供文件管理器的有效许可证。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_134" xml:space="preserve">
+    <value>文件管理器在此聚合体上不支持 A-SIS。该许可证有效，但在某些文件管理器中，A-SIS 限定于较小的聚合，例如 FAS3020 支持的最大聚合体为 1TB。有关型号的详细信息，请参阅文件管理器支持文档。您必须禁用 A-SIS 支持，或者将聚合体重新配置为支持的最大大小。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_135" xml:space="preserve">
+    <value>无法获取 LUN 的独占锁。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_140" xml:space="preserve">
+    <value>DNS 查找失败: 无法解析给定的服务器名。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_141" xml:space="preserve">
+    <value>无法连接目标上的 iSCSI 服务</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_142" xml:space="preserve">
+    <value>iSCSI 端口的值不正确，必须为介于 1 和 65535 之间的数字</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_143" xml:space="preserve">
+    <value>无法解析该请求</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_144" xml:space="preserve">
+    <value>找不到 VDI</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_150" xml:space="preserve">
+    <value>无法初始化 XMLRPC 连接</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_151" xml:space="preserve">
+    <value>无法查询本地控制域</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_152" xml:space="preserve">
+    <value>查询 PBD 条目时出现故障</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_153" xml:space="preserve">
+    <value>访问 API 对象时出现故障</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_16" xml:space="preserve">
+    <value>指定的存储库当前正在使用</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_160" xml:space="preserve">
+    <value>Dconf 字符串中缺少 Equallogic 目标参数</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_161" xml:space="preserve">
+    <value>Dconf 字符串中缺少 Equallogic 用户名参数</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_162" xml:space="preserve">
+    <value>Dconf 字符串中缺少 Equallogic 密码参数</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_163" xml:space="preserve">
+    <value>Dconf 字符串中缺少 Equallogic 存储池参数</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_164" xml:space="preserve">
+    <value>无法连接 Equallogic 阵列；SSH CLI 会话数已达到最大</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_165" xml:space="preserve">
+    <value>snap-reserver-percentage 值无效，必须为整数(采用 VDI 大小百分比的形式)，表示保留给快照的空间量。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_166" xml:space="preserve">
+    <value>snap-depletion 值无效，必须为“delete-oldest”或“volume-offline”之一</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_167" xml:space="preserve">
+    <value>卷空间不足，可能是由于分配的快照保留空间不足。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_168" xml:space="preserve">
+    <value>无法创建快照 VDI 的快照，不支持的操作</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_169" xml:space="preserve">
+    <value>无法连接 Equallogic 阵列，权限遭拒绝；用户名/密码无效</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_170" xml:space="preserve">
+    <value>不支持的 Equallogic 目标版本</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_171" xml:space="preserve">
+    <value>无法登录阵列。请检查 IP 设置。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_172" xml:space="preserve">
+    <value>Dconf 字符串中指定的 Equallogic 存储池参数无效</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_173" xml:space="preserve">
+    <value>Dconf 字符串中指定的 Equallogic 目标参数无效，请指定正确的组 IP 地址</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_174" xml:space="preserve">
+    <value>CLI 命令收到无效的 SNMP 响应</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_175" xml:space="preserve">
+    <value>“说明”字段中存储的卷元数据无效，该字段包含经编码的数据，用户无法编辑该字段</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_176" xml:space="preserve">
+    <value>CLI 命令收到无效的 EOF 响应</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_180" xml:space="preserve">
+    <value>卷组空间不足。SR 置备过度，空间不足。无法扩大基础卷来容纳磁盘的虚拟大小。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_181" xml:space="preserve">
+    <value>SR 的元数据卷操作出错。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_19" xml:space="preserve">
+    <value>没有此类设备</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_2" xml:space="preserve">
+    <value>在 dconf 字符串中检测到错误字符</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_20" xml:space="preserve">
+    <value>没有此类密钥。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_200" xml:space="preserve">
+    <value>常规 IO 错误</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_201" xml:space="preserve">
+    <value>当前不可用，请重试</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_202" xml:space="preserve">
+    <value>常规后端错误</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_203" xml:space="preserve">
+    <value>已达到活动的 FIST 点，导致进程异常退出</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_220" xml:space="preserve">
+    <value>设备配置请求缺少位置参数</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_221" xml:space="preserve">
+    <value>ISO 名称必须有 .iso 扩展名</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_222" xml:space="preserve">
+    <value>无法装载设备配置请求中指定的目录</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_223" xml:space="preserve">
+    <value>无法卸载设备配置请求中指定的目录</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_224" xml:space="preserve">
+    <value>在目标中找不到该 ISO 共享名，或者访问权限可能不正确。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_225" xml:space="preserve">
+    <value>位置字符串格式不正确。对于 NFS 目标，字符串格式必须为 SERVER:PATH，对于 CIFS 目标，格式必须为 \\SERVER\PATH</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_226" xml:space="preserve">
+    <value>本地路径无效</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_24" xml:space="preserve">
+    <value>指定的 VDI 当前正在使用</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_37" xml:space="preserve">
+    <value>锁定/解锁存储库或 VDI 的请求失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_38" xml:space="preserve">
+    <value>当前不支持所请求的方法</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_39" xml:space="preserve">
+    <value>指定的存储库中包含数据</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_40" xml:space="preserve">
+    <value>指定的存储库扫描失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_400" xml:space="preserve">
+    <value>缺少目标服务器名称或 IP 地址</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_401" xml:space="preserve">
+    <value>缺少存储系统 ID</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_402" xml:space="preserve">
+    <value>缺少存储池 ID</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_41" xml:space="preserve">
+    <value>存储库日志操作失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_410" xml:space="preserve">
+    <value>对 CSLG 服务器执行 gssi 操作失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_411" xml:space="preserve">
+    <value>SR 加载操作失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_412" xml:space="preserve">
+    <value>指定的存储协议无效</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_413" xml:space="preserve">
+    <value>无法解析 XML</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_414" xml:space="preserve">
+    <value>无法探查 SR</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_416" xml:space="preserve">
+    <value>快照/克隆失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_417" xml:space="preserve">
+    <value>分配存储失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_418" xml:space="preserve">
+    <value>取消分配存储失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_419" xml:space="preserve">
+    <value>分配存储失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_42" xml:space="preserve">
+    <value>指定的存储库已存在</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_420" xml:space="preserve">
+    <value>取消分配存储失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_421" xml:space="preserve">
+    <value>HBA 查询失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_422" xml:space="preserve">
+    <value>IQN/iSCSI 初始化失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_423" xml:space="preserve">
+    <value>SCSI 设备扫描失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_424" xml:space="preserve">
+    <value>无法连接目标: 请检查主机名或 IP 地址</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_425" xml:space="preserve">
+    <value>缺少存储节点 ID</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_426" xml:space="preserve">
+    <value>VDI 无法引入数据库中</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_427" xml:space="preserve">
+    <value>似乎未安装 CSLG 软件</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_428" xml:space="preserve">
+    <value>无法从父池创建多个子池</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_429" xml:space="preserve">
+    <value>当前 XML 定义的版本更新</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_43" xml:space="preserve">
+    <value>指定的 VDI 已存在</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_430" xml:space="preserve">
+    <value>无法与多路径后台程序通信</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_431" xml:space="preserve">
+    <value>存储适配器通信错误</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_432" xml:space="preserve">
+    <value>缺少适配器 ID</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_433" xml:space="preserve">
+    <value>缺少用户名</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_434" xml:space="preserve">
+    <value>缺少密码</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_435" xml:space="preserve">
+    <value>指定的存储系统 ID 无效</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_436" xml:space="preserve">
+    <value>无法收集存储系统信息</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_437" xml:space="preserve">
+    <value>无法收集存储池信息</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_438" xml:space="preserve">
+    <value>无法删除存储池</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_439" xml:space="preserve">
+    <value>无法收集存储卷信息</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_44" xml:space="preserve">
+    <value>指定的存储库空间不足</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_440" xml:space="preserve">
+    <value>无法列出存储卷</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_441" xml:space="preserve">
+    <value>无法调整存储卷的大小</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_442" xml:space="preserve">
+    <value>无法列出存储目标端口</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_443" xml:space="preserve">
+    <value>无法列出存储池</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_444" xml:space="preserve">
+    <value>tapdisk 失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_445" xml:space="preserve">
+    <value>tapdisk 已在运行</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_446" xml:space="preserve">
+    <value>XenServer 不支持在 CIFS 路径、用户名和密码中使用扩展字符。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_447" xml:space="preserve">
+    <value>XML 字符非法。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
+    <value>VDI 不可用</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_47" xml:space="preserve">
+    <value>存储库不可用</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_48" xml:space="preserve">
+    <value>尝试访问的存储库为未知类型</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_49" xml:space="preserve">
+    <value>xml 字符串的格式不正确</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_50" xml:space="preserve">
+    <value>尝试创建指定的逻辑卷时出错</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_51" xml:space="preserve">
+    <value>尝试删除指定的逻辑卷时出错</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_52" xml:space="preserve">
+    <value>逻辑卷装载/激活错误</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_53" xml:space="preserve">
+    <value>尝试卸载/停用指定的逻辑卷失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_54" xml:space="preserve">
+    <value>尝试将数据写入指定的逻辑卷时出错</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_55" xml:space="preserve">
+    <value>尝试在指定的逻辑卷上创建分区时出错</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_56" xml:space="preserve">
+    <value>逻辑卷上的分区当前正在使用</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_57" xml:space="preserve">
+    <value>尝试在指定的逻辑卷上创建文件系统时出错</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_58" xml:space="preserve">
+    <value>尝试从逻辑卷发出请求时出错。请求必须来自主服务器。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_59" xml:space="preserve">
+    <value>尝试调整逻辑卷大小失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_60" xml:space="preserve">
+    <value>为逻辑卷指定的大小无效。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_61" xml:space="preserve">
+    <value>尝试创建文件存储库时出错</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_62" xml:space="preserve">
+    <value>尝试删除文件存储库中的目录时出错。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_63" xml:space="preserve">
+    <value>尝试删除文件存储库时出错</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_64" xml:space="preserve">
+    <value>尝试删除 VDI 失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_65" xml:space="preserve">
+    <value>尝试加载 VDI 失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_66" xml:space="preserve">
+    <value>VDI 类型无效</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_67" xml:space="preserve">
+    <value>无法添加 iSCSI 设备</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_68" xml:space="preserve">
+    <value>登录 iSCSI 目标失败。请检查用户名和密码。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_69" xml:space="preserve">
+    <value>注销 iSCSI 目标失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_70" xml:space="preserve">
+    <value>无法设置 iSCSI 发起程序</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_71" xml:space="preserve">
+    <value>iSCSI 后台程序无法启动</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_72" xml:space="preserve">
+    <value>不支持 NFS 服务器版本</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_73" xml:space="preserve">
+    <value>尝试装载 NFS 共享时出错</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_74" xml:space="preserve">
+    <value>尝试卸载 NFS 共享时出错</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_75" xml:space="preserve">
+    <value>NFS 共享已添加</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_76" xml:space="preserve">
+    <value>尝试删除 NFS 共享失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_77" xml:space="preserve">
+    <value>尝试创建逻辑卷组失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_78" xml:space="preserve">
+    <value>尝试创建 VDI 失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_79" xml:space="preserve">
+    <value>为 VDI 指定的大小无效</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_80" xml:space="preserve">
+    <value>尝试将 VDI 标记为隐藏失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_81" xml:space="preserve">
+    <value>尝试克隆 VDI 失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_82" xml:space="preserve">
+    <value>尝试生成 VDI 快照失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_83" xml:space="preserve">
+    <value>尝试检测 iSCSI 目标/设备失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_84" xml:space="preserve">
+    <value>iScsi 目标与收到的 IQN 不匹配</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_85" xml:space="preserve">
+    <value>尝试分离 iSCSI 失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_86" xml:space="preserve">
+    <value>尝试查询 iSCSi 后台程序失败</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_87" xml:space="preserve">
+    <value>必须提供 LUNid 或 LUNserial 值</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_88" xml:space="preserve">
+    <value>尝试创建 NFS 存储库时出错</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_89" xml:space="preserve">
+    <value>请求缺少 LUNid 参数</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_90" xml:space="preserve">
+    <value>请求缺少设备参数</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_91" xml:space="preserve">
+    <value>设备的路径无效</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_92" xml:space="preserve">
+    <value>找不到卷</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_93" xml:space="preserve">
+    <value>pvs 实用程序返回错误</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_94" xml:space="preserve">
+    <value>请求缺少位置参数</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_95" xml:space="preserve">
+    <value>请求缺少目标参数</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_96" xml:space="preserve">
+    <value>请求缺少目标 IQN 参数</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_97" xml:space="preserve">
+    <value>请求缺少服务器配置 iSCSI IQN 参数</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_98" xml:space="preserve">
+    <value>请求缺少 LUN 序列号</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_99" xml:space="preserve">
+    <value>只有 1 个 LUN 可以与共享 LVM 结合使用</value>
+  </data>
+  <data name="SR_DEVICE_IN_USE" xml:space="preserve">
+    <value>无法执行该 SR 操作，因为 SR 底层的设备正由服务器使用。</value>
+  </data>
+  <data name="SR_FULL" xml:space="preserve">
+    <value>SR 已满。请求的大小 {0} 超过最大大小 {1}</value>
+  </data>
+  <data name="SR_HAS_MULTIPLE_PBDS" xml:space="preserve">
+    <value>在 SR 仍与多个服务器保持连接时，无法将 SR.shared 标志设置为 false</value>
+  </data>
+  <data name="SR_HAS_NO_PBDS" xml:space="preserve">
+    <value>SR 未连接 PBD</value>
+  </data>
+  <data name="SR_HAS_PBD" xml:space="preserve">
+    <value>SR {0} 仍通过 PBD 与服务器连接。无法将其销毁。</value>
+  </data>
+  <data name="SR_INDESTRUCTIBLE" xml:space="preserve">
+    <value>无法销毁 SR，因为其中设置了“indestructible”标志。</value>
+  </data>
+  <data name="SR_NOT_EMPTY" xml:space="preserve">
+    <value>无法执行该 SR 操作，因为 SR 不为空。</value>
+  </data>
+  <data name="SR_NOT_SHARABLE" xml:space="preserve">
+    <value>SR 不能共享</value>
+  </data>
+  <data name="SR_OPERATION_NOT_SUPPORTED" xml:space="preserve">
+    <value>此 SR 不支持该操作</value>
+  </data>
+  <data name="SR_REQUIRES_UPGRADE" xml:space="preserve">
+    <value>升级 SR 前无法执行该操作</value>
+  </data>
+  <data name="SR_UNKNOWN_DRIVER" xml:space="preserve">
+    <value>无法连接 SR，因为无法识别驱动程序 {0}。</value>
+  </data>
+  <data name="SR_UUID_EXISTS" xml:space="preserve">
+    <value>具有该 uuid 的 SR 已存在。</value>
+  </data>
+  <data name="SR_VDI_LOCKING_FAILED" xml:space="preserve">
+    <value>无法继续执行该操作，因为必要的 VDI 在存储级别已经锁定。</value>
+  </data>
+  <data name="SSL_VERIFY_ERROR" xml:space="preserve">
+    <value>远程系统的 SSL 证书无法通过我们证书库的验证。</value>
+  </data>
+  <data name="SUBJECT_ALREADY_EXISTS" xml:space="preserve">
+    <value>使用者已存在。</value>
+  </data>
+  <data name="SUBJECT_CANNOT_BE_RESOLVED" xml:space="preserve">
+    <value>外部目录服务无法解析使用者。</value>
+  </data>
+  <data name="SYSTEM_STATUS_MUST_USE_TAR_ON_OEM" xml:space="preserve">
+    <value>必须使用 tar 输出从 OEM 服务器检索系统状态。</value>
+  </data>
+  <data name="SYSTEM_STATUS_RETRIEVAL_FAILED" xml:space="preserve">
+    <value>从服务器检索系统状态失败。</value>
+  </data>
+  <data name="TASK_CANCELLED" xml:space="preserve">
+    <value>以异步方式取消了请求。</value>
+  </data>
+  <data name="TOO_BUSY" xml:space="preserve">
+    <value>请求遭拒绝，因为服务器太忙。</value>
+  </data>
+  <data name="TOO_MANY_PENDING_TASKS" xml:space="preserve">
+    <value>请求遭拒绝，因为服务器中的待定任务过多。</value>
+  </data>
+  <data name="TOO_MANY_STORAGE_MIGRATES" xml:space="preserve">
+    <value>您的并行迁移 VM 数已达最大值。</value>
+  </data>
+  <data name="TRANSPORT_PIF_NOT_CONFIGURED" xml:space="preserve">
+    <value>隧道传输 PIF 未设置 IP 配置。</value>
+  </data>
+  <data name="UNKNOWN_BOOTLOADER" xml:space="preserve">
+    <value>所请求的 VM {0} 引导加载程序 {1} 未知</value>
+  </data>
+  <data name="USER_IS_NOT_LOCAL_SUPERUSER" xml:space="preserve">
+    <value>只有本地超级用户才能执行此操作</value>
+  </data>
+  <data name="UUID_INVALID" xml:space="preserve">
+    <value>所提供的 uuid 无效。</value>
+  </data>
+  <data name="V6D_FAILURE" xml:space="preserve">
+    <value>许可证后台程序(v6d)存在问题。它是否正在运行?</value>
+  </data>
+  <data name="VALUE_NOT_SUPPORTED" xml:space="preserve">
+    <value>尝试为字段 {0} 设置的值 {1} 不受支持。{2}</value>
+  </data>
+  <data name="VBDS_MAX_ALLOWED" xml:space="preserve">
+    <value>此虚拟机已达到允许使用的最大虚拟磁盘数。</value>
+  </data>
+  <data name="VBDS_MAX_ALLOWED_TITLE" xml:space="preserve">
+    <value>允许的最大虚拟磁盘数</value>
+  </data>
+  <data name="VBD_CDS_MUST_BE_READONLY" xml:space="preserve">
+    <value>不支持读/写 CD</value>
+  </data>
+  <data name="VBD_IS_EMPTY" xml:space="preserve">
+    <value>VBD {0} - 驱动器为空，无法执行操作</value>
+  </data>
+  <data name="VBD_NOT_EMPTY" xml:space="preserve">
+    <value>VBD {0} - 无法执行操作，因为驱动器不为空</value>
+  </data>
+  <data name="VBD_NOT_REMOVABLE_MEDIA" xml:space="preserve">
+    <value>VBD {0} - 无法弹出介质，因为不是可移动介质</value>
+  </data>
+  <data name="VBD_NOT_UNPLUGGABLE" xml:space="preserve">
+    <value>驱动器无法进行热插拔，因为其未标记为可插拔</value>
+  </data>
+  <data name="VBD_TRAY_LOCKED" xml:space="preserve">
+    <value>此 VM 已锁定 DVD 驱动器托盘，因此无法弹出磁盘</value>
+  </data>
+  <data name="VCPUS_MAX_ALLOWED" xml:space="preserve">
+    <value>此虚拟机已达到允许使用的最大虚拟 CPU 数。</value>
+  </data>
+  <data name="VCPUS_MAX_ALLOWED_TITLE" xml:space="preserve">
+    <value>允许的最大虚拟 CPU 数</value>
+  </data>
+  <data name="VDI_CONTAINS_METADATA_OF_THIS_POOL" xml:space="preserve">
+    <value>无法将 VDI 打开进行元数据恢复，因为其中包含当前池的元数据。</value>
+  </data>
+  <data name="VDI_INCOMPATIBLE_TYPE" xml:space="preserve">
+    <value>无法执行该操作，因为指定的虚拟磁盘为不兼容的类型(例如，高可用性状态文件无法连接到 VM)</value>
+  </data>
+  <data name="VDI_IN_USE" xml:space="preserve">
+    <value>某个 VDI 正在由其他某项操作使用，无法执行此操作。</value>
+  </data>
+  <data name="VDI_IS_A_PHYSICAL_DEVICE" xml:space="preserve">
+    <value>无法在物理设备上执行该操作</value>
+  </data>
+  <data name="VDI_IS_NOT_ISO" xml:space="preserve">
+    <value>只能在 CD VDI (iso 文件或 CDROM 驱动器)上执行该操作。VDI {0} 为 {1} 类型。</value>
+  </data>
+  <data name="VDI_LOCATION_MISSING" xml:space="preserve">
+    <value>无法执行该操作，因为在指定的 SR 中找不到指定的虚拟磁盘</value>
+  </data>
+  <data name="VDI_MISSING" xml:space="preserve">
+    <value>无法执行该操作，因为找不到指定的虚拟磁盘</value>
+  </data>
+  <data name="VDI_NEEDS_VM_FOR_MIGRATE" xml:space="preserve">
+    <value>您尝试迁移的 VDI 未连接到运行中的 VM。</value>
+  </data>
+  <data name="VDI_NOT_AVAILABLE" xml:space="preserve">
+    <value>无法执行该操作，因为 VDI {0} 无法正确连接到 VM。</value>
+  </data>
+  <data name="VDI_NOT_MANAGED" xml:space="preserve">
+    <value>无法执行该操作，因为系统未管理此 VDI</value>
+  </data>
+  <data name="VDI_READONLY" xml:space="preserve">
+    <value>该操作需要进行写入访问，但 VDI {0} 为只读</value>
+  </data>
+  <data name="VIFS_MAX_ALLOWED" xml:space="preserve">
+    <value>此虚拟机已达到允许使用的最大虚拟网络接口数。</value>
+  </data>
+  <data name="VIFS_MAX_ALLOWED_TITLE" xml:space="preserve">
+    <value>允许的最大虚拟网络接口数</value>
+  </data>
+  <data name="VIF_IN_USE" xml:space="preserve">
+    <value>网络具有活动的 VIF</value>
+  </data>
+  <data name="VLAN_TAG_INVALID" xml:space="preserve">
+    <value>您尝试创建 VLAN，但提供的标记({0})无效 -- 它必须介于 0 与 4094 之间。</value>
+  </data>
+  <data name="VMPP_ARCHIVE_MORE_FREQUENT_THAN_BACKUP" xml:space="preserve">
+    <value>存档频率高于备份频繁。</value>
+  </data>
+  <data name="VMPP_HAS_VM" xml:space="preserve">
+    <value>至少为此保护策略分配了一个 VM。</value>
+  </data>
+  <data name="VMS_FAILED_TO_COOPERATE" xml:space="preserve">
+    <value>系统要求释放内存时，给定的 VM 无法执行该操作</value>
+  </data>
+  <data name="VM_ASSIGNED_TO_PROTECTION_POLICY" xml:space="preserve">
+    <value>已将此 VM 分配给某项保护策略。</value>
+  </data>
+  <data name="VM_ATTACHED_TO_MORE_THAN_ONE_VDI_WITH_TIMEOFFSET_MARKED_AS_RESET_ON_BOOT" xml:space="preserve">
+    <value>您尝试启动的 VM 已连接到偏移时间标记为启动时重置的多个 VDI。</value>
+  </data>
+  <data name="VM_BAD_POWER_STATE" xml:space="preserve">
+    <value>您尝试执行操作的 VM 需要处于“{1}”状态，但处于“{2}”状态。</value>
+  </data>
+  <data name="VM_BIOS_STRINGS_ALREADY_SET" xml:space="preserve">
+    <value>已设置此 VM 的 BIOS 字符串，无法再更改。</value>
+  </data>
+  <data name="VM_CANNOT_DELETE_DEFAULT_TEMPLATE" xml:space="preserve">
+    <value>无法删除指定的默认模板。</value>
+  </data>
+  <data name="VM_CHECKPOINT_RESUME_FAILED" xml:space="preserve">
+    <value>还原指定虚拟机的内存映像时出错</value>
+  </data>
+  <data name="VM_CHECKPOINT_SUSPEND_FAILED" xml:space="preserve">
+    <value>保存指定虚拟机的内存映像时出错</value>
+  </data>
+  <data name="VM_CRASHED" xml:space="preserve">
+    <value>VM 崩溃</value>
+  </data>
+  <data name="VM_DUPLICATE_VBD_DEVICE" xml:space="preserve">
+    <value>指定的 VM 具有重复的 VBD 设备，无法启动。</value>
+  </data>
+  <data name="VM_FAILED_SHUTDOWN_ACKNOWLEDGMENT" xml:space="preserve">
+    <value>VM 未认可需要关闭。</value>
+  </data>
+  <data name="VM_HALTED" xml:space="preserve">
+    <value>VM 意外终止</value>
+  </data>
+  <data name="VM_HAS_PCI_ATTACHED" xml:space="preserve">
+    <value>无法执行该操作，因为 VM 传递了一个或多个 PCI 设备。</value>
+  </data>
+  <data name="VM_HAS_TOO_MANY_SNAPSHOTS" xml:space="preserve">
+    <value>您尝试迁移的 VM 具有多个快照。</value>
+  </data>
+  <data name="VM_HOST_INCOMPATIBLE_VERSION" xml:space="preserve">
+    <value>在升级期间无法对旧版本的主机执行该 VM 操作。</value>
+  </data>
+  <data name="VM_HVM_REQUIRED" xml:space="preserve">
+    <value>此操作需要 HVM</value>
+  </data>
+  <data name="VM_HVM_REQUIRED-SHORT" xml:space="preserve">
+    <value>不支持 HVM</value>
+  </data>
+  <data name="VM_INCOMPATIBLE_WITH_THIS_HOST" xml:space="preserve">
+    <value>该 VM 与此主机的 CPU 功能不兼容。</value>
+  </data>
+  <data name="VM_IS_PART_OF_AN_APPLIANCE" xml:space="preserve">
+    <value>该 VM 无法单独恢复，因为它是 VM 设备的一部分。</value>
+  </data>
+  <data name="VM_IS_PROTECTED" xml:space="preserve">
+    <value>无法执行该操作，因为指定的 VM 受高可用性保护</value>
+  </data>
+  <data name="VM_IS_TEMPLATE" xml:space="preserve">
+    <value>尝试执行的操作对模板无效</value>
+  </data>
+  <data name="VM_MEMORY_SIZE_TOO_LOW" xml:space="preserve">
+    <value>指定 VM 的内存过少，无法启动。</value>
+  </data>
+  <data name="VM_MIGRATE_FAILED" xml:space="preserve">
+    <value>VM 迁移失败: {3}</value>
+  </data>
+  <data name="VM_MISSING_PV_DRIVERS" xml:space="preserve">
+    <value>尝试执行操作的 VM 需要安装 PV 驱动程序，但检测不到这些驱动程序。</value>
+  </data>
+  <data name="VM_NOT_RESIDENT_HERE" xml:space="preserve">
+    <value>指定的 VM 当前未驻留在指定的服务器上。</value>
+  </data>
+  <data name="VM_NO_CRASHDUMP_SR" xml:space="preserve">
+    <value>没有为此 VM 指定故障转储 SR。</value>
+  </data>
+  <data name="VM_NO_SUSPEND_SR" xml:space="preserve">
+    <value>没有为此 VM 指定挂起 SR。</value>
+  </data>
+  <data name="VM_NO_VCPUS" xml:space="preserve">
+    <value>至少需要 1 个 VCPU 来启动 VM</value>
+  </data>
+  <data name="VM_OLD_PV_DRIVERS" xml:space="preserve">
+    <value>您尝试执行操作的 VM 需要更高版本的 PV 驱动程序。请升级 PV 驱动程序。</value>
+  </data>
+  <data name="VM_REBOOTED" xml:space="preserve">
+    <value>VM 意外重新启动</value>
+  </data>
+  <data name="VM_REQUIRES_GPU" xml:space="preserve">
+    <value>您尝试在 GPU 组中没有可用 pGPU 的主机上运行 VM，但该 VM 需要 pGPU。此 VM 的一个 vGPU 已连接到此 GPU 组。</value>
+  </data>
+  <data name="VM_REQUIRES_GPU-SHORT" xml:space="preserve">
+    <value>GPU 不可用</value>
+  </data>
+  <data name="VM_REQUIRES_IOMMU" xml:space="preserve">
+    <value>您尝试在未启用 I/O 虚拟化(IOMMU/VT-d)的主机上运行 VM，但 VM 需要启用 I/O 虚拟化。</value>
+  </data>
+  <data name="VM_REQUIRES_NETWORK" xml:space="preserve">
+    <value>此 VM 需要使用该服务器无法看到的网络</value>
+  </data>
+  <data name="VM_REQUIRES_NETWORK-SHORT" xml:space="preserve">
+    <value>无法看到所需网络</value>
+  </data>
+  <data name="VM_REQUIRES_SR" xml:space="preserve">
+    <value>从该服务器无法看到此 VM 需要的存储</value>
+  </data>
+  <data name="VM_REQUIRES_SR-SHORT" xml:space="preserve">
+    <value>无法看到所需的存储</value>
+  </data>
+  <data name="VM_REQUIRES_VDI" xml:space="preserve">
+    <value>无法启动 VM，因为无法连接 VM 所需要的 VDI</value>
+  </data>
+  <data name="VM_REVERT_FAILED" xml:space="preserve">
+    <value>将指定虚拟机还原到指定快照时出错</value>
+  </data>
+  <data name="VM_SHUTDOWN_TIMEOUT" xml:space="preserve">
+    <value>此 VM 的关闭操作超时</value>
+  </data>
+  <data name="VM_SNAPSHOT_WITH_QUIESCE_FAILED" xml:space="preserve">
+    <value>静态快照操作因意外原因失败</value>
+  </data>
+  <data name="VM_SNAPSHOT_WITH_QUIESCE_NOT_SUPPORTED" xml:space="preserve">
+    <value>此虚拟机上未安装 VSS 插件</value>
+  </data>
+  <data name="VM_SNAPSHOT_WITH_QUIESCE_PLUGIN_DEOS_NOT_RESPOND" xml:space="preserve">
+    <value>无法与 VSS 插件联系</value>
+  </data>
+  <data name="VM_SNAPSHOT_WITH_QUIESCE_TIMEOUT" xml:space="preserve">
+    <value>VSS 插件已超时</value>
+  </data>
+  <data name="VM_TOO_MANY_VCPUS" xml:space="preserve">
+    <value>VCPU 过多，无法启动此 VM</value>
+  </data>
+  <data name="VM_TO_IMPORT_IS_NOT_NEWER_VERSION" xml:space="preserve">
+    <value>无法在非强制的情况下导入该 VM，因为其版本与现有 VM 的版本相同或低于现有版本。</value>
+  </data>
+  <data name="VM_UNSAFE_BOOT" xml:space="preserve">
+    <value>您尝试执行操作的 VM {0} 已被服务器判定为不安全。如果要运行 VM 的 CPU 所具有的功能标志集可能与 VM 所需要的功能标志集不兼容，则可能会发生此情况。如果要覆盖此警告，请使用“force”选项。</value>
+  </data>
+  <data name="WLB_AUTHENTICATION_FAILED" xml:space="preserve">
+    <value>WLB 服务器拒绝了我们配置的身份验证详细信息。</value>
+  </data>
+  <data name="WLB_CONNECTION_REFUSED" xml:space="preserve">
+    <value>WLB 服务器拒绝了与 XenServer 的连接。</value>
+  </data>
+  <data name="WLB_CONNECTION_RESET" xml:space="preserve">
+    <value>与 WLB 服务器的连接已重置。</value>
+  </data>
+  <data name="WLB_DISABLED" xml:space="preserve">
+    <value>此池的 wlb-enabled 设置为 false。</value>
+  </data>
+  <data name="WLB_INTERNAL_ERROR" xml:space="preserve">
+    <value>WLB 服务器报告了一个内部错误。</value>
+  </data>
+  <data name="WLB_MALFORMED_REQUEST" xml:space="preserve">
+    <value>WLB 服务器因格式错误而拒绝了 XenServer 的请求。</value>
+  </data>
+  <data name="WLB_MALFORMED_RESPONSE" xml:space="preserve">
+    <value>WLB 服务器提供了 XenServer 所不需要或不能理解的一些信息。</value>
+  </data>
+  <data name="WLB_NOT_INITIALIZED" xml:space="preserve">
+    <value>未配置 WLB 连接。</value>
+  </data>
+  <data name="WLB_TIMEOUT" xml:space="preserve">
+    <value>与 WLB 服务器的通信超时。</value>
+  </data>
+  <data name="WLB_UNKNOWN_HOST" xml:space="preserve">
+    <value>配置的 WLB 服务器名称无法在 DNS 中解析。</value>
+  </data>
+  <data name="WLB_URL_INVALID" xml:space="preserve">
+    <value>WLB URL 无效。请确保其格式为: &lt;ipaddress&gt;:&lt;port&gt;。将返回配置/指定的 URL。</value>
+  </data>
+  <data name="WLB_XENSERVER_AUTHENTICATION_FAILED" xml:space="preserve">
+    <value>WLB 服务器报告 XenServer 拒绝了其配置的身份验证详细信息。</value>
+  </data>
+  <data name="WLB_XENSERVER_CONNECTION_REFUSED" xml:space="preserve">
+    <value>WLB 服务器报告 XenServer 拒绝了其连接(尽管反方向的连接相当正常)。</value>
+  </data>
+  <data name="WLB_XENSERVER_MALFORMED_RESPONSE" xml:space="preserve">
+    <value>WLB 服务器报告从 XenServer 获得了 WLB 所不需要或不能理解的一些信息。</value>
+  </data>
+  <data name="WLB_XENSERVER_TIMEOUT" xml:space="preserve">
+    <value>WLB 服务器报告与 XenServer 的通信超时。</value>
+  </data>
+  <data name="WLB_XENSERVER_UNKNOWN_HOST" xml:space="preserve">
+    <value>WLB 服务器报告其为此 XenServer 实例配置的服务器名称无法在 DNS 中解析。</value>
+  </data>
+  <data name="XAPI_HOOK_FAILED" xml:space="preserve">
+    <value>第三方 xapi 挂接失败</value>
+  </data>
+  <data name="XENAPI_MISSING_PLUGIN" xml:space="preserve">
+    <value>找不到请求的插件。</value>
+  </data>
+  <data name="XENAPI_PLUGIN_FAILURE" xml:space="preserve">
+    <value>与该插件出现通信故障。</value>
+  </data>
+  <data name="XEN_VSS_REQ_ERROR_ADDING_VOLUME_TO_SNAPSET_FAILED" xml:space="preserve">
+    <value>要建立快照的一些卷无法添加到 VSS 快照集</value>
+  </data>
+  <data name="XEN_VSS_REQ_ERROR_CREATING_SNAPSHOT" xml:space="preserve">
+    <value>尝试创建快照失败</value>
+  </data>
+  <data name="XEN_VSS_REQ_ERROR_CREATING_SNAPSHOT_XML_STRING" xml:space="preserve">
+    <value>无法创建由可传输快照生成的 XML 字符串</value>
+  </data>
+  <data name="XEN_VSS_REQ_ERROR_INIT_FAILED" xml:space="preserve">
+    <value>初始化 VSS 请求程序失败</value>
+  </data>
+  <data name="XEN_VSS_REQ_ERROR_NO_VOLUMES_SUPPORTED" xml:space="preserve">
+    <value>找不到 Citrix XenServer Vss 提供程序支持的任何卷</value>
+  </data>
+  <data name="XEN_VSS_REQ_ERROR_PREPARING_WRITERS" xml:space="preserve">
+    <value>尝试为快照准备 VSS 写入程序失败</value>
+  </data>
+  <data name="XEN_VSS_REQ_ERROR_PROV_NOT_LOADED" xml:space="preserve">
+    <value>未加载 Citrix XenServer Vss 提供程序</value>
+  </data>
+  <data name="XEN_VSS_REQ_ERROR_START_SNAPSHOT_SET_FAILED" xml:space="preserve">
+    <value>尝试启动新 VSS 快照失败</value>
+  </data>
+  <data name="XMLRPC_GENERAL_ERROR" xml:space="preserve">
+    <value>执行 XMLRPC 请求时出错。</value>
+  </data>
+  <data name="XMLRPC_UNMARSHAL_FAILURE" xml:space="preserve">
+    <value>服务器无法解封 XMLRPC 消息；它需要一个元素，但却收到其他内容。</value>
+  </data>
+</root>

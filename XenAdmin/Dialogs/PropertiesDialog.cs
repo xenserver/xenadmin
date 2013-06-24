@@ -1,0 +1,487 @@
+﻿/* Copyright (c) Citrix Systems Inc. 
+ * All rights reserved. 
+ * 
+ * Redistribution and use in source and binary forms, 
+ * with or without modification, are permitted provided 
+ * that the following conditions are met: 
+ * 
+ * *   Redistributions of source code must retain the above 
+ *     copyright notice, this list of conditions and the 
+ *     following disclaimer. 
+ * *   Redistributions in binary form must reproduce the above 
+ *     copyright notice, this list of conditions and the 
+ *     following disclaimer in the documentation and/or other 
+ *     materials provided with the distribution. 
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+ * CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
+ * SUCH DAMAGE.
+ */
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
+using System.Windows.Forms;
+using XenAPI;
+using XenAdmin.Actions;
+using XenAdmin.SettingsPanels;
+using XenAdmin.Controls;
+using XenAdmin.Core;
+using XenAdmin.Wizards.NewPolicyWizard;
+using XenAdmin.Wizards.NewVMApplianceWizard;
+using XenAdmin.Wizards.GenericPages;
+
+namespace XenAdmin.Dialogs
+{
+    public partial class PropertiesDialog : VerticallyTabbedDialog
+    {
+        #region Tabs
+        public CPUMemoryEditPage VCpuMemoryEditPage;
+        public HostMultipathPage hostMultipathPage1;
+        public CustomFieldsDisplayPage CustomFieldsEditPage;
+        public LogDestinationEditPage LogDestinationEditPage;
+        public HomeServerEditPage HomeServerPage;
+        public BootOptionsEditPage StartupOptionsEditPage;
+        public VMAdvancedEditPage VMAdvancedEditPage;
+        public PerfmonAlertEditPage PerfmonAlertEditPage;
+        public EditNetworkPage editNetworkPage;
+        public VDISizeLocationPage vdiSizeLocation;
+        public VMHAEditPage VMHAEditPage;
+        public GeneralEditPage GeneralEditPage;
+        private UpsellPage PerfmonAlertUpsellEditPage;
+        private UpsellPage VMHAUpsellEditPage;
+        private UpsellPage PerfmonAlertOptionsUpsellEditPage;
+        public PerfmonAlertOptionsPage PerfmonAlertOptionsEditPage;
+        public HostPowerONEditPage HostPowerONEditPage;
+        public PoolPowerONEditPage PoolPowerONEditPage;
+        public StorageLinkEditPage StorageLinkPage;
+        private NewPolicySnapshotFrequencyPage newPolicySnapshotFrequencyPage1;
+        private NewPolicySnapshotTypePage newPolicySnapshotTypePage1;
+        private NewPolicyArchivePage newPolicyArchivePage1;
+        private NewPolicyEmailPage newPolicyEmailPage1;
+        private NewVMGroupVMsPage<VMPP> newPolicyVMsPage1;
+        private NewVMGroupVMsPage<VM_appliance> newVMApplianceVMsPage1;
+        private NewVMApplianceVMOrderAndDelaysPage newVmApplianceVmOrderAndDelaysPage1;
+        private UpsellPage GpuUpsellEditPage;
+        private GpuEditPage GpuEditPage;
+        #endregion
+
+        private IXenObject xenObject, xenObjectBefore, xenObjectCopy;
+        private AsyncAction _action;
+        private bool _startAction = true;
+        private System.Timers.Timer timer = new System.Timers.Timer();
+
+        public new event EventHandler<PropertiesDialogClosingEventArgs> FormClosing;
+
+        public PropertiesDialog(IXenObject xenObject)
+            : base(xenObject.Connection)
+        {
+            // xenObject must not be null. If this occurs, we shouldn't have offered Properties in the UI.
+            Debug.Assert(xenObject != null, "XenObject is null");
+
+            InitializeComponent();
+
+            this.xenObject = xenObject;
+            xenObjectBefore = xenObject.Clone();
+            xenObjectCopy = xenObject.Clone();
+
+            Name = String.Format("Edit{0}GeneralSettingsDialog", xenObject.GetType().Name);
+            Text = String.Format(Messages.PROPERTIES_DIALOG_TITLE, Helpers.GetName(xenObject));
+
+            if (!Application.RenderWithVisualStyles)
+                ContentPanel.BackColor = SystemColors.Control;
+
+            Build();
+        }
+
+        private void Build()
+        {
+            var pool = Helpers.GetPoolOfOne(connection);
+
+            bool is_host = xenObjectCopy is Host;
+            bool is_vm = xenObjectCopy is VM && !((VM)xenObjectCopy).is_a_snapshot;
+            bool is_sr = xenObjectCopy is SR;
+
+            bool is_pool = xenObjectCopy is Pool;
+            bool is_vdi = xenObjectCopy is VDI;
+            bool is_network = xenObjectCopy is XenAPI.Network;
+
+            bool is_hvm = is_vm && ((VM)xenObjectCopy).IsHVM;
+            bool is_in_pool = Helpers.GetPool(xenObjectCopy.Connection) != null;
+
+            bool is_pool_or_standalone = is_pool || (is_host && !is_in_pool);
+
+            bool wlb_enabled = (Helpers.WlbEnabledAndConfigured(xenObjectCopy.Connection));
+
+            bool is_VMPP = xenObjectCopy is VMPP;
+
+            bool is_VM_appliance = xenObjectCopy is VM_appliance;
+
+            ContentPanel.SuspendLayout();
+            verticalTabs.BeginUpdate();
+
+            try
+            {
+                verticalTabs.Items.Clear();
+
+                ShowTab(GeneralEditPage = new GeneralEditPage());
+
+                if (!is_VMPP && !is_VM_appliance)
+                    ShowTab(CustomFieldsEditPage = new CustomFieldsDisplayPage {AutoScroll = true});
+
+                if (is_vm)
+                {
+                    ShowTab(VCpuMemoryEditPage = new CPUMemoryEditPage());
+                    ShowTab(StartupOptionsEditPage = new BootOptionsEditPage());
+
+                    if (!Helpers.BostonOrGreater(xenObjectCopy.Connection) && Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictHAFloodgate))
+                    {
+                        VMHAUpsellEditPage = new UpsellPage {Image = Properties.Resources._001_PowerOn_h32bit_16, Text = Messages.START_UP_OPTIONS};
+                        VMHAUpsellEditPage.SetAllTexts(Messages.UPSELL_BLURB_HA, InvisibleMessages.UPSELL_LEARNMOREURL_HA);
+                        ShowTab(VMHAUpsellEditPage);
+                    }
+                    else
+                    {
+                        ShowTab(VMHAEditPage = new VMHAEditPage {VerticalTabs = verticalTabs});
+                    }
+                }
+
+                if (is_vm || is_host || (is_sr && Helpers.ClearwaterOrGreater(connection)))
+                {
+                    if (Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictAlerts))
+                    {
+                        PerfmonAlertUpsellEditPage = new UpsellPage {Image = Properties.Resources._000_Alert2_h32bit_16, Text = Messages.ALERTS};
+                        PerfmonAlertUpsellEditPage.SetAllTexts(Messages.UPSELL_BLURB_ALERTS, InvisibleMessages.UPSELL_LEARNMOREURL_ALERTS);
+                        ShowTab(PerfmonAlertUpsellEditPage);
+                    }
+                    else
+                    {
+                        ShowTab(PerfmonAlertEditPage = new PerfmonAlertEditPage {AutoScroll = true});
+                    }
+                }
+
+                if (is_pool_or_standalone)
+                {
+                    if (Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictAlerts))
+                    {
+                        PerfmonAlertOptionsUpsellEditPage = new UpsellPage {Image = Properties.Resources._000_Email_h32bit_16, Text = Messages.EMAIL_OPTIONS};
+                        PerfmonAlertOptionsUpsellEditPage.SetAllTexts(Messages.UPSELL_BLURB_ALERTS, InvisibleMessages.UPSELL_LEARNMOREURL_ALERTS);
+                        ShowTab(PerfmonAlertOptionsUpsellEditPage);
+                    }
+                    else
+                    {
+                        ShowTab(PerfmonAlertOptionsEditPage = new PerfmonAlertOptionsPage());
+                    }
+
+                    if (!Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictStorageChoices)
+                        && !Helpers.BostonOrGreater(xenObjectCopy.Connection)
+                        && Helpers.MidnightRideOrGreater(xenObjectCopy.Connection))
+                        ShowTab(StorageLinkPage = new StorageLinkEditPage());
+                }
+
+                if (is_host)
+                {
+                    ShowTab(hostMultipathPage1 = new HostMultipathPage());
+
+                    if (Helpers.MidnightRideOrGreater(xenObject.Connection))
+                        ShowTab(HostPowerONEditPage = new HostPowerONEditPage());
+
+                    ShowTab(LogDestinationEditPage = new LogDestinationEditPage());
+                }
+                
+                if (is_pool && Helpers.MidnightRideOrGreater(xenObject.Connection))
+                    ShowTab(PoolPowerONEditPage = new PoolPowerONEditPage());
+
+                if (is_network)
+                    ShowTab(editNetworkPage = new EditNetworkPage());
+
+                if (is_vm && !wlb_enabled)
+                    ShowTab(HomeServerPage = new HomeServerEditPage());
+
+                if (is_hvm)
+                {
+                    if (Helpers.BostonOrGreater(xenObject.Connection))
+                    {
+                        if (Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictGpu))
+                        {
+                            GpuUpsellEditPage = new UpsellPage { Image = Properties.Resources._000_GetMemoryInfo_h32bit_16, Text = Messages.GPU };
+                            GpuUpsellEditPage.SetAllTexts(Messages.UPSELL_BLURB_GPU, InvisibleMessages.UPSELL_LEARNMOREURL_GPU);
+                            ShowTab(GpuUpsellEditPage);
+                        }
+                        else
+                        {
+                            ShowTab(GpuEditPage = new GpuEditPage());
+                        }
+                    }
+
+                    ShowTab(VMAdvancedEditPage = new VMAdvancedEditPage());
+                }
+
+                if (is_VMPP)
+                {
+                    ShowTab(newPolicyVMsPage1 = new NewVMGroupVMsPage<VMPP> {Pool = pool});
+                    ShowTab(newPolicySnapshotTypePage1 = new NewPolicySnapshotTypePage());
+                    ShowTab(newPolicySnapshotFrequencyPage1 = new NewPolicySnapshotFrequencyPage {Pool = pool});
+                    ShowTab(newPolicyArchivePage1 = new NewPolicyArchivePage {Pool = pool, PropertiesDialog = this});
+                    ShowTab(newPolicyEmailPage1 = new NewPolicyEmailPage {PropertiesDialog = this});
+                }
+
+                if (is_VM_appliance)
+                {
+                    ShowTab(newVMApplianceVMsPage1 = new NewVMGroupVMsPage<VM_appliance> { Pool = pool });
+                    ShowTab(newVmApplianceVmOrderAndDelaysPage1 = new NewVMApplianceVMOrderAndDelaysPage { Pool = pool });
+                }
+
+                //
+                // Now add one tab per VBD (for VDIs only)
+                //
+
+                if (!is_vdi)
+                    return;
+
+                ShowTab(vdiSizeLocation = new VDISizeLocationPage());
+
+                VDI vdi = xenObjectCopy as VDI;
+
+                List<VBDEditPage> vbdEditPages = new List<VBDEditPage>();
+
+                foreach (VBD vbd in vdi.Connection.ResolveAll(vdi.VBDs))
+                {
+                    VBDEditPage editPage = new VBDEditPage();
+
+                    editPage.SetXenObjects(null, vbd);
+                    vbdEditPages.Add(editPage);
+                    ShowTab(editPage);
+                }
+
+                if (vbdEditPages.Count <= 0)
+                    return;
+
+                ActionProgressDialog dialog = new ActionProgressDialog(
+                    new DelegatedAsyncAction(vdi.Connection, Messages.DEVICE_POSITION_SCANNING,
+                        Messages.DEVICE_POSITION_SCANNING, Messages.DEVICE_POSITION_SCANNED,
+                        delegate(Session session)
+                        {
+                            foreach (VBDEditPage page in vbdEditPages)
+                                page.UpdateDevicePositions(session);
+                        }),
+                    ProgressBarStyle.Continuous);
+                dialog.ShowCancel = true;
+                dialog.ShowDialog(Program.MainWindow);
+            }
+            finally
+            {
+                ContentPanel.ResumeLayout();
+                verticalTabs.EndUpdate();
+                verticalTabs.SelectedIndex = 0;
+            }
+        }
+
+        private void ShowTab(IEditPage editPage)
+        {
+            var pageAsControl = (Control)editPage;
+            ContentPanel.Controls.Add(pageAsControl);
+            pageAsControl.BackColor = Color.Transparent;
+            pageAsControl.Dock = DockStyle.Fill;
+
+            editPage.SetXenObjects(xenObject, xenObjectCopy);
+            verticalTabs.Items.Add(editPage);
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            // Have any of the fields in the tab pages changed?
+            if (!HasChanged)
+            {
+                Close();
+                return;
+            }
+
+            if (!ValidToSave)
+            {
+                // Keep dialog open and allow user to correct the error as
+                // indicated by the balloon tooltip.
+                DialogResult = DialogResult.None;
+                return;
+            }
+
+            // Yes, save to the LocalXenObject.
+            List<AsyncAction> actions = SaveSettings();
+
+            Program.MainWindow.AllowHistorySwitch = true;
+            Program.Invoke(Program.MainWindow.GeneralPage, Program.MainWindow.GeneralPage.EnableDisableEdit);
+
+            // Add a save changes on the beginning of the actions to enact the alterations that were just changes to the xenObjectCopy.
+            // Must come first because some pages' SaveChanges() rely on modifying the object via the xenObjectCopy before their actions are run.
+            actions.Insert(0, new SaveChangesAction(xenObjectCopy, xenObjectBefore));
+
+            _action = new MultipleAction(
+                connection,
+                string.Format(Messages.UPDATE_PROPERTIES, Helpers.GetName(xenObject).Ellipsise(50)),
+                Messages.UPDATING_PROPERTIES,
+                Messages.UPDATED_PROPERTIES,
+                actions);
+            
+            _action.Completed += action_Completed;
+            Close();
+
+            if (_startAction)
+            {
+                _action.RunAsync();
+            }
+        }
+
+        private void action_Completed(object sender, EventArgs e)
+        {
+            Program.Invoke(Program.MainWindow.GeneralPage, Program.MainWindow.GeneralPage.EnableDisableEdit);
+        }
+
+        /*
+         * Iterates through all of the tab pages checking for changes and
+         * return the status.
+         */
+        private bool HasChanged
+        {
+            get
+            {
+                foreach (IEditPage editPage in verticalTabs.Items)
+                    if (editPage.HasChanged)
+                        return true;
+
+                return false;
+            }
+        }
+
+        /*
+         * Iterate through all tab pages looking for local validation errors.  If
+         * we encounter a local validation error on a TabPage, then make the TabPage
+         * the selected, and have the inner control show one or more balloon tips.  Keep
+         * the dialog open.
+         */
+        private bool ValidToSave
+        {
+            get
+            {
+                foreach (IEditPage editPage in verticalTabs.Items)
+                    if (!editPage.ValidToSave)
+                    {
+                        SelectPage(editPage);
+
+                        // Show local validation balloon message for this tab page.
+                        editPage.ShowLocalValidationMessages();
+
+                        return false;
+                    }
+
+                return true;
+            }
+        }
+
+        /* 
+         * Iterates through all of the tab pages, saving changes to their cloned XenObjects,
+         * and accumulating and returning their Actions for further processing.
+         */
+        private List<AsyncAction> SaveSettings()
+        {
+            List<AsyncAction> actions = new List<AsyncAction>();
+
+            foreach (IEditPage editPage in verticalTabs.Items)
+            {
+                if (!editPage.HasChanged)
+                    continue;
+
+                AsyncAction action = editPage.SaveSettings();
+                if (action == null)
+                    continue;
+
+                actions.Add(action);
+            }
+
+            return actions;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            Close();
+        }
+
+        protected sealed override void OnFormClosing(FormClosingEventArgs e)
+        {
+            foreach (IEditPage editPage in verticalTabs.Items)
+            {
+                editPage.Cleanup();
+            }
+
+            var args = new PropertiesDialogClosingEventArgs(_action, _startAction);
+
+            OnFormClosing(args);
+
+            _startAction = args.StartAction;
+        }
+
+        protected virtual void OnFormClosing(PropertiesDialogClosingEventArgs e)
+        {
+            var handler = FormClosing;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        private void verticalTabs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedPage = verticalTabs.SelectedItem as NewPolicyArchivePage;
+            if (selectedPage != null)
+            {
+                if (newPolicySnapshotFrequencyPage1.ValidToSave)
+                    selectedPage.SetXenObjects(null, null);
+                return;
+            }
+
+            var vmApplianceStartOrderPage = verticalTabs.SelectedItem as NewVMApplianceVMOrderAndDelaysPage;
+            if (vmApplianceStartOrderPage != null && newVMApplianceVMsPage1 != null)
+            {
+                vmApplianceStartOrderPage.SetSelectedVMs(newVMApplianceVMsPage1.SelectedVMs);
+                return;
+            }
+
+            var vmHAEditPage = verticalTabs.SelectedItem as VMHAEditPage;
+            if (vmHAEditPage != null)
+            {
+                vmHAEditPage.StartNtolUpdate();
+                return;
+            }
+        }
+
+        private void PropertiesDialog_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            timer.Stop();
+        }
+    }
+
+    public class PropertiesDialogClosingEventArgs : EventArgs
+    {
+        public AsyncAction Action { get; private set; }
+        public bool StartAction { get; set; }
+        public PropertiesDialogClosingEventArgs(AsyncAction action, bool startAction)
+        {
+            StartAction = startAction;
+            Action = action;
+        }
+    }
+}
+

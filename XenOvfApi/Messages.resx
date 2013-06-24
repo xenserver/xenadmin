@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AUTOGENERATED" xml:space="preserve">
+    <value>Auto_Generated_{0}</value>
+  </data>
+  <data name="CERTIFICATE_IS_INVALID" xml:space="preserve">
+    <value>Certificate is invalid.</value>
+  </data>
+  <data name="COMPRESS_FAILED" xml:space="preserve">
+    <value>Failed to compress {0}.</value>
+  </data>
+  <data name="COMPRESS_INVALID_METHOD" xml:space="preserve">
+    <value>Compression method {0} is not supported.</value>
+  </data>
+  <data name="CONVERSION_FAILED" xml:space="preserve">
+    <value>Failed to convert OVF to OVA.</value>
+  </data>
+  <data name="CONVERSION_NO_DATA" xml:space="preserve">
+    <value>Failed to convert HyperV configuration file.</value>
+  </data>
+  <data name="CULTURE_AVAILABLE" xml:space="preserve">
+    <value>Culture</value>
+  </data>
+  <data name="EULA_ACCEPT_MESSAGE" xml:space="preserve">
+    <value>Accept or reject this EULA agreement.</value>
+  </data>
+  <data name="EULA_CLOSE_BUTTON" xml:space="preserve">
+    <value>&amp;Close</value>
+  </data>
+  <data name="EULA_RB_ACCEPT" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="EULA_RB_REJECT" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+  <data name="EULA_TITLE" xml:space="preserve">
+    <value>Citrix OVF EULA</value>
+  </data>
+  <data name="FAILED_TO_ADD_OS_SECTION" xml:space="preserve">
+    <value>Failed to add operating system section because the virtual system collection is invalid.</value>
+  </data>
+  <data name="FAILED_TO_ADD_VIRTUAL_HARDWARE_SECTION" xml:space="preserve">
+    <value>Failed to add virtual hardware section because the virtual system collection is invalid.</value>
+  </data>
+  <data name="FILE_MISSING" xml:space="preserve">
+    <value>Failed to find {0}.</value>
+  </data>
+  <data name="INVALID_DATA_IN_OVA" xml:space="preserve">
+    <value>Failed to get next file in OVA.</value>
+  </data>
+  <data name="INVALID_DATA_IN_OVF" xml:space="preserve">
+    <value>Failed to deserialize OVF descriptor.</value>
+  </data>
+  <data name="OVF_CANNOT_FIND_SECTION" xml:space="preserve">
+    <value>Failed to find section with type {0} and id {1}.</value>
+  </data>
+  <data name="OVF_CANNOT_READ_EULA" xml:space="preserve">
+    <value>Failed to read EULA.</value>
+  </data>
+  <data name="OVF_CDROM_MISSING" xml:space="preserve">
+    <value>Failed to find DVD or CD drive resource.</value>
+  </data>
+  <data name="OVF_COMPRESSED_OVA_INVALID" xml:space="preserve">
+    <value>Uncompressed OVA file does not have an ova extension.</value>
+  </data>
+  <data name="OVF_CONTROLLER_MISSING" xml:space="preserve">
+    <value>Failed to find controller {0}.</value>
+  </data>
+  <data name="OVF_COULD_NOT_OPEN_STREAM" xml:space="preserve">
+    <value>Failed to open {0}.</value>
+  </data>
+  <data name="OVF_DEPLOYMENT_CFG_SECTION_MISSING" xml:space="preserve">
+    <value>Failed to find deployment configuration section.</value>
+  </data>
+  <data name="OVF_DEPLOYMENT_SECTION_MISSING" xml:space="preserve">
+    <value>Failed to find deployment section.</value>
+  </data>
+  <data name="OVF_DEVICE_OUT_OF_RANGE" xml:space="preserve">
+    <value>Device number {0} is less than zero or greater than 15.</value>
+  </data>
+  <data name="OVF_DISK_SECTION_MISSING" xml:space="preserve">
+    <value>Failed to find the disk section.</value>
+  </data>
+  <data name="OVF_ENVELOPE_IS_INVALID" xml:space="preserve">
+    <value>OVF envelope is invalid.</value>
+  </data>
+  <data name="OVF_INSTALL_SECTION_MISSING" xml:space="preserve">
+    <value>Failed to find the install section.</value>
+  </data>
+  <data name="OVF_POST_INSTALL_MISSING" xml:space="preserve">
+    <value>Failed to find the post-install section.</value>
+  </data>
+  <data name="OVF_POST_INSTALL_OPERATION_MISSING" xml:space="preserve">
+    <value>Failed to find a post-install operation.</value>
+  </data>
+  <data name="OVF_PRODUCT_PROPERTY_MISSING" xml:space="preserve">
+    <value>Failed to find product property {0}.</value>
+  </data>
+  <data name="OVF_PRODUCT_SECTION_MISSING" xml:space="preserve">
+    <value>Failed to find product section {0}.</value>
+  </data>
+  <data name="OVF_RASD_MISSING" xml:space="preserve">
+    <value>Failed to find resource {0}.</value>
+  </data>
+  <data name="OVF_REFERENCE_SECTION_MISSING" xml:space="preserve">
+    <value>Failed to find the references section.</value>
+  </data>
+  <data name="OVF_STARTUP_SECTION_MISSING" xml:space="preserve">
+    <value>Failed to find the startup section.</value>
+  </data>
+  <data name="OVF_STRINGS_SECTION_MISSING" xml:space="preserve">
+    <value>Failed to find the strings section for lanugage {0}.</value>
+  </data>
+  <data name="OVF_STRINGS_SECTION_MISSING_MSG" xml:space="preserve">
+    <value>Failed to find string {0} for language {1}.</value>
+  </data>
+  <data name="OVF_VHS_MISSING" xml:space="preserve">
+    <value>Failed to find the virtual hardware section.</value>
+  </data>
+  <data name="OVF_VIRTUAL_SYSTEM_MISSING" xml:space="preserve">
+    <value>Failed to find the virtual system.</value>
+  </data>
+  <data name="PASSWORD_EMPTY" xml:space="preserve">
+    <value>The password is empty.</value>
+  </data>
+  <data name="PASSWORD_FAILED" xml:space="preserve">
+    <value>The password is invalid.</value>
+  </data>
+  <data name="PASSWORD_LABEL" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="PASSWORD_NOMATCH" xml:space="preserve">
+    <value>Passwords do not match.</value>
+  </data>
+  <data name="PASSWORD_REENTER" xml:space="preserve">
+    <value>Re-Enter:</value>
+  </data>
+  <data name="PASSWORD_STRENGTH_FAIR" xml:space="preserve">
+    <value>Fair;</value>
+  </data>
+  <data name="PASSWORD_STRENGTH_GOOD" xml:space="preserve">
+    <value>Good;</value>
+  </data>
+  <data name="PASSWORD_STRENGTH_LOW" xml:space="preserve">
+    <value>Low;</value>
+  </data>
+  <data name="PASSWORD_STRENGTH_PROMPT" xml:space="preserve">
+    <value>Password Strength: </value>
+  </data>
+  <data name="PASSWORD_STRENGTH_STRONG" xml:space="preserve">
+    <value>Strong;</value>
+  </data>
+  <data name="PASSWORD_SUCCESS" xml:space="preserve">
+    <value>Password is valid.</value>
+  </data>
+  <data name="PASSWORD_TITLE" xml:space="preserve">
+    <value>Enter Password;</value>
+  </data>
+  <data name="PASSWORD_TOO_WEAK" xml:space="preserve">
+    <value>Password is not strong enough.</value>
+  </data>
+  <data name="PRODUCT_INFO_PROMPT" xml:space="preserve">
+    <value>Product Information:</value>
+  </data>
+  <data name="PRODUCT_PROMPT" xml:space="preserve">
+    <value>Product:</value>
+  </data>
+  <data name="PRODUCT_URL_PROMPT" xml:space="preserve">
+    <value>Product URL:</value>
+  </data>
+  <data name="RESOURCES_LOADED" xml:space="preserve">
+    <value>Loaded.</value>
+  </data>
+  <data name="SECURITY_FAILURE" xml:space="preserve">
+    <value>Security Failure</value>
+  </data>
+  <data name="SECURITY_FILE_MISSING" xml:space="preserve">
+    <value>Failed to find files listed in the manifest. Please refer to the log for the list of missing files.</value>
+  </data>
+  <data name="SECURITY_NOT_SUPPORTED" xml:space="preserve">
+    <value>Security method {0} is not supported.</value>
+  </data>
+  <data name="SECURITY_SECTION_INVALID" xml:space="preserve">
+    <value>Security section is invalid.</value>
+  </data>
+  <data name="SECURITY_SIGNATURE_FAILED" xml:space="preserve">
+    <value>The file {0} does not match the original.</value>
+  </data>
+  <data name="UNKNOWN" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="VALIDATION_FAILURE" xml:space="preserve">
+    <value>OVF package {0} is invalid.</value>
+  </data>
+  <data name="VALIDATION_FILE_NOTFOUND" xml:space="preserve">
+    <value>Failed to find file {0} listed in the reference section.</value>
+  </data>
+  <data name="VALIDATION_INVALID_CPU_EXCEEDS_LIMIT" xml:space="preserve">
+    <value>Processor quantity {0} exceeds the limit of {1}.</value>
+  </data>
+  <data name="VALIDATION_INVALID_CPU_QUANTITY" xml:space="preserve">
+    <value>Processor quantity {0} is invalid.</value>
+  </data>
+  <data name="VALIDATION_INVALID_FILETYPE" xml:space="preserve">
+    <value>File {0} has an unsupported extension.</value>
+  </data>
+  <data name="VALIDATION_INVALID_INSTANCEID" xml:space="preserve">
+    <value>InstanceId is empty.</value>
+  </data>
+  <data name="VALIDATION_INVALID_MEMORY_ALLOCATIONUNITS" xml:space="preserve">
+    <value>Memory allocation unit is invalid.</value>
+  </data>
+  <data name="VALIDATION_INVALID_MEMORY_QUANTITY" xml:space="preserve">
+    <value>Memory quantity is invalid.</value>
+  </data>
+  <data name="VALIDATION_INVALID_TYPE" xml:space="preserve">
+    <value>OVF envelope item has an unknown type.</value>
+  </data>
+  <data name="VALIDATION_INVALID_VERSION" xml:space="preserve">
+    <value>OVF version number {0} is invalid.</value>
+  </data>
+  <data name="VALIDATION_NETWORK_NO_DEVICE" xml:space="preserve">
+    <value>A network is not connected to a device.</value>
+  </data>
+  <data name="VALIDATION_REQUIRED_ELEMENT_NOT_RECOGNIZED" xml:space="preserve">
+    <value>A required resource with id {0} and name {1} was not recognized.</value>
+  </data>
+  <data name="VALIDATION_SCHEMA_FAILED" xml:space="preserve">
+    <value>OVF descriptor is invalid.</value>
+  </data>
+  <data name="VALIDATION_UNKNOWN_HARDWARE_TYPE" xml:space="preserve">
+    <value>Virtual hardware type {0} is invalid.</value>
+  </data>
+  <data name="VENDOR_PROMPT" xml:space="preserve">
+    <value>Vendor:</value>
+  </data>
+  <data name="VENDOR_URL_PROMPT" xml:space="preserve">
+    <value>Vendor URL:</value>
+  </data>
+  <data name="VERSION_PROMPT" xml:space="preserve">
+    <value>Version:</value>
+  </data>
+</root>

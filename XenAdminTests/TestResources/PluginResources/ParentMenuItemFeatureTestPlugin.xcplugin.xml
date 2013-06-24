@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<XenCenterPlugin xmlns="http://www.citrix.com/XenCenter/Plugins/schema" version="1" plugin_name="ShellPlugin" plugin_version="1.0.0.0">
+
+  <GroupMenuItem name="groupTest" menu="file" serialized="none">
+    <MenuItem name="file_ShellTest1" menu="file" serialized="none">
+      <Shell filename="ShellTest.bat" window="true"/>
+    </MenuItem>
+  </GroupMenuItem>
+  
+  </XenCenterPlugin>

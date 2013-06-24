@@ -1,0 +1,1512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tableLayoutPanelSubscriptionName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tableLayoutPanelSubscriptionName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanelSubscriptionName.ColumnCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="subNameTextBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="subNameTextBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="subNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 45</value>
+  </data>
+  <data name="subNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>284, 23</value>
+  </data>
+  <data name="subNameTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;subNameTextBox.Name" xml:space="preserve">
+    <value>subNameTextBox</value>
+  </data>
+  <data name="&gt;&gt;subNameTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;subNameTextBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanelSubscriptionName</value>
+  </data>
+  <data name="&gt;&gt;subNameTextBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="labelSubscriptionName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelSubscriptionName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelSubscriptionName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="labelSubscriptionName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 42</value>
+  </data>
+  <data name="labelSubscriptionName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 29</value>
+  </data>
+  <data name="labelSubscriptionName.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="labelSubscriptionName.Text" xml:space="preserve">
+    <value>Subscription &amp;Name:</value>
+  </data>
+  <data name="labelSubscriptionName.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;labelSubscriptionName.Name" xml:space="preserve">
+    <value>labelSubscriptionName</value>
+  </data>
+  <data name="&gt;&gt;labelSubscriptionName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelSubscriptionName.Parent" xml:space="preserve">
+    <value>tableLayoutPanelSubscriptionName</value>
+  </data>
+  <data name="&gt;&gt;labelSubscriptionName.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 12</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>427, 30</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Enter a name for your subscription and provide any necessary data range parameters along with details for delivering your report.</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>tableLayoutPanelSubscriptionName</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="labelSubNameAsterisk.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelSubNameAsterisk.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="labelSubNameAsterisk.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="labelSubNameAsterisk.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelSubNameAsterisk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>407, 42</value>
+  </data>
+  <data name="labelSubNameAsterisk.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="labelSubNameAsterisk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 29</value>
+  </data>
+  <data name="labelSubNameAsterisk.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="labelSubNameAsterisk.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;labelSubNameAsterisk.Name" xml:space="preserve">
+    <value>labelSubNameAsterisk</value>
+  </data>
+  <data name="&gt;&gt;labelSubNameAsterisk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelSubNameAsterisk.Parent" xml:space="preserve">
+    <value>tableLayoutPanelSubscriptionName</value>
+  </data>
+  <data name="&gt;&gt;labelSubNameAsterisk.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tableLayoutPanelSubscriptionName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="tableLayoutPanelSubscriptionName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="tableLayoutPanelSubscriptionName.RowCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tableLayoutPanelSubscriptionName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>427, 81</value>
+  </data>
+  <data name="tableLayoutPanelSubscriptionName.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelSubscriptionName.Name" xml:space="preserve">
+    <value>tableLayoutPanelSubscriptionName</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelSubscriptionName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelSubscriptionName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelSubscriptionName.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanelSubscriptionName.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="subNameTextBox" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelSubscriptionName" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="labelSubNameAsterisk" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,Absolute,20" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="labelDataRange.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelDataRange.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelDataRange.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="labelDataRange.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="labelDataRange.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 29</value>
+  </data>
+  <data name="labelDataRange.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelDataRange.Text" xml:space="preserve">
+    <value>Data &amp;Range: </value>
+  </data>
+  <data name="labelDataRange.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;labelDataRange.Name" xml:space="preserve">
+    <value>labelDataRange</value>
+  </data>
+  <data name="&gt;&gt;labelDataRange.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDataRange.Parent" xml:space="preserve">
+    <value>tableLayoutPanelRpParams</value>
+  </data>
+  <data name="&gt;&gt;labelDataRange.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="labelEmailTo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelEmailTo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelEmailTo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="labelEmailTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 18</value>
+  </data>
+  <data name="labelEmailTo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="labelEmailTo.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 3, 0</value>
+  </data>
+  <data name="labelEmailTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 29</value>
+  </data>
+  <data name="labelEmailTo.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="labelEmailTo.Text" xml:space="preserve">
+    <value>&amp;To:</value>
+  </data>
+  <data name="&gt;&gt;labelEmailTo.Name" xml:space="preserve">
+    <value>labelEmailTo</value>
+  </data>
+  <data name="&gt;&gt;labelEmailTo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelEmailTo.Parent" xml:space="preserve">
+    <value>tableLayoutPanelDeliveryOptions</value>
+  </data>
+  <data name="&gt;&gt;labelEmailTo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="emailToTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="emailToTextBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="emailToTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>70, 21</value>
+  </data>
+  <data name="emailToTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>321, 23</value>
+  </data>
+  <data name="emailToTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;emailToTextBox.Name" xml:space="preserve">
+    <value>emailToTextBox</value>
+  </data>
+  <data name="&gt;&gt;emailToTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailToTextBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanelDeliveryOptions</value>
+  </data>
+  <data name="&gt;&gt;emailToTextBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="labelEmailCc.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelEmailCc.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelEmailCc.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="labelEmailCc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 47</value>
+  </data>
+  <data name="labelEmailCc.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="labelEmailCc.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 3, 0</value>
+  </data>
+  <data name="labelEmailCc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 29</value>
+  </data>
+  <data name="labelEmailCc.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="labelEmailCc.Text" xml:space="preserve">
+    <value>&amp;Cc:</value>
+  </data>
+  <data name="&gt;&gt;labelEmailCc.Name" xml:space="preserve">
+    <value>labelEmailCc</value>
+  </data>
+  <data name="&gt;&gt;labelEmailCc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelEmailCc.Parent" xml:space="preserve">
+    <value>tableLayoutPanelDeliveryOptions</value>
+  </data>
+  <data name="&gt;&gt;labelEmailCc.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="emailCcTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="emailCcTextBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="emailCcTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>70, 50</value>
+  </data>
+  <data name="emailCcTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>321, 23</value>
+  </data>
+  <data name="emailCcTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;emailCcTextBox.Name" xml:space="preserve">
+    <value>emailCcTextBox</value>
+  </data>
+  <data name="&gt;&gt;emailCcTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailCcTextBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanelDeliveryOptions</value>
+  </data>
+  <data name="&gt;&gt;emailCcTextBox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="labelEmailBcc.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelEmailBcc.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelEmailBcc.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="labelEmailBcc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 76</value>
+  </data>
+  <data name="labelEmailBcc.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="labelEmailBcc.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 3, 0</value>
+  </data>
+  <data name="labelEmailBcc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 29</value>
+  </data>
+  <data name="labelEmailBcc.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="labelEmailBcc.Text" xml:space="preserve">
+    <value>&amp;Bcc:</value>
+  </data>
+  <data name="&gt;&gt;labelEmailBcc.Name" xml:space="preserve">
+    <value>labelEmailBcc</value>
+  </data>
+  <data name="&gt;&gt;labelEmailBcc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelEmailBcc.Parent" xml:space="preserve">
+    <value>tableLayoutPanelDeliveryOptions</value>
+  </data>
+  <data name="&gt;&gt;labelEmailBcc.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="emailBccTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="emailBccTextBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="emailBccTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>70, 79</value>
+  </data>
+  <data name="emailBccTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>321, 23</value>
+  </data>
+  <data name="emailBccTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;emailBccTextBox.Name" xml:space="preserve">
+    <value>emailBccTextBox</value>
+  </data>
+  <data name="&gt;&gt;emailBccTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailBccTextBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanelDeliveryOptions</value>
+  </data>
+  <data name="&gt;&gt;emailBccTextBox.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="labelEmailAddressFormat.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanelDeliveryOptions.ColumnCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="labelToAsterisk.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelToAsterisk.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="labelToAsterisk.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="labelToAsterisk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>394, 18</value>
+  </data>
+  <data name="labelToAsterisk.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="labelToAsterisk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 29</value>
+  </data>
+  <data name="labelToAsterisk.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="labelToAsterisk.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;labelToAsterisk.Name" xml:space="preserve">
+    <value>labelToAsterisk</value>
+  </data>
+  <data name="&gt;&gt;labelToAsterisk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelToAsterisk.Parent" xml:space="preserve">
+    <value>tableLayoutPanelDeliveryOptions</value>
+  </data>
+  <data name="&gt;&gt;labelToAsterisk.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="labelEmailReplyTo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelEmailReplyTo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelEmailReplyTo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="labelEmailReplyTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 105</value>
+  </data>
+  <data name="labelEmailReplyTo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="labelEmailReplyTo.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 3, 0</value>
+  </data>
+  <data name="labelEmailReplyTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 29</value>
+  </data>
+  <data name="labelEmailReplyTo.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="labelEmailReplyTo.Text" xml:space="preserve">
+    <value>Re&amp;ply-To:</value>
+  </data>
+  <data name="&gt;&gt;labelEmailReplyTo.Name" xml:space="preserve">
+    <value>labelEmailReplyTo</value>
+  </data>
+  <data name="&gt;&gt;labelEmailReplyTo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelEmailReplyTo.Parent" xml:space="preserve">
+    <value>tableLayoutPanelDeliveryOptions</value>
+  </data>
+  <data name="&gt;&gt;labelEmailReplyTo.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="emailReplyTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="emailReplyTextBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="emailReplyTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>70, 108</value>
+  </data>
+  <data name="emailReplyTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>321, 23</value>
+  </data>
+  <data name="emailReplyTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;emailReplyTextBox.Name" xml:space="preserve">
+    <value>emailReplyTextBox</value>
+  </data>
+  <data name="&gt;&gt;emailReplyTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailReplyTextBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanelDeliveryOptions</value>
+  </data>
+  <data name="&gt;&gt;emailReplyTextBox.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="labelReplyToAsterisk.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelReplyToAsterisk.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="labelReplyToAsterisk.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="labelReplyToAsterisk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>394, 105</value>
+  </data>
+  <data name="labelReplyToAsterisk.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="labelReplyToAsterisk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 29</value>
+  </data>
+  <data name="labelReplyToAsterisk.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="labelReplyToAsterisk.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;labelReplyToAsterisk.Name" xml:space="preserve">
+    <value>labelReplyToAsterisk</value>
+  </data>
+  <data name="&gt;&gt;labelReplyToAsterisk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelReplyToAsterisk.Parent" xml:space="preserve">
+    <value>tableLayoutPanelDeliveryOptions</value>
+  </data>
+  <data name="&gt;&gt;labelReplyToAsterisk.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="labelEmailSubject.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelEmailSubject.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelEmailSubject.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="labelEmailSubject.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 134</value>
+  </data>
+  <data name="labelEmailSubject.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="labelEmailSubject.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 3, 0</value>
+  </data>
+  <data name="labelEmailSubject.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 29</value>
+  </data>
+  <data name="labelEmailSubject.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="labelEmailSubject.Text" xml:space="preserve">
+    <value>&amp;Subject:</value>
+  </data>
+  <data name="&gt;&gt;labelEmailSubject.Name" xml:space="preserve">
+    <value>labelEmailSubject</value>
+  </data>
+  <data name="&gt;&gt;labelEmailSubject.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelEmailSubject.Parent" xml:space="preserve">
+    <value>tableLayoutPanelDeliveryOptions</value>
+  </data>
+  <data name="&gt;&gt;labelEmailSubject.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="emailSubjectTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="emailSubjectTextBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="emailSubjectTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>70, 137</value>
+  </data>
+  <data name="emailSubjectTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>321, 23</value>
+  </data>
+  <data name="emailSubjectTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;emailSubjectTextBox.Name" xml:space="preserve">
+    <value>emailSubjectTextBox</value>
+  </data>
+  <data name="&gt;&gt;emailSubjectTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailSubjectTextBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanelDeliveryOptions</value>
+  </data>
+  <data name="&gt;&gt;emailSubjectTextBox.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="labelReportRenderFormat.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelReportRenderFormat.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelReportRenderFormat.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="labelReportRenderFormat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 163</value>
+  </data>
+  <data name="labelReportRenderFormat.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="labelReportRenderFormat.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 3, 0</value>
+  </data>
+  <data name="labelReportRenderFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 29</value>
+  </data>
+  <data name="labelReportRenderFormat.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="labelReportRenderFormat.Text" xml:space="preserve">
+    <value>&amp;Format:</value>
+  </data>
+  <data name="&gt;&gt;labelReportRenderFormat.Name" xml:space="preserve">
+    <value>labelReportRenderFormat</value>
+  </data>
+  <data name="&gt;&gt;labelReportRenderFormat.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelReportRenderFormat.Parent" xml:space="preserve">
+    <value>tableLayoutPanelDeliveryOptions</value>
+  </data>
+  <data name="&gt;&gt;labelReportRenderFormat.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="rpRenderComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="rpRenderComboBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="rpRenderComboBox.Items" xml:space="preserve">
+    <value>Acrobat (PDF) file</value>
+  </data>
+  <data name="rpRenderComboBox.Items1" xml:space="preserve">
+    <value>Excel</value>
+  </data>
+  <data name="rpRenderComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>70, 166</value>
+  </data>
+  <data name="rpRenderComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 23</value>
+  </data>
+  <data name="rpRenderComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;rpRenderComboBox.Name" xml:space="preserve">
+    <value>rpRenderComboBox</value>
+  </data>
+  <data name="&gt;&gt;rpRenderComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rpRenderComboBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanelDeliveryOptions</value>
+  </data>
+  <data name="&gt;&gt;rpRenderComboBox.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="labelEmailComment.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelEmailComment.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelEmailComment.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="labelEmailComment.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 192</value>
+  </data>
+  <data name="labelEmailComment.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="labelEmailComment.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 3, 0</value>
+  </data>
+  <data name="labelEmailComment.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 43</value>
+  </data>
+  <data name="labelEmailComment.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="labelEmailComment.Text" xml:space="preserve">
+    <value>Co&amp;mment:</value>
+  </data>
+  <data name="&gt;&gt;labelEmailComment.Name" xml:space="preserve">
+    <value>labelEmailComment</value>
+  </data>
+  <data name="&gt;&gt;labelEmailComment.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelEmailComment.Parent" xml:space="preserve">
+    <value>tableLayoutPanelDeliveryOptions</value>
+  </data>
+  <data name="&gt;&gt;labelEmailComment.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="emailCommentRichTextBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="emailCommentRichTextBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="emailCommentRichTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>70, 195</value>
+  </data>
+  <data name="emailCommentRichTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>321, 37</value>
+  </data>
+  <data name="emailCommentRichTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="emailCommentRichTextBox.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;emailCommentRichTextBox.Name" xml:space="preserve">
+    <value>emailCommentRichTextBox</value>
+  </data>
+  <data name="&gt;&gt;emailCommentRichTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;emailCommentRichTextBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanelDeliveryOptions</value>
+  </data>
+  <data name="&gt;&gt;emailCommentRichTextBox.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="tableLayoutPanelDeliveryOptions.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanelDeliveryOptions.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="tableLayoutPanelDeliveryOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 24</value>
+  </data>
+  <data name="tableLayoutPanelDeliveryOptions.RowCount" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="tableLayoutPanelDeliveryOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>404, 235</value>
+  </data>
+  <data name="tableLayoutPanelDeliveryOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelDeliveryOptions.Name" xml:space="preserve">
+    <value>tableLayoutPanelDeliveryOptions</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelDeliveryOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelDeliveryOptions.Parent" xml:space="preserve">
+    <value>groupDeliveryOptions</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelDeliveryOptions.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanelDeliveryOptions.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelEmailAddressFormat" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="labelEmailTo" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="emailToTextBox" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelToAsterisk" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelEmailCc" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="emailCcTextBox" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelEmailBcc" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="emailBccTextBox" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelEmailReplyTo" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="emailReplyTextBox" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelReplyToAsterisk" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelEmailSubject" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="emailSubjectTextBox" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelReportRenderFormat" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="rpRenderComboBox" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelEmailComment" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="emailCommentRichTextBox" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="labelEmailAddressFormat.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelEmailAddressFormat.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="labelEmailAddressFormat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="labelEmailAddressFormat.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 3</value>
+  </data>
+  <data name="labelEmailAddressFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>404, 15</value>
+  </data>
+  <data name="labelEmailAddressFormat.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelEmailAddressFormat.Text" xml:space="preserve">
+    <value>(Use ";" to separate multiple email addresses.)</value>
+  </data>
+  <data name="labelEmailAddressFormat.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;labelEmailAddressFormat.Name" xml:space="preserve">
+    <value>labelEmailAddressFormat</value>
+  </data>
+  <data name="&gt;&gt;labelEmailAddressFormat.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelEmailAddressFormat.Parent" xml:space="preserve">
+    <value>tableLayoutPanelDeliveryOptions</value>
+  </data>
+  <data name="&gt;&gt;labelEmailAddressFormat.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="saveButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="saveButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="saveButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>291, 552</value>
+  </data>
+  <data name="saveButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="saveButton.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="saveButton.Text" xml:space="preserve">
+    <value>&amp;Save</value>
+  </data>
+  <data name="&gt;&gt;saveButton.Name" xml:space="preserve">
+    <value>saveButton</value>
+  </data>
+  <data name="&gt;&gt;saveButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;saveButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;saveButton.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cancelButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="cancelButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>373, 552</value>
+  </data>
+  <data name="cancelButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="cancelButton.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="cancelButton.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="&gt;&gt;cancelButton.Name" xml:space="preserve">
+    <value>cancelButton</value>
+  </data>
+  <data name="&gt;&gt;cancelButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cancelButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cancelButton.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="groupReportParameters.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="tableLayoutPanelRpParams.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rpParamComboBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="rpParamComboBox.Items" xml:space="preserve">
+    <value>Last Week</value>
+  </data>
+  <data name="rpParamComboBox.Items1" xml:space="preserve">
+    <value>Last Two Weeks</value>
+  </data>
+  <data name="rpParamComboBox.Items2" xml:space="preserve">
+    <value>Last Three Weeks</value>
+  </data>
+  <data name="rpParamComboBox.Items3" xml:space="preserve">
+    <value>Last Month</value>
+  </data>
+  <data name="rpParamComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>82, 3</value>
+  </data>
+  <data name="rpParamComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 23</value>
+  </data>
+  <data name="rpParamComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;rpParamComboBox.Name" xml:space="preserve">
+    <value>rpParamComboBox</value>
+  </data>
+  <data name="&gt;&gt;rpParamComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rpParamComboBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanelRpParams</value>
+  </data>
+  <data name="&gt;&gt;rpParamComboBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanelRpParams.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanelRpParams.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="tableLayoutPanelRpParams.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 24</value>
+  </data>
+  <data name="tableLayoutPanelRpParams.RowCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanelRpParams.Size" type="System.Drawing.Size, System.Drawing">
+    <value>420, 34</value>
+  </data>
+  <data name="tableLayoutPanelRpParams.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelRpParams.Name" xml:space="preserve">
+    <value>tableLayoutPanelRpParams</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelRpParams.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelRpParams.Parent" xml:space="preserve">
+    <value>groupReportParameters</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelRpParams.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanelRpParams.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="rpParamComboBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelDataRange" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="groupReportParameters.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="groupReportParameters.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 99</value>
+  </data>
+  <data name="groupReportParameters.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
+  <data name="groupReportParameters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>436, 66</value>
+  </data>
+  <data name="groupReportParameters.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="groupReportParameters.Text" xml:space="preserve">
+    <value>Report Parameters</value>
+  </data>
+  <data name="&gt;&gt;groupReportParameters.Name" xml:space="preserve">
+    <value>groupReportParameters</value>
+  </data>
+  <data name="&gt;&gt;groupReportParameters.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;groupReportParameters.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupReportParameters.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="dateTimePickerSchedStart.CustomFormat" xml:space="preserve">
+    <value>MMM d, yyyy</value>
+  </data>
+  <data name="dateTimePickerSchedStart.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="dateTimePickerSchedStart.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="dateTimePickerSchedStart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>60, 35</value>
+  </data>
+  <data name="dateTimePickerSchedStart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 6, 3, 3</value>
+  </data>
+  <data name="dateTimePickerSchedStart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 23</value>
+  </data>
+  <data name="dateTimePickerSchedStart.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerSchedStart.Name" xml:space="preserve">
+    <value>dateTimePickerSchedStart</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerSchedStart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerSchedStart.Parent" xml:space="preserve">
+    <value>tableLayoutPanelSchOptions</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerSchedStart.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="labelEnd.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelEnd.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelEnd.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="labelEnd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>176, 29</value>
+  </data>
+  <data name="labelEnd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 32</value>
+  </data>
+  <data name="labelEnd.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="labelEnd.Text" xml:space="preserve">
+    <value>&amp;Ending:</value>
+  </data>
+  <data name="labelEnd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;labelEnd.Name" xml:space="preserve">
+    <value>labelEnd</value>
+  </data>
+  <data name="&gt;&gt;labelEnd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelEnd.Parent" xml:space="preserve">
+    <value>tableLayoutPanelSchOptions</value>
+  </data>
+  <data name="&gt;&gt;labelEnd.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="labelStarting.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelStarting.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelStarting.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="labelStarting.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 29</value>
+  </data>
+  <data name="labelStarting.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 32</value>
+  </data>
+  <data name="labelStarting.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="labelStarting.Text" xml:space="preserve">
+    <value>St&amp;arting:</value>
+  </data>
+  <data name="labelStarting.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;labelStarting.Name" xml:space="preserve">
+    <value>labelStarting</value>
+  </data>
+  <data name="&gt;&gt;labelStarting.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelStarting.Parent" xml:space="preserve">
+    <value>tableLayoutPanelSchOptions</value>
+  </data>
+  <data name="&gt;&gt;labelStarting.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="groupDeliveryOptions.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="groupDeliveryOptions.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="groupDeliveryOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 171</value>
+  </data>
+  <data name="groupDeliveryOptions.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 24, 8</value>
+  </data>
+  <data name="groupDeliveryOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>436, 267</value>
+  </data>
+  <data name="groupDeliveryOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="groupDeliveryOptions.Text" xml:space="preserve">
+    <value>Delivery Options</value>
+  </data>
+  <data name="&gt;&gt;groupDeliveryOptions.Name" xml:space="preserve">
+    <value>groupDeliveryOptions</value>
+  </data>
+  <data name="&gt;&gt;groupDeliveryOptions.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;groupDeliveryOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupDeliveryOptions.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="groupScheduleOptions.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="tableLayoutPanelSchOptions.ColumnCount" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dateTimePickerSubscriptionRunTime.CustomFormat" xml:space="preserve">
+    <value>HH:mm</value>
+  </data>
+  <data name="dateTimePickerSubscriptionRunTime.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="dateTimePickerSubscriptionRunTime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>60, 3</value>
+  </data>
+  <data name="dateTimePickerSubscriptionRunTime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 23</value>
+  </data>
+  <data name="dateTimePickerSubscriptionRunTime.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerSubscriptionRunTime.Name" xml:space="preserve">
+    <value>dateTimePickerSubscriptionRunTime</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerSubscriptionRunTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerSubscriptionRunTime.Parent" xml:space="preserve">
+    <value>tableLayoutPanelSchOptions</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerSubscriptionRunTime.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="labelRunAt.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelRunAt.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelRunAt.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="labelRunAt.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelRunAt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="labelRunAt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 29</value>
+  </data>
+  <data name="labelRunAt.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelRunAt.Text" xml:space="preserve">
+    <value>R&amp;un at:</value>
+  </data>
+  <data name="labelRunAt.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;labelRunAt.Name" xml:space="preserve">
+    <value>labelRunAt</value>
+  </data>
+  <data name="&gt;&gt;labelRunAt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelRunAt.Parent" xml:space="preserve">
+    <value>tableLayoutPanelSchOptions</value>
+  </data>
+  <data name="&gt;&gt;labelRunAt.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="schedDeliverComboBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="schedDeliverComboBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="schedDeliverComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>245, 3</value>
+  </data>
+  <data name="schedDeliverComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>124, 23</value>
+  </data>
+  <data name="schedDeliverComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;schedDeliverComboBox.Name" xml:space="preserve">
+    <value>schedDeliverComboBox</value>
+  </data>
+  <data name="&gt;&gt;schedDeliverComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;schedDeliverComboBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanelSchOptions</value>
+  </data>
+  <data name="&gt;&gt;schedDeliverComboBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="labelDeliverOn.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelDeliverOn.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelDeliverOn.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="labelDeliverOn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelDeliverOn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>176, 0</value>
+  </data>
+  <data name="labelDeliverOn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 29</value>
+  </data>
+  <data name="labelDeliverOn.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="labelDeliverOn.Text" xml:space="preserve">
+    <value>&amp;Deliver on:</value>
+  </data>
+  <data name="labelDeliverOn.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;labelDeliverOn.Name" xml:space="preserve">
+    <value>labelDeliverOn</value>
+  </data>
+  <data name="&gt;&gt;labelDeliverOn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDeliverOn.Parent" xml:space="preserve">
+    <value>tableLayoutPanelSchOptions</value>
+  </data>
+  <data name="&gt;&gt;labelDeliverOn.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="dateTimePickerSchedEnd.CustomFormat" xml:space="preserve">
+    <value>MMM d, yyyy</value>
+  </data>
+  <data name="dateTimePickerSchedEnd.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="dateTimePickerSchedEnd.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="dateTimePickerSchedEnd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>245, 35</value>
+  </data>
+  <data name="dateTimePickerSchedEnd.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 6, 3, 3</value>
+  </data>
+  <data name="dateTimePickerSchedEnd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>124, 23</value>
+  </data>
+  <data name="dateTimePickerSchedEnd.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerSchedEnd.Name" xml:space="preserve">
+    <value>dateTimePickerSchedEnd</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerSchedEnd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerSchedEnd.Parent" xml:space="preserve">
+    <value>tableLayoutPanelSchOptions</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerSchedEnd.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="tableLayoutPanelSchOptions.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanelSchOptions.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="tableLayoutPanelSchOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 24</value>
+  </data>
+  <data name="tableLayoutPanelSchOptions.RowCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tableLayoutPanelSchOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>419, 61</value>
+  </data>
+  <data name="tableLayoutPanelSchOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelSchOptions.Name" xml:space="preserve">
+    <value>tableLayoutPanelSchOptions</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelSchOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelSchOptions.Parent" xml:space="preserve">
+    <value>groupScheduleOptions</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelSchOptions.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanelSchOptions.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="dateTimePickerSubscriptionRunTime" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelRunAt" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelStarting" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="dateTimePickerSchedStart" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="schedDeliverComboBox" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="labelDeliverOn" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="dateTimePickerSchedEnd" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="labelEnd" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Absolute,20,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="groupScheduleOptions.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="groupScheduleOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 444</value>
+  </data>
+  <data name="groupScheduleOptions.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
+  <data name="groupScheduleOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>435, 93</value>
+  </data>
+  <data name="groupScheduleOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="groupScheduleOptions.Text" xml:space="preserve">
+    <value>Schedule Options</value>
+  </data>
+  <data name="&gt;&gt;groupScheduleOptions.Name" xml:space="preserve">
+    <value>groupScheduleOptions</value>
+  </data>
+  <data name="&gt;&gt;groupScheduleOptions.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;groupScheduleOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupScheduleOptions.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>470, 587</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Subscription for report - </value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>WlbReportSubscriptionDialog</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+</root>

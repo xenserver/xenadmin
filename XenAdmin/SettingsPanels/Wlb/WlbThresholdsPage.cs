@@ -1,0 +1,189 @@
+﻿/* Copyright (c) Citrix Systems Inc. 
+ * All rights reserved. 
+ * 
+ * Redistribution and use in source and binary forms, 
+ * with or without modification, are permitted provided 
+ * that the following conditions are met: 
+ * 
+ * *   Redistributions of source code must retain the above 
+ *     copyright notice, this list of conditions and the 
+ *     following disclaimer. 
+ * *   Redistributions in binary form must reproduce the above 
+ *     copyright notice, this list of conditions and the 
+ *     following disclaimer in the documentation and/or other 
+ *     materials provided with the distribution. 
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+ * CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
+ * SUCH DAMAGE.
+ */
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Text;
+using System.Windows.Forms;
+
+using XenAdmin.Actions;
+using XenAdmin.Core;
+using XenAdmin.Wlb;
+using XenAPI;
+
+
+namespace XenAdmin.SettingsPanels
+{
+    public partial class WlbThresholdsPage : UserControl, IEditPage
+    {
+        private WlbPoolConfiguration _poolConfiguration;
+        private bool _loading = false;
+        private bool _hasChanged = false;
+
+        public WlbThresholdsPage()
+        {
+            InitializeComponent();
+
+            Text = Messages.WLB_THRESHOLDS;
+        }
+
+         public WlbPoolConfiguration PoolConfiguration
+        {
+            set
+            {
+                if (null != value)
+                {
+                    _poolConfiguration = value;
+                    InitializeControls();
+                }
+            }
+        }
+
+        private void InitializeControls()
+        {
+            _loading = true;
+            updownCPUCriticalPoint.Value = GetSafeUpDownValue(_poolConfiguration.HostCpuThresholdCritical, updownCPUCriticalPoint);
+            updownMemoryCriticalPoint.Value = GetSafeUpDownValue(WlbPoolConfiguration.ConvertToMB(_poolConfiguration.HostMemoryThresholdCritical), updownMemoryCriticalPoint);
+            updownDiskReadCriticalPoint.Value = GetSafeUpDownValue(WlbPoolConfiguration.ConvertToMB(_poolConfiguration.HostDiskReadThresholdCritical), updownDiskReadCriticalPoint);
+            updownDiskWriteCriticalPoint.Value = GetSafeUpDownValue(WlbPoolConfiguration.ConvertToMB(_poolConfiguration.HostDiskWriteThresholdCritical), updownDiskWriteCriticalPoint);
+            updownNetworkReadCriticalPoint.Value = GetSafeUpDownValue(WlbPoolConfiguration.ConvertToMB(_poolConfiguration.HostNetworkReadThresholdCritical), updownNetworkReadCriticalPoint);
+            updownNetworkWriteCriticalPoint.Value = GetSafeUpDownValue(WlbPoolConfiguration.ConvertToMB(_poolConfiguration.HostNetworkWriteThresholdCritical), updownNetworkWriteCriticalPoint);
+
+            labelCPUUnits.Text = string.Format(labelCPUUnits.Text, updownCPUCriticalPoint.Minimum, updownCPUCriticalPoint.Maximum);
+            labelFreeMemoryUnits.Text = string.Format(labelFreeMemoryUnits.Text, updownMemoryCriticalPoint.Minimum, updownMemoryCriticalPoint.Maximum);
+            labelDiskReadUnits.Text = string.Format(labelDiskReadUnits.Text, updownDiskReadCriticalPoint.Minimum, updownDiskReadCriticalPoint.Maximum);
+            labelDiskWriteUnits.Text = string.Format(labelDiskWriteUnits.Text, updownDiskWriteCriticalPoint.Minimum, updownDiskWriteCriticalPoint.Maximum);
+            labelNetworkReadUnits.Text = string.Format(labelNetworkReadUnits.Text, updownNetworkReadCriticalPoint.Minimum, updownNetworkReadCriticalPoint.Maximum);
+            labelNetworkWriteUnits.Text = string.Format(labelNetworkWriteUnits.Text, updownNetworkWriteCriticalPoint.Minimum, updownNetworkWriteCriticalPoint.Maximum);
+            
+            _loading = false; ;
+        }
+
+        private decimal GetSafeUpDownValue(decimal value, NumericUpDown thisControl)
+        {
+            if (value < thisControl.Minimum)
+            {
+                value = thisControl.Minimum;
+            }
+            if (value > thisControl.Maximum)
+            {
+                value = thisControl.Maximum;
+            }
+            return value;
+        }
+
+        private void updown_ValueChanged(object sender, EventArgs e)
+        {
+            if (!_loading)
+            {
+                if (sender is NumericUpDown)
+                {
+                    NumericUpDown thisNumericUpDown = sender as NumericUpDown;
+                    thisNumericUpDown.Value = GetSafeUpDownValue(thisNumericUpDown.Value, thisNumericUpDown);
+                    _hasChanged = true;
+                }
+            }
+        }
+
+        private void updown_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (sender is NumericUpDown)
+            {
+                NumericUpDown thisNumericUpDown = sender as NumericUpDown;
+                thisNumericUpDown.Value = GetSafeUpDownValue(thisNumericUpDown.Value, thisNumericUpDown);
+                _hasChanged = true;
+            }
+
+        }
+        
+        #region IEditPage Members
+
+        public AsyncAction SaveSettings()
+        {
+            _poolConfiguration.HostCpuThresholdCritical = (int)updownCPUCriticalPoint.Value;
+            _poolConfiguration.HostMemoryThresholdCritical = WlbPoolConfiguration.ConvertFromMB((int)updownMemoryCriticalPoint.Value);
+            _poolConfiguration.HostDiskReadThresholdCritical = WlbPoolConfiguration.ConvertFromMB((int)updownDiskReadCriticalPoint.Value);
+            _poolConfiguration.HostDiskWriteThresholdCritical = WlbPoolConfiguration.ConvertFromMB((int)updownDiskWriteCriticalPoint.Value);
+            _poolConfiguration.HostNetworkReadThresholdCritical = WlbPoolConfiguration.ConvertFromMB((int)updownNetworkReadCriticalPoint.Value);
+            _poolConfiguration.HostNetworkWriteThresholdCritical = WlbPoolConfiguration.ConvertFromMB((int)updownNetworkWriteCriticalPoint.Value);
+
+            return null;
+        }
+
+        public void SetXenObjects(IXenObject orig, IXenObject clone)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public bool ValidToSave
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
+
+        public void ShowLocalValidationMessages()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public void Cleanup()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public bool HasChanged
+        {
+            get { return _hasChanged; }
+        }
+
+        #endregion
+
+        #region VerticalTab Members
+
+
+        public string SubText
+        {
+            get { return Messages.WLB_THRESHOLDS_SUBTEXT; }
+        }
+
+        public Image Image
+        {
+            get { return Properties.Resources._000_GetMemoryInfo_h32bit_16; }
+        }
+
+        #endregion
+
+
+
+    }
+}

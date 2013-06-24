@@ -1,0 +1,510 @@
+﻿/* Copyright (c) Citrix Systems Inc. 
+ * All rights reserved. 
+ * 
+ * Redistribution and use in source and binary forms, 
+ * with or without modification, are permitted provided 
+ * that the following conditions are met: 
+ * 
+ * *   Redistributions of source code must retain the above 
+ *     copyright notice, this list of conditions and the 
+ *     following disclaimer. 
+ * *   Redistributions in binary form must reproduce the above 
+ *     copyright notice, this list of conditions and the 
+ *     following disclaimer in the documentation and/or other 
+ *     materials provided with the distribution. 
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+ * CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
+ * SUCH DAMAGE.
+ */
+
+using System;
+using System.Collections.Generic;
+using XenAdmin.Network;
+using XenAPI;
+
+
+namespace XenAdmin.Core
+{
+    /// <summary>
+    /// Encapsulates whether a slave can join a given pool
+    /// </summary>
+    public static class PoolJoinRules
+    {
+        // The order of the enum determines the order we sort the hosts in, in the New Pool Wizard
+        public enum Reason
+        {
+            WillBeMaster,
+            Allowed,
+            Connecting,
+            MasterNotConnected,
+            MasterConnecting,
+            DifferentAdConfig,
+            HasRunningVMs,
+            HasSharedStorage,
+            IsAPool,
+            LicenseRestriction,
+            NotSameLinuxPack,
+            PaidHostFreeMaster,
+            FreeHostPaidMaster,
+            LicenseMismatch,
+            DifferentServerVersion,
+            DifferentCPUs,
+            DifferentNetworkBackends,
+            MasterHasHA,
+            WrongRoleOnMaster,
+            WrongRoleOnSlave,
+            NotConnected,
+        }
+
+        // The order of if's in CanJoinPool() determines which reason we display if there is more than one.
+        // At least as far as WillBeMaster, some callers may rely on the order.
+        // Also, some of the private functions in this file rely on previous tests (especially for
+        // null-ness and connectedness) having been done first.
+
+        /// <summary>
+        /// Whether a server can join a pool (or form a pool with a standalone server)
+        /// </summary>
+        /// <param name="slaveConnection">The connection of the server that wants to join the pool</param>
+        /// <param name="masterConnection">The connection of the existing pool or of the proposed master of a new pool</param>
+        /// <param name="allowLicenseUpgrade">Whether we can upgrade a free host to a v6 license of the pool it's joining</param>
+        /// <param name="allowCpuLevelling">Whether we can apply CPU levelling to the slave before it joins the pool</param>
+        /// <returns>The reason why the server can't join the pool, or Reason.Allowed if it's OK</returns>
+        public static Reason CanJoinPool(IXenConnection slaveConnection, IXenConnection masterConnection, bool allowLicenseUpgrade, bool allowCpuLevelling, bool allowSlaveAdConfig)
+        {
+            if (!Helpers.IsConnected(slaveConnection))  // also implies slaveConnection != null
+                return Reason.NotConnected;
+
+            Host slaveHost = Helpers.GetMaster(slaveConnection);
+            if (Connecting(slaveHost))  // also implies slaveHost != null
+                return Reason.Connecting;
+
+            if (LicenseRestriction(slaveHost))
+                return Reason.LicenseRestriction;
+
+            if (IsAPool(slaveConnection))
+                return Reason.IsAPool;
+
+            if (!Helpers.IsConnected(masterConnection))  // also implies masterConnection != null
+                return Reason.MasterNotConnected;
+
+            Host masterHost = Helpers.GetMaster(masterConnection);
+            if (Connecting(masterHost))  // also implies masterHost != null
+                return Reason.MasterConnecting;
+
+            if (WillBeMaster(slaveConnection, masterConnection))
+                return Reason.WillBeMaster;
+
+            if (!RoleOK(masterConnection))
+                return Reason.WrongRoleOnMaster;
+
+            if (!CompatibleCPUs(slaveHost, masterHost, allowCpuLevelling))
+                return Reason.DifferentCPUs;
+
+            if (DifferentServerVersion(slaveHost, masterHost))
+                return Reason.DifferentServerVersion;
+
+            if (FreeHostPaidMaster(slaveHost, masterHost, allowLicenseUpgrade))
+                return Reason.FreeHostPaidMaster;
+
+            if (PaidHostFreeMaster(slaveHost, masterHost))
+                return Reason.PaidHostFreeMaster;
+
+            if (LicenseMismatch(slaveHost, masterHost))
+                return Reason.LicenseMismatch;
+            
+            if (!SameLinuxPack(slaveHost, masterHost))
+                return Reason.NotSameLinuxPack;
+
+            if (!RoleOK(slaveConnection))
+                return Reason.WrongRoleOnSlave;
+
+            if (HasSharedStorage(slaveConnection))
+                return Reason.HasSharedStorage;
+
+            if (HasRunningVMs(slaveConnection))
+                return Reason.HasRunningVMs;
+
+            if (DifferentNetworkBackends(slaveHost, masterHost))
+                return Reason.DifferentNetworkBackends;
+
+            if (!CompatibleAdConfig(slaveHost, masterHost, allowSlaveAdConfig))
+                return Reason.DifferentAdConfig;
+
+            if (HaEnabled(masterConnection))
+                return Reason.MasterHasHA;
+
+            return Reason.Allowed;
+        }
+
+        public static string ReasonMessage(Reason reason)
+        {
+            switch (reason)
+            {
+                case Reason.WillBeMaster:
+                    return Messages.MASTER;
+                case Reason.Allowed:
+                    return "";
+                case Reason.Connecting:
+                    return Messages.CONNECTING;
+                case Reason.MasterNotConnected:
+                    return Messages.NEWPOOL_MASTER_DISCONNECTED;
+                case Reason.MasterConnecting:
+                    return Messages.NEWPOOL_MASTER_CONNECTING;
+                case Reason.DifferentAdConfig:
+                    return Messages.NEWPOOL_DIFFERING_AD_CONFIG;
+                case Reason.HasRunningVMs:
+                    return Messages.NEWPOOL_HAS_RUNNING_VMS;
+                case Reason.HasSharedStorage:
+                    return Messages.NEWPOOL_HAS_SHARED_STORAGE;
+                case Reason.IsAPool:
+                    return Messages.NEWPOOL_IS_A_POOL;
+                case Reason.LicenseRestriction:
+                    return Messages.NEWPOOL_POOLINGRESTRICTED;
+                case Reason.NotSameLinuxPack:
+                    return Messages.NEWPOOL_LINUXPACK;
+                case Reason.PaidHostFreeMaster:
+                    return Messages.NEWPOOL_PAID_HOST_FREE_MASTER;
+                case Reason.FreeHostPaidMaster:
+                    return Messages.NEWPOOL_FREE_HOST_PAID_MASTER;
+                case Reason.LicenseMismatch:
+                    return Messages.NEWPOOL_LICENSEMISMATCH;
+                case Reason.DifferentServerVersion:
+                    return Messages.NEWPOOL_DIFF_SERVER;
+                case Reason.DifferentCPUs:
+                    return Messages.NEWPOOL_DIFF_HARDWARE;
+                case Reason.DifferentNetworkBackends:
+                    return Messages.NEWPOOL_DIFFERENT_NETWORK_BACKENDS;
+                case Reason.NotConnected:
+                    return Messages.DISCONNECTED;
+                case Reason.MasterHasHA:
+                    return Messages.POOL_JOIN_FORBIDDEN_BY_HA;
+                case Reason.WrongRoleOnMaster:
+                    return Messages.NEWPOOL_MASTER_ROLE;
+                case Reason.WrongRoleOnSlave:
+                    return Messages.NEWPOOL_SLAVE_ROLE;
+                default:
+                    System.Diagnostics.Trace.Assert(false, "Unknown reason");
+                    return "";
+            }
+        }
+
+        private static bool WillBeMaster(IXenConnection slave, IXenConnection master)
+        {
+            // Assume we have already tested that the connection has no other reason why it can't be a master
+            // (e.g., connected, licensing restrictions, ...)
+            return slave == master;
+        }
+
+        private static bool HasSharedStorage(IXenConnection connection)
+        {
+            foreach (SR sr in connection.Cache.SRs)
+            {
+                if (sr.shared && !sr.IsToolsSR)
+                    return true;
+            }
+            return false;
+        }
+
+        private static bool HasRunningVMs(IXenConnection connection)
+        {
+            foreach (VM vm in connection.Cache.VMs)
+            {
+                if (vm.is_a_real_vm && (vm.power_state == XenAPI.vm_power_state.Running || vm.power_state == XenAPI.vm_power_state.Suspended))
+                    return true;
+            }
+            return false;
+        }
+
+        private static bool Connecting(Host host)
+        {
+            return host == null;
+        }
+
+        private static bool IsAPool(IXenConnection connection)
+        {
+            return Helpers.GetPool(connection) != null;
+        }
+
+        private static bool LicenseRestriction(Host host)
+        {
+            return host.RestrictPooling;
+        }
+
+        // If CompatibleCPUs(slave, master, false) is true, the CPUs can be pooled without masking first.
+        // If CompatibleCPUs(slave, master, true) is true but CompatibleCPUs(slave, master, false) is false,
+        // the CPUs can be pooled but only if they are masked first.
+        public static bool CompatibleCPUs(Host slave, Host master, bool allowCpuLevelling)
+        {
+            if (slave == null || master == null)
+                return true;
+
+            Dictionary<string, string> slave_cpu_info = slave.cpu_info;
+            Dictionary<string, string> master_cpu_info = master.cpu_info;
+            if (!Helper.AreEqual2(slave_cpu_info, null) && !Helper.AreEqual2(master_cpu_info, null))
+            {
+                // Host.cpu_info is supported
+                // From this point on, it is only necessary to have matching vendor and features
+                // (after masking the slave, if allowed).
+                if (slave_cpu_info["vendor"] != master_cpu_info["vendor"])
+                    return false;
+
+                if (slave_cpu_info["features"] == master_cpu_info["features"])
+                    return true;
+
+                if (allowCpuLevelling)
+                {
+                    string cpuid_feature_mask = null;
+                    Pool pool = Helpers.GetPoolOfOne(master.Connection);
+                    if (pool != null && pool.other_config.ContainsKey("cpuid_feature_mask"))
+                        cpuid_feature_mask = pool.other_config["cpuid_feature_mask"];
+
+                    return MaskableTo(slave_cpu_info["maskable"], slave_cpu_info["physical_features"], master_cpu_info["features"], cpuid_feature_mask);
+                }
+
+                return false;    
+            }
+
+            // Host.cpu_info not supported: use the old method which compares vendor, family, model and flags
+            foreach (Host_cpu cpu1 in slave.Connection.Cache.Host_cpus)
+            {
+                foreach (Host_cpu cpu2 in master.Connection.Cache.Host_cpus)
+                {
+                    if (cpu1.vendor != cpu2.vendor ||
+                        cpu1.family != cpu2.family ||
+                        cpu1.model != cpu2.model ||
+                        cpu1.flags != cpu2.flags)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Can the features represented by "from" be masked to become the features represented by "to"?
+        /// </summary>
+        /// <param name="mask_type">"no", "base" (can only mask first 64 bits) or "full"</param>
+        /// <param name="from">The unmasked features, as a set of 32 hex digits, possibly separated by spaces or dashes</param>
+        /// <param name="to">The target features, as a set of 32 hex digits, possibly separated by spaces or dashes</param>
+        /// <param name="feature_mask">A mask of features to ignore for the comparison</param>
+        public static bool MaskableTo(string mask_type, string from, string to, string feature_mask)
+        {
+            if (mask_type == "no")
+                return false;
+
+            string from2 = from.Replace(" ", "");
+            from2 = from2.Replace("-", "");
+            string to2 = to.Replace(" ", "");
+            to2 = to2.Replace("-", "");
+            if (from2.Length != 32 || to2.Length != 32)
+                return false;
+
+            string fm2;
+            if (feature_mask == null)
+                fm2 = "ffffffffffffffffffffffffffffffff";
+            else
+            {
+                fm2 = feature_mask.Replace(" ", "");
+                fm2 = fm2.Replace("-", "");
+                if (fm2.Length != 32)
+                    fm2 = "ffffffffffffffffffffffffffffffff";
+            }
+
+            // Compare int64-by-int64. AMD can mask all the bits; some Intel chips can only mask the first half.
+            for (int i = 0; i < 2; ++i)
+            {
+                string fromPart = from2.Substring(16 * i, 16);
+                string toPart = to2.Substring(16 * i, 16);
+                string fmPart = fm2.Substring(16 * i, 16);
+
+                ulong fromInt = Convert.ToUInt64(fromPart, 16);
+                ulong toInt = Convert.ToUInt64(toPart, 16);
+                ulong fmInt = Convert.ToUInt64(fmPart, 16);
+                fromInt &= fmInt;
+                toInt &= fmInt;
+
+                if (i == 1 && mask_type == "base")  // must be an exact match
+                {
+                    if (fromInt != toInt)
+                        return false;
+                }
+                else  // "from" must be maskable to "to"
+                {
+                    if ((fromInt & toInt) != toInt)
+                        return false;
+                }
+            }
+
+            return true;
+        }
+
+        private static bool DifferentServerVersion(Host slave, Host master)
+        {
+            // Probably all the others will be equal if the hg_id is equal, but let's
+            // mimic the test on the server side (xen-api.hg:ocaml/xapi/xapi_pool.ml).
+            return
+                slave.hg_id != master.hg_id ||
+                slave.BuildNumberRaw != master.BuildNumberRaw ||
+                slave.ProductVersion != master.ProductVersion ||
+                slave.ProductBrand != master.ProductBrand;
+        }
+
+        private static bool SameLinuxPack(Host slave, Host master)
+        {
+            return slave.LinuxPackPresent == master.LinuxPackPresent;
+        }
+
+        public static bool CompatibleAdConfig(Host slave, Host master, bool allowSlaveConfig)
+        {
+            if (slave == null || master == null)
+                return false;
+
+            // CA-30223: There is no need to check the config of the auth services are the same, as xapi only relies on these two values being equal
+            if (slave.external_auth_type != master.external_auth_type ||
+                slave.external_auth_service_name != master.external_auth_service_name)
+            {
+                // if the slave is AD free and we are allowing the configure then we can solve this
+                if (slave.external_auth_type == Auth.AUTH_TYPE_NONE && allowSlaveConfig)
+                    return true;
+
+                return false;
+            }
+            return true;
+        }
+
+        public static bool FreeHostPaidMaster(Host slave, Host master, bool allowLicenseUpgrade)
+        {
+            if (slave != null && master != null &&
+                slave.IsFloodgateOrLater() && master.IsFloodgateOrLater() &&
+                Host.RestrictHAFloodgate(slave) && !Host.RestrictHAFloodgate(master))
+            {
+                // See http://scale.ad.xensource.com/confluence/display/engp/v6+licensing+for+XenServer+Essentials, req R21a.
+                // That section implies that we should downgrade a paid host to join a free pool, but that can't be the intention
+                // (confirmed by Carl Fischer). Carl's also not concerned about fixing up Enterprise/Platinum mismatches.
+                if (allowLicenseUpgrade && Helpers.MidnightRideOrGreater(master))
+                    return false;
+                return true;
+            }
+            return false;
+        }
+
+        private static bool PaidHostFreeMaster(Host slave, Host master)
+        {
+            return (slave.IsFloodgateOrLater() && master.IsFloodgateOrLater() &&
+                !Host.RestrictHAFloodgate(slave) && Host.RestrictHAFloodgate(master));
+        }
+
+        private static bool LicenseMismatch(Host slave, Host master)
+        {
+            if (Helpers.MidnightRideOrGreater(slave) && Helpers.MidnightRideOrGreater(master))
+            {
+                Host.Edition slaveEdition = Host.GetEdition(slave.edition);
+                Host.Edition masterEdition = Host.GetEdition(master.edition);
+
+                return slaveEdition != Host.Edition.Free && masterEdition != Host.Edition.Free && slaveEdition != masterEdition;
+            }
+            return false;
+        }
+
+        private static bool HaEnabled(IXenConnection connection)
+        {
+            Pool pool = Helpers.GetPoolOfOne(connection);
+            return (pool != null && pool.ha_enabled);
+        }
+
+        private static bool RoleOK(IXenConnection connection)
+        {
+            return
+                !Helpers.MidnightRideOrGreater(connection) ||
+                Role.CanPerform(new RbacMethodList("pool.join"), connection);
+        }
+
+        private static bool DifferentNetworkBackends(Host slave, Host master)
+        {
+            if (slave.software_version.ContainsKey("network_backend") &&
+                master.software_version.ContainsKey("network_backend") &&
+                slave.software_version["network_backend"] != master.software_version["network_backend"])
+                return true;
+
+            var masterPool = Helpers.GetPoolOfOne(master.Connection);
+            var slavePool = Helpers.GetPoolOfOne(slave.Connection);
+
+            return masterPool != null && slavePool != null &&
+                   masterPool.vSwitchController && slavePool.vSwitchController &&
+                   masterPool.vswitch_controller != slavePool.vswitch_controller;
+        }
+
+        /// <summary>
+        /// Check whether all supp packs that request homogeneity are in fact homogeneous
+        /// across the proposed pool. This is only a warning; it does not prevent the pool being created;
+        /// so it is not used by CanJoinPool.
+        /// </summary>
+        /// <returns>A list of strings: each string is the name of a bad supp pack with a reason in brackets</returns>
+        public static List<string> HomogeneousSuppPacksDiffering(List<Host> slaves, IXenObject poolOrMaster)
+        {
+            List<Host> allHosts = new List<Host>(slaves);
+            allHosts.AddRange(poolOrMaster.Connection.Cache.Hosts);
+
+            // Make a dictionary of all supp packs that should be homogeneous
+            Dictionary<string, string> homogeneousPacks = new Dictionary<string, string>();
+            foreach (Host host in allHosts)
+            {
+                foreach (Host.SuppPack suppPack in host.SuppPacks)
+                {
+                    if (suppPack.Homogeneous)
+                        homogeneousPacks[suppPack.OriginatorAndName] = suppPack.Description;
+                }
+            }
+
+            // Now for each such supp pack, see whether it is in fact homogeneous.
+            // If not, add it to the list of bad packs with a reason.
+
+            List<string> badPacks = new List<string>();
+
+            foreach (string pack in homogeneousPacks.Keys)
+            {
+                // Is it present on all hosts, with the same version?
+                List<Host> missingHosts = new List<Host>();
+                string expectedVersion = null;
+                bool versionsDiffer = false;
+
+                foreach (Host host in allHosts)
+                {
+                    Host.SuppPack matchingPack = host.SuppPacks.Find(sp => (sp.OriginatorAndName == pack));
+                    if (matchingPack == null)
+                        missingHosts.Add(host);
+                    else if (expectedVersion == null)
+                        expectedVersion = matchingPack.Version;
+                    else if (matchingPack.Version != expectedVersion)
+                        versionsDiffer = true;
+                }
+
+                if (missingHosts.Count != 0)
+                {
+                    badPacks.Add(string.Format(Messages.SUPP_PACK_MISSING_ON,
+                        homogeneousPacks[pack],  // the Description field from the pack, which we cunningly remembered to save above
+                        string.Join("\n", missingHosts.ConvertAll(host => host.ToString()).ToArray())));  // comma-separated list of hosts
+                }
+                else if (versionsDiffer)
+                {
+                    badPacks.Add(string.Format(Messages.SUPP_PACK_VERSIONS_DIFFER, homogeneousPacks[pack]));
+                }
+            }
+
+            return badPacks;
+        }
+    }
+}

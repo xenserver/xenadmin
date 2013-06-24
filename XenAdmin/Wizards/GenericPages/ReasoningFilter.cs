@@ -1,0 +1,69 @@
+﻿/* Copyright (c) Citrix Systems Inc. 
+ * All rights reserved. 
+ * 
+ * Redistribution and use in source and binary forms, 
+ * with or without modification, are permitted provided 
+ * that the following conditions are met: 
+ * 
+ * *   Redistributions of source code must retain the above 
+ *     copyright notice, this list of conditions and the 
+ *     following disclaimer. 
+ * *   Redistributions in binary form must reproduce the above 
+ *     copyright notice, this list of conditions and the 
+ *     following disclaimer in the documentation and/or other 
+ *     materials provided with the distribution. 
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+ * CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
+ * SUCH DAMAGE.
+ */
+
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using XenAPI;
+
+namespace XenAdmin.Wizards.GenericPages
+{
+    public abstract class ReasoningFilter
+    {
+        protected ReasoningFilter(IXenObject itemToFilterOn)
+        {
+            ItemToFilterOn = itemToFilterOn;
+        }
+
+        protected ReasoningFilter()
+        {
+        }
+
+        /// <summary>
+        /// Base item that should be used to filter on
+        /// </summary>
+        public IXenObject ItemToFilterOn { get; protected set; }
+        public abstract bool FailureFound { get; }
+        public abstract string Reason { get; }
+
+        public bool FailureFoundFor(IXenObject xenObject)
+        {
+            ItemToFilterOn = xenObject;
+            return FailureFound;
+        }
+
+        public KeyValuePair<bool, List<string>> Or(ReasoningFilter filter)
+        {
+            List<string> reasons = new List<string>{ Reason, filter.Reason };
+            return new KeyValuePair<bool, List<string>>(FailureFound || filter.FailureFound, reasons);
+        }
+    } 
+}

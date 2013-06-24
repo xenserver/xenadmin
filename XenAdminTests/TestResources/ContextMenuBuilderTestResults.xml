@@ -1,0 +1,1552 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<ContextMenuBuilderTests>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="&amp;Disconnect" IsSeparator="False" Bold="False" Available="True" Index="0" />
+      <ToolStripItem Text="Re&amp;boot" IsSeparator="False" Bold="False" Available="True" Index="1" />
+      <ToolStripItem Text="S&amp;hut Down" IsSeparator="False" Bold="False" Available="True" Index="2" />
+      <ToolStripItem Text="Restart Toolstac&amp;k" IsSeparator="False" Bold="False" Available="True" Index="3" />
+      <ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="4" />
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="5" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="De&amp;lete..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="1" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="De&amp;lete..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="1" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="De&amp;lete..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="1" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="S&amp;hut Down" IsSeparator="False" Bold="False" Available="True" Index="0" />
+			<ToolStripItem Text="S&amp;tart" IsSeparator="False" Bold="False" Available="True" Index="1" />
+			<ToolStripItem Text="S&amp;uspend" IsSeparator="False" Bold="False" Available="True" Index="2" />
+			<ToolStripItem Text="Reb&amp;oot" IsSeparator="False" Bold="False" Available="True" Index="3" />
+			<ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="4" />
+			<ToolStripItem Text="Force Shutdo&amp;wn" IsSeparator="False" Bold="False" Available="True" Index="5" />
+			<ToolStripItem Text="Force Re&amp;boot" IsSeparator="False" Bold="False" Available="True" Index="6" />
+			<ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="7" />
+			<ToolStripItem Text="Start on Ser&amp;ver" IsSeparator="False" Bold="False" Available="True" Index="8" />
+			<ToolStripItem Text="M&amp;igrate to Server" IsSeparator="False" Bold="False" Available="True" Index="9" />
+      <ToolStripItem Text="&amp;Export..." IsSeparator="False" Bold="False" Available="True" Index="10" />
+      <ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="11" />
+			<ToolStripItem Text="De&amp;lete..." IsSeparator="False" Bold="False" Available="True" Index="12" />
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="13" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="De&amp;lete..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="1" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="De&amp;lete..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="1" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="S&amp;hut Down" IsSeparator="False" Bold="False" Available="True" Index="0" />
+			<ToolStripItem Text="S&amp;tart" IsSeparator="False" Bold="False" Available="True" Index="1" />
+			<ToolStripItem Text="S&amp;uspend" IsSeparator="False" Bold="False" Available="True" Index="2" />
+			<ToolStripItem Text="Reb&amp;oot" IsSeparator="False" Bold="False" Available="True" Index="3" />
+			<ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="4" />
+			<ToolStripItem Text="Force Shutdo&amp;wn" IsSeparator="False" Bold="False" Available="True" Index="5" />
+			<ToolStripItem Text="Force Re&amp;boot" IsSeparator="False" Bold="False" Available="True" Index="6" />
+			<ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="7" />
+			<ToolStripItem Text="Start on Ser&amp;ver" IsSeparator="False" Bold="False" Available="True" Index="8" />
+			<ToolStripItem Text="M&amp;igrate to Server" IsSeparator="False" Bold="False" Available="True" Index="9" />
+      <ToolStripItem Text="&amp;Export..." IsSeparator="False" Bold="False" Available="True" Index="10" />
+      <ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="11" />
+			<ToolStripItem Text="Install &amp;XenServer Tools..." IsSeparator="False" Bold="False" Available="True" Index="12" />
+			<ToolStripItem Text="De&amp;lete..." IsSeparator="False" Bold="False" Available="True" Index="13" />
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="14" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="S&amp;hut Down" IsSeparator="False" Bold="False" Available="True" Index="0" />
+			<ToolStripItem Text="S&amp;uspend" IsSeparator="False" Bold="False" Available="True" Index="1" />
+			<ToolStripItem Text="Reb&amp;oot" IsSeparator="False" Bold="False" Available="True" Index="2" />
+			<ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="3" />
+			<ToolStripItem Text="Force Shutdo&amp;wn" IsSeparator="False" Bold="False" Available="True" Index="4" />
+			<ToolStripItem Text="Force Re&amp;boot" IsSeparator="False" Bold="False" Available="True" Index="5" />
+			<ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="6" />
+			<ToolStripItem Text="M&amp;igrate to Server" IsSeparator="False" Bold="False" Available="True" Index="7" />
+			<ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="8" />
+			<ToolStripItem Text="Install &amp;XenServer Tools..." IsSeparator="False" Bold="False" Available="True" Index="9" />
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="10" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:11abadc7-7bab-faa2-0198-1999f96e3b15" ToString="Windows Server 2003 x64 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="De&amp;lete..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="1" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="De&amp;lete..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="1" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="De&amp;lete..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="1" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="De&amp;lete..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="1" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="S&amp;tart" IsSeparator="False" Bold="False" Available="True" Index="0" />
+			<ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="1" />
+			<ToolStripItem Text="Force Shutdo&amp;wn" IsSeparator="False" Bold="False" Available="True" Index="2" />
+			<ToolStripItem Text="Force Re&amp;boot" IsSeparator="False" Bold="False" Available="True" Index="3" />
+			<ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="4" />
+			<ToolStripItem Text="Start on Ser&amp;ver" IsSeparator="False" Bold="False" Available="True" Index="5" />
+      <ToolStripItem Text="&amp;Export..." IsSeparator="False" Bold="False" Available="True" Index="6" />
+      <ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="7" />
+			<ToolStripItem Text="Install &amp;XenServer Tools..." IsSeparator="False" Bold="False" Available="True" Index="8" />
+			<ToolStripItem Text="De&amp;lete..." IsSeparator="False" Bold="False" Available="True" Index="9" />
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="10" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="De&amp;lete..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="1" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:c5ccb621-6086-6364-3f7b-13a3e788b1a2" ToString="Windows Server 2008 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="De&amp;lete..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="1" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:7166136b-f599-3e3c-4515-40dae8cbbead" ToString="incubus" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:98461529-e4ad-5052-a71d-e6bf0f11518c" ToString="inflames" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec3d7f2d-ff6e-782c-f05c-834a17ca9658" ToString="NFS ISO library" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:ec64ce83-5185-193c-83a5-53fac244fab4" ToString="state4.xml" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="1" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="De&amp;lete..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="1" />
+		</ToolStripItems>
+	</Test>
+	<Test>
+		<Selection>
+			<SelectedItem OpaqueRef="OpaqueRef:02cf0243-57d9-6b41-25b0-46498933a2a2" ToString="Windows XP SP2 (1)" Index="0" />
+			<SelectedItem OpaqueRef="OpaqueRef:7d1653a6-bc5d-56a7-38b9-8c72f29e29e0" ToString="Red Hat Enterprise Linux 5.3 (1)" Index="1" />
+			<SelectedItem OpaqueRef="OpaqueRef:f7d235ff-e118-d53d-e1aa-b366808df694" ToString="CentOS 4.5" Index="2" />
+		</Selection>
+		<ToolStripItems>
+			<ToolStripItem Text="De&amp;lete..." IsSeparator="False" Bold="False" Available="True" Index="0" />
+			<ToolStripItem Text="Edit Ta&amp;gs..." IsSeparator="False" Bold="False" Available="True" Index="1" />
+		</ToolStripItems>
+	</Test>
+</ContextMenuBuilderTests>

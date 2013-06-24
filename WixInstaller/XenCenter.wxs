@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ Copyright (c) Citrix Systems Inc.
+ All rights reserved.
+ 
+ Redistribution and use in source and binary forms, 
+ with or without modification, are permitted provided 
+ that the following conditions are met: 
+ 
+ *   Redistributions of source code must retain the above 
+     copyright notice, this list of conditions and the 
+     following disclaimer. 
+ *   Redistributions in binary form must reproduce the above 
+     copyright notice, this list of conditions and the 
+     following disclaimer in the documentation and/or other 
+     materials provided with the distribution. 
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+ CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+ INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+ MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+ CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
+ BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
+ SUCH DAMAGE. 
+-->
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <?define ProductVersion="1.0.0" ?>
+    <?define UpgradeCode="{EA0EF50F-5CC6-452B-B09F-3F5EC564899D}"?>
+    <?define ProductCode="{65AE1345-A520-456D-8A19-2F52D43D3A09}"?>
+    <Product Id="$(var.ProductCode)" Name="Citrix XenCenter" Language="$(env.WixLangId)" Version="$(var.ProductVersion)" Manufacturer="Citrix Systems, Inc." UpgradeCode="$(var.UpgradeCode)">
+        <Package Description="Citrix XenCenter" Comments="none." InstallerVersion="200" Compressed="yes" />
+        <Media Id="1" Cabinet="XenCenter.cab" EmbedCab="yes" />
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="ProgramFilesFolder">
+                <Directory Id="Citrix" Name="Citrix">
+                    <Directory Id="INSTALLDIR" ShortName="XenCente" Name="XenCenter">
+                        <Component Id="ReportViewer" Guid="D01090B9-1988-4ab4-B48A-D0B6161FAA48">
+                            <File Id="MicRepVwrCmnDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.dll" />
+                            <File Id="MicRepVwrPrcObjDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.ProcessingObjectModel.dll" />
+                            <File Id="MicRepVwrWFDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.WinForms.dll" />
+                            <File Id="HostHealthHistoryRDLC" Source="..\XenAdmin\ReportViewer\host_health_history.rdlc" />
+                            <File Id="PoolHealthRDLC" Source="..\XenAdmin\ReportViewer\pool_health.rdlc" />
+                            <File Id="opt_perf_histRDLC" Source="..\XenAdmin\ReportViewer\optimization_performance_history.rdlc" />
+                            <File Id="vmMovementHistoryRDLC" Source="..\XenAdmin\ReportViewer\vm_movement_history.rdlc" />
+                            <File Id="vmPerformanceHistoryRDLC" Source="..\XenAdmin\ReportViewer\vm_performance_history.rdlc" />
+                            <File Id="PoolHealthHistoryRDLC" Source="..\XenAdmin\ReportViewer\pool_health_history.rdlc" />
+                            <File Id="ReportConfigXML" Source="..\XenAdmin\ReportViewer\reports.xml" />
+                        </Component>
+                        <Component Id="MainExecutable" Guid="64FEF765-7593-4612-8D4D-EE81CF704DEB">
+                            <!-- XenCenter EXE -->
+                            <File Id="XenCenterEXE" Source="..\XenAdmin\bin\Release\XenCenter.exe" KeyPath="yes" />
+                            <!-- other EXEs -->
+                            <File Id="XenCenterMainEXE" Source="..\XenAdmin\bin\Release\XenCenterMain.exe" />
+                            <File Id="XeEXE" Source="..\xe\bin\Release\xe.exe" />
+                            <File Id="xva_verifyEXE" Source="..\xva_verify\bin\Release\xva_verify.exe" />
+                            <!-- config -->
+                            <File Id="XenCenterMainCONFIG" Source="..\XenAdmin\bin\Release\XenCenterMain.exe.config" />
+                            <!-- DLLs -->
+                            <File Id="CommandLibDLL" Source="..\XenAdmin\bin\Release\CommandLib.dll" />
+                            <File Id="CookComputingDLL" Source="..\XenAdmin\bin\Release\CookComputing.XmlRpcV2.dll" />
+                            <File Id="log4netDLL" Source="..\XenAdmin\bin\Release\log4net.dll" />
+                            <File Id="SharpZipLibDLL" Source="..\XenAdmin\bin\Release\ICSharpCode.SharpZipLib.dll" />
+                            <File Id="IonicZipDLL" Source="..\XenAdmin\bin\Release\Ionic.Zip.dll" />
+                            <File Id="MSTSCLibDLL" Source="..\XenAdmin\bin\Release\MSTSCLib.dll" />
+                            <File Id="XenCenterLibDLL" Source="..\XenAdmin\bin\Release\XenCenterLib.dll" />
+                            <File Id="XenCenterVNCDLL" Source="..\XenAdmin\bin\Release\XenCenterVNC.dll" />
+                            <File Id="XenModelDLL" Source="..\XenAdmin\bin\Release\XenModel.dll" />
+                            <File Id="DiscUtils" Source="..\XenAdmin\bin\Release\DiscUtils.dll" />
+                            <File Id="XenOvf" Source="..\XenAdmin\bin\Release\XenOvf.dll" />
+                            <File Id="XenOvfTransport" Source="..\XenAdmin\bin\Release\XenOvfTransport.dll" />
+                            <!-- Icons -->
+                            <File Id="XenCenterIcon" Source="..\XenAdmin\AppIcon.ico" />
+                            <File Id="hotfixCowley" Source="..\XenAdmin\XS56EFP1002.xsupdate" />
+                            <File Id="hotfixMNR" Source="..\XenAdmin\XS56E008.xsupdate" />
+                            <File Id="hotfixBoston" Source="..\XenAdmin\XS60E001.xsupdate" />
+							<File Id="hotfixBostonSanibel" Source="..\XenAdmin\XS60E009.xsupdate" />
+                            <File Id="XvaIcon" Source="..\XenAdmin\Images\file_vm.ico" />
+                            <File Id="XslicIcon" Source="..\XenAdmin\Images\file_license.ico" />
+                            <File Id="XkbIcon" Source="..\XenAdmin\Images\file_backup.ico" />
+                            <File Id="XsupdateIcon" Source="..\XenAdmin\Images\file_updates.ico" />
+							<!-- Define XVA extension -->
+							<ProgId Id="XenCenter.xva" Description="XVA File" Icon="XvaIcon">
+                                <Extension Id="xva" ContentType="application/xva">
+                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="import &quot;%1&quot;" />
+                                </Extension>
+                            </ProgId>
+							<!-- Define OVF extension -->
+							<ProgId Id="XenCenter.ovf" Description="OVF File" Icon="XvaIcon">
+                                <Extension Id="ovf" ContentType="application/ovf">
+                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="import &quot;%1&quot;" />
+                                </Extension>
+                            </ProgId>
+							<!-- Define OVA extension -->
+							<ProgId Id="XenCenter.ova" Description="OVA File" Icon="XvaIcon">
+                                <Extension Id="ova" ContentType="application/ova">
+                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="import &quot;%1&quot;" />
+                                </Extension>
+                            </ProgId>
+							<!-- Define VHD extension -->
+							<ProgId Id="XenCenter.vhd" Description="VHD File" Icon="XvaIcon">
+                                <Extension Id="vhd" ContentType="application/vhd">
+                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="import &quot;%1&quot;" />
+                                </Extension>
+                            </ProgId>
+							<!-- Define VMDK extension -->
+							<ProgId Id="XenCenter.vmdk" Description="VMDK File" Icon="XvaIcon">
+                                <Extension Id="vmdk" ContentType="application/vmdk">
+                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="import &quot;%1&quot;" />
+                                </Extension>
+                            </ProgId>
+							<!-- Define XSLIC extension -->
+							<ProgId Id="XenCenter.xslic" Description="XenServer License File" Icon="XslicIcon">
+                                <Extension Id="xslic" ContentType="application/xslic">
+                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="license &quot;%1&quot;" />
+                                </Extension>
+                            </ProgId>
+							<!-- Define XBK extension -->
+							<ProgId Id="XenCenter.xbk" Description="XenServer Backup File" Icon="XkbIcon">
+                                <Extension Id="xbk" ContentType="application/xbk">
+                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="restore &quot;%1&quot;" />
+                                </Extension>
+                            </ProgId>
+                            <!-- Define XSUPDATE extension -->
+							<ProgId Id="XenCenter.xsupdate" Description="XenServer Update File" Icon="XsupdateIcon">
+                                <Extension Id="xsupdate" ContentType="application/xsupdate">
+                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
+                                </Extension>
+                            </ProgId>
+                            <!-- Define XSOEM extension -->
+							<ProgId Id="XenCenter.xsoem" Description="XenServer OEM Update File" Icon="XsupdateIcon">
+                                <Extension Id="xsoem" ContentType="application/xsoem">
+                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
+                                </Extension>
+                            </ProgId>
+                            <!-- Define XENSEARCH extension -->
+                            <ProgId Id="XenCenter.xensearch" Description="XenCenter Saved Search" Icon="XenCenterIcon">
+                                <Extension Id="xensearch" ContentType="application/xensearch">
+                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="xensearch &quot;%1&quot;" />
+                                </Extension>
+                            </ProgId>
+                        </Component>
+                        <!-- TestResources -->
+                        <Directory Id="TestReso" ShortName="TestReso" Name="TestResources">
+                            <Component Id="TestResources" Guid="FA8D4F56-A94A-467c-9E6B-F3DC26F95B1E">
+                                <File Source="..\XenAdmin\bin\Release\TestResources\credits.xml" />
+                                <File Id="george_1.xml" Source="..\XenAdmin\bin\Release\TestResources\george-xapi-db.xml" />
+                                <File Id="george_2.xml" Source="..\XenAdmin\bin\Release\TestResources\george-xapi-db-2.xml" />
+                                <File Id="interes1.xml" Source="..\XenAdmin\bin\Release\TestResources\interesting-development.xml" />
+                                <File Id="interes2.xml" Source="..\XenAdmin\bin\Release\TestResources\interesting-production.xml" />
+                                <File Id="interes3.xml" Source="..\XenAdmin\bin\Release\TestResources\interesting-xenapp.xml" />
+                            </Component>
+                        </Directory>
+                        <Directory Id="Help" Name="Help">
+                            <Component Id="HelpFiles" Guid="EA8D4F56-A94A-467c-9E6B-F3DC26F95B1E">
+                                <File Id="XenCenterCHM" Source="..\XenAdmin\bin\Release\Help\XenCenter.chm" />
+                                <File Id="WLBCHM" Source="..\XenAdmin\bin\Release\Help\WLB.chm" />
+                            </Component>
+                        </Directory>
+                        <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
+                            <Component Id="ExternalToolsComponent" Guid="D5FC0252-C97B-46e7-9633-A6B68EDB6654">
+                                <File Id="XENSERVERLINUXFIXUP" Source="..\XenOvfApi\External Tools\xenserver-linuxfixup-disk.iso" />
+                                <File Id="REFERENCEVHD" Source="..\XenOvfApi\External Tools\bootablereference.vhd.bz2" />
+                            </Component>
+                        </Directory>
+                        <Directory Id="SCHEMAS" Name="Schemas">
+                            <Component Id="SchemasFilesComponent" Guid="E2186CD8-5064-4414-8AD7-E4495B6A3204">
+                                <File Id="CIMOSXML" Source="..\XenAdmin\bin\Release\Schemas\CIM_OperatingSystem.xml" />
+                                <File Id="CIMRASDXML" Source="..\XenAdmin\bin\Release\Schemas\CIM_ResourceAllocationSettingData.xml" />
+                                <File Id="CIMRASDXSD" Source="..\XenAdmin\bin\Release\Schemas\CIM_ResourceAllocationSettingData.xsd" />
+                                <File Id="CIMVSSDXML" Source="..\XenAdmin\bin\Release\Schemas\CIM_VirtualSystemSettingData.xml" />
+                                <File Id="CIMVSSDXSD" Source="..\XenAdmin\bin\Release\Schemas\CIM_VirtualSystemSettingData.xsd" />
+                                <File Id="COMMONXSD" Source="..\XenAdmin\bin\Release\Schemas\common.xsd" />
+                                <File Id="DSP8023XSD" Source="..\XenAdmin\bin\Release\Schemas\DSP8023.xsd" />
+                                <File Id="DSP8027XSD" Source="..\XenAdmin\bin\Release\Schemas\DSP8027.xsd" />
+                                <File Id="SECEXTXSD" Source="..\XenAdmin\bin\Release\Schemas\secext-1.0.xsd" />
+                                <File Id="WSSUTILXSD" Source="..\XenAdmin\bin\Release\Schemas\wss-utility-1.0.xsd" />
+                                <File Id="XENCXSD" Source="..\XenAdmin\bin\Release\Schemas\xenc-schema.xsd" />
+                                <File Id="XMLXSD" Source="..\XenAdmin\bin\Release\Schemas\xml.xsd" />
+                                <File Id="XMLDSIGXSD" Source="..\XenAdmin\bin\Release\Schemas\xmldsig-core-schema.xsd" />
+                            </Component>
+                        </Directory>
+                    </Directory>
+                </Directory>
+            </Directory>
+            <Directory Id="ProgramMenuFolder">
+                <Directory Id="ApplicationProgramsFolder" Name="Citrix" />
+            </Directory>
+        </Directory>
+        <DirectoryRef Id="TARGETDIR">
+            <Component Id="RegistryEntries" Guid="193BAE1F-F2AE-4451-94DC-4B105DB5179C">
+                <RegistryKey Root="HKMU" Key="Software\Citrix\XenCenter">
+                    <RegistryValue Type="string" Name="InstallDir" Value="[INSTALLDIR]" />
+                </RegistryKey>
+            </Component>
+        </DirectoryRef>
+        <DirectoryRef Id="ApplicationProgramsFolder">
+            <Component Id="ApplicationShortcut" Guid="6B875059-26BC-4fa7-ACB7-0B9A4E4665CA">
+                <Shortcut Id="startmenuXenCenter" ShortName="XenCen50" Name="Citrix XenCenter" Description="XenCenter Shortcut" Target="[INSTALLDIR]XenCenter.exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
+                <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
+                <RegistryValue Root="HKCU" Key="Software\Microsoft\XenCenter" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+            </Component>
+        </DirectoryRef>
+        <Feature Id="MainProgram" Title="Citrix XenCenter" Description="The complete package" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow">
+            <ComponentRef Id="MainExecutable" />
+            <ComponentRef Id="HelpFiles" />
+            <ComponentRef Id="ReportViewer" />
+            <ComponentRef Id="TestResources" />
+            <ComponentRef Id="SchemasFilesComponent" />
+            <ComponentRef Id="ExternalToolsComponent" />
+            <ComponentRef Id="RegistryEntries" />
+            <ComponentRef Id="ApplicationShortcut" />
+        </Feature>
+        <UIRef Id="My_WixUI_InstallDir" />
+        <UIRef Id="WixUI_ErrorProgressText" />
+        <Property Id="Install_All" Value="0" />
+        <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+        <Property Id="FRAMEWORK35">
+            <RegistrySearch Id="Framework35Registry" Type="raw" Root="HKLM" Key="Software\Microsoft\NET Framework Setup\NDP\v3.5" Name="Install" />
+        </Property>
+        <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
+        <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
+        <Condition Message=".NET Framework 3.5 is required for this installation.">FRAMEWORK35 &gt;= "#1"</Condition>
+        <InstallExecuteSequence>
+			<AppSearch Sequence="50" />
+            <FindRelatedProducts Before="LaunchConditions" />
+            <LaunchConditions Sequence="100" />
+            <ValidateProductID Sequence="700" />
+            <CostInitialize Sequence="800" />
+            <FileCost Sequence="900" />
+            <CostFinalize Sequence="1000" />
+            <MigrateFeatureStates Sequence="1200" />
+            <InstallValidate Sequence="1400" />
+            <InstallInitialize Sequence="1500" />
+            <ProcessComponents Sequence="1600" />
+            <UnpublishFeatures Sequence="1800" />
+            <RemoveRegistryValues Sequence="2600" />
+            <RemoveShortcuts Sequence="3200" />
+            <RemoveFiles Sequence="3500" />
+            <InstallFiles Sequence="4000" />
+            <CreateShortcuts Sequence="4500" />
+            <WriteRegistryValues Sequence="5000" />
+            <RegisterUser Sequence="6000" />
+            <RegisterProduct Sequence="6100" />
+            <PublishFeatures Sequence="6300" />
+            <PublishProduct Sequence="6400" />
+            <InstallFinalize Sequence="6600" />
+        </InstallExecuteSequence>
+        <InstallUISequence>
+            <FindRelatedProducts Before="LaunchConditions" />
+            <ExecuteAction Sequence="1102" />
+        </InstallUISequence>
+        <Icon Id="XenCenterICO" SourceFile="..\XenAdmin\AppIcon.ico" />
+    </Product>
+</Wix>

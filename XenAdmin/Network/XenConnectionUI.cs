@@ -1,0 +1,306 @@
+﻿/* Copyright (c) Citrix Systems Inc. 
+ * All rights reserved. 
+ * 
+ * Redistribution and use in source and binary forms, 
+ * with or without modification, are permitted provided 
+ * that the following conditions are met: 
+ * 
+ * *   Redistributions of source code must retain the above 
+ *     copyright notice, this list of conditions and the 
+ *     following disclaimer. 
+ * *   Redistributions in binary form must reproduce the above 
+ *     copyright notice, this list of conditions and the 
+ *     following disclaimer in the documentation and/or other 
+ *     materials provided with the distribution. 
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+ * CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
+ * SUCH DAMAGE.
+ */
+
+using System;
+using System.Drawing;
+using System.IO;
+using System.Net;
+using System.Windows.Forms;
+using XenAdmin.Core;
+using XenAdmin.Dialogs;
+using XenAPI;
+
+
+namespace XenAdmin.Network
+{
+    class XenConnectionUI
+    {
+        /// <summary>
+        /// Start connecting to a server
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="interactive">Whether the user has initiated/is watching this connection attempt.</param>
+        /// <param name="owner">The form that connecting dialogs will be displayed in front of.
+        /// May be null, in which case Program.MainWindow is used.</param>
+        /// <param name="initiateMasterSearch">If true, when connection to the master fails we will start trying to connect to
+        /// each remembered slave in turn.</param>
+        public static void BeginConnect(IXenConnection connection, bool interactive, Form owner, bool initiateMasterSearch)
+        {
+            Program.AssertOnEventThread();
+            RegisterEventHandlers(connection); 
+            if (interactive)
+                new ConnectingToServerDialog(connection).BeginConnect(owner, initiateMasterSearch);
+            else
+                ((XenConnection)connection).BeginConnect(initiateMasterSearch, PromptForNewPassword);
+        }
+
+        public static bool PromptForNewPassword(IXenConnection connection, string oldPassword)
+        {
+            bool result = false;
+            Program.Invoke(Program.MainWindow, delegate()
+                                                   {
+                                                       // show an altered version of the add server dialog with the hostname greyed out
+                                                       AddServerDialog dialog = new AddServerDialog(connection, true);
+                                                       result = dialog.ShowDialog(Program.MainWindow) == DialogResult.OK;
+                                                   });
+            return result;
+        }
+
+        private static void RegisterEventHandlers(IXenConnection connection)
+        {
+            UnregisterEventHandlers(connection);
+            connection.ConnectionResult += Connection_ConnectionResult;
+            connection.ConnectionStateChanged += Connection_ConnectionStateChanged;
+        }
+
+        private static void UnregisterEventHandlers(IXenConnection connection)
+        {
+            connection.ConnectionResult -= Connection_ConnectionResult;
+            connection.ConnectionStateChanged -= Connection_ConnectionStateChanged;
+        }
+
+        internal static void Connection_ConnectionResult(object sender, ConnectionResultEventArgs e)
+        {
+            // Show connection error
+            if (e.Connected || e.Error == null)
+                return;
+
+            IXenConnection connection = (IXenConnection)sender;
+
+            Program.Invoke(Program.MainWindow,
+                           delegate()
+                               {
+                                   ShowConnectingDialogError_(Program.MainWindow, connection, e.Error);
+                               });
+        }
+
+        internal static void ShowConnectingDialogError_(Form owner, IXenConnection connection, Exception error)
+        {
+            if (error is ExpressRestriction)
+            {
+                ExpressRestriction e = (ExpressRestriction)error;
+                Program.Invoke(Program.MainWindow, delegate()
+                {
+                    new LicenseWarningDialog(e.HostName, e.ExistingHostName).ShowDialog(owner);
+                });
+                return;
+            }
+
+            if (error is Failure)
+            {
+                Failure f = (Failure)error;
+                if (f.ErrorDescription[0] == Failure.HOST_IS_SLAVE)
+                {
+                    string oldHost = connection.Name;
+                    ((XenConnection)connection).Hostname = f.ErrorDescription[1];
+
+                    string pool_name = XenConnection.ConnectedElsewhere(((XenConnection)connection).Hostname);
+                    if (pool_name != null)
+                    {
+                        if (!Program.RunInAutomatedTestMode)
+                        {
+                            if (pool_name == oldHost)
+                            {
+                                new ThreeButtonDialog(
+                                    new ThreeButtonDialog.Details(
+                                       SystemIcons.Information,
+                                       string.Format(Messages.OLD_CONNECTION_ALREADY_CONNECTED, pool_name),
+                                       Messages.ADD_NEW_CONNECT_TO)).ShowDialog(owner);
+                            }
+                            else
+                            {
+
+                                new ThreeButtonDialog(
+                                    new ThreeButtonDialog.Details(
+                                       SystemIcons.Information,
+                                        string.Format(Messages.SLAVE_ALREADY_CONNECTED, oldHost, pool_name),
+                                       Messages.ADD_NEW_CONNECT_TO)).ShowDialog(owner);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (DialogResult.Yes ==
+                            new ThreeButtonDialog(
+                                new ThreeButtonDialog.Details(
+                                    SystemIcons.Warning,
+                                    String.Format(Messages.SLAVE_CONNECTION_ERROR, oldHost, ((XenConnection)connection).Hostname),
+                                    Messages.CONNECT_TO_SERVER),
+                                ThreeButtonDialog.ButtonYes,
+                                ThreeButtonDialog.ButtonNo).ShowDialog(owner))
+                        {
+                            BeginConnect(connection, true, owner, false);
+                        }
+                    }
+                }
+                else if (f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED)
+                {
+                    AddError(owner, connection, Messages.ERROR_NO_PERMISSION, Messages.SOLUTION_NO_PERMISSION);
+                }
+                else if (f.ErrorDescription[0] == XenAPI.Failure.SESSION_AUTHENTICATION_FAILED)
+                {
+                    AddError(owner, connection, Messages.ERROR_AUTHENTICATION, Messages.SOLUTION_AUTHENTICATION);
+                }
+                else if (f.ErrorDescription[0] == Failure.HOST_STILL_BOOTING)
+                {
+                    AddError(owner, connection, Messages.ERROR_HOST_STILL_BOOTING, Messages.SOLUTION_HOST_STILL_BOOTING);
+                }
+                else
+                {
+                    AddError(owner, connection, string.IsNullOrEmpty(f.Message) ? Messages.ERROR_UNKNOWN : f.Message, string.Empty);
+                }
+            }
+            else if (error is WebException)
+            {
+                if (((XenConnection)connection).SupressErrors)
+                    return;
+
+                WebException w = (WebException)error;
+                switch (w.Status)
+                {
+                    case WebExceptionStatus.ConnectionClosed:
+                        AddError(owner, connection, Messages.CONNECTION_CLOSED_BY_SERVER, string.Format(Messages.SOLUTION_CHECK_XENSERVER, ((XenConnection)connection).Hostname));
+                        break;
+                    case WebExceptionStatus.ConnectFailure:
+                        AddError(owner, connection, Messages.CONNECTION_REFUSED, string.Format(Messages.SOLUTION_CHECK_XENSERVER, ((XenConnection)connection).Hostname));
+                        break;
+                    case WebExceptionStatus.ProtocolError:
+                        if (w.Message != null && w.Message.Contains("(404)"))
+                            AddError(owner, connection, string.Format(Messages.ERROR_NO_XENSERVER, ((XenConnection)connection).Hostname), string.Format(Messages.SOLUTION_CHECK_XENSERVER, ((XenConnection)connection).Hostname));
+                        else
+                            AddError(owner, connection, Messages.ERROR_UNKNOWN, Messages.SOLUTION_UNKNOWN);
+                        break;
+                    case WebExceptionStatus.NameResolutionFailure:
+                        AddError(owner, connection, string.Format(Messages.ERROR_NOT_FOUND, ((XenConnection)connection).Hostname), Messages.SOLUTION_NOT_FOUND);
+                        break;
+                    case WebExceptionStatus.ReceiveFailure:
+                    case WebExceptionStatus.SendFailure:
+                        AddError(owner, connection, string.Format(Messages.ERROR_NO_XENSERVER, ((XenConnection)connection).Hostname), string.Format(Messages.SOLUTION_CHECK_XENSERVER, ((XenConnection)connection).Hostname));
+                        break;
+                    default:
+                        AddError(owner, connection, Messages.ERROR_UNKNOWN, Messages.SOLUTION_UNKNOWN);
+                        break;
+                }
+            }
+            else if (error is UriFormatException)
+            {
+                AddError(owner, connection, string.Format(Messages.ERROR_INVALID_URI, connection.Name), Messages.SOLUTION_NOT_FOUND);
+            }
+            else if (error is FileNotFoundException)
+            {
+                // If you're using the DbProxy
+                AddError(owner, connection, string.Format(string.Format(Messages.ERROR_FILE_NOT_FOUND, ((XenConnection)connection).Hostname), connection.Name), Messages.SOLUTION_UNKNOWN);
+            }
+            else if (error is ConnectionExists)
+            {
+                ConnectionsManager.ClearCacheAndRemoveConnection(connection);
+
+                if (!Program.RunInAutomatedTestMode)
+                {
+                    ConnectionExists c = error as ConnectionExists;
+
+                    new ThreeButtonDialog(
+                       new ThreeButtonDialog.Details(
+                           SystemIcons.Information,
+                           c.GetDialogMessage(connection),
+                           Messages.XENCENTER)).ShowDialog(owner);
+                }
+            }
+            else if (error is ArgumentException)
+            {
+                // This happens if the server API is incompatible with our bindings.  This should
+                // never happen in production, but will happen during development if a field
+                // changes type, for example.
+                AddError(owner, connection, Messages.SERVER_API_INCOMPATIBLE, Messages.SOLUTION_UNKNOWN);
+            }
+            else
+            {
+                if (((XenConnection)connection).SupressErrors)
+                    return;
+
+                AddError(owner, connection, string.Format(Messages.ERROR_UNKNOWN, ((XenConnection)connection).Hostname), Messages.SOLUTION_UNKNOWN);
+            }
+        }
+
+        private static void AddError(Form owner, IXenConnection connection, string error, string solution)
+        {
+            string text = string.Format(Messages.MESSAGEBOX_ERRORTEXT, ((XenConnection)connection).Hostname, error, solution);
+
+            // first check if there is already a dialog showing the same error (CA-97070, CA-88901)
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(ThreeButtonDialog))
+                {
+                    ThreeButtonDialog dlg = (ThreeButtonDialog) form;
+                    if (dlg.Message == text && dlg.Owner == owner)
+                    {
+                        HelpersGUI.BringFormToFront(form);
+                        return;
+                    }
+                }
+            }
+
+            if (((XenConnection)connection).fromDialog)
+            {
+                if (DialogResult.Retry == new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Error, text, Messages.CONNECT_TO_SERVER),
+                    new ThreeButtonDialog.TBDButton(Messages.RETRY_BUTTON_LABEL, DialogResult.Retry, ThreeButtonDialog.ButtonType.ACCEPT, true),
+                    ThreeButtonDialog.ButtonCancel).ShowDialog(owner))
+                {
+                    new AddServerDialog(connection, false).Show(owner);
+                }
+            }
+            else
+            {
+                new ThreeButtonDialog(
+                   new ThreeButtonDialog.Details(
+                       SystemIcons.Error,
+                       text,
+                       Messages.CONNECT_TO_SERVER)).ShowDialog(owner);
+            }
+        }
+
+        private static void Connection_ConnectionStateChanged(object sender, EventArgs e)
+        {
+            // Close dialogs on termination
+            IXenConnection connection = (IXenConnection)sender;
+
+            if (connection.IsConnected)
+                return;
+
+            Program.Invoke(Program.MainWindow,
+                           delegate()
+                           {
+                               XenDialogBase.CloseAll(connection);
+                           });
+        }
+    }
+}

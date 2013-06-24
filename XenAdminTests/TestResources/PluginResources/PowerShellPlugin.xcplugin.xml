@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XenCenterPlugin xmlns="http://www.citrix.com/XenCenter/Plugins/schema" version="1" plugin_name="PowerShellPlugin" plugin_version="1.0.0.0">
+  <MenuItem name="file_PowerShellTest1" menu="file" serialized="none">
+    <PowerShell filename="TestResources\PluginResources\PowerShellTest.ps1" window="true"/>
+  </MenuItem>
+  <MenuItem name="view_PowerShellTest1" menu="view" serialized="none">
+    <PowerShell filename="TestResources\PluginResources\PowerShellTest.ps1" window="true"/>
+  </MenuItem>
+  <MenuItem name="pool_PowerShellTest1" menu="pool" serialized="none">
+    <PowerShell filename="TestResources\PluginResources\PowerShellTest.ps1" window="true"/>
+  </MenuItem>
+  <MenuItem name="server_PowerShellTest1" menu="server" serialized="none">
+    <PowerShell filename="TestResources\PluginResources\PowerShellTest.ps1" window="true"/>
+  </MenuItem>
+  <MenuItem name="vm_PowerShellTest1" menu="vm" serialized="none">
+    <PowerShell filename="TestResources\PluginResources\PowerShellTest.ps1" window="true"/>
+  </MenuItem>
+  <MenuItem name="storage_PowerShellTest1" menu="storage" serialized="none">
+    <PowerShell filename="TestResources\PluginResources\PowerShellTest.ps1" window="true"/>
+  </MenuItem>
+  <MenuItem name="templates_PowerShellTest1" menu="templates" serialized="none">
+    <PowerShell filename="TestResources\PluginResources\PowerShellTest.ps1" window="true"/>
+  </MenuItem>
+  <MenuItem name="tools_PowerShellTest1" menu="tools" serialized="none">
+    <PowerShell filename="TestResources\PluginResources\PowerShellTest.ps1" window="true"/>
+  </MenuItem>
+  <MenuItem name="window_PowerShellTest1" menu="window" serialized="none">
+    <PowerShell filename="TestResources\PluginResources\PowerShellTest.ps1" window="true"/>
+  </MenuItem>
+  <MenuItem name="help_PowerShellTest1" menu="help" serialized="none">
+    <PowerShell filename="TestResources\PluginResources\PowerShellTest.ps1" window="true"/>
+  </MenuItem>
+</XenCenterPlugin>

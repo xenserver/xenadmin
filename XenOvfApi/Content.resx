@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CONVERT_APP_NAME" xml:space="preserve">
+    <value>Xen Appliance Wizard</value>
+  </data>
+  <data name="CONVERT_VMX_VSSD_CAPTION" xml:space="preserve">
+    <value>Converted from VMWare VMX</value>
+  </data>
+  <data name="CONVERT_VPC_VSSD_CAPTION" xml:space="preserve">
+    <value>Converted from Virtual PC</value>
+  </data>
+  <data name="CONVERT_XVA_VSSD_CAPTION" xml:space="preserve">
+    <value>Converted from XVA version 0.1</value>
+  </data>
+  <data name="CULTURE_AVAILABLE" xml:space="preserve">
+    <value>Culture</value>
+  </data>
+  <data name="INSTALL_SECTION_INFO_1" xml:space="preserve">
+    <value>Use the Run Once Disk to configure Linux for startup.</value>
+  </data>
+  <data name="IS_DISK_RASD_FILTER" xml:space="preserve">
+    <value>COM,FLOPPY,ISO,DISPLAY</value>
+  </data>
+  <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_1" xml:space="preserve">
+    <value>XenServer Specific Information</value>
+  </data>
+  <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_2" xml:space="preserve">
+    <value>Boot Order: CD/DVD - Network - Disk</value>
+  </data>
+  <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_3" xml:space="preserve">
+    <value>XenServer Platform Information</value>
+  </data>
+  <data name="POST_INSTALL_SECTION_INFO_1" xml:space="preserve">
+    <value>XenServer Post Install Operations ONLY (Attempt to fix up Linux distributions.)</value>
+  </data>
+  <data name="RASD_10_ALLOCATIONUNITS" xml:space="preserve">
+    <value>Ports</value>
+  </data>
+  <data name="RASD_10_CAPTION" xml:space="preserve">
+    <value>Network Adapter</value>
+  </data>
+  <data name="RASD_10_DESCRIPTION" xml:space="preserve">
+    <value>Network Adapter</value>
+  </data>
+  <data name="RASD_10_ELEMENTNAME" xml:space="preserve">
+    <value>Ethernet Port</value>
+  </data>
+  <data name="RASD_16_ALLOCATIONUNITS" xml:space="preserve">
+    <value>DVD Drives</value>
+  </data>
+  <data name="RASD_16_CAPTION" xml:space="preserve">
+    <value>CD/DVD Drive</value>
+  </data>
+  <data name="RASD_16_DESCRIPTION" xml:space="preserve">
+    <value>Xen CD/DVD Drive Setting Data.</value>
+  </data>
+  <data name="RASD_16_ELEMENTNAME" xml:space="preserve">
+    <value>CD/DVD Drive</value>
+  </data>
+  <data name="RASD_19_ALLOCATIONUNITS" xml:space="preserve">
+    <value>Disk</value>
+  </data>
+  <data name="RASD_19_CAPTION" xml:space="preserve">
+    <value>Hard Disk Image</value>
+  </data>
+  <data name="RASD_19_DESCRIPTION" xml:space="preserve">
+    <value>Hard Disk Image</value>
+  </data>
+  <data name="RASD_19_ELEMENTNAME" xml:space="preserve">
+    <value>Hard Disk Image</value>
+  </data>
+  <data name="RASD_19_RESOURCESUBTYPE" xml:space="preserve">
+    <value>Virtual Hard Disk Image</value>
+  </data>
+  <data name="RASD_3_ALLOCATIONUNITS" xml:space="preserve">
+    <value>Processor Cores</value>
+  </data>
+  <data name="RASD_3_CAPTION" xml:space="preserve">
+    <value>Processor</value>
+  </data>
+  <data name="RASD_3_DESCRIPTION" xml:space="preserve">
+    <value>Processor</value>
+  </data>
+  <data name="RASD_3_ELEMENTNAME" xml:space="preserve">
+    <value>Processor</value>
+  </data>
+  <data name="RASD_4_ALLOCATIONUNITS" xml:space="preserve">
+    <value>byte * 2^20</value>
+  </data>
+  <data name="RASD_4_CAPTION" xml:space="preserve">
+    <value>Memory</value>
+  </data>
+  <data name="RASD_4_DESCRIPTION" xml:space="preserve">
+    <value>Memory Setting Data</value>
+  </data>
+  <data name="RASD_4_ELEMENTNAME" xml:space="preserve">
+    <value>Memory</value>
+  </data>
+  <data name="RASD_4_RESOURCESUBTYPE" xml:space="preserve">
+    <value>Machine Memory</value>
+  </data>
+  <data name="RASD_CONTROLLER_ALLOCATIONUNITS" xml:space="preserve">
+    <value>Controllers</value>
+  </data>
+  <data name="RASD_CONTROLLER_DESCRIPTION" xml:space="preserve">
+    <value>{0} Controller</value>
+  </data>
+  <data name="RASD_CONTROLLER_ELEMENTNAME" xml:space="preserve">
+    <value>{0}  {1} Controller</value>
+  </data>
+  <data name="RASD_CONTROLLER_IDE" xml:space="preserve">
+    <value>IDE</value>
+  </data>
+  <data name="RASD_CONTROLLER_OTHER" xml:space="preserve">
+    <value>OTHER</value>
+  </data>
+  <data name="RASD_CONTROLLER_SCSI" xml:space="preserve">
+    <value>SCSI</value>
+  </data>
+  <data name="RASD_CONTROLLER_SCSI_DESCRIPTION" xml:space="preserve">
+    <value>SCSI BUS[{0}] LUN[{1}] PORT[{2}] TARGETID[{3}]</value>
+  </data>
+  <data name="RASD_CONTROLLER_SCSI_SUBTYPE" xml:space="preserve">
+    <value>lsilogic</value>
+  </data>
+  <data name="RASD_CONTROLLER_UNKNOWN" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="RASD_UNKNOWN_ELEMENTNAME" xml:space="preserve">
+    <value>Unknown Element Name</value>
+  </data>
+  <data name="SECTION_DISK_INFO" xml:space="preserve">
+    <value>Available Disks</value>
+  </data>
+  <data name="SECTION_EULA_INFO" xml:space="preserve">
+    <value>License Agreement</value>
+  </data>
+  <data name="SECTION_NETWORK_INFO" xml:space="preserve">
+    <value>Available Networks</value>
+  </data>
+  <data name="SECTION_OPERATINGSYSTEM_DESCRIPTION" xml:space="preserve">
+    <value>XenOVF Created Export</value>
+  </data>
+  <data name="SECTION_OPERATINGSYSTEM_INFO" xml:space="preserve">
+    <value>Guest Operating System</value>
+  </data>
+  <data name="SECTION_OPERATINGSYSTEM_VERSION" xml:space="preserve">
+    <value>Version {0}.{1}</value>
+  </data>
+  <data name="SECTION_STARTUP_INFO" xml:space="preserve">
+    <value>Startup Options</value>
+  </data>
+  <data name="VIRTUAL_DISK_DESC_CAPACITYALLOCATIONUNITS" xml:space="preserve">
+    <value>bytes</value>
+  </data>
+  <data name="VIRTUAL_HARDWARE_SECTION_INFO" xml:space="preserve">
+    <value>Virtual Hardware Requirements: {0} MB RAM; {1} CPU(s), {2} Disk(s), {3} Network(s)</value>
+  </data>
+  <data name="VIRTUAL_SYSTEM_COLLECTION_TYPE_INFO" xml:space="preserve">
+    <value>OVF/OVA Packages</value>
+  </data>
+  <data name="VIRTUAL_SYSTEM_TYPE_INFO" xml:space="preserve">
+    <value>XenOVF Generated</value>
+  </data>
+  <data name="VSSD_CAPTION" xml:space="preserve">
+    <value>Xen Virtual Machine</value>
+  </data>
+  <data name="XENSERVER_PLATFORM_DESCRIPTION" xml:space="preserve">
+    <value>XenServer Platform Configuration Item</value>
+  </data>
+  <data name="XENSERVER_SPECIFIC_DESCRIPTION" xml:space="preserve">
+    <value>XenServer Specific Configuration Item</value>
+  </data>
+</root>

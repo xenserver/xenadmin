@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xc="http://www.citrix.com/XenCenter/Plugins/schema" targetNamespace="http://www.citrix.com/XenCenter/Plugins/schema" elementFormDefault="qualified">
+	<xsd:element name="XenCenterPlugin">
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element ref="xc:menu-entry"/>
+			</xsd:choice>
+			<xsd:attribute name="plugin_provider" type="xsd:string" use="required"/>
+			<xsd:attribute name="plugin_version" type="xc:versionnumber" use="required"/>
+			<xsd:attribute name="plugin_name" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="menu-entry">
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element ref="xc:shell"/>
+			</xsd:choice>
+			<xsd:attribute name="name" type="xsd:string" use="required"/>
+			<xsd:attribute name="label" type="xsd:string" use="required"/>
+			<xsd:attribute name="tooltip" type="xsd:string"/>
+			<xsd:attribute name="image" type="xsd:string"/>
+			<xsd:attribute name="heading" type="xc:xcheading" use="required"/>
+			<xsd:attribute name="allowed-operation" type="xsd:string"/>
+			<xsd:attribute name="serialized" type="xc:xcserlevel"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="shell">
+		<xsd:complexType>
+			<xsd:attribute name="filename" type="xsd:string" use="required"/>
+			<xsd:attribute name="window" type="xsd:boolean"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="xcheading">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Server"/>
+			<xsd:enumeration value="VM"/>
+			<xsd:enumeration value="Pool"/>
+			<xsd:enumeration value="Storage"/>
+			<xsd:enumeration value="Templates"/>
+			<xsd:enumeration value="File"/>
+			<xsd:enumeration value="View"/>
+			<xsd:enumeration value="Tools"/>
+			<xsd:enumeration value="Window"/>
+			<xsd:enumeration value="Help"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="xcserlevel">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="global"/>
+			<xsd:enumeration value="object"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="versionnumber">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="([0-9]+[.][0-9]+[.][0-9]+[.][0-9]+)"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

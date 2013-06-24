@@ -1,0 +1,265 @@
+<?xml version="1.0"?>
+<CIM CIMVERSION="2.3" DTDVERSION="2.2">
+  <DECLARATION>
+    <DECLGROUP>
+      <VALUE.OBJECT>
+        <CLASS SUPERCLASS="CIM_SettingData" NAME="CIM_VirtualSystemSettingData">
+          <QUALIFIER TOSUBCLASS="false" NAME="Experimental" TYPE="boolean">
+            <VALUE>true</VALUE>
+          </QUALIFIER>
+          <QUALIFIER TOSUBCLASS="false" TRANSLATABLE="true" NAME="Version" TYPE="string">
+            <VALUE>2.16.0</VALUE>
+          </QUALIFIER>
+          <QUALIFIER NAME="UMLPackagePath" TYPE="string">
+            <VALUE>CIM::System::SystemElements</VALUE>
+          </QUALIFIER>
+          <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+            <VALUE>
+              CIM_VirtualSystemSettingData defines the virtual aspects of a virtual system through a set of virtualization specific properties. CIM_VirtualSystemSettingData is also used as the top level class of virtual system configurations. Virtual system configurations model configuration information about virtual systems and their components. A virtual system configuration consists of one top-level instance of class CIM_VirtualSystemSettingData that aggregates a number of instances of class CIM_ResourceAllocationSettingData, using association CIM_ConcreteComponent.
+              Virtual system configurations may for example be used to reflect configurations of
+              - virtual systems that are defined at a virtualization platform,
+              - virtual systems that are currently active,
+              - input requests to create new virtual systems,
+              - input requests to modify existing virtual systems, or
+              - snapshots of virtual systems.
+            </VALUE>
+          </QUALIFIER>
+          <PROPERTY CLASSORIGIN="CIM_VirtualSystemSettingData" PROPAGATED="false" NAME="VirtualSystemIdentifier" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                VirtualSystemIdentifier shall reflect a unique name for the system as it is used within the virtualization platform. Note that the VirtualSystemIdentifier is not the hostname assigned to the operating system instance running within the virtual system, nor is it an IP address or MAC address assigned to any of its network ports.
+                On create requests VirtualSystemIdentifier may contain implementation specific rules (like simple patterns or regular expresssion) that may be interpreted by the implementation when assigning a VirtualSystemIdentifier.
+              </VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_VirtualSystemSettingData" PROPAGATED="false" NAME="VirtualSystemType" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                VirtualSystemType shall reflect a particular type of virtual system. Implementations are commonly capable to support various implementation defined virtual system types.
+                As stated in the class description, instances of this class may be used for various purposes. A management application intending to use an instance of this class as input parameter to an operation that creates or modifies a virtual system should first determine the set of valid virtual system types that are supported by the virtualization platform hosting the virtual system by inspecting values of array property VirtualSystemTypesSupported of the instance of class CIM_VirtualSystemManagementCapabilities that describes the capabilities of the virtualization platform.
+              </VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY.ARRAY CLASSORIGIN="CIM_VirtualSystemSettingData" PROPAGATED="false" NAME="Notes" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>End-user supplied notes that are related to the virtual system.</VALUE>
+            </QUALIFIER>
+          </PROPERTY.ARRAY>
+          <PROPERTY CLASSORIGIN="CIM_VirtualSystemSettingData" PROPAGATED="false" NAME="CreationTime" TYPE="datetime">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Time when the virtual system configuration was created.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_VirtualSystemSettingData" PROPAGATED="false" NAME="ConfigurationID" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Unique id of the virtual system configuration. Note that the ConfigurationID is different from the InstanceID as it is assigned by the implementation to a virtual system or a virtual system configuration. It is not a key, and the same value may occur within more than one instance.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_VirtualSystemSettingData" PROPAGATED="false" NAME="ConfigurationDataRoot" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Filepath of a directory where information about the virtual system configuration is stored.Format shall be URI based on RFC 2079.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_VirtualSystemSettingData" PROPAGATED="false" NAME="ConfigurationFile" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Filepath of a file where information about the virtual system configuration is stored. A relative path appends to the value of the ConfigurationDataRoot property.Format shall be URI based on RFC 2079.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_VirtualSystemSettingData" PROPAGATED="false" NAME="SnapshotDataRoot" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Filepath of a directory where information about virtual system snapshots is stored. A relative path appends to the value of the ConfigurationDataRoot property.Format shall be URI based on RFC 2079.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_VirtualSystemSettingData" PROPAGATED="false" NAME="SuspendDataRoot" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Filepath of a directory where suspend related information about the virtual system is stored. A relative path appends to the value of the ConfigurationDataRoot property.Format shall be URI based on RFC 2079.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_VirtualSystemSettingData" PROPAGATED="false" NAME="SwapFileDataRoot" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Filepath of a directory where swapfiles of the virtual system are stored. A relative path appends to the value of the ConfigurationDataRoot property.Format shall be URI based on RFC 2079.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_VirtualSystemSettingData" PROPAGATED="false" NAME="LogDataRoot" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Filepath of a directory where log information about the virtual system is stored. A relative path appends to the value of the ConfigurationDataRoot property.Format shall be URI based on RFC 2079.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_VirtualSystemSettingData" PROPAGATED="false" NAME="AutomaticStartupAction" TYPE="uint16">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Action to take for the virtual system when the host is started.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ValueMap" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>2</VALUE>
+                <VALUE>3</VALUE>
+                <VALUE>4</VALUE>
+                <VALUE>..</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Values" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>None</VALUE>
+                <VALUE>Restart if previously active</VALUE>
+                <VALUE>Always startup</VALUE>
+                <VALUE>DMTF Reserved</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_VirtualSystemSettingData" PROPAGATED="false" NAME="AutomaticStartupActionDelay" TYPE="datetime">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Delay applicable to startup action. The value shall be in the interval variant of the datetime datatype.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_VirtualSystemSettingData" PROPAGATED="false" NAME="AutomaticStartupActionSequenceNumber" TYPE="uint16">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Number indicating the relative sequence of virtual system activation when the host system is started. A lower number indicates earlier activation. If one or more configurations show the same value, the sequence is implementation dependent. A value of 0 indicates that the sequence is implementation dependent.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_VirtualSystemSettingData" PROPAGATED="false" NAME="AutomaticShutdownAction" TYPE="uint16">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Action to take for the virtual system when the host is shut down.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ValueMap" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>2</VALUE>
+                <VALUE>3</VALUE>
+                <VALUE>4</VALUE>
+                <VALUE>..</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Values" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>Turn Off</VALUE>
+                <VALUE>Save state</VALUE>
+                <VALUE>Shutdown</VALUE>
+                <VALUE>DMTF Reserved</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_VirtualSystemSettingData" PROPAGATED="false" NAME="AutomaticRecoveryAction" TYPE="uint16">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Action to take for the virtual system when the software executed by the virtual system fails. Failures in this case means a failure that is detectable by the host platform, such as a non-interuptable wait state condition.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ValueMap" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>2</VALUE>
+                <VALUE>3</VALUE>
+                <VALUE>4</VALUE>
+                <VALUE>..</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Values" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>None</VALUE>
+                <VALUE>Restart</VALUE>
+                <VALUE>Revert to snapshot</VALUE>
+                <VALUE>DMTF Reserved</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_VirtualSystemSettingData" PROPAGATED="false" NAME="RecoveryFile" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Filepath of a file where recovery relateded information of the virtual system is stored.Format shall be URI based on RFC 2079.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_SettingData" PROPAGATED="true" NAME="InstanceID" TYPE="string">
+            <QUALIFIER OVERRIDABLE="false" NAME="Key" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TOSUBCLASS="false" NAME="Override" TYPE="string">
+              <VALUE>InstanceID</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                Within the scope of the instantiating Namespace, InstanceID opaquely and uniquely identifies an instance of this class. To ensure uniqueness within the NameSpace, the value of InstanceID should be constructed using the following &quot;preferred&quot; algorithm:
+                &lt;OrgID&gt;:&lt;LocalID&gt;
+                Where &lt;OrgID&gt; and &lt;LocalID&gt; are separated by a colon (:), and where &lt;OrgID&gt; must include a copyrighted, trademarked, or otherwise unique name that is owned by the business entity that is creating or defining the InstanceID or that is a registered ID assigned to the business entity by a recognized global authority. (This requirement is similar to the &lt;Schema Name&gt;_&lt;Class Name&gt; structure of Schema class names.) In addition, to ensure uniqueness, &lt;OrgID&gt; must not contain a colon (:). When using this algorithm, the first colon to appear in InstanceID must appear between &lt;OrgID&gt; and &lt;LocalID&gt;.
+                &lt;LocalID&gt; is chosen by the business entity and should not be reused to identify different underlying (real-world) elements. If the above &quot;preferred&quot; algorithm is not used, the defining entity must assure that the resulting InstanceID is not reused across any InstanceIDs produced by this or other providers for the NameSpace of this instance.
+                For DMTF-defined instances, the &quot;preferred&quot; algorithm must be used with the &lt;OrgID&gt; set to CIM.
+              </VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_SettingData" PROPAGATED="true" NAME="ElementName" TYPE="string">
+            <QUALIFIER OVERRIDABLE="false" NAME="Required" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TOSUBCLASS="false" NAME="Override" TYPE="string">
+              <VALUE>ElementName</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>The user-friendly name for this instance of SettingData. In addition, the user-friendly name can be used as an index property for a search or query. (Note: The name does not have to be unique within a namespace.)</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_SettingData" PROPAGATED="true" NAME="ConfigurationName" TYPE="string">
+            <QUALIFIER TOSUBCLASS="false" NAME="Experimental" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>An instance of CIM_SettingData may correspond to a well-known configuration that exists for an associated CIM_ManagedElement. If the ConfigurationName property is non-NULL, the instance of CIM_SettingData shall correspond to a well-known configuration for a Managed Element, the value of the ConfigurationName property shall be the name of the configuration, and the ChangeableType property shall have the value 0 or 2. A value of NULL for the ConfigurationName property shall mean that the instance of CIM_SettingData does not correspond to a well-known configuration for a Managed Element or that this information is unknown.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_SettingData" PROPAGATED="true" NAME="ChangeableType" TYPE="uint16">
+            <QUALIFIER TOSUBCLASS="false" NAME="Experimental" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Enumeration indicating the type of setting. 0 &quot;Not Changeable - Persistent&quot; indicates the instance of SettingData represents primordial settings and shall not be modifiable. 1 &quot;Changeable - Transient&quot; indicates the SettingData represents modifiable settings that are not persisted. Establishing persistent settings from transient settings may be supported. 2 &quot;Changeable - Persistent&quot; indicates the SettingData represents a persistent configuration that may be modified. 3 &quot;Not Changeable - Transient&quot; indicates the SettingData represents a snapshot of the settings of the associated ManagedElement and is not persistent.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ValueMap" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>0</VALUE>
+                <VALUE>1</VALUE>
+                <VALUE>2</VALUE>
+                <VALUE>3</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Values" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>Not Changeable - Persistent</VALUE>
+                <VALUE>Changeable - Transient</VALUE>
+                <VALUE>Changeable - Persistent</VALUE>
+                <VALUE>Not Changeable - Transient</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ManagedElement" PROPAGATED="true" NAME="Caption" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>The Caption property is a short textual description (one- line string) of the object.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="MaxLen" TYPE="uint32">
+              <VALUE>64</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ManagedElement" PROPAGATED="true" NAME="Description" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>The Description property provides a textual description of the object.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ManagedElement" PROPAGATED="true" NAME="Generation" TYPE="uint64">
+            <QUALIFIER TOSUBCLASS="false" NAME="Experimental" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                Generation is an optional, monotonically increasing property that may be used to identify a particular generation of the resource represented by this class.
+                If Generation is supported by the implementation, its value shall not be null.
+                Except as otherwise specified, a value (including null) of Generation specified at creation time shall be replaced by null if Generation is not supported by the implementation or shall be a, (possibly different), non-null value if the implementation does support Generation.
+                After creation and if supported, Generation shall be updated, at least once per access, whenever the represented resource is modified, regardless of the source of the modification.
+                Note: the Generation value only needs to be updated once between references, even if the resource is updated many times. The key point is to assure that it will be different if there have been updates, not to count each update.
+                Note: unless otherwise specified, the value of Generation within one instance is not required to be coordinated with the value of Generation in any other instance.
+                Note:the semantics of the instance, (as defined by its creation class), define the underlying resource. That underlying resource may be a collection or aggregation of resources. And, in that case, the semantics of the instance further define when updates to constituent resources also require updates to the Generation of the collective resource. Default behavior of composite aggregations should be to update the Generation of the composite whenever the Generation of a component is updated.
+                Subclasses may define additional requirements for updates on some or all of related instances.
+                For a particular instance, the value of Generation may wrap through zero, but the elapsed time between wraps shall be greater than 10&apos;s of years.
+                This class does not require Generation to be unique across instances of other classes nor across instances of the same class that have different keys. Generation shall be different across power cycles, resets, or reboots if any of those actions results in an update. Generation may be different across power cycles, resets, or reboots if those actions do not result in an update. If the Generation property of an instance is non-null, and if any attempt to update the instance includes the Generation property, then if it doesn&apos;t match the current value, the update shall fail.
+                The usage of this property is intended to be further specified by applicable management profiles.
+                Typically, a client will read the value of this property and then supply that value as input to an operation that modifies the instance in some means. This may be via an explicit parameter in an extrinsic method or via an embedded value in an extrinsic method or intrinsic operation.
+                For example: a profile may require that an intrinsic instance modification supply the Generation property and that it must match for the modification to succeed.
+              </VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+        </CLASS>
+      </VALUE.OBJECT>
+    </DECLGROUP>
+  </DECLARATION>
+</CIM>

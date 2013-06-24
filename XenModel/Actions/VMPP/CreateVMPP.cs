@@ -1,0 +1,75 @@
+﻿/* Copyright (c) Citrix Systems Inc. 
+ * All rights reserved. 
+ * 
+ * Redistribution and use in source and binary forms, 
+ * with or without modification, are permitted provided 
+ * that the following conditions are met: 
+ * 
+ * *   Redistributions of source code must retain the above 
+ *     copyright notice, this list of conditions and the 
+ *     following disclaimer. 
+ * *   Redistributions in binary form must reproduce the above 
+ *     copyright notice, this list of conditions and the 
+ *     following disclaimer in the documentation and/or other 
+ *     materials provided with the distribution. 
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+ * CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
+ * SUCH DAMAGE.
+ */
+
+using System;
+using System.Collections.Generic;
+using XenAPI;
+using XenAdmin.Core;
+
+
+namespace XenAdmin.Actions
+{
+    public class CreateVMPP : AsyncAction
+    {
+        private VMPP _record;
+        private List<VM> _vms;
+        private bool _runNow = false;
+        public CreateVMPP( VMPP record, List<VM> vms, bool runNow)
+            : base(record.Connection, Messages.CREATE_POLICY)
+        {
+            _record = record;
+            _vms = vms;
+            _runNow = runNow;
+            Pool = Helpers.GetPool(record.Connection);
+            ApiMethodsToRoleCheck.Add("VMPP.async_create");
+            ApiMethodsToRoleCheck.Add("VM.set_protection_policy");
+            ApiMethodsToRoleCheck.Add("VMPP.protect_now");
+        }
+
+        protected override void Run()
+        {
+            Description = string.Format(Messages.CREATING_VMPP, _record.Name);
+            RelatedTask = VMPP.async_create(Session, _record);
+            PollToCompletion();
+            var vmppref = new XenRef<VMPP>(Result);
+            Connection.WaitForCache(vmppref);
+            foreach (var selectedVM in _vms)
+            {
+                VM.set_protection_policy(Session, selectedVM.opaque_ref, vmppref.opaque_ref);
+            }
+            Description = string.Format(Messages.CREATED_VMPP, _record.Name);
+            PercentComplete = 60;
+            if (_runNow)
+                VMPP.protect_now(Session, vmppref);
+            PercentComplete = 100;
+        }
+    }
+}

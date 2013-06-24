@@ -1,0 +1,1344 @@
+<?xml version="1.0"?>
+<CIM CIMVERSION="2.3" DTDVERSION="2.2">
+  <DECLARATION>
+    <DECLGROUP>
+      <VALUE.OBJECT>
+        <CLASS SUPERCLASS="CIM_EnabledLogicalElement" NAME="CIM_OperatingSystem">
+          <QUALIFIER TOSUBCLASS="false" TRANSLATABLE="true" NAME="Version" TYPE="string">
+            <VALUE>2.17.1</VALUE>
+          </QUALIFIER>
+          <QUALIFIER NAME="UMLPackagePath" TYPE="string">
+            <VALUE>CIM::System::OperatingSystem</VALUE>
+          </QUALIFIER>
+          <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+            <VALUE>An OperatingSystem is software/firmware that makes a ComputerSystem&apos;s hardware usable, and implements and/or manages the resources, file systems, processes, user interfaces, services, ... available on the ComputerSystem.</VALUE>
+          </QUALIFIER>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="CSCreationClassName" TYPE="string">
+            <QUALIFIER OVERRIDABLE="false" NAME="Key" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>The scoping ComputerSystem&apos;s CreationClassName.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="MaxLen" TYPE="uint32">
+              <VALUE>256</VALUE>
+            </QUALIFIER>
+            <QUALIFIER OVERRIDABLE="false" NAME="Propagated" TYPE="string">
+              <VALUE>CIM_ComputerSystem.CreationClassName</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="CSName" TYPE="string">
+            <QUALIFIER OVERRIDABLE="false" NAME="Key" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>The scoping ComputerSystem&apos;s Name.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="MaxLen" TYPE="uint32">
+              <VALUE>256</VALUE>
+            </QUALIFIER>
+            <QUALIFIER OVERRIDABLE="false" NAME="Propagated" TYPE="string">
+              <VALUE>CIM_ComputerSystem.Name</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="CreationClassName" TYPE="string">
+            <QUALIFIER OVERRIDABLE="false" NAME="Key" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>CreationClassName indicates the name of the class or the subclass used in the creation of an instance. When used with the other key properties of this class, this property allows all instances of this class and its subclasses to be uniquely identified.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="MaxLen" TYPE="uint32">
+              <VALUE>256</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="Name" TYPE="string">
+            <QUALIFIER OVERRIDABLE="false" NAME="Key" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TOSUBCLASS="false" NAME="Override" TYPE="string">
+              <VALUE>Name</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>The inherited Name serves as key of an OperatingSystem instance within a ComputerSystem.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="MaxLen" TYPE="uint32">
+              <VALUE>256</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="MappingStrings" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>MIF.DMTF|Operating System|001.2</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="OSType" TYPE="uint16">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>A integer indicating the type of OperatingSystem.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ValueMap" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>0</VALUE>
+                <VALUE>1</VALUE>
+                <VALUE>2</VALUE>
+                <VALUE>3</VALUE>
+                <VALUE>4</VALUE>
+                <VALUE>5</VALUE>
+                <VALUE>6</VALUE>
+                <VALUE>7</VALUE>
+                <VALUE>8</VALUE>
+                <VALUE>9</VALUE>
+                <VALUE>10</VALUE>
+                <VALUE>11</VALUE>
+                <VALUE>12</VALUE>
+                <VALUE>13</VALUE>
+                <VALUE>14</VALUE>
+                <VALUE>15</VALUE>
+                <VALUE>16</VALUE>
+                <VALUE>17</VALUE>
+                <VALUE>18</VALUE>
+                <VALUE>19</VALUE>
+                <VALUE>20</VALUE>
+                <VALUE>21</VALUE>
+                <VALUE>22</VALUE>
+                <VALUE>23</VALUE>
+                <VALUE>24</VALUE>
+                <VALUE>25</VALUE>
+                <VALUE>26</VALUE>
+                <VALUE>27</VALUE>
+                <VALUE>28</VALUE>
+                <VALUE>29</VALUE>
+                <VALUE>30</VALUE>
+                <VALUE>31</VALUE>
+                <VALUE>32</VALUE>
+                <VALUE>33</VALUE>
+                <VALUE>34</VALUE>
+                <VALUE>35</VALUE>
+                <VALUE>36</VALUE>
+                <VALUE>37</VALUE>
+                <VALUE>38</VALUE>
+                <VALUE>39</VALUE>
+                <VALUE>40</VALUE>
+                <VALUE>41</VALUE>
+                <VALUE>42</VALUE>
+                <VALUE>43</VALUE>
+                <VALUE>44</VALUE>
+                <VALUE>45</VALUE>
+                <VALUE>46</VALUE>
+                <VALUE>47</VALUE>
+                <VALUE>48</VALUE>
+                <VALUE>49</VALUE>
+                <VALUE>50</VALUE>
+                <VALUE>51</VALUE>
+                <VALUE>52</VALUE>
+                <VALUE>53</VALUE>
+                <VALUE>54</VALUE>
+                <VALUE>55</VALUE>
+                <VALUE>56</VALUE>
+                <VALUE>57</VALUE>
+                <VALUE>58</VALUE>
+                <VALUE>59</VALUE>
+                <VALUE>60</VALUE>
+                <VALUE>61</VALUE>
+                <VALUE>62</VALUE>
+                <VALUE>63</VALUE>
+                <VALUE>64</VALUE>
+                <VALUE>65</VALUE>
+                <VALUE>66</VALUE>
+                <VALUE>67</VALUE>
+                <VALUE>68</VALUE>
+                <VALUE>69</VALUE>
+                <VALUE>70</VALUE>
+                <VALUE>71</VALUE>
+                <VALUE>72</VALUE>
+                <VALUE>73</VALUE>
+                <VALUE>74</VALUE>
+                <VALUE>75</VALUE>
+                <VALUE>76</VALUE>
+                <VALUE>77</VALUE>
+                <VALUE>78</VALUE>
+                <VALUE>79</VALUE>
+                <VALUE>80</VALUE>
+                <VALUE>81</VALUE>
+                <VALUE>82</VALUE>
+                <VALUE>83</VALUE>
+                <VALUE>84</VALUE>
+                <VALUE>85</VALUE>
+                <VALUE>86</VALUE>
+                <VALUE>87</VALUE>
+                <VALUE>88</VALUE>
+                <VALUE>89</VALUE>
+                <VALUE>90</VALUE>
+                <VALUE>91</VALUE>
+                <VALUE>92</VALUE>
+                <VALUE>93</VALUE>
+                <VALUE>94</VALUE>
+                <VALUE>95</VALUE>
+                <VALUE>96</VALUE>
+                <VALUE>97</VALUE>
+                <VALUE>98</VALUE>
+                <VALUE>99</VALUE>
+                <VALUE>100</VALUE>
+                <VALUE>101</VALUE>
+                <VALUE>102</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Values" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>Unknown</VALUE>
+                <VALUE>Other</VALUE>
+                <VALUE>MACOS</VALUE>
+                <VALUE>ATTUNIX</VALUE>
+                <VALUE>DGUX</VALUE>
+                <VALUE>DECNT</VALUE>
+                <VALUE>Tru64 UNIX</VALUE>
+                <VALUE>OpenVMS</VALUE>
+                <VALUE>HPUX</VALUE>
+                <VALUE>AIX</VALUE>
+                <VALUE>MVS</VALUE>
+                <VALUE>OS400</VALUE>
+                <VALUE>OS/2</VALUE>
+                <VALUE>JavaVM</VALUE>
+                <VALUE>MSDOS</VALUE>
+                <VALUE>WIN3x</VALUE>
+                <VALUE>WIN95</VALUE>
+                <VALUE>WIN98</VALUE>
+                <VALUE>WINNT</VALUE>
+                <VALUE>WINCE</VALUE>
+                <VALUE>NCR3000</VALUE>
+                <VALUE>NetWare</VALUE>
+                <VALUE>OSF</VALUE>
+                <VALUE>DC/OS</VALUE>
+                <VALUE>Reliant UNIX</VALUE>
+                <VALUE>SCO UnixWare</VALUE>
+                <VALUE>SCO OpenServer</VALUE>
+                <VALUE>Sequent</VALUE>
+                <VALUE>IRIX</VALUE>
+                <VALUE>Solaris</VALUE>
+                <VALUE>SunOS</VALUE>
+                <VALUE>U6000</VALUE>
+                <VALUE>ASERIES</VALUE>
+                <VALUE>HP NonStop OS</VALUE>
+                <VALUE>HP NonStop OSS</VALUE>
+                <VALUE>BS2000</VALUE>
+                <VALUE>LINUX</VALUE>
+                <VALUE>Lynx</VALUE>
+                <VALUE>XENIX</VALUE>
+                <VALUE>VM</VALUE>
+                <VALUE>Interactive UNIX</VALUE>
+                <VALUE>BSDUNIX</VALUE>
+                <VALUE>FreeBSD</VALUE>
+                <VALUE>NetBSD</VALUE>
+                <VALUE>GNU Hurd</VALUE>
+                <VALUE>OS9</VALUE>
+                <VALUE>MACH Kernel</VALUE>
+                <VALUE>Inferno</VALUE>
+                <VALUE>QNX</VALUE>
+                <VALUE>EPOC</VALUE>
+                <VALUE>IxWorks</VALUE>
+                <VALUE>VxWorks</VALUE>
+                <VALUE>MiNT</VALUE>
+                <VALUE>BeOS</VALUE>
+                <VALUE>HP MPE</VALUE>
+                <VALUE>NextStep</VALUE>
+                <VALUE>PalmPilot</VALUE>
+                <VALUE>Rhapsody</VALUE>
+                <VALUE>Windows 2000</VALUE>
+                <VALUE>Dedicated</VALUE>
+                <VALUE>OS/390</VALUE>
+                <VALUE>VSE</VALUE>
+                <VALUE>TPF</VALUE>
+                <VALUE>Windows (R) Me</VALUE>
+                <VALUE>Caldera Open UNIX</VALUE>
+                <VALUE>OpenBSD</VALUE>
+                <VALUE>Not Applicable</VALUE>
+                <VALUE>Windows XP</VALUE>
+                <VALUE>z/OS</VALUE>
+                <VALUE>Microsoft Windows Server 2003</VALUE>
+                <VALUE>Microsoft Windows Server 2003 64-Bit</VALUE>
+                <VALUE>Windows XP 64-Bit</VALUE>
+                <VALUE>Windows XP Embedded</VALUE>
+                <VALUE>Windows Vista</VALUE>
+                <VALUE>Windows Vista 64-Bit</VALUE>
+                <VALUE>Windows Embedded for Point of Service</VALUE>
+                <VALUE>Microsoft Windows Server 2008</VALUE>
+                <VALUE>Microsoft Windows Server 2008 64-Bit</VALUE>
+                <VALUE>FreeBSD 64-Bit</VALUE>
+                <VALUE>RedHat Enterprise Linux</VALUE>
+                <VALUE>RedHat Enterprise Linux 64-Bit</VALUE>
+                <VALUE>Solaris 64-Bit</VALUE>
+                <VALUE>SUSE</VALUE>
+                <VALUE>SUSE 64-Bit</VALUE>
+                <VALUE>SLES</VALUE>
+                <VALUE>SLES 64-Bit</VALUE>
+                <VALUE>Novell OES</VALUE>
+                <VALUE>Novell Linux Desktop</VALUE>
+                <VALUE>Sun Java Desktop System</VALUE>
+                <VALUE>Mandriva</VALUE>
+                <VALUE>Mandriva 64-Bit</VALUE>
+                <VALUE>TurboLinux</VALUE>
+                <VALUE>TurboLinux 64-Bit</VALUE>
+                <VALUE>Ubuntu</VALUE>
+                <VALUE>Ubuntu 64-Bit</VALUE>
+                <VALUE>Debian</VALUE>
+                <VALUE>Debian 64-Bit</VALUE>
+                <VALUE>Linux 2.4.x</VALUE>
+                <VALUE>Linux 2.4.x 64-Bit</VALUE>
+                <VALUE>Linux 2.6.x</VALUE>
+                <VALUE>Linux 2.6.x 64-Bit</VALUE>
+                <VALUE>Linux 64-Bit</VALUE>
+                <VALUE>Other 64-Bit</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_OperatingSystem.OtherTypeDescription</VALUE>
+                <VALUE>CIM_SoftwareElement.TargetOperatingSystem</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="OtherTypeDescription" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>A string describing the manufacturer and OperatingSystem type - used when the OperatingSystem property, OSType, is set to 1 or 59 (&quot;Other&quot; or &quot;Dedicated&quot;). The format of the string inserted in OtherTypeDescription should be similar in format to the Values strings defined for OSType. OtherTypeDescription should be set to NULL when OSType is any value other than 1 or 59.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="MaxLen" TYPE="uint32">
+              <VALUE>64</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_OperatingSystem.OSType</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="Version" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>A string describing the Operating System&apos;s version number. The format of the version information is as follows: &lt;Major Number&gt;.&lt;Minor Number&gt;.&lt;Revision&gt; or &lt;Major Number&gt;.&lt;Minor Number&gt;.&lt;Revision Letter&gt;.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="MappingStrings" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>MIF.DMTF|Operating System|001.3</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="LastBootUpTime" TYPE="datetime">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Time when the OperatingSystem was last booted.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="MappingStrings" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>MIF.DMTF|General Information|001.5</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="LocalDateTime" TYPE="datetime">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>OperatingSystem&apos;s notion of the local date and time of day.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="MappingStrings" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>MIB.IETF|HOST-RESOURCES-MIB.hrSystemDate</VALUE>
+                <VALUE>MIF.DMTF|General Information|001.6</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="CurrentTimeZone" TYPE="sint16">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>CurrentTimeZone indicates the number of minutes the OperatingSystem is offset from Greenwich Mean Time. Either the number is positive, negative or zero.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Units" TYPE="string">
+              <VALUE>Minutes</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="PUnit" TYPE="string">
+              <VALUE>minute</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="NumberOfLicensedUsers" TYPE="uint32">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Number of user licenses for the OperatingSystem. If unlimited, enter 0.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="NumberOfUsers" TYPE="uint32">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Number of user sessions for which the OperatingSystem is currently storing state information.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="Gauge" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="MappingStrings" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>MIF.DMTF|Host System|001.4</VALUE>
+                <VALUE>MIB.IETF|HOST-RESOURCES-MIB.hrSystemNumUsers</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="NumberOfProcesses" TYPE="uint32">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Number of process contexts currently loaded or running on the OperatingSystem.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="Gauge" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="MappingStrings" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>MIF.DMTF|Host System|001.5</VALUE>
+                <VALUE>MIB.IETF|HOST-RESOURCES-MIB.hrSystemProcesses</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="MaxNumberOfProcesses" TYPE="uint32">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Maximum number of process contexts the OperatingSystem can support. If there is no fixed maximum, the value should be 0. On systems that have a fixed maximum, this object can help diagnose failures that occur when the maximum is reached.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="MappingStrings" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>MIF.DMTF|Host System|001.6</VALUE>
+                <VALUE>MIB.IETF|HOST-RESOURCES-MIB.hrSystemMaxProcesses</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="TotalSwapSpaceSize" TYPE="uint64">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Total swap space in Kbytes. This value may be NULL (unspecified) if swap space is not distinguished from page files. However, some Operating Systems distinguish these concepts. For example, in UNIX, whole processes can be &apos;swapped out&apos; when the free page list falls and remains below a specified amount.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Units" TYPE="string">
+              <VALUE>KiloBytes</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="PUnit" TYPE="string">
+              <VALUE>byte * 2^10</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="TotalVirtualMemorySize" TYPE="uint64">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Number of Kbytes of virtual memory. For example, this may be calculated by adding the amount of total RAM to the amount of paging space (ie, adding the amount of memory in/aggregated by the ComputerSystem to the property, SizeStoredInPagingFiles.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Units" TYPE="string">
+              <VALUE>KiloBytes</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="MappingStrings" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>MIF.DMTF|System Memory Settings|001.5</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER NAME="PUnit" TYPE="string">
+              <VALUE>byte * 2^10</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="FreeVirtualMemory" TYPE="uint64">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Number of Kbytes of virtual memory currently unused and available. For example, this may be calculated by adding the amount of free RAM to the amount of free paging space (ie, adding the properties, FreePhysicalMemory and FreeSpace InPagingFiles).</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Units" TYPE="string">
+              <VALUE>KiloBytes</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="Gauge" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="MappingStrings" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>MIF.DMTF|System Memory Settings|001.6</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER NAME="PUnit" TYPE="string">
+              <VALUE>byte * 2^10</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="FreePhysicalMemory" TYPE="uint64">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Number of Kbytes of physical memory currently unused and available.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Units" TYPE="string">
+              <VALUE>KiloBytes</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="Gauge" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="MappingStrings" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>MIF.DMTF|System Memory Settings|001.2</VALUE>
+                <VALUE>MIF.UNIX|Host Physical Memory|6.1</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER NAME="PUnit" TYPE="string">
+              <VALUE>byte * 2^10</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="TotalVisibleMemorySize" TYPE="uint64">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>The total amount of physical memory (in Kbytes) available to the OperatingSystem. This value does not necessarily indicate the true amount of physical memory, but what is reported to the OperatingSystem as available to it.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Units" TYPE="string">
+              <VALUE>KiloBytes</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="PUnit" TYPE="string">
+              <VALUE>byte * 2^10</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="SizeStoredInPagingFiles" TYPE="uint64">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>The total number of KBytes that can be stored in the OperatingSystem&apos;s paging files. 0 indicates that there are no paging files.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Units" TYPE="string">
+              <VALUE>KiloBytes</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="MappingStrings" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>MIF.DMTF|System Memory Settings|001.3</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER NAME="PUnit" TYPE="string">
+              <VALUE>byte * 2^10</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="FreeSpaceInPagingFiles" TYPE="uint64">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>The total number of KBytes that can be mapped into the OperatingSystem&apos;s paging files without causing any other pages to be swapped out. 0 indicates that there are no paging files.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Units" TYPE="string">
+              <VALUE>KiloBytes</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="Gauge" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="MappingStrings" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>MIF.DMTF|System Memory Settings|001.4</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER NAME="PUnit" TYPE="string">
+              <VALUE>byte * 2^10</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="MaxProcessMemorySize" TYPE="uint64">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Maximum number of Kbytes of memory that can be allocated to a Process. For Operating Systems with no virtual memory, this value is typically equal to the total amount of physical Memory minus memory used by the BIOS and OS. For some Operating Systems, this value may be infinity - in which case, 0 should be entered. In other cases, this value could be a constant - for example, 2G or 4G.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Units" TYPE="string">
+              <VALUE>KiloBytes</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="PUnit" TYPE="string">
+              <VALUE>byte * 2^10</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="Distributed" TYPE="boolean">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Boolean indicating whether the OperatingSystem is distributed across several ComputerSystem nodes. If so, these nodes should be grouped as a Cluster.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_OperatingSystem" PROPAGATED="false" NAME="MaxProcessesPerUser" TYPE="uint32">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>A value that indicates the maximum processes that a user can have associate with it.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_EnabledLogicalElement" PROPAGATED="true" NAME="EnabledState" TYPE="uint16">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                EnabledState is an integer enumeration that indicates the enabled and disabled states of an element. It can also indicate the transitions between these requested states. For example, shutting down (value=4) and starting (value=10) are transient states between enabled and disabled. The following text briefly summarizes the various enabled and disabled states:
+                Enabled (2) indicates that the element is or could be executing commands, will process any queued commands, and queues new requests.
+                Disabled (3) indicates that the element will not execute commands and will drop any new requests.
+                Shutting Down (4) indicates that the element is in the process of going to a Disabled state.
+                Not Applicable (5) indicates the element does not support being enabled or disabled.
+                Enabled but Offline (6) indicates that the element might be completing commands, and will drop any new requests.
+                Test (7) indicates that the element is in a test state.
+                Deferred (8) indicates that the element might be completing commands, but will queue any new requests.
+                Quiesce (9) indicates that the element is enabled but in a restricted mode.
+                Starting (10) indicates that the element is in the process of going to an Enabled state. New requests are queued.
+              </VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ValueMap" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>0</VALUE>
+                <VALUE>1</VALUE>
+                <VALUE>2</VALUE>
+                <VALUE>3</VALUE>
+                <VALUE>4</VALUE>
+                <VALUE>5</VALUE>
+                <VALUE>6</VALUE>
+                <VALUE>7</VALUE>
+                <VALUE>8</VALUE>
+                <VALUE>9</VALUE>
+                <VALUE>10</VALUE>
+                <VALUE>11..32767</VALUE>
+                <VALUE>32768..65535</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Values" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>Unknown</VALUE>
+                <VALUE>Other</VALUE>
+                <VALUE>Enabled</VALUE>
+                <VALUE>Disabled</VALUE>
+                <VALUE>Shutting Down</VALUE>
+                <VALUE>Not Applicable</VALUE>
+                <VALUE>Enabled but Offline</VALUE>
+                <VALUE>In Test</VALUE>
+                <VALUE>Deferred</VALUE>
+                <VALUE>Quiesce</VALUE>
+                <VALUE>Starting</VALUE>
+                <VALUE>DMTF Reserved</VALUE>
+                <VALUE>Vendor Reserved</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_EnabledLogicalElement.OtherEnabledState</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <VALUE>5</VALUE>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_EnabledLogicalElement" PROPAGATED="true" NAME="OtherEnabledState" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>A string that describes the enabled or disabled state of the element when the EnabledState property is set to 1 (&quot;Other&quot;). This property must be set to null when EnabledState is any value other than 1.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_EnabledLogicalElement.EnabledState</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_EnabledLogicalElement" PROPAGATED="true" NAME="RequestedState" TYPE="uint16">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                RequestedState is an integer enumeration that indicates the last requested or desired state for the element, irrespective of the mechanism through which it was requested. The actual state of the element is represented by EnabledState. This property is provided to compare the last requested and current enabled or disabled states. Note that when EnabledState is set to 5 (&quot;Not Applicable&quot;), then this property has no meaning. Refer to the EnabledState property description for explanations of the values in the RequestedState enumeration.
+                &quot;Unknown&quot; (0) indicates the last requested state for the element is unknown.
+                Note that the value &quot;No Change&quot; (5) has been deprecated in lieu of indicating the last requested state is &quot;Unknown&quot; (0). If the last requested or desired state is unknown, RequestedState should have the value &quot;Unknown&quot; (0), but may have the value &quot;No Change&quot; (5).Offline (6) indicates that the element has been requested to transition to the Enabled but Offline EnabledState.
+                It should be noted that there are two new values in RequestedState that build on the statuses of EnabledState. These are &quot;Reboot&quot; (10) and &quot;Reset&quot; (11). Reboot refers to doing a &quot;Shut Down&quot; and then moving to an &quot;Enabled&quot; state. Reset indicates that the element is first &quot;Disabled&quot; and then &quot;Enabled&quot;. The distinction between requesting &quot;Shut Down&quot; and &quot;Disabled&quot; should also be noted. Shut Down requests an orderly transition to the Disabled state, and might involve removing power, to completely erase any existing state. The Disabled state requests an immediate disabling of the element, such that it will not execute or accept any commands or processing requests.
+
+                This property is set as the result of a method invocation (such as Start or StopService on CIM_Service), or can be overridden and defined as WRITEable in a subclass. The method approach is considered superior to a WRITEable property, because it allows an explicit invocation of the operation and the return of a result code.
+
+                If knowledge of the last RequestedState is not supported for the EnabledLogicalElement, the property shall be NULL or have the value 12 &quot;Not Applicable&quot;.
+              </VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ValueMap" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>0</VALUE>
+                <VALUE>2</VALUE>
+                <VALUE>3</VALUE>
+                <VALUE>4</VALUE>
+                <VALUE>5</VALUE>
+                <VALUE>6</VALUE>
+                <VALUE>7</VALUE>
+                <VALUE>8</VALUE>
+                <VALUE>9</VALUE>
+                <VALUE>10</VALUE>
+                <VALUE>11</VALUE>
+                <VALUE>12</VALUE>
+                <VALUE>..</VALUE>
+                <VALUE>32768..65535</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Values" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>Unknown</VALUE>
+                <VALUE>Enabled</VALUE>
+                <VALUE>Disabled</VALUE>
+                <VALUE>Shut Down</VALUE>
+                <VALUE>No Change</VALUE>
+                <VALUE>Offline</VALUE>
+                <VALUE>Test</VALUE>
+                <VALUE>Deferred</VALUE>
+                <VALUE>Quiesce</VALUE>
+                <VALUE>Reboot</VALUE>
+                <VALUE>Reset</VALUE>
+                <VALUE>Not Applicable</VALUE>
+                <VALUE>DMTF Reserved</VALUE>
+                <VALUE>Vendor Reserved</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_EnabledLogicalElement.EnabledState</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <VALUE>12</VALUE>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_EnabledLogicalElement" PROPAGATED="true" NAME="EnabledDefault" TYPE="uint16">
+            <QUALIFIER NAME="Write" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>An enumerated value indicating an administrator&apos;s default or startup configuration for the Enabled State of an element. By default, the element is &quot;Enabled&quot; (value=2).</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ValueMap" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>2</VALUE>
+                <VALUE>3</VALUE>
+                <VALUE>5</VALUE>
+                <VALUE>6</VALUE>
+                <VALUE>7</VALUE>
+                <VALUE>9</VALUE>
+                <VALUE>..</VALUE>
+                <VALUE>32768..65535</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Values" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>Enabled</VALUE>
+                <VALUE>Disabled</VALUE>
+                <VALUE>Not Applicable</VALUE>
+                <VALUE>Enabled but Offline</VALUE>
+                <VALUE>No Default</VALUE>
+                <VALUE>Quiesce</VALUE>
+                <VALUE>DMTF Reserved</VALUE>
+                <VALUE>Vendor Reserved</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <VALUE>2</VALUE>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_EnabledLogicalElement" PROPAGATED="true" NAME="TimeOfLastStateChange" TYPE="datetime">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>The date or time when the EnabledState of the element last changed. If the state of the element has not changed and this property is populated, then it must be set to a 0 interval value. If a state change was requested, but rejected or not yet processed, the property must not be updated.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY.ARRAY CLASSORIGIN="CIM_EnabledLogicalElement" PROPAGATED="true" NAME="AvailableRequestedStates" TYPE="uint16">
+            <QUALIFIER TOSUBCLASS="false" NAME="Experimental" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>AvailableRequestedStates indicates the possible values for the RequestedState parameter of the method RequestStateChange, used to initiate a state change. The values listed shall be a subset of the values contained in the RequestedStatesSupported property of the associated instance of CIM_EnabledLogicalElementCapabilities where the values selected are a function of the current state of the CIM_EnabledLogicalElement. This property may be non-null if an implementation is able to advertise the set of possible values as a function of the current state. This property shall be null if an implementation is unable to determine the set of possible values as a function of the current state.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ValueMap" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>2</VALUE>
+                <VALUE>3</VALUE>
+                <VALUE>4</VALUE>
+                <VALUE>6</VALUE>
+                <VALUE>7</VALUE>
+                <VALUE>8</VALUE>
+                <VALUE>9</VALUE>
+                <VALUE>10</VALUE>
+                <VALUE>11</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Values" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>Enabled</VALUE>
+                <VALUE>Disabled</VALUE>
+                <VALUE>Shut Down</VALUE>
+                <VALUE>Offline</VALUE>
+                <VALUE>Test</VALUE>
+                <VALUE>Defer</VALUE>
+                <VALUE>Quiesce</VALUE>
+                <VALUE>Reboot</VALUE>
+                <VALUE>Reset</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_EnabledLogicalElement.RequestStateChange</VALUE>
+                <VALUE>CIM_EnabledLogicalElementCapabilities.RequestedStatesSupported</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY.ARRAY>
+          <PROPERTY CLASSORIGIN="CIM_EnabledLogicalElement" PROPAGATED="true" NAME="TransitioningToState" TYPE="uint16">
+            <QUALIFIER TOSUBCLASS="false" NAME="Experimental" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                TransitioningToState indicates the target state to which the instance is transitioning.
+                A value of 5 &quot;No Change&quot; shall indicate that no transition is in progress.A value of 12 &quot;Not Applicable&quot; shall indicate the implementation does not support representing ongoing transitions.
+                A value other than 5 or 12 shall identify the state to which the element is in the process of transitioning.
+              </VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ValueMap" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>0</VALUE>
+                <VALUE>2</VALUE>
+                <VALUE>3</VALUE>
+                <VALUE>4</VALUE>
+                <VALUE>5</VALUE>
+                <VALUE>6</VALUE>
+                <VALUE>7</VALUE>
+                <VALUE>8</VALUE>
+                <VALUE>9</VALUE>
+                <VALUE>10</VALUE>
+                <VALUE>11</VALUE>
+                <VALUE>12</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Values" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>Unknown</VALUE>
+                <VALUE>Enabled</VALUE>
+                <VALUE>Disabled</VALUE>
+                <VALUE>Shut Down</VALUE>
+                <VALUE>No Change</VALUE>
+                <VALUE>Offline</VALUE>
+                <VALUE>Test</VALUE>
+                <VALUE>Defer</VALUE>
+                <VALUE>Quiesce</VALUE>
+                <VALUE>Reboot</VALUE>
+                <VALUE>Reset</VALUE>
+                <VALUE>Not Applicable</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_EnabledLogicalElement.RequestStateChange</VALUE>
+                <VALUE>CIM_EnabledLogicalElement.RequestedState</VALUE>
+                <VALUE>CIM_EnabledLogicalElement.EnabledState</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <VALUE>12</VALUE>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ManagedSystemElement" PROPAGATED="true" NAME="InstallDate" TYPE="datetime">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>A datetime value that indicates when the object was installed. Lack of a value does not indicate that the object is not installed.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="MappingStrings" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>MIF.DMTF|ComponentID|001.5</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY.ARRAY CLASSORIGIN="CIM_ManagedSystemElement" PROPAGATED="true" NAME="OperationalStatus" TYPE="uint16">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                Indicates the current statuses of the element. Various operational statuses are defined. Many of the enumeration&apos;s values are self-explanatory. However, a few are not and are described here in more detail.
+                &quot;Stressed&quot; indicates that the element is functioning, but needs attention. Examples of &quot;Stressed&quot; states are overload, overheated, and so on.
+                &quot;Predictive Failure&quot; indicates that an element is functioning nominally but predicting a failure in the near future.
+                &quot;In Service&quot; describes an element being configured, maintained, cleaned, or otherwise administered.
+                &quot;No Contact&quot; indicates that the monitoring system has knowledge of this element, but has never been able to establish communications with it.
+                &quot;Lost Communication&quot; indicates that the ManagedSystem Element is known to exist and has been contacted successfully in the past, but is currently unreachable.
+                &quot;Stopped&quot; and &quot;Aborted&quot; are similar, although the former implies a clean and orderly stop, while the latter implies an abrupt stop where the state and configuration of the element might need to be updated.
+                &quot;Dormant&quot; indicates that the element is inactive or quiesced.
+                &quot;Supporting Entity in Error&quot; indicates that this element might be &quot;OK&quot; but that another element, on which it is dependent, is in error. An example is a network service or endpoint that cannot function due to lower-layer networking problems.
+                &quot;Completed&quot; indicates that the element has completed its operation. This value should be combined with either OK, Error, or Degraded so that a client can tell if the complete operation Completed with OK (passed), Completed with Error (failed), or Completed with Degraded (the operation finished, but it did not complete OK or did not report an error).
+                &quot;Power Mode&quot; indicates that the element has additional power model information contained in the Associated PowerManagementService association.
+                OperationalStatus replaces the Status property on ManagedSystemElement to provide a consistent approach to enumerations, to address implementation needs for an array property, and to provide a migration path from today&apos;s environment to the future. This change was not made earlier because it required the deprecated qualifier. Due to the widespread use of the existing Status property in management applications, it is strongly recommended that providers or instrumentation provide both the Status and OperationalStatus properties. Further, the first value of OperationalStatus should contain the primary status for the element. When instrumented, Status (because it is single-valued) should also provide the primary status of the element.
+              </VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ValueMap" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>0</VALUE>
+                <VALUE>1</VALUE>
+                <VALUE>2</VALUE>
+                <VALUE>3</VALUE>
+                <VALUE>4</VALUE>
+                <VALUE>5</VALUE>
+                <VALUE>6</VALUE>
+                <VALUE>7</VALUE>
+                <VALUE>8</VALUE>
+                <VALUE>9</VALUE>
+                <VALUE>10</VALUE>
+                <VALUE>11</VALUE>
+                <VALUE>12</VALUE>
+                <VALUE>13</VALUE>
+                <VALUE>14</VALUE>
+                <VALUE>15</VALUE>
+                <VALUE>16</VALUE>
+                <VALUE>17</VALUE>
+                <VALUE>18</VALUE>
+                <VALUE>..</VALUE>
+                <VALUE>0x8000..</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Values" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>Unknown</VALUE>
+                <VALUE>Other</VALUE>
+                <VALUE>OK</VALUE>
+                <VALUE>Degraded</VALUE>
+                <VALUE>Stressed</VALUE>
+                <VALUE>Predictive Failure</VALUE>
+                <VALUE>Error</VALUE>
+                <VALUE>Non-Recoverable Error</VALUE>
+                <VALUE>Starting</VALUE>
+                <VALUE>Stopping</VALUE>
+                <VALUE>Stopped</VALUE>
+                <VALUE>In Service</VALUE>
+                <VALUE>No Contact</VALUE>
+                <VALUE>Lost Communication</VALUE>
+                <VALUE>Aborted</VALUE>
+                <VALUE>Dormant</VALUE>
+                <VALUE>Supporting Entity in Error</VALUE>
+                <VALUE>Completed</VALUE>
+                <VALUE>Power Mode</VALUE>
+                <VALUE>DMTF Reserved</VALUE>
+                <VALUE>Vendor Reserved</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER OVERRIDABLE="false" NAME="ArrayType" TYPE="string">
+              <VALUE>Indexed</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_ManagedSystemElement.StatusDescriptions</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY.ARRAY>
+          <PROPERTY.ARRAY CLASSORIGIN="CIM_ManagedSystemElement" PROPAGATED="true" NAME="StatusDescriptions" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Strings describing the various OperationalStatus array values. For example, if &quot;Stopping&quot; is the value assigned to OperationalStatus, then this property may contain an explanation as to why an object is being stopped. Note that entries in this array are correlated with those at the same array index in OperationalStatus.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER OVERRIDABLE="false" NAME="ArrayType" TYPE="string">
+              <VALUE>Indexed</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_ManagedSystemElement.OperationalStatus</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY.ARRAY>
+          <PROPERTY CLASSORIGIN="CIM_ManagedSystemElement" PROPAGATED="true" NAME="Status" TYPE="string">
+            <QUALIFIER TOSUBCLASS="false" NAME="Deprecated" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_ManagedSystemElement.OperationalStatus</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                A string indicating the current status of the object. Various operational and non-operational statuses are defined. This property is deprecated in lieu of OperationalStatus, which includes the same semantics in its enumeration. This change is made for 3 reasons:
+                1) Status is more correctly defined as an array. This definition overcomes the limitation of describing status using a single value, when it is really a multi-valued property (for example, an element might be OK AND Stopped.
+                2) A MaxLen of 10 is too restrictive and leads to unclear enumerated values.
+                3) The change to a uint16 data type was discussed when CIM V2.0 was defined. However, existing V1.0 implementations used the string property and did not want to modify their code. Therefore, Status was grandfathered into the Schema. Use of the deprecated qualifier allows the maintenance of the existing property, but also permits an improved definition using OperationalStatus.
+              </VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ValueMap" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>OK</VALUE>
+                <VALUE>Error</VALUE>
+                <VALUE>Degraded</VALUE>
+                <VALUE>Unknown</VALUE>
+                <VALUE>Pred Fail</VALUE>
+                <VALUE>Starting</VALUE>
+                <VALUE>Stopping</VALUE>
+                <VALUE>Service</VALUE>
+                <VALUE>Stressed</VALUE>
+                <VALUE>NonRecover</VALUE>
+                <VALUE>No Contact</VALUE>
+                <VALUE>Lost Comm</VALUE>
+                <VALUE>Stopped</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER NAME="MaxLen" TYPE="uint32">
+              <VALUE>10</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ManagedSystemElement" PROPAGATED="true" NAME="HealthState" TYPE="uint16">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                Indicates the current health of the element. This attribute expresses the health of this element but not necessarily that of its subcomponents. The possible values are 0 to 30, where 5 means the element is entirely healthy and 30 means the element is completely non-functional. The following continuum is defined:
+                &quot;Non-recoverable Error&quot; (30) - The element has completely failed, and recovery is not possible. All functionality provided by this element has been lost.
+                &quot;Critical Failure&quot; (25) - The element is non-functional and recovery might not be possible.
+                &quot;Major Failure&quot; (20) - The element is failing. It is possible that some or all of the functionality of this component is degraded or not working.
+                &quot;Minor Failure&quot; (15) - All functionality is available but some might be degraded.
+                &quot;Degraded/Warning&quot; (10) - The element is in working order and all functionality is provided. However, the element is not working to the best of its abilities. For example, the element might not be operating at optimal performance or it might be reporting recoverable errors.
+                &quot;OK&quot; (5) - The element is fully functional and is operating within normal operational parameters and without error.
+                &quot;Unknown&quot; (0) - The implementation cannot report on HealthState at this time.
+                DMTF has reserved the unused portion of the continuum for additional HealthStates in the future.
+              </VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ValueMap" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>0</VALUE>
+                <VALUE>5</VALUE>
+                <VALUE>10</VALUE>
+                <VALUE>15</VALUE>
+                <VALUE>20</VALUE>
+                <VALUE>25</VALUE>
+                <VALUE>30</VALUE>
+                <VALUE>..</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Values" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>Unknown</VALUE>
+                <VALUE>OK</VALUE>
+                <VALUE>Degraded/Warning</VALUE>
+                <VALUE>Minor failure</VALUE>
+                <VALUE>Major failure</VALUE>
+                <VALUE>Critical failure</VALUE>
+                <VALUE>Non-recoverable error</VALUE>
+                <VALUE>DMTF Reserved</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ManagedSystemElement" PROPAGATED="true" NAME="PrimaryStatus" TYPE="uint16">
+            <QUALIFIER TOSUBCLASS="false" NAME="Experimental" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                PrimaryStatus provides a high level status value, intended to align with Red-Yellow-Green type representation of status. It should be used in conjunction with DetailedStatus to provide high level and detailed health status of the ManagedElement and its subcomponents.
+                PrimaryStatus consists of one of the following values: Unknown, OK, Degraded or Error. &quot;Unknown&quot; indicates the implementation is in general capable of returning this property, but is unable to do so at this time.
+                &quot;OK&quot; indicates the ManagedElement is functioning normally.
+                &quot;Degraded&quot; indicates the ManagedElement is functioning below normal.
+                &quot;Error&quot; indicates the ManagedElement is in an Error condition.
+              </VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ValueMap" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>0</VALUE>
+                <VALUE>1</VALUE>
+                <VALUE>2</VALUE>
+                <VALUE>3</VALUE>
+                <VALUE>..</VALUE>
+                <VALUE>0x8000..</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Values" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>Unknown</VALUE>
+                <VALUE>OK</VALUE>
+                <VALUE>Degraded</VALUE>
+                <VALUE>Error</VALUE>
+                <VALUE>DMTF Reserved</VALUE>
+                <VALUE>Vendor Reserved</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_ManagedSystemElement.DetailedStatus</VALUE>
+                <VALUE>CIM_ManagedSystemElement.HealthState</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ManagedSystemElement" PROPAGATED="true" NAME="DetailedStatus" TYPE="uint16">
+            <QUALIFIER TOSUBCLASS="false" NAME="Experimental" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                DetailedStatus compliments PrimaryStatus with additional status detail. It consists of one of the following values: Not Available, No Additional Information, Stressed, Predictive Failure, Error, Non-Recoverable Error, SupportingEntityInError. Detailed status is used to expand upon the PrimaryStatus of the element.
+                A Null return indicates the implementation (provider) does not implement this property.
+                &quot;Not Available&quot; indicates that the implementation (provider) is capable of returning a value for this property, but not ever for this particular piece of hardware/software or the property is intentionally not used because it adds no meaningful information (as in the case of a property that is intended to add additional info to another property).
+                &quot;No Additional Information&quot; indicates that the element is functioning normally as indicated by PrimaryStatus = &quot;OK&quot;.
+                &quot;Stressed&quot; indicates that the element is functioning, but needs attention. Examples of &quot;Stressed&quot; states are overload, overheated, and so on.
+                &quot;Predictive Failure&quot; indicates that an element is functioning normally but a failure is predicted in the near future.
+                &quot;Non-Recoverable Error &quot; indicates that this element is in an error condition that requires human intervention.
+                &quot;Supporting Entity in Error&quot; indicates that this element might be &quot;OK&quot; but that another element, on which it is dependent, is in error. An example is a network service or endpoint that cannot function due to lower-layer networking problems.
+              </VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ValueMap" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>0</VALUE>
+                <VALUE>1</VALUE>
+                <VALUE>2</VALUE>
+                <VALUE>3</VALUE>
+                <VALUE>4</VALUE>
+                <VALUE>5</VALUE>
+                <VALUE>..</VALUE>
+                <VALUE>0x8000..</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Values" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>Not Available</VALUE>
+                <VALUE>No Additional Information</VALUE>
+                <VALUE>Stressed</VALUE>
+                <VALUE>Predictive Failure</VALUE>
+                <VALUE>Non-Recoverable Error</VALUE>
+                <VALUE>Supporting Entity in Error</VALUE>
+                <VALUE>DMTF Reserved</VALUE>
+                <VALUE>Vendor Reserved</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_EnabledLogicalElement.PrimaryStatus</VALUE>
+                <VALUE>CIM_ManagedSystemElement.HealthState</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ManagedSystemElement" PROPAGATED="true" NAME="OperatingStatus" TYPE="uint16">
+            <QUALIFIER TOSUBCLASS="false" NAME="Experimental" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                OperatingStatus provides a current status value for the operational condition of the element and can be used for providing more detail with respect to the value of EnabledState. It can also provide the transitional states when an element is transitioning from one state to another, such as when an element is transitioning between EnabledState and RequestedState, as well as other transitional conditions.
+                OperatingStatus consists of one of the following values: Unknown, Not Available, In Service, Starting, Stopping, Stopped, Aborted, Dormant, Completed, Migrating, Emmigrating, Immigrating, Snapshotting. Shutting Down, In Test
+                A Null return indicates the implementation (provider) does not implement this property.
+                &quot;Unknown&quot; indicates the implementation is in general capable of returning this property, but is unable to do so at this time.
+                &quot;None&quot; indicates that the implementation (provider) is capable of returning a value for this property, but not ever for this particular piece of hardware/software or the property is intentionally not used because it adds no meaningful information (as in the case of a property that is intended to add additional info to another property).
+                &quot;Servicing&quot; describes an element being configured, maintained, cleaned, or otherwise administered.
+                &quot;Starting&quot; describes an element being initialized.
+                &quot;Stopping&quot; describes an element being brought to an orderly stop.
+                &quot;Stopped&quot; and &quot;Aborted&quot; are similar, although the former implies a clean and orderly stop, while the latter implies an abrupt stop where the state and configuration of the element might need to be updated.
+                &quot;Dormant&quot; indicates that the element is inactive or quiesced.
+                &quot;Completed&quot; indicates that the element has completed its operation. This value should be combined with either OK, Error, or Degraded in the PrimaryStatus so that a client can tell if the complete operation Completed with OK (passed), Completed with Error (failed), or Completed with Degraded (the operation finished, but it did not complete OK or did not report an error).
+                &quot;Migrating&quot; element is being moved between host elements.
+                &quot;Immigrating&quot; element is being moved to new host element.
+                &quot;Emigrating&quot; element is being moved away from host element.
+                &quot;Shutting Down&quot; describes an element being brought to an abrupt stop.
+                &quot;In Test&quot; element is performing test functions.
+                &quot;Transitioning&quot; describes an element that is between states, that is, it is not fully available in either its previous state or its next state. This value should be used if other values indicating a transition to a specific state are not applicable.
+                &quot;In Service&quot; describes an element that is in service and operational.
+              </VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ValueMap" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>0</VALUE>
+                <VALUE>1</VALUE>
+                <VALUE>2</VALUE>
+                <VALUE>3</VALUE>
+                <VALUE>4</VALUE>
+                <VALUE>5</VALUE>
+                <VALUE>6</VALUE>
+                <VALUE>7</VALUE>
+                <VALUE>8</VALUE>
+                <VALUE>9</VALUE>
+                <VALUE>10</VALUE>
+                <VALUE>11</VALUE>
+                <VALUE>12</VALUE>
+                <VALUE>13</VALUE>
+                <VALUE>14</VALUE>
+                <VALUE>15</VALUE>
+                <VALUE>16</VALUE>
+                <VALUE>..</VALUE>
+                <VALUE>0x8000..</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Values" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>Unknown</VALUE>
+                <VALUE>Not Available</VALUE>
+                <VALUE>Servicing</VALUE>
+                <VALUE>Starting</VALUE>
+                <VALUE>Stopping</VALUE>
+                <VALUE>Stopped</VALUE>
+                <VALUE>Aborted</VALUE>
+                <VALUE>Dormant</VALUE>
+                <VALUE>Completed</VALUE>
+                <VALUE>Migrating</VALUE>
+                <VALUE>Emigrating</VALUE>
+                <VALUE>Immigrating</VALUE>
+                <VALUE>Snapshotting</VALUE>
+                <VALUE>Shutting Down</VALUE>
+                <VALUE>In Test</VALUE>
+                <VALUE>Transitioning</VALUE>
+                <VALUE>In Service</VALUE>
+                <VALUE>DMTF Reserved</VALUE>
+                <VALUE>Vendor Reserved</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_EnabledLogicalElement.EnabledState</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ManagedSystemElement" PROPAGATED="true" NAME="CommunicationStatus" TYPE="uint16">
+            <QUALIFIER TOSUBCLASS="false" NAME="Experimental" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                CommunicationStatus indicates the ability of the instrumentation to communicate with the underlying ManagedElement. CommunicationStatus consists of one of the following values: Unknown, None, Communication OK, Lost Communication, or No Contact.
+                A Null return indicates the implementation (provider) does not implement this property.
+                &quot;Unknown&quot; indicates the implementation is in general capable of returning this property, but is unable to do so at this time.
+                &quot;Not Available&quot; indicates that the implementation (provider) is capable of returning a value for this property, but not ever for this particular piece of hardware/software or the property is intentionally not used because it adds no meaningful information (as in the case of a property that is intended to add additional info to another property).
+                &quot;Communication OK &quot; indicates communication is established with the element, but does not convey any quality of service.
+                &quot;No Contact&quot; indicates that the monitoring system has knowledge of this element, but has never been able to establish communications with it.
+                &quot;Lost Communication&quot; indicates that the Managed Element is known to exist and has been contacted successfully in the past, but is currently unreachable.
+              </VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ValueMap" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>0</VALUE>
+                <VALUE>1</VALUE>
+                <VALUE>2</VALUE>
+                <VALUE>3</VALUE>
+                <VALUE>4</VALUE>
+                <VALUE>..</VALUE>
+                <VALUE>0x8000..</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Values" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>Unknown</VALUE>
+                <VALUE>Not Available</VALUE>
+                <VALUE>Communication OK</VALUE>
+                <VALUE>Lost Communication</VALUE>
+                <VALUE>No Contact</VALUE>
+                <VALUE>DMTF Reserved</VALUE>
+                <VALUE>Vendor Reserved</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ManagedElement" PROPAGATED="true" NAME="InstanceID" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                InstanceID is an optional property that may be used to opaquely and uniquely identify an instance of this class within the scope of the instantiating Namespace. Various subclasses of this class may override this property to make it required, or a key. Such subclasses may also modify the preferred algorithms for ensuring uniqueness that are defined below.
+                To ensure uniqueness within the NameSpace, the value of InstanceID should be constructed using the following &quot;preferred&quot; algorithm:
+                &lt;OrgID&gt;:&lt;LocalID&gt;
+                Where &lt;OrgID&gt; and &lt;LocalID&gt; are separated by a colon (:), and where &lt;OrgID&gt; must include a copyrighted, trademarked, or otherwise unique name that is owned by the business entity that is creating or defining the InstanceID or that is a registered ID assigned to the business entity by a recognized global authority. (This requirement is similar to the &lt;Schema Name&gt;_&lt;Class Name&gt; structure of Schema class names.) In addition, to ensure uniqueness, &lt;OrgID&gt; must not contain a colon (:). When using this algorithm, the first colon to appear in InstanceID must appear between &lt;OrgID&gt; and &lt;LocalID&gt;.
+                &lt;LocalID&gt; is chosen by the business entity and should not be reused to identify different underlying (real-world) elements. If not null and the above &quot;preferred&quot; algorithm is not used, the defining entity must assure that the resulting InstanceID is not reused across any InstanceIDs produced by this or other providers for the NameSpace of this instance.
+                If not set to null for DMTF-defined instances, the &quot;preferred&quot; algorithm must be used with the &lt;OrgID&gt; set to CIM.
+              </VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ManagedElement" PROPAGATED="true" NAME="Caption" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>The Caption property is a short textual description (one- line string) of the object.</VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="MaxLen" TYPE="uint32">
+              <VALUE>64</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ManagedElement" PROPAGATED="true" NAME="Description" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>The Description property provides a textual description of the object.</VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ManagedElement" PROPAGATED="true" NAME="ElementName" TYPE="string">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                A user-friendly name for the object. This property allows each instance to define a user-friendly name in addition to its key properties, identity data, and description information.
+                Note that the Name property of ManagedSystemElement is also defined as a user-friendly name. But, it is often subclassed to be a Key. It is not reasonable that the same property can convey both identity and a user-friendly name, without inconsistencies. Where Name exists and is not a Key (such as for instances of LogicalDevice), the same information can be present in both the Name and ElementName properties.
+              </VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <PROPERTY CLASSORIGIN="CIM_ManagedElement" PROPAGATED="true" NAME="Generation" TYPE="uint64">
+            <QUALIFIER TOSUBCLASS="false" NAME="Experimental" TYPE="boolean">
+              <VALUE>true</VALUE>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                Generation is an optional, monotonically increasing property that may be used to identify a particular generation of the resource represented by this class.
+                If Generation is supported by the implementation, its value shall not be null.
+                Except as otherwise specified, a value (including null) of Generation specified at creation time shall be replaced by null if Generation is not supported by the implementation or shall be a, (possibly different), non-null value if the implementation does support Generation.
+                After creation and if supported, Generation shall be updated, at least once per access, whenever the represented resource is modified, regardless of the source of the modification.
+                Note: the Generation value only needs to be updated once between references, even if the resource is updated many times. The key point is to assure that it will be different if there have been updates, not to count each update.
+                Note: unless otherwise specified, the value of Generation within one instance is not required to be coordinated with the value of Generation in any other instance.
+                Note:the semantics of the instance, (as defined by its creation class), define the underlying resource. That underlying resource may be a collection or aggregation of resources. And, in that case, the semantics of the instance further define when updates to constituent resources also require updates to the Generation of the collective resource. Default behavior of composite aggregations should be to update the Generation of the composite whenever the Generation of a component is updated.
+                Subclasses may define additional requirements for updates on some or all of related instances.
+                For a particular instance, the value of Generation may wrap through zero, but the elapsed time between wraps shall be greater than 10&apos;s of years.
+                This class does not require Generation to be unique across instances of other classes nor across instances of the same class that have different keys. Generation shall be different across power cycles, resets, or reboots if any of those actions results in an update. Generation may be different across power cycles, resets, or reboots if those actions do not result in an update. If the Generation property of an instance is non-null, and if any attempt to update the instance includes the Generation property, then if it doesn&apos;t match the current value, the update shall fail.
+                The usage of this property is intended to be further specified by applicable management profiles.
+                Typically, a client will read the value of this property and then supply that value as input to an operation that modifies the instance in some means. This may be via an explicit parameter in an extrinsic method or via an embedded value in an extrinsic method or intrinsic operation.
+                For example: a profile may require that an intrinsic instance modification supply the Generation property and that it must match for the modification to succeed.
+              </VALUE>
+            </QUALIFIER>
+          </PROPERTY>
+          <METHOD CLASSORIGIN="CIM_OperatingSystem" NAME="Reboot" TYPE="uint32">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Requests a reboot of the OperatingSystem. The return value should be 0 if the request was successfully executed, 1 if the request is not supported and some other value if an error occurred. In a subclass, the set of possible return codes could be specified, using a ValueMap qualifier on the method. The strings to which the ValueMap contents are &apos;translated&apos; may also be specified in the subclass as a Values array qualifier.</VALUE>
+            </QUALIFIER>
+          </METHOD>
+          <METHOD CLASSORIGIN="CIM_OperatingSystem" NAME="Shutdown" TYPE="uint32">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>Requests a shutdown of the OperatingSystem. The return value should be 0 if the request was successfully executed, 1 if the request is not supported and some other value if an error occurred. It is up to the implementation or subclass of OperatingSystem to establish dependencies between the Shutdown and Reboot methods, and for example, to provide more sophisticated capabilities such as scheduled shutdown/ reboot, etc. In a subclass, the set of possible return codes could be specified, using a ValueMap qualifier on the method. The strings to which the ValueMap contents are &apos;translated&apos; may also be specified in the subclass as a Values array qualifier.</VALUE>
+            </QUALIFIER>
+          </METHOD>
+          <METHOD CLASSORIGIN="CIM_EnabledLogicalElement" PROPAGATED="true" NAME="RequestStateChange" TYPE="uint32">
+            <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+              <VALUE>
+                Requests that the state of the element be changed to the value specified in the RequestedState parameter. When the requested state change takes place, the EnabledState and RequestedState of the element will be the same. Invoking the RequestStateChange method multiple times could result in earlier requests being overwritten or lost.
+                A return code of 0 shall indicate the state change was successfully initiated.
+                A return code of 3 shall indicate that the state transition cannot complete within the interval specified by the TimeoutPeriod parameter.
+                A return code of 4096 (0x1000) shall indicate the state change was successfully initiated, a ConcreteJob has been created, and its reference returned in the output parameter Job. Any other return code indicates an error condition.
+              </VALUE>
+            </QUALIFIER>
+            <QUALIFIER NAME="ValueMap" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>0</VALUE>
+                <VALUE>1</VALUE>
+                <VALUE>2</VALUE>
+                <VALUE>3</VALUE>
+                <VALUE>4</VALUE>
+                <VALUE>5</VALUE>
+                <VALUE>6</VALUE>
+                <VALUE>..</VALUE>
+                <VALUE>4096</VALUE>
+                <VALUE>4097</VALUE>
+                <VALUE>4098</VALUE>
+                <VALUE>4099</VALUE>
+                <VALUE>4100..32767</VALUE>
+                <VALUE>32768..65535</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER TRANSLATABLE="true" NAME="Values" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>Completed with No Error</VALUE>
+                <VALUE>Not Supported</VALUE>
+                <VALUE>Unknown or Unspecified Error</VALUE>
+                <VALUE>Cannot complete within Timeout Period</VALUE>
+                <VALUE>Failed</VALUE>
+                <VALUE>Invalid Parameter</VALUE>
+                <VALUE>In Use</VALUE>
+                <VALUE>DMTF Reserved</VALUE>
+                <VALUE>Method Parameters Checked - Job Started</VALUE>
+                <VALUE>Invalid State Transition</VALUE>
+                <VALUE>Use of Timeout Parameter Not Supported</VALUE>
+                <VALUE>Busy</VALUE>
+                <VALUE>Method Reserved</VALUE>
+                <VALUE>Vendor Specific</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+              <VALUE.ARRAY>
+                <VALUE>CIM_EnabledLogicalElement.RequestedState</VALUE>
+              </VALUE.ARRAY>
+            </QUALIFIER>
+            <PARAMETER NAME="RequestedState" TYPE="uint16">
+              <QUALIFIER OVERRIDABLE="false" NAME="IN" TYPE="boolean">
+                <VALUE>true</VALUE>
+              </QUALIFIER>
+              <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+                <VALUE>The state requested for the element. This information will be placed into the RequestedState property of the instance if the return code of the RequestStateChange method is 0 (&apos;Completed with No Error&apos;), or 4096 (0x1000) (&apos;Job Started&apos;). Refer to the description of the EnabledState and RequestedState properties for the detailed explanations of the RequestedState values.</VALUE>
+              </QUALIFIER>
+              <QUALIFIER NAME="ValueMap" TYPE="string">
+                <VALUE.ARRAY>
+                  <VALUE>2</VALUE>
+                  <VALUE>3</VALUE>
+                  <VALUE>4</VALUE>
+                  <VALUE>6</VALUE>
+                  <VALUE>7</VALUE>
+                  <VALUE>8</VALUE>
+                  <VALUE>9</VALUE>
+                  <VALUE>10</VALUE>
+                  <VALUE>11</VALUE>
+                  <VALUE>..</VALUE>
+                  <VALUE>32768..65535</VALUE>
+                </VALUE.ARRAY>
+              </QUALIFIER>
+              <QUALIFIER TRANSLATABLE="true" NAME="Values" TYPE="string">
+                <VALUE.ARRAY>
+                  <VALUE>Enabled</VALUE>
+                  <VALUE>Disabled</VALUE>
+                  <VALUE>Shut Down</VALUE>
+                  <VALUE>Offline</VALUE>
+                  <VALUE>Test</VALUE>
+                  <VALUE>Defer</VALUE>
+                  <VALUE>Quiesce</VALUE>
+                  <VALUE>Reboot</VALUE>
+                  <VALUE>Reset</VALUE>
+                  <VALUE>DMTF Reserved</VALUE>
+                  <VALUE>Vendor Reserved</VALUE>
+                </VALUE.ARRAY>
+              </QUALIFIER>
+              <QUALIFIER NAME="ModelCorrespondence" TYPE="string">
+                <VALUE.ARRAY>
+                  <VALUE>CIM_EnabledLogicalElement.RequestedState</VALUE>
+                </VALUE.ARRAY>
+              </QUALIFIER>
+            </PARAMETER>
+            <PARAMETER.REFERENCE REFERENCECLASS="CIM_ConcreteJob" NAME="Job">
+              <QUALIFIER OVERRIDABLE="false" NAME="IN" TYPE="boolean">
+                <VALUE>false</VALUE>
+              </QUALIFIER>
+              <QUALIFIER OVERRIDABLE="false" NAME="OUT" TYPE="boolean">
+                <VALUE>true</VALUE>
+              </QUALIFIER>
+              <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+                <VALUE>May contain a reference to the ConcreteJob created to track the state transition initiated by the method invocation.</VALUE>
+              </QUALIFIER>
+            </PARAMETER.REFERENCE>
+            <PARAMETER NAME="TimeoutPeriod" TYPE="datetime">
+              <QUALIFIER OVERRIDABLE="false" NAME="IN" TYPE="boolean">
+                <VALUE>true</VALUE>
+              </QUALIFIER>
+              <QUALIFIER TRANSLATABLE="true" NAME="Description" TYPE="string">
+                <VALUE>
+                  A timeout period that specifies the maximum amount of time that the client expects the transition to the new state to take. The interval format must be used to specify the TimeoutPeriod. A value of 0 or a null parameter indicates that the client has no time requirements for the transition.
+                  If this property does not contain 0 or null and the implementation does not support this parameter, a return code of &apos;Use Of Timeout Parameter Not Supported&apos; shall be returned.
+                </VALUE>
+              </QUALIFIER>
+            </PARAMETER>
+          </METHOD>
+        </CLASS>
+      </VALUE.OBJECT>
+    </DECLGROUP>
+  </DECLARATION>
+</CIM>

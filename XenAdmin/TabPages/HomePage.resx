@@ -1,0 +1,1092 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="line2Learn.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="line2Learn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="line2Learn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 239</value>
+  </data>
+  <data name="line2Learn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="line2Learn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 20</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="line2Learn.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="line2Learn.Text" xml:space="preserve">
+    <value>XenCenter</value>
+  </data>
+  <data name="line2Learn.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;line2Learn.Name" xml:space="preserve">
+    <value>line2Learn</value>
+  </data>
+  <data name="&gt;&gt;line2Learn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;line2Learn.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;line2Learn.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="line1Learn.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="line1Learn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="line1Learn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 219</value>
+  </data>
+  <data name="line1Learn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="line1Learn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 20</value>
+  </data>
+  <data name="line1Learn.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="line1Learn.Text" xml:space="preserve">
+    <value>about using</value>
+  </data>
+  <data name="line1Learn.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;line1Learn.Name" xml:space="preserve">
+    <value>line1Learn</value>
+  </data>
+  <data name="&gt;&gt;line1Learn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;line1Learn.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;line1Learn.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="titleLearn.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt, style=Bold</value>
+  </data>
+  <data name="titleLearn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="titleLearn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 196</value>
+  </data>
+  <data name="titleLearn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="titleLearn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 23</value>
+  </data>
+  <data name="titleLearn.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="titleLearn.Text" xml:space="preserve">
+    <value>LEARN</value>
+  </data>
+  <data name="titleLearn.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;titleLearn.Name" xml:space="preserve">
+    <value>titleLearn</value>
+  </data>
+  <data name="&gt;&gt;titleLearn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;titleLearn.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;titleLearn.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="line1Add.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="line1Add.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="line1Add.Location" type="System.Drawing.Point, System.Drawing">
+    <value>193, 219</value>
+  </data>
+  <data name="line1Add.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="line1Add.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 20</value>
+  </data>
+  <data name="line1Add.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="line1Add.Text" xml:space="preserve">
+    <value>a server</value>
+  </data>
+  <data name="line1Add.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;line1Add.Name" xml:space="preserve">
+    <value>line1Add</value>
+  </data>
+  <data name="&gt;&gt;line1Add.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;line1Add.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;line1Add.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="titleAdd.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt, style=Bold</value>
+  </data>
+  <data name="titleAdd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="titleAdd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>193, 196</value>
+  </data>
+  <data name="titleAdd.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="titleAdd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 23</value>
+  </data>
+  <data name="titleAdd.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="titleAdd.Text" xml:space="preserve">
+    <value>ADD</value>
+  </data>
+  <data name="titleAdd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;titleAdd.Name" xml:space="preserve">
+    <value>titleAdd</value>
+  </data>
+  <data name="&gt;&gt;titleAdd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;titleAdd.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;titleAdd.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="line1Upgrade.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="line1Upgrade.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="line1Upgrade.Location" type="System.Drawing.Point, System.Drawing">
+    <value>381, 219</value>
+  </data>
+  <data name="line1Upgrade.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="line1Upgrade.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 20</value>
+  </data>
+  <data name="line1Upgrade.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="line1Upgrade.Text" xml:space="preserve">
+    <value>XenServer</value>
+  </data>
+  <data name="line1Upgrade.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;line1Upgrade.Name" xml:space="preserve">
+    <value>line1Upgrade</value>
+  </data>
+  <data name="&gt;&gt;line1Upgrade.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;line1Upgrade.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;line1Upgrade.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="titleUpgrade.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt, style=Bold</value>
+  </data>
+  <data name="titleUpgrade.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="titleUpgrade.Location" type="System.Drawing.Point, System.Drawing">
+    <value>381, 196</value>
+  </data>
+  <data name="titleUpgrade.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="titleUpgrade.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 23</value>
+  </data>
+  <data name="titleUpgrade.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="titleUpgrade.Text" xml:space="preserve">
+    <value>UPGRADE</value>
+  </data>
+  <data name="titleUpgrade.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;titleUpgrade.Name" xml:space="preserve">
+    <value>titleUpgrade</value>
+  </data>
+  <data name="&gt;&gt;titleUpgrade.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;titleUpgrade.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;titleUpgrade.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="line2Try.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="line2Try.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="line2Try.Location" type="System.Drawing.Point, System.Drawing">
+    <value>569, 239</value>
+  </data>
+  <data name="line2Try.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="line2Try.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 20</value>
+  </data>
+  <data name="line2Try.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="line2Try.Text" xml:space="preserve">
+    <value>Virtualization</value>
+  </data>
+  <data name="line2Try.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;line2Try.Name" xml:space="preserve">
+    <value>line2Try</value>
+  </data>
+  <data name="&gt;&gt;line2Try.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;line2Try.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;line2Try.ZOrder" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="line1Try.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11.25pt</value>
+  </data>
+  <data name="line1Try.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="line1Try.Location" type="System.Drawing.Point, System.Drawing">
+    <value>569, 219</value>
+  </data>
+  <data name="line1Try.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="line1Try.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 20</value>
+  </data>
+  <data name="line1Try.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="line1Try.Text" xml:space="preserve">
+    <value>Desktop</value>
+  </data>
+  <data name="line1Try.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;line1Try.Name" xml:space="preserve">
+    <value>line1Try</value>
+  </data>
+  <data name="&gt;&gt;line1Try.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;line1Try.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;line1Try.ZOrder" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="titleTry.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt, style=Bold</value>
+  </data>
+  <data name="titleTry.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="titleTry.Location" type="System.Drawing.Point, System.Drawing">
+    <value>569, 196</value>
+  </data>
+  <data name="titleTry.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="titleTry.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 23</value>
+  </data>
+  <data name="titleTry.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="titleTry.Text" xml:space="preserve">
+    <value>TRY</value>
+  </data>
+  <data name="titleTry.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;titleTry.Name" xml:space="preserve">
+    <value>titleTry</value>
+  </data>
+  <data name="&gt;&gt;titleTry.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;titleTry.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;titleTry.ZOrder" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="heading.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 18pt, style=Bold</value>
+  </data>
+  <data name="heading.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="heading.Location" type="System.Drawing.Point, System.Drawing">
+    <value>166, 0</value>
+  </data>
+  <data name="heading.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 36</value>
+  </data>
+  <data name="heading.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="heading.Text" xml:space="preserve">
+    <value>Citrix XenServer</value>
+  </data>
+  <data name="heading.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;heading.Name" xml:space="preserve">
+    <value>heading</value>
+  </data>
+  <data name="&gt;&gt;heading.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;heading.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;heading.ZOrder" xml:space="preserve">
+    <value>27</value>
+  </data>
+  <data name="subHeading.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="subHeading.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="subHeading.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 36</value>
+  </data>
+  <data name="subHeading.Size" type="System.Drawing.Size, System.Drawing">
+    <value>694, 25</value>
+  </data>
+  <data name="subHeading.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="subHeading.Text" xml:space="preserve">
+    <value>Industry leading, open source platform for cloud, server and desktop virtualization</value>
+  </data>
+  <data name="subHeading.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;subHeading.Name" xml:space="preserve">
+    <value>subHeading</value>
+  </data>
+  <data name="&gt;&gt;subHeading.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;subHeading.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;subHeading.ZOrder" xml:space="preserve">
+    <value>26</value>
+  </data>
+  <data name="panelLearn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 62</value>
+  </data>
+  <data name="panelLearn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 211</value>
+  </data>
+  <data name="panelLearn.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;panelLearn.Name" xml:space="preserve">
+    <value>panelLearn</value>
+  </data>
+  <data name="&gt;&gt;panelLearn.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.TransparentPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;panelLearn.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;panelLearn.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="panelAdd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>193, 62</value>
+  </data>
+  <data name="panelAdd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 211</value>
+  </data>
+  <data name="panelAdd.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;panelAdd.Name" xml:space="preserve">
+    <value>panelAdd</value>
+  </data>
+  <data name="&gt;&gt;panelAdd.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.TransparentPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;panelAdd.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;panelAdd.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="panelGet.Location" type="System.Drawing.Point, System.Drawing">
+    <value>381, 62</value>
+  </data>
+  <data name="panelGet.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 211</value>
+  </data>
+  <data name="panelGet.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;panelGet.Name" xml:space="preserve">
+    <value>panelGet</value>
+  </data>
+  <data name="&gt;&gt;panelGet.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.TransparentPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;panelGet.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;panelGet.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="panelTry.Location" type="System.Drawing.Point, System.Drawing">
+    <value>569, 62</value>
+  </data>
+  <data name="panelTry.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 211</value>
+  </data>
+  <data name="panelTry.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;panelTry.Name" xml:space="preserve">
+    <value>panelTry</value>
+  </data>
+  <data name="&gt;&gt;panelTry.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.TransparentPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;panelTry.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;panelTry.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="titleCommunity.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt, style=Bold</value>
+  </data>
+  <data name="titleCommunity.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="titleCommunity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>169, 302</value>
+  </data>
+  <data name="titleCommunity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>373, 23</value>
+  </data>
+  <data name="titleCommunity.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="titleCommunity.Text" xml:space="preserve">
+    <value>Community Support Partners</value>
+  </data>
+  <data name="titleCommunity.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;titleCommunity.Name" xml:space="preserve">
+    <value>titleCommunity</value>
+  </data>
+  <data name="&gt;&gt;titleCommunity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;titleCommunity.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;titleCommunity.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="labelNetwork.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelNetwork.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="labelNetwork.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelNetwork.Location" type="System.Drawing.Point, System.Drawing">
+    <value>296, 353</value>
+  </data>
+  <data name="labelNetwork.Size" type="System.Drawing.Size, System.Drawing">
+    <value>217, 17</value>
+  </data>
+  <data name="labelNetwork.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="labelNetwork.Text" xml:space="preserve">
+    <value>Network with other XenServer users</value>
+  </data>
+  <data name="&gt;&gt;labelNetwork.Name" xml:space="preserve">
+    <value>labelNetwork</value>
+  </data>
+  <data name="&gt;&gt;labelNetwork.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelNetwork.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;labelNetwork.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="iconCommunity.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="iconCommunity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>181, 338</value>
+  </data>
+  <data name="iconCommunity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 90</value>
+  </data>
+  <data name="iconCommunity.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;iconCommunity.Name" xml:space="preserve">
+    <value>iconCommunity</value>
+  </data>
+  <data name="&gt;&gt;iconCommunity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;iconCommunity.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;iconCommunity.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="iconLearn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="iconLearn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 82</value>
+  </data>
+  <data name="iconLearn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 95</value>
+  </data>
+  <data name="iconLearn.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;iconLearn.Name" xml:space="preserve">
+    <value>iconLearn</value>
+  </data>
+  <data name="&gt;&gt;iconLearn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;iconLearn.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;iconLearn.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="iconAdd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="iconAdd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>214, 82</value>
+  </data>
+  <data name="iconAdd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 96</value>
+  </data>
+  <data name="iconAdd.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;iconAdd.Name" xml:space="preserve">
+    <value>iconAdd</value>
+  </data>
+  <data name="&gt;&gt;iconAdd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;iconAdd.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;iconAdd.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="iconGet.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="iconGet.Location" type="System.Drawing.Point, System.Drawing">
+    <value>401, 82</value>
+  </data>
+  <data name="iconGet.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 95</value>
+  </data>
+  <data name="iconGet.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;iconGet.Name" xml:space="preserve">
+    <value>iconGet</value>
+  </data>
+  <data name="&gt;&gt;iconGet.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;iconGet.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;iconGet.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="iconTry.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="iconTry.Location" type="System.Drawing.Point, System.Drawing">
+    <value>597, 82</value>
+  </data>
+  <data name="iconTry.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 94</value>
+  </data>
+  <data name="iconTry.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;iconTry.Name" xml:space="preserve">
+    <value>iconTry</value>
+  </data>
+  <data name="&gt;&gt;iconTry.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;iconTry.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;iconTry.ZOrder" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="horizDiv.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="horizDiv.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 278</value>
+  </data>
+  <data name="horizDiv.Size" type="System.Drawing.Size, System.Drawing">
+    <value>707, 2</value>
+  </data>
+  <data name="horizDiv.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;horizDiv.Name" xml:space="preserve">
+    <value>horizDiv</value>
+  </data>
+  <data name="&gt;&gt;horizDiv.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;horizDiv.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;horizDiv.ZOrder" xml:space="preserve">
+    <value>28</value>
+  </data>
+  <data name="vertDiv3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="vertDiv3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>542, 62</value>
+  </data>
+  <data name="vertDiv3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>3, 182</value>
+  </data>
+  <data name="vertDiv3.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;vertDiv3.Name" xml:space="preserve">
+    <value>vertDiv3</value>
+  </data>
+  <data name="&gt;&gt;vertDiv3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;vertDiv3.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;vertDiv3.ZOrder" xml:space="preserve">
+    <value>29</value>
+  </data>
+  <data name="vertDiv2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="vertDiv2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>354, 62</value>
+  </data>
+  <data name="vertDiv2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>3, 182</value>
+  </data>
+  <data name="vertDiv2.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;vertDiv2.Name" xml:space="preserve">
+    <value>vertDiv2</value>
+  </data>
+  <data name="&gt;&gt;vertDiv2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;vertDiv2.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;vertDiv2.ZOrder" xml:space="preserve">
+    <value>30</value>
+  </data>
+  <data name="vertDiv1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="vertDiv1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>166, 62</value>
+  </data>
+  <data name="vertDiv1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>3, 182</value>
+  </data>
+  <data name="vertDiv1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;vertDiv1.Name" xml:space="preserve">
+    <value>vertDiv1</value>
+  </data>
+  <data name="&gt;&gt;vertDiv1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;vertDiv1.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;vertDiv1.ZOrder" xml:space="preserve">
+    <value>31</value>
+  </data>
+  <data name="bulletNetwork.Location" type="System.Drawing.Point, System.Drawing">
+    <value>286, 361</value>
+  </data>
+  <data name="bulletNetwork.Size" type="System.Drawing.Size, System.Drawing">
+    <value>4, 4</value>
+  </data>
+  <data name="bulletNetwork.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;bulletNetwork.Name" xml:space="preserve">
+    <value>bulletNetwork</value>
+  </data>
+  <data name="&gt;&gt;bulletNetwork.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bulletNetwork.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;bulletNetwork.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="bulletSupport.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="bulletSupport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>286, 385</value>
+  </data>
+  <data name="bulletSupport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>4, 4</value>
+  </data>
+  <data name="bulletSupport.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;bulletSupport.Name" xml:space="preserve">
+    <value>bulletSupport</value>
+  </data>
+  <data name="&gt;&gt;bulletSupport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bulletSupport.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;bulletSupport.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="bulletPartners.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="bulletPartners.Location" type="System.Drawing.Point, System.Drawing">
+    <value>286, 409</value>
+  </data>
+  <data name="bulletPartners.Size" type="System.Drawing.Size, System.Drawing">
+    <value>4, 4</value>
+  </data>
+  <data name="bulletPartners.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;bulletPartners.Name" xml:space="preserve">
+    <value>bulletPartners</value>
+  </data>
+  <data name="&gt;&gt;bulletPartners.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bulletPartners.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;bulletPartners.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="labelSupport.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelSupport.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="labelSupport.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelSupport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>296, 377</value>
+  </data>
+  <data name="labelSupport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 17</value>
+  </data>
+  <data name="labelSupport.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="labelSupport.Text" xml:space="preserve">
+    <value>Visit the Citrix Knowledge Center</value>
+  </data>
+  <data name="&gt;&gt;labelSupport.Name" xml:space="preserve">
+    <value>labelSupport</value>
+  </data>
+  <data name="&gt;&gt;labelSupport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelSupport.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;labelSupport.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="labelPartners.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelPartners.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="labelPartners.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelPartners.Location" type="System.Drawing.Point, System.Drawing">
+    <value>296, 401</value>
+  </data>
+  <data name="labelPartners.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 17</value>
+  </data>
+  <data name="labelPartners.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="labelPartners.Text" xml:space="preserve">
+    <value>Learn more about partner offerings</value>
+  </data>
+  <data name="&gt;&gt;labelPartners.Name" xml:space="preserve">
+    <value>labelPartners</value>
+  </data>
+  <data name="&gt;&gt;labelPartners.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelPartners.Parent" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;labelPartners.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="mainPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 10</value>
+  </data>
+  <data name="mainPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="mainPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>707, 442</value>
+  </data>
+  <data name="mainPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;mainPanel.Name" xml:space="preserve">
+    <value>mainPanel</value>
+  </data>
+  <data name="&gt;&gt;mainPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mainPanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;mainPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>707, 452</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>HomePage</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.DoubleBufferedPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+</root>

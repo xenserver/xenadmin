@@ -1,0 +1,419 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Menu" xml:space="preserve">
+    <value>0xffe9</value>
+  </data>  
+  <data name="Back" xml:space="preserve">
+    <value>0xff08</value>
+  </data>
+  <data name="Tab" xml:space="preserve">
+    <value>0xff09</value>
+  </data>
+  <data name="ControlKey" xml:space="preserve">
+    <value>0xffe3</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>0xffff</value>
+  </data>
+  <data name="Down" xml:space="preserve">
+    <value>65364</value>
+  </data>
+  <data name="Enter" xml:space="preserve">
+    <value>0xff0d</value>
+  </data>
+  <data name="Escape" xml:space="preserve">
+    <value>0xff1b</value>
+  </data>
+  <data name="Left" xml:space="preserve">
+    <value>65361</value>
+  </data>
+  <data name="Right" xml:space="preserve">
+    <value>65363</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>0xff13</value>
+  </data>
+  <data name="Scroll" xml:space="preserve">
+    <value>0xff14</value>
+  </data>
+  <data name="Up" xml:space="preserve">
+    <value>65362</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>0xff50</value>
+  </data>
+  <data name="PageUp" xml:space="preserve">
+    <value>0xff55</value>
+  </data>
+  <data name="PageDown" xml:space="preserve">
+    <value>0xff56</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>0xff57</value>
+  </data>
+  <data name="PrintScreen" xml:space="preserve">
+    <value>0xff61</value>
+  </data>
+  <data name="Insert" xml:space="preserve">
+    <value>0xff63</value>
+  </data>
+  <data name="NumLock" xml:space="preserve">
+    <value>-1</value>
+  </data>
+  <data name="Separator" xml:space="preserve">
+    <value>0xffac</value>
+  </data>
+  <data name="F1" xml:space="preserve">
+    <value>0xffbe</value>
+  </data>
+  <data name="F2" xml:space="preserve">
+    <value>0xffbf</value>
+  </data>
+  <data name="F3" xml:space="preserve">
+    <value>0xffc0</value>
+  </data>
+  <data name="F4" xml:space="preserve">
+    <value>0xffc1</value>
+  </data>
+  <data name="F5" xml:space="preserve">
+    <value>0xffc2</value>
+  </data>
+  <data name="F6" xml:space="preserve">
+    <value>0xffc3</value>
+  </data>
+  <data name="F7" xml:space="preserve">
+    <value>0xffc4</value>
+  </data>
+  <data name="F8" xml:space="preserve">
+    <value>0xffc5</value>
+  </data>
+  <data name="F9" xml:space="preserve">
+    <value>0xffc6</value>
+  </data>
+  <data name="F10" xml:space="preserve">
+    <value>0xffc7</value>
+  </data>
+  <data name="F11" xml:space="preserve">
+    <value>0xffc8</value>
+  </data>
+  <data name="F12" xml:space="preserve">
+    <value>0xffc9</value>
+  </data>
+  <data name="F13" xml:space="preserve">
+    <value>0xffca</value>
+  </data>
+  <data name="F14" xml:space="preserve">
+    <value>0xffcb</value>
+  </data>
+  <data name="F15" xml:space="preserve">
+    <value>0xffcc</value>
+  </data>
+  <data name="F16" xml:space="preserve">
+    <value>0xffcd</value>
+  </data>
+  <data name="F17" xml:space="preserve">
+    <value>0xffce</value>
+  </data>
+  <data name="F18" xml:space="preserve">
+    <value>0xffcf</value>
+  </data>
+  <data name="F19" xml:space="preserve">
+    <value>0xffd0</value>
+  </data>
+  <data name="F20" xml:space="preserve">
+    <value>0xffd1</value>
+  </data>
+  <data name="F21" xml:space="preserve">
+    <value>0xffd2</value>
+  </data>
+  <data name="F22" xml:space="preserve">
+    <value>0xffd3</value>
+  </data>
+  <data name="F23" xml:space="preserve">
+    <value>0xffd4</value>
+  </data>
+  <data name="F24" xml:space="preserve">
+    <value>0xffd5</value>
+  </data>
+  <data name="DEAD_GRAVE" xml:space="preserve">
+    <value>0xfe50</value>
+  </data>
+  <data name="DEAD_ACUTE" xml:space="preserve">
+    <value>0xfe51</value>
+  </data>
+  <data name="DEAD_CIRCUMFLEX" xml:space="preserve">
+    <value>0xfe52</value>
+  </data>
+  <data name="DEAD_TILDE" xml:space="preserve">
+    <value>0xfe53</value>
+  </data>
+  <data name="DEAD_MACRON" xml:space="preserve">
+    <value>0xfe54</value>
+  </data>
+  <data name="DEAD_BREVE" xml:space="preserve">
+    <value>0xfe55</value>
+  </data>
+  <data name="DEAD_ABOVEDOT" xml:space="preserve">
+    <value>0xfe56</value>
+  </data>
+  <data name="DEAD_DIAERESIS" xml:space="preserve">
+    <value>0xfe57</value>
+  </data>
+  <data name="DEAD_ABOVERING" xml:space="preserve">
+    <value>0xfe58</value>
+  </data>
+  <data name="DEAD_DOUBLEACUTE" xml:space="preserve">
+    <value>0xfe59</value>
+  </data>
+  <data name="DEAD_CARON" xml:space="preserve">
+    <value>0xfe5a</value>
+  </data>
+  <data name="DEAD_CEDILLA" xml:space="preserve">
+    <value>0xfe5b</value>
+  </data>
+  <data name="DEAD_OGONEK" xml:space="preserve">
+    <value>0xfe5c</value>
+  </data>
+  <data name="DEAD_IOTA" xml:space="preserve">
+    <value>0xfe5d</value>
+  </data>
+  <data name="DEAD_VOICED_SOUND" xml:space="preserve">
+    <value>0xfe5e</value>
+  </data>
+  <data name="DEAD_SEMIVOICED_SOUND" xml:space="preserve">
+    <value>0xfe5f</value>
+  </data>
+  <data name="EURO_SIGN" xml:space="preserve">
+    <value>0x20ac</value>
+  </data>
+  <!-- XK_exclamdown -->
+  <data name="INVERTED_EXCLAMATION_MARK" xml:space="preserve">
+    <value>0x00a1</value>
+  </data>
+
+  <!-- replaced by INPUT_METHOD_ON_OFF for Microsoft Windows and Solaris; 
+       might still be used for other platforms -->
+  <data name="KanjiMode" xml:space="preserve">
+    <value>0xff21</value>
+  </data>
+
+  <!-- XK_Muhenkan -->
+  <data name="IMENonconvert" xml:space="preserve">
+    <value>0xff22</value>
+  </data>
+  <!-- XK_Henkan -->
+  <data name="IMEConvert" xml:space="preserve">
+    <value>0xff23</value>
+  </data>
+  <!-- XK_Romaji -->
+  <data name="ROMAN_CHARACTERS" xml:space="preserve">
+    <value>0xff24</value>
+  </data>
+  <data name="HIRAGANA" xml:space="preserve">
+    <value>0xff25</value>
+  </data>
+  <data name="KATAKANA" xml:space="preserve">
+    <value>0xff26</value>
+  </data>
+
+  <!-- These three are on the Japanese Macintosh keyboard, and select the Japanese
+ input method at the same time as switching mode.  Just sending the XK_ for
+ the mode switch might not be enough. -->
+  <data name="JAPANESE_ROMAN" xml:space="preserve">
+    <value>0xff24</value>
+  </data>
+  <data name="JAPANESE_HIRAGANA" xml:space="preserve">
+    <value>0xff25</value>
+  </data>
+  <data name="JAPANESE_KATAKANA" xml:space="preserve">
+    <value>0xff26</value>
+  </data>
+  <!-- XK_Zenkaku -->
+  <data name="FULL_WIDTH" xml:space="preserve">
+    <value>0xff28</value>
+  </data>
+  <!-- XK_Hankaku -->
+  <data name="HALF_WIDTH" xml:space="preserve">
+    <value>0xff29</value>
+  </data>
+  <data name="KanaMode" xml:space="preserve">
+    <value>0xff2d</value>
+  </data>
+<!--
+# replaced by KANA_LOCK for Microsoft Windows and Solaris; 
+# might still be used on other platforms
+# XK_Kana_Shift
+-->
+  <data name="KANA" xml:space="preserve">
+    <value>0xff2e</value>
+  </data>
+<!-- XK_Eisu_Shift -->
+  <data name="ALPHANUMERIC" xml:space="preserve">
+    <value>0xff2f</value>
+  </data>
+<!-- XK_Kanji_Bangou -->
+  <data name="CODE_INPUT" xml:space="preserve">
+    <value>0xff37</value>
+  </data>
+<!-- XK_Mae_Koho -->
+  <data name="PREVIOUS_CANDIDATE" xml:space="preserve">
+    <value>0xff3e</value>
+  </data>
+<!-- XK_Zen_Koho -->
+  <data name="ALL_CANDIDATES" xml:space="preserve">
+    <value>0xff3d</value>
+  </data>
+<!-- According to Java: Japanese PC 106 keyboard: kanji. Japanese Solaris
+# keyboard: nihongo.
+# I'm sending XK_Kanji -->
+  <data name="INPUT_METHOD_ON_OFF" xml:space="preserve">
+    <value>0xff21</value>
+  </data>
+
+<!--
+
+#
+# No known XK_ constants
+#
+
+#</data>
+  <data name="FINAL                    = 0x0018;
+#</data>
+  <data name="CUT                      = 0xFFD1;
+#</data>
+  <data name="COPY                     = 0xFFCD;
+#</data>
+  <data name="PASTE                    = 0xFFCF;
+#</data>
+  <data name="PROPS                    = 0xFFCA;
+#</data>
+  <data name="STOP                     = 0xFFC8;
+# Japanese Solaris keyboard: kakutei
+#</data>
+  <data name="ACCEPT
+
+-->
+  <data name="ShiftKey" xml:space="preserve">
+    <value>0xffe1</value>
+  </data>
+  <data name="Prior" xml:space="preserve">
+    <value>0xff55</value>
+  </data>
+</root>

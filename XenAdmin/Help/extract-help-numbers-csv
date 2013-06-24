@@ -1,0 +1,8 @@
+#!/bin/sh
+
+dir=$(dirname "$0")
+
+cat $dir/HelpManager.resx | sed -e 's###g' | awk '
+/data name="/ { FS="\""; NAME=$2; }
+/<value>.*<\/value>/ { print NAME "," $1; }' |
+sed -e 's# *<value># #g' | sed -e 's#</value>##g' | grep -v Icon1 | grep -v Bitmap1 | grep -v Name1 | sort -nk 3 

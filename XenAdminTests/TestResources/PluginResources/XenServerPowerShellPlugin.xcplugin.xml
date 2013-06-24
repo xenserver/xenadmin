@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XenCenterPlugin xmlns="http://www.citrix.com/XenCenter/Plugins/schema" version="1" plugin_name="XenServerPowerShellPlugin" plugin_version="1.0.0.0">
+  <!-- XenServer PowerShell test 1... using a script-->
+  <MenuItem name="file_XenServerPowerShellTest1" menu="file" serialized="none">
+    <XenServerPowerShell filename="TestResources\PluginResources\XenServerPowerShellTest.ps1" window="true"/>
+  </MenuItem>
+  <MenuItem name="view_XenServerPowerShellTest1" menu="view" serialized="none">
+    <XenServerPowerShell filename="TestResources\PluginResources\XenServerPowerShellTest.ps1" window="true"/>
+  </MenuItem>
+  <MenuItem name="pool_XenServerPowerShellTest1" menu="pool" serialized="none">
+    <XenServerPowerShell filename="TestResources\PluginResources\XenServerPowerShellTest.ps1" window="true"/>
+  </MenuItem>
+  <MenuItem name="server_XenServerPowerShellTest1" menu="server" serialized="none">
+    <XenServerPowerShell filename="TestResources\PluginResources\XenServerPowerShellTest.ps1" window="true"/>
+  </MenuItem>
+  <MenuItem name="vm_XenServerPowerShellTest1" menu="vm" serialized="none">
+    <XenServerPowerShell filename="TestResources\PluginResources\XenServerPowerShellTest.ps1" window="true"/>
+  </MenuItem>
+  <MenuItem name="storage_XenServerPowerShellTest1" menu="storage" serialized="none">
+    <XenServerPowerShell filename="TestResources\PluginResources\XenServerPowerShellTest.ps1" window="true"/>
+  </MenuItem>
+  <MenuItem name="templates_XenServerPowerShellTest1" menu="templates" serialized="none">
+    <XenServerPowerShell filename="TestResources\PluginResources\XenServerPowerShellTest.ps1" window="true"/>
+  </MenuItem>
+  <MenuItem name="tools_XenServerPowerShellTest1" menu="tools" serialized="none">
+    <XenServerPowerShell filename="TestResources\PluginResources\XenServerPowerShellTest.ps1" window="true"/>
+  </MenuItem>
+  <MenuItem name="window_XenServerPowerShellTest1" menu="window" serialized="none">
+    <XenServerPowerShell filename="TestResources\PluginResources\XenServerPowerShellTest.ps1" window="true"/>
+  </MenuItem>
+  <MenuItem name="help_XenServerPowerShellTest1" menu="help" serialized="none">
+    <XenServerPowerShell filename="TestResources\PluginResources\XenServerPowerShellTest.ps1" window="true"/>
+  </MenuItem>
+  <!-- XenServer PowerShell test 2... using a function-->
+  <MenuItem name="file_XenServerPowerShellTest2" menu="file" serialized="none">
+    <XenServerPowerShell filename="TestResources\PluginResources\XenServerPowerShellTest.ps1" function="write-host unit-test" window="true"/>
+  </MenuItem>
+  <MenuItem name="view_XenServerPowerShellTest2" menu="view" serialized="none">
+    <XenServerPowerShell filename="TestResources\PluginResources\XenServerPowerShellTest.ps1" function="write-host unit-test" window="true"/>
+  </MenuItem>
+  <MenuItem name="pool_XenServerPowerShellTest2" menu="pool" serialized="none">
+    <XenServerPowerShell filename="TestResources\PluginResources\XenServerPowerShellTest.ps1" function="write-host unit-test" window="true"/>
+  </MenuItem>
+  <MenuItem name="server_XenServerPowerShellTest2" menu="server" serialized="none">
+    <XenServerPowerShell filename="TestResources\PluginResources\XenServerPowerShellTest.ps1" function="write-host unit-test" window="true"/>
+  </MenuItem>
+  <MenuItem name="vm_XenServerPowerShellTest2" menu="vm" serialized="none">
+    <XenServerPowerShell filename="TestResources\PluginResources\XenServerPowerShellTest.ps1" function="write-host unit-test" window="true"/>
+  </MenuItem>
+  <MenuItem name="storage_XenServerPowerShellTest2" menu="storage" serialized="none">
+    <XenServerPowerShell filename="TestResources\PluginResources\XenServerPowerShellTest.ps1" function="write-host unit-test" window="true"/>
+  </MenuItem>
+  <MenuItem name="templates_XenServerPowerShellTest2" menu="templates" serialized="none">
+    <XenServerPowerShell filename="TestResources\PluginResources\XenServerPowerShellTest.ps1" function="write-host unit-test" window="true"/>
+  </MenuItem>
+  <MenuItem name="tools_XenServerPowerShellTest2" menu="tools" serialized="none">
+    <XenServerPowerShell filename="TestResources\PluginResources\XenServerPowerShellTest.ps1" function="write-host unit-test" window="true"/>
+  </MenuItem>
+  <MenuItem name="window_XenServerPowerShellTest2" menu="window" serialized="none">
+    <XenServerPowerShell filename="TestResources\PluginResources\XenServerPowerShellTest.ps1" function="write-host unit-test" window="true"/>
+  </MenuItem>
+  <MenuItem name="help_XenServerPowerShellTest2" menu="help" serialized="none">
+    <XenServerPowerShell filename="TestResources\PluginResources\XenServerPowerShellTest.ps1" function="write-host unit-test" window="true"/>
+  </MenuItem>
+</XenCenterPlugin>

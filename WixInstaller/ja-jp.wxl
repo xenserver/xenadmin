@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WixLocalization Culture="ja-JP" Codepage="932" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+    <String Id="Open">開く</String>
+    <String Id="XVA_File">XenServer 仮想アプライアンス</String>
+    <String Id="OVF_File">OVF ファイル</String>
+    <String Id="OVA_File">OVA ファイル</String>
+    <String Id="VHD_File">VHD ファイル</String>
+    <String Id="VMDK_File">VMDK ファイル</String>
+    <String Id="XenServer_License_File">XenServer ライセンス ファイル</String>
+    <String Id="XenServer_Backup_File">XenServer バックアップ ファイル</String>
+    <String Id="XenServer_Update_File">XenServer アップデート ファイル</String>
+    <String Id="XenServer_OEM_Update_File">XenServer OEM アップデート ファイル</String>
+    <String Id="XenCenter_Saved_Search">XenCenter 保存された検索条件</String>
+    <String Id="Required_For_Installation">この製品をインストールするには、.NET Framework 3.5 以降が必要です。</String>
+</WixLocalization>

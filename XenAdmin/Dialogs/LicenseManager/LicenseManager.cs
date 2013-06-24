@@ -1,0 +1,283 @@
+﻿/* Copyright (c) Citrix Systems Inc. 
+ * All rights reserved. 
+ * 
+ * Redistribution and use in source and binary forms, 
+ * with or without modification, are permitted provided 
+ * that the following conditions are met: 
+ * 
+ * *   Redistributions of source code must retain the above 
+ *     copyright notice, this list of conditions and the 
+ *     following disclaimer. 
+ * *   Redistributions in binary form must reproduce the above 
+ *     copyright notice, this list of conditions and the 
+ *     following disclaimer in the documentation and/or other 
+ *     materials provided with the distribution. 
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+ * CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
+ * SUCH DAMAGE.
+ */
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+using XenAdmin.Controls;
+using XenAdmin.Controls.CheckableDataGridView;
+using XenAdmin.Controls.SummaryPanel;
+using XenAdmin.Properties;
+using XenAPI;
+
+namespace XenAdmin.Dialogs
+{
+    public partial class LicenseManager : XenDialogBase, ILicenseManagerView
+    {
+        public LicenseManager(LicenseManagerController lmcontroller)
+        {
+            InitializeComponent();
+            SetupControllers(lmcontroller);
+        }
+
+        private void SetupControllers(LicenseManagerController lmcontroller)
+        {
+            checkableDataGridView.Controller = new LicenseCheckableDataGridViewController(checkableDataGridView);
+            summaryPanel.Controller = new SummaryPanelController(summaryPanel);
+            checkableDataGridView.LoadView();
+            Controller = lmcontroller;
+            Controller.View = this;
+        }
+
+        private void LoadView(List<IXenObject> itemsToShow, List<IXenObject> selectedItems)
+        {
+            //Grid
+            checkableDataGridView.SelectionChanged += checkableDataGridView_SelectionChanged;
+            checkableDataGridView.RowUpdated += checkableDataGridView_RowUpdated;
+            checkableDataGridView.RowChecked += checkableDataGridView_RowChecked;
+            
+            //Buttons
+            activateFreeXenServerButton.Click += activateFreeXenServerButton_Click;
+            cancelButton.Click += closeButton_Click;
+            releaseLicenseButton.Click += releaseLicenseButton_Click;
+            assignLicenceButton.Click += assignLicenceButton_Click;
+            applyActivationKeyToolStripMenuItem.Click += applyActivationKeyToolStripMenuItem_Click;
+            requestActivationKeyToolStripMenuItem.Click += requestActivationKeyToolStripMenuItem_Click;
+            downloadLicenseServerLink.Click += downloadLicenseServerLink_Click;
+            
+            //Controllers
+            Controller.PopulateGrid(itemsToShow, selectedItems);
+
+        }
+
+        void checkableDataGridView_RowChecked(object sender, CheckableDataGridViewRowEventArgs e)
+        {
+            Controller.UpdateButtonEnablement();
+        }
+
+        private void assignLicenceButton_Click(object sender, EventArgs e)
+        {
+            Controller.AssignLicense(checkableDataGridView.CheckedRows);
+        }
+
+        private void activateFreeXenServerButton_Click(object sender, EventArgs e)
+        {
+            freeXenServerContextMenuStrip.Show(activateFreeXenServerButton, new Point(0,activateFreeXenServerButton.Height));
+        }
+
+        private void applyActivationKeyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Controller.ApplyActivationKey(checkableDataGridView.CheckedRows);
+        }
+
+        private void requestActivationKeyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Controller.RequestActivationKey(checkableDataGridView.CheckedRows);
+        }
+
+        private void downloadLicenseServerLink_Click(object sender, EventArgs e)
+        {
+            Controller.DownloadLicenseManager();
+        }
+
+        private void releaseLicenseButton_Click(object sender, EventArgs e)
+        {
+            Controller.ReleaseLicenses(checkableDataGridView.CheckedRows);
+        }
+
+        private void checkableDataGridView_RowUpdated(object sender, CheckableDataGridViewRowEventArgs e)
+        {
+            LicenseCheckableDataGridView senderGrid = sender as LicenseCheckableDataGridView;
+            if (senderGrid == null || e.RowIndex >= senderGrid.Rows.Count || e.RowIndex < 0)
+                return;
+
+            LicenseDataGridViewRow lRow = senderGrid.Rows[e.RowIndex] as LicenseDataGridViewRow;
+            if (lRow == null)
+                return;
+
+            Controller.SetStatusIcon(e.RowIndex, lRow.RowStatus);
+
+            if (senderGrid.SelectedRows.Count >= 1 && senderGrid.SelectedRows[0].Index == e.RowIndex)
+            {
+                Controller.SummariseSelectedRow(checkableDataGridView.GetCheckableRow(e.RowIndex));
+            }
+
+            senderGrid.SortAndRefresh();
+        }
+
+        private void checkableDataGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            CheckableDataGridView senderGrid = sender as CheckableDataGridView;
+            if(senderGrid == null || senderGrid.SelectedRows.Count<1)
+                return;
+
+            Controller.SummariseSelectedRow(checkableDataGridView.GetCheckableRow(senderGrid.SelectedRows[0].Index));
+        }
+
+        private void closeButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        public DialogResult ShowDialog(IWin32Window parent, List<IXenObject> itemsToShow, List<IXenObject> selectedItems)
+        {
+            LoadView(itemsToShow, selectedItems);
+            return ShowDialog(parent);
+        }
+
+        public void RefreshView(List<IXenObject> itemsToShow, List<IXenObject> selectedItems)
+        {
+            Controller.Repopulate(itemsToShow, selectedItems);
+        }
+
+        #region ISummaryPanelView Members
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public LicenseManagerController Controller { set; private get; } 
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void DrawRowStatusIcon(int rowIndex, LicenseDataGridViewRow.Status rowStatus)
+        {
+            checkableDataGridView.SetStatusIcon(rowIndex, rowStatus);
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public List<CheckableDataGridViewRow> GetCheckedRows
+        {
+            get { return checkableDataGridView.CheckedRows; }
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void DrawRowsInGrid(List<CheckableDataGridViewRow> itemsToShow)
+        {
+            checkableDataGridView.AddRows(itemsToShow);
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void DrawSelectedRowsAsChecked(List<CheckableDataGridViewRow> rows)
+        {
+            checkableDataGridView.CheckRows(rows);
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void DrawSummaryForHighlightedRow(CheckableDataGridViewRow row, SummaryTextComponent summaryComponent, Action runOnUrlClick)
+        {
+            Program.Invoke(this, delegate
+                                     {
+                                         LicenseDataGridViewRow lRow = row as LicenseDataGridViewRow;
+                                         if(lRow == null)
+                                             return;
+
+                                         summaryPanel.Title = lRow.XenObject.Name;
+                                         summaryPanel.HelperUrl = Messages.LICENSE_MANAGER_BUY_LICENSE_LINK_TEXT;
+                                         summaryPanel.HelperUrlVisible = true;
+                                         summaryPanel.WarningVisible = lRow.WarningRequired;
+                                         summaryPanel.WarningText = lRow.WarningText;
+                                         summaryPanel.SummaryText = summaryComponent;
+                                         summaryPanel.WarningIcon = lRow.RowStatus == LicenseDataGridViewRow.Status.Warning ?
+                                                                                     SystemIcons.Error.ToBitmap() : 
+                                                                                     Resources._000_WarningAlert_h32bit_32;
+                                         summaryPanel.InformationVisible = false;
+                                         summaryPanel.RunOnUrlClick = runOnUrlClick;
+                                     });
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void DrawHighlightedRow(CheckableDataGridViewRow row)
+        {
+            checkableDataGridView.HighlightRow(row);
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void DrawAssignButtonAsDisabled(bool isDisabled)
+        {
+            assignLicenceButton.Enabled = !isDisabled;
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void DrawReleaseButtonAsDisabled(bool isDisabled)
+        {
+            releaseLicenseButton.Enabled = !isDisabled;
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void DrawActivateButtonAsDisabled(bool isDisabled)
+        {
+            activateFreeXenServerButton.Enabled = !isDisabled;
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void DrawActivateButtonAsHidden(bool isHidden)
+        {
+            if(isHidden)
+                activateFreeXenServerButton.Hide();
+            else
+                activateFreeXenServerButton.Show();
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void DrawRequestButtonAsDisabled(bool isDisabled)
+        {
+            requestActivationKeyToolStripMenuItem.Enabled = !isDisabled;
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void DrawApplyButtonAsDisabled(bool isDisabled)
+        {
+            applyActivationKeyToolStripMenuItem.Enabled = !isDisabled;
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void ClearAllGridRows()
+        {
+            checkableDataGridView.ClearAllGridRows();
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void DrawSummaryInformation(string info, bool show)
+        {
+            Program.Invoke(Program.MainWindow, delegate
+                                                   {
+                                                       summaryPanel.InformationText = info;
+                                                       summaryPanel.InformationVisible = show;
+                                                   });
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void SetRowDisabledRowInfo(int rowIndex, string info, bool disabled)
+        {
+            checkableDataGridView.SetRowInformation(rowIndex, info, disabled);
+        }
+
+        #endregion
+    }
+}

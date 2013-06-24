@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WixLocalization Culture="en-US" Codepage="1252" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+    <String Id="Open">Open</String>
+    <String Id="XVA_File">XVA File</String>
+    <String Id="OVF_File">OVF File</String>
+    <String Id="OVA_File">OVA File</String>
+    <String Id="VHD_File">VHD File</String>
+    <String Id="VMDK_File">VMDK File</String>
+    <String Id="XenServer_License_File">XenServer License File</String>
+    <String Id="XenServer_Backup_File">XenServer Backup File</String>
+    <String Id="XenServer_Update_File">XenServer Update File</String>
+    <String Id="XenServer_OEM_Update_File">XenServer OEM Update File</String>
+    <String Id="XenCenter_Saved_Search">XenCenter Saved Search</String>
+    <String Id="Required_For_Installation">.NET Framework 3.5 is required for this installation.</String>
+</WixLocalization>

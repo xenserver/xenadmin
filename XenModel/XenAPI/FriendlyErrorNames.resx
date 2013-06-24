@@ -1,0 +1,1781 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
+    <value>An activation key can only be applied when the edition is set to 'free'.</value>
+  </data>
+  <data name="AUTH_ALREADY_ENABLED" xml:space="preserve">
+    <value>External authentication for this server is already enabled.</value>
+  </data>
+  <data name="AUTH_DISABLE_FAILED" xml:space="preserve">
+    <value>External authentication has been disabled with errors: Your AD machine account was not disabled successfully on the AD server.</value>
+  </data>
+  <data name="AUTH_DISABLE_FAILED_PERMISSION_DENIED" xml:space="preserve">
+    <value>External authentication has been disabled with errors: Your AD machine account was not disabled on the AD server as permission was denied.</value>
+  </data>
+  <data name="AUTH_DISABLE_FAILED_WRONG_CREDENTIALS" xml:space="preserve">
+    <value>External authentication has been disabled with errors: Some AD machine accounts were not disabled on the AD server due to invalid credentials.</value>
+  </data>
+  <data name="AUTH_ENABLE_FAILED" xml:space="preserve">
+    <value>Could not enable external authentication.</value>
+  </data>
+  <data name="AUTH_ENABLE_FAILED_DOMAIN_LOOKUP_FAILED" xml:space="preserve">
+    <value>XenServer was unable to contact your domain server to enable external authentication. Check that your settings are correct and a route to the server exists.</value>
+  </data>
+  <data name="AUTH_ENABLE_FAILED_PERMISSION_DENIED" xml:space="preserve">
+    <value>Failed to enable external authentication, permission on the AD server was denied.</value>
+  </data>
+  <data name="AUTH_ENABLE_FAILED_UNAVAILABLE" xml:space="preserve">
+    <value>Failed to enable external authentication, the AD server was unavailable.</value>
+  </data>
+  <data name="AUTH_ENABLE_FAILED_WRONG_CREDENTIALS" xml:space="preserve">
+    <value>Failed to enable external authentication, the supplied credentials were invalid.</value>
+  </data>
+  <data name="AUTH_IS_DISABLED" xml:space="preserve">
+    <value>External authentication is disabled, unable to resolve subject name.</value>
+  </data>
+  <data name="AUTH_SERVICE_ERROR" xml:space="preserve">
+    <value>Error querying the external directory service.</value>
+  </data>
+  <data name="AUTH_UNKNOWN_TYPE" xml:space="preserve">
+    <value>Unknown type of external authentication.</value>
+  </data>
+  <data name="BACKUP_SCRIPT_FAILED" xml:space="preserve">
+    <value>The backup could not be performed because the backup script failed.</value>
+  </data>
+  <data name="BOOTLOADER_FAILED" xml:space="preserve">
+    <value>The bootloader for this VM returned an error -- did the VM installation succeed?  {1}</value>
+  </data>
+  <data name="CANNOT_ADD_TUNNEL_TO_BOND_SLAVE" xml:space="preserve">
+    <value>This PIF is a bond slave and cannot have a tunnel on it.</value>
+  </data>
+  <data name="CANNOT_ADD_VLAN_TO_BOND_SLAVE" xml:space="preserve">
+    <value>This PIF is a bond slave and cannot have a VLAN on it.</value>
+  </data>
+  <data name="CANNOT_CONTACT_HOST" xml:space="preserve">
+    <value>Cannot forward messages because the server cannot be contacted.  The server may be switched off or there may be network connectivity problems.</value>
+  </data>
+  <data name="CANNOT_CREATE_STATE_FILE" xml:space="preserve">
+    <value>An HA statefile could not be created, perhaps because no SR with the appropriate capability was found.</value>
+  </data>
+  <data name="CANNOT_DESTROY_DISASTER_RECOVERY_TASK" xml:space="preserve">
+    <value>The disaster recovery task could not be cleanly destroyed.</value>
+  </data>
+  <data name="CANNOT_DESTROY_SYSTEM_NETWORK" xml:space="preserve">
+    <value>You tried to destroy a system network: these cannot be destroyed.</value>
+  </data>
+  <data name="CANNOT_ENABLE_REDO_LOG" xml:space="preserve">
+    <value>Could not enable redo log.</value>
+  </data>
+  <data name="CANNOT_EVACUATE_HOST" xml:space="preserve">
+    <value>This server cannot be evacuated.</value>
+  </data>
+  <data name="CANNOT_FETCH_PATCH" xml:space="preserve">
+    <value>The requested update could not be obtained from the master.</value>
+  </data>
+  <data name="CANNOT_FIND_OEM_BACKUP_PARTITION" xml:space="preserve">
+    <value>The backup partition to stream the update to cannot be found</value>
+  </data>
+  <data name="CANNOT_FIND_PATCH" xml:space="preserve">
+    <value>The requested update could not be found.  This can occur when you designate a new master.  Please upload it again</value>
+  </data>
+  <data name="CANNOT_FIND_STATE_PARTITION" xml:space="preserve">
+    <value>The restore could not be performed because the state partition could not be found</value>
+  </data>
+  <data name="CANNOT_PLUG_BOND_SLAVE" xml:space="preserve">
+    <value>This PIF is a bond slave and cannot be plugged.</value>
+  </data>
+  <data name="CANNOT_PLUG_VIF" xml:space="preserve">
+    <value>This VM cannot be started, as its network interfaces could not be connected.  One of the NICs is in use elsewhere.</value>
+  </data>
+  <data name="CANNOT_RESET_CONTROL_DOMAIN" xml:space="preserve">
+    <value>The power-state of a control domain cannot be reset.</value>
+  </data>
+  <data name="CERTIFICATE_ALREADY_EXISTS" xml:space="preserve">
+    <value>A certificate already exists with the specified name.</value>
+  </data>
+  <data name="CERTIFICATE_CORRUPT" xml:space="preserve">
+    <value>The specified certificate is corrupt or unreadable.</value>
+  </data>
+  <data name="CERTIFICATE_DOES_NOT_EXIST" xml:space="preserve">
+    <value>The specified certificate does not exist.</value>
+  </data>
+  <data name="CERTIFICATE_LIBRARY_CORRUPT" xml:space="preserve">
+    <value>The certificate library is corrupt or unreadable.</value>
+  </data>
+  <data name="CERTIFICATE_NAME_INVALID" xml:space="preserve">
+    <value>The specified certificate name is invalid.</value>
+  </data>
+  <data name="CHANGE_PASSWORD_REJECTED" xml:space="preserve">
+    <value>Change password rejected</value>
+  </data>
+  <data name="COULD_NOT_FIND_NETWORK_INTERFACE_WITH_SPECIFIED_DEVICE_NAME_AND_MAC_ADDRESS" xml:space="preserve">
+    <value>Could not find a network interface with the specified device name and MAC address.</value>
+  </data>
+  <data name="COULD_NOT_IMPORT_DATABASE" xml:space="preserve">
+    <value>An error occurred while attempting to import a database from a metadata VDI</value>
+  </data>
+  <data name="CPU_FEATURE_MASKING_NOT_SUPPORTED" xml:space="preserve">
+    <value>The CPU does not support masking of features.</value>
+  </data>
+  <data name="CRL_ALREADY_EXISTS" xml:space="preserve">
+    <value>A CRL already exists with the specified name.</value>
+  </data>
+  <data name="CRL_CORRUPT" xml:space="preserve">
+    <value>The specified CRL is corrupt or unreadable.</value>
+  </data>
+  <data name="CRL_DOES_NOT_EXIST" xml:space="preserve">
+    <value>The specified CRL does not exist.</value>
+  </data>
+  <data name="CRL_NAME_INVALID" xml:space="preserve">
+    <value>The specified CRL name is invalid.</value>
+  </data>
+  <data name="DB_UNIQUENESS_CONSTRAINT_VIOLATION" xml:space="preserve">
+    <value>You attempted an operation which would have resulted in duplicate keys in the database.  Table: {0}, Field: {1}, Value: {2}</value>
+  </data>
+  <data name="DEFAULT_SR_NOT_FOUND" xml:space="preserve">
+    <value>No default SR found</value>
+  </data>
+  <data name="DEVICE_ALREADY_ATTACHED" xml:space="preserve">
+    <value>The device {0} is already attached to a VM</value>
+  </data>
+  <data name="DEVICE_ALREADY_DETACHED" xml:space="preserve">
+    <value>The device {0} is not currently attached</value>
+  </data>
+  <data name="DEVICE_ALREADY_EXISTS" xml:space="preserve">
+    <value>There is already a disk at position {0} on the selected VM</value>
+  </data>
+  <data name="DEVICE_ATTACH_TIMEOUT" xml:space="preserve">
+    <value>A timeout happened while attempting to attach a device {1} of type {0} to a VM</value>
+  </data>
+  <data name="DEVICE_DETACH_REJECTED" xml:space="preserve">
+    <value>The VM rejected the attempt to detach the device {1} of type {0}. {2}</value>
+  </data>
+  <data name="DEVICE_DETACH_TIMEOUT" xml:space="preserve">
+    <value>A timeout happened while attempting to detach a device {1} of type {0} from a VM</value>
+  </data>
+  <data name="DEVICE_NOT_ATTACHED" xml:space="preserve">
+    <value>The operation could not be performed because the VBD was not connected to the VM.</value>
+  </data>
+  <data name="DISK_VBD_MUST_BE_READWRITE_FOR_HVM" xml:space="preserve">
+    <value>All VBDs of type 'disk' must be read/write for HVM guests</value>
+  </data>
+  <data name="DOMAIN_BUILDER_ERROR" xml:space="preserve">
+    <value>An internal error generated by the domain builder.</value>
+  </data>
+  <data name="DOMAIN_EXISTS" xml:space="preserve">
+    <value>The operation could not be performed because a domain still exists for the specified VM.</value>
+  </data>
+  <data name="DUPLICATE_PIF_DEVICE_NAME" xml:space="preserve">
+    <value>A PIF with this specified device name already exists.</value>
+  </data>
+  <data name="DUPLICATE_VM" xml:space="preserve">
+    <value>Cannot restore this VM because it would create a duplicate</value>
+  </data>
+  <data name="EVACUATE_NO_OTHER_HOSTS_FOR_MASTER" xml:space="preserve">
+    <value>No other server available to nominate as master.  Please add or enable some other servers.</value>
+  </data>
+  <data name="EVENTS_LOST" xml:space="preserve">
+    <value>Some events have been lost from the queue and cannot be retrieved.</value>
+  </data>
+  <data name="EVENT_FROM_TOKEN_PARSE_FAILURE" xml:space="preserve">
+    <value>The event.from token could not be parsed. Valid values include: '', and a value returned from a previous event.from call.</value>
+  </data>
+  <data name="EVENT_SUBSCRIPTION_PARSE_FAILURE" xml:space="preserve">
+    <value>The server failed to parse your event subscription. Valid values include: *, class-name, class-name/object-reference.</value>
+  </data>
+  <data name="FEATURE_REQUIRES_HVM" xml:space="preserve">
+    <value>The VM is set up to use a feature that requires it to boot as HVM.</value>
+  </data>
+  <data name="FEATURE_RESTRICTED" xml:space="preserve">
+    <value>The use of this feature is restricted.</value>
+  </data>
+  <data name="FIELD_TYPE_ERROR" xml:space="preserve">
+    <value>One of the fields you supplied was of the wrong type.</value>
+  </data>
+  <data name="GPU_GROUP_CONTAINS_PGPU" xml:space="preserve">
+    <value>The GPU group contains active PGPUs and cannot be deleted.</value>
+  </data>
+  <data name="GPU_GROUP_CONTAINS_VGPU" xml:space="preserve">
+    <value>The GPU group contains active VGPUs and cannot be deleted.</value>
+  </data>
+  <data name="HANDLE_INVALID" xml:space="preserve">
+    <value>Object has been deleted.{0}:{1}</value>
+  </data>
+  <data name="HA_ABORT_NEW_MASTER" xml:space="preserve">
+    <value>This server cannot accept the proposed new master setting at this time.</value>
+  </data>
+  <data name="HA_CANNOT_CHANGE_BOND_STATUS_OF_MGMT_IFACE" xml:space="preserve">
+    <value>This operation cannot be performed because creating or deleting a bond involving the management interface is not allowed while HA is on. In order to do that, disable HA, create or delete the bond then re-enable HA.</value>
+  </data>
+  <data name="HA_CONSTRAINT_VIOLATION_NETWORK_NOT_SHARED" xml:space="preserve">
+    <value>This operation cannot be performed because the referenced network is not properly shared. The network must either be entirely virtual or must be physically present via a currently attached PIF on every server.</value>
+  </data>
+  <data name="HA_CONSTRAINT_VIOLATION_SR_NOT_SHARED" xml:space="preserve">
+    <value>This operation cannot be performed because the referenced SR is not properly shared. The SR must both be marked as shared and a currently attached PBD must exist for each server.</value>
+  </data>
+  <data name="HA_FAILED_TO_FORM_LIVESET" xml:space="preserve">
+    <value>HA could not be enabled on the Pool because a liveset could not be formed: check storage and network heartbeat paths.</value>
+  </data>
+  <data name="HA_HEARTBEAT_DAEMON_STARTUP_FAILED" xml:space="preserve">
+    <value>The server could not join the liveset because the HA daemon failed to start.</value>
+  </data>
+  <data name="HA_HOST_CANNOT_ACCESS_STATEFILE" xml:space="preserve">
+    <value>The server could not join the liveset because the HA daemon could not access the heartbeat disk.</value>
+  </data>
+  <data name="HA_HOST_CANNOT_SEE_PEERS" xml:space="preserve">
+    <value>The operation failed because the HA software on the specified server could not see a subset of other servers. Check your network connectivity.</value>
+  </data>
+  <data name="HA_HOST_IS_ARMED" xml:space="preserve">
+    <value>The operation could not be performed while the server is still armed; it must be disarmed first</value>
+  </data>
+  <data name="HA_IS_ENABLED" xml:space="preserve">
+    <value>The operation could not be performed because HA is enabled on the Pool</value>
+  </data>
+  <data name="HA_LOST_STATEFILE" xml:space="preserve">
+    <value>This server lost access to the HA statefile.</value>
+  </data>
+  <data name="HA_NOT_ENABLED" xml:space="preserve">
+    <value>The operation could not be performed because HA is not enabled on the Pool</value>
+  </data>
+  <data name="HA_NOT_INSTALLED" xml:space="preserve">
+    <value>The operation could not be performed because the HA software is not installed on this server.</value>
+  </data>
+  <data name="HA_NO_PLAN" xml:space="preserve">
+    <value>Cannot find a plan for placement of VMs as there are no other servers available.</value>
+  </data>
+  <data name="HA_OPERATION_WOULD_BREAK_FAILOVER_PLAN" xml:space="preserve">
+    <value>This operation cannot be performed because HA would no longer be guaranteed for this pool.  To perform this operation anyway, you must disable or reconfigure HA.</value>
+  </data>
+  <data name="HA_POOL_IS_ENABLED_BUT_HOST_IS_DISABLED" xml:space="preserve">
+    <value>This server cannot join the pool because the pool has HA enabled but this server has HA disabled.</value>
+  </data>
+  <data name="HA_SHOULD_BE_FENCED" xml:space="preserve">
+    <value>Server cannot rejoin pool because it should have fenced (it is not in the master's partition)</value>
+  </data>
+  <data name="HA_TOO_FEW_HOSTS" xml:space="preserve">
+    <value>HA can only be enabled for 2 servers or more. Note that 2 servers requires a pre-configured quorum tiebreak script.</value>
+  </data>
+  <data name="HOSTS_NOT_COMPATIBLE" xml:space="preserve">
+    <value>The hosts in this pool are not compatible.</value>
+  </data>
+  <data name="HOSTS_NOT_HOMOGENEOUS" xml:space="preserve">
+    <value>The servers in this pool are not homogeneous. {0}</value>
+  </data>
+  <data name="HOST_BROKEN" xml:space="preserve">
+    <value>This server failed in the middle of an automatic failover operation and needs to retry the failover action</value>
+  </data>
+  <data name="HOST_CANNOT_ATTACH_NETWORK" xml:space="preserve">
+    <value>Server cannot attach network (in the case of NIC bonding, this may be because attaching the network on this server would require other networks [that are currently active] to be taken down).</value>
+  </data>
+  <data name="HOST_CANNOT_ATTACH_NETWORK-SHORT" xml:space="preserve">
+    <value>Cannot attach network</value>
+  </data>
+  <data name="HOST_CANNOT_DESTROY_SELF" xml:space="preserve">
+    <value>This server cannot destroy itself.</value>
+  </data>
+  <data name="HOST_CANNOT_READ_METRICS" xml:space="preserve">
+    <value>The metrics of this server could not be read.</value>
+  </data>
+  <data name="HOST_CD_DRIVE_EMPTY" xml:space="preserve">
+    <value>The VM could not start because the CD drive is empty.</value>
+  </data>
+  <data name="HOST_DISABLED" xml:space="preserve">
+    <value>The specified server is disabled.</value>
+  </data>
+  <data name="HOST_DISABLED-SHORT" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="HOST_DISABLED_UNTIL_REBOOT" xml:space="preserve">
+    <value>The specified server is disabled and cannot be re-enabled until after it has rebooted.</value>
+  </data>
+  <data name="HOST_EVACUATE_IN_PROGRESS" xml:space="preserve">
+    <value>This host is being evacuated.</value>
+  </data>
+  <data name="HOST_HAS_NO_MANAGEMENT_IP" xml:space="preserve">
+    <value>The server failed to acquire an IP address on its management interface and therefore cannot contact the master.</value>
+  </data>
+  <data name="HOST_HAS_RESIDENT_VMS" xml:space="preserve">
+    <value>This server can not be forgotten because there are some user VMs still running</value>
+  </data>
+  <data name="HOST_IN_EMERGENCY_MODE" xml:space="preserve">
+    <value>This server is in emergency mode</value>
+  </data>
+  <data name="HOST_IN_RECOVERY_MODE" xml:space="preserve">
+    <value>The backup could not be performed because the server is in recovery mode</value>
+  </data>
+  <data name="HOST_IN_USE" xml:space="preserve">
+    <value>This operation cannot be completed as the server is in use.</value>
+  </data>
+  <data name="HOST_IS_LIVE" xml:space="preserve">
+    <value>This operation cannot be completed as the server is still live.</value>
+  </data>
+  <data name="HOST_IS_SLAVE" xml:space="preserve">
+    <value>The server that you are talking to is a slave</value>
+  </data>
+  <data name="HOST_ITS_OWN_SLAVE" xml:space="preserve">
+    <value>The host is its own slave. Please use pool-emergency-transition-to-master or pool-emergency-reset-master.</value>
+  </data>
+  <data name="HOST_MASTER_CANNOT_TALK_BACK" xml:space="preserve">
+    <value>The master reports that it cannot talk back to the slave on the supplied management IP address.</value>
+  </data>
+  <data name="HOST_NAME_INVALID" xml:space="preserve">
+    <value>The server name is invalid.</value>
+  </data>
+  <data name="HOST_NOT_DISABLED" xml:space="preserve">
+    <value>This server cannot be enabled as it is not disabled.</value>
+  </data>
+  <data name="HOST_NOT_ENOUGH_FREE_MEMORY" xml:space="preserve">
+    <value>Not enough server memory is available to perform this operation</value>
+  </data>
+  <data name="HOST_NOT_ENOUGH_FREE_MEMORY-SHORT" xml:space="preserve">
+    <value>Not enough free memory</value>
+  </data>
+  <data name="HOST_NOT_IN_RECOVERY_MODE" xml:space="preserve">
+    <value>The restore could not be performed because the server is not in recovery mode</value>
+  </data>
+  <data name="HOST_NOT_LIVE" xml:space="preserve">
+    <value>This operation cannot be completed as the server is not live.</value>
+  </data>
+  <data name="HOST_NOT_LIVE-SHORT" xml:space="preserve">
+    <value>Unreachable</value>
+  </data>
+  <data name="HOST_OFFLINE" xml:space="preserve">
+    <value>Server could not be contacted</value>
+  </data>
+  <data name="HOST_POWER_ON_MODE_DISABLED" xml:space="preserve">
+    <value>This operation cannot be completed as the server power on mode is disabled.</value>
+  </data>
+  <data name="HOST_STILL_BOOTING" xml:space="preserve">
+    <value>The server is still booting.</value>
+  </data>
+  <data name="HOST_UNKNOWN_TO_MASTER" xml:space="preserve">
+    <value>The master says the server is not known to it. Perhaps the server was deleted from the master's database?</value>
+  </data>
+  <data name="ILLEGAL_VBD_DEVICE" xml:space="preserve">
+    <value>The specified VBD device is not recognized: please use a non-negative integer</value>
+  </data>
+  <data name="IMPORT_ERROR" xml:space="preserve">
+    <value>This file could not be imported</value>
+  </data>
+  <data name="IMPORT_ERROR_ATTACHED_DISKS_NOT_FOUND" xml:space="preserve">
+    <value>The VM could not be imported because attached disks could not be found.</value>
+  </data>
+  <data name="IMPORT_ERROR_CANNOT_HANDLE_CHUNKED" xml:space="preserve">
+    <value>Cannot import VM using chunked encoding.</value>
+  </data>
+  <data name="IMPORT_ERROR_FAILED_TO_FIND_OBJECT" xml:space="preserve">
+    <value>The VM could not be imported because a required object could not be found.</value>
+  </data>
+  <data name="IMPORT_ERROR_PREMATURE_EOF" xml:space="preserve">
+    <value>The VM could not be imported; the end of the file was reached prematurely.</value>
+  </data>
+  <data name="IMPORT_ERROR_SOME_CHECKSUMS_FAILED" xml:space="preserve">
+    <value>Some data checksums were incorrect; the VM may be corrupt.</value>
+  </data>
+  <data name="IMPORT_ERROR_UNEXPECTED_FILE" xml:space="preserve">
+    <value>The VM could not be imported because the XVA file is invalid: an unexpected file was encountered.</value>
+  </data>
+  <data name="IMPORT_INCOMPATIBLE_VERSION" xml:space="preserve">
+    <value>Cannot import on this server because it was saved on an incompatible version</value>
+  </data>
+  <data name="INTERFACE_HAS_NO_IP" xml:space="preserve">
+    <value>The specified interface cannot be used because it has no IP address</value>
+  </data>
+  <data name="INTERNAL_ERROR" xml:space="preserve">
+    <value>Internal error: {0}</value>
+  </data>
+  <data name="INVALID_DEVICE" xml:space="preserve">
+    <value>The device name {0} is invalid</value>
+  </data>
+  <data name="INVALID_EDITION" xml:space="preserve">
+    <value>The edition you supplied is invalid. Valid editions are 'free', 'enterprise' and 'platinum'.</value>
+  </data>
+  <data name="INVALID_FEATURE_STRING" xml:space="preserve">
+    <value>The given feature string is not valid.</value>
+  </data>
+  <data name="INVALID_IP_ADDRESS_SPECIFIED" xml:space="preserve">
+    <value>A required parameter contained an invalid IP address</value>
+  </data>
+  <data name="INVALID_PATCH" xml:space="preserve">
+    <value>The uploaded update file is invalid</value>
+  </data>
+  <data name="INVALID_PATCH_WITH_LOG" xml:space="preserve">
+    <value>The uploaded update file is invalid.</value>
+  </data>
+  <data name="INVALID_VALUE" xml:space="preserve">
+    <value>The value '{1}' is invalid for field '{0}'.</value>
+  </data>
+  <data name="IS_TUNNEL_ACCESS_PIF" xml:space="preserve">
+    <value>You tried to create a VLAN or tunnel on top of a tunnel access PIF - use the underlying transport PIF instead.</value>
+  </data>
+  <data name="JOINING_HOST_CANNOT_BE_MASTER_OF_OTHER_HOSTS" xml:space="preserve">
+    <value>The server joining the pool cannot already be a master of another pool.</value>
+  </data>
+  <data name="JOINING_HOST_CANNOT_CONTAIN_SHARED_SRS" xml:space="preserve">
+    <value>The server joining the pool cannot contain any shared storage.</value>
+  </data>
+  <data name="JOINING_HOST_CANNOT_HAVE_RUNNING_OR_SUSPENDED_VMS" xml:space="preserve">
+    <value>The server joining the pool cannot have any running or suspended VMs.</value>
+  </data>
+  <data name="JOINING_HOST_CANNOT_HAVE_RUNNING_VMS" xml:space="preserve">
+    <value>The server joining the pool cannot have any running VMs.</value>
+  </data>
+  <data name="JOINING_HOST_CANNOT_HAVE_VMS_WITH_CURRENT_OPERATIONS" xml:space="preserve">
+    <value>Joining server cannot have VMs with any current operations</value>
+  </data>
+  <data name="JOINING_HOST_CONNECTION_FAILED" xml:space="preserve">
+    <value>The connection to the joining server failed</value>
+  </data>
+  <data name="JOINING_HOST_SERVICE_FAILED" xml:space="preserve">
+    <value>There was an error connecting to the server. the service contacted didn't reply properly.</value>
+  </data>
+  <data name="LICENCE_RESTRICTION" xml:space="preserve">
+    <value>This operation is not allowed with your current license</value>
+  </data>
+  <data name="LICENSE_CANNOT_DOWNGRADE_WHILE_IN_POOL" xml:space="preserve">
+    <value>Cannot downgrade license while in pool. Please disband the pool first, then downgrade licenses on servers separately.</value>
+  </data>
+  <data name="LICENSE_CHECKOUT_ERROR" xml:space="preserve">
+    <value>The license for the edition you requested is not available.</value>
+  </data>
+  <data name="LICENSE_DOES_NOT_SUPPORT_POOLING" xml:space="preserve">
+    <value>This server cannot join a pool because its license does not support pooling</value>
+  </data>
+  <data name="LICENSE_DOES_NOT_SUPPORT_XHA" xml:space="preserve">
+    <value>HA cannot be enabled because this server's license does not allow it</value>
+  </data>
+  <data name="LICENSE_EXPIRED" xml:space="preserve">
+    <value>Your license has expired</value>
+  </data>
+  <data name="LICENSE_FILE_DEPRECATED" xml:space="preserve">
+    <value>This type of license file is for previous versions of XenServer. Please upgrade to the new licensing system.</value>
+  </data>
+  <data name="LICENSE_PROCESSING_ERROR" xml:space="preserve">
+    <value>There was an error processing your license.  Please contact your support representative</value>
+  </data>
+  <data name="LIKEWISE_WINERROR_0251E" xml:space="preserve">
+    <value>XenServer was unable to contact your domain server. Check your settings are correct and that a route to the server exists.</value>
+  </data>
+  <data name="LOCATION_NOT_UNIQUE" xml:space="preserve">
+    <value>A VDI with the specified location already exists within the SR</value>
+  </data>
+  <data name="MAC_DOES_NOT_EXIST" xml:space="preserve">
+    <value>The MAC address specified doesn't exist on this server.</value>
+  </data>
+  <data name="MAC_INVALID" xml:space="preserve">
+    <value>The MAC address specified is not valid.</value>
+  </data>
+  <data name="MAC_STILL_EXISTS" xml:space="preserve">
+    <value>The MAC address specified still exists on this server.</value>
+  </data>
+  <data name="MAP_DUPLICATE_KEY" xml:space="preserve">
+    <value>INTERNAL ERROR: Attempted to set '{0}'.'{1}':'{3}'='{2}', but the key '{3}' was already present in map '{1}'.</value>
+  </data>
+  <data name="MEM_MAX_ALLOWED" xml:space="preserve">
+    <value>You have reached the maximum amount of memory allowed for this virtual machine.</value>
+  </data>
+  <data name="MEM_MAX_ALLOWED_TITLE" xml:space="preserve">
+    <value>Maximum amount of memory allowed</value>
+  </data>
+  <data name="MESSAGE_DEPRECATED" xml:space="preserve">
+    <value>This message has been deprecated.</value>
+  </data>
+  <data name="MESSAGE_METHOD_UNKNOWN" xml:space="preserve">
+    <value>You tried to call a method that does not exist.  The method name that you used is {0}.</value>
+  </data>
+  <data name="MESSAGE_PARAMETER_COUNT_MISMATCH" xml:space="preserve">
+    <value>You tried to call the method {0} with the incorrect number of parameters {2}.  The method expect {1} parameter(s).</value>
+  </data>
+  <data name="MESSAGE_REMOVED" xml:space="preserve">
+    <value>This function is no longer available.</value>
+  </data>
+  <data name="MIRROR_FAILED" xml:space="preserve">
+    <value>The VDI mirroring cannot be performed</value>
+  </data>
+  <data name="MISSING_CONNECTION_DETAILS" xml:space="preserve">
+    <value>The license-server connection details (address or port) were missing or incomplete.</value>
+  </data>
+  <data name="NETWORK_ALREADY_CONNECTED" xml:space="preserve">
+    <value>You tried to create a PIF, but the network {0} you tried to attach it to is already attached to some other PIF {1}, and so the creation failed.</value>
+  </data>
+  <data name="NETWORK_CONTAINS_PIF" xml:space="preserve">
+    <value>The network contains active PIFs ({0}) and cannot be deleted.</value>
+  </data>
+  <data name="NETWORK_CONTAINS_VIF" xml:space="preserve">
+    <value>The network contains active VIFs ({0}) and cannot be deleted.</value>
+  </data>
+  <data name="NOT_ALLOWED_ON_OEM_EDITION" xml:space="preserve">
+    <value>This command is not allowed on the OEM edition.</value>
+  </data>
+  <data name="NOT_IMPLEMENTED" xml:space="preserve">
+    <value>The function {0} is not implemented</value>
+  </data>
+  <data name="NOT_IN_EMERGENCY_MODE" xml:space="preserve">
+    <value>This pool is not in emergency mode.</value>
+  </data>
+  <data name="NOT_SUPPORTED_DURING_UPGRADE" xml:space="preserve">
+    <value>This operation is not supported during an upgrade</value>
+  </data>
+  <data name="NOT_SYSTEM_DOMAIN" xml:space="preserve">
+    <value>The given VM is not registered as a system domain. This operation can only be performed on a registered system domain.</value>
+  </data>
+  <data name="NO_HOSTS_AVAILABLE" xml:space="preserve">
+    <value>There were no servers available to complete the specified operation.</value>
+  </data>
+  <data name="NO_MORE_REDO_LOGS_ALLOWED" xml:space="preserve">
+    <value>The upper limit of active redo log instances was reached.</value>
+  </data>
+  <data name="OBJECT_NOLONGER_EXISTS" xml:space="preserve">
+    <value>The specified object no longer exists.</value>
+  </data>
+  <data name="ONLY_ALLOWED_ON_OEM_EDITION" xml:space="preserve">
+    <value>This command is only allowed on the OEM edition.</value>
+  </data>
+  <data name="OPENVSWITCH_NOT_ACTIVE" xml:space="preserve">
+    <value>This operation needs the OpenVSwitch networking backend to be enabled.</value>
+  </data>
+  <data name="OPERATION_BLOCKED" xml:space="preserve">
+    <value>You attempted an operation that was explicitly blocked (see the blocked_operations field of the given object). The administrator provided the following message: {1}.</value>
+  </data>
+  <data name="OPERATION_NOT_ALLOWED" xml:space="preserve">
+    <value>You attempted an operation that was not allowed. {0}</value>
+  </data>
+  <data name="OPERATION_PARTIALLY_FAILED" xml:space="preserve">
+    <value>Some VMs belonging to the appliance threw an exception while carrying out the specified operation</value>
+  </data>
+  <data name="OTHER_OPERATION_IN_PROGRESS" xml:space="preserve">
+    <value>Another operation involving the object is currently in progress</value>
+  </data>
+  <data name="OUT_OF_SPACE" xml:space="preserve">
+    <value>There is not enough space to upload the update</value>
+  </data>
+  <data name="PATCH_ALREADY_APPLIED" xml:space="preserve">
+    <value>The update {0} has already been applied</value>
+  </data>
+  <data name="PATCH_ALREADY_EXISTS" xml:space="preserve">
+    <value>The uploaded update already exists</value>
+  </data>
+  <data name="PATCH_APPLY_FAILED" xml:space="preserve">
+    <value>The update failed to apply.  View output for more details.</value>
+  </data>
+  <data name="PATCH_IS_APPLIED" xml:space="preserve">
+    <value>The specified patch is applied and cannot be destroyed.</value>
+  </data>
+  <data name="PATCH_PRECHECK_FAILED_ISO_MOUNTED" xml:space="preserve">
+    <value>XenServer Tools ISO must be ejected from all running VMs.</value>
+  </data>
+  <data name="PATCH_PRECHECK_FAILED_PREREQUISITE_MISSING" xml:space="preserve">
+    <value>The update precheck stage failed: prerequisite updates are missing.</value>
+  </data>
+  <data name="PATCH_PRECHECK_FAILED_UNKNOWN_ERROR" xml:space="preserve">
+    <value>The update precheck stage failed with an unknown error.</value>
+  </data>
+  <data name="PATCH_PRECHECK_FAILED_VM_RUNNING" xml:space="preserve">
+    <value>The update precheck stage failed: there are one or more VMs still running on the server.  All VMs must be shut down or suspended before the update can be applied.</value>
+  </data>
+  <data name="PATCH_PRECHECK_FAILED_WRONG_SERVER_BUILD" xml:space="preserve">
+    <value>XenServer build number ({1}) is incompatible with the update build number ({2}).</value>
+  </data>
+  <data name="PATCH_PRECHECK_FAILED_WRONG_SERVER_VERSION" xml:space="preserve">
+    <value>XenServer version number ({1}) is incompatible with the update version number ({2}).</value>
+  </data>
+  <data name="PBD_EXISTS" xml:space="preserve">
+    <value>A PBD already exists connecting the SR to the server</value>
+  </data>
+  <data name="PERMISSION_DENIED" xml:space="preserve">
+    <value>Caller not allowed to perform this operation.</value>
+  </data>
+  <data name="PIF_ALREADY_BONDED" xml:space="preserve">
+    <value>You cannot create a bond of an interface which is a member of an existing bond.</value>
+  </data>
+  <data name="PIF_BOND_NEEDS_MORE_MEMBERS" xml:space="preserve">
+    <value>A bond must consist of at least two member interfaces</value>
+  </data>
+  <data name="PIF_CANNOT_BOND_CROSS_HOST" xml:space="preserve">
+    <value>You cannot bond interfaces across different servers.</value>
+  </data>
+  <data name="PIF_CONFIGURATION_ERROR" xml:space="preserve">
+    <value>An unknown error occurred while attempting to configure an interface.</value>
+  </data>
+  <data name="PIF_DEVICE_NOT_FOUND" xml:space="preserve">
+    <value>The specified device was not found.</value>
+  </data>
+  <data name="PIF_DOES_NOT_ALLOW_UNPLUG" xml:space="preserve">
+    <value>The operation you requested cannot be performed because the specified PIF does not allow unplug.</value>
+  </data>
+  <data name="PIF_HAS_NO_NETWORK_CONFIGURATION" xml:space="preserve">
+    <value>PIF has no network configuration</value>
+  </data>
+  <data name="PIF_HAS_NO_V6_NETWORK_CONFIGURATION" xml:space="preserve">
+    <value>PIF has no IPv6 configuration (mode currently set to 'none')</value>
+  </data>
+  <data name="PIF_INCOMPATIBLE_PRIMARY_ADDRESS_TYPE" xml:space="preserve">
+    <value>The primary address types are not compatible</value>
+  </data>
+  <data name="PIF_IS_MANAGEMENT_INTERFACE" xml:space="preserve">
+    <value>PIF is the management interface.</value>
+  </data>
+  <data name="PIF_IS_PHYSICAL" xml:space="preserve">
+    <value>You tried to destroy the PIF {0}, but it represents an aspect of the physical server configuration, and so cannot be destroyed. </value>
+  </data>
+  <data name="PIF_IS_VLAN" xml:space="preserve">
+    <value>You tried to create a VLAN on top of another VLAN - use the underlying physical PIF/bond instead</value>
+  </data>
+  <data name="PIF_TUNNEL_STILL_EXISTS" xml:space="preserve">
+    <value>Operation cannot proceed while a tunnel exists on this interface.</value>
+  </data>
+  <data name="PIF_VLAN_EXISTS" xml:space="preserve">
+    <value>VLAN tag already in use</value>
+  </data>
+  <data name="PIF_VLAN_STILL_EXISTS" xml:space="preserve">
+    <value>Operation cannot proceed while a VLAN exists on this interface.</value>
+  </data>
+  <data name="POOL_AUTH_ALREADY_ENABLED" xml:space="preserve">
+    <value>External authentication is already enabled for at least one server in this pool.</value>
+  </data>
+  <data name="POOL_AUTH_DISABLE_FAILED" xml:space="preserve">
+    <value>External authentication has been disabled with errors: Some AD machine accounts were not disabled successfully on the AD server. </value>
+  </data>
+  <data name="POOL_AUTH_DISABLE_FAILED_PERMISSION_DENIED" xml:space="preserve">
+    <value>External authentication has been disabled with errors: Some AD machine accounts were not disabled on the AD server as permission was denied.</value>
+  </data>
+  <data name="POOL_AUTH_DISABLE_FAILED_WRONG_CREDENTIALS" xml:space="preserve">
+    <value>External authentication has been disabled with errors: Some AD machine accounts were not disabled on the AD server due to invalid credentials.</value>
+  </data>
+  <data name="POOL_AUTH_ENABLE_FAILED" xml:space="preserve">
+    <value>Could not enable external authentication: {1}</value>
+  </data>
+  <data name="POOL_AUTH_ENABLE_FAILED_DOMAIN_LOOKUP_FAILED" xml:space="preserve">
+    <value>XenServer was unable to contact your domain server to enable external authentication. Check that your settings are correct and a route to the server exists.</value>
+  </data>
+  <data name="POOL_AUTH_ENABLE_FAILED_DUPLICATE_HOSTNAME" xml:space="preserve">
+    <value>Failed to enable external authentication, a duplicate hostname was detected.</value>
+  </data>
+  <data name="POOL_AUTH_ENABLE_FAILED_INVALID_OU" xml:space="preserve">
+    <value>The pool failed to enable external authentication.</value>
+  </data>
+  <data name="POOL_AUTH_ENABLE_FAILED_PERMISSION_DENIED" xml:space="preserve">
+    <value>Failed to enable external authentication, permission on the AD server was denied.</value>
+  </data>
+  <data name="POOL_AUTH_ENABLE_FAILED_UNAVAILABLE" xml:space="preserve">
+    <value>Failed to enable external authentication, the AD server was unavailable.</value>
+  </data>
+  <data name="POOL_AUTH_ENABLE_FAILED_WRONG_CREDENTIALS" xml:space="preserve">
+    <value>Failed to enable external authentication, the supplied credentials were invalid.</value>
+  </data>
+  <data name="POOL_JOINING_EXTERNAL_AUTH_MISMATCH" xml:space="preserve">
+    <value>The external authentication configuration of the server joining the pool must match the pool's own external authentication configuration.</value>
+  </data>
+  <data name="POOL_JOINING_HOST_MUST_HAVE_PHYSICAL_MANAGEMENT_NIC" xml:space="preserve">
+    <value>The server joining the pool must have a physical management NIC (i.e. the management NIC must not be on a VLAN or bonded PIF).</value>
+  </data>
+  <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_PRODUCT_VERSION" xml:space="preserve">
+    <value>The server joining the pool must have the same product version as the pool master.</value>
+  </data>
+  <data name="PROVISION_FAILED_OUT_OF_SPACE" xml:space="preserve">
+    <value>The provision call failed because it ran out of space.</value>
+  </data>
+  <data name="PROVISION_ONLY_ALLOWED_ON_TEMPLATE" xml:space="preserve">
+    <value>The provision call can only be invoked on templates, not regular VMs.</value>
+  </data>
+  <data name="RBAC_PERMISSION_DENIED" xml:space="preserve">
+    <value>Your current role is not authorized to perform this action.
+Action: {0}</value>
+  </data>
+  <data name="RBAC_PERMISSION_DENIED_FRIENDLY" xml:space="preserve">
+    <value>Your current role is not authorized to perform this action.
+Current Role: {0}
+Authorized Roles: {1}</value>
+  </data>
+  <data name="RBAC_PERMISSION_DENIED_FRIENDLY_CONNECTION" xml:space="preserve">
+    <value>Your current role is not authorized to perform this action on {2}.
+Current Role: {0}
+Authorized Roles: {1}</value>
+  </data>
+  <data name="REDO_LOG_IS_ENABLED" xml:space="preserve">
+    <value>The operation could not be performed because a redo log is enabled on the Pool.</value>
+  </data>
+  <data name="RESTORE_INCOMPATIBLE_VERSION" xml:space="preserve">
+    <value>Cannot restore on this server because it was saved on an incompatible version</value>
+  </data>
+  <data name="RESTORE_SCRIPT_FAILED" xml:space="preserve">
+    <value>The restore could not be performed because the restore script failed. Your XenServer Backup file may be corrupt. See the logs for more information.</value>
+  </data>
+  <data name="RESTORE_TARGET_MGMT_IF_NOT_IN_BACKUP" xml:space="preserve">
+    <value>The restore could not be performed because the server's current management interface is not in the backup. The interfaces mentioned in the backup are:</value>
+  </data>
+  <data name="RESTORE_TARGET_MISSING_DEVICE" xml:space="preserve">
+    <value>The restore could not be performed because a network interface is missing</value>
+  </data>
+  <data name="ROLE_ALREADY_EXISTS" xml:space="preserve">
+    <value>Role already exists.</value>
+  </data>
+  <data name="ROLE_NOT_FOUND" xml:space="preserve">
+    <value>Role cannot be found.</value>
+  </data>
+  <data name="SESSION_AUTHENTICATION_FAILED" xml:space="preserve">
+    <value>Could not authenticate session. Check your access credentials and try again.</value>
+  </data>
+  <data name="SESSION_INVALID" xml:space="preserve">
+    <value>The connection to the server has been lost.</value>
+  </data>
+  <data name="SESSION_NOT_REGISTERED" xml:space="preserve">
+    <value>This session {0} is not registered to receive events.  You must call event.register before event.next.  The session handle you are using is echoed.</value>
+  </data>
+  <data name="SLAVE_REQUIRES_MANAGEMENT_INTERFACE" xml:space="preserve">
+    <value>The management interface on a slave cannot be disabled because the slave would enter emergency mode.</value>
+  </data>
+  <data name="SM_PLUGIN_COMMUNICATION_FAILURE" xml:space="preserve">
+    <value>The SM plugin did not respond to a query.</value>
+  </data>
+  <data name="SR_ATTACH_FAILED" xml:space="preserve">
+    <value>Attaching this SR failed.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE" xml:space="preserve">
+    <value>The SR failed to complete the operation</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_1" xml:space="preserve">
+    <value>Invalid argument</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_100" xml:space="preserve">
+    <value>Cannot find volume</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_101" xml:space="preserve">
+    <value>The request is missing the server path parameter</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_102" xml:space="preserve">
+    <value>The request is missing the server parameter</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_103" xml:space="preserve">
+    <value>The server path argument is not valid</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_104" xml:space="preserve">
+    <value>Unable to open the refcount file</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_105" xml:space="preserve">
+    <value>Root system device, cannot be used for VM storage</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_106" xml:space="preserve">
+    <value>The IQN provided is an invalid format</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_107" xml:space="preserve">
+    <value>The SCSIid parameter is missing or incorrect</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_108" xml:space="preserve">
+    <value>Unable to detect an NFS service on this target.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_109" xml:space="preserve">
+    <value>The snapshot chain is too long</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_110" xml:space="preserve">
+    <value>VDI resize failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_120" xml:space="preserve">
+    <value>Netapp Target parameter missing in Dconf string</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_121" xml:space="preserve">
+    <value>Netapp Username parameter missing in Dconf string</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_122" xml:space="preserve">
+    <value>Netapp Password parameter missing in Dconf string</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_123" xml:space="preserve">
+    <value>Netapp Aggregate parameter missing in Dconf string</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_124" xml:space="preserve">
+    <value>Failed to connect to Netapp target</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_125" xml:space="preserve">
+    <value>Authentication credentials incorrect</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_126" xml:space="preserve">
+    <value>Auth credentials have insufficient access privileges</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_127" xml:space="preserve">
+    <value>Max number of flexvols reached on target. Unable to allocate requested resource.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_128" xml:space="preserve">
+    <value>Max number of Snapshots reached on target Volume. Unable to create snapshot.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_129" xml:space="preserve">
+    <value>Insufficient space, unable to create snapshot.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_130" xml:space="preserve">
+    <value>Netapp Target version unsupported</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_131" xml:space="preserve">
+    <value>Unable to retrieve target IQN</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_132" xml:space="preserve">
+    <value>iSCSI service not running on the Netapp target.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_133" xml:space="preserve">
+    <value>Failed to enable A-SIS for the SR. Requires valid license on the filer.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_134" xml:space="preserve">
+    <value>The filer will not support A-SIS on this aggregate. The license is valid however on some filers A-SIS is limited to smaller aggregates, e.g. FAS3020 max supported aggregate is 1TB. See filer support documentation for details on your model. You must either disable A-SIS support, or re-configure your aggregate to the max supported size.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_135" xml:space="preserve">
+    <value>Failed to acquire an exclusive lock on the LUN.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_140" xml:space="preserve">
+    <value>DNS lookup failed: the given servername could not be resolved.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_141" xml:space="preserve">
+    <value>Unable to connect to iSCSI service on target</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_142" xml:space="preserve">
+    <value>Incorrect value for iSCSI port, must be a number between 1 and 65535</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_143" xml:space="preserve">
+    <value>Failed to parse the request</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_144" xml:space="preserve">
+    <value>VDI could not be found</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_150" xml:space="preserve">
+    <value>Failed to initialize XMLRPC connection</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_151" xml:space="preserve">
+    <value>Failed to query Local Control Domain</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_152" xml:space="preserve">
+    <value>A Failure occurred querying the PBD entries</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_153" xml:space="preserve">
+    <value>A Failure occurred accessing an API object</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_16" xml:space="preserve">
+    <value>The specified storage repository is currently in use</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_160" xml:space="preserve">
+    <value>Equallogic Target parameter missing in Dconf string</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_161" xml:space="preserve">
+    <value>Equallogic Username parameter missing in Dconf string</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_162" xml:space="preserve">
+    <value>Equallogic Password parameter missing in Dconf string</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_163" xml:space="preserve">
+    <value>Equallogic StoragePool parameter missing in Dconf string</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_164" xml:space="preserve">
+    <value>Failed to connect to Equallogic Array; maximum SSH CLI sessions reached</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_165" xml:space="preserve">
+    <value>Invalid snap-reserver-percentage value, must be an integer indicating the amount of space, as a percentage of the VDI size, to reserve for snapshots.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_166" xml:space="preserve">
+    <value>Invalid snap-depletion value, must be one of 'delete-oldest' or 'volume-offline'</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_167" xml:space="preserve">
+    <value>Volume out of space, probably due to insufficient snapshot reserve allocation.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_168" xml:space="preserve">
+    <value>Cannot create Snapshot of a Snapshot VDI, operation unsupported</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_169" xml:space="preserve">
+    <value>Failed to connect to Equallogic Array, Permission denied;username/password invalid</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_170" xml:space="preserve">
+    <value>Equallogic Target version unsupported</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_171" xml:space="preserve">
+    <value>Unable to logon to Array. Check IP settings.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_172" xml:space="preserve">
+    <value>Equallogic StoragePool parameter specified in Dconf string is Invalid</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_173" xml:space="preserve">
+    <value>Equallogic Target parameter specified in Dconf string is Invalid, please specify the correct Group IPaddress</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_174" xml:space="preserve">
+    <value>Invalid SNMP response received for a CLI command</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_175" xml:space="preserve">
+    <value>Volume metadata stored in the 'Description' field is invalid, this field contains encoded data and is not user editable</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_176" xml:space="preserve">
+    <value>Invalid EOF response received for a CLI command</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_180" xml:space="preserve">
+    <value>Volume Group out of space. The SR is over-provisioned, and out of space. Unable to grow the underlying volume to accommodate the virtual size of the disk.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_181" xml:space="preserve">
+    <value>Error in Metadata volume operation for SR.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_19" xml:space="preserve">
+    <value>No such device</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_2" xml:space="preserve">
+    <value>A bad character was detected in the dconf string</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_20" xml:space="preserve">
+    <value>No such secret.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_200" xml:space="preserve">
+    <value>General IO error</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_201" xml:space="preserve">
+    <value>Currently unavailable, try again</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_202" xml:space="preserve">
+    <value>General backend error</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_203" xml:space="preserve">
+    <value>An active FIST point was reached that causes the process to exit abnormally</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_220" xml:space="preserve">
+    <value>The device configuration request is missing the Location parameter</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_221" xml:space="preserve">
+    <value>ISO name must have .iso extension</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_222" xml:space="preserve">
+    <value>Unable to mount the directory specified in device configuration request</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_223" xml:space="preserve">
+    <value>Unable to unmount the directory specified in device configuration request</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_224" xml:space="preserve">
+    <value>Could not locate the ISO sharename on the target, or the access permissions may be incorrect.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_225" xml:space="preserve">
+    <value>Incorrect Location string format. String must be in the format SERVER:PATH for NFS targets, or \\SERVER\PATH for CIFS targets</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_226" xml:space="preserve">
+    <value>Invalid local path</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_24" xml:space="preserve">
+    <value>The specified VDI is currently in use</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_37" xml:space="preserve">
+    <value>The request to lock/unlock the storage repository or VDI failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_38" xml:space="preserve">
+    <value>The method you have requested is not currently supported</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_39" xml:space="preserve">
+    <value>The specified storage repository contains data</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_40" xml:space="preserve">
+    <value>The specified  storage repository scan failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_400" xml:space="preserve">
+    <value>The target server name or IP address is missing</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_401" xml:space="preserve">
+    <value>The Storage System ID is missing</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_402" xml:space="preserve">
+    <value>The Storage Pool ID is missing</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_41" xml:space="preserve">
+    <value>The storage repository log operation failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_410" xml:space="preserve">
+    <value>The gssi operation to the CSLG server failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_411" xml:space="preserve">
+    <value>The SR loading operation failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_412" xml:space="preserve">
+    <value>An invalid storage protocol was specified</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_413" xml:space="preserve">
+    <value>Unable to parse XML</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_414" xml:space="preserve">
+    <value>Failed to probe SR</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_416" xml:space="preserve">
+    <value>Snapshot/Clone failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_417" xml:space="preserve">
+    <value>Storage assignment failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_418" xml:space="preserve">
+    <value>Storage un-assignment failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_419" xml:space="preserve">
+    <value>Storage allocation failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_42" xml:space="preserve">
+    <value>The specified storage repository already exists</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_420" xml:space="preserve">
+    <value>Storage deallocation failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_421" xml:space="preserve">
+    <value>HBA Query failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_422" xml:space="preserve">
+    <value>IQN/iSCSI initialization failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_423" xml:space="preserve">
+    <value>SCSI device scan failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_424" xml:space="preserve">
+    <value>Failed to connect to target: please check the hostname or IP address</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_425" xml:space="preserve">
+    <value>The Storage Node ID is missing</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_426" xml:space="preserve">
+    <value>The VDI failed to be introduced to the database</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_427" xml:space="preserve">
+    <value>The CSLG software doesn't seem to be installed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_428" xml:space="preserve">
+    <value>Failed to create multiple sub-pools from parent pool</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_429" xml:space="preserve">
+    <value>Current XML definition is newer version</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_43" xml:space="preserve">
+    <value>The specified VDI already exists</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_430" xml:space="preserve">
+    <value>Failed to communicate with the multipath daemon</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_431" xml:space="preserve">
+    <value>Error in storage adapter communication</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_432" xml:space="preserve">
+    <value>The adapter id is missing</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_433" xml:space="preserve">
+    <value>The username is missing</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_434" xml:space="preserve">
+    <value>The password is missing</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_435" xml:space="preserve">
+    <value>An invalid storage system ID was specified</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_436" xml:space="preserve">
+    <value>Failed to collect storage system information</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_437" xml:space="preserve">
+    <value>Failed to collect storage pool information</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_438" xml:space="preserve">
+    <value>Failed to delete storage pool</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_439" xml:space="preserve">
+    <value>Failed to collect storage volume information</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_44" xml:space="preserve">
+    <value>The specified storage repository has insufficient space</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_440" xml:space="preserve">
+    <value>Failed to list storage volume</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_441" xml:space="preserve">
+    <value>Failed to resize storage volume</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_442" xml:space="preserve">
+    <value>Failed to list storage target ports</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_443" xml:space="preserve">
+    <value>Failed to list storage pool</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_444" xml:space="preserve">
+    <value>The tapdisk failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_445" xml:space="preserve">
+    <value>The tapdisk is already running</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_446" xml:space="preserve">
+    <value>XenServer does not support extended characters in CIFS paths, usernames, and passwords.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_447" xml:space="preserve">
+    <value>Illegal XML character.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_448" xml:space="preserve">
+    <value>Unsupported kernel: neither 2.6 nor 3.x.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
+    <value>The VDI is not available</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_47" xml:space="preserve">
+    <value>The storage repository is not available</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_48" xml:space="preserve">
+    <value>The storage repository you are attempting to access is an unknown type</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_49" xml:space="preserve">
+    <value>The xml string is malformed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_50" xml:space="preserve">
+    <value>There was an error while attempting to create the specified logical volume</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_51" xml:space="preserve">
+    <value>There was an error while attempting to delete the specified logical volume</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_52" xml:space="preserve">
+    <value>Logical Volume mount/activate error</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_53" xml:space="preserve">
+    <value>The attempt to umount/deactivate the specified logical volume failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_54" xml:space="preserve">
+    <value>There was an error while attempting to write to the specified logical volume</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_55" xml:space="preserve">
+    <value>There was an error while attempting to create a partition on the specified logical volume</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_56" xml:space="preserve">
+    <value>The partition on the logical volume is currently in use</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_57" xml:space="preserve">
+    <value>There was an error while attempting to create the filesystem on the specified logical volume</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_58" xml:space="preserve">
+    <value>There was an error while attempting to make a request from the logical volume. The request must come from the master.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_59" xml:space="preserve">
+    <value>The attempt to resize the logical volume failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_60" xml:space="preserve">
+    <value>The size specified for the logical volume is invalid.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_61" xml:space="preserve">
+    <value>There was an error while attempting create the file storage repository</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_62" xml:space="preserve">
+    <value>There was an error while attempting to remove the directory on the file storage repository.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_63" xml:space="preserve">
+    <value>There was an error while attempting to delete the file storage repository</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_64" xml:space="preserve">
+    <value>The attempt to remove the VDI failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_65" xml:space="preserve">
+    <value>The attempt to load the VDI failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_66" xml:space="preserve">
+    <value>The VDI type is invalid</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_67" xml:space="preserve">
+    <value>Unable to add the iSCSI device</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_68" xml:space="preserve">
+    <value>Logging in to the iSCSI target failed. Check your username and password.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_69" xml:space="preserve">
+    <value>Logging out of the iSCSI target failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_70" xml:space="preserve">
+    <value>Unable to set the iSCSI initiator</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_71" xml:space="preserve">
+    <value>The iSCSI daemon failed to start</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_72" xml:space="preserve">
+    <value>The NFS server version is unsupported</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_73" xml:space="preserve">
+    <value>There was an error while attempting to mount the NFS share</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_74" xml:space="preserve">
+    <value>There was an error while attempting to unmount the NFS share</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_75" xml:space="preserve">
+    <value>The NFS share has already been added</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_76" xml:space="preserve">
+    <value>The attempt to remove the NFS share failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_77" xml:space="preserve">
+    <value>The attempt to create a logical volume group failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_78" xml:space="preserve">
+    <value>The attempt to create a VDI failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_79" xml:space="preserve">
+    <value>The size specified for the VDI is invalid</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_80" xml:space="preserve">
+    <value>The attempt to mark the VDI as hidden failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_81" xml:space="preserve">
+    <value>The attempt to clone the VDI failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_82" xml:space="preserve">
+    <value>The attempt to snapshot the VDI failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_83" xml:space="preserve">
+    <value>The attempt to discover the iSCSI target/device failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_84" xml:space="preserve">
+    <value>The iScsi target and received IQNs do not match</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_85" xml:space="preserve">
+    <value>The attempt to detach the iSCSI failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_86" xml:space="preserve">
+    <value>The attempt to query the iSCSi daemon failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_87" xml:space="preserve">
+    <value>Either LUNid or LUNserial value must be provided</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_88" xml:space="preserve">
+    <value>There was an error while attempting to create the NFS storage repository</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_89" xml:space="preserve">
+    <value>The request is missing the LUNid parameter</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_90" xml:space="preserve">
+    <value>The request is missing the device parameter</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_91" xml:space="preserve">
+    <value>The device is not a valid path</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_92" xml:space="preserve">
+    <value>The volume cannot be found</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_93" xml:space="preserve">
+    <value>The pvs utility returns an error</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_94" xml:space="preserve">
+    <value>The request is missing the location parameter</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_95" xml:space="preserve">
+    <value>The request is missing the target parameter</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_96" xml:space="preserve">
+    <value>The request is missing the target IQN parameter</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_97" xml:space="preserve">
+    <value>The request is missing the server configuration iSCSI IQN parameter</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_98" xml:space="preserve">
+    <value>The request is missing the LUN serial number</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_99" xml:space="preserve">
+    <value>Only 1 LUN may be used with shared LVM</value>
+  </data>
+  <data name="SR_DEVICE_IN_USE" xml:space="preserve">
+    <value>The SR operation cannot be performed because a device underlying the SR is in use by the server.</value>
+  </data>
+  <data name="SR_FULL" xml:space="preserve">
+    <value>The SR is full. Requested size {0} exceeds the maximum size {1}</value>
+  </data>
+  <data name="SR_HAS_MULTIPLE_PBDS" xml:space="preserve">
+    <value>The SR.shared flag cannot be set to false while the SR remains connected to multiple servers</value>
+  </data>
+  <data name="SR_HAS_NO_PBDS" xml:space="preserve">
+    <value>The SR has no attached PBDs</value>
+  </data>
+  <data name="SR_HAS_PBD" xml:space="preserve">
+    <value>The SR {0} is still connected to a server via a PBD. It cannot be destroyed.</value>
+  </data>
+  <data name="SR_INDESTRUCTIBLE" xml:space="preserve">
+    <value>The SR could not be destroyed, as the 'indestructible' flag was set on it.</value>
+  </data>
+  <data name="SR_NOT_EMPTY" xml:space="preserve">
+    <value>The SR operation cannot be performed because the SR is not empty.</value>
+  </data>
+  <data name="SR_NOT_SHARABLE" xml:space="preserve">
+    <value>SR is not sharable</value>
+  </data>
+  <data name="SR_OPERATION_NOT_SUPPORTED" xml:space="preserve">
+    <value>This SR does not support this operation</value>
+  </data>
+  <data name="SR_REQUIRES_UPGRADE" xml:space="preserve">
+    <value>The operation cannot be performed until the SR has been upgraded</value>
+  </data>
+  <data name="SR_UNKNOWN_DRIVER" xml:space="preserve">
+    <value>The SR could not be connected because the driver {0} was not recognized.</value>
+  </data>
+  <data name="SR_UUID_EXISTS" xml:space="preserve">
+    <value>An SR with that uuid already exists.</value>
+  </data>
+  <data name="SR_VDI_LOCKING_FAILED" xml:space="preserve">
+    <value>The operation could not proceed because necessary VDIs were already locked at the storage level.</value>
+  </data>
+  <data name="SSL_VERIFY_ERROR" xml:space="preserve">
+    <value>The remote system's SSL certificate failed to verify against our certificate library.</value>
+  </data>
+  <data name="SUBJECT_ALREADY_EXISTS" xml:space="preserve">
+    <value>Subject already exists.</value>
+  </data>
+  <data name="SUBJECT_CANNOT_BE_RESOLVED" xml:space="preserve">
+    <value>Subject cannot be resolved by the external directory service.</value>
+  </data>
+  <data name="SYSTEM_STATUS_MUST_USE_TAR_ON_OEM" xml:space="preserve">
+    <value>You must use tar output to retrieve system status from an OEM server.</value>
+  </data>
+  <data name="SYSTEM_STATUS_RETRIEVAL_FAILED" xml:space="preserve">
+    <value>Retrieving system status from the server failed.</value>
+  </data>
+  <data name="TASK_CANCELLED" xml:space="preserve">
+    <value>The request was asynchronously cancelled.</value>
+  </data>
+  <data name="TOO_BUSY" xml:space="preserve">
+    <value>The request was rejected because the server is too busy.</value>
+  </data>
+  <data name="TOO_MANY_PENDING_TASKS" xml:space="preserve">
+    <value>The request was rejected because there are too many pending tasks on the server.</value>
+  </data>
+  <data name="TOO_MANY_STORAGE_MIGRATES" xml:space="preserve">
+    <value>You reached the maximal number of concurrently migrating VMs.</value>
+  </data>
+  <data name="TRANSPORT_PIF_NOT_CONFIGURED" xml:space="preserve">
+    <value>The tunnel transport PIF has no IP configuration set.</value>
+  </data>
+  <data name="UNKNOWN_BOOTLOADER" xml:space="preserve">
+    <value>The requested bootloader {1} for VM {0} is unknown</value>
+  </data>
+  <data name="USER_IS_NOT_LOCAL_SUPERUSER" xml:space="preserve">
+    <value>Only the local superuser can execute this operation</value>
+  </data>
+  <data name="UUID_INVALID" xml:space="preserve">
+    <value>The uuid you supplied was invalid.</value>
+  </data>
+  <data name="V6D_FAILURE" xml:space="preserve">
+    <value>There was a problem with the license daemon (v6d). Is it running?</value>
+  </data>
+  <data name="VALUE_NOT_SUPPORTED" xml:space="preserve">
+    <value>You attempted to set value {1} for field {0} that is not supported. {2}</value>
+  </data>
+  <data name="VBDS_MAX_ALLOWED" xml:space="preserve">
+    <value>You have reached the maximum number of virtual disks allowed for this virtual machine.</value>
+  </data>
+  <data name="VBDS_MAX_ALLOWED_TITLE" xml:space="preserve">
+    <value>Maximum number of virtual disks allowed</value>
+  </data>
+  <data name="VBD_CDS_MUST_BE_READONLY" xml:space="preserve">
+    <value>Read/write CDs are not supported</value>
+  </data>
+  <data name="VBD_IS_EMPTY" xml:space="preserve">
+    <value>VBD {0} - Operation could not be performed because the drive is empty</value>
+  </data>
+  <data name="VBD_NOT_EMPTY" xml:space="preserve">
+    <value>VBD {0} - Operation could not be performed because the drive is not empty</value>
+  </data>
+  <data name="VBD_NOT_REMOVABLE_MEDIA" xml:space="preserve">
+    <value>VBD {0} - Media could not be ejected because it is not removable</value>
+  </data>
+  <data name="VBD_NOT_UNPLUGGABLE" xml:space="preserve">
+    <value>Drive could not be hot-unplugged because it is not marked as unpluggable</value>
+  </data>
+  <data name="VBD_TRAY_LOCKED" xml:space="preserve">
+    <value>This VM has locked the DVD drive tray, so the disk cannot be ejected</value>
+  </data>
+  <data name="VCPUS_MAX_ALLOWED" xml:space="preserve">
+    <value>You have reached the maximum number of virtual CPUs allowed for this virtual machine.</value>
+  </data>
+  <data name="VCPUS_MAX_ALLOWED_TITLE" xml:space="preserve">
+    <value>Maximum number of virtual CPUs allowed</value>
+  </data>
+  <data name="VDI_CONTAINS_METADATA_OF_THIS_POOL" xml:space="preserve">
+    <value>The VDI could not be opened for metadata recovery as it contains the current pool's metadata.</value>
+  </data>
+  <data name="VDI_COPY_FAILED" xml:space="preserve">
+    <value>The VDI copy action has failed</value>
+  </data>
+  <data name="VDI_INCOMPATIBLE_TYPE" xml:space="preserve">
+    <value>This operation cannot be performed because the specified virtual disk is of an incompatible type (e.g., an HA statefile cannot be attached to a VM)</value>
+  </data>
+  <data name="VDI_IN_USE" xml:space="preserve">
+    <value>This operation cannot be performed because a VDI is in use by some other operation.</value>
+  </data>
+  <data name="VDI_IS_A_PHYSICAL_DEVICE" xml:space="preserve">
+    <value>The operation cannot be performed on physical device</value>
+  </data>
+  <data name="VDI_IS_NOT_ISO" xml:space="preserve">
+    <value>This operation can only be performed on CD VDIs (iso files or CDROM drives).  VDI {0} is of type {1}.</value>
+  </data>
+  <data name="VDI_LOCATION_MISSING" xml:space="preserve">
+    <value>This operation cannot be performed because the specified virtual disk could not be found in the specified SR</value>
+  </data>
+  <data name="VDI_MISSING" xml:space="preserve">
+    <value>This operation cannot be performed because the specified virtual disk could not be found</value>
+  </data>
+  <data name="VDI_NEEDS_VM_FOR_MIGRATE" xml:space="preserve">
+    <value>You attempted to migrate a VDI which is not attached to a running VM.</value>
+  </data>
+  <data name="VDI_NOT_AVAILABLE" xml:space="preserve">
+    <value>This operation cannot be performed because VDI {0} could not be properly attached to the VM.</value>
+  </data>
+  <data name="VDI_NOT_IN_MAP" xml:space="preserve">
+    <value>This VDI was not mapped to a destination SR in VM.migrate_send operation</value>
+  </data>
+  <data name="VDI_NOT_MANAGED" xml:space="preserve">
+    <value>This operation cannot be performed because the system does not manage this VDI</value>
+  </data>
+  <data name="VDI_READONLY" xml:space="preserve">
+    <value>The operation required write access but VDI {0} is read-only</value>
+  </data>
+  <data name="VIFS_MAX_ALLOWED" xml:space="preserve">
+    <value>You have reached the maximum number of virtual network interfaces allowed for this virtual machine.</value>
+  </data>
+  <data name="VIFS_MAX_ALLOWED_TITLE" xml:space="preserve">
+    <value>Maximum number of virtual network interfaces allowed</value>
+  </data>
+  <data name="VIF_IN_USE" xml:space="preserve">
+    <value>Network has active VIFs</value>
+  </data>
+  <data name="VLAN_TAG_INVALID" xml:space="preserve">
+    <value>You tried to create a VLAN, but the tag you gave ({0}) was invalid -- it must be between 0 and 4094.</value>
+  </data>
+  <data name="VMPP_ARCHIVE_MORE_FREQUENT_THAN_BACKUP" xml:space="preserve">
+    <value>Archive more frequent than backup.</value>
+  </data>
+  <data name="VMPP_HAS_VM" xml:space="preserve">
+    <value>There is at least on VM assigned to this protection policy.</value>
+  </data>
+  <data name="VMS_FAILED_TO_COOPERATE" xml:space="preserve">
+    <value>The given VMs failed to release memory when instructed to do so</value>
+  </data>
+  <data name="VM_ASSIGNED_TO_PROTECTION_POLICY" xml:space="preserve">
+    <value>This VM is assigned to a protection policy.</value>
+  </data>
+  <data name="VM_ATTACHED_TO_MORE_THAN_ONE_VDI_WITH_TIMEOFFSET_MARKED_AS_RESET_ON_BOOT" xml:space="preserve">
+    <value>You attempted to start a VM that's attached to more than one VDI with a timeoffset marked as reset-on-boot.</value>
+  </data>
+  <data name="VM_BAD_POWER_STATE" xml:space="preserve">
+    <value>You attempted an operation on a VM that needed it to be in state '{1}' but was in state '{2}'.</value>
+  </data>
+  <data name="VM_BIOS_STRINGS_ALREADY_SET" xml:space="preserve">
+    <value>The BIOS strings for this VM have already been set and cannot be changed anymore.</value>
+  </data>
+  <data name="VM_CANNOT_DELETE_DEFAULT_TEMPLATE" xml:space="preserve">
+    <value>You cannot delete the specified default template.</value>
+  </data>
+  <data name="VM_CHECKPOINT_RESUME_FAILED" xml:space="preserve">
+    <value>An error occurred while restoring the memory image of the specified virtual machine</value>
+  </data>
+  <data name="VM_CHECKPOINT_SUSPEND_FAILED" xml:space="preserve">
+    <value>An error occurred while saving the memory image of the specified virtual machine</value>
+  </data>
+  <data name="VM_CRASHED" xml:space="preserve">
+    <value>The VM crashed</value>
+  </data>
+  <data name="VM_DUPLICATE_VBD_DEVICE" xml:space="preserve">
+    <value>The specified VM has a duplicate VBD device and cannot be started.</value>
+  </data>
+  <data name="VM_FAILED_SHUTDOWN_ACKNOWLEDGMENT" xml:space="preserve">
+    <value>VM didn't acknowledge the need to shut down.</value>
+  </data>
+  <data name="VM_HALTED" xml:space="preserve">
+    <value>The VM unexpectedly halted</value>
+  </data>
+  <data name="VM_HAS_CHECKPOINT" xml:space="preserve">
+    <value>You attempted to migrate a VM which has a checkpoint.</value>
+  </data>
+  <data name="VM_HAS_PCI_ATTACHED" xml:space="preserve">
+    <value>This operation could not be performed because the VM has one or more PCI devices passed through.</value>
+  </data>
+  <data name="VM_HAS_TOO_MANY_SNAPSHOTS" xml:space="preserve">
+    <value>You attempted to migrate a VM with more than one snapshot.</value>
+  </data>
+  <data name="VM_HOST_INCOMPATIBLE_VERSION" xml:space="preserve">
+    <value>This VM operation cannot be performed on an older-versioned host during an upgrade.</value>
+  </data>
+  <data name="VM_HVM_REQUIRED" xml:space="preserve">
+    <value>HVM is required for this operation</value>
+  </data>
+  <data name="VM_HVM_REQUIRED-SHORT" xml:space="preserve">
+    <value>HVM not supported</value>
+  </data>
+  <data name="VM_INCOMPATIBLE_WITH_THIS_HOST" xml:space="preserve">
+    <value>The VM is incompatible with the CPU features of this host.</value>
+  </data>
+  <data name="VM_IS_PART_OF_AN_APPLIANCE" xml:space="preserve">
+    <value>The VM cannot be recovered on its own as it is part of a VM appliance.</value>
+  </data>
+  <data name="VM_IS_PROTECTED" xml:space="preserve">
+    <value>This operation cannot be performed because the specified VM is protected by HA</value>
+  </data>
+  <data name="VM_IS_TEMPLATE" xml:space="preserve">
+    <value>The operation attempted is not valid for templates</value>
+  </data>
+  <data name="VM_MEMORY_SIZE_TOO_LOW" xml:space="preserve">
+    <value>The specified VM has too little memory to be started.</value>
+  </data>
+  <data name="VM_MIGRATE_FAILED" xml:space="preserve">
+    <value>VM migration failed: {3}</value>
+  </data>
+  <data name="VM_MISSING_PV_DRIVERS" xml:space="preserve">
+    <value>You attempted an operation on a VM which requires PV drivers to be installed but the drivers were not detected.</value>
+  </data>
+  <data name="VM_NOT_RESIDENT_HERE" xml:space="preserve">
+    <value>The specified VM is not currently resident on the specified server.</value>
+  </data>
+  <data name="VM_NO_CRASHDUMP_SR" xml:space="preserve">
+    <value>This VM does not have a crashdump SR specified.</value>
+  </data>
+  <data name="VM_NO_SUSPEND_SR" xml:space="preserve">
+    <value>This VM does not have a suspend SR specified.</value>
+  </data>
+  <data name="VM_NO_VCPUS" xml:space="preserve">
+    <value>You need at least 1 VCPU to start a VM</value>
+  </data>
+  <data name="VM_OLD_PV_DRIVERS" xml:space="preserve">
+    <value>You attempted an operation on a VM which requires a more recent version of the PV drivers. Please upgrade your PV drivers.</value>
+  </data>
+  <data name="VM_REBOOTED" xml:space="preserve">
+    <value>The VM unexpectedly rebooted</value>
+  </data>
+  <data name="VM_REQUIRES_GPU" xml:space="preserve">
+    <value>You attempted to run a VM on a host which doesn't have a pGPU available in the GPU group needed by the VM. The VM has a vGPU attached to this GPU group.</value>
+  </data>
+  <data name="VM_REQUIRES_GPU-SHORT" xml:space="preserve">
+    <value>GPU not available</value>
+  </data>
+  <data name="VM_REQUIRES_IOMMU" xml:space="preserve">
+    <value>You attempted to run a VM on a host which doesn't have I/O virtualization (IOMMU/VT-d) enabled, which is needed by the VM.</value>
+  </data>
+  <data name="VM_REQUIRES_NETWORK" xml:space="preserve">
+    <value>This VM needs a network that cannot be seen from that server</value>
+  </data>
+  <data name="VM_REQUIRES_NETWORK-SHORT" xml:space="preserve">
+    <value>Cannot see required network</value>
+  </data>
+  <data name="VM_REQUIRES_SR" xml:space="preserve">
+    <value>This VM needs storage that cannot be seen from that server</value>
+  </data>
+  <data name="VM_REQUIRES_SR-SHORT" xml:space="preserve">
+    <value>Cannot see required storage</value>
+  </data>
+  <data name="VM_REQUIRES_VDI" xml:space="preserve">
+    <value>VM cannot be started because it requires a VDI which cannot be attached</value>
+  </data>
+  <data name="VM_REVERT_FAILED" xml:space="preserve">
+    <value>An error occurred while reverting the specified virtual machine to the specified snapshot</value>
+  </data>
+  <data name="VM_SHUTDOWN_TIMEOUT" xml:space="preserve">
+    <value>The shutdown of this VM timed out</value>
+  </data>
+  <data name="VM_SNAPSHOT_WITH_QUIESCE_FAILED" xml:space="preserve">
+    <value>The quiesced-snapshot operation failed for an unexpected reason</value>
+  </data>
+  <data name="VM_SNAPSHOT_WITH_QUIESCE_NOT_SUPPORTED" xml:space="preserve">
+    <value>The VSS plug-in is not installed on this virtual machine</value>
+  </data>
+  <data name="VM_SNAPSHOT_WITH_QUIESCE_PLUGIN_DEOS_NOT_RESPOND" xml:space="preserve">
+    <value>The VSS plug-in cannot be contacted</value>
+  </data>
+  <data name="VM_SNAPSHOT_WITH_QUIESCE_TIMEOUT" xml:space="preserve">
+    <value>The VSS plug-in has timed out</value>
+  </data>
+  <data name="VM_TOO_MANY_VCPUS" xml:space="preserve">
+    <value>Too many VCPUs to start this VM</value>
+  </data>
+  <data name="VM_TO_IMPORT_IS_NOT_NEWER_VERSION" xml:space="preserve">
+    <value>The VM cannot be imported unforced because it is either the same version or an older version of an existing VM.</value>
+  </data>
+  <data name="VM_UNSAFE_BOOT" xml:space="preserve">
+    <value>You attempted an operation on VM {0} that was judged to be unsafe by the server. This can happen if the VM would run on a CPU that has a potentially incompatible set of feature flags to those the VM requires. If you want to override this warning then use the 'force' option.</value>
+  </data>
+  <data name="WLB_AUTHENTICATION_FAILED" xml:space="preserve">
+    <value>The WLB server rejected our configured authentication details.</value>
+  </data>
+  <data name="WLB_CONNECTION_REFUSED" xml:space="preserve">
+    <value>The WLB server refused a connection to XenServer.</value>
+  </data>
+  <data name="WLB_CONNECTION_RESET" xml:space="preserve">
+    <value>The connection to the WLB server was reset.</value>
+  </data>
+  <data name="WLB_DISABLED" xml:space="preserve">
+    <value>This pool has wlb-enabled set to false.</value>
+  </data>
+  <data name="WLB_INTERNAL_ERROR" xml:space="preserve">
+    <value>The WLB server reported an internal error.</value>
+  </data>
+  <data name="WLB_MALFORMED_REQUEST" xml:space="preserve">
+    <value>The WLB server rejected XenServer's request as malformed.</value>
+  </data>
+  <data name="WLB_MALFORMED_RESPONSE" xml:space="preserve">
+    <value>The WLB server said something that XenServer wasn't expecting or didn't understand.</value>
+  </data>
+  <data name="WLB_NOT_INITIALIZED" xml:space="preserve">
+    <value>No WLB connection is configured.</value>
+  </data>
+  <data name="WLB_TIMEOUT" xml:space="preserve">
+    <value>The communication with the WLB server timed out.</value>
+  </data>
+  <data name="WLB_UNKNOWN_HOST" xml:space="preserve">
+    <value>The configured WLB server name failed to resolve in DNS.</value>
+  </data>
+  <data name="WLB_URL_INVALID" xml:space="preserve">
+    <value>The WLB URL is invalid. Ensure it is in format: &lt;ipaddress&gt;:&lt;port&gt;.  The configured/given URL is returned.</value>
+  </data>
+  <data name="WLB_XENSERVER_AUTHENTICATION_FAILED" xml:space="preserve">
+    <value>The WLB server reported that XenServer rejected its configured authentication details.</value>
+  </data>
+  <data name="WLB_XENSERVER_CONNECTION_REFUSED" xml:space="preserve">
+    <value>The WLB server reported that XenServer refused it a connection (even though we're connecting perfectly fine in the other direction).</value>
+  </data>
+  <data name="WLB_XENSERVER_MALFORMED_RESPONSE" xml:space="preserve">
+    <value>The WLB server reported that XenServer said something to it that WLB wasn't expecting or didn't understand.</value>
+  </data>
+  <data name="WLB_XENSERVER_TIMEOUT" xml:space="preserve">
+    <value>The WLB server reported that communication with XenServer timed out.</value>
+  </data>
+  <data name="WLB_XENSERVER_UNKNOWN_HOST" xml:space="preserve">
+    <value>The WLB server reported that its configured server name for this XenServer instance failed to resolve in DNS.</value>
+  </data>
+  <data name="XAPI_HOOK_FAILED" xml:space="preserve">
+    <value>3rd party xapi hook failed</value>
+  </data>
+  <data name="XENAPI_MISSING_PLUGIN" xml:space="preserve">
+    <value>The requested plugin could not be found.</value>
+  </data>
+  <data name="XENAPI_PLUGIN_FAILURE" xml:space="preserve">
+    <value>There was a failure communicating with the plugin.</value>
+  </data>
+  <data name="XEN_VSS_REQ_ERROR_ADDING_VOLUME_TO_SNAPSET_FAILED" xml:space="preserve">
+    <value>Some volumes to be snapshot could not be added to the VSS snapshot set</value>
+  </data>
+  <data name="XEN_VSS_REQ_ERROR_CREATING_SNAPSHOT" xml:space="preserve">
+    <value>An attempt to create the snapshots failed</value>
+  </data>
+  <data name="XEN_VSS_REQ_ERROR_CREATING_SNAPSHOT_XML_STRING" xml:space="preserve">
+    <value>Could not create the XML string generated by the transportable snapshot</value>
+  </data>
+  <data name="XEN_VSS_REQ_ERROR_INIT_FAILED" xml:space="preserve">
+    <value>Initialization of the VSS requester failed</value>
+  </data>
+  <data name="XEN_VSS_REQ_ERROR_NO_VOLUMES_SUPPORTED" xml:space="preserve">
+    <value>Could not find any volumes supported by the Citrix XenServer Vss Provider</value>
+  </data>
+  <data name="XEN_VSS_REQ_ERROR_PREPARING_WRITERS" xml:space="preserve">
+    <value>An attempt to prepare VSS writers for the snapshot failed</value>
+  </data>
+  <data name="XEN_VSS_REQ_ERROR_PROV_NOT_LOADED" xml:space="preserve">
+    <value>The Citrix XenServer Vss Provider is not loaded</value>
+  </data>
+  <data name="XEN_VSS_REQ_ERROR_START_SNAPSHOT_SET_FAILED" xml:space="preserve">
+    <value>An attempt to start a new VSS snapshot failed</value>
+  </data>
+  <data name="XMLRPC_GENERAL_ERROR" xml:space="preserve">
+    <value>An error occurred while performing the XMLRPC request.</value>
+  </data>
+  <data name="XMLRPC_UNMARSHAL_FAILURE" xml:space="preserve">
+    <value>The server failed to unmarshal the XMLRPC message; it was expecting one element and received something else.</value>
+  </data>
+</root>

@@ -1,0 +1,1017 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2005/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSources>
+    <DataSource Name="KirkwoodDBConnectionString">
+      <rd:DataSourceID>cebdff63-8609-4119-9275-e0643b844bb2</rd:DataSourceID>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+    </DataSource>
+  </DataSources>
+  <InteractiveHeight>11in</InteractiveHeight>
+  <ReportParameters>
+    <ReportParameter Name="LocaleCode">
+      <DataType>String</DataType>
+      <Prompt>LocaleCode</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Start">
+      <DataType>Integer</DataType>
+      <Prompt>Start</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="End">
+      <DataType>Integer</DataType>
+      <Prompt>End</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="PoolName">
+      <DataType>String</DataType>
+      <Prompt>PoolName</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="PoolID">
+      <DataType>String</DataType>
+      <Prompt>PoolID</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ParamLabels">
+      <DataType>String</DataType>
+      <Prompt>ParamLabels</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ParamValues">
+      <DataType>String</DataType>
+      <Prompt>ParamValues</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="UTCOffset">
+      <DataType>Integer</DataType>
+      <Prompt>UTCOffset</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <rd:DrawGrid>true</rd:DrawGrid>
+  <InteractiveWidth>8.5in</InteractiveWidth>
+  <rd:SnapToGrid>true</rd:SnapToGrid>
+  <RightMargin>1in</RightMargin>
+  <LeftMargin>1in</LeftMargin>
+  <PageHeader>
+    <PrintOnFirstPage>true</PrintOnFirstPage>
+    <ReportItems>
+      <Textbox Name="textbox10">
+        <Width>8.25in</Width>
+        <Style>
+          <Color>Navy</Color>
+          <BackgroundColor>LightGrey</BackgroundColor>
+          <BorderStyle>
+            <Default>Solid</Default>
+          </BorderStyle>
+          <FontFamily>Tahoma</FontFamily>
+          <FontSize>12pt</FontSize>
+          <FontWeight>700</FontWeight>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Left>0.125in</Left>
+        <Height>0.25in</Height>
+        <Value>=Code.GetLabel("LBL_VM_MOTION_HISTORY") + ": " + Parameters!PoolName.Value</Value>
+      </Textbox>
+    </ReportItems>
+    <Height>0.375in</Height>
+    <PrintOnLastPage>true</PrintOnLastPage>
+  </PageHeader>
+  <BottomMargin>1in</BottomMargin>
+  <rd:ReportID>f036bf6b-97cc-4c92-956d-af76056f0e0b</rd:ReportID>
+  <PageWidth>7.71in</PageWidth>
+  <DataSets>
+    <DataSet Name="KirkwoodDBDataSetLocal">
+      <Fields>
+        <Field Name="day">
+          <DataField>day</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="hour">
+          <DataField>hour</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="id">
+          <DataField>id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="vmname">
+          <DataField>vmname</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="to_hostname">
+          <DataField>to_hostname</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="from_hostname">
+          <DataField>from_hostname</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="recommendation_id">
+          <DataField>recommendation_id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="reason">
+          <DataField>reason</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="move_time">
+          <DataField>move_time</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>KirkwoodDBConnectionString</DataSourceName>
+        <CommandText />
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+    </DataSet>
+  </DataSets>
+  <Author>Citrix Systems</Author>
+  <Code>
+Function GetLabel(Label as String) as String
+
+	Dim i As Integer
+	Dim Names() As String
+	Dim Values() As String
+	Dim Param As Parameter = Report.Parameters!ParamLabels
+	Dim ParamVal As Parameter = Report.Parameters!ParamValues	
+
+	Names = Split(Param.Value.ToString(), "|")
+	Values = Split(ParamVal.Value.ToString(), "|")
+
+	For i = 0 to Ubound(Names)
+		If (Names(i) = Label) Then Return Values(i)
+	Next i
+
+	Return Label
+
+End Function 
+
+
+Function GetDateFromOffset(Offset as Integer) As String
+
+	Dim currentDate As DateTime = Now
+	Return DateAdd( "D", Offset, Now).ToShortDateString()
+
+
+End Function
+
+
+Function GetPageNumberText() As String
+
+					
+	Dim strPageFormatString As String = String.Empty
+	strPageFormatString = System.String.Format(GetLabel("LBL_FOOTER_PAGE"), Report.Globals!PageNumber, Report.Globals!TotalPages)
+	Return strPageFormatString
+
+End Function
+</Code>
+  <Width>8.5in</Width>
+  <Body>
+    <ReportItems>
+      <Table Name="ContentTable">
+        <ZIndex>1</ZIndex>
+        <DataSetName>KirkwoodDBDataSetLocal</DataSetName>
+        <Top>3.225in</Top>
+        <TableGroups>
+          <TableGroup>
+            <Grouping Name="TableGroup0">
+              <GroupExpressions>
+                <GroupExpression>=Fields!day.Value</GroupExpression>
+              </GroupExpressions>
+            </Grouping>
+            <Sorting>
+              <SortBy>
+                <SortExpression>=Fields!day.Value</SortExpression>
+                <Direction>Ascending</Direction>
+              </SortBy>
+            </Sorting>
+            <Header>
+              <TableRows>
+                <TableRow>
+                  <TableCells>
+                    <TableCell>
+                      <ColSpan>6</ColSpan>
+                      <ReportItems>
+                        <Textbox Name="Row1Column1">
+                          <Style>
+                            <BackgroundColor>White</BackgroundColor>
+                            <BorderColor>
+                              <Default>#bfbfbf</Default>
+                            </BorderColor>
+                            <BorderStyle>
+                              <Default>Solid</Default>
+                            </BorderStyle>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>18</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Format(Fields!day.Value,"d")</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ColSpan>2</ColSpan>
+                      <ReportItems>
+                        <Textbox Name="Row1PageFaultsPerSecond">
+                          <Style>
+                            <BackgroundColor>White</BackgroundColor>
+                            <BorderColor>
+                              <Default>#bfbfbf</Default>
+                            </BorderColor>
+                            <BorderStyle>
+                              <Default>Solid</Default>
+                            </BorderStyle>
+                            <FontSize>8pt</FontSize>
+                            <Format>#,##</Format>
+                            <TextAlign>Right</TextAlign>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>17</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Count(Fields!id.Value)</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                  <Height>0.2875in</Height>
+                </TableRow>
+                <TableRow>
+                  <Visibility>
+                    <Hidden>true</Hidden>
+                    <ToggleItem>Row1Column1</ToggleItem>
+                  </Visibility>
+                  <TableCells>
+                    <TableCell>
+                      <ColSpan>8</ColSpan>
+                      <ReportItems>
+                        <Rectangle Name="TGHeaderSpacerRow0_1">
+                          <ZIndex>16</ZIndex>
+                          <Style>
+                            <BackgroundColor>White</BackgroundColor>
+                            <BorderColor>
+                              <Default>White</Default>
+                            </BorderColor>
+                          </Style>
+                        </Rectangle>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                  <Height>0.0575in</Height>
+                </TableRow>
+                <TableRow>
+                  <Visibility>
+                    <Hidden>true</Hidden>
+                    <ToggleItem>Row1Column1</ToggleItem>
+                  </Visibility>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Rectangle Name="TGHeaderStartSpacer0_1">
+                          <ZIndex>15</ZIndex>
+                          <Style>
+                            <BackgroundColor>White</BackgroundColor>
+                          </Style>
+                        </Rectangle>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="TGHeader0_1">
+                          <Style>
+                            <Color>Navy</Color>
+                            <BackgroundColor>#dedede</BackgroundColor>
+                            <BorderColor>
+                              <Default>#bfbfbf</Default>
+                            </BorderColor>
+                            <BorderStyle>
+                              <Default>Solid</Default>
+                            </BorderStyle>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>14</ZIndex>
+                          <Value>=Code.GetLabel("LBL_VM_NAME")</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox1">
+                          <rd:DefaultName>textbox1</rd:DefaultName>
+                          <Style>
+                            <Color>Navy</Color>
+                            <BackgroundColor>#dedede</BackgroundColor>
+                            <BorderColor>
+                              <Default>#bfbfbf</Default>
+                            </BorderColor>
+                            <BorderStyle>
+                              <Default>Solid</Default>
+                            </BorderStyle>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Center</TextAlign>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>13</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Code.GetLabel("LBL_OPTIMIZATION")</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox3">
+                          <rd:DefaultName>textbox3</rd:DefaultName>
+                          <Style>
+                            <Color>Navy</Color>
+                            <BackgroundColor>#dedede</BackgroundColor>
+                            <BorderColor>
+                              <Default>#bfbfbf</Default>
+                            </BorderColor>
+                            <BorderStyle>
+                              <Default>Solid</Default>
+                            </BorderStyle>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Center</TextAlign>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>12</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Code.GetLabel("LBL_REASON")</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="TGHeader0_3">
+                          <Style>
+                            <Color>Navy</Color>
+                            <BackgroundColor>#dedede</BackgroundColor>
+                            <BorderColor>
+                              <Default>#bfbfbf</Default>
+                            </BorderColor>
+                            <BorderStyle>
+                              <Default>Solid</Default>
+                            </BorderStyle>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>11</ZIndex>
+                          <Value>=Code.GetLabel("LBL_FROM_HOST")</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="TGHeader0_4">
+                          <Style>
+                            <Color>Navy</Color>
+                            <BackgroundColor>#dedede</BackgroundColor>
+                            <BorderColor>
+                              <Default>#bfbfbf</Default>
+                            </BorderColor>
+                            <BorderStyle>
+                              <Default>Solid</Default>
+                            </BorderStyle>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>10</ZIndex>
+                          <Value>=Code.GetLabel("LBL_TO_HOST")</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="TGHeader0_5">
+                          <Style>
+                            <Color>Navy</Color>
+                            <BackgroundColor>#dedede</BackgroundColor>
+                            <BorderColor>
+                              <Default>#bfbfbf</Default>
+                            </BorderColor>
+                            <BorderStyle>
+                              <Default>Solid</Default>
+                            </BorderStyle>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>9</ZIndex>
+                          <Value>=Code.GetLabel("LBL_TIME")</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Rectangle Name="TGHeaderEndSpacer0_1">
+                          <ZIndex>8</ZIndex>
+                          <Style>
+                            <BackgroundColor>White</BackgroundColor>
+                            <BorderColor>
+                              <Default>#bfbfbf</Default>
+                            </BorderColor>
+                            <BorderStyle>
+                              <Left>Solid</Left>
+                            </BorderStyle>
+                          </Style>
+                        </Rectangle>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                  <Height>0.23in</Height>
+                </TableRow>
+              </TableRows>
+            </Header>
+          </TableGroup>
+          <TableGroup>
+            <Grouping Name="TableGroup1">
+              <GroupExpressions>
+                <GroupExpression>=Fields!id.Value</GroupExpression>
+              </GroupExpressions>
+              <Filters>
+                <Filter>
+                  <FilterExpression>=IsNothing(Fields!id.Value)</FilterExpression>
+                  <Operator>NotEqual</Operator>
+                  <FilterValues>
+                    <FilterValue>=true</FilterValue>
+                  </FilterValues>
+                </Filter>
+              </Filters>
+            </Grouping>
+            <Sorting>
+              <SortBy>
+                <SortExpression>=Fields!move_time.Value</SortExpression>
+                <Direction>Ascending</Direction>
+              </SortBy>
+            </Sorting>
+            <Visibility>
+              <Hidden>true</Hidden>
+              <ToggleItem>Row1Column1</ToggleItem>
+            </Visibility>
+            <Header>
+              <TableRows>
+                <TableRow>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Rectangle Name="Row2Column1BeginSpacer">
+                          <ZIndex>7</ZIndex>
+                          <Style>
+                            <BackgroundColor>White</BackgroundColor>
+                          </Style>
+                        </Rectangle>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="Row2Column1">
+                          <Style>
+                            <BackgroundColor>White</BackgroundColor>
+                            <BorderColor>
+                              <Default>#bfbfbf</Default>
+                            </BorderColor>
+                            <BorderStyle>
+                              <Default>Solid</Default>
+                            </BorderStyle>
+                            <FontSize>8pt</FontSize>
+                            <Format>d</Format>
+                            <TextAlign>Left</TextAlign>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>6</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!vmname.Value</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox2">
+                          <rd:DefaultName>textbox2</rd:DefaultName>
+                          <Style>
+                            <BackgroundColor>White</BackgroundColor>
+                            <BorderColor>
+                              <Default>#bfbfbf</Default>
+                            </BorderColor>
+                            <BorderStyle>
+                              <Default>Solid</Default>
+                            </BorderStyle>
+                            <FontSize>8pt</FontSize>
+                            <Format>d</Format>
+                            <TextAlign>Center</TextAlign>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>5</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Iif(Fields!recommendation_id.Value &gt; 0, "Yes", "No")</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="textbox4">
+                          <rd:DefaultName>textbox4</rd:DefaultName>
+                          <Style>
+                            <BackgroundColor>White</BackgroundColor>
+                            <BorderColor>
+                              <Default>#bfbfbf</Default>
+                            </BorderColor>
+                            <BorderStyle>
+                              <Default>Solid</Default>
+                            </BorderStyle>
+                            <FontSize>8pt</FontSize>
+                            <Format>d</Format>
+                            <TextAlign>Center</TextAlign>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>4</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Switch(Fields!reason.Value = 0, "", Fields!reason.Value = 1, "CPU",Fields!reason.Value = 2, "Memory",Fields!reason.Value = 3, "Disk",Fields!reason.Value = 4, "Network",Fields!reason.Value = 5, "Consolidation",Fields!reason.Value = 6, "Disk Reads",Fields!reason.Value = 7, "Disk Writes",Fields!reason.Value = 8, "Network Reads",Fields!reason.Value = 9, "Network Writes",Fields!reason.Value = 10, "Load Average")</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="Row2FromHost">
+                          <Style>
+                            <BackgroundColor>White</BackgroundColor>
+                            <BorderColor>
+                              <Default>#bfbfbf</Default>
+                            </BorderColor>
+                            <BorderStyle>
+                              <Default>Solid</Default>
+                            </BorderStyle>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>3</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!from_hostname.Value</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="Row2ToHost">
+                          <Style>
+                            <BackgroundColor>White</BackgroundColor>
+                            <BorderColor>
+                              <Default>#bfbfbf</Default>
+                            </BorderColor>
+                            <BorderStyle>
+                              <Default>Solid</Default>
+                            </BorderStyle>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>2</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Fields!to_hostname.Value</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="Row2Status">
+                          <Style>
+                            <BackgroundColor>White</BackgroundColor>
+                            <BorderColor>
+                              <Default>#bfbfbf</Default>
+                            </BorderColor>
+                            <BorderStyle>
+                              <Default>Solid</Default>
+                            </BorderStyle>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value>=Format(Fields!move_time.Value,"t")</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                    <TableCell>
+                      <ReportItems>
+                        <Rectangle Name="Row2StatusEndSpacer">
+                          <Style>
+                            <BackgroundColor>White</BackgroundColor>
+                            <BorderColor>
+                              <Default>#bfbfbf</Default>
+                            </BorderColor>
+                            <BorderStyle>
+                              <Left>Solid</Left>
+                            </BorderStyle>
+                          </Style>
+                        </Rectangle>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                  <Height>0.2875in</Height>
+                </TableRow>
+              </TableRows>
+            </Header>
+          </TableGroup>
+        </TableGroups>
+        <Width>8.25in</Width>
+        <Style>
+          <BackgroundColor>#dedede</BackgroundColor>
+          <BorderStyle>
+            <Default>Solid</Default>
+          </BorderStyle>
+        </Style>
+        <Header>
+          <TableRows>
+            <TableRow>
+              <TableCells>
+                <TableCell>
+                  <ColSpan>6</ColSpan>
+                  <ReportItems>
+                    <Textbox Name="Header1">
+                      <Style>
+                        <Color>Navy</Color>
+                        <BackgroundColor>#dedede</BackgroundColor>
+                        <BorderColor>
+                          <Default>#bfbfbf</Default>
+                        </BorderColor>
+                        <BorderStyle>
+                          <Default>Solid</Default>
+                        </BorderStyle>
+                        <FontWeight>700</FontWeight>
+                        <TextAlign>Left</TextAlign>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                      <ZIndex>20</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <UserSort>
+                        <SortExpression>=Fields!day.Value</SortExpression>
+                        <SortExpressionScope>TableGroup0</SortExpressionScope>
+                      </UserSort>
+                      <Value>=Code.GetLabel("LBL_DATE")</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ColSpan>2</ColSpan>
+                  <ReportItems>
+                    <Textbox Name="Header2">
+                      <Style>
+                        <Color>Navy</Color>
+                        <BackgroundColor>#dedede</BackgroundColor>
+                        <BorderColor>
+                          <Default>#bfbfbf</Default>
+                        </BorderColor>
+                        <BorderStyle>
+                          <Default>Solid</Default>
+                        </BorderStyle>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>700</FontWeight>
+                        <TextAlign>Right</TextAlign>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                      <ZIndex>19</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <UserSort>
+                        <SortExpression>=Count(Fields!id.Value)</SortExpression>
+                        <SortExpressionScope>TableGroup0</SortExpressionScope>
+                      </UserSort>
+                      <Value>=Code.GetLabel("LBL_TOTAL_VM_MOVES")</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+              <Height>0.2875in</Height>
+            </TableRow>
+          </TableRows>
+          <RepeatOnNewPage>true</RepeatOnNewPage>
+        </Header>
+        <TableColumns>
+          <TableColumn>
+            <Width>0.07801in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>2.62271in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>0.80166in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>0.80166in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>1.38427in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>1.45977in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>1.01061in</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>0.09131in</Width>
+          </TableColumn>
+        </TableColumns>
+        <Height>1.15in</Height>
+        <Left>0.125in</Left>
+      </Table>
+      <Chart Name="LineContentChart">
+        <Legend>
+          <Visible>true</Visible>
+          <Style>
+            <BackgroundColor>#dedede</BackgroundColor>
+            <BorderColor>
+              <Default>#8c8c8c</Default>
+            </BorderColor>
+            <BorderStyle>
+              <Default>Solid</Default>
+            </BorderStyle>
+            <FontSize>9pt</FontSize>
+          </Style>
+          <Position>BottomCenter</Position>
+          <Layout>Row</Layout>
+        </Legend>
+        <CategoryAxis>
+          <Axis>
+            <Title />
+            <Style>
+              <FontSize>8pt</FontSize>
+              <Format>d</Format>
+            </Style>
+            <MajorGridLines>
+              <ShowGridLines>true</ShowGridLines>
+              <Style>
+                <BorderColor>
+                  <Default>Gray</Default>
+                </BorderColor>
+                <BorderStyle>
+                  <Default>Dotted</Default>
+                </BorderStyle>
+              </Style>
+            </MajorGridLines>
+            <MinorGridLines>
+              <Style>
+                <BorderStyle>
+                  <Default>Solid</Default>
+                </BorderStyle>
+              </Style>
+            </MinorGridLines>
+            <MajorTickMarks>Outside</MajorTickMarks>
+            <Min>0</Min>
+            <Visible>true</Visible>
+            <Scalar>true</Scalar>
+          </Axis>
+        </CategoryAxis>
+        <NoRows>No Data</NoRows>
+        <DataSetName>KirkwoodDBDataSetLocal</DataSetName>
+        <PlotArea>
+          <Style>
+            <BackgroundColor>White</BackgroundColor>
+            <BorderStyle>
+              <Default>Solid</Default>
+            </BorderStyle>
+          </Style>
+        </PlotArea>
+        <ThreeDProperties />
+        <PointWidth>0</PointWidth>
+        <SeriesGroupings>
+          <SeriesGrouping>
+            <StaticSeries>
+              <StaticMember>
+                <Label>=Code.GetLabel("LBL_TOTAL_VM_MOVES")</Label>
+              </StaticMember>
+            </StaticSeries>
+          </SeriesGrouping>
+        </SeriesGroupings>
+        <Subtype>Plain</Subtype>
+        <ValueAxis>
+          <Axis>
+            <Title />
+            <Style>
+              <FontSize>8pt</FontSize>
+            </Style>
+            <MajorGridLines>
+              <ShowGridLines>true</ShowGridLines>
+              <Style>
+                <BorderColor>
+                  <Default>Gray</Default>
+                </BorderColor>
+                <BorderStyle>
+                  <Default>Dotted</Default>
+                </BorderStyle>
+              </Style>
+            </MajorGridLines>
+            <MinorGridLines>
+              <Style>
+                <BorderColor>
+                  <Default>DarkGray</Default>
+                </BorderColor>
+                <BorderStyle>
+                  <Default>Dashed</Default>
+                </BorderStyle>
+              </Style>
+            </MinorGridLines>
+            <MajorTickMarks>Outside</MajorTickMarks>
+            <Min>0</Min>
+            <Margin>true</Margin>
+            <Visible>true</Visible>
+            <Scalar>true</Scalar>
+          </Axis>
+        </ValueAxis>
+        <Type>Line</Type>
+        <Width>8.25in</Width>
+        <CategoryGroupings>
+          <CategoryGrouping>
+            <DynamicCategories>
+              <Grouping Name="LineChartGroup1">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!day.Value</GroupExpression>
+                </GroupExpressions>
+              </Grouping>
+              <Sorting>
+                <SortBy>
+                  <SortExpression>=Fields!day.Value</SortExpression>
+                  <Direction>Ascending</Direction>
+                </SortBy>
+              </Sorting>
+              <Label>=Format(Fields!day.Value,"d")</Label>
+            </DynamicCategories>
+          </CategoryGrouping>
+        </CategoryGroupings>
+        <Palette>Default</Palette>
+        <ChartData>
+          <ChartSeries>
+            <DataPoints>
+              <DataPoint>
+                <DataValues>
+                  <DataValue>
+                    <Value>=Iif(Count(Fields!id.Value) &gt; 0, Count(Fields!id.Value), 0)</Value>
+                  </DataValue>
+                </DataValues>
+                <DataLabel />
+                <Style>
+                  <BorderColor>
+                    <Default>RoyalBlue</Default>
+                  </BorderColor>
+                  <BorderStyle>
+                    <Default>Solid</Default>
+                  </BorderStyle>
+                  <FontFamily>Verdana</FontFamily>
+                  <FontSize>8pt</FontSize>
+                </Style>
+                <Marker>
+                  <Type>Diamond</Type>
+                  <Size>4pt</Size>
+                </Marker>
+              </DataPoint>
+            </DataPoints>
+          </ChartSeries>
+        </ChartData>
+        <Style>
+          <BackgroundColor>#dedede</BackgroundColor>
+          <BorderStyle>
+            <Default>Solid</Default>
+          </BorderStyle>
+          <FontFamily>Verdana</FontFamily>
+          <TextAlign>Center</TextAlign>
+          <PaddingTop>100pt</PaddingTop>
+        </Style>
+        <Title />
+        <Height>3.125in</Height>
+        <Left>0.125in</Left>
+      </Chart>
+    </ReportItems>
+    <Height>4.5in</Height>
+    <Style>
+      <BackgroundColor>#ffffff</BackgroundColor>
+    </Style>
+  </Body>
+  <Language>=User!Language</Language>
+  <PageFooter>
+    <PrintOnFirstPage>true</PrintOnFirstPage>
+    <ReportItems>
+      <Line Name="line1">
+        <Top>0.125in</Top>
+        <Width>8.25in</Width>
+        <Style>
+          <BorderStyle>
+            <Default>Solid</Default>
+          </BorderStyle>
+        </Style>
+        <ZIndex>2</ZIndex>
+        <Left>0.125in</Left>
+        <Height>0in</Height>
+      </Line>
+      <Textbox Name="textbox11">
+        <Top>0.125in</Top>
+        <Width>1.75in</Width>
+        <Style>
+          <FontFamily>Verdana</FontFamily>
+          <FontSize>7pt</FontSize>
+          <TextAlign>Right</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+        <ZIndex>1</ZIndex>
+        <CanGrow>true</CanGrow>
+        <Left>6.625in</Left>
+        <Height>0.2125in</Height>
+        <Value>=Code.GetPageNumberText()</Value>
+      </Textbox>
+      <Textbox Name="ReportingInfo">
+        <Top>0.125in</Top>
+        <Width>6.5in</Width>
+        <Style>
+          <FontFamily>Verdana</FontFamily>
+          <FontSize>7pt</FontSize>
+          <TextAlign>Left</TextAlign>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Left>0.125in</Left>
+        <Height>0.2125in</Height>
+        <Value>=String.Format(Code.GetLabel("LBL_FOOTER_LEFT"), Code.GetLabel("LBL_VM_MOTION_HISTORY"), Code.GetDateFromOffset(Parameters!Start.Value), Code.GetDateFromOffset(Parameters!End.Value)) + " | Citrix Systems, Inc."</Value>
+      </Textbox>
+    </ReportItems>
+    <Height>0.375in</Height>
+    <PrintOnLastPage>true</PrintOnLastPage>
+  </PageFooter>
+  <PageHeight>9.5in</PageHeight>
+</Report>

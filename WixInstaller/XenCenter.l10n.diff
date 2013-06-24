@@ -1,0 +1,178 @@
+# Copyright (c) Citrix Systems Inc.
+# All rights reserved.
+# 
+# Redistribution and use in source and binary forms, 
+# with or without modification, are permitted provided 
+# that the following conditions are met:
+# 
+# *   Redistributions of source code must retain the above 
+#     copyright notice, this list of conditions and the 
+#     following disclaimer. 
+# *   Redistributions in binary form must reproduce the above 
+#     copyright notice, this list of conditions and the 
+#     following disclaimer in the documentation and/or other 
+#     materials provided with the distribution. 
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+# CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+# INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
+# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+# NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
+# SUCH DAMAGE. 
+
+--- XenCenter.wxs	2012-04-27 15:35:27.662068200 +0100
++++ XenCenter.l10n.wxs	2012-04-27 16:28:00.539817200 +0100
+@@ -4,7 +4,7 @@
+     <?define UpgradeCode="{EA0EF50F-5CC6-452B-B09F-3F5EC564899D}"?>
+     <?define ProductCode="{65AE1345-A520-456D-8A19-2F52D43D3A09}"?>
+     <Product Id="$(var.ProductCode)" Name="Citrix XenCenter" Language="$(env.WixLangId)" Version="$(var.ProductVersion)" Manufacturer="Citrix Systems, Inc." UpgradeCode="$(var.UpgradeCode)">
+-        <Package Description="Citrix XenCenter" Comments="none." InstallerVersion="200" Compressed="yes" />
++        <Package Languages="1033,1041,2052,1028" Description="Citrix XenCenter" Comments="none." InstallerVersion="200" Compressed="yes" />
+         <Media Id="1" Cabinet="XenCenter.cab" EmbedCab="yes" />
+         <Directory Id="TARGETDIR" Name="SourceDir">
+             <Directory Id="ProgramFilesFolder">
+@@ -54,64 +54,64 @@
+                             <File Id="XslicIcon" Source="..\XenAdmin\Images\file_license.ico" />
+                             <File Id="XkbIcon" Source="..\XenAdmin\Images\file_backup.ico" />
+                             <File Id="XsupdateIcon" Source="..\XenAdmin\Images\file_updates.ico" />
+-							<!-- Define XVA extension -->
+-							<ProgId Id="XenCenter.xva" Description="XVA File" Icon="XvaIcon">
++                            <!-- Define XVA extension -->
++							<ProgId Id="XenCenter.xva" Description="!(loc.XVA_File)" Icon="XvaIcon">
+                                 <Extension Id="xva" ContentType="application/xva">
+-                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="import &quot;%1&quot;" />
++                                    <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="import &quot;%1&quot;" />
+                                 </Extension>
+                             </ProgId>
+-							<!-- Define OVF extension -->
+-							<ProgId Id="XenCenter.ovf" Description="OVF File" Icon="XvaIcon">
++                            <!-- Define OVF extension -->
++							<ProgId Id="XenCenter.ovf" Description="!(loc.OVF_File)" Icon="XvaIcon">
+                                 <Extension Id="ovf" ContentType="application/ovf">
+                                     <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="import &quot;%1&quot;" />
+                                 </Extension>
+                             </ProgId>
+-							<!-- Define OVA extension -->
+-							<ProgId Id="XenCenter.ova" Description="OVA File" Icon="XvaIcon">
++                            <!-- Define OVA extension -->
++							<ProgId Id="XenCenter.ova" Description="!(loc.OVA_File)" Icon="XvaIcon">
+                                 <Extension Id="ova" ContentType="application/ova">
+                                     <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="import &quot;%1&quot;" />
+                                 </Extension>
+                             </ProgId>
+-							<!-- Define VHD extension -->
+-							<ProgId Id="XenCenter.vhd" Description="VHD File" Icon="XvaIcon">
++                            <!-- Define VHD extension -->
++							<ProgId Id="XenCenter.vhd" Description="!(loc.VHD_File)" Icon="XvaIcon">
+                                 <Extension Id="vhd" ContentType="application/vhd">
+                                     <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="import &quot;%1&quot;" />
+                                 </Extension>
+                             </ProgId>
+-							<!-- Define VMDK extension -->
+-							<ProgId Id="XenCenter.vmdk" Description="VMDK File" Icon="XvaIcon">
++                            <!-- Define VMDK extension -->
++							<ProgId Id="XenCenter.vmdk" Description="!(loc.VMDK_File)" Icon="XvaIcon">
+                                 <Extension Id="vmdk" ContentType="application/vmdk">
+                                     <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="import &quot;%1&quot;" />
+                                 </Extension>
+                             </ProgId>
+-							<!-- Define XSLIC extension -->
+-							<ProgId Id="XenCenter.xslic" Description="XenServer License File" Icon="XslicIcon">
++                            <!-- Define XSLIC extension -->
++							<ProgId Id="XenCenter.xslic" Description="!(loc.XenServer_License_File)" Icon="XslicIcon">
+                                 <Extension Id="xslic" ContentType="application/xslic">
+-                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="license &quot;%1&quot;" />
++                                    <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="license &quot;%1&quot;" />
+                                 </Extension>
+                             </ProgId>
+-							<!-- Define XBK extension -->
+-							<ProgId Id="XenCenter.xbk" Description="XenServer Backup File" Icon="XkbIcon">
++                            <!-- Define XBK extension -->
++							<ProgId Id="XenCenter.xbk" Description="!(loc.XenServer_Backup_File)" Icon="XkbIcon">
+                                 <Extension Id="xbk" ContentType="application/xbk">
+-                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="restore &quot;%1&quot;" />
++                                    <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="restore &quot;%1&quot;" />
+                                 </Extension>
+                             </ProgId>
+                             <!-- Define XSUPDATE extension -->
+-							<ProgId Id="XenCenter.xsupdate" Description="XenServer Update File" Icon="XsupdateIcon">
++							<ProgId Id="XenCenter.xsupdate" Description="!(loc.XenServer_Update_File)" Icon="XsupdateIcon">
+                                 <Extension Id="xsupdate" ContentType="application/xsupdate">
+-                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
++                                    <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
+                                 </Extension>
+                             </ProgId>
+                             <!-- Define XSOEM extension -->
+-							<ProgId Id="XenCenter.xsoem" Description="XenServer OEM Update File" Icon="XsupdateIcon">
++							<ProgId Id="XenCenter.xsoem" Description="!(loc.XenServer_OEM_Update_File)" Icon="XsupdateIcon">
+                                 <Extension Id="xsoem" ContentType="application/xsoem">
+-                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
++                                    <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
+                                 </Extension>
+                             </ProgId>
+                             <!-- Define XENSEARCH extension -->
+-                            <ProgId Id="XenCenter.xensearch" Description="XenCenter Saved Search" Icon="XenCenterIcon">
++                            <ProgId Id="XenCenter.xensearch" Description="!(loc.XenCenter_Saved_Search)" Icon="XenCenterIcon">
+                                 <Extension Id="xensearch" ContentType="application/xensearch">
+-                                    <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="xensearch &quot;%1&quot;" />
++                                    <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="xensearch &quot;%1&quot;" />
+                                 </Extension>
+                             </ProgId>
+                         </Component>
+@@ -130,6 +130,30 @@
+                             <Component Id="HelpFiles" Guid="EA8D4F56-A94A-467c-9E6B-F3DC26F95B1E">
+                                 <File Id="XenCenterCHM" Source="..\XenAdmin\bin\Release\Help\XenCenter.chm" />
+                                 <File Id="WLBCHM" Source="..\XenAdmin\bin\Release\Help\WLB.chm" />
++                                <File Id="XenCenterJaCHM" Source="..\XenAdmin\bin\Release\Help\XenCenter.ja.chm" />
++                                <File Id="WLBJaCHM" Source="..\XenAdmin\bin\Release\Help\WLB.ja.chm" />
++                                <File Id="XenCenterScCHM" Source="..\XenAdmin\bin\Release\Help\XenCenter.zh-CN.chm" />
++                                <File Id="WLBScCHM" Source="..\XenAdmin\bin\Release\Help\WLB.zh-CN.chm" />
++                            </Component>
++                        </Directory>
++                        <Directory Id="ja" Name="ja">
++                            <Component Id="JaResources" Guid="D3ADD803-AF0B-4787-AC29-C6387FFF403B">
++                                <File Id="JaResourcesDLL" Source="..\XenAdmin\bin\Release\ja\XenCenterMain.resources.dll" />
++                                <File Id="JaXenModResourcesDLL" Source="..\XenAdmin\bin\Release\ja\XenModel.resources.dll" />
++                                <File Id="JaMicRepVwrCmnResDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.resources.dll" />
++                                <File Id="JaMicRepVwrPrcObjResDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.WinForms.resources.dll" />
++                                <File Id="JaXOResourcesDLL" Source="..\XenOvfApi\bin\Release\ja\XenOvf.resources.dll" />
++                                <File Id="JaXOTResourcesDLL" Source="..\XenOvfTransport\bin\Release\ja\XenOvfTransport.resources.dll" />
++                            </Component>
++                        </Directory>
++                        <Directory Id="sc" Name="zh-CN">
++                            <Component Id="ScResources" Guid="381e9319-f0c4-4c69-a1c2-0a2fc725bd19">
++                                <File Id="ScResourcesDLL" Source="..\XenAdmin\bin\Release\zh-CN\XenCenterMain.resources.dll" />
++                                <File Id="ScXenModResourcesDLL" Source="..\XenAdmin\bin\Release\zh-CN\XenModel.resources.dll" />
++                                <File Id="ScMicRepVwrCmnResDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.resources.dll" />
++                                <File Id="ScMicRepVwrPrcObjResDLL" Source="..\XenAdmin\ReportViewer\Microsoft.ReportViewer.WinForms.resources.dll" />
++                                <File Id="ScXOResourcesDLL" Source="..\XenOvfApi\bin\Release\zh-CN\XenOvf.resources.dll" />
++                                <File Id="ScXOTResourcesDLL" Source="..\XenOvfTransport\bin\Release\zh-CN\XenOvfTransport.resources.dll" />
+                             </Component>
+                         </Directory>
+                         <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
+@@ -179,6 +203,8 @@
+         <Feature Id="MainProgram" Title="Citrix XenCenter" Description="The complete package" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow">
+             <ComponentRef Id="MainExecutable" />
+             <ComponentRef Id="HelpFiles" />
++            <ComponentRef Id="JaResources" />
++            <ComponentRef Id="ScResources" />
+             <ComponentRef Id="ReportViewer" />
+             <ComponentRef Id="TestResources" />
+             <ComponentRef Id="SchemasFilesComponent" />
+@@ -195,7 +221,7 @@
+         </Property>
+         <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
+         <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
+-        <Condition Message=".NET Framework 3.5 is required for this installation.">FRAMEWORK35 &gt;= "#1"</Condition>
++        <Condition Message="!(loc.Required_For_Installation)">FRAMEWORK35 &gt;= "#1"</Condition>
+         <InstallExecuteSequence>
+ 			<AppSearch Sequence="50" />
+             <FindRelatedProducts Before="LaunchConditions" />

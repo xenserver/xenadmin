@@ -1,0 +1,126 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="XenOvfTransport.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="p2vTemplate" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">XenServer P2V (Orela) Server</Value>
+    </Setting>
+    <Setting Name="xenP2VDiskName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">P2V Automatically created.</Value>
+    </Setting>
+    <Setting Name="xenBootOptions" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">BIOS order</Value>
+    </Setting>
+    <Setting Name="xenBootOrder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">dc</Value>
+    </Setting>
+    <Setting Name="xenPlatformSetting" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">nx=true;acpi=true;apic=true;pae=true;stdvga=0;</Value>
+    </Setting>
+    <Setting Name="xenNetworkKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">network=</Value>
+    </Setting>
+    <Setting Name="xenDefaultNetwork" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">xenbr0</Value>
+    </Setting>
+    <Setting Name="xenISOMount" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/var/run/sr-mount/{0}</Value>
+    </Setting>
+    <Setting Name="xenISOTools" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/var/opt/xen/iso_import</Value>
+    </Setting>
+    <Setting Name="xenTools" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">XenServer Tools</Value>
+    </Setting>
+    <Setting Name="XenFixupLabel" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">xenserver-linuxfixup-disk.iso</Value>
+    </Setting>
+    <Setting Name="xenSRKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">sr=</Value>
+    </Setting>
+    <Setting Name="xenDeviceKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">device=</Value>
+    </Setting>
+    <Setting Name="xenNetworkUuidKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">XenNetwork=</Value>
+    </Setting>
+    <Setting Name="OVFVersion" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1.0.0</Value>
+    </Setting>
+    <Setting Name="uriRegex" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">^(http|https|file|ftp)://*</Value>
+    </Setting>
+    <Setting Name="iSCSITargetName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">DoNotUse_iSCSI_target</Value>
+    </Setting>
+    <Setting Name="iSCSINetworkName" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;Pool-wide network associated with eth0&lt;/string&gt;
+  &lt;string&gt;Network 0&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="iSCSIConnectRetry" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="iSCSITransferVM" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Transfer VM for VDI {0}</Value>
+    </Setting>
+    <Setting Name="iSCSITransferVMName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">XenServer Transfer</Value>
+    </Setting>
+    <Setting Name="TransferType" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">iSCSI</Value>
+    </Setting>
+    <Setting Name="xenSupportedVersions" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1.5,1.6,LATEST</Value>
+    </Setting>
+    <Setting Name="iSCSITransferVMNetwork" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;network_config=auto #REQUIRED: MUST BE FIRST Values:  "auto" "manual"&lt;/string&gt;
+  &lt;string&gt;network_mode=dhcp #REQUIRED: MUST BE SECOND Values: "dhcp" "manual"&lt;/string&gt;
+  &lt;string&gt;network_port=3260 #OPTIONAL: port for config is manual&lt;/string&gt;
+  &lt;string&gt;network_mac=00:00:00:00:00:00 #OPTIONAL: set mac address for config is manual&lt;/string&gt;
+  &lt;string&gt;network_ip=192.168.2.69 #OPTIONAL: Required if mode is manual&lt;/string&gt;
+  &lt;string&gt;network_mask=255.255.255.0 #OPTIONAL: Required if mode is manual&lt;/string&gt;
+  &lt;string&gt;network_gateway=192.168.2.1 #OPTIONAL: Required if mode is manual&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="DEFAULT_CULTURE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">en-us</Value>
+    </Setting>
+    <Setting Name="EXCLUDED_FILES_COPY" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;\PAGEFILE.SYS&lt;/string&gt;
+  &lt;string&gt;\HIBERFIL.SYS&lt;/string&gt;
+  &lt;string&gt;\SYSTEM VOLUME INFORMATION&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="ReferenceVHDName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">External Tools\bootableReference.vhd</Value>
+    </Setting>
+    <Setting Name="bzip2ext" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">.bz2</Value>
+    </Setting>
+    <Setting Name="iSCSITransferVMMgtNetwork" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">management  #Replace with Network UUID to change iSCSI network utilization.</Value>
+    </Setting>
+    <Setting Name="CreateApplianceFolder" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ApplianceFolderPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FixupOsMemorySizeAsMB" Type="System.Int64" Scope="Application">
+      <Value Profile="(Default)">256</Value>
+    </Setting>
+    <Setting Name="FixupDurationAsSeconds" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">600</Value>
+    </Setting>
+    <Setting Name="FixupPollTimeAsMs" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

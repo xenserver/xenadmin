@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XenCenterPlugin xmlns="http://www.citrix.com/XenCenter/Plugins/schema" version="1" plugin_name="TabPageFeatureTestPlugin" plugin_version="1.0.0.0">
+  <TabPage name="XenCenterTabPageTest"  url="about:credits" xencenter-only="true"/>
+  <TabPage name="PoolTabPageTest"  url="about:credits" search="pl"/>
+  <TabPage name="ServerTabPageTest"  url="about:credits" search="svr"/>
+  <TabPage name="VMTabPageTest"  url="about:credits" search="vm"/>
+  <TabPage name="SRTabPageTest"  url="about:credits" search="sr"/>
+  <TabPage name="UserTemplateTabPageTest"  url="about:credits" search="ut"/>
+  <TabPage name="DefaultTemplateTabPageTest"  url="about:credits" search="dt"/>
+  <TabPage name="AllTabPageTest"  url="about:credits" />
+  <Search uuid="pl" name="pools" major_version="2" minor_version="0" show_expanded="yes">
+    <Query>
+      <QueryScope>
+        <Pool />
+      </QueryScope>
+    </Query>
+  </Search>
+  <Search uuid="svr" name="servers" major_version="2" minor_version="0" show_expanded="yes">
+    <Query>
+      <QueryScope>
+        <Server />
+      </QueryScope>
+    </Query>
+  </Search>
+  <Search uuid="vm" name="vms" major_version="2" minor_version="0" show_expanded="yes">
+    <Query>
+      <QueryScope>
+        <VM />
+      </QueryScope>
+    </Query>
+  </Search>
+  <Search uuid="sr" name="srs" major_version="2" minor_version="0" show_expanded="yes">
+    <Query>
+      <QueryScope>
+        <RemoteSR />
+        <LocalSR />
+      </QueryScope>
+    </Query>
+  </Search>
+  <Search uuid="ut" name="user_templates" major_version="2" minor_version="0" show_expanded="yes">
+    <Query>
+      <QueryScope>
+        <UserTemplate />
+      </QueryScope>
+    </Query>
+  </Search>
+  <Search uuid="dt" name="default_templates" major_version="2" minor_version="0" show_expanded="yes">
+    <Query>
+      <QueryScope>
+        <DefaultTemplate />
+      </QueryScope>
+    </Query>
+  </Search>
+</XenCenterPlugin>

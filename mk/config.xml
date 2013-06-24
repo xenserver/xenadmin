@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <logRotator>
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>30</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.plugins.mercurial.MercurialSCM">
+    <source>http://hg.uk.xensource.com/carbon/trunk/xenadmin.hg/</source>
+    <modules></modules>
+    <subdir>xenadmin.hg</subdir>
+    <clean>true</clean>
+    <forest>false</forest>
+    <browser class="hudson.plugins.mercurial.browser.HgWeb">
+      <url>http://hg.uk.xensource.com/carbon/trunk/xenadmin.hg/</url>
+    </browser>
+  </scm>
+  <quietPeriod>300</quietPeriod>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector">
+    <hudson.triggers.SCMTrigger>
+      <spec>0-59/2 * * * *</spec>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>xenadmin.hg/mk/bumpBuildNumber.sh</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>xenadmin.hg/devtools/check-roaming.sh &amp;&amp; xenadmin.hg/devtools/i18ncheck/i18ncheck.sh &amp;&amp; xenadmin.hg/devtools/deadcheck/deadcheck.sh &amp;&amp; xenadmin.hg/devtools/spellcheck/spellcheck.sh</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>xenadmin.hg/mk/xenadmin-build.sh</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>xenadmin.hg/mk/tests-checks.sh</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>xenadmin.hg/mk/archive-push.sh</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.plugins.nunit.NUnitPublisher>
+      <testResultsPattern>output/XenAdminTests.xml</testResultsPattern>
+      <debug>false</debug>
+      <keepJUnitReports>false</keepJUnitReports>
+      <skipJUnitArchiver>false</skipJUnitArchiver>
+    </hudson.plugins.nunit.NUnitPublisher>
+    <hudson.tasks.Mailer>
+      <recipients>#xencenter@citrite.net</recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>true</sendToIndividuals>
+    </hudson.tasks.Mailer>
+  </publishers>
+  <buildWrappers/>
+</project>

@@ -1,0 +1,803 @@
+# Copyright (c) Citrix Systems Inc. 
+# All rights reserved.
+# 
+# Redistribution and use in source and binary forms, 
+# with or without modification, are permitted provided 
+# that the following conditions are met: 
+# 
+# *   Redistributions of source code must retain the above 
+#     copyright notice, this list of conditions and the 
+#     following disclaimer. 
+# *   Redistributions in binary form must reproduce the above 
+#     copyright notice, this list of conditions and the 
+#     following disclaimer in the documentation and/or other 
+#     materials provided with the distribution. 
+# 
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+# CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+# INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
+# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+# NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
+# SUCH DAMAGE.
+
+diff -ru wixlib/BrowseDlg.wxs wixlib/BrowseDlg.wxs
+--- wixlib/BrowseDlg.wxs	Thu Jan 20 06:13:28 2011 -0800
++++ wixlib/BrowseDlg.wxs	Mon Feb 20 18:18:06 2012 +0000
+@@ -23,7 +23,7 @@
+                     <Publish Event="Reset" Value="0">1</Publish>
+                     <Publish Event="EndDialog" Value="Return">1</Publish>
+                 </Control>
+-                <Control Id="ComboLabel" Type="Text" X="25" Y="58" Width="44" Height="10" TabSkip="no" Text="!(loc.BrowseDlgComboLabel)" />
++                <Control Id="ComboLabel" Type="Text" X="5" Y="58" Width="90" Height="10" TabSkip="no" Text="!(loc.BrowseDlgComboLabel)" />
+                 <Control Id="DirectoryCombo" Type="DirectoryCombo" X="70" Y="55" Width="220" Height="80" Property="_BrowseProperty" Indirect="yes" Fixed="yes" Remote="yes">
+                     <Subscribe Event="IgnoreChange" Attribute="IgnoreChange" />
+                 </Control>
+diff -ru wixlib/Common.wxs wixlib/Common.wxs
+--- wixlib/Common.wxs	Thu Jan 20 06:13:28 2011 -0800
++++ wixlib/Common.wxs	Mon Feb 20 18:18:06 2012 +0000
+@@ -12,12 +12,12 @@
+ -->
+ <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+     <Fragment>
+-        <Binary Id="WixUI_Bmp_Banner" SourceFile="!(wix.WixUIBannerBmp=$(var.bannerBmp))" />
+-        <Binary Id="WixUI_Bmp_Dialog" SourceFile="!(wix.WixUIDialogBmp=$(var.dialogBmp))" />
+-        <Binary Id="WixUI_Ico_Exclam" SourceFile="!(wix.WixUIExclamationIco=$(var.exclamationIco))" />
+-        <Binary Id="WixUI_Ico_Info" SourceFile="!(wix.WixUIInfoIco=$(var.infoIco))" />
+-        <Binary Id="WixUI_Bmp_New" SourceFile="!(wix.WixUINewIco=$(var.newIco))" />
+-        <Binary Id="WixUI_Bmp_Up" SourceFile="!(wix.WixUIUpIco=$(var.upIco))" />
++        <Binary Id="WixUI_Bmp_Banner" SourceFile="Bitmaps\bannrbmp.bmp" />
++        <Binary Id="WixUI_Bmp_Dialog" SourceFile="Bitmaps\dlgbmp.bmp" />
++        <Binary Id="WixUI_Ico_Exclam" SourceFile="Bitmaps\exclamic.ico" />
++        <Binary Id="WixUI_Ico_Info" SourceFile="Bitmaps\info.ico" />
++        <Binary Id="WixUI_Bmp_New" SourceFile="Bitmaps\New.ico" />
++        <Binary Id="WixUI_Bmp_Up" SourceFile="Bitmaps\Up.ico" />
+         <WixVariable Id="WixUICostingPopupOptOut" Value="1" Overridable="yes" />
+ 
+         <UI Id="WixUI_Common">
+@@ -87,6 +87,6 @@
+     </Fragment>
+ 
+     <Fragment>
+-        <Binary Id="WixUIWixca" SourceFile="$(var.printeulaDll)" />
++        <Binary Id="WixUIWixca" SourceFile="printeula.dll" />
+     </Fragment>
+ </Wix>
+diff -ru wixlib/InstallDirDlg.wxs wixlib/InstallDirDlg.wxs
+--- wixlib/InstallDirDlg.wxs	Thu Jan 20 06:13:28 2011 -0800
++++ wixlib/InstallDirDlg.wxs	Mon Feb 20 18:18:06 2012 +0000
+@@ -12,7 +12,8 @@
+ -->
+ <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+     <Fragment>
+-        <UI>
++        <PropertyRef Id="Install_All" />
++		<UI>
+             <Dialog Id="InstallDirDlg" Width="370" Height="270" Title="!(loc.InstallDirDlg_Title)">
+                 <Control Id="Next" Type="PushButton" X="236" Y="243" Width="56" Height="17" Default="yes" Text="!(loc.WixUINext)" />
+                 <Control Id="Back" Type="PushButton" X="180" Y="243" Width="56" Height="17" Text="!(loc.WixUIBack)" />
+@@ -20,7 +21,7 @@
+                     <Publish Event="SpawnDialog" Value="CancelDlg">1</Publish>
+                 </Control>
+ 
+-                <Control Id="Description" Type="Text" X="25" Y="23" Width="280" Height="15" Transparent="yes" NoPrefix="yes" Text="!(loc.InstallDirDlgDescription)" />
++                <Control Id="Description" Type="Text" X="25" Y="23" Width="340" Height="15" Transparent="yes" NoPrefix="yes" Text="!(loc.InstallDirDlgDescription)" />
+                 <Control Id="Title" Type="Text" X="15" Y="6" Width="200" Height="15" Transparent="yes" NoPrefix="yes" Text="!(loc.InstallDirDlgTitle)" />
+                 <Control Id="BannerBitmap" Type="Bitmap" X="0" Y="0" Width="370" Height="44" TabSkip="no" Text="!(loc.InstallDirDlgBannerBitmap)" />
+                 <Control Id="BannerLine" Type="Line" X="0" Y="44" Width="370" Height="0" />
+@@ -29,6 +30,13 @@
+                 <Control Id="FolderLabel" Type="Text" X="20" Y="60" Width="290" Height="30" NoPrefix="yes" Text="!(loc.InstallDirDlgFolderLabel)" />
+                 <Control Id="Folder" Type="PathEdit" X="20" Y="100" Width="320" Height="18" Property="WIXUI_INSTALLDIR" Indirect="yes" />
+                 <Control Id="ChangeFolder" Type="PushButton" X="20" Y="120" Width="56" Height="17" Text="!(loc.InstallDirDlgChange)" />
++                <Control Id="UsersLabel" Type="Text" X="20" Y="150" Width="290" Height="15" Text="!(loc.InstallDirDlgUsersLabel)" />
++                <Control Id="UsersRadioButtonGroupControl" Type="RadioButtonGroup" X="20" Y="165" Width="290" Height="50" Property="Install_All">
++                    <RadioButtonGroup Property="Install_All">
++                        <RadioButton Value="1" X="20" Y="0" Width="260" Height="20" Text="!(loc.InstallDirDlgUsersAllRadioButton)" />
++                        <RadioButton Value="0" X="20" Y="20" Width="260" Height="20" Text="!(loc.InstallDirDlgUsersOneRadioButton)" />
++                    </RadioButtonGroup>
++                </Control>
+             </Dialog>
+         </UI>
+     </Fragment>
+diff -ru wixlib/LicenseAgreementDlg.wxs wixlib/LicenseAgreementDlg.wxs
+--- wixlib/LicenseAgreementDlg.wxs	Thu Jan 20 06:13:28 2011 -0800
++++ wixlib/LicenseAgreementDlg.wxs	Mon Feb 20 18:18:06 2012 +0000
+@@ -33,7 +33,7 @@
+                     <Publish Event="SpawnDialog" Value="CancelDlg">1</Publish>
+                 </Control>
+                 <Control Id="LicenseText" Type="ScrollableText" X="20" Y="60" Width="330" Height="140" Sunken="yes" TabSkip="no">
+-                    <Text SourceFile="!(wix.WixUILicenseRtf=$(var.licenseRtf))" />
++                    <Text SourceFile="License.rtf" />
+                 </Control>
+             </Dialog>
+         </UI>
+diff -ru wixlib/MsiRMFilesInUse.wxs wixlib/MsiRMFilesInUse.wxs
+--- wixlib/MsiRMFilesInUse.wxs	Thu Jan 20 06:13:28 2011 -0800
++++ wixlib/MsiRMFilesInUse.wxs	Mon Feb 20 18:18:06 2012 +0000
+@@ -30,7 +30,7 @@
+                     </RadioButtonGroup>
+                 </Control>
+ 
+-                <Control Id="List" Type="ListBox" X="20" Y="100" Width="330" Height="80" Property="FileInUseProcess" Sunken="yes" TabSkip="yes" />
++                <Control Id="List" Type="ListBox" X="20" Y="100" Width="330" Height="90" Property="FileInUseProcess" Sunken="yes" TabSkip="yes" />
+                 <Control Id="BannerBitmap" Type="Bitmap" X="0" Y="0" Width="370" Height="44" TabSkip="no" Text="!(loc.MsiRMFilesInUseBannerBitmap)" />
+                 <Control Id="Text" Type="Text" X="20" Y="55" Width="330" Height="45" Text="!(loc.MsiRMFilesInUseText)" />
+                 <Control Id="BannerLine" Type="Line" X="0" Y="44" Width="370" Height="0" />
+diff -ru wixlib/VerifyReadyDlg.wxs wixlib/VerifyReadyDlg.wxs
+--- wixlib/VerifyReadyDlg.wxs	Thu Jan 20 06:13:28 2011 -0800
++++ wixlib/VerifyReadyDlg.wxs	Mon Feb 20 18:18:06 2012 +0000
+@@ -12,29 +12,32 @@
+ -->
+ <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+     <Fragment>
++        <PropertyRef Id="Install_All" />
+         <UI>
+             <Dialog Id="VerifyReadyDlg" Width="370" Height="270" Title="!(loc.VerifyReadyDlg_Title)" TrackDiskSpace="yes">
+-                <Control Id="Install" Type="PushButton" ElevationShield="yes" X="212" Y="243" Width="80" Height="17" Default="yes" Hidden="yes" Disabled="yes" Text="!(loc.VerifyReadyDlgInstall)">
++                <Control Id="Install" Type="PushButton" ElevationShield="yes" X="236" Y="243" Width="60" Height="17" Default="yes" Hidden="yes" Disabled="yes" Text="!(loc.VerifyReadyDlgInstall)">
+                     <Condition Action="show">NOT Installed AND ALLUSERS</Condition>
+                     <Condition Action="enable">NOT Installed</Condition>
+                     <Condition Action="default">NOT Installed</Condition>
++                    <Publish Property="ALLUSERS" Value="1">Install_All = "1"</Publish>
+                     <Publish Event="EndDialog" Value="Return"><![CDATA[OutOfDiskSpace <> 1]]></Publish>
+                     <Publish Event="SpawnDialog" Value="OutOfRbDiskDlg">OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND (PROMPTROLLBACKCOST="P" OR NOT PROMPTROLLBACKCOST)</Publish>
+                     <Publish Event="EndDialog" Value="Return">OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND PROMPTROLLBACKCOST="D"</Publish>
+                     <Publish Event="EnableRollback" Value="False">OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND PROMPTROLLBACKCOST="D"</Publish>
+                     <Publish Event="SpawnDialog" Value="OutOfDiskDlg">(OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 1) OR (OutOfDiskSpace = 1 AND PROMPTROLLBACKCOST="F")</Publish>
+                 </Control>
+-                <Control Id="InstallNoShield" Type="PushButton" ElevationShield="no" X="212" Y="243" Width="80" Height="17" Default="yes" Hidden="yes" Disabled="yes" Text="!(loc.VerifyReadyDlgInstall)">
++                <Control Id="InstallNoShield" Type="PushButton" ElevationShield="no" X="236" Y="243" Width="60" Height="17" Default="yes" Hidden="yes" Disabled="yes" Text="!(loc.VerifyReadyDlgInstall)">
+                     <Condition Action="show">NOT Installed AND NOT ALLUSERS</Condition>
+                     <Condition Action="enable">NOT Installed</Condition>
+                     <Condition Action="default">NOT Installed</Condition>
++                    <Publish Property="ALLUSERS" Value="1">Install_All = "1"</Publish>
+                     <Publish Event="EndDialog" Value="Return"><![CDATA[OutOfDiskSpace <> 1]]></Publish>
+                     <Publish Event="SpawnDialog" Value="OutOfRbDiskDlg">OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND (PROMPTROLLBACKCOST="P" OR NOT PROMPTROLLBACKCOST)</Publish>
+                     <Publish Event="EndDialog" Value="Return">OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND PROMPTROLLBACKCOST="D"</Publish>
+                     <Publish Event="EnableRollback" Value="False">OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND PROMPTROLLBACKCOST="D"</Publish>
+                     <Publish Event="SpawnDialog" Value="OutOfDiskDlg">(OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 1) OR (OutOfDiskSpace = 1 AND PROMPTROLLBACKCOST="F")</Publish>
+                 </Control>
+-                <Control Id="Change" Type="PushButton" ElevationShield="yes" X="212" Y="243" Width="80" Height="17" Default="yes" Hidden="yes" Disabled="yes" Text="!(loc.VerifyReadyDlgChange)">
++                <Control Id="Change" Type="PushButton" ElevationShield="yes" X="236" Y="243" Width="60" Height="17" Default="yes" Hidden="yes" Disabled="yes" Text="!(loc.VerifyReadyDlgChange)">
+                     <Condition Action="show">WixUI_InstallMode = "Change" AND ALLUSERS AND (ADDLOCAL OR REMOVE)</Condition>
+                     <Condition Action="enable">WixUI_InstallMode = "Change"</Condition>
+                     <Condition Action="default">WixUI_InstallMode = "Change"</Condition>
+@@ -44,7 +47,7 @@
+                     <Publish Event="EnableRollback" Value="False">OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND PROMPTROLLBACKCOST="D"</Publish>
+                     <Publish Event="SpawnDialog" Value="OutOfDiskDlg">(OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 1) OR (OutOfDiskSpace = 1 AND PROMPTROLLBACKCOST="F")</Publish>
+                 </Control>
+-                <Control Id="ChangeNoShield" Type="PushButton" ElevationShield="no" X="212" Y="243" Width="80" Height="17" Default="yes" Hidden="yes" Disabled="yes" Text="!(loc.VerifyReadyDlgChange)">
++                <Control Id="ChangeNoShield" Type="PushButton" ElevationShield="no" X="236" Y="243" Width="60" Height="17" Default="yes" Hidden="yes" Disabled="yes" Text="!(loc.VerifyReadyDlgChange)">
+                     <Condition Action="show">WixUI_InstallMode = "Change" AND (NOT ALLUSERS OR (NOT ADDLOCAL AND NOT REMOVE))</Condition>
+                     <Condition Action="enable">WixUI_InstallMode = "Change"</Condition>
+                     <Condition Action="default">WixUI_InstallMode = "Change"</Condition>
+@@ -54,7 +57,7 @@
+                     <Publish Event="EnableRollback" Value="False">OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND PROMPTROLLBACKCOST="D"</Publish>
+                     <Publish Event="SpawnDialog" Value="OutOfDiskDlg">(OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 1) OR (OutOfDiskSpace = 1 AND PROMPTROLLBACKCOST="F")</Publish>
+                 </Control>
+-                <Control Id="Repair" Type="PushButton" X="212" Y="243" Width="80" Height="17" Default="yes" Hidden="yes" Disabled="yes" Text="!(loc.VerifyReadyDlgRepair)">
++                <Control Id="Repair" Type="PushButton" X="236" Y="243" Width="60" Height="17" Default="yes" Hidden="yes" Disabled="yes" Text="!(loc.VerifyReadyDlgRepair)">
+                     <Condition Action="show">WixUI_InstallMode = "Repair"</Condition>
+                     <Condition Action="enable">WixUI_InstallMode = "Repair"</Condition>
+                     <Condition Action="default">WixUI_InstallMode = "Repair"</Condition>
+@@ -66,7 +69,7 @@
+                     <Publish Event="EnableRollback" Value="False">OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND PROMPTROLLBACKCOST="D"</Publish>
+                     <Publish Event="SpawnDialog" Value="OutOfDiskDlg">(OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 1) OR (OutOfDiskSpace = 1 AND PROMPTROLLBACKCOST="F")</Publish>
+                 </Control>
+-                <Control Id="Remove" Type="PushButton" ElevationShield="yes" X="212" Y="243" Width="80" Height="17" Hidden="yes" Disabled="yes" Text="!(loc.VerifyReadyDlgRemove)">
++                <Control Id="Remove" Type="PushButton" ElevationShield="yes" X="236" Y="243" Width="60" Height="17" Hidden="yes" Disabled="yes" Text="!(loc.VerifyReadyDlgRemove)">
+                     <Condition Action="show">WixUI_InstallMode = "Remove" AND ALLUSERS</Condition>
+                     <Condition Action="enable">WixUI_InstallMode = "Remove"</Condition>
+                     <Publish Event="Remove" Value="All"><![CDATA[OutOfDiskSpace <> 1]]></Publish>
+@@ -76,7 +79,7 @@
+                     <Publish Event="EnableRollback" Value="False">OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND PROMPTROLLBACKCOST="D"</Publish>
+                     <Publish Event="SpawnDialog" Value="OutOfDiskDlg">(OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 1) OR (OutOfDiskSpace = 1 AND PROMPTROLLBACKCOST="F")</Publish>
+                 </Control>
+-                <Control Id="RemoveNoShield" Type="PushButton" ElevationShield="no" X="212" Y="243" Width="80" Height="17" Hidden="yes" Disabled="yes" Text="!(loc.VerifyReadyDlgRemove)">
++                <Control Id="RemoveNoShield" Type="PushButton" ElevationShield="no" X="236" Y="243" Width="60" Height="17" Hidden="yes" Disabled="yes" Text="!(loc.VerifyReadyDlgRemove)">
+                     <Condition Action="show">WixUI_InstallMode = "Remove" AND NOT ALLUSERS</Condition>
+                     <Condition Action="enable">WixUI_InstallMode = "Remove"</Condition>
+                     <Publish Event="Remove" Value="All"><![CDATA[OutOfDiskSpace <> 1]]></Publish>
+@@ -86,7 +89,7 @@
+                     <Publish Event="EnableRollback" Value="False">OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND PROMPTROLLBACKCOST="D"</Publish>
+                     <Publish Event="SpawnDialog" Value="OutOfDiskDlg">(OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 1) OR (OutOfDiskSpace = 1 AND PROMPTROLLBACKCOST="F")</Publish>
+                 </Control>
+-                <Control Id="Update" Type="PushButton" ElevationShield="yes" X="212" Y="243" Width="80" Height="17" Hidden="yes" Disabled="yes" Text="!(loc.VerifyReadyDlgUpdate)">
++                <Control Id="Update" Type="PushButton" ElevationShield="yes" X="236" Y="243" Width="60" Height="17" Hidden="yes" Disabled="yes" Text="!(loc.VerifyReadyDlgUpdate)">
+                     <Condition Action="show">WixUI_InstallMode = "Update" AND ALLUSERS</Condition>
+                     <Condition Action="enable">WixUI_InstallMode = "Update"</Condition>
+                     <Publish Event="EndDialog" Value="Return"><![CDATA[OutOfDiskSpace <> 1]]></Publish>
+@@ -95,7 +98,7 @@
+                     <Publish Event="EnableRollback" Value="False">OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 0 AND PROMPTROLLBACKCOST="D"</Publish>
+                     <Publish Event="SpawnDialog" Value="OutOfDiskDlg">(OutOfDiskSpace = 1 AND OutOfNoRbDiskSpace = 1) OR (OutOfDiskSpace = 1 AND PROMPTROLLBACKCOST="F")</Publish>
+                 </Control>
+-                <Control Id="UpdateNoShield" Type="PushButton" ElevationShield="no" X="212" Y="243" Width="80" Height="17" Hidden="yes" Disabled="yes" Text="!(loc.VerifyReadyDlgUpdate)">
++                <Control Id="UpdateNoShield" Type="PushButton" ElevationShield="no" X="236" Y="243" Width="60" Height="17" Hidden="yes" Disabled="yes" Text="!(loc.VerifyReadyDlgUpdate)">
+                     <Condition Action="show">WixUI_InstallMode = "Update" AND NOT ALLUSERS</Condition>
+                     <Condition Action="enable">WixUI_InstallMode = "Update"</Condition>
+                     <Publish Event="EndDialog" Value="Return"><![CDATA[OutOfDiskSpace <> 1]]></Publish>
+@@ -139,7 +142,7 @@
+                 <Control Id="Cancel" Type="PushButton" X="304" Y="243" Width="56" Height="17" Cancel="yes" Text="!(loc.WixUICancel)">
+                     <Publish Event="SpawnDialog" Value="CancelDlg">1</Publish>
+                 </Control>
+-                <Control Id="Back" Type="PushButton" X="156" Y="243" Width="56" Height="17" Text="!(loc.WixUIBack)">
++                <Control Id="Back" Type="PushButton" X="180" Y="243" Width="56" Height="17" Text="!(loc.WixUIBack)">
+                     <Condition Action="default">WixUI_InstallMode = "Remove"</Condition>
+                 </Control>
+                 <Control Id="BannerBitmap" Type="Bitmap" X="0" Y="0" Width="370" Height="44" TabSkip="no" Text="!(loc.VerifyReadyDlgBannerBitmap)" />
+diff -ru wixlib/WelcomeEulaDlg.wxs wixlib/WelcomeEulaDlg.wxs
+--- wixlib/WelcomeEulaDlg.wxs	Thu Jan 20 06:13:28 2011 -0800
++++ wixlib/WelcomeEulaDlg.wxs	Mon Feb 20 18:18:06 2012 +0000
+@@ -48,7 +48,7 @@
+                     <Publish Event="SpawnDialog" Value="CancelDlg">1</Publish>
+                 </Control>
+                 <Control Id="LicenseText" Type="ScrollableText" X="130" Y="36" Width="226" Height="162" Sunken="yes" TabSkip="no">
+-                    <Text SourceFile="!(wix.WixUILicenseRtf=$(var.licenseRtf))" />
++                    <Text SourceFile="License.rtf" />
+                 </Control>
+             </Dialog>
+         </UI>
+diff -ru wixlib/WixUI_InstallDir.wxs wixlib/WixUI_InstallDir.wxs
+--- wixlib/WixUI_InstallDir.wxs	Thu Jan 20 06:13:28 2011 -0800
++++ wixlib/WixUI_InstallDir.wxs	Mon Feb 20 18:18:06 2012 +0000
+@@ -33,10 +33,13 @@ Patch dialog sequence:
+ 
+ <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+     <Fragment>
+-        <UI Id="WixUI_InstallDir">
++        <UI Id="My_WixUI_InstallDir">
+             <TextStyle Id="WixUI_Font_Normal" FaceName="Tahoma" Size="8" />
+             <TextStyle Id="WixUI_Font_Bigger" FaceName="Tahoma" Size="12" />
+             <TextStyle Id="WixUI_Font_Title" FaceName="Tahoma" Size="9" Bold="yes" />
++            <TextStyle Id="WixUI_Font_Normal_OnImage" FaceName="Tahoma" Size="8" Red="0" Green="0" Blue="0" />
++            <TextStyle Id="WixUI_Font_Bigger_OnImage" FaceName="Tahoma" Size="12" Red="0" Green="0" Blue="0" />
++            <TextStyle Id="WixUI_Font_Title_OnImage" FaceName="Tahoma" Size="9" Bold="yes" Red="0" Green="0" Blue="0" />
+ 
+             <Property Id="DefaultUIFont" Value="WixUI_Font_Normal" />
+             <Property Id="WixUI_Mode" Value="InstallDir" />
+@@ -57,22 +55,20 @@ Patch dialog sequence:
+             <DialogRef Id="ResumeDlg" />
+             <DialogRef Id="UserExit" />
+             
+-            <Publish Dialog="BrowseDlg" Control="OK" Event="DoAction" Value="WixUIValidatePath" Order="3">1</Publish>
+-            <Publish Dialog="BrowseDlg" Control="OK" Event="SpawnDialog" Value="InvalidDirDlg" Order="4"><![CDATA[WIXUI_INSTALLDIR_VALID<>"1"]]></Publish>
++            <Publish Dialog="BrowseDlg" Control="OK" Event="DoAction" Value="WixUIValidatePath" Order="3">NOT WIXUI_DONTVALIDATEPATH</Publish>
++            <Publish Dialog="BrowseDlg" Control="OK" Event="SpawnDialog" Value="InvalidDirDlg" Order="4"><![CDATA[NOT WIXUI_DONTVALIDATEPATH AND WIXUI_INSTALLDIR_VALID<>"1"]]></Publish>
+ 
+             <Publish Dialog="ExitDialog" Control="Finish" Event="EndDialog" Value="Return" Order="999">1</Publish>
+ 
+-            <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="LicenseAgreementDlg">NOT Installed</Publish>
++            <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="InstallDirDlg">NOT Installed</Publish>
+             <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg">Installed AND PATCH</Publish>
+ 
+-            <Publish Dialog="LicenseAgreementDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg">1</Publish>
+-            <Publish Dialog="LicenseAgreementDlg" Control="Next" Event="NewDialog" Value="InstallDirDlg">LicenseAccepted = "1"</Publish>
+-
+-            <Publish Dialog="InstallDirDlg" Control="Back" Event="NewDialog" Value="LicenseAgreementDlg">1</Publish>
++            <Publish Dialog="InstallDirDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg" Order="1">NOT Installed</Publish>
++            <Publish Dialog="InstallDirDlg" Control="Back" Event="NewDialog" Value="MaintenanceTypeDlg" Order="2">Installed AND NOT PATCH</Publish>
+             <Publish Dialog="InstallDirDlg" Control="Next" Event="SetTargetPath" Value="[WIXUI_INSTALLDIR]" Order="1">1</Publish>
+             <Publish Dialog="InstallDirDlg" Control="Next" Event="DoAction" Value="WixUIValidatePath" Order="2">NOT WIXUI_DONTVALIDATEPATH</Publish>
+             <Publish Dialog="InstallDirDlg" Control="Next" Event="SpawnDialog" Value="InvalidDirDlg" Order="3"><![CDATA[NOT WIXUI_DONTVALIDATEPATH AND WIXUI_INSTALLDIR_VALID<>"1"]]></Publish>
+-            <Publish Dialog="InstallDirDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg" Order="4">WIXUI_DONTVALIDATEPATH OR WIXUI_INSTALLDIR_VALID="1"</Publish>
++            <Publish Dialog="InstallDirDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg" Order="3">WIXUI_DONTVALIDATEPATH OR WIXUI_INSTALLDIR_VALID="1"</Publish>
+             <Publish Dialog="InstallDirDlg" Control="ChangeFolder" Property="_BrowseProperty" Value="[WIXUI_INSTALLDIR]" Order="1">1</Publish>
+             <Publish Dialog="InstallDirDlg" Control="ChangeFolder" Event="SpawnDialog" Value="BrowseDlg" Order="2">1</Publish>
+             
+@@ -79,9 +80,11 @@ Patch dialog sequence:
+ 
+             <Publish Dialog="MaintenanceTypeDlg" Control="RepairButton" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
+             <Publish Dialog="MaintenanceTypeDlg" Control="RemoveButton" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
++            <Publish Dialog="MaintenanceTypeDlg" Control="ChangeButton" Event="NewDialog" Value="InstallDirDlg">1</Publish>
+             <Publish Dialog="MaintenanceTypeDlg" Control="Back" Event="NewDialog" Value="MaintenanceWelcomeDlg">1</Publish>
+ 
+             <Property Id="ARPNOMODIFY" Value="1" />
++            <Property Id="WIXUI_DONTVALIDATEPATH" Value="1"/>
+         </UI>
+ 
+         <UIRef Id="WixUI_Common" />
+diff -ru wixlib/WixUI_en-us.wxl wixlib/WixUI_en-us.wxl
+--- wixlib/WixUI_en-us.wxl	Thu Jan 20 06:13:28 2011 -0800
++++ wixlib/WixUI_en-us.wxl	Mon Jun 25 15:01:06 2012 +0000
+@@ -47,8 +47,8 @@
+     <String Id="BrowseDlgNewFolderTooltip" Overridable="yes"><!-- _locID_text="BrowseDlgNewFolderTooltip" _locComment="BrowseDlgNewFolderTooltip" -->Create a new folder</String>
+     <String Id="BrowseDlgPathLabel" Overridable="yes"><!-- _locID_text="BrowseDlgPathLabel" _locComment="BrowseDlgPathLabel" -->&amp;Folder name:</String>
+     <String Id="BrowseDlgBannerBitmap" Overridable="yes"><!-- _locID_text="BrowseDlgBannerBitmap" _locComment="BrowseDlgBannerBitmap" -->WixUI_Bmp_Banner</String>
+-    <String Id="BrowseDlgDescription" Overridable="yes"><!-- _locID_text="BrowseDlgDescription" _locComment="BrowseDlgDescription" -->Browse to the destination folder</String>
+-    <String Id="BrowseDlgTitle" Overridable="yes"><!-- _locID_text="BrowseDlgTitle" _locComment="BrowseDlgTitle" -->{\WixUI_Font_Title}Change destination folder</String>
++    <String Id="BrowseDlgDescription" Overridable="yes"><!-- _locID_text="BrowseDlgDescription" _locComment="BrowseDlgDescription" -->{\WixUI_Font_Normal_OnImage}Browse to the destination folder</String>
++	<String Id="BrowseDlgTitle" Overridable="yes"><!-- _locID_text="BrowseDlgTitle" _locComment="BrowseDlgTitle" -->{\WixUI_Font_Title_OnImage}Change destination folder</String>
+ 
+     <String Id="CancelDlg_Title" Overridable="yes"><!-- _locID_text="CancelDlg_Title" _locComment="CancelDlg_Title" -->[ProductName] Setup</String>
+     <String Id="CancelDlgText" Overridable="yes"><!-- _locID_text="CancelDlgText" _locComment="CancelDlgText" -->Are you sure you want to cancel [ProductName] installation?</String>
+@@ -72,8 +72,8 @@
+     <String Id="DiskCostDlg_Title" Overridable="yes"><!-- _locID_text="DiskCostDlg_Title" _locComment="DiskCostDlg_Title" -->[ProductName] Setup</String>
+     <String Id="DiskCostDlgBannerBitmap" Overridable="yes"><!-- _locID_text="DiskCostDlgBannerBitmap" _locComment="DiskCostDlgBannerBitmap" -->WixUI_Bmp_Banner</String>
+     <String Id="DiskCostDlgText" Overridable="yes"><!-- _locID_text="DiskCostDlgText" _locComment="DiskCostDlgText" -->Highlighted volumes do not have enough disk space available for selected features. You can either remove some files from the highlighted volumes, install fewer features, or select different destination drives.</String>
+-    <String Id="DiskCostDlgDescription" Overridable="yes"><!-- _locID_text="DiskCostDlgDescription" _locComment="DiskCostDlgDescription" -->The disk space required for the installation of the selected features.</String>
+-    <String Id="DiskCostDlgTitle" Overridable="yes"><!-- _locID_text="DiskCostDlgTitle" _locComment="DiskCostDlgTitle" -->{\WixUI_Font_Title}Disk Space Requirements</String>
++    <String Id="DiskCostDlgDescription" Overridable="yes"><!-- _locID_text="DiskCostDlgDescription" _locComment="DiskCostDlgDescription" -->{\WixUI_Font_Normal_OnImage}The disk space required for the installation of the selected features.</String>
++    <String Id="DiskCostDlgTitle" Overridable="yes"><!-- _locID_text="DiskCostDlgTitle" _locComment="DiskCostDlgTitle" -->{\WixUI_Font_Title_OnImage}Disk Space Requirements</String>
+     <String Id="DiskCostDlgVolumeList" Overridable="yes"><!-- _locID_text="DiskCostDlgVolumeList" _locComment="DiskCostDlgVolumeList" -->{120}{70}{70}{70}{70}</String>
+ 
+     <String Id="ErrorDlg_Title" Overridable="yes"><!-- _locID_text="ErrorDlg_Title" _locComment="ErrorDlg_Title" -->[ProductName] Setup</String>
+@@ -105,14 +105,14 @@
+     <String Id="FilesInUse_Title" Overridable="yes"><!-- _locID_text="FilesInUse_Title" _locComment="FilesInUse_Title" -->[ProductName] Setup</String>
+     <String Id="FilesInUseExit" Overridable="yes"><!-- _locID_text="FilesInUseExit" _locComment="FilesInUseExit" -->E&amp;xit</String>
+     <String Id="FilesInUseBannerBitmap" Overridable="yes"><!-- _locID_text="FilesInUseBannerBitmap" _locComment="FilesInUseBannerBitmap" -->WixUI_Bmp_Banner</String>
+-    <String Id="FilesInUseText" Overridable="yes"><!-- _locID_text="FilesInUseText" _locComment="FilesInUseText" -->The following applications are using files that need to be updated by this setup. Close these applications and then click &amp;Retry to continue the installation or Exit to exit it.</String>
+-    <String Id="FilesInUseDescription" Overridable="yes"><!-- _locID_text="FilesInUseDescription" _locComment="FilesInUseDescription" -->Some files that need to be updated are currently in use.</String>
+-    <String Id="FilesInUseTitle" Overridable="yes"><!-- _locID_text="FilesInUseTitle" _locComment="FilesInUseTitle" -->{\WixUI_Font_Title}Files in Use</String>
++    <String Id="FilesInUseText" Overridable="yes"><!-- _locID_text="FilesInUseText" _locComment="FilesInUseText" -->The following applications are using files that need to be updated by this setup. Close these applications and then click Retry to continue the installation or Exit to exit it.</String>
++    <String Id="FilesInUseDescription" Overridable="yes"><!-- _locID_text="FilesInUseDescription" _locComment="FilesInUseDescription" -->{\WixUI_Font_Normal_OnImage}Some files that need to be updated are currently in use.</String>
++    <String Id="FilesInUseTitle" Overridable="yes"><!-- _locID_text="FilesInUseTitle" _locComment="FilesInUseTitle" -->{\WixUI_Font_Title_OnImage}Files in Use</String>
+ 
+     <String Id="InstallDirDlg_Title" Overridable="yes"><!-- _locID_text="InstallDirDlg_Title" _locComment="InstallDirDlg_Title" -->[ProductName] Setup</String>
+-    <String Id="InstallDirDlgChange" Overridable="yes"><!-- _locID_text="InstallDirDlgChange" _locComment="InstallDirDlgChange" -->&amp;Change...</String>
+-    <String Id="InstallDirDlgTitle" Overridable="yes"><!-- _locID_text="InstallDirDlgTitle" _locComment="InstallDirDlgTitle" -->{\WixUI_Font_Title}Destination Folder</String>
+-    <String Id="InstallDirDlgDescription" Overridable="yes"><!-- _locID_text="InstallDirDlgDescription" _locComment="InstallDirDlgDescription" -->Click Next to install to the default folder or click Change to choose another.</String>
++    <String Id="InstallDirDlgChange" Overridable="yes"><!-- _locID_text="InstallDirDlgChange" _locComment="InstallDirDlgChange" -->B&amp;rowse...</String>
++    <String Id="InstallDirDlgTitle" Overridable="yes"><!-- _locID_text="InstallDirDlgTitle" _locComment="InstallDirDlgTitle" -->{\WixUI_Font_Title_OnImage}Destination Folder</String>
++    <String Id="InstallDirDlgDescription" Overridable="yes"><!-- _locID_text="InstallDirDlgDescription" _locComment="InstallDirDlgDescription" -->{\WixUI_Font_Normal_OnImage}Click Next to install to the default folder or click Browse to choose another.</String>
+     <String Id="InstallDirDlgBannerBitmap" Overridable="yes"><!-- _locID_text="InstallDirDlgBannerBitmap" _locComment="InstallDirDlgBannerBitmap" -->WixUI_Bmp_Banner</String>
+     <String Id="InstallDirDlgFolderLabel" Overridable="yes"><!-- _locID_text="InstallDirDlgFolderLabel" _locComment="InstallDirDlgFolderLabel" -->Install [ProductName] to:</String>
+ 
+@@ -136,8 +136,8 @@
+     <String Id="LicenseAgreementDlg_Title" Overridable="yes"><!-- _locID_text="LicenseAgreementDlg_Title" _locComment="LicenseAgreementDlg_Title" -->[ProductName] Setup</String>
+     <String Id="LicenseAgreementDlgLicenseAcceptedCheckBox" Overridable="yes"><!-- _locID_text="LicenseAgreementDlgLicenseAcceptedCheckBox" _locComment="LicenseAgreementDlgLicenseAcceptedCheckBox" -->I &amp;accept the terms in the License Agreement</String>
+     <String Id="LicenseAgreementDlgBannerBitmap" Overridable="yes"><!-- _locID_text="LicenseAgreementDlgBannerBitmap" _locComment="LicenseAgreementDlgBannerBitmap" -->WixUI_Bmp_Banner</String>
+-    <String Id="LicenseAgreementDlgDescription" Overridable="yes"><!-- _locID_text="LicenseAgreementDlgDescription" _locComment="LicenseAgreementDlgDescription" -->Please read the following license agreement carefully</String>
+-    <String Id="LicenseAgreementDlgTitle" Overridable="yes"><!-- _locID_text="LicenseAgreementDlgTitle" _locComment="LicenseAgreementDlgTitle" -->{\WixUI_Font_Title}End-User License Agreement</String>
++    <String Id="LicenseAgreementDlgDescription" Overridable="yes"><!-- _locID_text="LicenseAgreementDlgDescription" _locComment="LicenseAgreementDlgDescription" -->{\WixUI_Font_Normal_OnImage}Please read the following license agreement carefully</String>
++    <String Id="LicenseAgreementDlgTitle" Overridable="yes"><!-- _locID_text="LicenseAgreementDlgTitle" _locComment="LicenseAgreementDlgTitle" -->{\WixUI_Font_Title_OnImage}End-User License Agreement</String>
+ 
+     <String Id="MaintenanceTypeDlg_Title" Overridable="yes"><!-- _locID_text="MaintenanceTypeDlg_Title" _locComment="MaintenanceTypeDlg_Title" -->[ProductName] Setup</String>
+     <String Id="MaintenanceTypeDlgChangeButton" Overridable="yes"><!-- _locID_text="MaintenanceTypeDlgChangeButton" _locComment="MaintenanceTypeDlgChangeButton" -->&amp;Change</String>
+@@ -147,8 +147,8 @@
+     <String Id="MaintenanceTypeDlgRemoveButton" Overridable="yes"><!-- _locID_text="MaintenanceTypeDlgRemoveButton" _locComment="MaintenanceTypeDlgRemoveButton" -->&amp;Remove</String>
+     <String Id="MaintenanceTypeDlgRemoveButtonTooltip" Overridable="yes"><!-- _locID_text="MaintenanceTypeDlgRemoveButtonTooltip" _locComment="MaintenanceTypeDlgRemoveButtonTooltip" -->Remove Installation</String>
+     <String Id="MaintenanceTypeDlgBannerBitmap" Overridable="yes"><!-- _locID_text="MaintenanceTypeDlgBannerBitmap" _locComment="MaintenanceTypeDlgBannerBitmap" -->WixUI_Bmp_Banner</String>
+-    <String Id="MaintenanceTypeDlgDescription" Overridable="yes"><!-- _locID_text="MaintenanceTypeDlgDescription" _locComment="MaintenanceTypeDlgDescription" -->Select the operation you wish to perform.</String>
+-    <String Id="MaintenanceTypeDlgTitle" Overridable="yes"><!-- _locID_text="MaintenanceTypeDlgTitle" _locComment="MaintenanceTypeDlgTitle" -->{\WixUI_Font_Title}Change, repair, or remove installation</String>
++    <String Id="MaintenanceTypeDlgDescription" Overridable="yes"><!-- _locID_text="MaintenanceTypeDlgDescription" _locComment="MaintenanceTypeDlgDescription" -->{\WixUI_Font_Normal_OnImage}Select the operation you wish to perform.</String>
++    <String Id="MaintenanceTypeDlgTitle" Overridable="yes"><!-- _locID_text="MaintenanceTypeDlgTitle" _locComment="MaintenanceTypeDlgTitle" -->{\WixUI_Font_Title_OnImage}Change, repair, or remove installation</String>
+     <String Id="MaintenanceTypeDlgChangeText" Overridable="yes"><!-- _locID_text="MaintenanceTypeDlgChangeText" _locComment="MaintenanceTypeDlgChangeText" -->Lets you change the way features are installed.</String>
+     <String Id="MaintenanceTypeDlgChangeDisabledText" Overridable="yes"><!-- _locID_text="MaintenanceTypeDlgChangeDisabledText" _locComment="MaintenanceTypeDlgChangeDisabledText" -->[ProductName] has no independently selectable features.</String>
+     <String Id="MaintenanceTypeDlgRemoveText" Overridable="yes"><!-- _locID_text="MaintenanceTypeDlgRemoveText" _locComment="MaintenanceTypeDlgRemoveText" -->Removes [ProductName] from your computer.</String>
+@@ -164,23 +164,23 @@
+     <String Id="MsiRMFilesInUse_Title" Overridable="yes"><!-- _locID_text="MsiRMFilesInUse_Title" _locComment="MsiRMFilesInUse_Title" -->[ProductName] Setup</String>
+     <String Id="MsiRMFilesInUseBannerBitmap" Overridable="yes"><!-- _locID_text="MsiRMFilesInUseBannerBitmap" _locComment="MsiRMFilesInUseBannerBitmap" -->WixUI_Bmp_Banner</String>
+     <String Id="MsiRMFilesInUseText" Overridable="yes"><!-- _locID_text="MsiRMFilesInUseText" _locComment="MsiRMFilesInUseText" -->The following applications are using files that need to be updated by this setup. You can let Setup Wizard close them and attempt to restart them or reboot the machine later.</String>
+-    <String Id="MsiRMFilesInUseDescription" Overridable="yes"><!-- _locID_text="MsiRMFilesInUseDescription" _locComment="MsiRMFilesInUseDescription" -->Some files that need to be updated are currently in use.</String>
+-    <String Id="MsiRMFilesInUseTitle" Overridable="yes"><!-- _locID_text="MsiRMFilesInUseTitle" _locComment="MsiRMFilesInUseTitle" -->{\WixUI_Font_Title}Files in Use</String>
++    <String Id="MsiRMFilesInUseDescription" Overridable="yes"><!-- _locID_text="MsiRMFilesInUseDescription" _locComment="MsiRMFilesInUseDescription" -->{\WixUI_Font_Normal_OnImage}Some files that need to be updated are currently in use.</String>
++    <String Id="MsiRMFilesInUseTitle" Overridable="yes"><!-- _locID_text="MsiRMFilesInUseTitle" _locComment="MsiRMFilesInUseTitle" -->{\WixUI_Font_Title_OnImage}Files in Use</String>
+     <String Id="MsiRMFilesInUseUseRM" Overridable="yes"><!-- _locID_text="MsiRMFilesInUseUseRM" _locComment="MsiRMFilesInUseUseRM" -->&amp;Close the applications and attempt to restart them.</String>
+     <String Id="MsiRMFilesInUseDontUseRM" Overridable="yes"><!-- _locID_text="MsiRMFilesInUseDontUseRM" _locComment="MsiRMFilesInUseDontUseRM" -->&amp;Do not close applications. A reboot will be required.</String>
+ 
+     <String Id="OutOfDiskDlg_Title" Overridable="yes"><!-- _locID_text="OutOfDiskDlg_Title" _locComment="OutOfDiskDlg_Title" -->[ProductName] Setup</String>
+     <String Id="OutOfDiskDlgBannerBitmap" Overridable="yes"><!-- _locID_text="OutOfDiskDlgBannerBitmap" _locComment="OutOfDiskDlgBannerBitmap" -->WixUI_Bmp_Banner</String>
+     <String Id="OutOfDiskDlgText" Overridable="yes"><!-- _locID_text="OutOfDiskDlgText" _locComment="OutOfDiskDlgText" -->The highlighted volumes do not have enough disk space available for the currently selected features. You can remove some files from the highlighted volumes, install fewer features, or select a different destination drive.</String>
+-    <String Id="OutOfDiskDlgDescription" Overridable="yes"><!-- _locID_text="OutOfDiskDlgDescription" _locComment="OutOfDiskDlgDescription" -->Disk space required for the installation exceeds available disk space.</String>
+-    <String Id="OutOfDiskDlgTitle" Overridable="yes"><!-- _locID_text="OutOfDiskDlgTitle" _locComment="OutOfDiskDlgTitle" -->{\WixUI_Font_Title}Out of Disk Space</String>
++    <String Id="OutOfDiskDlgDescription" Overridable="yes"><!-- _locID_text="OutOfDiskDlgDescription" _locComment="OutOfDiskDlgDescription" -->{\WixUI_Font_Normal_OnImage}Disk space required for the installation exceeds available disk space.</String>
++    <String Id="OutOfDiskDlgTitle" Overridable="yes"><!-- _locID_text="OutOfDiskDlgTitle" _locComment="OutOfDiskDlgTitle" -->{\WixUI_Font_Title_OnImage}Out of Disk Space</String>
+     <String Id="OutOfDiskDlgVolumeList" Overridable="yes"><!-- _locID_text="OutOfDiskDlgVolumeList" _locComment="OutOfDiskDlgVolumeList" -->{120}{70}{70}{70}{70}</String>
+ 
+     <String Id="OutOfRbDiskDlg_Title" Overridable="yes"><!-- _locID_text="OutOfRbDiskDlg_Title" _locComment="OutOfRbDiskDlg_Title" -->[ProductName] Setup</String>
+     <String Id="OutOfRbDiskDlgBannerBitmap" Overridable="yes"><!-- _locID_text="OutOfRbDiskDlgBannerBitmap" _locComment="OutOfRbDiskDlgBannerBitmap" -->WixUI_Bmp_Banner</String>
+     <String Id="OutOfRbDiskDlgText" Overridable="yes"><!-- _locID_text="OutOfRbDiskDlgText" _locComment="OutOfRbDiskDlgText" -->The highlighted volumes do not have enough disk space available for the currently selected features. You can remove some files from the highlighted volumes, install fewer features, or select a different destination drive.</String>
+-    <String Id="OutOfRbDiskDlgDescription" Overridable="yes"><!-- _locID_text="OutOfRbDiskDlgDescription" _locComment="OutOfRbDiskDlgDescription" -->Disk space required for the installation exceeds available disk space.</String>
+-    <String Id="OutOfRbDiskDlgTitle" Overridable="yes"><!-- _locID_text="OutOfRbDiskDlgTitle" _locComment="OutOfRbDiskDlgTitle" -->{\WixUI_Font_Title}Out of Disk Space</String>
++    <String Id="OutOfRbDiskDlgDescription" Overridable="yes"><!-- _locID_text="OutOfRbDiskDlgDescription" _locComment="OutOfRbDiskDlgDescription" -->{\WixUI_Font_Normal_OnImage}Disk space required for the installation exceeds available disk space.</String>
++    <String Id="OutOfRbDiskDlgTitle" Overridable="yes"><!-- _locID_text="OutOfRbDiskDlgTitle" _locComment="OutOfRbDiskDlgTitle" -->{\WixUI_Font_Title_OnImage}Out of Disk Space</String>
+     <String Id="OutOfRbDiskDlgVolumeList" Overridable="yes"><!-- _locID_text="OutOfRbDiskDlgVolumeList" _locComment="OutOfRbDiskDlgVolumeList" -->{120}{70}{70}{70}{70}</String>
+     <String Id="OutOfRbDiskDlgText2" Overridable="yes"><!-- _locID_text="OutOfRbDiskDlgText2" _locComment="OutOfRbDiskDlgText2" -->Alternatively, you may choose to disable the installer's rollback functionality. Disabling rollback prevents the installer from restoring your computer's original state should the installation be interrupted in any way. Click Yes if you wish to take the risk of disabling rollback.</String>
+ 
+@@ -192,13 +192,13 @@
+     <String Id="ProgressDlg_Title" Overridable="yes"><!-- _locID_text="ProgressDlg_Title" _locComment="ProgressDlg_Title" -->[ProductName] Setup</String>
+     <String Id="ProgressDlgBannerBitmap" Overridable="yes"><!-- _locID_text="ProgressDlgBannerBitmap" _locComment="ProgressDlgBannerBitmap" -->WixUI_Bmp_Banner</String>
+     <String Id="ProgressDlgTextInstalling" Overridable="yes"><!-- _locID_text="ProgressDlgTextInstalling" _locComment="ProgressDlgTextInstalling" -->Please wait while the Setup Wizard installs [ProductName].</String>
+-    <String Id="ProgressDlgTitleInstalling" Overridable="yes"><!-- _locID_text="ProgressDlgTitleInstalling" _locComment="ProgressDlgTitleInstalling" -->{\WixUI_Font_Title}Installing [ProductName]</String>
++    <String Id="ProgressDlgTitleInstalling" Overridable="yes"><!-- _locID_text="ProgressDlgTitleInstalling" _locComment="ProgressDlgTitleInstalling" -->{\WixUI_Font_Title_OnImage}Installing [ProductName]</String>
+     <String Id="ProgressDlgTextChanging" Overridable="yes"><!-- _locID_text="ProgressDlgTextChanging" _locComment="ProgressDlgTextChanging" -->Please wait while the Setup Wizard changes [ProductName].</String>
+-    <String Id="ProgressDlgTitleChanging" Overridable="yes"><!-- _locID_text="ProgressDlgTitleChanging" _locComment="ProgressDlgTitleChanging" -->{\WixUI_Font_Title}Changing [ProductName]</String>
++    <String Id="ProgressDlgTitleChanging" Overridable="yes"><!-- _locID_text="ProgressDlgTitleChanging" _locComment="ProgressDlgTitleChanging" -->{\WixUI_Font_Title_OnImage}Changing [ProductName]</String>
+     <String Id="ProgressDlgTextRepairing" Overridable="yes"><!-- _locID_text="ProgressDlgTextRepairing" _locComment="ProgressDlgTextRepairing" -->Please wait while the Setup Wizard repairs [ProductName].</String>
+-    <String Id="ProgressDlgTitleRepairing" Overridable="yes"><!-- _locID_text="ProgressDlgTitleRepairing" _locComment="ProgressDlgTitleRepairing" -->{\WixUI_Font_Title}Repairing [ProductName]</String>
++    <String Id="ProgressDlgTitleRepairing" Overridable="yes"><!-- _locID_text="ProgressDlgTitleRepairing" _locComment="ProgressDlgTitleRepairing" -->{\WixUI_Font_Title_OnImage}Repairing [ProductName]</String>
+     <String Id="ProgressDlgTextRemoving" Overridable="yes"><!-- _locID_text="ProgressDlgTextRemoving" _locComment="ProgressDlgTextRemoving" -->Please wait while the Setup Wizard removes [ProductName].</String>
+-    <String Id="ProgressDlgTitleRemoving" Overridable="yes"><!-- _locID_text="ProgressDlgTitleRemoving" _locComment="ProgressDlgTitleRemoving" -->{\WixUI_Font_Title}Removing [ProductName]</String>
++    <String Id="ProgressDlgTitleRemoving" Overridable="yes"><!-- _locID_text="ProgressDlgTitleRemoving" _locComment="ProgressDlgTitleRemoving" -->{\WixUI_Font_Title_OnImage}Removing [ProductName]</String>
+     <String Id="ProgressDlgTextUpdating" Overridable="yes"><!-- _locID_text="ProgressDlgTextUpdating" _locComment="ProgressDlgTextUpdating" -->Please wait while the Setup Wizard updates [ProductName].</String>
+     <String Id="ProgressDlgTitleUpdating" Overridable="yes"><!-- _locID_text="ProgressDlgTitleUpdating" _locComment="ProgressDlgTitleUpdating" -->{\WixUI_Font_Title}Updating [ProductName]</String>
+     <String Id="ProgressDlgProgressBar" Overridable="yes"><!-- _locID_text="ProgressDlgProgressBar" _locComment="ProgressDlgProgressBar" -->Progress done</String>
+@@ -218,8 +218,8 @@
+     <String Id="SetupTypeDlgCompleteButton" Overridable="yes"><!-- _locID_text="SetupTypeDlgCompleteButton" _locComment="SetupTypeDlgCompleteButton" -->C&amp;omplete</String>
+     <String Id="SetupTypeDlgCompleteButtonTooltip" Overridable="yes"><!-- _locID_text="SetupTypeDlgCompleteButtonTooltip" _locComment="SetupTypeDlgCompleteButtonTooltip" -->Complete Installation</String>
+     <String Id="SetupTypeDlgBannerBitmap" Overridable="yes"><!-- _locID_text="SetupTypeDlgBannerBitmap" _locComment="SetupTypeDlgBannerBitmap" -->WixUI_Bmp_Banner</String>
+-    <String Id="SetupTypeDlgTitle" Overridable="yes"><!-- _locID_text="SetupTypeDlgTitle" _locComment="SetupTypeDlgTitle" -->{\WixUI_Font_Title}Choose Setup Type</String>
+-    <String Id="SetupTypeDlgDescription" Overridable="yes"><!-- _locID_text="SetupTypeDlgDescription" _locComment="SetupTypeDlgDescription" -->Choose the setup type that best suits your needs</String>
++    <String Id="SetupTypeDlgTitle" Overridable="yes"><!-- _locID_text="SetupTypeDlgTitle" _locComment="SetupTypeDlgTitle" -->{\WixUI_Font_Title_OnImage}Choose Setup Type</String>
++    <String Id="SetupTypeDlgDescription" Overridable="yes"><!-- _locID_text="SetupTypeDlgDescription" _locComment="SetupTypeDlgDescription" -->{\WixUI_Font_Normal_OnImage}Choose the setup type that best suits your needs</String>
+     <String Id="SetupTypeDlgTypicalText" Overridable="yes"><!-- _locID_text="SetupTypeDlgTypicalText" _locComment="SetupTypeDlgTypicalText" -->Installs the most common program features. Recommended for most users.</String>
+     <String Id="SetupTypeDlgCustomText" Overridable="yes"><!-- _locID_text="SetupTypeDlgCustomText" _locComment="SetupTypeDlgCustomText" -->Allows users to choose which program features will be installed and where they will be installed. Recommended for advanced users.</String>
+     <String Id="SetupTypeDlgCompleteText" Overridable="yes"><!-- _locID_text="SetupTypeDlgCompleteText" _locComment="SetupTypeDlgCompleteText" -->All program features will be installed. Requires the most disk space.</String>
+@@ -234,16 +234,16 @@
+     <String Id="VerifyReadyDlgBannerBitmap" Overridable="yes"><!-- _locID_text="VerifyReadyDlgBannerBitmap" _locComment="VerifyReadyDlgBannerBitmap" -->WixUI_Bmp_Banner</String>
+     <String Id="VerifyReadyDlgInstall" Overridable="yes"><!-- _locID_text="VerifyReadyDlgInstall" _locComment="VerifyReadyDlgInstall" -->&amp;Install</String>
+     <String Id="VerifyReadyDlgInstallText" Overridable="yes"><!-- _locID_text="VerifyReadyDlgInstallText" _locComment="VerifyReadyDlgInstallText" -->Click Install to begin the installation. Click Back to review or change any of your installation settings. Click Cancel to exit the wizard.</String>
+-    <String Id="VerifyReadyDlgInstallTitle" Overridable="yes"><!-- _locID_text="VerifyReadyDlgInstallTitle" _locComment="VerifyReadyDlgInstallTitle" -->{\WixUI_Font_Title}Ready to install [ProductName]</String>
++    <String Id="VerifyReadyDlgInstallTitle" Overridable="yes"><!-- _locID_text="VerifyReadyDlgInstallTitle" _locComment="VerifyReadyDlgInstallTitle" -->{\WixUI_Font_Title_OnImage}Ready to install [ProductName]</String>
+     <String Id="VerifyReadyDlgChange" Overridable="yes"><!-- _locID_text="VerifyReadyDlgChange" _locComment="VerifyReadyDlgChange" -->&amp;Change</String>
+     <String Id="VerifyReadyDlgChangeText" Overridable="yes"><!-- _locID_text="VerifyReadyDlgChangeText" _locComment="VerifyReadyDlgChangeText" -->Click Change to begin the installation. Click Back to review or change any of your installation settings. Click Cancel to exit the wizard.</String>
+-    <String Id="VerifyReadyDlgChangeTitle" Overridable="yes"><!-- _locID_text="VerifyReadyDlgChangeTitle" _locComment="VerifyReadyDlgChangeTitle" -->{\WixUI_Font_Title}Ready to change [ProductName]</String>
++    <String Id="VerifyReadyDlgChangeTitle" Overridable="yes"><!-- _locID_text="VerifyReadyDlgChangeTitle" _locComment="VerifyReadyDlgChangeTitle" -->{\WixUI_Font_Title_OnImage}Ready to change [ProductName]</String>
+     <String Id="VerifyReadyDlgRepair" Overridable="yes"><!-- _locID_text="VerifyReadyDlgRepair" _locComment="VerifyReadyDlgRepair" -->Re&amp;pair</String>
+     <String Id="VerifyReadyDlgRepairText" Overridable="yes"><!-- _locID_text="VerifyReadyDlgRepairText" _locComment="VerifyReadyDlgRepairText" -->Click Repair to repair the installation of [ProductName]. Click Back to review or change any of your installation settings. Click Cancel to exit the wizard.</String>
+-    <String Id="VerifyReadyDlgRepairTitle" Overridable="yes"><!-- _locID_text="VerifyReadyDlgRepairTitle" _locComment="VerifyReadyDlgRepairTitle" -->{\WixUI_Font_Title}Ready to repair [ProductName]</String>
++    <String Id="VerifyReadyDlgRepairTitle" Overridable="yes"><!-- _locID_text="VerifyReadyDlgRepairTitle" _locComment="VerifyReadyDlgRepairTitle" -->{\WixUI_Font_Title_OnImage}Ready to repair [ProductName]</String>
+     <String Id="VerifyReadyDlgRemove" Overridable="yes"><!-- _locID_text="VerifyReadyDlgRemove" _locComment="VerifyReadyDlgRemove" -->&amp;Remove</String>
+     <String Id="VerifyReadyDlgRemoveText" Overridable="yes"><!-- _locID_text="VerifyReadyDlgRemoveText" _locComment="VerifyReadyDlgRemoveText" -->Click Remove to remove [ProductName] from your computer. Click Back to review or change any of your installation settings. Click Cancel to exit the wizard.</String>
+-    <String Id="VerifyReadyDlgRemoveTitle" Overridable="yes"><!-- _locID_text="VerifyReadyDlgRemoveTitle" _locComment="VerifyReadyDlgRemoveTitle" -->{\WixUI_Font_Title}Ready to remove [ProductName]</String>
++    <String Id="VerifyReadyDlgRemoveTitle" Overridable="yes"><!-- _locID_text="VerifyReadyDlgRemoveTitle" _locComment="VerifyReadyDlgRemoveTitle" -->{\WixUI_Font_Title_OnImage}Ready to remove [ProductName]</String>
+     <String Id="VerifyReadyDlgUpdate" Overridable="yes"><!-- _locID_text="VerifyReadyDlgUpdate" _locComment="VerifyReadyDlgUpdate" -->&amp;Update</String>
+     <String Id="VerifyReadyDlgUpdateText" Overridable="yes"><!-- _locID_text="VerifyReadyDlgUpdateText" _locComment="VerifyReadyDlgUpdateText" -->Click Update to update [ProductName] from your computer. Click Back to review or change any of your installation settings. Click Cancel to exit the wizard.</String>
+     <String Id="VerifyReadyDlgUpdateTitle" Overridable="yes"><!-- _locID_text="VerifyReadyDlgUpdateTitle" _locComment="VerifyReadyDlgUpdateTitle" -->{\WixUI_Font_Title}Ready to update [ProductName]</String>
+@@ -265,7 +265,7 @@
+     <String Id="WelcomeEulaDlgLicenseAcceptedCheckBox" Overridable="yes"><!-- _locID_text="WelcomeEulaDlgLicenseAcceptedCheckBox" _locComment="WelcomeEulaDlgLicenseAcceptedCheckBox" -->I &amp;accept the terms in the License Agreement</String>
+     <String Id="WelcomeEulaDlgInstall" Overridable="yes"><!-- _locID_text="WelcomeEulaDlgInstall" _locComment="WelcomeEulaDlgInstall" -->&amp;Install</String>
+     <String Id="WelcomeEulaDlgUpdate" Overridable="yes"><!-- _locID_text="WelcomeEulaDlgUpdate" _locComment="WelcomeEulaDlgUpdate" -->&amp;Update</String>
+-    <String Id="WelcomeEulaDlgTitle" Overridable="yes"><!-- _locID_text="WelcomeEulaDlgTitle" _locComment="WelcomeEulaDlgTitle" -->{\WixUI_Font_Title}Please read the [ProductName] License Agreement</String>
++    <String Id="WelcomeEulaDlgTitle" Overridable="yes"><!-- _locID_text="WelcomeEulaDlgTitle" _locComment="WelcomeEulaDlgTitle" -->{\WixUI_Font_Title_OnImage}Please read the [ProductName] License Agreement</String>
+ 
+     <String Id="ProgressTextInstallValidate" Overridable="yes"><!-- _locID_text="ProgressTextInstallValidate" _locComment="ProgressTextInstallValidate" -->Validating install</String>
+     <String Id="ProgressTextInstallFiles" Overridable="yes"><!-- _locID_text="ProgressTextInstallFiles" _locComment="ProgressTextInstallFiles" -->Copying new files</String>
+@@ -606,4 +606,9 @@
+     <String Id="UITextVolumeCostRequired" Overridable="yes"><!-- _locID_text="UITextVolumeCostRequired" _locComment="UITextVolumeCostRequired" -->Required</String>
+     <String Id="UITextVolumeCostSize" Overridable="yes"><!-- _locID_text="UITextVolumeCostSize" _locComment="UITextVolumeCostSize" -->Disk Size</String>
+     <String Id="UITextVolumeCostVolume" Overridable="yes"><!-- _locID_text="UITextVolumeCostVolume" _locComment="UITextVolumeCostVolume" -->Volume</String>
++
++    <String Id="ErrorNewerProduct">A newer version of this product is already installed.</String>
++    <String Id="InstallDirDlgUsersLabel">Install for:</String>
++    <String Id="InstallDirDlgUsersAllRadioButton">&amp;All Users</String>
++    <String Id="InstallDirDlgUsersOneRadioButton">&amp;Just Me</String>
+ </WixLocalization>
+\ No newline at end of file
+diff -ru wixlib/WixUI_ja-jp.wxl wixlib/WixUI_ja-jp.wxl
+--- wixlib/WixUI_ja-jp.wxl	Thu Jan 20 06:13:28 2011 -0800
++++ wixlib/WixUI_ja-jp.wxl	Mon Jun 25 15:08:16 2012 +0000
+@@ -47,8 +47,8 @@
+     <String Id="BrowseDlgNewFolderTooltip" Overridable="yes">新しいフォルダーの作成</String>
+     <String Id="BrowseDlgPathLabel" Overridable="yes">フォルダー名(&amp;F):</String>
+     <String Id="BrowseDlgBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+-    <String Id="BrowseDlgDescription" Overridable="yes">インストール先フォルダーを参照します。</String>
+-    <String Id="BrowseDlgTitle" Overridable="yes">{\WixUI_Font_Title}インストール先フォルダーの変更</String>
++	<String Id="BrowseDlgDescription" Overridable="yes">{\WixUI_Font_Normal_OnImage}インストール先のフォルダを参照します</String>
++	<String Id="BrowseDlgTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}インストール先フォルダの変更</String>
+ 
+     <String Id="CancelDlg_Title" Overridable="yes">[ProductName] セットアップ</String>
+     <String Id="CancelDlgText" Overridable="yes">[ProductName] のインストールを取り消しますか?</String>
+@@ -72,8 +72,8 @@
+     <String Id="DiskCostDlg_Title" Overridable="yes">[ProductName] セットアップ</String>
+     <String Id="DiskCostDlgBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+     <String Id="DiskCostDlgText" Overridable="yes">強調表示されたボリュームには、選択した機能に利用できる十分な空き領域がありません。強調表示されたボリュームから一部のファイルを削除するか、インストールする機能を減らすか、別のインストール先ドライブを選択することができます。</String>
+-    <String Id="DiskCostDlgDescription" Overridable="yes">選択された機能に必要なディスク領域です。</String>
+-    <String Id="DiskCostDlgTitle" Overridable="yes">{\WixUI_Font_Title}必要なディスク領域</String>
++    <String Id="DiskCostDlgDescription" Overridable="yes">{\WixUI_Font_Normal_OnImage}選択された機能のインストールに必要なディスク領域です。</String>
++    <String Id="DiskCostDlgTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}必要なディスク領域</String>
+     <String Id="DiskCostDlgVolumeList" Overridable="yes">{120}{70}{70}{70}{70}</String>
+ 
+     <String Id="ErrorDlg_Title" Overridable="yes">[ProductName] セットアップ</String>
+@@ -106,13 +106,13 @@
+     <String Id="FilesInUseExit" Overridable="yes">終了(&amp;X)</String>
+     <String Id="FilesInUseBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+     <String Id="FilesInUseText" Overridable="yes">以下のアプリケーションが、このセットアップで更新する必要のあるファイルを使用しています。これらのアプリケーションを閉じてから [\[]再試行(&amp;R)[\]] をクリックしてインストールを続行するか、[\[]終了[\]] をクリックして終了してください。</String>
+-    <String Id="FilesInUseDescription" Overridable="yes">更新する必要のある一部のファイルは現在使用中です。</String>
+-    <String Id="FilesInUseTitle" Overridable="yes">{\WixUI_Font_Title}使用中のファイル</String>
++    <String Id="FilesInUseDescription" Overridable="yes">{\WixUI_Font_Normal_OnImage}更新が必要なファイルの一部は現在、使用中です。</String>
++    <String Id="FilesInUseTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}使用中のファイル</String>
+ 
+     <String Id="InstallDirDlg_Title" Overridable="yes">[ProductName] セットアップ</String>
+-    <String Id="InstallDirDlgChange" Overridable="yes">変更(&amp;C)...</String>
+-    <String Id="InstallDirDlgTitle" Overridable="yes">{\WixUI_Font_Title}インストール先フォルダー</String>
+-    <String Id="InstallDirDlgDescription" Overridable="yes">既定のフォルダーにインストールするには [\[]次へ[\]] をクリックし、別のフォルダーを選択するには [\[]変更[\]] をクリックします。</String>
++    <String Id="InstallDirDlgChange" Overridable="yes">参照(&amp;R)...</String>
++    <String Id="InstallDirDlgTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}インストール先フォルダ</String>
++    <String Id="InstallDirDlgDescription" Overridable="yes">{\WixUI_Font_Normal_OnImage}インストール先のフォルダを指定して [\[]次へ[\]] をクリックしてください。</String>
+     <String Id="InstallDirDlgBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+     <String Id="InstallDirDlgFolderLabel" Overridable="yes">[ProductName] のインストール先:</String>
+ 
+@@ -136,8 +136,8 @@
+     <String Id="LicenseAgreementDlg_Title" Overridable="yes">[ProductName] セットアップ</String>
+     <String Id="LicenseAgreementDlgLicenseAcceptedCheckBox" Overridable="yes">使用許諾契約書に同意します(&amp;A)</String>
+     <String Id="LicenseAgreementDlgBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+-    <String Id="LicenseAgreementDlgDescription" Overridable="yes">以下の使用許諾契約書をよくお読みください。</String>
+-    <String Id="LicenseAgreementDlgTitle" Overridable="yes">{\WixUI_Font_Title}使用許諾契約書</String>
++    <String Id="LicenseAgreementDlgDescription" Overridable="yes">{\WixUI_Font_Normal_OnImage}次の使用許諾契約書を注意深くお読みください</String>
++    <String Id="LicenseAgreementDlgTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}使用許諾契約書</String>
+ 
+     <String Id="MaintenanceTypeDlg_Title" Overridable="yes">[ProductName] セットアップ</String>
+     <String Id="MaintenanceTypeDlgChangeButton" Overridable="yes">変更(&amp;C)</String>
+@@ -147,8 +147,8 @@
+     <String Id="MaintenanceTypeDlgRemoveButton" Overridable="yes">削除(&amp;R)</String>
+     <String Id="MaintenanceTypeDlgRemoveButtonTooltip" Overridable="yes">インストール内容の削除</String>
+     <String Id="MaintenanceTypeDlgBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+-    <String Id="MaintenanceTypeDlgDescription" Overridable="yes">実行する操作を選択してください。</String>
+-    <String Id="MaintenanceTypeDlgTitle" Overridable="yes">{\WixUI_Font_Title}インストールの変更、修復、または削除</String>
++    <String Id="MaintenanceTypeDlgDescription" Overridable="yes">{\WixUI_Font_Normal_OnImage}実行する操作を選択します。</String>
++    <String Id="MaintenanceTypeDlgTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}インストールの変更、修復、または削除</String>
+     <String Id="MaintenanceTypeDlgChangeText" Overridable="yes">機能のインストール方法を変更できます。</String>
+     <String Id="MaintenanceTypeDlgChangeDisabledText" Overridable="yes">[ProductName] の機能は個別に選択できません。</String>
+     <String Id="MaintenanceTypeDlgRemoveText" Overridable="yes">[ProductName] をコンピューターから削除します。</String>
+@@ -164,23 +164,23 @@
+     <String Id="MsiRMFilesInUse_Title" Overridable="yes">[ProductName] セットアップ</String>
+     <String Id="MsiRMFilesInUseBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+     <String Id="MsiRMFilesInUseText" Overridable="yes">以下のアプリケーションが、このセットアップで更新する必要のあるファイルを使用しています。セットアップ ウィザードを使用してこれらのアプリケーションを終了して再起動するか、後でコンピューターを再起動することができます。</String>
+-    <String Id="MsiRMFilesInUseDescription" Overridable="yes">更新する必要のある一部のファイルは現在使用中です。</String>
+-    <String Id="MsiRMFilesInUseTitle" Overridable="yes">{\WixUI_Font_Title}使用中のファイル</String>
++    <String Id="MsiRMFilesInUseDescription" Overridable="yes">{\WixUI_Font_Normal_OnImage}更新が必要なファイルの一部は現在、使用中です。</String>
++    <String Id="MsiRMFilesInUseTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}使用中のファイル</String>
+     <String Id="MsiRMFilesInUseUseRM" Overridable="yes">アプリケーションを終了してから再起動する(&amp;C)</String>
+     <String Id="MsiRMFilesInUseDontUseRM" Overridable="yes">アプリケーションを終了しない (再起動が必要)(&amp;D)</String>
+ 
+     <String Id="OutOfDiskDlg_Title" Overridable="yes">[ProductName] セットアップ</String>
+     <String Id="OutOfDiskDlgBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+     <String Id="OutOfDiskDlgText" Overridable="yes">強調表示されたボリュームには、現在選択中の機能に利用できる十分なディスク領域がありません。強調表示されたボリュームから一部のファイルを削除するか、インストールする機能を減らすか、別のインストール先ドライブを選択することができます。</String>
+-    <String Id="OutOfDiskDlgDescription" Overridable="yes">インストールに必要なディスク領域がディスクの空き領域を超えています。</String>
+-    <String Id="OutOfDiskDlgTitle" Overridable="yes">{\WixUI_Font_Title}ディスク領域の不足</String>
++    <String Id="OutOfDiskDlgDescription" Overridable="yes">{\WixUI_Font_Normal_OnImage}インストールに必要なディスク領域が、空きディスク領域を超えています。</String>
++    <String Id="OutOfDiskDlgTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}ディスク領域不足</String>
+     <String Id="OutOfDiskDlgVolumeList" Overridable="yes">{120}{70}{70}{70}{70}</String>
+ 
+     <String Id="OutOfRbDiskDlg_Title" Overridable="yes">[ProductName] セットアップ</String>
+     <String Id="OutOfRbDiskDlgBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+     <String Id="OutOfRbDiskDlgText" Overridable="yes">強調表示されたボリュームには、現在選択中の機能に利用できる十分なディスク領域がありません。強調表示されたボリュームから一部のファイルを削除するか、インストールする機能を減らすか、別のインストール先ドライブを選択することができます。</String>
+-    <String Id="OutOfRbDiskDlgDescription" Overridable="yes">インストールに必要なディスク領域がディスクの空き領域を超えています。</String>
+-    <String Id="OutOfRbDiskDlgTitle" Overridable="yes">{\WixUI_Font_Title}ディスク領域の不足</String>
++    <String Id="OutOfRbDiskDlgDescription" Overridable="yes">{\WixUI_Font_Normal_OnImage}インストールに必要なディスク領域が、空きディスク領域を超えています。</String>
++    <String Id="OutOfRbDiskDlgTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}ディスク領域不足</String>
+     <String Id="OutOfRbDiskDlgVolumeList" Overridable="yes">{120}{70}{70}{70}{70}</String>
+     <String Id="OutOfRbDiskDlgText2" Overridable="yes">あるいは、インストーラーのロールバック機能を無効にすることもできます。ロールバックを無効にすると、インストールがなんらかの理由で中断されてもインストーラーによってコンピューターの元の状態が復元されません。リスクを認識したうえでロールバック機能を無効にする場合は [\[]はい[\]] をクリックしてください。</String>
+ 
+@@ -192,13 +192,13 @@
+     <String Id="ProgressDlg_Title" Overridable="yes">[ProductName] セットアップ</String>
+     <String Id="ProgressDlgBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+     <String Id="ProgressDlgTextInstalling" Overridable="yes">[ProductName] をインストールしています。しばらくお待ちください。</String>
+-    <String Id="ProgressDlgTitleInstalling" Overridable="yes">{\WixUI_Font_Title}[ProductName] をインストール中</String>
++    <String Id="ProgressDlgTitleInstalling" Overridable="yes">{\WixUI_Font_Title_OnImage}[ProductName] のインストール</String>
+     <String Id="ProgressDlgTextChanging" Overridable="yes">[ProductName] を変更しています。しばらくお待ちください。</String>
+-    <String Id="ProgressDlgTitleChanging" Overridable="yes">{\WixUI_Font_Title}[ProductName] を変更中</String>
++    <String Id="ProgressDlgTitleChanging" Overridable="yes">{\WixUI_Font_Title_OnImage}[ProductName] の変更</String>
+     <String Id="ProgressDlgTextRepairing" Overridable="yes">[ProductName] を修復しています。しばらくお待ちください。</String>
+-    <String Id="ProgressDlgTitleRepairing" Overridable="yes">{\WixUI_Font_Title}[ProductName] を修復中</String>
++    <String Id="ProgressDlgTitleRepairing" Overridable="yes">{\WixUI_Font_Title_OnImage}[ProductName] の修復</String>
+     <String Id="ProgressDlgTextRemoving" Overridable="yes">[ProductName] を削除しています。しばらくお待ちください。</String>
+-    <String Id="ProgressDlgTitleRemoving" Overridable="yes">{\WixUI_Font_Title}[ProductName] を削除中</String>
++    <String Id="ProgressDlgTitleRemoving" Overridable="yes">{\WixUI_Font_Title_OnImage}[ProductName] の削除</String>
+     <String Id="ProgressDlgTextUpdating" Overridable="yes">[ProductName] を更新しています。しばらくお待ちください。</String>
+     <String Id="ProgressDlgTitleUpdating" Overridable="yes">{\WixUI_Font_Title}[ProductName] を更新中</String>
+     <String Id="ProgressDlgProgressBar" Overridable="yes">進行状況</String>
+@@ -218,8 +218,8 @@
+     <String Id="SetupTypeDlgCompleteButton" Overridable="yes">完全(&amp;O)</String>
+     <String Id="SetupTypeDlgCompleteButtonTooltip" Overridable="yes">完全インストール</String>
+     <String Id="SetupTypeDlgBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+-    <String Id="SetupTypeDlgTitle" Overridable="yes">{\WixUI_Font_Title}セットアップの種類の選択</String>
+-    <String Id="SetupTypeDlgDescription" Overridable="yes">目的に合わせてセットアップの種類を選択してください。</String>
++    <String Id="SetupTypeDlgTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}セットアップの種類の選択</String>
++    <String Id="SetupTypeDlgDescription" Overridable="yes">{\WixUI_Font_Normal_OnImage}目的に合わせてセットアップの種類を選択してください</String>
+     <String Id="SetupTypeDlgTypicalText" Overridable="yes">最も一般的に使われるプログラムの機能がインストールされます。通常は、こちらを選択してください。</String>
+     <String Id="SetupTypeDlgCustomText" Overridable="yes">ユーザーが、インストールするプログラムの機能やインストール先を選択することができます。詳しい知識のある方にお勧めします。</String>
+     <String Id="SetupTypeDlgCompleteText" Overridable="yes">すべてのプログラム機能をインストールします。最も多くのディスク領域が必要です。</String>
+@@ -234,16 +234,16 @@
+     <String Id="VerifyReadyDlgBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+     <String Id="VerifyReadyDlgInstall" Overridable="yes">インストール(&amp;I)</String>
+     <String Id="VerifyReadyDlgInstallText" Overridable="yes">インストールを開始するには [\[]インストール[\]] をクリックしてください。インストール設定を確認または変更するには [\[]戻る[\]] をクリックしてください。ウィザードを終了するには [\[]キャンセル[\]] をクリックしてください。</String>
+-    <String Id="VerifyReadyDlgInstallTitle" Overridable="yes">{\WixUI_Font_Title}[ProductName] のインストール準備完了</String>
++    <String Id="VerifyReadyDlgInstallTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}[ProductName] のインストールの準備完了</String>
+     <String Id="VerifyReadyDlgChange" Overridable="yes">変更(&amp;C)</String>
+     <String Id="VerifyReadyDlgChangeText" Overridable="yes">インストールを開始するには [\[]変更[\]] をクリックしてください。インストール設定を確認または変更するには [\[]戻る[\]] をクリックしてください。ウィザードを終了するには [\[]キャンセル[\]] をクリックしてください。</String>
+-    <String Id="VerifyReadyDlgChangeTitle" Overridable="yes">{\WixUI_Font_Title}[ProductName] の変更準備完了</String>
++    <String Id="VerifyReadyDlgChangeTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}[ProductName] の変更の準備完了</String>
+     <String Id="VerifyReadyDlgRepair" Overridable="yes">修復(&amp;P)</String>
+     <String Id="VerifyReadyDlgRepairText" Overridable="yes">[ProductName] のインストールを修復するには [\[]修復[\]] をクリックしてください。インストール設定を確認または変更するには [\[]戻る[\]] をクリックしてください。ウィザードを終了するには [\[]キャンセル[\]] をクリックしてください。</String>
+-    <String Id="VerifyReadyDlgRepairTitle" Overridable="yes">{\WixUI_Font_Title}[ProductName] の修復準備完了</String>
++    <String Id="VerifyReadyDlgRepairTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}[ProductName] の修復の準備完了</String>
+     <String Id="VerifyReadyDlgRemove" Overridable="yes">削除(&amp;R)</String>
+     <String Id="VerifyReadyDlgRemoveText" Overridable="yes">コンピューターから [ProductName] を削除するには [\[]削除[\]] をクリックしてください。インストール設定を確認または変更するには [\[]戻る[\]] をクリックしてください。ウィザードを終了するには [\[]キャンセル[\]] をクリックしてください。</String>
+-    <String Id="VerifyReadyDlgRemoveTitle" Overridable="yes">{\WixUI_Font_Title}[ProductName] の削除準備完了</String>
++    <String Id="VerifyReadyDlgRemoveTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}[ProductName] の削除の準備完了</String>
+     <String Id="VerifyReadyDlgUpdate" Overridable="yes">更新(&amp;U)</String>
+     <String Id="VerifyReadyDlgUpdateText" Overridable="yes">コンピューターの [ProductName] を更新するには [\[]更新[\]] をクリックしてください。インストール設定を確認または変更するには [\[]戻る[\]] をクリックしてください。ウィザードを終了するには [\[]キャンセル[\]] をクリックしてください。</String>
+     <String Id="VerifyReadyDlgUpdateTitle" Overridable="yes">{\WixUI_Font_Title}[ProductName] の更新準備完了</String>
+@@ -265,7 +265,7 @@
+     <String Id="WelcomeEulaDlgLicenseAcceptedCheckBox" Overridable="yes">使用許諾契約書に同意します(&amp;A)</String>
+     <String Id="WelcomeEulaDlgInstall" Overridable="yes">インストール(&amp;I)</String>
+     <String Id="WelcomeEulaDlgUpdate" Overridable="yes">更新(&amp;U)</String>
+-    <String Id="WelcomeEulaDlgTitle" Overridable="yes">{\WixUI_Font_Title}[ProductName] の使用許諾契約書をお読みください</String>
++    <String Id="WelcomeEulaDlgTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}[ProductName] の使用許諾契約書をお読みください</String>
+ 
+     <String Id="ProgressTextInstallValidate" Overridable="yes">インストールを検証しています</String>
+     <String Id="ProgressTextInstallFiles" Overridable="yes">新しいファイルをコピーしています</String>
+@@ -606,4 +606,9 @@
+     <String Id="UITextVolumeCostRequired" Overridable="yes">必須</String>
+     <String Id="UITextVolumeCostSize" Overridable="yes">ディスク サイズ</String>
+     <String Id="UITextVolumeCostVolume" Overridable="yes">ボリューム</String>
++
++    <String Id="ErrorNewerProduct" Overridable="yes">より新しいバージョンが既にインストールされています。</String>
++    <String Id="InstallDirDlgUsersLabel" Overridable="yes">対象ユーザー:</String>
++    <String Id="InstallDirDlgUsersAllRadioButton" Overridable="yes">すべてのユーザー(&amp;A)</String>
++    <String Id="InstallDirDlgUsersOneRadioButton" Overridable="yes">現在のユーザー(&amp;J)</String>
+ </WixLocalization>
+diff -ru wixlib/WixUI_zh-CN.wxl wixlib/WixUI_zh-CN.wxl
+--- wixlib/WixUI_zh-CN.wxl	Thu Jan 20 06:13:28 2011 -0800
++++ wixlib/WixUI_zh-CN.wxl	Mon Jun 25 15:14:25 2012 +0000
+@@ -47,8 +47,8 @@
+     <String Id="BrowseDlgNewFolderTooltip" Overridable="yes">新建文件夹</String>
+     <String Id="BrowseDlgPathLabel" Overridable="yes">文件夹名称(&amp;F):</String>
+     <String Id="BrowseDlgBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+-    <String Id="BrowseDlgDescription" Overridable="yes">浏览到目标文件夹</String>
+-    <String Id="BrowseDlgTitle" Overridable="yes">{\WixUI_Font_Title}更改目标文件夹</String>
++    <String Id="BrowseDlgDescription" Overridable="yes">{\WixUI_Font_Normal_OnImage}浏览到目标文件夹</String>
++    <String Id="BrowseDlgTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}更改目标文件夹</String>
+ 
+     <String Id="CancelDlg_Title" Overridable="yes">[ProductName] 安装程序</String>
+     <String Id="CancelDlgText" Overridable="yes">是否确实要取消安装 [ProductName]?</String>
+@@ -72,8 +72,8 @@
+     <String Id="DiskCostDlg_Title" Overridable="yes">[ProductName] 安装程序</String>
+     <String Id="DiskCostDlgBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+     <String Id="DiskCostDlgText" Overridable="yes">突出显示的卷没有足够的磁盘空间用于所选功能。您可以从突出显示的卷中删除一些文件，安装较少的功能，或者选择其他目标驱动器。</String>
+-    <String Id="DiskCostDlgDescription" Overridable="yes">安装选择的功能所需的磁盘空间。</String>
+-    <String Id="DiskCostDlgTitle" Overridable="yes">{\WixUI_Font_Title}磁盘空间要求</String>
++    <String Id="DiskCostDlgDescription" Overridable="yes">{\WixUI_Font_Normal_OnImage}安装所选功能所需的磁盘空间。</String>
++    <String Id="DiskCostDlgTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}磁盘空间需求</String>
+     <String Id="DiskCostDlgVolumeList" Overridable="yes">{120}{70}{70}{70}{70}</String>
+ 
+     <String Id="ErrorDlg_Title" Overridable="yes">[ProductName] 安装程序</String>
+@@ -106,13 +106,13 @@
+     <String Id="FilesInUseExit" Overridable="yes">退出(&amp;X)</String>
+     <String Id="FilesInUseBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+     <String Id="FilesInUseText" Overridable="yes">以下应用程序正在使用需要通过此安装程序更新的文件。请关闭这些应用程序，然后单击“重试”继续安装，或单击“退出”退出安装(&amp;R)。</String>
+-    <String Id="FilesInUseDescription" Overridable="yes">一些需要更新的文件当前正在使用中。</String>
+-    <String Id="FilesInUseTitle" Overridable="yes">{\WixUI_Font_Title}使用中的文件</String>
++    <String Id="FilesInUseDescription" Overridable="yes">{\WixUI_Font_Normal_OnImage}一些需要更新的文件正在使用中。</String>
++    <String Id="FilesInUseTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}正在使用的文件</String>
+ 
+     <String Id="InstallDirDlg_Title" Overridable="yes">[ProductName] 安装程序</String>
+-    <String Id="InstallDirDlgChange" Overridable="yes">更改(&amp;C)...</String>
+-    <String Id="InstallDirDlgTitle" Overridable="yes">{\WixUI_Font_Title}目标文件夹</String>
+-    <String Id="InstallDirDlgDescription" Overridable="yes">单击“下一步”安装到默认文件夹或单击“更改”选择其他位置。</String>
++    <String Id="InstallDirDlgChange" Overridable="yes">浏览(&amp;R)...</String>
++    <String Id="InstallDirDlgTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}目标文件夹</String>
++    <String Id="InstallDirDlgDescription" Overridable="yes">{\WixUI_Font_Normal_OnImage}单击“下一步”以安装到默认文件夹，或者单击“浏览”以选择其他文件夹。</String>
+     <String Id="InstallDirDlgBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+     <String Id="InstallDirDlgFolderLabel" Overridable="yes">[ProductName] 安装位置:</String>
+ 
+@@ -136,8 +136,8 @@
+     <String Id="LicenseAgreementDlg_Title" Overridable="yes">[ProductName] 安装程序</String>
+     <String Id="LicenseAgreementDlgLicenseAcceptedCheckBox" Overridable="yes">我接受许可协议中的条款(&amp;A)</String>
+     <String Id="LicenseAgreementDlgBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+-    <String Id="LicenseAgreementDlgDescription" Overridable="yes">请认真阅读以下许可协议</String>
+-    <String Id="LicenseAgreementDlgTitle" Overridable="yes">{\WixUI_Font_Title}最终用户许可协议</String>
++    <String Id="LicenseAgreementDlgDescription" Overridable="yes">{\WixUI_Font_Normal_OnImage}请仔细阅读以下许可协议</String>
++    <String Id="LicenseAgreementDlgTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}最终用户许可协议</String>
+ 
+     <String Id="MaintenanceTypeDlg_Title" Overridable="yes">[ProductName] 安装程序</String>
+     <String Id="MaintenanceTypeDlgChangeButton" Overridable="yes">更改(&amp;C)</String>
+@@ -147,8 +147,8 @@
+     <String Id="MaintenanceTypeDlgRemoveButton" Overridable="yes">删除(&amp;R)</String>
+     <String Id="MaintenanceTypeDlgRemoveButtonTooltip" Overridable="yes">删除安装</String>
+     <String Id="MaintenanceTypeDlgBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+-    <String Id="MaintenanceTypeDlgDescription" Overridable="yes">选择希望执行的操作。</String>
+-    <String Id="MaintenanceTypeDlgTitle" Overridable="yes">{\WixUI_Font_Title}更改、修复或删除安装</String>
++    <String Id="MaintenanceTypeDlgDescription" Overridable="yes">{\WixUI_Font_Normal_OnImage}选择您想执行的操作。</String>
++    <String Id="MaintenanceTypeDlgTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}更改、修复或删除安装</String>
+     <String Id="MaintenanceTypeDlgChangeText" Overridable="yes">允许您更改功能的安装方式。</String>
+     <String Id="MaintenanceTypeDlgChangeDisabledText" Overridable="yes">[ProductName] 没有单独可选的功能。</String>
+     <String Id="MaintenanceTypeDlgRemoveText" Overridable="yes">从您的计算机中删除 [ProductName]。</String>
+@@ -164,23 +164,23 @@
+     <String Id="MsiRMFilesInUse_Title" Overridable="yes">[ProductName] 安装程序</String>
+     <String Id="MsiRMFilesInUseBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+     <String Id="MsiRMFilesInUseText" Overridable="yes">以下应用程序正在使用此安装程序需要更新的文件。可以让安装向导关闭这些应用程序，稍后再尝试重新启动这些应用程序或重新启动计算机。</String>
+-    <String Id="MsiRMFilesInUseDescription" Overridable="yes">一些需要更新的文件当前正在使用中。</String>
+-    <String Id="MsiRMFilesInUseTitle" Overridable="yes">{\WixUI_Font_Title}使用中的文件</String>
++    <String Id="MsiRMFilesInUseDescription" Overridable="yes">{\WixUI_Font_Normal_OnImage}一些需要更新的文件正在使用中。</String>
++    <String Id="MsiRMFilesInUseTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}正在使用的文件</String>
+     <String Id="MsiRMFilesInUseUseRM" Overridable="yes">关闭应用程序，然后尝试将其重新启动(&amp;C)。</String>
+     <String Id="MsiRMFilesInUseDontUseRM" Overridable="yes">不关闭应用程序。需要重新启动(&amp;D)。</String>
+ 
+     <String Id="OutOfDiskDlg_Title" Overridable="yes">[ProductName] 安装程序</String>
+     <String Id="OutOfDiskDlgBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+     <String Id="OutOfDiskDlgText" Overridable="yes">突出显示的卷没有足够的磁盘空间用于安装当前所选功能。您可以从突出显示的卷中删除一些文件，安装较少的功能，或者选择其他目标驱动器。</String>
+-    <String Id="OutOfDiskDlgDescription" Overridable="yes">安装所需的磁盘空间超出了可用磁盘空间。</String>
+-    <String Id="OutOfDiskDlgTitle" Overridable="yes">{\WixUI_Font_Title}磁盘空间不足</String>
++    <String Id="OutOfDiskDlgDescription" Overridable="yes">{\WixUI_Font_Normal_OnImage}安装所需的磁盘空间超过可用磁盘空间。</String>
++    <String Id="OutOfDiskDlgTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}磁盘空间不足</String>
+     <String Id="OutOfDiskDlgVolumeList" Overridable="yes">{120}{70}{70}{70}{70}</String>
+ 
+     <String Id="OutOfRbDiskDlg_Title" Overridable="yes">[ProductName] 安装程序</String>
+     <String Id="OutOfRbDiskDlgBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+     <String Id="OutOfRbDiskDlgText" Overridable="yes">突出显示的卷没有足够的磁盘空间用于安装当前所选功能。您可以从突出显示的卷中删除一些文件，安装较少的功能，或者选择其他目标驱动器。</String>
+-    <String Id="OutOfRbDiskDlgDescription" Overridable="yes">安装所需的磁盘空间超出了可用磁盘空间。</String>
+-    <String Id="OutOfRbDiskDlgTitle" Overridable="yes">{\WixUI_Font_Title}磁盘空间不足</String>
++    <String Id="OutOfRbDiskDlgDescription" Overridable="yes">{\WixUI_Font_Normal_OnImage}安装所需的磁盘空间超过可用磁盘空间。</String>
++    <String Id="OutOfRbDiskDlgTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}磁盘空间不足</String>
+     <String Id="OutOfRbDiskDlgVolumeList" Overridable="yes">{120}{70}{70}{70}{70}</String>
+     <String Id="OutOfRbDiskDlgText2" Overridable="yes">或者，您可以选择禁用安装程序的回滚功能。禁用回滚功能将在因任何原因中断安装时，阻止安装程序还原计算机的原始状态。如果希望冒险禁用回滚功能，请单击“是”。</String>
+ 
+@@ -192,13 +192,13 @@
+     <String Id="ProgressDlg_Title" Overridable="yes">[ProductName] 安装程序</String>
+     <String Id="ProgressDlgBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+     <String Id="ProgressDlgTextInstalling" Overridable="yes">安装向导正在安装 [ProductName]，请稍候。</String>
+-    <String Id="ProgressDlgTitleInstalling" Overridable="yes">{\WixUI_Font_Title}正在安装 [ProductName]</String>
++    <String Id="ProgressDlgTitleInstalling" Overridable="yes">{\WixUI_Font_Title_OnImage}正在安装 [ProductName]</String>
+     <String Id="ProgressDlgTextChanging" Overridable="yes">安装向导正在更改 [ProductName]，请稍候。</String>
+-    <String Id="ProgressDlgTitleChanging" Overridable="yes">{\WixUI_Font_Title}正在更改 [ProductName]</String>
++    <String Id="ProgressDlgTitleChanging" Overridable="yes">{\WixUI_Font_Title_OnImage}正在更改 [ProductName]</String>
+     <String Id="ProgressDlgTextRepairing" Overridable="yes">安装向导正在修复 [ProductName]，请稍候。</String>
+-    <String Id="ProgressDlgTitleRepairing" Overridable="yes">{\WixUI_Font_Title}正在修复 [ProductName]</String>
++    <String Id="ProgressDlgTitleRepairing" Overridable="yes">{\WixUI_Font_Title_OnImage}正在修复 [ProductName]</String>
+     <String Id="ProgressDlgTextRemoving" Overridable="yes">安装向导正在删除 [ProductName]，请稍候。</String>
+-    <String Id="ProgressDlgTitleRemoving" Overridable="yes">{\WixUI_Font_Title}正在删除 [ProductName]</String>
++    <String Id="ProgressDlgTitleRemoving" Overridable="yes">{\WixUI_Font_Title_OnImage}正在删除 [ProductName]</String>
+     <String Id="ProgressDlgTextUpdating" Overridable="yes">安装向导正在更新 [ProductName]，请稍候。</String>
+     <String Id="ProgressDlgTitleUpdating" Overridable="yes">{\WixUI_Font_Title}正在更新 [ProductName]</String>
+     <String Id="ProgressDlgProgressBar" Overridable="yes">安装过程已完成</String>
+@@ -218,8 +218,8 @@
+     <String Id="SetupTypeDlgCompleteButton" Overridable="yes">完整(&amp;O)</String>
+     <String Id="SetupTypeDlgCompleteButtonTooltip" Overridable="yes">完整安装</String>
+     <String Id="SetupTypeDlgBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+-    <String Id="SetupTypeDlgTitle" Overridable="yes">{\WixUI_Font_Title}选择安装类型</String>
+-    <String Id="SetupTypeDlgDescription" Overridable="yes">选择最符合您需求的安装类型</String>
++    <String Id="SetupTypeDlgTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}选择安装类型</String>
++    <String Id="SetupTypeDlgDescription" Overridable="yes">{\WixUI_Font_Normal_OnImage}选择最适合您的需求的安装类型</String>
+     <String Id="SetupTypeDlgTypicalText" Overridable="yes">安装最常用的程序功能。建议大多数用户使用。</String>
+     <String Id="SetupTypeDlgCustomText" Overridable="yes">允许用户选择要安装的程序功能及其安装位置。建议高级用户使用。</String>
+     <String Id="SetupTypeDlgCompleteText" Overridable="yes">将安装所有程序功能。需要最多磁盘空间。</String>
+@@ -234,16 +234,16 @@
+     <String Id="VerifyReadyDlgBannerBitmap" Overridable="yes">WixUI_Bmp_Banner</String>
+     <String Id="VerifyReadyDlgInstall" Overridable="yes">安装(&amp;I)</String>
+     <String Id="VerifyReadyDlgInstallText" Overridable="yes">单击“安装”开始安装。单击“上一步”查看或更改任何安装设置。单击“取消”退出向导。</String>
+-    <String Id="VerifyReadyDlgInstallTitle" Overridable="yes">{\WixUI_Font_Title}已准备好安装 [ProductName]</String>
++    <String Id="VerifyReadyDlgInstallTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}已准备好安装 [ProductName]</String>
+     <String Id="VerifyReadyDlgChange" Overridable="yes">更改(&amp;C)</String>
+     <String Id="VerifyReadyDlgChangeText" Overridable="yes">单击“更改”开始安装。单击“上一步”查看或更改任何安装设置。单击“取消”退出向导。</String>
+-    <String Id="VerifyReadyDlgChangeTitle" Overridable="yes">{\WixUI_Font_Title}已准备好更改 [ProductName]</String>
++    <String Id="VerifyReadyDlgChangeTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}已准备好更改 [ProductName]</String>
+     <String Id="VerifyReadyDlgRepair" Overridable="yes">修复(&amp;P)</String>
+     <String Id="VerifyReadyDlgRepairText" Overridable="yes">单击“修复”修复 [ProductName] 的安装。单击“上一步”检查或更改任何安装设置。单击“取消”退出向导。</String>
+-    <String Id="VerifyReadyDlgRepairTitle" Overridable="yes">{\WixUI_Font_Title}已准备好修复 [ProductName]</String>
++    <String Id="VerifyReadyDlgRepairTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}已准备好修复 [ProductName]</String>
+     <String Id="VerifyReadyDlgRemove" Overridable="yes">删除(&amp;R)</String>
+     <String Id="VerifyReadyDlgRemoveText" Overridable="yes">单击“删除”可从计算机上删除 [ProductName]。单击“上一步”检查或更改任何安装设置。单击“取消”退出向导。</String>
+-    <String Id="VerifyReadyDlgRemoveTitle" Overridable="yes">{\WixUI_Font_Title}已准备好删除 [ProductName]</String>
++    <String Id="VerifyReadyDlgRemoveTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}已准备好删除 [ProductName]</String>
+     <String Id="VerifyReadyDlgUpdate" Overridable="yes">更新(&amp;U)</String>
+     <String Id="VerifyReadyDlgUpdateText" Overridable="yes">单击“更新”以更新计算机上的 [ProductName]。单击“上一步”检查或更改任何安装设置。单击“取消”退出向导。</String>
+     <String Id="VerifyReadyDlgUpdateTitle" Overridable="yes">{\WixUI_Font_Title}已准备好更新 [ProductName]</String>
+@@ -265,7 +265,7 @@
+     <String Id="WelcomeEulaDlgLicenseAcceptedCheckBox" Overridable="yes">我接受许可协议中的条款(&amp;A)</String>
+     <String Id="WelcomeEulaDlgInstall" Overridable="yes">安装(&amp;I)</String>
+     <String Id="WelcomeEulaDlgUpdate" Overridable="yes">更新(&amp;U)</String>
+-    <String Id="WelcomeEulaDlgTitle" Overridable="yes">{\WixUI_Font_Title}请阅读 [ProductName] 许可协议</String>
++    <String Id="WelcomeEulaDlgTitle" Overridable="yes">{\WixUI_Font_Title_OnImage}请阅读 [ProductName] 许可协议</String>
+ 
+     <String Id="ProgressTextInstallValidate" Overridable="yes">正在验证安装</String>
+     <String Id="ProgressTextInstallFiles" Overridable="yes">正在复制新文件</String>
+@@ -606,4 +606,9 @@
+     <String Id="UITextVolumeCostRequired" Overridable="yes">所需空间</String>
+     <String Id="UITextVolumeCostSize" Overridable="yes">磁盘大小</String>
+     <String Id="UITextVolumeCostVolume" Overridable="yes">卷</String>
++
++    <String Id="ErrorNewerProduct" Overridable="yes">已经安装了这种产品的较新版本。</String>
++    <String Id="InstallDirDlgUsersLabel" Overridable="yes">安装：</String>
++    <String Id="InstallDirDlgUsersAllRadioButton" Overridable="yes">所有用户(&amp;A)</String>
++    <String Id="InstallDirDlgUsersOneRadioButton" Overridable="yes">只有我(&amp;J)</String>
+ </WixLocalization>

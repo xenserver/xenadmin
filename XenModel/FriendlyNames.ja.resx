@@ -1,0 +1,2021 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AD.PropertyKey-subject-account-disabled" xml:space="preserve">
+    <value>アカウント無効</value>
+  </data>
+  <data name="AD.PropertyKey-subject-account-expired" xml:space="preserve">
+    <value>アカウント期限切れ</value>
+  </data>
+  <data name="AD.PropertyKey-subject-account-locked" xml:space="preserve">
+    <value>アカウントがロックされている</value>
+  </data>
+  <data name="AD.PropertyKey-subject-gecos" xml:space="preserve">
+    <value>Gecos</value>
+  </data>
+  <data name="AD.PropertyKey-subject-name" xml:space="preserve">
+    <value>名前</value>
+  </data>
+  <data name="AD.PropertyKey-subject-password-expired" xml:space="preserve">
+    <value>パスワード期限切れ</value>
+  </data>
+  <data name="Description-VM.ha_restart_priority.AlwaysRestart" xml:space="preserve">
+    <value>VM の再起動を常に試行します</value>
+  </data>
+  <data name="Description-VM.ha_restart_priority.AlwaysRestartHighPriority" xml:space="preserve">
+    <value>VM の再起動を常に最初に試行します (最高優先度)</value>
+  </data>
+  <data name="Description-VM.ha_restart_priority.BestEffort" xml:space="preserve">
+    <value>十分なリソースがある場合に VM の再起動を試行します</value>
+  </data>
+  <data name="Description-VM.ha_restart_priority.DoNotRestart" xml:space="preserve">
+    <value>VM は再起動されません</value>
+  </data>
+  <data name="Description-VM.ha_restart_priority.Restart" xml:space="preserve">
+    <value>VM の再起動を常に試行します</value>
+  </data>
+  <data name="Description-host.system_status-CVSM" xml:space="preserve">
+    <value>Citrix StorageLink の構成</value>
+  </data>
+  <data name="Description-host.system_status-X11" xml:space="preserve">
+    <value>X サーバーのログ ファイル</value>
+  </data>
+  <data name="Description-host.system_status-X11-auth" xml:space="preserve">
+    <value>X サーバーの認証ファイル</value>
+  </data>
+  <data name="Description-host.system_status-blobs" xml:space="preserve">
+    <value>XenServer 上にバイナリ オブジェクトとして格納されているユーザー情報を取得します。</value>
+  </data>
+  <data name="Description-host.system_status-boot-loader" xml:space="preserve">
+    <value>システム起動時に表示される起動オプションおよびその説明の一覧</value>
+  </data>
+  <data name="Description-host.system_status-client-logs" xml:space="preserve">
+    <value>クライアント アプリケーションのログ ファイル</value>
+  </data>
+  <data name="Description-host.system_status-device-model" xml:space="preserve">
+    <value>デバイス エミュレーション ログ</value>
+  </data>
+  <data name="Description-host.system_status-disk-info" xml:space="preserve">
+    <value>パーティションテーブル、空き容量、iSCSI と LVM の設定</value>
+  </data>
+  <data name="Description-host.system_status-filesystem_summarise" xml:space="preserve">
+    <value>Dom 0 で変更されたファイルの一覧</value>
+  </data>
+  <data name="Description-host.system_status-firstboot" xml:space="preserve">
+    <value>ローカル ストレージ リポジトリとネットワークを初期化するために実行されるスクリプト</value>
+  </data>
+  <data name="Description-host.system_status-hardware-info" xml:space="preserve">
+    <value>プロセス、メモリ、およびそのほかの基幹ハードウェアの詳細</value>
+  </data>
+  <data name="Description-host.system_status-hdparm-t" xml:space="preserve">
+    <value>各ローカル ハード ディスクに対して数回のタイミング テストを行います。このテストには約 1 分かかります</value>
+  </data>
+  <data name="Description-host.system_status-high-availability" xml:space="preserve">
+    <value>高可用性デーモンからのログ ファイル</value>
+  </data>
+  <data name="Description-host.system_status-host-crashdump-dumps" xml:space="preserve">
+    <value>サーバー クラッシュ時のメモリ ダンプ。このオプションを選択すると、レポート作成後にこれらのファイルの削除を確認するメッセージが表示されます</value>
+  </data>
+  <data name="Description-host.system_status-host-crashdump-logs" xml:space="preserve">
+    <value>サーバー クラッシュ時のログ ファイル</value>
+  </data>
+  <data name="Description-host.system_status-kernel-info" xml:space="preserve">
+    <value>カーネル モジュール、ファイルシステム デバイス、およびカーネル設定の詳細</value>
+  </data>
+  <data name="Description-host.system_status-loopback-devices" xml:space="preserve">
+    <value>ループバック デバイスの詳細</value>
+  </data>
+  <data name="Description-host.system_status-multipath" xml:space="preserve">
+    <value>サーバーのストレージのマルチパス設定を取得します</value>
+  </data>
+  <data name="Description-host.system_status-network-config" xml:space="preserve">
+    <value>ネットワーク インターフェイスの表示に使用される設定ファイル。名前解決の機能を提供し、ファイアウォールを有効にします</value>
+  </data>
+  <data name="Description-host.system_status-network-status" xml:space="preserve">
+    <value>ネットワーク インターフェイス、ルーティング テーブル、ファイアウォールの現在の状態</value>
+  </data>
+  <data name="Description-host.system_status-oem" xml:space="preserve">
+    <value>OEM プロバイダ固有のデータを収集します。</value>
+  </data>
+  <data name="Description-host.system_status-pam" xml:space="preserve">
+    <value>XenServer の PAM (Pluggable Authentication Modules) により使用される設定ファイルです。</value>
+  </data>
+  <data name="Description-host.system_status-persistent-stats" xml:space="preserve">
+    <value>永続的なパフォーマンス統計値</value>
+  </data>
+  <data name="Description-host.system_status-process-list" xml:space="preserve">
+    <value>実行中のすべてのプロセスをツリー形式で一覧表示します</value>
+  </data>
+  <data name="Description-host.system_status-system-info" xml:space="preserve">
+    <value>システム設定</value>
+  </data>
+  <data name="Description-host.system_status-system-logs" xml:space="preserve">
+    <value>さまざまなシステム プロセスのアクティビティを記録したログ ファイル</value>
+  </data>
+  <data name="Description-host.system_status-system-services" xml:space="preserve">
+    <value>設定されているシステム サービスの一覧</value>
+  </data>
+  <data name="Description-host.system_status-tapdisk-logs" xml:space="preserve">
+    <value>ストレージ サブシステム ログ</value>
+  </data>
+  <data name="Description-host.system_status-vncterm" xml:space="preserve">
+    <value>VNCTerm デーモンからのクラッシュ ダンプ ファイル</value>
+  </data>
+  <data name="Description-host.system_status-wlb" xml:space="preserve">
+    <value>このプールを監視している WLB サーバーからのログと状態に関する情報です。</value>
+  </data>
+  <data name="Description-host.system_status-xapi" xml:space="preserve">
+    <value>XenServer デーモンの内部ログ</value>
+  </data>
+  <data name="Description-host.system_status-xapi-debug" xml:space="preserve">
+    <value>XenServer デーモン クラッシュ ダンプ</value>
+  </data>
+  <data name="Description-host.system_status-xapi-subprocess" xml:space="preserve">
+    <value>XenServer デーモン プロセスの詳細</value>
+  </data>
+  <data name="Description-host.system_status-xen-info" xml:space="preserve">
+    <value>ハイパーバイザーのバージョンと現在の状態</value>
+  </data>
+  <data name="Description-host.system_status-xenopsd" xml:space="preserve">
+    <value>VM 内部診断</value>
+  </data>
+  <data name="Description-host.system_status-xenserver-config" xml:space="preserve">
+    <value>XenServer のバージョンとビルドの情報、プライマリ ハード ディスクの場所、プール設定などの詳細</value>
+  </data>
+  <data name="Description-host.system_status-xenserver-databases" xml:space="preserve">
+    <value>XenServer の状態に関する情報を格納するデータベース</value>
+  </data>
+  <data name="Description-host.system_status-xenserver-domains" xml:space="preserve">
+    <value>サーバーにインストールされているゲスト VM とその状態の一覧</value>
+  </data>
+  <data name="Description-host.system_status-xenserver-install" xml:space="preserve">
+    <value>XenServer インストール時のログ ファイル</value>
+  </data>
+  <data name="Description-host.system_status-xenserver-logs" xml:space="preserve">
+    <value>XenServer のアクティビティに関するログ ファイル</value>
+  </data>
+  <data name="Description-host.system_status-xha-liveset" xml:space="preserve">
+    <value>高可用性ライブセット</value>
+  </data>
+  <data name="Description-host.system_status-yum" xml:space="preserve">
+    <value>YUM リポジトリ情報と RPM パッケージの詳細</value>
+  </data>
+  <data name="Exception-PluginLabelNotDefined" xml:space="preserve">
+    <value>プラグイン '{1}' のリソース ファイルで '{0}.label' が定義されていません。</value>
+  </data>
+  <data name="Exception-PluginOnlyOneCommandPermitted" xml:space="preserve">
+    <value>実行できるシェルまたは PowerShell コマンドは 1 つのみです。</value>
+  </data>
+  <data name="Exception-PluginResourcesFileNotFound" xml:space="preserve">
+    <value>'{1}' のプラグイン '{0}' のリソース ファイルがありません。</value>
+  </data>
+  <data name="Exception-PluginVersionInvalid" xml:space="preserve">
+    <value>不明なバージョンの '{0}'。</value>
+  </data>
+  <data name="Exception-PluginXMLNodeNotRecognised" xml:space="preserve">
+    <value>XML ノード '{0}' を認識できませんでした。</value>
+  </data>
+  <data name="Exception-PowerShellExecutionPolicyRestricted" xml:space="preserve">
+    <value>PowerShell の 'ExecutionPolicy' が 'Restricted' の場合、XenServerPSSnapIn をロードできません。</value>
+  </data>
+  <data name="Exception-PowerShellNotPresent" xml:space="preserve">
+    <value>PowerShell プラグインを使用するには、PowerShell をインストールしておく必要があります。PowerShell は、Microsoft 社の Web サイトからダウンロードできます。</value>
+  </data>
+  <data name="Exception-PowerShellSnapInNotPresent" xml:space="preserve">
+    <value>XenServer PowerShell コマンドを使用するには、XenServerPSSnapIn をインストールしておく必要があります。XenServerPSSnapIn は SDK に含まれています。</value>
+  </data>
+  <data name="Exception-SearchParseFailed" xml:space="preserve">
+    <value>プラグイン '{1}' の検索 '{0}' を構文解析できません。</value>
+  </data>
+  <data name="Exception-XenSearchFileInvalid" xml:space="preserve">
+    <value>ファイル '{0}' は有効な保存済み検索ではありません。</value>
+  </data>
+  <data name="Exception-XmlAttributeMissing" xml:space="preserve">
+    <value>必要な属性 '{0}' が '{1}' タグにありません。</value>
+  </data>
+  <data name="Exception-XmlInvalid" xml:space="preserve">
+    <value>XML '{0}' の構文解析に失敗しました</value>
+  </data>
+  <data name="Label-Action.Action" xml:space="preserve">
+    <value>アクション</value>
+  </data>
+  <data name="Label-Action.Alert" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="Label-Action.Error" xml:space="preserve">
+    <value>エラー</value>
+  </data>
+  <data name="Label-Action.Information" xml:space="preserve">
+    <value>情報</value>
+  </data>
+  <data name="Label-Pool_patch.applied" xml:space="preserve">
+    <value>適用済み</value>
+  </data>
+  <data name="Label-Pool_patch.fully_applied" xml:space="preserve">
+    <value>すべて適用済み</value>
+  </data>
+  <data name="Label-Pool_patch.not_applied" xml:space="preserve">
+    <value>未適用</value>
+  </data>
+  <data name="Label-Pool_patch.partially_applied" xml:space="preserve">
+    <value>一部適用済み</value>
+  </data>
+  <data name="Label-SR.SRTypes-cslg" xml:space="preserve">
+    <value>StorageLink</value>
+  </data>
+  <data name="Label-SR.SRTypes-ebs" xml:space="preserve">
+    <value>Elastic Block Storage</value>
+  </data>
+  <data name="Label-SR.SRTypes-egenera" xml:space="preserve">
+    <value>Egenera 仮想ストレージ</value>
+  </data>
+  <data name="Label-SR.SRTypes-egeneracd" xml:space="preserve">
+    <value>Egenera 仮想 DVD ドライブ</value>
+  </data>
+  <data name="Label-SR.SRTypes-equal" xml:space="preserve">
+    <value>Dell EqualLogic</value>
+  </data>
+  <data name="Label-SR.SRTypes-ext" xml:space="preserve">
+    <value>Ext3</value>
+  </data>
+  <data name="Label-SR.SRTypes-iscsi" xml:space="preserve">
+    <value>VDI-per-LUN iSCSI</value>
+  </data>
+  <data name="Label-SR.SRTypes-iso" xml:space="preserve">
+    <value>ISO</value>
+  </data>
+  <data name="Label-SR.SRTypes-local" xml:space="preserve">
+    <value>ローカル</value>
+  </data>
+  <data name="Label-SR.SRTypes-lvm" xml:space="preserve">
+    <value>LVM</value>
+  </data>
+  <data name="Label-SR.SRTypes-lvmofc" xml:space="preserve">
+    <value>ハードウェア HBA</value>
+  </data>
+  <data name="Label-SR.SRTypes-lvmohba" xml:space="preserve">
+    <value>ハードウェア HBA</value>
+  </data>
+  <data name="Label-SR.SRTypes-lvmoiscsi" xml:space="preserve">
+    <value>iSCSI 上の LVM</value>
+  </data>
+  <data name="Label-SR.SRTypes-netapp" xml:space="preserve">
+    <value>NetApp</value>
+  </data>
+  <data name="Label-SR.SRTypes-nfs" xml:space="preserve">
+    <value>NFS</value>
+  </data>
+  <data name="Label-SR.SRTypes-shm" xml:space="preserve">
+    <value>Local Performance Monitoring</value>
+  </data>
+  <data name="Label-SR.SRTypes-udev" xml:space="preserve">
+    <value>udev</value>
+  </data>
+  <data name="Label-SR.SRTypes-unknown" xml:space="preserve">
+    <value>不明</value>
+  </data>
+  <data name="Label-SR.scsiid" xml:space="preserve">
+    <value>SCSI ID</value>
+  </data>
+  <data name="Label-SR.size" xml:space="preserve">
+    <value>サイズ</value>
+  </data>
+  <data name="Label-SR.state" xml:space="preserve">
+    <value>状態</value>
+  </data>
+  <data name="Label-VM.BootOrder" xml:space="preserve">
+    <value>起動順序</value>
+  </data>
+  <data name="Label-VM.ImageId" xml:space="preserve">
+    <value>イメージ ID</value>
+  </data>
+  <data name="Label-VM.InstanceId" xml:space="preserve">
+    <value>インスタンス ID</value>
+  </data>
+  <data name="Label-VM.InstanceType" xml:space="preserve">
+    <value>インスタンスの種類</value>
+  </data>
+  <data name="Label-VM.KeyName" xml:space="preserve">
+    <value>キー名</value>
+  </data>
+  <data name="Label-VM.OSName" xml:space="preserve">
+    <value>オペレーティング システム</value>
+  </data>
+  <data name="Label-VM.P2V_ImportDate" xml:space="preserve">
+    <value>P2V インポート日</value>
+  </data>
+  <data name="Label-VM.P2V_SourceMachine" xml:space="preserve">
+    <value>P2V ソース マシン</value>
+  </data>
+  <data name="Label-VM.PV_args" xml:space="preserve">
+    <value>OS 起動パラメータ</value>
+  </data>
+  <data name="Label-VM.PrivateDnsName" xml:space="preserve">
+    <value>プライベート DNS エントリ</value>
+  </data>
+  <data name="Label-VM.PublicDnsName" xml:space="preserve">
+    <value>パブリック DNS エントリ</value>
+  </data>
+  <data name="Label-VM.VCPUWeight" xml:space="preserve">
+    <value>VCPU 優先度</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-0" xml:space="preserve">
+    <value>最低</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-1" xml:space="preserve">
+    <value>非常に低い</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-2" xml:space="preserve">
+    <value>低</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-3" xml:space="preserve">
+    <value>通常以下</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-4" xml:space="preserve">
+    <value>通常</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-5" xml:space="preserve">
+    <value>通常以上</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-6" xml:space="preserve">
+    <value>高</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-7" xml:space="preserve">
+    <value>非常に高い</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-8" xml:space="preserve">
+    <value>最高</value>
+  </data>
+  <data name="Label-VM.VCPUs" xml:space="preserve">
+    <value>仮想 CPU</value>
+  </data>
+  <data name="Label-VM.VirtualizationState" xml:space="preserve">
+    <value>仮想化の状態</value>
+  </data>
+  <data name="Label-VM.affinity" xml:space="preserve">
+    <value>ホーム サーバー</value>
+  </data>
+  <data name="Label-VM.auto_boot" xml:space="preserve">
+    <value>自動起動</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority" xml:space="preserve">
+    <value>高可用性再起動優先度</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.AlwaysRestart" xml:space="preserve">
+    <value>再起動</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.AlwaysRestartHighPriority" xml:space="preserve">
+    <value>最初に再起動</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.BestEffort" xml:space="preserve">
+    <value>可能なら再起動</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.DoNotRestart" xml:space="preserve">
+    <value>再起動しない</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.High" xml:space="preserve">
+    <value>高</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.Low" xml:space="preserve">
+    <value>低</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.Medium" xml:space="preserve">
+    <value>中</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.Restart" xml:space="preserve">
+    <value>再起動</value>
+  </data>
+  <data name="Label-VM.memory_static_max" xml:space="preserve">
+    <value>メモリ</value>
+  </data>
+  <data name="Label-VM.power_state-Halted" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="Label-VM.power_state-Paused" xml:space="preserve">
+    <value>ポーズ</value>
+  </data>
+  <data name="Label-VM.power_state-Running" xml:space="preserve">
+    <value>実行中</value>
+  </data>
+  <data name="Label-VM.power_state-Suspended" xml:space="preserve">
+    <value>一時停止</value>
+  </data>
+  <data name="Label-VM.power_state-unknown" xml:space="preserve">
+    <value>不明</value>
+  </data>
+  <data name="Label-VM.uptime" xml:space="preserve">
+    <value>起動からの経過時間</value>
+  </data>
+  <data name="Label-host.ServerMemory" xml:space="preserve">
+    <value>サーバー</value>
+  </data>
+  <data name="Label-host.VMMemory" xml:space="preserve">
+    <value>VM</value>
+  </data>
+  <data name="Label-host.XenMemory" xml:space="preserve">
+    <value>Xen</value>
+  </data>
+  <data name="Label-host.address" xml:space="preserve">
+    <value>アドレス</value>
+  </data>
+  <data name="Label-host.agentUptime" xml:space="preserve">
+    <value>Toolstack アップタイム</value>
+  </data>
+  <data name="Label-host.edition" xml:space="preserve">
+    <value>エディション</value>
+  </data>
+  <data name="Label-host.edition-advanced" xml:space="preserve">
+    <value>Citrix XenServer Advanced Edition</value>
+  </data>
+  <data name="Label-host.edition-enterprise" xml:space="preserve">
+    <value>Citrix XenServer Enterprise Edition</value>
+  </data>
+  <data name="Label-host.edition-enterprise-xd" xml:space="preserve">
+    <value>Citrix XenServer for XenDesktop</value>
+  </data>
+  <data name="Label-host.edition-free" xml:space="preserve">
+    <value>Citrix XenServer</value>
+  </data>
+  <data name="Label-host.edition-platinum" xml:space="preserve">
+    <value>Citrix XenServer Platinum Edition</value>
+  </data>
+  <data name="Label-host.enabled" xml:space="preserve">
+    <value>有効</value>
+  </data>
+  <data name="Label-host.external_auth_service_name" xml:space="preserve">
+    <value>ドメイン</value>
+  </data>
+  <data name="Label-host.hostname" xml:space="preserve">
+    <value>DNS ホスト名</value>
+  </data>
+  <data name="Label-host.iscsi_iqn" xml:space="preserve">
+    <value>iSCSI IQN</value>
+  </data>
+  <data name="Label-host.license_params-expiry" xml:space="preserve">
+    <value>有効期限</value>
+  </data>
+  <data name="Label-host.license_params-productcode" xml:space="preserve">
+    <value>製品コード</value>
+  </data>
+  <data name="Label-host.license_params-serialnumber" xml:space="preserve">
+    <value>シリアル番号</value>
+  </data>
+  <data name="Label-host.license_params-sku_type" xml:space="preserve">
+    <value>サーバー ライセンス</value>
+  </data>
+  <data name="Label-host.license_server-address" xml:space="preserve">
+    <value>ライセンス サーバーのアドレス</value>
+  </data>
+  <data name="Label-host.license_server-port" xml:space="preserve">
+    <value>ライセンス サーバーのポート</value>
+  </data>
+  <data name="Label-host.log_destination" xml:space="preserve">
+    <value>ログの記録先</value>
+  </data>
+  <data name="Label-host.name_description" xml:space="preserve">
+    <value>説明</value>
+  </data>
+  <data name="Label-host.name_label" xml:space="preserve">
+    <value>名前</value>
+  </data>
+  <data name="Label-host.pool_members" xml:space="preserve">
+    <value>プール メンバ</value>
+  </data>
+  <data name="Label-host.sku_type-FG-dell_xe_enterprise" xml:space="preserve">
+    <value>Citrix Essentials for XenServer, Dell Enterprise Edition</value>
+  </data>
+  <data name="Label-host.sku_type-FG-dell_xe_express" xml:space="preserve">
+    <value>Citrix XenServer Dell Edition</value>
+  </data>
+  <data name="Label-host.sku_type-FG-dell_xe_server" xml:space="preserve">
+    <value>Citrix Essentials for XenServer, Dell Enterprise Edition</value>
+  </data>
+  <data name="Label-host.sku_type-FG-hp_xe_enterprise" xml:space="preserve">
+    <value>Citrix Essentials for XenServer, HP Enterprise Edition</value>
+  </data>
+  <data name="Label-host.sku_type-FG-hp_xe_express" xml:space="preserve">
+    <value>Citrix XenServer HP Edition</value>
+  </data>
+  <data name="Label-host.sku_type-FG-hp_xe_server" xml:space="preserve">
+    <value>Citrix Essentials for XenServer, HP Enterprise Edition</value>
+  </data>
+  <data name="Label-host.sku_type-FG-xe_enterprise" xml:space="preserve">
+    <value>Citrix Essentials for XenServer</value>
+  </data>
+  <data name="Label-host.sku_type-FG-xe_express" xml:space="preserve">
+    <value>Citrix XenServer</value>
+  </data>
+  <data name="Label-host.sku_type-FG-xe_server" xml:space="preserve">
+    <value>Citrix Essentials for XenServer</value>
+  </data>
+  <data name="Label-host.sku_type-dell_xe_enterprise" xml:space="preserve">
+    <value>Citrix XenServer Dell Enterprise Edition</value>
+  </data>
+  <data name="Label-host.sku_type-dell_xe_express" xml:space="preserve">
+    <value>Citrix XenServer Dell Express Edition</value>
+  </data>
+  <data name="Label-host.sku_type-dell_xe_server" xml:space="preserve">
+    <value>Citrix XenServer Dell Server Edition</value>
+  </data>
+  <data name="Label-host.sku_type-hp_xe_enterprise" xml:space="preserve">
+    <value>Citrix XenServer HP Enterprise Edition</value>
+  </data>
+  <data name="Label-host.sku_type-hp_xe_express" xml:space="preserve">
+    <value>Citrix XenServer HP Select Edition</value>
+  </data>
+  <data name="Label-host.sku_type-hp_xe_server" xml:space="preserve">
+    <value>Citrix XenServer HP Server Edition</value>
+  </data>
+  <data name="Label-host.sku_type-xe_enterprise" xml:space="preserve">
+    <value>Citrix XenServer Enterprise Edition</value>
+  </data>
+  <data name="Label-host.sku_type-xe_express" xml:space="preserve">
+    <value>Citrix XenServer Express Edition</value>
+  </data>
+  <data name="Label-host.sku_type-xe_server" xml:space="preserve">
+    <value>Citrix XenServer Server Edition</value>
+  </data>
+  <data name="Label-host.software_version-build_number" xml:space="preserve">
+    <value>XenServer ビルド番号</value>
+  </data>
+  <data name="Label-host.software_version-date" xml:space="preserve">
+    <value>XenServer ビルド日</value>
+  </data>
+  <data name="Label-host.software_version-product_version" xml:space="preserve">
+    <value>XenServer バージョン</value>
+  </data>
+  <data name="Label-host.system_status-CVSM" xml:space="preserve">
+    <value>Citrix StorageLink 設定</value>
+  </data>
+  <data name="Label-host.system_status-X11" xml:space="preserve">
+    <value>X サーバー ログ</value>
+  </data>
+  <data name="Label-host.system_status-X11-auth" xml:space="preserve">
+    <value>X11 認証</value>
+  </data>
+  <data name="Label-host.system_status-blobs" xml:space="preserve">
+    <value>ユーザー作成のバイナリ オブジェクト</value>
+  </data>
+  <data name="Label-host.system_status-boot-loader" xml:space="preserve">
+    <value>ブート ローダー設定</value>
+  </data>
+  <data name="Label-host.system_status-client-logs" xml:space="preserve">
+    <value>XenCenter ログ</value>
+  </data>
+  <data name="Label-host.system_status-device-model" xml:space="preserve">
+    <value>デバイスのモデル</value>
+  </data>
+  <data name="Label-host.system_status-disk-info" xml:space="preserve">
+    <value>ディスク情報</value>
+  </data>
+  <data name="Label-host.system_status-filesystem_summarise" xml:space="preserve">
+    <value>変更されたファイル</value>
+  </data>
+  <data name="Label-host.system_status-firstboot" xml:space="preserve">
+    <value>初回起動スクリプト</value>
+  </data>
+  <data name="Label-host.system_status-hardware-info" xml:space="preserve">
+    <value>ハードウェア情報</value>
+  </data>
+  <data name="Label-host.system_status-hdparm-t" xml:space="preserve">
+    <value>ローカル ディスク パフォーマンス テスト</value>
+  </data>
+  <data name="Label-host.system_status-high-availability" xml:space="preserve">
+    <value>高可用性</value>
+  </data>
+  <data name="Label-host.system_status-host-crashdump-dumps" xml:space="preserve">
+    <value>クラッシュ ダンプ ファイル</value>
+  </data>
+  <data name="Label-host.system_status-host-crashdump-logs" xml:space="preserve">
+    <value>クラッシュ ダンプ ログ</value>
+  </data>
+  <data name="Label-host.system_status-kernel-info" xml:space="preserve">
+    <value>カーネル情報</value>
+  </data>
+  <data name="Label-host.system_status-loopback-devices" xml:space="preserve">
+    <value>ループバック デバイス</value>
+  </data>
+  <data name="Label-host.system_status-multipath" xml:space="preserve">
+    <value>マルチパス設定</value>
+  </data>
+  <data name="Label-host.system_status-network-config" xml:space="preserve">
+    <value>ネットワーク スクリプト</value>
+  </data>
+  <data name="Label-host.system_status-network-status" xml:space="preserve">
+    <value>ネットワークの状態</value>
+  </data>
+  <data name="Label-host.system_status-oem" xml:space="preserve">
+    <value>OEM 固有のログ</value>
+  </data>
+  <data name="Label-host.system_status-pam" xml:space="preserve">
+    <value>認証モジュール設定</value>
+  </data>
+  <data name="Label-host.system_status-persistent-stats" xml:space="preserve">
+    <value>永続的統計値</value>
+  </data>
+  <data name="Label-host.system_status-process-list" xml:space="preserve">
+    <value>プロセス一覧</value>
+  </data>
+  <data name="Label-host.system_status-system-info" xml:space="preserve">
+    <value>システム設定</value>
+  </data>
+  <data name="Label-host.system_status-system-logs" xml:space="preserve">
+    <value>システム ログ</value>
+  </data>
+  <data name="Label-host.system_status-system-services" xml:space="preserve">
+    <value>システム サービス</value>
+  </data>
+  <data name="Label-host.system_status-tapdisk-logs" xml:space="preserve">
+    <value>ストレージ サブシステム ログ</value>
+  </data>
+  <data name="Label-host.system_status-vncterm" xml:space="preserve">
+    <value>VNCTerm クラッシュ ダンプ</value>
+  </data>
+  <data name="Label-host.system_status-wlb" xml:space="preserve">
+    <value>ワークロード バランスの状態</value>
+  </data>
+  <data name="Label-host.system_status-xapi" xml:space="preserve">
+    <value>XenServer デーモンの内部ログ</value>
+  </data>
+  <data name="Label-host.system_status-xapi-debug" xml:space="preserve">
+    <value>XenServer デーモン クラッシュ ダンプ</value>
+  </data>
+  <data name="Label-host.system_status-xapi-subprocess" xml:space="preserve">
+    <value>XenServer デーモン サブプロセス</value>
+  </data>
+  <data name="Label-host.system_status-xen-info" xml:space="preserve">
+    <value>ハイパーバイザー設定</value>
+  </data>
+  <data name="Label-host.system_status-xenopsd" xml:space="preserve">
+    <value>VM 内部診断</value>
+  </data>
+  <data name="Label-host.system_status-xenserver-config" xml:space="preserve">
+    <value>XenServer 設定</value>
+  </data>
+  <data name="Label-host.system_status-xenserver-databases" xml:space="preserve">
+    <value>XenServer データベース</value>
+  </data>
+  <data name="Label-host.system_status-xenserver-domains" xml:space="preserve">
+    <value>XenServer ドメイン一覧</value>
+  </data>
+  <data name="Label-host.system_status-xenserver-install" xml:space="preserve">
+    <value>XenServer インストール ログ ファイル</value>
+  </data>
+  <data name="Label-host.system_status-xenserver-logs" xml:space="preserve">
+    <value>XenServer ログ</value>
+  </data>
+  <data name="Label-host.system_status-xha-liveset" xml:space="preserve">
+    <value>高可用性ライブセット</value>
+  </data>
+  <data name="Label-host.system_status-yum" xml:space="preserve">
+    <value>RPM パッケージ データベース</value>
+  </data>
+  <data name="Label-host.uptime" xml:space="preserve">
+    <value>サーバー アップタイム</value>
+  </data>
+  <data name="Label-host.uuid" xml:space="preserve">
+    <value>UUID</value>
+  </data>
+  <data name="Label-performance.avg_cpu" xml:space="preserve">
+    <value>平均 CPU</value>
+  </data>
+  <data name="Label-performance.bond_rx" xml:space="preserve">
+    <value>{0} 受信</value>
+  </data>
+  <data name="Label-performance.bond_rx_errors" xml:space="preserve">
+    <value>{0} 受信エラー</value>
+  </data>
+  <data name="Label-performance.bond_tx" xml:space="preserve">
+    <value>{0} 送信</value>
+  </data>
+  <data name="Label-performance.bond_tx_errors" xml:space="preserve">
+    <value>{0} 送信エラー</value>
+  </data>
+  <data name="Label-performance.cpu" xml:space="preserve">
+    <value>CPU {0}</value>
+  </data>
+  <data name="Label-performance.lo_rx" xml:space="preserve">
+    <value>ループバック受信</value>
+  </data>
+  <data name="Label-performance.lo_rx_errors" xml:space="preserve">
+    <value>ループバック受信エラー</value>
+  </data>
+  <data name="Label-performance.lo_tx" xml:space="preserve">
+    <value>ループバック送信</value>
+  </data>
+  <data name="Label-performance.lo_tx_errors" xml:space="preserve">
+    <value>ループバック送信エラー</value>
+  </data>
+  <data name="Label-performance.loadavg" xml:space="preserve">
+    <value>コントロール ドメイン ロード</value>
+  </data>
+  <data name="Label-performance.memory" xml:space="preserve">
+    <value>メモリ合計</value>
+  </data>
+  <data name="Label-performance.memory_free_kib" xml:space="preserve">
+    <value>空きメモリ</value>
+  </data>
+  <data name="Label-performance.memory_internal_free" xml:space="preserve">
+    <value>空きメモリ</value>
+  </data>
+  <data name="Label-performance.memory_internal_used" xml:space="preserve">
+    <value>使用メモリ</value>
+  </data>
+  <data name="Label-performance.memory_target" xml:space="preserve">
+    <value>メモリ目標値</value>
+  </data>
+  <data name="Label-performance.memory_total_kib" xml:space="preserve">
+    <value>メモリ合計</value>
+  </data>
+  <data name="Label-performance.memory_used_kib" xml:space="preserve">
+    <value>使用メモリ</value>
+  </data>
+  <data name="Label-performance.network_latency" xml:space="preserve">
+    <value>ネットワーク遅延</value>
+  </data>
+  <data name="Label-performance.nic_rx" xml:space="preserve">
+    <value>NIC {0} 受信</value>
+  </data>
+  <data name="Label-performance.nic_rx_errors" xml:space="preserve">
+    <value>NIC {0} 受信エラー</value>
+  </data>
+  <data name="Label-performance.nic_tx" xml:space="preserve">
+    <value>NIC {0} 送信</value>
+  </data>
+  <data name="Label-performance.nic_tx_errors" xml:space="preserve">
+    <value>NIC {0} 送信エラー</value>
+  </data>
+  <data name="Label-performance.runstate_blocked" xml:space="preserve">
+    <value>VCPU アイドル</value>
+  </data>
+  <data name="Label-performance.runstate_concurrency_hazard" xml:space="preserve">
+    <value>VCPU 並列性のハザード</value>
+  </data>
+  <data name="Label-performance.runstate_entry_time" xml:space="preserve">
+    <value>VCPU エントリ時間</value>
+  </data>
+  <data name="Label-performance.runstate_full_contention" xml:space="preserve">
+    <value>VCPU 完全競合</value>
+  </data>
+  <data name="Label-performance.runstate_fullrun" xml:space="preserve">
+    <value>VCPU 完全実行</value>
+  </data>
+  <data name="Label-performance.runstate_partial_contention" xml:space="preserve">
+    <value>VCPU 部分競合</value>
+  </data>
+  <data name="Label-performance.runstate_partial_run" xml:space="preserve">
+    <value>VCPU 部分実行</value>
+  </data>
+  <data name="Label-performance.sr_cache_hits" xml:space="preserve">
+    <value>IntelliCache キャッシュ成功</value>
+  </data>
+  <data name="Label-performance.sr_cache_misses" xml:space="preserve">
+    <value>IntelliCache キャッシュ失敗</value>
+  </data>
+  <data name="Label-performance.sr_cache_size" xml:space="preserve">
+    <value>IntelliCache キャッシュ サイズ</value>
+  </data>
+  <data name="Label-performance.statefile_latency" xml:space="preserve">
+    <value>高可用性ステート ファイル遅延</value>
+  </data>
+  <data name="Label-performance.tap_rx" xml:space="preserve">
+    <value>TAP {0} 受信</value>
+  </data>
+  <data name="Label-performance.tap_rx_errors" xml:space="preserve">
+    <value>TAP {0} 受信エラー</value>
+  </data>
+  <data name="Label-performance.tap_tx" xml:space="preserve">
+    <value>TAP {0} 送信</value>
+  </data>
+  <data name="Label-performance.tap_tx_errors" xml:space="preserve">
+    <value>TAP {0} 送信エラー</value>
+  </data>
+  <data name="Label-performance.vbd_read" xml:space="preserve">
+    <value>ディスク {0} 読み取り</value>
+  </data>
+  <data name="Label-performance.vbd_read_latency" xml:space="preserve">
+    <value>ディスク {0} 読み取り遅延</value>
+  </data>
+  <data name="Label-performance.vbd_write" xml:space="preserve">
+    <value>ディスク {0} 書き込み</value>
+  </data>
+  <data name="Label-performance.vbd_write_latency" xml:space="preserve">
+    <value>ディスク {0} 書き込み遅延</value>
+  </data>
+  <data name="Label-performance.vif_rx" xml:space="preserve">
+    <value>{0} 受信</value>
+  </data>
+  <data name="Label-performance.vif_rx_errors" xml:space="preserve">
+    <value>{0} 受信エラー</value>
+  </data>
+  <data name="Label-performance.vif_tx" xml:space="preserve">
+    <value>{0} 送信</value>
+  </data>
+  <data name="Label-performance.vif_tx_errors" xml:space="preserve">
+    <value>{0} 送信エラー</value>
+  </data>
+  <data name="Label-performance.vlan_rx" xml:space="preserve">
+    <value>{0} 受信</value>
+  </data>
+  <data name="Label-performance.vlan_rx_errors" xml:space="preserve">
+    <value>{0} 受信エラー</value>
+  </data>
+  <data name="Label-performance.vlan_tx" xml:space="preserve">
+    <value>{0} 送信</value>
+  </data>
+  <data name="Label-performance.vlan_tx_errors" xml:space="preserve">
+    <value>{0} 送信エラー</value>
+  </data>
+  <data name="Label-performance.xapi_allocation_kib" xml:space="preserve">
+    <value>エージェント メモリ割り当て</value>
+  </data>
+  <data name="Label-performance.xapi_free_memory_kib" xml:space="preserve">
+    <value>空きエージェント メモリ</value>
+  </data>
+  <data name="Label-performance.xapi_latency" xml:space="preserve">
+    <value>XenServer ヘルスチェック遅延</value>
+  </data>
+  <data name="Label-performance.xapi_live_memory_kib" xml:space="preserve">
+    <value>エージェント メモリ ライブ</value>
+  </data>
+  <data name="Label-performance.xapi_memory_usage_kib" xml:space="preserve">
+    <value>エージェント メモリ使用</value>
+  </data>
+  <data name="Label-performance.xapi_rx" xml:space="preserve">
+    <value>&lt;内部&gt; ネットワーク {0} 受信</value>
+  </data>
+  <data name="Label-performance.xapi_rx_errors" xml:space="preserve">
+    <value>&lt;内部&gt; ネットワーク {0} 受信エラー</value>
+  </data>
+  <data name="Label-performance.xapi_tx" xml:space="preserve">
+    <value>&lt;内部&gt; ネットワーク {0} 送信</value>
+  </data>
+  <data name="Label-performance.xapi_tx_errors" xml:space="preserve">
+    <value>&lt;内部&gt; ネットワーク {0} 送信エラー</value>
+  </data>
+  <data name="Label-performance.xenbr_rx" xml:space="preserve">
+    <value>{0} 受信</value>
+  </data>
+  <data name="Label-performance.xenbr_rx_errors" xml:space="preserve">
+    <value>{0} 受信エラー</value>
+  </data>
+  <data name="Label-performance.xenbr_tx" xml:space="preserve">
+    <value>{0} 送信</value>
+  </data>
+  <data name="Label-performance.xenbr_tx_errors" xml:space="preserve">
+    <value>{0} 送信エラー</value>
+  </data>
+  <data name="Label-pool.ha_enabled" xml:space="preserve">
+    <value>プールの高可用性が有効</value>
+  </data>
+  <data name="Message.action-ha_heartbeat_approaching_timeout" xml:space="preserve">
+    <value>高可用性設定</value>
+  </data>
+  <data name="Message.action-ha_host_failed" xml:space="preserve">
+    <value>高可用性設定</value>
+  </data>
+  <data name="Message.action-ha_host_was_fenced" xml:space="preserve">
+    <value>高可用性設定</value>
+  </data>
+  <data name="Message.action-ha_network_bonding_error" xml:space="preserve">
+    <value>高可用性設定</value>
+  </data>
+  <data name="Message.action-ha_pool_drop_in_plan_exists_for" xml:space="preserve">
+    <value>高可用性設定</value>
+  </data>
+  <data name="Message.action-ha_pool_overcommitted" xml:space="preserve">
+    <value>高可用性設定</value>
+  </data>
+  <data name="Message.action-ha_protected_vm_restart_failed" xml:space="preserve">
+    <value>高可用性設定</value>
+  </data>
+  <data name="Message.action-ha_statefile_approaching_timeout" xml:space="preserve">
+    <value>高可用性設定</value>
+  </data>
+  <data name="Message.action-ha_statefile_lost" xml:space="preserve">
+    <value>高可用性設定</value>
+  </data>
+  <data name="Message.action-ha_xapi_healthcheck_approaching_timeout" xml:space="preserve">
+    <value>高可用性設定</value>
+  </data>
+  <data name="Message.action-license_does_not_support_pooling" xml:space="preserve">
+    <value>XenServer のオンライン購入</value>
+  </data>
+  <data name="Message.action-license_expires_soon" xml:space="preserve">
+    <value>XenServer のオンライン購入</value>
+  </data>
+  <data name="Message.action-multipath_periodic_alert" xml:space="preserve">
+    <value>ログ ファイルの表示</value>
+  </data>
+  <data name="Message.action-vbd_qos_failed" xml:space="preserve">
+    <value>ライセンスの適用</value>
+  </data>
+  <data name="Message.action-vcpu_qos_failed" xml:space="preserve">
+    <value>ライセンスの適用</value>
+  </data>
+  <data name="Message.action-vif_qos_failed" xml:space="preserve">
+    <value>ライセンスの適用</value>
+  </data>
+  <data name="Message.body-alarm" xml:space="preserve">
+    <value>アラート '{0}' を認識できませんでした。</value>
+  </data>
+  <data name="Message.body-extauth_in_pool_is_non_homogeneous" xml:space="preserve">
+    <value>'{0}' 内で使用されている外部認証サービスが矛盾しています。</value>
+  </data>
+  <data name="Message.body-extauth_init_in_host_failed" xml:space="preserve">
+    <value>サーバー '{0}' で Active Directory サーバーへの接続に失敗しました。
+
+{1}</value>
+  </data>
+  <data name="Message.body-grace_license" xml:space="preserve">
+    <value>{0} に猶予ライセンスが発行されました。ライセンス サーバーに接続できないか、ホストがアップグレード直後である場合に猶予ランセンスが発行されます。</value>
+  </data>
+  <data name="Message.body-ha_heartbeat_approaching_timeout" xml:space="preserve">
+    <value>サーバー '{0}' で高可用性ネットワーク ハートビートへの応答に時間がかかっています。隔離される可能性があります。</value>
+  </data>
+  <data name="Message.body-ha_host_failed" xml:space="preserve">
+    <value>サーバー '{0}' に障害が発生しました。</value>
+  </data>
+  <data name="Message.body-ha_host_was_fenced" xml:space="preserve">
+    <value>サーバー '{0}' は隔離された後、再起動に成功し、プールに再追加されました。</value>
+  </data>
+  <data name="Message.body-ha_network_bonding_error" xml:space="preserve">
+    <value>サーバー '{1}' のネットワーク ボンディング '{0}' のパスの 1 つに障害が発生しました。このため、高可用性の冗長性が低下します。</value>
+  </data>
+  <data name="Message.body-ha_pool_drop_in_plan_exists_for-0" xml:space="preserve">
+    <value>プール '{0}' に対するフェイルオーバー トレランスが 0 になりました。高可用性は保証されません。</value>
+  </data>
+  <data name="Message.body-ha_pool_drop_in_plan_exists_for-1" xml:space="preserve">
+    <value>プール '{0}' に対するフェイルオーバー トレランスが低下しました。高可用性で保証されるホスト障害はあと 1 つです。</value>
+  </data>
+  <data name="Message.body-ha_pool_drop_in_plan_exists_for-n" xml:space="preserve">
+    <value>プール '{0}' に対するフェイルオーバー トレランスが低下しました。高可用性で保証されるホスト障害数はあと {1} です。</value>
+  </data>
+  <data name="Message.body-ha_pool_overcommitted" xml:space="preserve">
+    <value>プール '{0}' の最大許容障害数が指定値未満になりました。 </value>
+  </data>
+  <data name="Message.body-ha_protected_vm_restart_failed" xml:space="preserve">
+    <value>高可用性で保護されている仮想マシン '{0}' の起動に失敗しました。</value>
+  </data>
+  <data name="Message.body-ha_statefile_approaching_timeout" xml:space="preserve">
+    <value>サーバー '{0}' でハートビート ストレージへの書き込みに時間がかかっています。隔離される可能性があります。</value>
+  </data>
+  <data name="Message.body-ha_statefile_lost" xml:space="preserve">
+    <value>プール '{0}'のサーバーでハートビート SR にアクセスできません。このため、高可用性による保護に問題が生じます。</value>
+  </data>
+  <data name="Message.body-ha_xapi_healthcheck_approaching_timeout" xml:space="preserve">
+    <value>サーバー '{0}'上の XenServer で応答に時間がかかっています。隔離される可能性があります。</value>
+  </data>
+  <data name="Message.body-host_clock_skew_detected" xml:space="preserve">
+    <value>サーバー '{0}' の時計がプール '{1}' のほかのサーバーと同期していません。これにより、仮想マシンの移行や収集されるパフォーマンス データに問題が生じる場合があります。</value>
+  </data>
+  <data name="Message.body-host_clock_went_backwards" xml:space="preserve">
+    <value>サーバー '{0}' の時計が戻されました。</value>
+  </data>
+  <data name="Message.body-host_sync_data_failed" xml:space="preserve">
+    <value>プール内でのパフォーマンス統計値の同期に一時的な障害が発生しました。一部のサーバーがオフラインであることが考えられます。</value>
+  </data>
+  <data name="Message.body-license_does_not_support_pooling" xml:space="preserve">
+    <value>サーバー '{0}' のライセンスが変更されたか有効期限が切れました。このため、XenServer Enterprise の機能は使用できなくなりました。</value>
+  </data>
+  <data name="Message.body-license_expired" xml:space="preserve">
+    <value>{0} のライセンスの有効期限が切れました。</value>
+  </data>
+  <data name="Message.body-license_expires_soon" xml:space="preserve">
+    <value>ホスト '{0}' のライセンスの有効期限は {1} に切れます。</value>
+  </data>
+  <data name="Message.body-license_not_available" xml:space="preserve">
+    <value>指定された種類のライセンスがないため、{0} にライセンスが発行されませんでした。</value>
+  </data>
+  <data name="Message.body-license_server_connected" xml:space="preserve">
+    <value>サーバー {0} がライセンス サーバーに接続されました。</value>
+  </data>
+  <data name="Message.body-license_server_unavailable" xml:space="preserve">
+    <value>サーバー {0} がライセンス サーバーから切断されました。</value>
+  </data>
+  <data name="Message.body-license_server_unreachable" xml:space="preserve">
+    <value>指定されたアドレスおよびポートでランセンス サーバーに接続できないため、{0} にライセンスがチェックアウトされませんでした。接続設定およびライセンス サーバーが動作していることを確認してください。</value>
+  </data>
+  <data name="Message.body-metadata_lun_broken" xml:space="preserve">
+    <value>プール '{0}' で 高可用性メタデータ ディスクにアクセスできません。アクセスが復元されるまで、サーバー障害時のプール メタデータの変更内容が失われる場合があります。</value>
+  </data>
+  <data name="Message.body-metadata_lun_healthy" xml:space="preserve">
+    <value>プール '{0}' の高可用性メタデータ ディスクへのアクセスが復元されました。これにより、サーバー障害からの回復が正しく実行されるようになりました。</value>
+  </data>
+  <data name="Message.body-multipath_periodic_alert" xml:space="preserve">
+    <value>サーバー '{0}' でマルチパスの状態に変更がありました。現在、{2} パス中 {1} パスがアクティブです。詳しくは、XenCenter のログを参照してください。</value>
+  </data>
+  <data name="Message.body-multipath_periodic_alert_healthy" xml:space="preserve">
+    <value>プール '{0}' のサーバーでマルチパスの状態に変更がありました。現在、すべてのパスがアクティブです。詳しくは、XenCenter のログを参照してください。</value>
+  </data>
+  <data name="Message.body-multipath_periodic_alert_healthy_standalone" xml:space="preserve">
+    <value>サーバー '{0}' でマルチパスの状態に変更がありました。現在、すべてのパスがアクティブです。詳しくは、XenCenter のログを参照してください。</value>
+  </data>
+  <data name="Message.body-multipath_periodic_alert_summary" xml:space="preserve">
+    <value>プール '{0}' のサーバーでマルチパスの状態に変更がありました。現在、次のサーバーにアクティブでないパスがあります。{1}。詳しくは、XenCenter のログを参照してください。</value>
+  </data>
+  <data name="Message.body-pbd_plug_failed_on_server_start" xml:space="preserve">
+    <value>サーバー '{0}' の起動時にストレージ リポジトリを接続できませんでした。[ストレージ] メニューの [修復] でこの問題を解決できる場合があります。</value>
+  </data>
+  <data name="Message.body-pool_master_transition" xml:space="preserve">
+    <value>現在、サーバー '{0}' がプール '{1}' のマスタとして動作しています。</value>
+  </data>
+  <data name="Message.body-vbd_qos_failed" xml:space="preserve">
+    <value>仮想マシン '{1}' のディスク '{0}' の QoS (サービス品質) 設定を適用できません。</value>
+  </data>
+  <data name="Message.body-vcpu_qos_failed" xml:space="preserve">
+    <value>仮想マシン '{1}' の VCPU '{0}' の QoS (サービス品質) 設定を適用できません。</value>
+  </data>
+  <data name="Message.body-vif_qos_failed" xml:space="preserve">
+    <value>仮想マシン '{1}' のネットワーク インターフェイス '{0}' の QoS (サービス品質) 設定を適用できません。</value>
+  </data>
+  <data name="Message.body-vm_cloned" xml:space="preserve">
+    <value>仮想マシン '{0}' が複製されました。</value>
+  </data>
+  <data name="Message.body-vm_crashed" xml:space="preserve">
+    <value>仮想マシン '{0}' がクラッシュしました。</value>
+  </data>
+  <data name="Message.body-vm_rebooted" xml:space="preserve">
+    <value>仮想マシン '{0}' が再起動しました。</value>
+  </data>
+  <data name="Message.body-vm_resumed" xml:space="preserve">
+    <value>仮想マシン '{0}' が再開しました。</value>
+  </data>
+  <data name="Message.body-vm_shutdown" xml:space="preserve">
+    <value>仮想マシン '{0}' がシャットダウンしました。</value>
+  </data>
+  <data name="Message.body-vm_started" xml:space="preserve">
+    <value>仮想マシン '{0}' が起動しました。</value>
+  </data>
+  <data name="Message.body-vm_suspended" xml:space="preserve">
+    <value>仮想マシン '{0}' が一時停止しました。</value>
+  </data>
+  <data name="Message.body-vm_uncooperative" xml:space="preserve">
+    <value>仮想マシン '{0}' のメモリ使用が要求どおりに減少しませんでした。</value>
+  </data>
+  <data name="Message.body-wlb_consultation_failed" xml:space="preserve">
+    <value>プール '{0}' で WLB サーバーから VM '{1}' に対する推奨再配置情報を取得できません。</value>
+  </data>
+  <data name="Message.body-wlb_optimization_alert" xml:space="preserve">
+    <value>WLB により、プール '{0}' の最適化が必要であることが報告されました。プールの最適化モードは '{1}' で、アラートの重要度は '{2}' です。</value>
+  </data>
+  <data name="Message.help-alarm" xml:space="preserve">
+    <value>アラートのヘルプ</value>
+  </data>
+  <data name="Message.help-ha_heartbeat_approaching_timeout" xml:space="preserve">
+    <value>高可用性のヘルプ</value>
+  </data>
+  <data name="Message.help-ha_host_failed" xml:space="preserve">
+    <value>高可用性のヘルプ</value>
+  </data>
+  <data name="Message.help-ha_host_was_fenced" xml:space="preserve">
+    <value>高可用性のヘルプ</value>
+  </data>
+  <data name="Message.help-ha_network_bonding_error" xml:space="preserve">
+    <value>高可用性のヘルプ</value>
+  </data>
+  <data name="Message.help-ha_pool_drop_in_plan_exists_for" xml:space="preserve">
+    <value>高可用性のヘルプ</value>
+  </data>
+  <data name="Message.help-ha_pool_overcommitted" xml:space="preserve">
+    <value>高可用性のヘルプ</value>
+  </data>
+  <data name="Message.help-ha_protected_vm_restart_failed" xml:space="preserve">
+    <value>高可用性のヘルプ</value>
+  </data>
+  <data name="Message.help-ha_statefile_approaching_timeout" xml:space="preserve">
+    <value>高可用性のヘルプ</value>
+  </data>
+  <data name="Message.help-ha_statefile_lost" xml:space="preserve">
+    <value>高可用性のヘルプ</value>
+  </data>
+  <data name="Message.help-ha_xapi_healthcheck_approaching_timeout" xml:space="preserve">
+    <value>高可用性のヘルプ</value>
+  </data>
+  <data name="Message.help-host_sync_data_failed" xml:space="preserve">
+    <value>高可用性のヘルプ</value>
+  </data>
+  <data name="Message.help-license_does_not_support_pooling" xml:space="preserve">
+    <value>ライセンスのヘルプ</value>
+  </data>
+  <data name="Message.help-pbd_plug_failed_on_server_start" xml:space="preserve">
+    <value>破損したストレージのヘルプ</value>
+  </data>
+  <data name="Message.help-vbd_qos_failed" xml:space="preserve">
+    <value>QoS のヘルプ</value>
+  </data>
+  <data name="Message.help-vcpu_qos_failed" xml:space="preserve">
+    <value>QoS のヘルプ</value>
+  </data>
+  <data name="Message.help-vif_qos_failed" xml:space="preserve">
+    <value>QoS のヘルプ</value>
+  </data>
+  <data name="Message.name-alarm" xml:space="preserve">
+    <value>認識されないアラート</value>
+  </data>
+  <data name="Message.name-bond_status_changed" xml:space="preserve">
+    <value>ボンディングの状態が変更されました</value>
+  </data>
+  <data name="Message.name-extauth_in_pool_is_non_homogeneous" xml:space="preserve">
+    <value>プール内で使用される認証方法が矛盾しています</value>
+  </data>
+  <data name="Message.name-extauth_init_in_host_failed" xml:space="preserve">
+    <value>Active Directory 認証が使用不可です</value>
+  </data>
+  <data name="Message.name-grace_license" xml:space="preserve">
+    <value>猶予ライセンスが発行されました。</value>
+  </data>
+  <data name="Message.name-ha_heartbeat_approaching_timeout" xml:space="preserve">
+    <value>高可用性ハートビートのタイムアウト</value>
+  </data>
+  <data name="Message.name-ha_host_failed" xml:space="preserve">
+    <value>サーバーの障害</value>
+  </data>
+  <data name="Message.name-ha_host_was_fenced" xml:space="preserve">
+    <value>サーバーのリカバリ</value>
+  </data>
+  <data name="Message.name-ha_network_bonding_error" xml:space="preserve">
+    <value>高可用性ネットワーク ボンディングのエラー</value>
+  </data>
+  <data name="Message.name-ha_pool_drop_in_plan_exists_for" xml:space="preserve">
+    <value>高可用性フェイルオーバー トレランスの低下</value>
+  </data>
+  <data name="Message.name-ha_pool_overcommitted" xml:space="preserve">
+    <value>高可用性フェイルオーバー トレランスの低下</value>
+  </data>
+  <data name="Message.name-ha_protected_vm_restart_failed" xml:space="preserve">
+    <value>高可用性で保護された VM の再起動の失敗</value>
+  </data>
+  <data name="Message.name-ha_statefile_approaching_timeout" xml:space="preserve">
+    <value>ハートビート SR のタイムアウト</value>
+  </data>
+  <data name="Message.name-ha_statefile_lost" xml:space="preserve">
+    <value>ハートビート SR のアクセス不可</value>
+  </data>
+  <data name="Message.name-ha_xapi_healthcheck_approaching_timeout" xml:space="preserve">
+    <value>XenServer ヘルスチェックのタイムアウト</value>
+  </data>
+  <data name="Message.name-host_clock_skew_detected" xml:space="preserve">
+    <value>サーバーの時計の非同期</value>
+  </data>
+  <data name="Message.name-host_clock_went_backwards" xml:space="preserve">
+    <value>サーバーの時計が戻されました</value>
+  </data>
+  <data name="Message.name-host_sync_data_failed" xml:space="preserve">
+    <value>XenServer 統計値の同期の失敗</value>
+  </data>
+  <data name="Message.name-ip_configured_pif_can_unplug" xml:space="preserve">
+    <value>ネットワーク設定の問題</value>
+  </data>
+  <data name="Message.name-license_does_not_support_pooling" xml:space="preserve">
+    <value>プール機能をサポートしないライセンス</value>
+  </data>
+  <data name="Message.name-license_expired" xml:space="preserve">
+    <value>ライセンスの有効期限が切れました。</value>
+  </data>
+  <data name="Message.name-license_expires_soon" xml:space="preserve">
+    <value>ライセンスの有効期限</value>
+  </data>
+  <data name="Message.name-license_not_available" xml:space="preserve">
+    <value>使用可能なライセンスがありません。</value>
+  </data>
+  <data name="Message.name-license_server_connected" xml:space="preserve">
+    <value>ライセンス サーバーへの接続に成功しました。</value>
+  </data>
+  <data name="Message.name-license_server_unavailable" xml:space="preserve">
+    <value>サーバーがライセンス サーバーから切断されました。</value>
+  </data>
+  <data name="Message.name-license_server_unreachable" xml:space="preserve">
+    <value>ライセンス サーバーに接続できません。</value>
+  </data>
+  <data name="Message.name-metadata_lun_broken" xml:space="preserve">
+    <value>高可用性メタデータ ディスクへのアクセス中断</value>
+  </data>
+  <data name="Message.name-metadata_lun_healthy" xml:space="preserve">
+    <value>高可用性メタデータ ディスクへのアクセス復元</value>
+  </data>
+  <data name="Message.name-multipath_periodic_alert" xml:space="preserve">
+    <value>マルチパス アラート</value>
+  </data>
+  <data name="Message.name-pbd_plug_failed_on_server_start" xml:space="preserve">
+    <value>サーバー起動時のストレージ接続の失敗</value>
+  </data>
+  <data name="Message.name-pool_master_transition" xml:space="preserve">
+    <value>プール マスタの変更</value>
+  </data>
+  <data name="Message.name-vbd_qos_failed" xml:space="preserve">
+    <value>VM ディスク QoS の失敗</value>
+  </data>
+  <data name="Message.name-vcpu_qos_failed" xml:space="preserve">
+    <value>VM VCPU QoS の失敗</value>
+  </data>
+  <data name="Message.name-vif_qos_failed" xml:space="preserve">
+    <value>VM ネットワーク インターフェイス QoS の失敗</value>
+  </data>
+  <data name="Message.name-vm_cloned" xml:space="preserve">
+    <value>VM の複製</value>
+  </data>
+  <data name="Message.name-vm_crashed" xml:space="preserve">
+    <value>VM のクラッシュ</value>
+  </data>
+  <data name="Message.name-vm_rebooted" xml:space="preserve">
+    <value>VM の再起動</value>
+  </data>
+  <data name="Message.name-vm_resumed" xml:space="preserve">
+    <value>VM の再開</value>
+  </data>
+  <data name="Message.name-vm_shutdown" xml:space="preserve">
+    <value>VM のシャットダウン</value>
+  </data>
+  <data name="Message.name-vm_started" xml:space="preserve">
+    <value>VM の起動</value>
+  </data>
+  <data name="Message.name-vm_suspended" xml:space="preserve">
+    <value>VM の一時停止</value>
+  </data>
+  <data name="Message.name-vm_uncooperative" xml:space="preserve">
+    <value>VM の非協調</value>
+  </data>
+  <data name="Message.name-vmpp_archive_failed_0" xml:space="preserve">
+    <value>この保護ポリシーのアーカイブ処理に失敗しました</value>
+  </data>
+  <data name="Message.name-vmpp_archive_lock_failed" xml:space="preserve">
+    <value>プールの保護ポリシーにより、アーカイブ サブポリシーが既に実行中です。後で再試行してください</value>
+  </data>
+  <data name="Message.name-vmpp_archive_missed_event" xml:space="preserve">
+    <value>ほかのスケジュールによるスナップショットが実行中であるため、スケジュールによるスナップショット アーカイブに失敗しました。スナップショットのサブポリシーを再設定してください。</value>
+  </data>
+  <data name="Message.name-vmpp_archive_succeeded" xml:space="preserve">
+    <value>アーカイブに成功しました</value>
+  </data>
+  <data name="Message.name-vmpp_archive_target_mount_failed" xml:space="preserve">
+    <value>アーカイブ先のマウントに失敗しました。アーカイブ先の設定を確認してください</value>
+  </data>
+  <data name="Message.name-vmpp_archive_target_unmount_failed" xml:space="preserve">
+    <value>アーカイブ先のアンマウントに失敗しました。ローカル ディレクトリが正しくマウントされており、ハンドルが開いていないことを確認してください</value>
+  </data>
+  <data name="Message.name-vmpp_backup_succeeded" xml:space="preserve">
+    <value>バックアップ成功</value>
+  </data>
+  <data name="Message.name-vmpp_license_error" xml:space="preserve">
+    <value>この処理は現在のライセンスでは実行できません</value>
+  </data>
+  <data name="Message.name-vmpp_snapshot_archive_already_exists" xml:space="preserve">
+    <value>このスナップショットはアーカイブ済みです</value>
+  </data>
+  <data name="Message.name-vmpp_snapshot_failed" xml:space="preserve">
+    <value>保護ポリシーに失敗しました</value>
+  </data>
+  <data name="Message.name-vmpp_snapshot_lock_failed" xml:space="preserve">
+    <value>この保護ポリシーのスナップショットは既に実行中です。後で再試行してください</value>
+  </data>
+  <data name="Message.name-vmpp_snapshot_missed_event" xml:space="preserve">
+    <value>ほかのスケジュールによるスナップショットが実行中であるため、スケジュールによるスナップショットに失敗しました。スナップショットのサブポリシーを再設定してください。</value>
+  </data>
+  <data name="Message.name-vmpp_snapshot_succeeded" xml:space="preserve">
+    <value>スナップショットに成功しました</value>
+  </data>
+  <data name="Message.name-vmpp_xapi_logon_failure" xml:space="preserve">
+    <value>API セッションにログインできません</value>
+  </data>
+  <data name="Message.name-wlb_consultation_failed" xml:space="preserve">
+    <value>WLB 情報の取得の失敗</value>
+  </data>
+  <data name="Message.name-wlb_host_power_off" xml:space="preserve">
+    <value>WLB ホスト電源切断</value>
+  </data>
+  <data name="Message.name-wlb_host_power_on" xml:space="preserve">
+    <value>WLB ホスト電源投入</value>
+  </data>
+  <data name="Message.name-wlb_optimization_alert" xml:space="preserve">
+    <value>WLB 最適化アラート</value>
+  </data>
+  <data name="Message.name-wlb_server_time_discrepancy" xml:space="preserve">
+    <value>WLB サーバーの時計の不一致</value>
+  </data>
+  <data name="Message.name-wlb_vm_relocation" xml:space="preserve">
+    <value>WLB VM 再配置</value>
+  </data>
+  <data name="Role.pool-admin.Description" xml:space="preserve">
+    <value>プール管理者には、XenServer のすべての機能および設定に対する完全なアクセス権が付与されます。プール管理者は、XenServer コンソールを使ってほかのユーザーの役割を管理できます。
+ 
+- 無制限
+- 役割およびユーザーの管理
+- XenServer コンソールへのアクセス</value>
+  </data>
+  <data name="Role.pool-admin.NameLabel" xml:space="preserve">
+    <value>プール管理者</value>
+  </data>
+  <data name="Role.pool-operator.Description" xml:space="preserve">
+    <value>プール オペレータはプール全体のリソースを管理し、ストレージのセットアップ、パッチ管理、およびリソース プール作成などを行います。
+ 
+- プール リソースの設定
+- 高可用性機能 (HA)、ワークロード バランス (WLB)、およびパッチ管理機能への完全なアクセス
+- 役割管理は不可</value>
+  </data>
+  <data name="Role.pool-operator.NameLabel" xml:space="preserve">
+    <value>プール オペレータ</value>
+  </data>
+  <data name="Role.read-only.Description" xml:space="preserve">
+    <value>読み取り専用の役割では、基本的な読み取りアクセスが付与されます。この役割のユーザーは、サーバーに接続して内容を表示できますが、コマンドを実行したり設定を変更したりすることはできません。
+ 
+- 読み取り専用アクセス</value>
+  </data>
+  <data name="Role.read-only.NameLabel" xml:space="preserve">
+    <value>読み取り専用</value>
+  </data>
+  <data name="Role.vm-admin.Description" xml:space="preserve">
+    <value>VM 管理者は、VM およびテンプレートを管理でき、必要なストレージにアクセスできます。各 VM の実行サーバーの選択は XenServer に依存し、動的メモリ制御 (DMC) やホーム サーバーの設定はテンプレートに依存します。
+ 
+- VM およびテンプレートの管理
+- 動的メモリ制御は不可
+- VM のスナップショット作成は不可
+- ホーム サーバーの指定やワークロードの実行サーバーの選択は不可</value>
+  </data>
+  <data name="Role.vm-admin.NameLabel" xml:space="preserve">
+    <value>VM 管理者</value>
+  </data>
+  <data name="Role.vm-operator.Description" xml:space="preserve">
+    <value>VM オペレータは、特定のリソース プールの VM にアクセスできます。VM のコンソールを使用でき、サーバーのリソースが許す限り VM の起動や停止を実行できます。
+ 
+- VM コンソールへの完全なアクセス
+- 基本的な VM ライフサイクル制御
+- VM プロパティやサーバー リソースの変更は不可</value>
+  </data>
+  <data name="Role.vm-operator.NameLabel" xml:space="preserve">
+    <value>VM オペレータ</value>
+  </data>
+  <data name="Role.vm-power-admin.Description" xml:space="preserve">
+    <value>VM パワー管理者には、VM およびテンプレートに対する完全な管理権限が付与されます。VM の実行サーバーを選択したり、動的メモリ制御 (DMC) やホーム サーバーを設定したりできます。
+ 
+- VM およびテンプレートの管理
+- 動的メモリ制御機能への完全なアクセス
+- VM のスナップショット作成機能への完全なアクセス
+- ホーム サーバーの指定やワークロードの実行サーバーの選択</value>
+  </data>
+  <data name="Role.vm-power-admin.NameLabel" xml:space="preserve">
+    <value>VM パワー管理者</value>
+  </data>
+  <data name="SR.name_description-ebs" xml:space="preserve">
+    <value>EBS ボリューム</value>
+  </data>
+  <data name="SR.name_description-ebs-host" xml:space="preserve">
+    <value>可用性ゾーン {0} 内の EBS ボリューム</value>
+  </data>
+  <data name="SR.name_description-local-hotplug-cd" xml:space="preserve">
+    <value>物理 DVD ドライブ</value>
+  </data>
+  <data name="SR.name_description-local-hotplug-cd-host" xml:space="preserve">
+    <value>{0} の物理 DVD ドライブ</value>
+  </data>
+  <data name="SR.name_description-local-hotplug-disk-host" xml:space="preserve">
+    <value>{0} の物理リムーバブル ストレージ</value>
+  </data>
+  <data name="SR.name_description-local-storage" xml:space="preserve">
+    <value>ローカル ストレージ</value>
+  </data>
+  <data name="SR.name_description-local-storage-host" xml:space="preserve">
+    <value>{0} のローカル ストレージ</value>
+  </data>
+  <data name="SR.name_description-xenserver-tools" xml:space="preserve">
+    <value>XenServer Tools ISO</value>
+  </data>
+  <data name="SR.name_label-ebs" xml:space="preserve">
+    <value>EBS</value>
+  </data>
+  <data name="SR.name_label-ebs-host" xml:space="preserve">
+    <value>{0} 内の EBS</value>
+  </data>
+  <data name="SR.name_label-local-hotplug-cd" xml:space="preserve">
+    <value>DVD ドライブ</value>
+  </data>
+  <data name="SR.name_label-local-hotplug-cd-host" xml:space="preserve">
+    <value>{0} の DVD ドライブ</value>
+  </data>
+  <data name="SR.name_label-local-hotplug-disk" xml:space="preserve">
+    <value>リムーバブル ストレージ</value>
+  </data>
+  <data name="SR.name_label-local-hotplug-disk-host" xml:space="preserve">
+    <value>{0} のリムーバブル ストレージ</value>
+  </data>
+  <data name="SR.name_label-local-storage" xml:space="preserve">
+    <value>ローカル ストレージ</value>
+  </data>
+  <data name="SR.name_label-local-storage-host" xml:space="preserve">
+    <value>{0} のローカル ストレージ</value>
+  </data>
+  <data name="SR.name_label-xenserver-tools" xml:space="preserve">
+    <value>XenServer Tools</value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 4.5 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 4.5 (32 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 4.5" xml:space="preserve">
+    <value>CentOS 4.5 をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 4.6 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 4.6 (32 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 4.6" xml:space="preserve">
+    <value>CentOS 4.6 をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 4.7 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 4.7 (32 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 4.7" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 4.7 が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 4.8 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 4.8 (32 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 5 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 5 (32 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 5 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 5 (64 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 5.0 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 5.0 (32 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 5.0 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 5.0 (64 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 5.0 x64" xml:space="preserve">
+    <value>CentOS 5.0 (64 ビット) をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 5.0" xml:space="preserve">
+    <value>CentOS 5.0 (32 ビット) をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 5.1 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 5.1 (32 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 5.1 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 5.1 (64 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 5.1 x64" xml:space="preserve">
+    <value>CentOS 5.1 (64 ビット) をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 5.1" xml:space="preserve">
+    <value>CentOS 5.1 (32 ビット) をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 5.2 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 5.2 (32 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 5.2 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 5.2 (64 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 5.2 x64" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 5.2 x64 が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 5.2" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 5.2 が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 5.3 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 5.3 (32 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 5.3 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 5.3 (64 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 5.3 x64" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 5.3 x64 が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 5.3" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 5.3 が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 5.4 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 5.4 (32 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 5.4 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 5.4 (64 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 6 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 6 (32 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 6 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 6 (64 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 6.0 (32-bit) (experimental)" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 6.0 (32 ビット) が動作する Linux VM を作成できます。このオペレーティング システムについては、現在試験的にサポートされています。</value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 6.0 (64-bit) (experimental)" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 6.0 (64 ビット) が動作する Linux VM を作成できます。このオペレーティング システムについては、現在試験的にサポートされています。</value>
+  </data>
+  <data name="VM.TemplateDescription-CentOS 6.0 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、CentOS 6.0 (64 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Citrix XenApp on Windows Server 2003 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Windows Server 2003 SP2 (32 ビット) が動作する VM を作成できます。Server、Enterprise、Datacenter、および SBS エディションがサポートされます。XenApp 用に最適化されたテンプレートです。</value>
+  </data>
+  <data name="VM.TemplateDescription-Citrix XenApp on Windows Server 2003 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Windows Server 2003 SP2 (64 ビット) が動作する VM を作成できます。Server、Enterprise、Datacenter、および SBS エディションがサポートされます。XenApp 用に最適化されたテンプレートです。</value>
+  </data>
+  <data name="VM.TemplateDescription-Citrix XenApp on Windows Server 2008 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Windows Server 2008 SP2 (32 ビット) が動作する VM を作成できます。すべてのエディションがサポートされます。XenApp 用に最適化されたテンプレートです。</value>
+  </data>
+  <data name="VM.TemplateDescription-Citrix XenApp on Windows Server 2008 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Windows Server 2008 SP2 (64 ビット) が動作する VM を作成できます。すべてのエディションがサポートされます。XenApp 用に最適化されたテンプレートです。</value>
+  </data>
+  <data name="VM.TemplateDescription-Citrix XenApp on Windows Server 2008 R2 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Windows Server 2008 R2、または Windows Server 2008 R2 SP1 (64 ビット) が動作する VM を作成できます。すべてのエディションがサポートされます。XenApp 用に最適化されたテンプレートです。</value>
+  </data>
+  <data name="VM.TemplateDescription-Citrix XenApp x64" xml:space="preserve">
+    <value>Citrix XenApp 用に最適化された Windows Server® 2003 (64 ビット) をインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Citrix XenApp" xml:space="preserve">
+    <value>Citrix XenApp 用に最適化された Windows Server® 2003 (32 ビット) をインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Debian Etch 4.0" xml:space="preserve">
+    <value>事前設定された Debian Etch 4.0 をインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Debian Lenny 5.0 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Debian Lenny 5.0 (32 ビット) が動作する VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Debian Lenny 5.0" xml:space="preserve">
+    <value>このテンプレートを使用して、Debian Lenny 5.0 が動作する VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Debian Sarge 3.1" xml:space="preserve">
+    <value>事前設定された Debian Sarge 3.1 をインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Debian Squeeze 6.0 (32-bit) (experimental)" xml:space="preserve">
+    <value>このテンプレートを使用して、Debian Squeeze 6.0 (32 ビット) が動作する VM を作成できます。このオペレーティング システムについては、現在試験的にサポートされています。</value>
+  </data>
+  <data name="VM.TemplateDescription-Debian Squeeze 6.0 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Debian Squeeze 6.0 (32 ビット) が動作する VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Debian Squeeze 6.0 (64-bit) (experimental)" xml:space="preserve">
+    <value>このテンプレートを使用して、Debian Squeeze 6.0 (64 ビット) が動作する VM を作成できます。このオペレーティング システムについては、現在試験的にサポートされています。</value>
+  </data>
+  <data name="VM.TemplateDescription-Debian Squeeze 6.0 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Debian Squeeze 6.0 (64 ビット) が動作する VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Demo Linux VM" xml:space="preserve">
+    <value>このテンプレートを使用して、デモ用またはテスト用のビルトイン Linux ディストリビューションが動作する Linux VM を作成できます。業務での使用は推奨されません。</value>
+  </data>
+  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Oracle Enterprise Linux 5 (32 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Oracle Enterprise Linux 5 (64 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.0 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Oracle Enterprise Linux 5.0 (32 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.0 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Oracle Enterprise Linux 5.0 (64 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.0 x64" xml:space="preserve">
+    <value>Oracle Enterprise Linux 5.0 (64 ビット) をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.0" xml:space="preserve">
+    <value>Oracle Enterprise Linux 5.0 (32 ビット) をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.1 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Oracle Enterprise Linux 5.1 (32 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.1 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Oracle Enterprise Linux 5.1 (64 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.1 x64" xml:space="preserve">
+    <value>Oracle Enterprise Linux 5.1 (64 ビット) をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.1" xml:space="preserve">
+    <value>Oracle Enterprise Linux 5.1 (32 ビット) をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.2 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Oracle Enterprise Linux 5.2 (32 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.2 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Oracle Enterprise Linux 5.2 (64 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.2 x64" xml:space="preserve">
+    <value>Oracle Enterprise Linux 5.2 (64 ビット) をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.2" xml:space="preserve">
+    <value>Oracle Enterprise Linux 5.2 (32 ビット) をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.3 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Oracle Enterprise Linux 5.3 (32 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.3 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Oracle Enterprise Linux 5.3 (64 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.4 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Oracle Enterprise Linux 5.4 (32 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.4 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Oracle Enterprise Linux 5.4 (64 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Oracle Enterprise Linux 6 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Oracle Enterprise Linux 6 (32 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Oracle Enterprise Linux 6 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Oracle Enterprise Linux 6 (64 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Oracle Enterprise Linux 6.0 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Oracle Enterprise Linux 6.0 (32 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Oracle Enterprise Linux 6.0 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Oracle Enterprise Linux 6.0 (64 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Other install media" xml:space="preserve">
+    <value>一覧にないオペレーティング システムを使用する場合は、このテンプレートを選択します。このテンプレートは、詳しい知識がある管理者向けです。また、弊社の製品は、標準テンプレートでサポートされる特定のディストリビューションおよびバージョンでのみ、動作テストが実施されていることをご了承ください。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 4.1" xml:space="preserve">
+    <value>Red Hat Enterprise Linux 4.1 をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 4.4" xml:space="preserve">
+    <value>Red Hat Enterprise Linux 4.4 をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 4.5 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 RHEL 4.5 (32 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 4.5" xml:space="preserve">
+    <value>Red Hat Enterprise Linux 4.5 をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 4.6 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 RHEL 4.6 (32 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 4.6" xml:space="preserve">
+    <value>Red Hat Enterprise Linux 4.6 をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 4.7 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 RHEL 4.7 (32 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 4.7" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 RHEL 4.7 (32 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 4.8 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 RHEL 4.5 (32 ビット) が動作する Linux VM を作成できます。作成後、Citrix RHEL 4.8 カーネルを適用するために XenServer Tools をインストールする必要があります。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 RHEL 5 (32 ビット) が動作する Linux VM を作成できます。5.4 以降のカーネルを使用する必要があります。 </value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 RHEL 5 (64 ビット) が動作する Linux VM を作成できます。5.4 以降のカーネルを使用する必要があります。 </value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.0 (32-bit)" xml:space="preserve">
+    <value>Red Hat Enterprise Linux 5.0 (32 ビット) をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.0 (64-bit)" xml:space="preserve">
+    <value>Red Hat Enterprise Linux 5.0 (64 ビット) をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.0 x64" xml:space="preserve">
+    <value>Red Hat Enterprise Linux 5.0 (64 ビット) をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.0" xml:space="preserve">
+    <value>Red Hat Enterprise Linux 5.0 (32 ビット) をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.1 (32-bit)" xml:space="preserve">
+    <value>Red Hat Enterprise Linux 5.1 (32 ビット) をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.1 (64-bit)" xml:space="preserve">
+    <value>Red Hat Enterprise Linux 5.1 (64 ビット) をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.1 x64" xml:space="preserve">
+    <value>Red Hat Enterprise Linux 5.1 (64 ビット) をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.1" xml:space="preserve">
+    <value>Red Hat Enterprise Linux 5.1 (32 ビット) をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.2 (32-bit)" xml:space="preserve">
+    <value>Red Hat Enterprise Linux 5.2 (32 ビット) をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.2 (64-bit)" xml:space="preserve">
+    <value>Red Hat Enterprise Linux 5.2 (64 ビット) をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.2 x64" xml:space="preserve">
+    <value>Red Hat Enterprise Linux 5.2 (64 ビット) をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.2" xml:space="preserve">
+    <value>Red Hat Enterprise Linux 5.2 (32 ビット) をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.3 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 Red Hat Enterprise Linux 5.3 (32 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.3 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 Red Hat Enterprise Linux 5.3 (64 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.3 x64" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 RHEL 5.3 x64 が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.3" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 RHEL 5.3 が動作する Linux VM を作成できます。5.4 以降のカーネルを使用する必要があります。 </value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.4 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 Red Hat Enterprise Linux 5.4 (32 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.4 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 Red Hat Enterprise Linux 5.4 (64 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 6 (32-bit) (experimental)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 Red Hat Enterprise Linux 6.0 (32 ビット) が動作する Linux VM を作成できます。このオペレーティング システムについては、現在試験的にサポートされています。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 6 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 Red Hat Enterprise Linux 6.0 (32 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 6 (64-bit) (experimental)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 Red Hat Enterprise Linux 6.0 (64 ビット) が動作する Linux VM を作成できます。このオペレーティング システムについては、現在試験的にサポートされています。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 6 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 Red Hat Enterprise Linux 6.0 (64 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 6.0 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 Red Hat Enterprise Linux 6.0 (32 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 6.0 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 Red Hat Enterprise Linux 6.0 (64 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP1 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 SUSE Linux Enterprise Server 10 SP1 (32 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP1 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 SUSE Linux Enterprise Server 10 SP1 (64 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP1 x64" xml:space="preserve">
+    <value>SUSE Linux Enterprise Server 10 (64 ビット) Service Pack 1 をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP1" xml:space="preserve">
+    <value>SUSE Linux Enterprise Server 10 (32 ビット) Service Pack 1 をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP2 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 SUSE Linux Enterprise Server 10 SP1 (32 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP2 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 SUSE Linux Enterprise Server 10 SP2 (64 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP2 x64" xml:space="preserve">
+    <value>SUSE Linux Enterprise Server 10 (64 ビット) Service Pack 2 をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP2" xml:space="preserve">
+    <value>SUSE Linux Enterprise Server 10 (32 ビット) Service Pack 2 をネットワーク インストール サーバーまたはベンダ メディアからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP3 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 SUSE Linux Enterprise Server 10 SP3 (32 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP3 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 SUSE Linux Enterprise Server 10 SP3 (64 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP4 (32-bit) (experimental)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 SUSE Linux Enterprise Server 10 SP4 (32 ビット) が動作する Linux VM を作成できます。このオペレーティング システムについては、現在試験的にサポートされています。</value>
+  </data>
+  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP4 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 SUSE Linux Enterprise Server 10 SP4 (32 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP4 (64-bit) (experimental)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 SUSE Linux Enterprise Server 10 SP4 (64 ビット) が動作する Linux VM を作成できます。このオペレーティング システムについては、現在試験的にサポートされています。</value>
+  </data>
+  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP4 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 SUSE Linux Enterprise Server 10 SP4 (64 ビット) が動作する Linux VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 11 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 SUSE Linux Enterprise Server 11 (32 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 11 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 SUSE Linux Enterprise Server 11 (64 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 11 SP1 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 SUSE Linux Enterprise Server 11 SP1 (32 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 11 SP1 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 SUSE Linux Enterprise Server 11 SP1 (64 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 11 x64" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 SUSE Linux Enterprise Server 11 x64 が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 11" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 SUSE Linux Enterprise Server 11 が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 9 SP4 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 SUSE Linux Enterprise Server 9 (32 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 9 SP4" xml:space="preserve">
+    <value>SUSE Linux Enterprise Server 9 Service Pack 4 をネットワーク インストール サーバーからインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Small Debian Etch" xml:space="preserve">
+    <value>このテンプレートを使用して、small Debian Etch が動作する VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Solaris 10 (experimental)" xml:space="preserve">
+    <value>このテンプレートを使用して、Solaris 10 が動作する VM を作成できます。このオペレーティング システムについては、現在試験的にサポートされています。</value>
+  </data>
+  <data name="VM.TemplateDescription-Ubuntu Lucid Lynx 10.04 (32-bit) (experimental)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 Ubuntu Lucid Lynx 10.04 (32 ビット) が動作する Linux VM を作成できます。このオペレーティング システムについては、現在試験的にサポートされています。</value>
+  </data>
+  <data name="VM.TemplateDescription-Ubuntu Lucid Lynx 10.04 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 Ubuntu Lucid Lynx 10.04 (32 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-Ubuntu Lucid Lynx 10.04 (64-bit) (experimental)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 Ubuntu Lucid Lynx 10.04 (64 ビット) が動作する Linux VM を作成できます。このオペレーティング システムについては、現在試験的にサポートされています。</value>
+  </data>
+  <data name="VM.TemplateDescription-Ubuntu Lucid Lynx 10.04 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 Ubuntu Lucid Lynx 10.04 (64 ビット) が動作する Linux VM を作成できます。 </value>
+  </data>
+  <data name="VM.TemplateDescription-Ubuntu Maverick Meerkat 10.10 (32-bit) (experimental)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 Ubuntu Maverick Meerkat 10.10 (32 ビット) が動作する Linux VM を作成できます。このオペレーティング システムについては、現在試験的にサポートされています。</value>
+  </data>
+  <data name="VM.TemplateDescription-Ubuntu Maverick Meerkat 10.10 (64-bit) (experimental)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 Ubuntu Maverick Meerkat 10.10 (64 ビット) が動作する Linux VM を作成できます。このオペレーティング システムについては、現在試験的にサポートされています。</value>
+  </data>
+  <data name="VM.TemplateDescription-Windows 2000 SP4 (32-bit)" xml:space="preserve">
+    <value>Windows 2000 Server Service Pack 4 (32 ビット) をインストールします。これより前のサービス パックはサポートされていません。</value>
+  </data>
+  <data name="VM.TemplateDescription-Windows 2000 SP4" xml:space="preserve">
+    <value>Windows 2000 Server Service Pack 4 をインストールします。これより前のサービス パックはサポートされていません。</value>
+  </data>
+  <data name="VM.TemplateDescription-Windows 7 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Windows 7、または Windows 7 SP1 (32 ビット) が動作する VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Windows 7 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Windows 7、または Windows 7 SP1 (64 ビット) が動作する VM を作成できます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Windows 8 (32-bit) (experimental)" xml:space="preserve">
+    <value>このテンプレートを使用して、Windows 8 (32 ビット) が動作する VM を作成できます。このオペレーティング システムについては、現在試験的にサポートされています。</value>
+  </data>
+  <data name="VM.TemplateDescription-Windows 8 (64-bit) (experimental)" xml:space="preserve">
+    <value>このテンプレートを使用して、Windows 8 (64 ビット) が動作する VM を作成できます。このオペレーティング システムについては、現在試験的にサポートされています。</value>
+  </data>
+  <data name="VM.TemplateDescription-Windows Server 2003 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Windows Server 2003 SP2 (32 ビット) が動作する VM を作成できます。Server、Enterprise、Datacenter、および SBS エディションがサポートされます。XenApp 用に最適化されたテンプレートです。</value>
+  </data>
+  <data name="VM.TemplateDescription-Windows Server 2003 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Windows Server 2003 SP2 (64 ビット) が動作する VM を作成できます。Server、Enterprise、Datacenter、および SBS エディションがサポートされます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Windows Server 2003 x64" xml:space="preserve">
+    <value>Windows Server® 2003 (64 ビット) をインストールします。Server、Enterprise、Datacentre、および SBS の各エディションがサポートされています。</value>
+  </data>
+  <data name="VM.TemplateDescription-Windows Server 2003" xml:space="preserve">
+    <value>Windows Server® 2003 (32 ビット) Service Pack 0、1、または 2 をインストールします。Standard、Enterprise、Datacenter、および SBS の各エディションがサポートされています。</value>
+  </data>
+  <data name="VM.TemplateDescription-Windows Server 2008 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Windows Server 2008 SP2 (32 ビット) が動作する VM を作成できます。すべてのエディションがサポートされます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Windows Server 2008 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Windows Server 2008 SP2 (64 ビット) が動作する VM を作成できます。すべてのエディションがサポートされます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Windows Server 2008 R2 (64-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Windows Server 2008 R2、または Windows Server 2008 R2 SP1 (64 ビット) が動作する VM を作成できます。すべてのエディションがサポートされます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Windows Server 2008 x64" xml:space="preserve">
+    <value>Windows Server® 2008 (64 ビット) をインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Windows Server 2008" xml:space="preserve">
+    <value>Windows Server® 2008 (32 ビット) をインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Windows Server 8 (64-bit) (experimental)" xml:space="preserve">
+    <value>このテンプレートを使用して、Windows Server 8 (64 ビット) が動作する VM を作成できます。このオペレーティング システムについては、現在試験的にサポートされています。</value>
+  </data>
+  <data name="VM.TemplateDescription-Windows Vista (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Windows Vista SP2 (32 ビット) が動作する VM を作成できます。Enterprise エディションがサポートされます。</value>
+  </data>
+  <data name="VM.TemplateDescription-Windows Vista" xml:space="preserve">
+    <value>Windows Vista™ (32 ビット) Enterprise エディションをインストールします。</value>
+  </data>
+  <data name="VM.TemplateDescription-Windows XP SP2 (32-bit)" xml:space="preserve">
+    <value>Windows XP Service Pack 2 (32 ビット) をインストールします。これより前のサービス パックはサポートされていません。</value>
+  </data>
+  <data name="VM.TemplateDescription-Windows XP SP2" xml:space="preserve">
+    <value>Windows XP Service Pack 2 をインストールします。これより前のサービス パックはサポートされていません。</value>
+  </data>
+  <data name="VM.TemplateDescription-Windows XP SP3 (32-bit)" xml:space="preserve">
+    <value>このテンプレートを使用して、Windows XP SP3 (32 ビット) が動作する VM を作成できます。Windows XP SP2 およびそれ以前はサポートされません。</value>
+  </data>
+  <data name="VM.TemplateDescription-Windows XP SP3" xml:space="preserve">
+    <value>Windows XP Service Pack 3 をインストールします。Service Pack 2 もサポートされていますが、直ちにアップグレードすることをお勧めします。これより前のサービス パックはサポートされていません。</value>
+  </data>
+  <data name="VM.TemplateDescription-Xen API SDK" xml:space="preserve">
+    <value>このテンプレートを使用して、XenServer Software Development Kit (SDK) API VM を作成できます。 </value>
+  </data>
+  <data name="SR.name_description-local-hotplug-disk" xml:space="preserve">
+    <value>物理リムーバブル ストレージ</value>
+  </data>
+  <data name="VM.TemplateDescription-Ubuntu Precise Pangolin 12.04 (32-bit) (experimental)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 Ubuntu Precise Pangolin 12.04 (32 ビット) が動作する Linux VM を作成できます。このオペレーティング システムについては、現在試験的にサポートされています。</value>
+  </data>
+  <data name="VM.TemplateDescription-Ubuntu Precise Pangolin 12.04 (64-bit) (experimental)" xml:space="preserve">
+    <value>このテンプレートを使用して、Xen 対応 Ubuntu Precise Pangolin 12.04 (64 ビット) が動作する Linux VM を作成できます。このオペレーティング システムについては、現在試験的にサポートされています。</value>
+  </data>
+  <data name="Label-performance.cpu_avg" xml:space="preserve">
+    <value>平均 CPU</value>
+  </data>
+  <data name="Label-performance.pif_aggr_rx" xml:space="preserve">
+    <value>NIC 受信合計</value>
+  </data>
+  <data name="Label-performance.pif_aggr_tx" xml:space="preserve">
+    <value>NIC 送信合計</value>
+  </data>
+</root>

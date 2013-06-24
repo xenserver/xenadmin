@@ -1,0 +1,87 @@
+﻿/* Copyright (c) Citrix Systems Inc. 
+ * All rights reserved. 
+ * 
+ * Redistribution and use in source and binary forms, 
+ * with or without modification, are permitted provided 
+ * that the following conditions are met: 
+ * 
+ * *   Redistributions of source code must retain the above 
+ *     copyright notice, this list of conditions and the 
+ *     following disclaimer. 
+ * *   Redistributions in binary form must reproduce the above 
+ *     copyright notice, this list of conditions and the 
+ *     following disclaimer in the documentation and/or other 
+ *     materials provided with the distribution. 
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+ * CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
+ * SUCH DAMAGE.
+ */
+
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
+using XenAdmin.Actions;
+using XenAdmin.Model;
+using XenAdmin.Network;
+using XenAPI;
+
+namespace XenAdmin.Controls
+{
+    public class TagsEditor : DoubleBufferedPanel
+    {
+        private readonly TagList _tagsList;
+
+        public TagsEditor(List<string> tags, Panel panel)
+        {
+            _tagsList = new TagList(tags, panel, 0);
+        }
+
+        public List<string> Tags
+        {
+            get { return _tagsList.Tags; }
+        }
+
+        protected override void OnSizeChanged(EventArgs e)
+        {
+            _tagsList.DrawSelf(null, new Rectangle(0, 0, Width, Height), false);
+        }
+
+        protected override void OnDrawToBuffer(PaintEventArgs e)
+        {
+            // Hack.  See Program.TransparentUsually.
+            e.Graphics.TextContrast = 5;
+            _tagsList.DrawSelf(e.Graphics, new Rectangle(0, 0, Width, Height), false);
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            _tagsList.OnMouseMove(e.Location);
+            base.OnMouseMove(e);
+        }
+
+        protected override void OnMouseClick(MouseEventArgs e)
+        {
+            _tagsList.OnMouseClick(e, e.Location);
+            base.OnMouseClick(e);
+        }
+
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            _tagsList.OnMouseLeave();
+            base.OnMouseLeave(e);
+        }
+    }
+}
