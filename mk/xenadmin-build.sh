@@ -120,6 +120,13 @@ version_cpp()
   mv -f $1.tmp $1
 }
 
+version_csharp_git()
+{
+  sed -e "s/0\.0\.0\.0/${XC_PRODUCT_VERSION}.${get_BUILD_NUMBER}/g" \
+      $1 > $1.tmp
+  mv -f $1.tmp $1
+}
+
 version_csharp()
 {
   sed -e "s/0\.0\.0\.0/${XC_PRODUCT_VERSION}.${get_BUILD_NUMBER}/g" \
@@ -153,7 +160,7 @@ version_brand_csharp()
   for projectName in $1
   do
     assemblyInfo=${REPO}/${projectName}/Properties/AssemblyInfo.cs
-    version_csharp ${assemblyInfo} && subst_globals ${assemblyInfo}
+    version_csharp_git ${assemblyInfo} && subst_globals ${assemblyInfo}
   done
 }
 
