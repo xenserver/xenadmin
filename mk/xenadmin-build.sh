@@ -50,7 +50,7 @@ rm -rf ${TEST_DIR}/* ${XENCENTER_LOGDIR}/XenCenter.log || true
 
 #the local revision numbers are the same as the local revision numbers on the remote repository;
 #also we know that xenadmin.git is not a patch queue style repository
-CSET_NUMBER=$(cd ${REPO} && git parents --template "{rev}" && echo "")
+CSET_NUMBER=$(cd ${REPO} && git rev-list HEAD -1 && echo "")
 
 #bring in version and branding info from latest xe-phase-1
 wget ${WGET_OPT} ${WEB_XE_PHASE_1}/globals -P ${SCRATCH_DIR}
