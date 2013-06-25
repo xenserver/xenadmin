@@ -1,6 +1,6 @@
 This repository contains the source code for XenCenter.
 
-Citrix XenCenter is a Windows-based management tool for XenServer environments
+XenCenter is a Windows-based management tool for XenServer environments
 which enables users to manage and monitor XenServer hosts and resource pools, 
 and to deploy, monitor, manage and migrate virtual machines.
 
