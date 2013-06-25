@@ -34,6 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.labelText = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonClearAll = new System.Windows.Forms.Button();
             this.dataGridViewSRs = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.columnTick = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,6 +42,7 @@
             this.columnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnMetadata = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FindSrsButton = new System.Windows.Forms.Button();
+            this.buttonSelectAll = new System.Windows.Forms.Button();
             this.FindSrsOptionsMenuStrip = new XenAdmin.Controls.NonReopeningContextMenuStrip(this.components);
             this.iscsiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,15 +54,25 @@
             // labelText
             // 
             resources.ApplyResources(this.labelText, "labelText");
+            this.tableLayoutPanel1.SetColumnSpan(this.labelText, 2);
             this.labelText.Name = "labelText";
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.buttonClearAll, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.dataGridViewSRs, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.FindSrsButton, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.labelText, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.buttonSelectAll, 1, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // buttonClearAll
+            // 
+            resources.ApplyResources(this.buttonClearAll, "buttonClearAll");
+            this.buttonClearAll.Name = "buttonClearAll";
+            this.buttonClearAll.UseVisualStyleBackColor = true;
+            this.buttonClearAll.Click += new System.EventHandler(this.buttonClearAll_Click);
             // 
             // dataGridViewSRs
             // 
@@ -85,6 +97,7 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             this.dataGridViewSRs.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.tableLayoutPanel1.SetRowSpan(this.dataGridViewSRs, 2);
             this.dataGridViewSRs.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSRs_CellValueChanged);
             this.dataGridViewSRs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSRs_CellClick);
             // 
@@ -128,6 +141,13 @@
             this.FindSrsButton.Name = "FindSrsButton";
             this.FindSrsButton.UseVisualStyleBackColor = true;
             this.FindSrsButton.Click += new System.EventHandler(this.FindSrsButton_Click);
+            // 
+            // buttonSelectAll
+            // 
+            resources.ApplyResources(this.buttonSelectAll, "buttonSelectAll");
+            this.buttonSelectAll.Name = "buttonSelectAll";
+            this.buttonSelectAll.UseVisualStyleBackColor = true;
+            this.buttonSelectAll.Click += new System.EventHandler(this.buttonSelectAll_Click);
             // 
             // FindSrsOptionsMenuStrip
             // 
@@ -177,5 +197,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnDesc;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnType;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnMetadata;
+        private System.Windows.Forms.Button buttonSelectAll;
+        private System.Windows.Forms.Button buttonClearAll;
     }
 }

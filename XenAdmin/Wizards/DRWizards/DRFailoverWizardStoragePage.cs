@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -54,7 +55,6 @@ namespace XenAdmin.Wizards.DRWizards
         public DRFailoverWizardStoragePage()
         {
             InitializeComponent();
-            SetupCellStyles();
         }
 
         #region XenTabPage overrides
@@ -106,7 +106,11 @@ namespace XenAdmin.Wizards.DRWizards
             base.PageLoaded(direction);
             if (direction == PageLoadedDirection.Forward)
                 SetupLabels();
+
             PopulateSrList();
+            
+            if (dataGridViewSRs.Rows.Count > 0)
+                SortRows();
         }
 
         #endregion
@@ -155,7 +159,6 @@ namespace XenAdmin.Wizards.DRWizards
                     {
                         row = new SrRow(sr, poolMetadataDetected, SelectedSRsUuids.Contains(sr.uuid));
                         dataGridViewSRs.Rows.Add(row);
-                        ToggleRowCheckable(row);
                     }
                 }
 
@@ -170,7 +173,6 @@ namespace XenAdmin.Wizards.DRWizards
                             row = new SrRow(srInfo, scannedDevice.Type, srInfo.PoolMetadataDetected,
                                             SelectedSRsUuids.Contains(srInfo.UUID));
                             dataGridViewSRs.Rows.Add(row);
-                            ToggleRowCheckable(row);
                         }
                     }
                 }
@@ -198,22 +200,6 @@ namespace XenAdmin.Wizards.DRWizards
                     labelText.Text = Messages.DR_WIZARD_STORAGEPAGE_DESCRIPTION_FAILOVER;
                     break;
             }
-        }
-
-        /// <summary>
-        /// Style to use for checkable rows
-        /// </summary>
-        private static DataGridViewCellStyle regStyle;
-        /// <summary>
-        /// Style to use for non-checkable rows (should appear grayed out)
-        /// </summary>
-        private static DataGridViewCellStyle dimmedStyle;
-
-        private void SetupCellStyles()
-        {
-            regStyle = dataGridViewSRs.DefaultCellStyle.Clone();
-            dimmedStyle = dataGridViewSRs.DefaultCellStyle.Clone();
-            dimmedStyle.ForeColor = SystemColors.GrayText;
         }
 
         #endregion
@@ -284,9 +270,7 @@ namespace XenAdmin.Wizards.DRWizards
         {
             if (srs.Count > 0)
             {
-                /*string message = srs.Aggregate(Messages.DR_WIZARD_STORAGEPAGE_SCAN_RESULT_TITLE, (current, sr) => String.Format("{0} \n\t {1}", current, sr));
-                new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Information, message, Messages.XENCENTER)).ShowDialog(this);*/
+                SortRows();
             }
             else
             {
@@ -390,7 +374,6 @@ namespace XenAdmin.Wizards.DRWizards
                         row = new SrRow(srInfo, type, srInfo.PoolMetadataDetected,
                                                srInfo.PoolMetadataDetected);
                         dataGridViewSRs.Rows.Add(row);
-                        ToggleRowCheckable(row);
                         ToggleRowChecked(row);
                     }
                 }
@@ -631,17 +614,6 @@ namespace XenAdmin.Wizards.DRWizards
             }
         }
 
-        private void ToggleRowCheckable(SrRow row)
-        {
-            if (row == null)
-                return;
-
-            bool checkable = row.HasMetadata;
-
-            row.Cells[0].ReadOnly = !checkable;
-            row.DefaultCellStyle = checkable ? regStyle : dimmedStyle;
-        }
-
         private bool IsRowChecked(SrRow row)
         {
             if (row == null)
@@ -676,6 +648,32 @@ namespace XenAdmin.Wizards.DRWizards
             return false;
         }
 
-        #endregion 
+        private void buttonSelectAll_Click(object sender, EventArgs e)
+        {
+            SelectAllRows(true);
+        }
+
+        private void buttonClearAll_Click(object sender, EventArgs e)
+        {
+            SelectAllRows(false);
+        }
+
+        private void SelectAllRows(bool selected)
+        {
+            foreach (var row in dataGridViewSRs.Rows.OfType<SrRow>())
+            {
+                var cell = row.Cells[0] as DataGridViewCheckBoxCell;
+                if (cell != null)
+                    cell.Value = selected;
+            }
+        }
+
+        private void SortRows()
+        {
+            dataGridViewSRs.Sort(columnMetadata, ListSortDirection.Descending);
+            dataGridViewSRs.Rows[0].Selected = true;
+        }
+
+        #endregion
     }
 }
