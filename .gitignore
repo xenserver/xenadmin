@@ -16,8 +16,6 @@ NUnit
 obj
 xml-rpc.net
 sharpziplib
-Amazon.EC2
-Amazon.SimpleDB
 XenServer.NET/*
 Thumbs.db
 *-listing.txt
@@ -27,7 +25,6 @@ Thumbs.db
 *.bak
 splash/Release/*
 Installer/Release/*
-XenAdmin/Help/docgen/*
 WixInstaller/wixlib/*
 WixInstaller/outXenCenter*
 WixInstaller/*.mst
@@ -41,8 +38,6 @@ WixInstaller/XenCenter.l10n.wxs
 XenOvfApi/External Tools/bootablereference.vhd.bz2
 sign.bat
 XenServer-SDK.zip
-regexp:ReSharper
-regexp:Javier
+_ReSharper.*/
 glob:Nunit/nunit.framework.dll
 glob:XenOvfApi/External Tools/xenserver-linuxfixup-disk.iso
-glob:BouncyCastle/BouncyCastle.Crypto.dll
