@@ -175,7 +175,7 @@
     <value>80</value>
   </data>
   <data name="columnName.Width" type="System.Int32, mscorlib">
-    <value>160</value>
+    <value>115</value>
   </data>
   <metadata name="columnDesc.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -187,7 +187,7 @@
     <value>80</value>
   </data>
   <data name="columnDesc.Width" type="System.Int32, mscorlib">
-    <value>150</value>
+    <value>115</value>
   </data>
   <metadata name="columnType.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -408,6 +408,18 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>557, 366</value>
   </data>
+  <data name="&gt;&gt;iscsiToolStripMenuItem.Name" xml:space="preserve">
+    <value>iscsiToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;iscsiToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fcToolStripMenuItem.Name" xml:space="preserve">
+    <value>fcToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;fcToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;columnTick.Name" xml:space="preserve">
     <value>columnTick</value>
   </data>
@@ -437,18 +449,6 @@
   </data>
   <data name="&gt;&gt;columnMetadata.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;iscsiToolStripMenuItem.Name" xml:space="preserve">
-    <value>iscsiToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;iscsiToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;fcToolStripMenuItem.Name" xml:space="preserve">
-    <value>fcToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;fcToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>DRFailoverWizardStoragePage</value>

@@ -10955,7 +10955,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select the storage repositories (SRs) containing the configuration data for the VMs and vApps that you want to fail back and then click Next..
+        ///   Looks up a localized string similar to Select the storage repositories (SRs) containing the configuration data for the VMs and vApps that you want to fail back. If you know which SRs contain your VMs&apos; disks, you can also include them now..
         /// </summary>
         public static string DR_WIZARD_STORAGEPAGE_DESCRIPTION_FAILBACK {
             get {
@@ -10964,7 +10964,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select the storage repositories (SRs) containing the VM configuration data for the VMs and vApps that you want to fail over and then click Next..
+        ///   Looks up a localized string similar to Select the storage repositories (SRs) containing the VM configuration data for the VMs and vApps that you want to fail over. If you know which SRs contain your VMs&apos; disks, you can also include them now..
         /// </summary>
         public static string DR_WIZARD_STORAGEPAGE_DESCRIPTION_FAILOVER {
             get {

@@ -3899,10 +3899,10 @@ Eject the CD and try again.</value>
     <value>Selected SRs: </value>
   </data>
   <data name="DR_WIZARD_STORAGEPAGE_DESCRIPTION_FAILBACK" xml:space="preserve">
-    <value>Select the storage repositories (SRs) containing the configuration data for the VMs and vApps that you want to fail back and then click Next.</value>
+    <value>Select the storage repositories (SRs) containing the configuration data for the VMs and vApps that you want to fail back. If you know which SRs contain your VMs' disks, you can also include them now.</value>
   </data>
   <data name="DR_WIZARD_STORAGEPAGE_DESCRIPTION_FAILOVER" xml:space="preserve">
-    <value>Select the storage repositories (SRs) containing the VM configuration data for the VMs and vApps that you want to fail over and then click Next.</value>
+    <value>Select the storage repositories (SRs) containing the VM configuration data for the VMs and vApps that you want to fail over. If you know which SRs contain your VMs' disks, you can also include them now.</value>
   </data>
   <data name="DR_WIZARD_STORAGEPAGE_SCAN_RESULT_NONE" xml:space="preserve">
     <value>No Storage Repositories were found</value>
