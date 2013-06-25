@@ -663,7 +663,7 @@ namespace XenAdmin.Wizards.DRWizards
             foreach (var row in dataGridViewSRs.Rows.OfType<SrRow>())
             {
                 var cell = row.Cells[0] as DataGridViewCheckBoxCell;
-                if (cell != null)
+                if (cell != null && (bool)cell.Value != selected)
                     cell.Value = selected;
             }
         }
