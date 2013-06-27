@@ -240,7 +240,7 @@ namespace XenAdmin.Dialogs
                 return HostState.ExpiresSoon;
             }
 
-            return HostState.Free;
+            return LicenseEdition ==  Host.Edition.Free ? HostState.Free : HostState.Licensed;
         }
 
         #region ILicenseStatus Members
