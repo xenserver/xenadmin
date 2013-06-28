@@ -112,26 +112,30 @@ namespace XenAdmin.Diagnostics.Checks.DR
             {
                 if (f.ErrorDescription.Count > 2 && f.ErrorDescription[0] == Failure.VM_REQUIRES_SR)
                 {
-                    List<SR> requiredSRs = GetRequiredSRs(xenObject);
-                    if (requiredSRs != null)
-                    {
-                        //search for local SRs
-                        SR localSR = requiredSRs.Find(item => !item.shared);
-                        if (localSR != null)
-                        {
-                            // there is local SR which means the VM cannot be recovered
-                            return new MissingSRProblem(this, Pool, localSR, null);
-                        }
+                    List<SR> requiredSRs = GetRequiredSRs(xenObject) ?? new List<SR>();
 
-                        //search for FibreChannel SRs
-                        List<SRDeviceConfig> srDeviceConfigList = GetFCSRDeviceConfigList(requiredSRs);
-                        if (srDeviceConfigList.Count > 0)
-                            return new MissingMultipleFCSRsProblem(this, Pool, srDeviceConfigList);
+                    SR sr = RetrieveSR(new XenRef<SR>(f.ErrorDescription[2]));
+                    if (!requiredSRs.Contains(sr))
+                        requiredSRs.Add(sr);
+
+                    //search for local SRs
+                    SR localSR = requiredSRs.Find(item => !item.shared);
+                    if (localSR != null)
+                    {
+                        // there is local SR which means the VM cannot be recovered
+                        return new MissingSRProblem(this, Pool, localSR, null);
                     }
 
-                    XenRef<SR> srRef = new XenRef<SR>(f.ErrorDescription[2]);
-                    SR sr = SR.get_record(MetadataSession, srRef);
-                    return new MissingSRProblem(this, Pool, sr, null);
+                    //search for FibreChannel SRs
+                    List<SRDeviceConfig> srDeviceConfigList = GetFCSRDeviceConfigList(requiredSRs);
+                    if (srDeviceConfigList.Count == 0)
+                        return new MissingSRProblem(this, Pool, requiredSRs[0], null);
+
+                    if (srDeviceConfigList.Count == 1)
+                        return new MissingSRProblem(this, Pool, srDeviceConfigList[0].SR,
+                                                    srDeviceConfigList[0].DeviceConfig);
+                    
+                    return new MissingMultipleFCSRsProblem(this, Pool, srDeviceConfigList);                   
                 }
             }
             catch (Exception e)

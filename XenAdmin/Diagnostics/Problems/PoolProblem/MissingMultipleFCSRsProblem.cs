@@ -36,7 +36,7 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
                 if (EmptySRDeviceConfigList)
                     return Messages.DR_WIZARD_PROBLEM_MISSING_MULTIPLE_SRS_NO_INFO;
 
-                return Messages.DR_WIZARD_PROBLEM_MISSING_MULTIPLE_SRS;
+                return string.Format(Messages.DR_WIZARD_PROBLEM_MISSING_MULTIPLE_SRS, srDeviceConfigList.Count);
             }
         }
 

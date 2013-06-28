@@ -87,6 +87,8 @@ namespace XenAdmin.Wizards.DRWizards
 
         public override bool EnableNext()
         {
+            buttonClearAll.Enabled = SelectedSRsUuids.Count > 0;
+            buttonSelectAll.Enabled = SelectedSRsUuids.Count < dataGridViewSRs.Rows.OfType<SrRow>().Count();
             return SelectedSRsUuids.Count > 0;
         }
 
