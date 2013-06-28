@@ -84,15 +84,14 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                     Pool pool = Helpers.GetPoolOfOne(selectedMaster.Connection);
                     foreach (var host in pool.HostsToUpgrade)
                     {
-                        log.InfoFormat("Host '{0}' upgrading from version '{1}'", host.Name, host.ProductVersion);
+                        log.InfoFormat("Host '{0}' upgrading from version '{1}'", host.Name, host.LongProductVersion);
                         currentHost = host;
                         bool allactionsDone = true;
                         foreach (var planAction in _planActions[host])
                         {
                             try
                             {
-                                string hostVersion = host.ProductVersion;
-                                int hostBuildNo = host.BuildNumber;
+                                string hostVersion = host.LongProductVersion;
                                 ReportRunning(this, new ReportRunningArgs(planAction, host));
                                 planAction.Run();
                                 if (_cancel)
@@ -100,9 +99,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                                 if (planAction is UpgradeHostPlanAction)
                                 {
                                     Host hostAfterReboot = host.Connection.Resolve(new XenRef<Host>(host.opaque_ref));
-                                    if (Helpers.SameServerVersion(hostAfterReboot, hostVersion, hostBuildNo))
+                                    if (Helpers.SameServerVersion(hostAfterReboot, hostVersion))
                                     {
-                                        log.ErrorFormat("Host '{0}' rebooted with the same version '{1}.{2}'", hostAfterReboot.Name, hostAfterReboot.ProductVersion, hostAfterReboot.BuildNumber);
+                                        log.ErrorFormat("Host '{0}' rebooted with the same version '{1}'", hostAfterReboot.Name, hostAfterReboot.LongProductVersion);
                                         ReportException.Raise(this,
                                                                 new ReportExceptionArgs(
                                                                     new Exception(Messages.REBOOT_WITH_SAME_VERSION),
@@ -111,7 +110,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                                         if (hostAfterReboot.IsMaster())
                                             _cancel = true;
                                     }
-                                    log.InfoFormat("Host '{0}' upgraded with version '{1}.{2}'", hostAfterReboot.Name, hostAfterReboot.ProductVersion, hostAfterReboot.BuildNumber);
+                                    log.InfoFormat("Host '{0}' upgraded with version '{1}'", hostAfterReboot.Name, hostAfterReboot.LongProductVersion);
                                 }
 
                             }

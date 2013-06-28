@@ -1817,9 +1817,9 @@ namespace XenAdmin.Core
            return null;
        }
 
-       public static bool SameServerVersion(Host host, string productVersion, int buildNumber)
+       public static bool SameServerVersion(Host host, string longProductVersion)
        {
-           return host.ProductVersion == productVersion && host.BuildNumber == buildNumber;
+           return host.LongProductVersion == longProductVersion;
        }
 
        public static TimeSpan LicenceExpiresIn(Host host, DateTime serverTime)

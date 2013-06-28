@@ -94,7 +94,7 @@ namespace XenAPI
                 Host master = Helpers.GetMaster(this);
                 foreach (var host in this.Connection.Cache.Hosts)
                 {
-                    if (host.ProductVersion != master.ProductVersion)
+                    if (host.LongProductVersion != master.LongProductVersion)
                         return true;
                 }
                 return false;
@@ -345,7 +345,7 @@ namespace XenAPI
 
                 List<XenAPI.Host> result = IsMasterUpgraded
                                                ? Connection.Cache.Hosts.Where(
-                                                   host => host.ProductVersion != master.ProductVersion).ToList()
+                                                   host => host.LongProductVersion != master.LongProductVersion).ToList()
                                                : Connection.Cache.Hosts.ToList();
                 result.Sort();
                 

@@ -86,10 +86,10 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
 
         private static bool CheckMasterIsUpgraded(List<Host> hosts, int i)
         {
-            string masterVersion = hosts[i].ProductVersion;
+            string masterVersion = hosts[i].LongProductVersion;
             for (int j = i + 1; j < hosts.Count; j++)
             {
-                if (hosts[j].ProductVersion != masterVersion)
+                if (hosts[j].LongProductVersion != masterVersion)
                     return true;
                 if (hosts[j].IsMaster())
                     break;
@@ -126,14 +126,14 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                     var host=currentHost = hosts[i];
                     if (host.IsMaster())
                     {
-                        poolHigherProductVersion = host.ProductVersion;
+                        poolHigherProductVersion = host.LongProductVersion;
                         if (CheckMasterIsUpgraded(hosts, i))
                         {
                             log.Debug(string.Format("Skipping master '{0}' because it is upgraded", host.Name));
                             continue;
                         }
                     }
-                    else if (host.ProductVersion == poolHigherProductVersion)
+                    else if (host.LongProductVersion == poolHigherProductVersion)
                     {
                         log.Debug(string.Format("Skipping host '{0}' because it is upgraded", host.Name));
                         continue;
@@ -156,7 +156,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                                 var upgradeAction = (UpgradeManualHostPlanAction)planAction;
                                 ManageSemiAutomaticPlanAction.Raise(this, () => new ManageSemiAutomaticPlanActionArgs(upgradeAction));
                                 if (host.IsMaster())
-                                    poolHigherProductVersion = upgradeAction.Host.ProductVersion;
+                                    poolHigherProductVersion = upgradeAction.Host.LongProductVersion;
                             }
                             else
                                 planAction.Run();

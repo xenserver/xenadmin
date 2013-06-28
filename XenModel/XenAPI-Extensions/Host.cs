@@ -533,6 +533,18 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Return this host's product version and build number (e.g. 5.6.100.72258), or null if product version can't be found.
+        /// </summary>
+        public virtual string LongProductVersion
+        {
+            get
+            {
+                string productVersion = ProductVersion;
+                return productVersion != null ? string.Format("{0}.{1}", productVersion, BuildNumber) : null;
+            }
+        }
+
+        /// <summary>
         /// Return the hg_id (Mercurial changeset number) of xapi on this host, or null if none can be found.
         /// </summary>
         public string hg_id

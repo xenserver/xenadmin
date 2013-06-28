@@ -280,8 +280,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                     }
                 }
             });
-            string beforeRebootProductVersion = upgradeHostPlanAction.Host.ProductVersion;
-            int beforeRebootBuildNo = upgradeHostPlanAction.Host.BuildNumber;
+            string beforeRebootProductVersion = upgradeHostPlanAction.Host.LongProductVersion;
             string hostName = upgradeHostPlanAction.Host.Name;
             upgradeHostPlanAction.Timeout += new EventHandler(upgradeHostPlanAction_Timeout);
             try
@@ -295,7 +294,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                     upgradeHostPlanAction.Run();
 
                     //if comes back and does not have a different product version
-                    if (Helpers.SameServerVersion(upgradeHostPlanAction.Host, beforeRebootProductVersion, beforeRebootBuildNo))
+                    if (Helpers.SameServerVersion(upgradeHostPlanAction.Host, beforeRebootProductVersion))
                     {
                         using (var dialog = new NotModalThreeButtonDialog(SystemIcons.Exclamation,
                             string.Format(Messages.ROLLING_UPGRADE_REBOOT_AGAIN_MESSAGE, hostName)
@@ -309,7 +308,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                         }
                     }
 
-                } while (Helpers.SameServerVersion(upgradeHostPlanAction.Host, beforeRebootProductVersion, beforeRebootBuildNo));
+                } while (Helpers.SameServerVersion(upgradeHostPlanAction.Host, beforeRebootProductVersion));
             }
             finally
             {
