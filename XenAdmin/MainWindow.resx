@@ -134,8 +134,11 @@
   <data name="treeView.Location" type="System.Drawing.Point, System.Drawing">
     <value>2, 52</value>
   </data>
+  <data name="treeView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 0</value>
+  </data>
   <data name="treeView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 595</value>
+    <value>241, 623</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="treeView.TabIndex" type="System.Int32, mscorlib">
@@ -412,7 +415,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="TabPageHome.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 593</value>
+    <value>753, 620</value>
   </data>
   <data name="TabPageHome.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -442,7 +445,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="TabPageSearch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 453</value>
+    <value>753, 620</value>
   </data>
   <data name="TabPageSearch.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -472,7 +475,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="TabPageGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 453</value>
+    <value>753, 620</value>
   </data>
   <data name="TabPageGeneral.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -499,7 +502,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabPageBallooning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 453</value>
+    <value>753, 620</value>
   </data>
   <data name="TabPageBallooning.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -523,7 +526,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabPageBallooningUpsell.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 453</value>
+    <value>753, 620</value>
   </data>
   <data name="TabPageBallooningUpsell.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -553,7 +556,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="TabPageConsole.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 593</value>
+    <value>753, 620</value>
   </data>
   <data name="TabPageConsole.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -583,7 +586,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="TabPageStorage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 453</value>
+    <value>753, 620</value>
   </data>
   <data name="TabPageStorage.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -613,7 +616,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPagePhysicalStorage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 453</value>
+    <value>753, 620</value>
   </data>
   <data name="TabPagePhysicalStorage.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -643,7 +646,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="TabPageSR.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 593</value>
+    <value>753, 620</value>
   </data>
   <data name="TabPageSR.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -673,7 +676,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="TabPageNetwork.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 453</value>
+    <value>753, 620</value>
   </data>
   <data name="TabPageNetwork.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -703,7 +706,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="TabPageNICs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 453</value>
+    <value>753, 620</value>
   </data>
   <data name="TabPageNICs.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -736,7 +739,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="TabPagePeformance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 453</value>
+    <value>753, 620</value>
   </data>
   <data name="TabPagePeformance.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -763,7 +766,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPageHA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 453</value>
+    <value>753, 620</value>
   </data>
   <data name="TabPageHA.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -790,7 +793,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPageHAUpsell.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 453</value>
+    <value>753, 620</value>
   </data>
   <data name="TabPageHAUpsell.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -823,7 +826,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="snapshotPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 453</value>
+    <value>753, 620</value>
   </data>
   <data name="snapshotPage.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -847,7 +850,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="TabPageSnapshots.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 453</value>
+    <value>753, 620</value>
   </data>
   <data name="TabPageSnapshots.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -877,7 +880,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="TabPageHistory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 453</value>
+    <value>753, 620</value>
   </data>
   <data name="TabPageHistory.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -904,7 +907,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPageTagCloud.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 453</value>
+    <value>753, 620</value>
   </data>
   <data name="TabPageTagCloud.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -928,7 +931,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabPageWLB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 453</value>
+    <value>753, 620</value>
   </data>
   <data name="TabPageWLB.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -952,7 +955,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabPageWLBUpsell.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 453</value>
+    <value>753, 620</value>
   </data>
   <data name="TabPageWLBUpsell.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -976,7 +979,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabPageAD.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 453</value>
+    <value>753, 620</value>
   </data>
   <data name="TabPageAD.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -1009,7 +1012,7 @@
     <value>0, 0</value>
   </data>
   <data name="TheTabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>761, 619</value>
+    <value>761, 646</value>
   </data>
   <data name="TheTabControl.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1045,7 +1048,7 @@
     <value>100</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1008, 649</value>
+    <value>1008, 676</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>243</value>
@@ -1064,54 +1067,6 @@
   </data>
   <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <metadata name="StatusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>0, 564</value>
-  </metadata>
-  <data name="StatusStrip.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="windowStatusBar.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="windowStatusBar.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="windowStatusBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>883, 22</value>
-  </data>
-  <data name="windowStatusBar.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="statusProgressBar.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="statusProgressBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 17</value>
-  </data>
-  <data name="StatusStrip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 704</value>
-  </data>
-  <data name="StatusStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1008, 27</value>
-  </data>
-  <data name="StatusStrip.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="StatusStrip.Text" xml:space="preserve">
-    <value>statusStrip1</value>
-  </data>
-  <data name="&gt;&gt;StatusStrip.Name" xml:space="preserve">
-    <value>StatusStrip</value>
-  </data>
-  <data name="&gt;&gt;StatusStrip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;StatusStrip.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;StatusStrip.ZOrder" xml:space="preserve">
-    <value>5</value>
   </data>
   <metadata name="ToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 24</value>
@@ -1630,11 +1585,11 @@
         SfzPlMB1BCpKPODLETroXx/6j6eI5ytTPEcFVJg4wJHJt9l/rf935Y3a/5lT2V5BhYkDrOlc/V7T/V4Z
         HbD+z17K/p4piaMIKsXAwJ7Cr8iayf2MOZ0zECqEApjTOIM0mnSeBpwI/y+2XO4/cwLrM6gUBLBmcD+b
         fnL2f5VqtdvMGZzdUGEwABkqVSZ/uf5qy3+JDYr/WVI4P7IkcVhCpSGAJZXTXKxA4d3Rdyf+h84IewB0
-        7lFQaIMwazbfs/pZ9f/UN+v/564X/seUxH4eqg0VsKXz1FlNsf+59eX2/xP2T3rLmsn+liWF7U3f0Ylf
+        7lFQaIMwazbfs/op9f/UN+v/564X/seUxH4eqg0VsKXz1FlNsf+59eX2/xP2T3rLmsn+liWF7U3f0Ylf
         fA4E/eddJ/6fOYPtNdAFFlAtmIA7R+BE2KbQ/6uervi/6emmX+uurX9ZeK70v9Q2pf8ccwV+AW0/BVWK
         AwCdLFAi/Db5YMz/iTf6/nff7PlvftjuP9ce0f/M6RwfwN4iBNhSef0E40V/ux5x/+9w0v2/+CFgwPXy
         fmeO55gGVUIYcObzLBWeJPVf6pjaf47DYv+Z09jfEmU7MmCp4HvKv0r6P3M9xwfmZPZ+qDDxgCWJ04TF
-        nvsvMzDeSbYdCbAAMSOEiQswMAAAy0qhzi6d/rwAAAAASUVORK5CYII=
+        nvsvMzDeSbYdCbAAMSOEiQswMAAAvmChyMGFDr0AAAAASUVORK5CYII=
 </value>
   </data>
   <data name="AlertsToolbarButtonSmall.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -2646,18 +2601,6 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>XenCenter</value>
-  </data>
-  <data name="&gt;&gt;windowStatusBar.Name" xml:space="preserve">
-    <value>windowStatusBar</value>
-  </data>
-  <data name="&gt;&gt;windowStatusBar.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DecentToolStripStatusLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;statusProgressBar.Name" xml:space="preserve">
-    <value>statusProgressBar</value>
-  </data>
-  <data name="&gt;&gt;statusProgressBar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripProgressBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;backButton.Name" xml:space="preserve">
     <value>backButton</value>

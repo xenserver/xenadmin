@@ -42,9 +42,7 @@ using System.Windows.Forms;
 using System.Xml;
 using XenAdmin.Core;
 using XenAdmin.Network;
-using XenAdmin.XenSearch;
 using XenAPI;
-using XenAdmin.Actions;
 
 
 namespace XenAdmin.Plugins
@@ -113,8 +111,6 @@ namespace XenAdmin.Plugins
         private TabPage _tabPage;
         private WebBrowser2 Browser;
         private bool UrlIsLoaded;
-
-        private ActionBase MainWindowActionAtNavigateTime = null;
 
         /// <summary>
         /// If true, this indicates that the most recent Navigation was an error.
@@ -199,7 +195,6 @@ namespace XenAdmin.Plugins
             Browser = new WebBrowser2();
             Browser.Dock = DockStyle.Fill;
             Browser.IsWebBrowserContextMenuEnabled = ContextEnabled;
-            Browser.ProgressChanged += Browser_ProgressChanged;
             Browser.DocumentCompleted += Browser_DocumentCompleted;
             Browser.Navigating += Browser_Navigating;
             Browser.Navigated += Browser_Navigated;
@@ -306,48 +301,10 @@ namespace XenAdmin.Plugins
         {
             Program.AssertOnEventThread();
 
-            if (tabControl != null && tabControl.SelectedTab != null && tabControl.SelectedTab.Tag == this)
-            {
-                if (Program.MainWindow.StatusBarAction == null 
-                    || Program.MainWindow.StatusBarAction.IsCompleted && MainWindowActionAtNavigateTime.Equals(Program.MainWindow.StatusBarAction))
-                {
-                    // we still have 'control' of the status bar
-                    Program.MainWindow.statusProgressBar.Visible = false;
-                    Program.MainWindow.statusProgressBar.Value = 0;
-                    Program.MainWindow.SetStatusBar(null, null);
-                }
-            }
-
             if (!XenCenterOnly && lastBrowserState != null)
             {
                 log.DebugFormat("url for '{0}' set to '{1}'", Helpers.GetName(lastBrowserState.Obj), e.Url);
                 lastBrowserState.Urls = new List<Uri> { e.Url };
-            }
-        }
-
-        private void Browser_ProgressChanged(object sender, WebBrowserProgressChangedEventArgs e)
-        {
-            Program.AssertOnEventThread();
-
-            if (tabControl != null && tabControl.SelectedTab != null && tabControl.SelectedTab.Tag == this)
-            {
-                if (e.MaximumProgress != 0)
-                {
-                    if (Program.MainWindow.StatusBarAction == null || Program.MainWindow.StatusBarAction.IsCompleted)
-                    {
-                        MainWindowActionAtNavigateTime = Program.MainWindow.StatusBarAction;
-                        Program.MainWindow.statusProgressBar.Value = Convert.ToInt32(((e.CurrentProgress * 100L) / (e.MaximumProgress)));
-                        Program.MainWindow.statusProgressBar.Visible = true;
-                    }
-                    if (Browser.Url != null)
-                    {
-                        string text =
-                            e.CurrentProgress >= e.MaximumProgress ?
-                                "" :
-                                string.Format(Messages.LOADING, Browser.Url.ToString().Ellipsise(50));
-                        Program.MainWindow.SetStatusBar(null, text);
-                    }
-                }
             }
         }
 

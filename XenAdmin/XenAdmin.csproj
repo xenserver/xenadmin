@@ -380,9 +380,6 @@
     <Compile Include="Controls\DecentGroupBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\DecentToolStripStatusLabel.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Controls\DoubleBufferedListView.cs">
       <SubType>Component</SubType>
     </Compile>

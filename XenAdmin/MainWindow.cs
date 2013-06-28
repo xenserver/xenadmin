@@ -103,9 +103,6 @@ namespace XenAdmin
         internal readonly VMStoragePage VMStoragePage = new VMStoragePage();
         internal readonly AdPage AdPage = new AdPage();
 
-        private ActionBase statusBarAction = null;
-        public ActionBase StatusBarAction { get { return statusBarAction; } }
-
         private bool IgnoreTabChanges = false;
         public bool AllowHistorySwitch = false;
         private bool ToolbarsEnabled;
@@ -396,15 +393,8 @@ namespace XenAdmin
                                                             if (action == null)
                                                                 return;
 
-                                                            SetStatusBar(null, null);
                                                             if (action.Type == ActionType.Action)
                                                             {
-                                                                if (statusBarAction != null)
-                                                                {
-                                                                    statusBarAction.Changed -= actionChanged;
-                                                                    statusBarAction.Completed -= actionChanged;
-                                                                }
-                                                                statusBarAction = action;
                                                                 action.Changed += actionChanged;
                                                                 action.Completed += actionChanged;
                                                                 actionChanged(action, null);
@@ -422,23 +412,15 @@ namespace XenAdmin
 
         void actionChanged_(ActionBase action)
         {
-            statusProgressBar.Visible = action.ShowProgress && !action.IsCompleted;
-
             // Be defensive against CA-8517.
             if (action.PercentComplete < 0 || action.PercentComplete > 100)
             {
                 log.ErrorFormat("PercentComplete is erroneously {0}", action.PercentComplete);
             }
-            else
-            {
-                statusProgressBar.Value = action.PercentComplete;
-            }
 
             // Don't show cancelled exception
             if (action.Exception != null && !(action.Exception is CancelledException))
             {
-                SetStatusBar(XenAdmin.Properties.Resources._000_error_h32bit_16, action.Exception.Message);
-
                 bool logs_visible;
                 IXenObject selected = selectionManager.Selection.FirstAsXenObject;
                 if (selected != null && action.AppliesTo.Contains(selected.opaque_ref))
@@ -491,25 +473,6 @@ namespace XenAdmin
 
                 RequestRefreshTreeView();
             }
-            else
-            {
-                SetStatusBar(null,
-                    action.IsCompleted ? null :
-                    !string.IsNullOrEmpty(action.Description) ? action.Description :
-                    !string.IsNullOrEmpty(action.Title) ? action.Title :
-                                                                null);
-            }
-        }
-
-        public void SetStatusBar(Image image, string message)
-        {
-            if ((windowStatusBar.Text != null && windowStatusBar.Text.Equals(message))
-                || windowStatusBar.Image != null && windowStatusBar.Equals(image))
-                return;
-
-            windowStatusBar.Image = image;
-            windowStatusBar.Text = message == null ? null : Helpers.FirstLine(message);
-            statusToolTip.SetToolTip(StatusStrip, message);
         }
 
         private bool ShouldSwitchToHistoryTab()
@@ -520,10 +483,6 @@ namespace XenAdmin
 
         private void MainWindow_Shown(object sender, EventArgs e)
         {
-            // CA-39179 for some reason making the statusProgressBar invisible in the resx file stops it
-            // becoming visible afterwards.
-            statusProgressBar.Visible = false;
-
             MainMenuBar.Location = new Point(0, 0);
             treeView.SelectedNode = treeView.Nodes[0];
 
@@ -2771,8 +2730,6 @@ namespace XenAdmin
                 }
             }
 
-            SetStatusBar(null, statusBarText);
-
             if (targetToHighlight != null)
             {
                 if (_highlightedDragTarget != targetToHighlight)
@@ -2800,7 +2757,6 @@ namespace XenAdmin
                 _highlightedDragTarget.ForeColor = treeView.ForeColor;
                 _highlightedDragTarget = null;
                 treeBuilder.HighlightedDragTarget = null;
-                SetStatusBar(null, null);
             }
         }
 

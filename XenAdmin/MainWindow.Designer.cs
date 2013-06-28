@@ -100,9 +100,6 @@ namespace XenAdmin
             this.TabPageWLB = new System.Windows.Forms.TabPage();
             this.TabPageWLBUpsell = new System.Windows.Forms.TabPage();
             this.TabPageAD = new System.Windows.Forms.TabPage();
-            this.StatusStrip = new System.Windows.Forms.StatusStrip();
-            this.windowStatusBar = new XenAdmin.Controls.DecentToolStripStatusLabel();
-            this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.ToolStrip = new XenAdmin.Controls.ToolStripEx();
             this.backButton = new System.Windows.Forms.ToolStripSplitButton();
             this.forwardButton = new System.Windows.Forms.ToolStripSplitButton();
@@ -295,7 +292,6 @@ namespace XenAdmin
             this.toolTipContainer1.SuspendLayout();
             this.TheTabControl.SuspendLayout();
             this.TabPageSnapshots.SuspendLayout();
-            this.StatusStrip.SuspendLayout();
             this.ToolStrip.SuspendLayout();
             this.ToolBarContextMenu.SuspendLayout();
             this.MenuBarToolStrip.SuspendLayout();
@@ -552,30 +548,6 @@ namespace XenAdmin
             resources.ApplyResources(this.TabPageAD, "TabPageAD");
             this.TabPageAD.Name = "TabPageAD";
             this.TabPageAD.UseVisualStyleBackColor = true;
-            // 
-            // StatusStrip
-            // 
-            resources.ApplyResources(this.StatusStrip, "StatusStrip");
-            this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.windowStatusBar,
-            this.statusProgressBar});
-            this.StatusStrip.Name = "StatusStrip";
-            // 
-            // windowStatusBar
-            // 
-            resources.ApplyResources(this.windowStatusBar, "windowStatusBar");
-            this.windowStatusBar.Name = "windowStatusBar";
-            this.windowStatusBar.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-            this.windowStatusBar.Spring = true;
-            this.windowStatusBar.Text = null;
-            // 
-            // statusProgressBar
-            // 
-            this.statusProgressBar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            resources.ApplyResources(this.statusProgressBar, "statusProgressBar");
-            this.statusProgressBar.Margin = new System.Windows.Forms.Padding(5);
-            this.statusProgressBar.Name = "statusProgressBar";
-            this.statusProgressBar.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             // 
             // ToolStrip
             // 
@@ -1867,7 +1839,6 @@ namespace XenAdmin
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.ToolStrip);
             this.Controls.Add(this.MenuPanel);
-            this.Controls.Add(this.StatusStrip);
             this.DoubleBuffered = true;
             this.KeyPreview = true;
             this.MainMenuStrip = this.MainMenuBar;
@@ -1888,8 +1859,6 @@ namespace XenAdmin
             this.toolTipContainer1.PerformLayout();
             this.TheTabControl.ResumeLayout(false);
             this.TabPageSnapshots.ResumeLayout(false);
-            this.StatusStrip.ResumeLayout(false);
-            this.StatusStrip.PerformLayout();
             this.ToolStrip.ResumeLayout(false);
             this.ToolStrip.PerformLayout();
             this.ToolBarContextMenu.ResumeLayout(false);
@@ -1905,8 +1874,6 @@ namespace XenAdmin
 
         #endregion
 
-        private System.Windows.Forms.StatusStrip StatusStrip;
-        internal XenAdmin.Controls.DecentToolStripStatusLabel windowStatusBar;
         private System.Windows.Forms.SplitContainer splitContainer1;
         // A custom MenuStrip to allow click-through
         // A custom ToolStrip to allow click-through
@@ -1919,7 +1886,6 @@ namespace XenAdmin
         private CommandToolStripButton ForceShutdownToolbarButton;
         private System.Windows.Forms.ContextMenuStrip TreeContextMenu;
         private System.Windows.Forms.ToolTip statusToolTip;
-        internal System.Windows.Forms.ToolStripProgressBar statusProgressBar;
         private CommandToolStripButton AddPoolToolbarButton;
         private CommandToolStripButton newStorageToolbarButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
@@ -1944,7 +1910,7 @@ namespace XenAdmin
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
-        internal System.Windows.Forms.ToolStripMenuItem poolToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem poolToolStripMenuItem;
         private CommandToolStripMenuItem AddPoolToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private CommandToolStripMenuItem PoolPropertiesToolStripMenuItem;
@@ -1956,7 +1922,7 @@ namespace XenAdmin
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private CommandToolStripMenuItem deleteToolStripMenuItem;
         private CommandToolStripMenuItem disconnectPoolToolStripMenuItem;
-        internal System.Windows.Forms.ToolStripMenuItem HostMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem HostMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem11;
         private CommandToolStripMenuItem ServerPropertiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
@@ -1971,7 +1937,7 @@ namespace XenAdmin
         private CommandToolStripMenuItem maintenanceModeToolStripMenuItem1;
         private CommandToolStripMenuItem backupToolStripMenuItem;
         private CommandToolStripMenuItem restoreFromBackupToolStripMenuItem;
-        internal System.Windows.Forms.ToolStripMenuItem VMToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem VMToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private CommandToolStripMenuItem VMPropertiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
