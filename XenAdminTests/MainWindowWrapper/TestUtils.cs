@@ -40,6 +40,7 @@ using XenAdmin;
 using XenAdmin.Controls;
 using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Dialogs;
+using XenAdmin.Controls.XenSearch;
 
 namespace XenAdminTests
 {
@@ -143,6 +144,10 @@ namespace XenAdminTests
         {
             return GetFieldDeep<Label>(o, name);
         }
-
+		
+		public static DropDownComboButton GetDropDownComboButton(object o, string name)
+        {
+            return GetFieldDeep<DropDownComboButton>(o, name);
+        }
     }
 }

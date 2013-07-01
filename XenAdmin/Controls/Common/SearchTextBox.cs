@@ -228,24 +228,22 @@ namespace XenAdmin.Controls
         [Browsable(true)]
         public new event EventHandler TextChanged;
 
-        public new bool ContainsFocus
+        private bool wasFocused;
+        private int cursorLoc;
+
+        public void SaveState()
         {
-            get { return textBox1.ContainsFocus; }
+            wasFocused = textBox1.ContainsFocus;
+            cursorLoc = textBox1.SelectionStart;
         }
 
-        public int SelectionStart
+        public void RestoreState()
         {
-            get { return textBox1.SelectionStart; }
-        }
+            if (!wasFocused || ContainsFocus)
+                return;
 
-        public new void Select()
-        {
             textBox1.Select();
-        }
-
-        public void Select(int start, int length)
-        {
-            textBox1.Select(start, length);
+            textBox1.Select(cursorLoc, 0);
         }
     }
 }

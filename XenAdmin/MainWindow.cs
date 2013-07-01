@@ -1540,12 +1540,9 @@ namespace XenAdmin
         /// </summary>
         internal void RefreshTreeView()
         {
-            VirtualTreeNode newRootNode = treeBuilder.CreateNewRootNode(TreeSearchBox.Search, TreeSearchBox.OrganizationalMode);
+            VirtualTreeNode newRootNode = treeBuilder.CreateNewRootNode(TreeSearchBox.Search.AddFullTextFilter(searchTextBox.Text), OrganizationalMode);
 
-            Program.Invoke(this, delegate
-            {
-                RefreshTreeView(newRootNode);
-            });
+            Program.Invoke(this, () => RefreshTreeView(newRootNode));
         }
 
         /// <summary>
@@ -1566,7 +1563,7 @@ namespace XenAdmin
 
             try
             {
-                treeBuilder.RefreshTreeView(newRootNode, TreeSearchBox.searchText, TreeSearchBox.currentMode);
+                treeBuilder.RefreshTreeView(newRootNode, searchTextBox.Text, TreeSearchBox.currentMode);
             }
             catch (Exception exn)
             {
@@ -1737,17 +1734,17 @@ namespace XenAdmin
             // unavoidable side-effect of giving them focus - this is irritating if trying to navigate
             // the tree using the keyboard.
 
-            MajorChange(delegate()
-            {
-                bool treeViewHasFocus = treeView.ContainsFocus;
-                TreeSearchBox.SaveState();
-               
-                ChangeToNewTabs();
+            MajorChange(() =>
+                {
+                    bool treeViewHasFocus = treeView.ContainsFocus;
+                    searchTextBox.SaveState();
 
-                if (!searchMode && treeViewHasFocus)
-                    treeView.Focus();
-                TreeSearchBox.RestoreState();
-            });
+                    ChangeToNewTabs();
+
+                    if (!searchMode && treeViewHasFocus)
+                        treeView.Focus();
+                    searchTextBox.RestoreState();
+                });
         }
 
         private bool SearchTabVisible
@@ -2323,7 +2320,7 @@ namespace XenAdmin
 
         private void AddOrgViewItems(int insertIndex, IList<VirtualTreeNode> nodes, ContextMenuStrip contextMenuStrip)
         {
-            if (!TreeSearchBox.OrganizationalMode || nodes.Count == 0)
+            if (!OrganizationalMode || nodes.Count == 0)
             {
                 return;
             }
@@ -2662,7 +2659,7 @@ namespace XenAdmin
 
         private bool CanDrag()
         {
-            if (!TreeSearchBox.OrganizationalMode)
+            if (!OrganizationalMode)
             {
                 return selectionManager.Selection.AllItemsAre<Host>() || selectionManager.Selection.AllItemsAre<VM>((Predicate<VM>)delegate(VM vm)
                 {
@@ -3402,14 +3399,14 @@ namespace XenAdmin
 
             bool success = SelectObject(o, treeView.Nodes[0], expand, ref cancelled);
 
-            if (!success && !cancelled && TreeSearchBox.searchText.Length > 0)
+            if (!success && !cancelled && searchTextBox.Text.Length > 0)
             {
                 // if the node could not be found and the node *is* selectable then it means that
                 // node isn't visible with the current search. So clear the search and try and
                 // select the object again.
 
                 // clear search.
-                TreeSearchBox.searchText = string.Empty;
+                searchTextBox.Reset();
 
                 // update the treeview
                 RefreshTreeView();
@@ -3574,6 +3571,11 @@ namespace XenAdmin
             }
         }
 
+        public bool OrganizationalMode
+        {
+            get { return TreeSearchBox.currentMode == TreeSearchBox.Mode.OrgView; }
+        }
+
         private bool DoSearch(string filename)
         {
             List<Search> searches = Search.LoadFile(filename);
@@ -3663,10 +3665,18 @@ namespace XenAdmin
             }
             return name;
         }
+        
+        private void searchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            RequestRefreshTreeView();
+        }
 
         void TreeSearchBox_SearchChanged(object sender, EventArgs e)
         {
+            searchTextBox.Reset();
             RequestRefreshTreeView();
+            FocusTreeView();
+            SelectObject(null);            
         }
 
         private void SearchPanel_ExportSearch(object sender, SearchEventArgs e)
@@ -3950,14 +3960,6 @@ namespace XenAdmin
         internal static ToolStripMenuItem NewToolStripMenuItem(string text)
         {
             return NewToolStripMenuItem(text, null, null);
-        }
-
-        /// <summary>
-        /// Equivalent to NewToolStripMenuItem(text, ico, null).
-        /// </summary>
-        internal static ToolStripMenuItem NewToolStripMenuItem(string text, Image ico)
-        {
-            return NewToolStripMenuItem(text, ico, null);
         }
 
         /// <summary>

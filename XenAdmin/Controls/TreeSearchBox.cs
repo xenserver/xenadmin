@@ -53,24 +53,7 @@ namespace XenAdmin.Controls
             PopulateMenu();
         }
 
-        public bool OrganizationalMode
-        {
-            get { return currentMode == Mode.OrgView; }
-        }
-
-        public string searchText
-        {
-            get { return searchTextBox.Text; }
-            set { searchTextBox.Text = value; }
-        }
-
-        // This is here to support the unit tests
-        internal List<ToolStripItem> MenuItems
-        {
-            get { return comboButtonViews.Items; }
-        }
-
-        private void Search_SearchesChanged(object sender, EventArgs e)
+        private void Search_SearchesChanged()
         {
             PopulateMenu();
         }
@@ -91,7 +74,7 @@ namespace XenAdmin.Controls
 
         private void AddMenuItem(string name, object tag, Image image, bool selected)
         {
-            ToolStripMenuItem menuItem = MainWindow.NewToolStripMenuItem(name, image);
+            ToolStripMenuItem menuItem = MainWindow.NewToolStripMenuItem(name, image, null);
             menuItem.Tag = tag;
             comboButtonViews.AddItem(menuItem);
             if (selected)
@@ -108,17 +91,6 @@ namespace XenAdmin.Controls
             AddMenuItem(search.Name.EscapeAmpersands(), search,
                 search.DefaultSearch ? Properties.Resources._000_defaultSpyglass_h32bit_16 : Properties.Resources._000_Search_h32bit_16,
                 currentMode == Mode.SavedSearch && currentSearch.UUID == search.UUID);
-        }
-
-        // When switching between org and cluster view we default back to XenCenter 
-        // node to stop weirdness
-        void JumpToRootNode()
-        {
-            if (Program.MainWindow == null)
-                return;
-
-            Program.MainWindow.FocusTreeView();
-            Program.MainWindow.SelectObject(null);
         }
 
         private void comboButtonViews_SelectedItemChanged(object sender, EventArgs e)
@@ -139,61 +111,26 @@ namespace XenAdmin.Controls
                 currentMode = mode;
             }
 
-            searchTextBox.Text = "";
-            OnSearchChanged();
-            JumpToRootNode();
-        }
-
-        private void searchTextBox_TextChanged(object sender, EventArgs e)
-        {
-            OnSearchChanged();
-        }
-
-        public event EventHandler SearchChanged;
-        public virtual void OnSearchChanged()
-        {
             if (SearchChanged != null)
                 SearchChanged(this, new EventArgs());
         }
+
+        public event EventHandler SearchChanged;
 
         public Search Search
         {
             get
             {
-                Search search;
                 switch (currentMode)
                 {
                     case Mode.ServerView:
-                        search = TreeSearch.DefaultTreeSearch ?? TreeSearch.SearchFor(null);
-                        break;
+                        return TreeSearch.DefaultTreeSearch ?? TreeSearch.SearchFor(null);
                     case Mode.OrgView:
-                        search = Search.SearchForEverything();
-                        break;
+                        return Search.SearchForEverything();
                     default:  // Mode.SavedSearch
-                        search = currentSearch;
-                        break;
+                        return currentSearch;
                 }
-
-                return search.AddFullTextFilter(searchTextBox.Text);
             }
-        }
-
-        private bool wasFocused;
-        private int cursorLoc;
-
-        public void SaveState()
-        {
-            wasFocused = searchTextBox.ContainsFocus;
-            cursorLoc = searchTextBox.SelectionStart;
-        }
-
-        public void RestoreState()
-        {
-            if (!wasFocused || searchTextBox.ContainsFocus)
-                return;
-
-            searchTextBox.Select();
-            searchTextBox.Select(cursorLoc, 0);
         }
     }
 }

@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using NUnit.Framework;
@@ -47,23 +48,24 @@ namespace XenAdminTests.SearchTests
         public void LoadInSearchPanel()
         {
             foreach (Search search in Search.Searches)
-                MW(delegate() { Program.MainWindow.DoSearch(search); });
+                MW(() => Program.MainWindow.DoSearch(search));
         }
 
         [Test]
         public void LoadInTree()
         {
-            TreeSearchBox treeSearchBox = Program.MainWindow.TreeSearchBox;
-            foreach (ToolStripItem item in treeSearchBox.MenuItems)
-            {
-                if (item is ToolStripMenuItem)
+            MW(() =>
                 {
-                    MW(item.PerformClick);
+                    var menuItems = MainWindowWrapper.TreeSearchBoxItems;
+					
+					foreach (ToolStripMenuItem item in menuItems.OfType<ToolStripMenuItem>())
+                    {
+                        item.PerformClick();
 
-                    // Try typing in the TreeSearchBox too. TODO: check the results.
-                    MW(delegate() { treeSearchBox.searchText = "eb 10.*"; });
-                }
-            }
+                        // Try typing in the TreeSearchBox too.
+                        MainWindowWrapper.SearchTextBox.Text = "eb 10.*";
+                    }
+                });
         }
     }
 }

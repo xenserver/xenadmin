@@ -630,12 +630,12 @@ namespace XenAdmin.XenSearch
         }
 
         private static Dictionary<String, Search> searches =new Dictionary<string, Search>();
-        public static event EventHandler SearchesChanged;
+        public static event Action SearchesChanged;
 
         private static void OnSearchesChanged()
         {
             if (SearchesChanged != null)
-                SearchesChanged(null, new EventArgs());
+                SearchesChanged();
         }
 
         public static Search[] Searches

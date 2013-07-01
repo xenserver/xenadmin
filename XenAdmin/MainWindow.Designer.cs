@@ -70,6 +70,7 @@ namespace XenAdmin
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView = new XenAdmin.Controls.FlickerFreeTreeView();
+            this.searchTextBox = new XenAdmin.Controls.SearchTextBox();
             this.TreeSearchBox = new XenAdmin.Controls.TreeSearchBox();
             this.TitleBackPanel = new XenAdmin.Controls.GradientPanel.GradientPanel();
             this.TitleIcon = new System.Windows.Forms.PictureBox();
@@ -309,6 +310,7 @@ namespace XenAdmin
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.treeView);
+            this.splitContainer1.Panel1.Controls.Add(this.searchTextBox);
             this.splitContainer1.Panel1.Controls.Add(this.TreeSearchBox);
             resources.ApplyResources(this.splitContainer1.Panel1, "splitContainer1.Panel1");
             // 
@@ -341,11 +343,16 @@ namespace XenAdmin
             this.treeView.DragOver += new System.Windows.Forms.DragEventHandler(this.treeView_DragOver);
             this.treeView.SelectionsChanged += new System.EventHandler(this.treeView_SelectionsChanged);
             // 
+            // searchTextBox
+            // 
+            resources.ApplyResources(this.searchTextBox, "searchTextBox");
+            this.searchTextBox.Name = "searchTextBox";
+            this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
+            // 
             // TreeSearchBox
             // 
             resources.ApplyResources(this.TreeSearchBox, "TreeSearchBox");
             this.TreeSearchBox.Name = "TreeSearchBox";
-            this.TreeSearchBox.searchText = "";
             // 
             // TitleBackPanel
             // 
@@ -1890,7 +1897,7 @@ namespace XenAdmin
         private CommandToolStripButton newStorageToolbarButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
-        internal XenAdmin.Controls.TreeSearchBox TreeSearchBox;
+        private XenAdmin.Controls.TreeSearchBox TreeSearchBox;
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.PictureBox TitleIcon;
         private System.Windows.Forms.ToolStripButton AlertsToolbarButton;
@@ -2092,6 +2099,7 @@ namespace XenAdmin
         private ToolStripSeparator toolStripSeparator31;
         private CommandToolStripMenuItem destroyServerToolStripMenuItem;
         private CommandToolStripMenuItem restartToolstackToolStripMenuItem;
+        private SearchTextBox searchTextBox;
     }
 
 }

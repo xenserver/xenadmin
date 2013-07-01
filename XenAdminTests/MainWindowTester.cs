@@ -381,7 +381,7 @@ namespace XenAdminTests
 
         protected void ToggleOrgView()
         {
-            MW(() => PutInOrgView(!MainWindowWrapper.TreeSearchBox.OrganizationalMode));
+            MW(() => PutInOrgView(!MainWindowWrapper.Item.OrganizationalMode));
         }
 
         /// <summary>
@@ -390,7 +390,7 @@ namespace XenAdminTests
         /// </summary>
         protected void PutInOrgView(bool org)
         {
-            MW(MainWindowWrapper.TreeSearchBox.MenuItems[org ? 1 : 0].PerformClick);
+            MW(MainWindowWrapper.TreeSearchBoxItems[org ? 1 : 0].PerformClick);
             MW(MainWindowWrapper.RefreshTreeView);
 
             Predicate<VirtualTreeNode> match = n => n.Tag is Pool || n.Tag is Host || (n.Tag == null && n.Nodes.Count == 0);
@@ -405,7 +405,7 @@ namespace XenAdminTests
 
         protected void ApplyTreeSearch(string text)
         {
-            MW(() => MainWindowWrapper.TreeSearchBox.searchText = text);
+            MW(() => MainWindowWrapper.SearchTextBox.Text = text);
             MW(MainWindowWrapper.RefreshTreeView);
         }
 

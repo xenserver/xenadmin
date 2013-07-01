@@ -32,7 +32,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelViews = new System.Windows.Forms.Label();
             this.comboButtonViews = new XenAdmin.Controls.XenSearch.DropDownComboButton();
-            this.searchTextBox = new XenAdmin.Controls.SearchTextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,28 +55,20 @@
             this.comboButtonViews.UseVisualStyleBackColor = true;
             this.comboButtonViews.SelectedItemChanged += new System.EventHandler(this.comboButtonViews_SelectedItemChanged);
             // 
-            // searchTextBox
-            // 
-            resources.ApplyResources(this.searchTextBox, "searchTextBox");
-            this.searchTextBox.Name = "searchTextBox";
-            this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
-            // 
             // TreeSearchBox
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.searchTextBox);
             this.Name = "TreeSearchBox";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
-
+            this.PerformLayout();
         }
 
         #endregion
 
-        private SearchTextBox searchTextBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label labelViews;
         private XenAdmin.Controls.XenSearch.DropDownComboButton comboButtonViews;

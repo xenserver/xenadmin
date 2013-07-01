@@ -35,6 +35,7 @@ using System.Text;
 using XenAdmin;
 using System.Windows.Forms;
 using XenAdmin.Controls;
+using XenAdmin.Controls.XenSearch;
 using XenAdmin.Plugins;
 using XenAdmin.Commands;
 
@@ -225,6 +226,20 @@ namespace XenAdminTests
             }
         }
 
+        internal List<ToolStripItem> TreeSearchBoxItems
+        {
+            get
+            {
+                DropDownComboButton comboButton = TestUtils.GetDropDownComboButton(Item, "TreeSearchBox.comboButtonViews");
+                return comboButton.Items;
+            }
+        }
+
+        public SearchTextBox SearchTextBox
+        {
+            get { return GetField<SearchTextBox>("searchTextBox"); }
+        }
+
         public TabControl TheTabControl
         {
             get
@@ -233,7 +248,7 @@ namespace XenAdminTests
             }
         }
 
-        public XenAdmin.Controls.MenuStripEx MainMenuBar
+        public MenuStripEx MainMenuBar
         {
             get
             {

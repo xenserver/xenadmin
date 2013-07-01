@@ -243,7 +243,7 @@ namespace XenAdminTests.TreeTests
             // apply a random saved search
             MW(delegate
             {
-                MainWindowWrapper.TreeSearchBox.MenuItems[2].PerformClick();
+                MainWindowWrapper.TreeSearchBoxItems[2].PerformClick();
                 MainWindowWrapper.RefreshTreeView();
             });
 
