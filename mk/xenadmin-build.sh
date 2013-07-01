@@ -260,9 +260,9 @@ compile_installer()
   
   if [ "${name}" = "VNCControl" ]
   then
-   ${LIGHT} obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -out out${name}/${name}.msi
+   ${LIGHT} obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
   else
-   ${LIGHT} obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -loc $2.wxl -out out${name}/${name}.msi
+   ${LIGHT} obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -loc $2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
   fi
 }
 

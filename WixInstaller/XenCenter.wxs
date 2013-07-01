@@ -32,7 +32,8 @@
  SUCH DAMAGE. 
 -->
 
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
     <?define ProductVersion="1.0.0" ?>
     <?define UpgradeCode="{EA0EF50F-5CC6-452B-B09F-3F5EC564899D}"?>
     <?define ProductCode="{65AE1345-A520-456D-8A19-2F52D43D3A09}"?>
@@ -206,7 +207,7 @@
             <Component Id="ApplicationShortcut" Guid="6B875059-26BC-4fa7-ACB7-0B9A4E4665CA">
                 <Shortcut Id="startmenuXenCenter" ShortName="XenCen50" Name="Citrix XenCenter" Description="XenCenter Shortcut" Target="[INSTALLDIR]XenCenter.exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
                 <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
-                <RegistryValue Root="HKCU" Key="Software\Microsoft\XenCenter" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+                <RegistryValue Root="HKCU" Key="Software\Citrix\XenCenter" Name="installed" Type="integer" Value="1" KeyPath="yes" />
             </Component>
         </DirectoryRef>
         <Feature Id="MainProgram" Title="Citrix XenCenter" Description="The complete package" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow">
@@ -223,14 +224,12 @@
         <UIRef Id="WixUI_ErrorProgressText" />
         <Property Id="Install_All" Value="0" />
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
-        <Property Id="FRAMEWORK35">
-            <RegistrySearch Id="Framework35Registry" Type="raw" Root="HKLM" Key="Software\Microsoft\NET Framework Setup\NDP\v3.5" Name="Install" />
-        </Property>
         <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
         <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
-        <Condition Message=".NET Framework 3.5 is required for this installation.">FRAMEWORK35 &gt;= "#1"</Condition>
+        <PropertyRef Id="NETFRAMEWORK35" />
+        <Condition Message=".NET Framework 3.5 is required for this installation."><![CDATA[Installed OR NETFRAMEWORK35]]></Condition>
         <InstallExecuteSequence>
-			<AppSearch Sequence="50" />
+            <AppSearch Sequence="50" />
             <FindRelatedProducts Before="LaunchConditions" />
             <LaunchConditions Sequence="100" />
             <ValidateProductID Sequence="700" />
