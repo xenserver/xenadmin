@@ -409,6 +409,13 @@ namespace XenAdmin.Core
 
         private static bool PaidHostFreeMaster(Host slave, Host master)
         {
+            if (slave == null || master == null)
+                return false;
+
+            // Is using per socket generation licenses?
+            if (Helpers.ClearwaterOrGreater(slave) && Helpers.ClearwaterOrGreater(master))
+                return !slave.IsFreeLicense() && master.IsFreeLicense();
+
             return (slave.IsFloodgateOrLater() && master.IsFloodgateOrLater() &&
                 !Host.RestrictHAFloodgate(slave) && Host.RestrictHAFloodgate(master));
         }
