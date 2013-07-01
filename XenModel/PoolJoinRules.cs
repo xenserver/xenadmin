@@ -391,13 +391,8 @@ namespace XenAdmin.Core
                 return false;
             
             // Is using per socket generation licenses?
-            if (Helpers.ClearwaterOrGreater(slave) && Helpers.ClearwaterOrGreater(master) &&
-                slave.IsFreeLicense() && !master.IsFreeLicense())
-            {
-                if (allowLicenseUpgrade)
-                    return false;
-                return true;
-            }
+            if (Helpers.ClearwaterOrGreater(slave) && Helpers.ClearwaterOrGreater(master))
+                return slave.IsFreeLicense() && !master.IsFreeLicense() && !allowLicenseUpgrade;
 
             if (slave.IsFloodgateOrLater() && master.IsFloodgateOrLater() &&
                 Host.RestrictHAFloodgate(slave) && !Host.RestrictHAFloodgate(master))
