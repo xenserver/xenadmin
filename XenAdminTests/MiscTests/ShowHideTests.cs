@@ -37,7 +37,7 @@ using XenAdmin.Controls;
 using XenAPI;
 using XenAdmin;
 using XenAdmin.Core;
-using XenAdmin.Network;
+
 
 namespace XenAdminTests.MiscTests
 {
@@ -50,7 +50,7 @@ namespace XenAdminTests.MiscTests
 
         private ComparableList<IXenObject> Populate()
         {
-            VirtualTreeNode rootNode = MW(() => { return new MainWindowTreeBuilder(new FlickerFreeTreeView()).CreateNewRootNode(new TreeSearchBox().Search, false); });
+            VirtualTreeNode rootNode = MW(() => new MainWindowTreeBuilder(new FlickerFreeTreeView()).CreateNewRootNode(new TreeSearchBox().Search, TreeSearchBox.Mode.Infrastructure));
             List<VirtualTreeNode> nodes = new List<VirtualTreeNode>(rootNode.Descendants);
             return new ComparableList<IXenObject>(nodes.ConvertAll(n => (IXenObject)n.Tag));
         }
@@ -61,7 +61,7 @@ namespace XenAdminTests.MiscTests
         /// <param name="hiddenObject">The hidden object.</param>
         private ComparableList<IXenObject> CalculatePopulateWithHiddenObject(IXenObject hiddenObject)
         {
-            VirtualTreeNode rootNode = MW(() => { return new MainWindowTreeBuilder(new FlickerFreeTreeView()).CreateNewRootNode(new TreeSearchBox().Search, false); });
+            VirtualTreeNode rootNode = MW(() => new MainWindowTreeBuilder(new FlickerFreeTreeView()).CreateNewRootNode(new TreeSearchBox().Search, TreeSearchBox.Mode.Infrastructure));
 
             List<VirtualTreeNode> nodes = new List<VirtualTreeNode>(rootNode.Descendants);
 

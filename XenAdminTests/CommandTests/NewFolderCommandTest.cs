@@ -35,9 +35,8 @@ using System.Text;
 using XenAdmin.Commands;
 using XenAdmin.Model;
 using XenAdmin.Controls;
-using System.Threading;
 using NUnit.Framework;
-using XenAdmin.Core;
+
 
 namespace XenAdminTests.CommandTests
 {
@@ -78,6 +77,11 @@ namespace XenAdminTests.CommandTests
         internal override Command CreateCommand()
         {
             return new NewFolderCommand();
+        }
+
+        protected override int NativeView
+        {
+            get { return ORGANIZATION_VIEW; }
         }
 
         public void Test()

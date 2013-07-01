@@ -36,8 +36,7 @@ using XenAdmin.Commands;
 using XenAdmin;
 using XenAdmin.Controls;
 using NUnit.Framework;
-using XenAdmin.Model;
-using XenAPI;
+
 
 namespace XenAdminTests.CommandTests
 {
@@ -105,7 +104,7 @@ namespace XenAdminTests.CommandTests
         {
             // just delete one tag for this test as it's quite slow.
 
-            PutInOrgView(true);
+            PutInOrgView(ORGANIZATION_VIEW);
 
             VirtualTreeNode node = GetAllTreeNodes().Find(delegate(VirtualTreeNode n)
             {

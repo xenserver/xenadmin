@@ -67,7 +67,6 @@ namespace XenAdmin.Controls
 
         public void Reset()
         {
-            textBox1.Text = string.Empty;
             textBox1_LostFocus(this, EventArgs.Empty);
         }
 

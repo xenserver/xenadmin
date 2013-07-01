@@ -184,7 +184,7 @@ namespace XenAdminTests.TabsAndMenus
         [Test]
         public void ToolBar_Snapshot()
         {
-            PutInOrgView(true);
+            PutInOrgView(OBJECT_VIEW);
             try
             {
                 ExpectedMenuItem[] buttons = new ExpectedMenuItem[]{
@@ -207,14 +207,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(false);
+                PutInOrgView(INFRASTRUCTURE_VIEW);
             }
         }
 
         [Test]
         public void ToolBar_VDI()
         {
-            PutInOrgView(true);
+            PutInOrgView(OBJECT_VIEW);
             try
             {
                 ExpectedMenuItem[] buttons = new ExpectedMenuItem[]{
@@ -234,14 +234,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(false);
+                PutInOrgView(INFRASTRUCTURE_VIEW);
             }
         }
 
         [Test]
         public void ToolBar_Network()
         {
-            PutInOrgView(true);
+            PutInOrgView(OBJECT_VIEW);
             try
             {
                 ExpectedMenuItem[] buttons = new ExpectedMenuItem[]{
@@ -264,14 +264,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(false);
+                PutInOrgView(INFRASTRUCTURE_VIEW);
             }
         }
 
         [Test]
         public void ToolBar_GroupingTag()
         {
-            PutInOrgView(true);
+            PutInOrgView(OBJECT_VIEW);
             try
             {
                 ExpectedMenuItem[] buttons = new ExpectedMenuItem[]{
@@ -294,14 +294,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(false);
+                PutInOrgView(INFRASTRUCTURE_VIEW);
             }
         }
 
         [Test]
         public void ToolBar_Folder()
         {
-            PutInOrgView(true);
+            PutInOrgView(ORGANIZATION_VIEW);
             try
             {
                 ExpectedMenuItem[] buttons = new ExpectedMenuItem[]{
@@ -324,7 +324,7 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(false);
+                PutInOrgView(INFRASTRUCTURE_VIEW);
             }
         }
 

@@ -135,7 +135,7 @@ namespace XenAdminTests.TabsAndMenus
         [Test]
         public void Tabs_Snapshot()
         {
-            PutInOrgView(true);
+            PutInOrgView(OBJECT_VIEW);
             try
             {
                 foreach (VM snapshot in GetAllXenObjects<VM>(v => v.is_a_snapshot))
@@ -145,28 +145,28 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(false);
+                PutInOrgView(INFRASTRUCTURE_VIEW);
             }
         }
 
         [Test]
         public void Tabs_VDI()
         {
-            PutInOrgView(true);
+            PutInOrgView(OBJECT_VIEW);
             try
             {
                 VerifyTabs(GetAnyVDI(v => ( v.name_label != "base copy" && !v.IsHidden )), VDITabs);
             }
             finally
             {
-                PutInOrgView(false);
+                PutInOrgView(INFRASTRUCTURE_VIEW);
             }
         }
 
         [Test]
         public void Tabs_Network()
         {
-            PutInOrgView(true);
+            PutInOrgView(OBJECT_VIEW);
             try
             {
                 foreach (XenAPI.Network network in GetAllXenObjects<XenAPI.Network>(n => n.name_label != "Host internal management network"))
@@ -176,14 +176,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(false);
+                PutInOrgView(INFRASTRUCTURE_VIEW);
             }
         }
 
         [Test]
         public void Tabs_GroupingTag()
         {
-            PutInOrgView(true);
+            PutInOrgView(OBJECT_VIEW);
             try
             {
                 VirtualTreeNode n = GetAllTreeNodes().Find(v => v.Tag is GroupingTag);
@@ -191,13 +191,13 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(false);
+                PutInOrgView(INFRASTRUCTURE_VIEW);
             }
         }
 
         public void Tabs_Folder()
         {
-            PutInOrgView(true);
+            PutInOrgView(OBJECT_VIEW);
             try
             {
                 foreach (Folder folder in GetAllXenObjects<Folder>())
@@ -207,7 +207,7 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(false);
+                PutInOrgView(INFRASTRUCTURE_VIEW);
             }
         }
 

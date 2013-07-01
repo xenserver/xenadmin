@@ -615,9 +615,21 @@ namespace XenAdmin.XenSearch
             return new Search(query, grouping, false, "", "", null, sorts);
         }
 
-        public static Search SearchForEverything()
+        public static Search SearchForAllTypes()
         {
-            Query query = new Query(new QueryScope(ObjectTypes.AllIncFolders), null);
+            Query query = new Query(new QueryScope(ObjectTypes.AllExcFolders), null);
+            return new Search(query, null, false, "", null, false);
+        }
+
+        public static Search SearchForOrganization()
+        {
+            var foldersQuery = new NullQuery<Folder>(PropertyNames.folder, false);
+            var vAppsQuery = new BooleanQuery(PropertyNames.in_any_appliance, true);
+            var tagsQuery = new ListEmptyQuery<String>(PropertyNames.tags, false);
+            var fieldsQuery = new BooleanQuery(PropertyNames.has_custom_fields, true);
+            var groupQuery = new GroupQuery(new QueryFilter[] {foldersQuery, vAppsQuery, tagsQuery, fieldsQuery}, GroupQuery.GroupQueryType.Or);
+
+            Query query = new Query(new QueryScope(ObjectTypes.AllIncFolders), groupQuery);
             return new Search(query, null, false, "", null, false);
         }
 

@@ -33,14 +33,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using XenAdmin.Controls;
-using System.Collections.ObjectModel;
 using XenAdmin.Model;
 using XenAPI;
-using XenAdmin.Controls.CustomGridView;
 using System.Windows.Forms;
 using System.Threading;
 using XenAdmin.Actions;
-using XenAdmin.Network.StorageLink;
 
 
 namespace XenAdmin.Commands
@@ -55,8 +52,8 @@ namespace XenAdmin.Commands
         protected override bool CanExecuteCore()
         {
             Folder targetFolder = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Folder>();
-            
-            return Program.MainWindow.OrganizationalMode && 
+
+            return Program.MainWindow.TreeSearchBoxMode == TreeSearchBox.Mode.Organization && 
                 targetFolder != null && 
                 GetDraggedItemsAsXenObjects<IXenObject>().Count > 0 && 
                 DraggedObjectsAreValid();

@@ -1540,7 +1540,7 @@ namespace XenAdmin
         /// </summary>
         internal void RefreshTreeView()
         {
-            VirtualTreeNode newRootNode = treeBuilder.CreateNewRootNode(TreeSearchBox.Search.AddFullTextFilter(searchTextBox.Text), OrganizationalMode);
+            VirtualTreeNode newRootNode = treeBuilder.CreateNewRootNode(TreeSearchBox.Search.AddFullTextFilter(searchTextBox.Text), TreeSearchBoxMode);
 
             Program.Invoke(this, () => RefreshTreeView(newRootNode));
         }
@@ -1563,7 +1563,7 @@ namespace XenAdmin
 
             try
             {
-                treeBuilder.RefreshTreeView(newRootNode, searchTextBox.Text, TreeSearchBox.currentMode);
+                treeBuilder.RefreshTreeView(newRootNode, searchTextBox.Text, TreeSearchBoxMode);
             }
             catch (Exception exn)
             {
@@ -2320,7 +2320,9 @@ namespace XenAdmin
 
         private void AddOrgViewItems(int insertIndex, IList<VirtualTreeNode> nodes, ContextMenuStrip contextMenuStrip)
         {
-            if (!OrganizationalMode || nodes.Count == 0)
+            if ((TreeSearchBoxMode != XenAdmin.Controls.TreeSearchBox.Mode.Objects
+                && TreeSearchBoxMode != XenAdmin.Controls.TreeSearchBox.Mode.Organization)
+                || nodes.Count == 0)
             {
                 return;
             }
@@ -2659,12 +2661,10 @@ namespace XenAdmin
 
         private bool CanDrag()
         {
-            if (!OrganizationalMode)
+            if ((TreeSearchBoxMode != XenAdmin.Controls.TreeSearchBox.Mode.Objects
+                && TreeSearchBoxMode != XenAdmin.Controls.TreeSearchBox.Mode.Organization))
             {
-                return selectionManager.Selection.AllItemsAre<Host>() || selectionManager.Selection.AllItemsAre<VM>((Predicate<VM>)delegate(VM vm)
-                {
-                    return !vm.is_a_template;
-                });
+                return selectionManager.Selection.AllItemsAre<Host>() || selectionManager.Selection.AllItemsAre<VM>(vm => !vm.is_a_template);
             }
             foreach (SelectedItem item in selectionManager.Selection)
             {
@@ -3551,6 +3551,9 @@ namespace XenAdmin
 
         #region XenSearch
 
+        public TreeSearchBox.Mode TreeSearchBoxMode
+        { get { return TreeSearchBox.currentMode; } }
+
         // SearchMode doesn't just mean we are looking at the Search tab.
         // It's set when we import a search from a file; or when we double-click
         // on a folder or tag name to search for it.
@@ -3569,11 +3572,6 @@ namespace XenAdmin
                 searchMode = value;
                 UpdateToolbarsCore();
             }
-        }
-
-        public bool OrganizationalMode
-        {
-            get { return TreeSearchBox.currentMode == TreeSearchBox.Mode.OrgView; }
         }
 
         private bool DoSearch(string filename)

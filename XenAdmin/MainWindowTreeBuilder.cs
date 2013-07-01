@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Model;
@@ -50,8 +51,9 @@ namespace XenAdmin
         private object _highlightedDragTarget;
         private string _lastSearchText = string.Empty;
         private TreeSearchBox.Mode _lastSearchMode;
-        private readonly List<VirtualTreeNode.PersistenceInfo> _serverViewExpandedTags = new List<VirtualTreeNode.PersistenceInfo>();
-        private readonly List<VirtualTreeNode.PersistenceInfo> _orgViewExpandedTags = new List<VirtualTreeNode.PersistenceInfo>();
+        private readonly List<VirtualTreeNode.PersistenceInfo> _infrastructureViewExpandedTags = new List<VirtualTreeNode.PersistenceInfo>();
+        private readonly List<VirtualTreeNode.PersistenceInfo> _objectViewExpandedTags = new List<VirtualTreeNode.PersistenceInfo>();
+        private readonly List<VirtualTreeNode.PersistenceInfo> _organizationViewExpandedTags = new List<VirtualTreeNode.PersistenceInfo>();
         private bool _rootExpanded;
 
         public MainWindowTreeBuilder(FlickerFreeTreeView treeView)
@@ -63,21 +65,27 @@ namespace XenAdmin
             _treeViewForeColor = treeView.ForeColor;
             _treeViewBackColor = treeView.BackColor;
 
-            SetDefaultOrgViewExpandedNodes();
+            SetDefaultObjectViewExpandedNodes();
+            SetOrganizationViewExpandedNodes();
         }
 
-        /// <summary>
-        /// Sets up the default expanded nodes for org view. These are Folders, Tags, Types, Custom Fields.
-        /// </summary>
-        private void SetDefaultOrgViewExpandedNodes()
+        private void SetDefaultObjectViewExpandedNodes()
         {
-            VirtualTreeNode dummyRootNode = new VirtualTreeNode("XenCenter");
-            OrganizationalView.PopulateOrganizationalView(new MainWindowTreeNodeGroupAcceptor(null, _treeViewForeColor, _treeViewBackColor, dummyRootNode), TreeSearch.DefaultTreeSearch);
+            VirtualTreeNode dummyRootNode = new VirtualTreeNode(Messages.VIEW_OBJECTS);
+            OrganizationalView.PopulateObjectView(CreateGroupAcceptor(dummyRootNode), TreeSearch.DefaultTreeSearch);
+
             foreach (VirtualTreeNode n in dummyRootNode.Nodes)
-            {
-                _orgViewExpandedTags.Add(n.GetPersistenceInfo());
-            }
+                _objectViewExpandedTags.Add(n.GetPersistenceInfo());
         }
+
+        private void SetOrganizationViewExpandedNodes()
+        {
+            VirtualTreeNode dummyRootNode = new VirtualTreeNode(Messages.VIEW_ORGANIZATION);
+            OrganizationalView.PopulateOrganizationView(CreateGroupAcceptor(dummyRootNode), TreeSearch.DefaultTreeSearch);
+
+            foreach (VirtualTreeNode n in dummyRootNode.Nodes)
+                _organizationViewExpandedTags.Add(n.GetPersistenceInfo());
+         }
 
         /// <summary>
         /// Gets or sets an object that should be highlighted.
@@ -130,48 +138,76 @@ namespace XenAdmin
             }
         }
 
-        public VirtualTreeNode CreateNewRootNode(Search search, bool organizationalMode)
+        public VirtualTreeNode CreateNewRootNode(Search search, TreeSearchBox.Mode mode)
         {
-            if (!organizationalMode)
-            {
-                Util.ThrowIfParameterNull(search, "search");
-            }
+            VirtualTreeNode newRootNode;
+            MainWindowTreeNodeGroupAcceptor groupAcceptor;
 
-            VirtualTreeNode newRootNode = new VirtualTreeNode("XenCenter");
-
-            MainWindowTreeNodeGroupAcceptor groupAcceptor = new MainWindowTreeNodeGroupAcceptor(_highlightedDragTarget, _treeViewForeColor, _treeViewBackColor, newRootNode);
-
-            if (organizationalMode)
+            switch (mode)
             {
-                OrganizationalView.PopulateOrganizationalView(groupAcceptor, search);
-            }
-            else
-            {
-                search.PopulateAdapters(groupAcceptor);
+                case TreeSearchBox.Mode.Objects:
+                    newRootNode = new VirtualTreeNode(Messages.VIEW_OBJECTS);
+                    groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
+                    OrganizationalView.PopulateObjectView(groupAcceptor, search);
+                    break;
+                case TreeSearchBox.Mode.Organization:
+                    newRootNode = new VirtualTreeNode(Messages.VIEW_ORGANIZATION);
+                    groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
+                    OrganizationalView.PopulateOrganizationView(groupAcceptor, search);
+                    break;
+                default:
+                    Util.ThrowIfParameterNull(search, "search");
+                    newRootNode = new VirtualTreeNode("XenCenter");
+                    groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
+                    search.PopulateAdapters(groupAcceptor);
+                    break;
             }
 
             return newRootNode;
         }
 
+        private MainWindowTreeNodeGroupAcceptor CreateGroupAcceptor(VirtualTreeNode parent)
+        {
+            return CreateGroupAcceptor(null, parent);
+        }
+
+        private MainWindowTreeNodeGroupAcceptor CreateGroupAcceptor(object dragTarget, VirtualTreeNode parent)
+        {
+            return new MainWindowTreeNodeGroupAcceptor(dragTarget, _treeViewForeColor, _treeViewBackColor, parent);
+        }
+
+        private void AssignList(ref List<VirtualTreeNode.PersistenceInfo> list, TreeSearchBox.Mode mode)
+        {
+            switch (mode)
+            {
+                case TreeSearchBox.Mode.Objects:
+                    list = _objectViewExpandedTags;
+                    break;
+                case TreeSearchBox.Mode.Organization:
+                    list = _organizationViewExpandedTags;
+                    break;
+                default:
+                    list = _infrastructureViewExpandedTags;
+                    break;
+            }
+        }
+
         private void PersistExpandedNodes(string searchText)
         {
-            // only persist the expansion state of nodes if there isn't an active search. If there's a search then
-            // we're just going to expand everything later.
+            // only persist the expansion state of nodes if there isn't an active search.
+            //If there's a search then we're just going to expand everything later.
 
-            // also because we want to restore the nodes back to their original state after a search is removed, do the check on _lastSearchText and _lastSearchMode.
+            // also because we wan't to restore the nodes back to their original state
+            //after a search is removed, do the check on _lastSearchText and _lastSearchMode.
 
             if (searchText.Length == 0 && _lastSearchText.Length == 0 && _lastSearchMode != TreeSearchBox.Mode.SavedSearch)
             {
-                var list = _lastSearchMode == TreeSearchBox.Mode.OrgView ? _orgViewExpandedTags : _serverViewExpandedTags;
+                List < VirtualTreeNode.PersistenceInfo > list = null;
+                AssignList(ref list, _lastSearchMode);
                 list.Clear();
 
-                foreach (VirtualTreeNode node in _treeView.AllNodes)
-                {
-                    if (node.Tag != null && node.IsExpanded)
-                    {
-                        list.Add(node.GetPersistenceInfo());
-                    }
-                }
+                foreach (VirtualTreeNode node in _treeView.AllNodes.Where(n => n.Tag != null && n.IsExpanded))
+                    list.Add(node.GetPersistenceInfo());
             }
 
             // persist the expansion state of the root node separately - it's a special case as its
@@ -190,7 +226,8 @@ namespace XenAdmin
             if (searchText.Length == 0 && searchMode != TreeSearchBox.Mode.SavedSearch)
             {
                 // if there isn't a search persist the user's expanded nodes.
-                var list = new List<VirtualTreeNode.PersistenceInfo>(searchMode == TreeSearchBox.Mode.OrgView ? _orgViewExpandedTags : _serverViewExpandedTags);
+                List < VirtualTreeNode.PersistenceInfo > list = null;
+                AssignList(ref list, searchMode);
 
                 var allNodes = new List<VirtualTreeNode>(_treeView.AllNodes);
                 
@@ -326,6 +363,7 @@ namespace XenAdmin
                     else
                     {
                         node = AddNode(_parent, _index, grouping.GetGroupName(group), grouping.GetGroupIcon(group), false, new GroupingTag(grouping, FindGroupingParent(_parent.Tag), group));
+
                         if (group is DateTime)
                             Program.BeginInvoke(Program.MainWindow, () => { node.Text = HelpersGUI.DateTimeToString((DateTime)group, Messages.DATEFORMAT_DMY_HMS, true); });   // annoying: has to be on the event thread because of CA-46983
                     }

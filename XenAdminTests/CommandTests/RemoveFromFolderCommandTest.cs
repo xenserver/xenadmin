@@ -77,7 +77,7 @@ namespace XenAdminTests.CommandTests
 
         internal override Command CreateCommand()
         {
-            PutInOrgView(true);
+            PutInOrgView(ORGANIZATION_VIEW);
 
             _node = GetAllTreeNodes().Find(n => n.Tag is IXenObject && !(n.Tag is Folder) && n.Parent.Tag is Folder);
 

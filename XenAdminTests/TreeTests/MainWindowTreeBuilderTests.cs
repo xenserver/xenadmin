@@ -50,7 +50,7 @@ namespace XenAdminTests.TreeTests
             MW(()=>
             {
                 MainWindowTreeBuilder _treeBuilder = new MainWindowTreeBuilder(MainWindowWrapper.TreeView);
-                VirtualTreeNode newRoot = _treeBuilder.CreateNewRootNode(new TreeSearchBox().Search, false);
+                VirtualTreeNode newRoot = _treeBuilder.CreateNewRootNode(new TreeSearchBox().Search, TreeSearchBox.Mode.Infrastructure);
                 MainWindowWrapper.TreeView.UpdateRootNodes(new[] {newRoot});
                 MainWindowWrapper.TreeView.EndUpdate();
                 AssertTreeViewsSame(DeserializeTreeView("state1.treeview.serverview.xml").Nodes, MainWindowWrapper.TreeView.Nodes);
@@ -63,7 +63,7 @@ namespace XenAdminTests.TreeTests
             MW(() =>
             {
                 MainWindowTreeBuilder _treeBuilder = new MainWindowTreeBuilder(MainWindowWrapper.TreeView);
-                VirtualTreeNode newRoot = _treeBuilder.CreateNewRootNode(new TreeSearchBox().Search, true);
+                VirtualTreeNode newRoot = _treeBuilder.CreateNewRootNode(new TreeSearchBox().Search, TreeSearchBox.Mode.Objects);
                 MainWindowWrapper.TreeView.UpdateRootNodes(new[] { newRoot });
                 MainWindowWrapper.TreeView.EndUpdate();
                 AssertTreeViewsSame(DeserializeTreeView("state1.treeview.orgview.xml").Nodes, MainWindowWrapper.TreeView.Nodes);

@@ -78,7 +78,7 @@ namespace XenAdminTests.CommandTests
 
         internal override Command CreateCommand()
         {
-            PutInOrgView(true);
+            PutInOrgView(ORGANIZATION_VIEW);
 
             _node = GetAllTreeNodes().Find(delegate(VirtualTreeNode n)
             {

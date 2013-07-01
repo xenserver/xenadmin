@@ -35,14 +35,13 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.XenSearch;
-using XenAdmin.Core;
-using XenAPI;
+
 
 namespace XenAdmin.Controls
 {
     public partial class TreeSearchBox : UserControl
     {
-        public enum Mode { ServerView, OrgView, SavedSearch }
+        public enum Mode { Infrastructure, Objects, Organization, SavedSearch }
         public Mode currentMode;
         private Search currentSearch;
 
@@ -62,8 +61,9 @@ namespace XenAdmin.Controls
         {
             comboButtonViews.ClearItems();
 
-            AddMenuItem(Messages.CLUSTER_VIEW, Mode.ServerView);
-            AddMenuItem(Messages.ORGANIZATIONAL_VIEW, Mode.OrgView);
+            AddMenuItem(Messages.VIEW_INFRASTRUCTURE, Mode.Infrastructure);
+            AddMenuItem(Messages.VIEW_OBJECTS, Mode.Objects);
+            AddMenuItem(Messages.VIEW_ORGANIZATION, Mode.Organization);
 
             Search[] searches = Search.Searches;
             Array.Sort<Search>(searches);
@@ -123,10 +123,12 @@ namespace XenAdmin.Controls
             {
                 switch (currentMode)
                 {
-                    case Mode.ServerView:
+                    case Mode.Infrastructure:
                         return TreeSearch.DefaultTreeSearch ?? TreeSearch.SearchFor(null);
-                    case Mode.OrgView:
-                        return Search.SearchForEverything();
+                    case Mode.Objects:
+                        return Search.SearchForAllTypes();
+                    case Mode.Organization:
+                        return Search.SearchForOrganization();
                     default:  // Mode.SavedSearch
                         return currentSearch;
                 }

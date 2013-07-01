@@ -40,12 +40,16 @@ using XenAdmin.Core;
 using XenAdmin.Model;
 using XenAdmin.Network;
 using XenAPI;
-using XenAdmin.Network.StorageLink;
+
 
 namespace XenAdminTests
 {
     public abstract class MainWindowTester : TestObjectProvider
     {
+        protected const int INFRASTRUCTURE_VIEW = 0;
+        protected const int OBJECT_VIEW = 1;
+        protected const int ORGANIZATION_VIEW = 2;
+
         // Run on MainWindowThread
         private static object[] EMPTY = new object[0];
         protected void MW(MethodInvoker f)
@@ -379,26 +383,19 @@ namespace XenAdminTests
             return null;
         }
 
-        protected void ToggleOrgView()
-        {
-            MW(() => PutInOrgView(!MainWindowWrapper.Item.OrganizationalMode));
-        }
-
         /// <summary>
-        /// Puts the main treeview into either Server view or Folder view and waits until the tree has been
-        /// repopulated.
+        /// Puts the main treeview into Infrastructure, Objects or Organization
+        /// view and waits until the tree has been repopulated.
         /// </summary>
-        protected void PutInOrgView(bool org)
+        protected void PutInOrgView(int index)
         {
-            MW(MainWindowWrapper.TreeSearchBoxItems[org ? 1 : 0].PerformClick);
+            MW(MainWindowWrapper.TreeSearchBoxItems[index].PerformClick);
             MW(MainWindowWrapper.RefreshTreeView);
 
             Predicate<VirtualTreeNode> match = n => n.Tag is Pool || n.Tag is Host || (n.Tag == null && n.Nodes.Count == 0);
 
-            if (org)
-            {
+            if (index == ORGANIZATION_VIEW)
                 match = n => n.Tag is GroupingTag;
-            }
 
             MWWaitFor(() => new List<VirtualTreeNode>(MainWindowWrapper.TreeView.AllNodes).Find(match) != null);
         }

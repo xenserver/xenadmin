@@ -78,6 +78,11 @@ namespace XenAdminTests.CommandTests
             return new PutFolderIntoRenameModeCommand();
         }
 
+        protected override int NativeView
+        {
+            get { return ORGANIZATION_VIEW; }
+        }
+
         public void Test()
         {
             foreach (SelectedItemCollection selection in RunTest())

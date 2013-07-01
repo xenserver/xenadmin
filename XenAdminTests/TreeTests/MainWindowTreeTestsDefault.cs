@@ -69,12 +69,9 @@ namespace XenAdminTests.TreeTests
         public void TestOrgViewDefaultExpandedNodes()
         {
             ConnectToStateDBs("state1.xml");
-            PutInOrgView(true);
+            PutInOrgView(OBJECT_VIEW);
 
-            CheckExpandedNodes(delegate(VirtualTreeNode n)
-            {
-                return n.Tag == null || n.Text == "Types" || n.Text == "Custom Fields" || n.Text == "Folders" || n.Text == "Tags";
-            }, "Expanded nodes incorrect.");
+            CheckExpandedNodes(n => n.Tag == null || n.Text == "Types" || n.Text == "Custom Fields" || n.Text == "Folders" || n.Text == "Tags", "Expanded nodes incorrect.");
         }
 
     }

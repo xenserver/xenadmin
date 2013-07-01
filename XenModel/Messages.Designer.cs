@@ -22677,15 +22677,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Folder View.
-        /// </summary>
-        public static string ORGANIZATIONAL_VIEW {
-            get {
-                return ResourceManager.GetString("ORGANIZATIONAL_VIEW", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Out of date.
         /// </summary>
         public static string OUT_OF_DATE {
@@ -30835,6 +30826,33 @@ namespace XenAdmin {
         public static string VIEW_FOLDER_MENU_OPTION {
             get {
                 return ResourceManager.GetString("VIEW_FOLDER_MENU_OPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Infrastructure.
+        /// </summary>
+        public static string VIEW_INFRASTRUCTURE {
+            get {
+                return ResourceManager.GetString("VIEW_INFRASTRUCTURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Objects.
+        /// </summary>
+        public static string VIEW_OBJECTS {
+            get {
+                return ResourceManager.GetString("VIEW_OBJECTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Organization Views.
+        /// </summary>
+        public static string VIEW_ORGANIZATION {
+            get {
+                return ResourceManager.GetString("VIEW_ORGANIZATION", resourceCulture);
             }
         }
         

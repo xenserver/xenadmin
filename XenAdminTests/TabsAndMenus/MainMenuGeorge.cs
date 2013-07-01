@@ -722,7 +722,7 @@ namespace XenAdminTests.TabsAndMenus
         [Test]
         public void MainMenu_Snapshot()
         {
-            PutInOrgView(true);
+            PutInOrgView(OBJECT_VIEW);
             try
             {
                 foreach (VM snapshot in GetAllXenObjects<VM>(v => v.is_a_snapshot))
@@ -834,14 +834,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(false);
+                PutInOrgView(INFRASTRUCTURE_VIEW);
             }
         }
 
         [Test]
         public void MainMenu_VDI()
         {
-            PutInOrgView(true);
+            PutInOrgView(OBJECT_VIEW);
             try
             {
                 ExpectedMenuItem[] poolToolStripMenuItem = new ExpectedMenuItem[]{
@@ -950,14 +950,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(false);
+                PutInOrgView(INFRASTRUCTURE_VIEW);
             }
         }
 
         [Test]
         public void MainMenu_Network()
         {
-            PutInOrgView(true);
+            PutInOrgView(OBJECT_VIEW);
             try
             {
                 foreach (XenAPI.Network network in GetAllXenObjects<XenAPI.Network>(n => n.name_label != "Guest installer network"))
@@ -1069,14 +1069,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(false);
+                PutInOrgView(INFRASTRUCTURE_VIEW);
             }
         }
 
         [Test]
         public void MainMenu_GroupingTag()
         {
-            PutInOrgView(true);
+            PutInOrgView(OBJECT_VIEW);
             try
             {
                 VirtualTreeNode n = GetAllTreeNodes().Find(v => v.Tag is GroupingTag);
@@ -1187,14 +1187,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(false);
+                PutInOrgView(INFRASTRUCTURE_VIEW);
             }
         }
 
         [Test]
         public void MainMenu_Folder()
         {
-            PutInOrgView(true);
+            PutInOrgView(ORGANIZATION_VIEW);
             try
             {
                 foreach (Folder folder in GetAllXenObjects<Folder>())
@@ -1306,7 +1306,7 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(false);
+                PutInOrgView(INFRASTRUCTURE_VIEW);
             }
         }
 

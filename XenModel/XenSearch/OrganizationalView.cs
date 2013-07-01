@@ -127,8 +127,10 @@ namespace XenAdmin.XenSearch
             }
         }
 
-        private static Search OrgViewSearch(Search search, bool includeFolders, // normally exclude folders even if in search: CA-27260
-            QueryFilter addFilter, Grouping grouping)
+        /// <param name="includeFolders">
+        /// Normally exclude folders even if in search: CA-27260
+        /// </param>
+        private static Search OrgViewSearch(Search search, bool includeFolders, QueryFilter addFilter, Grouping grouping)
         {
             QueryFilter filter;
             ObjectTypes types;
@@ -139,7 +141,9 @@ namespace XenAdmin.XenSearch
             }
             else
             {
-                types = includeFolders ? search.Query.QueryScope.ObjectTypes : (search.Query.QueryScope.ObjectTypes & ~ObjectTypes.Folder);
+                types = includeFolders
+                            ? search.Query.QueryScope.ObjectTypes
+                            : (search.Query.QueryScope.ObjectTypes & ~ObjectTypes.Folder);
             }
 
             QueryScope scope = new QueryScope(types);
@@ -179,12 +183,18 @@ namespace XenAdmin.XenSearch
             return OrgViewSearch(search, false, FieldsQuery, FieldsGrouping);
         }
 
-        public static void PopulateOrganizationalView(IAcceptGroups adapter, Search search)
+        public static void PopulateObjectView(IAcceptGroups adapter, Search search)
+        {
+            AddGroup(adapter, Messages.TYPES, TypesSearch(search));
+
+            adapter.FinishedInThisGroup(true);
+        }
+
+        public static void PopulateOrganizationView(IAcceptGroups adapter, Search search)
         {
             AddGroup(adapter, Folders._root, FoldersSearch(search));
             AddGroup(adapter, Messages.VM_APPLIANCES, vAppsSearch(search));
             AddGroup(adapter, Messages.TAGS, TagsSearch(search));
-            AddGroup(adapter, Messages.TYPES, TypesSearch(search));
             AddGroup(adapter, Messages.CUSTOM_FIELDS, FieldsSearch(search));
 
             adapter.FinishedInThisGroup(true);

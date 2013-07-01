@@ -45,7 +45,7 @@ namespace XenAdminTests.TabsAndMenus
         public void TestFixtureSetUp()
         {
             ConnectToStateDBs("state1.xml");
-            PutInOrgView(false);
+            PutInOrgView(INFRASTRUCTURE_VIEW);
             DisableAllPlugins();
         }
 

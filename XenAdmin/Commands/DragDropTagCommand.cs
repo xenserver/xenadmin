@@ -35,10 +35,7 @@ using System.Text;
 using XenAdmin.Controls;
 using XenAPI;
 using XenAdmin.Model;
-using System.Collections.ObjectModel;
-using XenAdmin.Controls.CustomGridView;
 using System.Windows.Forms;
-using XenAdmin.Network.StorageLink;
 using XenAdmin.Actions;
 
 
@@ -64,7 +61,8 @@ namespace XenAdmin.Commands
             List<IXenObject> draggedObjects = GetDraggedItemsAsXenObjects<IXenObject>();
             GroupingTag gt = GetTargetNodeAncestorAsXenObjectOrGroupingTag<GroupingTag>();
             
-            if (Program.MainWindow.OrganizationalMode && gt != null && draggedObjects.Count > 0)
+            if (Program.MainWindow.TreeSearchBoxMode == TreeSearchBox.Mode.Organization
+                && gt != null && draggedObjects.Count > 0)
             {
                 foreach (IXenObject xenObject in draggedObjects)
                 {

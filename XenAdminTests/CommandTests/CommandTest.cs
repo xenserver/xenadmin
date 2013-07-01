@@ -37,7 +37,7 @@ using XenAdmin;
 using NUnit.Framework;
 using XenAPI;
 using XenAdmin.Controls;
-using XenAdmin.Network;
+
 
 namespace XenAdminTests.CommandTests
 {
@@ -55,6 +55,11 @@ namespace XenAdminTests.CommandTests
         internal Command Command { get; private set; }
 
         internal abstract Command CreateCommand();
+
+        protected virtual int NativeView
+        {
+            get { return OBJECT_VIEW; }
+        }
 
         internal IEnumerable<SelectedItemCollection> RunTest()
         {
@@ -77,9 +82,9 @@ namespace XenAdminTests.CommandTests
             }
         }
 
-        internal IEnumerable<SelectedItemCollection> RunTest( IEnumerable<SelectedItemCollection> selections )    
+        internal IEnumerable<SelectedItemCollection> RunTest( IEnumerable<SelectedItemCollection> selections)    
         {
-            PutInOrgView(false);
+            PutInOrgView(INFRASTRUCTURE_VIEW);
             
             Command = CreateCommand();
 
@@ -138,7 +143,7 @@ namespace XenAdminTests.CommandTests
                         }
                     }
                 }
-                ToggleOrgView();
+                MW(() => PutInOrgView(NativeView));
             }
         }
 
@@ -153,7 +158,7 @@ namespace XenAdminTests.CommandTests
             }
             else
             {
-                ToggleOrgView();
+                MW(() => PutInOrgView(OBJECT_VIEW));
 
                 nodes = new List<VirtualTreeNode>(objects.ConvertAll(o => FindInTree(o)));
 

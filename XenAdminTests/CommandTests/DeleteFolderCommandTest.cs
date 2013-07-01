@@ -34,9 +34,8 @@ using System.Collections.Generic;
 using System.Text;
 using XenAdmin.Commands;
 using XenAdmin.Model;
-using XenAPI;
-using XenAdmin.Controls;
 using NUnit.Framework;
+
 
 namespace XenAdminTests.CommandTests
 {
@@ -75,6 +74,11 @@ namespace XenAdminTests.CommandTests
         internal override Command CreateCommand()
         {
             return new DeleteFolderCommand();
+        }
+
+        protected override int NativeView 
+        {
+            get { return ORGANIZATION_VIEW; }
         }
 
         public void Test()

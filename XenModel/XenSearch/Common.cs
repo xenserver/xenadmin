@@ -304,7 +304,7 @@ namespace XenAdmin.XenSearch
             ObjectTypes_images[ObjectTypes.Snapshot] = Icons.Snapshot;
             ObjectTypes_images[ObjectTypes.VDI] = Icons.VDI;
             ObjectTypes_images[ObjectTypes.Folder] = Icons.Folder;
-        	ObjectTypes_images[ObjectTypes.Appliance] = Icons.XenCenter;
+            ObjectTypes_images[ObjectTypes.Appliance] = Icons.VmAppliance;
             //ObjectTypes_images[ObjectTypes.StorageLinkServer] = Icons.StorageLinkServer;
             //ObjectTypes_images[ObjectTypes.StorageLinkSystem] = Icons.StorageLinkSystem;
             //ObjectTypes_images[ObjectTypes.StorageLinkPool] = Icons.StorageLinkPool;

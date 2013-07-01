@@ -7917,9 +7917,6 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="OPTIMIZED" xml:space="preserve">
     <value>Optimized</value>
   </data>
-  <data name="ORGANIZATIONAL_VIEW" xml:space="preserve">
-    <value>Folder View</value>
-  </data>
   <data name="OUT_OF_DATE" xml:space="preserve">
     <value>Out of date</value>
   </data>
@@ -10699,6 +10696,15 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   </data>
   <data name="VIEW_FOLDER_MENU_OPTION" xml:space="preserve">
     <value>View folder...</value>
+  </data>
+  <data name="VIEW_INFRASTRUCTURE" xml:space="preserve">
+    <value>Infrastructure</value>
+  </data>
+  <data name="VIEW_OBJECTS" xml:space="preserve">
+    <value>Objects</value>
+  </data>
+  <data name="VIEW_ORGANIZATION" xml:space="preserve">
+    <value>Organization Views</value>
   </data>
   <data name="VIEW_POLICIES" xml:space="preserve">
     <value>View VM Protection Policies</value>
