@@ -387,8 +387,19 @@ namespace XenAdmin.Core
 
         public static bool FreeHostPaidMaster(Host slave, Host master, bool allowLicenseUpgrade)
         {
-            if (slave != null && master != null &&
-                slave.IsFloodgateOrLater() && master.IsFloodgateOrLater() &&
+            if (slave == null || master == null)
+                return false;
+            
+            // Is using per socket generation licenses?
+            if (Helpers.ClearwaterOrGreater(slave) && Helpers.ClearwaterOrGreater(master) &&
+                slave.IsFreeLicense() && !master.IsFreeLicense())
+            {
+                if (allowLicenseUpgrade)
+                    return false;
+                return true;
+            }
+
+            if (slave.IsFloodgateOrLater() && master.IsFloodgateOrLater() &&
                 Host.RestrictHAFloodgate(slave) && !Host.RestrictHAFloodgate(master))
             {
                 // See http://scale.ad.xensource.com/confluence/display/engp/v6+licensing+for+XenServer+Essentials, req R21a.
