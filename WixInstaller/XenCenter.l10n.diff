@@ -1,13 +1,36 @@
---- XenCenter.wxs	2013-07-01 10:39:54.447126800 +0100
-+++ XenCenter.l10n.wxs	2013-07-01 10:39:51.998882000 +0100
-@@ -32,13 +32,12 @@
-  SUCH DAMAGE. 
- -->
- 
--<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
--     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
-+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-     <?define ProductVersion="1.0.0" ?>
+# Copyright (c) Citrix Systems Inc.
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, 
+# with or without modification, are permitted provided 
+# that the following conditions are met: 
+# 
+# *   Redistributions of source code must retain the above 
+#     copyright notice, this list of conditions and the 
+#     following disclaimer. 
+# *   Redistributions in binary form must reproduce the above 
+#     copyright notice, this list of conditions and the 
+#     following disclaimer in the documentation and/or other 
+#     materials provided with the distribution. 
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+# CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+# INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
+# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+# NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
+# SUCH DAMAGE. 
+
+--- XenCenter.wxs	2013-07-01 11:22:14.744131100 +0100
++++ XenCenter.l10n.wxs	2013-07-01 11:23:18.864542500 +0100
+@@ -38,7 +38,7 @@
      <?define UpgradeCode="{EA0EF50F-5CC6-452B-B09F-3F5EC564899D}"?>
      <?define ProductCode="{65AE1345-A520-456D-8A19-2F52D43D3A09}"?>
      <Product Id="$(var.ProductCode)" Name="Citrix XenCenter" Language="$(env.WixLangId)" Version="$(var.ProductVersion)" Manufacturer="Citrix Systems, Inc." UpgradeCode="$(var.UpgradeCode)">
@@ -16,7 +39,7 @@
          <Media Id="1" Cabinet="XenCenter.cab" EmbedCab="yes" />
          <Directory Id="TARGETDIR" Name="SourceDir">
              <Directory Id="ProgramFilesFolder">
-@@ -88,64 +87,64 @@
+@@ -88,64 +88,64 @@
                              <File Id="XslicIcon" Source="..\XenAdmin\Images\file_license.ico" />
                              <File Id="XkbIcon" Source="..\XenAdmin\Images\file_backup.ico" />
                              <File Id="XsupdateIcon" Source="..\XenAdmin\Images\file_updates.ico" />
@@ -104,7 +127,7 @@
                                  </Extension>
                              </ProgId>
                          </Component>
-@@ -164,6 +163,30 @@
+@@ -164,6 +164,30 @@
                              <Component Id="HelpFiles" Guid="EA8D4F56-A94A-467c-9E6B-F3DC26F95B1E">
                                  <File Id="XenCenterCHM" Source="..\XenAdmin\bin\Release\Help\XenCenter.chm" />
                                  <File Id="WLBCHM" Source="..\XenAdmin\bin\Release\Help\WLB.chm" />
@@ -135,7 +158,7 @@
                              </Component>
                          </Directory>
                          <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
-@@ -213,6 +236,8 @@
+@@ -213,6 +237,8 @@
          <Feature Id="MainProgram" Title="Citrix XenCenter" Description="The complete package" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow">
              <ComponentRef Id="MainExecutable" />
              <ComponentRef Id="HelpFiles" />
@@ -144,12 +167,12 @@
              <ComponentRef Id="ReportViewer" />
              <ComponentRef Id="TestResources" />
              <ComponentRef Id="SchemasFilesComponent" />
-@@ -227,7 +252,7 @@
+@@ -227,7 +253,7 @@
          <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
          <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
          <PropertyRef Id="NETFRAMEWORK35" />
 -        <Condition Message=".NET Framework 3.5 is required for this installation."><![CDATA[Installed OR NETFRAMEWORK35]]></Condition>
-+        <Condition Message="!(loc.Required_For_Installation)"><![CDATA[Installed OR NETFRAMEWORK35]]</Condition>
++        <Condition Message="!(loc.Required_For_Installation)"><![CDATA[Installed OR NETFRAMEWORK35]]></Condition>
          <InstallExecuteSequence>
              <AppSearch Sequence="50" />
              <FindRelatedProducts Before="LaunchConditions" />

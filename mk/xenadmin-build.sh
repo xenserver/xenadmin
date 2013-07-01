@@ -254,7 +254,7 @@ compile_installer()
    
   cd ${WIX}
   mkdir -p obj${name}
-  WixLangId=${langid} ${CANDLE} -out obj${name}/ $1.wxs
+  WixLangId=${langid} ${CANDLE} -ext WiXNetFxExtension -out obj${name}/ $1.wxs
    
   mkdir -p out${name}
   
