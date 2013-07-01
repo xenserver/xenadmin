@@ -50,8 +50,8 @@ namespace XenAPI
             Enterprise,
             Platinum,
             EnterpriseXD,
-            XenDesktop,   //Added in Clearwater (PR-1589) and is new form of "EnterpriseXD"
-            PerSocket     //Added in Clearwater (PR-1589)
+            PerSocket,     //Added in Clearwater (PR-1589)
+            XenDesktop     //Added in Clearwater (PR-1589) and is new form of "EnterpriseXD"
         }
 
         public override string Name

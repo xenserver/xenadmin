@@ -128,7 +128,9 @@ namespace XenAdmin.Dialogs
                 if (XenObject != null && !XenObject.Connection.IsConnected)
                     return Messages.UNKNOWN;
 
-                return Helpers.GetFriendlyLicenseName(XenObjectHost);
+                // for a pool, get the lowest license, i.e. pool.LicenseString
+                Pool pool = Helpers.GetPool(XenObjectHost.Connection);
+                return pool != null ? pool.LicenseString : Helpers.GetFriendlyLicenseName(XenObjectHost);
             } 
         }
 
