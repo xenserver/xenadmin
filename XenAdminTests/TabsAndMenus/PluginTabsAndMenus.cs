@@ -46,13 +46,14 @@ namespace XenAdminTests.TabsAndMenus
     {
         private List<string> _folders = new List<string>();
 
-        private readonly string[] XenCenterTabs = new string[] { "Home", "Search", "Tags", "XenCenterTabPageTest", "Logs" };
-        private readonly string[] PoolTabs = new string[] { "Search", "General", "Memory", "Storage", "Networking", "HA", "WLB", "Users", "PoolTabPageTest", "AllTabPageTest", "Logs" };
-        private readonly string[] HostTabs = new string[] { "Search", "General", "Memory", "Storage", "Networking", "NICs", "Console", "Performance", "Users", "ServerTabPageTest", "AllTabPageTest", "Logs" };
-        private readonly string[] VMTabs = new string[] { "General", "Memory", "Storage", "Networking", "Console", "Performance", "Snapshots", "VMTabPageTest", "AllTabPageTest", "Logs" };
-        private readonly string[] DefaultTemplateTabs = new string[] { "General", "Memory", "Networking", "DefaultTemplateTabPageTest", "AllTabPageTest", "Logs" };
-        private readonly string[] UserTemplateTabs = new string[] { "General", "Memory", "Storage", "Networking", "UserTemplateTabPageTest", "AllTabPageTest", "Logs" };
-        private readonly string[] SRTabs = new string[] { "General", "Storage", "SRTabPageTest", "AllTabPageTest", "Logs" };
+        private readonly string[] XenCenterTabs = new[] {"Home", "Search", "XenCenterTabPageTest", "Logs"};
+        private readonly string[] PoolTabs = new[] {"Search", "General", "Memory", "Storage", "Networking", "HA", "WLB", "Users", "PoolTabPageTest", "AllTabPageTest", "Logs"};
+
+        private readonly string[] HostTabs = new[] {"Search", "General", "Memory", "Storage", "Networking", "NICs", "Console", "Performance", "Users", "ServerTabPageTest", "AllTabPageTest", "Logs"};
+        private readonly string[] VMTabs = new[] { "General", "Memory", "Storage", "Networking", "Console", "Performance", "Snapshots", "VMTabPageTest", "AllTabPageTest", "Logs" };
+        private readonly string[] DefaultTemplateTabs = new[] { "General", "Memory", "Networking", "DefaultTemplateTabPageTest", "AllTabPageTest", "Logs" };
+        private readonly string[] UserTemplateTabs = new[] { "General", "Memory", "Storage", "Networking", "UserTemplateTabPageTest", "AllTabPageTest", "Logs" };
+        private readonly string[] SRTabs = new[] { "General", "Storage", "SRTabPageTest", "AllTabPageTest", "Logs" };
 
         public PluginTabsAndMenus()
             : base("state4.xml")

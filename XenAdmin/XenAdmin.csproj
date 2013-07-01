@@ -606,12 +606,6 @@
     <Compile Include="TabPages\PhysicalStoragePage.Designer.cs">
       <DependentUpon>PhysicalStoragePage.cs</DependentUpon>
     </Compile>
-    <Compile Include="TabPages\TagCloudPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="TabPages\TagCloudPage.Designer.cs">
-      <DependentUpon>TagCloudPage.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\VisualMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1670,10 +1664,6 @@
     <EmbeddedResource Include="TabPages\PhysicalStoragePage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PhysicalStoragePage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\TagCloudPage.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>TagCloudPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\BallooningWizard.resx">
       <SubType>Designer</SubType>
@@ -5441,12 +5431,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\SrStoragePage.zh-CN.resx">
       <DependentUpon>SrStoragePage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\TagCloudPage.ja.resx">
-      <DependentUpon>TagCloudPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\TagCloudPage.zh-CN.resx">
-      <DependentUpon>TagCloudPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\UpsellTabPage.ja.resx">
       <DependentUpon>UpsellTabPage.cs</DependentUpon>

@@ -43,20 +43,20 @@ namespace XenAdminTests.TabsAndMenus
     [TestFixture, Category(TestCategories.UICategoryB)]
     public class TabsAndMenusGeorge : TabsAndMenus
     {
-        public static string[] XenCenterTabs = new string[] { "Home", "Search", "Tags", "Logs" };
-        public static string[] PoolTabs = new string[] { "Search", "General", "Storage", "Networking", "HA", "WLB", "Users", "Logs" };
-        public static string[] HostTabs = new string[] { "Search", "General", "Storage", "Networking", "NICs", "Console", "Performance", "Users", "Logs" };
-        public static string[] VMTabs = new string[] { "General", "Storage", "Networking", "Console", "Performance", "Snapshots", "Logs" };
-        public static string[] DefaultTemplateTabs = new string[] { "General", "Networking", "Logs" };
-        public static string[] OtherInstallMediaTabs = new string[] { "General", "Storage", "Networking", "Logs" };
-        public static string[] UserTemplateTabs_Provision = new string[] { "General", "Networking", "Logs" };
-        public static string[] UserTemplateTabs_NoProvision = new string[] { "General", "Storage", "Networking", "Logs" };
-        public static string[] SRTabs = new string[] { "General", "Storage", "Logs" };
-        public static string[] SnapshotTabs = new string[] { "General", "Networking", "Logs" };
-        public static string[] VDITabs = new string[] { "Logs" };
-        public static string[] NetworkTabs = new string[] { "Logs" };
-        public static string[] GroupingTagTabs = new string[] { "Search", "Logs" };
-        public static string[] FolderTabs = new string[] { "Search", "Logs" };
+        private string[] XenCenterTabs = new[] { "Home", "Search", "Logs" };
+        private string[] PoolTabs = new[] { "Search", "General", "Storage", "Networking", "HA", "WLB", "Users", "Logs" };
+        private string[] HostTabs = new[] { "Search", "General", "Storage", "Networking", "NICs", "Console", "Performance", "Users", "Logs" };
+        private string[] VMTabs = new[] { "General", "Storage", "Networking", "Console", "Performance", "Snapshots", "Logs" };
+        private string[] DefaultTemplateTabs = new[] { "General", "Networking", "Logs" };
+        private string[] OtherInstallMediaTabs = new[] { "General", "Storage", "Networking", "Logs" };
+        private string[] UserTemplateTabs_Provision = new[] { "General", "Networking", "Logs" };
+        private string[] UserTemplateTabs_NoProvision = new[] { "General", "Storage", "Networking", "Logs" };
+        private string[] SRTabs = new[] { "General", "Storage", "Logs" };
+        private string[] SnapshotTabs = new[] { "General", "Networking", "Logs" };
+        private string[] VDITabs = new[] { "Logs" };
+        private string[] NetworkTabs = new[] { "Logs" };
+        private string[] GroupingTagTabs = new[] { "Search", "Logs" };
+        private string[] FolderTabs = new[] { "Search", "Logs" };
 
         public TabsAndMenusGeorge()
             : base("state1.xml")

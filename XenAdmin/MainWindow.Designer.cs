@@ -97,7 +97,6 @@ namespace XenAdmin
             this.TabPageSnapshots = new System.Windows.Forms.TabPage();
             this.snapshotPage = new XenAdmin.TabPages.SnapshotsPage();
             this.TabPageHistory = new System.Windows.Forms.TabPage();
-            this.TabPageTagCloud = new System.Windows.Forms.TabPage();
             this.TabPageWLB = new System.Windows.Forms.TabPage();
             this.TabPageWLBUpsell = new System.Windows.Forms.TabPage();
             this.TabPageAD = new System.Windows.Forms.TabPage();
@@ -422,7 +421,6 @@ namespace XenAdmin
             this.TheTabControl.Controls.Add(this.TabPageHAUpsell);
             this.TheTabControl.Controls.Add(this.TabPageSnapshots);
             this.TheTabControl.Controls.Add(this.TabPageHistory);
-            this.TheTabControl.Controls.Add(this.TabPageTagCloud);
             this.TheTabControl.Controls.Add(this.TabPageWLB);
             this.TheTabControl.Controls.Add(this.TabPageWLBUpsell);
             this.TheTabControl.Controls.Add(this.TabPageAD);
@@ -531,12 +529,6 @@ namespace XenAdmin
             resources.ApplyResources(this.TabPageHistory, "TabPageHistory");
             this.TabPageHistory.Name = "TabPageHistory";
             this.TabPageHistory.UseVisualStyleBackColor = true;
-            // 
-            // TabPageTagCloud
-            // 
-            resources.ApplyResources(this.TabPageTagCloud, "TabPageTagCloud");
-            this.TabPageTagCloud.Name = "TabPageTagCloud";
-            this.TabPageTagCloud.UseVisualStyleBackColor = true;
             // 
             // TabPageWLB
             // 
@@ -2022,7 +2014,6 @@ namespace XenAdmin
         private System.Windows.Forms.TabPage TabPageHA;
         private System.Windows.Forms.TabPage TabPageHAUpsell;
         private System.Windows.Forms.TabPage TabPageHistory;
-        private System.Windows.Forms.TabPage TabPageTagCloud;
         internal System.Windows.Forms.TabPage TabPageWLB;
         private System.Windows.Forms.TabPage TabPageWLBUpsell;
         private System.Windows.Forms.TabPage TabPageSnapshots;

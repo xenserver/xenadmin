@@ -92,7 +92,6 @@ namespace XenAdmin
         internal readonly HAUpsellPage HAUpsellPage = new HAUpsellPage();
         internal readonly HistoryPage HistoryPage = new HistoryPage();
         internal readonly HomePage HomePage = new HomePage();
-        internal readonly TagCloudPage TagCloudPage = new TagCloudPage();
         internal readonly SearchPage SearchPage = new SearchPage();
         internal readonly NetworkPage NetworkPage = new NetworkPage();
         internal readonly NICPage NICPage = new NICPage();
@@ -150,7 +149,6 @@ namespace XenAdmin
                 treeView.ItemHeight = 18;  // otherwise it's too close together on XP and the icons crash into each other
 
             components.Add(SearchPage);
-            components.Add(TagCloudPage);
             components.Add(NICPage);
             components.Add(VMStoragePage);
             components.Add(SrStoragePage);
@@ -166,7 +164,6 @@ namespace XenAdmin
             components.Add(AdPage);
 
             AddTabContents(SearchPage, TabPageSearch);
-            AddTabContents(TagCloudPage, TabPageTagCloud);
             AddTabContents(VMStoragePage, TabPageStorage);
             AddTabContents(SrStoragePage, TabPageSR);
             AddTabContents(NICPage, TabPageNICs);
@@ -1690,7 +1687,6 @@ namespace XenAdmin
             NewTabCount = 0;
             ShowTab(TabPageHome, !SearchMode && show_home);
             ShowTab(TabPageSearch, (SearchMode || show_home || SearchTabVisible));
-            ShowTab(TabPageTagCloud, !multi && !SearchMode && show_home);
             ShowTab(TabPageGeneral, !multi && !SearchMode && (isVMSelected || (isHostSelected && (isHostLive || !is_connected)) || isPoolSelected || isSRSelected || isStorageLinkSelected));
             ShowTab(dmc_upsell ? TabPageBallooningUpsell : TabPageBallooning, !multi && !SearchMode && mr_or_greater && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
             ShowTab(TabPageStorage, !multi && !SearchMode && (isRealVMSelected || (isTemplateSelected && !selectedTemplateHasProvisionXML)));
@@ -2387,10 +2383,6 @@ namespace XenAdmin
                 {
                     GeneralPage.XenObject = selectionManager.Selection.FirstAsXenObject;
                 }
-                else if (t == TabPageTagCloud)
-                {
-                    TagCloudPage.LoadTags();
-                }
                 else if (t == TabPageBallooning)
                 {
                     BallooningPage.XenObject = selectionManager.Selection.FirstAsXenObject;
@@ -2524,7 +2516,7 @@ namespace XenAdmin
         /// </summary>
         public enum Tab
         {
-            Overview, Home, TagCloud, Grouping, Settings, Storage, Network, Console, Performance, History, NICs, SR
+            Overview, Home, Grouping, Settings, Storage, Network, Console, Performance, History, NICs, SR
         }
 
         public void SwitchToTab(Tab tab)
@@ -2533,9 +2525,6 @@ namespace XenAdmin
             {
                 case Tab.Overview:
                     TheTabControl.SelectedTab = TabPageSearch;
-                    break;
-                case Tab.TagCloud:
-                    TheTabControl.SelectedTab = TabPageTagCloud;
                     break;
                 case Tab.Home:
                     TheTabControl.SelectedTab = TabPageHome;
@@ -3165,8 +3154,6 @@ namespace XenAdmin
                 return "TabPageHA" + modelObj;
             if (TheTabControl.SelectedTab == TabPageHAUpsell)
                 return "TabPageHAUpsell" + modelObj;
-            if (TheTabControl.SelectedTab == TabPageTagCloud)
-                return "TabPageTagCloud" + modelObj;
             if (TheTabControl.SelectedTab == TabPageSnapshots)
                 return "TabPageSnapshots" + modelObj;
             if (TheTabControl.SelectedTab == TabPageBallooning)
