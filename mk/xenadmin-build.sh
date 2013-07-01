@@ -254,15 +254,15 @@ compile_installer()
    
   cd ${WIX}
   mkdir -p obj${name}
-  WixLangId=${langid} ${CANDLE} -out obj${name}/ $1.wxs
+  WixLangId=${langid} ${CANDLE} -ext WiXNetFxExtension -out obj${name}/ $1.wxs
    
   mkdir -p out${name}
   
   if [ "${name}" = "VNCControl" ]
   then
-   ${LIGHT} obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -out out${name}/${name}.msi
+   ${LIGHT} obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
   else
-   ${LIGHT} obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -loc $2.wxl -out out${name}/${name}.msi
+   ${LIGHT} obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -loc $2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
   fi
 }
 

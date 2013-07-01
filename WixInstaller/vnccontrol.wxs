@@ -32,7 +32,8 @@
  SUCH DAMAGE. 
 -->
 
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
     <?define ProductVersion="1.0.0" ?>
     <?define UpgradeCode="{A77AF69F-14AF-4cd0-B978-236945C7AC97}"?>
     <?define ProductCode="{0CE5C3E7-E786-467a-80CF-F3EC04D414E4}"?>
@@ -86,15 +87,13 @@
         </Feature>
         <Property Id="Install_All" Value="0" />
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
-        <Property Id="FRAMEWORK20">
-            <RegistrySearch Id="Framework20Registry" Type="raw" Root="HKLM" Key="Software\Microsoft\NET Framework Setup\NDP\v2.0.50727" Name="Install" />
-        </Property>
         <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
         <Upgrade Id="$(var.UpgradeCode)">
             <UpgradeVersion Property="UPGRADEFOUND" ExcludeLanguages="yes" Minimum="0.0.0" IncludeMinimum="yes" Maximum="$(var.ProductVersion)" IncludeMaximum="no" />
             <UpgradeVersion OnlyDetect="yes" ExcludeLanguages="yes" Property="NEWERPRODUCTFOUND" Minimum="$(var.ProductVersion)" IncludeMinimum="no" />
         </Upgrade>
-        <Condition Message=".NET Framework 2.0 is not present on the computer.">FRAMEWORK20 = "#1"</Condition>
+        <PropertyRef Id="NETFRAMEWORK20" />
+        <Condition Message=".NET Framework 2.0 is not present on the computer."><![CDATA[Installed OR NETFRAMEWORK20]]></Condition>
         <InstallExecuteSequence>
             <AppSearch Sequence="50" />
             <FindRelatedProducts Before="LaunchConditions" />
