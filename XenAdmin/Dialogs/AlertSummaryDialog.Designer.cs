@@ -56,13 +56,7 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripDropDownButtonServerFilter = new System.Windows.Forms.ToolStripDropDownButton();
-            this.toolStripDropDownButtonDateFilter = new System.Windows.Forms.ToolStripDropDownButton();
-            this.toolStripMenuItemShowAll = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemLast24 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemLast3Days = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemLast7Days = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemLast30Days = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemCustomDate = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownButtonDateFilter = new XenAdmin.Controls.FilterDatesToolStripDropDownButton();
             this.toolStripDropDownSeveritiesFilter = new System.Windows.Forms.ToolStripDropDownButton();
             this.dataLossImminentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serviceLossImminentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -284,50 +278,9 @@ namespace XenAdmin.Dialogs
             // 
             // toolStripDropDownButtonDateFilter
             // 
-            this.toolStripDropDownButtonDateFilter.AutoToolTip = false;
-            this.toolStripDropDownButtonDateFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemShowAll,
-            this.toolStripMenuItemLast24,
-            this.toolStripMenuItemLast3Days,
-            this.toolStripMenuItemLast7Days,
-            this.toolStripMenuItemLast30Days,
-            this.toolStripMenuItemCustomDate});
+            this.toolStripDropDownButtonDateFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.toolStripDropDownButtonDateFilter, "toolStripDropDownButtonDateFilter");
-            this.toolStripDropDownButtonDateFilter.Image = global::XenAdmin.Properties.Resources._000_FilterDates_h32bit_16;
             this.toolStripDropDownButtonDateFilter.Name = "toolStripDropDownButtonDateFilter";
-            this.toolStripDropDownButtonDateFilter.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripDropDownButtonDateFilter_DropDownItemClicked);
-            // 
-            // toolStripMenuItemShowAll
-            // 
-            this.toolStripMenuItemShowAll.Checked = true;
-            this.toolStripMenuItemShowAll.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.toolStripMenuItemShowAll.Name = "toolStripMenuItemShowAll";
-            resources.ApplyResources(this.toolStripMenuItemShowAll, "toolStripMenuItemShowAll");
-            // 
-            // toolStripMenuItemLast24
-            // 
-            this.toolStripMenuItemLast24.Name = "toolStripMenuItemLast24";
-            resources.ApplyResources(this.toolStripMenuItemLast24, "toolStripMenuItemLast24");
-            // 
-            // toolStripMenuItemLast3Days
-            // 
-            this.toolStripMenuItemLast3Days.Name = "toolStripMenuItemLast3Days";
-            resources.ApplyResources(this.toolStripMenuItemLast3Days, "toolStripMenuItemLast3Days");
-            // 
-            // toolStripMenuItemLast7Days
-            // 
-            this.toolStripMenuItemLast7Days.Name = "toolStripMenuItemLast7Days";
-            resources.ApplyResources(this.toolStripMenuItemLast7Days, "toolStripMenuItemLast7Days");
-            // 
-            // toolStripMenuItemLast30Days
-            // 
-            this.toolStripMenuItemLast30Days.Name = "toolStripMenuItemLast30Days";
-            resources.ApplyResources(this.toolStripMenuItemLast30Days, "toolStripMenuItemLast30Days");
-            // 
-            // toolStripMenuItemCustomDate
-            // 
-            this.toolStripMenuItemCustomDate.Name = "toolStripMenuItemCustomDate";
-            resources.ApplyResources(this.toolStripMenuItemCustomDate, "toolStripMenuItemCustomDate");
             // 
             // toolStripDropDownSeveritiesFilter
             // 
@@ -535,13 +488,7 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButtonDateFilter;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemShowAll;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemLast24;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemLast3Days;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemLast7Days;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemLast30Days;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCustomDate;
+        private XenAdmin.Controls.FilterDatesToolStripDropDownButton toolStripDropDownButtonDateFilter;
         private System.Windows.Forms.ToolStripButton toolStripButtonDismissAll;
         private System.Windows.Forms.ToolStripButton toolStripButtonExportAll;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;

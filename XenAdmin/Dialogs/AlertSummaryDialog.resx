@@ -429,42 +429,6 @@
   <data name="toolStripDropDownButtonServerFilter.Text" xml:space="preserve">
     <value>Filter &amp;Servers</value>
   </data>
-  <data name="toolStripMenuItemShowAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 22</value>
-  </data>
-  <data name="toolStripMenuItemShowAll.Text" xml:space="preserve">
-    <value>&amp;No Filter</value>
-  </data>
-  <data name="toolStripMenuItemLast24.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 22</value>
-  </data>
-  <data name="toolStripMenuItemLast24.Text" xml:space="preserve">
-    <value>Last 24 Hours</value>
-  </data>
-  <data name="toolStripMenuItemLast3Days.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 22</value>
-  </data>
-  <data name="toolStripMenuItemLast3Days.Text" xml:space="preserve">
-    <value>Last 3 Days</value>
-  </data>
-  <data name="toolStripMenuItemLast7Days.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 22</value>
-  </data>
-  <data name="toolStripMenuItemLast7Days.Text" xml:space="preserve">
-    <value>Last 7 Days</value>
-  </data>
-  <data name="toolStripMenuItemLast30Days.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 22</value>
-  </data>
-  <data name="toolStripMenuItemLast30Days.Text" xml:space="preserve">
-    <value>Last 30 Days</value>
-  </data>
-  <data name="toolStripMenuItemCustomDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 22</value>
-  </data>
-  <data name="toolStripMenuItemCustomDate.Text" xml:space="preserve">
-    <value>Custom...</value>
-  </data>
   <data name="toolStripDropDownButtonDateFilter.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
@@ -472,7 +436,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripDropDownButtonDateFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 25</value>
+    <value>78, 25</value>
   </data>
   <data name="toolStripDropDownButtonDateFilter.Text" xml:space="preserve">
     <value>&amp;Filter Dates</value>
@@ -838,43 +802,7 @@
     <value>toolStripDropDownButtonDateFilter</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownButtonDateFilter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemShowAll.Name" xml:space="preserve">
-    <value>toolStripMenuItemShowAll</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemShowAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemLast24.Name" xml:space="preserve">
-    <value>toolStripMenuItemLast24</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemLast24.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemLast3Days.Name" xml:space="preserve">
-    <value>toolStripMenuItemLast3Days</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemLast3Days.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemLast7Days.Name" xml:space="preserve">
-    <value>toolStripMenuItemLast7Days</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemLast7Days.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemLast30Days.Name" xml:space="preserve">
-    <value>toolStripMenuItemLast30Days</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemLast30Days.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemCustomDate.Name" xml:space="preserve">
-    <value>toolStripMenuItemCustomDate</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemCustomDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.Controls.FilterDatesToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownSeveritiesFilter.Name" xml:space="preserve">
     <value>toolStripDropDownSeveritiesFilter</value>

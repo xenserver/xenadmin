@@ -59,6 +59,7 @@ namespace XenAdmin.Dialogs
         public AlertSummaryDialog()
         {
             InitializeComponent();
+            toolStripDropDownButtonDateFilter.FilterChanged += toolStripDropDownButtonDateFilter_FilterChanged;
             GridViewAlerts.Sort(ColumnDate, ListSortDirection.Descending);
             Host_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(Host_CollectionChanged);
             LabelCappingEntries.Text = String.Format(Messages.ALERT_CAP_LABEL, ALERT_CAP);
@@ -574,7 +575,7 @@ namespace XenAdmin.Dialogs
             bool hiddenByDate = false;
             Program.Invoke(this, delegate
             {
-                hiddenByDate = hiddenByDateFilter(alert);
+                hiddenByDate = toolStripDropDownButtonDateFilter.HideByDate(alert.Timestamp.ToLocalTime());
             });
             return hiddenByDate || hiddenByHostFilter(alert) || HiddenBySeverityFilter(alert);
         }
@@ -595,22 +596,6 @@ namespace XenAdmin.Dialogs
                 return !value;
             else
                 return false;
-        }
-
-        /// <summary>
-        /// Filter returns true if the alert is dated from before the minimum datetime filter, or after the maximum datetime filter
-        /// </summary>
-        /// <param name="alert"></param>
-        /// <returns></returns>
-        private bool hiddenByDateFilter(Alert alert)
-        {
-            if (dateFilterDialog.StartDateSet && dateFilterDialog.StartDate > alert.Timestamp.ToLocalTime())
-                return true;
-
-            if (dateFilterDialog.EndDateSet && dateFilterDialog.EndDate < alert.Timestamp.ToLocalTime())
-                return true;
-
-            return false;
         }
 
         private bool HiddenBySeverityFilter(Alert alert)
@@ -1125,27 +1110,8 @@ namespace XenAdmin.Dialogs
             });
         }
 
-        private void toolStripDropDownButtonDateFilter_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void toolStripDropDownButtonDateFilter_FilterChanged()
         {
-            switch (toolStripDropDownButtonDateFilter.DropDownItems.IndexOf(e.ClickedItem))
-            {
-                case 0: dateFilterDialog.SetNone(); break;
-                case 1: dateFilterDialog.Set24Hours(); break;
-                case 2: dateFilterDialog.SetDays(XenAdmin.Dialogs.DateFilterDialog.DaysInPastOptions.THREE_DAYS); break;
-                case 3: dateFilterDialog.SetDays(XenAdmin.Dialogs.DateFilterDialog.DaysInPastOptions.SEVEN_DAYS); break;
-                case 4: dateFilterDialog.SetDays(XenAdmin.Dialogs.DateFilterDialog.DaysInPastOptions.THIRTY_DAYS); break;
-                case 5: DialogResult result = dateFilterDialog.ShowDialog();
-                    if (result != DialogResult.OK)
-                    {
-                        return;
-                    }
-                    break;
-            }
-            foreach (ToolStripMenuItem t in toolStripDropDownButtonDateFilter.DropDownItems)
-            {
-                t.Checked = false;
-            }
-            ((ToolStripMenuItem)e.ClickedItem).Checked = true;
             Rebuild();
         }
 

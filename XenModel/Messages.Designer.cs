@@ -8401,6 +8401,60 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Custom....
+        /// </summary>
+        public static string DATE_FILTER_CUSTOM {
+            get {
+                return ResourceManager.GetString("DATE_FILTER_CUSTOM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last &amp;24 Hours.
+        /// </summary>
+        public static string DATE_FILTER_LAST_24_HOURS {
+            get {
+                return ResourceManager.GetString("DATE_FILTER_LAST_24_HOURS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last &amp;3 Days.
+        /// </summary>
+        public static string DATE_FILTER_LAST_3_DAYS {
+            get {
+                return ResourceManager.GetString("DATE_FILTER_LAST_3_DAYS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last 3&amp;0 Days.
+        /// </summary>
+        public static string DATE_FILTER_LAST_30_DAYS {
+            get {
+                return ResourceManager.GetString("DATE_FILTER_LAST_30_DAYS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last &amp;7 Days.
+        /// </summary>
+        public static string DATE_FILTER_LAST_7_DAYS {
+            get {
+                return ResourceManager.GetString("DATE_FILTER_LAST_7_DAYS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;No Filter.
+        /// </summary>
+        public static string DATE_FILTER_NONE {
+            get {
+                return ResourceManager.GetString("DATE_FILTER_NONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MMM d.
         /// </summary>
         public static string DATEFORMAT_DM {

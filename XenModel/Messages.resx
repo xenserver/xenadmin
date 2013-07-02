@@ -3050,6 +3050,24 @@ Please reconnect the host and try again.</value>
   <data name="DATE_AND_TIME" xml:space="preserve">
     <value>Date &amp; Time</value>
   </data>
+  <data name="DATE_FILTER_CUSTOM" xml:space="preserve">
+    <value>&amp;Custom...</value>
+  </data>
+  <data name="DATE_FILTER_LAST_24_HOURS" xml:space="preserve">
+    <value>Last &amp;24 Hours</value>
+  </data>
+  <data name="DATE_FILTER_LAST_30_DAYS" xml:space="preserve">
+    <value>Last 3&amp;0 Days</value>
+  </data>
+  <data name="DATE_FILTER_LAST_3_DAYS" xml:space="preserve">
+    <value>Last &amp;3 Days</value>
+  </data>
+  <data name="DATE_FILTER_LAST_7_DAYS" xml:space="preserve">
+    <value>Last &amp;7 Days</value>
+  </data>
+  <data name="DATE_FILTER_NONE" xml:space="preserve">
+    <value>&amp;No Filter</value>
+  </data>
   <data name="DEACTIVATE" xml:space="preserve">
     <value>Dea&amp;ctivate</value>
   </data>
