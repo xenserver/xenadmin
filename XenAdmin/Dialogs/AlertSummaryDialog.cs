@@ -60,24 +60,14 @@ namespace XenAdmin.Dialogs
         {
             InitializeComponent();
             toolStripDropDownButtonDateFilter.FilterChanged += toolStripDropDownButtonDateFilter_FilterChanged;
+            toolStripDropDownButtonServerFilter.FilterChanged += toolStripDropDownButtonServerFilter_FilterChanged;
             GridViewAlerts.Sort(ColumnDate, ListSortDirection.Descending);
-            Host_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(Host_CollectionChanged);
             LabelCappingEntries.Text = String.Format(Messages.ALERT_CAP_LABEL, ALERT_CAP);
             GridViewAlerts.ScrollBars = ScrollBars.Vertical;
             UpdateActionEnablement();
 
-            // Build the list of hosts to filter by for the first time and set all of them to be checked
-            CheckStates = new Dictionary<string, bool>();
-            foreach (IXenConnection c in ConnectionsManager.XenConnectionsCopy)
-            {
-                foreach (Host h in c.Cache.Hosts)
-                    CheckStates[h.uuid] = true;
-
-                foreach (Pool p in c.Cache.Pools)
-                    CheckStates[p.uuid] = true;
-            }
-            buildFilterList();
-            ConnectionsManager.XenConnections.CollectionChanged += new CollectionChangeEventHandler(XenConnections_CollectionChanged);
+            toolStripDropDownButtonServerFilter.InitializeHostList();
+            toolStripDropDownButtonServerFilter.BuildFilterList();
             Alert.XenCenterAlerts.CollectionChanged += CollectionChanged;
         }
 
@@ -85,306 +75,6 @@ namespace XenAdmin.Dialogs
         {
             Rebuild();
         }
-
-        void XenConnections_CollectionChanged(object sender, CollectionChangeEventArgs e)
-        {
-            if (e.Action == CollectionChangeAction.Add)
-            {
-                IXenConnection c = e.Element as IXenConnection;
-                foreach (Host h in c.Cache.Hosts)
-                    CheckStates[h.uuid] = true;
-
-                foreach (Pool p in c.Cache.Pools)
-                    CheckStates[p.uuid] = true;
-            }
-        }
-
-
-        #region Host Filter List code
-
-        private Dictionary<string, bool> CheckStates;
-        private static bool inFilterListUpdate;
-        private static bool retryFilterListUpdate;
-        private Dictionary<string, int> alertCounts;
-
-        //Maintain a list of all the objects we currently have events on for clearing out on rebuild
-        private List<IXenConnection> connectionsWithEvents = new List<IXenConnection>();
-        private List<Host> hostsWithEvents = new List<Host>();
-
-        private void buildFilterList()
-        {
-            Program.AssertOnEventThread();
-            if (inFilterListUpdate)
-            {
-                // queue up an update after the current one has finished, in case the update has missed 
-                // the relevant change
-                retryFilterListUpdate = true;
-                return;
-            }
-            inFilterListUpdate = true;
-            alertCounts = new Dictionary<string, int>();
-            foreach (Alert alert in Alert.Alerts)
-            {
-                if (alert.Dismissing)
-                    continue;
-                MessageAlert m = alert as MessageAlert;
-                if (m == null)
-                    continue;
-                if (m.HostUuid != null)
-                {
-                    if (alertCounts.ContainsKey(m.HostUuid))
-                        alertCounts[m.HostUuid] += 1;
-                    else
-                        alertCounts[m.HostUuid] = 1;
-                }
-            }
-            try
-            {
-                toolStripDropDownButtonServerFilter.DropDownItems.Clear();
-                DeregisterEvents();
-                RegisterEvents();
-                foreach (IXenConnection c in ConnectionsManager.XenConnectionsCopy)
-                {
-                    Pool p = Helpers.GetPool(c);
-                    if (p == null)
-                    {
-                        // Stand alone host
-                        foreach (Host h in c.Cache.Hosts)
-                        {
-                            toolStripDropDownButtonServerFilter.DropDownItems.Add(GenerateHostFilterItem(h));
-                            break;
-                        }
-                    }
-                    else
-                        toolStripDropDownButtonServerFilter.DropDownItems.Add(GeneratePoolFilterItem(p));
-                }
-            }
-            finally
-            {
-                inFilterListUpdate = false;
-                if (retryFilterListUpdate)
-                {
-                    // there was a request to update while-st we were building, rebuild in case we missed something
-                    retryFilterListUpdate = false;
-                    buildFilterList();
-                }
-            }
-        }
-
-        private ToolStripMenuItem GeneratePoolFilterItem(Pool p)
-        {
-            int poolAlertCount = 0;
-            List<ToolStripMenuItem> subItems = new List<ToolStripMenuItem>();
-            bool allChecked = true;
-            foreach (Host h in p.Connection.Cache.Hosts)
-            {
-                if (alertCounts.ContainsKey(h.uuid))
-                {
-                    poolAlertCount += alertCounts[h.uuid];
-                }
-                subItems.Add(GenerateHostFilterItem(h));
-                if (!CheckStates.ContainsKey(h.uuid))
-                {
-                    allChecked = false;
-                }
-            }
-            //TODO: Is there some way we can use these alert counts? Uncomment to see them in the filter menu... looks a bit odd.
-            //ToolStripMenuItem t = new ToolStripMenuItem(string.Format("{0} ({1} alerts)", Helpers.GetName(p), poolAlertCount));
-            ToolStripMenuItem t = new ToolStripMenuItem(Helpers.GetName(p));
-            t.Tag = p.uuid;
-            t.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-            t.DropDownItems.AddRange(subItems.ToArray());
-            t.Checked = allChecked;
-            t.Click += new EventHandler(t_Click);
-            t.Image = Images.GetImage16For(p);
-            return t;
-        }
-
-        void t_Click(object sender, EventArgs e)
-        {
-            ToolStripItem t = sender as ToolStripItem;
-            ToolStripItemClickedEventArgs args = new ToolStripItemClickedEventArgs(t);
-            toolStripDropDownButtonServerFilter_DropDownItemClicked(null, args);
-        }
-
-        private ToolStripMenuItem GenerateHostFilterItem(Host h)
-        {
-            string name = Helpers.GetName(h);
-            //TODO: Is there some way we can use these alert counts? Uncomment to see them in the filter menu... looks a bit odd.
-            //if (alertCounts.ContainsKey(h.uuid))
-            //{
-            //    name = string.Format("{0} ({1} alerts)",
-            //        Helpers.TrimStringIfRequired(Helpers.GetName(h), 50),
-            //        alertCounts[h.uuid].ToString());
-            //}
-            //else
-            //{
-            //    name = string.Format("{0} (0 alerts)",
-            //         Helpers.TrimStringIfRequired(Helpers.GetName(h), 50));
-            //}
-            ToolStripMenuItem t = new ToolStripMenuItem(name);
-            t.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-            t.Tag = h.uuid;
-            t.Checked = CheckStates.ContainsKey(h.uuid);
-            t.Click += new EventHandler(t_Click);
-            t.Image = Images.GetImage16For(h);
-            return t;
-        }
-
-        private void DeregisterEvents()
-        {
-            foreach (IXenConnection c in connectionsWithEvents)
-            {
-                c.ConnectionStateChanged -= connection_ConnectionStateChanged;
-                c.Cache.DeregisterCollectionChanged<Host>(Host_CollectionChangedWithInvoke);
-                c.CachePopulated -= connection_CachePopulated;
-            }
-            foreach (Host h in hostsWithEvents)
-            {
-                DeregisterHostEvents(h);
-            }
-            connectionsWithEvents.Clear();
-            hostsWithEvents.Clear();
-        }
-
-        private readonly CollectionChangeEventHandler Host_CollectionChangedWithInvoke;
-        private void RegisterEvents()
-        {
-            foreach (IXenConnection c in ConnectionsManager.XenConnectionsCopy)
-            {
-                c.ConnectionStateChanged += connection_ConnectionStateChanged;
-                c.Cache.RegisterCollectionChanged<Host>(Host_CollectionChangedWithInvoke);
-                c.CachePopulated += connection_CachePopulated;
-                connectionsWithEvents.Add(c);
-                foreach (Host host in c.Cache.Hosts)
-                {
-                    RegisterHostEvents(host);
-                    hostsWithEvents.Add(host);
-                }
-            }
-        }
-
-        private void RegisterHostEvents(Host host)
-        {
-            Host_metrics metrics = host.Connection.Resolve<Host_metrics>(host.metrics);
-            if (metrics != null)
-                metrics.PropertyChanged += new PropertyChangedEventHandler(hostMetrics_PropertyChanged);
-            host.PropertyChanged += new PropertyChangedEventHandler(host_PropertyChanged);
-        }
-
-        private void DeregisterHostEvents(Host host)
-        {
-            Host_metrics metrics = host.Connection.Resolve<Host_metrics>(host.metrics);
-            if (metrics != null)
-                metrics.PropertyChanged -= new PropertyChangedEventHandler(hostMetrics_PropertyChanged);
-            host.PropertyChanged -= new PropertyChangedEventHandler(host_PropertyChanged);
-        }
-
-        void connection_CachePopulated(object sender, EventArgs e)
-        {
-            Program.Invoke(this, refreshLists);
-        }
-
-        private void Host_CollectionChanged(object sender, CollectionChangeEventArgs e)
-        {
-            if (e.Action == CollectionChangeAction.Add)
-            {
-                CheckStates[((Host)e.Element).uuid] = true;
-            }
-            Program.Invoke(this, refreshLists);
-        }
-
-        private void hostMetrics_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "live")
-                Program.Invoke(this, refreshLists);
-        }
-
-        private void host_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "name_label" || e.PropertyName == "metrics")
-
-                Program.Invoke(this, refreshLists);
-        }
-
-        void connection_ConnectionStateChanged(object sender, EventArgs e)
-        {
-            Program.Invoke(this, refreshLists);
-        }
-
-        private void refreshLists()
-        {
-            buildFilterList();
-            Rebuild();
-        }
-
-        private void toolStripDropDownButtonServerFilter_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            ToolStripMenuItem t = e.ClickedItem as ToolStripMenuItem;
-            if (t == null)
-                return;
-
-            string uuid = (string)t.Tag;
-            if (uuid == null)
-                return;
-
-            // toggle the check state
-            // CA-103341 check the key exists when getting it; if it doesn't consider
-            // its checkstate as false, in which case toggle to true
-            bool check = CheckStates.ContainsKey(uuid) ? !CheckStates[uuid] : true;
-            CheckStates[uuid] = check;
-            t.Checked = check;
-
-            if (t.HasDropDownItems)
-            {
-                //this is a pool check/uncheck its hosts
-                foreach (ToolStripItem child in t.DropDownItems)
-                {
-                    ToolStripMenuItem h = child as ToolStripMenuItem;
-                    if (h == null)
-                        continue;
-
-                    string hUuid = (string)h.Tag;
-                    if (hUuid == null)
-                        continue;
-
-                    h.Checked = check;
-                    CheckStates[hUuid] = check;
-                }
-            }
-            else if (t.OwnerItem != null && t.OwnerItem is ToolStripMenuItem)
-            {
-                // this is a host, look and see if we need to check/uncheck the pool
-                ToolStripMenuItem p = t.OwnerItem as ToolStripMenuItem;
-                string pUuid = (string)p.Tag;
-                if (pUuid == null)
-                    return;
-
-                bool allChecked = true;
-                foreach (ToolStripItem child in p.DropDownItems)
-                {
-                    ToolStripMenuItem h = child as ToolStripMenuItem;
-                    if (h == null)
-                        continue;
-
-                    string hUuid = (string)h.Tag;
-                    if (hUuid == null)
-                        continue;
-
-                    if (!CheckStates.ContainsKey(hUuid) || !CheckStates[hUuid])
-                    {
-                        allChecked = false;
-                        break;
-                    }
-                }
-
-                p.Checked = allChecked;
-                CheckStates[pUuid] = allChecked;
-            }
-            Rebuild();
-        }
-
-        #endregion
 
         #region AlertListCode
 
@@ -572,30 +262,11 @@ namespace XenAdmin.Dialogs
         /// <param name="alert"></param>
         private bool filterAlert(Alert alert)
         {
-            bool hiddenByDate = false;
-            Program.Invoke(this, delegate
-            {
-                hiddenByDate = toolStripDropDownButtonDateFilter.HideByDate(alert.Timestamp.ToLocalTime());
-            });
-            return hiddenByDate || hiddenByHostFilter(alert) || HiddenBySeverityFilter(alert);
-        }
-
-        /// <summary>
-        /// Filter returns true if the alert came from a host and the host is checked in the filter list, or is not a host alert.
-        /// Filter returns false if the alert is a host alert, but its relevant host entry is either unchecked or missing from the filter list.
-        /// </summary>
-        /// <param name="alert"></param>
-        /// <returns></returns>
-        private bool hiddenByHostFilter(Alert alert)
-        {
-            if (alert.HostUuid == null)
-                return false;
-            bool value;
-            // if the host checkbox is not ticked then the message is hidden
-            if (CheckStates.TryGetValue(alert.HostUuid, out value))
-                return !value;
-            else
-                return false;
+            bool hide = false;
+            Program.Invoke(this, () =>
+                                 hide = toolStripDropDownButtonDateFilter.HideByDate(alert.Timestamp.ToLocalTime())
+                                        || toolStripDropDownButtonServerFilter.HideByLocation(alert.HostUuid));
+            return hide || HiddenBySeverityFilter(alert);
         }
 
         private bool HiddenBySeverityFilter(Alert alert)
@@ -867,7 +538,8 @@ namespace XenAdmin.Dialogs
             }
             // When we refresh now the alerts we are dismissing will be removed from the GridViewAlerts control as their dismissing flag
             // is set. This also updates the numbers in the filter list correctly.
-            refreshLists();
+            toolStripDropDownButtonServerFilter.RefreshLists();
+
             foreach (IXenConnection c in alertGroups.Keys)
             {
                 _DismissAlerts(c, alertGroups[c]);
@@ -918,7 +590,6 @@ namespace XenAdmin.Dialogs
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             Alert.XenCenterAlerts.CollectionChanged -= CollectionChanged;
-            ConnectionsManager.XenConnections.CollectionChanged -= new CollectionChangeEventHandler(XenConnections_CollectionChanged);
             base.OnFormClosing(e);
         }
 
@@ -1115,6 +786,11 @@ namespace XenAdmin.Dialogs
             Rebuild();
         }
 
+        private void toolStripDropDownButtonServerFilter_FilterChanged()
+        {
+            Rebuild();
+        }
+
         private void toolStripDropDownSeveritiesFilter_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             Rebuild();
@@ -1219,11 +895,6 @@ namespace XenAdmin.Dialogs
         private void toolStripButtonRefresh_Click(object sender, EventArgs e)
         {
             Rebuild();
-        }
-
-        private void AlertSummaryDialog_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            DeregisterEvents();
         }
 
         private void GridViewAlerts_KeyDown(object sender, KeyEventArgs e)

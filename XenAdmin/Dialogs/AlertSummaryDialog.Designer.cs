@@ -55,7 +55,7 @@ namespace XenAdmin.Dialogs
             this.LabelDialogBlurb = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripDropDownButtonServerFilter = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toolStripDropDownButtonServerFilter = new XenAdmin.Controls.FilterLocationToolStripDropDownButton();
             this.toolStripDropDownButtonDateFilter = new XenAdmin.Controls.FilterDatesToolStripDropDownButton();
             this.toolStripDropDownSeveritiesFilter = new System.Windows.Forms.ToolStripDropDownButton();
             this.dataLossImminentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -272,7 +272,6 @@ namespace XenAdmin.Dialogs
             // 
             this.toolStripDropDownButtonServerFilter.AutoToolTip = false;
             resources.ApplyResources(this.toolStripDropDownButtonServerFilter, "toolStripDropDownButtonServerFilter");
-            this.toolStripDropDownButtonServerFilter.Image = global::XenAdmin.Properties.Resources._000_FilterServer_h32bit_16;
             this.toolStripDropDownButtonServerFilter.Margin = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.toolStripDropDownButtonServerFilter.Name = "toolStripDropDownButtonServerFilter";
             // 
@@ -457,7 +456,6 @@ namespace XenAdmin.Dialogs
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Name = "AlertSummaryDialog";
             this.Load += new System.EventHandler(this.AlertSummaryDialog_Load);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AlertSummaryDialog_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridViewAlerts)).EndInit();
             this.ContextMenuAlertGridView.ResumeLayout(false);
@@ -498,7 +496,7 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.ToolStripButton toolStripButtonHelp;
         private System.Windows.Forms.ToolStripButton toolStripButtonFix;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButtonServerFilter;
+        private XenAdmin.Controls.FilterLocationToolStripDropDownButton toolStripDropDownButtonServerFilter;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButtonRefresh;
