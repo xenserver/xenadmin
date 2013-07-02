@@ -1088,7 +1088,6 @@
     <Compile Include="LicenseTimer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ResxCheck.cs" />
     <Compile Include="SettingsPanels\BootDevice.cs" />
     <Compile Include="SettingsPanels\CPUMemoryEditPage.cs">
       <SubType>UserControl</SubType>
