@@ -228,6 +228,11 @@
         <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
         <PropertyRef Id="NETFRAMEWORK35" />
         <Condition Message=".NET Framework 3.5 is required for this installation."><![CDATA[Installed OR NETFRAMEWORK35]]></Condition>
+        <Property Id="PERMACHINEINSTALL">
+            <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\Citrix\XenCenter" Name="InstallDir" />
+        </Property>
+        <CustomAction Id="ClearAllUsers" Property="ALLUSERS" Value="" />
+        <CustomAction Id="SetAllUsers" Property="ALLUSERS" Value="1" />
         <InstallExecuteSequence>
             <AppSearch Sequence="50" />
             <FindRelatedProducts Before="LaunchConditions" />
@@ -254,7 +259,9 @@
             <InstallFinalize Sequence="6600" />
         </InstallExecuteSequence>
         <InstallUISequence>
+            <Custom Action="SetAllUsers" Before="FindRelatedProducts">NOT Installed AND PERMACHINEINSTALL</Custom>
             <FindRelatedProducts Before="LaunchConditions" />
+            <Custom Action="ClearAllUsers" After="FindRelatedProducts">NOT Installed AND PERMACHINEINSTALL</Custom>
             <ExecuteAction Sequence="1102" />
         </InstallUISequence>
         <Icon Id="XenCenterICO" SourceFile="..\XenAdmin\AppIcon.ico" />
