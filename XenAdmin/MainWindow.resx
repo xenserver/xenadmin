@@ -2446,12 +2446,6 @@
   <data name="pluginItemsPlaceHolderToolStripMenuItem9.Text" xml:space="preserve">
     <value>PluginItemsPlaceHolder</value>
   </data>
-  <data name="logWindowToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 22</value>
-  </data>
-  <data name="logWindowToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Log Window</value>
-  </data>
   <data name="windowToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 20</value>
   </data>
@@ -3587,12 +3581,6 @@
     <value>pluginItemsPlaceHolderToolStripMenuItem9</value>
   </data>
   <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;logWindowToolStripMenuItem.Name" xml:space="preserve">
-    <value>logWindowToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;logWindowToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;helpToolStripMenuItem.Name" xml:space="preserve">

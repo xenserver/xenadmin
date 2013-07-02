@@ -1181,12 +1181,6 @@
     <Compile Include="Controls\TreeViews\FlickerFreeTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="HistoryWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="HistoryWindow.Designer.cs">
-      <DependentUpon>HistoryWindow.cs</DependentUpon>
-    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="TabPages\NICPage.cs">
       <SubType>UserControl</SubType>
@@ -2076,10 +2070,6 @@
     <EmbeddedResource Include="Dialogs\LoadSessionDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>LoadSessionDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="HistoryWindow.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>HistoryWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\NICPage.resx">
       <DependentUpon>NICPage.cs</DependentUpon>
@@ -5179,12 +5169,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ConsoleView\XSVNCScreen.zh-CN.resx">
       <DependentUpon>XSVNCScreen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="HistoryWindow.ja.resx">
-      <DependentUpon>HistoryWindow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="HistoryWindow.zh-CN.resx">
-      <DependentUpon>HistoryWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.ja.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>

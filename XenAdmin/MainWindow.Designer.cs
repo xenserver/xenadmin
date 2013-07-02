@@ -268,7 +268,6 @@ namespace XenAdmin
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pluginItemsPlaceHolderToolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
-            this.logWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpTopicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1708,8 +1707,7 @@ namespace XenAdmin
             // windowToolStripMenuItem
             // 
             this.windowToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.pluginItemsPlaceHolderToolStripMenuItem9,
-            this.logWindowToolStripMenuItem});
+            this.pluginItemsPlaceHolderToolStripMenuItem9});
             this.windowToolStripMenuItem.Name = "windowToolStripMenuItem";
             resources.ApplyResources(this.windowToolStripMenuItem, "windowToolStripMenuItem");
             this.windowToolStripMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.windowToolStripMenuItem_DropDownItemClicked);
@@ -1719,12 +1717,6 @@ namespace XenAdmin
             // 
             this.pluginItemsPlaceHolderToolStripMenuItem9.Name = "pluginItemsPlaceHolderToolStripMenuItem9";
             resources.ApplyResources(this.pluginItemsPlaceHolderToolStripMenuItem9, "pluginItemsPlaceHolderToolStripMenuItem9");
-            // 
-            // logWindowToolStripMenuItem
-            // 
-            this.logWindowToolStripMenuItem.Name = "logWindowToolStripMenuItem";
-            resources.ApplyResources(this.logWindowToolStripMenuItem, "logWindowToolStripMenuItem");
-            this.logWindowToolStripMenuItem.Click += new System.EventHandler(this.logWindowToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -1976,7 +1968,6 @@ namespace XenAdmin
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem windowToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem logWindowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpTopicsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpContextMenuItem;

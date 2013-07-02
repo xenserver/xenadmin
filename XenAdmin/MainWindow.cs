@@ -43,7 +43,6 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using XenAdmin.Actions.GUIActions;
-using XenAdmin.Dialogs.OptionsPages;
 using XenAdmin.Wizards.ImportWizard;
 using XenAPI;
 using XenAdmin.Actions;
@@ -57,7 +56,6 @@ using XenAdmin.Network;
 using XenAdmin.TabPages;
 using XenAdmin.Wizards;
 using XenAdmin.XenSearch;
-using System.Globalization;
 using XenAdmin.Wizards.PatchingWizard;
 using XenAdmin.Plugins;
 using XenAdmin.Network.StorageLink;
@@ -426,7 +424,7 @@ namespace XenAdmin
                     {
                         logs_visible = true;
                     }
-                    else if (ShouldSwitchToHistoryTab())
+                    else if (AllowHistorySwitch)
                     {
                         TheTabControl.SelectedTab = TabPageHistory;
                         logs_visible = true;
@@ -441,23 +439,7 @@ namespace XenAdmin
                     logs_visible = false;
                 }
 
-                HistoryWindow w = HistoryWindow.TheHistoryWindow;
-                bool history_visible = w != null && w.Visible;
-
-                if (history_visible)
-                {
-                    if (w.WindowState == FormWindowState.Minimized)
-                    {
-                        Win32.FlashTaskbar(w.Handle);
-                    }
-                    else
-                    {
-                        w.BringToFront();
-                        w.Activate();
-                    }
-                }
-
-                if (!logs_visible && !history_visible)
+                if (!logs_visible)
                 {
                     IXenObject model =
                         (IXenObject)action.VM ??
@@ -470,12 +452,6 @@ namespace XenAdmin
 
                 RequestRefreshTreeView();
             }
-        }
-
-        private bool ShouldSwitchToHistoryTab()
-        {
-            return AllowHistorySwitch &&
-                (HistoryWindow.TheHistoryWindow == null || !HistoryWindow.TheHistoryWindow.Visible);
         }
 
         private void MainWindow_Shown(object sender, EventArgs e)
@@ -1877,7 +1853,7 @@ namespace XenAdmin
         {
             Object o = selectionManager.Selection.First;
             IXenObject s = o as IXenObject;
-            if (s != null && s.InError && ShouldSwitchToHistoryTab())
+            if (s != null && s.InError && AllowHistorySwitch)
             {
                 s.InError = false;
                 return TabPageHistory;
@@ -2566,8 +2542,6 @@ namespace XenAdmin
 
             topLevelMenu_DropDownOpening(sender, e);
 
-            windowToolStripMenuItem.DropDown.Items.Add(logWindowToolStripMenuItem);
-
             foreach (Form form in GetAuxWindows())
             {
                 ToolStripMenuItem item = NewToolStripMenuItem(form.Text.EscapeAmpersands());
@@ -2581,7 +2555,7 @@ namespace XenAdmin
             List<Form> result = new List<Form>();
             foreach (Form form in Application.OpenForms)
             {
-                if (form != this && form != HistoryWindow.TheHistoryWindow && form.Text != "" && !(form is ConnectingToServerDialog))
+                if (form != this && form.Text != "" && !(form is ConnectingToServerDialog))
                 {
                     result.Add(form);
                 }
@@ -2897,11 +2871,6 @@ namespace XenAdmin
                 ResumeRefreshTreeView();
                 e.CancelEdit = true;
             }
-        }
-
-        private void logWindowToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HistoryWindow.OpenHistoryWindow();
         }
 
         protected override void OnClosing(CancelEventArgs e)
