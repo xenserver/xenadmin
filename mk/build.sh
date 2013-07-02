@@ -47,19 +47,6 @@ fi
 set -e
 
 ROOT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
-cd ${ROOT_DIR}
-#DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-# now we are sure we are running from the branch root
-#cd ${DIR}/../..
-
-
-if [ -d "xenadmin-ref.hg" ]
-then
-  hg --cwd xenadmin-ref.hg pull -u
-else
-  hg clone ssh://xenhg@hg.uk.xensource.com/carbon/${XS_BRANCH}/xenadmin-ref.hg/
-fi
 
 production_jenkins_build()
 {
