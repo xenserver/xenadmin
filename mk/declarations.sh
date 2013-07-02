@@ -89,6 +89,14 @@ fi
 XS_BRANCH=`cd $DIR;git config --get remote.origin.url|sed -e 's@.*carbon/\(.*\)/xenadmin.git.*@\1@'`
 echo Running on branch: $XS_BRANCH
 
+cd ${ROOT_DIR}
+if [ -d "xenadmin-ref.hg" ]
+then
+  hg --cwd xenadmin-ref.hg pull -u
+else
+  hg clone ssh://xenhg@hg.uk.xensource.com/carbon/${XS_BRANCH}/xenadmin-ref.hg/
+fi
+
 #rename Jenkins environment variables to distinguish them from ours; remember to use them as get only
 get_JOB_NAME=${JOB_NAME}
 get_BUILD_NUMBER=${BUILD_NUMBER}
