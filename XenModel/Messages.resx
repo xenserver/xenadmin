@@ -4562,6 +4562,12 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="FILE_X_EXISTS_OVERWRITE" xml:space="preserve">
     <value>File {0} already exists. Overwrite?</value>
   </data>
+  <data name="FILTERS_OFF" xml:space="preserve">
+    <value>Filters are OFF</value>
+  </data>
+  <data name="FILTERS_ON" xml:space="preserve">
+    <value>Filters are ON</value>
+  </data>
   <data name="FINISH" xml:space="preserve">
     <value>&amp;Finish</value>
   </data>

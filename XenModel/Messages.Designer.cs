@@ -12976,6 +12976,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Filters are OFF.
+        /// </summary>
+        public static string FILTERS_OFF {
+            get {
+                return ResourceManager.GetString("FILTERS_OFF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filters are ON.
+        /// </summary>
+        public static string FILTERS_ON {
+            get {
+                return ResourceManager.GetString("FILTERS_ON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Finish.
         /// </summary>
         public static string FINISH {

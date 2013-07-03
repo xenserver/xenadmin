@@ -156,6 +156,11 @@ namespace XenAdmin.Controls
 
             return false;
         }
+        
+        public bool FilterIsOn
+        {
+            get { return HostCheckStates.ContainsValue(false); }
+        }
 
         private ToolStripMenuItem GeneratePoolFilterItem(Pool p)
         {
@@ -250,7 +255,7 @@ namespace XenAdmin.Controls
             Program.Invoke(Parent, RefreshLists);
         }
 
-        void XenConnections_CollectionChanged(object sender, CollectionChangeEventArgs e)
+        private void XenConnections_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             if (e.Action == CollectionChangeAction.Add)
             {

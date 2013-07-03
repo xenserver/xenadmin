@@ -424,7 +424,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripDropDownButtonServerFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 25</value>
+    <value>86, 25</value>
   </data>
   <data name="toolStripDropDownButtonServerFilter.Text" xml:space="preserve">
     <value>Filter &amp;Servers</value>
@@ -484,7 +484,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripDropDownSeveritiesFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 25</value>
+    <value>98, 25</value>
   </data>
   <data name="toolStripDropDownSeveritiesFilter.Text" xml:space="preserve">
     <value>Filter Se&amp;verities</value>
@@ -499,7 +499,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonRefresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 25</value>
+    <value>50, 25</value>
   </data>
   <data name="toolStripButtonRefresh.Text" xml:space="preserve">
     <value>&amp;Refresh</value>
@@ -514,7 +514,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonExportAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 25</value>
+    <value>61, 25</value>
   </data>
   <data name="toolStripButtonExportAll.Text" xml:space="preserve">
     <value>&amp;Export All</value>
@@ -526,10 +526,19 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonDismissAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 25</value>
+    <value>68, 25</value>
   </data>
   <data name="toolStripButtonDismissAll.Text" xml:space="preserve">
     <value>Dismiss &amp;All</value>
+  </data>
+  <data name="toolStripLabelFiltersOnOff.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="toolStripLabelFiltersOnOff.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 25</value>
+  </data>
+  <data name="toolStripLabelFiltersOnOff.Text" xml:space="preserve">
+    <value>Filters are ON/OFF</value>
   </data>
   <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 1</value>
@@ -655,7 +664,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonDismiss.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 25</value>
+    <value>51, 25</value>
   </data>
   <data name="toolStripButtonDismiss.Text" xml:space="preserve">
     <value>&amp;Dismiss</value>
@@ -796,7 +805,7 @@
     <value>toolStripDropDownButtonServerFilter</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownButtonServerFilter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.Controls.FilterLocationToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownButtonDateFilter.Name" xml:space="preserve">
     <value>toolStripDropDownButtonDateFilter</value>
@@ -899,6 +908,12 @@
   </data>
   <data name="&gt;&gt;toolStripButtonDismiss.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabelFiltersOnOff.Name" xml:space="preserve">
+    <value>toolStripLabelFiltersOnOff</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabelFiltersOnOff.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AlertSummaryDialog</value>

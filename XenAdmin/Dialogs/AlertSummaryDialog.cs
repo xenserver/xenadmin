@@ -52,8 +52,6 @@ namespace XenAdmin.Dialogs
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private DateFilterDialog dateFilterDialog = new DateFilterDialog();
-
         private static readonly int ALERT_CAP = 1000;
 
         public AlertSummaryDialog()
@@ -74,6 +72,16 @@ namespace XenAdmin.Dialogs
         void AlertSummaryDialog_Load(object sender, EventArgs e)
         {
             Rebuild();
+        }
+        
+        private void SetFilterLabel()
+        {
+            bool filterIsOn = toolStripDropDownButtonDateFilter.FilterIsOn
+                              || toolStripDropDownButtonServerFilter.FilterIsOn;
+
+            toolStripLabelFiltersOnOff.Text = filterIsOn
+                                                  ? Messages.FILTERS_ON
+                                                  : Messages.FILTERS_OFF;
         }
 
         #region AlertListCode
@@ -116,6 +124,8 @@ namespace XenAdmin.Dialogs
                 // 4) Take the top n as set by the filters
                 // 5) Add them to the control using the optimized AddRange()
 
+                Program.Invoke(this, SetFilterLabel);
+                
                 List<Alert> alerts = Alert.NonDismissingAlerts;
                 alerts.RemoveAll(filterAlert);
                 
