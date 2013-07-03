@@ -26,10 +26,10 @@
 # WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
 # NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
-# SUCH DAMAGE. 
+# SUCH DAMAGE.
 
---- XenCenter.wxs	2013-07-01 11:22:14.744131100 +0100
-+++ XenCenter.l10n.wxs	2013-07-01 11:23:18.864542500 +0100
+--- XenCenter.wxs	2013-07-02 12:29:32.138358700 +0100
++++ XenCenter.l10n.wxs	2013-07-02 12:31:36.023746000 +0100
 @@ -38,7 +38,7 @@
      <?define UpgradeCode="{EA0EF50F-5CC6-452B-B09F-3F5EC564899D}"?>
      <?define ProductCode="{65AE1345-A520-456D-8A19-2F52D43D3A09}"?>
@@ -173,6 +173,6 @@
          <PropertyRef Id="NETFRAMEWORK35" />
 -        <Condition Message=".NET Framework 3.5 is required for this installation."><![CDATA[Installed OR NETFRAMEWORK35]]></Condition>
 +        <Condition Message="!(loc.Required_For_Installation)"><![CDATA[Installed OR NETFRAMEWORK35]]></Condition>
-         <InstallExecuteSequence>
-             <AppSearch Sequence="50" />
-             <FindRelatedProducts Before="LaunchConditions" />
+         <Property Id="PERMACHINEINSTALL">
+             <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\Citrix\XenCenter" Name="InstallDir" />
+         </Property>
