@@ -282,6 +282,9 @@
   <data name="DOMAIN_EXISTS" xml:space="preserve">
     <value>The operation could not be performed because a domain still exists for the specified VM.</value>
   </data>
+  <data name="DUPLICATE_MAC_SEED" xml:space="preserve">
+    <value>This MAC seed is already in use by a VM in the pool</value>
+  </data>
   <data name="DUPLICATE_PIF_DEVICE_NAME" xml:space="preserve">
     <value>A PIF with this specified device name already exists.</value>
   </data>
@@ -1394,6 +1397,9 @@ Authorized Roles: {1}</value>
   <data name="SR_INDESTRUCTIBLE" xml:space="preserve">
     <value>The SR could not be destroyed, as the 'indestructible' flag was set on it.</value>
   </data>
+  <data name="SR_IS_CACHE_SR" xml:space="preserve">
+    <value>The SR is currently being used as a local cache SR.</value>
+  </data>
   <data name="SR_NOT_EMPTY" xml:space="preserve">
     <value>The SR operation cannot be performed because the SR is not empty.</value>
   </data>
@@ -1444,6 +1450,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="TRANSPORT_PIF_NOT_CONFIGURED" xml:space="preserve">
     <value>The tunnel transport PIF has no IP configuration set.</value>
+  </data>
+  <data name="UNIMPLEMENTED_IN_SM_BACKEND" xml:space="preserve">
+    <value>You have attempted a function which is not implemented</value>
   </data>
   <data name="UNKNOWN_BOOTLOADER" xml:space="preserve">
     <value>The requested bootloader {1} for VM {0} is unknown</value>
