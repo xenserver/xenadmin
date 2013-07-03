@@ -65,7 +65,7 @@ namespace XenAdminTests.UnitTests.AlertTests
                 AppliesTo = "HostAName, HostBName, ConnAName, ConnBName",
                 FixLinkText = "&Go to Web Page...",
                 HelpID = "XenServerPatchAlert",
-                Description = "My description (April 1, 2011)",
+                Description = "My description",
                 HelpLinkText = "&Help on this alert...",
                 Title = "New Update Available - name",
                 Priority = "Priority2"
@@ -91,7 +91,7 @@ namespace XenAdminTests.UnitTests.AlertTests
                 AppliesTo = "HostAName, HostBName",
                 FixLinkText = "&Go to Web Page...",
                 HelpID = "XenServerPatchAlert",
-                Description = "My description (April 1, 2011)",
+                Description = "My description",
                 HelpLinkText = "&Help on this alert...",
                 Title = "New Update Available - name",
                 Priority = "Priority1"
@@ -118,7 +118,7 @@ namespace XenAdminTests.UnitTests.AlertTests
                 AppliesTo = "ConnAName, ConnBName",
                 FixLinkText = "&Go to Web Page...",
                 HelpID = "XenServerPatchAlert",
-                Description = "My description (April 1, 2011)",
+                Description = "My description",
                 HelpLinkText = "&Help on this alert...",
                 Title = "New Update Available - name",
                 Priority = "Unknown"
@@ -143,7 +143,7 @@ namespace XenAdminTests.UnitTests.AlertTests
                 AppliesTo = string.Empty,
                 FixLinkText = "&Go to Web Page...",
                 HelpID = "XenServerPatchAlert",
-                Description = "My description (April 1, 2011)",
+                Description = "My description",
                 HelpLinkText = "&Help on this alert...",
                 Title = "New Update Available - name",
                 Priority = "Priority5"

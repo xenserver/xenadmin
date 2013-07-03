@@ -65,7 +65,7 @@ namespace XenAdminTests.UnitTests.AlertTests
                 AppliesTo = "HostAName, HostBName, ConnAName, ConnBName",
                 FixLinkText = "&Go to Web Page...",
                 HelpID = "XenServerUpdateAlert",
-                Description = "name is now available. Download the latest at the Citrix website (April 1, 2011)",
+                Description = "name is now available. Download the latest at the Citrix website.",
                 HelpLinkText = "&Help on this alert...",
                 Title = "name is now available",
                 Priority = "Priority5"
@@ -91,7 +91,7 @@ namespace XenAdminTests.UnitTests.AlertTests
                 AppliesTo = "HostAName, HostBName",
                 FixLinkText = "&Go to Web Page...",
                 HelpID = "XenServerUpdateAlert",
-                Description = "name is now available. Download the latest at the Citrix website (April 1, 2011)",
+                Description = "name is now available. Download the latest at the Citrix website.",
                 HelpLinkText = "&Help on this alert...",
                 Title = "name is now available",
                 Priority = "Priority5"
@@ -118,7 +118,7 @@ namespace XenAdminTests.UnitTests.AlertTests
                 AppliesTo = "ConnAName, ConnBName",
                 FixLinkText = "&Go to Web Page...",
                 HelpID = "XenServerUpdateAlert",
-                Description = "name is now available. Download the latest at the Citrix website (April 1, 2011)",
+                Description = "name is now available. Download the latest at the Citrix website.",
                 HelpLinkText = "&Help on this alert...",
                 Title = "name is now available",
                 Priority = "Priority5"
@@ -143,7 +143,7 @@ namespace XenAdminTests.UnitTests.AlertTests
                 AppliesTo = string.Empty,
                 FixLinkText = "&Go to Web Page...",
                 HelpID = "XenServerUpdateAlert",
-                Description = "name is now available. Download the latest at the Citrix website (April 1, 2011)",
+                Description = "name is now available. Download the latest at the Citrix website.",
                 HelpLinkText = "&Help on this alert...",
                 Title = "name is now available",
                 Priority = "Priority5"

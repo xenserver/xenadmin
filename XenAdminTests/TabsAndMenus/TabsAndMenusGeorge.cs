@@ -209,7 +209,7 @@ namespace XenAdminTests.TabsAndMenus
         [Test]
         public void Tabs_Folder()
         {
-            PutInOrgView(OBJECT_VIEW);
+            PutInOrgView(ORGANIZATION_VIEW);
             try
             {
                 foreach (Folder folder in GetAllXenObjects<Folder>())

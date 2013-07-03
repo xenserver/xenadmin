@@ -50,7 +50,7 @@ namespace XenAdminTests.UnitTests.AlertTests
                 AppliesTo = "XenCenter",
                 FixLinkText = "&Go to Web Page...",
                 HelpID = "XenCenterUpdateAlert",
-                Description = "xc is now available. Download the new version from the Citrix website - December 9, 2011.",
+                Description = "xc is now available. Download the new version from the Citrix website.",
                 HelpLinkText = "&Help on this alert...",
                 Title = "New XenCenter Available",
                 Priority = "Priority5"
