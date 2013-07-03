@@ -9298,6 +9298,24 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   <data name="SEVERITY" xml:space="preserve">
     <value>Severity</value>
   </data>
+  <data name="SEVERITY_FILTER_0" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="SEVERITY_FILTER_1" xml:space="preserve">
+    <value>Data loss imminent</value>
+  </data>
+  <data name="SEVERITY_FILTER_2" xml:space="preserve">
+    <value>Service loss imminent</value>
+  </data>
+  <data name="SEVERITY_FILTER_3" xml:space="preserve">
+    <value>Service degraded</value>
+  </data>
+  <data name="SEVERITY_FILTER_4" xml:space="preserve">
+    <value>Service recovered</value>
+  </data>
+  <data name="SEVERITY_FILTER_5" xml:space="preserve">
+    <value>Informational</value>
+  </data>
   <data name="SHADOW_MEMORY_MULTIPLIER" xml:space="preserve">
     <value>Shadow memory multiplier: {0}</value>
   </data>
@@ -9643,6 +9661,15 @@ Do you want to connect to the pool master '{1}'?</value>
   </data>
   <data name="STATUS" xml:space="preserve">
     <value>Status</value>
+  </data>
+  <data name="STATUS_FILTER_COMPLETE" xml:space="preserve">
+    <value>Complete</value>
+  </data>
+  <data name="STATUS_FILTER_ERROR" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="STATUS_FILTER_IN_PROGRESS" xml:space="preserve">
+    <value>In progress</value>
   </data>
   <data name="STATUS_REPORT_ZIP_FAILED" xml:space="preserve">
     <value>There was an error while packaging the server status report. Only a partial report may be available</value>

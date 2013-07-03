@@ -2259,6 +2259,12 @@
     <Compile Include="Controls\FilterLocationToolStripDropDownButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\FilterSeveritiesToolStripDropDownButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\FilterStatusToolStripDropDownButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\HaNtolControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

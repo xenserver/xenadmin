@@ -49,6 +49,7 @@ namespace XenAdmin.Controls
         /// Maintain a list of all the objects we currently have events on for clearing out on rebuild
         /// </summary>
         private List<IXenConnection> connectionsWithEvents = new List<IXenConnection>();
+        private List<Pool> poolsWithEvents = new List<Pool>();
         private List<Host> hostsWithEvents = new List<Host>();
         private Dictionary<string, bool> HostCheckStates = new Dictionary<string, bool>();
         private readonly CollectionChangeEventHandler m_hostCollectionChangedWithInvoke;
@@ -205,6 +206,12 @@ namespace XenAdmin.Controls
                 c.CachePopulated += connection_CachePopulated;
                 connectionsWithEvents.Add(c);
 
+                foreach (var pool in c.Cache.Pools)
+                {
+                    pool.PropertyChanged += pool_PropertyChanged;
+                    poolsWithEvents.Add(pool);
+                }
+
                 foreach (Host host in c.Cache.Hosts)
                 {
                     RegisterHostEvents(host);
@@ -222,10 +229,14 @@ namespace XenAdmin.Controls
                 c.CachePopulated -= connection_CachePopulated;
             }
 
+            foreach (var pool in poolsWithEvents)
+                pool.PropertyChanged -= pool_PropertyChanged;
+
             foreach (Host h in hostsWithEvents)
                 DeregisterHostEvents(h);
             
             connectionsWithEvents.Clear();
+            poolsWithEvents.Clear();
             hostsWithEvents.Clear();
         }
 
@@ -272,6 +283,12 @@ namespace XenAdmin.Controls
                 HostCheckStates[((Host)e.Element).uuid] = true;
 
             Program.Invoke(Parent, RefreshLists);
+        }
+
+        private void pool_PropertyChanged(object obj, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "other_config" || e.PropertyName == "name_label")
+                Program.Invoke(Parent, RefreshLists);
         }
 
         private void hostMetrics_PropertyChanged(object sender, PropertyChangedEventArgs e)

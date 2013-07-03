@@ -57,13 +57,7 @@ namespace XenAdmin.Dialogs
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripDropDownButtonServerFilter = new XenAdmin.Controls.FilterLocationToolStripDropDownButton();
             this.toolStripDropDownButtonDateFilter = new XenAdmin.Controls.FilterDatesToolStripDropDownButton();
-            this.toolStripDropDownSeveritiesFilter = new System.Windows.Forms.ToolStripDropDownButton();
-            this.dataLossImminentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.serviceLossImminentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.serviceDegradedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.serviceRecoveredToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.informationalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.unknownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownSeveritiesFilter = new XenAdmin.Controls.FilterSeveritiesToolStripDropDownButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -285,70 +279,8 @@ namespace XenAdmin.Dialogs
             // 
             // toolStripDropDownSeveritiesFilter
             // 
-            this.toolStripDropDownSeveritiesFilter.AutoToolTip = false;
-            this.toolStripDropDownSeveritiesFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dataLossImminentToolStripMenuItem,
-            this.serviceLossImminentToolStripMenuItem,
-            this.serviceDegradedToolStripMenuItem,
-            this.serviceRecoveredToolStripMenuItem,
-            this.informationalToolStripMenuItem,
-            this.unknownToolStripMenuItem});
             resources.ApplyResources(this.toolStripDropDownSeveritiesFilter, "toolStripDropDownSeveritiesFilter");
             this.toolStripDropDownSeveritiesFilter.Name = "toolStripDropDownSeveritiesFilter";
-            this.toolStripDropDownSeveritiesFilter.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripDropDownSeveritiesFilter_DropDownItemClicked);
-            // 
-            // dataLossImminentToolStripMenuItem
-            // 
-            this.dataLossImminentToolStripMenuItem.Checked = true;
-            this.dataLossImminentToolStripMenuItem.CheckOnClick = true;
-            this.dataLossImminentToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.dataLossImminentToolStripMenuItem.Image = global::XenAdmin.Properties.Resources._000_PiiYes_h32bit_16;
-            this.dataLossImminentToolStripMenuItem.Name = "dataLossImminentToolStripMenuItem";
-            resources.ApplyResources(this.dataLossImminentToolStripMenuItem, "dataLossImminentToolStripMenuItem");
-            // 
-            // serviceLossImminentToolStripMenuItem
-            // 
-            this.serviceLossImminentToolStripMenuItem.Checked = true;
-            this.serviceLossImminentToolStripMenuItem.CheckOnClick = true;
-            this.serviceLossImminentToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.serviceLossImminentToolStripMenuItem.Image = global::XenAdmin.Properties.Resources._000_PiiMaybe_h32bit_16;
-            this.serviceLossImminentToolStripMenuItem.Name = "serviceLossImminentToolStripMenuItem";
-            resources.ApplyResources(this.serviceLossImminentToolStripMenuItem, "serviceLossImminentToolStripMenuItem");
-            // 
-            // serviceDegradedToolStripMenuItem
-            // 
-            this.serviceDegradedToolStripMenuItem.Checked = true;
-            this.serviceDegradedToolStripMenuItem.CheckOnClick = true;
-            this.serviceDegradedToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.serviceDegradedToolStripMenuItem.Image = global::XenAdmin.Properties.Resources._000_PiiCustomised_h32bit_16;
-            this.serviceDegradedToolStripMenuItem.Name = "serviceDegradedToolStripMenuItem";
-            resources.ApplyResources(this.serviceDegradedToolStripMenuItem, "serviceDegradedToolStripMenuItem");
-            // 
-            // serviceRecoveredToolStripMenuItem
-            // 
-            this.serviceRecoveredToolStripMenuItem.Checked = true;
-            this.serviceRecoveredToolStripMenuItem.CheckOnClick = true;
-            this.serviceRecoveredToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.serviceRecoveredToolStripMenuItem.Image = global::XenAdmin.Properties.Resources._000_PiiNo_h32bit_16;
-            this.serviceRecoveredToolStripMenuItem.Name = "serviceRecoveredToolStripMenuItem";
-            resources.ApplyResources(this.serviceRecoveredToolStripMenuItem, "serviceRecoveredToolStripMenuItem");
-            // 
-            // informationalToolStripMenuItem
-            // 
-            this.informationalToolStripMenuItem.Checked = true;
-            this.informationalToolStripMenuItem.CheckOnClick = true;
-            this.informationalToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.informationalToolStripMenuItem.Image = global::XenAdmin.Properties.Resources._000_Severity5_h32bit_16;
-            this.informationalToolStripMenuItem.Name = "informationalToolStripMenuItem";
-            resources.ApplyResources(this.informationalToolStripMenuItem, "informationalToolStripMenuItem");
-            // 
-            // unknownToolStripMenuItem
-            // 
-            this.unknownToolStripMenuItem.Checked = true;
-            this.unknownToolStripMenuItem.CheckOnClick = true;
-            this.unknownToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.unknownToolStripMenuItem.Name = "unknownToolStripMenuItem";
-            resources.ApplyResources(this.unknownToolStripMenuItem, "unknownToolStripMenuItem");
             // 
             // toolStripSeparator3
             // 
@@ -504,13 +436,7 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButtonRefresh;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownSeveritiesFilter;
-        private System.Windows.Forms.ToolStripMenuItem dataLossImminentToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem serviceLossImminentToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem serviceDegradedToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem serviceRecoveredToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem informationalToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem unknownToolStripMenuItem;
+        private XenAdmin.Controls.FilterSeveritiesToolStripDropDownButton toolStripDropDownSeveritiesFilter;
         private System.Windows.Forms.DataGridViewImageColumn ColumnExpand;
         private System.Windows.Forms.DataGridViewImageColumn ColumnType;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAppliesTo;

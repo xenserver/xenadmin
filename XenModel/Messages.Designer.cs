@@ -26713,6 +26713,60 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unknown.
+        /// </summary>
+        public static string SEVERITY_FILTER_0 {
+            get {
+                return ResourceManager.GetString("SEVERITY_FILTER_0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data loss imminent.
+        /// </summary>
+        public static string SEVERITY_FILTER_1 {
+            get {
+                return ResourceManager.GetString("SEVERITY_FILTER_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Service loss imminent.
+        /// </summary>
+        public static string SEVERITY_FILTER_2 {
+            get {
+                return ResourceManager.GetString("SEVERITY_FILTER_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Service degraded.
+        /// </summary>
+        public static string SEVERITY_FILTER_3 {
+            get {
+                return ResourceManager.GetString("SEVERITY_FILTER_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Service recovered.
+        /// </summary>
+        public static string SEVERITY_FILTER_4 {
+            get {
+                return ResourceManager.GetString("SEVERITY_FILTER_4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Informational.
+        /// </summary>
+        public static string SEVERITY_FILTER_5 {
+            get {
+                return ResourceManager.GetString("SEVERITY_FILTER_5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shadow memory multiplier: {0}.
         /// </summary>
         public static string SHADOW_MEMORY_MULTIPLIER {
@@ -27745,6 +27799,33 @@ namespace XenAdmin {
         public static string STATUS {
             get {
                 return ResourceManager.GetString("STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complete.
+        /// </summary>
+        public static string STATUS_FILTER_COMPLETE {
+            get {
+                return ResourceManager.GetString("STATUS_FILTER_COMPLETE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string STATUS_FILTER_ERROR {
+            get {
+                return ResourceManager.GetString("STATUS_FILTER_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In progress.
+        /// </summary>
+        public static string STATUS_FILTER_IN_PROGRESS {
+            get {
+                return ResourceManager.GetString("STATUS_FILTER_IN_PROGRESS", resourceCulture);
             }
         }
         

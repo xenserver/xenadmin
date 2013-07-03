@@ -54,19 +54,27 @@ namespace XenAdmin.Dialogs
 
         private static readonly int ALERT_CAP = 1000;
 
+        private readonly CollectionChangeEventHandler m_alertCollectionChangedWithInvoke;
+        Dictionary<string, bool> expandedState = new Dictionary<string, bool>();
+        private bool inAlertBuild;
+        private bool retryAlertBuild;
+
         public AlertSummaryDialog()
         {
             InitializeComponent();
             toolStripDropDownButtonDateFilter.FilterChanged += toolStripDropDownButtonDateFilter_FilterChanged;
             toolStripDropDownButtonServerFilter.FilterChanged += toolStripDropDownButtonServerFilter_FilterChanged;
+            toolStripDropDownSeveritiesFilter.FilterChanged += toolStripDropDownSeveritiesFilter_FilterChanged;
             GridViewAlerts.Sort(ColumnDate, ListSortDirection.Descending);
             LabelCappingEntries.Text = String.Format(Messages.ALERT_CAP_LABEL, ALERT_CAP);
             GridViewAlerts.ScrollBars = ScrollBars.Vertical;
             UpdateActionEnablement();
 
+            m_alertCollectionChangedWithInvoke = Program.ProgramInvokeHandler(AlertsCollectionChanged);
+            Alert.XenCenterAlerts.CollectionChanged += m_alertCollectionChangedWithInvoke;
+
             toolStripDropDownButtonServerFilter.InitializeHostList();
             toolStripDropDownButtonServerFilter.BuildFilterList();
-            Alert.XenCenterAlerts.CollectionChanged += CollectionChanged;
         }
 
         void AlertSummaryDialog_Load(object sender, EventArgs e)
@@ -77,7 +85,8 @@ namespace XenAdmin.Dialogs
         private void SetFilterLabel()
         {
             bool filterIsOn = toolStripDropDownButtonDateFilter.FilterIsOn
-                              || toolStripDropDownButtonServerFilter.FilterIsOn;
+                              || toolStripDropDownButtonServerFilter.FilterIsOn
+                              || toolStripDropDownSeveritiesFilter.FilterIsOn;
 
             toolStripLabelFiltersOnOff.Text = filterIsOn
                                                   ? Messages.FILTERS_ON
@@ -85,11 +94,6 @@ namespace XenAdmin.Dialogs
         }
 
         #region AlertListCode
-
-        Dictionary<string, bool> expandedState = new Dictionary<string, bool>();
-        private bool inAlertBuild;
-        private bool retryAlertBuild;
-
 
         private void Rebuild()
         {
@@ -265,7 +269,6 @@ namespace XenAdmin.Dialogs
 
         }
 
-        #region Alert Row Filtering code
         /// <summary>
         /// Runs all the current filters on the alert to determine if it should be shown in the list or not.
         /// </summary>
@@ -275,21 +278,10 @@ namespace XenAdmin.Dialogs
             bool hide = false;
             Program.Invoke(this, () =>
                                  hide = toolStripDropDownButtonDateFilter.HideByDate(alert.Timestamp.ToLocalTime())
-                                        || toolStripDropDownButtonServerFilter.HideByLocation(alert.HostUuid));
-            return hide || HiddenBySeverityFilter(alert);
+                                        || toolStripDropDownButtonServerFilter.HideByLocation(alert.HostUuid)
+                                        || toolStripDropDownSeveritiesFilter.HideBySeverity(alert.Priority));
+            return hide;
         }
-
-        private bool HiddenBySeverityFilter(Alert alert)
-        {
-            return !((dataLossImminentToolStripMenuItem.Checked && alert.Priority == AlertPriority.Priority1)
-                     || (serviceLossImminentToolStripMenuItem.Checked && alert.Priority == AlertPriority.Priority2)
-                     || (serviceDegradedToolStripMenuItem.Checked && alert.Priority == AlertPriority.Priority3)
-                     || (serviceRecoveredToolStripMenuItem.Checked && alert.Priority == AlertPriority.Priority4)
-                     || (informationalToolStripMenuItem.Checked && alert.Priority == AlertPriority.Priority5)
-                     || unknownToolStripMenuItem.Checked && alert.Priority == AlertPriority.Unknown);
-        }
-
-        #endregion
 
         private void RemoveAlertRow(Alert a)
         {
@@ -360,8 +352,6 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        #region sorting code
-
         /// <summary>
         /// Handles the automatic sorting of the AlertsGridView for the non-string columns
         /// </summary>
@@ -385,10 +375,6 @@ namespace XenAdmin.Dialogs
         }
 
         #endregion
-
-        #endregion
-
-        #region Alert Actions Logic
 
         private void ButtonHelp_Click(object sender, EventArgs e)
         {
@@ -519,19 +505,15 @@ namespace XenAdmin.Dialogs
                 _DismissAlerts(null, local_alerts);
         }
 
-        /// <param name="connection">May be null, in which case this is expected to be for client-side alerts.</param>
+        /// <param name="connection">
+        /// May be null, in which case this is expected to be for client-side alerts.
+        /// </param>
         private static void _DismissAlerts(IXenConnection connection, List<Alert> alerts)
         {
             new DeleteAllAlertsAction(connection, alerts).RunAsync();
         }
-        #endregion
 
-        private void CollectionChanged(object sender, CollectionChangeEventArgs e)
-        {
-            Program.BeginInvoke(this, (CollectionChangeEventHandler)CollectionChanged_, sender, e);
-        }
-
-        private void CollectionChanged_(object sender, CollectionChangeEventArgs e)
+        private void AlertsCollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             Program.AssertOnEventThread();
             if (e.Element == null)
@@ -559,7 +541,7 @@ namespace XenAdmin.Dialogs
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            Alert.XenCenterAlerts.CollectionChanged -= CollectionChanged;
+            Alert.XenCenterAlerts.CollectionChanged -= m_alertCollectionChangedWithInvoke;
             base.OnFormClosing(e);
         }
 
@@ -761,10 +743,10 @@ namespace XenAdmin.Dialogs
             Rebuild();
         }
 
-        private void toolStripDropDownSeveritiesFilter_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            Rebuild();
-        }
+         private void toolStripDropDownSeveritiesFilter_FilterChanged()
+         {
+             Rebuild();
+         }
 
         private void toolStripButtonExportAll_Click(object sender, EventArgs e)
         {
