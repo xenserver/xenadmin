@@ -345,40 +345,6 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private static string GetName(Alert alert)
-        {
-            if (alert is XenServerPatchAlert)
-            {
-                return ((XenServerPatchAlert)alert).Patch.Name;
-            }
-            if (alert is XenCenterUpdateAlert)
-            {
-                return ((XenCenterUpdateAlert)alert).NewVersion.Name;
-            }
-            if (alert is XenServerUpdateAlert)
-            {
-                return ((XenServerUpdateAlert)alert).Version.Name;
-            }
-            return string.Empty;
-        }
-
-        private static string GetDetails(Alert alert)
-        {
-            if (alert is XenServerPatchAlert)
-            {
-                return ((XenServerPatchAlert)alert).Patch.Description;
-            }
-            if (alert is XenCenterUpdateAlert)
-            {
-                return Messages.ALERT_NEW_VERSION;
-            }
-            if (alert is XenServerUpdateAlert)
-            {
-                return string.Format(Messages.DOWLOAD_LATEST_XS_TITLE, ((XenServerUpdateAlert)alert).Version.Name);
-            }
-            return string.Empty;
-        }
-
         private static string GetWebPageLabel(Alert alert)
         {
             if (alert is XenServerPatchAlert)
@@ -404,8 +370,8 @@ namespace XenAdmin.Dialogs
             DataGridViewRow newRow = new DataGridViewRow();
             newRow.Tag = alert;
 
-            nameCell.Value = GetName(alert);
-            detailsCell.Value = GetDetails(alert);
+            nameCell.Value = alert.Name;
+            detailsCell.Value = alert.Description;
             dateCell.Value = HelpersGUI.DateTimeToString(alert.Timestamp.ToLocalTime(), Messages.DATEFORMAT_DMY, true);
             webPageCell.Value = GetWebPageLabel(alert);
             appliesToCell.Value = alert.AppliesTo;
@@ -431,7 +397,7 @@ namespace XenAdmin.Dialogs
 
         private static int CompareOnName(Alert alert1, Alert alert2)
         {
-            int sortResult = string.Compare(GetName(alert1), GetName(alert2));
+            int sortResult = string.Compare(alert1.Name, alert2.Name);
             if (sortResult == 0)
                 sortResult = (string.Compare(alert1.uuid, alert2.uuid));
             return sortResult;
@@ -469,7 +435,7 @@ namespace XenAdmin.Dialogs
         {
             int sortResult = string.Compare(alert1.AppliesTo, alert2.AppliesTo);
             if (sortResult == 0)
-                sortResult = string.Compare(GetName(alert1), GetName(alert2));
+                sortResult = string.Compare(alert1.Name, alert2.Name);
             if (sortResult == 0)
                 sortResult = (string.Compare(alert1.uuid, alert2.uuid));
             return sortResult;
@@ -594,8 +560,7 @@ namespace XenAdmin.Dialogs
             Uri address = new Uri(patchUri);
             string tempFile = Path.GetTempFileName();
 
-            DownloadAndUnzipXenServerPatchAction action = new DownloadAndUnzipXenServerPatchAction(GetName(patchAlert),
-                                                                                                   address, tempFile);
+            var action = new DownloadAndUnzipXenServerPatchAction(patchAlert.Description, address, tempFile);
             ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Continuous, false) { ShowCancel = true };
             dialog.ShowDialog(this);
 

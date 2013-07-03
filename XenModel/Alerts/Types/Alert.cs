@@ -44,7 +44,7 @@ namespace XenAdmin.Alerts
         public readonly static object XenCenterAlertsLock = new object();
         public readonly static ChangeableList<Alert> XenCenterAlerts = new ChangeableList<Alert>();
 
-        public bool Dismissing = false;
+        public bool Dismissing;
 
         public virtual bool CanApply
         {
@@ -201,15 +201,12 @@ namespace XenAdmin.Alerts
             Dismiss();
         }
 
-        public abstract string Title
-        {
-            get;
-        }
+        public virtual string Name
+        { get { return Title; } }
 
-        public abstract string Description
-        {
-            get;
-        }
+        public abstract string Title { get; }
+
+        public abstract string Description { get; }
 
         /// <summary>
         /// Specifies the icon to use for the alert
@@ -224,29 +221,21 @@ namespace XenAdmin.Alerts
             get { return Description; }
         }
 
-        public abstract string AppliesTo
-        {
-            get;
-        }
+        public abstract string AppliesTo { get; }
 
         /// <summary>
         /// The text for the 'click here to fix...' link. A null return value
         /// indicates no such link should be displayed.
         /// </summary>
-        public abstract string FixLinkText
-        {
-            get;
-        }
+        public abstract string FixLinkText { get; }
 
         public delegate void FixLinkDelegate();
+
         /// <summary>
         /// The delegate called when the 'click here to fix...' link is clicked. The calling
         /// Alert is passed in. May only return null if FixLinkText is null.
         /// </summary>
-        public abstract FixLinkDelegate FixLinkAction
-        {
-            get;
-        }
+        public abstract FixLinkDelegate FixLinkAction { get; }
 
         /// <summary>
         /// The text for the 'click here for help...' link.
@@ -259,10 +248,7 @@ namespace XenAdmin.Alerts
         /// <summary>
         /// The helpid opened when the 'click here for help...' link is clicked.
         /// </summary>
-        public abstract string HelpID
-        {
-            get;
-        }
+        public abstract string HelpID { get; }
 
         public IXenConnection Connection = null;
 

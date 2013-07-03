@@ -32,9 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using XenAdmin.Actions;
 using XenAdmin.Core;
-using XenAdmin;
 
 
 namespace XenAdmin.Alerts
@@ -51,19 +49,22 @@ namespace XenAdmin.Alerts
 
         public override AlertPriority Priority { get { return AlertPriority.Priority5; } }
 
+        public override string Name
+        {
+            get { return NewVersion.Name; }
+        }
+
         public override string Title
         {
-            get
-            {
-                return Messages.ALERT_NEW_VERSION;
-            }
+            get { return Messages.ALERT_NEW_VERSION; }
         }
 
         public override string Description
         {
             get
             {
-                return string.Format(Messages.ALERT_NEW_VERSION_DETAILS, NewVersion.Name, HelpersGUI.DateTimeToString(NewVersion.TimeStamp, Messages.DATEFORMAT_DMY_LONG, true));
+                return string.Format(Messages.ALERT_NEW_VERSION_DETAILS, NewVersion.Name,
+                    HelpersGUI.DateTimeToString(NewVersion.TimeStamp, Messages.DATEFORMAT_DMY_LONG, false));
             }
         }
 
@@ -71,7 +72,9 @@ namespace XenAdmin.Alerts
         {
             get
             {
-                return string.Format(Messages.ALERT_NEW_VERSION_DETAILS, NewVersion.Name, HelpersGUI.DateTimeToString(NewVersion.TimeStamp, Messages.DATEFORMAT_DMY_LONG, false));
+                return string.Format("{0} ({1})",
+                     string.Format(Messages.ALERT_NEW_VERSION_DETAILS, NewVersion.Name),
+                     HelpersGUI.DateTimeToString(NewVersion.TimeStamp, Messages.DATEFORMAT_DMY_LONG, false));
             }
         }
 

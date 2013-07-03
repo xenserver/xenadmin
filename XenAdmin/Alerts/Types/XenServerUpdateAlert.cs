@@ -81,27 +81,28 @@ namespace XenAdmin.Alerts
             canIgnore = connections.Count == 0 && hosts.Count == 0;
         }
 
+        public override string Name
+        {
+            get { return Version.Name; }
+        }
+
         public override string Title
         {
-            get
-            {
-                return string.Format(Messages.DOWLOAD_LATEST_XS_TITLE,Version.Name);
-            }
+            get { return string.Format(Messages.DOWLOAD_LATEST_XS_TITLE, Version.Name); }
         }
 
         public override string Description
         {
-            get
-            {
-                return string.Format(Messages.DOWNLOAD_LATEST_XS_BODY, Version.Name, HelpersGUI.DateTimeToString(Version.TimeStamp, Messages.DATEFORMAT_DMY_LONG, true));
-            }
+            get { return string.Format(Messages.DOWNLOAD_LATEST_XS_BODY, Version.Name); }
         }
 
         public override string DescriptionInvariant
         {
             get
             {
-                return string.Format(Messages.DOWNLOAD_LATEST_XS_BODY, Version.Name, HelpersGUI.DateTimeToString(Version.TimeStamp, Messages.DATEFORMAT_DMY_LONG, false));
+                return string.Format("{0} ({1})",
+                     string.Format(Messages.DOWNLOAD_LATEST_XS_BODY, Version.Name),
+                     HelpersGUI.DateTimeToString(Version.TimeStamp, Messages.DATEFORMAT_DMY_LONG, false));
             }
         }
 

@@ -161,10 +161,7 @@ namespace XenAdmin.Alerts
 
         public override string Description
         {
-            get
-            {
-                return string.Format("{0} ({1})", Patch.Description, HelpersGUI.DateTimeToString(Patch.TimeStamp, Messages.DATEFORMAT_DMY_LONG, true));
-            }
+            get { return Patch.Description; }
         }
 
         public override string DescriptionInvariant
@@ -173,6 +170,11 @@ namespace XenAdmin.Alerts
             {
                 return string.Format("{0} ({1})", Patch.Description, HelpersGUI.DateTimeToString(Patch.TimeStamp, Messages.DATEFORMAT_DMY_LONG, false));
             }
+        }
+
+        public override string Name
+        {
+            get { return Patch.Name; }
         }
 
         public override FixLinkDelegate FixLinkAction
@@ -198,10 +200,7 @@ namespace XenAdmin.Alerts
 
         public override string Title
         {
-            get
-            {
-                return string.Format(Messages.NEW_UPDATE_AVAILABLE,Patch.Name);
-            }
+            get { return string.Format(Messages.NEW_UPDATE_AVAILABLE, Patch.Name); }
         }
 
         public override void Dismiss()

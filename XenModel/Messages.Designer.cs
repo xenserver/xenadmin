@@ -3844,7 +3844,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is now available. Download the new version from the Citrix website - {1}..
+        ///   Looks up a localized string similar to {0} is now available. Download the new version from the Citrix website..
         /// </summary>
         public static string ALERT_NEW_VERSION_DETAILS {
             get {
@@ -9902,7 +9902,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is now available. Download the latest at the Citrix website ({1}).
+        ///   Looks up a localized string similar to {0} is now available. Download the latest at the Citrix website..
         /// </summary>
         public static string DOWNLOAD_LATEST_XS_BODY {
             get {

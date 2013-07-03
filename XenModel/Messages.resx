@@ -1438,7 +1438,7 @@ Note: If RBAC is enabled, only alerts which you have privileges to dismiss will 
     <value>New XenCenter Available</value>
   </data>
   <data name="ALERT_NEW_VERSION_DETAILS" xml:space="preserve">
-    <value>{0} is now available. Download the new version from the Citrix website - {1}.</value>
+    <value>{0} is now available. Download the new version from the Citrix website.</value>
   </data>
   <data name="ALERT_NEW_VERSION_DOWNLOAD" xml:space="preserve">
     <value>&amp;Go to Web Page...</value>
@@ -3532,7 +3532,7 @@ This will also delete its subfolders.</value>
     <value>Download...</value>
   </data>
   <data name="DOWNLOAD_LATEST_XS_BODY" xml:space="preserve">
-    <value>{0} is now available. Download the latest at the Citrix website ({1})</value>
+    <value>{0} is now available. Download the latest at the Citrix website.</value>
   </data>
   <data name="DRAC_NO_SUPP_PACK" xml:space="preserve">
     <value>Dell supplemental pack is not installed.</value>
