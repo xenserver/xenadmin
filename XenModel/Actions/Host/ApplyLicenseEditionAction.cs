@@ -175,7 +175,7 @@ namespace XenAdmin.Actions
 
                     if(xo is Host)
                     {
-                        Host.apply_edition(host.Connection.Session, host.opaque_ref, Host.GetEditionText(_edition));
+                        Host.apply_edition(host.Connection.Session, host.opaque_ref, Host.GetEditionText(_edition), false);
                         // PR-1102: populate the list of updated hosts
                         updatedHosts.Add(host, previousLicenseData);
                     }
@@ -186,7 +186,7 @@ namespace XenAdmin.Actions
                         {
                             foreach (Host poolHost in xo.Connection.Cache.Hosts)
                             {
-                                Host.apply_edition(host.Connection.Session, poolHost.opaque_ref, Host.GetEditionText(_edition));
+                                Host.apply_edition(host.Connection.Session, poolHost.opaque_ref, Host.GetEditionText(_edition), false);
                             }  
                         }
                         else

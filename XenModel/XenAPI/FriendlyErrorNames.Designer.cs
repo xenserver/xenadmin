@@ -556,6 +556,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This MAC seed is already in use by a VM in the pool.
+        /// </summary>
+        public static string DUPLICATE_MAC_SEED {
+            get {
+                return ResourceManager.GetString("DUPLICATE_MAC_SEED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A PIF with this specified device name already exists..
         /// </summary>
         public static string DUPLICATE_PIF_DEVICE_NAME {
@@ -3882,6 +3891,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The SR is currently being used as a local cache SR..
+        /// </summary>
+        public static string SR_IS_CACHE_SR {
+            get {
+                return ResourceManager.GetString("SR_IS_CACHE_SR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The SR operation cannot be performed because the SR is not empty..
         /// </summary>
         public static string SR_NOT_EMPTY {
@@ -4031,6 +4049,15 @@ namespace XenAPI {
         public static string TRANSPORT_PIF_NOT_CONFIGURED {
             get {
                 return ResourceManager.GetString("TRANSPORT_PIF_NOT_CONFIGURED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have attempted a function which is not implemented.
+        /// </summary>
+        public static string UNIMPLEMENTED_IN_SM_BACKEND {
+            get {
+                return ResourceManager.GetString("UNIMPLEMENTED_IN_SM_BACKEND", resourceCulture);
             }
         }
         

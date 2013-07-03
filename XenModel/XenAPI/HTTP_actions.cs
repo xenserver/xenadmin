@@ -28,6 +28,7 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 using System;
 using System.Text;
 using System.Net;
@@ -88,6 +89,13 @@ namespace XenAPI
         {
             Get(dataCopiedDelegate, cancellingDelegate, timeout_ms, hostname, "/export_metadata", proxy, path,
                 "task_id", task_id, "session_id", session_id, "uuid", uuid);
+        }
+
+        public static void get_export_raw_vdi(HTTP.DataCopiedDelegate dataCopiedDelegate, HTTP.FuncBool cancellingDelegate, int timeout_ms,
+            string hostname, IWebProxy proxy, string path, string task_id, string session_id, string vdi)
+        {
+            Get(dataCopiedDelegate, cancellingDelegate, timeout_ms, hostname, "/export_raw_vdi", proxy, path,
+                "task_id", task_id, "session_id", session_id, "vdi", vdi);
         }
 
         public static void get_host_backup(HTTP.DataCopiedDelegate dataCopiedDelegate, HTTP.FuncBool cancellingDelegate, int timeout_ms,

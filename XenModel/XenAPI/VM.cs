@@ -28,6 +28,7 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1961,6 +1962,16 @@ namespace XenAPI
         public static XenRef<Task> async_assert_can_be_recovered(Session session, string _self, string _session_to)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_assert_can_be_recovered(session.uuid, (_self != null) ? _self : "", (_session_to != null) ? _session_to : "").parse());
+        }
+
+        public static List<XenRef<SR>> get_SRs_required_for_recovery(Session session, string _self, string _session_to)
+        {
+            return XenRef<SR>.Create(session.proxy.vm_get_srs_required_for_recovery(session.uuid, (_self != null) ? _self : "", (_session_to != null) ? _session_to : "").parse());
+        }
+
+        public static XenRef<Task> async_get_SRs_required_for_recovery(Session session, string _self, string _session_to)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vm_get_srs_required_for_recovery(session.uuid, (_self != null) ? _self : "", (_session_to != null) ? _session_to : "").parse());
         }
 
         public static void recover(Session session, string _self, string _session_to, bool _force)

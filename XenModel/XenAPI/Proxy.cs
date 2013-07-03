@@ -28,6 +28,7 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -2475,6 +2476,16 @@ namespace XenAPI
         async_vm_assert_can_be_recovered(string session, string _self, string _session_to);
 
 
+        [XmlRpcMethod("VM.get_SRs_required_for_recovery")]
+        Response<string []>
+        vm_get_srs_required_for_recovery(string session, string _self, string _session_to);
+
+
+        [XmlRpcMethod("Async.VM.get_SRs_required_for_recovery")]
+        Response<string>
+        async_vm_get_srs_required_for_recovery(string session, string _self, string _session_to);
+
+
         [XmlRpcMethod("VM.recover")]
         Response<string>
         vm_recover(string session, string _self, string _session_to, bool _force);
@@ -3108,6 +3119,16 @@ namespace XenAPI
         [XmlRpcMethod("Async.VM_appliance.assert_can_be_recovered")]
         Response<string>
         async_vm_appliance_assert_can_be_recovered(string session, string _self, string _session_to);
+
+
+        [XmlRpcMethod("VM_appliance.get_SRs_required_for_recovery")]
+        Response<string []>
+        vm_appliance_get_srs_required_for_recovery(string session, string _self, string _session_to);
+
+
+        [XmlRpcMethod("Async.VM_appliance.get_SRs_required_for_recovery")]
+        Response<string>
+        async_vm_appliance_get_srs_required_for_recovery(string session, string _self, string _session_to);
 
 
         [XmlRpcMethod("VM_appliance.recover")]
@@ -3887,7 +3908,7 @@ namespace XenAPI
 
         [XmlRpcMethod("host.apply_edition")]
         Response<string>
-        host_apply_edition(string session, string _host, string _edition);
+        host_apply_edition(string session, string _host, string _edition, bool _force);
 
 
         [XmlRpcMethod("host.refresh_pack_info")]
