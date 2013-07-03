@@ -1421,9 +1421,9 @@ namespace XenAPI
             }
         }
 
-        public static List<XenRef<SR>> GetDRMissingSRs(Session session, string vm)
+        public static List<XenRef<SR>> GetDRMissingSRs(Session session, string vm, string sessionTo)
         {
-            return null;
+            return VM.get_SRs_required_for_recovery(session, vm, sessionTo);
         }
     }
 
