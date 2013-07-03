@@ -20806,6 +20806,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You cannot add a licensed server to an unlicensed pool.
+        /// </summary>
+        public static string NEWPOOL_LICENSED_HOST_UNLICENSED_MASTER {
+            get {
+                return ResourceManager.GetString("NEWPOOL_LICENSED_HOST_UNLICENSED_MASTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This server does not have the same XenServer license edition as the pool master.
         /// </summary>
         public static string NEWPOOL_LICENSEMISMATCH {
@@ -20874,6 +20883,15 @@ namespace XenAdmin {
         public static string NEWPOOL_SLAVE_ROLE {
             get {
                 return ResourceManager.GetString("NEWPOOL_SLAVE_ROLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot add an unlicensed server to a licensed pool.
+        /// </summary>
+        public static string NEWPOOL_UNLICENSED_HOST_LICENSED_MASTER {
+            get {
+                return ResourceManager.GetString("NEWPOOL_UNLICENSED_HOST_LICENSED_MASTER", resourceCulture);
             }
         }
         

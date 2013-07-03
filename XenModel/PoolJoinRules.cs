@@ -58,6 +58,8 @@ namespace XenAdmin.Core
             NotSameLinuxPack,
             PaidHostFreeMaster,
             FreeHostPaidMaster,
+            LicensedHostUnlicensedMaster,
+            UnlicensedHostLicensedMaster,
             LicenseMismatch,
             DifferentServerVersion,
             DifferentCPUs,
@@ -116,10 +118,14 @@ namespace XenAdmin.Core
                 return Reason.DifferentServerVersion;
 
             if (FreeHostPaidMaster(slaveHost, masterHost, allowLicenseUpgrade))
-                return Reason.FreeHostPaidMaster;
+                return Helpers.ClearwaterOrGreater(masterHost) ? 
+                    Reason.UnlicensedHostLicensedMaster : 
+                    Reason.FreeHostPaidMaster;
 
             if (PaidHostFreeMaster(slaveHost, masterHost))
-                return Reason.PaidHostFreeMaster;
+                return Helpers.ClearwaterOrGreater(masterHost) ?
+                    Reason.LicensedHostUnlicensedMaster : 
+                    Reason.PaidHostFreeMaster;
 
             if (LicenseMismatch(slaveHost, masterHost))
                 return Reason.LicenseMismatch;
@@ -178,6 +184,10 @@ namespace XenAdmin.Core
                     return Messages.NEWPOOL_PAID_HOST_FREE_MASTER;
                 case Reason.FreeHostPaidMaster:
                     return Messages.NEWPOOL_FREE_HOST_PAID_MASTER;
+                case Reason.LicensedHostUnlicensedMaster:
+                    return Messages.NEWPOOL_LICENSED_HOST_UNLICENSED_MASTER;
+                case Reason.UnlicensedHostLicensedMaster:
+                    return Messages.NEWPOOL_UNLICENSED_HOST_LICENSED_MASTER;
                 case Reason.LicenseMismatch:
                     return Messages.NEWPOOL_LICENSEMISMATCH;
                 case Reason.DifferentServerVersion:

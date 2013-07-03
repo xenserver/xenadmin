@@ -7121,6 +7121,9 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NEWPOOL_IS_A_POOL" xml:space="preserve">
     <value>This server is master of an existing pool</value>
   </data>
+  <data name="NEWPOOL_LICENSED_HOST_UNLICENSED_MASTER" xml:space="preserve">
+    <value>You cannot add a licensed server to an unlicensed pool</value>
+  </data>
   <data name="NEWPOOL_LICENSEMISMATCH" xml:space="preserve">
     <value>This server does not have the same XenServer license edition as the pool master</value>
   </data>
@@ -7144,6 +7147,9 @@ You should only proceed if you have verified that these settings are correct.</v
   </data>
   <data name="NEWPOOL_SLAVE_ROLE" xml:space="preserve">
     <value>Your current role on the slave is not authorized to add the slave to a pool</value>
+  </data>
+  <data name="NEWPOOL_UNLICENSED_HOST_LICENSED_MASTER" xml:space="preserve">
+    <value>You cannot add an unlicensed server to a licensed pool</value>
   </data>
   <data name="NEWSR_ACTION" xml:space="preserve">
     <value>NFS SR [{0}]</value>
