@@ -31,6 +31,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using XenAdmin.Core;
 
 namespace XenAPI
 {
@@ -92,7 +93,9 @@ namespace XenAPI
 
         public static List<XenRef<SR>> GetDRMissingSRs(Session session, string vm, string sessionTo)
         {
-            return VM_appliance.get_SRs_required_for_recovery(session, vm, sessionTo);
+            return Helpers.MethodExists(session, "VM_appliance.get_SRs_required_for_recovery")
+                       ? VM_appliance.get_SRs_required_for_recovery(session, vm, sessionTo)
+                       : null;
         }
     }
 }

@@ -463,10 +463,10 @@
     <value>Moving {0} virtual disks to {1}</value>
   </data>
   <data name="ACTION_MULTIPLE_DR_TASK_CREATE_END" xml:space="preserve">
-    <value>Preparing Storage Repositories</value>
+    <value>Storage Repositories prepared</value>
   </data>
   <data name="ACTION_MULTIPLE_DR_TASK_CREATE_START" xml:space="preserve">
-    <value>Storage Repositories prepared</value>
+    <value>Preparing Storage Repositories</value>
   </data>
   <data name="ACTION_MULTIPLE_DR_TASK_CREATE_TITLE" xml:space="preserve">
     <value>Prepare Storage Repositories</value>

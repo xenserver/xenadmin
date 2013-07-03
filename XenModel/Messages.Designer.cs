@@ -1096,7 +1096,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Preparing Storage Repositories.
+        ///   Looks up a localized string similar to Storage Repositories prepared.
         /// </summary>
         public static string ACTION_MULTIPLE_DR_TASK_CREATE_END {
             get {
@@ -1105,7 +1105,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Storage Repositories prepared.
+        ///   Looks up a localized string similar to Preparing Storage Repositories.
         /// </summary>
         public static string ACTION_MULTIPLE_DR_TASK_CREATE_START {
             get {
