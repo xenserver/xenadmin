@@ -1836,5 +1836,17 @@ namespace XenAdmin.Core
 
            return connection.Cache.Hosts.Any(h => h.enabled);
        }
+
+        /// <summary>
+        /// Returns true if given method exists already; false otherwise
+        /// </summary>
+        /// <param name="session"></param>
+        /// <param name="methodName"></param>
+        /// <returns></returns>
+        public static bool MethodExists(Session session, string methodName)
+        {
+            string[] methods = session.proxy.SystemListMethods();
+            return methods.Contains(methodName);
+        }
     }
 }

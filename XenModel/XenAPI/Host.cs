@@ -28,6 +28,7 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1187,9 +1188,9 @@ namespace XenAPI
             return XenRef<Task>.Create(session.proxy.async_host_get_server_certificate(session.uuid, (_host != null) ? _host : "").parse());
         }
 
-        public static void apply_edition(Session session, string _host, string _edition)
+        public static void apply_edition(Session session, string _host, string _edition, bool _force)
         {
-            session.proxy.host_apply_edition(session.uuid, (_host != null) ? _host : "", (_edition != null) ? _edition : "").parse();
+            session.proxy.host_apply_edition(session.uuid, (_host != null) ? _host : "", (_edition != null) ? _edition : "", _force).parse();
         }
 
         public static void refresh_pack_info(Session session, string _host)
