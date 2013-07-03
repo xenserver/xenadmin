@@ -157,7 +157,7 @@ namespace XenAdmin.Alerts
         /// <summary>
         /// The host this alert is related to
         /// </summary>
-        public String HostUuid;
+        public string HostUuid;
 
         protected DateTime _timestamp = DateTime.MinValue;
         public string uuid;
@@ -201,8 +201,9 @@ namespace XenAdmin.Alerts
             Dismiss();
         }
 
-        public virtual string Name
-        { get { return Title; } }
+        public virtual string Name { get { return null; } }
+
+        public virtual string WebPageLabel { get { return null; } }
 
         public abstract string Title { get; }
 
@@ -250,11 +251,75 @@ namespace XenAdmin.Alerts
         /// </summary>
         public abstract string HelpID { get; }
 
-        public IXenConnection Connection = null;
+        public IXenConnection Connection;
 
         public virtual bool Equals(Alert other)
         {
             return base.Equals(other);
+        }
+
+        public static int CompareOnDate(Alert alert1, Alert alert2)
+        {
+            int sortResult = DateTime.Compare(alert1.Timestamp, alert2.Timestamp);
+            if (sortResult == 0)
+                sortResult = CompareOnName(alert1, alert2);
+            if (sortResult == 0)
+                sortResult = string.Compare(alert1.uuid, alert2.uuid);
+            return sortResult;
+        }
+
+        /// <summary>
+        /// Sorts two alerts by priority based on their type, tie broken by uuid
+        /// </summary>
+        public static int CompareOnPriority(Alert alert1, Alert alert2)
+        {
+            //the Unknown priority is lowest of all
+            //it's only given the value 0 because this is the default for integers
+            if (alert1.Priority < alert2.Priority)
+                return alert1.Priority == 0 ? 1 : -1;
+
+            if (alert1.Priority > alert2.Priority)
+                return alert2.Priority == 0 ? -1 : 1;
+
+            return string.Compare(alert1.uuid, alert2.uuid);
+        }
+
+        public static int CompareOnTitle(Alert alert1, Alert alert2)
+        {
+            int sortResult = string.Compare(alert1.Title, alert2.Title);
+            if (sortResult == 0)
+                sortResult = CompareOnName(alert1, alert2);
+            if (sortResult == 0)
+                sortResult = string.Compare(alert1.uuid, alert2.uuid);
+            return sortResult;
+        }
+
+        public static int CompareOnAppliesTo(Alert alert1, Alert alert2)
+        {
+            int sortResult = string.Compare(alert1.AppliesTo, alert2.AppliesTo);
+            if (sortResult == 0)
+                sortResult = string.Compare(alert1.Name, alert2.Name);
+            if (sortResult == 0)
+                sortResult = string.Compare(alert1.uuid, alert2.uuid);
+            return sortResult;
+        }
+
+        public static int CompareOnName(Alert alert1, Alert alert2)
+        {
+            int sortResult = string.Compare(alert1.Name, alert2.Name);
+            if (sortResult == 0)
+                sortResult = string.Compare(alert1.uuid, alert2.uuid);
+            return sortResult;
+        }
+
+        public static int CompareOnWebPage(Alert alert1, Alert alert2)
+        {
+            int sortResult = string.Compare(alert1.WebPageLabel, alert2.WebPageLabel);
+            if (sortResult == 0)
+                sortResult = CompareOnName(alert1, alert2);
+            if (sortResult == 0)
+                sortResult = string.Compare(alert1.uuid, alert2.uuid);
+            return sortResult;
         }
     }
 

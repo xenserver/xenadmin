@@ -132,6 +132,15 @@ namespace XenAdmin.Alerts
             canIgnore = connections.Count == 0 && hosts.Count == 0;
         }
 
+        public override string WebPageLabel
+        {
+            get
+            {
+                Uri uri = new Uri(Patch.Url);
+                return uri.Segments.Last();
+            }
+        }
+
         public override AlertPriority Priority
         {
             get

@@ -49,6 +49,11 @@ namespace XenAdmin.Alerts
 
         public override AlertPriority Priority { get { return AlertPriority.Priority5; } }
 
+        public override string WebPageLabel
+        {
+            get { return Messages.AVAILABLE_UPDATES_DOWNLOAD_TEXT; }
+        }
+
         public override string Name
         {
             get { return NewVersion.Name; }

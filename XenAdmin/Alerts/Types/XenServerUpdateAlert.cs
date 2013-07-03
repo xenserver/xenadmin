@@ -81,6 +81,11 @@ namespace XenAdmin.Alerts
             canIgnore = connections.Count == 0 && hosts.Count == 0;
         }
 
+        public override string WebPageLabel
+        {
+            get { return Messages.AVAILABLE_UPDATES_DOWNLOAD_TEXT; }
+        }
+
         public override string Name
         {
             get { return Version.Name; }

@@ -345,20 +345,6 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private static string GetWebPageLabel(Alert alert)
-        {
-            if (alert is XenServerPatchAlert)
-            {
-                Uri uri = new Uri(((XenServerPatchAlert)alert).Patch.Url);
-                return uri.Segments.Last();
-            }
-            else if (alert is XenCenterUpdateAlert || alert is XenServerUpdateAlert)
-            {
-                return Messages.AVAILABLE_UPDATES_DOWNLOAD_TEXT;
-            }
-            return string.Empty;
-        }
-
         private DataGridViewRow NewUpdateRow(Alert alert)
         {
             DataGridViewTextBoxCell nameCell = new DataGridViewTextBoxCell();
@@ -371,9 +357,9 @@ namespace XenAdmin.Dialogs
             newRow.Tag = alert;
 
             nameCell.Value = alert.Name;
-            detailsCell.Value = alert.Description;
+            detailsCell.Value = string.Join(" ", new[] { alert.Title, alert.Description });
             dateCell.Value = HelpersGUI.DateTimeToString(alert.Timestamp.ToLocalTime(), Messages.DATEFORMAT_DMY, true);
-            webPageCell.Value = GetWebPageLabel(alert);
+            webPageCell.Value = alert.WebPageLabel;
             appliesToCell.Value = alert.AppliesTo;
 
             newRow.Cells.Add(nameCell);
@@ -395,79 +381,33 @@ namespace XenAdmin.Dialogs
             this.Close();
         }
 
-        private static int CompareOnName(Alert alert1, Alert alert2)
-        {
-            int sortResult = string.Compare(alert1.Name, alert2.Name);
-            if (sortResult == 0)
-                sortResult = (string.Compare(alert1.uuid, alert2.uuid));
-            return sortResult;
-        }
-
-        private static int CompareOnDetails(Alert alert1, Alert alert2)
-        {
-            int sortResult = string.Compare(alert1.Description, alert2.Description);
-            if (sortResult == 0)
-                sortResult = (string.Compare(alert1.uuid, alert2.uuid));
-            return sortResult;
-        }
-
-        private static int CompareOnDate(Alert alert1, Alert alert2)
-        {
-            int sortResult = DateTime.Compare(alert1.Timestamp, alert2.Timestamp);
-            if (sortResult == 0)
-                sortResult = CompareOnName(alert1, alert2);
-            if (sortResult == 0)
-                sortResult = (string.Compare(alert1.uuid, alert2.uuid));
-            return sortResult;
-        }
-
-        private static int CompareOnWebPage(Alert alert1, Alert alert2)
-        {
-            int sortResult = string.Compare(GetWebPageLabel(alert1), GetWebPageLabel(alert2));
-            if (sortResult == 0)
-                sortResult = CompareOnName(alert1, alert2);
-            if (sortResult == 0)
-                sortResult = (string.Compare(alert1.uuid, alert2.uuid));
-            return sortResult;
-        }
-
-        private static int CompareOnAppliesTo(Alert alert1, Alert alert2)
-        {
-            int sortResult = string.Compare(alert1.AppliesTo, alert2.AppliesTo);
-            if (sortResult == 0)
-                sortResult = string.Compare(alert1.Name, alert2.Name);
-            if (sortResult == 0)
-                sortResult = (string.Compare(alert1.uuid, alert2.uuid));
-            return sortResult;
-        }
-
         private void dataGridViewUpdates_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
             Alert alert1 = (Alert)dataGridViewUpdates.Rows[e.RowIndex1].Tag;
             Alert alert2 = (Alert)dataGridViewUpdates.Rows[e.RowIndex2].Tag;
             if (e.Column.Index == ColumnName.Index)
             {
-                e.SortResult = CompareOnName(alert1, alert2);
+                e.SortResult = Alert.CompareOnName(alert1, alert2);
                 e.Handled = true;
             }
             else if (e.Column.Index == ColumnDescription.Index)
             {
-                e.SortResult = CompareOnDetails(alert1, alert2);
+                e.SortResult = Alert.CompareOnTitle(alert1, alert2);
                 e.Handled = true;
             }
             else if (e.Column.Index == ColumnReleaseDate.Index)
             {
-                e.SortResult = CompareOnDate(alert1, alert2);
+                e.SortResult = Alert.CompareOnDate(alert1, alert2);
                 e.Handled = true;
             }
             else if (e.Column.Index == ColumnWebPage.Index)
             {
-                e.SortResult = CompareOnWebPage(alert1, alert2);
+                e.SortResult = Alert.CompareOnWebPage(alert1, alert2);
                 e.Handled = true;
             }
             else if (e.Column.Index == ColumnAppliesTo.Index)
             {
-                e.SortResult = CompareOnAppliesTo(alert1, alert2);
+                e.SortResult = Alert.CompareOnAppliesTo(alert1, alert2);
                 e.Handled = true;
             }
         }

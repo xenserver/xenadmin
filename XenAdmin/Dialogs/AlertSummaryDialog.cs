@@ -137,19 +137,19 @@ namespace XenAdmin.Dialogs
                 {
                     if (GridViewAlerts.SortedColumn.Index == ColumnDetails.Index)
                     {
-                        alerts.Sort(CompareAlertsOnDetails);
+                        alerts.Sort(Alert.CompareOnTitle);
                     }
                     else if (GridViewAlerts.SortedColumn.Index == ColumnDate.Index)
                     {
-                        alerts.Sort(CompareAlertsOnDate);
+                        alerts.Sort(Alert.CompareOnDate);
                     }
                     else if (GridViewAlerts.SortedColumn.Index == ColumnAppliesTo.Index)
                     {
-                        alerts.Sort(CompareAlertsOnAppliesTo);
+                        alerts.Sort(Alert.CompareOnAppliesTo);
                     }
                     else if (GridViewAlerts.SortedColumn.Index == ColumnType.Index)
                     {
-                        alerts.Sort(CompareAlertsOnPriority);
+                        alerts.Sort(Alert.CompareOnPriority);
                     }
                     if (GridViewAlerts.SortOrder == SortOrder.Descending)
                     {
@@ -362,46 +362,6 @@ namespace XenAdmin.Dialogs
 
         #region sorting code
 
-        private static int CompareAlertsOnDate(Alert alert1, Alert alert2)
-        {
-            int SortResult = DateTime.Compare(alert1.Timestamp, alert2.Timestamp);
-            if (SortResult == 0)
-                SortResult = (String.Compare(alert1.uuid, alert2.uuid));
-            return SortResult;
-        }
-
-        /// <summary>
-        /// Internal method used for sorting two alerts by priority based on their type, tie broken by uuid
-        /// </summary>
-        private static int CompareAlertsOnPriority(Alert alert1, Alert alert2)
-        {
-            //the Unknown priority is lowest of all
-            //it's only given the value 0 because this is the default for integers
-            if (alert1.Priority < alert2.Priority)
-                return alert1.Priority == 0 ? 1 : -1;
-
-            if (alert1.Priority > alert2.Priority)
-                return alert2.Priority == 0 ? -1 : 1;
-
-            return (String.Compare(alert1.uuid, alert2.uuid));
-        }
-
-        private static int CompareAlertsOnDetails(Alert alert1, Alert alert2)
-        {
-            int SortResult = String.Compare(alert1.Title, alert2.Title);
-            if (SortResult == 0)
-                SortResult = (String.Compare(alert1.uuid, alert2.uuid));
-            return SortResult;
-        }
-
-        private static int CompareAlertsOnAppliesTo(Alert alert1, Alert alert2)
-        {
-            int SortResult = String.Compare(alert1.AppliesTo, alert2.AppliesTo);
-            if (SortResult == 0)
-                SortResult = (String.Compare(alert1.uuid, alert2.uuid));
-            return SortResult;
-        }
-
         /// <summary>
         /// Handles the automatic sorting of the AlertsGridView for the non-string columns
         /// </summary>
@@ -419,7 +379,7 @@ namespace XenAdmin.Dialogs
             }
             else if (e.Column.Index == ColumnType.Index)
             {
-                e.SortResult = CompareAlertsOnPriority(alert1, alert2);
+                e.SortResult = Alert.CompareOnPriority(alert1, alert2);
                 e.Handled = true;
             }
         }
