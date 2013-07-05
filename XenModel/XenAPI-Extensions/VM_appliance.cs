@@ -91,10 +91,10 @@ namespace XenAPI
             }
         }
 
-        public static List<XenRef<SR>> GetDRMissingSRs(Session session, string vm, string sessionTo)
+        public static List<XenRef<SR>> GetDRMissingSRs(Session session, string vm, Session sessionTo)
         {
-            return Helpers.MethodExists(session, "VM_appliance.get_SRs_required_for_recovery")
-                       ? VM_appliance.get_SRs_required_for_recovery(session, vm, sessionTo)
+            return Helpers.AugustaOrGreater(sessionTo.Connection)
+                       ? VM_appliance.get_SRs_required_for_recovery(session, vm, sessionTo.uuid)
                        : null;
         }
     }

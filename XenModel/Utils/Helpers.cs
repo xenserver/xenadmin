@@ -439,6 +439,27 @@ namespace XenAdmin.Core
                 HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
         }
 
+        /// <param name="conn">May be null, in which case true is returned.</param>
+        public static bool AugustaOrGreater(IXenConnection conn)
+        {
+            return conn == null ? true : AugustaOrGreater(Helpers.GetMaster(conn));
+        }
+
+        /// <param name="host">May be null, in which case true is returned.</param>
+        public static bool AugustaOrGreater(Host host)
+        {
+            if (host == null)
+                return true;
+
+            return false;
+
+            //TODO: uncomment and update Augusta platform_version when it's known
+            //string platform_version = HostPlatformVersion(host);
+            //return
+            //    platform_version != null && productVersionCompare(platform_version, "x.x.x") >= 0 ||
+            //    HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+        }
+
         // CP-3435: Disable Check for Updates in Common Criteria Certification project
         public static bool CommonCriteriaCertificationRelease
         {
@@ -1836,17 +1857,5 @@ namespace XenAdmin.Core
 
            return connection.Cache.Hosts.Any(h => h.enabled);
        }
-
-        /// <summary>
-        /// Returns true if given method exists already; false otherwise
-        /// </summary>
-        /// <param name="session"></param>
-        /// <param name="methodName"></param>
-        /// <returns></returns>
-        public static bool MethodExists(Session session, string methodName)
-        {
-            string[] methods = session.proxy.SystemListMethods();
-            return methods.Contains(methodName);
-        }
     }
 }

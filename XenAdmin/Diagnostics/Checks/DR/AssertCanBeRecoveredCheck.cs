@@ -62,10 +62,9 @@ namespace XenAdmin.Diagnostics.Checks.DR
             List<XenRef<SR>> xenRefSRs = new List<XenRef<SR>>();
             
             if (xenObject is VM)
-                xenRefSRs = VM.GetDRMissingSRs(MetadataSession, xenObject.opaque_ref, Pool.Connection.Session.uuid);
+                xenRefSRs = VM.GetDRMissingSRs(MetadataSession, xenObject.opaque_ref, Pool.Connection.Session);
             if (xenObject is VM_appliance)
-                xenRefSRs = VM_appliance.GetDRMissingSRs(MetadataSession, xenObject.opaque_ref,
-                                                         Pool.Connection.Session.uuid);
+                xenRefSRs = VM_appliance.GetDRMissingSRs(MetadataSession, xenObject.opaque_ref, Pool.Connection.Session);
 
             if (xenRefSRs != null && xenRefSRs.Count > 0)
                 return xenRefSRs.Select(item => RetrieveSR(item)).ToList();
