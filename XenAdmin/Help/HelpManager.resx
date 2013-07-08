@@ -1026,4 +1026,7 @@
   <data name="LVMoHBAWarningDialog" xml:space="preserve">
     <value>9854</value>
   </data>
+  <data name="NewSRWizard_Summary_HBAPane" xml:space="preserve">
+    <value>9855</value>
+  </data>
 </root>
