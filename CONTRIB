@@ -38,12 +38,6 @@ xs-devel@lists.xenserver.org.
       do changes at work you may find your employer owns the patches
       instead of you.
 
-Mailing list
-============
-Please note that mailing list xs-devel@lists.xenserver.org is not live yet; 
-for any questions, or if you wish to sumbit code, we recommend reaching 
-out to the maintainers, who will attempt to steer you in the right direction.
-	
 ----------------------------------------------------------------------------
 	  
 For a list of maintainers, please see MAINTAINERS file.
