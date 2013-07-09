@@ -59,6 +59,7 @@ namespace XenAdmin.Wizards
         private readonly EqualLogic xentabPageEqualLogic;
         private readonly LVMoISCSI xenTabPageLvmoIscsi;
         private readonly LVMoHBA xenTabPageLvmoHba;
+        private readonly LVMoHBASummary xenTabPageLvmoHbaSummary;
         private readonly CslgSettings xenTabPageCslgSettings;
         private readonly CslgLocation xenTabPageCslgLocation;
         private readonly FilerDetails xenTabPageFilerDetails;
@@ -109,6 +110,7 @@ namespace XenAdmin.Wizards
             xentabPageEqualLogic = new EqualLogic();
             xenTabPageLvmoIscsi = new LVMoISCSI();
             xenTabPageLvmoHba = new LVMoHBA();
+            xenTabPageLvmoHbaSummary = new LVMoHBASummary();
             xenTabPageCslgSettings = new CslgSettings();
             xenTabPageCslgLocation = new CslgLocation();
             xenTabPageFilerDetails = new FilerDetails();
@@ -241,7 +243,10 @@ namespace XenAdmin.Wizards
                 else if (m_srWizardType is SrWizardType_LvmoIscsi)
                     AddPage(xenTabPageLvmoIscsi);
                 else if (m_srWizardType is SrWizardType_LvmoHba)
+                {
                     AddPage(xenTabPageLvmoHba);
+                    AddPage(xenTabPageLvmoHbaSummary);
+                }
                 else if (m_srWizardType is SrWizardType_Cslg)
                 {
                     AddPage(xenTabPageCslg);
@@ -249,21 +254,21 @@ namespace XenAdmin.Wizards
                     if (Helpers.BostonOrGreater(xenConnection))
                         AddPages(xenTabPageCslgLocation, xenTabPageCslgSettings);
                     else
-                        AddPages(new XenTabPage {Text = ""});
+                        AddPages(new XenTabPage { Text = "" });
                 }
                 else if (m_srWizardType is SrWizardType_NetApp || m_srWizardType is SrWizardType_EqualLogic)
                 {
-                        AddPages(xenTabPageCslg, xenTabPageFilerDetails);
+                    AddPages(xenTabPageCslg, xenTabPageFilerDetails);
 
-                        if (m_srWizardType is SrWizardType_NetApp)
+                    if (m_srWizardType is SrWizardType_NetApp)
                     {
                         xenTabPageFilerDetails.IsNetApp = true;
-                            AddPage(xenTabPageNetApp);
+                        AddPage(xenTabPageNetApp);
                     }
-                        else if (m_srWizardType is SrWizardType_EqualLogic)
+                    else if (m_srWizardType is SrWizardType_EqualLogic)
                     {
                         xenTabPageFilerDetails.IsNetApp = false;
-                            AddPage(xentabPageEqualLogic);
+                        AddPage(xentabPageEqualLogic);
                     }
                 }
                 else if (m_srWizardType is SrWizardType_CifsIso)
@@ -313,17 +318,18 @@ namespace XenAdmin.Wizards
                 m_srWizardType.SrDescriptors.Clear();
                 foreach (var lvmOhbaSrDescriptor in xenTabPageLvmoHba.SrDescriptors)
                 {
-                    m_srWizardType.SrDescriptors.Add(new SrDescriptor()
-                                                         {
-                                                             UUID = lvmOhbaSrDescriptor.UUID,
-                                                             DeviceConfig = lvmOhbaSrDescriptor.DeviceConfig,
-                                                             Description =
-                                                                 description ?? lvmOhbaSrDescriptor.Description,
-                                                             Name = name
-                                                         });
+                    lvmOhbaSrDescriptor.Name = name;
+                    if (!string.IsNullOrEmpty(description))
+                        lvmOhbaSrDescriptor.Description = description;
+
+                    m_srWizardType.SrDescriptors.Add(lvmOhbaSrDescriptor);
                     names.Add(name);
                     name = SrWizardHelpers.DefaultSRName(Messages.NEWSR_HBA_DEFAULT_NAME, names);
                 }
+
+                xenTabPageLvmoHbaSummary.SuccessfullyCreatedSRs.Clear();
+                xenTabPageLvmoHbaSummary.FailedToCreateSRs.Clear();
+                RunFinalAction();
             }
             else if (senderPagetype == typeof(LVMoISCSI))
             {
@@ -454,7 +460,28 @@ namespace XenAdmin.Wizards
 
         protected override void FinishWizard()
         {
+            if (m_srWizardType is SrWizardType_LvmoHba)
+            {
+                base.FinishWizard();
+                return;
+            }
+
+            bool closeWizard;
+            RunFinalAction(out closeWizard);
+            if (closeWizard)
+                base.FinishWizard();
+        }
+
+        private void RunFinalAction()
+        {
+            bool closeWizard;
+            RunFinalAction(out closeWizard);
+        }
+
+        private void RunFinalAction(out bool closeWizard)
+        {
             FinalAction = null;
+            closeWizard = false;
 
             // Override the WizardBase: try running the SR create/attach. If it succeeds, close the wizard.
             // Otherwise show the error and allow the user to adjust the settings and try again.
@@ -464,8 +491,8 @@ namespace XenAdmin.Wizards
                 log.Error("New SR Wizard: Pool has disappeared");
                 new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection)), Messages.XENCENTER)).ShowDialog(this);
-                
-                base.FinishWizard();
+
+                closeWizard = true;
                 return;
             }
 
@@ -475,7 +502,8 @@ namespace XenAdmin.Wizards
                 log.Error("New SR Wizard: Master has disappeared");
                 new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection)), Messages.XENCENTER)).ShowDialog(this);
-                base.FinishWizard();
+
+                closeWizard = true;
                 return;
             }
 
@@ -509,12 +537,29 @@ namespace XenAdmin.Wizards
             // if this is a Disaster Recovery Task, it could be either a "Find existing SRs" or an "Attach SR needed for DR" case
             if (m_srWizardType.DisasterRecoveryTask)
             {
-                base.FinishWizard();
+                closeWizard = true;
                 return;
             }
 
             ProgressBarStyle progressBarStyle = FinalAction is SrIntroduceAction ? ProgressBarStyle.Blocks : ProgressBarStyle.Marquee;
             ActionProgressDialog dialog = new ActionProgressDialog(FinalAction, progressBarStyle) {ShowCancel = true};
+
+            if (m_srWizardType is SrWizardType_LvmoHba)
+            {
+                foreach (var asyncAction in actionList)
+                {
+                    asyncAction.Completed += asyncAction_Completed;
+                }
+
+                ActionProgressDialog closureDialog = dialog;
+                // close dialog even when there's an error for HBA SR type as there will be the Summary page displayed.
+                FinalAction.Completed +=
+                    (s, ea) => Program.Invoke(Program.MainWindow, () =>
+                                                                      {
+                                                                          if (closureDialog != null)
+                                                                              closureDialog.Close();
+                                                                      });
+            }
             dialog.ShowDialog(this);
 
             if (!FinalAction.Succeeded && FinalAction is SrReattachAction && !_srToReattach.IsDetached)
@@ -539,17 +584,31 @@ namespace XenAdmin.Wizards
                     }
                 }
 
-                if (m_srWizardType is SrWizardType_LvmoHba)
-                {
-                    SetFCDevicesOnLVMoHBAPage();
-                    CurrentStepTabPage.PopulatePage();
-                }
-
                 return;
             }
 
             // Close wizard
-            base.FinishWizard();
+            closeWizard = true;
+        }
+
+        private Dictionary<AsyncAction, SrDescriptor> actionSrDescriptorDict = new Dictionary<AsyncAction, SrDescriptor>();
+
+        void asyncAction_Completed(object sender, EventArgs e)
+        {
+            AsyncAction action = sender as AsyncAction;
+            if (action == null)
+                return;
+
+            SrDescriptor srDescriptor;
+            actionSrDescriptorDict.TryGetValue(action, out srDescriptor);
+
+            if (srDescriptor == null)
+                return;
+
+            if (action.Succeeded)
+                xenTabPageLvmoHbaSummary.SuccessfullyCreatedSRs.Add(srDescriptor);
+            else
+                xenTabPageLvmoHbaSummary.FailedToCreateSRs.Add(srDescriptor);
         }
 
         private List<AsyncAction> GetActions(Host master, bool disasterRecoveryTask)
@@ -558,10 +617,11 @@ namespace XenAdmin.Wizards
             // This will be one off create, introduce, reattach
 
             List<AsyncAction> finalActions = new List<AsyncAction>();
+            actionSrDescriptorDict.Clear();
 
             foreach (var srDescriptor in m_srWizardType.SrDescriptors)
             {
-                if (String.IsNullOrEmpty(m_srWizardType.UUID))
+                if (String.IsNullOrEmpty(srDescriptor.UUID))
                 {
                     // Don't need to show any warning, as the only destructive creates
                     // are in iSCSI and HBA, where they show their own warning
@@ -613,6 +673,10 @@ namespace XenAdmin.Wizards
                                                               srDescriptor.Description,
                                                               srDescriptor.DeviceConfig));
                 }
+
+                AsyncAction action = finalActions.Last();
+                if (!actionSrDescriptorDict.ContainsKey(action))
+                    actionSrDescriptorDict.Add(action, srDescriptor);
             }
 
             return finalActions;

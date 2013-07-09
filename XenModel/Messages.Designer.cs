@@ -21262,6 +21262,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} ({1} - {2}).
+        /// </summary>
+        public static string NEWSR_LVMOHBA_SUMMARY_DETAILS_CELL_TEXT {
+            get {
+                return ResourceManager.GetString("NEWSR_LVMOHBA_SUMMARY_DETAILS_CELL_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to create {0} SRs.
         /// </summary>
         public static string NEWSR_LVMOHBA_SUMMARY_FAILURE_MULTIPLE {

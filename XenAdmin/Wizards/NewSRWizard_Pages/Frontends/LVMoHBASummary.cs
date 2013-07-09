@@ -13,6 +13,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         public LVMoHBASummary()
         {
             InitializeComponent();
+            SuccessfullyCreatedSRs = new List<SrDescriptor>();
+            FailedToCreateSRs = new List<SrDescriptor>();
         }
 
         #region XenTabPage overrides
@@ -36,6 +38,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             return false;
         }
 
+        public override bool EnablePrevious()
+        {
+            return false;
+        }
+
         public override void  PopulatePage()
         {
             PopulateGrid(false);
@@ -47,8 +54,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         #region Accessors
 
-        public List<SrDescriptor> SuccessfullyCreatedSRs { private get; set; }
-        public List<SrDescriptor> FailedToCreateSRs { private get; set; }
+        public List<SrDescriptor> SuccessfullyCreatedSRs { get; set; }
+        public List<SrDescriptor> FailedToCreateSRs { get; set; }
 
         #endregion
 
@@ -198,9 +205,17 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             protected override DataGridViewTextBoxCell GetDetailsCell()
             {
+                LvmOhbaSrDescriptor lvmOhbaSrDescriptor = srDescriptor as LvmOhbaSrDescriptor;
+                string text = lvmOhbaSrDescriptor != null
+                                  ? string.Format(Messages.NEWSR_LVMOHBA_SUMMARY_DETAILS_CELL_TEXT,
+                                                  lvmOhbaSrDescriptor.Name,
+                                                  Util.DiskSizeString(lvmOhbaSrDescriptor.Device.Size),
+                                                  lvmOhbaSrDescriptor.Device.Serial)
+                                  : srDescriptor.Name;
+                
                 return new DataGridViewTextBoxCell
                            {
-                               Value = srDescriptor.Description,
+                               Value = text,
                                Style = {Padding = new Padding(10, 0, 0, 0)}
                            };
             }

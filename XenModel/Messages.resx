@@ -7277,6 +7277,9 @@ Once all configuration is complete the HBA will expose a SCSI device backed by t
   <data name="NEWSR_LVMOHBA_NEXT_TEXT" xml:space="preserve">
     <value>&amp;Create</value>
   </data>
+  <data name="NEWSR_LVMOHBA_SUMMARY_DETAILS_CELL_TEXT" xml:space="preserve">
+    <value>{0} ({1} - {2})</value>
+  </data>
   <data name="NEWSR_LVMOHBA_SUMMARY_FAILURE_MULTIPLE" xml:space="preserve">
     <value>Failed to create {0} SRs</value>
   </data>
