@@ -40,7 +40,7 @@ using XenAdmin.Wizards.NewSRWizard_Pages.Frontends;
 
 namespace XenAdminTests.WizardTests.state1_xml.NewSRWizardTests
 {
-    [TestFixture, Category(TestCategories.UICategoryB)]
+    [TestFixture, Category(TestCategories.UICategoryB), Category(TestCategories.SmokeTest)]
     public class NewSRWizardTest_NFS : WizardTest<NewSRWizard>
     {
         public NewSRWizardTest_NFS()
@@ -107,7 +107,7 @@ namespace XenAdminTests.WizardTests.state1_xml.NewSRWizardTests
         }
     }
 
-    [TestFixture, Category(TestCategories.UICategoryB)]
+    [TestFixture, Category(TestCategories.UICategoryB), Category(TestCategories.SmokeTest)]
     public class NewSRWizardTest_iSCSI : WizardTest<NewSRWizard>
     {
         public NewSRWizardTest_iSCSI()
@@ -243,7 +243,7 @@ namespace XenAdminTests.WizardTests.state1_xml.NewSRWizardTests
         }
     }
 
-    [TestFixture, Category(TestCategories.UICategoryB)]
+    [TestFixture, Category(TestCategories.UICategoryB), Category(TestCategories.SmokeTest)]
     public class NewSRWizardTest_CIFS : WizardTest<NewSRWizard>
     {
         public NewSRWizardTest_CIFS()

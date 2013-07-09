@@ -38,7 +38,7 @@ using NUnit.Framework;
 
 namespace XenAdminTests.CommandTests
 {
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class DeleteVMCommandTestGeorge : MainWindowLauncher_TestFixture
     {
         public DeleteVMCommandTestGeorge()
@@ -53,7 +53,7 @@ namespace XenAdminTests.CommandTests
         }
     }
 
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class DeleteVMCommandTestMidnightRide : MainWindowLauncher_TestFixture
     {
         public DeleteVMCommandTestMidnightRide()

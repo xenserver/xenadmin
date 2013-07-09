@@ -37,7 +37,7 @@ using System.Collections.Generic;
 
 namespace XenAdminTests.UnitTests.Diagnostics
 {
-    [TestFixture, Category(TestCategories.Unit)]
+    [TestFixture, Category(TestCategories.Unit), Category(TestCategories.SmokeTest)]
     public class MultipleHotfixTests
     {
         private Mock<Hotfix> hotfixA;

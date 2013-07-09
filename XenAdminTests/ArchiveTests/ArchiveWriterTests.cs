@@ -39,7 +39,7 @@ using XenCenterLib.Archive;
 
 namespace XenAdminTests.ArchiveTests
 {
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     class ArchiveWriterTests
     {
         private class FakeArchiveWriter : ArchiveWriter

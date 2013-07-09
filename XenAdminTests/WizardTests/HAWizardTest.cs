@@ -39,7 +39,7 @@ using XenAdmin.Wizards;
 
 namespace XenAdminTests.WizardTests.state1_xml.HAWizardTests
 {
-    [TestFixture, Category(TestCategories.UICategoryB)]
+    [TestFixture, Category(TestCategories.UICategoryB), Category(TestCategories.SmokeTest)]
     public class HAWizardTest : WizardTest<HAWizard>
     {
         public HAWizardTest()

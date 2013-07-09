@@ -38,7 +38,7 @@ using NUnit.Framework;
 
 namespace XenAdminTests.CommandTests
 {
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class DisconnectHostCommandTestGeorge : MainWindowLauncher_TestFixture
     {
         public DisconnectHostCommandTestGeorge()
@@ -53,7 +53,7 @@ namespace XenAdminTests.CommandTests
         }
     }
 
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class DisconnectHostCommandTestMidnightRide : MainWindowLauncher_TestFixture
     {
         public DisconnectHostCommandTestMidnightRide()

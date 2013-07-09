@@ -37,7 +37,7 @@ using XenAPI;
 
 namespace XenAdminTests.UnitTests.Diagnostics
 {
-    [TestFixture]
+    [TestFixture, Category(TestCategories.SmokeTest)]
     public class HotFixFactoryTests : UnitTester_TestFixture
     {
         private const string id = "test";

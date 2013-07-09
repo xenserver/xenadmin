@@ -78,7 +78,7 @@ namespace XenAdminTests.LicensingTests
             return rows;
         }
 
-        [Test]
+        [Test, Category(TestCategories.SmokeTest)]
         public void ButtonEnablementForNoSelection()
         {
             LicenseManagerController licenseSummary = new LicenseManagerController(view.Object);
@@ -90,7 +90,7 @@ namespace XenAdminTests.LicensingTests
             view.Verify(v => v.DrawActivateButtonAsHidden(false));
         }
 
-        [Test]
+        [Test, Category(TestCategories.SmokeTest)]
         public void ButtonEnablementForUnlicensedClearwaterSelection()
         {
             LicenseManagerController licenseSummary = new LicenseManagerController(view.Object)
@@ -111,7 +111,7 @@ namespace XenAdminTests.LicensingTests
             view.Verify(v => v.DrawActivateButtonAsHidden(true));
         }
 
-        [Test]
+        [Test, Category(TestCategories.SmokeTest)]
         public void ButtonEnablementForLicensedClearwaterSelection()
         {
             LicenseManagerController licenseSummary = new LicenseManagerController(view.Object)
@@ -135,7 +135,7 @@ namespace XenAdminTests.LicensingTests
             
         }
 
-        [Test]
+        [Test, Category(TestCategories.SmokeTest)]
         public void ButtonEnablementForTwoLicensedClearwaterSelection()
         {
             LicenseManagerController licenseSummary = new LicenseManagerController(view.Object)
@@ -166,7 +166,7 @@ namespace XenAdminTests.LicensingTests
             view.Verify(v => v.DrawActivateButtonAsDisabled(false));
         }
 
-        [Test]
+        [Test, Category(TestCategories.SmokeTest)]
         public void ButtonEnablementForTwoMixedLicenseClearwaterSelection()
         {
             LicenseManagerController licenseSummary = new LicenseManagerController(view.Object)
@@ -197,7 +197,7 @@ namespace XenAdminTests.LicensingTests
             view.Verify(v => v.DrawActivateButtonAsDisabled(false));
         }
 
-        [Test]
+        [Test, Category(TestCategories.SmokeTest)]
         public void ButtonEnablementForUnlicensedTampaSelection()
         {
             LicenseManagerController licenseSummary = new LicenseManagerController(view.Object)
@@ -222,7 +222,7 @@ namespace XenAdminTests.LicensingTests
             view.Verify(v => v.DrawActivateButtonAsDisabled(false));
         }
 
-        [Test]
+        [Test, Category(TestCategories.SmokeTest)]
         public void ButtonEnablementForMulitpleMixedTampaSelection()
         {
             LicenseManagerController licenseSummary = new LicenseManagerController(view.Object)
@@ -254,7 +254,7 @@ namespace XenAdminTests.LicensingTests
             view.Verify(v => v.DrawActivateButtonAsDisabled(false));
         }
 
-        [Test]
+        [Test, Category(TestCategories.SmokeTest)]
         public void ButtonEnablementForLicensedTampaSelection()
         {
             LicenseManagerController licenseSummary = new LicenseManagerController(view.Object)
@@ -279,7 +279,7 @@ namespace XenAdminTests.LicensingTests
             view.Verify(v => v.DrawActivateButtonAsDisabled(false));
         }
 
-        [Test]
+        [Test, Category(TestCategories.SmokeTest)]
         public void ButtonEnablementForUnactivatableHosts()
         {
             LicenseManagerController licenseSummary = new LicenseManagerController(view.Object)
@@ -304,7 +304,7 @@ namespace XenAdminTests.LicensingTests
             view.Verify(v => v.DrawActivateButtonAsDisabled(true));
         }
 
-        [Test]
+        [Test, Category(TestCategories.SmokeTest)]
         public void ButtonEnablementForFailingVerifier()
         {
             LicenseManagerController licenseSummary = new LicenseManagerController(view.Object)

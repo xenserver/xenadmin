@@ -42,7 +42,7 @@ using System.Threading;
 
 namespace XenAdminTests.XenModelTests
 {
-    [TestFixture, Category(TestCategories.UICategoryB)]
+    [TestFixture, Category(TestCategories.UICategoryB), Category(TestCategories.SmokeTest)]
     public class PureAsyncActionTests : ActionTestBase
     {
 

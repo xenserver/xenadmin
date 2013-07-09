@@ -153,7 +153,7 @@ namespace XenAdminTests.FolderTests
         }
     }
 
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class FolderTest_Create : FolderTest
     {
         protected override void DoAction()

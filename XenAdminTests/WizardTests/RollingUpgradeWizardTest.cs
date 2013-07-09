@@ -37,7 +37,7 @@ using XenAdmin.Wizards.RollingUpgradeWizard;
 namespace XenAdminTests.WizardTests.state5_xml
 {
 
-    [TestFixture, Category(TestCategories.UICategoryB)]
+    [TestFixture, Category(TestCategories.UICategoryB), Category(TestCategories.SmokeTest)]
     class RollingUpgradeWizardTest : WizardTest<RollingUpgradeWizard>
     {
         public RollingUpgradeWizardTest()

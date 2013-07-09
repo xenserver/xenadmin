@@ -37,7 +37,7 @@ using XenAdmin.Wizards;
 
 namespace XenAdminTests.WizardTests.state1_xml.BugToolWizardTests
 {
-    [TestFixture, Category(TestCategories.UICategoryB)]
+    [TestFixture, Category(TestCategories.UICategoryB), Category(TestCategories.SmokeTest)]
     public class BugToolWizardTest : WizardTest<BugToolWizard>
     {
         public BugToolWizardTest()
