@@ -43,7 +43,7 @@ using System.Xml;
 
 namespace XenAdminTests.WizardTests.state1_xml.NewVMWizardTests
 {
-    [TestFixture, Category(TestCategories.UICategoryB)]
+    [TestFixture, Category(TestCategories.UICategoryB), Category(TestCategories.SmokeTest)]
     public class NewVMWizardTestSpecificHost : WizardTest<NewVMWizard>
     {
         public NewVMWizardTestSpecificHost()
@@ -117,7 +117,7 @@ namespace XenAdminTests.WizardTests.state4_xml.NewVMWizardTests
         }
     }
 
-    [TestFixture, Category(TestCategories.UICategoryB)]
+    [TestFixture, Category(TestCategories.UICategoryB), Category(TestCategories.SmokeTest)]
     public class NewVMWizardTestWindowsTemplate : WizardTest<NewVMWizard>
     {
         public NewVMWizardTestWindowsTemplate()

@@ -38,7 +38,7 @@ using XenAdmin;
 
 namespace XenAdminTests.CommandTests
 {
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class AddHostCommandTestSetup : MainWindowLauncher_TestFixture
     {
         public AddHostCommandTestSetup()

@@ -43,7 +43,7 @@ namespace XenAdminTests.DialogTests.LicenseManager.SelectionVerifiers
 {
     public class CanUseLicenseServerVerifierTests : UnitTester_SingleConnectionTestFixture
     {
-        [Test]
+        [Test, Category(TestCategories.SmokeTest)]
         [TestCase(0, 0, Status.Error)]
         [TestCase(1, 0, Status.OK)]
         [TestCase(0, 1, Status.Error)]

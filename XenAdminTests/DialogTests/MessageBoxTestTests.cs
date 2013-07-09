@@ -34,7 +34,7 @@ using XenAdmin.Dialogs;
 
 namespace XenAdminTests.DialogTests.boston.MessageBoxTestTests
 {
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class MessageBoxTestTests : DialogTest<MessageBoxTest>
     {
         protected override MessageBoxTest NewDialog()

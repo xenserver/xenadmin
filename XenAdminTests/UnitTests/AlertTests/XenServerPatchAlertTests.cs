@@ -41,7 +41,7 @@ using XenAPI;
 
 namespace XenAdminTests.UnitTests.AlertTests
 {
-    [TestFixture, Category(TestCategories.Unit)]
+    [TestFixture, Category(TestCategories.Unit), Category(TestCategories.SmokeTest)]
     public class XenServerPatchAlertTests
     {
         private Mock<IXenConnection> connA;

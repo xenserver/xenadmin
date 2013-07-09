@@ -37,7 +37,7 @@ using XenAdmin.XenSearch;
 
 namespace XenAdminTests.SearchUnitTests
 {
-    [TestFixture, Category(TestCategories.UICategoryB)]
+    [TestFixture, Category(TestCategories.UICategoryB), Category(TestCategories.SmokeTest)]
     class MatchTests_Date
     {
         [Test, Sequential]

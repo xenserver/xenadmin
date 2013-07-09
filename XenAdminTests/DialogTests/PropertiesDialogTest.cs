@@ -53,7 +53,7 @@ namespace XenAdminTests.DialogTests.state1_xml.PropertiesDialogTests
         }
     }
 
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class PropertiesDialogTest_Host : VerticallyTabbedDialogTest<PropertiesDialog>
     {
         public PropertiesDialogTest_Host()
@@ -169,7 +169,7 @@ namespace XenAdminTests.DialogTests.state1_xml.PropertiesDialogTests
         }
     }
 
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class PropertiesDialogTest_VDI : VerticallyTabbedDialogTest<PropertiesDialog>
     {
         public PropertiesDialogTest_VDI()
