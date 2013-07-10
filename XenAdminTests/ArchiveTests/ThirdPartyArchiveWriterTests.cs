@@ -39,7 +39,7 @@ using XenCenterLib.Archive;
 
 namespace XenAdminTests.ArchiveTests
 {
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class TarArchiveWriterTests : ThirdPartyArchiveWriterTest
     {
         [TestFixtureSetUp]
@@ -50,7 +50,7 @@ namespace XenAdminTests.ArchiveTests
         }
     }
 
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class ZipArchiveWriterTests : ThirdPartyArchiveWriterTest
     {
         [TestFixtureSetUp]

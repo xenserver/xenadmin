@@ -39,7 +39,7 @@ using XenAdmin.Wizards.NewVMWizard;
 
 namespace XenAdminTests.DialogTests.state1_xml.DialogsForConnection
 {
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class AddServerDialogTest_true : DialogTest<AddServerDialog>
     {
         protected override AddServerDialog NewDialog()
@@ -48,7 +48,7 @@ namespace XenAdminTests.DialogTests.state1_xml.DialogsForConnection
         }
     }
 
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class AddServerDialogTest_false : DialogTest<AddServerDialog>
     {
         protected override AddServerDialog NewDialog()
@@ -57,8 +57,8 @@ namespace XenAdminTests.DialogTests.state1_xml.DialogsForConnection
         }
     }
 
-    
-    [TestFixture, Category(TestCategories.UICategoryA)]
+
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class ConnectingToServerDialogTest : DialogTest<ConnectingToServerDialog>
     {
         IXenConnection connection = null;

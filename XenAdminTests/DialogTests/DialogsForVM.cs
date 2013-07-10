@@ -38,7 +38,7 @@ using XenAPI;
 
 namespace XenAdminTests.DialogTests.state1_xml.DialogsForVM
 {
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class AttachDiskDialogTest : DialogTest<AttachDiskDialog>
     {
         protected override AttachDiskDialog NewDialog()
@@ -128,7 +128,7 @@ namespace XenAdminTests.DialogTests.state1_xml.DialogsForVM
         }
     }
 
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class CopyVMDialogTest_DefaultTemplate : DialogTest<CopyVMDialog>
     {
         protected override CopyVMDialog NewDialog()

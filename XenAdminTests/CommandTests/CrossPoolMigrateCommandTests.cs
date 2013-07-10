@@ -57,7 +57,7 @@ namespace XenAdminTests.CommandTests
             }
         }
 
-        [Test]
+        [Test, Category(TestCategories.SmokeTest)]
         [TestCase(true, Description = "Is LunPerVdi", Result = false)]
         [TestCase(false, Description = "Is Not LunPerVdi", Result = true)]
         public bool VerifyLunPerVdiBehaviour(bool IsLunPerVdi)
@@ -75,7 +75,7 @@ namespace XenAdminTests.CommandTests
             return cmd.CanExecute();
         }
 
-        [Test]
+        [Test, Category(TestCategories.SmokeTest)]
         [TestCase(true, Description = "Wlb enabled", Result = false)]
         [TestCase(false, Description = "Wlb disabled", Result = true)]
         public bool IntrapoolWlbEnabledBehaviour(bool WlbEnabled)
@@ -97,7 +97,7 @@ namespace XenAdminTests.CommandTests
         }
 
 
-        [Test]
+        [Test, Category(TestCategories.SmokeTest)]
         [TestCase(true, true, Description = "Wlb enabled both", Result = false)]
         [TestCase(false, false, Description = "Wlb disabled both", Result = true)]
         [TestCase(true, false, Description = "Wlb enabled VM", Result = false)]

@@ -38,7 +38,7 @@ using XenCenterLib.Compression;
 namespace XenAdminTests.CompressionTests
 {
 
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class GzipCompressionTests : ThirdPartyCompressionTests
     {
         [TestFixtureSetUp]
@@ -49,7 +49,7 @@ namespace XenAdminTests.CompressionTests
         }
     }
 
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class Bzip2CompressionTests : ThirdPartyCompressionTests
     {
         [TestFixtureSetUp]

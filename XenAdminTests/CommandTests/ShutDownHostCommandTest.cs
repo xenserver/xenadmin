@@ -41,7 +41,7 @@ using NUnit.Framework;
 namespace XenAdminTests.CommandTests
 {
 
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class ShutDownHostCommandTestGeorge : MainWindowLauncher_TestFixture
     {
         public ShutDownHostCommandTestGeorge()
@@ -56,7 +56,7 @@ namespace XenAdminTests.CommandTests
         }
     }
 
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class ShutDownHostCommandTestMidnightRide : MainWindowLauncher_TestFixture
     {
         public ShutDownHostCommandTestMidnightRide()
@@ -71,7 +71,7 @@ namespace XenAdminTests.CommandTests
         }
     }
 
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class ShutDownHostCommandTestRbacGeorge : MainWindowLauncher_TestFixture
     {
         public ShutDownHostCommandTestRbacGeorge()
@@ -86,7 +86,7 @@ namespace XenAdminTests.CommandTests
         }
     }
 
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class ShutDownHostCommandTestRbacMidnightRide : MainWindowLauncher_TestFixture
     {
         public ShutDownHostCommandTestRbacMidnightRide()

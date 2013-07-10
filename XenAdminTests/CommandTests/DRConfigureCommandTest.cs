@@ -35,7 +35,7 @@ using NUnit.Framework;
 
 namespace XenAdminTests.CommandTests
 {
-    [TestFixture, Category(TestCategories.UICategoryA)]
+    [TestFixture, Category(TestCategories.UICategoryA), Category(TestCategories.SmokeTest)]
     public class DRConfigureCommandTestBoston : MainWindowLauncher_TestFixture
     {
         public DRConfigureCommandTestBoston()

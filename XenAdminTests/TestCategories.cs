@@ -55,6 +55,11 @@ namespace XenAdminTests
         /// </summary>
         public const string Unit = "Unit";
 
+        /// <summary>
+        /// Smoke tests
+        /// </summary>
+        public const string SmokeTest = "SmokeTest";
+
     }
 
 }
