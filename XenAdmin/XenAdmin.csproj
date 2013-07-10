@@ -5930,7 +5930,13 @@
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\LVMoHBA.zh-CN.resx">
       <DependentUpon>LVMoHBA.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\LVMoHBASummary.ja.resx">
+      <DependentUpon>LVMoHBASummary.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\LVMoHBASummary.resx">
+      <DependentUpon>LVMoHBASummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\LVMoHBASummary.zh-CN.resx">
       <DependentUpon>LVMoHBASummary.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\LVMoISCSI.ja.resx">
