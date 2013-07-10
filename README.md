@@ -1,3 +1,6 @@
+XenCenter
+=========
+
 This repository contains the source code for XenCenter.
 
 XenCenter is a Windows-based management tool for XenServer environments
@@ -6,8 +9,22 @@ and to deploy, monitor, manage and migrate virtual machines.
 
 XenCenter is written mostly in C#.
    
+Contributions
+-------------
+
+The preferable way to contribute is to submit your patches to the 
+xs-devel@lists.xenserver.org mailing list rather than submitting pull requests. 
+Please see the CONTRIB file for some general guidelines on submitting changes.
+
+License
+-------
+
+This code is licensed under the BSD 2-Clause license. Please see the LICENSE
+file for more information.
+
 How to build XenCenter
-======================
+----------------------
+
 To build XenCenter, you not only need 
  *  the source from xenadmin repository
  
