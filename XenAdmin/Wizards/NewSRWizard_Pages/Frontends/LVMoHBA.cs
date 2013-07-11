@@ -213,6 +213,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             }
         }
 
+        public override string NextText(bool isLastPage)
+        {
+            return Messages.NEWSR_LVMOHBA_NEXT_TEXT;
+        }
+
         #endregion
 
         #region Event handlers

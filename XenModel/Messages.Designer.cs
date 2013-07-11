@@ -21253,6 +21253,87 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Create.
+        /// </summary>
+        public static string NEWSR_LVMOHBA_NEXT_TEXT {
+            get {
+                return ResourceManager.GetString("NEWSR_LVMOHBA_NEXT_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} ({1} - {2}).
+        /// </summary>
+        public static string NEWSR_LVMOHBA_SUMMARY_DETAILS_CELL_TEXT {
+            get {
+                return ResourceManager.GetString("NEWSR_LVMOHBA_SUMMARY_DETAILS_CELL_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to create {0} SRs.
+        /// </summary>
+        public static string NEWSR_LVMOHBA_SUMMARY_FAILURE_MULTIPLE {
+            get {
+                return ResourceManager.GetString("NEWSR_LVMOHBA_SUMMARY_FAILURE_MULTIPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to create SR.
+        /// </summary>
+        public static string NEWSR_LVMOHBA_SUMMARY_FAILURE_SINGLE {
+            get {
+                return ResourceManager.GetString("NEWSR_LVMOHBA_SUMMARY_FAILURE_SINGLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Summary of new Storage Repositories creation.
+        /// </summary>
+        public static string NEWSR_LVMOHBA_SUMMARY_MULTIPLE_TITLE {
+            get {
+                return ResourceManager.GetString("NEWSR_LVMOHBA_SUMMARY_MULTIPLE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Summary of new Storage Repository creation.
+        /// </summary>
+        public static string NEWSR_LVMOHBA_SUMMARY_SINGLE_TITLE {
+            get {
+                return ResourceManager.GetString("NEWSR_LVMOHBA_SUMMARY_SINGLE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} SRs created successfully.
+        /// </summary>
+        public static string NEWSR_LVMOHBA_SUMMARY_SUCCESS_MULTIPLE {
+            get {
+                return ResourceManager.GetString("NEWSR_LVMOHBA_SUMMARY_SUCCESS_MULTIPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SR created successfully.
+        /// </summary>
+        public static string NEWSR_LVMOHBA_SUMMARY_SUCCESS_SINGLE {
+            get {
+                return ResourceManager.GetString("NEWSR_LVMOHBA_SUMMARY_SUCCESS_SINGLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Summary.
+        /// </summary>
+        public static string NEWSR_LVMOHBA_SUMMARY_TEXT {
+            get {
+                return ResourceManager.GetString("NEWSR_LVMOHBA_SUMMARY_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shared Logical Volume Manager (LVM) support is available using either iSCSI or Fibre Channel access to a shared LUN. 
         ///
         ///Using the LVM-based shared SR provides the same performance benefits as unshared LVM for local disk storage, however in the shared context, iSCSI or Fibre Channel-based SRs enable VM agility — VMs may be started on any server in a pool and migrated between them..

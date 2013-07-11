@@ -39,7 +39,7 @@ using XenAdmin.Model;
 
 namespace XenAdminTests.TabsAndMenus
 {
-    [TestFixture, Category(TestCategories.UICategoryB), Category(TestCategories.SmokeTest)]
+    [TestFixture, Category(TestCategories.UICategoryB)]
     public class TabsAndMenusTampa : TabsAndMenus
     {
         public TabsAndMenusTampa()

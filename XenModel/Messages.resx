@@ -7274,6 +7274,33 @@ Once all configuration is complete the HBA will expose a SCSI device backed by t
   <data name="NEWSR_LVMOHBA_DESCRIPTION" xml:space="preserve">
     <value>Hardware HBA SR [{0} - {1}]</value>
   </data>
+  <data name="NEWSR_LVMOHBA_NEXT_TEXT" xml:space="preserve">
+    <value>&amp;Create</value>
+  </data>
+  <data name="NEWSR_LVMOHBA_SUMMARY_DETAILS_CELL_TEXT" xml:space="preserve">
+    <value>{0} ({1} - {2})</value>
+  </data>
+  <data name="NEWSR_LVMOHBA_SUMMARY_FAILURE_MULTIPLE" xml:space="preserve">
+    <value>Failed to create {0} SRs</value>
+  </data>
+  <data name="NEWSR_LVMOHBA_SUMMARY_FAILURE_SINGLE" xml:space="preserve">
+    <value>Failed to create SR</value>
+  </data>
+  <data name="NEWSR_LVMOHBA_SUMMARY_MULTIPLE_TITLE" xml:space="preserve">
+    <value>Summary of new Storage Repositories creation</value>
+  </data>
+  <data name="NEWSR_LVMOHBA_SUMMARY_SINGLE_TITLE" xml:space="preserve">
+    <value>Summary of new Storage Repository creation</value>
+  </data>
+  <data name="NEWSR_LVMOHBA_SUMMARY_SUCCESS_MULTIPLE" xml:space="preserve">
+    <value>{0} SRs created successfully</value>
+  </data>
+  <data name="NEWSR_LVMOHBA_SUMMARY_SUCCESS_SINGLE" xml:space="preserve">
+    <value>SR created successfully</value>
+  </data>
+  <data name="NEWSR_LVMOHBA_SUMMARY_TEXT" xml:space="preserve">
+    <value>Summary</value>
+  </data>
   <data name="NEWSR_LVMOISCSI_BLURB" xml:space="preserve">
     <value>Shared Logical Volume Manager (LVM) support is available using either iSCSI or Fibre Channel access to a shared LUN. 
 
