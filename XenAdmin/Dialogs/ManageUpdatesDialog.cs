@@ -63,6 +63,8 @@ namespace XenAdmin.Dialogs
         private ImageList imageList = new ImageList();
         private bool checkForUpdatesSucceeded;
 
+        Dictionary<string, bool> expandedState = new Dictionary<string, bool>();
+
         private void CheckForUpdates_CheckForUpdatesCompleted(object sender, CheckForUpdatesCompletedEventArgs e)
         {
             Program.Invoke(this, delegate
@@ -87,7 +89,7 @@ namespace XenAdmin.Dialogs
             InitializeProgressControls();
             InformationHelperVisible = false;
             informationLabel.Click += informationLabel_Click;
-            availableUpdates.CheckForUpdatesCompleted += new EventHandler<CheckForUpdatesCompletedEventArgs>(CheckForUpdates_CheckForUpdatesCompleted);
+            availableUpdates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
         }
 
         private void informationLabel_Click(object sender, EventArgs e)
@@ -106,7 +108,7 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        void connection_CachePopulated(object sender, EventArgs e)
+        private void connection_CachePopulated(object sender, EventArgs e)
         {
             Program.Invoke(this, Rebuild);
         }
@@ -347,27 +349,34 @@ namespace XenAdmin.Dialogs
 
         private DataGridViewRow NewUpdateRow(Alert alert)
         {
-            DataGridViewTextBoxCell nameCell = new DataGridViewTextBoxCell();
-            DataGridViewTextBoxCell detailsCell = new DataGridViewTextBoxCell();
+            DataGridViewImageCell expanderCell = new DataGridViewImageCell();
+            DataGridViewTextBoxCell messageCell = new DataGridViewTextBoxCell();
+            DataGridViewTextBoxCell appliesToCell = new DataGridViewTextBoxCell();
             DataGridViewTextBoxCell dateCell = new DataGridViewTextBoxCell();
             DataGridViewLinkCell webPageCell = new DataGridViewLinkCell();
-            DataGridViewTextBoxCell appliesToCell = new DataGridViewTextBoxCell();
            
             DataGridViewRow newRow = new DataGridViewRow();
             newRow.Tag = alert;
 
-            nameCell.Value = alert.Name;
-            detailsCell.Value = string.Join(" ", new[] { alert.Title, alert.Description });
+            // Set the detail cell content and expanding arrow
+            if (expandedState.ContainsKey(alert.uuid))
+            {
+                // show the expanded arrow and the body detail
+                expanderCell.Value = Properties.Resources.expanded_triangle;
+                messageCell.Value = String.Format("{0}\n\n{1}", alert.Title, alert.Description);
+            }
+            else
+            {
+                // show the expand arrow and just the title
+                expanderCell.Value = Properties.Resources.contracted_triangle;
+                messageCell.Value = alert.Title;
+            }
+
             dateCell.Value = HelpersGUI.DateTimeToString(alert.Timestamp.ToLocalTime(), Messages.DATEFORMAT_DMY, true);
             webPageCell.Value = alert.WebPageLabel;
             appliesToCell.Value = alert.AppliesTo;
 
-            newRow.Cells.Add(nameCell);
-            newRow.Cells.Add(detailsCell);
-            newRow.Cells.Add(dateCell);
-            newRow.Cells.Add(webPageCell);
-            newRow.Cells.Add(appliesToCell);
-
+            newRow.Cells.AddRange(expanderCell, messageCell, appliesToCell, dateCell, webPageCell);
             return newRow;
         }
 
@@ -385,12 +394,8 @@ namespace XenAdmin.Dialogs
         {
             Alert alert1 = (Alert)dataGridViewUpdates.Rows[e.RowIndex1].Tag;
             Alert alert2 = (Alert)dataGridViewUpdates.Rows[e.RowIndex2].Tag;
-            if (e.Column.Index == ColumnName.Index)
-            {
-                e.SortResult = Alert.CompareOnName(alert1, alert2);
-                e.Handled = true;
-            }
-            else if (e.Column.Index == ColumnDescription.Index)
+
+            if (e.Column.Index == ColumnMessage.Index)
             {
                 e.SortResult = Alert.CompareOnTitle(alert1, alert2);
                 e.Handled = true;
@@ -588,6 +593,80 @@ namespace XenAdmin.Dialogs
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == ColumnWebPage.Index)
                 OpenGoToWebsiteLink();
+        }
+
+        private void dataGridViewUpdates_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // If you click on the headers you can get -1 as the index.
+            if (e.ColumnIndex < 0 || e.RowIndex < 0 || e.ColumnIndex != ColumnExpander.Index)
+                return;
+
+            toggleExpandedState(e.RowIndex);
+        }
+
+        private void dataGridViewUpdates_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // If you click on the headers you can get -1 as the index.
+            if (e.ColumnIndex < 0 || e.RowIndex < 0)
+                return;
+            toggleExpandedState(e.RowIndex);
+        }
+
+        private void dataGridViewUpdates_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Right) // expand all selected rows
+            {
+                foreach (DataGridViewBand row in dataGridViewUpdates.SelectedRows)
+                {
+                    Alert alert = (Alert)dataGridViewUpdates.Rows[row.Index].Tag;
+                    if (!expandedState.ContainsKey(alert.uuid))
+                    {
+                        toggleExpandedState(row.Index);
+                    }
+                }
+            }
+            else if (e.KeyCode == Keys.Left) // collapse all selected rows
+            {
+                foreach (DataGridViewBand row in dataGridViewUpdates.SelectedRows)
+                {
+                    Alert alert = (Alert)dataGridViewUpdates.Rows[row.Index].Tag;
+                    if (expandedState.ContainsKey(alert.uuid))
+                    {
+                        toggleExpandedState(row.Index);
+                    }
+                }
+            }
+            else if (e.KeyCode == Keys.Enter) // toggle expanded state for all selected rows
+            {
+                foreach (DataGridViewBand row in dataGridViewUpdates.SelectedRows)
+                {
+                    toggleExpandedState(row.Index);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Toggles the row specified between the expanded and contracted state
+        /// </summary>
+        /// <param name="alert"></param>
+        /// <param name="RowIndex"></param>
+        private void toggleExpandedState(int RowIndex)
+        {
+            Alert alert = (Alert)dataGridViewUpdates.Rows[RowIndex].Tag;
+
+            if (expandedState.ContainsKey(alert.uuid))
+            {
+                expandedState.Remove(alert.uuid);
+                dataGridViewUpdates.Rows[RowIndex].Cells[ColumnMessage.Index].Value = alert.Title;
+                dataGridViewUpdates.Rows[RowIndex].Cells[ColumnExpander.Index].Value = Properties.Resources.contracted_triangle;
+            }
+            else
+            {
+                expandedState.Add(alert.uuid, true);
+                dataGridViewUpdates.Rows[RowIndex].Cells[ColumnMessage.Index].Value
+                    = String.Format("{0}\n\n{1}", alert.Title, alert.Description);
+                dataGridViewUpdates.Rows[RowIndex].Cells[ColumnExpander.Index].Value = Properties.Resources.expanded_triangle;
+            }
         }
     }
 }
