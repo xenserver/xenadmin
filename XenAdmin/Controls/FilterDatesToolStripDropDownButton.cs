@@ -52,7 +52,7 @@ namespace XenAdmin.Controls
 
         public FilterDatesToolStripDropDownButton()
         {
-            toolStripMenuItemShowAll = new ToolStripMenuItem {Checked = true, Text = Messages.DATE_FILTER_NONE};
+            toolStripMenuItemShowAll = new ToolStripMenuItem {Checked = true, Text = Messages.FILTER_SHOW_ALL};
             toolStripMenuItemLast24Hours = new ToolStripMenuItem {Text = Messages.DATE_FILTER_LAST_24_HOURS};
             toolStripMenuItemLast3Days = new ToolStripMenuItem {Text = Messages.DATE_FILTER_LAST_3_DAYS};
             toolStripMenuItemLast7Days = new ToolStripMenuItem {Text = Messages.DATE_FILTER_LAST_7_DAYS};
@@ -61,12 +61,13 @@ namespace XenAdmin.Controls
 
             DropDownItems.AddRange(new ToolStripItem[]
                                        {
-                                           toolStripMenuItemShowAll,
                                            toolStripMenuItemLast24Hours,
                                            toolStripMenuItemLast3Days,
                                            toolStripMenuItemLast7Days,
                                            toolStripMenuItemLast30Days,
-                                           toolStripMenuItemCustomDate
+                                           toolStripMenuItemCustomDate,
+                                           new ToolStripSeparator(),
+                                           toolStripMenuItemShowAll
                                        });
 
             dateFilterDialog = new DateFilterDialog();
@@ -105,29 +106,33 @@ namespace XenAdmin.Controls
             switch (DropDownItems.IndexOf(menuItem))
             {
                 case 0:
-                    dateFilterDialog.SetNone();
-                    break;
-                case 1:
                     dateFilterDialog.Set24Hours();
                     break;
-                case 2:
+                case 1:
                     dateFilterDialog.SetDays(DateFilterDialog.DaysInPastOptions.THREE_DAYS);
                     break;
-                case 3:
+                case 2:
                     dateFilterDialog.SetDays(DateFilterDialog.DaysInPastOptions.SEVEN_DAYS);
                     break;
-                case 4:
+                case 3:
                     dateFilterDialog.SetDays(DateFilterDialog.DaysInPastOptions.THIRTY_DAYS);
                     break;
-                case 5:
+                case 4:
                     DialogResult result = dateFilterDialog.ShowDialog();
                     if (result != DialogResult.OK)
                         return;
                     break;
+                case 6:
+                    dateFilterDialog.SetNone();
+                    break;
             }
 
-            foreach (ToolStripMenuItem t in DropDownItems)
-                t.Checked = false;
+            foreach (ToolStripItem t in DropDownItems)
+            {
+                var mt = t as ToolStripMenuItem;
+                if (mt != null)
+                    mt.Checked = false;
+            }
 
             menuItem.Checked = true;
 

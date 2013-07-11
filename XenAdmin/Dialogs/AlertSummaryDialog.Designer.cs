@@ -40,11 +40,6 @@ namespace XenAdmin.Dialogs
             this.ButtonClose = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.GridViewAlerts = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
-            this.ColumnExpand = new System.Windows.Forms.DataGridViewImageColumn();
-            this.ColumnType = new System.Windows.Forms.DataGridViewImageColumn();
-            this.ColumnAppliesTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnDetails = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ContextMenuAlertGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripMenuItemFix = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemHelp = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,6 +58,7 @@ namespace XenAdmin.Dialogs
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonExportAll = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDismissAll = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLabelFiltersOnOff = new System.Windows.Forms.ToolStripLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
@@ -70,7 +66,11 @@ namespace XenAdmin.Dialogs
             this.toolStripButtonFix = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonHelp = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDismiss = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabelFiltersOnOff = new System.Windows.Forms.ToolStripLabel();
+            this.ColumnExpand = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ColumnType = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ColumnDetails = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnAppliesTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridViewAlerts)).BeginInit();
             this.ContextMenuAlertGridView.SuspendLayout();
@@ -108,8 +108,8 @@ namespace XenAdmin.Dialogs
             this.GridViewAlerts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnExpand,
             this.ColumnType,
-            this.ColumnAppliesTo,
             this.ColumnDetails,
+            this.ColumnAppliesTo,
             this.ColumnDate});
             this.GridViewAlerts.ContextMenuStrip = this.ContextMenuAlertGridView;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
@@ -130,62 +130,6 @@ namespace XenAdmin.Dialogs
             this.GridViewAlerts.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.AlertsGridView_CellClick);
             this.GridViewAlerts.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GridViewAlerts_KeyDown);
             this.GridViewAlerts.SelectionChanged += new System.EventHandler(this.GridViewAlerts_SelectionChanged);
-            // 
-            // ColumnExpand
-            // 
-            this.ColumnExpand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle2.NullValue = null;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.ColumnExpand.DefaultCellStyle = dataGridViewCellStyle2;
-            this.ColumnExpand.FillWeight = 49.51523F;
-            resources.ApplyResources(this.ColumnExpand, "ColumnExpand");
-            this.ColumnExpand.Name = "ColumnExpand";
-            this.ColumnExpand.ReadOnly = true;
-            this.ColumnExpand.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // ColumnType
-            // 
-            this.ColumnType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle3.NullValue = null;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-            this.ColumnType.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ColumnType.FillWeight = 109.5524F;
-            resources.ApplyResources(this.ColumnType, "ColumnType");
-            this.ColumnType.Name = "ColumnType";
-            this.ColumnType.ReadOnly = true;
-            this.ColumnType.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColumnType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // ColumnAppliesTo
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.ColumnAppliesTo.DefaultCellStyle = dataGridViewCellStyle4;
-            this.ColumnAppliesTo.FillWeight = 109.5524F;
-            resources.ApplyResources(this.ColumnAppliesTo, "ColumnAppliesTo");
-            this.ColumnAppliesTo.Name = "ColumnAppliesTo";
-            this.ColumnAppliesTo.ReadOnly = true;
-            // 
-            // ColumnDetails
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ColumnDetails.DefaultCellStyle = dataGridViewCellStyle5;
-            this.ColumnDetails.FillWeight = 380F;
-            resources.ApplyResources(this.ColumnDetails, "ColumnDetails");
-            this.ColumnDetails.Name = "ColumnDetails";
-            this.ColumnDetails.ReadOnly = true;
-            // 
-            // ColumnDate
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.ColumnDate.DefaultCellStyle = dataGridViewCellStyle6;
-            this.ColumnDate.FillWeight = 130F;
-            resources.ApplyResources(this.ColumnDate, "ColumnDate");
-            this.ColumnDate.Name = "ColumnDate";
-            this.ColumnDate.ReadOnly = true;
-            this.ColumnDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // ContextMenuAlertGridView
             // 
@@ -253,9 +197,9 @@ namespace XenAdmin.Dialogs
             this.toolStrip1.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripDropDownSeveritiesFilter,
             this.toolStripDropDownButtonServerFilter,
             this.toolStripDropDownButtonDateFilter,
-            this.toolStripDropDownSeveritiesFilter,
             this.toolStripSeparator3,
             this.toolStripButtonRefresh,
             this.toolStripSeparator1,
@@ -313,6 +257,12 @@ namespace XenAdmin.Dialogs
             this.toolStripButtonDismissAll.Name = "toolStripButtonDismissAll";
             this.toolStripButtonDismissAll.Click += new System.EventHandler(this.DismissAllButton_Click);
             // 
+            // toolStripLabelFiltersOnOff
+            // 
+            this.toolStripLabelFiltersOnOff.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            resources.ApplyResources(this.toolStripLabelFiltersOnOff, "toolStripLabelFiltersOnOff");
+            this.toolStripLabelFiltersOnOff.Name = "toolStripLabelFiltersOnOff";
+            // 
             // panel1
             // 
             resources.ApplyResources(this.panel1, "panel1");
@@ -369,11 +319,61 @@ namespace XenAdmin.Dialogs
             this.toolStripButtonDismiss.Name = "toolStripButtonDismiss";
             this.toolStripButtonDismiss.Click += new System.EventHandler(this.ButtonDismiss_Click);
             // 
-            // toolStripLabelFiltersOnOff
+            // ColumnExpand
             // 
-            this.toolStripLabelFiltersOnOff.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            resources.ApplyResources(this.toolStripLabelFiltersOnOff, "toolStripLabelFiltersOnOff");
-            this.toolStripLabelFiltersOnOff.Name = "toolStripLabelFiltersOnOff";
+            this.ColumnExpand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle2.NullValue = null;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.ColumnExpand.DefaultCellStyle = dataGridViewCellStyle2;
+            this.ColumnExpand.FillWeight = 49.51523F;
+            resources.ApplyResources(this.ColumnExpand, "ColumnExpand");
+            this.ColumnExpand.Name = "ColumnExpand";
+            this.ColumnExpand.ReadOnly = true;
+            this.ColumnExpand.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // ColumnType
+            // 
+            this.ColumnType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle3.NullValue = null;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
+            this.ColumnType.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ColumnType.FillWeight = 109.5524F;
+            resources.ApplyResources(this.ColumnType, "ColumnType");
+            this.ColumnType.Name = "ColumnType";
+            this.ColumnType.ReadOnly = true;
+            this.ColumnType.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // ColumnDetails
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColumnDetails.DefaultCellStyle = dataGridViewCellStyle4;
+            this.ColumnDetails.FillWeight = 380F;
+            resources.ApplyResources(this.ColumnDetails, "ColumnDetails");
+            this.ColumnDetails.Name = "ColumnDetails";
+            this.ColumnDetails.ReadOnly = true;
+            // 
+            // ColumnAppliesTo
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.ColumnAppliesTo.DefaultCellStyle = dataGridViewCellStyle5;
+            this.ColumnAppliesTo.FillWeight = 109.5524F;
+            resources.ApplyResources(this.ColumnAppliesTo, "ColumnAppliesTo");
+            this.ColumnAppliesTo.Name = "ColumnAppliesTo";
+            this.ColumnAppliesTo.ReadOnly = true;
+            // 
+            // ColumnDate
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.ColumnDate.DefaultCellStyle = dataGridViewCellStyle6;
+            this.ColumnDate.FillWeight = 130F;
+            resources.ApplyResources(this.ColumnDate, "ColumnDate");
+            this.ColumnDate.Name = "ColumnDate";
+            this.ColumnDate.ReadOnly = true;
+            this.ColumnDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // AlertSummaryDialog
             // 
@@ -437,11 +437,11 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.ToolStripButton toolStripButtonRefresh;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private XenAdmin.Controls.FilterSeveritiesToolStripDropDownButton toolStripDropDownSeveritiesFilter;
+        private System.Windows.Forms.ToolStripLabel toolStripLabelFiltersOnOff;
         private System.Windows.Forms.DataGridViewImageColumn ColumnExpand;
         private System.Windows.Forms.DataGridViewImageColumn ColumnType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAppliesTo;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDetails;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAppliesTo;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
-        private System.Windows.Forms.ToolStripLabel toolStripLabelFiltersOnOff;
     }
 }

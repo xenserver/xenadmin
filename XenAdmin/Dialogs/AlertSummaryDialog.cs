@@ -259,11 +259,7 @@ namespace XenAdmin.Dialogs
             appliesCell.Value = alert.AppliesTo;
             dateCell.Value = HelpersGUI.DateTimeToString(alert.Timestamp.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true);
 
-            newRow.Cells.Add(expanderCell);
-            newRow.Cells.Add(imageCell);
-            newRow.Cells.Add(appliesCell);
-            newRow.Cells.Add(detailCell);
-            newRow.Cells.Add(dateCell);
+            newRow.Cells.AddRange(expanderCell, imageCell, detailCell, appliesCell, dateCell);
 
             return newRow;
 

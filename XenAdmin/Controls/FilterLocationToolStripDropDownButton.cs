@@ -56,6 +56,8 @@ namespace XenAdmin.Controls
         private bool inFilterListUpdate;
         private bool retryFilterListUpdate;
 
+        private ToolStripMenuItem toolStripMenuItemAll;
+
         public FilterLocationToolStripDropDownButton()
         {
             ConnectionsManager.XenConnections.CollectionChanged += XenConnections_CollectionChanged;
@@ -122,13 +124,27 @@ namespace XenAdmin.Controls
                     {
                         foreach (Host h in c.Cache.Hosts)
                         {
-                            DropDownItems.Add(GenerateFilterItem(h, h.uuid));
+                            var item = GenerateFilterItem(h, h.uuid);
+                            item.Checked = HostCheckStates.ContainsKey(h.uuid);
+                            DropDownItems.Add(item);
                             break;
                         }
                     }
                     else
                         DropDownItems.Add(GeneratePoolFilterItem(p));
                 }
+
+                toolStripMenuItemAll = new ToolStripMenuItem
+                    {
+                        Text = Messages.FILTER_SHOW_ALL,
+                        Enabled = FilterIsOn
+                    };
+
+                DropDownItems.AddRange(new ToolStripItem[]
+                    {
+                        new ToolStripSeparator(),
+                        toolStripMenuItemAll
+                    });
             }
             finally
             {
@@ -305,6 +321,7 @@ namespace XenAdmin.Controls
 
         protected override void OnDropDownItemClicked(ToolStripItemClickedEventArgs e)
         {
+            //this method pertains to pool or stand alone host items
             base.OnDropDownItemClicked(e);
             HandleItemClicked(e.ClickedItem as ToolStripMenuItem);
         }
@@ -335,6 +352,13 @@ namespace XenAdmin.Controls
                     string hostUuid = (string)child.Tag;
                     HostCheckStates[hostUuid] = child.Checked;
                 }
+
+                toolStripMenuItemAll.Enabled = FilterIsOn;
+            }
+            else if (item == toolStripMenuItemAll)
+            {
+                toolStripMenuItemAll.Enabled = false;
+                InitializeHostList();
             }
             else
             {
@@ -358,6 +382,8 @@ namespace XenAdmin.Controls
                                                     ? CheckState.Unchecked
                                                     : CheckState.Indeterminate;
                 }
+
+                toolStripMenuItemAll.Enabled = FilterIsOn;
             }
 
             OnFilterChanged();

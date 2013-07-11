@@ -207,6 +207,15 @@
   <data name="ColumnType.Width" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
+  <metadata name="ColumnDetails.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnDetails.HeaderText" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="ColumnDetails.MinimumWidth" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
   <metadata name="ColumnAppliesTo.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -214,15 +223,6 @@
     <value>Location</value>
   </data>
   <data name="ColumnAppliesTo.MinimumWidth" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <metadata name="ColumnDetails.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnDetails.HeaderText" xml:space="preserve">
-    <value>Details</value>
-  </data>
-  <data name="ColumnDetails.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
   <metadata name="ColumnDate.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -417,6 +417,15 @@
   <data name="toolStrip1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
+  <data name="toolStripDropDownSeveritiesFilter.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="toolStripDropDownSeveritiesFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 25</value>
+  </data>
+  <data name="toolStripDropDownSeveritiesFilter.Text" xml:space="preserve">
+    <value>Filter by Severit&amp;y</value>
+  </data>
   <data name="toolStripDropDownButtonServerFilter.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
@@ -427,7 +436,7 @@
     <value>111, 25</value>
   </data>
   <data name="toolStripDropDownButtonServerFilter.Text" xml:space="preserve">
-    <value>Filter by &amp;Location</value>
+    <value>Filter by Lo&amp;cation</value>
   </data>
   <data name="toolStripDropDownButtonDateFilter.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -436,19 +445,10 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripDropDownButtonDateFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 25</value>
+    <value>89, 25</value>
   </data>
   <data name="toolStripDropDownButtonDateFilter.Text" xml:space="preserve">
-    <value>&amp;Filter Dates</value>
-  </data>
-  <data name="toolStripDropDownSeveritiesFilter.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="toolStripDropDownSeveritiesFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 25</value>
-  </data>
-  <data name="toolStripDropDownSeveritiesFilter.Text" xml:space="preserve">
-    <value>Filter by &amp;Severity</value>
+    <value>Filter by D&amp;ate</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 28</value>
@@ -478,7 +478,7 @@
     <value>61, 25</value>
   </data>
   <data name="toolStripButtonExportAll.Text" xml:space="preserve">
-    <value>&amp;Export All</value>
+    <value>E&amp;xport All</value>
   </data>
   <data name="toolStripButtonDismissAll.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -490,7 +490,7 @@
     <value>68, 25</value>
   </data>
   <data name="toolStripButtonDismissAll.Text" xml:space="preserve">
-    <value>Dismiss &amp;All</value>
+    <value>&amp;Dismiss All</value>
   </data>
   <data name="toolStripLabelFiltersOnOff.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -702,36 +702,6 @@
   <data name="$this.Text" xml:space="preserve">
     <value>System Alerts</value>
   </data>
-  <data name="&gt;&gt;ColumnExpand.Name" xml:space="preserve">
-    <value>ColumnExpand</value>
-  </data>
-  <data name="&gt;&gt;ColumnExpand.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnType.Name" xml:space="preserve">
-    <value>ColumnType</value>
-  </data>
-  <data name="&gt;&gt;ColumnType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnAppliesTo.Name" xml:space="preserve">
-    <value>ColumnAppliesTo</value>
-  </data>
-  <data name="&gt;&gt;ColumnAppliesTo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnDetails.Name" xml:space="preserve">
-    <value>ColumnDetails</value>
-  </data>
-  <data name="&gt;&gt;ColumnDetails.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnDate.Name" xml:space="preserve">
-    <value>ColumnDate</value>
-  </data>
-  <data name="&gt;&gt;ColumnDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;ToolStripMenuItemFix.Name" xml:space="preserve">
     <value>ToolStripMenuItemFix</value>
   </data>
@@ -810,6 +780,12 @@
   <data name="&gt;&gt;toolStripButtonDismissAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripLabelFiltersOnOff.Name" xml:space="preserve">
+    <value>toolStripLabelFiltersOnOff</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabelFiltersOnOff.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;toolStripLabel1.Name" xml:space="preserve">
     <value>toolStripLabel1</value>
   </data>
@@ -834,11 +810,35 @@
   <data name="&gt;&gt;toolStripButtonDismiss.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripLabelFiltersOnOff.Name" xml:space="preserve">
-    <value>toolStripLabelFiltersOnOff</value>
+  <data name="&gt;&gt;ColumnExpand.Name" xml:space="preserve">
+    <value>ColumnExpand</value>
   </data>
-  <data name="&gt;&gt;toolStripLabelFiltersOnOff.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;ColumnExpand.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnType.Name" xml:space="preserve">
+    <value>ColumnType</value>
+  </data>
+  <data name="&gt;&gt;ColumnType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnDetails.Name" xml:space="preserve">
+    <value>ColumnDetails</value>
+  </data>
+  <data name="&gt;&gt;ColumnDetails.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnAppliesTo.Name" xml:space="preserve">
+    <value>ColumnAppliesTo</value>
+  </data>
+  <data name="&gt;&gt;ColumnAppliesTo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnDate.Name" xml:space="preserve">
+    <value>ColumnDate</value>
+  </data>
+  <data name="&gt;&gt;ColumnDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AlertSummaryDialog</value>
