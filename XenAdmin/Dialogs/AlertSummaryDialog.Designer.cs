@@ -42,8 +42,8 @@ namespace XenAdmin.Dialogs
             this.GridViewAlerts = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.ColumnExpand = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnType = new System.Windows.Forms.DataGridViewImageColumn();
-            this.ColumnAppliesTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDetails = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnAppliesTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ContextMenuAlertGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripMenuItemFix = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,15 +54,18 @@ namespace XenAdmin.Dialogs
             this.LabelCappingEntries = new System.Windows.Forms.Label();
             this.LabelDialogBlurb = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStrip1 = new XenAdmin.Controls.ToolStripEx();
+            this.toolStripDropDownSeveritiesFilter = new XenAdmin.Controls.FilterSeveritiesToolStripDropDownButton();
             this.toolStripDropDownButtonServerFilter = new XenAdmin.Controls.FilterLocationToolStripDropDownButton();
             this.toolStripDropDownButtonDateFilter = new XenAdmin.Controls.FilterDatesToolStripDropDownButton();
-            this.toolStripDropDownSeveritiesFilter = new XenAdmin.Controls.FilterSeveritiesToolStripDropDownButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonExportAll = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonDismissAll = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSplitButtonDismiss = new System.Windows.Forms.ToolStripSplitButton();
+            this.tsmiDismissAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDismissSelected = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripLabelFiltersOnOff = new System.Windows.Forms.ToolStripLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
@@ -70,7 +73,6 @@ namespace XenAdmin.Dialogs
             this.toolStripButtonFix = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonHelp = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDismiss = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabelFiltersOnOff = new System.Windows.Forms.ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridViewAlerts)).BeginInit();
             this.ContextMenuAlertGridView.SuspendLayout();
@@ -108,8 +110,8 @@ namespace XenAdmin.Dialogs
             this.GridViewAlerts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnExpand,
             this.ColumnType,
-            this.ColumnAppliesTo,
             this.ColumnDetails,
+            this.ColumnAppliesTo,
             this.ColumnDate});
             this.GridViewAlerts.ContextMenuStrip = this.ContextMenuAlertGridView;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
@@ -158,24 +160,24 @@ namespace XenAdmin.Dialogs
             this.ColumnType.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ColumnType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // ColumnAppliesTo
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.ColumnAppliesTo.DefaultCellStyle = dataGridViewCellStyle4;
-            this.ColumnAppliesTo.FillWeight = 109.5524F;
-            resources.ApplyResources(this.ColumnAppliesTo, "ColumnAppliesTo");
-            this.ColumnAppliesTo.Name = "ColumnAppliesTo";
-            this.ColumnAppliesTo.ReadOnly = true;
-            // 
             // ColumnDetails
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ColumnDetails.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColumnDetails.DefaultCellStyle = dataGridViewCellStyle4;
             this.ColumnDetails.FillWeight = 380F;
             resources.ApplyResources(this.ColumnDetails, "ColumnDetails");
             this.ColumnDetails.Name = "ColumnDetails";
             this.ColumnDetails.ReadOnly = true;
+            // 
+            // ColumnAppliesTo
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.ColumnAppliesTo.DefaultCellStyle = dataGridViewCellStyle5;
+            this.ColumnAppliesTo.FillWeight = 109.5524F;
+            resources.ApplyResources(this.ColumnAppliesTo, "ColumnAppliesTo");
+            this.ColumnAppliesTo.Name = "ColumnAppliesTo";
+            this.ColumnAppliesTo.ReadOnly = true;
             // 
             // ColumnDate
             // 
@@ -251,18 +253,24 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.toolStrip1.ClickThrough = true;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripDropDownSeveritiesFilter,
             this.toolStripDropDownButtonServerFilter,
             this.toolStripDropDownButtonDateFilter,
-            this.toolStripDropDownSeveritiesFilter,
             this.toolStripSeparator3,
             this.toolStripButtonRefresh,
             this.toolStripSeparator1,
             this.toolStripButtonExportAll,
-            this.toolStripButtonDismissAll,
+            this.toolStripSplitButtonDismiss,
             this.toolStripLabelFiltersOnOff});
             this.toolStrip1.Name = "toolStrip1";
+            // 
+            // toolStripDropDownSeveritiesFilter
+            // 
+            resources.ApplyResources(this.toolStripDropDownSeveritiesFilter, "toolStripDropDownSeveritiesFilter");
+            this.toolStripDropDownSeveritiesFilter.Name = "toolStripDropDownSeveritiesFilter";
             // 
             // toolStripDropDownButtonServerFilter
             // 
@@ -276,11 +284,6 @@ namespace XenAdmin.Dialogs
             this.toolStripDropDownButtonDateFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.toolStripDropDownButtonDateFilter, "toolStripDropDownButtonDateFilter");
             this.toolStripDropDownButtonDateFilter.Name = "toolStripDropDownButtonDateFilter";
-            // 
-            // toolStripDropDownSeveritiesFilter
-            // 
-            resources.ApplyResources(this.toolStripDropDownSeveritiesFilter, "toolStripDropDownSeveritiesFilter");
-            this.toolStripDropDownSeveritiesFilter.Name = "toolStripDropDownSeveritiesFilter";
             // 
             // toolStripSeparator3
             // 
@@ -306,12 +309,33 @@ namespace XenAdmin.Dialogs
             this.toolStripButtonExportAll.Name = "toolStripButtonExportAll";
             this.toolStripButtonExportAll.Click += new System.EventHandler(this.toolStripButtonExportAll_Click);
             // 
-            // toolStripButtonDismissAll
+            // toolStripSplitButtonDismiss
             // 
-            this.toolStripButtonDismissAll.AutoToolTip = false;
-            resources.ApplyResources(this.toolStripButtonDismissAll, "toolStripButtonDismissAll");
-            this.toolStripButtonDismissAll.Name = "toolStripButtonDismissAll";
-            this.toolStripButtonDismissAll.Click += new System.EventHandler(this.DismissAllButton_Click);
+            this.toolStripSplitButtonDismiss.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripSplitButtonDismiss.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiDismissAll,
+            this.tsmiDismissSelected});
+            resources.ApplyResources(this.toolStripSplitButtonDismiss, "toolStripSplitButtonDismiss");
+            this.toolStripSplitButtonDismiss.Name = "toolStripSplitButtonDismiss";
+            this.toolStripSplitButtonDismiss.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripSplitButtonDismiss_DropDownItemClicked);
+            // 
+            // tsmiDismissAll
+            // 
+            this.tsmiDismissAll.Name = "tsmiDismissAll";
+            resources.ApplyResources(this.tsmiDismissAll, "tsmiDismissAll");
+            this.tsmiDismissAll.Click += new System.EventHandler(this.tsmiDismissAll_Click);
+            // 
+            // tsmiDismissSelected
+            // 
+            this.tsmiDismissSelected.Name = "tsmiDismissSelected";
+            resources.ApplyResources(this.tsmiDismissSelected, "tsmiDismissSelected");
+            this.tsmiDismissSelected.Click += new System.EventHandler(this.ButtonDismiss_Click);
+            // 
+            // toolStripLabelFiltersOnOff
+            // 
+            this.toolStripLabelFiltersOnOff.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            resources.ApplyResources(this.toolStripLabelFiltersOnOff, "toolStripLabelFiltersOnOff");
+            this.toolStripLabelFiltersOnOff.Name = "toolStripLabelFiltersOnOff";
             // 
             // panel1
             // 
@@ -369,12 +393,6 @@ namespace XenAdmin.Dialogs
             this.toolStripButtonDismiss.Name = "toolStripButtonDismiss";
             this.toolStripButtonDismiss.Click += new System.EventHandler(this.ButtonDismiss_Click);
             // 
-            // toolStripLabelFiltersOnOff
-            // 
-            this.toolStripLabelFiltersOnOff.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            resources.ApplyResources(this.toolStripLabelFiltersOnOff, "toolStripLabelFiltersOnOff");
-            this.toolStripLabelFiltersOnOff.Name = "toolStripLabelFiltersOnOff";
-            // 
             // AlertSummaryDialog
             // 
             this.AcceptButton = this.ButtonClose;
@@ -419,10 +437,9 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemHelp;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDismiss;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private XenAdmin.Controls.ToolStripEx toolStrip1;
         private System.Windows.Forms.Panel panel1;
         private XenAdmin.Controls.FilterDatesToolStripDropDownButton toolStripDropDownButtonDateFilter;
-        private System.Windows.Forms.ToolStripButton toolStripButtonDismissAll;
         private System.Windows.Forms.ToolStripButton toolStripButtonExportAll;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Panel panel2;
@@ -437,11 +454,14 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.ToolStripButton toolStripButtonRefresh;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private XenAdmin.Controls.FilterSeveritiesToolStripDropDownButton toolStripDropDownSeveritiesFilter;
+        private System.Windows.Forms.ToolStripLabel toolStripLabelFiltersOnOff;
         private System.Windows.Forms.DataGridViewImageColumn ColumnExpand;
         private System.Windows.Forms.DataGridViewImageColumn ColumnType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAppliesTo;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDetails;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAppliesTo;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
-        private System.Windows.Forms.ToolStripLabel toolStripLabelFiltersOnOff;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButtonDismiss;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDismissAll;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDismissSelected;
     }
 }

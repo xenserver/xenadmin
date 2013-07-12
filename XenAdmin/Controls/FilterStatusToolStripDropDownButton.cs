@@ -42,9 +42,12 @@ namespace XenAdmin.Controls
     {
         public event Action FilterChanged;
 
+        private bool internalUpdating;
+
         private ToolStripMenuItem toolStripMenuItemComplete;
         private ToolStripMenuItem toolStripMenuItemInProgress;
         private ToolStripMenuItem toolStripMenuItemError;
+        private ToolStripMenuItem toolStripMenuItemAll;
 
         public FilterStatusToolStripDropDownButton()
         {
@@ -66,12 +69,23 @@ namespace XenAdmin.Controls
                                              Checked = true,
                                              CheckOnClick = true
                                          };
+            toolStripMenuItemAll = new ToolStripMenuItem
+            {
+                Text = Messages.FILTER_SHOW_ALL,
+                Enabled = false
+            };
             DropDownItems.AddRange(new ToolStripItem[]
                                        {
                                            toolStripMenuItemComplete,
                                            toolStripMenuItemInProgress,
-                                           toolStripMenuItemError
+                                           toolStripMenuItemError,
+                                           new ToolStripSeparator(),
+                                           toolStripMenuItemAll
                                        });
+
+            toolStripMenuItemComplete.CheckedChanged += Item_CheckedChanged;
+            toolStripMenuItemInProgress.CheckedChanged += Item_CheckedChanged;
+            toolStripMenuItemError.CheckedChanged += Item_CheckedChanged;
         }
 
         public bool FilterIsOn
@@ -88,8 +102,25 @@ namespace XenAdmin.Controls
         {
             base.OnDropDownItemClicked(e);
 
+            if (e.ClickedItem == toolStripMenuItemAll)
+            {
+                internalUpdating = true;
+                toolStripMenuItemComplete.Checked = true;
+                toolStripMenuItemInProgress.Checked = true;
+                toolStripMenuItemError.Checked = true;
+                internalUpdating = false;
+
+                Item_CheckedChanged(null, null);
+            }
+
             if (FilterChanged != null)
                 FilterChanged();
+        }
+
+        private void Item_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!internalUpdating)
+                toolStripMenuItemAll.Enabled = FilterIsOn;
         }
     }
 }

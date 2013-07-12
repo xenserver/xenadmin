@@ -42,12 +42,15 @@ namespace XenAdmin.Controls
     {
         public event Action FilterChanged;
 
+        private bool internalUpdating;
+
         private ToolStripMenuItem toolStripMenuItem0;
         private ToolStripMenuItem toolStripMenuItem1;
         private ToolStripMenuItem toolStripMenuItem2;
         private ToolStripMenuItem toolStripMenuItem3;
         private ToolStripMenuItem toolStripMenuItem4;
         private ToolStripMenuItem toolStripMenuItem5;
+        private ToolStripMenuItem toolStripMenuItemAll;
 
         public FilterSeveritiesToolStripDropDownButton()
         {
@@ -55,7 +58,7 @@ namespace XenAdmin.Controls
                                      {
                                          Text = Messages.SEVERITY_FILTER_0,
                                          Checked = true,
-                                         CheckOnClick = true
+                                         CheckOnClick = true,
                                      };
             toolStripMenuItem1 = new ToolStripMenuItem
                                      {
@@ -92,6 +95,11 @@ namespace XenAdmin.Controls
                                          CheckOnClick = true,
                                          Image = Properties.Resources._000_Severity5_h32bit_16
                                      };
+            toolStripMenuItemAll = new ToolStripMenuItem
+                {
+                    Text = Messages.FILTER_SHOW_ALL,
+                    Enabled = false
+                };
             DropDownItems.AddRange(new ToolStripItem[]
                                        {
                                            toolStripMenuItem1,
@@ -99,8 +107,17 @@ namespace XenAdmin.Controls
                                            toolStripMenuItem3,
                                            toolStripMenuItem4,
                                            toolStripMenuItem5,
-                                           toolStripMenuItem0
+                                           toolStripMenuItem0,
+                                           new ToolStripSeparator(),
+                                           toolStripMenuItemAll
                                        });
+
+            toolStripMenuItem0.CheckedChanged += Item_CheckedChanged;
+            toolStripMenuItem1.CheckedChanged += Item_CheckedChanged;
+            toolStripMenuItem2.CheckedChanged += Item_CheckedChanged;
+            toolStripMenuItem3.CheckedChanged += Item_CheckedChanged;
+            toolStripMenuItem4.CheckedChanged += Item_CheckedChanged;
+            toolStripMenuItem5.CheckedChanged += Item_CheckedChanged;
         }
 
         public bool FilterIsOn
@@ -130,8 +147,28 @@ namespace XenAdmin.Controls
         {
             base.OnDropDownItemClicked(e);
 
+            if (e.ClickedItem == toolStripMenuItemAll)
+            {
+                internalUpdating = true;
+                toolStripMenuItem0.Checked = true;
+                toolStripMenuItem1.Checked = true;
+                toolStripMenuItem2.Checked = true;
+                toolStripMenuItem3.Checked = true;
+                toolStripMenuItem4.Checked = true;
+                toolStripMenuItem5.Checked = true;
+                internalUpdating = false;
+                
+                Item_CheckedChanged(null, null);
+            }
+
             if (FilterChanged != null)
                 FilterChanged();
+        }
+
+        private void Item_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!internalUpdating)
+                toolStripMenuItemAll.Enabled = FilterIsOn;
         }
     }
 }

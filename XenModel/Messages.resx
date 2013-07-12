@@ -3065,9 +3065,6 @@ Please reconnect the host and try again.</value>
   <data name="DATE_FILTER_LAST_7_DAYS" xml:space="preserve">
     <value>Last &amp;7 Days</value>
   </data>
-  <data name="DATE_FILTER_NONE" xml:space="preserve">
-    <value>&amp;No Filter</value>
-  </data>
   <data name="DEACTIVATE" xml:space="preserve">
     <value>Dea&amp;ctivate</value>
   </data>
@@ -4567,6 +4564,9 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="FILTERS_ON" xml:space="preserve">
     <value>Filters are ON</value>
+  </data>
+  <data name="FILTER_SHOW_ALL" xml:space="preserve">
+    <value>Show &amp;All</value>
   </data>
   <data name="FINISH" xml:space="preserve">
     <value>&amp;Finish</value>
@@ -9332,22 +9332,22 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
     <value>Severity</value>
   </data>
   <data name="SEVERITY_FILTER_0" xml:space="preserve">
-    <value>Unknown</value>
+    <value>&amp;Unknown</value>
   </data>
   <data name="SEVERITY_FILTER_1" xml:space="preserve">
-    <value>Data loss imminent</value>
+    <value>&amp;Critical</value>
   </data>
   <data name="SEVERITY_FILTER_2" xml:space="preserve">
-    <value>Service loss imminent</value>
+    <value>&amp;Major</value>
   </data>
   <data name="SEVERITY_FILTER_3" xml:space="preserve">
-    <value>Service degraded</value>
+    <value>&amp;Warning</value>
   </data>
   <data name="SEVERITY_FILTER_4" xml:space="preserve">
-    <value>Service recovered</value>
+    <value>Mi&amp;nor</value>
   </data>
   <data name="SEVERITY_FILTER_5" xml:space="preserve">
-    <value>Informational</value>
+    <value>&amp;Information</value>
   </data>
   <data name="SHADOW_MEMORY_MULTIPLIER" xml:space="preserve">
     <value>Shadow memory multiplier: {0}</value>

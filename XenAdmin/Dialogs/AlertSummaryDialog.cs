@@ -75,6 +75,8 @@ namespace XenAdmin.Dialogs
 
             toolStripDropDownButtonServerFilter.InitializeHostList();
             toolStripDropDownButtonServerFilter.BuildFilterList();
+            toolStripSplitButtonDismiss.DefaultItem = tsmiDismissAll;
+            toolStripSplitButtonDismiss.Text = tsmiDismissAll.Text;
         }
 
         void AlertSummaryDialog_Load(object sender, EventArgs e)
@@ -259,11 +261,7 @@ namespace XenAdmin.Dialogs
             appliesCell.Value = alert.AppliesTo;
             dateCell.Value = HelpersGUI.DateTimeToString(alert.Timestamp.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true);
 
-            newRow.Cells.Add(expanderCell);
-            newRow.Cells.Add(imageCell);
-            newRow.Cells.Add(appliesCell);
-            newRow.Cells.Add(detailCell);
-            newRow.Cells.Add(dateCell);
+            newRow.Cells.AddRange(expanderCell, imageCell, detailCell, appliesCell, dateCell);
 
             return newRow;
 
@@ -428,7 +426,7 @@ namespace XenAdmin.Dialogs
             DismissAlerts(selectedAlerts);
         }
 
-        private void DismissAllButton_Click(object sender, EventArgs e)
+        private void tsmiDismissAll_Click(object sender, EventArgs e)
         {
             DialogResult result;
             if (GridViewAlerts.Rows.Count == Alert.Alerts.Length) //no filter, only two buttons
@@ -461,10 +459,7 @@ namespace XenAdmin.Dialogs
                 //Dismiss All
                 dismissingAlerts.AddRange(Alert.Alerts);
             }
-            dismissingAlerts.RemoveAll(delegate(Alert a)
-            {
-                return !AllowedToDismiss(a.Connection);
-            });
+            dismissingAlerts.RemoveAll(a => !AllowedToDismiss(a.Connection));
             DismissAlerts(dismissingAlerts.ToArray());
         }
 
@@ -608,11 +603,23 @@ namespace XenAdmin.Dialogs
 
             toolStripButtonExportAll.Enabled = GridViewAlerts.Rows.Count > 0;
 
-            toolStripButtonDismissAll.Enabled = AllowedToDismissAtLeastOne();
-            // We use the nondismissing alert count here because we dont want to offer people the chance to dismiss alerts which are already being dismissed... they aren't even shown in the datagridview
-            toolStripButtonDismissAll.AutoToolTip = !toolStripButtonDismissAll.Enabled;
-            toolStripButtonDismissAll.ToolTipText = toolStripButtonDismissAll.Enabled ? string.Empty :
-                Alert.NonDismissingAlertCount > 0 ? Messages.DELETE_ANY_MESSAGE_RBAC_BLOCKED : Messages.NO_MESSAGES_TO_DISMISS;
+            // We use the nondismissing alert count here because we dont wan't to
+            // offer people the chance to dismiss alerts which are already being
+            // dismissed... they aren't even shown in the datagridview
+
+            tsmiDismissAll.Enabled = AllowedToDismissAtLeastOne();
+            tsmiDismissAll.AutoToolTip = !tsmiDismissAll.Enabled;
+            tsmiDismissAll.ToolTipText = tsmiDismissAll.Enabled
+                                                          ? string.Empty
+                                                          : Alert.NonDismissingAlertCount > 0
+                                                                ? Messages.DELETE_ANY_MESSAGE_RBAC_BLOCKED
+                                                                : Messages.NO_MESSAGES_TO_DISMISS;
+
+            tsmiDismissSelected.Enabled = AllowedToDismissSelected();
+            tsmiDismissSelected.AutoToolTip = !tsmiDismissSelected.Enabled;
+            tsmiDismissSelected.ToolTipText = tsmiDismissSelected.Enabled
+                                                  ? string.Empty
+                                                  : Messages.DELETE_MESSAGE_RBAC_BLOCKED;
         }
 
         /// <summary>
@@ -733,6 +740,8 @@ namespace XenAdmin.Dialogs
             });
         }
 
+        #region Top ToolStrip event handlers
+
         private void toolStripDropDownButtonDateFilter_FilterChanged()
         {
             Rebuild();
@@ -744,6 +753,11 @@ namespace XenAdmin.Dialogs
         }
 
          private void toolStripDropDownSeveritiesFilter_FilterChanged()
+         {
+             Rebuild();
+         }
+
+         private void toolStripButtonRefresh_Click(object sender, EventArgs e)
          {
              Rebuild();
          }
@@ -786,12 +800,10 @@ namespace XenAdmin.Dialogs
                 }).RunAsync();
         }
 
-        private string EscapeQuotes(string s)
+        private void toolStripSplitButtonDismiss_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            if (s == null)
-                return null;
-
-            return s.Replace("\"", "\"\"");
+            toolStripSplitButtonDismiss.DefaultItem = e.ClickedItem;
+            toolStripSplitButtonDismiss.Text = toolStripSplitButtonDismiss.DefaultItem.Text;
         }
 
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
@@ -844,10 +856,12 @@ namespace XenAdmin.Dialogs
                                  EscapeQuotes(date));
         }
 
-        private void toolStripButtonRefresh_Click(object sender, EventArgs e)
+        private string EscapeQuotes(string s)
         {
-            Rebuild();
+            return s == null ? null : s.Replace("\"", "\"\"");
         }
+
+        #endregion
 
         private void GridViewAlerts_KeyDown(object sender, KeyEventArgs e)
         {

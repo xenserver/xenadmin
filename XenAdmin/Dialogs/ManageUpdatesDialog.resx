@@ -121,42 +121,69 @@
   <data name="dataGridViewUpdates.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <metadata name="ColumnName.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ColumnExpander.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="ColumnName.HeaderText" xml:space="preserve">
-    <value>Name</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="dataGridViewCellStyle1.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
+        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///////////////////////////////////////////8bD
+        xgAAAAAAhIKE////////////////////////////////////////////xsPGAAAAAACEgoT/////////
+        ///////////////////////////////////Gw8YAAAAAAISChP//////////////////////////////
+        /////////////8bDxgAAAAAAhIKE////////////AAD/AAD/////////AAD/AAD/////////xsPGAAAA
+        AACEgoT///////////////8AAP8AAP8AAP8AAP/////////////Gw8YAAAAAAISChP//////////////
+        /////wAA/wAA/////////////////8bDxgAAAAAAhIKE////////////////AAD/AAD/AAD/AAD/////
+        ////////xsPGAAAAAACEgoT///////////8AAP8AAP////////8AAP8AAP/////////Gw8YAAAAAAISC
+        hP///////////////////////////////////////////8bDxgAAAAAAhIKE////////////////////
+        ////////////////////////xsPGAAAAAACEgoT/////////////////////////////////////////
+        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
+        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
+</value>
+  </data>
+  <data name="ColumnExpander.HeaderText" xml:space="preserve">
+    <value />
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ColumnName.MinimumWidth" type="System.Int32, mscorlib">
-    <value>70</value>
+  <data name="ColumnExpander.MinimumWidth" type="System.Int32, mscorlib">
+    <value>20</value>
   </data>
-  <data name="ColumnName.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+  <data name="ColumnExpander.Width" type="System.Int32, mscorlib">
+    <value>20</value>
   </data>
-  <metadata name="ColumnDescription.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ColumnMessage.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="ColumnDescription.HeaderText" xml:space="preserve">
-    <value>Description</value>
+  <data name="ColumnMessage.HeaderText" xml:space="preserve">
+    <value>Message</value>
   </data>
-  <data name="ColumnDescription.MinimumWidth" type="System.Int32, mscorlib">
-    <value>100</value>
+  <data name="ColumnMessage.MinimumWidth" type="System.Int32, mscorlib">
+    <value>70</value>
   </data>
-  <data name="ColumnDescription.Width" type="System.Int32, mscorlib">
-    <value>306</value>
+  <data name="ColumnMessage.Width" type="System.Int32, mscorlib">
+    <value>300</value>
+  </data>
+  <metadata name="ColumnAppliesTo.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnAppliesTo.HeaderText" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="ColumnAppliesTo.MinimumWidth" type="System.Int32, mscorlib">
+    <value>95</value>
   </data>
   <metadata name="ColumnReleaseDate.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="ColumnReleaseDate.HeaderText" xml:space="preserve">
-    <value>Released</value>
+    <value>Date</value>
   </data>
   <data name="ColumnReleaseDate.MinimumWidth" type="System.Int32, mscorlib">
     <value>80</value>
   </data>
   <data name="ColumnReleaseDate.Width" type="System.Int32, mscorlib">
-    <value>90</value>
+    <value>200</value>
   </data>
   <metadata name="ColumnWebPage.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -166,15 +193,6 @@
   </data>
   <data name="ColumnWebPage.MinimumWidth" type="System.Int32, mscorlib">
     <value>100</value>
-  </data>
-  <metadata name="ColumnAppliesTo.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnAppliesTo.HeaderText" xml:space="preserve">
-    <value>Applies To</value>
-  </data>
-  <data name="ColumnAppliesTo.MinimumWidth" type="System.Int32, mscorlib">
-    <value>95</value>
   </data>
   <data name="tableLayoutPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -188,7 +206,6 @@
   <data name="labelUpdates.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="labelUpdates.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
@@ -735,36 +752,6 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Check for Updates</value>
   </data>
-  <data name="&gt;&gt;ColumnName.Name" xml:space="preserve">
-    <value>ColumnName</value>
-  </data>
-  <data name="&gt;&gt;ColumnName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnDescription.Name" xml:space="preserve">
-    <value>ColumnDescription</value>
-  </data>
-  <data name="&gt;&gt;ColumnDescription.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnReleaseDate.Name" xml:space="preserve">
-    <value>ColumnReleaseDate</value>
-  </data>
-  <data name="&gt;&gt;ColumnReleaseDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnWebPage.Name" xml:space="preserve">
-    <value>ColumnWebPage</value>
-  </data>
-  <data name="&gt;&gt;ColumnWebPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewLinkColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnAppliesTo.Name" xml:space="preserve">
-    <value>ColumnAppliesTo</value>
-  </data>
-  <data name="&gt;&gt;ColumnAppliesTo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;refreshToolStripMenuItem.Name" xml:space="preserve">
     <value>refreshToolStripMenuItem</value>
   </data>
@@ -782,6 +769,36 @@
   </data>
   <data name="&gt;&gt;downloadAndInstallToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnExpander.Name" xml:space="preserve">
+    <value>ColumnExpander</value>
+  </data>
+  <data name="&gt;&gt;ColumnExpander.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnMessage.Name" xml:space="preserve">
+    <value>ColumnMessage</value>
+  </data>
+  <data name="&gt;&gt;ColumnMessage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnAppliesTo.Name" xml:space="preserve">
+    <value>ColumnAppliesTo</value>
+  </data>
+  <data name="&gt;&gt;ColumnAppliesTo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnReleaseDate.Name" xml:space="preserve">
+    <value>ColumnReleaseDate</value>
+  </data>
+  <data name="&gt;&gt;ColumnReleaseDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnWebPage.Name" xml:space="preserve">
+    <value>ColumnWebPage</value>
+  </data>
+  <data name="&gt;&gt;ColumnWebPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewLinkColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ManageUpdatesDialog</value>
