@@ -5,6 +5,7 @@ using XenAdmin.Controls;
 using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Core;
 using XenAdmin.Properties;
+using System.Linq;
 
 namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 {
@@ -47,7 +48,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         {
             PopulateGrid(false);
             PopulateGrid(true);
-            ExpandCollapseRow(0);
+
+            foreach (var row in dataGridViewSummary.Rows.OfType<LVMoHBASummaryHeaderGridViewRow>())
+            {
+                ExpandCollapseRow(row.Index);
+            }
         }
 
         #endregion
