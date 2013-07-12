@@ -195,34 +195,34 @@
   <data name="ColumnExpand.Width" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
-  <metadata name="ColumnType.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ColumnSeverity.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="ColumnType.HeaderText" xml:space="preserve">
+  <data name="ColumnSeverity.HeaderText" xml:space="preserve">
     <value />
   </data>
-  <data name="ColumnType.MinimumWidth" type="System.Int32, mscorlib">
+  <data name="ColumnSeverity.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="ColumnType.Width" type="System.Int32, mscorlib">
+  <data name="ColumnSeverity.Width" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <metadata name="ColumnDetails.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ColumnMessage.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="ColumnDetails.HeaderText" xml:space="preserve">
+  <data name="ColumnMessage.HeaderText" xml:space="preserve">
     <value>Message</value>
   </data>
-  <data name="ColumnDetails.MinimumWidth" type="System.Int32, mscorlib">
+  <data name="ColumnMessage.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <metadata name="ColumnAppliesTo.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ColumnLocation.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="ColumnAppliesTo.HeaderText" xml:space="preserve">
+  <data name="ColumnLocation.HeaderText" xml:space="preserve">
     <value>Location</value>
   </data>
-  <data name="ColumnAppliesTo.MinimumWidth" type="System.Int32, mscorlib">
+  <data name="ColumnLocation.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
   <metadata name="ColumnDate.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -729,36 +729,6 @@
   <data name="$this.Text" xml:space="preserve">
     <value>System Alerts</value>
   </data>
-  <data name="&gt;&gt;ColumnExpand.Name" xml:space="preserve">
-    <value>ColumnExpand</value>
-  </data>
-  <data name="&gt;&gt;ColumnExpand.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnType.Name" xml:space="preserve">
-    <value>ColumnType</value>
-  </data>
-  <data name="&gt;&gt;ColumnType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnDetails.Name" xml:space="preserve">
-    <value>ColumnDetails</value>
-  </data>
-  <data name="&gt;&gt;ColumnDetails.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnAppliesTo.Name" xml:space="preserve">
-    <value>ColumnAppliesTo</value>
-  </data>
-  <data name="&gt;&gt;ColumnAppliesTo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnDate.Name" xml:space="preserve">
-    <value>ColumnDate</value>
-  </data>
-  <data name="&gt;&gt;ColumnDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;ToolStripMenuItemFix.Name" xml:space="preserve">
     <value>ToolStripMenuItemFix</value>
   </data>
@@ -878,6 +848,36 @@
   </data>
   <data name="&gt;&gt;toolStripButtonDismiss.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnExpand.Name" xml:space="preserve">
+    <value>ColumnExpand</value>
+  </data>
+  <data name="&gt;&gt;ColumnExpand.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnSeverity.Name" xml:space="preserve">
+    <value>ColumnSeverity</value>
+  </data>
+  <data name="&gt;&gt;ColumnSeverity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnMessage.Name" xml:space="preserve">
+    <value>ColumnMessage</value>
+  </data>
+  <data name="&gt;&gt;ColumnMessage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnLocation.Name" xml:space="preserve">
+    <value>ColumnLocation</value>
+  </data>
+  <data name="&gt;&gt;ColumnLocation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnDate.Name" xml:space="preserve">
+    <value>ColumnDate</value>
+  </data>
+  <data name="&gt;&gt;ColumnDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AlertSummaryDialog</value>

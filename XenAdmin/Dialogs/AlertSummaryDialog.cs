@@ -133,7 +133,7 @@ namespace XenAdmin.Dialogs
                 Program.Invoke(this, SetFilterLabel);
                 
                 List<Alert> alerts = Alert.NonDismissingAlerts;
-                alerts.RemoveAll(filterAlert);
+                alerts.RemoveAll(FilterAlert);
                 
                 log.DebugFormat("Rebuilding alertList: there are {0} alerts in total. After filtering we have {1}",
                     Alert.AlertCount,
@@ -141,7 +141,7 @@ namespace XenAdmin.Dialogs
                 
                 if (GridViewAlerts.SortedColumn != null)
                 {
-                    if (GridViewAlerts.SortedColumn.Index == ColumnDetails.Index)
+                    if (GridViewAlerts.SortedColumn.Index == ColumnMessage.Index)
                     {
                         alerts.Sort(Alert.CompareOnTitle);
                     }
@@ -149,11 +149,11 @@ namespace XenAdmin.Dialogs
                     {
                         alerts.Sort(Alert.CompareOnDate);
                     }
-                    else if (GridViewAlerts.SortedColumn.Index == ColumnAppliesTo.Index)
+                    else if (GridViewAlerts.SortedColumn.Index == ColumnLocation.Index)
                     {
                         alerts.Sort(Alert.CompareOnAppliesTo);
                     }
-                    else if (GridViewAlerts.SortedColumn.Index == ColumnType.Index)
+                    else if (GridViewAlerts.SortedColumn.Index == ColumnSeverity.Index)
                     {
                         alerts.Sort(Alert.CompareOnPriority);
                     }
@@ -271,7 +271,7 @@ namespace XenAdmin.Dialogs
         /// Runs all the current filters on the alert to determine if it should be shown in the list or not.
         /// </summary>
         /// <param name="alert"></param>
-        private bool filterAlert(Alert alert)
+        private bool FilterAlert(Alert alert)
         {
             bool hide = false;
             Program.Invoke(this, () =>
@@ -338,13 +338,13 @@ namespace XenAdmin.Dialogs
             if (expandedState.ContainsKey(alert.uuid))
             {
                 expandedState.Remove(alert.uuid);
-                GridViewAlerts.Rows[RowIndex].Cells[ColumnDetails.Index].Value = alert.Title;
+                GridViewAlerts.Rows[RowIndex].Cells[ColumnMessage.Index].Value = alert.Title;
                 GridViewAlerts.Rows[RowIndex].Cells[ColumnExpand.Index].Value = Properties.Resources.contracted_triangle;
             }
             else
             {
                 expandedState.Add(alert.uuid, true);
-                GridViewAlerts.Rows[RowIndex].Cells[ColumnDetails.Index].Value
+                GridViewAlerts.Rows[RowIndex].Cells[ColumnMessage.Index].Value
                     = String.Format("{0}\n\n{1}", alert.Title, alert.Description);
                 GridViewAlerts.Rows[RowIndex].Cells[ColumnExpand.Index].Value = Properties.Resources.expanded_triangle;
             }
@@ -365,7 +365,7 @@ namespace XenAdmin.Dialogs
                 e.SortResult = (GridViewAlerts.SortOrder == SortOrder.Descending) ? SortResult *= -1 : SortResult;
                 e.Handled = true;
             }
-            else if (e.Column.Index == ColumnType.Index)
+            else if (e.Column.Index == ColumnSeverity.Index)
             {
                 e.SortResult = Alert.CompareOnPriority(alert1, alert2);
                 e.Handled = true;
@@ -785,7 +785,7 @@ namespace XenAdmin.Dialogs
                     StreamWriter stream = new StreamWriter(dialog.FileName, false, UTF8Encoding.UTF8);
                     try
                     {
-                        stream.WriteLine("{0},{1},{2},{3},{4}", Messages.TITLE, 
+                        stream.WriteLine("{0},{1},{2},{3},{4}", Messages.TITLE,
                             Messages.SEVERITY, Messages.DESCRIPTION, Messages.APPLIES_TO, Messages.TIMESTAMP);
                         foreach (Alert a in Alert.Alerts)
                         {
@@ -808,22 +808,20 @@ namespace XenAdmin.Dialogs
 
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // We should only be here if one item is selected, we dont do multi-fix
+            // We should only be here if one item is selected, we don't do multi-fix
             if (GridViewAlerts.SelectedRows.Count == 0)
             {
                 log.ErrorFormat("Attempted to copy alert with no alert selected.");
                 return;
             }
 
-
-            Alert alert;
             StringBuilder sb = new StringBuilder();
             foreach (DataGridViewRow r in GridViewAlerts.SelectedRows)
             {
-                alert = (Alert)r.Tag;
+                Alert alert = (Alert)r.Tag;
                 sb.AppendLine(GetAlertDetailsCSVQuotes(alert));
             }
-            string text = sb.ToString().Trim();
+
             try
             {
                 Clipboard.SetText(sb.ToString());

@@ -43,7 +43,6 @@
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.labelUpdates = new System.Windows.Forms.Label();
             this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.helpButton = new XenAdmin.Controls.HelpButton();
             this.panelProgress = new XenAdmin.Controls.FlickerFreePanel();
             this.labelProgress = new System.Windows.Forms.Label();
             this.pictureBoxProgress = new System.Windows.Forms.PictureBox();
@@ -52,16 +51,15 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.informationLabelIcon = new System.Windows.Forms.PictureBox();
             this.informationLabel = new System.Windows.Forms.LinkLabel();
-            this.ColumnExpander = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ColumnExpand = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnAppliesTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnReleaseDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnWebPage = new System.Windows.Forms.DataGridViewLinkColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUpdates)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.helpButton)).BeginInit();
             this.panelProgress.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProgress)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -76,12 +74,12 @@
             this.dataGridViewUpdates.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dataGridViewUpdates.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridViewUpdates.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnExpander,
+            this.ColumnExpand,
             this.ColumnMessage,
-            this.ColumnAppliesTo,
-            this.ColumnReleaseDate,
+            this.ColumnLocation,
+            this.ColumnDate,
             this.ColumnWebPage});
-            this.tableLayoutPanel.SetColumnSpan(this.dataGridViewUpdates, 3);
+            this.tableLayoutPanel.SetColumnSpan(this.dataGridViewUpdates, 2);
             this.dataGridViewUpdates.ContextMenuStrip = this.contextMenuStrip;
             this.dataGridViewUpdates.Name = "dataGridViewUpdates";
             this.dataGridViewUpdates.ReadOnly = true;
@@ -132,7 +130,6 @@
             resources.ApplyResources(this.tableLayoutPanel, "tableLayoutPanel");
             this.tableLayoutPanel.Controls.Add(this.labelUpdates, 1, 0);
             this.tableLayoutPanel.Controls.Add(this.pictureBox, 0, 0);
-            this.tableLayoutPanel.Controls.Add(this.helpButton, 2, 0);
             this.tableLayoutPanel.Controls.Add(this.dataGridViewUpdates, 1, 1);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             // 
@@ -147,13 +144,6 @@
             this.pictureBox.Image = global::XenAdmin.Properties.Resources._015_Download_h32bit_32;
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.TabStop = false;
-            // 
-            // helpButton
-            // 
-            resources.ApplyResources(this.helpButton, "helpButton");
-            this.helpButton.Name = "helpButton";
-            this.helpButton.TabStop = false;
-            this.helpButton.Click += new System.EventHandler(this.helpButton_Click);
             // 
             // panelProgress
             // 
@@ -211,16 +201,16 @@
             this.informationLabel.Name = "informationLabel";
             this.informationLabel.TabStop = true;
             // 
-            // ColumnExpander
+            // ColumnExpand
             // 
-            this.ColumnExpander.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ColumnExpand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
             dataGridViewCellStyle1.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle1.NullValue")));
             dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.ColumnExpander.DefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(this.ColumnExpander, "ColumnExpander");
-            this.ColumnExpander.Name = "ColumnExpander";
-            this.ColumnExpander.ReadOnly = true;
+            this.ColumnExpand.DefaultCellStyle = dataGridViewCellStyle1;
+            resources.ApplyResources(this.ColumnExpand, "ColumnExpand");
+            this.ColumnExpand.Name = "ColumnExpand";
+            this.ColumnExpand.ReadOnly = true;
             // 
             // ColumnMessage
             // 
@@ -233,26 +223,26 @@
             this.ColumnMessage.Name = "ColumnMessage";
             this.ColumnMessage.ReadOnly = true;
             // 
-            // ColumnAppliesTo
+            // ColumnLocation
             // 
-            this.ColumnAppliesTo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.ColumnAppliesTo.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ColumnAppliesTo.FillWeight = 20F;
-            resources.ApplyResources(this.ColumnAppliesTo, "ColumnAppliesTo");
-            this.ColumnAppliesTo.Name = "ColumnAppliesTo";
-            this.ColumnAppliesTo.ReadOnly = true;
-            this.ColumnAppliesTo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColumnLocation.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ColumnLocation.FillWeight = 20F;
+            resources.ApplyResources(this.ColumnLocation, "ColumnLocation");
+            this.ColumnLocation.Name = "ColumnLocation";
+            this.ColumnLocation.ReadOnly = true;
+            this.ColumnLocation.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // ColumnReleaseDate
+            // ColumnDate
             // 
-            this.ColumnReleaseDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ColumnDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.ColumnReleaseDate.DefaultCellStyle = dataGridViewCellStyle4;
-            this.ColumnReleaseDate.FillWeight = 20F;
-            resources.ApplyResources(this.ColumnReleaseDate, "ColumnReleaseDate");
-            this.ColumnReleaseDate.Name = "ColumnReleaseDate";
-            this.ColumnReleaseDate.ReadOnly = true;
+            this.ColumnDate.DefaultCellStyle = dataGridViewCellStyle4;
+            this.ColumnDate.FillWeight = 20F;
+            resources.ApplyResources(this.ColumnDate, "ColumnDate");
+            this.ColumnDate.Name = "ColumnDate";
+            this.ColumnDate.ReadOnly = true;
             // 
             // ColumnWebPage
             // 
@@ -277,8 +267,6 @@
             this.Controls.Add(this.downloadAndInstallButton);
             this.Controls.Add(this.refreshButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
-            this.MaximizeBox = true;
-            this.MinimizeBox = true;
             this.Name = "ManageUpdatesDialog";
             this.Shown += new System.EventHandler(this.ManageUpdatesDialog_Shown);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ManageUpdatesDialog_FormClosing);
@@ -287,7 +275,6 @@
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.helpButton)).EndInit();
             this.panelProgress.ResumeLayout(false);
             this.panelProgress.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProgress)).EndInit();
@@ -314,14 +301,13 @@
         private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator separatorToolStripMenuItem;
         private System.Windows.Forms.Button downloadAndInstallButton;
-        private XenAdmin.Controls.HelpButton helpButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.PictureBox informationLabelIcon;
         private System.Windows.Forms.LinkLabel informationLabel;
-        private System.Windows.Forms.DataGridViewImageColumn ColumnExpander;
+        private System.Windows.Forms.DataGridViewImageColumn ColumnExpand;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnMessage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAppliesTo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnReleaseDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
         private System.Windows.Forms.DataGridViewLinkColumn ColumnWebPage;
     }
 }

@@ -265,7 +265,7 @@ namespace XenAdmin.Dialogs
                 }
 
                 if (sortedColumn == null)
-                    dataGridViewUpdates.Sort(ColumnReleaseDate, ListSortDirection.Descending);
+                    dataGridViewUpdates.Sort(ColumnDate, ListSortDirection.Descending);
                 else
                     dataGridViewUpdates.Sort(sortedColumn, sortDirection);
 
@@ -400,7 +400,7 @@ namespace XenAdmin.Dialogs
                 e.SortResult = Alert.CompareOnTitle(alert1, alert2);
                 e.Handled = true;
             }
-            else if (e.Column.Index == ColumnReleaseDate.Index)
+            else if (e.Column.Index == ColumnDate.Index)
             {
                 e.SortResult = Alert.CompareOnDate(alert1, alert2);
                 e.Handled = true;
@@ -410,7 +410,7 @@ namespace XenAdmin.Dialogs
                 e.SortResult = Alert.CompareOnWebPage(alert1, alert2);
                 e.Handled = true;
             }
-            else if (e.Column.Index == ColumnAppliesTo.Index)
+            else if (e.Column.Index == ColumnLocation.Index)
             {
                 e.SortResult = Alert.CompareOnAppliesTo(alert1, alert2);
                 e.Handled = true;
@@ -524,7 +524,7 @@ namespace XenAdmin.Dialogs
                 else
                 {
                     string disconnectedServerNames =
-                        dataGridViewUpdates.SelectedRows[0].Cells[ColumnAppliesTo.Index].Value.ToString();
+                        dataGridViewUpdates.SelectedRows[0].Cells[ColumnLocation.Index].Value.ToString();
 
                     new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(SystemIcons.Warning,
@@ -584,11 +584,6 @@ namespace XenAdmin.Dialogs
             DownloadAndInstall();
         }
 
-        private void helpButton_Click(object sender, EventArgs e)
-        {
-            Help.HelpManager.Launch(HelpName);
-        }
-
         private void dataGridViewUpdates_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == ColumnWebPage.Index)
@@ -598,7 +593,7 @@ namespace XenAdmin.Dialogs
         private void dataGridViewUpdates_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // If you click on the headers you can get -1 as the index.
-            if (e.ColumnIndex < 0 || e.RowIndex < 0 || e.ColumnIndex != ColumnExpander.Index)
+            if (e.ColumnIndex < 0 || e.RowIndex < 0 || e.ColumnIndex != ColumnExpand.Index)
                 return;
 
             toggleExpandedState(e.RowIndex);
@@ -658,14 +653,14 @@ namespace XenAdmin.Dialogs
             {
                 expandedState.Remove(alert.uuid);
                 dataGridViewUpdates.Rows[RowIndex].Cells[ColumnMessage.Index].Value = alert.Title;
-                dataGridViewUpdates.Rows[RowIndex].Cells[ColumnExpander.Index].Value = Properties.Resources.contracted_triangle;
+                dataGridViewUpdates.Rows[RowIndex].Cells[ColumnExpand.Index].Value = Properties.Resources.contracted_triangle;
             }
             else
             {
                 expandedState.Add(alert.uuid, true);
                 dataGridViewUpdates.Rows[RowIndex].Cells[ColumnMessage.Index].Value
                     = String.Format("{0}\n\n{1}", alert.Title, alert.Description);
-                dataGridViewUpdates.Rows[RowIndex].Cells[ColumnExpander.Index].Value = Properties.Resources.expanded_triangle;
+                dataGridViewUpdates.Rows[RowIndex].Cells[ColumnExpand.Index].Value = Properties.Resources.expanded_triangle;
             }
         }
     }
