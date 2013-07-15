@@ -33,10 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Windows.Forms;
 
 using XenAdmin.Controls;
@@ -44,11 +41,8 @@ using XenAdmin.Core;
 using XenAdmin.Actions;
 
 using XenAPI;
-using System.Drawing.Text;
 using XenAdmin.Dialogs;
-using XenAdmin.Network.StorageLink;
 using XenAdmin.Commands;
-
 
 namespace XenAdmin.TabPages
 {
@@ -80,7 +74,6 @@ namespace XenAdmin.TabPages
             base.Text = Messages.VIRTUAL_DISKS;
 
             Properties.Settings.Default.PropertyChanged += Default_PropertyChanged;
-
         }
 
         private void SetupDeprecationBanner()
@@ -136,39 +129,41 @@ namespace XenAdmin.TabPages
 
         private void BuildList()
         {
-            //Save the selection
-            DataGridViewSelectedRowCollection selectedItems = dataGridViewVDIs.SelectedRows;
-            int firstrowDisplayed = dataGridViewVDIs.FirstDisplayedScrollingRowIndex;
             dataGridViewVDIs.SuspendLayout();
-
             try
             {
-                dataGridViewVDIs.Rows.Clear();
-
                 if (sr == null)
                     return;
 
-                List<VDI> vdis = sr.Connection.ResolveAll(sr.VDIs);
+                List<VDI> vdis =
+                    sr.Connection.ResolveAll(sr.VDIs).Where(
+                        vdi =>
+                        vdi.Show(Properties.Settings.Default.ShowHiddenVMs && !vdi.IsAnIntermediateStorageMotionSnapshot))
+                        .ToList();
+
+                List<VDIRow> vdisToRemove =
+                    dataGridViewVDIs.Rows.OfType<VDIRow>().Where(vdiRow => !vdis.Contains(vdiRow.VDI)).OrderByDescending(row => row.Index).ToList();
+
+                foreach (var vdiRow in vdisToRemove)
+                {
+                    dataGridViewVDIs.Rows.RemoveAt(vdiRow.Index);
+                }
 
                 storageLinkVolumeColumn.Visible = vdis.Find(v => v.sm_config.ContainsKey("SVID")) != null;
 
                 foreach (VDI vdi in vdis)
                 {
-                    if (!vdi.Show(Properties.Settings.Default.ShowHiddenVMs))
+                    VDI vdi1 = vdi;
+                    VDIRow vdiRow = dataGridViewVDIs.Rows.OfType<VDIRow>().FirstOrDefault(row => row.VDI.Equals(vdi1));
+                    if (vdiRow != null)
+                    {
+                        vdiRow.UpdateRowDetails(vdi, storageLinkVolumeColumn.Visible);
                         continue;
-
-                    if (vdi.IsAnIntermediateStorageMotionSnapshot)
-                        continue;
+                    }
 
                     VDIRow newRow = new VDIRow(vdi, storageLinkVolumeColumn.Visible);
                     dataGridViewVDIs.Rows.Add(newRow);
                 }
-                IEnumerable<VDI> selectedVDIs = from VDIRow row in selectedItems select row.VDI;
-                foreach (VDIRow row in dataGridViewVDIs.Rows)
-                {
-                    row.Selected = selectedVDIs.Contains(row.VDI);
-                }
-
             }
             finally
             {
@@ -178,8 +173,7 @@ namespace XenAdmin.TabPages
 
                 dataGridViewVDIs.ResumeLayout();
             }
-            if (dataGridViewVDIs.Rows.Count > 0)
-                dataGridViewVDIs.FirstDisplayedScrollingRowIndex = (firstrowDisplayed < 0 || firstrowDisplayed >= dataGridViewVDIs.Rows.Count) ? 0 : firstrowDisplayed;
+            
             RefreshButtons();
         }
 
@@ -191,7 +185,8 @@ namespace XenAdmin.TabPages
                 foreach (DataGridViewRow r in dataGridViewVDIs.SelectedRows)
                 {
                     VDIRow row = r as VDIRow;
-                    vdis.Add(new SelectedItem(row.VDI));
+                    if (row != null)
+                        vdis.Add(new SelectedItem(row.VDI));
                 }
                 return new SelectedItemCollection(vdis);
             }
@@ -492,7 +487,7 @@ namespace XenAdmin.TabPages
 
         public class VDIRow : DataGridViewRow
         {
-            public VDI VDI;
+            public VDI VDI { get; private set; }
 
             private bool showStorageLink = false;
 
@@ -533,6 +528,17 @@ namespace XenAdmin.TabPages
                         return VDI.VMsOfVDI;
                     default:
                         return "";
+                }
+            }
+
+            public void UpdateRowDetails(VDI vdi, bool showSL)
+            {
+                VDI = vdi;
+                showStorageLink = showSL;
+
+                for (int i = 0; i < 5; i++)
+                {
+                    Cells[i].Value = GetCellText(i);
                 }
             }
         }
