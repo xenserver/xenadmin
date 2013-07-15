@@ -79,7 +79,7 @@ namespace XenAdmin.Dialogs
             toolStripSplitButtonDismiss.Text = tsmiDismissAll.Text;
         }
 
-        void AlertSummaryDialog_Load(object sender, EventArgs e)
+        private void AlertSummaryDialog_Load(object sender, EventArgs e)
         {
             Rebuild();
         }
@@ -309,7 +309,7 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private void AlertsGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void GridViewAlerts_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // If you click on the headers you can get -1 as the index.
             if (e.ColumnIndex < 0 || e.RowIndex < 0 || e.ColumnIndex != ColumnExpand.Index)
@@ -318,7 +318,7 @@ namespace XenAdmin.Dialogs
             toggleExpandedState(e.RowIndex);
         }
 
-        private void AlertsGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void GridViewAlerts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             // If you click on the headers you can get -1 as the index.
             if (e.ColumnIndex < 0 || e.RowIndex < 0)
@@ -326,28 +326,53 @@ namespace XenAdmin.Dialogs
             toggleExpandedState(e.RowIndex);
         }
 
-        /// <summary>
-        /// Toggles the row specified between the expanded and contracted state
-        /// </summary>
-        /// <param name="alert"></param>
-        /// <param name="RowIndex"></param>
-        private void toggleExpandedState(int RowIndex)
+        private void GridViewAlerts_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Right) // expand all selected rows
+            {
+                foreach (DataGridViewBand row in GridViewAlerts.SelectedRows)
+                {
+                    Alert alert = (Alert)GridViewAlerts.Rows[row.Index].Tag;
+                    if (!expandedState.ContainsKey(alert.uuid))
+                    {
+                        toggleExpandedState(row.Index);
+                    }
+                }
+            }
+            else if (e.KeyCode == Keys.Left) // collapse all selected rows
+            {
+                foreach (DataGridViewBand row in GridViewAlerts.SelectedRows)
+                {
+                    Alert alert = (Alert)GridViewAlerts.Rows[row.Index].Tag;
+                    if (expandedState.ContainsKey(alert.uuid))
+                    {
+                        toggleExpandedState(row.Index);
+                    }
+                }
+            }
+            else if (e.KeyCode == Keys.Enter) // toggle expanded state for all selected rows
+            {
+                foreach (DataGridViewBand row in GridViewAlerts.SelectedRows)
+                {
+                    toggleExpandedState(row.Index);
+                }
+            }
+        }
 
-            Alert alert = (Alert)GridViewAlerts.Rows[RowIndex].Tag;
-            if (expandedState.ContainsKey(alert.uuid))
+        private void GridViewAlerts_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (GridViewAlerts.Columns[e.ColumnIndex].SortMode == DataGridViewColumnSortMode.Automatic)
             {
-                expandedState.Remove(alert.uuid);
-                GridViewAlerts.Rows[RowIndex].Cells[ColumnMessage.Index].Value = alert.Title;
-                GridViewAlerts.Rows[RowIndex].Cells[ColumnExpand.Index].Value = Properties.Resources.contracted_triangle;
+                Rebuild();
             }
-            else
-            {
-                expandedState.Add(alert.uuid, true);
-                GridViewAlerts.Rows[RowIndex].Cells[ColumnMessage.Index].Value
-                    = String.Format("{0}\n\n{1}", alert.Title, alert.Description);
-                GridViewAlerts.Rows[RowIndex].Cells[ColumnExpand.Index].Value = Properties.Resources.expanded_triangle;
-            }
+        }
+
+        private void GridViewAlerts_SelectionChanged(object sender, EventArgs e)
+        {
+            // stop the buttons getting enabled/disabled during refresh, the rebuild will set them once it's finished
+            if (inAlertBuild)
+                return;
+            UpdateActionEnablement();
         }
 
         /// <summary>
@@ -355,7 +380,7 @@ namespace XenAdmin.Dialogs
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AlertsGridView_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
+        private void GridViewAlerts_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
             Alert alert1 = (Alert)GridViewAlerts.Rows[e.RowIndex1].Tag;
             Alert alert2 = (Alert)GridViewAlerts.Rows[e.RowIndex2].Tag;
@@ -369,6 +394,30 @@ namespace XenAdmin.Dialogs
             {
                 e.SortResult = Alert.CompareOnPriority(alert1, alert2);
                 e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// Toggles the row specified between the expanded and contracted state
+        /// </summary>
+        /// <param name="alert"></param>
+        /// <param name="RowIndex"></param>
+        private void toggleExpandedState(int RowIndex)
+        {
+            Alert alert = (Alert)GridViewAlerts.Rows[RowIndex].Tag;
+
+            if (expandedState.ContainsKey(alert.uuid))
+            {
+                expandedState.Remove(alert.uuid);
+                GridViewAlerts.Rows[RowIndex].Cells[ColumnMessage.Index].Value = alert.Title;
+                GridViewAlerts.Rows[RowIndex].Cells[ColumnExpand.Index].Value = Properties.Resources.contracted_triangle;
+            }
+            else
+            {
+                expandedState.Add(alert.uuid, true);
+                GridViewAlerts.Rows[RowIndex].Cells[ColumnMessage.Index].Value
+                    = String.Format("{0}\n\n{1}", alert.Title, alert.Description);
+                GridViewAlerts.Rows[RowIndex].Cells[ColumnExpand.Index].Value = Properties.Resources.expanded_triangle;
             }
         }
 
@@ -540,67 +589,8 @@ namespace XenAdmin.Dialogs
             base.OnFormClosing(e);
         }
 
-        private void AlertsGridView_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (GridViewAlerts.Columns[e.ColumnIndex].SortMode == DataGridViewColumnSortMode.Automatic)
-            {
-                Rebuild();
-            }
-        }
-
-        private void GridViewAlerts_SelectionChanged(object sender, EventArgs e)
-        {
-            // stop the buttons getting enabled/disabled during refresh, the rebuild will set them once it's finished
-            if (inAlertBuild)
-                return;
-            UpdateActionEnablement();
-        }
-
         private void UpdateActionEnablement()
         {
-            if (GridViewAlerts.SelectedRows.Count == 0)
-            {
-                toolStripButtonFix.Visible = toolStripButtonHelp.Visible = false;
-                toolStripButtonDismiss.Visible = true;
-                toolStripButtonDismiss.Enabled = false;
-            }
-            else if (GridViewAlerts.SelectedRows.Count > 1)
-            {
-                toolStripButtonDismiss.Visible = true;
-                // the only multiselect action we support is a dismiss
-                toolStripButtonDismiss.Enabled = AllowedToDismissSelected();
-                toolStripButtonDismiss.AutoToolTip = !toolStripButtonDismiss.Enabled;
-                toolStripButtonDismiss.ToolTipText = toolStripButtonDismiss.Enabled ? string.Empty : Messages.DELETE_MESSAGE_RBAC_BLOCKED;
-                toolStripButtonFix.Visible = toolStripButtonHelp.Visible = false;
-            }
-            else
-            {
-                toolStripButtonDismiss.Visible = true;
-                toolStripButtonDismiss.Enabled = AllowedToDismissSelected();
-                toolStripButtonDismiss.AutoToolTip = !toolStripButtonDismiss.Enabled;
-                toolStripButtonDismiss.ToolTipText = toolStripButtonDismiss.Enabled ? string.Empty : Messages.DELETE_MESSAGE_RBAC_BLOCKED;
-                Alert alert = (Alert)GridViewAlerts.SelectedRows[0].Tag;
-                if (!string.IsNullOrEmpty(alert.HelpID))
-                {
-                    toolStripButtonHelp.Visible = true;
-                    toolStripButtonHelp.Text = alert.HelpLinkText;
-                }
-                else
-                {
-                    toolStripButtonHelp.Visible = false;
-                }
-
-                if (string.IsNullOrEmpty(alert.FixLinkText) || alert.FixLinkAction == null)
-                {
-                    toolStripButtonFix.Visible = false;
-                }
-                else
-                {
-                    toolStripButtonFix.Visible = true;
-                    toolStripButtonFix.Text = alert.FixLinkText;
-                }
-            }
-
             toolStripButtonExportAll.Enabled = GridViewAlerts.Rows.Count > 0;
 
             // We use the nondismissing alert count here because we dont wan't to
@@ -716,27 +706,31 @@ namespace XenAdmin.Dialogs
             {
                 UpdateActionEnablement();
                 ContextMenuAlertGridView.Items.Clear();
-                if (toolStripButtonFix.Visible)
+                
+                if (GridViewAlerts.SelectedRows.Count != 1)
+                    return;
+
+                Alert alert = GridViewAlerts.SelectedRows[0].Tag as Alert;
+                if (alert == null)
+                    return;
+
+                if (!string.IsNullOrEmpty(alert.FixLinkText) && alert.FixLinkAction != null)
                 {
                     ContextMenuAlertGridView.Items.Add(ToolStripMenuItemFix);
-                    ToolStripMenuItemFix.Text = toolStripButtonFix.Text;
+                    ToolStripMenuItemFix.Text = alert.FixLinkText;
                 }
-                if (ToolStripMenuItemHelp.Visible)
+                if (!string.IsNullOrEmpty(alert.HelpID))
                 {
                     ContextMenuAlertGridView.Items.Add(ToolStripMenuItemHelp);
-                    ToolStripMenuItemHelp.Text = toolStripButtonHelp.Text;
+                    ToolStripMenuItemHelp.Text = alert.HelpLinkText;
                 }
-                if (toolStripButtonDismiss.Visible)
-                {
+                if (AllowedToDismissSelected())
                     ContextMenuAlertGridView.Items.Add(ToolStripMenuItemDismiss);
-                    ToolStripMenuItemDismiss.Enabled = toolStripButtonDismiss.Enabled;
-                    ToolStripMenuItemDismiss.ToolTipText = toolStripButtonDismiss.ToolTipText;
-                }
+
                 if (ContextMenuAlertGridView.Items.Count > 0)
                     ContextMenuAlertGridView.Items.Add(toolStripSeparator2);
 
                 ContextMenuAlertGridView.Items.Add(copyToolStripMenuItem);
-
             });
         }
 
@@ -752,15 +746,15 @@ namespace XenAdmin.Dialogs
             Rebuild();
         }
 
-         private void toolStripDropDownSeveritiesFilter_FilterChanged()
-         {
-             Rebuild();
-         }
+        private void toolStripDropDownSeveritiesFilter_FilterChanged()
+        {
+            Rebuild();
+        }
 
-         private void toolStripButtonRefresh_Click(object sender, EventArgs e)
-         {
-             Rebuild();
-         }
+        private void toolStripButtonRefresh_Click(object sender, EventArgs e)
+        {
+            Rebuild();
+        }
 
         private void toolStripButtonExportAll_Click(object sender, EventArgs e)
         {
@@ -859,39 +853,6 @@ namespace XenAdmin.Dialogs
             return s == null ? null : s.Replace("\"", "\"\"");
         }
 
-        #endregion
-
-        private void GridViewAlerts_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Right) // expand all selected rows
-            {
-                foreach (DataGridViewBand row in GridViewAlerts.SelectedRows)
-                {
-                    Alert alert = (Alert)GridViewAlerts.Rows[row.Index].Tag;
-                    if (!expandedState.ContainsKey(alert.uuid))
-                    {
-                        toggleExpandedState(row.Index);
-                    }
-                }
-            }
-            else if (e.KeyCode == Keys.Left) // collapse all selected rows
-            {
-                foreach (DataGridViewBand row in GridViewAlerts.SelectedRows)
-                {
-                    Alert alert = (Alert)GridViewAlerts.Rows[row.Index].Tag;
-                    if (expandedState.ContainsKey(alert.uuid))
-                    {
-                        toggleExpandedState(row.Index);
-                    }
-                }
-            }
-            else if (e.KeyCode == Keys.Enter) // toggle expanded state for all selected rows
-            {   
-                foreach (DataGridViewBand row in GridViewAlerts.SelectedRows)
-                {
-                    toggleExpandedState(row.Index);
-                }
-            }
-        }
+        #endregion 
     }
 }
