@@ -65,6 +65,7 @@ namespace XenAdmin.Dialogs
             checkableDataGridView.SelectionChanged += checkableDataGridView_SelectionChanged;
             checkableDataGridView.RowUpdated += checkableDataGridView_RowUpdated;
             checkableDataGridView.RowChecked += checkableDataGridView_RowChecked;
+            checkableDataGridView.RefreshAll += checkableDataGridView_RefreshAll;
             
             //Buttons
             activateFreeXenServerButton.Click += activateFreeXenServerButton_Click;
@@ -158,6 +159,11 @@ namespace XenAdmin.Dialogs
         public void RefreshView(List<IXenObject> itemsToShow, List<IXenObject> selectedItems)
         {
             Controller.Repopulate(itemsToShow, selectedItems);
+        }
+
+        void checkableDataGridView_RefreshAll(object sender, EventArgs eventArgs)
+        {
+            Program.Invoke(this, Controller.Repopulate);
         }
 
         #region ISummaryPanelView Members

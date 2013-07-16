@@ -36,6 +36,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Linq;
+using XenAdmin.Core;
 using XenAPI;
 
 namespace XenAdmin.Dialogs
@@ -60,12 +61,17 @@ namespace XenAdmin.Dialogs
             Hosts = hosts;
         }
 
-        private bool CanActivate(Host host)
+        public static bool CanActivate(Host host)
         {
             //This check used to be "_expiresText != Messages.LICENSE_NEVER" but I've swapped it for
             //"!host.isOEM" according to the ticket CA-37336 where this 3rd part of the check was added
             //OEM licenses (< XS ver 5.5) have perpetual (2036) expiry dates
-            return host.IsFreeLicense() && host.IsFloodgateOrLater() && !host.isOEM;
+            return host.IsFreeLicense() && host.IsFloodgateOrLater() && !host.isOEM && !Helpers.ClearwaterOrGreater(host);
+        }
+
+        public static bool CanActivate(Pool pool)
+        {
+            return pool.Connection.Cache.Hosts.All(CanActivate);
         }
 
         public ReadOnlyCollection<Host> HostsThatCanBeActivated
