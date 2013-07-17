@@ -335,7 +335,9 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private void AddToolTipToCdDropDownBox_DrawItemEvent(object sender, DrawItemEventArgs e)
         {
-            string selectedText = CdDropDownBox.GetItemText(CdDropDownBox.Items[e.Index]);
+            string selectedText = "";
+            if (e.Index != -1)
+                selectedText = CdDropDownBox.GetItemText(CdDropDownBox.Items[e.Index]);
 
             Font font = (e.Index != -1 && CdDropDownBox.Items[e.Index] is ToStringWrapper<SR>) ? Program.DefaultFontBold : Program.DefaultFont;
 
