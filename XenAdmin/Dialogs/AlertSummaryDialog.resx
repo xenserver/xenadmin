@@ -151,7 +151,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ButtonClose.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="pictureBox1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -178,7 +178,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="GridViewAlerts.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -234,44 +234,17 @@
   <data name="ColumnDate.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <metadata name="ContextMenuAlertGridView.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
+  <metadata name="ColumnActions.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
-  <data name="ToolStripMenuItemFix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 22</value>
+  <data name="ColumnActions.HeaderText" xml:space="preserve">
+    <value>Actions</value>
   </data>
-  <data name="ToolStripMenuItemFix.Text" xml:space="preserve">
-    <value>Fix</value>
+  <data name="ColumnActions.MinimumWidth" type="System.Int32, mscorlib">
+    <value>30</value>
   </data>
-  <data name="ToolStripMenuItemHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 22</value>
-  </data>
-  <data name="ToolStripMenuItemHelp.Text" xml:space="preserve">
-    <value>Help</value>
-  </data>
-  <data name="ToolStripMenuItemDismiss.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 22</value>
-  </data>
-  <data name="ToolStripMenuItemDismiss.Text" xml:space="preserve">
-    <value>&amp;Dismiss</value>
-  </data>
-  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 6</value>
-  </data>
-  <data name="copyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 22</value>
-  </data>
-  <data name="copyToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Copy</value>
-  </data>
-  <data name="ContextMenuAlertGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 98</value>
-  </data>
-  <data name="&gt;&gt;ContextMenuAlertGridView.Name" xml:space="preserve">
-    <value>ContextMenuAlertGridView</value>
-  </data>
-  <data name="&gt;&gt;ContextMenuAlertGridView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ColumnActions.Width" type="System.Int32, mscorlib">
+    <value>53</value>
   </data>
   <data name="GridViewAlerts.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -298,7 +271,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;GridViewAlerts.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="LabelCappingEntries.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -337,7 +310,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;LabelCappingEntries.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="LabelDialogBlurb.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -400,7 +373,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="LabelDialogBlurb" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50" /&gt;&lt;Rows Styles="Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
@@ -580,7 +553,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -633,35 +606,11 @@
   <data name="&gt;&gt;ColumnDate.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItemFix.Name" xml:space="preserve">
-    <value>ToolStripMenuItemFix</value>
+  <data name="&gt;&gt;ColumnActions.Name" xml:space="preserve">
+    <value>ColumnActions</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItemFix.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItemHelp.Name" xml:space="preserve">
-    <value>ToolStripMenuItemHelp</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItemHelp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItemDismiss.Name" xml:space="preserve">
-    <value>ToolStripMenuItemDismiss</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItemDismiss.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
-    <value>toolStripSeparator2</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;copyToolStripMenuItem.Name" xml:space="preserve">
-    <value>copyToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;copyToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;ColumnActions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownSeveritiesFilter.Name" xml:space="preserve">
     <value>toolStripDropDownSeveritiesFilter</value>

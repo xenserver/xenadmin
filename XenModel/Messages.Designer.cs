@@ -3620,6 +3620,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Actions.
+        /// </summary>
+        public static string ALERT_ACTIONS {
+            get {
+                return ResourceManager.GetString("ALERT_ACTIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Alarm Settings.
         /// </summary>
         public static string ALERT_ALARM_ACTION {
@@ -3768,6 +3777,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dismiss.
+        /// </summary>
+        public static string ALERT_DISMISS {
+            get {
+                return ResourceManager.GetString("ALERT_DISMISS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you wish to dismiss all alerts from every connected server, or just the set of alerts shown in your current system alert filter?
         ///
         ///Note: If RBAC is enabled, only alerts which you have privileges to dismiss will be affected..
@@ -3799,7 +3817,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Help on this alert....
+        ///   Looks up a localized string similar to Help.
         /// </summary>
         public static string ALERT_GENERIC_HELP {
             get {
@@ -3826,7 +3844,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Go to Web Page....
+        ///   Looks up a localized string similar to Go to Web Page.
         /// </summary>
         public static string ALERT_NEW_PATCH_DOWNLOAD {
             get {
@@ -3853,7 +3871,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Go to Web Page....
+        ///   Looks up a localized string similar to Go to Web Page.
         /// </summary>
         public static string ALERT_NEW_VERSION_DOWNLOAD {
             get {

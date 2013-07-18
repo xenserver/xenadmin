@@ -2232,6 +2232,8 @@
     <Compile Include="Controls\ConsoleTab\FullScreenHint.Designer.cs">
       <DependentUpon>FullScreenHint.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DataGridViewDropDownSplitButtonCell.cs">
+    </Compile>
     <Compile Include="Controls\CustomDataGraph\DrawSetArgs.cs" />
     <Compile Include="Controls\CustomDataGraph\GraphHelpers.cs" />
     <Compile Include="Controls\DataGridViewEx\CollapsingPoolHostDataGridViewRowDefaultSorter.cs" />

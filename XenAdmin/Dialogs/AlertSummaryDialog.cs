@@ -36,6 +36,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
+using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
@@ -225,18 +227,19 @@ namespace XenAdmin.Dialogs
                     }
                 }
             }
-
         }
 
         private DataGridViewRow NewAlertRow(Alert alert)
         {
-            DataGridViewImageCell expanderCell = new DataGridViewImageCell();
-            DataGridViewImageCell imageCell = new DataGridViewImageCell();
-            DataGridViewTextBoxCell appliesCell = new DataGridViewTextBoxCell();
-            DataGridViewTextBoxCell detailCell = new DataGridViewTextBoxCell();
-            DataGridViewTextBoxCell dateCell = new DataGridViewTextBoxCell();
-            DataGridViewRow newRow = new DataGridViewRow();
-            newRow.Tag = alert;
+            var expanderCell = new DataGridViewImageCell();
+            var imageCell = new DataGridViewImageCell();
+            var appliesCell = new DataGridViewTextBoxCell();
+            var detailCell = new DataGridViewTextBoxCell();
+            var dateCell = new DataGridViewTextBoxCell();
+
+            var actionItems = GetAlertActionItems(alert);
+            var actionCell = new DataGridViewDropDownSplitButtonCell(actionItems.ToArray());
+            var newRow = new DataGridViewRow { Tag = alert, MinimumHeight = DataGridViewDropDownSplitButtonCell.MIN_ROW_HEIGHT };
 
             // Get the relevant image for the row depending on the type of the alert
             Image typeImage = alert is MessageAlert && ((MessageAlert)alert).Message.ShowOnGraphs
@@ -260,11 +263,9 @@ namespace XenAdmin.Dialogs
             }
             appliesCell.Value = alert.AppliesTo;
             dateCell.Value = HelpersGUI.DateTimeToString(alert.Timestamp.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true);
-
-            newRow.Cells.AddRange(expanderCell, imageCell, detailCell, appliesCell, dateCell);
-
+            newRow.Cells.AddRange(expanderCell, imageCell, detailCell, appliesCell, dateCell, actionCell);
+            
             return newRow;
-
         }
 
         /// <summary>
@@ -292,30 +293,13 @@ namespace XenAdmin.Dialogs
                 LabelCappingEntries.Visible = false;
         }
 
-        private void GridViewAlerts_MouseDown(object sender, MouseEventArgs e)
-        {
-            //CA-66824, CA-71820
-            if (e.Button == MouseButtons.Right)
-            {
-                var hitTest = GridViewAlerts.HitTest(e.X, e.Y);
-
-                if (hitTest.RowIndex < 0 || hitTest.RowIndex >= GridViewAlerts.RowCount)
-                    return;
-                if (hitTest.ColumnIndex < 0 || hitTest.ColumnIndex >= GridViewAlerts.ColumnCount)
-                    return;
-
-                GridViewAlerts.ClearSelection();
-                GridViewAlerts[hitTest.ColumnIndex, hitTest.RowIndex].Selected = true;
-            }
-        }
-
         private void GridViewAlerts_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // If you click on the headers you can get -1 as the index.
             if (e.ColumnIndex < 0 || e.RowIndex < 0 || e.ColumnIndex != ColumnExpand.Index)
                 return;
 
-            toggleExpandedState(e.RowIndex);
+            ToggleExpandedState(e.RowIndex);
         }
 
         private void GridViewAlerts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -323,7 +307,9 @@ namespace XenAdmin.Dialogs
             // If you click on the headers you can get -1 as the index.
             if (e.ColumnIndex < 0 || e.RowIndex < 0)
                 return;
-            toggleExpandedState(e.RowIndex);
+
+            if (e.ColumnIndex != ColumnActions.Index)
+                ToggleExpandedState(e.RowIndex);
         }
 
         private void GridViewAlerts_KeyDown(object sender, KeyEventArgs e)
@@ -335,7 +321,7 @@ namespace XenAdmin.Dialogs
                     Alert alert = (Alert)GridViewAlerts.Rows[row.Index].Tag;
                     if (!expandedState.ContainsKey(alert.uuid))
                     {
-                        toggleExpandedState(row.Index);
+                        ToggleExpandedState(row.Index);
                     }
                 }
             }
@@ -346,7 +332,7 @@ namespace XenAdmin.Dialogs
                     Alert alert = (Alert)GridViewAlerts.Rows[row.Index].Tag;
                     if (expandedState.ContainsKey(alert.uuid))
                     {
-                        toggleExpandedState(row.Index);
+                        ToggleExpandedState(row.Index);
                     }
                 }
             }
@@ -354,7 +340,7 @@ namespace XenAdmin.Dialogs
             {
                 foreach (DataGridViewBand row in GridViewAlerts.SelectedRows)
                 {
-                    toggleExpandedState(row.Index);
+                    ToggleExpandedState(row.Index);
                 }
             }
         }
@@ -397,33 +383,30 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        /// <summary>
-        /// Toggles the row specified between the expanded and contracted state
-        /// </summary>
-        /// <param name="alert"></param>
-        /// <param name="RowIndex"></param>
-        private void toggleExpandedState(int RowIndex)
+        private void ToggleExpandedState(int rowIndex)
         {
-            Alert alert = (Alert)GridViewAlerts.Rows[RowIndex].Tag;
+            var row = GridViewAlerts.Rows[rowIndex];
+            Alert alert = row.Tag as Alert;
+            if (alert == null)
+                return;
 
             if (expandedState.ContainsKey(alert.uuid))
             {
                 expandedState.Remove(alert.uuid);
-                GridViewAlerts.Rows[RowIndex].Cells[ColumnMessage.Index].Value = alert.Title;
-                GridViewAlerts.Rows[RowIndex].Cells[ColumnExpand.Index].Value = Properties.Resources.contracted_triangle;
+                row.Cells[ColumnExpand.Index].Value = Properties.Resources.contracted_triangle;
+                row.Cells[ColumnMessage.Index].Value = alert.Title;
             }
             else
             {
                 expandedState.Add(alert.uuid, true);
-                GridViewAlerts.Rows[RowIndex].Cells[ColumnMessage.Index].Value
-                    = String.Format("{0}\n\n{1}", alert.Title, alert.Description);
-                GridViewAlerts.Rows[RowIndex].Cells[ColumnExpand.Index].Value = Properties.Resources.expanded_triangle;
+                row.Cells[ColumnExpand.Index].Value = Properties.Resources.expanded_triangle;
+                row.Cells[ColumnMessage.Index].Value = string.Format("{0}\n\n{1}", alert.Title, alert.Description);
             }
         }
 
         #endregion
 
-        private void ButtonHelp_Click(object sender, EventArgs e)
+        private void ToolStripMenuItemHelp_Click(object sender, EventArgs e)
         {
             // We should only be here if one item is selected, we dont do multi-help
             if (GridViewAlerts.SelectedRows.Count != 1)
@@ -439,7 +422,7 @@ namespace XenAdmin.Dialogs
 
         }
 
-        private void ButtonFix_Click(object sender, EventArgs e)
+        private void ToolStripMenuItemFix_Click(object sender, EventArgs e)
         {
             // We should only be here if one item is selected, we dont do multi-fix
             if (GridViewAlerts.SelectedRows.Count == 0)
@@ -460,7 +443,7 @@ namespace XenAdmin.Dialogs
             alert.FixLinkAction.Invoke();
         }
 
-        private void ButtonDismiss_Click(object sender, EventArgs e)
+        private void ToolStripMenuItemDismiss_Click(object sender, EventArgs e)
         {
             if (new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_CONFIRM, Messages.XENCENTER),
@@ -685,53 +668,39 @@ namespace XenAdmin.Dialogs
             return false;
         }
 
-        private void ToolStripMenuItemFix_Click(object sender, EventArgs e)
+        private List<ToolStripItem> GetAlertActionItems(Alert alert)
         {
-            ButtonFix_Click(null, null);
-        }
+            var items = new List<ToolStripItem>();
 
-        private void ToolStripMenuItemHelp_Click(object sender, EventArgs e)
-        {
-            ButtonHelp_Click(null, null);
-        }
-
-        private void ToolStripMenuItemDismiss_Click(object sender, EventArgs e)
-        {
-            ButtonDismiss_Click(null, null);
-        }
-
-        private void ContextMenuAlertGridView_Opening(object sender, CancelEventArgs e)
-        {
-            Program.Invoke(this, delegate
+            if (AllowedToDismissSelected())
             {
-                UpdateActionEnablement();
-                ContextMenuAlertGridView.Items.Clear();
-                
-                if (GridViewAlerts.SelectedRows.Count != 1)
-                    return;
+                var dismiss = new ToolStripMenuItem(Messages.ALERT_DISMISS);
+                dismiss.Click += ToolStripMenuItemDismiss_Click;
+                items.Add(dismiss);
+            }
 
-                Alert alert = GridViewAlerts.SelectedRows[0].Tag as Alert;
-                if (alert == null)
-                    return;
+            if (!string.IsNullOrEmpty(alert.FixLinkText) && alert.FixLinkAction != null)
+            {
+                var fix = new ToolStripMenuItem(alert.FixLinkText);
+                fix.Click += ToolStripMenuItemFix_Click;
+                items.Add(fix);
+            }
 
-                if (!string.IsNullOrEmpty(alert.FixLinkText) && alert.FixLinkAction != null)
-                {
-                    ContextMenuAlertGridView.Items.Add(ToolStripMenuItemFix);
-                    ToolStripMenuItemFix.Text = alert.FixLinkText;
-                }
-                if (!string.IsNullOrEmpty(alert.HelpID))
-                {
-                    ContextMenuAlertGridView.Items.Add(ToolStripMenuItemHelp);
-                    ToolStripMenuItemHelp.Text = alert.HelpLinkText;
-                }
-                if (AllowedToDismissSelected())
-                    ContextMenuAlertGridView.Items.Add(ToolStripMenuItemDismiss);
+            if (!string.IsNullOrEmpty(alert.HelpID))
+            {
+                var help = new ToolStripMenuItem(alert.HelpLinkText);
+                help.Click += ToolStripMenuItemHelp_Click;
+                items.Add(help);
+            }
 
-                if (ContextMenuAlertGridView.Items.Count > 0)
-                    ContextMenuAlertGridView.Items.Add(toolStripSeparator2);
+            if (items.Count > 0)
+                items.Add(new ToolStripSeparator());
 
-                ContextMenuAlertGridView.Items.Add(copyToolStripMenuItem);
-            });
+            var copy = new ToolStripMenuItem(Messages.COPY);
+            copy.Click += copyToolStripMenuItem_Click;
+            items.Add(copy);
+
+            return items;
         }
 
         #region Top ToolStrip event handlers
@@ -774,7 +743,7 @@ namespace XenAdmin.Dialogs
                 String.Format(Messages.EXPORT_SYSTEM_ALERTS, dialog.FileName),
                 String.Format(Messages.EXPORTING_SYSTEM_ALERTS, dialog.FileName),
                 String.Format(Messages.EXPORTED_SYSTEM_ALERTS, dialog.FileName),
-                delegate(Session _)
+                delegate
                 {
                     StreamWriter stream = new StreamWriter(dialog.FileName, false, UTF8Encoding.UTF8);
                     try
@@ -853,6 +822,6 @@ namespace XenAdmin.Dialogs
             return s == null ? null : s.Replace("\"", "\"\"");
         }
 
-        #endregion 
+        #endregion
     }
 }

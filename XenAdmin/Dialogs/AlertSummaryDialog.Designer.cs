@@ -28,7 +28,6 @@ namespace XenAdmin.Dialogs
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AlertSummaryDialog));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -45,12 +44,7 @@ namespace XenAdmin.Dialogs
             this.ColumnMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContextMenuAlertGridView = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ToolStripMenuItemFix = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItemHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItemDismiss = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ColumnActions = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LabelCappingEntries = new System.Windows.Forms.Label();
             this.LabelDialogBlurb = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -69,7 +63,6 @@ namespace XenAdmin.Dialogs
             this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridViewAlerts)).BeginInit();
-            this.ContextMenuAlertGridView.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -104,8 +97,8 @@ namespace XenAdmin.Dialogs
             this.ColumnSeverity,
             this.ColumnMessage,
             this.ColumnLocation,
-            this.ColumnDate});
-            this.GridViewAlerts.ContextMenuStrip = this.ContextMenuAlertGridView;
+            this.ColumnDate,
+            this.ColumnActions});
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -117,7 +110,6 @@ namespace XenAdmin.Dialogs
             this.GridViewAlerts.GridColor = System.Drawing.SystemColors.ControlDark;
             this.GridViewAlerts.MultiSelect = true;
             this.GridViewAlerts.Name = "GridViewAlerts";
-            this.GridViewAlerts.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GridViewAlerts_MouseDown);
             this.GridViewAlerts.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.GridViewAlerts_SortCompare);
             this.GridViewAlerts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridViewAlerts_CellDoubleClick);
             this.GridViewAlerts.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GridViewAlerts_ColumnHeaderMouseClick);
@@ -132,7 +124,6 @@ namespace XenAdmin.Dialogs
             dataGridViewCellStyle2.NullValue = null;
             dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.ColumnExpand.DefaultCellStyle = dataGridViewCellStyle2;
-            this.ColumnExpand.FillWeight = 49.51523F;
             resources.ApplyResources(this.ColumnExpand, "ColumnExpand");
             this.ColumnExpand.Name = "ColumnExpand";
             this.ColumnExpand.ReadOnly = true;
@@ -140,12 +131,11 @@ namespace XenAdmin.Dialogs
             // 
             // ColumnSeverity
             // 
-            this.ColumnSeverity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ColumnSeverity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
             dataGridViewCellStyle3.NullValue = null;
             dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
             this.ColumnSeverity.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ColumnSeverity.FillWeight = 109.5524F;
             resources.ApplyResources(this.ColumnSeverity, "ColumnSeverity");
             this.ColumnSeverity.Name = "ColumnSeverity";
             this.ColumnSeverity.ReadOnly = true;
@@ -157,7 +147,7 @@ namespace XenAdmin.Dialogs
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.ColumnMessage.DefaultCellStyle = dataGridViewCellStyle4;
-            this.ColumnMessage.FillWeight = 380F;
+            this.ColumnMessage.FillWeight = 200F;
             resources.ApplyResources(this.ColumnMessage, "ColumnMessage");
             this.ColumnMessage.Name = "ColumnMessage";
             this.ColumnMessage.ReadOnly = true;
@@ -166,7 +156,6 @@ namespace XenAdmin.Dialogs
             // 
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             this.ColumnLocation.DefaultCellStyle = dataGridViewCellStyle5;
-            this.ColumnLocation.FillWeight = 109.5524F;
             resources.ApplyResources(this.ColumnLocation, "ColumnLocation");
             this.ColumnLocation.Name = "ColumnLocation";
             this.ColumnLocation.ReadOnly = true;
@@ -175,54 +164,18 @@ namespace XenAdmin.Dialogs
             // 
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             this.ColumnDate.DefaultCellStyle = dataGridViewCellStyle6;
-            this.ColumnDate.FillWeight = 130F;
             resources.ApplyResources(this.ColumnDate, "ColumnDate");
             this.ColumnDate.Name = "ColumnDate";
             this.ColumnDate.ReadOnly = true;
             this.ColumnDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // ContextMenuAlertGridView
+            // ColumnActions
             // 
-            this.ContextMenuAlertGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStripMenuItemFix,
-            this.ToolStripMenuItemHelp,
-            this.ToolStripMenuItemDismiss,
-            this.toolStripSeparator2,
-            this.copyToolStripMenuItem});
-            this.ContextMenuAlertGridView.Name = "ContextMenuAlertGridView";
-            resources.ApplyResources(this.ContextMenuAlertGridView, "ContextMenuAlertGridView");
-            this.ContextMenuAlertGridView.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuAlertGridView_Opening);
-            // 
-            // ToolStripMenuItemFix
-            // 
-            this.ToolStripMenuItemFix.Name = "ToolStripMenuItemFix";
-            resources.ApplyResources(this.ToolStripMenuItemFix, "ToolStripMenuItemFix");
-            this.ToolStripMenuItemFix.Click += new System.EventHandler(this.ToolStripMenuItemFix_Click);
-            // 
-            // ToolStripMenuItemHelp
-            // 
-            this.ToolStripMenuItemHelp.Name = "ToolStripMenuItemHelp";
-            resources.ApplyResources(this.ToolStripMenuItemHelp, "ToolStripMenuItemHelp");
-            this.ToolStripMenuItemHelp.Click += new System.EventHandler(this.ToolStripMenuItemHelp_Click);
-            // 
-            // ToolStripMenuItemDismiss
-            // 
-            this.ToolStripMenuItemDismiss.Image = global::XenAdmin.Properties.Resources._000_DeleteMessage_h32bit_16;
-            this.ToolStripMenuItemDismiss.Name = "ToolStripMenuItemDismiss";
-            resources.ApplyResources(this.ToolStripMenuItemDismiss, "ToolStripMenuItemDismiss");
-            this.ToolStripMenuItemDismiss.Click += new System.EventHandler(this.ToolStripMenuItemDismiss_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
-            // 
-            // copyToolStripMenuItem
-            // 
-            this.copyToolStripMenuItem.Image = global::XenAdmin.Properties.Resources.copy_16;
-            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            resources.ApplyResources(this.copyToolStripMenuItem, "copyToolStripMenuItem");
-            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+            this.ColumnActions.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnActions, "ColumnActions");
+            this.ColumnActions.Name = "ColumnActions";
+            this.ColumnActions.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnActions.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // LabelCappingEntries
             // 
@@ -321,7 +274,7 @@ namespace XenAdmin.Dialogs
             // 
             this.tsmiDismissSelected.Name = "tsmiDismissSelected";
             resources.ApplyResources(this.tsmiDismissSelected, "tsmiDismissSelected");
-            this.tsmiDismissSelected.Click += new System.EventHandler(this.ButtonDismiss_Click);
+            this.tsmiDismissSelected.Click += new System.EventHandler(this.ToolStripMenuItemDismiss_Click);
             // 
             // toolStripLabelFiltersOnOff
             // 
@@ -353,7 +306,6 @@ namespace XenAdmin.Dialogs
             this.Load += new System.EventHandler(this.AlertSummaryDialog_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridViewAlerts)).EndInit();
-            this.ContextMenuAlertGridView.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -371,10 +323,6 @@ namespace XenAdmin.Dialogs
         private XenAdmin.Controls.DataGridViewEx.DataGridViewEx GridViewAlerts;
         private System.Windows.Forms.Label LabelCappingEntries;
         private System.Windows.Forms.Label LabelDialogBlurb;
-        private System.Windows.Forms.ContextMenuStrip ContextMenuAlertGridView;
-        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemFix;
-        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemHelp;
-        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDismiss;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private XenAdmin.Controls.ToolStripEx toolStrip1;
         private System.Windows.Forms.Panel panel1;
@@ -382,8 +330,6 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.ToolStripButton toolStripButtonExportAll;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private XenAdmin.Controls.FilterLocationToolStripDropDownButton toolStripDropDownButtonServerFilter;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButtonRefresh;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private XenAdmin.Controls.FilterSeveritiesToolStripDropDownButton toolStripDropDownSeveritiesFilter;
@@ -396,5 +342,6 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnMessage;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnActions;
     }
 }

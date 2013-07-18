@@ -1357,6 +1357,9 @@ Do you wish to continue?</value>
   <data name="ALERTS_TOTAL" xml:space="preserve">
     <value>Total alerts: {0}</value>
   </data>
+  <data name="ALERT_ACTIONS" xml:space="preserve">
+    <value>Actions</value>
+  </data>
   <data name="ALERT_ALARM_ACTION" xml:space="preserve">
     <value>Alarm Settings</value>
   </data>
@@ -1409,6 +1412,9 @@ This alarm is set to be triggered when network usage is more than {3}.</value>
   <data name="ALERT_DISK_SUB_TEXT" xml:space="preserve">
     <value>When disk usage exceeds {0} for {1} min(s)</value>
   </data>
+  <data name="ALERT_DISMISS" xml:space="preserve">
+    <value>Dismiss</value>
+  </data>
   <data name="ALERT_DISMISS_ALL_CONTINUE" xml:space="preserve">
     <value>Do you wish to dismiss all alerts from every connected server, or just the set of alerts shown in your current system alert filter?
 
@@ -1423,7 +1429,7 @@ Note: If RBAC is enabled, only alerts which you have privileges to dismiss will 
     <value>Once a system alert is dismissed it will be removed from the server permanently. Do you wish to continue?</value>
   </data>
   <data name="ALERT_GENERIC_HELP" xml:space="preserve">
-    <value>&amp;Help on this alert...</value>
+    <value>Help</value>
   </data>
   <data name="ALERT_MEMORY_SUB_TEXT" xml:space="preserve">
     <value>When free memory falls below {0} for {1} min(s)</value>
@@ -1432,7 +1438,7 @@ Note: If RBAC is enabled, only alerts which you have privileges to dismiss will 
     <value>When network usage exceeds {0} for {1} min(s)</value>
   </data>
   <data name="ALERT_NEW_PATCH_DOWNLOAD" xml:space="preserve">
-    <value>&amp;Go to Web Page...</value>
+    <value>Go to Web Page</value>
   </data>
   <data name="ALERT_NEW_VERSION" xml:space="preserve">
     <value>New XenCenter Available</value>
@@ -1441,7 +1447,7 @@ Note: If RBAC is enabled, only alerts which you have privileges to dismiss will 
     <value>{0} is now available. Download the new version from the Citrix website.</value>
   </data>
   <data name="ALERT_NEW_VERSION_DOWNLOAD" xml:space="preserve">
-    <value>&amp;Go to Web Page...</value>
+    <value>Go to Web Page</value>
   </data>
   <data name="ALERT_SR_SUB_TEXT" xml:space="preserve">
     <value>When storage throughput exceeds {0} for {1} min(s)</value>
