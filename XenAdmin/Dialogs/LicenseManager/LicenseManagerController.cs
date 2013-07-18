@@ -40,6 +40,7 @@ using XenAdmin.Controls.CheckableDataGridView;
 using XenAdmin.Controls.SummaryPanel;
 using XenAdmin.Core;
 using XenAdmin.Dialogs.LicenseManagerSelectionVerifiers;
+using XenAdmin.Network;
 using XenAPI;
 
 namespace XenAdmin.Dialogs
@@ -76,14 +77,26 @@ namespace XenAdmin.Dialogs
                 return;
             }
 
-            AddToGrid(itemsToShow);
+            // show pool members as individual hosts if needed (i.e. can activate free license)
+            var allItemsToShow = new List<IXenObject>();
+            foreach (var xenObject in itemsToShow)
+            {
+                if (LicenseDataGridViewRow.RowShouldBeExpanded(xenObject))
+                {
+                    allItemsToShow.AddRange(xenObject.Connection.Cache.Hosts);
+                }
+                else
+                    allItemsToShow.Add(xenObject);
+            }
 
-            foreach (LicenseDataGridViewRow row in ConvertXenObjects(itemsToShow).ConvertAll(r => r as LicenseDataGridViewRow))
+            AddToGrid(allItemsToShow);
+
+            foreach (LicenseDataGridViewRow row in ConvertXenObjects(allItemsToShow).ConvertAll(r => r as LicenseDataGridViewRow))
             {
                 UpdateButtonEnablement(new List<LicenseDataGridViewRow>{row});
             }
             CheckPreSelectedRows(selectedItems);
-            SelectAndSummariseSelectedRow(itemsToShow, selectedItems);
+            SelectAndSummariseSelectedRow(allItemsToShow, selectedItems);
         }
 
         public void Repopulate(List<IXenObject> itemsToShow, List<IXenObject> selectedItems)
@@ -392,6 +405,28 @@ namespace XenAdmin.Dialogs
                 }
             }
             return hosts;
+        }
+
+        public void Repopulate()
+        {
+            Repopulate(GetAllObjects(), new List<IXenObject>());
+        }
+
+        private List<IXenObject> GetAllObjects()
+        {
+            List<IXenObject> allObjects = new List<IXenObject>();
+            foreach (IXenConnection conn in ConnectionsManager.XenConnections)
+            {
+                if (conn == null || !conn.IsConnected)
+                    continue;
+
+                Pool pool = Helpers.GetPool(conn);
+                if (pool == null)
+                    allObjects.AddRange(conn.Cache.Hosts);
+                else
+                    allObjects.Add(pool);
+            }
+            return allObjects;
         }
     }
 }

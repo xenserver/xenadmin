@@ -70,7 +70,7 @@ namespace XenAdmin.Actions.VMActions
             try
             {
                 var vbds = Connection.ResolveAll(VM.VBDs);
-                int halfstep = (int)(180/vbds.Count);
+                int halfstep = (int)(90/(vbds.Count * 2));
                 // move the progress bar above 0, it's more reassuring to see than a blank bar as we copy the first disk
                 PercentComplete += 10;
                 Exception exn = null;
@@ -84,9 +84,10 @@ namespace XenAdmin.Actions.VMActions
                     if (curVdi == null || curVdi.SR.opaque_ref == this.SR.opaque_ref)
                         continue;
 
-                    var newVDI = Connection.WaitForCache<VDI>(XenAPI.VDI.copy(Session, oldVBD.VDI.opaque_ref, this.SR.opaque_ref));
-                    PercentComplete += halfstep;
-
+                    RelatedTask = XenAPI.VDI.async_copy(Session, oldVBD.VDI.opaque_ref, this.SR.opaque_ref);
+                    PollToCompletion(PercentComplete, PercentComplete + halfstep);
+                    var newVDI = Connection.WaitForCache(new XenRef<VDI>(Result));
+ 
                     var newVBD = new VBD
                                      {
                                          IsOwner = oldVBD.IsOwner,

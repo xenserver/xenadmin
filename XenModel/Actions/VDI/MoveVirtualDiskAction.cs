@@ -66,8 +66,9 @@ namespace XenAdmin.Actions
             Description = string.Format(Messages.ACTION_MOVING_VDI_STATUS, Helpers.GetName(vdi));
             PercentComplete = 10;
             log.DebugFormat("Moving VDI '{0}'", Helpers.GetName(vdi));
-            XenAPI.VDI newVDI = Connection.WaitForCache<XenAPI.VDI>(XenAPI.VDI.copy(Session, vdi.opaque_ref, SR.opaque_ref));
-            PercentComplete = 60;
+            RelatedTask = XenAPI.VDI.async_copy(Session, vdi.opaque_ref, SR.opaque_ref);
+            PollToCompletion(PercentComplete, 60);
+            XenAPI.VDI newVDI = Connection.WaitForCache(new XenRef<VDI>(Result));
 
             // if the original is a suspend VDI, link the suspended VM to the new VDI
             if (vdi.type == vdi_type.suspend)

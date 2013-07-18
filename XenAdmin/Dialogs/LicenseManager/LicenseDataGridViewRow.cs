@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using XenAdmin.Controls;
 using XenAdmin.Controls.CheckableDataGridView;
 using XenAdmin.Core;
 using XenAPI;
@@ -71,9 +72,26 @@ namespace XenAdmin.Dialogs
             licenseStatus.BeginUpdate();
         }
 
+        private bool refreshing = false;
         private void licenseStatus_ItemUpdated(object sender, EventArgs e)
         {
-            TriggerCellTextUpdatedEvent();
+            if (refreshing)
+                return;
+
+            // check if we need to do a full refresh (i.e. pool members need to be displayed as individual items in the list)
+            if (RowShouldBeExpanded(XenObject) && DataGridView is LicenseCheckableDataGridView)
+            {
+                refreshing = true;
+                TriggerRefreshAllEvent();  
+            }
+            else
+                TriggerCellTextUpdatedEvent();
+        }
+
+        public static bool RowShouldBeExpanded(IXenObject xenObject)
+        {
+            return xenObject is Pool && xenObject.Connection.Cache.Hosts.Length > 1 
+                && LicenseActivationRequest.CanActivate(xenObject as Pool);
         }
 
         public override Queue<object> CellText
@@ -352,6 +370,13 @@ namespace XenAdmin.Dialogs
                 disposed = true;
             }
             base.Dispose(disposing);
+        }
+
+        protected void TriggerRefreshAllEvent()
+        {
+            var view = DataGridView as LicenseCheckableDataGridView;
+            if (view != null)
+                view.TriggerRefreshAllEvent();
         }
     }
 }

@@ -33,9 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -44,11 +42,8 @@ using XenAdmin.Core;
 using XenAdmin.Actions;
 
 using XenAPI;
-using System.Drawing.Text;
 using XenAdmin.Dialogs;
-using XenAdmin.Network.StorageLink;
 using XenAdmin.Commands;
-
 
 namespace XenAdmin.TabPages
 {
@@ -57,7 +52,7 @@ namespace XenAdmin.TabPages
         private SR sr;
         private readonly DataGridViewColumn sizeColumn;
         private readonly DataGridViewColumn storageLinkVolumeColumn;
-        private bool rebuildRequired = false;
+        private bool rebuildRequired;
 
         public SrStoragePage()
         {
@@ -80,7 +75,6 @@ namespace XenAdmin.TabPages
             base.Text = Messages.VIRTUAL_DISKS;
 
             Properties.Settings.Default.PropertyChanged += Default_PropertyChanged;
-
         }
 
         private void SetupDeprecationBanner()
@@ -134,53 +128,70 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void BuildList()
+        private void RefreshDataGridView(VDIsData data)
         {
-            //Save the selection
-            DataGridViewSelectedRowCollection selectedItems = dataGridViewVDIs.SelectedRows;
-            int firstrowDisplayed = dataGridViewVDIs.FirstDisplayedScrollingRowIndex;
             dataGridViewVDIs.SuspendLayout();
-
             try
             {
-                dataGridViewVDIs.Rows.Clear();
+                storageLinkVolumeColumn.Visible = data.ShowStorageLink;
 
-                if (sr == null)
-                    return;
-
-                List<VDI> vdis = sr.Connection.ResolveAll(sr.VDIs);
-
-                storageLinkVolumeColumn.Visible = vdis.Find(v => v.sm_config.ContainsKey("SVID")) != null;
-
-                foreach (VDI vdi in vdis)
+                // Update existing rows
+                foreach (var vdiRow in data.VdiRowsToUpdate)
                 {
-                    if (!vdi.Show(Properties.Settings.Default.ShowHiddenVMs))
-                        continue;
-
-                    if (vdi.IsAnIntermediateStorageMotionSnapshot)
-                        continue;
-
-                    VDIRow newRow = new VDIRow(vdi, storageLinkVolumeColumn.Visible);
-                    dataGridViewVDIs.Rows.Add(newRow);
-                }
-                IEnumerable<VDI> selectedVDIs = from VDIRow row in selectedItems select row.VDI;
-                foreach (VDIRow row in dataGridViewVDIs.Rows)
-                {
-                    row.Selected = selectedVDIs.Contains(row.VDI);
+                    vdiRow.RefreshRowDetails(data.ShowStorageLink);
                 }
 
+                // Remove rows for deleted VDIs
+                foreach (var vdiRow in data.VdiRowsToRemove)
+                {
+                    dataGridViewVDIs.Rows.RemoveAt(vdiRow.Index);
+                }
+
+                // Add rows for new VDIs
+                foreach (var vdi in data.VdisToAdd)
+                {
+                    VDIRow newRow = new VDIRow(vdi, data.ShowStorageLink);
+                    dataGridViewVDIs.Rows.Add(newRow);   
+                }
             }
             finally
             {
                 if (dataGridViewVDIs.SortedColumn != null && dataGridViewVDIs.SortOrder != SortOrder.None)
                     dataGridViewVDIs.Sort(dataGridViewVDIs.SortedColumn,
-                        dataGridViewVDIs.SortOrder == SortOrder.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending);
+                                          dataGridViewVDIs.SortOrder == SortOrder.Ascending
+                                              ? ListSortDirection.Ascending
+                                              : ListSortDirection.Descending);
 
                 dataGridViewVDIs.ResumeLayout();
             }
-            if (dataGridViewVDIs.Rows.Count > 0)
-                dataGridViewVDIs.FirstDisplayedScrollingRowIndex = (firstrowDisplayed < 0 || firstrowDisplayed >= dataGridViewVDIs.Rows.Count) ? 0 : firstrowDisplayed;
+
             RefreshButtons();
+        }
+
+        private readonly object _locker = new object();
+
+        private void _BuildList(object sender)
+        {
+            lock (_locker)
+            {
+                if (sr == null)
+                    return;
+
+                Program.Invoke(this, RefreshButtons);
+
+                VDIsDataRetriever dataRetriever = new VDIsDataRetriever(sr, dataGridViewVDIs.Rows.OfType<VDIRow>());
+                VDIsData data = dataRetriever.CurrentData;
+
+                Program.Invoke(this, () => RefreshDataGridView(data));
+            }
+        }
+
+        private void BuildList()
+        {
+            if (sr == null)
+                return;
+
+            ThreadPool.QueueUserWorkItem(_BuildList);
         }
 
         private SelectedItemCollection SelectedVDIs
@@ -191,7 +202,8 @@ namespace XenAdmin.TabPages
                 foreach (DataGridViewRow r in dataGridViewVDIs.SelectedRows)
                 {
                     VDIRow row = r as VDIRow;
-                    vdis.Add(new SelectedItem(row.VDI));
+                    if (row != null)
+                        vdis.Add(new SelectedItem(row.VDI));
                 }
                 return new SelectedItemCollection(vdis);
             }
@@ -218,10 +230,7 @@ namespace XenAdmin.TabPages
 
         void a_Completed(object sender, EventArgs e)
         {
-            Program.Invoke(Program.MainWindow, delegate
-            {
-                RefreshButtons();
-            });
+            Program.Invoke(Program.MainWindow, RefreshButtons);
         }
 
         void Connection_XenObjectsUpdated(object sender, EventArgs e)
@@ -492,7 +501,7 @@ namespace XenAdmin.TabPages
 
         public class VDIRow : DataGridViewRow
         {
-            public VDI VDI;
+            public VDI VDI { get; private set; }
 
             private bool showStorageLink = false;
 
@@ -533,6 +542,68 @@ namespace XenAdmin.TabPages
                         return VDI.VMsOfVDI;
                     default:
                         return "";
+                }
+            }
+
+            public void RefreshRowDetails(bool showSL)
+            {
+                showStorageLink = showSL;
+                for (int i = 0; i < 5; i++)
+                {
+                    Cells[i].Value = GetCellText(i);
+                }
+            }
+        }
+
+        public struct VDIsData
+        {
+            public List<VDIRow> VdiRowsToUpdate { get; private set; }
+            public List<VDIRow> VdiRowsToRemove { get; private set; }
+            public List<VDI> VdisToAdd { get; private set; }
+            public bool ShowStorageLink { get; private set; }
+
+            public VDIsData(List<VDIRow> vdiRowsToUpdate, List<VDIRow> vdiRowsToRemove, List<VDI> vdisToAdd,
+                bool showStorageLink) : this()
+            {
+                VdiRowsToUpdate = vdiRowsToUpdate;
+                VdiRowsToRemove = vdiRowsToRemove;
+                VdisToAdd = vdisToAdd;
+                ShowStorageLink = showStorageLink;
+            }
+        }
+
+        public class VDIsDataRetriever
+        {
+            private SR sr;
+            private IEnumerable<VDIRow> currentVDIRows;
+
+            public VDIsDataRetriever(SR sr, IEnumerable<VDIRow> currentVDIRows)
+            {
+                this.sr = sr;
+                this.currentVDIRows = currentVDIRows;
+            }
+
+            public VDIsData CurrentData
+            {
+                get
+                {
+                    List<VDI> vdis =
+                        sr.Connection.ResolveAll(sr.VDIs).Where(
+                            vdi =>
+                            vdi.Show(Properties.Settings.Default.ShowHiddenVMs &&
+                                     !vdi.IsAnIntermediateStorageMotionSnapshot))
+                            .ToList();
+
+                    bool showStorageLink = vdis.Find(v => v.sm_config.ContainsKey("SVID")) != null;
+
+                    var vdiRowsToRemove =
+                        currentVDIRows.Where(vdiRow => !vdis.Contains(vdiRow.VDI)).OrderByDescending(row => row.Index).ToList();
+
+                    var vdiRowsToUpdate = currentVDIRows.Except(vdiRowsToRemove).ToList();
+
+                    var vdisToAdd = vdis.Except(vdiRowsToUpdate.ConvertAll(vdiRow => vdiRow.VDI)).ToList();
+
+                    return new VDIsData(vdiRowsToUpdate, vdiRowsToRemove, vdisToAdd, showStorageLink);
                 }
             }
         }

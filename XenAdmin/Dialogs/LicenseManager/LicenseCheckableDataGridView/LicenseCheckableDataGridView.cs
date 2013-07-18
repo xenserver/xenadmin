@@ -43,6 +43,9 @@ namespace XenAdmin.Controls
     {
         private const string statusColumnKey = "statusImageColumn";
 
+        public delegate void RefreshAllEvent(object sender, EventArgs e);
+        public event RefreshAllEvent RefreshAll;
+
         private LicenseCheckableDataGridViewController LicenseController
         {
             get { return Controller as LicenseCheckableDataGridViewController; }
@@ -118,6 +121,13 @@ namespace XenAdmin.Controls
                                                        });
 
 
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void TriggerRefreshAllEvent()
+        {
+            if (RefreshAll != null)
+                RefreshAll(this, EventArgs.Empty);
         }
     }
 }
