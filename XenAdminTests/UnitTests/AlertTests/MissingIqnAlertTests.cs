@@ -50,7 +50,7 @@ namespace XenAdminTests.UnitTests.AlertTests
                 FixLinkText = "Edit IQN",
                 HelpID = "MissingIqnAlert",
                 Description = " has no iSCSI-IQN. This could cause problems with iSCSI storage on this network.",
-                HelpLinkText = "&Help on this alert...",
+                HelpLinkText = "Help",
                 Title = "iSCSI-IQN Missing",
                 Priority = "Priority3"
             });

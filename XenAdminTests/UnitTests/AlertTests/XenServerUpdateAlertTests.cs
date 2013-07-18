@@ -63,10 +63,10 @@ namespace XenAdminTests.UnitTests.AlertTests
             validator.Verify(new AlertClassUnitTestData
             {
                 AppliesTo = "HostAName, HostBName, ConnAName, ConnBName",
-                FixLinkText = "&Go to Web Page...",
+                FixLinkText = "Go to Web Page",
                 HelpID = "XenServerUpdateAlert",
                 Description = "name is now available. Download the latest at the Citrix website.",
-                HelpLinkText = "&Help on this alert...",
+                HelpLinkText = "Help",
                 Title = "name is now available",
                 Priority = "Priority5"
             });
@@ -89,10 +89,10 @@ namespace XenAdminTests.UnitTests.AlertTests
             validator.Verify(new AlertClassUnitTestData
             {
                 AppliesTo = "HostAName, HostBName",
-                FixLinkText = "&Go to Web Page...",
+                FixLinkText = "Go to Web Page",
                 HelpID = "XenServerUpdateAlert",
                 Description = "name is now available. Download the latest at the Citrix website.",
-                HelpLinkText = "&Help on this alert...",
+                HelpLinkText = "Help",
                 Title = "name is now available",
                 Priority = "Priority5"
             });
@@ -116,10 +116,10 @@ namespace XenAdminTests.UnitTests.AlertTests
             validator.Verify(new AlertClassUnitTestData
             {
                 AppliesTo = "ConnAName, ConnBName",
-                FixLinkText = "&Go to Web Page...",
+                FixLinkText = "Go to Web Page",
                 HelpID = "XenServerUpdateAlert",
                 Description = "name is now available. Download the latest at the Citrix website.",
-                HelpLinkText = "&Help on this alert...",
+                HelpLinkText = "Help",
                 Title = "name is now available",
                 Priority = "Priority5"
             });
@@ -141,10 +141,10 @@ namespace XenAdminTests.UnitTests.AlertTests
             validator.Verify(new AlertClassUnitTestData
             {
                 AppliesTo = string.Empty,
-                FixLinkText = "&Go to Web Page...",
+                FixLinkText = "Go to Web Page",
                 HelpID = "XenServerUpdateAlert",
                 Description = "name is now available. Download the latest at the Citrix website.",
-                HelpLinkText = "&Help on this alert...",
+                HelpLinkText = "Help",
                 Title = "name is now available",
                 Priority = "Priority5"
             });

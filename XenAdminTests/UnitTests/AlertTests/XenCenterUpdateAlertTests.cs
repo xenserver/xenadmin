@@ -48,10 +48,10 @@ namespace XenAdminTests.UnitTests.AlertTests
             validator.Verify(new AlertClassUnitTestData
             {
                 AppliesTo = "XenCenter",
-                FixLinkText = "&Go to Web Page...",
+                FixLinkText = "Go to Web Page",
                 HelpID = "XenCenterUpdateAlert",
                 Description = "xc is now available. Download the new version from the Citrix website.",
-                HelpLinkText = "&Help on this alert...",
+                HelpLinkText = "Help",
                 Title = "New XenCenter Available",
                 Priority = "Priority5"
             });

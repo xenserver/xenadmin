@@ -58,7 +58,7 @@ namespace XenAdminTests.UnitTests.AlertTests
             {
                 FixLinkText = "Edit IQN",
                 HelpID = "DuplicateIqnAlert",
-                HelpLinkText = "&Help on this alert...",
+                HelpLinkText = "Help",
                 Title = "iSCSI-IQN Exists",
                 Priority = "Priority3"
             });

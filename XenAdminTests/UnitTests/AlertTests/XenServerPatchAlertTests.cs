@@ -63,10 +63,10 @@ namespace XenAdminTests.UnitTests.AlertTests
             validator.Verify(new AlertClassUnitTestData
             {
                 AppliesTo = "HostAName, HostBName, ConnAName, ConnBName",
-                FixLinkText = "&Go to Web Page...",
+                FixLinkText = "Go to Web Page",
                 HelpID = "XenServerPatchAlert",
                 Description = "My description",
-                HelpLinkText = "&Help on this alert...",
+                HelpLinkText = "Help",
                 Title = "New Update Available - name",
                 Priority = "Priority2"
             });
@@ -89,10 +89,10 @@ namespace XenAdminTests.UnitTests.AlertTests
             validator.Verify(new AlertClassUnitTestData
             {
                 AppliesTo = "HostAName, HostBName",
-                FixLinkText = "&Go to Web Page...",
+                FixLinkText = "Go to Web Page",
                 HelpID = "XenServerPatchAlert",
                 Description = "My description",
-                HelpLinkText = "&Help on this alert...",
+                HelpLinkText = "Help",
                 Title = "New Update Available - name",
                 Priority = "Priority1"
             });
@@ -116,10 +116,10 @@ namespace XenAdminTests.UnitTests.AlertTests
             validator.Verify(new AlertClassUnitTestData
             {
                 AppliesTo = "ConnAName, ConnBName",
-                FixLinkText = "&Go to Web Page...",
+                FixLinkText = "Go to Web Page",
                 HelpID = "XenServerPatchAlert",
                 Description = "My description",
-                HelpLinkText = "&Help on this alert...",
+                HelpLinkText = "Help",
                 Title = "New Update Available - name",
                 Priority = "Unknown"
             });
@@ -141,10 +141,10 @@ namespace XenAdminTests.UnitTests.AlertTests
             validator.Verify(new AlertClassUnitTestData
             {
                 AppliesTo = string.Empty,
-                FixLinkText = "&Go to Web Page...",
+                FixLinkText = "Go to Web Page",
                 HelpID = "XenServerPatchAlert",
                 Description = "My description",
-                HelpLinkText = "&Help on this alert...",
+                HelpLinkText = "Help",
                 Title = "New Update Available - name",
                 Priority = "Priority5"
             });

@@ -47,9 +47,9 @@ namespace XenAdminTests.UnitTests.AlertTests
                                         {
                                             AppliesTo = "XenCenter",
                                             Description = "There is a newer version of XenCenter available. Please contact your support representative.",
-                                            FixLinkText = "&Go to Web Page...",
+                                            FixLinkText = "Go to Web Page",
                                             HelpID = "GuiOldAlert",
-                                            HelpLinkText = "&Help on this alert...",
+                                            HelpLinkText = "Help",
                                             Title = "Newer XenCenter Available",
                                             Priority = "Priority5"
                                         });
