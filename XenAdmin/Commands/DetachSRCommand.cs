@@ -140,15 +140,15 @@ namespace XenAdmin.Commands
             {
                 return Messages.SR_DETACHED;
             }
-            else if (sr.HasRunningVMs())
+            if (sr.HasRunningVMs())
             {
                 return Messages.SR_HAS_RUNNING_VMS;
             }
-            else if (!sr.CanCreateWithXenCenter)
+            if (!sr.CanCreateWithXenCenter)
             {
                 return Messages.SR_CANNOT_BE_DETACHED_WITH_XC;
             }
-            else if (HelpersGUI.GetActionInProgress(sr))
+            if (HelpersGUI.GetActionInProgress(sr))
             {
                 return Messages.SR_ACTION_IN_PROGRESS;
             }

@@ -83,7 +83,7 @@ namespace XenAdmin.Commands
 
         private static bool CanExecute(SR sr)
         {
-            return sr != null && !sr.shared && !sr.IsDetached && sr.CanCreateWithXenCenter && !HelpersGUI.GetActionInProgress(sr);
+            return sr != null && !sr.shared && sr.HasPBDs && sr.CanCreateWithXenCenter && !HelpersGUI.GetActionInProgress(sr);
         }
 
         public override string MenuText

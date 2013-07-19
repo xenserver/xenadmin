@@ -65,13 +65,13 @@ namespace XenAdmin.Actions
 
             while (i++ < max)
             {
-                if (sr.IsDetached)
+                if (!sr.HasPBDs)
                     return true;
 
                 Thread.Sleep(1000);
             }
 
-            return sr.IsDetached;
+            return !sr.HasPBDs;
         }
 
         protected override void Run()

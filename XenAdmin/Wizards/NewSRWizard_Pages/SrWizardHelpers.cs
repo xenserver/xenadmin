@@ -66,7 +66,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
             foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
                 foreach (SR sr in connection.Cache.SRs)
-                    if (sr.uuid == uuid && !sr.IsDetached)
+                    if (sr.uuid == uuid && sr.HasPBDs)
                         return sr;
 
             foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)

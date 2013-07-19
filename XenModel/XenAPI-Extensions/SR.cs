@@ -279,12 +279,7 @@ namespace XenAPI
         /// <returns></returns>
         private bool AllPBDsAttached()
         {
-            foreach (PBD pbd in Connection.ResolveAll(this.PBDs))
-            {
-                if (!pbd.currently_attached)
-                    return false;
-            }
-            return true;
+            return Connection.ResolveAll(this.PBDs).All(pbd => pbd.currently_attached);
         }
 
         /// <summary>
@@ -293,12 +288,7 @@ namespace XenAPI
         /// <returns></returns>
         private bool AnyPBDAttached()
         {
-            foreach (PBD pbd in Connection.ResolveAll(this.PBDs))
-            {
-                if (pbd.currently_attached)
-                    return true;
-            }
-            return false;
+            return Connection.ResolveAll(this.PBDs).Any(pbd => pbd.currently_attached);
         }
 
         /// <summary>
@@ -385,10 +375,19 @@ namespace XenAPI
         {
             get
             {
+                // SR is detached when it has no PBDs or when all its PBDs are unplugged
+                return !HasPBDs || !AnyPBDAttached();
+            }
+        }
+
+        public bool HasPBDs
+        {
+            get
+            {
                 // CA-15188: Show SRs with no PBDs on Orlando, as pool-eject bug has been fixed.
                 // SRs are detached if they have no PBDs
 
-                return PBDs.Count < 1;
+                return PBDs.Count > 0;
             }
         }
 
@@ -900,11 +899,11 @@ namespace XenAPI
         {
             get
             {
-                if (IsDetached || IsHidden)
+                if (!HasPBDs || IsHidden)
                 {
                     return Icons.StorageDisabled;
                 }
-                else if (IsBroken() || !MultipathAOK)
+                else if (IsDetached || IsBroken() || !MultipathAOK)
                 {
                     return Icons.StorageBroken;
                 }
@@ -944,10 +943,10 @@ namespace XenAPI
         {
             get
             {
-                if (IsDetached)
+                if (!HasPBDs)
                     return Messages.DETACHED;
 
-                if (IsBroken())
+                if (IsDetached || IsBroken())
                     return Messages.GENERAL_SR_STATE_BROKEN;
 
                 if (!MultipathAOK)

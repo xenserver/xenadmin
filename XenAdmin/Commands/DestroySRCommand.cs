@@ -144,7 +144,7 @@ namespace XenAdmin.Commands
             {
                 return base.GetCantExecuteReasonCore(item);
             }
-            if (sr.IsDetached)
+            if (!sr.HasPBDs)
             {
                 return Messages.SR_DETACHED;
             }

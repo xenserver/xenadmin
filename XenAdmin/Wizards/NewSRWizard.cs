@@ -507,7 +507,7 @@ namespace XenAdmin.Wizards
                 return;
             }
 
-            if (_srToReattach != null && !_srToReattach.IsDetached && _srToReattach.Connection == xenConnection)
+            if (_srToReattach != null && _srToReattach.HasPBDs && _srToReattach.Connection == xenConnection)
             {
                 // Error - cannot reattach attached SR
                 MessageBox.Show(this,
@@ -562,10 +562,10 @@ namespace XenAdmin.Wizards
             }
             dialog.ShowDialog(this);
 
-            if (!FinalAction.Succeeded && FinalAction is SrReattachAction && !_srToReattach.IsDetached)
+            if (!FinalAction.Succeeded && FinalAction is SrReattachAction && _srToReattach.HasPBDs)
             {
-                // reattach failed. Ensure SR is now detached.
-                dialog = new ActionProgressDialog(new SrAction(SrActionKind.Detach, _srToReattach), progressBarStyle);
+                // reattach failed. Ensure PBDs are now unplugged and destroyed.
+                dialog = new ActionProgressDialog(new SrAction(SrActionKind.UnplugAndDestroyPBDs, _srToReattach), progressBarStyle);
                 dialog.ShowCancel = false;
                 dialog.ShowDialog();
             }

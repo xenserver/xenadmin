@@ -676,7 +676,7 @@ namespace XenAdmin.TabPages
             PDSection s = pdSectionStatus;
 
             bool broken = sr.IsBroken() || !sr.MultipathAOK || sr.NeedsUpgrading;
-            bool detached = sr.IsDetached;
+            bool detached = !sr.HasPBDs;
 
             List<ToolStripMenuItem> menuItems = new List<ToolStripMenuItem>();
             ToolStripMenuItem repair = MainWindow.NewToolStripMenuItem(sr.NeedsUpgrading ? Messages.UPGRADE_SR : Messages.GENERAL_SR_CONTEXT_REPAIR,

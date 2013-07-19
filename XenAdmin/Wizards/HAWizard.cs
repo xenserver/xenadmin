@@ -102,7 +102,7 @@ namespace XenAdmin.Wizards
             List<string> brokenSRs = new List<string>();
             foreach (SR sr in xenConnection.Cache.SRs)
             {
-                if (!sr.IsDetached && sr.IsBroken() && !sr.IsToolsSR && sr.shared)
+                if (sr.HasPBDs && sr.IsBroken() && !sr.IsToolsSR && sr.shared)
                 {
                     brokenSRs.Add(sr.NameWithoutHost);
                 }

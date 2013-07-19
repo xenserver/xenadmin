@@ -94,7 +94,7 @@ namespace XenAdmin.Commands
 
         private bool CanExecute(SR sr)
         {
-            return sr != null && !sr.IsDetached && (sr.IsBroken() || !sr.MultipathAOK) && !HelpersGUI.GetActionInProgress(sr) && sr.CanRepairAfterUpgradeFromLegacySL;
+            return sr != null && sr.HasPBDs && (sr.IsBroken() || !sr.MultipathAOK) && !HelpersGUI.GetActionInProgress(sr) && sr.CanRepairAfterUpgradeFromLegacySL;
         }
 
         public override Image MenuImage

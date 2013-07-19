@@ -36,7 +36,7 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public enum SrActionKind { SetAsDefault, Detach, Forget, Destroy, UpgradeLVM };
+    public enum SrActionKind { SetAsDefault, Detach, Forget, Destroy, UpgradeLVM, UnplugAndDestroyPBDs };
 
     public class SrAction : PureAsyncAction
     {
@@ -66,6 +66,7 @@ namespace XenAdmin.Actions
                         sr.Name, Helpers.GetName(sr.Connection));
 
                 case SrActionKind.Detach:
+                case SrActionKind.UnplugAndDestroyPBDs:
                     return String.Format(Messages.ACTION_SR_DETACHING,
                         sr.Name, Helpers.GetName(sr.Connection));
 
@@ -85,9 +86,6 @@ namespace XenAdmin.Actions
             return "";
         }
 
-
-
-
         protected override void Run()
         {
             log.DebugFormat("Running SrActionKind.{0}", kind.ToString());
@@ -97,18 +95,13 @@ namespace XenAdmin.Actions
             switch (kind)
             {
                 case SrActionKind.Detach:
-                    DoDetach(ref inc);
+                    UnplugPBDs(ref inc);
                     Description = string.Format(Messages.ACTION_SR_DETACH_SUCCESSFUL, SR.NameWithoutHost);
                     break;
 
                 case SrActionKind.Destroy:
-
-                    foreach (XenRef<PBD> pbd in SR.PBDs)
-                    {
-                        RelatedTask = PBD.async_unplug(Session, pbd.opaque_ref);
-                        PollToCompletion(PercentComplete, PercentComplete + inc);
-                    }
-
+                    if (!Helpers.TampaOrGreater(Connection))
+                        UnplugPBDs(ref inc);
                     RelatedTask = XenAPI.SR.async_destroy(Session, SR.opaque_ref);
                     PollToCompletion(50, 100);
                     Description = Messages.ACTION_SR_DESTROY_SUCCESSFUL;
@@ -116,8 +109,8 @@ namespace XenAdmin.Actions
 
                 case SrActionKind.Forget:
                     Description = string.Format(Messages.FORGETTING_SR_0, SR.NameWithoutHost);
-                    if (!SR.IsDetached && SR.IsDetachable())
-                        DoDetach(ref inc);
+                    if (!Helpers.TampaOrGreater(Connection) && !SR.IsDetached && SR.IsDetachable())
+                        UnplugPBDs(ref inc);
                     if (!SR.allowed_operations.Contains(storage_operations.forget))
                     {
                         Description = Messages.ERROR_DIALOG_FORGET_SR_TITLE;
@@ -161,10 +154,16 @@ namespace XenAdmin.Actions
 
                     Description = Messages.ACTION_SR_UPGRADED;
                     break;
+
+                case SrActionKind.UnplugAndDestroyPBDs:
+                    UnplugPBDs(ref inc);
+                    DestroyPBDs(ref inc);
+                    Description = string.Format(Messages.ACTION_SR_DETACH_SUCCESSFUL, SR.NameWithoutHost);
+                    break;
             }
         }
 
-        private void DoDetach(ref int inc)
+        private void UnplugPBDs(ref int inc)
         {
             if (SR.PBDs.Count < 1)
                 return;
@@ -173,7 +172,16 @@ namespace XenAdmin.Actions
             {
                 RelatedTask = PBD.async_unplug(Session, pbd.opaque_ref);
                 PollToCompletion(PercentComplete, PercentComplete + inc);
+            }
+        }
 
+        private void DestroyPBDs(ref int inc)
+        {
+            if (SR.PBDs.Count < 1)
+                return;
+
+            foreach (XenRef<PBD> pbd in SR.PBDs)
+            {
                 RelatedTask = PBD.async_destroy(Session, pbd.opaque_ref);
                 PollToCompletion(PercentComplete, PercentComplete + inc);
             }

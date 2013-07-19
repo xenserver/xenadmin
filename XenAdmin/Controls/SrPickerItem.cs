@@ -163,13 +163,19 @@ namespace XenAdmin.Controls
 
         protected override bool CanBeEnabled
         {
-            get { return TheSR.SupportsVdiCreate() && !ExistingVDILocation() && TargetSRHasEnoughFreeSpace; }
+            get
+            {
+                return !TheSR.IsDetached && TheSR.SupportsVdiCreate() && !ExistingVDILocation() &&
+                       TargetSRHasEnoughFreeSpace;
+            }
         }
 
         protected override string  CannotBeShownReason
         {   
 	        get 
 	        {
+                if (TheSR.IsDetached)
+                    return Messages.SR_DETACHED;
                 if (ExistingVDILocation())
                     return Messages.CURRENT_LOCATION;
 	            return base.CannotBeShownReason;

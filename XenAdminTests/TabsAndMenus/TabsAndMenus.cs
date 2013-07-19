@@ -339,12 +339,12 @@ namespace XenAdminTests.TabsAndMenus
 
         protected static bool CanDestroy(SR sr)
         {
-            return !sr.IsDetached && sr.IsDetachable() && sr.allowed_operations.Contains(storage_operations.destroy) && !HelpersGUI.GetActionInProgress(sr);
+            return !sr.HasRunningVMs() && sr.CanCreateWithXenCenter && sr.allowed_operations.Contains(storage_operations.destroy) && !HelpersGUI.GetActionInProgress(sr);
         }
 
         protected static bool CanSetAsDefault(SR sr)
         {
-            return !sr.IsDetached && !SR.IsDefaultSr(sr) && sr.SupportsVdiCreate() && (sr.shared || sr.Connection.Cache.HostCount <= 1) && !HelpersGUI.GetActionInProgress(sr);
+            return sr.HasPBDs && !SR.IsDefaultSr(sr) && sr.SupportsVdiCreate() && (sr.shared || sr.Connection.Cache.HostCount <= 1) && !HelpersGUI.GetActionInProgress(sr);
         }
 
         /// <summary>
