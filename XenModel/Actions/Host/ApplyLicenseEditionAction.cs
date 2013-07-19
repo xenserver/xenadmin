@@ -173,9 +173,13 @@ namespace XenAdmin.Actions
                     // PR-1102: catch the host's license data, before applying the new one, so it can be sent later to the licensing server
                     LicensingHelper.LicenseDataStruct previousLicenseData = new LicensingHelper.LicenseDataStruct(host);
 
-                    if(xo is Host)
+                    if(xo is Host && host != null)
                     {
-                        Host.apply_edition(host.Connection.Session, host.opaque_ref, Host.GetEditionText(_edition), false);
+                        if (Helpers.AugustaOrGreater(host))
+                            Host.apply_edition(host.Connection.Session, host.opaque_ref, Host.GetEditionText(_edition),false);
+                        else
+                            Host.apply_edition(host.Connection.Session, host.opaque_ref, Host.GetEditionText(_edition));
+
                         // PR-1102: populate the list of updated hosts
                         updatedHosts.Add(host, previousLicenseData);
                     }
@@ -186,7 +190,7 @@ namespace XenAdmin.Actions
                         {
                             foreach (Host poolHost in xo.Connection.Cache.Hosts)
                             {
-                                Host.apply_edition(host.Connection.Session, poolHost.opaque_ref, Host.GetEditionText(_edition), false);
+                                Host.apply_edition(host.Connection.Session, poolHost.opaque_ref, Host.GetEditionText(_edition));
                             }  
                         }
                         else
