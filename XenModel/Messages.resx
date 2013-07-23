@@ -9034,6 +9034,9 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="ROLLING_POOL_UPGRADE" xml:space="preserve">
     <value>Rolling Pool Upgrade</value>
   </data>
+  <data name="ROLLING_UPGRADE_CAN_RESUME_UPGRADE" xml:space="preserve">
+    <value>This upgrade can be resumed by launching the Rolling Pool Upgrade wizard again.</value>
+  </data>
   <data name="ROLLING_UPGRADE_DISCONNECTED_SERVER" xml:space="preserve">
     <value>No longer connected to {0}. Please review your selection and try again.</value>
   </data>

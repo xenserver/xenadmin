@@ -32,6 +32,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using XenAdmin.Actions;
 using XenAdmin.Controls;
 using XenAdmin.Core;
@@ -163,6 +164,22 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 RevertResolvedPreChecks();
 
             base.OnCancel();
+        }
+
+        private void ShowCanBeResumedInfo()
+        {
+            new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Information,
+                                                                Messages.ROLLING_UPGRADE_CAN_RESUME_UPGRADE,
+                                                                Messages.ROLLING_POOL_UPGRADE)).ShowDialog(
+                                                                    Program.MainWindow);
+        }
+
+        protected override void OnClosed(System.EventArgs e)
+        {
+            base.OnClosed(e);
+
+            if (RollingUpgradeUpgradePage.UpgradeStatus == RollingUpgradeStatus.Cancelled)
+                ThreadPool.QueueUserWorkItem(o => Program.Invoke(Program.MainWindow, ShowCanBeResumedInfo));
         }
     }
 }

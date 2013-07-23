@@ -25939,6 +25939,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This upgrade can be resumed by launching the Rolling Pool Upgrade wizard again..
+        /// </summary>
+        public static string ROLLING_UPGRADE_CAN_RESUME_UPGRADE {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_CAN_RESUME_UPGRADE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No longer connected to {0}. Please review your selection and try again..
         /// </summary>
         public static string ROLLING_UPGRADE_DISCONNECTED_SERVER {
