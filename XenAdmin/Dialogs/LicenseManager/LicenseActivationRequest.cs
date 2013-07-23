@@ -71,7 +71,7 @@ namespace XenAdmin.Dialogs
 
         public static bool CanActivate(Pool pool)
         {
-            return pool.Connection.Cache.Hosts.All(CanActivate);
+            return pool.Connection.Cache.Hosts.Any(CanActivate);
         }
 
         public ReadOnlyCollection<Host> HostsThatCanBeActivated

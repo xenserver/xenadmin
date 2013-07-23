@@ -451,13 +451,10 @@ namespace XenAdmin.Core
             if (host == null)
                 return true;
 
-            return false;
-
-            //TODO: uncomment and update Augusta platform_version when it's known
-            //string platform_version = HostPlatformVersion(host);
-            //return
-            //    platform_version != null && productVersionCompare(platform_version, "x.x.x") >= 0 ||
-            //    HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+            string platform_version = HostPlatformVersion(host);
+            return
+                platform_version != null && productVersionCompare(platform_version, "1.8.50") >= 0 ||
+                HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
         }
 
         // CP-3435: Disable Check for Updates in Common Criteria Certification project
