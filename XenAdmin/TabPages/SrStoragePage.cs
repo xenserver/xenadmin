@@ -34,7 +34,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 
 using XenAdmin.Controls;
@@ -53,6 +52,8 @@ namespace XenAdmin.TabPages
         private readonly DataGridViewColumn sizeColumn;
         private readonly DataGridViewColumn storageLinkVolumeColumn;
         private bool rebuildRequired;
+
+        private readonly VDIsDataGridViewBuilder dataGridViewBuilder;
 
         public SrStoragePage()
         {
@@ -75,6 +76,8 @@ namespace XenAdmin.TabPages
             base.Text = Messages.VIRTUAL_DISKS;
 
             Properties.Settings.Default.PropertyChanged += Default_PropertyChanged;
+            
+            dataGridViewBuilder = new VDIsDataGridViewBuilder(this);
         }
 
         private void SetupDeprecationBanner()
@@ -105,7 +108,7 @@ namespace XenAdmin.TabPages
                 }
 
                 sr = value;
-
+                
                 if (sr != null)
                 {
                     sr.PropertyChanged += sr_PropertyChanged;
@@ -123,7 +126,7 @@ namespace XenAdmin.TabPages
                 removeDropDownButton.Visible = addDropDownButton.Visible;
                 RemoveButtonContainer.Visible = !removeDropDownButton.Visible;
 
-                BuildList();
+                BuildList(true);
                 SetupDeprecationBanner();
             }
         }
@@ -168,30 +171,19 @@ namespace XenAdmin.TabPages
             RefreshButtons();
         }
 
-        private readonly object _locker = new object();
-
-        private void _BuildList(object sender)
+        private IEnumerable<VDIRow> GetCurrentVDIRows()
         {
-            lock (_locker)
-            {
-                if (sr == null)
-                    return;
-
-                Program.Invoke(this, RefreshButtons);
-
-                VDIsDataRetriever dataRetriever = new VDIsDataRetriever(sr, dataGridViewVDIs.Rows.OfType<VDIRow>());
-                VDIsData data = dataRetriever.CurrentData;
-
-                Program.Invoke(this, () => RefreshDataGridView(data));
-            }
+            return dataGridViewVDIs.Rows.OfType<VDIRow>();
         }
 
-        private void BuildList()
+        private void BuildList(bool reset)
         {
+            Program.AssertOnEventThread();
+
             if (sr == null)
                 return;
 
-            ThreadPool.QueueUserWorkItem(_BuildList);
+            dataGridViewBuilder.AddRequest(new RefreshGridRequest(sr, reset));
         }
 
         private SelectedItemCollection SelectedVDIs
@@ -236,7 +228,7 @@ namespace XenAdmin.TabPages
         void Connection_XenObjectsUpdated(object sender, EventArgs e)
         {
             if (rebuildRequired)
-                BuildList();
+                BuildList(false);
 
             rebuildRequired = false;
         }
@@ -256,7 +248,7 @@ namespace XenAdmin.TabPages
         {
             if (e.PropertyName != "ShowHiddenVMs")
                 return;
-            Program.Invoke(this, BuildList);
+            Program.Invoke(this, () => BuildList(false));
         }
         #endregion
 
@@ -499,6 +491,23 @@ namespace XenAdmin.TabPages
         }
         #endregion
 
+        private void dataGridViewVDIs_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            // Select the row that the user right clicked on if it's not already in the selection
+            if (e.Button == MouseButtons.Right && e.RowIndex >= 0)
+            {
+                if (!dataGridViewVDIs.Rows[e.RowIndex].Selected)
+                {
+                    // Check if the CurrentCell is the cell the user right clicked on (but the row is not Selected) [CA-64954]
+                    // This happens when the grid is initially shown: the current cell is the first cell in the first column, but the row is not selected
+                    if (dataGridViewVDIs.CurrentCell == dataGridViewVDIs[e.ColumnIndex, e.RowIndex])
+                        dataGridViewVDIs.Rows[e.RowIndex].Selected = true;
+                    else
+                        dataGridViewVDIs.CurrentCell = dataGridViewVDIs[e.ColumnIndex, e.RowIndex];
+                }
+            }
+        }
+
         public class VDIRow : DataGridViewRow
         {
             public VDI VDI { get; private set; }
@@ -572,56 +581,117 @@ namespace XenAdmin.TabPages
             }
         }
 
-        public class VDIsDataRetriever
+        public class RefreshGridRequest
         {
-            private SR sr;
-            private IEnumerable<VDIRow> currentVDIRows;
+            public SR SR { get; private set; }
+            public bool Reset { get; private set; }
 
-            public VDIsDataRetriever(SR sr, IEnumerable<VDIRow> currentVDIRows)
+            public RefreshGridRequest(SR sr, bool reset)
             {
-                this.sr = sr;
-                this.currentVDIRows = currentVDIRows;
+                SR = sr;
+                Reset = reset;
+            }
+        }
+
+        public class VDIsDataGridViewBuilder
+        {
+            private readonly Control owner;
+            private readonly object _locker = new object();
+            private BackgroundWorker worker;
+            private Queue<RefreshGridRequest> queue = new Queue<RefreshGridRequest>();
+
+            public VDIsDataGridViewBuilder(Control owner)
+            {
+                this.owner = owner;
+                worker = new BackgroundWorker {WorkerSupportsCancellation = true};
+                worker.DoWork += DoWork;
+                worker.RunWorkerCompleted += (RunWorkerCompleted);
             }
 
-            public VDIsData CurrentData
+            private void RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
             {
-                get
+                if (e.Cancelled || e.Error != null)
+                    return;
+
+                lock (_locker)
                 {
-                    List<VDI> vdis =
+                    if (queue.Count > 0 && !worker.IsBusy)
+                        worker.RunWorkerAsync();
+                }
+            }
+
+            private VDIsData GetCurrentData(SR sr, IEnumerable<VDIRow> currentVDIRows)
+            {
+                List<VDI> vdis =
                         sr.Connection.ResolveAll(sr.VDIs).Where(
                             vdi =>
                             vdi.Show(Properties.Settings.Default.ShowHiddenVMs &&
                                      !vdi.IsAnIntermediateStorageMotionSnapshot))
                             .ToList();
 
-                    bool showStorageLink = vdis.Find(v => v.sm_config.ContainsKey("SVID")) != null;
+                bool showStorageLink = vdis.Find(v => v.sm_config.ContainsKey("SVID")) != null;
 
-                    var vdiRowsToRemove =
-                        currentVDIRows.Where(vdiRow => !vdis.Contains(vdiRow.VDI)).OrderByDescending(row => row.Index).ToList();
+                var vdiRowsToRemove =
+                    currentVDIRows.Where(vdiRow => !vdis.Contains(vdiRow.VDI)).OrderByDescending(row => row.Index).ToList();
 
-                    var vdiRowsToUpdate = currentVDIRows.Except(vdiRowsToRemove).ToList();
+                var vdiRowsToUpdate = currentVDIRows.Except(vdiRowsToRemove).ToList();
 
-                    var vdisToAdd = vdis.Except(vdiRowsToUpdate.ConvertAll(vdiRow => vdiRow.VDI)).ToList();
+                var vdisToAdd = vdis.Except(vdiRowsToUpdate.ConvertAll(vdiRow => vdiRow.VDI)).ToList();
 
-                    return new VDIsData(vdiRowsToUpdate, vdiRowsToRemove, vdisToAdd, showStorageLink);
+                return new VDIsData(vdiRowsToUpdate, vdiRowsToRemove, vdisToAdd, showStorageLink);
+            }
+
+            private void DoWork(object sender, DoWorkEventArgs e)
+            {
+                RefreshGridRequest refreshRequest;
+                lock (_locker)
+                {
+                    refreshRequest = queue.Count > 0 ? queue.Dequeue() : null;
+                }
+
+                if (worker.CancellationPending)
+                    return;
+
+                if (refreshRequest == null || refreshRequest.SR == null)
+                    return;
+
+                SrStoragePage page = owner as SrStoragePage;
+                if (page == null)
+                    return;
+
+                if (refreshRequest.Reset)
+                    Program.Invoke(owner, page.dataGridViewVDIs.Rows.Clear);
+
+                Program.Invoke(owner, page.RefreshButtons);
+
+                IEnumerable<VDIRow> currentVDIRows = Enumerable.Empty<VDIRow>();
+                Program.Invoke(owner, () => currentVDIRows = page.GetCurrentVDIRows());
+                VDIsData data = GetCurrentData(refreshRequest.SR, currentVDIRows);
+
+                if (worker.CancellationPending)
+                    return;
+
+                Program.Invoke(owner, () => ((SrStoragePage)owner).RefreshDataGridView(data));
+            }
+
+            public void AddRequest(RefreshGridRequest refreshGridRequest)
+            {
+                lock (_locker)
+                {
+                    if (refreshGridRequest.Reset)
+                        queue.Clear();
+
+                    queue.Enqueue(refreshGridRequest);
+
+                    if (!worker.IsBusy)
+                        worker.RunWorkerAsync();
                 }
             }
-        }
 
-        private void dataGridViewVDIs_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            // Select the row that the user right clicked on if it's not already in the selection
-            if (e.Button == MouseButtons.Right && e.RowIndex >= 0)
+            public void Stop()
             {
-                if (!dataGridViewVDIs.Rows[e.RowIndex].Selected)
-                {
-                    // Check if the CurrentCell is the cell the user right clicked on (but the row is not Selected) [CA-64954]
-                    // This happens when the grid is initially shown: the current cell is the first cell in the first column, but the row is not selected
-                    if (dataGridViewVDIs.CurrentCell == dataGridViewVDIs[e.ColumnIndex, e.RowIndex]) 
-                        dataGridViewVDIs.Rows[e.RowIndex].Selected = true;
-                    else
-                        dataGridViewVDIs.CurrentCell = dataGridViewVDIs[e.ColumnIndex, e.RowIndex];
-                }
+                if (!worker.CancellationPending)
+                    worker.CancelAsync();
             }
         }
     }

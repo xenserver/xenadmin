@@ -79,7 +79,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            if (selection.Count == 1)
+            if (selection != null && selection.Count == 1)
             {
                 VDI vdi = selection[0].XenObject as VDI;
                 if (vdi == null)
@@ -92,8 +92,11 @@ namespace XenAdmin.Commands
                     return false;
                 if (vdi.IsHaType)
                     return false;
-                if (vdi.Connection.Resolve(vdi.SR).HBALunPerVDI)
+
+                SR sr = vdi.Connection.Resolve(vdi.SR);
+                if (sr == null || sr.HBALunPerVDI)
                     return false;
+                
                 return true;
             }
             return false;

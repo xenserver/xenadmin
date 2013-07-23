@@ -22,10 +22,14 @@ namespace XenAdmin.TabPages
             ConnectionsManager.History.CollectionChanged -= History_CollectionChanged;
             Properties.Settings.Default.PropertyChanged -= Default_PropertyChanged;
 
-            if (disposing && (components != null))
+            if (disposing) 
             {
-                components.Dispose();
+                if (components != null)
+                    components.Dispose();
+
+                dataGridViewBuilder.Stop();
             }
+
             base.Dispose(disposing);
         }
 

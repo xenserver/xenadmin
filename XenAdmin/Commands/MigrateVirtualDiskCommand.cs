@@ -94,6 +94,11 @@ namespace XenAdmin.Commands
             return selection.Count >= 1 && selection.All(v=>VDIIsSuitable(v.XenObject as VDI));
         }
 
+        private SR GetSR(VDI vdi)
+        {
+            return vdi.Connection.Resolve(vdi.SR);
+        }
+
         private bool VDIIsSuitable(VDI vdi)
         {
             
@@ -109,14 +114,10 @@ namespace XenAdmin.Commands
                 return false;
             if(vdi.GetVMs().Any(vm=>!vm.IsRunning))
                 return false;
-            if (vdi.Connection.Resolve(vdi.SR).HBALunPerVDI)
+            SR sr = GetSR(vdi);
+            if (sr == null || sr.HBALunPerVDI)
                 return false;
             return true;
-        }
-
-        private bool IsOnLocalSR(VDI vdi)
-        {
-            return vdi.Connection.Resolve(vdi.SR).IsLocalSR; //Is it currently hosted on a local SR
         }
 
         protected override string GetCantExecuteReasonCore(SelectedItem item)
@@ -132,9 +133,12 @@ namespace XenAdmin.Commands
                 return Messages.CANNOT_MOVE_HA_VD;
             if (vdi.IsMetadataForDR)
                 return Messages.CANNOT_MOVE_DR_VD;
-            if (IsOnLocalSR(vdi))
+            SR sr = GetSR(vdi);
+            if (sr == null)
+                return base.GetCantExecuteReasonCore(item);
+            if (sr.IsLocalSR) //Is it currently hosted on a local SR
                 return Messages.LOCAL_TO_LOCAL_MOVE;
-            if (vdi.Connection.Resolve(vdi.SR).HBALunPerVDI)
+            if (sr.HBALunPerVDI)
                 return Messages.UNSUPPORTED_SR_TYPE;
 
             return base.GetCantExecuteReasonCore(item);
