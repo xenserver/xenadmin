@@ -10,29 +10,6 @@ namespace XenAdmin.TabPages
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            // Deregister listeners.  
-            SR = null;
-            
-            ConnectionsManager.History.CollectionChanged -= History_CollectionChanged;
-            Properties.Settings.Default.PropertyChanged -= Default_PropertyChanged;
-
-            if (disposing) 
-            {
-                if (components != null)
-                    components.Dispose();
-
-                dataGridViewBuilder.Stop();
-            }
-
-            base.Dispose(disposing);
-        }
-
         #region Component Designer generated code
 
         /// <summary> 

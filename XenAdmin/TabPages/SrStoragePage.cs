@@ -80,6 +80,35 @@ namespace XenAdmin.TabPages
             dataGridViewBuilder = new VDIsDataGridViewBuilder(this);
         }
 
+        private bool disposed;
+
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                // Deregister listeners.
+                SR = null;
+
+                ConnectionsManager.History.CollectionChanged -= History_CollectionChanged;
+                Properties.Settings.Default.PropertyChanged -= Default_PropertyChanged;
+
+                if (disposing)
+                {
+                    if (components != null)
+                        components.Dispose();
+
+                    dataGridViewBuilder.Stop();
+                }
+
+                disposed = true;
+            }
+            base.Dispose(disposing);
+        }
+
         private void SetupDeprecationBanner()
         {
             if (sr != null && SR.IsIslOrIslLegacy(sr))
