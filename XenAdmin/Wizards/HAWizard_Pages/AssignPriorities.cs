@@ -665,7 +665,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             Program.AssertOnEventThread();
             Dictionary<VM, VMStartupOptions> result = new Dictionary<VM, VMStartupOptions>();
             
-            foreach (var curRow in dataGridViewVms.SelectedRows.Cast<VmWithSettingsRow>())
+            foreach (var curRow in dataGridViewVms.Rows.Cast<VmWithSettingsRow>())
             {
                 result[curRow.Vm] = new VMStartupOptions(curRow.StartOrder,
                                                          curRow.StartDelay,
