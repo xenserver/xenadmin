@@ -204,6 +204,33 @@ namespace XenAdmin.Wizards
             return success;
         }
 
+        private bool CanShowLVMoHBASummaryPage()
+        {
+            string description = m_srWizardType.Description;
+            string name = m_srWizardType.SrName;
+
+            List<string> names = xenConnection.Cache.SRs.Select(sr => sr.Name).ToList();
+
+            m_srWizardType.SrDescriptors.Clear();
+            foreach (var lvmOhbaSrDescriptor in xenTabPageLvmoHba.SrDescriptors)
+            {
+                lvmOhbaSrDescriptor.Name = name;
+                if (!string.IsNullOrEmpty(description))
+                    lvmOhbaSrDescriptor.Description = description;
+
+                m_srWizardType.SrDescriptors.Add(lvmOhbaSrDescriptor);
+                names.Add(name);
+                name = SrWizardHelpers.DefaultSRName(Messages.NEWSR_HBA_DEFAULT_NAME, names);
+            }
+
+            xenTabPageLvmoHbaSummary.SuccessfullyCreatedSRs.Clear();
+            xenTabPageLvmoHbaSummary.FailedToCreateSRs.Clear();
+
+            bool closeWizard;
+            RunFinalAction(out closeWizard);
+            return closeWizard;
+        }
+
         protected override bool RunNextPagePrecheck(XenTabPage senderPage)
         {
             // if reattaching and RBAC warning page is visible, then we run the prechecks when leaving the RBAC warning page
@@ -225,6 +252,11 @@ namespace XenAdmin.Wizards
                 }
             }
             
+            if (senderPage == xenTabPageLvmoHba)
+            {
+                return CanShowLVMoHBASummaryPage();
+            }
+
             return base.RunNextPagePrecheck(senderPage);
         }
      
@@ -307,29 +339,6 @@ namespace XenAdmin.Wizards
             {
                 m_srWizardType.DeviceConfig = xenTabPageCifsIso.DeviceConfig;
                 SetCustomDescription(m_srWizardType, xenTabPageCifsIso.SrDescription);
-            }
-            else if (senderPagetype == typeof(LVMoHBA))
-            {
-                string description = m_srWizardType.Description;
-                string name = m_srWizardType.SrName;
-
-                List<string> names = xenConnection.Cache.SRs.Select(sr => sr.Name).ToList();
-
-                m_srWizardType.SrDescriptors.Clear();
-                foreach (var lvmOhbaSrDescriptor in xenTabPageLvmoHba.SrDescriptors)
-                {
-                    lvmOhbaSrDescriptor.Name = name;
-                    if (!string.IsNullOrEmpty(description))
-                        lvmOhbaSrDescriptor.Description = description;
-
-                    m_srWizardType.SrDescriptors.Add(lvmOhbaSrDescriptor);
-                    names.Add(name);
-                    name = SrWizardHelpers.DefaultSRName(Messages.NEWSR_HBA_DEFAULT_NAME, names);
-                }
-
-                xenTabPageLvmoHbaSummary.SuccessfullyCreatedSRs.Clear();
-                xenTabPageLvmoHbaSummary.FailedToCreateSRs.Clear();
-                RunFinalAction();
             }
             else if (senderPagetype == typeof(LVMoISCSI))
             {
@@ -470,12 +479,6 @@ namespace XenAdmin.Wizards
             RunFinalAction(out closeWizard);
             if (closeWizard)
                 base.FinishWizard();
-        }
-
-        private void RunFinalAction()
-        {
-            bool closeWizard;
-            RunFinalAction(out closeWizard);
         }
 
         private void RunFinalAction(out bool closeWizard)
