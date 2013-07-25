@@ -519,7 +519,8 @@ namespace XenAdmin.Dialogs
                 if (patchAlert.Hosts.Count > 0)
                 {
                     wizard.SelectServers(patchAlert.Hosts);
-                    wizard.NextStep();
+                    if (wizard.CurrentStepTabPage.EnableNext())
+                        wizard.NextStep();
                 }
                 else
                 {

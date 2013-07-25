@@ -33,7 +33,6 @@ using XenAPI;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.HostProblem;
 
-
 namespace XenAdmin.Diagnostics.Checks
 {
     class HostLivenessCheck : Check
@@ -48,14 +47,6 @@ namespace XenAdmin.Diagnostics.Checks
             if (!Host.IsLive)
             {
                 return new HostNotLive(this, Host);
-            }
-
-            //
-            // Check the host is not in Maintenance Mode (or disabled)
-            //
-            if (Host.MaintenanceMode || !Host.enabled)
-            {
-                return new HostMaintenanceMode(this, Host);
             }
             return null;
         }

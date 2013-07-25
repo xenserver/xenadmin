@@ -2289,6 +2289,7 @@
     <Compile Include="Controls\SrPickerItem.cs" />
     <Compile Include="Controls\SummaryPanel\ISummaryPanelView.cs" />
     <Compile Include="Diagnostics\Checks\HostHasWlbCheck.cs" />
+    <Compile Include="Diagnostics\Checks\HostMaintenanceModeCheck.cs" />
     <Compile Include="Diagnostics\Checks\UpgradingFromTampaAndOlderCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostHasWssCheck.cs" />
     <Compile Include="Diagnostics\Checks\VmprActivatedCheck.cs" />

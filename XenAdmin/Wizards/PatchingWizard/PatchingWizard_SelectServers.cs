@@ -133,7 +133,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void EnabledRow(Host host, UpdateType type, int index)
         {
             var row = (PatchingHostsDataGridViewRow)dataGridViewHosts.Rows[index];
-            row.Enabled = host.enabled;
 
             if(!host.CanApplyHotfixes)
             {

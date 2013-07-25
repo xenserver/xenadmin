@@ -142,12 +142,12 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         {
             List<KeyValuePair<string, List<Check>>> checks = new List<KeyValuePair<string, List<Check>>>();
 
-            //HostLivenessCheck checks
+            //HostMaintenanceModeCheck checks
             checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_HOST_LIVENESS_STATUS, new List<Check>()));
             List<Check> checkGroup = checks[checks.Count - 1].Value;
             foreach (Host host in SelectedServers)
             {
-                checkGroup.Add(new HostLivenessCheck(host));
+                checkGroup.Add(new HostMaintenanceModeCheck(host));
             }
 
             //HA checks
