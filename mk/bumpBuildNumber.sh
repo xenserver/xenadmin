@@ -49,8 +49,8 @@ fi
 
 PSQL="ssh -q xenbuild@xenbuilder.uk.xensource.com PGPASSWORD=xenadmindb psql -q -A -t xenbuilder xenadmin"
 
-QUERY="""INSERT INTO xenadmin_builds (build_number,job,revision) SELECT ${get_BUILD_NUMBER},'${get_JOB_NAME}','${get_GIT_REVISION}' WHERE NOT EXISTS ( SELECT 1 FROM xenadmin_builds WHERE build_number = ${get_BUILD_NUMBER});
-UPDATE xenadmin_builds SET job='${get_JOB_NAME}',revision='${get_GIT_REVISION}' WHERE build_number=${get_BUILD_NUMBER};
+QUERY="""INSERT INTO xenadmin_builds (build_number,job,revision) SELECT ${get_BUILD_NUMBER},'${get_JOB_NAME}','${get_REVISION}' WHERE NOT EXISTS ( SELECT 1 FROM xenadmin_builds WHERE build_number = ${get_BUILD_NUMBER});
+UPDATE xenadmin_builds SET job='${get_JOB_NAME}',revision='${get_REVISION}' WHERE build_number=${get_BUILD_NUMBER};
 SELECT MAX(build_number) FROM xenadmin_builds;"""
 
 echo "${QUERY}"

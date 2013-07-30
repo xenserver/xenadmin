@@ -48,28 +48,46 @@ set -e
 
 ROOT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
 
+XENADMIN_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+source ${XENADMIN_DIR}/mk/declarations.sh
+
+# if this is an official build 
+if [ $get_BUILD_NUMBER -ne 0 ]
+then
+	cd ${ROOT_DIR}
+	#DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+	# now we are sure we are running from the branch root
+	#cd ${DIR}/../..
+
+	if [ -d "xenadmin-ref.hg" ]
+	then
+	  hg --cwd xenadmin-ref.hg pull -u
+	else
+	  hg clone ssh://xenhg@hg.uk.xensource.com/carbon/${XS_BRANCH}/xenadmin-ref.hg/
+	fi
+fi
+
 production_jenkins_build()
 {
-    source ${ROOT_DIR}/xenadmin.git/mk/declarations.sh
-    source ${ROOT_DIR}/xenadmin.git/mk/bumpBuildNumber.sh
-    source ${ROOT_DIR}/xenadmin.git/devtools/check-roaming.sh
-    source ${ROOT_DIR}/xenadmin.git/devtools/i18ncheck/i18ncheck.sh
-    source ${ROOT_DIR}/xenadmin.git/devtools/deadcheck/deadcheck.sh
-    source ${ROOT_DIR}/xenadmin.git/devtools/spellcheck/spellcheck.sh
-    source ${ROOT_DIR}/xenadmin.git/mk/xenadmin-build.sh
-    source ${ROOT_DIR}/xenadmin.git/mk/tests-checks.sh
-    source ${ROOT_DIR}/xenadmin.git/mk/archive-push.sh
-    source ${ROOT_DIR}/xenadmin.git/mk/archive-build-artifacts.sh
+    source ${XENADMIN_DIR}/mk/bumpBuildNumber.sh
+    source ${XENADMIN_DIR}/devtools/check-roaming.sh
+    source ${XENADMIN_DIR}/devtools/i18ncheck/i18ncheck.sh
+    source ${XENADMIN_DIR}/devtools/deadcheck/deadcheck.sh
+    source ${XENADMIN_DIR}/devtools/spellcheck/spellcheck.sh
+    source ${XENADMIN_DIR}/mk/xenadmin-build.sh
+    source ${XENADMIN_DIR}/mk/tests-checks.sh
+    source ${XENADMIN_DIR}/mk/archive-push.sh
+    source ${XENADMIN_DIR}/mk/archive-build-artifacts.sh
 }
 
 # Use this option if you're running on a Jenkins that is not the production Jenkins server
 private_jenkins_build()
 {
-    source ${ROOT_DIR}/xenadmin.git/mk/declarations.sh
-    source ${ROOT_DIR}/xenadmin.git/devtools/spellcheck/spellcheck.sh
-    source ${ROOT_DIR}/xenadmin.git/mk/xenadmin-build.sh
-    source ${ROOT_DIR}/xenadmin.git/mk/tests-checks.sh
-    source ${ROOT_DIR}/xenadmin.git/mk/archive-build-artifacts.sh
+    source ${XENADMIN_DIR}/devtools/spellcheck/spellcheck.sh
+    source ${XENADMIN_DIR}/mk/xenadmin-build.sh
+    source ${XENADMIN_DIR}/mk/tests-checks.sh
+    source ${XENADMIN_DIR}/mk/archive-build-artifacts.sh
 }
 
 # Set the PRIVATE_BUILD_MODE variable in order to use the private build mode

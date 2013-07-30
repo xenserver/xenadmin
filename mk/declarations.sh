@@ -45,6 +45,7 @@ fi
 
 # that's the code to get the branch name of the repository
 SOURCE="${BASH_SOURCE[0]}"
+XENADMIN_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 DIR="$( dirname "$SOURCE" )"
 while [ -h "$SOURCE" ]
 do 
@@ -78,23 +79,33 @@ then
     echo "Warning: BUILD_URL env var not set, we will use 'n/a'"
 fi
 
-get_GIT_REVISION=${GIT_COMMIT}
+if [ -d "$DIR/../.git" ]
+then
+    if [ -z "${GIT_COMMIT-}" ]
+    then
+        get_REVISION="none"
+	    echo "Warning: GIT_COMMIT env var not set, we will use 'none'"
+    else
+   	    get_REVISION="${GIT_COMMIT}"
+    fi
 
-if [ -z "${get_GIT_REVISION+xxx}" ]
-then 
-    get_GIT_REVISION="none"
-    echo "Warning: GIT_COMMIT env var not set, we will use $get_GIT_REVISION"
+	XS_BRANCH=`cd $DIR;git config --get remote.origin.url|sed -e 's@.*carbon/\(.*\)/xenadmin.git.*@\1@'`
+else
+	if [ -z "${MERCURIAL_REVISION+xxx}" ]
+	then 
+	    MERCURIAL_REVISION="none"
+	    echo "Warning: MERCURIAL_REVISION env var not set, we will use $MERCURIAL_REVISION"
+	fi
+	get_REVISION=${MERCURIAL_REVISION}
+	XS_BRANCH=`cd $DIR;hg showconfig paths.default|sed -e 's@.*carbon/\(.*\)/xenadmin.hg.*@\1@'`
 fi
 
-XS_BRANCH=`cd $DIR;git config --get remote.origin.url|sed -e 's@.*carbon/\(.*\)/xenadmin.git.*@\1@'`
-echo Running on branch: $XS_BRANCH
-
-cd ${ROOT_DIR}
-if [ -d "xenadmin-ref.hg" ]
+if [ -z "${XS_BRANCH+xxx}" ]
 then
-  hg --cwd xenadmin-ref.hg pull -u
+    echo Failed to detect the branch, stopping here because this would break things much later.
+    exit 1
 else
-  hg clone ssh://xenhg@hg.uk.xensource.com/carbon/${XS_BRANCH}/xenadmin-ref.hg/
+    echo Running on branch: $XS_BRANCH
 fi
 
 #rename Jenkins environment variables to distinguish them from ours; remember to use them as get only
@@ -118,7 +129,7 @@ else
 fi
 
 echo "Workspace located in: $ROOT"
-REPO=${ROOT}/xenadmin.git
+REPO=${XENADMIN_DIR}
 REF_REPO=${ROOT}/xenadmin-ref.hg
 SCRATCH_DIR=${ROOT}/scratch
 OUTPUT_DIR=${ROOT}/output

@@ -47,11 +47,16 @@ fi
 cp ${OUTPUT_DIR}/{manifest,latest-successful-build} ${ROOT}/xenadmin-ref.hg
 cd ${ROOT}/xenadmin-ref.hg && hg commit -m "Latest successful build ${get_BUILD_ID}"
 
-#if [ -z "${DISABLE_PUSH+xxx}" ]
-#then
-#  cd ${ROOT}/xenadmin-ref.hg && hg push
-#else
-  echo "pushing to ssh://hg has been disabled"
-#fi
+if [ ${XS_BRANCH} = "trunk" ]
+then
+   echo "Pushes are disabled on trunk."
+else
+    if [ -z "${DISABLE_PUSH+xxx}" ]
+    then
+        cd ${ROOT}/xenadmin-ref.hg && hg push
+    else
+        echo "pushing to ssh://hg has been disabled"
+    fi
+fi
 
 set +u

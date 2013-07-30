@@ -385,7 +385,7 @@ done
 
 #create manifest
 echo "@branch=${XS_BRANCH}" >> ${OUTPUT_DIR}/manifest
-echo "xenadmin xenadmin.git" ${get_GIT_REVISION:0:12} >> ${OUTPUT_DIR}/manifest
+echo "xenadmin ${XENADMIN_DIR}" ${get_REVISION:0:12} >> ${OUTPUT_DIR}/manifest
 cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep xencenter-ovf >> ${OUTPUT_DIR}/manifest
 cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep chroot-lenny >> ${OUTPUT_DIR}/manifest
 cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep branding >> ${OUTPUT_DIR}/manifest
