@@ -40,8 +40,8 @@ namespace XenAdmin.Controls.XenSearch
     {
         private int _maxHeight = 400;
 
-        public event EventHandler SearchChanged;
-        public event EventHandler SearchForChanged;
+        public event Action SearchChanged;
+        public event Action SearchForChanged;
         public event Action SaveRequested;
 
         public Searcher()
@@ -58,18 +58,18 @@ namespace XenAdmin.Controls.XenSearch
 
         private void GroupingControlGroupingChanged(object sender, EventArgs e)
         {
-            OnSearchChanged(EventArgs.Empty);
+            OnSearchChanged();
         }
 
         private void QueryElementQueryChanged(object sender, EventArgs e)
         {
-            OnSearchChanged(EventArgs.Empty);
+            OnSearchChanged();
         }
 
         private void SearchForQueryChanged(object sender, EventArgs e)
         {
-            OnSearchForChanged(EventArgs.Empty);
-            OnSearchChanged(EventArgs.Empty);
+            OnSearchForChanged();
+            OnSearchChanged();
         }
 
         #region Accessors
@@ -140,24 +140,16 @@ namespace XenAdmin.Controls.XenSearch
                 buttonSave.Enabled = (ConnectionsManager.XenConnections.Find(c => c.IsConnected) != null);
         }
 
-        protected virtual void OnSearchChanged(EventArgs e)
+        protected virtual void OnSearchChanged()
         {
-            EventHandler handler = SearchChanged;
-
-            if (handler != null)
-            {
-                handler(this, e);
-            }
+            if (SearchChanged != null)
+                SearchChanged();
         }
 
-        protected virtual void OnSearchForChanged(EventArgs e)
+        protected virtual void OnSearchForChanged()
         {
-            EventHandler handler = SearchForChanged;
-
-            if (handler != null)
-            {
-                handler(this, e);
-            }
+            if (SearchForChanged != null)
+                SearchForChanged();
         }
 
         private void QueryElement_Resize(object sender, EventArgs e)

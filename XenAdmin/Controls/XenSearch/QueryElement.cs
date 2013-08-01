@@ -204,6 +204,29 @@ namespace XenAdmin.Controls.XenSearch
             Setup();
         }
 
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            CurrentQueryType = null;
+
+            foreach (QueryElement subQueryElement in subQueryElements)
+            {
+                subQueryElement.Resize -= subQueryElement_Resize;
+                subQueryElement.QueryChanged -= subQueryElement_QueryChanged;
+                subQueryElement.searcher.SearchForChanged -= subQueryElement.searcher_SearchForChanged;
+                subQueryElement.Dispose();
+            }
+
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
         void queryTypeComboButton_BeforePopup(object sender, EventArgs e)
         {
             PopulateGroupTypesComboButton(false);
@@ -590,7 +613,7 @@ namespace XenAdmin.Controls.XenSearch
             {
                 searcher = value;
                 if (searcher != null)
-                    searcher.SearchForChanged += new EventHandler(searcher_SearchForChanged);
+                    searcher.SearchForChanged += searcher_SearchForChanged;
             }
         }
 
@@ -726,7 +749,7 @@ namespace XenAdmin.Controls.XenSearch
             }
         }
 
-        private void searcher_SearchForChanged(object sender, EventArgs e)
+        private void searcher_SearchForChanged()
         {
             // We only run this for the outermost query because subqueries
             // are removed by their parent (RemoveUnwantedFilters() is recursive).
@@ -818,12 +841,14 @@ namespace XenAdmin.Controls.XenSearch
             Controls.Remove(subQueryElement);
             subQueryElements.Remove(subQueryElement);
 
-            subQueryElement.Resize -= new EventHandler(subQueryElement_Resize);
-            subQueryElement.QueryChanged -= new EventHandler(subQueryElement_QueryChanged);
-            subQueryElement.searcher.SearchForChanged -= new EventHandler(subQueryElement.searcher_SearchForChanged);
+            subQueryElement.Resize -= subQueryElement_Resize;
+            subQueryElement.QueryChanged -= subQueryElement_QueryChanged;
+            subQueryElement.searcher.SearchForChanged -= subQueryElement.searcher_SearchForChanged;
 
             subQueryElement.Dispose();
         }
+
+        #region Nested classes
 
         internal abstract class QueryType
         {
@@ -2479,6 +2504,7 @@ namespace XenAdmin.Controls.XenSearch
                     && vm.VBDs.Count > 0;
             }
         }
+        
         internal class LongQueryType : MatchQueryType
         {
             private readonly MatchType[] matchType;
@@ -2498,5 +2524,7 @@ namespace XenAdmin.Controls.XenSearch
 
             protected override MatchType[] MatchTypes { get { return matchType; } }
         }
+
+        #endregion
     }
 }

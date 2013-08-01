@@ -129,7 +129,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void UI_SearchChanged(object sender, EventArgs e)
+        private void UI_SearchChanged()
         {
             if (!ignoreSearchUpdate && !Program.Exiting)
             {

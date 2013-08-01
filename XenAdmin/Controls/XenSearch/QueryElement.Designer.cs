@@ -9,29 +9,6 @@ namespace XenAdmin.Controls.XenSearch
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            CurrentQueryType = null;
-
-            foreach (QueryElement subQueryElement in subQueryElements)
-            {
-                subQueryElement.Resize -= new EventHandler(subQueryElement_Resize);
-                subQueryElement.QueryChanged -= new EventHandler(subQueryElement_QueryChanged);
-                subQueryElement.searcher.SearchForChanged -= new EventHandler(subQueryElement.searcher_SearchForChanged);
-                subQueryElement.Dispose();
-            }
-
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
         #region Component Designer generated code
 
         /// <summary> 

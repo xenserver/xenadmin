@@ -64,7 +64,7 @@ namespace XenAdmin.Controls.XenSearch
         private static MetricUpdater MetricUpdater;
 
         private Search search;
-        public event EventHandler SearchChanged;
+        public event Action SearchChanged;
 
         private readonly UpdateManager listUpdateManager = new UpdateManager();
 
@@ -101,7 +101,7 @@ namespace XenAdmin.Controls.XenSearch
         private void OnSearchChanged()
         {
             if (SearchChanged != null)
-                SearchChanged(this, new EventArgs());
+                SearchChanged();
         }
 
         void CustomFields_CustomFieldsChanged(object sender, EventArgs e)

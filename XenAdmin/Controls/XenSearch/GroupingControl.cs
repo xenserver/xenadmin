@@ -163,7 +163,7 @@ namespace XenAdmin.Controls.XenSearch
                 GroupingChanged(this, new EventArgs());
         }
 
-        private void searcher_SearchForChanged(object sender, EventArgs e)
+        private void searcher_SearchForChanged()
         {
             RemoveUnwantedGroups();
 
@@ -181,7 +181,7 @@ namespace XenAdmin.Controls.XenSearch
             {
                 searcher = value;
                 if (searcher != null)
-                    searcher.SearchForChanged += new EventHandler(searcher_SearchForChanged);
+                    searcher.SearchForChanged += searcher_SearchForChanged;
             }
         }
 
