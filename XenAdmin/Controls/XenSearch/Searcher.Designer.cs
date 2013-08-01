@@ -33,6 +33,9 @@ namespace XenAdmin.Controls.XenSearch
             this.GroupsLabel = new System.Windows.Forms.Label();
             this.FiltersLabel = new System.Windows.Forms.Label();
             this.SearchLabel = new System.Windows.Forms.Label();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.searchFor = new XenAdmin.Controls.XenSearch.SearchFor();
             this.GroupingControl = new XenAdmin.Controls.XenSearch.GroupingControl();
             this.QueryElement = new XenAdmin.Controls.XenSearch.QueryElement();
@@ -52,6 +55,26 @@ namespace XenAdmin.Controls.XenSearch
             // 
             resources.ApplyResources(this.SearchLabel, "SearchLabel");
             this.SearchLabel.Name = "SearchLabel";
+            // 
+            // buttonSave
+            // 
+            resources.ApplyResources(this.buttonSave, "buttonSave");
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            // 
+            // buttonClose
+            // 
+            resources.ApplyResources(this.buttonClose, "buttonClose");
+            this.buttonClose.Image = global::XenAdmin.Properties.Resources._000_Abort_h32bit_16;
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
             // 
             // searchFor
             // 
@@ -76,9 +99,12 @@ namespace XenAdmin.Controls.XenSearch
             // 
             // Searcher
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             resources.ApplyResources(this, "$this");
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.buttonClose);
+            this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.searchFor);
             this.Controls.Add(this.SearchLabel);
             this.Controls.Add(this.FiltersLabel);
@@ -99,5 +125,8 @@ namespace XenAdmin.Controls.XenSearch
         internal QueryElement QueryElement;
         private System.Windows.Forms.Label SearchLabel;
         private SearchFor searchFor;
+        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button buttonClose;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -8311,15 +8311,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Custom Search....
-        /// </summary>
-        public static string CUSTOMISE_SEARCH {
-            get {
-                return ResourceManager.GetString("CUSTOMISE_SEARCH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Daily; at {0}.
         /// </summary>
         public static string DAILY_SCHEDULE_FORMAT {
@@ -14882,15 +14873,6 @@ namespace XenAdmin {
         public static string HIDE_RUN_HISTORY {
             get {
                 return ResourceManager.GetString("HIDE_RUN_HISTORY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Hide Sear&amp;ch Query.
-        /// </summary>
-        public static string HIDE_SEARCH {
-            get {
-                return ResourceManager.GetString("HIDE_SEARCH", resourceCulture);
             }
         }
         

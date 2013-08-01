@@ -142,7 +142,7 @@
     <value>121, 23</value>
   </data>
   <data name="SearchButton.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>0</value>
   </data>
   <data name="SearchButton.Text" xml:space="preserve">
     <value>S&amp;earch Options</value>
@@ -199,10 +199,10 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="OutputPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>626, 194</value>
+    <value>626, 164</value>
   </data>
   <data name="OutputPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;OutputPanel.Name" xml:space="preserve">
     <value>OutputPanel</value>
@@ -220,16 +220,16 @@
     <value>Fill</value>
   </data>
   <data name="panel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 225</value>
+    <value>1, 255</value>
   </data>
   <data name="panel4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="panel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>626, 194</value>
+    <value>626, 164</value>
   </data>
   <data name="panel4.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;panel4.Name" xml:space="preserve">
     <value>panel4</value>
@@ -259,7 +259,7 @@
     <value>1, 1, 1, 0</value>
   </data>
   <data name="Searcher.Size" type="System.Drawing.Size, System.Drawing">
-    <value>626, 187</value>
+    <value>626, 217</value>
   </data>
   <data name="Searcher.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -292,7 +292,7 @@
     <value>628, 420</value>
   </data>
   <data name="tableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel.Name" xml:space="preserve">
     <value>tableLayoutPanel</value>
@@ -325,61 +325,55 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pageContainerPanel.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <metadata name="searchOptionsMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <data name="editSearchToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
+    <value>179, 22</value>
   </data>
   <data name="editSearchToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Custom Search...</value>
   </data>
   <data name="resetSearchToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
+    <value>179, 22</value>
   </data>
   <data name="resetSearchToolStripMenuItem.Text" xml:space="preserve">
     <value>De&amp;fault Search</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 6</value>
+    <value>176, 6</value>
   </data>
   <data name="applySavedToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
+    <value>179, 22</value>
   </data>
   <data name="applySavedToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Apply Saved Search</value>
   </data>
   <data name="deleteSavedToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
+    <value>179, 22</value>
   </data>
   <data name="deleteSavedToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Delete Saved Search</value>
   </data>
-  <data name="saveSearchToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
-  </data>
-  <data name="saveSearchToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Save Current Search...</value>
-  </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 6</value>
+    <value>176, 6</value>
   </data>
   <data name="exportSearchToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
+    <value>179, 22</value>
   </data>
   <data name="exportSearchToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Export To File...</value>
   </data>
   <data name="importSearchToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
+    <value>179, 22</value>
   </data>
   <data name="importSearchToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Import...</value>
   </data>
   <data name="searchOptionsMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 192</value>
+    <value>180, 148</value>
   </data>
   <data name="&gt;&gt;searchOptionsMenuStrip.Name" xml:space="preserve">
     <value>searchOptionsMenuStrip</value>
@@ -427,12 +421,6 @@
     <value>deleteSavedToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;deleteSavedToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;saveSearchToolStripMenuItem.Name" xml:space="preserve">
-    <value>saveSearchToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;saveSearchToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">

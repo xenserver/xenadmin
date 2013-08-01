@@ -42,7 +42,6 @@ namespace XenAdmin.TabPages
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.applySavedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteSavedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exportSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -109,7 +108,6 @@ namespace XenAdmin.TabPages
             this.toolStripSeparator1,
             this.applySavedToolStripMenuItem,
             this.deleteSavedToolStripMenuItem,
-            this.saveSearchToolStripMenuItem,
             this.toolStripSeparator2,
             this.exportSearchToolStripMenuItem,
             this.importSearchToolStripMenuItem});
@@ -143,12 +141,6 @@ namespace XenAdmin.TabPages
             // 
             this.deleteSavedToolStripMenuItem.Name = "deleteSavedToolStripMenuItem";
             resources.ApplyResources(this.deleteSavedToolStripMenuItem, "deleteSavedToolStripMenuItem");
-            // 
-            // saveSearchToolStripMenuItem
-            // 
-            this.saveSearchToolStripMenuItem.Name = "saveSearchToolStripMenuItem";
-            resources.ApplyResources(this.saveSearchToolStripMenuItem, "saveSearchToolStripMenuItem");
-            this.saveSearchToolStripMenuItem.Click += new System.EventHandler(this.saveSearchToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -187,7 +179,6 @@ namespace XenAdmin.TabPages
 
         #endregion
 
-        private System.Windows.Forms.ToolStripMenuItem saveSearchToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetSearchToolStripMenuItem;
         internal XenAdmin.Controls.NonReopeningContextMenuStrip searchOptionsMenuStrip;
         internal System.Windows.Forms.ToolStripMenuItem editSearchToolStripMenuItem;

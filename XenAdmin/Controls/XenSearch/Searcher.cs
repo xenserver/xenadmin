@@ -42,6 +42,7 @@ namespace XenAdmin.Controls.XenSearch
 
         public event EventHandler SearchChanged;
         public event EventHandler SearchForChanged;
+        public event Action SaveRequested;
 
         public Searcher()
         {
@@ -70,6 +71,8 @@ namespace XenAdmin.Controls.XenSearch
             OnSearchForChanged(EventArgs.Empty);
             OnSearchChanged(EventArgs.Empty);
         }
+
+        #region Accessors
 
         [Browsable(false)]
         public Search Search
@@ -124,6 +127,19 @@ namespace XenAdmin.Controls.XenSearch
             get { return GroupingControl.Grouping; }
         }
 
+        public bool Expanded { get; private set; }
+
+        #endregion
+
+        public void ToggleExpandedState(bool expand)
+        {
+            Visible = expand;
+            Expanded = expand;
+
+            if (Visible)
+                buttonSave.Enabled = (ConnectionsManager.XenConnections.Find(c => c.IsConnected) != null);
+        }
+
         protected virtual void OnSearchChanged(EventArgs e)
         {
             EventHandler handler = SearchChanged;
@@ -153,6 +169,17 @@ namespace XenAdmin.Controls.XenSearch
             GroupingControl.Top = contentsHeight - 41;
 
             Height = Math.Min(_maxHeight, contentsHeight);
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            if (SaveRequested != null)
+                SaveRequested();
+        }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            ToggleExpandedState(false);
         }
     }
 }

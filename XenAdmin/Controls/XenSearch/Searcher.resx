@@ -130,13 +130,13 @@
     <value>NoControl</value>
   </data>
   <data name="GroupsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 123</value>
+    <value>19, 153</value>
   </data>
   <data name="GroupsLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 20</value>
   </data>
   <data name="GroupsLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="GroupsLabel.Text" xml:space="preserve">
     <value>Group by</value>
@@ -151,7 +151,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;GroupsLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="FiltersLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -163,13 +163,13 @@
     <value>NoControl</value>
   </data>
   <data name="FiltersLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 64</value>
+    <value>19, 94</value>
   </data>
   <data name="FiltersLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 20</value>
   </data>
   <data name="FiltersLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="FiltersLabel.Text" xml:space="preserve">
     <value>Filters</value>
@@ -184,7 +184,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;FiltersLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="SearchLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -196,13 +196,13 @@
     <value>NoControl</value>
   </data>
   <data name="SearchLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 10</value>
+    <value>19, 40</value>
   </data>
   <data name="SearchLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 20</value>
   </data>
   <data name="SearchLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="SearchLabel.Text" xml:space="preserve">
     <value>Search for</value>
@@ -217,16 +217,112 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;SearchLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="buttonSave.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="buttonSave.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
+    <value>371, 6</value>
+  </data>
+  <data name="buttonSave.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 6, 3, 6</value>
+  </data>
+  <data name="buttonSave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="buttonSave.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="buttonSave.Text" xml:space="preserve">
+    <value>Save...</value>
+  </data>
+  <data name="&gt;&gt;buttonSave.Name" xml:space="preserve">
+    <value>buttonSave</value>
+  </data>
+  <data name="&gt;&gt;buttonSave.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonSave.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;buttonSave.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="buttonClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="buttonClose.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>455, 6</value>
+  </data>
+  <data name="buttonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 6, 6, 6</value>
+  </data>
+  <data name="buttonClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="buttonClose.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;buttonClose.Name" xml:space="preserve">
+    <value>buttonClose</value>
+  </data>
+  <data name="&gt;&gt;buttonClose.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonClose.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;buttonClose.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
+  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 20</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>New Search</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="searchFor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 32</value>
+    <value>18, 62</value>
   </data>
   <data name="searchFor.Size" type="System.Drawing.Size, System.Drawing">
     <value>429, 31</value>
   </data>
   <data name="searchFor.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;searchFor.Name" xml:space="preserve">
     <value>searchFor</value>
@@ -238,13 +334,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;searchFor.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="GroupingControl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="GroupingControl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 146</value>
+    <value>18, 176</value>
   </data>
   <data name="GroupingControl.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 2, 1</value>
@@ -253,7 +349,7 @@
     <value>447, 29</value>
   </data>
   <data name="GroupingControl.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;GroupingControl.Name" xml:space="preserve">
     <value>GroupingControl</value>
@@ -265,13 +361,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;GroupingControl.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="QueryElement.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="QueryElement.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 89</value>
+    <value>16, 119</value>
   </data>
   <data name="QueryElement.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 2, 2, 0</value>
@@ -280,7 +376,7 @@
     <value>448, 25</value>
   </data>
   <data name="QueryElement.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;QueryElement.Name" xml:space="preserve">
     <value>QueryElement</value>
@@ -292,7 +388,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;QueryElement.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>8</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -307,7 +403,7 @@
     <value>0, 8</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>484, 187</value>
+    <value>484, 226</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Searcher</value>

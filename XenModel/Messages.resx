@@ -2981,9 +2981,6 @@ Please reconnect the host and try again.</value>
   <data name="CUSTOM" xml:space="preserve">
     <value>Custom...</value>
   </data>
-  <data name="CUSTOMISE_SEARCH" xml:space="preserve">
-    <value>&amp;Custom Search...</value>
-  </data>
   <data name="CUSTOM_FIELDS" xml:space="preserve">
     <value>Custom Fields</value>
   </data>
@@ -5235,9 +5232,6 @@ Click Configure HA to alter the settings displayed below.</value>
   </data>
   <data name="HIDE_RUN_HISTORY" xml:space="preserve">
     <value>Hide Run History</value>
-  </data>
-  <data name="HIDE_SEARCH" xml:space="preserve">
-    <value>Hide Sear&amp;ch Query</value>
   </data>
   <data name="HIGH_AVAILABILITY" xml:space="preserve">
     <value>High Availability</value>

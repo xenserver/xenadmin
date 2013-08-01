@@ -61,7 +61,9 @@ namespace XenAdmin.TabPages
             InitializeComponent();
 
             Searcher.SearchChanged += UI_SearchChanged;
+            Searcher.SaveRequested += Searcher_SaveRequested;
             OutputPanel.QueryPanel.SearchChanged += UI_SearchChanged;
+
             if (!Application.RenderWithVisualStyles)
             {
                 panel2.BackColor = Searcher.BackColor = SystemColors.Control;
@@ -90,17 +92,15 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void Save()
+        private void Searcher_SaveRequested()
         {
-            Program.AssertOnEventThread();
-
             Search newSearch = Search;
-
-            NameAndConnectionPrompt dialog = new NameAndConnectionPrompt();
+            
             string saveName = newSearch.Name ?? String.Empty;
             List<Search> existingSearches = new List<Search>(Search.Searches);
-            if (null != existingSearches.Find(search => search.Name == saveName))  // name already exists: choose a new name by appending an integer (CA-34780)
+            if (null != existingSearches.Find(search => search.Name == saveName))
             {
+                // name already exists: choose a new name by appending an integer (CA-34780)
                 for (int i = 2; ; ++i)
                 {
                     string possName = string.Format("{0} ({1})", saveName, i);
@@ -111,16 +111,21 @@ namespace XenAdmin.TabPages
                     }
                 }
             }
-            dialog.PromptedName = saveName;
-            dialog.HelpID = "SaveSearchDialog";
 
-            if (dialog.ShowDialog(this) == DialogResult.OK &&
-                dialog.Connection != null)  // CA-40307
+            using (var dialog = new NameAndConnectionPrompt
             {
-                newSearch.Name = dialog.PromptedName;
-                newSearch.Connection = dialog.Connection;
+                PromptedName = saveName,
+                HelpID = "SaveSearchDialog"
+            })
+            {
+                if (dialog.ShowDialog(this) == DialogResult.OK &&
+                    dialog.Connection != null) // CA-40307
+                {
+                    newSearch.Name = dialog.PromptedName;
+                    newSearch.Connection = dialog.Connection;
 
-                new SearchAction(newSearch, SearchAction.Operation.save).RunAsync();
+                    new SearchAction(newSearch, SearchAction.Operation.save).RunAsync();
+                }
             }
         }
 
@@ -168,18 +173,17 @@ namespace XenAdmin.TabPages
                 QueryFilter filter = Searcher.QueryFilter;
                 Query query = new Query(scope, filter);
                 Grouping grouping = Searcher.Grouping;
-                bool visible = Searcher.Visible;
                 string name = (base.Text == Messages.CUSTOM_SEARCH ? null : base.Text);
                 string uuid = null;
                 List<KeyValuePair<String, int>> columns = OutputPanel.QueryPanel.ColumnsAndWidths;
                 Sort[] sorting = OutputPanel.QueryPanel.Sorting;
-                
-                return new Search(query, grouping, visible, name, uuid, columns, sorting);
+
+                return new Search(query, grouping, Searcher.Expanded, name, uuid, columns, sorting);
             }
 
             set
             {
-                QueryExpanded = value.ShowSearch;
+                Searcher.ToggleExpandedState(value.ShowSearch);
 
                 ignoreSearchUpdate = true;
                 try
@@ -200,26 +204,6 @@ namespace XenAdmin.TabPages
         private void UpdateTitle(Search search)
         {
             base.Text = ((search == null || search.Name == null) ? Messages.CUSTOM_SEARCH : HelpersGUI.GetLocalizedSearchName(search));
-        }
-
-        private bool QueryExpanded
-        {
-            get 
-            { 
-                return Searcher.Visible; 
-            }
-            set
-            {
-                Searcher.Visible = value;
-                editSearchToolStripMenuItem.Text = value ? Messages.HIDE_SEARCH : Messages.CUSTOMISE_SEARCH;
-            }
-        }
-
-        private void ShowHideQuery()
-        {
-            QueryExpanded = !QueryExpanded;
-
-            OnSearchChanged(EventArgs.Empty);
         }
 
         public void BuildList()
@@ -247,25 +231,20 @@ namespace XenAdmin.TabPages
 
         private void searchOptionsMenuStrip_Opening(object sender, CancelEventArgs e)
         {
-            saveSearchToolStripMenuItem.Enabled = (ConnectionsManager.XenConnections.Find(c => c.IsConnected) != null);  // There is at least one connected Connection
             AttachSavedSubmenu(applySavedToolStripMenuItem, true);
             AttachSavedSubmenu(deleteSavedToolStripMenuItem, false);
         }
 
         private void editSearchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowHideQuery();
-        }
-
-        private void saveSearchToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Save();
+            Searcher.ToggleExpandedState(true);
+            OnSearchChanged(EventArgs.Empty);
         }
 
         private void resetSearchToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Search search = Search.SearchFor(xenObjects);
-            search.ShowSearch = QueryExpanded;
+            search.ShowSearch = Searcher.Visible;
             Search = search;
         }
 
