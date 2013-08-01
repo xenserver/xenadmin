@@ -8921,7 +8921,16 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This will delete saved search &apos;{0}&apos;.  Click OK to continue..
+        ///   Looks up a localized string similar to &amp;Delete.
+        /// </summary>
+        public static string DELETE_SEARCH_MENU_ITEM {
+            get {
+                return ResourceManager.GetString("DELETE_SEARCH_MENU_ITEM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete saved search &apos;{0}&apos;?.
         /// </summary>
         public static string DELETE_SEARCH_PROMPT {
             get {

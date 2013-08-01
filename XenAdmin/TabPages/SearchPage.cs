@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Controls.XenSearch;
 using XenAdmin.Core;
@@ -51,7 +52,6 @@ namespace XenAdmin.TabPages
 
         private bool ignoreSearchUpdate;
         private List<IXenObject> xenObjects;
-
         public event EventHandler SearchChanged;
 
         /// <summary>
@@ -171,7 +171,6 @@ namespace XenAdmin.TabPages
 
                 return new Search(query, grouping, Searcher.Expanded, name, uuid, columns, sorting);
             }
-
             set
             {
                 Searcher.ToggleExpandedState(value.ShowSearch);
@@ -204,13 +203,6 @@ namespace XenAdmin.TabPages
             OutputPanel.BuildList();
         }
     
-        private void SearchButton_Click(object sender, EventArgs e)
-        {
-            searchOptionsMenuStrip.Show(this, 
-                new Point(SearchButton.Left + panel4.Left + tableLayoutPanel.Left + pageContainerPanel.Left, 
-                    SearchButton.Bottom + panel4.Left + tableLayoutPanel.Left + pageContainerPanel.Top));
-        }
-
         protected override void OnSizeChanged(EventArgs e)
         {
             base.OnSizeChanged(e);
@@ -220,26 +212,70 @@ namespace XenAdmin.TabPages
 
         #region Search menu
 
-        private void searchOptionsMenuStrip_Opening(object sender, CancelEventArgs e)
+        private void contextMenuStripSearches_Opening(object sender, CancelEventArgs e)
         {
-            AttachSavedSubmenu(applySavedToolStripMenuItem, true);
-            AttachSavedSubmenu(deleteSavedToolStripMenuItem, false);
+            var defaultSearches = Search.Searches.Where(s => s.DefaultSearch).OrderBy(s => s);
+            var customSearches = Search.Searches.Where(s => !s.DefaultSearch).OrderBy(s => s);
+
+            var customItems = new List<ToolStripMenuItem>();
+            foreach (Search search in customSearches)
+            {
+                customItems.Add(new ToolStripMenuItem(search.Name.EscapeAmpersands(),
+                                                 Properties.Resources._000_Search_h32bit_16,
+                                                 applySavedSearch_Click) { Tag = search });
+            }
+
+            var defaultItems = new List<ToolStripMenuItem>();
+            foreach (Search search in defaultSearches)
+            {
+                defaultItems.Add(new ToolStripMenuItem(search.Name.EscapeAmpersands(),
+                                                       Properties.Resources._000_defaultSpyglass_h32bit_16,
+                                                       applySavedSearch_Click) { Tag = search });
+            }
+
+            contextMenuStripSearches.Items.Clear();
+            contextMenuStripSearches.Items.AddRange(customItems.ToArray());
+            contextMenuStripSearches.Items.AddRange(defaultItems.ToArray());
+
+            if (contextMenuStripSearches.Items.Count > 0)
+                contextMenuStripSearches.Items.Add(new ToolStripSeparator());
+
+            var deleteItem = new ToolStripMenuItem(Messages.DELETE_SEARCH_MENU_ITEM);
+
+            if (customSearches.Count() > 0)
+            {
+                deleteItem.Enabled = true;
+
+                var deleteableItems = new List<ToolStripMenuItem>();
+                foreach (Search search in customSearches)
+                {
+                    deleteableItems.Add(new ToolStripMenuItem(search.Name.EscapeAmpersands(),
+                                                              Properties.Resources._000_Search_h32bit_16,
+                                                              deleteSavedSearch_Click) { Tag = search });
+                }
+                deleteItem.DropDownItems.AddRange(deleteableItems.ToArray());
+            }
+            else
+            {
+                deleteItem.Enabled = false;
+            }
+            contextMenuStripSearches.Items.Add(deleteItem);
         }
 
-        private void editSearchToolStripMenuItem_Click(object sender, EventArgs e)
+        private void buttonNewSearch_Click(object sender, EventArgs e)
         {
             Searcher.ToggleExpandedState(true);
             OnSearchChanged(EventArgs.Empty);
         }
 
-        private void resetSearchToolStripMenuItem_Click(object sender, EventArgs e)
+        private void buttonReset_Click(object sender, EventArgs e)
         {
             Search search = Search.SearchFor(xenObjects);
             search.ShowSearch = Searcher.Visible;
             Search = search;
         }
 
-        private void exportSearchToolStripMenuItem_Click(object sender, EventArgs e)
+        private void buttonExport_Click(object sender, EventArgs e)
         {
             using (SaveFileDialog dialog = new SaveFileDialog())
             {
@@ -268,66 +304,44 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void importSearchToolStripMenuItem_Click(object sender, EventArgs e)
+        private void buttonImport_Click(object sender, EventArgs e)
         {
             new ImportSearchCommand(Program.MainWindow.CommandInterface).Execute();
         }
 
         private void applySavedSearch_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem item = (ToolStripMenuItem)sender;
-            Search = item.Tag as Search;
+            var item = sender as ToolStripItem;
+            if (item == null)
+                return;
+
+            var search = item.Tag as Search;
+            if (search == null)
+                return;
+
+            Search = search;
         }
 
         private void deleteSavedSearch_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem item = (ToolStripMenuItem)sender;
-            Search search = (Search)item.Tag;
+            var item = sender as ToolStripItem;
+            if (item == null)
+                return;
 
-            if (new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Information, String.Format(Messages.DELETE_SEARCH_PROMPT, search.Name), String.Format(Messages.DELETE_SEARCH, search.Name)),
-                    ThreeButtonDialog.ButtonOK,
-                    ThreeButtonDialog.ButtonCancel).ShowDialog(this) == DialogResult.OK)
+            var search = item.Tag as Search;
+            if (search == null)
+                return;
+
+            using (var dlog = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Warning,
+                        String.Format(Messages.DELETE_SEARCH_PROMPT, search.Name),
+                        String.Format(Messages.DELETE_SEARCH, search.Name)),
+                    ThreeButtonDialog.ButtonYes,
+                    ThreeButtonDialog.ButtonNo))
             {
-                new SearchAction(search, SearchAction.Operation.delete).RunAsync();
+                if (dlog.ShowDialog(this) == DialogResult.Yes)
+                    new SearchAction(search, SearchAction.Operation.delete).RunAsync();
             }
-        }
-
-        // If applyMenu, include all searches; otherwise (delete menu), only include custom searches.
-        // Also they use different click handlers.
-        private ToolStripItem[] MakeSavedSubmenu(bool applyMenu)
-        {
-            List<ToolStripItem> ans = new List<ToolStripItem>();
-
-            Search[] searches = Search.Searches;
-            Array.Sort(searches);
-            foreach (Search search in searches)
-            {
-                if (!applyMenu && search.DefaultSearch)
-                    continue;
-                Image icon = search.DefaultSearch ? Properties.Resources._000_defaultSpyglass_h32bit_16 : Properties.Resources._000_Search_h32bit_16;
-                EventHandler onClickDelegate = applyMenu ? (EventHandler)applySavedSearch_Click : (EventHandler)deleteSavedSearch_Click;
-                ToolStripMenuItem item = new ToolStripMenuItem(search.Name.EscapeAmpersands(), icon, onClickDelegate);
-                item.Tag = search;
-                ans.Add(item);
-            }
-
-            // If we have no items, make a greyed-out "(None)" item
-            if (ans.Count == 0)
-            {
-                ToolStripMenuItem item = MainWindow.NewToolStripMenuItem(Messages.NONE_PARENS);
-                item.Enabled = false;
-                ans.Add(item);
-            }
-
-            return ans.ToArray();
-        }
-
-        // applyMenu: See comment on MakeSavedSubmenu()
-        private void AttachSavedSubmenu(ToolStripDropDownItem parent, bool applyMenu)
-        {
-            parent.DropDownItems.Clear();
-            parent.DropDownItems.AddRange(MakeSavedSubmenu(applyMenu));
         }
 
         #endregion
