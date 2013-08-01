@@ -201,7 +201,6 @@ namespace XenAdmin
 
             TreeSearchBox.SearchChanged += TreeSearchBox_SearchChanged;
             SearchPage.SearchChanged += SearchPanel_SearchChanged;
-            SearchPage.ExportSearch += SearchPanel_ExportSearch;
 
             Alert.XenCenterAlerts.CollectionChanged += XenCenterAlerts_CollectionChanged;
 
@@ -3631,37 +3630,6 @@ namespace XenAdmin
             RequestRefreshTreeView();
             FocusTreeView();
             SelectObject(null);            
-        }
-
-        private void SearchPanel_ExportSearch(object sender, SearchEventArgs e)
-        {
-            if (e.Search == null)
-                return;  // probably shouldn't happen, but let's be safe
-
-            using (SaveFileDialog dialog = new SaveFileDialog())
-            {
-                dialog.AddExtension = true;
-                dialog.Filter = string.Format("{0} (*.xensearch)|*.xensearch|{1} (*.*)|*.*", Messages.XENSEARCH_SAVED_SEARCH, Messages.ALL_FILES);
-                dialog.FilterIndex = 0;
-                dialog.RestoreDirectory = true;
-                dialog.DefaultExt = "xensearch";
-                dialog.CheckPathExists = false;
-                
-                if (dialog.ShowDialog(this) != DialogResult.OK)
-                    return;
-
-                try
-                {
-                    log.InfoFormat("Exporting search to {0}", dialog.FileName);
-                    e.Search.Save(dialog.FileName);
-                    log.InfoFormat("Exported search to {0} successfully.", dialog.FileName);
-                }
-                catch
-                {
-                    log.ErrorFormat("Failed to export search to {0}", dialog.FileName);
-                    throw;
-                }
-            }
         }
 
         #endregion

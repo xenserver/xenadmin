@@ -844,31 +844,5 @@ namespace XenAdmin.XenSearch
 
             searches["dead-beef-1234-snapshotsbyvm"] = SnapshotsByVM;
         }
-
-        internal static Search GetByUUID(String uuid)
-        {
-            lock (searches)
-            {
-                Search search;
-                if (!searches.TryGetValue(uuid, out search))
-                    return null;
-                return search;
-            }
-        }
-    }
-
-    public class SearchEventArgs : EventArgs
-    {
-        private Search search;
-
-        public Search Search
-        {
-            get { return search; }
-        }
-
-        public SearchEventArgs(Search search)
-        {
-            this.search = search;
-        }
     }
 }

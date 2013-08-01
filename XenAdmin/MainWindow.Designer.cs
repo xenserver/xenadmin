@@ -37,7 +37,6 @@ namespace XenAdmin
             Properties.Settings.Default.SettingChanging -= new System.Configuration.SettingChangingEventHandler(Default_SettingChanging);
             TreeSearchBox.SearchChanged -= TreeSearchBox_SearchChanged;
             SearchPage.SearchChanged -= SearchPanel_SearchChanged;
-            SearchPage.ExportSearch -= SearchPanel_ExportSearch;
             treeViewUpdateManager.Update -= treeViewUpdateManager_Update;
 
             treeViewUpdateManager.Dispose();

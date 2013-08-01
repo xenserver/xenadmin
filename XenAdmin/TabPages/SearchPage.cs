@@ -47,11 +47,12 @@ namespace XenAdmin.TabPages
 {
     public partial class SearchPage : BaseTabPage
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private bool ignoreSearchUpdate;
         private List<IXenObject> xenObjects;
 
         public event EventHandler SearchChanged;
-        public event EventHandler<SearchEventArgs> ExportSearch;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchPage"/> class.
@@ -75,16 +76,6 @@ namespace XenAdmin.TabPages
         protected virtual void OnSearchChanged(EventArgs e)
         {
             EventHandler handler = SearchChanged;
-
-            if (handler != null)
-            {
-                handler(this, e);
-            }
-        }
-
-        protected virtual void OnExportSearch(SearchEventArgs e)
-        {
-            EventHandler<SearchEventArgs> handler = ExportSearch;
 
             if (handler != null)
             {
@@ -250,7 +241,31 @@ namespace XenAdmin.TabPages
 
         private void exportSearchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OnExportSearch(new SearchEventArgs(Search));
+            using (SaveFileDialog dialog = new SaveFileDialog())
+            {
+                dialog.AddExtension = true;
+                dialog.Filter = string.Format("{0} (*.xensearch)|*.xensearch|{1} (*.*)|*.*",
+                    Messages.XENSEARCH_SAVED_SEARCH, Messages.ALL_FILES);
+                dialog.FilterIndex = 0;
+                dialog.RestoreDirectory = true;
+                dialog.DefaultExt = "xensearch";
+                dialog.CheckPathExists = false;
+
+                if (dialog.ShowDialog(this) != DialogResult.OK)
+                    return;
+
+                try
+                {
+                    log.InfoFormat("Exporting search to {0}", dialog.FileName);
+                    Search.Save(dialog.FileName);
+                    log.InfoFormat("Exported search to {0} successfully.", dialog.FileName);
+                }
+                catch
+                {
+                    log.ErrorFormat("Failed to export search to {0}", dialog.FileName);
+                    throw;
+                }
+            }
         }
 
         private void importSearchToolStripMenuItem_Click(object sender, EventArgs e)
