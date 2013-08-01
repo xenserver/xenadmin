@@ -199,7 +199,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="OutputPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>626, 235</value>
+    <value>626, 194</value>
   </data>
   <data name="OutputPanel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -226,7 +226,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="panel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>626, 235</value>
+    <value>626, 194</value>
   </data>
   <data name="panel4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -289,7 +289,7 @@
     <value>3</value>
   </data>
   <data name="tableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>628, 461</value>
+    <value>628, 420</value>
   </data>
   <data name="tableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -309,8 +309,11 @@
   <data name="tableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panel2" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel4" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="Searcher" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,36,AutoSize,0,Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
+  <data name="pageContainerPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 78</value>
+  </data>
   <data name="pageContainerPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>648, 481</value>
+    <value>648, 440</value>
   </data>
   <data name="&gt;&gt;pageContainerPanel.Name" xml:space="preserve">
     <value>pageContainerPanel</value>
@@ -338,12 +341,6 @@
   </data>
   <data name="resetSearchToolStripMenuItem.Text" xml:space="preserve">
     <value>De&amp;fault Search</value>
-  </data>
-  <data name="showColumnsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
-  </data>
-  <data name="showColumnsToolStripMenuItem.Text" xml:space="preserve">
-    <value>S&amp;how Columns</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
     <value>185, 6</value>
@@ -382,7 +379,7 @@
     <value>&amp;Import...</value>
   </data>
   <data name="searchOptionsMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 214</value>
+    <value>189, 192</value>
   </data>
   <data name="&gt;&gt;searchOptionsMenuStrip.Name" xml:space="preserve">
     <value>searchOptionsMenuStrip</value>
@@ -412,12 +409,6 @@
     <value>resetSearchToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;resetSearchToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;showColumnsToolStripMenuItem.Name" xml:space="preserve">
-    <value>showColumnsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;showColumnsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">

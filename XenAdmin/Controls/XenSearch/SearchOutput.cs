@@ -78,5 +78,11 @@ namespace XenAdmin.Controls.XenSearch
             if (QueryPanel != null)
                 QueryPanel.BuildList();
         }
+
+        private void contextMenuStripColumns_Opening(object sender, CancelEventArgs e)
+        {
+            contextMenuStripColumns.Items.Clear();
+            contextMenuStripColumns.Items.AddRange(QueryPanel.GetChooseColumnsMenu().ToArray());
+        }
     }
 }

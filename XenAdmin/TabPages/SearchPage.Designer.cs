@@ -39,7 +39,6 @@ namespace XenAdmin.TabPages
             this.searchOptionsMenuStrip = new XenAdmin.Controls.NonReopeningContextMenuStrip(this.components);
             this.editSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showColumnsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.applySavedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteSavedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -107,7 +106,6 @@ namespace XenAdmin.TabPages
             this.searchOptionsMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editSearchToolStripMenuItem,
             this.resetSearchToolStripMenuItem,
-            this.showColumnsToolStripMenuItem,
             this.toolStripSeparator1,
             this.applySavedToolStripMenuItem,
             this.deleteSavedToolStripMenuItem,
@@ -130,11 +128,6 @@ namespace XenAdmin.TabPages
             this.resetSearchToolStripMenuItem.Name = "resetSearchToolStripMenuItem";
             resources.ApplyResources(this.resetSearchToolStripMenuItem, "resetSearchToolStripMenuItem");
             this.resetSearchToolStripMenuItem.Click += new System.EventHandler(this.resetSearchToolStripMenuItem_Click);
-            // 
-            // showColumnsToolStripMenuItem
-            // 
-            this.showColumnsToolStripMenuItem.Name = "showColumnsToolStripMenuItem";
-            resources.ApplyResources(this.showColumnsToolStripMenuItem, "showColumnsToolStripMenuItem");
             // 
             // toolStripSeparator1
             // 
@@ -188,6 +181,7 @@ namespace XenAdmin.TabPages
             this.panel4.PerformLayout();
             this.searchOptionsMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -209,6 +203,5 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.Panel panel2;
         public System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.ToolStripMenuItem showColumnsToolStripMenuItem;
     }
 }

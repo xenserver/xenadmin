@@ -250,8 +250,6 @@ namespace XenAdmin.TabPages
             saveSearchToolStripMenuItem.Enabled = (ConnectionsManager.XenConnections.Find(c => c.IsConnected) != null);  // There is at least one connected Connection
             AttachSavedSubmenu(applySavedToolStripMenuItem, true);
             AttachSavedSubmenu(deleteSavedToolStripMenuItem, false);
-            showColumnsToolStripMenuItem.DropDownItems.Clear();
-            showColumnsToolStripMenuItem.DropDownItems.AddRange(OutputPanel.QueryPanel.GetChooseColumnsMenu().ToArray());
         }
 
         private void editSearchToolStripMenuItem_Click(object sender, EventArgs e)
