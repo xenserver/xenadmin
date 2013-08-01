@@ -26344,7 +26344,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} Overview.
+        ///   Looks up a localized string similar to {0}: All Servers, VMs, Custom Templates &amp; Remote SRs.
         /// </summary>
         public static string SEARCH_TITLE_HOST {
             get {
@@ -26353,7 +26353,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Overview.
+        ///   Looks up a localized string similar to All Servers, VMs, Custom Templates &amp; Remote SRs.
         /// </summary>
         public static string SEARCH_TITLE_OVERVIEW {
             get {
@@ -26362,7 +26362,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} Overview.
+        ///   Looks up a localized string similar to {0}: All Servers, VMs, Custom Templates &amp; Remote SRs.
         /// </summary>
         public static string SEARCH_TITLE_POOL {
             get {

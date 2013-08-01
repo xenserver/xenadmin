@@ -3563,7 +3563,7 @@ namespace XenAdmin
             DoSearch(Search.SearchForFolder(path));
         }
 
-        void SearchPanel_SearchChanged(object sender, EventArgs e)
+        void SearchPanel_SearchChanged()
         {
             if (SearchMode)
                 History.ReplaceHistoryItem(new SearchHistoryItem(SearchPage.Search));

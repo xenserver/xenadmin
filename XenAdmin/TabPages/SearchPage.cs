@@ -52,7 +52,7 @@ namespace XenAdmin.TabPages
 
         private bool ignoreSearchUpdate;
         private List<IXenObject> xenObjects;
-        public event EventHandler SearchChanged;
+        public event Action SearchChanged;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchPage"/> class.
@@ -73,14 +73,10 @@ namespace XenAdmin.TabPages
             }
         }
 
-        protected virtual void OnSearchChanged(EventArgs e)
+        protected virtual void OnSearchChanged()
         {
-            EventHandler handler = SearchChanged;
-
-            if (handler != null)
-            {
-                handler(this, e);
-            }
+            if (SearchChanged != null)
+                SearchChanged();
         }
 
         private void Searcher_SaveRequested()
@@ -125,7 +121,7 @@ namespace XenAdmin.TabPages
             if (!ignoreSearchUpdate && !Program.Exiting)
             {
                 OutputPanel.Search = Search;
-                OnSearchChanged(EventArgs.Empty);
+                OnSearchChanged();
             }
         }
 
@@ -193,12 +189,14 @@ namespace XenAdmin.TabPages
 
         private void UpdateTitle(Search search)
         {
-            base.Text = ((search == null || search.Name == null) ? Messages.CUSTOM_SEARCH : HelpersGUI.GetLocalizedSearchName(search));
+            base.Text = (search == null || search.Name == null)
+                            ? Messages.CUSTOM_SEARCH
+                            : HelpersGUI.GetLocalizedSearchName(search);
         }
 
         public void BuildList()
         {
-            if (!this.Visible)
+            if (!Visible)
                 return;
             OutputPanel.BuildList();
         }
@@ -265,7 +263,7 @@ namespace XenAdmin.TabPages
         private void buttonNewSearch_Click(object sender, EventArgs e)
         {
             Searcher.ToggleExpandedState(true);
-            OnSearchChanged(EventArgs.Empty);
+            OnSearchChanged();
         }
 
         private void buttonReset_Click(object sender, EventArgs e)
