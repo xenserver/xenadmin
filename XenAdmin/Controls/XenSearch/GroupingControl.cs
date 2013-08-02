@@ -124,12 +124,10 @@ namespace XenAdmin.Controls.XenSearch
                 CustomFieldRemoved(groupingType, new EventArgs());
         }
 
-        private List<Button> groups; // Button.tag = GroupType
+        private readonly List<Button> groups = new List<Button>(); // Button.tag = GroupType
 
         public GroupingControl()
         {
-            groups = new List<Button>();
-           
             InitializeComponent();
 
             AddGroup(potentialGroups[0]);
@@ -295,6 +293,7 @@ namespace XenAdmin.Controls.XenSearch
                 offset += button.Width + innerGutter;
             }
 
+            AddGroupButton.Left = offset;
             OnGroupChanged();
 
             AddGroupButton.Enabled = groups.Count < MAX_GROUPS && GetRemainingGroupTypes(null).Count > 0;

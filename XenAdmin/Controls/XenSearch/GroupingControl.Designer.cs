@@ -35,17 +35,17 @@ namespace XenAdmin.Controls.XenSearch
             // AddGroupButton
             // 
             resources.ApplyResources(this.AddGroupButton, "AddGroupButton");
-            this.AddGroupButton.Image = global::XenAdmin.Properties.Resources.expanded_triangle;
+            this.AddGroupButton.Image = global::XenAdmin.Properties.Resources.tempAdd;
             this.AddGroupButton.Name = "AddGroupButton";
             this.AddGroupButton.UseVisualStyleBackColor = true;
             this.AddGroupButton.Click += new System.EventHandler(this.AddGroupButton_Click);
             // 
             // GroupingControl
             // 
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.AddGroupButton);
             this.Name = "GroupingControl";
-            resources.ApplyResources(this, "$this");
             this.ResumeLayout(false);
             this.PerformLayout();
 

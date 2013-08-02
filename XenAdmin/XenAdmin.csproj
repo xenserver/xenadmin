@@ -3951,6 +3951,7 @@
     <None Include="Images\SpinningFrame7.png" />
     <Content Include="Images\subscribe.png" />
     <Content Include="Images\suse_16x.png" />
+    <Content Include="Images\tempAdd.png" />
     <Content Include="Images\tools_notinstalled_16x.png" />
     <Content Include="Images\tools_outofdate_16x.png" />
     <Content Include="Images\tools_uptodate_16x.png" />
