@@ -175,8 +175,8 @@ namespace XenAdmin.Actions
 
                     if(xo is Host && host != null)
                     {
-                        if (Helpers.AugustaOrGreater(host))
-                            Host.apply_edition(host.Connection.Session, host.opaque_ref, Host.GetEditionText(_edition),false);
+                        if (Helpers.ClearwaterOrGreater(host))
+                            Host.apply_edition(host.Connection.Session, host.opaque_ref, Host.GetEditionText(_edition), false);
                         else
                             Host.apply_edition(host.Connection.Session, host.opaque_ref, Host.GetEditionText(_edition));
 
