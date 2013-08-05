@@ -349,8 +349,7 @@ namespace XenAdmin.Dialogs
             View.DrawRequestButtonAsDisabled(!ActivationRequest.AllHostsCanBeActivated);
 
             //Activate Button
-            verifier = VerifierFactory.Verifier(SelectionVerifierFactory.Option.CanUseLicenseServer, lRows);
-            View.DrawActivateButtonAsDisabled(!ActivationRequest.AllHostsCanBeActivated || verifier.Status == LicenseSelectionVerifier.VerificationStatus.Error);
+            View.DrawActivateButtonAsDisabled(!ActivationRequest.AllHostsCanBeActivated);
             View.DrawActivateButtonAsHidden(representedHosts.Any(Helpers.ClearwaterOrGreater));
         }
 
