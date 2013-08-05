@@ -73,10 +73,10 @@ namespace XenAdmin.Actions
         }
 
         /// <summary>
-        /// XenCenters's opinion on if the task can be considered safe to exit.
-        /// If not safe to exit the MainWindow will try and cancel the task on shutdown
-        /// if it is still running.
-        /// If this is true the task will be left to complete after XenCenter has exited.
+        /// Indicates whether XenCenter can exit safely while a task is still in
+        /// progress. If it's not safe, the MainWindow will try to cancel the
+        /// running task on exit. If it is safe, the task will be left to complete
+        /// after XenCenter has exited.
         /// Use this for composite tasks when an action has more than one xapi call.
         /// </summary>
         private bool safeToExit = true;
@@ -442,6 +442,7 @@ namespace XenAdmin.Actions
         }
 
         #region Audit logging
+
         protected static readonly log4net.ILog AuditLog = log4net.LogManager.GetLogger("Audit");
         
         protected virtual void AuditLogStarted()
@@ -466,7 +467,8 @@ namespace XenAdmin.Actions
 
         protected virtual string AuditDescription()
         {
-            return string.Format("{0}: {1}: {2}{3}", this.GetType().Name, DescribeConnection(), DescribeObject(), Description);
+            return string.Format("{0}: {1}: {2}{3}", GetType().Name,
+                DescribeConnection(), DescribeObject(), Description);
         }
 
         protected virtual string DescribeConnection()
@@ -497,39 +499,18 @@ namespace XenAdmin.Actions
 
         protected virtual string DescribeVM(VM v)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("VM ");
-            sb.Append(v.uuid);
-            sb.Append(" (");
-            sb.Append(v.Name);
-            sb.Append("): ");
-            return sb.ToString();
+            return string.Format("VM {0} ({1}): ", v.uuid, v.Name);
         }
 
         protected virtual string DescribePool(Pool p)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("Pool ");
-            sb.Append(p.uuid);
-            sb.Append(" (");
-            sb.Append(p.Name);
-            sb.Append("): ");
-            return sb.ToString();
+            return string.Format("Pool {0} ({1}): ", p.uuid, p.Name);
         }
 
         protected virtual string DescribeHost(Host h)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("Host ");
-            sb.Append(h.uuid);
-            sb.Append(" (");
-            sb.Append(h.Name);
-            sb.Append("): ");
-            return sb.ToString();
+            return string.Format("Host {0} ({1}): ", h.uuid, h.Name);
         }
         #endregion
-
-
-
     }
 }
