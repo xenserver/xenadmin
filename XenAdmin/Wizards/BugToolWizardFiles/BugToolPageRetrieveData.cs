@@ -145,8 +145,8 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             foreach(Capability c in capabilities)
                     strings.Add(c.Key);
             _action = new SystemStatusAction(_hostList, strings);
-            _action.Changed += new EventHandler<EventArgs>(_action_Changed);
-            _action.Completed += new EventHandler<EventArgs>(_action_Completed);
+            _action.Changed += _action_Changed;
+            _action.Completed += _action_Completed;
             _action.RunAsync();
         }
 
@@ -196,12 +196,12 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             OnPageUpdated();
         }
 
-        private void _action_Completed(object sender, EventArgs e)
+        private void _action_Completed(ActionBase sender)
         {
             Program.Invoke(this, finish);
         }
 
-        private void _action_Changed(object sender, EventArgs e)
+        private void _action_Changed(object sender)
         {
             Program.Invoke(this, actionchanged);
         }

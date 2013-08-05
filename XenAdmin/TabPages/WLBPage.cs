@@ -230,7 +230,7 @@ namespace XenAdmin.TabPages
 
         #region Event Handlers
 
-        protected void action_Completed(object sender, EventArgs e)
+        protected void action_Completed(ActionBase sender)
         {
             // This seems to be called off the event thread
             AsyncAction action = (AsyncAction)sender;

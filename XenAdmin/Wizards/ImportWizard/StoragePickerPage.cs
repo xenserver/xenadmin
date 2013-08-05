@@ -279,7 +279,7 @@ namespace XenAdmin.Wizards.ImportWizard
             CheckTask();
         }
 
-		private void m_importXvaAction_Completed(object sender, EventArgs e)
+        private void m_importXvaAction_Completed(ActionBase sender)
 		{
 			Program.Invoke(this, () =>
 			{

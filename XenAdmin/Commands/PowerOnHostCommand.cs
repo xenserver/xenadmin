@@ -97,7 +97,7 @@ namespace XenAdmin.Commands
             foreach (Host host in selection.AsXenObjects<Host>(CanExecute))
             {
                 var action = new HostPowerOnAction( host);
-                action.Completed += (s, e) => MainWindowCommandInterface.Refresh();
+                action.Completed += s => MainWindowCommandInterface.Refresh();
                 actions.Add(action);
             }
             RunMultipleActions(actions, null, Messages.ACTION_HOST_STARTING, Messages.ACTION_HOST_STARTED, true);

@@ -83,7 +83,7 @@ namespace XenAdmin.Dialogs
             EnableControls();
         }
 
-        void getDataSorucesAction_Completed(object sender, EventArgs e)
+        void getDataSorucesAction_Completed(ActionBase sender)
         {
             Program.Invoke(this, delegate
             {

@@ -108,7 +108,7 @@ namespace XenAdmin.Commands
             {
                 string n = s;
                 Folders.FixupRelativePath(ref n);
-                if (n == null || n == String.Empty)
+                if (string.IsNullOrEmpty(n))
                     continue;
 
                 newPaths.Add(Folders.AppendPath(folder == null ? Folders.PATH_SEPARATOR : folder.opaque_ref, n));
@@ -118,7 +118,7 @@ namespace XenAdmin.Commands
             {
                 FolderAction action = new FolderAction(connection, FolderAction.Kind.New, newPaths.ToArray());
 
-                EventHandler<EventArgs> completed = null;
+                Action<ActionBase> completed = null;
                 completed = delegate
                 {
                     action.Completed -= completed;

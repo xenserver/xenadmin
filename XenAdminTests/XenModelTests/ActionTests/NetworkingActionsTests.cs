@@ -66,7 +66,7 @@ namespace XenAdminTests.XenModelTests.ActionTests
         public void CreateNetwork()
         {
             NetworkAction networkAction = new NetworkAction(DatabaseManager.ConnectionFor(dbName), newNetwork, true);
-            networkAction.Completed += new System.EventHandler<System.EventArgs>(networkAction_Completed);
+            networkAction.Completed += networkAction_Completed;
             networkAction.RunAsync();
             AutoResetEvent.WaitOne();
             DatabaseManager.ConnectionFor(dbName).LoadCache(DatabaseManager.ConnectionFor(dbName).Session);
@@ -81,7 +81,7 @@ namespace XenAdminTests.XenModelTests.ActionTests
             Assert.True(DatabaseManager.ConnectionFor(dbName).Cache.PIFs.Length > 0);
             PIF pif = DatabaseManager.ConnectionFor(dbName).Cache.PIFs[0];
             NetworkAction networkAction = new NetworkAction(DatabaseManager.ConnectionFor(dbName), newNetwork, pif, 2);
-            networkAction.Completed += new System.EventHandler<System.EventArgs>(networkAction_Completed);
+            networkAction.Completed += networkAction_Completed;
             networkAction.RunAsync();
             AutoResetEvent.WaitOne();
             DatabaseManager.RefreshCacheFor(dbName);
@@ -95,7 +95,7 @@ namespace XenAdminTests.XenModelTests.ActionTests
             Network network = FindCreatedNetwork();
             Assert.NotNull(network);
             NetworkAction networkAction = new NetworkAction(DatabaseManager.ConnectionFor(dbName), network, false);
-            networkAction.Completed += new System.EventHandler<System.EventArgs>(networkAction_Completed);
+            networkAction.Completed += networkAction_Completed;
             networkAction.RunAsync();
             AutoResetEvent.WaitOne();
             DatabaseManager.RefreshCacheFor(dbName);
@@ -114,7 +114,7 @@ namespace XenAdminTests.XenModelTests.ActionTests
             return null;
         }
 
-        void networkAction_Completed(object sender, System.EventArgs e)
+        void networkAction_Completed(ActionBase sender)
         {
             AutoResetEvent.Set();
         }

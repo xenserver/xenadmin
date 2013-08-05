@@ -16,8 +16,8 @@ namespace XenAdmin.Dialogs
         {
             if (action != null)
             {
-                action.Completed -= new EventHandler<EventArgs>(action_Completed);
-                action.Changed -= new EventHandler<EventArgs>(action_Changed);
+                action.Completed -= action_Completed;
+                action.Changed -= action_Changed;
             }
 
             if (disposing && (components != null))

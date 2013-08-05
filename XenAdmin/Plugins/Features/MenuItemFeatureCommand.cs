@@ -174,7 +174,7 @@ namespace XenAdmin.Plugins
             return output;
         }
 
-        private void ExternalPluginAction_Completed(object sender, EventArgs e)
+        private void ExternalPluginAction_Completed(ActionBase sender)
         {
             MethodInvoker method = delegate
             {

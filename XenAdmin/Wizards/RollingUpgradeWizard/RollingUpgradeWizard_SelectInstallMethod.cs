@@ -227,7 +227,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             action.RunAsync();
         }
 
-        private void action_Completed(object sender, EventArgs e)
+        private void action_Completed(ActionBase sender)
         {
             Program.BeginInvoke(this, () => ChangeInputEnablement(true));
             var action = (AsyncAction)sender;

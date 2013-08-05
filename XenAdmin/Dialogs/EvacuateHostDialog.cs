@@ -246,12 +246,12 @@ namespace XenAdmin.Dialogs
 
             AsyncAction a = vmlbi.Solve();
             if (a != null)
-                a.Completed += new EventHandler<EventArgs>(solveActionCompleted);
+                a.Completed += solveActionCompleted;
 
             vmsListBox.Refresh();
         }
 
-        void solveActionCompleted(object sender, EventArgs e)
+        void solveActionCompleted(ActionBase sender)
         {
             // this should rescan the vm errors and update the dialog.
             Program.Invoke(this, update);
@@ -650,7 +650,7 @@ namespace XenAdmin.Dialogs
                 action.Session = action.NewSession();
         }
 
-        protected override void action_Completed(object sender, EventArgs e)
+        protected override void action_Completed(ActionBase sender)
         {
             Program.Invoke(this, delegate()
             {
@@ -688,7 +688,7 @@ namespace XenAdmin.Dialogs
                 ProcessError(null, failure.ErrorDescription.ToArray());
             });
 
-            base.action_Completed(sender, e);
+            base.action_Completed(sender);
         }
 
         private void ProcessError(String vmRef, String[] ErrorDescription)

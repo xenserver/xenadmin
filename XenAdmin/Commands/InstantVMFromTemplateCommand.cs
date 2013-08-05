@@ -32,6 +32,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+
+using XenAdmin.Actions;
+
 using XenAPI;
 using XenAdmin.Actions.VMActions;
 using System.Collections.ObjectModel;
@@ -65,11 +68,11 @@ namespace XenAdmin.Commands
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
            var createAction= new CreateVMFastAction(selection[0].Connection, selection[0].XenObject as VM);
-           createAction.Completed += new EventHandler<EventArgs>(createAction_Completed);
+           createAction.Completed += createAction_Completed;
             createAction.RunAsync();
         }
 
-        static void createAction_Completed(object sender, EventArgs e)
+        static void createAction_Completed(ActionBase sender)
         {
             CreateVMFastAction action = (CreateVMFastAction) sender;
             var startAction = new VMStartAction(action.Connection.Resolve(new XenRef<VM>(action.Result)), VMOperationCommand.WarningDialogHAInvalidConfig, VMOperationCommand.StartDiagnosisForm);

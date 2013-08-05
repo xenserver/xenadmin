@@ -217,7 +217,7 @@ namespace XenAdmin.Actions.Wlb
         }
 
          
-        private void HostAction_Completed(object sender, EventArgs e)
+        private void HostAction_Completed(ActionBase sender)
         {
             AsyncAction action = (AsyncAction)sender;
             if (action.IsCompleted)

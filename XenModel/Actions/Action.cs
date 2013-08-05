@@ -171,8 +171,6 @@ namespace XenAdmin.Actions
             }
         }
 
-
-
         protected void SetAppliesTo(IXenObject xo)
         {
             if (xo == null)
@@ -243,8 +241,11 @@ namespace XenAdmin.Actions
         private int _percentComplete = 0;
         private Exception _exception = null;
 
-        public event EventHandler<EventArgs> Changed;
-        public event EventHandler<EventArgs> Completed;
+        #region Events
+        public event Action<ActionBase> Changed;
+        public event Action<ActionBase> Completed;
+        public static event Action<ActionBase> NewAction;
+        #endregion
 
         public bool LogDescriptionChanges = true;
 
@@ -270,8 +271,6 @@ namespace XenAdmin.Actions
 
         }
 
-        public static event EventHandler NewAction;
-
         public ActionBase(ActionType type, string title, string description, bool SuppressHistory, bool non_action_completed)
         {
             Type = type;
@@ -285,7 +284,7 @@ namespace XenAdmin.Actions
                 _isCompleted = true;
             }
             if (NewAction != null && !SuppressHistory)
-                NewAction(this, null);
+                NewAction(this);
 
         }
 
@@ -304,7 +303,7 @@ namespace XenAdmin.Actions
                 {
                     _isCompleted = value;
                     OnChanged();
-                    OnCompleted(EventArgs.Empty);
+                    OnCompleted();
                 }
             }
         }
@@ -395,7 +394,7 @@ namespace XenAdmin.Actions
                 try
                 {
                     if (!SuppressProgressReport)
-                        Changed(this, null);
+                        Changed(this);
                 }
                 catch (Exception e)
                 {
@@ -404,15 +403,13 @@ namespace XenAdmin.Actions
                 }
         }
 
-        protected virtual void OnCompleted(EventArgs e)
+        protected virtual void OnCompleted()
         {
-            EventHandler<EventArgs> handler = Completed;
-
-            if (handler != null)
+            if (Completed != null)
             {
                 try
                 {
-                    handler(this, e);
+                    Completed(this);
                 }
                 catch (Exception ex)
                 {

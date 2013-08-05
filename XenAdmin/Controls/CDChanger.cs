@@ -175,15 +175,15 @@ namespace XenAdmin.Controls
             ChangeVMISOAction action =
                 new ChangeVMISOAction(connection, vm, vdi, cdrom);
 
-            action.Completed += new EventHandler<EventArgs>(delegate(Object o, EventArgs f)
-                                                                {
-                                                                    Program.Invoke(this, delegate()
-                                                                                             {
-                                                                                                 changing = false;
-                                                                                                 SelectCD();
-                                                                                                 Enabled = true;
-                                                                                             });
-                                                                });
+            action.Completed += delegate
+                {
+                    Program.Invoke(this, delegate()
+                        {
+                            changing = false;
+                            SelectCD();
+                            Enabled = true;
+                        });
+                };
 
             action.RunAsync();
         }

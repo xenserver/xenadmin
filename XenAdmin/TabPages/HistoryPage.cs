@@ -156,10 +156,10 @@ namespace XenAdmin.TabPages
             {
                 ActionRow row = AddRow(a);
                 row.Visible = FilterRowVisible(row);
-                a.Changed -= new EventHandler<EventArgs>(action_Changed);
-                a.Completed -= new EventHandler<EventArgs>(action_Changed);                
-                a.Changed += new EventHandler<EventArgs>(action_Changed);
-                a.Completed += new EventHandler<EventArgs>(action_Changed);
+                a.Changed -= action_Changed;
+                a.Completed -= action_Changed; 
+                a.Changed += action_Changed;
+                a.Completed += action_Changed;
             }
             customHistoryContainer1.CustomHistoryPanel.SuspendDraw = false;
             customHistoryContainer1.CustomHistoryPanel.Refresh();
@@ -217,11 +217,11 @@ namespace XenAdmin.TabPages
             BuildRowList();
         }
 
-        private void action_Changed(object sender, EventArgs e)
+        private void action_Changed(ActionBase sender)
         {
-            Program.Invoke(this, delegate()
+            Program.Invoke(this, delegate
             {
-                ActionRow row = FindRowFromAction((ActionBase)sender);
+                ActionRow row = FindRowFromAction(sender);
                 if (row != null && row.Visible)
                     customHistoryContainer1.Invalidate();
             });

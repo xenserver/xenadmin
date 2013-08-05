@@ -118,14 +118,14 @@ namespace XenAdmin.Actions
             this.Description = Messages.POOLCREATE_ADDED;
         }
 
-        protected override void OnCompleted(EventArgs e)
+        protected override void OnCompleted()
         {
             if (Succeeded)
             {
                 ConnectionsManager.ClearCacheAndRemoveConnection(Host.Connection);
             }
             ClearAllDelegates();
-            base.OnCompleted(e);
+            base.OnCompleted();
         }
     }
 }

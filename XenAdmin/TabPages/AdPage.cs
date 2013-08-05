@@ -193,8 +193,8 @@ namespace XenAdmin.TabPages
                                                                  e.Element is DisableAdAction))
                                                             {
                                                                 AsyncAction action = (AsyncAction) e.Element;
-                                                                action.Completed +=
-                                                                    new EventHandler<EventArgs>(action_Completed);
+                                                                action.Completed += action_Completed;
+
                                                                 if (_xenObject != null &&
                                                                     _xenObject.Connection == action.Connection)
                                                                     checkAdType();
@@ -203,10 +203,10 @@ namespace XenAdmin.TabPages
         }
 
 
-        void action_Completed(object sender, EventArgs e)
+        void action_Completed(ActionBase sender)
         {
             AsyncAction action = (AsyncAction)sender;
-            action.Completed -= new EventHandler<EventArgs>(action_Completed);
+            action.Completed -= action_Completed;
 
             if (_xenObject != null && _xenObject.Connection == action.Connection)
                 Program.Invoke(this, checkAdType);

@@ -278,18 +278,15 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
             {
                 var vmpp = ((PolicyRow)dataGridView1.SelectedRows[0]).VMPP;
                 var action = new RunPolicyNowAction(vmpp);
-                action.Completed += new EventHandler<EventArgs>(action_Completed);
+                action.Completed += action_Completed;
                 buttonRunNow.Enabled = false;
                 action.RunAsync();
             }
         }
 
-        void action_Completed(object sender, EventArgs e)
+        void action_Completed(ActionBase sender)
         {
-            Program.Invoke(Program.MainWindow, () =>
-            {
-                RefreshButtons();
-            });
+            Program.Invoke(Program.MainWindow, RefreshButtons);
         }
 
         private void SetupDeprecationBanner()

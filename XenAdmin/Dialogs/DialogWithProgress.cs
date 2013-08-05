@@ -37,6 +37,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+
+using XenAdmin.Actions;
 using XenAdmin.Network;
 
 
@@ -188,9 +190,8 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        protected virtual void action_Completed(object sender, EventArgs e)
+        protected virtual void action_Completed(ActionBase action)
         {
-            Actions.ActionBase action = sender as Actions.ActionBase;
             if(action == null)
                 return;
 
@@ -237,25 +238,24 @@ namespace XenAdmin.Dialogs
             
         }
 
-        private void action_Changed(object sender, EventArgs e)
+        private void action_Changed(ActionBase action)
         {
-            Actions.ActionBase action = sender as Actions.ActionBase;
             if (action == null)
                 return;
 
-            Program.Invoke(this, delegate()
+            Program.Invoke(this, delegate
             {
                 SetActionLabelText(action.Description, SystemColors.ControlText);
                 ActionProgressBar.Value = action.PercentComplete;
             });
         }
 
-        internal void DoAction(Actions.AsyncAction action)
+        internal void DoAction(AsyncAction action)
         {
             Program.AssertOnEventThread();
 
-            action.Changed += new EventHandler<EventArgs>(action_Changed);
-            action.Completed += new EventHandler<EventArgs>(action_Completed);
+            action.Changed += action_Changed;
+            action.Completed += action_Completed;
 
             Grow(action.RunAsync);
         }

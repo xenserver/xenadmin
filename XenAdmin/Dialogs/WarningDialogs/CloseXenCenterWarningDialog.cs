@@ -98,35 +98,32 @@ namespace XenAdmin.Dialogs.WarningDialogs
                 ActionBase a = action;
                 ActionRow row = new ActionRow(action);
                 row.ShowCancel = false;
-                action.Completed += new EventHandler<EventArgs>(delegate(object o, EventArgs e)
-                {
-                    Program.Invoke(this, delegate()
+                action.Completed += delegate
                     {
-                        row.Visible = !a.IsCompleted;
-                        row.ShowCancel = false;
-                        bool canEnd = true;
-                        foreach (ActionRow r in customHistoryContainer1.CustomHistoryPanel.Rows)
-                        {
-                            if (!r.Action.IsCompleted || r.Action.Exception != null)
+                        Program.Invoke(this, delegate
                             {
-                                canEnd = false;
-                                break;
-                            }
-                        }
-                        customHistoryContainer1.Refresh();
-                        if (canEnd)
-                            DialogResult = DialogResult.Ignore;
-                    });
-                });
-                action.Changed += new EventHandler<EventArgs>(delegate(object o, EventArgs e)
-                {
-                    Program.Invoke(this, delegate()
+                                row.Visible = !a.IsCompleted;
+                                row.ShowCancel = false;
+                                bool canEnd = true;
+                                foreach (ActionRow r in customHistoryContainer1.CustomHistoryPanel.Rows)
+                                {
+                                    if (!r.Action.IsCompleted || r.Action.Exception != null)
+                                    {
+                                        canEnd = false;
+                                        break;
+                                    }
+                                }
+                                customHistoryContainer1.Refresh();
+                                if (canEnd)
+                                    DialogResult = DialogResult.Ignore;
+                            });
+                    };
+                action.Changed += (obj => Program.Invoke(this, delegate
                     {
                         row.Visible = !a.IsCompleted;
                         row.ShowCancel = false;
                         customHistoryContainer1.Refresh();
-                    });
-                });
+                    }));
                 customHistoryContainer1.CustomHistoryPanel.AddItem(row);
             }
 

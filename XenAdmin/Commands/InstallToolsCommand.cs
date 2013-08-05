@@ -230,7 +230,7 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        private void FirstInstallToolsActionCompleted(object sender, EventArgs e)
+        private void FirstInstallToolsActionCompleted(ActionBase sender)
         {
             InstallPVToolsAction action = (InstallPVToolsAction)sender;
 
@@ -246,7 +246,7 @@ namespace XenAdmin.Commands
         }
 
 
-        private void InstallToolsActionCompleted(object sender, EventArgs e)
+        private void InstallToolsActionCompleted(ActionBase sender)
         {
             InstallPVToolsAction action = (InstallPVToolsAction)sender;
            

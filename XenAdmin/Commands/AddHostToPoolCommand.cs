@@ -150,7 +150,7 @@ namespace XenAdmin.Commands
             {
                 string opaque_ref = host.opaque_ref;
                 AddHostToPoolAction action = new AddHostToPoolAction(_pool, host, GetAdPrompt, NtolDialog, ApplyLicenseEditionCommand.ShowLicensingFailureDialog);
-                action.Completed += (s, e) => Program.ShowObject(opaque_ref);
+                action.Completed += s => Program.ShowObject(opaque_ref);
                 actions.Add(action);
 
                 // hide connection. If the action fails, re-show it.

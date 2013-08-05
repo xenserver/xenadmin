@@ -494,8 +494,8 @@ namespace XenAdmin.Wizards.DRWizards
                 }
             }
         }
-        
-        private void action_Completed(object sender, EventArgs e)
+
+        private void action_Completed(ActionBase sender)
         {
             Thread.Sleep(1000);
             Program.Invoke(Program.MainWindow, RefreshRechecks);

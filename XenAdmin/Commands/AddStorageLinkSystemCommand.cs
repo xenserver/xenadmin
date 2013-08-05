@@ -132,7 +132,7 @@ namespace XenAdmin.Commands
                             }, true);
 
                         actionWithWait.AppliesTo.Add(server.opaque_ref);
-                        actionWithWait.Completed += (ss, ee) => OnCompleted(new CompletedEventArgs(actionWithWait.Succeeded));
+                        actionWithWait.Completed += ss => OnCompleted(new CompletedEventArgs(actionWithWait.Succeeded));
 
                         new ActionProgressDialog(actionWithWait, ProgressBarStyle.Continuous) { ShowCancel = true }.ShowDialog(dialog);
 

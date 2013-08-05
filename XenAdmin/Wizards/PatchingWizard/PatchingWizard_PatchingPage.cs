@@ -130,8 +130,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (!IsAutomaticMode)
             {
                 actionManualMode = new ApplyPatchAction(new List<Pool_patch> { Patch }, SelectedServers);
-                actionManualMode.Changed += new EventHandler<EventArgs>(action_Changed);
-                actionManualMode.Completed += new EventHandler<EventArgs>(action_Completed);
+                actionManualMode.Changed += action_Changed;
+                actionManualMode.Completed += action_Completed;
                 textBoxLog.Text = ManualTextInstructions;
                 actionManualMode.RunAsync();
                 return;
@@ -248,8 +248,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 AsyncAction currentAction = actions[i];
                 oemWorker.ReportProgress(0, currentAction);
-                currentAction.Changed += new EventHandler<EventArgs>(PatchingWizard_PatchingPage_Changed);
-                currentAction.Completed += new EventHandler<EventArgs>(PatchingWizard_PatchingPage_Completed);
+                currentAction.Changed += PatchingWizard_PatchingPage_Changed;
+                currentAction.Completed += PatchingWizard_PatchingPage_Completed;
                 currentAction.RunAsync();
                 autoResetEvent.WaitOne();
                 try
@@ -268,12 +268,12 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         }
 
-        private void PatchingWizard_PatchingPage_Completed(object sender, EventArgs e)
+        private void PatchingWizard_PatchingPage_Completed(ActionBase sender)
         {
             autoResetEvent.Set();
         }
 
-        private void PatchingWizard_PatchingPage_Changed(object sender, EventArgs e)
+        private void PatchingWizard_PatchingPage_Changed(ActionBase sender)
         {
             AsyncAction action = (AsyncAction)sender;
             Program.Invoke(Program.MainWindow, delegate { progressBar.Value = oemActionsDone * 100 + action.PercentComplete; });
@@ -283,27 +283,24 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         #region manual_mode
 
-        private void action_Completed(object sender, EventArgs e)
+        private void action_Completed(ActionBase sender)
         {
             _nextEnabled = true;
             _cancelEnabled = false;
-            AsyncAction action = (AsyncAction)sender;
+            
             try
             {
-                string result = action.Result;
-                Program.Invoke(Program.MainWindow, delegate()
-                    { FinishedSuccessfully(); });
+                Program.Invoke(Program.MainWindow, FinishedSuccessfully);
             }
             catch (Exception except)
             {
-                Program.Invoke(Program.MainWindow, delegate()
-                    { FinishedWithErrors(except); });
+                Program.Invoke(Program.MainWindow, () => FinishedWithErrors(except));
             }
-            Program.Invoke(Program.MainWindow, delegate { OnPageUpdated(); });
+            Program.Invoke(Program.MainWindow, OnPageUpdated);
             _thisPageHasBeenCompleted = true;
         }
 
-        private void action_Changed(object sender, EventArgs e)
+        private void action_Changed(ActionBase sender)
         {
             AsyncAction action = (AsyncAction)sender;
             Program.Invoke(Program.MainWindow, delegate { progressBar.Value = action.PercentComplete; });

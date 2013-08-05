@@ -242,7 +242,7 @@ namespace XenAdmin.Wizards.DRWizards
         internal List<string> RecoveredVmsUuids = new List<string>();
         internal List<string> RecoveredVmAppliancesUuids = new List<string>();
 
-        private void SingleRecoverActionCompleted(object sender, EventArgs e)
+        private void SingleRecoverActionCompleted(ActionBase sender)
         {
             DrRecoverAction senderAction = (DrRecoverAction)sender;
             senderAction.Completed -= SingleRecoverActionCompleted;
@@ -279,7 +279,7 @@ namespace XenAdmin.Wizards.DRWizards
                 ReportActionResultGot(senderAction);
         }
 
-        private void SingleRecoverActionChanged(object sender, EventArgs e)
+        private void SingleRecoverActionChanged(ActionBase sender)
         {
             DrRecoverAction senderAction = (DrRecoverAction)sender;
 
@@ -298,7 +298,7 @@ namespace XenAdmin.Wizards.DRWizards
         private MultipleAction multipleRecoverAction;
         private Session metadataSession;
 
-        private void OpenDatabaseActionCompleted(object sender, EventArgs e)
+        private void OpenDatabaseActionCompleted(ActionBase sender)
         {
             VdiOpenDatabaseAction senderAction = (VdiOpenDatabaseAction)sender;
             senderAction.Completed -= OpenDatabaseActionCompleted;
@@ -329,7 +329,7 @@ namespace XenAdmin.Wizards.DRWizards
             multipleRecoverAction.RunAsync();
         }
 
-        private void MultipleRecoverActionCompleted(object sender, EventArgs e)
+        private void MultipleRecoverActionCompleted(ActionBase sender)
         {
             MultipleAction senderAction = (MultipleAction)sender;
             senderAction.Completed -= MultipleRecoverActionCompleted;
@@ -425,7 +425,7 @@ namespace XenAdmin.Wizards.DRWizards
             }
         }
 
-        private void StartVMsActionChanged(object sender, EventArgs e)
+        private void StartVMsActionChanged(ActionBase sender)
         {
             StartVMsAndAppliancesAction senderAction = (StartVMsAndAppliancesAction)sender;
 
@@ -440,7 +440,7 @@ namespace XenAdmin.Wizards.DRWizards
             });
         }
 
-        private void StartVMsActionCompleted(object sender, EventArgs e)
+        private void StartVMsActionCompleted(ActionBase sender)
         {
             StartVMsAndAppliancesAction senderAction = (StartVMsAndAppliancesAction)sender;
             senderAction.Completed -= StartVMsActionCompleted;

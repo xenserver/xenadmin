@@ -366,8 +366,8 @@ namespace XenAdmin
 
             Application.ApplicationExit -= Application_ApplicationExit;
             Application.ApplicationExit += Application_ApplicationExit;
-            ActionBase.NewAction -= new EventHandler(Action_NewAction);
-            ActionBase.NewAction += new EventHandler(Action_NewAction);
+            ActionBase.NewAction -= Action_NewAction;
+            ActionBase.NewAction += Action_NewAction;
 
             MainWindow mainWindow = new MainWindow(argType, args);
 
@@ -376,9 +376,8 @@ namespace XenAdmin
             log.Info("Application main thread exited");
         }
 
-        static void Action_NewAction(object sender, EventArgs e)
+        static void Action_NewAction(ActionBase action)
         {
-            var action = sender as ActionBase;
             if (Program.MainWindow != null && action != null)
                 Program.Invoke(Program.MainWindow,
                     delegate()

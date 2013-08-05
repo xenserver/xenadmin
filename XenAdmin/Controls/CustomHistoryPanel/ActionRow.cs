@@ -81,8 +81,8 @@ namespace XenAdmin.Controls
             setupRowDetails();
             if (!Action.IsCompleted)
             {
-                Action.Changed += new EventHandler<EventArgs>(Action_Changed);
-                Action.Completed += new EventHandler<EventArgs>(Action_Completed);
+                Action.Changed += Action_Changed;
+                Action.Completed += Action_Completed;
             }
         }
 
@@ -101,7 +101,7 @@ namespace XenAdmin.Controls
 
         }
 
-        private void Action_Completed(object sender, EventArgs e)
+        private void Action_Completed(ActionBase sender)
         {
             setupRowDetails();
         }
@@ -194,7 +194,7 @@ namespace XenAdmin.Controls
             }
         }
 
-        private void Action_Changed(object sender, EventArgs e)
+        private void Action_Changed(ActionBase sender)
         {
             if (Action is AsyncAction)
                 (Action as AsyncAction).RecomputeCanCancel();

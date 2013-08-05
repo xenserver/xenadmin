@@ -637,7 +637,7 @@ namespace XenAdmin.Controls.Wlb
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">e</param>
-        protected void OptRecRetrieveAction_Completed(object sender, EventArgs e)
+        protected void OptRecRetrieveAction_Completed(ActionBase sender)
         {
             AsyncAction action = (AsyncAction)sender;
             if (action.IsCompleted)

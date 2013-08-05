@@ -72,7 +72,7 @@ namespace XenAdmin.Commands
             {
                 this.MainWindowCommandInterface.CloseActiveWizards(host.Connection);
                 ShutdownHostAction action = new ShutdownHostAction(host,AddHostToPoolCommand.NtolDialog);
-                action.Completed += (e, s) => MainWindowCommandInterface.Refresh();
+                action.Completed += e => MainWindowCommandInterface.Refresh();
                 actions.Add(action);
             }
             RunMultipleActions(actions, null, Messages.ACTION_HOSTS_SHUTTING_DOWN, Messages.ACTION_HOSTS_SHUTDOWN, true);

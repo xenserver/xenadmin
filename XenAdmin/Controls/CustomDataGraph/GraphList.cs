@@ -711,12 +711,12 @@ namespace XenAdmin.Controls.CustomDataGraph
             }
         }
 
-        public void LoadDataSources(EventHandler<EventArgs> completedEventHandler)
+        public void LoadDataSources(Action<ActionBase> completedEventHandler)
         {
             if (XenObject == null)
                 return;
             GetDataSourcesAction action = new GetDataSourcesAction(XenObject.Connection, XenObject);
-            action.Completed += new EventHandler<EventArgs>(completedEventHandler);
+            action.Completed += completedEventHandler;
             action.RunAsync();
         }
 

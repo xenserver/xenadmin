@@ -61,14 +61,14 @@ namespace XenAdmin.Commands
             action.RunAsync();
         }
 
-        protected override void action_Completed(object sender, EventArgs e)
+        protected override void action_Completed(ActionBase sender)
         {
             EventHandler handler = Completed;
 
             if (handler != null)
                 handler(this, new EventArgs());
 
-            base.action_Completed(sender, e);
+            base.action_Completed(sender);
         }
     }
 }

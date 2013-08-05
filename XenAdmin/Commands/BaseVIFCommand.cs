@@ -46,7 +46,7 @@ namespace XenAdmin.Commands
 
         }
 
-        protected virtual void action_Completed(object sender, EventArgs e)
+        protected virtual void action_Completed(ActionBase sender)
         {
             var action = (AsyncAction)sender;
             if (action.Result == false.ToString())

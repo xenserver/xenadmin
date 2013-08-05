@@ -51,7 +51,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             InitializeComponent();
         }
 
-        void action_CompletedTimeServer(object sender, EventArgs e)
+        void action_CompletedTimeServer(ActionBase sender)
         {
             GetServerTimeAction action = (GetServerTimeAction)sender;
             Program.Invoke(Program.MainWindow, () =>
@@ -87,7 +87,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             if (master != null)
             {
                 GetServerTimeAction action = new GetServerTimeAction(master);
-                action.Completed += new EventHandler<EventArgs>(action_CompletedTimeServer);
+                action.Completed += action_CompletedTimeServer;
                 action.RunAsync();
             }
         }

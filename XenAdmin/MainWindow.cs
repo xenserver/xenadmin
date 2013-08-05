@@ -391,17 +391,17 @@ namespace XenAdmin
                                                             {
                                                                 action.Changed += actionChanged;
                                                                 action.Completed += actionChanged;
-                                                                actionChanged(action, null);
+                                                                actionChanged(action);
                                                             }
                                                         });
         }
 
-        void actionChanged(object sender, EventArgs e)
+        void actionChanged(ActionBase action)
         {
             if (Program.Exiting)
                 return;
-            ActionBase action = (ActionBase)sender;
-            Program.Invoke(this, delegate() { actionChanged_(action); });
+
+            Program.Invoke(this, () => actionChanged_(action));
         }
 
         void actionChanged_(ActionBase action)
@@ -3446,7 +3446,7 @@ namespace XenAdmin
             dialog.ShowDialog(this);
         }
 
-        internal void action_Completed(object sender, EventArgs e)
+        internal void action_Completed(ActionBase sender)
         {
             if (Program.Exiting)
             {
@@ -3454,15 +3454,13 @@ namespace XenAdmin
             }
 
             RequestRefreshTreeView();
-
-            Program.Invoke(this, delegate()
-            {
-                // Update toolbars, since if an action has just completed, various buttons may need to be re-enabled. Applies to:
-                // HostAction
-                // EnableHAAction
-                // DisableHAAction
-                UpdateToolbars();
-            });
+            
+            //Update toolbars, since if an action has just completed, various
+            //buttons may need to be re-enabled. Applies to:
+            // HostAction
+            // EnableHAAction
+            // DisableHAAction
+            Program.Invoke(this, UpdateToolbars);
         }
 
         private void xenBugToolToolStripMenuItem_Click(object sender, EventArgs e)

@@ -354,7 +354,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             action.RunAsync();
         }
 
-        private void action_Completed(object sender, EventArgs e)
+        private void action_Completed(ActionBase sender)
         {
             AsyncAction action = (AsyncAction)sender;
 

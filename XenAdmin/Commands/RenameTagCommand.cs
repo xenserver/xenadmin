@@ -92,9 +92,9 @@ namespace XenAdmin.Commands
             action.RunAsync();
         }
 
-        private void action_Completed(object sender, EventArgs e)
+        private void action_Completed(ActionBase sender)
         {
-            OnCompleted(new RenameCompletedEventArgs(((ActionBase)sender).Succeeded));
+            OnCompleted(new RenameCompletedEventArgs(sender.Succeeded));
         }
 
         protected virtual void OnCompleted(RenameCompletedEventArgs e)

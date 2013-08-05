@@ -557,11 +557,11 @@ namespace XenAdmin.Wizards
                 ActionProgressDialog closureDialog = dialog;
                 // close dialog even when there's an error for HBA SR type as there will be the Summary page displayed.
                 FinalAction.Completed +=
-                    (s, ea) => Program.Invoke(Program.MainWindow, () =>
-                                                                      {
-                                                                          if (closureDialog != null)
-                                                                              closureDialog.Close();
-                                                                      });
+                    s => Program.Invoke(Program.MainWindow, () =>
+                        {
+                            if (closureDialog != null)
+                                closureDialog.Close();
+                        });
             }
             dialog.ShowDialog(this);
 
@@ -596,7 +596,7 @@ namespace XenAdmin.Wizards
 
         private Dictionary<AsyncAction, SrDescriptor> actionSrDescriptorDict = new Dictionary<AsyncAction, SrDescriptor>();
 
-        void asyncAction_Completed(object sender, EventArgs e)
+        void asyncAction_Completed(ActionBase sender)
         {
             AsyncAction action = sender as AsyncAction;
             if (action == null)

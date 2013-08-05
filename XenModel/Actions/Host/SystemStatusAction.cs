@@ -115,7 +115,7 @@ namespace XenAdmin.Actions
                 // Ensure downloaded filenames are unique even for hosts with the same hostname: append a counter to the timestring
                 SingleHostStatusAction action = new SingleHostStatusAction(host, entries, filepath, timestring + "-" + ++i);
                 actions.Add(action);
-                action.Changed += (EventHandler<EventArgs>)delegate(object sender, EventArgs e)
+                action.Changed += (Action<ActionBase>)delegate
                     {
                         int total = 0;
 
@@ -126,7 +126,7 @@ namespace XenAdmin.Actions
 
                         PercentComplete = (int)(total / n);
                     };
-                action.Completed += (EventHandler<EventArgs>)delegate(object sender, EventArgs e)
+                action.Completed += (Action<ActionBase>)delegate
                     {
                         lock (completeActionsMonitor)
                         {

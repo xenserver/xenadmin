@@ -654,7 +654,7 @@ namespace XenAdmin.Controls.NetworkingTab
             Program.Invoke(this, BuildList);
         }
 
-        void action_Completed(object sender, EventArgs e)
+        void action_Completed(ActionBase sender)
         {
             Program.Invoke(this, BuildList);
         }

@@ -282,7 +282,7 @@ namespace XenAdmin.Dialogs
             DoAction(_repairAction);
         }
 
-        protected override void action_Completed(object sender, EventArgs e)
+        protected override void action_Completed(ActionBase sender)
         {
             if(_srList.Count > 0 && _srList.Any(s=>s !=null && !s.MultipathAOK))
             {
@@ -293,7 +293,7 @@ namespace XenAdmin.Dialogs
             if (sender is MultipleAction)
                 Program.Invoke(this, Build);
 
-            base.action_Completed(sender, e);
+            base.action_Completed(sender);
         }
 
         private class RepairTreeNode : TreeNode

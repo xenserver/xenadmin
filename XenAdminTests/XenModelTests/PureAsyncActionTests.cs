@@ -114,7 +114,7 @@ namespace XenAdminTests.XenModelTests
             mockProxy.VerifyAll();
         }
 
-        void action_Completed(object sender, EventArgs e)
+        void action_Completed(ActionBase sender)
         {
             _autoResetEvent.Set();
         }

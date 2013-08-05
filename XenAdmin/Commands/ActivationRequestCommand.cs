@@ -56,7 +56,7 @@ namespace XenAdmin.Commands
             action.RunAsync();
         }
 
-        void action_Completed(object sender, EventArgs e)
+        void action_Completed(ActionBase sender)
         {
             ActivationRequestAction action = (ActivationRequestAction)sender;
             if (action.Succeeded)

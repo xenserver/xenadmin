@@ -240,16 +240,16 @@ namespace XenAdmin.TabPages
                                                                 return;
 
                                                             if (e.Action == CollectionChangeAction.Add)
-                                                                a.Completed += new EventHandler<EventArgs>(a_Completed);
+                                                                a.Completed += a_Completed;
 
                                                             if (e.Action == CollectionChangeAction.Remove)
-                                                                a.Completed -= new EventHandler<EventArgs>(a_Completed);
+                                                                a.Completed -= a_Completed;
 
                                                             RefreshButtons();
                                                         });
         }
 
-        void a_Completed(object sender, EventArgs e)
+        void a_Completed(ActionBase sender)
         {
             Program.Invoke(Program.MainWindow, RefreshButtons);
         }

@@ -231,7 +231,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                         var action = new SrCslgAdaptersScanAction(Connection);
                         var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
                         // never show the error message if it fails.
-                        action.Completed += (s, e) =>
+                        action.Completed += s =>
                         {
                             if (!action.Succeeded)
                             {
@@ -254,7 +254,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                         var dialog = new ActionProgressDialog(scanAction, ProgressBarStyle.Marquee);
 
                         // never show the error message if it fails.
-                        scanAction.Completed += (s, e) =>
+                        scanAction.Completed += s =>
                                                     {
                                                         if (!scanAction.Succeeded)
                                                         {
@@ -649,7 +649,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     if (dialog.DialogResult == DialogResult.Yes && ee.Action != null)
                     {
                         ee.StartAction = false;
-                        ee.Action.Completed += (ss, eee) =>
+                        ee.Action.Completed += ss =>
                         {
                             if (ee.Action.Succeeded)
                             {

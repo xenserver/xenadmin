@@ -63,14 +63,14 @@ namespace XenAdmin.Core
             }
         }
 
-        private static void RunCheckForUpdates(EventHandler<EventArgs> completedEvent)
+        private static void RunCheckForUpdates(Action<ActionBase> completedEvent)
         {
             DownloadUpdatesXmlAction action = new DownloadUpdatesXmlAction();
-            action.Completed += new EventHandler<EventArgs>(completedEvent);
+            action.Completed += completedEvent;
             action.RunAsync();
         }
 
-        public static void CheckForUpdates(EventHandler<EventArgs> completedEvent)
+        public static void CheckForUpdates(Action<ActionBase> completedEvent)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
                 return;
@@ -86,7 +86,7 @@ namespace XenAdmin.Core
             RunCheckForUpdates(action_Completed);
         }
 
-        private static void action_Completed(object sender, EventArgs e)
+        private static void action_Completed(ActionBase sender)
         {
             DownloadUpdatesXmlAction action = (DownloadUpdatesXmlAction)sender;
             if (!action.Succeeded)

@@ -103,10 +103,8 @@ namespace XenAdmin.Actions.DR
             }
         }
 
-        void action_Changed(object sender, EventArgs e)
+        void action_Changed(ActionBase a)
         {
-            ActionBase a = (ActionBase) sender;
-
             PercentComplete = ((ActionCountCompleted * 100) + a.PercentComplete) / ActionCountTotal;
         }
     }

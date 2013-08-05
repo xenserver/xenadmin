@@ -343,7 +343,7 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private void action_Completed(object sender, EventArgs e)
+        private void action_Completed(ActionBase sender)
         {
             Program.Invoke(Program.MainWindow.GeneralPage, Program.MainWindow.GeneralPage.EnableDisableEdit);
         }

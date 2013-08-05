@@ -36,6 +36,9 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
+using XenAdmin.Actions;
+
 using XenAPI;
 using XenAdmin.Actions.HostActions;
 using XenAdmin.Controls.DataGridViewEx;
@@ -61,7 +64,7 @@ namespace XenAdmin.Dialogs.VMDialogs
             AvailableLabel.Text = PoolMemoryAvailableExcludingHost(Server);
 
             VmsToMigrateAction = new VMsWhichCanBeMigratedAction(Server.Connection, Server);
-            VmsToMigrateAction.Completed += new EventHandler<EventArgs>(action_Completed);
+            VmsToMigrateAction.Completed += action_Completed;
             VmsToMigrateAction.RunAsync();
         }
 
@@ -106,7 +109,7 @@ namespace XenAdmin.Dialogs.VMDialogs
             OKButton.Enabled = required == 0 ? true : required < PoolMemoryFree;
         }
 
-        void action_Completed(object sender, EventArgs e)
+        void action_Completed(ActionBase sender)
         {
             Program.Invoke(Program.MainWindow, PopulateGridView);
         }

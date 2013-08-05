@@ -80,12 +80,12 @@ namespace XenAdmin.Commands
             {
                 // TODO: work out what the new description should be
                 var action = new VMCloneAction(snapshot, newName, "");
-                action.Completed += new EventHandler<EventArgs>(action_Completed);
+                action.Completed += action_Completed;
                 action.RunAsync();
             }
         }
 
-        void action_Completed(object sender, EventArgs e)
+        void action_Completed(ActionBase sender)
         {
             AsyncAction action = (AsyncAction)sender;
             var vm = action.Connection.Resolve(new XenRef<VM>(action.Result));

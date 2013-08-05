@@ -162,7 +162,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 action.Completed -= Common_action_Completed;
         }
 
-        private void Common_action_Completed(object sender, EventArgs e)
+        private void Common_action_Completed(ActionBase sender)
         {
             Program.Invoke(this, delegate()
             {

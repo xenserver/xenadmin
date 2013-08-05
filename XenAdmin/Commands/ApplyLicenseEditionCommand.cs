@@ -75,7 +75,7 @@ namespace XenAdmin.Commands
             ActionProgressDialog actionProgress = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
 
             // close dialog even when there's an error as this action shows its own error dialog box.
-            action.Completed += (s, ee) => Program.Invoke(Program.MainWindow, () =>
+            action.Completed += s => Program.Invoke(Program.MainWindow, () =>
             {
                 Failure f = action.Exception as Failure;
                 if (f != null && f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED_FRIENDLY)

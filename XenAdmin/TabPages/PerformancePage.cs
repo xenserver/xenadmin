@@ -393,7 +393,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void SaveGraphs(object sender, EventArgs e)
+        private void SaveGraphs(ActionBase sender)
         {
             Program.Invoke(Program.MainWindow, delegate
             {

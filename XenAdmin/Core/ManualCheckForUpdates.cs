@@ -88,7 +88,7 @@ namespace XenAdmin.Core
             }
         }
 
-        private void actionCompleted(object sender, EventArgs e)
+        private void actionCompleted(ActionBase sender)
         {
             Program.AssertOffEventThread();
             DownloadUpdatesXmlAction action = sender as DownloadUpdatesXmlAction;

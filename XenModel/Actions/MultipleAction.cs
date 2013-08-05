@@ -108,7 +108,7 @@ namespace XenAdmin.Actions
                 subAction.Changed -= SubActionChanged;
         }
 
-        private void SubActionChanged(object sender, EventArgs e)
+        private void SubActionChanged(ActionBase sender)
         {
             AsyncAction subAction = sender as AsyncAction;
             if (subAction != null)
@@ -145,7 +145,7 @@ namespace XenAdmin.Actions
             }
         }
 
-        protected virtual void MultipleAction_Completed(object sender, EventArgs e)
+        protected virtual void MultipleAction_Completed(ActionBase sender)
         {
             // The MultipleAction can sometimes complete prematurely, for example
             // if the sudo dialog is cancelled, of (less likely) if one of the

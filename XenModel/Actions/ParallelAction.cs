@@ -68,7 +68,7 @@ namespace XenAdmin.Actions
             foreach (AsyncAction subAction in subActions)
             {
                 AsyncAction action = subAction;
-                action.Completed += new EventHandler<EventArgs>(action_Completed);
+                action.Completed += action_Completed;
                 _queuePC.EnqueueItem(
                     () =>
                     {
@@ -100,7 +100,8 @@ namespace XenAdmin.Actions
 
         private readonly object _lock = new object();
         private volatile int i = 0;
-        void action_Completed(object sender, EventArgs e)
+        
+        void action_Completed(ActionBase sender)
         {
             lock (_lock)
             {
@@ -111,10 +112,10 @@ namespace XenAdmin.Actions
             }
         }
 
-        protected override void MultipleAction_Completed(object sender, EventArgs e)
+        protected override void MultipleAction_Completed(ActionBase sender)
         {
             
-            base.MultipleAction_Completed(sender, e);
+            base.MultipleAction_Completed(sender);
             _queuePC.StopWorkers(false);
         }
     }

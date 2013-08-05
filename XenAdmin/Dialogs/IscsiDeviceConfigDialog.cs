@@ -396,14 +396,14 @@ namespace XenAdmin.Dialogs
                     getIscsiHost(), getIscsiPort(), null, null);
             }
 
-            IscsiPopulateIqnsAction.Completed += new EventHandler<EventArgs>(IscsiPopulateIqnsAction_Completed);
+            IscsiPopulateIqnsAction.Completed += IscsiPopulateIqnsAction_Completed;
             Dialogs.ActionProgressDialog dialog = new Dialogs.ActionProgressDialog(
                 IscsiPopulateIqnsAction, ProgressBarStyle.Marquee);
             dialog.ShowCancel = true;
             dialog.ShowDialog(this);
         }
 
-        private void IscsiPopulateIqnsAction_Completed(object sender, EventArgs e)
+        private void IscsiPopulateIqnsAction_Completed(ActionBase sender)
         {
             Program.Invoke(this, (System.Threading.WaitCallback)IscsiPopulateIqnsAction_Completed_, sender);
         }
@@ -478,7 +478,7 @@ namespace XenAdmin.Dialogs
             dialog.ShowDialog(this);
         }
 
-        private void IscsiPopulateLunsAction_Completed(object sender, EventArgs e)
+        private void IscsiPopulateLunsAction_Completed(ActionBase sender)
         {
             Program.Invoke(this, (WaitCallback)IscsiPopulateLunsAction_Completed_, sender);
         }

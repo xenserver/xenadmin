@@ -104,7 +104,7 @@ namespace XenAdmin.Dialogs
             resolveAction.NameResolveComplete += new AddRemoveSubjectsAction.NameResolvedEventHandler(resolveAction_NameResolveComplete);
             resolveAction.AllResolveComplete += new AddRemoveSubjectsAction.AllNamesResolvedEventHandler(resolveAction_AllResolveComplete);
             resolveAction.SubjectAddComplete += new AddRemoveSubjectsAction.SubjectAddedEventHandler(resolveAction_SubjectAddComplete);
-            resolveAction.Completed += new EventHandler<EventArgs>(addAction_Completed);
+            resolveAction.Completed += addAction_Completed;
             resolveAction.RunAsync();
         }
 
@@ -158,7 +158,7 @@ namespace XenAdmin.Dialogs
             });
         }
 
-        private void addAction_Completed(object sender, EventArgs e)
+        private void addAction_Completed(ActionBase sender)
         {
             Program.Invoke(this, delegate
             {

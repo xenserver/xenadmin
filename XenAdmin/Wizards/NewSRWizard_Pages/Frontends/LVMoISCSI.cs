@@ -436,7 +436,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             UpdateButtons();
         }
 
-        private void IscsiPopulateIqnsAction_Completed(object sender, EventArgs e)
+        private void IscsiPopulateIqnsAction_Completed(ActionBase sender)
         {
             Program.Invoke(this, (System.Threading.WaitCallback)IscsiPopulateIqnsAction_Completed_, sender);
         }
@@ -513,7 +513,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             dialog.ShowDialog(this);
         }
 
-        private void IscsiPopulateLunsAction_Completed(object sender, EventArgs e)
+        private void IscsiPopulateLunsAction_Completed(ActionBase sender)
         {
             Program.Invoke(this, (WaitCallback)IscsiPopulateLunsAction_Completed_, sender);
         }

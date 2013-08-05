@@ -143,7 +143,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        private void RestoreAction_Completed(object sender, EventArgs e)
+        private void RestoreAction_Completed(ActionBase sender)
         {
             HostBackupRestoreAction action = (HostBackupRestoreAction)sender;
             

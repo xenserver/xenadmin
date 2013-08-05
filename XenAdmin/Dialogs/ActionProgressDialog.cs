@@ -86,8 +86,8 @@ namespace XenAdmin.Dialogs
         {
             InitializeComponent();
             this.action = action;
-            action.Completed += new EventHandler<EventArgs>(action_Completed);
-            action.Changed += new EventHandler<EventArgs>(action_Changed);
+            action.Completed += action_Completed;
+            action.Changed += action_Changed;
             progressBar1.Style = progressBarStyle;
             updateStatusLabel();
             buttonCancel.Enabled = action.CanCancel;
@@ -101,7 +101,7 @@ namespace XenAdmin.Dialogs
             this.showTryAgain = showTryAgain;
         }
 
-        private void action_Changed(object sender, EventArgs e)
+        private void action_Changed(ActionBase sender)
         {
             Program.AssertOffEventThread();
 
@@ -141,7 +141,7 @@ namespace XenAdmin.Dialogs
                 UpdateLabel(labelSubActionStatus, multipleAction.SubActionDescription, multipleAction.SubActionTitle);
         }
 
-        private void action_Completed(object sender, EventArgs e)
+        private void action_Completed(ActionBase sender)
         {
             if (Disposing || IsDisposed || Program.Exiting)
                 return;

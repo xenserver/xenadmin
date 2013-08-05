@@ -131,7 +131,7 @@ namespace XenAdmin.TabPages
             });
         }
 
-        private void action_Changed(object sender, EventArgs e)
+        private void action_Changed(ActionBase sender)
         {
             // This seems to be called off the event thread
             AsyncAction action = (AsyncAction)sender;

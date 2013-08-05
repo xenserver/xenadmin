@@ -173,7 +173,7 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
                     dataGridView1.Rows.Clear();
                     panelLoading.Visible = true;
                     GetVMPPAlertsAction action = new GetVMPPAlertsAction(_vmpp, 24);
-                    action.Completed += new EventHandler<EventArgs>(action_Completed);
+                    action.Completed += action_Completed;
                     action.RunAsync();
                 }
                 else if (comboBox1.SelectedIndex == 2)
@@ -181,13 +181,13 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
                     dataGridView1.Rows.Clear();
                     panelLoading.Visible = true;
                     GetVMPPAlertsAction action = new GetVMPPAlertsAction(_vmpp, 7 * 24);
-                    action.Completed += new EventHandler<EventArgs>(action_Completed);
+                    action.Completed += action_Completed;
                     action.RunAsync();
                 }
             }
         }
 
-        void action_Completed(object sender, EventArgs e)
+        void action_Completed(ActionBase sender)
         {
             var action = (GetVMPPAlertsAction)sender;
             Program.Invoke(Program.MainWindow, () =>

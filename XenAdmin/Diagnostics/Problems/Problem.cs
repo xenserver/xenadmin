@@ -42,7 +42,7 @@ namespace XenAdmin.Diagnostics.Problems
         private AsyncAction solutionAction;
         private readonly Check _check;
 
-        private void SolutionAction_Completed(object sender, EventArgs e)
+        private void SolutionAction_Completed(ActionBase sender)
         {
             SolutionActionCompleted = true;
         }

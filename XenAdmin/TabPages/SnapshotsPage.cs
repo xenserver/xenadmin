@@ -260,9 +260,8 @@ namespace XenAdmin.TabPages
                                                         });
         }
 
-        private void CreateActionCompleted(object sender, EventArgs e)
+        private void CreateActionCompleted(ActionBase senderAction)
         {
-            ActionBase senderAction = (ActionBase)sender;
             senderAction.Completed -= CreateActionCompleted;
             ActionBase action = ConnectionsManager.History.Find(SpinningPredicate());
             if (action == null)
