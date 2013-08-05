@@ -38,7 +38,7 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
-    public enum ActionType { Error, Information, Action, Alert, Meddling };
+    public enum ActionType { Error, Information, Action, Meddling };
 
     public class ActionBase
     {

@@ -212,8 +212,6 @@ namespace XenAdmin.Controls
                     return Properties.Resources.commands_16;
                 case ActionType.Error:
                     return Properties.Resources._000_error_h32bit_16;
-                case ActionType.Alert:
-                    return Properties.Resources._000_Alert2_h32bit_16;
                 default:
                     throw new InvalidEnumArgumentException();
             }

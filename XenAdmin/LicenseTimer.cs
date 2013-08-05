@@ -32,6 +32,7 @@
 using System;
 using System.Timers;
 using XenAdmin.Actions;
+using XenAdmin.Alerts;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
@@ -160,59 +161,20 @@ namespace XenAdmin
         {
             Program.AssertOnEventThread();
 
-            log.InfoFormat("Server {0} is within 30 days of expiry ({1}). Show License Summary if needed", hostname, HelpersGUI.DateTimeToString(expiryDate, Messages.DATEFORMAT_DMY_HMS, true));
-            string timeleft = GetLicenseTimeLeftString(expiryDate.Subtract(now), false);
-            string message = string.Format(Messages.MAINWINDOW_EXPIRE_MESSAGE, hostname.Ellipsise(25), timeleft);
-            new ActionBase(ActionType.Alert, Messages.NOTICE_LICENCE_TITLE, message, false);
+            log.InfoFormat("Server {0} is within 30 days of expiry ({1}). Show License Summary if needed",
+                hostname,
+                HelpersGUI.DateTimeToString(expiryDate, Messages.DATEFORMAT_DMY_HMS, true));
+
+            var alert = new LicenseAlert(hostname, now, expiryDate) { LicenseManagerLauncher = licenseManagerLauncher };
+            Alert.AddAlert(alert);
 
             if (Program.RunInAutomatedTestMode)
-                log.DebugFormat("In automated test mode: quashing license expiry warning '{0}'", message);
+                log.DebugFormat("In automated test mode: quashing license expiry warning '{0}'", alert.Description);
             else
             {
                 licenseManagerLauncher.Parent = Program.MainWindow;
                 licenseManagerLauncher.LaunchIfRequired(true, ConnectionsManager.XenConnections);
-            }
-                
-        }
-
-        /// <summary>
-        /// Returns a string similar to "x days", "x minutes", "x hours", "x months" where x is the time till the host's license expires/needs reactivating.
-        /// </summary>
-        /// <param name="timeTillExpire"></param>
-        /// <param name="CapAtTenYears">Set to true will return Messages.UNLIMITED for timespans over 3653 days</param>
-        /// <returns></returns>
-        public static string GetLicenseTimeLeftString(TimeSpan timeTillExpire, bool CapAtTenYears)
-        {
-            if (timeTillExpire.Ticks < 0)
-                return "";
-            if (CapAtTenYears && timeTillExpire.TotalDays > 3653)
-            {
-                return Messages.UNLIMITED;
-            }
-            else if (timeTillExpire.TotalDays > 60)
-            {
-                // Show remaining time in months
-                return string.Format(Messages.TIME_MONTHS,
-                    (long)(Math.Floor(timeTillExpire.TotalDays / 30)));
-            }
-            else if (timeTillExpire.TotalDays > 2)
-            {
-                // Show remaining time in days
-                return string.Format(Messages.TIME_DAYS,
-                    (long)timeTillExpire.TotalDays);
-            }
-            else if (timeTillExpire.TotalHours > 2)
-            {
-                // Show remaining time in hours
-                return string.Format(Messages.TIME_HOURS,
-                    (long)timeTillExpire.TotalHours);
-            }
-            else
-            {
-                // Show remaining time in minutes (round up so you never get 'in 0 minutes')
-                return string.Format(Messages.TIME_MINUTES,
-                    (long)Math.Ceiling(timeTillExpire.TotalMinutes));
-            }
+            }    
         }
 
         /// <summary>

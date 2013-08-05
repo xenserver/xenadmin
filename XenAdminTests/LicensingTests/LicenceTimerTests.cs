@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 using XenAdmin;
+using XenAdmin.Alerts;
 
 namespace XenAdminTests.LicensingTests
 {
@@ -85,7 +86,7 @@ namespace XenAdminTests.LicensingTests
 
             foreach (KeyValuePair<TimeSpan, string > value in valuesToCheck)
             {
-                Assert.AreEqual(value.Value, LicenseTimer.GetLicenseTimeLeftString(value.Key, capped));
+                Assert.AreEqual(value.Value, LicenseAlert.GetLicenseTimeLeftString(value.Key, capped));
             }
         }
 

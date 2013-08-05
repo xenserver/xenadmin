@@ -63,7 +63,6 @@ namespace XenAdmin.TabPages
             label1.Font = Program.HeaderGradientFont;
 
             actionsCheckBox.ForeColor = Program.HeaderGradientForeColor;
-            alertsCheckBox.ForeColor = Program.HeaderGradientForeColor;
             errorsCheckBox.ForeColor = Program.HeaderGradientForeColor;
             informationCheckBox.ForeColor = Program.HeaderGradientForeColor;
         }
@@ -186,9 +185,6 @@ namespace XenAdmin.TabPages
                 return false;
 
             if (!errorsCheckBox.Checked && (row.Type == ActionType.Error || row.Error))
-                return false;
-
-            if (!alertsCheckBox.Checked && row.Type == ActionType.Alert)
                 return false;
 
             if (!informationCheckBox.Checked && row.Type == ActionType.Information)

@@ -36,7 +36,6 @@ namespace XenAdmin.TabPages
             this.button1 = new System.Windows.Forms.Button();
             this.gradientPanel1 = new XenAdmin.Controls.GradientPanel.GradientPanel();
             this.errorsCheckBox = new System.Windows.Forms.CheckBox();
-            this.alertsCheckBox = new System.Windows.Forms.CheckBox();
             this.informationCheckBox = new System.Windows.Forms.CheckBox();
             this.actionsCheckBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -57,7 +56,6 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.gradientPanel1, "gradientPanel1");
             this.gradientPanel1.Controls.Add(this.button1);
             this.gradientPanel1.Controls.Add(this.errorsCheckBox);
-            this.gradientPanel1.Controls.Add(this.alertsCheckBox);
             this.gradientPanel1.Controls.Add(this.informationCheckBox);
             this.gradientPanel1.Controls.Add(this.actionsCheckBox);
             this.gradientPanel1.Controls.Add(this.label1);
@@ -75,18 +73,6 @@ namespace XenAdmin.TabPages
             this.errorsCheckBox.Name = "errorsCheckBox";
             this.errorsCheckBox.UseVisualStyleBackColor = false;
             this.errorsCheckBox.CheckedChanged += new System.EventHandler(this.errorsCheckBox_CheckedChanged);
-            // 
-            // alertsCheckBox
-            // 
-            resources.ApplyResources(this.alertsCheckBox, "alertsCheckBox");
-            this.alertsCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.alertsCheckBox.Checked = true;
-            this.alertsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.alertsCheckBox.ForeColor = System.Drawing.Color.White;
-            this.alertsCheckBox.Image = global::XenAdmin.Properties.Resources._000_Alert2_h32bit_16;
-            this.alertsCheckBox.Name = "alertsCheckBox";
-            this.alertsCheckBox.UseVisualStyleBackColor = false;
-            this.alertsCheckBox.CheckedChanged += new System.EventHandler(this.alertsCheckBox_CheckedChanged);
             // 
             // informationCheckBox
             // 
@@ -143,7 +129,6 @@ namespace XenAdmin.TabPages
 
         private System.Windows.Forms.CheckBox informationCheckBox;
         private System.Windows.Forms.CheckBox actionsCheckBox;
-        private System.Windows.Forms.CheckBox alertsCheckBox;
         private System.Windows.Forms.CheckBox errorsCheckBox;
         private XenAdmin.Controls.CustomHistoryContainer customHistoryContainer1;
         private System.Windows.Forms.Button button1;
