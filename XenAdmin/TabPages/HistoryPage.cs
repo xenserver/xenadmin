@@ -61,10 +61,6 @@ namespace XenAdmin.TabPages
 
             label1.ForeColor = Program.HeaderGradientForeColor;
             label1.Font = Program.HeaderGradientFont;
-
-            actionsCheckBox.ForeColor = Program.HeaderGradientForeColor;
-            errorsCheckBox.ForeColor = Program.HeaderGradientForeColor;
-            informationCheckBox.ForeColor = Program.HeaderGradientForeColor;
         }
 
         public void SetXenObjects(IEnumerable<IXenObject> xenObjects)
@@ -181,36 +177,7 @@ namespace XenAdmin.TabPages
             if (!ShowAll && _xenObjects.Find(x => row.AppliesTo.Contains(x.opaque_ref)) == null)
                 return false;
 
-            if (!actionsCheckBox.Checked && (row.Type == ActionType.Action || row.Type == ActionType.Meddling))
-                return false;
-
-            if (!errorsCheckBox.Checked && (row.Type == ActionType.Error || row.Error))
-                return false;
-
-            if (!informationCheckBox.Checked && row.Type == ActionType.Information)
-                return false;
-
             return true;
-        }
-
-        private void actionsCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            BuildRowList();
-        }
-
-        private void alertsCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            BuildRowList();
-        }
-
-        private void informationCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            BuildRowList();
-        }
-
-        private void errorsCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            BuildRowList();
         }
 
         private void action_Changed(ActionBase sender)

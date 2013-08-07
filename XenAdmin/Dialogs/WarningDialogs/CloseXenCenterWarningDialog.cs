@@ -71,7 +71,7 @@ namespace XenAdmin.Dialogs.WarningDialogs
             foreach (ActionBase action in ConnectionsManager.History)
             {
                 AsyncAction a = action as AsyncAction;
-                if (action.Type == ActionType.Action && !action.IsCompleted && (a == null || !a.Cancelling))
+                if (!action.IsCompleted && (a == null || !a.Cancelling))
                 {
                     IXenObject xo = (action.Pool as IXenObject) ?? (action.Host as IXenObject) ?? (action.VM as IXenObject) ?? (action.SR as IXenObject);
                     if (xo == null || xo.Connection != connection)
@@ -86,7 +86,7 @@ namespace XenAdmin.Dialogs.WarningDialogs
         {
             foreach (ActionBase action in ConnectionsManager.History)
             {
-                if (action.Type == ActionType.Action && !action.IsCompleted)
+                if (!action.IsCompleted)
                 {
                     AddRow(action);
                 }

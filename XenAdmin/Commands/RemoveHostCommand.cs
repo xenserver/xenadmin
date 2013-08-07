@@ -73,7 +73,7 @@ namespace XenAdmin.Commands
             {
                 string msg = string.Format(Messages.MAINWINDOW_LOG_REMOVECONNECTION, host.Connection.Hostname);
                 log.Info(msg);
-                new ActionBase(ActionType.Information, msg, msg, false);
+                new ActionBase(msg, msg, false, true);
                 MainWindowCommandInterface.CloseActiveWizards(host.Connection);
                 host.Connection.EndConnect();
                 MainWindowCommandInterface.RemoveConnection(host.Connection);

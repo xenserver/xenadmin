@@ -46,12 +46,8 @@ namespace XenAdmin.Controls
     {
         public readonly ChangeableList<CustomHistoryRow> Rows = new ChangeableList<CustomHistoryRow>();
 
-        internal const int col1 = 35;
         internal int col2 = -1;
-        private int col4;
-
-        internal int col3;
-
+        internal int col4;
         public bool SuspendDraw = false;
 
         public int ScrollTop = 0;
@@ -78,8 +74,6 @@ namespace XenAdmin.Controls
                     Measure(g, Messages.HISTORYROW_TIME));
                 col4 = 10 + (int)Drawing.MeasureText(g, HelpersGUI.DateTimeToString(new DateTime(9999, 12, 30, 20, 58, 58), Messages.DATEFORMAT_DMY_HMS, true), Font).Width;
             }
-
-            col3 = Width - (6 + col1 + col2 + col4);
 
             g.FillRectangle(Application.RenderWithVisualStyles ? SystemBrushes.ControlLightLight : SystemBrushes.Control, Bounds);
 
@@ -182,7 +176,7 @@ namespace XenAdmin.Controls
                     ToolStripMenuItem copyItem = new ToolStripMenuItem(Messages.COPY, Properties.Resources.copy_16);
                     copyItem.Click += new EventHandler(delegate(object sender, EventArgs eve)
                     {
-                        Clipboard.SetText(string.Format(Messages.HISTORYPANEL_COPY_FORMAT, Core.PropertyManager.GetFriendlyName(string.Format("Label-Action.{0}", clickedRow.Type.ToString())), clickedRow.Title, clickedRow.Description, clickedRow.TimeOccurred));
+                        Clipboard.SetText(string.Format(Messages.HISTORYPANEL_COPY_FORMAT, Core.PropertyManager.GetFriendlyName("Label-Action.Action"), clickedRow.Title, clickedRow.Description, clickedRow.TimeOccurred));
                     });
                     menu.Items.Add(copyItem);
                     menu.Show(this, PointToClient(MousePosition));

@@ -47,7 +47,6 @@ namespace XenAdmin.Controls
         /// </summary>
         public ActionBase Action;
         public List<string> AppliesTo = new List<string>();
-        public ActionType Type;
 
         private DateTime finished = DateTime.MinValue;
 
@@ -72,7 +71,6 @@ namespace XenAdmin.Controls
 
         public ActionRow(ActionBase action)
         {
-            Type = action.Type;
             AppliesTo = action.AppliesTo;
             Action = action;
             this.Image = getImage();
@@ -153,11 +151,11 @@ namespace XenAdmin.Controls
                 this.Title = Action.Title;
             }
 
-            Error = (Action.Exception != null || Action.Type == ActionType.Error) && !(Action.Exception is CancelledException);
+            Error = (Action.Exception != null) && !(Action.Exception is CancelledException);
 
             Image = getImage();
 
-            ShowTime = Action.Type == ActionType.Action || Action.Type == ActionType.Meddling || Action.Type == ActionType.Error;
+            ShowTime = Action.Finished - Action.Started >= TimeSpan.FromSeconds(1);
 
             if (Action.Exception == null)
             {
@@ -182,7 +180,6 @@ namespace XenAdmin.Controls
 
             if (Action.IsCompleted)
             {
-                Type = Action.Type;
                 finished = Action.Finished;
                 if (ParentPanel != null)
                 {
@@ -203,18 +200,31 @@ namespace XenAdmin.Controls
 
         private Image getImage()
         {
-            switch (Action.Type)
-            {
-                case ActionType.Information:
-                    return Properties.Resources._000_Info3_h32bit_16;
-                case ActionType.Action:
-                case ActionType.Meddling:
-                    return Properties.Resources.commands_16;
-                case ActionType.Error:
-                    return Properties.Resources._000_error_h32bit_16;
-                default:
-                    throw new InvalidEnumArgumentException();
-            }
+            if (Action.IsCompleted)
+                return Action.Succeeded
+                           ? Properties.Resources._000_Tick_h32bit_16
+                           : Properties.Resources._000_error_h32bit_16;
+
+            if (Action.PercentComplete < 10)
+                return Properties.Resources.usagebar_0;
+            if (Action.PercentComplete < 20)
+                return Properties.Resources.usagebar_1;
+            if (Action.PercentComplete < 30)
+                return Properties.Resources.usagebar_2;
+            if (Action.PercentComplete < 40)
+                return Properties.Resources.usagebar_3;
+            if (Action.PercentComplete < 50)
+                return Properties.Resources.usagebar_4;
+            if (Action.PercentComplete < 60)
+                return Properties.Resources.usagebar_5;
+            if (Action.PercentComplete < 70)
+                return Properties.Resources.usagebar_6;
+            if (Action.PercentComplete < 80)
+                return Properties.Resources.usagebar_7;
+            if (Action.PercentComplete < 90)
+                return Properties.Resources.usagebar_8;
+
+            return Properties.Resources.usagebar_9;
         }
     }
 }

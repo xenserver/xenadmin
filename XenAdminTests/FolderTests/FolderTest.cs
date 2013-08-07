@@ -93,7 +93,7 @@ namespace XenAdminTests.FolderTests
         {
             foreach (XenAdmin.Actions.ActionBase a in ConnectionsManager.History)
             {
-                if (a.Type == ActionType.Action && !a.IsCompleted)
+                if (!a.IsCompleted)
                     return true;
             }
             return false;

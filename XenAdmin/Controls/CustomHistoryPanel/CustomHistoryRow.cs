@@ -45,6 +45,20 @@ namespace XenAdmin.Controls
     {
         public static readonly Padding Margin = new Padding(3);
 
+        private int col1
+        {
+            get { return Image == null ? 89 : Image.Width + 19; }
+        }
+        private int col3
+        {
+            get
+            {
+                return ParentPanel == null
+                           ? 0
+                           : ParentPanel.Width - (6 + col1 + ParentPanel.col2 + ParentPanel.col4);
+            }
+        }
+
         private static readonly string DescriptionLabel = Messages.HISTORYROW_DETAILS;
         private static readonly string ErrorLabel = Messages.HISTORYROW_ERROR;
         private static readonly string TimeLabel = Messages.HISTORYROW_TIME;
@@ -66,7 +80,7 @@ namespace XenAdmin.Controls
         public string Title;
         public string Description;
         public string TimeOccurred;
-        public CustomHistoryPanel ParentPanel = null;
+        public CustomHistoryPanel ParentPanel;
         public bool ButtonPressed = false;
         public bool Visible = true;
         public bool ShowCancel = true;
@@ -104,18 +118,18 @@ namespace XenAdmin.Controls
             int top = Bounds.Top + ItemPadding.Top + InternalPadding.Top;
             int left = Bounds.Left + InternalPadding.Left;
 
-            int rowheight1 = HeightRow1() + ItemPadding.Vertical;
-            int rowheight2 = HeightRow2() + ItemPadding.Vertical;
-            int rowheight3 = ShowTime ? HeightRow3() + ItemPadding.Vertical : 0;
+            int rowheight1 = HeightOf(Title, TitleFont, ParentPanel.col2 + col3) + ItemPadding.Vertical;
+            int rowheight2 = HeightOf(Description, Font, col3) + ItemPadding.Vertical;
+            int rowheight3 = ShowTime ? HeightOf(TimeTaken, Font, col3) + ItemPadding.Vertical : 0;
             int rowheight4 = ShowProgress ? 17 + ItemPadding.Vertical : 0;
             RowHeight = rowheight1 + rowheight2 + rowheight3 + rowheight4 + InternalPadding.Vertical;
             RowWidth = Bounds.Width;
 
             if (g != null && Bounds.Top < visibleBottom && Bounds.Top + RowHeight > visibleTop && Bounds.Top + RowHeight <= Int16.MaxValue)
             {
-                int left1 = left + CustomHistoryPanel.col1;
+                int left1 = left + col1;
                 int left2 = left1 + ParentPanel.col2;
-                int left3 = left2 + ParentPanel.col3;
+                int left3 = left2 + col3;
                 int top1 = top + rowheight1;
                 int top2 = top1 + rowheight2;
                 int top3 = top2 + rowheight3;
@@ -133,15 +147,15 @@ namespace XenAdmin.Controls
                     g.DrawLine(ErrorPenThick, Bounds.Left,            Bounds.Top,             Bounds.Left,            Bounds.Top + RowHeight + 1);
                 }
 
-                g.DrawImage(Image, left + ((CustomHistoryPanel.col1 - Image.Width) / 2), top, Image.Width, Image.Height);
-                Drawing.DrawText(g, Title, TitleFont, new Rectangle(left1, top, ParentPanel.col2 + ParentPanel.col3, rowheight1), TitleColor, TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
+                g.DrawImage(Image, left + ((col1 - Image.Width) / 2), top, Image.Width, Image.Height);
+                Drawing.DrawText(g, Title, TitleFont, new Rectangle(left1, top, ParentPanel.col2 + col3, rowheight1), TitleColor, TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
                 Drawing.DrawText(g, TimeOccurred, Font, new Point(left3, top), TextColor);
                 if(!Error)
                     Drawing.DrawText(g, DescriptionLabel, Font, new Point(left1, top1), TextColor);
                 else
                     Drawing.DrawText(g, ErrorLabel, Font, new Point(left1, top1), ErrorColor);
 
-                Drawing.DrawText(g, Description, Font, new Rectangle(left2, top1, ParentPanel.col3, rowheight2), TextColor, TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
+                Drawing.DrawText(g, Description, Font, new Rectangle(left2, top1, col3, rowheight2), TextColor, TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
 
                 if (ShowCancel)
                 {
@@ -185,7 +199,7 @@ namespace XenAdmin.Controls
                 if (ShowTime)
                 {
                     Drawing.DrawText(g, TimeLabel, Font, new Point(left1, top2), TextColor);
-                    Drawing.DrawText(g, TimeTaken, Font, new Rectangle(left2, top2, ParentPanel.col3, rowheight3), TextColor, TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
+                    Drawing.DrawText(g, TimeTaken, Font, new Rectangle(left2, top2, col3, rowheight3), TextColor, TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
                 }
 
                 if (ShowProgress)
@@ -193,16 +207,16 @@ namespace XenAdmin.Controls
                     if (Application.RenderWithVisualStyles)
                     {
                         Drawing.DrawText(g, ProgressLabel, Font, new Point(left1, top3), TextColor);
-                        ProgressBarRenderer.DrawHorizontalBar(g, new Rectangle(left2, top3, ParentPanel.col3, 17));
-                        ProgressBarRenderer.DrawHorizontalChunks(g, new Rectangle(left2 + 4, top3 + 3, (Progress * (ParentPanel.col3 - 8) / 100), 12));
+                        ProgressBarRenderer.DrawHorizontalBar(g, new Rectangle(left2, top3, col3, 17));
+                        ProgressBarRenderer.DrawHorizontalChunks(g, new Rectangle(left2 + 4, top3 + 3, (Progress * (col3 - 8) / 100), 12));
                     }
                     else
                     {
                         Drawing.DrawText(g, ProgressLabel, Font, new Point(left1, top3), TextColor);
-                        g.FillRectangle(SystemBrushes.ButtonShadow, new Rectangle(left2, top3, ParentPanel.col3, 17));
-                        g.FillRectangle(SystemBrushes.ButtonHighlight, new Rectangle(left2 + 1, top3 + 1, ParentPanel.col3 - 1, 16));
-                        g.FillRectangle(SystemBrushes.ButtonFace, new Rectangle(left2 + 1, top3 + 1, ParentPanel.col3 - 2, 15));
-                        int barwidth = (Progress * (ParentPanel.col3 - 4) / 100);
+                        g.FillRectangle(SystemBrushes.ButtonShadow, new Rectangle(left2, top3, col3, 17));
+                        g.FillRectangle(SystemBrushes.ButtonHighlight, new Rectangle(left2 + 1, top3 + 1, col3 - 1, 16));
+                        g.FillRectangle(SystemBrushes.ButtonFace, new Rectangle(left2 + 1, top3 + 1, col3 - 2, 15));
+                        int barwidth = (Progress * (col3 - 4) / 100);
                         int chunkwidth = 7;
                         int chunkgap = 2;
                         int progleft = 0;
@@ -218,21 +232,6 @@ namespace XenAdmin.Controls
                         }
                         g.FillRectangle(SystemBrushes.ActiveCaption, new Rectangle(left2 + 2 + progleft, top3 + 2, chunkwidth - progleft, 13));
                     }
-                    /*int barwidth = (Progress * (ParentPanel.col3 - 8) / 100);
-                    int chunkwidth = 7;
-                    int chunkgap = 1;
-                    int progleft = 0;
-                    while (true)
-                    {
-                        if (progleft + chunkwidth + chunkgap < barwidth)
-                        {
-                            ChunkRenderer.DrawBackground(g, new Rectangle(left2 + 4 + progleft, t + rowheight2 + rowheight3 + 3, chunkwidth, 12));
-                            progleft += chunkwidth + chunkgap;
-                        }
-                        else
-                            break;
-                    }
-                    ChunkRenderer.DrawBackground(g, new Rectangle(left2 + 4 + progleft, t + rowheight2 + rowheight3 + 3, chunkwidth - progleft, 12));*/
                 }
             }
 
@@ -243,21 +242,6 @@ namespace XenAdmin.Controls
         {
             int h = Drawing.MeasureText(text, font, new Size(width, Int32.MaxValue), TextFormatFlags.TextBoxControl | TextFormatFlags.WordBreak).Height;
             return h > 0 ? h : 12;
-        }
-
-        private int HeightRow3()
-        {
-            return HeightOf(TimeTaken, Font, ParentPanel.col3);
-        }
-
-        private int HeightRow2()
-        {
-            return HeightOf(Description, Font, ParentPanel.col3);
-        }
-
-        private int HeightRow1()
-        {
-            return HeightOf(Title, TitleFont, ParentPanel.col2 + ParentPanel.col3);
         }
 
         internal void Click(Point p, MouseButtons button)
@@ -290,8 +274,8 @@ namespace XenAdmin.Controls
 
         private Rectangle CancelButtonRect()
         {
-            return new Rectangle(Margin.Left + InternalPadding.Left + CustomHistoryPanel.col1 + ParentPanel.col2 + ParentPanel.col3,
-                                 Margin.Left + InternalPadding.Top + ItemPadding.Top + ItemPadding.Vertical + HeightRow1(), 75, 23);
+            return new Rectangle(Margin.Left + InternalPadding.Left + col1 + ParentPanel.col2 + col3,
+                                 Margin.Left + InternalPadding.Top + ItemPadding.Top + ItemPadding.Vertical + HeightOf(Title, TitleFont, ParentPanel.col2 + col3), 75, 23);
         }
     }
 }

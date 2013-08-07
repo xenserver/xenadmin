@@ -38,13 +38,10 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
-    public enum ActionType { Error, Information, Action, Meddling };
-
     public class ActionBase
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public ActionType Type;
         public string Title;
 
         /// <summary>
@@ -265,27 +262,32 @@ namespace XenAdmin.Actions
 
         public const int MAX_HISTORY_ITEM = 1000;
 
-        public ActionBase(ActionType type, string title, string description, bool SuppressHistory)
-            : this(type, title, description, SuppressHistory, true)
+        public ActionBase(string title, string description, bool suppressHistory)
+            : this(title, description, suppressHistory, false)
         {
 
         }
 
-        public ActionBase(ActionType type, string title, string description, bool SuppressHistory, bool non_action_completed)
+        public ActionBase(string title, string description, bool suppressHistory, bool completeImmediately)
+            : this(title, description, suppressHistory, completeImmediately, null)
+        {}
+
+        public ActionBase(string title, string description, bool suppressHistory, bool completeImmediately, string error)
         {
-            Type = type;
             Title = title;
             _description = description;
             log.Debug(_description);
-            if (type != ActionType.Action && non_action_completed)
+            if (completeImmediately)
             {
+                if (!string.IsNullOrEmpty(error))
+                    _exception = new Exception(error);
+
                 Finished = DateTime.Now;
                 _percentComplete = 100;
                 _isCompleted = true;
             }
-            if (NewAction != null && !SuppressHistory)
+            if (NewAction != null && !suppressHistory)
                 NewAction(this);
-
         }
 
         public string Description
@@ -344,11 +346,6 @@ namespace XenAdmin.Actions
             get { return _exception; }
             protected set
             {
-                if (!(value is CancelledException))
-                {
-                    // Only set to error if not cancelled by user
-                    this.Type = ActionType.Error;
-                }
                 _exception = value;
                 OnChanged();
             }
@@ -431,7 +428,7 @@ namespace XenAdmin.Actions
             MarkCompletedCore();
         }
 
-        protected void MarkCompletedCore()
+        private void MarkCompletedCore()
         {
             Finished = DateTime.Now;
             PercentComplete = 100;

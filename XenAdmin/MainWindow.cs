@@ -380,19 +380,15 @@ namespace XenAdmin
             if (Program.Exiting)
                 return;
 
-            //Program.AssertOnEventThread();
             Program.BeginInvoke(Program.MainWindow, () =>
                                                         {
                                                             ActionBase action = (ActionBase)e.Element;
                                                             if (action == null)
                                                                 return;
 
-                                                            if (action.Type == ActionType.Action)
-                                                            {
-                                                                action.Changed += actionChanged;
-                                                                action.Completed += actionChanged;
-                                                                actionChanged(action);
-                                                            }
+                                                            action.Changed += actionChanged;
+                                                            action.Completed += actionChanged;
+                                                            actionChanged(action);
                                                         });
         }
 
@@ -803,10 +799,7 @@ namespace XenAdmin
                         new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(SystemIcons.Error, message, linkStart, linkLength, linkUrl, Messages.CONNECTION_REFUSED_TITLE)).ShowDialog(this);
 
-                        ActionBase failedAction = new ActionBase(ActionType.Error, Messages.CONNECTION_REFUSED, message, false, false);
-                        failedAction.IsCompleted = true;
-                        failedAction.PercentComplete = 100;
-                        failedAction.Finished = DateTime.Now;
+                        new ActionBase(Messages.CONNECTION_REFUSED, message, false, true, Messages.CONNECTION_REFUSED_TITLE);
                     });
                     return;
                 }
@@ -2877,7 +2870,7 @@ namespace XenAdmin
             bool currentTasks = false;
             foreach (ActionBase a in ConnectionsManager.History)
             {
-                if (a.Type == ActionType.Action && !a.IsCompleted)
+                if (!a.IsCompleted)
                 {
                     currentTasks = true;
                     break;

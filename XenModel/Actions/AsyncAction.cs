@@ -51,8 +51,8 @@ namespace XenAdmin.Actions
 
         private string _result;
 
-        protected AsyncAction(IXenConnection connection, string title, string description, bool SuppressHistory)
-            : base(ActionType.Action, title, description, SuppressHistory)
+        protected AsyncAction(IXenConnection connection, string title, string description, bool suppressHistory)
+            : base(title, description, suppressHistory)
         {
             this.Connection = connection;
         }
@@ -370,7 +370,7 @@ namespace XenAdmin.Actions
                     continue;
 
                 AsyncAction a = action as AsyncAction;
-                if (action.Type == ActionType.Action && !action.IsCompleted && (a == null || !a.Cancelling))
+                if (!action.IsCompleted && (a == null || !a.Cancelling))
                 {
                     return false;
                 }

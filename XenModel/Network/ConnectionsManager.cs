@@ -123,7 +123,7 @@ namespace XenAdmin
                 if (xo == null || xo.Connection != connection)
                     continue;
 
-                if (action.Type == ActionType.Action && !action.IsCompleted)
+                if (!action.IsCompleted)
                 {
                     return false;
                 }
@@ -139,7 +139,7 @@ namespace XenAdmin
                 if (xo == null || xo.Connection != connection)
                     continue;
 
-                if (action.Type == ActionType.Action && !action.IsCompleted)
+                if (!action.IsCompleted)
                 {
                     action.Cancel();
                 }
