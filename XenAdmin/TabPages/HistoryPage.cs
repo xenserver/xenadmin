@@ -33,13 +33,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Drawing;
 using System.Windows.Forms;
 
 using XenAdmin.Actions;
 using XenAdmin.Controls;
-using XenAdmin.Core;
-using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.Dialogs;
 
@@ -49,9 +46,6 @@ namespace XenAdmin.TabPages
     public partial class HistoryPage : UserControl
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly List<IXenObject> _xenObjects = new List<IXenObject>();
-
-        public bool ShowAll { get; set; }
 
         public HistoryPage()
         {
@@ -66,22 +60,6 @@ namespace XenAdmin.TabPages
             toolStripSplitButtonDismiss.Text = tsmiDismissAll.Text;
         }
 
-        public void SetXenObjects(IEnumerable<IXenObject> xenObjects)
-        {
-            Util.ThrowIfParameterNull(xenObjects, "xenObjects");
-            Program.AssertOnEventThread();
-            _xenObjects.Clear();
-            _xenObjects.AddRange(xenObjects);
-
-            // Refilter (but don't rebuild) list
-            foreach (ActionRow row in customHistoryContainer1.CustomHistoryPanel.Rows)
-            {
-                row.Visible = FilterRowVisible(row);
-            }
-
-            removeAllButtonUpdate();
-        }
-
         private void History_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             Program.BeginInvoke(Program.MainWindow, () =>
@@ -92,7 +70,6 @@ namespace XenAdmin.TabPages
                                                             {
                                                                 case CollectionChangeAction.Add:
                                                                     row = AddRow(action);
-                                                                    row.Visible = FilterRowVisible(row);
                                                                     break;
                                                                 case CollectionChangeAction.Remove:
                                                                     row = FindRowFromAction(action);
@@ -131,7 +108,6 @@ namespace XenAdmin.TabPages
             foreach (ActionBase a in ConnectionsManager.History)
             {
                 ActionRow row = AddRow(a);
-                row.Visible = FilterRowVisible(row);
                 a.Changed -= action_Changed;
                 a.Completed -= action_Changed; 
                 a.Changed += action_Changed;
@@ -151,14 +127,6 @@ namespace XenAdmin.TabPages
 
             customHistoryContainer1.CustomHistoryPanel.AddItem(row);
             return row;
-        }
-
-        private bool FilterRowVisible(ActionRow row)
-        {
-            if (!ShowAll && _xenObjects.Find(x => row.AppliesTo.Contains(x.opaque_ref)) == null)
-                return false;
-
-            return true;
         }
 
         private void action_Changed(ActionBase sender)

@@ -2366,30 +2366,6 @@ namespace XenAdmin
                 }
                 else if (t == TabPageHistory)
                 {
-                    // If the user has selected the root of the tree, show all history items
-                    HistoryPage.ShowAll = selectionManager.Selection.Count == 1 && selectionManager.Selection.First == null;
-
-                    List<IXenObject> xenObjects = new List<IXenObject>();
-
-                    foreach (VirtualTreeNode n in treeView.SelectedNodes)
-                    {
-                        IXenObject x = n.Tag as IXenObject;
-                        if (x != null)
-                        {
-                            xenObjects.Add(x);
-                        }
-                        foreach (VirtualTreeNode nn in n.Descendants)
-                        {
-                            IXenObject xx = nn.Tag as IXenObject;
-                            if (xx != null)
-                            {
-                                xenObjects.Add(xx);
-                            }
-                        }
-                    }
-
-                    HistoryPage.SetXenObjects(xenObjects);
-
                     // Unmark node if user has now seen error in log tab
                     if (selectionManager.Selection.FirstAsXenObject != null)
                     {
