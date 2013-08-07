@@ -61,6 +61,9 @@ namespace XenAdmin.TabPages
 
             label1.ForeColor = Program.HeaderGradientForeColor;
             label1.Font = Program.HeaderGradientFont;
+
+            toolStripSplitButtonDismiss.DefaultItem = tsmiDismissAll;
+            toolStripSplitButtonDismiss.Text = tsmiDismissAll.Text;
         }
 
         public void SetXenObjects(IEnumerable<IXenObject> xenObjects)
@@ -77,28 +80,6 @@ namespace XenAdmin.TabPages
             }
 
             removeAllButtonUpdate();
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            if (ConnectionsManager.History.Count > 0 && (Program.RunInAutomatedTestMode ||
-                new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOGS_DELETE, Messages.MESSAGEBOX_LOGS_DELETE_TITLE),
-                    ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo).ShowDialog(this) == DialogResult.Yes))
-            {
-                customHistoryContainer1.CustomHistoryPanel.Rows.RemoveAll(delegate(CustomHistoryRow item)
-                {
-                    ActionRow row = item as ActionRow;
-                    if (row != null && item.Visible && row.Action.IsCompleted)
-                    {
-                        ConnectionsManager.History.Remove(row.Action);
-                        return true;
-                    }
-                    return false;
-                });
-            }
-            customHistoryContainer1.CustomHistoryPanel.Refresh();
         }
 
         private void History_CollectionChanged(object sender, CollectionChangeEventArgs e)
@@ -129,7 +110,7 @@ namespace XenAdmin.TabPages
 
         private void removeAllButtonUpdate()
         {
-            button1.Enabled = customHistoryContainer1.CustomHistoryPanel.Rows.Find(r => r.Visible) != null;
+            tsmiDismissAll.Enabled = customHistoryContainer1.CustomHistoryPanel.Rows.Find(r => r.Visible) != null;
         }
 
         private ActionRow FindRowFromAction(ActionBase action)
@@ -189,5 +170,43 @@ namespace XenAdmin.TabPages
                     customHistoryContainer1.Invalidate();
             });
         }
+
+        #region Control event handlers
+
+        private void toolStripSplitButtonDismiss_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            toolStripSplitButtonDismiss.DefaultItem = e.ClickedItem;
+            toolStripSplitButtonDismiss.Text = toolStripSplitButtonDismiss.DefaultItem.Text;
+        }
+
+        private void tsmiDismissAll_Click(object sender, EventArgs e)
+        {
+            if (ConnectionsManager.History.Count > 0 &&
+                (Program.RunInAutomatedTestMode ||
+                 new ThreeButtonDialog(
+                     new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOGS_DELETE, Messages.MESSAGEBOX_LOGS_DELETE_TITLE),
+                     ThreeButtonDialog.ButtonYes,
+                     ThreeButtonDialog.ButtonNo).ShowDialog(this) == DialogResult.Yes))
+            {
+                customHistoryContainer1.CustomHistoryPanel.Rows.RemoveAll(delegate(CustomHistoryRow item)
+                    {
+                        ActionRow row = item as ActionRow;
+                        if (row != null && item.Visible && row.Action.IsCompleted)
+                        {
+                            ConnectionsManager.History.Remove(row.Action);
+                            return true;
+                        }
+                        return false;
+                    });
+            }
+            customHistoryContainer1.CustomHistoryPanel.Refresh();
+        }
+
+        private void tsmiDismissSelected_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
     }
 }
