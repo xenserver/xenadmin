@@ -184,6 +184,33 @@ namespace XenAdmin.Dialogs
             get { return Helpers.ClearwaterOrGreater(LicencedHost); }
         }
 
+        internal static bool PoolIsMixedFreeAndExpiring(IXenObject xenObject)
+        {
+            if (xenObject is Pool)
+            {
+                if (xenObject.Connection.Cache.Hosts.Length == 1)
+                    return false;
+
+                int freeCount = xenObject.Connection.Cache.Hosts.Count(h => Host.GetEdition(h.edition) == Host.Edition.Free);
+                if (freeCount == 0 || freeCount < xenObject.Connection.Cache.Hosts.Length)
+                    return false;
+
+                var expiryGroups = from Host h in xenObject.Connection.Cache.Hosts
+                                   let exp = h.LicenseExpiryUTC
+                                   group h by exp
+                                   into g
+                                   select new { ExpiryDate = g.Key, Hosts = g };
+
+                if(expiryGroups.Count() > 1)
+                {
+                    expiryGroups.OrderBy(g => g.ExpiryDate);
+                    if ((expiryGroups.ElementAt(1).ExpiryDate - expiryGroups.ElementAt(0).ExpiryDate).TotalDays > 30)
+                        return true;
+                }
+            }
+            return false;
+        }
+
         internal static bool PoolIsPartiallyLicensed(IXenObject xenObject)
         {
             if (xenObject is Pool)

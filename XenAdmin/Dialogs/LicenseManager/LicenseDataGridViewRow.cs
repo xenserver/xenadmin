@@ -163,16 +163,15 @@ namespace XenAdmin.Dialogs
                 if (!licenseStatus.Updated)
                     return false;
 
-                bool free = CurrentLicenseState == Dialogs.LicenseStatus.HostState.Free;
-                bool noIdea = CurrentLicenseState == Dialogs.LicenseStatus.HostState.Unknown;
-
-                if (free || noIdea)
+                if (CurrentLicenseState == Dialogs.LicenseStatus.HostState.Unknown)
                     return false;
 
-                bool licensed = CurrentLicenseState == Dialogs.LicenseStatus.HostState.Licensed;
                 Pool pool = Helpers.GetPool(XenObjectHost.Connection);
 
-                if (licensed)
+                if (CurrentLicenseState == Dialogs.LicenseStatus.HostState.Free)
+                    return Dialogs.LicenseStatus.PoolIsMixedFreeAndExpiring(pool);
+
+                if (CurrentLicenseState == Dialogs.LicenseStatus.HostState.Licensed)
                     return Dialogs.LicenseStatus.PoolIsPartiallyLicensed(pool)
                            || Dialogs.LicenseStatus.PoolHasMixedLicenses(pool);
 
@@ -186,6 +185,13 @@ namespace XenAdmin.Dialogs
             {
                 switch (CurrentLicenseState)
                 {
+                    case Dialogs.LicenseStatus.HostState.Free:
+                        {
+                            Pool pool = Helpers.GetPool(XenObjectHost.Connection);
+                            if (Dialogs.LicenseStatus.PoolIsMixedFreeAndExpiring(pool))
+                                return Messages.POOL_IS_PARTIALLY_LICENSED;
+                            return Messages.UNKNOWN;
+                        }
                     case Dialogs.LicenseStatus.HostState.PartiallyLicensed:
                         return Messages.POOL_IS_PARTIALLY_LICENSED;
                     case Dialogs.LicenseStatus.HostState.Licensed:
