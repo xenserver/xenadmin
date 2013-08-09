@@ -8443,6 +8443,9 @@ The VM protection policy for this VM does not have automatic archiving configure
   <data name="POOL_GONE" xml:space="preserve">
     <value>Pool has disappeared!</value>
   </data>
+  <data name="POOL_HAS_MIXED_LICENSES" xml:space="preserve">
+    <value>This pool has hosts with different types of license.</value>
+  </data>
   <data name="POOL_HAS_NO_SHARED_STORAGE" xml:space="preserve">
     <value>This pool has no shared storage</value>
   </data>

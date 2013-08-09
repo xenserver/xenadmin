@@ -148,7 +148,11 @@ namespace XenAdmin.Dialogs
 
                 // for a pool, get the lowest license, i.e. pool.LicenseString
                 Pool pool = Helpers.GetPool(XenObjectHost.Connection);
-                return pool != null ? pool.LicenseString : Helpers.GetFriendlyLicenseName(XenObjectHost);
+
+                if (pool == null || XenObject is Host)
+                    return Helpers.GetFriendlyLicenseName(XenObjectHost);
+
+                return pool.LicenseString;
             } 
         }
 
@@ -156,10 +160,23 @@ namespace XenAdmin.Dialogs
         {
             get
             {
-                bool licensed = CurrentLicenseState == Dialogs.LicenseStatus.HostState.Licensed;
+                if (!licenseStatus.Updated)
+                    return false;
+
                 bool free = CurrentLicenseState == Dialogs.LicenseStatus.HostState.Free;
                 bool noIdea = CurrentLicenseState == Dialogs.LicenseStatus.HostState.Unknown;
-                return !licensed && !free && licenseStatus.Updated && !noIdea;
+
+                if (free || noIdea)
+                    return false;
+
+                bool licensed = CurrentLicenseState == Dialogs.LicenseStatus.HostState.Licensed;
+                Pool pool = Helpers.GetPool(XenObjectHost.Connection);
+
+                if (licensed)
+                    return Dialogs.LicenseStatus.PoolIsPartiallyLicensed(pool)
+                           || Dialogs.LicenseStatus.PoolHasMixedLicenses(pool);
+
+                return true;
             }
         }
 
@@ -171,6 +188,17 @@ namespace XenAdmin.Dialogs
                 {
                     case Dialogs.LicenseStatus.HostState.PartiallyLicensed:
                         return Messages.POOL_IS_PARTIALLY_LICENSED;
+                    case Dialogs.LicenseStatus.HostState.Licensed:
+                        {
+                            Pool pool = Helpers.GetPool(XenObjectHost.Connection);
+                            if (Dialogs.LicenseStatus.PoolHasMixedLicenses(pool))
+                                return Messages.POOL_HAS_MIXED_LICENSES;
+
+                            if (Dialogs.LicenseStatus.PoolIsPartiallyLicensed(pool))
+                                return Messages.POOL_IS_PARTIALLY_LICENSED;
+
+                            return Messages.UNKNOWN;
+                        }
                     case Dialogs.LicenseStatus.HostState.Unavailable:
                         return Messages.LICENSE_EXPIRED_NO_LICENSES_AVAILABLE;
                     case Dialogs.LicenseStatus.HostState.Expired:

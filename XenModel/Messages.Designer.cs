@@ -24163,6 +24163,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This pool has hosts with different types of license..
+        /// </summary>
+        public static string POOL_HAS_MIXED_LICENSES {
+            get {
+                return ResourceManager.GetString("POOL_HAS_MIXED_LICENSES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This pool has no shared storage.
         /// </summary>
         public static string POOL_HAS_NO_SHARED_STORAGE {

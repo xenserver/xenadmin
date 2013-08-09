@@ -184,31 +184,47 @@ namespace XenAdmin.Dialogs
             get { return Helpers.ClearwaterOrGreater(LicencedHost); }
         }
 
-        private bool PoolIsPartiallyLicensed
+        internal static bool PoolIsPartiallyLicensed(IXenObject xenObject)
         {
-            get
+            if (xenObject is Pool)
             {
-                if(XenObject is Pool)
-                {
-                    if(XenObject.Connection.Cache.Hosts.Length == 1)
-                        return false;
+                if (xenObject.Connection.Cache.Hosts.Length == 1)
+                    return false;
 
-                    int freeCount = XenObject.Connection.Cache.Hosts.Count(h => Host.GetEdition(h.edition) == Host.Edition.Free);
-                    return freeCount > 0 &&  freeCount < XenObject.Connection.Cache.Hosts.Length;
-                }
-                return false;
+                int freeCount = xenObject.Connection.Cache.Hosts.Count(h => Host.GetEdition(h.edition) == Host.Edition.Free);
+                return freeCount > 0 && freeCount < xenObject.Connection.Cache.Hosts.Length;
             }
+            return false;
+        }
+
+        internal static bool PoolHasMixedLicenses(IXenObject xenObject)
+        {
+            var pool = xenObject as Pool;
+            if (pool != null)
+            {
+                if (xenObject.Connection.Cache.Hosts.Length == 1)
+                    return false;
+
+                if (xenObject.Connection.Cache.Hosts.Any(h => Host.GetEdition(h.edition) == Host.Edition.Free))
+                    return false;
+
+                var licenseGroups = from Host h in xenObject.Connection.Cache.Hosts
+                                    let ed = Host.GetEdition(h.edition)
+                                    group h by ed;
+
+                return licenseGroups.Count() > 1;
+            }
+            return false;
         }
 
         private HostState CalculateCurrentState()
         {
-
             if (ExpiryDate.HasValue && ExpiryDate.Value.Day == 1 && ExpiryDate.Value.Month == 1 && ExpiryDate.Value.Year == 1970)
             {
                 return HostState.Unavailable;
             }
 
-            if (PoolIsPartiallyLicensed)
+            if (PoolIsPartiallyLicensed(XenObject))
                 return HostState.PartiallyLicensed;
 
             if (IsUsingPerSocketGenerationLicenses)
