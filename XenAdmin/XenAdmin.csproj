@@ -2529,6 +2529,7 @@
     <Compile Include="SettingsPanels\GpuEditPage.Designer.cs">
       <DependentUpon>GpuEditPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="TabPages\ActionBaseExtensions.cs" />
     <Compile Include="TabPages\GeneralTabLicenseStatusStringifier.cs" />
     <Compile Include="WinformsXenAdminConfigProvider.cs" />
     <Compile Include="Actions\GUIActions\Wlb\ExportReportAction.cs" />

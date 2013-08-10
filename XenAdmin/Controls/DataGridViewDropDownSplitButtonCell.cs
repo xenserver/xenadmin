@@ -58,24 +58,20 @@ namespace XenAdmin.Controls
 
         private bool active;
 
-        public DataGridViewDropDownSplitButtonCell(params ToolStripItem[] dropDownItems)
+        public DataGridViewDropDownSplitButtonCell()
         {
             Style.Padding = CELL_PADDING;
             Style.Alignment = DataGridViewContentAlignment.TopLeft;
             ContextMenu = new ContextMenuStrip();
-            ContextMenu.Items.AddRange(dropDownItems);
             ContextMenu.ItemClicked += _contextMenu_ItemClicked;
-
-            foreach (ToolStripItem item in ContextMenu.Items)
-            {
-                if (item is ToolStripMenuItem)
-                {
-                    DefaultItem = item;
-                    break;
-                }
-            }
         }
-        
+
+        public DataGridViewDropDownSplitButtonCell(params ToolStripItem[] dropDownItems)
+            : this()
+        {
+            RefreshItems(dropDownItems);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposed)
@@ -99,6 +95,21 @@ namespace XenAdmin.Controls
                 _defaultItem = value;
                 if (_defaultItem != null)
                     Value = _defaultItem.Text;
+            }
+        }
+
+        public void RefreshItems(params ToolStripItem[] dropDownItems)
+        {
+            ContextMenu.Items.Clear();
+            ContextMenu.Items.AddRange(dropDownItems);
+
+            foreach (ToolStripItem item in ContextMenu.Items)
+            {
+                if (item is ToolStripMenuItem)
+                {
+                    DefaultItem = item;
+                    break;
+                }
             }
         }
 
@@ -152,7 +163,7 @@ namespace XenAdmin.Controls
             DataGridView.InvalidateCell(this);
         }
 
-        protected override void OnMouseClick(DataGridViewCellMouseEventArgs e)
+        protected override void OnMouseDown(DataGridViewCellMouseEventArgs e)
         {
             var cell = DataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
             var rec = DataGridView.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);

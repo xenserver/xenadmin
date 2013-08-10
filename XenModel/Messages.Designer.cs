@@ -14904,6 +14904,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Go to....
+        /// </summary>
+        public static string HISTORYPAGE_GOTO {
+            get {
+                return ResourceManager.GetString("HISTORYPAGE_GOTO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {3} {0}: {1} - {2}.
         /// </summary>
         public static string HISTORYPANEL_COPY_FORMAT {
@@ -19389,6 +19398,24 @@ namespace XenAdmin {
         public static string MESSAGEBOX_LOAD_CORRUPTED_TITLE {
             get {
                 return ResourceManager.GetString("MESSAGEBOX_LOAD_CORRUPTED_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete this log entry?.
+        /// </summary>
+        public static string MESSAGEBOX_LOG_DELETE {
+            get {
+                return ResourceManager.GetString("MESSAGEBOX_LOG_DELETE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear log entry.
+        /// </summary>
+        public static string MESSAGEBOX_LOG_DELETE_TITLE {
+            get {
+                return ResourceManager.GetString("MESSAGEBOX_LOG_DELETE_TITLE", resourceCulture);
             }
         }
         

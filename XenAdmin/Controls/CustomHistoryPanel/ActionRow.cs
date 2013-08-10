@@ -36,7 +36,7 @@ using System.Drawing;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Network;
-
+using XenAdmin.TabPages;
 
 namespace XenAdmin.Controls
 {
@@ -73,10 +73,11 @@ namespace XenAdmin.Controls
         {
             AppliesTo = action.AppliesTo;
             Action = action;
-            this.Image = getImage();
+            Image = action.GetImage();
             TimeOccurred = HelpersGUI.DateTimeToString(Action.Started, Messages.DATEFORMAT_DMY_HMS, true);
-            this.CancelButtonClicked += new EventHandler<EventArgs>(CancelAction);
+            CancelButtonClicked += CancelAction;
             setupRowDetails();
+
             if (!Action.IsCompleted)
             {
                 Action.Changed += Action_Changed;
@@ -114,65 +115,12 @@ namespace XenAdmin.Controls
         {
             AppliesTo = Action.AppliesTo;
 
-            AsyncAction asyncAction = Action as AsyncAction;
-
-            if (Action.Title == null)
-            {
-                // Should occur rarely if ever
-                IXenConnection conn = asyncAction == null ? null : asyncAction.Connection;
-
-                string conn_name = conn == null ? null : Helpers.GetName(conn);
-                string vm_name = Action.VM == null ? null : Action.VM.Name;
-                string desc = Action.Description;
-
-                if (conn_name != null && vm_name != null && desc != null)
-                {
-                    this.Title = string.Format(Messages.HISTORYROW_ON_WITH, conn_name, vm_name, desc);
-                }
-                else if (vm_name != null && desc != null)
-                {
-                    this.Title = string.Format(Messages.HISTORYROW_WITH, vm_name, desc);
-                }
-                else if (conn_name != null && desc != null)
-                {
-                    this.Title = string.Format(Messages.HISTORYROW_ON, conn_name, desc);
-                }
-                else if (desc != null)
-                {
-                    this.Title = desc;
-                }
-                else
-                {
-                    this.Title = "";
-                }
-            }
-            else
-            {
-                this.Title = Action.Title;
-            }
+            Title = Action.GetTitle();
 
             Error = (Action.Exception != null) && !(Action.Exception is CancelledException);
-
-            Image = getImage();
-
+            Image = Action.GetImage();
             ShowTime = Action.Finished - Action.Started >= TimeSpan.FromSeconds(1);
-
-            if (Action.Exception == null)
-            {
-                Description = Action.Description;
-            }
-            else if (Action.Exception is CancelledException)
-            {
-                Description = Messages.EXCEPTION_USER_CANCELLED;
-            }
-            else if (Action.Exception is I18NException)
-            {
-                Description = ((I18NException)Action.Exception).I18NMessage;
-            }
-            else
-            {
-                Description = Action.Exception.Message;
-            }
+            Description = Action.GetDescription();
             ShowProgress = Action.ShowProgress && !Action.IsCompleted;
             ShowCancel = !Action.IsCompleted;
             Progress = Action.PercentComplete;
@@ -182,12 +130,7 @@ namespace XenAdmin.Controls
             {
                 finished = Action.Finished;
                 if (ParentPanel != null)
-                {
-                    Program.BeginInvoke(ParentPanel, delegate()
-                    {
-                        ParentPanel.Refresh();
-                    });
-                }
+                    Program.BeginInvoke(ParentPanel, () => ParentPanel.Refresh());
             }
         }
 
@@ -196,35 +139,6 @@ namespace XenAdmin.Controls
             if (Action is AsyncAction)
                 (Action as AsyncAction).RecomputeCanCancel();
             setupRowDetails();
-        }
-
-        private Image getImage()
-        {
-            if (Action.IsCompleted)
-                return Action.Succeeded
-                           ? Properties.Resources._000_Tick_h32bit_16
-                           : Properties.Resources._000_error_h32bit_16;
-
-            if (Action.PercentComplete < 10)
-                return Properties.Resources.usagebar_0;
-            if (Action.PercentComplete < 20)
-                return Properties.Resources.usagebar_1;
-            if (Action.PercentComplete < 30)
-                return Properties.Resources.usagebar_2;
-            if (Action.PercentComplete < 40)
-                return Properties.Resources.usagebar_3;
-            if (Action.PercentComplete < 50)
-                return Properties.Resources.usagebar_4;
-            if (Action.PercentComplete < 60)
-                return Properties.Resources.usagebar_5;
-            if (Action.PercentComplete < 70)
-                return Properties.Resources.usagebar_6;
-            if (Action.PercentComplete < 80)
-                return Properties.Resources.usagebar_7;
-            if (Action.PercentComplete < 90)
-                return Properties.Resources.usagebar_8;
-
-            return Properties.Resources.usagebar_9;
         }
     }
 }

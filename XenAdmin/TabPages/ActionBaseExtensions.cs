@@ -1,0 +1,161 @@
+﻿/* Copyright (c) Citrix Systems Inc. 
+ * All rights reserved. 
+ * 
+ * Redistribution and use in source and binary forms, 
+ * with or without modification, are permitted provided 
+ * that the following conditions are met: 
+ * 
+ * *   Redistributions of source code must retain the above 
+ *     copyright notice, this list of conditions and the 
+ *     following disclaimer. 
+ * *   Redistributions in binary form must reproduce the above 
+ *     copyright notice, this list of conditions and the 
+ *     following disclaimer in the documentation and/or other 
+ *     materials provided with the distribution. 
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+ * CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
+ * SUCH DAMAGE.
+ */
+
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+
+using XenAdmin.Actions;
+using XenAdmin.Core;
+using XenAdmin.Network;
+
+using XenAPI;
+
+namespace XenAdmin.TabPages
+{
+    static class ActionBaseExtensions
+    {
+        internal static Image GetImage(this ActionBase action)
+        {
+            if (action.IsCompleted)
+                return action.Succeeded
+                           ? Properties.Resources._000_Tick_h32bit_16
+                           : Properties.Resources._000_error_h32bit_16;
+
+            if (action.PercentComplete < 10)
+                return Properties.Resources.usagebar_0;
+            if (action.PercentComplete < 20)
+                return Properties.Resources.usagebar_1;
+            if (action.PercentComplete < 30)
+                return Properties.Resources.usagebar_2;
+            if (action.PercentComplete < 40)
+                return Properties.Resources.usagebar_3;
+            if (action.PercentComplete < 50)
+                return Properties.Resources.usagebar_4;
+            if (action.PercentComplete < 60)
+                return Properties.Resources.usagebar_5;
+            if (action.PercentComplete < 70)
+                return Properties.Resources.usagebar_6;
+            if (action.PercentComplete < 80)
+                return Properties.Resources.usagebar_7;
+            if (action.PercentComplete < 90)
+                return Properties.Resources.usagebar_8;
+
+            return Properties.Resources.usagebar_9;
+        }
+
+        internal static string GetDetails(this ActionBase action)
+        {
+            var sb = new StringBuilder(GetTitle(action));
+            sb.Append("\n").Append(GetDescription(action));
+
+            string timeString = GetTimeElapsed(action);
+            if (!string.IsNullOrEmpty(timeString))
+                sb.Append("\n").Append(timeString);
+
+            return sb.ToString();
+        }
+
+        internal static string GetTimeElapsed(this ActionBase action)
+        {
+            TimeSpan time = action.IsCompleted
+                                ? action.Finished.Subtract(action.Started)
+                                : DateTime.Now.Subtract(action.Started);
+
+            time = new TimeSpan(time.Days, time.Hours, time.Minutes, time.Seconds, 0);
+            return time.TotalSeconds > 0
+                       ? string.Format("{0} {1}", Messages.HISTORYROW_TIME, time)
+                       : string.Empty;
+        }
+
+        internal static string GetDescription(this ActionBase action)
+        {
+            if (action.Exception == null)
+                return action.Description;
+
+            if (action.Exception is CancelledException)
+                return Messages.EXCEPTION_USER_CANCELLED;
+
+            if (action.Exception is I18NException)
+                return ((I18NException)action.Exception).I18NMessage;
+
+            return action.Exception.Message;
+        }
+
+        internal static string GetTitle(this ActionBase action)
+        {
+            if (action.Title != null)
+                return action.Title;
+
+            AsyncAction asyncAction = action as AsyncAction;
+
+            // Should occur rarely if ever
+            IXenConnection conn = asyncAction == null ? null : asyncAction.Connection;
+
+            string conn_name = conn == null ? null : Helpers.GetName(conn);
+            string vm_name = action.VM == null ? null : action.VM.Name;
+            string desc = action.Description;
+
+            if (conn_name != null && vm_name != null && desc != null)
+                return string.Format(Messages.HISTORYROW_ON_WITH, conn_name, vm_name, desc);
+
+            if (vm_name != null && desc != null)
+                return string.Format(Messages.HISTORYROW_WITH, vm_name, desc);
+
+            if (conn_name != null && desc != null)
+                return string.Format(Messages.HISTORYROW_ON, conn_name, desc);
+
+            if (desc != null)
+                return desc;
+
+            return "";
+        }
+
+        internal static string GetLocation(this ActionBase action)
+        {
+            if (action.Host != null)
+                return action.Host.Name;
+
+            if (action.Pool != null)
+                return action.Pool.Name;
+
+            return string.Empty;
+        }
+
+        internal static IXenObject GetRelevantXenObject(this ActionBase action)
+        {
+            return action.SR ?? action.Template ?? action.VM ?? action.Host ??
+                   (IXenObject)action.Pool;
+        }
+    }
+}
