@@ -1281,41 +1281,6 @@ namespace XenAdmin
             }
         }
 
-        public void BackgroundMajorChange(MethodInvoker f)
-        {
-            Program.AssertOffEventThread();
-
-            Program.Invoke(this, delegate()
-            {
-                SuspendRefreshTreeView();
-                SuspendUpdateToolbars();
-            });
-            try
-            {
-                f();
-            }
-            catch (Exception e)
-            {
-                log.Debug("Exception thrown by target of BackgroundMajorChange.", e);
-                log.Debug(e, e);
-                throw;
-            }
-            finally
-            {
-                Program.Invoke(this, delegate()
-                {
-                    try
-                    {
-                        ResumeUpdateToolbars();
-                    }
-                    finally
-                    {
-                        ResumeRefreshTreeView();
-                    }
-                });
-            }
-        }
-
         private static bool IsPool(VirtualTreeNode node)
         {
             return (node != null && node.Tag != null && node.Tag is XenAPI.Pool);
@@ -1326,42 +1291,14 @@ namespace XenAdmin
             return IsXenModelObject(node) && node.Tag is Host;
         }
 
-        private static bool IsSR(VirtualTreeNode node)
-        {
-            return (node != null && node.Tag != null && node.Tag is SR);
-        }
-
         private static bool IsVM(VirtualTreeNode node)
         {
             return node != null && node.Tag != null && node.Tag is VM;
         }
 
-        /// <summary>
-        /// A "real" VM is one that's not a template.
-        /// </summary>
-        private static bool IsRealVM(VirtualTreeNode node)
-        {
-            return IsVM(node) && !GetVM(node).is_a_template;
-        }
-
-        private static bool IsTemplate(VirtualTreeNode node)
-        {
-            return IsVM(node) && GetVM(node).is_a_template && !GetVM(node).is_a_snapshot;
-        }
-
-        private static bool IsSnapshot(VirtualTreeNode node)
-        {
-            return IsVM(node) && GetVM(node).is_a_snapshot;
-        }
-
         private static bool IsXenModelObject(VirtualTreeNode node)
         {
             return node != null && node.Tag != null && node.Tag is IXenObject;
-        }
-
-        private static bool IsGroup(VirtualTreeNode node)
-        {
-            return node != null && node.Tag != null && node.Tag is GroupingTag;
         }
 
         private static IXenConnection GetXenConnection(VirtualTreeNode node)
@@ -1386,21 +1323,9 @@ namespace XenAdmin
             return IsHost(node) ? (Host)node.Tag : null;
         }
 
-        private static SR GetSR(VirtualTreeNode node)
-        {
-            return IsSR(node) ? (SR)node.Tag : null;
-        }
-
         private static VM GetVM(VirtualTreeNode node)
         {
             return IsVM(node) ? (VM)node.Tag : null;
-        }
-
-        // Finds the pool of a node, if the object is in a pool
-        private static Pool PoolOfNode(VirtualTreeNode node)
-        {
-            IXenConnection connection = GetXenConnection(node);
-            return connection == null ? null : Helpers.GetPool(connection);
         }
 
         // Finds the pool of a node, if it's an ancestor node in the tree
@@ -1551,8 +1476,6 @@ namespace XenAdmin
             else if (TheTabControl.SelectedTab == TabPageSearch)
                 SearchPage.BuildList();
         }
-
-
 
         void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -2460,7 +2383,7 @@ namespace XenAdmin
         /// </summary>
         public enum Tab
         {
-            Overview, Home, Grouping, Settings, Storage, Network, Console, Performance, History, NICs, SR
+            Overview, Home, Settings, Storage, Network, Console, Performance, History, NICs, SR
         }
 
         public void SwitchToTab(Tab tab)
@@ -3202,13 +3125,6 @@ namespace XenAdmin
         public bool HasHelp()
         {
             return Help.HelpManager.HasHelpFor(TabHelpID());
-        }
-
-        private void debugHelpToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
-        {
-            //XenAdmin.Properties.Settings.Default.DebugHelp = debugHelpToolStripMenuItem.Checked;
-            XenAdmin.Properties.Settings.Default.DebugHelp = false;
-            Settings.TrySaveSettings();
         }
 
         private void viewApplicationLogToolStripMenuItem_Click(object sender, EventArgs e)
