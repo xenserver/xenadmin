@@ -1281,77 +1281,14 @@ namespace XenAdmin
             }
         }
 
-        private static bool IsPool(VirtualTreeNode node)
-        {
-            return (node != null && node.Tag != null && node.Tag is XenAPI.Pool);
-        }
-
-        private static bool IsHost(VirtualTreeNode node)
-        {
-            return IsXenModelObject(node) && node.Tag is Host;
-        }
-
-        private static bool IsVM(VirtualTreeNode node)
-        {
-            return node != null && node.Tag != null && node.Tag is VM;
-        }
-
-        private static bool IsXenModelObject(VirtualTreeNode node)
-        {
-            return node != null && node.Tag != null && node.Tag is IXenObject;
-        }
-
-        private static IXenConnection GetXenConnection(VirtualTreeNode node)
-        {
-            if (node == null)
-                return null;
-            else if (node.Tag is IXenConnection)
-                return (IXenConnection)node.Tag;
-            else if (node.Tag is IXenObject)
-                return ((IXenObject)node.Tag).Connection;
-            else
-                return null;
-        }
-
-        private static Pool GetPool(VirtualTreeNode node)
-        {
-            return IsPool(node) ? (Pool)node.Tag : null;
-        }
-
-        private static Host GetHost(VirtualTreeNode node)
-        {
-            return IsHost(node) ? (Host)node.Tag : null;
-        }
-
-        private static VM GetVM(VirtualTreeNode node)
-        {
-            return IsVM(node) ? (VM)node.Tag : null;
-        }
-
-        // Finds the pool of a node, if it's an ancestor node in the tree
-        private static VirtualTreeNode PoolAncestorNodeOfNode(VirtualTreeNode node)
-        {
-            while (node != null)
-            {
-                if (IsPool(node))
-                    return node;
-                node = node.Parent;
-            }
-            return null;
-        }
-
         private static Pool PoolAncestorOfNode(VirtualTreeNode node)
         {
-            return GetPool(PoolAncestorNodeOfNode(node));
-        }
-
-        // Finds the host of a node, if it's an ancestor node in the tree
-        private static VirtualTreeNode HostAncestorNodeOfNode(VirtualTreeNode node)
-        {
             while (node != null)
             {
-                if (IsHost(node))
-                    return node;
+                var pool = node.Tag as Pool;
+                if (pool != null)
+                    return pool;
+
                 node = node.Parent;
             }
             return null;
@@ -1359,7 +1296,15 @@ namespace XenAdmin
 
         private static Host HostAncestorOfNode(VirtualTreeNode node)
         {
-            return GetHost(HostAncestorNodeOfNode(node));
+            while (node != null)
+            {
+                var host = node.Tag as Host;
+                if (host != null)
+                    return host;
+
+                node = node.Parent;
+            }
+            return null;
         }
 
         private int ignoreRefreshTreeView = 0;
@@ -1967,7 +1912,7 @@ namespace XenAdmin
 
                 if (xenObject != null)
                 {
-                    items.Add(new SelectedItem(xenObject, GetXenConnection(node), HostAncestorOfNode(node), PoolAncestorOfNode(node)));
+                    items.Add(new SelectedItem(xenObject, xenObject.Connection, HostAncestorOfNode(node), PoolAncestorOfNode(node)));
                 }
                 else
                 {
@@ -2640,55 +2585,58 @@ namespace XenAdmin
 
         private void treeView_NodeMouseDoubleClick(object sender, VirtualTreeNodeMouseClickEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (e.Button != MouseButtons.Left)
+                return;
+            if (e.Node == null)
+                return;
+
+            IXenConnection conn = e.Node.Tag as IXenConnection;
+            if (conn == null)
             {
-                IXenConnection conn = GetXenConnection(e.Node);
-                VM vm = GetVM(e.Node);
-                Host host = GetHost(e.Node);
+                var obj = e.Node.Tag as IXenObject;
+                if (obj != null)
+                    conn = obj.Connection;
+            }
+            if (conn != null && !conn.IsConnected)
+            {
+                new ReconnectHostCommand(commandInterface, conn).Execute();
+                return;
+            }
 
-                if (conn != null && !conn.IsConnected)
-                {
-                    new ReconnectHostCommand(commandInterface, conn).Execute();
-                }
-                else if (vm != null)
-                {
-                    if (vm.is_a_template)
-                    {
-                        Command cmd = new NewVMCommand(commandInterface, selectionManager.Selection);
-                        if (cmd.CanExecute())
-                        {
-                            treeView.SelectedNode = e.Node;
-                            cmd.Execute();
-                        }
-                    }
-                    else if (vm.power_state == vm_power_state.Halted && vm.allowed_operations.Contains(vm_operations.start))
-                    {
-                        Command cmd = new StartVMCommand(commandInterface, selectionManager.Selection);
-                        if (cmd.CanExecute())
-                        {
-                            treeView.SelectedNode = e.Node;
-                            cmd.Execute();
-                        }
-                    }
-                    else if (vm.power_state == vm_power_state.Suspended && vm.allowed_operations.Contains(vm_operations.resume))
-                    {
-                        Command cmd = new ResumeVMCommand(commandInterface, selectionManager.Selection);
-                        if (cmd.CanExecute())
-                        {
-                            treeView.SelectedNode = e.Node;
-                            cmd.Execute();
-                        }
-                    }
-                }
-                else
-                {
-                    Command cmd = new PowerOnHostCommand(commandInterface, host);
+            VM vm = e.Node.Tag as VM;
+            if (vm != null)
+            {
+                Command cmd = null;
 
-                    if (cmd.CanExecute())
-                    {
-                        treeView.SelectedNode = e.Node;
-                        cmd.Execute();
-                    }
+                if (vm.is_a_template)
+                {
+                    cmd = new NewVMCommand(commandInterface, selectionManager.Selection);
+                }
+                else if (vm.power_state == vm_power_state.Halted && vm.allowed_operations.Contains(vm_operations.start))
+                {
+                    cmd = new StartVMCommand(commandInterface, selectionManager.Selection);
+                }
+                else if (vm.power_state == vm_power_state.Suspended && vm.allowed_operations.Contains(vm_operations.resume))
+                {
+                    cmd = new ResumeVMCommand(commandInterface, selectionManager.Selection);
+                }
+
+                if (cmd != null && cmd.CanExecute())
+                {
+                    treeView.SelectedNode = e.Node;
+                    cmd.Execute();
+                }
+                return;
+            }
+
+            Host host = e.Node.Tag as Host;
+            if (host != null)
+            {
+                Command cmd = new PowerOnHostCommand(commandInterface, host);
+                if (cmd.CanExecute())
+                {
+                    treeView.SelectedNode = e.Node;
+                    cmd.Execute();
                 }
             }
         }
