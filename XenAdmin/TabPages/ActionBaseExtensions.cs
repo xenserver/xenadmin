@@ -157,5 +157,68 @@ namespace XenAdmin.TabPages
             return action.SR ?? action.Template ?? action.VM ?? action.Host ??
                    (IXenObject)action.Pool;
         }
+
+        #region Comparison (just static non-extension) methods
+
+        /// <summary>
+        /// Ascending order:
+        /// 1. cancelled/failed
+        /// 2. lower state of completeness (smaller percentage completed)
+        /// 3. completed successfully
+        /// </summary>
+        /// <param name="action1"></param>
+        /// <param name="action2"></param>
+        /// <returns></returns>
+        public static int CompareOnStatus(ActionBase action1, ActionBase action2)
+        {
+            if (action1.IsCompleted && action2.IsCompleted)
+            {
+                if (action1.Succeeded && action2.Succeeded)
+                    return 0;
+                if (!action1.Succeeded && !action2.Succeeded)
+                    return 0;
+                if (!action1.Succeeded && action2.Succeeded)
+                    return -1;
+                if (action1.Succeeded && !action2.Succeeded)
+                    return 1;
+            }
+
+            if (!action1.IsCompleted && action2.IsCompleted)
+                return -1;
+
+            if (action1.IsCompleted && !action2.IsCompleted)
+                return 1;
+
+            return action1.PercentComplete.CompareTo(action2.PercentComplete);
+        }
+
+        public static int CompareOnTitle(ActionBase action1, ActionBase action2)
+        {
+            int result = string.Compare(action1.GetTitle(), action2.GetTitle());
+            if (result == 0)
+                result = CompareOnStatus(action1, action2);
+            return result;
+        }
+
+        public static int CompareOnLocation(ActionBase action1, ActionBase action2)
+        {
+            string location1 = action1.GetLocation();
+            string location2 = action2.GetLocation();
+
+            int result = string.Compare(location1, location2);
+            if (result == 0)
+                result = CompareOnStatus(action1, action2);
+            return result;
+        }
+
+        public static int CompareOnDateStarted(ActionBase action1, ActionBase action2)
+        {
+            int result = DateTime.Compare(action1.Started, action2.Started);
+            if (result == 0)
+                result = CompareOnStatus(action1, action2);
+            return result;
+        }
+
+        #endregion
     }
 }

@@ -111,6 +111,7 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.dataGridView, "dataGridView");
             this.dataGridView.GridColor = System.Drawing.SystemColors.Control;
             this.dataGridView.Name = "dataGridView";
+            this.dataGridView.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_ColumnHeaderMouseClick);
             this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
             this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView_SelectionChanged);
             // 
@@ -133,6 +134,7 @@ namespace XenAdmin.TabPages
             this.columnStatus.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.columnStatus, "columnStatus");
             this.columnStatus.Name = "columnStatus";
+            this.columnStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // columnMessage
             // 

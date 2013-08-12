@@ -53,10 +53,11 @@ namespace XenAdmin.TabPages
         {
             InitializeComponent();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
+            dataGridView.Sort(columnDate, ListSortDirection.Descending);
             toolStripTop.Renderer = new CustomToolStripRenderer();
             toolStripSplitButtonDismiss.DefaultItem = tsmiDismissAll;
             toolStripSplitButtonDismiss.Text = tsmiDismissAll.Text;
+            ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
         }
 
         private void History_CollectionChanged(object sender, CollectionChangeEventArgs e)
@@ -67,7 +68,8 @@ namespace XenAdmin.TabPages
                 switch (e.Action)
                 {
                     case CollectionChangeAction.Add:
-                        AddActionRow(action);
+                        var actions = SortActions(ConnectionsManager.History);
+                        InsertActionRow(actions.IndexOf(action), action);
                         break;
                     case CollectionChangeAction.Remove:
                         RemoveActionRow(action);
@@ -99,8 +101,10 @@ namespace XenAdmin.TabPages
                 dataGridView.SuspendLayout();
                 dataGridView.Rows.Clear();
 
+                var actions = SortActions(ConnectionsManager.History);
+                
                 var rows = new List<DataGridViewActionRow>();
-                foreach (ActionBase action in ConnectionsManager.History)
+                foreach (ActionBase action in actions)
                 {
                     var row = CreateActionRow(action);
                     rows.Add(row);
@@ -116,10 +120,35 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void AddActionRow(ActionBase action)
+        private List<ActionBase> SortActions(List<ActionBase> actions)
         {
+            if (dataGridView.SortedColumn != null)
+            {
+                if (dataGridView.SortedColumn.Index == columnStatus.Index)
+                    actions.Sort(ActionBaseExtensions.CompareOnStatus);
+                else if (dataGridView.SortedColumn.Index == columnMessage.Index)
+                    actions.Sort(ActionBaseExtensions.CompareOnTitle);
+                else if (dataGridView.SortedColumn.Index == columnLocation.Index)
+                    actions.Sort(ActionBaseExtensions.CompareOnLocation);
+                else if (dataGridView.SortedColumn.Index == columnDate.Index)
+                    actions.Sort(ActionBaseExtensions.CompareOnDateStarted);
+
+                if (dataGridView.SortOrder == SortOrder.Descending)
+                    actions.Reverse();
+            }
+
+            return actions;
+        }
+
+        private void InsertActionRow(int index, ActionBase action)
+        {
+            if (index < 0)
+                index = 0;
+            if (index > dataGridView.RowCount)
+                index = dataGridView.RowCount;
+
             var row = CreateActionRow(action);
-            dataGridView.Rows.Add(row);
+            dataGridView.Rows.Insert(index, row);
             RegisterActionEvents(action);
         }
 
@@ -223,6 +252,12 @@ namespace XenAdmin.TabPages
         private void dataGridView_SelectionChanged(object sender, EventArgs e)
         {
             tsmiDismissSelected.Enabled = dataGridView.SelectedRows.Cast<DataGridViewActionRow>().Any(row => row.Action.IsCompleted);
+        }
+
+        private void dataGridView_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (dataGridView.Columns[e.ColumnIndex].SortMode == DataGridViewColumnSortMode.Automatic)
+                BuildRowList();
         }
 
 
