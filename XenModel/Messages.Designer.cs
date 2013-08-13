@@ -27965,7 +27965,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error.
+        ///   Looks up a localized string similar to Error/Canceled.
         /// </summary>
         public static string STATUS_FILTER_ERROR {
             get {

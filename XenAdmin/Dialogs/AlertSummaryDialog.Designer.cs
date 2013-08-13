@@ -216,6 +216,7 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this.toolStripDropDownSeveritiesFilter, "toolStripDropDownSeveritiesFilter");
             this.toolStripDropDownSeveritiesFilter.Name = "toolStripDropDownSeveritiesFilter";
+            this.toolStripDropDownSeveritiesFilter.FilterChanged += new System.Action(this.toolStripDropDownSeveritiesFilter_FilterChanged);
             // 
             // toolStripDropDownButtonServerFilter
             // 
@@ -223,12 +224,14 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.toolStripDropDownButtonServerFilter, "toolStripDropDownButtonServerFilter");
             this.toolStripDropDownButtonServerFilter.Margin = new System.Windows.Forms.Padding(2, 1, 0, 2);
             this.toolStripDropDownButtonServerFilter.Name = "toolStripDropDownButtonServerFilter";
+            this.toolStripDropDownButtonServerFilter.FilterChanged += new System.Action(this.toolStripDropDownButtonServerFilter_FilterChanged);
             // 
             // toolStripDropDownButtonDateFilter
             // 
             this.toolStripDropDownButtonDateFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.toolStripDropDownButtonDateFilter, "toolStripDropDownButtonDateFilter");
             this.toolStripDropDownButtonDateFilter.Name = "toolStripDropDownButtonDateFilter";
+            this.toolStripDropDownButtonDateFilter.FilterChanged += new System.Action(this.toolStripDropDownButtonDateFilter_FilterChanged);
             // 
             // toolStripSeparator3
             // 

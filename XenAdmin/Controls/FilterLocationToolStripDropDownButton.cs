@@ -43,6 +43,7 @@ namespace XenAdmin.Controls
 {
     class FilterLocationToolStripDropDownButton : ToolStripDropDownButton
     {
+        [Browsable(true)]
         public event Action FilterChanged;
 
         /// <summary>
@@ -51,6 +52,10 @@ namespace XenAdmin.Controls
         private List<IXenConnection> connectionsWithEvents = new List<IXenConnection>();
         private List<Pool> poolsWithEvents = new List<Pool>();
         private List<Host> hostsWithEvents = new List<Host>();
+        /// <summary>
+        /// Store only host check states because the pools can be in an
+        /// indeterminate state.
+        /// </summary>
         private Dictionary<string, bool> HostCheckStates = new Dictionary<string, bool>();
         private readonly CollectionChangeEventHandler m_hostCollectionChangedWithInvoke;
         private bool inFilterListUpdate;
@@ -151,18 +156,14 @@ namespace XenAdmin.Controls
                 inFilterListUpdate = false;
                 if (retryFilterListUpdate)
                 {
-                    // there was a request to update while-st we were building, rebuild in case we missed something
+                    // there was a request to update whilst we were building,
+                    // rebuild in case we missed something
                     retryFilterListUpdate = false;
                     BuildFilterList();
                 }
             }
         }
 
-        /// <summary>
-        /// If it's not a host alert it should always be shown.
-        /// If it's a host alert and the host uuid is in the HostCheckSates list
-        /// and is unchecked it should be hidden, otherwise it should be shown.
-        /// </summary>
         public bool HideByLocation(string hostUuid)
         {
             if (hostUuid == null)
@@ -170,6 +171,25 @@ namespace XenAdmin.Controls
 
             if (HostCheckStates.ContainsKey(hostUuid) && !HostCheckStates[hostUuid])
                 return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// To be used for items that apply to pools, i.e. all their hosts. The
+        /// reason is that we only store host check states because the pools may
+        /// be in an indeterminate state.
+        /// </summary>
+        public bool HideByLocation(List<string> hostUuids)
+        {
+            if (hostUuids.Count == 0)
+                return false;
+
+            foreach (string uuid in hostUuids)
+            {
+                if (HostCheckStates.ContainsKey(uuid) && !HostCheckStates[uuid])
+                    return true;
+            }
 
             return false;
         }

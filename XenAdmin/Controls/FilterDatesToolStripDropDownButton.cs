@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -40,6 +41,7 @@ namespace XenAdmin.Controls
 {
     class FilterDatesToolStripDropDownButton : ToolStripDropDownButton
     {
+        [Browsable(true)]
         public event Action FilterChanged;
 
         private ToolStripMenuItem toolStripMenuItemShowAll;

@@ -9717,7 +9717,7 @@ Do you want to connect to the pool master '{1}'?</value>
     <value>Complete</value>
   </data>
   <data name="STATUS_FILTER_ERROR" xml:space="preserve">
-    <value>Error</value>
+    <value>Error/Canceled</value>
   </data>
   <data name="STATUS_FILTER_IN_PROGRESS" xml:space="preserve">
     <value>In progress</value>

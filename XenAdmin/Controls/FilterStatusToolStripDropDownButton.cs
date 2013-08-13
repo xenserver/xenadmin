@@ -36,10 +36,13 @@ using System.Diagnostics;
 using System.Text;
 using System.Windows.Forms;
 
+using XenAdmin.Actions;
+
 namespace XenAdmin.Controls
 {
     public class FilterStatusToolStripDropDownButton : ToolStripDropDownButton
     {
+        [Browsable(true)]
         public event Action FilterChanged;
 
         private bool internalUpdating;
@@ -88,6 +91,13 @@ namespace XenAdmin.Controls
             toolStripMenuItemError.CheckedChanged += Item_CheckedChanged;
         }
 
+        public bool HideByStatus(ActionBase action)
+        {
+            return !((toolStripMenuItemComplete.Checked && action.Succeeded)
+                || (toolStripMenuItemError.Checked && action.IsCompleted && !action.Succeeded)
+                || (toolStripMenuItemInProgress.Checked && !action.IsCompleted));
+        }
+
         public bool FilterIsOn
         {
             get
@@ -112,15 +122,17 @@ namespace XenAdmin.Controls
 
                 Item_CheckedChanged(null, null);
             }
-
-            if (FilterChanged != null)
-                FilterChanged();
         }
 
         private void Item_CheckedChanged(object sender, EventArgs e)
         {
             if (!internalUpdating)
+            {
                 toolStripMenuItemAll.Enabled = FilterIsOn;
+
+                if (FilterChanged != null)
+                    FilterChanged();
+            }
         }
     }
 }

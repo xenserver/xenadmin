@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -40,6 +41,7 @@ namespace XenAdmin.Controls
 {
     class FilterSeveritiesToolStripDropDownButton : ToolStripDropDownButton
     {
+        [Browsable(true)]
         public event Action FilterChanged;
 
         private bool internalUpdating;
@@ -160,15 +162,17 @@ namespace XenAdmin.Controls
                 
                 Item_CheckedChanged(null, null);
             }
-
-            if (FilterChanged != null)
-                FilterChanged();
         }
 
         private void Item_CheckedChanged(object sender, EventArgs e)
         {
             if (!internalUpdating)
+            {
                 toolStripMenuItemAll.Enabled = FilterIsOn;
+
+                if (FilterChanged != null)
+                    FilterChanged();
+            }
         }
     }
 }

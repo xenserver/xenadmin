@@ -135,6 +135,33 @@
     <value>None</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="toolStripDdbFilterStatus.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripDdbFilterStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 22</value>
+  </data>
+  <data name="toolStripDdbFilterStatus.Text" xml:space="preserve">
+    <value>Filter by Stat&amp;us</value>
+  </data>
+  <data name="toolStripDdbFilterLocation.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripDdbFilterLocation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 22</value>
+  </data>
+  <data name="toolStripDdbFilterLocation.Text" xml:space="preserve">
+    <value>Filter by Lo&amp;cation</value>
+  </data>
+  <data name="toolStripDdbFilterDates.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripDdbFilterDates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 22</value>
+  </data>
+  <data name="toolStripDdbFilterDates.Text" xml:space="preserve">
+    <value>Filter by D&amp;ate</value>
+  </data>
   <data name="tsmiDismissAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 22</value>
   </data>
@@ -150,21 +177,6 @@
   <data name="toolStripSplitButtonDismiss.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="toolStripSplitButtonDismiss.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
-        YKxG6WBogkMZKgPNCEVJFBGdGETEvgwyO9DJE5syZw3PIlPEE9pgBCLZ5XvdMB8Ew8gXbl54nuf63dd9
-        0OGSnwCahxbPRNPAPMw9Xpg6ZmF46kZZ0xSKzJPIrhpDWsVnpBhGkKx3nAX8Pv7z1zg8OoY/cITdn4fw
-        bf/C0kYAN3Ma/w3gWfZL5kzTKBxjWyK2DftwI9tyMYCZKXbNHaD91bLYJrDXsYbrWfUKwJrPE9M2M1Oc
-        VzOOpHI7Jr376Hi9ogHqFIANO0/MmmmbmSmm9a8ze+I4MrNWAdjtoJgWcx+PSzg166yZZ8xM8XvXDix9
-        c4jIqFYAjoriBV9AhEPv1mH/sonogha0afbZMMZz+yreTGyhpusHwtNNCsA5U1zS4BLxzJIfg299qO32
-        Ir7UJtZfftyATqeT+8o2D8JSjQrAJblrncYL7ZJ2+bfaFnC/1S1NjL3diRat7qrO7wLRP3HjWsojBeCo
-        mDEo5mNjuweFGvjWg2EBhCbpkW78htSHHwRyNdmgAFzPEee2iFkzayy2OLXzT4gr6UdUnlXrullsxxQ+
-        kx0g8BTA3aZlButjSTyjODq/WcQcW/B/Je4OQhLvKQDnzN1mp0nnkvAhR8VuMzNrpm1mpjgkoVwB/v8D
-        TgDQASA1MVpwzwAAAABJRU5ErkJggg==
-</value>
-  </data>
   <data name="toolStripSplitButtonDismiss.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -175,13 +187,13 @@
     <value>&amp;Dismiss</value>
   </data>
   <data name="toolStripTop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>6, 9</value>
   </data>
   <data name="toolStripTop.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 6, 6, 6</value>
   </data>
   <data name="toolStripTop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>772, 25</value>
+    <value>773, 25</value>
   </data>
   <data name="toolStripTop.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -393,6 +405,24 @@
   </data>
   <data name="&gt;&gt;tsmiDismissSelected.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripDdbFilterStatus.Name" xml:space="preserve">
+    <value>toolStripDdbFilterStatus</value>
+  </data>
+  <data name="&gt;&gt;toolStripDdbFilterStatus.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.FilterStatusToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolStripDdbFilterLocation.Name" xml:space="preserve">
+    <value>toolStripDdbFilterLocation</value>
+  </data>
+  <data name="&gt;&gt;toolStripDdbFilterLocation.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.FilterLocationToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolStripDdbFilterDates.Name" xml:space="preserve">
+    <value>toolStripDdbFilterDates</value>
+  </data>
+  <data name="&gt;&gt;toolStripDdbFilterDates.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.FilterDatesToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;columnExpander.Name" xml:space="preserve">
     <value>columnExpander</value>

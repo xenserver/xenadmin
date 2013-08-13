@@ -64,9 +64,6 @@ namespace XenAdmin.Dialogs
         public AlertSummaryDialog()
         {
             InitializeComponent();
-            toolStripDropDownButtonDateFilter.FilterChanged += toolStripDropDownButtonDateFilter_FilterChanged;
-            toolStripDropDownButtonServerFilter.FilterChanged += toolStripDropDownButtonServerFilter_FilterChanged;
-            toolStripDropDownSeveritiesFilter.FilterChanged += toolStripDropDownSeveritiesFilter_FilterChanged;
             GridViewAlerts.Sort(ColumnDate, ListSortDirection.Descending);
             LabelCappingEntries.Text = String.Format(Messages.ALERT_CAP_LABEL, ALERT_CAP);
             GridViewAlerts.ScrollBars = ScrollBars.Vertical;
@@ -75,14 +72,14 @@ namespace XenAdmin.Dialogs
             m_alertCollectionChangedWithInvoke = Program.ProgramInvokeHandler(AlertsCollectionChanged);
             Alert.XenCenterAlerts.CollectionChanged += m_alertCollectionChangedWithInvoke;
 
-            toolStripDropDownButtonServerFilter.InitializeHostList();
-            toolStripDropDownButtonServerFilter.BuildFilterList();
             toolStripSplitButtonDismiss.DefaultItem = tsmiDismissAll;
             toolStripSplitButtonDismiss.Text = tsmiDismissAll.Text;
         }
 
         private void AlertSummaryDialog_Load(object sender, EventArgs e)
         {
+            toolStripDropDownButtonServerFilter.InitializeHostList();
+            toolStripDropDownButtonServerFilter.BuildFilterList();
             Rebuild();
         }
         

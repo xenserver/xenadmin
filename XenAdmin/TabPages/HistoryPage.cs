@@ -60,6 +60,13 @@ namespace XenAdmin.TabPages
             ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            toolStripDdbFilterLocation.InitializeHostList();
+            toolStripDdbFilterLocation.BuildFilterList();
+        }
+
         private void History_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             Program.BeginInvoke(Program.MainWindow, () =>
@@ -68,8 +75,12 @@ namespace XenAdmin.TabPages
                 switch (e.Action)
                 {
                     case CollectionChangeAction.Add:
-                        var actions = SortActions(ConnectionsManager.History);
-                        InsertActionRow(actions.IndexOf(action), action);
+                        var actions = new List<ActionBase>(ConnectionsManager.History);
+                        actions.RemoveAll(FilterAction);
+                        SortActions(actions);
+                        var index = actions.IndexOf(action);
+                        if (index > -1)
+                            InsertActionRow(index, action);
                         break;
                     case CollectionChangeAction.Remove:
                         RemoveActionRow(action);
@@ -101,7 +112,9 @@ namespace XenAdmin.TabPages
                 dataGridView.SuspendLayout();
                 dataGridView.Rows.Clear();
 
-                var actions = SortActions(ConnectionsManager.History);
+                var actions = new List<ActionBase>(ConnectionsManager.History);
+                actions.RemoveAll(FilterAction);
+                SortActions(actions);
                 
                 var rows = new List<DataGridViewActionRow>();
                 foreach (ActionBase action in actions)
@@ -120,7 +133,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private List<ActionBase> SortActions(List<ActionBase> actions)
+        private void SortActions(List<ActionBase> actions)
         {
             if (dataGridView.SortedColumn != null)
             {
@@ -136,8 +149,16 @@ namespace XenAdmin.TabPages
                 if (dataGridView.SortOrder == SortOrder.Descending)
                     actions.Reverse();
             }
+        }
 
-            return actions;
+        private bool FilterAction(ActionBase action)
+        {
+            bool hide = false;
+            Program.Invoke(this, () =>
+                                 hide = toolStripDdbFilterDates.HideByDate(action.Started)
+                                        || toolStripDdbFilterLocation.HideByLocation(action.GetApplicableHosts())
+                                        || toolStripDdbFilterStatus.HideByStatus(action));
+            return hide;
         }
 
         private void InsertActionRow(int index, ActionBase action)
@@ -283,6 +304,22 @@ namespace XenAdmin.TabPages
         private void tsmiDismissSelected_Click(object sender, EventArgs e)
         {
 
+        }
+
+
+        private void toolStripDdbFilterStatus_FilterChanged()
+        {
+            BuildRowList();
+        }
+
+        private void toolStripDdbFilterLocation_FilterChanged()
+        {
+            BuildRowList();
+        }
+
+        private void toolStripDdbFilterDates_FilterChanged()
+        {
+            BuildRowList();
         }
 
         #endregion

@@ -158,6 +158,18 @@ namespace XenAdmin.TabPages
                    (IXenObject)action.Pool;
         }
 
+        internal static List<string> GetApplicableHosts(this ActionBase action)
+        {
+            var hostUuids = new List<string>();
+
+            if (action.Host != null && action.Host.uuid != null)
+                hostUuids.Add(action.Host.uuid);
+            else if (action.Pool != null)
+                hostUuids.AddRange(action.Pool.Connection.Cache.Hosts.Where(h => h.uuid != null).Select(h => h.uuid));
+
+            return hostUuids;
+        }
+
         #region Comparison (just static non-extension) methods
 
         /// <summary>
