@@ -123,6 +123,17 @@ namespace XenAdmin.TabPages
                 });
         }
 
+        private void SetFilterLabel()
+        {
+            bool filterIsOn = toolStripDdbFilterDates.FilterIsOn
+                              || toolStripDdbFilterLocation.FilterIsOn
+                              || toolStripDdbFilterStatus.FilterIsOn;
+
+            toolStripLabelFiltersOnOff.Text = filterIsOn
+                                                  ? Messages.FILTERS_ON
+                                                  : Messages.FILTERS_OFF;
+        }
+
         private void BuildRowList()
         {
             try
@@ -144,6 +155,8 @@ namespace XenAdmin.TabPages
 
                 foreach(var actionRow in rows)
                     RegisterActionEvents(actionRow.Action);
+
+                SetFilterLabel();
             }
             finally
             {
@@ -258,7 +271,7 @@ namespace XenAdmin.TabPages
             tsmiDismissSelected.Enabled = dataGridView.SelectedRows.Cast<DataGridViewActionRow>().Any(row => row.Action.IsCompleted);
         }
 
-        #region Control handlers
+        #region Control event handlers
 
         private void row_DismissalRequested(DataGridViewActionRow row)
         {
@@ -400,19 +413,19 @@ namespace XenAdmin.TabPages
                     items.Add(cancel);
                 }
 
+                if (action.IsCompleted)
+                {
+                    var dismiss = new ToolStripMenuItem(Messages.ALERT_DISMISS);
+                    dismiss.Click += ToolStripMenuItemDismiss_Click;
+                    items.Add(dismiss);
+                }
+
                 var obj = action.GetRelevantXenObject();
                 if (obj != null)
                 {
                     var goTo = new ToolStripMenuItem(Messages.HISTORYPAGE_GOTO);
                     goTo.Click += ToolStripMenuItemGoTo_Click;
                     items.Add(goTo);
-                }
-
-                if (action.IsCompleted)
-                {
-                    var dismiss = new ToolStripMenuItem(Messages.ALERT_DISMISS);
-                    dismiss.Click += ToolStripMenuItemDismiss_Click;
-                    items.Add(dismiss);
                 }
 
                 return items;

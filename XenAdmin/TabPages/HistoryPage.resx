@@ -186,6 +186,15 @@
   <data name="toolStripSplitButtonDismiss.Text" xml:space="preserve">
     <value>&amp;Dismiss</value>
   </data>
+  <data name="toolStripLabelFiltersOnOff.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="toolStripLabelFiltersOnOff.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 22</value>
+  </data>
+  <data name="toolStripLabelFiltersOnOff.Text" xml:space="preserve">
+    <value>Filters are ON/OFF</value>
+  </data>
   <data name="toolStripTop.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 9</value>
   </data>
@@ -388,24 +397,6 @@
   <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSplitButtonDismiss.Name" xml:space="preserve">
-    <value>toolStripSplitButtonDismiss</value>
-  </data>
-  <data name="&gt;&gt;toolStripSplitButtonDismiss.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSplitButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiDismissAll.Name" xml:space="preserve">
-    <value>tsmiDismissAll</value>
-  </data>
-  <data name="&gt;&gt;tsmiDismissAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiDismissSelected.Name" xml:space="preserve">
-    <value>tsmiDismissSelected</value>
-  </data>
-  <data name="&gt;&gt;tsmiDismissSelected.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;toolStripDdbFilterStatus.Name" xml:space="preserve">
     <value>toolStripDdbFilterStatus</value>
   </data>
@@ -423,6 +414,24 @@
   </data>
   <data name="&gt;&gt;toolStripDdbFilterDates.Type" xml:space="preserve">
     <value>XenAdmin.Controls.FilterDatesToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolStripSplitButtonDismiss.Name" xml:space="preserve">
+    <value>toolStripSplitButtonDismiss</value>
+  </data>
+  <data name="&gt;&gt;toolStripSplitButtonDismiss.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSplitButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsmiDismissAll.Name" xml:space="preserve">
+    <value>tsmiDismissAll</value>
+  </data>
+  <data name="&gt;&gt;tsmiDismissAll.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsmiDismissSelected.Name" xml:space="preserve">
+    <value>tsmiDismissSelected</value>
+  </data>
+  <data name="&gt;&gt;tsmiDismissSelected.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnExpander.Name" xml:space="preserve">
     <value>columnExpander</value>
@@ -459,6 +468,12 @@
   </data>
   <data name="&gt;&gt;columnActions.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabelFiltersOnOff.Name" xml:space="preserve">
+    <value>toolStripLabelFiltersOnOff</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabelFiltersOnOff.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>HistoryPage</value>
