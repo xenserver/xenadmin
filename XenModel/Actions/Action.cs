@@ -260,8 +260,6 @@ namespace XenAdmin.Actions
             }
         }
 
-        public const int MAX_HISTORY_ITEM = 1000;
-
         public ActionBase(string title, string description, bool suppressHistory)
             : this(title, description, suppressHistory, false)
         {

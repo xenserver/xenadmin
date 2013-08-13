@@ -49,6 +49,8 @@ namespace XenAdmin.TabPages
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        private const int MAX_HISTORY_ITEM = 1000;
+
         public HistoryPage()
         {
             InitializeComponent();
@@ -58,6 +60,7 @@ namespace XenAdmin.TabPages
             toolStripSplitButtonDismiss.DefaultItem = tsmiDismissAll;
             toolStripSplitButtonDismiss.Text = tsmiDismissAll.Text;
             ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
+            ActionBase.NewAction += Action_NewAction;
         }
 
         protected override void OnLoad(EventArgs e)
@@ -65,6 +68,21 @@ namespace XenAdmin.TabPages
             base.OnLoad(e);
             toolStripDdbFilterLocation.InitializeHostList();
             toolStripDdbFilterLocation.BuildFilterList();
+        }
+
+        private void Action_NewAction(ActionBase action)
+        {
+            if (action == null)
+                return;
+
+            Program.Invoke(Program.MainWindow,
+                           () =>
+                           {
+                               int count = ConnectionsManager.History.Count;
+                               if (count >= MAX_HISTORY_ITEM)
+                                   ConnectionsManager.History.RemoveAt(0);
+                               ConnectionsManager.History.Add(action);
+                           });
         }
 
         private void History_CollectionChanged(object sender, CollectionChangeEventArgs e)

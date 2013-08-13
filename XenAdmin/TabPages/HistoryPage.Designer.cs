@@ -14,6 +14,7 @@ namespace XenAdmin.TabPages
         protected override void Dispose(bool disposing)
         {
             ConnectionsManager.XenConnections.CollectionChanged -= History_CollectionChanged;
+            XenAdmin.Actions.ActionBase.NewAction -= Action_NewAction;
 
             if (disposing && (components != null))
             {

@@ -366,27 +366,12 @@ namespace XenAdmin
 
             Application.ApplicationExit -= Application_ApplicationExit;
             Application.ApplicationExit += Application_ApplicationExit;
-            ActionBase.NewAction -= Action_NewAction;
-            ActionBase.NewAction += Action_NewAction;
 
             MainWindow mainWindow = new MainWindow(argType, args);
 
             Application.Run(mainWindow);
 
             log.Info("Application main thread exited");
-        }
-
-        static void Action_NewAction(ActionBase action)
-        {
-            if (Program.MainWindow != null && action != null)
-                Program.Invoke(Program.MainWindow,
-                    delegate()
-                    {
-                        int count = ConnectionsManager.History.Count;
-                        if (count >= ActionBase.MAX_HISTORY_ITEM)
-                            ConnectionsManager.History.RemoveRange(ActionBase.MAX_HISTORY_ITEM - 2, count - ActionBase.MAX_HISTORY_ITEM + 1);
-                        ConnectionsManager.History.Add(action);
-                    });
         }
 
         private static ArgType ParseFileArgs(List<string> args, out string[] filePath)
