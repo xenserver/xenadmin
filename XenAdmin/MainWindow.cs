@@ -2239,6 +2239,7 @@ namespace XenAdmin
                     {
                         selectionManager.Selection.FirstAsXenObject.InError = false;
                     }
+                    HistoryPage.RefreshDisplayedEvents();
                     RequestRefreshTreeView();
                 }
                 else if (t == TabPageNICs)

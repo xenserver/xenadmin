@@ -27956,6 +27956,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Canceled.
+        /// </summary>
+        public static string STATUS_FILTER_CANCEL {
+            get {
+                return ResourceManager.GetString("STATUS_FILTER_CANCEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Complete.
         /// </summary>
         public static string STATUS_FILTER_COMPLETE {
@@ -27965,7 +27974,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error/Canceled.
+        ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string STATUS_FILTER_ERROR {
             get {

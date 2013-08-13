@@ -50,7 +50,9 @@ namespace XenAdmin.TabPages
             if (action.IsCompleted)
                 return action.Succeeded
                            ? Properties.Resources._000_Tick_h32bit_16
-                           : Properties.Resources._000_error_h32bit_16;
+                           : action.Exception is CancelledException
+                                 ? Properties.Resources.tempCancel
+                                 : Properties.Resources._000_error_h32bit_16;
 
             if (action.PercentComplete < 10)
                 return Properties.Resources.usagebar_0;

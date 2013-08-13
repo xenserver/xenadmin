@@ -9713,11 +9713,14 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="STATUS" xml:space="preserve">
     <value>Status</value>
   </data>
+  <data name="STATUS_FILTER_CANCEL" xml:space="preserve">
+    <value>Canceled</value>
+  </data>
   <data name="STATUS_FILTER_COMPLETE" xml:space="preserve">
     <value>Complete</value>
   </data>
   <data name="STATUS_FILTER_ERROR" xml:space="preserve">
-    <value>Error/Canceled</value>
+    <value>Error</value>
   </data>
   <data name="STATUS_FILTER_IN_PROGRESS" xml:space="preserve">
     <value>In progress</value>

@@ -50,6 +50,7 @@ namespace XenAdmin.Controls
         private ToolStripMenuItem toolStripMenuItemComplete;
         private ToolStripMenuItem toolStripMenuItemInProgress;
         private ToolStripMenuItem toolStripMenuItemError;
+        private ToolStripMenuItem toolStripMenuItemCancelled;
         private ToolStripMenuItem toolStripMenuItemAll;
 
         public FilterStatusToolStripDropDownButton()
@@ -72,16 +73,23 @@ namespace XenAdmin.Controls
                                              Checked = true,
                                              CheckOnClick = true
                                          };
+            toolStripMenuItemCancelled = new ToolStripMenuItem
+                {
+                    Text = Messages.STATUS_FILTER_CANCEL,
+                    Checked = true,
+                    CheckOnClick = true
+                };
             toolStripMenuItemAll = new ToolStripMenuItem
-            {
-                Text = Messages.FILTER_SHOW_ALL,
-                Enabled = false
-            };
+                {
+                    Text = Messages.FILTER_SHOW_ALL,
+                    Enabled = false
+                };
             DropDownItems.AddRange(new ToolStripItem[]
                                        {
                                            toolStripMenuItemComplete,
                                            toolStripMenuItemInProgress,
                                            toolStripMenuItemError,
+                                           toolStripMenuItemCancelled,
                                            new ToolStripSeparator(),
                                            toolStripMenuItemAll
                                        });
@@ -89,13 +97,18 @@ namespace XenAdmin.Controls
             toolStripMenuItemComplete.CheckedChanged += Item_CheckedChanged;
             toolStripMenuItemInProgress.CheckedChanged += Item_CheckedChanged;
             toolStripMenuItemError.CheckedChanged += Item_CheckedChanged;
+            toolStripMenuItemCancelled.CheckedChanged += Item_CheckedChanged;
         }
 
         public bool HideByStatus(ActionBase action)
         {
+            bool cancelled = action.IsCompleted && !action.Succeeded && (action.Exception is CancelledException);
+            bool error = action.IsCompleted && !action.Succeeded && !(action.Exception is CancelledException);
+
             return !((toolStripMenuItemComplete.Checked && action.Succeeded)
-                || (toolStripMenuItemError.Checked && action.IsCompleted && !action.Succeeded)
-                || (toolStripMenuItemInProgress.Checked && !action.IsCompleted));
+                || (toolStripMenuItemError.Checked && error)
+                || (toolStripMenuItemInProgress.Checked && !action.IsCompleted)
+                || (toolStripMenuItemCancelled.Checked && cancelled));
         }
 
         public bool FilterIsOn
@@ -104,7 +117,8 @@ namespace XenAdmin.Controls
             {
                 return !toolStripMenuItemComplete.Checked
                     || !toolStripMenuItemInProgress.Checked
-                    || !toolStripMenuItemError.Checked;
+                    || !toolStripMenuItemError.Checked
+                    || !toolStripMenuItemCancelled.Checked;
             }
         }
 
@@ -118,6 +132,7 @@ namespace XenAdmin.Controls
                 toolStripMenuItemComplete.Checked = true;
                 toolStripMenuItemInProgress.Checked = true;
                 toolStripMenuItemError.Checked = true;
+                toolStripMenuItemCancelled.Checked = true;
                 internalUpdating = false;
 
                 Item_CheckedChanged(null, null);

@@ -70,12 +70,17 @@ namespace XenAdmin.TabPages
             toolStripDdbFilterLocation.BuildFilterList();
         }
 
+        public void RefreshDisplayedEvents()
+        {
+            BuildRowList();
+        }
+
         private void Action_NewAction(ActionBase action)
         {
             if (action == null)
                 return;
 
-            Program.Invoke(Program.MainWindow,
+            Program.BeginInvoke(Program.MainWindow,
                            () =>
                            {
                                int count = ConnectionsManager.History.Count;
@@ -87,7 +92,7 @@ namespace XenAdmin.TabPages
 
         private void History_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
-            Program.BeginInvoke(Program.MainWindow, () =>
+            Program.BeginInvoke(this, () =>
             {
                 ActionBase action = (ActionBase)e.Element;
                 switch (e.Action)
@@ -113,7 +118,7 @@ namespace XenAdmin.TabPages
 
         private void action_Changed(ActionBase sender)
         {
-            Program.Invoke(Program.MainWindow, () =>
+            Program.Invoke(this, () =>
                 {
                     var row = FindRowFromAction(sender);
                     if (row != null)
@@ -405,10 +410,9 @@ namespace XenAdmin.TabPages
             {
                 var items = new List<ToolStripItem>();
 
-                if (!action.IsCompleted)
+                if (!action.IsCompleted && action.CanCancel)
                 {
                     var cancel = new ToolStripMenuItem(Messages.CANCEL);
-                    cancel.Enabled = action.CanCancel;
                     cancel.Click += ToolStripMenuItemCancel_Click;
                     items.Add(cancel);
                 }
