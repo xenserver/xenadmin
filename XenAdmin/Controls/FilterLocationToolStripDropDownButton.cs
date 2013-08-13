@@ -156,7 +156,7 @@ namespace XenAdmin.Controls
                 inFilterListUpdate = false;
                 if (retryFilterListUpdate)
                 {
-                    // there was a request to update whilst we were building,
+                    // there was a request to update while we were building,
                     // rebuild in case we missed something
                     retryFilterListUpdate = false;
                     BuildFilterList();
