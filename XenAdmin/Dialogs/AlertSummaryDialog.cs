@@ -85,13 +85,19 @@ namespace XenAdmin.Dialogs
         
         private void SetFilterLabel()
         {
-            bool filterIsOn = toolStripDropDownButtonDateFilter.FilterIsOn
-                              || toolStripDropDownButtonServerFilter.FilterIsOn
-                              || toolStripDropDownSeveritiesFilter.FilterIsOn;
-
-            toolStripLabelFiltersOnOff.Text = filterIsOn
+            toolStripLabelFiltersOnOff.Text = FilterIsOn
                                                   ? Messages.FILTERS_ON
                                                   : Messages.FILTERS_OFF;
+        }
+
+        private bool FilterIsOn
+        {
+            get
+            {
+                return toolStripDropDownButtonDateFilter.FilterIsOn
+                                 || toolStripDropDownButtonServerFilter.FilterIsOn
+                                 || toolStripDropDownSeveritiesFilter.FilterIsOn;
+            }
         }
 
         #region AlertListCode
@@ -458,19 +464,28 @@ namespace XenAdmin.Dialogs
         private void tsmiDismissAll_Click(object sender, EventArgs e)
         {
             DialogResult result;
-            if (GridViewAlerts.Rows.Count == Alert.Alerts.Length) //no filter, only two buttons
-                result = new ThreeButtonDialog(
+
+            if (!FilterIsOn)
+            {
+                using (var dlog = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_ALL_NO_FILTER_CONTINUE),
-                    "DismissAllAlertsConfirmationDialog",
                     new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_YES_CONFIRM_BUTTON, DialogResult.Yes),
-                    ThreeButtonDialog.ButtonCancel).ShowDialog(this);
+                    ThreeButtonDialog.ButtonCancel))
+                {
+                    result = dlog.ShowDialog(this);
+                }
+            }
             else
-                result = new ThreeButtonDialog(
+            {
+                using (var dlog = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_ALL_CONTINUE),
-                    "DismissAllAlertsConfirmationDialog",
                     new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_CONFIRM_BUTTON, DialogResult.Yes),
                     new ThreeButtonDialog.TBDButton(Messages.DISMISS_FILTERED_CONFIRM_BUTTON, DialogResult.No, ThreeButtonDialog.ButtonType.NONE),
-                    ThreeButtonDialog.ButtonCancel).ShowDialog(this);
+                    ThreeButtonDialog.ButtonCancel))
+                {
+                    result = dlog.ShowDialog(this);
+                }
+            }
 
             if (result == DialogResult.Cancel)
                 return;
@@ -590,6 +605,8 @@ namespace XenAdmin.Dialogs
             tsmiDismissSelected.ToolTipText = tsmiDismissSelected.Enabled
                                                   ? string.Empty
                                                   : Messages.DELETE_MESSAGE_RBAC_BLOCKED;
+
+            toolStripSplitButtonDismiss.Enabled = tsmiDismissAll.Enabled && tsmiDismissSelected.Enabled;
         }
 
         /// <summary>
@@ -626,15 +643,19 @@ namespace XenAdmin.Dialogs
             List<IXenConnection> selectedAlertConnections = new List<IXenConnection>();
             foreach (DataGridViewRow r in GridViewAlerts.SelectedRows)
             {
-                Alert alert = (Alert)r.Tag;
-                if (alert.Connection != null && !selectedAlertConnections.Contains(alert.Connection))
+                Alert alert = r.Tag as Alert;
+                if (alert != null && alert.Connection != null &&
+                    !selectedAlertConnections.Contains(alert.Connection))
                 {
                     selectedAlertConnections.Add(alert.Connection);
                 }
             }
+
+            if (selectedAlertConnections.Count == 0)
+                return false;
+
             foreach (IXenConnection c in selectedAlertConnections)
             {
-                // Check they are allowed to dismiss server alerts.
                 if (!AllowedToDismiss(c))
                     return false;
             }

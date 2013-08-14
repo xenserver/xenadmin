@@ -3786,9 +3786,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you wish to dismiss all alerts from every connected server, or just the set of alerts shown in your current system alert filter?
+        ///   Looks up a localized string similar to You have applied filters to the list of alerts. Do you wish to dismiss all alerts from every connected server, or only the alerts you have chosen to view? In both cases the dismissed alerts will be removed from the servers permanently.
         ///
-        ///Note: If RBAC is enabled, only alerts which you have privileges to dismiss will be affected..
+        ///Note that if RBAC is enabled, only alerts which you have privileges to dismiss will be affected..
         /// </summary>
         public static string ALERT_DISMISS_ALL_CONTINUE {
             get {
@@ -3797,9 +3797,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to dismiss all alerts from every connected server?
+        ///   Looks up a localized string similar to This operation will remove permanently all alerts from every connected server. Do you wish to continue?
         ///
-        ///Note: If RBAC is enabled, only alerts which you have privileges to dismiss will be affected..
+        ///Note that if RBAC is enabled, only alerts which you have privileges to dismiss will be affected..
         /// </summary>
         public static string ALERT_DISMISS_ALL_NO_FILTER_CONTINUE {
             get {

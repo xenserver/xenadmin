@@ -1416,14 +1416,14 @@ This alarm is set to be triggered when network usage is more than {3}.</value>
     <value>Dismiss</value>
   </data>
   <data name="ALERT_DISMISS_ALL_CONTINUE" xml:space="preserve">
-    <value>Do you wish to dismiss all alerts from every connected server, or just the set of alerts shown in your current system alert filter?
+    <value>You have applied filters to the list of alerts. Do you wish to dismiss all alerts from every connected server, or only the alerts you have chosen to view? In both cases the dismissed alerts will be removed from the servers permanently.
 
-Note: If RBAC is enabled, only alerts which you have privileges to dismiss will be affected.</value>
+Note that if RBAC is enabled, only alerts which you have privileges to dismiss will be affected.</value>
   </data>
   <data name="ALERT_DISMISS_ALL_NO_FILTER_CONTINUE" xml:space="preserve">
-    <value>Are you sure you want to dismiss all alerts from every connected server?
+    <value>This operation will remove permanently all alerts from every connected server. Do you wish to continue?
 
-Note: If RBAC is enabled, only alerts which you have privileges to dismiss will be affected.</value>
+Note that if RBAC is enabled, only alerts which you have privileges to dismiss will be affected.</value>
   </data>
   <data name="ALERT_DISMISS_CONFIRM" xml:space="preserve">
     <value>Once a system alert is dismissed it will be removed from the server permanently. Do you wish to continue?</value>
