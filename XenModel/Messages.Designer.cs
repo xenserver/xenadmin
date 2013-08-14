@@ -3817,6 +3817,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export &amp;all.
+        /// </summary>
+        public static string ALERT_EXPORT_ALL_BUTTON {
+            get {
+                return ResourceManager.GetString("ALERT_EXPORT_ALL_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have applied filters to the list of alerts. Do you wish to export all alerts from every connected server, or only the alerts you have chosen to view?.
+        /// </summary>
+        public static string ALERT_EXPORT_ALL_OR_FILTERED {
+            get {
+                return ResourceManager.GetString("ALERT_EXPORT_ALL_OR_FILTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only export &amp;filtered.
+        /// </summary>
+        public static string ALERT_EXPORT_FILTERED_BUTTON {
+            get {
+                return ResourceManager.GetString("ALERT_EXPORT_FILTERED_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Help.
         /// </summary>
         public static string ALERT_GENERIC_HELP {

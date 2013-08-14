@@ -745,38 +745,69 @@ namespace XenAdmin.Dialogs
 
         private void toolStripButtonExportAll_Click(object sender, EventArgs e)
         {
-            SaveFileDialog dialog = new SaveFileDialog();
-            dialog.AddExtension = true;
-            dialog.Filter = string.Format("{0} (*.csv)|*.csv|{1} (*.*)|*.*", Messages.CSV_DESCRIPTION, Messages.ALL_FILES);
-            dialog.FilterIndex = 0;
-            dialog.Title = Messages.EXPORT_ALL;
-            dialog.RestoreDirectory = true;
-            dialog.DefaultExt = "csv";
-            dialog.CheckPathExists = false;
-            dialog.OverwritePrompt = true;
-            if (dialog.ShowDialog(this) != DialogResult.OK)
-                return;
+            bool exportAll = true;
+
+            if (FilterIsOn)
+            {
+                using (var dlog = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(null, Messages.ALERT_EXPORT_ALL_OR_FILTERED),
+                    new ThreeButtonDialog.TBDButton(Messages.ALERT_EXPORT_ALL_BUTTON, DialogResult.Yes),
+                    new ThreeButtonDialog.TBDButton(Messages.ALERT_EXPORT_FILTERED_BUTTON, DialogResult.No, ThreeButtonDialog.ButtonType.NONE),
+                    ThreeButtonDialog.ButtonCancel))
+                {
+                    var result = dlog.ShowDialog(this);
+                    if (result == DialogResult.No)
+                        exportAll = false;
+                    else if (result == DialogResult.Cancel)
+                        return;
+                }
+            }
+
+            string fileName;
+            using (SaveFileDialog dialog = new SaveFileDialog
+                {
+                    AddExtension = true,
+                    Filter = string.Format("{0} (*.csv)|*.csv|{1} (*.*)|*.*",
+                                           Messages.CSV_DESCRIPTION, Messages.ALL_FILES),
+                    FilterIndex = 0,
+                    Title = Messages.EXPORT_ALL,
+                    RestoreDirectory = true,
+                    DefaultExt = "csv",
+                    CheckPathExists = false,
+                    OverwritePrompt = true
+                })
+            {
+                if (dialog.ShowDialog(this) != DialogResult.OK)
+                    return;
+                fileName = dialog.FileName;
+            }
 
             new DelegatedAsyncAction(null,
-                String.Format(Messages.EXPORT_SYSTEM_ALERTS, dialog.FileName),
-                String.Format(Messages.EXPORTING_SYSTEM_ALERTS, dialog.FileName),
-                String.Format(Messages.EXPORTED_SYSTEM_ALERTS, dialog.FileName),
+                string.Format(Messages.EXPORT_SYSTEM_ALERTS, fileName),
+                string.Format(Messages.EXPORTING_SYSTEM_ALERTS, fileName),
+                string.Format(Messages.EXPORTED_SYSTEM_ALERTS, fileName),
                 delegate
                 {
-                    StreamWriter stream = new StreamWriter(dialog.FileName, false, UTF8Encoding.UTF8);
-                    try
+                    using (StreamWriter stream = new StreamWriter(fileName, false, UTF8Encoding.UTF8))
                     {
                         stream.WriteLine("{0},{1},{2},{3},{4}", Messages.TITLE,
-                            Messages.SEVERITY, Messages.DESCRIPTION, Messages.APPLIES_TO, Messages.TIMESTAMP);
-                        foreach (Alert a in Alert.Alerts)
+                                         Messages.SEVERITY, Messages.DESCRIPTION,
+                                         Messages.APPLIES_TO, Messages.TIMESTAMP);
+
+                        if (exportAll)
                         {
-                            stream.WriteLine(GetAlertDetailsCSVQuotes(a));
+                            foreach (Alert a in Alert.Alerts)
+                                stream.WriteLine(GetAlertDetailsCSVQuotes(a));
                         }
-                    }
-                    finally
-                    {
-                        stream.Close();
-                        stream.Dispose();
+                        else
+                        {
+                            foreach (DataGridViewRow row in GridViewAlerts.Rows)
+                            {
+                                var a = row.Tag as Alert;
+                                if (a != null)
+                                    stream.WriteLine(GetAlertDetailsCSVQuotes(a));
+                            }
+                        }
                     }
                 }).RunAsync();
         }
