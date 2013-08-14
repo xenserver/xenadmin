@@ -563,10 +563,10 @@ namespace XenAdmin.SettingsPanels
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.AlertIntervalLabel);
+            this.Controls.Add(this.nudAlertInterval);
             this.Controls.Add(this.AlertIntervalMinutesLabel);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.nudAlertInterval);
-            this.Controls.Add(this.AlertIntervalLabel);
             this.Name = "PerfmonAlertEditPage";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.MemoryGroupBox.ResumeLayout(false);
