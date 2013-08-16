@@ -74,7 +74,7 @@ namespace XenAdmin.Alerts
 
         public override AlertPriority Priority
         {
-            get { return AlertPriority.Unknown; }
+            get { return AlertPriority.Priority3; }
         }
 
         public override string AppliesTo
