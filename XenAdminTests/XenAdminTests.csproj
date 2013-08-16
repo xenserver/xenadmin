@@ -342,7 +342,6 @@
     </Compile>
     <Compile Include="MainWindowWrapper\InputPromptDialogWrapper.cs" />
     <Compile Include="DialogTests\VIFDialogTest.cs" />
-    <Compile Include="MainWindowWrapper\HistoryPageWrapper.cs" />
     <Compile Include="MainWindowWrapper\ViewMenuWrapper.cs" />
     <Compile Include="SearchTests\ExpectedResults.cs">
       <SubType>Code</SubType>

@@ -362,7 +362,7 @@ namespace XenAdmin.TabPages
 
         #region Nested classes
 
-        private class DataGridViewActionRow : DataGridViewRow
+        public class DataGridViewActionRow : DataGridViewRow
         {
             private DataGridViewImageCell expanderCell = new DataGridViewImageCell();
             private DataGridViewImageCell statusCell = new DataGridViewImageCell();

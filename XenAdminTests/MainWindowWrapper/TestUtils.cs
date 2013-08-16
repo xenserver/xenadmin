@@ -149,5 +149,10 @@ namespace XenAdminTests
         {
             return GetFieldDeep<DropDownComboButton>(o, name);
         }
+
+        public static ToolStripMenuItem GetToolStripMenuItem(object o, string name)
+        {
+            return GetFieldDeep<ToolStripMenuItem>(o, name);
+        }
     }
 }

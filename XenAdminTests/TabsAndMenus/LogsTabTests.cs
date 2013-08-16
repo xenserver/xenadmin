@@ -32,6 +32,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Forms;
+
 using NUnit.Framework;
 using XenAdmin;
 using XenAdmin.TabPages;
@@ -42,31 +44,36 @@ namespace XenAdminTests.TabsAndMenus
 {
     public class LogsTabTests : MainWindowLauncher_TestFixture
     {
-        private List<CustomHistoryRow> GetVisibleRows(Predicate<List<CustomHistoryRow>> match)
+        private List<HistoryPage.DataGridViewActionRow> GetVisibleRows()
         {
-            return GetVisibleRows(match, null);
-        }
-
-        private List<CustomHistoryRow> GetVisibleRows(Predicate<List<CustomHistoryRow>> match, string assertMessage)
-        {
-            var rows = new List<CustomHistoryRow>();
-            MWWaitFor(() =>
+            var rows = new List<HistoryPage.DataGridViewActionRow>();
+            MW(() =>
                 {
-                    rows = MainWindowWrapper.HistoryPage.CustomHistoryContainer.CustomHistoryPanel.Rows.FindAll(r => r.Visible);
-                    return match(rows);
-                }, assertMessage);
+                    var gridView = TestUtils.GetDataGridView(MainWindowWrapper.Item, "HistoryPage.dataGridView");
+                    foreach (DataGridViewRow row in gridView.Rows)
+                    {
+                        var actionRow = row as HistoryPage.DataGridViewActionRow;
+                        if (actionRow != null)
+                            rows.Add(actionRow);
+                    }
+                });
             return rows;
         }
 
-        private List<CustomHistoryRow> GetUnfinishedRows(Predicate<List<CustomHistoryRow>> match, string assertMessage)
+        private List<HistoryPage.DataGridViewActionRow> GetUnfinishedRows()
         {
-            var rows = new List<CustomHistoryRow>();
-            MWWaitFor(() =>
-            {
-                var visibleRows = MainWindowWrapper.HistoryPage.CustomHistoryContainer.CustomHistoryPanel.Rows.FindAll(r => r.Visible);
-                rows = visibleRows.FindAll(r => r is ActionRow && !((ActionRow)r).Action.IsCompleted);
-                return match(rows);
-            }, assertMessage);
+            var rows = new List<HistoryPage.DataGridViewActionRow>();
+            MW(() =>
+                {
+                    var gridView = TestUtils.GetDataGridView(MainWindowWrapper.Item, "HistoryPage.dataGridView");
+
+                    foreach (DataGridViewRow row in gridView.Rows)
+                    {
+                        var actionRow = row as HistoryPage.DataGridViewActionRow;
+                        if (actionRow != null && !actionRow.Action.IsCompleted)
+                            rows.Add(actionRow);
+                    }
+                });
             return rows;
         }
 
@@ -103,18 +110,11 @@ namespace XenAdminTests.TabsAndMenus
                 // Switch to the History tab
                 GoToTabPage(MainWindowWrapper.TabPageHistory);
 
-                if (n.Tag == null || n.Tag is Pool || n.Text == "inflames")
-                {
-                    List<CustomHistoryRow> visibleRows = GetVisibleRows(r => r.Count == 1 && r[0].Title.StartsWith("Connected to "));
+                var visibleRows = GetVisibleRows();
 
-                    Assert.AreEqual(1, visibleRows.Count, "No connection item found.");
-                    Assert.IsTrue(visibleRows[0].Title.StartsWith("Connected to "), "Connected message not found. The message was: " + visibleRows[0].Title);
-                }
-                else
-                {
-                    List<CustomHistoryRow> visibleRows = GetVisibleRows(r => r.Count == 0);
-                    Assert.AreEqual(0, visibleRows.Count, "Items found when should be empty for [" + n.Text + "]: " + string.Join(", ", visibleRows.ConvertAll(v => v.Title).ToArray()));
-                }
+                Assert.AreEqual(1, visibleRows.Count, "No connection item found.");
+                Assert.IsTrue(visibleRows[0].Action.GetDetails().StartsWith("Connected to "),
+                    "Connected message not found. The message was: " + visibleRows[0].Action.GetDetails());
             }
         }
 
@@ -131,11 +131,13 @@ namespace XenAdminTests.TabsAndMenus
             // Switch to the History tab
             GoToTabPage(MainWindowWrapper.TabPageHistory);
 
-            GetVisibleRows(r => r.Count == 0, "History page wasn't empty before VMs shut down");
+            var rows = GetVisibleRows();
+            Assert.AreEqual(1, rows.Count, "History page didn't have 1 message before VMs shut down");
 
             MW(MainWindowWrapper.MainToolStripItems.ShutDownToolStripButton.PerformClick);
 
-            GetVisibleRows(r => r.Count == 2, "Items weren't added when VMs shut down.");
+            rows = GetVisibleRows();
+            Assert.AreEqual(4, rows.Count, "Items weren't added when VMs shut down.");
         }
 
         [Test]
@@ -143,13 +145,17 @@ namespace XenAdminTests.TabsAndMenus
         {
             SelectInTree(GetAnyPool());
             GoToTabPage(MainWindowWrapper.TabPageHistory);
-            GetVisibleRows(r => r.Count == 1, "No connection item found.");
+
+            var rows = GetVisibleRows();
+            Assert.AreEqual(1, rows.Count, "No connection item found.");
 
             // wait for everything to finish.
-            GetUnfinishedRows(r => r.Count == 0, "Actions didn't finish.");
+            rows = GetUnfinishedRows();
+            Assert.AreEqual(0, rows.Count, "No connection item found.");
 
-            MW(MainWindowWrapper.HistoryPage.ClearButton.PerformClick);
-            GetVisibleRows(r => r.Count == 0, "Items weren't cleared.");
+            MW(() => TestUtils.GetToolStripMenuItem(MainWindowWrapper.Item, "HistoryPage.tsmiDismissAll").PerformClick());
+            rows = GetVisibleRows();
+            Assert.AreEqual(0, rows.Count, "Items weren't cleared.");
         }
 
         [Test]
@@ -157,32 +163,52 @@ namespace XenAdminTests.TabsAndMenus
         {
             SelectInTree(GetAnyPool());
             GoToTabPage(MainWindowWrapper.TabPageHistory);
-            GetVisibleRows(r => r.Count == 1, "No connection item found.");
+            var showAllButton = MW(() => TestUtils.GetToolStripMenuItem(MainWindowWrapper.Item,
+                                                                        "HistoryPage.toolStripDdbFilterStatus.toolStripMenuItemAll"));
 
-            // this should clear all items as they are all information messages.
-            MW(() => MainWindowWrapper.HistoryPage.InformationCheckBox.Checked = false);
-            GetVisibleRows(r => r.Count == 0, "Items weren't cleared.");
+            var rows = GetVisibleRows();
+            Assert.AreEqual(1, rows.Count, "No connection item found.");
+            Assert.IsFalse(showAllButton.Enabled);
+
+            // this should clear all items as they are all completed.
+            MW(() => TestUtils.GetToolStripMenuItem(MainWindowWrapper.Item,
+                "HistoryPage.toolStripDdbFilterStatus.toolStripMenuItemComplete").PerformClick());
+            rows = GetVisibleRows();
+            Assert.AreEqual(0, rows.Count, "Items weren't cleared.");
+            Assert.IsTrue(showAllButton.Enabled);
 
             // this should bring them back.
-            MW(() => MainWindowWrapper.HistoryPage.InformationCheckBox.Checked = true);
-            GetVisibleRows(r => r.Count == 1, "Items were cleared.");
+            MW(() => TestUtils.GetToolStripMenuItem(MainWindowWrapper.Item,
+                "HistoryPage.toolStripDdbFilterStatus.toolStripMenuItemComplete").PerformClick());
+            rows = GetVisibleRows();
+            Assert.AreEqual(1, rows.Count, "Items were cleared.");
+            Assert.IsFalse(showAllButton.Enabled);
 
-            // nothing should change for actions-checkbox
-            MW(() => MainWindowWrapper.HistoryPage.ActionsCheckBox.Checked = false);
-            GetVisibleRows(r => r.Count == 1, "Items were cleared.");
+            // nothing should change for cancelled items
+            MW(() => TestUtils.GetToolStripMenuItem(MainWindowWrapper.Item,
+                "HistoryPage.toolStripDdbFilterStatus.toolStripMenuItemCancelled").PerformClick());
+            rows = GetVisibleRows();
+            Assert.AreEqual(1, rows.Count, "Items were cleared.");
+            Assert.IsTrue(showAllButton.Enabled);
 
-            // nothing should change for alerts-checkbox
-            MW(() => MainWindowWrapper.HistoryPage.AlertsCheckBox.Checked = false);
-            GetVisibleRows(r => r.Count == 1, "Items were cleared.");
+            // nothing should change for failed items
+            MW(() => TestUtils.GetToolStripMenuItem(MainWindowWrapper.Item,
+                "HistoryPage.toolStripDdbFilterStatus.toolStripMenuItemError").PerformClick());
+            rows = GetVisibleRows();
+            Assert.AreEqual(1, rows.Count, "Items were cleared.");
+            Assert.IsTrue(showAllButton.Enabled);
 
-            // nothing should change for errors-checkbox
-            MW(() => MainWindowWrapper.HistoryPage.ErrorsCheckBox.Checked = false);
-            GetVisibleRows(r => r.Count == 1, "Items were cleared.");
+            // nothing should change for incomplete items
+            MW(() => TestUtils.GetToolStripMenuItem(MainWindowWrapper.Item,
+                "HistoryPage.toolStripDdbFilterStatus.toolStripMenuItemInProgress").PerformClick());
+            rows = GetVisibleRows();
+            Assert.AreEqual(1, rows.Count, "Items were cleared.");
+            Assert.IsTrue(showAllButton.Enabled);
 
             // put all these back
-            MW(() => MainWindowWrapper.HistoryPage.ActionsCheckBox.Checked = true);
-            MW(() => MainWindowWrapper.HistoryPage.AlertsCheckBox.Checked = true);
-            MW(() => MainWindowWrapper.HistoryPage.ErrorsCheckBox.Checked = true);
+            MW(() => TestUtils.GetToolStripMenuItem(MainWindowWrapper.Item,
+                "HistoryPage.toolStripDdbFilterStatus.toolStripMenuItemAll").PerformClick());
+            Assert.IsFalse(showAllButton.Enabled);
         }
     }
 }

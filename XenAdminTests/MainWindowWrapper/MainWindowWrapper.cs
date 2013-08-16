@@ -264,14 +264,6 @@ namespace XenAdminTests
             }
         }
 
-        public HistoryPageWrapper HistoryPage
-        {
-            get
-            {
-                return new HistoryPageWrapper(Item.HistoryPage);
-            }
-        }
-
         public NetworkTabPageWrapper NetworkPage
         {
             get
