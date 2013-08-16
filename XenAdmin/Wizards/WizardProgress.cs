@@ -46,7 +46,6 @@ namespace XenAdmin.Wizards
         private static readonly Color HighlightColorMiddle = Color.FromArgb(10, 80, 200);
         private static readonly Color HighlightColorEdge = Color.FromArgb(9, 70, 162);
         private static readonly Color bgBrushColor = Color.FromArgb(255, 255, 255);
-        private static readonly SolidBrush bgBrush = new SolidBrush(bgBrushColor);
 
         private int _currentStep = 0;
 
@@ -173,7 +172,10 @@ namespace XenAdmin.Wizards
             int bg_h = bg.Height;
             int bg_top = Height - bg_h;
             if (bg_top > 0)
-                e.Graphics.FillRectangle(bgBrush, new Rectangle(0, 0, Width, bg_top));
+            {
+                using (SolidBrush bgBrush = new SolidBrush(bgBrushColor))
+                    e.Graphics.FillRectangle(bgBrush, new Rectangle(0, 0, Width, bg_top));
+            }
             e.Graphics.DrawImage(bg, new Rectangle(0, bg_top, bg.Width, bg_h));
 
             using (LinearGradientBrush highlight = new LinearGradientBrush(Point.Empty, new Point(Width, 0), HighlightColorEdge, HighlightColorMiddle))

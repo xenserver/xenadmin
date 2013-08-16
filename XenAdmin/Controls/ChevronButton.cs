@@ -97,11 +97,12 @@ namespace XenAdmin.Controls
             focusRect.Inflate(-2,-2);
             if(hasFocus)
             {
-                ControlPaint.DrawFocusRectangle(e.Graphics,focusRect,this.ForeColor,this.BackColor);
+                ControlPaint.DrawFocusRectangle(e.Graphics, focusRect, ForeColor, BackColor);
             }
             else
             {
-                e.Graphics.DrawRectangle(new Pen(this.BackColor,1),focusRect);
+                using (var pen = new Pen(BackColor, 1))
+                    e.Graphics.DrawRectangle(pen, focusRect);
             }
 
         }

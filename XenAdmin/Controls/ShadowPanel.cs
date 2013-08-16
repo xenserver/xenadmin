@@ -125,15 +125,15 @@ namespace XenAdmin.Controls
 
             if (PanelColor != Color.Transparent)
             {
-                SolidBrush bgBrush = new SolidBrush(_panelColor);
-                g.FillRectangle(bgBrush, fullRectangle);
+                using (SolidBrush bgBrush = new SolidBrush(_panelColor))
+                    g.FillRectangle(bgBrush, fullRectangle);
             }
 
             // Draw a nice 1 pixel border it a BorderColor is specified
             if (_borderColor != Color.Transparent)
             {
-                Pen borderPen = new Pen(BorderColor);
-                g.DrawRectangle(borderPen, fullRectangle);
+                using (Pen borderPen = new Pen(BorderColor))
+                    g.DrawRectangle(borderPen, fullRectangle);
             }
 
             // Memory efficiency

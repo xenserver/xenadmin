@@ -547,8 +547,8 @@ namespace XenAdmin.Controls.Wlb
 
             if (e.Item.Selected)
             {
-                SolidBrush brush = new SolidBrush(SystemColors.Highlight);
-                e.Graphics.FillRectangle(brush, rect);
+                using (SolidBrush brush = new SolidBrush(SystemColors.Highlight))
+                    e.Graphics.FillRectangle(brush, rect);
             }
             else
             {
@@ -594,8 +594,8 @@ namespace XenAdmin.Controls.Wlb
 
             if (e.Item.Selected)
             {
-                SolidBrush brush = new SolidBrush(SystemColors.Highlight);
-                e.Graphics.FillRectangle(brush, rect);
+                using (SolidBrush brush = new SolidBrush(SystemColors.Highlight))
+                    e.Graphics.FillRectangle(brush, rect);
                 subItemTextColor = GetTaskOptMode(task) == WlbPoolPerformanceMode.MaximizePerformance ? COLOR_HIGHLIGHTED_MAX_PERFORMANCE_SUBITEM_TEXT : COLOR_HIGHLIGHTED_MAX_DENSITY_SUBITEM_TEXT;
             }
             else

@@ -76,8 +76,6 @@ namespace XenAdmin.Controls.Wlb
         private readonly Color OperationTextColor;
         private readonly Color ShadedRowColor;
         private readonly Color DisabledShadedRowColor;
-        private readonly Brush ShadedRowBrush;
-        private readonly Brush DisabledShadedRowBrush;
         
         // Listview minimum column widths
         private int[] minimumColumnWidths = { 0, 25, 25, 25 };
@@ -93,9 +91,7 @@ namespace XenAdmin.Controls.Wlb
             OperationTextFont = new Font(this.Font, FontStyle.Bold);
             OperationTextColor = Color.Black;
             ShadedRowColor = Color.FromArgb(230, 240, 255);
-            ShadedRowBrush = new SolidBrush(ShadedRowColor);
             DisabledShadedRowColor = Color.FromArgb(224, 222, 205);
-            DisabledShadedRowBrush = new SolidBrush(DisabledShadedRowColor);
 
             optimizePoolListView.SmallImageList = Images.ImageList16;
             optimizePoolListView.ListViewItemSorter = columnSorter;
@@ -881,12 +877,8 @@ namespace XenAdmin.Controls.Wlb
             r.Width = Math.Max(i, optimizePoolListView.ClientSize.Width);
             r.X = i;
 
-            Brush backBrush;
-            if (e.Item.Index % 2 == 1)
-                backBrush = ShadedRowBrush;
-            else
-                backBrush = SystemBrushes.Window;
-            e.Graphics.FillRectangle(backBrush, r);
+            using (Brush backBrush = new SolidBrush(e.Item.Index % 2 == 1 ? ShadedRowColor : SystemColors.Window))
+                e.Graphics.FillRectangle(backBrush, r);
         }
 
         /// <summary>
@@ -896,15 +888,9 @@ namespace XenAdmin.Controls.Wlb
         /// <param name="e">DrawListViewSubItemEventArgs</param>
         private void OptimizePoolListView_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
         {
-            Brush backBrush;
-
-            if (e.Item.Index % 2 == 1)
-                backBrush = ShadedRowBrush;
-            else
-                backBrush = SystemBrushes.Window;
-
             Rectangle rect = e.Bounds;
-            e.Graphics.FillRectangle(backBrush, rect);
+            using (Brush backBrush = new SolidBrush(e.Item.Index % 2 == 1 ? ShadedRowColor : SystemColors.Window))
+                e.Graphics.FillRectangle(backBrush, rect);
 
             Color fontColor = Color.Black;
 

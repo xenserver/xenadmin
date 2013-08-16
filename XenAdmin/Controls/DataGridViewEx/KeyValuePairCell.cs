@@ -142,7 +142,10 @@ namespace XenAdmin.Controls.DataGridViewEx
                 return;
 
             // Paint the background
-            graphics.FillRectangle(new SolidBrush(Selected ? cellStyle.SelectionBackColor : cellStyle.BackColor), cellBounds.X + cellStyle.Padding.Left, cellBounds.Y + cellStyle.Padding.Top, cellBounds.Width - cellStyle.Padding.Horizontal, cellBounds.Height - cellStyle.Padding.Vertical);
+            using (var brush = new SolidBrush(Selected ? cellStyle.SelectionBackColor : cellStyle.BackColor))
+                graphics.FillRectangle(brush, cellBounds.X + cellStyle.Padding.Left,
+                    cellBounds.Y + cellStyle.Padding.Top, cellBounds.Width - cellStyle.Padding.Horizontal,
+                    cellBounds.Height - cellStyle.Padding.Vertical);
 
             // Go through drawing the keys, making note of their widths so we know how much to indent the values by
             // and keeping track of the Y positions so we can place the value labels without measuring.
@@ -163,11 +166,12 @@ namespace XenAdmin.Controls.DataGridViewEx
                 if (s.Width > indent)
                     indent = s.Width;
 
-                graphics.DrawString(
-                    kvp.Key,
-                    cellStyle.Font, new SolidBrush(Selected ? cellStyle.SelectionForeColor : cellStyle.ForeColor),
-                    (float)(cellBounds.X + cellStyle.Padding.Left),
-                    (float)(cellBounds.Y + currentY));
+                using (var brush = new SolidBrush(Selected ? cellStyle.SelectionForeColor : cellStyle.ForeColor))
+                    graphics.DrawString(
+                        kvp.Key,
+                        cellStyle.Font, brush,
+                        (float)(cellBounds.X + cellStyle.Padding.Left),
+                        (float)(cellBounds.Y + currentY));
 
                 currentY += s.Height + KVP_SPACE;
                 heights[i] = s.Height;
@@ -179,12 +183,11 @@ namespace XenAdmin.Controls.DataGridViewEx
             for (int i = 0; i < kvps.Count; i++)
             {
                 KeyValuePair<String, String> kvp = kvps[i];
-                graphics.DrawString(
-                    kvp.Value,
-                    cellStyle.Font,
-                    new SolidBrush(Selected ? cellStyle.SelectionForeColor : cellStyle.ForeColor),
-                    (float)(cellBounds.X + cellStyle.Padding.Left + indent),
-                    (float)(cellBounds.Y + currentY));
+
+                using (var brush = new SolidBrush(Selected ? cellStyle.SelectionForeColor : cellStyle.ForeColor))
+                    graphics.DrawString(kvp.Value, cellStyle.Font, brush,
+                        (float)(cellBounds.X + cellStyle.Padding.Left + indent),
+                        (float)(cellBounds.Y + currentY));
 
                 currentY += heights[i] + KVP_SPACE;
             }

@@ -384,7 +384,8 @@ namespace XenAdmin.Controls
                     float x = this.Width / 2 - proposedSize.Width / 2;
                     float y = this.Height / 2 - proposedSize.Height / 2;
                     RectangleF rect = new RectangleF(x, y, proposedSize.Width, proposedSize.Height);
-                    g.FillRectangle(new SolidBrush(BackColor), rect);
+                    using (var brush = new SolidBrush(BackColor))
+                        g.FillRectangle(brush, rect);
                     g.DrawString(text, Font, Brushes.Black, rect);
                 }
             }

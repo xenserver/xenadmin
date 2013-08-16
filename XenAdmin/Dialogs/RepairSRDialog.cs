@@ -151,7 +151,8 @@ namespace XenAdmin.Dialogs
                     statusFont = node.PBD.currently_attached ? Font : BoldFont;
                 }
 
-                e.Graphics.DrawString(status, statusFont, new SolidBrush(statusColor), new Rectangle(e.Bounds.Right, e.Bounds.Top, Right - e.Bounds.Right, e.Bounds.Height));
+                using (var brush = new SolidBrush(statusColor))
+                    e.Graphics.DrawString(status, statusFont, brush, new Rectangle(e.Bounds.Right, e.Bounds.Top, Right - e.Bounds.Right, e.Bounds.Height));
             }
         }
 

@@ -66,15 +66,16 @@ namespace XenAdmin.Controls.DataGridViewEx
                                errorText, cellStyle, advancedBorderStyle, paintParts);
                     if ((cellState & DataGridViewElementStates.Selected) != 0 && row.Enabled )
                     {
-                        graphics.FillRectangle(
-                            new SolidBrush(this.DataGridView.DefaultCellStyle.SelectionBackColor)
-                            , cellBounds.X, cellBounds.Y, hostIcon.Width, cellBounds.Height);
+                        using (var brush = new SolidBrush(DataGridView.DefaultCellStyle.SelectionBackColor))
+                            graphics.FillRectangle(
+                                brush, cellBounds.X, cellBounds.Y, hostIcon.Width, cellBounds.Height);
                     }
                     else
                     {
                         //Background behind the host icon
-                        graphics.FillRectangle(new SolidBrush(this.DataGridView.DefaultCellStyle.BackColor),
-                                               cellBounds.X, cellBounds.Y, hostIcon.Width, cellBounds.Height);
+                        using (var brush = new SolidBrush(this.DataGridView.DefaultCellStyle.BackColor))
+                            graphics.FillRectangle(brush,
+                                                   cellBounds.X, cellBounds.Y, hostIcon.Width, cellBounds.Height);
                     }
 
                     if (row.Enabled)

@@ -137,12 +137,12 @@ namespace XenAdmin.Controls.Ballooning
                 {
                     using (Graphics gBitmap = Graphics.FromImage(bitmap))
                     {
-                        SolidBrush textBrush = new SolidBrush(textColor);
                         gBitmap.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
                         gBitmap.Clip = new Region(new Rectangle(TEXT_PAD, 0, bitmap.Width - 2 * TEXT_PAD, bitmap.Height));
                         textRect.X -= segmentBounds.Left;
                         textRect.Y -= segmentBounds.Top;
-                        gBitmap.DrawString(text, font, textBrush, textRect, sf);
+                        using (SolidBrush textBrush = new SolidBrush(textColor))
+                            gBitmap.DrawString(text, font, textBrush, textRect, sf);
 
                         // ...if we can't fit all the text in, overlay fade...
                         if (textSize.Width + (2 * TEXT_PAD) > bitmap.Width)

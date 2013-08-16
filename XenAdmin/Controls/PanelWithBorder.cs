@@ -44,18 +44,12 @@ namespace XenAdmin.Controls
 
     class PanelWithBorder : Panel
     {
-        private Pen pen;
+        private Color _borderColor = SystemColors.Control;
         [Browsable(false)]
         public Color BorderColor
         {
-            get
-            {
-                return pen.Color;
-            }
-            private set
-            {
-                pen = new Pen(value);
-            }
+            get { return _borderColor; }
+            private set { _borderColor = value; }
         }
 
         public static Color DefaultBorderColor
@@ -65,7 +59,7 @@ namespace XenAdmin.Controls
 
         public PanelWithBorder(Color borderColor)
         {
-            this.BorderColor = borderColor;
+            BorderColor = borderColor;
 
             SetStyle(ControlStyles.DoubleBuffer |
                 ControlStyles.Opaque, true);
@@ -79,7 +73,8 @@ namespace XenAdmin.Controls
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            e.Graphics.DrawRectangle(pen, 0, 0, this.Width - 1, this.Height - 1);
+            using (var pen = new Pen(BorderColor))
+                e.Graphics.DrawRectangle(pen, 0, 0, Width - 1, Height - 1);
         }
     }
 }

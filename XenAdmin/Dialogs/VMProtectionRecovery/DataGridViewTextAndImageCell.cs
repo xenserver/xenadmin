@@ -53,14 +53,15 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
 
                 if ((cellState & DataGridViewElementStates.Selected) != 0)
                 {
-                    graphics.FillRectangle(
-                        new SolidBrush(this.DataGridView.DefaultCellStyle.SelectionBackColor)
-                        , cellBounds.X, cellBounds.Y, Image.Width, cellBounds.Height);
+                    using (var brush = new SolidBrush(DataGridView.DefaultCellStyle.SelectionBackColor))
+                        graphics.FillRectangle(
+                            brush, cellBounds.X, cellBounds.Y, Image.Width, cellBounds.Height);
                 }
                 else
                 {
-                    graphics.FillRectangle(new SolidBrush(this.DataGridView.DefaultCellStyle.BackColor),
-                                           cellBounds.X, cellBounds.Y, Image.Width, cellBounds.Height);
+                    using (var brush = new SolidBrush(DataGridView.DefaultCellStyle.BackColor))
+                        graphics.FillRectangle(brush,
+                                               cellBounds.X, cellBounds.Y, Image.Width, cellBounds.Height);
                 }
                 graphics.DrawImage(Image, cellBounds.X, cellBounds.Y+2, Image.Width,
                                          Math.Min(Image.Height,cellBounds.Height));
