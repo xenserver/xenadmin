@@ -31,22 +31,22 @@ namespace XenAdmin.TabPages
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HistoryPage));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolStripTop = new System.Windows.Forms.ToolStrip();
-            this.toolStripDdbFilterStatus = new XenAdmin.Controls.FilterStatusToolStripDropDownButton();
-            this.toolStripDdbFilterLocation = new XenAdmin.Controls.FilterLocationToolStripDropDownButton();
-            this.toolStripDdbFilterDates = new XenAdmin.Controls.FilterDatesToolStripDropDownButton();
             this.toolStripSplitButtonDismiss = new System.Windows.Forms.ToolStripSplitButton();
             this.tsmiDismissAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDismissSelected = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.toolStripLabelFiltersOnOff = new System.Windows.Forms.ToolStripLabel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.toolStripDdbFilterStatus = new XenAdmin.Controls.FilterStatusToolStripDropDownButton();
+            this.toolStripDdbFilterLocation = new XenAdmin.Controls.FilterLocationToolStripDropDownButton();
+            this.toolStripDdbFilterDates = new XenAdmin.Controls.FilterDatesToolStripDropDownButton();
             this.dataGridView = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.columnExpander = new System.Windows.Forms.DataGridViewImageColumn();
             this.columnStatus = new System.Windows.Forms.DataGridViewImageColumn();
@@ -54,9 +54,9 @@ namespace XenAdmin.TabPages
             this.columnLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnActions = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolStripLabelFiltersOnOff = new System.Windows.Forms.ToolStripLabel();
             this.toolStripTop.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,6 +72,48 @@ namespace XenAdmin.TabPages
             this.toolStripSplitButtonDismiss,
             this.toolStripLabelFiltersOnOff});
             this.toolStripTop.Name = "toolStripTop";
+            // 
+            // toolStripSplitButtonDismiss
+            // 
+            this.toolStripSplitButtonDismiss.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripSplitButtonDismiss.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiDismissAll,
+            this.tsmiDismissSelected});
+            resources.ApplyResources(this.toolStripSplitButtonDismiss, "toolStripSplitButtonDismiss");
+            this.toolStripSplitButtonDismiss.Name = "toolStripSplitButtonDismiss";
+            this.toolStripSplitButtonDismiss.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripSplitButtonDismiss_DropDownItemClicked);
+            // 
+            // tsmiDismissAll
+            // 
+            this.tsmiDismissAll.Name = "tsmiDismissAll";
+            resources.ApplyResources(this.tsmiDismissAll, "tsmiDismissAll");
+            this.tsmiDismissAll.Click += new System.EventHandler(this.tsmiDismissAll_Click);
+            // 
+            // tsmiDismissSelected
+            // 
+            this.tsmiDismissSelected.Name = "tsmiDismissSelected";
+            resources.ApplyResources(this.tsmiDismissSelected, "tsmiDismissSelected");
+            this.tsmiDismissSelected.Click += new System.EventHandler(this.tsmiDismissSelected_Click);
+            // 
+            // toolStripLabelFiltersOnOff
+            // 
+            this.toolStripLabelFiltersOnOff.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            resources.ApplyResources(this.toolStripLabelFiltersOnOff, "toolStripLabelFiltersOnOff");
+            this.toolStripLabelFiltersOnOff.Name = "toolStripLabelFiltersOnOff";
+            // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.tableLayoutPanel1.Controls.Add(this.dataGridView, 0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // tableLayoutPanel2
+            // 
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.BackColor = System.Drawing.Color.Gainsboro;
+            this.tableLayoutPanel2.Controls.Add(this.toolStripTop, 0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
             // toolStripDdbFilterStatus
             // 
@@ -93,36 +135,6 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.toolStripDdbFilterDates, "toolStripDdbFilterDates");
             this.toolStripDdbFilterDates.Name = "toolStripDdbFilterDates";
             this.toolStripDdbFilterDates.FilterChanged += new System.Action(this.toolStripDdbFilterDates_FilterChanged);
-            // 
-            // toolStripSplitButtonDismiss
-            // 
-            this.toolStripSplitButtonDismiss.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripSplitButtonDismiss.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiDismissAll,
-            this.tsmiDismissSelected});
-            resources.ApplyResources(this.toolStripSplitButtonDismiss, "toolStripSplitButtonDismiss");
-            this.toolStripSplitButtonDismiss.Margin = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            this.toolStripSplitButtonDismiss.Name = "toolStripSplitButtonDismiss";
-            this.toolStripSplitButtonDismiss.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripSplitButtonDismiss_DropDownItemClicked);
-            // 
-            // tsmiDismissAll
-            // 
-            this.tsmiDismissAll.Name = "tsmiDismissAll";
-            resources.ApplyResources(this.tsmiDismissAll, "tsmiDismissAll");
-            this.tsmiDismissAll.Click += new System.EventHandler(this.tsmiDismissAll_Click);
-            // 
-            // tsmiDismissSelected
-            // 
-            this.tsmiDismissSelected.Name = "tsmiDismissSelected";
-            resources.ApplyResources(this.tsmiDismissSelected, "tsmiDismissSelected");
-            this.tsmiDismissSelected.Click += new System.EventHandler(this.tsmiDismissSelected_Click);
-            // 
-            // panel1
-            // 
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel1.Controls.Add(this.dataGridView);
-            this.panel1.Name = "panel1";
             // 
             // dataGridView
             // 
@@ -195,37 +207,31 @@ namespace XenAdmin.TabPages
             this.columnActions.Name = "columnActions";
             this.columnActions.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // toolStripLabelFiltersOnOff
-            // 
-            this.toolStripLabelFiltersOnOff.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            resources.ApplyResources(this.toolStripLabelFiltersOnOff, "toolStripLabelFiltersOnOff");
-            this.toolStripLabelFiltersOnOff.Name = "toolStripLabelFiltersOnOff";
-            // 
             // HistoryPage
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.toolStripTop);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.tableLayoutPanel2);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.DoubleBuffered = true;
             this.Name = "HistoryPage";
             this.toolStripTop.ResumeLayout(false);
             this.toolStripTop.PerformLayout();
-            this.panel1.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStrip toolStripTop;
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButtonDismiss;
         private System.Windows.Forms.ToolStripMenuItem tsmiDismissAll;
         private System.Windows.Forms.ToolStripMenuItem tsmiDismissSelected;
         private XenAdmin.Controls.DataGridViewEx.DataGridViewEx dataGridView;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridViewImageColumn columnExpander;
         private System.Windows.Forms.DataGridViewImageColumn columnStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnMessage;
@@ -236,5 +242,7 @@ namespace XenAdmin.TabPages
         private XenAdmin.Controls.FilterLocationToolStripDropDownButton toolStripDdbFilterLocation;
         private XenAdmin.Controls.FilterDatesToolStripDropDownButton toolStripDdbFilterDates;
         private System.Windows.Forms.ToolStripLabel toolStripLabelFiltersOnOff;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
     }
 }
