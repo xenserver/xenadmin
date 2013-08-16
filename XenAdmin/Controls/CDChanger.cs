@@ -30,14 +30,6 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
-using XenAdmin;
-using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.Actions;
 using XenAdmin.Core;
@@ -186,6 +178,19 @@ namespace XenAdmin.Controls
                 };
 
             action.RunAsync();
+        }
+
+        protected override void DeregisterEvents()
+        {
+            // Remove VM listeners
+            if (vm != null)
+                vm.PropertyChanged -= vm_PropertyChanged;
+
+            // Remove VBD (cdrom) listeners
+            if (cdrom != null)
+                cdrom.PropertyChanged -= cdrom_PropertyChanged;
+
+            base.DeregisterEvents();
         }
     }
 }

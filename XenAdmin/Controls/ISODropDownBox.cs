@@ -315,16 +315,14 @@ namespace XenAdmin.Controls
         {
             set
             {
-                if (_connection != null)
+                if (connection != null)
                 {
-                    connection.Cache.DeregisterCollectionChanged<SR>(SR_CollectionChangedWithInvoke);
-                    removeSRListeners();
+                    DeregisterEvents();
                 }
                 _connection = value;
                 if (connection != null)
                 {
-                    connection.Cache.RegisterCollectionChanged<SR>(SR_CollectionChangedWithInvoke);
-                    addSRListeners();
+                    RegisterEvents();
                     refreshAll();
                 }
             }
@@ -341,8 +339,14 @@ namespace XenAdmin.Controls
             }
         }
 
-        protected void removeSRListeners()
+        protected virtual void DeregisterEvents()
         {
+            if (connection == null)
+                return;
+
+            // deregister collection listener
+            connection.Cache.DeregisterCollectionChanged<SR>(SR_CollectionChangedWithInvoke);
+            // Remove SR listeners
             foreach (SR sr in connection.Cache.SRs)
             {
                 sr.PropertyChanged -= sr_PropertyChanged;
@@ -353,8 +357,15 @@ namespace XenAdmin.Controls
             }
         }
 
-        protected void addSRListeners()
+        protected void RegisterEvents()
         {
+            if (connection == null)
+                return;
+            
+            // register collection listener
+            connection.Cache.RegisterCollectionChanged<SR>(SR_CollectionChangedWithInvoke);
+
+            // Add SR listeners
             foreach (SR sr in connection.Cache.SRs)
             {
                 sr.PropertyChanged -= sr_PropertyChanged;
