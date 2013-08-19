@@ -371,6 +371,10 @@ namespace XenAdmin.TabPages
             private DataGridViewTextBoxCell dateCell = new DataGridViewTextBoxCell();
             private DataGridViewDropDownSplitButtonCell actionCell = new DataGridViewDropDownSplitButtonCell();
 
+            private ToolStripMenuItem cancelItem = new ToolStripMenuItem(Messages.CANCEL);
+            private ToolStripMenuItem dismissItem = new ToolStripMenuItem(Messages.ALERT_DISMISS);
+            private ToolStripMenuItem goToItem = new ToolStripMenuItem(Messages.HISTORYPAGE_GOTO);
+
             public event Action<DataGridViewActionRow> DismissalRequested;
             public event Action<IXenObject> GoToXenObjectRequested;
 
@@ -380,6 +384,11 @@ namespace XenAdmin.TabPages
             public DataGridViewActionRow(ActionBase action)
             {
                 Action = action;
+
+                cancelItem.Click += ToolStripMenuItemCancel_Click;
+                dismissItem.Click += ToolStripMenuItemDismiss_Click;
+                goToItem.Click += ToolStripMenuItemGoTo_Click;
+
                 MinimumHeight = DataGridViewDropDownSplitButtonCell.MIN_ROW_HEIGHT;
                 Cells.AddRange(expanderCell, statusCell, messageCell, locationCell, dateCell, actionCell);
                 RefreshSelf();
@@ -387,7 +396,17 @@ namespace XenAdmin.TabPages
 
             public void RefreshSelf()
             {
-                var actionItems = GetActionItems(Action);
+                var actionItems = new List<ToolStripItem>();
+                if (!Action.IsCompleted && Action.CanCancel)
+                    actionItems.Add(cancelItem);
+
+                if (Action.IsCompleted)
+                    actionItems.Add(dismissItem);
+
+                var obj = Action.GetRelevantXenObject();
+                if (obj != null)
+                    actionItems.Add(goToItem);
+
                 actionCell.RefreshItems(actionItems.ToArray());
 
                 statusCell.Value = Action.GetImage();
@@ -404,35 +423,6 @@ namespace XenAdmin.TabPages
                 }
                 locationCell.Value = Action.GetLocation();
                 dateCell.Value = HelpersGUI.DateTimeToString(Action.Started.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true);
-            }
-
-            private List<ToolStripItem> GetActionItems(ActionBase action)
-            {
-                var items = new List<ToolStripItem>();
-
-                if (!action.IsCompleted && action.CanCancel)
-                {
-                    var cancel = new ToolStripMenuItem(Messages.CANCEL);
-                    cancel.Click += ToolStripMenuItemCancel_Click;
-                    items.Add(cancel);
-                }
-
-                if (action.IsCompleted)
-                {
-                    var dismiss = new ToolStripMenuItem(Messages.ALERT_DISMISS);
-                    dismiss.Click += ToolStripMenuItemDismiss_Click;
-                    items.Add(dismiss);
-                }
-
-                var obj = action.GetRelevantXenObject();
-                if (obj != null)
-                {
-                    var goTo = new ToolStripMenuItem(Messages.HISTORYPAGE_GOTO);
-                    goTo.Click += ToolStripMenuItemGoTo_Click;
-                    items.Add(goTo);
-                }
-
-                return items;
             }
 
             private void ToolStripMenuItemCancel_Click(object sender, EventArgs e)
