@@ -254,7 +254,7 @@ namespace XenAdmin
             this.pluginItemsPlaceHolderToolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.templatePropertiesToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bugToolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bugToolToolStripMenuItem = new CommandToolStripMenuItem();
             this.AlertsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.LicenseManagerMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1643,9 +1643,9 @@ namespace XenAdmin
             // 
             // bugToolToolStripMenuItem
             // 
+            this.bugToolToolStripMenuItem.Command = new XenAdmin.Commands.BugToolCommand();
             this.bugToolToolStripMenuItem.Name = "bugToolToolStripMenuItem";
             resources.ApplyResources(this.bugToolToolStripMenuItem, "bugToolToolStripMenuItem");
-            this.bugToolToolStripMenuItem.Click += new System.EventHandler(this.xenBugToolToolStripMenuItem_Click);
             // 
             // AlertsToolStripMenuItem
             // 
@@ -1960,7 +1960,7 @@ namespace XenAdmin
         private CommandToolStripMenuItem duplicateTemplateToolStripMenuItem;
         private CommandToolStripMenuItem uninstallTemplateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem bugToolToolStripMenuItem;
+        private CommandToolStripMenuItem bugToolToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
         private System.Windows.Forms.ToolStripMenuItem LicenseManagerMenuItem;
         private CommandToolStripMenuItem installNewUpdateToolStripMenuItem;

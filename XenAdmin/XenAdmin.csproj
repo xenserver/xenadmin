@@ -2164,6 +2164,7 @@
     <Compile Include="Commands\Controls\AssignVMGroupToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Commands\BugToolCommand.cs" />
     <Compile Include="Commands\RestartToolstackCommand.cs" />
     <Compile Include="Commands\CrossPoolMigrateCommand.cs" />
     <Compile Include="Commands\DestroyHostCommand.cs" />

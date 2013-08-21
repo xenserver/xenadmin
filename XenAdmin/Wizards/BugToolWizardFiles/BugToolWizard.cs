@@ -52,10 +52,10 @@ namespace XenAdmin.Wizards
         private readonly BugToolPageRetrieveData bugToolPageRetrieveData;
         private readonly BugToolPageDestination bugToolPageDestination1;
 
-        public BugToolWizard(List<IXenObject> selectedObjects)
+        public BugToolWizard(params IXenObject[] selectedObjects)
             : this()
         {
-            bugToolPageSelectHosts1.SelectHosts(selectedObjects);
+            bugToolPageSelectHosts1.SelectHosts(new List<IXenObject>(selectedObjects));
         }
 
         public BugToolWizard()

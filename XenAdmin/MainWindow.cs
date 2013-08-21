@@ -113,9 +113,6 @@ namespace XenAdmin
         private string[] CommandLineParam = null;
         private ArgType CommandLineArgType = ArgType.None;
 
-        private static BugToolWizard BugToolWizard;
-        private static AboutDialog theAboutDialog;
-
         private static readonly Color HasAlertsColor = Color.Red;
         private static readonly Color NoAlertsColor = SystemColors.ControlText;
         private static readonly System.Windows.Forms.Timer CheckForUpdatesTimer = new System.Windows.Forms.Timer();
@@ -1848,7 +1845,6 @@ namespace XenAdmin
             bool george_or_greater = best_host != null && Helpers.GeorgeOrGreater(best_host);
 
             exportSettingsToolStripMenuItem.Enabled = ConnectionsManager.XenConnectionsCopy.Count > 0;
-            bugToolToolStripMenuItem.Enabled = HelpersGUI.AtLeastOneConnectedConnection();
 
             this.MenuShortcuts = true;
 
@@ -1953,16 +1949,7 @@ namespace XenAdmin
 
         private void aboutXenSourceAdminToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (theAboutDialog == null || theAboutDialog.IsDisposed)
-            {
-                theAboutDialog = new AboutDialog();
-                theAboutDialog.Show(this);
-            }
-            else
-            {
-                theAboutDialog.BringToFront();
-                theAboutDialog.Focus();
-            }
+            ShowForm(typeof(AboutDialog));
         }
 
         /// <summary>
@@ -2920,7 +2907,18 @@ namespace XenAdmin
         /// <param name="type">The type of the form to be shown.</param>
         public void ShowForm(Type type)
         {
-            foreach (Form form in Application.OpenForms)
+            ShowForm(type, null);
+        }
+
+        /// <summary>
+        /// Shows a form of the specified type if it has already been created. If the form doesn't exist yet
+        /// it is created first and then shown.
+        /// </summary>
+        /// <param name="type">The type of the form to be shown.</param>
+        /// <param name="args">The arguments to pass to the form's consructor</param>
+        public void ShowForm(Type type, object[] args)
+        {
+             foreach (Form form in Application.OpenForms)
             {
                 if (form.GetType() == type)
                 {
@@ -2929,7 +2927,7 @@ namespace XenAdmin
                 }
             }
 
-            Form newForm = (Form)Activator.CreateInstance(type);
+            Form newForm = (Form)Activator.CreateInstance(type, args);
             newForm.Show(this);
         }
 
@@ -3295,22 +3293,6 @@ namespace XenAdmin
             // EnableHAAction
             // DisableHAAction
             Program.Invoke(this, UpdateToolbars);
-        }
-
-        private void xenBugToolToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (BugToolWizard == null || BugToolWizard.IsDisposed)
-            {
-                if (selectionManager.Selection != null && selectionManager.Selection.AllItemsAre<IXenObject>(x => x is Host || x is Pool))
-                    BugToolWizard = new BugToolWizard(selectionManager.Selection.AsXenObjects<IXenObject>());
-                else
-                    BugToolWizard = new BugToolWizard();
-                BugToolWizard.Show();
-            }
-            else
-            {
-                HelpersGUI.BringFormToFront(BugToolWizard);
-            }
         }
 
         private void ShowHiddenObjectsToolStripMenuItem_Click(object sender, EventArgs e)

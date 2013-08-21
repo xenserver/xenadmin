@@ -191,17 +191,6 @@ namespace XenAdmin.Core
             return found;
         }
 
-        internal static bool AtLeastOneConnectedConnection()
-        {
-            foreach (IXenConnection c in ConnectionsManager.XenConnectionsCopy)
-            {
-                if (c.IsConnected)
-                    return true;
-            }
-            return false;
-        }
-
-
         public static Dictionary<Host, Host> CheckHostIQNsDiffer()
         {
             Dictionary<Host, string> hosts = new Dictionary<Host, string>();

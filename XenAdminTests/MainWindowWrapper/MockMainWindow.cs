@@ -84,6 +84,11 @@ namespace XenAdminTests
             
         }
 
+        public void ShowForm(Type type, object[] args)
+        {
+            
+        }
+
         public void CloseActiveWizards(IXenConnection connection)
         {
             throw new Exception("The method or operation is not implemented.");
