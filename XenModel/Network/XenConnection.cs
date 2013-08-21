@@ -431,8 +431,9 @@ namespace XenAdmin.Network
         }
 
         /// <summary>
-        /// For retrieving an extra session using different credentials to those stored in the e Used for the sudo
-        /// function in actions. Does not prompt for new credentials.
+        /// For retrieving an extra session using different credentials to those stored in the connection. Used for the sudo
+        /// function in actions. Does not prompt for new credentials if the authentication fails. 
+        /// Does not change connection's Username and Password.
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
@@ -443,7 +444,7 @@ namespace XenAdmin.Network
         }
 
         /// <summary>
-        /// For retrieving new session. Changes coneection's Username and Password.
+        /// For retrieving a new session. Changes connection's Username and Password.
         /// </summary>
         /// <param name="hostname"></param>
         /// <param name="port"></param>
@@ -460,7 +461,7 @@ namespace XenAdmin.Network
         }
 
         /// <summary>
-        /// 
+        /// For retrieving a new session. 
         /// </summary>
         /// <param name="hostname"></param>
         /// <param name="port"></param>
@@ -476,9 +477,11 @@ namespace XenAdmin.Network
             while (true)
             {
                 attempt++;
-                string uname = username;
-                string pwd = password; // Keep the password that we're using for this iteration, as it may
+                string uname = isElevated ? username : Username;
+                string pwd = isElevated ? password : Password; // Keep the password that we're using for this iteration, as it may
                 // be changed by another thread handling an authentication failure.
+                // For elevated session we use the elevated username and password passed into this function, 
+                // as the connection's Username and Password are not updated.
 
                 Session session = SessionFactory.CreateSession(this, hostname, port);
                 if (isElevated)
