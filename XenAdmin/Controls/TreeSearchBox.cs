@@ -74,8 +74,11 @@ namespace XenAdmin.Controls
 
         private void AddMenuItem(string name, object tag, Image image, bool selected)
         {
-            ToolStripMenuItem menuItem = MainWindow.NewToolStripMenuItem(name, image, null);
-            menuItem.Tag = tag;
+            var menuItem = new ToolStripMenuItem(name)
+                {
+                    Image = image,
+                    Tag = tag
+                };
             comboButtonViews.AddItem(menuItem);
             if (selected)
                 comboButtonViews.SelectedItem = menuItem;

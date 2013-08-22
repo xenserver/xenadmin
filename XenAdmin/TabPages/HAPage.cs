@@ -329,10 +329,8 @@ namespace XenAdmin.TabPages
                 if (redBold)
                 {
                     newChild.Items[1].ForeColor = Color.Red;
-                    ToolStripMenuItem editHa = MainWindow.NewToolStripMenuItem(Messages.CONFIGURE_HA_ELLIPSIS, delegate(object sender, EventArgs e)
-                    {
-                        EditHA(pool);
-                    });
+                    ToolStripMenuItem editHa = new ToolStripMenuItem(Messages.CONFIGURE_HA_ELLIPSIS);
+                    editHa.Click += delegate { EditHA(pool); };
                     newChild.MenuItems.Add(editHa);
                     newChild.DefaultMenuItem = editHa;
                 }
@@ -351,10 +349,8 @@ namespace XenAdmin.TabPages
                 if (redBold)
                 {
                     newChild.Items[1].ForeColor = Color.Red;
-                    ToolStripMenuItem editHa = MainWindow.NewToolStripMenuItem(Messages.CONFIGURE_HA_ELLIPSIS, delegate(object sender, EventArgs e)
-                    {
-                        EditHA(pool);
-                    });
+                    ToolStripMenuItem editHa = new ToolStripMenuItem(Messages.CONFIGURE_HA_ELLIPSIS);
+                    editHa.Click += delegate { EditHA(pool); };
                     newChild.MenuItems.Add(editHa);
                     newChild.DefaultMenuItem = editHa;
                 }
@@ -575,19 +571,20 @@ namespace XenAdmin.TabPages
             {
                 menu.Items.Add(item);
             }
-            ToolStripMenuItem copyItem = MainWindow.NewToolStripMenuItem(Messages.COPY, Properties.Resources.copy_16, delegate(object sender2, EventArgs eve)
-            {
-                try
+            ToolStripMenuItem copyItem = new ToolStripMenuItem(Messages.COPY) { Image = Properties.Resources.copy_16 };
+            copyItem.Click += delegate
                 {
-                    String text = Helpers.ToWindowsLineEndings(e.Item.Tag != null ? e.Item.Tag.ToString() : e.Item.Text);
-                    Clipboard.SetText(text);
-                }
-                catch (Exception ex)
-                {
-                    log.Error("Exception while trying to set clipboard text.", ex);
-                    log.Error(ex, ex);
-                }
-            });
+                    try
+                    {
+                        String text = Helpers.ToWindowsLineEndings(e.Item.Tag != null ? e.Item.Tag.ToString() : e.Item.Text);
+                        Clipboard.SetText(text);
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error("Exception while trying to set clipboard text.", ex);
+                        log.Error(ex, ex);
+                    }
+                };
             menu.Items.Add(copyItem);
             menu.Show(this, PointToClient(MousePosition));
         }

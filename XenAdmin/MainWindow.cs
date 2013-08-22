@@ -2366,7 +2366,7 @@ namespace XenAdmin
 
             foreach (Form form in GetAuxWindows())
             {
-                ToolStripMenuItem item = NewToolStripMenuItem(form.Text.EscapeAmpersands());
+                ToolStripMenuItem item = new ToolStripMenuItem(form.Text.EscapeAmpersands());
                 item.Tag = form;
                 windowToolStripMenuItem.DropDown.Items.Add(item);
             }
@@ -3666,40 +3666,6 @@ namespace XenAdmin
                 if (args[i] is string)
                     args[i] = ((string)args[i]).Ellipsise(Helpers.DEFAULT_NAME_TRIM_LENGTH);
             }
-        }
-
-        /// <summary>
-        /// Create a new ToolStripMenuItem, setting the appropriate default font, and configuring it with the given text, icon, and click handler.
-        /// </summary>
-        /// <param name="text">The menu item text.  Don't forget that this may need to have its ampersands escaped.</param>
-        /// <param name="ico">May be null, in which case no icon is set.</param>
-        /// <param name="clickHandler">May be null, in which case no click handler is set.</param>
-        /// <returns>The new ToolStripMenuItem</returns>
-        internal static ToolStripMenuItem NewToolStripMenuItem(string text, Image ico, EventHandler clickHandler)
-        {
-            ToolStripMenuItem m = new ToolStripMenuItem(text);
-            m.Font = Program.DefaultFont;
-            if (ico != null)
-                m.Image = ico;
-            if (clickHandler != null)
-                m.Click += clickHandler;
-            return m;
-        }
-
-        /// <summary>
-        /// Equivalent to NewToolStripMenuItem(text, null, null).
-        /// </summary>
-        internal static ToolStripMenuItem NewToolStripMenuItem(string text)
-        {
-            return NewToolStripMenuItem(text, null, null);
-        }
-
-        /// <summary>
-        /// Equivalent to NewToolStripMenuItem(text, null, clickHandler).
-        /// </summary>
-        internal static ToolStripMenuItem NewToolStripMenuItem(string text, EventHandler clickHandler)
-        {
-            return NewToolStripMenuItem(text, null, clickHandler);
         }
 
         internal void FocusTreeView()

@@ -499,11 +499,12 @@ namespace XenAdmin.TabPages
         {
             PDSection s = pdSectionManagementInterfaces;
 
-            ToolStripMenuItem editValue = MainWindow.NewToolStripMenuItem(Messages.EDIT, Properties.Resources.edit_16, delegate(object sender, EventArgs e)
-            {
-                NetworkingProperties p = new NetworkingProperties(Host, null);
-                p.ShowDialog(Program.MainWindow);
-            });
+            ToolStripMenuItem editValue = new ToolStripMenuItem(Messages.EDIT) { Image = Properties.Resources.edit_16 };
+            editValue.Click += delegate
+                {
+                    NetworkingProperties p = new NetworkingProperties(Host, null);
+                    p.ShowDialog(Program.MainWindow);
+                };
             List<ToolStripMenuItem> menuItems = new List<ToolStripMenuItem>();
             menuItems.Add(editValue);
 
@@ -556,12 +557,13 @@ namespace XenAdmin.TabPages
 
             foreach (CustomField customField in customFields)
             {
-                ToolStripMenuItem editValue = MainWindow.NewToolStripMenuItem(Messages.EDIT, Properties.Resources.edit_16, delegate(object sender, EventArgs e)
-                {
-                    PropertiesDialog dialog = new PropertiesDialog(xenObject);
-                    dialog.SelectPage(dialog.CustomFieldsEditPage);
-                    dialog.ShowDialog();
-                });
+                ToolStripMenuItem editValue = new ToolStripMenuItem(Messages.EDIT){Image= Properties.Resources.edit_16};
+                editValue.Click += delegate
+                    {
+                        PropertiesDialog dialog = new PropertiesDialog(xenObject);
+                        dialog.SelectPage(dialog.CustomFieldsEditPage);
+                        dialog.ShowDialog();
+                    };
                 List<ToolStripMenuItem> menuItems = new List<ToolStripMenuItem>();
                 menuItems.Add(editValue);
                 CustomFieldWrapper cfWrapper = new CustomFieldWrapper(xenObject, customField.Definition);
@@ -679,17 +681,18 @@ namespace XenAdmin.TabPages
             bool detached = !sr.HasPBDs;
 
             List<ToolStripMenuItem> menuItems = new List<ToolStripMenuItem>();
-            ToolStripMenuItem repair = MainWindow.NewToolStripMenuItem(sr.NeedsUpgrading ? Messages.UPGRADE_SR : Messages.GENERAL_SR_CONTEXT_REPAIR,
-                Properties.Resources._000_StorageBroken_h32bit_16,
-                delegate(object sender, EventArgs e)
+            ToolStripMenuItem repair = new ToolStripMenuItem
+                {
+                    Text = sr.NeedsUpgrading ? Messages.UPGRADE_SR : Messages.GENERAL_SR_CONTEXT_REPAIR,
+                    Image = Properties.Resources._000_StorageBroken_h32bit_16
+                };
+            repair.Click += delegate
                 {
                     if (sr.NeedsUpgrading)
-                    {
                         new UpgradeSRCommand(Program.MainWindow.CommandInterface, sr).Execute();
-                    }
                     else
                         Program.MainWindow.ShowPerConnectionWizard(xenObject.Connection, new RepairSRDialog(sr));
-                });
+                };
             menuItems.Add(repair);
 
             if (broken && !detached)
@@ -932,19 +935,19 @@ namespace XenAdmin.TabPages
 
             if (info.ContainsKey("expiry"))
             {
-                ToolStripMenuItem editItem = MainWindow.NewToolStripMenuItem(Messages.LAUNCH_LICENSE_MANAGER, delegate
-                {
-                    if(LicenseLauncher != null)
+                ToolStripMenuItem editItem = new ToolStripMenuItem(Messages.LAUNCH_LICENSE_MANAGER);
+                editItem.Click += delegate
                     {
-                        LicenseLauncher.Parent = Program.MainWindow;
-                        LicenseLauncher.LaunchIfRequired(false, ConnectionsManager.XenConnections);
-                    }
-                        
-                });
+                        if (LicenseLauncher != null)
+                        {
+                            LicenseLauncher.Parent = Program.MainWindow;
+                            LicenseLauncher.LaunchIfRequired(false, ConnectionsManager.XenConnections);
+                        }
+                    };
 
                 GeneralTabLicenseStatusStringifier ss = new GeneralTabLicenseStatusStringifier(licenseStatus);
                 s.AddEntry(Messages.LICENSE_STATUS, ss.ExpiryStatus, new List<ToolStripMenuItem>(new [] { editItem }));
-                s.AddEntry(FriendlyName("host.license_params-expiry"), ss.ExpiryDate, new List<ToolStripMenuItem>(new ToolStripMenuItem[] { editItem }));
+                s.AddEntry(FriendlyName("host.license_params-expiry"), ss.ExpiryDate, new List<ToolStripMenuItem>(new [] { editItem }));
                 info.Remove("expiry");
             }
 
@@ -1094,31 +1097,33 @@ namespace XenAdmin.TabPages
                 }
                 else if (!host.enabled)
                 {
+                    var item = new ToolStripMenuItem(Messages.EXIT_MAINTENANCE_MODE);
+                    item.Click += delegate
+                        {
+                            new HostMaintenanceModeCommand(Program.MainWindow.CommandInterface, host,
+                                                           HostMaintenanceModeCommandParameter.Exit).Execute();
+                        };
                     s.AddEntry(FriendlyName("host.enabled"),
                                host.MaintenanceMode ? Messages.HOST_IN_MAINTENANCE_MODE : Messages.DISABLED,
-                                 new List<ToolStripMenuItem>(new ToolStripMenuItem[] {
-                                    MainWindow.NewToolStripMenuItem(Messages.EXIT_MAINTENANCE_MODE, delegate(object sender, EventArgs e)
-                                    {
-                                        new HostMaintenanceModeCommand(Program.MainWindow.CommandInterface, host, HostMaintenanceModeCommandParameter.Exit).Execute();
-                                    })
-                                 }),
+                               new List<ToolStripMenuItem>(new[] { item }),
                                Color.Red);
                 }
                 else
                 {
+                    var item = new ToolStripMenuItem(Messages.ENTER_MAINTENANCE_MODE);
+                    item.Click += delegate
+                        {
+                            new HostMaintenanceModeCommand(Program.MainWindow.CommandInterface, host,
+                                HostMaintenanceModeCommandParameter.Enter).Execute();
+                        };
                     s.AddEntry(FriendlyName("host.enabled"), Messages.YES,
-                                 new List<ToolStripMenuItem>(new ToolStripMenuItem[] {
-                                    MainWindow.NewToolStripMenuItem(Messages.ENTER_MAINTENANCE_MODE, delegate(object sender, EventArgs e)
-                                    {
-                                        new HostMaintenanceModeCommand(Program.MainWindow.CommandInterface, host, HostMaintenanceModeCommandParameter.Enter).Execute();
-                                    })
-                                 }));
+                                 new List<ToolStripMenuItem>(new [] {item}));
                 }
 
                 s.AddEntry(FriendlyName("host.iscsi_iqn"), host.iscsi_iqn,
-                    new List<ToolStripMenuItem>(new ToolStripMenuItem[] { EditMenuItem("GeneralEditPage", "txtIQN") }));
+                    new List<ToolStripMenuItem>(new [] { EditMenuItem("GeneralEditPage", "txtIQN") }));
                 s.AddEntry(FriendlyName("host.log_destination"), host.SysLogDestination ?? Messages.HOST_LOG_DESTINATION_LOCAL,
-                    new List<ToolStripMenuItem>(new ToolStripMenuItem[] { EditMenuItem("LogDestinationEditPage", "localRadioButton") }));
+                    new List<ToolStripMenuItem>(new [] { EditMenuItem("LogDestinationEditPage", "localRadioButton") }));
 
                 PrettyTimeSpan uptime = host.Uptime;
                 PrettyTimeSpan agentUptime = host.AgentUptime;
@@ -1144,12 +1149,13 @@ namespace XenAdmin.TabPages
 					var appl = vm.Connection.Resolve(vm.appliance);
 					if (appl != null)
 					{
-						ToolStripMenuItem applProperties = MainWindow.NewToolStripMenuItem(Messages.VM_APPLIANCE_PROPERTIES,
-																							 (sender, e) =>
-																							 {
-																								 using (PropertiesDialog propertiesDialog = new PropertiesDialog(appl))
-																								 	propertiesDialog.ShowDialog(this);
-																							 });
+                        var applProperties = new ToolStripMenuItem(Messages.VM_APPLIANCE_PROPERTIES);
+					    applProperties.Click +=
+					        (sender, e) =>
+					            {
+					                using (PropertiesDialog propertiesDialog = new PropertiesDialog(appl))
+					                    propertiesDialog.ShowDialog(this);
+					            };
 
 						s.AddEntryLink(Messages.VM_APPLIANCE, appl.Name, new List<ToolStripMenuItem>(new[] { applProperties }),
 									   () =>
@@ -1177,13 +1183,14 @@ namespace XenAdmin.TabPages
                         {
                             if (InstallToolsCommand.CanExecute(vm))
                             {
-                                ToolStripMenuItem installtools = MainWindow.NewToolStripMenuItem(
-                                    Messages.INSTALL_XENSERVER_TOOLS_DOTS, delegate(object sender, EventArgs e)
+                                var installtools = new ToolStripMenuItem(Messages.INSTALL_XENSERVER_TOOLS_DOTS);
+                                installtools.Click += delegate
                                     {
                                         new InstallToolsCommand(Program.MainWindow.CommandInterface, vm).Execute();
-                                    });
+                                    };
                                 s.AddEntryLink(FriendlyName("VM.VirtualizationState"), vm.VirtualisationStatusString,
-                                    new List<ToolStripMenuItem>(new ToolStripMenuItem[] { installtools }), new InstallToolsCommand(Program.MainWindow.CommandInterface, vm));
+                                    new List<ToolStripMenuItem>(new [] { installtools }),
+                                    new InstallToolsCommand(Program.MainWindow.CommandInterface, vm));
                             }
                             else
                             {
@@ -1369,20 +1376,18 @@ namespace XenAdmin.TabPages
 
         private void GenTagRow(PDSection s)
         {
-            List<ToolStripMenuItem> toolStrip = new List<ToolStripMenuItem>(new ToolStripMenuItem[] { EditMenuItem("GeneralEditPage", "") });
+            List<ToolStripMenuItem> toolStrip = new List<ToolStripMenuItem>(new [] { EditMenuItem("GeneralEditPage", "") });
 
             string[] tags = Tags.GetTags(xenObject);
             if (tags != null && tags.Length > 0)
             {
-                ToolStripMenuItem goToTag = MainWindow.NewToolStripMenuItem(Messages.VIEW_TAG_MENU_OPTION);
+                ToolStripMenuItem goToTag = new ToolStripMenuItem(Messages.VIEW_TAG_MENU_OPTION);
 
                 foreach (string tag in tags)
                 {
-                    goToTag.DropDownItems.Add(MainWindow.NewToolStripMenuItem(tag.Ellipsise(30),
-                        delegate(object sender, EventArgs e)
-                        {
-                            Program.MainWindow.SearchForTag(tag);
-                        }));
+                    var item = new ToolStripMenuItem(tag.Ellipsise(30));
+                    item.Click += delegate { Program.MainWindow.SearchForTag(tag); };
+                    goToTag.DropDownItems.Add(item);
                 }
                 toolStrip.Insert(0, goToTag);
                 s.AddEntry(Messages.TAGS, TagsString(), toolStrip);
@@ -1407,13 +1412,9 @@ namespace XenAdmin.TabPages
             List<ToolStripMenuItem> menuItems = new List<ToolStripMenuItem>();
             if (xenObject.Path != "")
             {
-                menuItems.Add(
-                    MainWindow.NewToolStripMenuItem(Messages.VIEW_FOLDER_MENU_OPTION,
-                        delegate(object sender, EventArgs e)
-                        {
-                            Program.MainWindow.SearchForFolder(xenObject.Path);
-                        })
-                    );
+                var item = new ToolStripMenuItem(Messages.VIEW_FOLDER_MENU_OPTION);
+                item.Click += delegate { Program.MainWindow.SearchForFolder(xenObject.Path); };
+                menuItems.Add(item);
             }
             menuItems.Add(EditMenuItem("GeneralEditPage", ""));
             s.AddEntry(
