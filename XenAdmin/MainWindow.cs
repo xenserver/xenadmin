@@ -221,16 +221,16 @@ namespace XenAdmin
             treeBuilder = new MainWindowTreeBuilder(treeView);
 
 
-            selectionManager.BindTo(MainMenuBar.Items, commandInterface);
-            selectionManager.BindTo(ToolStrip.Items, commandInterface);
-            Properties.Settings.Default.SettingChanging += new System.Configuration.SettingChangingEventHandler(Default_SettingChanging);
+            SelectionManager.BindTo(MainMenuBar.Items, commandInterface);
+            SelectionManager.BindTo(ToolStrip.Items, commandInterface);
+            Properties.Settings.Default.SettingChanging += Default_SettingChanging;
 
             licenseTimer = new LicenseTimer(licenseManagerLauncher);
             GeneralPage.LicenseLauncher = licenseManagerLauncher;
         }
 
 
-        private void Default_SettingChanging(object sender, System.Configuration.SettingChangingEventArgs e)
+        private void Default_SettingChanging(object sender, SettingChangingEventArgs e)
         {
 			if (e == null)
 				return;
@@ -239,10 +239,10 @@ namespace XenAdmin
             {
                 ConsolePanel.ResetAllViews();
 
-				if (selectionManager.Selection.FirstIsRealVM)
-					ConsolePanel.setCurrentSource((VM)selectionManager.Selection.First);
-				else if (selectionManager.Selection.FirstIsHost)
-					ConsolePanel.setCurrentSource((Host)selectionManager.Selection.First);
+				if (SelectionManager.Selection.FirstIsRealVM)
+					ConsolePanel.setCurrentSource((VM)SelectionManager.Selection.First);
+				else if (SelectionManager.Selection.FirstIsHost)
+					ConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
 
                 UnpauseVNC(sender == TheTabControl);
             }
@@ -408,7 +408,7 @@ namespace XenAdmin
             if (action.Exception != null && !(action.Exception is CancelledException))
             {
                 bool logs_visible;
-                IXenObject selected = selectionManager.Selection.FirstAsXenObject;
+                IXenObject selected = SelectionManager.Selection.FirstAsXenObject;
                 if (selected != null && action.AppliesTo.Contains(selected.opaque_ref))
                 {
                     if (TheTabControl.SelectedTab == TabPageHistory)
@@ -723,7 +723,7 @@ namespace XenAdmin
 
                     RequestRefreshTreeView();
                     //CA-41228 refresh submenu items when there are no connections
-                    selectionManager.SetSelection(selectionManager.Selection);
+                    SelectionManager.RefreshSelection();
                 }
                 // update ui
                 //XenAdmin.Settings.SaveServerList();
@@ -1434,7 +1434,7 @@ namespace XenAdmin
                     _menuShortcuts = value;
 
                     // update the selection so menu items can enable/disable keyboard shortcuts as appropriate.
-                    selectionManager.SetSelection(selectionManager.Selection);
+                    SelectionManager.RefreshSelection();
                 }
             }
         }
@@ -1467,7 +1467,7 @@ namespace XenAdmin
         public void UpdateToolbarsCore()
         {
             // refresh the selection-manager
-            selectionManager.SetSelection(selectionManager.Selection);
+            SelectionManager.RefreshSelection();
 
             ToolStrip.Height = ToolbarsEnabled ? TOOLBAR_HEIGHT : 0;
             ToolStrip.Enabled = ToolbarsEnabled;
@@ -1484,36 +1484,36 @@ namespace XenAdmin
             ForceRebootToolbarButton.Available = ((ForceVMRebootCommand)ForceRebootToolbarButton.Command).ShowOnMainToolBar;
             ForceShutdownToolbarButton.Available = ((ForceVMShutDownCommand)ForceShutdownToolbarButton.Command).ShowOnMainToolBar;
 
-            IXenConnection selectionConnection = selectionManager.Selection.GetConnectionOfFirstItem();
+            IXenConnection selectionConnection = SelectionManager.Selection.GetConnectionOfFirstItem();
             Pool selectionPool = selectionConnection == null ? null : Helpers.GetPool(selectionConnection);
             Host selectionMaster = null == selectionPool ? null : selectionPool.Connection.Resolve(selectionPool.master);
 
             // 'Home' tab is only visible if the 'Overview' tree node is selected, or if the tree is
             // empty (i.e. at startup).
-            bool show_home = selectionManager.Selection.Count == 1 && selectionManager.Selection[0].Value == null;
+            bool show_home = SelectionManager.Selection.Count == 1 && SelectionManager.Selection[0].Value == null;
             // Only show the HA tab if the host's license has the HA flag set
             bool has_ha_license_flag = selectionMaster != null && !selectionMaster.RestrictHAOrlando;
             bool george_or_greater = Helpers.GeorgeOrGreater(selectionConnection);
             bool mr_or_greater = Helpers.MidnightRideOrGreater(selectionConnection);
             // The upsell pages use the first selected XenObject: but they're only shown if there is only one selected object (see calls to ShowTab() below).
-            bool dmc_upsell = Helpers.FeatureForbidden(selectionManager.Selection.FirstAsXenObject, Host.RestrictDMC);
-            bool ha_upsell = Helpers.FeatureForbidden(selectionManager.Selection.FirstAsXenObject, Host.RestrictHAFloodgate);
-            bool wlb_upsell = Helpers.FeatureForbidden(selectionManager.Selection.FirstAsXenObject, Host.RestrictWLB);
+            bool dmc_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictDMC);
+            bool ha_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictHAFloodgate);
+            bool wlb_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictWLB);
             bool is_connected = selectionConnection != null && selectionConnection.IsConnected;
 
             bool multi = SelectionManager.Selection.Count > 1;
 
-            bool isPoolSelected = selectionManager.Selection.FirstIsPool;
-            bool isVMSelected = selectionManager.Selection.FirstIsVM;
-            bool isHostSelected = selectionManager.Selection.FirstIsHost;
-            bool isSRSelected = selectionManager.Selection.FirstIsSR;
-            bool isRealVMSelected = selectionManager.Selection.FirstIsRealVM;
-            bool isTemplateSelected = selectionManager.Selection.FirstIsTemplate;
-            bool isHostLive = selectionManager.Selection.FirstIsLiveHost;
-            bool isStorageLinkSelected = selectionManager.Selection.FirstIsStorageLink;
-            bool isStorageLinkSRSelected = selectionManager.Selection.First is StorageLinkRepository && ((StorageLinkRepository)selectionManager.Selection.First).SR(ConnectionsManager.XenConnectionsCopy) != null;
+            bool isPoolSelected = SelectionManager.Selection.FirstIsPool;
+            bool isVMSelected = SelectionManager.Selection.FirstIsVM;
+            bool isHostSelected = SelectionManager.Selection.FirstIsHost;
+            bool isSRSelected = SelectionManager.Selection.FirstIsSR;
+            bool isRealVMSelected = SelectionManager.Selection.FirstIsRealVM;
+            bool isTemplateSelected = SelectionManager.Selection.FirstIsTemplate;
+            bool isHostLive = SelectionManager.Selection.FirstIsLiveHost;
+            bool isStorageLinkSelected = SelectionManager.Selection.FirstIsStorageLink;
+            bool isStorageLinkSRSelected = SelectionManager.Selection.First is StorageLinkRepository && ((StorageLinkRepository)SelectionManager.Selection.First).SR(ConnectionsManager.XenConnectionsCopy) != null;
 
-            bool selectedTemplateHasProvisionXML = selectionManager.Selection.FirstIsTemplate && ((VM)selectionManager.Selection[0].XenObject).HasProvisionXML;
+            bool selectedTemplateHasProvisionXML = SelectionManager.Selection.FirstIsTemplate && ((VM)SelectionManager.Selection[0].XenObject).HasProvisionXML;
 
             NewTabCount = 0;
             ShowTab(TabPageHome, !SearchMode && show_home);
@@ -1526,7 +1526,7 @@ namespace XenAdmin
             ShowTab(TabPageNetwork, !multi && !SearchMode && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
             ShowTab(TabPageNICs, !multi && !SearchMode && ((isHostSelected && isHostLive)));
 
-            pluginManager.SetSelectedXenObject(selectionManager.Selection.FirstAsXenObject);
+            pluginManager.SetSelectedXenObject(SelectionManager.Selection.FirstAsXenObject);
 
             bool shownConsoleReplacement = false;
             foreach (TabPageFeature f in pluginManager.GetAllFeatures<TabPageFeature>(f => f.IsConsoleReplacement && !f.IsError && !multi && f.ShowTab))
@@ -1541,7 +1541,7 @@ namespace XenAdmin
             ShowTab(TabPageSnapshots, !multi && !SearchMode && george_or_greater && isRealVMSelected);
             
             //Disable the WLB tab from Clearwater onwards
-            if(selectionManager.Selection.All(s=>!Helpers.ClearwaterOrGreater(s.Connection)))
+            if(SelectionManager.Selection.All(s=>!Helpers.ClearwaterOrGreater(s.Connection)))
                 ShowTab(wlb_upsell ? TabPageWLBUpsell : TabPageWLB, !multi && !SearchMode && isPoolSelected && george_or_greater);
             
             ShowTab(TabPageAD, !multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive) && george_or_greater);
@@ -1578,31 +1578,31 @@ namespace XenAdmin
         {
             get
             {
-                if (selectionManager.Selection.Count == 1)
+                if (SelectionManager.Selection.Count == 1)
                 {
-                    Host host = selectionManager.Selection[0].XenObject as Host;
+                    Host host = SelectionManager.Selection[0].XenObject as Host;
 
                     if (host != null)
                     {
                         return host.IsLive;
                     }
 
-                    if (selectionManager.Selection[0].XenObject is Pool)
+                    if (SelectionManager.Selection[0].XenObject is Pool)
                     {
                         return true;
                     }
 
-                    if (selectionManager.Selection[0].GroupingTag != null)
+                    if (SelectionManager.Selection[0].GroupingTag != null)
                     {
                         return true;
                     }
 
-                    if (selectionManager.Selection[0].XenObject is Folder)
+                    if (SelectionManager.Selection[0].XenObject is Folder)
                     {
                         return true;
                     }
                 }
-                else if (selectionManager.Selection.Count > 1)
+                else if (SelectionManager.Selection.Count > 1)
                 {
                     return true;
                 }
@@ -1700,13 +1700,13 @@ namespace XenAdmin
                 IgnoreTabChanges = false;
                 TheTabControl.ResumeLayout();
 
-                SetLastSelectedPage(selectionManager.Selection.First, TheTabControl.SelectedTab);
+                SetLastSelectedPage(SelectionManager.Selection.First, TheTabControl.SelectedTab);
             }
         }
 
         private TabPage NewSelectedPage()
         {
-            Object o = selectionManager.Selection.First;
+            Object o = SelectionManager.Selection.First;
             IXenObject s = o as IXenObject;
             if (s != null && s.InError && AllowHistorySwitch)
             {
@@ -1835,9 +1835,9 @@ namespace XenAdmin
 
         private void MainMenuBar_MenuActivate(object sender, EventArgs e)
         {
-            Host hostAncestor = selectionManager.Selection.Count == 1 ? selectionManager.Selection[0].HostAncestor : null;
-            IXenConnection connection = selectionManager.Selection.GetConnectionOfFirstItem();
-            bool vm = selectionManager.Selection.FirstIsRealVM && !((VM)selectionManager.Selection.First).Locked;
+            Host hostAncestor = SelectionManager.Selection.Count == 1 ? SelectionManager.Selection[0].HostAncestor : null;
+            IXenConnection connection = SelectionManager.Selection.GetConnectionOfFirstItem();
+            bool vm = SelectionManager.Selection.FirstIsRealVM && !((VM)SelectionManager.Selection.First).Locked;
 
             Host best_host = hostAncestor ?? (connection == null ? null : Helpers.GetMaster(connection));
             bool george_or_greater = best_host != null && Helpers.GeorgeOrGreater(best_host);
@@ -1850,7 +1850,7 @@ namespace XenAdmin
             resumeOnToolStripMenuItem.Available = resumeOnToolStripMenuItem.Enabled;
             relocateToolStripMenuItem.Available = relocateToolStripMenuItem.Enabled;
             storageLinkToolStripMenuItem.Available = storageLinkToolStripMenuItem.Enabled;
-            sendCtrlAltDelToolStripMenuItem.Enabled = (TheTabControl.SelectedTab == TabPageConsole) && vm && ((VM)selectionManager.Selection.First).power_state == vm_power_state.Running;
+            sendCtrlAltDelToolStripMenuItem.Enabled = (TheTabControl.SelectedTab == TabPageConsole) && vm && ((VM)SelectionManager.Selection.First).power_state == vm_power_state.Running;
 
             templatesToolStripMenuItem1.Checked = Properties.Settings.Default.DefaultTemplatesVisible;
             customTemplatesToolStripMenuItem.Checked = Properties.Settings.Default.UserTemplatesVisible;
@@ -1982,9 +1982,9 @@ namespace XenAdmin
             {
                 filepath = Program.RunInAutomatedTestMode ? "" : filepath == "" ? dialog.FileName : filepath;
 
-                Host hostAncestor = selectionManager.Selection.Count == 1 ? selectionManager.Selection[0].HostAncestor : null;
+                Host hostAncestor = SelectionManager.Selection.Count == 1 ? SelectionManager.Selection[0].HostAncestor : null;
 
-                if (selectionManager.Selection.Count == 1 && hostAncestor == null)
+                if (SelectionManager.Selection.Count == 1 && hostAncestor == null)
                 {
                     SelectHostDialog hostdialog = new SelectHostDialog();
                     hostdialog.TheHost = null;
@@ -2175,7 +2175,7 @@ namespace XenAdmin
 
             if (!SearchMode)
             {
-                History.NewHistoryItem(new XenModelObjectHistoryItem(selectionManager.Selection.FirstAsXenObject, t));
+                History.NewHistoryItem(new XenModelObjectHistoryItem(SelectionManager.Selection.FirstAsXenObject, t));
             }
 
             if (t != TabPageBallooning)
@@ -2185,14 +2185,14 @@ namespace XenAdmin
 
             if (t == TabPageConsole)
             {
-                if (selectionManager.Selection.FirstIsRealVM)
+                if (SelectionManager.Selection.FirstIsRealVM)
                 {
-                    ConsolePanel.setCurrentSource((VM)selectionManager.Selection.First);
+                    ConsolePanel.setCurrentSource((VM)SelectionManager.Selection.First);
                     UnpauseVNC(e != null && sender == TheTabControl);
                 }
-                else if (selectionManager.Selection.FirstIsHost)
+                else if (SelectionManager.Selection.FirstIsHost)
                 {
-                    ConsolePanel.setCurrentSource((Host)selectionManager.Selection.First);
+                    ConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
                     UnpauseVNC(e != null && sender == TheTabControl);
                 }
             }
@@ -2202,76 +2202,76 @@ namespace XenAdmin
 
                 if (t == TabPageGeneral)
                 {
-                    GeneralPage.XenObject = selectionManager.Selection.FirstAsXenObject;
+                    GeneralPage.XenObject = SelectionManager.Selection.FirstAsXenObject;
                 }
                 else if (t == TabPageBallooning)
                 {
-                    BallooningPage.XenObject = selectionManager.Selection.FirstAsXenObject;
+                    BallooningPage.XenObject = SelectionManager.Selection.FirstAsXenObject;
                 }
                 else if (t == TabPageSR)
                 {
-                    StorageLinkRepository slr = selectionManager.Selection.First as StorageLinkRepository;
-                    SrStoragePage.SR = slr == null ? selectionManager.Selection.First as SR : slr.SR(ConnectionsManager.XenConnectionsCopy);
+                    StorageLinkRepository slr = SelectionManager.Selection.First as StorageLinkRepository;
+                    SrStoragePage.SR = slr == null ? SelectionManager.Selection.First as SR : slr.SR(ConnectionsManager.XenConnectionsCopy);
                 }
                 else if (t == TabPageNetwork)
                 {
-                    NetworkPage.XenObject = selectionManager.Selection.FirstAsXenObject;
+                    NetworkPage.XenObject = SelectionManager.Selection.FirstAsXenObject;
                 }
                 else if (t == TabPageHistory)
                 {
                     // Unmark node if user has now seen error in log tab
-                    if (selectionManager.Selection.FirstAsXenObject != null)
+                    if (SelectionManager.Selection.FirstAsXenObject != null)
                     {
-                        selectionManager.Selection.FirstAsXenObject.InError = false;
+                        SelectionManager.Selection.FirstAsXenObject.InError = false;
                     }
                     HistoryPage.RefreshDisplayedEvents();
                     RequestRefreshTreeView();
                 }
                 else if (t == TabPageNICs)
                 {
-                    NICPage.Host = selectionManager.Selection.First as Host;
+                    NICPage.Host = SelectionManager.Selection.First as Host;
                 }
                 else if (t == TabPageStorage)
                 {
-                    VMStoragePage.VM = selectionManager.Selection.First as VM;
+                    VMStoragePage.VM = SelectionManager.Selection.First as VM;
                 }
                 else if (t == TabPagePeformance)
                 {
-                    PerformancePage.XenObject = selectionManager.Selection.FirstAsXenObject;
+                    PerformancePage.XenObject = SelectionManager.Selection.FirstAsXenObject;
                 }
                 else if (t == TabPageSearch && !SearchMode)
                 {
-                    if (selectionManager.Selection.First is GroupingTag)
+                    if (SelectionManager.Selection.First is GroupingTag)
                     {
-                        GroupingTag gt = (GroupingTag)selectionManager.Selection.First;
+                        GroupingTag gt = (GroupingTag)SelectionManager.Selection.First;
                         SearchPage.Search = Search.SearchForGroup(gt.Grouping, gt.Parent, gt.Group);
                     }
                     else
                     {
-                        SearchPage.XenObject = selectionManager.Selection.Count > 1 ? null : selectionManager.Selection.FirstAsXenObject;
+                        SearchPage.XenObject = SelectionManager.Selection.Count > 1 ? null : SelectionManager.Selection.FirstAsXenObject;
                     }
                 }
                 else if (t == TabPageHA)
                 {
-                    HAPage.XenObject = selectionManager.Selection.FirstAsXenObject;
+                    HAPage.XenObject = SelectionManager.Selection.FirstAsXenObject;
                 }
                 else if (t == TabPageWLB)
                 {
-                    WlbPage.Pool = selectionManager.Selection.First as Pool;
+                    WlbPage.Pool = SelectionManager.Selection.First as Pool;
                 }
                 else if (t == TabPageSnapshots)
                 {
-                    snapshotPage.VM = selectionManager.Selection.First as VM;
+                    snapshotPage.VM = SelectionManager.Selection.First as VM;
                 }
                 else if (t == TabPagePhysicalStorage)
                 {
-                    PhysicalStoragePage.SetSelectionBroadcaster(selectionManager, commandInterface);
-                    PhysicalStoragePage.Host = selectionManager.Selection.First as Host;
-                    PhysicalStoragePage.Connection = selectionManager.Selection.GetConnectionOfFirstItem();
+                    PhysicalStoragePage.SetSelectionBroadcaster(SelectionManager, commandInterface);
+                    PhysicalStoragePage.Host = SelectionManager.Selection.First as Host;
+                    PhysicalStoragePage.Connection = SelectionManager.Selection.GetConnectionOfFirstItem();
                 }
                 else if (t == TabPageAD)
                 {
-                    AdPage.XenObject = selectionManager.Selection.FirstAsXenObject;
+                    AdPage.XenObject = SelectionManager.Selection.FirstAsXenObject;
                 }
             }
 
@@ -2295,7 +2295,7 @@ namespace XenAdmin
 
             if (t != null)
             {
-                SetLastSelectedPage(selectionManager.Selection.First, t);
+                SetLastSelectedPage(SelectionManager.Selection.First, t);
             }
         }
 
@@ -2448,9 +2448,9 @@ namespace XenAdmin
             if ((TreeSearchBoxMode != XenAdmin.Controls.TreeSearchBox.Mode.Objects
                 && TreeSearchBoxMode != XenAdmin.Controls.TreeSearchBox.Mode.Organization))
             {
-                return selectionManager.Selection.AllItemsAre<Host>() || selectionManager.Selection.AllItemsAre<VM>(vm => !vm.is_a_template);
+                return SelectionManager.Selection.AllItemsAre<Host>() || SelectionManager.Selection.AllItemsAre<VM>(vm => !vm.is_a_template);
             }
-            foreach (SelectedItem item in selectionManager.Selection)
+            foreach (SelectedItem item in SelectionManager.Selection)
             {
                 if (!IsSelectableXenModelObject(item.XenObject) || item.Connection == null || !item.Connection.IsConnected)
                 {
@@ -2592,15 +2592,15 @@ namespace XenAdmin
 
                 if (vm.is_a_template)
                 {
-                    cmd = new NewVMCommand(commandInterface, selectionManager.Selection);
+                    cmd = new NewVMCommand(commandInterface, SelectionManager.Selection);
                 }
                 else if (vm.power_state == vm_power_state.Halted && vm.allowed_operations.Contains(vm_operations.start))
                 {
-                    cmd = new StartVMCommand(commandInterface, selectionManager.Selection);
+                    cmd = new StartVMCommand(commandInterface, SelectionManager.Selection);
                 }
                 else if (vm.power_state == vm_power_state.Suspended && vm.allowed_operations.Contains(vm_operations.resume))
                 {
-                    cmd = new ResumeVMCommand(commandInterface, selectionManager.Selection);
+                    cmd = new ResumeVMCommand(commandInterface, SelectionManager.Selection);
                 }
 
                 if (cmd != null && cmd.CanExecute())
@@ -2974,28 +2974,28 @@ namespace XenAdmin
             // for now, since there are few topics which depend on the selected object we shall just check the special cases
             // when more topic are added we can just return the ModelObjectName
 
-            if (TheTabControl.SelectedTab == TabPageGeneral && selectionManager.Selection.First is VM)
+            if (TheTabControl.SelectedTab == TabPageGeneral && SelectionManager.Selection.First is VM)
             {
                 return "VM";
             }
 
             if (TheTabControl.SelectedTab == TabPagePhysicalStorage || TheTabControl.SelectedTab == TabPageStorage || TheTabControl.SelectedTab == TabPageSR)
             {
-                if (selectionManager.Selection.FirstIsPool)
+                if (SelectionManager.Selection.FirstIsPool)
                     return "Pool";
-                if (selectionManager.Selection.FirstIsHost)
+                if (SelectionManager.Selection.FirstIsHost)
                     return "Server";
-                if (selectionManager.Selection.FirstIsVM)
+                if (SelectionManager.Selection.FirstIsVM)
                     return "VM";
-                if (selectionManager.Selection.FirstIsSR)
+                if (SelectionManager.Selection.FirstIsSR)
                     return "Storage";
             }
 
             if (TheTabControl.SelectedTab == TabPageNetwork)
             {
-                if (selectionManager.Selection.FirstIsHost)
+                if (SelectionManager.Selection.FirstIsHost)
                     return "Server";
-                if (selectionManager.Selection.FirstIsVM)
+                if (SelectionManager.Selection.FirstIsVM)
                     return "VM";
             }
 
@@ -3302,8 +3302,8 @@ namespace XenAdmin
         internal void OpenGlobalImportWizard(string param)
         {
             HelpersGUI.BringFormToFront(this);
-            Host hostAncestor = selectionManager.Selection.Count == 1 ? selectionManager.Selection[0].HostAncestor : null;
-            new ImportWizard(selectionManager.Selection.GetConnectionOfFirstItem(), hostAncestor, param, false).Show();
+            Host hostAncestor = SelectionManager.Selection.Count == 1 ? SelectionManager.Selection[0].HostAncestor : null;
+            new ImportWizard(SelectionManager.Selection.GetConnectionOfFirstItem(), hostAncestor, param, false).Show();
         }
 
         internal void InstallUpdate(string path)
@@ -3379,7 +3379,7 @@ namespace XenAdmin
                 History.ReplaceHistoryItem(new SearchHistoryItem(SearchPage.Search));
             else
                 History.ReplaceHistoryItem(new ModifiedSearchHistoryItem(
-                    selectionManager.Selection.FirstAsXenObject, SearchPage.Search));
+                    SelectionManager.Selection.FirstAsXenObject, SearchPage.Search));
         }
 
         /// <summary>
@@ -3393,14 +3393,14 @@ namespace XenAdmin
                 TitleLabel.Text = HelpersGUI.GetLocalizedSearchName(SearchPage.Search);
                 TitleIcon.Image = Images.GetImage16For(SearchPage.Search);
             }
-            else if (!SearchMode && selectionManager.Selection.ContainsOneItemOfType<IXenObject>())
+            else if (!SearchMode && SelectionManager.Selection.ContainsOneItemOfType<IXenObject>())
             {
-                IXenObject xenObject = selectionManager.Selection[0].XenObject;
+                IXenObject xenObject = SelectionManager.Selection[0].XenObject;
                 TitleLabel.Text = GetTitleLabel(xenObject);
                 TitleIcon.Image = Images.GetImage16For(xenObject);
                 // When in folder view only show the logged in label if it is clear to which connection the object belongs (most likely pools and hosts)
 
-                if (selectionManager.Selection[0].PoolAncestor == null && selectionManager.Selection[0].HostAncestor == null)
+                if (SelectionManager.Selection[0].PoolAncestor == null && SelectionManager.Selection[0].HostAncestor == null)
                     loggedInLabel1.Connection = null;
                 else
                     loggedInLabel1.Connection = xenObject.Connection;
@@ -3510,7 +3510,7 @@ namespace XenAdmin
 
         private void LicenseManagerMenuItem_Click(object sender, EventArgs e)
         {
-            licenseManagerLauncher.LaunchIfRequired(false, ConnectionsManager.XenConnections, selectionManager.Selection);
+            licenseManagerLauncher.LaunchIfRequired(false, ConnectionsManager.XenConnections, SelectionManager.Selection);
         }
 
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
@@ -3539,7 +3539,7 @@ namespace XenAdmin
                     break;
 
                 case Keys.F2:
-                    PropertiesCommand cmd = new PropertiesCommand(commandInterface, selectionManager.Selection);
+                    PropertiesCommand cmd = new PropertiesCommand(commandInterface, SelectionManager.Selection);
                     if (cmd.CanExecute())
                     {
                         cmd.Execute();

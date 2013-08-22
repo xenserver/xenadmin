@@ -79,10 +79,12 @@ namespace XenAdmin.Commands
         /// </summary>
         public override SelectedItemCollection Selection
         {
-            get
-            {
-                return _selection;
-            }
+            get { return _selection; }
+        }
+
+        public override void RefreshSelection()
+        {
+            SetSelection(Selection);
         }
     }
 }

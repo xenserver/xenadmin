@@ -102,6 +102,8 @@ namespace XenAdmin.Commands
         /// </summary>
         public abstract SelectedItemCollection Selection { get;}
 
+        public abstract void RefreshSelection();
+
         /// <summary>
         /// Occurs when the selection changes.
         /// </summary>
