@@ -2560,8 +2560,13 @@ namespace XenAdmin
             commands.Add(new DragDropAddHostToPoolCommand(commandInterface, targetNode, dragData));
             commands.Add(new DragDropMigrateVMCommand(commandInterface, targetNode, dragData));
             commands.Add(new DragDropRemoveHostFromPoolCommand(commandInterface, targetNode, dragData));
-            commands.Add(new DragDropTagCommand(commandInterface, targetNode, dragData));
-            commands.Add(new DragDropIntoFolderCommand(commandInterface, targetNode, dragData));
+
+            if (TreeSearchBoxMode == TreeSearchBox.Mode.Organization)
+            {
+                commands.Add(new DragDropTagCommand(commandInterface, targetNode, dragData));
+                commands.Add(new DragDropIntoFolderCommand(commandInterface, targetNode, dragData));
+            }
+
             return commands;
         }
 
@@ -3316,8 +3321,7 @@ namespace XenAdmin
 
         #region XenSearch
 
-        public TreeSearchBox.Mode TreeSearchBoxMode
-        { get { return TreeSearchBox.currentMode; } }
+        private TreeSearchBox.Mode TreeSearchBoxMode;
 
         // SearchMode doesn't just mean we are looking at the Search tab.
         // It's set when we import a search from a file; or when we double-click
@@ -3434,8 +3438,9 @@ namespace XenAdmin
             RequestRefreshTreeView();
         }
 
-        void TreeSearchBox_SearchChanged(object sender, EventArgs e)
+        void TreeSearchBox_SearchChanged(TreeSearchBox.Mode mode)
         {
+            TreeSearchBoxMode = mode;
             searchTextBox.Reset();
             RequestRefreshTreeView();
             FocusTreeView();

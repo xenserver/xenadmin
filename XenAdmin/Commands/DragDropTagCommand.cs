@@ -61,8 +61,7 @@ namespace XenAdmin.Commands
             List<IXenObject> draggedObjects = GetDraggedItemsAsXenObjects<IXenObject>();
             GroupingTag gt = GetTargetNodeAncestorAsXenObjectOrGroupingTag<GroupingTag>();
             
-            if (Program.MainWindow.TreeSearchBoxMode == TreeSearchBox.Mode.Organization
-                && gt != null && draggedObjects.Count > 0)
+            if (gt != null && draggedObjects.Count > 0)
             {
                 foreach (IXenObject xenObject in draggedObjects)
                 {

@@ -42,7 +42,7 @@ namespace XenAdmin.Controls
     public partial class TreeSearchBox : UserControl
     {
         public enum Mode { Infrastructure, Objects, Organization, SavedSearch }
-        public Mode currentMode;
+        private Mode currentMode;
         private Search currentSearch;
 
         public TreeSearchBox()
@@ -115,10 +115,10 @@ namespace XenAdmin.Controls
             }
 
             if (SearchChanged != null)
-                SearchChanged(this, new EventArgs());
+                SearchChanged(currentMode);
         }
 
-        public event EventHandler SearchChanged;
+        public event Action<Mode> SearchChanged;
 
         public Search Search
         {

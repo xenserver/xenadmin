@@ -53,8 +53,7 @@ namespace XenAdmin.Commands
         {
             Folder targetFolder = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Folder>();
 
-            return Program.MainWindow.TreeSearchBoxMode == TreeSearchBox.Mode.Organization && 
-                targetFolder != null && 
+            return targetFolder != null && 
                 GetDraggedItemsAsXenObjects<IXenObject>().Count > 0 && 
                 DraggedObjectsAreValid();
         }
