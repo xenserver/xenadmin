@@ -54,7 +54,6 @@ using XenAdmin.Dialogs;
 using XenAdmin.Model;
 using XenAdmin.Network;
 using XenAdmin.TabPages;
-using XenAdmin.Wizards;
 using XenAdmin.XenSearch;
 using XenAdmin.Wizards.PatchingWizard;
 using XenAdmin.Plugins;
@@ -544,6 +543,7 @@ namespace XenAdmin
                         if (ee.ConnectionState == StorageLinkConnectionState.Connected)
                         {
                             Program.Invoke(this, RefreshTreeView);
+                            UpdateHeaderAndTabPages();
 
                             TrySelectNewNode(o =>
                             {
@@ -1353,6 +1353,7 @@ namespace XenAdmin
         {
             Program.AssertOffEventThread();
             RefreshTreeView();
+            UpdateHeaderAndTabPages();
         }
 
         /// <summary>
@@ -1370,53 +1371,50 @@ namespace XenAdmin
         /// Refreshes the main tree view. A new node tree is built on the calling thread and then merged into the main tree view
         /// on the main program thread.
         /// </summary>
-        internal void RefreshTreeView()
+        private void RefreshTreeView()
         {
             VirtualTreeNode newRootNode = treeBuilder.CreateNewRootNode(TreeSearchBox.Search.AddFullTextFilter(searchTextBox.Text), TreeSearchBoxMode);
 
-            Program.Invoke(this, () => RefreshTreeView(newRootNode));
+            Program.Invoke(this, () =>
+                {
+                    if (ignoreRefreshTreeView > 0)
+                    {
+                        calledRefreshTreeView = true;
+                        return;
+                    }
+
+                    ignoreRefreshTreeView++;  // Some events can be ignored while rebuilding the tree
+
+                    try
+                    {
+                        treeBuilder.RefreshTreeView(newRootNode, searchTextBox.Text, TreeSearchBoxMode);
+                    }
+                    catch (Exception exn)
+                    {
+                        log.Error(exn, exn);
+#if DEBUG
+                        if (Debugger.IsAttached)
+                            throw;
+#endif
+                    }
+                    finally
+                    {
+                        ignoreRefreshTreeView--;
+                    }
+                });
         }
 
-        /// <summary>
-        /// Refreshes the tree view. The specified node tree is merged with the current node tree.
-        /// </summary>
-        /// <param name="newRootNode">The new node tree for the main treeview..</param>
-        private void RefreshTreeView(VirtualTreeNode newRootNode)
+        private void UpdateHeaderAndTabPages()
         {
-            Program.AssertOnEventThread();
-
-            if (ignoreRefreshTreeView > 0)
-            {
-                calledRefreshTreeView = true;
-                return;
-            }
-
-            ignoreRefreshTreeView++;  // Some events can be ignored while rebuilding the tree
-
-            try
-            {
-                treeBuilder.RefreshTreeView(newRootNode, searchTextBox.Text, TreeSearchBoxMode);
-            }
-            catch (Exception exn)
-            {
-                log.Error(exn, exn);
-#if DEBUG
-                if (System.Diagnostics.Debugger.IsAttached)
-                    throw;
-#endif
-            }
-            finally
-            {
-                ignoreRefreshTreeView--;
-            }
-
+            Program.Invoke(this, () =>
+                {
+                    // This is required to update search results when things change.
+                    if (TheTabControl.SelectedTab == TabPageGeneral)
+                        GeneralPage.BuildList();
+                    else if (TheTabControl.SelectedTab == TabPageSearch)
+                        SearchPage.BuildList();
+                });
             UpdateHeader();
-
-            // This is required to update search results when things change.
-            if (TheTabControl.SelectedTab == TabPageGeneral)
-                GeneralPage.BuildList();
-            else if (TheTabControl.SelectedTab == TabPageSearch)
-                SearchPage.BuildList();
         }
 
         void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2421,7 +2419,6 @@ namespace XenAdmin
             RequestRefreshTreeView();
         }
 
-        private const Single SCROLL_REGION = 20;
         private VirtualTreeNode _highlightedDragTarget;
 
         private void treeView_ItemDrag(object sender, VirtualTreeViewItemDragEventArgs e)
@@ -2487,6 +2484,8 @@ namespace XenAdmin
             // CA-11457: When dragging in resource tree, view doesn't scroll
             // http://www.fmsinc.com/freE/NewTips/NET/NETtip21.asp
 
+            int SCROLL_REGION = 20;
+
             Point pt = treeView.PointToClient(Cursor.Position);
             VirtualTreeNode targetNode = treeView.GetNodeAt(treeView.PointToClient(new Point(e.X, e.Y)));
 
@@ -2500,17 +2499,12 @@ namespace XenAdmin
             }
 
             VirtualTreeNode targetToHighlight = null;
-            string statusBarText = null;
 
             foreach (DragDropCommand cmd in GetDragDropCommands(targetNode, e.Data))
             {
                 if (cmd.CanExecute())
                 {
                     targetToHighlight = cmd.HighlightNode;
-                }
-                if (cmd.StatusBarText != null)
-                {
-                    statusBarText = cmd.StatusBarText;
                 }
             }
 
@@ -2662,6 +2656,7 @@ namespace XenAdmin
                         // if the command fails for some reason, the refresh code will correctly revert the tag back to the original.
                         node.Tag = newTag;
                         RefreshTreeView();
+                        UpdateHeaderAndTabPages();
 
                         // since the selected node doesn't actually change, then a selectionsChanged message doesn't get fired
                         // and the selection doesn't get updated to be the new tag/folder. Do it manually here instead.
@@ -3197,6 +3192,7 @@ namespace XenAdmin
 
                 // update the treeview
                 RefreshTreeView();
+                UpdateHeaderAndTabPages();
 
                 // and try again.
                 return SelectObject(o, treeView.Nodes[0], expand, ref cancelled);
@@ -3777,6 +3773,7 @@ namespace XenAdmin
                             if (null == ConnectionsManager.XenConnections.Find(existing => (existing.Hostname == conn.Hostname && existing.Port == conn.Port)))
                                 ConnectionsManager.XenConnections.Add(conn);
                             RefreshTreeView();
+                            UpdateHeaderAndTabPages();
                         }
 
                         log.InfoFormat("Imported server list from '{0}' successfully.", dialog.FileName);
