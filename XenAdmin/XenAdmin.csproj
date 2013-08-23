@@ -2281,6 +2281,12 @@
     <Compile Include="Controls\LunPerVdiPicker.Designer.cs">
       <DependentUpon>LunPerVdiPicker.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MainWindowControls\NavigationView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MainWindowControls\NavigationView.Designer.cs">
+      <DependentUpon>NavigationView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NetworkComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -4202,6 +4208,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\LunPerVdiPicker.zh-CN.resx">
       <DependentUpon>LunPerVdiPicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MainWindowControls\NavigationView.ja.resx">
+      <DependentUpon>NavigationView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MainWindowControls\NavigationView.resx">
+      <DependentUpon>NavigationView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MainWindowControls\NavigationView.zh-CN.resx">
+      <DependentUpon>NavigationView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\NetworkComboBox.ja.resx">
       <DependentUpon>NetworkComboBox.cs</DependentUpon>

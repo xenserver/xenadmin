@@ -1372,7 +1372,7 @@ namespace XenAdmin
         /// </summary>
         private void RefreshTreeView()
         {
-            VirtualTreeNode newRootNode = treeBuilder.CreateNewRootNode(TreeSearchBox.Search.AddFullTextFilter(searchTextBox.Text), TreeSearchBoxMode);
+            VirtualTreeNode newRootNode = treeBuilder.CreateNewRootNode(TreeSearchBox.Search.AddFullTextFilter(navigationView.SearchText), TreeSearchBoxMode);
 
             Program.Invoke(this, () =>
                 {
@@ -1386,7 +1386,7 @@ namespace XenAdmin
 
                     try
                     {
-                        treeBuilder.RefreshTreeView(newRootNode, searchTextBox.Text, TreeSearchBoxMode);
+                        treeBuilder.RefreshTreeView(newRootNode,navigationView.SearchText, TreeSearchBoxMode);
                     }
                     catch (Exception exn)
                     {
@@ -1563,13 +1563,14 @@ namespace XenAdmin
             MajorChange(() =>
                 {
                     bool treeViewHasFocus = treeView.ContainsFocus;
-                    searchTextBox.SaveState();
+                    navigationView.SaveSearchBoxState();
 
                     ChangeToNewTabs();
 
                     if (!searchMode && treeViewHasFocus)
                         treeView.Focus();
-                    searchTextBox.RestoreState();
+                    
+                    navigationView.RestoreSearchBoxState();
                 });
         }
 
@@ -3165,14 +3166,14 @@ namespace XenAdmin
 
             bool success = SelectObject(o, treeView.Nodes[0], expand, ref cancelled);
 
-            if (!success && !cancelled && searchTextBox.Text.Length > 0)
+            if (!success && !cancelled && navigationView.SearchText.Length > 0)
             {
                 // if the node could not be found and the node *is* selectable then it means that
                 // node isn't visible with the current search. So clear the search and try and
                 // select the object again.
 
                 // clear search.
-                searchTextBox.Reset();
+                navigationView.ResetSeachBox();
 
                 // update the treeview
                 RefreshTreeView();
@@ -3412,18 +3413,18 @@ namespace XenAdmin
             return name;
         }
         
-        private void searchTextBox_TextChanged(object sender, EventArgs e)
-        {
-            RequestRefreshTreeView();
-        }
-
         void TreeSearchBox_SearchChanged(TreeSearchBox.Mode mode)
         {
             TreeSearchBoxMode = mode;
-            searchTextBox.Reset();
+            navigationView.ResetSeachBox();
             RequestRefreshTreeView();
             FocusTreeView();
             SelectObject(null);            
+        }
+
+        private void navigationView_SearchTextChanged()
+        {
+            RequestRefreshTreeView();
         }
 
         #endregion
