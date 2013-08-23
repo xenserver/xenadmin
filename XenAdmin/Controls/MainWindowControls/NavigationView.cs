@@ -50,6 +50,10 @@ namespace XenAdmin.Controls.MainWindowControls
             InitializeComponent();
         }
 
+        public TreeSearchBox.Mode NavigationMode { get; set; }
+
+        #region SearchBox
+
         public string SearchText
         {
             get { return searchTextBox.Text; }
@@ -75,5 +79,7 @@ namespace XenAdmin.Controls.MainWindowControls
             if (SearchTextChanged != null)
                 SearchTextChanged();
         }
+
+        #endregion
     }
 }
