@@ -169,7 +169,7 @@ namespace XenAdmin.XenSearch
             return new GridVerticalArrayItem(
                 new GridItemBase[] {
                                        new GridStringItem(new PropertyWrapper(PropertyNames.label, o), HorizontalAlignment.Left, 
-                                                          VerticalAlignment.Middle, MainWindow.IsSelectableXenModelObject(o), true, QueryPanel.TextBrush, Program.DefaultFont,
+                                                          VerticalAlignment.Middle, o != null, true, QueryPanel.TextBrush, Program.DefaultFont,
                                                           QueryPanel.TextBrush, Program.DefaultFontUnderline,
                                                           // Next argument used to be "if (ObjectInTreeView(o)) ? delegate() {...} : null".
                                                           // I moved the ObjectInTreeView inside the delegate because it's O(#nodes in tree)

@@ -229,7 +229,6 @@ namespace XenAdmin
             GeneralPage.LicenseLauncher = licenseManagerLauncher;
         }
 
-
         private void Default_SettingChanging(object sender, SettingChangingEventArgs e)
         {
 			if (e == null)
@@ -1649,7 +1648,7 @@ namespace XenAdmin
                         m++;
                         i++;
                     }
-                    else if (NewTabsContains(p[m]))
+                    else if (NewTabs.Contains(p[m]))
                     {
                         p.Insert(m, NewTabs[i]);
                         if (new_selected_page == NewTabs[i])
@@ -1716,10 +1715,9 @@ namespace XenAdmin
             else
             {
                 TabPage last_selected_page = GetLastSelectedPage(o);
-                return
-                    last_selected_page != null && NewTabsContains(last_selected_page) ?
-                        last_selected_page :
-                        NewTabs[0];
+                return last_selected_page != null && NewTabs.Contains(last_selected_page)
+                           ? last_selected_page
+                           : NewTabs[0];
             }
         }
 
@@ -1744,11 +1742,6 @@ namespace XenAdmin
                 o == null ? selectedOverviewTab :
                 selectedTabs.ContainsKey(o) ? selectedTabs[o] :
                                                null;
-        }
-
-        private bool NewTabsContains(TabPage tp)
-        {
-            return NewTabsIndexOf(tp) != -1;
         }
 
         private int NewTabsIndexOf(TabPage tp)
@@ -1861,21 +1854,9 @@ namespace XenAdmin
             checkForUpdatesToolStripMenuItem.Available = !Helpers.CommonCriteriaCertificationRelease;
         }
 
-        // Which XenObject's are selectable in the tree, and draggable in the search results?
-        public static bool IsSelectableXenModelObject(IXenObject o)
-        {
-            return o != null;
-        }
-
         public static bool CanSelectNode(VirtualTreeNode node)
         {
-            if (node.Tag == null) // XenCenter node
-                return true;
-            if (node.Tag is IXenObject)
-                return IsSelectableXenModelObject(node.Tag as IXenObject);
-            if (node.Tag is GroupingTag)
-                return true;
-            return false;
+            return node.Tag == null || node.Tag is IXenObject || node.Tag is GroupingTag;
         }
 
         private void TreeView_BeforeSelect(object sender, VirtualTreeViewCancelEventArgs e)
@@ -2452,10 +2433,8 @@ namespace XenAdmin
             }
             foreach (SelectedItem item in SelectionManager.Selection)
             {
-                if (!IsSelectableXenModelObject(item.XenObject) || item.Connection == null || !item.Connection.IsConnected)
-                {
+                if (item.XenObject==null || item.Connection == null || !item.Connection.IsConnected)
                     return false;
-                }
             }
             return true;
         }

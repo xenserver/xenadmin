@@ -705,7 +705,7 @@ namespace XenAdmin.Controls.XenSearch
         public override bool IsDraggableRow(GridRow row)
         {
             IXenObject o = row.Tag as IXenObject;
-            return MainWindow.IsSelectableXenModelObject(o);
+            return o != null;
         }
 
         private void MetricsUpdated(object o, EventArgs e)
