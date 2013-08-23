@@ -67,7 +67,7 @@ namespace XenAdmin.Commands
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
-            MainWindowCommandInterface.SelectObjectInTree(null, false);
+            MainWindowCommandInterface.SelectObjectInTree(null);
 
             foreach (Host host in selection.AsXenObjects<Host>())
             {

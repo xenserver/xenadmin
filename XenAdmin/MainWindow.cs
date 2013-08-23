@@ -1855,17 +1855,12 @@ namespace XenAdmin
             checkForUpdatesToolStripMenuItem.Available = !Helpers.CommonCriteriaCertificationRelease;
         }
 
-        public static bool CanSelectNode(VirtualTreeNode node)
-        {
-            return node.Tag == null || node.Tag is IXenObject || node.Tag is GroupingTag;
-        }
-
         private void TreeView_BeforeSelect(object sender, VirtualTreeViewCancelEventArgs e)
         {
             if (e.Node == null)
                 return;
 
-            if (!CanSelectNode(e.Node))
+            if (!treeView.CanSelectNode(e.Node))
             {
                 e.Cancel = true;
                 return;
@@ -2045,7 +2040,7 @@ namespace XenAdmin
             {
                 // don't change the selection - just show the menu.
             }
-            else if (CanSelectNode(e.Node))
+            else if (treeView.CanSelectNode(e.Node))
             {
                 treeView.SelectedNode = e.Node;
             }
@@ -2608,7 +2603,7 @@ namespace XenAdmin
             }
         }
 
-        internal void treeView_EditSelectedNode()
+        internal void EditSelectedNodeInTreeView()
         {
             SuspendRefreshTreeView();
             SuspendUpdateToolbars();
@@ -3114,27 +3109,7 @@ namespace XenAdmin
                 {
                     Program.Invoke(Program.MainWindow, delegate
                     {
-                        foreach (VirtualTreeNode node in treeView.AllNodes)
-                        {
-                            if (tagMatch(node.Tag))
-                            {
-                                if (selectNode)
-                                {
-                                    treeView.SelectedNode = node;
-                                }
-                                if (expandNode)
-                                {
-                                    node.Expand();
-                                }
-                                if (ensureNodeVisible)
-                                {
-                                    node.EnsureVisible();
-                                }
-                                success = true;
-                                return;
-                            }
-                        }
-                        success = false;
+                        success = treeView.TryToSelectNewNode(tagMatch, selectNode, expandNode, ensureNodeVisible);
                     });
                     Thread.Sleep(500);
                 }
@@ -3158,13 +3133,13 @@ namespace XenAdmin
         /// <param name="expand">A value specifying whether the node should be expanded when it's found. 
         /// If false, the node is left in the state it's found in.</param>
         /// <returns>A value indicating whether selection was successful.</returns>
-        public bool SelectObject(IXenObject o, bool expand)
+        private bool SelectObject(IXenObject o, bool expand)
         {
             bool cancelled = false;
             if (treeView.Nodes.Count == 0)
                 return false;
 
-            bool success = SelectObject(o, treeView.Nodes[0], expand, ref cancelled);
+            bool success = treeView.SelectObject(o, treeView.Nodes[0], expand, ref cancelled);
 
             if (!success && !cancelled && navigationView.SearchText.Length > 0)
             {
@@ -3180,48 +3155,9 @@ namespace XenAdmin
                 UpdateHeaderAndTabPages();
 
                 // and try again.
-                return SelectObject(o, treeView.Nodes[0], expand, ref cancelled);
+                return treeView.SelectObject(o, treeView.Nodes[0], expand, ref cancelled);
             }
             return success;
-        }
-
-        /// <summary>
-        /// Selects the specified object in the tree.
-        /// </summary>
-        /// <param name="o">The object to be selected.</param>
-        /// <param name="node">The node at which to start.</param>
-        /// <param name="expand">Expand the node when it's found.</param>
-        /// <param name="cancelled">if set to <c>true</c> then the node for the specified object was not allowed to be selected.</param>
-        /// <returns>A value indicating whether selection was successful.</returns>
-        private bool SelectObject(IXenObject o, VirtualTreeNode node, bool expand, ref bool cancelled)
-        {
-            IXenObject candidate = node.Tag as IXenObject;
-
-            if (o == null || (candidate != null && candidate.opaque_ref == o.opaque_ref))
-            {
-                if (!CanSelectNode(node))
-                {
-                    cancelled = true;
-                    return false;
-                }
-
-                treeView.SelectedNode = node;
-
-                if (expand)
-                {
-                    node.Expand();
-                }
-
-                return true;
-            }
-
-            foreach (VirtualTreeNode child in node.Nodes)
-            {
-                if (SelectObject(o, child, expand, ref cancelled))
-                    return true;
-            }
-
-            return false;
         }
 
         private void CloseWhenActionsCanceled(object o)

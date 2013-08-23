@@ -237,7 +237,7 @@ namespace XenAdmin.Commands
             MainWindowCommandInterface.Invoke(delegate
             {
                 // Try to select the VM on which the PV tools are to be installed
-                if (MainWindowCommandInterface.SelectObjectInTree(action.VM, false))
+                if (MainWindowCommandInterface.SelectObjectInTree(action.VM))
                 {
                     // Switch to the VM's console tab
                     MainWindowCommandInterface.SwitchToTab(MainWindow.Tab.Console);

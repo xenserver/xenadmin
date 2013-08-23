@@ -56,7 +56,7 @@ namespace XenAdminTests
 
         }
 
-        public bool SelectObjectInTree(IXenObject xenObject, bool expand)
+        public bool SelectObjectInTree(IXenObject xenObject)
         {
             return false;
         }

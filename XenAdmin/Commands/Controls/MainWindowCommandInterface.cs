@@ -49,7 +49,7 @@ namespace XenAdmin
     public interface IMainWindow
     {
         void Invoke(MethodInvoker method);
-        bool SelectObjectInTree(IXenObject xenObject, bool expand);
+        bool SelectObjectInTree(IXenObject xenObject);
         void TrySelectNewObjectInTree(Predicate<object> tagMatch, bool selectNode, bool expandNode, bool ensureNodeVisible);
         void TrySelectNewObjectInTree(IXenConnection c, bool selectNode, bool expandNode, bool ensureNodeVisible);
         void Refresh();
@@ -104,9 +104,9 @@ namespace XenAdmin
                 Program.Invoke(_owner, method);
             }
 
-            public bool SelectObjectInTree(IXenObject xenObject, bool expand)
+            public bool SelectObjectInTree(IXenObject xenObject)
             {
-                return _owner.SelectObject(xenObject, expand);
+                return _owner.SelectObject(xenObject);
             }
 
             public void Refresh()
@@ -189,7 +189,7 @@ namespace XenAdmin
 
             public void PutSelectedNodeIntoEditMode()
             {
-                _owner.treeView_EditSelectedNode();
+                _owner.EditSelectedNodeInTreeView();
             }
 
             public void SwitchToTab(Tab tab)

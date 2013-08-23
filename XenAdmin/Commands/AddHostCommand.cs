@@ -87,7 +87,7 @@ namespace XenAdmin.Commands
             // first select the disconnected host in the tree
             // before the tree is populated, the opaque_ref of the disconnected host is the hostname
             // so use this to select the object.
-            MainWindowCommandInterface.Invoke(() => MainWindowCommandInterface.SelectObjectInTree(new Host { opaque_ref = e.Connection.Hostname }, false));
+            MainWindowCommandInterface.Invoke(() => MainWindowCommandInterface.SelectObjectInTree(new Host { opaque_ref = e.Connection.Hostname }));
             MainWindowCommandInterface.TrySelectNewObjectInTree(e.Connection, true, true, true);
         }
 

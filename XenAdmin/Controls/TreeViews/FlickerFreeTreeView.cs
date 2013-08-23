@@ -33,7 +33,6 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Core;
-using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using XenAdmin.Network;
 using XenAPI;
@@ -215,9 +214,9 @@ namespace XenAdmin.Controls
             SelectedNodes.SetContents(newSelectedNodes);
         }
 
-        private static void TryToSelectNode(List<VirtualTreeNode> nodes, VirtualTreeNode node)
+        private void TryToSelectNode(List<VirtualTreeNode> nodes, VirtualTreeNode node)
         {
-            if (!MainWindow.CanSelectNode(node))
+            if (!CanSelectNode(node))
             {
                 TryToSelectNode(nodes, node.Parent);
             }
@@ -225,6 +224,11 @@ namespace XenAdmin.Controls
             {
                 nodes.Add(node);
             }
+        }
+
+        public bool CanSelectNode(VirtualTreeNode node)
+        {
+            return node.Tag == null || node.Tag is IXenObject || node.Tag is GroupingTag;
         }
 
         /// <summary>
@@ -310,5 +314,64 @@ namespace XenAdmin.Controls
         }
 
         #endregion
+
+        public bool TryToSelectNewNode(Predicate<object> tagMatch, bool selectNode, bool expandNode, bool ensureNodeVisible)
+        {
+            foreach (VirtualTreeNode node in AllNodes)
+            {
+                if (tagMatch(node.Tag))
+                {
+                    if (selectNode)
+                        SelectedNode = node;
+                    
+                    if (expandNode)
+                    node.Expand();
+                    
+                    if (ensureNodeVisible)
+                    node.EnsureVisible();
+                    
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Selects the specified object in the tree.
+        /// </summary>
+        /// <param name="o">The object to be selected.</param>
+        /// <param name="node">The node at which to start.</param>
+        /// <param name="expand">Expand the node when it's found.</param>
+        /// <param name="cancelled">if set to <c>true</c> then the node for the
+        /// specified object was not allowed to be selected.</param>
+        /// <returns>A value indicating whether selection was successful.</returns>
+        public bool SelectObject(IXenObject o, VirtualTreeNode node, bool expand, ref bool cancelled)
+        {
+            IXenObject candidate = node.Tag as IXenObject;
+
+            if (o == null || (candidate != null && candidate.opaque_ref == o.opaque_ref))
+            {
+                if (!CanSelectNode(node))
+                {
+                    cancelled = true;
+                    return false;
+                }
+
+                SelectedNode = node;
+
+                if (expand)
+                    node.Expand();
+
+                return true;
+            }
+
+            foreach (VirtualTreeNode child in node.Nodes)
+            {
+                if (SelectObject(o, child, expand, ref cancelled))
+                    return true;
+            }
+
+            return false;
+        }
     }
 }
