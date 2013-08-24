@@ -135,7 +135,7 @@
     <value>0, 25</value>
   </data>
   <data name="navigationView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 67</value>
+    <value>243, 651</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="navigationView.TabIndex" type="System.Int32, mscorlib">
@@ -145,40 +145,13 @@
     <value>navigationView</value>
   </data>
   <data name="&gt;&gt;navigationView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.Controls.MainWindowControls.NavigationView, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;navigationView.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;navigationView.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="treeView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
-  </data>
-  <data name="treeView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 92</value>
-  </data>
-  <data name="treeView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 0</value>
-  </data>
-  <data name="treeView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 584</value>
-  </data>
-  <data name="treeView.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;treeView.Name" xml:space="preserve">
-    <value>treeView</value>
-  </data>
-  <data name="&gt;&gt;treeView.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.FlickerFreeTreeView, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;treeView.Parent" xml:space="preserve">
-    <value>splitContainer1.Panel1</value>
-  </data>
-  <data name="&gt;&gt;treeView.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="TreeSearchBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -208,7 +181,7 @@
     <value>splitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;TreeSearchBox.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="splitContainer1.Panel1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
@@ -1069,10 +1042,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <metadata name="ToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>0, 24</value>
+    <value>350, 3</value>
   </metadata>
   <data name="ToolStrip.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1537,25 +1510,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ToolStrip.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <metadata name="TreeContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>249, 141</value>
-  </metadata>
-  <data name="TreeContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 4</value>
-  </data>
-  <data name="&gt;&gt;TreeContextMenu.Name" xml:space="preserve">
-    <value>TreeContextMenu</value>
-  </data>
-  <data name="&gt;&gt;TreeContextMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>2</value>
   </data>
   <metadata name="statusToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>997, 141</value>
+    <value>475, 8</value>
   </metadata>
   <metadata name="ToolBarContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>235, 180</value>
+    <value>163, 5</value>
   </metadata>
   <data name="ShowToolbarMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 22</value>
@@ -1588,11 +1549,11 @@
         SfzPlMB1BCpKPODLETroXx/6j6eI5ytTPEcFVJg4wJHJt9l/rf935Y3a/5lT2V5BhYkDrOlc/V7T/V4Z
         HbD+z17K/p4piaMIKsXAwJ7Cr8iayf2MOZ0zECqEApjTOIM0mnSeBpwI/y+2XO4/cwLrM6gUBLBmcD+b
         fnL2f5VqtdvMGZzdUGEwABkqVSZ/uf5qy3+JDYr/WVI4P7IkcVhCpSGAJZXTXKxA4d3Rdyf+h84IewB0
-        7lFQaIMwazbfs/pJ9f/UN+v/564X/seUxH4eqg0VsKXz1FlNsf+59eX2/xP2T3rLmsn+liWF7U3f0Ylf
+        7lFQaIMwazbfs/oJ9f/UN+v/564X/seUxH4eqg0VsKXz1FlNsf+59eX2/xP2T3rLmsn+liWF7U3f0Ylf
         fA4E/eddJ/6fOYPtNdAFFlAtmIA7R+BE2KbQ/6uervi/6emmX+uurX9ZeK70v9Q2pf8ccwV+AW0/BVWK
         AwCdLFAi/Db5YMz/iTf6/nff7PlvftjuP9ce0f/M6RwfwN4iBNhSef0E40V/ux5x/+9w0v2/+CFgwPXy
         fmeO55gGVUIYcObzLBWeJPVf6pjaf47DYv+Z09jfEmU7MmCp4HvKv0r6P3M9xwfmZPZ+qDDxgCWJ04TF
-        nvsvMzDeSbYdCbAAMSOEiQswMAAAuhKhxkr34QYAAAAASUVORK5CYII=
+        nvsvMzDeSbYdCbAAMSOEiQswMAAAtcShxK0IaJgAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="AlertsToolbarButtonSmall.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -2576,13 +2537,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;MenuPanel.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>104</value>
+    <value>32</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>

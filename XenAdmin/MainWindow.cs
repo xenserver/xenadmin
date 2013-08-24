@@ -117,7 +117,6 @@ namespace XenAdmin
         private static readonly System.Windows.Forms.Timer CheckForUpdatesTimer = new System.Windows.Forms.Timer();
 
         private readonly UpdateManager treeViewUpdateManager = new UpdateManager(30 * 1000);
-        private readonly MainWindowTreeBuilder treeBuilder;
         private readonly SelectionManager selectionManager = new SelectionManager();
         private readonly PluginManager pluginManager;
         private readonly ContextMenuBuilder contextMenuBuilder;
@@ -137,10 +136,6 @@ namespace XenAdmin
             InitializeComponent();
             SetMenuItemStartIndexes();
             Icon = Properties.Resources.AppIcon;
-
-            treeView.ImageList = Images.ImageList16;
-            if (treeView.ItemHeight < 18)
-                treeView.ItemHeight = 18;  // otherwise it's too close together on XP and the icons crash into each other
 
             components.Add(SearchPage);
             components.Add(NICPage);
@@ -195,6 +190,7 @@ namespace XenAdmin
             pluginManager.LoadPlugins();
             contextMenuBuilder = new ContextMenuBuilder(pluginManager, commandInterface);
 
+            navigationView.CurrentSearch = TreeSearchBox.Search;
             TreeSearchBox.SearchChanged += TreeSearchBox_SearchChanged;
             SearchPage.SearchChanged += SearchPanel_SearchChanged;
 
@@ -212,14 +208,7 @@ namespace XenAdmin
 
             TitleLeftLine.Visible = Environment.OSVersion.Version.Major != 6 || Application.RenderWithVisualStyles;
 
-            VirtualTreeNode n = new VirtualTreeNode(Messages.XENCENTER);
-            n.NodeFont = Program.DefaultFont;
-            treeView.Nodes.Add(n);
-
             treeViewUpdateManager.Update += treeViewUpdateManager_Update;
-
-            treeBuilder = new MainWindowTreeBuilder(treeView);
-
 
             SelectionManager.BindTo(MainMenuBar.Items, commandInterface);
             SelectionManager.BindTo(ToolStrip.Items, commandInterface);
@@ -328,8 +317,12 @@ namespace XenAdmin
             NewTabs[0] = TabPageHome;
             NewTabCount = 1;
             ChangeToNewTabs();
+        }
 
-            ActiveControl = treeView;
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+            navigationView.FocusTreeView();
         }
 
         protected override void OnHandleCreated(EventArgs e)
@@ -447,7 +440,6 @@ namespace XenAdmin
         private void MainWindow_Shown(object sender, EventArgs e)
         {
             MainMenuBar.Location = new Point(0, 0);
-            treeView.SelectedNode = treeView.Nodes[0];
 
             if (ToolStrip.Renderer is ToolStripProfessionalRenderer)
             {
@@ -541,8 +533,7 @@ namespace XenAdmin
                     {
                         if (ee.ConnectionState == StorageLinkConnectionState.Connected)
                         {
-                            Program.Invoke(this, RefreshTreeView);
-                            UpdateHeaderAndTabPages();
+                            Program.Invoke(this, navigationView.RefreshTreeView);
 
                             TrySelectNewNode(o =>
                             {
@@ -1154,8 +1145,7 @@ namespace XenAdmin
                     return;
 
                 inMajorChange = true;
-                SuspendRefreshTreeView();
-                SuspendUpdateToolbars();
+                navigationView.SuspendRefreshTreeView();
             }
             catch (Exception exn)
             {
@@ -1169,11 +1159,7 @@ namespace XenAdmin
             Program.AssertOffEventThread();
             try
             {
-                Program.Invoke(this, delegate()
-                {
-                    SuspendRefreshTreeView();
-                    SuspendUpdateToolbars();
-                });
+                Program.Invoke(this, () => navigationView.SuspendRefreshTreeView());
             }
             catch (Exception exn)
             {
@@ -1195,15 +1181,7 @@ namespace XenAdmin
             Program.AssertOnEventThread();
             try
             {
-                try
-                {
-                    ResumeUpdateToolbars();
-                }
-                finally
-                {
-                    ResumeRefreshTreeView();
-                }
-
+                navigationView.ResumeRefreshTreeView();
                 inMajorChange = false;
             }
             catch (Exception exn)
@@ -1218,17 +1196,7 @@ namespace XenAdmin
             Program.AssertOffEventThread();
             try
             {
-                Program.Invoke(this, delegate()
-                {
-                    try
-                    {
-                        ResumeUpdateToolbars();
-                    }
-                    finally
-                    {
-                        ResumeRefreshTreeView();
-                    }
-                });
+                Program.Invoke(this, () => navigationView.ResumeRefreshTreeView());
             }
             catch (Exception exn)
             {
@@ -1250,8 +1218,8 @@ namespace XenAdmin
             }
 
             inMajorChange = true;
-            SuspendRefreshTreeView();
-            SuspendUpdateToolbars();
+            navigationView.SuspendRefreshTreeView();
+
             try
             {
                 f();
@@ -1264,95 +1232,18 @@ namespace XenAdmin
             }
             finally
             {
-                try
-                {
-                    ResumeUpdateToolbars();
-                }
-                finally
-                {
-                    ResumeRefreshTreeView();
-                }
-
+                navigationView.ResumeRefreshTreeView();
                 inMajorChange = false;
             }
         }
 
-        private static Pool PoolAncestorOfNode(VirtualTreeNode node)
-        {
-            while (node != null)
-            {
-                var pool = node.Tag as Pool;
-                if (pool != null)
-                    return pool;
-
-                node = node.Parent;
-            }
-            return null;
-        }
-
-        private static Host HostAncestorOfNode(VirtualTreeNode node)
-        {
-            while (node != null)
-            {
-                var host = node.Tag as Host;
-                if (host != null)
-                    return host;
-
-                node = node.Parent;
-            }
-            return null;
-        }
-
-        private int ignoreRefreshTreeView = 0;
-        private bool calledRefreshTreeView = false;
         private int ignoreUpdateToolbars = 0;
         private bool calledUpdateToolbars = false;
-
-        void SuspendRefreshTreeView()
-        {
-            Program.AssertOnEventThread();
-            if (ignoreRefreshTreeView == 0)
-            {
-                calledRefreshTreeView = false;
-            }
-            ignoreRefreshTreeView++;
-        }
-
-        void ResumeRefreshTreeView()
-        {
-            Program.AssertOnEventThread();
-            ignoreRefreshTreeView--;
-            if (ignoreRefreshTreeView == 0 && calledRefreshTreeView)
-            {
-                RequestRefreshTreeView();
-            }
-        }
-
-        void SuspendUpdateToolbars()
-        {
-            Program.AssertOnEventThread();
-            if (ignoreUpdateToolbars == 0)
-            {
-                calledUpdateToolbars = false;
-            }
-            ignoreUpdateToolbars++;
-        }
-
-        void ResumeUpdateToolbars()
-        {
-            Program.AssertOnEventThread();
-            ignoreUpdateToolbars--;
-            if (ignoreUpdateToolbars == 0 && calledUpdateToolbars)
-            {
-                UpdateToolbars();
-            }
-        }
 
         private void treeViewUpdateManager_Update(object sender, EventArgs e)
         {
             Program.AssertOffEventThread();
-            RefreshTreeView();
-            UpdateHeaderAndTabPages();
+            navigationView.RefreshTreeView();
         }
 
         /// <summary>
@@ -1366,43 +1257,6 @@ namespace XenAdmin
             }
         }
 
-        /// <summary>
-        /// Refreshes the main tree view. A new node tree is built on the calling thread and then merged into the main tree view
-        /// on the main program thread.
-        /// </summary>
-        private void RefreshTreeView()
-        {
-            VirtualTreeNode newRootNode = treeBuilder.CreateNewRootNode(TreeSearchBox.Search.AddFullTextFilter(navigationView.SearchText), navigationView.NavigationMode);
-
-            Program.Invoke(this, () =>
-                {
-                    if (ignoreRefreshTreeView > 0)
-                    {
-                        calledRefreshTreeView = true;
-                        return;
-                    }
-
-                    ignoreRefreshTreeView++;  // Some events can be ignored while rebuilding the tree
-
-                    try
-                    {
-                        treeBuilder.RefreshTreeView(newRootNode, navigationView.SearchText, navigationView.NavigationMode);
-                    }
-                    catch (Exception exn)
-                    {
-                        log.Error(exn, exn);
-#if DEBUG
-                        if (Debugger.IsAttached)
-                            throw;
-#endif
-                    }
-                    finally
-                    {
-                        ignoreRefreshTreeView--;
-                    }
-                });
-        }
-
         private void UpdateHeaderAndTabPages()
         {
             Program.Invoke(this, () =>
@@ -1412,8 +1266,9 @@ namespace XenAdmin
                         GeneralPage.BuildList();
                     else if (TheTabControl.SelectedTab == TabPageSearch)
                         SearchPage.BuildList();
+
+                    UpdateHeader();
                 });
-            UpdateHeader();
         }
 
         void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1562,13 +1417,13 @@ namespace XenAdmin
 
             MajorChange(() =>
                 {
-                    bool treeViewHasFocus = treeView.ContainsFocus;
+                    bool treeViewHasFocus = navigationView.TreeViewContainsFocus;
                     navigationView.SaveSearchBoxState();
 
                     ChangeToNewTabs();
 
                     if (!searchMode && treeViewHasFocus)
-                        treeView.Focus();
+                        navigationView.FocusTreeView();
                     
                     navigationView.RestoreSearchBoxState();
                 });
@@ -1855,63 +1710,6 @@ namespace XenAdmin
             checkForUpdatesToolStripMenuItem.Available = !Helpers.CommonCriteriaCertificationRelease;
         }
 
-        private void TreeView_BeforeSelect(object sender, VirtualTreeViewCancelEventArgs e)
-        {
-            if (e.Node == null)
-                return;
-
-            if (!treeView.CanSelectNode(e.Node))
-            {
-                e.Cancel = true;
-                return;
-            }
-
-            SearchMode = false;
-
-            AllowHistorySwitch = false;
-        }
-
-        private void treeView_SelectionsChanged(object sender, EventArgs e)
-        {
-            // this is fired when the selection of the main treeview changes.
-
-            List<SelectedItem> items = new List<SelectedItem>();
-            foreach (VirtualTreeNode node in treeView.SelectedNodes)
-            {
-                GroupingTag groupingTag = node.Tag as GroupingTag;
-                IXenObject xenObject = node.Tag as IXenObject;
-
-                if (xenObject != null)
-                {
-                    items.Add(new SelectedItem(xenObject, xenObject.Connection, HostAncestorOfNode(node), PoolAncestorOfNode(node)));
-                }
-                else
-                {
-                    items.Add(new SelectedItem(groupingTag));
-                }
-            }
-
-            // setting this sets the XenCenter selection. Everything that needs to know about the selection and
-            // selection changes should use this object.
-
-            selectionManager.SetSelection(items);
-
-            UpdateToolbars();
-
-            //
-            // NB do not trigger updates to the panels in this method
-            // instead, put them in TheTabControl_SelectedIndexChanged,
-            // so only the selected tab is updated
-            //
-
-            TheTabControl_SelectedIndexChanged(sender, EventArgs.Empty);
-
-            if (TheTabControl.SelectedTab != null)
-                TheTabControl.SelectedTab.Refresh();
-
-            UpdateHeader();
-        }
-
         private void xenSourceOnTheWebToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Program.OpenURL(InvisibleMessages.HOMEPAGE);
@@ -1992,148 +1790,6 @@ namespace XenAdmin
         private void dialog_HelpRequest(object sender, EventArgs e)
         {
             Help.HelpManager.Launch("LicenseKeyDialog");
-        }
-
-        private void TreeView_NodeMouseClick(object sender, VirtualTreeNodeMouseClickEventArgs e)
-        {
-            try
-            {
-                TreeView_NodeMouseClick_(sender, e);
-
-                if (SearchMode)
-                {
-                    SearchMode = false;
-                    TheTabControl_SelectedIndexChanged(null, null);
-                    UpdateHeader();
-                }
-            }
-            catch (Exception exn)
-            {
-                log.Error(exn, exn);
-                // Swallow this exception -- there's no point throwing it on.
-#if DEBUG
-                throw;
-#endif
-            }
-        }
-
-        private void TreeView_NodeMouseClick_(object sender, VirtualTreeNodeMouseClickEventArgs e)
-        {
-            if (treeView.Nodes.Count < 1)
-                return;
-
-            if (e.Button != MouseButtons.Right)
-                return;
-
-            // Handle r-click menu stuff
-
-            if (treeView.SelectedNodes.Count == 0)
-            {
-                treeView.SelectedNode = e.Node;
-
-                if (treeView.SelectedNode != e.Node)  // if node is unselectable in TreeView_BeforeSelect: CA-26615
-                {
-                    return;
-                }
-            }
-            else if (treeView.SelectedNodes.Contains(e.Node))
-            {
-                // don't change the selection - just show the menu.
-            }
-            else if (treeView.CanSelectNode(e.Node))
-            {
-                treeView.SelectedNode = e.Node;
-            }
-            else
-            {
-                // can't select node - don't show menu.
-                return;
-            }
-
-            MainMenuBar_MenuActivate(MainMenuBar, new EventArgs());
-
-            TreeContextMenu.SuspendLayout();
-            TreeContextMenu.Items.Clear();
-
-            if (e.Node == treeView.Nodes[0] && treeView.SelectedNodes.Count == 1)
-            {
-                // XenCenter (top most)
-
-                TreeContextMenu.Items.Add(new CommandToolStripMenuItem(new AddHostCommand(commandInterface), true));
-                TreeContextMenu.Items.Add(new CommandToolStripMenuItem(new NewPoolCommand(commandInterface, new SelectedItem[0]), true));
-                TreeContextMenu.Items.Add(new CommandToolStripMenuItem(new ConnectAllHostsCommand(commandInterface), true));
-                TreeContextMenu.Items.Add(new CommandToolStripMenuItem(new DisconnectAllHostsCommand(commandInterface), true));
-            }
-            else
-            {
-                TreeContextMenu.Items.AddRange(contextMenuBuilder.Build(SelectionManager.Selection));
-            }
-
-            int insertIndex = TreeContextMenu.Items.Count;
-
-            if (TreeContextMenu.Items.Count > 0)
-            {
-                CommandToolStripMenuItem lastItem = TreeContextMenu.Items[TreeContextMenu.Items.Count - 1] as CommandToolStripMenuItem;
-
-                if (lastItem != null && lastItem.Command is PropertiesCommand)
-                {
-                    insertIndex--;
-                }
-            }
-
-            AddExpandCollapseItems(insertIndex, treeView.SelectedNodes, TreeContextMenu);
-            AddOrgViewItems(insertIndex, treeView.SelectedNodes, TreeContextMenu);
-
-            TreeContextMenu.ResumeLayout();
-
-            if (TreeContextMenu.Items.Count > 0)
-            {
-                TreeContextMenu.Show(treeView, e.Location);
-            }
-        }
-
-        private void AddExpandCollapseItems(int insertIndex, IList<VirtualTreeNode> nodes, ContextMenuStrip contextMenuStrip)
-        {
-            if (nodes.Count == 1 && nodes[0].Nodes.Count == 0)
-            {
-                return;
-            }
-
-            Command cmd = new CollapseChildTreeNodesCommand(commandInterface, nodes);
-            if (cmd.CanExecute())
-            {
-                contextMenuStrip.Items.Insert(insertIndex, new CommandToolStripMenuItem(cmd, true));
-            }
-
-            cmd = new ExpandTreeNodesCommand(commandInterface, nodes);
-            if (cmd.CanExecute())
-            {
-                contextMenuStrip.Items.Insert(insertIndex, new CommandToolStripMenuItem(cmd, true));
-            }
-        }
-
-        private void AddOrgViewItems(int insertIndex, IList<VirtualTreeNode> nodes, ContextMenuStrip contextMenuStrip)
-        {
-            if ((navigationView.NavigationMode != XenAdmin.Controls.TreeSearchBox.Mode.Objects
-                && navigationView.NavigationMode != XenAdmin.Controls.TreeSearchBox.Mode.Organization)
-                || nodes.Count == 0)
-            {
-                return;
-            }
-
-            Command cmd = new RemoveFromFolderCommand(commandInterface, nodes);
-
-            if (cmd.CanExecute())
-            {
-                contextMenuStrip.Items.Insert(insertIndex, new CommandToolStripMenuItem(cmd, true));
-            }
-
-            cmd = new UntagCommand(commandInterface, nodes);
-
-            if (cmd.CanExecute())
-            {
-                contextMenuStrip.Items.Insert(insertIndex, new CommandToolStripMenuItem(cmd, true));
-            }
         }
 
         /// <param name="e">
@@ -2396,283 +2052,10 @@ namespace XenAdmin
             RequestRefreshTreeView();
         }
 
-        private VirtualTreeNode _highlightedDragTarget;
-
-        private void treeView_ItemDrag(object sender, VirtualTreeViewItemDragEventArgs e)
+        private void EditSelectedNodeInTreeView()
         {
-            foreach (VirtualTreeNode node in e.Nodes)
-            {
-                if (node == null || node.TreeView == null)
-                {
-                    return;
-                }
-            }
-
-            // select the node if it isn't already selected
-            if (e.Nodes.Count == 1 && treeView.SelectedNode != e.Nodes[0])
-            {
-                treeView.SelectedNode = e.Nodes[0];
-            }
-
-            if (CanDrag())
-            {
-                DoDragDrop(new List<VirtualTreeNode>(e.Nodes).ToArray(), DragDropEffects.Move);
-            }
-        }
-
-        private bool CanDrag()
-        {
-            if ((navigationView.NavigationMode != XenAdmin.Controls.TreeSearchBox.Mode.Objects
-                && navigationView.NavigationMode != XenAdmin.Controls.TreeSearchBox.Mode.Organization))
-            {
-                return SelectionManager.Selection.AllItemsAre<Host>() || SelectionManager.Selection.AllItemsAre<VM>(vm => !vm.is_a_template);
-            }
-            foreach (SelectedItem item in SelectionManager.Selection)
-            {
-                if (item.XenObject==null || item.Connection == null || !item.Connection.IsConnected)
-                    return false;
-            }
-            return true;
-        }
-
-        private void treeView_DragEnter(object sender, DragEventArgs e)
-        {
-            e.Effect = DragDropEffects.None;
-            VirtualTreeNode targetNode = treeView.GetNodeAt(treeView.PointToClient(new Point(e.X, e.Y)));
-            foreach (DragDropCommand cmd in GetDragDropCommands(targetNode, e.Data))
-            {
-                if (cmd.CanExecute())
-                {
-                    e.Effect = DragDropEffects.Move;
-                    return;
-                }
-            }
-        }
-
-        private void treeView_DragLeave(object sender, EventArgs e)
-        {
-            ClearHighlightedDragTarget();
-        }
-
-        private void treeView_DragOver(object sender, DragEventArgs e)
-        {
-            // CA-11457: When dragging in resource tree, view doesn't scroll
-            // http://www.fmsinc.com/freE/NewTips/NET/NETtip21.asp
-
-            int SCROLL_REGION = 20;
-
-            Point pt = treeView.PointToClient(Cursor.Position);
-            VirtualTreeNode targetNode = treeView.GetNodeAt(treeView.PointToClient(new Point(e.X, e.Y)));
-
-            if ((pt.Y + SCROLL_REGION) > treeView.Height)
-            {
-                Win32.SendMessage(treeView.Handle, Win32.WM_VSCROLL, new IntPtr(1), IntPtr.Zero);
-            }
-            else if (pt.Y < SCROLL_REGION)
-            {
-                Win32.SendMessage(treeView.Handle, Win32.WM_VSCROLL, IntPtr.Zero, IntPtr.Zero);
-            }
-
-            VirtualTreeNode targetToHighlight = null;
-
-            foreach (DragDropCommand cmd in GetDragDropCommands(targetNode, e.Data))
-            {
-                if (cmd.CanExecute())
-                {
-                    targetToHighlight = cmd.HighlightNode;
-                }
-            }
-
-            if (targetToHighlight != null)
-            {
-                if (_highlightedDragTarget != targetToHighlight)
-                {
-                    ClearHighlightedDragTarget();
-                    treeBuilder.HighlightedDragTarget = targetToHighlight.Tag;
-                    _highlightedDragTarget = targetToHighlight;
-                    _highlightedDragTarget.BackColor = SystemColors.Highlight;
-                    _highlightedDragTarget.ForeColor = SystemColors.HighlightText;
-                }
-                e.Effect = DragDropEffects.Move;
-            }
-            else
-            {
-                ClearHighlightedDragTarget();
-                e.Effect = DragDropEffects.None;
-            }
-        }
-
-        private void ClearHighlightedDragTarget()
-        {
-            if (_highlightedDragTarget != null)
-            {
-                _highlightedDragTarget.BackColor = treeView.BackColor;
-                _highlightedDragTarget.ForeColor = treeView.ForeColor;
-                _highlightedDragTarget = null;
-                treeBuilder.HighlightedDragTarget = null;
-            }
-        }
-
-        private void treeView_DragDrop(object sender, DragEventArgs e)
-        {
-            ClearHighlightedDragTarget();
-
-            VirtualTreeNode targetNode = treeView.GetNodeAt(treeView.PointToClient(new Point(e.X, e.Y)));
-
-            foreach (DragDropCommand cmd in GetDragDropCommands(targetNode, e.Data))
-            {
-                if (cmd.CanExecute())
-                {
-                    cmd.Execute();
-                    return;
-                }
-            }
-        }
-
-        private List<DragDropCommand> GetDragDropCommands(VirtualTreeNode targetNode, IDataObject dragData)
-        {
-            List<DragDropCommand> commands = new List<DragDropCommand>();
-            commands.Add(new DragDropAddHostToPoolCommand(commandInterface, targetNode, dragData));
-            commands.Add(new DragDropMigrateVMCommand(commandInterface, targetNode, dragData));
-            commands.Add(new DragDropRemoveHostFromPoolCommand(commandInterface, targetNode, dragData));
-
-            if (navigationView.NavigationMode == TreeSearchBox.Mode.Organization)
-            {
-                commands.Add(new DragDropTagCommand(commandInterface, targetNode, dragData));
-                commands.Add(new DragDropIntoFolderCommand(commandInterface, targetNode, dragData));
-            }
-
-            return commands;
-        }
-
-        private void treeView_NodeMouseDoubleClick(object sender, VirtualTreeNodeMouseClickEventArgs e)
-        {
-            if (e.Button != MouseButtons.Left)
-                return;
-            if (e.Node == null)
-                return;
-
-            IXenConnection conn = e.Node.Tag as IXenConnection;
-            if (conn == null)
-            {
-                var obj = e.Node.Tag as IXenObject;
-                if (obj != null)
-                    conn = obj.Connection;
-            }
-            if (conn != null && !conn.IsConnected)
-            {
-                new ReconnectHostCommand(commandInterface, conn).Execute();
-                return;
-            }
-
-            VM vm = e.Node.Tag as VM;
-            if (vm != null)
-            {
-                Command cmd = null;
-
-                if (vm.is_a_template)
-                {
-                    cmd = new NewVMCommand(commandInterface, SelectionManager.Selection);
-                }
-                else if (vm.power_state == vm_power_state.Halted && vm.allowed_operations.Contains(vm_operations.start))
-                {
-                    cmd = new StartVMCommand(commandInterface, SelectionManager.Selection);
-                }
-                else if (vm.power_state == vm_power_state.Suspended && vm.allowed_operations.Contains(vm_operations.resume))
-                {
-                    cmd = new ResumeVMCommand(commandInterface, SelectionManager.Selection);
-                }
-
-                if (cmd != null && cmd.CanExecute())
-                {
-                    treeView.SelectedNode = e.Node;
-                    cmd.Execute();
-                }
-                return;
-            }
-
-            Host host = e.Node.Tag as Host;
-            if (host != null)
-            {
-                Command cmd = new PowerOnHostCommand(commandInterface, host);
-                if (cmd.CanExecute())
-                {
-                    treeView.SelectedNode = e.Node;
-                    cmd.Execute();
-                }
-            }
-        }
-
-        internal void EditSelectedNodeInTreeView()
-        {
-            SuspendRefreshTreeView();
-            SuspendUpdateToolbars();
-            treeView.LabelEdit = true;
-            treeView.SelectedNode.BeginEdit();
-        }
-
-        private void treeView_AfterLabelEdit(object sender, VirtualNodeLabelEditEventArgs e)
-        {
-            VirtualTreeNode node = e.Node;
-            treeView.LabelEdit = false;
-            Folder folder = e.Node.Tag as Folder;
-            GroupingTag groupingTag = e.Node.Tag as GroupingTag;
-            Command command = null;
-            object newTag = null;
-
-            EventHandler<RenameCompletedEventArgs> completed = delegate(object s, RenameCompletedEventArgs ee)
-            {
-                Program.Invoke(this, delegate
-                {
-                    ResumeUpdateToolbars();
-                    ResumeRefreshTreeView();
-
-                    if (ee.Success)
-                    {
-                        // the new tag is updated on the node here. This ensures that the node stays selected 
-                        // when the treeview is refreshed. If you don't set the tag like this, the treeview refresh code notices 
-                        // that the tags are different and selects the parent node instead of this node.
-
-                        // if the command fails for some reason, the refresh code will correctly revert the tag back to the original.
-                        node.Tag = newTag;
-                        RefreshTreeView();
-                        UpdateHeaderAndTabPages();
-
-                        // since the selected node doesn't actually change, then a selectionsChanged message doesn't get fired
-                        // and the selection doesn't get updated to be the new tag/folder. Do it manually here instead.
-                        treeView_SelectionsChanged(treeView, EventArgs.Empty);
-                    }
-                });
-            };
-
-            if (!string.IsNullOrEmpty(e.Label))
-            {
-                if (folder != null)
-                {
-                    RenameFolderCommand cmd = new RenameFolderCommand(commandInterface, folder, e.Label);
-                    command = cmd;
-                    cmd.Completed += completed;
-                    newTag = new Folder(null, e.Label);
-                }
-                else if (groupingTag != null)
-                {
-                    RenameTagCommand cmd = new RenameTagCommand(commandInterface, groupingTag.Group.ToString(), e.Label);
-                    command = cmd;
-                    cmd.Completed += completed;
-                    newTag = new GroupingTag(groupingTag.Grouping, groupingTag.Parent, e.Label);
-                }
-            }
-
-            if (command != null && command.CanExecute())
-            {
-                command.Execute();
-            }
-            else
-            {
-                ResumeUpdateToolbars();
-                ResumeRefreshTreeView();
-                e.CancelEdit = true;
-            }
+            navigationView.SuspendRefreshTreeView();
+            navigationView.EditSelectedNode();
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -3108,9 +2491,9 @@ namespace XenAdmin
                 for (int i = 0; i < 20 && !success; i++)
                 {
                     Program.Invoke(Program.MainWindow, delegate
-                    {
-                        success = treeView.TryToSelectNewNode(tagMatch, selectNode, expandNode, ensureNodeVisible);
-                    });
+                        {
+                            success = navigationView.TryToSelectNewNode(tagMatch, selectNode, expandNode, ensureNodeVisible);
+                        });
                     Thread.Sleep(500);
                 }
             });
@@ -3123,41 +2506,7 @@ namespace XenAdmin
         /// <returns>A value indicating whether selection was successful.</returns>
         public bool SelectObject(IXenObject o)
         {
-            return SelectObject(o, false);
-        }
-
-        /// <summary>
-        /// Selects the specified object in the treeview.
-        /// </summary>
-        /// <param name="o">The object to be selected.</param>
-        /// <param name="expand">A value specifying whether the node should be expanded when it's found. 
-        /// If false, the node is left in the state it's found in.</param>
-        /// <returns>A value indicating whether selection was successful.</returns>
-        private bool SelectObject(IXenObject o, bool expand)
-        {
-            bool cancelled = false;
-            if (treeView.Nodes.Count == 0)
-                return false;
-
-            bool success = treeView.SelectObject(o, treeView.Nodes[0], expand, ref cancelled);
-
-            if (!success && !cancelled && navigationView.SearchText.Length > 0)
-            {
-                // if the node could not be found and the node *is* selectable then it means that
-                // node isn't visible with the current search. So clear the search and try and
-                // select the object again.
-
-                // clear search.
-                navigationView.ResetSeachBox();
-
-                // update the treeview
-                RefreshTreeView();
-                UpdateHeaderAndTabPages();
-
-                // and try again.
-                return treeView.SelectObject(o, treeView.Nodes[0], expand, ref cancelled);
-            }
-            return success;
+            return navigationView.SelectObject(o, false);
         }
 
         private void CloseWhenActionsCanceled(object o)
@@ -3347,18 +2696,79 @@ namespace XenAdmin
             return name;
         }
         
-        void TreeSearchBox_SearchChanged(TreeSearchBox.Mode mode)
+        private void TreeSearchBox_SearchChanged(TreeSearchBox.Mode mode)
         {
+            navigationView.CurrentSearch = TreeSearchBox.Search;
             navigationView.NavigationMode = mode;
             navigationView.ResetSeachBox();
             RequestRefreshTreeView();
-            FocusTreeView();
+            navigationView.FocusTreeView();
             SelectObject(null);            
         }
 
         private void navigationView_SearchTextChanged()
         {
             RequestRefreshTreeView();
+        }
+
+        private void navigationView_TreeViewSelectionChanged(List<SelectedItem> items)
+        {
+            selectionManager.SetSelection(items);
+
+            UpdateToolbars();
+
+            //
+            // NB do not trigger updates to the panels in this method
+            // instead, put them in TheTabControl_SelectedIndexChanged,
+            // so only the selected tab is updated
+            //
+
+            TheTabControl_SelectedIndexChanged(null, EventArgs.Empty);
+
+            if (TheTabControl.SelectedTab != null)
+                TheTabControl.SelectedTab.Refresh();
+
+            UpdateHeader();
+        }
+
+        private void navigationView_TreeNodeBeforeSelected()
+        {
+            SearchMode = false;
+            AllowHistorySwitch = false;
+        }
+
+        private void navigationView_TreeNodeClicked()
+        {
+            if (SearchMode)
+            {
+                SearchMode = false;
+                TheTabControl_SelectedIndexChanged(null, null);
+                UpdateHeader();
+            }
+        }
+
+        private void navigationView_TreeNodeRightClicked()
+        {
+           MainMenuBar_MenuActivate(MainMenuBar, new EventArgs());
+        }
+
+        private void navigationView_TreeViewRefreshed()
+        {
+            UpdateHeaderAndTabPages();
+        }
+
+        private void navigationView_TreeViewRefreshResumed()
+        {
+            ignoreUpdateToolbars--;
+            if (ignoreUpdateToolbars == 0 && calledUpdateToolbars)
+                UpdateToolbars();
+        }
+
+        private void navigationView_TreeViewRefreshSuspended()
+        {
+            if (ignoreUpdateToolbars == 0)
+                calledUpdateToolbars = false;
+            ignoreUpdateToolbars++;
         }
 
         #endregion
@@ -3439,31 +2849,6 @@ namespace XenAdmin
                 RequestRefreshTreeView();
                 if (TheTabControl.SelectedTab == TabPageSearch)
                     SearchPage.PanelProd();
-            }
-        }
-
-        private void treeView_KeyUp(object sender, KeyEventArgs e)
-        {
-            switch (e.KeyCode)
-            {
-                case Keys.Apps:
-                    if (treeView.SelectedNode != null)
-                    {
-                        treeView.SelectedNode.EnsureVisible();
-                        TreeView_NodeMouseClick(treeView, new VirtualTreeNodeMouseClickEventArgs(treeView.SelectedNode,
-                            MouseButtons.Right, 1,
-                            treeView.SelectedNode.Bounds.X,
-                            treeView.SelectedNode.Bounds.Y + treeView.SelectedNode.Bounds.Height));
-                    }
-                    break;
-
-                case Keys.F2:
-                    PropertiesCommand cmd = new PropertiesCommand(commandInterface, SelectionManager.Selection);
-                    if (cmd.CanExecute())
-                    {
-                        cmd.Execute();
-                    }
-                    break;
             }
         }
 
@@ -3587,11 +2972,6 @@ namespace XenAdmin
             }
         }
 
-        internal void FocusTreeView()
-        {
-            treeView.Focus();
-        }
-
         #region ISynchronizeInvoke Members
 
         // this explicit implementation of ISynchronizeInvoke is used to allow the model to update 
@@ -3657,8 +3037,7 @@ namespace XenAdmin
                             }
                             if (null == ConnectionsManager.XenConnections.Find(existing => (existing.Hostname == conn.Hostname && existing.Port == conn.Port)))
                                 ConnectionsManager.XenConnections.Add(conn);
-                            RefreshTreeView();
-                            UpdateHeaderAndTabPages();
+                            navigationView.RefreshTreeView();
                         }
 
                         log.InfoFormat("Imported server list from '{0}' successfully.", dialog.FileName);

@@ -68,7 +68,7 @@ namespace XenAdmin
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.treeView = new XenAdmin.Controls.FlickerFreeTreeView();
+            this.navigationView = new XenAdmin.Controls.MainWindowControls.NavigationView();
             this.TreeSearchBox = new XenAdmin.Controls.TreeSearchBox();
             this.TitleBackPanel = new XenAdmin.Controls.GradientPanel.GradientPanel();
             this.TitleIcon = new System.Windows.Forms.PictureBox();
@@ -117,7 +117,6 @@ namespace XenAdmin
             this.ForceShutdownToolbarButton = new XenAdmin.Commands.CommandToolStripButton();
             this.ForceRebootToolbarButton = new XenAdmin.Commands.CommandToolStripButton();
             this.AlertsToolbarButton = new System.Windows.Forms.ToolStripButton();
-            this.TreeContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.statusToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.ToolBarContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ShowToolbarMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -280,7 +279,6 @@ namespace XenAdmin
             this.MainMenuBar = new XenAdmin.Controls.MenuStripEx();
             this.securityGroupsToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.MenuPanel = new System.Windows.Forms.Panel();
-            this.navigationView = new XenAdmin.Controls.MainWindowControls.NavigationView();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -307,7 +305,6 @@ namespace XenAdmin
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.navigationView);
-            this.splitContainer1.Panel1.Controls.Add(this.treeView);
             this.splitContainer1.Panel1.Controls.Add(this.TreeSearchBox);
             resources.ApplyResources(this.splitContainer1.Panel1, "splitContainer1.Panel1");
             // 
@@ -318,27 +315,20 @@ namespace XenAdmin
             this.splitContainer1.Panel2.Controls.Add(this.TheTabControl);
             resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
             // 
-            // treeView
+            // navigationView
             // 
-            this.treeView.AllowDrop = true;
-            resources.ApplyResources(this.treeView, "treeView");
-            this.treeView.HideSelection = false;
-            this.treeView.HScrollPos = 0;
-            this.treeView.Name = "treeView";
-            this.treeView.SelectionMode = XenAdmin.Controls.TreeViewSelectionMode.MultiSelect;
-            this.treeView.ShowLines = false;
-            this.treeView.ShowNodeToolTips = true;
-            this.treeView.NodeMouseDoubleClick += new System.EventHandler<XenAdmin.Controls.VirtualTreeNodeMouseClickEventArgs>(this.treeView_NodeMouseDoubleClick);
-            this.treeView.DragLeave += new System.EventHandler(this.treeView_DragLeave);
-            this.treeView.AfterLabelEdit += new System.EventHandler<XenAdmin.Controls.VirtualNodeLabelEditEventArgs>(this.treeView_AfterLabelEdit);
-            this.treeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeView_DragEnter);
-            this.treeView.KeyUp += new System.Windows.Forms.KeyEventHandler(this.treeView_KeyUp);
-            this.treeView.NodeMouseClick += new System.EventHandler<XenAdmin.Controls.VirtualTreeNodeMouseClickEventArgs>(this.TreeView_NodeMouseClick);
-            this.treeView.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeView_DragDrop);
-            this.treeView.BeforeSelect += new System.EventHandler<XenAdmin.Controls.VirtualTreeViewCancelEventArgs>(this.TreeView_BeforeSelect);
-            this.treeView.ItemDrag += new System.EventHandler<XenAdmin.Controls.VirtualTreeViewItemDragEventArgs>(this.treeView_ItemDrag);
-            this.treeView.DragOver += new System.Windows.Forms.DragEventHandler(this.treeView_DragOver);
-            this.treeView.SelectionsChanged += new System.EventHandler(this.treeView_SelectionsChanged);
+            this.navigationView.CurrentSearch = null;
+            resources.ApplyResources(this.navigationView, "navigationView");
+            this.navigationView.Name = "navigationView";
+            this.navigationView.NavigationMode = XenAdmin.Controls.TreeSearchBox.Mode.Infrastructure;
+            this.navigationView.TreeViewRefreshResumed += new System.Action(this.navigationView_TreeViewRefreshResumed);
+            this.navigationView.TreeViewRefreshSuspended += new System.Action(this.navigationView_TreeViewRefreshSuspended);
+            this.navigationView.TreeViewSelectionChanged += new System.Action<System.Collections.Generic.List<XenAdmin.Commands.SelectedItem>>(this.navigationView_TreeViewSelectionChanged);
+            this.navigationView.TreeNodeClicked += new System.Action(this.navigationView_TreeNodeClicked);
+            this.navigationView.TreeNodeRightClicked += new System.Action(this.navigationView_TreeNodeRightClicked);
+            this.navigationView.SearchTextChanged += new System.Action(this.navigationView_SearchTextChanged);
+            this.navigationView.TreeNodeBeforeSelected += new System.Action(this.navigationView_TreeNodeBeforeSelected);
+            this.navigationView.TreeViewRefreshed += new System.Action(this.navigationView_TreeViewRefreshed);
             // 
             // TreeSearchBox
             // 
@@ -702,11 +692,6 @@ namespace XenAdmin
             this.AlertsToolbarButton.Name = "AlertsToolbarButton";
             this.AlertsToolbarButton.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             this.AlertsToolbarButton.Click += new System.EventHandler(this.AlertsToolbarButton_Click);
-            // 
-            // TreeContextMenu
-            // 
-            this.TreeContextMenu.Name = "TreeViewMenu";
-            resources.ApplyResources(this.TreeContextMenu, "TreeContextMenu");
             // 
             // ToolBarContextMenu
             // 
@@ -1816,12 +1801,6 @@ namespace XenAdmin
             resources.ApplyResources(this.MenuPanel, "MenuPanel");
             this.MenuPanel.Name = "MenuPanel";
             // 
-            // navigationView
-            // 
-            resources.ApplyResources(this.navigationView, "navigationView");
-            this.navigationView.Name = "navigationView";
-            this.navigationView.SearchTextChanged += new Action(navigationView_SearchTextChanged);
-            // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -1875,7 +1854,6 @@ namespace XenAdmin
         private CommandToolStripButton SuspendToolbarButton;
         private CommandToolStripButton ForceRebootToolbarButton;
         private CommandToolStripButton ForceShutdownToolbarButton;
-        private System.Windows.Forms.ContextMenuStrip TreeContextMenu;
         private System.Windows.Forms.ToolTip statusToolTip;
         private CommandToolStripButton AddPoolToolbarButton;
         private CommandToolStripButton newStorageToolbarButton;
@@ -1982,7 +1960,6 @@ namespace XenAdmin
         private System.Windows.Forms.Panel MenuPanel;
         private System.Windows.Forms.ToolStripMenuItem AlertsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
-        private XenAdmin.Controls.FlickerFreeTreeView treeView;
         private System.Windows.Forms.ToolStripMenuItem serverViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem templatesToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator24;
@@ -2067,7 +2044,6 @@ namespace XenAdmin
 		private CommandToolStripMenuItem disasterRecoveryToolStripMenuItem;
 		private CommandToolStripMenuItem DrWizardToolStripMenuItem;
 		private CommandToolStripMenuItem drConfigureToolStripMenuItem;
-
         private CommandToolStripMenuItem securityGroupsToolStripMenuItem;
         private ToolStripSeparator toolStripMenuItem1;
         private CommandToolStripMenuItem HostPasswordToolStripMenuItem;
