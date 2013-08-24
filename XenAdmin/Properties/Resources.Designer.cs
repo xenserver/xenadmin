@@ -1964,6 +1964,76 @@ namespace XenAdmin.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap tempInfra16 {
+            get {
+                object obj = ResourceManager.GetObject("tempInfra16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap tempInfra24 {
+            get {
+                object obj = ResourceManager.GetObject("tempInfra24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap tempNotif16 {
+            get {
+                object obj = ResourceManager.GetObject("tempNotif16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap tempNotif24 {
+            get {
+                object obj = ResourceManager.GetObject("tempNotif24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap tempObj16 {
+            get {
+                object obj = ResourceManager.GetObject("tempObj16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap tempObj24 {
+            get {
+                object obj = ResourceManager.GetObject("tempObj24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap tempSearch16 {
+            get {
+                object obj = ResourceManager.GetObject("tempSearch16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap tempSearch24 {
+            get {
+                object obj = ResourceManager.GetObject("tempSearch24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap tempTags16 {
+            get {
+                object obj = ResourceManager.GetObject("tempTags16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap tempTags24 {
+            get {
+                object obj = ResourceManager.GetObject("tempTags24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap tools_notinstalled_16x {
             get {
                 object obj = ResourceManager.GetObject("tools_notinstalled_16x", resourceCulture);

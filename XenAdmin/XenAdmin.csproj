@@ -3962,6 +3962,16 @@
     <Content Include="Images\suse_16x.png" />
     <Content Include="Images\tempAdd.png" />
     <None Include="Images\tempCancel.png" />
+    <None Include="Images\tempNotif16.png" />
+    <None Include="Images\tempNotif24.png" />
+    <None Include="Images\tempObj16.png" />
+    <None Include="Images\tempObj24.png" />
+    <None Include="Images\tempSearch16.png" />
+    <None Include="Images\tempSearch24.png" />
+    <None Include="Images\tempInfra16.png" />
+    <None Include="Images\tempInfra24.png" />
+    <None Include="Images\tempTags24.png" />
+    <None Include="Images\tempTags16.png" />
     <Content Include="Images\tools_notinstalled_16x.png" />
     <Content Include="Images\tools_outofdate_16x.png" />
     <Content Include="Images\tools_uptodate_16x.png" />
