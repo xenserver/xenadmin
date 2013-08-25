@@ -56,6 +56,7 @@ namespace XenAdmin.Controls.MainWindowControls
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly MainWindowTreeBuilder treeBuilder;
+        private readonly UpdateManager treeViewUpdateManager = new UpdateManager(30 * 1000);
 
         private VirtualTreeNode _highlightedDragTarget;
         private int ignoreRefreshTreeView;
@@ -65,9 +66,6 @@ namespace XenAdmin.Controls.MainWindowControls
         #endregion
 
         #region Events
-
-        [Browsable(true)]
-        public event Action SearchTextChanged;
 
         [Browsable(true)]
         public event Action<List<SelectedItem>> TreeViewSelectionChanged;
@@ -107,6 +105,7 @@ namespace XenAdmin.Controls.MainWindowControls
             treeView.SelectedNode = treeView.Nodes[0];
 
             treeBuilder = new MainWindowTreeBuilder(treeView);
+            treeViewUpdateManager.Update += treeViewUpdateManager_Update;
         }
 
         public TreeSearchBox.Mode NavigationMode { get; set; }
@@ -204,13 +203,18 @@ namespace XenAdmin.Controls.MainWindowControls
 
         private void searchTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (SearchTextChanged != null)
-                SearchTextChanged();
+            RequestRefreshTreeView();
         }
 
         #endregion
 
         #region TreeView
+
+        private void treeViewUpdateManager_Update(object sender, EventArgs e)
+        {
+            Program.AssertOffEventThread();
+            RefreshTreeView();
+        }
 
         public void MajorChange(MethodInvoker f)
         {
@@ -295,6 +299,7 @@ namespace XenAdmin.Controls.MainWindowControls
 
         public void EditSelectedNode()
         {
+            SuspendRefreshTreeView();
             treeView.LabelEdit = true;
             treeView.SelectedNode.BeginEdit();
         }
@@ -304,7 +309,7 @@ namespace XenAdmin.Controls.MainWindowControls
             treeView.Focus();
         }
 
-        public void SuspendRefreshTreeView()
+        private void SuspendRefreshTreeView()
         {
             Program.AssertOnEventThread();
 
@@ -316,13 +321,13 @@ namespace XenAdmin.Controls.MainWindowControls
                 TreeViewRefreshSuspended();
         }
 
-        public void ResumeRefreshTreeView()
+        private void ResumeRefreshTreeView()
         {
             Program.AssertOnEventThread();
 
             ignoreRefreshTreeView--;
             if (ignoreRefreshTreeView == 0 && calledRefreshTreeView)
-                Program.MainWindow.RequestRefreshTreeView();
+                RequestRefreshTreeView();
 
             if (TreeViewRefreshResumed != null)
                 TreeViewRefreshResumed();
@@ -332,7 +337,7 @@ namespace XenAdmin.Controls.MainWindowControls
         /// Refreshes the main tree view. A new node tree is built on the calling thread and then merged into the main tree view
         /// on the main program thread.
         /// </summary>
-        public void RefreshTreeView()
+        private void RefreshTreeView()
         {
             var newRootNode = treeBuilder.CreateNewRootNode(CurrentSearch.AddFullTextFilter(SearchText), NavigationMode);
 
@@ -366,6 +371,12 @@ namespace XenAdmin.Controls.MainWindowControls
                 if (TreeViewRefreshed != null)
                 TreeViewRefreshed();
             });
+        }
+
+        public void RequestRefreshTreeView()
+        {
+            if (!Program.Exiting)
+                treeViewUpdateManager.RequestUpdate();
         }
 
 

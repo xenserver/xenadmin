@@ -116,7 +116,6 @@ namespace XenAdmin
         private static readonly Color NoAlertsColor = SystemColors.ControlText;
         private static readonly System.Windows.Forms.Timer CheckForUpdatesTimer = new System.Windows.Forms.Timer();
 
-        private readonly UpdateManager treeViewUpdateManager = new UpdateManager(30 * 1000);
         private readonly SelectionManager selectionManager = new SelectionManager();
         private readonly PluginManager pluginManager;
         private readonly ContextMenuBuilder contextMenuBuilder;
@@ -207,8 +206,6 @@ namespace XenAdmin
             loggedInLabel1.SetTextColor(Program.TitleBarForeColor);
 
             TitleLeftLine.Visible = Environment.OSVersion.Version.Major != 6 || Application.RenderWithVisualStyles;
-
-            treeViewUpdateManager.Update += treeViewUpdateManager_Update;
 
             SelectionManager.BindTo(MainMenuBar.Items, commandInterface);
             SelectionManager.BindTo(ToolStrip.Items, commandInterface);
@@ -533,7 +530,7 @@ namespace XenAdmin
                     {
                         if (ee.ConnectionState == StorageLinkConnectionState.Connected)
                         {
-                            Program.Invoke(this, navigationView.RefreshTreeView);
+                            RequestRefreshTreeView();
 
                             TrySelectNewNode(o =>
                             {
@@ -1129,21 +1126,12 @@ namespace XenAdmin
         private int ignoreUpdateToolbars = 0;
         private bool calledUpdateToolbars = false;
 
-        private void treeViewUpdateManager_Update(object sender, EventArgs e)
-        {
-            Program.AssertOffEventThread();
-            navigationView.RefreshTreeView();
-        }
-
         /// <summary>
         /// Requests a refresh of the main tree view. The refresh will be managed such that we are not overloaded using an UpdateManager.
         /// </summary>
         public void RequestRefreshTreeView()
         {
-            if (!Program.Exiting)
-            {
-                treeViewUpdateManager.RequestUpdate();
-            }
+            navigationView.RequestRefreshTreeView();
         }
 
         private void UpdateHeaderAndTabPages()
@@ -1932,7 +1920,6 @@ namespace XenAdmin
 
         private void EditSelectedNodeInTreeView()
         {
-            navigationView.SuspendRefreshTreeView();
             navigationView.EditSelectedNode();
         }
 
@@ -2580,14 +2567,9 @@ namespace XenAdmin
             navigationView.CurrentSearch = TreeSearchBox.Search;
             navigationView.NavigationMode = mode;
             navigationView.ResetSeachBox();
-            RequestRefreshTreeView();
+            navigationView.RequestRefreshTreeView();
             navigationView.FocusTreeView();
-            SelectObject(null);            
-        }
-
-        private void navigationView_SearchTextChanged()
-        {
-            RequestRefreshTreeView();
+            navigationView.SelectObject(null, false);            
         }
 
         private void navigationView_TreeViewSelectionChanged(List<SelectedItem> items)
@@ -2916,7 +2898,7 @@ namespace XenAdmin
                             }
                             if (null == ConnectionsManager.XenConnections.Find(existing => (existing.Hostname == conn.Hostname && existing.Port == conn.Port)))
                                 ConnectionsManager.XenConnections.Add(conn);
-                            navigationView.RefreshTreeView();
+                            RequestRefreshTreeView();
                         }
 
                         log.InfoFormat("Imported server list from '{0}' successfully.", dialog.FileName);

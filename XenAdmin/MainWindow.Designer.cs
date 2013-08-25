@@ -37,9 +37,6 @@ namespace XenAdmin
             Properties.Settings.Default.SettingChanging -= new System.Configuration.SettingChangingEventHandler(Default_SettingChanging);
             TreeSearchBox.SearchChanged -= TreeSearchBox_SearchChanged;
             SearchPage.SearchChanged -= SearchPanel_SearchChanged;
-            treeViewUpdateManager.Update -= treeViewUpdateManager_Update;
-
-            treeViewUpdateManager.Dispose();
 
             selectionManager.Dispose();
 
@@ -326,7 +323,6 @@ namespace XenAdmin
             this.navigationView.TreeViewSelectionChanged += new System.Action<System.Collections.Generic.List<XenAdmin.Commands.SelectedItem>>(this.navigationView_TreeViewSelectionChanged);
             this.navigationView.TreeNodeClicked += new System.Action(this.navigationView_TreeNodeClicked);
             this.navigationView.TreeNodeRightClicked += new System.Action(this.navigationView_TreeNodeRightClicked);
-            this.navigationView.SearchTextChanged += new System.Action(this.navigationView_SearchTextChanged);
             this.navigationView.TreeNodeBeforeSelected += new System.Action(this.navigationView_TreeNodeBeforeSelected);
             this.navigationView.TreeViewRefreshed += new System.Action(this.navigationView_TreeViewRefreshed);
             // 
