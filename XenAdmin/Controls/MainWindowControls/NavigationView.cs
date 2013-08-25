@@ -60,6 +60,7 @@ namespace XenAdmin.Controls.MainWindowControls
         private VirtualTreeNode _highlightedDragTarget;
         private int ignoreRefreshTreeView;
         private bool calledRefreshTreeView;
+        private bool inMajorChange;
 
         #endregion
 
@@ -112,6 +113,71 @@ namespace XenAdmin.Controls.MainWindowControls
 
         public Search CurrentSearch { get; set; }
 
+        public bool InSearchMode { get; set; }
+
+        #region Connection
+
+        public void XenConnectionCollectionChanged(CollectionChangeEventArgs e)
+        {
+            IXenConnection connection = (IXenConnection)e.Element;
+            if (connection == null)
+                return;
+
+            if (e.Action == CollectionChangeAction.Add)
+            {
+                connection.BeforeMajorChange += Connection_BeforeMajorChange;
+                connection.AfterMajorChange += Connection_AfterMajorChange;
+            }
+            else if (e.Action == CollectionChangeAction.Remove)
+            {
+                connection.BeforeMajorChange -= Connection_BeforeMajorChange;
+                connection.AfterMajorChange -= Connection_AfterMajorChange;
+            }
+        }
+
+        private void Connection_BeforeMajorChange(object sender, ConnectionMajorChangeEventArgs e)
+        {
+            try
+            {
+                Program.Invoke(this, () =>
+                {
+                    if (!e.Background)
+                    {
+                        if (inMajorChange)
+                            return;
+                        inMajorChange = true;
+                    }
+                    SuspendRefreshTreeView();
+                });
+            }
+            catch (Exception exn)
+            {
+                log.Error(exn, exn);
+                // Can do nothing more about this.
+            }
+        }
+
+        private void Connection_AfterMajorChange(object sender, ConnectionMajorChangeEventArgs e)
+        {
+            try
+            {
+                Program.Invoke(this, () =>
+                {
+                    ResumeRefreshTreeView();
+
+                    if (!e.Background)
+                        inMajorChange = false;
+                });
+            }
+            catch (Exception exn)
+            {
+                log.Error(exn, exn);
+                // Can do nothing more about this.
+            }
+        }
+
+        #endregion
+
         #region SearchBox
 
         public string SearchText
@@ -146,9 +212,46 @@ namespace XenAdmin.Controls.MainWindowControls
 
         #region TreeView
 
-        public bool TreeViewContainsFocus
+        public void MajorChange(MethodInvoker f)
         {
-            get { return treeView.ContainsFocus; }
+            Program.AssertOnEventThread();
+
+            if (inMajorChange)
+            {
+                f();
+                return;
+            }
+
+            try
+            {
+                inMajorChange = true;
+                SuspendRefreshTreeView();
+                f();
+            }
+            catch (Exception e)
+            {
+                log.Debug("Exception thrown by target of MajorChange.", e);
+                log.Debug(e, e);
+                throw;
+            }
+            finally
+            {
+                ResumeRefreshTreeView();
+                inMajorChange = false;
+            }
+        }
+
+        public void SaveAndRestoreTreeViewFocus(MethodInvoker f)
+        {
+            bool treeViewHasFocus = treeView.ContainsFocus;
+            SaveSearchBoxState();
+
+            f();
+
+            if (!InSearchMode && treeViewHasFocus)
+                FocusTreeView();
+
+            RestoreSearchBoxState();
         }
 
 

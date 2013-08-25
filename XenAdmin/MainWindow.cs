@@ -657,6 +657,8 @@ namespace XenAdmin
                 if (connection == null)
                     return;
 
+                navigationView.XenConnectionCollectionChanged(e);
+
                 if (e.Action == CollectionChangeAction.Add)
                 {
                     connection.ClearingCache += connection_ClearingCache;
@@ -665,8 +667,6 @@ namespace XenAdmin
                     connection.ConnectionClosed += Connection_ConnectionClosed;
                     connection.ConnectionReconnecting += connection_ConnectionReconnecting;
                     connection.XenObjectsUpdated += Connection_XenObjectsUpdated;
-                    connection.BeforeMajorChange += Connection_BeforeMajorChange;
-                    connection.AfterMajorChange += Connection_AfterMajorChange;
                     connection.Cache.RegisterCollectionChanged<XenAPI.Message>(MessageCollectionChangedWithInvoke);
                     connection.Cache.RegisterCollectionChanged<Pool>(PoolCollectionChangedWithInvoke);
                     connection.Cache.RegisterCollectionChanged<Host>(HostCollectionChangedWithInvoke);
@@ -686,8 +686,6 @@ namespace XenAdmin
                     connection.ConnectionClosed -= Connection_ConnectionClosed;
                     connection.ConnectionReconnecting -= connection_ConnectionReconnecting;
                     connection.XenObjectsUpdated -= Connection_XenObjectsUpdated;
-                    connection.BeforeMajorChange -= Connection_BeforeMajorChange;
-                    connection.AfterMajorChange -= Connection_AfterMajorChange;
                     connection.Cache.DeregisterCollectionChanged<XenAPI.Message>(MessageCollectionChangedWithInvoke);
                     connection.Cache.DeregisterCollectionChanged<Pool>(PoolCollectionChangedWithInvoke);
                     connection.Cache.DeregisterCollectionChanged<Host>(HostCollectionChangedWithInvoke);
@@ -1128,115 +1126,6 @@ namespace XenAdmin
             RequestRefreshTreeView();
         }
 
-        void Connection_BeforeMajorChange(object sender, ConnectionMajorChangeEventArgs e)
-        {
-            if (e.Background)
-                Connection_BeforeBackgroundMajorChange();
-            else
-                Program.Invoke(this, (EventHandler)Connection_BeforeMajorChange_, sender, e);
-        }
-
-        private void Connection_BeforeMajorChange_(object sender, EventArgs eventArgs)
-        {
-            Program.AssertOnEventThread();
-            try
-            {
-                if (inMajorChange)
-                    return;
-
-                inMajorChange = true;
-                navigationView.SuspendRefreshTreeView();
-            }
-            catch (Exception exn)
-            {
-                log.Error(exn, exn);
-                // Can do nothing more about this.
-            }
-        }
-
-        private void Connection_BeforeBackgroundMajorChange()
-        {
-            Program.AssertOffEventThread();
-            try
-            {
-                Program.Invoke(this, () => navigationView.SuspendRefreshTreeView());
-            }
-            catch (Exception exn)
-            {
-                log.Error(exn, exn);
-                // Can do nothing more about this.
-            }
-        }
-
-        void Connection_AfterMajorChange(object sender, ConnectionMajorChangeEventArgs e)
-        {
-            if (e.Background)
-                Connection_AfterBackgroundMajorChange();
-            else
-                Program.Invoke(this, (EventHandler)Connection_AfterMajorChange_, sender, e);
-        }
-
-        private void Connection_AfterMajorChange_(object sender, EventArgs eventArgs)
-        {
-            Program.AssertOnEventThread();
-            try
-            {
-                navigationView.ResumeRefreshTreeView();
-                inMajorChange = false;
-            }
-            catch (Exception exn)
-            {
-                log.Error(exn, exn);
-                // Can do nothing more about this.
-            }
-        }
-
-        private void Connection_AfterBackgroundMajorChange()
-        {
-            Program.AssertOffEventThread();
-            try
-            {
-                Program.Invoke(this, () => navigationView.ResumeRefreshTreeView());
-            }
-            catch (Exception exn)
-            {
-                log.Error(exn, exn);
-                // Can do nothing more about this.
-            }
-        }
-
-        private bool inMajorChange = false;
-
-        public void MajorChange(MethodInvoker f)
-        {
-            Program.AssertOnEventThread();
-
-            if (inMajorChange)
-            {
-                f();
-                return;
-            }
-
-            inMajorChange = true;
-            navigationView.SuspendRefreshTreeView();
-
-            try
-            {
-                f();
-            }
-            catch (Exception e)
-            {
-                log.Debug("Exception thrown by target of MajorChange.", e);
-                log.Debug(e, e);
-                throw;
-            }
-            finally
-            {
-                navigationView.ResumeRefreshTreeView();
-                inMajorChange = false;
-            }
-        }
-
         private int ignoreUpdateToolbars = 0;
         private bool calledUpdateToolbars = false;
 
@@ -1415,18 +1304,7 @@ namespace XenAdmin
             // unavoidable side-effect of giving them focus - this is irritating if trying to navigate
             // the tree using the keyboard.
 
-            MajorChange(() =>
-                {
-                    bool treeViewHasFocus = navigationView.TreeViewContainsFocus;
-                    navigationView.SaveSearchBoxState();
-
-                    ChangeToNewTabs();
-
-                    if (!searchMode && treeViewHasFocus)
-                        navigationView.FocusTreeView();
-                    
-                    navigationView.RestoreSearchBoxState();
-                });
+            navigationView.MajorChange(() => navigationView.SaveAndRestoreTreeViewFocus(ChangeToNewTabs));
         }
 
         private bool SearchTabVisible
@@ -1579,7 +1457,7 @@ namespace XenAdmin
 
         public void SetLastSelectedPage(object o, TabPage p)
         {
-            if (searchMode)
+            if (SearchMode)
                 return;
 
             if (o == null)
@@ -2602,6 +2480,7 @@ namespace XenAdmin
                     return;
 
                 searchMode = value;
+                navigationView.InSearchMode = value;
                 UpdateToolbarsCore();
             }
         }
