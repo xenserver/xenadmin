@@ -54,7 +54,10 @@ namespace XenAdmin
         private NavigationPane.NavigationMode _lastSearchMode;
         private readonly List<VirtualTreeNode.PersistenceInfo> _infrastructureViewExpandedTags = new List<VirtualTreeNode.PersistenceInfo>();
         private readonly List<VirtualTreeNode.PersistenceInfo> _objectViewExpandedTags = new List<VirtualTreeNode.PersistenceInfo>();
-        private readonly List<VirtualTreeNode.PersistenceInfo> _organizationViewExpandedTags = new List<VirtualTreeNode.PersistenceInfo>();
+        private readonly List<VirtualTreeNode.PersistenceInfo> _tagsViewExpanded = new List<VirtualTreeNode.PersistenceInfo>();
+        private readonly List<VirtualTreeNode.PersistenceInfo> _foldersViewExpanded = new List<VirtualTreeNode.PersistenceInfo>();
+        private readonly List<VirtualTreeNode.PersistenceInfo> _fieldsViewExpanded = new List<VirtualTreeNode.PersistenceInfo>();
+        private readonly List<VirtualTreeNode.PersistenceInfo> _vappsViewExpanded = new List<VirtualTreeNode.PersistenceInfo>();
         private bool _rootExpanded;
 
         public MainWindowTreeBuilder(FlickerFreeTreeView treeView)
@@ -67,7 +70,10 @@ namespace XenAdmin
             _treeViewBackColor = treeView.BackColor;
 
             SetDefaultObjectViewExpandedNodes();
-            SetOrganizationViewExpandedNodes();
+            SetTagsViewExpandedNodes();
+            SetFoldersViewExpandedNodes();
+            SetCustomFieldsViewExpandedNodes();
+            SetVappsViewExpandedNodes();
         }
 
         private void SetDefaultObjectViewExpandedNodes()
@@ -79,14 +85,41 @@ namespace XenAdmin
                 _objectViewExpandedTags.Add(n.GetPersistenceInfo());
         }
 
-        private void SetOrganizationViewExpandedNodes()
+        private void SetTagsViewExpandedNodes()
         {
-            VirtualTreeNode dummyRootNode = new VirtualTreeNode(Messages.VIEW_ORGANIZATION);
-            OrganizationalView.PopulateOrganizationView(CreateGroupAcceptor(dummyRootNode), TreeSearch.DefaultTreeSearch);
+            VirtualTreeNode dummyRootNode = new VirtualTreeNode(Messages.TAGS);
+            OrganizationalView.PopulateTagsView(CreateGroupAcceptor(dummyRootNode), TreeSearch.DefaultTreeSearch);
 
             foreach (VirtualTreeNode n in dummyRootNode.Nodes)
-                _organizationViewExpandedTags.Add(n.GetPersistenceInfo());
-         }
+                _tagsViewExpanded.Add(n.GetPersistenceInfo());
+        }
+
+        private void SetFoldersViewExpandedNodes()
+        {
+            VirtualTreeNode dummyRootNode = new VirtualTreeNode(Messages.FOLDERS);
+            OrganizationalView.PopulateFoldersView(CreateGroupAcceptor(dummyRootNode), TreeSearch.DefaultTreeSearch);
+
+            foreach (VirtualTreeNode n in dummyRootNode.Nodes)
+                _foldersViewExpanded.Add(n.GetPersistenceInfo());
+        }
+
+        private void SetCustomFieldsViewExpandedNodes()
+        {
+            VirtualTreeNode dummyRootNode = new VirtualTreeNode(Messages.CUSTOM_FIELDS);
+            OrganizationalView.PopulateCustomFieldsView(CreateGroupAcceptor(dummyRootNode), TreeSearch.DefaultTreeSearch);
+
+            foreach (VirtualTreeNode n in dummyRootNode.Nodes)
+                _fieldsViewExpanded.Add(n.GetPersistenceInfo());
+        }
+
+        private void SetVappsViewExpandedNodes()
+        {
+            VirtualTreeNode dummyRootNode = new VirtualTreeNode(Messages.VM_APPLIANCES);
+            OrganizationalView.PopulateVappsView(CreateGroupAcceptor(dummyRootNode), TreeSearch.DefaultTreeSearch);
+
+            foreach (VirtualTreeNode n in dummyRootNode.Nodes)
+                _vappsViewExpanded.Add(n.GetPersistenceInfo());
+        }
 
         /// <summary>
         /// Gets or sets an object that should be highlighted.
@@ -151,10 +184,25 @@ namespace XenAdmin
                     groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
                     OrganizationalView.PopulateObjectView(groupAcceptor, search);
                     break;
-                case NavigationPane.NavigationMode.Organization:
-                    newRootNode = new VirtualTreeNode(Messages.VIEW_ORGANIZATION);
+                case NavigationPane.NavigationMode.Tags:
+                    newRootNode = new VirtualTreeNode(Messages.TAGS);
                     groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
-                    OrganizationalView.PopulateOrganizationView(groupAcceptor, search);
+                    OrganizationalView.PopulateTagsView(groupAcceptor, search);
+                    break;
+                case NavigationPane.NavigationMode.Folders:
+                    newRootNode = new VirtualTreeNode(Messages.FOLDERS);
+                    groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
+                    OrganizationalView.PopulateFoldersView(groupAcceptor, search);
+                    break;
+                case NavigationPane.NavigationMode.CustomFields:
+                    newRootNode = new VirtualTreeNode(Messages.CUSTOM_FIELDS);
+                    groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
+                    OrganizationalView.PopulateCustomFieldsView(groupAcceptor, search);
+                    break;
+                case NavigationPane.NavigationMode.vApps:
+                    newRootNode = new VirtualTreeNode(Messages.VM_APPLIANCES);
+                    groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
+                    OrganizationalView.PopulateVappsView(groupAcceptor, search);
                     break;
                 default:
                     Util.ThrowIfParameterNull(search, "search");
@@ -184,8 +232,17 @@ namespace XenAdmin
                 case NavigationPane.NavigationMode.Objects:
                     list = _objectViewExpandedTags;
                     break;
-                case NavigationPane.NavigationMode.Organization:
-                    list = _organizationViewExpandedTags;
+                case NavigationPane.NavigationMode.Tags:
+                    list = _tagsViewExpanded;
+                    break;
+                case NavigationPane.NavigationMode.Folders:
+                    list = _foldersViewExpanded;
+                    break;
+                case NavigationPane.NavigationMode.CustomFields:
+                    list = _fieldsViewExpanded;
+                    break;
+                case NavigationPane.NavigationMode.vApps:
+                    list = _vappsViewExpanded;
                     break;
                 default:
                     list = _infrastructureViewExpandedTags;

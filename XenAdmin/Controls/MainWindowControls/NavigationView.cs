@@ -400,11 +400,13 @@ namespace XenAdmin.Controls.MainWindowControls
 
         private bool CanDrag()
         {
-            if ((NavigationMode != NavigationPane.NavigationMode.Objects
-                && NavigationMode != NavigationPane.NavigationMode.Organization))
+            if (NavigationMode == NavigationPane.NavigationMode.Infrastructure
+                || NavigationMode == NavigationPane.NavigationMode.SavedSearch
+                || NavigationMode == NavigationPane.NavigationMode.Notifications)
             {
                 return Program.MainWindow.SelectionManager.Selection.AllItemsAre<Host>() || Program.MainWindow.SelectionManager.Selection.AllItemsAre<VM>(vm => !vm.is_a_template);
             }
+
             foreach (SelectedItem item in Program.MainWindow.SelectionManager.Selection)
             {
                 if (item.XenObject == null || item.Connection == null || !item.Connection.IsConnected)
@@ -420,7 +422,10 @@ namespace XenAdmin.Controls.MainWindowControls
             commands.Add(new DragDropMigrateVMCommand(Program.MainWindow.CommandInterface, targetNode, dragData));
             commands.Add(new DragDropRemoveHostFromPoolCommand(Program.MainWindow.CommandInterface, targetNode, dragData));
 
-            if (NavigationMode == NavigationPane.NavigationMode.Organization)
+            if (NavigationMode == NavigationPane.NavigationMode.Tags
+                || NavigationMode == NavigationPane.NavigationMode.Folders
+                || NavigationMode == NavigationPane.NavigationMode.CustomFields
+                || NavigationMode == NavigationPane.NavigationMode.vApps)
             {
                 commands.Add(new DragDropTagCommand(Program.MainWindow.CommandInterface, targetNode, dragData));
                 commands.Add(new DragDropIntoFolderCommand(Program.MainWindow.CommandInterface, targetNode, dragData));
@@ -520,8 +525,9 @@ namespace XenAdmin.Controls.MainWindowControls
 
         private void AddOrgViewItems(int insertIndex, IList<VirtualTreeNode> nodes)
         {
-            if ((NavigationMode != NavigationPane.NavigationMode.Objects
-                 && NavigationMode != NavigationPane.NavigationMode.Organization)
+            if (NavigationMode == NavigationPane.NavigationMode.Infrastructure
+                || NavigationMode == NavigationPane.NavigationMode.SavedSearch
+                || NavigationMode == NavigationPane.NavigationMode.Notifications
                 || nodes.Count == 0)
             {
                 return;

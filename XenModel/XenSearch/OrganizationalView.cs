@@ -190,13 +190,27 @@ namespace XenAdmin.XenSearch
             adapter.FinishedInThisGroup(true);
         }
 
-        public static void PopulateOrganizationView(IAcceptGroups adapter, Search search)
+        public static void PopulateTagsView(IAcceptGroups adapter, Search search)
+        {
+            AddGroup(adapter, Messages.TAGS, TagsSearch(search));
+            adapter.FinishedInThisGroup(true);
+        }
+
+        public static void PopulateFoldersView(IAcceptGroups adapter, Search search)
         {
             AddGroup(adapter, Folders._root, FoldersSearch(search));
-            AddGroup(adapter, Messages.VM_APPLIANCES, vAppsSearch(search));
-            AddGroup(adapter, Messages.TAGS, TagsSearch(search));
-            AddGroup(adapter, Messages.CUSTOM_FIELDS, FieldsSearch(search));
+            adapter.FinishedInThisGroup(true);
+        }
 
+        public static void PopulateCustomFieldsView(IAcceptGroups adapter, Search search)
+        {
+            AddGroup(adapter, Messages.CUSTOM_FIELDS, FieldsSearch(search));
+            adapter.FinishedInThisGroup(true);
+        }
+
+        public static void PopulateVappsView(IAcceptGroups adapter, Search search)
+        {
+            AddGroup(adapter, Messages.VM_APPLIANCES, vAppsSearch(search));
             adapter.FinishedInThisGroup(true);
         }
 

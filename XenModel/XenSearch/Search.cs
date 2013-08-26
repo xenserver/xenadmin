@@ -621,13 +621,28 @@ namespace XenAdmin.XenSearch
             return new Search(query, null, false, "", null, false);
         }
 
-        public static Search SearchForOrganization()
+        public static Search SearchForTags()
         {
-            var foldersQuery = new NullQuery<Folder>(PropertyNames.folder, false);
-            var vAppsQuery = new BooleanQuery(PropertyNames.in_any_appliance, true);
             var tagsQuery = new ListEmptyQuery<String>(PropertyNames.tags, false);
+            var groupQuery = new GroupQuery(new QueryFilter[] {tagsQuery}, GroupQuery.GroupQueryType.Or);
+
+            Query query = new Query(new QueryScope(ObjectTypes.AllIncFolders), groupQuery);
+            return new Search(query, null, false, "", null, false);
+        }
+
+        public static Search SearchForCustomFields()
+        {
             var fieldsQuery = new BooleanQuery(PropertyNames.has_custom_fields, true);
-            var groupQuery = new GroupQuery(new QueryFilter[] {foldersQuery, vAppsQuery, tagsQuery, fieldsQuery}, GroupQuery.GroupQueryType.Or);
+            var groupQuery = new GroupQuery(new QueryFilter[] { fieldsQuery }, GroupQuery.GroupQueryType.Or);
+
+            Query query = new Query(new QueryScope(ObjectTypes.AllIncFolders), groupQuery);
+            return new Search(query, null, false, "", null, false);
+        }
+
+        public static Search SearchForVapps()
+        {
+            var vAppsQuery = new BooleanQuery(PropertyNames.in_any_appliance, true);
+            var groupQuery = new GroupQuery(new QueryFilter[] { vAppsQuery }, GroupQuery.GroupQueryType.Or);
 
             Query query = new Query(new QueryScope(ObjectTypes.AllIncFolders), groupQuery);
             return new Search(query, null, false, "", null, false);

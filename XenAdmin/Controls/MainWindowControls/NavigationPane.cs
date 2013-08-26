@@ -45,7 +45,11 @@ namespace XenAdmin.Controls.MainWindowControls
 {
     public partial class NavigationPane : UserControl
     {
-        public enum NavigationMode { Infrastructure, Objects, Organization, SavedSearch, Notifications }
+        public enum NavigationMode
+        {
+            Infrastructure, Objects, Tags, Folders, CustomFields, vApps,
+            SavedSearch, Notifications
+        }
 
         private NavigationMode currentMode;
 
@@ -80,14 +84,15 @@ namespace XenAdmin.Controls.MainWindowControls
 
             AddNavigationItemPair(buttonInfraBig, buttonInfraSmall);
             AddNavigationItemPair(buttonObjectsBig, buttonObjectsSmall);
-            AddNavigationItemPair(buttonTagsBig, buttonTagsSmall);
+            AddNavigationItemPair(buttonOrganizationBig, buttonOrganizationSmall);
             AddNavigationItemPair(buttonSearchesBig, buttonSearchesSmall);
             AddNavigationItemPair(buttonNotifyBig, buttonNotifySmall);
 
             buttonInfraBig.SetTag(NavigationMode.Infrastructure);
             buttonObjectsBig.SetTag(NavigationMode.Objects);
-            buttonTagsBig.SetTag(NavigationMode.Organization);
             buttonNotifyBig.SetTag(NavigationMode.Notifications);
+
+            PopulateOrganizationDropDown();
 
             Search.SearchesChanged += PopulateSearchDropDown;
             PopulateSearchDropDown();
@@ -115,8 +120,14 @@ namespace XenAdmin.Controls.MainWindowControls
                         return TreeSearch.DefaultTreeSearch ?? TreeSearch.SearchFor(null);
                     case NavigationMode.Objects:
                         return Search.SearchForAllTypes();
-                    case NavigationMode.Organization:
-                        return Search.SearchForOrganization();
+                    case NavigationMode.Tags:
+                        return Search.SearchForTags();
+                    case NavigationMode.Folders:
+                        return Search.SearchForAllFolders();
+                    case NavigationMode.CustomFields:
+                        return Search.SearchForCustomFields();
+                    case NavigationMode.vApps:
+                        return Search.SearchForVapps();
                     default:
                         return m_search;
                 }
@@ -178,6 +189,17 @@ namespace XenAdmin.Controls.MainWindowControls
             smallButton.PairedItem = bigButton;
             bigButton.NavigationViewChanged += NavigationViewChanged;
             smallButton.NavigationViewChanged += NavigationViewChanged;
+        }
+
+        private void PopulateOrganizationDropDown()
+        {
+            toolStripMenuItemFields.Tag = NavigationMode.CustomFields;
+            toolStripMenuItemFolders.Tag = NavigationMode.Folders;
+            toolStripMenuItemTags.Tag = NavigationMode.Tags;
+            toolStripMenuItemVapps.Tag = NavigationMode.vApps;
+
+            var items = from ToolStripItem item in buttonOrganizationBig.DropDownItems select item;
+            buttonOrganizationBig.SetItemList(items.ToArray());
         }
 
         private void PopulateSearchDropDown()
