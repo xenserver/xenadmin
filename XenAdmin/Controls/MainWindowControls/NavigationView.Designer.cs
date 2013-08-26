@@ -20,6 +20,9 @@
                 if (treeViewUpdateManager != null)
                     treeViewUpdateManager.Dispose();
 
+                if (selectionManager != null)
+                    selectionManager.Dispose();
+
                 if (components != null)
                     components.Dispose();
             }
@@ -52,6 +55,7 @@
             // treeView
             // 
             this.treeView.AllowDrop = true;
+            this.treeView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView.HideSelection = false;
             this.treeView.HScrollPos = 0;
@@ -74,7 +78,6 @@
             this.treeView.ItemDrag += new System.EventHandler<XenAdmin.Controls.VirtualTreeViewItemDragEventArgs>(this.treeView_ItemDrag);
             this.treeView.DragOver += new System.Windows.Forms.DragEventHandler(this.treeView_DragOver);
             this.treeView.SelectionsChanged += new System.EventHandler(this.treeView_SelectionsChanged);
-
             // 
             // TreeContextMenu
             // 

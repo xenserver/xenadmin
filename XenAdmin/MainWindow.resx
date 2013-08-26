@@ -128,60 +128,30 @@
   <data name="splitContainer1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="navigationView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="navigationPane.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="navigationView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 25</value>
-  </data>
-  <data name="navigationView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 651</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="navigationView.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;navigationView.Name" xml:space="preserve">
-    <value>navigationView</value>
-  </data>
-  <data name="&gt;&gt;navigationView.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.MainWindowControls.NavigationView, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;navigationView.Parent" xml:space="preserve">
-    <value>splitContainer1.Panel1</value>
-  </data>
-  <data name="&gt;&gt;navigationView.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="TreeSearchBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="TreeSearchBox.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="TreeSearchBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="TreeSearchBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="navigationPane.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="TreeSearchBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 25</value>
+  <data name="navigationPane.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 676</value>
   </data>
-  <data name="TreeSearchBox.TabIndex" type="System.Int32, mscorlib">
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="navigationPane.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;TreeSearchBox.Name" xml:space="preserve">
-    <value>TreeSearchBox</value>
+  <data name="&gt;&gt;navigationPane.Name" xml:space="preserve">
+    <value>navigationPane</value>
   </data>
-  <data name="&gt;&gt;TreeSearchBox.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.TreeSearchBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;navigationPane.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.MainWindowControls.NavigationPane, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;TreeSearchBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;navigationPane.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name="&gt;&gt;TreeSearchBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;navigationPane.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="splitContainer1.Panel1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
@@ -1045,7 +1015,7 @@
     <value>1</value>
   </data>
   <metadata name="ToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>350, 3</value>
+    <value>0, 24</value>
   </metadata>
   <data name="ToolStrip.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1545,15 +1515,15 @@
   <data name="AlertsToolbarButtonSmall.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHaSURBVDhPYyAZZHLIcmYL7JM0luSCipAA0jmlBfNFHkTv
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHZSURBVDhPYyAZZHLIcmYL7JM0luSCipAA0jmlBfNFHkTv
         SfzPlMB1BCpKPODLETroXx/6j6eI5ytTPEcFVJg4wJHJt9l/rf935Y3a/5lT2V5BhYkDrOlc/V7T/V4Z
         HbD+z17K/p4piaMIKsXAwJ7Cr8iayf2MOZ0zECqEApjTOIM0mnSeBpwI/y+2XO4/cwLrM6gUBLBmcD+b
         fnL2f5VqtdvMGZzdUGEwABkqVSZ/uf5qy3+JDYr/WVI4P7IkcVhCpSGAJZXTXKxA4d3Rdyf+h84IewB0
-        7lFQaIMwazbfs/oJ9f/UN+v/564X/seUxH4eqg0VsKXz1FlNsf+59eX2/xP2T3rLmsn+liWF7U3f0Ylf
-        fA4E/eddJ/6fOYPtNdAFFlAtmIA7R+BE2KbQ/6uervi/6emmX+uurX9ZeK70v9Q2pf8ccwV+AW0/BVWK
-        AwCdLFAi/Db5YMz/iTf6/nff7PlvftjuP9ce0f/M6RwfwN4iBNhSef0E40V/ux5x/+9w0v2/+CFgwPXy
-        fmeO55gGVUIYcObzLBWeJPVf6pjaf47DYv+Z09jfEmU7MmCp4HvKv0r6P3M9xwfmZPZ+qDDxgCWJ04TF
-        nvsvMzDeSbYdCbAAMSOEiQswMAAAtcShxK0IaJgAAAAASUVORK5CYII=
+        7lFQaIMwazbfs/ru+n/qm/X/c9cL/2NKYj8P1YYK2NJ56qym2P/c+nL7/wn7J71lzWR/y5LC9qbv6MQv
+        PgeC/vOuE//PnMH2GugCC6gWTMCdI3AibFPo/1VPV/zf9HTTr3XX1r8sPFf6X2qb0n+OuQK/gLafgirF
+        AYBOFigRfpt8MOb/xBt9/7tv9vw3P2z3n2uP6H/mdI4PYG8RAmypvH6C8aK/XY+4/3c46f5f/BAw4Hp5
+        vzPHc0yDKiEMOPN5lgpPkvovdUztP8dhsf/MaexvibIdGbBU8D3lXyX9n7me4wNzMns/VJh4wJLEacJi
+        z/2XGRjvJNuOBFiAmBHCxAUYGACrAaG/K6anqgAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="AlertsToolbarButtonSmall.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">

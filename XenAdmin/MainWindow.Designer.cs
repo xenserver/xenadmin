@@ -35,10 +35,7 @@ namespace XenAdmin
             Program.StorageLinkConnections.CollectionChanged -= StorageLinkConnections_CollectionChanged;
             Program.StorageLinkConnections.Dispose();
             Properties.Settings.Default.SettingChanging -= new System.Configuration.SettingChangingEventHandler(Default_SettingChanging);
-            TreeSearchBox.SearchChanged -= TreeSearchBox_SearchChanged;
             SearchPage.SearchChanged -= SearchPanel_SearchChanged;
-
-            selectionManager.Dispose();
 
             if (disposing && (components != null))
             {
@@ -65,8 +62,7 @@ namespace XenAdmin
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.navigationView = new XenAdmin.Controls.MainWindowControls.NavigationView();
-            this.TreeSearchBox = new XenAdmin.Controls.TreeSearchBox();
+            this.navigationPane = new XenAdmin.Controls.MainWindowControls.NavigationPane();
             this.TitleBackPanel = new XenAdmin.Controls.GradientPanel.GradientPanel();
             this.TitleIcon = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -301,8 +297,7 @@ namespace XenAdmin
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.navigationView);
-            this.splitContainer1.Panel1.Controls.Add(this.TreeSearchBox);
+            this.splitContainer1.Panel1.Controls.Add(this.navigationPane);
             resources.ApplyResources(this.splitContainer1.Panel1, "splitContainer1.Panel1");
             // 
             // splitContainer1.Panel2
@@ -312,24 +307,17 @@ namespace XenAdmin
             this.splitContainer1.Panel2.Controls.Add(this.TheTabControl);
             resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
             // 
-            // navigationView
+            // navigationPane
             // 
-            this.navigationView.CurrentSearch = null;
-            resources.ApplyResources(this.navigationView, "navigationView");
-            this.navigationView.Name = "navigationView";
-            this.navigationView.NavigationMode = XenAdmin.Controls.TreeSearchBox.Mode.Infrastructure;
-            this.navigationView.TreeViewRefreshResumed += new System.Action(this.navigationView_TreeViewRefreshResumed);
-            this.navigationView.TreeViewRefreshSuspended += new System.Action(this.navigationView_TreeViewRefreshSuspended);
-            this.navigationView.TreeViewSelectionChanged += new System.Action<System.Collections.Generic.List<XenAdmin.Commands.SelectedItem>>(this.navigationView_TreeViewSelectionChanged);
-            this.navigationView.TreeNodeClicked += new System.Action(this.navigationView_TreeNodeClicked);
-            this.navigationView.TreeNodeRightClicked += new System.Action(this.navigationView_TreeNodeRightClicked);
-            this.navigationView.TreeNodeBeforeSelected += new System.Action(this.navigationView_TreeNodeBeforeSelected);
-            this.navigationView.TreeViewRefreshed += new System.Action(this.navigationView_TreeViewRefreshed);
-            // 
-            // TreeSearchBox
-            // 
-            resources.ApplyResources(this.TreeSearchBox, "TreeSearchBox");
-            this.TreeSearchBox.Name = "TreeSearchBox";
+            resources.ApplyResources(this.navigationPane, "navigationPane");
+            this.navigationPane.Name = "navigationPane";
+            this.navigationPane.TreeViewRefreshResumed += new System.Action(this.navigationPane_TreeViewRefreshResumed);
+            this.navigationPane.TreeViewRefreshSuspended += new System.Action(this.navigationPane_TreeViewRefreshSuspended);
+            this.navigationPane.TreeViewSelectionChanged += new System.Action(this.navigationPane_TreeViewSelectionChanged);
+            this.navigationPane.TreeNodeClicked += new System.Action(this.navigationPane_TreeNodeClicked);
+            this.navigationPane.TreeNodeRightClicked += new System.Action(this.navigationPane_TreeNodeRightClicked);
+            this.navigationPane.TreeNodeBeforeSelected += new System.Action(this.navigationPane_TreeNodeBeforeSelected);
+            this.navigationPane.TreeViewRefreshed += new System.Action(this.navigationPane_TreeViewRefreshed);
             // 
             // TitleBackPanel
             // 
@@ -1814,7 +1802,6 @@ namespace XenAdmin
             this.HelpRequested += new System.Windows.Forms.HelpEventHandler(this.MainWindow_HelpRequested);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainWindow_KeyDown);
             this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
             this.TitleBackPanel.ResumeLayout(false);
@@ -1855,7 +1842,6 @@ namespace XenAdmin
         private CommandToolStripButton newStorageToolbarButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
-        private XenAdmin.Controls.TreeSearchBox TreeSearchBox;
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.PictureBox TitleIcon;
         private System.Windows.Forms.ToolStripButton AlertsToolbarButton;
@@ -2053,7 +2039,7 @@ namespace XenAdmin
         private ToolStripSeparator toolStripSeparator31;
         private CommandToolStripMenuItem destroyServerToolStripMenuItem;
         private CommandToolStripMenuItem restartToolstackToolStripMenuItem;
-        private XenAdmin.Controls.MainWindowControls.NavigationView navigationView;
+        private XenAdmin.Controls.MainWindowControls.NavigationPane navigationPane;
     }
 
 }

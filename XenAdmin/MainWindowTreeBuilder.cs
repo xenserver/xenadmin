@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Controls;
+using XenAdmin.Controls.MainWindowControls;
 using XenAdmin.Model;
 using XenAPI;
 using XenAdmin.XenSearch;
@@ -50,7 +51,7 @@ namespace XenAdmin
         private readonly Color _treeViewBackColor;
         private object _highlightedDragTarget;
         private string _lastSearchText = string.Empty;
-        private TreeSearchBox.Mode _lastSearchMode;
+        private NavigationPane.NavigationMode _lastSearchMode;
         private readonly List<VirtualTreeNode.PersistenceInfo> _infrastructureViewExpandedTags = new List<VirtualTreeNode.PersistenceInfo>();
         private readonly List<VirtualTreeNode.PersistenceInfo> _objectViewExpandedTags = new List<VirtualTreeNode.PersistenceInfo>();
         private readonly List<VirtualTreeNode.PersistenceInfo> _organizationViewExpandedTags = new List<VirtualTreeNode.PersistenceInfo>();
@@ -102,7 +103,7 @@ namespace XenAdmin
         /// </summary>
         /// <param name="newRootNode">The new root node.</param>
         /// <param name="searchText">The search text for the currently active search.</param>
-        public void RefreshTreeView(VirtualTreeNode newRootNode, string searchText, TreeSearchBox.Mode searchMode)
+        public void RefreshTreeView(VirtualTreeNode newRootNode, string searchText, NavigationPane.NavigationMode searchMode)
         {
             Util.ThrowIfParameterNull(newRootNode, "newRootNode");
             Util.ThrowIfParameterNull(searchText, "searchText");
@@ -138,19 +139,19 @@ namespace XenAdmin
             }
         }
 
-        public VirtualTreeNode CreateNewRootNode(Search search, TreeSearchBox.Mode mode)
+        public VirtualTreeNode CreateNewRootNode(Search search, NavigationPane.NavigationMode mode)
         {
             VirtualTreeNode newRootNode;
             MainWindowTreeNodeGroupAcceptor groupAcceptor;
 
             switch (mode)
             {
-                case TreeSearchBox.Mode.Objects:
+                case NavigationPane.NavigationMode.Objects:
                     newRootNode = new VirtualTreeNode(Messages.VIEW_OBJECTS);
                     groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
                     OrganizationalView.PopulateObjectView(groupAcceptor, search);
                     break;
-                case TreeSearchBox.Mode.Organization:
+                case NavigationPane.NavigationMode.Organization:
                     newRootNode = new VirtualTreeNode(Messages.VIEW_ORGANIZATION);
                     groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
                     OrganizationalView.PopulateOrganizationView(groupAcceptor, search);
@@ -176,14 +177,14 @@ namespace XenAdmin
             return new MainWindowTreeNodeGroupAcceptor(dragTarget, _treeViewForeColor, _treeViewBackColor, parent);
         }
 
-        private void AssignList(ref List<VirtualTreeNode.PersistenceInfo> list, TreeSearchBox.Mode mode)
+        private void AssignList(ref List<VirtualTreeNode.PersistenceInfo> list, NavigationPane.NavigationMode mode)
         {
             switch (mode)
             {
-                case TreeSearchBox.Mode.Objects:
+                case NavigationPane.NavigationMode.Objects:
                     list = _objectViewExpandedTags;
                     break;
-                case TreeSearchBox.Mode.Organization:
+                case NavigationPane.NavigationMode.Organization:
                     list = _organizationViewExpandedTags;
                     break;
                 default:
@@ -200,7 +201,7 @@ namespace XenAdmin
             // also because we wan't to restore the nodes back to their original state
             //after a search is removed, do the check on _lastSearchText and _lastSearchMode.
 
-            if (searchText.Length == 0 && _lastSearchText.Length == 0 && _lastSearchMode != TreeSearchBox.Mode.SavedSearch)
+            if (searchText.Length == 0 && _lastSearchText.Length == 0 && _lastSearchMode != NavigationPane.NavigationMode.SavedSearch)
             {
                 List < VirtualTreeNode.PersistenceInfo > list = null;
                 AssignList(ref list, _lastSearchMode);
@@ -215,15 +216,15 @@ namespace XenAdmin
             _rootExpanded = _treeView.Nodes[0].IsExpanded || _treeView.Nodes[0].Nodes.Count == 0;
         }
 
-        private void RestoreExpandedNodes(string searchText, TreeSearchBox.Mode searchMode)
+        private void RestoreExpandedNodes(string searchText, NavigationPane.NavigationMode searchMode)
         {
-            if ((searchText != _lastSearchText && searchText.Length > 0) || (searchMode == TreeSearchBox.Mode.SavedSearch && _lastSearchMode != TreeSearchBox.Mode.SavedSearch))
+            if ((searchText != _lastSearchText && searchText.Length > 0) || (searchMode == NavigationPane.NavigationMode.SavedSearch && _lastSearchMode != NavigationPane.NavigationMode.SavedSearch))
             {
                 // expand all nodes if there's a search and the search has changed.
                 _treeView.ExpandAll();
             }
 
-            if (searchText.Length == 0 && searchMode != TreeSearchBox.Mode.SavedSearch)
+            if (searchText.Length == 0 && searchMode != NavigationPane.NavigationMode.SavedSearch)
             {
                 // if there isn't a search persist the user's expanded nodes.
                 List < VirtualTreeNode.PersistenceInfo > list = null;

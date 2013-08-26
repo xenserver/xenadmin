@@ -35,6 +35,7 @@ using System.Text;
 using XenAdmin;
 using System.Windows.Forms;
 using XenAdmin.Controls;
+using XenAdmin.Controls.MainWindowControls;
 using XenAdmin.Controls.XenSearch;
 using XenAdmin.Plugins;
 using XenAdmin.Commands;
@@ -215,14 +216,6 @@ namespace XenAdminTests
             get
             {
                 return new ViewMenuWrapper(Item);
-            }
-        }
-
-        public TreeSearchBox TreeSearchBox
-        {
-            get
-            {
-                return GetField<TreeSearchBox>("TreeSearchBox");
             }
         }
 

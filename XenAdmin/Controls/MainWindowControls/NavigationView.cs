@@ -55,6 +55,7 @@ namespace XenAdmin.Controls.MainWindowControls
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        private readonly SelectionManager selectionManager = new SelectionManager();
         private readonly MainWindowTreeBuilder treeBuilder;
         private readonly UpdateManager treeViewUpdateManager = new UpdateManager(30 * 1000);
 
@@ -68,7 +69,7 @@ namespace XenAdmin.Controls.MainWindowControls
         #region Events
 
         [Browsable(true)]
-        public event Action<List<SelectedItem>> TreeViewSelectionChanged;
+        public event Action TreeViewSelectionChanged;
 
         [Browsable(true)]
         public event Action TreeNodeBeforeSelected;
@@ -90,6 +91,8 @@ namespace XenAdmin.Controls.MainWindowControls
 
         #endregion
 
+        #region Accessors
+
         public NavigationView()
         {
             InitializeComponent();
@@ -108,11 +111,18 @@ namespace XenAdmin.Controls.MainWindowControls
             treeViewUpdateManager.Update += treeViewUpdateManager_Update;
         }
 
-        public TreeSearchBox.Mode NavigationMode { get; set; }
+        public NavigationPane.NavigationMode NavigationMode { get; set; }
 
         public Search CurrentSearch { get; set; }
 
         public bool InSearchMode { get; set; }
+
+        internal SelectionBroadcaster SelectionManager
+        {
+            get { return selectionManager; }
+        }
+
+        #endregion
 
         #region Connection
 
@@ -179,27 +189,10 @@ namespace XenAdmin.Controls.MainWindowControls
 
         #region SearchBox
 
-        public string SearchText
-        {
-            get { return searchTextBox.Text; }
-        }
-
-
-        public void SaveSearchBoxState()
-        {
-            searchTextBox.SaveState();
-        }
-
-        public void RestoreSearchBoxState()
-        {
-            searchTextBox.RestoreState();
-        }
-
         public void ResetSeachBox()
         {
             searchTextBox.Reset();
         }
-
 
         private void searchTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -215,6 +208,7 @@ namespace XenAdmin.Controls.MainWindowControls
             Program.AssertOffEventThread();
             RefreshTreeView();
         }
+
 
         public void MajorChange(MethodInvoker f)
         {
@@ -248,16 +242,15 @@ namespace XenAdmin.Controls.MainWindowControls
         public void SaveAndRestoreTreeViewFocus(MethodInvoker f)
         {
             bool treeViewHasFocus = treeView.ContainsFocus;
-            SaveSearchBoxState();
+            searchTextBox.SaveState();
 
             f();
 
             if (!InSearchMode && treeViewHasFocus)
                 FocusTreeView();
 
-            RestoreSearchBoxState();
+            searchTextBox.RestoreState();
         }
-
 
         /// <summary>
         /// Selects the specified object in the treeview.
@@ -274,7 +267,7 @@ namespace XenAdmin.Controls.MainWindowControls
 
             bool success = treeView.SelectObject(o, treeView.Nodes[0], expand, ref cancelled);
 
-            if (!success && !cancelled && SearchText.Length > 0)
+            if (!success && !cancelled && searchTextBox.Text.Length > 0)
             {
                 // if the node could not be found and the node *is* selectable then it means that
                 // node isn't visible with the current search. So clear the search and try and
@@ -309,6 +302,12 @@ namespace XenAdmin.Controls.MainWindowControls
             treeView.Focus();
         }
 
+        public void RequestRefreshTreeView()
+        {
+            if (!Program.Exiting)
+                treeViewUpdateManager.RequestUpdate();
+        }
+
         private void SuspendRefreshTreeView()
         {
             Program.AssertOnEventThread();
@@ -339,7 +338,7 @@ namespace XenAdmin.Controls.MainWindowControls
         /// </summary>
         private void RefreshTreeView()
         {
-            var newRootNode = treeBuilder.CreateNewRootNode(CurrentSearch.AddFullTextFilter(SearchText), NavigationMode);
+            var newRootNode = treeBuilder.CreateNewRootNode(CurrentSearch.AddFullTextFilter(searchTextBox.Text), NavigationMode);
 
             Program.Invoke(this, () =>
             {
@@ -353,7 +352,7 @@ namespace XenAdmin.Controls.MainWindowControls
 
                 try
                 {
-                    treeBuilder.RefreshTreeView(newRootNode, SearchText, NavigationMode);
+                    treeBuilder.RefreshTreeView(newRootNode, searchTextBox.Text, NavigationMode);
                 }
                 catch (Exception exn)
                 {
@@ -372,13 +371,6 @@ namespace XenAdmin.Controls.MainWindowControls
                 TreeViewRefreshed();
             });
         }
-
-        public void RequestRefreshTreeView()
-        {
-            if (!Program.Exiting)
-                treeViewUpdateManager.RequestUpdate();
-        }
-
 
         private static Pool PoolAncestorOfNode(VirtualTreeNode node)
         {
@@ -408,8 +400,8 @@ namespace XenAdmin.Controls.MainWindowControls
 
         private bool CanDrag()
         {
-            if ((NavigationMode != XenAdmin.Controls.TreeSearchBox.Mode.Objects
-                && NavigationMode != XenAdmin.Controls.TreeSearchBox.Mode.Organization))
+            if ((NavigationMode != NavigationPane.NavigationMode.Objects
+                && NavigationMode != NavigationPane.NavigationMode.Organization))
             {
                 return Program.MainWindow.SelectionManager.Selection.AllItemsAre<Host>() || Program.MainWindow.SelectionManager.Selection.AllItemsAre<VM>(vm => !vm.is_a_template);
             }
@@ -428,7 +420,7 @@ namespace XenAdmin.Controls.MainWindowControls
             commands.Add(new DragDropMigrateVMCommand(Program.MainWindow.CommandInterface, targetNode, dragData));
             commands.Add(new DragDropRemoveHostFromPoolCommand(Program.MainWindow.CommandInterface, targetNode, dragData));
 
-            if (NavigationMode == TreeSearchBox.Mode.Organization)
+            if (NavigationMode == NavigationPane.NavigationMode.Organization)
             {
                 commands.Add(new DragDropTagCommand(Program.MainWindow.CommandInterface, targetNode, dragData));
                 commands.Add(new DragDropIntoFolderCommand(Program.MainWindow.CommandInterface, targetNode, dragData));
@@ -528,8 +520,8 @@ namespace XenAdmin.Controls.MainWindowControls
 
         private void AddOrgViewItems(int insertIndex, IList<VirtualTreeNode> nodes)
         {
-            if ((NavigationMode != XenAdmin.Controls.TreeSearchBox.Mode.Objects
-                 && NavigationMode != XenAdmin.Controls.TreeSearchBox.Mode.Organization)
+            if ((NavigationMode != NavigationPane.NavigationMode.Objects
+                 && NavigationMode != NavigationPane.NavigationMode.Organization)
                 || nodes.Count == 0)
             {
                 return;
@@ -847,8 +839,10 @@ namespace XenAdmin.Controls.MainWindowControls
                 }
             }
 
+            selectionManager.SetSelection(items);
+
             if (TreeViewSelectionChanged != null)
-                TreeViewSelectionChanged(items);
+                TreeViewSelectionChanged();
         }
 
         #endregion

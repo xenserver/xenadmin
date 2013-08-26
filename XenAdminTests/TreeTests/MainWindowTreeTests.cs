@@ -35,6 +35,8 @@ using System.Text;
 using System.Threading;
 using NUnit.Framework;
 using XenAdmin.Controls;
+using XenAdmin.Controls.MainWindowControls;
+
 using XenAPI;
 using System.Windows.Forms;
 using XenAdmin.Core;
@@ -272,7 +274,7 @@ namespace XenAdminTests.TreeTests
             MW(delegate
             {
                 MainWindowTreeBuilder builder = new MainWindowTreeBuilder(MainWindowWrapper.TreeView);
-                VirtualTreeNode newRoot = builder.CreateNewRootNode(TreeSearch.DefaultTreeSearch, TreeSearchBox.Mode.Objects);
+                VirtualTreeNode newRoot = builder.CreateNewRootNode(TreeSearch.DefaultTreeSearch, NavigationPane.NavigationMode.Objects);
                 MainWindowWrapper.TreeView.UpdateRootNodes(new [] { newRoot });  // update once to set all the node names properly
                 MainWindowWrapper.TreeView.EndUpdate();
 
@@ -285,7 +287,7 @@ namespace XenAdminTests.TreeTests
                 Assert.AreEqual(updateCount, updateCount2, "BeginUpdate shouldn't have been called.");
 
                 // this time there is a different node, so an update should occur
-                newRoot = builder.CreateNewRootNode(TreeSearch.DefaultTreeSearch, TreeSearchBox.Mode.Objects);
+                newRoot = builder.CreateNewRootNode(TreeSearch.DefaultTreeSearch, NavigationPane.NavigationMode.Objects);
                 newRoot.Nodes[0].Text = "bla";
 
                 MainWindowWrapper.TreeView.UpdateRootNodes(new[] { newRoot });

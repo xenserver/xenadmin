@@ -180,12 +180,6 @@
     <Compile Include="Controls\Tags\TagsEditor.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\TreeSearchBox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\TreeSearchBox.Designer.cs">
-      <DependentUpon>TreeSearchBox.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\UpsellPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1392,10 +1386,6 @@
       <DependentUpon>SnapshotTreeView.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TreeSearchBox.resx">
-      <DependentUpon>TreeSearchBox.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\UpsellPage.resx">
       <DependentUpon>UpsellPage.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -2216,6 +2206,9 @@
     <Compile Include="Controls\ChevronToggleButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Controls\Common\SmoothSplitContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\ConsoleTab\ConnectionBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -2281,6 +2274,23 @@
     <Compile Include="Controls\LunPerVdiPicker.Designer.cs">
       <DependentUpon>LunPerVdiPicker.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MainWindowControls\INavigationItem.cs" />
+    <Compile Include="Controls\MainWindowControls\NavigationButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MainWindowControls\NavigationDropDownButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MainWindowControls\NavigationPane.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MainWindowControls\NavigationPane.Designer.cs">
+      <DependentUpon>NavigationPane.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainWindowControls\NavigationToolStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MainWindowControls\NavigationToolStripRenderer.cs" />
     <Compile Include="Controls\MainWindowControls\NavigationView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4219,6 +4229,15 @@
     <EmbeddedResource Include="Controls\LunPerVdiPicker.zh-CN.resx">
       <DependentUpon>LunPerVdiPicker.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MainWindowControls\NavigationPane.ja.resx">
+      <DependentUpon>NavigationPane.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MainWindowControls\NavigationPane.resx">
+      <DependentUpon>NavigationPane.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MainWindowControls\NavigationPane.zh-CN.resx">
+      <DependentUpon>NavigationPane.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\MainWindowControls\NavigationView.ja.resx">
       <DependentUpon>NavigationView.cs</DependentUpon>
     </EmbeddedResource>
@@ -4438,12 +4457,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\TransparentTrackBar.zh-CN.resx">
       <DependentUpon>TransparentTrackBar.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TreeSearchBox.ja.resx">
-      <DependentUpon>TreeSearchBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TreeSearchBox.zh-CN.resx">
-      <DependentUpon>TreeSearchBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\TreeViews\FlickerFreeTreeView.ja.resx">
       <DependentUpon>FlickerFreeTreeView.cs</DependentUpon>

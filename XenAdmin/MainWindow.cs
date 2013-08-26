@@ -116,7 +116,6 @@ namespace XenAdmin
         private static readonly Color NoAlertsColor = SystemColors.ControlText;
         private static readonly System.Windows.Forms.Timer CheckForUpdatesTimer = new System.Windows.Forms.Timer();
 
-        private readonly SelectionManager selectionManager = new SelectionManager();
         private readonly PluginManager pluginManager;
         private readonly ContextMenuBuilder contextMenuBuilder;
         private readonly MainWindowCommandInterface commandInterface;
@@ -189,8 +188,6 @@ namespace XenAdmin
             pluginManager.LoadPlugins();
             contextMenuBuilder = new ContextMenuBuilder(pluginManager, commandInterface);
 
-            navigationView.CurrentSearch = TreeSearchBox.Search;
-            TreeSearchBox.SearchChanged += TreeSearchBox_SearchChanged;
             SearchPage.SearchChanged += SearchPanel_SearchChanged;
 
             Alert.XenCenterAlerts.CollectionChanged += XenCenterAlerts_CollectionChanged;
@@ -254,7 +251,7 @@ namespace XenAdmin
         {
             get
             {
-                return selectionManager;
+                return navigationPane.SelectionManager;
             }
         }
 
@@ -319,7 +316,7 @@ namespace XenAdmin
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
-            navigationView.FocusTreeView();
+            navigationPane.FocusTreeView();
         }
 
         protected override void OnHandleCreated(EventArgs e)
@@ -654,7 +651,7 @@ namespace XenAdmin
                 if (connection == null)
                     return;
 
-                navigationView.XenConnectionCollectionChanged(e);
+                navigationPane.XenConnectionCollectionChanged(e);
 
                 if (e.Action == CollectionChangeAction.Add)
                 {
@@ -1131,7 +1128,7 @@ namespace XenAdmin
         /// </summary>
         public void RequestRefreshTreeView()
         {
-            navigationView.RequestRefreshTreeView();
+            navigationPane.RequestRefreshTreeView();
         }
 
         private void UpdateHeaderAndTabPages()
@@ -1292,7 +1289,7 @@ namespace XenAdmin
             // unavoidable side-effect of giving them focus - this is irritating if trying to navigate
             // the tree using the keyboard.
 
-            navigationView.MajorChange(() => navigationView.SaveAndRestoreTreeViewFocus(ChangeToNewTabs));
+            navigationPane.SaveAndRestoreTreeViewFocus(ChangeToNewTabs);
         }
 
         private bool SearchTabVisible
@@ -1920,7 +1917,7 @@ namespace XenAdmin
 
         private void EditSelectedNodeInTreeView()
         {
-            navigationView.EditSelectedNode();
+            navigationPane.EditSelectedNode();
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -2357,7 +2354,7 @@ namespace XenAdmin
                 {
                     Program.Invoke(Program.MainWindow, delegate
                         {
-                            success = navigationView.TryToSelectNewNode(tagMatch, selectNode, expandNode, ensureNodeVisible);
+                            success = navigationPane.TryToSelectNewNode(tagMatch, selectNode, expandNode, ensureNodeVisible);
                         });
                     Thread.Sleep(500);
                 }
@@ -2371,7 +2368,7 @@ namespace XenAdmin
         /// <returns>A value indicating whether selection was successful.</returns>
         public bool SelectObject(IXenObject o)
         {
-            return navigationView.SelectObject(o, false);
+            return navigationPane.SelectObject(o);
         }
 
         private void CloseWhenActionsCanceled(object o)
@@ -2467,7 +2464,7 @@ namespace XenAdmin
                     return;
 
                 searchMode = value;
-                navigationView.InSearchMode = value;
+                navigationPane.InSearchMode = value;
                 UpdateToolbarsCore();
             }
         }
@@ -2561,21 +2558,9 @@ namespace XenAdmin
             }
             return name;
         }
-        
-        private void TreeSearchBox_SearchChanged(TreeSearchBox.Mode mode)
-        {
-            navigationView.CurrentSearch = TreeSearchBox.Search;
-            navigationView.NavigationMode = mode;
-            navigationView.ResetSeachBox();
-            navigationView.RequestRefreshTreeView();
-            navigationView.FocusTreeView();
-            navigationView.SelectObject(null, false);            
-        }
 
-        private void navigationView_TreeViewSelectionChanged(List<SelectedItem> items)
+        private void navigationPane_TreeViewSelectionChanged()
         {
-            selectionManager.SetSelection(items);
-
             UpdateToolbars();
 
             //
@@ -2592,13 +2577,13 @@ namespace XenAdmin
             UpdateHeader();
         }
 
-        private void navigationView_TreeNodeBeforeSelected()
+        private void navigationPane_TreeNodeBeforeSelected()
         {
             SearchMode = false;
             AllowHistorySwitch = false;
         }
 
-        private void navigationView_TreeNodeClicked()
+        private void navigationPane_TreeNodeClicked()
         {
             if (SearchMode)
             {
@@ -2608,24 +2593,24 @@ namespace XenAdmin
             }
         }
 
-        private void navigationView_TreeNodeRightClicked()
+        private void navigationPane_TreeNodeRightClicked()
         {
            MainMenuBar_MenuActivate(MainMenuBar, new EventArgs());
         }
 
-        private void navigationView_TreeViewRefreshed()
+        private void navigationPane_TreeViewRefreshed()
         {
             UpdateHeaderAndTabPages();
         }
 
-        private void navigationView_TreeViewRefreshResumed()
+        private void navigationPane_TreeViewRefreshResumed()
         {
             ignoreUpdateToolbars--;
             if (ignoreUpdateToolbars == 0 && calledUpdateToolbars)
                 UpdateToolbars();
         }
 
-        private void navigationView_TreeViewRefreshSuspended()
+        private void navigationPane_TreeViewRefreshSuspended()
         {
             if (ignoreUpdateToolbars == 0)
                 calledUpdateToolbars = false;
