@@ -56,14 +56,15 @@ namespace XenAdminTests.SearchTests
         {
             MW(() =>
                 {
-                    var menuItems = MainWindowWrapper.TreeSearchBoxItems;
+                    var menuItems = ((ToolStripDropDownButton)TestUtils.GetToolStripItem(MainWindowWrapper.Item, "navigationPane.buttonSearchesBig")).DropDownItems;
 					
 					foreach (ToolStripMenuItem item in menuItems.OfType<ToolStripMenuItem>())
                     {
                         item.PerformClick();
 
                         // Try typing in the TreeSearchBox too.
-                        MainWindowWrapper.SearchTextBox.Text = "eb 10.*";
+                        var textbox = TestUtils.GetSearchTextBox(MainWindowWrapper.Item, "navigationPane.navigationView.searchTextBox");
+                        textbox.Text = "eb 10.*";
                     }
                 });
         }

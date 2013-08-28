@@ -34,6 +34,9 @@ using System.Collections.Generic;
 using System.Text;
 using XenAdmin.Commands;
 using NUnit.Framework;
+
+using XenAdmin.Controls.MainWindowControls;
+
 using XenAPI;
 using XenAdmin;
 using System.Windows.Forms;
@@ -81,6 +84,11 @@ namespace XenAdminTests.CommandTests
         internal override Command CreateCommand()
         {
             return new EditTagsCommand();
+        }
+
+        protected override NavigationPane.NavigationMode NativeMode
+        {
+            get { return NavigationPane.NavigationMode.Tags; }
         }
 
         public void TestMultipleSelectAddTag()

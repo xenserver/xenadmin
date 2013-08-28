@@ -35,6 +35,9 @@ using System.Text;
 using XenAdmin.Commands;
 using XenAdmin;
 using NUnit.Framework;
+
+using XenAdmin.Controls.MainWindowControls;
+
 using XenAPI;
 using XenAdmin.Controls;
 
@@ -56,13 +59,14 @@ namespace XenAdminTests.CommandTests
 
         internal abstract Command CreateCommand();
 
-        protected virtual int NativeView
+        protected virtual NavigationPane.NavigationMode NativeMode
         {
-            get { return OBJECT_VIEW; }
+            get { return NavigationPane.NavigationMode.Infrastructure; }
         }
 
         internal IEnumerable<SelectedItemCollection> RunTest()
         {
+            PutInNavigationMode(NativeMode);
             return RunTest(GetSelections());
         }
 
@@ -82,10 +86,8 @@ namespace XenAdminTests.CommandTests
             }
         }
 
-        internal IEnumerable<SelectedItemCollection> RunTest( IEnumerable<SelectedItemCollection> selections)    
-        {
-            PutInOrgView(INFRASTRUCTURE_VIEW);
-            
+        internal IEnumerable<SelectedItemCollection> RunTest( IEnumerable<SelectedItemCollection> selections)
+        {           
             Command = CreateCommand();
 
             ((ICommand)Command).SetMainWindow(Program.MainWindow.CommandInterface);
@@ -96,7 +98,7 @@ namespace XenAdminTests.CommandTests
             {
                 ((ICommand)Command).SetSelection(selection);
 
-                if (MW<bool>(() => Command.CanExecute()))
+                if (MW(() => Command.CanExecute()))
                 {
                     noneExecuted = false;
                     SelectNodes(selection);
@@ -124,26 +126,22 @@ namespace XenAdminTests.CommandTests
         private IEnumerable<SelectedItemCollection> GetSelections()
         {
             List<object> output = new List<object>();
-            for (int i = 0; i < 2; i++)
+            foreach (VirtualTreeNode n in GetAllTreeNodes())
             {
-                foreach (VirtualTreeNode n in GetAllTreeNodes())
+                if (!output.Contains(n.Tag))
                 {
-                    if (!output.Contains(n.Tag))
-                    {
-                        output.Add(n.Tag);
+                    output.Add(n.Tag);
 
-                        GroupingTag gt = n.Tag as GroupingTag;
-                        if (gt != null)
-                        {
-                            yield return new SelectedItemCollection(new[] { new SelectedItem(gt) });
-                        }
-                        else
-                        {
-                            yield return new SelectedItemCollection(new[] { new SelectedItem(n.Tag as IXenObject) });
-                        }
+                    GroupingTag gt = n.Tag as GroupingTag;
+                    if (gt != null)
+                    {
+                        yield return new SelectedItemCollection(new[] { new SelectedItem(gt) });
+                    }
+                    else
+                    {
+                        yield return new SelectedItemCollection(new[] { new SelectedItem(n.Tag as IXenObject) });
                     }
                 }
-                MW(() => PutInOrgView(NativeView));
             }
         }
 
@@ -158,7 +156,7 @@ namespace XenAdminTests.CommandTests
             }
             else
             {
-                MW(() => PutInOrgView(OBJECT_VIEW));
+                PutInNavigationMode(NavigationPane.NavigationMode.Objects);
 
                 nodes = new List<VirtualTreeNode>(objects.ConvertAll(o => FindInTree(o)));
 

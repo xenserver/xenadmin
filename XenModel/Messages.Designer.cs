@@ -31181,7 +31181,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Objects.
+        ///   Looks up a localized string similar to Objects by Type.
         /// </summary>
         public static string VIEW_OBJECTS {
             get {

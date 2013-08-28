@@ -34,6 +34,7 @@ using System.Windows.Forms;
 using NUnit.Framework;
 using XenAdmin;
 using XenAdmin.Commands;
+using XenAdmin.Controls.MainWindowControls;
 
 namespace XenAdminTests.TabsAndMenus
 {
@@ -45,7 +46,7 @@ namespace XenAdminTests.TabsAndMenus
         public void TestFixtureSetUp()
         {
             ConnectToStateDBs("state1.xml");
-            PutInOrgView(INFRASTRUCTURE_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
             DisableAllPlugins();
         }
 

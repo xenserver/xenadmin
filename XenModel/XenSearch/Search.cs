@@ -630,6 +630,15 @@ namespace XenAdmin.XenSearch
             return new Search(query, null, false, "", null, false);
         }
 
+        public static Search SearchForFolders()
+        {
+            var foldersQuery = new NullQuery<Folder>(PropertyNames.folder, false);
+           var groupQuery = new GroupQuery(new QueryFilter[] { foldersQuery }, GroupQuery.GroupQueryType.Or);
+
+            Query query = new Query(new QueryScope(ObjectTypes.AllIncFolders), groupQuery);
+            return new Search(query, null, false, "", null, false);
+        }
+
         public static Search SearchForCustomFields()
         {
             var fieldsQuery = new BooleanQuery(PropertyNames.has_custom_fields, true);

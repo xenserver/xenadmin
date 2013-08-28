@@ -92,6 +92,14 @@ namespace XenAdmin.Controls.MainWindowControls
 
                 if (buttonItem != null && buttonItem.Checked)
                     buttonItem.Checked = false;
+
+                var dropDownButton = toolStripItem as ToolStripDropDownButton;
+
+                if (dropDownButton != null && dropDownButton != curItem.OwnerItem)
+                {
+                    foreach (ToolStripMenuItem item in dropDownButton.DropDownItems)
+                        item.Checked = false;
+                }
             }
         }
     }

@@ -91,8 +91,6 @@ namespace XenAdmin.Controls.MainWindowControls
 
         #endregion
 
-        #region Accessors
-
         public NavigationView()
         {
             InitializeComponent();
@@ -110,6 +108,8 @@ namespace XenAdmin.Controls.MainWindowControls
             treeBuilder = new MainWindowTreeBuilder(treeView);
             treeViewUpdateManager.Update += treeViewUpdateManager_Update;
         }
+
+        #region Accessors
 
         public NavigationPane.NavigationMode NavigationMode { get; set; }
 
@@ -304,8 +304,7 @@ namespace XenAdmin.Controls.MainWindowControls
 
         public void RequestRefreshTreeView()
         {
-            if (!Program.Exiting)
-                treeViewUpdateManager.RequestUpdate();
+            Program.BeginInvoke(this, treeViewUpdateManager.RequestUpdate);
         }
 
         private void SuspendRefreshTreeView()
@@ -332,14 +331,8 @@ namespace XenAdmin.Controls.MainWindowControls
                 TreeViewRefreshResumed();
         }
 
-        /// <summary>
-        /// Refreshes the main tree view. A new node tree is built on the calling thread and then merged into the main tree view
-        /// on the main program thread.
-        /// </summary>
         private void RefreshTreeView()
         {
-            var newRootNode = treeBuilder.CreateNewRootNode(CurrentSearch.AddFullTextFilter(searchTextBox.Text), NavigationMode);
-
             Program.Invoke(this, () =>
             {
                 if (ignoreRefreshTreeView > 0)
@@ -352,6 +345,7 @@ namespace XenAdmin.Controls.MainWindowControls
 
                 try
                 {
+                    var newRootNode = treeBuilder.CreateNewRootNode(CurrentSearch.AddFullTextFilter(searchTextBox.Text), NavigationMode);
                     treeBuilder.RefreshTreeView(newRootNode, searchTextBox.Text, NavigationMode);
                 }
                 catch (Exception exn)
@@ -366,9 +360,9 @@ namespace XenAdmin.Controls.MainWindowControls
                 {
                     ignoreRefreshTreeView--;
                 }
-                
+
                 if (TreeViewRefreshed != null)
-                TreeViewRefreshed();
+                    TreeViewRefreshed();
             });
         }
 

@@ -204,6 +204,12 @@ namespace XenAdmin
                     groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
                     OrganizationalView.PopulateVappsView(groupAcceptor, search);
                     break;
+                case NavigationPane.NavigationMode.SavedSearch:
+                    Util.ThrowIfParameterNull(search, "search");
+                    newRootNode = new VirtualTreeNode(search.Name);
+                    groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
+                    search.PopulateAdapters(groupAcceptor);
+                    break;
                 default:
                     Util.ThrowIfParameterNull(search, "search");
                     newRootNode = new VirtualTreeNode("XenCenter");

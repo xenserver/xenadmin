@@ -103,14 +103,12 @@ namespace XenAdminTests.TreeTests
                     }
                 }
             });
-
-            MW(MainWindowWrapper.RefreshTreeView);
         }
 
         [Test]
         public void TestPersistenceBetweenServerAndOrgView()
         {
-            PutInOrgView(INFRASTRUCTURE_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
 
             // collapse all nodes in server view.
             MW(MainWindowWrapper.TreeView.CollapseAll);
@@ -145,8 +143,8 @@ namespace XenAdminTests.TreeTests
                 return n.Tag == null || n == poolNode || n == poolNode.Nodes[0] || n == poolNode.Nodes[1];
             }, "Couldn't expand host nodes.");
 
-            // now go into folder view.
-            PutInOrgView(ORGANIZATION_VIEW);
+            // now go into objects view.
+            PutInNavigationMode(NavigationPane.NavigationMode.Objects);
 
             // collapse all nodes
             MW(MainWindowWrapper.TreeView.CollapseAll);
@@ -154,19 +152,22 @@ namespace XenAdminTests.TreeTests
             // wait for all nodes to become collapsed.
             CheckExpandedNodes(n => false, "Couldn't collapse all nodes.");
 
-            // expand root node and custom fields nodes in folder view.
+            // expand root node and snapshots nodes in folder view.
             MW(() =>
             {
                 MainWindowWrapper.TreeView.Nodes[0].Expand();
-                VirtualTreeNode typesNode = MainWindowWrapper.TreeView.Nodes[0].Nodes[3];
-                Assert.AreEqual("Custom Fields", typesNode.Text);
+                MainWindowWrapper.TreeView.Nodes[0].Nodes[0].Expand();
+                VirtualTreeNode typesNode = MainWindowWrapper.TreeView.Nodes[0].Nodes[0].Nodes[3];
+                Assert.AreEqual("Snapshots", typesNode.Text);
                 typesNode.Expand();
             });
 
             // wait for those nodes to become expanded.
-            CheckExpandedNodes(n => n == MainWindowWrapper.TreeView.Nodes[0] || n == MainWindowWrapper.TreeView.Nodes[0].Nodes[3], "Couldn't expand nodes.");
+            CheckExpandedNodes(n => n == MainWindowWrapper.TreeView.Nodes[0]
+                || n == MainWindowWrapper.TreeView.Nodes[0].Nodes[0]
+                || n == MainWindowWrapper.TreeView.Nodes[0].Nodes[0].Nodes[3], "Couldn't expand nodes.");
 
-            PutInOrgView(INFRASTRUCTURE_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
 
             if (!CheckExpandedNodes(n => n.Tag == null || n.Tag is Pool || n.Tag is Host))
             {
@@ -174,9 +175,9 @@ namespace XenAdminTests.TreeTests
                 Assert.Fail("Nodes not correctly persisted in infrastructure view. Expanded nodes were: " + string.Join(", ", expandedNodes.ToArray()) + ". They should have only been XenCenter, Hottub, inflames, incubus.");
             }
 
-            PutInOrgView(OBJECT_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Objects);
 
-            if (!CheckExpandedNodes(n => n.Tag == null || n.Text == "Types"))
+            if (!CheckExpandedNodes(n => n.Tag == null || n.Text == "Types" || n.Text == "Snapshots"))
             {
                 var expandedNodes = MW(() => GetAllTreeNodes().FindAll(n => n.IsExpanded).ConvertAll(n => n.Text));
                 Assert.Fail("Nodes not correctly persisted in organization view. Expanded nodes were: " + string.Join(", ", expandedNodes.ToArray()) + ". They should have only been Objects, Types.");
@@ -186,7 +187,7 @@ namespace XenAdminTests.TreeTests
         [Test]
         public void TestMigratedVMStaysSelectedAndBecomesVisible()
         {
-            PutInOrgView(INFRASTRUCTURE_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
 
             // this VM is at pool level.
             VM vm = GetAnyVM(v => v.name_label == "Windows Server 2008 (1)");
@@ -207,9 +208,10 @@ namespace XenAdminTests.TreeTests
         }
 
         [Test]
+        [Ignore]
         public void TestPersistenceWhenAddingThenRemovingTextSearch()
         {
-            PutInOrgView(INFRASTRUCTURE_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
             Thread.Sleep(1000);
 
             // expand root, pool and host nodes.
@@ -235,27 +237,19 @@ namespace XenAdminTests.TreeTests
         [Test]
         public void TestPersistenceWhenAddingThenRemovingSavedSearch()
         {
-            PutInOrgView(INFRASTRUCTURE_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
 
             // expand root and pool nodes.
             SetExpandedNodes(n => n.Tag is Pool || n.Tag == null);
 
-            Thread.Sleep(500);
-
             // apply a random saved search
-            MW(delegate
-            {
-                MainWindowWrapper.TreeSearchBoxItems[3].PerformClick();
-                MainWindowWrapper.RefreshTreeView();
-            });
-
-            Thread.Sleep(500);
+            PutInNavigationMode(NavigationPane.NavigationMode.SavedSearch);
 
             // test that all the nodes were expanded for the saved search.
             CheckExpandedNodes(n => true, "Not all nodes were expanded for search");
 
             // now remove the saved search by going back into server
-            PutInOrgView(INFRASTRUCTURE_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
 
             // now check the original nodes expansion state has been restored.
             CheckExpandedNodes(n => n.Tag == null || n.Tag is Pool, "Nodes weren't correctly persisted");
@@ -269,7 +263,7 @@ namespace XenAdminTests.TreeTests
         [Test]
         public void TestBeginUpdateOnlyCalledIfNecessary()
         {
-            PutInOrgView(OBJECT_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Objects);
 
             MW(delegate
             {

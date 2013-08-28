@@ -31,11 +31,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using NUnit.Framework;
 using XenAdmin;
 using XenAdmin.Controls;
+using XenAdmin.Controls.MainWindowControls;
 using XenAdmin.Core;
 using XenAdmin.Model;
 using XenAdmin.Network;
@@ -46,10 +48,6 @@ namespace XenAdminTests
 {
     public abstract class MainWindowTester : TestObjectProvider
     {
-        protected const int INFRASTRUCTURE_VIEW = 0;
-        protected const int OBJECT_VIEW = 1;
-        protected const int ORGANIZATION_VIEW = 2;
-
         // Run on MainWindowThread
         private static object[] EMPTY = new object[0];
         protected void MW(MethodInvoker f)
@@ -243,14 +241,14 @@ namespace XenAdminTests
 
         protected void EnsureDefaultTemplatesShown()
         {
-            MW(() => EnsureChecked(MainWindowWrapper.ViewMenuItems.TemplatesToolStripMenuItem));
+            EnsureChecked(MainWindowWrapper.ViewMenuItems.TemplatesToolStripMenuItem);
 
             MWWaitFor(delegate
-            {
-                List<VirtualTreeNode> defaultTemplates = GetAllTreeNodes().FindAll(n => n.Tag is VM && ((VM)n.Tag).DefaultTemplate);
-
-                return (defaultTemplates.Count > 0);
-            });
+                {
+                    var nodes = new List<VirtualTreeNode>(MainWindowWrapper.TreeView.AllNodes);
+                    var defaultTemplates = nodes.Select(n => n.Tag is VM && ((VM)n.Tag).DefaultTemplate);
+                    return (defaultTemplates.Count() > 0);
+                });
         }
 
         protected void ClickMenuItem(string menuName, string itemName)
@@ -350,7 +348,7 @@ namespace XenAdminTests
         /// <returns>The node.</returns>
         protected VirtualTreeNode FindInTree(object ixmo, Predicate<VirtualTreeNode> match)
         {
-            foreach (VirtualTreeNode node in GetAllTreeNodes())
+            foreach (VirtualTreeNode node in MainWindowWrapper.TreeView.AllNodes)
             {
                 bool found = false;
 
@@ -387,23 +385,78 @@ namespace XenAdminTests
         /// Puts the main treeview into Infrastructure, Objects or Organization
         /// view and waits until the tree has been repopulated.
         /// </summary>
-        protected void PutInOrgView(int index)
+        protected void PutInNavigationMode(NavigationPane.NavigationMode mode)
         {
-            MW(MainWindowWrapper.TreeSearchBoxItems[index].PerformClick);
-            MW(MainWindowWrapper.RefreshTreeView);
+            MW(() =>
+                {
+                    var originalMode = GetNavigationMode();
 
-            Predicate<VirtualTreeNode> match = n => n.Tag is Pool || n.Tag is Host || (n.Tag == null && n.Nodes.Count == 0);
+                    switch (mode)
+                    {
+                        case NavigationPane.NavigationMode.Infrastructure:
+                            TestUtils.GetToolStripItem(MainWindowWrapper.Item, "navigationPane.buttonInfraBig").PerformClick();
+                            break;
+                        case NavigationPane.NavigationMode.Objects:
+                            TestUtils.GetToolStripItem(MainWindowWrapper.Item, "navigationPane.buttonObjectsBig").PerformClick();
+                            break;
+                        case NavigationPane.NavigationMode.Tags:
+                            TestUtils.GetToolStripMenuItem(MainWindowWrapper.Item, "navigationPane.toolStripMenuItemTags").PerformClick();
+                            break;
+                        case NavigationPane.NavigationMode.Folders:
+                            TestUtils.GetToolStripMenuItem(MainWindowWrapper.Item, "navigationPane.toolStripMenuItemFolders").PerformClick();
+                            break;
+                        case NavigationPane.NavigationMode.CustomFields:
+                            TestUtils.GetToolStripMenuItem(MainWindowWrapper.Item, "navigationPane.toolStripMenuItemFields").PerformClick();
+                            break;
+                        case NavigationPane.NavigationMode.vApps:
+                            TestUtils.GetToolStripMenuItem(MainWindowWrapper.Item, "navigationPane.toolStripMenuItemVapps").PerformClick();
+                            break;
+                        case NavigationPane.NavigationMode.SavedSearch:
+                            var item = (ToolStripDropDownButton)TestUtils.GetToolStripItem(MainWindowWrapper.Item, "navigationPane.buttonSearchesBig");
+                            item.ShowDropDown();
+                            WaitFor(() => item.DropDownItems.Count > 0);
+                            item.DropDownItems[0].PerformClick();
+                            break;
+                        case NavigationPane.NavigationMode.Notifications:
+                            break;
+                    }
 
-            if (index == ORGANIZATION_VIEW)
-                match = n => n.Tag is GroupingTag;
+                    if (originalMode == mode)
+                        MainWindowWrapper.Item.RequestRefreshTreeView();
+                });
 
-            MWWaitFor(() => new List<VirtualTreeNode>(MainWindowWrapper.TreeView.AllNodes).Find(match) != null);
+            MWWaitFor(() => GetNavigationMode() == mode);
+        }
+
+        private NavigationPane.NavigationMode GetNavigationMode()
+        {
+            switch (MainWindowWrapper.TreeView.Nodes[0].Text)
+            {
+                case "Objects by Type":
+                    return NavigationPane.NavigationMode.Objects;
+                case "Tags":
+                    return NavigationPane.NavigationMode.Tags;
+                case "Folders":
+                    return NavigationPane.NavigationMode.Folders;
+                case "Custom Fields":
+                    return NavigationPane.NavigationMode.CustomFields;
+                case "vApps":
+                    return NavigationPane.NavigationMode.vApps;
+                case "XenCenter":
+                    return NavigationPane.NavigationMode.Infrastructure;
+                default:
+                    return NavigationPane.NavigationMode.SavedSearch;
+            }
         }
 
         protected void ApplyTreeSearch(string text)
         {
-            MW(() => MainWindowWrapper.SearchTextBox.Text = text);
-            MW(MainWindowWrapper.RefreshTreeView);
+            MW(() =>
+                {
+                    var textbox = TestUtils.GetSearchTextBox(MainWindowWrapper.Item, "navigationPane.navigationView.searchTextBox");
+                    textbox.Text = text;
+                });
+            MW(MainWindowWrapper.Item.RequestRefreshTreeView);
         }
 
         protected void GoToTabPage(TabPage tabPage)

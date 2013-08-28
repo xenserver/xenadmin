@@ -10815,7 +10815,7 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
     <value>Infrastructure</value>
   </data>
   <data name="VIEW_OBJECTS" xml:space="preserve">
-    <value>Objects</value>
+    <value>Objects by Type</value>
   </data>
   <data name="VIEW_ORGANIZATION" xml:space="preserve">
     <value>Organization Views</value>

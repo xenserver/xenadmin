@@ -123,7 +123,7 @@ namespace XenAdmin.Controls.MainWindowControls
                     case NavigationMode.Tags:
                         return Search.SearchForTags();
                     case NavigationMode.Folders:
-                        return Search.SearchForAllFolders();
+                        return Search.SearchForFolders();
                     case NavigationMode.CustomFields:
                         return Search.SearchForCustomFields();
                     case NavigationMode.vApps:

@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using XenAdmin.Commands;
+using XenAdmin.Controls.MainWindowControls;
 using XenAdmin.Model;
 using XenAdmin.Controls;
 using NUnit.Framework;
@@ -79,9 +80,9 @@ namespace XenAdminTests.CommandTests
             return new NewFolderCommand();
         }
 
-        protected override int NativeView
+        protected override NavigationPane.NavigationMode NativeMode
         {
-            get { return ORGANIZATION_VIEW; }
+            get { return NavigationPane.NavigationMode.Folders; }
         }
 
         public void Test()
@@ -89,14 +90,13 @@ namespace XenAdminTests.CommandTests
             foreach (SelectedItemCollection selection in RunTest())
             {
                 Folder folder = (Folder)selection[0].XenObject;
-                VirtualTreeNode node = FindInTree(folder);
 
                 // choose new folder name
                 string newFolderName = Guid.NewGuid().ToString();
 
                 if (folder.IsRootFolder)
                 {
-                    HandleModalDialog<NameAndConnectionPromptWrapper>("New Folder", Command.Execute, delegate(NameAndConnectionPromptWrapper p)
+                    HandleModalDialog("New Folder", Command.Execute, delegate(NameAndConnectionPromptWrapper p)
                         {
                             p.NameTextBox.Text = newFolderName;
                             p.OKButton.PerformClick();
@@ -104,7 +104,7 @@ namespace XenAdminTests.CommandTests
                 }
                 else
                 {
-                    HandleModalDialog<InputPromptDialogWrapper>("New Folder", Command.Execute, delegate(InputPromptDialogWrapper p)
+                    HandleModalDialog("New Folder", Command.Execute, delegate(InputPromptDialogWrapper p)
                         {
                             p.NameTextBox.Text = newFolderName;
                             p.OKButton.PerformClick();

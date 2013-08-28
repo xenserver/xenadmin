@@ -138,14 +138,6 @@ namespace XenAdminTests
             }
         }
 
-        public ContextMenuStrip TreeContextMenu
-        {
-            get
-            {
-                return GetField<ContextMenuStrip>("TreeContextMenu");
-            }
-        }
-
         public PluginManager PluginManager
         {
             get
@@ -156,11 +148,7 @@ namespace XenAdminTests
 
         public FlickerFreeTreeView TreeView
         {
-            get
-            {
-                return GetField<FlickerFreeTreeView>("treeView");
-            }
-        }
+            get { return TestUtils.GetFlickerFreeTreeView(Item, "navigationPane.navigationView.treeView"); } }
 
         public CommandToolStripMenuItem AddHostToolStripMenuItemInPoolMenu
         {
@@ -177,7 +165,6 @@ namespace XenAdminTests
                 return Item.StorageToolStripMenuItem;
             }
         }
-
 
         public StorageMenuWrapper StorageMenuItems
         {
@@ -217,20 +204,6 @@ namespace XenAdminTests
             {
                 return new ViewMenuWrapper(Item);
             }
-        }
-
-        internal List<ToolStripItem> TreeSearchBoxItems
-        {
-            get
-            {
-                DropDownComboButton comboButton = TestUtils.GetDropDownComboButton(Item, "TreeSearchBox.comboButtonViews");
-                return comboButton.Items;
-            }
-        }
-
-        public SearchTextBox SearchTextBox
-        {
-            get { return GetField<SearchTextBox>("searchTextBox"); }
         }
 
         public TabControl TheTabControl
@@ -279,18 +252,6 @@ namespace XenAdminTests
             {
                 return GetField<TabPage>("TabPageNetwork");
             }
-        }
-
-        
-
-        public void RefreshTreeView()
-        {
-            ExecuteMethod("RefreshTreeView", new Type[0], new object[0]);
-        }
-
-        public void TreeView_NodeMouseClick_(object sender, VirtualTreeNodeMouseClickEventArgs e)
-        {
-            ExecuteMethod("TreeView_NodeMouseClick_", new object[] { sender, e });
         }
     }
 }

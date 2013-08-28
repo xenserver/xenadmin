@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using XenAdmin.Commands;
+using XenAdmin.Controls.MainWindowControls;
 using XenAdmin.Model;
 using NUnit.Framework;
 
@@ -76,9 +77,9 @@ namespace XenAdminTests.CommandTests
             return new DeleteFolderCommand();
         }
 
-        protected override int NativeView 
+        protected override NavigationPane.NavigationMode NativeMode
         {
-            get { return ORGANIZATION_VIEW; }
+            get { return NavigationPane.NavigationMode.Folders; }
         }
 
         public void Test()

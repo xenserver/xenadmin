@@ -37,6 +37,7 @@ using XenAdmin;
 using XenAdmin.Controls;
 using NUnit.Framework;
 
+using XenAdmin.Controls.MainWindowControls;
 
 namespace XenAdminTests.CommandTests
 {
@@ -77,6 +78,11 @@ namespace XenAdminTests.CommandTests
             return new DeleteTagCommand();
         }
 
+        protected override NavigationPane.NavigationMode NativeMode
+        {
+            get { return NavigationPane.NavigationMode.Tags; }
+        }
+
         public void Test()
         {
             foreach (SelectedItemCollection selection in RunTest(GetSelections()))
@@ -104,7 +110,7 @@ namespace XenAdminTests.CommandTests
         {
             // just delete one tag for this test as it's quite slow.
 
-            PutInOrgView(ORGANIZATION_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Tags);
 
             VirtualTreeNode node = GetAllTreeNodes().Find(delegate(VirtualTreeNode n)
             {

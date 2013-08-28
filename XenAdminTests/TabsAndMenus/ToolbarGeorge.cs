@@ -30,6 +30,9 @@
  */
 
 using NUnit.Framework;
+
+using XenAdmin.Controls.MainWindowControls;
+
 using XenAPI;
 using XenAdmin;
 using XenAdmin.Controls;
@@ -184,7 +187,7 @@ namespace XenAdminTests.TabsAndMenus
         [Test]
         public void ToolBar_Snapshot()
         {
-            PutInOrgView(OBJECT_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Objects);
             try
             {
                 ExpectedMenuItem[] buttons = new ExpectedMenuItem[]{
@@ -207,14 +210,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(INFRASTRUCTURE_VIEW);
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
             }
         }
 
         [Test]
         public void ToolBar_VDI()
         {
-            PutInOrgView(OBJECT_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Objects);
             try
             {
                 ExpectedMenuItem[] buttons = new ExpectedMenuItem[]{
@@ -234,14 +237,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(INFRASTRUCTURE_VIEW);
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
             }
         }
 
         [Test]
         public void ToolBar_Network()
         {
-            PutInOrgView(OBJECT_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Objects);
             try
             {
                 ExpectedMenuItem[] buttons = new ExpectedMenuItem[]{
@@ -264,14 +267,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(INFRASTRUCTURE_VIEW);
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
             }
         }
 
         [Test]
         public void ToolBar_GroupingTag()
         {
-            PutInOrgView(OBJECT_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Objects);
             try
             {
                 ExpectedMenuItem[] buttons = new ExpectedMenuItem[]{
@@ -294,14 +297,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(INFRASTRUCTURE_VIEW);
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
             }
         }
 
         [Test]
         public void ToolBar_Folder()
         {
-            PutInOrgView(ORGANIZATION_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Folders);
             try
             {
                 ExpectedMenuItem[] buttons = new ExpectedMenuItem[]{
@@ -324,7 +327,7 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(INFRASTRUCTURE_VIEW);
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
             }
         }
 

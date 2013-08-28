@@ -87,12 +87,13 @@ namespace XenAdminTests.TabsAndMenus
 
             // Generate the TreeContextMenu
 
-            MW(delegate()
-            {
-                node.EnsureVisible();
-                MainWindowWrapper.TreeView_NodeMouseClick_(MainWindowWrapper.TreeView, e);
-            });
-            ContextMenuStrip menu = MainWindowWrapper.TreeContextMenu;
+            MW(() =>
+                {
+                    node.EnsureVisible();
+                    var view = TestUtils.GetNavigationView(MainWindowWrapper.Item, "navigationPane.navigationView");
+                    TestUtils.ExecuteMethod(view, "HandleNodeRightClick", new object[] { e });
+                });
+            var menu = TestUtils.GetContextMenuStrip(MainWindowWrapper.Item, "navigationPane.navigationView.TreeContextMenu");
 
             AssertToolStripItems(ixmoString, expectedItems, menu.Items, true);
 

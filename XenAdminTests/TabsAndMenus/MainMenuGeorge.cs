@@ -32,6 +32,7 @@
 using NUnit.Framework;
 using XenAdmin;
 using XenAdmin.Controls;
+using XenAdmin.Controls.MainWindowControls;
 using XenAdmin.Model;
 using XenAPI;
 
@@ -356,7 +357,6 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedTextMenuItem("&Upgrade", false, false  ),
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("&Virtual Disks", false, false, new ExpectedMenuItem[]{new ExpectedTextMenuItem("New &Virtual Disk...", false),new ExpectedTextMenuItem("&Attach Virtual Disk...", false)}  ),
-	                //new ExpectedTextMenuItem("Storage&Link", false, false, new ExpectedMenuItem[]{new ExpectedTextMenuItem("&Change Server Password...", false),new ExpectedTextMenuItem("&Remove Servers...", false), new ExpectedSeparator(), new ExpectedTextMenuItem("&Add Storage System...", false), new ExpectedTextMenuItem("R&emove Storage System...", false), new ExpectedSeparator(), new ExpectedTextMenuItem("&Destroy Storage Volume...", false)}  ),
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("&Detach...", false, false  ),
 	                new ExpectedTextMenuItem("R&eattach...", false, false  ),
@@ -467,7 +467,6 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("&Upgrade", false, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("&Virtual Disks", true, false, new ExpectedMenuItem[]{new ExpectedTextMenuItem("New &Virtual Disk...", true),new ExpectedTextMenuItem("&Attach Virtual Disk...", true)}  ),
-	           // new ExpectedTextMenuItem("Storage&Link", false, false, new ExpectedMenuItem[]{new ExpectedTextMenuItem("&Change Server Password...", false),new ExpectedTextMenuItem("&Remove Servers...", false), new ExpectedSeparator(), new ExpectedTextMenuItem("&Add Storage System...", false), new ExpectedTextMenuItem("R&emove Storage System...", false), new ExpectedSeparator(), new ExpectedTextMenuItem("&Destroy Storage Volume...", false)}  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("&Detach...", false, false  ),
 	            new ExpectedTextMenuItem("R&eattach...", false, false  ),
@@ -722,7 +721,7 @@ namespace XenAdminTests.TabsAndMenus
         [Test]
         public void MainMenu_Snapshot()
         {
-            PutInOrgView(OBJECT_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Objects);
             try
             {
                 foreach (VM snapshot in GetAllXenObjects<VM>(v => v.is_a_snapshot))
@@ -834,14 +833,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(INFRASTRUCTURE_VIEW);
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
             }
         }
 
         [Test]
         public void MainMenu_VDI()
         {
-            PutInOrgView(OBJECT_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Objects);
             try
             {
                 ExpectedMenuItem[] poolToolStripMenuItem = new ExpectedMenuItem[]{
@@ -950,14 +949,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(INFRASTRUCTURE_VIEW);
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
             }
         }
 
         [Test]
         public void MainMenu_Network()
         {
-            PutInOrgView(OBJECT_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Objects);
             try
             {
                 foreach (XenAPI.Network network in GetAllXenObjects<XenAPI.Network>(n => n.name_label != "Guest installer network"))
@@ -1069,14 +1068,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(INFRASTRUCTURE_VIEW);
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
             }
         }
 
         [Test]
         public void MainMenu_GroupingTag()
         {
-            PutInOrgView(OBJECT_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Tags);
             try
             {
                 VirtualTreeNode n = GetAllTreeNodes().Find(v => v.Tag is GroupingTag);
@@ -1187,14 +1186,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(INFRASTRUCTURE_VIEW);
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
             }
         }
 
         [Test]
         public void MainMenu_Folder()
         {
-            PutInOrgView(ORGANIZATION_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Folders);
             try
             {
                 foreach (Folder folder in GetAllXenObjects<Folder>())
@@ -1306,7 +1305,7 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(INFRASTRUCTURE_VIEW);
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
             }
         }
 

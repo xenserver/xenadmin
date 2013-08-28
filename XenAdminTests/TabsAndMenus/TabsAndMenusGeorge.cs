@@ -33,6 +33,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using XenAdmin;
 using XenAdmin.Controls;
+using XenAdmin.Controls.MainWindowControls;
 using XenAdmin.Core;
 using XenAdmin.Model;
 using XenAdmin.XenSearch;
@@ -146,7 +147,7 @@ namespace XenAdminTests.TabsAndMenus
         [Test]
         public void Tabs_Snapshot()
         {
-            PutInOrgView(OBJECT_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Objects);
             try
             {
                 foreach (VM snapshot in GetAllXenObjects<VM>(v => v.is_a_snapshot))
@@ -156,28 +157,28 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(INFRASTRUCTURE_VIEW);
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
             }
         }
 
         [Test]
         public void Tabs_VDI()
         {
-            PutInOrgView(OBJECT_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Objects);
             try
             {
                 VerifyTabs(GetAnyVDI(v => v.name_label != "base copy"), VDITabs);
             }
             finally
             {
-                PutInOrgView(INFRASTRUCTURE_VIEW);
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
             }
         }
 
         [Test]
         public void Tabs_Network()
         {
-            PutInOrgView(OBJECT_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Objects);
             try
             {
                 foreach (XenAPI.Network network in GetAllXenObjects<XenAPI.Network>(n => n.name_label != "Guest installer network"))
@@ -187,14 +188,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(INFRASTRUCTURE_VIEW);
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
             }
         }
 
         [Test]
         public void Tabs_GroupingTag()
         {
-            PutInOrgView(OBJECT_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Objects);
             try
             {
                 VirtualTreeNode n = GetAllTreeNodes().Find(v => v.Tag is GroupingTag);
@@ -202,14 +203,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(INFRASTRUCTURE_VIEW);
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
             }
         }
 
         [Test]
         public void Tabs_Folder()
         {
-            PutInOrgView(ORGANIZATION_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Folders);
             try
             {
                 foreach (Folder folder in GetAllXenObjects<Folder>())
@@ -219,7 +220,7 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(INFRASTRUCTURE_VIEW);
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
             }
         }
 
@@ -534,7 +535,7 @@ namespace XenAdminTests.TabsAndMenus
                                            new ExpectedTextMenuItem("P&roperties", true)
                                        };
 
-                PutInOrgView(OBJECT_VIEW);//objects view
+                PutInNavigationMode(NavigationPane.NavigationMode.Objects);
 
                 foreach (VM snapshot in GetAllXenObjects<VM>(v => v.is_a_snapshot))
                 {
@@ -542,9 +543,22 @@ namespace XenAdminTests.TabsAndMenus
                     VerifyContextMenu(snapshot, expected.ToArray());
                 }
 
-                PutInOrgView(ORGANIZATION_VIEW);//organization view
+                PutInNavigationMode(NavigationPane.NavigationMode.Tags);
 
-                foreach (VM snapshot in GetAllXenObjects<VM>(v => v.is_a_snapshot && (v.tags.Length > 0 || Folders.GetFolder(v) != null)))
+                foreach (VM snapshot in GetAllXenObjects<VM>(v => v.is_a_snapshot && v.tags.Length > 0))
+                {
+                    var expected = new List<ExpectedMenuItem>(expectedForAll);
+
+                    if (Helpers.CowleyOrGreater(snapshot.Connection) && snapshot.tags.Length > 0)
+                        expected.Insert(5, new ExpectedTextMenuItem("Untag Ob&ject", true));
+                    if (Helpers.CowleyOrGreater(snapshot.Connection) && Folders.GetFolder(snapshot) != null)
+                        expected.Insert(5, new ExpectedTextMenuItem("Remove from &folder", true));
+                    VerifyContextMenu(snapshot, expected.ToArray());
+                }
+
+                PutInNavigationMode(NavigationPane.NavigationMode.Folders);
+
+                foreach (VM snapshot in GetAllXenObjects<VM>(v => v.is_a_snapshot && Folders.GetFolder(v) != null))
                 {
                     var expected = new List<ExpectedMenuItem>(expectedForAll);
 
@@ -557,14 +571,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(INFRASTRUCTURE_VIEW);
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
             }
         }
 
         [Test]
         public void ContextMenu_VDI()
         {
-            PutInOrgView(OBJECT_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Objects);
             try
             {
                 foreach (VDI v in GetAllXenObjects<VDI>(v => v.name_label != "base copy" && !v.is_a_snapshot))
@@ -581,14 +595,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(INFRASTRUCTURE_VIEW);
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
             }
         }
 
         [Test]
         public void ContextMenu_Network()
         {
-            PutInOrgView(OBJECT_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Objects);
             try
             {
                 foreach (XenAPI.Network network in GetAllXenObjects<XenAPI.Network>(n => n.name_label != "Guest installer network"))
@@ -600,14 +614,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(INFRASTRUCTURE_VIEW);
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
             }
         }
 
         [Test]
         public void ContextMenu_GroupingTag()
         {
-            PutInOrgView(ORGANIZATION_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Tags);
             try
             {
                 foreach (VirtualTreeNode node in GetAllTreeNodes())
@@ -631,14 +645,14 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(INFRASTRUCTURE_VIEW);
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
             }
         }
 
         [Test]
         public void ContextMenu_Folder()
         {
-            PutInOrgView(OBJECT_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Objects);
             try
             {
                 foreach (VirtualTreeNode node in GetAllTreeNodes())
@@ -665,7 +679,7 @@ namespace XenAdminTests.TabsAndMenus
             }
             finally
             {
-                PutInOrgView(INFRASTRUCTURE_VIEW);
+                PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
             }
         }
 

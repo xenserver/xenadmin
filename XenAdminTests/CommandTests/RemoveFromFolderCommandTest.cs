@@ -33,6 +33,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using XenAdmin.Commands;
+using XenAdmin.Controls.MainWindowControls;
+
 using XenAPI;
 using XenAdmin.Model;
 using XenAdmin;
@@ -75,9 +77,14 @@ namespace XenAdminTests.CommandTests
     {
         private VirtualTreeNode _node;
 
+        protected override NavigationPane.NavigationMode NativeMode
+        {
+            get { return NavigationPane.NavigationMode.Folders; }
+        }
+
         internal override Command CreateCommand()
         {
-            PutInOrgView(ORGANIZATION_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Folders);
 
             _node = GetAllTreeNodes().Find(n => n.Tag is IXenObject && !(n.Tag is Folder) && n.Parent.Tag is Folder);
 

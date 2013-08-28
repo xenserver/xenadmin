@@ -39,6 +39,7 @@ using NUnit.Framework;
 using XenAdmin;
 using XenAdmin.Controls;
 using XenAdmin.Controls.DataGridViewEx;
+using XenAdmin.Controls.MainWindowControls;
 using XenAdmin.Dialogs;
 using XenAdmin.Controls.XenSearch;
 
@@ -95,6 +96,11 @@ namespace XenAdminTests
             return GetFieldDeep<TextBox>(o, name);
         }
 
+        public static SearchTextBox GetSearchTextBox(object o, string name)
+        {
+            return GetFieldDeep<SearchTextBox>(o, name);
+        }
+
         public static ComboBox GetComboBox(object o, string name)
         {
             return GetFieldDeep<ComboBox>(o, name);
@@ -130,6 +136,16 @@ namespace XenAdminTests
             return GetFieldDeep<DoubleBufferedListView>(o, name);
         }
 
+        public static FlickerFreeTreeView GetFlickerFreeTreeView(object o, string name)
+        {
+            return GetFieldDeep<FlickerFreeTreeView>(o, name);
+        }
+
+        public static NavigationView GetNavigationView(object o, string name)
+        {
+            return GetFieldDeep<NavigationView>(o, name);
+        }
+
         public static DataGridViewEx GetDataGridViewEx(object o, string name)
         {
             return GetFieldDeep<DataGridViewEx>(o, name);
@@ -150,9 +166,41 @@ namespace XenAdminTests
             return GetFieldDeep<DropDownComboButton>(o, name);
         }
 
+        public static ToolStripItem GetToolStripItem(object o, string name)
+        {
+            return GetFieldDeep<ToolStripItem>(o, name);
+        }
+
         public static ToolStripMenuItem GetToolStripMenuItem(object o, string name)
         {
             return GetFieldDeep<ToolStripMenuItem>(o, name);
+        }
+
+        public static ContextMenuStrip GetContextMenuStrip(object o, string name)
+        {
+            return GetFieldDeep<ContextMenuStrip>(o, name);
+        }
+
+
+        /// <summary>
+        /// Executes the private method with the specified name from the wrapped class.
+        /// </summary>
+        /// <param name="name">The name of the private method.</param>
+        /// <param name="parameters">The parameters of the private method.</param>
+        public static object ExecuteMethod(object item, string name, object[] parameters)
+        {
+            return item.GetType().GetMethod(name, BindingFlags.Instance | BindingFlags.NonPublic).Invoke(item, parameters);
+        }
+
+        /// <summary>
+        /// Executes the private method with the specified name from the wrapped class.
+        /// </summary>
+        /// <param name="name">The name of the private method.</param>
+        /// <param name="types">The types of the parameters of the private method.</param>
+        /// <param name="parameters">The parameters of the private method.</param>
+        public static object ExecuteMethod(object item, string name, Type[] types, object[] parameters)
+        {
+            return item.GetType().GetMethod(name, BindingFlags.Instance | BindingFlags.NonPublic, null, types, null).Invoke(item, parameters);
         }
     }
 }

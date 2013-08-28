@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 using XenAdmin.Controls;
+using XenAdmin.Controls.MainWindowControls;
 
 namespace XenAdminTests.TreeTests
 {
@@ -69,9 +70,9 @@ namespace XenAdminTests.TreeTests
         public void TestOrgViewDefaultExpandedNodes()
         {
             ConnectToStateDBs("state1.xml");
-            PutInOrgView(OBJECT_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Objects);
 
-            CheckExpandedNodes(n => n.Tag == null || n.Text == "Types" || n.Text == "Custom Fields" || n.Text == "Folders" || n.Text == "Tags", "Expanded nodes incorrect.");
+            CheckExpandedNodes(n => n.Tag == null || n.Text == "Types", "Expanded nodes incorrect.");
         }
 
     }

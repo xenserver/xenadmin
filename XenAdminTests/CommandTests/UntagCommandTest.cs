@@ -34,6 +34,8 @@ using System.Collections.Generic;
 using System.Text;
 using XenAdmin.Controls;
 using XenAdmin.Commands;
+using XenAdmin.Controls.MainWindowControls;
+
 using XenAPI;
 using XenAdmin;
 using XenAdmin.Model;
@@ -76,9 +78,14 @@ namespace XenAdminTests.CommandTests
         private VirtualTreeNode _node;
         private string _tag;
 
+        protected override NavigationPane.NavigationMode NativeMode
+        {
+            get { return NavigationPane.NavigationMode.Tags; }
+        }
+
         internal override Command CreateCommand()
         {
-            PutInOrgView(ORGANIZATION_VIEW);
+            PutInNavigationMode(NavigationPane.NavigationMode.Tags);
 
             _node = GetAllTreeNodes().Find(delegate(VirtualTreeNode n)
             {

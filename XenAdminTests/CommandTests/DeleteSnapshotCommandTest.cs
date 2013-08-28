@@ -32,6 +32,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+
+using XenAdmin.Controls.MainWindowControls;
+
 using XenAPI;
 using NUnit.Framework;
 using XenAdmin.Commands;
@@ -74,6 +77,11 @@ namespace XenAdminTests.CommandTests
         internal override Command CreateCommand()
         {
             return new DeleteSnapshotCommand();
+        }
+
+        protected override NavigationPane.NavigationMode NativeMode
+        {
+            get { return NavigationPane.NavigationMode.Objects; }
         }
 
         public void Test()

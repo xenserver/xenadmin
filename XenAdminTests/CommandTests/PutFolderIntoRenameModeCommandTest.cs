@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.Text;
 using XenAdmin.Commands;
 using XenAdmin.Controls;
+using XenAdmin.Controls.MainWindowControls;
 using XenAdmin.Model;
 using NUnit.Framework;
 using XenAdmin.Core;
@@ -78,9 +79,9 @@ namespace XenAdminTests.CommandTests
             return new PutFolderIntoRenameModeCommand();
         }
 
-        protected override int NativeView
+        protected override NavigationPane.NavigationMode NativeMode
         {
-            get { return ORGANIZATION_VIEW; }
+            get { return NavigationPane.NavigationMode.Folders; }
         }
 
         public void Test()
