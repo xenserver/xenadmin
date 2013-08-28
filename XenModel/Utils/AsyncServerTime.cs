@@ -66,7 +66,7 @@ namespace XenAdmin.Utils
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
-        /// Server time - updated by thread and user is informed via the ServerTimeEventHandler
+        /// Server time (UTC) - updated by thread and user is informed via the ServerTimeEventHandler
         /// Default = DateTime.UtcNow
         /// </summary>
         public DateTime ServerTime { get; private set; }
@@ -110,6 +110,7 @@ namespace XenAdmin.Utils
 
             try
             {
+                //Note we're using the get_servertime call which returns the UTC time
                 ServerTime = Host.get_servertime(host.Connection.Session, host.opaque_ref);
             }
 

@@ -1840,13 +1840,6 @@ namespace XenAdmin.Core
            return host.LongProductVersion == longProductVersion;
        }
 
-       public static TimeSpan LicenceExpiresIn(Host host, DateTime serverTime)
-       {
-           DateTime d = host.LicenseExpiryUTC;
-           d = d.ToLocalTime();
-           return d.Subtract(serverTime);
-       }
-
        public static bool EnabledTargetExists(Host host, IXenConnection connection)
        {
            if (host != null)

@@ -503,11 +503,12 @@ namespace XenAdmin.Core
         /// <summary>
         /// The expiry date of a host's license
         /// </summary>
+        /// <param name="referenceDate">Should be UTC!</param>
         public static string HostLicenseExpiryString(Host h, bool longFormat, DateTime referenceDate)
         {
             if (h.license_params != null && h.license_params.ContainsKey("expiry"))
             {
-                TimeSpan timeDiff = Helpers.LicenceExpiresIn(h, referenceDate);
+                TimeSpan timeDiff = h.LicenseExpiryUTC.Subtract(referenceDate);
 
                 if (timeDiff.TotalDays < 3653)
                     return DateTimeToString(h.LicenseExpiryUTC.ToLocalTime(),

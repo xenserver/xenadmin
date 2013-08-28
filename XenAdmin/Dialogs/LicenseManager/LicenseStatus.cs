@@ -175,8 +175,9 @@ namespace XenAdmin.Dialogs
 
         protected virtual TimeSpan CalculateLicenceExpiresIn()
         {
+            //ServerTime is UTC
             DateTime currentRefTime = serverTime.ServerTime;
-            return Helpers.LicenceExpiresIn(LicencedHost, currentRefTime);
+            return LicencedHost.LicenseExpiryUTC.Subtract(currentRefTime);
         }
 
         public bool IsUsingPerSocketGenerationLicenses
