@@ -715,10 +715,10 @@
     <Compile Include="Dialogs\InputPromptDialog.Designer.cs">
       <DependentUpon>InputPromptDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\AlertSummaryDialog.cs">
+    <Compile Include="TabPages\AlertSummaryDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\AlertSummaryDialog.Designer.cs">
+    <Compile Include="TabPages\AlertSummaryDialog.Designer.cs">
       <DependentUpon>AlertSummaryDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="TabPages\HAPage.cs">
@@ -1769,7 +1769,7 @@
       <DependentUpon>InputPromptDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\AlertSummaryDialog.resx">
+    <EmbeddedResource Include="TabPages\AlertSummaryDialog.resx">
       <DependentUpon>AlertSummaryDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -2490,10 +2490,10 @@
     <Compile Include="Dialogs\VDIMigrateDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\ManageUpdatesDialog.cs">
+    <Compile Include="TabPages\ManageUpdatesDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\ManageUpdatesDialog.Designer.cs">
+    <Compile Include="TabPages\ManageUpdatesDialog.Designer.cs">
       <DependentUpon>ManageUpdatesDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\OptionsPages\PluginOptionsPage.cs">
@@ -4554,10 +4554,10 @@
     <EmbeddedResource Include="Dialogs\AdPasswordPrompt.zh-CN.resx">
       <DependentUpon>AdPasswordPrompt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\AlertSummaryDialog.ja.resx">
+    <EmbeddedResource Include="TabPages\AlertSummaryDialog.ja.resx">
       <DependentUpon>AlertSummaryDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\AlertSummaryDialog.zh-CN.resx">
+    <EmbeddedResource Include="TabPages\AlertSummaryDialog.zh-CN.resx">
       <DependentUpon>AlertSummaryDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AllowUpdatesDialog.ja.resx">
@@ -4774,13 +4774,13 @@
     <EmbeddedResource Include="Dialogs\LoadSessionDialog.zh-CN.resx">
       <DependentUpon>LoadSessionDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ManageUpdatesDialog.ja.resx">
+    <EmbeddedResource Include="TabPages\ManageUpdatesDialog.ja.resx">
       <DependentUpon>ManageUpdatesDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ManageUpdatesDialog.resx">
+    <EmbeddedResource Include="TabPages\ManageUpdatesDialog.resx">
       <DependentUpon>ManageUpdatesDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ManageUpdatesDialog.zh-CN.resx">
+    <EmbeddedResource Include="TabPages\ManageUpdatesDialog.zh-CN.resx">
       <DependentUpon>ManageUpdatesDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\MessageBoxTest.ja.resx">
