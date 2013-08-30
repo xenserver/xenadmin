@@ -39,15 +39,16 @@ using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Alerts;
 using XenAdmin.Core;
+using XenAdmin.Dialogs;
 using XenAdmin.Network;
 using XenAdmin.Wizards.PatchingWizard;
 using XenAPI;
 using Timer = System.Windows.Forms.Timer;
 using XenAdmin.Actions;
 
-namespace XenAdmin.Dialogs
+namespace XenAdmin.TabPages
 {
-    public partial class ManageUpdatesDialog : XenDialogBase
+    public partial class ManageUpdatesPage : UserControl
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -83,13 +84,24 @@ namespace XenAdmin.Dialogs
                                      });
         }
 
-        public ManageUpdatesDialog()
+        public ManageUpdatesPage()
         {
             InitializeComponent();
             InitializeProgressControls();
             InformationHelperVisible = false;
             informationLabel.Click += informationLabel_Click;
             availableUpdates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
+        }
+
+        public void RefreshUpdateList()
+        {
+            CheckForUpdates();
+        }
+
+        public void CancelUpdateCheck()
+        {
+            if (spinningTimer.Enabled)
+                ShowProgress(false);
         }
 
         private void informationLabel_Click(object sender, EventArgs e)
@@ -380,16 +392,6 @@ namespace XenAdmin.Dialogs
             return newRow;
         }
 
-        private void ManageUpdatesDialog_Shown(object sender, EventArgs e)
-        {
-            CheckForUpdates();            
-        }
-
-        private void closeButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void dataGridViewUpdates_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
             Alert alert1 = (Alert)dataGridViewUpdates.Rows[e.RowIndex1].Tag;
@@ -440,13 +442,7 @@ namespace XenAdmin.Dialogs
         {
             int imageIndex = ++currentSpinningFrame <= 7 ? currentSpinningFrame : currentSpinningFrame = 0;
             pictureBoxProgress.Image = imageList.Images[imageIndex];
-        }
-
-        private void ManageUpdatesDialog_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (spinningTimer.Enabled)
-                ShowProgress(false);
-        }
+        }       
 
         private void ShowProgress(bool show)
         {

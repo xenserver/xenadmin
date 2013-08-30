@@ -71,6 +71,7 @@
             // 
             // navigationView
             // 
+            this.navigationView.CurrentSearch = null;
             resources.ApplyResources(this.navigationView, "navigationView");
             this.navigationView.InSearchMode = false;
             this.navigationView.Name = "navigationView";
@@ -88,6 +89,7 @@
             resources.ApplyResources(this.notificationsView, "notificationsView");
             this.notificationsView.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.notificationsView.Name = "notificationsView";
+            this.notificationsView.NotificationsSubModeChanged += new System.Action<XenAdmin.Controls.MainWindowControls.NotificationsSubMode>(this.notificationsView_NotificationsSubModeChanged);
             // 
             // toolStripBig
             // 

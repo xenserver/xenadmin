@@ -2493,11 +2493,11 @@
     <Compile Include="Dialogs\VDIMigrateDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TabPages\ManageUpdatesDialog.cs">
-      <SubType>Form</SubType>
+    <Compile Include="TabPages\ManageUpdatesPage.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="TabPages\ManageUpdatesDialog.Designer.cs">
-      <DependentUpon>ManageUpdatesDialog.cs</DependentUpon>
+    <Compile Include="TabPages\ManageUpdatesPage.Designer.cs">
+      <DependentUpon>ManageUpdatesPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\OptionsPages\PluginOptionsPage.cs">
       <SubType>UserControl</SubType>
@@ -4778,14 +4778,14 @@
     <EmbeddedResource Include="Dialogs\LoadSessionDialog.zh-CN.resx">
       <DependentUpon>LoadSessionDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\ManageUpdatesDialog.ja.resx">
-      <DependentUpon>ManageUpdatesDialog.cs</DependentUpon>
+    <EmbeddedResource Include="TabPages\ManageUpdatesPage.ja.resx">
+      <DependentUpon>ManageUpdatesPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\ManageUpdatesDialog.resx">
-      <DependentUpon>ManageUpdatesDialog.cs</DependentUpon>
+    <EmbeddedResource Include="TabPages\ManageUpdatesPage.resx">
+      <DependentUpon>ManageUpdatesPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\ManageUpdatesDialog.zh-CN.resx">
-      <DependentUpon>ManageUpdatesDialog.cs</DependentUpon>
+    <EmbeddedResource Include="TabPages\ManageUpdatesPage.zh-CN.resx">
+      <DependentUpon>ManageUpdatesPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\MessageBoxTest.ja.resx">
       <DependentUpon>MessageBoxTest.cs</DependentUpon>

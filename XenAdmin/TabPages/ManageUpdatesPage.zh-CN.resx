@@ -125,7 +125,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnName.HeaderText" xml:space="preserve">
-    <value>名前</value>
+    <value>名称</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ColumnName.MinimumWidth" type="System.Int32, mscorlib">
@@ -138,7 +138,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnDescription.HeaderText" xml:space="preserve">
-    <value>説明</value>
+    <value>说明</value>
   </data>
   <data name="ColumnDescription.MinimumWidth" type="System.Int32, mscorlib">
     <value>100</value>
@@ -150,7 +150,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnReleaseDate.HeaderText" xml:space="preserve">
-    <value>リリース日</value>
+    <value>已发布</value>
   </data>
   <data name="ColumnReleaseDate.MinimumWidth" type="System.Int32, mscorlib">
     <value>80</value>
@@ -162,7 +162,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnWebPage.HeaderText" xml:space="preserve">
-    <value>Web ページ</value>
+    <value>Web 页面</value>
   </data>
   <data name="ColumnWebPage.MinimumWidth" type="System.Int32, mscorlib">
     <value>100</value>
@@ -171,7 +171,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnAppliesTo.HeaderText" xml:space="preserve">
-    <value>適用先</value>
+    <value>应用对象</value>
   </data>
   <data name="ColumnAppliesTo.MinimumWidth" type="System.Int32, mscorlib">
     <value>95</value>
@@ -202,13 +202,13 @@
     <value>0, 3, 0, 6</value>
   </data>
   <data name="labelUpdates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 38</value>
+    <value>132, 38</value>
   </data>
   <data name="labelUpdates.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="labelUpdates.Text" xml:space="preserve">
-    <value>アップデートの検索中...</value>
+    <value>正在搜索更新...</value>
   </data>
   <data name="labelUpdates.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -397,7 +397,7 @@
     <value>184, 22</value>
   </data>
   <data name="refreshToolStripMenuItem.Text" xml:space="preserve">
-    <value>更新(&amp;R)</value>
+    <value>刷新(&amp;R)</value>
   </data>
   <data name="separatorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 6</value>
@@ -406,7 +406,7 @@
     <value>184, 22</value>
   </data>
   <data name="downloadAndInstallToolStripMenuItem.Text" xml:space="preserve">
-    <value>ダウンロードしてインストール(&amp;D)...</value>
+    <value>下载并安装(&amp;D)...</value>
   </data>
   <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>185, 54</value>
@@ -457,7 +457,7 @@
     <value>5</value>
   </data>
   <data name="closeButton.Text" xml:space="preserve">
-    <value>閉じる(&amp;C)</value>
+    <value>关闭(&amp;C)</value>
   </data>
   <data name="&gt;&gt;closeButton.Name" xml:space="preserve">
     <value>closeButton</value>
@@ -487,13 +487,13 @@
     <value>43, 11</value>
   </data>
   <data name="labelProgress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 21</value>
+    <value>142, 21</value>
   </data>
   <data name="labelProgress.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="labelProgress.Text" xml:space="preserve">
-    <value>アップデートの検索中...</value>
+    <value>正在搜索更新...</value>
   </data>
   <data name="&gt;&gt;labelProgress.Name" xml:space="preserve">
     <value>labelProgress</value>
@@ -577,7 +577,7 @@
     <value>4</value>
   </data>
   <data name="refreshButton.Text" xml:space="preserve">
-    <value>更新(&amp;R)</value>
+    <value>刷新(&amp;R)</value>
   </data>
   <data name="&gt;&gt;refreshButton.Name" xml:space="preserve">
     <value>refreshButton</value>
@@ -598,16 +598,16 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="downloadAndInstallButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>376, 357</value>
+    <value>478, 357</value>
   </data>
   <data name="downloadAndInstallButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 23</value>
+    <value>139, 23</value>
   </data>
   <data name="downloadAndInstallButton.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="downloadAndInstallButton.Text" xml:space="preserve">
-    <value>ダウンロードしてインストール(&amp;D)...</value>
+    <value>下载并安装(&amp;D)...</value>
   </data>
   <data name="&gt;&gt;downloadAndInstallButton.Name" xml:space="preserve">
     <value>downloadAndInstallButton</value>
@@ -640,7 +640,7 @@
     <value>800, 420</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>アップデートの確認</value>
+    <value>检查更新</value>
   </data>
   <data name="&gt;&gt;refreshToolStripMenuItem.Name" xml:space="preserve">
     <value>refreshToolStripMenuItem</value>
@@ -691,7 +691,7 @@
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>ManageUpdatesDialog</value>
+    <value>ManageUpdatesPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>

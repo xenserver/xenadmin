@@ -246,7 +246,6 @@ namespace XenAdmin
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.LicenseManagerMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
-            this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.installNewUpdateToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.rollingUpgradeToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
@@ -268,6 +267,7 @@ namespace XenAdmin
             this.MainMenuBar = new XenAdmin.Controls.MenuStripEx();
             this.securityGroupsToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.MenuPanel = new System.Windows.Forms.Panel();
+            this.updatesPage = new XenAdmin.TabPages.ManageUpdatesPage();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -299,6 +299,7 @@ namespace XenAdmin
             // 
             this.splitContainer1.Panel2.Controls.Add(this.TheTabControl);
             this.splitContainer1.Panel2.Controls.Add(this.alertPage);
+            this.splitContainer1.Panel2.Controls.Add(this.updatesPage);
             this.splitContainer1.Panel2.Controls.Add(this.TitleBackPanel);
             resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
             // 
@@ -314,6 +315,7 @@ namespace XenAdmin
             this.navigationPane.TreeNodeBeforeSelected += new System.Action(this.navigationPane_TreeNodeBeforeSelected);
             this.navigationPane.TreeViewRefreshed += new System.Action(this.navigationPane_TreeViewRefreshed);
             this.navigationPane.NavigationModeChanged += new System.Action<XenAdmin.Controls.MainWindowControls.NavigationPane.NavigationMode>(this.navigationPane_NavigationModeChanged);
+            this.navigationPane.NotificationsSubModeChanged += new Action<XenAdmin.Controls.MainWindowControls.NotificationsSubMode>(navigationPane_NotificationsSubModeChanged);
             // 
             // TheTabControl
             // 
@@ -464,6 +466,7 @@ namespace XenAdmin
             // alertPage
             // 
             resources.ApplyResources(this.alertPage, "alertPage");
+            this.alertPage.BackColor = System.Drawing.SystemColors.Window;
             this.alertPage.MinimumSize = new System.Drawing.Size(757, 520);
             this.alertPage.Name = "alertPage";
             // 
@@ -1562,7 +1565,6 @@ namespace XenAdmin
             this.toolStripSeparator14,
             this.LicenseManagerMenuItem,
             this.toolStripSeparator13,
-            this.checkForUpdatesToolStripMenuItem,
             this.installNewUpdateToolStripMenuItem,
             this.rollingUpgradeToolStripMenuItem,
             this.toolStripSeparator6,
@@ -1593,12 +1595,6 @@ namespace XenAdmin
             // 
             this.toolStripSeparator13.Name = "toolStripSeparator13";
             resources.ApplyResources(this.toolStripSeparator13, "toolStripSeparator13");
-            // 
-            // checkForUpdatesToolStripMenuItem
-            // 
-            this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            resources.ApplyResources(this.checkForUpdatesToolStripMenuItem, "checkForUpdatesToolStripMenuItem");
-            this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
             // 
             // installNewUpdateToolStripMenuItem
             // 
@@ -1746,6 +1742,11 @@ namespace XenAdmin
             resources.ApplyResources(this.MenuPanel, "MenuPanel");
             this.MenuPanel.Name = "MenuPanel";
             // 
+            // updatesPage
+            // 
+            resources.ApplyResources(this.updatesPage, "updatesPage");
+            this.updatesPage.Name = "updatesPage";
+            // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -1888,7 +1889,6 @@ namespace XenAdmin
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem15;
         private System.Windows.Forms.ToolStripMenuItem viewApplicationLogToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem17;
-        private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem xenSourceOnTheWebToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem aboutXenSourceAdminToolStripMenuItem;
@@ -1994,6 +1994,7 @@ namespace XenAdmin
         private CommandToolStripMenuItem restartToolstackToolStripMenuItem;
         private XenAdmin.Controls.MainWindowControls.NavigationPane navigationPane;
         private XenAdmin.TabPages.AlertSummaryPage alertPage;
+        private XenAdmin.TabPages.ManageUpdatesPage updatesPage;
     }
 
 }

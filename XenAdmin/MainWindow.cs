@@ -1565,8 +1565,6 @@ namespace XenAdmin
             localStorageToolStripMenuItem.Checked = Properties.Settings.Default.LocalSRsVisible;
             ShowHiddenObjectsToolStripMenuItem.Checked = Properties.Settings.Default.ShowHiddenVMs;
             connectDisconnectToolStripMenuItem.Enabled = ConnectionsManager.XenConnectionsCopy.Count > 0;
-
-            checkForUpdatesToolStripMenuItem.Available = !Helpers.CommonCriteriaCertificationRelease;
         }
 
         private void xenSourceOnTheWebToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2297,11 +2295,6 @@ namespace XenAdmin
 
         #endregion
 
-        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowForm(typeof (ManageUpdatesDialog));
-        }
-
         /// <summary>
         /// Used to select the pool or standalone host node for the specified connection which is about to appear in the tree.
         /// </summary>
@@ -2573,18 +2566,30 @@ namespace XenAdmin
             UpdateHeader();
         }
 
+        private void navigationPane_NotificationsSubModeChanged(NotificationsSubMode submode)
+        {
+            alertPage.Visible = submode == NotificationsSubMode.Alerts;
+            updatesPage.Visible = submode == NotificationsSubMode.Updates;
+
+            if (alertPage.Visible)
+                alertPage.RefreshAlertList();
+
+            if (updatesPage.Visible)
+                updatesPage.RefreshUpdateList();
+            else
+                updatesPage.CancelUpdateCheck();
+        }
+
         private void navigationPane_NavigationModeChanged(NavigationPane.NavigationMode mode)
         {
             if (mode == NavigationPane.NavigationMode.Notifications)
             {
                 TheTabControl.Visible = false;
-                alertPage.Visible = true;
-                alertPage.RefreshAlertList();
             }
             else
             {
                 TheTabControl.Visible = true;
-                alertPage.Visible = false;
+                alertPage.Visible = updatesPage.Visible = false;
             }
         }
 

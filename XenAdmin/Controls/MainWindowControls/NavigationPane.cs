@@ -60,6 +60,9 @@ namespace XenAdmin.Controls.MainWindowControls
         public event Action<NavigationMode> NavigationModeChanged;
 
         [Browsable(true)]
+        public event Action<NotificationsSubMode> NotificationsSubModeChanged;
+
+        [Browsable(true)]
         public event Action TreeViewSelectionChanged;
 
         [Browsable(true)]
@@ -339,6 +342,12 @@ namespace XenAdmin.Controls.MainWindowControls
 
                 pairedItem.Visible = (item.Placement == ToolStripItemPlacement.None);
             }
+        }
+
+        private void notificationsView_NotificationsSubModeChanged(NotificationsSubMode subMode)
+        {
+            if (NotificationsSubModeChanged != null)
+                NotificationsSubModeChanged(subMode);
         }
 
         #endregion
