@@ -69,6 +69,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.m_gridFeatures.AllowUserToResizeRows = false;
             this.m_gridFeatures.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.m_gridFeatures.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.m_gridFeatures.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.m_gridFeatures.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.m_gridFeatures.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.m_gridFeatures.ColumnHeadersVisible = false;
@@ -187,6 +188,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.m_gridPlugins.AllowUserToResizeRows = false;
             this.m_gridPlugins.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.m_gridPlugins.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.m_gridPlugins.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.m_gridPlugins.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.m_gridPlugins.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.m_gridPlugins.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {

@@ -253,7 +253,15 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         public override string Text { get { return Messages.PLUGINS; } }
 
-        public string SubText { get { return string.Format(Messages.PLUGIN_ENABLED_COUNT, _pluginManager.EnabledPluginsCount); } }
+        public string SubText
+        {
+            get
+            {
+                return _pluginManager.EnabledPluginsCount == 1
+                           ? Messages.PLUGIN_ENABLED_COUNT_ONE
+                           : string.Format(Messages.PLUGIN_ENABLED_COUNT, _pluginManager.EnabledPluginsCount);
+            }
+        }
 
         public Image Image { get { return Properties.Resources._000_Module_h32bit_16; } }
 

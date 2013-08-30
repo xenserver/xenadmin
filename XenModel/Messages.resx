@@ -8387,6 +8387,9 @@ Please reconnect the host and try again</value>
   <data name="PLUGIN_ENABLED_COUNT" xml:space="preserve">
     <value>{0} plugins enabled</value>
   </data>
+  <data name="PLUGIN_ENABLED_COUNT_ONE" xml:space="preserve">
+    <value>1 plugin enabled</value>
+  </data>
   <data name="PLUGIN_FEATURES" xml:space="preserve">
     <value>Features</value>
   </data>

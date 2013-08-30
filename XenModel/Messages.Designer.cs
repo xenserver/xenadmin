@@ -24035,6 +24035,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 1 plugin enabled.
+        /// </summary>
+        public static string PLUGIN_ENABLED_COUNT_ONE {
+            get {
+                return ResourceManager.GetString("PLUGIN_ENABLED_COUNT_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Features.
         /// </summary>
         public static string PLUGIN_FEATURES {
