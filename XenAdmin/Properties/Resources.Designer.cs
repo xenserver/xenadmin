@@ -2034,6 +2034,13 @@ namespace XenAdmin.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap tempUpdates {
+            get {
+                object obj = ResourceManager.GetObject("tempUpdates", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap tools_notinstalled_16x {
             get {
                 object obj = ResourceManager.GetObject("tools_notinstalled_16x", resourceCulture);

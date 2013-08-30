@@ -22730,6 +22730,60 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alerts.
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_ALERTS_READ {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_ALERTS_READ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alerts ({0}).
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_ALERTS_UNREAD {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_ALERTS_UNREAD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Events.
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_EVENTS_READ {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_READ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Events ({0}).
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_EVENTS_UNREAD {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_UNREAD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updates.
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_UPDATES_READ {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_UPDATES_READ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updates ({0}).
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_UPDATES_UNREAD {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_UPDATES_UNREAD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Now.
         /// </summary>
         public static string NOW {
@@ -28699,24 +28753,6 @@ namespace XenAdmin {
         public static string SYNCING_DATABASE {
             get {
                 return ResourceManager.GetString("SYNCING_DATABASE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No System Alerts.
-        /// </summary>
-        public static string SYSTEM_ALERTS_EMPTY {
-            get {
-                return ResourceManager.GetString("SYSTEM_ALERTS_EMPTY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to System Alerts: {0}.
-        /// </summary>
-        public static string SYSTEM_ALERTS_TOTAL {
-            get {
-                return ResourceManager.GetString("SYSTEM_ALERTS_TOTAL", resourceCulture);
             }
         }
         

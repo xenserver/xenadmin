@@ -7856,6 +7856,24 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NOTICE_LICENCE_TITLE" xml:space="preserve">
     <value>Server License</value>
   </data>
+  <data name="NOTIFICATIONS_SUBMODE_ALERTS_READ" xml:space="preserve">
+    <value>Alerts</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_ALERTS_UNREAD" xml:space="preserve">
+    <value>Alerts ({0})</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_READ" xml:space="preserve">
+    <value>Events</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD" xml:space="preserve">
+    <value>Events ({0})</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_UPDATES_READ" xml:space="preserve">
+    <value>Updates</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_UPDATES_UNREAD" xml:space="preserve">
+    <value>Updates ({0})</value>
+  </data>
   <data name="NOT_AGILE_NETWORK_NOT_SHARED" xml:space="preserve">
     <value>The VM is not using a shared network. Restart cannot be guaranteed.</value>
   </data>
@@ -9961,12 +9979,6 @@ Do you want to connect to the pool master '{1}'?</value>
   </data>
   <data name="SYNCING_DATABASE" xml:space="preserve">
     <value>Performing pool database sync</value>
-  </data>
-  <data name="SYSTEM_ALERTS_EMPTY" xml:space="preserve">
-    <value>No System Alerts</value>
-  </data>
-  <data name="SYSTEM_ALERTS_TOTAL" xml:space="preserve">
-    <value>System Alerts: {0}</value>
   </data>
   <data name="TAGS" xml:space="preserve">
     <value>Tags</value>

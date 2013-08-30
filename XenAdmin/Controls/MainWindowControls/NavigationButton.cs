@@ -53,10 +53,12 @@ namespace XenAdmin.Controls.MainWindowControls
             var pairedButton = PairedItem as ToolStripButton;
 
             if (pairedButton != null && pairedButton.Checked != Checked)
+            {
                 pairedButton.Checked = Checked;
 
-            if (Checked && NavigationViewChanged != null)
-                NavigationViewChanged(Tag);
+                if (Checked && NavigationViewChanged != null)
+                    NavigationViewChanged(Tag);
+            }
         }
 
         public void SetTag(object tag)

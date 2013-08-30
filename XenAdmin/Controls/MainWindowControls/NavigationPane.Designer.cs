@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NavigationPane));
             this.splitContainer1 = new XenAdmin.Controls.Common.SmoothSplitContainer();
             this.navigationView = new XenAdmin.Controls.MainWindowControls.NavigationView();
+            this.notificationsView = new XenAdmin.Controls.MainWindowControls.NotificationsView();
             this.toolStripBig = new XenAdmin.Controls.MainWindowControls.NavigationToolStripBig();
             this.buttonInfraBig = new XenAdmin.Controls.MainWindowControls.NavigationButtonBig();
             this.buttonObjectsBig = new XenAdmin.Controls.MainWindowControls.NavigationButtonBig();
@@ -62,6 +63,7 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.navigationView);
+            this.splitContainer1.Panel1.Controls.Add(this.notificationsView);
             // 
             // splitContainer1.Panel2
             // 
@@ -69,7 +71,6 @@
             // 
             // navigationView
             // 
-            this.navigationView.CurrentSearch = null;
             resources.ApplyResources(this.navigationView, "navigationView");
             this.navigationView.InSearchMode = false;
             this.navigationView.Name = "navigationView";
@@ -81,6 +82,12 @@
             this.navigationView.TreeNodeRightClicked += new System.Action(this.navigationView_TreeNodeRightClicked);
             this.navigationView.TreeNodeBeforeSelected += new System.Action(this.navigationView_TreeNodeBeforeSelected);
             this.navigationView.TreeViewRefreshed += new System.Action(this.navigationView_TreeViewRefreshed);
+            // 
+            // notificationsView
+            // 
+            resources.ApplyResources(this.notificationsView, "notificationsView");
+            this.notificationsView.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.notificationsView.Name = "notificationsView";
             // 
             // toolStripBig
             // 
@@ -278,5 +285,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolders;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFields;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemVapps;
+        private NotificationsView notificationsView;
     }
 }

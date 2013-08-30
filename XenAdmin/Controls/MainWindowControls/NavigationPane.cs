@@ -36,6 +36,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using XenAdmin.Alerts;
 using XenAdmin.Commands;
 using XenAdmin.XenSearch;
 using XenAPI;
@@ -54,6 +55,9 @@ namespace XenAdmin.Controls.MainWindowControls
         private NavigationMode currentMode;
 
         #region Events
+
+        [Browsable(true)]
+        public event Action<NavigationMode> NavigationModeChanged;
 
         [Browsable(true)]
         public event Action TreeViewSelectionChanged;
@@ -146,6 +150,12 @@ namespace XenAdmin.Controls.MainWindowControls
 
         #endregion
 
+        public void UpdateNotificationsButton()
+        {
+            buttonNotifyBig.Text = string.Format("Notifications ({0})", Alert.NonDismissingAlertCount);
+            notificationsView.UpdateEntries(NotificationsSubMode.Alerts, Alert.NonDismissingAlertCount);
+        }
+
         public void XenConnectionCollectionChanged(CollectionChangeEventArgs e)
         {
             navigationView.XenConnectionCollectionChanged(e);
@@ -228,12 +238,27 @@ namespace XenAdmin.Controls.MainWindowControls
 
         private void OnSearchChanged()
         {
-            navigationView.CurrentSearch = Search;
-            navigationView.NavigationMode = currentMode;
-            navigationView.ResetSeachBox();
-            navigationView.RequestRefreshTreeView();
-            navigationView.FocusTreeView();
-            navigationView.SelectObject(null, false); 
+            if (currentMode == NavigationMode.Notifications)
+            {
+                notificationsView.Visible = true;
+                notificationsView.SelectNotificationsSubMode(NotificationsSubMode.Alerts);
+                navigationView.Visible = false;
+            }
+            else
+            {
+                notificationsView.Visible = false;
+                navigationView.Visible = true;
+
+                navigationView.CurrentSearch = Search;
+                navigationView.NavigationMode = currentMode;
+                navigationView.ResetSeachBox();
+                navigationView.RequestRefreshTreeView();
+                navigationView.FocusTreeView();
+                navigationView.SelectObject(null, false);
+            }
+
+            if (NavigationModeChanged != null)
+                NavigationModeChanged(currentMode);
         }
 
         #endregion

@@ -43,6 +43,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using XenAdmin.Actions.GUIActions;
+using XenAdmin.Controls.MainWindowControls;
 using XenAdmin.Wizards.ImportWizard;
 using XenAPI;
 using XenAdmin.Actions;
@@ -112,8 +113,6 @@ namespace XenAdmin
         private string[] CommandLineParam = null;
         private ArgType CommandLineArgType = ArgType.None;
 
-        private static readonly Color HasAlertsColor = Color.Red;
-        private static readonly Color NoAlertsColor = SystemColors.ControlText;
         private static readonly System.Windows.Forms.Timer CheckForUpdatesTimer = new System.Windows.Forms.Timer();
 
         private readonly PluginManager pluginManager;
@@ -201,8 +200,6 @@ namespace XenAdmin
             // Fix colour of text on gradient panels
             TitleLabel.ForeColor = Program.TitleBarForeColor;
             loggedInLabel1.SetTextColor(Program.TitleBarForeColor);
-
-            TitleLeftLine.Visible = Environment.OSVersion.Version.Major != 6 || Application.RenderWithVisualStyles;
 
             SelectionManager.BindTo(MainMenuBar.Items, commandInterface);
             SelectionManager.BindTo(ToolStrip.Items, commandInterface);
@@ -1199,7 +1196,6 @@ namespace XenAdmin
 
             ToolStrip.Height = ToolbarsEnabled ? TOOLBAR_HEIGHT : 0;
             ToolStrip.Enabled = ToolbarsEnabled;
-            MenuBarToolStrip.Visible = MenuBarToolStrip.Enabled = !ToolbarsEnabled;
             ShowToolbarMenuItem.Checked = toolbarToolStripMenuItem.Checked = ToolbarsEnabled;
 
             powerOnHostToolStripButton.Available = powerOnHostToolStripButton.Enabled;
@@ -2577,6 +2573,21 @@ namespace XenAdmin
             UpdateHeader();
         }
 
+        private void navigationPane_NavigationModeChanged(NavigationPane.NavigationMode mode)
+        {
+            if (mode == NavigationPane.NavigationMode.Notifications)
+            {
+                TheTabControl.Visible = false;
+                alertPage.Visible = true;
+                alertPage.RefreshAlertList();
+            }
+            else
+            {
+                TheTabControl.Visible = true;
+                alertPage.Visible = false;
+            }
+        }
+
         private void navigationPane_TreeNodeBeforeSelected()
         {
             SearchMode = false;
@@ -2619,39 +2630,9 @@ namespace XenAdmin
 
         #endregion
 
-        private void AlertsToolbarButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void UpdateAlertToolbarButton()
-        {
-            int validAlertCount = Alert.NonDismissingAlertCount;
-
-            if (validAlertCount == 0 && AlertsToolbarButton.Text != Messages.SYSTEM_ALERTS_EMPTY)
-            {
-                AlertsToolbarButtonSmall.Font = AlertsToolbarButton.Font = Program.DefaultFont;
-                AlertsToolbarButtonSmall.ForeColor = AlertsToolbarButton.ForeColor = NoAlertsColor;
-                AlertsToolbarButtonSmall.Image = AlertsToolbarButton.Image = XenAdmin.Properties.Resources._000_Tick_h32bit_16;
-                AlertsToolbarButtonSmall.Text = AlertsToolbarButton.Text = Messages.SYSTEM_ALERTS_EMPTY;
-            }
-            else if (validAlertCount > 0)
-            {
-                if (AlertsToolbarButton.Text == Messages.SYSTEM_ALERTS_EMPTY)
-                {
-                    AlertsToolbarButtonSmall.Font = AlertsToolbarButton.Font = Program.DefaultFontBoldUnderline;
-                    AlertsToolbarButtonSmall.ForeColor = AlertsToolbarButton.ForeColor = HasAlertsColor;
-                    AlertsToolbarButtonSmall.Image = AlertsToolbarButton.Image = XenAdmin.Properties.Resources._000_XenCenterAlerts_h32bit_24;
-                }
-                AlertsToolbarButtonSmall.Text = AlertsToolbarButton.Text = string.Format(Messages.SYSTEM_ALERTS_TOTAL, validAlertCount);
-            }
-
-        }
-
         void XenCenterAlerts_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
-            //Program.AssertOnEventThread();
-            Program.BeginInvoke(Program.MainWindow, UpdateAlertToolbarButton);
+            Program.BeginInvoke(Program.MainWindow, navigationPane.UpdateNotificationsButton);
         }
 
         private void backButton_Click(object sender, EventArgs e)

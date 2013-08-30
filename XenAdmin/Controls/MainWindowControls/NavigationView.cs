@@ -395,10 +395,10 @@ namespace XenAdmin.Controls.MainWindowControls
         private bool CanDrag()
         {
             if (NavigationMode == NavigationPane.NavigationMode.Infrastructure
-                || NavigationMode == NavigationPane.NavigationMode.SavedSearch
-                || NavigationMode == NavigationPane.NavigationMode.Notifications)
+                || NavigationMode == NavigationPane.NavigationMode.SavedSearch)
             {
-                return Program.MainWindow.SelectionManager.Selection.AllItemsAre<Host>() || Program.MainWindow.SelectionManager.Selection.AllItemsAre<VM>(vm => !vm.is_a_template);
+                return Program.MainWindow.SelectionManager.Selection.AllItemsAre<Host>()
+                    || Program.MainWindow.SelectionManager.Selection.AllItemsAre<VM>(vm => !vm.is_a_template);
             }
 
             foreach (SelectedItem item in Program.MainWindow.SelectionManager.Selection)

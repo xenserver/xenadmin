@@ -139,7 +139,7 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="navigationView.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;navigationView.Name" xml:space="preserve">
     <value>navigationView</value>
@@ -152,6 +152,36 @@
   </data>
   <data name="&gt;&gt;navigationView.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="notificationsView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="notificationsView.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="notificationsView.ItemHeight" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="notificationsView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="notificationsView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 229</value>
+  </data>
+  <data name="notificationsView.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;notificationsView.Name" xml:space="preserve">
+    <value>notificationsView</value>
+  </data>
+  <data name="&gt;&gt;notificationsView.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.MainWindowControls.NotificationsView, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;notificationsView.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;notificationsView.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel1.Name" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -334,7 +364,7 @@
     <value>229</value>
   </data>
   <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Name" xml:space="preserve">
     <value>splitContainer1</value>
