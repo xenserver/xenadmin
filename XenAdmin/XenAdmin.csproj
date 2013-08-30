@@ -715,11 +715,11 @@
     <Compile Include="Dialogs\InputPromptDialog.Designer.cs">
       <DependentUpon>InputPromptDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="TabPages\AlertSummaryDialog.cs">
-      <SubType>Form</SubType>
+    <Compile Include="TabPages\AlertSummaryPage.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="TabPages\AlertSummaryDialog.Designer.cs">
-      <DependentUpon>AlertSummaryDialog.cs</DependentUpon>
+    <Compile Include="TabPages\AlertSummaryPage.Designer.cs">
+      <DependentUpon>AlertSummaryPage.cs</DependentUpon>
     </Compile>
     <Compile Include="TabPages\HAPage.cs">
       <SubType>UserControl</SubType>
@@ -1769,8 +1769,8 @@
       <DependentUpon>InputPromptDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\AlertSummaryDialog.resx">
-      <DependentUpon>AlertSummaryDialog.cs</DependentUpon>
+    <EmbeddedResource Include="TabPages\AlertSummaryPage.resx">
+      <DependentUpon>AlertSummaryPage.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\HAPage.resx">
@@ -4554,11 +4554,11 @@
     <EmbeddedResource Include="Dialogs\AdPasswordPrompt.zh-CN.resx">
       <DependentUpon>AdPasswordPrompt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\AlertSummaryDialog.ja.resx">
-      <DependentUpon>AlertSummaryDialog.cs</DependentUpon>
+    <EmbeddedResource Include="TabPages\AlertSummaryPage.ja.resx">
+      <DependentUpon>AlertSummaryPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\AlertSummaryDialog.zh-CN.resx">
-      <DependentUpon>AlertSummaryDialog.cs</DependentUpon>
+    <EmbeddedResource Include="TabPages\AlertSummaryPage.zh-CN.resx">
+      <DependentUpon>AlertSummaryPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AllowUpdatesDialog.ja.resx">
       <DependentUpon>AllowUpdatesDialog.cs</DependentUpon>

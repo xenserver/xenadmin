@@ -56,9 +56,6 @@ namespace XenAdminTests.DialogTests.state1_xml.DialogsWithDefaultConstructor
     public class AddStorageLinkSystemDialogTest : DialogWithDefaultConstructorTest<AddStorageLinkSystemDialog> { }
 
     [TestFixture, Category(TestCategories.UICategoryA)]
-    public class AlertSummaryDialogTest : DialogWithDefaultConstructorTest<AlertSummaryDialog> { }
-
-    [TestFixture, Category(TestCategories.UICategoryA)]
     public class BondPropertiesTest : DialogWithDefaultConstructorTest<BondProperties> { }
 
     [TestFixture, Category(TestCategories.UICategoryA)]

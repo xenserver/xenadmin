@@ -39,6 +39,7 @@ using System.Windows.Forms;
 
 using XenAdmin.Controls;
 using XenAdmin.Core;
+using XenAdmin.Dialogs;
 using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.Alerts;
@@ -48,9 +49,9 @@ using XenAdmin.Actions;
 using System.IO;
 
 
-namespace XenAdmin.Dialogs
+namespace XenAdmin.TabPages
 {
-    public partial class AlertSummaryDialog : XenDialogBase
+    public partial class AlertSummaryPage : UserControl
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -61,7 +62,7 @@ namespace XenAdmin.Dialogs
         private bool inAlertBuild;
         private bool retryAlertBuild;
 
-        public AlertSummaryDialog()
+        public AlertSummaryPage()
         {
             InitializeComponent();
             GridViewAlerts.Sort(ColumnDate, ListSortDirection.Descending);
@@ -76,7 +77,7 @@ namespace XenAdmin.Dialogs
             toolStripSplitButtonDismiss.Text = tsmiDismissAll.Text;
         }
 
-        private void AlertSummaryDialog_Load(object sender, EventArgs e)
+        public void RefreshAlertList()
         {
             toolStripDropDownButtonServerFilter.InitializeHostList();
             toolStripDropDownButtonServerFilter.BuildFilterList();
@@ -190,7 +191,7 @@ namespace XenAdmin.Dialogs
                     log.Debug("Rebuilding alertList: Cleared rows");
                     GridViewAlerts.Rows.AddRange(gridRows.ToArray());
                     log.DebugFormat("Rebuilding alertList: Added {0} rows to the grid", GridViewAlerts.Rows.Count);
-                    LabelCappingEntries.Visible = (alertsFound > ALERT_CAP);
+                    tableLayoutPanel3.Visible = alertsFound > ALERT_CAP;
 
                     //restore selection
                     if (selection.Count > 0)
@@ -293,7 +294,7 @@ namespace XenAdmin.Dialogs
                     GridViewAlerts.Rows.RemoveAt(i);
             }
             if (GridViewAlerts.Rows.Count < ALERT_CAP)
-                LabelCappingEntries.Visible = false;
+                tableLayoutPanel3.Visible = false;
         }
 
         private void GridViewAlerts_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -571,17 +572,6 @@ namespace XenAdmin.Dialogs
                     RemoveAlertRow(a);
                     break;
             }
-        }
-
-        private void closeButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            Alert.XenCenterAlerts.CollectionChanged -= m_alertCollectionChangedWithInvoke;
-            base.OnFormClosing(e);
         }
 
         private void UpdateActionEnablement()

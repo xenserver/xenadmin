@@ -2621,7 +2621,7 @@ namespace XenAdmin
 
         private void AlertsToolbarButton_Click(object sender, EventArgs e)
         {
-            ShowForm(typeof (AlertSummaryDialog));
+
         }
 
         private void UpdateAlertToolbarButton()
