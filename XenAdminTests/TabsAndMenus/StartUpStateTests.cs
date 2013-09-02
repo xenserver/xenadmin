@@ -59,7 +59,7 @@ namespace XenAdminTests.TabsAndMenus
         [Test]
         public void TestTabs()
         {
-            VerifyTabs(null, new [] { "Home", "Search", "Logs" });
+            VerifyTabs(null, new [] { "Home", "Search" });
         }
 
         [Test]

@@ -238,14 +238,6 @@ namespace XenAdminTests
             }
         }
 
-        public TabPage TabPageHistory
-        {
-            get
-            {
-                return GetField<TabPage>("TabPageHistory");
-            }
-        }
-
         public TabPage TabPageNetwork
         {
             get

@@ -314,18 +314,21 @@ namespace XenAdminTests
         /// <returns>A value indicating whether the action was successful.</returns>
         protected bool SelectInTree(Predicate<VirtualTreeNode> match, params object[] ixmos)
         {
-            List<VirtualTreeNode> nodes = new List<VirtualTreeNode>();
-            foreach (object x in ixmos)
-            {
-                VirtualTreeNode node = FindInTree(x, match);
-                if (node == null)
-                    return false;
-                nodes.Add(node);
-            }
+            return MWWaitFor(() =>
+                {
+                    List<VirtualTreeNode> nodes = new List<VirtualTreeNode>();
+                    foreach (object x in ixmos)
+                    {
+                        VirtualTreeNode node = FindInTree(x, match);
+                        if (node == null)
+                            return false;
+                        nodes.Add(node);
+                    }
 
-            MW(() => nodes.ForEach(v => v.EnsureVisible()));
-            MW(() => MainWindowWrapper.TreeView.SelectedNodes.SetContents(nodes));
-            return true;
+                    nodes.ForEach(v => v.EnsureVisible());
+                    MainWindowWrapper.TreeView.SelectedNodes.SetContents(nodes);
+                    return true;
+                });
         }
 
         /// <summary>

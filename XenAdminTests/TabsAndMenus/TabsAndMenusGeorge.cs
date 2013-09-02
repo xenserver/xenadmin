@@ -44,20 +44,20 @@ namespace XenAdminTests.TabsAndMenus
     [TestFixture, Category(TestCategories.UICategoryB)]
     public class TabsAndMenusGeorge : TabsAndMenus
     {
-        private string[] XenCenterTabs = new[] { "Home", "Search", "Logs" };
-        private string[] PoolTabs = new[] { "Search", "General", "Storage", "Networking", "HA", "WLB", "Users", "Logs" };
-        private string[] HostTabs = new[] { "Search", "General", "Storage", "Networking", "NICs", "Console", "Performance", "Users", "Logs" };
-        private string[] VMTabs = new[] { "General", "Storage", "Networking", "Console", "Performance", "Snapshots", "Logs" };
-        private string[] DefaultTemplateTabs = new[] { "General", "Networking", "Logs" };
-        private string[] OtherInstallMediaTabs = new[] { "General", "Storage", "Networking", "Logs" };
-        private string[] UserTemplateTabs_Provision = new[] { "General", "Networking", "Logs" };
-        private string[] UserTemplateTabs_NoProvision = new[] { "General", "Storage", "Networking", "Logs" };
-        private string[] SRTabs = new[] { "General", "Storage", "Logs" };
-        private string[] SnapshotTabs = new[] { "General", "Networking", "Logs" };
-        private string[] VDITabs = new[] { "Logs" };
-        private string[] NetworkTabs = new[] { "Logs" };
-        private string[] GroupingTagTabs = new[] { "Search", "Logs" };
-        private string[] FolderTabs = new[] { "Search", "Logs" };
+        private string[] XenCenterTabs = new[] { "Home", "Search" };
+        private string[] PoolTabs = new[] { "Search", "General", "Storage", "Networking", "HA", "WLB", "Users" };
+        private string[] HostTabs = new[] { "Search", "General", "Storage", "Networking", "NICs", "Console", "Performance", "Users" };
+        private string[] VMTabs = new[] { "General", "Storage", "Networking", "Console", "Performance", "Snapshots" };
+        private string[] DefaultTemplateTabs = new[] { "General", "Networking" };
+        private string[] OtherInstallMediaTabs = new[] { "General", "Storage", "Networking" };
+        private string[] UserTemplateTabs_Provision = new[] { "General", "Networking" };
+        private string[] UserTemplateTabs_NoProvision = new[] { "General", "Storage", "Networking" };
+        private string[] SRTabs = new[] { "General", "Storage" };
+        private string[] SnapshotTabs = new[] { "General", "Networking" };
+        private string[] VDITabs = new string[] { };
+        private string[] NetworkTabs = new string[] { };
+        private string[] GroupingTagTabs = new[] { "Search" };
+        private string[] FolderTabs = new[] { "Search" };
 
         public TabsAndMenusGeorge()
             : base("state1.xml")

@@ -55,19 +55,19 @@ namespace XenAdminTests.TabsAndMenus
             DisableAllPlugins();
         }
 
-        private string[] XenCenterTabs = new[] { "Home", "Search", "Logs" };
-        private string[] PoolTabs = new[] { "Search", "General", "Memory", "Storage", "Networking", "HA", "WLB", "Users", "Logs" };
-        private string[] HostTabs = new[] { "Search", "General", "Memory", "Storage", "Networking", "NICs", "Console", "Performance", "Users", "Logs" };
-        private string[] VMTabs = new[] { "General", "Memory", "Storage", "Networking", "Console", "Performance", "Snapshots", "Logs" };
-        private string[] DefaultTemplateTabs = new[] { "General", "Memory", "Networking", "Logs" };
-        private string[] OtherInstallMediaTabs = new[] { "General", "Memory", "Storage", "Networking", "Logs" };
-        private string[] UserTemplateTabs = new[] { "General", "Memory", "Storage", "Networking", "Logs" };
-        private string[] SRTabs = new[] { "General", "Storage", "Logs" };
-        private string[] SnapshotTabs = new[] { "General", "Memory", "Networking", "Logs" };
-        private string[] VDITabs = new[] { "Logs" };
-        private string[] NetworkTabs = new[] { "Logs" };
-        private string[] GroupingTagTabs = new[] { "Search", "Logs" };
-        private string[] FolderTabs = new[] { "Search", "Logs" };
+        private string[] XenCenterTabs = new[] { "Home", "Search" };
+        private string[] PoolTabs = new[] { "Search", "General", "Memory", "Storage", "Networking", "HA", "WLB", "Users" };
+        private string[] HostTabs = new[] { "Search", "General", "Memory", "Storage", "Networking", "NICs", "Console", "Performance", "Users" };
+        private string[] VMTabs = new[] { "General", "Memory", "Storage", "Networking", "Console", "Performance", "Snapshots" };
+        private string[] DefaultTemplateTabs = new[] { "General", "Memory", "Networking" };
+        private string[] OtherInstallMediaTabs = new[] { "General", "Memory", "Storage", "Networking" };
+        private string[] UserTemplateTabs = new[] { "General", "Memory", "Storage", "Networking" };
+        private string[] SRTabs = new[] { "General", "Storage" };
+        private string[] SnapshotTabs = new[] { "General", "Memory", "Networking" };
+        private string[] VDITabs = new string[] { };
+        private string[] NetworkTabs = new string[] { };
+        private string[] GroupingTagTabs = new[] { "Search" };
+        private string[] FolderTabs = new[] { "Search" };
 
         [Test]
         public void Tabs_XenCenterNode()

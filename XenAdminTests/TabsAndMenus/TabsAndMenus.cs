@@ -112,10 +112,8 @@ namespace XenAdminTests.TabsAndMenus
             List<ToolStripItem> items = new List<ToolStripItem>();
 
             // skip out forward, back and system alert buttons
-            for (int i = 2; i < MainWindowWrapper.MainToolStrip.Items.Count - 1; i++)
-            {
+            for (int i = 2; i < MainWindowWrapper.MainToolStrip.Items.Count; i++)
                 items.Add(MainWindowWrapper.MainToolStrip.Items[i]);
-            }
 
             AssertToolStripItems(ixmoString, expectedItems, new ToolStripItemCollection(MainWindowWrapper.MainToolStrip, items.ToArray()), false);
         }

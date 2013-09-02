@@ -49,7 +49,7 @@ namespace XenAdminTests.TabsAndMenus
             var rows = new List<HistoryPage.DataGridViewActionRow>();
             MW(() =>
                 {
-                    var gridView = TestUtils.GetDataGridView(MainWindowWrapper.Item, "HistoryPage.dataGridView");
+                    var gridView = TestUtils.GetDataGridView(MainWindowWrapper.Item, "eventsPage.dataGridView");
                     foreach (DataGridViewRow row in gridView.Rows)
                     {
                         var actionRow = row as HistoryPage.DataGridViewActionRow;
@@ -65,7 +65,7 @@ namespace XenAdminTests.TabsAndMenus
             var rows = new List<HistoryPage.DataGridViewActionRow>();
             MW(() =>
                 {
-                    var gridView = TestUtils.GetDataGridView(MainWindowWrapper.Item, "HistoryPage.dataGridView");
+                    var gridView = TestUtils.GetDataGridView(MainWindowWrapper.Item, "eventsPage.dataGridView");
 
                     foreach (DataGridViewRow row in gridView.Rows)
                     {
@@ -81,7 +81,7 @@ namespace XenAdminTests.TabsAndMenus
         public new void TearDown()
         {
             RemoveStateDBs();
-            GoToTabPage(MainWindowWrapper.TabPageHistory);
+            //Events tab
             ConnectionsManager.History.Clear();
         }
 
@@ -107,9 +107,7 @@ namespace XenAdminTests.TabsAndMenus
                 SelectInTree(n.Tag);
                 MW(n.EnsureVisible);
 
-                // Switch to the History tab
-                GoToTabPage(MainWindowWrapper.TabPageHistory);
-
+                //Events tab
                 var visibleRows = GetVisibleRows();
 
                 Assert.AreEqual(1, visibleRows.Count, "No connection item found.");
@@ -128,8 +126,7 @@ namespace XenAdminTests.TabsAndMenus
 
             new List<VirtualTreeNode>(MainWindowWrapper.TreeView.SelectedNodes).ForEach(n => MW(n.EnsureVisible));
 
-            // Switch to the History tab
-            GoToTabPage(MainWindowWrapper.TabPageHistory);
+            //Events tab
 
             var rows = GetVisibleRows();
             Assert.AreEqual(1, rows.Count, "History page didn't have 1 message before VMs shut down");
@@ -144,8 +141,8 @@ namespace XenAdminTests.TabsAndMenus
         public void TestClear()
         {
             SelectInTree(GetAnyPool());
-            GoToTabPage(MainWindowWrapper.TabPageHistory);
-
+            
+            //Events tab
             var rows = GetVisibleRows();
             Assert.AreEqual(1, rows.Count, "No connection item found.");
 
@@ -153,7 +150,7 @@ namespace XenAdminTests.TabsAndMenus
             rows = GetUnfinishedRows();
             Assert.AreEqual(0, rows.Count, "No connection item found.");
 
-            MW(() => TestUtils.GetToolStripMenuItem(MainWindowWrapper.Item, "HistoryPage.tsmiDismissAll").PerformClick());
+            MW(() => TestUtils.GetToolStripMenuItem(MainWindowWrapper.Item, "eventsPage.tsmiDismissAll").PerformClick());
             rows = GetVisibleRows();
             Assert.AreEqual(0, rows.Count, "Items weren't cleared.");
         }
@@ -162,9 +159,9 @@ namespace XenAdminTests.TabsAndMenus
         public void TestHide()
         {
             SelectInTree(GetAnyPool());
-            GoToTabPage(MainWindowWrapper.TabPageHistory);
+            //Events tab
             var showAllButton = MW(() => TestUtils.GetToolStripMenuItem(MainWindowWrapper.Item,
-                                                                        "HistoryPage.toolStripDdbFilterStatus.toolStripMenuItemAll"));
+                                                                        "eventsPage.toolStripDdbFilterStatus.toolStripMenuItemAll"));
 
             var rows = GetVisibleRows();
             Assert.AreEqual(1, rows.Count, "No connection item found.");
@@ -172,42 +169,42 @@ namespace XenAdminTests.TabsAndMenus
 
             // this should clear all items as they are all completed.
             MW(() => TestUtils.GetToolStripMenuItem(MainWindowWrapper.Item,
-                "HistoryPage.toolStripDdbFilterStatus.toolStripMenuItemComplete").PerformClick());
+                "eventsPage.toolStripDdbFilterStatus.toolStripMenuItemComplete").PerformClick());
             rows = GetVisibleRows();
             Assert.AreEqual(0, rows.Count, "Items weren't cleared.");
             Assert.IsTrue(showAllButton.Enabled);
 
             // this should bring them back.
             MW(() => TestUtils.GetToolStripMenuItem(MainWindowWrapper.Item,
-                "HistoryPage.toolStripDdbFilterStatus.toolStripMenuItemComplete").PerformClick());
+                "eventsPage.toolStripDdbFilterStatus.toolStripMenuItemComplete").PerformClick());
             rows = GetVisibleRows();
             Assert.AreEqual(1, rows.Count, "Items were cleared.");
             Assert.IsFalse(showAllButton.Enabled);
 
             // nothing should change for cancelled items
             MW(() => TestUtils.GetToolStripMenuItem(MainWindowWrapper.Item,
-                "HistoryPage.toolStripDdbFilterStatus.toolStripMenuItemCancelled").PerformClick());
+                "eventsPage.toolStripDdbFilterStatus.toolStripMenuItemCancelled").PerformClick());
             rows = GetVisibleRows();
             Assert.AreEqual(1, rows.Count, "Items were cleared.");
             Assert.IsTrue(showAllButton.Enabled);
 
             // nothing should change for failed items
             MW(() => TestUtils.GetToolStripMenuItem(MainWindowWrapper.Item,
-                "HistoryPage.toolStripDdbFilterStatus.toolStripMenuItemError").PerformClick());
+                "eventsPage.toolStripDdbFilterStatus.toolStripMenuItemError").PerformClick());
             rows = GetVisibleRows();
             Assert.AreEqual(1, rows.Count, "Items were cleared.");
             Assert.IsTrue(showAllButton.Enabled);
 
             // nothing should change for incomplete items
             MW(() => TestUtils.GetToolStripMenuItem(MainWindowWrapper.Item,
-                "HistoryPage.toolStripDdbFilterStatus.toolStripMenuItemInProgress").PerformClick());
+                "eventsPage.toolStripDdbFilterStatus.toolStripMenuItemInProgress").PerformClick());
             rows = GetVisibleRows();
             Assert.AreEqual(1, rows.Count, "Items were cleared.");
             Assert.IsTrue(showAllButton.Enabled);
 
             // put all these back
             MW(() => TestUtils.GetToolStripMenuItem(MainWindowWrapper.Item,
-                "HistoryPage.toolStripDdbFilterStatus.toolStripMenuItemAll").PerformClick());
+                "eventsPage.toolStripDdbFilterStatus.toolStripMenuItemAll").PerformClick());
             Assert.IsFalse(showAllButton.Enabled);
         }
     }
