@@ -38,15 +38,14 @@ namespace XenAdmin.TabPages
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStripTop = new System.Windows.Forms.ToolStrip();
+            this.toolStripDdbFilterStatus = new XenAdmin.Controls.FilterStatusToolStripDropDownButton();
+            this.toolStripDdbFilterLocation = new XenAdmin.Controls.FilterLocationToolStripDropDownButton();
+            this.toolStripDdbFilterDates = new XenAdmin.Controls.FilterDatesToolStripDropDownButton();
             this.toolStripSplitButtonDismiss = new System.Windows.Forms.ToolStripSplitButton();
             this.tsmiDismissAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDismissSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripLabelFiltersOnOff = new System.Windows.Forms.ToolStripLabel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.toolStripDdbFilterStatus = new XenAdmin.Controls.FilterStatusToolStripDropDownButton();
-            this.toolStripDdbFilterLocation = new XenAdmin.Controls.FilterLocationToolStripDropDownButton();
-            this.toolStripDdbFilterDates = new XenAdmin.Controls.FilterDatesToolStripDropDownButton();
             this.dataGridView = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.columnExpander = new System.Windows.Forms.DataGridViewImageColumn();
             this.columnStatus = new System.Windows.Forms.DataGridViewImageColumn();
@@ -54,10 +53,11 @@ namespace XenAdmin.TabPages
             this.columnLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnActions = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.toolStripTop.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripTop
@@ -72,6 +72,27 @@ namespace XenAdmin.TabPages
             this.toolStripSplitButtonDismiss,
             this.toolStripLabelFiltersOnOff});
             this.toolStripTop.Name = "toolStripTop";
+            // 
+            // toolStripDdbFilterStatus
+            // 
+            this.toolStripDdbFilterStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.toolStripDdbFilterStatus, "toolStripDdbFilterStatus");
+            this.toolStripDdbFilterStatus.Name = "toolStripDdbFilterStatus";
+            this.toolStripDdbFilterStatus.FilterChanged += new System.Action(this.toolStripDdbFilterStatus_FilterChanged);
+            // 
+            // toolStripDdbFilterLocation
+            // 
+            this.toolStripDdbFilterLocation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.toolStripDdbFilterLocation, "toolStripDdbFilterLocation");
+            this.toolStripDdbFilterLocation.Name = "toolStripDdbFilterLocation";
+            this.toolStripDdbFilterLocation.FilterChanged += new System.Action(this.toolStripDdbFilterLocation_FilterChanged);
+            // 
+            // toolStripDdbFilterDates
+            // 
+            this.toolStripDdbFilterDates.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.toolStripDdbFilterDates, "toolStripDdbFilterDates");
+            this.toolStripDdbFilterDates.Name = "toolStripDdbFilterDates";
+            this.toolStripDdbFilterDates.FilterChanged += new System.Action(this.toolStripDdbFilterDates_FilterChanged);
             // 
             // toolStripSplitButtonDismiss
             // 
@@ -107,34 +128,6 @@ namespace XenAdmin.TabPages
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.Gainsboro;
             this.tableLayoutPanel1.Controls.Add(this.dataGridView, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // tableLayoutPanel2
-            // 
-            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.BackColor = System.Drawing.Color.Gainsboro;
-            this.tableLayoutPanel2.Controls.Add(this.toolStripTop, 0, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            // 
-            // toolStripDdbFilterStatus
-            // 
-            this.toolStripDdbFilterStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.toolStripDdbFilterStatus, "toolStripDdbFilterStatus");
-            this.toolStripDdbFilterStatus.Name = "toolStripDdbFilterStatus";
-            this.toolStripDdbFilterStatus.FilterChanged += new System.Action(this.toolStripDdbFilterStatus_FilterChanged);
-            // 
-            // toolStripDdbFilterLocation
-            // 
-            this.toolStripDdbFilterLocation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.toolStripDdbFilterLocation, "toolStripDdbFilterLocation");
-            this.toolStripDdbFilterLocation.Name = "toolStripDdbFilterLocation";
-            this.toolStripDdbFilterLocation.FilterChanged += new System.Action(this.toolStripDdbFilterLocation_FilterChanged);
-            // 
-            // toolStripDdbFilterDates
-            // 
-            this.toolStripDdbFilterDates.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.toolStripDdbFilterDates, "toolStripDdbFilterDates");
-            this.toolStripDdbFilterDates.Name = "toolStripDdbFilterDates";
-            this.toolStripDdbFilterDates.FilterChanged += new System.Action(this.toolStripDdbFilterDates_FilterChanged);
             // 
             // dataGridView
             // 
@@ -207,10 +200,18 @@ namespace XenAdmin.TabPages
             this.columnActions.Name = "columnActions";
             this.columnActions.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // tableLayoutPanel2
+            // 
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.BackColor = System.Drawing.Color.Gainsboro;
+            this.tableLayoutPanel2.Controls.Add(this.toolStripTop, 0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            // 
             // HistoryPage
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.BackColor = System.Drawing.SystemColors.Window;
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.DoubleBuffered = true;
@@ -218,8 +219,8 @@ namespace XenAdmin.TabPages
             this.toolStripTop.ResumeLayout(false);
             this.toolStripTop.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

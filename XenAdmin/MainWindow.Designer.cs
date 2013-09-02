@@ -80,11 +80,12 @@ namespace XenAdmin
             this.TabPageHAUpsell = new System.Windows.Forms.TabPage();
             this.TabPageSnapshots = new System.Windows.Forms.TabPage();
             this.snapshotPage = new XenAdmin.TabPages.SnapshotsPage();
-            this.TabPageHistory = new System.Windows.Forms.TabPage();
             this.TabPageWLB = new System.Windows.Forms.TabPage();
             this.TabPageWLBUpsell = new System.Windows.Forms.TabPage();
             this.TabPageAD = new System.Windows.Forms.TabPage();
             this.alertPage = new XenAdmin.TabPages.AlertSummaryPage();
+            this.eventsPage = new XenAdmin.TabPages.HistoryPage();
+            this.updatesPage = new XenAdmin.TabPages.ManageUpdatesPage();
             this.TitleBackPanel = new XenAdmin.Controls.GradientPanel.GradientPanel();
             this.TitleIcon = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -267,7 +268,6 @@ namespace XenAdmin
             this.MainMenuBar = new XenAdmin.Controls.MenuStripEx();
             this.securityGroupsToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.MenuPanel = new System.Windows.Forms.Panel();
-            this.updatesPage = new XenAdmin.TabPages.ManageUpdatesPage();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -299,6 +299,7 @@ namespace XenAdmin
             // 
             this.splitContainer1.Panel2.Controls.Add(this.TheTabControl);
             this.splitContainer1.Panel2.Controls.Add(this.alertPage);
+            this.splitContainer1.Panel2.Controls.Add(this.eventsPage);
             this.splitContainer1.Panel2.Controls.Add(this.updatesPage);
             this.splitContainer1.Panel2.Controls.Add(this.TitleBackPanel);
             resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
@@ -307,6 +308,7 @@ namespace XenAdmin
             // 
             resources.ApplyResources(this.navigationPane, "navigationPane");
             this.navigationPane.Name = "navigationPane";
+            this.navigationPane.NotificationsSubModeChanged += new System.Action<XenAdmin.Controls.MainWindowControls.NotificationsSubMode>(this.navigationPane_NotificationsSubModeChanged);
             this.navigationPane.TreeViewRefreshResumed += new System.Action(this.navigationPane_TreeViewRefreshResumed);
             this.navigationPane.TreeViewRefreshSuspended += new System.Action(this.navigationPane_TreeViewRefreshSuspended);
             this.navigationPane.TreeViewSelectionChanged += new System.Action(this.navigationPane_TreeViewSelectionChanged);
@@ -315,7 +317,6 @@ namespace XenAdmin
             this.navigationPane.TreeNodeBeforeSelected += new System.Action(this.navigationPane_TreeNodeBeforeSelected);
             this.navigationPane.TreeViewRefreshed += new System.Action(this.navigationPane_TreeViewRefreshed);
             this.navigationPane.NavigationModeChanged += new System.Action<XenAdmin.Controls.MainWindowControls.NavigationPane.NavigationMode>(this.navigationPane_NavigationModeChanged);
-            this.navigationPane.NotificationsSubModeChanged += new Action<XenAdmin.Controls.MainWindowControls.NotificationsSubMode>(navigationPane_NotificationsSubModeChanged);
             // 
             // TheTabControl
             // 
@@ -335,7 +336,6 @@ namespace XenAdmin
             this.TheTabControl.Controls.Add(this.TabPageHA);
             this.TheTabControl.Controls.Add(this.TabPageHAUpsell);
             this.TheTabControl.Controls.Add(this.TabPageSnapshots);
-            this.TheTabControl.Controls.Add(this.TabPageHistory);
             this.TheTabControl.Controls.Add(this.TabPageWLB);
             this.TheTabControl.Controls.Add(this.TabPageWLBUpsell);
             this.TheTabControl.Controls.Add(this.TabPageAD);
@@ -439,12 +439,6 @@ namespace XenAdmin
             this.snapshotPage.Name = "snapshotPage";
             this.snapshotPage.VM = null;
             // 
-            // TabPageHistory
-            // 
-            resources.ApplyResources(this.TabPageHistory, "TabPageHistory");
-            this.TabPageHistory.Name = "TabPageHistory";
-            this.TabPageHistory.UseVisualStyleBackColor = true;
-            // 
             // TabPageWLB
             // 
             resources.ApplyResources(this.TabPageWLB, "TabPageWLB");
@@ -469,6 +463,17 @@ namespace XenAdmin
             this.alertPage.BackColor = System.Drawing.SystemColors.Window;
             this.alertPage.MinimumSize = new System.Drawing.Size(757, 520);
             this.alertPage.Name = "alertPage";
+            // 
+            // eventsPage
+            // 
+            resources.ApplyResources(this.eventsPage, "eventsPage");
+            this.eventsPage.Name = "eventsPage";
+            // 
+            // updatesPage
+            // 
+            resources.ApplyResources(this.updatesPage, "updatesPage");
+            this.updatesPage.BackColor = System.Drawing.SystemColors.Window;
+            this.updatesPage.Name = "updatesPage";
             // 
             // TitleBackPanel
             // 
@@ -1742,11 +1747,6 @@ namespace XenAdmin
             resources.ApplyResources(this.MenuPanel, "MenuPanel");
             this.MenuPanel.Name = "MenuPanel";
             // 
-            // updatesPage
-            // 
-            resources.ApplyResources(this.updatesPage, "updatesPage");
-            this.updatesPage.Name = "updatesPage";
-            // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -1916,7 +1916,6 @@ namespace XenAdmin
         private System.Windows.Forms.TabPage TabPagePeformance;
         private System.Windows.Forms.TabPage TabPageHA;
         private System.Windows.Forms.TabPage TabPageHAUpsell;
-        private System.Windows.Forms.TabPage TabPageHistory;
         internal System.Windows.Forms.TabPage TabPageWLB;
         private System.Windows.Forms.TabPage TabPageWLBUpsell;
         private System.Windows.Forms.TabPage TabPageSnapshots;
@@ -1995,6 +1994,7 @@ namespace XenAdmin
         private XenAdmin.Controls.MainWindowControls.NavigationPane navigationPane;
         private XenAdmin.TabPages.AlertSummaryPage alertPage;
         private XenAdmin.TabPages.ManageUpdatesPage updatesPage;
+        private XenAdmin.TabPages.HistoryPage eventsPage;
     }
 
 }

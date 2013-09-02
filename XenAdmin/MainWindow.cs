@@ -88,7 +88,6 @@ namespace XenAdmin
         internal readonly ConsolePanel ConsolePanel = new ConsolePanel();
         internal readonly HAPage HAPage = new HAPage();
         internal readonly HAUpsellPage HAUpsellPage = new HAUpsellPage();
-        internal readonly HistoryPage HistoryPage = new HistoryPage();
         internal readonly HomePage HomePage = new HomePage();
         internal readonly SearchPage SearchPage = new SearchPage();
         internal readonly NetworkPage NetworkPage = new NetworkPage();
@@ -101,7 +100,14 @@ namespace XenAdmin
         internal readonly AdPage AdPage = new AdPage();
 
         private bool IgnoreTabChanges = false;
-        public bool AllowHistorySwitch = false;
+        public bool AllowHistorySwitch
+        {
+            set
+            {
+                if (value)
+                    navigationPane_NotificationsSubModeChanged(NotificationsSubMode.Events);
+            }
+        }
         private bool ToolbarsEnabled;
 
         private readonly Dictionary<IXenConnection, IList<Form>> activePoolWizards = new Dictionary<IXenConnection, IList<Form>>();
@@ -144,7 +150,6 @@ namespace XenAdmin
             components.Add(ConsolePanel);
             components.Add(NetworkPage);
             components.Add(HAPage);
-            components.Add(HistoryPage);
             components.Add(HomePage);
             components.Add(WlbPage);
             components.Add(AdPage);
@@ -161,7 +166,6 @@ namespace XenAdmin
             AddTabContents(NetworkPage, TabPageNetwork);
             AddTabContents(HAPage, TabPageHA);
             AddTabContents(HAUpsellPage, TabPageHAUpsell);
-            AddTabContents(HistoryPage, TabPageHistory);
             AddTabContents(HomePage, TabPageHome);
             AddTabContents(WlbPage, TabPageWLB);
             AddTabContents(WLBUpsellPage, TabPageWLBUpsell);
@@ -390,39 +394,13 @@ namespace XenAdmin
             // Don't show cancelled exception
             if (action.Exception != null && !(action.Exception is CancelledException))
             {
-                bool logs_visible;
-                IXenObject selected = SelectionManager.Selection.FirstAsXenObject;
-                if (selected != null && action.AppliesTo.Contains(selected.opaque_ref))
-                {
-                    if (TheTabControl.SelectedTab == TabPageHistory)
-                    {
-                        logs_visible = true;
-                    }
-                    else if (AllowHistorySwitch)
-                    {
-                        TheTabControl.SelectedTab = TabPageHistory;
-                        logs_visible = true;
-                    }
-                    else
-                    {
-                        logs_visible = false;
-                    }
-                }
-                else
-                {
-                    logs_visible = false;
-                }
-
-                if (!logs_visible)
-                {
-                    IXenObject model =
+                IXenObject model =
                         (IXenObject)action.VM ??
                         (IXenObject)action.Host ??
                         (IXenObject)action.Pool ??
                         (IXenObject)action.SR;
-                    if (model != null)
-                        model.InError = true;
-                }
+                if (model != null)
+                    model.InError = true;
 
                 RequestRefreshTreeView();
             }
@@ -457,8 +435,6 @@ namespace XenAdmin
             ToolbarsEnabled = Properties.Settings.Default.ToolbarsEnabled;
             RequestRefreshTreeView();
             UpdateToolbars();
-
-            ExpandPanel(HistoryPage);
 
             // kick-off connections for all the loaded server list
             foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
@@ -1277,8 +1253,6 @@ namespace XenAdmin
                 ShowTab(f.TabPage, true);
             }
 
-            ShowTab(TabPageHistory, !SearchMode);
-
             // N.B. Change NewTabs definition if you add more tabs here.
 
             // Save and restore focus on treeView, since selecting tabs in ChangeToNewTabs() has the
@@ -1422,21 +1396,14 @@ namespace XenAdmin
         {
             Object o = SelectionManager.Selection.First;
             IXenObject s = o as IXenObject;
-            if (s != null && s.InError && AllowHistorySwitch)
-            {
-                s.InError = false;
-                return TabPageHistory;
-            }
-            else
-            {
-                TabPage last_selected_page = GetLastSelectedPage(o);
-                return last_selected_page != null && NewTabs.Contains(last_selected_page)
-                           ? last_selected_page
-                           : NewTabs[0];
-            }
+
+            TabPage last_selected_page = GetLastSelectedPage(o);
+            return last_selected_page != null && NewTabs.Contains(last_selected_page)
+                       ? last_selected_page
+                       : NewTabs[0];
         }
 
-        public void SetLastSelectedPage(object o, TabPage p)
+        private void SetLastSelectedPage(object o, TabPage p)
         {
             if (SearchMode)
                 return;
@@ -1707,16 +1674,6 @@ namespace XenAdmin
                 {
                     NetworkPage.XenObject = SelectionManager.Selection.FirstAsXenObject;
                 }
-                else if (t == TabPageHistory)
-                {
-                    // Unmark node if user has now seen error in log tab
-                    if (SelectionManager.Selection.FirstAsXenObject != null)
-                    {
-                        SelectionManager.Selection.FirstAsXenObject.InError = false;
-                    }
-                    HistoryPage.RefreshDisplayedEvents();
-                    RequestRefreshTreeView();
-                }
                 else if (t == TabPageNICs)
                 {
                     NICPage.Host = SelectionManager.Selection.First as Host;
@@ -1831,9 +1788,6 @@ namespace XenAdmin
                     break;
                 case Tab.Performance:
                     TheTabControl.SelectedTab = TabPagePeformance;
-                    break;
-                case Tab.History:
-                    TheTabControl.SelectedTab = TabPageHistory;
                     break;
                 case Tab.NICs:
                     TheTabControl.SelectedTab = TabPageNICs;
@@ -2169,8 +2123,6 @@ namespace XenAdmin
                 return "TabPageWLB" + modelObj;
             if (TheTabControl.SelectedTab == TabPagePeformance)
                 return "TabPagePerformance" + modelObj;
-            if (TheTabControl.SelectedTab == TabPageHistory)
-                return "TabPageHistory" + modelObj;
             if (TheTabControl.SelectedTab == TabPageHA)
                 return "TabPageHA" + modelObj;
             if (TheTabControl.SelectedTab == TabPageHAUpsell)
@@ -2568,8 +2520,10 @@ namespace XenAdmin
 
         private void navigationPane_NotificationsSubModeChanged(NotificationsSubMode submode)
         {
+            TheTabControl.Visible = false;
             alertPage.Visible = submode == NotificationsSubMode.Alerts;
             updatesPage.Visible = submode == NotificationsSubMode.Updates;
+            eventsPage.Visible = submode == NotificationsSubMode.Events;
 
             if (alertPage.Visible)
                 alertPage.RefreshAlertList();
@@ -2578,6 +2532,16 @@ namespace XenAdmin
                 updatesPage.RefreshUpdateList();
             else
                 updatesPage.CancelUpdateCheck();
+
+            if (eventsPage.Visible)
+            {
+                // Unmark node if user has now seen error in log tab
+                if (SelectionManager.Selection.FirstAsXenObject != null)
+                    SelectionManager.Selection.FirstAsXenObject.InError = false;
+
+                eventsPage.RefreshDisplayedEvents();
+                RequestRefreshTreeView();
+            }
         }
 
         private void navigationPane_NavigationModeChanged(NavigationPane.NavigationMode mode)
@@ -2589,7 +2553,7 @@ namespace XenAdmin
             else
             {
                 TheTabControl.Visible = true;
-                alertPage.Visible = updatesPage.Visible = false;
+                alertPage.Visible = updatesPage.Visible = eventsPage.Visible = false;
             }
         }
 

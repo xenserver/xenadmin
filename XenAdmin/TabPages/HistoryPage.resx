@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="toolStripTop.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>6, 9</value>
+    <value>1, 1</value>
   </metadata>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="toolStripTop.AutoSize" type="System.Boolean, mscorlib">
@@ -433,6 +433,24 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>786, 487</value>
   </data>
+  <data name="&gt;&gt;toolStripDdbFilterStatus.Name" xml:space="preserve">
+    <value>toolStripDdbFilterStatus</value>
+  </data>
+  <data name="&gt;&gt;toolStripDdbFilterStatus.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.FilterStatusToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolStripDdbFilterLocation.Name" xml:space="preserve">
+    <value>toolStripDdbFilterLocation</value>
+  </data>
+  <data name="&gt;&gt;toolStripDdbFilterLocation.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.FilterLocationToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolStripDdbFilterDates.Name" xml:space="preserve">
+    <value>toolStripDdbFilterDates</value>
+  </data>
+  <data name="&gt;&gt;toolStripDdbFilterDates.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.FilterDatesToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;toolStripSplitButtonDismiss.Name" xml:space="preserve">
     <value>toolStripSplitButtonDismiss</value>
   </data>
@@ -456,24 +474,6 @@
   </data>
   <data name="&gt;&gt;toolStripLabelFiltersOnOff.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripDdbFilterStatus.Name" xml:space="preserve">
-    <value>toolStripDdbFilterStatus</value>
-  </data>
-  <data name="&gt;&gt;toolStripDdbFilterStatus.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.FilterStatusToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;toolStripDdbFilterLocation.Name" xml:space="preserve">
-    <value>toolStripDdbFilterLocation</value>
-  </data>
-  <data name="&gt;&gt;toolStripDdbFilterLocation.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.FilterLocationToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;toolStripDdbFilterDates.Name" xml:space="preserve">
-    <value>toolStripDdbFilterDates</value>
-  </data>
-  <data name="&gt;&gt;toolStripDdbFilterDates.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.FilterDatesToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;columnExpander.Name" xml:space="preserve">
     <value>columnExpander</value>

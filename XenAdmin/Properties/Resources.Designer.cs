@@ -1964,6 +1964,13 @@ namespace XenAdmin.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap tempErrorEvents {
+            get {
+                object obj = ResourceManager.GetObject("tempErrorEvents", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap tempInfra16 {
             get {
                 object obj = ResourceManager.GetObject("tempInfra16", resourceCulture);

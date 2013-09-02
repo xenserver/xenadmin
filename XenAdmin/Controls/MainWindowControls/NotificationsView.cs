@@ -142,6 +142,10 @@ namespace XenAdmin.Controls.MainWindowControls
             SubMode = submode;
         }
 
+        /// <summary>
+        /// For the Alerts and the Updates this is the total number of entries,
+        /// while for the Events it is the number of error entries.
+        /// </summary>
         public int UnreadEntries { get; set; }
 
         public Image Image
@@ -155,7 +159,9 @@ namespace XenAdmin.Controls.MainWindowControls
                     case NotificationsSubMode.Updates:
                         return Properties.Resources.tempUpdates;
                     case NotificationsSubMode.Events:
-                        return Properties.Resources._000_date_h32bit_16;
+                        return UnreadEntries == 0
+                                   ? Properties.Resources._000_date_h32bit_16
+                                   : Properties.Resources.tempErrorEvents;
                     default:
                         return null;
                 }
