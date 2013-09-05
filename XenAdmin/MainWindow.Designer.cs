@@ -29,6 +29,8 @@ namespace XenAdmin
 
             pluginManager.Dispose();
 
+            OtherConfigAndTagsWatcher.DeregisterEventHandlers();
+
             ConnectionsManager.History.CollectionChanged -= History_CollectionChanged;
             Alert.XenCenterAlerts.CollectionChanged -= XenCenterAlerts_CollectionChanged;
             ConnectionsManager.XenConnections.CollectionChanged -= XenConnection_CollectionChanged;

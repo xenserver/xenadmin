@@ -51,6 +51,23 @@ namespace XenAdmin
             XenConnections_CollectionChanged(null, null);
         }
 
+        public static void DeregisterEventHandlers()
+        {
+            ConnectionsManager.XenConnections.CollectionChanged -= XenConnections_CollectionChanged;
+            foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
+            {
+                connection.Cache.DeregisterCollectionChanged<Pool>(PoolCollectionChangedWithInvoke);
+                connection.Cache.DeregisterCollectionChanged<Host>(HostCollectionChangedWithInvoke);
+                connection.Cache.DeregisterCollectionChanged<VM>(VMCollectionChangedWithInvoke);
+                connection.Cache.DeregisterCollectionChanged<SR>(SRCollectionChangedWithInvoke);
+                connection.Cache.DeregisterCollectionChanged<VDI>(VDICollectionChangedWithInvoke);
+                connection.Cache.DeregisterCollectionChanged<XenAPI.Network>(NetworkCollectionChangedWithInvoke);
+
+                connection.XenObjectsUpdated -= connection_XenObjectsUpdated;
+                connection.ConnectionStateChanged -= connection_ConnectionStateChanged;
+            }
+        }
+
         public static void InitEventHandlers()
         {
             PoolCollectionChangedWithInvoke = InvokeHelper.InvokeHandler(CollectionChanged<Pool>);
@@ -72,20 +89,42 @@ namespace XenAdmin
         
         private static void XenConnections_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
-            foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
+            try
             {
+                IXenConnection connection = (IXenConnection)e.Element;
+                if (connection == null)
+                    return;
 
-                connection.Cache.RegisterCollectionChanged<Pool>(PoolCollectionChangedWithInvoke);
-                connection.Cache.RegisterCollectionChanged<Host>(HostCollectionChangedWithInvoke);
-                connection.Cache.RegisterCollectionChanged<VM>(VMCollectionChangedWithInvoke);
-                connection.Cache.RegisterCollectionChanged<SR>(SRCollectionChangedWithInvoke);
-                connection.Cache.RegisterCollectionChanged<VDI>(VDICollectionChangedWithInvoke);
-                connection.Cache.RegisterCollectionChanged<XenAPI.Network>(NetworkCollectionChangedWithInvoke);
+                if (e.Action == CollectionChangeAction.Add)
+                {
+                    connection.Cache.RegisterCollectionChanged<Pool>(PoolCollectionChangedWithInvoke);
+                    connection.Cache.RegisterCollectionChanged<Host>(HostCollectionChangedWithInvoke);
+                    connection.Cache.RegisterCollectionChanged<VM>(VMCollectionChangedWithInvoke);
+                    connection.Cache.RegisterCollectionChanged<SR>(SRCollectionChangedWithInvoke);
+                    connection.Cache.RegisterCollectionChanged<VDI>(VDICollectionChangedWithInvoke);
+                    connection.Cache.RegisterCollectionChanged<XenAPI.Network>(NetworkCollectionChangedWithInvoke);
 
-                connection.XenObjectsUpdated -= connection_XenObjectsUpdated;
-                connection.XenObjectsUpdated += connection_XenObjectsUpdated;
-                connection.ConnectionStateChanged -= connection_ConnectionStateChanged;
-                connection.ConnectionStateChanged += connection_ConnectionStateChanged;
+                    connection.XenObjectsUpdated -= connection_XenObjectsUpdated;
+                    connection.XenObjectsUpdated += connection_XenObjectsUpdated;
+                    connection.ConnectionStateChanged -= connection_ConnectionStateChanged;
+                    connection.ConnectionStateChanged += connection_ConnectionStateChanged;
+                }
+                else if (e.Action == CollectionChangeAction.Remove)
+                {
+                    connection.Cache.DeregisterCollectionChanged<Pool>(PoolCollectionChangedWithInvoke);
+                    connection.Cache.DeregisterCollectionChanged<Host>(HostCollectionChangedWithInvoke);
+                    connection.Cache.DeregisterCollectionChanged<VM>(VMCollectionChangedWithInvoke);
+                    connection.Cache.DeregisterCollectionChanged<SR>(SRCollectionChangedWithInvoke);
+                    connection.Cache.DeregisterCollectionChanged<VDI>(VDICollectionChangedWithInvoke);
+                    connection.Cache.DeregisterCollectionChanged<XenAPI.Network>(NetworkCollectionChangedWithInvoke);
+
+                    connection.XenObjectsUpdated -= connection_XenObjectsUpdated;
+                    connection.ConnectionStateChanged -= connection_ConnectionStateChanged;
+                }
+            }
+            catch (Exception)
+            {
+                // Can't do any more about this.
             }
 
             FireOtherConfigEvent = true;
