@@ -48,7 +48,7 @@ namespace XenAdminTests.CommandTests
         [Test]
         public void Run()
         {
-            DisconnectHostCommandTest tester = new DisconnectHostCommandTest();
+            DeleteVMCommandTest tester = new DeleteVMCommandTest();
             tester.Test();
         }
     }
@@ -63,7 +63,7 @@ namespace XenAdminTests.CommandTests
         [Test]
         public void Run()
         {
-            DisconnectHostCommandTest tester = new DisconnectHostCommandTest();
+            DeleteVMCommandTest tester = new DeleteVMCommandTest();
             tester.Test();
         }
     }
