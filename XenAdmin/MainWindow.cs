@@ -1844,7 +1844,7 @@ namespace XenAdmin
             templatesToolStripMenuItem1.Checked = !templatesToolStripMenuItem1.Checked;
             XenAdmin.Properties.Settings.Default.DefaultTemplatesVisible = templatesToolStripMenuItem1.Checked;
             Settings.TrySaveSettings();
-            RequestRefreshTreeView();
+            navigationPane.OnSearchChanged();
         }
 
         private void customTemplatesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1852,7 +1852,7 @@ namespace XenAdmin
             customTemplatesToolStripMenuItem.Checked = !customTemplatesToolStripMenuItem.Checked;
             XenAdmin.Properties.Settings.Default.UserTemplatesVisible = customTemplatesToolStripMenuItem.Checked;
             Settings.TrySaveSettings();
-            RequestRefreshTreeView();
+            navigationPane.OnSearchChanged();
         }
 
         private void localStorageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1860,7 +1860,7 @@ namespace XenAdmin
             localStorageToolStripMenuItem.Checked = !localStorageToolStripMenuItem.Checked;
             XenAdmin.Properties.Settings.Default.LocalSRsVisible = localStorageToolStripMenuItem.Checked;
             Settings.TrySaveSettings();
-            RequestRefreshTreeView();
+            navigationPane.OnSearchChanged();
         }
 
         private void EditSelectedNodeInTreeView()
@@ -2369,7 +2369,7 @@ namespace XenAdmin
             ShowHiddenObjectsToolStripMenuItem.Checked = !ShowHiddenObjectsToolStripMenuItem.Checked;
             XenAdmin.Properties.Settings.Default.ShowHiddenVMs = ShowHiddenObjectsToolStripMenuItem.Checked;
             Settings.TrySaveSettings();
-            RequestRefreshTreeView();
+            navigationPane.OnSearchChanged();
         }
 
         internal void OpenGlobalImportWizard(string param)

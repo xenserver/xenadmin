@@ -239,7 +239,7 @@ namespace XenAdmin.Controls.MainWindowControls
             buttonSearchesBig.SetItemList(itemList.ToArray());
         }
 
-        private void OnSearchChanged()
+        public void OnSearchChanged()
         {
             if (currentMode == NavigationMode.Notifications)
             {
