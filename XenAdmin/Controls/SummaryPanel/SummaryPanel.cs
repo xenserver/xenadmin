@@ -42,7 +42,7 @@ namespace XenAdmin.Controls.SummaryPanel
         public SummaryPanel()
         {
             InitializeComponent();
-            helperLink.Click += helperLink_Click;
+            helperLink.LinkClicked += helperLink_LinkClicked;
             
         }
 
@@ -96,7 +96,7 @@ namespace XenAdmin.Controls.SummaryPanel
             set { Controller.WarningIcon = value; }
         }
 
-        private void helperLink_Click(object sender, EventArgs e)
+        private void helperLink_LinkClicked(object sender, EventArgs e)
         {
             Controller.UrlClicked();
         }

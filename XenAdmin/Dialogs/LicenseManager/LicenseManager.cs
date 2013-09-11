@@ -74,7 +74,7 @@ namespace XenAdmin.Dialogs
             assignLicenceButton.Click += assignLicenceButton_Click;
             applyActivationKeyToolStripMenuItem.Click += applyActivationKeyToolStripMenuItem_Click;
             requestActivationKeyToolStripMenuItem.Click += requestActivationKeyToolStripMenuItem_Click;
-            downloadLicenseServerLink.Click += downloadLicenseServerLink_Click;
+            downloadLicenseServerLink.LinkClicked += downloadLicenseServerLink_LinkClicked;
             
             //Controllers
             Controller.PopulateGrid(itemsToShow, selectedItems);
@@ -106,7 +106,7 @@ namespace XenAdmin.Dialogs
             Controller.RequestActivationKey(checkableDataGridView.CheckedRows);
         }
 
-        private void downloadLicenseServerLink_Click(object sender, EventArgs e)
+        private void downloadLicenseServerLink_LinkClicked(object sender, EventArgs e)
         {
             Controller.DownloadLicenseManager();
         }
