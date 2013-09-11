@@ -66,17 +66,14 @@ namespace XenAdminTests.WizardTests
         {
             RunBefore();
 
-            wizard = (T)MW<T>(NewWizard);
+            wizard = MW<T>(NewWizard);
             MW(wizard.Show);
 
             btnNext = TestUtils.GetButton(wizard, "buttonNext");
             btnPrevious = TestUtils.GetButton(wizard, "buttonPrevious");
             btnCancel = TestUtils.GetButton(wizard, "buttonCancel");
 
-
-
-            for (
-                int i = 0; i < pageNames.Length; ++i)
+            for (int i = 0; i < pageNames.Length; ++i)
             {
                 bool lastPage = (i == pageNames.Length - 1);
 
@@ -124,6 +121,8 @@ namespace XenAdminTests.WizardTests
 
             // Any subsequent testing defined in derived class
             RunAfter();
+
+            MW(() => wizard.Dispose());
         }
 
         private string CurrentPageName(T wizard)

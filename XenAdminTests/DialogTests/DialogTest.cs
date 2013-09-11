@@ -47,7 +47,7 @@ namespace XenAdminTests.DialogTests
         {
             RunBefore();
 
-            dialog = (T)MW<T>(NewDialog);
+            dialog = MW<T>(NewDialog);
 
             RunBeforeShow();
 
@@ -60,7 +60,11 @@ namespace XenAdminTests.DialogTests
             // Any subsequent testing defined in derived class
             RunAfter();
 
-            MW(dialog.Close);
+            MW(() =>
+                {
+                    dialog.Close();
+                    dialog.Dispose();
+                });
         }
 
         protected abstract T NewDialog();

@@ -179,6 +179,11 @@ namespace XenAdmin.Controls.MainWindowControls
             return navigationView.TryToSelectNewNode(tagMatch, selectNode, expandNode, ensureNodeVisible);
         }
 
+        public void UpdateSearch()
+        {
+            navigationView.CurrentSearch = Search;
+        }
+        
         public void RequestRefreshTreeView()
         {
             navigationView.RequestRefreshTreeView();
@@ -192,6 +197,17 @@ namespace XenAdmin.Controls.MainWindowControls
         public void SaveAndRestoreTreeViewFocus(MethodInvoker f)
         {
             navigationView.MajorChange(() => navigationView.SaveAndRestoreTreeViewFocus(f));
+        }
+
+        public void SwitchToNotificationsView(NotificationsSubMode subMode)
+        {
+            //check the button if switching has been requested programmatically
+            if (!buttonNotifyBig.Checked)
+                buttonNotifyBig.Checked = true;
+
+            notificationsView.Visible = true;
+            notificationsView.SelectNotificationsSubMode(subMode);
+            navigationView.Visible = false;
         }
 
         #region Private Methods
@@ -239,13 +255,11 @@ namespace XenAdmin.Controls.MainWindowControls
             buttonSearchesBig.SetItemList(itemList.ToArray());
         }
 
-        public void OnSearchChanged()
+        private void OnNavigationModeChanged()
         {
             if (currentMode == NavigationMode.Notifications)
             {
-                notificationsView.Visible = true;
-                notificationsView.SelectNotificationsSubMode(NotificationsSubMode.Alerts);
-                navigationView.Visible = false;
+                SwitchToNotificationsView(NotificationsSubMode.Alerts);
             }
             else
             {
@@ -325,7 +339,7 @@ namespace XenAdmin.Controls.MainWindowControls
                 currentMode = NavigationMode.SavedSearch;
             }
 
-            OnSearchChanged();
+            OnNavigationModeChanged();
         }
 
         private void toolStripBig_LayoutCompleted(object sender, EventArgs e)

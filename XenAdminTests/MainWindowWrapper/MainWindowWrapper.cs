@@ -222,14 +222,6 @@ namespace XenAdminTests
             }
         }
 
-        public SearchPageWrapper SearchPage
-        {
-            get
-            {
-                return new SearchPageWrapper(Item.SearchPage);
-            }
-        }
-
         public NetworkTabPageWrapper NetworkPage
         {
             get

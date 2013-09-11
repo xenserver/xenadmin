@@ -30,6 +30,8 @@
  */
 
 using System;
+using System.Windows.Forms;
+
 using NUnit.Framework;
 using XenAdmin.Controls.XenSearch;
 using XenAdmin.CustomFields;
@@ -49,14 +51,48 @@ namespace XenAdminTests.SearchTests
             ApplyTreeSearch(string.Empty);
 
             // set search to search-for-everything.
-            MWWaitFor(() => Searcher.SearchFor.SearchForComboButton.Item.SelectItem<ObjectTypes>(o => o == ObjectTypes.AllExcFolders), "Couldn't select all-folders");
+            MWWaitFor(() => SearchForComboButton.SelectItem<ObjectTypes>(o => o == ObjectTypes.AllExcFolders),
+                "Couldn't select all-folders");
         }
 
-        private SearcherWrapper Searcher
+        private Button NewSearchButton
+        {
+            get { return TestUtils.GetButton(MainWindowWrapper.Item, "SearchPage.buttonNewSearch"); }
+        }
+
+        private Searcher SearcherPanel
         {
             get
             {
-                return MainWindowWrapper.SearchPage.Searcher;
+                return TestUtils.GetFieldDeep<Searcher>(MainWindowWrapper.Item,
+                                                        "SearchPage.Searcher");
+            }
+        }
+
+        private DropDownComboButton SearchForComboButton
+        {
+            get
+            {
+                return TestUtils.GetFieldDeep<DropDownComboButton>(SearcherPanel,
+                    "searchFor.searchForComboButton");
+            }
+        }
+
+        private DropDownComboButton ComboButton
+        {
+            get
+            {
+                return TestUtils.GetFieldDeep<DropDownComboButton>(SearcherPanel,
+                    "QueryElement.ComboButton");
+            }
+        }
+
+        private DropDownComboButton QueryTypeComboButton
+        {
+            get
+            {
+                return TestUtils.GetFieldDeep<DropDownComboButton>(SearcherPanel,
+                    "QueryElement.queryTypeComboButton");
             }
         }
 
@@ -67,11 +103,14 @@ namespace XenAdminTests.SearchTests
         [Test]
         public void TestSearcherUpdatesWhenTagsChange()
         {
+            MW(() => NewSearchButton.PerformClick());
+
             // now test that the filter-value combo updates when the tags change for each of these objects.
             foreach (IXenObject xenObject in new IXenObject[] { GetAnyHost(), GetAnyNetwork(), GetAnyPool(), GetAnySR(), GetAnyVM() })
             {
                 // select Tags for the query type
-                MWWaitFor(() => Searcher.QueryElement.QueryTypeComboButton.Item.SelectItem<QueryElement.QueryType>(qt => qt.ToString() == "Tags"), "Couldn't select Tags");
+                MWWaitFor(() => QueryTypeComboButton.SelectItem<QueryElement.QueryType>(qt => qt.ToString() == "Tags"),
+                    "Couldn't select Tags");
 
                 string newTag = Guid.NewGuid().ToString();
 
@@ -79,15 +118,19 @@ namespace XenAdminTests.SearchTests
                 Tags.AddTag(xenObject, newTag);
 
                 // now see if this new tag has been added to the searcher.
-                MWWaitFor(() => null != Searcher.QueryElement.ComboButton.Items.Find(ts => ts.Text == newTag), "New tag not added to the Searcher with " + xenObject.GetType() + " selected.");
+                MWWaitFor(() => null != ComboButton.Items.Find(ts => ts.Text == newTag),
+                    "New tag not added to the Searcher with " + xenObject.GetType() + " selected.");
             }
         }
 
         [Test]
         public void TestSearcherDoesntUpdateWhenTagsChangeOnUnsearchableObject()
         {
+            MW(() => NewSearchButton.PerformClick());
+
             // select Tags for the query type
-            MWWaitFor(() => Searcher.QueryElement.QueryTypeComboButton.Item.SelectItem<QueryElement.QueryType>(qt => qt.ToString() == "Tags"), "Couldn't select Tags");
+            MWWaitFor(() => QueryTypeComboButton.SelectItem<QueryElement.QueryType>(qt => qt.ToString() == "Tags"),
+                "Couldn't select Tags");
 
             string newTag = Guid.NewGuid().ToString();
 
@@ -95,24 +138,28 @@ namespace XenAdminTests.SearchTests
             Tags.AddTag(GetAnyVBD(), newTag);
 
             // now check that this new tag has not been added to the searcher.
-            MWWaitFor(() => null == Searcher.QueryElement.ComboButton.Items.Find(ts => ts.Text == newTag), "New tag added to the Searcher with VBD selected.");
+            MWWaitFor(() => null == ComboButton.Items.Find(ts => ts.Text == newTag),
+                "New tag added to the Searcher with VBD selected.");
         }
 
         [Test]
         public void TestSearcherUpdatesWhenCustomFieldsChange()
         {
+            MW(() => NewSearchButton.PerformClick());
+
             // create a new custom field
             string newCustomField = Guid.NewGuid().ToString();
             VM vm = GetAnyVM();
-            CustomFieldsManager.AddCustomField(vm.Connection.Session, vm.Connection, new CustomFieldDefinition(newCustomField, CustomFieldDefinition.Types.String));
+
+            CustomFieldsManager.AddCustomField(vm.Connection.Session, vm.Connection,
+                new CustomFieldDefinition(newCustomField, CustomFieldDefinition.Types.String));
 
             // now see if this new custom field has been added to the searcher.
             MWWaitFor(delegate
             {
                 // need to click for repopulate.
-                Searcher.QueryElement.QueryTypeComboButton.Item.PerformClick();
-                return null != Searcher.QueryElement.QueryTypeComboButton.Items.Find(ts => ts.Text == newCustomField);   
-                
+                QueryTypeComboButton.PerformClick();
+                return null != QueryTypeComboButton.Items.Find(ts => ts.Text == newCustomField);
             }, "New custom field not added to the Searcher.");
         }
     }

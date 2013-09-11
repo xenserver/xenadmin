@@ -105,7 +105,7 @@ namespace XenAdmin
             set
             {
                 if (value)
-                    navigationPane_NotificationsSubModeChanged(NotificationsSubMode.Events);
+                    navigationPane.SwitchToNotificationsView(NotificationsSubMode.Events);
             }
         }
         private bool ToolbarsEnabled;
@@ -589,15 +589,7 @@ namespace XenAdmin
             Launched = true;
         }
 
-        private void ExpandPanel(UserControl panel)
-        {
-            panel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
-            panel.Location = new Point(0, 0);
-            panel.Size = new Size(panel.Parent.Width, panel.Parent.Height);
-        }
-
         // Manages UI and network updates whenever hosts are added and removed
-
         void XenConnection_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             if (Program.Exiting)
@@ -1842,25 +1834,36 @@ namespace XenAdmin
         private void templatesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             templatesToolStripMenuItem1.Checked = !templatesToolStripMenuItem1.Checked;
-            XenAdmin.Properties.Settings.Default.DefaultTemplatesVisible = templatesToolStripMenuItem1.Checked;
-            Settings.TrySaveSettings();
-            navigationPane.OnSearchChanged();
+            Properties.Settings.Default.DefaultTemplatesVisible = templatesToolStripMenuItem1.Checked;
+            ViewSettingsChanged();
         }
 
         private void customTemplatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             customTemplatesToolStripMenuItem.Checked = !customTemplatesToolStripMenuItem.Checked;
-            XenAdmin.Properties.Settings.Default.UserTemplatesVisible = customTemplatesToolStripMenuItem.Checked;
-            Settings.TrySaveSettings();
-            navigationPane.OnSearchChanged();
+            Properties.Settings.Default.UserTemplatesVisible = customTemplatesToolStripMenuItem.Checked;
+            ViewSettingsChanged();
         }
 
         private void localStorageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             localStorageToolStripMenuItem.Checked = !localStorageToolStripMenuItem.Checked;
-            XenAdmin.Properties.Settings.Default.LocalSRsVisible = localStorageToolStripMenuItem.Checked;
+            Properties.Settings.Default.LocalSRsVisible = localStorageToolStripMenuItem.Checked;
+            ViewSettingsChanged();
+        }
+
+        private void ShowHiddenObjectsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowHiddenObjectsToolStripMenuItem.Checked = !ShowHiddenObjectsToolStripMenuItem.Checked;
+            Properties.Settings.Default.ShowHiddenVMs = ShowHiddenObjectsToolStripMenuItem.Checked;
+            ViewSettingsChanged();
+        }
+
+        private void ViewSettingsChanged()
+        {
             Settings.TrySaveSettings();
-            navigationPane.OnSearchChanged();
+            navigationPane.UpdateSearch();
+            RequestRefreshTreeView();
         }
 
         private void EditSelectedNodeInTreeView()
@@ -2362,14 +2365,6 @@ namespace XenAdmin
             // EnableHAAction
             // DisableHAAction
             Program.Invoke(this, UpdateToolbars);
-        }
-
-        private void ShowHiddenObjectsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowHiddenObjectsToolStripMenuItem.Checked = !ShowHiddenObjectsToolStripMenuItem.Checked;
-            XenAdmin.Properties.Settings.Default.ShowHiddenVMs = ShowHiddenObjectsToolStripMenuItem.Checked;
-            Settings.TrySaveSettings();
-            navigationPane.OnSearchChanged();
         }
 
         internal void OpenGlobalImportWizard(string param)

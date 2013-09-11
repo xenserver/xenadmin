@@ -71,13 +71,8 @@
     <Compile Include="MainWindowWrapper\AddServerDialogWrapper.cs" />
     <Compile Include="MainWindowWrapper\MockMainWindow.cs" />
     <Compile Include="MainWindowWrapper\NameAndConnectionPromptWrapper.cs" />
-    <Compile Include="MainWindowWrapper\DropDownComboButtonWrapper.cs" />
     <Compile Include="MainWindowWrapper\HostMenuWrapper.cs" />
     <Compile Include="MainWindowWrapper\MainToolBarWrapper.cs" />
-    <Compile Include="MainWindowWrapper\QueryElementWrapper.cs" />
-    <Compile Include="MainWindowWrapper\SearcherWrapper.cs" />
-    <Compile Include="MainWindowWrapper\SearchForWrapper.cs" />
-    <Compile Include="MainWindowWrapper\SearchPageWrapper.cs" />
     <Compile Include="MainWindowWrapper\StartShutdownMenuWrapper.cs" />
     <Compile Include="MainWindowWrapper\StorageMenuWrapper.cs" />
     <Compile Include="MainWindowWrapper\ToolsMenuWrapper.cs" />

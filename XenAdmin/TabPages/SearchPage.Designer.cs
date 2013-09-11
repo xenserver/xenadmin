@@ -153,7 +153,7 @@ namespace XenAdmin.TabPages
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
         private XenAdmin.Controls.XenSearch.SearchOutput OutputPanel;
-        public XenAdmin.Controls.XenSearch.Searcher Searcher;
+        private XenAdmin.Controls.XenSearch.Searcher Searcher;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel4;
         private XenAdmin.Controls.DropDownButton ddButtonSavedSearches;
