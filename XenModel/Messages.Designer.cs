@@ -14201,7 +14201,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The selected VM is currently protected by HA. Are you sure you want to force the shut down of this VM? This operation can result int data loss..
+        ///   Looks up a localized string similar to The selected VM is currently protected by HA. Are you sure you want to force the shut down of this VM? This operation can result in data loss..
         /// </summary>
         public static string HA_CONFIRM_FORCESHUTDOWN_VM_NO_CANCEL_TASKS {
             get {

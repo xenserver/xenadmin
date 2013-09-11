@@ -5025,7 +5025,7 @@ not currently live:
     <value>At least one of the selected VMs is currently protected by HA. Are you sure you want to forcibly shut down the selected VMs? This operation can result in data loss.</value>
   </data>
   <data name="HA_CONFIRM_FORCESHUTDOWN_VM_NO_CANCEL_TASKS" xml:space="preserve">
-    <value>The selected VM is currently protected by HA. Are you sure you want to force the shut down of this VM? This operation can result int data loss.</value>
+    <value>The selected VM is currently protected by HA. Are you sure you want to force the shut down of this VM? This operation can result in data loss.</value>
   </data>
   <data name="HA_CONFIRM_SHUTDOWN_VM" xml:space="preserve">
     <value>The selected VM is currently protected by HA. Are you sure you want to shut it down?</value>
