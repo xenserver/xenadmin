@@ -105,8 +105,8 @@ namespace XenAdmin.TabPages
             this.DataPlotNav.DataEventList = this.DataEventList;
             this.DataPlotNav.DisplayedUuids = ((System.Collections.Generic.List<string>)(resources.GetObject("DataPlotNav.DisplayedUuids")));
             this.DataPlotNav.GraphOffset = System.TimeSpan.Parse("00:00:00");
-            this.DataPlotNav.GraphWidth = System.TimeSpan.Parse("00:15:00");
-            this.DataPlotNav.GridSpacing = System.TimeSpan.Parse("00:03:00");
+            this.DataPlotNav.GraphWidth = System.TimeSpan.Parse("00:09:59");
+            this.DataPlotNav.GridSpacing = System.TimeSpan.Parse("00:02:00");
             this.DataPlotNav.MinimumSize = new System.Drawing.Size(410, 0);
             this.DataPlotNav.Name = "DataPlotNav";
             this.DataPlotNav.ScrollViewOffset = System.TimeSpan.Parse("00:00:00");
