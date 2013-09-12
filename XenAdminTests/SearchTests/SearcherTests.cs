@@ -101,6 +101,7 @@ namespace XenAdminTests.SearchTests
         /// </summary>
         /// <param name="xenObject">The xen object to be tested.</param>
         [Test]
+        [Ignore]
         public void TestSearcherUpdatesWhenTagsChange()
         {
             MW(() => NewSearchButton.PerformClick());
@@ -143,6 +144,7 @@ namespace XenAdminTests.SearchTests
         }
 
         [Test]
+        [Ignore]
         public void TestSearcherUpdatesWhenCustomFieldsChange()
         {
             MW(() => NewSearchButton.PerformClick());
