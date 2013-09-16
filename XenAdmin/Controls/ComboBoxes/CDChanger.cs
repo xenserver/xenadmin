@@ -84,7 +84,7 @@ namespace XenAdmin.Controls
             }
         }
         
-        public override void RefreshSRs()
+        protected override void RefreshSRs()
         {
             BeginUpdate();
             try
@@ -128,28 +128,16 @@ namespace XenAdmin.Controls
         {
             // let the base class take care of skipping the SR headings (CA-40779)
             base.OnSelectionChangeCommitted(e); 
-            /*if (SelectedItem is ToStringWrapper<SR>)
-            {
-                // This can occur if moving to the SR heading using the keyboard.
-                // The base class prevents it from happening with mouse clicks.
-                // TODO: This would be a lot neater if the base class stopped this happening
-                // on keyboard events too.
-                // Fires selectedIndexChanged event therefore
-                // If selectedIndex + 1 is a Title it will move down the list
-                // until it finds one which isn't a title (which is lucky)
-                if (SelectedIndex < Items.Count - 1)
-                    SelectedIndex++;
-            }*/
 
             ToStringWrapper<VDI> vdiNameWrapper = SelectedItem as ToStringWrapper<VDI>;
             if (vdiNameWrapper == null)
                 return;
 
-            // dont change the cdrom if we go from <empty> to <empty>
+            // don't change the cdrom if we go from <empty> to <empty>
             if (vdiNameWrapper.item == null && cdrom != null && Helper.IsNullOrEmptyOpaqueRef(cdrom.VDI.opaque_ref))
                 return;
 
-            // dont change the cdrom if we leave the same one in
+            // don't change the cdrom if we leave the same one in
             if (vdiNameWrapper.item != null && cdrom != null && cdrom.VDI.opaque_ref == vdiNameWrapper.item.opaque_ref)
                 return;
 
@@ -164,8 +152,7 @@ namespace XenAdmin.Controls
             changing = true;
             Enabled = false;
 
-            ChangeVMISOAction action =
-                new ChangeVMISOAction(connection, vm, vdi, cdrom);
+            ChangeVMISOAction action = new ChangeVMISOAction(connection, vm, vdi, cdrom);
 
             action.Completed += delegate
                 {

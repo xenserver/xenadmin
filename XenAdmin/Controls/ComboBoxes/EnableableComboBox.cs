@@ -47,12 +47,8 @@ namespace XenAdmin.Controls
     /// Adding Items which extend IEnableableComboBoxItem will mean that the mouse click
     /// will be disabled on those items where the Enabled value is false
     /// </summary>
-    public class EnableableComboBox : LongStringComboBox
+    public class EnableableComboBox : NonSelectableComboBox
     {
-        private IntPtr oldWndProc = IntPtr.Zero;
-        private Win32.WndProcDelegate newWndProc;
-        private IntPtr DropDownHandle = IntPtr.Zero;
-
         public EnableableComboBox()
         {
             DrawItem += m_comboBoxConnection_DrawItem;
@@ -97,114 +93,6 @@ namespace XenAdmin.Controls
             }
         }
 
-        private bool AllItemsDisabled()
-        {
-            var list = Items.OfType<IEnableableComboBoxItem>().ToList();
-            return (list.Count == Items.Count && list.All(item => !item.Enabled));
-        }
-
-        private bool skip;
-        protected override void OnSelectedIndexChanged(EventArgs e)
-        {
-            int i = SelectedIndex;
-
-            if (i == -1 || AllItemsDisabled())
-                return;
-
-            if (!(Items[i] is IEnableableComboBoxItem))
-            {
-                base.OnSelectedIndexChanged(e);
-                return;
-            }
-            
-            while (true)
-            {
-                if (i == 0)
-                {
-                    skip = true;
-                }
-                else if (i == Items.Count - 1)
-                {
-                    skip = false;
-                }
-
-                IEnableableComboBoxItem item = Items[i] as IEnableableComboBoxItem;
-                if (item != null && !item.Enabled)
-                {
-                    i += skip ? 1 : -1;
-
-                }
-                else
-                {
-                    skip = true;
-                    break;
-                }
-            }
-
-            if(SelectedIndex != i)
-            {
-                //Calling this resends the event - you don't want to call the base
-                //event or any registered handlers will be triggered twice
-                SelectedIndex = i;
-                return;
-            }
-            
-            base.OnSelectedIndexChanged(e);
-        }
-
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Up || e.KeyCode == Keys.PageUp || e.KeyCode == Keys.Left)
-            {
-                skip = false;
-            }
-            else
-            {
-                skip = true;
-            }
-            base.OnKeyDown(e);
-        }
-
-        protected override void WndProc(ref Message m)
-        {
-            switch (m.Msg)
-            {
-                case Win32.WM_PARENTNOTIFY:
-                    DropDownHandle = m.LParam;
-                    oldWndProc = Win32.GetWindowLong(DropDownHandle, Win32.GWL_WNDPROC);
-                    newWndProc = new Win32.WndProcDelegate(ReplacementWndProc);
-                    Win32.SetWindowLong(DropDownHandle, Win32.GWL_WNDPROC, Marshal.GetFunctionPointerForDelegate(newWndProc));
-                    break;
-            }
-
-            base.WndProc(ref m);
-        }
-
-        private IntPtr ReplacementWndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
-        {
-            if (msg == (uint)Win32.WM_LBUTTONDOWN || msg == (uint)Win32.WM_LBUTTONDBLCLK)
-            {
-                Win32.POINT loc = new Win32.POINT();
-                loc.X = MousePosition.X;
-                loc.Y = MousePosition.Y;
-                Win32.ScreenToClient(DropDownHandle, ref loc);
-                Win32.RECT dropdown_rect = new Win32.RECT();
-                Win32.GetClientRect(DropDownHandle, out dropdown_rect);
-                if (dropdown_rect.Left <= loc.X && loc.X < dropdown_rect.Right && dropdown_rect.Top <= loc.Y && loc.Y < dropdown_rect.Bottom)
-                {
-                    int index = (int)Win32.SendMessage(DropDownHandle, Win32.LB_ITEMFROMPOINT, IntPtr.Zero, (IntPtr)(loc.X + (loc.Y << 16)));
-                    if (index >> 16 == 0)
-                    {
-                        Object o = Items[index];
-                        IEnableableComboBoxItem enableableComboBoxItem = o as IEnableableComboBoxItem;
-                        if (enableableComboBoxItem != null && !enableableComboBoxItem.Enabled)
-                            return IntPtr.Zero;
-                    }
-                }
-            }
-            return Win32.CallWindowProc(oldWndProc, hWnd, msg, wParam, lParam);
-        }
-
         public new bool Enabled
         {
             get
@@ -216,6 +104,12 @@ namespace XenAdmin.Controls
                 base.Enabled = value;
                 BackColor = value ? SystemColors.Window : SystemColors.Control;
             }
+        }
+
+        protected override bool IsItemNonSelectable(object o)
+        {
+            var item = o as IEnableableComboBoxItem;
+            return item != null && !item.Enabled;
         }
     }
 }

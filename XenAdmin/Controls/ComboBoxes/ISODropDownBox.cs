@@ -48,7 +48,7 @@ using System.Runtime.InteropServices;
 
 namespace XenAdmin.Controls
 {
-    public partial class ISODropDownBox : LongStringComboBox
+    public partial class ISODropDownBox : NonSelectableComboBox
     {
         public VM vm;
         protected VBD cdrom;
@@ -58,15 +58,19 @@ namespace XenAdmin.Controls
         protected bool physicalOnly = false;
         protected bool isoOnly = false;
         protected bool empty = false;
-        private bool _skipDown = false;
+        private bool noTools = false;
+
         private VDI selectedCD;
 
         public VDI SelectedCD
         {
-            get { return SelectedItem == null ? null : (SelectedItem as ToStringWrapper<VDI>).item; }
+            get
+            {
+                var selectedVdi = SelectedItem as ToStringWrapper<VDI>;
+                return selectedVdi == null ? null : selectedVdi.item;
+            }
             set { selectedCD = value; }
         }
-        public bool noTools = false;
 
         public ISODropDownBox()
         {
@@ -74,7 +78,7 @@ namespace XenAdmin.Controls
             InitializeComponent();
         }
 
-        public void RefreshSRs_()
+        private void RefreshSRs_()
         {
             BeginUpdate();
             try
@@ -93,7 +97,7 @@ namespace XenAdmin.Controls
             return sr.Name;
         }
 
-        public virtual void RefreshSRs()
+        protected virtual void RefreshSRs()
         {
             Program.AssertOnEventThread();
 
@@ -160,45 +164,29 @@ namespace XenAdmin.Controls
             if (selectedCD == null)
             {
                 if (Items.Count > 0)
-                    this.SelectedIndex = 0;
+                    SelectedIndex = 0;
                 else
-                    this.SelectedIndex = -1;
+                    SelectedIndex = -1;
 
                 return;
             }
 
-            foreach (Object o in Items)
+            foreach (object o in Items)
             {
                 ToStringWrapper<VDI> vdiNameWrapper = o as ToStringWrapper<VDI>;
 
                 if (vdiNameWrapper == null)
                     continue;
 
-                XenAPI.VDI iso = vdiNameWrapper.item;
-                if (iso == null || !iso.Show(XenAdmin.Properties.Settings.Default.ShowHiddenVMs))
+                VDI iso = vdiNameWrapper.item;
+                if (iso == null || !iso.Show(Properties.Settings.Default.ShowHiddenVMs))
                     continue;
 
                 if (iso == selectedCD)
                 {
-                    this.SelectedItem = o;
+                    SelectedItem = o;
                     break;
                 }
-            }
-        }
-
-        // CA-12115
-        public bool HasSelectableItems
-        {
-            get
-            {
-                foreach (Object o in Items)
-                {
-                    if (!(o is ToStringWrapper<SR>))
-                    {
-                        return true;
-                    }
-                }
-                return false;
             }
         }
 
@@ -441,73 +429,13 @@ namespace XenAdmin.Controls
             }
         }
         
-        // if we have selected an SR then we automatically select the first ISO on that SR
-        private void this_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            skipSRs();
-        }
-
         protected override void OnSelectionChangeCommitted(EventArgs e)
         {
-            skipSRs();
             base.OnSelectionChangeCommitted(e);
-            if (SelectedItem != null)
-                selectedCD = (SelectedItem as ToStringWrapper<VDI>).item;
-        }
 
-        private void skipSRs()
-        {
-            int i = SelectedIndex;
-
-            if (!HasSelectableItems || i == -1)
-            {
-                SelectedIndex = -1;
-                return;
-            }
-
-            // Find the next selectable item in the appropriate (up/down) direction
-            while (true)
-            {
-                if (i == 0)
-                {
-                    _skipDown = true;
-                }
-                else if (i == Items.Count - 1)
-                {
-                    _skipDown = false;
-                }
-                if (Items[i] is ToStringWrapper<SR>)
-                {
-                    i += _skipDown ? 1 : -1;
-                }
-                else
-                {
-                    _skipDown = true;
-                    break;
-                }
-            }
-            SelectedIndex = i;
-        }
-
-        // CA-12115
-        // The up and down arrow keys cause the combobox to change selection to the next
-        // or previous in the list. The page up and page down keys change the selection
-        // by one page at a time as defined by the size of the dropdown list. We need to
-        // make sure that when we arrow up or down that the item selection jumps over the
-        // bold SR read-only group separator.  We will change the skip direction here.
-        // Also the left and right arrows should navigate through list in the same way 
-        // as the up and down arrows (CA-40779)
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Up || e.KeyCode == Keys.PageUp || e.KeyCode == Keys.Left)
-            {
-                _skipDown = false;
-            }
-            else
-            {
-                _skipDown = true;
-            }
-            base.OnKeyDown(e);
+            var selectedVdi = SelectedItem as ToStringWrapper<VDI>;
+            if (selectedVdi != null)
+                selectedCD = selectedVdi.item;
         }
 
         protected override void OnDrawItem(DrawItemEventArgs e)
@@ -547,60 +475,15 @@ namespace XenAdmin.Controls
 
         protected override void OnDropDownClosed(EventArgs e)
         {
-            skipSRs();
-
             base.OnDropDownClosed(e);
 
             if (refreshOnClose)
                 refreshAll();
         }
 
-        // we need to prevent the mouse click occuring when the user clicks on certain objects
-        // the combo box creates another window for the dropdown list so we cannot use it's wndproc
-        // when this other window is created at run time we get told the window handle (LParam on WM_PARENTNOTIFY)
-        // so we then replace this window's wndproc with our own (ReplacementWndProc)
-
-        private IntPtr oldWndProc = IntPtr.Zero;
-        private Win32.WndProcDelegate newWndProc;
-        private IntPtr DropDownHandle = IntPtr.Zero;
-
-        protected override void WndProc(ref System.Windows.Forms.Message m)
+        protected override bool IsItemNonSelectable(object o)
         {
-            switch (m.Msg)
-            {
-                case Win32.WM_PARENTNOTIFY:
-                    DropDownHandle = m.LParam;
-                    oldWndProc = Win32.GetWindowLong(DropDownHandle, Win32.GWL_WNDPROC);
-                    newWndProc = new Win32.WndProcDelegate(ReplacementWndProc);
-                    Win32.SetWindowLong(DropDownHandle, Win32.GWL_WNDPROC, Marshal.GetFunctionPointerForDelegate(newWndProc));
-                    break;
-            }
-
-            base.WndProc(ref m);
-        }
-
-        private IntPtr ReplacementWndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
-        {
-            if (msg == (uint)Win32.WM_LBUTTONDOWN || msg == (uint)Win32.WM_LBUTTONDBLCLK)
-            {
-                Win32.POINT loc = new Win32.POINT();
-                loc.X = MousePosition.X;
-                loc.Y = MousePosition.Y;
-                Win32.ScreenToClient(DropDownHandle, ref loc);
-                Win32.RECT dropdown_rect = new Win32.RECT();
-                Win32.GetClientRect(DropDownHandle, out dropdown_rect);
-                if (dropdown_rect.Left <= loc.X && loc.X < dropdown_rect.Right && dropdown_rect.Top <= loc.Y && loc.Y < dropdown_rect.Bottom)
-                {
-                    int index = (int)Win32.SendMessage(DropDownHandle, Win32.LB_ITEMFROMPOINT, IntPtr.Zero, (IntPtr)(loc.X + (loc.Y << 16)));
-                    if (index >> 16 == 0)
-                    {
-                        Object o = Items[index];
-                        if (o is ToStringWrapper<SR>)
-                            return IntPtr.Zero;
-                    }
-                }
-            }
-            return Win32.CallWindowProc(oldWndProc, hWnd, msg, wParam, lParam);
+            return o is ToStringWrapper<SR>;
         }
     }
 }

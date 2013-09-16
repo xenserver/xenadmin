@@ -38,7 +38,6 @@ namespace XenAdmin.Controls
             this.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.FormattingEnabled = true;
-            this.SelectedIndexChanged += new System.EventHandler(this.this_SelectedIndexChanged);
             this.ResumeLayout(false);
 
         }
