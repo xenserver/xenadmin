@@ -34,34 +34,27 @@ using XenAdmin;
 
 namespace XenAPI
 {
-    partial class GPU_group : IComparable<GPU_group>, IEquatable<GPU_group>
+    partial class VGPU_type : IComparable<VGPU_type>, IEquatable<VGPU_type>
     {
         public override string Name
         {
             get
             {
-                string name = name_label;
-                if (name.StartsWith("Group of "))
-                    name = name.Substring(9);
-                return name;
+                if (max_heads == 0)
+                    return Messages.VGPU_PASSTHRU_TOSTRING;
+
+                return string.Format(Messages.VGPU_TOSTRING, vendor_name, model_name, max_heads);
             }
         }
-
-        public override string ToString()
-        {
-            return PGPUs.Count == 1 
-                ? String.Format(Messages.GPU_GROUP_NAME_AND_NO_OF_GPUS_ONE, Name)
-                : String.Format(Messages.GPU_GROUP_NAME_AND_NO_OF_GPUS, Name, PGPUs.Count);
-        }
-
-        #region IEquatable<GPU_group> Members
+        
+        #region IEquatable<VGPU_type> Members
 
         /// <summary>
         /// Indicates whether the current object is equal to the specified object.
         /// This calls the implementation from XenObject.
         /// This implementation is required for ToStringWrapper.
         /// </summary>
-        public bool Equals(GPU_group other)
+        public bool Equals(VGPU_type other)
         {
             return base.Equals(other);
         }

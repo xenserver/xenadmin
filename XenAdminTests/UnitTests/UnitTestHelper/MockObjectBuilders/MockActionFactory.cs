@@ -84,7 +84,7 @@ namespace XenAdminTests.UnitTests.UnitTestHelper.MockObjectBuilders
                 p =>
                 p.async_vgpu_create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), "0",
                               It.IsAny<object>())).Returns(new Response<string>("ok"));
-            return new GpuAssignAction(vm.Object, group.Object);
+            return new GpuAssignAction(vm.Object, group.Object, null);
         }
     }
 }

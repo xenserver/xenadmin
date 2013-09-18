@@ -2206,6 +2206,9 @@
     <Compile Include="Controls\ChevronToggleButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Controls\ComboBoxes\VgpuComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\ComboBoxes\NonSelectableComboBox.cs">
       <SubType>Component</SubType>
     </Compile>

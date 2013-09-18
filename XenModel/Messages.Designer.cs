@@ -31208,6 +31208,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pass-through whole GPU.
+        /// </summary>
+        public static string VGPU_PASSTHRU_TOSTRING {
+            get {
+                return ResourceManager.GetString("VGPU_PASSTHRU_TOSTRING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} {1} vGPU ({2} per GPU).
+        /// </summary>
+        public static string VGPU_TOSTRING {
+            get {
+                return ResourceManager.GetString("VGPU_TOSTRING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View folder....
         /// </summary>
         public static string VIEW_FOLDER_MENU_OPTION {

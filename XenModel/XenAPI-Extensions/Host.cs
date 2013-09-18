@@ -374,9 +374,19 @@ namespace XenAPI
         {
             get { return BoolKeyPreferTrue(license_params, "restrict_gpu"); }
         }
+
         public static bool RestrictGpu(Host h)
         {
             return h._RestrictGpu;
+        }
+
+        private bool _RestrictVgpu
+        {
+            get { return BoolKeyPreferTrue(license_params, "restrict_vgpu"); }
+        }
+        public static bool RestrictVgpu(Host h)
+        {
+            return h._RestrictVgpu;
         }
 
         public bool HasPBDTo(SR sr)

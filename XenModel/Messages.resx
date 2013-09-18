@@ -10823,6 +10823,12 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="VERSION_NUMBER" xml:space="preserve">
     <value>XenCenter version {0} (build {1})</value>
   </data>
+  <data name="VGPU_PASSTHRU_TOSTRING" xml:space="preserve">
+    <value>Pass-through whole GPU</value>
+  </data>
+  <data name="VGPU_TOSTRING" xml:space="preserve">
+    <value>{0} {1} vGPU ({2} per GPU)</value>
+  </data>
   <data name="VIEW_FOLDER_MENU_OPTION" xml:space="preserve">
     <value>View folder...</value>
   </data>

@@ -212,41 +212,40 @@ namespace XenAdmin.Core
         }
 
         /// <summary>
-        /// Gets the pool which the provided connection belongs to, or null if the server is not in a pool,
-        /// or null if the 'connection' argument is null.
+        /// Gets the pool for the provided connection. Returns null if we have
+        /// a standalone host (or the provided connection is null).
         /// </summary>
+        /// <remarks> To obtain the pool object for the case of a standalone host
+        /// use GetPoolOfOne.</remarks>
         public static Pool GetPool(IXenConnection connection)
         {
             if (connection == null)
                 return null;
 
-            foreach (Pool ThePool in connection.Cache.Pools)
+            foreach (Pool thePool in connection.Cache.Pools)
             {
-                if (ThePool!=null&&ThePool.IsVisible)
-                    return ThePool;
+                if (thePool != null && thePool.IsVisible)
+                    return thePool;
             }
             return null;
         }
-
-
-
 
         /// <summary>
-        /// Get the unique Pool object corresponding to the given connection.  This differs from GetPool in that
-        /// the object is always returned -- GetPool returns null if the pool is to be hidden.  May still return
-        /// null if the cache is being populated.
+        /// Get the unique Pool object corresponding to the given connection.
+        /// Returns the pool object even in the case of a standalone host. May
+        /// return null if the cache is still being populated or the given
+        /// connection is null.
         /// </summary>
-        /// <param name="connection">May not be null.</param>
         public static Pool GetPoolOfOne(IXenConnection connection)
         {
-            System.Diagnostics.Trace.Assert(connection != null);
+            if (connection == null)
+                return null;
+
             foreach (Pool pool in connection.Cache.Pools)
-            {
                 return pool;
-            }
+            
             return null;
         }
-
 
         /// <summary>
         /// Return the host object representing the master of the given connection, or null if the

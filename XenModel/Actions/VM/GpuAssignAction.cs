@@ -32,6 +32,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+
+using XenAdmin.Core;
+
 using XenAPI;
 
 namespace XenAdmin.Actions
@@ -40,12 +43,14 @@ namespace XenAdmin.Actions
     {
         VM vm;
         GPU_group gpu_group;
+        private VGPU_type vgpuType;
 
-        public GpuAssignAction(VM vm, GPU_group gpu_group)
+        public GpuAssignAction(VM vm, GPU_group gpu_group, VGPU_type vgpuType)
             : base(vm.Connection, "Set GPU", true)
         {
             this.vm = vm;
             this.gpu_group = gpu_group;
+            this.vgpuType = vgpuType;
         }
 
         protected override void Run()
@@ -60,7 +65,11 @@ namespace XenAdmin.Actions
             // Add the new VGPU
             string device = "0";  // fixed at the moment, see PR-1060
             Dictionary<string, string> other_config = new Dictionary<string,string>();
-            VGPU.async_create(Session, vm.opaque_ref, gpu_group.opaque_ref, device, other_config);
+
+            if (Helpers.FeatureForbidden(vm, Host.RestrictVgpu))
+                VGPU.async_create(Session, vm.opaque_ref, gpu_group.opaque_ref, device, other_config);
+            else
+                VGPU.async_create(Session, vm.opaque_ref, gpu_group.opaque_ref, device, other_config, vgpuType.opaque_ref);
         }
     }
 }
