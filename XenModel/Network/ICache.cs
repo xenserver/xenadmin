@@ -74,6 +74,7 @@ namespace XenAdmin.Network
         VBD[] VBDs { get; }
         VDI[] VDIs { get; }
         VGPU[] VGPUs { get; }
+        VGPU_type[] VGPU_types { get; }
         VIF[] VIFs { get; }
         VMPP[] VMPPs { get; }
         VM_appliance[] VM_appliances { get; }

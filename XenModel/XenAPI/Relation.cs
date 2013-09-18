@@ -107,6 +107,16 @@ namespace XenAPI
                 new Relation("metadata_VDIs", "VDI", "metadata_of_pool"),
             });
 
+            relations.Add(typeof(Proxy_PGPU), new Relation[] {
+                new Relation("resident_VGPUs", "VGPU", "resident_on"),
+            });
+
+            relations.Add(typeof(Proxy_VGPU_type), new Relation[] {
+                new Relation("enabled_on_PGPUs", "PGPU", "enabled_VGPU_types"),
+                new Relation("supported_on_PGPUs", "PGPU", "supported_VGPU_types"),
+                new Relation("VGPUs", "VGPU", "type"),
+            });
+
             relations.Add(typeof(Proxy_PIF), new Relation[] {
                 new Relation("tunnel_transport_PIF_of", "tunnel", "transport_PIF"),
                 new Relation("tunnel_access_PIF_of", "tunnel", "access_PIF"),

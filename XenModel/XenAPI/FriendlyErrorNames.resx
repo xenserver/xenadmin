@@ -312,6 +312,9 @@
   <data name="FIELD_TYPE_ERROR" xml:space="preserve">
     <value>One of the fields you supplied was of the wrong type.</value>
   </data>
+  <data name="GPU_GROUP_CONTAINS_NO_PGPUS" xml:space="preserve">
+    <value>The GPU group does not contain any PGPUs.</value>
+  </data>
   <data name="GPU_GROUP_CONTAINS_PGPU" xml:space="preserve">
     <value>The GPU group contains active PGPUs and cannot be deleted.</value>
   </data>
@@ -704,6 +707,15 @@
   </data>
   <data name="PERMISSION_DENIED" xml:space="preserve">
     <value>Caller not allowed to perform this operation.</value>
+  </data>
+  <data name="PGPU_INSUFFICIENT_CAPACITY_FOR_VGPU" xml:space="preserve">
+    <value>There is insufficient capacity on this PGPU to run the VGPU.</value>
+  </data>
+  <data name="PGPU_IN_USE_BY_VM" xml:space="preserve">
+    <value>This PGPU is currently in use by running VMs.</value>
+  </data>
+  <data name="PGPU_NOT_COMPATIBLE_WITH_GPU_GROUP" xml:space="preserve">
+    <value>PGPU type not compatible with destination group.</value>
   </data>
   <data name="PIF_ALREADY_BONDED" xml:space="preserve">
     <value>You cannot create a bond of an interface which is a member of an existing bond.</value>
@@ -1538,6 +1550,15 @@ Authorized Roles: {1}</value>
   <data name="VDI_READONLY" xml:space="preserve">
     <value>The operation required write access but VDI {0} is read-only</value>
   </data>
+  <data name="VGPU_TYPE_NOT_COMPATIBLE_WITH_RUNNING_TYPE" xml:space="preserve">
+    <value>VGPU type is not compatible with one or more of the VGPU types currently running on this PGPU</value>
+  </data>
+  <data name="VGPU_TYPE_NOT_ENABLED" xml:space="preserve">
+    <value>VGPU type is not one of the PGPU's enabled types.</value>
+  </data>
+  <data name="VGPU_TYPE_NOT_SUPPORTED" xml:space="preserve">
+    <value>VGPU type is not one of the PGPU's supported types.</value>
+  </data>
   <data name="VIFS_MAX_ALLOWED" xml:space="preserve">
     <value>You have reached the maximum number of virtual network interfaces allowed for this virtual machine.</value>
   </data>
@@ -1600,6 +1621,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VM_HAS_TOO_MANY_SNAPSHOTS" xml:space="preserve">
     <value>You attempted to migrate a VM with more than one snapshot.</value>
+  </data>
+  <data name="VM_HAS_VGPU" xml:space="preserve">
+    <value>This operation could not be performed, because the VM has one or more virtual GPUs.</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VERSION" xml:space="preserve">
     <value>This VM operation cannot be performed on an older-versioned host during an upgrade.</value>
@@ -1672,6 +1696,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VM_REQUIRES_VDI" xml:space="preserve">
     <value>VM cannot be started because it requires a VDI which cannot be attached</value>
+  </data>
+  <data name="VM_REQUIRES_VGPU" xml:space="preserve">
+    <value>You attempted to run a VM on a host on which the vGPU required by the VM cannot be allocated on any pGPUs in the GPU_group needed by the VM.</value>
   </data>
   <data name="VM_REVERT_FAILED" xml:space="preserve">
     <value>An error occurred while reverting the specified virtual machine to the specified snapshot</value>

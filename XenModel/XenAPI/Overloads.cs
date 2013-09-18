@@ -39,6 +39,19 @@ namespace XenAPI
 {
     public partial interface Proxy : IXmlRpcProxy
     {
+        #region pre-7.0 compatibility
+
+        [XmlRpcMethod("VGPU.create")]
+        Response<string>
+        vgpu_create(string session, string _vm, string _gpu_group, string _device, Object _other_config);
+
+
+        [XmlRpcMethod("Async.VGPU.create")]
+        Response<string>
+        async_vgpu_create(string session, string _vm, string _gpu_group, string _device, Object _other_config);
+
+        #endregion
+
         #region pre-6.2 compatibility
 
         [XmlRpcMethod("session.login_with_password")]
@@ -142,6 +155,21 @@ namespace XenAPI
         async_bond_create(string session, string _network, string[] _members, string _mac);
 
         #endregion
+    }
+
+    public partial class VGPU
+    {
+        // Backward compatibility for VGPU.create in XenServer 6.x.
+
+        public static XenRef<VGPU> create(Session session, string _vm, string _gpu_group, string _device, Dictionary<string, string> _other_config)
+        {
+            return XenRef<VGPU>.Create(session.proxy.vgpu_create(session.uuid, (_vm != null) ? _vm : "", (_gpu_group != null) ? _gpu_group : "", (_device != null) ? _device : "", Maps.convert_to_proxy_string_string(_other_config)).parse());
+        }
+
+        public static XenRef<Task> async_create(Session session, string _vm, string _gpu_group, string _device, Dictionary<string, string> _other_config)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vgpu_create(session.uuid, (_vm != null) ? _vm : "", (_gpu_group != null) ? _gpu_group : "", (_device != null) ? _device : "", Maps.convert_to_proxy_string_string(_other_config)).parse());
+        }
     }
 
     public partial class Blob

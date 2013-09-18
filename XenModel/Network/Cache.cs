@@ -72,13 +72,14 @@ namespace XenAdmin.Network
         private readonly ChangeableDictionary<XenRef<VBD_metrics>, VBD_metrics> _vbd_metrics = new ChangeableDictionary<XenRef<VBD_metrics>, VBD_metrics>();
         private readonly ChangeableDictionary<XenRef<VDI>, VDI> _vdi = new ChangeableDictionary<XenRef<VDI>, VDI>();
         private readonly ChangeableDictionary<XenRef<VGPU>, VGPU> _vgpu = new ChangeableDictionary<XenRef<VGPU>, VGPU>();
+        private readonly ChangeableDictionary<XenRef<VGPU_type>, VGPU_type> _vgpu_types = new ChangeableDictionary<XenRef<VGPU_type>, VGPU_type>();
         private readonly ChangeableDictionary<XenRef<VIF>, VIF> _vif = new ChangeableDictionary<XenRef<VIF>, VIF>();
         private readonly ChangeableDictionary<XenRef<VIF_metrics>, VIF_metrics> _vif_metrics = new ChangeableDictionary<XenRef<VIF_metrics>, VIF_metrics>();
         private readonly ChangeableDictionary<XenRef<VLAN>, VLAN> _vlan = new ChangeableDictionary<XenRef<VLAN>, VLAN>();
         private readonly ChangeableDictionary<XenRef<VM>, VM> _vm = new ChangeableDictionary<XenRef<VM>, VM>();
         private readonly ChangeableDictionary<XenRef<VM_metrics>, VM_metrics> _vm_metrics = new ChangeableDictionary<XenRef<VM_metrics>, VM_metrics>();
         private readonly ChangeableDictionary<XenRef<VM_guest_metrics>, VM_guest_metrics> _vm_guest_metrics = new ChangeableDictionary<XenRef<VM_guest_metrics>, VM_guest_metrics>();
-        private readonly ChangeableDictionary<XenRef<VMPP>,VMPP> _vmmp=new ChangeableDictionary<XenRef<VMPP>, VMPP>();
+        private readonly ChangeableDictionary<XenRef<VMPP>, VMPP> _vmmp = new ChangeableDictionary<XenRef<VMPP>, VMPP>();
         private readonly ChangeableDictionary<XenRef<VM_appliance>, VM_appliance> _vm_appliance = new ChangeableDictionary<XenRef<VM_appliance>, VM_appliance>();
         private readonly ChangeableDictionary<XenRef<Crashdump>, Crashdump> _crashdump = new ChangeableDictionary<XenRef<Crashdump>, Crashdump>();
 
@@ -99,22 +100,19 @@ namespace XenAdmin.Network
         }
 
 
-
         public Bond[] Bonds
         {
-            get
-            {
-                return contents(_bond);
-            }
+            get { return contents(_bond); }
         }
+
         public VMPP[] VMPPs
         {
-            get { return contents((_vmmp)); }
+            get { return contents(_vmmp); }
         }
 
         public VM_appliance[] VM_appliances
         {
-            get { return contents((_vm_appliance)); }
+            get { return contents(_vm_appliance); }
         }
 
         public Folder[] Folders
@@ -129,10 +127,7 @@ namespace XenAdmin.Network
         
         public Host[] Hosts
         {
-            get
-            {
-                return contents(_host);
-            }
+            get { return contents(_host); }
         }
 
         public int HostCount
@@ -140,129 +135,76 @@ namespace XenAdmin.Network
             get { return _host.Count; }
         }
 
-       
-
         public Host_cpu[] Host_cpus
         {
             get { return contents(_host_cpu); }
         }
 
-
-
         public XenAPI.Message[] Messages
         {
-            get
-            {
-                return contents(_message);
-            }
+            get { return contents(_message); }
         }
-
-      
 
         public XenAPI.Network[] Networks
         {
-            get
-            {
-                return contents(_network);
-            }
+            get { return contents(_network); }
         }
-
-
+                
         public PBD[] PBDs
         {
-            get
-            {
-                return contents(_pbd);
-            }
+            get { return contents(_pbd); }
         }
-
 
         public PGPU[] PGPUs
         {
-            get
-            {
-                return contents(_pgpu);
-            }
+            get { return contents(_pgpu); }
         }
-
 
         public PIF[] PIFs
         {
-            get
-            {
-                return contents(_pif);
-            }
+            get { return contents(_pif); }
         }
-
 
         public Pool[] Pools
         {
-            get
-            {
-                return contents(_pool);
-            }
+            get { return contents(_pool); }
         }
-
 
         public Pool_patch[] Pool_patches
         {
-            get
-            {
-                return contents(_pool_patch);
-            }
+            get { return contents(_pool_patch); }
         }
-
-
-        
 
         public Role[] Roles
         {
-            get
-            {
-                return contents(_role);
-            }
+            get { return contents(_role); }
         }
-
-     
 
         public SM[] SMs
         {
-            get
-            {
-                return contents(_sm);
-            }
+            get { return contents(_sm); }
         }
-
-       
 
         public SR[] SRs
         {
-            get
-            {
-                return contents(_sr);
-            }
+            get { return contents(_sr); }
         }
-
-
 
         public Subject[] Subjects
         {
             get { return contents(_subject); }
         }
 
-
         public Tunnel[] Tunnels
         {
             get { return contents(_tunnel); }
         }
-
 
         public VBD[] VBDs
         {
             get { return contents(_vbd); }
         }
 
-      
         public VDI[] VDIs
         {
             get { return contents(_vdi); }
@@ -270,31 +212,23 @@ namespace XenAdmin.Network
 
         public VGPU[] VGPUs
         {
-            get
-            {
-                return contents(_vgpu);
-            }
+            get { return contents(_vgpu); }
         }
+
+        public VGPU_type[] VGPU_types
+        {
+            get { return contents(_vgpu_types); } }
 
         public VIF[] VIFs
         {
-            get
-            {
-                return contents(_vif);
-            }
+            get { return contents(_vif); }
         }
-
-      
 
         public VM[] VMs
         {
-            get
-            {
-                return contents(_vm);
-            }
+            get { return contents(_vm); }
         }
 
-       
 
         private static T[] contents<T>(ChangeableDictionary<XenRef<T>, T> d) where T : XenObject<T>
         {
@@ -310,9 +244,6 @@ namespace XenAdmin.Network
                 return result;
             }
         }
-
-
-
 
         /// <summary>
         /// Returns the collection for the given type, or null if no such dictionary is present.

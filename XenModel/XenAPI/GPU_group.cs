@@ -50,7 +50,8 @@ namespace XenAPI
             List<XenRef<PGPU>> PGPUs,
             List<XenRef<VGPU>> VGPUs,
             string[] GPU_types,
-            Dictionary<string, string> other_config)
+            Dictionary<string, string> other_config,
+            allocation_algorithm allocation_algorithm)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -59,6 +60,7 @@ namespace XenAPI
             this.VGPUs = VGPUs;
             this.GPU_types = GPU_types;
             this.other_config = other_config;
+            this.allocation_algorithm = allocation_algorithm;
         }
 
         /// <summary>
@@ -79,6 +81,7 @@ namespace XenAPI
             VGPUs = update.VGPUs;
             GPU_types = update.GPU_types;
             other_config = update.other_config;
+            allocation_algorithm = update.allocation_algorithm;
         }
 
         internal void UpdateFromProxy(Proxy_GPU_group proxy)
@@ -90,6 +93,7 @@ namespace XenAPI
             VGPUs = proxy.VGPUs == null ? null : XenRef<VGPU>.Create(proxy.VGPUs);
             GPU_types = proxy.GPU_types == null ? new string[] {} : (string [])proxy.GPU_types;
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
+            allocation_algorithm = proxy.allocation_algorithm == null ? (allocation_algorithm) 0 : (allocation_algorithm)Helper.EnumParseDefault(typeof(allocation_algorithm), (string)proxy.allocation_algorithm);
         }
 
         public Proxy_GPU_group ToProxy()
@@ -102,6 +106,7 @@ namespace XenAPI
             result_.VGPUs = (VGPUs != null) ? Helper.RefListToStringArray(VGPUs) : new string[] {};
             result_.GPU_types = GPU_types;
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.allocation_algorithm = allocation_algorithm_helper.ToString(allocation_algorithm);
             return result_;
         }
 
@@ -118,6 +123,7 @@ namespace XenAPI
             VGPUs = Marshalling.ParseSetRef<VGPU>(table, "VGPUs");
             GPU_types = Marshalling.ParseStringArray(table, "GPU_types");
             other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+            allocation_algorithm = (allocation_algorithm)Helper.EnumParseDefault(typeof(allocation_algorithm), Marshalling.ParseString(table, "allocation_algorithm"));
         }
 
         public bool DeepEquals(GPU_group other)
@@ -133,7 +139,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._PGPUs, other._PGPUs) &&
                 Helper.AreEqual2(this._VGPUs, other._VGPUs) &&
                 Helper.AreEqual2(this._GPU_types, other._GPU_types) &&
-                Helper.AreEqual2(this._other_config, other._other_config);
+                Helper.AreEqual2(this._other_config, other._other_config) &&
+                Helper.AreEqual2(this._allocation_algorithm, other._allocation_algorithm);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, GPU_group server)
@@ -156,6 +163,10 @@ namespace XenAPI
                 if (!Helper.AreEqual2(_other_config, server._other_config))
                 {
                     GPU_group.set_other_config(session, opaqueRef, _other_config);
+                }
+                if (!Helper.AreEqual2(_allocation_algorithm, server._allocation_algorithm))
+                {
+                    GPU_group.set_allocation_algorithm(session, opaqueRef, _allocation_algorithm);
                 }
 
                 return null;
@@ -212,6 +223,11 @@ namespace XenAPI
             return Maps.convert_from_proxy_string_string(session.proxy.gpu_group_get_other_config(session.uuid, (_gpu_group != null) ? _gpu_group : "").parse());
         }
 
+        public static allocation_algorithm get_allocation_algorithm(Session session, string _gpu_group)
+        {
+            return (allocation_algorithm)Helper.EnumParseDefault(typeof(allocation_algorithm), (string)session.proxy.gpu_group_get_allocation_algorithm(session.uuid, (_gpu_group != null) ? _gpu_group : "").parse());
+        }
+
         public static void set_name_label(Session session, string _gpu_group, string _label)
         {
             session.proxy.gpu_group_set_name_label(session.uuid, (_gpu_group != null) ? _gpu_group : "", (_label != null) ? _label : "").parse();
@@ -235,6 +251,61 @@ namespace XenAPI
         public static void remove_from_other_config(Session session, string _gpu_group, string _key)
         {
             session.proxy.gpu_group_remove_from_other_config(session.uuid, (_gpu_group != null) ? _gpu_group : "", (_key != null) ? _key : "").parse();
+        }
+
+        public static void set_allocation_algorithm(Session session, string _gpu_group, allocation_algorithm _allocation_algorithm)
+        {
+            session.proxy.gpu_group_set_allocation_algorithm(session.uuid, (_gpu_group != null) ? _gpu_group : "", allocation_algorithm_helper.ToString(_allocation_algorithm)).parse();
+        }
+
+        public static XenRef<GPU_group> create(Session session, string _name_label, string _name_description, Dictionary<string, string> _other_config)
+        {
+            return XenRef<GPU_group>.Create(session.proxy.gpu_group_create(session.uuid, (_name_label != null) ? _name_label : "", (_name_description != null) ? _name_description : "", Maps.convert_to_proxy_string_string(_other_config)).parse());
+        }
+
+        public static XenRef<Task> async_create(Session session, string _name_label, string _name_description, Dictionary<string, string> _other_config)
+        {
+            return XenRef<Task>.Create(session.proxy.async_gpu_group_create(session.uuid, (_name_label != null) ? _name_label : "", (_name_description != null) ? _name_description : "", Maps.convert_to_proxy_string_string(_other_config)).parse());
+        }
+
+        public static void destroy(Session session, string _self)
+        {
+            session.proxy.gpu_group_destroy(session.uuid, (_self != null) ? _self : "").parse();
+        }
+
+        public static XenRef<Task> async_destroy(Session session, string _self)
+        {
+            return XenRef<Task>.Create(session.proxy.async_gpu_group_destroy(session.uuid, (_self != null) ? _self : "").parse());
+        }
+
+        public static List<XenRef<VGPU_type>> get_enabled_VGPU_types(Session session, string _self)
+        {
+            return XenRef<VGPU_type>.Create(session.proxy.gpu_group_get_enabled_vgpu_types(session.uuid, (_self != null) ? _self : "").parse());
+        }
+
+        public static XenRef<Task> async_get_enabled_VGPU_types(Session session, string _self)
+        {
+            return XenRef<Task>.Create(session.proxy.async_gpu_group_get_enabled_vgpu_types(session.uuid, (_self != null) ? _self : "").parse());
+        }
+
+        public static List<XenRef<VGPU_type>> get_supported_VGPU_types(Session session, string _self)
+        {
+            return XenRef<VGPU_type>.Create(session.proxy.gpu_group_get_supported_vgpu_types(session.uuid, (_self != null) ? _self : "").parse());
+        }
+
+        public static XenRef<Task> async_get_supported_VGPU_types(Session session, string _self)
+        {
+            return XenRef<Task>.Create(session.proxy.async_gpu_group_get_supported_vgpu_types(session.uuid, (_self != null) ? _self : "").parse());
+        }
+
+        public static long get_remaining_capacity(Session session, string _self, string _vgpu_type)
+        {
+            return long.Parse((string)session.proxy.gpu_group_get_remaining_capacity(session.uuid, (_self != null) ? _self : "", (_vgpu_type != null) ? _vgpu_type : "").parse());
+        }
+
+        public static XenRef<Task> async_get_remaining_capacity(Session session, string _self, string _vgpu_type)
+        {
+            return XenRef<Task>.Create(session.proxy.async_gpu_group_get_remaining_capacity(session.uuid, (_self != null) ? _self : "", (_vgpu_type != null) ? _vgpu_type : "").parse());
         }
 
         public static List<XenRef<GPU_group>> get_all(Session session)
@@ -287,6 +358,12 @@ namespace XenAPI
         public virtual Dictionary<string, string> other_config {
              get { return _other_config; }
              set { if (!Helper.AreEqual(value, _other_config)) { _other_config = value; Changed = true; NotifyPropertyChanged("other_config"); } }
+         }
+
+        private allocation_algorithm _allocation_algorithm;
+        public virtual allocation_algorithm allocation_algorithm {
+             get { return _allocation_algorithm; }
+             set { if (!Helper.AreEqual(value, _allocation_algorithm)) { _allocation_algorithm = value; Changed = true; NotifyPropertyChanged("allocation_algorithm"); } }
          }
 
 

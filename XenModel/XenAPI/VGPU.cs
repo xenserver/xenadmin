@@ -49,7 +49,9 @@ namespace XenAPI
             XenRef<GPU_group> GPU_group,
             string device,
             bool currently_attached,
-            Dictionary<string, string> other_config)
+            Dictionary<string, string> other_config,
+            XenRef<VGPU_type> type,
+            XenRef<PGPU> resident_on)
         {
             this.uuid = uuid;
             this.VM = VM;
@@ -57,6 +59,8 @@ namespace XenAPI
             this.device = device;
             this.currently_attached = currently_attached;
             this.other_config = other_config;
+            this.type = type;
+            this.resident_on = resident_on;
         }
 
         /// <summary>
@@ -76,6 +80,8 @@ namespace XenAPI
             device = update.device;
             currently_attached = update.currently_attached;
             other_config = update.other_config;
+            type = update.type;
+            resident_on = update.resident_on;
         }
 
         internal void UpdateFromProxy(Proxy_VGPU proxy)
@@ -86,6 +92,8 @@ namespace XenAPI
             device = proxy.device == null ? null : (string)proxy.device;
             currently_attached = (bool)proxy.currently_attached;
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
+            type = proxy.type == null ? null : XenRef<VGPU_type>.Create(proxy.type);
+            resident_on = proxy.resident_on == null ? null : XenRef<PGPU>.Create(proxy.resident_on);
         }
 
         public Proxy_VGPU ToProxy()
@@ -97,6 +105,8 @@ namespace XenAPI
             result_.device = (device != null) ? device : "";
             result_.currently_attached = currently_attached;
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.type = (type != null) ? type : "";
+            result_.resident_on = (resident_on != null) ? resident_on : "";
             return result_;
         }
 
@@ -112,6 +122,8 @@ namespace XenAPI
             device = Marshalling.ParseString(table, "device");
             currently_attached = Marshalling.ParseBool(table, "currently_attached");
             other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+            type = Marshalling.ParseRef<VGPU_type>(table, "type");
+            resident_on = Marshalling.ParseRef<PGPU>(table, "resident_on");
         }
 
         public bool DeepEquals(VGPU other)
@@ -126,7 +138,9 @@ namespace XenAPI
                 Helper.AreEqual2(this._GPU_group, other._GPU_group) &&
                 Helper.AreEqual2(this._device, other._device) &&
                 Helper.AreEqual2(this._currently_attached, other._currently_attached) &&
-                Helper.AreEqual2(this._other_config, other._other_config);
+                Helper.AreEqual2(this._other_config, other._other_config) &&
+                Helper.AreEqual2(this._type, other._type) &&
+                Helper.AreEqual2(this._resident_on, other._resident_on);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VGPU server)
@@ -187,6 +201,16 @@ namespace XenAPI
             return Maps.convert_from_proxy_string_string(session.proxy.vgpu_get_other_config(session.uuid, (_vgpu != null) ? _vgpu : "").parse());
         }
 
+        public static XenRef<VGPU_type> get_type(Session session, string _vgpu)
+        {
+            return XenRef<VGPU_type>.Create(session.proxy.vgpu_get_type(session.uuid, (_vgpu != null) ? _vgpu : "").parse());
+        }
+
+        public static XenRef<PGPU> get_resident_on(Session session, string _vgpu)
+        {
+            return XenRef<PGPU>.Create(session.proxy.vgpu_get_resident_on(session.uuid, (_vgpu != null) ? _vgpu : "").parse());
+        }
+
         public static void set_other_config(Session session, string _vgpu, Dictionary<string, string> _other_config)
         {
             session.proxy.vgpu_set_other_config(session.uuid, (_vgpu != null) ? _vgpu : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
@@ -202,14 +226,14 @@ namespace XenAPI
             session.proxy.vgpu_remove_from_other_config(session.uuid, (_vgpu != null) ? _vgpu : "", (_key != null) ? _key : "").parse();
         }
 
-        public static XenRef<VGPU> create(Session session, string _vm, string _gpu_group, string _device, Dictionary<string, string> _other_config)
+        public static XenRef<VGPU> create(Session session, string _vm, string _gpu_group, string _device, Dictionary<string, string> _other_config, string _type)
         {
-            return XenRef<VGPU>.Create(session.proxy.vgpu_create(session.uuid, (_vm != null) ? _vm : "", (_gpu_group != null) ? _gpu_group : "", (_device != null) ? _device : "", Maps.convert_to_proxy_string_string(_other_config)).parse());
+            return XenRef<VGPU>.Create(session.proxy.vgpu_create(session.uuid, (_vm != null) ? _vm : "", (_gpu_group != null) ? _gpu_group : "", (_device != null) ? _device : "", Maps.convert_to_proxy_string_string(_other_config), (_type != null) ? _type : "").parse());
         }
 
-        public static XenRef<Task> async_create(Session session, string _vm, string _gpu_group, string _device, Dictionary<string, string> _other_config)
+        public static XenRef<Task> async_create(Session session, string _vm, string _gpu_group, string _device, Dictionary<string, string> _other_config, string _type)
         {
-            return XenRef<Task>.Create(session.proxy.async_vgpu_create(session.uuid, (_vm != null) ? _vm : "", (_gpu_group != null) ? _gpu_group : "", (_device != null) ? _device : "", Maps.convert_to_proxy_string_string(_other_config)).parse());
+            return XenRef<Task>.Create(session.proxy.async_vgpu_create(session.uuid, (_vm != null) ? _vm : "", (_gpu_group != null) ? _gpu_group : "", (_device != null) ? _device : "", Maps.convert_to_proxy_string_string(_other_config), (_type != null) ? _type : "").parse());
         }
 
         public static void destroy(Session session, string _self)
@@ -266,6 +290,18 @@ namespace XenAPI
         public virtual Dictionary<string, string> other_config {
              get { return _other_config; }
              set { if (!Helper.AreEqual(value, _other_config)) { _other_config = value; Changed = true; NotifyPropertyChanged("other_config"); } }
+         }
+
+        private XenRef<VGPU_type> _type;
+        public virtual XenRef<VGPU_type> type {
+             get { return _type; }
+             set { if (!Helper.AreEqual(value, _type)) { _type = value; Changed = true; NotifyPropertyChanged("type"); } }
+         }
+
+        private XenRef<PGPU> _resident_on;
+        public virtual XenRef<PGPU> resident_on {
+             get { return _resident_on; }
+             set { if (!Helper.AreEqual(value, _resident_on)) { _resident_on = value; Changed = true; NotifyPropertyChanged("resident_on"); } }
          }
 
 

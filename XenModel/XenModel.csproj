@@ -298,6 +298,7 @@
     <Compile Include="XenAPI-Extensions\GPU_group.cs" />
     <Compile Include="XenAPI-Extensions\VM_appliance.cs" />
     <Compile Include="XenAPI-Extensions\vm_power_state.cs" />
+    <Compile Include="XenAPI\allocation_algorithm.cs" />
     <Compile Include="XenAPI\bond_mode.cs" />
     <Compile Include="XenAPI\DR_task.cs" />
     <Compile Include="XenAPI\GPU_group.cs" />
@@ -308,6 +309,7 @@
     <Compile Include="XenAPI\PGPU.cs" />
     <Compile Include="XenAPI\primary_address_type.cs" />
     <Compile Include="XenAPI\VGPU.cs" />
+    <Compile Include="XenAPI\VGPU_type.cs" />
     <Compile Include="XenAPI\vif_locking_mode.cs" />
     <Compile Include="XenAPI\VM_appliance.cs" />
     <Compile Include="XenAPI\vm_appliance_operation.cs" />
