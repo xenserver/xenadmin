@@ -48,7 +48,7 @@ namespace XenAdminTests.XenModelTests.ActionTests
         protected override bool VerifyResult(GpuAssignAction action)
         {
             ObjectManager.MockProxyFor(id).Verify(p => p.async_vgpu_create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), "0",
-                              It.IsAny<object>()), Times.Once());
+                              It.IsAny<object>(), It.IsAny<string>()), Times.Once());
             ObjectManager.MockProxyFor(id).Verify(p => p.async_vgpu_destroy(It.IsAny<string>(), It.IsAny<string>()), Times.Never());
             return true;
         }

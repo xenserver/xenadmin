@@ -69,7 +69,8 @@ namespace XenAdmin.Actions
             if (Helpers.FeatureForbidden(vm, Host.RestrictVgpu))
                 VGPU.async_create(Session, vm.opaque_ref, gpu_group.opaque_ref, device, other_config);
             else
-                VGPU.async_create(Session, vm.opaque_ref, gpu_group.opaque_ref, device, other_config, vgpuType.opaque_ref);
+                VGPU.async_create(Session, vm.opaque_ref, gpu_group.opaque_ref, device,
+                                  other_config, vgpuType == null ? null : vgpuType.opaque_ref);
         }
     }
 }
