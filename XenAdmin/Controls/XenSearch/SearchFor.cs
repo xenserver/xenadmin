@@ -40,7 +40,7 @@ namespace XenAdmin.Controls.XenSearch
 {
     public partial class SearchFor : UserControl
     {
-        public event EventHandler QueryChanged;
+        public event Action QueryChanged;
 
         private const ObjectTypes CUSTOM = ObjectTypes.None;  // We use None as a special signal value for "Custom..."
 
@@ -56,6 +56,18 @@ namespace XenAdmin.Controls.XenSearch
             InitializeComponent();
             InitializeDictionaries();
             PopulateSearchForComboButton();
+        }
+
+        public void BlankSearch()
+        {
+            QueryScope = new QueryScope(ObjectTypes.None);
+            OnQueryChanged();
+        }
+
+        private void OnQueryChanged()
+        {
+            if (QueryChanged != null)
+                QueryChanged();
         }
 
         private void InitializeDictionaries()
@@ -155,8 +167,7 @@ namespace XenAdmin.Controls.XenSearch
                 customValue = sfc.Selected;
             }
 
-            if (QueryChanged != null)
-                QueryChanged(this, new EventArgs());
+            OnQueryChanged();
         }
 
         private void searchForComboButton_selChanged(object sender, EventArgs e)
@@ -165,8 +176,7 @@ namespace XenAdmin.Controls.XenSearch
             if (types == CUSTOM)
                 return;  // CUSTOM is dealt with in searchForComboButton_itemSelected instead
 
-            if (QueryChanged != null)
-                QueryChanged(this, new EventArgs());
+            OnQueryChanged();
         }
 
         public QueryScope QueryScope

@@ -61,6 +61,7 @@ namespace XenAdmin.TabPages
         {
             InitializeComponent();
 
+            Searcher.SearchPanelExpandChanged += Searcher_SearchPanelExpandChanged;
             Searcher.SearchChanged += UI_SearchChanged;
             Searcher.SaveRequested += Searcher_SaveRequested;
             OutputPanel.QueryPanel.SearchChanged += UI_SearchChanged;
@@ -208,6 +209,11 @@ namespace XenAdmin.TabPages
                 Searcher.MaxHeight = Height / 2;
         }
 
+        private void Searcher_SearchPanelExpandChanged()
+        {
+            buttonEditSearch.Enabled = !Searcher.Expanded;
+        }
+
         #region Search menu
 
         private void contextMenuStripSearches_Opening(object sender, CancelEventArgs e)
@@ -260,7 +266,7 @@ namespace XenAdmin.TabPages
             contextMenuStripSearches.Items.Add(deleteItem);
         }
 
-        private void buttonNewSearch_Click(object sender, EventArgs e)
+        private void buttonEditSearch_Click(object sender, EventArgs e)
         {
             Searcher.ToggleExpandedState(true);
             OnSearchChanged();

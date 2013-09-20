@@ -43,6 +43,7 @@ namespace XenAdmin.Controls.XenSearch
         public event Action SearchChanged;
         public event Action SearchForChanged;
         public event Action SaveRequested;
+        public event Action SearchPanelExpandChanged;
 
         public Searcher()
         {
@@ -66,7 +67,7 @@ namespace XenAdmin.Controls.XenSearch
             OnSearchChanged();
         }
 
-        private void SearchForQueryChanged(object sender, EventArgs e)
+        private void SearchForQueryChanged()
         {
             OnSearchForChanged();
             OnSearchChanged();
@@ -138,6 +139,9 @@ namespace XenAdmin.Controls.XenSearch
 
             if (Visible)
                 buttonSave.Enabled = (ConnectionsManager.XenConnections.Find(c => c.IsConnected) != null);
+
+            if (SearchPanelExpandChanged != null)
+                SearchPanelExpandChanged();
         }
 
         protected virtual void OnSearchChanged()
@@ -172,6 +176,11 @@ namespace XenAdmin.Controls.XenSearch
         private void buttonClose_Click(object sender, EventArgs e)
         {
             ToggleExpandedState(false);
+        }
+
+        private void buttonNewSearch_Click(object sender, EventArgs e)
+        {
+            searchFor.BlankSearch();
         }
     }
 }

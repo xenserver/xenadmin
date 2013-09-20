@@ -35,7 +35,7 @@ namespace XenAdmin.Controls.XenSearch
             this.SearchLabel = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.buttonNewSearch = new System.Windows.Forms.Button();
             this.searchFor = new XenAdmin.Controls.XenSearch.SearchFor();
             this.GroupingControl = new XenAdmin.Controls.XenSearch.GroupingControl();
             this.QueryElement = new XenAdmin.Controls.XenSearch.QueryElement();
@@ -71,10 +71,12 @@ namespace XenAdmin.Controls.XenSearch
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
-            // label1
+            // buttonNewSearch
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.buttonNewSearch, "buttonNewSearch");
+            this.buttonNewSearch.Name = "buttonNewSearch";
+            this.buttonNewSearch.UseVisualStyleBackColor = true;
+            this.buttonNewSearch.Click += new System.EventHandler(this.buttonNewSearch_Click);
             // 
             // searchFor
             // 
@@ -101,16 +103,16 @@ namespace XenAdmin.Controls.XenSearch
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.Controls.Add(this.label1);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.buttonNewSearch);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonSave);
-            this.Controls.Add(this.searchFor);
             this.Controls.Add(this.SearchLabel);
+            this.Controls.Add(this.searchFor);
             this.Controls.Add(this.FiltersLabel);
+            this.Controls.Add(this.QueryElement);
             this.Controls.Add(this.GroupsLabel);
             this.Controls.Add(this.GroupingControl);
-            this.Controls.Add(this.QueryElement);
             this.Name = "Searcher";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -127,6 +129,6 @@ namespace XenAdmin.Controls.XenSearch
         private SearchFor searchFor;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonClose;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonNewSearch;
     }
 }

@@ -32,7 +32,7 @@ namespace XenAdmin.TabPages
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchPage));
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.buttonNewSearch = new System.Windows.Forms.Button();
+            this.buttonEditSearch = new System.Windows.Forms.Button();
             this.ddButtonSavedSearches = new XenAdmin.Controls.DropDownButton();
             this.contextMenuStripSearches = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.buttonReset = new System.Windows.Forms.Button();
@@ -64,7 +64,7 @@ namespace XenAdmin.TabPages
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel2.Controls.Add(this.buttonNewSearch);
+            this.panel2.Controls.Add(this.buttonEditSearch);
             this.panel2.Controls.Add(this.ddButtonSavedSearches);
             this.panel2.Controls.Add(this.buttonReset);
             this.panel2.Controls.Add(this.buttonExport);
@@ -72,12 +72,12 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
-            // buttonNewSearch
+            // buttonEditSearch
             // 
-            resources.ApplyResources(this.buttonNewSearch, "buttonNewSearch");
-            this.buttonNewSearch.Name = "buttonNewSearch";
-            this.buttonNewSearch.UseVisualStyleBackColor = true;
-            this.buttonNewSearch.Click += new System.EventHandler(this.buttonNewSearch_Click);
+            resources.ApplyResources(this.buttonEditSearch, "buttonEditSearch");
+            this.buttonEditSearch.Name = "buttonEditSearch";
+            this.buttonEditSearch.UseVisualStyleBackColor = true;
+            this.buttonEditSearch.Click += new System.EventHandler(this.buttonEditSearch_Click);
             // 
             // ddButtonSavedSearches
             // 
@@ -160,7 +160,7 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.Button buttonImport;
         private System.Windows.Forms.Button buttonExport;
         private System.Windows.Forms.Button buttonReset;
-        private System.Windows.Forms.Button buttonNewSearch;
+        private System.Windows.Forms.Button buttonEditSearch;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripSearches;
     }
 }
