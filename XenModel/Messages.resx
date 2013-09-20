@@ -7641,6 +7641,9 @@ Review these settings, then click Previous if you need to change anything. Other
   <data name="NEWVMWIZARD_TEMPLATEPAGE_WINDOWS" xml:space="preserve">
     <value>Windows</value>
   </data>
+  <data name="NEWVMWIZARD_VGPUPAGE_TITLE" xml:space="preserve">
+    <value>Assign a virtual GPU</value>
+  </data>
   <data name="NEWVM_DEFAULTNAME" xml:space="preserve">
     <value>{0} ({1})</value>
   </data>
@@ -8748,8 +8751,11 @@ You must reconnect to {1} using an account with Pool Administrator permissions b
   <data name="RBAC_WARNING_VM_WIZARD_BLOCK" xml:space="preserve">
     <value>A {0} user cannot create VMs. Log in as a different user with sufficient privileges and try again.</value>
   </data>
+  <data name="RBAC_WARNING_VM_WIZARD_GPU" xml:space="preserve">
+    <value>A {0} user cannot assign a virtual GPU and will be restricted to the settings on the template.</value>
+  </data>
   <data name="RBAC_WARNING_VM_WIZARD_MEM" xml:space="preserve">
-    <value>A {0} user  cannot alter memory values and will be restricted to the settings on the template</value>
+    <value>A {0} user cannot alter memory values and will be restricted to the settings on the template.</value>
   </data>
   <data name="READY_UPGRADE" xml:space="preserve">
     <value>Ready to Upgrade</value>

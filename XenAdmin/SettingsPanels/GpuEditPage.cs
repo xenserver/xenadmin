@@ -30,10 +30,10 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Controls;
 using XenAdmin.Core;
@@ -43,30 +43,44 @@ using XenAPI;
 
 namespace XenAdmin.SettingsPanels
 {
-    public partial class GpuEditPage : UserControl, IEditPage
+    public partial class GpuEditPage : XenTabPage, IEditPage
     {
-        private VM vm;
+        public VM vm;
         private GpuTuple currentGpuTuple;
         private GPU_group[] gpu_groups;
         private bool gpusAvailable;
-        private bool vmStopped;
 
         public GpuEditPage()
         {
             InitializeComponent();
-            Text = Messages.GPU;
+        }
+
+        public GPU_group GpuGroup
+        {
+            get
+            {
+                GpuTuple tuple = comboBoxGpus.SelectedItem as GpuTuple;
+                return tuple == null ? null : tuple.GpuGroup;
+            }
+        }
+
+        public VGPU_type VgpuType
+        {
+            get
+            {
+                GpuTuple tuple = comboBoxGpus.SelectedItem as GpuTuple;
+                if (tuple == null || tuple.VgpuTypes == null || tuple.VgpuTypes.Length == 0)
+                    return null;
+
+                return tuple.VgpuTypes[0];
+            }
         }
 
         #region IEditPage Members
 
         public AsyncAction SaveSettings()
         {
-            GpuTuple tuple = comboBoxGpus.SelectedItem as GpuTuple;
-            if (tuple == null)
-                return null;
-
-            return new GpuAssignAction(vm, tuple.GpuGroup,
-                                           tuple.VgpuTypes == null ? null : tuple.VgpuTypes[0]);
+            return new GpuAssignAction(vm, GpuGroup, VgpuType);
         }
 
         public void SetXenObjects(IXenObject orig, IXenObject clone)
@@ -76,31 +90,11 @@ namespace XenAdmin.SettingsPanels
             Trace.Assert(!Helpers.FeatureForbidden(clone, Host.RestrictGpu));  // If license insufficient, we show upsell page instead
 
             vm = (VM)clone;
-            currentGpuTuple = new GpuTuple(null, null);
 
-            if (vm.VGPUs.Count != 0)
-            {
-                VGPU vgpu = vm.Connection.Resolve(vm.VGPUs[0]);
-                if (vgpu != null)
-                {
-                    var vgpuGroup = vgpu.Connection.Resolve(vgpu.GPU_group);
+            if (Connection == null) // on the PropertiesDialog
+                Connection = vm.Connection;
 
-                    if (Helpers.FeatureForbidden(vm, Host.RestrictVgpu))
-                        currentGpuTuple = new GpuTuple(vgpuGroup, null);
-                    else
-                    {
-                        VGPU_type vgpuType = vm.Connection.Resolve(vgpu.type);
-                        currentGpuTuple = new GpuTuple(vgpuGroup, new[] { vgpuType });
-                    }
-                }
-            }
-
-            gpu_groups = clone.Connection.Cache.GPU_groups;
-            gpusAvailable = gpu_groups.Length > 0;
-
-            vmStopped = (vm.power_state == vm_power_state.Halted);
-
-            Populate();
+            PopulatePage();
         }
 
         public bool ValidToSave
@@ -147,12 +141,65 @@ namespace XenAdmin.SettingsPanels
 
         #endregion
 
-        private void Populate()
+        #region XenTabPage overrides
+
+        public override string Text
         {
+            get { return Messages.GPU; }
+        }
+
+        public override string PageTitle
+        {
+            get { return Messages.NEWVMWIZARD_VGPUPAGE_TITLE; }
+        }
+
+        public override string HelpID
+        {
+            get { return "GPU"; }
+        }
+
+        public override List<KeyValuePair<string, string>> PageSummary
+        {
+            get
+            {
+                var summ = new List<KeyValuePair<string, string>>();
+
+                GpuTuple tuple = comboBoxGpus.SelectedItem as GpuTuple;
+                if (tuple != null)
+                    summ.Add(new KeyValuePair<string, string>(Messages.GPU, tuple.ToString()));
+
+                return summ;
+            }
+        }
+        
+        public override void PopulatePage()
+        {
+            currentGpuTuple = new GpuTuple(null, null);
+
+            if (vm.VGPUs.Count != 0)
+            {
+                VGPU vgpu = Connection.Resolve(vm.VGPUs[0]);
+                if (vgpu != null)
+                {
+                    var vgpuGroup = Connection.Resolve(vgpu.GPU_group);
+
+                    if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu))
+                        currentGpuTuple = new GpuTuple(vgpuGroup, null);
+                    else
+                    {
+                        VGPU_type vgpuType = Connection.Resolve(vgpu.type);
+                        currentGpuTuple = new GpuTuple(vgpuGroup, new[] { vgpuType });
+                    }
+                }
+            }
+
+            gpu_groups = Connection.Cache.GPU_groups;
+            gpusAvailable = gpu_groups.Length > 0;
+
             if (!gpusAvailable)
             {
                 labelGpuType.Visible = comboBoxGpus.Visible = false;
-                labelRubric.Text = Helpers.GetPool(vm.Connection) == null
+                labelRubric.Text = Helpers.GetPool(Connection) == null
                                        ? Messages.GPU_RUBRIC_NO_GPUS_SERVER
                                        : Messages.GPU_RUBRIC_NO_GPUS_POOL;
             }
@@ -164,14 +211,14 @@ namespace XenAdmin.SettingsPanels
                 Array.Sort(gpu_groups);
                 foreach (GPU_group gpu_group in gpu_groups)
                 {
-                    if (Helpers.FeatureForbidden(vm, Host.RestrictVgpu))
+                    if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu))
                     {
                         comboBoxGpus.Items.Add(new GpuTuple(gpu_group, null));
                     }
                     else
                     {
-                        var enabledRefs = GPU_group.get_enabled_VGPU_types(vm.Connection.Session, gpu_group.opaque_ref);
-                        var enabledTypes = vm.Connection.ResolveAll(enabledRefs);
+                        var enabledRefs = GPU_group.get_enabled_VGPU_types(Connection.Session, gpu_group.opaque_ref);
+                        var enabledTypes = Connection.ResolveAll(enabledRefs);
 
                         if (enabledTypes.Count > 1)
                         {
@@ -210,6 +257,8 @@ namespace XenAdmin.SettingsPanels
             ShowHideWarnings();
         }
 
+        #endregion
+
         private void ShowHideWarnings()
         {
             if (!gpusAvailable)
@@ -222,7 +271,7 @@ namespace XenAdmin.SettingsPanels
                 return;
             }
 
-            if (!vmStopped)
+            if (vm.power_state != vm_power_state.Halted)
             {
                 imgRDP.Visible = labelRDP.Visible =
                 imgNeedDriver.Visible = labelNeedDriver.Visible =

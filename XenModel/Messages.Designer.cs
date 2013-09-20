@@ -22343,6 +22343,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assign a virtual GPU.
+        /// </summary>
+        public static string NEWVMWIZARD_VGPUPAGE_TITLE {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_VGPUPAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Virtual Network Interface - {0}.
         /// </summary>
         public static string NEWVNET_TITLE {
@@ -25095,7 +25104,16 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A {0} user  cannot alter memory values and will be restricted to the settings on the template.
+        ///   Looks up a localized string similar to A {0} user cannot assign a virtual GPU and will be restricted to the settings on the template..
+        /// </summary>
+        public static string RBAC_WARNING_VM_WIZARD_GPU {
+            get {
+                return ResourceManager.GetString("RBAC_WARNING_VM_WIZARD_GPU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user cannot alter memory values and will be restricted to the settings on the template..
         /// </summary>
         public static string RBAC_WARNING_VM_WIZARD_MEM {
             get {

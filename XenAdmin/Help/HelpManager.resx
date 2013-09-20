@@ -1029,4 +1029,7 @@
   <data name="NewSRWizard_Summary_HBAPane" xml:space="preserve">
     <value>9855</value>
   </data>
+  <data name="NewVMWizard_GPUPane" xml:space="preserve">
+    <value>2080</value>
+  </data>
 </root>

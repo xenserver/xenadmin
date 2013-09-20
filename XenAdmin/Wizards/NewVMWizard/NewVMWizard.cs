@@ -34,6 +34,8 @@ using XenAdmin.Commands;
 using XenAdmin.Controls;
 using XenAdmin.Network;
 using XenAdmin.Actions.VMActions;
+using XenAdmin.SettingsPanels;
+
 using XenAPI;
 using System.Collections.Generic;
 using XenAdmin.Wizards.GenericPages;
@@ -57,9 +59,12 @@ namespace XenAdmin.Wizards.NewVMWizard
         private readonly RBACWarningPage page_RbacWarning;
         private readonly Page_Cloud page_Cloud;
         private readonly LunPerVdiNewVMMappingPage page_6b_LunPerVdi;
+        private readonly GpuEditPage pageVgpu;
 
         private Host m_affinity;
         private bool BlockAffinitySelection = false;
+        private bool vgpuCapability;
+
         public AsyncAction Action;
 
         public NewVMWizard(IXenConnection connection, VM template, Host affinity)
@@ -79,6 +84,10 @@ namespace XenAdmin.Wizards.NewVMWizard
             page_RbacWarning = new RBACWarningPage();
             page_Cloud = new Page_Cloud();
             page_6b_LunPerVdi = new LunPerVdiNewVMMappingPage { Connection = xenConnection };
+            pageVgpu = new GpuEditPage();
+
+            if (!Helpers.FeatureForbidden(connection, Host.RestrictVgpu))
+                vgpuCapability = connection.Cache.GPU_groups.Length > 0;
 
             #region RBAC Warning Page Checks
             if (connection.Session.IsLocalSuperuser || Helpers.GetMaster(connection).external_auth_type == Auth.AUTH_TYPE_NONE)
@@ -87,15 +96,14 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
             else
             {
-
                 // Check to see if they can even create a VM
-                RBACWarningPage.WizardPermissionCheck createCheck = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_VM_WIZARD_BLOCK);
+                var createCheck = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_VM_WIZARD_BLOCK);
                 foreach (RbacMethod method in CreateVMAction.StaticRBACDependencies)
                     createCheck.AddApiCheck(method);
                 createCheck.Blocking = true;
 
                 // Check to see if they can set memory values
-                RBACWarningPage.WizardPermissionCheck memCheck = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_VM_WIZARD_MEM);
+                var memCheck = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_VM_WIZARD_MEM);
                 memCheck.AddApiCheck("vm.set_memory_limits");
                 memCheck.WarningAction = new RBACWarningPage.PermissionCheckActionDelegate(delegate()
                 {
@@ -105,19 +113,29 @@ namespace XenAdmin.Wizards.NewVMWizard
 
 
                 // Check to see if they can set the VM's affinity
-                RBACWarningPage.WizardPermissionCheck affinityCheck = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_VM_WIZARD_AFFINITY);
+                var affinityCheck = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_VM_WIZARD_AFFINITY);
                 affinityCheck.ApiCallsToCheck.Add("vm.set_affinity");
                 affinityCheck.WarningAction = new RBACWarningPage.PermissionCheckActionDelegate(delegate()
                 {
                     page_4_HomeServer.DisableStep = true;
                     BlockAffinitySelection = true;
-                    Program.Invoke(this, delegate
-                    {
-                        RefreshProgress();
-                    });
+                    Program.Invoke(this, RefreshProgress);
                 });
 
                 page_RbacWarning.AddPermissionChecks(xenConnection, createCheck, affinityCheck, memCheck);
+
+                if (vgpuCapability)
+                {
+                    var vgpuCheck = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_VM_WIZARD_GPU);
+                    vgpuCheck.ApiCallsToCheck.Add("vgpu.create");
+                    vgpuCheck.WarningAction = new RBACWarningPage.PermissionCheckActionDelegate(() =>
+                    {
+                        pageVgpu.DisableStep = true;
+                        Program.Invoke(this, RefreshProgress);
+                    });
+
+                    page_RbacWarning.AddPermissionChecks(xenConnection, vgpuCheck);
+                }
 
                 AddPage(page_RbacWarning, 0);
             }
@@ -127,6 +145,9 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             AddPages(page_1_Template, page_2_Name, page_3_InstallationMedia, page_4_HomeServer,
                      page_5_CpuMem, page_6_Storage, page_7_Networking, page_8_Finish);
+
+            if (vgpuCapability)
+                AddAfterPage(page_5_CpuMem, pageVgpu);
 
             m_affinity = affinity;
             page_1_Template.SelectedTemplate = template;
@@ -154,14 +175,16 @@ namespace XenAdmin.Wizards.NewVMWizard
                                         page_5_CpuMem.SelectedMemoryDynamicMin,
                                         page_5_CpuMem.SelectedMemoryDynamicMax,
                                         page_5_CpuMem.SelectedMemoryStaticMax,
-                                        page_6b_LunPerVdi.MapLunsToVdisRequired 
+                                        page_6b_LunPerVdi.MapLunsToVdisRequired
                                             ? page_6b_LunPerVdi.MappedDisks
                                             : page_6_Storage.SelectedDisks,
                                         page_6_Storage.FullCopySR,
                                         page_7_Networking.SelectedVifs,
                                         page_8_Finish.StartImmediately,
                                         VMOperationCommand.WarningDialogHAInvalidConfig,
-                                        VMOperationCommand.StartDiagnosisForm);
+                                        VMOperationCommand.StartDiagnosisForm,
+                                        vgpuCapability ? pageVgpu.GpuGroup : null,
+                                        vgpuCapability ? pageVgpu.VgpuType : null);
             Action.RunAsync();
 
             base.FinishWizard();
@@ -180,6 +203,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 page_3_InstallationMedia.SelectedTemplate = selectedTemplate;
                 page_4_HomeServer.SelectedTemplate = selectedTemplate;
                 page_5_CpuMem.SelectedTemplate = selectedTemplate;
+                pageVgpu.vm = selectedTemplate;
                 page_6_Storage.SelectedTemplate = selectedTemplate;
                 page_7_Networking.SelectedTemplate = selectedTemplate;
 

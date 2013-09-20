@@ -64,6 +64,8 @@ namespace XenAdmin.Actions.VMActions
         private readonly bool StartAfter;
         private readonly Host CopyBiosStringsFrom;
         private readonly SR FullCopySR;
+        private readonly GPU_group GpuGroup;
+        private readonly VGPU_type VgpuType;
 
         private Action<VMStartAbstractAction, Failure> _startDiagnosisForm;
         private Action<VM, bool> _warningDialogHAInvalidConfig;
@@ -102,10 +104,16 @@ namespace XenAdmin.Actions.VMActions
             "vif.create"
         );
 
-        public CreateVMAction(IXenConnection connection, VM template, Host copyBiosStringsFrom, string name, string description, InstallMethod installMethod,
-            string pvArgs, VDI cd, string url, Host homeServer, long vcpus, long memoryDynamicMin, long memoryDynamicMax, long memoryStaticMax,
-            List<DiskDescription> disks, SR fullCopySR, List<VIF> vifs, bool startAfter, Action<VM, bool> warningDialogHAInvalidConfig, Action<VMStartAbstractAction, Failure> startDiagnosisForm)
-            : base(connection, string.Format(Messages.CREATE_VM, name), string.Format(Messages.CREATE_VM_FROM_TEMPLATE, name, Helpers.GetName(template)))
+        public CreateVMAction(IXenConnection connection, VM template, Host copyBiosStringsFrom,
+            string name, string description, InstallMethod installMethod,
+            string pvArgs, VDI cd, string url, Host homeServer, long vcpus,
+            long memoryDynamicMin, long memoryDynamicMax, long memoryStaticMax,
+            List<DiskDescription> disks, SR fullCopySR, List<VIF> vifs, bool startAfter,
+            Action<VM, bool> warningDialogHAInvalidConfig,
+            Action<VMStartAbstractAction, Failure> startDiagnosisForm,
+            GPU_group gpuGroup, VGPU_type vgpuType)
+            : base(connection, string.Format(Messages.CREATE_VM, name),
+            string.Format(Messages.CREATE_VM_FROM_TEMPLATE, name, Helpers.GetName(template)))
         {
             Template = template;
             CopyBiosStringsFrom = copyBiosStringsFrom;
@@ -126,6 +134,8 @@ namespace XenAdmin.Actions.VMActions
             StartAfter = startAfter;
             _warningDialogHAInvalidConfig = warningDialogHAInvalidConfig;
             _startDiagnosisForm = startDiagnosisForm;
+            GpuGroup = gpuGroup;
+            VgpuType = vgpuType;
 
             Pool pool_of_one = Helpers.GetPoolOfOne(Connection);
             if (HomeServer != null || pool_of_one != null) // otherwise we have no where to put the action
@@ -140,10 +150,17 @@ namespace XenAdmin.Actions.VMActions
             if (Template.memory_dynamic_min != MemoryDynamicMin || Template.memory_dynamic_max != MemoryDynamicMax || Template.memory_static_max != MemoryStaticMax)
                 ApiMethodsToRoleCheck.Add("vm.set_memory_limits");
 
+            if (GpuGroup != null && VgpuType != null)
+            {
+                ApiMethodsToRoleCheck.Add("VGPU.destroy");
+                ApiMethodsToRoleCheck.Add("VGPU.create");
+            }
+
             ApiMethodsToRoleCheck.AddRange(StaticRBACDependencies);
 
             ApiMethodsToRoleCheck.AddRange(Role.CommonTaskApiList);
             ApiMethodsToRoleCheck.AddRange(Role.CommonSessionApiList);
+
             #endregion
         }
 
@@ -182,6 +199,8 @@ namespace XenAdmin.Actions.VMActions
             XenAdminConfigManager.Provider.ShowObject(VM.opaque_ref);
             PointOfNoReturn = true;
 
+            AssignVgpu();
+
             if (StartAfter)
             {
                 Description = Messages.STARTING_VM;
@@ -190,6 +209,15 @@ namespace XenAdmin.Actions.VMActions
             }
 
             Description = Messages.VM_SUCCESSFULLY_CREATED;
+        }
+
+        private void AssignVgpu()
+        {
+            if (GpuGroup != null && VgpuType != null)
+            {
+                var action = new GpuAssignAction(VM, GpuGroup, VgpuType);
+                action.RunExternal(Session);
+            }
         }
 
         private void CopyBiosStrings()
