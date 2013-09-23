@@ -36,16 +36,16 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonClearAll = new System.Windows.Forms.Button();
             this.dataGridViewSRs = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
-            this.FindSrsButton = new System.Windows.Forms.Button();
-            this.buttonSelectAll = new System.Windows.Forms.Button();
-            this.FindSrsOptionsMenuStrip = new XenAdmin.Controls.NonReopeningContextMenuStrip(this.components);
-            this.iscsiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.columnTick = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnMetadata = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FindSrsButton = new System.Windows.Forms.Button();
+            this.buttonSelectAll = new System.Windows.Forms.Button();
+            this.FindSrsOptionsMenuStrip = new XenAdmin.Controls.NonReopeningContextMenuStrip(this.components);
+            this.iscsiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSRs)).BeginInit();
             this.FindSrsOptionsMenuStrip.SuspendLayout();
@@ -88,6 +88,7 @@
             this.columnType,
             this.columnMetadata});
             resources.ApplyResources(this.dataGridViewSRs, "dataGridViewSRs");
+            this.dataGridViewSRs.GridColor = System.Drawing.SystemColors.Control;
             this.dataGridViewSRs.Name = "dataGridViewSRs";
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -100,6 +101,39 @@
             this.tableLayoutPanel1.SetRowSpan(this.dataGridViewSRs, 2);
             this.dataGridViewSRs.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSRs_CellValueChanged);
             this.dataGridViewSRs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSRs_CellClick);
+            // 
+            // columnTick
+            // 
+            resources.ApplyResources(this.columnTick, "columnTick");
+            this.columnTick.Name = "columnTick";
+            // 
+            // columnName
+            // 
+            this.columnName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            resources.ApplyResources(this.columnName, "columnName");
+            this.columnName.Name = "columnName";
+            this.columnName.ReadOnly = true;
+            // 
+            // columnDesc
+            // 
+            this.columnDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            resources.ApplyResources(this.columnDesc, "columnDesc");
+            this.columnDesc.Name = "columnDesc";
+            this.columnDesc.ReadOnly = true;
+            // 
+            // columnType
+            // 
+            this.columnType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            resources.ApplyResources(this.columnType, "columnType");
+            this.columnType.Name = "columnType";
+            this.columnType.ReadOnly = true;
+            // 
+            // columnMetadata
+            // 
+            this.columnMetadata.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            resources.ApplyResources(this.columnMetadata, "columnMetadata");
+            this.columnMetadata.Name = "columnMetadata";
+            this.columnMetadata.ReadOnly = true;
             // 
             // FindSrsButton
             // 
@@ -135,39 +169,6 @@
             this.fcToolStripMenuItem.Name = "fcToolStripMenuItem";
             resources.ApplyResources(this.fcToolStripMenuItem, "fcToolStripMenuItem");
             this.fcToolStripMenuItem.Click += new System.EventHandler(this.fcToolStripMenuItem_Click);
-            // 
-            // columnTick
-            // 
-            resources.ApplyResources(this.columnTick, "columnTick");
-            this.columnTick.Name = "columnTick";
-            // 
-            // columnName
-            // 
-            this.columnName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            resources.ApplyResources(this.columnName, "columnName");
-            this.columnName.Name = "columnName";
-            this.columnName.ReadOnly = true;
-            // 
-            // columnDesc
-            // 
-            this.columnDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            resources.ApplyResources(this.columnDesc, "columnDesc");
-            this.columnDesc.Name = "columnDesc";
-            this.columnDesc.ReadOnly = true;
-            // 
-            // columnType
-            // 
-            this.columnType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            resources.ApplyResources(this.columnType, "columnType");
-            this.columnType.Name = "columnType";
-            this.columnType.ReadOnly = true;
-            // 
-            // columnMetadata
-            // 
-            this.columnMetadata.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            resources.ApplyResources(this.columnMetadata, "columnMetadata");
-            this.columnMetadata.Name = "columnMetadata";
-            this.columnMetadata.ReadOnly = true;
             // 
             // DRFailoverWizardStoragePage
             // 
