@@ -99,10 +99,10 @@
             // 
             // buttonReattach
             // 
+            resources.ApplyResources(this.buttonReattach, "buttonReattach");
             this.buttonReattach.FlatAppearance.BorderSize = 0;
             this.buttonReattach.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.buttonReattach.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            resources.ApplyResources(this.buttonReattach, "buttonReattach");
             this.buttonReattach.ForeColor = System.Drawing.Color.Navy;
             this.buttonReattach.Name = "buttonReattach";
             this.buttonReattach.UseVisualStyleBackColor = true;
@@ -139,10 +139,10 @@
             // 
             // buttonFormat
             // 
+            resources.ApplyResources(this.buttonFormat, "buttonFormat");
             this.buttonFormat.FlatAppearance.BorderSize = 0;
             this.buttonFormat.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.buttonFormat.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            resources.ApplyResources(this.buttonFormat, "buttonFormat");
             this.buttonFormat.ForeColor = System.Drawing.Color.Navy;
             this.buttonFormat.Name = "buttonFormat";
             this.buttonFormat.UseVisualStyleBackColor = true;

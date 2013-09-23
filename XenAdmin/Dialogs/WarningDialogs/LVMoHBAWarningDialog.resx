@@ -282,6 +282,12 @@
   <data name="&gt;&gt;pictureBoxArrowReattach.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="buttonReattach.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="buttonReattach.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="buttonReattach.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
@@ -292,7 +298,7 @@
     <value>29, 4</value>
   </data>
   <data name="buttonReattach.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 23</value>
+    <value>67, 25</value>
   </data>
   <data name="buttonReattach.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -399,6 +405,12 @@
   <data name="&gt;&gt;pictureBoxArrowFormat.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="buttonFormat.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="buttonFormat.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="buttonFormat.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
@@ -412,7 +424,7 @@
     <value>29, 4</value>
   </data>
   <data name="buttonFormat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 23</value>
+    <value>57, 25</value>
   </data>
   <data name="buttonFormat.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
