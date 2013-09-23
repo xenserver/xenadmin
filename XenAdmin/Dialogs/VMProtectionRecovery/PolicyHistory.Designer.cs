@@ -36,19 +36,19 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.labelHistory = new System.Windows.Forms.Label();
             this.panelLoading = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridView1 = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.ColumnExpand = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnResult = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel1.SuspendLayout();
             this.panelLoading.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,14 +68,6 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
             resources.GetString("comboBox1.Items2")});
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.comboBox1);
-            this.panel1.Controls.Add(this.label1);
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Name = "panel1";
-            this.panel1.SizeChanged += new System.EventHandler(this.panel1_SizeChanged);
             // 
             // labelHistory
             // 
@@ -102,6 +94,14 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.labelHistory, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.comboBox1, 2, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
             // dataGridView1
             // 
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
@@ -114,6 +114,7 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
             this.ColumnDateTime,
             this.ColumnDescription});
             resources.ApplyResources(this.dataGridView1, "dataGridView1");
+            this.dataGridView1.GridColor = System.Drawing.SystemColors.Control;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
@@ -157,15 +158,14 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.labelHistory);
             this.Controls.Add(this.panelLoading);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "PolicyHistory";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panelLoading.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -177,7 +177,6 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
         private DataGridViewEx dataGridView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label labelHistory;
         private System.Windows.Forms.Panel panelLoading;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -186,5 +185,6 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnResult;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDateTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

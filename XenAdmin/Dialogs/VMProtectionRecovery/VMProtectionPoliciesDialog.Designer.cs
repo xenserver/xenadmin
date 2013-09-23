@@ -53,13 +53,11 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
             this.chevronButton1 = new XenAdmin.Controls.ChevronButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.deprecationBanner = new XenAdmin.Controls.DeprecationBanner();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
@@ -78,9 +76,11 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
             this.ColumnNextArchive,
             this.ColumnLastResult});
             resources.ApplyResources(this.dataGridView1, "dataGridView1");
+            this.dataGridView1.GridColor = System.Drawing.SystemColors.Control;
             this.dataGridView1.MultiSelect = true;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
+            this.tableLayoutPanel3.SetRowSpan(this.dataGridView1, 6);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // NameColum
@@ -215,39 +215,33 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
             this.deprecationBanner.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.deprecationBanner.Name = "deprecationBanner";
             // 
-            // tableLayoutPanel2
-            // 
-            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.Controls.Add(this.buttonNew, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.buttonEnable, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.buttonRunNow, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.buttonDelete, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.buttonProperties, 0, 4);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            // 
             // tableLayoutPanel3
             // 
             resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
+            this.tableLayoutPanel3.Controls.Add(this.buttonProperties, 1, 5);
             this.tableLayoutPanel3.Controls.Add(this.labelPolicyTitle, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel2, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.dataGridView1, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.localServerTime1, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.localServerTime1, 0, 7);
+            this.tableLayoutPanel3.Controls.Add(this.buttonEnable, 1, 2);
+            this.tableLayoutPanel3.Controls.Add(this.buttonRunNow, 1, 3);
+            this.tableLayoutPanel3.Controls.Add(this.buttonDelete, 1, 4);
+            this.tableLayoutPanel3.Controls.Add(this.buttonNew, 1, 1);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             // 
             // tableLayoutPanel4
             // 
             resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
-            this.tableLayoutPanel4.Controls.Add(this.buttonCancel, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.chevronButton1, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.buttonCancel, 1, 0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             // 
             // tableLayoutPanel5
             // 
             resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
-            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel4, 0, 3);
+            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel1, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel3, 0, 1);
             this.tableLayoutPanel5.Controls.Add(this.policyHistory1, 0, 2);
-            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel1, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel4, 0, 3);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             // 
             // VMProtectionPoliciesDialog
@@ -263,7 +257,6 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
@@ -296,7 +289,6 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNextArchive;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLastResult;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;

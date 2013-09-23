@@ -210,13 +210,5 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
             }
             labelHistory.Text = string.Format(Messages.HISTORY_FOR_POLICY, vmppName);
         }
-
-        private void panel1_SizeChanged(object sender, EventArgs e)
-        {
-            if (_vmpp != null)
-            {
-                ReloadHistoryLabel();
-            }
-        }
     }
 }

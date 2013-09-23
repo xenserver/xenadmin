@@ -31,7 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LocalServerTime));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelServerTime = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -47,14 +49,22 @@
             resources.ApplyResources(this.labelServerTime, "labelServerTime");
             this.labelServerTime.Name = "labelServerTime";
             // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.labelServerTime, 1, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
             // LocalServerTime
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.labelServerTime);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "LocalServerTime";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -64,5 +74,6 @@
 
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label labelServerTime;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
