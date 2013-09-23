@@ -316,10 +316,8 @@ namespace XenAdmin
             OptionsDialog.Log();
 
             log.Info("Environment.CommandLine: " + Environment.CommandLine);
-            for (int i = 0; i < Args.Length; i++)
-            {
-                log.InfoFormat("Args[{0}]: {1}", i, Args[i]);
-            }
+            if (Args.Length > 0)
+                log.InfoFormat("Args[0]: {0}", Args[0]);
 
             List<string> sanitizedArgs = new List<string>(Args);
             // Remove the '--wait' argument, which may have been passed to the splash screen
