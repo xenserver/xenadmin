@@ -178,9 +178,10 @@ namespace XenAdmin.Controls.XenSearch
             ToggleExpandedState(false);
         }
 
-        private void buttonNewSearch_Click(object sender, EventArgs e)
+        public void BlankSearch()
         {
             searchFor.BlankSearch();
+            QueryElement.SelectDefaultQueryType();
         }
     }
 }

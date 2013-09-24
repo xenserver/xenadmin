@@ -35,12 +35,12 @@ namespace XenAdmin.TabPages
             this.buttonEditSearch = new System.Windows.Forms.Button();
             this.ddButtonSavedSearches = new XenAdmin.Controls.DropDownButton();
             this.contextMenuStripSearches = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.buttonReset = new System.Windows.Forms.Button();
             this.buttonExport = new System.Windows.Forms.Button();
             this.buttonImport = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.OutputPanel = new XenAdmin.Controls.XenSearch.SearchOutput();
             this.Searcher = new XenAdmin.Controls.XenSearch.Searcher();
+            this.buttonNewSearch = new System.Windows.Forms.Button();
             this.pageContainerPanel.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -64,9 +64,9 @@ namespace XenAdmin.TabPages
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel2.Controls.Add(this.buttonNewSearch);
             this.panel2.Controls.Add(this.buttonEditSearch);
             this.panel2.Controls.Add(this.ddButtonSavedSearches);
-            this.panel2.Controls.Add(this.buttonReset);
             this.panel2.Controls.Add(this.buttonExport);
             this.panel2.Controls.Add(this.buttonImport);
             resources.ApplyResources(this.panel2, "panel2");
@@ -91,13 +91,6 @@ namespace XenAdmin.TabPages
             this.contextMenuStripSearches.Name = "contextMenuStripSearches";
             resources.ApplyResources(this.contextMenuStripSearches, "contextMenuStripSearches");
             this.contextMenuStripSearches.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripSearches_Opening);
-            // 
-            // buttonReset
-            // 
-            resources.ApplyResources(this.buttonReset, "buttonReset");
-            this.buttonReset.Name = "buttonReset";
-            this.buttonReset.UseVisualStyleBackColor = true;
-            this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
             // 
             // buttonExport
             // 
@@ -132,6 +125,13 @@ namespace XenAdmin.TabPages
             this.Searcher.MaxHeight = 400;
             this.Searcher.Name = "Searcher";
             // 
+            // buttonNewSearch
+            // 
+            resources.ApplyResources(this.buttonNewSearch, "buttonNewSearch");
+            this.buttonNewSearch.Name = "buttonNewSearch";
+            this.buttonNewSearch.UseVisualStyleBackColor = true;
+            this.buttonNewSearch.Click += new System.EventHandler(this.buttonNewSearch_Click);
+            // 
             // SearchPage
             // 
             resources.ApplyResources(this, "$this");
@@ -159,8 +159,8 @@ namespace XenAdmin.TabPages
         private XenAdmin.Controls.DropDownButton ddButtonSavedSearches;
         private System.Windows.Forms.Button buttonImport;
         private System.Windows.Forms.Button buttonExport;
-        private System.Windows.Forms.Button buttonReset;
         private System.Windows.Forms.Button buttonEditSearch;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripSearches;
+        private System.Windows.Forms.Button buttonNewSearch;
     }
 }

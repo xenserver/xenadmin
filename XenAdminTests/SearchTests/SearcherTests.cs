@@ -55,9 +55,9 @@ namespace XenAdminTests.SearchTests
                 "Couldn't select all-folders");
         }
 
-        private Button NewSearchButton
+        private Button EditSearchButton
         {
-            get { return TestUtils.GetButton(MainWindowWrapper.Item, "SearchPage.buttonNewSearch"); }
+            get { return TestUtils.GetButton(MainWindowWrapper.Item, "SearchPage.buttonEditSearch"); }
         }
 
         private Searcher SearcherPanel
@@ -104,7 +104,7 @@ namespace XenAdminTests.SearchTests
         [Ignore]
         public void TestSearcherUpdatesWhenTagsChange()
         {
-            MW(() => NewSearchButton.PerformClick());
+            MW(() => EditSearchButton.PerformClick());
 
             // now test that the filter-value combo updates when the tags change for each of these objects.
             foreach (IXenObject xenObject in new IXenObject[] { GetAnyHost(), GetAnyNetwork(), GetAnyPool(), GetAnySR(), GetAnyVM() })
@@ -127,7 +127,7 @@ namespace XenAdminTests.SearchTests
         [Test]
         public void TestSearcherDoesntUpdateWhenTagsChangeOnUnsearchableObject()
         {
-            MW(() => NewSearchButton.PerformClick());
+            MW(() => EditSearchButton.PerformClick());
 
             // select Tags for the query type
             MWWaitFor(() => QueryTypeComboButton.SelectItem<QueryElement.QueryType>(qt => qt.ToString() == "Tags"),
@@ -147,7 +147,7 @@ namespace XenAdminTests.SearchTests
         [Ignore]
         public void TestSearcherUpdatesWhenCustomFieldsChange()
         {
-            MW(() => NewSearchButton.PerformClick());
+            MW(() => EditSearchButton.PerformClick());
 
             // create a new custom field
             string newCustomField = Guid.NewGuid().ToString();

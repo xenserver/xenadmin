@@ -218,6 +218,8 @@ namespace XenAdmin.TabPages
 
         private void contextMenuStripSearches_Opening(object sender, CancelEventArgs e)
         {
+            var theDefaultSearch = new ToolStripMenuItem(Messages.DEFAULT_SEARCH, null, applyDefaultSearch_Click);
+
             var defaultSearches = Search.Searches.Where(s => s.DefaultSearch).OrderBy(s => s);
             var customSearches = Search.Searches.Where(s => !s.DefaultSearch).OrderBy(s => s);
 
@@ -238,11 +240,10 @@ namespace XenAdmin.TabPages
             }
 
             contextMenuStripSearches.Items.Clear();
+            contextMenuStripSearches.Items.Add(theDefaultSearch);
             contextMenuStripSearches.Items.AddRange(customItems.ToArray());
             contextMenuStripSearches.Items.AddRange(defaultItems.ToArray());
-
-            if (contextMenuStripSearches.Items.Count > 0)
-                contextMenuStripSearches.Items.Add(new ToolStripSeparator());
+            contextMenuStripSearches.Items.Add(new ToolStripSeparator());
 
             var deleteItem = new ToolStripMenuItem(Messages.DELETE_SEARCH_MENU_ITEM);
 
@@ -269,10 +270,15 @@ namespace XenAdmin.TabPages
         private void buttonEditSearch_Click(object sender, EventArgs e)
         {
             Searcher.ToggleExpandedState(true);
-            OnSearchChanged();
         }
 
-        private void buttonReset_Click(object sender, EventArgs e)
+        private void buttonNewSearch_Click(object sender, EventArgs e)
+        {
+            Searcher.ToggleExpandedState(true);
+            Searcher.BlankSearch();
+        }
+
+        private void applyDefaultSearch_Click(object sender, EventArgs e)
         {
             Search search = Search.SearchFor(xenObjects);
             search.ShowSearch = Searcher.Visible;

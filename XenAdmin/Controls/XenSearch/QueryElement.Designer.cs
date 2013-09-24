@@ -93,10 +93,10 @@ namespace XenAdmin.Controls.XenSearch
             this.queryTypeComboButton.BeforeItemSelected += new System.EventHandler(this.queryTypeComboButton_BeforeItemSelected);
             this.queryTypeComboButton.ItemSelected += new System.EventHandler(this.queryTypeComboButton_ItemSelected);
             // 
-            // folderComboButton
+            // resourceSelectButton
             // 
-            resources.ApplyResources(this.resourceSelectButton, "folderComboButton");
-            this.resourceSelectButton.Name = "folderComboButton";
+            resources.ApplyResources(this.resourceSelectButton, "resourceSelectButton");
+            this.resourceSelectButton.Name = "resourceSelectButton";
             this.resourceSelectButton.SelectedItem = null;
             this.resourceSelectButton.UseMnemonic = false;
             this.resourceSelectButton.UseVisualStyleBackColor = true;
@@ -104,6 +104,7 @@ namespace XenAdmin.Controls.XenSearch
             // 
             // QueryElement
             // 
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.unitsLabel);
             this.Controls.Add(this.numericUpDown);
@@ -114,7 +115,6 @@ namespace XenAdmin.Controls.XenSearch
             this.Controls.Add(this.removeButton);
             this.Controls.Add(this.textBox);
             this.Controls.Add(this.resourceSelectButton);
-            resources.ApplyResources(this, "$this");
             this.Name = "QueryElement";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).EndInit();
             this.ResumeLayout(false);

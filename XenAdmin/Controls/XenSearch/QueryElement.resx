@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="textBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>328, 2</value>
+    <value>303, 2</value>
   </data>
   <data name="textBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>203, 20</value>
@@ -151,7 +151,7 @@
     <value>NoControl</value>
   </data>
   <data name="removeButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>534, 1</value>
+    <value>519, 1</value>
   </data>
   <data name="removeButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 23</value>
@@ -175,7 +175,7 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="dateTimePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>328, 2</value>
+    <value>303, 2</value>
   </data>
   <data name="dateTimePicker.Size" type="System.Drawing.Size, System.Drawing">
     <value>203, 20</value>
@@ -199,7 +199,7 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="numericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>328, 2</value>
+    <value>303, 2</value>
   </data>
   <data name="numericUpDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>159, 20</value>
@@ -229,7 +229,7 @@
     <value>NoControl</value>
   </data>
   <data name="unitsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>495, 5</value>
+    <value>470, 5</value>
   </data>
   <data name="unitsLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 13</value>
@@ -255,9 +255,9 @@
   <data name="ComboButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAAcAAAAFCAYAAACJmvbYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOxAAA
-        DsQBlSsOGwAAAEpJREFUGFdjZGBg6AFiGyCWAWJRIH4LxM+B+AgQM0QD8X8sOAYkyQjEZ9AkLwH5TAz/
-        /4M0gY28DVXwEEgrgMVBBJKC/UAJJZgYAIbFI8X9mrxkAAAAAElFTkSuQmCC
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOwwAA
+        DsMBx2+oZAAAAE9JREFUGFdjAIIeID4BxE+A+CcQPwPis0A8EYgZooH4PxYcA8QMjEB8BioAw5eAmInh
+        /38Qm0EGiG8DMYjzEIgVwOIgAknBfiBWgoj9ZwAAhPclqFvZLCsAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="ComboButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
@@ -267,7 +267,7 @@
     <value>NoControl</value>
   </data>
   <data name="ComboButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>327, 1</value>
+    <value>302, 1</value>
   </data>
   <data name="ComboButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -302,9 +302,9 @@
   <data name="matchTypeComboButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAAcAAAAFCAYAAACJmvbYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOxAAA
-        DsQBlSsOGwAAAEpJREFUGFdjZGBg6AFiGyCWAWJRIH4LxM+B+AgQM0QD8X8sOAYkyQjEZ9AkLwH5TAz/
-        /4M0gY28DVXwEEgrgMVBBJKC/UAJJZgYAIbFI8X9mrxkAAAAAElFTkSuQmCC
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOwwAA
+        DsMBx2+oZAAAAE9JREFUGFdjAIIeID4BxE+A+CcQPwPis0A8EYgZooH4PxYcA8QMjEB8BioAw5eAmInh
+        /38Qm0EGiG8DMYjzEIgVwOIgAknBfiBWgoj9ZwAAhPclqFvZLCsAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="matchTypeComboButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
@@ -314,7 +314,7 @@
     <value>NoControl</value>
   </data>
   <data name="matchTypeComboButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 1</value>
+    <value>151, 1</value>
   </data>
   <data name="matchTypeComboButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -349,9 +349,9 @@
   <data name="queryTypeComboButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAAcAAAAFCAYAAACJmvbYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOxAAA
-        DsQBlSsOGwAAAEpJREFUGFdjZGBg6AFiGyCWAWJRIH4LxM+B+AgQM0QD8X8sOAYkyQjEZ9AkLwH5TAz/
-        /4M0gY28DVXwEEgrgMVBBJKC/UAJJZgYAIbFI8X9mrxkAAAAAElFTkSuQmCC
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOwwAA
+        DsMBx2+oZAAAAE9JREFUGFdjAIIeID4BxE+A+CcQPwPis0A8EYgZooH4PxYcA8QMjEB8BioAw5eAmInh
+        /38Qm0EGiG8DMYjzEIgVwOIgAknBfiBWgoj9ZwAAhPclqFvZLCsAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="queryTypeComboButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
@@ -361,7 +361,7 @@
     <value>NoControl</value>
   </data>
   <data name="queryTypeComboButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 1</value>
+    <value>0, 1</value>
   </data>
   <data name="queryTypeComboButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -393,51 +393,51 @@
   <data name="&gt;&gt;queryTypeComboButton.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="folderComboButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="resourceSelectButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="folderComboButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="resourceSelectButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAAcAAAAFCAYAAACJmvbYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOxAAA
-        DsQBlSsOGwAAAEpJREFUGFdjZGBg6AFiGyCWAWJRIH4LxM+B+AgQM0QD8X8sOAYkyQjEZ9AkLwH5TAz/
-        /4M0gY28DVXwEEgrgMVBBJKC/UAJJZgYAIbFI8X9mrxkAAAAAElFTkSuQmCC
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOwwAA
+        DsMBx2+oZAAAAE9JREFUGFdjAIIeID4BxE+A+CcQPwPis0A8EYgZooH4PxYcA8QMjEB8BioAw5eAmInh
+        /38Qm0EGiG8DMYjzEIgVwOIgAknBfiBWgoj9ZwAAhPclqFvZLCsAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="folderComboButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="resourceSelectButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name="folderComboButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 1</value>
+  <data name="resourceSelectButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>151, 1</value>
   </data>
-  <data name="folderComboButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="resourceSelectButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="folderComboButton.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="resourceSelectButton.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 2, 0</value>
   </data>
-  <data name="folderComboButton.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="resourceSelectButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>356, 23</value>
   </data>
-  <data name="folderComboButton.TabIndex" type="System.Int32, mscorlib">
+  <data name="resourceSelectButton.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="folderComboButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="resourceSelectButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="folderComboButton.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+  <data name="resourceSelectButton.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>TextBeforeImage</value>
   </data>
-  <data name="&gt;&gt;folderComboButton.Name" xml:space="preserve">
-    <value>folderComboButton</value>
+  <data name="&gt;&gt;resourceSelectButton.Name" xml:space="preserve">
+    <value>resourceSelectButton</value>
   </data>
-  <data name="&gt;&gt;folderComboButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;resourceSelectButton.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenSearch.ResourceSelectButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;folderComboButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;resourceSelectButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;folderComboButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;resourceSelectButton.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

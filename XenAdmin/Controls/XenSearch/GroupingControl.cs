@@ -51,7 +51,6 @@ namespace XenAdmin.Controls.XenSearch
 
         public static event EventHandler CustomFieldRemoved;
         private const int MAX_GROUPS = 5;
-        private const int leftGutter = 23;
         private const int innerGutter = 6;
 
         static GroupingControl()
@@ -264,7 +263,7 @@ namespace XenAdmin.Controls.XenSearch
             SuspendLayout();
 
             bool folderSeen = false;
-            int offset = leftGutter;
+            int offset = 0;
             
             foreach (Button button in groups.ToArray())
             {
@@ -441,7 +440,7 @@ namespace XenAdmin.Controls.XenSearch
             int draggedButtonRight = draggedButton.Left + draggedButton.Width;
             int draggedButtonIndex = groups.IndexOf(draggedButton);
 
-            int offset = leftGutter;
+            int offset = 0;
             int leftBarrier = -1;
             int swapWith = -1;
             int rightBarrier = -1;
@@ -485,7 +484,7 @@ namespace XenAdmin.Controls.XenSearch
             bool movedNeither = !movedLeft && !movedRight;
             if (movedRight || movedNeither)
             {
-                int maxRight;
+                int maxRight = 0;
                 if (rightBarrier >= 0)
                 {
                     if (swapWith >= 0 && swapWith >= rightBarrier)
@@ -494,22 +493,20 @@ namespace XenAdmin.Controls.XenSearch
                 }
                 else if (groupsArray.Length >= 2)
                     maxRight = groupsArray[groupsArray.Length - 2].Right + innerGutter;
-                else
-                    maxRight = leftGutter;
+
                 if (potentialLocation > maxRight)
                     potentialLocation = maxRight;
             }
             if (movedLeft || movedNeither)
             {
-                int maxLeft;
+                int maxLeft = 0;
                 if (leftBarrier >= 0)
                 {
                     if (swapWith >= 0 && swapWith <= leftBarrier)
                         swapWith = leftBarrier + 1;
                     maxLeft = groupsArray[leftBarrier].Right + innerGutter;
                 }
-                else
-                    maxLeft = leftGutter;
+
                 if (potentialLocation < maxLeft)
                     potentialLocation = maxLeft;
             }

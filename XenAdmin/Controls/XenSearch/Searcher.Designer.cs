@@ -35,10 +35,9 @@ namespace XenAdmin.Controls.XenSearch
             this.SearchLabel = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
-            this.buttonNewSearch = new System.Windows.Forms.Button();
             this.searchFor = new XenAdmin.Controls.XenSearch.SearchFor();
-            this.GroupingControl = new XenAdmin.Controls.XenSearch.GroupingControl();
             this.QueryElement = new XenAdmin.Controls.XenSearch.QueryElement();
+            this.GroupingControl = new XenAdmin.Controls.XenSearch.GroupingControl();
             this.SuspendLayout();
             // 
             // GroupsLabel
@@ -71,24 +70,10 @@ namespace XenAdmin.Controls.XenSearch
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
-            // buttonNewSearch
-            // 
-            resources.ApplyResources(this.buttonNewSearch, "buttonNewSearch");
-            this.buttonNewSearch.Name = "buttonNewSearch";
-            this.buttonNewSearch.UseVisualStyleBackColor = true;
-            this.buttonNewSearch.Click += new System.EventHandler(this.buttonNewSearch_Click);
-            // 
             // searchFor
             // 
             resources.ApplyResources(this.searchFor, "searchFor");
             this.searchFor.Name = "searchFor";
-            // 
-            // GroupingControl
-            // 
-            resources.ApplyResources(this.GroupingControl, "GroupingControl");
-            this.GroupingControl.BackColor = System.Drawing.Color.Transparent;
-            this.GroupingControl.Name = "GroupingControl";
-            this.GroupingControl.Searcher = null;
             // 
             // QueryElement
             // 
@@ -99,12 +84,18 @@ namespace XenAdmin.Controls.XenSearch
             this.QueryElement.Searcher = null;
             this.QueryElement.Resize += new System.EventHandler(this.QueryElement_Resize);
             // 
+            // GroupingControl
+            // 
+            resources.ApplyResources(this.GroupingControl, "GroupingControl");
+            this.GroupingControl.BackColor = System.Drawing.Color.Transparent;
+            this.GroupingControl.Name = "GroupingControl";
+            this.GroupingControl.Searcher = null;
+            // 
             // Searcher
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.Controls.Add(this.buttonNewSearch);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.SearchLabel);
@@ -129,6 +120,5 @@ namespace XenAdmin.Controls.XenSearch
         private SearchFor searchFor;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonClose;
-        private System.Windows.Forms.Button buttonNewSearch;
     }
 }

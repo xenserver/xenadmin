@@ -3101,6 +3101,9 @@ Please reconnect the host and try again.</value>
   <data name="DEFAULT_INSTALL_OF_XENSERVER" xml:space="preserve">
     <value>Default install of XenServer</value>
   </data>
+  <data name="DEFAULT_SEARCH" xml:space="preserve">
+    <value>Default Search</value>
+  </data>
   <data name="DEFAULT_SEARCH_OBJECTS_BY_TAG" xml:space="preserve">
     <value>Resources by Tag</value>
   </data>

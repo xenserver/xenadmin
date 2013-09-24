@@ -8635,6 +8635,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Default Search.
+        /// </summary>
+        public static string DEFAULT_SEARCH {
+            get {
+                return ResourceManager.GetString("DEFAULT_SEARCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Resources by Tag.
         /// </summary>
         public static string DEFAULT_SEARCH_OBJECTS_BY_TAG {

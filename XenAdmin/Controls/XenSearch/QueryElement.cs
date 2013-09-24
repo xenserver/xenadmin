@@ -310,7 +310,7 @@ namespace XenAdmin.Controls.XenSearch
             }
         }
 
-        private void SelectDefaultQueryType()
+        public void SelectDefaultQueryType()
         {
             CurrentQueryType = DefaultQueryType;
         }
