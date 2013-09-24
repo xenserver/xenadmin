@@ -43,7 +43,7 @@ namespace XenAPI
                 if (max_heads == 0)
                     return Messages.VGPU_PASSTHRU_TOSTRING;
 
-                return string.Format(Messages.VGPU_TOSTRING, vendor_name, model_name, max_heads);
+                return string.Format(Messages.VGPU_TOSTRING, vendor_name, model_name);
             }
         }
         
