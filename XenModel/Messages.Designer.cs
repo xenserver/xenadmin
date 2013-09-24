@@ -17494,22 +17494,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You selected more than one Free XenServer product but activation keys can only be applied to one XenServer product at a time.
-        ///
-        ///Select one Free XenServer product and try again..
+        ///   Looks up a localized string similar to Activation keys can only be applied to one Free XenServer product at a time..
         /// </summary>
         public static string LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION {
             get {
                 return ResourceManager.GetString("LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Apply an Activation Key.
-        /// </summary>
-        public static string LICENSE_TOO_MANY_SERVERS_SELECTED_TITLE {
-            get {
-                return ResourceManager.GetString("LICENSE_TOO_MANY_SERVERS_SELECTED_TITLE", resourceCulture);
             }
         }
         

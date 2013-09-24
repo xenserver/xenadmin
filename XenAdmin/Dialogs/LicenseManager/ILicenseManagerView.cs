@@ -54,7 +54,7 @@ namespace XenAdmin.Dialogs
         void DrawActivateButtonAsDisabled(bool isDisabled);
         void DrawActivateButtonAsHidden(bool isHidden);
         void DrawRequestButtonAsDisabled(bool isDisabled);
-        void DrawApplyButtonAsDisabled(bool isDisabled);
+        void DrawApplyButtonAsDisabled(bool isDisabled, string disabledReason);
         List<CheckableDataGridViewRow> GetCheckedRows { get; }
         void ClearAllGridRows();
         Control Parent { get; }

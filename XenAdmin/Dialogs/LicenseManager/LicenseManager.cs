@@ -257,9 +257,10 @@ namespace XenAdmin.Dialogs
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public void DrawApplyButtonAsDisabled(bool isDisabled)
+        public void DrawApplyButtonAsDisabled(bool isDisabled, string disabledReason)
         {
             applyActivationKeyToolStripMenuItem.Enabled = !isDisabled;
+            applyActivationKeyToolStripMenuItem.ToolTipText = string.IsNullOrEmpty(disabledReason) ? null : disabledReason;
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]

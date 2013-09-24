@@ -6113,12 +6113,7 @@ Size: {3}</value>
     <value>Status</value>
   </data>
   <data name="LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION" xml:space="preserve">
-    <value>You selected more than one Free XenServer product but activation keys can only be applied to one XenServer product at a time.
-
-Select one Free XenServer product and try again.</value>
-  </data>
-  <data name="LICENSE_TOO_MANY_SERVERS_SELECTED_TITLE" xml:space="preserve">
-    <value>Apply an Activation Key</value>
+    <value>Activation keys can only be applied to one Free XenServer product at a time.</value>
   </data>
   <data name="LICENSE_UNSUPPORTED" xml:space="preserve">
     <value>Unsupported</value>

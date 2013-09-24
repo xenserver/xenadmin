@@ -100,12 +100,13 @@ namespace XenAdminTests.LicensingTests
                 };
 
             activation.Setup(a => a.AllHostsCanBeActivated).Returns(true);
+            activation.Setup(a => a.HostsThatCanBeActivated).Returns(() => new List<Host>().AsReadOnly());
             view.Setup(v => v.GetCheckedRows).Returns(CreateList(new TestCase { MockType = ObjectBuilderType.ClearwaterHost}));
 
             licenseSummary.UpdateButtonEnablement();
             view.Verify(v => v.DrawAssignButtonAsDisabled(false));
             view.Verify(v => v.DrawReleaseButtonAsDisabled(true));
-            view.Verify(v => v.DrawApplyButtonAsDisabled(false));
+            view.Verify(v => v.DrawApplyButtonAsDisabled(false, null));
             view.Verify(v => v.DrawRequestButtonAsDisabled(false));
             view.Verify(v => v.DrawActivateButtonAsDisabled(false));
             view.Verify(v => v.DrawActivateButtonAsHidden(true));
@@ -121,6 +122,7 @@ namespace XenAdminTests.LicensingTests
             };
 
             activation.Setup(a => a.AllHostsCanBeActivated).Returns(true);
+            activation.Setup(a => a.HostsThatCanBeActivated).Returns(() => new List<Host>().AsReadOnly());
             view.Setup(v => v.GetCheckedRows).Returns(CreateList(new TestCase { 
                                                                         MockType = ObjectBuilderType.ClearwaterHost, 
                                                                         License = Host.Edition.PerSocket}));
@@ -129,7 +131,7 @@ namespace XenAdminTests.LicensingTests
             view.Verify(v => v.DrawAssignButtonAsDisabled(false));
             view.Verify(v => v.DrawReleaseButtonAsDisabled(false));
             view.Verify(v => v.DrawActivateButtonAsHidden(true));
-            view.Verify(v => v.DrawApplyButtonAsDisabled(false));
+            view.Verify(v => v.DrawApplyButtonAsDisabled(false, null));
             view.Verify(v => v.DrawRequestButtonAsDisabled(false));
             view.Verify(v => v.DrawActivateButtonAsDisabled(false));
             
@@ -145,6 +147,7 @@ namespace XenAdminTests.LicensingTests
             };
 
             activation.Setup(a => a.AllHostsCanBeActivated).Returns(true);
+            activation.Setup(a => a.HostsThatCanBeActivated).Returns(() => new List<Host>().AsReadOnly());
             view.Setup(v => v.GetCheckedRows).Returns(CreateList(
                 new TestCase
                 {
@@ -161,7 +164,7 @@ namespace XenAdminTests.LicensingTests
             view.Verify(v => v.DrawAssignButtonAsDisabled(false));
             view.Verify(v => v.DrawReleaseButtonAsDisabled(false));
             view.Verify(v => v.DrawActivateButtonAsHidden(true));
-            view.Verify(v => v.DrawApplyButtonAsDisabled(false));
+            view.Verify(v => v.DrawApplyButtonAsDisabled(false, null));
             view.Verify(v => v.DrawRequestButtonAsDisabled(false));
             view.Verify(v => v.DrawActivateButtonAsDisabled(false));
         }
@@ -176,6 +179,7 @@ namespace XenAdminTests.LicensingTests
             };
 
             activation.Setup(a => a.AllHostsCanBeActivated).Returns(true);
+            activation.Setup(a => a.HostsThatCanBeActivated).Returns(() => new List<Host>().AsReadOnly());
             view.Setup(v => v.GetCheckedRows).Returns(CreateList(
                 new TestCase
                 {
@@ -192,7 +196,7 @@ namespace XenAdminTests.LicensingTests
             view.Verify(v => v.DrawAssignButtonAsDisabled(false));
             view.Verify(v => v.DrawReleaseButtonAsDisabled(false));
             view.Verify(v => v.DrawActivateButtonAsHidden(true));
-            view.Verify(v => v.DrawApplyButtonAsDisabled(false));
+            view.Verify(v => v.DrawApplyButtonAsDisabled(false, null));
             view.Verify(v => v.DrawRequestButtonAsDisabled(false));
             view.Verify(v => v.DrawActivateButtonAsDisabled(false));
         }
@@ -207,6 +211,7 @@ namespace XenAdminTests.LicensingTests
             };
 
             activation.Setup(a => a.AllHostsCanBeActivated).Returns(true);
+            activation.Setup(a => a.HostsThatCanBeActivated).Returns(() => new List<Host> { new Host() }.AsReadOnly());
             view.Setup(v => v.GetCheckedRows).Returns(CreateList(new TestCase
             {
                 MockType = ObjectBuilderType.TampaHost,
@@ -217,7 +222,7 @@ namespace XenAdminTests.LicensingTests
             view.Verify(v => v.DrawAssignButtonAsDisabled(false));
             view.Verify(v => v.DrawReleaseButtonAsDisabled(true));
             view.Verify(v => v.DrawActivateButtonAsHidden(false));
-            view.Verify(v => v.DrawApplyButtonAsDisabled(false));
+            view.Verify(v => v.DrawApplyButtonAsDisabled(false, null));
             view.Verify(v => v.DrawRequestButtonAsDisabled(false));
             view.Verify(v => v.DrawActivateButtonAsDisabled(false));
         }
@@ -232,6 +237,7 @@ namespace XenAdminTests.LicensingTests
             };
 
             activation.Setup(a => a.AllHostsCanBeActivated).Returns(true);
+            activation.Setup(a => a.HostsThatCanBeActivated).Returns(() => new List<Host> { new Host() }.AsReadOnly());
             view.Setup(v => v.GetCheckedRows).Returns(CreateList(
                 new TestCase
                 {
@@ -249,7 +255,7 @@ namespace XenAdminTests.LicensingTests
             view.Verify(v => v.DrawAssignButtonAsDisabled(false));
             view.Verify(v => v.DrawReleaseButtonAsDisabled(false));
             view.Verify(v => v.DrawActivateButtonAsHidden(false));
-            view.Verify(v => v.DrawApplyButtonAsDisabled(false));
+            view.Verify(v => v.DrawApplyButtonAsDisabled(false, null));
             view.Verify(v => v.DrawRequestButtonAsDisabled(false));
             view.Verify(v => v.DrawActivateButtonAsDisabled(false));
         }
@@ -264,6 +270,7 @@ namespace XenAdminTests.LicensingTests
             };
 
             activation.Setup(a => a.AllHostsCanBeActivated).Returns(true);
+            activation.Setup(a => a.HostsThatCanBeActivated).Returns(() => new List<Host>().AsReadOnly());
             view.Setup(v => v.GetCheckedRows).Returns(CreateList(new TestCase
             {
                 MockType = ObjectBuilderType.TampaHost,
@@ -274,7 +281,7 @@ namespace XenAdminTests.LicensingTests
             view.Verify(v => v.DrawAssignButtonAsDisabled(false));
             view.Verify(v => v.DrawReleaseButtonAsDisabled(false));
             view.Verify(v => v.DrawActivateButtonAsHidden(false));
-            view.Verify(v => v.DrawApplyButtonAsDisabled(false));
+            view.Verify(v => v.DrawApplyButtonAsDisabled(false, null));
             view.Verify(v => v.DrawRequestButtonAsDisabled(false));
             view.Verify(v => v.DrawActivateButtonAsDisabled(false));
         }
@@ -289,6 +296,7 @@ namespace XenAdminTests.LicensingTests
             };
 
             activation.Setup(a => a.AllHostsCanBeActivated).Returns(false);
+            activation.Setup(a => a.HostsThatCanBeActivated).Returns(() => new List<Host>().AsReadOnly());
             view.Setup(v => v.GetCheckedRows).Returns(CreateList(new TestCase
             {
                 MockType = ObjectBuilderType.RioHost,
@@ -299,7 +307,7 @@ namespace XenAdminTests.LicensingTests
             view.Verify(v => v.DrawAssignButtonAsDisabled(false));
             view.Verify(v => v.DrawReleaseButtonAsDisabled(true));
             view.Verify(v => v.DrawActivateButtonAsHidden(true));
-            view.Verify(v => v.DrawApplyButtonAsDisabled(true));
+            view.Verify(v => v.DrawApplyButtonAsDisabled(true, null));
             view.Verify(v => v.DrawRequestButtonAsDisabled(true));
             view.Verify(v => v.DrawActivateButtonAsDisabled(true));
         }

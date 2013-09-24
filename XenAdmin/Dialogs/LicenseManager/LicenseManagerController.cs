@@ -241,19 +241,9 @@ namespace XenAdmin.Dialogs
         {
             List<Host> checkedHosts = RowsToHosts(rowsChecked.ConvertAll(r => r as LicenseDataGridViewRow));
             ActivationRequest.Hosts = checkedHosts;
-            if (ActivationRequest.HostsThatCanBeActivated.Count > 1)
-            {
-                new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(
-                       SystemIcons.Exclamation,
-                       Messages.LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION,
-                       Messages.LICENSE_TOO_MANY_SERVERS_SELECTED_TITLE)).ShowDialog(View.Parent);
-            }
-            else
-            {
-                Debug.Assert(ActivationRequest.HostsThatCanBeActivated.Count > 0, "There must be hosts that can be activated, already selected");
-                new OpenLicenseFileDialog(View.Parent, ActivationRequest.HostsThatCanBeActivated[0], Messages.APPLY_ACTIVATION_KEY, true).ShowDialogAndRunAction();
-            }
+            Debug.Assert(ActivationRequest.HostsThatCanBeActivated.Count == 1,
+                "There must be one host that can be activated selected");
+            new OpenLicenseFileDialog(View.Parent, ActivationRequest.HostsThatCanBeActivated[0], Messages.APPLY_ACTIVATION_KEY, true).ShowDialogAndRunAction();
         }
 
         public void DownloadLicenseManager()
@@ -343,7 +333,10 @@ namespace XenAdmin.Dialogs
             ActivationRequest.Hosts = representedHosts;
 
             //Apply Button
-            View.DrawApplyButtonAsDisabled(!ActivationRequest.AllHostsCanBeActivated);
+            if (ActivationRequest.HostsThatCanBeActivated.Count > 1)
+                View.DrawApplyButtonAsDisabled(true, Messages.LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION);
+            else
+                View.DrawApplyButtonAsDisabled(!ActivationRequest.AllHostsCanBeActivated, null);
 
             //Request Button
             View.DrawRequestButtonAsDisabled(!ActivationRequest.AllHostsCanBeActivated);
