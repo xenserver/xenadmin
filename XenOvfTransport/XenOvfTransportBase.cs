@@ -55,36 +55,22 @@ namespace XenOvfTransport
 				UpdateHandler.Invoke(e);
 		}
 
-        internal XenAPI.Session _XenSession = null;
-        internal Uri _XenServer = null;
-        internal string _UserName = null;
-        internal string _Password = null;
-        internal bool _OwnSession = false;
+        protected readonly Session XenSession;
+        internal Uri _XenServer;
 
 		protected iSCSI m_iscsi;
 		private bool m_cancel;
 
-        public XenOvfTransportBase()
+        protected XenOvfTransportBase()
         {
 			ServicePointManager.ServerCertificateValidationCallback = ValidateServerCertificate;
         }
 
-		public XenOvfTransportBase(Uri xenserver, Session session)
+		protected XenOvfTransportBase(Uri xenserver, Session session)
 			: this()
         {
         	_XenServer = xenserver;
-        	_XenSession = session;
-        	_OwnSession = false;
-        }
-
-        ~XenOvfTransportBase()
-        {
-            if (_OwnSession && _XenSession != null)
-            {
-                _XenSession.logout();
-                _OwnSession = false;
-                _XenSession = null;
-            }
+        	XenSession = session;
         }
 
 		public bool Cancel
@@ -106,14 +92,6 @@ namespace XenOvfTransport
 			m_tvmSubnetMask = tvmSubnetMask;
 			m_tvmGateway = tvmGateway;
 		}
-
-        public Session XenSession
-        {
-            get
-            {
-                return _XenSession;
-            }
-        }
 
         public static bool ValidateServerCertificate(object sender, X509Certificate cert, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {

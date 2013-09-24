@@ -117,7 +117,7 @@
   -->
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties StartDate="20090814" AssemblyFileVersion="1" AssemblyVersion="1" Reset="1" />
+      <UserProperties Reset="1" AssemblyVersion="1" AssemblyFileVersion="1" StartDate="20090814" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

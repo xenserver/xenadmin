@@ -52,11 +52,6 @@ namespace XenOvfTransport
 
         private List<XenRef<VDI>> _vdiRefs = new List<XenRef<VDI>>();
 
-        public Export()
-            : base()
-        {
-        }
-
         public Export(Uri xenserver, Session session)
             : base(xenserver, session)
         {
@@ -64,17 +59,10 @@ namespace XenOvfTransport
 
         public EnvelopeType Process(string targetPath, string ovfname, string[] vmUuid)
         {
-            return Process(_XenSession, targetPath, ovfname, vmUuid);
-        }
-
-        public EnvelopeType Process(Session xenSession, string targetPath, string ovfname, string[] vmUuid)
-        {
-            _XenSession = xenSession;
-
             List<EnvelopeType> envList = new List<EnvelopeType>();
 
             foreach (string vmuuid in vmUuid)
-                envList.Add(_export(_XenSession, targetPath, ovfname, vmuuid));
+                envList.Add(_export(XenSession, targetPath, ovfname, vmuuid));
 
             EnvelopeType ovfEnv = OVF.Merge(envList, ovfname);
 
@@ -375,7 +363,7 @@ namespace XenOvfTransport
 
                     try
                     {
-                        uuid = VDI.get_uuid(_XenSession, vdiuuid);
+                        uuid = VDI.get_uuid(XenSession, vdiuuid);
                         destinationFilename = Path.Combine(targetPath, string.Format(@"{0}.vhd", uuid));
                         if (File.Exists(destinationFilename))
                         {
@@ -384,7 +372,7 @@ namespace XenOvfTransport
                             Log.Info("{0}: VHD Name collision, renamed {0} to {1}", label, string.Format(@"{0}.vhd", uuid), string.Format(@"{0}_{1}.vhd", uuid, Thread.CurrentThread.ManagedThreadId));
                         }
                         OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.MarqueeOn, "Export", string.Format(Messages.FILES_TRANSPORT_SETUP, uuid + ".vhd")));
-						using (Stream source = m_iscsi.Connect(_XenSession, uuid, true))
+						using (Stream source = m_iscsi.Connect(XenSession, uuid, true))
                         {
                             OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.MarqueeOff, "Export", ""));
                             using (FileStream fs = new FileStream(destinationFilename, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None))
@@ -420,7 +408,7 @@ namespace XenOvfTransport
                     finally
                     {
                         OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.MarqueeOn, "Export", string.Format(Messages.FILES_TRANSPORT_CLEANUP, uuid + ".vhd")));
-						m_iscsi.Disconnect(_XenSession);
+						m_iscsi.Disconnect(XenSession);
                         OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.MarqueeOff, "Export", ""));
                     }
                 }

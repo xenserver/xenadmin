@@ -89,7 +89,7 @@ namespace XenOvfTransport
         private int EncryptionKeySize;
         private List<XenRef<VM>> P2VVMServerList = new List<XenRef<VM>>();
         private XenRef<SR> DefaultSRUUID = null;
-        private Http http;
+        private readonly Http http;
         private VirtualDisk vhdDisk = null;
         private WimFile wimDisk = null;
         private ulong wimFileCount = 0;
@@ -130,16 +130,10 @@ namespace XenOvfTransport
 
 		#region Constructors
 
-        public Import()
-            : base()
-		{
-			InitialiseHttp();
-		}
-
         public Import(Uri xenserver, Session session)
             : base(xenserver, session)
         {
-			InitialiseHttp();
+            http = new Http { UpdateHandler = http_UpdateHandler };
         }
 
 		#endregion
@@ -392,11 +386,6 @@ namespace XenOvfTransport
 
         #region PRIVATE
 		
-		private void InitialiseHttp()
-		{
-			http = new Http {UpdateHandler = http_UpdateHandler};
-		}
-
 		private void http_UpdateHandler(XenOvfTranportEventArgs e)
 		{
 			OnUpdate(e);
