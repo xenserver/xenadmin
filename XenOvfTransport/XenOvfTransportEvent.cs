@@ -35,91 +35,29 @@ using System.Text;
 
 namespace XenOvfTransport
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public enum XenOvfTranportEventType
     {
-        /// <summary>
-        /// 
-        /// </summary>
         FileStart,
-        /// <summary>
-        /// 
-        /// </summary>
         FileProgress,
-        /// <summary>
-        /// 
-        /// </summary>
         FileComplete,
-        /// <summary>
-        /// 
-        /// </summary>
         FileCancelled,
-        /// <summary>
-        /// 
-        /// </summary>
         ImportStart,
-        /// <summary>
-        /// 
-        /// </summary>
         ImportProgress,
-        /// <summary>
-        /// 
-        /// </summary>
         ImportThreadComplete,
-        /// <summary>
-        /// 
-        /// </summary>
         ImportComplete,
-        /// <summary>
-        /// 
-        /// </summary>
         ImportCancelled,
-        /// <summary>
-        /// 
-        /// </summary>
         ExportStart,
-        /// <summary>
-        /// 
-        /// </summary>
         ExportProgress,
-        /// <summary>
-        /// 
-        /// </summary>
         ExportThreadComplete,
-        /// <summary>
-        /// 
-        /// </summary>
         ExportComplete,
-        /// <summary>
-        /// 
-        /// </summary>
         ExportCancelled,
-        /// <summary>
-        /// 
-        /// </summary>
         Progress,
-        /// <summary>
-        /// 
-        /// </summary>
         MarqueeOn,
-        /// <summary>
-        /// 
-        /// </summary>
         MarqueeOff,
-        /// <summary>
-        /// 
-        /// </summary>
         Failure,
-        /// <summary>
-        /// 
-        /// </summary>
         Unknown
     }
-    /// <summary>
-    /// 
-    /// </summary>
+
     public class XenOvfTranportEventArgs : EventArgs
     {
         private XenOvfTranportEventType _type = XenOvfTranportEventType.Unknown;
@@ -128,11 +66,7 @@ namespace XenOvfTransport
         private string _target;
         private string _message;
         private Exception _exception;
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="target"></param>
-        /// <param name="message"></param>
+
         public XenOvfTranportEventArgs(XenOvfTranportEventType type, string target, string message)
         {
             _type = type;
@@ -146,14 +80,7 @@ namespace XenOvfTransport
             _message = message;
             _exception = exception;
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="target"></param>
-        /// <param name="message"></param>
-        /// <param name="transfered"></param>
-        /// <param name="total"></param>
+
         public XenOvfTranportEventArgs(XenOvfTranportEventType type, string target, string message, ulong transfered, ulong total)
         {
             _type = type;
@@ -162,44 +89,32 @@ namespace XenOvfTransport
             _total = total;
             _transfered = transfered;
         }
-        /// <summary>
-        /// 
-        /// </summary>
+
         public string Target
         {
             get { return _target; }
         }
-        /// <summary>
-        /// 
-        /// </summary>
+
         public string Message
         {
             get { return _message; }
         }
-        /// <summary>
-        /// 
-        /// </summary>
+
         public ulong Total
         {
             get { return _total; }
         }
-        /// <summary>
-        /// 
-        /// </summary>
+
         public ulong Transfered
         {
             get { return _transfered; }
         }
-        /// <summary>
-        /// 
-        /// </summary>
+
         public XenOvfTranportEventType Type
         {
             get { return _type; }
         }
-        /// <summary>
-        /// 
-        /// </summary>
+
         public Exception exception
         {
             get

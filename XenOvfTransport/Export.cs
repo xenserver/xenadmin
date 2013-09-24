@@ -43,9 +43,6 @@ using XenAPI;
 
 namespace XenOvfTransport
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class Export : XenOvfTransportBase
     {
         private const long KB = 1024;
@@ -55,40 +52,21 @@ namespace XenOvfTransport
 
         private List<XenRef<VDI>> _vdiRefs = new List<XenRef<VDI>>();
 
-        /// <summary>
-        /// 
-        /// </summary>
         public Export()
             : base()
         {
         }
-        /// <summary>
-        /// 
-        /// </summary>
+
         public Export(Uri xenserver, Session session)
             : base(xenserver, session)
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="targetPath"></param>
-        /// <param name="ovfname"></param>
-        /// <param name="vmUuid"></param>
-        /// <returns></returns>
         public EnvelopeType Process(string targetPath, string ovfname, string[] vmUuid)
         {
             return Process(_XenSession, targetPath, ovfname, vmUuid);
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="xenSession"></param>
-        /// <param name="targetPath"></param>
-        /// <param name="ovfname"></param>
-        /// <param name="vmUuid"></param>
-        /// <returns></returns>
+
         public EnvelopeType Process(Session xenSession, string targetPath, string ovfname, string[] vmUuid)
         {
             _XenSession = xenSession;
@@ -109,19 +87,10 @@ namespace XenOvfTransport
             return ovfEnv;
         }
 
-    	/// <summary>
-    	/// 
-    	/// </summary>
 		public bool AutoSave { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public bool ShouldVerifyDisks { get; set; }
 
-    	/// <summary>
-    	/// 
-    	/// </summary>
 		public bool MetaDataOnly { get; set; }
 
         private EnvelopeType _export(Session xenSession, string targetPath, string ovfname, string vmUuid)

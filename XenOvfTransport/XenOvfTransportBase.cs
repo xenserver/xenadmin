@@ -31,26 +31,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Net;
 using System.Net.Security;
-using System.Reflection;
-using System.Resources;
-using System.Text;
-using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-using System.Security.Authentication;
-
 using XenAPI;
-
-using XenOvf.Utilities;
 
 
 namespace XenOvfTransport
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class XenOvfTransportBase
     {
 		public Action<XenOvfTranportEventArgs> UpdateHandler { get; set; }
@@ -76,17 +64,11 @@ namespace XenOvfTransport
 		protected iSCSI m_iscsi;
 		private bool m_cancel;
 
-        /// <summary>
-        /// 
-        /// </summary>
         public XenOvfTransportBase()
         {
 			ServicePointManager.ServerCertificateValidationCallback = ValidateServerCertificate;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
 		public XenOvfTransportBase(Uri xenserver, Session session)
 			: this()
         {
@@ -95,9 +77,6 @@ namespace XenOvfTransport
         	_OwnSession = false;
         }
 
-    	/// <summary>
-        /// 
-        /// </summary>
         ~XenOvfTransportBase()
         {
             if (_OwnSession && _XenSession != null)
@@ -128,9 +107,6 @@ namespace XenOvfTransport
 			m_tvmGateway = tvmGateway;
 		}
 
-        /// <summary>
-        /// 
-        /// </summary>
         public Session XenSession
         {
             get
@@ -138,14 +114,7 @@ namespace XenOvfTransport
                 return _XenSession;
             }
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="cert"></param>
-        /// <param name="chain"></param>
-        /// <param name="sslPolicyErrors"></param>
-        /// <returns></returns>
+
         public static bool ValidateServerCertificate(object sender, X509Certificate cert, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             return true;

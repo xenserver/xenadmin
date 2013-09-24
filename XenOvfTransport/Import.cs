@@ -61,58 +61,26 @@ using XenCenterLib.Compression;
 
 namespace XenOvfTransport
 {
-
-    /// <summary>
-    /// 
-    /// </summary>
     public class Import : XenOvfTransportBase
     {
         private const long KB = 1024;
         private const long MB = (KB * 1024);
         private const long GB = (MB * 1024);
         private const long STATMEMMIN = 16 * MB;
-        /// <summary>
-        /// 
-        /// </summary>
+
         public enum TransferType 
         { 
-            /// <summary>
-            /// 
-            /// </summary>
-            UploadRawVDI = 0, 
-            /// <summary>
-            /// 
-            /// </summary>
-            iSCSI = 1, 
-            /// <summary>
-            /// 
-            /// </summary>
-            SFTP = 2, 
-            /// <summary>
-            /// 
-            /// </summary>
-            Skip = 3, 
-            /// <summary>
-            /// 
-            /// </summary>
+            UploadRawVDI = 0,
+            iSCSI = 1,
+            SFTP = 2,
+            Skip = 3,
             Unknown = 4 
         }
-        /// <summary>
-        /// 
-        /// </summary>
+
         public enum TransferMethod 
         {
-            /// <summary>
-            /// 
-            /// </summary>
             Image = 0,
-            /// <summary>
-            /// 
-            /// </summary>
             Files = 1,
-            /// <summary>
-            /// 
-            /// </summary>
             Unknown = 2
         }
 
@@ -136,9 +104,6 @@ namespace XenOvfTransport
         private AutoResetEvent uridownloadcomplete = new AutoResetEvent(false);
         private string _appliancename = null;
 
-        /// <summary>
-        /// 
-        /// </summary>
         public string ApplianceName
         {
             get
@@ -151,9 +116,6 @@ namespace XenOvfTransport
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public bool MetaDataOnly
         {
             get
@@ -167,18 +129,13 @@ namespace XenOvfTransport
 		}
 
 		#region Constructors
-		/// <summary>
-        /// 
-        /// </summary>
+
         public Import()
             : base()
 		{
 			InitialiseHttp();
 		}
 
-        /// <summary>
-        /// 
-        /// </summary>
         public Import(Uri xenserver, Session session)
             : base(xenserver, session)
         {
@@ -189,20 +146,12 @@ namespace XenOvfTransport
 
 		#region PUBLIC
 
-		/// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ovfFileName"></param>
         public void Process(string ovfFileName)
         {
 
             Process(ovfFileName, null);
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ovfFileName"></param>
-        /// <param name="passcode"></param>
+
         public void Process(string ovfFileName, string passcode)
         {
             if (XenSession == null)
@@ -231,23 +180,12 @@ namespace XenOvfTransport
             EnvelopeType ovfEnv = OVF.Load(openovf);
             Process(ovfEnv, ovfpath, passcode);
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ovfObj"></param>
-        /// <param name="pathToOvf"></param>
-        /// <param name="passcode"></param>
+
         public void Process(EnvelopeType ovfObj, string pathToOvf, string passcode)
         {
             Process(XenSession, ovfObj, pathToOvf, passcode);
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="xenSession"></param>
-        /// <param name="ovfObj"></param>
-        /// <param name="pathToOvf"></param>
-        /// <param name="passcode"></param>
+
 		public void Process(Session xenSession, EnvelopeType ovfObj, string pathToOvf, string passcode)
         {
             if (xenSession == null)
@@ -2679,32 +2617,15 @@ namespace XenOvfTransport
 
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     [Serializable]
     public class ImportException : Exception
     {
-        /// <summary>
-        /// 
-        /// </summary>
         public ImportException() : base() { }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="message"></param>
+
         public ImportException(string message) : base(message) { }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="message"></param>
-        /// <param name="exception"></param>
+
         public ImportException(string message, Exception exception) : base(message, exception) { }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="serialinfo"></param>
-        /// <param name="context"></param>
+ 
         public ImportException(SerializationInfo serialinfo, StreamingContext context) : base(serialinfo, context) { }
     }
 }

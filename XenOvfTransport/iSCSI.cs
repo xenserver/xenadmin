@@ -31,20 +31,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
-using System.Resources;
 using System.Threading;
 using DiscUtils.Iscsi;
 using XenOvf.Utilities;
 using XenAPI;
 using SuppressMessage = System.Diagnostics.CodeAnalysis.SuppressMessageAttribute;
 
+
 namespace XenOvfTransport
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class iSCSI
     {
         private const long KB = 1024;
@@ -81,9 +77,6 @@ namespace XenOvfTransport
             InitializeiSCSI();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public ulong Position
         {
             get
@@ -92,9 +85,6 @@ namespace XenOvfTransport
             }
         }
         
-		/// <summary>
-        /// 
-        /// </summary>
         public ulong Length
         {
             get
@@ -103,12 +93,6 @@ namespace XenOvfTransport
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="xenSession"></param>
-        /// <param name="vdiuuid"></param>
-        /// <returns></returns>
         [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "Logging mechanism")]
         public XenOvfTransport.DiskStream Connect(XenAPI.Session xenSession, string vdiuuid, bool read_only)
         {
@@ -194,10 +178,6 @@ namespace XenOvfTransport
             }
         }
         
-		/// <summary>
-        /// 
-        /// </summary>
-        /// <param name="xenSession"></param>
         [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "Logging mechanism")]
         public void Disconnect(XenAPI.Session xenSession)
         {
@@ -224,12 +204,6 @@ namespace XenOvfTransport
             StopiScsiTarget(xenSession);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="destination"></param>
-        /// <param name="close"></param>
         [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "Logging mechanism")]
         public void Copy(Stream source, Stream destination, string filename, bool shouldHash)
         {
@@ -313,12 +287,6 @@ namespace XenOvfTransport
             Log.Info("Finished copying {0} bytes to {1} via iSCSI.", source.Length, filename);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="destination"></param>
-        /// <param name="close"></param>
         [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "Logging mechanism")]
         public void Verify(Stream target, string filename)
         {
