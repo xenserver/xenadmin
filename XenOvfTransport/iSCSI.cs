@@ -55,7 +55,7 @@ namespace XenOvfTransport
         private Disk iDisk;
         private string _hashAlgorithmName = "SHA1";
         private byte[] _copyHash;
-        private byte[] _buffer;
+        private byte[] _buffer = new byte[2 * MB];
 
         private Dictionary<string, string> m_networkArgs = new Dictionary<string, string>();
 
@@ -71,11 +71,6 @@ namespace XenOvfTransport
             {
                 return iDisk;
             }
-        }
-
-		public iSCSI()
-        {
-            InitializeiSCSI();
         }
 
         public ulong Position
@@ -95,24 +90,28 @@ namespace XenOvfTransport
         }
 
         [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "Logging mechanism")]
-        public XenOvfTransport.DiskStream Connect(XenAPI.Session xenSession, string vdiuuid, bool read_only)
+        public DiskStream Connect(XenAPI.Session xenSession, string vdiuuid, bool read_only)
         {
-            int iSCSIConnectRetry = Properties.Settings.Default.iSCSIConnectRetry;
-            bool iSCSIConnected = false;
             StartiScsiTarget(xenSession, vdiuuid, read_only);
-            string ipaddress = ParsePluginRecordFor("ip");
-            int ipport = Convert.ToInt32(ParsePluginRecordFor("port"));
-            string targetGroupTag = ParsePluginRecordFor("isci_lun");
-            if (ipaddress == null)
-            {
-                throw new NullReferenceException(Messages.ISCSI_ERROR_NO_IPADDRESS);
-            }
-            string username = ParsePluginRecordFor("username");
-            string password = ParsePluginRecordFor("password");
+
+            string ipaddress, port, targetGroupTag, username, password;
+
+            if (!TryParsePluginRecordFor(_pluginrecord, "ip", out ipaddress))
+                throw new Exception(Messages.ISCSI_ERROR_NO_IPADDRESS);
+
+            TryParsePluginRecordFor(_pluginrecord, "port", out port);
+            int ipport = Convert.ToInt32(port);
+            TryParsePluginRecordFor(_pluginrecord, "isci_lun", out targetGroupTag);
+            TryParsePluginRecordFor(_pluginrecord, "username", out username);
+            TryParsePluginRecordFor(_pluginrecord, "password", out password);
 
             Initiator initiator = new Initiator();
             if (username != null && password != null)
                 initiator.SetCredentials(username, password);
+
+            int iSCSIConnectRetry = Properties.Settings.Default.iSCSIConnectRetry;
+            bool iSCSIConnected = false;
+            
             while (!iSCSIConnected && iSCSIConnectRetry > 0)
             {
 				if (Cancel)
@@ -136,25 +135,29 @@ namespace XenOvfTransport
             }
 
             if (!iSCSIConnected)
-            {
                 throw new Exception(Messages.ISCSI_ERROR);
-            }
-
+            
             long lun = 0;
             try
             {
                 LunInfo[] luns = _iscsisession.GetLuns();
                 if (_newscsi)
                 {
-                    long lunIdx = Convert.ToInt32(ParsePluginRecordFor("iscsi_lun"));
+                    string idx;
+                    TryParsePluginRecordFor(_pluginrecord, "iscsi_lun", out idx);
+                    long lunIdx = Convert.ToInt32(idx);
                     lun = luns[lunIdx].Lun;
                 }
+                
                 log.InfoFormat("iSCSI.Connect found {0} luns, looking for block storage.", luns.Length);
+                
                 foreach (LunInfo iLun in luns)
                 {
                     if (iLun.DeviceType == LunClass.BlockStorage)
                     {
-                        if (_newscsi && iLun.Lun == lun) { break; }
+                        if (_newscsi && iLun.Lun == lun)
+                            break;
+
                         lun = iLun.Lun;
                         break;
                     }
@@ -165,12 +168,14 @@ namespace XenOvfTransport
                 log.Error("Could not determin LUN");
                 throw;
             }
+
             log.InfoFormat("iSCSI.Connect, found on lun: {0}", lun);
+
             try
             {
                 iDisk = _iscsisession.OpenDisk(lun);
                 // Use our own DiskStream class to workaround a bug in DiscUtils.DiskStream.
-                return new XenOvfTransport.DiskStream(_iscsisession, lun, (read_only ? FileAccess.Read : FileAccess.ReadWrite));
+                return new DiskStream(_iscsisession, lun, (read_only ? FileAccess.Read : FileAccess.ReadWrite));
             }
             catch (Exception ex)
             {   
@@ -190,18 +195,20 @@ namespace XenOvfTransport
             }
             catch (Exception exn)
             {
-                log.WarnFormat("Exception when disposing iDisk {0}", exn);
+                log.DebugFormat("Failed to dispose iDisk: {0}. Continuing.", exn);
             }
+
             try
             {
                 if (_iscsisession != null)
                     _iscsisession.Dispose();
                 _iscsisession = null;
             }
-            catch (Exception)
+            catch (Exception exn)
             {
-                log.WarnFormat("Exception when disposing iscsisession");
+                log.DebugFormat("Failed to dispose iScsiSession: {0}. Continuing.", exn);
             }
+
             StopiScsiTarget(xenSession);
         }
 
@@ -225,7 +232,7 @@ namespace XenOvfTransport
                 {
                     if (Cancel)
                     {
-                        log.WarnFormat(Messages.ISCSI_COPY_CANCELLED, filename);
+                        log.InfoFormat(Messages.ISCSI_COPY_CANCELLED, filename);
                         throw new OperationCanceledException(string.Format(Messages.ISCSI_COPY_CANCELLED, filename));
                     }
 
@@ -257,7 +264,7 @@ namespace XenOvfTransport
 
                         _bytescopied = (ulong)offset;
 
-                        OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileProgress, "SendData Start", updatemsg, (ulong)_bytescopied, (ulong)_bytestotal));
+                        OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileProgress, "SendData Start", updatemsg, _bytescopied, _bytestotal));
                     }
                     catch (Exception ex)
                     {
@@ -307,7 +314,7 @@ namespace XenOvfTransport
                 {
                     if (Cancel)
                     {
-                        log.Warn(Messages.ISCSI_VERIFY_CANCELLED);
+                        log.Info(Messages.ISCSI_VERIFY_CANCELLED);
                         throw new OperationCanceledException(Messages.ISCSI_VERIFY_CANCELLED);
                     }
 
@@ -479,9 +486,8 @@ namespace XenOvfTransport
             {
                 string host = XenAPI.Session.get_this_host(xenSession, xenSession.uuid);
 
-                // Transfer VM for VDI 1596d05a-f0b5-425c-9d95-74959c6e482c
+                // Transfer VM for VDI <uuid>
                 Dictionary<string, string> args = new Dictionary<string, string>();
-                // cannot change.
                 args.Add("vdi_uuid", vdiuuid);
                 args.Add("transfer_mode", "ISCSI");
                 args.Add("read_only", read_only ? "true" : "false");
@@ -506,67 +512,60 @@ namespace XenOvfTransport
         [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "Logging mechanism")]
         private void StopiScsiTarget(XenAPI.Session xenSession)
         {
-            if (_iscsisession != null)
-            {
-                try
-                {
-                    _iscsisession.Dispose();
-                }
-                catch ( Exception ex)
-                {
-                    log.DebugFormat("iScsiSession dispose failed: {0}, continuing", ex.Message);
-                }
-            }
-
-            string host = XenAPI.Session.get_this_host(xenSession, xenSession.uuid);
-
-            Dictionary<string, string> args = new Dictionary<string, string>();
-            args["record_handle"] = ParsePluginRecordFor("record_handle");
             try
             {
+                string host = XenAPI.Session.get_this_host(xenSession, xenSession.uuid);
+                Dictionary<string, string> args = new Dictionary<string, string>();
+
+                string handle;
+                if (!TryParsePluginRecordFor(_pluginrecord, "record_handle", out handle))
+                {
+                    log.Debug("Transfer VM was not started. Will not attempt to shut it down.");
+                    return;
+                }
+                
+                args["record_handle"] = handle;
                 Host.call_plugin(xenSession, host, "transfer", "unexpose", args);
+                log.Debug("iSCSI.StopScsiTarget: iSCSI Target Destroyed.");
             }
             catch (Exception ex)
             {
                 log.WarnFormat("{0} {1}", Messages.ISCSI_SHUTDOWN_ERROR, ex.Message);
                 throw new Exception(Messages.ISCSI_SHUTDOWN_ERROR, ex);
             }
-
-            InitializeiSCSI();
-            log.Debug("iSCSI.StopScsiTarget: iSCSI Target Destroyed.");
-        }
-
-        private void InitializeiSCSI()
-        {
-            _iscsisession = null;
-            _newscsi = false;
-            _pluginrecord = "";
-            _bytescopied = 0;
-            _bytestotal = 0;
-            _buffer = new byte[2 * MB];
         }
 
         private static bool IsZeros(byte[] buff)
         {
-            bool empty = true;
             foreach (byte b in buff)
             {
-                if (b != 0x0) { empty = false; break; }
+                if (b != 0x0)
+                    return false;
             }
-            return empty;
+            return true;
         }
-        
-        private string ParsePluginRecordFor(string name)
+
+        private static bool TryParsePluginRecordFor(string rec, string name, out string outValue)
         {
+            outValue = null;
             System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
-            doc.LoadXml(_pluginrecord);
-            foreach (System.Xml.XmlElement n in doc.GetElementsByTagName("transfer_record"))
+
+            try
             {
-                return n.GetAttribute(name);
+                doc.LoadXml(rec);
+                foreach (System.Xml.XmlElement n in doc.GetElementsByTagName("transfer_record"))
+                {
+                    outValue = n.GetAttribute(name);
+                    return true;
+                }
             }
-            return null;
+            catch (System.Xml.XmlException)
+            {
+                log.DebugFormat("Failed to parse the plugin record: '{0}'", rec);
+            }
+            return false;
         }
-        
-		#endregion
+
+        #endregion
     }
 }

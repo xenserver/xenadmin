@@ -111,14 +111,13 @@ namespace XenOvfTransport
 						List<XenRef<VM>> vmRefs = VM.get_by_name_label(xenSession, vmUuid);
 						vmRef = vmRefs[0];
 					    log.DebugFormat("{0} VM(s) found by label {1}", vmRefs.Count, vmUuid);
-						if (vmRefs.Count > 1)
-						log.WarnFormat("Only exporting FIRST VM with name {0}", vmUuid);
+                        if (vmRefs.Count > 1)
+                            log.WarnFormat("Only exporting FIRST VM with name {0}", vmUuid);
 					}
 					catch
 					{
-						var msg = string.Format(Messages.ERROR_VM_NOT_FOUND, vmUuid);
-						log.Error(msg);
-						throw new Exception(msg);
+						log.ErrorFormat(Messages.ERROR_VM_NOT_FOUND, vmUuid);
+						throw;
 					}
                 }
                 #endregion

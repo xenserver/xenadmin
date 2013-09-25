@@ -92,13 +92,13 @@ namespace XenOvfTransport
                     SendData(http, readstream, p2vUri, filesize);
                 }
             }
-            catch (ReConnectException rce)
+            catch (ReConnectException)
             {
-                throw rce;
+                throw;
             }
-            catch (OperationCanceledException oce)
+            catch (OperationCanceledException)
             {
-                throw oce;
+                throw;
             }
             catch (Exception ex)
             {
@@ -396,19 +396,14 @@ namespace XenOvfTransport
                     if (p >= (ulong)filesize)
                         break;
                 }
-                //catch (VhdException vhdex)
-                //{
-                //    Log.Error("OVF.Tools.Http.SendData Vhd Exception: {0}", vhdex.Message);
-                //    throw vhdex;
-                //}
-                catch (OperationCanceledException oce)
+                catch (OperationCanceledException)
                 {
-                    throw oce;
+                    throw;
                 }
                 catch (Exception ex)
                 {
                     log.ErrorFormat("OVF.Tools.Http.SendData FAILED {0}", ex.Message);
-                    throw ex;
+                    throw;
                 }
             }
             http.Flush();
