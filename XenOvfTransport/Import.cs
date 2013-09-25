@@ -51,18 +51,20 @@ using DiscUtils.Registry;
 using DiscUtils.Wim;
 using XenAdmin.Core;
 using XenAPI;
-using XenCenterLib.Archive;
 using XenOvf;
 using XenOvf.Definitions;
 using XenOvf.Definitions.XENC;
 using XenOvf.Definitions.VMC;
-using XenOvf.Utilities;
 using XenCenterLib.Compression;
+
+using XenOvf.Utilities;
 
 namespace XenOvfTransport
 {
     public class Import : XenOvfTransportBase
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private const long KB = 1024;
         private const long MB = (KB * 1024);
         private const long GB = (MB * 1024);
@@ -163,7 +165,7 @@ namespace XenOvfTransport
             if (Path.GetExtension(ovffilename).ToLower().EndsWith("ova", StringComparison.InvariantCulture) ||
                 Path.GetExtension(ovffilename).ToLower().EndsWith("gz", StringComparison.InvariantCulture))
             {
-                Log.Info("Import.Process: Opening OVF Archive: {0}", ovfFileName);
+                log.InfoFormat("Import.Process: Opening OVF Archive: {0}", ovfFileName);
                 OVF.OpenOva(ovfpath, ovffilename);
                 if (!File.Exists(openovf))
                 {
@@ -267,19 +269,19 @@ namespace XenOvfTransport
             {
                //FIND/SET THE NAME OF THE VM
 				ovfname = OVF.FindSystemName(ovfObj, vSystem.id);
-                Log.Audit("Import: {0}, {1}", ovfname, pathToOvf);
+                log.InfoFormat("Import: {0}, {1}", ovfname, pathToOvf);
 
 				VirtualHardwareSection_Type vhs = OVF.FindVirtualHardwareSectionByAffinity(ovfObj, vSystem.id, "xen");
 
                 XenRef<VM> vmRef = DefineSystem(xenSession, vhs, ovfname);
                 if (vmRef == null)
                 {
-                    Log.Error(Messages.ERROR_CREATE_VM_FAILED);
+                    log.Error(Messages.ERROR_CREATE_VM_FAILED);
                     throw new ImportException(Messages.ERROR_CREATE_VM_FAILED);
 				}
 
 				HideSystem(xenSession, vmRef);
-                Log.Debug("OVF.Import.Process: DefineSystem completed ({0})", VM.get_name_label(xenSession, vmRef));
+                log.DebugFormat("OVF.Import.Process: DefineSystem completed ({0})", VM.get_name_label(xenSession, vmRef));
 				
 				#region Set appliance
 				if (Helpers.BostonOrGreater(xenSession.Connection))
@@ -367,7 +369,7 @@ namespace XenOvfTransport
                 {
 					if (ex is OperationCanceledException)
 						throw;
-                    Log.Error(Messages.ERROR_IMPORT_FAILED);
+                    log.Error(Messages.ERROR_IMPORT_FAILED);
                     throw new Exception(Messages.ERROR_IMPORT_FAILED, ex);
                 }
             }
@@ -521,7 +523,7 @@ namespace XenOvfTransport
                         {
                             var statusMessage = string.Format(Messages.START_FILE_DECRYPTION, filename);
                             OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.MarqueeOn, "Security", statusMessage));
-                            Log.Debug(statusMessage);
+                            log.Debug(statusMessage);
                             OVF.DecryptToTempFile(EncryptionClass, filename, version, passcode, encryptfilename);
                             sourcefile = encryptfilename;
                             statusMessage += Messages.COMPLETE;
@@ -567,14 +569,14 @@ namespace XenOvfTransport
                         }
                         if (knownDisk)
                         {
-                            Log.Debug("Found file {0} using {1} Stream", filename, ext);
+                            log.DebugFormat("Found file {0} using {1} Stream", filename, ext);
                             vhdDisk = VirtualDisk.OpenDisk(sourcefile, FileAccess.Read);
                             dataStream = vhdDisk.Content;
                             dataCapacity = vhdDisk.Capacity;
                         }
                         else if (ext.ToLower().Contains("wim"))
                         {
-                            Log.Warning("EXPERIMENTAL CODE: Found file {0} using WIM file structure", filename);
+                            log.WarnFormat("EXPERIMENTAL CODE: Found file {0} using WIM file structure", filename);
                             wimDisk = new DiscUtils.Wim.WimFile(new FileStream(sourcefile, FileMode.Open, FileAccess.Read));
                             //wimFS = wimDisk.GetImage(wimDisk.BootImage);
 
@@ -589,7 +591,7 @@ namespace XenOvfTransport
                         }
                         else if (ext.ToLower().Contains("xva"))
                         {
-                            Log.Warning("EXPERIMENTAL CODE: Found file {0} using XVA Stream (DISK {1} is being imported).", filename, xvadisk);
+                            log.WarnFormat("EXPERIMENTAL CODE: Found file {0} using XVA Stream (DISK {1} is being imported).", filename, xvadisk);
                             DiscUtils.Xva.VirtualMachine vm = new DiscUtils.Xva.VirtualMachine(new FileStream(sourcefile, FileMode.Open, FileAccess.Read));
                             int i = 0;
                             foreach (DiscUtils.Xva.Disk d in vm.Disks)
@@ -620,7 +622,7 @@ namespace XenOvfTransport
                     }
                     catch (Exception ex)
                     {
-                        Log.Error(Messages.ISCSI_ERROR_CANNOT_OPEN_DISK);
+                        log.Error(Messages.ISCSI_ERROR_CANNOT_OPEN_DISK);
                         throw new Exception(Messages.ISCSI_ERROR_CANNOT_OPEN_DISK, ex);
                     }
                 }
@@ -631,7 +633,7 @@ namespace XenOvfTransport
             }
             else
             {
-                Log.Error(Messages.ERROR_FILE_NAME_NULL);
+                log.Error(Messages.ERROR_FILE_NAME_NULL);
                 throw new InvalidDataException(Messages.ERROR_FILE_NAME_NULL);
             }
             #endregion
@@ -661,7 +663,7 @@ namespace XenOvfTransport
                     if (freespace <= dataCapacity)
                     { 
                         string message = string.Format(Messages.NOT_ENOUGH_SPACE_IN_SR, sruuid, Convert.ToString(vhdDisk.Capacity), filename);
-                        Log.Error(message);
+                        log.Error(message);
                         throw new IOException(message);
                     }
                 }
@@ -695,12 +697,12 @@ namespace XenOvfTransport
                         }
                     case TransferType.Skip:
                         {
-                            Log.Info("ImportFile: Upload Skipped");
+                            log.Info("ImportFile: Upload Skipped");
                             break;
                         }
                     default:
                 		{
-                            Log.Error(Messages.UNSUPPORTED_TRANSPORT);
+                            log.Error(Messages.UNSUPPORTED_TRANSPORT);
                             throw new InvalidDataException(Messages.UNSUPPORTED_TRANSPORT);
                         }
                 }
@@ -728,15 +730,15 @@ namespace XenOvfTransport
             }
 
             Directory.SetCurrentDirectory(StartPath);
-            Log.Debug("OVF.Import.ImportFile leave: created {0} VDIs", vdiRef.Count );
+            log.DebugFormat("OVF.Import.ImportFile leave: created {0} VDIs", vdiRef.Count);
             return vdiRef;
         }
         private XenRef<VDI> UploadiSCSI(Session xenSession, string sruuid, string label, Stream filestream, long capacity, string description, string vdiuuid)
         {
-            Log.Debug("OVF.Import.UploadiSCSI Enter");
-            Log.Debug("OVF.Import.UploadiSCSI SRUUID: {0}", sruuid);
-            Log.Debug("OVF.Import.UploadiSCSI Label: {0}", label);
-            Log.Debug("OVF.Import.UploadiSCSI Capacity: {0}", capacity);
+            log.Debug("OVF.Import.UploadiSCSI Enter");
+            log.DebugFormat("OVF.Import.UploadiSCSI SRUUID: {0}", sruuid);
+            log.DebugFormat("OVF.Import.UploadiSCSI Label: {0}", label);
+            log.DebugFormat("OVF.Import.UploadiSCSI Capacity: {0}", capacity);
 
             XenRef<VDI> vdiRef = null;
 
@@ -773,7 +775,7 @@ namespace XenOvfTransport
             {
 				if (ex is OperationCanceledException)
 					throw;
-                Log.Error("{0} {1}", Messages.ERROR_ISCSI_UPLOAD_FAILED, ex.Message);
+                log.ErrorFormat("{0} {1}", Messages.ERROR_ISCSI_UPLOAD_FAILED, ex.Message);
                 vdiRef = null;
                 throw new Exception(Messages.ERROR_ISCSI_UPLOAD_FAILED, ex);
             }
@@ -784,17 +786,17 @@ namespace XenOvfTransport
             }
             #endregion
 
-            Log.Debug("OVF.Import.UploadiSCSI Leave");
+            log.Debug("OVF.Import.UploadiSCSI Leave");
             return vdiRef;
         }
 
         private XenRef<VDI> UploadiSCSIbyWimFile(Session xenSession, string sruuid, string label, WimFile wimDisk, int imageindex, long capacity, ulong wimFileCount, int arch, string description)
         {
-            Log.Debug("OVF.Import.UploadiSCSIbyWimFile Enter");
-            Log.Debug("OVF.Import.UploadiSCSIbyWimFile SRUUID: {0}", sruuid);
-            Log.Debug("OVF.Import.UploadiSCSIbyWimFile Label: {0}", label);
-            Log.Debug("OVF.Import.UploadiSCSIbyWimFile ImageIndex: {0}", imageindex);
-            Log.Debug("OVF.Import.UploadiSCSIbyWimFile Capacity: {0}", capacity);
+            log.Debug("OVF.Import.UploadiSCSIbyWimFile Enter");
+            log.DebugFormat("OVF.Import.UploadiSCSIbyWimFile SRUUID: {0}", sruuid);
+            log.DebugFormat("OVF.Import.UploadiSCSIbyWimFile Label: {0}", label);
+            log.DebugFormat("OVF.Import.UploadiSCSIbyWimFile ImageIndex: {0}", imageindex);
+            log.DebugFormat("OVF.Import.UploadiSCSIbyWimFile Capacity: {0}", capacity);
             string vdilabel = string.Format("{0}{1}", label, imageindex);
             XenRef<VDI> vdiRef = CreateVDI(xenSession, sruuid, vdilabel, capacity, description);
 
@@ -813,7 +815,7 @@ namespace XenOvfTransport
             }
             else
             {
-                Log.Warning("Refernce VHD not found [{0}]", Properties.Settings.Default.ReferenceVHDName);
+                log.WarnFormat("Refernce VHD not found [{0}]", Properties.Settings.Default.ReferenceVHDName);
             }
 
             #region UPLOAD iSCSI STREAM
@@ -837,7 +839,7 @@ namespace XenOvfTransport
                 }
                 else
                 {
-                    Log.Warning("System will not be bootable, cannot find [{0}] to extract master boot record.", vhdfile);
+                    log.WarnFormat("System will not be bootable, cannot find [{0}] to extract master boot record.", vhdfile);
                     OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileStart, "Import", Messages.WARNING_TARGET_NOT_BOOTABLE));
                 }
 				m_iscsi.ScsiDisk.Signature = new Random().Next();
@@ -871,7 +873,7 @@ namespace XenOvfTransport
             {
 				if (ex is OperationCanceledException)
 					throw;
-                Log.Error("{0} {1}", Messages.ERROR_ISCSI_UPLOAD_FAILED, ex.Message);
+                log.ErrorFormat("{0} {1}", Messages.ERROR_ISCSI_UPLOAD_FAILED, ex.Message);
                 vdiRef = null;
                 throw new Exception(Messages.ERROR_ISCSI_UPLOAD_FAILED, ex);
             }
@@ -882,7 +884,7 @@ namespace XenOvfTransport
             }
             #endregion
 
-            Log.Debug("OVF.Import.UploadiSCSIbyWimFile Leave");
+            log.Debug("OVF.Import.UploadiSCSIbyWimFile Leave");
             return vdiRef;
         }
 
@@ -923,10 +925,10 @@ namespace XenOvfTransport
             }
             catch (Exception ex)
             {
-                Log.Error("{0} {1}", Messages.ERROR_CANNOT_CREATE_VDI, ex.Message);
+                log.ErrorFormat("{0} {1}", Messages.ERROR_CANNOT_CREATE_VDI, ex.Message);
                 throw new Exception(Messages.ERROR_CANNOT_CREATE_VDI, ex);
             }
-            Log.Debug("Import.CeateVDI::VDI Created");
+            log.Debug("Import.CeateVDI::VDI Created");
             return vdiRef;
         }
 
@@ -934,7 +936,11 @@ namespace XenOvfTransport
         {
             foreach (DiscDirectoryInfo dir in DirInfos)
             {
-                if (IsExcluded(dir.FullName)) { Log.Info("Directory Skip {0}", dir.FullName); continue; }
+                if (IsExcluded(dir.FullName))
+                {
+                    log.InfoFormat("Directory Skip {0}", dir.FullName);
+                    continue;
+                }
                 FileAttributes attr = dir.Attributes;
                 if ((dir.Attributes & FileAttributes.ReparsePoint) == 0)
                 {
@@ -950,7 +956,7 @@ namespace XenOvfTransport
                 }
                 else
                 {
-                    Log.Trace("Directory ReparsePoint {0}", dir.FullName);
+                    log.DebugFormat("Directory ReparsePoint {0}", dir.FullName);
                     ReparsePoint rp = w.GetReparsePoint(dir.FullName);
                     ntfs.CreateDirectory(dir.FullName);
                     ntfs.SetReparsePoint(dir.FullName, rp);
@@ -961,7 +967,11 @@ namespace XenOvfTransport
         {
             foreach (DiscFileInfo file in FileInfos)
             {
-                if (IsExcluded(file.FullName)) { Log.Info("File Skip {0}", file.FullName); continue; }
+                if (IsExcluded(file.FullName))
+                {
+                    log.InfoFormat("File Skip {0}", file.FullName);
+                    continue;
+                }
                 FileAttributes attr = file.Attributes;
                 if ((attr & FileAttributes.ReparsePoint) == 0)
                 {
@@ -981,7 +991,7 @@ namespace XenOvfTransport
                 }
                 else
                 {
-                    Log.Trace("Reparse Point: {0}", file.FullName);
+                    log.DebugFormat("Reparse Point: {0}", file.FullName);
                     ReparsePoint rp = w.GetReparsePoint(file.FullName);
                     ntfs.SetReparsePoint(file.FullName, rp);
                 }
@@ -1004,10 +1014,10 @@ namespace XenOvfTransport
 
         private XenRef<VDI> UploadRawVDI(Session xenSession, string sruuid, string label, Stream filestream, long capacity, string description)
         {
-            Log.Debug("OVF.Import.UploadRawVDI Enter");
-            Log.Debug("OVF.Import.UpdoadRadVDI SRUUID: {0}", sruuid);
-            Log.Debug("OVF.Import.UpdoadRadVDI Label: {0}", label);
-            Log.Debug("OVF.Import.UpdoadRadVDI Capacity: {0}", capacity);
+            log.Debug("OVF.Import.UploadRawVDI Enter");
+            log.DebugFormat("OVF.Import.UpdoadRadVDI SRUUID: {0}", sruuid);
+            log.DebugFormat("OVF.Import.UpdoadRadVDI Label: {0}", label);
+            log.DebugFormat("OVF.Import.UpdoadRadVDI Capacity: {0}", capacity);
 
             #region CREATE A VDI
             Hashtable vdiHash = new Hashtable();
@@ -1039,10 +1049,10 @@ namespace XenOvfTransport
             }
             catch (Exception ex)
             {
-                Log.Error("{0} {1}", Messages.ERROR_CANNOT_CREATE_VDI, ex.Message);
+                log.ErrorFormat("{0} {1}", Messages.ERROR_CANNOT_CREATE_VDI, ex.Message);
                 throw new Exception(Messages.ERROR_CANNOT_CREATE_VDI, ex);
             }
-            Log.Debug("Import.UploadRawVDI::VDI Created");
+            log.Debug("Import.UploadRawVDI::VDI Created");
             #endregion
 
             #region UPLOAD HTTP STREAM
@@ -1061,18 +1071,18 @@ namespace XenOvfTransport
             }
             catch (Exception ex)
             {
-                Log.Error("{0} {1}", Messages.ERROR_HTTP_UPLOAD_FAILED, ex.Message);
+                log.ErrorFormat("{0} {1}", Messages.ERROR_HTTP_UPLOAD_FAILED, ex.Message);
                 if (vdiRef != null)
                     RemoveVDI(xenSession, vdiRef);
                 vdiRef = null;
                 throw new Exception(Messages.ERROR_HTTP_UPLOAD_FAILED, ex);
             }
-            Log.Debug("Import.UploadRawVDI::http.put complete");
+            log.Debug("Import.UploadRawVDI::http.put complete");
             #endregion
             
             // give it time to catch up.
             Thread.Sleep(new TimeSpan(0, 0, 5));
-            Log.Debug("OVF.UploadRawVDI Leave");
+            log.Debug("OVF.UploadRawVDI Leave");
             return vdiRef;
 
         }
@@ -1093,7 +1103,7 @@ namespace XenOvfTransport
 
             if (system.System == null)
             {
-                Log.Debug("OVF.Import.DefineSystem: System VSSD is empty, guessing. HVM style");
+                log.Debug("OVF.Import.DefineSystem: System VSSD is empty, guessing. HVM style");
                 if (vM_name_label == null)
                 {
                 	vM_name_label = Messages.UNDEFINED_NAME_LABEL;
@@ -1283,7 +1293,7 @@ namespace XenOvfTransport
             }
             catch (Exception ex)
             {
-                Log.Error("{0} {1}", Messages.ERROR_CREATE_VM_FAILED, ex.Message);
+                log.ErrorFormat("{0} {1}", Messages.ERROR_CREATE_VM_FAILED, ex.Message);
                 throw new Exception(Messages.ERROR_CREATE_VM_FAILED, ex);
             }
         }
@@ -1295,7 +1305,7 @@ namespace XenOvfTransport
             }
             catch (Exception ex)
             {
-                Log.Error("{0} {1}", Messages.ERROR_REMOVE_VM_FAILED, ex.Message);
+                log.ErrorFormat("{0} {1}", Messages.ERROR_REMOVE_VM_FAILED, ex.Message);
                 throw new Exception(Messages.ERROR_REMOVE_VM_FAILED, ex);
             }
             return;
@@ -1304,12 +1314,12 @@ namespace XenOvfTransport
         {
             try
             {
-                Log.Error("OVF.Import.RemoveVDI: Something went wrong deleting associated VDI");
+                log.Error("OVF.Import.RemoveVDI: Something went wrong deleting associated VDI");
 				VDI.destroy(xenSession, vdi.opaque_ref);
             }
             catch (Exception ex)
             {
-                Log.Error("{0}, {1}", Messages.ERROR_REMOVE_VDI_FAILED, ex.Message);
+                log.ErrorFormat("{0}, {1}", Messages.ERROR_REMOVE_VDI_FAILED, ex.Message);
                 throw new Exception(Messages.ERROR_REMOVE_VDI_FAILED, ex);
             }
             return;
@@ -1459,11 +1469,11 @@ namespace XenOvfTransport
                         }
                         catch (Exception ex)
                         {
-                            Log.Error("{0} {1}", Messages.ERROR_CREATE_VIF_FAILED, ex.Message);
+                            log.ErrorFormat("{0} {1}", Messages.ERROR_CREATE_VIF_FAILED, ex.Message);
                             throw new Exception(Messages.ERROR_CREATE_VIF_FAILED, ex);
                         }
                         #endregion
-                        Log.Debug("OVF.Import.AddResourceSettingData: Network Added");
+                        log.Debug("OVF.Import.AddResourceSettingData: Network Added");
 
                         break;
                     }
@@ -1522,7 +1532,7 @@ namespace XenOvfTransport
                                                     }
                                                     catch
                                                     {
-                                                        Log.Trace("Import.AddResourceSettingData: iso sr uuid not found, trying name_label");
+                                                        log.Debug("Import.AddResourceSettingData: iso sr uuid not found, trying name_label");
                                                     }
                                                     #endregion
 
@@ -1538,13 +1548,13 @@ namespace XenOvfTransport
                                                     }
                                                     catch
                                                     {
-                                                        Log.Trace("Import.AddResourceSettingData: iso sr uuid not found, looking for vdi...");
+                                                        log.Debug("Import.AddResourceSettingData: iso sr uuid not found, looking for vdi...");
                                                     }
                                                     #endregion
                                                 }
                                                 catch (Exception ex)
                                                 {
-                                                    Log.Warning("Import.AddResourceSettingData: could not find SR: {0}", ex.Message);
+                                                    log.WarnFormat("Import.AddResourceSettingData: could not find SR: {0}", ex.Message);
                                                     isoUuid = null;
                                                 }
                                                 break;
@@ -1593,14 +1603,14 @@ namespace XenOvfTransport
 											if (ex is OperationCanceledException)
 												throw;
                                         	var msg = string.Format(Messages.ERROR_ADDRESOURCESETTINGDATA_FAILED, Messages.ISO);
-                                            Log.Error("{0}, {1}", msg, ex.Message);
+                                            log.ErrorFormat("{0}, {1}", msg, ex.Message);
                                             throw new Exception(msg, ex);
                                         }
                                         finally
                                         {
                                             if (vdiRef == null || vdiRef.Count <= 0)
                                             {
-                                                Log.Error(string.Format(Messages.ERROR_IMPORT_DISK_FAILED, filename, isoUuid));
+                                                log.Error(string.Format(Messages.ERROR_IMPORT_DISK_FAILED, filename, isoUuid));
                                                 RemoveSystem(xenSession, vmRef);
                                             }
                                         }
@@ -1689,16 +1699,16 @@ namespace XenOvfTransport
                                     }
                                     catch (Exception ex)
                                     {
-                                        Log.Error("Import.AddResourceSettingData: {0}", ex.Message);
+                                        log.ErrorFormat("Import.AddResourceSettingData: {0}", ex.Message);
                                     }
                                 }
                                 else
                                 {
-                                    Log.Warning("Import:  ================== ATTENTION NEEDED =======================");
-                                    Log.Warning("Import:  Could not determine appropriate number of device placement.");
-                                    Log.Warning("Import:  Please Start, Logon, Shut down, System {{0})", (string)vbdHash["vm_name_label"]);
-                                    Log.Warning("Import:  Then attach disks with labels ending with \"+\" to the device number defined before the +.");
-                                    Log.Warning("Import:  ===========================================================");
+                                    log.WarnFormat("Import:  ================== ATTENTION NEEDED =======================");
+                                    log.WarnFormat("Import:  Could not determine appropriate number of device placement.");
+                                    log.WarnFormat("Import:  Please Start, Logon, Shut down, System ({0})", (string)vbdHash["vm_name_label"]);
+                                    log.WarnFormat("Import:  Then attach disks with labels ending with \"+\" to the device number defined before the +.");
+                                    log.Warn("Import:  ===========================================================");
                                     OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.Progress, "Import", Messages.WARNING_ADMIN_REQUIRED));
                                 }
                             }
@@ -1708,7 +1718,7 @@ namespace XenOvfTransport
                         #endregion
                         OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.ImportProgress, "CD/DVD Drive",
 							string.Format(Messages.DEVICE_ATTACHED, Messages.CD_DVD_DEVICE)));
-                        Log.Debug("Import.AddResourceSettingData: CD/DVD ROM Added");
+                        log.Debug("Import.AddResourceSettingData: CD/DVD ROM Added");
 
                         break;
                     }
@@ -1719,7 +1729,7 @@ namespace XenOvfTransport
                         #region ADD DISK
                         if (filename == null) // NO disk is available, why import RASD?
                         {
-                            Log.Warning("No file available to import, skipping: RASD{0}: {1}", rasd.ResourceType.Value, rasd.InstanceID.Value);
+                            log.WarnFormat("No file available to import, skipping: RASD{0}: {1}", rasd.ResourceType.Value, rasd.InstanceID.Value);
                             break;
                         }
                         string sruuid = null;
@@ -1803,8 +1813,7 @@ namespace XenOvfTransport
                                     }
                                     catch
                                     {
-                                        Log.Trace("Import.AddResourceSettingData: SR missing... still looking..");
-                                        // move on..
+                                        log.Debug("Import.AddResourceSettingData: SR missing... still looking..");
                                     }
                                     if (srref == null)
                                     {
@@ -1815,7 +1824,7 @@ namespace XenOvfTransport
                                         }
                                         catch
                                         {
-                                            Log.Trace("Import.AddResourceSettingData: SR missing... still looking..");
+                                            log.Debug("Import.AddResourceSettingData: SR missing... still looking..");
                                         }
                                         if (srlist != null && srlist.Count > 0)
                                         {
@@ -1834,7 +1843,7 @@ namespace XenOvfTransport
                                 {
                                     if (DefaultSRUUID == null)
                                     {
-                                        Log.Error(Messages.ERROR_COULD_NOT_FIND_SR);
+                                        log.Error(Messages.ERROR_COULD_NOT_FIND_SR);
                                         throw new InvalidDataException(Messages.ERROR_COULD_NOT_FIND_SR);
                                     }
 
@@ -1845,7 +1854,7 @@ namespace XenOvfTransport
                                         XenRef<VDI> tempVDI = VDI.get_by_uuid(xenSession, vdiuuid);
                                         if (tempVDI == null)
                                         {
-                                            Log.Error(Messages.ERROR_COULD_NOT_FIND_SR);
+                                            log.Error(Messages.ERROR_COULD_NOT_FIND_SR);
                                             throw new InvalidDataException(Messages.ERROR_COULD_NOT_FIND_SR);
                                         }
 
@@ -1876,7 +1885,7 @@ namespace XenOvfTransport
 									if (ex is OperationCanceledException)
 										throw;
 									var msg = string.Format(Messages.ERROR_ADDRESOURCESETTINGDATA_FAILED, Messages.DISK_DEVICE);
-                                    Log.Error("{0} {1}", msg, ex.Message);
+                                    log.ErrorFormat("{0} {1}", msg, ex.Message);
                                     throw new InvalidDataException(msg, ex);
                                 }
                                 finally
@@ -1884,12 +1893,12 @@ namespace XenOvfTransport
                                     if (vdiRef == null)
                                     {
                                     	var msg = string.Format(Messages.ERROR_IMPORT_DISK_FAILED, filename, sruuid);
-                                        Log.Error(msg);
+                                        log.Error(msg);
                                         RemoveSystem(xenSession, vmRef);
                                     }
                                 }
 
-                                Log.Debug("Import.AddResourceSettingData coung {0} VDIs", vdiRef.Count );
+                                log.DebugFormat("Import.AddResourceSettingData coung {0} VDIs", vdiRef.Count);
 
 
                                 foreach (XenRef<VDI> currentVDI in vdiRef)
@@ -1936,30 +1945,30 @@ namespace XenOvfTransport
                                         }
                                         catch (Exception ex)
                                         {
-                                            Log.Error("{0} {1}", Messages.ERROR_CREATE_VBD_FAILED, ex.Message);
+                                            log.ErrorFormat("{0} {1}", Messages.ERROR_CREATE_VBD_FAILED, ex.Message);
                                             throw new Exception(Messages.ERROR_CREATE_VBD_FAILED, ex);
                                         }
                                     }
                                     else
                                     {
-                                        Log.Warning("Import:  ================== ATTENTION NEEDED =======================");
-                                        Log.Warning("Import:  Could not determine appropriate number for device placement.");
-                                        Log.Warning("Import:  Please Start, Logon, Shut down, System ({0})", (string)vbdHash["vm_name_label"]);
-                                        Log.Warning("Import:  Then manually attach disks with labels with {0}_# that are not attached to {0}", (string)vbdHash["vm_name_label"]);
-                                        Log.Warning("Import:  ===========================================================");
+                                        log.WarnFormat("Import:  ================== ATTENTION NEEDED =======================");
+                                        log.WarnFormat("Import:  Could not determine appropriate number for device placement.");
+                                        log.WarnFormat("Import:  Please Start, Logon, Shut down, System ({0})", (string)vbdHash["vm_name_label"]);
+                                        log.WarnFormat("Import:  Then manually attach disks with labels with {0}_# that are not attached to {0}", (string)vbdHash["vm_name_label"]);
+                                        log.WarnFormat("Import:  ===========================================================");
                                         OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.Progress, "Import", Messages.WARNING_ADMIN_REQUIRED));
                                     }
                                 }
                             }
                             else
                             {
-                                Log.Info("Import: FILE SKIPPED (METADATA ONLY SELECTED)  {0}", _currentfilename);
+                                log.InfoFormat("Import: FILE SKIPPED (METADATA ONLY SELECTED)  {0}", _currentfilename);
                             }
                             #endregion
 
 
                         }
-                        Log.Debug("Import.AddResourceSettingData: Hard Disk Image Added");
+                        log.Debug("Import.AddResourceSettingData: Hard Disk Image Added");
                         break;
                         #endregion
                     }
@@ -1969,7 +1978,7 @@ namespace XenOvfTransport
                                                          Justification = "Logging mechanism")]
         private string VerifyUserDevice(Session xenSession, XenRef<VM> vmRef, string device)
         {
-            Log.Debug("Import.VerifyUserDevice, checking device: {0} (99 = autoselect)", device);
+            log.DebugFormat("Import.VerifyUserDevice, checking device: {0} (99 = autoselect)", device);
             string usethisdevice = null;
             List<XenRef<VBD>> vbds = VM.get_VBDs(xenSession, vmRef);
             string[] allowedVBDs = VM.get_allowed_VBD_devices(xenSession, vmRef);
@@ -1977,7 +1986,7 @@ namespace XenOvfTransport
             if (allowedVBDs == null || allowedVBDs.Length <= 0)
             {
                 string message = string.Format("OVF.VerifyUserDevice: No more available devices, cannot add device: {0}", device);
-                Log.Error(message);
+                log.Error(message);
                 return device + "+";
             }
 
@@ -1988,7 +1997,7 @@ namespace XenOvfTransport
                     if (device.ToLower() == allowedvbd.ToLower())
                     {
                         usethisdevice = device;
-                        Log.Debug("Import.VerifyUserDevice, device: {0} will be used.", device);
+                        log.DebugFormat("Import.VerifyUserDevice, device: {0} will be used.", device);
                         break;
                     }
                 }
@@ -1996,7 +2005,7 @@ namespace XenOvfTransport
             else
             {
                 usethisdevice = allowedVBDs[0];
-                Log.Debug("Import.VerifyUserDevice, device [{0}] is not available, setting to: [{1}]", device, usethisdevice);
+                log.DebugFormat("Import.VerifyUserDevice, device [{0}] is not available, setting to: [{1}]", device, usethisdevice);
             }
 
             if (usethisdevice == null)
@@ -2165,12 +2174,12 @@ namespace XenOvfTransport
             bool useHostResource = false;
             if (Tools.ValidateProperty("HostResource", rasd))
             {
-                Log.Debug("Using HostResource to find Disk");
+                log.Debug("Using HostResource to find Disk");
                 useHostResource = true;
             }
             else
             {
-                Log.Debug("Using InstanceID to find Disk");
+                log.Debug("Using InstanceID to find Disk");
             }
             
             foreach(VirtualDiskDesc_Type disk in disks)
@@ -2278,7 +2287,7 @@ namespace XenOvfTransport
             List<XenRef<VDI>> vdiRef = null;
             if (args is TaskInfo)
             {
-                Log.Info("Import.ImportFileProc: ThreadID: {0}[{1}]", Thread.CurrentThread.Name, Thread.CurrentThread.ManagedThreadId);
+                log.InfoFormat("Import.ImportFileProc: ThreadID: {0}[{1}]", Thread.CurrentThread.Name, Thread.CurrentThread.ManagedThreadId);
                 TaskInfo ti = (TaskInfo)args;
                 try
                 {
@@ -2288,11 +2297,11 @@ namespace XenOvfTransport
                 {
 					if (ex is OperationCanceledException)
 						throw;
-                    Log.Error(Messages.ERROR_IMPORT_FAILED);
+                    log.Error(Messages.ERROR_IMPORT_FAILED);
                     throw new Exception(Messages.ERROR_IMPORT_FAILED, ex);
                 }
             }
-            Log.Debug("OVF.ImportFileProc (worker thread) completed");
+            log.Debug("OVF.ImportFileProc (worker thread) completed");
             return vdiRef;
         }
         
@@ -2324,11 +2333,11 @@ namespace XenOvfTransport
                 {
                     rsv.Validate(filename);
                     IsURI = true;
-                    Log.Info("Import.isURI: File: {0} is in URI format.", filename);
+                    log.InfoFormat("Import.isURI: File: {0} is in URI format.", filename);
                 }
                 catch
                 {
-                    Log.Info("Import.isURI: File: {0} is not in URI format.", filename);
+                    log.InfoFormat("Import.isURI: File: {0} is not in URI format.", filename);
                     IsURI = false;
                 }
             }
@@ -2505,16 +2514,16 @@ namespace XenOvfTransport
                         finally { }
                     }
                     refVHD = outfile;
-                    Log.Info("A Compressed Reference VHD was found and uncompressed.");
+                    log.Info("A Compressed Reference VHD was found and uncompressed.");
                 }
             }
-            Log.Info("Reference VHD: {0}", refVHD);
+            log.InfoFormat("Reference VHD: {0}", refVHD);
             return refVHD;
         }
 
     	public string DownloadFileAsync(Uri filetodownload, ulong totalsize)
         {
-            Log.Info("DownloadFileAsync: {0}", filetodownload);
+            log.InfoFormat("DownloadFileAsync: {0}", filetodownload);
             _downloadexception = null;
             string tmpfilename = filetodownload.AbsolutePath.Substring(filetodownload.AbsolutePath.LastIndexOf('/') + 1);
             if (!File.Exists(tmpfilename))
@@ -2545,10 +2554,10 @@ namespace XenOvfTransport
         {
             if (e.Error != null)
             {
-                Log.Error("DownloadFileAsync: {0} ", e.Error.Message);
+                log.ErrorFormat("DownloadFileAsync: {0} ", e.Error.Message);
                 _downloadexception = e.Error;
             }
-            Log.Info("DownloadFileAsync: completed");
+            log.Info("DownloadFileAsync: completed");
             uridownloadcomplete.Set();
         }
 

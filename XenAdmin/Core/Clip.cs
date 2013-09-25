@@ -82,9 +82,9 @@ namespace XenAdmin.Core
                 {
                     Win32.ChangeClipboardChain(registeredClipboardHandle, IntPtr.Zero);
                 }
-                catch (Exception exn)
+                catch (Exception)
                 {
-                    log.WarnFormat("ChangeClipboardChain failed", exn);
+                    log.WarnFormat("ChangeClipboardChain failed");
                 }
                 registeredClipboardHandle = IntPtr.Zero;
                 nextClipboardViewer = IntPtr.Zero;

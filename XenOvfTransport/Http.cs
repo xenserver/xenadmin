@@ -38,17 +38,15 @@ using System.IO;
 using System.Net.Security;
 using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
-using System.Security.Authentication;
 using System.Text;
 
-using DiscUtils;
-
-using XenOvf.Utilities;
 
 namespace XenOvfTransport
 {
     public class Http
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
 		public Action<XenOvfTranportEventArgs> UpdateHandler { get; set; }
 		
 		private void OnUpdate(XenOvfTranportEventArgs e)
@@ -82,7 +80,7 @@ namespace XenOvfTransport
                 http = DoHttp("PUT", serverUri, p2vUri, headers);
                 if (http == null)
                 {
-                    Log.Debug("Http.DoHTTP FAILED");
+                    log.Debug("Http.DoHTTP FAILED");
                     return;
                 }
                 if (isChunked)
@@ -104,7 +102,7 @@ namespace XenOvfTransport
             }
             catch (Exception ex)
             {
-                Log.Error("OVF.Tools.Http.Put: Exception: {0}", ex);
+                log.Error("OVF.Tools.Http.Put: Exception: {0}", ex);
             }
             finally
             {
@@ -113,6 +111,7 @@ namespace XenOvfTransport
                 http = null;
             }
         }
+
         public void Get(string filename, Uri serverUri, string p2vUri)
         {
             try
@@ -154,12 +153,12 @@ namespace XenOvfTransport
             }
             catch (EndOfStreamException eof)
             {
-                Log.Debug("Get::No Data: {0}", eof.Message);
+                log.DebugFormat("Get::No Data: {0}", eof.Message);
             }
             catch (Exception ex)
             {
                 //marshal_response(http, tag.Failed);                
-                Log.Error("Get::Exception: {0}", ex.Message);
+                log.ErrorFormat("Get::Exception: {0}", ex.Message);
             }
         }
 
@@ -167,10 +166,10 @@ namespace XenOvfTransport
         {
             ServerURI = serverUri;
 
-            Log.Debug("Connect To: {0}:{1}", serverUri.Host, serverUri.Port);
+            log.DebugFormat("Connect To: {0}:{1}", serverUri.Host, serverUri.Port);
             Stream http = Connect(serverUri.Host, serverUri.Port);
             String httprequest = string.Format("{0} {1} http:/1.0\r\n", method, p2vUri);
-            Log.Debug("Request: {0}", httprequest);
+            log.DebugFormat("Request: {0}", httprequest);
             if (http == null)
             {
                 throw new Exception("HTTP == NULL");
@@ -209,28 +208,32 @@ namespace XenOvfTransport
             {
                 case 0:
                     {
-                        Log.Debug("No Return data at this time.");
+                        log.Debug("No Return data at this time.");
                         code = 200;
                         break;
                     }
                 case 200:
                     {
-                        Log.Debug("200 OK");
+                        log.Debug("200 OK");
                         break;
                     }
                 case 403:
                     {
-                        Log.Debug("403 FORBIDDEN, handler was not found");
+                        log.Debug("403 FORBIDDEN, handler was not found");
                         break;
                     }
-                default: { Log.Debug("ERROR Returned: {0}", code); break; }
+                default:
+                    {
+                        log.DebugFormat("ERROR Returned: {0}", code);
+                        break;
+                    }
             }
 
             while (true)
             {
                 response = ReadLine(http);
-                if (response.Equals("\r\n") || response.Equals("")) break;
-                //Log.Debug("RESPONSE: {0}", response);
+                if (response.Equals("\r\n") || response.Equals(""))
+                    break;
             }
             return code;
         }
@@ -255,7 +258,7 @@ namespace XenOvfTransport
             message = Encoding.UTF8.GetBytes(string.Format("\r\n0\r\n"));
             http.Write(message, 0, message.Length);
             http.Flush();
-            Log.Debug("TestBuffer {0} bytes written", testBuffer.Length);
+            log.DebugFormat("TestBuffer {0} bytes written", testBuffer.Length);
         }
         internal void SendFilesInDirectory(Stream http, string pathname)
         {
@@ -270,12 +273,12 @@ namespace XenOvfTransport
                 http.Write(block, 0, block.Length);
                 message = Encoding.UTF8.GetBytes(string.Format("\r\n"));
                 http.Write(message, 0, message.Length);
-                Log.Debug("Block [{0}] written", file);
+                log.DebugFormat("Block [{0}] written", file);
             }
             message = Encoding.UTF8.GetBytes(string.Format("0\r\n"));
             http.Write(message, 0, message.Length);
             http.Flush();
-            Log.Debug("Finished sending files in: {0}", pathname);
+            log.DebugFormat("Finished sending files in: {0}", pathname);
         }
         internal void SendChunkedData(Stream http, Stream filestream, long offset, long filesize)
         {
@@ -343,26 +346,32 @@ namespace XenOvfTransport
                 }
                 catch (Exception ex)
                 {
-                    Log.Debug("EXCEPTION: {0} : {1}", ex.GetType().ToString(), ex.Message);
+                    log.DebugFormat("EXCEPTION: {0} : {1}", ex.GetType(), ex.Message);
                     throw new ReConnectException(string.Format("{0}", bytessent), ex);
                 }
-                Log.Bytes(Encoding.UTF8.GetBytes(string.Format(">>> {0} <<< Block {1} : Total {2} : Full {3} Skipped: {4}\r",
-                                                    i++,
-                                                    n.ToString("N0", CultureInfo.InvariantCulture),
-                                                    bytessent.ToString("N0", CultureInfo.InvariantCulture),
-                                                    filesize.ToString("N0", CultureInfo.InvariantCulture),
-                                                    skipblock)));
+
+                string str1 = string.Format(">>> {0} <<< Block {1} : Total {2} : Full {3} Skipped: {4}\r",
+                                           i++,
+                                           n.ToString("N0", CultureInfo.InvariantCulture),
+                                           bytessent.ToString("N0", CultureInfo.InvariantCulture),
+                                           filesize.ToString("N0", CultureInfo.InvariantCulture),
+                                           skipblock);
+                log.Debug(Encoding.ASCII.GetString(Encoding.UTF8.GetBytes(str1)));
 
                 Thread.Sleep(100);
             }
+
             http.Write(finalblock, 0, finalblock.Length);
             http.Flush();
             OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileComplete, "SendData Completed", "Disk Copy", (ulong)bytessent, (ulong)filesize));
-            Log.Bytes(Encoding.UTF8.GetBytes(string.Format("=== {0} === Total {1} : Full {2}\r",
-                                                i++,
-                                                bytessent.ToString("N0", CultureInfo.InvariantCulture),
-                                                filesize.ToString("N0", CultureInfo.InvariantCulture))));
+
+            string str2 = string.Format("=== {0} === Total {1} : Full {2}\r",
+                                       i++,
+                                       bytessent.ToString("N0", CultureInfo.InvariantCulture),
+                                       filesize.ToString("N0", CultureInfo.InvariantCulture));
+            log.Debug(Encoding.ASCII.GetString(Encoding.UTF8.GetBytes(str2)));
         }
+
         internal void SendData(Stream http, Stream filestream, string p2vUri, long filesize)
         {
             byte[] block = new byte[MB];
@@ -379,12 +388,13 @@ namespace XenOvfTransport
                     OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileProgress, "SendData Start", "Disk Copy", p, (ulong)filesize));
                     if (Cancel)
                     {
-                        Log.Warning("OVF.Tools.Http.SendData IMPORT CANCELED: resulting vm may be bad.");
+                        log.Warn("OVF.Tools.Http.SendData IMPORT CANCELED: resulting vm may be bad.");
                         throw new OperationCanceledException("Import canceled.");
                     }
                     http.Write(block, 0, n);
                     p += (ulong)n;
-                    if (p >= (ulong)filesize) break;
+                    if (p >= (ulong)filesize)
+                        break;
                 }
                 //catch (VhdException vhdex)
                 //{
@@ -397,7 +407,7 @@ namespace XenOvfTransport
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("OVF.Tools.Http.SendData FAILED {0}", ex.Message);
+                    log.ErrorFormat("OVF.Tools.Http.SendData FAILED {0}", ex.Message);
                     throw ex;
                 }
             }

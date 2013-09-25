@@ -41,10 +41,13 @@ using XenOvf.Definitions;
 using XenOvf.Utilities;
 using XenAPI;
 
+
 namespace XenOvfTransport
 {
     public class Export : XenOvfTransportBase
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private const long KB = 1024;
         private const long MB = (KB * 1024);
         private const long GB = (MB * 1024);
@@ -87,7 +90,7 @@ namespace XenOvfTransport
 
             try
             {
-                Log.Audit("Export: {0}, {1}", ovfname, targetPath);
+                log.InfoFormat("Export: {0}, {1}", ovfname, targetPath);
 
                 #region GET VM Reference
                 XenRef<VM> vmRef = null;
@@ -98,7 +101,7 @@ namespace XenOvfTransport
                 }
                 catch
                 {
-                    Log.Warning("VM not found as uuid: {0}, trying as name-label", vmUuid);
+                    log.WarnFormat("VM not found as uuid: {0}, trying as name-label", vmUuid);
                     vmRef = null;
                 }
                 if (vmRef == null)
@@ -107,17 +110,14 @@ namespace XenOvfTransport
 					{
 						List<XenRef<VM>> vmRefs = VM.get_by_name_label(xenSession, vmUuid);
 						vmRef = vmRefs[0];
-						Log.Trace("{0} VM(s) found by label {1}", vmRefs.Count, vmUuid);
+					    log.DebugFormat("{0} VM(s) found by label {1}", vmRefs.Count, vmUuid);
 						if (vmRefs.Count > 1)
-						{
-							Log.Warning("Only exporting FIRST VM with name {0}", vmUuid);
-						}
-
+						log.WarnFormat("Only exporting FIRST VM with name {0}", vmUuid);
 					}
 					catch
 					{
 						var msg = string.Format(Messages.ERROR_VM_NOT_FOUND, vmUuid);
-						Log.Error(msg);
+						log.Error(msg);
 						throw new Exception(msg);
 					}
                 }
@@ -129,7 +129,7 @@ namespace XenOvfTransport
                 {
                 	var message = string.Format(Messages.ERROR_VM_NOT_HALTED, vm.Name);
                 	OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.ExportProgress, "Export", message));
-                    Log.Info(message);
+                    log.Info(message);
                     throw new Exception(message);
                 }
 
@@ -261,12 +261,14 @@ namespace XenOvfTransport
                         }
                         catch (Exception ex)
                         {
-							Log.Info("Export: VDI Skipped: {0}: {1}", vdi.opaque_ref, ex.Message);
+							log.InfoFormat("Export: VDI Skipped: {0}: {1}", vdi.opaque_ref, ex.Message);
                         }
                         finally
                         {
-                            if (source != null) source.Close();
-                            if (fs != null) fs.Close();
+                            if (source != null)
+                                source.Close();
+                            if (fs != null)
+                                fs.Close();
                         }
                     }
                 }
@@ -339,7 +341,7 @@ namespace XenOvfTransport
             {
 				if (ex is OperationCanceledException)
 					throw;
-                Log.Error(Messages.ERROR_EXPORT_FAILED);
+                log.Error(Messages.ERROR_EXPORT_FAILED);
                 throw new Exception(Messages.ERROR_EXPORT_FAILED, ex);
             }
             return ovfEnv;
@@ -365,14 +367,18 @@ namespace XenOvfTransport
                     {
                         uuid = VDI.get_uuid(XenSession, vdiuuid);
                         destinationFilename = Path.Combine(targetPath, string.Format(@"{0}.vhd", uuid));
+                        
                         if (File.Exists(destinationFilename))
                         {
                             destinationFilename = Path.Combine(targetPath, string.Format(@"{0}_{1}.vhd", uuid, Thread.CurrentThread.ManagedThreadId));
                             OVF.UpdateFilename(ovfEnv, string.Format(@"{0}.vhd", uuid), string.Format(@"{0}_{1}.vhd", uuid, Thread.CurrentThread.ManagedThreadId));
-                            Log.Info("{0}: VHD Name collision, renamed {0} to {1}", label, string.Format(@"{0}.vhd", uuid), string.Format(@"{0}_{1}.vhd", uuid, Thread.CurrentThread.ManagedThreadId));
+                            log.InfoFormat("{0}: VHD Name collision, renamed {1}.vhd to {1}_{2}.vhd",
+                                           label, uuid, Thread.CurrentThread.ManagedThreadId);
                         }
+
                         OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.MarqueeOn, "Export", string.Format(Messages.FILES_TRANSPORT_SETUP, uuid + ".vhd")));
-						using (Stream source = m_iscsi.Connect(XenSession, uuid, true))
+						
+                        using (Stream source = m_iscsi.Connect(XenSession, uuid, true))
                         {
                             OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.MarqueeOff, "Export", ""));
                             using (FileStream fs = new FileStream(destinationFilename, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None))
@@ -401,7 +407,7 @@ namespace XenOvfTransport
 						if (ex is OperationCanceledException)
 							throw;
                         var msg = string.Format(Messages.ISCSI_COPY_ERROR, destinationFilename);
-                        Log.Error(msg);
+                        log.Error(msg);
                         OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.Failure, "Export", msg, ex));
                         throw new Exception(msg, ex);
                     }

@@ -34,7 +34,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using DiscUtils.Iscsi;
-using XenOvf.Utilities;
 using XenAPI;
 using SuppressMessage = System.Diagnostics.CodeAnalysis.SuppressMessageAttribute;
 
@@ -43,6 +42,8 @@ namespace XenOvfTransport
 {
     public class iSCSI
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private const long KB = 1024;
         private const long MB = (KB * 1024);
         private const long GB = (MB * 1024);
@@ -119,16 +120,16 @@ namespace XenOvfTransport
 
                 try
                 {
-                    Log.Debug(Messages.FILES_TRANSPORT_SETUP, vdiuuid);
+                    log.DebugFormat(Messages.FILES_TRANSPORT_SETUP, vdiuuid);
                     TargetAddress ta = new TargetAddress(ipaddress, ipport, targetGroupTag);
                     TargetInfo[] targets = initiator.GetTargets(ta);
-                    Log.Info("iSCSI.Connect found {0} targets, connecting to: {1}", targets.Length, targets[0].Name);
+                    log.InfoFormat("iSCSI.Connect found {0} targets, connecting to: {1}", targets.Length, targets[0].Name);
                     _iscsisession = initiator.ConnectTo(targets[0]);
                     iSCSIConnected = true;
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("{0} {1}", Messages.ISCSI_ERROR, ex.Message);
+                    log.ErrorFormat("{0} {1}", Messages.ISCSI_ERROR, ex.Message);
                     Thread.Sleep(new TimeSpan(0, 0, 5));
                     iSCSIConnectRetry--;
                 }
@@ -148,7 +149,7 @@ namespace XenOvfTransport
                     long lunIdx = Convert.ToInt32(ParsePluginRecordFor("iscsi_lun"));
                     lun = luns[lunIdx].Lun;
                 }
-                Log.Info("iSCSI.Connect found {0} luns, looking for block storage.", luns.Length);
+                log.InfoFormat("iSCSI.Connect found {0} luns, looking for block storage.", luns.Length);
                 foreach (LunInfo iLun in luns)
                 {
                     if (iLun.DeviceType == LunClass.BlockStorage)
@@ -161,10 +162,10 @@ namespace XenOvfTransport
             }
             catch (Exception)
             {
-                Log.Error("Could not determin LUN");
+                log.Error("Could not determin LUN");
                 throw;
             }
-            Log.Info("iSCSI.Connect, found on lun: {0}", lun);
+            log.InfoFormat("iSCSI.Connect, found on lun: {0}", lun);
             try
             {
                 iDisk = _iscsisession.OpenDisk(lun);
@@ -173,7 +174,7 @@ namespace XenOvfTransport
             }
             catch (Exception ex)
             {   
-                Log.Error("{0} {1}", Messages.ISCSI_ERROR_CANNOT_OPEN_DISK, ex.Message);
+                log.ErrorFormat("{0} {1}", Messages.ISCSI_ERROR_CANNOT_OPEN_DISK, ex.Message);
                 throw new Exception(Messages.ISCSI_ERROR_CANNOT_OPEN_DISK, ex);
             }
         }
@@ -189,7 +190,7 @@ namespace XenOvfTransport
             }
             catch (Exception exn)
             {
-                Log.Warning("Exception when disposing iDisk", exn);
+                log.WarnFormat("Exception when disposing iDisk {0}", exn);
             }
             try
             {
@@ -197,9 +198,9 @@ namespace XenOvfTransport
                     _iscsisession.Dispose();
                 _iscsisession = null;
             }
-            catch (Exception exn)
+            catch (Exception)
             {
-                Log.Warning("Exception when disposing iscsisession", exn);
+                log.WarnFormat("Exception when disposing iscsisession");
             }
             StopiScsiTarget(xenSession);
         }
@@ -207,7 +208,7 @@ namespace XenOvfTransport
         [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "Logging mechanism")]
         public void Copy(Stream source, Stream destination, string filename, bool shouldHash)
         {
-            Log.Info("Started copying {0} bytes to {1} via iSCSI.", source.Length, filename);
+            log.InfoFormat("Started copying {0} bytes to {1} via iSCSI.", source.Length, filename);
 
             int bytesRead = 0;
             long offset = 0;
@@ -215,7 +216,7 @@ namespace XenOvfTransport
             _bytestotal = (ulong)source.Length;
 
             string updatemsg = string.Format(Messages.ISCSI_COPY_PROGRESS, filename);
-            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileStart, "SendData Start", updatemsg, (ulong)0, (ulong)_bytestotal));
+            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileStart, "SendData Start", updatemsg, 0, _bytestotal));
 
             // Create a hash algorithm to compute the hash from separate blocks during the copy.
             using (var hashAlgorithm = System.Security.Cryptography.HashAlgorithm.Create(_hashAlgorithmName))
@@ -224,7 +225,7 @@ namespace XenOvfTransport
                 {
                     if (Cancel)
                     {
-                        Log.Warning(Messages.ISCSI_COPY_CANCELLED, filename);
+                        log.WarnFormat(Messages.ISCSI_COPY_CANCELLED, filename);
                         throw new OperationCanceledException(string.Format(Messages.ISCSI_COPY_CANCELLED, filename));
                     }
 
@@ -261,7 +262,7 @@ namespace XenOvfTransport
                     catch (Exception ex)
                     {
                         var message = string.Format(Messages.ISCSI_COPY_ERROR, filename);
-                        Log.Warning(message);
+                        log.Warn(message);
                         throw new Exception(message, ex);
                     }
                 }
@@ -282,22 +283,22 @@ namespace XenOvfTransport
             }
 
             destination.Flush();
-            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileComplete, "SendData Completed", updatemsg, (ulong)_bytescopied, (ulong)_bytestotal));
+            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileComplete, "SendData Completed", updatemsg, _bytescopied, _bytestotal));
 
-            Log.Info("Finished copying {0} bytes to {1} via iSCSI.", source.Length, filename);
+            log.InfoFormat("Finished copying {0} bytes to {1} via iSCSI.", source.Length, filename);
         }
 
         [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "Logging mechanism")]
         public void Verify(Stream target, string filename)
         {
-            Log.Info("Started verifying {0} bytes in {1} after copy via iSCSI.", _bytescopied, filename);
+            log.InfoFormat("Started verifying {0} bytes in {1} after copy via iSCSI.", _bytescopied, filename);
 
             int bytesRead = 0;
             long offset = 0;
             long limit = (long)_bytescopied;
 
             string updatemsg = string.Format(Messages.ISCSI_VERIFY_PROGRESS, filename);
-            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileStart, "SendData Start", updatemsg, (ulong)0, (ulong)limit));
+            OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileStart, "SendData Start", updatemsg, 0, (ulong)limit));
 
             // Create a hash algorithm to compute the hash from separate blocks in the same way as Copy().
             using (var hashAlgorithm = System.Security.Cryptography.HashAlgorithm.Create(_hashAlgorithmName))
@@ -306,7 +307,7 @@ namespace XenOvfTransport
                 {
                     if (Cancel)
                     {
-                        Log.Warning(Messages.ISCSI_VERIFY_CANCELLED);
+                        log.Warn(Messages.ISCSI_VERIFY_CANCELLED);
                         throw new OperationCanceledException(Messages.ISCSI_VERIFY_CANCELLED);
                     }
 
@@ -334,7 +335,7 @@ namespace XenOvfTransport
                     catch (Exception ex)
                     {
                         var message = string.Format(Messages.ISCSI_VERIFY_ERROR, filename);
-                        Log.Warning("{0} {1}", message, ex.Message);
+                        log.WarnFormat("{0} {1}", message, ex.Message);
                         throw new Exception(message, ex);
                     }
                 }
@@ -351,24 +352,23 @@ namespace XenOvfTransport
                 // Compare targetHash with copyHash.
                 if (!System.Linq.Enumerable.SequenceEqual(_copyHash, hashAlgorithm.Hash))
                 {
-                    Log.Error(Messages.ISCSI_VERIFY_INVALID);
+                    log.Error(Messages.ISCSI_VERIFY_INVALID);
                     throw new Exception(Messages.ISCSI_VERIFY_INVALID);
                 }
             }
 
             OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileComplete, "SendData Completed", updatemsg, (ulong)offset, (ulong)limit));
 
-            Log.Info("Finished verifying {0} bytes in {1} after copy via iSCSI.", target.Length, filename);
+            log.InfoFormat("Finished verifying {0} bytes in {1} after copy via iSCSI.", target.Length, filename);
         }
 
         public void WimCopy(Stream source, Stream destination, string filename, bool close, ulong fileindex, ulong filecount)
         {
-            Log.Info("iSCSI.Copy copying {0} bytes.", source.Length);
+            log.InfoFormat("iSCSI.Copy copying {0} bytes.", source.Length);
             _bytestotal = (ulong)source.Length;
             ulong zerosskipped = 0;
             byte[] block = new byte[2 * MB];
             ulong p = 0;
-            int n = 0;
 			
             string updatemsg = string.Format(Messages.ISCSI_WIM_PROGRESS_FORMAT, fileindex, filecount, filename);
 			OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileStart, "SendData Start", updatemsg, 0, _bytestotal));
@@ -377,8 +377,9 @@ namespace XenOvfTransport
             {
                 try
                 {
-                    n = source.Read(block, 0, block.Length);
-                    if (n <= 0) break;
+                    int n = source.Read(block, 0, block.Length);
+                    if (n <= 0)
+                        break;
                     if (!IsZeros(block))
                     {
                         destination.Seek((long)p, SeekOrigin.Begin);
@@ -390,12 +391,13 @@ namespace XenOvfTransport
                     }
                     if (Cancel)
                     {
-                        Log.Warning(Messages.ISCSI_COPY_CANCELLED, filename);
+                        log.WarnFormat(Messages.ISCSI_COPY_CANCELLED, filename);
                         throw new OperationCanceledException(string.Format(Messages.ISCSI_COPY_CANCELLED, filename));
                     }
                     p += (ulong)n;
                     _bytescopied = p;
-                    if (p >= (ulong)source.Length) break;
+                    if (p >= (ulong)source.Length)
+                        break;
                     OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileProgress, "SendData Start", updatemsg, _bytescopied, _bytestotal));
                 }
                 catch (Exception ex)
@@ -403,7 +405,7 @@ namespace XenOvfTransport
 					if (ex is OperationCanceledException)
 						throw;
                     var message = string.Format(Messages.ISCSI_COPY_ERROR, filename);
-                    Log.Warning(message);
+                    log.Warn(message);
                     throw new Exception(message, ex);
                 }
             }
@@ -414,7 +416,7 @@ namespace XenOvfTransport
                 if (destination != null) destination.Close();
             }
 			OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileComplete, "SendData Completed", updatemsg, _bytescopied, _bytestotal));
-            Log.Info("iSCSI.Copy done with copy.");
+            log.Info("iSCSI.Copy done with copy.");
         }
 
         /// <summary>
@@ -496,7 +498,7 @@ namespace XenOvfTransport
             }
             catch (Exception ex)
             {
-                Log.Error("{0} {1}", Messages.ISCSI_START_ERROR, ex.Message);
+                log.ErrorFormat("{0} {1}", Messages.ISCSI_START_ERROR, ex.Message);
                 throw new Exception(Messages.ISCSI_START_ERROR, ex);
             }
         }
@@ -512,7 +514,7 @@ namespace XenOvfTransport
                 }
                 catch ( Exception ex)
                 {
-                    Log.Debug("iScsiSession dispose failed: {0}, continuing", ex.Message);
+                    log.DebugFormat("iScsiSession dispose failed: {0}, continuing", ex.Message);
                 }
             }
 
@@ -522,16 +524,16 @@ namespace XenOvfTransport
             args["record_handle"] = ParsePluginRecordFor("record_handle");
             try
             {
-                string pluginreturn = Host.call_plugin(xenSession, host, "transfer", "unexpose", args);
+                Host.call_plugin(xenSession, host, "transfer", "unexpose", args);
             }
             catch (Exception ex)
             {
-                Log.Warning("{0} {1}", Messages.ISCSI_SHUTDOWN_ERROR, ex.Message);
+                log.WarnFormat("{0} {1}", Messages.ISCSI_SHUTDOWN_ERROR, ex.Message);
                 throw new Exception(Messages.ISCSI_SHUTDOWN_ERROR, ex);
             }
 
             InitializeiSCSI();
-            Log.Debug("iSCSI.StopScsiTarget: iSCSI Target Destroyed.");
+            log.Debug("iSCSI.StopScsiTarget: iSCSI Target Destroyed.");
         }
 
         private void InitializeiSCSI()
