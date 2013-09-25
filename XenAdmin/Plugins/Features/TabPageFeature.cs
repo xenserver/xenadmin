@@ -677,7 +677,7 @@ namespace XenAdmin.Plugins
                     return;
 
                 string secret_uuid = pool.GetXCPluginSecret(PluginDescriptor.Name, state.Obj);
-                if (secret_uuid != null && secret_uuid != "")
+                if (!string.IsNullOrEmpty(secret_uuid))
                 {
                     XenRef<Secret> secret_ref = Secret.get_by_uuid(session, secret_uuid);
                     TryToDestroySecret(session, secret_ref.opaque_ref);

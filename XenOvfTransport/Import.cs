@@ -201,7 +201,7 @@ namespace XenOvfTransport
                 }
                 string fileuuids = null;
                 SecuritySection_Type[] securitysection = OVF.FindSections<SecuritySection_Type>((ovfObj).Sections);
-                if (securitysection != null || securitysection.Length >= 0)
+                if (securitysection != null && securitysection.Length >= 0)
                 {
                     foreach (Security_Type securitytype in securitysection[0].Security)
                     {
@@ -1119,7 +1119,7 @@ namespace XenOvfTransport
                 }
                 vmUuid = Guid.NewGuid().ToString();
 
-                if (system.System.VirtualSystemType != null && system.System.VirtualSystemType.Value != null && system.System.VirtualSystemType.Value.Length > 0)
+                if (system.System.VirtualSystemType != null && !string.IsNullOrEmpty(system.System.VirtualSystemType.Value))
                 {
                     systemType = system.System.VirtualSystemType.Value;
                 }
@@ -1377,7 +1377,7 @@ namespace XenOvfTransport
                         Dictionary<XenRef<Network>, Network> networks = Network.get_all_records(xenSession);
                         if (rasd.Connection != null && rasd.Connection.Length > 0)
                         {
-                            if (rasd.Connection[0].Value != null && rasd.Connection[0].Value.Length > 0)
+                            if (!string.IsNullOrEmpty(rasd.Connection[0].Value))
                             {
                                 // Ignore the NetworkSection/Network
                                 // During Network Selection the UUID for Network was set in Connection Field
@@ -2099,9 +2099,7 @@ namespace XenOvfTransport
             List<RASD_Type> connectedRasds = new List<RASD_Type>();
             foreach (RASD_Type rasd in rasds)
             {
-                if (rasd.Parent != null && 
-                    rasd.Parent.Value != null &&
-                    rasd.Parent.Value.Length > 0 )
+                if (rasd.Parent != null && !string.IsNullOrEmpty(rasd.Parent.Value) )
                 {
                     string parent = rasd.Parent.Value.Replace(@"\", "");
                     string instance = instanceId.Replace(@"\", "");

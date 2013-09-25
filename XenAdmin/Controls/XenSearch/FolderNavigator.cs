@@ -52,7 +52,7 @@ namespace XenAdmin.Controls.XenSearch
         {
             set
             {
-                if (value == null || value == String.Empty)
+                if (string.IsNullOrEmpty(value))
                     this.Visible = false;
                 else
                 {

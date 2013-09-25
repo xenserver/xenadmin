@@ -376,14 +376,14 @@ namespace XenOvf.Utilities
                 string ovfname = ovffilename;
                 string ext = Path.GetExtension(ovffilename);
 
-                if (ext != null && ext.Length > 0 && (ext.ToLower().EndsWith("gz") || ext.ToLower().EndsWith("bz2")))
+                if (!string.IsNullOrEmpty(ext) && (ext.ToLower().EndsWith("gz") || ext.ToLower().EndsWith("bz2")))
                 {
                     ovfname = Path.GetFileNameWithoutExtension(ovffilename);
                 }
 
                 ext = Path.GetExtension(ovfname);
 
-                if (ext != null && ext.Length > 0 && ext.ToLower().EndsWith("ova"))
+                if (!string.IsNullOrEmpty(ext) && ext.ToLower().EndsWith("ova"))
                 {
                     ovfname = Path.GetFileNameWithoutExtension(ovfname) + ".ovf";
                 }
@@ -468,8 +468,7 @@ namespace XenOvf.Utilities
                             if (!(strvalue != null &&
                                   strvalue.Length > 0 &&
                                   strvalue[0] != null &&
-                                  strvalue[0].Value != null &&
-                                  strvalue[0].Value.Length > 0))
+                                  !string.IsNullOrEmpty(strvalue[0].Value)))
                             {
                                 isValid = false;
                             }
@@ -480,8 +479,7 @@ namespace XenOvf.Utilities
                             if (!(msgtype != null &&
                                   msgtype.Length > 0 &&
                                   msgtype[0] != null &&
-                                  msgtype[0].Value != null &&
-                                  msgtype[0].Value.Length > 0))
+                                  !string.IsNullOrEmpty(msgtype[0].Value)))
                             {
                                 isValid = false;
                             }

@@ -174,14 +174,14 @@ namespace XenOvfTransport
                 string vmtype = string.Format(typeformat, "hvm", "3.0", "unknown");
                 if (vm.HVM_boot_policy != null && vm.HVM_boot_policy == Properties.Settings.Default.xenBootOptions)
                 {
-                    if (vm.domarch != null && vm.domarch.Length > 0)
+                    if (!string.IsNullOrEmpty(vm.domarch))
                     {
                         vmtype = string.Format(typeformat, vm.domarch, "3.0", "unknown");
                     }
                 }
                 else
                 {
-                    if (vm.domarch != null && vm.domarch.Length > 0)
+                    if (!string.IsNullOrEmpty(vm.domarch))
                     {
                         vmtype = string.Format(typeformat, "xen", "3.0", vm.domarch);
                     }
@@ -228,9 +228,7 @@ namespace XenOvfTransport
                 foreach (XenRef<VBD> vbdref in vbdlist)
                 {
                     VBD vbd = VBD.get_record(xenSession, vbdref);
-                    XenRef<VDI> vdi = null;
-                    Stream source = null;
-                    FileStream fs = null;
+
                     if (vbd.type == vbd_type.CD)
                     {
                         string rasdid = OVF.AddCDROM(ovfEnv, vsId, vbd.uuid, OVF.GetContentMessage("RASD_16_CAPTION"), OVF.GetContentMessage("RASD_16_DESCRIPTION"));
@@ -240,7 +238,7 @@ namespace XenOvfTransport
                     {
                         try
                         {
-                            vdi = VBD.get_VDI(xenSession, vbdref);
+                            XenRef<VDI> vdi = VBD.get_VDI(xenSession, vbdref);
                             if (vdi != null && !string.IsNullOrEmpty(vdi.opaque_ref) && !(vdi.opaque_ref.ToLower().Contains("null")))
                             {
                                 _vdiRefs.Add(vdi);
@@ -261,14 +259,7 @@ namespace XenOvfTransport
                         }
                         catch (Exception ex)
                         {
-							log.InfoFormat("Export: VDI Skipped: {0}: {1}", vdi.opaque_ref, ex.Message);
-                        }
-                        finally
-                        {
-                            if (source != null)
-                                source.Close();
-                            if (fs != null)
-                                fs.Close();
+                            log.InfoFormat("Export: VBD Skipped: {0}: {1}", vbdref, ex.Message);
                         }
                     }
                 }
@@ -291,7 +282,7 @@ namespace XenOvfTransport
                         }
                     }
                 }
-                if (vm.HVM_boot_policy != null && vm.HVM_boot_policy.Length > 0)
+                if (!string.IsNullOrEmpty(vm.HVM_boot_policy))
                 {
                     OVF.AddOtherSystemSettingData(ovfEnv, vsId, "HVM_boot_policy", vm.HVM_boot_policy, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_2"));
                 }
@@ -309,27 +300,27 @@ namespace XenOvfTransport
                     }
 					OVF.AddOtherSystemSettingData(ovfEnv, vsId, "platform", sb.ToString(), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_3"));
                 }
-                if (vm.PV_args != null && vm.PV_args.Length > 0)
+                if (!string.IsNullOrEmpty(vm.PV_args))
                 {
 					OVF.AddOtherSystemSettingData(ovfEnv, vsId, "PV_args", vm.PV_args, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
                 }
-                if (vm.PV_bootloader != null && vm.PV_bootloader.Length > 0)
+                if (!string.IsNullOrEmpty(vm.PV_bootloader))
                 {
 					OVF.AddOtherSystemSettingData(ovfEnv, vsId, "PV_bootloader", vm.PV_bootloader, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
                 }
-                if (vm.PV_bootloader_args != null && vm.PV_bootloader_args.Length > 0)
+                if (!string.IsNullOrEmpty(vm.PV_bootloader_args))
                 {
 					OVF.AddOtherSystemSettingData(ovfEnv, vsId, "PV_bootloader_args", vm.PV_bootloader_args, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
                 }
-                if (vm.PV_kernel != null && vm.PV_kernel.Length > 0)
+                if (!string.IsNullOrEmpty(vm.PV_kernel))
                 {
 					OVF.AddOtherSystemSettingData(ovfEnv, vsId, "PV_kernel", vm.PV_kernel, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
                 }
-                if (vm.PV_legacy_args != null && vm.PV_legacy_args.Length > 0)
+                if (!string.IsNullOrEmpty(vm.PV_legacy_args))
                 {
 					OVF.AddOtherSystemSettingData(ovfEnv, vsId, "PV_legacy_args", vm.PV_legacy_args, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
                 }
-                if (vm.PV_ramdisk != null && vm.PV_ramdisk.Length > 0)
+                if (!string.IsNullOrEmpty(vm.PV_ramdisk))
                 {
 					OVF.AddOtherSystemSettingData(ovfEnv, vsId, "PV_ramdisk", vm.PV_ramdisk, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
                 }

@@ -55,7 +55,7 @@ namespace XenAdmin.Core
 
         private ComparableAddress(string address)
         {
-            System.Diagnostics.Trace.Assert(address != null && address != String.Empty);  // caught in TryParse()
+            System.Diagnostics.Trace.Assert(!string.IsNullOrEmpty(address));  // caught in TryParse()
             addressString = address;
         }
 
@@ -72,7 +72,7 @@ namespace XenAdmin.Core
         public static bool TryParse(String candidate, bool allowPartialIP, bool allowName, out ComparableAddress address)
         {
             address = null;
-            if (candidate == null || candidate == String.Empty)
+            if (string.IsNullOrEmpty(candidate))
                 return false;
 
             IPAddress ipAddress;

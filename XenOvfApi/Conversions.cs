@@ -394,7 +394,7 @@ namespace XenOvf
             string line = sr.ReadLine();
             while (true)
             {
-                if (line != null && line.Length > 0 && line.Contains("="))
+                if (!string.IsNullOrEmpty(line) && line.Contains("="))
                 {
                     string[] vmxpair = line.Split(new char[] { '=' });
                     mappings.Add(vmxpair[0].Trim(), vmxpair[1].Replace("\"","").Trim());
@@ -958,8 +958,7 @@ namespace XenOvf
                                 AddCDROM(env, vsId, diskId, _ovfrm.GetString("RASD_16_CAPTION"), _ovfrm.GetString("RASD_16_ELEMENTNAME"));
                                 if (loc.pathname != null &&
                                     loc.pathname.absolute != null &&
-                                    loc.pathname.absolute.value != null &&
-                                    loc.pathname.absolute.value.Length > 0)
+                                    !string.IsNullOrEmpty(loc.pathname.absolute.value))
                                 {
                                     AddFileReference(env, lang, Path.GetFileName(loc.pathname.absolute.value), diskId, 0, Properties.Settings.Default.isoFileFormatURI);
                                     UpdateResourceAllocationSettingData(env, vsId, diskId, "HostResource", string.Format(Properties.Settings.Default.hostresource, diskId));

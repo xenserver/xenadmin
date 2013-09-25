@@ -104,7 +104,7 @@ namespace XenAdmin.Actions
             settings["target"] = targetHost;
             settings["port"] = targetPort.ToString(System.Globalization.CultureInfo.InvariantCulture);
             settings["targetIQN"] = targetIQN;
-            if (this.chapUsername != null && this.chapUsername.Length > 0)
+            if (!string.IsNullOrEmpty(this.chapUsername))
             {
                 settings["chapuser"] = this.chapUsername;
                 settings["chappassword"] = this.chapPassword;

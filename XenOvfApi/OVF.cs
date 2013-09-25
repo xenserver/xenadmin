@@ -1156,7 +1156,7 @@ namespace XenOvf
             }
 
             RASD_Type rasd = new RASD_Type();
-            if (macAddress != null && macAddress.Length > 0)
+            if (!string.IsNullOrEmpty(macAddress))
             {
                 rasd.Address = new cimString(macAddress);
             }
@@ -1166,7 +1166,7 @@ namespace XenOvf
             rasd.Caption = new Caption(_ovfrm.GetString("RASD_10_CAPTION"));
             rasd.ConsumerVisibility = new ConsumerVisibility();
             rasd.ConsumerVisibility.Value = 3;
-            if (networkDescription != null && networkDescription.Length > 0)
+            if (!string.IsNullOrEmpty(networkDescription))
             {
                 rasd.Description = new cimString(networkDescription);
             }
@@ -1255,7 +1255,7 @@ namespace XenOvf
             OperatingSystemSection_Type oss = new OperatingSystemSection_Type();
             oss.id = osid;
             string info = null;
-            if (description != null && description.Length > 0)
+            if (!string.IsNullOrEmpty(description))
             {
                 oss.Description = new Msg_Type(AddToStringSection(ovfEnv, lang, description), description);
             }
@@ -1264,7 +1264,7 @@ namespace XenOvf
                 info = _ovfrm.GetString("SECTION_OPERATINGSYSTEM_DESCRIPTION");
                 oss.Description = new Msg_Type(AddToStringSection(ovfEnv, lang, info), info);
             }
-            if (osInfo != null && osInfo.Length > 0)
+            if (!string.IsNullOrEmpty(osInfo))
             {
                 oss.Info = new Msg_Type(AddToStringSection(ovfEnv, lang, osInfo), osInfo);
             }
@@ -1921,7 +1921,7 @@ namespace XenOvf
             vssd.InstanceID = new cimString(Guid.NewGuid().ToString());
             vssd.VirtualSystemIdentifier = new cimString(identifier);
             vssd.VirtualSystemType = new cimString(systemtype);
-            if (description != null && description.Length > 0) // optional
+            if (!string.IsNullOrEmpty(description)) // optional
             {
                 vssd.Description = new cimString(description);
             }
@@ -2066,8 +2066,7 @@ namespace XenOvf
         {
             RASD_Type rasd = FindRasdById(ovfObj, vsId, rasdId);
             if (rasd.Connection != null && rasd.Connection.Length > 0 &&
-                rasd.Connection[0] != null && rasd.Connection[0].Value != null &&
-                rasd.Connection[0].Value.Length > 0)
+                rasd.Connection[0] != null && !string.IsNullOrEmpty(rasd.Connection[0].Value))
             {
                 if (rasd.Connection[0].Value.ToLower().Contains(prompt))
                 {
@@ -2395,7 +2394,7 @@ namespace XenOvf
                         else
                         {
                             string elementname = _ovfrm.GetString("RASD_UNKNOWN_ELEMENTNAME");
-                            if (_rasd.ElementName.Value != null && _rasd.ElementName.Value.Length > 0)
+                            if (!string.IsNullOrEmpty(_rasd.ElementName.Value))
                                 elementname = _rasd.ElementName.Value;
                             Log.Debug("OVF.RemoveRasd deleted: {0}:{1}", elementname, _rasd.InstanceID.Value);
                         }
@@ -3109,7 +3108,7 @@ namespace XenOvf
 
             foreach (RASD_Type rasd in rasdList)
             {
-                if (macAddress != null && macAddress.Length > 0)
+                if (!string.IsNullOrEmpty(macAddress))
                 {
                     rasd.Address = new cimString(macAddress);
                 }
@@ -4202,7 +4201,7 @@ namespace XenOvf
 		public static string FindStringsMessage(EnvelopeType ovfObj, string lang, Msg_Type msg)
         {
             string message = "";
-            if (msg.msgid != null && msg.msgid.Length > 0)
+            if (!string.IsNullOrEmpty(msg.msgid))
             {
                 if (lang == null)
                 {
@@ -4210,8 +4209,7 @@ namespace XenOvf
                 }
                 message = FindStringsMessage(ovfObj, lang, msg.msgid);
             }
-            if ((message == "" || message == "Empty") &&
-                 msg.Value != null && msg.Value.Length > 0)
+            if ((message == "" || message == "Empty") && !string.IsNullOrEmpty(msg.Value))
             {
                 message = msg.Value;
             }
@@ -5246,8 +5244,7 @@ namespace XenOvf
             RASD_Type rasd = FindRasdById(ovfObj, vsId, rasdId);
 
             if (rasd.Connection != null && rasd.Connection.Length > 0 &&
-                rasd.Connection[0] != null && rasd.Connection[0].Value != null &&
-                rasd.Connection[0].Value.Length > 0)
+                rasd.Connection[0] != null && !string.IsNullOrEmpty(rasd.Connection[0].Value))
             {
                 StringBuilder sb = new StringBuilder();
                 if (rasd.Connection[0].Value.ToLower().Contains(prompt))
@@ -5451,7 +5448,7 @@ namespace XenOvf
         [SecurityPermission(SecurityAction.LinkDemand)]
         public static object Deserialize(string ovfxml)
         {
-            if (ovfxml != null && ovfxml.Length > 0)
+            if (!string.IsNullOrEmpty(ovfxml))
             {
                 return Tools.Deserialize(ovfxml, typeof(EnvelopeType));
             }

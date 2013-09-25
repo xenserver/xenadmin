@@ -293,8 +293,7 @@ namespace XenOvf
                     {
                         foreach (XenOvf.Definitions.XENC.DataReference dataref in st.ReferenceList.Items)
                         {
-                            if (dataref.ValueType != null && dataref.ValueType.Length > 0 &&
-                                dataref.ValueType.Contains(id))
+                            if (!string.IsNullOrEmpty(dataref.ValueType) && dataref.ValueType.Contains(id))
                             {
                                 return true;  // no need to go anyfurther, nicer just to leave now.
                             }
