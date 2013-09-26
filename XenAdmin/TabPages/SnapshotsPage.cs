@@ -1172,32 +1172,17 @@ namespace XenAdmin.TabPages
 
         private void SetContextMenuMultiSelection()
         {
-            //Take snap
-            contextMenuStrip.Items[0].Available = false;
-            //Revert
-            contextMenuStrip.Items[1].Available = false;
-            //---
-            contextMenuStrip.Items[2].Available = false;
-            //New VM
-            contextMenuStrip.Items[3].Available = false;
-            //New template
-            contextMenuStrip.Items[4].Available = false;
-            //Export
-            contextMenuStrip.Items[5].Available = false;
-            //Archive now
-            contextMenuStrip.Items[6].Available = CanArchive;
-            //---
-            contextMenuStrip.Items[7].Available = false;
-            //View
-            contextMenuStrip.Items[8].Available = true;
-            //SortBy
-            contextMenuStrip.Items[9].Available = false;
-            //------
-            contextMenuStrip.Items[10].Available = true;
-            //Delete
-            contextMenuStrip.Items[11].Available = true;
-            //Properties
-            contextMenuStrip.Items[12].Available = false;
+            contextMenuStrip.Items.Clear();
+
+            if (CanArchive)
+                contextMenuStrip.Items.Add(archiveToolStripMenuItem);
+
+            contextMenuStrip.Items.AddRange(new ToolStripItem[]
+                {
+                    viewToolStripMenuItem,
+                    sortToolStripSeparator,
+                    deleteToolStripMenuItem
+                });
         }
 
         private bool CanArchive
@@ -1211,65 +1196,52 @@ namespace XenAdmin.TabPages
 
         private void SetContextMenuSnapshot()
         {
-            //Take snap
-            contextMenuStrip.Items[0].Available = false;
-            //Revert
-            contextMenuStrip.Items[1].Available = true && m_TreeViewEnabled;
-            //---
-            contextMenuStrip.Items[2].Available = true && m_TreeViewEnabled;
-            //New VM
-            contextMenuStrip.Items[3].Available = true;
-            //New template
-            contextMenuStrip.Items[4].Available = true;
-            //Export
-            contextMenuStrip.Items[5].Available = true;
-            //Archive now
-            contextMenuStrip.Items[6].Available = CanArchive;
-            //---
-            contextMenuStrip.Items[7].Available = true;
-            //View
-            contextMenuStrip.Items[8].Available = true;
-            //SortBy
-            contextMenuStrip.Items[9].Available = toolStripButtonListView.Checked;
-            //------
-            contextMenuStrip.Items[10].Available = true;
-            //Delete
-            contextMenuStrip.Items[11].Available = true;
-            //Properties
-            contextMenuStrip.Items[12].Available = true;
+            contextMenuStrip.Items.Clear();
+
+            if (m_TreeViewEnabled)
+            {
+                contextMenuStrip.Items.AddRange(new ToolStripItem[]
+                    {
+                        revertToolStripMenuItem,
+                        saveVMToolStripSeparator
+                    });
+            }
+            contextMenuStrip.Items.AddRange(new ToolStripItem[]
+                {
+                    saveVMToolStripMenuItem,
+                    saveTemplateToolStripMenuItem,
+                    exportToolStripMenuItem
+                });
+
+            if (CanArchive)
+                contextMenuStrip.Items.Add(archiveToolStripMenuItem);
+
+            contextMenuStrip.Items.AddRange(new ToolStripItem[]
+                {
+                    separatorDeleteToolStripSeparator,
+                    viewToolStripMenuItem
+                });
+
+            if (toolStripButtonListView.Checked)
+                contextMenuStrip.Items.Add(sortByToolStripMenuItem);
+
+            contextMenuStrip.Items.AddRange(new ToolStripItem[]
+                {
+                    sortToolStripSeparator,
+                    deleteToolStripMenuItem,
+                    propertiesToolStripMenuItem
+                });
         }
 
 
         private void SetContextMenuNoneSelected()
         {
-            //Take snap
-            contextMenuStrip.Items[0].Available = true;
-            //Revert
-            contextMenuStrip.Items[1].Available = false;
-            //---
-            contextMenuStrip.Items[2].Available = false;
-            //New VM
-            contextMenuStrip.Items[3].Available = false;
-            //New template
-            contextMenuStrip.Items[4].Available = false;
-            //Export
-            contextMenuStrip.Items[5].Available = false;
-            //Archive
-            contextMenuStrip.Items[6].Available = false;
-            //---
-            contextMenuStrip.Items[7].Available = false;
-            //View
-            if (this.VM.snapshots.Count > 0)
-                contextMenuStrip.Items[8].Available = true;
-            else contextMenuStrip.Items[8].Available = false;
-            //SortBy
-            contextMenuStrip.Items[9].Available = false;
-            //------
-            contextMenuStrip.Items[10].Available = false;
-            //Delete
-            contextMenuStrip.Items[11].Available = false;
-            //Properties
-            contextMenuStrip.Items[12].Available = false;
+            contextMenuStrip.Items.Clear();
+
+            contextMenuStrip.Items.Add(TakeSnapshotToolStripMenuItem);
+
+            if (VM.snapshots.Count > 0)
+                contextMenuStrip.Items.Add(viewToolStripMenuItem);
         }
 
 
