@@ -370,7 +370,7 @@
     <value>2</value>
   </data>
   <data name="sendCAD.Text" xml:space="preserve">
-    <value>Ctrl+Alt+Del の送信(&amp;E) (Ctrl+Alt+Ins)</value>
+    <value>Ctrl+Alt+Del の送信(&amp;A) (Ctrl+Alt+Ins)</value>
   </data>
   <data name="&gt;&gt;sendCAD.Name" xml:space="preserve">
     <value>sendCAD</value>
@@ -454,7 +454,7 @@
     <value>3</value>
   </data>
   <data name="scaleCheckBox.Text" xml:space="preserve">
-    <value>ウィンドウに合わせる(&amp;A)</value>
+    <value>ウィンドウに合わせる(&amp;E)</value>
   </data>
   <data name="&gt;&gt;scaleCheckBox.Name" xml:space="preserve">
     <value>scaleCheckBox</value>

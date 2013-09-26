@@ -370,7 +370,7 @@
     <value>2</value>
   </data>
   <data name="sendCAD.Text" xml:space="preserve">
-    <value>发送 Ctrl+Alt+Del(&amp;E) (Ctrl+Alt+Insert)</value>
+    <value>发送 Ctrl+Alt+Del(&amp;A) (Ctrl+Alt+Insert)</value>
   </data>
   <data name="&gt;&gt;sendCAD.Name" xml:space="preserve">
     <value>sendCAD</value>
@@ -454,7 +454,7 @@
     <value>3</value>
   </data>
   <data name="scaleCheckBox.Text" xml:space="preserve">
-    <value>缩放(&amp;A)</value>
+    <value>缩放(&amp;E)</value>
   </data>
   <data name="&gt;&gt;scaleCheckBox.Name" xml:space="preserve">
     <value>scaleCheckBox</value>

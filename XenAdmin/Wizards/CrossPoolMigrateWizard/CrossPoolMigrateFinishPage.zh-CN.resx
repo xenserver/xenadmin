@@ -142,7 +142,7 @@
     <value>3, 29</value>
   </data>
   <data name="m_dataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>608, 272</value>
+    <value>608, 217</value>
   </data>
   <data name="m_dataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -157,7 +157,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;m_dataGridView.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="m_labelIntro.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -192,10 +192,100 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;m_labelIntro.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
+  </data>
+  <data name="panelErrorsFound.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="labelError.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="labelError.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelError.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 0</value>
+  </data>
+  <data name="labelError.Size" type="System.Drawing.Size, System.Drawing">
+    <value>583, 23</value>
+  </data>
+  <data name="labelError.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelError.Text" xml:space="preserve">
+    <value>需要先解决发现的问题，然后再继续操作。</value>
+  </data>
+  <data name="labelError.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;labelError.Name" xml:space="preserve">
+    <value>labelError</value>
+  </data>
+  <data name="&gt;&gt;labelError.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelError.Parent" xml:space="preserve">
+    <value>panelErrorsFound</value>
+  </data>
+  <data name="&gt;&gt;labelError.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="pictureBoxError.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
+  <data name="pictureBoxError.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="pictureBoxError.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="pictureBoxError.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 0, 0</value>
+  </data>
+  <data name="pictureBoxError.Size" type="System.Drawing.Size, System.Drawing">
+    <value>25, 23</value>
+  </data>
+  <data name="pictureBoxError.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxError.Name" xml:space="preserve">
+    <value>pictureBoxError</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxError.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxError.Parent" xml:space="preserve">
+    <value>panelErrorsFound</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxError.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="panelErrorsFound.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 306</value>
+  </data>
+  <data name="panelErrorsFound.Size" type="System.Drawing.Size, System.Drawing">
+    <value>608, 23</value>
+  </data>
+  <data name="panelErrorsFound.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="panelErrorsFound.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;panelErrorsFound.Name" xml:space="preserve">
+    <value>panelErrorsFound</value>
+  </data>
+  <data name="&gt;&gt;panelErrorsFound.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelErrorsFound.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;panelErrorsFound.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -204,7 +294,7 @@
     <value>0, 0</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 332</value>
@@ -225,7 +315,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="m_labelIntro" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="m_dataGridView" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,20,Absolute,20" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,20,Percent,100,Absolute,8,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panelErrorsFound" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="m_labelIntro" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="m_dataGridView" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,20,Percent,100,Absolute,8,Absolute,29,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -236,16 +326,16 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 332</value>
   </data>
-  <data name="&gt;&gt;Column2.Name" xml:space="preserve">
-    <value>Column2</value>
-  </data>
-  <data name="&gt;&gt;Column2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;Column1.Name" xml:space="preserve">
     <value>Column1</value>
   </data>
   <data name="&gt;&gt;Column1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column2.Name" xml:space="preserve">
+    <value>Column2</value>
+  </data>
+  <data name="&gt;&gt;Column2.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

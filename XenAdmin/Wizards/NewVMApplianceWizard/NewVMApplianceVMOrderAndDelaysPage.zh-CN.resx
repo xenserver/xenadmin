@@ -169,11 +169,17 @@
   <data name="ColumnName.HeaderText" xml:space="preserve">
     <value>VM</value>
   </data>
+  <data name="ColumnName.MinimumWidth" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
   <metadata name="ColumnDescription.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="ColumnDescription.HeaderText" xml:space="preserve">
     <value>说明</value>
+  </data>
+  <data name="ColumnDescription.MinimumWidth" type="System.Int32, mscorlib">
+    <value>50</value>
   </data>
   <metadata name="ColumnOrder.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -181,11 +187,17 @@
   <data name="ColumnOrder.HeaderText" xml:space="preserve">
     <value>启动顺序</value>
   </data>
+  <data name="ColumnOrder.MinimumWidth" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
   <metadata name="ColumnStartDelay.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="ColumnStartDelay.HeaderText" xml:space="preserve">
     <value>延迟间隔</value>
+  </data>
+  <data name="ColumnStartDelay.MinimumWidth" type="System.Int32, mscorlib">
+    <value>50</value>
   </data>
   <data name="dataGridView1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

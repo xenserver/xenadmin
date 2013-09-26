@@ -402,25 +402,25 @@
   <data name="upsellPage1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        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
 </value>
   </data>
   <data name="upsellPage1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>3, 51</value>
   </data>
   <data name="upsellPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 84</value>
+    <value>243, 67</value>
   </data>
   <data name="upsellPage1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -471,13 +471,13 @@
     <value>Fill</value>
   </data>
   <data name="SRBlurb.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 93</value>
+    <value>3, 124</value>
   </data>
   <data name="SRBlurb.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
   </data>
   <data name="SRBlurb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 237</value>
+    <value>297, 206</value>
   </data>
   <data name="SRBlurb.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -497,6 +497,45 @@
   <data name="&gt;&gt;SRBlurb.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="deprecationBanner.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="deprecationBanner.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="deprecationBanner.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="deprecationBanner.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="deprecationBanner.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 5</value>
+  </data>
+  <data name="deprecationBanner.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="deprecationBanner.Size" type="System.Drawing.Size, System.Drawing">
+    <value>293, 38</value>
+  </data>
+  <data name="deprecationBanner.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="deprecationBanner.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;deprecationBanner.Name" xml:space="preserve">
+    <value>deprecationBanner</value>
+  </data>
+  <data name="&gt;&gt;deprecationBanner.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.DeprecationBanner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;deprecationBanner.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;deprecationBanner.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -504,7 +543,7 @@
     <value>234, 3</value>
   </data>
   <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>303, 330</value>
@@ -525,7 +564,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="upsellPage1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="SRBlurb" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="upsellPage1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="SRBlurb" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="deprecationBanner" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

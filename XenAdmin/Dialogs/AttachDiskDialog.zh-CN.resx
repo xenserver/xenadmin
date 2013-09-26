@@ -153,11 +153,11 @@
   <data name="&gt;&gt;DiskListTreeView.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="ReadOnlyCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="ReadOnlyCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="ReadOnlyCheckBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="ReadOnlyCheckBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -278,6 +278,15 @@
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="readonlyCheckboxToolTipContainer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="readonlyCheckboxToolTipContainer.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="readonlyCheckboxToolTipContainer.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="readonlyCheckboxToolTipContainer.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>

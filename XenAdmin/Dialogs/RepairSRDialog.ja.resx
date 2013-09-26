@@ -141,6 +141,10 @@
   <data name="&gt;&gt;ProgressSeparator.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ActionProgressBar.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
   <data name="&gt;&gt;ActionProgressBar.Name" xml:space="preserve">
     <value>ActionProgressBar</value>
   </data>
@@ -157,7 +161,6 @@
   <data name="CloseButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="CloseButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>

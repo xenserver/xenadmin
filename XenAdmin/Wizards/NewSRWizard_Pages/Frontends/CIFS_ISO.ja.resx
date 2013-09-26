@@ -127,13 +127,13 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="checkBoxUseDifferentUsername.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 120</value>
+    <value>17, 130</value>
   </data>
   <data name="checkBoxUseDifferentUsername.Size" type="System.Drawing.Size, System.Drawing">
     <value>178, 18</value>
   </data>
   <data name="checkBoxUseDifferentUsername.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="checkBoxUseDifferentUsername.Text" xml:space="preserve">
     <value>異なるユーザー名を使用する(&amp;D)</value>
@@ -166,7 +166,7 @@
     <value>72, 17</value>
   </data>
   <data name="labelCifsPassword.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="labelCifsPassword.Text" xml:space="preserve">
     <value>パスワード(&amp;W):</value>
@@ -196,7 +196,7 @@
     <value>75, 17</value>
   </data>
   <data name="labelCifsUsername.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="labelCifsUsername.Text" xml:space="preserve">
     <value>ユーザー名(&amp;U):</value>
@@ -223,7 +223,7 @@
     <value>262, 19</value>
   </data>
   <data name="textBoxCifsPassword.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;textBoxCifsPassword.Name" xml:space="preserve">
     <value>textBoxCifsPassword</value>
@@ -247,7 +247,7 @@
     <value>262, 19</value>
   </data>
   <data name="textBoxCifsUsername.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;textBoxCifsUsername.Name" xml:space="preserve">
     <value>textBoxCifsUsername</value>
@@ -265,13 +265,13 @@
     <value>False</value>
   </data>
   <data name="groupBoxLogin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 120</value>
+    <value>4, 130</value>
   </data>
   <data name="groupBoxLogin.Size" type="System.Drawing.Size, System.Drawing">
     <value>384, 82</value>
   </data>
   <data name="groupBoxLogin.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;groupBoxLogin.Name" xml:space="preserve">
     <value>groupBoxLogin</value>
@@ -295,13 +295,16 @@
     <value>NoControl</value>
   </data>
   <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 85</value>
+    <value>85, 86</value>
+  </data>
+  <data name="label22.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="label22.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 17</value>
   </data>
   <data name="label22.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="label22.Text" xml:space="preserve">
     <value>例: \\server\sharename</value>
@@ -318,26 +321,26 @@
   <data name="&gt;&gt;label22.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="labelCifsShareName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="labelCifsShareName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="labelCifsShareName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="labelCifsShareName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="labelCifsShareName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 59</value>
+    <value>3, 63</value>
   </data>
   <data name="labelCifsShareName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 10, 3</value>
+    <value>3, 3, 10, 3</value>
   </data>
   <data name="labelCifsShareName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 23</value>
+    <value>69, 13</value>
   </data>
   <data name="labelCifsShareName.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="labelCifsShareName.Text" xml:space="preserve">
     <value>共有名(&amp;S):</value>
@@ -370,13 +373,13 @@
     <value>2</value>
   </data>
   <data name="comboBoxCifsSharename.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 62</value>
+    <value>85, 59</value>
   </data>
   <data name="comboBoxCifsSharename.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 20</value>
+    <value>412, 21</value>
   </data>
   <data name="comboBoxCifsSharename.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;comboBoxCifsSharename.Name" xml:space="preserve">
     <value>comboBoxCifsSharename</value>
@@ -406,7 +409,7 @@
     <value>500, 102</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>

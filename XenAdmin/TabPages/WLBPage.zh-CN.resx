@@ -461,6 +461,9 @@
   <data name="pdSectionConfiguration.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
+  <data name="pdSectionConfiguration.SectionTitle" xml:space="preserve">
+    <value>配置</value>
+  </data>
   <data name="pdSectionConfiguration.Size" type="System.Drawing.Size, System.Drawing">
     <value>693, 34</value>
   </data>

@@ -130,13 +130,13 @@
     <value>0, 63</value>
   </data>
   <data name="AlertIntervalLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+    <value>3, 3, 15, 3</value>
   </data>
   <data name="AlertIntervalLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 17</value>
   </data>
   <data name="AlertIntervalLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="AlertIntervalLabel.Text" xml:space="preserve">
     <value>アラートの送信間隔(&amp;R):</value>
@@ -165,8 +165,11 @@
   <data name="AlertIntervalMinutesLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>213, 63</value>
   </data>
+  <data name="AlertIntervalMinutesLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
   <data name="AlertIntervalMinutesLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 17</value>
+    <value>43, 13</value>
   </data>
   <data name="AlertIntervalMinutesLabel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -184,31 +187,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;AlertIntervalMinutesLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="nudAlertInterval.Location" type="System.Drawing.Point, System.Drawing">
-    <value>134, 61</value>
-  </data>
-  <data name="nudAlertInterval.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 19</value>
-  </data>
-  <data name="nudAlertInterval.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="&gt;&gt;nudAlertInterval.Name" xml:space="preserve">
-    <value>nudAlertInterval</value>
-  </data>
-  <data name="&gt;&gt;nudAlertInterval.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;nudAlertInterval.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;nudAlertInterval.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="tableLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
   </data>
   <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -219,11 +198,461 @@
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="DiskGroupBox.AutoSize" type="System.Boolean, mscorlib">
+  <data name="memoryMinutesLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="DiskGroupBox.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
+  <data name="memoryMinutesLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="memoryMinutesLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>272, 58</value>
+  </data>
+  <data name="memoryMinutesLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 13</value>
+  </data>
+  <data name="memoryMinutesLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="memoryMinutesLabel.Text" xml:space="preserve">
+    <value>分</value>
+  </data>
+  <data name="&gt;&gt;memoryMinutesLabel.Name" xml:space="preserve">
+    <value>memoryMinutesLabel</value>
+  </data>
+  <data name="&gt;&gt;memoryMinutesLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;memoryMinutesLabel.Parent" xml:space="preserve">
+    <value>MemoryGroupBox</value>
+  </data>
+  <data name="&gt;&gt;memoryMinutesLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="nudMemoryDurationThreshold.Location" type="System.Drawing.Point, System.Drawing">
+    <value>190, 56</value>
+  </data>
+  <data name="nudMemoryDurationThreshold.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 0</value>
+  </data>
+  <data name="nudMemoryDurationThreshold.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 20</value>
+  </data>
+  <data name="nudMemoryDurationThreshold.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;nudMemoryDurationThreshold.Name" xml:space="preserve">
+    <value>nudMemoryDurationThreshold</value>
+  </data>
+  <data name="&gt;&gt;nudMemoryDurationThreshold.Type" xml:space="preserve">
+    <value>XenAdmin.SettingsPanels.AlertNumericUpDown, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;nudMemoryDurationThreshold.Parent" xml:space="preserve">
+    <value>MemoryGroupBox</value>
+  </data>
+  <data name="&gt;&gt;nudMemoryDurationThreshold.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="memoryUnitsLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="memoryUnitsLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="memoryUnitsLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>272, 32</value>
+  </data>
+  <data name="memoryUnitsLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 13</value>
+  </data>
+  <data name="memoryUnitsLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="memoryUnitsLabel.Text" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="&gt;&gt;memoryUnitsLabel.Name" xml:space="preserve">
+    <value>memoryUnitsLabel</value>
+  </data>
+  <data name="&gt;&gt;memoryUnitsLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;memoryUnitsLabel.Parent" xml:space="preserve">
+    <value>MemoryGroupBox</value>
+  </data>
+  <data name="&gt;&gt;memoryUnitsLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="nudMemoryUsage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>190, 30</value>
+  </data>
+  <data name="nudMemoryUsage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 20</value>
+  </data>
+  <data name="nudMemoryUsage.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;nudMemoryUsage.Name" xml:space="preserve">
+    <value>nudMemoryUsage</value>
+  </data>
+  <data name="&gt;&gt;nudMemoryUsage.Type" xml:space="preserve">
+    <value>XenAdmin.SettingsPanels.AlertNumericUpDown, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;nudMemoryUsage.Parent" xml:space="preserve">
+    <value>MemoryGroupBox</value>
+  </data>
+  <data name="&gt;&gt;nudMemoryUsage.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="MemoryAlertCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="MemoryAlertCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="MemoryAlertCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 0</value>
+  </data>
+  <data name="MemoryAlertCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 17</value>
+  </data>
+  <data name="MemoryAlertCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="MemoryAlertCheckBox.Text" xml:space="preserve">
+    <value>メモリ使用量アラートを有効にする(&amp;M)</value>
+  </data>
+  <data name="&gt;&gt;MemoryAlertCheckBox.Name" xml:space="preserve">
+    <value>MemoryAlertCheckBox</value>
+  </data>
+  <data name="&gt;&gt;MemoryAlertCheckBox.Type" xml:space="preserve">
+    <value>XenAdmin.SettingsPanels.AlertCheckBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;MemoryAlertCheckBox.Parent" xml:space="preserve">
+    <value>MemoryGroupBox</value>
+  </data>
+  <data name="&gt;&gt;MemoryAlertCheckBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="memoryDurationThresholdLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="memoryDurationThresholdLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="memoryDurationThresholdLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 56</value>
+  </data>
+  <data name="memoryDurationThresholdLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 13</value>
+  </data>
+  <data name="memoryDurationThresholdLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="memoryDurationThresholdLabel.Text" xml:space="preserve">
+    <value>許容時間(&amp;T):</value>
+  </data>
+  <data name="memoryDurationThresholdLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;memoryDurationThresholdLabel.Name" xml:space="preserve">
+    <value>memoryDurationThresholdLabel</value>
+  </data>
+  <data name="&gt;&gt;memoryDurationThresholdLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;memoryDurationThresholdLabel.Parent" xml:space="preserve">
+    <value>MemoryGroupBox</value>
+  </data>
+  <data name="&gt;&gt;memoryDurationThresholdLabel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="memoryUsageLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="memoryUsageLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="memoryUsageLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 30</value>
+  </data>
+  <data name="memoryUsageLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 13</value>
+  </data>
+  <data name="memoryUsageLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="memoryUsageLabel.Text" xml:space="preserve">
+    <value>空きメモリの下限値(&amp;B):</value>
+  </data>
+  <data name="memoryUsageLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;memoryUsageLabel.Name" xml:space="preserve">
+    <value>memoryUsageLabel</value>
+  </data>
+  <data name="&gt;&gt;memoryUsageLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;memoryUsageLabel.Parent" xml:space="preserve">
+    <value>MemoryGroupBox</value>
+  </data>
+  <data name="&gt;&gt;memoryUsageLabel.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="MemoryGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 283</value>
+  </data>
+  <data name="MemoryGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 0</value>
+  </data>
+  <data name="MemoryGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>420, 89</value>
+  </data>
+  <data name="MemoryGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="MemoryGroupBox.Text" xml:space="preserve">
+    <value>                              </value>
+  </data>
+  <data name="&gt;&gt;MemoryGroupBox.Name" xml:space="preserve">
+    <value>MemoryGroupBox</value>
+  </data>
+  <data name="&gt;&gt;MemoryGroupBox.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;MemoryGroupBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;MemoryGroupBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="srMinutesLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="srMinutesLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="srMinutesLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>337, 58</value>
+  </data>
+  <data name="srMinutesLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 13</value>
+  </data>
+  <data name="srMinutesLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="srMinutesLabel.Text" xml:space="preserve">
+    <value>分</value>
+  </data>
+  <data name="&gt;&gt;srMinutesLabel.Name" xml:space="preserve">
+    <value>srMinutesLabel</value>
+  </data>
+  <data name="&gt;&gt;srMinutesLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;srMinutesLabel.Parent" xml:space="preserve">
+    <value>SrGroupBox</value>
+  </data>
+  <data name="&gt;&gt;srMinutesLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="nudSrMinutes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>255, 56</value>
+  </data>
+  <data name="nudSrMinutes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 0</value>
+  </data>
+  <data name="nudSrMinutes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 20</value>
+  </data>
+  <data name="nudSrMinutes.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;nudSrMinutes.Name" xml:space="preserve">
+    <value>nudSrMinutes</value>
+  </data>
+  <data name="&gt;&gt;nudSrMinutes.Type" xml:space="preserve">
+    <value>XenAdmin.SettingsPanels.AlertNumericUpDown, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;nudSrMinutes.Parent" xml:space="preserve">
+    <value>SrGroupBox</value>
+  </data>
+  <data name="&gt;&gt;nudSrMinutes.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="srUnitsLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="srUnitsLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="srUnitsLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>337, 32</value>
+  </data>
+  <data name="srUnitsLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>31, 13</value>
+  </data>
+  <data name="srUnitsLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="srUnitsLabel.Text" xml:space="preserve">
+    <value>KB/秒</value>
+  </data>
+  <data name="&gt;&gt;srUnitsLabel.Name" xml:space="preserve">
+    <value>srUnitsLabel</value>
+  </data>
+  <data name="&gt;&gt;srUnitsLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;srUnitsLabel.Parent" xml:space="preserve">
+    <value>SrGroupBox</value>
+  </data>
+  <data name="&gt;&gt;srUnitsLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="nudSrUsage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>255, 30</value>
+  </data>
+  <data name="nudSrUsage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 20</value>
+  </data>
+  <data name="nudSrUsage.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;nudSrUsage.Name" xml:space="preserve">
+    <value>nudSrUsage</value>
+  </data>
+  <data name="&gt;&gt;nudSrUsage.Type" xml:space="preserve">
+    <value>XenAdmin.SettingsPanels.AlertNumericUpDown, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;nudSrUsage.Parent" xml:space="preserve">
+    <value>SrGroupBox</value>
+  </data>
+  <data name="&gt;&gt;nudSrUsage.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="SrAlertCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="SrAlertCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="SrAlertCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 0</value>
+  </data>
+  <data name="SrAlertCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 17</value>
+  </data>
+  <data name="SrAlertCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="SrAlertCheckBox.Text" xml:space="preserve">
+    <value>ストレージ スループット アラートを有効にする(&amp;S)</value>
+  </data>
+  <data name="&gt;&gt;SrAlertCheckBox.Name" xml:space="preserve">
+    <value>SrAlertCheckBox</value>
+  </data>
+  <data name="&gt;&gt;SrAlertCheckBox.Type" xml:space="preserve">
+    <value>XenAdmin.SettingsPanels.AlertCheckBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;SrAlertCheckBox.Parent" xml:space="preserve">
+    <value>SrGroupBox</value>
+  </data>
+  <data name="&gt;&gt;SrAlertCheckBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="SrDurationThresholdLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="SrDurationThresholdLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="SrDurationThresholdLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 56</value>
+  </data>
+  <data name="SrDurationThresholdLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 13</value>
+  </data>
+  <data name="SrDurationThresholdLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="SrDurationThresholdLabel.Text" xml:space="preserve">
+    <value>許容時間(&amp;T):</value>
+  </data>
+  <data name="SrDurationThresholdLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;SrDurationThresholdLabel.Name" xml:space="preserve">
+    <value>SrDurationThresholdLabel</value>
+  </data>
+  <data name="&gt;&gt;SrDurationThresholdLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SrDurationThresholdLabel.Parent" xml:space="preserve">
+    <value>SrGroupBox</value>
+  </data>
+  <data name="&gt;&gt;SrDurationThresholdLabel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="SrUsageLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="SrUsageLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="SrUsageLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 30</value>
+  </data>
+  <data name="SrUsageLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 13</value>
+  </data>
+  <data name="SrUsageLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="SrUsageLabel.Text" xml:space="preserve">
+    <value>SR スループットの上限値(&amp;E):</value>
+  </data>
+  <data name="SrUsageLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;SrUsageLabel.Name" xml:space="preserve">
+    <value>SrUsageLabel</value>
+  </data>
+  <data name="&gt;&gt;SrUsageLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SrUsageLabel.Parent" xml:space="preserve">
+    <value>SrGroupBox</value>
+  </data>
+  <data name="&gt;&gt;SrUsageLabel.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="SrGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 378</value>
+  </data>
+  <data name="SrGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 0</value>
+  </data>
+  <data name="SrGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>420, 89</value>
+  </data>
+  <data name="SrGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="SrGroupBox.Text" xml:space="preserve">
+    <value>                              </value>
+  </data>
+  <data name="&gt;&gt;SrGroupBox.Name" xml:space="preserve">
+    <value>SrGroupBox</value>
+  </data>
+  <data name="&gt;&gt;SrGroupBox.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;SrGroupBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;SrGroupBox.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="DiskMinutesLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -235,10 +664,10 @@
     <value>272, 58</value>
   </data>
   <data name="DiskMinutesLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 17</value>
+    <value>43, 13</value>
   </data>
   <data name="DiskMinutesLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>6</value>
   </data>
   <data name="DiskMinutesLabel.Text" xml:space="preserve">
     <value>分</value>
@@ -271,7 +700,7 @@
     <value>nudDiskDurationThreshold</value>
   </data>
   <data name="&gt;&gt;nudDiskDurationThreshold.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.SettingsPanels.AlertNumericUpDown, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;nudDiskDurationThreshold.Parent" xml:space="preserve">
     <value>DiskGroupBox</value>
@@ -292,7 +721,7 @@
     <value>32, 17</value>
   </data>
   <data name="DiskPercentLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="DiskPercentLabel.Text" xml:space="preserve">
     <value>KB/秒</value>
@@ -322,7 +751,7 @@
     <value>nudDiskUsagePercent</value>
   </data>
   <data name="&gt;&gt;nudDiskUsagePercent.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.SettingsPanels.AlertNumericUpDown, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;nudDiskUsagePercent.Parent" xml:space="preserve">
     <value>DiskGroupBox</value>
@@ -352,7 +781,7 @@
     <value>DiskAlertCheckBox</value>
   </data>
   <data name="&gt;&gt;DiskAlertCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.SettingsPanels.AlertCheckBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;DiskAlertCheckBox.Parent" xml:space="preserve">
     <value>DiskGroupBox</value>
@@ -373,7 +802,7 @@
     <value>71, 17</value>
   </data>
   <data name="DiskDurationThresholdLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="DiskDurationThresholdLabel.Text" xml:space="preserve">
     <value>許容時間(&amp;T):</value>
@@ -426,9 +855,6 @@
   <data name="&gt;&gt;DiskUsagePercentLabel.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="DiskGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="DiskGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 160</value>
   </data>
@@ -454,13 +880,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;DiskGroupBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="groupBox2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="groupBox2.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
+    <value>2</value>
   </data>
   <data name="NetPercentLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -487,7 +907,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;NetPercentLabel.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+    <value>NetGroupBox</value>
   </data>
   <data name="&gt;&gt;NetPercentLabel.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -505,10 +925,10 @@
     <value>nudNetUsagePercent</value>
   </data>
   <data name="&gt;&gt;nudNetUsagePercent.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.SettingsPanels.AlertNumericUpDown, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;nudNetUsagePercent.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+    <value>NetGroupBox</value>
   </data>
   <data name="&gt;&gt;nudNetUsagePercent.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -538,7 +958,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;NetMinutesLabel.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+    <value>NetGroupBox</value>
   </data>
   <data name="&gt;&gt;NetMinutesLabel.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -559,10 +979,10 @@
     <value>nudNetDurationThreshold</value>
   </data>
   <data name="&gt;&gt;nudNetDurationThreshold.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.SettingsPanels.AlertNumericUpDown, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;nudNetDurationThreshold.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+    <value>NetGroupBox</value>
   </data>
   <data name="&gt;&gt;nudNetDurationThreshold.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -589,10 +1009,10 @@
     <value>NetAlertCheckBox</value>
   </data>
   <data name="&gt;&gt;NetAlertCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.SettingsPanels.AlertCheckBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;NetAlertCheckBox.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+    <value>NetGroupBox</value>
   </data>
   <data name="&gt;&gt;NetAlertCheckBox.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -625,7 +1045,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;NetDurationThresholdLabel.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+    <value>NetGroupBox</value>
   </data>
   <data name="&gt;&gt;NetDurationThresholdLabel.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -658,43 +1078,34 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;NetUsagePercentLabel.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+    <value>NetGroupBox</value>
   </data>
   <data name="&gt;&gt;NetUsagePercentLabel.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="groupBox2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="NetGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 95</value>
   </data>
-  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 81</value>
-  </data>
-  <data name="groupBox2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="NetGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
   </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>475, 73</value>
+  <data name="NetGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>420, 87</value>
   </data>
-  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+  <data name="NetGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
-    <value>groupBox2</value>
+  <data name="&gt;&gt;NetGroupBox.Name" xml:space="preserve">
+    <value>NetGroupBox</value>
   </data>
-  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+  <data name="&gt;&gt;NetGroupBox.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;NetGroupBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="groupBox1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="groupBox1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
+  <data name="&gt;&gt;NetGroupBox.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="cpuPercentLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -721,7 +1132,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cpuPercentLabel.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>CpuGroupBox</value>
   </data>
   <data name="&gt;&gt;cpuPercentLabel.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -739,10 +1150,10 @@
     <value>nudCPUUsagePercent</value>
   </data>
   <data name="&gt;&gt;nudCPUUsagePercent.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.SettingsPanels.AlertNumericUpDown, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;nudCPUUsagePercent.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>CpuGroupBox</value>
   </data>
   <data name="&gt;&gt;nudCPUUsagePercent.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -772,7 +1183,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cpuMinutesLabel.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>CpuGroupBox</value>
   </data>
   <data name="&gt;&gt;cpuMinutesLabel.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -793,10 +1204,10 @@
     <value>nudCPUDurationThreshold</value>
   </data>
   <data name="&gt;&gt;nudCPUDurationThreshold.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.SettingsPanels.AlertNumericUpDown, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;nudCPUDurationThreshold.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>CpuGroupBox</value>
   </data>
   <data name="&gt;&gt;nudCPUDurationThreshold.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -826,10 +1237,10 @@
     <value>CPUAlertCheckBox</value>
   </data>
   <data name="&gt;&gt;CPUAlertCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.SettingsPanels.AlertCheckBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;CPUAlertCheckBox.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>CpuGroupBox</value>
   </data>
   <data name="&gt;&gt;CPUAlertCheckBox.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -862,7 +1273,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CPUUsagePercentLabel.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>CpuGroupBox</value>
   </data>
   <data name="&gt;&gt;CPUUsagePercentLabel.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -895,37 +1306,34 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CPUDurationThresholdLabel.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>CpuGroupBox</value>
   </data>
   <data name="&gt;&gt;CPUDurationThresholdLabel.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="groupBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="CpuGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="CpuGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
   </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>475, 72</value>
+  <data name="CpuGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>420, 86</value>
   </data>
-  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+  <data name="CpuGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
-    <value>groupBox1</value>
+  <data name="&gt;&gt;CpuGroupBox.Name" xml:space="preserve">
+    <value>CpuGroupBox</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;CpuGroupBox.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;CpuGroupBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;CpuGroupBox.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 86</value>
@@ -955,19 +1363,10 @@
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="DiskGroupBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="groupBox2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="groupBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="tableLayoutPanel2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="MemoryGroupBox" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="SrGroupBox" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="DiskGroupBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="NetGroupBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CpuGroupBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
-  </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -994,73 +1393,31 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>tableLayoutPanel2</value>
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="nudAlertInterval.Location" type="System.Drawing.Point, System.Drawing">
+    <value>130, 62</value>
   </data>
-  <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="nudAlertInterval.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 20</value>
   </data>
-  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>500, 56</value>
+  <data name="nudAlertInterval.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
-    <value>54</value>
+  <data name="&gt;&gt;nudAlertInterval.Name" xml:space="preserve">
+    <value>nudAlertInterval</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
-    <value>tableLayoutPanel2</value>
+  <data name="&gt;&gt;nudAlertInterval.Type" xml:space="preserve">
+    <value>XenAdmin.SettingsPanels.AlertNumericUpDown, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;nudAlertInterval.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50" /&gt;&lt;Rows Styles="Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="passwordFailure1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="passwordFailure1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="passwordFailure1.Error" xml:space="preserve">
-    <value />
-  </data>
-  <data name="passwordFailure1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 50</value>
-  </data>
-  <data name="passwordFailure1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="passwordFailure1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="passwordFailure1.TabIndex" type="System.Int32, mscorlib">
-    <value>53</value>
-  </data>
-  <data name="passwordFailure1.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;passwordFailure1.Name" xml:space="preserve">
-    <value>passwordFailure1</value>
-  </data>
-  <data name="&gt;&gt;passwordFailure1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.Common.PasswordFailure, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;passwordFailure1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;passwordFailure1.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;nudAlertInterval.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

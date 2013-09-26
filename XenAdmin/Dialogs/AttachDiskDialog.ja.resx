@@ -166,7 +166,7 @@
     <value>15, 178</value>
   </data>
   <data name="ReadOnlyCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 22</value>
+    <value>129, 19</value>
   </data>
   <data name="ReadOnlyCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -181,7 +181,7 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ReadOnlyCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>readonlyCheckboxToolTipContainer</value>
   </data>
   <data name="&gt;&gt;ReadOnlyCheckBox.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -244,7 +244,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;CancelBtn.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -277,6 +277,39 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="readonlyCheckboxToolTipContainer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="readonlyCheckboxToolTipContainer.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="readonlyCheckboxToolTipContainer.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="readonlyCheckboxToolTipContainer.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="readonlyCheckboxToolTipContainer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 180</value>
+  </data>
+  <data name="readonlyCheckboxToolTipContainer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 22</value>
+  </data>
+  <data name="readonlyCheckboxToolTipContainer.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;readonlyCheckboxToolTipContainer.Name" xml:space="preserve">
+    <value>readonlyCheckboxToolTipContainer</value>
+  </data>
+  <data name="&gt;&gt;readonlyCheckboxToolTipContainer.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;readonlyCheckboxToolTipContainer.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;readonlyCheckboxToolTipContainer.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -286,7 +319,7 @@
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>391, 220</value>
+    <value>391, 221</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>

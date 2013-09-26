@@ -261,6 +261,9 @@
   <data name="m_comboBoxSr.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left, Right</value>
   </data>
+  <data name="m_comboBoxSr.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="m_comboBoxSr.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 53</value>
   </data>
@@ -302,6 +305,9 @@
   </data>
   <data name="m_dataGridView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
+  </data>
+  <data name="m_dataGridView.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="m_dataGridView.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 103</value>

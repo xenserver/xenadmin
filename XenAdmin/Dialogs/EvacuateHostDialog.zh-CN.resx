@@ -121,9 +121,16 @@
   <data name="ActionStatusLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
   </data>
+  <data name="ActionStatusLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 339</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ActionStatusLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ActionStatusLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
   <data name="&gt;&gt;ActionStatusLabel.Name" xml:space="preserve">
     <value>ActionStatusLabel</value>
@@ -140,6 +147,12 @@
   <data name="ProgressSeparator.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
   </data>
+  <data name="ProgressSeparator.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 331</value>
+  </data>
+  <data name="ProgressSeparator.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
   <data name="&gt;&gt;ProgressSeparator.Name" xml:space="preserve">
     <value>ProgressSeparator</value>
   </data>
@@ -154,6 +167,12 @@
   </data>
   <data name="ActionProgressBar.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
+  </data>
+  <data name="ActionProgressBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 368</value>
+  </data>
+  <data name="ActionProgressBar.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
   </data>
   <data name="&gt;&gt;ActionProgressBar.Name" xml:space="preserve">
     <value>ActionProgressBar</value>
@@ -319,7 +338,7 @@
     <value>12</value>
   </data>
   <data name="labelBlurb.Text" xml:space="preserve">
-    <value>此操作将从该服务器迁移所有正在运行的 VM，并将该服务器转换到维护模式。</value>
+    <value>此操作将迁移或暂停此服务器上运行的所有 VM，并将服务器转换到维护模式。</value>
   </data>
   <data name="&gt;&gt;labelBlurb.Name" xml:space="preserve">
     <value>labelBlurb</value>

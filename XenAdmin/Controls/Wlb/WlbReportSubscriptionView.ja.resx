@@ -255,6 +255,9 @@
   <data name="pdSectionParameters.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
+  <data name="pdSectionParameters.SectionTitle" xml:space="preserve">
+    <value>レポートのパラメータ</value>
+  </data>
   <data name="pdSectionParameters.Size" type="System.Drawing.Size, System.Drawing">
     <value>683, 34</value>
   </data>
@@ -281,6 +284,9 @@
   </data>
   <data name="pdSectionGeneral.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
+  </data>
+  <data name="pdSectionGeneral.SectionTitle" xml:space="preserve">
+    <value>全般</value>
   </data>
   <data name="pdSectionGeneral.Size" type="System.Drawing.Size, System.Drawing">
     <value>683, 34</value>
@@ -309,6 +315,9 @@
   <data name="pdSectionDelivery.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
+  <data name="pdSectionDelivery.SectionTitle" xml:space="preserve">
+    <value>配信オプション</value>
+  </data>
   <data name="pdSectionDelivery.Size" type="System.Drawing.Size, System.Drawing">
     <value>683, 34</value>
   </data>
@@ -336,6 +345,9 @@
   <data name="pdSectionSchedule.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
+  <data name="pdSectionSchedule.SectionTitle" xml:space="preserve">
+    <value>スケジュール オプション</value>
+  </data>
   <data name="pdSectionSchedule.Size" type="System.Drawing.Size, System.Drawing">
     <value>683, 34</value>
   </data>
@@ -362,6 +374,9 @@
   </data>
   <data name="pdSectionHistory.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
+  </data>
+  <data name="pdSectionHistory.SectionTitle" xml:space="preserve">
+    <value>履歴</value>
   </data>
   <data name="pdSectionHistory.Size" type="System.Drawing.Size, System.Drawing">
     <value>683, 34</value>

@@ -136,7 +136,7 @@
     <value>10, 49</value>
   </data>
   <data name="wlbOptimizationModePage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>557, 582</value>
+    <value>552, 613</value>
   </data>
   <data name="wlbOptimizationModePage.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -163,7 +163,7 @@
     <value>10, 49</value>
   </data>
   <data name="wlbAutomationPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>557, 582</value>
+    <value>552, 613</value>
   </data>
   <data name="wlbAutomationPage.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -190,7 +190,7 @@
     <value>10, 49</value>
   </data>
   <data name="wlbThresholdsPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>557, 582</value>
+    <value>552, 613</value>
   </data>
   <data name="wlbThresholdsPage.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -217,7 +217,7 @@
     <value>10, 49</value>
   </data>
   <data name="wlbMetricWeightingPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>557, 582</value>
+    <value>552, 613</value>
   </data>
   <data name="wlbMetricWeightingPage.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -244,7 +244,7 @@
     <value>10, 49</value>
   </data>
   <data name="wlbHostExclusionPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>557, 582</value>
+    <value>552, 613</value>
   </data>
   <data name="wlbHostExclusionPage.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -271,7 +271,7 @@
     <value>10, 49</value>
   </data>
   <data name="wlbAdvancedSettingsPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>560, 582</value>
+    <value>560, 613</value>
   </data>
   <data name="wlbAdvancedSettingsPage.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -291,9 +291,6 @@
   <data name="ContentPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="ContentPanel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
   <data name="ContentPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -301,7 +298,7 @@
     <value>10, 49, 10, 10</value>
   </data>
   <data name="ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>577, 641</value>
+    <value>572, 672</value>
   </data>
   <data name="&gt;&gt;ContentPanel.Name" xml:space="preserve">
     <value>ContentPanel</value>
@@ -315,11 +312,11 @@
   <data name="&gt;&gt;ContentPanel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="verticalTabs.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+  <data name="verticalTabs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 0</value>
   </data>
   <data name="verticalTabs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 643</value>
+    <value>216, 674</value>
   </data>
   <data name="&gt;&gt;verticalTabs.Name" xml:space="preserve">
     <value>verticalTabs</value>
@@ -333,11 +330,11 @@
   <data name="&gt;&gt;verticalTabs.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="cancelButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+  <data name="cancelButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left</value>
   </data>
   <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>730, 661</value>
+    <value>738, 725</value>
   </data>
   <data name="&gt;&gt;cancelButton.Name" xml:space="preserve">
     <value>cancelButton</value>
@@ -349,13 +346,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cancelButton.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
-  <data name="okButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+  <data name="okButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left</value>
   </data>
   <data name="okButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>650, 661</value>
+    <value>647, 725</value>
   </data>
   <data name="&gt;&gt;okButton.Name" xml:space="preserve">
     <value>okButton</value>
@@ -369,11 +366,20 @@
   <data name="&gt;&gt;okButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="splitContainer.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+  <data name="splitContainer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left</value>
   </data>
-  <data name="splitContainer.Panel1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+  <data name="splitContainer.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="splitContainer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 43</value>
+  </data>
+  <data name="splitContainer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 3, 10, 3</value>
+  </data>
+  <data name="splitContainer.Panel1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>20, 0, 0, 0</value>
   </data>
   <data name="&gt;&gt;splitContainer.Panel1.Name" xml:space="preserve">
     <value>splitContainer.Panel1</value>
@@ -387,8 +393,8 @@
   <data name="&gt;&gt;splitContainer.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="splitContainer.Panel2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+  <data name="splitContainer.Panel2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 20, 0</value>
   </data>
   <data name="&gt;&gt;splitContainer.Panel2.Name" xml:space="preserve">
     <value>splitContainer.Panel2</value>
@@ -406,10 +412,10 @@
     <value>400</value>
   </data>
   <data name="splitContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>813, 643</value>
+    <value>834, 674</value>
   </data>
   <data name="splitContainer.SplitterDistance" type="System.Int32, mscorlib">
-    <value>230</value>
+    <value>236</value>
   </data>
   <data name="&gt;&gt;splitContainer.Name" xml:space="preserve">
     <value>splitContainer</value>
@@ -423,6 +429,105 @@
   <data name="&gt;&gt;splitContainer.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="blueBorder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>574, 674</value>
+  </data>
+  <data name="&gt;&gt;blueBorder.Name" xml:space="preserve">
+    <value>blueBorder</value>
+  </data>
+  <data name="&gt;&gt;blueBorder.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.BlueBorderPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;blueBorder.Parent" xml:space="preserve">
+    <value>splitContainer.Panel2</value>
+  </data>
+  <data name="&gt;&gt;blueBorder.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="deprecationBanner.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="deprecationBanner.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="deprecationBanner.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="deprecationBanner.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="deprecationBanner.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="deprecationBanner.Location" type="System.Drawing.Point, System.Drawing">
+    <value>131, 8</value>
+  </data>
+  <data name="deprecationBanner.Size" type="System.Drawing.Size, System.Drawing">
+    <value>570, 27</value>
+  </data>
+  <data name="deprecationBanner.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="deprecationBanner.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;deprecationBanner.Name" xml:space="preserve">
+    <value>deprecationBanner</value>
+  </data>
+  <data name="&gt;&gt;deprecationBanner.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.DeprecationBanner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;deprecationBanner.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;deprecationBanner.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanel1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tableLayoutPanel1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>834, 43</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="deprecationBanner" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,15,Percent,70,Percent,15" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -430,7 +535,7 @@
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>834, 714</value>
+    <value>834, 755</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>

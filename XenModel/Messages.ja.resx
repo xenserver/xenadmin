@@ -708,6 +708,30 @@
   <data name="ACTION_TEMPLATE_CLONING" xml:space="preserve">
     <value>複製しています</value>
   </data>
+  <data name="ACTION_TOOLSTACK_RESTARTED" xml:space="preserve">
+    <value>ツールスタックが再起動しました。</value>
+  </data>
+  <data name="ACTION_TOOLSTACK_RESTARTED_ON" xml:space="preserve">
+    <value>ツールスタックが '{0}' で再起動しました。</value>
+  </data>
+  <data name="ACTION_TOOLSTACK_RESTARTING" xml:space="preserve">
+    <value>ツールスタックを再起動しています...</value>
+  </data>
+  <data name="ACTION_TOOLSTACK_RESTARTING_ON" xml:space="preserve">
+    <value>ツールスタックを '{0}' で再起動しています...</value>
+  </data>
+  <data name="ACTION_TOOLSTACK_RESTART_ON" xml:space="preserve">
+    <value>ツールスタックを '{0}' で再起動します</value>
+  </data>
+  <data name="ACTION_VDI_CREATED" xml:space="preserve">
+    <value>仮想ディスクが作成されました</value>
+  </data>
+  <data name="ACTION_VDI_CREATING" xml:space="preserve">
+    <value>仮想ディスクを作成しています...</value>
+  </data>
+  <data name="ACTION_VDI_CREATING_TITLE" xml:space="preserve">
+    <value>SR '{1}' 上のディスク '{0}' の作成</value>
+  </data>
   <data name="ACTION_VDI_DELETED" xml:space="preserve">
     <value>仮想ディスクが削除されました</value>
   </data>
@@ -1047,6 +1071,12 @@ XenServer では、CPU の一部の機能をプールの既存のサーバーに
 
 この機能を使用して続行しますか?</value>
   </data>
+  <data name="ADD_HOST_TO_POOL_DISCONNECTED_POOL" xml:space="preserve">
+    <value>サーバー '{0}' をプール '{1}' に移動できません。このプールに接続されていません。</value>
+  </data>
+  <data name="ADD_HOST_TO_POOL_DISCONNECTED_POOL_MULTIPLE" xml:space="preserve">
+    <value>選択したサーバーをプール '{0}' に移動できません。このプールに接続されていません。</value>
+  </data>
   <data name="ADD_HOST_TO_POOL_LICENSE_MESSAGE" xml:space="preserve">
     <value>サーバー '{0}' の追加先プールのライセンスはアップグレードされています。
 
@@ -1080,7 +1110,7 @@ XenServer では、CPU の一部の機能をプールの既存のサーバーに
     <value>追加するサーバーのホスト名または IP アドレスと、そのサーバーのログイン情報を入力します。</value>
   </data>
   <data name="ADD_NEW_INCORRECT" xml:space="preserve">
-    <value>ユーザー名またはパスワードが間違っています。</value>
+    <value>ユーザー名またはパスワードが不正です。</value>
   </data>
   <data name="ADD_NEW_SERVER_MENU_ITEM" xml:space="preserve">
     <value>新規サーバーの追加(&amp;A)...</value>
@@ -1341,12 +1371,25 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
   <data name="ALERT_ALARM_FILESYSTEM_DESCRIPTION" xml:space="preserve">
     <value>{0} のコントロール ドメインのディスク使用量が {1} に達しました。このディスクに空きがなくなると、XenServer のパフォーマンスが重大な影響を受けます。ログ ファイルや不要な (ユーザー作成の) ファイルを削除してください。</value>
   </data>
+  <data name="ALERT_ALARM_MEMORY" xml:space="preserve">
+    <value>メモリ使用アラーム</value>
+  </data>
+  <data name="ALERT_ALARM_MEMORY_DESCRIPTION" xml:space="preserve">
+    <value>{0} 上の空きメモリが直近の {2} で {1} です。
+空きメモリが {3} を下回るとアラートが送信されます。</value>
+  </data>
   <data name="ALERT_ALARM_NETWORK" xml:space="preserve">
     <value>ネットワーク使用量アラート</value>
   </data>
   <data name="ALERT_ALARM_NETWORK_DESCRIPTION" xml:space="preserve">
     <value>{0} の平均ネットワーク使用量は、直近の {2} で {1} です。
 ネットワーク使用量が {3} を超えるとアラートが送信されます。</value>
+  </data>
+  <data name="ALERT_ALARM_STORAGE" xml:space="preserve">
+    <value>ストレージ スループット アラート</value>
+  </data>
+  <data name="ALERT_ALARM_STORAGE_DESCRIPTION" xml:space="preserve">
+    <value>ストレージ リポジトリ '{1}' 上の {0} の読み取りおよび書き込み合計スループットが直近の {3} で {2} です。合計スループットが {4} を超えるとアラートが送信されます。</value>
   </data>
   <data name="ALERT_CAP_LABEL" xml:space="preserve">
     <value>(最初の {0} 項目を表示しています)</value>
@@ -1362,11 +1405,19 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
 
 注: RBAC が有効な場合、役割で許可されているアラートのみがクリアされます。</value>
   </data>
+  <data name="ALERT_DISMISS_ALL_NO_FILTER_CONTINUE" xml:space="preserve">
+    <value>接続されているすべてのサーバーのすべてのアラートをクリアしますか?
+
+注: RBAC が有効な場合、役割で許可されているアラートのみがクリアされます。</value>
+  </data>
   <data name="ALERT_DISMISS_CONFIRM" xml:space="preserve">
     <value>クリアしたシステム アラートは、サーバーから完全に削除されます。続行しますか?</value>
   </data>
   <data name="ALERT_GENERIC_HELP" xml:space="preserve">
-    <value>このアラートのヘルプ...</value>
+    <value>このアラートのヘルプ(&amp;H)...</value>
+  </data>
+  <data name="ALERT_MEMORY_SUB_TEXT" xml:space="preserve">
+    <value>空きメモリが {1} 分間 {0} を下回ったとき </value>
   </data>
   <data name="ALERT_NET_SUB_TEXT" xml:space="preserve">
     <value>ネットワーク使用が {1} 分間 {0} を超えたとき</value>
@@ -1382,6 +1433,9 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
   </data>
   <data name="ALERT_NEW_VERSION_DOWNLOAD" xml:space="preserve">
     <value>Web ページを開く(&amp;G)...</value>
+  </data>
+  <data name="ALERT_SR_SUB_TEXT" xml:space="preserve">
+    <value>ストレージ スループットが {1} 分間 {0} を超えたとき</value>
   </data>
   <data name="ALLOW_TO_CONTINUE" xml:space="preserve">
     <value>続行を許可する(&amp;A)</value>
@@ -1533,6 +1587,12 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
   </data>
   <data name="ASSIGNING_VM_APPLIANCE" xml:space="preserve">
     <value>vApp を割り当てています...</value>
+  </data>
+  <data name="ASSIGN_LICENSE_DIALOG_COLLAPSE_MESSAGE" xml:space="preserve">
+    <value>ライセンス詳細</value>
+  </data>
+  <data name="ASSIGN_LICENSE_DIALOG_EXPAND_MESSAGE" xml:space="preserve">
+    <value>ライセンス詳細</value>
   </data>
   <data name="ASSIGN_PROTECTION_POLICY" xml:space="preserve">
     <value>VM 保護ポリシーの割り当て(&amp;Y)</value>
@@ -2057,6 +2117,9 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
   <data name="CHECKING_HOST_LIVENESS_STATUS" xml:space="preserve">
     <value>ホストのライブネスの状態のチェック</value>
   </data>
+  <data name="CHECKING_LICENSING_STATUS" xml:space="preserve">
+    <value>ライセンスの状態を確認しています</value>
+  </data>
   <data name="CHECKING_ROLE" xml:space="preserve">
     <value>役割を確認しています...</value>
   </data>
@@ -2072,8 +2135,17 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
   <data name="CHECKING_UPGRADE_HOTFIX_STATUS" xml:space="preserve">
     <value>Hotfix のアップグレード状態のチェック</value>
   </data>
+  <data name="CHECKING_VMPR_STATUS" xml:space="preserve">
+    <value>VM 保護ポリシーの存在を確認しています</value>
+  </data>
+  <data name="CHECKING_WLB_STATUS" xml:space="preserve">
+    <value>WLB の存在を確認しています</value>
+  </data>
+  <data name="CHECKING_WSS_STATUS" xml:space="preserve">
+    <value>WSS アプライアンスの存在を確認しています</value>
+  </data>
   <data name="CHECK_WLB_ENABLED" xml:space="preserve">
-    <value>プール '{0}' の WLB は有効にできません。</value>
+    <value>プール '{0}' を WLB から除外する必要があります</value>
   </data>
   <data name="CHIN" xml:space="preserve">
     <value>サーバー間のプライベート ネットワーク</value>
@@ -2102,8 +2174,8 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
   <data name="CLONING_TEMPLATE" xml:space="preserve">
     <value>テンプレート '{0}' を複製しています</value>
   </data>
-  <data name="CLOSE_WITH_MNEMONIC" xml:space="preserve">
-    <value>閉じる(&amp;C)</value>
+  <data name="CLOSE" xml:space="preserve">
+    <value>閉じる</value>
   </data>
   <data name="CLOSE_WIZARD_CLICK_FINISH" xml:space="preserve">
     <value>このウィザードを閉じるには、[完了] をクリックします</value>
@@ -2340,6 +2412,15 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   <data name="CONFIRM_REBOOT_VM_TITLE" xml:space="preserve">
     <value>VM の再起動</value>
   </data>
+  <data name="CONFIRM_RESTART_TOOLSTACK_MANY_SERVERS" xml:space="preserve">
+    <value>選択したサーバーでツールスタックを再起動しますか? これにより、XenCenter とこれらのサーバーとの接続が一時的に切断されます。</value>
+  </data>
+  <data name="CONFIRM_RESTART_TOOLSTACK_ONE_SERVER" xml:space="preserve">
+    <value>'{0}' でツールスタックを再起動しますか? これにより、XenCenter とこのサーバーとの接続が一時的に切断されます。</value>
+  </data>
+  <data name="CONFIRM_RESTART_TOOLSTACK_TITLE" xml:space="preserve">
+    <value>ツールスタックの再起動</value>
+  </data>
   <data name="CONFIRM_SHUTDOWN_SERVER" xml:space="preserve">
     <value>'{0}' をシャットダウンしてもよろしいですか?
 
@@ -2491,6 +2572,9 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   <data name="CONNECTION_RETRYING_SLAVE" xml:space="preserve">
     <value>{0} への接続: {1} のプールを検索しています</value>
   </data>
+  <data name="CONNECTION_WAS_LOST" xml:space="preserve">
+    <value>サーバーとの接続が切断されました</value>
+  </data>
   <data name="CONNECTION_WILL_RETRY_SLAVE" xml:space="preserve">
     <value>{0} への接続: {1} 秒以内にほかのプール メンバに接続を試行します</value>
   </data>
@@ -2599,10 +2683,16 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   <data name="COPY_VM_SLOW_CLONE_DESCRIPTION" xml:space="preserve">
     <value>既存テンプレートの複製</value>
   </data>
+  <data name="COULD_NOT_OPEN_URL" xml:space="preserve">
+    <value>URL '{0}' を開くことができません</value>
+  </data>
   <data name="COULD_NOT_WRITE_FILE" xml:space="preserve">
     <value>ファイル '{0}' に書き込めません。
 
 {1}</value>
+  </data>
+  <data name="COUNTS_PER_SEC_UNIT" xml:space="preserve">
+    <value>cps</value>
   </data>
   <data name="CPM_FAILURE_REASON_SAME_AS_RESIDENT_HOST" xml:space="preserve">
     <value>現在の所属ホストまたはプールへの移行はできません</value>
@@ -2632,7 +2722,10 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>ストレージ:</value>
   </data>
   <data name="CPM_SUMMARY_KEY_TRANSFER_NETWORK" xml:space="preserve">
-    <value>移行設定:</value>
+    <value>ライブ マイグレーション ネットワーク:</value>
+  </data>
+  <data name="CPM_SUMMARY_NETWORK_NOT_FOUND" xml:space="preserve">
+    <value>ネットワークが見つかりません</value>
   </data>
   <data name="CPM_SUMMARY_UNSET" xml:space="preserve">
     <value>未設定</value>
@@ -2656,7 +2749,7 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>移行先のプールまたはスタンドアロン サーバーを選択します</value>
   </data>
   <data name="CPM_WIZARD_ERROR_TARGET_DISCONNECTED" xml:space="preserve">
-    <value>ターゲット ホストに到達できなくなりました。
+    <value>移行先ホストに到達できなくなりました。
 
 このホストに再接続して再試行してください。</value>
   </data>
@@ -2696,8 +2789,17 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   <data name="CPM_WIZARD_TITLE_AND_LOCATION" xml:space="preserve">
     <value>VM の {0} への移行</value>
   </data>
+  <data name="CPM_WIZARD_VM_MISSING_ERROR" xml:space="preserve">
+    <value>選択した VM は移行できなくなっています。選択項目を確認して、このウィザードを再度実行してください</value>
+  </data>
   <data name="CPM_WIZARD_VM_SELECTION_INTRODUCTION" xml:space="preserve">
     <value>移行する VM の仮想ネットワーク インターフェイス(&amp;V):</value>
+  </data>
+  <data name="CPM_WLB_ENABLED_ON_HOST_FAILURE_REASON" xml:space="preserve">
+    <value>このホストの WLB が有効になっています</value>
+  </data>
+  <data name="CPM_WLB_ENABLED_ON_VM_FAILURE_REASON" xml:space="preserve">
+    <value>元ホストの WLB が有効になっています</value>
   </data>
   <data name="CPU" xml:space="preserve">
     <value>CPU</value>
@@ -2882,6 +2984,9 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   <data name="DAILY_SCHEDULE_FORMAT" xml:space="preserve">
     <value>毎日の {0}</value>
   </data>
+  <data name="DATATYPE_CPU" xml:space="preserve">
+    <value>CPU</value>
+  </data>
   <data name="DATATYPE_CUSTOM" xml:space="preserve">
     <value>カスタム</value>
   </data>
@@ -2900,8 +3005,8 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   <data name="DATATYPE_NETWORK" xml:space="preserve">
     <value>ネットワーク</value>
   </data>
-  <data name="DATATYPE_PERCENTAGE" xml:space="preserve">
-    <value>パーセンテージ</value>
+  <data name="DATATYPE_STORAGE" xml:space="preserve">
+    <value>ストレージ</value>
   </data>
   <data name="DATE" xml:space="preserve">
     <value>日付</value>
@@ -2944,6 +3049,9 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   </data>
   <data name="DEBIAN_SARGE_31" xml:space="preserve">
     <value>Debian Sarge 3.1</value>
+  </data>
+  <data name="DECONFIGURE_WLB" xml:space="preserve">
+    <value>WLB の設定解除</value>
   </data>
   <data name="DECONFIGURING_WLB" xml:space="preserve">
     <value>ワークロード バランスを切断しています。</value>
@@ -3315,11 +3423,17 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   <data name="DISK_PERCENT_USED" xml:space="preserve">
     <value>{0}% ({1} 使用)</value>
   </data>
+  <data name="DISK_TOO_BIG" xml:space="preserve">
+    <value>必要な空き容量がありません</value>
+  </data>
   <data name="DISK_TOO_SMALL" xml:space="preserve">
     <value>{0} {1} 以上のディスクが必要です</value>
   </data>
   <data name="DISMISS_ALL_CONFIRM_BUTTON" xml:space="preserve">
     <value>すべてのアラートをクリア(&amp;A)</value>
+  </data>
+  <data name="DISMISS_ALL_YES_CONFIRM_BUTTON" xml:space="preserve">
+    <value>すべてクリア(&amp;A)</value>
   </data>
   <data name="DISMISS_FILTERED_CONFIRM_BUTTON" xml:space="preserve">
     <value>フィルタされたアラートのみをクリア(&amp;F)</value>
@@ -3377,6 +3491,9 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_EXTRACTING_DESC" xml:space="preserve">
     <value>{0} を抽出しています</value>
+  </data>
+  <data name="DOWNLOAD_AND_EXTRACT_ACTION_EXTRACTING_ERROR" xml:space="preserve">
+    <value>ダウンロードしたアーカイブからアップデート ファイルを抽出できません。詳しくは、アプリケーション ログを参照してください。</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_FILE_NOT_FOUND" xml:space="preserve">
     <value>アップデート ファイルを特定できません。詳しくは、アプリケーション ログを参照してください。</value>
@@ -3803,6 +3920,9 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="DVD_DRIVE_LABEL_NUMBERED" xml:space="preserve">
     <value>DVD ドライブ {0}:</value>
   </data>
+  <data name="DVSCS" xml:space="preserve">
+    <value>サーバー間のプライベート ネットワーク</value>
+  </data>
   <data name="DYNAMIC_MAX" xml:space="preserve">
     <value>最大メモリ</value>
   </data>
@@ -4109,7 +4229,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>ゲートウェイが無効です。</value>
   </data>
   <data name="ERROR_INVALID_IP" xml:space="preserve">
-    <value>IP アドレスが無効です。</value>
+    <value>IP アドレスが無効です</value>
   </data>
   <data name="ERROR_INVALID_MASK" xml:space="preserve">
     <value>サブネット マスクが無効です。</value>
@@ -4227,7 +4347,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>すべてをエクスポート</value>
   </data>
   <data name="EXPORT_APPLIANCE" xml:space="preserve">
-    <value>アプライアンスのエクスポート</value>
+    <value>OVF/OVA パッケージのエクスポート</value>
   </data>
   <data name="EXPORT_APPLIANCE_PAGE_ERROR_APP_EXISTS" xml:space="preserve">
     <value>既にアプライアンスが存在します。別のエクスポート先を選択してください。</value>
@@ -4592,9 +4712,6 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="GENERAL_HEADING_CPUS" xml:space="preserve">
     <value>CPU</value>
   </data>
-  <data name="GENERAL_HEADING_GENERAL" xml:space="preserve">
-    <value>全般</value>
-  </data>
   <data name="GENERAL_HEADING_LICENSE_DETAILS" xml:space="preserve">
     <value>ライセンス詳細</value>
   </data>
@@ -4751,9 +4868,6 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="GRAPHS_DEFAULT_NAME_NETWORK" xml:space="preserve">
     <value>ネットワーク パフォーマンス</value>
   </data>
-  <data name="GRAPHS_DELETE" xml:space="preserve">
-    <value>グラフの削除(&amp;D)</value>
-  </data>
   <data name="GRAPHS_DESC" xml:space="preserve">
     <value>グラフの表示形式</value>
   </data>
@@ -4772,11 +4886,10 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="GRAPHS_NO_DATA" xml:space="preserve">
     <value>データがありません</value>
   </data>
-  <data name="GRAPHS_RESTORE_DEFAULT" xml:space="preserve">
-    <value>デフォルトのグラフに戻す(&amp;R)</value>
-  </data>
   <data name="GRAPHS_RESTORE_DEFAULT_MESSAGE" xml:space="preserve">
-    <value>グラフをデフォルトの設定に戻してよろしいですか? これにより、既存のグラフが削除され、復元できなくなります。</value>
+    <value>デフォルトのグラフに戻しますか?  これにより、現在のグラフが削除され元に戻せなくなります。
+
+注: カスタム設定の色は保持されます。</value>
   </data>
   <data name="GRAPH_LOADING" xml:space="preserve">
     <value>データをロードしています...</value>
@@ -4851,6 +4964,9 @@ CD をイジェクトしてから再試行してください。</value>
   </data>
   <data name="HA_BUTTON_TOOLTIP_STILL_CALCULATING" xml:space="preserve">
     <value>VM がアジャイルかどうかを確認しています。お待ちください。</value>
+  </data>
+  <data name="HA_CALCULATING_AGILITY" xml:space="preserve">
+    <value>計算しています...</value>
   </data>
   <data name="HA_CANNOT_EDIT_WITH_DEAD_HOSTS" xml:space="preserve">
     <value>VM の再起動優先度を変更するには、プール内のすべてのサーバーが稼働中である必要があります。現在、以下のサーバーが稼働していません。
@@ -5112,11 +5228,8 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="HELP" xml:space="preserve">
     <value>ヘルプ</value>
   </data>
-  <data name="HELP_ELLIPSES" xml:space="preserve">
-    <value>ヘルプ...</value>
-  </data>
   <data name="HELP_MESSAGE_DISABLE_WLB" xml:space="preserve">
-    <value>WLB の一時停止</value>
+    <value>削除</value>
   </data>
   <data name="HIDE_DETAILS" xml:space="preserve">
     <value>詳細を非表示</value>
@@ -5249,7 +5362,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>(メニュー生成エラー)</value>
   </data>
   <data name="HOST_MENU_CPM_TEXT" xml:space="preserve">
-    <value>VM の移行ウィザード...</value>
+    <value>VM の移行ウィザード(&amp;M)...</value>
   </data>
   <data name="HOST_MENU_CURRENT_SERVER" xml:space="preserve">
     <value>現在のサーバー</value>
@@ -5316,6 +5429,9 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   </data>
   <data name="HOST_SHUTDOWN" xml:space="preserve">
     <value>サーバーのシャットダウン</value>
+  </data>
+  <data name="HOST_X" xml:space="preserve">
+    <value>ホスト '{0}':</value>
   </data>
   <data name="HOTFIX_CHECK" xml:space="preserve">
     <value>Hotfix チェック</value>
@@ -5413,20 +5529,29 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="IMPORT_LOWERCASE" xml:space="preserve">
     <value>インポート</value>
   </data>
+  <data name="IMPORT_OPTIONS_PAGE_CHOOSE_ISO_SR" xml:space="preserve">
+    <value>[ISO SR を選択]</value>
+  </data>
   <data name="IMPORT_OPTIONS_PAGE_ERROR_NO_FIXUP_ISO_INSTALLED" xml:space="preserve">
-    <value>XenCenter のインストール先フォルダに Fixup ISO が見つかりません。</value>
+    <value>OS Fixup ISO が見つかりません</value>
   </data>
   <data name="IMPORT_OPTIONS_PAGE_ERROR_NO_ISO_SR_AVAILABLE" xml:space="preserve">
     <value>適切な ISO SR が見つかりません。修復に必要な設定を確認して再試行してください。</value>
   </data>
   <data name="IMPORT_OPTIONS_PAGE_FOUND_EXISTING_ISO" xml:space="preserve">
-    <value>SR {0} 内の OS Fixup ISO により修復が行われます。</value>
+    <value>上記 SR 内の OS Fixup ISO により修復が行われます</value>
+  </data>
+  <data name="IMPORT_OPTIONS_PAGE_NEW_ISO_LIBRARY" xml:space="preserve">
+    <value>新規 ISO ライブラリ...</value>
   </data>
   <data name="IMPORT_OPTIONS_PAGE_TEXT" xml:space="preserve">
     <value>OS の修復設定</value>
   </data>
   <data name="IMPORT_OPTIONS_PAGE_TITLE" xml:space="preserve">
     <value>ハイパーバイザーの互換性問題の修復</value>
+  </data>
+  <data name="IMPORT_OPTIONS_PAGE_USE_SELECTED_ISO_LIBRARY" xml:space="preserve">
+    <value>選択した SR に OS Fixup ISO が自動的にコピーされます。</value>
   </data>
   <data name="IMPORT_SECURITY_PAGE_ERROR_MISSING_CERTIFICATE" xml:space="preserve">
     <value>アプライアンスの証明書が見つかりません。ファイルがありません。</value>
@@ -5624,7 +5749,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>インポートしたテンプレートのストレージ リポジトリを選択してください。</value>
   </data>
   <data name="IMPORT_WIZARD_VM_SELECTION_INTRODUCTION" xml:space="preserve">
-    <value>インポートする VM の仮想ネットワーク インターフェイス:</value>
+    <value>インポートする VM の仮想ネットワーク インターフェイス(&amp;V):</value>
   </data>
   <data name="IMPORT_WIZARD_VM_SR_HINT_TEXT" xml:space="preserve">
     <value>インポートした VM のストレージ リポジトリを選択してください。</value>
@@ -5719,6 +5844,9 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="INTERFACES_COUNT" xml:space="preserve">
     <value>インターフェイス: {0}</value>
   </data>
+  <data name="INVALID_NUMBER" xml:space="preserve">
+    <value>無効な数</value>
+  </data>
   <data name="INVALID_OVF" xml:space="preserve">
     <value>これは有効な OVF ファイルではありません。</value>
   </data>
@@ -5791,6 +5919,9 @@ SCSI ID: {2}
   </data>
   <data name="ISCSI_SHOULD_NO_BE_CREATED" xml:space="preserve">
     <value>SHOULD NEVER BE CREATED</value>
+  </data>
+  <data name="ISL_SR" xml:space="preserve">
+    <value>StorageLink テクノロジ</value>
   </data>
   <data name="ISOCOMBOBOX_CD_DRIVE" xml:space="preserve">
     <value>{1} の DVD ドライブ {0}</value>
@@ -5865,10 +5996,10 @@ SCSI ID: {2}
     <value>ライセンス エラー</value>
   </data>
   <data name="LICENSE_EXPIRED" xml:space="preserve">
-    <value>期限切れ</value>
+    <value>非ライセンス</value>
   </data>
   <data name="LICENSE_EXPIRED_NO_LICENSES_AVAILABLE" xml:space="preserve">
-    <value>期限切れ (使用可能なライセンスなし)</value>
+    <value>ライセンスがありません</value>
   </data>
   <data name="LICENSE_EXPIRED_OR_NEEDS_ACTIVATION" xml:space="preserve">
     <value>サーバー ライセンスの有効期限が切れたか、アクティブ化が必要です。</value>
@@ -5901,11 +6032,29 @@ SCSI ID: {2}
   <data name="LICENSE_FILE_TOO_LARGE" xml:space="preserve">
     <value>選択したライセンス ファイルのサイズが大きすぎます</value>
   </data>
+  <data name="LICENSE_FREE" xml:space="preserve">
+    <value>Free</value>
+  </data>
   <data name="LICENSE_HOST_NOT_LIVE" xml:space="preserve">
     <value>このホストは非アクティブになりました</value>
   </data>
   <data name="LICENSE_LICENSED" xml:space="preserve">
     <value>ライセンス済み</value>
+  </data>
+  <data name="LICENSE_MANAGER_BUY_LICENSE_LINK_TEXT" xml:space="preserve">
+    <value>ライセンスの購入...</value>
+  </data>
+  <data name="LICENSE_MANAGER_SUMMARY_LICENSE_EXPIRES" xml:space="preserve">
+    <value>ライセンスの有効期限:</value>
+  </data>
+  <data name="LICENSE_MANAGER_SUMMARY_LICENSE_SERVER" xml:space="preserve">
+    <value>ライセンス サーバー:</value>
+  </data>
+  <data name="LICENSE_MANAGER_SUMMARY_LICENSE_SOCKETS" xml:space="preserve">
+    <value>ソケット:</value>
+  </data>
+  <data name="LICENSE_MANAGER_SUMMARY_LICENSE_TYPE" xml:space="preserve">
+    <value>ライセンスの種類:</value>
   </data>
   <data name="LICENSE_NEVER" xml:space="preserve">
     <value>なし</value>
@@ -5940,8 +6089,17 @@ SCSI ID: {2}
   <data name="LICENSE_RESTRICTION_MESSAGE" xml:space="preserve">
     <value>ライセンスによる制限: {0} に接続できません。XE Express ライセンスを使用するサーバーが既に存在しています ({1})</value>
   </data>
+  <data name="LICENSE_SA_EXPIRED" xml:space="preserve">
+    <value>サポートおよび保守の有効期限が切れました</value>
+  </data>
+  <data name="LICENSE_SA_EXPIRES_IN" xml:space="preserve">
+    <value>サポートおよび保守の有効期限があと {0} で切れます</value>
+  </data>
   <data name="LICENSE_SERVER_COULD_NOT_OPEN_LINK" xml:space="preserve">
     <value>{0} を開くことができません</value>
+  </data>
+  <data name="LICENSE_SERVER_PORT_FORMAT" xml:space="preserve">
+    <value>{0}:{1}</value>
   </data>
   <data name="LICENSE_STATUS" xml:space="preserve">
     <value>状態</value>
@@ -5954,6 +6112,12 @@ SCSI ID: {2}
   <data name="LICENSE_TOO_MANY_SERVERS_SELECTED_TITLE" xml:space="preserve">
     <value>アクティブ化キーの適用</value>
   </data>
+  <data name="LICENSE_UNSUPPORTED" xml:space="preserve">
+    <value>サポートされません</value>
+  </data>
+  <data name="LICENSE_UPDATING" xml:space="preserve">
+    <value>アップデートしています...</value>
+  </data>
   <data name="LICENSE_UPDATING_LICENSES" xml:space="preserve">
     <value>ライセンスの更新</value>
   </data>
@@ -5962,6 +6126,12 @@ SCSI ID: {2}
   </data>
   <data name="LICENSE_WILL_EXPIRE" xml:space="preserve">
     <value>サーバー ライセンスの有効期限が 30 日以内に切れるか、アクティブ化が必要です。</value>
+  </data>
+  <data name="LICENSE_YOUR_LICENCE_EXPIRES_IN" xml:space="preserve">
+    <value>ライセンスがあと {0} で切れます</value>
+  </data>
+  <data name="LICENSE_YOUR_LICENCE_HAS_EXPIRED" xml:space="preserve">
+    <value>ライセンスの有効期限が切れました。</value>
   </data>
   <data name="LICENSING_DIALOG_EXPIRED_TEXT" xml:space="preserve">
     <value>有効期限が切れたサーバーがあります。XenServer ライセンスを割り当てるか、無償の XenServer 製品をアクティブ化してください。</value>
@@ -5977,9 +6147,6 @@ SCSI ID: {2}
   </data>
   <data name="LIST_SEPARATOR" xml:space="preserve">
     <value>, </value>
-  </data>
-  <data name="LOADAVG_UNIT" xml:space="preserve">
-    <value>ロード</value>
   </data>
   <data name="LOADING" xml:space="preserve">
     <value>'{0}' をロードしています...</value>
@@ -6004,6 +6171,18 @@ SCSI ID: {2}
   </data>
   <data name="LOG_DESTINATION" xml:space="preserve">
     <value>ログの記録先</value>
+  </data>
+  <data name="LUNPERVDIPICKER_IMPORT_VDI_COLUMN_TITLE" xml:space="preserve">
+    <value>VM - VDI (仮想ディスク)</value>
+  </data>
+  <data name="LUNPERVDIPICKER_VDI_COLUMN_TITLE" xml:space="preserve">
+    <value>VDI (仮想ディスク)</value>
+  </data>
+  <data name="LUNPERVDI_PAGE_NAME" xml:space="preserve">
+    <value>LUN-per-VDI マッピング</value>
+  </data>
+  <data name="LUNPERVDI_PAGE_TITLE" xml:space="preserve">
+    <value>仮想ディスク (VDI) をターゲット SR 上の個々の LUN にマップします</value>
   </data>
   <data name="MAC" xml:space="preserve">
     <value>MAC</value>
@@ -6252,6 +6431,9 @@ SCSI ID: {2}
   <data name="MAINWINDOW_REPAIR_SR_CONTEXT_MENU" xml:space="preserve">
     <value>修復(&amp;P)...</value>
   </data>
+  <data name="MAINWINDOW_RESTART_TOOLSTACK" xml:space="preserve">
+    <value>ツールスタックの再起動(&amp;K)</value>
+  </data>
   <data name="MAINWINDOW_RESUME" xml:space="preserve">
     <value>再開(&amp;E)</value>
   </data>
@@ -6289,7 +6471,7 @@ SCSI ID: {2}
     <value>一時停止(&amp;U)</value>
   </data>
   <data name="MAINWINDOW_TAKE_SNAPSHOT" xml:space="preserve">
-    <value>スナップショットの作成(&amp;A)...</value>
+    <value>スナップショットの作成(&amp;K)...</value>
   </data>
   <data name="MAINWINDOW_TOOLBAR_POWER_ON_SERVER" xml:space="preserve">
     <value>サーバーの電源投入 (Ctrl+B)</value>
@@ -6356,6 +6538,12 @@ SCSI ID: {2}
   </data>
   <data name="MANAGEMENT_NETWORK_WITH_POOL" xml:space="preserve">
     <value>{1} の {0} (管理)</value>
+  </data>
+  <data name="MANUAL_CHECK_FOR_UPDATES_PARTIAL_UNLICENSED_INFO" xml:space="preserve">
+    <value>一部のホストで Subscription Advantage が必要です</value>
+  </data>
+  <data name="MANUAL_CHECK_FOR_UPDATES_UNLICENSED_INFO" xml:space="preserve">
+    <value>Subscription Advantage が必要です</value>
   </data>
   <data name="MASTER" xml:space="preserve">
     <value>マスタ</value>
@@ -6625,6 +6813,9 @@ SCSI ID: {2}
   <data name="MESSAGEBOX_VIF_DELETE_TITLE" xml:space="preserve">
     <value>ネットワーク インターフェイスの削除</value>
   </data>
+  <data name="MESSAGE_ALERT_TITLE" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
   <data name="MIAMI_NOT_SUPPORTED" xml:space="preserve">
     <value>このバージョンの XenCenter は XenServer 4.0 および 4.1 をサポートしません。
 以前のバージョンをインストールしてください。</value>
@@ -6642,7 +6833,7 @@ SCSI ID: {2}
     <value>移行先のストレージ リポジトリの選択(&amp;D)</value>
   </data>
   <data name="MIGRATE_VDI_UPSELL_BLURB" xml:space="preserve">
-    <value>VDI ライブ マイグレーション機能を使用するには、XenServer をアップグレードしてください。この機能により、共有ストレージ上の複数の VDI を、同一プールのストレージ リポジトリ間で移行できます。VM のダウンタイムは発生しません。 
+    <value>VDI ライブ マイグレーション機能を使用するには、XenServer をアップグレードしてください。この機能により、複数の VDI を、同一プールの SR 間で移行できます。VM のダウンタイムは発生しません。 
 
 下のボタンを使用して、この機能や XenServer の試用についての情報を参照できます。</value>
   </data>
@@ -6874,6 +7065,9 @@ SCSI ID: {2}
   <data name="NETW_DETAILS_TEXT" xml:space="preserve">
     <value>ネットワーク設定</value>
   </data>
+  <data name="NETW_DETAILS_VLAN_NUMBER_IN_USE" xml:space="preserve">
+    <value>この VLAN 番号は既に使用されています。</value>
+  </data>
   <data name="NETW_EXTERNAL_DETAILS_TITLE" xml:space="preserve">
     <value>新規ネットワークの設定</value>
   </data>
@@ -6926,7 +7120,7 @@ SCSI ID: {2}
     <value>このサーバーのバージョンはマスタのものと異なります</value>
   </data>
   <data name="NEWPOOL_FREE_HOST_PAID_MASTER" xml:space="preserve">
-    <value>プール マスタはアップグレードされていますが、このサーバーはアップグレードされていません</value>
+    <value>XenServer Advanced Edition またはそれ以上のエディションのプールに Free Edition のサーバーを追加することはできません</value>
   </data>
   <data name="NEWPOOL_HAS_RUNNING_VMS" xml:space="preserve">
     <value>このサーバーには実行中または一時停止中の VM があります</value>
@@ -6938,7 +7132,7 @@ SCSI ID: {2}
     <value>このサーバーは既存のプールのマスタとして動作しています</value>
   </data>
   <data name="NEWPOOL_LICENSEMISMATCH" xml:space="preserve">
-    <value>サーバーのライセンスがマスタのものと一致していません。</value>
+    <value>このサーバーの XenServer ライセンスのエディションはプール マスタのものと異なります</value>
   </data>
   <data name="NEWPOOL_LINUXPACK" xml:space="preserve">
     <value>このサーバーの Linux パックのインストール状態はマスタのものと異なります</value>
@@ -6953,7 +7147,7 @@ SCSI ID: {2}
     <value>マスタに対する現在の役割には、このプールへのホストの追加が許可されていません。</value>
   </data>
   <data name="NEWPOOL_PAID_HOST_FREE_MASTER" xml:space="preserve">
-    <value>このサーバーはアップグレードされていますが、プール マスタはアップグレードされていません</value>
+    <value>XenServer Free Edition のプールに Advanced Edition またはそれ以上のエディションのサーバーを追加することはできません</value>
   </data>
   <data name="NEWPOOL_POOLINGRESTRICTED" xml:space="preserve">
     <value>このサーバーのライセンスではプール機能を使用できません</value>
@@ -7412,10 +7606,10 @@ NFS ストレージ リポジトリを設定する場合は、NFS サーバー�
     <value>新規 DVD ドライブが作成されました</value>
   </data>
   <data name="NEW_DVD_DRIVE_REBOOT" xml:space="preserve">
-    <value>新規 DVD ドライブのインストールを完了するには、VM を再起動する必要があります。</value>
+    <value>新規 DVD ドライブのインストールを完了するには、VM をシャットダウンして再起動する必要があります。</value>
   </data>
   <data name="NEW_DVD_DRIVE_REBOOT_TOOLS" xml:space="preserve">
-    <value>新規 DVD ドライブのインストールを完了するには、VM を再起動する必要があります。
+    <value>新規 DVD ドライブのインストールを完了するには、VM をシャットダウンして再起動する必要があります。
 VM が再起動したら、[XenServer Tools のインストール] を再度クリックしてください。</value>
   </data>
   <data name="NEW_DVD_DRIVE_REQUIRED" xml:space="preserve">
@@ -7532,6 +7726,12 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   </data>
   <data name="NEW_VM_WIZARD_TEMPLATEPAGE_UBUNTU" xml:space="preserve">
     <value>Ubuntu</value>
+  </data>
+  <data name="NFS_ISO_ALREADY_ATTACHED" xml:space="preserve">
+    <value>この NFS ISO ストレージは既に '{0}' に接続されています</value>
+  </data>
+  <data name="NFS_ISO_PATH_EXAMPLE" xml:space="preserve">
+    <value>例: server:/path</value>
   </data>
   <data name="NIC" xml:space="preserve">
     <value>NIC</value>
@@ -7659,6 +7859,9 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   <data name="NUMBER_OF_SNAPSHOTS_TO_KEEP" xml:space="preserve">
     <value>保持するスナップショット数</value>
   </data>
+  <data name="NUMBER_OF_SOCKETS" xml:space="preserve">
+    <value>ソケット数</value>
+  </data>
   <data name="NUMBER_SNAPSHOTS" xml:space="preserve">
     <value>{0} スナップショット</value>
   </data>
@@ -7768,6 +7971,9 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   <data name="PARTIALLY_CONNECTED" xml:space="preserve">
     <value>一部接続済み</value>
   </data>
+  <data name="PARTIALLY_LICENSED" xml:space="preserve">
+    <value>一部ライセンス済み</value>
+  </data>
   <data name="PASSPHRASE_STRENGTH_FAIR" xml:space="preserve">
     <value>標準</value>
   </data>
@@ -7809,6 +8015,9 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_RESTARTVMS" xml:space="preserve">
     <value>再起動する VM:</value>
+  </data>
+  <data name="PATCHINGWIZARD_MODEPAGE_RESTARTXAPI" xml:space="preserve">
+    <value>XAPI エージェントの再起動順序 (マスタは常に最初):</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_TEXT" xml:space="preserve">
     <value>アップデート モード</value>
@@ -7944,6 +8153,13 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   <data name="PATCH_FOR_XENSERVER_VERSION" xml:space="preserve">
     <value>このパッチは XenServer {0} 用です。</value>
   </data>
+  <data name="PATCH_NOT_FOUND" xml:space="preserve">
+    <value>見つかりません</value>
+  </data>
+  <data name="PATCH_NOT_FOUND_EXPANDED_DESCRIPTION" xml:space="preserve">
+    <value>{0}
+ファイルが見つかりません</value>
+  </data>
   <data name="PATCH_UPLOADED" xml:space="preserve">
     <value>アップデートがサーバー '{0}' にアップロードされました </value>
   </data>
@@ -7953,14 +8169,11 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   <data name="PBDS_CHECK_DESCRIPTION" xml:space="preserve">
     <value>ストレージ接続のチェック</value>
   </data>
+  <data name="PDSECTION_TITLE" xml:space="preserve">
+    <value>タイトル</value>
+  </data>
   <data name="PERFORMANCE_TAB_TITLE" xml:space="preserve">
     <value>パフォーマンス グラフ</value>
-  </data>
-  <data name="PERFORM_ALERT_EDIT_INTERVAL_TOO_HIGH" xml:space="preserve">
-    <value>間隔には、{0} 未満の値を指定してください</value>
-  </data>
-  <data name="PERFORM_ALERT_EDIT_INTERVAL_TOO_LOW" xml:space="preserve">
-    <value>間隔には、{0} 以上の値を指定してください</value>
   </data>
   <data name="PERFORM_ALERT_EDIT_INTERVAL_WRONG_MULTIPLE" xml:space="preserve">
     <value>間隔には、5 の倍数を指定してください</value>
@@ -7970,6 +8183,9 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   </data>
   <data name="PERMISSION_DENIED" xml:space="preserve">
     <value>権限が拒否されました</value>
+  </data>
+  <data name="PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
+    <value>Citrix XenServer Per-Socket ({0} 必須)(&amp;S)</value>
   </data>
   <data name="PHYSICAL_DEVICE" xml:space="preserve">
     <value>物理デバイス</value>
@@ -8048,6 +8264,11 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   </data>
   <data name="PLAN_ACTION_STATUS_REENABLING_HOST" xml:space="preserve">
     <value>ホストを有効にしています</value>
+  </data>
+  <data name="PLEASE_RECONNECT_HOST" xml:space="preserve">
+    <value>{0}
+
+このホストに再接続して再試行してください</value>
   </data>
   <data name="PLUGINS" xml:space="preserve">
     <value>プラグイン</value>
@@ -8165,6 +8386,9 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   <data name="POOL_HAS_NO_SHARED_STORAGE" xml:space="preserve">
     <value>このプールには共有ストレージがありません</value>
   </data>
+  <data name="POOL_IS_PARTIALLY_LICENSED" xml:space="preserve">
+    <value>このプールは一部のみライセンスが適用されています</value>
+  </data>
   <data name="POOL_JOIN_FORBIDDEN_BY_HA" xml:space="preserve">
     <value>プールの高可用性が有効になっています</value>
   </data>
@@ -8182,6 +8406,9 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   </data>
   <data name="POOL_NETWORK_TAB_TITLE" xml:space="preserve">
     <value>プール ネットワーク</value>
+  </data>
+  <data name="POOL_OR_HOST_IS_NOT_CONNECTED" xml:space="preserve">
+    <value>プールまたはホストが接続されていません</value>
   </data>
   <data name="POOL_PICKER_BLURB_NO_AFFINITY" xml:space="preserve">
     <value>この VM のインポート先プールまたはサーバーを選択します。ホーム サーバーは、テンプレートで指定されているものが使用されます\n\n選択したリソース プールに該当するサーバーがない場合は無視されます。</value>
@@ -8395,6 +8622,9 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   <data name="RBAC_WARNING_PAGE_DESCRIPTION_SR_CREATE" xml:space="preserve">
     <value>最初に、新しいストレージ リポジトリを作成できるかどうか、およびこのウィザード機能を使用できるかどうかを確認するために、役割に基づいたセキュリティ チェックが実行されます。</value>
   </data>
+  <data name="RBAC_WARNING_PAGE_HEADER_ROW_DESC" xml:space="preserve">
+    <value>'{2}' の {0} ({1}) の権限を確認しています...</value>
+  </data>
   <data name="RBAC_WARNING_PAGE_TEXT_TITLE" xml:space="preserve">
     <value>アクセス権のチェック</value>
   </data>
@@ -8483,6 +8713,9 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   <data name="REMOVED_UPDATE" xml:space="preserve">
     <value>アップデート '{0}' が削除されました</value>
   </data>
+  <data name="REMOVED_UPDATES" xml:space="preserve">
+    <value>アップデートが削除されました</value>
+  </data>
   <data name="REMOVED_VMS_FROM_APPLIANCE" xml:space="preserve">
     <value>vApp から削除されました </value>
   </data>
@@ -8567,6 +8800,9 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   <data name="REMOVE_STORAGE_SYSTEMS" xml:space="preserve">
     <value>ストレージ システムの削除(&amp;E)</value>
   </data>
+  <data name="REMOVE_UPDATES" xml:space="preserve">
+    <value>アップデートを削除します</value>
+  </data>
   <data name="REMOVE_VIRTUAL_DISK" xml:space="preserve">
     <value>仮想ディスクの削除</value>
   </data>
@@ -8593,6 +8829,9 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   </data>
   <data name="REMOVING_UPDATE" xml:space="preserve">
     <value>アップデート '{0}' を削除しています...</value>
+  </data>
+  <data name="REMOVING_UPDATES" xml:space="preserve">
+    <value>アップデートを削除しています</value>
   </data>
   <data name="REMOVING_VMS_FROM_APPLIANCE" xml:space="preserve">
     <value>vApp から削除しています</value>
@@ -8641,6 +8880,9 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   </data>
   <data name="REPAIR_SR_DIALOG_UNPLUGGED" xml:space="preserve">
     <value>アンプラグされました</value>
+  </data>
+  <data name="REPAIR_SR_WARNING_MULTIPATHS_DOWN" xml:space="preserve">
+    <value>マルチパスは完全には機能しません</value>
   </data>
   <data name="REPEATED_KEY" xml:space="preserve">
     <value>繰り返されたキー</value>
@@ -8693,8 +8935,17 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   <data name="RETRY_BUTTON_LABEL" xml:space="preserve">
     <value>再試行(&amp;R)</value>
   </data>
+  <data name="REVERTED_WIZARD_CHANGES" xml:space="preserve">
+    <value>このウィザードによるすべての変更を元に戻しました</value>
+  </data>
   <data name="REVERTING_POWER_STATE" xml:space="preserve">
     <value>{0} の電源状態を元に戻しています</value>
+  </data>
+  <data name="REVERTING_RESOLVED_PRECHECKS" xml:space="preserve">
+    <value>解決された事前チェックを元に戻しています</value>
+  </data>
+  <data name="REVERTING_WIZARD_CHANGES" xml:space="preserve">
+    <value>このウィザードによるすべての変更を元に戻しています</value>
   </data>
   <data name="REVERT_POOL_STATE" xml:space="preserve">
     <value>        プールの状態を元に戻す</value>
@@ -8702,8 +8953,8 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   <data name="REVERT_PRECHECK_ACTIONS" xml:space="preserve">
     <value>事前チェック操作を元に戻す</value>
   </data>
-  <data name="REVERT_RESOLVED_PRECHECKS" xml:space="preserve">
-    <value>解決された事前チェックを元に戻しています</value>
+  <data name="REVERT_WIZARD_CHANGES" xml:space="preserve">
+    <value>このウィザードによるすべての変更を元に戻します</value>
   </data>
   <data name="RIGHT_CTRL" xml:space="preserve">
     <value>右 Ctrl</value>
@@ -8761,6 +9012,21 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   <data name="ROLLING_UPGRADE_WARNING_SL" xml:space="preserve">
     <value>StorageLink Gateway を使用している VM があります。 
 StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレードは、VM がシャットダウン状態で NetApp、Dell EqualLogic、または SMI-S アダプタを使用する場合のみサポートされます。</value>
+  </data>
+  <data name="RPU_WARNING_DESCRIPTION_CLEARWATER_OR_GREATER" xml:space="preserve">
+    <value>'{0}': XenServer 6.2 用の新しいライセンスをライセンス サーバーに追加してください。</value>
+  </data>
+  <data name="RPU_WIZARD_TAMPA_AND_OLDER_TITLE" xml:space="preserve">
+    <value>ライセンスの状態を確認しています</value>
+  </data>
+  <data name="RPU_WIZARD_VMPR_VMPP_DEPRECATION" xml:space="preserve">
+    <value>'{0}': VM 保護ポリシーは、XenServer 6.2 から削除されています</value>
+  </data>
+  <data name="RPU_WIZARD_WLB_REMOVAL" xml:space="preserve">
+    <value>'{0}': WLB は、XenServer 6.2 から削除されています</value>
+  </data>
+  <data name="RPU_WIZARD_WSS_DEPRECATED" xml:space="preserve">
+    <value>'{0}': WSS サーバーのサポートは、XenServer 6.2 から削除されています</value>
   </data>
   <data name="RUNNING_ARCHIVE" xml:space="preserve">
     <value>アーカイブ中</value>
@@ -8872,6 +9138,12 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   </data>
   <data name="SECURITY_GROUPS" xml:space="preserve">
     <value>セキュリティ グループ</value>
+  </data>
+  <data name="SELECTED_HOST_POOL_NOT_CONNECTED" xml:space="preserve">
+    <value>選択したホストまたはプールに接続されていません</value>
+  </data>
+  <data name="SELECTION_CANNOT_BE_MIXED_WITH_CLEARWATER" xml:space="preserve">
+    <value>XenServer 6.2 以前と以降のライセンスは個別に適用する必要があります</value>
   </data>
   <data name="SELECT_A_FILTER" xml:space="preserve">
     <value>フィルタを選択...</value>
@@ -8998,6 +9270,9 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   </data>
   <data name="SET_STORAGELINK_LICENSE_SERVER_ACTION_TITLE" xml:space="preserve">
     <value>'{0}' のライセンス サーバーの設定</value>
+  </data>
+  <data name="SEVERITY" xml:space="preserve">
+    <value>重要度</value>
   </data>
   <data name="SHADOW_MEMORY_MULTIPLIER" xml:space="preserve">
     <value>シャドウ メモリ乗数: {0}</value>
@@ -9522,6 +9797,9 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   <data name="STRINGIFY_LIST_LASTSEP" xml:space="preserve">
     <value> および </value>
   </data>
+  <data name="STRING_SPACE_STRING" xml:space="preserve">
+    <value>{0} {1}</value>
+  </data>
   <data name="SUCCEEDED" xml:space="preserve">
     <value>成功</value>
   </data>
@@ -9641,9 +9919,6 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   </data>
   <data name="THE_SNAPSHOT" xml:space="preserve">
     <value>スナップショット '{0}'</value>
-  </data>
-  <data name="THE_USER" xml:space="preserve">
-    <value>ユーザー '{0}'</value>
   </data>
   <data name="THIS_VM_IS_NOT_PROTECTED" xml:space="preserve">
     <value>現在、この VM は VM 保護ポリシーで保護されていません。</value>
@@ -9836,6 +10111,9 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   <data name="UNRECOGNISED_PLUGIN_VERSION" xml:space="preserve">
     <value>認識できないプラグインのバージョン '{0}'</value>
   </data>
+  <data name="UNSUPPORTED_SR_TYPE" xml:space="preserve">
+    <value>SR の種類がサポートされていません</value>
+  </data>
   <data name="UNTAG" xml:space="preserve">
     <value>オブジェクトのタグ解除(&amp;J)</value>
   </data>
@@ -9979,6 +10257,11 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   </data>
   <data name="UPDATES_WIZARD_EXIT_MAINTENANCE_MODE" xml:space="preserve">
     <value>保守モードからの切り替え</value>
+  </data>
+  <data name="UPDATES_WIZARD_FILE_NOT_FOUND" xml:space="preserve">
+    <value>アップデート ファイル '{0}' が見つかりません。
+
+設定を確認し、もう一度実行してください。</value>
   </data>
   <data name="UPDATES_WIZARD_HA_ON_DESCRIPTION" xml:space="preserve">
     <value>プール '{0}' の高可用性は有効にできません。</value>
@@ -10294,9 +10577,6 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   <data name="USERNAME_LABLE" xml:space="preserve">
     <value>ユーザー名(&amp;U):</value>
   </data>
-  <data name="USERS" xml:space="preserve">
-    <value>{0} ユーザー</value>
-  </data>
   <data name="USER_AUTHORIZATION_FAILED" xml:space="preserve">
     <value>XenCenter で {0} の操作を許可できません。詳しくは、アプリケーション ログ ファイルを参照してください。</value>
   </data>
@@ -10309,11 +10589,20 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   <data name="UUID_SEARCH" xml:space="preserve">
     <value>＝</value>
   </data>
+  <data name="VALUE_HYPHEN_VALUE" xml:space="preserve">
+    <value>{0} - {1}</value>
+  </data>
   <data name="VAL_B" xml:space="preserve">
     <value>{0} B</value>
   </data>
   <data name="VAL_BYTE" xml:space="preserve">
     <value>B</value>
+  </data>
+  <data name="VAL_FORMAT" xml:space="preserve">
+    <value>{0} {1}</value>
+  </data>
+  <data name="VAL_FORMAT_SECONDS" xml:space="preserve">
+    <value>{0}{1}</value>
   </data>
   <data name="VAL_GB" xml:space="preserve">
     <value>{0} GB</value>
@@ -10322,22 +10611,16 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
     <value>GB</value>
   </data>
   <data name="VAL_GIGRATE" xml:space="preserve">
-    <value>Gbps</value>
+    <value>GBps</value>
   </data>
   <data name="VAL_KB" xml:space="preserve">
-    <value>{0} KB</value>
+    <value>{0} kB</value>
   </data>
   <data name="VAL_KILB" xml:space="preserve">
     <value>kB</value>
   </data>
   <data name="VAL_KILRATE" xml:space="preserve">
-    <value>kbps</value>
-  </data>
-  <data name="VAL_LOAD_FORMAT" xml:space="preserve">
-    <value>{0}{1}</value>
-  </data>
-  <data name="VAL_LOAD_NUM_FORMAT" xml:space="preserve">
-    <value>0.000</value>
+    <value>kBps</value>
   </data>
   <data name="VAL_MB" xml:space="preserve">
     <value>{0} MB</value>
@@ -10346,7 +10629,7 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
     <value>MB</value>
   </data>
   <data name="VAL_MEGRATE" xml:space="preserve">
-    <value>Mbps</value>
+    <value>MBps</value>
   </data>
   <data name="VAL_MICSEC" xml:space="preserve">
     <value>マイクロ秒</value>
@@ -10354,20 +10637,17 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   <data name="VAL_MILSEC" xml:space="preserve">
     <value>ミリ秒</value>
   </data>
-  <data name="VAL_RATE" xml:space="preserve">
-    <value>bps</value>
+  <data name="VAL_NANOSEC" xml:space="preserve">
+    <value>ns</value>
   </data>
-  <data name="VAL_RATE_FORMAT" xml:space="preserve">
-    <value>{0}{1}</value>
+  <data name="VAL_RATE" xml:space="preserve">
+    <value>Bps</value>
   </data>
   <data name="VAL_RATE_NUM_FORMAT" xml:space="preserve">
     <value>0.0</value>
   </data>
   <data name="VAL_SEC" xml:space="preserve">
     <value>秒</value>
-  </data>
-  <data name="VAL_SECS_FORMAT" xml:space="preserve">
-    <value>{0}{1}</value>
   </data>
   <data name="VAPP_SHUTDOWN_CONTEXT_MENU" xml:space="preserve">
     <value>vApp のシャットダウン(&amp;N)</value>
@@ -10459,6 +10739,9 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   <data name="VM" xml:space="preserve">
     <value>VM</value>
   </data>
+  <data name="VMPP" xml:space="preserve">
+    <value>VM 保護ポリシー</value>
+  </data>
   <data name="VMS" xml:space="preserve">
     <value>VM</value>
   </data>
@@ -10528,9 +10811,6 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   <data name="VM_IN_POOL" xml:space="preserve">
     <value>'{1}' の {0}</value>
   </data>
-  <data name="VM_IS_SHUT_DOWN" xml:space="preserve">
-    <value>この VM はシャットダウン状態です。</value>
-  </data>
   <data name="VM_LIVE_CHANGES_NOT_SUPPORTED_MESSAGE" xml:space="preserve">
     <value>メモリや VCPU への変更は、VM の再起動後に反映されます。</value>
   </data>
@@ -10567,6 +10847,9 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   <data name="VM_ON_SERVER" xml:space="preserve">
     <value>'{1}' の {0}</value>
   </data>
+  <data name="VM_PAUSED" xml:space="preserve">
+    <value>この VM は一時停止状態です。</value>
+  </data>
   <data name="VM_PROTECTION_CONTEXT_MENU" xml:space="preserve">
     <value>VM 保護ポリシー(&amp;O)...</value>
   </data>
@@ -10575,6 +10858,12 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   </data>
   <data name="VM_PROTECTION_POLICY_FAILED" xml:space="preserve">
     <value>{0} ({1} 項目の VM で失敗)</value>
+  </data>
+  <data name="VM_PROTECTION_POLICY_HOST_NOT_LIVE" xml:space="preserve">
+    <value>プール マスタに到達できません</value>
+  </data>
+  <data name="VM_PROTECTION_POLICY_SUCCEEDED" xml:space="preserve">
+    <value>成功</value>
   </data>
   <data name="VM_REVERTED" xml:space="preserve">
     <value>VM が '{0}' の状態に戻りました</value>
@@ -10593,6 +10882,9 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   </data>
   <data name="VM_SUCCESSFULLY_CREATED" xml:space="preserve">
     <value>VM が作成されました</value>
+  </data>
+  <data name="VM_SUSPENDED" xml:space="preserve">
+    <value>この VM は一時停止状態です。</value>
   </data>
   <data name="VM_USES_LOCAL_STORAGE" xml:space="preserve">
     <value>この VM はローカル ストレージを使用します</value>
@@ -11332,9 +11624,6 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   <data name="WLB_SUBSCRIPTION_DELIVERON" xml:space="preserve">
     <value>配信日</value>
   </data>
-  <data name="WLB_SUBSCRIPTION_DELIVERYOPTIONS" xml:space="preserve">
-    <value>配信オプション</value>
-  </data>
   <data name="WLB_SUBSCRIPTION_EDITED_BY" xml:space="preserve">
     <value>編集者</value>
   </data>
@@ -11350,9 +11639,6 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   <data name="WLB_SUBSCRIPTION_FORMAT" xml:space="preserve">
     <value>フォーマット</value>
   </data>
-  <data name="WLB_SUBSCRIPTION_HISTORY" xml:space="preserve">
-    <value>履歴</value>
-  </data>
   <data name="WLB_SUBSCRIPTION_LASTSENT" xml:space="preserve">
     <value>最終送信</value>
   </data>
@@ -11362,14 +11648,8 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   <data name="WLB_SUBSCRIPTION_REPLYTO" xml:space="preserve">
     <value>返信先</value>
   </data>
-  <data name="WLB_SUBSCRIPTION_REPORTPARAMETERS" xml:space="preserve">
-    <value>レポートのパラメータ</value>
-  </data>
   <data name="WLB_SUBSCRIPTION_RUNAT" xml:space="preserve">
     <value>実行時刻</value>
-  </data>
-  <data name="WLB_SUBSCRIPTION_SCHEDULEOPTIONS" xml:space="preserve">
-    <value>スケジュール オプション</value>
   </data>
   <data name="WLB_SUBSCRIPTION_STARTING" xml:space="preserve">
     <value>起動しています</value>
@@ -11379,9 +11659,6 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   </data>
   <data name="WLB_SUBSCRIPTION_TO" xml:space="preserve">
     <value>宛先</value>
-  </data>
-  <data name="WLB_TAB_CONFIGURATION" xml:space="preserve">
-    <value>設定</value>
   </data>
   <data name="WLB_TASK_SCHEDULE_CONFLICT_BLURB" xml:space="preserve">
     <value>既存のスケジュールと競合しています。</value>
@@ -11448,6 +11725,9 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   <data name="XENSERVER" xml:space="preserve">
     <value>XenServer</value>
   </data>
+  <data name="XENSERVER_6_2" xml:space="preserve">
+    <value>XenServer 6.2</value>
+  </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">
     <value>XenServer テンプレート</value>
   </data>
@@ -11479,6 +11759,15 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   </data>
   <data name="X_HIDDEN" xml:space="preserve">
     <value>{0} (非表示)</value>
+  </data>
+  <data name="X_IS_DEPRECATED_IN_X" xml:space="preserve">
+    <value>{0} 機能は {1} で廃止され、今後のバージョンで使用できない可能性があります</value>
+  </data>
+  <data name="X_IS_REMOVED_IN_X" xml:space="preserve">
+    <value>{0} 機能は {1} で使用できません</value>
+  </data>
+  <data name="X_WITH_WARNING_X" xml:space="preserve">
+    <value>{0} 警告: {1}</value>
   </data>
   <data name="YES" xml:space="preserve">
     <value>はい</value>

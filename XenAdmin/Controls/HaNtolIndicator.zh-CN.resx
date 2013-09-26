@@ -143,6 +143,9 @@
   <data name="tableStatus.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="pictureBoxStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="pictureBoxStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -312,6 +315,9 @@
   <data name="&gt;&gt;labelMax.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="spinner.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="spinner.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -339,11 +345,11 @@
   <data name="&gt;&gt;spinner.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="numericUpDownCapacity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>81, 30</value>
+  <data name="numericUpDownCapacity.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
-  <data name="numericUpDownCapacity.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 3, 0, 0</value>
+  <data name="numericUpDownCapacity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 39</value>
   </data>
   <data name="numericUpDownCapacity.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 19</value>
@@ -366,23 +372,17 @@
   <data name="&gt;&gt;numericUpDownCapacity.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="labelNumberOfServers.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="labelNumberOfServers.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="labelNumberOfServers.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="labelNumberOfServers.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="labelNumberOfServers.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 27</value>
-  </data>
-  <data name="labelNumberOfServers.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="labelNumberOfServers.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 4, 0, 0</value>
   </data>
   <data name="labelNumberOfServers.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 22</value>
@@ -433,7 +433,7 @@
     <value>0</value>
   </data>
   <data name="tableServerFailureLimit.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tableStatus" Row="2" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="labelMax" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="spinner" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="numericUpDownCapacity" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelNumberOfServers" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,40" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tableStatus" Row="2" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="labelMax" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="spinner" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="numericUpDownCapacity" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelNumberOfServers" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBoxControls.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>

@@ -134,7 +134,7 @@
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>アップデート対象のサーバーを一覧から選択します。
-一覧で選択できないサーバーは、製品のエディションが異なるなどの理由でアップデートをインストールできないことを示します。</value>
+一覧で選択できないサーバーにはこのアップデートをインストールできません。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -256,15 +256,6 @@
   <data name="ColumnVersion.Width" type="System.Int32, mscorlib">
     <value>67</value>
   </data>
-  <metadata name="ColumnEdition.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnEdition.HeaderText" xml:space="preserve">
-    <value>エディション</value>
-  </data>
-  <data name="ColumnEdition.Width" type="System.Int32, mscorlib">
-    <value>64</value>
-  </data>
   <data name="dataGridViewHosts.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 60</value>
   </data>
@@ -323,12 +314,6 @@
     <value>ColumnVersion</value>
   </data>
   <data name="&gt;&gt;ColumnVersion.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnEdition.Name" xml:space="preserve">
-    <value>ColumnEdition</value>
-  </data>
-  <data name="&gt;&gt;ColumnEdition.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

@@ -478,7 +478,7 @@
     <value>13</value>
   </data>
   <data name="labelNeedDriver.Text" xml:space="preserve">
-    <value>この VM に、適切なグラフィック カード ドライバをインストールする★しておく必要があります。</value>
+    <value>この VM に、適切なグラフィック カード ドライバをインストールしておく必要があります。</value>
   </data>
   <data name="&gt;&gt;labelNeedDriver.Name" xml:space="preserve">
     <value>labelNeedDriver</value>

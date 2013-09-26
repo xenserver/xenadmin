@@ -133,8 +133,8 @@
     <value>1</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>请从可用服务器列表中选择一个或多个服务器。
-无法应用所选更新的服务器(例如由于版本不同)在此列表中显示为禁用状态。</value>
+    <value>从可用服务器列表中选择一个或多个服务器。
+无法应用所选更新的服务器在此列表中显示为已禁用。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -256,15 +256,6 @@
   <data name="ColumnVersion.Width" type="System.Int32, mscorlib">
     <value>67</value>
   </data>
-  <metadata name="ColumnEdition.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnEdition.HeaderText" xml:space="preserve">
-    <value>版本</value>
-  </data>
-  <data name="ColumnEdition.Width" type="System.Int32, mscorlib">
-    <value>64</value>
-  </data>
   <data name="dataGridViewHosts.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 60</value>
   </data>
@@ -323,12 +314,6 @@
     <value>ColumnVersion</value>
   </data>
   <data name="&gt;&gt;ColumnVersion.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnEdition.Name" xml:space="preserve">
-    <value>ColumnEdition</value>
-  </data>
-  <data name="&gt;&gt;ColumnEdition.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

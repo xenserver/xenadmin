@@ -1169,6 +1169,48 @@
   <data name="Message.body-vm_uncooperative" xml:space="preserve">
     <value>虚拟机“{0}”在收到请求时未降低其内存使用率。</value>
   </data>
+  <data name="Message.body-vmpp_archive_failed_0" xml:space="preserve">
+    <value>无法完成此保护策略的存档操作。</value>
+  </data>
+  <data name="Message.body-vmpp_archive_lock_failed" xml:space="preserve">
+    <value>当前无法存档快照，因为已在执行存档操作。在同一池中一次只能执行一项 VMPR 存档操作。请稍后再运行保护策略。</value>
+  </data>
+  <data name="Message.body-vmpp_archive_missed_event" xml:space="preserve">
+    <value>当前无法存档快照，因为已在执行存档操作。在同一池中一次只能执行一项 VMPR 存档操作。请检查此池中保护策略的存档计划，确保其不冲突。</value>
+  </data>
+  <data name="Message.body-vmpp_archive_succeeded" xml:space="preserve">
+    <value>已成功存档计划的快照。</value>
+  </data>
+  <data name="Message.body-vmpp_archive_target_mount_failed" xml:space="preserve">
+    <value>无法装载在此 VM 保护策略中指定为存档目标的远程 CIFS 或 NFS 共享。请检查 VMPR 存档目标配置设置。</value>
+  </data>
+  <data name="Message.body-vmpp_archive_target_unmount_failed" xml:space="preserve">
+    <value>无法卸载在此 VM 保护策略中指定为存档目标的远程 CIFS 或 NFS 共享。请确保本地目录已成功装载并且没有打开的句柄。</value>
+  </data>
+  <data name="Message.body-vmpp_backup_succeeded" xml:space="preserve">
+    <value>备份成功</value>
+  </data>
+  <data name="Message.body-vmpp_license_error" xml:space="preserve">
+    <value>您使用的 XenServer 许可证不允许您使用 VMPR 功能。VMPR 在 Citrix XenServer Advanced Edition 或更高版本中可用。</value>
+  </data>
+  <data name="Message.body-vmpp_snapshot_archive_already_exists" xml:space="preserve">
+    <value>已存档快照。</value>
+  </data>
+  <data name="Message.body-vmpp_snapshot_failed" xml:space="preserve">
+    <value>VM 保护策略无法运行，因为无法创建快照。</value>
+  </data>
+  <data name="Message.body-vmpp_snapshot_lock_failed" xml:space="preserve">
+    <value>当前无法创建快照，因为已在执行此策略计划的快照操作。请稍后再试。</value>
+  </data>
+  <data name="Message.body-vmpp_snapshot_missed_event" xml:space="preserve">
+    <value>当前无法创建快照，因为已在此池中执行计划的快照操作。在同一池中一次只能执行一项 VMPR 快照操作。请检查此池中保护策略的快照计划，确保其不冲突。</value>
+  </data>
+  <data name="Message.body-vmpp_snapshot_succeeded" xml:space="preserve">
+    <value>已成功创建计划的快照。</value>
+  </data>
+  <data name="Message.body-vmpp_xapi_logon_failure" xml:space="preserve">
+    <value>无法登录 XAPI 会话。</value>
+  </data>
   <data name="Message.body-wlb_consultation_failed" xml:space="preserve">
     <value>池“{0}”无法从 WLB 检索 VM“{1}”的放置建议。</value>
   </data>
@@ -1353,46 +1395,46 @@
     <value>VM 不合作</value>
   </data>
   <data name="Message.name-vmpp_archive_failed_0" xml:space="preserve">
-    <value>此保护策略的存档阶段失败</value>
+    <value>VMPR 存档操作失败</value>
   </data>
   <data name="Message.name-vmpp_archive_lock_failed" xml:space="preserve">
-    <value>正在执行池中某个保护策略的存档子策略。请稍后重试</value>
+    <value>VMPR 存档操作失败</value>
   </data>
   <data name="Message.name-vmpp_archive_missed_event" xml:space="preserve">
-    <value>计划快照存档事件因另一个持续计划快照的运行而丢失。这是异常行为，请重新配置快照子策略。</value>
+    <value>VMPR 存档操作失败</value>
   </data>
   <data name="Message.name-vmpp_archive_succeeded" xml:space="preserve">
-    <value>存档成功</value>
+    <value>已成功存档计划的快照</value>
   </data>
   <data name="Message.name-vmpp_archive_target_mount_failed" xml:space="preserve">
-    <value>无法装载存档目标。请检查存档目标配置设置</value>
+    <value>VMPR 存档操作失败</value>
   </data>
   <data name="Message.name-vmpp_archive_target_unmount_failed" xml:space="preserve">
-    <value>无法卸载存档目标。请确保本地目录已成功装载，并且没有打开的句柄</value>
+    <value>无法卸载 VMPR 存档目标</value>
   </data>
   <data name="Message.name-vmpp_backup_succeeded" xml:space="preserve">
     <value>备份成功</value>
   </data>
   <data name="Message.name-vmpp_license_error" xml:space="preserve">
-    <value>使用当前许可证不允许执行此操作</value>
+    <value>VMPR 失败: VMPR 的许可证不足</value>
   </data>
   <data name="Message.name-vmpp_snapshot_archive_already_exists" xml:space="preserve">
-    <value>快照已存档</value>
+    <value>无法存档快照</value>
   </data>
   <data name="Message.name-vmpp_snapshot_failed" xml:space="preserve">
-    <value>保护策略失败</value>
+    <value>VMPR 失败: 无法创建快照</value>
   </data>
   <data name="Message.name-vmpp_snapshot_lock_failed" xml:space="preserve">
-    <value>正在执行此保护策略的快照。请稍后重试</value>
+    <value>VMPR 失败: 无法创建快照</value>
   </data>
   <data name="Message.name-vmpp_snapshot_missed_event" xml:space="preserve">
-    <value>计划快照事件因另一个持续计划快照的运行而丢失。这是异常行为，请重新配置快照子策略。</value>
+    <value>VMPR 失败: 无法创建快照</value>
   </data>
   <data name="Message.name-vmpp_snapshot_succeeded" xml:space="preserve">
-    <value>快照已成功</value>
+    <value>已成功计划快照</value>
   </data>
   <data name="Message.name-vmpp_xapi_logon_failure" xml:space="preserve">
-    <value>无法登录 API 会话</value>
+    <value>VMPP XAPI 登录失败</value>
   </data>
   <data name="Message.name-wlb_consultation_failed" xml:space="preserve">
     <value>WLB 咨询失败</value>
@@ -1523,491 +1565,17 @@
   <data name="SR.name_label-xenserver-tools" xml:space="preserve">
     <value>XenServer Tools</value>
   </data>
-  <data name="VM.TemplateDescription-CentOS 4.5 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 4.5 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 4.5" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 CentOS 4.5。</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 4.6 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 4.6 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 4.6" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 CentOS 4.6。</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 4.7 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 4.7 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 4.7" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 4.7 发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 4.8 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 4.8 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 5 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 5 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 5 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 5 (64 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 5.0 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 5.0 (32 位)发行版来宾操作系统创建 Linux VM</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 5.0 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 5.0 (64 位)发行版来宾操作系统创建 Linux VM</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 5.0 x64" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 64 位 CentOS 5.0。</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 5.0" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 32 位 CentOS 5.0。</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 5.1 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 5.1 (32 位)发行版来宾操作系统创建 Linux VM</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 5.1 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 5.1 (64 位)发行版来宾操作系统创建 Linux VM</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 5.1 x64" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 64 位 CentOS 5.1。</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 5.1" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 32 位 CentOS 5.1。</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 5.2 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 5.2 (32 位)发行版来宾操作系统创建 Linux VM</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 5.2 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 5.2 (64 位)发行版来宾操作系统创建 Linux VM</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 5.2 x64" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 5.2 x64 发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 5.2" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 5.2 发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 5.3 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 5.3 (32 位)发行版来宾操作系统创建 Linux VM</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 5.3 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 5.3 (64 位)发行版来宾操作系统创建 Linux VM</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 5.3 x64" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 5.3 x64 发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 5.3" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 5.3 发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 5.4 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 5.4 (32 位)发行版来宾操作系统创建 Linux VM</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 5.4 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 5.4 (64 位)发行版来宾操作系统创建 Linux VM</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 6 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 6 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 6 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 6 (64 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 6.0 (32-bit) (experimental)" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 6.0 (32 位)发行版来宾操作系统创建 Linux VM。目前，对该来宾操作系统的支持仍在实验阶段。</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 6.0 (64-bit) (experimental)" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 6.0 (64 位)发行版来宾操作系统创建 Linux VM。目前，对该来宾操作系统的支持仍在实验阶段。</value>
-  </data>
-  <data name="VM.TemplateDescription-CentOS 6.0 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 CentOS 6.0 (64 位)发行版来宾操作系统创建 Linux VM</value>
-  </data>
-  <data name="VM.TemplateDescription-Citrix XenApp on Windows Server 2003 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Windows Server 2003 SP2 (32 位)来宾操作系统创建 VM。支持 Server、Enterprise、Data Centre 和 SBS Edition。此模板专为优化 XenApp 的性能而进行了特别调整。</value>
-  </data>
-  <data name="VM.TemplateDescription-Citrix XenApp on Windows Server 2003 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Windows Server 2003 SP2 (64 位)来宾操作系统创建 VM。支持 Server、Enterprise、Data Centre 和 SBS Edition。此模板专为优化 XenApp 的性能而进行了特别调整。</value>
-  </data>
-  <data name="VM.TemplateDescription-Citrix XenApp on Windows Server 2008 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Windows Server 2008 SP2 (32 位)来宾操作系统创建 VM。支持所有版本。此模板专为优化 XenApp 的性能而进行了特别调整。</value>
-  </data>
-  <data name="VM.TemplateDescription-Citrix XenApp on Windows Server 2008 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Windows Server 2008 SP2 (64 位)来宾操作系统创建 VM。支持所有版本。此模板专为优化 XenApp 的性能而进行了特别调整。</value>
-  </data>
-  <data name="VM.TemplateDescription-Citrix XenApp on Windows Server 2008 R2 (64-bit)" xml:space="preserve">
-    <value>此模板可用于太拼命过过 Windows Server 2008 R2 或 Windows Server 2008 R2 SP1 (64 位)来宾操作系统创建 VM。支持所有版本。此模板专为优化 XenApp 性能而进行了特别的调整。</value>
-  </data>
-  <data name="VM.TemplateDescription-Citrix XenApp x64" xml:space="preserve">
-    <value>安装针对 Citrix XenApp 安装优化的 64 位 Windows Server® 2003。</value>
-  </data>
-  <data name="VM.TemplateDescription-Citrix XenApp" xml:space="preserve">
-    <value>安装针对 Citrix XenApp 安装优化的 32 位 Windows Server® 2003。</value>
-  </data>
-  <data name="VM.TemplateDescription-Debian Etch 4.0" xml:space="preserve">
-    <value>安装随时可用的 Debian Etch 4.0 安装。</value>
-  </data>
-  <data name="VM.TemplateDescription-Debian Lenny 5.0 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Debian Lenny 5.0 (32 位)发行版来宾操作系统创建 VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Debian Lenny 5.0" xml:space="preserve">
-    <value>此模板可用于通过 Debian Lenny 5.0 发行版来宾操作系统创建 VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Debian Sarge 3.1" xml:space="preserve">
-    <value>安装随时可用的 Debian Sarge 3.1 安装。</value>
-  </data>
-  <data name="VM.TemplateDescription-Debian Squeeze 6.0 (32-bit) (experimental)" xml:space="preserve">
-    <value>此模板可用于通过 Debian Squeeze 6.0 (32 位)发行版来宾操作系统创建 VM。目前，对该来宾操作系统的支持仍在实验阶段。</value>
-  </data>
-  <data name="VM.TemplateDescription-Debian Squeeze 6.0 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Debian Squeeze 6.0 (32 位)发行版来宾操作系统创建 VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Debian Squeeze 6.0 (64-bit) (experimental)" xml:space="preserve">
-    <value>此模板可用于通过 Debian Squeeze 6.0 (64 位)发行版来宾操作系统创建 VM。目前，对该来宾操作系统的支持仍在实验阶段。</value>
-  </data>
-  <data name="VM.TemplateDescription-Debian Squeeze 6.0 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Debian Squeeze 6.0 (64 位)发行版来宾操作系统创建 VM。</value>
-  </data>
   <data name="VM.TemplateDescription-Demo Linux VM" xml:space="preserve">
     <value>此模板可用于通过内置 Linux 发行版创建 Linux VM，以进行测试和演示。建议不要在生产环境中使用。</value>
   </data>
-  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5 (32-bit)" xml:space="preserve">
-    <value>此模板可用于从 Oracle Enterprise Linux 5 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5 (64-bit)" xml:space="preserve">
-    <value>此模板可用于从 Oracle Enterprise Linux 5 (64 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.0 (32-bit)" xml:space="preserve">
-    <value>此模板可用于从 Oracle Enterprise Linux 5.0 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.0 (64-bit)" xml:space="preserve">
-    <value>此模板可用于从 Oracle Enterprise Linux 5.0 (64 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.0 x64" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 64 位 Oracle Enterprise Linux 5.0。</value>
-  </data>
-  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.0" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 32 位 Oracle Enterprise Linux 5.0。</value>
-  </data>
-  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.1 (32-bit)" xml:space="preserve">
-    <value>此模板可用于从 Oracle Enterprise Linux 5.1 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.1 (64-bit)" xml:space="preserve">
-    <value>此模板可用于从 Oracle Enterprise Linux 5.1 (64 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.1 x64" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 64 位 Oracle Enterprise Linux 5.1。</value>
-  </data>
-  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.1" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 32 位 Oracle Enterprise Linux 5.1。</value>
-  </data>
-  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.2 (32-bit)" xml:space="preserve">
-    <value>此模板可用于从 Oracle Enterprise Linux 5.2 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.2 (64-bit)" xml:space="preserve">
-    <value>此模板可用于从 Oracle Enterprise Linux 5.2 (64 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.2 x64" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 64 位 Oracle Enterprise Linux 5.2。</value>
-  </data>
-  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.2" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 32 位 Oracle Enterprise Linux 5.2。</value>
-  </data>
-  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.3 (32-bit)" xml:space="preserve">
-    <value>此模板可用于从 Oracle Enterprise Linux 5.3 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.3 (64-bit)" xml:space="preserve">
-    <value>此模板可用于从 Oracle Enterprise Linux 5.3 (64 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.4 (32-bit)" xml:space="preserve">
-    <value>此模板可用于从 Oracle Enterprise Linux 5.4 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Oracle Enterprise Linux 5.4 (64-bit)" xml:space="preserve">
-    <value>此模板可用于从 Oracle Enterprise Linux 5.4 (64 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Oracle Enterprise Linux 6 (32-bit)" xml:space="preserve">
-    <value>此模板可用于从 Oracle Enterprise Linux 6 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Oracle Enterprise Linux 6 (64-bit)" xml:space="preserve">
-    <value>此模板可用于从 Oracle Enterprise Linux 6 (64 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Oracle Enterprise Linux 6.0 (32-bit)" xml:space="preserve">
-    <value>此模板可用于从 Oracle Enterprise Linux 6.0 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Oracle Enterprise Linux 6.0 (64-bit)" xml:space="preserve">
-    <value>此模板可用于从 Oracle Enterprise Linux 6.0 (64 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
   <data name="VM.TemplateDescription-Other install media" xml:space="preserve">
     <value>如果未列出您要使用的操作系统，或许可以通过选择此模板来进行安装。建议仅由高级用户尝试使用此模板，并且请注意，我们的产品仅在运行标准随附模板所涵盖的受支持发行版和特定版本的情况下经过测试。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 4.1" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 Red Hat Enterprise Linux 4.1。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 4.4" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 Red Hat Enterprise Linux 4.4。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 4.5 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 RHEL 4.5 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 4.5" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 Red Hat Enterprise Linux 4.5。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 4.6 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 RHEL 4.6 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 4.6" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 Red Hat Enterprise Linux 4.6。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 4.7 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 RHEL 4.7 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 4.7" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 RHEL 4.7 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 4.8 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 RHEL 4.8 (32 位)发行版来宾操作系统创建 Linux VM。在创建 VM 后，必须安装“XenServer Tools”，以便应用 Citrix RHEL 4.8 内核。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 RHEL 5 (32 位)发行版来宾操作系统创建 Linux VM。必须使用 5.4 或更高版本的内核。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 RHEL 5 (64 位)发行版来宾操作系统创建 Linux VM。必须使用 5.4 或更高版本的内核。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.0 (32-bit)" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 32 位 Red Hat Enterprise Linux 5.0。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.0 (64-bit)" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 64 位 Red Hat Enterprise Linux 5.0。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.0 x64" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 64 位 Red Hat Enterprise Linux 5.0。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.0" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 32 位 Red Hat Enterprise Linux 5.0。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.1 (32-bit)" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 32 位 Red Hat Enterprise Linux 5.1。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.1 (64-bit)" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 64 位 Red Hat Enterprise Linux 5.1。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.1 x64" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 64 位 Red Hat Enterprise Linux 5.1。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.1" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 32 位 Red Hat Enterprise Linux 5.1。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.2 (32-bit)" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 32 位 Red Hat Enterprise Linux 5.2。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.2 (64-bit)" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 64 位的 Red Hat Enterprise Linux 5.2。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.2 x64" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 64 位的 Red Hat Enterprise Linux 5.2。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.2" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 32 位 Red Hat Enterprise Linux 5.2。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.3 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 Red Hat Enterprise Linux 5.3 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.3 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 Red Hat Enterprise Linux 5.3 (64 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.3 x64" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 RHEL 5.3 x64 发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.3" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 RHEL 5.3 发行版来宾操作系统创建 Linux VM。必须使用 5.4 或更高版本的内核。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.4 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 Red Hat Enterprise Linux 5.4 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 5.4 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 Red Hat Enterprise Linux 5.4 (64 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 6 (32-bit) (experimental)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 Red Hat Enterprise Linux 6.0 (32 位)发行版来宾操作系统创建 Linux VM。目前，对该来宾操作系统的支持仍在实验阶段。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 6 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 Red Hat Enterprise Linux 6.0 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 6 (64-bit) (experimental)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 Red Hat Enterprise Linux 6.0 (64 位)发行版来宾操作系统创建 Linux VM。目前，对该来宾操作系统的支持仍在实验阶段。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 6 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 Red Hat Enterprise Linux 6.0 (64 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 6.0 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 Red Hat Enterprise Linux 6.0 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Red Hat Enterprise Linux 6.0 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 Red Hat Enterprise Linux 6.0 (64 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP1 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 SUSE Linux Enterprise Server 10 SP1 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP1 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 SUSE Linux Enterprise Server 10 SP1 (64 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP1 x64" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 64 位 SUSE Linux Enterprise Server 10 Service Pack 1。</value>
-  </data>
-  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP1" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 32 位 SUSE Linux Enterprise Server 10 Service Pack 1。</value>
-  </data>
-  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP2 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 SUSE Linux Enterprise Server 10 SP1 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP2 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 SUSE Linux Enterprise Server 10 SP2 (64 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP2 x64" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 64 位 SUSE Linux Enterprise Server 10 Service Pack 2。</value>
-  </data>
-  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP2" xml:space="preserve">
-    <value>从供应商介质或网络安装服务器安装 32 位 SUSE Linux Enterprise Server 10 Service Pack 2。</value>
-  </data>
-  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP3 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 SUSE Linux Enterprise Server 10 SP3 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP3 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 SUSE Linux Enterprise Server 10 SP3 (64 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP4 (32-bit) (experimental)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 SUSE Linux Enterprise Server 10 SP4 (32 位)发行版来宾操作系统创建 Linux VM。目前，对该来宾操作系统的支持仍在实验阶段。</value>
-  </data>
-  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP4 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 SUSE Linux Enterprise Server 10 SP4 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP4 (64-bit) (experimental)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 SUSE Linux Enterprise Server 10 SP4 (64 位)发行版来宾操作系统创建 Linux VM。目前，对该来宾操作系统的支持仍在实验阶段。</value>
-  </data>
-  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 10 SP4 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 SUSE Linux Enterprise Server 10 SP4 (64 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 11 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 SUSE Linux Enterprise Server 11 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 11 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 SUSE Linux Enterprise Server 11 (64 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 11 SP1 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 SUSE Linux Enterprise Server 11 SP1 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 11 SP1 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 SUSE Linux Enterprise Server 11 SP1 (64 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 11 x64" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 SUSE Linux Enterprise Server 11 x64 发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 11" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 SUSE Linux Enterprise Server 11 发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 9 SP4 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 SUSE Linux Enterprise Server 9 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-SUSE Linux Enterprise Server 9 SP4" xml:space="preserve">
-    <value>从网络安装服务器安装 SUSE Linux Enterprise Server 9 Service Pack 4。</value>
-  </data>
-  <data name="VM.TemplateDescription-Small Debian Etch" xml:space="preserve">
-    <value>此模板可用于通过小型 Debian Etch 发行版来宾操作系统创建 VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Solaris 10 (experimental)" xml:space="preserve">
-    <value>此模板可用于通过 Solaris 10 来宾操作系统创建 VM。目前，对该来宾操作系统的支持仍在实验阶段。</value>
-  </data>
-  <data name="VM.TemplateDescription-Ubuntu Lucid Lynx 10.04 (32-bit) (experimental)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 Ubuntu Lucid Lynx 10.04 (32 位)发行版来宾操作系统创建 Linux VM。目前，对该来宾操作系统的支持仍在实验阶段。</value>
-  </data>
-  <data name="VM.TemplateDescription-Ubuntu Lucid Lynx 10.04 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 Ubuntu Lucid Lynx 10.04 (32 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Ubuntu Lucid Lynx 10.04 (64-bit) (experimental)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 Ubuntu Lucid Lynx 10.04 (64 位)发行版来宾操作系统创建 Linux VM。目前，对此来宾操作系统的支持仍在试验阶段。</value>
-  </data>
-  <data name="VM.TemplateDescription-Ubuntu Lucid Lynx 10.04 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 Ubuntu Lucid Lynx 10.04 (64 位)发行版来宾操作系统创建 Linux VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Ubuntu Maverick Meerkat 10.10 (32-bit) (experimental)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 Ubuntu Maverick Meerkat 10.10 (32 位)发行版来宾操作系统创建 Linux VM。目前，对该来宾操作系统的支持仍在实验阶段。</value>
-  </data>
-  <data name="VM.TemplateDescription-Ubuntu Maverick Meerkat 10.10 (64-bit) (experimental)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 Ubuntu Maverick Meerkat 10.10 (64 位)发行版来宾操作系统创建 Linux VM。目前，对该来宾操作系统的支持仍在实验阶段。</value>
-  </data>
-  <data name="VM.TemplateDescription-Windows 2000 SP4 (32-bit)" xml:space="preserve">
-    <value>安装 Windows 2000 Server Service Pack 4 (32 位)。不支持早期版本的 Service Pack。</value>
-  </data>
-  <data name="VM.TemplateDescription-Windows 2000 SP4" xml:space="preserve">
-    <value>安装 Windows 2000 Server Service Pack 4。不支持早期版本的 Service Pack。</value>
-  </data>
-  <data name="VM.TemplateDescription-Windows 7 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Windows 7 或 Windows 7 SP1 (32 位)来宾操作系统创建 VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Windows 7 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Windows 7 或 Windows 7 SP1 (64 位)来宾操作系统创建 VM。</value>
-  </data>
-  <data name="VM.TemplateDescription-Windows 8 (32-bit) (experimental)" xml:space="preserve">
-    <value>此模板可用于通过 Windows 8 (32 位)来宾操作系统创建 VM。目前，对此来宾操作系统的支持仍在试验阶段。</value>
-  </data>
-  <data name="VM.TemplateDescription-Windows 8 (64-bit) (experimental)" xml:space="preserve">
-    <value>此模板可用于通过 Windows 8 (64 位)来宾操作系统创建 VM。目前，对此来宾操作系统的支持仍在试验阶段。</value>
-  </data>
-  <data name="VM.TemplateDescription-Windows Server 2003 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Windows Server 2003 SP2 (32 位)来宾操作系统创建 VM。支持 Server、Enterprise、Data Centre 和 SBS Edition。此模板专为优化 XenApp 的性能而进行了特别调整。</value>
-  </data>
-  <data name="VM.TemplateDescription-Windows Server 2003 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Windows Server 2003 SP2 (64 位)来宾操作系统创建 VM。支持 Server、Enterprise、Data Centre 和 SBS Edition。</value>
-  </data>
-  <data name="VM.TemplateDescription-Windows Server 2003 x64" xml:space="preserve">
-    <value>安装 64 位 Windows Server® 2003。支持 Server、Enterprise、Data Centre 和 SBS 版。</value>
-  </data>
-  <data name="VM.TemplateDescription-Windows Server 2003" xml:space="preserve">
-    <value>安装 32 位 Windows Server® 2003 Service Pack 0、1 或 2。支持 Server、Enterprise、Data Centre 和 SBS 版。</value>
-  </data>
-  <data name="VM.TemplateDescription-Windows Server 2008 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Windows Server 2008 SP2 (32 位)来宾操作系统创建 VM。支持所有版本。</value>
-  </data>
-  <data name="VM.TemplateDescription-Windows Server 2008 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Windows Server 2008 SP2 (64 位)来宾操作系统创建 VM。支持所有版本。</value>
-  </data>
-  <data name="VM.TemplateDescription-Windows Server 2008 R2 (64-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Windows Server 2008 R2 或 Windows Server 2008 R2 SP1 (64 位)来宾操作系统创建 VM。支持所有版本。</value>
-  </data>
-  <data name="VM.TemplateDescription-Windows Server 2008 x64" xml:space="preserve">
-    <value>安装 64 位 Windows Server® 2008。</value>
-  </data>
-  <data name="VM.TemplateDescription-Windows Server 2008" xml:space="preserve">
-    <value>安装 32 位 Windows Server® 2008。</value>
-  </data>
-  <data name="VM.TemplateDescription-Windows Server 8 (64-bit) (experimental)" xml:space="preserve">
-    <value>此模板可用于通过 Windows Server 8 (64 位)来宾操作系统创建 VM。目前，对此来宾操作系统的支持仍在试验阶段。</value>
-  </data>
-  <data name="VM.TemplateDescription-Windows Vista (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Windows Vista SP2 (32 位)来宾操作系统创建 VM。支持 Enterprise Edition。</value>
-  </data>
-  <data name="VM.TemplateDescription-Windows Vista" xml:space="preserve">
-    <value>安装 32 位 Windows Vista™ Enterprise Edition。</value>
-  </data>
-  <data name="VM.TemplateDescription-Windows XP SP2 (32-bit)" xml:space="preserve">
-    <value>安装 Windows XP Service Pack 2 (32 位)。不支持早期版本的 Service Pack。</value>
-  </data>
-  <data name="VM.TemplateDescription-Windows XP SP2" xml:space="preserve">
-    <value>安装 Windows XP Service Pack 2。不支持早期版本的 Service Pack。</value>
-  </data>
-  <data name="VM.TemplateDescription-Windows XP SP3 (32-bit)" xml:space="preserve">
-    <value>此模板可用于通过 Windows XP SP3 (32 位)来宾操作系统创建 VM。不支持早期版本的 Windows XP Service Pack。</value>
-  </data>
-  <data name="VM.TemplateDescription-Windows XP SP3" xml:space="preserve">
-    <value>安装 Windows XP Service Pack 3。此外，还支持 Service Pack 2，但建议您立即升级。不支持早期版本的 Service Pack。</value>
   </data>
   <data name="VM.TemplateDescription-Xen API SDK" xml:space="preserve">
     <value>此模板可用于安装 XenServer 软件开发工具包(SDK) API VM。</value>
   </data>
   <data name="SR.name_description-local-hotplug-disk" xml:space="preserve">
     <value>可移动物理存储</value>
-  </data>
-  <data name="VM.TemplateDescription-Ubuntu Precise Pangolin 12.04 (32-bit) (experimental)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 Ubuntu Precise Pangolin 12.04 (32 位)发行版来宾操作系统创建 Linux VM。目前，对此来宾操作系统的支持仍在试验阶段。</value>
-  </data>
-  <data name="VM.TemplateDescription-Ubuntu Precise Pangolin 12.04 (64-bit) (experimental)" xml:space="preserve">
-    <value>此模板可用于通过 Xen 感知 Ubuntu Precise Pangolin 12.04 (64 位)发行版来宾操作系统创建 Linux VM。目前，对此来宾操作系统的支持仍在试验阶段。</value>
   </data>
   <data name="Label-performance.cpu_avg" xml:space="preserve">
     <value>平均 CPU 使用率</value>
@@ -2017,5 +1585,77 @@
   </data>
   <data name="Label-performance.pif_aggr_tx" xml:space="preserve">
     <value>NIC 发送的总数据量</value>
+  </data>
+  <data name="Label-SR.SRTypes-rawhba" xml:space="preserve">
+    <value>LUN-per-VDI</value>
+  </data>
+  <data name="Label-performance.sr_avgqu_sz" xml:space="preserve">
+    <value>“{0}”队列大小</value>
+  </data>
+  <data name="Label-performance.cpu-state" xml:space="preserve">
+    <value>CPU {0} {1}-状态 {2}</value>
+  </data>
+  <data name="Label-performance.sr_inflight" xml:space="preserve">
+    <value>“{0}”传输请求</value>
+  </data>
+  <data name="Label-performance.sr_iops_read" xml:space="preserve">
+    <value>“{0}”读取 IOPS</value>
+  </data>
+  <data name="Label-performance.sr_iops_total" xml:space="preserve">
+    <value>“{0}”总 IOPS</value>
+  </data>
+  <data name="Label-performance.sr_iops_write" xml:space="preserve">
+    <value>“{0}”写入 IOPS</value>
+  </data>
+  <data name="Label-performance.sr_iowait" xml:space="preserve">
+    <value>“{0}”IO 等待</value>
+  </data>
+  <data name="Label-performance.sr_io_throughput_read" xml:space="preserve">
+    <value>“{0}”读取吞吐量</value>
+  </data>
+  <data name="Label-performance.sr_io_throughput_total" xml:space="preserve">
+    <value>“{0}”总吞吐量</value>
+  </data>
+  <data name="Label-performance.sr_io_throughput_write" xml:space="preserve">
+    <value>“{0}”写入吞吐量</value>
+  </data>
+  <data name="Label-performance.sr_latency" xml:space="preserve">
+    <value>“{0}”延迟</value>
+  </data>
+  <data name="Label-performance.memory_reclaimed" xml:space="preserve">
+    <value>回收的内存</value>
+  </data>
+  <data name="Label-performance.memory_reclaimed_max" xml:space="preserve">
+    <value>潜在回收的内存</value>
+  </data>
+  <data name="Label-host.edition-per-socket" xml:space="preserve">
+    <value>Citrix XenServer Per-Socket Edition</value>
+  </data>
+  <data name="Label-host.edition-xendesktop" xml:space="preserve">
+    <value>Citrix XenServer for XenDesktop</value>
+  </data>
+  <data name="Message.help-extauth_init_in_host_failed" xml:space="preserve">
+    <value>有关 AD 的帮助</value>
+  </data>
+  <data name="Message.help-extauth_in_pool_is_non_homogeneous" xml:space="preserve">
+    <value>有关 AD 的帮助</value>
+  </data>
+  <data name="Label-performance.vbd_avgqu_sz" xml:space="preserve">
+    <value>磁盘 {0} 队列大小</value>
+  </data>
+  <data name="Label-performance.vbd_inflight" xml:space="preserve">
+    <value>磁盘 {0} 传输请求</value>
+  </data>
+  <data name="Label-performance.vbd_iops_read" xml:space="preserve">
+    <value>磁盘 {0} 读取 IOPS</value>
+  </data>
+  <data name="Label-performance.vbd_iops_total" xml:space="preserve">
+    <value>磁盘 {0} 总 IOPS</value>
+  </data>
+  <data name="Label-performance.vbd_iops_write" xml:space="preserve">
+    <value>磁盘 {0} 写入 IOPS</value>
+  </data>
+  <data name="Label-performance.vbd_iowait" xml:space="preserve">
+    <value>磁盘 {0} IO 等待</value>
   </data>
 </root>

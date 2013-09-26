@@ -138,14 +138,14 @@
     <value>8, 3, 3, 3</value>
   </data>
   <data name="assignPriorities.Size" type="System.Drawing.Size, System.Drawing">
-    <value>538, 419</value>
+    <value>602, 419</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="assignPriorities.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="assignPriorities.Text" xml:space="preserve">
-    <value>assignPriorities1</value>
+    <value>高可用性计划</value>
   </data>
   <data name="&gt;&gt;assignPriorities.Name" xml:space="preserve">
     <value>assignPriorities</value>
@@ -172,7 +172,7 @@
     <value>45, 0</value>
   </data>
   <data name="labelBlurb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>493, 45</value>
+    <value>557, 45</value>
   </data>
   <data name="labelBlurb.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -232,7 +232,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="buttonOk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>379, 3</value>
+    <value>443, 3</value>
   </data>
   <data name="buttonOk.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -265,7 +265,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>460, 3</value>
+    <value>524, 3</value>
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -298,7 +298,7 @@
     <value>8, 472</value>
   </data>
   <data name="m_panelBottom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>538, 29</value>
+    <value>602, 29</value>
   </data>
   <data name="m_panelBottom.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -352,7 +352,7 @@
     <value>8, 8</value>
   </data>
   <data name="m_panelTop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>538, 45</value>
+    <value>602, 45</value>
   </data>
   <data name="m_panelTop.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -379,7 +379,7 @@
     <value>8, 53</value>
   </data>
   <data name="m_panelMiddle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>538, 419</value>
+    <value>602, 419</value>
   </data>
   <data name="m_panelMiddle.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -403,7 +403,7 @@
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>554, 509</value>
+    <value>618, 509</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
@@ -412,7 +412,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>570, 452</value>
+    <value>634, 452</value>
   </data>
   <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>8, 8, 8, 8</value>

@@ -166,7 +166,7 @@
     <value>128, 18</value>
   </data>
   <data name="radioButtonArchiveDaily.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="radioButtonArchiveDaily.Text" xml:space="preserve">
     <value>毎日アーカイブする(&amp;L)</value>

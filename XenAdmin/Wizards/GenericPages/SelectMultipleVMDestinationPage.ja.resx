@@ -211,7 +211,7 @@
     <value>m_comboBoxConnection</value>
   </data>
   <data name="&gt;&gt;m_comboBoxConnection.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.Controls.EnableableComboBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;m_comboBoxConnection.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -367,7 +367,7 @@
     <value>m_colTarget</value>
   </data>
   <data name="&gt;&gt;m_colTarget.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.Controls.EnableableComboBoxColumn, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>SelectMultipleVMDestinationPage</value>

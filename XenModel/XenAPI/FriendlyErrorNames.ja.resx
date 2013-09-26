@@ -321,8 +321,8 @@
   <data name="HA_ABORT_NEW_MASTER" xml:space="preserve">
     <value>現在このサーバーは、指定された新規マスタ設定を受け入れることはできません。</value>
   </data>
-  <data name="HA_CANNOT_BOND_MANAGEMENT_IFACE" xml:space="preserve">
-    <value>高可用性が有効になっているため、プライマリの管理インターフェイスを含むボンディングは作成できません。いったん高可用性を無効にしてボンディングを作成し、その後で高可用性を有効にしてください。</value>
+  <data name="HA_CANNOT_CHANGE_BOND_STATUS_OF_MGMT_IFACE" xml:space="preserve">
+    <value>高可用性が有効なときに管理インターフェイスのボンディングを作成したり削除したりできないため、この処理は実行できません。高可用性を無効にしてからボンディングを作成または削除し、その後で再度高可用性を有効にしてください。</value>
   </data>
   <data name="HA_CONSTRAINT_VIOLATION_NETWORK_NOT_SHARED" xml:space="preserve">
     <value>参照されているネットワークが正しく共有されていないため、この処理は実行できません。ネットワークは、完全に仮想化されているか、各サーバーに PIF で物理的に接続されている必要があります。</value>
@@ -404,6 +404,9 @@
   </data>
   <data name="HOST_DISABLED_UNTIL_REBOOT" xml:space="preserve">
     <value>指定したサーバーは無効になっており、再起動するまで有効にできません。</value>
+  </data>
+  <data name="HOST_EVACUATE_IN_PROGRESS" xml:space="preserve">
+    <value>このホストを退避しています。</value>
   </data>
   <data name="HOST_HAS_NO_MANAGEMENT_IP" xml:space="preserve">
     <value>このサーバーの管理インターフェイスの IP アドレスを取得できないため、マスタと通信できません。</value>
@@ -600,6 +603,9 @@
   <data name="MESSAGE_PARAMETER_COUNT_MISMATCH" xml:space="preserve">
     <value>メソッド {0} を不正なパラメータ数 {2} で呼び出そうとしました。このメソッドには {1} 個のパラメータを指定できます。</value>
   </data>
+  <data name="MESSAGE_REMOVED" xml:space="preserve">
+    <value>この機能は使用できなくなりました。</value>
+  </data>
   <data name="MIRROR_FAILED" xml:space="preserve">
     <value>VDI のミラー化を実行できません</value>
   </data>
@@ -646,7 +652,7 @@
     <value>この処理を行うには、OpenVSwitch ネットワーク バックエンドが有効である必要があります。</value>
   </data>
   <data name="OPERATION_BLOCKED" xml:space="preserve">
-    <value>明示的にブロックされている処理を実行しようとしました (対象オブジェクトの blocked_operations フィールドを参照)。</value>
+    <value>明示的にブロックされている処理を実行しようとしました (対象オブジェクトの blocked_operations フィールドを参照)。管理者によるメッセージ: {1}。</value>
   </data>
   <data name="OPERATION_NOT_ALLOWED" xml:space="preserve">
     <value>許可されていない処理を実行しようとしました。{0}</value>
@@ -671,6 +677,9 @@
   </data>
   <data name="PATCH_IS_APPLIED" xml:space="preserve">
     <value>指定されたパッチは適用済みであり、破棄できません。</value>
+  </data>
+  <data name="PATCH_PRECHECK_FAILED_ISO_MOUNTED" xml:space="preserve">
+    <value>実行中のすべての VM から XenServer Tools ISO をイジェクトする必要があります。</value>
   </data>
   <data name="PATCH_PRECHECK_FAILED_PREREQUISITE_MISSING" xml:space="preserve">
     <value>アップデートの事前チェックに失敗しました。必要なアップデートが適用されていません。</value>
@@ -1202,6 +1211,9 @@
   <data name="SR_BACKEND_FAILURE_447" xml:space="preserve">
     <value>無効な XML 文字です。</value>
   </data>
+  <data name="SR_BACKEND_FAILURE_448" xml:space="preserve">
+    <value>サポートされないカーネル: 2.6 でも 3.x でもありません。</value>
+  </data>
   <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
     <value>VDI が使用できません。</value>
   </data>
@@ -1481,6 +1493,9 @@
   <data name="VDI_CONTAINS_METADATA_OF_THIS_POOL" xml:space="preserve">
     <value>この VDI には現在のプールのメタデータが含まれているため、メタデータの復元に使用できません。</value>
   </data>
+  <data name="VDI_COPY_FAILED" xml:space="preserve">
+    <value>VDI のコピーに失敗しました</value>
+  </data>
   <data name="VDI_INCOMPATIBLE_TYPE" xml:space="preserve">
     <value>指定した仮想ディスクの種類に互換性がない (高可用性ステート ファイルを VM に接続できないなど) ため、この処理を実行できません。</value>
   </data>
@@ -1504,6 +1519,9 @@
   </data>
   <data name="VDI_NOT_AVAILABLE" xml:space="preserve">
     <value>VDI {0} を VM に正しく接続できないため、この処理を実行できません。</value>
+  </data>
+  <data name="VDI_NOT_IN_MAP" xml:space="preserve">
+    <value>この VDI は、VM.migrate_send 処理で変換先 SR にマップされていません</value>
   </data>
   <data name="VDI_NOT_MANAGED" xml:space="preserve">
     <value>システムがこの VDI を管理していないため、この処理は実行できません。</value>
@@ -1564,6 +1582,9 @@
   </data>
   <data name="VM_HALTED" xml:space="preserve">
     <value>VM が予期せず停止しました。</value>
+  </data>
+  <data name="VM_HAS_CHECKPOINT" xml:space="preserve">
+    <value>チェックポイントが作成された VM を移行しようとしています。</value>
   </data>
   <data name="VM_HAS_PCI_ATTACHED" xml:space="preserve">
     <value>VM で PCI デバイスのパススルーが設定されているため、この処理を実行できません。</value>
@@ -1668,7 +1689,7 @@
     <value>この VM は、既存のものと同じまたは古いバージョンなのでインポートできません。</value>
   </data>
   <data name="VM_UNSAFE_BOOT" xml:space="preserve">
-    <value>VM {0} に対して実行しようとした処理が、サーバーにより安全ではないと判断されました。この問題は、VM で使用される機能が、CPU の機能フラグと潜在的に非互換である場合に発生します。この警告を無視するには、「force」オプションを指定してください。</value>
+    <value>VM {0} に対して実行しようとした処理が、サーバーにより安全ではないと判断されました。この問題は、VM で必要な機能と、その VM が動作する CPU の機能フラグが潜在的に非互換である場合に発生します。この警告を無視するには、「force」オプションを指定してください。</value>
   </data>
   <data name="WLB_AUTHENTICATION_FAILED" xml:space="preserve">
     <value>WLB サーバーにより認証が拒否されました。</value>

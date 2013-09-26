@@ -117,14 +117,368 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="&gt;&gt;panel3.Name" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;panel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel3.Parent" xml:space="preserve">
+    <value>pageContainerPanel</value>
+  </data>
+  <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pageContainerPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>827, 343</value>
+  </data>
+  <data name="&gt;&gt;pageContainerPanel.Name" xml:space="preserve">
+    <value>pageContainerPanel</value>
+  </data>
+  <data name="&gt;&gt;pageContainerPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pageContainerPanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pageContainerPanel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;GraphList.Name" xml:space="preserve">
+    <value>GraphList</value>
+  </data>
+  <data name="&gt;&gt;GraphList.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.CustomDataGraph.GraphList, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;GraphList.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;GraphList.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 27</value>
+  </data>
+  <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 3</value>
+  </data>
+  <data name="panel1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>643, 236</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="GraphList.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="GraphList.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
+    <value>634, 0</value>
+  </data>
+  <data name="DataEventList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Right</value>
+  </data>
+  <data name="DataEventList.HorizontalScrollbar" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="DataEventList.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="DataEventList.ItemHeight" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="DataEventList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>654, 25</value>
+  </data>
+  <data name="DataEventList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 298</value>
+  </data>
+  <data name="DataEventList.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;DataEventList.Name" xml:space="preserve">
+    <value>DataEventList</value>
+  </data>
+  <data name="&gt;&gt;DataEventList.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.CustomDataGraph.DataEventList, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;DataEventList.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;DataEventList.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="DataPlotNav.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="DataPlotNav.DisplayedUuids" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAEAQAAAH9TeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5MaXN0YDFbW1N5
+        c3RlbS5TdHJpbmcsIG1zY29ybGliLCBWZXJzaW9uPTIuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVi
+        bGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OV1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24GAAAI
+        CAkCAAAAAAAAAAAAAAARAgAAAAAAAAAL
+</value>
+  </data>
+  <data name="DataPlotNav.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 269</value>
+  </data>
+  <data name="DataPlotNav.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>38, 3, 3, 3</value>
+  </data>
+  <data name="DataPlotNav.Size" type="System.Drawing.Size, System.Drawing">
+    <value>643, 54</value>
+  </data>
+  <data name="DataPlotNav.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;DataPlotNav.Name" xml:space="preserve">
+    <value>DataPlotNav</value>
+  </data>
+  <data name="&gt;&gt;DataPlotNav.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.CustomDataGraph.DataPlotNav, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;DataPlotNav.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;DataPlotNav.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="GraphList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="GraphList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 1</value>
+  </data>
+  <data name="GraphList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="GraphList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>639, 232</value>
+  </data>
+  <data name="GraphList.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;GraphList.Name" xml:space="preserve">
+    <value>GraphList</value>
+  </data>
+  <data name="&gt;&gt;GraphList.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.CustomDataGraph.GraphList, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;GraphList.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;GraphList.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="EventsLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="EventsLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Verdana, 9pt, style=Bold</value>
+  </data>
+  <data name="EventsLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="EventsLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="EventsLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 0, 0, 0</value>
+  </data>
+  <data name="EventsLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 28</value>
+  </data>
+  <data name="EventsLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="EventsLabel.Text" xml:space="preserve">
+    <value>VM 生命周期事件</value>
+  </data>
+  <data name="EventsLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;EventsLabel.Name" xml:space="preserve">
+    <value>EventsLabel</value>
+  </data>
+  <data name="&gt;&gt;EventsLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;EventsLabel.Parent" xml:space="preserve">
+    <value>gradientPanel2</value>
+  </data>
+  <data name="&gt;&gt;EventsLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="gradientPanel2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="&gt;&gt;EventsLabel.Name" xml:space="preserve">
+    <value>EventsLabel</value>
+  </data>
+  <data name="&gt;&gt;EventsLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;EventsLabel.Parent" xml:space="preserve">
+    <value>gradientPanel2</value>
+  </data>
+  <data name="&gt;&gt;EventsLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="gradientPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>654, 0</value>
+  </data>
+  <data name="gradientPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 28</value>
+  </data>
+  <data name="gradientPanel2.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="&gt;&gt;gradientPanel2.Name" xml:space="preserve">
+    <value>gradientPanel2</value>
+  </data>
+  <data name="&gt;&gt;gradientPanel2.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.GradientPanel.GradientPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;gradientPanel2.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;gradientPanel2.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;zoomButton.Name" xml:space="preserve">
+    <value>zoomButton</value>
+  </data>
+  <data name="&gt;&gt;zoomButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;zoomButton.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;zoomButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;moveDownButton.Name" xml:space="preserve">
+    <value>moveDownButton</value>
+  </data>
+  <data name="&gt;&gt;moveDownButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;moveDownButton.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;moveDownButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;moveUpButton.Name" xml:space="preserve">
+    <value>moveUpButton</value>
+  </data>
+  <data name="&gt;&gt;moveUpButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;moveUpButton.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;moveUpButton.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;graphActionsButton.Name" xml:space="preserve">
+    <value>graphActionsButton</value>
+  </data>
+  <data name="&gt;&gt;graphActionsButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;graphActionsButton.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;graphActionsButton.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;gradientPanel2.Name" xml:space="preserve">
+    <value>gradientPanel2</value>
+  </data>
+  <data name="&gt;&gt;gradientPanel2.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.GradientPanel.GradientPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;gradientPanel2.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;gradientPanel2.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;DataPlotNav.Name" xml:space="preserve">
+    <value>DataPlotNav</value>
+  </data>
+  <data name="&gt;&gt;DataPlotNav.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.CustomDataGraph.DataPlotNav, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;DataPlotNav.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;DataPlotNav.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="panel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>807, 323</value>
+  </data>
+  <data name="panel3.TabIndex" type="System.Int32, mscorlib">
+    <value>49</value>
+  </data>
+  <data name="&gt;&gt;panel3.Name" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;panel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel3.Parent" xml:space="preserve">
+    <value>pageContainerPanel</value>
+  </data>
+  <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="zoomButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="zoomButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="zoomButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>588, 1</value>
   </data>
@@ -134,7 +488,6 @@
   <data name="zoomButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="zoomButton.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
@@ -255,256 +608,11 @@
   <data name="&gt;&gt;graphActionsButton.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="gradientPanel2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="EventsLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="EventsLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Verdana, 9pt, style=Bold</value>
-  </data>
-  <data name="EventsLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="EventsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="EventsLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 0, 0, 0</value>
-  </data>
-  <data name="EventsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 28</value>
-  </data>
-  <data name="EventsLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
-  </data>
-  <data name="EventsLabel.Text" xml:space="preserve">
-    <value>VM 生命周期事件</value>
-  </data>
-  <data name="EventsLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;EventsLabel.Name" xml:space="preserve">
-    <value>EventsLabel</value>
-  </data>
-  <data name="&gt;&gt;EventsLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;EventsLabel.Parent" xml:space="preserve">
-    <value>gradientPanel2</value>
-  </data>
-  <data name="&gt;&gt;EventsLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="gradientPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>674, 0</value>
-  </data>
-  <data name="gradientPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 28</value>
-  </data>
-  <data name="gradientPanel2.TabIndex" type="System.Int32, mscorlib">
-    <value>47</value>
-  </data>
-  <data name="&gt;&gt;gradientPanel2.Name" xml:space="preserve">
-    <value>gradientPanel2</value>
-  </data>
-  <data name="&gt;&gt;gradientPanel2.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.GradientPanel.GradientPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;gradientPanel2.Parent" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;gradientPanel2.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="DataPlotNav.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
-  </data>
-  <data name="DataEventList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Right</value>
-  </data>
-  <data name="DataEventList.HorizontalScrollbar" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="DataEventList.IntegralHeight" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="DataEventList.ItemHeight" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="DataEventList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>674, 25</value>
-  </data>
-  <data name="DataEventList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 318</value>
-  </data>
-  <data name="DataEventList.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;DataEventList.Name" xml:space="preserve">
-    <value>DataEventList</value>
-  </data>
-  <data name="&gt;&gt;DataEventList.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.CustomDataGraph.DataEventList, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;DataEventList.Parent" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;DataEventList.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="DataPlotNav.DisplayedUuids" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAEAQAAAH9TeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5MaXN0YDFbW1N5
-        c3RlbS5TdHJpbmcsIG1zY29ybGliLCBWZXJzaW9uPTIuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVi
-        bGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OV1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24GAAAI
-        CAkCAAAAAAAAAAAAAAARAgAAAAAAAAAL
-</value>
-  </data>
-  <data name="DataPlotNav.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 289</value>
-  </data>
-  <data name="DataPlotNav.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>38, 3, 3, 3</value>
-  </data>
-  <data name="DataPlotNav.Size" type="System.Drawing.Size, System.Drawing">
-    <value>663, 54</value>
-  </data>
-  <data name="DataPlotNav.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;DataPlotNav.Name" xml:space="preserve">
-    <value>DataPlotNav</value>
-  </data>
-  <data name="&gt;&gt;DataPlotNav.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.CustomDataGraph.DataPlotNav, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;DataPlotNav.Parent" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;DataPlotNav.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="GraphList.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="GraphList.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
-    <value>634, 0</value>
-  </data>
-  <data name="GraphList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="GraphList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 1</value>
-  </data>
-  <data name="GraphList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="GraphList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>661, 254</value>
-  </data>
-  <data name="GraphList.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;GraphList.Name" xml:space="preserve">
-    <value>GraphList</value>
-  </data>
-  <data name="&gt;&gt;GraphList.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.CustomDataGraph.GraphList, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;GraphList.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;GraphList.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 27</value>
-  </data>
-  <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 3, 3</value>
-  </data>
-  <data name="panel1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>663, 256</value>
-  </data>
-  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="panel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>827, 343</value>
-  </data>
-  <data name="panel3.TabIndex" type="System.Int32, mscorlib">
-    <value>49</value>
-  </data>
-  <data name="&gt;&gt;panel3.Name" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;panel3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel3.Parent" xml:space="preserve">
-    <value>pageContainerPanel</value>
-  </data>
-  <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="pageContainerPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>827, 343</value>
-  </data>
-  <data name="&gt;&gt;pageContainerPanel.Name" xml:space="preserve">
-    <value>pageContainerPanel</value>
-  </data>
-  <data name="&gt;&gt;pageContainerPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pageContainerPanel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;pageContainerPanel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <metadata name="graphActionsMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="newGraphToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 22</value>
-  </data>
-  <data name="newGraphToolStripMenuItem.Text" xml:space="preserve">
-    <value>新建图表(&amp;N)...</value>
-  </data>
-  <data name="editGraphToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 22</value>
-  </data>
-  <data name="editGraphToolStripMenuItem.Text" xml:space="preserve">
-    <value>编辑图表(&amp;E)...</value>
-  </data>
   <data name="graphActionsMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 48</value>
+    <value>195, 98</value>
   </data>
   <data name="&gt;&gt;graphActionsMenuStrip.Name" xml:space="preserve">
     <value>graphActionsMenuStrip</value>
@@ -512,9 +620,45 @@
   <data name="&gt;&gt;graphActionsMenuStrip.Type" xml:space="preserve">
     <value>XenAdmin.Controls.NonReopeningContextMenuStrip, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="newGraphToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="newGraphToolStripMenuItem.Text" xml:space="preserve">
+    <value>新建图表(&amp;N)...</value>
+  </data>
+  <data name="editGraphToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="editGraphToolStripMenuItem.Text" xml:space="preserve">
+    <value>编辑图表(&amp;E)...</value>
+  </data>
+  <data name="deleteGraphToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="deleteGraphToolStripMenuItem.Text" xml:space="preserve">
+    <value>删除图表(&amp;D)...</value>
+  </data>
+  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 6</value>
+  </data>
+  <data name="restoreDefaultGraphsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="restoreDefaultGraphsToolStripMenuItem.Text" xml:space="preserve">
+    <value>还原默认图表(&amp;R)</value>
+  </data>
   <metadata name="zoomMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>198, 17</value>
   </metadata>
+  <data name="zoomMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 136</value>
+  </data>
+  <data name="&gt;&gt;zoomMenuStrip.Name" xml:space="preserve">
+    <value>zoomMenuStrip</value>
+  </data>
+  <data name="&gt;&gt;zoomMenuStrip.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.NonReopeningContextMenuStrip, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="lastYearToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
   </data>
@@ -551,15 +695,6 @@
   <data name="lastTenMinutesToolStripMenuItem.Text" xml:space="preserve">
     <value>10 分钟(&amp;M)</value>
   </data>
-  <data name="zoomMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 158</value>
-  </data>
-  <data name="&gt;&gt;zoomMenuStrip.Name" xml:space="preserve">
-    <value>zoomMenuStrip</value>
-  </data>
-  <data name="&gt;&gt;zoomMenuStrip.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.NonReopeningContextMenuStrip, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>337, 17</value>
   </metadata>
@@ -590,6 +725,21 @@
   <data name="editGraphToolStripContextMenuItem.Text" xml:space="preserve">
     <value>编辑图表(&amp;E)...</value>
   </data>
+  <data name="deleteGraphToolStripContextMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="deleteGraphToolStripContextMenuItem.Text" xml:space="preserve">
+    <value>删除图表(&amp;D)...</value>
+  </data>
+  <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 6</value>
+  </data>
+  <data name="restoreDefaultGraphsToolStripContextMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="restoreDefaultGraphsToolStripContextMenuItem.Text" xml:space="preserve">
+    <value>还原默认图表(&amp;R)</value>
+  </data>
   <data name="actionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 22</value>
   </data>
@@ -597,7 +747,22 @@
     <value>操作(&amp;A)</value>
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 6</value>
+    <value>149, 6</value>
+  </data>
+  <data name="zoomToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="zoomToolStripMenuItem.Text" xml:space="preserve">
+    <value>缩放(&amp;Z)</value>
+  </data>
+  <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 126</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip.Name" xml:space="preserve">
+    <value>contextMenuStrip</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lastYearToolStripContextMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
@@ -635,21 +800,6 @@
   <data name="lastTenMinutesToolStripContextMenuItem.Text" xml:space="preserve">
     <value>10 分钟(&amp;M)</value>
   </data>
-  <data name="zoomToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 22</value>
-  </data>
-  <data name="zoomToolStripMenuItem.Text" xml:space="preserve">
-    <value>缩放(&amp;Z)</value>
-  </data>
-  <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 104</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStrip.Name" xml:space="preserve">
-    <value>contextMenuStrip</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStrip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -672,6 +822,24 @@
     <value>editGraphToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;editGraphToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;deleteGraphToolStripMenuItem.Name" xml:space="preserve">
+    <value>deleteGraphToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;deleteGraphToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
+    <value>toolStripSeparator3</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;restoreDefaultGraphsToolStripMenuItem.Name" xml:space="preserve">
+    <value>restoreDefaultGraphsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;restoreDefaultGraphsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lastYearToolStripMenuItem.Name" xml:space="preserve">
@@ -744,6 +912,24 @@
     <value>editGraphToolStripContextMenuItem</value>
   </data>
   <data name="&gt;&gt;editGraphToolStripContextMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;deleteGraphToolStripContextMenuItem.Name" xml:space="preserve">
+    <value>deleteGraphToolStripContextMenuItem</value>
+  </data>
+  <data name="&gt;&gt;deleteGraphToolStripContextMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator4.Name" xml:space="preserve">
+    <value>toolStripSeparator4</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;restoreDefaultGraphsToolStripContextMenuItem.Name" xml:space="preserve">
+    <value>restoreDefaultGraphsToolStripContextMenuItem</value>
+  </data>
+  <data name="&gt;&gt;restoreDefaultGraphsToolStripContextMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">

@@ -130,13 +130,19 @@
     <value>http://updates.xensource.com/XenServer/{0}/XenCenter</value>
   </data>
   <data name="COMMUNITY_URL" xml:space="preserve">
-    <value>http://forums.citrix.com/category.jspa?categoryID=176</value>
+    <value>http://xenserver.org/</value>
+  </data>
+  <data name="DVSC_DEPRECATION_URL" xml:space="preserve">
+    <value>http://support.citrix.com/article/CTX137336</value>
   </data>
   <data name="HOMEPAGE" xml:space="preserve">
     <value>http://www.citrix.com/xenserver</value>
   </data>
   <data name="HTTP_LICENSES" xml:space="preserve">
     <value>www.citrix.com/xenserverenterprise</value>
+  </data>
+  <data name="ISL_DEPRECATION_URL" xml:space="preserve">
+    <value>http://support.citrix.com/article/CTX137337</value>
   </data>
   <data name="LICENSE_EXPIRY_WEBPAGE" xml:space="preserve">
     <value>http://www.citrix.com/xenserverenterprise</value>
@@ -212,6 +218,18 @@
   </data>
   <data name="UPSELL_LEARNMOREURL_WLB" xml:space="preserve">
     <value>http://www.citrix.com/xenserver/le/features/wlb</value>
+  </data>
+  <data name="UPSELL_SA" xml:space="preserve">
+    <value>http://store.citrix.com/XSInProduct</value>
+  </data>
+  <data name="VMPR_DEPRECATION_URL" xml:space="preserve">
+    <value>http://support.citrix.com/article/CTX137335</value>
+  </data>
+  <data name="WLB_DEPRECATION_URL" xml:space="preserve">
+    <value>http://support.citrix.com/article/CTX137333</value>
+  </data>
+  <data name="WSS_DEPRECATION_URL" xml:space="preserve">
+    <value>http://support.citrix.com/article/CTX137334</value>
   </data>
   <data name="XENDESKTOP_URL" xml:space="preserve">
     <value>http://www.citrix.com/TryXenDesktop</value>

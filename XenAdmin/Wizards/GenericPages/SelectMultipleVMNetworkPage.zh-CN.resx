@@ -166,7 +166,7 @@
     <value>1</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>所导入 VM 中的虚拟网络接口:</value>
+    <value>所导入 &amp;VM 中的虚拟网络接口:</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>

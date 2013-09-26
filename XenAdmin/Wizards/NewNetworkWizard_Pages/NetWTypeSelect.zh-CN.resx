@@ -196,7 +196,7 @@
     <value>NoControl</value>
   </data>
   <data name="rbtnBondedNetwork.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 208</value>
+    <value>20, 233</value>
   </data>
   <data name="rbtnBondedNetwork.Size" type="System.Drawing.Size, System.Drawing">
     <value>117, 17</value>
@@ -236,7 +236,7 @@
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>创建不离开每个 XenServer 主机的网络。
-该网络可用作同一主机上各 VM 之间的专用连接。</value>
+此网络可用作同一主机上两个 VM 之间的专用连接。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -257,7 +257,7 @@
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>38, 228</value>
+    <value>38, 253</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>320, 26</value>
@@ -294,15 +294,17 @@
     <value>19, 20</value>
   </data>
   <data name="labelCHIN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>328, 39</value>
+    <value>331, 65</value>
   </data>
   <data name="labelCHIN.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="labelCHIN.Text" xml:space="preserve">
     <value>创建不离开 XenServer 池的网络。
-该网络可用作池中各 VM 之间的专用连接。
-此类型的网络要求 vSwitch 控制器处于运行状态。</value>
+此网络可用作池中两个 VM 之间的专用连接。
+此类网络需要运行 vSwitch Controller。 
+此功能在 XenServer 6.2 中已弃用，在将来
+的版本中可能会删除。</value>
   </data>
   <data name="&gt;&gt;labelCHIN.Name" xml:space="preserve">
     <value>labelCHIN</value>
@@ -352,6 +354,75 @@
   <data name="toolTipContainerCHIN.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="&gt;&gt;panelCHIN.Name" xml:space="preserve">
+    <value>panelCHIN</value>
+  </data>
+  <data name="&gt;&gt;panelCHIN.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelCHIN.Parent" xml:space="preserve">
+    <value>toolTipContainerCHIN</value>
+  </data>
+  <data name="&gt;&gt;panelCHIN.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="toolTipContainerCHIN.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 134</value>
+  </data>
+  <data name="toolTipContainerCHIN.Size" type="System.Drawing.Size, System.Drawing">
+    <value>380, 92</value>
+  </data>
+  <data name="toolTipContainerCHIN.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;toolTipContainerCHIN.Name" xml:space="preserve">
+    <value>toolTipContainerCHIN</value>
+  </data>
+  <data name="&gt;&gt;toolTipContainerCHIN.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolTipContainerCHIN.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolTipContainerCHIN.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;rbtnCHIN.Name" xml:space="preserve">
+    <value>rbtnCHIN</value>
+  </data>
+  <data name="&gt;&gt;rbtnCHIN.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbtnCHIN.Parent" xml:space="preserve">
+    <value>panelCHIN</value>
+  </data>
+  <data name="&gt;&gt;rbtnCHIN.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelCHIN.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panelCHIN.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="panelCHIN.Size" type="System.Drawing.Size, System.Drawing">
+    <value>380, 92</value>
+  </data>
+  <data name="panelCHIN.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;panelCHIN.Name" xml:space="preserve">
+    <value>panelCHIN</value>
+  </data>
+  <data name="&gt;&gt;panelCHIN.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelCHIN.Parent" xml:space="preserve">
+    <value>toolTipContainerCHIN</value>
+  </data>
+  <data name="&gt;&gt;panelCHIN.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="rbtnCHIN.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -385,74 +456,41 @@
   <data name="&gt;&gt;rbtnCHIN.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="panelCHIN.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="panelCHIN.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="panelCHIN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 72</value>
-  </data>
-  <data name="panelCHIN.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;panelCHIN.Name" xml:space="preserve">
-    <value>panelCHIN</value>
-  </data>
-  <data name="&gt;&gt;panelCHIN.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelCHIN.Parent" xml:space="preserve">
-    <value>toolTipContainerCHIN</value>
-  </data>
-  <data name="&gt;&gt;panelCHIN.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="toolTipContainerCHIN.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 134</value>
-  </data>
-  <data name="toolTipContainerCHIN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 72</value>
-  </data>
-  <data name="toolTipContainerCHIN.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;toolTipContainerCHIN.Name" xml:space="preserve">
-    <value>toolTipContainerCHIN</value>
-  </data>
-  <data name="&gt;&gt;toolTipContainerCHIN.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;toolTipContainerCHIN.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;toolTipContainerCHIN.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="toolTipContainerExternal.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="rbtnExternalNetwork.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;panelExternal.Name" xml:space="preserve">
+    <value>panelExternal</value>
   </data>
-  <data name="rbtnExternalNetwork.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8.25pt, style=Bold</value>
+  <data name="&gt;&gt;panelExternal.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="rbtnExternalNetwork.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;panelExternal.Parent" xml:space="preserve">
+    <value>toolTipContainerExternal</value>
   </data>
-  <data name="rbtnExternalNetwork.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="&gt;&gt;panelExternal.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="rbtnExternalNetwork.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 17</value>
+  <data name="toolTipContainerExternal.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 39</value>
   </data>
-  <data name="rbtnExternalNetwork.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="toolTipContainerExternal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>380, 35</value>
   </data>
-  <data name="rbtnExternalNetwork.Text" xml:space="preserve">
-    <value>外部网络(&amp;E)</value>
+  <data name="toolTipContainerExternal.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;toolTipContainerExternal.Name" xml:space="preserve">
+    <value>toolTipContainerExternal</value>
+  </data>
+  <data name="&gt;&gt;toolTipContainerExternal.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolTipContainerExternal.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolTipContainerExternal.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;rbtnExternalNetwork.Name" xml:space="preserve">
     <value>rbtnExternalNetwork</value>
@@ -490,26 +528,38 @@
   <data name="&gt;&gt;panelExternal.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="toolTipContainerExternal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 39</value>
+  <data name="rbtnExternalNetwork.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="toolTipContainerExternal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 35</value>
+  <data name="rbtnExternalNetwork.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt, style=Bold</value>
   </data>
-  <data name="toolTipContainerExternal.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="rbtnExternalNetwork.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerExternal.Name" xml:space="preserve">
-    <value>toolTipContainerExternal</value>
+  <data name="rbtnExternalNetwork.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerExternal.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="rbtnExternalNetwork.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 17</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerExternal.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="rbtnExternalNetwork.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerExternal.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="rbtnExternalNetwork.Text" xml:space="preserve">
+    <value>外部网络(&amp;E)</value>
+  </data>
+  <data name="&gt;&gt;rbtnExternalNetwork.Name" xml:space="preserve">
+    <value>rbtnExternalNetwork</value>
+  </data>
+  <data name="&gt;&gt;rbtnExternalNetwork.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbtnExternalNetwork.Parent" xml:space="preserve">
+    <value>panelExternal</value>
+  </data>
+  <data name="&gt;&gt;rbtnExternalNetwork.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -524,7 +574,7 @@
     <value>0, 32, 0, 0</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>416, 269</value>
+    <value>416, 297</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>选择类型</value>

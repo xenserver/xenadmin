@@ -358,7 +358,7 @@
     <value>32</value>
   </data>
   <data name="SendEmailNoteLabel.Text" xml:space="preserve">
-    <value>XenServer では、サーバーで生成されるシステム アラートをメールで送信できます。このプールのサーバーおよび VM についてこの機能を有効にするには、メールの送信先アドレスを指定します。</value>
+    <value>サーバーによりシステム アラートが生成されたときにメールが送信されるように設定できます。このプールまたはスタンドアロン サーバーでこの機能を有効にするには、アラート通知メールの送信先アドレスを入力してください。</value>
   </data>
   <data name="&gt;&gt;SendEmailNoteLabel.Name" xml:space="preserve">
     <value>SendEmailNoteLabel</value>

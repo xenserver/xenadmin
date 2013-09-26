@@ -520,16 +520,16 @@
     <value>NoControl</value>
   </data>
   <data name="subHeading.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 36</value>
+    <value>9, 36</value>
   </data>
   <data name="subHeading.Size" type="System.Drawing.Size, System.Drawing">
-    <value>379, 25</value>
+    <value>694, 25</value>
   </data>
   <data name="subHeading.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
   <data name="subHeading.Text" xml:space="preserve">
-    <value>中堅・中小企業からクラウドまで対応の仮想プラットフォーム</value>
+    <value>業界で高く評価されているクラウド、サーバー、デスクトップの仮想化プラットフォームです。</value>
   </data>
   <data name="subHeading.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>

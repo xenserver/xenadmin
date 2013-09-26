@@ -321,8 +321,8 @@
   <data name="HA_ABORT_NEW_MASTER" xml:space="preserve">
     <value>此服务器此时无法接受建议的新主服务器设置。</value>
   </data>
-  <data name="HA_CANNOT_BOND_MANAGEMENT_IFACE" xml:space="preserve">
-    <value>无法执行此操作，因为在高可用性处于启用状态时不允许创建与管理接口之间的绑定。要执行此操作，请禁用高可用性，创建绑定，然后重新启用高可用性。</value>
+  <data name="HA_CANNOT_CHANGE_BOND_STATUS_OF_MGMT_IFACE" xml:space="preserve">
+    <value>无法执行此操作，因为在高可用性处于启用状态时不允许创建或删除涉及管理接口的绑定。要执行此操作，请禁用高可用性，创建或删除绑定，然后重新启用高可用性。</value>
   </data>
   <data name="HA_CONSTRAINT_VIOLATION_NETWORK_NOT_SHARED" xml:space="preserve">
     <value>无法执行该操作，因为引用的网络未正确共享。该网络必须完全虚拟，或者在每个服务器上通过当前连接的 PIF 而以物理形式存在。</value>
@@ -404,6 +404,9 @@
   </data>
   <data name="HOST_DISABLED_UNTIL_REBOOT" xml:space="preserve">
     <value>指定的服务器已禁用，在重新启动前无法重新启用。</value>
+  </data>
+  <data name="HOST_EVACUATE_IN_PROGRESS" xml:space="preserve">
+    <value>正在撤走此主机。</value>
   </data>
   <data name="HOST_HAS_NO_MANAGEMENT_IP" xml:space="preserve">
     <value>服务器无法获取其管理接口的 IP 地址，因此无法与主服务器联系。</value>
@@ -600,6 +603,9 @@
   <data name="MESSAGE_PARAMETER_COUNT_MISMATCH" xml:space="preserve">
     <value>您尝试调用方法 {0} 时使用的参数数目 {2} 不正确。该方法需要 {1} 个参数。</value>
   </data>
+  <data name="MESSAGE_REMOVED" xml:space="preserve">
+    <value>此功能不再可用。</value>
+  </data>
   <data name="MIRROR_FAILED" xml:space="preserve">
     <value>无法执行 VDI 镜像。</value>
   </data>
@@ -646,7 +652,7 @@
     <value>此操作需要启用 OpenVSwitch 网络后端。</value>
   </data>
   <data name="OPERATION_BLOCKED" xml:space="preserve">
-    <value>您尝试执行的操作已明确被阻止(请参阅给定对象的 blocked_operations 字段)。</value>
+    <value>您尝试执行的操作明显受到阻止(请参阅指定对象的 blocked_operations 字段)。管理员提供了以下消息: {1}。</value>
   </data>
   <data name="OPERATION_NOT_ALLOWED" xml:space="preserve">
     <value>您尝试执行的操作不被允许。{0}</value>
@@ -671,6 +677,9 @@
   </data>
   <data name="PATCH_IS_APPLIED" xml:space="preserve">
     <value>指定的修补程序已应用，无法销毁。</value>
+  </data>
+  <data name="PATCH_PRECHECK_FAILED_ISO_MOUNTED" xml:space="preserve">
+    <value>必须从所有正在运行的 VM 中弹出 XenServer Tools ISO。</value>
   </data>
   <data name="PATCH_PRECHECK_FAILED_PREREQUISITE_MISSING" xml:space="preserve">
     <value>更新预检查阶段失败: 缺少必备的更新。</value>
@@ -706,7 +715,7 @@
     <value>尝试配置接口时发生未知错误。</value>
   </data>
   <data name="PIF_DEVICE_NOT_FOUND" xml:space="preserve">
-    <value>未找到指定的设备。</value>
+    <value>未找到指定设备。</value>
   </data>
   <data name="PIF_DOES_NOT_ALLOW_UNPLUG" xml:space="preserve">
     <value>无法执行请求的操作，因为指定的 PIF 不允许插拔。</value>
@@ -1008,7 +1017,7 @@
     <value>CLI 命令收到无效的 EOF 响应</value>
   </data>
   <data name="SR_BACKEND_FAILURE_180" xml:space="preserve">
-    <value>卷组空间不足。SR 置备过度，空间不足。无法扩大基础卷来容纳磁盘的虚拟大小。</value>
+    <value>卷组空间不足。SR 过度置备且空间不足。无法增大基本卷，因而无法适应磁盘的虚拟大小。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_181" xml:space="preserve">
     <value>SR 的元数据卷操作出错。</value>
@@ -1201,6 +1210,9 @@
   </data>
   <data name="SR_BACKEND_FAILURE_447" xml:space="preserve">
     <value>XML 字符非法。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_448" xml:space="preserve">
+    <value>内核不受支持: 内核既不是 2.6，也不是 3.x。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
     <value>VDI 不可用</value>
@@ -1481,6 +1493,9 @@
   <data name="VDI_CONTAINS_METADATA_OF_THIS_POOL" xml:space="preserve">
     <value>无法将 VDI 打开进行元数据恢复，因为其中包含当前池的元数据。</value>
   </data>
+  <data name="VDI_COPY_FAILED" xml:space="preserve">
+    <value>VDI 复制操作失败</value>
+  </data>
   <data name="VDI_INCOMPATIBLE_TYPE" xml:space="preserve">
     <value>无法执行该操作，因为指定的虚拟磁盘为不兼容的类型(例如，高可用性状态文件无法连接到 VM)</value>
   </data>
@@ -1500,10 +1515,13 @@
     <value>无法执行该操作，因为找不到指定的虚拟磁盘</value>
   </data>
   <data name="VDI_NEEDS_VM_FOR_MIGRATE" xml:space="preserve">
-    <value>您尝试迁移的 VDI 未连接到运行中的 VM。</value>
+    <value>您尝试迁移的 VDI 未连接到正在运行的 VM。</value>
   </data>
   <data name="VDI_NOT_AVAILABLE" xml:space="preserve">
     <value>无法执行该操作，因为 VDI {0} 无法正确连接到 VM。</value>
+  </data>
+  <data name="VDI_NOT_IN_MAP" xml:space="preserve">
+    <value>此 VDI 未映射到 VM.migrate_send 操作中的目标 SR</value>
   </data>
   <data name="VDI_NOT_MANAGED" xml:space="preserve">
     <value>无法执行该操作，因为系统未管理此 VDI</value>
@@ -1564,6 +1582,9 @@
   </data>
   <data name="VM_HALTED" xml:space="preserve">
     <value>VM 意外终止</value>
+  </data>
+  <data name="VM_HAS_CHECKPOINT" xml:space="preserve">
+    <value>您尝试迁移的 VM 具有一个检查点。</value>
   </data>
   <data name="VM_HAS_PCI_ATTACHED" xml:space="preserve">
     <value>无法执行该操作，因为 VM 传递了一个或多个 PCI 设备。</value>
@@ -1626,7 +1647,7 @@
     <value>GPU 不可用</value>
   </data>
   <data name="VM_REQUIRES_IOMMU" xml:space="preserve">
-    <value>您尝试在未启用 I/O 虚拟化(IOMMU/VT-d)的主机上运行 VM，但 VM 需要启用 I/O 虚拟化。</value>
+    <value>您尝试在未启用 I/O 虚拟化(IOMMU/VT-d)的主机上运行 VM，该 VM 要求启用 I/O 虚拟化。</value>
   </data>
   <data name="VM_REQUIRES_NETWORK" xml:space="preserve">
     <value>此 VM 需要使用该服务器无法看到的网络</value>
@@ -1668,7 +1689,7 @@
     <value>无法在非强制的情况下导入该 VM，因为其版本与现有 VM 的版本相同或低于现有版本。</value>
   </data>
   <data name="VM_UNSAFE_BOOT" xml:space="preserve">
-    <value>您尝试执行操作的 VM {0} 已被服务器判定为不安全。如果要运行 VM 的 CPU 所具有的功能标志集可能与 VM 所需要的功能标志集不兼容，则可能会发生此情况。如果要覆盖此警告，请使用“force”选项。</value>
+    <value>您尝试在服务器判定不安全的 VM“{0}”上执行操作。如果 VM 在具有的功能集可能与 VM 所需的功能集不兼容的 CPU 上运行，则会发生此问题。如果要覆盖此警告，请使用“强制”选项。</value>
   </data>
   <data name="WLB_AUTHENTICATION_FAILED" xml:space="preserve">
     <value>WLB 服务器拒绝了我们配置的身份验证详细信息。</value>
@@ -1737,7 +1758,7 @@
     <value>无法创建由可传输快照生成的 XML 字符串</value>
   </data>
   <data name="XEN_VSS_REQ_ERROR_INIT_FAILED" xml:space="preserve">
-    <value>初始化 VSS 请求程序失败</value>
+    <value>VSS 请求程序初始化失败</value>
   </data>
   <data name="XEN_VSS_REQ_ERROR_NO_VOLUMES_SUPPORTED" xml:space="preserve">
     <value>找不到 Citrix XenServer Vss 提供程序支持的任何卷</value>

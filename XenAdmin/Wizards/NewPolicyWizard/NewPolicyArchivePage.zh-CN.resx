@@ -166,7 +166,7 @@
     <value>188, 17</value>
   </data>
   <data name="radioButtonArchiveDaily.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="radioButtonArchiveDaily.Text" xml:space="preserve">
     <value>每天存档计划快照(&amp;L)</value>

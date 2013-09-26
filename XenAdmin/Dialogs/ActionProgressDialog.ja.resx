@@ -136,7 +136,7 @@
     <value>3, 8, 3, 3</value>
   </data>
   <data name="labelStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 21</value>
+    <value>254, 15</value>
   </data>
   <data name="labelStatus.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -157,7 +157,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;labelStatus.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="progressBar1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
@@ -166,7 +166,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="progressBar1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>54, 125</value>
+    <value>54, 120</value>
   </data>
   <data name="progressBar1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 10, 6, 12</value>
@@ -187,7 +187,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;progressBar1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>4</value>
   </data>
   <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -197,48 +197,6 @@
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>3</value>
-  </data>
-  <data name="labelTop.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelTop.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="labelTop.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelTop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>51, 36</value>
-  </data>
-  <data name="labelTop.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 0</value>
-  </data>
-  <data name="labelTop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 21</value>
-  </data>
-  <data name="labelTop.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="labelTop.Text" xml:space="preserve">
-    <value>処理中にエラーが発生しました。</value>
-  </data>
-  <data name="labelTop.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="labelTop.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;labelTop.Name" xml:space="preserve">
-    <value>labelTop</value>
-  </data>
-  <data name="&gt;&gt;labelTop.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelTop.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;labelTop.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="icon.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -274,121 +232,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;icon.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="labelBottom.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelBottom.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="labelBottom.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelBottom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>51, 94</value>
-  </data>
-  <data name="labelBottom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 21</value>
-  </data>
-  <data name="labelBottom.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="labelBottom.Text" xml:space="preserve">
-    <value>設定を確認し、もう一度実行してください。</value>
-  </data>
-  <data name="labelBottom.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="labelBottom.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;labelBottom.Name" xml:space="preserve">
-    <value>labelBottom</value>
-  </data>
-  <data name="&gt;&gt;labelBottom.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelBottom.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;labelBottom.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="labelException.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelException.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="labelException.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelException.Location" type="System.Drawing.Point, System.Drawing">
-    <value>51, 65</value>
-  </data>
-  <data name="labelException.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 8, 3, 8</value>
-  </data>
-  <data name="labelException.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 21</value>
-  </data>
-  <data name="labelException.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="labelException.Text" xml:space="preserve">
-    <value>エラー情報</value>
-  </data>
-  <data name="labelException.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;labelException.Name" xml:space="preserve">
-    <value>labelException</value>
-  </data>
-  <data name="&gt;&gt;labelException.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelException.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;labelException.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="buttonCancel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="buttonCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>311, 124</value>
-  </data>
-  <data name="buttonCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 9, 3, 3</value>
-  </data>
-  <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="buttonCancel.Text" xml:space="preserve">
-    <value>キャンセル</value>
-  </data>
-  <data name="buttonCancel.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
-    <value>buttonCancel</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>1</value>
   </data>
   <data name="buttonClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -400,7 +244,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>230, 169</value>
+    <value>230, 164</value>
   </data>
   <data name="buttonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 12, 3, 3</value>
@@ -427,7 +271,199 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;buttonClose.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="buttonCancel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="buttonCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>311, 119</value>
+  </data>
+  <data name="buttonCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 9, 3, 3</value>
+  </data>
+  <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="buttonCancel.Text" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="buttonCancel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
+    <value>buttonCancel</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="labelBottom.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelBottom.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="labelBottom.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelBottom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>51, 95</value>
+  </data>
+  <data name="labelBottom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 15</value>
+  </data>
+  <data name="labelBottom.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="labelBottom.Text" xml:space="preserve">
+    <value>設定を確認し、もう一度実行してください。</value>
+  </data>
+  <data name="labelBottom.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="labelBottom.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;labelBottom.Name" xml:space="preserve">
+    <value>labelBottom</value>
+  </data>
+  <data name="&gt;&gt;labelBottom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelBottom.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;labelBottom.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="labelException.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelException.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="labelException.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelException.Location" type="System.Drawing.Point, System.Drawing">
+    <value>51, 72</value>
+  </data>
+  <data name="labelException.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 8, 3, 8</value>
+  </data>
+  <data name="labelException.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 15</value>
+  </data>
+  <data name="labelException.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="labelException.Text" xml:space="preserve">
+    <value>エラー情報</value>
+  </data>
+  <data name="labelException.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;labelException.Name" xml:space="preserve">
+    <value>labelException</value>
+  </data>
+  <data name="&gt;&gt;labelException.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelException.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;labelException.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="labelSubActionStatus.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelSubActionStatus.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelSubActionStatus.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="labelSubActionStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>51, 30</value>
+  </data>
+  <data name="labelSubActionStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 0</value>
+  </data>
+  <data name="labelSubActionStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>254, 15</value>
+  </data>
+  <data name="labelSubActionStatus.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="labelSubActionStatus.Text" xml:space="preserve">
+    <value>サブアクションの進行状況</value>
+  </data>
+  <data name="&gt;&gt;labelSubActionStatus.Name" xml:space="preserve">
+    <value>labelSubActionStatus</value>
+  </data>
+  <data name="&gt;&gt;labelSubActionStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelSubActionStatus.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;labelSubActionStatus.ZOrder" xml:space="preserve">
     <value>7</value>
+  </data>
+  <data name="labelTop.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelTop.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="labelTop.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelTop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>51, 49</value>
+  </data>
+  <data name="labelTop.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 0</value>
+  </data>
+  <data name="labelTop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 15</value>
+  </data>
+  <data name="labelTop.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="labelTop.Text" xml:space="preserve">
+    <value>処理中にエラーが発生しました。</value>
+  </data>
+  <data name="labelTop.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="labelTop.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;labelTop.Name" xml:space="preserve">
+    <value>labelTop</value>
+  </data>
+  <data name="&gt;&gt;labelTop.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelTop.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;labelTop.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -439,10 +475,10 @@
     <value>8, 5</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>390, 195</value>
+    <value>390, 239</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -460,7 +496,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="progressBar1" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelStatus" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelTop" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="icon" Row="0" RowSpan="6" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelBottom" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelException" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="buttonCancel" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="buttonClose" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Absolute,260,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelStatus" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="icon" Row="0" RowSpan="6" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="buttonClose" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="buttonCancel" Row="5" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="progressBar1" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelBottom" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelException" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelSubActionStatus" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelTop" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Absolute,260,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -475,7 +511,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>406, 205</value>
+    <value>406, 249</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>

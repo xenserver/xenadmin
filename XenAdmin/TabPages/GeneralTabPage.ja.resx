@@ -141,6 +141,9 @@
   <data name="pdSectionStorageLinkSystemCapabilities.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
+  <data name="pdSectionStorageLinkSystemCapabilities.SectionTitle" xml:space="preserve">
+    <value>機能</value>
+  </data>
   <data name="pdSectionStorageLinkSystemCapabilities.Size" type="System.Drawing.Size, System.Drawing">
     <value>729, 34</value>
   </data>
@@ -200,6 +203,9 @@
   </data>
   <data name="pdSectionMultipathBoot.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
+  </data>
+  <data name="pdSectionMultipathBoot.SectionTitle" xml:space="preserve">
+    <value>ルート ディスク マルチパス</value>
   </data>
   <data name="pdSectionMultipathBoot.Size" type="System.Drawing.Size, System.Drawing">
     <value>729, 34</value>
@@ -261,6 +267,9 @@
   <data name="pdStorageLink.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
+  <data name="pdStorageLink.SectionTitle" xml:space="preserve">
+    <value>StorageLink</value>
+  </data>
   <data name="pdStorageLink.Size" type="System.Drawing.Size, System.Drawing">
     <value>729, 34</value>
   </data>
@@ -320,6 +329,9 @@
   </data>
   <data name="pdSectionUpdates.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
+  </data>
+  <data name="pdSectionUpdates.SectionTitle" xml:space="preserve">
+    <value>アップデート</value>
   </data>
   <data name="pdSectionUpdates.Size" type="System.Drawing.Size, System.Drawing">
     <value>729, 34</value>
@@ -381,6 +393,9 @@
   <data name="pdSectionMemoryAndVCPUs.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
+  <data name="pdSectionMemoryAndVCPUs.SectionTitle" xml:space="preserve">
+    <value>メモリと VCPU</value>
+  </data>
   <data name="pdSectionMemoryAndVCPUs.Size" type="System.Drawing.Size, System.Drawing">
     <value>729, 34</value>
   </data>
@@ -440,6 +455,9 @@
   </data>
   <data name="pdSectionMultipathing.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
+  </data>
+  <data name="pdSectionMultipathing.SectionTitle" xml:space="preserve">
+    <value>マルチパス</value>
   </data>
   <data name="pdSectionMultipathing.Size" type="System.Drawing.Size, System.Drawing">
     <value>729, 34</value>
@@ -501,6 +519,9 @@
   <data name="pdSectionStatus.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
+  <data name="pdSectionStatus.SectionTitle" xml:space="preserve">
+    <value>状態</value>
+  </data>
   <data name="pdSectionStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>729, 34</value>
   </data>
@@ -560,6 +581,9 @@
   </data>
   <data name="pdSectionHighAvailability.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
+  </data>
+  <data name="pdSectionHighAvailability.SectionTitle" xml:space="preserve">
+    <value>高可用性</value>
   </data>
   <data name="pdSectionHighAvailability.Size" type="System.Drawing.Size, System.Drawing">
     <value>729, 34</value>
@@ -621,6 +645,9 @@
   <data name="pdSectionBootOptions.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
+  <data name="pdSectionBootOptions.SectionTitle" xml:space="preserve">
+    <value>起動オプション</value>
+  </data>
   <data name="pdSectionBootOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>729, 34</value>
   </data>
@@ -680,6 +707,9 @@
   </data>
   <data name="pdSectionCPU.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
+  </data>
+  <data name="pdSectionCPU.SectionTitle" xml:space="preserve">
+    <value>CPU</value>
   </data>
   <data name="pdSectionCPU.Size" type="System.Drawing.Size, System.Drawing">
     <value>729, 34</value>
@@ -741,6 +771,9 @@
   <data name="pdSectionLicense.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
+  <data name="pdSectionLicense.SectionTitle" xml:space="preserve">
+    <value>ライセンス詳細</value>
+  </data>
   <data name="pdSectionLicense.Size" type="System.Drawing.Size, System.Drawing">
     <value>729, 34</value>
   </data>
@@ -800,6 +833,9 @@
   </data>
   <data name="pdSectionVersion.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
+  </data>
+  <data name="pdSectionVersion.SectionTitle" xml:space="preserve">
+    <value>バージョン詳細</value>
   </data>
   <data name="pdSectionVersion.Size" type="System.Drawing.Size, System.Drawing">
     <value>729, 34</value>
@@ -861,6 +897,9 @@
   <data name="pdSectionMemory.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
+  <data name="pdSectionMemory.SectionTitle" xml:space="preserve">
+    <value>メモリ</value>
+  </data>
   <data name="pdSectionMemory.Size" type="System.Drawing.Size, System.Drawing">
     <value>729, 34</value>
   </data>
@@ -920,6 +959,9 @@
   </data>
   <data name="pdSectionManagementInterfaces.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
+  </data>
+  <data name="pdSectionManagementInterfaces.SectionTitle" xml:space="preserve">
+    <value>管理インターフェイス</value>
   </data>
   <data name="pdSectionManagementInterfaces.Size" type="System.Drawing.Size, System.Drawing">
     <value>729, 34</value>
@@ -981,6 +1023,9 @@
   <data name="pdSectionCustomFields.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
+  <data name="pdSectionCustomFields.SectionTitle" xml:space="preserve">
+    <value>カスタム フィールド</value>
+  </data>
   <data name="pdSectionCustomFields.Size" type="System.Drawing.Size, System.Drawing">
     <value>729, 34</value>
   </data>
@@ -1040,6 +1085,9 @@
   </data>
   <data name="pdSectionGeneral.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
+  </data>
+  <data name="pdSectionGeneral.SectionTitle" xml:space="preserve">
+    <value>全般</value>
   </data>
   <data name="pdSectionGeneral.Size" type="System.Drawing.Size, System.Drawing">
     <value>729, 34</value>

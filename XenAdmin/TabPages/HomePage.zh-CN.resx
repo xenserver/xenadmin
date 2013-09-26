@@ -520,16 +520,16 @@
     <value>NoControl</value>
   </data>
   <data name="subHeading.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 36</value>
+    <value>9, 36</value>
   </data>
   <data name="subHeading.Size" type="System.Drawing.Size, System.Drawing">
-    <value>379, 25</value>
+    <value>694, 25</value>
   </data>
   <data name="subHeading.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
   <data name="subHeading.Text" xml:space="preserve">
-    <value>在云计算环境中经过验证的企业级免费虚拟化平台。</value>
+    <value>业界领先的开源平台，用于实现云、服务器和桌面虚拟化</value>
   </data>
   <data name="subHeading.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
