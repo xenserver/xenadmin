@@ -634,7 +634,7 @@
     <value>3, 3, 3, 0</value>
   </data>
   <data name="SrGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>420, 89</value>
+    <value>420, 95</value>
   </data>
   <data name="SrGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>

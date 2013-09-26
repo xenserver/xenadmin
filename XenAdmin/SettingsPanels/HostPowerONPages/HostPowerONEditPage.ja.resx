@@ -376,7 +376,7 @@
     <value>361, 111</value>
   </data>
   <data name="textBoxCustom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 19</value>
+    <value>100, 19</value>
   </data>
   <data name="textBoxCustom.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
