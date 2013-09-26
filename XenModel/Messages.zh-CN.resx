@@ -6430,7 +6430,7 @@ SCSI ID: {2}
     <value>修复(&amp;P)...</value>
   </data>
   <data name="MAINWINDOW_RESTART_TOOLSTACK" xml:space="preserve">
-    <value>重新启动 Toolstack(&K)</value>
+    <value>重新启动 Toolstack (&amp;K)</value>
   </data>
   <data name="MAINWINDOW_RESUME" xml:space="preserve">
     <value>恢复(&amp;E)</value>
