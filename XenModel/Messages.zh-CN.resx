@@ -510,6 +510,15 @@
   <data name="ACTION_REMOVE_ALERTS_PROGRESS_DESCRIPTION" xml:space="preserve">
     <value>正在删除 {1} 条警报中的第 {0} 条...</value>
   </data>
+  <data name="ACTION_RESUMEANDSTARTVMS_PREPARING" xml:space="preserve">
+    <value>正在准备恢复并启动 VM...</value>
+  </data>
+  <data name="ACTION_RESUMEANDSTARTVMS_RESUMINGN" xml:space="preserve">
+    <value>正在恢复第 {0} 个 VM，共 {1} 个</value>
+  </data>
+  <data name="ACTION_RESUMEANDSTARTVMS_STARTINGN" xml:space="preserve">
+    <value>正在启动第 {0} 个 VM，共 {1} 个</value>
+  </data>
   <data name="ACTION_SAVE_ALERTS" xml:space="preserve">
     <value>保存警报</value>
   </data>
@@ -3036,19 +3045,19 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>yyyy-MM-dd tt h:mm:ss</value>
   </data>
   <data name="DATEFORMAT_DMY_LONG" xml:space="preserve">
-    <value>yyyy '年' M' 月 'd' 日'</value>
+    <value>yyyy年M月d日</value>
   </data>
   <data name="DATEFORMAT_HM" xml:space="preserve">
-    <value>tt h:mm</value>
+    <value>HH:mm</value>
   </data>
   <data name="DATEFORMAT_HMS" xml:space="preserve">
-    <value>tt h:mm:ss</value>
+    <value>HH:mm:ss</value>
   </data>
   <data name="DATEFORMAT_H_SHORT" xml:space="preserve">
     <value>HH</value>
   </data>
   <data name="DATEFORMAT_WDMY_HM_LONG" xml:space="preserve">
-    <value>yyyy '年' M' 月 'd' 日' dddd tt h:mm</value>
+    <value>yyyy年M月d日 dddd tt h:mm</value>
   </data>
   <data name="DATE_AND_TIME" xml:space="preserve">
     <value>日期和时间</value>

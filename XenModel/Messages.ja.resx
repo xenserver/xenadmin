@@ -510,6 +510,15 @@
   <data name="ACTION_REMOVE_ALERTS_PROGRESS_DESCRIPTION" xml:space="preserve">
     <value>{1} 個のアラートのうち {0} 個を削除しています...</value>
   </data>
+  <data name="ACTION_RESUMEANDSTARTVMS_PREPARING" xml:space="preserve">
+    <value>VM の再開および起動を準備しています...</value>
+  </data>
+  <data name="ACTION_RESUMEANDSTARTVMS_RESUMINGN" xml:space="preserve">
+    <value>VM を再開しています。{0}/{1}</value>
+  </data>
+  <data name="ACTION_RESUMEANDSTARTVMS_STARTINGN" xml:space="preserve">
+    <value>VM を起動しています。{0}/{1}</value>
+  </data>
   <data name="ACTION_SAVE_ALERTS" xml:space="preserve">
     <value>アラートの保存</value>
   </data>
