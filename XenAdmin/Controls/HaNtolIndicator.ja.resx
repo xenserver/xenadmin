@@ -415,7 +415,7 @@
     <value>3</value>
   </data>
   <data name="tableServerFailureLimit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>364, 101</value>
+    <value>390, 101</value>
   </data>
   <data name="tableServerFailureLimit.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -448,7 +448,7 @@
     <value>3, 3, 6, 0</value>
   </data>
   <data name="groupBoxControls.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 101</value>
+    <value>400, 101</value>
   </data>
   <data name="groupBoxControls.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -478,7 +478,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>364, 122</value>
+    <value>394, 122</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>HaNtolIndicator</value>

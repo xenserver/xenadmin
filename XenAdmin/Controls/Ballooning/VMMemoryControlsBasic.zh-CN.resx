@@ -172,7 +172,7 @@
     <value>1</value>
   </data>
   <data name="spinnerPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>150, 117</value>
+    <value>150, 107</value>
   </data>
   <data name="spinnerPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -316,7 +316,7 @@
     <value>22, 53</value>
   </data>
   <data name="groupBoxOn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>520, 172</value>
+    <value>520, 162</value>
   </data>
   <data name="groupBoxOn.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -334,7 +334,7 @@
     <value>3</value>
   </data>
   <data name="iconDMCUnavailable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 229</value>
+    <value>22, 219</value>
   </data>
   <data name="iconDMCUnavailable.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -358,7 +358,7 @@
     <value>True</value>
   </data>
   <data name="labelDMCUnavailable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>44, 231</value>
+    <value>44, 221</value>
   </data>
   <data name="labelDMCUnavailable.Size" type="System.Drawing.Size, System.Drawing">
     <value>204, 13</value>
@@ -385,10 +385,10 @@
     <value>True</value>
   </data>
   <data name="linkInstallTools.Location" type="System.Drawing.Point, System.Drawing">
-    <value>44, 248</value>
+    <value>44, 238</value>
   </data>
   <data name="linkInstallTools.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 13</value>
+    <value>139, 20</value>
   </data>
   <data name="linkInstallTools.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
