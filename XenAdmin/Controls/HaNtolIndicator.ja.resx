@@ -295,7 +295,7 @@
     <value>123, 36</value>
   </data>
   <data name="labelMax.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1, 30</value>
+    <value>10, 30</value>
   </data>
   <data name="labelMax.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>

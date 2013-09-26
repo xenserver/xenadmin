@@ -4396,9 +4396,6 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   <data name="EXPORT_EULA_PAGE_TOOLTIP" xml:space="preserve">
     <value>已达到最大 EULA 数({0})。</value>
   </data>
-  <data name="EXPORT_LOWERCASE" xml:space="preserve">
-    <value>导出</value>
-  </data>
   <data name="EXPORT_OPTIONS_PAGE_TEXT" xml:space="preserve">
     <value>高级选项</value>
   </data>
@@ -5523,9 +5520,6 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   </data>
   <data name="IMPORT_INCOMPLETE_FILES" xml:space="preserve">
     <value>导出的文件不完整，或格式无法识别。</value>
-  </data>
-  <data name="IMPORT_LOWERCASE" xml:space="preserve">
-    <value>导入</value>
   </data>
   <data name="IMPORT_OPTIONS_PAGE_CHOOSE_ISO_SR" xml:space="preserve">
     <value>[选择一个 ISO SR]</value>
@@ -10066,8 +10060,11 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="TURN_HA_OFF" xml:space="preserve">
     <value>关闭高可用性功能</value>
   </data>
-  <data name="TVM_PAGE_DESCRIPTION" xml:space="preserve">
-    <value>选择用于执行 {0} 操作的临时 VM (转移 VM)运行时所在的网络。</value>
+  <data name="TVM_PAGE_DESCRIPTION_EXPORT" xml:space="preserve">
+    <value>选择用于执行导出操作的临时 VM (转移 VM)运行时所在的网络。</value>
+  </data>
+  <data name="TVM_PAGE_DESCRIPTION_IMPORT" xml:space="preserve">
+    <value>选择用于执行导入操作的临时 VM (转移 VM)运行时所在的网络。</value>
   </data>
   <data name="TVM_PAGE_TEXT" xml:space="preserve">
     <value>传输 VM 设置</value>
