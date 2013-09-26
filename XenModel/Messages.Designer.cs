@@ -22683,7 +22683,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The VM is not using a shared SR. Restart cannot be guaranteed..
+        ///   Looks up a localized string similar to The VM is using a non-shared SR. Restart cannot be guaranteed..
         /// </summary>
         public static string NOT_AGILE_SR_NOT_SHARED {
             get {
