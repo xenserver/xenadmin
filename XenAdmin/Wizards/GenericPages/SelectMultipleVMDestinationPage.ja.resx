@@ -157,7 +157,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="tableLayoutPanel2.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
@@ -229,7 +229,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>615, 30</value>
+    <value>615, 32</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

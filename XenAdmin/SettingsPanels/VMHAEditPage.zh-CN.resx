@@ -604,7 +604,7 @@
     <value>1</value>
   </data>
   <data name="m_tlpPriority.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="m_tlpPriority.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
@@ -661,7 +661,7 @@
     <value>1</value>
   </data>
   <data name="m_tlpPriority.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 30</value>
+    <value>624, 32</value>
   </data>
   <data name="m_tlpPriority.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
