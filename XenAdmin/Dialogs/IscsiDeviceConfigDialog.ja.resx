@@ -328,7 +328,7 @@
     <value>NoControl</value>
   </data>
   <data name="lunInUseLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 247</value>
+    <value>110, 249</value>
   </data>
   <data name="lunInUseLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>399, 46</value>
@@ -481,10 +481,10 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="comboBoxIscsiIqns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>118, 194</value>
+    <value>110, 194</value>
   </data>
   <data name="comboBoxIscsiIqns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>262, 23</value>
+    <value>268, 23</value>
   </data>
   <data name="comboBoxIscsiIqns.TabIndex" type="System.Int32, mscorlib">
     <value>115</value>
@@ -514,7 +514,7 @@
     <value>4, 197</value>
   </data>
   <data name="labelIscsiIQN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 21</value>
+    <value>104, 21</value>
   </data>
   <data name="labelIscsiIQN.TabIndex" type="System.Int32, mscorlib">
     <value>114</value>
@@ -544,10 +544,10 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="comboBoxIscsiLuns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>118, 223</value>
+    <value>110, 223</value>
   </data>
   <data name="comboBoxIscsiLuns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>262, 23</value>
+    <value>268, 23</value>
   </data>
   <data name="comboBoxIscsiLuns.TabIndex" type="System.Int32, mscorlib">
     <value>119</value>
@@ -616,7 +616,7 @@
     <value>0, 0, 0, 15</value>
   </data>
   <data name="labelIscsiInvalidHost.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 21</value>
+    <value>182, 17</value>
   </data>
   <data name="labelIscsiInvalidHost.TabIndex" type="System.Int32, mscorlib">
     <value>121</value>
@@ -856,7 +856,7 @@
     <value>4, 225</value>
   </data>
   <data name="targetLunLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 21</value>
+    <value>104, 21</value>
   </data>
   <data name="targetLunLabel.TabIndex" type="System.Int32, mscorlib">
     <value>118</value>

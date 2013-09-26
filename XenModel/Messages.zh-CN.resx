@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTION_ACTIVATING_MULTIPLE_VDIS_STATUS" xml:space="preserve">
     <value>正在激活虚拟磁盘...</value>
@@ -384,6 +384,12 @@
   <data name="ACTION_EXPORT_VM_FROM_X" xml:space="preserve">
     <value>正在从“{1}”导出 VM“{0}”</value>
   </data>
+  <data name="ACTION_GETTING_DATASOURCES" xml:space="preserve">
+    <value>正在提取数据源</value>
+  </data>
+  <data name="ACTION_GET_DATASOURCES" xml:space="preserve">
+    <value>提取数据源</value>
+  </data>
   <data name="ACTION_GET_METADATA_VDIS_DONE" xml:space="preserve">
     <value>操作已完成。找到 {0} 个 VDI。</value>
   </data>
@@ -519,6 +525,9 @@
   <data name="ACTION_SAVE_CUSTOM_FIELDS" xml:space="preserve">
     <value>保存自定义字段</value>
   </data>
+  <data name="ACTION_SAVE_DATASOURCES" xml:space="preserve">
+    <value>保存数据源</value>
+  </data>
   <data name="ACTION_SAVE_FOLDER_TAGS" xml:space="preserve">
     <value>保存文件夹和标记</value>
   </data>
@@ -530,6 +539,9 @@
   </data>
   <data name="ACTION_SAVING_CUSTOM_FIELDS_FOR" xml:space="preserve">
     <value>正在保存“{0}”的自定义字段...</value>
+  </data>
+  <data name="ACTION_SAVING_DATASOURCES" xml:space="preserve">
+    <value>正在保存数据源</value>
   </data>
   <data name="ACTION_SAVING_FOLDER_TAGS_FOR" xml:space="preserve">
     <value>正在保存“{0}”的文件夹和标记...</value>
@@ -10266,7 +10278,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
 请检查您的设置并重试。</value>
   </data>
   <data name="UPDATES_WIZARD_HA_ON_DESCRIPTION" xml:space="preserve">
-    <value>池“{0}”无法启用高可用性。</value>
+ 	<value>池“{0}”不能启用高可用性。</value>
   </data>
   <data name="UPDATES_WIZARD_HA_ON_TITLE" xml:space="preserve">
     <value>“{0}”已启用高可用性</value>

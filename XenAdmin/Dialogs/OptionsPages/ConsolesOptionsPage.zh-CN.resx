@@ -505,7 +505,7 @@
     <value>0, 3, 0, 3</value>
   </data>
   <data name="UncaptureKeyComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 25</value>
+    <value>135, 22</value>
   </data>
   <data name="UncaptureKeyComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -709,7 +709,7 @@
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 91</value>
+    <value>287, 96</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -742,7 +742,7 @@
     <value>3, 3, 3, 0</value>
   </data>
   <data name="ShortcutsGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1009, 116</value>
+    <value>1009, 120</value>
   </data>
   <data name="ShortcutsGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

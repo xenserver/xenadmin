@@ -499,7 +499,7 @@
     <value>3, 204</value>
   </data>
   <data name="localServerTime1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 18</value>
+    <value>0, 0</value>
   </data>
   <data name="localServerTime1.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -532,7 +532,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="chevronButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 28</value>
+    <value>0, 0</value>
   </data>
   <data name="chevronButton1.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -616,7 +616,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>851, 66</value>
+    <value>851, 39</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -691,7 +691,7 @@
     <value>3</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>851, 230</value>
+    <value>851, 250</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -772,7 +772,7 @@
     <value>4</value>
   </data>
   <data name="tableLayoutPanel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>867, 536</value>
+    <value>867, 543</value>
   </data>
   <data name="tableLayoutPanel5.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -805,7 +805,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>867, 536</value>
+    <value>867, 543</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>

@@ -661,7 +661,7 @@
     <value>1</value>
   </data>
   <data name="m_tlpPriority.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 27</value>
+    <value>624, 30</value>
   </data>
   <data name="m_tlpPriority.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
