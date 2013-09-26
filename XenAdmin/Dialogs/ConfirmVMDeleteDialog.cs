@@ -44,7 +44,6 @@ namespace XenAdmin.Dialogs
     public partial class ConfirmVMDeleteDialog : XenDialogBase
     {
         private const int MINIMUM_COL_WIDTH = 50;
-        private bool internalUpdate;
 
         public ConfirmVMDeleteDialog(IEnumerable<VM> vms)
         {
