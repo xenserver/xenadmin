@@ -71,7 +71,6 @@ namespace XenAdmin.Controls.XenSearch
 
         public QueryPanel()
         {
-            InitializeComponent();
             this.SuspendLayout();
             MetricUpdater = PropertyAccessorHelper.MetricUpdater; // new MetricUpdater();
             MetricUpdater.MetricsUpdated += MetricsUpdated;
@@ -87,16 +86,15 @@ namespace XenAdmin.Controls.XenSearch
         {
             if (disposing)
             {
+                if (MetricUpdater != null)
+                    MetricUpdater.MetricsUpdated -= MetricsUpdated;
+                CustomFieldsManager.CustomFieldsChanged -= CustomFields_CustomFieldsChanged;
+                listUpdateManager.Update -= listUpdateManager_Update;
                 listUpdateManager.Dispose();
             }
 
             base.Dispose(disposing);
         }
-
-        private void InitializeComponent()
-        {
-        }
-
 
         private void OnSearchChanged()
         {

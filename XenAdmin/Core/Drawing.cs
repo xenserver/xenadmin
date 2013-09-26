@@ -300,60 +300,62 @@ namespace XenAdmin.Core
         /// <param name="color">The color of the progress bar.</param>
         public static void DrawSimpleProgressBar(Graphics g, Rectangle r, double progress, SimpleProgressBarColor color)
         {
-            Bitmap bitmap = new Bitmap(r.Width, r.Height);
-            using (Graphics gg = Graphics.FromImage(bitmap))
+            using (Bitmap bitmap = new Bitmap(r.Width, r.Height))
             {
-                //fill background in white
-                gg.FillRectangle(Brushes.White, new Rectangle(0, 0, r.Width, r.Height));
-                Rectangle chunks = new Rectangle(0, 0, (int)(r.Width * progress), r.Height);
-
-                if (Application.RenderWithVisualStyles)
+                using (Graphics gg = Graphics.FromImage(bitmap))
                 {
-                    ProgressBarRenderer.DrawHorizontalChunks(gg, chunks);
-                }
-                else
-                {
-                    var brush = Brushes.LightGreen;
+                    //fill background in white
+                    gg.FillRectangle(Brushes.White, new Rectangle(0, 0, r.Width, r.Height));
+                    Rectangle chunks = new Rectangle(0, 0, (int)(r.Width * progress), r.Height);
 
-                    if (color == SimpleProgressBarColor.Red)
+                    if (Application.RenderWithVisualStyles)
                     {
-                        brush = Brushes.Red;
+                        ProgressBarRenderer.DrawHorizontalChunks(gg, chunks);
                     }
-                    else if (color == SimpleProgressBarColor.Blue)
+                    else
                     {
-                        brush = Brushes.Blue;
-                    }
+                        var brush = Brushes.LightGreen;
 
-                    gg.FillRectangle(brush, chunks);
-                }
-            }
-
-            if (Application.RenderWithVisualStyles && color != SimpleProgressBarColor.Green)
-            {
-                for (int i = 0; i < bitmap.Width * progress; i++)
-                {
-                    for (int j = 0; j < bitmap.Height; j++)
-                    {
-                        Color c = bitmap.GetPixel(i, j);
-
-                        if (color == SimpleProgressBarColor.Blue)
+                        if (color == SimpleProgressBarColor.Red)
                         {
-                            bitmap.SetPixel(i, j, Color.FromArgb(c.R, c.B, c.G));
+                            brush = Brushes.Red;
                         }
-                        else
+                        else if (color == SimpleProgressBarColor.Blue)
                         {
-                            //red
-                            bitmap.SetPixel(i, j, Color.FromArgb(c.G, c.R, c.B));
+                            brush = Brushes.Blue;
+                        }
+
+                        gg.FillRectangle(brush, chunks);
+                    }
+                }
+
+                if (Application.RenderWithVisualStyles && color != SimpleProgressBarColor.Green)
+                {
+                    for (int i = 0; i < bitmap.Width * progress; i++)
+                    {
+                        for (int j = 0; j < bitmap.Height; j++)
+                        {
+                            Color c = bitmap.GetPixel(i, j);
+
+                            if (color == SimpleProgressBarColor.Blue)
+                            {
+                                bitmap.SetPixel(i, j, Color.FromArgb(c.R, c.B, c.G));
+                            }
+                            else
+                            {
+                                //red
+                                bitmap.SetPixel(i, j, Color.FromArgb(c.G, c.R, c.B));
+                            }
                         }
                     }
                 }
+
+                // draw progress bar
+                g.DrawImage(bitmap, r);
+
+                // draw rectangle around progress bar.
+                g.DrawRectangle(SystemPens.ControlDark, r);
             }
-
-            // draw progress bar
-            g.DrawImage(bitmap, r);
-
-            // draw rectangle around progress bar.
-            g.DrawRectangle(SystemPens.ControlDark, r);
         }
 
         /// <summary>
@@ -363,13 +365,15 @@ namespace XenAdmin.Core
         /// <returns>Image converted to grey scale</returns>
         public static Image ConvertToGreyScale(Image source)
         {
-            var bitmap = new Bitmap(source.Width, source.Height);
-            using (Graphics graphics = Graphics.FromImage(bitmap))
+            using (var bitmap = new Bitmap(source.Width, source.Height))
             {
-                var rectangle = new Rectangle(0, 0, source.Width, source.Height);
-                graphics.DrawImage(source, rectangle, 0, 0, source.Width, source.Height, GraphicsUnit.Pixel,
-                                   Drawing.GreyScaleAttributes);
-                return bitmap;
+                using (Graphics graphics = Graphics.FromImage(bitmap))
+                {
+                    var rectangle = new Rectangle(0, 0, source.Width, source.Height);
+                    graphics.DrawImage(source, rectangle, 0, 0, source.Width, source.Height, GraphicsUnit.Pixel,
+                                       Drawing.GreyScaleAttributes);
+                    return bitmap;
+                }
             }
         }
     }
