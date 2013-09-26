@@ -145,10 +145,10 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="m_gridFeatures.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 282</value>
+    <value>3, 286</value>
   </data>
   <data name="m_gridFeatures.Size" type="System.Drawing.Size, System.Drawing">
-    <value>482, 86</value>
+    <value>482, 88</value>
   </data>
   <data name="m_gridFeatures.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -250,13 +250,13 @@
     <value>NoControl</value>
   </data>
   <data name="linkLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 383</value>
+    <value>3, 389</value>
   </data>
   <data name="linkLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 12, 3, 3</value>
   </data>
   <data name="linkLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 21</value>
+    <value>166, 15</value>
   </data>
   <data name="linkLabel1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -448,7 +448,7 @@
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 264</value>
+    <value>3, 268</value>
   </data>
   <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 6, 3, 0</value>
@@ -517,7 +517,7 @@
     <value>3, 123</value>
   </data>
   <data name="m_gridPlugins.Size" type="System.Drawing.Size, System.Drawing">
-    <value>482, 132</value>
+    <value>482, 136</value>
   </data>
   <data name="m_gridPlugins.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
