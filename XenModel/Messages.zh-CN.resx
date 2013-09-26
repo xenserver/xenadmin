@@ -10261,7 +10261,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>退出维护模式</value>
   </data>
   <data name="UPDATES_WIZARD_FILE_NOT_FOUND" xml:space="preserve">
-    <value>找不到更新文件	 '{0}'。
+    <value>找不到更新文件		 '{0}'。
 	
 请检查您的设置并重试。</value>
   </data>

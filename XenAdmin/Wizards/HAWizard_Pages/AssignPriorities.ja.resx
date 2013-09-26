@@ -409,13 +409,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelStartDelayUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>280, 265</value>
+    <value>275, 265</value>
   </data>
   <data name="labelStartDelayUnits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="labelStartDelayUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 20</value>
+    <value>8, 20</value>
   </data>
   <data name="labelStartDelayUnits.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -481,7 +481,7 @@
     <value>Top</value>
   </data>
   <data name="haNtolIndicator.Location" type="System.Drawing.Point, System.Drawing">
-    <value>309, 228</value>
+    <value>270, 228</value>
   </data>
   <data name="haNtolIndicator.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>10, 0, 3, 3</value>

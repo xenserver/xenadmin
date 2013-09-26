@@ -190,7 +190,7 @@
     <value>19, 3</value>
   </data>
   <data name="labelStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>330, 10</value>
+    <value>330, 15</value>
   </data>
   <data name="labelStatus.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -220,7 +220,7 @@
     <value>1</value>
   </data>
   <data name="tableStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 16</value>
+    <value>352, 20</value>
   </data>
   <data name="tableStatus.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -292,7 +292,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>139, 27</value>
+    <value>143, 30</value>
   </data>
   <data name="labelMax.Size" type="System.Drawing.Size, System.Drawing">
     <value>1, 22</value>
@@ -322,7 +322,7 @@
     <value>NoControl</value>
   </data>
   <data name="spinner.Location" type="System.Drawing.Point, System.Drawing">
-    <value>145, 30</value>
+    <value>148, 30</value>
   </data>
   <data name="spinner.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -349,10 +349,10 @@
     <value>Left</value>
   </data>
   <data name="numericUpDownCapacity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 39</value>
+    <value>94, 30</value>
   </data>
   <data name="numericUpDownCapacity.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 19</value>
+    <value>45, 19</value>
   </data>
   <data name="numericUpDownCapacity.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -415,7 +415,7 @@
     <value>3</value>
   </data>
   <data name="tableServerFailureLimit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>358, 71</value>
+    <value>358, 84</value>
   </data>
   <data name="tableServerFailureLimit.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -448,7 +448,7 @@
     <value>3, 3, 6, 0</value>
   </data>
   <data name="groupBoxControls.Size" type="System.Drawing.Size, System.Drawing">
-    <value>364, 101</value>
+    <value>368, 101</value>
   </data>
   <data name="groupBoxControls.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>

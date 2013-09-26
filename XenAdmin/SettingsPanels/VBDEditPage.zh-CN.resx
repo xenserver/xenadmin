@@ -259,10 +259,10 @@
     <value>NoControl</value>
   </data>
   <data name="labelDevicePositionMsg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 108</value>
+    <value>119, 112</value>
   </data>
   <data name="labelDevicePositionMsg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 41</value>
+    <value>281, 35</value>
   </data>
   <data name="labelDevicePositionMsg.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
