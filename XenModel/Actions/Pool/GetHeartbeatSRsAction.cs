@@ -43,8 +43,10 @@ namespace XenAdmin.Actions
         private readonly List<SRWrapper> _srs = new List<SRWrapper>();
 
         public GetHeartbeatSRsAction(Pool pool)
-            : base(pool.Connection, string.Format(Messages.HA_SCANNING_SRS, Helpers.GetName(pool.Connection)), null, true)
+            : base(pool.Connection, string.Format(Messages.HA_SCANNING_SRS,
+            Helpers.GetName(pool.Connection).Ellipsise(50)), null, true)
         {
+
         }
 
         public List<SRWrapper> SRs
