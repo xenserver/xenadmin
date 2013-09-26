@@ -277,7 +277,7 @@
     <value>3, 0, 3, 3</value>
   </data>
   <data name="srPicker1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>495, 186</value>
+    <value>500, 186</value>
   </data>
   <data name="srPicker1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
