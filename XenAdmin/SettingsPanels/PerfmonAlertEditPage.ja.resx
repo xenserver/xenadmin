@@ -1090,7 +1090,7 @@
     <value>3, 3, 3, 0</value>
   </data>
   <data name="NetGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>420, 87</value>
+    <value>420, 95</value>
   </data>
   <data name="NetGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1318,7 +1318,7 @@
     <value>3, 3, 3, 0</value>
   </data>
   <data name="CpuGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>420, 86</value>
+    <value>420, 95</value>
   </data>
   <data name="CpuGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

@@ -313,7 +313,7 @@
     <value>103, 246</value>
   </data>
   <data name="comboBoxIscsiLuns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 20</value>
+    <value>271, 25</value>
   </data>
   <data name="comboBoxIscsiLuns.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -373,7 +373,7 @@
     <value>NoControl</value>
   </data>
   <data name="lunInUseLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 275</value>
+    <value>103, 276</value>
   </data>
   <data name="lunInUseLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>395, 46</value>
