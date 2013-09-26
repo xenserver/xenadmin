@@ -79,17 +79,16 @@ namespace XenAdmin.Controls
             if (index > -1 && cb != null)
             {
                 IEnableableComboBoxItem item = cb.Items[index] as IEnableableComboBoxItem;
-                using (SolidBrush textBrush = new SolidBrush(SystemColors.ControlText))
-                {
-                    //Paint disabled items grey - otherwise leave them black
-                    if (item != null && !item.Enabled)
-                        textBrush.Color = SystemColors.GrayText;
+                Color textColor = SystemColors.ControlText;
 
-                    if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
-                        textBrush.Color = SystemColors.HighlightText;
+                //Paint disabled items grey - otherwise leave them black
+                if (item != null && !item.Enabled)
+                    textColor = SystemColors.GrayText;    
 
-                    e.Graphics.DrawString(cb.Items[index].ToString(), ((Control)sender).Font, textBrush, e.Bounds.X, e.Bounds.Y);
-                }
+                if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+                    textColor = SystemColors.HighlightText;
+
+                Drawing.DrawText(e.Graphics, cb.Items[index].ToString(), cb.Font, e.Bounds.Location, textColor);
             }
         }
 

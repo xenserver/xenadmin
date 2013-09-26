@@ -33,6 +33,8 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
+using XenAdmin.Core;
+
 namespace XenAdmin.Controls
 {
     /// <summary>
@@ -96,14 +98,6 @@ namespace XenAdmin.Controls
             }
         }
 
-        private int MeasureTextWidth(string text)
-        {
-            using (Graphics graphics = CreateGraphics())
-            {
-                return (int) graphics.MeasureString(text, Font).Width;
-            }
-        }
-
         private int VerticalScrollBarWidth
         {
             get { return Items.Count > MaxDropDownItems ? SystemInformation.VerticalScrollBarWidth : 0; }
@@ -114,8 +108,10 @@ namespace XenAdmin.Controls
         protected override void OnSelectedIndexChanged(EventArgs e)
         {
             string itemText = SelectedItem != null ? SelectedItem.ToString() : string.Empty;
+            int width = Drawing.MeasureText(itemText, Font).Width;
+
             int selectedItemTextWidth = !string.IsNullOrEmpty(itemText)
-                                            ? MeasureTextWidth(itemText) + DropDownButtonWidth
+                                            ? width + DropDownButtonWidth
                                             : 0;
             toolTip.SetToolTip(this, selectedItemTextWidth > ClientRectangle.Width ? itemText : string.Empty);
 
