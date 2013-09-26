@@ -148,7 +148,7 @@
     <value>0</value>
   </data>
   <data name="memorySpinnerDynMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 32</value>
+    <value>0, 31</value>
   </data>
   <data name="memorySpinnerDynMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -181,7 +181,7 @@
     <value>2</value>
   </data>
   <data name="spinnerPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 60</value>
+    <value>220, 59</value>
   </data>
   <data name="spinnerPanel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -316,7 +316,7 @@
     <value>22, 53</value>
   </data>
   <data name="groupBoxOn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>520, 165</value>
+    <value>520, 166</value>
   </data>
   <data name="groupBoxOn.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>

@@ -218,7 +218,7 @@
     <value>3, 0, 3, 0</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>592, 48</value>
+    <value>605, 38</value>
   </data>
   <data name="label9.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -245,10 +245,10 @@
     <value>Fill</value>
   </data>
   <data name="panel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 153</value>
+    <value>3, 145</value>
   </data>
   <data name="panel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>610, 50</value>
+    <value>620, 50</value>
   </data>
   <data name="panel4.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -329,7 +329,7 @@
     <value>Fill</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 94</value>
+    <value>3, 84</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>610, 25</value>
@@ -350,7 +350,7 @@
     <value>1</value>
   </data>
   <data name="pictureBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 15</value>
+    <value>3, 10</value>
   </data>
   <data name="pictureBox4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -413,7 +413,7 @@
     <value>Fill</value>
   </data>
   <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 125</value>
+    <value>3, 115</value>
   </data>
   <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
     <value>610, 25</value>
@@ -497,7 +497,7 @@
     <value>Fill</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 63</value>
+    <value>3, 53</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>610, 25</value>
@@ -527,7 +527,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>615, 250</value>
+    <value>625, 250</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -602,7 +602,7 @@
     <value>96, 96</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>615, 400</value>
+    <value>625, 400</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>PatchingWizard_FirstPage</value>
