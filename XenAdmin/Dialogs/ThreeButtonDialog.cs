@@ -93,8 +93,6 @@ namespace XenAdmin.Dialogs
                 pictureBoxIcon.Image = properties.Icon.ToBitmap();
 
             labelMessage.Text = properties.MainMessage;
-            if (properties.linkLength > 0)
-                labelMessage.Links.Add(new LinkLabel.Link(properties.linkStart, properties.linkLength, properties.linkUrl));
 
             if (properties.WindowTitle != null)
                 this.Text = properties.WindowTitle;
@@ -266,11 +264,8 @@ namespace XenAdmin.Dialogs
         public class Details
         {
             public Icon Icon;
-            public string WindowTitle = null;
+            public string WindowTitle;
             public string MainMessage = "";
-            public int linkStart = 0;
-            public int linkLength = 0;
-            public string linkUrl = "";
 
             public Details(Icon Icon, string MainMessage)
             {
@@ -282,15 +277,6 @@ namespace XenAdmin.Dialogs
                 : this(Icon, MainMessage)
             {
                 this.WindowTitle = WindowTitle;
-            }
-
-
-            public Details(Icon Icon, string MainMessage, int linkStart, int linkLength, string linkUrl, string WindowTitle)
-                : this(Icon, MainMessage, WindowTitle)
-            {
-                this.linkStart = linkStart;
-                this.linkLength = linkLength;
-                this.linkUrl = linkUrl;
             }
         }
 

@@ -730,20 +730,23 @@ namespace XenAdmin
 
                 if (server_min > current_version)
                 {
-
                     connection.EndConnect();
-                    //Program.Invoke(Program.MainWindow, RefreshTreeView);
+
                     Program.Invoke(Program.MainWindow, delegate()
                     {
+                        string msg = string.Format(Messages.GUI_OUT_OF_DATE, Helpers.GetName(master));
                         string url = "https://" + connection.Hostname;
-                        string message = string.Format(Messages.GUI_OUT_OF_DATE, Helpers.GetName(master), url);
-                        int linkStart = message.Length - url.Length - 1;
-                        int linkLength = url.Length;
-                        string linkUrl = url;
-                        new ThreeButtonDialog(
-                            new ThreeButtonDialog.Details(SystemIcons.Error, message, linkStart, linkLength, linkUrl, Messages.CONNECTION_REFUSED_TITLE)).ShowDialog(this);
 
-                        new ActionBase(Messages.CONNECTION_REFUSED, message, false, true, Messages.CONNECTION_REFUSED_TITLE);
+                        using (var dlog = new ConnectionRefusedDialog())
+                        {
+                            dlog.ErrorMessage = msg;
+                            dlog.Url = url;
+                            dlog.ShowDialog(this);
+                        }
+
+                        new ActionBase(Messages.CONNECTION_REFUSED_TITLE,
+                                       string.Format("{0}\n{1}", msg, url), false,
+                                       true, Messages.CONNECTION_REFUSED);
                     });
                     return;
                 }

@@ -4921,7 +4921,7 @@ Note: Any custom color selections will remain unchanged</value>
   <data name="GUI_OUT_OF_DATE" xml:space="preserve">
     <value>This version of XenCenter is out of date and cannot connect to {0}.
 
-You can get a compatible version of XenCenter from {1}.</value>
+You can get a compatible version of XenCenter from the following location:</value>
   </data>
   <data name="HA" xml:space="preserve">
     <value>HA</value>
