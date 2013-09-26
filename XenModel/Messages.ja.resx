@@ -4397,9 +4397,6 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="EXPORT_EULA_PAGE_TOOLTIP" xml:space="preserve">
     <value>EULA の最大数 ({0}) に達しました。</value>
   </data>
-  <data name="EXPORT_LOWERCASE" xml:space="preserve">
-    <value>エクスポート</value>
-  </data>
   <data name="EXPORT_OPTIONS_PAGE_TEXT" xml:space="preserve">
     <value>高度なオプション</value>
   </data>
@@ -5525,9 +5522,6 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   </data>
   <data name="IMPORT_INCOMPLETE_FILES" xml:space="preserve">
     <value>エクスポートされたファイルが不完全であるか、形式を認識できません。</value>
-  </data>
-  <data name="IMPORT_LOWERCASE" xml:space="preserve">
-    <value>インポート</value>
   </data>
   <data name="IMPORT_OPTIONS_PAGE_CHOOSE_ISO_SR" xml:space="preserve">
     <value>[ISO SR を選択]</value>
@@ -10064,8 +10058,11 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   <data name="TURN_HA_OFF" xml:space="preserve">
     <value>高可用性の無効化</value>
   </data>
-  <data name="TVM_PAGE_DESCRIPTION" xml:space="preserve">
-    <value>一時的な VM (Transfer VM) を実行するネットワークを選択します。この VM は{0}処理で使用されます。</value>
+  <data name="TVM_PAGE_DESCRIPTION_EXPORT" xml:space="preserve">
+    <value>一時的な VM (Transfer VM) を実行するネットワークを選択します。この VM はエクスポート処理で使用されます。</value>
+  </data>
+  <data name="TVM_PAGE_DESCRIPTION_IMPORT" xml:space="preserve">
+    <value>一時的な VM (Transfer VM) を実行するネットワークを選択します。この VM はインポート処理で使用されます。</value>
   </data>
   <data name="TVM_PAGE_TEXT" xml:space="preserve">
     <value>Transfer VM の設定</value>
