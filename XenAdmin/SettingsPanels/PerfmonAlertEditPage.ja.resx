@@ -862,7 +862,7 @@
     <value>3, 3, 3, 0</value>
   </data>
   <data name="DiskGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>475, 85</value>
+    <value>420, 85</value>
   </data>
   <data name="DiskGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>

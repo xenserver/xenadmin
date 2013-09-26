@@ -187,7 +187,7 @@
     <value>92, 5</value>
   </data>
   <data name="AttachButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 23</value>
+    <value>116, 23</value>
   </data>
   <data name="AttachButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
