@@ -30,15 +30,15 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SummaryPanel));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.titleLabel = new System.Windows.Forms.Label();
+            this.information = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.warningIcon = new System.Windows.Forms.PictureBox();
             this.warningText = new System.Windows.Forms.Label();
-            this.titleLabel = new System.Windows.Forms.Label();
-            this.information = new System.Windows.Forms.Label();
-            this.helperLink = new System.Windows.Forms.LinkLabel();
             this.informationLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.informationImage = new System.Windows.Forms.PictureBox();
             this.informationMessage = new System.Windows.Forms.Label();
+            this.helperLink = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.warningIcon)).BeginInit();
@@ -55,6 +55,17 @@
             this.tableLayoutPanel1.Controls.Add(this.informationLayoutPanel, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.helperLink, 0, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // titleLabel
+            // 
+            resources.ApplyResources(this.titleLabel, "titleLabel");
+            this.titleLabel.AutoEllipsis = true;
+            this.titleLabel.Name = "titleLabel";
+            // 
+            // information
+            // 
+            resources.ApplyResources(this.information, "information");
+            this.information.Name = "information";
             // 
             // tableLayoutPanel2
             // 
@@ -75,23 +86,6 @@
             this.warningText.AutoEllipsis = true;
             this.warningText.Name = "warningText";
             // 
-            // titleLabel
-            // 
-            resources.ApplyResources(this.titleLabel, "titleLabel");
-            this.titleLabel.AutoEllipsis = true;
-            this.titleLabel.Name = "titleLabel";
-            // 
-            // information
-            // 
-            resources.ApplyResources(this.information, "information");
-            this.information.Name = "information";
-            // 
-            // helperLink
-            // 
-            this.helperLink.AutoEllipsis = true;
-            resources.ApplyResources(this.helperLink, "helperLink");
-            this.helperLink.Name = "helperLink";
-            // 
             // informationLayoutPanel
             // 
             resources.ApplyResources(this.informationLayoutPanel, "informationLayoutPanel");
@@ -110,6 +104,12 @@
             resources.ApplyResources(this.informationMessage, "informationMessage");
             this.informationMessage.AutoEllipsis = true;
             this.informationMessage.Name = "informationMessage";
+            // 
+            // helperLink
+            // 
+            this.helperLink.AutoEllipsis = true;
+            resources.ApplyResources(this.helperLink, "helperLink");
+            this.helperLink.Name = "helperLink";
             // 
             // SummaryPanel
             // 

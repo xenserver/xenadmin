@@ -128,9 +128,6 @@
   <data name="titleLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
   </data>
-  <data name="titleLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="titleLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
@@ -142,7 +139,7 @@
     <value>8, 8, 3, 8</value>
   </data>
   <data name="titleLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 13</value>
+    <value>224, 20</value>
   </data>
   <data name="titleLabel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -163,7 +160,7 @@
     <value>True</value>
   </data>
   <data name="information.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 37</value>
+    <value>8, 44</value>
   </data>
   <data name="information.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>8, 8, 3, 8</value>
@@ -247,7 +244,7 @@
     <value>Fill</value>
   </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 61</value>
+    <value>3, 68</value>
   </data>
   <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
@@ -328,7 +325,7 @@
     <value>1</value>
   </data>
   <data name="informationLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 108</value>
+    <value>3, 115</value>
   </data>
   <data name="informationLayoutPanel.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
