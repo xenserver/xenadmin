@@ -519,6 +519,15 @@
   <data name="ACTION_REMOVE_ALERTS_PROGRESS_DESCRIPTION" xml:space="preserve">
     <value>Removing alert {0} of {1}...</value>
   </data>
+  <data name="ACTION_RESUMEANDSTARTVMS_PREPARING" xml:space="preserve">
+    <value>Preparing to resume and start VMs...</value>
+  </data>
+  <data name="ACTION_RESUMEANDSTARTVMS_RESUMINGN" xml:space="preserve">
+    <value>Resuming VM {0} of {1}</value>
+  </data>
+  <data name="ACTION_RESUMEANDSTARTVMS_STARTINGN" xml:space="preserve">
+    <value>Starting VM {0} of {1}</value>
+  </data>
   <data name="ACTION_SAVE_ALERTS" xml:space="preserve">
     <value>Save alerts</value>
   </data>

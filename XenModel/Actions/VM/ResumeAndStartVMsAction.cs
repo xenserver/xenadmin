@@ -48,7 +48,7 @@ namespace XenAdmin.Actions.VMActions
         private Action<VM, bool> _warningDialogHAInvalidConfig;
 
         public ResumeAndStartVMsAction(IXenConnection connection, Host host, List<VM> vmsToResume, List<VM> vmsToStart,Action<VM, bool> warningDialogHAInvalidConfig, Action<VMStartAbstractAction, Failure> startDiagnosisForm)
-            : base(connection, "Preparing to resume and start VMs...", true)
+            : base(connection, Messages.ACTION_RESUMEANDSTARTVMS_PREPARING, true)
         {
             Host = host;
             VmsToResume = vmsToResume;
@@ -74,7 +74,7 @@ namespace XenAdmin.Actions.VMActions
 
             foreach (VM vm in VmsToResume)
             {
-                Description = string.Format("Resuming VM {0} of {1}", ActionCountCompleted, VmsToResume.Count);
+                Description = string.Format(Messages.ACTION_RESUMEANDSTARTVMS_RESUMINGN, ActionCountCompleted, VmsToResume.Count);
 
                 AsyncAction action;
                 if (CanVMBootOnHost(vm, Host))
@@ -89,7 +89,7 @@ namespace XenAdmin.Actions.VMActions
 
             foreach (VM vm in VmsToStart)
             {
-                Description = string.Format("Starting VM {0} of {1}", ActionCountCompleted - VmsToResume.Count, VmsToStart.Count);
+                Description = string.Format(Messages.ACTION_RESUMEANDSTARTVMS_STARTINGN, ActionCountCompleted - VmsToResume.Count, VmsToStart.Count);
 
                 AsyncAction action;
                 if (CanVMBootOnHost(vm, Host))
