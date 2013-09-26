@@ -171,8 +171,8 @@ namespace XenAdminTests.Controls
                 yield return new TestCase { Text = "junk&", Expected = "junk&", Width = 50 };
                 yield return new TestCase { Text = "junk&", Expected = "junk&", Width = 100 };
                 yield return new TestCase { Text = "junk&&", Expected = "junk&&", Width = 100 };
-                yield return new TestCase { Text = "junk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", Expected = "junk&&&&&&...", Width = 100 };
-                yield return new TestCase { Text = "jnk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", Expected = "jnk&&&&&&&...", Width = 100 };
+                yield return new TestCase { Text = "junk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", Expected = "junk&&&&&&&&&&&&&&&&&...", Width = 100 };
+                yield return new TestCase { Text = "jnk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", Expected = "jnk&&&&&&&&&&&&&&&&&&&...", Width = 100 };
                 yield return new TestCase { Text = "junk&&junk", Expected = "junk&&junk", Width = 100 };
                 yield return new TestCase { Text = "junk&junk", Expected = "junk&junk", Width = 100 };
                 yield return new TestCase
@@ -190,19 +190,18 @@ namespace XenAdminTests.Controls
             }
         }
 
-
         public IEnumerable<TestCase> TestCasesNoMnemonic
         {
             get
             {
                 yield return new TestCase { Text = "junk", Expected = "junk", Width = 100 };
-                yield return new TestCase { Text = "junk&", Expected = "ju...", Width = 50 };
+                yield return new TestCase { Text = "junk&", Expected = "junk&&", Width = 50 };
                 yield return new TestCase { Text = "junk&", Expected = "junk&&", Width = 100 };
                 yield return new TestCase { Text = "junk&&", Expected = "junk&&&&", Width = 100 };
                 yield return new TestCase { Text = "junk&&junk", Expected = "junk&&&&junk", Width = 100 };
                 yield return new TestCase { Text = "junk&junk", Expected = "junk&&junk", Width = 100 };
-                yield return new TestCase { Text = "junk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", Expected = "junk&&&&&&...", Width = 100 };
-                yield return new TestCase { Text = "jnk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", Expected = "jnk&&&&&&...", Width = 100 };
+                yield return new TestCase { Text = "junk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", Expected = "junk&&&&&&&&&&&&&&&&...", Width = 100 };
+                yield return new TestCase { Text = "jnk&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&", Expected = "jnk&&&&&&&&&&&&&&&&&&...", Width = 100 };
                 yield return new TestCase
                 {
                     Text = "AllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoyAllWorkAndNoPlayMakesJackADullBoy",

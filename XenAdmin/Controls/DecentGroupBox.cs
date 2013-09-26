@@ -122,14 +122,11 @@ namespace XenAdmin.Controls
 
             if (autoEllipsis && newText != null)
             {
-                using (Graphics g = CreateGraphics())
+                newText = newText.Ellipsise(new Rectangle(0, 0, maxWidth, Height), Font);
+                if (newText == ".") //If ellipsise shortens the string to less than the ellipsis
                 {
-                    newText = newText.Ellipsise(new Rectangle(0, 0, maxWidth, Height), Font);
-                    if (newText == ".") //If ellipsise shortens the string to less than the ellipsis
-                    {
-                        base.Text = String.Empty;
-                        return;
-                    }
+                    base.Text = String.Empty;
+                    return;
                 }
 
                 //Avoid sending &... to the base class, so ensure we have an even number of ampersands on the end of the string.
