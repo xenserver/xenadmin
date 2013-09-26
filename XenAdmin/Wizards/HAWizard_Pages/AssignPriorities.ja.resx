@@ -568,7 +568,7 @@
     <value>3, 6, 3, 6</value>
   </data>
   <data name="dataGridViewVms.Size" type="System.Drawing.Size, System.Drawing">
-    <value>625, 194</value>
+    <value>640, 194</value>
   </data>
   <data name="dataGridViewVms.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -598,7 +598,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>631, 347</value>
+    <value>661, 347</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -652,7 +652,7 @@
     <value>8, 3, 3, 3</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>631, 347</value>
+    <value>661, 347</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>高可用性再起動優先度</value>

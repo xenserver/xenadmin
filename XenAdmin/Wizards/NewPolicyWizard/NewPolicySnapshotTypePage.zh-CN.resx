@@ -187,7 +187,7 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="radioButtonDiskAndMemory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 102</value>
+    <value>6, 98</value>
   </data>
   <data name="radioButtonDiskAndMemory.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 17</value>
@@ -217,7 +217,7 @@
     <value>25, 65</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>460, 38</value>
+    <value>460, 30</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>

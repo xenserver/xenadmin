@@ -337,7 +337,7 @@
     <value>7</value>
   </data>
   <data name="buttonClear.Text" xml:space="preserve">
-    <value>清除(&amp;C)</value>
+    <value>全部清除(&amp;C)</value>
   </data>
   <data name="&gt;&gt;buttonClear.Name" xml:space="preserve">
     <value>buttonClear</value>
