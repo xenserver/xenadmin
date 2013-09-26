@@ -82,17 +82,17 @@ namespace XenAdmin.Controls
         {
             get
             {
-                using (Graphics graphics = CreateGraphics())
+                int longest = 0;
+                foreach (var item in Items)
                 {
-                    int longest = 0;
-                    foreach (var item in Items)
-                    {
-                        int stringLength = (int) graphics.MeasureString(item.ToString(), Font).Width;
-                        if (stringLength > longest)
-                            longest = stringLength;
-                    }
-                    return longest;
+                    //CA-113310: use TextRenderer rather than Graphics to measure
+                    //the string because it will be placed on a winforms control
+                    //with the default UseCompatibleTextRendering value (false)
+                    int stringLength = TextRenderer.MeasureText(item.ToString(), Font).Width;
+                    if (stringLength > longest)
+                        longest = stringLength;
                 }
+                return longest;
             }
         }
 
