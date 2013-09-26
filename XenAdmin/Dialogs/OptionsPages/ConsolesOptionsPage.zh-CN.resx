@@ -505,7 +505,7 @@
     <value>0, 3, 0, 3</value>
   </data>
   <data name="UncaptureKeyComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 30</value>
+    <value>135, 25</value>
   </data>
   <data name="UncaptureKeyComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>

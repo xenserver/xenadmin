@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="memorySpinnerDynMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>0, 2</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="memorySpinnerDynMin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -148,7 +148,7 @@
     <value>0</value>
   </data>
   <data name="memorySpinnerDynMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 25</value>
+    <value>0, 27</value>
   </data>
   <data name="memorySpinnerDynMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -172,7 +172,7 @@
     <value>1</value>
   </data>
   <data name="spinnerPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>150, 107</value>
+    <value>150, 105</value>
   </data>
   <data name="spinnerPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -181,7 +181,7 @@
     <value>2</value>
   </data>
   <data name="spinnerPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 50</value>
+    <value>220, 55</value>
   </data>
   <data name="spinnerPanel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -211,7 +211,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="vmShinyBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>500, 83</value>
+    <value>500, 78</value>
   </data>
   <data name="vmShinyBar.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -316,7 +316,7 @@
     <value>22, 53</value>
   </data>
   <data name="groupBoxOn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>520, 162</value>
+    <value>520, 165</value>
   </data>
   <data name="groupBoxOn.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -334,7 +334,7 @@
     <value>3</value>
   </data>
   <data name="iconDMCUnavailable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 219</value>
+    <value>22, 222</value>
   </data>
   <data name="iconDMCUnavailable.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>

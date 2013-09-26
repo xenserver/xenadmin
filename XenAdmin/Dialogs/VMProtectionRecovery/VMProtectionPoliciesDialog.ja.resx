@@ -367,7 +367,7 @@
     <value>3, 0</value>
   </data>
   <data name="labelPolicyTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>727, 14</value>
+    <value>727, 20</value>
   </data>
   <data name="labelPolicyTitle.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
