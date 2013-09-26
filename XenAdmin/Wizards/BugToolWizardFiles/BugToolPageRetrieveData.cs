@@ -213,7 +213,9 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             {
                 e.Graphics.FillRectangle(backBrush, e.Bounds);
             }
-            e.Graphics.DrawImage(Images.GetImage16For(host.Host), new Rectangle(e.Bounds.Location, new Size(e.Bounds.Height, e.Bounds.Height)));
+
+            e.Graphics.DrawImage(Images.GetImage16For(host.Host), e.Bounds.Left, e.Bounds.Top);
+
             int width = Drawing.MeasureText(host.StatusString, flickerFreeListBox1.Font).Width;
             Drawing.DrawText(e.Graphics, host.ToString(), flickerFreeListBox1.Font, new Rectangle(e.Bounds.Left + Properties.Resources._000_Server_h32bit_16.Width, e.Bounds.Top, e.Bounds.Right - (width + Properties.Resources._000_Server_h32bit_16.Width), e.Bounds.Height), flickerFreeListBox1.ForeColor, TextFormatFlags.Left | TextFormatFlags.EndEllipsis);
             if (host.Status == HostStatus.queued)
