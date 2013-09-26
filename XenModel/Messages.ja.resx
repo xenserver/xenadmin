@@ -384,6 +384,12 @@
   <data name="ACTION_EXPORT_VM_FROM_X" xml:space="preserve">
     <value>'{1}' からの VM '{0}' のエクスポート</value>
   </data>
+  <data name="ACTION_GETTING_DATASOURCES" xml:space="preserve">
+    <value>データ ソースを取得しています</value>
+  </data>
+  <data name="ACTION_GET_DATASOURCES" xml:space="preserve">
+    <value>データ ソースの取得</value>
+  </data>
   <data name="ACTION_GET_METADATA_VDIS_DONE" xml:space="preserve">
     <value>操作完了。{0} 項目の VDI が見つかりました。</value>
   </data>
@@ -519,6 +525,9 @@
   <data name="ACTION_SAVE_CUSTOM_FIELDS" xml:space="preserve">
     <value>カスタム フィールドの保存</value>
   </data>
+  <data name="ACTION_SAVE_DATASOURCES" xml:space="preserve">
+    <value>データ ソースの保存</value>
+  </data>
   <data name="ACTION_SAVE_FOLDER_TAGS" xml:space="preserve">
     <value>フォルダとタグの保存</value>
   </data>
@@ -530,6 +539,9 @@
   </data>
   <data name="ACTION_SAVING_CUSTOM_FIELDS_FOR" xml:space="preserve">
     <value>'{0}' のカスタム フィールドを保存しています...</value>
+  </data>
+  <data name="ACTION_SAVING_DATASOURCES" xml:space="preserve">
+    <value>データ ソースを保存しています</value>
   </data>
   <data name="ACTION_SAVING_FOLDER_TAGS_FOR" xml:space="preserve">
     <value>'{0}' のフォルダとタグを保存しています...</value>

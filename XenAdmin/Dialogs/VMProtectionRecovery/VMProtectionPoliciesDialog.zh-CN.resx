@@ -361,7 +361,7 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="labelPolicyTitle.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+    <value>Segoe UI, 8pt</value>
   </data>
   <data name="labelPolicyTitle.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>
