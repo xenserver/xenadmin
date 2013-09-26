@@ -345,10 +345,10 @@
     <value>0</value>
   </data>
   <data name="gradientPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>650, 0</value>
+    <value>655, 0</value>
   </data>
   <data name="gradientPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 24</value>
+    <value>155, 24</value>
   </data>
   <data name="gradientPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>47</value>
