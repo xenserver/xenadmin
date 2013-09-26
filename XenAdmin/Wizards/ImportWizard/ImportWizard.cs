@@ -100,6 +100,7 @@ namespace XenAdmin.Wizards.ImportWizard
             lunPerVdiMappingPage = new LunPerVdiImportPage { Connection = con };
 
 			m_selectedObject = xenObject;
+            m_pageTvmIp.IsExportMode = false;
 			m_pageFinish.SummaryRetreiver = GetSummary;
 			m_pageXvaStorage.ImportVmCompleted += m_pageXvaStorage_ImportVmCompleted;
 

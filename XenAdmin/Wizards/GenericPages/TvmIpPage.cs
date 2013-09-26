@@ -89,8 +89,7 @@ namespace XenAdmin.Wizards.GenericPages
 
         public override void PopulatePage()
 		{
-			autoHeightLabel1.Text = String.Format(Messages.TVM_PAGE_DESCRIPTION, IsExportMode ? Messages.EXPORT_LOWERCASE : Messages.IMPORT_LOWERCASE);
-            m_comboBoxNetwork.PopulateComboBox(Connection);
+			m_comboBoxNetwork.PopulateComboBox(Connection);
 			m_radioAutomatic.Checked = true;
 		}
 
@@ -103,7 +102,15 @@ namespace XenAdmin.Wizards.GenericPages
 
 		#region Accessors
 
-		public bool IsExportMode { private get; set; }
+        public bool IsExportMode
+        {
+            set
+            {
+                autoHeightLabel1.Text = value
+                                            ? Messages.TVM_PAGE_DESCRIPTION_EXPORT
+                                            : Messages.TVM_PAGE_DESCRIPTION_IMPORT;
+            }
+        }
 
 		public KeyValuePair<string, string> NetworkUuid
 		{

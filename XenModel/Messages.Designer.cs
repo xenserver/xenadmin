@@ -12580,15 +12580,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to export.
-        /// </summary>
-        public static string EXPORT_LOWERCASE {
-            get {
-                return ResourceManager.GetString("EXPORT_LOWERCASE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Advanced Options.
         /// </summary>
         public static string EXPORT_OPTIONS_PAGE_TEXT {
@@ -15674,15 +15665,6 @@ namespace XenAdmin {
         public static string IMPORT_INCOMPLETE_FILES {
             get {
                 return ResourceManager.GetString("IMPORT_INCOMPLETE_FILES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to import.
-        /// </summary>
-        public static string IMPORT_LOWERCASE {
-            get {
-                return ResourceManager.GetString("IMPORT_LOWERCASE", resourceCulture);
             }
         }
         
@@ -29421,11 +29403,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select the network on which the temporary VM (Transfer VM) used to perform the {0} operation will run..
+        ///   Looks up a localized string similar to Select the network on which the temporary VM (Transfer VM) used to perform the export operation will run..
         /// </summary>
-        public static string TVM_PAGE_DESCRIPTION {
+        public static string TVM_PAGE_DESCRIPTION_EXPORT {
             get {
-                return ResourceManager.GetString("TVM_PAGE_DESCRIPTION", resourceCulture);
+                return ResourceManager.GetString("TVM_PAGE_DESCRIPTION_EXPORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the network on which the temporary VM (Transfer VM) used to perform the import operation will run..
+        /// </summary>
+        public static string TVM_PAGE_DESCRIPTION_IMPORT {
+            get {
+                return ResourceManager.GetString("TVM_PAGE_DESCRIPTION_IMPORT", resourceCulture);
             }
         }
         

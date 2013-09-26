@@ -4448,9 +4448,6 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EXPORT_EULA_PAGE_TOOLTIP" xml:space="preserve">
     <value>Maximum number of EULAs  ({0}) has been reached.</value>
   </data>
-  <data name="EXPORT_LOWERCASE" xml:space="preserve">
-    <value>export</value>
-  </data>
   <data name="EXPORT_OPTIONS_PAGE_TEXT" xml:space="preserve">
     <value>Advanced Options</value>
   </data>
@@ -5536,9 +5533,6 @@ Click Configure HA to alter the settings displayed below.</value>
   </data>
   <data name="IMPORT_INCOMPLETE_FILES" xml:space="preserve">
     <value>The exported files are incomplete or in an unrecognised format.</value>
-  </data>
-  <data name="IMPORT_LOWERCASE" xml:space="preserve">
-    <value>import</value>
   </data>
   <data name="IMPORT_OPTIONS_PAGE_CHOOSE_ISO_SR" xml:space="preserve">
     <value>[Choose an ISO SR]</value>
@@ -10200,8 +10194,11 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="TURN_HA_OFF" xml:space="preserve">
     <value>Turn HA off</value>
   </data>
-  <data name="TVM_PAGE_DESCRIPTION" xml:space="preserve">
-    <value>Select the network on which the temporary VM (Transfer VM) used to perform the {0} operation will run.</value>
+  <data name="TVM_PAGE_DESCRIPTION_EXPORT" xml:space="preserve">
+    <value>Select the network on which the temporary VM (Transfer VM) used to perform the export operation will run.</value>
+  </data>
+  <data name="TVM_PAGE_DESCRIPTION_IMPORT" xml:space="preserve">
+    <value>Select the network on which the temporary VM (Transfer VM) used to perform the import operation will run.</value>
   </data>
   <data name="TVM_PAGE_TEXT" xml:space="preserve">
     <value>Transfer VM Settings</value>
