@@ -209,7 +209,7 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 0</value>
+    <value>17, 5</value>
   </data>
   <data name="label9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>20, 0, 3, 0</value>

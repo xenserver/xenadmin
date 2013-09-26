@@ -129,7 +129,7 @@
     <value>0, 3, 3, 3</value>
   </data>
   <data name="AddButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 23</value>
+    <value>80, 23</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="AddButton.TabIndex" type="System.Int32, mscorlib">
@@ -184,10 +184,10 @@
     <value>NoControl</value>
   </data>
   <data name="AttachButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 5</value>
+    <value>92, 5</value>
   </data>
   <data name="AttachButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 23</value>
+    <value>106, 23</value>
   </data>
   <data name="AttachButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
