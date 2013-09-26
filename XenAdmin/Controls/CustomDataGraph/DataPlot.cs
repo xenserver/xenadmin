@@ -36,6 +36,7 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Controls.CustomDataGraph
@@ -399,7 +400,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             {
                 Rectangle rect = new Rectangle(SlightlySmaller.Location, SlightlySmaller.Size);
                 rect.Width -= Convert.ToInt32(labelsize.Width);
-                string nameLabel = DisplayName.Ellipsise(paintEventArgs.Graphics, rect, Palette.LabelFont);
+                string nameLabel = DisplayName.Ellipsise(rect, Palette.LabelFont);
                 SizeF nameLabelSize = paintEventArgs.Graphics.MeasureString(nameLabel, Palette.LabelFont);
                 paintEventArgs.Graphics.DrawString(nameLabel, Palette.LabelFont, Palette.LabelBrush, SlightlySmaller.Left, SlightlySmaller.Top - (nameLabelSize.Height + 1));
             }

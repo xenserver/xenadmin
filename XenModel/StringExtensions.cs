@@ -84,41 +84,6 @@ namespace XenAdmin
         }
 
         /// <summary>
-        /// This has the same bahvoiur as the standard ellipsise extension but this uses graphics
-        /// objects to scale the text. This performs a binary chop on the string to get the correct length
-        /// </summary>
-        /// <param name="text"></param>
-        /// <param name="g"></param>
-        /// <param name="rectangle"></param>
-        /// <param name="font"></param>
-        /// <returns></returns>
-        public static string Ellipsise(this string text, Graphics g, Rectangle rectangle, Font font)
-        {
-            int width = (int)g.MeasureString(text, font).Width;
-            if (width <= rectangle.Width)
-                return text;
-
-            int widthel = (int)g.MeasureString(Messages.ELLIPSIS, font).Width;
-            if (widthel > rectangle.Width)
-                return ".";
-
-            // Binary chop to set the string to the right size
-            int a = 0;
-            int b = text.Length;
-            int c;
-            for (c = (a + b) / 2; c > a; c = (a + b) / 2)
-            {
-                string sr = text.Ellipsise(c);
-                int srWidth = (int)g.MeasureString(sr, font).Width;
-                if (srWidth > rectangle.Width)
-                    b = c;
-                else
-                    a = c;
-            }
-            return text.Ellipsise(c);
-        }
-
-        /// <summary>
         /// Escapes ampersands by doubling them up. Will return null if passed null.
         /// </summary>
         /// <param name="s"></param>

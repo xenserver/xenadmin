@@ -210,7 +210,7 @@ namespace XenAdmin.Controls.CustomGridView
             if (vAlign == VerticalAlignment.Middle)
                 loc.Y += (int)((rectangle.Height - DataSize.Height) / 2);
 
-            return text.Ellipsise(g, rectangle, font);
+            return text.Ellipsise(rectangle, font);
         }
 
         public override void OnMouseMove(Point point)

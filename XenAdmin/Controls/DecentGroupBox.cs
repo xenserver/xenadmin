@@ -124,7 +124,7 @@ namespace XenAdmin.Controls
             {
                 using (Graphics g = CreateGraphics())
                 {
-                    newText = newText.Ellipsise(g, new Rectangle(0, 0, maxWidth, Height), Font);
+                    newText = newText.Ellipsise(new Rectangle(0, 0, maxWidth, Height), Font);
                     if (newText == ".") //If ellipsise shortens the string to less than the ellipsis
                     {
                         base.Text = String.Empty;

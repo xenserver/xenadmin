@@ -77,8 +77,7 @@ namespace XenAdmin.Controls.ConsoleTab
                 if (width > labelConnection.ContentRectangle.Width)
                 {
                     labelConnection.ToolTipText = connectionName;
-                    connectionName = connectionName.Ellipsise(g,
-                                                      labelConnection.ContentRectangle, labelConnection.Font);
+                    connectionName = connectionName.Ellipsise(labelConnection.ContentRectangle, labelConnection.Font);
                 }
                 else
                 {

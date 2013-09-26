@@ -171,7 +171,7 @@ namespace XenAdmin.Controls.Ballooning
                     int nameWidth = textMaxWidth;
                     if (!last)
                         nameWidth -= INTER_GAP + Drawing.MeasureText(g, ",", Font, TextFormatFlags.NoPadding).Width;
-                    name = name.Ellipsise(g, new Rectangle(0, 0, nameWidth, icon.Height), Font);
+                    name = name.Ellipsise(new Rectangle(0, 0, nameWidth, icon.Height), Font);
                     if (!last)
                         name += ",";
                     width = icon.Width + INTRA_GAP + Drawing.MeasureText(g, name, Font, TextFormatFlags.NoPadding).Width;  // actual width after ellipsisation

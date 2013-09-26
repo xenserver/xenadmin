@@ -37,6 +37,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using XenAPI;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Dialogs
@@ -190,7 +191,7 @@ namespace XenAdmin.Dialogs
                         continue;
 
                     var subItem = item.SubItems[columnIndex];
-                    subItem.Text.Ellipsise(g, subItem.Bounds, subItem.Font);
+                    subItem.Text.Ellipsise(subItem.Bounds, subItem.Font);
                 }
             }
         }

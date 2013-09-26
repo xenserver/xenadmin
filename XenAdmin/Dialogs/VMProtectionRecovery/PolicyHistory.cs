@@ -205,8 +205,7 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
             {
                 int maxWidth = label1.Left - labelHistory.Left;
                 int availableWidth = maxWidth - (int)g.MeasureString(string.Format(Messages.HISTORY_FOR_POLICY, ""), labelHistory.Font).Width;
-                vmppName = vmppName.Ellipsise(g,
-                                      new System.Drawing.Rectangle(0, 0, availableWidth, labelHistory.Height), labelHistory.Font);
+                vmppName = vmppName.Ellipsise(new System.Drawing.Rectangle(0, 0, availableWidth, labelHistory.Height), labelHistory.Font);
             }
             labelHistory.Text = string.Format(Messages.HISTORY_FOR_POLICY, vmppName);
         }
