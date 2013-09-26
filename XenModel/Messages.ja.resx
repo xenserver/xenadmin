@@ -4910,7 +4910,7 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="GUI_OUT_OF_DATE" xml:space="preserve">
     <value>XenCenter のバージョンが古いため {0} に接続できません。
 
-{1} から新しいバージョンを入手できます。</value>
+最新バージョンの XenCenter は、以下の場所から入手できます。</value>
   </data>
   <data name="HA" xml:space="preserve">
     <value>高可用性</value>
@@ -7509,6 +7509,9 @@ NFS ストレージ リポジトリを設定する場合は、NFS サーバー�
   <data name="NEWVMWIZARD_STORAGEPAGE_DISK" xml:space="preserve">
     <value>ディスク {0}</value>
   </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_DISK_DESCRIPTION" xml:space="preserve">
+    <value>テンプレートによるプロビジョニング</value>
+  </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_NAME" xml:space="preserve">
     <value>ストレージ</value>
   </data>
@@ -8185,7 +8188,7 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
     <value>権限が拒否されました</value>
   </data>
   <data name="PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>Citrix XenServer Per-Socket ({0} 必須)(&amp;S)</value>
+    <value>Citrix XenServer Per-Socket ({0} ソケット分必要)(&amp;S)</value>
   </data>
   <data name="PHYSICAL_DEVICE" xml:space="preserve">
     <value>物理デバイス</value>
