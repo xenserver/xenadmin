@@ -306,7 +306,7 @@
     <value>7, 0, 0, 0</value>
   </data>
   <data name="EventsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 28</value>
+    <value>100, 28</value>
   </data>
   <data name="EventsLabel.TabIndex" type="System.Int32, mscorlib">
     <value>46</value>
@@ -315,7 +315,7 @@
     <value>VM イベント</value>
   </data>
   <data name="EventsLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>MiddleCenter</value>
   </data>
   <data name="&gt;&gt;EventsLabel.Name" xml:space="preserve">
     <value>EventsLabel</value>
@@ -519,7 +519,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="moveDownButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 23</value>
+    <value>79, 23</value>
   </data>
   <data name="moveDownButton.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -552,7 +552,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="moveUpButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 23</value>
+    <value>79, 23</value>
   </data>
   <data name="moveUpButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

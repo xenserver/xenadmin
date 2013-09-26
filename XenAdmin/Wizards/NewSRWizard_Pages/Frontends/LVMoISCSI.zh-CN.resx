@@ -373,7 +373,7 @@
     <value>NoControl</value>
   </data>
   <data name="lunInUseLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 272</value>
+    <value>103, 275</value>
   </data>
   <data name="lunInUseLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>395, 46</value>

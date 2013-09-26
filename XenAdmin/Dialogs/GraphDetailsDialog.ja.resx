@@ -226,10 +226,10 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="GraphNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>58, 6</value>
+    <value>74, 6</value>
   </data>
   <data name="GraphNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>424, 23</value>
+    <value>402, 23</value>
   </data>
   <data name="GraphNameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>

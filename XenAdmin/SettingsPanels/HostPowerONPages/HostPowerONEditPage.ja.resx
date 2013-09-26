@@ -373,7 +373,7 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxCustom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>361, 111</value>
+    <value>348, 111</value>
   </data>
   <data name="textBoxCustom.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 19</value>

@@ -406,7 +406,7 @@
     <value>3, 3, 3, 0</value>
   </data>
   <data name="MemoryGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>420, 89</value>
+    <value>420, 95</value>
   </data>
   <data name="MemoryGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>

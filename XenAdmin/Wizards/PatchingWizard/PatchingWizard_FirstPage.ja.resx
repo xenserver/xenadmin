@@ -218,7 +218,7 @@
     <value>3, 0, 3, 0</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>600, 50</value>
+    <value>600, 60</value>
   </data>
   <data name="label9.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -528,7 +528,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>600, 220</value>
+    <value>600, 230</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>

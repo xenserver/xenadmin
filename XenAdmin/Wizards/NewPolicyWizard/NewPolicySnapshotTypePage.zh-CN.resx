@@ -214,7 +214,7 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 56</value>
+    <value>25, 65</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>460, 43</value>
@@ -307,7 +307,7 @@
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>0, 10</value>
   </data>
   <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 20</value>

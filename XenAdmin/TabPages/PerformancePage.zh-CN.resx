@@ -480,7 +480,7 @@
     <value>NoControl</value>
   </data>
   <data name="zoomButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>588, 1</value>
+    <value>570, 1</value>
   </data>
   <data name="zoomButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>

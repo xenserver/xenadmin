@@ -163,7 +163,7 @@
     <value>NoControl</value>
   </data>
   <data name="AlertIntervalMinutesLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>218, 55</value>
+    <value>225, 55</value>
   </data>
   <data name="AlertIntervalMinutesLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
@@ -1378,7 +1378,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>500, 26</value>
+    <value>500, 40</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
