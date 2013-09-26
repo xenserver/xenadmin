@@ -237,6 +237,18 @@
   <data name="radioButtonDisabled.Text" xml:space="preserve">
     <value>已禁用(&amp;D)</value>
   </data>
+  <data name="&gt;&gt;radioButtonDisabled.Name" xml:space="preserve">
+    <value>radioButtonDisabled</value>
+  </data>
+  <data name="&gt;&gt;radioButtonDisabled.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButtonDisabled.Parent" xml:space="preserve">
+    <value>groupBoxMode</value>
+  </data>
+  <data name="&gt;&gt;radioButtonDisabled.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="radioButtonWakeonLAN.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -253,7 +265,19 @@
     <value>1</value>
   </data>
   <data name="radioButtonWakeonLAN.Text" xml:space="preserve">
-    <value>Wake-on-LAN (WoL)(&amp;W)</value>
+    <value>LAN 唤醒(WoL)(&amp;W)</value>
+  </data>
+  <data name="&gt;&gt;radioButtonWakeonLAN.Name" xml:space="preserve">
+    <value>radioButtonWakeonLAN</value>
+  </data>
+  <data name="&gt;&gt;radioButtonWakeonLAN.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButtonWakeonLAN.Parent" xml:space="preserve">
+    <value>groupBoxMode</value>
+  </data>
+  <data name="&gt;&gt;radioButtonWakeonLAN.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="radioButtonILO.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -273,6 +297,18 @@
   <data name="radioButtonILO.Text" xml:space="preserve">
     <value>HP Integrated Lights-Out (iLO)(&amp;L)</value>
   </data>
+  <data name="&gt;&gt;radioButtonILO.Name" xml:space="preserve">
+    <value>radioButtonILO</value>
+  </data>
+  <data name="&gt;&gt;radioButtonILO.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButtonILO.Parent" xml:space="preserve">
+    <value>groupBoxMode</value>
+  </data>
+  <data name="&gt;&gt;radioButtonILO.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="radioButtonDRAC.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -290,6 +326,18 @@
   </data>
   <data name="radioButtonDRAC.Text" xml:space="preserve">
     <value>Dell Remote Access Controller (DRAC)(&amp;R)</value>
+  </data>
+  <data name="&gt;&gt;radioButtonDRAC.Name" xml:space="preserve">
+    <value>radioButtonDRAC</value>
+  </data>
+  <data name="&gt;&gt;radioButtonDRAC.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButtonDRAC.Parent" xml:space="preserve">
+    <value>groupBoxMode</value>
+  </data>
+  <data name="&gt;&gt;radioButtonDRAC.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="radioButtonCustom.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -309,6 +357,18 @@
   <data name="radioButtonCustom.Text" xml:space="preserve">
     <value>自定义开机脚本(/etc/xapi.d/plugins/)(&amp;T):</value>
   </data>
+  <data name="&gt;&gt;radioButtonCustom.Name" xml:space="preserve">
+    <value>radioButtonCustom</value>
+  </data>
+  <data name="&gt;&gt;radioButtonCustom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButtonCustom.Parent" xml:space="preserve">
+    <value>groupBoxMode</value>
+  </data>
+  <data name="&gt;&gt;radioButtonCustom.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="textBoxCustom.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -323,6 +383,18 @@
   </data>
   <data name="textBoxCustom.Text" xml:space="preserve">
     <value>脚本名称</value>
+  </data>
+  <data name="&gt;&gt;textBoxCustom.Name" xml:space="preserve">
+    <value>textBoxCustom</value>
+  </data>
+  <data name="&gt;&gt;textBoxCustom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxCustom.Parent" xml:space="preserve">
+    <value>groupBoxMode</value>
+  </data>
+  <data name="&gt;&gt;textBoxCustom.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="tableLayoutPanelCredentials.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
@@ -576,15 +648,15 @@
   <data name="&gt;&gt;groupBoxCredentials.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="ColumnKey.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="ColumnKey.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="ColumnKey.HeaderText" xml:space="preserve">
     <value>键</value>
   </data>
-  <data name="ColumnValue.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="ColumnValue.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="ColumnValue.HeaderText" xml:space="preserve">
     <value>值</value>
   </data>
@@ -637,9 +709,9 @@
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="$this.Localizable" type="System.Boolean, mscorlib">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
   </data>

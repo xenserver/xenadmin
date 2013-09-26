@@ -154,9 +154,9 @@
     <value>1</value>
   </data>
   <data name="m_labelIntro.Text" xml:space="preserve">
-    <value>Operating System Fixup 将为在非 XenServer 平台上创建的 OVF 包(例如，在 VMware 环境中创建的 OVF 包)和磁盘映像创建基本级别的互操作性。Operating System Fixup 将尝试修复导入的 VM 中出现的可能会阻止 VM 的操作系统重新启动的问题。
+    <value>操作系统修复将为在非 XenServer 平台上创建的 OVF 包(例如，在 VMware 环境中创建的 OVF 包)和磁盘映像创建基本级别的互操作性。操作系统修复将尝试修复导入的 VM 中出现的可能会阻止 VM 的操作系统重新启动的问题。
 
-Operating System Fixup 以可引导的 ISO 映像方式提供，附加到导入的 VM 的 DVD 驱动器上，在首次启动时对该 VM 执行必要的修复。</value>
+操作系统修复以可引导的 ISO 映像方式提供，附加到导入的 VM 的 DVD 驱动器上，在首次启动时对该 VM 执行必要的修复。</value>
   </data>
   <data name="&gt;&gt;m_labelIntro.Name" xml:space="preserve">
     <value>m_labelIntro</value>
@@ -186,7 +186,7 @@ Operating System Fixup 以可引导的 ISO 映像方式提供，附加到导入�
     <value>2</value>
   </data>
   <data name="m_radioButtonDontRunOSFixups.Text" xml:space="preserve">
-    <value>不使用 Operating System Fixup(&amp;D)</value>
+    <value>不使用操作系统修复(&amp;D)</value>
   </data>
   <data name="&gt;&gt;m_radioButtonDontRunOSFixups.Name" xml:space="preserve">
     <value>m_radioButtonDontRunOSFixups</value>
@@ -252,7 +252,7 @@ Operating System Fixup 以可引导的 ISO 映像方式提供，附加到导入�
     <value>4</value>
   </data>
   <data name="m_radioButtonRunOSFixups.Text" xml:space="preserve">
-    <value>使用 Operating System Fixup(&amp;U)</value>
+    <value>使用操作系统修复(&amp;U)</value>
   </data>
   <data name="&gt;&gt;m_radioButtonRunOSFixups.Name" xml:space="preserve">
     <value>m_radioButtonRunOSFixups</value>
@@ -330,7 +330,7 @@ Operating System Fixup 以可引导的 ISO 映像方式提供，附加到导入�
     <value>6</value>
   </data>
   <data name="m_labelLocationFixupISO.Text" xml:space="preserve">
-    <value>Operating System Fixup ISO 的位置(&amp;L):</value>
+    <value>操作系统修复 ISO 的位置(&amp;L):</value>
   </data>
   <data name="m_labelLocationFixupISO.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -417,7 +417,7 @@ Operating System Fixup 以可引导的 ISO 映像方式提供，附加到导入�
     <value>8</value>
   </data>
   <data name="m_labelFixupISOInfo.Text" xml:space="preserve">
-    <value>Fixup ISO 将自动复制到所选 SR</value>
+    <value>修复 ISO 将自动复制到所选 SR</value>
   </data>
   <data name="m_labelFixupISOInfo.Visible" type="System.Boolean, mscorlib">
     <value>False</value>

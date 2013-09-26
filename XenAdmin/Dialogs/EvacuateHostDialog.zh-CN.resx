@@ -209,7 +209,7 @@
     <value>7</value>
   </data>
   <data name="vmListLabel.Text" xml:space="preserve">
-    <value>该服务器上的虚拟机:</value>
+    <value>此服务器上的虚拟机:</value>
   </data>
   <data name="&gt;&gt;vmListLabel.Name" xml:space="preserve">
     <value>vmListLabel</value>
@@ -338,7 +338,7 @@
     <value>12</value>
   </data>
   <data name="labelBlurb.Text" xml:space="preserve">
-    <value>此操作将迁移或暂停此服务器上运行的所有 VM，并将服务器转换到维护模式。</value>
+    <value>此操作将迁移或挂起此服务器上运行的所有 VM，并将服务器转换到维护模式。</value>
   </data>
   <data name="&gt;&gt;labelBlurb.Name" xml:space="preserve">
     <value>labelBlurb</value>

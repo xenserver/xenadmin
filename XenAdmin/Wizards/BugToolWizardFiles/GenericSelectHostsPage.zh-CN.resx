@@ -289,7 +289,7 @@
     <value>17</value>
   </data>
   <data name="HostListTreeView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 26</value>
+    <value>3, 52</value>
   </data>
   <data name="HostListTreeView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>

@@ -208,7 +208,7 @@
     <value>3</value>
   </data>
   <data name="OKButton.Text" xml:space="preserve">
-    <value>以后(&amp;A)</value>
+    <value>以后再说(&amp;A)</value>
   </data>
   <data name="OKButton.Visible" type="System.Boolean, mscorlib">
     <value>False</value>

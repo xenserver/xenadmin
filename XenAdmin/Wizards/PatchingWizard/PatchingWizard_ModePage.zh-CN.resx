@@ -322,7 +322,7 @@
     <value>1</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>是否要执行此操作?</value>
+    <value>您要执行哪项操作?</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>

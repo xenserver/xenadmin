@@ -268,7 +268,7 @@
     <value>2</value>
   </data>
   <data name="m_labelEulaIntro.Text" xml:space="preserve">
-    <value>可以将最终用户许可协议(EULA)文档包含在导出的 OVF/OVA 包中。</value>
+    <value>可以在导出的 OVF/OVA 包中包括最终用户许可协议(EULA)文档。</value>
   </data>
   <data name="&gt;&gt;m_labelEulaIntro.Name" xml:space="preserve">
     <value>m_labelEulaIntro</value>

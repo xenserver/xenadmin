@@ -146,7 +146,7 @@
     <value>True</value>
   </metadata>
   <data name="DescriptionColum.HeaderText" xml:space="preserve">
-    <value>下次快照时间</value>
+    <value>下次创建快照时间</value>
   </data>
   <data name="DescriptionColum.Width" type="System.Int32, mscorlib">
     <value>138</value>
@@ -181,7 +181,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="dataGridView1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 29</value>
+    <value>3, 35</value>
   </data>
   <data name="dataGridView1.Size" type="System.Drawing.Size, System.Drawing">
     <value>727, 176</value>
@@ -367,7 +367,7 @@
     <value>3, 0</value>
   </data>
   <data name="labelPolicyTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>727, 18</value>
+    <value>727, 20</value>
   </data>
   <data name="labelPolicyTitle.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

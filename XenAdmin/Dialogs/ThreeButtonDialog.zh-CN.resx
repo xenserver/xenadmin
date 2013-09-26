@@ -301,7 +301,7 @@
     <value>True</value>
   </data>
   <data name="labelMessage.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8pt</value>
+    <value>Segoe UI, 9pt</value>
   </data>
   <data name="labelMessage.LinkArea" type="System.Windows.Forms.LinkArea, System.Windows.Forms">
     <value>0, 0</value>

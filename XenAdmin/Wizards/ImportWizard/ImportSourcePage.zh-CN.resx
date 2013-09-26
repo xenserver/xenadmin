@@ -258,6 +258,9 @@
   <data name="m_ctrlError.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
+  <data name="m_ctrlError.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="m_ctrlError.Error" xml:space="preserve">
     <value />
   </data>

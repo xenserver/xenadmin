@@ -415,7 +415,7 @@
     <value>3</value>
   </data>
   <data name="tableServerFailureLimit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>358, 81</value>
+    <value>364, 101</value>
   </data>
   <data name="tableServerFailureLimit.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

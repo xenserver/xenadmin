@@ -541,10 +541,10 @@
     <value>版本</value>
   </data>
   <data name="Label-host.edition-advanced" xml:space="preserve">
-    <value>Citrix XenServer 高级版</value>
+    <value>Citrix XenServer Advanced Edition</value>
   </data>
   <data name="Label-host.edition-enterprise" xml:space="preserve">
-    <value>Citrix XenServer 企业版</value>
+    <value>Citrix XenServer Enterprise Edition</value>
   </data>
   <data name="Label-host.edition-enterprise-xd" xml:space="preserve">
     <value>Citrix XenServer for XenDesktop</value>
@@ -553,7 +553,7 @@
     <value>Citrix XenServer</value>
   </data>
   <data name="Label-host.edition-platinum" xml:space="preserve">
-    <value>Citrix XenServer 铂金版</value>
+    <value>Citrix XenServer Platinum Edition</value>
   </data>
   <data name="Label-host.enabled" xml:space="preserve">
     <value>已启用</value>
@@ -643,13 +643,13 @@
     <value>Citrix XenServer HP Server Edition</value>
   </data>
   <data name="Label-host.sku_type-xe_enterprise" xml:space="preserve">
-    <value>Citrix XenServer 企业版</value>
+    <value>Citrix XenServer Enterprise Edition</value>
   </data>
   <data name="Label-host.sku_type-xe_express" xml:space="preserve">
-    <value>Citrix XenServer 速成版</value>
+    <value>Citrix XenServer Express Edition</value>
   </data>
   <data name="Label-host.sku_type-xe_server" xml:space="preserve">
-    <value>Citrix XenServer 服务器版</value>
+    <value>Citrix XenServer Server Edition</value>
   </data>
   <data name="Label-host.software_version-build_number" xml:space="preserve">
     <value>XenServer 内部版本号</value>

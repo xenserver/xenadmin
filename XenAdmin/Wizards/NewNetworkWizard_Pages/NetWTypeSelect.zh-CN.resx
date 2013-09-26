@@ -337,7 +337,7 @@
     <value>2</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>创建通过一个 VLAN 传递通信量的网络。</value>
+    <value>创建通过其中一个 VLAN 传递流量的网络。</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>

@@ -356,7 +356,7 @@
     <value>6</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>检查以下最终的高可用性配置。可以按“完成”按钮通过此配置启用高可用性，或者使用“上一步”按钮更改配置。</value>
+    <value>检查以下最终的高可用性配置。可以按“完成”按钮启用此配置中的高可用性，或者使用“上一步”按钮更改配置。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

@@ -145,7 +145,7 @@
     <value>閉じる(&amp;C)</value>
   </data>
   <data name="EULA_RB_ACCEPT" xml:space="preserve">
-    <value>受け入れる</value>
+    <value>同意</value>
   </data>
   <data name="EULA_RB_REJECT" xml:space="preserve">
     <value>拒否</value>

@@ -1355,14 +1355,14 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>CPU 使用率警报</value>
   </data>
   <data name="ALERT_ALARM_CPU_DESCRIPTION" xml:space="preserve">
-    <value>在过去 {2}内 {0} 上的 CPU 使用率平均达到 {1}。
+    <value>在过去 {2}内{0}上的 CPU 使用率平均达到 {1}。
 该警报设置为在 CPU 使用率超过 {3} 时触发。</value>
   </data>
   <data name="ALERT_ALARM_DISK" xml:space="preserve">
     <value>磁盘使用率警报</value>
   </data>
   <data name="ALERT_ALARM_DISK_DESCRIPTION" xml:space="preserve">
-    <value>在过去 {2}内 {0} 上的磁盘使用率平均达到 {1}。
+    <value>在过去 {2}内{0}上的磁盘使用率平均达到 {1}。
 该警报设置为在磁盘使用率超过 {3} 时触发。</value>
   </data>
   <data name="ALERT_ALARM_FILESYSTEM" xml:space="preserve">
@@ -1375,21 +1375,21 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>内存使用率警报</value>
   </data>
   <data name="ALERT_ALARM_MEMORY_DESCRIPTION" xml:space="preserve">
-    <value>在过去 {2}内 {0} 上的可用内存为 {1}。
+    <value>在过去 {2}内{0}上的可用内存为 {1}。
 此警报设置为在可用内存低于 {3} 时触发。</value>
   </data>
   <data name="ALERT_ALARM_NETWORK" xml:space="preserve">
     <value>网络使用率警报</value>
   </data>
   <data name="ALERT_ALARM_NETWORK_DESCRIPTION" xml:space="preserve">
-    <value>在过去 {2}内 {0} 上的网络使用率平均达到 {1}。
+    <value>在过去 {2}内{0}上的网络使用率平均达到 {1}。
 该警报设置为在网络使用率超过 {3} 时触发。</value>
   </data>
   <data name="ALERT_ALARM_STORAGE" xml:space="preserve">
     <value>存储吞吐量警报</value>
   </data>
   <data name="ALERT_ALARM_STORAGE_DESCRIPTION" xml:space="preserve">
-    <value>在过去 {3}内存储库“{1}”上 {0} 的总读取和写入吞吐量为 {2}。此警报设置为在总吞吐量超过 {4} 时触发。</value>
+    <value>在过去 {3}内存储库“{1}”上{0}的总读取和写入吞吐量为 {2}。此警报设置为在总吞吐量超过 {4} 时触发。</value>
   </data>
   <data name="ALERT_CAP_LABEL" xml:space="preserve">
     <value>(显示前 {0} 个条目)</value>
@@ -1482,7 +1482,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>以下任何:</value>
   </data>
   <data name="APPLIED_ON" xml:space="preserve">
-    <value>应用时间: </value>
+    <value>应用对象: </value>
   </data>
   <data name="APPLIES_TO" xml:space="preserve">
     <value>应用对象</value>
@@ -1870,7 +1870,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>选择要包含在报告中的服务器</value>
   </data>
   <data name="BUGTOOL_RBAC_FAILURE" xml:space="preserve">
-    <value>{0} 用户无法检索所有指定的项目。</value>
+    <value>权限为{0}的用户无法检索所有指定的项目。</value>
   </data>
   <data name="BUGTOOL_SAVING" xml:space="preserve">
     <value>正在保存服务器状态报告</value>
@@ -2561,9 +2561,9 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <comment>Message shown when user attempts to connect to a second XE Express host from the UI</comment>
   </data>
   <data name="CONNECTION_RESTRICTED_MESSAGE_LONG" xml:space="preserve">
-    <value>与服务器 {0} 的连接受到限制 - 已经与 Citrix XenServer 速成版服务器({1})建立连接。
+    <value>与服务器 {0} 的连接受到限制 - 已经与 Citrix XenServer Express Edition 服务器({1})建立连接。
 
-一次只能连接一个 Citrix XenServer 速成版服务器。要了解许可证的升级方法，请进入下面的链接。</value>
+一次只能连接一个 Citrix XenServer Express Edition 服务器。要了解许可证的升级方法，请进入下面的链接。</value>
   </data>
   <data name="CONNECTION_RESTRICTED_NOTICE_TITLE" xml:space="preserve">
     <value>由于许可证限制，无法连接 {0}</value>
@@ -4445,7 +4445,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>完成时验证导出(&amp;V)</value>
   </data>
   <data name="EXTERNAL_NETWORKS_REQUIRE_STANDARD" xml:space="preserve">
-    <value>外部网络需要使用标准版许可证。</value>
+    <value>外部网络需要使用 Standard Edition 许可证。</value>
   </data>
   <data name="EXTERNAL_PLUGIN_BAD_EXIT" xml:space="preserve">
     <value>外部命令已退出，退出代码为: {0}</value>
@@ -4484,10 +4484,10 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>功能已在注册表中禁用</value>
   </data>
   <data name="FEATURE_NOT_AVAILABLE_NEED_COWLEY_ENTERPRISE_OR_PLATINUM_PLURAL" xml:space="preserve">
-    <value>{0} 需要使用 XenServer 5.6 Feature Pack 1 或更高版本的企业版或铂金版许可证。</value>
+    <value>{0} 需要使用 XenServer 5.6 Feature Pack 1 或更高版本的 Enterprise 或 Platinum Edition 许可证。</value>
   </data>
   <data name="FEATURE_NOT_AVAILABLE_NEED_ENTERPRISE_OR_PLATINUM_PLURAL" xml:space="preserve">
-    <value>{0} 需要使用企业版\n或铂金版许可证。</value>
+    <value>{0} 需要使用 Enterprise\n或 Enterprise Edition 许可证。</value>
   </data>
   <data name="FEATURE_NOT_AVAILABLE_NEED_GEORGE" xml:space="preserve">
     <value>{0} 需要使用 XenServer 5.5 或更高版本</value>
@@ -4496,7 +4496,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>{0} 需要使用 XenServer 5.6 或更高版本</value>
   </data>
   <data name="FEATURE_NOT_AVAILABLE_NEED_MR_ENTERPRISE_OR_PLATINUM_PLURAL" xml:space="preserve">
-    <value>{0} 需要使用 XenServer 5.6\n或更高版本的企业版或铂金版许可证。</value>
+    <value>{0} 需要使用 XenServer 5.6\n或更高版本的 Enterprise 或 Platinum Edition 许可证。</value>
   </data>
   <data name="FEATURE_NOT_AVAILABLE_NEED_MR_PLURAL" xml:space="preserve">
     <value>{0} 需要使用 XenServer 5.6 或更高版本</value>
@@ -4871,7 +4871,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>图形外观</value>
   </data>
   <data name="GRAPHS_DETAILS_TITLE" xml:space="preserve">
-    <value>{0} 详细信息</value>
+    <value>“{0}”详细信息</value>
   </data>
   <data name="GRAPHS_EDIT" xml:space="preserve">
     <value>编辑图表...</value>
@@ -5531,25 +5531,25 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>[选择一个 ISO SR]</value>
   </data>
   <data name="IMPORT_OPTIONS_PAGE_ERROR_NO_FIXUP_ISO_INSTALLED" xml:space="preserve">
-    <value>找不到 Fixup ISO</value>
+    <value>找不到修复 ISO</value>
   </data>
   <data name="IMPORT_OPTIONS_PAGE_ERROR_NO_ISO_SR_AVAILABLE" xml:space="preserve">
     <value>找不到合适的 ISO SR。请检查执行修复的配置要求，然后重试。</value>
   </data>
   <data name="IMPORT_OPTIONS_PAGE_FOUND_EXISTING_ISO" xml:space="preserve">
-    <value>上述 SR 中的 Fixup ISO 将用于执行修复</value>
+    <value>上述 SR 中的修复 ISO 将用于执行修复</value>
   </data>
   <data name="IMPORT_OPTIONS_PAGE_NEW_ISO_LIBRARY" xml:space="preserve">
     <value>新建 ISO 库...</value>
   </data>
   <data name="IMPORT_OPTIONS_PAGE_TEXT" xml:space="preserve">
-    <value>OS 修复设置</value>
+    <value>操作系统修复设置</value>
   </data>
   <data name="IMPORT_OPTIONS_PAGE_TITLE" xml:space="preserve">
     <value>使用“操作系统修复”可确保虚拟机管理程序的互操作性</value>
   </data>
   <data name="IMPORT_OPTIONS_PAGE_USE_SELECTED_ISO_LIBRARY" xml:space="preserve">
-    <value>Fixup ISO 将自动复制到所选 SR</value>
+    <value>修复 ISO 将自动复制到所选 SR</value>
   </data>
   <data name="IMPORT_SECURITY_PAGE_ERROR_MISSING_CERTIFICATE" xml:space="preserve">
     <value>找不到设备证书。缺少该文件。</value>
@@ -6031,7 +6031,7 @@ SCSI ID: {2}
     <value>所选文件过大，不能用作许可证</value>
   </data>
   <data name="LICENSE_FREE" xml:space="preserve">
-    <value>可用</value>
+    <value>免费</value>
   </data>
   <data name="LICENSE_HOST_NOT_LIVE" xml:space="preserve">
     <value>所选主机不再处于活动状态</value>
@@ -6091,7 +6091,7 @@ SCSI ID: {2}
     <value>您的支持和维护已过期</value>
   </data>
   <data name="LICENSE_SA_EXPIRES_IN" xml:space="preserve">
-    <value>您的支持和维护将于 {0} 过期</value>
+    <value>您的支持和维护将于 {0}后过期</value>
   </data>
   <data name="LICENSE_SERVER_COULD_NOT_OPEN_LINK" xml:space="preserve">
     <value>无法打开 {0}</value>
@@ -6138,7 +6138,7 @@ SCSI ID: {2}
     <value>一个或多个托管服务器即将到期。请分配 XenServer 许可证，或激活免费 XenServer 产品。</value>
   </data>
   <data name="LICENSING_DIALOG_TEXT" xml:space="preserve">
-    <value>激活免费 XenServer 产品，或为 XenServer 高级版、企业版和铂金版分配/释放许可证。</value>
+    <value>激活免费 XenServer 产品或为 XenServer Advanced Edition、Enterprise Edition 和 Platinum Edition 分配/释放许可证。</value>
   </data>
   <data name="LINK_STATUS" xml:space="preserve">
     <value>链接状态</value>
@@ -6430,7 +6430,7 @@ SCSI ID: {2}
     <value>修复(&amp;P)...</value>
   </data>
   <data name="MAINWINDOW_RESTART_TOOLSTACK" xml:space="preserve">
-    <value>重新启动 Toolstack (&amp;K)</value>
+    <value>重新启动 Toolstack(&amp;K)</value>
   </data>
   <data name="MAINWINDOW_RESUME" xml:space="preserve">
     <value>恢复(&amp;E)</value>
@@ -7968,7 +7968,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>父文件夹</value>
   </data>
   <data name="PARTIALLY_APPLIED" xml:space="preserve">
-    <value>在某些服务器上适用</value>
+    <value>已在部分服务器上应用</value>
   </data>
   <data name="PARTIALLY_CONNECTED" xml:space="preserve">
     <value>部分连接</value>
@@ -8187,7 +8187,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>权限遭拒</value>
   </data>
   <data name="PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>Citrix XenServer Per-Socket(&amp;S)(需要 {0})</value>
+    <value>Citrix XenServer Per-Socket(&amp;S)(需要 {0} 个)</value>
   </data>
   <data name="PHYSICAL_DEVICE" xml:space="preserve">
     <value>物理设备</value>
@@ -8321,7 +8321,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>iLO</value>
   </data>
   <data name="PM_MODE_WOL" xml:space="preserve">
-    <value>Wake on LAN</value>
+    <value>LAN 唤醒</value>
   </data>
   <data name="POLICY_DOES_NOT_HAVE_ARCHIVE" xml:space="preserve">
     <value>无法将所选快照存档。
@@ -8477,7 +8477,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
 按“确定”继续执行向导，然后返回到服务器，并按屏幕说明操作。</value>
   </data>
   <data name="PROPERTIES_DIALOG_TITLE" xml:space="preserve">
-    <value>“{0}”属性</value>
+    <value>“{0}”的属性</value>
   </data>
   <data name="PROPERTY_ON_OBJECT" xml:space="preserve">
     <value>“{1}”上的 {0}</value>
@@ -8587,7 +8587,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
 {0}</value>
   </data>
   <data name="RBAC_HTTP_FAILURE" xml:space="preserve">
-    <value>{0} 用户无法执行该操作。</value>
+    <value>权限为“{0}”的用户无法执行该操作。</value>
   </data>
   <data name="RBAC_NO_WIZARD_LIMITS" xml:space="preserve">
     <value>检查完毕，您对该向导中的功能具有完全访问权限。</value>
@@ -8601,22 +8601,22 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
 必须先使用具有池管理员权限的帐户重新连接 {1}，才能使用“池滚动升级”向导滚动升级池。</value>
   </data>
   <data name="RBAC_WARNING_EXPORT_WIZARD_APPLIANCE" xml:space="preserve">
-    <value>{0} 用户无法导出设备。请以具有足够权限的其他用户身份登录，然后重试。</value>
+    <value>权限为“{0}”的用户无法导出设备。请以具有足够权限的其他用户身份登录，然后重试。</value>
   </data>
   <data name="RBAC_WARNING_EXPORT_WIZARD_XVA" xml:space="preserve">
-    <value>{0} 用户无法导出 VM。请以具有足够权限的其他用户身份登录，然后重试。</value>
+    <value>权限为“{0}”的用户无法导出 VM。请以具有足够权限的其他用户身份登录，然后重试。</value>
   </data>
   <data name="RBAC_WARNING_IMPORT_WIZARD_AFFINITY" xml:space="preserve">
-    <value>{0} 用户无法更改主服务器设置。该值将从模板获得，如果该值与资源池外部的服务器关联，将被忽略。</value>
+    <value>权限为“{0}”的用户无法更改主服务器设置。该值将从模板获得，如果该值与资源池外部的服务器关联，将被忽略。</value>
   </data>
   <data name="RBAC_WARNING_IMPORT_WIZARD_APPLIANCE" xml:space="preserve">
-    <value>{0} 用户无法导入设备。请以具有足够权限的其他用户身份登录，然后重试。</value>
+    <value>权限为“{0}”的用户无法导入设备。请以具有足够权限的其他用户身份登录，然后重试。</value>
   </data>
   <data name="RBAC_WARNING_IMPORT_WIZARD_IMAGE" xml:space="preserve">
-    <value>{0} 用户无法导入虚拟磁盘映像。请以具有足够权限的其他用户身份登录，然后重试。</value>
+    <value>权限为“{0}”的用户无法导入虚拟磁盘映像。请以具有足够权限的其他用户身份登录，然后重试。</value>
   </data>
   <data name="RBAC_WARNING_IMPORT_WIZARD_XVA" xml:space="preserve">
-    <value>{0} 用户无法导入 VM。请以具有足够权限的其他用户身份登录，然后重试。</value>
+    <value>权限为“{0}”的用户无法导入 VM。请以具有足够权限的其他用户身份登录，然后重试。</value>
   </data>
   <data name="RBAC_WARNING_PAGE_DESCRIPTION_SR_ATTACH" xml:space="preserve">
     <value>执行此向导之前，请执行基于角色的安全检查，以确保您具有足够的权限，能够连接存储库并使用此向导中的所有功能。</value>
@@ -8625,31 +8625,31 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>执行此向导之前，请执行基于角色的安全检查，以确保您具有足够的权限，能够创建新存储库并使用此向导中的所有功能。</value>
   </data>
   <data name="RBAC_WARNING_PAGE_HEADER_ROW_DESC" xml:space="preserve">
-    <value>正在检查“{2}”中 {0} ({1})的权限...</value>
+    <value>正在检查“{2}”中 {0} 的权限({1})...</value>
   </data>
   <data name="RBAC_WARNING_PAGE_TEXT_TITLE" xml:space="preserve">
     <value>权限检查</value>
   </data>
   <data name="RBAC_WARNING_SR_WIZARD_ATTACH" xml:space="preserve">
-    <value>用户 {0} 无法连接 SR。请以具有足够权限的其他用户身份登录并重试。</value>
+    <value>权限为“{0}”的用户无法连接 SR。请以具有足够权限的其他用户身份登录并重试。</value>
   </data>
   <data name="RBAC_WARNING_SR_WIZARD_CREATE" xml:space="preserve">
-    <value>用户 {0} 无法创建新 SR。请以具有足够权限的其他用户身份登录并重试。</value>
+    <value>权限为“{0}”的用户无法创建新 SR。请以具有足够权限的其他用户身份登录并重试。</value>
   </data>
   <data name="RBAC_WARNING_VMPP" xml:space="preserve">
-    <value>{0} 用户无法创建 VM 保护策略。请以具有足够权限的其他用户身份登录，然后重试。</value>
+    <value>权限为“{0}”的用户无法创建 VM 保护策略。请以具有足够权限的其他用户身份登录，然后重试。</value>
   </data>
   <data name="RBAC_WARNING_VM_APPLIANCE" xml:space="preserve">
-    <value>{0} 用户无法创建 vApp。请以具有足够权限的其他用户身份登录，然后重试。</value>
+    <value>权限为“{0}”的用户无法创建 vApp。请以具有足够权限的其他用户身份登录，然后重试。</value>
   </data>
   <data name="RBAC_WARNING_VM_WIZARD_AFFINITY" xml:space="preserve">
-    <value>{0} 用户无法更改主服务器设置。存储选择将受到所选模板中定义的主服务器所限制</value>
+    <value>权限为“{0}”的用户无法更改主服务器设置。存储选择将受到所选模板中定义的主服务器所限制</value>
   </data>
   <data name="RBAC_WARNING_VM_WIZARD_BLOCK" xml:space="preserve">
-    <value>{0} 用户无法创建 VM。请以具有足够权限的其他用户身份登录，然后重试。</value>
+    <value>权限为“{0}”的用户无法创建 VM。请以具有足够权限的其他用户身份登录，然后重试。</value>
   </data>
   <data name="RBAC_WARNING_VM_WIZARD_MEM" xml:space="preserve">
-    <value>{0} 用户无法更改内存值，将被限定于模板上的设置</value>
+    <value>权限为“{0}”的用户无法更改内存值，将被限定于模板上的设置</value>
   </data>
   <data name="READY_UPGRADE" xml:space="preserve">
     <value>升级准备就绪</value>
@@ -9887,7 +9887,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>内存: {0}</value>
   </data>
   <data name="TEMPLATE_INFO_OS" xml:space="preserve">
-    <value>OS: {0}</value>
+    <value>操作系统: {0}</value>
   </data>
   <data name="TEMPLATE_INFO_TOOLSNOTPRESENT" xml:space="preserve">
     <value>XenServer Tools: 不存在</value>
@@ -10314,7 +10314,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>池“{0}”上没有默认 SR</value>
   </data>
   <data name="UPDATES_WIZARD_NO_HOSTS" xml:space="preserve">
-    <value>没有可用于迁移 VM {0} 的服务器。</value>
+    <value>没有可用于迁移 VM“{0}”的服务器。</value>
   </data>
   <data name="UPDATES_WIZARD_NO_MEMORY" xml:space="preserve">
     <value>{0}: 其他服务器上的可用内存不足，无法将所有 VM 迁移出此服务器。</value>
@@ -10371,11 +10371,11 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>重新启动代理</value>
   </data>
   <data name="UPDATES_WIZARD_RESTART_OEM" xml:space="preserve">
-    <value>重新启动这些嵌入版服务器:
+    <value>重新启动这些 Embedded Edition 服务器:
 </value>
   </data>
   <data name="UPDATES_WIZARD_RESTART_OEM_MASTER" xml:space="preserve">
-    <value>重新启动嵌入版服务器“{0}”，并对这些服务器应用任何更新:
+    <value>重新启动 Embedded Edition 服务器“{0}”，并对这些服务器应用任何更新:
 </value>
   </data>
   <data name="UPDATES_WIZARD_RESTART_SERVERS" xml:space="preserve">
@@ -10967,7 +10967,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>正在等待用户...</value>
   </data>
   <data name="WAKE_ON_LAN" xml:space="preserve">
-    <value>Wake-on-LAN</value>
+    <value>LAN 唤醒</value>
   </data>
   <data name="WARNING" xml:space="preserve">
     <value>警告</value>
@@ -11094,7 +11094,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="WLB_CONNECTION_ERROR_BLURB_NO_PRIV" xml:space="preserve">
     <value>与 Workload Balancing 服务器通信时出错:
 
-{0} 用户无法更改 Workload Balancing 设置。</value>
+权限为“{0}”的用户无法更改 Workload Balancing 设置。</value>
   </data>
   <data name="WLB_CONTROLLING_HOME_SERVER" xml:space="preserve">
     <value>Workload Balancing 受 VM 布局控制。</value>
@@ -11246,7 +11246,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>未针对池“{0}”进行配置</value>
   </data>
   <data name="WLB_NO_PERMISSION_BLURB" xml:space="preserve">
-    <value>{0} 用户无法更改 Workload Balancing 设置。</value>
+    <value>权限为“{0}”的用户无法更改 Workload Balancing 设置。</value>
   </data>
   <data name="WLB_OPTIMIZATION_MODE" xml:space="preserve">
     <value>优化模式</value>
@@ -11737,10 +11737,10 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>需要 XenServer 升级</value>
   </data>
   <data name="XSOEM" xml:space="preserve">
-    <value>XenServer 嵌入版更新文件({0})|{0}|所有文件({1})|{1}</value>
+    <value>XenServer Embedded Edition 更新文件({0})|{0}|所有文件({1})|{1}</value>
   </data>
   <data name="XSREL" xml:space="preserve">
-    <value>XenServer 嵌入版升级文件({0})|{0}|所有文件({1})|{1}</value>
+    <value>XenServer Embedded Edition 升级文件({0})|{0}|所有文件({1})|{1}</value>
   </data>
   <data name="XSUPDATE" xml:space="preserve">
     <value>XenServer 更新文件({0})|{0}|所有文件({1})|{1}</value>
