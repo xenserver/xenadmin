@@ -57,12 +57,14 @@ namespace XenAdmin.Dialogs
             // labelMessage
             // 
             resources.ApplyResources(this.labelMessage, "labelMessage");
+            this.tableLayoutPanel1.SetColumnSpan(this.labelMessage, 2);
             this.labelMessage.MaximumSize = new System.Drawing.Size(409, 9999);
             this.labelMessage.Name = "labelMessage";
             // 
             // linkLabel
             // 
             resources.ApplyResources(this.linkLabel, "linkLabel");
+            this.tableLayoutPanel1.SetColumnSpan(this.linkLabel, 2);
             this.linkLabel.Name = "linkLabel";
             this.linkLabel.TabStop = true;
             this.linkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
