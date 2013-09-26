@@ -52,7 +52,7 @@
             // 
             resources.ApplyResources(this.Details, "Details");
             this.Details.BackColor = System.Drawing.Color.Transparent;
-            this.Details.Name = resources.ApplyResources(this.Details, "Details");
+            this.Details.Name = "Details";
             this.Details.ValidChanged += new System.EventHandler(this.Details_ValidChanged);
             // 
             // BondProperties
