@@ -107,6 +107,8 @@ namespace XenAdmin.Dialogs
                                 item.Group = listView.Groups["listViewGroupAttachedDisks"];
                                 item.Tag = vbd;
                                 item.Checked = vbd.IsOwner;
+                                foreach (ListViewItem.ListViewSubItem subitem in item.SubItems)
+                                    subitem.Tag = subitem.Text;
                                 listView.Items.Add(item);
                             }
                         }
@@ -120,6 +122,8 @@ namespace XenAdmin.Dialogs
                     item.SubItems.Add(vm.Name);
                     item.Tag = snapshot;
                     item.Group = listView.Groups["listViewGroupSnapshots"];
+                    foreach (ListViewItem.ListViewSubItem subitem in item.SubItems)
+                        subitem.Tag = subitem.Text;
                     listView.Items.Add(item);
                 }
             }
@@ -131,6 +135,8 @@ namespace XenAdmin.Dialogs
                 item.Group = listView.Groups["listViewGroupAttachedDisks"];
                 item.Tag = vdi.Connection.ResolveAll(vdi.VBDs);
                 item.Checked = false;
+                foreach (ListViewItem.ListViewSubItem subitem in item.SubItems)
+                    subitem.Tag = subitem.Text;
                 listView.Items.Add(item);
             }
             EnableSelectAllClear();
@@ -183,16 +189,22 @@ namespace XenAdmin.Dialogs
 
         private void EllipsizeStrings(int columnIndex)
         {
-            using (Graphics g = listView.CreateGraphics())
+            foreach (ListViewItem item in listView.Items)
             {
-                foreach (ListViewItem item in listView.Items)
-                {
-                    if (columnIndex < 0 || columnIndex >= item.SubItems.Count)
-                        continue;
+                if (columnIndex < 0 || columnIndex >= item.SubItems.Count)
+                    continue;
 
-                    var subItem = item.SubItems[columnIndex];
-                    subItem.Text.Ellipsise(subItem.Bounds, subItem.Font);
-                }
+                var subItem = item.SubItems[columnIndex];
+
+                string wholeText = subItem.Tag as string;
+                if (wholeText == null)
+                    continue;
+
+                var rec = new Rectangle(subItem.Bounds.Left, subItem.Bounds.Top,
+                                        listView.Columns[columnIndex].Width, subItem.Bounds.Height);
+                
+                subItem.Text = wholeText.Ellipsise(rec, subItem.Font);
+                listView.Invalidate(rec);
             }
         }
         
@@ -260,26 +272,27 @@ namespace XenAdmin.Dialogs
                 base.WndProc(ref m);
                 if (m.Msg == 20)
                 {
-                    if (this.Items.Count == 0)
+                    if (Items.Count == 0)
                     {
                         _b = true;
-                        Graphics g = this.CreateGraphics();
-                        int w = (this.Width - g.MeasureString(_msg,
-                          this.Font).ToSize().Width) / 2;
-                        g.DrawString(_msg, this.Font,
-                          SystemBrushes.ControlText, w, 30);
+                        using (Graphics g = CreateGraphics())
+                        {
+                            int w = (Width - g.MeasureString(_msg, Font).ToSize().Width) / 2;
+                            g.DrawString(_msg, Font, SystemBrushes.ControlText, w, 30);
+                        }
                     }
                     else
                     {
                         if (_b)
                         {
-                            this.Invalidate();
+                            Invalidate();
                             _b = false;
                         }
                     }
                 }
 
-                if (m.Msg == 4127) this.Invalidate();
+                if (m.Msg == 4127)
+                    Invalidate();
             }
         }
     }
