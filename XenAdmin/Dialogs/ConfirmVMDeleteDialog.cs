@@ -44,6 +44,7 @@ namespace XenAdmin.Dialogs
     public partial class ConfirmVMDeleteDialog : XenDialogBase
     {
         private const int MINIMUM_COL_WIDTH = 50;
+        private bool internalUpdate;
 
         public ConfirmVMDeleteDialog(IEnumerable<VM> vms)
         {
@@ -133,6 +134,7 @@ namespace XenAdmin.Dialogs
                 listView.Items.Add(item);
             }
             EnableSelectAllClear();
+            EllipsizeStrings();
         }
 
         public ConfirmVMDeleteDialog(VM vm)
@@ -173,18 +175,27 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private void YesButton_Click(object sender, EventArgs e)
+        private void EllipsizeStrings()
         {
-            this.DialogResult = DialogResult.Yes;
-            Close();
+            foreach (ColumnHeader col in listView.Columns)
+                EllipsizeStrings(col.Index);
         }
 
-        private void CancelButton2_Click(object sender, EventArgs e)
+        private void EllipsizeStrings(int columnIndex)
         {
-            this.DialogResult = DialogResult.Cancel;
-            Close();
-        }
+            using (Graphics g = listView.CreateGraphics())
+            {
+                foreach (ListViewItem item in listView.Items)
+                {
+                    if (columnIndex < 0 || columnIndex >= item.SubItems.Count)
+                        continue;
 
+                    var subItem = item.SubItems[columnIndex];
+                    subItem.Text.Ellipsise(g, subItem.Bounds, subItem.Font);
+                }
+            }
+        }
+        
         private void buttonSelectAll_Click(object sender, EventArgs e)
         {
             foreach (ListViewItem item in listView.Items)
@@ -205,36 +216,17 @@ namespace XenAdmin.Dialogs
         {
             bool allChecked = true;
             bool allUnChecked = true;
+
             foreach (ListViewItem item in listView.Items)
             {
                 if (item.Checked)
                     allUnChecked = false;
                 else
-                {
                     allChecked = false;
-                }
+            }
 
-            }
-            if (allUnChecked && allChecked)
-            {
-                buttonSelectAll.Enabled = false;
-                buttonClear.Enabled = false;
-            }
-            else if (allUnChecked)
-            {
-                buttonSelectAll.Enabled = true;
-                buttonClear.Enabled = false;
-            }
-            else if (allChecked)
-            {
-                buttonSelectAll.Enabled = false;
-                buttonClear.Enabled = true;
-            }
-            else
-            {
-                buttonSelectAll.Enabled = true;
-                buttonClear.Enabled = true;
-            }
+            buttonSelectAll.Enabled = !allChecked;
+            buttonClear.Enabled = !allUnChecked;
         }
 
         private void listView_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
@@ -247,6 +239,11 @@ namespace XenAdmin.Dialogs
                 e.NewWidth = MINIMUM_COL_WIDTH;
                 e.Cancel = true;
             }
+        }
+
+        private void listView_ColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
+        {
+            EllipsizeStrings(e.ColumnIndex);
         }
 
         private void listView_ItemChecked(object sender, ItemCheckedEventArgs e)
@@ -284,7 +281,6 @@ namespace XenAdmin.Dialogs
 
                 if (m.Msg == 4127) this.Invalidate();
             }
-
         }
     }
 }

@@ -48,7 +48,6 @@ namespace XenAdmin.Dialogs
             this.btnYes.DialogResult = System.Windows.Forms.DialogResult.Yes;
             this.btnYes.Name = "btnYes";
             this.btnYes.UseVisualStyleBackColor = true;
-            this.btnYes.Click += new System.EventHandler(this.YesButton_Click);
             // 
             // btnNo
             // 
@@ -56,7 +55,6 @@ namespace XenAdmin.Dialogs
             this.btnNo.DialogResult = System.Windows.Forms.DialogResult.No;
             this.btnNo.Name = "btnNo";
             this.btnNo.UseVisualStyleBackColor = true;
-            this.btnNo.Click += new System.EventHandler(this.CancelButton2_Click);
             // 
             // pictureBox1
             // 
@@ -87,6 +85,7 @@ namespace XenAdmin.Dialogs
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
             this.listView.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView_ItemChecked);
+            this.listView.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.listView_ColumnWidthChanged);
             this.listView.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.listView_ColumnWidthChanging);
             // 
             // columnHeaderName
