@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTION_ACTIVATING_MULTIPLE_VDIS_STATUS" xml:space="preserve">
     <value>正在激活虚拟磁盘...</value>
@@ -10261,7 +10261,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>退出维护模式</value>
   </data>
   <data name="UPDATES_WIZARD_FILE_NOT_FOUND" xml:space="preserve">
-    <value>找不到更新文件 {0}。
+    <value>找不到更新文件 '{0}'。
 
 请检查您的设置并重试。</value>
   </data>
