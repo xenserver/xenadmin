@@ -1414,7 +1414,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>系统警报一旦解除，就将从服务器上永久删除。是否继续?</value>
   </data>
   <data name="ALERT_GENERIC_HELP" xml:space="preserve">
-    <value>有关此警报的帮助...</value>
+    <value>有关此警报的帮助(&H)...</value>
   </data>
   <data name="ALERT_MEMORY_SUB_TEXT" xml:space="preserve">
     <value>当可用内存低于 {0} 并持续 {1} 分钟时</value>
@@ -6430,7 +6430,7 @@ SCSI ID: {2}
     <value>修复(&amp;P)...</value>
   </data>
   <data name="MAINWINDOW_RESTART_TOOLSTACK" xml:space="preserve">
-    <value>重新启动 Toolstack</value>
+    <value>重新启动 Toolstack(&K)</value>
   </data>
   <data name="MAINWINDOW_RESUME" xml:space="preserve">
     <value>恢复(&amp;E)</value>
