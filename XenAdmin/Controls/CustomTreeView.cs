@@ -112,6 +112,7 @@ namespace XenAdmin.Controls
                 if (_descriptionFont != null)
                     _descriptionFont.Dispose();
                 _descriptionFont = new Font(value.FontFamily, value.Size - 1);
+                RecalculateWidth();
             }
         }
 
