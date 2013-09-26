@@ -1482,7 +1482,7 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
     <value>以下のいずれかが合致する</value>
   </data>
   <data name="APPLIED_ON" xml:space="preserve">
-    <value>適用: </value>
+    <value>適用済み:</value>
   </data>
   <data name="APPLIES_TO" xml:space="preserve">
     <value>適用先</value>
