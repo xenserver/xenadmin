@@ -345,7 +345,7 @@
     <value>0</value>
   </data>
   <data name="gradientPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>640, 0</value>
+    <value>650, 0</value>
   </data>
   <data name="gradientPanel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 24</value>

@@ -274,7 +274,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelStartDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 7</value>
+    <value>0, 7</value>
   </data>
   <data name="labelStartDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 18</value>
@@ -301,7 +301,7 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="StartDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 3</value>
+    <value>78, 3</value>
   </data>
   <data name="StartDatePicker.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 20</value>
