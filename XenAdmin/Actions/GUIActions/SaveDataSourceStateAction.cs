@@ -56,7 +56,7 @@ namespace XenAdmin.Actions
         }
 
         public SaveDataSourceStateAction(IXenConnection connection, IXenObject xmo, List<DataSourceItem> items, List<DesignedGraph> graphs)
-            : base(connection, "Saving DataSources", "Saving DataSources", true)
+            : base(connection, Messages.ACTION_SAVE_DATASOURCES, Messages.ACTION_SAVING_DATASOURCES, true)
         {
             DataSourceItems = items;
             XenObject = xmo;

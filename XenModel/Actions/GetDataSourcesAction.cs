@@ -42,7 +42,7 @@ namespace XenAdmin.Actions
         public readonly IXenObject IXenObject;
 
         public GetDataSourcesAction(IXenConnection connection, IXenObject xmo)
-            : base(connection, "Saving DataSources", "Saving DataSources", true)
+            : base(connection, Messages.ACTION_GET_DATASOURCES, Messages.ACTION_GETTING_DATASOURCES, true)
         {
             IXenObject = xmo;
         }
