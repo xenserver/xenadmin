@@ -423,7 +423,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             Disk.name_label = string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_VDINAME, vmName, Device.userdevice); //Device.userdevice;
             Disk.read_only = false;
-            Disk.name_description = "Created by template provisioner";
+            Disk.name_description = Messages.NEWVMWIZARD_STORAGEPAGE_DISK_DESCRIPTION;
             Device.mode = vbd_mode.RW;
 
             CanDelete = Disk.type == vdi_type.user;

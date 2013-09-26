@@ -22161,6 +22161,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Created by template provisioner.
+        /// </summary>
+        public static string NEWVMWIZARD_STORAGEPAGE_DISK_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_STORAGEPAGE_DISK_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Storage.
         /// </summary>
         public static string NEWVMWIZARD_STORAGEPAGE_NAME {
