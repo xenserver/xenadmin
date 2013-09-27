@@ -2212,6 +2212,9 @@
     <Compile Include="Controls\ComboBoxes\NonSelectableComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Common\AutoHeightRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\Common\SmoothSplitContainer.cs">
       <SubType>Component</SubType>
     </Compile>

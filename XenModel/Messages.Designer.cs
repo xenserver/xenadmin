@@ -3656,6 +3656,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Don&apos;t assign this VM a home server. The VM will be started on any server with the necessary resources. (Shared storage required)..
+        /// </summary>
+        public static string AFFINITY_PICKER_DYNAMIC_NOT_SHARED_SR {
+            get {
+                return ResourceManager.GetString("AFFINITY_PICKER_DYNAMIC_NOT_SHARED_SR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Don&apos;t assign this VM a home server. The VM will be started on any server with the necessary resources..
+        /// </summary>
+        public static string AFFINITY_PICKER_DYNAMIC_SHARED_SR {
+            get {
+                return ResourceManager.GetString("AFFINITY_PICKER_DYNAMIC_SHARED_SR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to is after.
         /// </summary>
         public static string AFTER {

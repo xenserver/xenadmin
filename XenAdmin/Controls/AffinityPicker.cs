@@ -98,7 +98,9 @@ namespace XenAdmin.Controls
             // Update enablement
             DynamicRadioButton.Enabled = Helpers.HasFullyConnectedSharedStorage(Connection) && SrHost == null;
             ServersGridView.Enabled = StaticRadioButton.Checked;
-            SharedStorageLabel.Visible = !Helpers.HasFullyConnectedSharedStorage(Connection);
+            DynamicRadioButton.Text = Helpers.HasFullyConnectedSharedStorage(Connection)
+                                          ? Messages.AFFINITY_PICKER_DYNAMIC_SHARED_SR
+                                          : Messages.AFFINITY_PICKER_DYNAMIC_NOT_SHARED_SR;
         }
 
         private void SelectRadioButtons()
