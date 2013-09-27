@@ -32,9 +32,9 @@
 using System;
 using System.Collections.Generic;
 using XenAdmin.Core;
-using XenAPI;
 using XenAdmin.Controls;
 using XenAdmin.Network;
+using XenAPI;
 
 
 namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
@@ -53,7 +53,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         {
             InitializeComponent();
             passwordFailure1.Visible = false;
-            CueBannersManager.SetWatermark(NfsServerPathComboBox, Messages.NFS_ISO_PATH_EXAMPLE);
         }
 
         #region XenTabPage overrides
@@ -101,6 +100,14 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             // Remove all SRs that the current pool can see
             add_srs.RemoveAll(s => my_srs.Contains(s));
             this.NfsServerPathComboBox.Items.AddRange(add_srs.ToArray());
+        }
+
+        public override void PageLoaded(PageLoadedDirection direction)
+        {
+            base.PageLoaded(direction);
+
+            if (direction == PageLoadedDirection.Forward)
+                HelpersGUI.FocusFirstControl(Controls);
         }
 
         #endregion

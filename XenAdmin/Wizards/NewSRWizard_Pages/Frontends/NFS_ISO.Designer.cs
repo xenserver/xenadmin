@@ -33,6 +33,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.NfsServerPathComboBox = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.passwordFailure1 = new XenAdmin.Controls.Common.PasswordFailure();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -55,7 +56,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.NfsServerPathComboBox, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.passwordFailure1, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.passwordFailure1, 1, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // NfsServerPathComboBox
@@ -65,6 +67,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.NfsServerPathComboBox.Name = "NfsServerPathComboBox";
             this.NfsServerPathComboBox.SelectedIndexChanged += new System.EventHandler(this.NfsServerPathTextBox_TextChanged);
             this.NfsServerPathComboBox.TextChanged += new System.EventHandler(this.NfsServerPathTextBox_TextChanged);
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
             // 
             // passwordFailure1
             // 
@@ -92,5 +99,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ComboBox NfsServerPathComboBox;
         private XenAdmin.Controls.Common.PasswordFailure passwordFailure1;
+        private System.Windows.Forms.Label label2;
     }
 }
