@@ -1,11 +1,11 @@
-namespace XenAdmin.Controls
+﻿namespace XenAdmin.Controls
 {
-    partial class ISODropDownBox
+    partial class LongStringComboBox
     {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private System.ComponentModel.IContainer components;
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -13,9 +13,6 @@ namespace XenAdmin.Controls
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            // deregisteres all event handlers
-            DeregisterEvents();
-
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -31,17 +28,15 @@ namespace XenAdmin.Controls
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
-            // 
-            // ISODropDownBox
-            // 
-            this.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.FormattingEnabled = true;
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

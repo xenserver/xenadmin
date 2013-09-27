@@ -33,22 +33,15 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-using System.Collections;
-using System.Text.RegularExpressions;
-
-using XenAdmin;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
-using System.Runtime.InteropServices;
 
 
 namespace XenAdmin.Controls
 {
-    public partial class ISODropDownBox : NonSelectableComboBox
+    public class ISODropDownBox : NonSelectableComboBox
     {
         public VM vm;
         protected VBD cdrom;
@@ -75,7 +68,15 @@ namespace XenAdmin.Controls
         public ISODropDownBox()
         {
             SR_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(SR_CollectionChanged);
-            InitializeComponent();
+            DrawMode = DrawMode.OwnerDrawFixed;
+            DropDownStyle = ComboBoxStyle.DropDownList;
+            FormattingEnabled = true;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            DeregisterEvents();
+            base.Dispose(disposing);
         }
 
         private void RefreshSRs_()

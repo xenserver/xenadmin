@@ -132,7 +132,6 @@
             // 
             // m_comboBoxNetwork
             // 
-            this.m_comboBoxNetwork.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             resources.ApplyResources(this.m_comboBoxNetwork, "m_comboBoxNetwork");
             this.m_comboBoxNetwork.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.m_comboBoxNetwork.FormattingEnabled = true;

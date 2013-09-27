@@ -59,7 +59,6 @@
             // 
             // networkComboBox
             // 
-            this.networkComboBox.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.networkComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.networkComboBox.FormattingEnabled = true;
             this.networkComboBox.IncludeOnlyEnabledNetworksInComboBox = false;

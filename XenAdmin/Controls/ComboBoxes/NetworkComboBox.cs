@@ -38,12 +38,10 @@ using XenAPI;
 
 namespace XenAdmin.Controls
 {
-    public partial class NetworkComboBox : LongStringComboBox
+    public class NetworkComboBox : LongStringComboBox
     {
-
         public NetworkComboBox()
         {
-            InitializeComponent();
             DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
@@ -136,7 +134,5 @@ namespace XenAdmin.Controls
                         : new KeyValuePair<string, string>(selectedItem.Network.uuid, selectedItem.Network.Name);
             }
         }
-
-        public AutoScaleMode AutoScaleMode { get;  set; }
     }
 }

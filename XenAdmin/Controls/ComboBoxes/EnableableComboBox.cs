@@ -51,45 +51,31 @@ namespace XenAdmin.Controls
     {
         public EnableableComboBox()
         {
-            DrawItem += m_comboBoxConnection_DrawItem;
             DrawMode = DrawMode.OwnerDrawVariable;
             DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
-        private bool disposed;
-        protected override void Dispose(bool disposing)
+        protected override void OnDrawItem(DrawItemEventArgs e)
         {
-            if(disposing)
-            {
-                if(!disposed)
-                {
-                    DrawItem -= m_comboBoxConnection_DrawItem;
-                }
-                disposed = true;
-            }
-            base.Dispose(disposing);
-        }
-
-        private void m_comboBoxConnection_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            e.DrawBackground();
-            ComboBox cb = (ComboBox)sender;
             int index = e.Index;
 
-            if (index > -1 && cb != null)
+            if (index > -1)
             {
-                IEnableableComboBoxItem item = cb.Items[index] as IEnableableComboBoxItem;
+                e.DrawBackground();
+
+                IEnableableComboBoxItem item = Items[index] as IEnableableComboBoxItem;
                 Color textColor = SystemColors.ControlText;
 
                 //Paint disabled items grey - otherwise leave them black
                 if (item != null && !item.Enabled)
-                    textColor = SystemColors.GrayText;    
+                    textColor = SystemColors.GrayText;
 
                 if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
                     textColor = SystemColors.HighlightText;
 
-                Drawing.DrawText(e.Graphics, cb.Items[index].ToString(), cb.Font, e.Bounds.Location, textColor);
+                Drawing.DrawText(e.Graphics, Items[index].ToString(), Font, e.Bounds.Location, textColor);
             }
+            base.OnDrawItem(e);
         }
 
         public new bool Enabled
