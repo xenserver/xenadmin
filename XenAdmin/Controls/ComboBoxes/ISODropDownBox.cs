@@ -93,11 +93,6 @@ namespace XenAdmin.Controls
             }
         }
 
-        private static string srToString(SR sr)
-        {
-            return sr.Name;
-        }
-
         protected virtual void RefreshSRs()
         {
             Program.AssertOnEventThread();
@@ -147,7 +142,7 @@ namespace XenAdmin.Controls
                     }
                 }
 
-                items.Add(new ToStringWrapper<SR>(sr, srToString));
+                items.Add(new ToStringWrapper<SR>(sr, sr.Name));
             }
 
             if (items.Count > 0)
@@ -283,20 +278,6 @@ namespace XenAdmin.Controls
             foreach (ToStringWrapper<VDI> vdiWrapper in items)
             {
                 Items.Add(vdiWrapper);
-            }
-        }
-
-        public int ISOCount
-        {
-            get
-            {
-                int i = 0;
-                foreach (object o in Items)
-                {
-                    if (o is ToStringWrapper<VDI>)
-                        i++;
-                }
-                return i;
             }
         }
 
@@ -445,28 +426,21 @@ namespace XenAdmin.Controls
             {
                 Object o = Items[e.Index];
 
+                e.DrawBackground();
+
                 if (o is ToStringWrapper<SR>)
                 {
-                    e.DrawBackground();
                     Drawing.DrawText(e.Graphics, o.ToString(), Program.DefaultFontBold, e.Bounds, SystemColors.ControlText, TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
                 }
                 else
                 {
-                    if ((e.State & DrawItemState.Selected) != 0)
-                    {
-                        e.DrawBackground();
-                        Drawing.DrawText(e.Graphics, o.ToString(), Program.DefaultFont, e.Bounds, e.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
-                    }
-                    else if((e.State & DrawItemState.Disabled) != 0)
-                    {
-                        e.DrawBackground();
-                        Drawing.DrawText(e.Graphics, o.ToString(), Program.DefaultFont, e.Bounds, SystemColors.GrayText, TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
-                    }
-                    else
-                    {
-                        e.DrawBackground();
-                        Drawing.DrawText(e.Graphics, o.ToString(), Program.DefaultFont, e.Bounds, e.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
-                    }
+                    Color colour = e.ForeColor;
+
+                    if ((e.State & DrawItemState.Disabled) != 0)
+                        colour = SystemColors.GrayText;
+
+                    Drawing.DrawText(e.Graphics, o.ToString(), Program.DefaultFont, e.Bounds, colour, TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
+
                     e.DrawFocusRectangle();
                 }
             }
