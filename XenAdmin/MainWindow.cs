@@ -139,8 +139,7 @@ namespace XenAdmin
             InitializeComponent();
             SetMenuItemStartIndexes();
             Icon = Properties.Resources.AppIcon;
-
-            components.Add(SearchPage);
+            
             components.Add(NICPage);
             components.Add(VMStoragePage);
             components.Add(SrStoragePage);
@@ -153,8 +152,8 @@ namespace XenAdmin
             components.Add(HomePage);
             components.Add(WlbPage);
             components.Add(AdPage);
+            components.Add(SearchPage);
 
-            AddTabContents(SearchPage, TabPageSearch);
             AddTabContents(VMStoragePage, TabPageStorage);
             AddTabContents(SrStoragePage, TabPageSR);
             AddTabContents(NICPage, TabPageNICs);
@@ -171,6 +170,7 @@ namespace XenAdmin
             AddTabContents(WLBUpsellPage, TabPageWLBUpsell);
             AddTabContents(PhysicalStoragePage, TabPagePhysicalStorage);
             AddTabContents(AdPage, TabPageAD);
+            AddTabContents(SearchPage, TabPageSearch);
 
             TheTabControl.SelectedIndexChanged += TheTabControl_SelectedIndexChanged;
 
@@ -1212,7 +1212,6 @@ namespace XenAdmin
 
             NewTabCount = 0;
             ShowTab(TabPageHome, !SearchMode && show_home);
-            ShowTab(TabPageSearch, (SearchMode || show_home || SearchTabVisible));
             ShowTab(TabPageGeneral, !multi && !SearchMode && (isVMSelected || (isHostSelected && (isHostLive || !is_connected)) || isPoolSelected || isSRSelected || isStorageLinkSelected));
             ShowTab(dmc_upsell ? TabPageBallooningUpsell : TabPageBallooning, !multi && !SearchMode && mr_or_greater && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
             ShowTab(TabPageStorage, !multi && !SearchMode && (isRealVMSelected || (isTemplateSelected && !selectedTemplateHasProvisionXML)));
@@ -1241,12 +1240,10 @@ namespace XenAdmin
             
             ShowTab(TabPageAD, !multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive) && george_or_greater);
 
-            // put plugin tabs before logs tab
-
             foreach (TabPageFeature f in pluginManager.GetAllFeatures<TabPageFeature>(f => !f.IsConsoleReplacement && !multi && f.ShowTab))
-            {
                 ShowTab(f.TabPage, true);
-            }
+
+            ShowTab(TabPageSearch, true);
 
             // N.B. Change NewTabs definition if you add more tabs here.
 
@@ -1255,42 +1252,6 @@ namespace XenAdmin
             // the tree using the keyboard.
 
             navigationPane.SaveAndRestoreTreeViewFocus(ChangeToNewTabs);
-        }
-
-        private bool SearchTabVisible
-        {
-            get
-            {
-                if (SelectionManager.Selection.Count == 1)
-                {
-                    Host host = SelectionManager.Selection[0].XenObject as Host;
-
-                    if (host != null)
-                    {
-                        return host.IsLive;
-                    }
-
-                    if (SelectionManager.Selection[0].XenObject is Pool)
-                    {
-                        return true;
-                    }
-
-                    if (SelectionManager.Selection[0].GroupingTag != null)
-                    {
-                        return true;
-                    }
-
-                    if (SelectionManager.Selection[0].XenObject is Folder)
-                    {
-                        return true;
-                    }
-                }
-                else if (SelectionManager.Selection.Count > 1)
-                {
-                    return true;
-                }
-                return false;
-            }
         }
 
         private readonly TabPage[] NewTabs = new TabPage[512];
@@ -1626,14 +1587,10 @@ namespace XenAdmin
             TabPage t = TheTabControl.SelectedTab;
 
             if (!SearchMode)
-            {
                 History.NewHistoryItem(new XenModelObjectHistoryItem(SelectionManager.Selection.FirstAsXenObject, t));
-            }
 
             if (t != TabPageBallooning)
-            {
                 BallooningPage.IsHidden();
-            }
 
             if (t == TabPageConsole)
             {
@@ -1718,27 +1675,17 @@ namespace XenAdmin
             }
 
             if (t == TabPagePeformance)
-            {
                 PerformancePage.ResumeGraph();
-            }
             else
-            {
                 PerformancePage.PauseGraph();
-            }
 
             if (t == TabPageSearch)
-            {
                 SearchPage.PanelShown();
-            }
             else
-            {
                 SearchPage.PanelHidden();
-            }
 
             if (t != null)
-            {
                 SetLastSelectedPage(SelectionManager.Selection.First, t);
-            }
         }
 
         private void UnpauseVNC(bool focus)

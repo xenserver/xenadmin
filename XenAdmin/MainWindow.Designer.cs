@@ -324,7 +324,6 @@ namespace XenAdmin
             // 
             resources.ApplyResources(this.TheTabControl, "TheTabControl");
             this.TheTabControl.Controls.Add(this.TabPageHome);
-            this.TheTabControl.Controls.Add(this.TabPageSearch);
             this.TheTabControl.Controls.Add(this.TabPageGeneral);
             this.TheTabControl.Controls.Add(this.TabPageBallooning);
             this.TheTabControl.Controls.Add(this.TabPageBallooningUpsell);
@@ -341,6 +340,7 @@ namespace XenAdmin
             this.TheTabControl.Controls.Add(this.TabPageWLB);
             this.TheTabControl.Controls.Add(this.TabPageWLBUpsell);
             this.TheTabControl.Controls.Add(this.TabPageAD);
+            this.TheTabControl.Controls.Add(this.TabPageSearch);
             this.TheTabControl.Name = "TheTabControl";
             this.TheTabControl.SelectedIndex = 4;
             // 
@@ -469,6 +469,7 @@ namespace XenAdmin
             // eventsPage
             // 
             resources.ApplyResources(this.eventsPage, "eventsPage");
+            this.eventsPage.BackColor = System.Drawing.SystemColors.Window;
             this.eventsPage.Name = "eventsPage";
             // 
             // updatesPage
