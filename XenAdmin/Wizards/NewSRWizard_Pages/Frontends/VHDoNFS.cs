@@ -50,6 +50,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         public VHDoNFS()
         {
             InitializeComponent();
+            ToggleReattachControlsEnabledState(false);
         }
 
         #region XenTabPage overrides
@@ -96,7 +97,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             NfsScanButton.Enabled = SrWizardHelpers.ValidateNfsSharename(NfsServerPathTextBox.Text);
 
             listBoxNfsSRs.Items.Clear();
-            panelNfsReattach.Enabled = false;
+            ToggleReattachControlsEnabledState(false);
 
             if(radioButtonNfsNew.Enabled)
                 radioButtonNfsNew.Checked = true;
@@ -158,7 +159,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 if (SRs.Count == 0)
                 {
                     // Disable box
-                    panelNfsReattach.Enabled = false;
+                    ToggleReattachControlsEnabledState(false);
                     listBoxNfsSRs.Items.Add(Messages.NEWSR_NFS_NO_SRS_FOUND);
                     return;
                 }
@@ -169,7 +170,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
                 listBoxNfsSRs.TryAndSelectUUID();
 
-                panelNfsReattach.Enabled = true;
+                ToggleReattachControlsEnabledState(true);
             }
             finally
             {
@@ -244,6 +245,12 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             radioButtonNfsNew.Enabled = false;
             radioButtonNfsReattach.Enabled = true;
+        }
+
+        private void ToggleReattachControlsEnabledState(bool enable)
+        {
+            radioButtonNfsReattach.Enabled = enable;
+            listBoxNfsSRs.Enabled = enable;
         }
     }
 }

@@ -1360,6 +1360,12 @@ Do you wish to continue?</value>
   <data name="AD_USER_ALREADY_HAS_ACCESS" xml:space="preserve">
     <value>Subject '{0}' already has access to the server.</value>
   </data>
+  <data name="AFFINITY_PICKER_DYNAMIC_NOT_SHARED_SR" xml:space="preserve">
+    <value>&amp;Don't assign this VM a home server. The VM will be started on any server with the necessary resources. (Shared storage required).</value>
+  </data>
+  <data name="AFFINITY_PICKER_DYNAMIC_SHARED_SR" xml:space="preserve">
+    <value>&amp;Don't assign this VM a home server. The VM will be started on any server with the necessary resources.</value>
+  </data>
   <data name="AFTER" xml:space="preserve">
     <value>is after</value>
   </data>
@@ -7897,7 +7903,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>The VM is not using a shared network. Restart cannot be guaranteed.</value>
   </data>
   <data name="NOT_AGILE_SR_NOT_SHARED" xml:space="preserve">
-    <value>The VM is not using a shared SR. Restart cannot be guaranteed.</value>
+    <value>The VM is using a non-shared SR. Restart cannot be guaranteed.</value>
   </data>
   <data name="NOT_AGILE_UNKOWN" xml:space="preserve">
     <value>The VM is not agile. Restart cannot be guaranteed.</value>

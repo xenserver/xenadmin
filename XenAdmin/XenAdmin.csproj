@@ -988,9 +988,6 @@
     <Compile Include="Controls\ComboBoxes\CDChanger.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ComboBoxes\CDChanger.Designer.cs">
-      <DependentUpon>CDChanger.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\EmptyPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1017,9 +1014,6 @@
     </Compile>
     <Compile Include="Controls\ComboBoxes\ISODropDownBox.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\ComboBoxes\ISODropDownBox.Designer.cs">
-      <DependentUpon>ISODropDownBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\MenuStripEx.cs">
       <SubType>Component</SubType>
@@ -1941,10 +1935,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>HelpButton.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ComboBoxes\ISODropDownBox.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ISODropDownBox.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\HomeServerEditPage.resx">
       <DependentUpon>HomeServerEditPage.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -2206,10 +2196,16 @@
     <Compile Include="Controls\ChevronToggleButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Controls\ComboBoxes\LongStringComboBox.Designer.cs">
+      <DependentUpon>LongStringComboBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ComboBoxes\VgpuComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\ComboBoxes\NonSelectableComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Common\AutoHeightRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\Common\SmoothSplitContainer.cs">
@@ -2308,9 +2304,6 @@
     </Compile>
     <Compile Include="Controls\ComboBoxes\NetworkComboBox.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\ComboBoxes\NetworkComboBox.Designer.cs">
-      <DependentUpon>NetworkComboBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ComboBoxes\NetworkComboBoxItem.cs" />
     <Compile Include="Controls\SrPickerItem.cs" />
@@ -4162,6 +4155,15 @@
     <EmbeddedResource Include="Controls\ColorsHelper.zh-CN.resx">
       <DependentUpon>ColorsHelper.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ComboBoxes\LongStringComboBox.ja.resx">
+      <DependentUpon>LongStringComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ComboBoxes\LongStringComboBox.resx">
+      <DependentUpon>LongStringComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ComboBoxes\LongStringComboBox.zh-CN.resx">
+      <DependentUpon>LongStringComboBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Common\SearchTextBox.ja.resx">
       <DependentUpon>SearchTextBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -4263,15 +4265,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MainWindowControls\NavigationView.zh-CN.resx">
       <DependentUpon>NavigationView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ComboBoxes\NetworkComboBox.ja.resx">
-      <DependentUpon>NetworkComboBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ComboBoxes\NetworkComboBox.resx">
-      <DependentUpon>NetworkComboBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ComboBoxes\NetworkComboBox.zh-CN.resx">
-      <DependentUpon>NetworkComboBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SummaryPanel\SummaryPanel.ja.resx">
       <DependentUpon>SummaryPanel.cs</DependentUpon>
@@ -4418,12 +4411,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\HelpButton.zh-CN.resx">
       <DependentUpon>HelpButton.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ComboBoxes\ISODropDownBox.ja.resx">
-      <DependentUpon>ISODropDownBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ComboBoxes\ISODropDownBox.zh-CN.resx">
-      <DependentUpon>ISODropDownBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MultipleDvdIsoList.ja.resx">
       <DependentUpon>MultipleDvdIsoList.cs</DependentUpon>

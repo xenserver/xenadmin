@@ -33,22 +33,15 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-using System.Collections;
-using System.Text.RegularExpressions;
-
-using XenAdmin;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
-using System.Runtime.InteropServices;
 
 
 namespace XenAdmin.Controls
 {
-    public partial class ISODropDownBox : NonSelectableComboBox
+    public class ISODropDownBox : NonSelectableComboBox
     {
         public VM vm;
         protected VBD cdrom;
@@ -75,7 +68,15 @@ namespace XenAdmin.Controls
         public ISODropDownBox()
         {
             SR_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(SR_CollectionChanged);
-            InitializeComponent();
+            DrawMode = DrawMode.OwnerDrawFixed;
+            DropDownStyle = ComboBoxStyle.DropDownList;
+            FormattingEnabled = true;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            DeregisterEvents();
+            base.Dispose(disposing);
         }
 
         private void RefreshSRs_()
@@ -90,11 +91,6 @@ namespace XenAdmin.Controls
             {
                 EndUpdate();
             }
-        }
-
-        private static string srToString(SR sr)
-        {
-            return sr.Name;
         }
 
         protected virtual void RefreshSRs()
@@ -146,7 +142,7 @@ namespace XenAdmin.Controls
                     }
                 }
 
-                items.Add(new ToStringWrapper<SR>(sr, srToString));
+                items.Add(new ToStringWrapper<SR>(sr, sr.Name));
             }
 
             if (items.Count > 0)
@@ -282,20 +278,6 @@ namespace XenAdmin.Controls
             foreach (ToStringWrapper<VDI> vdiWrapper in items)
             {
                 Items.Add(vdiWrapper);
-            }
-        }
-
-        public int ISOCount
-        {
-            get
-            {
-                int i = 0;
-                foreach (object o in Items)
-                {
-                    if (o is ToStringWrapper<VDI>)
-                        i++;
-                }
-                return i;
             }
         }
 
@@ -444,28 +426,21 @@ namespace XenAdmin.Controls
             {
                 Object o = Items[e.Index];
 
+                e.DrawBackground();
+
                 if (o is ToStringWrapper<SR>)
                 {
-                    e.DrawBackground();
                     Drawing.DrawText(e.Graphics, o.ToString(), Program.DefaultFontBold, e.Bounds, SystemColors.ControlText, TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
                 }
                 else
                 {
-                    if ((e.State & DrawItemState.Selected) != 0)
-                    {
-                        e.DrawBackground();
-                        Drawing.DrawText(e.Graphics, o.ToString(), Program.DefaultFont, e.Bounds, e.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
-                    }
-                    else if((e.State & DrawItemState.Disabled) != 0)
-                    {
-                        e.DrawBackground();
-                        Drawing.DrawText(e.Graphics, o.ToString(), Program.DefaultFont, e.Bounds, SystemColors.GrayText, TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
-                    }
-                    else
-                    {
-                        e.DrawBackground();
-                        Drawing.DrawText(e.Graphics, o.ToString(), Program.DefaultFont, e.Bounds, e.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
-                    }
+                    Color colour = e.ForeColor;
+
+                    if ((e.State & DrawItemState.Disabled) != 0)
+                        colour = SystemColors.GrayText;
+
+                    Drawing.DrawText(e.Graphics, o.ToString(), Program.DefaultFont, e.Bounds, colour, TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
+
                     e.DrawFocusRectangle();
                 }
             }

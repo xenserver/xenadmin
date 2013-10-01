@@ -30,7 +30,6 @@
  */
 
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 using XenAdmin.Core;
@@ -41,22 +40,11 @@ namespace XenAdmin.Controls
     /// A combobox that automatically resizes the dropdown's width to be as big
     /// as the longest string in the items list
     /// </summary>
-    public class LongStringComboBox : ComboBox
+    public partial class LongStringComboBox : ComboBox
     {
-        private readonly ToolTip toolTip = new ToolTip();
-
-        private bool disposed;
-        protected override void Dispose(bool disposing)
+        public LongStringComboBox()
         {
-            if (disposing)
-            {
-                if (!disposed)
-                {
-                    toolTip.Dispose();
-                }
-                disposed = true;
-            }
-            base.Dispose(disposing);
+            InitializeComponent();
         }
 
         protected override void OnDropDown(EventArgs e)

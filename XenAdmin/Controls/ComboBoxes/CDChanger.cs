@@ -36,11 +36,10 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Controls
 {
-    public partial class CDChanger : ISODropDownBox
+    public class CDChanger : ISODropDownBox
     {
         public CDChanger()
         {
-            InitializeComponent();
             Empty = true;
         }
 

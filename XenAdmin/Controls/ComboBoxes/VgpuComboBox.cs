@@ -48,7 +48,7 @@ namespace XenAdmin.Controls
 
         protected override void OnDrawItem(DrawItemEventArgs e)
         {
-            if (e.Index != -1)
+            if (e.Index > -1)
             {
                 e.DrawBackground();
 
