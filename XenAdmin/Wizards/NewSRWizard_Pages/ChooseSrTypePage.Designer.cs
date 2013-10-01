@@ -40,9 +40,11 @@
             this.upsellPage1 = new XenAdmin.Controls.UpsellPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.verticalDividerLine = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.SRBlurb = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.deprecationBanner = new XenAdmin.Controls.DeprecationBanner();
+            this.selectedStoreTypeLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -129,6 +131,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.verticalDividerLine);
             this.panel1.Controls.Add(this.labelVirtualDiskStorage);
             this.panel1.Controls.Add(this.labelISOlibrary);
             this.panel1.Controls.Add(this.radioButtonNfs);
@@ -140,12 +143,19 @@
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
+            // verticalDividerLine
+            // 
+            this.verticalDividerLine.BackColor = System.Drawing.SystemColors.ControlDark;
+            resources.ApplyResources(this.verticalDividerLine, "verticalDividerLine");
+            this.verticalDividerLine.Name = "verticalDividerLine";
+            // 
             // tableLayoutPanel2
             // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
             this.tableLayoutPanel2.Controls.Add(this.upsellPage1, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.SRBlurb, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.SRBlurb, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.deprecationBanner, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.selectedStoreTypeLabel, 0, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
             // SRBlurb
@@ -159,6 +169,11 @@
             this.deprecationBanner.BackColor = System.Drawing.Color.LightCoral;
             this.deprecationBanner.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.deprecationBanner.Name = "deprecationBanner";
+            // 
+            // selectedStoreTypeLabel
+            // 
+            resources.ApplyResources(this.selectedStoreTypeLabel, "selectedStoreTypeLabel");
+            this.selectedStoreTypeLabel.Name = "selectedStoreTypeLabel";
             // 
             // ChooseSrTypePage
             // 
@@ -191,5 +206,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private XenAdmin.Controls.Common.AutoHeightLabel SRBlurb;
         private XenAdmin.Controls.DeprecationBanner deprecationBanner;
+        private System.Windows.Forms.Label verticalDividerLine;
+        private System.Windows.Forms.Label selectedStoreTypeLabel;
     }
 }

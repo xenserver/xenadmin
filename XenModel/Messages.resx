@@ -7336,9 +7336,9 @@ Once all configuration is complete the HBA will expose a SCSI device backed by t
     <value>Summary</value>
   </data>
   <data name="NEWSR_LVMOISCSI_BLURB" xml:space="preserve">
-    <value>Shared Logical Volume Manager (LVM) support is available using either iSCSI or Fibre Channel access to a shared LUN. 
+    <value>iSCSI or Fibre Channel access to a shared LUN can be configured using LVM.
 
-Using the LVM-based shared SR provides the same performance benefits as unshared LVM for local disk storage, however in the shared context, iSCSI or Fibre Channel-based SRs enable VM agility — VMs may be started on any server in a pool and migrated between them.</value>
+Using an LVM for a shared SR provides the same performance benefits as a unshared LVM for local disk storage but also enables VM agility.</value>
   </data>
   <data name="NEWSR_MULTI_POOL_WARNING" xml:space="preserve">
     <value>Warning: you must ensure that the following SR is not in use by any server not connected to XenCenter. Failure to do so may result in data loss.
