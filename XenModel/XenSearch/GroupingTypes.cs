@@ -58,11 +58,6 @@ namespace XenAdmin.XenSearch
             return group.ToString();
         }
 
-        public virtual string GetGroupOpaqueRef(object group)
-        {
-            return GetGroupName(group);
-        }
-
         public virtual Icons GetGroupIcon(Object group)
         {
             return Icons.XenCenter;
@@ -375,11 +370,6 @@ namespace XenAdmin.XenSearch
         public override object GetGroup(IXenObject o)
         {
             return CustomFieldsManager.GetCustomFieldValue(o, definition);
-        }
-
-        public override string GetGroupOpaqueRef(object group)
-        {
-            return base.GetGroupName(group);
         }
 
         public override XmlNode ToXmlNode(XmlDocument doc)
