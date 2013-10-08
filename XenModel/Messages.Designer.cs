@@ -2859,7 +2859,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AD authentication is currently being configured for pool &apos;{0}&apos;. Further details are available on the logs tab..
+        ///   Looks up a localized string similar to AD authentication is currently being configured for pool &apos;{0}&apos;..
         /// </summary>
         public static string AD_CONFIGURING_BLURB {
             get {
@@ -2868,7 +2868,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AD authentication is currently being configured for server &apos;{0}&apos;. Further details are available on the logs tab..
+        ///   Looks up a localized string similar to AD authentication is currently being configured for server &apos;{0}&apos;..
         /// </summary>
         public static string AD_CONFIGURING_BLURB_HOST {
             get {
@@ -6137,15 +6137,6 @@ namespace XenAdmin {
         public static string CLOSE_WIZARD_CLICK_FINISH {
             get {
                 return ResourceManager.GetString("CLOSE_WIZARD_CLICK_FINISH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Server View.
-        /// </summary>
-        public static string CLUSTER_VIEW {
-            get {
-                return ResourceManager.GetString("CLUSTER_VIEW", resourceCulture);
             }
         }
         
@@ -13732,15 +13723,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Updates Manager....
-        /// </summary>
-        public static string GENERAL_HOST_CONTEXT_APPLY_PATCHES {
-            get {
-                return ResourceManager.GetString("GENERAL_HOST_CONTEXT_APPLY_PATCHES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Memory:.
         /// </summary>
         public static string GENERAL_MEMORY {
@@ -14705,9 +14687,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HA is currently being disabled for &apos;{0}&apos;.
-        ///
-        ///See the logs tab for more information..
+        ///   Looks up a localized string similar to HA is currently being disabled for &apos;{0}&apos;..
         /// </summary>
         public static string HA_PAGE_DISABLING {
             get {
@@ -14716,9 +14696,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HA is currently being enabled for &apos;{0}&apos;.
-        ///
-        ///See the logs tab for more information..
+        ///   Looks up a localized string similar to HA is currently being enabled for &apos;{0}&apos;..
         /// </summary>
         public static string HA_PAGE_ENABLING {
             get {
@@ -19490,7 +19468,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to delete this log entry?.
+        ///   Looks up a localized string similar to Are you sure you want to delete this entry?.
         /// </summary>
         public static string MESSAGEBOX_LOG_DELETE {
             get {
@@ -19517,7 +19495,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This will clear all non-active log entries in the current tab. Do you wish to continue?.
+        ///   Looks up a localized string similar to This will clear all non-active entries in the current view. Do you wish to continue?.
         /// </summary>
         public static string MESSAGEBOX_LOGS_DELETE {
             get {
@@ -19526,7 +19504,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clear log entries.
+        ///   Looks up a localized string similar to Clear entries.
         /// </summary>
         public static string MESSAGEBOX_LOGS_DELETE_TITLE {
             get {
@@ -27612,7 +27590,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Some errors were encountered. See the Logs tab or application log file for more information..
+        ///   Looks up a localized string similar to Some errors were encountered. See the XenCenter log for more information..
         /// </summary>
         public static string SOME_ERRORS_ENCOUNTERED {
             get {
@@ -29671,15 +29649,6 @@ namespace XenAdmin {
         public static string UNTIL_RESTART_X_AFTER_RESTART_Y {
             get {
                 return ResourceManager.GetString("UNTIL_RESTART_X_AFTER_RESTART_Y", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Updates Manager.
-        /// </summary>
-        public static string UPDATE_MANAGER {
-            get {
-                return ResourceManager.GetString("UPDATE_MANAGER", resourceCulture);
             }
         }
         
@@ -33194,28 +33163,6 @@ namespace XenAdmin {
         public static string WLB_OPTIMIZING_POOL {
             get {
                 return ResourceManager.GetString("WLB_OPTIMIZING_POOL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Workload Balancing is currently being paused for pool &apos;{0}&apos;.
-        ///
-        ///See the logs tab for more information..
-        /// </summary>
-        public static string WLB_PAGE_DISABLING {
-            get {
-                return ResourceManager.GetString("WLB_PAGE_DISABLING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Workload Balancing is currently resuming for pool &apos;{0}&apos;.
-        ///
-        ///See the logs tab for more information..
-        /// </summary>
-        public static string WLB_PAGE_ENABLING {
-            get {
-                return ResourceManager.GetString("WLB_PAGE_ENABLING", resourceCulture);
             }
         }
         
