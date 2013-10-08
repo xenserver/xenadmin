@@ -235,6 +235,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
                 if (frontend.IsEnhancedSR && Helpers.FeatureForbidden(Connection, Host.RestrictStorageChoices))
                 {
+                    selectedStoreTypeLabel.Visible = false;
+                    selectedStoreTypeLabel.Text = string.Empty;
                     SRBlurb.Visible = false;
                     upsellPage1.Visible = true;
                     upsellPage1.SetAllTexts(Messages.UPSELL_BLURB_ENHANCEDSR, InvisibleMessages.UPSELL_LEARNMOREURL_ENHANCEDSR);
@@ -243,6 +245,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
                 else
                 {
                     upsellPage1.Visible = false;
+                    selectedStoreTypeLabel.Visible = true;
+                    selectedStoreTypeLabel.Text = radioButton.Text;
                     SRBlurb.Visible = true;
                     SRBlurb.Text = frontend.FrontendBlurb;
                     m_allowNext = true;

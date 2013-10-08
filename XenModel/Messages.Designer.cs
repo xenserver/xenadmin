@@ -21458,9 +21458,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shared Logical Volume Manager (LVM) support is available using either iSCSI or Fibre Channel access to a shared LUN. 
+        ///   Looks up a localized string similar to iSCSI or Fibre Channel access to a shared LUN can be configured using LVM.
         ///
-        ///Using the LVM-based shared SR provides the same performance benefits as unshared LVM for local disk storage, however in the shared context, iSCSI or Fibre Channel-based SRs enable VM agility — VMs may be started on any server in a pool and migrated between them..
+        ///Using an LVM for a shared SR provides the same performance benefits as a unshared LVM for local disk storage but also enables VM agility..
         /// </summary>
         public static string NEWSR_LVMOISCSI_BLURB {
             get {
