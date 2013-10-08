@@ -126,7 +126,6 @@ namespace XenAdmin.Commands
                 }
             }
 
-            MainWindowCommandInterface.AllowHistorySwitch();
             MainWindowCommandInterface.CloseActiveWizards(host.Connection);
             var action = new EnableHostAction(host, result == DialogResult.Yes,AddHostToPoolCommand.EnableNtolDialog);
             action.Completed += delegate { MainWindowCommandInterface.Refresh(); };

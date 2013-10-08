@@ -320,7 +320,6 @@ namespace XenAdmin.Dialogs
             // Yes, save to the LocalXenObject.
             List<AsyncAction> actions = SaveSettings();
 
-            Program.MainWindow.AllowHistorySwitch = true;
             Program.Invoke(Program.MainWindow.GeneralPage, Program.MainWindow.GeneralPage.EnableDisableEdit);
 
             // Add a save changes on the beginning of the actions to enact the alterations that were just changes to the xenObjectCopy.

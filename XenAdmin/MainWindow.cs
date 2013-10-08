@@ -100,14 +100,6 @@ namespace XenAdmin
         internal readonly AdPage AdPage = new AdPage();
 
         private bool IgnoreTabChanges = false;
-        public bool AllowHistorySwitch
-        {
-            set
-            {
-                if (value)
-                    navigationPane.SwitchToNotificationsView(NotificationsSubMode.Events);
-            }
-        }
         private bool ToolbarsEnabled;
 
         private readonly Dictionary<IXenConnection, IList<Form>> activePoolWizards = new Dictionary<IXenConnection, IList<Form>>();
@@ -796,7 +788,6 @@ namespace XenAdmin
             {
                 Program.MainWindow.closeActiveWizards(host);
 
-                AllowHistorySwitch = true;
                 var action = new DisableHostAction(host);
                 action.Completed += action_Completed;
                 action.RunAsync();
@@ -1559,7 +1550,6 @@ namespace XenAdmin
 
         private void DoLicenseAction(Host host, string filePath)
         {
-            AllowHistorySwitch = true;
             ApplyLicenseAction action = new ApplyLicenseAction(host.Connection, host, filePath);
             ActionProgressDialog actionProgress = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
 
@@ -1580,7 +1570,6 @@ namespace XenAdmin
         /// </param>
         private void TheTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            AllowHistorySwitch = false;
             if (IgnoreTabChanges)
                 return;
 
@@ -2531,7 +2520,6 @@ namespace XenAdmin
         private void navigationPane_TreeNodeBeforeSelected()
         {
             SearchMode = false;
-            AllowHistorySwitch = false;
         }
 
         private void navigationPane_TreeNodeClicked()
@@ -2700,8 +2688,6 @@ namespace XenAdmin
                 ShowDisconnectedMessage(parent);
                 return false;
             }
-
-            Program.MainWindow.AllowHistorySwitch = true;
 
             return true;
         }

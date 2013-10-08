@@ -69,7 +69,6 @@ namespace XenAdmin.Commands
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
-            MainWindowCommandInterface.AllowHistorySwitch();
             new HVMBootAction((VM)selection[0].XenObject).RunAsync();
         }
 

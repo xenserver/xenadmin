@@ -53,7 +53,6 @@ namespace XenAdmin
         void TrySelectNewObjectInTree(Predicate<object> tagMatch, bool selectNode, bool expandNode, bool ensureNodeVisible);
         void TrySelectNewObjectInTree(IXenConnection c, bool selectNode, bool expandNode, bool ensureNodeVisible);
         void Refresh();
-        void AllowHistorySwitch();
         void ShowPerXenModelObjectWizard(IXenObject obj, Form wizard);
         void ShowPerConnectionWizard(IXenConnection connection, Form wizard);
         void ShowForm(Type type);
@@ -112,11 +111,6 @@ namespace XenAdmin
             public void Refresh()
             {
                 _owner.RequestRefreshTreeView();
-            }
-
-            public void AllowHistorySwitch()
-            {
-                _owner.AllowHistorySwitch = true;
             }
 
             public void ShowPerXenModelObjectWizard(IXenObject obj, Form wizard)

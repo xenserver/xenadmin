@@ -115,10 +115,8 @@ namespace XenAdmin.Commands
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
-
             AssertOperationAllowsExecution();
 
-            Program.MainWindow.AllowHistorySwitch = true;
             string title = Messages.ACTION_VMS_RESUMING_ON_TITLE;
             string startDescription = Messages.ACTION_VM_RESUMING;
             string endDescription = Messages.ACTION_VM_RESUMED;

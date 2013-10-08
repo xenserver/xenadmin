@@ -82,7 +82,6 @@ namespace XenAdmin.Commands
                     actions.Add(new SetVMOtherConfigAction(vm.Connection, vm, "instant", "true"));
                     actions.Add(new VMToTemplateAction(vm));
 
-                    MainWindowCommandInterface.AllowHistorySwitch();
                     MainWindowCommandInterface.CloseActiveWizards(vm);
 
                     RunMultipleActions(actions, string.Format(Messages.ACTION_VM_TEMPLATIZING_TITLE, vm.Name),

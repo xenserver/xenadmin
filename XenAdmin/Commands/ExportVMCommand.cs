@@ -180,8 +180,6 @@ namespace XenAdmin.Commands
                 Directory.SetCurrentDirectory(oldDir);
             }
 
-            MainWindowCommandInterface.AllowHistorySwitch();
-            
             new ExportVmAction(connection, host, vm, filename, verify).RunAsync();
         }
 

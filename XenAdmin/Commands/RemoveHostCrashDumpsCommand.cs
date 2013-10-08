@@ -72,7 +72,6 @@ namespace XenAdmin.Commands
 
             if (result == DialogResult.OK)
             {
-                MainWindowCommandInterface.AllowHistorySwitch();
                 new DestroyHostCrashDumpAction(host).RunAsync();
             }
         }

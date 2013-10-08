@@ -65,10 +65,6 @@ namespace XenAdminTests
         {
         }
 
-        public void AllowHistorySwitch()
-        {
-        }
-
         public void ShowPerXenModelObjectWizard(IXenObject obj, Form wizard)
         {
 

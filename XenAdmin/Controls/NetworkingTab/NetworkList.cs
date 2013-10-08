@@ -605,8 +605,6 @@ namespace XenAdmin.Controls.NetworkingTab
 
         private void DoRemoveNetwork()
         {
-            Program.MainWindow.AllowHistorySwitch = true;
-
             if (SelectedVif != null)
             {
                 VM vm = XenObject as VM;

@@ -91,8 +91,6 @@ namespace XenAdmin.Commands
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
-            MainWindowCommandInterface.AllowHistorySwitch();
-
             List<AsyncAction> actions = new List<AsyncAction>();
             foreach (Host host in selection.AsXenObjects<Host>(CanExecute))
             {

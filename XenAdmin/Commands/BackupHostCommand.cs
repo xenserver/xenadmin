@@ -86,10 +86,7 @@ namespace XenAdmin.Commands
                 dialog.DefaultExt = "xbk";
 
                 if (dialog.ShowDialog(Parent) != DialogResult.Cancel)
-                {
-                    MainWindowCommandInterface.AllowHistorySwitch();
                     new HostBackupRestoreAction(host, HostBackupRestoreAction.HostBackupRestoreType.backup, dialog.FileName).RunAsync();
-                }
             }
             else
             {

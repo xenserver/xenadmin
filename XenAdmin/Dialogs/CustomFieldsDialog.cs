@@ -105,8 +105,6 @@ namespace XenAdmin.Dialogs
             if (!MainWindow.Confirm(connection, Program.MainWindow, Messages.MESSAGEBOX_CONFIRM, Messages.MESSAGEBOX_DELETE_CUSTOM_FIELD, name))
                 return;
 
-            Program.MainWindow.AllowHistorySwitch = true;
-
             int selIdx = lbCustomFields.SelectedIndex;
 
             lbCustomFields.Items.RemoveAt(selIdx);
