@@ -300,12 +300,6 @@ namespace XenAPI
                 Download_VGPU(session, list);
             }
 
-            if (session.APIVersion >= API_Version.API_2_0)
-            {
-                // Download Augusta-only objects
-                Download_VGPU_type(session, list);
-            }
-
             foreach (ObjectChange o in list)
             {
                 changes.Enqueue(o);
@@ -576,13 +570,6 @@ namespace XenAPI
             Dictionary<XenRef<VGPU>, VGPU> records = VGPU.get_all_records(session);
             foreach (KeyValuePair<XenRef<VGPU>, VGPU> entry in records)
                 changes.Add(new ObjectChange(typeof(VGPU), entry.Key.opaque_ref, entry.Value));
-        }
-
-        private static void Download_VGPU_type(Session session, List<ObjectChange> changes)
-        {
-            Dictionary<XenRef<VGPU_type>, VGPU_type> records = VGPU_type.get_all_records(session);
-            foreach (KeyValuePair<XenRef<VGPU_type>, VGPU_type> entry in records)
-                changes.Add(new ObjectChange(typeof(VGPU_type), entry.Key.opaque_ref, entry.Value));
         }
     }
 }
