@@ -657,11 +657,15 @@ namespace XenAdmin.XenSearch
             return new Search(query, null, false, "", null, false);
         }
 
-        public static Search SearchForGroup(Grouping grouping, object parent, object v)
+        public static Search SearchForNonVappGroup(Grouping grouping, object parent, object v)
         {
-            bool vAppsGroup = (grouping is OrganizationalView && v.ToString() == Messages.VM_APPLIANCES);
-            ObjectTypes objectTypes = vAppsGroup ? ObjectTypes.VM : ObjectTypes.AllExcFolders;
-            return new Search(new Query(new QueryScope(objectTypes), grouping.GetSubquery(parent, v)),
+            return new Search(new Query(new QueryScope(ObjectTypes.AllExcFolders), grouping.GetSubquery(parent, v)),
+                              grouping.GetSubgrouping(v), false, grouping.GetGroupName(v), "", false);
+        }
+
+        public static Search SearchForVappGroup(Grouping grouping, object parent, object v)
+        {
+            return new Search(new Query(new QueryScope(ObjectTypes.VM), grouping.GetSubquery(parent, v)),
                               grouping.GetSubgrouping(v), false, grouping.GetGroupName(v), "", false);
         }
 

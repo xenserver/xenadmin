@@ -392,6 +392,19 @@ namespace XenAdmin.Controls.MainWindowControls
             return null;
         }
 
+        private static GroupingTag GroupAncestorOfNode(VirtualTreeNode node)
+        {
+            while (node != null)
+            {
+                var group = node.Tag as GroupingTag;
+                if (group != null)
+                    return group;
+
+                node = node.Parent;
+            }
+            return null;
+        }
+
         private bool CanDrag()
         {
             if (NavigationMode == NavigationPane.NavigationMode.Infrastructure
@@ -474,12 +487,13 @@ namespace XenAdmin.Controls.MainWindowControls
 
             if (e.Node == treeView.Nodes[0] && treeView.SelectedNodes.Count == 1)
             {
-                // XenCenter (top most)
-
-                TreeContextMenu.Items.Add(new CommandToolStripMenuItem(new AddHostCommand(Program.MainWindow.CommandInterface), true));
-                TreeContextMenu.Items.Add(new CommandToolStripMenuItem(new NewPoolCommand(Program.MainWindow.CommandInterface, new SelectedItem[0]), true));
-                TreeContextMenu.Items.Add(new CommandToolStripMenuItem(new ConnectAllHostsCommand(Program.MainWindow.CommandInterface), true));
-                TreeContextMenu.Items.Add(new CommandToolStripMenuItem(new DisconnectAllHostsCommand(Program.MainWindow.CommandInterface), true));
+                if (e.Node.Tag == null)// XenCenter (top most)
+                {
+                    TreeContextMenu.Items.Add(new CommandToolStripMenuItem(new AddHostCommand(Program.MainWindow.CommandInterface), true));
+                    TreeContextMenu.Items.Add(new CommandToolStripMenuItem(new NewPoolCommand(Program.MainWindow.CommandInterface, new SelectedItem[0]), true));
+                    TreeContextMenu.Items.Add(new CommandToolStripMenuItem(new ConnectAllHostsCommand(Program.MainWindow.CommandInterface), true));
+                    TreeContextMenu.Items.Add(new CommandToolStripMenuItem(new DisconnectAllHostsCommand(Program.MainWindow.CommandInterface), true));
+                }
             }
             else
             {
@@ -822,7 +836,7 @@ namespace XenAdmin.Controls.MainWindowControls
         private void treeView_SelectionsChanged(object sender, EventArgs e)
         {
             // this is fired when the selection of the main treeview changes.
-
+            VirtualTreeNode rootNode = treeView.Nodes.Count > 0 ? treeView.Nodes[0] : null;
             List<SelectedItem> items = new List<SelectedItem>();
             foreach (VirtualTreeNode node in treeView.SelectedNodes)
             {
@@ -831,11 +845,13 @@ namespace XenAdmin.Controls.MainWindowControls
 
                 if (xenObject != null)
                 {
-                    items.Add(new SelectedItem(xenObject, xenObject.Connection, HostAncestorOfNode(node), PoolAncestorOfNode(node)));
+                    items.Add(new SelectedItem(xenObject, xenObject.Connection,
+                        HostAncestorOfNode(node), PoolAncestorOfNode(node),
+                        GroupAncestorOfNode(node), rootNode));
                 }
                 else
                 {
-                    items.Add(new SelectedItem(groupingTag));
+                    items.Add(new SelectedItem(groupingTag, rootNode));
                 }
             }
 

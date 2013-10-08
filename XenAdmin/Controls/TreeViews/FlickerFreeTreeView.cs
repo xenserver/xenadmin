@@ -35,6 +35,8 @@ using System.Windows.Forms;
 using XenAdmin.Core;
 using System.Collections.Generic;
 using XenAdmin.Network;
+using XenAdmin.XenSearch;
+
 using XenAPI;
 using Message = System.Windows.Forms.Message;
 
@@ -228,7 +230,7 @@ namespace XenAdmin.Controls
 
         public bool CanSelectNode(VirtualTreeNode node)
         {
-            return node.Tag == null || node.Tag is IXenObject || node.Tag is GroupingTag;
+            return node.Tag == null || node.Tag is IXenObject || node.Tag is GroupingTag || node.Tag is Search;
         }
 
         /// <summary>

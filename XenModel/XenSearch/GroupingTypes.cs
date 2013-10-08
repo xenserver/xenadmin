@@ -80,14 +80,14 @@ namespace XenAdmin.XenSearch
         /// <returns>A QueryFilter that returns the objects with the given value (wrt the given parent, if given).
         /// In other words, the QueryFilter that we need when selecting val in the Folder View.  May return null if all objects
         /// are to be shown (such as when selecting the Types node).</returns>
-        internal virtual QueryFilter GetSubquery(object parent, object val)
+        public virtual QueryFilter GetSubquery(object parent, object val)
         {
             return null;
         }
 
         /// <param name="val">May not be null.</param>
         /// <returns>The Grouping that we need when selecting val in the Folder View, or null if no grouping is required.</returns>
-        internal virtual Grouping GetSubgrouping(object val)
+        public virtual Grouping GetSubgrouping(object val)
         {
             return null;
         }
@@ -250,7 +250,7 @@ namespace XenAdmin.XenSearch
             return search.Query.GetSubQueryFor(property);
         }
 
-        internal override QueryFilter GetSubquery(object parent, object val)
+        public override QueryFilter GetSubquery(object parent, object val)
         {
             if (typeof(T).IsEnum)
                 return new EnumPropertyQuery<T>(property, (T)val, true);
@@ -400,7 +400,7 @@ namespace XenAdmin.XenSearch
             return definition.GetHashCode();
         }
 
-        internal override QueryFilter GetSubquery(object parent, object val)
+        public override QueryFilter GetSubquery(object parent, object val)
         {
             System.Diagnostics.Trace.Assert(val != null);
 
@@ -415,7 +415,7 @@ namespace XenAdmin.XenSearch
             else return base.GetSubquery(parent, val);
         }
 
-        internal override Grouping GetSubgrouping(object val)
+        public override Grouping GetSubgrouping(object val)
         {
             CustomFieldDefinition defn =
                 CustomFieldsManager.GetCustomFieldDefinition(val.ToString());
@@ -445,7 +445,7 @@ namespace XenAdmin.XenSearch
             return CustomFieldsManager.CustomFieldArrays(o);
         }
 
-        internal override QueryFilter GetSubquery(object parent, object val)
+        public override QueryFilter GetSubquery(object parent, object val)
         {
             System.Diagnostics.Trace.Assert(val != null);
 
@@ -476,7 +476,7 @@ namespace XenAdmin.XenSearch
             }
         }
 
-        internal override Grouping GetSubgrouping(object val)
+        public override Grouping GetSubgrouping(object val)
         {
             CustomFieldDefinition defn =
                 CustomFieldsManager.GetCustomFieldDefinition(val.ToString());

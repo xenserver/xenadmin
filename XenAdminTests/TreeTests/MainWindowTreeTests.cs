@@ -156,16 +156,15 @@ namespace XenAdminTests.TreeTests
             MW(() =>
             {
                 MainWindowWrapper.TreeView.Nodes[0].Expand();
-                MainWindowWrapper.TreeView.Nodes[0].Nodes[0].Expand();
-                VirtualTreeNode typesNode = MainWindowWrapper.TreeView.Nodes[0].Nodes[0].Nodes[3];
+                MainWindowWrapper.TreeView.Nodes[0].Nodes[3].Expand();
+                VirtualTreeNode typesNode = MainWindowWrapper.TreeView.Nodes[0].Nodes[3];
                 Assert.AreEqual("Snapshots", typesNode.Text);
                 typesNode.Expand();
             });
 
             // wait for those nodes to become expanded.
             CheckExpandedNodes(n => n == MainWindowWrapper.TreeView.Nodes[0]
-                || n == MainWindowWrapper.TreeView.Nodes[0].Nodes[0]
-                || n == MainWindowWrapper.TreeView.Nodes[0].Nodes[0].Nodes[3], "Couldn't expand nodes.");
+                || n == MainWindowWrapper.TreeView.Nodes[0].Nodes[3], "Couldn't expand nodes.");
 
             PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
 
@@ -177,7 +176,7 @@ namespace XenAdminTests.TreeTests
 
             PutInNavigationMode(NavigationPane.NavigationMode.Objects);
 
-            if (!CheckExpandedNodes(n => n.Tag == null || n.Text == "Types" || n.Text == "Snapshots"))
+            if (!CheckExpandedNodes(n => n.Parent == null || n.Text == "Objects by Type" || n.Text == "Snapshots"))
             {
                 var expandedNodes = MW(() => GetAllTreeNodes().FindAll(n => n.IsExpanded).ConvertAll(n => n.Text));
                 Assert.Fail("Nodes not correctly persisted in organization view. Expanded nodes were: " + string.Join(", ", expandedNodes.ToArray()) + ". They should have only been Objects, Types.");

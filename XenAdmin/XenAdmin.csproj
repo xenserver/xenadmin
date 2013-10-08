@@ -2306,6 +2306,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\ComboBoxes\NetworkComboBoxItem.cs" />
+    <Compile Include="OrganizationalView.cs" />
     <Compile Include="Controls\SrPickerItem.cs" />
     <Compile Include="Controls\SummaryPanel\ISummaryPanelView.cs" />
     <Compile Include="Diagnostics\Checks\HostHasWlbCheck.cs" />

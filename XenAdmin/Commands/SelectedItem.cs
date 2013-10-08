@@ -32,6 +32,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+
+using XenAdmin.Controls;
+
 using XenAPI;
 using XenAdmin.Network;
 using XenAdmin.Core;
@@ -48,14 +51,17 @@ namespace XenAdmin.Commands
         private readonly Pool _poolAncestor;
         private readonly IXenConnection _connection;
         private readonly GroupingTag _groupingTag;
+        private readonly GroupingTag _groupAncestor;
+        private readonly VirtualTreeNode _rootNode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectedItem"/> class.
         /// </summary>
         /// <param name="groupingTag">The grouping tag that is selected.</param>
-        public SelectedItem(GroupingTag groupingTag)
+        public SelectedItem(GroupingTag groupingTag, VirtualTreeNode rootNode)
         {
             _groupingTag = groupingTag;
+            _rootNode = rootNode;
         }
 
         /// <summary>
@@ -71,6 +77,28 @@ namespace XenAdmin.Commands
             _hostAncestor = hostAncestor;
             _poolAncestor = poolAncestor;
             _connection = connection;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SelectedItem"/> class.
+        /// </summary>
+        /// <param name="xenObject">The xen object that is selected.</param>
+        /// <param name="connection">The connection of the xen object.</param>
+        /// <param name="hostAncestor">The host ancestor of the xen object in the tree.</param>
+        /// <param name="poolAncestor">The pool ancestor of the xen object in the tree.</param>
+        /// <param name="groupAncestor">In Objects view this is the type under which
+        /// the object is grouped.</param>
+        public SelectedItem(IXenObject xenObject, IXenConnection connection, Host hostAncestor,
+            Pool poolAncestor, GroupingTag groupAncestor, VirtualTreeNode rootNode)
+            : this(xenObject, connection, hostAncestor, poolAncestor)
+        {
+            _groupAncestor = groupAncestor;
+            _rootNode = rootNode;
+        }
+
+        public VirtualTreeNode RootNode
+        {
+            get { return _rootNode; }
         }
 
         /// <summary>
@@ -160,6 +188,11 @@ namespace XenAdmin.Commands
             {
                 return _groupingTag;
             }
+        }
+
+        public GroupingTag GroupAncestor
+        {
+            get { return _groupAncestor; }
         }
 
         /// <summary>

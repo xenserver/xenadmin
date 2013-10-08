@@ -110,18 +110,19 @@ namespace XenAdminTests.CommandTests
         {
             // just delete one tag for this test as it's quite slow.
 
-            PutInNavigationMode(NavigationPane.NavigationMode.Tags);
+            PutInNavigationMode(NativeMode);
 
-            VirtualTreeNode node = GetAllTreeNodes().Find(delegate(VirtualTreeNode n)
-            {
-                GroupingTag g = n.Tag as GroupingTag;
-                return g != null && n.Parent.Tag is GroupingTag && g.Grouping.GroupingName == "Tags";
-            });
+            VirtualTreeNode node = GetAllTreeNodes().Find(n =>
+                {
+                    GroupingTag g = n.Tag as GroupingTag;
+                    return g != null && n.Parent != null && g.Grouping.GroupingName == "Tags";
+                });
 
             GroupingTag gt = (GroupingTag)node.Tag;
 
+            var rootNode = GetAllTreeNodes().Find(n => n.Parent == null);
 
-            yield return new SelectedItemCollection(new[] { new SelectedItem(gt) });
+            yield return new SelectedItemCollection(new[] { new SelectedItem(gt, rootNode) });
         }
     }
 }

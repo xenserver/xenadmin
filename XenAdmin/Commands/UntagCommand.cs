@@ -73,7 +73,7 @@ namespace XenAdmin.Commands
 
         private static bool IsTagInOrgMode(VirtualTreeNode node)
         {
-            if (node != null)
+            if (node != null && node.Parent != null)//exclude the top node
             {
                 GroupingTag gt = node.Tag as GroupingTag;
                 return gt != null && gt.Grouping.GroupingName == Messages.TAGS;
@@ -87,11 +87,11 @@ namespace XenAdmin.Commands
 
             foreach (VirtualTreeNode node in _nodes)
             {
-                string tag = node.Parent.Text as string;
+                string tag = node.Parent.Text;
 
                 IXenObject xenObject = node.Tag as IXenObject;
 
-                if (tag != null && xenObject != null)
+                if (!string.IsNullOrEmpty(tag) && xenObject != null)
                     actions.Add(Tags.RemoveTagAction(xenObject, tag));
             }
 

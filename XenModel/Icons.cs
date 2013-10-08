@@ -151,6 +151,9 @@ namespace XenAdmin
         VmCrossPoolMigrate,
 
         PifPrimary,
-        PifSecondary
+        PifSecondary,
+
+        Home,
+        Objects
     }
 }

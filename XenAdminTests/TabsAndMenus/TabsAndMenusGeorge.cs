@@ -30,6 +30,8 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
+
 using NUnit.Framework;
 using XenAdmin;
 using XenAdmin.Controls;
@@ -45,17 +47,17 @@ namespace XenAdminTests.TabsAndMenus
     public class TabsAndMenusGeorge : TabsAndMenus
     {
         private string[] XenCenterTabs = new[] { "Home", "Search" };
-        private string[] PoolTabs = new[] { "Search", "General", "Storage", "Networking", "HA", "WLB", "Users" };
-        private string[] HostTabs = new[] { "Search", "General", "Storage", "Networking", "NICs", "Console", "Performance", "Users" };
-        private string[] VMTabs = new[] { "General", "Storage", "Networking", "Console", "Performance", "Snapshots" };
-        private string[] DefaultTemplateTabs = new[] { "General", "Networking" };
-        private string[] OtherInstallMediaTabs = new[] { "General", "Storage", "Networking" };
-        private string[] UserTemplateTabs_Provision = new[] { "General", "Networking" };
-        private string[] UserTemplateTabs_NoProvision = new[] { "General", "Storage", "Networking" };
-        private string[] SRTabs = new[] { "General", "Storage" };
-        private string[] SnapshotTabs = new[] { "General", "Networking" };
-        private string[] VDITabs = new string[] { };
-        private string[] NetworkTabs = new string[] { };
+        private string[] PoolTabs = new[] { "General", "Storage", "Networking", "HA", "WLB", "Users", "Search" };
+        private string[] HostTabs = new[] { "General", "Storage", "Networking", "NICs", "Console", "Performance", "Users", "Search" };
+        private string[] VMTabs = new[] { "General", "Storage", "Networking", "Console", "Performance", "Snapshots", "Search" };
+        private string[] DefaultTemplateTabs = new[] { "General", "Networking", "Search" };
+        private string[] OtherInstallMediaTabs = new[] { "General", "Storage", "Networking", "Search" };
+        private string[] UserTemplateTabs_Provision = new[] { "General", "Networking", "Search" };
+        private string[] UserTemplateTabs_NoProvision = new[] { "General", "Storage", "Networking", "Search" };
+        private string[] SRTabs = new[] { "General", "Storage", "Search" };
+        private string[] SnapshotTabs = new[] { "General", "Networking", "Search" };
+        private string[] VDITabs = new [] { "Search" };
+        private string[] NetworkTabs = new [] { "Search" };
         private string[] GroupingTagTabs = new[] { "Search" };
         private string[] FolderTabs = new[] { "Search" };
 
@@ -213,10 +215,9 @@ namespace XenAdminTests.TabsAndMenus
             PutInNavigationMode(NavigationPane.NavigationMode.Folders);
             try
             {
-                foreach (Folder folder in GetAllXenObjects<Folder>())
-                {
+                var folders = GetAllXenObjects<Folder>().Where(f => !(string.IsNullOrEmpty(f.ToString())));
+                foreach (Folder folder in folders)
                     VerifyTabs(folder, FolderTabs);
-                }
             }
             finally
             {
@@ -228,7 +229,7 @@ namespace XenAdminTests.TabsAndMenus
         public void ContextMenu_XenCenterNode_AllClosed()
         {
             VirtualTreeNode rootNode = FindInTree(null);
-            MW(() => rootNode.Collapse());
+            MW(rootNode.Collapse);
             VerifyContextMenu(null, new ExpectedMenuItem[] {
                 new ExpectedTextMenuItem("&Add...", true),
                 new ExpectedTextMenuItem("&New Pool...", true),
@@ -624,7 +625,9 @@ namespace XenAdminTests.TabsAndMenus
             PutInNavigationMode(NavigationPane.NavigationMode.Tags);
             try
             {
-                foreach (VirtualTreeNode node in GetAllTreeNodes())
+                var nodes = GetAllTreeNodes().Where(n => n.Parent != null);
+
+                foreach (VirtualTreeNode node in nodes)
                 {
                     GroupingTag gt = node.Tag as GroupingTag;
                     if (gt != null)

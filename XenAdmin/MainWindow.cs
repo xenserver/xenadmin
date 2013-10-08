@@ -1640,14 +1640,40 @@ namespace XenAdmin
                 }
                 else if (t == TabPageSearch && !SearchMode)
                 {
-                    if (SelectionManager.Selection.First is GroupingTag)
+                    var rootNode = SelectionManager.Selection.RootNode;
+                    var rootNodeGrouping = rootNode == null ? null : rootNode.Tag as GroupingTag;
+                    var search = rootNode == null ? null : rootNode.Tag as Search;
+
+                    if (search != null)
                     {
-                        GroupingTag gt = (GroupingTag)SelectionManager.Selection.First;
-                        SearchPage.Search = Search.SearchForGroup(gt.Grouping, gt.Parent, gt.Group);
+                        SearchPage.Search = search;
+                    }
+                    else if (rootNodeGrouping != null)
+                    {
+                        var objectsView = rootNodeGrouping.Grouping as OrganizationViewObjects;
+                        var vappsView = rootNodeGrouping.Grouping as OrganizationViewVapps;
+
+                        if (vappsView != null)
+                        {
+                            SearchPage.Search = Search.SearchForVappGroup(rootNodeGrouping.Grouping,
+                                rootNodeGrouping.Parent, rootNodeGrouping.Group);
+                        }
+                        else if (objectsView != null)
+                        {
+                            GroupingTag gt = SelectionManager.Selection.First as GroupingTag
+                                             ?? SelectionManager.Selection.GroupAncestor;
+
+                            SearchPage.Search = Search.SearchForNonVappGroup(gt.Grouping, gt.Parent, gt.Group);
+                        }
+                        else
+                        {
+                            SearchPage.Search = Search.SearchForNonVappGroup(rootNodeGrouping.Grouping,
+                                  rootNodeGrouping.Parent, rootNodeGrouping.Group);
+                        }
                     }
                     else
                     {
-                        SearchPage.XenObject = SelectionManager.Selection.Count > 1 ? null : SelectionManager.Selection.FirstAsXenObject;
+                        SearchPage.XenObject = null;
                     }
                 }
                 else if (t == TabPageHA)

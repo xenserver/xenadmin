@@ -65,12 +65,10 @@ namespace XenAdmin.Controls
             {
                 var path = new List<object>();
 
-                if (node.Tag != null)
-                {
+                if (node.Tag != null && node.Parent != null)
                     path.Add(node.Tag);
-                }
-                
-                path.AddRange(new List<VirtualTreeNode>(node.Ancestors).ConvertAll(n => n.Tag).FindAll(o => o != null));
+
+                path.AddRange(new List<VirtualTreeNode>(node.Ancestors).FindAll(o => o.Parent != null).ConvertAll(n => n.Tag).FindAll(o => o != null));
                 path.Reverse();
                 return path;
             }
