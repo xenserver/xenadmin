@@ -1840,12 +1840,13 @@ namespace XenAdmin
             bool currentTasks = false;
             foreach (ActionBase a in ConnectionsManager.History)
             {
-                if (!a.IsCompleted)
+                if (!(a is MeddlingAction) && !a.IsCompleted)
                 {
                     currentTasks = true;
                     break;
                 }
             }
+
             if (currentTasks)
             {
                 e.Cancel = true;

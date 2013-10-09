@@ -178,7 +178,7 @@ namespace XenAdminTests.TabsAndMenus
                 Assert.AreEqual("groupTest", GetVisibleToolStripItems(MainWindowWrapper.FileMenu.DropDownItems)[7].Text);
 
                 MainWindowWrapper.ViewMenu.ShowDropDown();
-                Assert.AreEqual("view_ShellTest1", GetVisibleToolStripItems(MainWindowWrapper.ViewMenu.DropDownItems)[3].Text);
+                Assert.AreEqual("view_ShellTest1", GetVisibleToolStripItems(MainWindowWrapper.ViewMenu.DropDownItems)[5].Text);
 
                 MainWindowWrapper.PoolMenu.ShowDropDown();
                 Assert.AreEqual("pool_ShellTest1", GetVisibleToolStripItems(MainWindowWrapper.PoolMenu.DropDownItems)[19].Text);

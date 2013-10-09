@@ -118,6 +118,10 @@ namespace XenAdmin.TabPages
 
         private void action_Changed(ActionBase sender)
         {
+            var asyncAction = sender as AsyncAction;
+            if (asyncAction != null)
+                asyncAction.RecomputeCanCancel();
+
             Program.Invoke(this, () =>
                 {
                     var row = FindRowFromAction(sender);
