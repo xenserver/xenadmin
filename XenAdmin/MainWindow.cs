@@ -229,7 +229,6 @@ namespace XenAdmin
             {
                 foreach (ToolStripItem item in menu.DropDownItems)
                 {
-                    ToolStripMenuItem menuItem = item as ToolStripMenuItem;
                     if (item != null && item.Text == "PluginItemsPlaceHolder")
                     {
                         pluginMenuItemStartIndexes.Add(menu, menu.DropDownItems.IndexOf(item));
@@ -2444,6 +2443,44 @@ namespace XenAdmin
             }
         }
 
+        private void UpdateViewMenu(NavigationPane.NavigationMode mode)
+        {
+            //the order is the reverse from the order in which we want them to appear
+            var items = new ToolStripItem []
+                {
+                    toolStripSeparator24,
+                    ShowHiddenObjectsToolStripMenuItem,
+                    localStorageToolStripMenuItem,
+                    templatesToolStripMenuItem1,
+                    customTemplatesToolStripMenuItem
+                };
+
+            if (mode == NavigationPane.NavigationMode.Infrastructure)
+            {
+                foreach (var item in items)
+                {
+                    if (!viewToolStripMenuItem.DropDownItems.Contains(item))
+                        viewToolStripMenuItem.DropDownItems.Insert(0, item);
+                }
+            }
+            else if (mode == NavigationPane.NavigationMode.Notifications)
+            {
+                 foreach (var item in items)
+                    viewToolStripMenuItem.DropDownItems.Remove(item);
+            }
+            else
+            {
+                for (int i = 2; i < items.Length; i++)
+                    viewToolStripMenuItem.DropDownItems.Remove(items[i]);
+
+                for (int i = 0; i < 2; i++)
+                    if (!viewToolStripMenuItem.DropDownItems.Contains(items[i]))
+                        viewToolStripMenuItem.DropDownItems.Insert(0, items[i]);
+            }
+
+            pluginMenuItemStartIndexes[viewToolStripMenuItem] = viewToolStripMenuItem.DropDownItems.IndexOf(toolStripSeparator24) + 1;
+        }
+
         string GetTitleLabel(IXenObject xenObject)
         {
             string name = Helpers.GetName(xenObject);
@@ -2515,6 +2552,8 @@ namespace XenAdmin
                 TheTabControl.Visible = true;
                 alertPage.Visible = updatesPage.Visible = eventsPage.Visible = false;
             }
+
+            UpdateViewMenu(mode);
         }
 
         private void navigationPane_TreeNodeBeforeSelected()
