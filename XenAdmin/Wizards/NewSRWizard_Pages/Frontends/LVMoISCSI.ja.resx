@@ -192,37 +192,37 @@
   <data name="toolTipContainerIQNscan.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="buttonIscsiPopulateIQNs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="scanTargetHostButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="buttonIscsiPopulateIQNs.Enabled" type="System.Boolean, mscorlib">
+  <data name="scanTargetHostButton.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="buttonIscsiPopulateIQNs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="scanTargetHostButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="buttonIscsiPopulateIQNs.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="scanTargetHostButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="buttonIscsiPopulateIQNs.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="scanTargetHostButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 23</value>
   </data>
-  <data name="buttonIscsiPopulateIQNs.TabIndex" type="System.Int32, mscorlib">
+  <data name="scanTargetHostButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="buttonIscsiPopulateIQNs.Text" xml:space="preserve">
+  <data name="scanTargetHostButton.Text" xml:space="preserve">
     <value>IQN の検出(&amp;Q)</value>
   </data>
-  <data name="&gt;&gt;buttonIscsiPopulateIQNs.Name" xml:space="preserve">
-    <value>buttonIscsiPopulateIQNs</value>
+  <data name="&gt;&gt;scanTargetHostButton.Name" xml:space="preserve">
+    <value>scanTargetHostButton</value>
   </data>
-  <data name="&gt;&gt;buttonIscsiPopulateIQNs.Type" xml:space="preserve">
+  <data name="&gt;&gt;scanTargetHostButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonIscsiPopulateIQNs.Parent" xml:space="preserve">
+  <data name="&gt;&gt;scanTargetHostButton.Parent" xml:space="preserve">
     <value>toolTipContainerIQNscan</value>
   </data>
-  <data name="&gt;&gt;buttonIscsiPopulateIQNs.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;scanTargetHostButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="toolTipContainerIQNscan.Location" type="System.Drawing.Point, System.Drawing">
@@ -366,31 +366,31 @@
   <data name="&gt;&gt;labelIscsiInvalidHost.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="lunInUseLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="errorLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="lunInUseLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="errorLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lunInUseLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="errorLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>103, 272</value>
   </data>
-  <data name="lunInUseLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="errorLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>395, 46</value>
   </data>
-  <data name="lunInUseLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="errorLabel.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;lunInUseLabel.Name" xml:space="preserve">
-    <value>lunInUseLabel</value>
+  <data name="&gt;&gt;errorLabel.Name" xml:space="preserve">
+    <value>errorLabel</value>
   </data>
-  <data name="&gt;&gt;lunInUseLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;errorLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lunInUseLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;errorLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lunInUseLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;errorLabel.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="targetLunLabel.AutoSize" type="System.Boolean, mscorlib">

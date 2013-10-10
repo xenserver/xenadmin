@@ -167,11 +167,11 @@
     <Compile Include="Controls\ShadowPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\SnapshotTreeView.cs">
+    <Compile Include="Controls\SpinnerIcon.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\SnapshotTreeView.designer.cs">
-      <DependentUpon>SnapshotTreeView.cs</DependentUpon>
+    <Compile Include="Controls\SpinnerIcon.designer.cs">
+      <DependentUpon>SpinnerIcon.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Tags\TagList.cs" />
     <Compile Include="Controls\Tags\TagButton.cs">
@@ -1376,10 +1376,6 @@
       <DependentUpon>ShadowPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SnapshotTreeView.resx">
-      <DependentUpon>SnapshotTreeView.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\UpsellPage.resx">
       <DependentUpon>UpsellPage.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -2228,6 +2224,12 @@
     </Compile>
     <Compile Include="Controls\ConsoleTab\FullScreenHint.Designer.cs">
       <DependentUpon>FullScreenHint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SnapshotTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\SnapshotTreeView.designer.cs">
+      <DependentUpon>SnapshotTreeView.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\DataGridViewDropDownSplitButtonCell.cs">
     </Compile>
@@ -4206,6 +4208,16 @@
     <EmbeddedResource Include="Controls\ConsoleTab\FullScreenHint.zh-CN.resx">
       <DependentUpon>FullScreenHint.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SnapshotTreeView.ja.resx">
+      <DependentUpon>SnapshotTreeView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SnapshotTreeView.resx">
+      <DependentUpon>SnapshotTreeView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SnapshotTreeView.zh-CN.resx">
+      <DependentUpon>SnapshotTreeView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\CustomDataGraph\DataEventList.ja.resx">
       <DependentUpon>DataEventList.cs</DependentUpon>
     </EmbeddedResource>
@@ -4441,12 +4453,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ShadowPanel.zh-CN.resx">
       <DependentUpon>ShadowPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SnapshotTreeView.ja.resx">
-      <DependentUpon>SnapshotTreeView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SnapshotTreeView.zh-CN.resx">
-      <DependentUpon>SnapshotTreeView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SrPicker.zh-CN.resx">
       <DependentUpon>SrPicker.cs</DependentUpon>

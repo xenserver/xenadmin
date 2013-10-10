@@ -16824,6 +16824,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid hostname.
+        /// </summary>
+        public static string INVALID_HOST {
+            get {
+                return ResourceManager.GetString("INVALID_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid number.
         /// </summary>
         public static string INVALID_NUMBER {
@@ -17751,6 +17760,15 @@ namespace XenAdmin {
         public static string LOGGED_IN_AS {
             get {
                 return ResourceManager.GetString("LOGGED_IN_AS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logging in to the iSCSI target failed..
+        /// </summary>
+        public static string LOGGING_IN_TO_THE_ISCSI_TARGET_FAILED {
+            get {
+                return ResourceManager.GetString("LOGGING_IN_TO_THE_ISCSI_TARGET_FAILED", resourceCulture);
             }
         }
         
@@ -26684,6 +26702,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select target IQN.
+        /// </summary>
+        public static string SELECT_TARGET_IQN {
+            get {
+                return ResourceManager.GetString("SELECT_TARGET_IQN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select target LUN.
+        /// </summary>
+        public static string SELECT_TARGET_LUN {
+            get {
+                return ResourceManager.GetString("SELECT_TARGET_LUN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select VMs to Suspend - server &apos;{0}&apos;.
         /// </summary>
         public static string SELECT_VMS_TO_SUSPEND_DLOG_TITLE {
@@ -27833,6 +27869,15 @@ namespace XenAdmin {
         public static string SR_SIZE_USED {
             get {
                 return ResourceManager.GetString("SR_SIZE_USED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to connect to iSCSI target.
+        /// </summary>
+        public static string SR_UNABLE_TO_CONNECT_TO_SCSI_TARGET {
+            get {
+                return ResourceManager.GetString("SR_UNABLE_TO_CONNECT_TO_SCSI_TARGET", resourceCulture);
             }
         }
         

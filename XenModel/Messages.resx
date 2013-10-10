@@ -5876,6 +5876,9 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="INTERFACES_COUNT" xml:space="preserve">
     <value>Interfaces: {0}</value>
   </data>
+  <data name="INVALID_HOST" xml:space="preserve">
+    <value>Invalid hostname</value>
+  </data>
   <data name="INVALID_NUMBER" xml:space="preserve">
     <value>Invalid number</value>
   </data>
@@ -6195,6 +6198,9 @@ Size: {3}</value>
   </data>
   <data name="LOGGED_IN_AS" xml:space="preserve">
     <value>Logged in as: {0}</value>
+  </data>
+  <data name="LOGGING_IN_TO_THE_ISCSI_TARGET_FAILED" xml:space="preserve">
+    <value>Logging in to the iSCSI target failed.</value>
   </data>
   <data name="LOG_DESTINATION" xml:space="preserve">
     <value>Log Destination</value>
@@ -9293,6 +9299,12 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   <data name="SELECT_STORAGE_DROPDOWN_ERROR_NOT_ENOUGH_SPACE" xml:space="preserve">
     <value>{0} - not enough available space on the SR</value>
   </data>
+  <data name="SELECT_TARGET_IQN" xml:space="preserve">
+    <value>Select target IQN</value>
+  </data>
+  <data name="SELECT_TARGET_LUN" xml:space="preserve">
+    <value>Select target LUN</value>
+  </data>
   <data name="SELECT_VMS_TO_SUSPEND_DLOG_TITLE" xml:space="preserve">
     <value>Select VMs to Suspend - server '{0}'</value>
   </data>
@@ -9704,6 +9716,9 @@ Do you want to connect to the pool master '{1}'?</value>
   </data>
   <data name="SR_SIZE_USED" xml:space="preserve">
     <value>{0} used of {1} total ({2} allocated)</value>
+  </data>
+  <data name="SR_UNABLE_TO_CONNECT_TO_SCSI_TARGET" xml:space="preserve">
+    <value>Unable to connect to iSCSI target</value>
   </data>
   <data name="SR_X_ON_Y" xml:space="preserve">
     <value>SR {0} on {1}</value>
