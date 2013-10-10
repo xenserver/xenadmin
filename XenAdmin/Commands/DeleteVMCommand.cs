@@ -71,7 +71,6 @@ namespace XenAdmin.Commands
 
         private AsyncAction GetAction(VM vm, List<VBD> deleteDisks, List<VM> deleteSnapshots)
         {
-            MainWindowCommandInterface.AllowHistorySwitch();
             return new VMDestroyAction(vm, deleteDisks, deleteSnapshots);
         }
 

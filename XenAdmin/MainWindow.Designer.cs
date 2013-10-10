@@ -67,7 +67,6 @@ namespace XenAdmin
             this.navigationPane = new XenAdmin.Controls.MainWindowControls.NavigationPane();
             this.TheTabControl = new System.Windows.Forms.TabControl();
             this.TabPageHome = new System.Windows.Forms.TabPage();
-            this.TabPageSearch = new System.Windows.Forms.TabPage();
             this.TabPageGeneral = new System.Windows.Forms.TabPage();
             this.TabPageBallooning = new System.Windows.Forms.TabPage();
             this.TabPageBallooningUpsell = new System.Windows.Forms.TabPage();
@@ -85,6 +84,7 @@ namespace XenAdmin
             this.TabPageWLB = new System.Windows.Forms.TabPage();
             this.TabPageWLBUpsell = new System.Windows.Forms.TabPage();
             this.TabPageAD = new System.Windows.Forms.TabPage();
+            this.TabPageSearch = new System.Windows.Forms.TabPage();
             this.alertPage = new XenAdmin.TabPages.AlertSummaryPage();
             this.eventsPage = new XenAdmin.TabPages.HistoryPage();
             this.updatesPage = new XenAdmin.TabPages.ManageUpdatesPage();
@@ -125,10 +125,6 @@ namespace XenAdmin
             this.pluginItemsPlaceHolderToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.serverViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.templatesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.customTemplatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.localStorageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ShowHiddenObjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
             this.pluginItemsPlaceHolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -270,6 +266,9 @@ namespace XenAdmin
             this.MainMenuBar = new XenAdmin.Controls.MenuStripEx();
             this.securityGroupsToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.MenuPanel = new System.Windows.Forms.Panel();
+            this.templatesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.customTemplatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.localStorageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -324,7 +323,6 @@ namespace XenAdmin
             // 
             resources.ApplyResources(this.TheTabControl, "TheTabControl");
             this.TheTabControl.Controls.Add(this.TabPageHome);
-            this.TheTabControl.Controls.Add(this.TabPageSearch);
             this.TheTabControl.Controls.Add(this.TabPageGeneral);
             this.TheTabControl.Controls.Add(this.TabPageBallooning);
             this.TheTabControl.Controls.Add(this.TabPageBallooningUpsell);
@@ -341,6 +339,7 @@ namespace XenAdmin
             this.TheTabControl.Controls.Add(this.TabPageWLB);
             this.TheTabControl.Controls.Add(this.TabPageWLBUpsell);
             this.TheTabControl.Controls.Add(this.TabPageAD);
+            this.TheTabControl.Controls.Add(this.TabPageSearch);
             this.TheTabControl.Name = "TheTabControl";
             this.TheTabControl.SelectedIndex = 4;
             // 
@@ -349,12 +348,6 @@ namespace XenAdmin
             resources.ApplyResources(this.TabPageHome, "TabPageHome");
             this.TabPageHome.Name = "TabPageHome";
             this.TabPageHome.UseVisualStyleBackColor = true;
-            // 
-            // TabPageSearch
-            // 
-            resources.ApplyResources(this.TabPageSearch, "TabPageSearch");
-            this.TabPageSearch.Name = "TabPageSearch";
-            this.TabPageSearch.UseVisualStyleBackColor = true;
             // 
             // TabPageGeneral
             // 
@@ -459,6 +452,12 @@ namespace XenAdmin
             this.TabPageAD.Name = "TabPageAD";
             this.TabPageAD.UseVisualStyleBackColor = true;
             // 
+            // TabPageSearch
+            // 
+            resources.ApplyResources(this.TabPageSearch, "TabPageSearch");
+            this.TabPageSearch.Name = "TabPageSearch";
+            this.TabPageSearch.UseVisualStyleBackColor = true;
+            // 
             // alertPage
             // 
             resources.ApplyResources(this.alertPage, "alertPage");
@@ -469,6 +468,7 @@ namespace XenAdmin
             // eventsPage
             // 
             resources.ApplyResources(this.eventsPage, "eventsPage");
+            this.eventsPage.BackColor = System.Drawing.SystemColors.Window;
             this.eventsPage.Name = "eventsPage";
             // 
             // updatesPage
@@ -753,7 +753,9 @@ namespace XenAdmin
             // 
             this.viewToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.serverViewToolStripMenuItem,
+            this.customTemplatesToolStripMenuItem,
+            this.templatesToolStripMenuItem1,
+            this.localStorageToolStripMenuItem,
             this.ShowHiddenObjectsToolStripMenuItem,
             this.toolStripSeparator24,
             this.pluginItemsPlaceHolderToolStripMenuItem,
@@ -761,33 +763,6 @@ namespace XenAdmin
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             resources.ApplyResources(this.viewToolStripMenuItem, "viewToolStripMenuItem");
             this.viewToolStripMenuItem.DropDownOpening += new System.EventHandler(this.topLevelMenu_DropDownOpening);
-            // 
-            // serverViewToolStripMenuItem
-            // 
-            this.serverViewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.templatesToolStripMenuItem1,
-            this.customTemplatesToolStripMenuItem,
-            this.localStorageToolStripMenuItem});
-            this.serverViewToolStripMenuItem.Name = "serverViewToolStripMenuItem";
-            resources.ApplyResources(this.serverViewToolStripMenuItem, "serverViewToolStripMenuItem");
-            // 
-            // templatesToolStripMenuItem1
-            // 
-            this.templatesToolStripMenuItem1.Name = "templatesToolStripMenuItem1";
-            resources.ApplyResources(this.templatesToolStripMenuItem1, "templatesToolStripMenuItem1");
-            this.templatesToolStripMenuItem1.Click += new System.EventHandler(this.templatesToolStripMenuItem1_Click);
-            // 
-            // customTemplatesToolStripMenuItem
-            // 
-            this.customTemplatesToolStripMenuItem.Name = "customTemplatesToolStripMenuItem";
-            resources.ApplyResources(this.customTemplatesToolStripMenuItem, "customTemplatesToolStripMenuItem");
-            this.customTemplatesToolStripMenuItem.Click += new System.EventHandler(this.customTemplatesToolStripMenuItem_Click);
-            // 
-            // localStorageToolStripMenuItem
-            // 
-            this.localStorageToolStripMenuItem.Name = "localStorageToolStripMenuItem";
-            resources.ApplyResources(this.localStorageToolStripMenuItem, "localStorageToolStripMenuItem");
-            this.localStorageToolStripMenuItem.Click += new System.EventHandler(this.localStorageToolStripMenuItem_Click);
             // 
             // ShowHiddenObjectsToolStripMenuItem
             // 
@@ -1749,6 +1724,24 @@ namespace XenAdmin
             resources.ApplyResources(this.MenuPanel, "MenuPanel");
             this.MenuPanel.Name = "MenuPanel";
             // 
+            // templatesToolStripMenuItem1
+            // 
+            this.templatesToolStripMenuItem1.Name = "templatesToolStripMenuItem1";
+            resources.ApplyResources(this.templatesToolStripMenuItem1, "templatesToolStripMenuItem1");
+            this.templatesToolStripMenuItem1.Click += new System.EventHandler(this.templatesToolStripMenuItem1_Click);
+            // 
+            // customTemplatesToolStripMenuItem
+            // 
+            this.customTemplatesToolStripMenuItem.Name = "customTemplatesToolStripMenuItem";
+            resources.ApplyResources(this.customTemplatesToolStripMenuItem, "customTemplatesToolStripMenuItem");
+            this.customTemplatesToolStripMenuItem.Click += new System.EventHandler(this.customTemplatesToolStripMenuItem_Click);
+            // 
+            // localStorageToolStripMenuItem
+            // 
+            this.localStorageToolStripMenuItem.Name = "localStorageToolStripMenuItem";
+            resources.ApplyResources(this.localStorageToolStripMenuItem, "localStorageToolStripMenuItem");
+            this.localStorageToolStripMenuItem.Click += new System.EventHandler(this.localStorageToolStripMenuItem_Click);
+            // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -1897,13 +1890,9 @@ namespace XenAdmin
         private XenAdmin.Controls.MenuStripEx MainMenuBar;
         private System.Windows.Forms.Panel MenuPanel;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
-        private System.Windows.Forms.ToolStripMenuItem serverViewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem templatesToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator24;
         private System.Windows.Forms.ToolStripMenuItem toolbarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ShowHiddenObjectsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem customTemplatesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem localStorageToolStripMenuItem;
         internal System.Windows.Forms.TabControl TheTabControl;
         private System.Windows.Forms.TabPage TabPageHome;
         internal System.Windows.Forms.TabPage TabPageSearch;
@@ -1997,6 +1986,9 @@ namespace XenAdmin
         private XenAdmin.TabPages.AlertSummaryPage alertPage;
         private XenAdmin.TabPages.ManageUpdatesPage updatesPage;
         private XenAdmin.TabPages.HistoryPage eventsPage;
+        private ToolStripMenuItem customTemplatesToolStripMenuItem;
+        private ToolStripMenuItem templatesToolStripMenuItem1;
+        private ToolStripMenuItem localStorageToolStripMenuItem;
     }
 
 }

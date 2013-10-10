@@ -683,7 +683,7 @@ namespace XenAdmin.Controls.XenSearch
                 return null;
 
 
-            GridRow row = NewGroupRow(String.Format("{0}: {1}", grouping.GroupingName, grouping.GetGroupOpaqueRef(o)), null, ROW_HEIGHT, 0);
+            GridRow row = NewGroupRow(String.Format("{0}: {1}", grouping.GroupingName, o), null, ROW_HEIGHT, 0);
 
             GridImageItem statusItem = new GridImageItem(
                 grouping.GroupingName,

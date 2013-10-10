@@ -126,6 +126,7 @@ namespace XenAdminTests.CommandTests
         private IEnumerable<SelectedItemCollection> GetSelections()
         {
             List<object> output = new List<object>();
+            var rootNode = GetAllTreeNodes().Find(n => n.Parent == null);
             foreach (VirtualTreeNode n in GetAllTreeNodes())
             {
                 if (!output.Contains(n.Tag))
@@ -135,7 +136,7 @@ namespace XenAdminTests.CommandTests
                     GroupingTag gt = n.Tag as GroupingTag;
                     if (gt != null)
                     {
-                        yield return new SelectedItemCollection(new[] { new SelectedItem(gt) });
+                        yield return new SelectedItemCollection(new[] { new SelectedItem(gt, rootNode) });
                     }
                     else
                     {
@@ -156,7 +157,7 @@ namespace XenAdminTests.CommandTests
             }
             else
             {
-                PutInNavigationMode(NavigationPane.NavigationMode.Objects);
+                PutInNavigationMode(NativeMode);
 
                 nodes = new List<VirtualTreeNode>(objects.ConvertAll(o => FindInTree(o)));
 

@@ -90,7 +90,6 @@ namespace XenAdmin.Commands
         protected void RunAction(IEnumerable<VM> vms, string title, string startDescription, string endDescription,
             Dictionary<VM, List<VBD>> vbdsToEjectDict)
         {
-            MainWindowCommandInterface.AllowHistorySwitch();
             var actions = GetActions(vms, title, startDescription, endDescription, vbdsToEjectDict);
             RunMultipleActions(actions, title, startDescription, endDescription, true);
         }

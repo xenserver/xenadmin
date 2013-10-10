@@ -100,14 +100,6 @@ namespace XenAdmin
         internal readonly AdPage AdPage = new AdPage();
 
         private bool IgnoreTabChanges = false;
-        public bool AllowHistorySwitch
-        {
-            set
-            {
-                if (value)
-                    navigationPane.SwitchToNotificationsView(NotificationsSubMode.Events);
-            }
-        }
         private bool ToolbarsEnabled;
 
         private readonly Dictionary<IXenConnection, IList<Form>> activePoolWizards = new Dictionary<IXenConnection, IList<Form>>();
@@ -139,8 +131,7 @@ namespace XenAdmin
             InitializeComponent();
             SetMenuItemStartIndexes();
             Icon = Properties.Resources.AppIcon;
-
-            components.Add(SearchPage);
+            
             components.Add(NICPage);
             components.Add(VMStoragePage);
             components.Add(SrStoragePage);
@@ -153,8 +144,8 @@ namespace XenAdmin
             components.Add(HomePage);
             components.Add(WlbPage);
             components.Add(AdPage);
+            components.Add(SearchPage);
 
-            AddTabContents(SearchPage, TabPageSearch);
             AddTabContents(VMStoragePage, TabPageStorage);
             AddTabContents(SrStoragePage, TabPageSR);
             AddTabContents(NICPage, TabPageNICs);
@@ -171,6 +162,7 @@ namespace XenAdmin
             AddTabContents(WLBUpsellPage, TabPageWLBUpsell);
             AddTabContents(PhysicalStoragePage, TabPagePhysicalStorage);
             AddTabContents(AdPage, TabPageAD);
+            AddTabContents(SearchPage, TabPageSearch);
 
             TheTabControl.SelectedIndexChanged += TheTabControl_SelectedIndexChanged;
 
@@ -237,7 +229,6 @@ namespace XenAdmin
             {
                 foreach (ToolStripItem item in menu.DropDownItems)
                 {
-                    ToolStripMenuItem menuItem = item as ToolStripMenuItem;
                     if (item != null && item.Text == "PluginItemsPlaceHolder")
                     {
                         pluginMenuItemStartIndexes.Add(menu, menu.DropDownItems.IndexOf(item));
@@ -796,7 +787,6 @@ namespace XenAdmin
             {
                 Program.MainWindow.closeActiveWizards(host);
 
-                AllowHistorySwitch = true;
                 var action = new DisableHostAction(host);
                 action.Completed += action_Completed;
                 action.RunAsync();
@@ -1212,7 +1202,6 @@ namespace XenAdmin
 
             NewTabCount = 0;
             ShowTab(TabPageHome, !SearchMode && show_home);
-            ShowTab(TabPageSearch, (SearchMode || show_home || SearchTabVisible));
             ShowTab(TabPageGeneral, !multi && !SearchMode && (isVMSelected || (isHostSelected && (isHostLive || !is_connected)) || isPoolSelected || isSRSelected || isStorageLinkSelected));
             ShowTab(dmc_upsell ? TabPageBallooningUpsell : TabPageBallooning, !multi && !SearchMode && mr_or_greater && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
             ShowTab(TabPageStorage, !multi && !SearchMode && (isRealVMSelected || (isTemplateSelected && !selectedTemplateHasProvisionXML)));
@@ -1241,12 +1230,10 @@ namespace XenAdmin
             
             ShowTab(TabPageAD, !multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive) && george_or_greater);
 
-            // put plugin tabs before logs tab
-
             foreach (TabPageFeature f in pluginManager.GetAllFeatures<TabPageFeature>(f => !f.IsConsoleReplacement && !multi && f.ShowTab))
-            {
                 ShowTab(f.TabPage, true);
-            }
+
+            ShowTab(TabPageSearch, true);
 
             // N.B. Change NewTabs definition if you add more tabs here.
 
@@ -1255,42 +1242,6 @@ namespace XenAdmin
             // the tree using the keyboard.
 
             navigationPane.SaveAndRestoreTreeViewFocus(ChangeToNewTabs);
-        }
-
-        private bool SearchTabVisible
-        {
-            get
-            {
-                if (SelectionManager.Selection.Count == 1)
-                {
-                    Host host = SelectionManager.Selection[0].XenObject as Host;
-
-                    if (host != null)
-                    {
-                        return host.IsLive;
-                    }
-
-                    if (SelectionManager.Selection[0].XenObject is Pool)
-                    {
-                        return true;
-                    }
-
-                    if (SelectionManager.Selection[0].GroupingTag != null)
-                    {
-                        return true;
-                    }
-
-                    if (SelectionManager.Selection[0].XenObject is Folder)
-                    {
-                        return true;
-                    }
-                }
-                else if (SelectionManager.Selection.Count > 1)
-                {
-                    return true;
-                }
-                return false;
-            }
         }
 
         private readonly TabPage[] NewTabs = new TabPage[512];
@@ -1598,7 +1549,6 @@ namespace XenAdmin
 
         private void DoLicenseAction(Host host, string filePath)
         {
-            AllowHistorySwitch = true;
             ApplyLicenseAction action = new ApplyLicenseAction(host.Connection, host, filePath);
             ActionProgressDialog actionProgress = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
 
@@ -1619,21 +1569,16 @@ namespace XenAdmin
         /// </param>
         private void TheTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            AllowHistorySwitch = false;
             if (IgnoreTabChanges)
                 return;
 
             TabPage t = TheTabControl.SelectedTab;
 
             if (!SearchMode)
-            {
                 History.NewHistoryItem(new XenModelObjectHistoryItem(SelectionManager.Selection.FirstAsXenObject, t));
-            }
 
             if (t != TabPageBallooning)
-            {
                 BallooningPage.IsHidden();
-            }
 
             if (t == TabPageConsole)
             {
@@ -1683,14 +1628,40 @@ namespace XenAdmin
                 }
                 else if (t == TabPageSearch && !SearchMode)
                 {
-                    if (SelectionManager.Selection.First is GroupingTag)
+                    var rootNode = SelectionManager.Selection.RootNode;
+                    var rootNodeGrouping = rootNode == null ? null : rootNode.Tag as GroupingTag;
+                    var search = rootNode == null ? null : rootNode.Tag as Search;
+
+                    if (search != null)
                     {
-                        GroupingTag gt = (GroupingTag)SelectionManager.Selection.First;
-                        SearchPage.Search = Search.SearchForGroup(gt.Grouping, gt.Parent, gt.Group);
+                        SearchPage.Search = search;
+                    }
+                    else if (rootNodeGrouping != null)
+                    {
+                        var objectsView = rootNodeGrouping.Grouping as OrganizationViewObjects;
+                        var vappsView = rootNodeGrouping.Grouping as OrganizationViewVapps;
+
+                        if (vappsView != null)
+                        {
+                            SearchPage.Search = Search.SearchForVappGroup(rootNodeGrouping.Grouping,
+                                rootNodeGrouping.Parent, rootNodeGrouping.Group);
+                        }
+                        else if (objectsView != null)
+                        {
+                            GroupingTag gt = SelectionManager.Selection.First as GroupingTag
+                                             ?? SelectionManager.Selection.GroupAncestor;
+
+                            SearchPage.Search = Search.SearchForNonVappGroup(gt.Grouping, gt.Parent, gt.Group);
+                        }
+                        else
+                        {
+                            SearchPage.Search = Search.SearchForNonVappGroup(rootNodeGrouping.Grouping,
+                                  rootNodeGrouping.Parent, rootNodeGrouping.Group);
+                        }
                     }
                     else
                     {
-                        SearchPage.XenObject = SelectionManager.Selection.Count > 1 ? null : SelectionManager.Selection.FirstAsXenObject;
+                        SearchPage.XenObject = null;
                     }
                 }
                 else if (t == TabPageHA)
@@ -1718,27 +1689,17 @@ namespace XenAdmin
             }
 
             if (t == TabPagePeformance)
-            {
                 PerformancePage.ResumeGraph();
-            }
             else
-            {
                 PerformancePage.PauseGraph();
-            }
 
             if (t == TabPageSearch)
-            {
                 SearchPage.PanelShown();
-            }
             else
-            {
                 SearchPage.PanelHidden();
-            }
 
             if (t != null)
-            {
                 SetLastSelectedPage(SelectionManager.Selection.First, t);
-            }
         }
 
         private void UnpauseVNC(bool focus)
@@ -1879,12 +1840,13 @@ namespace XenAdmin
             bool currentTasks = false;
             foreach (ActionBase a in ConnectionsManager.History)
             {
-                if (!a.IsCompleted)
+                if (!(a is MeddlingAction) && !a.IsCompleted)
                 {
                     currentTasks = true;
                     break;
                 }
             }
+
             if (currentTasks)
             {
                 e.Cancel = true;
@@ -2482,6 +2444,44 @@ namespace XenAdmin
             }
         }
 
+        private void UpdateViewMenu(NavigationPane.NavigationMode mode)
+        {
+            //the order is the reverse from the order in which we want them to appear
+            var items = new ToolStripItem []
+                {
+                    toolStripSeparator24,
+                    ShowHiddenObjectsToolStripMenuItem,
+                    localStorageToolStripMenuItem,
+                    templatesToolStripMenuItem1,
+                    customTemplatesToolStripMenuItem
+                };
+
+            if (mode == NavigationPane.NavigationMode.Infrastructure)
+            {
+                foreach (var item in items)
+                {
+                    if (!viewToolStripMenuItem.DropDownItems.Contains(item))
+                        viewToolStripMenuItem.DropDownItems.Insert(0, item);
+                }
+            }
+            else if (mode == NavigationPane.NavigationMode.Notifications)
+            {
+                 foreach (var item in items)
+                    viewToolStripMenuItem.DropDownItems.Remove(item);
+            }
+            else
+            {
+                for (int i = 2; i < items.Length; i++)
+                    viewToolStripMenuItem.DropDownItems.Remove(items[i]);
+
+                for (int i = 0; i < 2; i++)
+                    if (!viewToolStripMenuItem.DropDownItems.Contains(items[i]))
+                        viewToolStripMenuItem.DropDownItems.Insert(0, items[i]);
+            }
+
+            pluginMenuItemStartIndexes[viewToolStripMenuItem] = viewToolStripMenuItem.DropDownItems.IndexOf(toolStripSeparator24) + 1;
+        }
+
         string GetTitleLabel(IXenObject xenObject)
         {
             string name = Helpers.GetName(xenObject);
@@ -2553,12 +2553,13 @@ namespace XenAdmin
                 TheTabControl.Visible = true;
                 alertPage.Visible = updatesPage.Visible = eventsPage.Visible = false;
             }
+
+            UpdateViewMenu(mode);
         }
 
         private void navigationPane_TreeNodeBeforeSelected()
         {
             SearchMode = false;
-            AllowHistorySwitch = false;
         }
 
         private void navigationPane_TreeNodeClicked()
@@ -2727,8 +2728,6 @@ namespace XenAdmin
                 ShowDisconnectedMessage(parent);
                 return false;
             }
-
-            Program.MainWindow.AllowHistorySwitch = true;
 
             return true;
         }

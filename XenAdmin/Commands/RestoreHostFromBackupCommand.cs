@@ -127,7 +127,6 @@ namespace XenAdmin.Commands
                     if (hostdialog.DialogResult != DialogResult.OK)
                         return;
                     host = hostdialog.TheHost;
-                    MainWindowCommandInterface.AllowHistorySwitch();
                     HostBackupRestoreAction action = new HostBackupRestoreAction(host, HostBackupRestoreAction.HostBackupRestoreType.restore, filepath);
                     action.Completed += RestoreAction_Completed;
                     action.RunAsync();
@@ -136,7 +135,6 @@ namespace XenAdmin.Commands
             }
             else
             {
-                MainWindowCommandInterface.AllowHistorySwitch();
                 HostBackupRestoreAction action = new HostBackupRestoreAction(host, HostBackupRestoreAction.HostBackupRestoreType.restore, filepath);
                 action.Completed += RestoreAction_Completed;
                 action.RunAsync();

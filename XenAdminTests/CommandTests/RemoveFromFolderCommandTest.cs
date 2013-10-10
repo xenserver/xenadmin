@@ -84,7 +84,7 @@ namespace XenAdminTests.CommandTests
 
         internal override Command CreateCommand()
         {
-            PutInNavigationMode(NavigationPane.NavigationMode.Folders);
+            PutInNavigationMode(NativeMode);
 
             _node = GetAllTreeNodes().Find(n => n.Tag is IXenObject && !(n.Tag is Folder) && n.Parent.Tag is Folder);
 
@@ -95,7 +95,7 @@ namespace XenAdminTests.CommandTests
 
         public void Test()
         {
-            foreach (IXenObject x in RunTest(() => (IXenObject)null))
+            foreach (IXenObject x in RunTest(() => GetAnyXenObject(o => Folders.GetFolder(o) != null)))
             {
                 MW(Command.Execute);
 

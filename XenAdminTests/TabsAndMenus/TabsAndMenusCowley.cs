@@ -29,6 +29,8 @@
  * SUCH DAMAGE.
  */
 
+using System.Linq;
+
 using NUnit.Framework;
 
 using XenAdmin.Controls.MainWindowControls;
@@ -56,16 +58,16 @@ namespace XenAdminTests.TabsAndMenus
         }
 
         private string[] XenCenterTabs = new[] { "Home", "Search" };
-        private string[] PoolTabs = new[] { "Search", "General", "Memory", "Storage", "Networking", "HA", "WLB", "Users" };
-        private string[] HostTabs = new[] { "Search", "General", "Memory", "Storage", "Networking", "NICs", "Console", "Performance", "Users" };
-        private string[] VMTabs = new[] { "General", "Memory", "Storage", "Networking", "Console", "Performance", "Snapshots" };
-        private string[] DefaultTemplateTabs = new[] { "General", "Memory", "Networking" };
-        private string[] OtherInstallMediaTabs = new[] { "General", "Memory", "Storage", "Networking" };
-        private string[] UserTemplateTabs = new[] { "General", "Memory", "Storage", "Networking" };
-        private string[] SRTabs = new[] { "General", "Storage" };
-        private string[] SnapshotTabs = new[] { "General", "Memory", "Networking" };
-        private string[] VDITabs = new string[] { };
-        private string[] NetworkTabs = new string[] { };
+        private string[] PoolTabs = new[] { "General", "Memory", "Storage", "Networking", "HA", "WLB", "Users", "Search" };
+        private string[] HostTabs = new[] { "General", "Memory", "Storage", "Networking", "NICs", "Console", "Performance", "Users", "Search" };
+        private string[] VMTabs = new[] { "General", "Memory", "Storage", "Networking", "Console", "Performance", "Snapshots", "Search" };
+        private string[] DefaultTemplateTabs = new[] { "General", "Memory", "Networking", "Search" };
+        private string[] OtherInstallMediaTabs = new[] { "General", "Memory", "Storage", "Networking", "Search" };
+        private string[] UserTemplateTabs = new[] { "General", "Memory", "Storage", "Networking", "Search" };
+        private string[] SRTabs = new[] { "General", "Storage", "Search" };
+        private string[] SnapshotTabs = new[] { "General", "Memory", "Networking", "Search" };
+        private string[] VDITabs = new [] { "Search" };
+        private string[] NetworkTabs = new [] { "Search" };
         private string[] GroupingTagTabs = new[] { "Search" };
         private string[] FolderTabs = new[] { "Search" };
 
@@ -202,10 +204,9 @@ namespace XenAdminTests.TabsAndMenus
             PutInNavigationMode(NavigationPane.NavigationMode.Objects);
             try
             {
-                foreach (Folder folder in GetAllXenObjects<Folder>())
-                {
+                var folders = GetAllXenObjects<Folder>().Where(f => !(string.IsNullOrEmpty(f.ToString())));
+                foreach (Folder folder in folders)
                     VerifyTabs(folder, FolderTabs);
-                }
             }
             finally
             {

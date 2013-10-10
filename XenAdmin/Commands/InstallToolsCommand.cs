@@ -127,7 +127,6 @@ namespace XenAdmin.Commands
                         ThreeButtonDialog.ButtonYes,
                         ThreeButtonDialog.ButtonNo).ShowDialog(Parent) == DialogResult.Yes)
                 {
-                    MainWindowCommandInterface.AllowHistorySwitch();
                     CreateCdDriveAction createDriveAction = new CreateCdDriveAction(vm, true,NewDiskDialog.ShowMustRebootBoxCD,NewDiskDialog.ShowVBDWarningBox);
                     new ActionProgressDialog(createDriveAction, ProgressBarStyle.Marquee).ShowDialog(Parent);
 
@@ -143,7 +142,6 @@ namespace XenAdmin.Commands
                 DialogResult dr = new InstallToolsWarningDialog(vm.Connection).ShowDialog(Parent);
                 if (dr == DialogResult.Yes)
                 {
-                    MainWindowCommandInterface.AllowHistorySwitch();
                     InstallPVToolsAction installToolsAction = new InstallPVToolsAction( vm, XSToolsSRNotFound, Properties.Settings.Default.ShowHiddenVMs);
                     installToolsAction.Completed += InstallToolsActionCompleted;
 
@@ -186,8 +184,6 @@ namespace XenAdmin.Commands
                     ThreeButtonDialog.ButtonYes,
                     ThreeButtonDialog.ButtonNo).ShowDialog(Parent) == DialogResult.Yes)
                 {
-                    MainWindowCommandInterface.AllowHistorySwitch();
-
                     foreach (VM vm in vms)
                     {
                         if (CanExecute(vm) && vm.FindVMCDROM() == null)
@@ -208,8 +204,6 @@ namespace XenAdmin.Commands
 
                 if (new InstallToolsWarningDialog(null, true, vmConnections).ShowDialog(Parent) == DialogResult.Yes)
                 {
-                    MainWindowCommandInterface.AllowHistorySwitch();
-
                     foreach (VM vm in vms)
                     {
                         InstallPVToolsAction installToolsAction = new InstallPVToolsAction(vm, XSToolsSRNotFound, Properties.Settings.Default.ShowHiddenVMs);

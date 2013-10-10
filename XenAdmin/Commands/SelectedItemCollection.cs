@@ -33,6 +33,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Collections.ObjectModel;
+
+using XenAdmin.Controls;
+
 using XenAPI;
 using XenAdmin.Core;
 using XenAdmin.Network;
@@ -422,6 +425,29 @@ namespace XenAdmin.Commands
         }
 
         /// <summary>
+        /// Gets the common group ancestor for the selection. If the selected
+        /// items have different group ancestors then null is returned.
+        /// </summary>
+        public GroupingTag GroupAncestor
+        {
+            get
+            {
+                GroupingTag groupAncestor = null;
+                for (int i = 0; i < Count; i++)
+                {
+                    if (this[i].GroupAncestor == null)
+                        return null;
+                    
+                    if (i > 0 && this[i].GroupAncestor != groupAncestor)
+                        return null;
+
+                    groupAncestor = this[i].GroupAncestor;
+                }
+                return groupAncestor;
+            }
+        }
+
+        /// <summary>
         /// Gets the common host ancestor for the selection without using the individual objects' HostAncestor.
         /// </summary>
         public Host HostAncestorFromConnection
@@ -466,6 +492,14 @@ namespace XenAdmin.Commands
             }
 
             return connection;
-        } 
+        }
+
+        public VirtualTreeNode RootNode
+        {
+            get
+            {
+                return Items.Count > 0 ? Items[0].RootNode : null;
+            }
+        }
     }
 }

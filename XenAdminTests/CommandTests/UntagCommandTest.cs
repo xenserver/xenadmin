@@ -85,13 +85,13 @@ namespace XenAdminTests.CommandTests
 
         internal override Command CreateCommand()
         {
-            PutInNavigationMode(NavigationPane.NavigationMode.Tags);
+            PutInNavigationMode(NativeMode);
 
             _node = GetAllTreeNodes().Find(delegate(VirtualTreeNode n)
             {
                 GroupingTag groupingTag = n.Parent == null ? null : n.Parent.Tag as GroupingTag;
 
-                if (n.Tag is IXenObject && groupingTag != null && (string)groupingTag.Grouping.GroupingName == "Tags")
+                if (n.Tag is IXenObject && groupingTag != null && groupingTag.Grouping.GroupingName == "Tags")
                 {
                     _tag = (string)groupingTag.Group;
                     return true;
@@ -107,7 +107,11 @@ namespace XenAdminTests.CommandTests
 
         public void Test()
         {
-            foreach (IXenObject x in RunTest(() => (IXenObject)null))
+            foreach (IXenObject x in RunTest(() => GetAnyXenObject(o =>
+                {
+                    string[] tags = o.Get("tags") as string[];
+                    return tags != null && tags.Length > 0;
+                })))
             {
                 MW(Command.Execute);
 
@@ -118,7 +122,7 @@ namespace XenAdminTests.CommandTests
                 Assert.IsNotNull(nodeXenObject);
 
 
-                MWWaitFor(() => !Tags.GetTagList(nodeXenObject).Contains(_tag), "Item " + nodeXenObject + " not removed from folder.");
+                MWWaitFor(() => !Tags.GetTagList(nodeXenObject).Contains(_tag), "Item " + nodeXenObject + " was not untagged.");
             }
         }
     }

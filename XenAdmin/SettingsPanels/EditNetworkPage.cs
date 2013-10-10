@@ -643,7 +643,6 @@ namespace XenAdmin.SettingsPanels
                     a.Host = h;
                     break;
                 }
-                Program.MainWindow.AllowHistorySwitch = true;
                 actions.Add(a);
             }
 

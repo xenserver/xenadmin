@@ -33,6 +33,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
+
+using XenAdmin;
 using XenAdmin.Controls;
 using XenAdmin.Controls.MainWindowControls;
 
@@ -71,9 +73,7 @@ namespace XenAdminTests.TreeTests
         {
             ConnectToStateDBs("state1.xml");
             PutInNavigationMode(NavigationPane.NavigationMode.Objects);
-
-            CheckExpandedNodes(n => n.Tag == null || n.Text == "Types", "Expanded nodes incorrect.");
+            CheckExpandedNodes(n => n.Text == "Objects by Type", "Expanded nodes incorrect.");
         }
-
     }
 }

@@ -40,10 +40,9 @@ namespace XenAdmin.XenSearch
 {
     internal class TreeNodeGroupAcceptor : IAcceptGroups
     {
-        protected readonly IHaveNodes parent;
-        protected readonly bool? needToBeExpanded;
-
-        protected int index = 0;
+        private readonly IHaveNodes parent;
+        private readonly bool? needToBeExpanded;
+        private int index;
 
         public TreeNodeGroupAcceptor(IHaveNodes parent, bool? needToBeExpanded)
         {   
@@ -51,37 +50,20 @@ namespace XenAdmin.XenSearch
             this.needToBeExpanded = needToBeExpanded;
         }
 
-        public virtual IAcceptGroups Add(Grouping grouping, Object group, int indent)
+        public IAcceptGroups Add(Grouping grouping, Object group, int indent)
         {
             if (group == null)
                 return null;
 
-            bool? expandNode = ShouldExpandNode(group);
-            VirtualTreeNode node = AddNode(index, grouping, group);
+            VirtualTreeNode node = new VirtualTreeNode(group.ToString());
+            node.Tag = group;
+            parent.Nodes.Insert(index, node);
             index++;
 
-            return newAcceptor(node, expandNode);
+            return new TreeNodeGroupAcceptor(node, null);
         }
 
-        protected virtual bool? ShouldExpandNode(Object group)
-        {
-            return null;
-        }
-
-        protected virtual VirtualTreeNode AddNode(int index, Grouping grouping, Object obj)
-        {
-            VirtualTreeNode node = new VirtualTreeNode(obj.ToString());
-            node.Tag = obj;
-            parent.Nodes.Insert(index, node);
-            return node;
-        }
-
-        protected virtual TreeNodeGroupAcceptor newAcceptor(VirtualTreeNode node, bool? expanded)
-        {
-            return new TreeNodeGroupAcceptor(node, expanded);
-        }
-
-        public virtual void FinishedInThisGroup(bool defaultExpand)
+        public void FinishedInThisGroup(bool defaultExpand)
         {
             if (needToBeExpanded.HasValue ? needToBeExpanded.Value : defaultExpand)
                 parent.Expand();

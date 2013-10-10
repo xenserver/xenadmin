@@ -143,7 +143,6 @@ namespace XenAdmin.Commands
             }
 
             MainWindowCommandInterface.SelectObjectInTree(_pool);
-            MainWindowCommandInterface.AllowHistorySwitch();
 
             List<AsyncAction> actions = new List<AsyncAction>();
             foreach (Host host in _hosts)

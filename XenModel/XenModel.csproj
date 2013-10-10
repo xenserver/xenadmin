@@ -318,7 +318,6 @@
     <Compile Include="XenSearch\GroupAlg.cs" />
     <Compile Include="XenSearch\GroupingTypes.cs" />
     <Compile Include="XenSearch\MetricUpdater.cs" />
-    <Compile Include="XenSearch\OrganizationalView.cs" />
     <Compile Include="XenSearch\PropertyAccessorHelper.cs" />
     <Compile Include="XenSearch\Query.cs" />
     <Compile Include="XenSearch\QueryScope.cs" />

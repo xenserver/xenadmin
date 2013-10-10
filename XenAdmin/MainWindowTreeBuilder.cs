@@ -52,13 +52,19 @@ namespace XenAdmin
         private object _highlightedDragTarget;
         private string _lastSearchText = string.Empty;
         private NavigationPane.NavigationMode _lastSearchMode;
-        private readonly List<VirtualTreeNode.PersistenceInfo> _infrastructureViewExpandedTags = new List<VirtualTreeNode.PersistenceInfo>();
-        private readonly List<VirtualTreeNode.PersistenceInfo> _objectViewExpandedTags = new List<VirtualTreeNode.PersistenceInfo>();
+        private readonly List<VirtualTreeNode.PersistenceInfo> _infraViewExpanded = new List<VirtualTreeNode.PersistenceInfo>();
+        private readonly List<VirtualTreeNode.PersistenceInfo> _objectViewExpanded = new List<VirtualTreeNode.PersistenceInfo>();
         private readonly List<VirtualTreeNode.PersistenceInfo> _tagsViewExpanded = new List<VirtualTreeNode.PersistenceInfo>();
         private readonly List<VirtualTreeNode.PersistenceInfo> _foldersViewExpanded = new List<VirtualTreeNode.PersistenceInfo>();
         private readonly List<VirtualTreeNode.PersistenceInfo> _fieldsViewExpanded = new List<VirtualTreeNode.PersistenceInfo>();
         private readonly List<VirtualTreeNode.PersistenceInfo> _vappsViewExpanded = new List<VirtualTreeNode.PersistenceInfo>();
         private bool _rootExpanded;
+
+        private readonly OrganizationViewFields viewFields = new OrganizationViewFields();
+        private readonly OrganizationViewFolders viewFolders = new OrganizationViewFolders();
+        private readonly OrganizationViewTags viewTags = new OrganizationViewTags();
+        private readonly OrganizationViewObjects viewObjects = new OrganizationViewObjects();
+        private readonly OrganizationViewVapps viewVapps = new OrganizationViewVapps();
 
         public MainWindowTreeBuilder(FlickerFreeTreeView treeView)
         {
@@ -68,57 +74,6 @@ namespace XenAdmin
             _treeView = treeView;
             _treeViewForeColor = treeView.ForeColor;
             _treeViewBackColor = treeView.BackColor;
-
-            SetDefaultObjectViewExpandedNodes();
-            SetTagsViewExpandedNodes();
-            SetFoldersViewExpandedNodes();
-            SetCustomFieldsViewExpandedNodes();
-            SetVappsViewExpandedNodes();
-        }
-
-        private void SetDefaultObjectViewExpandedNodes()
-        {
-            VirtualTreeNode dummyRootNode = new VirtualTreeNode(Messages.VIEW_OBJECTS);
-            OrganizationalView.PopulateObjectView(CreateGroupAcceptor(dummyRootNode), TreeSearch.DefaultTreeSearch);
-
-            foreach (VirtualTreeNode n in dummyRootNode.Nodes)
-                _objectViewExpandedTags.Add(n.GetPersistenceInfo());
-        }
-
-        private void SetTagsViewExpandedNodes()
-        {
-            VirtualTreeNode dummyRootNode = new VirtualTreeNode(Messages.TAGS);
-            OrganizationalView.PopulateTagsView(CreateGroupAcceptor(dummyRootNode), TreeSearch.DefaultTreeSearch);
-
-            foreach (VirtualTreeNode n in dummyRootNode.Nodes)
-                _tagsViewExpanded.Add(n.GetPersistenceInfo());
-        }
-
-        private void SetFoldersViewExpandedNodes()
-        {
-            VirtualTreeNode dummyRootNode = new VirtualTreeNode(Messages.FOLDERS);
-            OrganizationalView.PopulateFoldersView(CreateGroupAcceptor(dummyRootNode), TreeSearch.DefaultTreeSearch);
-
-            foreach (VirtualTreeNode n in dummyRootNode.Nodes)
-                _foldersViewExpanded.Add(n.GetPersistenceInfo());
-        }
-
-        private void SetCustomFieldsViewExpandedNodes()
-        {
-            VirtualTreeNode dummyRootNode = new VirtualTreeNode(Messages.CUSTOM_FIELDS);
-            OrganizationalView.PopulateCustomFieldsView(CreateGroupAcceptor(dummyRootNode), TreeSearch.DefaultTreeSearch);
-
-            foreach (VirtualTreeNode n in dummyRootNode.Nodes)
-                _fieldsViewExpanded.Add(n.GetPersistenceInfo());
-        }
-
-        private void SetVappsViewExpandedNodes()
-        {
-            VirtualTreeNode dummyRootNode = new VirtualTreeNode(Messages.VM_APPLIANCES);
-            OrganizationalView.PopulateVappsView(CreateGroupAcceptor(dummyRootNode), TreeSearch.DefaultTreeSearch);
-
-            foreach (VirtualTreeNode n in dummyRootNode.Nodes)
-                _vappsViewExpanded.Add(n.GetPersistenceInfo());
         }
 
         /// <summary>
@@ -164,7 +119,7 @@ namespace XenAdmin
             }
         }
 
-        internal void ExpandSelection()
+        private void ExpandSelection()
         {
             foreach (var node in _treeView.SelectedNodes)
             {
@@ -174,56 +129,57 @@ namespace XenAdmin
 
         public VirtualTreeNode CreateNewRootNode(Search search, NavigationPane.NavigationMode mode)
         {
+            IAcceptGroups groupAcceptor;
             VirtualTreeNode newRootNode;
-            MainWindowTreeNodeGroupAcceptor groupAcceptor;
 
             switch (mode)
             {
                 case NavigationPane.NavigationMode.Objects:
-                    newRootNode = new VirtualTreeNode(Messages.VIEW_OBJECTS);
+                    newRootNode = viewObjects.RootNode;
                     groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
-                    OrganizationalView.PopulateObjectView(groupAcceptor, search);
+                    viewObjects.Populate(search, groupAcceptor);
                     break;
                 case NavigationPane.NavigationMode.Tags:
-                    newRootNode = new VirtualTreeNode(Messages.TAGS);
+                    newRootNode = viewTags.RootNode;
                     groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
-                    OrganizationalView.PopulateTagsView(groupAcceptor, search);
+                    viewTags.Populate(search, groupAcceptor);
                     break;
                 case NavigationPane.NavigationMode.Folders:
-                    newRootNode = new VirtualTreeNode(Messages.FOLDERS);
+                    newRootNode = viewFolders.RootNode;
                     groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
-                    OrganizationalView.PopulateFoldersView(groupAcceptor, search);
+                    viewFolders.Populate(search, groupAcceptor);
                     break;
                 case NavigationPane.NavigationMode.CustomFields:
-                    newRootNode = new VirtualTreeNode(Messages.CUSTOM_FIELDS);
+                    newRootNode = viewFields.RootNode;
                     groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
-                    OrganizationalView.PopulateCustomFieldsView(groupAcceptor, search);
+                    viewFields.Populate(search, groupAcceptor);
                     break;
                 case NavigationPane.NavigationMode.vApps:
-                    newRootNode = new VirtualTreeNode(Messages.VM_APPLIANCES);
+                    newRootNode = viewVapps.RootNode;
                     groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
-                    OrganizationalView.PopulateVappsView(groupAcceptor, search);
+                    viewVapps.Populate(search, groupAcceptor);
                     break;
                 case NavigationPane.NavigationMode.SavedSearch:
                     Util.ThrowIfParameterNull(search, "search");
-                    newRootNode = new VirtualTreeNode(search.Name);
+                    newRootNode = new VirtualTreeNode(search.Name)
+                        {
+                            Tag = search,
+                            ImageIndex = search.DefaultSearch
+                                             ? (int)Icons.DefaultSearch
+                                             : (int)Icons.Search
+                        };
                     groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
                     search.PopulateAdapters(groupAcceptor);
                     break;
-                default:
+                default://includes Infrastructure and Notifications
                     Util.ThrowIfParameterNull(search, "search");
-                    newRootNode = new VirtualTreeNode("XenCenter");
+                    newRootNode = new VirtualTreeNode("XenCenter") { ImageIndex = (int)Icons.Home };
                     groupAcceptor = CreateGroupAcceptor(_highlightedDragTarget, newRootNode);
                     search.PopulateAdapters(groupAcceptor);
                     break;
             }
-
+            
             return newRootNode;
-        }
-
-        private MainWindowTreeNodeGroupAcceptor CreateGroupAcceptor(VirtualTreeNode parent)
-        {
-            return CreateGroupAcceptor(null, parent);
         }
 
         private MainWindowTreeNodeGroupAcceptor CreateGroupAcceptor(object dragTarget, VirtualTreeNode parent)
@@ -231,28 +187,22 @@ namespace XenAdmin
             return new MainWindowTreeNodeGroupAcceptor(dragTarget, _treeViewForeColor, _treeViewBackColor, parent);
         }
 
-        private void AssignList(ref List<VirtualTreeNode.PersistenceInfo> list, NavigationPane.NavigationMode mode)
+        private List<VirtualTreeNode.PersistenceInfo> AssignList(NavigationPane.NavigationMode mode)
         {
             switch (mode)
             {
                 case NavigationPane.NavigationMode.Objects:
-                    list = _objectViewExpandedTags;
-                    break;
+                    return _objectViewExpanded;
                 case NavigationPane.NavigationMode.Tags:
-                    list = _tagsViewExpanded;
-                    break;
+                    return _tagsViewExpanded;
                 case NavigationPane.NavigationMode.Folders:
-                    list = _foldersViewExpanded;
-                    break;
+                    return _foldersViewExpanded;
                 case NavigationPane.NavigationMode.CustomFields:
-                    list = _fieldsViewExpanded;
-                    break;
+                    return _fieldsViewExpanded;
                 case NavigationPane.NavigationMode.vApps:
-                    list = _vappsViewExpanded;
-                    break;
+                    return _vappsViewExpanded;
                 default:
-                    list = _infrastructureViewExpandedTags;
-                    break;
+                    return _infraViewExpanded;
             }
         }
 
@@ -261,16 +211,15 @@ namespace XenAdmin
             // only persist the expansion state of nodes if there isn't an active search.
             //If there's a search then we're just going to expand everything later.
 
-            // also because we wan't to restore the nodes back to their original state
+            // also because we want to restore the nodes back to their original state
             //after a search is removed, do the check on _lastSearchText and _lastSearchMode.
 
             if (searchText.Length == 0 && _lastSearchText.Length == 0 && _lastSearchMode != NavigationPane.NavigationMode.SavedSearch)
             {
-                List < VirtualTreeNode.PersistenceInfo > list = null;
-                AssignList(ref list, _lastSearchMode);
+                var list = AssignList(_lastSearchMode);
                 list.Clear();
 
-                foreach (VirtualTreeNode node in _treeView.AllNodes.Where(n => n.Tag != null && n.IsExpanded))
+                foreach (VirtualTreeNode node in _treeView.AllNodes.Where(n => n.Tag != null && n.Parent != null && n.IsExpanded))
                     list.Add(node.GetPersistenceInfo());
             }
 
@@ -290,11 +239,10 @@ namespace XenAdmin
             if (searchText.Length == 0 && searchMode != NavigationPane.NavigationMode.SavedSearch)
             {
                 // if there isn't a search persist the user's expanded nodes.
-                List < VirtualTreeNode.PersistenceInfo > list = null;
-                AssignList(ref list, searchMode);
+                var list = AssignList(searchMode);
 
                 var allNodes = new List<VirtualTreeNode>(_treeView.AllNodes);
-                
+
                 foreach (VirtualTreeNode.PersistenceInfo info in list)
                 {
                     VirtualTreeNode match;
@@ -303,9 +251,8 @@ namespace XenAdmin
                     if (_treeView.TryExactMatch(info.Path, out match) >= info.Path.Count)
                     {
                         if (!match.IsExpanded)
-                        {
                             match.Expand();
-                        }
+
                         allNodes.Remove(match);
                         continue;
                     }
@@ -317,9 +264,8 @@ namespace XenAdmin
                         if (match != null)
                         {
                             if (!match.IsExpanded)
-                            {
                                 match.Expand();
-                            }
+
                             allNodes.Remove(match);
                         }
                     }
@@ -328,23 +274,19 @@ namespace XenAdmin
                 // collapse everything else
                 foreach (VirtualTreeNode n in allNodes)
                 {
-                    if (n.Tag != null && n.IsExpanded)
-                    {
+                    if (n.Tag != null && n.Parent != null && n.IsExpanded)
                         n.Collapse();
-                    }
                 }
 
                 // special case for root node
                 if (_rootExpanded)
-                {
                     _treeView.Nodes[0].Expand();
-                }
             }
         }
 
         #region MainWindowTreeNodeGroupAcceptor class
 
-        private class MainWindowTreeNodeGroupAcceptor : IAcceptGroups
+        public class MainWindowTreeNodeGroupAcceptor : IAcceptGroups
         {
             private readonly VirtualTreeNode _parent;
             private readonly Color _treeViewForeColor;
@@ -352,7 +294,8 @@ namespace XenAdmin
             private readonly object _highlightedDragTarget;
             private int _index;
 
-            public MainWindowTreeNodeGroupAcceptor(object highlightedDragTarget, Color treeViewForeColor, Color treeViewBackColor, VirtualTreeNode parent)
+            public MainWindowTreeNodeGroupAcceptor(object highlightedDragTarget,
+                Color treeViewForeColor, Color treeViewBackColor, VirtualTreeNode parent)
             {
                 _parent = parent;
                 _treeViewForeColor = treeViewForeColor;
@@ -368,195 +311,196 @@ namespace XenAdmin
 
             public IAcceptGroups Add(Grouping grouping, Object group, int indent)
             {
-                if (group != null)
+                if (group == null)
+                    return null;
+
+                VirtualTreeNode node;
+
+                if (group is Pool)
                 {
-                    VirtualTreeNode node;
-
-                    if (group is Pool)
-                    {
-                        node = AddPoolNode(_parent, _index, (Pool)group);
-                    }
-                    else if (group is Host)
-                    {
-                        node = AddHostNode(_parent, _index, (Host)group);
-                    }
-                    else if (group is VM)
-                    {
-                        node = AddVMNode(_parent, _index, (VM)group);
-                    }
-					else if (group is VM_appliance)
-					{
-						node = AddVmApplianceNode(_parent, _index, (VM_appliance)group);
-					}
-					else if (group is SR)
-                    {
-                        node = AddSRNode(_parent, _index, (SR)group);
-                    }
-                    else if (group is XenAPI.Network)
-                    {
-                        node = AddNetworkNode(_parent, _index, (XenAPI.Network)group);
-                    }
-                    else if (group is VDI)
-                    {
-                        node = AddVDINode(_parent, _index, (VDI)group);
-                    }
-                    else if (group is Folder)
-                    {
-                        node = AddFolderNode(_parent, _index, (Folder)group);
-                    }
-                    else if (group is StorageLinkServer)
-                    {
-                        node = AddStorageLinkServerNode(_parent, _index, (StorageLinkServer)group);
-                    }
-                    else if (group is StorageLinkSystem)
-                    {
-                        node = AddStorageLinkSystemNode(_parent, _index, (StorageLinkSystem)group);
-                    }
-                    else if (group is StorageLinkPool)
-                    {
-                        node = AddStorageLinkPoolNode(_parent, _index, (StorageLinkPool)group);
-                    }
-                    else if (group is StorageLinkVolume)
-                    {
-                        node = AddStorageLinkVolumeNode(_parent, _index, (StorageLinkVolume)group);
-                    }
-                    else if (group is StorageLinkRepository)
-                    {
-                        node = AddStorageLinkRepositoryNode(_parent, _index, (StorageLinkRepository)group);
-                    }
-                    else
-                    {
-                        node = AddNode(_parent, _index, grouping.GetGroupName(group), grouping.GetGroupIcon(group), false, new GroupingTag(grouping, FindGroupingParent(_parent.Tag), group));
-
-                        if (group is DateTime)
-                            Program.BeginInvoke(Program.MainWindow, () => { node.Text = HelpersGUI.DateTimeToString((DateTime)group, Messages.DATEFORMAT_DMY_HMS, true); });   // annoying: has to be on the event thread because of CA-46983
-                    }
-
-                    _index++;
-
-                    return new MainWindowTreeNodeGroupAcceptor(_highlightedDragTarget, _treeViewForeColor, _treeViewBackColor, node);
+                    node = AddPoolNode((Pool)group);
                 }
-                return null;
+                else if (group is Host)
+                {
+                    node = AddHostNode((Host)group);
+                }
+                else if (group is VM)
+                {
+                    node = AddVMNode((VM)group);
+                }
+                else if (group is VM_appliance)
+                {
+                    node = AddVmApplianceNode((VM_appliance)group);
+                }
+                else if (group is SR)
+                {
+                    node = AddSRNode((SR)group);
+                }
+                else if (group is XenAPI.Network)
+                {
+                    node = AddNetworkNode((XenAPI.Network)group);
+                }
+                else if (group is VDI)
+                {
+                    node = AddVDINode((VDI)group);
+                }
+                else if (group is Folder)
+                {
+                    node = AddFolderNode((Folder)group);
+                }
+                else if (group is StorageLinkServer)
+                {
+                    node = AddStorageLinkServerNode((StorageLinkServer)group);
+                }
+                else if (group is StorageLinkSystem)
+                {
+                    node = AddStorageLinkSystemNode((StorageLinkSystem)group);
+                }
+                else if (group is StorageLinkPool)
+                {
+                    node = AddStorageLinkPoolNode((StorageLinkPool)group);
+                }
+                else if (group is StorageLinkVolume)
+                {
+                    node = AddStorageLinkVolumeNode((StorageLinkVolume)group);
+                }
+                else if (group is StorageLinkRepository)
+                {
+                    node = AddStorageLinkRepositoryNode((StorageLinkRepository)group);
+                }
+                else
+                {
+                    node = AddNode(grouping.GetGroupName(group), grouping.GetGroupIcon(group),
+                        false, new GroupingTag(grouping, GetGroupingTagFromNode(_parent), group));
+
+                    if (group is DateTime)
+                        Program.BeginInvoke(Program.MainWindow, () => { node.Text = HelpersGUI.DateTimeToString((DateTime)group, Messages.DATEFORMAT_DMY_HMS, true); }); // annoying: has to be on the event thread because of CA-46983
+                }
+
+                return new MainWindowTreeNodeGroupAcceptor(_highlightedDragTarget, _treeViewForeColor, _treeViewBackColor, node);
             }
 
             #endregion
 
-            private static object FindGroupingParent(object parentTag)
+            private static object GetGroupingTagFromNode(VirtualTreeNode node)
             {
-                if (parentTag is GroupingTag)
+                if (node == null)
+                    return null;
+
+                GroupingTag gt = node.Tag as GroupingTag;
+                if (gt != null)
                 {
-                    GroupingTag gt = (GroupingTag)parentTag;
                     // gt.Grouping is OrganizationalView means that we're at the Tags/Types/Custom Fields level.
                     // Custom field keys are the next level down, and values are the one after that.
                     return gt.Grouping is OrganizationalView ? null : gt.Group;
                 }
-                else
-                {
-                    return parentTag;
-                }
+
+                return node.Tag;
             }
 
-            private VirtualTreeNode AddStorageLinkServerNode(VirtualTreeNode parent, int index, StorageLinkServer storageLinkServer)
+            private VirtualTreeNode AddStorageLinkServerNode(StorageLinkServer storageLinkServer)
             {
-                return AddNode(parent, index, storageLinkServer.Name, Images.GetIconFor(storageLinkServer), false, storageLinkServer);
+                return AddNode(storageLinkServer.Name, Images.GetIconFor(storageLinkServer), false, storageLinkServer);
             }
 
-            private VirtualTreeNode AddStorageLinkSystemNode(VirtualTreeNode parent, int index, StorageLinkSystem storageLinkSystem)
+            private VirtualTreeNode AddStorageLinkSystemNode(StorageLinkSystem storageLinkSystem)
             {
-                return AddNode(parent, index, Helpers.GetName(storageLinkSystem), Images.GetIconFor(storageLinkSystem), false, storageLinkSystem);
+                return AddNode(Helpers.GetName(storageLinkSystem), Images.GetIconFor(storageLinkSystem), false, storageLinkSystem);
             }
 
-            private VirtualTreeNode AddStorageLinkPoolNode(VirtualTreeNode parent, int index, StorageLinkPool storageLinkPool)
+            private VirtualTreeNode AddStorageLinkPoolNode(StorageLinkPool storageLinkPool)
             {
-                return AddNode(parent, index, Helpers.GetName(storageLinkPool), Images.GetIconFor(storageLinkPool), false, storageLinkPool);
+                return AddNode(Helpers.GetName(storageLinkPool), Images.GetIconFor(storageLinkPool), false, storageLinkPool);
             }
 
-            private VirtualTreeNode AddStorageLinkVolumeNode(VirtualTreeNode parent, int index, StorageLinkVolume storageLinkVolume)
+            private VirtualTreeNode AddStorageLinkVolumeNode(StorageLinkVolume storageLinkVolume)
             {
                 string name = storageLinkVolume.FriendlyName;
+
                 VDI vdi = storageLinkVolume.VDI(ConnectionsManager.XenConnectionsCopy);
-
                 if (vdi != null)
-                {
                     name = string.Format("{0} ({1})", vdi.Name, name);
-                }
 
-                return AddNode(parent, index, name, Images.GetIconFor(storageLinkVolume), false, storageLinkVolume);
+                return AddNode(name, Images.GetIconFor(storageLinkVolume), false, storageLinkVolume);
             }
 
-            private VirtualTreeNode AddStorageLinkRepositoryNode(VirtualTreeNode parent, int index, StorageLinkRepository storageLinkRepository)
+            private VirtualTreeNode AddStorageLinkRepositoryNode(StorageLinkRepository storageLinkRepository)
             {
                 string name = storageLinkRepository.Name;
                 StorageLinkPool pool = storageLinkRepository.StorageLinkPool;
 
                 if (pool != null && !string.IsNullOrEmpty(pool.ParentStorageLinkPoolId))
-                {
                     name = string.Format("{0} ({1})", storageLinkRepository.Name, pool);
-                }
-
-                return AddNode(parent, index, name, Images.GetIconFor(storageLinkRepository), false, storageLinkRepository);
+                
+                return AddNode(name, Images.GetIconFor(storageLinkRepository), false, storageLinkRepository);
             }
 
-            private VirtualTreeNode AddPoolNode(VirtualTreeNode parent, int index, Pool pool)
+            private VirtualTreeNode AddPoolNode(Pool pool)
             {
-                return AddNode(parent, index, Helpers.GetName(pool), Images.GetIconFor(pool), false, pool);
+                return AddNode(Helpers.GetName(pool), Images.GetIconFor(pool), false, pool);
             }
 
-            private VirtualTreeNode AddVMNode(VirtualTreeNode parent, int index, VM vm)
+            private VirtualTreeNode AddVMNode(VM vm)
             {
                 bool hidden = vm.IsHidden;
                 string name = hidden ? String.Format(Messages.X_HIDDEN, vm.Name) : vm.Name;
-                return AddNode(parent, index, name, Images.GetIconFor(vm), hidden, vm);
+                return AddNode(name, Images.GetIconFor(vm), hidden, vm);
             }
 
-			private VirtualTreeNode AddVmApplianceNode(VirtualTreeNode parent, int index, VM_appliance appliance)
+			private VirtualTreeNode AddVmApplianceNode(VM_appliance appliance)
 			{
-				return AddNode(parent, index, appliance.Name, Images.GetIconFor(appliance), false, appliance);
+				return AddNode(appliance.Name, Images.GetIconFor(appliance), false, appliance);
 			}
 
-            private VirtualTreeNode AddHostNode(VirtualTreeNode parent, int index, Host host)
+            private VirtualTreeNode AddHostNode(Host host)
             {
-                return AddNode(parent, index, host.Name, Images.GetIconFor(host), false, host);
+                return AddNode(host.Name, Images.GetIconFor(host), false, host);
             }
 
-            private VirtualTreeNode AddSRNode(VirtualTreeNode parent, int index, SR sr)
+            private VirtualTreeNode AddSRNode(SR sr)
             {
                 bool hidden = sr.IsHidden;
                 String name = hidden ? String.Format(Messages.X_HIDDEN, sr.NameWithoutHost) : sr.NameWithoutHost;
-                return AddNode(parent, index, name, Images.GetIconFor(sr), hidden, sr);
+                return AddNode(name, Images.GetIconFor(sr), hidden, sr);
             }
 
-            private VirtualTreeNode AddNetworkNode(VirtualTreeNode parent, int index, XenAPI.Network network)
+            private VirtualTreeNode AddNetworkNode(XenAPI.Network network)
             {
                 bool hidden = network.IsHidden;
                 bool slave = network.IsSlave;
                 string rawName = network.Name;
-                String name = slave ? String.Format(Messages.NIC_SLAVE, rawName) :
-                    hidden ? String.Format(Messages.X_HIDDEN, rawName) :
-                    rawName;
-                return AddNode(parent, index, name, Images.GetIconFor(network), slave || hidden, network);
+                String name = slave
+                                  ? String.Format(Messages.NIC_SLAVE, rawName)
+                                  : hidden
+                                        ? String.Format(Messages.X_HIDDEN, rawName)
+                                        : rawName;
+                return AddNode(name, Images.GetIconFor(network), slave || hidden, network);
             }
 
-            private VirtualTreeNode AddVDINode(VirtualTreeNode parent, int index, VDI vdi)
+            private VirtualTreeNode AddVDINode(VDI vdi)
             {
                 String name = String.IsNullOrEmpty(vdi.Name) ? Messages.NO_NAME : vdi.Name;
-                return AddNode(parent, index, name, Images.GetIconFor(vdi), false, vdi);
+                return AddNode(name, Images.GetIconFor(vdi), false, vdi);
             }
 
-            private VirtualTreeNode AddFolderNode(VirtualTreeNode parent, int index, Folder folder)
+            private VirtualTreeNode AddFolderNode(Folder folder)
             {
-                return AddNode(parent, index, folder.Name, Images.GetIconFor(folder), false, folder);
+                return AddNode(folder.Name, Images.GetIconFor(folder), false, folder);
             }
 
-            private VirtualTreeNode AddNode(VirtualTreeNode parent, int index, string name, Icons icon, bool grayed, object obj)
+            private VirtualTreeNode AddNode(string name, Icons icon, bool grayed, object obj)
             {
-                VirtualTreeNode result = new VirtualTreeNode(name.Ellipsise(1000));
+                VirtualTreeNode result = new VirtualTreeNode(name.Ellipsise(1000))
+                    {
+                        Tag = obj,
+                        ImageIndex = (int)icon,
+                        SelectedImageIndex = (int)icon
+                    };
+
+                _parent.Nodes.Insert(_index, result);
+                _index++;
 
                 IXenObject xenObject = obj as IXenObject;
-                result.Tag = obj;
-                parent.Nodes.Insert(index, result);
-                result.ImageIndex = (int)icon;
-                result.SelectedImageIndex = (int)icon;
                 bool error = xenObject != null && xenObject.InError;
                 bool highlighted = _highlightedDragTarget != null && obj != null && _highlightedDragTarget.Equals(obj);
 

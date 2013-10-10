@@ -29,6 +29,8 @@
  * SUCH DAMAGE.
  */
 
+
+using System.Linq;
 using NUnit.Framework;
 using XenAdmin;
 using XenAdmin.Controls;
@@ -1196,7 +1198,9 @@ namespace XenAdminTests.TabsAndMenus
             PutInNavigationMode(NavigationPane.NavigationMode.Folders);
             try
             {
-                foreach (Folder folder in GetAllXenObjects<Folder>())
+                var folders = GetAllXenObjects<Folder>().Where(f => !(string.IsNullOrEmpty(f.ToString())));
+
+                foreach (Folder folder in folders)
                 {
                     ExpectedMenuItem[] poolToolStripMenuItem = new ExpectedMenuItem[]{
 	                    new ExpectedTextMenuItem("&New Pool...", true, false  ),

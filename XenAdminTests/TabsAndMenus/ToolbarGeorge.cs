@@ -29,6 +29,8 @@
  * SUCH DAMAGE.
  */
 
+using System.Linq;
+
 using NUnit.Framework;
 
 using XenAdmin.Controls.MainWindowControls;
@@ -320,10 +322,9 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedTextMenuItem("Suspend", false  ),
                 };
 
-                foreach (Folder folder in GetAllXenObjects<Folder>())
-                {
+                var folders = GetAllXenObjects<Folder>().Where(f => !(string.IsNullOrEmpty(f.ToString())));
+                foreach (Folder folder in folders)
                     VerifyToolbar(folder, buttons);
-                }
             }
             finally
             {
