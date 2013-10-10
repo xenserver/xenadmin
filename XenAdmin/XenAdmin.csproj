@@ -2559,6 +2559,7 @@
     </Compile>
     <Compile Include="TabPages\ActionBaseExtensions.cs" />
     <Compile Include="TabPages\GeneralTabLicenseStatusStringifier.cs" />
+    <Compile Include="Utils\TemporaryDisablerForControls.cs" />
     <Compile Include="WinformsXenAdminConfigProvider.cs" />
     <Compile Include="Actions\GUIActions\Wlb\ExportReportAction.cs" />
     <Compile Include="Actions\GUIActions\Wlb\WlbOptimizePoolAction.cs" />

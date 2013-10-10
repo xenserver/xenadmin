@@ -41,6 +41,7 @@ using XenAdmin.Controls;
 using XenAdmin.Dialogs;
 using System.Drawing;
 using System.Linq;
+using XenAdmin.Utils;
 
 namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 {
@@ -874,67 +875,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             }
         }
 
-        #endregion
-
-        #region Helper Classes
-        /// <summary>
-        /// Utility class that can remember Enabled states of controls provided. Original Enabled values can be restored.
-        /// </summary>
-        private class TemporaryDisablerForControls
-        {
-            /// <summary>
-            /// Stores controls as Keys and their original Enabled states as Values.
-            /// </summary>
-            private readonly Dictionary<Control, bool> savedEnabledStatesOfControls = new Dictionary<Control, bool>();
-
-            /// <summary>
-            /// Saves the current Enabled values of the controls provided.
-            /// </summary>
-            /// <remarks>This does not clear previously saved data, but update the ones that were saved before and provided again.</remarks>
-            /// <param name="controls"></param>
-            public void SaveOrUpdateEnabledStates(IEnumerable<Control> controls)
-            {
-                if (controls == null)
-                    throw new ArgumentNullException("controls");
-
-                foreach (var control in controls)
-                {
-                    if (control == null) 
-                        continue;
-
-                    if (savedEnabledStatesOfControls.ContainsKey(control))
-                        savedEnabledStatesOfControls[control] = control.Enabled;
-                    else
-                        savedEnabledStatesOfControls.Add(control, control.Enabled);
-                }
-            }
-
-            /// <summary>
-            /// Clears all previously saved data.
-            /// </summary>
-            public void Reset()
-            {
-                savedEnabledStatesOfControls.Clear();
-            }
-
-            /// <summary>
-            /// Sets Enabled property to false on every control that was saved before.
-            /// </summary>
-            public void DisableAllControls()
-            {
-                foreach (var kvp in savedEnabledStatesOfControls)
-                    kvp.Key.Enabled = false;
-            }
-
-            /// <summary>
-            /// Restores original Enabled property values on all controls that was saved before.
-            /// </summary>
-            public void RestoreEnabledOnAllControls()
-            {
-                foreach (var kvp in savedEnabledStatesOfControls)
-                    kvp.Key.Enabled = kvp.Value;
-            }
-        }
         #endregion
     }
 }
