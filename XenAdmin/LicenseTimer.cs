@@ -67,11 +67,17 @@ namespace XenAdmin
         }
 
         /// <summary>
-        /// Call this to check the server licenses when a connection has been made.
+        /// Call this to check the server licenses when a connection has been made or on periodic check.
         /// If a license has expired, the user is warned.
+        /// The logic for the periodic license warning check: only shows the less than 30 day warnings once every day XC is running.
         /// </summary>
-        internal void CheckActiveServerLicense(IXenConnection connection)
+        /// <param name="connection">The connection to check licenses on</param>
+        /// <param name="periodicCheck">Whehter it is a periodic check</param>
+        internal bool CheckActiveServerLicense(IXenConnection connection, bool periodicCheck)
         {
+            if (Helpers.ClearwaterOrGreater(connection))
+                return false;
+
             DateTime now = DateTime.UtcNow - connection.ServerTimeOffset;
             foreach (Host host in connection.Cache.Hosts)
             {
@@ -83,21 +89,28 @@ namespace XenAdmin
 
                 if (expiryDate < now)
                 {
-                    // License has expired already
-                    Program.Invoke(Program.MainWindow, delegate {
+                    // License has expired. Pop up the License Manager.
+                    Program.Invoke(Program.MainWindow, delegate()
+                    {
                         showLicenseSummaryExpired(host, expiryDate);
                     });
-                    return;
+                    return true;
                 }
-                else if (timeToExpiry < CONNECTION_WARN_THRESHOLD)
+                if (timeToExpiry < CONNECTION_WARN_THRESHOLD &&
+                    (!periodicCheck || DateTime.UtcNow.Subtract(lastPeriodicLicenseWarning) > RUNNING_WARN_FREQUENCY))
                 {
-                    // If the license is sufficiently close to expiry warn now
-                    Program.Invoke(Program.MainWindow, delegate {
+                    // If the license is sufficiently close to expiry date, show the warning
+                    // If it's a periodic check, only warn if XC has been open for one day
+                    if (periodicCheck)
+                        lastPeriodicLicenseWarning = DateTime.UtcNow;
+                    Program.Invoke(Program.MainWindow, delegate()
+                    {
                         showLicenseSummaryWarning(Helpers.GetName(host), now, expiryDate);
                     });
-                    return;
-                }  
+                    return true;
+                }
             }
+            return false;
         }
 
         /// <summary>
@@ -109,50 +122,10 @@ namespace XenAdmin
                 return;
             foreach (IXenConnection xc in ConnectionsManager.XenConnectionsCopy)
             {
-                if (periodicCheck(xc))
+                if (CheckActiveServerLicense(xc, true))
                     return;
             }          
         }
-
-
-        /// <summary>
-        /// The logic for the periodic license warning check, only shows the less than 30 day warnings once every day XC is running.
-        /// Invokes dialog shows as is called from background timer threads.
-        /// </summary>
-        /// <param name="xc">The connection to check licenses on</param>
-        /// <returns></returns>
-        private bool periodicCheck(IXenConnection xc)
-        {
-            DateTime now = DateTime.UtcNow - xc.ServerTimeOffset;
-            foreach (Host host in xc.Cache.Hosts)
-            {
-                if (host.IsXCP)
-                    continue;
-
-                DateTime expiryDate = host.LicenseExpiryUTC;
-                TimeSpan timeToExpiry = expiryDate.Subtract(now);
-                if (expiryDate < now)
-                {
-                    // License has expired. Pop up the License Manager.
-                    Program.Invoke(Program.MainWindow, delegate() {
-                        showLicenseSummaryExpired(host, expiryDate);
-                    });
-                    return true;
-                }
-                else if (timeToExpiry < CONNECTION_WARN_THRESHOLD &&
-                    DateTime.UtcNow.Subtract(lastPeriodicLicenseWarning) > RUNNING_WARN_FREQUENCY)
-                {
-                    // Check to see if XC has been open one day. If it has, show < 30 day expiry warnings
-                    lastPeriodicLicenseWarning = DateTime.UtcNow;
-                    Program.Invoke(Program.MainWindow, delegate() {
-                        showLicenseSummaryWarning(Helpers.GetName(host), now, expiryDate);
-                    });
-                    return true;
-                }
-            }
-            return false;
-        }
-
 
         /// <summary>
         /// Shows the license summary dialog to the user as their license will soon expire.

@@ -759,7 +759,7 @@ namespace XenAdmin
                 HelpersGUI.PerformIQNCheck();
 
             if(licenseTimer != null)
-                licenseTimer.CheckActiveServerLicense(connection);
+                licenseTimer.CheckActiveServerLicense(connection, false);
             Updates.CheckServerPatches();
             Updates.CheckServerVersion();
             RequestRefreshTreeView();
