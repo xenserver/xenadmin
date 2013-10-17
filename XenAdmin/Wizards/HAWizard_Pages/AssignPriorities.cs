@@ -372,7 +372,8 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             Program.AssertOnEventThread();
 
             var row = findItemFromVM(vm);
-            dataGridViewVms.Rows.Remove(row);
+            if (row != null)
+                dataGridViewVms.Rows.Remove(row);
         }
 
         /// <summary>
