@@ -67,6 +67,9 @@ namespace XenAdmin.Controls.ConsoleTab
 
         private void DisplayConnectionName()
         {
+            if (_selectedScreen == null) //screen not assigned yet
+                return; 
+
             string connectionName = _selectedScreen.Source.is_control_domain 
                 ? _selectedScreen.Source.AffinityServerString 
                 : _selectedScreen.Source.Name;
