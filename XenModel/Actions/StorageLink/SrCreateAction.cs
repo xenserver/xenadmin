@@ -159,6 +159,16 @@ namespace XenAdmin.Actions
                 }
                 throw;
             }
+            finally 
+            {
+                // Destroy secret after the SR creation is complete. This is safe
+                // since all PBDs will have duplicated the secret (CA-113396).
+                if (!string.IsNullOrEmpty(secretuuid) && Helpers.AugustaOrGreater(Connection))
+                {
+                    string opaqref = Secret.get_by_uuid(Session, secretuuid);
+                    Secret.destroy(Session, opaqref);
+                }
+            }
 
             log.Debug("Checking that SR.create() actually succeeded");
             foreach (XenRef<PBD> pbdRef in XenAPI.SR.get_PBDs(Session, sr.opaque_ref))
