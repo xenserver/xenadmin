@@ -670,7 +670,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     comboBoxIscsiLuns.Items.Add(label);
                     LunMap.Add(label, i);
                 }
-                comboBoxIscsiLuns.SelectedItem = Messages.SELECT_TARGET_LUN;
+                comboBoxIscsiLuns.SelectedItem = comboBoxIscsiLuns.Items.Count == 2 ? comboBoxIscsiLuns.Items[1] : Messages.SELECT_TARGET_LUN; //if there is only one choice, select that one by default
                 comboBoxIscsiLuns.Enabled = true;
                 targetLunLabel.Enabled = true;
                 comboBoxIscsiLuns.Focus();
