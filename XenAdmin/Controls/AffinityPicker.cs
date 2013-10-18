@@ -96,7 +96,7 @@ namespace XenAdmin.Controls
                 return;
 
             // Update enablement
-            DynamicRadioButton.Enabled = Helpers.HasFullyConnectedSharedStorage(Connection) && SrHost == null;
+            DynamicRadioButton.Enabled = (Helpers.HasFullyConnectedSharedStorage(Connection) && SrHost == null) || Affinity == null;
             ServersGridView.Enabled = StaticRadioButton.Checked;
             DynamicRadioButton.Text = Helpers.HasFullyConnectedSharedStorage(Connection)
                                           ? Messages.AFFINITY_PICKER_DYNAMIC_SHARED_SR
@@ -105,7 +105,7 @@ namespace XenAdmin.Controls
 
         private void SelectRadioButtons()
         {
-            if (!SelectSomething() && DynamicRadioButton.Enabled)
+            if (!SelectAffinityServer() && DynamicRadioButton.Enabled)
             {
                 //Trace.Assert(DynamicRadioButton.Enabled, "Could not select any hosts or find shared storage");
                 DynamicRadioButton.Checked = true; // always set dynamic check state before static because static check has an event handler
@@ -156,6 +156,11 @@ namespace XenAdmin.Controls
                 return false;
             }
             return false;
+        }
+
+        private bool SelectAffinityServer()
+        {
+            return Affinity != null && SelectServer(Affinity);
         }
 
         private bool SelectSomething()
