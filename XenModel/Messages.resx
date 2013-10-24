@@ -4339,6 +4339,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EULAS" xml:space="preserve">
     <value>EULAs</value>
   </data>
+  <data name="EVACUATE_HOST_DIALOG_TITLE" xml:space="preserve">
+    <value>Enter Maintenance Mode - {0}</value>
+  </data>
   <data name="EVACUATE_HOST_EJECT_CD_PROMPT" xml:space="preserve">
     <value> {0}Click here to eject the CD</value>
   </data>

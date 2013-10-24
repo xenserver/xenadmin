@@ -67,6 +67,10 @@ namespace XenAdmin.Dialogs
             this.vmsListBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.vmsListBox.Name = "vmsListBox";
             this.vmsListBox.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.vmsListBox.Sorted = true;
+            this.vmsListBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.vmsListBox_DrawItem);
+            this.vmsListBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.vmsListBox_MouseClick);
+            this.vmsListBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.vmsListBox_MouseMove);
             // 
             // CloseButton
             // 

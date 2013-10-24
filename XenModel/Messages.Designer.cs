@@ -12309,6 +12309,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter Maintenance Mode - {0}.
+        /// </summary>
+        public static string EVACUATE_HOST_DIALOG_TITLE {
+            get {
+                return ResourceManager.GetString("EVACUATE_HOST_DIALOG_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  {0}Click here to eject the CD.
         /// </summary>
         public static string EVACUATE_HOST_EJECT_CD_PROMPT {

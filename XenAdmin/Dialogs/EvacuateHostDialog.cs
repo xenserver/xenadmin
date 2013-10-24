@@ -46,6 +46,7 @@ namespace XenAdmin.Dialogs
 {
     public partial class EvacuateHostDialog : DialogWithProgress
     {
+        #region Private fields
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly Host host;
@@ -56,7 +57,25 @@ namespace XenAdmin.Dialogs
         private string elevatedPass;
         private Session elevatedSession;
 
-        private readonly string OriginalText;
+        private readonly string[] rbacMethods = new[]
+            {
+                "host.remove_from_other_config", // save VM list
+                "host.add_to_other_config",
+
+                "host.disable", // disable the host
+
+                "pbd.plug", // Repair SR and install tools
+                "pbd.create",
+                "vbd.eject",
+                "vbd.insert",
+
+                "vm.suspend", // Suspend VMs
+
+                "vbd.async_eject", // Change ISO
+                "vbd.async_insert"
+            };
+
+        #endregion
 
         /* README
          * 
@@ -74,15 +93,6 @@ namespace XenAdmin.Dialogs
             InitializeComponent();
 
             Shrink();
-
-            this.OriginalText = this.Text;
-            vmsListBox.Sorted = true;
-            vmsListBox.SelectionMode = SelectionMode.None;
-            vmsListBox.DrawMode = DrawMode.OwnerDrawFixed;
-            vmsListBox.DrawItem += new DrawItemEventHandler(vmsListBox_DrawItem);
-            vmsListBox.MouseMove += new MouseEventHandler(vmsListBox_MouseMove);
-            vmsListBox.MouseClick += vmsListBox_MouseClick;
-            vmsListBox.ItemHeight = 16;
 
             NewMasterComboBox.DrawMode = DrawMode.OwnerDrawFixed;
             NewMasterComboBox.DrawItem += new DrawItemEventHandler(NewMasterComboBox_DrawItem);
@@ -109,10 +119,6 @@ namespace XenAdmin.Dialogs
             vms = new Dictionary<string, VMListBoxItem>();
             this.host.PropertyChanged += new PropertyChangedEventHandler(hostUpdate);
 
-            Program.AssertOnEventThread();
-            this.Text = OriginalText + " - " + host.Name;
-            populateVMs();
-            populateHosts();
             ActiveControl = CloseButton;
         }
 
@@ -191,9 +197,13 @@ namespace XenAdmin.Dialogs
                 return;
 
             VMListBoxItem item = vmsListBox.Items[e.Index] as VMListBoxItem;
+            if (item == null)
+                return;
+
             using (Font basicFont = new Font(e.Font, FontStyle.Regular))
             {
-                vmsListBox.WilkieSpecial(Images.GetImage16For(item.Icon), item.ToString(), item.GetError(), Color.Red, basicFont, e);
+                vmsListBox.WilkieSpecial(Images.GetImage16For(item.vm), item.ToString(),
+                    item.error, Color.Red, basicFont, e);
             }
         }
 
@@ -214,7 +224,7 @@ namespace XenAdmin.Dialogs
             {
                 using (Graphics graphics = vmsListBox.CreateGraphics())
                 {
-                    s = Drawing.MeasureText(graphics, item.GetError(),
+                    s = Drawing.MeasureText(graphics, item.error,
                                                  boldFont, bounds.Size, TextFormatFlags.Right | TextFormatFlags.VerticalCenter);
                 }
             }
@@ -267,8 +277,6 @@ namespace XenAdmin.Dialogs
         private void update()
         {
             Program.AssertOnEventThread();
-
-            this.Text = OriginalText + " - " + host.Name;
             populateVMs();
             populateHosts();
             Scan();
@@ -282,6 +290,7 @@ namespace XenAdmin.Dialogs
                     //Save Evacuated VMs for later
                     host.SaveEvacuatedVMs(session);
                 }, "host.remove_from_other_config", "host.add_to_other_config");
+
             DelegatedAsyncAction action = new DelegatedAsyncAction(connection, Messages.MAINTENANCE_MODE,
                 Messages.SCANNING_VMS, Messages.SCANNING_VMS, delegate(Session session)
                 {
@@ -322,8 +331,8 @@ namespace XenAdmin.Dialogs
                                 Host powerOnHost = session.Connection.Cache.Find_By_Uuid<Host>(kvp.Value[(int)RecProperties.ToHost]);
                                 if (powerOnHost != null)
                                 {
-                                    ToStringWrapper<Host> previousSelection = NewMasterComboBox.SelectedItem as ToStringWrapper<Host>;
-                                    ToStringWrapper<Host> hostToAdd = new ToStringWrapper<Host>(powerOnHost, (ToStringDelegate<Host>)getHostName);
+                                    var previousSelection = NewMasterComboBox.SelectedItem as ToStringWrapper<Host>;
+                                    var hostToAdd = new ToStringWrapper<Host>(powerOnHost, powerOnHost.Name);
                                     if (NewMasterComboBox.Items.Count == 0)
                                     {
                                         powerOnHost.PropertyChanged -= new PropertyChangedEventHandler(host_PropertyChanged);
@@ -395,16 +404,17 @@ namespace XenAdmin.Dialogs
             Program.AssertOnEventThread();
 
             deregisterVMEvents();
-            Dictionary<string, AsyncAction> solveActionsByUuid = new Dictionary<string,AsyncAction>();
-            foreach (VMListBoxItem i in vms.Values)
-            {
-                solveActionsByUuid.Add(i.GetVM().uuid, i.solutionAction);
-            }
-            vms = new Dictionary<string, VMListBoxItem>();
 
-            vmsListBox.BeginUpdate();
+            Dictionary<string, AsyncAction> solveActionsByUuid = new Dictionary<string,AsyncAction>();
+
+            foreach (VMListBoxItem i in vms.Values)
+                solveActionsByUuid.Add(i.vm.uuid, i.solutionAction);
+            
+            vms = new Dictionary<string, VMListBoxItem>();
+            
             try
             {
+                vmsListBox.BeginUpdate();
                 vmsListBox.Items.Clear();
 
                 foreach (VM vm in connection.ResolveAll(host.resident_VMs))
@@ -448,7 +458,7 @@ namespace XenAdmin.Dialogs
             //Deregister event handlers from these VMs
             foreach (VMListBoxItem vmlbi in vms.Values)
             {
-                VM v = vmlbi.GetVM();
+                VM v = vmlbi.vm;
                 v.PropertyChanged -= new PropertyChangedEventHandler(VM_PropertyChanged);
                 VM_guest_metrics gm = connection.Resolve(v.guest_metrics);
                 if (gm == null)
@@ -461,7 +471,6 @@ namespace XenAdmin.Dialogs
         private void populateHosts()
         {
             Program.AssertOnEventThread();
-
 
             ToStringWrapper<Host> previousSelection = NewMasterComboBox.SelectedItem as ToStringWrapper<Host>;
 
@@ -479,8 +488,7 @@ namespace XenAdmin.Dialogs
                     host.PropertyChanged -= new PropertyChangedEventHandler(host_PropertyChanged);
                     host.PropertyChanged += new PropertyChangedEventHandler(host_PropertyChanged);
                     if (host.enabled && metrics != null && metrics.live)
-                        NewMasterComboBox.Items.Add(new ToStringWrapper<Host>(host,
-                            (ToStringDelegate<Host>)getHostName));
+                        NewMasterComboBox.Items.Add(new ToStringWrapper<Host>(host, host.Name));
                 }
 
                 SelectProperItemInNewMasterComboBox(previousSelection);
@@ -491,18 +499,13 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private String getHostName(Host host)
-        {
-            return host.Name;
-        }
-
         private class VMListBoxItem : IComparable<VMListBoxItem>
         {
-            VM vm;
+            public readonly VM vm;
             EvacuateHostDialog dialog;
             Solution solution;
             public AsyncAction solutionAction;
-            string error;
+            public string error { get; private set; }
 
             public VMListBoxItem(EvacuateHostDialog dialog, VM vm)
             {
@@ -510,11 +513,6 @@ namespace XenAdmin.Dialogs
                 this.vm = vm;
                 this.error = "";
                 this.solution = Solution.None;
-            }
-
-            public Icons Icon
-            {
-                get { return Images.GetIconFor(vm); }
             }
 
             public override string ToString()
@@ -525,11 +523,6 @@ namespace XenAdmin.Dialogs
             public int CompareTo(VMListBoxItem otherVM)
             {
                 return vm.CompareTo(otherVM.vm);
-            }
-
-            public VM GetVM()
-            {
-                return vm;
             }
 
             public void UpdateError(string message, Solution solution)
@@ -564,11 +557,6 @@ namespace XenAdmin.Dialogs
                             : Messages.PV_DRIVERS_NOT_INSTALLED;
                         break;
                 }
-            }
-
-            public string GetError()
-            {
-                return this.error;
             }
 
             public AsyncAction Solve()
@@ -811,28 +799,16 @@ namespace XenAdmin.Dialogs
         {
             base.OnShown(e);
 
+            Text = string.Format(Messages.EVACUATE_HOST_DIALOG_TITLE, host.Name);
+
             //This dialog uses several different actions all of which might need an elevated session
             //We sudo once for all of them and store the session, or close the dialog.
             List<Role> validRoles = new List<Role>();
-            if (!connection.Session.IsLocalSuperuser && Helpers.MidnightRideOrGreater(connection) && !Registry.DontSudo
-                && !Role.CanPerform(new RbacMethodList(
 
-                    "host.remove_from_other_config", // save VM list
-                    "host.add_to_other_config", 
-
-                    "host.disable", // disable the host
-
-                    "pbd.plug", // Repair SR and install tools
-                    "pbd.create",
-                    "vbd.eject",
-                    "vbd.insert",
-
-                    "vm.suspend", // Suspend VMs
-
-                    "vbd.async_eject", // Change ISO
-                    "vbd.async_insert"
-                    
-                    ), connection, out validRoles))
+            if (!connection.Session.IsLocalSuperuser
+                && Helpers.MidnightRideOrGreater(connection)
+                && !Registry.DontSudo
+                && !Role.CanPerform(new RbacMethodList(rbacMethods), connection, out validRoles))
             {
                 var sudoDialog = XenAdminConfigManager.Provider.SudoDialogDelegate;
                 var result = sudoDialog(validRoles, connection, Text);
@@ -847,7 +823,7 @@ namespace XenAdmin.Dialogs
                 elevatedSession = result.ElevatedSession;
             }
 
-            Scan();
+            update();
         }
 
         private void SelectProperItemInNewMasterComboBox(ToStringWrapper<Host> previousSelection)
