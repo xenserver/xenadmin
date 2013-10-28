@@ -206,9 +206,8 @@ namespace XenAdmin.Dialogs
                                                        if (Visible)
                                                        {
                                                            OwnerActivatedOnClosed = false;
-                                                           Close();
-                                                       } 
-                                                           
+                                                       }
+                                                       Close();
                                                    });
         }
 
