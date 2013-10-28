@@ -48,6 +48,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
         public HAFinishPage()
         {
             InitializeComponent();
+            pictureBox1.Visible = labelNoVmsProtected.Visible = labelNoHaGuaranteed.Visible = false;
         }
 
         #region XenTabPage overrides
