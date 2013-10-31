@@ -4343,16 +4343,16 @@ Would you like to eject these ISOs before continuing?</value>
     <value>Enter Maintenance Mode - {0}</value>
   </data>
   <data name="EVACUATE_HOST_EJECT_CD_PROMPT" xml:space="preserve">
-    <value> {0}Click here to eject the CD</value>
+    <value>{0} Eject the CD</value>
   </data>
   <data name="EVACUATE_HOST_INSTALL_TOOLS_PROMPT" xml:space="preserve">
-    <value> {0}Click here to install XenServer Tools</value>
+    <value>{0} Install XenServer Tools</value>
   </data>
   <data name="EVACUATE_HOST_LOCAL_CD" xml:space="preserve">
-    <value>This VM uses a local CD. </value>
+    <value>This VM uses a local CD.</value>
   </data>
   <data name="EVACUATE_HOST_LOCAL_STORAGE" xml:space="preserve">
-    <value>This VM uses local storage. </value>
+    <value>This VM uses local storage.</value>
   </data>
   <data name="EVACUATE_HOST_NOT_ENOUGH_MEMORY" xml:space="preserve">
     <value>There is not enough free memory available on the other servers in the pool to migrate all the running VMs off this server. Please suspend some of the VMs</value>
@@ -4367,7 +4367,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>No servers available</value>
   </data>
   <data name="EVACUATE_HOST_SUSPEND_VM_PROMPT" xml:space="preserve">
-    <value> {0}Click here to suspend the VM</value>
+    <value>{0} Suspend the VM</value>
   </data>
   <data name="EVACUATE_SOLUTION_IN_PROGRESS" xml:space="preserve">
     <value>Action in progress...</value>

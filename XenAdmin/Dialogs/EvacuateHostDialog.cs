@@ -51,7 +51,7 @@ namespace XenAdmin.Dialogs
 
         private readonly Host host;
         private EvacuateHostAction hostAction;
-        private Dictionary<string, VMListBoxItem> vms;
+        private Dictionary<string, VmPrecheckRow> vms;
         private Dictionary<XenRef<VM>, String[]> reasons;
         private string elevatedUName;
         private string elevatedPass;
@@ -116,7 +116,7 @@ namespace XenAdmin.Dialogs
             if (Helpers.WlbEnabled(host.Connection) && WlbServerState.GetState(pool) == WlbServerState.ServerState.Enabled)
                 lableWLBEnabled.Visible = true;
 
-            vms = new Dictionary<string, VMListBoxItem>();
+            vms = new Dictionary<string, VmPrecheckRow>();
             this.host.PropertyChanged += new PropertyChangedEventHandler(hostUpdate);
 
             ActiveControl = CloseButton;
@@ -185,79 +185,38 @@ namespace XenAdmin.Dialogs
         }
 
         const int RIGHT_PADDING = 5;
-
-        void vmsListBox_DrawItem(object sender, DrawItemEventArgs e)
+       
+        private void dataGridViewVms_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
-            using (SolidBrush backBrush = new SolidBrush(vmsListBox.BackColor))
+            if (e.RowIndex >= 0 && e.RowIndex < dataGridViewVms.RowCount
+                && e.ColumnIndex == columnAction.Index)
             {
-                e.Graphics.FillRectangle(backBrush, e.Bounds);
-            }
-
-            if (e.Index == -1)
-                return;
-
-            VMListBoxItem item = vmsListBox.Items[e.Index] as VMListBoxItem;
-            if (item == null)
-                return;
-
-            using (Font basicFont = new Font(e.Font, FontStyle.Regular))
-            {
-                vmsListBox.WilkieSpecial(Images.GetImage16For(item.vm), item.ToString(),
-                    item.error, Color.Red, basicFont, e);
-            }
-        }
-
-        private VMListBoxItem isOnErrorLabelFor(Point p)
-        {
-            int i = vmsListBox.IndexFromPoint(p);
-            if (i == ListBox.NoMatches)
-                return null;
-
-            VMListBoxItem item = vmsListBox.Items[i] as VMListBoxItem;
-            if (item == null)
-                return null;
-
-            Rectangle bounds = vmsListBox.GetItemRectangle(i);
-
-            Size s;
-            using (Font boldFont = new Font(vmsListBox.Font, FontStyle.Bold))
-            {
-                using (Graphics graphics = vmsListBox.CreateGraphics())
+                var row = dataGridViewVms.Rows[e.RowIndex] as VmPrecheckRow;
+                if (row != null && row.hasSolution())
                 {
-                    s = Drawing.MeasureText(graphics, item.error,
-                                                 boldFont, bounds.Size, TextFormatFlags.Right | TextFormatFlags.VerticalCenter);
+                    Cursor.Current = Cursors.Hand;
+                    return;
                 }
             }
 
-            Rectangle ErrorTextBounds = new Rectangle(bounds.Right - s.Width - RIGHT_PADDING, bounds.Top, s.Width, s.Height);
-
-            return ErrorTextBounds.Contains(p) ? item : null;
+            Cursor.Current = Cursors.Default;
         }
 
-        void vmsListBox_MouseMove(object sender, MouseEventArgs e)
+        private void dataGridViewVms_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            VMListBoxItem item = isOnErrorLabelFor(e.Location);
-            if (item != null && item.hasSolution())
+            if (e.RowIndex >= 0 && e.RowIndex < dataGridViewVms.RowCount
+                && e.ColumnIndex == columnAction.Index)
             {
-                Cursor.Current = Cursors.Hand;
+                var row = dataGridViewVms.Rows[e.RowIndex] as VmPrecheckRow;
+                if (row != null && row.hasSolution())
+                {
+                    AsyncAction a = row.Solve();
+                    if (a != null)
+                        a.Completed += solveActionCompleted;
+
+                    row.Update();
+                }
             }
-            else
-            {
-                Cursor.Current = Cursors.Default;
-            }
-        }
-
-        void vmsListBox_MouseClick(object sender, MouseEventArgs e)
-        {
-            VMListBoxItem vmlbi = isOnErrorLabelFor(e.Location);
-            if (vmlbi == null || !vmlbi.hasSolution())
-                return;
-
-            AsyncAction a = vmlbi.Solve();
-            if (a != null)
-                a.Completed += solveActionCompleted;
-
-            vmsListBox.Refresh();
         }
 
         void solveActionCompleted(ActionBase sender)
@@ -369,7 +328,7 @@ namespace XenAdmin.Dialogs
         {
             if (args.PropertyName == "resident_on" || args.PropertyName == "allowed_operations")
             {
-                Program.Invoke(this, vmsListBox.Refresh);
+                Program.Invoke(this, dataGridViewVms.Refresh);
             }
             else if (args.PropertyName == "virtualisation_status")
             {
@@ -407,46 +366,48 @@ namespace XenAdmin.Dialogs
 
             Dictionary<string, AsyncAction> solveActionsByUuid = new Dictionary<string,AsyncAction>();
 
-            foreach (VMListBoxItem i in vms.Values)
+            foreach (VmPrecheckRow i in vms.Values)
                 solveActionsByUuid.Add(i.vm.uuid, i.solutionAction);
-            
-            vms = new Dictionary<string, VMListBoxItem>();
+
+            vms = new Dictionary<string, VmPrecheckRow>();
             
             try
             {
-                vmsListBox.BeginUpdate();
-                vmsListBox.Items.Clear();
+                dataGridViewVms.SuspendLayout();
+                dataGridViewVms.Rows.Clear();
 
                 foreach (VM vm in connection.ResolveAll(host.resident_VMs))
                 {
                     if (vm.is_control_domain || vm.is_a_template)
                         continue;
 
-                    vm.PropertyChanged += new PropertyChangedEventHandler(VM_PropertyChanged);
-                    VMListBoxItem vmlbi = new VMListBoxItem(this, vm);
+                    vm.PropertyChanged += VM_PropertyChanged;
+
+                    var row = new VmPrecheckRow(this, vm);
                     if (solveActionsByUuid.ContainsKey(vm.uuid))
-                    {
-                        vmlbi.solutionAction = solveActionsByUuid[vm.uuid];
-                    }
-                    vms.Add(vm.opaque_ref, vmlbi);
-                    vmsListBox.Items.Add(vmlbi);
+                        row.solutionAction = solveActionsByUuid[vm.uuid];
+
+                    vms.Add(vm.opaque_ref, row);
+                    dataGridViewVms.Rows.Add(row);
                 }
             }
             finally
             {
-                vmsListBox.EndUpdate();
+                dataGridViewVms.ResumeLayout();
                 RefreshEntermaintenanceButton();
             }
         }
 
         private void RefreshEntermaintenanceButton()
         {
-            this.EvacuateButton.Enabled = true;
-            foreach (VMListBoxItem item in vmsListBox.Items)
+            EvacuateButton.Enabled = true;
+
+            foreach (var row in dataGridViewVms.Rows)
             {
-                if (item.hasSolution())
+                var precheckRow = row as VmPrecheckRow;
+                if (precheckRow != null && precheckRow.hasSolution())
                 {
-                    this.EvacuateButton.Enabled = false;
+                    EvacuateButton.Enabled = false;
                     break;
                 }
             }
@@ -454,16 +415,15 @@ namespace XenAdmin.Dialogs
 
         private void deregisterVMEvents()
         {
-
             //Deregister event handlers from these VMs
-            foreach (VMListBoxItem vmlbi in vms.Values)
+            foreach (var row in vms.Values)
             {
-                VM v = vmlbi.vm;
-                v.PropertyChanged -= new PropertyChangedEventHandler(VM_PropertyChanged);
+                VM v = row.vm;
+                v.PropertyChanged -= VM_PropertyChanged;
                 VM_guest_metrics gm = connection.Resolve(v.guest_metrics);
                 if (gm == null)
                     return;
-                gm.PropertyChanged -= new PropertyChangedEventHandler(gm_PropertyChanged);
+                gm.PropertyChanged -= gm_PropertyChanged;
 
             }
         }
@@ -499,7 +459,7 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private class VMListBoxItem : IComparable<VMListBoxItem>
+        private class VmPrecheckRow : DataGridViewRow, IComparable<VmPrecheckRow>
         {
             public readonly VM vm;
             EvacuateHostDialog dialog;
@@ -507,12 +467,40 @@ namespace XenAdmin.Dialogs
             public AsyncAction solutionAction;
             public string error { get; private set; }
 
-            public VMListBoxItem(EvacuateHostDialog dialog, VM vm)
+            private DataGridViewImageCell cellImage = new DataGridViewImageCell();
+            private DataGridViewTextBoxCell cellVm = new DataGridViewTextBoxCell();
+            private DataGridViewTextBoxCell cellAction = new DataGridViewTextBoxCell();
+
+            public VmPrecheckRow(EvacuateHostDialog dialog, VM vm)
             {
                 this.dialog = dialog;
                 this.vm = vm;
                 this.error = "";
                 this.solution = Solution.None;
+
+                Cells.AddRange(cellImage, cellVm, cellAction);
+                Update();
+            }
+
+            public void Update()
+            {
+                cellImage.Value = Images.GetImage16For(vm);
+                cellVm.Value = ToString();
+                cellAction.Value = error;
+
+                if (hasSolution())
+                {
+                    cellAction.Style.Font = new Font(Program.DefaultFont, FontStyle.Underline);
+                    cellAction.Style.ForeColor = Color.Blue;
+                }
+                else
+                {
+                    cellAction.Style.Font = Program.DefaultFont;
+                    cellAction.Style.ForeColor = DefaultForeColor;
+                }
+
+                cellAction.Style.SelectionForeColor = cellAction.Style.ForeColor;
+                cellAction.Style.SelectionBackColor = cellAction.Style.BackColor;
             }
 
             public override string ToString()
@@ -520,7 +508,7 @@ namespace XenAdmin.Dialogs
                 return vm.Name;
             }
 
-            public int CompareTo(VMListBoxItem otherVM)
+            public int CompareTo(VmPrecheckRow otherVM)
             {
                 return vm.CompareTo(otherVM.vm);
             }
@@ -551,12 +539,15 @@ namespace XenAdmin.Dialogs
                         break;
 
                     case Solution.InstallPVDriversNoSolution:
-                        // if the state is not unknown we have metrics and can show a detailed message. Otherwise go with the server and just
-                        // say they arent installed
-                        error = vm.GetVirtualisationStatus != VM.VirtualisationStatus.UNKNOWN ? vm.GetVirtualisationWarningMessages()
+                        // if the state is not unknown we have metrics and can show a detailed message.
+                        // Otherwise go with the server and just say they aren't installed
+                        error = vm.GetVirtualisationStatus != VM.VirtualisationStatus.UNKNOWN
+                            ? vm.GetVirtualisationWarningMessages()
                             : Messages.PV_DRIVERS_NOT_INSTALLED;
                         break;
                 }
+
+                Update();
             }
 
             public AsyncAction Solve()
@@ -783,11 +774,11 @@ namespace XenAdmin.Dialogs
 
         void UpdateVMWithError(string opaqueRef, string message, Solution solution)
         {
-            VMListBoxItem vmlbi = vms[opaqueRef];
+            var row = vms[opaqueRef];
 
-            vmlbi.UpdateError(message, solution);
+            row.UpdateError(message, solution);
 
-            Program.Invoke(this, vmsListBox.Refresh);
+            Program.Invoke(this, dataGridViewVms.Refresh);
         }
 
         private void CloseButton_Click(object sender, EventArgs e)

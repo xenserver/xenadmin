@@ -12318,7 +12318,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  {0}Click here to eject the CD.
+        ///   Looks up a localized string similar to {0} Eject the CD.
         /// </summary>
         public static string EVACUATE_HOST_EJECT_CD_PROMPT {
             get {
@@ -12327,7 +12327,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  {0}Click here to install XenServer Tools.
+        ///   Looks up a localized string similar to {0} Install XenServer Tools.
         /// </summary>
         public static string EVACUATE_HOST_INSTALL_TOOLS_PROMPT {
             get {
@@ -12336,7 +12336,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This VM uses a local CD. .
+        ///   Looks up a localized string similar to This VM uses a local CD..
         /// </summary>
         public static string EVACUATE_HOST_LOCAL_CD {
             get {
@@ -12345,7 +12345,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This VM uses local storage. .
+        ///   Looks up a localized string similar to This VM uses local storage..
         /// </summary>
         public static string EVACUATE_HOST_LOCAL_STORAGE {
             get {
@@ -12390,7 +12390,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  {0}Click here to suspend the VM.
+        ///   Looks up a localized string similar to {0} Suspend the VM.
         /// </summary>
         public static string EVACUATE_HOST_SUSPEND_VM_PROMPT {
             get {
