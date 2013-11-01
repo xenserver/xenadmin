@@ -365,15 +365,14 @@ namespace XenAdmin.Core
         /// <returns>Image converted to grey scale</returns>
         public static Image ConvertToGreyScale(Image source)
         {
-            using (var bitmap = new Bitmap(source.Width, source.Height))
+            var bitmap = new Bitmap(source.Width, source.Height);
+
+            using (Graphics graphics = Graphics.FromImage(bitmap))
             {
-                using (Graphics graphics = Graphics.FromImage(bitmap))
-                {
-                    var rectangle = new Rectangle(0, 0, source.Width, source.Height);
-                    graphics.DrawImage(source, rectangle, 0, 0, source.Width, source.Height, GraphicsUnit.Pixel,
-                                       Drawing.GreyScaleAttributes);
-                    return bitmap;
-                }
+                var rectangle = new Rectangle(0, 0, source.Width, source.Height);
+                graphics.DrawImage(source, rectangle, 0, 0, source.Width, source.Height, GraphicsUnit.Pixel,
+                                   Drawing.GreyScaleAttributes);
+                return bitmap;
             }
         }
     }
