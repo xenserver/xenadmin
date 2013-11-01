@@ -81,8 +81,7 @@ namespace XenAdmin.Dialogs
             vmsListBox.DrawMode = DrawMode.OwnerDrawFixed;
             vmsListBox.DrawItem += new DrawItemEventHandler(vmsListBox_DrawItem);
             vmsListBox.MouseMove += new MouseEventHandler(vmsListBox_MouseMove);
-            //vmsListBox.MouseDoubleClick += new MouseEventHandler(vmsListBox_MouseDoubleClick);
-            vmsListBox.MouseClick += new MouseEventHandler(vmsListBox_MouseDoubleClick);
+            vmsListBox.MouseClick += vmsListBox_MouseClick;
             vmsListBox.ItemHeight = 16;
 
             NewMasterComboBox.DrawMode = DrawMode.OwnerDrawFixed;
@@ -238,7 +237,7 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        void vmsListBox_MouseDoubleClick(object sender, MouseEventArgs e)
+        void vmsListBox_MouseClick(object sender, MouseEventArgs e)
         {
             VMListBoxItem vmlbi = isOnErrorLabelFor(e.Location);
             if (vmlbi == null || !vmlbi.hasSolution())
@@ -650,7 +649,20 @@ namespace XenAdmin.Dialogs
                 action.Session = action.NewSession();
         }
 
-        protected override void action_Completed(ActionBase sender)
+        private void DoAction(AsyncAction action)
+        {
+            action.Changed += action_Changed;
+            action.Completed += action_Completed;
+
+            Grow(action.RunAsync);
+        }
+
+        private void action_Changed(ActionBase action)
+        {
+            Program.Invoke(this, () => UpdateProgressControls(action));
+        }
+
+        private void action_Completed(ActionBase sender)
         {
             Program.Invoke(this, delegate()
             {
@@ -688,7 +700,7 @@ namespace XenAdmin.Dialogs
                 ProcessError(null, failure.ErrorDescription.ToArray());
             });
 
-            base.action_Completed(sender);
+            Program.Invoke(this, () => FinalizeProgressControls(sender));
         }
 
         private void ProcessError(String vmRef, String[] ErrorDescription)

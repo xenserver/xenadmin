@@ -280,10 +280,17 @@ namespace XenAdmin.Dialogs
                 _repairAction = new MultipleAction(null, string.Empty, string.Empty, string.Empty, subActions);
             }
             
-            DoAction(_repairAction);
+            _repairAction.Changed += action_Changed;
+            _repairAction.Completed += action_Completed;
+            Grow(_repairAction.RunAsync);
         }
 
-        protected override void action_Completed(ActionBase sender)
+        private void action_Changed(ActionBase action)
+        {
+            Program.Invoke(this, () => UpdateProgressControls(action));
+        }
+
+        private void action_Completed(ActionBase sender)
         {
             if(_srList.Count > 0 && _srList.Any(s=>s !=null && !s.MultipathAOK))
             {
@@ -291,10 +298,13 @@ namespace XenAdmin.Dialogs
                 SucceededWithWarningDescription = Messages.REPAIR_SR_WARNING_MULTIPATHS_DOWN;
             }
 
-            if (sender is MultipleAction)
-                Program.Invoke(this, Build);
+            Program.Invoke(this, () =>
+                {
+                    if (sender is MultipleAction)
+                        Build();
 
-            base.action_Completed(sender);
+                    FinalizeProgressControls(sender);
+                });
         }
 
         private class RepairTreeNode : TreeNode
