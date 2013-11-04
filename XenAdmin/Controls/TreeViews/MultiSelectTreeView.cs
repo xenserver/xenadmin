@@ -386,7 +386,18 @@ namespace XenAdmin.Controls
                 }
                 if (tnMostRecentSelectedNode != null)
                 {
-                    tnMostRecentSelectedNode.EnsureVisible();
+                    if (((e.KeyData & Keys.Control) != 0) || ((e.KeyData & Keys.Shift) != 0))
+                    {
+                        SuspendLayout();
+                        int prevScrollPos = HScrollPos;
+                        tnMostRecentSelectedNode.EnsureVisible();
+                        HScrollPos = prevScrollPos;
+                        ResumeLayout();
+                    }
+                    else
+                    {
+                        tnMostRecentSelectedNode.EnsureVisible();
+                    }
                 }
             }
             base.OnKeyDown(e);
