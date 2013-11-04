@@ -76,6 +76,8 @@ namespace XenAdmin.Controls
         private MultiSelectTreeNode _selectionMirrorPoint;
         private MultiSelectTreeNodeCollection _nodes;
 
+        public Point LastMouseDownEventPosition { get; private set; }
+
         public event TreeViewEventHandler AfterDeselect;
         public event TreeViewEventHandler BeforeDeselect;
         public event EventHandler SelectionsChanged;
@@ -386,7 +388,18 @@ namespace XenAdmin.Controls
                 }
                 if (tnMostRecentSelectedNode != null)
                 {
-                    tnMostRecentSelectedNode.EnsureVisible();
+                    if (((e.KeyData & Keys.Control) != 0) || ((e.KeyData & Keys.Shift) != 0))
+                    {
+                        SuspendLayout();
+                        int prevScrollPos = HScrollPos;
+                        tnMostRecentSelectedNode.EnsureVisible();
+                        HScrollPos = prevScrollPos;
+                        ResumeLayout();
+                    }
+                    else
+                    {
+                        tnMostRecentSelectedNode.EnsureVisible();
+                    }
                 }
             }
             base.OnKeyDown(e);
@@ -394,6 +407,7 @@ namespace XenAdmin.Controls
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
+            LastMouseDownEventPosition = new Point(e.X, e.Y);
             _keysStartNode = null;
             intMouseClicks = e.Clicks;
             MultiSelectTreeNode nodeAt = (MultiSelectTreeNode)base.GetNodeAt(e.X, e.Y);

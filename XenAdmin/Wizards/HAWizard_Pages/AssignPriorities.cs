@@ -259,8 +259,6 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             {
                 dataGridViewVms.ResumeLayout();
             }
-
-            updateButtons();
         }
 
         /// <summary>
@@ -344,6 +342,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
                 row.UpdateAgile(isNowAgile);
                 row.FriendlyNonAgileReason = nonAgileReason;
             }
+            updateButtons();
         }
         
         private bool IsHaActivatedFirstTime(IEnumerable<VM> vms)

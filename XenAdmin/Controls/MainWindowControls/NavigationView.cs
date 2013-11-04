@@ -466,19 +466,6 @@ namespace XenAdmin.Controls.MainWindowControls
                     return;
                 }
             }
-            else if (treeView.SelectedNodes.Contains(e.Node))
-            {
-                // don't change the selection - just show the menu.
-            }
-            else if (treeView.CanSelectNode(e.Node))
-            {
-                treeView.SelectedNode = e.Node;
-            }
-            else
-            {
-                // can't select node - don't show menu.
-                return;
-            }
 
             if (TreeNodeRightClicked != null)
                 TreeNodeRightClicked();
@@ -514,7 +501,9 @@ namespace XenAdmin.Controls.MainWindowControls
             AddOrgViewItems(insertIndex, treeView.SelectedNodes);
 
             if (TreeContextMenu.Items.Count > 0)
-                TreeContextMenu.Show(treeView, e.Location);
+            {
+                TreeContextMenu.Show(treeView.PointToScreen(Point.Empty) + (Size)treeView.LastMouseDownEventPosition);
+            }
         }
 
         private void AddExpandCollapseItems(int insertIndex, IList<VirtualTreeNode> nodes)
