@@ -123,11 +123,7 @@ namespace XenAdmin.Actions
 
         private ParallelAction CreateNewParallelAction(List<AsyncAction> batch)
         {
-            return new ParallelAction(connection, CreatedActionTitle, CreatedActionStartDescription, 
-                                      CreatedActionEndDescription, batch)
-                       {
-                           NumberOfSimultaneousActions = BATCH_SIZE
-                       };
+            return new ParallelAction(connection, CreatedActionTitle, CreatedActionStartDescription, CreatedActionEndDescription, batch, BATCH_SIZE);
         }
 
         private List<AsyncAction> BatchAsVdiMigrate(List<VDI> vdis, SR sr)

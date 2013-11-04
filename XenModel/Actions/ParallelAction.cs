@@ -44,15 +44,7 @@ namespace XenAdmin.Actions
     /// </summary>
     public class ParallelAction : MultipleAction
     {
-        private int numberOfSimultaneousActions = 25;
-
-        /// <summary>
-        /// Number of actions to be run at the same time
-        /// </summary>
-        public int NumberOfSimultaneousActions
-        {
-            set { numberOfSimultaneousActions = value; }
-        }
+        private const int DEFAULT_MAX_NUMBER_OF_PARALLEL_ACTIONS = 25;
 
         //Change parameter to increase the number of concurrent actions running
         private readonly ProduceConsumerQueue _queuePC;
@@ -60,7 +52,13 @@ namespace XenAdmin.Actions
         public ParallelAction (IXenConnection connection, string title, string startDescription, string endDescription, List<AsyncAction> subActions)
             : base(connection, title, startDescription, endDescription, subActions)
         {
-            _queuePC = new ProduceConsumerQueue(subActions.Count < numberOfSimultaneousActions ? subActions.Count : numberOfSimultaneousActions);
+            _queuePC = new ProduceConsumerQueue(Math.Min(DEFAULT_MAX_NUMBER_OF_PARALLEL_ACTIONS, subActions.Count));
+        }
+
+        public ParallelAction(IXenConnection connection, string title, string startDescription, string endDescription, List<AsyncAction> subActions, int maxNumberOfParallelActions)
+            : base(connection, title, startDescription, endDescription, subActions)
+        {
+            _queuePC = new ProduceConsumerQueue(Math.Min(maxNumberOfParallelActions, subActions.Count));
         }
 
         protected override void RunSubActions(List<Exception> exceptions)
