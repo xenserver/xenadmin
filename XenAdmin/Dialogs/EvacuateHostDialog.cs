@@ -46,17 +46,36 @@ namespace XenAdmin.Dialogs
 {
     public partial class EvacuateHostDialog : DialogWithProgress
     {
+        #region Private fields
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly Host host;
         private EvacuateHostAction hostAction;
-        private Dictionary<string, VMListBoxItem> vms;
+        private Dictionary<string, VmPrecheckRow> vms;
         private Dictionary<XenRef<VM>, String[]> reasons;
         private string elevatedUName;
         private string elevatedPass;
         private Session elevatedSession;
 
-        private readonly string OriginalText;
+        private readonly string[] rbacMethods = new[]
+            {
+                "host.remove_from_other_config", // save VM list
+                "host.add_to_other_config",
+
+                "host.disable", // disable the host
+
+                "pbd.plug", // Repair SR and install tools
+                "pbd.create",
+                "vbd.eject",
+                "vbd.insert",
+
+                "vm.suspend", // Suspend VMs
+
+                "vbd.async_eject", // Change ISO
+                "vbd.async_insert"
+            };
+
+        #endregion
 
         /* README
          * 
@@ -74,16 +93,6 @@ namespace XenAdmin.Dialogs
             InitializeComponent();
 
             Shrink();
-
-            this.OriginalText = this.Text;
-            vmsListBox.Sorted = true;
-            vmsListBox.SelectionMode = SelectionMode.None;
-            vmsListBox.DrawMode = DrawMode.OwnerDrawFixed;
-            vmsListBox.DrawItem += new DrawItemEventHandler(vmsListBox_DrawItem);
-            vmsListBox.MouseMove += new MouseEventHandler(vmsListBox_MouseMove);
-            //vmsListBox.MouseDoubleClick += new MouseEventHandler(vmsListBox_MouseDoubleClick);
-            vmsListBox.MouseClick += new MouseEventHandler(vmsListBox_MouseDoubleClick);
-            vmsListBox.ItemHeight = 16;
 
             NewMasterComboBox.DrawMode = DrawMode.OwnerDrawFixed;
             NewMasterComboBox.DrawItem += new DrawItemEventHandler(NewMasterComboBox_DrawItem);
@@ -107,13 +116,9 @@ namespace XenAdmin.Dialogs
             if (Helpers.WlbEnabled(host.Connection) && WlbServerState.GetState(pool) == WlbServerState.ServerState.Enabled)
                 lableWLBEnabled.Visible = true;
 
-            vms = new Dictionary<string, VMListBoxItem>();
+            vms = new Dictionary<string, VmPrecheckRow>();
             this.host.PropertyChanged += new PropertyChangedEventHandler(hostUpdate);
 
-            Program.AssertOnEventThread();
-            this.Text = OriginalText + " - " + host.Name;
-            populateVMs();
-            populateHosts();
             ActiveControl = CloseButton;
         }
 
@@ -180,75 +185,38 @@ namespace XenAdmin.Dialogs
         }
 
         const int RIGHT_PADDING = 5;
-
-        void vmsListBox_DrawItem(object sender, DrawItemEventArgs e)
+       
+        private void dataGridViewVms_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
-            using (SolidBrush backBrush = new SolidBrush(vmsListBox.BackColor))
+            if (e.RowIndex >= 0 && e.RowIndex < dataGridViewVms.RowCount
+                && e.ColumnIndex == columnAction.Index)
             {
-                e.Graphics.FillRectangle(backBrush, e.Bounds);
-            }
-
-            if (e.Index == -1)
-                return;
-
-            VMListBoxItem item = vmsListBox.Items[e.Index] as VMListBoxItem;
-            using (Font basicFont = new Font(e.Font, FontStyle.Regular))
-            {
-                vmsListBox.WilkieSpecial(Images.GetImage16For(item.Icon), item.ToString(), item.GetError(), Color.Red, basicFont, e);
-            }
-        }
-
-        private VMListBoxItem isOnErrorLabelFor(Point p)
-        {
-            int i = vmsListBox.IndexFromPoint(p);
-            if (i == ListBox.NoMatches)
-                return null;
-
-            VMListBoxItem item = vmsListBox.Items[i] as VMListBoxItem;
-            if (item == null)
-                return null;
-
-            Rectangle bounds = vmsListBox.GetItemRectangle(i);
-
-            Size s;
-            using (Font boldFont = new Font(vmsListBox.Font, FontStyle.Bold))
-            {
-                using (Graphics graphics = vmsListBox.CreateGraphics())
+                var row = dataGridViewVms.Rows[e.RowIndex] as VmPrecheckRow;
+                if (row != null && row.hasSolution())
                 {
-                    s = Drawing.MeasureText(graphics, item.GetError(),
-                                                 boldFont, bounds.Size, TextFormatFlags.Right | TextFormatFlags.VerticalCenter);
+                    Cursor.Current = Cursors.Hand;
+                    return;
                 }
             }
 
-            Rectangle ErrorTextBounds = new Rectangle(bounds.Right - s.Width - RIGHT_PADDING, bounds.Top, s.Width, s.Height);
-
-            return ErrorTextBounds.Contains(p) ? item : null;
+            Cursor.Current = Cursors.Default;
         }
 
-        void vmsListBox_MouseMove(object sender, MouseEventArgs e)
+        private void dataGridViewVms_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            VMListBoxItem item = isOnErrorLabelFor(e.Location);
-            if (item != null && item.hasSolution())
+            if (e.RowIndex >= 0 && e.RowIndex < dataGridViewVms.RowCount
+                && e.ColumnIndex == columnAction.Index)
             {
-                Cursor.Current = Cursors.Hand;
+                var row = dataGridViewVms.Rows[e.RowIndex] as VmPrecheckRow;
+                if (row != null && row.hasSolution())
+                {
+                    AsyncAction a = row.Solve();
+                    if (a != null)
+                        a.Completed += solveActionCompleted;
+
+                    row.Update();
+                }
             }
-            else
-            {
-                Cursor.Current = Cursors.Default;
-            }
-        }
-
-        void vmsListBox_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            VMListBoxItem vmlbi = isOnErrorLabelFor(e.Location);
-            if (vmlbi == null || !vmlbi.hasSolution())
-                return;
-
-            AsyncAction a = vmlbi.Solve();
-            if (a != null)
-                a.Completed += solveActionCompleted;
-
-            vmsListBox.Refresh();
         }
 
         void solveActionCompleted(ActionBase sender)
@@ -268,8 +236,6 @@ namespace XenAdmin.Dialogs
         private void update()
         {
             Program.AssertOnEventThread();
-
-            this.Text = OriginalText + " - " + host.Name;
             populateVMs();
             populateHosts();
             Scan();
@@ -283,6 +249,7 @@ namespace XenAdmin.Dialogs
                     //Save Evacuated VMs for later
                     host.SaveEvacuatedVMs(session);
                 }, "host.remove_from_other_config", "host.add_to_other_config");
+
             DelegatedAsyncAction action = new DelegatedAsyncAction(connection, Messages.MAINTENANCE_MODE,
                 Messages.SCANNING_VMS, Messages.SCANNING_VMS, delegate(Session session)
                 {
@@ -323,8 +290,8 @@ namespace XenAdmin.Dialogs
                                 Host powerOnHost = session.Connection.Cache.Find_By_Uuid<Host>(kvp.Value[(int)RecProperties.ToHost]);
                                 if (powerOnHost != null)
                                 {
-                                    ToStringWrapper<Host> previousSelection = NewMasterComboBox.SelectedItem as ToStringWrapper<Host>;
-                                    ToStringWrapper<Host> hostToAdd = new ToStringWrapper<Host>(powerOnHost, (ToStringDelegate<Host>)getHostName);
+                                    var previousSelection = NewMasterComboBox.SelectedItem as ToStringWrapper<Host>;
+                                    var hostToAdd = new ToStringWrapper<Host>(powerOnHost, powerOnHost.Name);
                                     if (NewMasterComboBox.Items.Count == 0)
                                     {
                                         powerOnHost.PropertyChanged -= new PropertyChangedEventHandler(host_PropertyChanged);
@@ -361,7 +328,7 @@ namespace XenAdmin.Dialogs
         {
             if (args.PropertyName == "resident_on" || args.PropertyName == "allowed_operations")
             {
-                Program.Invoke(this, vmsListBox.Refresh);
+                Program.Invoke(this, dataGridViewVms.Refresh);
             }
             else if (args.PropertyName == "virtualisation_status")
             {
@@ -396,48 +363,51 @@ namespace XenAdmin.Dialogs
             Program.AssertOnEventThread();
 
             deregisterVMEvents();
-            Dictionary<string, AsyncAction> solveActionsByUuid = new Dictionary<string,AsyncAction>();
-            foreach (VMListBoxItem i in vms.Values)
-            {
-                solveActionsByUuid.Add(i.GetVM().uuid, i.solutionAction);
-            }
-            vms = new Dictionary<string, VMListBoxItem>();
 
-            vmsListBox.BeginUpdate();
+            Dictionary<string, AsyncAction> solveActionsByUuid = new Dictionary<string,AsyncAction>();
+
+            foreach (VmPrecheckRow i in vms.Values)
+                solveActionsByUuid.Add(i.vm.uuid, i.solutionAction);
+
+            vms = new Dictionary<string, VmPrecheckRow>();
+            
             try
             {
-                vmsListBox.Items.Clear();
+                dataGridViewVms.SuspendLayout();
+                dataGridViewVms.Rows.Clear();
 
                 foreach (VM vm in connection.ResolveAll(host.resident_VMs))
                 {
                     if (vm.is_control_domain || vm.is_a_template)
                         continue;
 
-                    vm.PropertyChanged += new PropertyChangedEventHandler(VM_PropertyChanged);
-                    VMListBoxItem vmlbi = new VMListBoxItem(this, vm);
+                    vm.PropertyChanged += VM_PropertyChanged;
+
+                    var row = new VmPrecheckRow(this, vm);
                     if (solveActionsByUuid.ContainsKey(vm.uuid))
-                    {
-                        vmlbi.solutionAction = solveActionsByUuid[vm.uuid];
-                    }
-                    vms.Add(vm.opaque_ref, vmlbi);
-                    vmsListBox.Items.Add(vmlbi);
+                        row.solutionAction = solveActionsByUuid[vm.uuid];
+
+                    vms.Add(vm.opaque_ref, row);
+                    dataGridViewVms.Rows.Add(row);
                 }
             }
             finally
             {
-                vmsListBox.EndUpdate();
+                dataGridViewVms.ResumeLayout();
                 RefreshEntermaintenanceButton();
             }
         }
 
         private void RefreshEntermaintenanceButton()
         {
-            this.EvacuateButton.Enabled = true;
-            foreach (VMListBoxItem item in vmsListBox.Items)
+            EvacuateButton.Enabled = true;
+
+            foreach (var row in dataGridViewVms.Rows)
             {
-                if (item.hasSolution())
+                var precheckRow = row as VmPrecheckRow;
+                if (precheckRow != null && precheckRow.hasSolution())
                 {
-                    this.EvacuateButton.Enabled = false;
+                    EvacuateButton.Enabled = false;
                     break;
                 }
             }
@@ -445,16 +415,15 @@ namespace XenAdmin.Dialogs
 
         private void deregisterVMEvents()
         {
-
             //Deregister event handlers from these VMs
-            foreach (VMListBoxItem vmlbi in vms.Values)
+            foreach (var row in vms.Values)
             {
-                VM v = vmlbi.GetVM();
-                v.PropertyChanged -= new PropertyChangedEventHandler(VM_PropertyChanged);
+                VM v = row.vm;
+                v.PropertyChanged -= VM_PropertyChanged;
                 VM_guest_metrics gm = connection.Resolve(v.guest_metrics);
                 if (gm == null)
                     return;
-                gm.PropertyChanged -= new PropertyChangedEventHandler(gm_PropertyChanged);
+                gm.PropertyChanged -= gm_PropertyChanged;
 
             }
         }
@@ -462,7 +431,6 @@ namespace XenAdmin.Dialogs
         private void populateHosts()
         {
             Program.AssertOnEventThread();
-
 
             ToStringWrapper<Host> previousSelection = NewMasterComboBox.SelectedItem as ToStringWrapper<Host>;
 
@@ -480,8 +448,7 @@ namespace XenAdmin.Dialogs
                     host.PropertyChanged -= new PropertyChangedEventHandler(host_PropertyChanged);
                     host.PropertyChanged += new PropertyChangedEventHandler(host_PropertyChanged);
                     if (host.enabled && metrics != null && metrics.live)
-                        NewMasterComboBox.Items.Add(new ToStringWrapper<Host>(host,
-                            (ToStringDelegate<Host>)getHostName));
+                        NewMasterComboBox.Items.Add(new ToStringWrapper<Host>(host, host.Name));
                 }
 
                 SelectProperItemInNewMasterComboBox(previousSelection);
@@ -492,30 +459,48 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private String getHostName(Host host)
+        private class VmPrecheckRow : DataGridViewRow, IComparable<VmPrecheckRow>
         {
-            return host.Name;
-        }
-
-        private class VMListBoxItem : IComparable<VMListBoxItem>
-        {
-            VM vm;
+            public readonly VM vm;
             EvacuateHostDialog dialog;
             Solution solution;
             public AsyncAction solutionAction;
-            string error;
+            public string error { get; private set; }
 
-            public VMListBoxItem(EvacuateHostDialog dialog, VM vm)
+            private DataGridViewImageCell cellImage = new DataGridViewImageCell();
+            private DataGridViewTextBoxCell cellVm = new DataGridViewTextBoxCell();
+            private DataGridViewTextBoxCell cellAction = new DataGridViewTextBoxCell();
+
+            public VmPrecheckRow(EvacuateHostDialog dialog, VM vm)
             {
                 this.dialog = dialog;
                 this.vm = vm;
                 this.error = "";
                 this.solution = Solution.None;
+
+                Cells.AddRange(cellImage, cellVm, cellAction);
+                Update();
             }
 
-            public Icons Icon
+            public void Update()
             {
-                get { return Images.GetIconFor(vm); }
+                cellImage.Value = Images.GetImage16For(vm);
+                cellVm.Value = ToString();
+                cellAction.Value = error;
+
+                if (hasSolution())
+                {
+                    cellAction.Style.Font = new Font(Program.DefaultFont, FontStyle.Underline);
+                    cellAction.Style.ForeColor = Color.Blue;
+                }
+                else
+                {
+                    cellAction.Style.Font = Program.DefaultFont;
+                    cellAction.Style.ForeColor = DefaultForeColor;
+                }
+
+                cellAction.Style.SelectionForeColor = cellAction.Style.ForeColor;
+                cellAction.Style.SelectionBackColor = cellAction.Style.BackColor;
             }
 
             public override string ToString()
@@ -523,14 +508,9 @@ namespace XenAdmin.Dialogs
                 return vm.Name;
             }
 
-            public int CompareTo(VMListBoxItem otherVM)
+            public int CompareTo(VmPrecheckRow otherVM)
             {
                 return vm.CompareTo(otherVM.vm);
-            }
-
-            public VM GetVM()
-            {
-                return vm;
             }
 
             public void UpdateError(string message, Solution solution)
@@ -559,17 +539,15 @@ namespace XenAdmin.Dialogs
                         break;
 
                     case Solution.InstallPVDriversNoSolution:
-                        // if the state is not unknown we have metrics and can show a detailed message. Otherwise go with the server and just
-                        // say they arent installed
-                        error = vm.GetVirtualisationStatus != VM.VirtualisationStatus.UNKNOWN ? vm.GetVirtualisationWarningMessages()
+                        // if the state is not unknown we have metrics and can show a detailed message.
+                        // Otherwise go with the server and just say they aren't installed
+                        error = vm.GetVirtualisationStatus != VM.VirtualisationStatus.UNKNOWN
+                            ? vm.GetVirtualisationWarningMessages()
                             : Messages.PV_DRIVERS_NOT_INSTALLED;
                         break;
                 }
-            }
 
-            public string GetError()
-            {
-                return this.error;
+                Update();
             }
 
             public AsyncAction Solve()
@@ -650,7 +628,20 @@ namespace XenAdmin.Dialogs
                 action.Session = action.NewSession();
         }
 
-        protected override void action_Completed(ActionBase sender)
+        private void DoAction(AsyncAction action)
+        {
+            action.Changed += action_Changed;
+            action.Completed += action_Completed;
+
+            Grow(action.RunAsync);
+        }
+
+        private void action_Changed(ActionBase action)
+        {
+            Program.Invoke(this, () => UpdateProgressControls(action));
+        }
+
+        private void action_Completed(ActionBase sender)
         {
             Program.Invoke(this, delegate()
             {
@@ -688,7 +679,7 @@ namespace XenAdmin.Dialogs
                 ProcessError(null, failure.ErrorDescription.ToArray());
             });
 
-            base.action_Completed(sender);
+            Program.Invoke(this, () => FinalizeProgressControls(sender));
         }
 
         private void ProcessError(String vmRef, String[] ErrorDescription)
@@ -783,11 +774,11 @@ namespace XenAdmin.Dialogs
 
         void UpdateVMWithError(string opaqueRef, string message, Solution solution)
         {
-            VMListBoxItem vmlbi = vms[opaqueRef];
+            var row = vms[opaqueRef];
 
-            vmlbi.UpdateError(message, solution);
+            row.UpdateError(message, solution);
 
-            Program.Invoke(this, vmsListBox.Refresh);
+            Program.Invoke(this, dataGridViewVms.Refresh);
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -799,28 +790,16 @@ namespace XenAdmin.Dialogs
         {
             base.OnShown(e);
 
+            Text = string.Format(Messages.EVACUATE_HOST_DIALOG_TITLE, host.Name);
+
             //This dialog uses several different actions all of which might need an elevated session
             //We sudo once for all of them and store the session, or close the dialog.
             List<Role> validRoles = new List<Role>();
-            if (!connection.Session.IsLocalSuperuser && Helpers.MidnightRideOrGreater(connection) && !Registry.DontSudo
-                && !Role.CanPerform(new RbacMethodList(
 
-                    "host.remove_from_other_config", // save VM list
-                    "host.add_to_other_config", 
-
-                    "host.disable", // disable the host
-
-                    "pbd.plug", // Repair SR and install tools
-                    "pbd.create",
-                    "vbd.eject",
-                    "vbd.insert",
-
-                    "vm.suspend", // Suspend VMs
-
-                    "vbd.async_eject", // Change ISO
-                    "vbd.async_insert"
-                    
-                    ), connection, out validRoles))
+            if (!connection.Session.IsLocalSuperuser
+                && Helpers.MidnightRideOrGreater(connection)
+                && !Registry.DontSudo
+                && !Role.CanPerform(new RbacMethodList(rbacMethods), connection, out validRoles))
             {
                 var sudoDialog = XenAdminConfigManager.Provider.SudoDialogDelegate;
                 var result = sudoDialog(validRoles, connection, Text);
@@ -835,7 +814,7 @@ namespace XenAdmin.Dialogs
                 elevatedSession = result.ElevatedSession;
             }
 
-            Scan();
+            update();
         }
 
         private void SelectProperItemInNewMasterComboBox(ToStringWrapper<Host> previousSelection)

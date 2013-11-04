@@ -29,8 +29,12 @@ namespace XenAdmin.Dialogs
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EvacuateHostDialog));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.vmListLabel = new System.Windows.Forms.Label();
-            this.vmsListBox = new XenAdmin.Controls.FlickerFreeListBox();
             this.CloseButton = new System.Windows.Forms.Button();
             this.EvacuateButton = new System.Windows.Forms.Button();
             this.labelBlurb = new System.Windows.Forms.Label();
@@ -39,9 +43,14 @@ namespace XenAdmin.Dialogs
             this.NewMasterLabel = new System.Windows.Forms.Label();
             this.labelMasterBlurb = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.dataGridViewVms = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.lableWLBEnabled = new System.Windows.Forms.Label();
+            this.columnImage = new System.Windows.Forms.DataGridViewImageColumn();
+            this.columnVm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnAction = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVms)).BeginInit();
             this.SuspendLayout();
             // 
             // ActionStatusLabel
@@ -60,13 +69,6 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this.vmListLabel, "vmListLabel");
             this.vmListLabel.Name = "vmListLabel";
-            // 
-            // vmsListBox
-            // 
-            resources.ApplyResources(this.vmsListBox, "vmsListBox");
-            this.vmsListBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.vmsListBox.Name = "vmsListBox";
-            this.vmsListBox.SelectionMode = System.Windows.Forms.SelectionMode.None;
             // 
             // CloseButton
             // 
@@ -115,15 +117,84 @@ namespace XenAdmin.Dialogs
             // panel2
             // 
             resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Controls.Add(this.dataGridViewVms);
             this.panel2.Controls.Add(this.lableWLBEnabled);
-            this.panel2.Controls.Add(this.vmsListBox);
             this.panel2.Controls.Add(this.vmListLabel);
             this.panel2.Name = "panel2";
+            // 
+            // dataGridViewVms
+            // 
+            this.dataGridViewVms.AllowUserToResizeColumns = false;
+            resources.ApplyResources(this.dataGridViewVms, "dataGridViewVms");
+            this.dataGridViewVms.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dataGridViewVms.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewVms.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewVms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewVms.ColumnHeadersVisible = false;
+            this.dataGridViewVms.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.columnImage,
+            this.columnVm,
+            this.columnAction});
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewVms.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridViewVms.HideSelection = true;
+            this.dataGridViewVms.Name = "dataGridViewVms";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewVms.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridViewVms.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.RowHeaderSelect;
+            this.dataGridViewVms.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewVms_CellMouseClick);
+            this.dataGridViewVms.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewVms_CellMouseMove);
             // 
             // lableWLBEnabled
             // 
             resources.ApplyResources(this.lableWLBEnabled, "lableWLBEnabled");
             this.lableWLBEnabled.Name = "lableWLBEnabled";
+            // 
+            // columnImage
+            // 
+            this.columnImage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.NullValue = "System.Drawing.Bitmap";
+            this.columnImage.DefaultCellStyle = dataGridViewCellStyle2;
+            resources.ApplyResources(this.columnImage, "columnImage");
+            this.columnImage.Name = "columnImage";
+            this.columnImage.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.columnImage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // columnVm
+            // 
+            this.columnVm.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.columnVm.FillWeight = 137.8531F;
+            resources.ApplyResources(this.columnVm, "columnVm");
+            this.columnVm.Name = "columnVm";
+            // 
+            // columnAction
+            // 
+            this.columnAction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.columnAction.DefaultCellStyle = dataGridViewCellStyle3;
+            this.columnAction.FillWeight = 40F;
+            resources.ApplyResources(this.columnAction, "columnAction");
+            this.columnAction.Name = "columnAction";
             // 
             // EvacuateHostDialog
             // 
@@ -155,6 +226,7 @@ namespace XenAdmin.Dialogs
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVms)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -164,7 +236,6 @@ namespace XenAdmin.Dialogs
 
         private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.Button EvacuateButton;
-        private XenAdmin.Controls.FlickerFreeListBox vmsListBox;
         private System.Windows.Forms.Label vmListLabel;
         private System.Windows.Forms.Label labelBlurb;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -173,5 +244,9 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Label labelMasterBlurb;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lableWLBEnabled;
+        private XenAdmin.Controls.DataGridViewEx.DataGridViewEx dataGridViewVms;
+        private System.Windows.Forms.DataGridViewImageColumn columnImage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnVm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnAction;
     }
 }

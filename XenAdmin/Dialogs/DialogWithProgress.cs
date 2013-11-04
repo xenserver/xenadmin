@@ -190,27 +190,25 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        protected virtual void action_Completed(ActionBase action)
+        protected void FinalizeProgressControls(ActionBase action)
         {
-            if(action == null)
+            if (action == null)
                 return;
 
-            Program.Invoke(this, delegate()
+            Program.AssertOnEventThread();
+
+            if (action.Succeeded)
             {
-                
-                if (action.Succeeded)
-                {
-                    if (SucceededWithWarning && !String.IsNullOrEmpty(SucceededWithWarningDescription))
-                        SetActionLabelText(String.Format(Messages.X_WITH_WARNING_X, action.Description, SucceededWithWarningDescription), Color.OrangeRed);
-                    else
-                        SetActionLabelText(action.Description, Color.Green);                  
-                }
+                if (SucceededWithWarning && !String.IsNullOrEmpty(SucceededWithWarningDescription))
+                    SetActionLabelText(String.Format(Messages.X_WITH_WARNING_X, action.Description, SucceededWithWarningDescription), Color.OrangeRed);
                 else
-                {
-                    string text = action.Exception is CancelledException ? Messages.CANCELLED_BY_USER : action.Exception.Message;
-                    SetActionLabelText(text, Color.Red);
-                }
-            });
+                    SetActionLabelText(action.Description, Color.Green);
+            }
+            else
+            {
+                string text = action.Exception is CancelledException ? Messages.CANCELLED_BY_USER : action.Exception.Message;
+                SetActionLabelText(text, Color.Red);
+            }
         }
 
         protected bool SucceededWithWarning { private get; set; }
@@ -237,30 +235,19 @@ namespace XenAdmin.Dialogs
             ExceptionToolTip.SetToolTip(ActionStatusLabel, text);
             
         }
-
-        private void action_Changed(ActionBase action)
+        
+        protected void UpdateProgressControls(ActionBase action)
         {
             if (action == null)
                 return;
 
-            Program.Invoke(this, delegate
-            {
-                SetActionLabelText(action.Description, SystemColors.ControlText);
-                ActionProgressBar.Value = action.PercentComplete;
-            });
-        }
-
-        internal void DoAction(AsyncAction action)
-        {
             Program.AssertOnEventThread();
 
-            action.Changed += action_Changed;
-            action.Completed += action_Completed;
-
-            Grow(action.RunAsync);
+            SetActionLabelText(action.Description, SystemColors.ControlText);
+            ActionProgressBar.Value = action.PercentComplete;
         }
 
-        protected void ClearAction()
+        private void ClearAction()
         {
             SetActionLabelText("", SystemColors.ControlText);
             this.ActionProgressBar.Value = 0;
