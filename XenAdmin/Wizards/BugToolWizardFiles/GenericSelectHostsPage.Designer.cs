@@ -82,8 +82,8 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.tableLayoutPanel1.Controls.Add(this.autoHeightLabel1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.HostListTreeView, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.connectbutton, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.SelectNoneButton, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.SelectAllButton, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.SelectAllButton, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.SelectNoneButton, 2, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // autoHeightLabel1

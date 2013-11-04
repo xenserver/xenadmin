@@ -133,7 +133,7 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="listBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;listBox.Name" xml:space="preserve">
     <value>listBox</value>
@@ -151,13 +151,13 @@
     <value>Bottom, Right</value>
   </data>
   <data name="clearAllButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>464, 375</value>
+    <value>545, 375</value>
   </data>
   <data name="clearAllButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
   <data name="clearAllButton.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="clearAllButton.Text" xml:space="preserve">
     <value>&amp;Clear All</value>
@@ -178,7 +178,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="selectAllButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>545, 375</value>
+    <value>464, 375</value>
   </data>
   <data name="selectAllButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -214,7 +214,7 @@
     <value>311, 13</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Select which VMs you would like to configure from the list below.</value>
