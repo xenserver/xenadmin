@@ -110,7 +110,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         }
 
         public List<Host> SelectedHosts { private get; set; }
-        public List<Capability> CapabilityList { private get; set; }
+        public IEnumerable<Capability> CapabilityList { private get; set; }
 
         /// <summary>
         /// Must be called on the event thread.
@@ -125,7 +125,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             _action = null;
         }
 
-        private void RunAction(List<Capability> capabilities, List<Host> hosts)
+        private void RunAction(IEnumerable<Capability> capabilities, List<Host> hosts)
         {
             OnPageUpdated();
             _hostList.Clear();

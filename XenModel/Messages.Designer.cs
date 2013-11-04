@@ -23928,7 +23928,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to These files may contain personally identifiable information if customized.
+        ///   Looks up a localized string similar to These files may contain personally identifiable information if customized..
         /// </summary>
         public static string PII_CUSTOMISED {
             get {
@@ -23937,7 +23937,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to These files may contain personally identifiable information.
+        ///   Looks up a localized string similar to These files may contain personally identifiable information..
         /// </summary>
         public static string PII_MAYBE {
             get {
@@ -23946,7 +23946,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to These files will contain no personally identifiable information.
+        ///   Looks up a localized string similar to These files will contain no personally identifiable information..
         /// </summary>
         public static string PII_NO {
             get {
@@ -23955,7 +23955,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to These files will contain personally identifiable information.
+        ///   Looks up a localized string similar to These files will contain personally identifiable information..
         /// </summary>
         public static string PII_YES {
             get {

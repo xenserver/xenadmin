@@ -8335,16 +8335,16 @@ File not found</value>
     <value>Unknown</value>
   </data>
   <data name="PII_CUSTOMISED" xml:space="preserve">
-    <value>These files may contain personally identifiable information if customized</value>
+    <value>These files may contain personally identifiable information if customized.</value>
   </data>
   <data name="PII_MAYBE" xml:space="preserve">
-    <value>These files may contain personally identifiable information</value>
+    <value>These files may contain personally identifiable information.</value>
   </data>
   <data name="PII_NO" xml:space="preserve">
-    <value>These files will contain no personally identifiable information</value>
+    <value>These files will contain no personally identifiable information.</value>
   </data>
   <data name="PII_YES" xml:space="preserve">
-    <value>These files will contain personally identifiable information</value>
+    <value>These files will contain personally identifiable information.</value>
   </data>
   <data name="PLANACTION_VMS_MIGRATE" xml:space="preserve">
     <value>Migrate VMs from Server</value>

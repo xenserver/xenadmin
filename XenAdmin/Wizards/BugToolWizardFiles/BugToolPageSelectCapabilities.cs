@@ -31,19 +31,15 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.IO;
-using System.Text;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 using System.Xml;
 
 using XenAdmin.Controls;
 using XenAdmin.Core;
-using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.Actions;
 using XenAdmin.Dialogs;
@@ -61,7 +57,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         private List<GetSystemStatusCapabilities> actions;
         private ActionProgressDialog dialog;
         private bool cancelled;
-        private int oldIndex = -1;
         #endregion
 
         public BugToolPageSelectCapabilities()
@@ -71,10 +66,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             //set this here due to a framework bug
             splitContainer1.Panel1MinSize = 250;
             splitContainer1.Panel2MinSize = 200;
-
-            // Due to a Visual Studio bug, ToolTipTitle is not put in the resx, even though the form is Localizable=true
-            // so we have to set it here instead.
-            PiiTooltip.ToolTipTitle = Messages.PRIVACY_WARNING;
         }
 
         public override string Text{get { return Messages.BUGTOOL_PAGE_CAPABILITIES_TEXT; }}
@@ -100,18 +91,24 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
         private bool wizardCheckAnyChecked()
         {
-            foreach (Capability c in _capabilities)
-                if (c.Checked)
+            foreach (DataGridViewRow row in dataGridViewItems.Rows)
+            {
+                var capRow = row as CapabilityRow;
+                if (capRow != null && capRow.Capability.Checked)
                     return true;
+            }
             return false;
         }
 
         private bool wizardCheckAnyUnchecked()
         {
-            foreach (Capability c in _capabilities)
-                if (!c.Checked)
-                    return true;
-            return false;
+             foreach (DataGridViewRow row in dataGridViewItems.Rows)
+             {
+                 var capRow = row as CapabilityRow;
+                 if (capRow != null && !capRow.Capability.Checked)
+                     return true;
+             }
+             return false;
         }
 
         /// <summary>
@@ -125,7 +122,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 return true;
 
             _hostList = HostList;
-            CapabilitiesCheckedListBox.Items.Clear();
+            dataGridViewItems.Rows.Clear();
 
             if (dialog != null && dialog.Visible)
                 dialog.Close();
@@ -290,29 +287,36 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             }));
         }
 
-        private void OnCheckedCapabilitiesChanged(bool refreshList)
+        private void OnCheckedCapabilitiesChanged()
         {
-            TotalSizeValue.Text = getShoppingCartTotalSize();
-            TotalTimeValue.Text = getShoppingCartTotalTime();
-            OnPageUpdated();
+            string totalSize, totalTime;
+            CalculateTotalSizeAndTime(out totalSize, out totalTime);
+            TotalSizeValue.Text = totalSize;
+            TotalTimeValue.Text = totalTime;
             ClearButton.Enabled = wizardCheckAnyChecked();
             SelectButton.Enabled = wizardCheckAnyUnchecked();
-
-            if (refreshList)
-                CapabilitiesCheckedListBox.Refresh();
+            OnPageUpdated();
         }
 
         private void buildList()
         {
-            CapabilitiesCheckedListBox.Items.Clear();
-
-            foreach (Capability c in _capabilities)
+            try
             {
-                CapabilitiesCheckedListBox.Items.Add(c);
-                if (CapabilitiesCheckedListBox.SelectedIndex == -1)
-                    CapabilitiesCheckedListBox.SelectedItem = c;    
+                dataGridViewItems.SuspendLayout();
+                dataGridViewItems.Rows.Clear();
+
+                var list = new List<DataGridViewRow>();
+                foreach (Capability c in _capabilities)
+                    list.Add(new CapabilityRow(c));
+
+                dataGridViewItems.Rows.AddRange(list.ToArray());
             }
-            OnCheckedCapabilitiesChanged(false);
+            finally
+            {
+                dataGridViewItems.ResumeLayout();
+            }
+
+            OnCheckedCapabilitiesChanged();
         }
 
         private long getLogSize()
@@ -340,140 +344,86 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             }
         }
 
-        private string getShoppingCartTotalSize()
+        private void CalculateTotalSizeAndTime(out string totalSize, out string totalTime)
         {
-            List<long> minList = new List<long>();
-            List<long> maxList = new List<long>();
-            foreach (Capability c in CapabilitiesCheckedListBox.Items)
+            var sizeMinList = new List<long>();
+            var sizeMaxList = new List<long>();
+
+            var timeMinList = new List<long>();
+            var timeMaxList = new List<long>();
+
+            foreach (var row in dataGridViewItems.Rows)
             {
-                if (c.Checked)
+                var capRow = row as CapabilityRow;
+                if (capRow != null && capRow.Capability.Checked)
                 {
+                    var c = capRow.Capability;
                     int m = c.Key == "client-logs" ? 1 : _hostList.Count;
-                    minList.Add(c.MinSize * m);
-                    maxList.Add(c.MaxSize * m);
+
+                    sizeMinList.Add(c.MinSize * m);
+                    sizeMaxList.Add(c.MaxSize * m);
+
+                    timeMinList.Add(c.MinTime * m);
+                    timeMaxList.Add(c.MaxTime * m);
                 }
             }
-            return Helpers.StringFromMaxMinSizeList(minList, maxList);
+            totalSize = Helpers.StringFromMaxMinSizeList(sizeMinList, sizeMaxList);
+            totalTime = Helpers.StringFromMaxMinTimeList(timeMinList, timeMaxList);
         }
 
-        private string getShoppingCartTotalTime()
-        {
-            List<long> minList = new List<long>();
-            List<long> maxList = new List<long>();
-            foreach (Capability c in CapabilitiesCheckedListBox.Items)
-            {
-                if (c.Checked)
-                {
-                    int m = c.Key == "client-logs" ? 1 : _hostList.Count;
-                    minList.Add(c.MinTime * m);
-                    maxList.Add(c.MaxTime * m);
-                }
-            }
-            return Helpers.StringFromMaxMinTimeList(minList, maxList);
-        }
-
-        public List<Capability> Capabilities
+        public IEnumerable<Capability> Capabilities
         {
             get
             {
-                List<Capability> list = new List<Capability>();
-                foreach (Capability c in CapabilitiesCheckedListBox.Items)
-                {
-                    if(c.Checked)
-                        list.Add(c);
-                }
-                return list;
+                return from DataGridViewRow row in dataGridViewItems.Rows
+                       let capRow = row as CapabilityRow
+                       where capRow != null && capRow.Capability.Checked
+                       select capRow.Capability;
             }
         }
 
         #region Control event handlers
 
-        private void CapabilitiesCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void dataGridViewItems_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
-            if (CapabilitiesCheckedListBox.SelectedIndex == -1)
+            var row1 = dataGridViewItems.Rows[e.RowIndex1] as CapabilityRow;
+            var row2 = dataGridViewItems.Rows[e.RowIndex2] as CapabilityRow;
+
+            if (row1 != null && row2 != null && e.Column.Index == columnImage.Index)
+            {
+                e.SortResult = row1.Capability.PII.CompareTo(row2.Capability.PII);
+                e.Handled = true;
+            }
+        }
+
+        private void dataGridViewItems_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridViewItems.SelectedRows.Count > 0)
+            {
+                var row = dataGridViewItems.SelectedRows[0] as CapabilityRow;
+                if (row == null)
+                    return;
+
+                DescriptionValue.Text = row.Capability.Description;
+                SizeValue.Text = row.Capability.EstimatedSize;
+                TimeValue.Text = row.Capability.EstimatedTime;
+            }
+        }
+
+        private void dataGridViewItems_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex != columnCheck.Index)
+                return;
+            if (e.RowIndex < 0 || e.RowIndex >= dataGridViewItems.RowCount)
                 return;
 
-            Capability c = CapabilitiesCheckedListBox.SelectedItem as Capability;
-
-            DescriptionValue.Text = c.Description;
-            SizeValue.Text = c.EstimatedSize;
-            TimeValue.Text = c.EstimatedTime;
-        }
-
-        private void CapabilitiesCheckedListBox_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            if (e.Index == -1)
+            var row = dataGridViewItems.Rows[e.RowIndex] as CapabilityRow;
+            if (row == null)
                 return;
-            Capability c = CapabilitiesCheckedListBox.Items[e.Index] as Capability;
-            using (SolidBrush backBrush = new SolidBrush(e.BackColor))
-            {
-                e.Graphics.FillRectangle(backBrush, e.Bounds);
-                CheckBoxRenderer.DrawCheckBox(e.Graphics, new Point(e.Bounds.Left + 1, e.Bounds.Top + 1), c.Checked ? CheckBoxState.CheckedNormal : CheckBoxState.UncheckedNormal);
-                Drawing.DrawText(e.Graphics, c.ToString(), Font, new Point(e.Bounds.Left + e.Bounds.Height, e.Bounds.Top + 1), e.ForeColor);
-                e.Graphics.FillRectangle(backBrush, new Rectangle(e.Bounds.Right - 15, e.Bounds.Top, 15, e.Bounds.Height));
-            }
-            if (c.PII == PrivateInformationIncluded.customized)
-            {
-                e.Graphics.DrawImage(Properties.Resources._000_PiiCustomised_h32bit_16, new Rectangle(e.Bounds.Right - 15, e.Bounds.Top, 15, 15));
-            }
-            else if (c.PII == PrivateInformationIncluded.maybe)
-            {
-                e.Graphics.DrawImage(Properties.Resources._000_PiiMaybe_h32bit_16, new Rectangle(e.Bounds.Right - 15, e.Bounds.Top, 15, 15));
-            }
-            else if (c.PII == PrivateInformationIncluded.no)
-            {
-                e.Graphics.DrawImage(Properties.Resources._000_PiiNo_h32bit_16, new Rectangle(e.Bounds.Right - 15, e.Bounds.Top, 15, 15));
-            }
-            else
-            {
-                e.Graphics.DrawImage(Properties.Resources._000_PiiYes_h32bit_16, new Rectangle(e.Bounds.Right - 15, e.Bounds.Top, 15, 15));
-            }
-        }
 
-        private void CapabilitiesCheckedListBox_MouseMove(object sender, MouseEventArgs e)
-        {
-            Point point = CapabilitiesCheckedListBox.PointToClient(MousePosition);
-            int imageLeft = CapabilitiesCheckedListBox.Height > CapabilitiesCheckedListBox.ItemHeight * CapabilitiesCheckedListBox.Items.Count ? 19 : 37;
-            if (point.X < CapabilitiesCheckedListBox.Width - imageLeft)
-            {
-                PiiTooltip.RemoveAll();
-                return;
-            }
-            int hoverIndex = CapabilitiesCheckedListBox.IndexFromPoint(point);
-            if (hoverIndex >= 0 && hoverIndex < CapabilitiesCheckedListBox.Items.Count)
-            {
-                if ((CapabilitiesCheckedListBox.Items[hoverIndex] as Capability).PiiText != PiiTooltip.GetToolTip(CapabilitiesCheckedListBox) || hoverIndex != oldIndex)
-                {
-                    oldIndex = hoverIndex;
-                    PiiTooltip.Active = false;
-                    PiiTooltip.SetToolTip(CapabilitiesCheckedListBox, (CapabilitiesCheckedListBox.Items[hoverIndex] as Capability).PiiText);
-                    PiiTooltip.Active = true;
-                }
-            } 
-        }
-
-        private void CapabilitiesCheckedListBox_MouseUp(object sender, MouseEventArgs e)
-        {
-            Point point = CapabilitiesCheckedListBox.PointToClient(MousePosition);
-            if (point.X < 15)
-            {
-                Capability c = CapabilitiesCheckedListBox.SelectedItem as Capability;
-                c.Checked = !c.Checked;
-                OnCheckedCapabilitiesChanged(true);
-            }
-        }
-
-        private void CapabilitiesCheckedListBox_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Space)
-            {
-                Capability c = CapabilitiesCheckedListBox.SelectedItem as Capability;
-                if (c != null)
-                {
-                    c.Checked = !c.Checked;
-                    OnCheckedCapabilitiesChanged(true);
-                }
-            }
+            row.Capability.Checked = !row.Capability.Checked;
+            row.Update();
+            OnCheckedCapabilitiesChanged();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -494,21 +444,74 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
         private void SelectButton_Click(object sender, EventArgs e)
         {
-            foreach (Capability c in _capabilities)
-                c.Checked = true;
-
-            OnCheckedCapabilitiesChanged(true);
+            foreach (DataGridViewRow row in dataGridViewItems.Rows)
+            {
+                var capRow = row as CapabilityRow;
+                if (capRow != null && !capRow.Capability.Checked)
+                {
+                    capRow.Capability.Checked = true;
+                    capRow.Update();
+                }
+            }
+            OnCheckedCapabilitiesChanged();
         }
 
         private void ClearButton_Click(object sender, EventArgs e)
         {
-            foreach (Capability c in _capabilities)
-                c.Checked = false;
-
-            OnCheckedCapabilitiesChanged(true);
+            foreach (DataGridViewRow row in dataGridViewItems.Rows)
+            {
+                var capRow = row as CapabilityRow;
+                if (capRow != null && capRow.Capability.Checked)
+                {
+                    capRow.Capability.Checked = false;
+                    capRow.Update();
+                }
+            }
+            OnCheckedCapabilitiesChanged();
         }
 
         #endregion
+
+        private class CapabilityRow : DataGridViewRow
+        {
+            public readonly Capability Capability;
+
+            private readonly DataGridViewCheckBoxCell cellCheck = new DataGridViewCheckBoxCell();
+            private readonly DataGridViewTextBoxCell cellItem = new DataGridViewTextBoxCell();
+            private readonly DataGridViewImageCell cellImage = new DataGridViewImageCell();
+
+            public CapabilityRow(Capability capability)
+            {
+                Capability = capability;
+                Cells.AddRange(cellCheck, cellItem, cellImage);
+                Update();
+            }
+
+            public void Update()
+            {
+                cellCheck.Value = Capability.Checked;
+                cellItem.Value = Capability.Name;
+
+                switch(Capability.PII)
+                {
+                    case PrivateInformationIncluded.maybe:
+                        cellImage.Value = Properties.Resources._000_PiiMaybe_h32bit_16;
+                        break;
+                    case PrivateInformationIncluded.customized:
+                        cellImage.Value = Properties.Resources._000_PiiCustomised_h32bit_16;
+                        break;
+                    case PrivateInformationIncluded.no:
+                        cellImage.Value = Properties.Resources._000_PiiNo_h32bit_16;
+                        break;
+                    case PrivateInformationIncluded.yes:
+                    default:
+                        cellImage.Value = Properties.Resources._000_PiiYes_h32bit_16;
+                        break;
+                }
+
+                cellImage.ToolTipText = Capability.PiiText;
+            }
+        }
     }
 
     public enum ContentType { text_plain, application_data };
@@ -519,12 +522,14 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
     {
         public ContentType ContentType;
         bool _defaultChecked;
-        public string Key;
         public long MaxSize;
         public long MinSize;
         public long MaxTime;
         public long MinTime;
         public PrivateInformationIncluded PII;
+        private string _key;
+        private string _name;
+        private string _description;
 
         public bool Checked;
 
@@ -545,25 +550,48 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         {
             get
             {
-                if (PII == PrivateInformationIncluded.yes)
-                    return Messages.PII_YES;
-                else if(PII == PrivateInformationIncluded.maybe)
-                    return Messages.PII_MAYBE;
-                else if(PII == PrivateInformationIncluded.customized)
-                    return Messages.PII_CUSTOMISED;
-                else
-                    return Messages.PII_NO;
-
+                switch (PII)
+                {
+                    case PrivateInformationIncluded.yes:
+                        return Messages.PII_YES;
+                    case PrivateInformationIncluded.maybe:
+                        return Messages.PII_MAYBE;
+                    case PrivateInformationIncluded.customized:
+                        return Messages.PII_CUSTOMISED;
+                    case PrivateInformationIncluded.no:
+                    default:
+                        return Messages.PII_NO;
+                }
             }
         }
 
-        public string Description
+        public string Key
         {
             get
             {
-                return Core.PropertyManager.GetFriendlyName(
-                    string.Format("Description-host.system_status-{0}", Key));
+                return _key;
             }
+            set
+            {
+                _key = value;
+
+                _name = Core.PropertyManager.GetFriendlyName(string.Format("Label-host.system_status-{0}", _key));
+
+                if (string.IsNullOrEmpty(_name))
+                    _name = _key;
+
+                _description = Core.PropertyManager.GetFriendlyName(string.Format("Description-host.system_status-{0}", _key));
+            }
+        }
+
+        public string Name
+        {
+            get { return _name; }
+        }
+            
+        public string Description
+        {
+            get { return _description; }
         }
 
         public string EstimatedSize
@@ -584,9 +612,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
         public override string ToString()
         {
-            string result = Core.PropertyManager.GetFriendlyName(
-               string.Format("Label-host.system_status-{0}", Key));
-            return result == null ? Key : result;
+            return _name;
         }
 
         public int CompareTo(Capability other)

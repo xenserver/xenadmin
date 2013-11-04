@@ -28,18 +28,17 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BugToolPageSelectCapabilities));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.CapabilitiesCheckedListBox = new XenAdmin.Controls.FlickerFreeListBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.dataGridViewItems = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
+            this.columnCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.columnItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.SelectButton = new System.Windows.Forms.Button();
             this.ClearButton = new System.Windows.Forms.Button();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.DescriptionLabel = new System.Windows.Forms.Label();
             this.DescriptionValue = new System.Windows.Forms.Label();
             this.SizeLabel = new System.Windows.Forms.Label();
@@ -50,14 +49,13 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.TotalSizeValue = new System.Windows.Forms.Label();
             this.TotalTimeLabel = new System.Windows.Forms.Label();
             this.TotalTimeValue = new System.Windows.Forms.Label();
-            this.PiiTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewItems)).BeginInit();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
@@ -79,43 +77,47 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.label3, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.CapabilitiesCheckedListBox, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridViewItems, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.SelectButton, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.ClearButton, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.linkLabel1, 0, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
-            // label3
+            // dataGridViewItems
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
+            this.dataGridViewItems.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dataGridViewItems.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dataGridViewItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGridViewItems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.columnCheck,
+            this.columnItem,
+            this.columnImage});
+            this.tableLayoutPanel1.SetColumnSpan(this.dataGridViewItems, 3);
+            resources.ApplyResources(this.dataGridViewItems, "dataGridViewItems");
+            this.dataGridViewItems.GridColor = System.Drawing.SystemColors.Control;
+            this.dataGridViewItems.Name = "dataGridViewItems";
+            this.dataGridViewItems.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dataGridViewItems_SortCompare);
+            this.dataGridViewItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewItems_CellClick);
+            this.dataGridViewItems.SelectionChanged += new System.EventHandler(this.dataGridViewItems_SelectionChanged);
             // 
-            // CapabilitiesCheckedListBox
+            // columnCheck
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.CapabilitiesCheckedListBox, 2);
-            resources.ApplyResources(this.CapabilitiesCheckedListBox, "CapabilitiesCheckedListBox");
-            this.CapabilitiesCheckedListBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.CapabilitiesCheckedListBox.FormattingEnabled = true;
-            this.CapabilitiesCheckedListBox.Name = "CapabilitiesCheckedListBox";
-            this.PiiTooltip.SetToolTip(this.CapabilitiesCheckedListBox, resources.GetString("CapabilitiesCheckedListBox.ToolTip"));
-            this.CapabilitiesCheckedListBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CapabilitiesCheckedListBox_MouseUp);
-            this.CapabilitiesCheckedListBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.CapabilitiesCheckedListBox_DrawItem);
-            this.CapabilitiesCheckedListBox.SelectedIndexChanged += new System.EventHandler(this.CapabilitiesCheckedListBox_SelectedIndexChanged);
-            this.CapabilitiesCheckedListBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CapabilitiesCheckedListBox_MouseMove);
-            this.CapabilitiesCheckedListBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.CapabilitiesCheckedListBox_KeyUp);
+            this.columnCheck.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.columnCheck, "columnCheck");
+            this.columnCheck.Name = "columnCheck";
+            this.columnCheck.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.columnCheck.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // label2
+            // columnItem
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.columnItem, "columnItem");
+            this.columnItem.Name = "columnItem";
             // 
-            // flowLayoutPanel1
+            // columnImage
             // 
-            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
-            this.tableLayoutPanel1.SetColumnSpan(this.flowLayoutPanel1, 2);
-            this.flowLayoutPanel1.Controls.Add(this.SelectButton);
-            this.flowLayoutPanel1.Controls.Add(this.ClearButton);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            resources.ApplyResources(this.columnImage, "columnImage");
+            this.columnImage.Name = "columnImage";
+            this.columnImage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // SelectButton
             // 
@@ -131,30 +133,28 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.ClearButton.UseVisualStyleBackColor = true;
             this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
-            // tableLayoutPanel4
-            // 
-            resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
-            this.tableLayoutPanel4.Controls.Add(this.linkLabel1, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.DescriptionLabel, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.DescriptionValue, 0, 2);
-            this.tableLayoutPanel4.Controls.Add(this.SizeLabel, 0, 3);
-            this.tableLayoutPanel4.Controls.Add(this.SizeValue, 0, 4);
-            this.tableLayoutPanel4.Controls.Add(this.TimeLabel, 0, 5);
-            this.tableLayoutPanel4.Controls.Add(this.TimeValue, 0, 6);
-            this.tableLayoutPanel4.Controls.Add(this.TotalSizeLabel, 0, 7);
-            this.tableLayoutPanel4.Controls.Add(this.TotalSizeValue, 1, 7);
-            this.tableLayoutPanel4.Controls.Add(this.TotalTimeLabel, 0, 8);
-            this.tableLayoutPanel4.Controls.Add(this.TotalTimeValue, 1, 8);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            // 
             // linkLabel1
             // 
-            resources.ApplyResources(this.linkLabel1, "linkLabel1");
             this.linkLabel1.AutoEllipsis = true;
-            this.tableLayoutPanel4.SetColumnSpan(this.linkLabel1, 2);
+            resources.ApplyResources(this.linkLabel1, "linkLabel1");
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.TabStop = true;
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // tableLayoutPanel4
+            // 
+            resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
+            this.tableLayoutPanel4.Controls.Add(this.DescriptionLabel, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.DescriptionValue, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.SizeLabel, 0, 2);
+            this.tableLayoutPanel4.Controls.Add(this.SizeValue, 0, 3);
+            this.tableLayoutPanel4.Controls.Add(this.TimeLabel, 0, 4);
+            this.tableLayoutPanel4.Controls.Add(this.TimeValue, 0, 5);
+            this.tableLayoutPanel4.Controls.Add(this.TotalSizeLabel, 0, 6);
+            this.tableLayoutPanel4.Controls.Add(this.TotalSizeValue, 1, 6);
+            this.tableLayoutPanel4.Controls.Add(this.TotalTimeLabel, 0, 7);
+            this.tableLayoutPanel4.Controls.Add(this.TotalTimeValue, 1, 7);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             // 
             // DescriptionLabel
             // 
@@ -209,12 +209,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             resources.ApplyResources(this.TotalTimeValue, "TotalTimeValue");
             this.TotalTimeValue.Name = "TotalTimeValue";
             // 
-            // PiiTooltip
-            // 
-            this.PiiTooltip.IsBalloon = true;
-            this.PiiTooltip.ShowAlways = true;
-            this.PiiTooltip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Warning;
-            // 
             // tableLayoutPanel3
             // 
             resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
@@ -238,7 +232,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.splitContainer1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewItems)).EndInit();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -251,7 +245,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private XenAdmin.Controls.FlickerFreeListBox CapabilitiesCheckedListBox;
         private System.Windows.Forms.Label DescriptionLabel;
         private System.Windows.Forms.Label SizeLabel;
         private System.Windows.Forms.Label TimeLabel;
@@ -260,18 +253,18 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         private System.Windows.Forms.Label TimeValue;
         private System.Windows.Forms.Label TotalSizeLabel;
         private System.Windows.Forms.Label TotalSizeValue;
-        private System.Windows.Forms.ToolTip PiiTooltip;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label TotalTimeLabel;
         private System.Windows.Forms.Label TotalTimeValue;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button ClearButton;
         private System.Windows.Forms.Button SelectButton;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private XenAdmin.Controls.DataGridViewEx.DataGridViewEx dataGridViewItems;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn columnCheck;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnItem;
+        private System.Windows.Forms.DataGridViewImageColumn columnImage;
     }
 }
