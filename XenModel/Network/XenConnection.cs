@@ -607,7 +607,7 @@ namespace XenAdmin.Network
                 SetPoolAndHostInAction(action, pool, PoolOpaqueRef);
         }
 
-        private void SetPoolAndHostInAction(ActionBase n, Pool pool, string poolopaqueref)
+        private void SetPoolAndHostInAction(ActionBase action, Pool pool, string poolopaqueref)
         {
             if (pool != null && !string.IsNullOrEmpty(poolopaqueref))
             {
@@ -619,9 +619,10 @@ namespace XenAdmin.Network
                 Host h = new Host();
                 h.Connection = this;
                 h.opaque_ref = pool.master.opaque_ref;
+                h.name_label = Hostname;
 
-                n.Pool = p;
-                n.Host = h;
+                action.Pool = p;
+                action.Host = h;
             }
             else
             {
@@ -632,7 +633,7 @@ namespace XenAdmin.Network
                 Host host = new Host();
                 host.Connection = this;
                 host.opaque_ref = HostnameWithPort;
-                n.Host = host;
+                action.Host = host;
             }
         }
 

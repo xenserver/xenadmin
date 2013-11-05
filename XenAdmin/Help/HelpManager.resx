@@ -1032,4 +1032,7 @@
   <data name="NewVMWizard_GPUPane" xml:space="preserve">
     <value>2080</value>
   </data>
+  <data name="EventsPane" xml:space="preserve">
+    <value>9856</value>
+  </data>
 </root>

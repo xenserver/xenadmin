@@ -63,15 +63,10 @@ namespace XenAdmin.TabPages
             ActionBase.NewAction += Action_NewAction;
         }
 
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
-            toolStripDdbFilterLocation.InitializeHostList();
-            toolStripDdbFilterLocation.BuildFilterList();
-        }
-
         public void RefreshDisplayedEvents()
         {
+            toolStripDdbFilterLocation.InitializeHostList();
+            toolStripDdbFilterLocation.BuildFilterList();
             BuildRowList();
         }
 

@@ -308,6 +308,8 @@ namespace XenAdmin
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
+            TheTabControl.Visible = true;
+            alertPage.Visible = updatesPage.Visible = eventsPage.Visible = false;
             navigationPane.FocusTreeView();
         }
 
@@ -2197,10 +2199,19 @@ namespace XenAdmin
 
         private void LaunchHelp()
         {
-            if (TheTabControl.SelectedTab.Tag is TabPageFeature && ((TabPageFeature)TheTabControl.SelectedTab.Tag).HasHelp)
-                ((TabPageFeature)TheTabControl.SelectedTab.Tag).LaunchHelp();
+            if (alertPage.Visible)
+                Help.HelpManager.Launch("AlertSummaryDialog");
+            else if (updatesPage.Visible)
+                Help.HelpManager.Launch("ManageUpdatesDialog");
+            else if (eventsPage.Visible)
+                Help.HelpManager.Launch("EventsPane");
             else
-                Help.HelpManager.Launch(TabHelpID());
+            {
+                if (TheTabControl.SelectedTab.Tag is TabPageFeature && ((TabPageFeature)TheTabControl.SelectedTab.Tag).HasHelp)
+                    ((TabPageFeature)TheTabControl.SelectedTab.Tag).LaunchHelp();
+                else
+                    Help.HelpManager.Launch(TabHelpID());
+            }
         }
 
         public bool HasHelp()
