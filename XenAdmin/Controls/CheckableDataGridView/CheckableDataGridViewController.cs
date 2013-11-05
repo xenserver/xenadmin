@@ -245,7 +245,7 @@ namespace XenAdmin.Controls.CheckableDataGridView
 
         private void ToggleDisableIfNotLastStanding(int checkedRowIndex)
         {
-            foreach (CheckableDataGridViewRow otherRow in storedRows)
+            foreach (CheckableDataGridViewRow otherRow in storedRows.ToList())
             {
                 if(otherRow.LockDisabledState)
                     continue;
