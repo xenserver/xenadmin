@@ -125,6 +125,9 @@ namespace XenAdmin
             this.pluginItemsPlaceHolderToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.customTemplatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.templatesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.localStorageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ShowHiddenObjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
             this.pluginItemsPlaceHolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -266,9 +269,6 @@ namespace XenAdmin
             this.MainMenuBar = new XenAdmin.Controls.MenuStripEx();
             this.securityGroupsToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.MenuPanel = new System.Windows.Forms.Panel();
-            this.templatesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.customTemplatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.localStorageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -309,7 +309,7 @@ namespace XenAdmin
             // 
             resources.ApplyResources(this.navigationPane, "navigationPane");
             this.navigationPane.Name = "navigationPane";
-            this.navigationPane.NotificationsSubModeChanged += new System.Action<XenAdmin.Controls.MainWindowControls.NotificationsSubMode>(this.navigationPane_NotificationsSubModeChanged);
+            this.navigationPane.NotificationsSubModeChanged += new System.Action<XenAdmin.Controls.MainWindowControls.NotificationsSubModeItem>(this.navigationPane_NotificationsSubModeChanged);
             this.navigationPane.TreeViewRefreshResumed += new System.Action(this.navigationPane_TreeViewRefreshResumed);
             this.navigationPane.TreeViewRefreshSuspended += new System.Action(this.navigationPane_TreeViewRefreshSuspended);
             this.navigationPane.TreeViewSelectionChanged += new System.Action(this.navigationPane_TreeViewSelectionChanged);
@@ -763,6 +763,24 @@ namespace XenAdmin
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             resources.ApplyResources(this.viewToolStripMenuItem, "viewToolStripMenuItem");
             this.viewToolStripMenuItem.DropDownOpening += new System.EventHandler(this.topLevelMenu_DropDownOpening);
+            // 
+            // customTemplatesToolStripMenuItem
+            // 
+            this.customTemplatesToolStripMenuItem.Name = "customTemplatesToolStripMenuItem";
+            resources.ApplyResources(this.customTemplatesToolStripMenuItem, "customTemplatesToolStripMenuItem");
+            this.customTemplatesToolStripMenuItem.Click += new System.EventHandler(this.customTemplatesToolStripMenuItem_Click);
+            // 
+            // templatesToolStripMenuItem1
+            // 
+            this.templatesToolStripMenuItem1.Name = "templatesToolStripMenuItem1";
+            resources.ApplyResources(this.templatesToolStripMenuItem1, "templatesToolStripMenuItem1");
+            this.templatesToolStripMenuItem1.Click += new System.EventHandler(this.templatesToolStripMenuItem1_Click);
+            // 
+            // localStorageToolStripMenuItem
+            // 
+            this.localStorageToolStripMenuItem.Name = "localStorageToolStripMenuItem";
+            resources.ApplyResources(this.localStorageToolStripMenuItem, "localStorageToolStripMenuItem");
+            this.localStorageToolStripMenuItem.Click += new System.EventHandler(this.localStorageToolStripMenuItem_Click);
             // 
             // ShowHiddenObjectsToolStripMenuItem
             // 
@@ -1723,24 +1741,6 @@ namespace XenAdmin
             this.MenuPanel.Controls.Add(this.MainMenuBar);
             resources.ApplyResources(this.MenuPanel, "MenuPanel");
             this.MenuPanel.Name = "MenuPanel";
-            // 
-            // templatesToolStripMenuItem1
-            // 
-            this.templatesToolStripMenuItem1.Name = "templatesToolStripMenuItem1";
-            resources.ApplyResources(this.templatesToolStripMenuItem1, "templatesToolStripMenuItem1");
-            this.templatesToolStripMenuItem1.Click += new System.EventHandler(this.templatesToolStripMenuItem1_Click);
-            // 
-            // customTemplatesToolStripMenuItem
-            // 
-            this.customTemplatesToolStripMenuItem.Name = "customTemplatesToolStripMenuItem";
-            resources.ApplyResources(this.customTemplatesToolStripMenuItem, "customTemplatesToolStripMenuItem");
-            this.customTemplatesToolStripMenuItem.Click += new System.EventHandler(this.customTemplatesToolStripMenuItem_Click);
-            // 
-            // localStorageToolStripMenuItem
-            // 
-            this.localStorageToolStripMenuItem.Name = "localStorageToolStripMenuItem";
-            resources.ApplyResources(this.localStorageToolStripMenuItem, "localStorageToolStripMenuItem");
-            this.localStorageToolStripMenuItem.Click += new System.EventHandler(this.localStorageToolStripMenuItem_Click);
             // 
             // MainWindow
             // 

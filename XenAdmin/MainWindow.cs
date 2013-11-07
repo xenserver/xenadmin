@@ -2430,6 +2430,9 @@ namespace XenAdmin
         /// </summary>
         private void UpdateHeader()
         {
+            if (!TheTabControl.Visible)
+                return;
+
             if (SearchMode && SearchPage.Search != null)
             {
                 TitleLabel.Text = HelpersGUI.GetLocalizedSearchName(SearchPage.Search);
@@ -2527,12 +2530,12 @@ namespace XenAdmin
             UpdateHeader();
         }
 
-        private void navigationPane_NotificationsSubModeChanged(NotificationsSubMode submode)
+        private void navigationPane_NotificationsSubModeChanged(NotificationsSubModeItem submodeItem)
         {
             TheTabControl.Visible = false;
-            alertPage.Visible = submode == NotificationsSubMode.Alerts;
-            updatesPage.Visible = submode == NotificationsSubMode.Updates;
-            eventsPage.Visible = submode == NotificationsSubMode.Events;
+            alertPage.Visible = submodeItem.SubMode == NotificationsSubMode.Alerts;
+            updatesPage.Visible = submodeItem.SubMode == NotificationsSubMode.Updates;
+            eventsPage.Visible = submodeItem.SubMode == NotificationsSubMode.Events;
 
             if (alertPage.Visible)
                 alertPage.RefreshAlertList();
@@ -2551,6 +2554,10 @@ namespace XenAdmin
                 eventsPage.RefreshDisplayedEvents();
                 RequestRefreshTreeView();
             }
+
+            loggedInLabel1.Connection = null;
+            TitleLabel.Text = submodeItem.Text;
+            TitleIcon.Image = submodeItem.Image;
         }
 
         private void navigationPane_NavigationModeChanged(NavigationPane.NavigationMode mode)

@@ -60,7 +60,7 @@ namespace XenAdmin.Controls.MainWindowControls
         public event Action<NavigationMode> NavigationModeChanged;
 
         [Browsable(true)]
-        public event Action<NotificationsSubMode> NotificationsSubModeChanged;
+        public event Action<NotificationsSubModeItem> NotificationsSubModeChanged;
 
         [Browsable(true)]
         public event Action TreeViewSelectionChanged;
@@ -358,10 +358,10 @@ namespace XenAdmin.Controls.MainWindowControls
             }
         }
 
-        private void notificationsView_NotificationsSubModeChanged(NotificationsSubMode subMode)
+        private void notificationsView_NotificationsSubModeChanged(NotificationsSubModeItem subModeItem)
         {
             if (NotificationsSubModeChanged != null)
-                NotificationsSubModeChanged(subMode);
+                NotificationsSubModeChanged(subModeItem);
         }
 
         #endregion

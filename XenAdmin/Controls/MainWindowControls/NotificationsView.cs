@@ -44,7 +44,7 @@ namespace XenAdmin.Controls.MainWindowControls
     class NotificationsView : FlickerFreeListBox
     {
         [Browsable(true)]
-        public event Action<NotificationsSubMode> NotificationsSubModeChanged;
+        public event Action<NotificationsSubModeItem> NotificationsSubModeChanged;
 
         public NotificationsView()
         {
@@ -127,13 +127,13 @@ namespace XenAdmin.Controls.MainWindowControls
             var item = Items[SelectedIndex] as NotificationsSubModeItem;
 
             if (item != null && NotificationsSubModeChanged != null)
-                NotificationsSubModeChanged(item.SubMode);
+                NotificationsSubModeChanged(item);
         }
     }
 
     public enum NotificationsSubMode { Alerts, Updates, Events }
 
-    class NotificationsSubModeItem
+    public class NotificationsSubModeItem
     {
         public readonly NotificationsSubMode SubMode;
         

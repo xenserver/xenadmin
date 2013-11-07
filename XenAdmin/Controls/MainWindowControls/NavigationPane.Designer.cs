@@ -89,7 +89,7 @@
             resources.ApplyResources(this.notificationsView, "notificationsView");
             this.notificationsView.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.notificationsView.Name = "notificationsView";
-            this.notificationsView.NotificationsSubModeChanged += new System.Action<XenAdmin.Controls.MainWindowControls.NotificationsSubMode>(this.notificationsView_NotificationsSubModeChanged);
+            this.notificationsView.NotificationsSubModeChanged += new System.Action<XenAdmin.Controls.MainWindowControls.NotificationsSubModeItem>(this.notificationsView_NotificationsSubModeChanged);
             // 
             // toolStripBig
             // 
