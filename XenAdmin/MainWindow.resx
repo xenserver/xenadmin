@@ -720,9 +720,6 @@
   <data name="TheTabControl.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 30</value>
   </data>
-  <data name="TheTabControl.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
   <data name="TheTabControl.Padding" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -754,7 +751,7 @@
     <value>0, 30</value>
   </data>
   <data name="alertPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
+    <value>12, 12, 12, 12</value>
   </data>
   <data name="alertPage.Size" type="System.Drawing.Size, System.Drawing">
     <value>761, 645</value>
@@ -773,36 +770,6 @@
   </data>
   <data name="&gt;&gt;alertPage.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="eventsPage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="eventsPage.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 8.25pt</value>
-  </data>
-  <data name="eventsPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 30</value>
-  </data>
-  <data name="eventsPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
-  <data name="eventsPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>761, 645</value>
-  </data>
-  <data name="eventsPage.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;eventsPage.Name" xml:space="preserve">
-    <value>eventsPage</value>
-  </data>
-  <data name="&gt;&gt;eventsPage.Type" xml:space="preserve">
-    <value>XenAdmin.TabPages.HistoryPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;eventsPage.Parent" xml:space="preserve">
-    <value>splitContainer1.Panel2</value>
-  </data>
-  <data name="&gt;&gt;eventsPage.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="updatesPage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -832,6 +799,36 @@
     <value>splitContainer1.Panel2</value>
   </data>
   <data name="&gt;&gt;updatesPage.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="eventsPage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="eventsPage.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
+  </data>
+  <data name="eventsPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 30</value>
+  </data>
+  <data name="eventsPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>12, 12, 12, 12</value>
+  </data>
+  <data name="eventsPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>761, 645</value>
+  </data>
+  <data name="eventsPage.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;eventsPage.Name" xml:space="preserve">
+    <value>eventsPage</value>
+  </data>
+  <data name="&gt;&gt;eventsPage.Type" xml:space="preserve">
+    <value>XenAdmin.TabPages.HistoryPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;eventsPage.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel2</value>
+  </data>
+  <data name="&gt;&gt;eventsPage.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="TitleBackPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -991,7 +988,7 @@
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="toolTipContainer1" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="TitleLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="TitleBackPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 3</value>
+    <value>0, 0</value>
   </data>
   <data name="TitleBackPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>759, 24</value>

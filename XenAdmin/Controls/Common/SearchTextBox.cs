@@ -90,7 +90,7 @@ namespace XenAdmin.Controls
 
             Graphics g = e.Graphics;
 
-            var borderRect = new Rectangle(1, 1, Width - 2, Height - 2);
+            var borderRect = new Rectangle(0, 0, Width, Height);
 
             if (Application.RenderWithVisualStyles)
             {

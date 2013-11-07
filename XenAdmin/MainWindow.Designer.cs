@@ -86,8 +86,8 @@ namespace XenAdmin
             this.TabPageAD = new System.Windows.Forms.TabPage();
             this.TabPageSearch = new System.Windows.Forms.TabPage();
             this.alertPage = new XenAdmin.TabPages.AlertSummaryPage();
-            this.eventsPage = new XenAdmin.TabPages.HistoryPage();
             this.updatesPage = new XenAdmin.TabPages.ManageUpdatesPage();
+            this.eventsPage = new XenAdmin.TabPages.HistoryPage();
             this.TitleBackPanel = new XenAdmin.Controls.GradientPanel.GradientPanel();
             this.TitleIcon = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -286,7 +286,7 @@ namespace XenAdmin
             // 
             // splitContainer1
             // 
-            this.splitContainer1.BackColor = System.Drawing.Color.Transparent;
+            this.splitContainer1.BackColor = System.Drawing.SystemColors.Control;
             resources.ApplyResources(this.splitContainer1, "splitContainer1");
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer1.Name = "splitContainer1";
@@ -298,10 +298,11 @@ namespace XenAdmin
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer1.Panel2.Controls.Add(this.TheTabControl);
             this.splitContainer1.Panel2.Controls.Add(this.alertPage);
-            this.splitContainer1.Panel2.Controls.Add(this.eventsPage);
             this.splitContainer1.Panel2.Controls.Add(this.updatesPage);
+            this.splitContainer1.Panel2.Controls.Add(this.eventsPage);
             this.splitContainer1.Panel2.Controls.Add(this.TitleBackPanel);
             resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
             // 
@@ -462,20 +463,19 @@ namespace XenAdmin
             // 
             resources.ApplyResources(this.alertPage, "alertPage");
             this.alertPage.BackColor = System.Drawing.SystemColors.Window;
-            this.alertPage.MinimumSize = new System.Drawing.Size(757, 520);
             this.alertPage.Name = "alertPage";
-            // 
-            // eventsPage
-            // 
-            resources.ApplyResources(this.eventsPage, "eventsPage");
-            this.eventsPage.BackColor = System.Drawing.SystemColors.Window;
-            this.eventsPage.Name = "eventsPage";
             // 
             // updatesPage
             // 
             resources.ApplyResources(this.updatesPage, "updatesPage");
             this.updatesPage.BackColor = System.Drawing.SystemColors.Window;
             this.updatesPage.Name = "updatesPage";
+            // 
+            // eventsPage
+            // 
+            resources.ApplyResources(this.eventsPage, "eventsPage");
+            this.eventsPage.BackColor = System.Drawing.SystemColors.Window;
+            this.eventsPage.Name = "eventsPage";
             // 
             // TitleBackPanel
             // 

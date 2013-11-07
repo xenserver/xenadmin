@@ -39,10 +39,23 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NavigationView));
+            this.TreeContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
             this.searchTextBox = new XenAdmin.Controls.SearchTextBox();
             this.treeView = new XenAdmin.Controls.FlickerFreeTreeView();
-            this.TreeContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // TreeContextMenu
+            // 
+            this.TreeContextMenu.Name = "TreeContextMenu";
+            resources.ApplyResources(this.TreeContextMenu, "TreeContextMenu");
+            // 
+            // panel1
+            // 
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Controls.Add(this.treeView);
+            this.panel1.Name = "panel1";
             // 
             // searchTextBox
             // 
@@ -73,18 +86,14 @@
             this.treeView.DragOver += new System.Windows.Forms.DragEventHandler(this.treeView_DragOver);
             this.treeView.SelectionsChanged += new System.EventHandler(this.treeView_SelectionsChanged);
             // 
-            // TreeContextMenu
-            // 
-            this.TreeContextMenu.Name = "TreeContextMenu";
-            resources.ApplyResources(this.TreeContextMenu, "TreeContextMenu");
-            // 
             // NavigationView
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.treeView);
             this.Controls.Add(this.searchTextBox);
+            this.Controls.Add(this.panel1);
             this.Name = "NavigationView";
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -94,5 +103,6 @@
         private SearchTextBox searchTextBox;
         private FlickerFreeTreeView treeView;
         private System.Windows.Forms.ContextMenuStrip TreeContextMenu;
+        private System.Windows.Forms.Panel panel1;
     }
 }

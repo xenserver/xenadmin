@@ -95,6 +95,8 @@ namespace XenAdmin.Controls.MainWindowControls
         {
             InitializeComponent();
 
+            panel1.BackColor = Program.TitleBarBorderColor;
+
             treeView.ImageList = Images.ImageList16;
             if (treeView.ItemHeight < 18)
                 treeView.ItemHeight = 18;

@@ -289,7 +289,6 @@ namespace XenAdmin.TabPages
             this.Controls.Add(this.GridViewAlerts);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.tableLayoutPanel3);
-            this.MinimumSize = new System.Drawing.Size(757, 520);
             this.Name = "AlertSummaryPage";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
