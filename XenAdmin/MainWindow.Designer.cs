@@ -269,6 +269,9 @@ namespace XenAdmin
             this.MainMenuBar = new XenAdmin.Controls.MenuStripEx();
             this.securityGroupsToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.MenuPanel = new System.Windows.Forms.Panel();
+            this.StatusStrip = new System.Windows.Forms.StatusStrip();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -282,6 +285,7 @@ namespace XenAdmin
             this.ToolBarContextMenu.SuspendLayout();
             this.MainMenuBar.SuspendLayout();
             this.MenuPanel.SuspendLayout();
+            this.StatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -1742,6 +1746,28 @@ namespace XenAdmin
             resources.ApplyResources(this.MenuPanel, "MenuPanel");
             this.MenuPanel.Name = "MenuPanel";
             // 
+            // StatusStrip
+            // 
+            resources.ApplyResources(this.StatusStrip, "StatusStrip");
+            this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLabel,
+            this.statusProgressBar});
+            this.StatusStrip.Name = "StatusStrip";
+            // 
+            // statusLabel
+            // 
+            resources.ApplyResources(this.statusLabel, "statusLabel");
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
+            this.statusLabel.Spring = true;
+            // 
+            // statusProgressBar
+            // 
+            resources.ApplyResources(this.statusProgressBar, "statusProgressBar");
+            this.statusProgressBar.Margin = new System.Windows.Forms.Padding(5);
+            this.statusProgressBar.Name = "statusProgressBar";
+            this.statusProgressBar.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
+            // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -1749,6 +1775,7 @@ namespace XenAdmin
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.ToolStrip);
             this.Controls.Add(this.MenuPanel);
+            this.Controls.Add(this.StatusStrip);
             this.DoubleBuffered = true;
             this.KeyPreview = true;
             this.MainMenuStrip = this.MainMenuBar;
@@ -1775,6 +1802,8 @@ namespace XenAdmin
             this.MainMenuBar.ResumeLayout(false);
             this.MainMenuBar.PerformLayout();
             this.MenuPanel.ResumeLayout(false);
+            this.StatusStrip.ResumeLayout(false);
+            this.StatusStrip.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1989,6 +2018,9 @@ namespace XenAdmin
         private ToolStripMenuItem customTemplatesToolStripMenuItem;
         private ToolStripMenuItem templatesToolStripMenuItem1;
         private ToolStripMenuItem localStorageToolStripMenuItem;
+        private StatusStrip StatusStrip;
+        private ToolStripStatusLabel statusLabel;
+        private ToolStripProgressBar statusProgressBar;
     }
 
 }

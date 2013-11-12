@@ -89,6 +89,8 @@ namespace XenAdmin.Controls.MainWindowControls
         [Browsable(true)]
         public event Action TreeViewRefreshResumed;
 
+        internal event Action<string> DragDropCommandActivated;
+
         #endregion
 
         public NavigationView()
@@ -451,6 +453,9 @@ namespace XenAdmin.Controls.MainWindowControls
                 _highlightedDragTarget.ForeColor = treeView.ForeColor;
                 _highlightedDragTarget = null;
                 treeBuilder.HighlightedDragTarget = null;
+
+                if (DragDropCommandActivated != null)
+                    DragDropCommandActivated(null);
             }
         }
 
@@ -697,12 +702,19 @@ namespace XenAdmin.Controls.MainWindowControls
             }
 
             VirtualTreeNode targetToHighlight = null;
-
+            
+            string statusBarText = null;
             foreach (DragDropCommand cmd in GetDragDropCommands(targetNode, e.Data))
             {
                 if (cmd.CanExecute())
                     targetToHighlight = cmd.HighlightNode;
+
+                if (cmd.StatusBarText != null)
+                    statusBarText = cmd.StatusBarText;
             }
+
+            if (DragDropCommandActivated != null)
+                DragDropCommandActivated(statusBarText);
 
             if (targetToHighlight != null)
             {

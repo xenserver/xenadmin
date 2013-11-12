@@ -99,6 +99,9 @@ namespace XenAdmin
         internal readonly VMStoragePage VMStoragePage = new VMStoragePage();
         internal readonly AdPage AdPage = new AdPage();
 
+        private ActionBase statusBarAction = null;
+        public ActionBase StatusBarAction { get { return statusBarAction; } }
+      
         private bool IgnoreTabChanges = false;
         private bool ToolbarsEnabled;
 
@@ -165,6 +168,7 @@ namespace XenAdmin
             AddTabContents(SearchPage, TabPageSearch);
 
             TheTabControl.SelectedIndexChanged += TheTabControl_SelectedIndexChanged;
+            navigationPane.DragDropCommandActivated += navigationPane_DragDropCommandActivated;
 
             PoolCollectionChangedWithInvoke = Program.ProgramInvokeHandler(CollectionChanged<Pool>);
             MessageCollectionChangedWithInvoke = Program.ProgramInvokeHandler(MessageCollectionChanged);
@@ -184,7 +188,6 @@ namespace XenAdmin
             contextMenuBuilder = new ContextMenuBuilder(pluginManager, commandInterface);
 
             SearchPage.SearchChanged += SearchPanel_SearchChanged;
-
             Alert.XenCenterAlerts.CollectionChanged += XenCenterAlerts_CollectionChanged;
 
             FormFontFixer.Fix(this);
@@ -196,6 +199,8 @@ namespace XenAdmin
             // Fix colour of text on gradient panels
             TitleLabel.ForeColor = Program.TitleBarForeColor;
             loggedInLabel1.SetTextColor(Program.TitleBarForeColor);
+
+            statusProgressBar.Visible = false;
 
             SelectionManager.BindTo(MainMenuBar.Items, commandInterface);
             SelectionManager.BindTo(ToolStrip.Items, commandInterface);
@@ -362,6 +367,17 @@ namespace XenAdmin
                                                             if (action == null)
                                                                 return;
 
+                                                            var meddlingAction = action as MeddlingAction;
+                                                            if (meddlingAction == null)
+                                                            {
+                                                                SetStatusBar(null, null);
+                                                                if (statusBarAction != null)
+                                                                {
+                                                                    statusBarAction.Changed -= actionChanged;
+                                                                    statusBarAction.Completed -= actionChanged;
+                                                                }
+                                                                statusBarAction = action;
+                                                            }
                                                             action.Changed += actionChanged;
                                                             action.Completed += actionChanged;
                                                             actionChanged(action);
@@ -378,15 +394,26 @@ namespace XenAdmin
 
         void actionChanged_(ActionBase action)
         {
+             var meddlingAction = action as MeddlingAction;
+             if (meddlingAction == null)
+                 statusProgressBar.Visible = action.ShowProgress && !action.IsCompleted;
+
             // Be defensive against CA-8517.
             if (action.PercentComplete < 0 || action.PercentComplete > 100)
             {
                 log.ErrorFormat("PercentComplete is erroneously {0}", action.PercentComplete);
             }
+            else if (meddlingAction == null)
+            {
+                statusProgressBar.Value = action.PercentComplete;
+            }
 
             // Don't show cancelled exception
             if (action.Exception != null && !(action.Exception is CancelledException))
             {
+                if (meddlingAction == null)
+                    SetStatusBar(XenAdmin.Properties.Resources._000_error_h32bit_16, action.Exception.Message);
+
                 IXenObject model =
                         (IXenObject)action.VM ??
                         (IXenObject)action.Host ??
@@ -397,6 +424,31 @@ namespace XenAdmin
 
                 RequestRefreshTreeView();
             }
+            else if (meddlingAction == null)
+            {
+                SetStatusBar(null,
+                    action.IsCompleted ? null :
+                    !string.IsNullOrEmpty(action.Description) ? action.Description :
+                    !string.IsNullOrEmpty(action.Title) ? action.Title :
+                                                                null);
+            }
+        }
+
+        public void SetStatusBar(Image image, string message)
+        {
+            if ((statusLabel.Text != null && statusLabel.Text.Equals(message))
+                || (statusLabel.Image != null && statusLabel.Equals(image)))
+                return;
+
+            statusLabel.Image = image;
+            statusLabel.Text = Helpers.FirstLine(message);
+            statusToolTip.SetToolTip(StatusStrip, message);
+        }
+
+        public void SetProgressBar(bool visible, int progress)
+        {
+            statusProgressBar.Visible = visible;
+            statusProgressBar.Value = progress;
         }
 
         private void MainWindow_Shown(object sender, EventArgs e)
@@ -2510,6 +2562,11 @@ namespace XenAdmin
                     return string.Format(Messages.VM_IN_POOL, name, pool);
             }
             return name;
+        }
+
+        void navigationPane_DragDropCommandActivated(string cmdText)
+        {
+            SetStatusBar(null, cmdText);
         }
 
         private void navigationPane_TreeViewSelectionChanged()
