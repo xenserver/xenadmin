@@ -153,8 +153,6 @@ namespace XenAdmin.Wizards
             action.RunAsync();
 
             Program.MainWindow.UpdateToolbars();
-            // Switch to logs tab, since this action takes a while and there's no feedback on the HA tab
-            Program.MainWindow.SwitchToTab(MainWindow.Tab.History);
             base.FinishWizard();
         }
 

@@ -1719,7 +1719,7 @@ namespace XenAdmin
         /// </summary>
         public enum Tab
         {
-            Overview, Home, Settings, Storage, Network, Console, Performance, History, NICs, SR
+            Overview, Home, Settings, Storage, Network, Console, Performance, NICs, SR
         }
 
         public void SwitchToTab(Tab tab)

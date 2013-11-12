@@ -461,9 +461,6 @@ namespace XenAdmin.Controls.Wlb
             if ((action != null && action.GetType() != typeof(WlbOptimizePoolAction)) || action == null)
             {
                 new WlbOptimizePoolAction(_pool, _vmOptList, _optId).RunAsync();
-
-                // Switch to logs tab, since this action takes a while and there's no feedback on the HA tab
-                Program.MainWindow.SwitchToTab(MainWindow.Tab.History);
                 Program.MainWindow.UpdateToolbars();
             }
         }
