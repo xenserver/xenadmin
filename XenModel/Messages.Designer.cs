@@ -31319,7 +31319,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenCenter version {0} (build {1}).
+        ///   Looks up a localized string similar to XenCenter version {0} (build {1}) {2}-bit.
         /// </summary>
         public static string VERSION_NUMBER {
             get {

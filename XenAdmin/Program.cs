@@ -501,6 +501,7 @@ namespace XenAdmin
             log.Info(".NET runtime version: " + Environment.Version.ToString(4));
             log.Info("OS version: " + Environment.OSVersion.ToString());
             log.Info("UI Culture: " + Thread.CurrentThread.CurrentUICulture.EnglishName);
+            log.Info(string.Format("Bitness: {0}-bit", IntPtr.Size * 8));
         }
 
         static void Application_ApplicationExit(object sender, EventArgs e)
