@@ -4874,6 +4874,12 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="GPU_NONE" xml:space="preserve">
     <value>None</value>
   </data>
+  <data name="GPU_PLACEMENT_POLICY_MAX_DENSITY" xml:space="preserve">
+    <value>Maximum density</value>
+  </data>
+  <data name="GPU_PLACEMENT_POLICY_MAX_PERFORMANCE" xml:space="preserve">
+    <value>Maximum performance</value>
+  </data>
   <data name="GPU_RUBRIC_NO_GPUS_POOL" xml:space="preserve">
     <value>You can improve graphics performance by assigning a dedicated graphics processing unit (GPU) to a VM. However, no GPUs have been detected in this pool, so this option is not currently available.</value>
   </data>
@@ -9387,6 +9393,15 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   </data>
   <data name="SET_BOND_MODE_ACTION_TITLE" xml:space="preserve">
     <value>Change bond mode</value>
+  </data>
+  <data name="SET_GPU_PLACEMENT_POLICY_ACTION_DESCRIPTION" xml:space="preserve">
+    <value>Setting GPU placement policy</value>
+  </data>
+  <data name="SET_GPU_PLACEMENT_POLICY_ACTION_DONE" xml:space="preserve">
+    <value>GPU placement policy set</value>
+  </data>
+  <data name="SET_GPU_PLACEMENT_POLICY_ACTION_TITLE" xml:space="preserve">
+    <value>Set GPU placement policy</value>
   </data>
   <data name="SET_MTU_ON_CHINS_UNDER_NETWORK" xml:space="preserve">
     <value>It is highly recommended you confirm this setting matches the MTU on related network '{0}'</value>

@@ -13912,6 +13912,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum density.
+        /// </summary>
+        public static string GPU_PLACEMENT_POLICY_MAX_DENSITY {
+            get {
+                return ResourceManager.GetString("GPU_PLACEMENT_POLICY_MAX_DENSITY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum performance.
+        /// </summary>
+        public static string GPU_PLACEMENT_POLICY_MAX_PERFORMANCE {
+            get {
+                return ResourceManager.GetString("GPU_PLACEMENT_POLICY_MAX_PERFORMANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You can improve graphics performance by assigning a dedicated graphics processing unit (GPU) to a VM. However, no GPUs have been detected in this pool, so this option is not currently available..
         /// </summary>
         public static string GPU_RUBRIC_NO_GPUS_POOL {
@@ -26955,6 +26973,33 @@ namespace XenAdmin {
         public static string SET_BOND_MODE_ACTION_TITLE {
             get {
                 return ResourceManager.GetString("SET_BOND_MODE_ACTION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setting GPU placement policy.
+        /// </summary>
+        public static string SET_GPU_PLACEMENT_POLICY_ACTION_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("SET_GPU_PLACEMENT_POLICY_ACTION_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GPU placement policy set.
+        /// </summary>
+        public static string SET_GPU_PLACEMENT_POLICY_ACTION_DONE {
+            get {
+                return ResourceManager.GetString("SET_GPU_PLACEMENT_POLICY_ACTION_DONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set GPU placement policy.
+        /// </summary>
+        public static string SET_GPU_PLACEMENT_POLICY_ACTION_TITLE {
+            get {
+                return ResourceManager.GetString("SET_GPU_PLACEMENT_POLICY_ACTION_TITLE", resourceCulture);
             }
         }
         

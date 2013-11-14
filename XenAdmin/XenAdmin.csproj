@@ -2501,6 +2501,12 @@
     <Compile Include="Dialogs\VDIMigrateDialog.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SettingsPanels\PoolGpuEditPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingsPanels\PoolGpuEditPage.Designer.cs">
+      <DependentUpon>PoolGpuEditPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="TabPages\ManageUpdatesPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -5341,6 +5347,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\PerfmonAlertOptionsPage.zh-CN.resx">
       <DependentUpon>PerfmonAlertOptionsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\PoolGpuEditPage.ja.resx">
+      <DependentUpon>PoolGpuEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\PoolGpuEditPage.resx">
+      <DependentUpon>PoolGpuEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\PoolGpuEditPage.zh-CN.resx">
+      <DependentUpon>PoolGpuEditPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\StorageLinkEditPage.ja.resx">
       <DependentUpon>StorageLinkEditPage.cs</DependentUpon>

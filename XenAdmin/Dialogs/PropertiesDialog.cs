@@ -76,6 +76,7 @@ namespace XenAdmin.Dialogs
         private NewVMApplianceVMOrderAndDelaysPage newVmApplianceVmOrderAndDelaysPage1;
         private UpsellPage GpuUpsellEditPage;
         private GpuEditPage GpuEditPage;
+        public PoolGpuEditPage PoolGpuEditPage;
         #endregion
 
         private IXenObject xenObject, xenObjectBefore, xenObjectCopy;
@@ -203,6 +204,13 @@ namespace XenAdmin.Dialogs
                 
                 if (is_pool && Helpers.MidnightRideOrGreater(xenObject.Connection))
                     ShowTab(PoolPowerONEditPage = new PoolPowerONEditPage());
+
+                if (is_pool_or_standalone)
+                {
+                    if (Helpers.ClearwaterOrGreater(xenObject.Connection)
+                        && !Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictVgpu))
+                    ShowTab(PoolGpuEditPage = new PoolGpuEditPage());
+                }
 
                 if (is_network)
                     ShowTab(editNetworkPage = new EditNetworkPage());
