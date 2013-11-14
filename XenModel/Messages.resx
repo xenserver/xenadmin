@@ -786,6 +786,12 @@
   <data name="ACTION_VDI_OPEN_DATABASE_TITLE" xml:space="preserve">
     <value>Open metadata database from SR '{0}'</value>
   </data>
+  <data name="ACTION_VGPU_CONFIGURATION_SAVED" xml:space="preserve">
+    <value>vGPU configuration saved</value>
+  </data>
+  <data name="ACTION_VGPU_CONFIGURATION_SAVING" xml:space="preserve">
+    <value>Saving vGPU configuration</value>
+  </data>
   <data name="ACTION_VIF_CREATED" xml:space="preserve">
     <value>Virtual network interface created</value>
   </data>
@@ -4885,6 +4891,12 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="GPU_RUBRIC_NO_GPUS_SERVER" xml:space="preserve">
     <value>You can improve graphics performance by assigning a dedicated graphics processing unit (GPU) to a VM. However, no GPUs have been detected in this server, so this option is not currently available.</value>
+  </data>
+  <data name="GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_MULTIPLE" xml:space="preserve">
+    <value>Select which vGPU types are allowed on these GPUs:</value>
+  </data>
+  <data name="GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_ONE" xml:space="preserve">
+    <value>Select which vGPU types are allowed on this GPU:</value>
   </data>
   <data name="GRAPHS" xml:space="preserve">
     <value>Graphs</value>

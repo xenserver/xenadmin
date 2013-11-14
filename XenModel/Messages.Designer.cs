@@ -2068,6 +2068,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to vGPU configuration saved.
+        /// </summary>
+        public static string ACTION_VGPU_CONFIGURATION_SAVED {
+            get {
+                return ResourceManager.GetString("ACTION_VGPU_CONFIGURATION_SAVED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving vGPU configuration.
+        /// </summary>
+        public static string ACTION_VGPU_CONFIGURATION_SAVING {
+            get {
+                return ResourceManager.GetString("ACTION_VGPU_CONFIGURATION_SAVING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Virtual network interface created.
         /// </summary>
         public static string ACTION_VIF_CREATED {
@@ -13944,6 +13962,24 @@ namespace XenAdmin {
         public static string GPU_RUBRIC_NO_GPUS_SERVER {
             get {
                 return ResourceManager.GetString("GPU_RUBRIC_NO_GPUS_SERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select which vGPU types are allowed on these GPUs:.
+        /// </summary>
+        public static string GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_MULTIPLE {
+            get {
+                return ResourceManager.GetString("GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_MULTIPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select which vGPU types are allowed on this GPU:.
+        /// </summary>
+        public static string GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_ONE {
+            get {
+                return ResourceManager.GetString("GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_ONE", resourceCulture);
             }
         }
         

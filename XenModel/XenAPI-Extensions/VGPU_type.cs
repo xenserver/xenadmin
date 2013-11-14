@@ -43,18 +43,9 @@ namespace XenAPI
                 if (max_heads == 0)
                     return Messages.VGPU_PASSTHRU_TOSTRING;
 
-                long capacity = 0;
-                if (supported_on_PGPUs != null && supported_on_PGPUs.Count > 0)
-                {
-                    PGPU pgpu = Connection.Resolve(supported_on_PGPUs[0]);
-                    if (pgpu.supported_VGPU_max_capacities != null)
-                    {
-                        capacity = pgpu.supported_VGPU_max_capacities[new XenRef<VGPU_type>(this)];
-                    }
-                }
-
-                return string.Format(Messages.VGPU_TOSTRING, model_name, capacity);
+                return string.Format(Messages.VGPU_TOSTRING, model_name, Capacity);
             }
+
         }
         
         #region IEquatable<VGPU_type> Members
@@ -70,5 +61,26 @@ namespace XenAPI
         }
 
         #endregion
+    
+        /// <summary>
+        /// vGPUs per GPU
+        /// </summary>
+        public long Capacity
+        {
+            get
+            {
+                long capacity = 0;
+                if (supported_on_PGPUs != null && supported_on_PGPUs.Count > 0)
+                {
+                    PGPU pgpu = Connection.Resolve(supported_on_PGPUs[0]);
+                    if (pgpu.supported_VGPU_max_capacities != null)
+                    {
+                        capacity = pgpu.supported_VGPU_max_capacities[new XenRef<VGPU_type>(this)];
+                    }
+                }
+                return capacity;
+            }
+        }
+        
     }
 }

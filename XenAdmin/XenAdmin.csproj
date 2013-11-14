@@ -2225,6 +2225,10 @@
     <Compile Include="Controls\ConsoleTab\FullScreenHint.Designer.cs">
       <DependentUpon>FullScreenHint.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GPU\GpuConfiguration.cs" />
+    <Compile Include="Controls\GPU\GpuConfiguration.Designer.cs">
+      <DependentUpon>GpuConfiguration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\GPU\GpuPlacementPolicyPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -4282,6 +4286,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DeprecationBanner.zh-CN.resx">
       <DependentUpon>DeprecationBanner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\GPU\GpuConfiguration.ja.resx">
+      <DependentUpon>GpuConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\GPU\GpuConfiguration.resx">
+      <DependentUpon>GpuConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\GPU\GpuConfiguration.zh-CN.resx">
+      <DependentUpon>GpuConfiguration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\GPU\GpuPlacementPolicyPanel.ja.resx">
       <DependentUpon>GpuPlacementPolicyPanel.cs</DependentUpon>
