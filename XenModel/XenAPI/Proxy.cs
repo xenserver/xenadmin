@@ -7861,6 +7861,16 @@ namespace XenAPI
         vgpu_type_get_max_heads(string session, string _vgpu_type);
 
 
+        [XmlRpcMethod("VGPU_type.get_max_resolution_x")]
+        Response<string>
+        vgpu_type_get_max_resolution_x(string session, string _vgpu_type);
+
+
+        [XmlRpcMethod("VGPU_type.get_max_resolution_y")]
+        Response<string>
+        vgpu_type_get_max_resolution_y(string session, string _vgpu_type);
+
+
         [XmlRpcMethod("VGPU_type.get_supported_on_PGPUs")]
         Response<string []>
         vgpu_type_get_supported_on_pgpus(string session, string _vgpu_type);
@@ -8677,6 +8687,8 @@ namespace XenAPI
         public string model_name;
         public string framebuffer_size;
         public string max_heads;
+        public string max_resolution_x;
+        public string max_resolution_y;
         public string [] supported_on_PGPUs;
         public string [] enabled_on_PGPUs;
         public string [] VGPUs;

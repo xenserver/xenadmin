@@ -48,6 +48,8 @@ namespace XenAPI
             string model_name,
             long framebuffer_size,
             long max_heads,
+            long max_resolution_x,
+            long max_resolution_y,
             List<XenRef<PGPU>> supported_on_PGPUs,
             List<XenRef<PGPU>> enabled_on_PGPUs,
             List<XenRef<VGPU>> VGPUs,
@@ -59,6 +61,8 @@ namespace XenAPI
             this.model_name = model_name;
             this.framebuffer_size = framebuffer_size;
             this.max_heads = max_heads;
+            this.max_resolution_x = max_resolution_x;
+            this.max_resolution_y = max_resolution_y;
             this.supported_on_PGPUs = supported_on_PGPUs;
             this.enabled_on_PGPUs = enabled_on_PGPUs;
             this.VGPUs = VGPUs;
@@ -82,6 +86,8 @@ namespace XenAPI
             model_name = update.model_name;
             framebuffer_size = update.framebuffer_size;
             max_heads = update.max_heads;
+            max_resolution_x = update.max_resolution_x;
+            max_resolution_y = update.max_resolution_y;
             supported_on_PGPUs = update.supported_on_PGPUs;
             enabled_on_PGPUs = update.enabled_on_PGPUs;
             VGPUs = update.VGPUs;
@@ -96,6 +102,8 @@ namespace XenAPI
             model_name = proxy.model_name == null ? null : (string)proxy.model_name;
             framebuffer_size = proxy.framebuffer_size == null ? 0 : long.Parse((string)proxy.framebuffer_size);
             max_heads = proxy.max_heads == null ? 0 : long.Parse((string)proxy.max_heads);
+            max_resolution_x = proxy.max_resolution_x == null ? 0 : long.Parse((string)proxy.max_resolution_x);
+            max_resolution_y = proxy.max_resolution_y == null ? 0 : long.Parse((string)proxy.max_resolution_y);
             supported_on_PGPUs = proxy.supported_on_PGPUs == null ? null : XenRef<PGPU>.Create(proxy.supported_on_PGPUs);
             enabled_on_PGPUs = proxy.enabled_on_PGPUs == null ? null : XenRef<PGPU>.Create(proxy.enabled_on_PGPUs);
             VGPUs = proxy.VGPUs == null ? null : XenRef<VGPU>.Create(proxy.VGPUs);
@@ -111,6 +119,8 @@ namespace XenAPI
             result_.model_name = (model_name != null) ? model_name : "";
             result_.framebuffer_size = framebuffer_size.ToString();
             result_.max_heads = max_heads.ToString();
+            result_.max_resolution_x = max_resolution_x.ToString();
+            result_.max_resolution_y = max_resolution_y.ToString();
             result_.supported_on_PGPUs = (supported_on_PGPUs != null) ? Helper.RefListToStringArray(supported_on_PGPUs) : new string[] {};
             result_.enabled_on_PGPUs = (enabled_on_PGPUs != null) ? Helper.RefListToStringArray(enabled_on_PGPUs) : new string[] {};
             result_.VGPUs = (VGPUs != null) ? Helper.RefListToStringArray(VGPUs) : new string[] {};
@@ -130,6 +140,8 @@ namespace XenAPI
             model_name = Marshalling.ParseString(table, "model_name");
             framebuffer_size = Marshalling.ParseLong(table, "framebuffer_size");
             max_heads = Marshalling.ParseLong(table, "max_heads");
+            max_resolution_x = Marshalling.ParseLong(table, "max_resolution_x");
+            max_resolution_y = Marshalling.ParseLong(table, "max_resolution_y");
             supported_on_PGPUs = Marshalling.ParseSetRef<PGPU>(table, "supported_on_PGPUs");
             enabled_on_PGPUs = Marshalling.ParseSetRef<PGPU>(table, "enabled_on_PGPUs");
             VGPUs = Marshalling.ParseSetRef<VGPU>(table, "VGPUs");
@@ -149,6 +161,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._model_name, other._model_name) &&
                 Helper.AreEqual2(this._framebuffer_size, other._framebuffer_size) &&
                 Helper.AreEqual2(this._max_heads, other._max_heads) &&
+                Helper.AreEqual2(this._max_resolution_x, other._max_resolution_x) &&
+                Helper.AreEqual2(this._max_resolution_y, other._max_resolution_y) &&
                 Helper.AreEqual2(this._supported_on_PGPUs, other._supported_on_PGPUs) &&
                 Helper.AreEqual2(this._enabled_on_PGPUs, other._enabled_on_PGPUs) &&
                 Helper.AreEqual2(this._VGPUs, other._VGPUs) &&
@@ -202,6 +216,16 @@ namespace XenAPI
         public static long get_max_heads(Session session, string _vgpu_type)
         {
             return long.Parse((string)session.proxy.vgpu_type_get_max_heads(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse());
+        }
+
+        public static long get_max_resolution_x(Session session, string _vgpu_type)
+        {
+            return long.Parse((string)session.proxy.vgpu_type_get_max_resolution_x(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse());
+        }
+
+        public static long get_max_resolution_y(Session session, string _vgpu_type)
+        {
+            return long.Parse((string)session.proxy.vgpu_type_get_max_resolution_y(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse());
         }
 
         public static List<XenRef<PGPU>> get_supported_on_PGPUs(Session session, string _vgpu_type)
@@ -267,6 +291,18 @@ namespace XenAPI
         public virtual long max_heads {
              get { return _max_heads; }
              set { if (!Helper.AreEqual(value, _max_heads)) { _max_heads = value; Changed = true; NotifyPropertyChanged("max_heads"); } }
+         }
+
+        private long _max_resolution_x;
+        public virtual long max_resolution_x {
+             get { return _max_resolution_x; }
+             set { if (!Helper.AreEqual(value, _max_resolution_x)) { _max_resolution_x = value; Changed = true; NotifyPropertyChanged("max_resolution_x"); } }
+         }
+
+        private long _max_resolution_y;
+        public virtual long max_resolution_y {
+             get { return _max_resolution_y; }
+             set { if (!Helper.AreEqual(value, _max_resolution_y)) { _max_resolution_y = value; Changed = true; NotifyPropertyChanged("max_resolution_y"); } }
          }
 
         private List<XenRef<PGPU>> _supported_on_PGPUs;
