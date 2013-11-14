@@ -253,7 +253,7 @@ namespace XenAdmin.Controls.Ballooning
             }
         }
 
-        protected Rectangle barRect
+        protected virtual Rectangle barRect
         {
             get
             {

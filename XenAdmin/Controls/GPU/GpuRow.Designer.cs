@@ -43,7 +43,6 @@
             this.shinyBarsContainerPanel = new System.Windows.Forms.TableLayoutPanel();
             this.editButton = new System.Windows.Forms.Button();
             this.multipleSelectionPanel = new System.Windows.Forms.Panel();
-            this.editSelectedGpusButton = new System.Windows.Forms.Button();
             this.clearAllButton = new System.Windows.Forms.Button();
             this.selectAllButton = new System.Windows.Forms.Button();
             this.panelWithBorder.SuspendLayout();
@@ -105,6 +104,7 @@
             // allowedTypesGrid
             // 
             this.allowedTypesGrid.AllowUserToResizeColumns = false;
+            this.allowedTypesGrid.BackgroundColor = System.Drawing.SystemColors.Window;
             this.allowedTypesGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.allowedTypesGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.allowedTypesGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -114,16 +114,16 @@
             this.ImageColumn,
             this.TextColumn});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.allowedTypesGrid.DefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(this.allowedTypesGrid, "allowedTypesGrid");
             this.allowedTypesGrid.GridColor = System.Drawing.SystemColors.Control;
             this.allowedTypesGrid.HideSelection = true;
+            resources.ApplyResources(this.allowedTypesGrid, "allowedTypesGrid");
             this.allowedTypesGrid.Name = "allowedTypesGrid";
             this.allowedTypesGrid.ReadOnly = true;
             this.allowedTypesGrid.TabStop = false;
@@ -155,27 +155,18 @@
             // 
             // editButton
             // 
-            this.editButton.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.editButton, "editButton");
+            this.editButton.BackColor = System.Drawing.Color.Transparent;
             this.editButton.Name = "editButton";
             this.editButton.UseVisualStyleBackColor = false;
             this.editButton.Click += new System.EventHandler(this.editButton_Click);
             // 
             // multipleSelectionPanel
             // 
-            this.multipleSelectionPanel.Controls.Add(this.editSelectedGpusButton);
             this.multipleSelectionPanel.Controls.Add(this.clearAllButton);
             this.multipleSelectionPanel.Controls.Add(this.selectAllButton);
             resources.ApplyResources(this.multipleSelectionPanel, "multipleSelectionPanel");
             this.multipleSelectionPanel.Name = "multipleSelectionPanel";
-            // 
-            // editSelectedGpusButton
-            // 
-            resources.ApplyResources(this.editSelectedGpusButton, "editSelectedGpusButton");
-            this.editSelectedGpusButton.BackColor = System.Drawing.Color.Transparent;
-            this.editSelectedGpusButton.Name = "editSelectedGpusButton";
-            this.editSelectedGpusButton.UseVisualStyleBackColor = false;
-            this.editSelectedGpusButton.Click += new System.EventHandler(this.editButton_Click);
             // 
             // clearAllButton
             // 
@@ -223,8 +214,7 @@
         private System.Windows.Forms.Button selectAllButton;
         private PanelWithBorder panelWithBorder;
         protected System.Windows.Forms.Panel multipleSelectionPanel;
-        protected System.Windows.Forms.Button editButton;
-        protected System.Windows.Forms.Button editSelectedGpusButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button editButton;
     }
 }

@@ -109,6 +109,14 @@ namespace XenAdmin.Controls.GPU
                 return 40;
             }
         }
+
+        protected override Rectangle barRect
+        {
+            get
+            {
+                return new Rectangle(10, 20, this.Width - 25, barHeight);
+            }
+        }
     }
 
     public static class GpuShinyBarColors

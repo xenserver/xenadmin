@@ -42,14 +42,17 @@ namespace XenAdmin.Controls.GPU
             var oldControls = new List<Control>(shinyBarsContainerPanel.Controls.Count);
             oldControls.AddRange(shinyBarsContainerPanel.Controls.Cast<Control>());
 
+            bool showingHostLabel = connection.Cache.Hosts.Length > 1;
+
             int index = 1;
             XenRef<Host> hostRef = null;
+
             foreach (PGPU pgpu in pGpuList)
             {
                 var host = connection.Resolve(pgpu.host);
 
                 // add host label if needed
-                if (hostRef == null || pgpu.host.opaque_ref != hostRef.opaque_ref)
+                if (showingHostLabel && (hostRef == null || pgpu.host.opaque_ref != hostRef.opaque_ref))
                 {
                     AddHostLabel(new Label { Text = String.Format(Messages.GPU_ON_HOST_LABEL, host.Name)}, ref index);
                     hostRef = pgpu.host;
@@ -80,7 +83,7 @@ namespace XenAdmin.Controls.GPU
             {
                 shinyBarsContainerPanel.Controls.Add(checkBox, 0, index);
                 checkBox.Dock = DockStyle.Fill;
-                checkBox.Margin = new Padding(3, 30, 0, 0);
+                checkBox.Margin = new Padding(3, 14, 0, 0);
                 checkBox.CheckedChanged += CheckedChanged;
                 checkBox.Checked = true;
             }
@@ -108,7 +111,7 @@ namespace XenAdmin.Controls.GPU
         private void SetupPage()
         {
             multipleSelectionPanel.Visible = (pGpus.Count > 1);
-            editButton.Visible = !multipleSelectionPanel.Visible;
+            editButton.Text = (pGpus.Count > 1) ? "&Edit Selected GPUs..." : "&Edit...";
         }
 
         private GpuShinyBar FindGpuShinyBar(PGPU pGpu)
@@ -177,7 +180,7 @@ namespace XenAdmin.Controls.GPU
 
         private void CheckedChanged(object sender, EventArgs e)
         {
-            editSelectedGpusButton.Enabled = clearAllButton.Enabled =
+            editButton.Enabled = clearAllButton.Enabled =
                 (pGpus.Values.Where(checkBox => checkBox != null).Any(checkBox => checkBox.Checked));
             selectAllButton.Enabled =
                 (pGpus.Values.Where(checkBox => checkBox != null).Any(checkBox => !checkBox.Checked));
@@ -200,6 +203,7 @@ namespace XenAdmin.Controls.GPU
                                                     orderby vGpuType.Capacity ascending
                                                     select new VGpuTypeRow(vGpuType, enabledType)).ToArray());
                 }
+                allowedTypesGrid.Height = allowedTypesGrid.Rows[0].Height * (allowedTypesGrid.RowCount);
             }
             finally
             {

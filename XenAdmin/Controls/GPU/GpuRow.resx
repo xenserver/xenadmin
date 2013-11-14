@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABY
-        CQAAAk1TRnQBSQFMAgEBAgEAAcgBAgHIAQIBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAAQgBAwEIAQMBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -195,10 +195,10 @@
     <value>NoControl</value>
   </data>
   <data name="allowedTypesLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>460, 6</value>
+    <value>470, 6</value>
   </data>
   <data name="allowedTypesLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 0</value>
+    <value>6, 6, 0, 3</value>
   </data>
   <data name="allowedTypesLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>217, 16</value>
@@ -234,13 +234,13 @@
     <value>NoControl</value>
   </data>
   <data name="pGpuLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>34, 6</value>
+    <value>25, 6</value>
   </data>
   <data name="pGpuLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
+    <value>3, 6, 3, 3</value>
   </data>
   <data name="pGpuLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 16</value>
+    <value>436, 16</value>
   </data>
   <data name="pGpuLabel.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -261,10 +261,10 @@
     <value>NoControl</value>
   </data>
   <data name="pGpuPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
+    <value>3, 6</value>
   </data>
   <data name="pGpuPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
+    <value>3, 6, 3, 3</value>
   </data>
   <data name="pGpuPictureBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -305,17 +305,14 @@
   <data name="TextColumn.Width" type="System.Int32, mscorlib">
     <value>190</value>
   </data>
-  <data name="allowedTypesGrid.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="allowedTypesGrid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>460, 28</value>
+    <value>470, 25</value>
   </data>
   <data name="allowedTypesGrid.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 0, 6, 0</value>
+    <value>6, 0, 0, 0</value>
   </data>
   <data name="allowedTypesGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 93</value>
+    <value>217, 59</value>
   </data>
   <data name="allowedTypesGrid.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -345,7 +342,10 @@
     <value>Fill</value>
   </data>
   <data name="shinyBarsContainerPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 31</value>
+    <value>1, 26</value>
+  </data>
+  <data name="shinyBarsContainerPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
   </data>
   <data name="shinyBarsContainerPanel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -354,7 +354,7 @@
     <value>1</value>
   </data>
   <data name="shinyBarsContainerPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>448, 121</value>
+    <value>462, 95</value>
   </data>
   <data name="shinyBarsContainerPanel.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -372,19 +372,22 @@
     <value>4</value>
   </data>
   <data name="shinyBarsContainerPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls /&gt;&lt;Columns Styles="Absolute,24,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls /&gt;&lt;Columns Styles="Absolute,20,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="editButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="editButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="editButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>460, 127</value>
+    <value>470, 90</value>
   </data>
   <data name="editButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 6, 6, 6</value>
   </data>
   <data name="editButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 22</value>
+    <value>66, 23</value>
   </data>
   <data name="editButton.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -414,7 +417,7 @@
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>683, 155</value>
+    <value>687, 122</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -432,40 +435,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="allowedTypesLabel" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="pGpuLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="pGpuPictureBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="allowedTypesGrid" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="shinyBarsContainerPanel" Row="1" RowSpan="2" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="editButton" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="editSelectedGpusButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="editSelectedGpusButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="editSelectedGpusButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>460, 4</value>
-  </data>
-  <data name="editSelectedGpusButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
-  </data>
-  <data name="editSelectedGpusButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 22</value>
-  </data>
-  <data name="editSelectedGpusButton.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
-  </data>
-  <data name="editSelectedGpusButton.Text" xml:space="preserve">
-    <value>&amp;Edit Selected GPUs...</value>
-  </data>
-  <data name="&gt;&gt;editSelectedGpusButton.Name" xml:space="preserve">
-    <value>editSelectedGpusButton</value>
-  </data>
-  <data name="&gt;&gt;editSelectedGpusButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;editSelectedGpusButton.Parent" xml:space="preserve">
-    <value>multipleSelectionPanel</value>
-  </data>
-  <data name="&gt;&gt;editSelectedGpusButton.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="allowedTypesLabel" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="pGpuLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="pGpuPictureBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="allowedTypesGrid" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="shinyBarsContainerPanel" Row="1" RowSpan="2" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="editButton" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,58,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="clearAllButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -492,7 +462,7 @@
     <value>multipleSelectionPanel</value>
   </data>
   <data name="&gt;&gt;clearAllButton.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="selectAllButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -519,16 +489,16 @@
     <value>multipleSelectionPanel</value>
   </data>
   <data name="&gt;&gt;selectAllButton.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="multipleSelectionPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
   </data>
   <data name="multipleSelectionPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 156</value>
+    <value>1, 123</value>
   </data>
   <data name="multipleSelectionPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>683, 31</value>
+    <value>687, 31</value>
   </data>
   <data name="multipleSelectionPanel.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -558,7 +528,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="panelWithBorder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>685, 188</value>
+    <value>689, 155</value>
   </data>
   <data name="panelWithBorder.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -588,7 +558,7 @@
     <value>True</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>685, 188</value>
+    <value>689, 155</value>
   </data>
   <data name="&gt;&gt;allowedTypesImageList.Name" xml:space="preserve">
     <value>allowedTypesImageList</value>
