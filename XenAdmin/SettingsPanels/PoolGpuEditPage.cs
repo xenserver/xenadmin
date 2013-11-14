@@ -38,7 +38,10 @@ namespace XenAdmin.SettingsPanels
 
         public string SubText
         {
-            get { return radioButtonDepth.Checked ? Messages.GPU_PLACEMENT_POLICY_MAX_DENSITY : Messages.GPU_PLACEMENT_POLICY_MAX_PERFORMANCE; }
+            get 
+            { 
+                return radioButtonDepth.Checked ? Messages.GPU_PLACEMENT_POLICY_MAX_DENSITY : 
+                    radioButtonBreadth.Checked ? Messages.GPU_PLACEMENT_POLICY_MAX_PERFORMANCE : Messages.GPU_PLACEMENT_POLICY_MIXED; }
         }
 
         public Image Image

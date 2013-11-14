@@ -178,7 +178,7 @@
     <value>5</value>
   </data>
   <data name="radioButtonMixture.Text" xml:space="preserve">
-    <value>Unknown or mixture</value>
+    <value>Mixed: different settings for different GPU groups</value>
   </data>
   <data name="&gt;&gt;radioButtonMixture.Name" xml:space="preserve">
     <value>radioButtonMixture</value>
