@@ -3044,6 +3044,9 @@ Please reconnect the host and try again.</value>
   <data name="DATATYPE_DISK" xml:space="preserve">
     <value>Disk</value>
   </data>
+  <data name="DATATYPE_GPU" xml:space="preserve">
+    <value>GPU</value>
+  </data>
   <data name="DATATYPE_LATENCY" xml:space="preserve">
     <value>Latency</value>
   </data>
@@ -10835,6 +10838,9 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="VAL_KILB" xml:space="preserve">
     <value>kB</value>
   </data>
+  <data name="VAL_KILOWATT" xml:space="preserve">
+    <value>kW</value>
+  </data>
   <data name="VAL_KILRATE" xml:space="preserve">
     <value>kBps</value>
   </data>
@@ -10853,6 +10859,12 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="VAL_MILSEC" xml:space="preserve">
     <value>ms</value>
   </data>
+  <data name="VAL_MILWATT" xml:space="preserve">
+    <value>mW</value>
+  </data>
+  <data name="VAL_MWATT" xml:space="preserve">
+    <value>MW</value>
+  </data>
   <data name="VAL_NANOSEC" xml:space="preserve">
     <value>ns</value>
   </data>
@@ -10864,6 +10876,9 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   </data>
   <data name="VAL_SEC" xml:space="preserve">
     <value>s</value>
+  </data>
+  <data name="VAL_WATT" xml:space="preserve">
+    <value>W</value>
   </data>
   <data name="VAPP_SHUTDOWN_CONTEXT_MENU" xml:space="preserve">
     <value>Shut Dow&amp;n vApp</value>

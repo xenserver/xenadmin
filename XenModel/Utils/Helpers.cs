@@ -989,6 +989,7 @@ namespace XenAdmin.Core
     	static Regex SrRegex = new Regex("^sr_[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}_cache_(size|hits|misses)");
         static Regex SrIORegex = new Regex("^(io_throughput|iops)_(read|write|total)_([a-f0-9]{8})$");
         static Regex SrOtherRegex = new Regex("^(latency|avgqu_sz|inflight|iowait)_([a-f0-9]{8})$");
+        static Regex GpuRegex = new Regex(@"^gpu_((memory_(free|used))|power_usage|temperature|(utilisation_(compute|memory_io)))_(([a-fA-F0-9]{4}\/)?[a-fA-F0-9]{2}\/[0-1][a-fA-F0-9].[0-7])$");
 
         public static string GetFriendlyDataSourceName(string name, IXenObject iXenObject)
         {
@@ -1121,6 +1122,17 @@ namespace XenAdmin.Core
                                sr.Name.Ellipsise(30));
             }
 
+            m = GpuRegex.Match(name);
+            if (m.Success)
+            {
+                string pciId = m.Groups[6].Value.Replace(@"/", ":");
+                PGPU gpu = FindGpu(iXenObject, pciId);
+                return gpu == null
+                           ? null
+                           : FormatFriendly(string.Format("Label-performance.gpu_{0}", m.Groups[1].Value),
+                                            gpu.Name, pciId);
+            }
+
             if (NetworkLatencyRegex.IsMatch(name))
                 return PropertyManager.GetFriendlyName("Label-performance.network_latency");
 
@@ -1142,6 +1154,22 @@ namespace XenAdmin.Core
         private static string FormatFriendly(string key, params string[] args)
         {
             return string.Format(PropertyManager.GetFriendlyName(key), args);
+        }
+
+        private static PGPU FindGpu(IXenObject iXenObject, string pciId)
+        {
+            foreach (PCI pci in iXenObject.Connection.Cache.PCIs)
+            {
+                if (pci.pci_id != pciId)
+                    continue;
+
+                foreach (PGPU gpu in iXenObject.Connection.Cache.PGPUs)
+                {
+                    if (gpu.PCI.opaque_ref == pci.opaque_ref)
+                        return gpu;
+                }
+            }
+            return null;
         }
 
         private static XenAPI.Network FindNetworkOfVIF(IXenObject iXenObject, string device)

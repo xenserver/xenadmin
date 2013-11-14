@@ -1658,4 +1658,22 @@
   <data name="Label-performance.vbd_iowait" xml:space="preserve">
     <value>Disk {0} IO Wait</value>
   </data>
+  <data name="Label-performance.gpu_memory_free" xml:space="preserve">
+    <value>{0} {1} Free Memory</value>
+  </data>
+  <data name="Label-performance.gpu_memory_used" xml:space="preserve">
+    <value>{0} {1} Used Memory</value>
+  </data>
+  <data name="Label-performance.gpu_power_usage" xml:space="preserve">
+    <value>{0} {1} Power Usage</value>
+  </data>
+  <data name="Label-performance.gpu_temperature" xml:space="preserve">
+    <value>{0} {1} Temperature</value>
+  </data>
+  <data name="Label-performance.gpu_utilisation_compute" xml:space="preserve">
+    <value>{0} {1} Utilization</value>
+  </data>
+  <data name="Label-performance.gpu_utilisation_memory_io" xml:space="preserve">
+    <value>{0} {1} Memory Utilization</value>
+  </data>
 </root>

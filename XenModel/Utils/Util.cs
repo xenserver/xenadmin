@@ -198,6 +198,37 @@ namespace XenAdmin
             return t.ToString("0");
         }
 
+        public static string MilliWattString(double t)
+        {
+            string unit;
+            string value = MilliWattValue(t, out unit);
+            return string.Format(Messages.VAL_FORMAT, value, unit);
+        }
+
+        public static string MilliWattValue(double t, out string unit)
+        {
+            if (t >= DEC_GIGA)
+            {
+                unit = Messages.VAL_MWATT;
+                return (t / DEC_GIGA).ToString("0");
+            }
+
+            if (t >= DEC_MEGA)
+            {
+                unit = Messages.VAL_KILOWATT;
+                return (t / DEC_MEGA).ToString("0");
+            }
+
+            if (t >= DEC_KILO)
+            {
+                unit = Messages.VAL_WATT;
+                return (t / DEC_KILO).ToString("0");
+            }
+
+            unit = Messages.VAL_MILWATT;
+            return t.ToString("0");
+        }
+
         public static long ToMB(long bytes)
         {
             return ToMB(bytes, RoundingBehaviour.Nearest);

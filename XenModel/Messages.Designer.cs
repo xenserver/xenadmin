@@ -8464,6 +8464,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to GPU.
+        /// </summary>
+        public static string DATATYPE_GPU {
+            get {
+                return ResourceManager.GetString("DATATYPE_GPU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Latency.
         /// </summary>
         public static string DATATYPE_LATENCY {
@@ -31247,6 +31256,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to kW.
+        /// </summary>
+        public static string VAL_KILOWATT {
+            get {
+                return ResourceManager.GetString("VAL_KILOWATT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to kBps.
         /// </summary>
         public static string VAL_KILRATE {
@@ -31301,6 +31319,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to mW.
+        /// </summary>
+        public static string VAL_MILWATT {
+            get {
+                return ResourceManager.GetString("VAL_MILWATT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MW.
+        /// </summary>
+        public static string VAL_MWATT {
+            get {
+                return ResourceManager.GetString("VAL_MWATT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ns.
         /// </summary>
         public static string VAL_NANOSEC {
@@ -31333,6 +31369,15 @@ namespace XenAdmin {
         public static string VAL_SEC {
             get {
                 return ResourceManager.GetString("VAL_SEC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to W.
+        /// </summary>
+        public static string VAL_WATT {
+            get {
+                return ResourceManager.GetString("VAL_WATT", resourceCulture);
             }
         }
         

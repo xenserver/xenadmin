@@ -174,7 +174,8 @@ namespace XenAdmin.Controls.CustomDataGraph
             }
             else if (settype.Contains("memory") || settype.Contains("allocation"))
             {
-                dataSet.Type = DataType.Memory;
+                dataSet.Type = settype.Contains("gpu") ? DataType.Gpu : DataType.Memory;
+
                 dataSet.MultiplyingFactor = settype.Contains("kib") || settype == "memory_internal_free"
                                                 ? (int)Util.BINARY_KILO
                                                 : 1;
@@ -256,6 +257,25 @@ namespace XenAdmin.Controls.CustomDataGraph
                 //xapi units are in requests
                 dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.None, RangeScaleMode.Auto);
                 dataSet.Type = DataType.Storage;
+            }
+            else if (settype.StartsWith("gpu"))
+            {
+                if (settype.Contains("power_usage"))
+                {
+                    //xapi units are in mW
+                    dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.MilliWatt, RangeScaleMode.Auto);
+                }
+                else if (settype.Contains("temperature"))
+                {
+                    //xapi units are in Centigrade
+                    dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.Centigrade, RangeScaleMode.Auto);
+                }
+                else if (settype.Contains("utilisation"))
+                {
+                    dataSet.CustomYRange = new DataRange(100, 0, 10, Unit.Percentage, RangeScaleMode.Auto);
+                    dataSet.MultiplyingFactor = 100;
+                }
+                dataSet.Type = DataType.Gpu;
             }
             else
             {
@@ -760,7 +780,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         }
     }
 
-    public enum DataType { Cpu, Memory, Disk, Storage, Network, Latency, LoadAverage, Custom };
+    public enum DataType { Cpu, Memory, Disk, Storage, Network, Latency, LoadAverage, Gpu, Custom };
 
     public static class DatatypeExtensions
     {
@@ -782,6 +802,8 @@ namespace XenAdmin.Controls.CustomDataGraph
                     return Messages.DATATYPE_LATENCY;
                 case DataType.LoadAverage:
                     return Messages.DATATYPE_LOADAVERAGE;
+                case DataType.Gpu:
+                    return Messages.DATATYPE_GPU;
                 default:
                     return Messages.DATATYPE_CUSTOM;
             }

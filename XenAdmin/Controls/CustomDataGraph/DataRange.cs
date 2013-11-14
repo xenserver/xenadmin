@@ -84,6 +84,9 @@ namespace XenAdmin.Controls.CustomDataGraph
             return value < Min ? Min : value > Max ? Max : value;
         }
 
+        /// <summary>
+        /// This is the value together with the unit, e.g. "10 kB"
+        /// </summary>
         public virtual string GetString(double value)
         {
             double constrVal = ConstrainedValue(value);
@@ -100,11 +103,18 @@ namespace XenAdmin.Controls.CustomDataGraph
                     return Util.NanoSecondsString(constrVal);
                 case Unit.CountsPerSecond:
                     return Util.CountsPerSecondString(constrVal);
+                case Unit.MilliWatt:
+                    return Util.MilliWattString(constrVal);
+                case Unit.Centigrade:
+                     return string.Format("{0}\u2103", constrVal.ToString("0"));
                 default:
                     return constrVal.ToString();
             }
         }
 
+        /// <summary>
+        /// This is the just the unit, e.g. "kB"
+        /// </summary>
         public string UnitString
         {
             get
@@ -126,12 +136,20 @@ namespace XenAdmin.Controls.CustomDataGraph
                         return unit;
                     case Unit.CountsPerSecond:
                         return Messages.COUNTS_PER_SEC_UNIT;
+                    case Unit.Centigrade:
+                        return "\u2103";
+                    case Unit.MilliWatt:
+                        Util.MilliWattValue(Max, out unit);
+                        return unit;
                     default:
                         return "";
                 }
             }
         }
 
+        /// <summary>
+        /// This is the value string, e.g. "10"
+        /// </summary>
         public virtual string GetRelativeString(double value)
         {
             double constrVal = ConstrainedValue(value);
@@ -145,6 +163,8 @@ namespace XenAdmin.Controls.CustomDataGraph
                     return Util.DataRateValue(constrVal, out unit);
                 case Unit.NanoSeconds:
                     return Util.NanoSecondsValue(constrVal, out unit);
+                case Unit.MilliWatt:
+                    return Util.MilliWattValue(constrVal, out unit);
                 case Unit.CountsPerSecond://fall through
                 default:
                     return constrVal.ToString();
@@ -177,6 +197,8 @@ namespace XenAdmin.Controls.CustomDataGraph
                 case Unit.Percentage:
                 case Unit.NanoSeconds:
                 case Unit.CountsPerSecond:
+                case Unit.MilliWatt:
+                case Unit.Centigrade:
                     int pow = 0;
                     max = Max;
                     if (Max > 1)
@@ -230,5 +252,5 @@ namespace XenAdmin.Controls.CustomDataGraph
 
     public enum RangeScaleMode { Fixed, Auto, Delegate }
 
-    public enum Unit { None, Percentage, BytesPerSecond, Bytes, NanoSeconds, CountsPerSecond }
+    public enum Unit { None, Percentage, BytesPerSecond, Bytes, NanoSeconds, CountsPerSecond, MilliWatt, Centigrade }
 }
