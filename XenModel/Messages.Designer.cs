@@ -13912,6 +13912,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Edit Selected GPUs....
+        /// </summary>
+        public static string GPU_EDIT_ALLOWED_TYPES_MULTIPLE {
+            get {
+                return ResourceManager.GetString("GPU_EDIT_ALLOWED_TYPES_MULTIPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Edit....
+        /// </summary>
+        public static string GPU_EDIT_ALLOWED_TYPES_SINGLE {
+            get {
+                return ResourceManager.GetString("GPU_EDIT_ALLOWED_TYPES_SINGLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} ({1} GPUs).
         /// </summary>
         public static string GPU_GROUP_NAME_AND_NO_OF_GPUS {

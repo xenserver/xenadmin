@@ -111,7 +111,7 @@ namespace XenAdmin.Controls.GPU
         private void SetupPage()
         {
             multipleSelectionPanel.Visible = (pGpus.Count > 1);
-            editButton.Text = (pGpus.Count > 1) ? "&Edit Selected GPUs..." : "&Edit...";
+            editButton.Text = (pGpus.Count > 1) ? Messages.GPU_EDIT_ALLOWED_TYPES_MULTIPLE : Messages.GPU_EDIT_ALLOWED_TYPES_SINGLE;
         }
 
         private GpuShinyBar FindGpuShinyBar(PGPU pGpu)

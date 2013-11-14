@@ -4874,6 +4874,12 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="GPU" xml:space="preserve">
     <value>GPU</value>
   </data>
+  <data name="GPU_EDIT_ALLOWED_TYPES_MULTIPLE" xml:space="preserve">
+    <value>&amp;Edit Selected GPUs...</value>
+  </data>
+  <data name="GPU_EDIT_ALLOWED_TYPES_SINGLE" xml:space="preserve">
+    <value>&amp;Edit...</value>
+  </data>
   <data name="GPU_GROUP_NAME_AND_NO_OF_GPUS" xml:space="preserve">
     <value>{0} ({1} GPUs)</value>
   </data>
