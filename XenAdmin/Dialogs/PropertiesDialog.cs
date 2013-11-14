@@ -466,10 +466,22 @@ namespace XenAdmin.Dialogs
                 return;
             }
 
-            var vmHAEditPage = verticalTabs.SelectedItem as VMHAEditPage;
-            if (vmHAEditPage != null)
+            if (verticalTabs.SelectedItem == VMHAEditPage)
             {
-                vmHAEditPage.StartNtolUpdate();
+                VMHAEditPage.StartNtolUpdate();
+                if (GpuEditPage != null)
+                {
+                    VMHAEditPage.GpuGroup = GpuEditPage.GpuGroup;
+                    VMHAEditPage.VgpuType = GpuEditPage.VgpuType;
+                    VMHAEditPage.RefillPrioritiesComboBox();
+                }
+                return;
+            }
+
+            if (verticalTabs.SelectedItem == GpuEditPage && VMHAEditPage != null)
+            {
+                GpuEditPage.SelectedPriority = VMHAEditPage.SelectedPriority;
+                GpuEditPage.ShowHideWarnings();
                 return;
             }
         }

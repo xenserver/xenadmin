@@ -32,16 +32,15 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 
-using XenAdmin;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAdmin.TabPages;
 using XenAPI;
-using System.Drawing;
 using XenAdmin.Controls;
 
 
@@ -124,10 +123,7 @@ namespace XenAdmin.SettingsPanels
                 	return String.Format(Messages.HA_NOT_CONFIGURED, Helpers.GetName(pool).Ellipsise(30));
                 }
 
-                if (m_comboBoxProtectionLevel.SelectedItem != null)
-                    return m_comboBoxProtectionLevel.SelectedItem.ToString();
-
-                return Messages.NONE_DEFINED;
+                return Helpers.RestartPriorityI18n(SelectedPriority);
             }
         }
 
@@ -248,10 +244,7 @@ namespace XenAdmin.SettingsPanels
                     // VM wasn't agile
                     vmIsAgile = false;
                 }
-                Program.Invoke(Program.MainWindow, delegate()
-                {
-                    RefillPrioritiesComboBox();
-                });
+                Program.Invoke(Program.MainWindow, RefillPrioritiesComboBox);
             }
             catch (Exception e)
             {
@@ -287,7 +280,7 @@ namespace XenAdmin.SettingsPanels
         /// <summary>
         /// Called after we determine if the selected VM is agile or not. Fills the combo box with the correct PriorityWrappers.
         /// </summary>
-        private void RefillPrioritiesComboBox()
+        public void RefillPrioritiesComboBox()
         {
             Program.AssertOnEventThread();
 
@@ -298,7 +291,8 @@ namespace XenAdmin.SettingsPanels
             foreach (var restartPriority in restartPriorities)
             {
                 // add "restart" priorities only is vm is agile
-                if (VM.HaPriorityIsRestart(vm.Connection, restartPriority) && !vmIsAgile)
+                if (VM.HaPriorityIsRestart(vm.Connection, restartPriority) &&
+                    (!vmIsAgile || GpuGroup != null || VgpuType != null))
                     continue;
                 m_comboBoxProtectionLevel.Items.Add(new PriorityWrapper(restartPriority));
             }
@@ -306,10 +300,9 @@ namespace XenAdmin.SettingsPanels
             // Select appropriate entry in combo box
             bool found = false;
 
-            VM.HA_Restart_Priority pri = vm.HARestartPriority;
             foreach (PriorityWrapper w in m_comboBoxProtectionLevel.Items)
             {
-                if (w.Priority == pri)
+                if (w.Priority == SelectedPriority)
                 {
                     found = true;
                     m_comboBoxProtectionLevel.SelectedItem = w;
@@ -322,7 +315,7 @@ namespace XenAdmin.SettingsPanels
                 // Someone might have set a High/Medium/Low restart priority for a non-agile VM through the CLI,
                 // even though this is not possible through the GUI. Hence we need to add that priority to the
                 // combo box just to prevent things screwing up.
-                m_comboBoxProtectionLevel.Items.Insert(0, new PriorityWrapper(pri));
+                m_comboBoxProtectionLevel.Items.Insert(0, new PriorityWrapper(SelectedPriority));
                 m_comboBoxProtectionLevel.SelectedIndex = 0;
             }
         }
@@ -430,21 +423,11 @@ namespace XenAdmin.SettingsPanels
             return showStartOrderAndDelay && (nudOrder.Value != origOrder || nudStartDelay.Value != origStartDelay);
 		}
 
-		private VM.HA_Restart_Priority SelectedPriority
-		{
-			get
-			{
-				PriorityWrapper w = m_comboBoxProtectionLevel.SelectedItem as PriorityWrapper;
-				if (w == null)
-				{
-					return origRestartPriority;
-				}
-				else
-				{
-					return w.Priority;
-				}
-			}
-		}
+		public VM.HA_Restart_Priority SelectedPriority { get; private set; }
+
+        public GPU_group GpuGroup { private get; set; }
+
+        public VGPU_type VgpuType { private get; set; }
 
 		private bool IsHaEditable()
 		{
@@ -462,7 +445,8 @@ namespace XenAdmin.SettingsPanels
 			System.Diagnostics.Trace.Assert(vm == null);
 			vm = (VM)clone;
 
-			origRestartPriority = vm.HARestartPriority;
+            origRestartPriority = vm.HARestartPriority;
+		    SelectedPriority = origRestartPriority;
 			origOrder = vm.order;
 			origStartDelay = vm.start_delay;
 
@@ -604,13 +588,15 @@ namespace XenAdmin.SettingsPanels
 			if (vm == null)
 				return;
 
-			VM.HA_Restart_Priority priority = SelectedPriority;
+		    var pw = m_comboBoxProtectionLevel.SelectedItem as PriorityWrapper;
+            if (pw != null)
+                SelectedPriority = pw.Priority;
 
-            comboLabel.Text = Helpers.RestartPriorityDescription(priority);
+            comboLabel.Text = Helpers.RestartPriorityDescription(SelectedPriority);
 
-			Dictionary<VM, VM.HA_Restart_Priority> settings = Helpers.GetVmHaRestartPriorities(vm.Connection, Properties.Settings.Default.ShowHiddenVMs);
+			var settings = Helpers.GetVmHaRestartPriorities(vm.Connection, Properties.Settings.Default.ShowHiddenVMs);
 			// Supplement with the changed setting
-			settings[vm] = priority;
+            settings[vm] = SelectedPriority;
 
 			// This will trigger an update in the ntol indicator.
 			haNtolIndicator.Settings = settings;

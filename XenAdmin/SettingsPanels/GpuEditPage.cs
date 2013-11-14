@@ -82,6 +82,8 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
+        public VM.HA_Restart_Priority SelectedPriority { private get; set; }
+
         #region IEditPage Members
 
         public AsyncAction SaveSettings()
@@ -96,6 +98,7 @@ namespace XenAdmin.SettingsPanels
             Trace.Assert(!Helpers.FeatureForbidden(clone, Host.RestrictGpu));  // If license insufficient, we show upsell page instead
 
             vm = (VM)clone;
+            SelectedPriority = vm.HARestartPriority;
 
             if (Connection == null) // on the PropertiesDialog
                 Connection = vm.Connection;
@@ -210,87 +213,85 @@ namespace XenAdmin.SettingsPanels
             gpu_groups = Connection.Cache.GPU_groups.Where(g => g.PGPUs.Count > 0 && g.supported_VGPU_types.Count != 0).ToArray();//not showing empty groups
             gpusAvailable = gpu_groups.Length > 0;
 
-            if (!gpusAvailable)
+            if (gpusAvailable)
             {
-                labelGpuType.Visible = comboBoxGpus.Visible = false;
-                labelRubric.Text = Helpers.GetPool(Connection) == null
-                                       ? Messages.GPU_RUBRIC_NO_GPUS_SERVER
-                                       : Messages.GPU_RUBRIC_NO_GPUS_POOL;
+                PopulateComboBox();
+                ShowHideWarnings();
             }
             else
             {
-                var noneItem = new GpuTuple(null, null, null);
-                comboBoxGpus.Items.Add(noneItem);
+                labelRubric.Text = Helpers.GetPool(Connection) == null
+                                       ? Messages.GPU_RUBRIC_NO_GPUS_SERVER
+                                       : Messages.GPU_RUBRIC_NO_GPUS_POOL;
 
-                Array.Sort(gpu_groups);
-                foreach (GPU_group gpu_group in gpu_groups)
-                {
-                    if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu))
-                    {
-                        comboBoxGpus.Items.Add(new GpuTuple(gpu_group, null, null));
-                    }
-                    else
-                    {
-                        var enabledRefs = GPU_group.get_enabled_VGPU_types(Connection.Session, gpu_group.opaque_ref);
-                        var enabledTypes = Connection.ResolveAll(enabledRefs);
-
-                        var allTypes = Connection.ResolveAll(gpu_group.supported_VGPU_types);
-
-                        var disabledTypes = allTypes.FindAll(t => !enabledTypes.Exists(e => e.opaque_ref == t.opaque_ref));
-
-                        if (allTypes.Count > 1)
-                        {
-                            allTypes.Sort((t1, t2) =>
-                            {
-                                int result = t1.Capacity.CompareTo(t2.Capacity);
-                                if (result != 0)
-                                    return result;
-                                return t1.Name.CompareTo(t2.Name);
-                            });
-
-                            comboBoxGpus.Items.Add(new GpuTuple(gpu_group, allTypes.ToArray(), disabledTypes.ToArray()));
-
-                            foreach (var vgpuType in allTypes)
-                                comboBoxGpus.Items.Add(new GpuTuple(gpu_group, new[] { vgpuType }, disabledTypes.ToArray()));
-                        }
-                        else
-                            comboBoxGpus.Items.Add(new GpuTuple(gpu_group, null, disabledTypes.ToArray()));
-                    }
-                }
-
-                foreach (var item in comboBoxGpus.Items)
-                {
-                    var tuple = item as GpuTuple;
-                    if (tuple == null)
-                        continue;
-
-                    if (tuple.Equals(currentGpuTuple))
-                    {
-                        comboBoxGpus.SelectedItem = item;
-                        break;
-                    }
-                }
-                if (comboBoxGpus.SelectedItem == null)
-                    comboBoxGpus.SelectedItem = noneItem;
+                tableLayoutPanel1.Visible = false;
+                warningsTable.Visible = false;
             }
-
-            ShowHideWarnings();
         }
 
         #endregion
 
-        private void ShowHideWarnings()
+        private void PopulateComboBox()
+        {
+            var noneItem = new GpuTuple(null, null, null);
+            comboBoxGpus.Items.Add(noneItem);
+
+            Array.Sort(gpu_groups);
+            foreach (GPU_group gpu_group in gpu_groups)
+            {
+                if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu))
+                {
+                    comboBoxGpus.Items.Add(new GpuTuple(gpu_group, null, null));
+                }
+                else
+                {
+                    var enabledRefs = GPU_group.get_enabled_VGPU_types(Connection.Session, gpu_group.opaque_ref);
+                    var enabledTypes = Connection.ResolveAll(enabledRefs);
+
+                    var allTypes = Connection.ResolveAll(gpu_group.supported_VGPU_types);
+
+                    var disabledTypes = allTypes.FindAll(t => !enabledTypes.Exists(e => e.opaque_ref == t.opaque_ref));
+
+                    if (allTypes.Count > 1)
+                    {
+                        allTypes.Sort((t1, t2) =>
+                        {
+                            int result = t1.Capacity.CompareTo(t2.Capacity);
+                            if (result != 0)
+                                return result;
+                            return t1.Name.CompareTo(t2.Name);
+                        });
+
+                        comboBoxGpus.Items.Add(new GpuTuple(gpu_group, allTypes.ToArray(), disabledTypes.ToArray()));
+
+                        foreach (var vgpuType in allTypes)
+                            comboBoxGpus.Items.Add(new GpuTuple(gpu_group, new[] { vgpuType }, disabledTypes.ToArray()));
+                    }
+                    else
+                        comboBoxGpus.Items.Add(new GpuTuple(gpu_group, null, disabledTypes.ToArray()));
+                }
+            }
+
+            foreach (var item in comboBoxGpus.Items)
+            {
+                var tuple = item as GpuTuple;
+                if (tuple == null)
+                    continue;
+
+                if (tuple.Equals(currentGpuTuple))
+                {
+                    comboBoxGpus.SelectedItem = item;
+                    break;
+                }
+            }
+            if (comboBoxGpus.SelectedItem == null)
+                comboBoxGpus.SelectedItem = noneItem;
+        }
+
+        public void ShowHideWarnings()
         {
             if (!gpusAvailable)
-            {
-                imgRDP.Visible = labelRDP.Visible =
-                imgNeedDriver.Visible = labelNeedDriver.Visible =
-                imgNeedGpu.Visible = labelNeedGpu.Visible =
-                imgStopVM.Visible = labelStopVM.Visible =
-                imgHA.Visible = labelHA.Visible =
-                    false;
                 return;
-            }
 
             if (vm.power_state != vm_power_state.Halted)
             {
@@ -306,7 +307,7 @@ namespace XenAdmin.SettingsPanels
                 return;
             }
 
-            if (vm.IsHAProtectedRestart)
+            if (VM.HaPriorityIsRestart(Connection, SelectedPriority))
             {
                 imgRDP.Visible = labelRDP.Visible =
                 imgNeedDriver.Visible = labelNeedDriver.Visible =
@@ -320,6 +321,7 @@ namespace XenAdmin.SettingsPanels
                 return;
             }
 
+            labelGpuType.Enabled = comboBoxGpus.Enabled = true;
             GpuTuple tuple = comboBoxGpus.SelectedItem as GpuTuple;
 
             imgStopVM.Visible = labelStopVM.Visible =
