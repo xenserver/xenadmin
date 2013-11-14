@@ -207,7 +207,7 @@ namespace XenAdmin.SettingsPanels
                 }
             }
 
-            gpu_groups = Connection.Cache.GPU_groups;
+            gpu_groups = Connection.Cache.GPU_groups.Where(g => g.PGPUs.Count > 0 && g.supported_VGPU_types.Count != 0).ToArray();//not showing empty groups
             gpusAvailable = gpu_groups.Length > 0;
 
             if (!gpusAvailable)

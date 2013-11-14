@@ -66,6 +66,7 @@ namespace XenAdmin.TabPages
             var allPgpus = xenObject.Connection.Cache.PGPUs;
             pGPUs.AddRange(from pGpu in allPgpus
                            let host = xenObject.Connection.Resolve(pGpu.host)
+                           where pGpu.supported_VGPU_types.Count > 0
                            orderby host, pGpu.Name ascending
                            select pGpu
                 );
@@ -200,12 +201,12 @@ namespace XenAdmin.TabPages
                     gpuRow.RefreshGpu(pgpu);
             }
 
-            if (e.PropertyName == "enabled_VGPU_types")
+            if (e.PropertyName == "enabled_VGPU_types" || e.PropertyName == "supported_VGPU_types")
             {
                 Rebuild();
             }
-
         }
+
         private void RegisterPgpuHandlers(PGPU pgpu)
         {
             pgpu.PropertyChanged -= pgpu_PropertyChanged;
