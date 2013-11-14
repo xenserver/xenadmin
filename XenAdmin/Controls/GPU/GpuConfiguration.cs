@@ -14,6 +14,14 @@ namespace XenAdmin.Controls.GPU
     {
         private List<PGPU> PGpuList { get; set; }
 
+        internal override string HelpName
+        {
+            get
+            {
+                return "GpuConfigurationDialog";
+            }
+        }
+
         private GpuConfiguration()
         {
             InitializeComponent();
