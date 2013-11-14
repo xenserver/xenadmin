@@ -53,6 +53,11 @@ namespace XenAdmin.SettingsPanels
         public GpuEditPage()
         {
             InitializeComponent();
+            imgRDP.Visible = labelRDP.Visible =
+                imgNeedDriver.Visible = labelNeedDriver.Visible =
+                imgNeedGpu.Visible = labelNeedGpu.Visible =
+                imgStopVM.Visible = labelStopVM.Visible =
+                    false;
         }
 
         public GPU_group GpuGroup
@@ -252,6 +257,8 @@ namespace XenAdmin.SettingsPanels
                         break;
                     }
                 }
+                if (comboBoxGpus.SelectedItem == null)
+                    comboBoxGpus.SelectedItem = noneItem;
             }
 
             ShowHideWarnings();

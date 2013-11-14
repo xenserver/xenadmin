@@ -146,9 +146,6 @@ namespace XenAdmin.Wizards.NewVMWizard
             AddPages(page_1_Template, page_2_Name, page_3_InstallationMedia, page_4_HomeServer,
                      page_5_CpuMem, page_6_Storage, page_7_Networking, page_8_Finish);
 
-            if (vgpuCapability)
-                AddAfterPage(page_5_CpuMem, pageVgpu);
-
             m_affinity = affinity;
             page_1_Template.SelectedTemplate = template;
             page_1b_BiosLocking.Affinity = affinity;
@@ -206,6 +203,10 @@ namespace XenAdmin.Wizards.NewVMWizard
                 pageVgpu.vm = selectedTemplate;
                 page_6_Storage.SelectedTemplate = selectedTemplate;
                 page_7_Networking.SelectedTemplate = selectedTemplate;
+
+                RemovePage(pageVgpu);
+                if (vgpuCapability && selectedTemplate.IsHVM)
+                    AddAfterPage(page_5_CpuMem, pageVgpu);
 
                 RemovePage(page_1b_BiosLocking);
 
