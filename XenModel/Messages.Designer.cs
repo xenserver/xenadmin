@@ -14038,6 +14038,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not available.
+        /// </summary>
+        public static string GPU_UNAVAILABLE {
+            get {
+                return ResourceManager.GetString("GPU_UNAVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading Data....
         /// </summary>
         public static string GRAPH_LOADING {

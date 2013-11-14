@@ -132,8 +132,16 @@ namespace XenAdmin.SettingsPanels
         {
             get
             {
-                var tuple = comboBoxGpus.SelectedItem as GpuTuple;
-                return tuple == null ? "" : tuple.ToString();
+                string txt = Messages.GPU_UNAVAILABLE;
+
+                if (gpusAvailable)
+                {
+                    var tuple = comboBoxGpus.SelectedItem as GpuTuple;
+                    if (tuple != null)
+                        txt = tuple.ToString();
+                }
+
+                return txt;
             }
         }
 

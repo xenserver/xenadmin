@@ -4916,6 +4916,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_ONE" xml:space="preserve">
     <value>Select which vGPU types are allowed on this GPU:</value>
   </data>
+  <data name="GPU_UNAVAILABLE" xml:space="preserve">
+    <value>Not available</value>
+  </data>
   <data name="GRAPHS" xml:space="preserve">
     <value>Graphs</value>
   </data>
