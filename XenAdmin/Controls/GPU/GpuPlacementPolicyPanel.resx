@@ -205,10 +205,13 @@
     <value>1, 1</value>
   </data>
   <data name="containerPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>462, 33</value>
+    <value>1046, 33</value>
   </data>
   <data name="containerPanel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
+  </data>
+  <data name="containerPanel.WrapContents" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;containerPanel.Name" xml:space="preserve">
     <value>containerPanel</value>
@@ -232,7 +235,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="panelWithBorder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>464, 35</value>
+    <value>755, 35</value>
   </data>
   <data name="panelWithBorder.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
