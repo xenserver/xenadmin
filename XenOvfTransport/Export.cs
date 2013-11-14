@@ -323,6 +323,26 @@ namespace XenOvfTransport
                 {
 					OVF.AddOtherSystemSettingData(ovfEnv, vsId, "PV_ramdisk", vm.PV_ramdisk, OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
                 }
+
+                if (vm.VGPUs.Count != 0)
+                {
+                    VGPU vgpu = VGPU.get_record(xenSession, vm.VGPUs[0]);
+
+                    if (vgpu != null)
+                    {
+                        var vgpuGroup = GPU_group.get_record(xenSession, vgpu.GPU_group);
+                        var vgpuType = VGPU_type.get_record(xenSession, vgpu.type);
+
+                        var sb = new StringBuilder();
+                        sb.AppendFormat("GPU_types={{{0}}};",
+                                        vgpuGroup.GPU_types == null || vgpuGroup.GPU_types.Length < 1
+                                            ? ""
+                                            : string.Join(";", vgpuGroup.GPU_types));
+                        sb.AppendFormat("VGPU_type_vendor_name={0};", vgpuType.vendor_name ?? "");
+                        sb.AppendFormat("VGPU_type_model_name={0};", vgpuType.model_name ?? "");
+                        OVF.AddOtherSystemSettingData(ovfEnv, vsId, "vgpu", sb.ToString(), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_4"));
+                    }
+                }
                 #endregion
 
                 OVF.FinalizeEnvelope(ovfEnv);

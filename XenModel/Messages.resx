@@ -2791,7 +2791,7 @@ You can only connect to a single Citrix XenServer Express Edition server at a ti
     <value>&amp;Destination:</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS" xml:space="preserve">
-    <value>Select the pool or standalone server where you want to migrate the selected VM(s)</value>
+    <value>Select the pool or standalone server where you want to migrate the selected VM(s).</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO" xml:space="preserve">
     <value>Specify a &amp;home server in the destination pool (optional):</value>
@@ -2835,7 +2835,7 @@ Please reconnect the host and try again.</value>
     <value>Pla&amp;ce migrated virtual disks onto specified SRs:</value>
   </data>
   <data name="CPM_WIZARD_STORAGE_INSTRUCTIONS" xml:space="preserve">
-    <value>Select one or more storage repositories (SR) in the destination pool or standalone server</value>
+    <value>Select one or more storage repositories (SR) in the destination pool or standalone server.</value>
   </data>
   <data name="CPM_WIZARD_TITLE" xml:space="preserve">
     <value>Migrate VM</value>
@@ -5796,6 +5796,12 @@ Click Configure HA to alter the settings displayed below.</value>
   </data>
   <data name="IMPORT_VM_VIFS" xml:space="preserve">
     <value>Configure virtual network interfaces for the new VM</value>
+  </data>
+  <data name="IMPORT_VM_WITH_VGPU_WARNING_MANY" xml:space="preserve">
+    <value>Some or all of the VMs you are importing have vGPUs assigned to them. The selected location does not have the right type of GPU for all of them. If you continue with the import, their vGPU settings will be lost.</value>
+  </data>
+  <data name="IMPORT_VM_WITH_VGPU_WARNING_ONE" xml:space="preserve">
+    <value>The VM you are importing has a vGPU assigned to it. The selected location does not have the right type of GPU. If you continue with the import, the vGPU settings will be lost.</value>
   </data>
   <data name="IMPORT_WIZARD_ALL_ON_SAME_SR_RADIO" xml:space="preserve">
     <value>Place &amp;all imported virtual disks on this target SR:</value>

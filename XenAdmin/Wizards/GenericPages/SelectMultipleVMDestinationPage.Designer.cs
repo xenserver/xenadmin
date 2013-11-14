@@ -38,18 +38,24 @@
             this.m_dataGridView = new System.Windows.Forms.DataGridView();
             this.m_colVmName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.m_colTarget = new XenAdmin.Controls.EnableableComboBoxColumn();
+            this.tableLayoutPanelWarning = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.labelWarning = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.m_dataGridView)).BeginInit();
+            this.tableLayoutPanelWarning.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.m_labelIntro, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.m_dataGridView, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.m_dataGridView, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanelWarning, 0, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // m_labelIntro
@@ -114,6 +120,25 @@
             this.m_colTarget.Name = "m_colTarget";
             this.m_colTarget.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
+            // tableLayoutPanelWarning
+            // 
+            resources.ApplyResources(this.tableLayoutPanelWarning, "tableLayoutPanelWarning");
+            this.tableLayoutPanelWarning.Controls.Add(this.pictureBox1, 0, 0);
+            this.tableLayoutPanelWarning.Controls.Add(this.labelWarning, 1, 0);
+            this.tableLayoutPanelWarning.Name = "tableLayoutPanelWarning";
+            // 
+            // pictureBox1
+            // 
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.Image = global::XenAdmin.Properties.Resources._000_WarningAlert_h32bit_32;
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.TabStop = false;
+            // 
+            // labelWarning
+            // 
+            resources.ApplyResources(this.labelWarning, "labelWarning");
+            this.labelWarning.Name = "labelWarning";
+            // 
             // SelectMultipleVMDestinationPage
             // 
             resources.ApplyResources(this, "$this");
@@ -125,6 +150,9 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.m_dataGridView)).EndInit();
+            this.tableLayoutPanelWarning.ResumeLayout(false);
+            this.tableLayoutPanelWarning.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -140,5 +168,8 @@
         private XenAdmin.Controls.EnableableComboBox m_comboBoxConnection;
         private System.Windows.Forms.DataGridViewTextBoxColumn m_colVmName;
         private  XenAdmin.Controls.EnableableComboBoxColumn m_colTarget;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelWarning;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label labelWarning;
     }
 }

@@ -29,13 +29,26 @@
  * SUCH DAMAGE.
  */
 
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+using XenAdmin.Controls;
 using XenAdmin.Wizards.GenericPages;
 using XenAPI;
+using XenOvf;
+using XenOvf.Definitions;
+
 
 namespace XenAdmin.Wizards.ImportWizard
 {
     class ImportSelectHostPage : SelectMultipleVMDestinationPage
     {
+        public EnvelopeType SelectedOvfEnvelope { private get; set; }
+        private List<Xen_ConfigurationSettingData_Type> vgpuSettings = new List<Xen_ConfigurationSettingData_Type>();
+
+        #region XenTabPage overrides
+
         /// <summary>
         /// Gets the page's title (headline)
         /// </summary>
@@ -46,21 +59,94 @@ namespace XenAdmin.Wizards.ImportWizard
 		/// </summary>
 		public override string Text { get { return Messages.NEWSR_LOCATION; } }
 
-        protected override string InstructionText { get { return Messages.IMPORT_WIZARD_DESTINATION_INSTRUCTIONS; } }
-
-        protected override string HomeServerText { get { return Messages.IMPORT_WIZARD_DESTINATION_DESTINATION; } }
-
-        protected override string HomeServerSelectionIntroText { get { return Messages.IMPORT_WIZARD_DESTINATION_TABLE_INTRO; } }
-        
-
         protected override bool ImplementsIsDirty()
         {
             return true;
         }
 
+        public override void PageLoaded(PageLoadedDirection direction)
+        {
+            base.PageLoaded(direction);
+
+            if (direction == PageLoadedDirection.Forward)
+            {
+                vgpuSettings.Clear();
+                ShowWarning(null);
+
+                if (SelectedOvfEnvelope == null || VmMappings.Count < 1)
+                    return;
+
+                vgpuSettings = FindVgpuSettings(SelectedOvfEnvelope);
+            }
+        }
+
+        #endregion
+
+        protected override string InstructionText { get { return Messages.IMPORT_WIZARD_DESTINATION_INSTRUCTIONS; } }
+
+        protected override string HomeServerText { get { return Messages.IMPORT_WIZARD_DESTINATION_DESTINATION; } }
+
+        protected override string HomeServerSelectionIntroText { get { return Messages.IMPORT_WIZARD_DESTINATION_TABLE_INTRO; } }
+
+        protected override void OnChosenItemChanged()
+        {
+            if (vgpuSettings.Count == 0 || ChosenItem ==null || CheckRightGpuExists())
+            {
+                ShowWarning(null);
+                return;
+            }
+
+            ShowWarning(VmMappings.Count == 1
+                            ? Messages.IMPORT_VM_WITH_VGPU_WARNING_ONE
+                            : Messages.IMPORT_VM_WITH_VGPU_WARNING_MANY);
+        }
+
         public override DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem)
         {
             return new ImportDelayLoadingOptionComboBoxItem(xenItem);
+        }
+
+        private List<Xen_ConfigurationSettingData_Type> FindVgpuSettings(EnvelopeType envelopeType)
+        {
+            var list = new List<Xen_ConfigurationSettingData_Type>();
+
+            foreach (VirtualSystem_Type vsType in ((VirtualSystemCollection_Type)envelopeType.Item).Content)
+            {
+                VirtualHardwareSection_Type vhs = OVF.FindVirtualHardwareSectionByAffinity(envelopeType, vsType.id, "xen");
+                list.AddRange(vhs.VirtualSystemOtherConfigurationData.Where(s => s.Name == "vgpu"));
+            }
+
+            return list;
+        }
+
+        private bool CheckRightGpuExists()
+        {
+            foreach (var vgpuSetting in vgpuSettings)
+            {
+                Match m = XenOvfTransport.Import.VGPU_REGEX.Match(vgpuSetting.Value.Value);
+                if (!m.Success)
+                    continue;
+
+                var types = m.Groups[1].Value.Split(';');
+
+                var gpuGroup = ChosenItem.Connection.Cache.GPU_groups.FirstOrDefault(g =>
+                    g.GPU_types.Length == types.Length &&
+                    g.GPU_types.Intersect(types).Count() == types.Length);
+
+                if (gpuGroup == null)
+                    return false;
+
+                string vendorName = m.Groups[2].Value;
+                string modelName = m.Groups[3].Value;
+
+                var vgpuType = ChosenItem.Connection.Cache.VGPU_types.FirstOrDefault(v =>
+                    v.vendor_name == vendorName && v.model_name == modelName);
+
+                if (vgpuType == null)
+                    return false;
+            }
+
+            return true;
         }
     }
 }

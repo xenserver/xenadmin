@@ -7706,7 +7706,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select the pool or standalone server where you want to migrate the selected VM(s).
+        ///   Looks up a localized string similar to Select the pool or standalone server where you want to migrate the selected VM(s)..
         /// </summary>
         public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS {
             get {
@@ -7834,7 +7834,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select one or more storage repositories (SR) in the destination pool or standalone server.
+        ///   Looks up a localized string similar to Select one or more storage repositories (SR) in the destination pool or standalone server..
         /// </summary>
         public static string CPM_WIZARD_STORAGE_INSTRUCTIONS {
             get {
@@ -16456,6 +16456,24 @@ namespace XenAdmin {
         public static string IMPORT_VM_VIFS {
             get {
                 return ResourceManager.GetString("IMPORT_VM_VIFS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Some or all of the VMs you are importing have vGPUs assigned to them. The selected location does not have the right type of GPU for all of them. If you continue with the import, their vGPU settings will be lost..
+        /// </summary>
+        public static string IMPORT_VM_WITH_VGPU_WARNING_MANY {
+            get {
+                return ResourceManager.GetString("IMPORT_VM_WITH_VGPU_WARNING_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The VM you are importing has a vGPU assigned to it. The selected location does not have the right type of GPU. If you continue with the import, the vGPU settings will be lost..
+        /// </summary>
+        public static string IMPORT_VM_WITH_VGPU_WARNING_ONE {
+            get {
+                return ResourceManager.GetString("IMPORT_VM_WITH_VGPU_WARNING_ONE", resourceCulture);
             }
         }
         

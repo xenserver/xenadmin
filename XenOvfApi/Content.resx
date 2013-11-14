@@ -147,6 +147,9 @@
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_3" xml:space="preserve">
     <value>XenServer Platform Information</value>
   </data>
+  <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_4" xml:space="preserve">
+    <value>vGPU Information</value>
+  </data>
   <data name="POST_INSTALL_SECTION_INFO_1" xml:space="preserve">
     <value>XenServer Post Install Operations ONLY (Attempt to fix up Linux distributions.)</value>
   </data>

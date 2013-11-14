@@ -79,6 +79,7 @@ namespace XenAdmin.Wizards.GenericPages
 			InitializeComponent();
             InitializeText();
 			ConnectionsManager.XenConnections.CollectionChanged += CollectionChanged;
+            ShowWarning(null);
 		}
 
         public override void PageCancelled()
@@ -102,7 +103,16 @@ namespace XenAdmin.Wizards.GenericPages
 	        label2.Text = HomeServerSelectionIntroText;
 	    }
 
-	    public IXenObject ChosenItem { get; private set; }
+	    private IXenObject _chosenItem;
+	    public IXenObject ChosenItem
+	    {
+	        get { return _chosenItem; }
+            private set
+            {
+                _chosenItem = value;
+                OnChosenItemChanged();
+            }
+	    }
 
 	    /// <summary>
         /// Text containing instructions for use - at the top of the page
@@ -117,7 +127,21 @@ namespace XenAdmin.Wizards.GenericPages
         /// <summary>
         /// Text above the table containing a list of VMs and concomitant home server
         /// </summary>
-	    protected abstract string HomeServerSelectionIntroText { get; }
+        protected abstract string HomeServerSelectionIntroText { get; }
+
+        protected virtual void OnChosenItemChanged()
+        {}
+
+	    protected void ShowWarning(string warningText)
+        {
+            if (string.IsNullOrEmpty(warningText))
+                tableLayoutPanelWarning.Visible = false;
+            else
+            {
+                labelWarning.Text = warningText;
+                tableLayoutPanelWarning.Visible = true;
+            }
+        }
 
 		#region Base class (XenTabPage) overrides
 

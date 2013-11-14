@@ -198,6 +198,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
 						CheckDisabledPages(m_pageEula, m_pageSecurity); //decide whether to disable these progress steps
 						ResetVmMappings(m_pageImportSource.SelectedOvfEnvelope);
+						m_pageHost.SelectedOvfEnvelope = m_pageImportSource.SelectedOvfEnvelope;
 						m_pageHost.SetDefaultTarget(m_selectedObject);
 						m_pageHost.VmMappings = m_vmMappings;
 						m_pageStorage.SelectedOvfEnvelope = m_pageImportSource.SelectedOvfEnvelope;
@@ -218,6 +219,7 @@ namespace XenAdmin.Wizards.ImportWizard
 						}
 						m_pageVMconfig.IsWim = m_pageImportSource.IsWIM;
 						m_pageHost.SetDefaultTarget(m_selectedObject);
+ 						m_pageHost.SelectedOvfEnvelope = null;
 						m_pageHost.VmMappings = m_vmMappings;
 						NotifyNextPagesOfChange(m_pageVMconfig, m_pageHost, m_pageStorage, m_pageNetwork, m_pageOptions);
 						break;
