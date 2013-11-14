@@ -1398,6 +1398,20 @@ namespace XenAPI
             }
         }
 
+        public bool HasGPUPassthrough
+        {
+            get
+            {
+                if (VGPUs != null && VGPUs.Count > 0)
+                {
+                    var vGPUs = Connection.ResolveAll(VGPUs);
+                    return vGPUs.Any(vGPU => vGPU != null && vGPU.IsPassthrough);
+                }
+                return false;
+            }
+        }
+
+
         public virtual IEnumerable<SR> SRs
         {
             get

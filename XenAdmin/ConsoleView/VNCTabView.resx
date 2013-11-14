@@ -697,7 +697,7 @@
     <value>1</value>
   </data>
   <data name="dedicatedGpuWarning.Text" xml:space="preserve">
-    <value>This VM has a dedicated GPU assigned. You must connect to it using Remote Desktop.</value>
+    <value>This VM has a pass-through GPU assigned. You must connect to it using Remote Desktop.</value>
   </data>
   <data name="dedicatedGpuWarning.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>

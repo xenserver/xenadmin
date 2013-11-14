@@ -1363,8 +1363,8 @@ namespace XenAdmin.ConsoleView
 
         internal void ShowGpuWarningIfRequired()
         {
-            dedicatedGpuWarning.Visible = vncScreen != null && (vncScreen.UseVNC || string.IsNullOrEmpty(vncScreen.rdpIP)) && 
-                vncScreen.Source.HasVGPUs && vncScreen.Source.power_state == vm_power_state.Running;
+            dedicatedGpuWarning.Visible = vncScreen != null && (vncScreen.UseVNC || string.IsNullOrEmpty(vncScreen.rdpIP)) &&
+                vncScreen.Source.HasGPUPassthrough && vncScreen.Source.power_state == vm_power_state.Running;
         }
 
     }
