@@ -113,8 +113,10 @@ namespace XenAdmin.SettingsPanels
 
             radioButtonDepth.Checked = currentAllocationAlgorithm == allocation_algorithm.depth_first;
             radioButtonBreadth.Checked = currentAllocationAlgorithm == allocation_algorithm.breadth_first;
-            radioButtonMixture.Checked =
-                radioButtonMixture.Visible = currentAllocationAlgorithm == allocation_algorithm.unknown;
+
+            radioButtonMixture.Checked = currentAllocationAlgorithm == allocation_algorithm.unknown;
+            radioButtonMixture.Visible = currentAllocationAlgorithm == allocation_algorithm.unknown;
+            radioButtonMixture.Enabled = currentAllocationAlgorithm == allocation_algorithm.unknown;
         }
     }
 }
