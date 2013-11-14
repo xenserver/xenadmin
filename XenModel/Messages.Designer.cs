@@ -13930,6 +13930,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to On {0}:.
+        /// </summary>
+        public static string GPU_ON_HOST_LABEL {
+            get {
+                return ResourceManager.GetString("GPU_ON_HOST_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Placement policy: {0}.
         /// </summary>
         public static string GPU_PLACEMENT_POLICY_DESCRIPTION {

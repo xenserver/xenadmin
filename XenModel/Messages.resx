@@ -4880,6 +4880,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="GPU_NONE" xml:space="preserve">
     <value>None</value>
   </data>
+  <data name="GPU_ON_HOST_LABEL" xml:space="preserve">
+    <value>On {0}:</value>
+  </data>
   <data name="GPU_PLACEMENT_POLICY_DESCRIPTION" xml:space="preserve">
     <value>Placement policy: {0}</value>
   </data>

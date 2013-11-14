@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Controls.DataGridViewEx;
+using XenAdmin.Network;
 using XenAdmin.Properties;
 using XenAPI;
 
@@ -13,46 +16,155 @@ namespace XenAdmin.Controls.GPU
             InitializeComponent();
         }
 
-        public GpuRow(Host host, PGPU pGpu)
+        public GpuRow(IXenConnection connection, List<PGPU> pGpuList)
             : this()
         {
-            this.host = host;
-            this.pGpu = pGpu;
+            this.connection = connection;
+            pGpuLabel.Text = pGpuList[0].Name;
+            RepopulateAllowedTypes(pGpuList[0]);
+            Rebuild(pGpuList);
+            SetupPage();
         }
 
-        private Host host;
-        private PGPU pGpu
+        private IXenConnection connection;
+
+        private Dictionary<PGPU, CheckBox> pGpus = new Dictionary<PGPU, CheckBox>();
+
+        private void Rebuild(List<PGPU> pGpuList)
         {
-            set
+            Program.AssertOnEventThread();
+            if (!Visible)
+                return;
+
+            shinyBarsContainerPanel.SuspendLayout();
+            
+            // Store a list of the current controls. We remove them at the end because it makes less flicker that way.
+            var oldControls = new List<Control>(shinyBarsContainerPanel.Controls.Count);
+            oldControls.AddRange(shinyBarsContainerPanel.Controls.Cast<Control>());
+
+            int index = 1;
+            XenRef<Host> hostRef = null;
+            foreach (PGPU pgpu in pGpuList)
             {
-                pGPULabel.Text = value.Name;
-                RepopulateAllowedTypes(value);
-                // Initialize the shiny bar
-                gpuShinyBar1.Initialize(host, value);
+                var host = connection.Resolve(pgpu.host);
+
+                // add host label if needed
+                if (hostRef == null || pgpu.host.opaque_ref != hostRef.opaque_ref)
+                {
+                    AddHostLabel(new Label { Text = String.Format(Messages.GPU_ON_HOST_LABEL, host.Name)}, ref index);
+                    hostRef = pgpu.host;
+                }
+
+                // add pGPU shiny bar
+                var gpuShinyBar = new GpuShinyBar();
+                var checkBox = pGpuList.Count > 1 ? new CheckBox { Checked = true } : null; 
+                AddShinyBar(gpuShinyBar, checkBox, ref index);
+                gpuShinyBar.Initialize(pgpu);
+
+                pGpus.Add(pgpu, checkBox);
+            }    
+            
+            // Remove old controls
+            foreach (Control c in oldControls)
+            {
+                shinyBarsContainerPanel.Controls.Remove(c);
+                c.Dispose();
             }
+            shinyBarsContainerPanel.ResumeLayout();
+            ReLayout();
+        }
+
+        private void AddShinyBar(UserControl shinyBar, CheckBox checkBox, ref int index)
+        {
+            if (checkBox != null)
+            {
+                shinyBarsContainerPanel.Controls.Add(checkBox, 0, index);
+                checkBox.Dock = DockStyle.Fill;
+                checkBox.Margin = new Padding(3, 30, 0, 0);
+            }
+
+            shinyBarsContainerPanel.Controls.Add(shinyBar, 1, index);
+            shinyBar.Dock = DockStyle.Fill;
+
+            index++;
+        }
+
+        private void AddHostLabel(Label label, ref int index)
+        {
+            shinyBarsContainerPanel.Controls.Add(label, 0, index);
+            shinyBarsContainerPanel.SetColumnSpan(label, 2); 
+            label.Dock = DockStyle.Fill;
+            index++;
+        }
+
+        private void ReLayout()
+        {
+            Program.AssertOnEventThread();
+            Height = tableLayoutPanel1.Height + 2;
+        }
+
+        private void SetupPage()
+        {
+            multipleSelectionPanel.Visible = (pGpus.Count > 1);
+            editButton.Visible = !multipleSelectionPanel.Visible;
         }
 
         private void RepopulateAllowedTypes(PGPU pGpu)
         {
-            dataGridViewEx1.SuspendLayout();
-            dataGridViewEx1.Rows.Clear();
-            dataGridViewEx1.Cursor = Cursors.WaitCursor;
+            allowedTypesGrid.SuspendLayout();
+            allowedTypesGrid.Rows.Clear();
+            allowedTypesGrid.Cursor = Cursors.WaitCursor;
             try
             {
-                dataGridViewEx1.Rows.Clear();
+                allowedTypesGrid.Rows.Clear();
                 if (pGpu.supported_VGPU_types != null && pGpu.supported_VGPU_types.Count > 0)
                 {
-                    dataGridViewEx1.Rows.AddRange((from vGpuTypeRef in pGpu.supported_VGPU_types
+                    allowedTypesGrid.Rows.AddRange((from vGpuTypeRef in pGpu.supported_VGPU_types
                                                    let vGpuType = pGpu.Connection.Resolve(vGpuTypeRef)
                                                    let enabledType = pGpu.enabled_VGPU_types.Contains(vGpuTypeRef)
+                                                   orderby vGpuType.Capacity ascending 
                                                    select new VGpuTypeRow(vGpuType, enabledType)).ToArray());
                 }
             }
             finally
             {
-                dataGridViewEx1.ResumeLayout();
-                dataGridViewEx1.Cursor = Cursors.Default;
+                allowedTypesGrid.ResumeLayout();
+                allowedTypesGrid.Cursor = Cursors.Default;
             }
+        }
+
+        public List<PGPU> SelectedPGPUs
+        {
+            get
+            {
+                if (pGpus.Count == 0)
+                    return null;
+
+                return pGpus.Count > 1 
+                    ? (from kvp in pGpus where kvp.Value != null && kvp.Value.Checked select kvp.Key).ToList() 
+                    : new List<PGPU> {pGpus.Keys.ElementAt(0)};
+            }
+        }
+
+        private void selectAllButton_Click(object sender, EventArgs e)
+        {
+            foreach (var checkBox in pGpus.Values.Where(checkBox => checkBox != null))
+            {
+                checkBox.Checked = true;
+            }
+        }
+
+        private void clearAllButton_Click(object sender, EventArgs e)
+        {
+            foreach (var checkBox in pGpus.Values.Where(checkBox => checkBox != null))
+            {
+                checkBox.Checked = false;
+            }
+        }
+
+        private void editButton_Click(object sender, EventArgs e)
+        {
+            new GpuConfiguration(SelectedPGPUs).ShowDialog(Program.MainWindow);
         }
     }
 
@@ -81,5 +193,4 @@ namespace XenAdmin.Controls.GPU
             NameCell.Value = VGpuType.Name;
         }
     }
-
 }

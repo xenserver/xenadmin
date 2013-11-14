@@ -50,6 +50,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.gpuPlacementPolicyPanel1);
             this.Name = "GpuPage";
+            this.VisibleChanged += new System.EventHandler(this.GpuPage_VisibleChanged);
             this.Controls.SetChildIndex(this.gpuPlacementPolicyPanel1, 0);
             this.Controls.SetChildIndex(this.pageContainerPanel, 0);
             this.ResumeLayout(false);

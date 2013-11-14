@@ -1267,6 +1267,12 @@ namespace XenAdmin
             ShowTab(TabPageNetwork, !multi && !SearchMode && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
             ShowTab(TabPageNICs, !multi && !SearchMode && ((isHostSelected && isHostLive)));
 
+            bool isPoolOrLiveStandaloneHost = isPoolSelected || (isHostSelected && isHostLive && selectionPool == null);
+            bool showGpu = SelectionManager.Selection.All(s => Helpers.ClearwaterOrGreater(s.Connection)) &&
+                !Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictVgpu);
+
+            ShowTab(TabPageGPU, !multi && !SearchMode && isPoolOrLiveStandaloneHost && showGpu);
+
             pluginManager.SetSelectedXenObject(SelectionManager.Selection.FirstAsXenObject);
 
             bool shownConsoleReplacement = false;
@@ -1286,11 +1292,6 @@ namespace XenAdmin
                 ShowTab(wlb_upsell ? TabPageWLBUpsell : TabPageWLB, !multi && !SearchMode && isPoolSelected && george_or_greater);
             
             ShowTab(TabPageAD, !multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive) && george_or_greater);
-
-            bool showGPU = SelectionManager.Selection.All(s => Helpers.ClearwaterOrGreater(s.Connection)) &&
-                !Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictVgpu);
-
-            ShowTab(TabPageGPU, !multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolSelected) && showGPU);
 
             foreach (TabPageFeature f in pluginManager.GetAllFeatures<TabPageFeature>(f => !f.IsConsoleReplacement && !multi && f.ShowTab))
                 ShowTab(f.TabPage, true);
