@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GpuPlacementPolicyPanel));
             this.panelWithBorder = new XenAdmin.Controls.PanelWithBorder();
-            this.containerPanel = new System.Windows.Forms.Panel();
+            this.containerPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.placementPolicyLabel = new System.Windows.Forms.Label();
             this.editPlacementPolicyButton = new System.Windows.Forms.Button();
             this.panelWithBorder.SuspendLayout();
@@ -53,8 +53,8 @@
             // 
             // placementPolicyLabel
             // 
-            this.placementPolicyLabel.AutoEllipsis = true;
             resources.ApplyResources(this.placementPolicyLabel, "placementPolicyLabel");
+            this.placementPolicyLabel.AutoEllipsis = true;
             this.placementPolicyLabel.Name = "placementPolicyLabel";
             // 
             // editPlacementPolicyButton
@@ -87,7 +87,7 @@
         private PanelWithBorder panelWithBorder;
         private System.Windows.Forms.Button editPlacementPolicyButton;
         private System.Windows.Forms.Label placementPolicyLabel;
-        private System.Windows.Forms.Panel containerPanel;
+        private System.Windows.Forms.FlowLayoutPanel containerPanel;
 
     }
 }

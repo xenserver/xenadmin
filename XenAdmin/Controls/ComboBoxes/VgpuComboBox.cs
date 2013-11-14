@@ -56,10 +56,18 @@ namespace XenAdmin.Controls
                 if (obj == null)
                     return;
 
-                if (IsItemNonSelectable(obj))
+                if (IsHeaderItem(obj))
                 {
                     Drawing.DrawText(e.Graphics, obj.ToString(), Program.DefaultFontBold,
                                      e.Bounds, SystemColors.ControlText,
+                                     TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
+                }
+                else if (obj.IsNotEnabledVgpu)
+                {
+                    string text = (obj.IsVgpuSubitem ? "    " : string.Empty) + obj;
+
+                    Drawing.DrawText(e.Graphics, text, Program.DefaultFont,
+                                     e.Bounds, Color.DarkGray,
                                      TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
                 }
                 else
@@ -84,11 +92,18 @@ namespace XenAdmin.Controls
             base.OnDrawItem(e);
         }
 
-        protected override bool IsItemNonSelectable(object obj)
+        protected bool IsHeaderItem(object obj)
         {
             var tuple = obj as GpuTuple;
             return tuple != null && tuple.IsGpuHeaderItem;
         }
+
+        protected override bool IsItemNonSelectable(object obj)
+        {
+            var tuple = obj as GpuTuple;
+            return tuple != null && (tuple.IsGpuHeaderItem || tuple.IsNotEnabledVgpu);
+        }
+
     }
 
     internal class GpuTuple : IEquatable<GpuTuple>
@@ -98,9 +113,10 @@ namespace XenAdmin.Controls
         public readonly bool IsGpuHeaderItem;
         public readonly bool IsVgpuSubitem;
         public readonly bool IsFractionalVgpu;
+        public readonly bool IsNotEnabledVgpu;
         private readonly string displayName = string.Empty;
 
-        public GpuTuple(GPU_group gpuGroup, VGPU_type[] vgpuTypes)
+        public GpuTuple(GPU_group gpuGroup, VGPU_type[] vgpuTypes, VGPU_type[] disabledVGpuTypes)
         {
             GpuGroup = gpuGroup;
             VgpuTypes = vgpuTypes;
@@ -121,6 +137,8 @@ namespace XenAdmin.Controls
                 displayName = VgpuTypes[0].Description;
                 IsVgpuSubitem = true;
                 IsFractionalVgpu = VgpuTypes[0].max_heads != 0;
+                if (disabledVGpuTypes != null && disabledVGpuTypes.Select(t => t.opaque_ref).Contains(VgpuTypes[0].opaque_ref))
+                    IsNotEnabledVgpu = true;
             }
             else
             {

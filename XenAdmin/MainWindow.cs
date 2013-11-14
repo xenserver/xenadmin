@@ -1271,7 +1271,7 @@ namespace XenAdmin
             bool showGpu = SelectionManager.Selection.All(s => Helpers.ClearwaterOrGreater(s.Connection)) &&
                 !Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictVgpu);
 
-            ShowTab(TabPageGPU, !multi && !SearchMode && isPoolOrLiveStandaloneHost && showGpu);
+            ShowTab(TabPageGPU, !multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolOrLiveStandaloneHost) && showGpu);
 
             pluginManager.SetSelectedXenObject(SelectionManager.Selection.FirstAsXenObject);
 

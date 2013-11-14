@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using XenAdmin.Controls;
 using XenAdmin.Controls.GPU;
 using XenAPI;
 
@@ -35,8 +36,6 @@ namespace XenAdmin.TabPages
                 System.Diagnostics.Trace.Assert(value is Pool || value is Host);
                 xenObject = value;
 
-                gpuPlacementPolicyPanel1.XenObject = value;
-
                 Rebuild();
             }
         }
@@ -57,7 +56,6 @@ namespace XenAdmin.TabPages
             {
                 oldControls.Add(c);
             }
-
 
             // Group pGPUs with the same settings
             Dictionary<GpuSettings, List<PGPU>> settingsToPGPUs = new Dictionary<GpuSettings, List<PGPU>>();  // all PGPUs with a particular setting
@@ -103,6 +101,8 @@ namespace XenAdmin.TabPages
             int initScroll = pageContainerPanel.VerticalScroll.Value;
             int top = pageContainerPanel.Padding.Top - initScroll;
 
+            AddRowToPanel(CreateGpuPlacementPolicyPanel(), ref top);
+
             foreach (GpuSettings settings in listSettings)
             {
                 AddRowToPanel(new GpuRow(xenObject.Connection, settingsToPGPUs[settings]), ref top);
@@ -121,6 +121,16 @@ namespace XenAdmin.TabPages
             _rebuilding = false;
             pageContainerPanel.ResumeLayout();
             ReLayout();
+        }
+
+        private GpuPlacementPolicyPanel CreateGpuPlacementPolicyPanel()
+        {
+            return new GpuPlacementPolicyPanel
+                       {
+                           MinimumSize = new System.Drawing.Size(393, 35),
+                           Name = "gpuPlacementPolicyPanel1",
+                           XenObject = xenObject
+                       };
         }
 
         private void ReLayout()

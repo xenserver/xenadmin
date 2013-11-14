@@ -187,7 +187,7 @@ namespace XenAdmin.SettingsPanels
         
         public override void PopulatePage()
         {
-            currentGpuTuple = new GpuTuple(null, null);
+            currentGpuTuple = new GpuTuple(null, null, null);
 
             if (vm.VGPUs.Count != 0)
             {
@@ -197,11 +197,11 @@ namespace XenAdmin.SettingsPanels
                     var vgpuGroup = Connection.Resolve(vgpu.GPU_group);
 
                     if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu))
-                        currentGpuTuple = new GpuTuple(vgpuGroup, null);
+                        currentGpuTuple = new GpuTuple(vgpuGroup, null, null);
                     else
                     {
                         VGPU_type vgpuType = Connection.Resolve(vgpu.type);
-                        currentGpuTuple = new GpuTuple(vgpuGroup, new[] { vgpuType });
+                        currentGpuTuple = new GpuTuple(vgpuGroup, new[] { vgpuType }, null);
                     }
                 }
             }
@@ -218,7 +218,7 @@ namespace XenAdmin.SettingsPanels
             }
             else
             {
-                var noneItem = new GpuTuple(null, null);
+                var noneItem = new GpuTuple(null, null, null);
                 comboBoxGpus.Items.Add(noneItem);
 
                 Array.Sort(gpu_groups);
@@ -226,30 +226,34 @@ namespace XenAdmin.SettingsPanels
                 {
                     if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu))
                     {
-                        comboBoxGpus.Items.Add(new GpuTuple(gpu_group, null));
+                        comboBoxGpus.Items.Add(new GpuTuple(gpu_group, null, null));
                     }
                     else
                     {
                         var enabledRefs = GPU_group.get_enabled_VGPU_types(Connection.Session, gpu_group.opaque_ref);
                         var enabledTypes = Connection.ResolveAll(enabledRefs);
 
-                        if (enabledTypes.Count > 1)
+                        var allTypes = Connection.ResolveAll(gpu_group.supported_VGPU_types);
+
+                        var disabledTypes = allTypes.FindAll(t => !enabledTypes.Exists(e => e.opaque_ref == t.opaque_ref));
+
+                        if (allTypes.Count > 1)
                         {
-                            enabledTypes.Sort((t1, t2) =>
+                            allTypes.Sort((t1, t2) =>
                             {
-                                int result = t1.max_heads.CompareTo(t2.max_heads);
+                                int result = t1.Capacity.CompareTo(t2.Capacity);
                                 if (result != 0)
                                     return result;
                                 return t1.Name.CompareTo(t2.Name);
                             });
 
-                            comboBoxGpus.Items.Add(new GpuTuple(gpu_group, enabledTypes.ToArray()));
+                            comboBoxGpus.Items.Add(new GpuTuple(gpu_group, allTypes.ToArray(), disabledTypes.ToArray()));
 
-                            foreach (var vgpuType in enabledTypes)
-                                comboBoxGpus.Items.Add(new GpuTuple(gpu_group, new[] { vgpuType }));
+                            foreach (var vgpuType in allTypes)
+                                comboBoxGpus.Items.Add(new GpuTuple(gpu_group, new[] { vgpuType }, disabledTypes.ToArray()));
                         }
                         else
-                            comboBoxGpus.Items.Add(new GpuTuple(gpu_group, null));
+                            comboBoxGpus.Items.Add(new GpuTuple(gpu_group, null, disabledTypes.ToArray()));
                     }
                 }
 
