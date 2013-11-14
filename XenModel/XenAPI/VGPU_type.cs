@@ -50,7 +50,9 @@ namespace XenAPI
             long max_heads,
             List<XenRef<PGPU>> supported_on_PGPUs,
             List<XenRef<PGPU>> enabled_on_PGPUs,
-            List<XenRef<VGPU>> VGPUs)
+            List<XenRef<VGPU>> VGPUs,
+            List<XenRef<GPU_group>> supported_on_GPU_groups,
+            List<XenRef<GPU_group>> enabled_on_GPU_groups)
         {
             this.uuid = uuid;
             this.vendor_name = vendor_name;
@@ -60,6 +62,8 @@ namespace XenAPI
             this.supported_on_PGPUs = supported_on_PGPUs;
             this.enabled_on_PGPUs = enabled_on_PGPUs;
             this.VGPUs = VGPUs;
+            this.supported_on_GPU_groups = supported_on_GPU_groups;
+            this.enabled_on_GPU_groups = enabled_on_GPU_groups;
         }
 
         /// <summary>
@@ -81,6 +85,8 @@ namespace XenAPI
             supported_on_PGPUs = update.supported_on_PGPUs;
             enabled_on_PGPUs = update.enabled_on_PGPUs;
             VGPUs = update.VGPUs;
+            supported_on_GPU_groups = update.supported_on_GPU_groups;
+            enabled_on_GPU_groups = update.enabled_on_GPU_groups;
         }
 
         internal void UpdateFromProxy(Proxy_VGPU_type proxy)
@@ -93,6 +99,8 @@ namespace XenAPI
             supported_on_PGPUs = proxy.supported_on_PGPUs == null ? null : XenRef<PGPU>.Create(proxy.supported_on_PGPUs);
             enabled_on_PGPUs = proxy.enabled_on_PGPUs == null ? null : XenRef<PGPU>.Create(proxy.enabled_on_PGPUs);
             VGPUs = proxy.VGPUs == null ? null : XenRef<VGPU>.Create(proxy.VGPUs);
+            supported_on_GPU_groups = proxy.supported_on_GPU_groups == null ? null : XenRef<GPU_group>.Create(proxy.supported_on_GPU_groups);
+            enabled_on_GPU_groups = proxy.enabled_on_GPU_groups == null ? null : XenRef<GPU_group>.Create(proxy.enabled_on_GPU_groups);
         }
 
         public Proxy_VGPU_type ToProxy()
@@ -106,6 +114,8 @@ namespace XenAPI
             result_.supported_on_PGPUs = (supported_on_PGPUs != null) ? Helper.RefListToStringArray(supported_on_PGPUs) : new string[] {};
             result_.enabled_on_PGPUs = (enabled_on_PGPUs != null) ? Helper.RefListToStringArray(enabled_on_PGPUs) : new string[] {};
             result_.VGPUs = (VGPUs != null) ? Helper.RefListToStringArray(VGPUs) : new string[] {};
+            result_.supported_on_GPU_groups = (supported_on_GPU_groups != null) ? Helper.RefListToStringArray(supported_on_GPU_groups) : new string[] {};
+            result_.enabled_on_GPU_groups = (enabled_on_GPU_groups != null) ? Helper.RefListToStringArray(enabled_on_GPU_groups) : new string[] {};
             return result_;
         }
 
@@ -123,6 +133,8 @@ namespace XenAPI
             supported_on_PGPUs = Marshalling.ParseSetRef<PGPU>(table, "supported_on_PGPUs");
             enabled_on_PGPUs = Marshalling.ParseSetRef<PGPU>(table, "enabled_on_PGPUs");
             VGPUs = Marshalling.ParseSetRef<VGPU>(table, "VGPUs");
+            supported_on_GPU_groups = Marshalling.ParseSetRef<GPU_group>(table, "supported_on_GPU_groups");
+            enabled_on_GPU_groups = Marshalling.ParseSetRef<GPU_group>(table, "enabled_on_GPU_groups");
         }
 
         public bool DeepEquals(VGPU_type other)
@@ -139,7 +151,9 @@ namespace XenAPI
                 Helper.AreEqual2(this._max_heads, other._max_heads) &&
                 Helper.AreEqual2(this._supported_on_PGPUs, other._supported_on_PGPUs) &&
                 Helper.AreEqual2(this._enabled_on_PGPUs, other._enabled_on_PGPUs) &&
-                Helper.AreEqual2(this._VGPUs, other._VGPUs);
+                Helper.AreEqual2(this._VGPUs, other._VGPUs) &&
+                Helper.AreEqual2(this._supported_on_GPU_groups, other._supported_on_GPU_groups) &&
+                Helper.AreEqual2(this._enabled_on_GPU_groups, other._enabled_on_GPU_groups);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VGPU_type server)
@@ -205,6 +219,16 @@ namespace XenAPI
             return XenRef<VGPU>.Create(session.proxy.vgpu_type_get_vgpus(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse());
         }
 
+        public static List<XenRef<GPU_group>> get_supported_on_GPU_groups(Session session, string _vgpu_type)
+        {
+            return XenRef<GPU_group>.Create(session.proxy.vgpu_type_get_supported_on_gpu_groups(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse());
+        }
+
+        public static List<XenRef<GPU_group>> get_enabled_on_GPU_groups(Session session, string _vgpu_type)
+        {
+            return XenRef<GPU_group>.Create(session.proxy.vgpu_type_get_enabled_on_gpu_groups(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse());
+        }
+
         public static List<XenRef<VGPU_type>> get_all(Session session)
         {
             return XenRef<VGPU_type>.Create(session.proxy.vgpu_type_get_all(session.uuid).parse());
@@ -261,6 +285,18 @@ namespace XenAPI
         public virtual List<XenRef<VGPU>> VGPUs {
              get { return _VGPUs; }
              set { if (!Helper.AreEqual(value, _VGPUs)) { _VGPUs = value; Changed = true; NotifyPropertyChanged("VGPUs"); } }
+         }
+
+        private List<XenRef<GPU_group>> _supported_on_GPU_groups;
+        public virtual List<XenRef<GPU_group>> supported_on_GPU_groups {
+             get { return _supported_on_GPU_groups; }
+             set { if (!Helper.AreEqual(value, _supported_on_GPU_groups)) { _supported_on_GPU_groups = value; Changed = true; NotifyPropertyChanged("supported_on_GPU_groups"); } }
+         }
+
+        private List<XenRef<GPU_group>> _enabled_on_GPU_groups;
+        public virtual List<XenRef<GPU_group>> enabled_on_GPU_groups {
+             get { return _enabled_on_GPU_groups; }
+             set { if (!Helper.AreEqual(value, _enabled_on_GPU_groups)) { _enabled_on_GPU_groups = value; Changed = true; NotifyPropertyChanged("enabled_on_GPU_groups"); } }
          }
 
 

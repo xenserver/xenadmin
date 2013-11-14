@@ -51,7 +51,8 @@ namespace XenAPI
             Dictionary<string, string> other_config,
             List<XenRef<VGPU_type>> supported_VGPU_types,
             List<XenRef<VGPU_type>> enabled_VGPU_types,
-            List<XenRef<VGPU>> resident_VGPUs)
+            List<XenRef<VGPU>> resident_VGPUs,
+            Dictionary<XenRef<VGPU_type>, long> supported_VGPU_max_capacities)
         {
             this.uuid = uuid;
             this.PCI = PCI;
@@ -61,6 +62,7 @@ namespace XenAPI
             this.supported_VGPU_types = supported_VGPU_types;
             this.enabled_VGPU_types = enabled_VGPU_types;
             this.resident_VGPUs = resident_VGPUs;
+            this.supported_VGPU_max_capacities = supported_VGPU_max_capacities;
         }
 
         /// <summary>
@@ -82,6 +84,7 @@ namespace XenAPI
             supported_VGPU_types = update.supported_VGPU_types;
             enabled_VGPU_types = update.enabled_VGPU_types;
             resident_VGPUs = update.resident_VGPUs;
+            supported_VGPU_max_capacities = update.supported_VGPU_max_capacities;
         }
 
         internal void UpdateFromProxy(Proxy_PGPU proxy)
@@ -94,6 +97,7 @@ namespace XenAPI
             supported_VGPU_types = proxy.supported_VGPU_types == null ? null : XenRef<VGPU_type>.Create(proxy.supported_VGPU_types);
             enabled_VGPU_types = proxy.enabled_VGPU_types == null ? null : XenRef<VGPU_type>.Create(proxy.enabled_VGPU_types);
             resident_VGPUs = proxy.resident_VGPUs == null ? null : XenRef<VGPU>.Create(proxy.resident_VGPUs);
+            supported_VGPU_max_capacities = proxy.supported_VGPU_max_capacities == null ? null : Maps.convert_from_proxy_XenRefVGPU_type_long(proxy.supported_VGPU_max_capacities);
         }
 
         public Proxy_PGPU ToProxy()
@@ -107,6 +111,7 @@ namespace XenAPI
             result_.supported_VGPU_types = (supported_VGPU_types != null) ? Helper.RefListToStringArray(supported_VGPU_types) : new string[] {};
             result_.enabled_VGPU_types = (enabled_VGPU_types != null) ? Helper.RefListToStringArray(enabled_VGPU_types) : new string[] {};
             result_.resident_VGPUs = (resident_VGPUs != null) ? Helper.RefListToStringArray(resident_VGPUs) : new string[] {};
+            result_.supported_VGPU_max_capacities = Maps.convert_to_proxy_XenRefVGPU_type_long(supported_VGPU_max_capacities);
             return result_;
         }
 
@@ -124,6 +129,7 @@ namespace XenAPI
             supported_VGPU_types = Marshalling.ParseSetRef<VGPU_type>(table, "supported_VGPU_types");
             enabled_VGPU_types = Marshalling.ParseSetRef<VGPU_type>(table, "enabled_VGPU_types");
             resident_VGPUs = Marshalling.ParseSetRef<VGPU>(table, "resident_VGPUs");
+            supported_VGPU_max_capacities = Maps.convert_from_proxy_XenRefVGPU_type_long(Marshalling.ParseHashTable(table, "supported_VGPU_max_capacities"));
         }
 
         public bool DeepEquals(PGPU other)
@@ -140,7 +146,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config) &&
                 Helper.AreEqual2(this._supported_VGPU_types, other._supported_VGPU_types) &&
                 Helper.AreEqual2(this._enabled_VGPU_types, other._enabled_VGPU_types) &&
-                Helper.AreEqual2(this._resident_VGPUs, other._resident_VGPUs);
+                Helper.AreEqual2(this._resident_VGPUs, other._resident_VGPUs) &&
+                Helper.AreEqual2(this._supported_VGPU_max_capacities, other._supported_VGPU_max_capacities);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, PGPU server)
@@ -213,6 +220,11 @@ namespace XenAPI
         public static List<XenRef<VGPU>> get_resident_VGPUs(Session session, string _pgpu)
         {
             return XenRef<VGPU>.Create(session.proxy.pgpu_get_resident_vgpus(session.uuid, (_pgpu != null) ? _pgpu : "").parse());
+        }
+
+        public static Dictionary<XenRef<VGPU_type>, long> get_supported_VGPU_max_capacities(Session session, string _pgpu)
+        {
+            return Maps.convert_from_proxy_XenRefVGPU_type_long(session.proxy.pgpu_get_supported_vgpu_max_capacities(session.uuid, (_pgpu != null) ? _pgpu : "").parse());
         }
 
         public static void set_other_config(Session session, string _pgpu, Dictionary<string, string> _other_config)
@@ -336,6 +348,12 @@ namespace XenAPI
         public virtual List<XenRef<VGPU>> resident_VGPUs {
              get { return _resident_VGPUs; }
              set { if (!Helper.AreEqual(value, _resident_VGPUs)) { _resident_VGPUs = value; Changed = true; NotifyPropertyChanged("resident_VGPUs"); } }
+         }
+
+        private Dictionary<XenRef<VGPU_type>, long> _supported_VGPU_max_capacities;
+        public virtual Dictionary<XenRef<VGPU_type>, long> supported_VGPU_max_capacities {
+             get { return _supported_VGPU_max_capacities; }
+             set { if (!Helper.AreEqual(value, _supported_VGPU_max_capacities)) { _supported_VGPU_max_capacities = value; Changed = true; NotifyPropertyChanged("supported_VGPU_max_capacities"); } }
          }
 
 

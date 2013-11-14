@@ -51,7 +51,9 @@ namespace XenAPI
             List<XenRef<VGPU>> VGPUs,
             string[] GPU_types,
             Dictionary<string, string> other_config,
-            allocation_algorithm allocation_algorithm)
+            allocation_algorithm allocation_algorithm,
+            List<XenRef<VGPU_type>> supported_VGPU_types,
+            List<XenRef<VGPU_type>> enabled_VGPU_types)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -61,6 +63,8 @@ namespace XenAPI
             this.GPU_types = GPU_types;
             this.other_config = other_config;
             this.allocation_algorithm = allocation_algorithm;
+            this.supported_VGPU_types = supported_VGPU_types;
+            this.enabled_VGPU_types = enabled_VGPU_types;
         }
 
         /// <summary>
@@ -82,6 +86,8 @@ namespace XenAPI
             GPU_types = update.GPU_types;
             other_config = update.other_config;
             allocation_algorithm = update.allocation_algorithm;
+            supported_VGPU_types = update.supported_VGPU_types;
+            enabled_VGPU_types = update.enabled_VGPU_types;
         }
 
         internal void UpdateFromProxy(Proxy_GPU_group proxy)
@@ -94,6 +100,8 @@ namespace XenAPI
             GPU_types = proxy.GPU_types == null ? new string[] {} : (string [])proxy.GPU_types;
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
             allocation_algorithm = proxy.allocation_algorithm == null ? (allocation_algorithm) 0 : (allocation_algorithm)Helper.EnumParseDefault(typeof(allocation_algorithm), (string)proxy.allocation_algorithm);
+            supported_VGPU_types = proxy.supported_VGPU_types == null ? null : XenRef<VGPU_type>.Create(proxy.supported_VGPU_types);
+            enabled_VGPU_types = proxy.enabled_VGPU_types == null ? null : XenRef<VGPU_type>.Create(proxy.enabled_VGPU_types);
         }
 
         public Proxy_GPU_group ToProxy()
@@ -107,6 +115,8 @@ namespace XenAPI
             result_.GPU_types = GPU_types;
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
             result_.allocation_algorithm = allocation_algorithm_helper.ToString(allocation_algorithm);
+            result_.supported_VGPU_types = (supported_VGPU_types != null) ? Helper.RefListToStringArray(supported_VGPU_types) : new string[] {};
+            result_.enabled_VGPU_types = (enabled_VGPU_types != null) ? Helper.RefListToStringArray(enabled_VGPU_types) : new string[] {};
             return result_;
         }
 
@@ -124,6 +134,8 @@ namespace XenAPI
             GPU_types = Marshalling.ParseStringArray(table, "GPU_types");
             other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
             allocation_algorithm = (allocation_algorithm)Helper.EnumParseDefault(typeof(allocation_algorithm), Marshalling.ParseString(table, "allocation_algorithm"));
+            supported_VGPU_types = Marshalling.ParseSetRef<VGPU_type>(table, "supported_VGPU_types");
+            enabled_VGPU_types = Marshalling.ParseSetRef<VGPU_type>(table, "enabled_VGPU_types");
         }
 
         public bool DeepEquals(GPU_group other)
@@ -140,7 +152,9 @@ namespace XenAPI
                 Helper.AreEqual2(this._VGPUs, other._VGPUs) &&
                 Helper.AreEqual2(this._GPU_types, other._GPU_types) &&
                 Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._allocation_algorithm, other._allocation_algorithm);
+                Helper.AreEqual2(this._allocation_algorithm, other._allocation_algorithm) &&
+                Helper.AreEqual2(this._supported_VGPU_types, other._supported_VGPU_types) &&
+                Helper.AreEqual2(this._enabled_VGPU_types, other._enabled_VGPU_types);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, GPU_group server)
@@ -228,6 +242,16 @@ namespace XenAPI
             return (allocation_algorithm)Helper.EnumParseDefault(typeof(allocation_algorithm), (string)session.proxy.gpu_group_get_allocation_algorithm(session.uuid, (_gpu_group != null) ? _gpu_group : "").parse());
         }
 
+        public static List<XenRef<VGPU_type>> get_supported_VGPU_types(Session session, string _gpu_group)
+        {
+            return XenRef<VGPU_type>.Create(session.proxy.gpu_group_get_supported_vgpu_types(session.uuid, (_gpu_group != null) ? _gpu_group : "").parse());
+        }
+
+        public static List<XenRef<VGPU_type>> get_enabled_VGPU_types(Session session, string _gpu_group)
+        {
+            return XenRef<VGPU_type>.Create(session.proxy.gpu_group_get_enabled_vgpu_types(session.uuid, (_gpu_group != null) ? _gpu_group : "").parse());
+        }
+
         public static void set_name_label(Session session, string _gpu_group, string _label)
         {
             session.proxy.gpu_group_set_name_label(session.uuid, (_gpu_group != null) ? _gpu_group : "", (_label != null) ? _label : "").parse();
@@ -276,26 +300,6 @@ namespace XenAPI
         public static XenRef<Task> async_destroy(Session session, string _self)
         {
             return XenRef<Task>.Create(session.proxy.async_gpu_group_destroy(session.uuid, (_self != null) ? _self : "").parse());
-        }
-
-        public static List<XenRef<VGPU_type>> get_enabled_VGPU_types(Session session, string _self)
-        {
-            return XenRef<VGPU_type>.Create(session.proxy.gpu_group_get_enabled_vgpu_types(session.uuid, (_self != null) ? _self : "").parse());
-        }
-
-        public static XenRef<Task> async_get_enabled_VGPU_types(Session session, string _self)
-        {
-            return XenRef<Task>.Create(session.proxy.async_gpu_group_get_enabled_vgpu_types(session.uuid, (_self != null) ? _self : "").parse());
-        }
-
-        public static List<XenRef<VGPU_type>> get_supported_VGPU_types(Session session, string _self)
-        {
-            return XenRef<VGPU_type>.Create(session.proxy.gpu_group_get_supported_vgpu_types(session.uuid, (_self != null) ? _self : "").parse());
-        }
-
-        public static XenRef<Task> async_get_supported_VGPU_types(Session session, string _self)
-        {
-            return XenRef<Task>.Create(session.proxy.async_gpu_group_get_supported_vgpu_types(session.uuid, (_self != null) ? _self : "").parse());
         }
 
         public static long get_remaining_capacity(Session session, string _self, string _vgpu_type)
@@ -364,6 +368,18 @@ namespace XenAPI
         public virtual allocation_algorithm allocation_algorithm {
              get { return _allocation_algorithm; }
              set { if (!Helper.AreEqual(value, _allocation_algorithm)) { _allocation_algorithm = value; Changed = true; NotifyPropertyChanged("allocation_algorithm"); } }
+         }
+
+        private List<XenRef<VGPU_type>> _supported_VGPU_types;
+        public virtual List<XenRef<VGPU_type>> supported_VGPU_types {
+             get { return _supported_VGPU_types; }
+             set { if (!Helper.AreEqual(value, _supported_VGPU_types)) { _supported_VGPU_types = value; Changed = true; NotifyPropertyChanged("supported_VGPU_types"); } }
+         }
+
+        private List<XenRef<VGPU_type>> _enabled_VGPU_types;
+        public virtual List<XenRef<VGPU_type>> enabled_VGPU_types {
+             get { return _enabled_VGPU_types; }
+             set { if (!Helper.AreEqual(value, _enabled_VGPU_types)) { _enabled_VGPU_types = value; Changed = true; NotifyPropertyChanged("enabled_VGPU_types"); } }
          }
 
 

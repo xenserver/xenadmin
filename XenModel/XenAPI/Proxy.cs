@@ -7516,6 +7516,11 @@ namespace XenAPI
         pgpu_get_resident_vgpus(string session, string _pgpu);
 
 
+        [XmlRpcMethod("PGPU.get_supported_VGPU_max_capacities")]
+        Response<Object>
+        pgpu_get_supported_vgpu_max_capacities(string session, string _pgpu);
+
+
         [XmlRpcMethod("PGPU.set_other_config")]
         Response<string>
         pgpu_set_other_config(string session, string _pgpu, Object _other_config);
@@ -7646,6 +7651,16 @@ namespace XenAPI
         gpu_group_get_allocation_algorithm(string session, string _gpu_group);
 
 
+        [XmlRpcMethod("GPU_group.get_supported_VGPU_types")]
+        Response<string []>
+        gpu_group_get_supported_vgpu_types(string session, string _gpu_group);
+
+
+        [XmlRpcMethod("GPU_group.get_enabled_VGPU_types")]
+        Response<string []>
+        gpu_group_get_enabled_vgpu_types(string session, string _gpu_group);
+
+
         [XmlRpcMethod("GPU_group.set_name_label")]
         Response<string>
         gpu_group_set_name_label(string session, string _gpu_group, string _label);
@@ -7694,26 +7709,6 @@ namespace XenAPI
         [XmlRpcMethod("Async.GPU_group.destroy")]
         Response<string>
         async_gpu_group_destroy(string session, string _self);
-
-
-        [XmlRpcMethod("GPU_group.get_enabled_VGPU_types")]
-        Response<string []>
-        gpu_group_get_enabled_vgpu_types(string session, string _self);
-
-
-        [XmlRpcMethod("Async.GPU_group.get_enabled_VGPU_types")]
-        Response<string>
-        async_gpu_group_get_enabled_vgpu_types(string session, string _self);
-
-
-        [XmlRpcMethod("GPU_group.get_supported_VGPU_types")]
-        Response<string []>
-        gpu_group_get_supported_vgpu_types(string session, string _self);
-
-
-        [XmlRpcMethod("Async.GPU_group.get_supported_VGPU_types")]
-        Response<string>
-        async_gpu_group_get_supported_vgpu_types(string session, string _self);
 
 
         [XmlRpcMethod("GPU_group.get_remaining_capacity")]
@@ -7879,6 +7874,16 @@ namespace XenAPI
         [XmlRpcMethod("VGPU_type.get_VGPUs")]
         Response<string []>
         vgpu_type_get_vgpus(string session, string _vgpu_type);
+
+
+        [XmlRpcMethod("VGPU_type.get_supported_on_GPU_groups")]
+        Response<string []>
+        vgpu_type_get_supported_on_gpu_groups(string session, string _vgpu_type);
+
+
+        [XmlRpcMethod("VGPU_type.get_enabled_on_GPU_groups")]
+        Response<string []>
+        vgpu_type_get_enabled_on_gpu_groups(string session, string _vgpu_type);
 
 
         [XmlRpcMethod("VGPU_type.get_all")]
@@ -8633,6 +8638,7 @@ namespace XenAPI
         public string [] supported_VGPU_types;
         public string [] enabled_VGPU_types;
         public string [] resident_VGPUs;
+        public Object supported_VGPU_max_capacities;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8646,6 +8652,8 @@ namespace XenAPI
         public string [] GPU_types;
         public Object other_config;
         public string allocation_algorithm;
+        public string [] supported_VGPU_types;
+        public string [] enabled_VGPU_types;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8672,6 +8680,8 @@ namespace XenAPI
         public string [] supported_on_PGPUs;
         public string [] enabled_on_PGPUs;
         public string [] VGPUs;
+        public string [] supported_on_GPU_groups;
+        public string [] enabled_on_GPU_groups;
     }
 
 }

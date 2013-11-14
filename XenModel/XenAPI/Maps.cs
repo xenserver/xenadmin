@@ -837,6 +837,53 @@ namespace XenAPI
             return result;
         }
 
+        internal static Dictionary<XenRef<VGPU_type>, long>
+        convert_from_proxy_XenRefVGPU_type_long(Object o)
+        {
+            Hashtable table = (Hashtable)o;
+            Dictionary<XenRef<VGPU_type>, long> result = new Dictionary<XenRef<VGPU_type>, long>();
+            if (table != null)
+            {
+                foreach (string key in table.Keys)
+                {
+                    try
+                    {
+                        XenRef<VGPU_type> k = XenRef<VGPU_type>.Create(key);
+                        long v = table[key] == null ? 0 : long.Parse((string)table[key]);
+                        result[k] = v;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            return result;
+        }
+
+        internal static Hashtable
+        convert_to_proxy_XenRefVGPU_type_long(Dictionary<XenRef<VGPU_type>, long> table)
+        {
+            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            if (table != null)
+            {
+                foreach (XenRef<VGPU_type> key in table.Keys)
+                {
+                    try
+                    {
+                        string k = (key != null) ? key : "";
+                        string v = table[key].ToString();
+                        result[k] = v;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            return result;
+        }
+
         internal static Dictionary<XenRef<VIF>, XenRef<Network>>
         convert_from_proxy_XenRefVIF_XenRefNetwork(Object o)
         {

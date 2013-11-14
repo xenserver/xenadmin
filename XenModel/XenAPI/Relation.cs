@@ -112,6 +112,8 @@ namespace XenAPI
             });
 
             relations.Add(typeof(Proxy_VGPU_type), new Relation[] {
+                new Relation("enabled_on_GPU_groups", "GPU_group", "enabled_VGPU_types"),
+                new Relation("supported_on_GPU_groups", "GPU_group", "supported_VGPU_types"),
                 new Relation("enabled_on_PGPUs", "PGPU", "enabled_VGPU_types"),
                 new Relation("supported_on_PGPUs", "PGPU", "supported_VGPU_types"),
                 new Relation("VGPUs", "VGPU", "type"),
