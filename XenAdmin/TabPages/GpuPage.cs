@@ -149,6 +149,11 @@ namespace XenAdmin.TabPages
             pageContainerPanel.Controls.Add(row);
         }
 
+        private GpuRow FindRow(PGPU pgpu)
+        {
+            return pgpu != null ? pageContainerPanel.Controls.OfType<GpuRow>().FirstOrDefault(row => row.PGPUs.Contains(pgpu)) : null;
+        }
+
         private void pageContainerPanel_SizeChanged(object sender, EventArgs e)
         {
             foreach (Control row in pageContainerPanel.Controls)
@@ -177,7 +182,15 @@ namespace XenAdmin.TabPages
 
         private void pgpu_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "resident_VGPUs" || e.PropertyName == "enabled_VGPU_types")
+            if (e.PropertyName == "resident_VGPUs")
+            {
+                var pgpu = sender as PGPU;
+                var gpuRow = FindRow(pgpu);
+                if (gpuRow != null) 
+                    gpuRow.RefreshGpu(pgpu);
+            }
+
+            if (e.PropertyName == "enabled_VGPU_types")
             {
                 Rebuild();
             }

@@ -26,7 +26,7 @@ namespace XenAdmin.Controls.GPU
             SetupPage();
         }
 
-        private IXenConnection connection;
+        private readonly IXenConnection connection;
 
         private Dictionary<PGPU, CheckBox> pGpus = new Dictionary<PGPU, CheckBox>();
 
@@ -57,7 +57,7 @@ namespace XenAdmin.Controls.GPU
 
                 // add pGPU shiny bar
                 var gpuShinyBar = new GpuShinyBar();
-                var checkBox = pGpuList.Count > 1 ? new CheckBox { Checked = true } : null; 
+                var checkBox = pGpuList.Count > 1 ? new CheckBox() : null; 
                 AddShinyBar(gpuShinyBar, checkBox, ref index);
                 gpuShinyBar.Initialize(pgpu);
 
@@ -81,6 +81,8 @@ namespace XenAdmin.Controls.GPU
                 shinyBarsContainerPanel.Controls.Add(checkBox, 0, index);
                 checkBox.Dock = DockStyle.Fill;
                 checkBox.Margin = new Padding(3, 30, 0, 0);
+                checkBox.CheckedChanged += CheckedChanged;
+                checkBox.Checked = true;
             }
 
             shinyBarsContainerPanel.Controls.Add(shinyBar, 1, index);
@@ -109,27 +111,33 @@ namespace XenAdmin.Controls.GPU
             editButton.Visible = !multipleSelectionPanel.Visible;
         }
 
-        private void RepopulateAllowedTypes(PGPU pGpu)
+        private GpuShinyBar FindGpuShinyBar(PGPU pGpu)
         {
-            allowedTypesGrid.SuspendLayout();
-            allowedTypesGrid.Rows.Clear();
-            allowedTypesGrid.Cursor = Cursors.WaitCursor;
-            try
+            return pGpu != null
+                       ? shinyBarsContainerPanel.Controls.OfType<GpuShinyBar>().FirstOrDefault(
+                           shinyBar => shinyBar.PGPU == pGpu)
+                       : null;
+        }
+
+        public void RefreshGpu(PGPU pGpu)
+        {
+            Program.AssertOnEventThread();
+            if (!Visible)
+                return;
+
+            GpuShinyBar gpuShinyBar = FindGpuShinyBar(pGpu);
+            if (gpuShinyBar != null)
             {
-                allowedTypesGrid.Rows.Clear();
-                if (pGpu.supported_VGPU_types != null && pGpu.supported_VGPU_types.Count > 0)
-                {
-                    allowedTypesGrid.Rows.AddRange((from vGpuTypeRef in pGpu.supported_VGPU_types
-                                                   let vGpuType = pGpu.Connection.Resolve(vGpuTypeRef)
-                                                   let enabledType = pGpu.enabled_VGPU_types.Contains(vGpuTypeRef)
-                                                   orderby vGpuType.Capacity ascending 
-                                                   select new VGpuTypeRow(vGpuType, enabledType)).ToArray());
-                }
+                gpuShinyBar.Initialize(pGpu);
+                gpuShinyBar.Refresh();
             }
-            finally
+        }
+
+        public IEnumerable<PGPU> PGPUs
+        {
+            get
             {
-                allowedTypesGrid.ResumeLayout();
-                allowedTypesGrid.Cursor = Cursors.Default;
+                return pGpus.Keys;
             }
         }
 
@@ -166,6 +174,40 @@ namespace XenAdmin.Controls.GPU
         {
             new GpuConfiguration(SelectedPGPUs).ShowDialog(Program.MainWindow);
         }
+
+        private void CheckedChanged(object sender, EventArgs e)
+        {
+            editSelectedGpusButton.Enabled = clearAllButton.Enabled =
+                (pGpus.Values.Where(checkBox => checkBox != null).Any(checkBox => checkBox.Checked));
+            selectAllButton.Enabled =
+                (pGpus.Values.Where(checkBox => checkBox != null).Any(checkBox => !checkBox.Checked));
+        }
+
+        #region Allowed vGpu types
+        private void RepopulateAllowedTypes(PGPU pGpu)
+        {
+            allowedTypesGrid.SuspendLayout();
+            allowedTypesGrid.Rows.Clear();
+            allowedTypesGrid.Cursor = Cursors.WaitCursor;
+            try
+            {
+                allowedTypesGrid.Rows.Clear();
+                if (pGpu.supported_VGPU_types != null && pGpu.supported_VGPU_types.Count > 0)
+                {
+                    allowedTypesGrid.Rows.AddRange((from vGpuTypeRef in pGpu.supported_VGPU_types
+                                                    let vGpuType = pGpu.Connection.Resolve(vGpuTypeRef)
+                                                    let enabledType = pGpu.enabled_VGPU_types.Contains(vGpuTypeRef)
+                                                    orderby vGpuType.Capacity ascending
+                                                    select new VGpuTypeRow(vGpuType, enabledType)).ToArray());
+                }
+            }
+            finally
+            {
+                allowedTypesGrid.ResumeLayout();
+                allowedTypesGrid.Cursor = Cursors.Default;
+            }
+        }
+        #endregion
     }
 
     class VGpuTypeRow : DataGridViewExRow

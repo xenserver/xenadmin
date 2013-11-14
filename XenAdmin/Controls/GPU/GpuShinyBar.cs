@@ -13,25 +13,28 @@ namespace XenAdmin.Controls.GPU
             InitializeComponent();
         }
 
-        private PGPU pGPU;
+        public PGPU PGPU { get; private set; }
 
         private List<VGPU> vGPUs;
         private Dictionary<VGPU, VM> vms;
+        private long capacity;
 
         public void Initialize(PGPU pGPU)
         {
-            this.pGPU = pGPU;
+            this.PGPU = pGPU;
 
             vGPUs = pGPU.Connection.ResolveAll(pGPU.resident_VGPUs);
 
             vms = new Dictionary<VGPU, VM>();
             foreach (VGPU vgpu in vGPUs)
                 vms[vgpu] = vgpu.Connection.Resolve(vgpu.VM);
+
+            capacity = vGPUs.Count > 0 ? pGPU.supported_VGPU_max_capacities[vGPUs[0].type] : 8;
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (pGPU == null || vGPUs == null)
+            if (PGPU == null || vGPUs == null)
                 return;
 
             Graphics g = e.Graphics;
@@ -45,15 +48,16 @@ namespace XenAdmin.Controls.GPU
             // A bar for each vGPU
             int i = 0;
             vGPUs.Sort();
-            long length = barArea.Width / 8;
+
+            long segmentLength = barArea.Width / (capacity > 0 ? capacity : 8);
             foreach (VGPU vgpu in vGPUs)
             {
                 VM vm = vms[vgpu];
                 if (vm != null)
                 {
-                    var vGpuType = pGPU.Connection.Resolve(vgpu.type);
+                    var vGpuType = PGPU.Connection.Resolve(vgpu.type);
 
-                    DrawSegment(g, length, vm.Name, vGpuType != null ? vGpuType.model_name : "",
+                    DrawSegment(g, segmentLength, vm.Name, vGpuType != null ? vGpuType.model_name : "",
                         GpuShinyBarColors.GpuShinyBar_VMs[i++ % GpuShinyBarColors.GpuShinyBar_VMs.Length],
                         ref left);
                 }
@@ -71,7 +75,7 @@ namespace XenAdmin.Controls.GPU
             int line_bottom = barArea.Top + barArea.Height / 2;
             int line_top = barArea.Top - line_height;
 
-            long incr = max / 8;
+            long incr = max / (capacity > 0 ? capacity : 8);
 
             // Draw the grid
             using (Pen pen = new Pen(GpuShinyBarColors.Grid))
