@@ -117,44 +117,47 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="panelWithBorder.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="panel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="panelWithBorder.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="containerPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="containerPanel.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="placementPolicyLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="placementPolicyLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="placementPolicyLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="placementPolicyLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="placementPolicyLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 10</value>
-  </data>
-  <data name="placementPolicyLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 10, 5, 5</value>
+    <value>3, 10</value>
   </data>
   <data name="placementPolicyLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>431, 16</value>
+    <value>110, 13</value>
   </data>
   <data name="placementPolicyLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>2</value>
+  </data>
+  <data name="placementPolicyLabel.Text" xml:space="preserve">
+    <value>placementPolicyLabel</value>
   </data>
   <data name="&gt;&gt;placementPolicyLabel.Name" xml:space="preserve">
     <value>placementPolicyLabel</value>
   </data>
   <data name="&gt;&gt;placementPolicyLabel.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;placementPolicyLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
+    <value>containerPanel</value>
   </data>
   <data name="&gt;&gt;placementPolicyLabel.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -166,16 +169,13 @@
     <value>NoControl</value>
   </data>
   <data name="editPlacementPolicyButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>447, 6</value>
-  </data>
-  <data name="editPlacementPolicyButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 6, 6, 6</value>
+    <value>398, 5</value>
   </data>
   <data name="editPlacementPolicyButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 22</value>
+    <value>61, 22</value>
   </data>
   <data name="editPlacementPolicyButton.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>1</value>
   </data>
   <data name="editPlacementPolicyButton.Text" xml:space="preserve">
     <value>&amp;Edit...</value>
@@ -187,63 +187,57 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;editPlacementPolicyButton.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
+    <value>containerPanel</value>
   </data>
   <data name="&gt;&gt;editPlacementPolicyButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="containerPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 1</value>
   </data>
-  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="containerPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>462, 33</value>
   </data>
-  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>519, 32</value>
-  </data>
-  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
-    <value>panel</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="placementPolicyLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="editPlacementPolicyButton" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,81.8951,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="panel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="panel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="panel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>519, 32</value>
-  </data>
-  <data name="panel.TabIndex" type="System.Int32, mscorlib">
+  <data name="containerPanel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;panel.Name" xml:space="preserve">
-    <value>panel</value>
+  <data name="&gt;&gt;containerPanel.Name" xml:space="preserve">
+    <value>containerPanel</value>
   </data>
-  <data name="&gt;&gt;panel.Type" xml:space="preserve">
+  <data name="&gt;&gt;containerPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;containerPanel.Parent" xml:space="preserve">
+    <value>panelWithBorder</value>
+  </data>
+  <data name="&gt;&gt;containerPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelWithBorder.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panelWithBorder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="panelWithBorder.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="panelWithBorder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>464, 35</value>
+  </data>
+  <data name="panelWithBorder.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;panelWithBorder.Name" xml:space="preserve">
+    <value>panelWithBorder</value>
+  </data>
+  <data name="&gt;&gt;panelWithBorder.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PanelWithBorder, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;panel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelWithBorder.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;panel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelWithBorder.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -252,11 +246,14 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
   </data>
+  <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>519, 32</value>
+    <value>464, 35</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>GpuPlacementPolicyPanel</value>

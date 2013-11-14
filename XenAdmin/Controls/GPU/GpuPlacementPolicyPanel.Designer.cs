@@ -29,43 +29,39 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GpuPlacementPolicyPanel));
-            this.panel = new XenAdmin.Controls.PanelWithBorder();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.placementPolicyLabel = new XenAdmin.Controls.Common.AutoHeightLabel();
+            this.panelWithBorder = new XenAdmin.Controls.PanelWithBorder();
+            this.containerPanel = new System.Windows.Forms.Panel();
+            this.placementPolicyLabel = new System.Windows.Forms.Label();
             this.editPlacementPolicyButton = new System.Windows.Forms.Button();
-            this.panel.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.panelWithBorder.SuspendLayout();
+            this.containerPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel
+            // panelWithBorder
             // 
-            resources.ApplyResources(this.panel, "panel");
-            this.panel.BackColor = System.Drawing.Color.Transparent;
-            this.panel.Controls.Add(this.tableLayoutPanel1);
-            this.panel.Name = "panel";
-            this.panel.VisibleChanged += new System.EventHandler(this.GpuPlacementPolicyPanel_VisibleChanged);
+            resources.ApplyResources(this.panelWithBorder, "panelWithBorder");
+            this.panelWithBorder.BackColor = System.Drawing.Color.Transparent;
+            this.panelWithBorder.Controls.Add(this.containerPanel);
+            this.panelWithBorder.Name = "panelWithBorder";
             // 
-            // tableLayoutPanel1
+            // containerPanel
             // 
-            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.placementPolicyLabel, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.editPlacementPolicyButton, 1, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            resources.ApplyResources(this.containerPanel, "containerPanel");
+            this.containerPanel.Controls.Add(this.placementPolicyLabel);
+            this.containerPanel.Controls.Add(this.editPlacementPolicyButton);
+            this.containerPanel.Name = "containerPanel";
             // 
             // placementPolicyLabel
             // 
-            resources.ApplyResources(this.placementPolicyLabel, "placementPolicyLabel");
             this.placementPolicyLabel.AutoEllipsis = true;
-            this.placementPolicyLabel.BackColor = System.Drawing.Color.Transparent;
-            this.placementPolicyLabel.MinimumSize = new System.Drawing.Size(0, 16);
+            resources.ApplyResources(this.placementPolicyLabel, "placementPolicyLabel");
             this.placementPolicyLabel.Name = "placementPolicyLabel";
             // 
             // editPlacementPolicyButton
             // 
             resources.ApplyResources(this.editPlacementPolicyButton, "editPlacementPolicyButton");
-            this.editPlacementPolicyButton.BackColor = System.Drawing.Color.Transparent;
             this.editPlacementPolicyButton.Name = "editPlacementPolicyButton";
-            this.editPlacementPolicyButton.UseVisualStyleBackColor = false;
+            this.editPlacementPolicyButton.UseVisualStyleBackColor = true;
             this.editPlacementPolicyButton.Click += new System.EventHandler(this.editPlacementPolicyButton_Click);
             // 
             // GpuPlacementPolicyPanel
@@ -73,21 +69,25 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.panel);
+            this.Controls.Add(this.panelWithBorder);
             this.DoubleBuffered = true;
-            this.MinimumSize = new System.Drawing.Size(519, 32);
+            this.MinimumSize = new System.Drawing.Size(400, 32);
             this.Name = "GpuPlacementPolicyPanel";
-            this.panel.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
+            this.VisibleChanged += new System.EventHandler(this.GpuPlacementPolicyPanel_VisibleChanged);
+            this.panelWithBorder.ResumeLayout(false);
+            this.containerPanel.ResumeLayout(false);
+            this.containerPanel.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private PanelWithBorder panel;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private PanelWithBorder panelWithBorder;
         private System.Windows.Forms.Button editPlacementPolicyButton;
-        private XenAdmin.Controls.Common.AutoHeightLabel placementPolicyLabel;
+        private System.Windows.Forms.Label placementPolicyLabel;
+        private System.Windows.Forms.Panel containerPanel;
+
     }
 }

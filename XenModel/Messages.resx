@@ -4880,11 +4880,26 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="GPU_NONE" xml:space="preserve">
     <value>None</value>
   </data>
+  <data name="GPU_PLACEMENT_POLICY_DESCRIPTION" xml:space="preserve">
+    <value>Placement policy: {0}</value>
+  </data>
   <data name="GPU_PLACEMENT_POLICY_MAX_DENSITY" xml:space="preserve">
     <value>Maximum density</value>
   </data>
+  <data name="GPU_PLACEMENT_POLICY_MAX_DENSITY_DESCRIPTION" xml:space="preserve">
+    <value>Maximum density: put as many VMs as possible on the same GPU</value>
+  </data>
   <data name="GPU_PLACEMENT_POLICY_MAX_PERFORMANCE" xml:space="preserve">
     <value>Maximum performance</value>
+  </data>
+  <data name="GPU_PLACEMENT_POLICY_MAX_PERFORMANCE_DESCRIPTION" xml:space="preserve">
+    <value>Maximum performance: put VMs on as many GPUs as possible</value>
+  </data>
+  <data name="GPU_PLACEMENT_POLICY_MIXED" xml:space="preserve">
+    <value>Mixed</value>
+  </data>
+  <data name="GPU_PLACEMENT_POLICY_MIXED_DESCRIPTION" xml:space="preserve">
+    <value>Mixed: different settings for different GPU groups</value>
   </data>
   <data name="GPU_RUBRIC_NO_GPUS_POOL" xml:space="preserve">
     <value>You can improve graphics performance by assigning a dedicated graphics processing unit (GPU) to a VM. However, no GPUs have been detected in this pool, so this option is not currently available.</value>

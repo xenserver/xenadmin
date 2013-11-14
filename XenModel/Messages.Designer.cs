@@ -13930,6 +13930,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Placement policy: {0}.
+        /// </summary>
+        public static string GPU_PLACEMENT_POLICY_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("GPU_PLACEMENT_POLICY_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum density.
         /// </summary>
         public static string GPU_PLACEMENT_POLICY_MAX_DENSITY {
@@ -13939,11 +13948,47 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum density: put as many VMs as possible on the same GPU.
+        /// </summary>
+        public static string GPU_PLACEMENT_POLICY_MAX_DENSITY_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("GPU_PLACEMENT_POLICY_MAX_DENSITY_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum performance.
         /// </summary>
         public static string GPU_PLACEMENT_POLICY_MAX_PERFORMANCE {
             get {
                 return ResourceManager.GetString("GPU_PLACEMENT_POLICY_MAX_PERFORMANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum performance: put VMs on as many GPUs as possible.
+        /// </summary>
+        public static string GPU_PLACEMENT_POLICY_MAX_PERFORMANCE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("GPU_PLACEMENT_POLICY_MAX_PERFORMANCE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mixed.
+        /// </summary>
+        public static string GPU_PLACEMENT_POLICY_MIXED {
+            get {
+                return ResourceManager.GetString("GPU_PLACEMENT_POLICY_MIXED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mixed: different settings for different GPU groups.
+        /// </summary>
+        public static string GPU_PLACEMENT_POLICY_MIXED_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("GPU_PLACEMENT_POLICY_MIXED_DESCRIPTION", resourceCulture);
             }
         }
         

@@ -46,7 +46,7 @@ namespace XenAdmin.Controls
                 }
                 currentAllocationAlgorithm = gpu_group.allocation_algorithm;
             }
-            placementPolicyLabel.Text = string.Format("Placement policy: {0}",
+            placementPolicyLabel.Text = string.Format(Messages.GPU_PLACEMENT_POLICY_DESCRIPTION,
                                                       PlacementPolicyWrapper.ToString(currentAllocationAlgorithm));
         }
 
@@ -135,11 +135,11 @@ namespace XenAdmin.Controls
             switch (x)
             {
                 case allocation_algorithm.breadth_first:
-                    return "Maximum performance: put VMs on as many GPUs as possible";
+                    return Messages.GPU_PLACEMENT_POLICY_MAX_PERFORMANCE_DESCRIPTION;
                 case allocation_algorithm.depth_first:
-                    return "Maximum density: put as many VMs as possible on the same GPU";
+                    return Messages.GPU_PLACEMENT_POLICY_MAX_DENSITY_DESCRIPTION;
                 default:
-                    return "Unknown or mixture";
+                    return Messages.GPU_PLACEMENT_POLICY_MIXED_DESCRIPTION;
             }
         }
     }
