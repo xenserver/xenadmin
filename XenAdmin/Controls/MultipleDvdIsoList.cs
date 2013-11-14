@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using XenAPI;
@@ -55,12 +56,9 @@ namespace XenAdmin.Controls
         private VM vm = null;
         public VM VM
         {
-            set 
+            set
             {
-                if (vm != null)
-                {
-                    vm.PropertyChanged -= new PropertyChangedEventHandler(vm_PropertyChanged);
-                }
+                DeregisterEvents();
                 cdChanger1.vm = value;
                 vm = value;
                 if (vm != null)
@@ -72,6 +70,26 @@ namespace XenAdmin.Controls
             get 
             {
                 return cdChanger1.vm;
+            }
+        }
+
+        protected virtual void DeregisterEvents()
+        {
+            if (vm == null)
+                return;
+
+            // remove VM listeners
+            vm.PropertyChanged -= vm_PropertyChanged;
+
+            // remove cache listener
+            vm.Connection.CachePopulated -= CachePopulatedMethod;
+
+            // remove VBD listeners
+            var vbds = vm.Connection.ResolveAll(VM.VBDs);
+                
+            foreach (var vbd in vbds.Where(vbd => vbd.IsCDROM || vbd.IsFloppyDrive))
+            {
+                vbd.PropertyChanged -= vbd_PropertyChanged;
             }
         }
 
