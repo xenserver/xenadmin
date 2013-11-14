@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.ConsoleView;
 using XenAPI;
@@ -113,6 +114,10 @@ namespace XenAdmin.Controls
         {
             Program.AssertOnEventThread();
 
+            // activeVNCView is going to change, so the current activeVNCView will become inactive
+            // Start a timer for closing the inactive VNC connection after an interval (20 seconds)
+            StartCloseVNCTimer(activeVNCView);
+
             this.Controls.Clear();
 
             if (source == null)
@@ -134,10 +139,12 @@ namespace XenAdmin.Controls
             }
             activeVMConsoles.Remove(source);
             activeVMConsoles.Add(source);
+
+            StopCloseVncTimer(source);
+            
             while (activeVMConsoles.Count > MAX_ACTIVE_VM_CONSOLES)
             {
                 closeVNCForSource(activeVMConsoles[0]);
-                activeVMConsoles.RemoveAt(0);
             }
 
             if (vncViews.ContainsKey(source))
@@ -304,6 +311,9 @@ namespace XenAdmin.Controls
 
             vncViews.Remove(source);
             vncView.Dispose();
+
+            if (activeVMConsoles.Contains(source)) 
+                activeVMConsoles.Remove(source);
         }
 
         public bool isVNCPausedForSource(VM source)
@@ -401,6 +411,72 @@ namespace XenAdmin.Controls
                 activeVNCView.SwitchIfRequired();
         }
 
+        #region Close VNC connection
 
+        private const int CLOSE_VNC_INTERVAL = 20000; //20 milliseconds 
+
+        private static readonly Dictionary<VM, Timer> CloseVNCTimers = new Dictionary<VM, Timer>();
+
+        public void StartCloseVNCTimer(VNCView vncView)
+        {
+            if (vncView == null)
+                return;
+
+            // find the <VM, VNCView> pair in vncViews and start timer on the vm 
+            foreach (var kvp in vncViews.Where(kvp => kvp.Value == vncView))
+            {
+                StartCloseVNCTimer(kvp.Key);
+                break;
+            }
+        }
+
+        private void StartCloseVNCTimer(VM vm)
+        {
+            Program.AssertOnEventThread();
+
+            if (CloseVNCTimers.ContainsKey(vm) || !vncViews.ContainsKey(vm))
+                return;
+
+            var t = new Timer {Interval = CLOSE_VNC_INTERVAL};
+
+            t.Tick += delegate
+                          {
+                              Program.AssertOnEventThread();
+                              try
+                              {
+                                  log.DebugFormat("ConsolePanel: closeVNCForSource({0}) in delegate", vm.Name);
+                                  closeVNCForSource(vm);
+                              }
+                              catch (Exception exception)
+                              {
+                                  log.ErrorFormat("ConsolePanel: Exception closing the VNC console for {0}: {1}",
+                                                  vm.Name, exception.Message);
+                              }
+
+                              t.Stop();
+                              CloseVNCTimers.Remove(vm);
+                              log.DebugFormat(
+                                  "ConsolePanel: CloseVNCTimer({0}): Timer stopped and removed in delegate",
+                                  vm.Name);
+                          };
+
+            CloseVNCTimers.Add(vm, t);
+            log.DebugFormat("ConsolePanel: CloseVNCTimer({0}): Start timer (timers count {1})", vm.Name, CloseVNCTimers.Count);
+            t.Start();
+        }
+
+        private static void StopCloseVncTimer(VM vm)
+        {
+            Program.AssertOnEventThread();
+
+            if (!CloseVNCTimers.ContainsKey(vm) || CloseVNCTimers[vm] == null) 
+                return;
+
+            CloseVNCTimers[vm].Stop();
+            CloseVNCTimers.Remove(vm);
+            log.DebugFormat("ConsolePanel: StopCloseVncTimer({0}): Timer stopped and removed", vm.Name);
+        }
+
+        #endregion
     }
 }

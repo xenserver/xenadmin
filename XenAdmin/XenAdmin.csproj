@@ -2225,7 +2225,9 @@
     <Compile Include="Controls\ConsoleTab\FullScreenHint.Designer.cs">
       <DependentUpon>FullScreenHint.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GPU\GpuConfiguration.cs" />
+    <Compile Include="Controls\GPU\GpuConfiguration.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Controls\GPU\GpuConfiguration.Designer.cs">
       <DependentUpon>GpuConfiguration.cs</DependentUpon>
     </Compile>

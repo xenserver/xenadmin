@@ -1658,7 +1658,11 @@ namespace XenAdmin
             }
             else
             {
-                ConsolePanel.PauseAllViews();
+                ConsolePanel.PauseAllViews();            
+                
+                // Start timer for closing the VNC connection after an interval (20 seconds)
+                // when the console tab is not selected
+                ConsolePanel.StartCloseVNCTimer(ConsolePanel.activeVNCView);
 
                 if (t == TabPageGeneral)
                 {
