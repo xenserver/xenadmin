@@ -259,5 +259,10 @@ namespace XenAdmin.ConsoleView
         {
             vncTabView.setupCD();
         }
+
+        internal bool IsVNC
+        {
+            get { return vncTabView.IsVNC; }
+        }
     }
 }

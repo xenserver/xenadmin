@@ -1367,5 +1367,9 @@ namespace XenAdmin.ConsoleView
                 vncScreen.Source.HasGPUPassthrough && vncScreen.Source.power_state == vm_power_state.Running;
         }
 
+        internal bool IsVNC
+        {
+            get { return vncScreen.UseVNC; }
+        }
     }
 }

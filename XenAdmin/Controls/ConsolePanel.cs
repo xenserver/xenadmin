@@ -316,6 +316,14 @@ namespace XenAdmin.Controls
                 activeVMConsoles.Remove(source);
         }
 
+        public void closeVNCForSource(VM source, bool vncOnly)
+        {
+            if (!vncViews.ContainsKey(source) || vncViews[source] == null
+                || (vncOnly && !vncViews[source].IsVNC))
+                return;
+            closeVNCForSource(source);
+        }
+
         public bool isVNCPausedForSource(VM source)
         {
             Program.AssertOnEventThread();
@@ -445,7 +453,7 @@ namespace XenAdmin.Controls
                               try
                               {
                                   log.DebugFormat("ConsolePanel: closeVNCForSource({0}) in delegate", vm.Name);
-                                  closeVNCForSource(vm);
+                                  closeVNCForSource(vm, true);
                               }
                               catch (Exception exception)
                               {
