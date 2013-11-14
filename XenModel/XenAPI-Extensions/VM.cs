@@ -1157,6 +1157,25 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// True if this VM's ha_restart_priority is not "Do not restart" and its pool has ha_enabled true.
+        /// For pre-Boston VMs: True if this VM has ha_always_run set and its pool has ha_enabled true.
+        /// </summary>
+        public bool IsHAProtectedRestart
+        {
+            get
+            {
+                if (Connection == null)
+                    return false;
+                Pool myPool = Helpers.GetPoolOfOne(Connection);
+                if (myPool == null)
+                    return false;
+                if (Helpers.BostonOrGreater(Connection))
+                    return myPool.ha_enabled && this.HARestartPriority == HA_Restart_Priority.Restart;
+                return myPool.ha_enabled && this.ha_always_run;
+            }
+        }
+
+        /// <summary>
         /// Calls set_ha_restart_priority and set_ha_always_run as appropriate.
         /// </summary>
         /// <param name="priority"></param>

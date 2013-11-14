@@ -39,6 +39,8 @@
             this.labelNeedGpu = new System.Windows.Forms.Label();
             this.imgStopVM = new System.Windows.Forms.PictureBox();
             this.labelStopVM = new System.Windows.Forms.Label();
+            this.imgHA = new System.Windows.Forms.PictureBox();
+            this.labelHA = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelGpuType = new System.Windows.Forms.Label();
             this.comboBoxGpus = new XenAdmin.Controls.VgpuComboBox();
@@ -47,6 +49,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.imgNeedDriver)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgNeedGpu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgStopVM)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgHA)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,6 +69,8 @@
             this.warningsTable.Controls.Add(this.labelNeedGpu, 1, 2);
             this.warningsTable.Controls.Add(this.imgStopVM, 0, 3);
             this.warningsTable.Controls.Add(this.labelStopVM, 1, 3);
+            this.warningsTable.Controls.Add(this.imgHA, 0, 4);
+            this.warningsTable.Controls.Add(this.labelHA, 1, 4);
             this.warningsTable.Name = "warningsTable";
             this.warningsTable.SizeChanged += new System.EventHandler(this.warningsTable_SizeChanged);
             // 
@@ -126,6 +131,21 @@
             this.labelStopVM.MaximumSize = new System.Drawing.Size(584, 999);
             this.labelStopVM.Name = "labelStopVM";
             // 
+            // imgHA
+            // 
+            this.imgHA.ErrorImage = null;
+            this.imgHA.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
+            resources.ApplyResources(this.imgHA, "imgHA");
+            this.imgHA.InitialImage = null;
+            this.imgHA.Name = "imgHA";
+            this.imgHA.TabStop = false;
+            // 
+            // labelHA
+            // 
+            resources.ApplyResources(this.labelHA, "labelHA");
+            this.labelHA.MaximumSize = new System.Drawing.Size(584, 999);
+            this.labelHA.Name = "labelHA";
+            // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
@@ -161,6 +181,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.imgNeedDriver)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgNeedGpu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgStopVM)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgHA)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -183,5 +204,7 @@
         private System.Windows.Forms.Label labelGpuType;
         private System.Windows.Forms.PictureBox imgNeedDriver;
         private System.Windows.Forms.Label labelNeedDriver;
+        private System.Windows.Forms.PictureBox imgHA;
+        private System.Windows.Forms.Label labelHA;
     }
 }

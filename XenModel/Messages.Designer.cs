@@ -22868,6 +22868,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The VM has one or more virtual GPUs. Restart cannot be guaranteed..
+        /// </summary>
+        public static string NOT_AGILE_VM_HAS_VGPU {
+            get {
+                return ResourceManager.GetString("NOT_AGILE_VM_HAS_VGPU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not applied.
         /// </summary>
         public static string NOT_APPLIED {

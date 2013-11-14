@@ -57,6 +57,7 @@ namespace XenAdmin.SettingsPanels
                 imgNeedDriver.Visible = labelNeedDriver.Visible =
                 imgNeedGpu.Visible = labelNeedGpu.Visible =
                 imgStopVM.Visible = labelStopVM.Visible =
+                imgHA.Visible = labelHA.Visible =
                     false;
         }
 
@@ -286,6 +287,7 @@ namespace XenAdmin.SettingsPanels
                 imgNeedDriver.Visible = labelNeedDriver.Visible =
                 imgNeedGpu.Visible = labelNeedGpu.Visible =
                 imgStopVM.Visible = labelStopVM.Visible =
+                imgHA.Visible = labelHA.Visible =
                     false;
                 return;
             }
@@ -295,6 +297,7 @@ namespace XenAdmin.SettingsPanels
                 imgRDP.Visible = labelRDP.Visible =
                 imgNeedDriver.Visible = labelNeedDriver.Visible =
                 imgNeedGpu.Visible = labelNeedGpu.Visible =
+                imgHA.Visible = labelHA.Visible =
                     false;
 
                 imgStopVM.Visible = labelStopVM.Visible = true;
@@ -303,9 +306,25 @@ namespace XenAdmin.SettingsPanels
                 return;
             }
 
+            if (vm.IsHAProtectedRestart)
+            {
+                imgRDP.Visible = labelRDP.Visible =
+                imgNeedDriver.Visible = labelNeedDriver.Visible =
+                imgNeedGpu.Visible = labelNeedGpu.Visible =
+                imgStopVM.Visible = labelStopVM.Visible =
+                    false;
+
+                imgHA.Visible = labelHA.Visible = true;
+
+                labelGpuType.Enabled = comboBoxGpus.Enabled = false;
+                return;
+            }
+
             GpuTuple tuple = comboBoxGpus.SelectedItem as GpuTuple;
 
-            imgStopVM.Visible = labelStopVM.Visible = false;
+            imgStopVM.Visible = labelStopVM.Visible =
+            imgHA.Visible = labelHA.Visible = false;
+
             imgRDP.Visible = labelRDP.Visible =
                 HasChanged && currentGpuTuple.GpuGroup == null &&
                 tuple != null && !tuple.IsFractionalVgpu;
