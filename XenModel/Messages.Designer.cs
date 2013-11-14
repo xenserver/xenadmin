@@ -31463,6 +31463,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} vGPU ({1} per GPU, {2}, {3} displays).
+        /// </summary>
+        public static string VGPU_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("VGPU_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pass-through whole GPU.
         /// </summary>
         public static string VGPU_PASSTHRU_TOSTRING {

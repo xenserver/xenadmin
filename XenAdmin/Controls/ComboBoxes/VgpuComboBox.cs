@@ -118,7 +118,7 @@ namespace XenAdmin.Controls
             else if (VgpuTypes.Length == 1)
             {
                 //this refers to vGPU type which is a subitem of a GPU group
-                displayName = VgpuTypes[0].Name;
+                displayName = VgpuTypes[0].Description;
                 IsVgpuSubitem = true;
                 IsFractionalVgpu = VgpuTypes[0].max_heads != 0;
             }

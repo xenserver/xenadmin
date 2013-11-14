@@ -47,6 +47,19 @@ namespace XenAPI
             }
 
         }
+
+        public override string Description
+        {
+            get
+            {
+                if (max_heads == 0)
+                    return Messages.VGPU_PASSTHRU_TOSTRING;
+
+                var videoRam = framebuffer_size != 0 ? Util.SuperiorSizeString(framebuffer_size, 0): string.Empty;
+                return string.Format(Messages.VGPU_DESCRIPTION, model_name, Capacity, videoRam, max_heads); // videoRam TO BE REPLACED with max_resolution 
+            }
+
+        }
         
         #region IEquatable<VGPU_type> Members
 
