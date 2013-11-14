@@ -98,6 +98,7 @@ namespace XenAdmin
         internal readonly PhysicalStoragePage PhysicalStoragePage = new PhysicalStoragePage();
         internal readonly VMStoragePage VMStoragePage = new VMStoragePage();
         internal readonly AdPage AdPage = new AdPage();
+        internal readonly GpuPage GpuPage = new GpuPage();
 
         private ActionBase statusBarAction = null;
         public ActionBase StatusBarAction { get { return statusBarAction; } }
@@ -147,6 +148,7 @@ namespace XenAdmin
             components.Add(HomePage);
             components.Add(WlbPage);
             components.Add(AdPage);
+            components.Add(GpuPage);
             components.Add(SearchPage);
 
             AddTabContents(VMStoragePage, TabPageStorage);
@@ -165,6 +167,7 @@ namespace XenAdmin
             AddTabContents(WLBUpsellPage, TabPageWLBUpsell);
             AddTabContents(PhysicalStoragePage, TabPagePhysicalStorage);
             AddTabContents(AdPage, TabPageAD);
+            AddTabContents(GpuPage, TabPageGPU);
             AddTabContents(SearchPage, TabPageSearch);
 
             TheTabControl.SelectedIndexChanged += TheTabControl_SelectedIndexChanged;
@@ -1284,6 +1287,11 @@ namespace XenAdmin
             
             ShowTab(TabPageAD, !multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive) && george_or_greater);
 
+            bool showGPU = SelectionManager.Selection.All(s => Helpers.ClearwaterOrGreater(s.Connection)) &&
+                !Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictVgpu);
+
+            ShowTab(TabPageGPU, !multi && !SearchMode && (isHostSelected || isPoolSelected) && showGPU);           
+
             foreach (TabPageFeature f in pluginManager.GetAllFeatures<TabPageFeature>(f => !f.IsConsoleReplacement && !multi && f.ShowTab))
                 ShowTab(f.TabPage, true);
 
@@ -1740,6 +1748,10 @@ namespace XenAdmin
                 {
                     AdPage.XenObject = SelectionManager.Selection.FirstAsXenObject;
                 }
+                else if (t == TabPageGPU)
+                {
+                    GpuPage.XenObject = SelectionManager.Selection.FirstAsXenObject;
+                }
             }
 
             if (t == TabPagePeformance)
@@ -2159,6 +2171,8 @@ namespace XenAdmin
                 return "TabPageBallooningUpsell";
             if (TheTabControl.SelectedTab == TabPageWLBUpsell)
                 return "TabPageWLBUpsell";
+            if (TheTabControl.SelectedTab == TabPageGPU)
+                return "TabPageGPU" + modelObj;
             return "TabPageUnknown";
         }
 

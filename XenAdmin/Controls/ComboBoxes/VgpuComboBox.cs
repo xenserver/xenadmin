@@ -110,7 +110,7 @@ namespace XenAdmin.Controls
                 //this refers to the item "None"
                 displayName = Messages.GPU_NONE;
             }
-            else if (VgpuTypes == null  || VgpuTypes.Length == 0)
+            else if (VgpuTypes == null  || VgpuTypes.Length == 0 || vgpuTypes[0] == null)
             {
                 //this refers to an item mapping a GPU with only passthrough type
                 displayName = GpuGroup.Name;

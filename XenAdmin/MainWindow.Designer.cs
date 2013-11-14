@@ -84,6 +84,7 @@ namespace XenAdmin
             this.TabPageWLB = new System.Windows.Forms.TabPage();
             this.TabPageWLBUpsell = new System.Windows.Forms.TabPage();
             this.TabPageAD = new System.Windows.Forms.TabPage();
+            this.TabPageGPU = new System.Windows.Forms.TabPage();
             this.TabPageSearch = new System.Windows.Forms.TabPage();
             this.alertPage = new XenAdmin.TabPages.AlertSummaryPage();
             this.updatesPage = new XenAdmin.TabPages.ManageUpdatesPage();
@@ -344,6 +345,7 @@ namespace XenAdmin
             this.TheTabControl.Controls.Add(this.TabPageWLB);
             this.TheTabControl.Controls.Add(this.TabPageWLBUpsell);
             this.TheTabControl.Controls.Add(this.TabPageAD);
+            this.TheTabControl.Controls.Add(this.TabPageGPU);
             this.TheTabControl.Controls.Add(this.TabPageSearch);
             this.TheTabControl.Name = "TheTabControl";
             this.TheTabControl.SelectedIndex = 4;
@@ -456,6 +458,12 @@ namespace XenAdmin
             resources.ApplyResources(this.TabPageAD, "TabPageAD");
             this.TabPageAD.Name = "TabPageAD";
             this.TabPageAD.UseVisualStyleBackColor = true;
+            // 
+            // TabPageGPU
+            // 
+            resources.ApplyResources(this.TabPageGPU, "TabPageGPU");
+            this.TabPageGPU.Name = "TabPageGPU";
+            this.TabPageGPU.UseVisualStyleBackColor = true;
             // 
             // TabPageSearch
             // 
@@ -1966,6 +1974,7 @@ namespace XenAdmin
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private CommandToolStripMenuItem poolReconnectAsToolStripMenuItem;
         internal System.Windows.Forms.TabPage TabPageAD;
+        private System.Windows.Forms.TabPage TabPageGPU;
         private CommandToolStripMenuItem powerOnToolStripMenuItem;
         private CommandToolStripButton shutDownToolStripButton;
         private CommandToolStripButton startVMToolStripButton;

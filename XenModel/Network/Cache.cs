@@ -56,7 +56,8 @@ namespace XenAdmin.Network
         private readonly ChangeableDictionary<XenRef<Host_patch>, Host_patch> _host_patch = new ChangeableDictionary<XenRef<Host_patch>, Host_patch>();
         private readonly ChangeableDictionary<XenRef<Message>, Message> _message = new ChangeableDictionary<XenRef<Message>, Message>();
         private readonly ChangeableDictionary<XenRef<XenAPI.Network>, XenAPI.Network> _network = new ChangeableDictionary<XenRef<XenAPI.Network>, XenAPI.Network>();
-        private readonly ChangeableDictionary<XenRef<PBD>, PBD>_pbd = new ChangeableDictionary<XenRef<PBD>, PBD>();
+        private readonly ChangeableDictionary<XenRef<PBD>, PBD> _pbd = new ChangeableDictionary<XenRef<PBD>, PBD>();
+        private readonly ChangeableDictionary<XenRef<PCI>, PCI> _pcis = new ChangeableDictionary<XenRef<PCI>, PCI>();
         private readonly ChangeableDictionary<XenRef<PGPU>, PGPU> _pgpu = new ChangeableDictionary<XenRef<PGPU>, PGPU>();
         private readonly ChangeableDictionary<XenRef<PIF>, PIF> _pif = new ChangeableDictionary<XenRef<PIF>, PIF>();
         private readonly ChangeableDictionary<XenRef<PIF_metrics>, PIF_metrics> _pif_metrics = new ChangeableDictionary<XenRef<PIF_metrics>, PIF_metrics>();
@@ -153,6 +154,11 @@ namespace XenAdmin.Network
         public PBD[] PBDs
         {
             get { return contents(_pbd); }
+        }
+
+        public PCI[] PCIs
+        {
+            get { return contents(_pcis); }
         }
 
         public PGPU[] PGPUs

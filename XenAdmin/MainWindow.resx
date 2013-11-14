@@ -684,6 +684,30 @@
   <data name="&gt;&gt;TabPageAD.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
+  <data name="TabPageGPU.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPageGPU.Size" type="System.Drawing.Size, System.Drawing">
+    <value>753, 592</value>
+  </data>
+  <data name="TabPageGPU.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="TabPageGPU.Text" xml:space="preserve">
+    <value>GPU</value>
+  </data>
+  <data name="&gt;&gt;TabPageGPU.Name" xml:space="preserve">
+    <value>TabPageGPU</value>
+  </data>
+  <data name="&gt;&gt;TabPageGPU.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPageGPU.Parent" xml:space="preserve">
+    <value>TheTabControl</value>
+  </data>
+  <data name="&gt;&gt;TabPageGPU.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
   <data name="TabPageSearch.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>

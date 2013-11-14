@@ -31382,7 +31382,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} {1} vGPU (?? per GPU).
+        ///   Looks up a localized string similar to {0} vGPU ({1} per GPU).
         /// </summary>
         public static string VGPU_TOSTRING {
             get {

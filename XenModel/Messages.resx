@@ -10878,7 +10878,7 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
     <value>Pass-through whole GPU</value>
   </data>
   <data name="VGPU_TOSTRING" xml:space="preserve">
-    <value>{0} {1} vGPU (?? per GPU)</value>
+    <value>{0} vGPU ({1} per GPU)</value>
   </data>
   <data name="VIEW_FOLDER_MENU_OPTION" xml:space="preserve">
     <value>View folder...</value>

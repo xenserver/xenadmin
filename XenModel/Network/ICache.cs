@@ -54,6 +54,7 @@ namespace XenAdmin.Network
         Message[] Messages { get; }
         XenAPI.Network[] Networks { get; }
         PBD[] PBDs { get; }
+        PCI[] PCIs { get; }
         PGPU[] PGPUs { get; }
         PIF[] PIFs { get; }
         Pool_patch[] Pool_patches { get; }

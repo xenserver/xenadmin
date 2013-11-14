@@ -2225,6 +2225,24 @@
     <Compile Include="Controls\ConsoleTab\FullScreenHint.Designer.cs">
       <DependentUpon>FullScreenHint.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GPU\GpuPlacementPolicyPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\GPU\GpuPlacementPolicyPanel.Designer.cs">
+      <DependentUpon>GpuPlacementPolicyPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GPU\GpuRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\GPU\GpuRow.Designer.cs">
+      <DependentUpon>GpuRow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GPU\GpuShinyBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\GPU\GpuShinyBar.Designer.cs">
+      <DependentUpon>GpuShinyBar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SnapshotTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -2506,6 +2524,12 @@
     </Compile>
     <Compile Include="SettingsPanels\PoolGpuEditPage.Designer.cs">
       <DependentUpon>PoolGpuEditPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\GpuPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\GpuPage.Designer.cs">
+      <DependentUpon>GpuPage.cs</DependentUpon>
     </Compile>
     <Compile Include="TabPages\ManageUpdatesPage.cs">
       <SubType>UserControl</SubType>
@@ -4259,6 +4283,33 @@
     <EmbeddedResource Include="Controls\DeprecationBanner.zh-CN.resx">
       <DependentUpon>DeprecationBanner.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\GPU\GpuPlacementPolicyPanel.ja.resx">
+      <DependentUpon>GpuPlacementPolicyPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\GPU\GpuPlacementPolicyPanel.resx">
+      <DependentUpon>GpuPlacementPolicyPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\GPU\GpuPlacementPolicyPanel.zh-CN.resx">
+      <DependentUpon>GpuPlacementPolicyPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\GPU\GpuRow.ja.resx">
+      <DependentUpon>GpuRow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\GPU\GpuRow.resx">
+      <DependentUpon>GpuRow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\GPU\GpuRow.zh-CN.resx">
+      <DependentUpon>GpuRow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\GPU\GpuShinyBar.ja.resx">
+      <DependentUpon>GpuShinyBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\GPU\GpuShinyBar.resx">
+      <DependentUpon>GpuShinyBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\GPU\GpuShinyBar.zh-CN.resx">
+      <DependentUpon>GpuShinyBar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\LunPerVdiPicker.ja.resx">
       <DependentUpon>LunPerVdiPicker.cs</DependentUpon>
     </EmbeddedResource>
@@ -5447,6 +5498,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\GeneralTabPage.zh-CN.resx">
       <DependentUpon>GeneralTabPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\GpuPage.ja.resx">
+      <DependentUpon>GpuPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\GpuPage.resx">
+      <DependentUpon>GpuPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\GpuPage.zh-CN.resx">
+      <DependentUpon>GpuPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\HAPage.ja.resx">
       <DependentUpon>HAPage.cs</DependentUpon>
