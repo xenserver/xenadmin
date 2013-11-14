@@ -433,7 +433,7 @@
     <value>Public DNS entry</value>
   </data>
   <data name="Label-VM.VCPUWeight" xml:space="preserve">
-    <value>VCPU priority</value>
+    <value>vCPU priority</value>
   </data>
   <data name="Label-VM.VCPUWeight-0" xml:space="preserve">
     <value>Lowest</value>
@@ -862,25 +862,25 @@
     <value>NIC {0} Send Errors</value>
   </data>
   <data name="Label-performance.runstate_blocked" xml:space="preserve">
-    <value>VCPUs idle</value>
+    <value>vCPUs idle</value>
   </data>
   <data name="Label-performance.runstate_concurrency_hazard" xml:space="preserve">
-    <value>VCPUs concurrency hazard</value>
+    <value>vCPUs concurrency hazard</value>
   </data>
   <data name="Label-performance.runstate_entry_time" xml:space="preserve">
-    <value>VCPUs entry time</value>
+    <value>vCPUs entry time</value>
   </data>
   <data name="Label-performance.runstate_full_contention" xml:space="preserve">
-    <value>VCPUs full contention</value>
+    <value>vCPUs full contention</value>
   </data>
   <data name="Label-performance.runstate_fullrun" xml:space="preserve">
-    <value>VCPUs full run</value>
+    <value>vCPUs full run</value>
   </data>
   <data name="Label-performance.runstate_partial_contention" xml:space="preserve">
-    <value>VCPUs partial contention</value>
+    <value>vCPUs partial contention</value>
   </data>
   <data name="Label-performance.runstate_partial_run" xml:space="preserve">
-    <value>VCPUs partial run</value>
+    <value>vCPUs partial run</value>
   </data>
   <data name="Label-performance.sr_cache_hits" xml:space="preserve">
     <value>IntelliCache Cache Hits</value>
@@ -1365,7 +1365,7 @@
     <value>VM Disk QoS Failed</value>
   </data>
   <data name="Message.name-vcpu_qos_failed" xml:space="preserve">
-    <value>VM VCPU QoS Failed</value>
+    <value>VM vCPU QoS Failed</value>
   </data>
   <data name="Message.name-vif_qos_failed" xml:space="preserve">
     <value>VM Network Interface QoS Failed</value>

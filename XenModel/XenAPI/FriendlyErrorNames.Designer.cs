@@ -646,7 +646,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The GPU group does not contain any PGPUs..
+        ///   Looks up a localized string similar to The GPU group does not contain any pGPUs..
         /// </summary>
         public static string GPU_GROUP_CONTAINS_NO_PGPUS {
             get {
@@ -655,7 +655,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The GPU group contains active PGPUs and cannot be deleted..
+        ///   Looks up a localized string similar to The GPU group contains active pGPUs and cannot be deleted..
         /// </summary>
         public static string GPU_GROUP_CONTAINS_PGPU {
             get {
@@ -664,7 +664,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The GPU group contains active VGPUs and cannot be deleted..
+        ///   Looks up a localized string similar to The GPU group contains active vGPUs and cannot be deleted..
         /// </summary>
         public static string GPU_GROUP_CONTAINS_VGPU {
             get {
@@ -1834,7 +1834,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This PGPU is currently in use by running VMs..
+        ///   Looks up a localized string similar to This pGPU is currently in use by running VMs..
         /// </summary>
         public static string PGPU_IN_USE_BY_VM {
             get {
@@ -1843,7 +1843,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is insufficient capacity on this PGPU to run the VGPU..
+        ///   Looks up a localized string similar to There is insufficient capacity on this pGPU to run the vGPU..
         /// </summary>
         public static string PGPU_INSUFFICIENT_CAPACITY_FOR_VGPU {
             get {
@@ -1852,7 +1852,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PGPU type not compatible with destination group..
+        ///   Looks up a localized string similar to pGPU type not compatible with destination group..
         /// </summary>
         public static string PGPU_NOT_COMPATIBLE_WITH_GPU_GROUP {
             get {
@@ -4350,7 +4350,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VGPU type is not compatible with one or more of the VGPU types currently running on this PGPU.
+        ///   Looks up a localized string similar to vGPU type is not compatible with one or more of the vGPU types currently running on this pGPU.
         /// </summary>
         public static string VGPU_TYPE_NOT_COMPATIBLE_WITH_RUNNING_TYPE {
             get {
@@ -4359,7 +4359,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VGPU type is not one of the PGPU&apos;s enabled types..
+        ///   Looks up a localized string similar to vGPU type is not one of the pGPU&apos;s enabled types..
         /// </summary>
         public static string VGPU_TYPE_NOT_ENABLED {
             get {
@@ -4368,7 +4368,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VGPU type is not one of the PGPU&apos;s supported types..
+        ///   Looks up a localized string similar to vGPU type is not one of the pGPU&apos;s supported types..
         /// </summary>
         public static string VGPU_TYPE_NOT_SUPPORTED {
             get {

@@ -1825,7 +1825,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VCPUs idle.
+        ///   Looks up a localized string similar to vCPUs idle.
         /// </summary>
         public static string Label_performance_runstate_blocked {
             get {
@@ -1834,7 +1834,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VCPUs concurrency hazard.
+        ///   Looks up a localized string similar to vCPUs concurrency hazard.
         /// </summary>
         public static string Label_performance_runstate_concurrency_hazard {
             get {
@@ -1843,7 +1843,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VCPUs entry time.
+        ///   Looks up a localized string similar to vCPUs entry time.
         /// </summary>
         public static string Label_performance_runstate_entry_time {
             get {
@@ -1852,7 +1852,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VCPUs full contention.
+        ///   Looks up a localized string similar to vCPUs full contention.
         /// </summary>
         public static string Label_performance_runstate_full_contention {
             get {
@@ -1861,7 +1861,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VCPUs full run.
+        ///   Looks up a localized string similar to vCPUs full run.
         /// </summary>
         public static string Label_performance_runstate_fullrun {
             get {
@@ -1870,7 +1870,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VCPUs partial contention.
+        ///   Looks up a localized string similar to vCPUs partial contention.
         /// </summary>
         public static string Label_performance_runstate_partial_contention {
             get {
@@ -1879,7 +1879,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VCPUs partial run.
+        ///   Looks up a localized string similar to vCPUs partial run.
         /// </summary>
         public static string Label_performance_runstate_partial_run {
             get {
@@ -2842,7 +2842,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VCPU priority.
+        ///   Looks up a localized string similar to vCPU priority.
         /// </summary>
         public static string Label_VM_VCPUWeight {
             get {
@@ -4095,7 +4095,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM VCPU QoS Failed.
+        ///   Looks up a localized string similar to VM vCPU QoS Failed.
         /// </summary>
         public static string Message_name_vcpu_qos_failed {
             get {

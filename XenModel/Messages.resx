@@ -2862,10 +2862,10 @@ Please reconnect the host and try again.</value>
     <value>CPU and Memory</value>
   </data>
   <data name="CPU_AND_MEMORY_SUB" xml:space="preserve">
-    <value>{0} VCPU(s) &amp; {1} MB RAM</value>
+    <value>{0} vCPU(s) &amp; {1} MB RAM</value>
   </data>
   <data name="CPU_SUB" xml:space="preserve">
-    <value>{0} VCPU(s)</value>
+    <value>{0} vCPU(s)</value>
   </data>
   <data name="CREATEDVM_CLONE" xml:space="preserve">
     <value>Created '{0}' by cloning '{1}'</value>
@@ -10125,7 +10125,7 @@ Do you want to connect to the pool master '{1}'?</value>
     <value>XenServer Tools: Up to date</value>
   </data>
   <data name="TEMPLATE_INFO_VCPUS" xml:space="preserve">
-    <value>VCPUs: {0}</value>
+    <value>vCPUs: {0}</value>
   </data>
   <data name="TEMPLATE_LINUX_PACK_NEEDED" xml:space="preserve">
     <value>You must install the Linux pack to use this template</value>
@@ -11148,7 +11148,7 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
     <value>This VM uses local storage</value>
   </data>
   <data name="VM_VCPU_CHANGES_NOT_SUPPORTED_MESSAGE" xml:space="preserve">
-    <value>VCPU changes will take effect when you restart the VM.</value>
+    <value>vCPU changes will take effect when you restart the VM.</value>
   </data>
   <data name="VM_X" xml:space="preserve">
     <value>VM '{0}'</value>

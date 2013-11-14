@@ -394,7 +394,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="pdSectionMemoryAndVCPUs.SectionTitle" xml:space="preserve">
-    <value>Memory and VCPUs</value>
+    <value>Memory and vCPUs</value>
   </data>
   <data name="pdSectionMemoryAndVCPUs.Size" type="System.Drawing.Size, System.Drawing">
     <value>729, 34</value>

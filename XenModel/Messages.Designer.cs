@@ -7915,7 +7915,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} VCPU(s) &amp; {1} MB RAM.
+        ///   Looks up a localized string similar to {0} vCPU(s) &amp; {1} MB RAM.
         /// </summary>
         public static string CPU_AND_MEMORY_SUB {
             get {
@@ -7924,7 +7924,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} VCPU(s).
+        ///   Looks up a localized string similar to {0} vCPU(s).
         /// </summary>
         public static string CPU_SUB {
             get {
@@ -29201,7 +29201,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VCPUs: {0}.
+        ///   Looks up a localized string similar to vCPUs: {0}.
         /// </summary>
         public static string TEMPLATE_INFO_VCPUS {
             get {
@@ -32156,7 +32156,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VCPU changes will take effect when you restart the VM..
+        ///   Looks up a localized string similar to vCPU changes will take effect when you restart the VM..
         /// </summary>
         public static string VM_VCPU_CHANGES_NOT_SUPPORTED_MESSAGE {
             get {
