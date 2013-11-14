@@ -177,7 +177,7 @@ namespace XenAdmin.Controls.GPU
                 vGpusPerGpuColumn.Value = string.Empty;
 
             if (!isPassThru)
-                maxResolutionColumn.Value = "max res."; //VGpuType.max_res as soon as it is available in API
+                maxResolutionColumn.Value = VGpuType.MaxResolution;
 
             if (!isPassThru)
                 maxDisplaysColumn.Value = VGpuType.max_heads;
