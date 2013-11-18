@@ -449,11 +449,14 @@ namespace XenAdmin.TabPages
 
         private void ToolStripMenuItemDismiss_Click(object sender, EventArgs e)
         {
-            if (new ThreeButtonDialog(
+            using (var dlog = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_CONFIRM, Messages.XENCENTER),
                     ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo).ShowDialog(this) != DialogResult.Yes)
-                return;
+                    ThreeButtonDialog.ButtonNo))
+            {
+                if (dlog.ShowDialog(this) != DialogResult.Yes)
+                    return;
+            }
 
             Alert[] selectedAlerts = new Alert[GridViewAlerts.SelectedRows.Count];
             for (int i = 0; i < selectedAlerts.Length; i++)

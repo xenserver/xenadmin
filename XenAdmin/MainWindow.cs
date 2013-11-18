@@ -190,6 +190,7 @@ namespace XenAdmin
             pluginManager.LoadPlugins();
             contextMenuBuilder = new ContextMenuBuilder(pluginManager, commandInterface);
 
+            eventsPage.GoToXenObjectRequested += eventsPage_GoToXenObjectRequested;
             SearchPage.SearchChanged += SearchPanel_SearchChanged;
             Alert.XenCenterAlerts.CollectionChanged += XenCenterAlerts_CollectionChanged;
 
@@ -2360,6 +2361,12 @@ namespace XenAdmin
         public bool SelectObject(IXenObject o)
         {
             return navigationPane.SelectObject(o);
+        }
+
+        private void eventsPage_GoToXenObjectRequested(IXenObject obj)
+        {
+            navigationPane.SwitchToInfrastructureMode();
+            navigationPane.SelectObject(obj);
         }
 
         private void CloseWhenActionsCanceled(object o)

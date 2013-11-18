@@ -203,12 +203,20 @@ namespace XenAdmin.Controls.MainWindowControls
             navigationView.MajorChange(() => navigationView.SaveAndRestoreTreeViewFocus(f));
         }
 
-        public void SwitchToNotificationsView(NotificationsSubMode subMode)
+        public void SwitchToInfrastructureMode()
+        {
+            if (!buttonInfraBig.Checked)
+                buttonInfraBig.Checked = true;
+        }
+
+        private void SwitchToNotificationsView(NotificationsSubMode subMode)
         {
             //check the button if switching has been requested programmatically
             if (!buttonNotifyBig.Checked)
                 buttonNotifyBig.Checked = true;
 
+            //show the notificationsView first and then hide the navigationView
+            //to avoid instantaneous appearance of empty panels
             notificationsView.Visible = true;
             notificationsView.SelectNotificationsSubMode(subMode);
             navigationView.Visible = false;
@@ -267,15 +275,19 @@ namespace XenAdmin.Controls.MainWindowControls
             }
             else
             {
-                notificationsView.Visible = false;
+                //show the navigationView first and then hide the notificationsView
+                //to avoid instantaneous appearance of empty panels
                 navigationView.Visible = true;
+                notificationsView.Visible = false;
 
                 navigationView.CurrentSearch = Search;
                 navigationView.NavigationMode = currentMode;
                 navigationView.ResetSeachBox();
                 navigationView.RequestRefreshTreeView();
                 navigationView.FocusTreeView();
-                navigationView.SelectObject(null, false);
+
+                if (navigationView.SelectionManager.Selection.Count < 1)
+                    navigationView.SelectObject(null, false);
             }
 
             if (NavigationModeChanged != null)

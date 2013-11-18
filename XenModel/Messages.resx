@@ -6856,6 +6856,9 @@ This action is final and unrecoverable.</value>
   <data name="MESSAGEBOX_LOGS_DELETE" xml:space="preserve">
     <value>This will clear all non-active entries in the current view. Do you wish to continue?</value>
   </data>
+  <data name="MESSAGEBOX_LOGS_DELETE_SELECTED" xml:space="preserve">
+    <value>Do you wish to delete the selected entries?</value>
+  </data>
   <data name="MESSAGEBOX_LOGS_DELETE_TITLE" xml:space="preserve">
     <value>Clear entries</value>
   </data>
@@ -6863,7 +6866,7 @@ This action is final and unrecoverable.</value>
     <value>Are you sure you want to delete this entry?</value>
   </data>
   <data name="MESSAGEBOX_LOG_DELETE_TITLE" xml:space="preserve">
-    <value>Clear log entry</value>
+    <value>Clear entry</value>
   </data>
   <data name="MESSAGEBOX_MOVING_VDI_TITLE" xml:space="preserve">
     <value>Moving Virtual Disk</value>

@@ -51,6 +51,8 @@ namespace XenAdmin.TabPages
 
         private const int MAX_HISTORY_ITEM = 1000;
 
+        internal event Action<IXenObject> GoToXenObjectRequested;
+
         public HistoryPage()
         {
             InitializeComponent();
@@ -292,7 +294,8 @@ namespace XenAdmin.TabPages
 
         private void row_GoToXenObjectRequested(IXenObject obj)
         {
-            throw new NotImplementedException();
+            if (GoToXenObjectRequested != null)
+                GoToXenObjectRequested(obj);
         }
 
 
@@ -338,7 +341,25 @@ namespace XenAdmin.TabPages
 
         private void tsmiDismissSelected_Click(object sender, EventArgs e)
         {
+            using (var dlog = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOGS_DELETE_SELECTED, Messages.MESSAGEBOX_LOGS_DELETE_TITLE),
+                    ThreeButtonDialog.ButtonYes,
+                    ThreeButtonDialog.ButtonNo))
+            {
 
+                if (dlog.ShowDialog(this) != DialogResult.Yes)
+                    return;
+            }
+
+            var actions = new List<ActionBase>();
+            foreach (var row in dataGridView.SelectedRows)
+            {
+                var actionRow = row as DataGridViewActionRow;
+                if (actionRow != null)
+                    actions.Add(actionRow.Action);
+            }
+
+            ConnectionsManager.History.RemoveAll(actions.Contains);
         }
 
 
