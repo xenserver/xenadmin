@@ -31,6 +31,7 @@
 
 using System.ComponentModel;
 using System.Windows.Forms;
+using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAPI;
 
@@ -143,7 +144,9 @@ namespace XenAdmin.Controls
 
         private void editPlacementPolicyButton_Click(object sender, System.EventArgs e)
         {
-            using (PropertiesDialog propertiesDialog = new PropertiesDialog(xenObject))
+            var pool = Helpers.GetPoolOfOne(xenObject.Connection);
+
+            using (PropertiesDialog propertiesDialog = new PropertiesDialog(pool))
             {
                 propertiesDialog.SelectPage(propertiesDialog.PoolGpuEditPage);
                 propertiesDialog.ShowDialog(this);
