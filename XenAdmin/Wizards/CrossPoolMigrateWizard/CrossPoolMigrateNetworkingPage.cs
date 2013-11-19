@@ -29,7 +29,10 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using XenAdmin.Controls;
 using XenAdmin.Wizards.GenericPages;
 using XenAPI;
 
@@ -65,6 +68,18 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
             List<VIF> vifs = Connection.ResolveAll(vm.VIFs);
             return new CrossPoolMigrationNetworkResourceContainer(vifs);
+        }
+
+        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        {
+            if (!CrossPoolMigrateWizard.AllVMsAvailable(VmMappings, Connection))
+            {
+                cancel = true;
+                SetButtonNextEnabled(false);
+                SetButtonPreviousEnabled(false);
+            }
+
+            base.PageLeave(direction, ref cancel);
         }
     }
 }

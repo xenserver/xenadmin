@@ -204,8 +204,8 @@ namespace XenAdmin.Wizards.GenericPages
         public abstract DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem);
 
 		#region Private methods
-
-        private void SetButtonNextEnabled(bool enabled)
+        
+        protected void SetButtonNextEnabled(bool enabled)
         {
             m_buttonNextEnabled = enabled;
             OnPageUpdated();
