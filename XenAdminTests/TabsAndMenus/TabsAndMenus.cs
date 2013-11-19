@@ -78,17 +78,12 @@ namespace XenAdminTests.TabsAndMenus
         protected void VerifyContextMenu(object ixmo, ExpectedMenuItem[] expectedItems)
         {
             string ixmoString = (ixmo == null ? "XenCenter node" : ixmo.ToString());
-
-            // The easiest way to generate the context menu is to call TreeView_NodeMouseClick_ ourselves.
-            // So construct fake click event data.
             Assert.IsTrue(SelectInTree(ixmo), "Couldn't find a node for " + ixmoString + " in the tree");
-            
-
-            // Generate the TreeContextMenu
 
             MW(() =>
                 {
                     var tree = TestUtils.GetFlickerFreeTreeView(MainWindowWrapper.Item, "navigationPane.navigationView.treeView");
+                    // Generate the TreeContextMenu
                     var e = new VirtualTreeNodeMouseClickEventArgs(tree.SelectedNode, MouseButtons.Right, 1, 0, 0);
                     var view = TestUtils.GetNavigationView(MainWindowWrapper.Item, "navigationPane.navigationView");
                     TestUtils.ExecuteMethod(view, "HandleNodeRightClick", new object[] { e });

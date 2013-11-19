@@ -54,6 +54,19 @@ namespace XenAdmin.Controls.MainWindowControls
             Items.Add(new NotificationsSubModeItem(NotificationsSubMode.Events));
         }
 
+        public int GetTotalEntries()
+        {
+            int total = 0;
+            foreach (var item in Items)
+            {
+                var subModeItem = item as NotificationsSubModeItem;
+
+                if (subModeItem != null)
+                    total += subModeItem.UnreadEntries;
+            }
+            return total;
+        }
+
         public void UpdateEntries(NotificationsSubMode subMode, int entries)
         {
             foreach (var item in Items)
@@ -78,7 +91,12 @@ namespace XenAdmin.Controls.MainWindowControls
                
                 if (subModeItem != null && subModeItem.SubMode == subMode)
                 {
+                    var lastSelected = SelectedItem;
                     SelectedItem = item;
+
+                    if (lastSelected == SelectedItem)
+                        OnSelectedIndexChanged(EventArgs.Empty);
+                    
                     break;
                 }
             }
@@ -150,45 +168,52 @@ namespace XenAdmin.Controls.MainWindowControls
 
         public Image Image
         {
-            get
-            {
-                switch (SubMode)
-                {
-                    case NotificationsSubMode.Alerts:
-                        return Properties.Resources._000_Alert2_h32bit_16;
-                    case NotificationsSubMode.Updates:
-                        return Properties.Resources.tempUpdates;
-                    case NotificationsSubMode.Events:
-                        return UnreadEntries == 0
-                                   ? Properties.Resources._000_date_h32bit_16
-                                   : Properties.Resources.tempErrorEvents;
-                    default:
-                        return null;
-                }
-            }
+            get { return GetImage(SubMode, UnreadEntries); }
         }
 
         public string Text
         {
-            get
+            get { return GetText(SubMode, UnreadEntries); }
+        }
+
+        public static Image GetImage(NotificationsSubMode submode, int unreadEntries)
+        {
+            switch (submode)
             {
-                switch (SubMode)
-                {
-                    case NotificationsSubMode.Alerts:
-                        return UnreadEntries == 0
-                                   ? Messages.NOTIFICATIONS_SUBMODE_ALERTS_READ
-                                   : string.Format(Messages.NOTIFICATIONS_SUBMODE_ALERTS_UNREAD, UnreadEntries);
-                    case NotificationsSubMode.Updates:
-                        return UnreadEntries == 0
-                                   ? Messages.NOTIFICATIONS_SUBMODE_UPDATES_READ
-                                   : string.Format(Messages.NOTIFICATIONS_SUBMODE_UPDATES_UNREAD, UnreadEntries);
-                    case NotificationsSubMode.Events:
-                        return UnreadEntries == 0
-                                   ? Messages.NOTIFICATIONS_SUBMODE_EVENTS_READ
-                                   : string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_UNREAD, UnreadEntries);
-                    default:
-                        return "";
-                }
+                case NotificationsSubMode.Alerts:
+                    return Properties.Resources._000_Alert2_h32bit_16;
+                case NotificationsSubMode.Updates:
+                    return Properties.Resources.tempUpdates;
+                case NotificationsSubMode.Events:
+                    return unreadEntries == 0
+                               ? Properties.Resources._000_date_h32bit_16
+                               : Properties.Resources.tempErrorEvents;
+                default:
+                    return null;
+            }
+        }
+
+        public static string GetText(NotificationsSubMode submode, int unreadEntries)
+        {
+            switch (submode)
+            {
+                case NotificationsSubMode.Alerts:
+                    return unreadEntries == 0
+                               ? Messages.NOTIFICATIONS_SUBMODE_ALERTS_READ
+                               : string.Format(Messages.NOTIFICATIONS_SUBMODE_ALERTS_UNREAD, unreadEntries);
+                case NotificationsSubMode.Updates:
+                    return unreadEntries == 0
+                               ? Messages.NOTIFICATIONS_SUBMODE_UPDATES_READ
+                               : string.Format(Messages.NOTIFICATIONS_SUBMODE_UPDATES_UNREAD, unreadEntries);
+                case NotificationsSubMode.Events:
+                    if (unreadEntries == 0)
+                        return Messages.NOTIFICATIONS_SUBMODE_EVENTS_READ;
+                    else if (unreadEntries == 1)
+                        return Messages.NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_ONE;
+                    else
+                        return string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_MANY, unreadEntries);
+                default:
+                    return "";
             }
         }
     }

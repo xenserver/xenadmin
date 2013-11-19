@@ -53,6 +53,7 @@ namespace XenAdmin.Controls.MainWindowControls
         }
 
         private NavigationMode currentMode;
+        private NotificationsSubMode lastNotificationsMode = NotificationsSubMode.Alerts;
 
         #region Events
 
@@ -157,10 +158,10 @@ namespace XenAdmin.Controls.MainWindowControls
 
         #endregion
 
-        public void UpdateNotificationsButton()
+        public void UpdateNotificationsButton(NotificationsSubMode mode, int entries)
         {
-            buttonNotifyBig.Text = string.Format("Notifications ({0})", Alert.NonDismissingAlertCount);
-            notificationsView.UpdateEntries(NotificationsSubMode.Alerts, Alert.NonDismissingAlertCount);
+            notificationsView.UpdateEntries(mode, entries);
+            buttonNotifyBig.Text = string.Format("Notifications ({0})", notificationsView.GetTotalEntries());
         }
 
         public void XenConnectionCollectionChanged(CollectionChangeEventArgs e)
@@ -203,12 +204,20 @@ namespace XenAdmin.Controls.MainWindowControls
             navigationView.MajorChange(() => navigationView.SaveAndRestoreTreeViewFocus(f));
         }
 
-        public void SwitchToNotificationsView(NotificationsSubMode subMode)
+        public void SwitchToInfrastructureMode()
+        {
+            if (!buttonInfraBig.Checked)
+                buttonInfraBig.Checked = true;
+        }
+
+        private void SwitchToNotificationsView(NotificationsSubMode subMode)
         {
             //check the button if switching has been requested programmatically
             if (!buttonNotifyBig.Checked)
                 buttonNotifyBig.Checked = true;
 
+            //show the notificationsView first and then hide the navigationView
+            //to avoid instantaneous appearance of empty panels
             notificationsView.Visible = true;
             notificationsView.SelectNotificationsSubMode(subMode);
             navigationView.Visible = false;
@@ -263,19 +272,24 @@ namespace XenAdmin.Controls.MainWindowControls
         {
             if (currentMode == NavigationMode.Notifications)
             {
-                SwitchToNotificationsView(NotificationsSubMode.Alerts);
+                //restore the last selected view
+                SwitchToNotificationsView(lastNotificationsMode);
             }
             else
             {
-                notificationsView.Visible = false;
+                //show the navigationView first and then hide the notificationsView
+                //to avoid instantaneous appearance of empty panels
                 navigationView.Visible = true;
+                notificationsView.Visible = false;
 
                 navigationView.CurrentSearch = Search;
                 navigationView.NavigationMode = currentMode;
                 navigationView.ResetSeachBox();
                 navigationView.RequestRefreshTreeView();
                 navigationView.FocusTreeView();
-                navigationView.SelectObject(null, false);
+
+                if (navigationView.SelectionManager.Selection.Count < 1)
+                    navigationView.SelectObject(null, false);
             }
 
             if (NavigationModeChanged != null)
@@ -371,6 +385,8 @@ namespace XenAdmin.Controls.MainWindowControls
 
         private void notificationsView_NotificationsSubModeChanged(NotificationsSubModeItem subModeItem)
         {
+            lastNotificationsMode = subModeItem.SubMode;
+
             if (NotificationsSubModeChanged != null)
                 NotificationsSubModeChanged(subModeItem);
         }

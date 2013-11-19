@@ -66,6 +66,8 @@ namespace XenAdmin.TabPages
 
         Dictionary<string, bool> expandedState = new Dictionary<string, bool>();
 
+        public event Action<int> UpdatesCollectionChanged;
+
         private void CheckForUpdates_CheckForUpdatesCompleted(object sender, CheckForUpdatesCompletedEventArgs e)
         {
             Program.Invoke(this, delegate
@@ -74,7 +76,12 @@ namespace XenAdmin.TabPages
                                          ShowProgress(false);
                                          checkForUpdatesSucceeded = e.Succeeded;
                                          if (checkForUpdatesSucceeded)
+                                         {
                                              Rebuild();
+
+                                             if (UpdatesCollectionChanged != null)
+                                                 UpdatesCollectionChanged(updateAlerts.Count);
+                                         }
                                          else
                                          {
                                              pictureBox.Image = SystemIcons.Error.ToBitmap();

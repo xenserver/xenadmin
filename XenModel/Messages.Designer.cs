@@ -19666,7 +19666,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clear log entry.
+        ///   Looks up a localized string similar to Clear entry.
         /// </summary>
         public static string MESSAGEBOX_LOG_DELETE_TITLE {
             get {
@@ -19689,6 +19689,15 @@ namespace XenAdmin {
         public static string MESSAGEBOX_LOGS_DELETE {
             get {
                 return ResourceManager.GetString("MESSAGEBOX_LOGS_DELETE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you wish to delete the selected entries?.
+        /// </summary>
+        public static string MESSAGEBOX_LOGS_DELETE_SELECTED {
+            get {
+                return ResourceManager.GetString("MESSAGEBOX_LOGS_DELETE_SELECTED", resourceCulture);
             }
         }
         
@@ -23012,11 +23021,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Events ({0}).
+        ///   Looks up a localized string similar to Events ({0} errors).
         /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_EVENTS_UNREAD {
+        public static string NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_MANY {
             get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_UNREAD", resourceCulture);
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Events (1 error).
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_ONE {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_ONE", resourceCulture);
             }
         }
         
