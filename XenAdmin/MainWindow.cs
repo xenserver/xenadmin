@@ -190,6 +190,7 @@ namespace XenAdmin
             pluginManager.LoadPlugins();
             contextMenuBuilder = new ContextMenuBuilder(pluginManager, commandInterface);
 
+            updatesPage.UpdatesCollectionChanged += updatesPage_UpdatesCollectionChanged;
             eventsPage.GoToXenObjectRequested += eventsPage_GoToXenObjectRequested;
             SearchPage.SearchChanged += SearchPanel_SearchChanged;
             Alert.XenCenterAlerts.CollectionChanged += XenCenterAlerts_CollectionChanged;
@@ -366,26 +367,48 @@ namespace XenAdmin
                 return;
 
             Program.BeginInvoke(Program.MainWindow, () =>
-                                                        {
-                                                            ActionBase action = (ActionBase)e.Element;
-                                                            if (action == null)
-                                                                return;
+            {
+                ActionBase action = (ActionBase)e.Element;
+                if (action == null)
+                    return;
 
-                                                            var meddlingAction = action as MeddlingAction;
-                                                            if (meddlingAction == null)
-                                                            {
-                                                                SetStatusBar(null, null);
-                                                                if (statusBarAction != null)
-                                                                {
-                                                                    statusBarAction.Changed -= actionChanged;
-                                                                    statusBarAction.Completed -= actionChanged;
-                                                                }
-                                                                statusBarAction = action;
-                                                            }
-                                                            action.Changed += actionChanged;
-                                                            action.Completed += actionChanged;
-                                                            actionChanged(action);
-                                                        });
+                switch (e.Action)
+                {
+                    case CollectionChangeAction.Add:
+                        {
+                            var meddlingAction = action as MeddlingAction;
+                            if (meddlingAction == null)
+                            {
+                                SetStatusBar(null, null);
+                                if (statusBarAction != null)
+                                {
+                                    statusBarAction.Changed -= actionChanged;
+                                    statusBarAction.Completed -= actionChanged;
+                                }
+                                statusBarAction = action;
+                            }
+                            action.Changed += actionChanged;
+                            action.Completed += actionChanged;
+                            actionChanged(action);
+                            break;
+                        }
+                    case CollectionChangeAction.Remove:
+                        {
+                            action.Changed -= actionChanged;
+                            action.Completed -= actionChanged;
+                            
+                            int errors = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded);
+                            navigationPane.UpdateNotificationsButton(NotificationsSubMode.Events, errors);
+
+                            if (eventsPage.Visible)
+                            {
+                                TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Events, errors);
+                                TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Events, errors);
+                            }
+                            break;
+                        }
+                }
+            });
         }
 
         void actionChanged(ActionBase action)
@@ -435,6 +458,15 @@ namespace XenAdmin
                     !string.IsNullOrEmpty(action.Description) ? action.Description :
                     !string.IsNullOrEmpty(action.Title) ? action.Title :
                                                                 null);
+            }
+
+            int errors = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded);
+            navigationPane.UpdateNotificationsButton(NotificationsSubMode.Events, errors);
+
+            if (eventsPage.Visible)
+            {
+                TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Events, errors);
+                TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Events, errors);
             }
         }
 
@@ -2369,6 +2401,17 @@ namespace XenAdmin
             navigationPane.SelectObject(obj);
         }
 
+        private void updatesPage_UpdatesCollectionChanged(int updatesCount)
+        {
+            navigationPane.UpdateNotificationsButton(NotificationsSubMode.Updates, updatesCount);
+
+            if (updatesPage.Visible)
+            {
+                TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Updates, updatesCount);
+                TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Updates, updatesCount);
+            }
+        }
+
         private void CloseWhenActionsCanceled(object o)
         {
             int i = 0;
@@ -2615,10 +2658,10 @@ namespace XenAdmin
 
         private void navigationPane_NotificationsSubModeChanged(NotificationsSubModeItem submodeItem)
         {
-            TheTabControl.Visible = false;
             alertPage.Visible = submodeItem.SubMode == NotificationsSubMode.Alerts;
             updatesPage.Visible = submodeItem.SubMode == NotificationsSubMode.Updates;
             eventsPage.Visible = submodeItem.SubMode == NotificationsSubMode.Events;
+            TheTabControl.Visible = false;
 
             if (alertPage.Visible)
                 alertPage.RefreshAlertList();
@@ -2701,7 +2744,17 @@ namespace XenAdmin
 
         void XenCenterAlerts_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
-            Program.BeginInvoke(Program.MainWindow, navigationPane.UpdateNotificationsButton);
+            Program.BeginInvoke(Program.MainWindow, () =>
+                {
+                    navigationPane.UpdateNotificationsButton(
+                        NotificationsSubMode.Alerts, Alert.NonDismissingAlertCount);
+
+                    if (alertPage.Visible)
+                    {
+                        TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Alerts, Alert.NonDismissingAlertCount);
+                        TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Alerts, Alert.NonDismissingAlertCount);
+                    }
+                });
         }
 
         private void backButton_Click(object sender, EventArgs e)

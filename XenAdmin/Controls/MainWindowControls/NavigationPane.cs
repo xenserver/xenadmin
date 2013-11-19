@@ -53,6 +53,7 @@ namespace XenAdmin.Controls.MainWindowControls
         }
 
         private NavigationMode currentMode;
+        private NotificationsSubMode lastNotificationsMode = NotificationsSubMode.Alerts;
 
         #region Events
 
@@ -157,10 +158,10 @@ namespace XenAdmin.Controls.MainWindowControls
 
         #endregion
 
-        public void UpdateNotificationsButton()
+        public void UpdateNotificationsButton(NotificationsSubMode mode, int entries)
         {
-            buttonNotifyBig.Text = string.Format("Notifications ({0})", Alert.NonDismissingAlertCount);
-            notificationsView.UpdateEntries(NotificationsSubMode.Alerts, Alert.NonDismissingAlertCount);
+            notificationsView.UpdateEntries(mode, entries);
+            buttonNotifyBig.Text = string.Format("Notifications ({0})", notificationsView.GetTotalEntries());
         }
 
         public void XenConnectionCollectionChanged(CollectionChangeEventArgs e)
@@ -271,7 +272,8 @@ namespace XenAdmin.Controls.MainWindowControls
         {
             if (currentMode == NavigationMode.Notifications)
             {
-                SwitchToNotificationsView(NotificationsSubMode.Alerts);
+                //restore the last selected view
+                SwitchToNotificationsView(lastNotificationsMode);
             }
             else
             {
@@ -383,6 +385,8 @@ namespace XenAdmin.Controls.MainWindowControls
 
         private void notificationsView_NotificationsSubModeChanged(NotificationsSubModeItem subModeItem)
         {
+            lastNotificationsMode = subModeItem.SubMode;
+
             if (NotificationsSubModeChanged != null)
                 NotificationsSubModeChanged(subModeItem);
         }

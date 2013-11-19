@@ -7946,8 +7946,11 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_READ" xml:space="preserve">
     <value>Events</value>
   </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD" xml:space="preserve">
-    <value>Events ({0})</value>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_MANY" xml:space="preserve">
+    <value>Events ({0} errors)</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_ONE" xml:space="preserve">
+    <value>Events (1 error)</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_UPDATES_READ" xml:space="preserve">
     <value>Updates</value>

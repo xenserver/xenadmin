@@ -23021,11 +23021,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Events ({0}).
+        ///   Looks up a localized string similar to Events ({0} errors).
         /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_EVENTS_UNREAD {
+        public static string NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_MANY {
             get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_UNREAD", resourceCulture);
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Events (1 error).
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_ONE {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_ONE", resourceCulture);
             }
         }
         
