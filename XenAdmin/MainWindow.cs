@@ -1176,7 +1176,7 @@ namespace XenAdmin
         /// </summary>
         public void RequestRefreshTreeView()
         {
-            navigationPane.RequestRefreshTreeView();
+            Program.Invoke(this, navigationPane.RequestRefreshTreeView);
         }
 
         private void UpdateHeaderAndTabPages()

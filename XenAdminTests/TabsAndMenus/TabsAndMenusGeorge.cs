@@ -401,7 +401,7 @@ namespace XenAdminTests.TabsAndMenus
                 expectedMenuItems.Add(new ExpectedTextMenuItem("S&uspend", true));
                 expectedMenuItems.Add(new ExpectedTextMenuItem("Reb&oot", true));
                 expectedMenuItems.Add(new ExpectedSeparator());
-                expectedMenuItems.Add(new ExpectedTextMenuItem("Force Shutdo&wn", true));
+                expectedMenuItems.Add(new ExpectedTextMenuItem("Force Shut Do&wn", true));
                 expectedMenuItems.Add(new ExpectedTextMenuItem("Force Re&boot", true));
                 expectedMenuItems.Add(new ExpectedSeparator());
 
@@ -445,7 +445,7 @@ namespace XenAdminTests.TabsAndMenus
             foreach (VM vm in GetAllXenObjects<VM>(NoTools))
             {
                 VerifyContextMenu(vm, new ExpectedMenuItem[] {
-                    new ExpectedTextMenuItem("Force Shutdo&wn", true),
+                    new ExpectedTextMenuItem("Force Shut Do&wn", true),
                     new ExpectedTextMenuItem("Force Re&boot", true),
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("Ta&ke a Snapshot...", true),
