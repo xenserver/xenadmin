@@ -4745,9 +4745,6 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="FORCE_REBOOT" xml:space="preserve">
     <value>Force Reboot</value>
   </data>
-  <data name="FORCE_SHUTDOWN" xml:space="preserve">
-    <value>Force Shut down</value>
-  </data>
   <data name="FORGETTING_SRS" xml:space="preserve">
     <value>Forgetting SRs</value>
   </data>
@@ -6443,10 +6440,10 @@ This will permanently delete and reinitialize all local storage on the servers. 
     <value>Force Re&amp;boot</value>
   </data>
   <data name="MAINWINDOW_FORCE_SHUTDOWN" xml:space="preserve">
-    <value>Force Shut&amp;down</value>
+    <value>Force Shut &amp;Down</value>
   </data>
   <data name="MAINWINDOW_FORCE_SHUTDOWN_CONTEXT_MENU" xml:space="preserve">
-    <value>Force Shutdo&amp;wn</value>
+    <value>Force Shut Do&amp;wn</value>
   </data>
   <data name="MAINWINDOW_FORGET_SAVED_PASSWORD" xml:space="preserve">
     <value>&amp;Forget</value>
