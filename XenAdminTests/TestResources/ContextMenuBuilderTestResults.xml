@@ -1270,7 +1270,7 @@
 			<ToolStripItem Text="S&amp;uspend" IsSeparator="False" Bold="False" Available="True" Index="2" />
 			<ToolStripItem Text="Reb&amp;oot" IsSeparator="False" Bold="False" Available="True" Index="3" />
 			<ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="4" />
-			<ToolStripItem Text="Force Shutdo&amp;wn" IsSeparator="False" Bold="False" Available="True" Index="5" />
+			<ToolStripItem Text="Force Shut Do&amp;wn" IsSeparator="False" Bold="False" Available="True" Index="5" />
 			<ToolStripItem Text="Force Re&amp;boot" IsSeparator="False" Bold="False" Available="True" Index="6" />
 			<ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="7" />
 			<ToolStripItem Text="Start on Ser&amp;ver" IsSeparator="False" Bold="False" Available="True" Index="8" />
@@ -1315,7 +1315,7 @@
 			<ToolStripItem Text="S&amp;uspend" IsSeparator="False" Bold="False" Available="True" Index="2" />
 			<ToolStripItem Text="Reb&amp;oot" IsSeparator="False" Bold="False" Available="True" Index="3" />
 			<ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="4" />
-			<ToolStripItem Text="Force Shutdo&amp;wn" IsSeparator="False" Bold="False" Available="True" Index="5" />
+			<ToolStripItem Text="Force Shut Do&amp;wn" IsSeparator="False" Bold="False" Available="True" Index="5" />
 			<ToolStripItem Text="Force Re&amp;boot" IsSeparator="False" Bold="False" Available="True" Index="6" />
 			<ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="7" />
 			<ToolStripItem Text="Start on Ser&amp;ver" IsSeparator="False" Bold="False" Available="True" Index="8" />
@@ -1337,7 +1337,7 @@
 			<ToolStripItem Text="S&amp;uspend" IsSeparator="False" Bold="False" Available="True" Index="1" />
 			<ToolStripItem Text="Reb&amp;oot" IsSeparator="False" Bold="False" Available="True" Index="2" />
 			<ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="3" />
-			<ToolStripItem Text="Force Shutdo&amp;wn" IsSeparator="False" Bold="False" Available="True" Index="4" />
+			<ToolStripItem Text="Force Shut Do&amp;wn" IsSeparator="False" Bold="False" Available="True" Index="4" />
 			<ToolStripItem Text="Force Re&amp;boot" IsSeparator="False" Bold="False" Available="True" Index="5" />
 			<ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="6" />
 			<ToolStripItem Text="M&amp;igrate to Server" IsSeparator="False" Bold="False" Available="True" Index="7" />
@@ -1446,7 +1446,7 @@
 		<ToolStripItems>
 			<ToolStripItem Text="S&amp;tart" IsSeparator="False" Bold="False" Available="True" Index="0" />
 			<ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="1" />
-			<ToolStripItem Text="Force Shutdo&amp;wn" IsSeparator="False" Bold="False" Available="True" Index="2" />
+			<ToolStripItem Text="Force Shut Do&amp;wn" IsSeparator="False" Bold="False" Available="True" Index="2" />
 			<ToolStripItem Text="Force Re&amp;boot" IsSeparator="False" Bold="False" Available="True" Index="3" />
 			<ToolStripItem Text="" IsSeparator="True" Bold="False" Available="True" Index="4" />
 			<ToolStripItem Text="Start on Ser&amp;ver" IsSeparator="False" Bold="False" Available="True" Index="5" />

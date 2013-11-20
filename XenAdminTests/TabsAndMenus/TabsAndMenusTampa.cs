@@ -276,7 +276,7 @@ namespace XenAdminTests.TabsAndMenus
                 expectedMenuItems.Add(new ExpectedTextMenuItem("S&uspend", true));
                 expectedMenuItems.Add(new ExpectedTextMenuItem("Reb&oot", true));
                 expectedMenuItems.Add(new ExpectedSeparator());
-                expectedMenuItems.Add(new ExpectedTextMenuItem("Force Shutdo&wn", true));
+                expectedMenuItems.Add(new ExpectedTextMenuItem("Force Shut Do&wn", true));
                 expectedMenuItems.Add(new ExpectedTextMenuItem("Force Re&boot", true));
                 expectedMenuItems.Add(new ExpectedSeparator());
 
