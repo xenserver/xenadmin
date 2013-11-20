@@ -161,7 +161,7 @@ namespace XenAdmin.Controls.MainWindowControls
         public void UpdateNotificationsButton(NotificationsSubMode mode, int entries)
         {
             notificationsView.UpdateEntries(mode, entries);
-            buttonNotifyBig.Text = string.Format("Notifications ({0})", notificationsView.GetTotalEntries());
+            buttonNotifyBig.Text = buttonNotifySmall.Text = string.Format("Notifications ({0})", notificationsView.GetTotalEntries());
         }
 
         public void XenConnectionCollectionChanged(CollectionChangeEventArgs e)
