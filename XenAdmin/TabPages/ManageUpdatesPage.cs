@@ -52,8 +52,6 @@ namespace XenAdmin.TabPages
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly ManualCheckForUpdates manualCheck = new ManualCheckForUpdates();
-
         //Maintain a list of all the objects we currently have events on for clearing out on rebuild
         private List<IXenConnection> connectionsWithEvents = new List<IXenConnection>();
         private List<Pool> poolsWithEvents = new List<Pool>();
@@ -78,7 +76,7 @@ namespace XenAdmin.TabPages
 
                      if (checkForUpdatesSucceeded)
                      {
-                         alertCount = manualCheck.UpdateAlerts.Count;
+                         alertCount = Updates.UpdateAlerts.Count;
 
                          if (alertCount > 0)
                              panelProgress.Visible = false;
@@ -110,7 +108,7 @@ namespace XenAdmin.TabPages
             InitializeProgressControls();
             InformationHelperVisible = false;
             informationLabel.Click += informationLabel_Click;
-            manualCheck.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
+            Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
         }
 
         public void CancelUpdateCheck()
@@ -223,7 +221,7 @@ namespace XenAdmin.TabPages
 
                 dataGridViewUpdates.Rows.Clear();
 
-                if (manualCheck.UpdateAlerts.Count == 0)
+                if (Updates.UpdateAlerts.Count == 0)
                 {
                     panelProgress.Visible = true;
                     pictureBoxProgress.Image = SystemIcons.Information.ToBitmap();
@@ -234,7 +232,7 @@ namespace XenAdmin.TabPages
 
                 panelProgress.Visible = false;
 
-                foreach (var myAlert in manualCheck.UpdateAlerts)
+                foreach (var myAlert in Updates.UpdateAlerts)
                     dataGridViewUpdates.Rows.Add(NewUpdateRow(myAlert));
 
                 if (sortedColumn == null)
@@ -419,7 +417,7 @@ namespace XenAdmin.TabPages
             spinningTimer.Start();
             panelProgress.Visible = true;
             labelProgress.Text = Messages.AVAILABLE_UPDATES_SEARCHING;
-            manualCheck.RunCheck();
+            Updates.RunCheck();
         }
 
         private void OpenGoToWebsiteLink()

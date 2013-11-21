@@ -2418,7 +2418,6 @@
       <DependentUpon>SearchOutput.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\CueBannersManager.cs" />
-    <Compile Include="Core\ManualCheckForUpdates.cs" />
     <Compile Include="Core\VMGroup.cs" />
     <Compile Include="Controls\DataGridViewEx\PoolHostDataGridViewOneCheckbox.cs">
       <SubType>Component</SubType>
