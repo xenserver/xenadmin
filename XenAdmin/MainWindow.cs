@@ -193,7 +193,7 @@ namespace XenAdmin
             updatesPage.UpdatesCollectionChanged += updatesPage_UpdatesCollectionChanged;
             eventsPage.GoToXenObjectRequested += eventsPage_GoToXenObjectRequested;
             SearchPage.SearchChanged += SearchPanel_SearchChanged;
-            Alert.XenCenterAlerts.CollectionChanged += XenCenterAlerts_CollectionChanged;
+            Alert.RegisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
 
             FormFontFixer.Fix(this);
 
@@ -774,8 +774,7 @@ namespace XenAdmin
         {
             IXenConnection connection = (IXenConnection)sender;
             closeActiveWizards(connection);
-            lock (Alert.XenCenterAlertsLock)
-                Alert.XenCenterAlerts.RemoveAll(new Predicate<Alert>(delegate(Alert alert) { return alert.Connection != null && alert.Connection.Equals(connection); }));
+            Alert.RemoveAlert(alert => alert.Connection != null && alert.Connection.Equals(connection));
         }
 
         void connection_CachePopulated(object sender, EventArgs e)

@@ -71,7 +71,7 @@ namespace XenAdmin.TabPages
             UpdateActionEnablement();
 
             m_alertCollectionChangedWithInvoke = Program.ProgramInvokeHandler(AlertsCollectionChanged);
-            Alert.XenCenterAlerts.CollectionChanged += m_alertCollectionChangedWithInvoke;
+            Alert.RegisterAlertCollectionChanged(m_alertCollectionChangedWithInvoke);
 
             toolStripSplitButtonDismiss.DefaultItem = tsmiDismissAll;
             toolStripSplitButtonDismiss.Text = tsmiDismissAll.Text;
@@ -541,17 +541,17 @@ namespace XenAdmin.TabPages
 
             foreach (IXenConnection c in alertGroups.Keys)
             {
-                _DismissAlerts(c, alertGroups[c]);
+                DismissAlerts(c, alertGroups[c]);
             }
 
             if (local_alerts.Count > 0)
-                _DismissAlerts(null, local_alerts);
+                DismissAlerts(null, local_alerts);
         }
 
         /// <param name="connection">
         /// May be null, in which case this is expected to be for client-side alerts.
         /// </param>
-        private static void _DismissAlerts(IXenConnection connection, List<Alert> alerts)
+        private static void DismissAlerts(IXenConnection connection, List<Alert> alerts)
         {
             new DeleteAllAlertsAction(connection, alerts).RunAsync();
         }

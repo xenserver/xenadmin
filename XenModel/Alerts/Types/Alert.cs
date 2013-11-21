@@ -31,6 +31,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+
 using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.Core;
@@ -41,8 +43,8 @@ namespace XenAdmin.Alerts
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public readonly static object XenCenterAlertsLock = new object();
-        public readonly static ChangeableList<Alert> XenCenterAlerts = new ChangeableList<Alert>();
+        private readonly static object XenCenterAlertsLock = new object();
+        private readonly static ChangeableList<Alert> XenCenterAlerts = new ChangeableList<Alert>();
 
         public bool Dismissing;
 
@@ -74,21 +76,25 @@ namespace XenAdmin.Alerts
             log.InfoFormat("Removed {0}: {1} - {2}", a.GetType().Name, a.Title, a.DescriptionInvariant);
         }
 
+        public static void RemoveAlert(Predicate<Alert> predicate)
+        {
+            lock (XenCenterAlertsLock)
+                XenCenterAlerts.RemoveAll(predicate);
+        }
+
         /// <summary>
         /// Find the Alert in the alert collection, or null if none exists.
         /// </summary>
-        /// <param name="m"></param>
         public static Alert FindAlert(Alert alert)
         {
             lock (XenCenterAlertsLock)
-            {
-                foreach (Alert a in XenCenterAlerts)
-                {
-                    if (a.Equals(alert))
-                        return a;
-                }
-            }
-            return null;
+                return FindAlert(a => a.Equals(alert));
+        }
+
+        public static Alert FindAlert(Predicate<Alert> predicate)
+        {
+            lock (XenCenterAlertsLock)
+                return XenCenterAlerts.Find(predicate);
         }
 
         /// <summary>
@@ -166,6 +172,16 @@ namespace XenAdmin.Alerts
         public Alert()
         {
             uuid = Guid.NewGuid().ToString();
+        }
+
+        public static void RegisterAlertCollectionChanged(CollectionChangeEventHandler handler)
+        {
+            XenCenterAlerts.CollectionChanged += handler;
+        }
+
+        public static void DeregisterAlertCollectionChanged(CollectionChangeEventHandler handler)
+        {
+            XenCenterAlerts.CollectionChanged -= handler;
         }
 
         /// <summary>

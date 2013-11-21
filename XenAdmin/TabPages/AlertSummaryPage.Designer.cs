@@ -15,7 +15,7 @@ namespace XenAdmin.TabPages
         {
             if (disposing)
             {
-                XenAdmin.Alerts.Alert.XenCenterAlerts.CollectionChanged -= m_alertCollectionChangedWithInvoke;
+                XenAdmin.Alerts.Alert.DeregisterAlertCollectionChanged(m_alertCollectionChangedWithInvoke);
 
                 if (components != null)
                     components.Dispose();
