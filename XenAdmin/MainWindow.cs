@@ -854,8 +854,7 @@ namespace XenAdmin
 
             if(licenseTimer != null)
                 licenseTimer.CheckActiveServerLicense(connection, false);
-            Updates.CheckServerPatches();
-            Updates.CheckServerVersion();
+
             RequestRefreshTreeView();
         }
 
@@ -952,9 +951,6 @@ namespace XenAdmin
                 case "other_config":
                     // other_config may contain HideFromXenCenter
                     UpdateToolbars();
-                    // other_config contains which patches to ignore
-                    Updates.CheckServerPatches();
-                    Updates.CheckServerVersion();
                     break;
 
                 case "name_label":

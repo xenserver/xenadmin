@@ -417,7 +417,7 @@ namespace XenAdmin.TabPages
             spinningTimer.Start();
             panelProgress.Visible = true;
             labelProgress.Text = Messages.AVAILABLE_UPDATES_SEARCHING;
-            Updates.RunCheck();
+            Updates.CheckForUpdates();
         }
 
         private void OpenGoToWebsiteLink()
