@@ -550,11 +550,16 @@ namespace XenAdmin
 
                 // start checkforupdates thread
                 CheckForUpdatesTimer.Interval = 1000 * 60 * 60 * 24; // 24 hours
-                CheckForUpdatesTimer.Tick += Updates.Tick;
+                CheckForUpdatesTimer.Tick += CheckForUpdatesTimer_Tick;
                 CheckForUpdatesTimer.Start();
                 Updates.AutomaticCheckForUpdates();
             }
             ProcessCommand(CommandLineArgType, CommandLineParam);
+        }
+
+        private void CheckForUpdatesTimer_Tick(object sender, EventArgs e)
+        {
+            Updates.AutomaticCheckForUpdates();
         }
 
         private void LoadTasksAsMeddlingActions(IXenConnection connection)

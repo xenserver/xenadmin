@@ -69,7 +69,7 @@ namespace XenAdmin.Alerts
         /// <summary>
         /// Can we apply this alert. Calling this sets the CannotApplyReason where applicable
         /// </summary>
-        public override bool CanApply
+        public bool CanApply
         {
             get 
             { 

@@ -33,8 +33,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using XenAdmin.Actions;
-using System.Windows.Forms;
-using XenAdmin.Dialogs;
 using XenAPI;
 using XenAdmin.Alerts;
 using XenAdmin.Network;
@@ -348,14 +346,6 @@ namespace XenAdmin.Core
                 return null;
 
             return alert;
-        }
-
-        /// <summary>
-        /// Equivalent to CheckForUpdates().
-        /// </summary>
-        internal static void Tick(object sender, EventArgs e)
-        {
-            AutomaticCheckForUpdates();
         }
     }
 }

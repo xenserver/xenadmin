@@ -40,9 +40,7 @@ namespace XenAdmin.Core
 {
     class ManualCheckForUpdates
     {
-        private static List<XenCenterVersion> XenCenterVersions = new List<XenCenterVersion>();
-        private static List<XenServerVersion> XenServerVersions = new List<XenServerVersion>();
-        private static List<XenServerPatch> XenServerPatches = new List<XenServerPatch>();
+        private readonly List<Alert> updateAlerts = new List<Alert>();
 
         public event Action<bool, string> CheckForUpdatesCompleted;
 
@@ -53,35 +51,7 @@ namespace XenAdmin.Core
 
         public List<Alert> UpdateAlerts
         {
-            get
-            {
-                List<Alert> updateAlerts = new List<Alert>();
-                XenCenterUpdateAlert xenCenterAlert = Updates.NewXenCenterVersionAlert(XenCenterVersions, false);
-                if (xenCenterAlert != null)
-                {
-                    updateAlerts.Add(xenCenterAlert);
-                }
-
-                XenServerUpdateAlert xenServerUpdateAlert = Updates.NewServerVersionAlert(XenServerVersions, false);
-                if (xenServerUpdateAlert != null)
-                {
-                    updateAlerts.Add(xenServerUpdateAlert);
-                }
-
-                List<XenServerPatchAlert> xenServerPatchAlerts = Updates.NewServerPatchesAlerts(XenServerVersions,
-                                                                                                XenServerPatches,
-                                                                                                false);
-
-                if (xenServerPatchAlerts != null)
-                {
-                    foreach (var xenServerPatchAlert in xenServerPatchAlerts)
-                    {
-                        updateAlerts.Add(xenServerPatchAlert);
-                    }
-                }
-
-                return updateAlerts;
-            }
+            get { return updateAlerts; }
         }
 
         private void actionCompleted(ActionBase sender)
@@ -95,18 +65,27 @@ namespace XenAdmin.Core
             if (action != null)
             {
                 succeeded = action.Succeeded;
+                updateAlerts.Clear();
+
                 if (succeeded)
                 {
-                    XenCenterVersions = action.XenCenterVersions;
-                    XenServerVersions = action.XenServerVersions;
-                    XenServerPatches = action.XenServerPatches;
+                    var xenCenterAlert = Updates.NewXenCenterVersionAlert(action.XenCenterVersions, false);
+                    if (xenCenterAlert != null)
+                        updateAlerts.Add(xenCenterAlert);
+
+                    var xenServerUpdateAlert = Updates.NewServerVersionAlert(action.XenServerVersions, false);
+                    if (xenServerUpdateAlert != null)
+                        updateAlerts.Add(xenServerUpdateAlert);
+
+                    var xenServerPatchAlerts = Updates.NewServerPatchesAlerts(action.XenServerVersions, action.XenServerPatches, false);
+                    if (xenServerPatchAlerts != null)
+                    {
+                        foreach (var xenServerPatchAlert in xenServerPatchAlerts)
+                            updateAlerts.Add(xenServerPatchAlert);
+                    }
                 }
                 else
                 {
-                    XenCenterVersions.Clear();
-                    XenServerVersions.Clear();
-                    XenServerPatches.Clear();
-
                     if (action.Exception != null)
                     {
                         if (action.Exception is System.Net.Sockets.SocketException)

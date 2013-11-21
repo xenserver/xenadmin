@@ -48,11 +48,6 @@ namespace XenAdmin.Alerts
 
         public bool Dismissing;
 
-        public virtual bool CanApply
-        {
-            get { return true; }
-        }
-
         public string CannotApplyReason { get; set; }
 
         public static void AddAlert(Alert a)
