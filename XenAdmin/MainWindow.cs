@@ -2667,7 +2667,7 @@ namespace XenAdmin
                 alertPage.RefreshAlertList();
 
             if (updatesPage.Visible)
-                updatesPage.RefreshUpdateList();
+                updatesPage.CheckForUpdates();
             else
                 updatesPage.CancelUpdateCheck();
 

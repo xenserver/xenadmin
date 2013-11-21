@@ -44,11 +44,7 @@ namespace XenAdmin.Core
         private static List<XenServerVersion> XenServerVersions = new List<XenServerVersion>();
         private static List<XenServerPatch> XenServerPatches = new List<XenServerPatch>();
 
-        public event EventHandler<CheckForUpdatesCompletedEventArgs> CheckForUpdatesCompleted;
-
-        public ManualCheckForUpdates()
-        {
-        }
+        public event Action<bool, string> CheckForUpdatesCompleted;
 
         public void RunCheck()
         {
@@ -134,21 +130,7 @@ namespace XenAdmin.Core
             }
 
             if (CheckForUpdatesCompleted != null)
-            {
-                CheckForUpdatesCompleted(this, new CheckForUpdatesCompletedEventArgs(succeeded, errorMessage));
-            }
-        }
-    }
-
-    public class CheckForUpdatesCompletedEventArgs : EventArgs
-    {
-        public bool Succeeded { get; set; }
-        public string ErrorMessage { get; set; }
-
-        public CheckForUpdatesCompletedEventArgs(bool succeeded, string errorMessage)
-        {
-            Succeeded = succeeded;
-            ErrorMessage = errorMessage;
+                CheckForUpdatesCompleted(succeeded, errorMessage);
         }
     }
 }
