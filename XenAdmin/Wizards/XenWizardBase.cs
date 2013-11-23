@@ -32,9 +32,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 using XenAdmin.Controls;
@@ -43,7 +40,7 @@ using XenAdmin.Network;
 
 namespace XenAdmin.Wizards
 {
-    public partial class XenWizardBase : Form
+    public partial class XenWizardBase : XenCenterForm
     {
         protected static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 

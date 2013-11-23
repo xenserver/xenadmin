@@ -32,16 +32,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Network;
 using XenAdmin.Core;
 
 namespace XenAdmin.Dialogs
 {
-    public partial class XenDialogBase : Form
+    public partial class XenDialogBase : XenCenterForm
     {
         private static Dictionary<IXenConnection, List<XenDialogBase>> instances = new Dictionary<IXenConnection, List<XenDialogBase>>();
 

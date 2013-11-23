@@ -135,7 +135,9 @@ namespace XenAdmin
             InitializeComponent();
             SetMenuItemStartIndexes();
             Icon = Properties.Resources.AppIcon;
-            
+
+            #region Add Tab pages
+
             components.Add(NICPage);
             components.Add(VMStoragePage);
             components.Add(SrStoragePage);
@@ -170,6 +172,8 @@ namespace XenAdmin
             AddTabContents(GpuPage, TabPageGPU);
             AddTabContents(SearchPage, TabPageSearch);
 
+            #endregion
+
             TheTabControl.SelectedIndexChanged += TheTabControl_SelectedIndexChanged;
             navigationPane.DragDropCommandActivated += navigationPane_DragDropCommandActivated;
 
@@ -198,7 +202,6 @@ namespace XenAdmin
             FormFontFixer.Fix(this);
 
             Folders.InitFolders();
-
             OtherConfigAndTagsWatcher.InitEventHandlers();
 
             // Fix colour of text on gradient panels
@@ -206,6 +209,8 @@ namespace XenAdmin
             loggedInLabel1.SetTextColor(Program.TitleBarForeColor);
 
             statusProgressBar.Visible = false;
+            windowToolStripMenuItem.Enabled = false;
+            XenCenterForm.ApplicationOpenFormsChanged += XenCenterForm_ApplicationOpenFormsChanged;
 
             SelectionManager.BindTo(MainMenuBar.Items, commandInterface);
             SelectionManager.BindTo(ToolStrip.Items, commandInterface);
@@ -213,6 +218,20 @@ namespace XenAdmin
 
             licenseTimer = new LicenseTimer(licenseManagerLauncher);
             GeneralPage.LicenseLauncher = licenseManagerLauncher;
+        }
+
+        private void XenCenterForm_ApplicationOpenFormsChanged()
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form != this && form.Text != "" && !(form is ConnectingToServerDialog))
+                {
+                    windowToolStripMenuItem.Enabled = true;
+                    return;
+                }
+            }
+
+            windowToolStripMenuItem.Enabled = false;
         }
 
         private void Default_SettingChanging(object sender, SettingChangingEventArgs e)

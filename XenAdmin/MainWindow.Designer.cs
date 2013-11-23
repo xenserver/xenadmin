@@ -33,6 +33,7 @@ namespace XenAdmin
 
             ConnectionsManager.History.CollectionChanged -= History_CollectionChanged;
             Alert.DeregisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
+            XenCenterForm.ApplicationOpenFormsChanged -= XenCenterForm_ApplicationOpenFormsChanged;
             ConnectionsManager.XenConnections.CollectionChanged -= XenConnection_CollectionChanged;
             Program.StorageLinkConnections.CollectionChanged -= StorageLinkConnections_CollectionChanged;
             Program.StorageLinkConnections.Dispose();
