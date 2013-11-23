@@ -708,7 +708,6 @@
     <Compile Include="Controls\CustomGridView\GridView.Designer.cs">
       <DependentUpon>GridView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CustomHistoryPanel\ActionRow.cs" />
     <Compile Include="Dialogs\InputPromptDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -861,19 +860,6 @@
     <Compile Include="Dialogs\ChangeServerPasswordDialog.Designer.cs">
       <DependentUpon>ChangeServerPasswordDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CustomHistoryPanel\CustomHistoryContainer.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\CustomHistoryPanel\CustomHistoryContainer.Designer.cs">
-      <DependentUpon>CustomHistoryContainer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\CustomHistoryPanel\CustomHistoryPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\CustomHistoryPanel\CustomHistoryPanel.Designer.cs">
-      <DependentUpon>CustomHistoryPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\CustomHistoryPanel\CustomHistoryRow.cs" />
     <Compile Include="Controls\CustomListPanel\CustomListItem.cs" />
     <Compile Include="Controls\CustomListPanel\CustomListPanel.cs">
       <SubType>Component</SubType>
@@ -1819,10 +1805,6 @@
       <DependentUpon>ChangeServerPasswordDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\CustomHistoryPanel\CustomHistoryContainer.resx">
-      <DependentUpon>CustomHistoryContainer.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\CustomListPanel\CustomListPanel.resx">
       <DependentUpon>CustomListPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -2592,7 +2574,7 @@
     <Compile Include="SettingsPanels\GpuEditPage.Designer.cs">
       <DependentUpon>GpuEditPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="TabPages\ActionBaseExtensions.cs" />
+    <Compile Include="Core\ActionBaseExtensions.cs" />
     <Compile Include="TabPages\GeneralTabLicenseStatusStringifier.cs" />
     <Compile Include="Utils\TemporaryDisablerForControls.cs" />
     <Compile Include="WinformsXenAdminConfigProvider.cs" />
@@ -4450,12 +4432,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CustomGridView\GridView.zh-CN.resx">
       <DependentUpon>GridView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\CustomHistoryPanel\CustomHistoryContainer.ja.resx">
-      <DependentUpon>CustomHistoryContainer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\CustomHistoryPanel\CustomHistoryContainer.zh-CN.resx">
-      <DependentUpon>CustomHistoryContainer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CustomListPanel\CustomListPanel.ja.resx">
       <DependentUpon>CustomListPanel.cs</DependentUpon>

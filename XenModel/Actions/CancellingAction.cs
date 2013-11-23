@@ -59,12 +59,12 @@ namespace XenAdmin.Actions
         /// </summary>
         private volatile bool cancelled = false;
 
-        public CancellingAction(string title, string description, bool suppressHistory) 
+        protected CancellingAction(string title, string description, bool suppressHistory) 
             : base(title, description, suppressHistory)
         {
         }
 
-        public CancellingAction(string title, string description, bool suppressHistory, bool completeImmediately)
+        protected CancellingAction(string title, string description, bool suppressHistory, bool completeImmediately)
             : base(title, description, suppressHistory, completeImmediately)
         {
         }
