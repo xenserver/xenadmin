@@ -2115,6 +2115,7 @@
     <Content Include="AppIcon.ico" />
     <Compile Include="Actions\GUIActions\MeddlingActionManager.cs" />
     <Compile Include="Actions\GUIActions\MeddlingActionTaskSpecifications.cs" />
+    <Compile Include="Alerts\AlertExtensions.cs" />
     <Compile Include="Alerts\Types\LicenseAlert.cs" />
     <Compile Include="Alerts\Types\IqnAlert.cs" />
     <Compile Include="Commands\ApplyLicenseEditionCommand.cs" />

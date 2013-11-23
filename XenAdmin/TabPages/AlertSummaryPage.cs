@@ -793,7 +793,7 @@ namespace XenAdmin.TabPages
                         if (exportAll)
                         {
                             foreach (Alert a in Alert.Alerts)
-                                stream.WriteLine(GetAlertDetailsCSVQuotes(a));
+                                stream.WriteLine(a.GetAlertDetailsCSVQuotes());
                         }
                         else
                         {
@@ -801,7 +801,7 @@ namespace XenAdmin.TabPages
                             {
                                 var a = row.Tag as Alert;
                                 if (a != null)
-                                    stream.WriteLine(GetAlertDetailsCSVQuotes(a));
+                                    stream.WriteLine(a.GetAlertDetailsCSVQuotes());
                             }
                         }
                     }
@@ -813,6 +813,8 @@ namespace XenAdmin.TabPages
             toolStripSplitButtonDismiss.DefaultItem = e.ClickedItem;
             toolStripSplitButtonDismiss.Text = toolStripSplitButtonDismiss.DefaultItem.Text;
         }
+
+        #endregion
 
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -827,7 +829,7 @@ namespace XenAdmin.TabPages
             foreach (DataGridViewRow r in GridViewAlerts.SelectedRows)
             {
                 Alert alert = (Alert)r.Tag;
-                sb.AppendLine(GetAlertDetailsCSVQuotes(alert));
+                sb.AppendLine(alert.GetAlertDetailsCSVQuotes());
             }
 
             try
@@ -840,33 +842,5 @@ namespace XenAdmin.TabPages
                 log.Error(ex, ex);
             }
         }
-
-        private string GetAlertDetailsCSVQuotes(Alert a)
-        {
-            string date = String.Empty;
-            string description = String.Empty;
-
-            Program.Invoke(Program.MainWindow, delegate
-                           {
-                               date = HelpersGUI.DateTimeToString(
-                                   a.Timestamp.ToLocalTime(),
-                                   Messages.DATEFORMAT_DMY_HM, true);
-                               description = a.Description;
-                           });
-
-            return String.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\"",
-                                 EscapeQuotes(a.Title),
-                                 EscapeQuotes(a.Priority.GetString()),
-                                 EscapeQuotes(description),
-                                 EscapeQuotes(a.AppliesTo),
-                                 EscapeQuotes(date));
-        }
-
-        private string EscapeQuotes(string s)
-        {
-            return s == null ? null : s.Replace("\"", "\"\"");
-        }
-
-        #endregion
     }
 }

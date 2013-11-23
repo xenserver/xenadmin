@@ -88,10 +88,12 @@ namespace XenAdmin.Alerts
                     }
                 }
 
-                CannotApplyReason = string.Empty;
+                CannotApplyReason = null;
                 return true;
             }
         }
+
+        public string CannotApplyReason { get; set; }
 
         private bool IsHostLicenseRestricted(Host host)
         {
@@ -121,15 +123,6 @@ namespace XenAdmin.Alerts
             hosts.AddRange(newHosts);
             if (hosts.Count > 0)
                 canIgnore = false;
-        }
-
-        public void CopyConnectionsAndHosts(XenServerPatchAlert alert)
-        {
-            connections.Clear();
-            connections.AddRange(alert.connections);
-            hosts.Clear();
-            hosts.AddRange(alert.hosts);
-            canIgnore = connections.Count == 0 && hosts.Count == 0;
         }
 
         public override string WebPageLabel

@@ -48,8 +48,6 @@ namespace XenAdmin.Alerts
 
         public bool Dismissing;
 
-        public string CannotApplyReason { get; set; }
-
         public static void AddAlert(Alert a)
         {
             try

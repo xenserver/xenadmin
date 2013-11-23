@@ -106,7 +106,7 @@ namespace XenAdmin.TabPages
         {
             InitializeComponent();
             InitializeProgressControls();
-            InformationHelperVisible = false;
+            tableLayoutPanel1.Visible = false;
             informationLabel.Click += informationLabel_Click;
             Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
         }
@@ -278,12 +278,12 @@ namespace XenAdmin.TabPages
                 {
                     if(!alert.CanApply)
                     {
-                        ShowInformationHelper = alert.CannotApplyReason;
+                        ShowInformationHelper(alert.CannotApplyReason);
                         downloadAndInstallButton.Enabled = false;
                         return;
                     }
 
-                    ShowInformationHelper = alert.CannotApplyReason;
+                    ShowInformationHelper(alert.CannotApplyReason);
                     downloadAndInstallButton.Enabled = !string.IsNullOrEmpty(alert.Patch.PatchUrl);
                     return;
                 }
@@ -292,29 +292,16 @@ namespace XenAdmin.TabPages
             downloadAndInstallButton.Enabled = false;
         }
 
-        private string ShowInformationHelper
+        private void ShowInformationHelper(string reason)
         {
-            set 
-            { 
-                if(String.IsNullOrEmpty(value))
-                {
-                    InformationHelperVisible = false;
-                    informationLabel.Text = value;
-                }
-                else
-                {
-                    InformationHelperVisible = true;
-                    informationLabel.Text = value;
-                }
-            }
-        }
-
-        private bool InformationHelperVisible
-        {
-            set
+            if (string.IsNullOrEmpty(reason))
             {
-                informationLabel.Visible = value;
-                informationLabelIcon.Visible = value;
+                tableLayoutPanel1.Visible = false;
+            }
+            else
+            {
+                informationLabel.Text = reason;
+                tableLayoutPanel1.Visible = true;
             }
         }
 
