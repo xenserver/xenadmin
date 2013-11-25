@@ -437,15 +437,9 @@ namespace XenAdmin.Alerts
         /// <param name="m"></param>
         public static Alert FindAlert(XenAPI.Message m)
         {
-            lock (XenCenterAlertsLock)
-            {
-                foreach (Alert a in XenCenterAlerts)
-                {
-                    if (a is MessageAlert && ((MessageAlert)a).Message.opaque_ref == m.opaque_ref && m.Connection == a.Connection)
-                        return a;
-                }
-            }
-            return null;
+            return FindAlert(a => a is MessageAlert &&
+                                  ((MessageAlert)a).Message.opaque_ref == m.opaque_ref &&
+                                  m.Connection == a.Connection);
         }
 
         public static void RemoveAlert(XenAPI.Message m)

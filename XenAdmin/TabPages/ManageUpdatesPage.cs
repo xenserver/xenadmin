@@ -52,9 +52,6 @@ namespace XenAdmin.TabPages
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly ManualCheckForUpdates availableUpdates = new ManualCheckForUpdates();
-        private readonly List<Alert> updateAlerts = new List<Alert>();
-
         //Maintain a list of all the objects we currently have events on for clearing out on rebuild
         private List<IXenConnection> connectionsWithEvents = new List<IXenConnection>();
         private List<Pool> poolsWithEvents = new List<Pool>();
@@ -68,47 +65,59 @@ namespace XenAdmin.TabPages
 
         public event Action<int> UpdatesCollectionChanged;
 
-        private void CheckForUpdates_CheckForUpdatesCompleted(object sender, CheckForUpdatesCompletedEventArgs e)
+        private void CheckForUpdates_CheckForUpdatesCompleted(bool succeeded, string errorMessage)
         {
             Program.Invoke(this, delegate
-                                     {
-                                         refreshButton.Enabled = true;
-                                         ShowProgress(false);
-                                         checkForUpdatesSucceeded = e.Succeeded;
-                                         if (checkForUpdatesSucceeded)
-                                         {
-                                             Rebuild();
+                 {
+                     refreshButton.Enabled = true;
+                     spinningTimer.Stop();
+                     checkForUpdatesSucceeded = succeeded;
+                     int alertCount = 0;
 
-                                             if (UpdatesCollectionChanged != null)
-                                                 UpdatesCollectionChanged(updateAlerts.Count);
-                                         }
-                                         else
-                                         {
-                                             pictureBox.Image = SystemIcons.Error.ToBitmap();
-                                             UpdateLabels(false, e.ErrorMessage);
-                                             UpdateDownloadAndInstallButton(false);
-                                         }
-                                     });
+                     if (checkForUpdatesSucceeded)
+                     {
+                         alertCount = Updates.UpdateAlerts.Count;
+
+                         if (alertCount > 0)
+                             panelProgress.Visible = false;
+                         else
+                         {
+                             pictureBoxProgress.Image = SystemIcons.Information.ToBitmap();
+                             labelProgress.Text = Messages.AVAILABLE_UPDATES_NOT_FOUND;
+                         }
+
+                         Rebuild();
+                     }
+                     else
+                     {
+                         pictureBoxProgress.Image = SystemIcons.Error.ToBitmap();
+                         labelProgress.Text = string.IsNullOrEmpty(errorMessage)
+                                                  ? Messages.AVAILABLE_UPDATES_NOT_FOUND
+                                                  : errorMessage;
+                         UpdateDownloadAndInstallButton(false);
+                     }
+
+                     if (UpdatesCollectionChanged != null)
+                             UpdatesCollectionChanged(alertCount);
+                 });
         }
 
         public ManageUpdatesPage()
         {
             InitializeComponent();
             InitializeProgressControls();
-            InformationHelperVisible = false;
+            tableLayoutPanel1.Visible = false;
             informationLabel.Click += informationLabel_Click;
-            availableUpdates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
-        }
-
-        public void RefreshUpdateList()
-        {
-            CheckForUpdates();
+            Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
         }
 
         public void CancelUpdateCheck()
         {
             if (spinningTimer.Enabled)
-                ShowProgress(false);
+            {
+                spinningTimer.Stop();
+                panelProgress.Visible = false;
+            }
         }
 
         private void informationLabel_Click(object sender, EventArgs e)
@@ -140,12 +149,12 @@ namespace XenAdmin.TabPages
                 connectionsWithEvents.Add(c);
                 foreach (var pool in c.Cache.Pools)
                 {
-                    RegisterPoolEvents(pool);
+                    pool.PropertyChanged += pool_PropertyChanged;
                     poolsWithEvents.Add(pool);
                 }
                 foreach (Host host in c.Cache.Hosts)
                 {
-                    RegisterHostEvents(host);
+                    host.PropertyChanged += host_PropertyChanged;
                     hostsWithEvents.Add(host);
                 }
             }
@@ -154,40 +163,17 @@ namespace XenAdmin.TabPages
         private void DeregisterEvents()
         {
             foreach (IXenConnection c in connectionsWithEvents)
-            {
                 c.CachePopulated -= connection_CachePopulated;
-            }
+
             foreach (var pool in poolsWithEvents)
-            {
-                DeregisterPoolEvents(pool);
-            }
-            foreach (Host h in hostsWithEvents)
-            {
-                DeregisterHostEvents(h);
-            }
+                pool.PropertyChanged -= pool_PropertyChanged;
+
+            foreach (Host host in hostsWithEvents)
+                host.PropertyChanged -= host_PropertyChanged;
+
             connectionsWithEvents.Clear();
             hostsWithEvents.Clear();
             poolsWithEvents.Clear();
-        }
-        
-        private void RegisterHostEvents(Host host)
-        {
-            host.PropertyChanged += host_PropertyChanged;
-        }
-
-        private void DeregisterHostEvents(Host host)
-        {
-            host.PropertyChanged -= host_PropertyChanged;
-        }
-
-        private void RegisterPoolEvents(Pool pool)
-        {
-            pool.PropertyChanged += pool_PropertyChanged;
-        }
-
-        private void DeregisterPoolEvents(Pool pool)
-        {
-            pool.PropertyChanged -= pool_PropertyChanged;
         }
 
         private void host_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -198,43 +184,8 @@ namespace XenAdmin.TabPages
 
         private void pool_PropertyChanged(object obj, PropertyChangedEventArgs e)
         {
-            Pool pool = (Pool)obj;
             if (e.PropertyName == "other_config" || e.PropertyName == "name_label")
                 Program.Invoke(this, Rebuild);
-        }
-
-        private void RefreshAlertsList()
-        {
-            updateAlerts.Clear();
-            foreach (var updateAlert in availableUpdates.UpdateAlerts)
-            {
-                updateAlerts.Add(updateAlert);
-            }
-        }
-
-        private void UpdateLabels(bool updatesFound)
-        {
-            UpdateLabels(updatesFound, string.Empty);
-        }
-
-        private void UpdateLabels(bool updatesFound, string errorMessage)
-        {
-            tableLayoutPanel.SuspendLayout();
-            try
-            {
-                if (updatesFound)
-                {
-                    labelUpdates.Text = Messages.AVAILABLE_UPDATES_FOUND;
-                }
-                else
-                {
-                    labelUpdates.Text = errorMessage == string.Empty ? Messages.AVAILABLE_UPDATES_NOT_FOUND : errorMessage;
-                }
-            }
-            finally
-            {
-                tableLayoutPanel.ResumeLayout();
-            }
         }
 
         private void RefreshEventHandlers()
@@ -250,8 +201,6 @@ namespace XenAdmin.TabPages
             if (!checkForUpdatesSucceeded)
                 return;
 
-            RefreshAlertsList();
-            UpdateLabels(updateAlerts.Count > 0);
             RefreshEventHandlers();
             PopulateGrid();
         }
@@ -272,16 +221,19 @@ namespace XenAdmin.TabPages
 
                 dataGridViewUpdates.Rows.Clear();
 
-                if (updateAlerts.Count == 0)
+                if (Updates.UpdateAlerts.Count == 0)
                 {
+                    panelProgress.Visible = true;
+                    pictureBoxProgress.Image = SystemIcons.Information.ToBitmap();
+                    labelProgress.Text = Messages.AVAILABLE_UPDATES_NOT_FOUND;
                     UpdateDownloadAndInstallButton(false);
                     return;
                 }
 
-                foreach (var myAlert in updateAlerts)
-                {
+                panelProgress.Visible = false;
+
+                foreach (var myAlert in Updates.UpdateAlerts)
                     dataGridViewUpdates.Rows.Add(NewUpdateRow(myAlert));
-                }
 
                 if (sortedColumn == null)
                     dataGridViewUpdates.Sort(ColumnDate, ListSortDirection.Descending);
@@ -326,12 +278,12 @@ namespace XenAdmin.TabPages
                 {
                     if(!alert.CanApply)
                     {
-                        ShowInformationHelper = alert.CannotApplyReason;
+                        ShowInformationHelper(alert.CannotApplyReason);
                         downloadAndInstallButton.Enabled = false;
                         return;
                     }
 
-                    ShowInformationHelper = alert.CannotApplyReason;
+                    ShowInformationHelper(alert.CannotApplyReason);
                     downloadAndInstallButton.Enabled = !string.IsNullOrEmpty(alert.Patch.PatchUrl);
                     return;
                 }
@@ -340,29 +292,16 @@ namespace XenAdmin.TabPages
             downloadAndInstallButton.Enabled = false;
         }
 
-        private string ShowInformationHelper
+        private void ShowInformationHelper(string reason)
         {
-            set 
-            { 
-                if(String.IsNullOrEmpty(value))
-                {
-                    InformationHelperVisible = false;
-                    informationLabel.Text = value;
-                }
-                else
-                {
-                    InformationHelperVisible = true;
-                    informationLabel.Text = value;
-                }
-            }
-        }
-
-        private bool InformationHelperVisible
-        {
-            set
+            if (string.IsNullOrEmpty(reason))
             {
-                informationLabel.Visible = value;
-                informationLabelIcon.Visible = value;
+                tableLayoutPanel1.Visible = false;
+            }
+            else
+            {
+                informationLabel.Text = reason;
+                tableLayoutPanel1.Visible = true;
             }
         }
 
@@ -449,15 +388,6 @@ namespace XenAdmin.TabPages
         {
             int imageIndex = ++currentSpinningFrame <= 7 ? currentSpinningFrame : currentSpinningFrame = 0;
             pictureBoxProgress.Image = imageList.Images[imageIndex];
-        }       
-
-        private void ShowProgress(bool show)
-        {
-            if (show)
-                spinningTimer.Start();
-            else
-                spinningTimer.Stop();
-            panelProgress.Visible = show;
         }
 
         private void refreshButton_Click(object sender, EventArgs e)
@@ -465,21 +395,16 @@ namespace XenAdmin.TabPages
             CheckForUpdates();
         }
 
-        private void CheckForUpdates()
+        public void CheckForUpdates()
         {
             checkForUpdatesSucceeded = false;
-            ResetControls();
-            ShowProgress(true);
-            availableUpdates.RunCheck();
-        }
-
-        private void ResetControls()
-        {
-            pictureBox.Image = Properties.Resources._015_Download_h32bit_32;
             refreshButton.Enabled = false;
-            labelUpdates.Text = Messages.AVAILABLE_UPDATES_SEARCHING;
             dataGridViewUpdates.Rows.Clear();
             UpdateDownloadAndInstallButton(false);
+            spinningTimer.Start();
+            panelProgress.Visible = true;
+            labelProgress.Text = Messages.AVAILABLE_UPDATES_SEARCHING;
+            Updates.CheckForUpdates();
         }
 
         private void OpenGoToWebsiteLink()

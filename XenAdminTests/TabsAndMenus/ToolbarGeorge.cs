@@ -406,7 +406,7 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("Shut Down", false  ),
 	            new ExpectedTextMenuItem("Reboot", false  ),
 	            new ExpectedTextMenuItem("Suspend", false  ),
-                new ExpectedTextMenuItem("Force Shut down", true  ),
+                new ExpectedTextMenuItem("Force Shut Down", true  ),
                 new ExpectedTextMenuItem("Force Reboot", true  ),
             };
 

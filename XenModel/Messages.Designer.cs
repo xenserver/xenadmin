@@ -13525,15 +13525,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Force Shut down.
-        /// </summary>
-        public static string FORCE_SHUTDOWN {
-            get {
-                return ResourceManager.GetString("FORCE_SHUTDOWN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &amp;Forget.
         /// </summary>
         public static string FORGET_SR {
@@ -18478,7 +18469,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Force Shut&amp;down.
+        ///   Looks up a localized string similar to Force Shut &amp;Down.
         /// </summary>
         public static string MAINWINDOW_FORCE_SHUTDOWN {
             get {
@@ -18487,7 +18478,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Force Shutdo&amp;wn.
+        ///   Looks up a localized string similar to Force Shut Do&amp;wn.
         /// </summary>
         public static string MAINWINDOW_FORCE_SHUTDOWN_CONTEXT_MENU {
             get {

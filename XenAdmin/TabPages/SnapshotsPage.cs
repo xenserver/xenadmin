@@ -70,8 +70,8 @@ namespace XenAdmin.TabPages
             this.DoubleBuffered = true;
             base.Text = Messages.SNAPSHOTS_PAGE_TITLE;
             dataGridView.TabIndex = TreeView.TabIndex;
-            DataGridView.Sorted += new EventHandler(DataGridView_Sorted);
-            ConnectionsManager.History.CollectionChanged += new CollectionChangeEventHandler(History_CollectionChanged);
+            DataGridView.Sorted += DataGridView_Sorted;
+            ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
         }
 
 

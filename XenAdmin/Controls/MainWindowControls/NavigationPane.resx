@@ -394,7 +394,7 @@
     <value>23, 22</value>
   </data>
   <data name="buttonNotifySmall.Text" xml:space="preserve">
-    <value>toolStripButton1</value>
+    <value>Notifications</value>
   </data>
   <data name="buttonSearchesSmall.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
@@ -406,7 +406,7 @@
     <value>29, 22</value>
   </data>
   <data name="buttonSearchesSmall.Text" xml:space="preserve">
-    <value>toolStripButton1</value>
+    <value>Saved Searches</value>
   </data>
   <data name="buttonOrganizationSmall.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
@@ -418,7 +418,7 @@
     <value>29, 22</value>
   </data>
   <data name="buttonOrganizationSmall.Text" xml:space="preserve">
-    <value>toolStripButton1</value>
+    <value>Organization Views</value>
   </data>
   <data name="buttonObjectsSmall.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
@@ -430,7 +430,7 @@
     <value>23, 22</value>
   </data>
   <data name="buttonObjectsSmall.Text" xml:space="preserve">
-    <value>toolStripButton1</value>
+    <value>Objects</value>
   </data>
   <data name="buttonInfraSmall.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
@@ -442,7 +442,7 @@
     <value>23, 22</value>
   </data>
   <data name="buttonInfraSmall.Text" xml:space="preserve">
-    <value>toolStripButton1</value>
+    <value>Infrastructure</value>
   </data>
   <data name="toolStripSmall.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 401</value>

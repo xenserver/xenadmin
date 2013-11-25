@@ -39,7 +39,6 @@ using XenAdmin.Controls.MainWindowControls;
 
 using XenAPI;
 using System.Windows.Forms;
-using XenAdmin.Core;
 using System.Reflection;
 using XenAdmin;
 using XenAdmin.XenSearch;
@@ -105,10 +104,16 @@ namespace XenAdminTests.TreeTests
             });
         }
 
+        private void ClearTreeSelections()
+        {
+            MW(() => MainWindowWrapper.TreeView.SelectedNodes.SetContents(new List<VirtualTreeNode>()));
+        }
+
         [Test]
         public void TestPersistenceBetweenServerAndOrgView()
         {
             PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
+            ClearTreeSelections();
 
             // collapse all nodes in server view.
             MW(MainWindowWrapper.TreeView.CollapseAll);
@@ -187,6 +192,7 @@ namespace XenAdminTests.TreeTests
         public void TestMigratedVMStaysSelectedAndBecomesVisible()
         {
             PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
+            ClearTreeSelections();
 
             // this VM is at pool level.
             VM vm = GetAnyVM(v => v.name_label == "Windows Server 2008 (1)");
@@ -211,6 +217,7 @@ namespace XenAdminTests.TreeTests
         public void TestPersistenceWhenAddingThenRemovingTextSearch()
         {
             PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
+            ClearTreeSelections();
             Thread.Sleep(1000);
 
             // expand root, pool and host nodes.
@@ -237,6 +244,7 @@ namespace XenAdminTests.TreeTests
         public void TestPersistenceWhenAddingThenRemovingSavedSearch()
         {
             PutInNavigationMode(NavigationPane.NavigationMode.Infrastructure);
+            ClearTreeSelections();
 
             // expand root and pool nodes.
             SetExpandedNodes(n => n.Tag is Pool || n.Tag == null);
@@ -263,6 +271,7 @@ namespace XenAdminTests.TreeTests
         public void TestBeginUpdateOnlyCalledIfNecessary()
         {
             PutInNavigationMode(NavigationPane.NavigationMode.Objects);
+            ClearTreeSelections();
 
             MW(delegate
             {

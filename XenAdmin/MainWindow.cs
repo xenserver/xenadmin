@@ -135,7 +135,9 @@ namespace XenAdmin
             InitializeComponent();
             SetMenuItemStartIndexes();
             Icon = Properties.Resources.AppIcon;
-            
+
+            #region Add Tab pages
+
             components.Add(NICPage);
             components.Add(VMStoragePage);
             components.Add(SrStoragePage);
@@ -170,6 +172,8 @@ namespace XenAdmin
             AddTabContents(GpuPage, TabPageGPU);
             AddTabContents(SearchPage, TabPageSearch);
 
+            #endregion
+
             TheTabControl.SelectedIndexChanged += TheTabControl_SelectedIndexChanged;
             navigationPane.DragDropCommandActivated += navigationPane_DragDropCommandActivated;
 
@@ -193,12 +197,11 @@ namespace XenAdmin
             updatesPage.UpdatesCollectionChanged += updatesPage_UpdatesCollectionChanged;
             eventsPage.GoToXenObjectRequested += eventsPage_GoToXenObjectRequested;
             SearchPage.SearchChanged += SearchPanel_SearchChanged;
-            Alert.XenCenterAlerts.CollectionChanged += XenCenterAlerts_CollectionChanged;
+            Alert.RegisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
 
             FormFontFixer.Fix(this);
 
             Folders.InitFolders();
-
             OtherConfigAndTagsWatcher.InitEventHandlers();
 
             // Fix colour of text on gradient panels
@@ -206,6 +209,8 @@ namespace XenAdmin
             loggedInLabel1.SetTextColor(Program.TitleBarForeColor);
 
             statusProgressBar.Visible = false;
+            windowToolStripMenuItem.Enabled = false;
+            XenCenterForm.ApplicationOpenFormsChanged += XenCenterForm_ApplicationOpenFormsChanged;
 
             SelectionManager.BindTo(MainMenuBar.Items, commandInterface);
             SelectionManager.BindTo(ToolStrip.Items, commandInterface);
@@ -213,6 +218,20 @@ namespace XenAdmin
 
             licenseTimer = new LicenseTimer(licenseManagerLauncher);
             GeneralPage.LicenseLauncher = licenseManagerLauncher;
+        }
+
+        private void XenCenterForm_ApplicationOpenFormsChanged()
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form != this && form.Text != "" && !(form is ConnectingToServerDialog))
+                {
+                    windowToolStripMenuItem.Enabled = true;
+                    return;
+                }
+            }
+
+            windowToolStripMenuItem.Enabled = false;
         }
 
         private void Default_SettingChanging(object sender, SettingChangingEventArgs e)
@@ -550,11 +569,16 @@ namespace XenAdmin
 
                 // start checkforupdates thread
                 CheckForUpdatesTimer.Interval = 1000 * 60 * 60 * 24; // 24 hours
-                CheckForUpdatesTimer.Tick += Updates.Tick;
+                CheckForUpdatesTimer.Tick += CheckForUpdatesTimer_Tick;
                 CheckForUpdatesTimer.Start();
                 Updates.AutomaticCheckForUpdates();
             }
             ProcessCommand(CommandLineArgType, CommandLineParam);
+        }
+
+        private void CheckForUpdatesTimer_Tick(object sender, EventArgs e)
+        {
+            Updates.AutomaticCheckForUpdates();
         }
 
         private void LoadTasksAsMeddlingActions(IXenConnection connection)
@@ -774,8 +798,7 @@ namespace XenAdmin
         {
             IXenConnection connection = (IXenConnection)sender;
             closeActiveWizards(connection);
-            lock (Alert.XenCenterAlertsLock)
-                Alert.XenCenterAlerts.RemoveAll(new Predicate<Alert>(delegate(Alert alert) { return alert.Connection != null && alert.Connection.Equals(connection); }));
+            Alert.RemoveAlert(alert => alert.Connection != null && alert.Connection.Equals(connection));
         }
 
         void connection_CachePopulated(object sender, EventArgs e)
@@ -850,8 +873,7 @@ namespace XenAdmin
 
             if(licenseTimer != null)
                 licenseTimer.CheckActiveServerLicense(connection, false);
-            Updates.CheckServerPatches();
-            Updates.CheckServerVersion();
+
             RequestRefreshTreeView();
         }
 
@@ -948,9 +970,6 @@ namespace XenAdmin
                 case "other_config":
                     // other_config may contain HideFromXenCenter
                     UpdateToolbars();
-                    // other_config contains which patches to ignore
-                    Updates.CheckServerPatches();
-                    Updates.CheckServerVersion();
                     break;
 
                 case "name_label":
@@ -1176,7 +1195,7 @@ namespace XenAdmin
         /// </summary>
         public void RequestRefreshTreeView()
         {
-            navigationPane.RequestRefreshTreeView();
+            Program.Invoke(this, navigationPane.RequestRefreshTreeView);
         }
 
         private void UpdateHeaderAndTabPages()
@@ -2667,7 +2686,7 @@ namespace XenAdmin
                 alertPage.RefreshAlertList();
 
             if (updatesPage.Visible)
-                updatesPage.RefreshUpdateList();
+                updatesPage.CheckForUpdates();
             else
                 updatesPage.CancelUpdateCheck();
 

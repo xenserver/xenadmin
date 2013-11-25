@@ -36,6 +36,7 @@ using System.Windows.Forms;
 
 using NUnit.Framework;
 using XenAdmin;
+using XenAdmin.Core;
 using XenAdmin.TabPages;
 using XenAdmin.Controls;
 using XenAPI;
