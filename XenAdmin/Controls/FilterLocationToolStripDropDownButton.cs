@@ -139,17 +139,22 @@ namespace XenAdmin.Controls
                         DropDownItems.Add(GeneratePoolFilterItem(p));
                 }
 
-                toolStripMenuItemAll = new ToolStripMenuItem
-                    {
-                        Text = Messages.FILTER_SHOW_ALL,
-                        Enabled = FilterIsOn
-                    };
+                if (DropDownItems.Count > 0)
+                {
+                    toolStripMenuItemAll = new ToolStripMenuItem
+                        {
+                            Text = Messages.FILTER_SHOW_ALL,
+                            Enabled = FilterIsOn
+                        };
 
-                DropDownItems.AddRange(new ToolStripItem[]
-                    {
-                        new ToolStripSeparator(),
-                        toolStripMenuItemAll
-                    });
+                    DropDownItems.AddRange(new ToolStripItem[]
+                        {
+                            new ToolStripSeparator(),
+                            toolStripMenuItemAll
+                        });
+                }
+
+                Enabled = DropDownItems.Count > 0;
             }
             finally
             {
