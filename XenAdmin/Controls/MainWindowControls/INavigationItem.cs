@@ -42,4 +42,9 @@ namespace XenAdmin.Controls.MainWindowControls
 
         event Action<object> NavigationViewChanged;
     }
+
+    interface INotificationItem
+    {
+        int UnreadEntries { get; set; }
+    }
 }

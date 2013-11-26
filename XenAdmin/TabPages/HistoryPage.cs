@@ -61,6 +61,7 @@ namespace XenAdmin.TabPages
             toolStripTop.Renderer = new CustomToolStripRenderer();
             toolStripSplitButtonDismiss.DefaultItem = tsmiDismissAll;
             toolStripSplitButtonDismiss.Text = tsmiDismissAll.Text;
+            UpdateButtons();
             ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
             ActionBase.NewAction += Action_NewAction;
         }

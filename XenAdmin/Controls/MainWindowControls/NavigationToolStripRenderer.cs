@@ -36,36 +36,194 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using XenAdmin.Core;
 
 namespace XenAdmin.Controls.MainWindowControls
 {
-    class SmallNavigationToolStripRenderer : ToolStripProfessionalRenderer
+    class NavigationToolStripRenderer : ToolStripProfessionalRenderer
     {
-        public SmallNavigationToolStripRenderer()
-        {
-            RoundedEdges = false;
-        }
-    }
-
-    class BigNavigationToolStripRenderer : ToolStripProfessionalRenderer
-    {
-        public BigNavigationToolStripRenderer()
+        public NavigationToolStripRenderer()
             : base(new NavigationColourTable())
         {
             RoundedEdges = false;
         }
+
+        protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e)
+        {
+            var bounds = new Rectangle(Point.Empty, e.ToolStrip.Size);
+            
+            using (Pen pen = new Pen(NavigationColourTable.BACK_COLOR))
+                e.Graphics.DrawRectangle(pen, bounds);
+        }
+
+        protected override void OnRenderButtonBackground(ToolStripItemRenderEventArgs e)
+        {
+            base.OnRenderButtonBackground(e);
+
+            var button = (NavigationButton)e.Item;
+            if (button == null)
+                return;
+
+            var gradTop = ColorTable.ToolStripPanelGradientBegin;
+            var gradBottom = ColorTable.ToolStripPanelGradientBegin;
+
+            if (button.Pressed || button.Checked)
+            {
+                gradTop = NavigationColourTable.CHECKED_GRADIENT_BEGIN;
+                gradBottom = NavigationColourTable.CHECKED_GRADIENT_END;
+            }
+            else if (button.Selected)//hover
+            {
+                gradTop = NavigationColourTable.HOVER_GRADIENT_BEGIN;
+                gradBottom = NavigationColourTable.HOVER_GRADIENT_END;
+            }
+
+            var bounds = new Rectangle(Point.Empty, e.Item.Size);
+            var g = e.Graphics;
+
+            DrawItemBackGround(g, bounds, gradTop, gradBottom);
+
+            if (button.Pressed || button.Checked || button.Selected)
+                DrawItemBorder(g, bounds);
+        }
+
+        protected override void OnRenderDropDownButtonBackground(ToolStripItemRenderEventArgs e)
+        {
+            base.OnRenderDropDownButtonBackground(e);
+
+            var dropdown = e.Item as NavigationDropDownButton;
+            if (dropdown == null)
+                return;
+
+            var gradTop = ColorTable.ToolStripPanelGradientBegin;
+            var gradBottom = ColorTable.ToolStripPanelGradientBegin;
+
+            var dropDownItems = dropdown.DropDownItems;
+            if (dropDownItems.Count == 0)
+            {
+                var pairedItem = dropdown.PairedItem as NavigationDropDownButton;
+                if (pairedItem != null)
+                    dropDownItems = pairedItem.DropDownItems;
+            }
+
+            bool itemChecked = false;
+            foreach (ToolStripMenuItem menuItem in dropDownItems)
+            {
+                if (menuItem.Checked)
+                {
+                    itemChecked = true;
+                    break;
+                }
+            }
+
+            if (itemChecked)
+            {
+                gradTop = NavigationColourTable.CHECKED_GRADIENT_BEGIN;
+                gradBottom = NavigationColourTable.CHECKED_GRADIENT_END;
+            }
+            else if (dropdown.Pressed || dropdown.Selected)//mouse down or hover
+            {
+                gradTop = NavigationColourTable.HOVER_GRADIENT_BEGIN;
+                gradBottom = NavigationColourTable.HOVER_GRADIENT_END;
+            }
+
+            var bounds = new Rectangle(Point.Empty, e.Item.Size);
+            var g = e.Graphics;
+
+            DrawItemBackGround(g, bounds, gradTop, gradBottom);
+
+            if (itemChecked || dropdown.Pressed || dropdown.Selected)
+                DrawItemBorder(g, bounds);
+        }
+
+        protected override void OnRenderItemText(ToolStripItemTextRenderEventArgs e)
+        {
+            base.OnRenderItemText(e);
+
+            var notifyButton = e.Item as NotificationButtonBig;
+            if (notifyButton == null || notifyButton.UnreadEntries == 0)
+                return;
+
+            using (Font blobFont = new Font(e.TextFont, FontStyle.Bold))
+            {
+                var g = e.Graphics;
+                var blobText = notifyButton.UnreadEntries.ToString();
+                var contRect = e.Item.ContentRectangle;
+
+                var blobSize = Drawing.MeasureText(g, blobText, blobFont, contRect.Size,
+                                   TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+
+                var blobRect = new Rectangle(0, 0, blobSize.Width, blobSize.Height);
+                blobRect.Inflate(2, 2);
+                //when offsetting also account for the inflation to the opposite direction
+                blobRect.Offset(e.TextRectangle.Right + 4, contRect.Top + 2 + ((contRect.Height - blobRect.Height) / 2));
+
+                using (GraphicsPath path = new GraphicsPath())
+                {
+                    path.AddEllipse(blobRect);
+
+                    using (var brush = new PathGradientBrush(path) { CenterColor = Color.Red, SurroundColors = new[] { Color.Firebrick } })
+                        g.FillEllipse(brush, blobRect);
+                }
+
+                Drawing.DrawText(g, blobText, blobFont, blobRect, Color.White,
+                    TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+            }
+        }
+
+        private void DrawItemBackGround(Graphics g, Rectangle bounds, Color gradTop, Color gradBottom)
+        {
+            using (var brush = new LinearGradientBrush(bounds, Color.Black, Color.Black, LinearGradientMode.Vertical))
+            {
+                ColorBlend blend = new ColorBlend
+                    {
+                        Positions = new[] { 0, 1 / 2f, 1 },
+                        Colors = new[] { gradTop, gradBottom, gradTop }
+                    };
+
+                brush.InterpolationColors = blend;
+                g.FillRectangle(brush, bounds);
+            }
+        }
+
+        private void DrawItemBorder(Graphics g, Rectangle bounds)
+        {
+            using (Pen pen = new Pen(NavigationColourTable.ITEM_BORDER_COLOR))
+                g.DrawRectangle(pen, bounds.X + 1, bounds.Y, bounds.Width - 2, bounds.Height - 1);
+        }
+    }
+
+    class SmallNavigationToolStripRenderer : NavigationToolStripRenderer
+    {
+        
+    }
+
+    class BigNavigationToolStripRenderer : NavigationToolStripRenderer
+    {
+        
     }
 
     class NavigationColourTable : ProfessionalColorTable
     {
+        internal static readonly Color CHECKED_GRADIENT_BEGIN = Color.Silver;
+        internal static readonly Color CHECKED_GRADIENT_END = Color.WhiteSmoke;
+        internal static readonly Color HOVER_GRADIENT_BEGIN = Color.WhiteSmoke;
+        internal static readonly Color HOVER_GRADIENT_END = Color.White;
+        internal static readonly Color BACK_COLOR = SystemColors.Control;
+        internal static readonly Color ITEM_BORDER_COLOR = Color.SlateGray;
+
+        public override Color ToolStripGradientBegin
+        {
+            get { return BACK_COLOR; }
+        }
         public override Color ToolStripGradientMiddle
         {
-            get { return base.ToolStripGradientBegin; }
+            get { return BACK_COLOR; }
         }
 
         public override Color ToolStripGradientEnd
         {
-            get { return base.ToolStripGradientBegin; }
+            get { return BACK_COLOR; }
         }
     }
 }

@@ -23048,6 +23048,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notifications ({0}).
+        /// </summary>
+        public static string NOTIFICATIONS_TOTAL {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_TOTAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notifications.
+        /// </summary>
+        public static string NOTIFICATIONS_TOTAL_ZERO {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_TOTAL_ZERO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Now.
         /// </summary>
         public static string NOW {

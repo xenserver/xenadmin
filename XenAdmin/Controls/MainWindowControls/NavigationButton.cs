@@ -98,4 +98,51 @@ namespace XenAdmin.Controls.MainWindowControls
             Alignment = ToolStripItemAlignment.Right;
         }
     }
+
+    class NotificationButtonBig : NavigationButtonBig, INotificationItem
+    {
+        private int unreadEntries;
+
+        public int UnreadEntries
+        {
+            get { return unreadEntries; }
+            set
+            {
+                unreadEntries = value;
+                
+                ToolTipText = unreadEntries > 0
+                     ? string.Format(Messages.NOTIFICATIONS_TOTAL, unreadEntries)
+                     : Messages.NOTIFICATIONS_TOTAL_ZERO;
+                
+                Invalidate();
+            }
+        }
+    }
+
+    class NotificationButtonSmall : NavigationButtonSmall, INotificationItem
+    {
+        private int unreadEntries;
+
+        public int UnreadEntries
+        {
+            get { return unreadEntries; }
+            set
+            {
+                unreadEntries = value;
+
+                if (unreadEntries > 0)
+                {
+                    Text = ToolTipText = string.Format(Messages.NOTIFICATIONS_TOTAL, unreadEntries);
+                    Image = Properties.Resources.tempNotif16Errors;
+                }
+                else
+                {
+                    Text = ToolTipText = Messages.NOTIFICATIONS_TOTAL_ZERO;
+                    Image = Properties.Resources.tempNotif16;
+                }
+
+                Invalidate();
+            }
+        }
+    }
 }
