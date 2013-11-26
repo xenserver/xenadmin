@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -29,23 +29,33 @@
  * SUCH DAMAGE.
  */
 
-namespace XenAdmin.RDP
-{
-    public class MsRdpClient2 : AxMSTSCLib.AxMsRdpClient2
-    {
-        public MsRdpClient2()
-            : base()
-        {
-        }
+using System;
+using XenAdmin.Core;
 
-        protected override void WndProc(ref System.Windows.Forms.Message m)
+
+namespace XenAdmin.Alerts
+{
+    public static class AlertExtensions
+    {
+        public static string GetAlertDetailsCSVQuotes(this Alert a)
         {
-            //Fix for the missing focus issue on the rdp client component
-            if (m.Msg == 0x0021) //WM_MOUSEACTIVATE ref:http://msdn.microsoft.com/en-us/library/ms645612(VS.85).aspx
+            string date = String.Empty;
+            string description = String.Empty;
+
+            Program.Invoke(Program.MainWindow, delegate
             {
-                this.Select();
-            }
-            base.WndProc(ref m);
+                date = HelpersGUI.DateTimeToString(
+                    a.Timestamp.ToLocalTime(),
+                    Messages.DATEFORMAT_DMY_HM, true);
+                description = a.Description;
+            });
+
+            return String.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\"",
+                                 a.Title.EscapeQuotes(),
+                                 a.Priority.GetString().EscapeQuotes(),
+                                 description.EscapeQuotes(),
+                                 a.AppliesTo.EscapeQuotes(),
+                                 date.EscapeQuotes());
         }
     }
 }

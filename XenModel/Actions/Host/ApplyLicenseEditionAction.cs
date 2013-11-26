@@ -168,7 +168,7 @@ namespace XenAdmin.Actions
                         }
                     };
 
-                    Alert.XenCenterAlerts.CollectionChanged += alertsChangeHandler;
+                    Alert.RegisterAlertCollectionChanged(alertsChangeHandler);
 
                     // PR-1102: catch the host's license data, before applying the new one, so it can be sent later to the licensing server
                     LicensingHelper.LicenseDataStruct previousLicenseData = new LicensingHelper.LicenseDataStruct(host);
@@ -228,7 +228,7 @@ namespace XenAdmin.Actions
                 }
                 finally
                 {
-                    Alert.XenCenterAlerts.CollectionChanged -= alertsChangeHandler;
+                    Alert.DeregisterAlertCollectionChanged(alertsChangeHandler);
                 }
             }
 

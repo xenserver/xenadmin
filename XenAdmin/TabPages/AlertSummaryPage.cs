@@ -71,7 +71,7 @@ namespace XenAdmin.TabPages
             UpdateActionEnablement();
 
             m_alertCollectionChangedWithInvoke = Program.ProgramInvokeHandler(AlertsCollectionChanged);
-            Alert.XenCenterAlerts.CollectionChanged += m_alertCollectionChangedWithInvoke;
+            Alert.RegisterAlertCollectionChanged(m_alertCollectionChangedWithInvoke);
 
             toolStripSplitButtonDismiss.DefaultItem = tsmiDismissAll;
             toolStripSplitButtonDismiss.Text = tsmiDismissAll.Text;
@@ -541,17 +541,17 @@ namespace XenAdmin.TabPages
 
             foreach (IXenConnection c in alertGroups.Keys)
             {
-                _DismissAlerts(c, alertGroups[c]);
+                DismissAlerts(c, alertGroups[c]);
             }
 
             if (local_alerts.Count > 0)
-                _DismissAlerts(null, local_alerts);
+                DismissAlerts(null, local_alerts);
         }
 
         /// <param name="connection">
         /// May be null, in which case this is expected to be for client-side alerts.
         /// </param>
-        private static void _DismissAlerts(IXenConnection connection, List<Alert> alerts)
+        private static void DismissAlerts(IXenConnection connection, List<Alert> alerts)
         {
             new DeleteAllAlertsAction(connection, alerts).RunAsync();
         }
@@ -579,7 +579,10 @@ namespace XenAdmin.TabPages
 
         private void UpdateActionEnablement()
         {
-            toolStripButtonExportAll.Enabled = GridViewAlerts.Rows.Count > 0;
+            toolStripDropDownSeveritiesFilter.Enabled =
+                toolStripDropDownButtonServerFilter.Enabled =
+                toolStripDropDownButtonDateFilter.Enabled =
+                toolStripButtonExportAll.Enabled = GridViewAlerts.Rows.Count > 0;
 
             // We use the nondismissing alert count here because we dont wan't to
             // offer people the chance to dismiss alerts which are already being
@@ -790,7 +793,7 @@ namespace XenAdmin.TabPages
                         if (exportAll)
                         {
                             foreach (Alert a in Alert.Alerts)
-                                stream.WriteLine(GetAlertDetailsCSVQuotes(a));
+                                stream.WriteLine(a.GetAlertDetailsCSVQuotes());
                         }
                         else
                         {
@@ -798,7 +801,7 @@ namespace XenAdmin.TabPages
                             {
                                 var a = row.Tag as Alert;
                                 if (a != null)
-                                    stream.WriteLine(GetAlertDetailsCSVQuotes(a));
+                                    stream.WriteLine(a.GetAlertDetailsCSVQuotes());
                             }
                         }
                     }
@@ -810,6 +813,8 @@ namespace XenAdmin.TabPages
             toolStripSplitButtonDismiss.DefaultItem = e.ClickedItem;
             toolStripSplitButtonDismiss.Text = toolStripSplitButtonDismiss.DefaultItem.Text;
         }
+
+        #endregion
 
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -824,7 +829,7 @@ namespace XenAdmin.TabPages
             foreach (DataGridViewRow r in GridViewAlerts.SelectedRows)
             {
                 Alert alert = (Alert)r.Tag;
-                sb.AppendLine(GetAlertDetailsCSVQuotes(alert));
+                sb.AppendLine(alert.GetAlertDetailsCSVQuotes());
             }
 
             try
@@ -837,33 +842,5 @@ namespace XenAdmin.TabPages
                 log.Error(ex, ex);
             }
         }
-
-        private string GetAlertDetailsCSVQuotes(Alert a)
-        {
-            string date = String.Empty;
-            string description = String.Empty;
-
-            Program.Invoke(Program.MainWindow, delegate
-                           {
-                               date = HelpersGUI.DateTimeToString(
-                                   a.Timestamp.ToLocalTime(),
-                                   Messages.DATEFORMAT_DMY_HM, true);
-                               description = a.Description;
-                           });
-
-            return String.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\"",
-                                 EscapeQuotes(a.Title),
-                                 EscapeQuotes(a.Priority.GetString()),
-                                 EscapeQuotes(description),
-                                 EscapeQuotes(a.AppliesTo),
-                                 EscapeQuotes(date));
-        }
-
-        private string EscapeQuotes(string s)
-        {
-            return s == null ? null : s.Replace("\"", "\"\"");
-        }
-
-        #endregion
     }
 }

@@ -33,8 +33,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using XenAdmin.Actions;
-using System.Windows.Forms;
-using XenAdmin.Dialogs;
 using XenAPI;
 using XenAdmin.Alerts;
 using XenAdmin.Network;
@@ -46,11 +44,74 @@ namespace XenAdmin.Core
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        public static event Action<bool, string> CheckForUpdatesCompleted;
+
         public const string LastSeenServerVersionKey = "XenCenter.LastSeenServerVersion";
 
-        public static List<XenCenterVersion> XenCenterVersions = new List<XenCenterVersion>();
-        public static List<XenServerVersion> XenServerVersions = new List<XenServerVersion>();
-        public static List<XenServerPatch> XenServerPatches = new List<XenServerPatch>();
+        private static readonly List<Alert> updateAlerts = new List<Alert>();
+        public static List<Alert> UpdateAlerts
+        {
+            get { return updateAlerts; }
+        }
+
+
+        private static void actionCompleted(ActionBase sender)
+        {
+            Program.AssertOffEventThread();
+            DownloadUpdatesXmlAction action = sender as DownloadUpdatesXmlAction;
+
+            bool succeeded = false;
+            string errorMessage = string.Empty;
+
+            if (action != null)
+            {
+                succeeded = action.Succeeded;
+                updateAlerts.Clear();
+
+                if (succeeded)
+                {
+                    var xenCenterAlert = NewXenCenterVersionAlert(action.XenCenterVersions, false);
+                    if (xenCenterAlert != null)
+                        updateAlerts.Add(xenCenterAlert);
+
+                    var xenServerUpdateAlert = NewServerVersionAlert(action.XenServerVersions, false);
+                    if (xenServerUpdateAlert != null)
+                        updateAlerts.Add(xenServerUpdateAlert);
+
+                    var xenServerPatchAlerts = NewServerPatchesAlerts(action.XenServerVersions, action.XenServerPatches, false);
+                    if (xenServerPatchAlerts != null)
+                    {
+                        foreach (var xenServerPatchAlert in xenServerPatchAlerts)
+                            updateAlerts.Add(xenServerPatchAlert);
+                    }
+                }
+                else
+                {
+                    if (action.Exception != null)
+                    {
+                        if (action.Exception is System.Net.Sockets.SocketException)
+                        {
+                            errorMessage = Messages.AVAILABLE_UPDATES_NETWORK_ERROR;
+                        }
+                        else
+                        {
+                            // Clean up and remove excess newlines, carriage returns, trailing nonsense
+                            string errorText = action.Exception.Message.Trim();
+                            errorText = System.Text.RegularExpressions.Regex.Replace(errorText, @"\r\n+", "");
+                            errorMessage = string.Format(Messages.AVAILABLE_UPDATES_ERROR, errorText);
+                        }
+                    }
+
+                    if (string.IsNullOrEmpty(errorMessage))
+                    {
+                        errorMessage = Messages.AVAILABLE_UPDATES_INTERNAL_ERROR;
+                    }
+                }
+            }
+
+            if (CheckForUpdatesCompleted != null)
+                CheckForUpdatesCompleted(succeeded, errorMessage);
+        }
 
         private static bool AllowUpdates
         {
@@ -62,20 +123,15 @@ namespace XenAdmin.Core
                         Properties.Settings.Default.AllowPatchesUpdates);
             }
         }
-
-        private static void RunCheckForUpdates(Action<ActionBase> completedEvent)
-        {
-            DownloadUpdatesXmlAction action = new DownloadUpdatesXmlAction();
-            action.Completed += completedEvent;
-            action.RunAsync();
-        }
-
-        public static void CheckForUpdates(Action<ActionBase> completedEvent)
+ 
+        public static void CheckForUpdates()
         {
             if (Helpers.CommonCriteriaCertificationRelease)
                 return;
 
-            RunCheckForUpdates(completedEvent);
+            DownloadUpdatesXmlAction action = new DownloadUpdatesXmlAction();
+            action.Completed += actionCompleted;
+            action.RunAsync();
         }
 
         public static void AutomaticCheckForUpdates()
@@ -83,22 +139,7 @@ namespace XenAdmin.Core
             if (!AllowUpdates)
                 return;
 
-            RunCheckForUpdates(action_Completed);
-        }
-
-        private static void action_Completed(ActionBase sender)
-        {
-            DownloadUpdatesXmlAction action = (DownloadUpdatesXmlAction)sender;
-            if (!action.Succeeded)
-                return;
-
-            XenCenterVersions = action.XenCenterVersions;
-            XenServerVersions = action.XenServerVersions;
-            XenServerPatches = action.XenServerPatches;
-
-            CheckXenCenterVersion();
-            CheckServerPatches();
-            CheckServerVersion();
+            CheckForUpdates();
         }
 
         private static XenCenterVersion GetLatestPublishedXenCenterVersion(List<XenCenterVersion> xenCenterVersions, Version programVersion)
@@ -111,31 +152,11 @@ namespace XenAdmin.Core
                 if (v.IsLatest)
                     latest.Add(v);
 
-            XenCenterVersion to_use = latest.Find(new Predicate<XenCenterVersion>(delegate(XenCenterVersion xcv)
-            {
-                return xcv.Lang == Program.CurrentLanguage;
-            }));
-
-            if (to_use == null)
-                to_use = latest.Find(new Predicate<XenCenterVersion>(delegate(XenCenterVersion xcv)
-                {
-                    return string.IsNullOrEmpty(xcv.Lang);
-                }));
-
-            return to_use;
+            return latest.Find(xcv => xcv.Lang == Program.CurrentLanguage) ??
+                   latest.Find(xcv => string.IsNullOrEmpty(xcv.Lang));
         }
 
-        private static void CheckXenCenterVersion()
-        {
-            if (!AllowUpdates || !Properties.Settings.Default.AllowXenCenterUpdates)
-                return;
-
-            XenCenterUpdateAlert alert = NewXenCenterVersionAlert(XenCenterVersions, true);
-            if (alert != null)
-                Alert.AddAlert(alert);
-        }
-
-        public static XenCenterUpdateAlert NewXenCenterVersionAlert(List<XenCenterVersion> xenCenterVersions,
+        private static XenCenterUpdateAlert NewXenCenterVersionAlert(List<XenCenterVersion> xenCenterVersions,
             bool checkAlertIsAlreadyDismissed)
         {
             return NewXenCenterVersionAlert(xenCenterVersions, Program.Version, checkAlertIsAlreadyDismissed);
@@ -179,25 +200,6 @@ namespace XenAdmin.Core
             List<XenServerPatchAlert> alerts = GetServerPatchesAlerts(xenServerVersions, xenServerPatches,
                                                                       checkAlertIsAlreadyDismissed);
             return alerts.Where(alert => !alert.CanIgnore).ToList();
-        }
-
-        public static void CheckServerPatches()
-        {
-            if (!AllowUpdates || !Properties.Settings.Default.AllowPatchesUpdates)
-                return;
-
-            List<XenServerPatchAlert> alerts = GetServerPatchesAlerts(XenServerVersions, XenServerPatches, true);
-
-            foreach (var alert in alerts)
-            {
-                Alert existingAlert = Alert.FindAlert(alert);
-                if (existingAlert != null && alert.CanIgnore)
-                    Alert.RemoveAlert(existingAlert);
-                else if (existingAlert != null)
-                    ((XenServerPatchAlert) existingAlert).CopyConnectionsAndHosts(alert);
-                else if (!alert.CanIgnore)
-                    Alert.AddAlert(alert);
-            }
         }
 
         private static XenServerPatchAlert GetServerPatchAlert(List<XenServerPatchAlert> alerts, XenServerPatch patch)
@@ -279,27 +281,9 @@ namespace XenAdmin.Core
 
         private static List<string> GetLatestSeenVersion(Pool pool)
         {
-            if (!pool.other_config.ContainsKey(Updates.LastSeenServerVersionKey))
+            if (!pool.other_config.ContainsKey(LastSeenServerVersionKey))
                 return new List<string>();
-            return new List<string>(pool.other_config[Updates.LastSeenServerVersionKey].Split(','));
-        }
-
-        public static void CheckServerVersion()
-        {
-            if (!AllowUpdates || !Properties.Settings.Default.AllowXenServerUpdates)
-                return;
-
-            XenServerUpdateAlert alert = NewServerVersionAlert(XenServerVersions, true);
-            if (alert == null)
-                return;
-            
-            Alert existingAlert = Alert.FindAlert(alert);
-            if (existingAlert != null && alert.CanIgnore)
-                Alert.RemoveAlert(existingAlert);
-            else if (existingAlert != null)
-                ((XenServerUpdateAlert)existingAlert).CopyConnectionsAndHosts(alert);
-            else if (!alert.CanIgnore)
-                Alert.AddAlert(alert);
+            return new List<string>(pool.other_config[LastSeenServerVersionKey].Split(','));
         }
 
         public static XenServerUpdateAlert NewServerVersionAlert(List<XenServerVersion> xenServerVersions,
@@ -348,14 +332,6 @@ namespace XenAdmin.Core
                 return null;
 
             return alert;
-        }
-
-        /// <summary>
-        /// Equivalent to CheckForUpdates().
-        /// </summary>
-        internal static void Tick(object sender, EventArgs e)
-        {
-            AutomaticCheckForUpdates();
         }
     }
 }

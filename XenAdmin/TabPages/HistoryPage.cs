@@ -61,6 +61,7 @@ namespace XenAdmin.TabPages
             toolStripTop.Renderer = new CustomToolStripRenderer();
             toolStripSplitButtonDismiss.DefaultItem = tsmiDismissAll;
             toolStripSplitButtonDismiss.Text = tsmiDismissAll.Text;
+            UpdateButtons();
             ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
             ActionBase.NewAction += Action_NewAction;
         }
@@ -273,8 +274,13 @@ namespace XenAdmin.TabPages
 
         private void UpdateButtons()
         {
+            toolStripDdbFilterStatus.Enabled =
+                toolStripDdbFilterLocation.Enabled =
+                toolStripDdbFilterDates.Enabled = dataGridView.Rows.Count > 0;
+
             tsmiDismissAll.Enabled = dataGridView.Rows.Cast<DataGridViewActionRow>().Any(row => row.Action.IsCompleted);
             tsmiDismissSelected.Enabled = dataGridView.SelectedRows.Cast<DataGridViewActionRow>().Any(row => row.Action.IsCompleted);
+            toolStripSplitButtonDismiss.Enabled = tsmiDismissAll.Enabled && tsmiDismissSelected.Enabled;
         }
 
         #region Control event handlers

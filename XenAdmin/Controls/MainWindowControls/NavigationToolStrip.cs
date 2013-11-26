@@ -77,6 +77,8 @@ namespace XenAdmin.Controls.MainWindowControls
                         item.Checked = false;
                 }
             }
+            
+            Invalidate();
         }
 
         private void dropDownButton_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -101,6 +103,8 @@ namespace XenAdmin.Controls.MainWindowControls
                         item.Checked = false;
                 }
             }
+
+            Invalidate();
         }
     }
 

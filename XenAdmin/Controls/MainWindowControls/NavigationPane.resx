@@ -529,13 +529,13 @@
     <value>buttonNotifyBig</value>
   </data>
   <data name="&gt;&gt;buttonNotifyBig.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.MainWindowControls.NavigationButtonBig, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.MainWindowControls.NotificationButtonBig, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;buttonNotifySmall.Name" xml:space="preserve">
     <value>buttonNotifySmall</value>
   </data>
   <data name="&gt;&gt;buttonNotifySmall.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.MainWindowControls.NavigationButtonSmall, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.MainWindowControls.NotificationButtonSmall, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;buttonSearchesSmall.Name" xml:space="preserve">
     <value>buttonSearchesSmall</value>

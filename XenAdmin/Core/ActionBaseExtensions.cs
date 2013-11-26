@@ -41,7 +41,7 @@ using XenAdmin.Network;
 
 using XenAPI;
 
-namespace XenAdmin.TabPages
+namespace XenAdmin.Core
 {
     static class ActionBaseExtensions
     {

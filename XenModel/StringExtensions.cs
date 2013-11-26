@@ -30,7 +30,6 @@
  */
 
 using System;
-using System.Drawing;
 
 namespace XenAdmin
 {
@@ -94,6 +93,11 @@ namespace XenAdmin
                 return null;
             else
                 return s.Replace("&", "&&");
+        }
+
+        public static string EscapeQuotes(this string s)
+        {
+            return s == null ? null : s.Replace("\"", "\"\"");
         }
     }
 }

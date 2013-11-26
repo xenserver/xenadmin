@@ -1,35 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
- * All rights reserved. 
- * 
- * Redistribution and use in source and binary forms, 
- * with or without modification, are permitted provided 
- * that the following conditions are met: 
- * 
- * *   Redistributions of source code must retain the above 
- *     copyright notice, this list of conditions and the 
- *     following disclaimer. 
- * *   Redistributions in binary form must reproduce the above 
- *     copyright notice, this list of conditions and the 
- *     following disclaimer in the documentation and/or other 
- *     materials provided with the distribution. 
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
- * CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
- * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
- * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
- * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
- * SUCH DAMAGE.
- */
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -53,8 +22,6 @@ namespace XenAdmin.ConsoleView
         /// </summary>
         private MsRdpClient6 rdpClient6 = null;
 
-        private MsRdpClient2 rdpClient2 = null;
-
         /// <summary>
         /// This will be equal to rdpClient6, if the DLL that we've got is version 6, otherwise equal to
         /// rdpClient2.
@@ -67,24 +34,13 @@ namespace XenAdmin.ConsoleView
         {
             this.parent = parent;
             this.size = size;
-            try
-            {
-                rdpControl = rdpClient6 = new MsRdpClient6();
-                RDPConfigure(size);
+            rdpControl = rdpClient6 = new MsRdpClient6();
+            RDPConfigure(size);
 
-                // CA-96135: Try adding rdpControl to parent.Controls list; this will throw exception when
-                // MsRdpClient6 control cannot be created (there is no appropriate version of dll present)
-                parent.Controls.Add(rdpControl);
-            }
-            catch
-            {
-                if (parent.Controls.Contains(rdpControl))
-                    parent.Controls.Remove(rdpControl);
-                rdpClient6 = null;
-                rdpControl = rdpClient2 = new MsRdpClient2();
-                RDPConfigure(size);
-                parent.Controls.Add(rdpControl);
-            }
+            // CA-96135: Try adding rdpControl to parent.Controls list; this will throw exception when
+            // MsRdpClient6 control cannot be created (there is no appropriate version of dll present)
+            parent.Controls.Add(rdpControl);
+
             rdpControl.Resize += resizeHandler;
         }
 
@@ -110,22 +66,12 @@ namespace XenAdmin.ConsoleView
 
         private void RDPAddOnDisconnected()
         {
-            if (rdpClient6 == null)
-                rdpClient2.OnDisconnected += rdpClient_OnDisconnected;
-            else
-                rdpClient6.OnDisconnected += rdpClient_OnDisconnected;
+            rdpClient6.OnDisconnected += rdpClient_OnDisconnected;
         }
 
         private void RDPSetSettings()
         {
-            if (rdpClient6 == null)
-            {
-                rdpClient2.SecuredSettings2.KeyboardHookMode = Properties.Settings.Default.WindowsShortcuts ? 1 : 0;
-                rdpClient2.SecuredSettings2.AudioRedirectionMode = Properties.Settings.Default.ReceiveSoundFromRDP ? 0 : 1;
-                rdpClient2.AdvancedSettings3.DisableRdpdr = Properties.Settings.Default.ClipboardAndPrinterRedirection ? 0 : 1;
-                rdpClient2.AdvancedSettings2.ConnectToServerConsole = Properties.Settings.Default.ConnectToServerConsole;
-            }
-            else
+            if (rdpClient6 != null)
             {
                 rdpClient6.SecuredSettings2.KeyboardHookMode = Properties.Settings.Default.WindowsShortcuts ? 1 : 0;
                 rdpClient6.SecuredSettings2.AudioRedirectionMode = Properties.Settings.Default.ReceiveSoundFromRDP ? 0 : 1;
@@ -145,14 +91,7 @@ namespace XenAdmin.ConsoleView
                 w,
                 h);
 
-            if (rdpClient6 == null)
-            {
-                rdpClient2.Server = rdpIP;
-                rdpClient2.DesktopWidth = w;
-                rdpClient2.DesktopHeight = h;
-                rdpClient2.Connect();
-            }
-            else
+            if (rdpClient6 != null)
             {
                 rdpClient6.Server = rdpIP;
                 rdpClient6.DesktopWidth = w;
@@ -163,17 +102,17 @@ namespace XenAdmin.ConsoleView
 
         private int Connected
         {
-            get { return rdpClient6 == null ? rdpClient2.Connected : rdpClient6.Connected; }
+            get { return rdpClient6 == null ? 0 : rdpClient6.Connected; }
         }
 
         private int DesktopHeight
         {
-            get { return rdpClient6 == null ? rdpClient2.DesktopHeight : rdpClient6.DesktopHeight; }
+            get { return rdpClient6 == null ? 0 : rdpClient6.DesktopHeight; }
         }
 
         private int DesktopWidth
         {
-            get { return rdpClient6 == null ? rdpClient2.DesktopWidth : rdpClient6.DesktopWidth; }
+            get { return rdpClient6 == null ? 0 : rdpClient6.DesktopWidth; }
         }
 
         private static readonly List<System.Windows.Forms.Timer> RdpCleanupTimers = new List<System.Windows.Forms.Timer>();
@@ -198,10 +137,7 @@ namespace XenAdmin.ConsoleView
             {
                 if (Connected == 1)
                 {
-                    if (rdpClient6 == null)
-                        rdpClient2.Disconnect();
-                    else
-                        rdpClient6.Disconnect();
+                    rdpClient6.Disconnect();
                 }  
             }
             catch(InvalidComObjectException ex)

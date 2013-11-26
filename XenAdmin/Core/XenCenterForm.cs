@@ -30,21 +30,34 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Windows.Forms;
 
-namespace XenAdmin.Controls.MainWindowControls
+namespace XenAdmin
 {
-    interface INavigationItem
+    public class XenCenterForm : Form
     {
-        INavigationItem PairedItem { get; set; }
+        public static event Action ApplicationOpenFormsChanged;
 
-        event Action<object> NavigationViewChanged;
-    }
+        protected XenCenterForm()
+        {
+            Shown += XenCenterForm_Shown;
+            FormClosed += XenCenterForm_FormClosed;
+        }
 
-    interface INotificationItem
-    {
-        int UnreadEntries { get; set; }
+        private void OnApplicationOpenFormsChanged()
+        {
+            if (ApplicationOpenFormsChanged != null)
+                ApplicationOpenFormsChanged();
+        }
+
+        private void XenCenterForm_Shown(object sender, EventArgs e)
+        {
+            OnApplicationOpenFormsChanged();
+        }
+
+        private void XenCenterForm_FormClosed(object sender, EventArgs e)
+        {
+            OnApplicationOpenFormsChanged();
+        }
     }
 }
