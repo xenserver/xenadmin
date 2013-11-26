@@ -53,8 +53,6 @@ namespace XenAdmin.ConsoleView
         /// </summary>
         private MsRdpClient6 rdpClient6 = null;
 
-        private MsRdpClient2 rdpClient2 = null;
-
         /// <summary>
         /// This will be equal to rdpClient6, if the DLL that we've got is version 6, otherwise equal to
         /// rdpClient2.
@@ -76,14 +74,14 @@ namespace XenAdmin.ConsoleView
                 // MsRdpClient6 control cannot be created (there is no appropriate version of dll present)
                 parent.Controls.Add(rdpControl);
             }
-            catch
+            catch (Exception ex)
             {
+                Log.Error("MsRdpClient6 control cannot be added.", ex);
+                
                 if (parent.Controls.Contains(rdpControl))
                     parent.Controls.Remove(rdpControl);
+                
                 rdpClient6 = null;
-                rdpControl = rdpClient2 = new MsRdpClient2();
-                RDPConfigure(size);
-                parent.Controls.Add(rdpControl);
             }
             rdpControl.Resize += resizeHandler;
         }
@@ -110,22 +108,13 @@ namespace XenAdmin.ConsoleView
 
         private void RDPAddOnDisconnected()
         {
-            if (rdpClient6 == null)
-                rdpClient2.OnDisconnected += rdpClient_OnDisconnected;
-            else
+            if (rdpClient6 != null)
                 rdpClient6.OnDisconnected += rdpClient_OnDisconnected;
         }
 
         private void RDPSetSettings()
         {
-            if (rdpClient6 == null)
-            {
-                rdpClient2.SecuredSettings2.KeyboardHookMode = Properties.Settings.Default.WindowsShortcuts ? 1 : 0;
-                rdpClient2.SecuredSettings2.AudioRedirectionMode = Properties.Settings.Default.ReceiveSoundFromRDP ? 0 : 1;
-                rdpClient2.AdvancedSettings3.DisableRdpdr = Properties.Settings.Default.ClipboardAndPrinterRedirection ? 0 : 1;
-                rdpClient2.AdvancedSettings2.ConnectToServerConsole = Properties.Settings.Default.ConnectToServerConsole;
-            }
-            else
+            if (rdpClient6 != null)
             {
                 rdpClient6.SecuredSettings2.KeyboardHookMode = Properties.Settings.Default.WindowsShortcuts ? 1 : 0;
                 rdpClient6.SecuredSettings2.AudioRedirectionMode = Properties.Settings.Default.ReceiveSoundFromRDP ? 0 : 1;
@@ -145,14 +134,7 @@ namespace XenAdmin.ConsoleView
                 w,
                 h);
 
-            if (rdpClient6 == null)
-            {
-                rdpClient2.Server = rdpIP;
-                rdpClient2.DesktopWidth = w;
-                rdpClient2.DesktopHeight = h;
-                rdpClient2.Connect();
-            }
-            else
+            if (rdpClient6 != null)
             {
                 rdpClient6.Server = rdpIP;
                 rdpClient6.DesktopWidth = w;
@@ -163,17 +145,17 @@ namespace XenAdmin.ConsoleView
 
         private int Connected
         {
-            get { return rdpClient6 == null ? rdpClient2.Connected : rdpClient6.Connected; }
+            get { return rdpClient6 == null ? 0 : rdpClient6.Connected; }
         }
 
         private int DesktopHeight
         {
-            get { return rdpClient6 == null ? rdpClient2.DesktopHeight : rdpClient6.DesktopHeight; }
+            get { return rdpClient6 == null ? 0 : rdpClient6.DesktopHeight; }
         }
 
         private int DesktopWidth
         {
-            get { return rdpClient6 == null ? rdpClient2.DesktopWidth : rdpClient6.DesktopWidth; }
+            get { return rdpClient6 == null ? 0 : rdpClient6.DesktopWidth; }
         }
 
         private static readonly List<System.Windows.Forms.Timer> RdpCleanupTimers = new List<System.Windows.Forms.Timer>();
@@ -198,9 +180,7 @@ namespace XenAdmin.ConsoleView
             {
                 if (Connected == 1)
                 {
-                    if (rdpClient6 == null)
-                        rdpClient2.Disconnect();
-                    else
+                    if (rdpClient6 != null)
                         rdpClient6.Disconnect();
                 }  
             }
