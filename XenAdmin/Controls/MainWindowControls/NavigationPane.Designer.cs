@@ -41,9 +41,9 @@
             this.toolStripMenuItemFields = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemVapps = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonSearchesBig = new XenAdmin.Controls.MainWindowControls.NavigationDropDownButtonBig();
-            this.buttonNotifyBig = new XenAdmin.Controls.MainWindowControls.NavigationButtonBig();
+            this.buttonNotifyBig = new XenAdmin.Controls.MainWindowControls.NotificationButtonBig();
             this.toolStripSmall = new XenAdmin.Controls.MainWindowControls.NavigationToolStripSmall();
-            this.buttonNotifySmall = new XenAdmin.Controls.MainWindowControls.NavigationButtonSmall();
+            this.buttonNotifySmall = new XenAdmin.Controls.MainWindowControls.NotificationButtonSmall();
             this.buttonSearchesSmall = new XenAdmin.Controls.MainWindowControls.NavigationDropDownButtonSmall();
             this.buttonOrganizationSmall = new XenAdmin.Controls.MainWindowControls.NavigationDropDownButtonSmall();
             this.buttonObjectsSmall = new XenAdmin.Controls.MainWindowControls.NavigationButtonSmall();
@@ -179,6 +179,7 @@
             this.buttonNotifyBig.Name = "buttonNotifyBig";
             this.buttonNotifyBig.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             this.buttonNotifyBig.PairedItem = null;
+            this.buttonNotifyBig.UnreadEntries = 0;
             // 
             // toolStripSmall
             // 
@@ -205,6 +206,7 @@
             this.buttonNotifySmall.Name = "buttonNotifySmall";
             this.buttonNotifySmall.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             this.buttonNotifySmall.PairedItem = null;
+            this.buttonNotifySmall.UnreadEntries = 0;
             // 
             // buttonSearchesSmall
             // 
@@ -274,13 +276,13 @@
         private XenAdmin.Controls.MainWindowControls.NavigationButtonSmall buttonObjectsSmall;
         private XenAdmin.Controls.MainWindowControls.NavigationDropDownButtonSmall buttonOrganizationSmall;
         private XenAdmin.Controls.MainWindowControls.NavigationDropDownButtonSmall buttonSearchesSmall;
-        private XenAdmin.Controls.MainWindowControls.NavigationButtonSmall buttonNotifySmall;
+        private XenAdmin.Controls.MainWindowControls.NotificationButtonSmall buttonNotifySmall;
         private XenAdmin.Controls.MainWindowControls.NavigationToolStripBig toolStripBig;
         private XenAdmin.Controls.MainWindowControls.NavigationButtonBig buttonInfraBig;
         private XenAdmin.Controls.MainWindowControls.NavigationButtonBig buttonObjectsBig;
         private XenAdmin.Controls.MainWindowControls.NavigationDropDownButtonBig buttonOrganizationBig;
         private XenAdmin.Controls.MainWindowControls.NavigationDropDownButtonBig buttonSearchesBig;
-        private XenAdmin.Controls.MainWindowControls.NavigationButtonBig buttonNotifyBig;
+        private XenAdmin.Controls.MainWindowControls.NotificationButtonBig buttonNotifyBig;
         private XenAdmin.Controls.Common.SmoothSplitContainer splitContainer1;
         private NavigationView navigationView;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemTags;

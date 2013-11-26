@@ -7955,6 +7955,12 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NOTIFICATIONS_SUBMODE_UPDATES_UNREAD" xml:space="preserve">
     <value>Updates ({0})</value>
   </data>
+  <data name="NOTIFICATIONS_TOTAL" xml:space="preserve">
+    <value>Notifications ({0})</value>
+  </data>
+  <data name="NOTIFICATIONS_TOTAL_ZERO" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
   <data name="NOT_AGILE_NETWORK_NOT_SHARED" xml:space="preserve">
     <value>The VM is not using a shared network. Restart cannot be guaranteed.</value>
   </data>
