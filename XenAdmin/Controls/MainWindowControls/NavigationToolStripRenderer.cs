@@ -147,27 +147,81 @@ namespace XenAdmin.Controls.MainWindowControls
             using (Font blobFont = new Font(e.TextFont, FontStyle.Bold))
             {
                 var g = e.Graphics;
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+
                 var blobText = notifyButton.UnreadEntries.ToString();
+                var textFlags = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.NoPadding;
+
                 var contRect = e.Item.ContentRectangle;
+                var blobSize = Drawing.MeasureText(g, blobText, blobFont, contRect.Size, textFlags);
 
-                var blobSize = Drawing.MeasureText(g, blobText, blobFont, contRect.Size,
-                                   TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+                int horizPadding = 5;
+                int vertPadding = 1;
+                int rightMargin = 2;
 
-                var blobRect = new Rectangle(0, 0, blobSize.Width, blobSize.Height);
-                blobRect.Inflate(2, 2);
-                //when offsetting also account for the inflation to the opposite direction
-                blobRect.Offset(e.TextRectangle.Right + 4, contRect.Top + 2 + ((contRect.Height - blobRect.Height) / 2));
+                var blobRect = new Rectangle(e.TextRectangle.Right + rightMargin + horizPadding + 1,
+                                     contRect.Top + ((contRect.Height - blobSize.Height) / 2),
+                                     blobSize.Width,
+                                     blobSize.Height);
+
+                var redRect = new Rectangle(blobRect.Location, blobRect.Size);
+                var whiteRect = new Rectangle(blobRect.Location, blobRect.Size);
+                redRect.Inflate(horizPadding, vertPadding);
+                whiteRect.Inflate(horizPadding + 1, vertPadding + 1);
 
                 using (GraphicsPath path = new GraphicsPath())
                 {
-                    path.AddEllipse(blobRect);
+                    int diameter = redRect.Height;
+                    var arc = new Rectangle(redRect.Location, new Size(diameter, diameter));
 
-                    using (var brush = new PathGradientBrush(path) { CenterColor = Color.Red, SurroundColors = new[] { Color.Firebrick } })
-                        g.FillEllipse(brush, blobRect);
+                    //top left corner
+                    path.AddArc(arc, 180, 90);
+
+                    // top right corner
+                    arc.X = redRect.Right - diameter;
+                    path.AddArc(arc, 270, 90);
+
+                    // bottom right corner 
+                    arc.Y = redRect.Bottom - diameter;
+                    path.AddArc(arc, 0, 90);
+
+                    // bottom left corner
+                    arc.X = redRect.Left;
+                    path.AddArc(arc, 90, 90);
+ 
+                    path.CloseFigure();
+
+                    using (var brush = new SolidBrush(NavigationColourTable.NOTIFICATION_BACKCOLOR))
+                        g.FillPath(brush, path);
                 }
 
-                Drawing.DrawText(g, blobText, blobFont, blobRect, Color.White,
-                    TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+                using (GraphicsPath path = new GraphicsPath())
+                {
+                    int diameter = whiteRect.Height;
+                    var arc = new Rectangle(whiteRect.Location, new Size(diameter, diameter));
+
+                    //top left corner
+                    path.AddArc(arc, 180, 90);
+
+                    // top right corner
+                    arc.X = whiteRect.Right - diameter;
+                    path.AddArc(arc, 270, 90);
+
+                    // bottom right corner 
+                    arc.Y = whiteRect.Bottom - diameter;
+                    path.AddArc(arc, 0, 90);
+
+                    // bottom left corner
+                    arc.X = whiteRect.Left;
+                    path.AddArc(arc, 90, 90);
+
+                    path.CloseFigure();
+
+                    using (var pen = new Pen(NavigationColourTable.NOTIFICATION_FORECOLOR, 1))
+                        g.DrawPath(pen, path);
+                }
+
+                Drawing.DrawText(g, blobText, blobFont, blobRect, NavigationColourTable.NOTIFICATION_FORECOLOR, textFlags);
             }
         }
 
@@ -211,6 +265,8 @@ namespace XenAdmin.Controls.MainWindowControls
         internal static readonly Color HOVER_GRADIENT_END = Color.White;
         internal static readonly Color BACK_COLOR = SystemColors.Control;
         internal static readonly Color ITEM_BORDER_COLOR = Color.SlateGray;
+        internal static readonly Color NOTIFICATION_BACKCOLOR = Color.FromArgb(204, 0, 0);
+        internal static readonly Color NOTIFICATION_FORECOLOR = Color.White;
 
         public override Color ToolStripGradientBegin
         {
