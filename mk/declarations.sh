@@ -89,7 +89,9 @@ then
    	    get_REVISION="${GIT_COMMIT}"
     fi
 
-	XS_BRANCH=`cd $DIR;git config --get remote.origin.url|sed -e 's@.*carbon/\(.*\)/xenadmin.git.*@\1@'`
+#	XS_BRANCH=`cd $DIR;git config --get remote.origin.url|sed -e 's@.*carbon/\(.*\)/xenadmin.git.*@\1@'`
+XS_BRANCH='car-100'
+
 else
 	if [ -z "${MERCURIAL_REVISION+xxx}" ]
 	then 
