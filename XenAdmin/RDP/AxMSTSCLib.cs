@@ -1,3 +1,34 @@
+/* Copyright (c) Citrix Systems Inc. 
+ * All rights reserved. 
+ * 
+ * Redistribution and use in source and binary forms, 
+ * with or without modification, are permitted provided 
+ * that the following conditions are met: 
+ * 
+ * *   Redistributions of source code must retain the above 
+ *     copyright notice, this list of conditions and the 
+ *     following disclaimer. 
+ * *   Redistributions in binary form must reproduce the above 
+ *     copyright notice, this list of conditions and the 
+ *     following disclaimer in the documentation and/or other 
+ *     materials provided with the distribution. 
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+ * CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
+ * SUCH DAMAGE.
+ */
+
 /*
  * To create this file, I did the following:
  *
@@ -1490,6 +1521,1562 @@ namespace AxMSTSCLib {
         private AxMsRdpClientNotSafeForScripting parent;
         
         public AxMsRdpClientNotSafeForScriptingEventMulticaster(AxMsRdpClientNotSafeForScripting parent) {
+            this.parent = parent;
+        }
+        
+        public virtual void OnConnecting() {
+            System.EventArgs onconnectingEvent = new System.EventArgs();
+            this.parent.RaiseOnOnConnecting(this.parent, onconnectingEvent);
+        }
+        
+        public virtual void OnConnected() {
+            System.EventArgs onconnectedEvent = new System.EventArgs();
+            this.parent.RaiseOnOnConnected(this.parent, onconnectedEvent);
+        }
+        
+        public virtual void OnLoginComplete() {
+            System.EventArgs onlogincompleteEvent = new System.EventArgs();
+            this.parent.RaiseOnOnLoginComplete(this.parent, onlogincompleteEvent);
+        }
+        
+        public virtual void OnDisconnected(int discReason) {
+            IMsTscAxEvents_OnDisconnectedEvent ondisconnectedEvent = new IMsTscAxEvents_OnDisconnectedEvent(discReason);
+            this.parent.RaiseOnOnDisconnected(this.parent, ondisconnectedEvent);
+        }
+        
+        public virtual void OnEnterFullScreenMode() {
+            System.EventArgs onenterfullscreenmodeEvent = new System.EventArgs();
+            this.parent.RaiseOnOnEnterFullScreenMode(this.parent, onenterfullscreenmodeEvent);
+        }
+        
+        public virtual void OnLeaveFullScreenMode() {
+            System.EventArgs onleavefullscreenmodeEvent = new System.EventArgs();
+            this.parent.RaiseOnOnLeaveFullScreenMode(this.parent, onleavefullscreenmodeEvent);
+        }
+        
+        public virtual void OnChannelReceivedData(string chanName, string data) {
+            IMsTscAxEvents_OnChannelReceivedDataEvent onchannelreceiveddataEvent = new IMsTscAxEvents_OnChannelReceivedDataEvent(chanName, data);
+            this.parent.RaiseOnOnChannelReceivedData(this.parent, onchannelreceiveddataEvent);
+        }
+        
+        public virtual void OnRequestGoFullScreen() {
+            System.EventArgs onrequestgofullscreenEvent = new System.EventArgs();
+            this.parent.RaiseOnOnRequestGoFullScreen(this.parent, onrequestgofullscreenEvent);
+        }
+        
+        public virtual void OnRequestLeaveFullScreen() {
+            System.EventArgs onrequestleavefullscreenEvent = new System.EventArgs();
+            this.parent.RaiseOnOnRequestLeaveFullScreen(this.parent, onrequestleavefullscreenEvent);
+        }
+        
+        public virtual void OnFatalError(int errorCode) {
+            IMsTscAxEvents_OnFatalErrorEvent onfatalerrorEvent = new IMsTscAxEvents_OnFatalErrorEvent(errorCode);
+            this.parent.RaiseOnOnFatalError(this.parent, onfatalerrorEvent);
+        }
+        
+        public virtual void OnWarning(int warningCode) {
+            IMsTscAxEvents_OnWarningEvent onwarningEvent = new IMsTscAxEvents_OnWarningEvent(warningCode);
+            this.parent.RaiseOnOnWarning(this.parent, onwarningEvent);
+        }
+        
+        public virtual void OnRemoteDesktopSizeChange(int width, int height) {
+            IMsTscAxEvents_OnRemoteDesktopSizeChangeEvent onremotedesktopsizechangeEvent = new IMsTscAxEvents_OnRemoteDesktopSizeChangeEvent(width, height);
+            this.parent.RaiseOnOnRemoteDesktopSizeChange(this.parent, onremotedesktopsizechangeEvent);
+        }
+        
+        public virtual void OnIdleTimeoutNotification() {
+            System.EventArgs onidletimeoutnotificationEvent = new System.EventArgs();
+            this.parent.RaiseOnOnIdleTimeoutNotification(this.parent, onidletimeoutnotificationEvent);
+        }
+        
+        public virtual void OnRequestContainerMinimize() {
+            System.EventArgs onrequestcontainerminimizeEvent = new System.EventArgs();
+            this.parent.RaiseOnOnRequestContainerMinimize(this.parent, onrequestcontainerminimizeEvent);
+        }
+        
+        public virtual void OnConfirmClose(out bool pfAllowClose) {
+            IMsTscAxEvents_OnConfirmCloseEvent onconfirmcloseEvent = new IMsTscAxEvents_OnConfirmCloseEvent();
+            this.parent.RaiseOnOnConfirmClose(this.parent, onconfirmcloseEvent);
+            pfAllowClose = onconfirmcloseEvent.pfAllowClose;
+        }
+        
+        public virtual void OnReceivedTSPublicKey(string publicKey, out bool pfContinueLogon) {
+            IMsTscAxEvents_OnReceivedTSPublicKeyEvent onreceivedtspublickeyEvent = new IMsTscAxEvents_OnReceivedTSPublicKeyEvent(publicKey);
+            this.parent.RaiseOnOnReceivedTSPublicKey(this.parent, onreceivedtspublickeyEvent);
+            pfContinueLogon = onreceivedtspublickeyEvent.pfContinueLogon;
+        }
+        
+        public virtual void OnAutoReconnecting(int disconnectReason, int attemptCount, out MSTSCLib.AutoReconnectContinueState pArcContinueStatus) {
+            IMsTscAxEvents_OnAutoReconnectingEvent onautoreconnectingEvent = new IMsTscAxEvents_OnAutoReconnectingEvent(disconnectReason, attemptCount);
+            this.parent.RaiseOnOnAutoReconnecting(this.parent, onautoreconnectingEvent);
+            pArcContinueStatus = onautoreconnectingEvent.pArcContinueStatus;
+        }
+        
+        public virtual void OnAuthenticationWarningDisplayed() {
+            System.EventArgs onauthenticationwarningdisplayedEvent = new System.EventArgs();
+            this.parent.RaiseOnOnAuthenticationWarningDisplayed(this.parent, onauthenticationwarningdisplayedEvent);
+        }
+        
+        public virtual void OnAuthenticationWarningDismissed() {
+            System.EventArgs onauthenticationwarningdismissedEvent = new System.EventArgs();
+            this.parent.RaiseOnOnAuthenticationWarningDismissed(this.parent, onauthenticationwarningdismissedEvent);
+        }
+        
+        public virtual void OnRemoteProgramResult(string bstrRemoteProgram, MSTSCLib.RemoteProgramResult lError, bool vbIsExecutable) {
+            IMsTscAxEvents_OnRemoteProgramResultEvent onremoteprogramresultEvent = new IMsTscAxEvents_OnRemoteProgramResultEvent(bstrRemoteProgram, lError, vbIsExecutable);
+            this.parent.RaiseOnOnRemoteProgramResult(this.parent, onremoteprogramresultEvent);
+        }
+        
+        public virtual void OnRemoteProgramDisplayed(bool vbDisplayed, uint uDisplayInformation) {
+            IMsTscAxEvents_OnRemoteProgramDisplayedEvent onremoteprogramdisplayedEvent = new IMsTscAxEvents_OnRemoteProgramDisplayedEvent(vbDisplayed, uDisplayInformation);
+            this.parent.RaiseOnOnRemoteProgramDisplayed(this.parent, onremoteprogramdisplayedEvent);
+        }
+        
+        public virtual void OnLogonError(int lError) {
+            IMsTscAxEvents_OnLogonErrorEvent onlogonerrorEvent = new IMsTscAxEvents_OnLogonErrorEvent(lError);
+            this.parent.RaiseOnOnLogonError(this.parent, onlogonerrorEvent);
+        }
+        
+        public virtual void OnFocusReleased(int iDirection) {
+            IMsTscAxEvents_OnFocusReleasedEvent onfocusreleasedEvent = new IMsTscAxEvents_OnFocusReleasedEvent(iDirection);
+            this.parent.RaiseOnOnFocusReleased(this.parent, onfocusreleasedEvent);
+        }
+        
+        public virtual void OnUserNameAcquired(string bstrUserName) {
+            IMsTscAxEvents_OnUserNameAcquiredEvent onusernameacquiredEvent = new IMsTscAxEvents_OnUserNameAcquiredEvent(bstrUserName);
+            this.parent.RaiseOnOnUserNameAcquired(this.parent, onusernameacquiredEvent);
+        }
+        
+        public virtual void OnMouseInputModeChanged(bool fMouseModeRelative) {
+            IMsTscAxEvents_OnMouseInputModeChangedEvent onmouseinputmodechangedEvent = new IMsTscAxEvents_OnMouseInputModeChangedEvent(fMouseModeRelative);
+            this.parent.RaiseOnOnMouseInputModeChanged(this.parent, onmouseinputmodechangedEvent);
+        }
+    }
+    
+    [System.Windows.Forms.AxHost.ClsidAttribute("{3523c2fb-4031-44e4-9a3b-f1e94986ee7f}")]
+    [System.ComponentModel.DesignTimeVisibleAttribute(true)]
+    [System.ComponentModel.DefaultEvent("OnConnecting")]
+    public class AxMsRdpClient2NotSafeForScripting : System.Windows.Forms.AxHost {
+        
+        private MSTSCLib.IMsRdpClient2 ocx;
+        
+        private AxMsRdpClient2NotSafeForScriptingEventMulticaster eventMulticaster;
+        
+        private System.Windows.Forms.AxHost.ConnectionPointCookie cookie;
+        
+        public AxMsRdpClient2NotSafeForScripting() : 
+                base("3523c2fb-4031-44e4-9a3b-f1e94986ee7f") {
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(1)]
+        public virtual string Server {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("Server", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.Server;
+            }
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("Server", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.Server = value;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(2)]
+        public virtual string Domain {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("Domain", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.Domain;
+            }
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("Domain", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.Domain = value;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(3)]
+        public virtual string UserName {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("UserName", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.UserName;
+            }
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("UserName", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.UserName = value;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(4)]
+        public virtual string DisconnectedText {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("DisconnectedText", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.DisconnectedText;
+            }
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("DisconnectedText", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.DisconnectedText = value;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(5)]
+        public virtual string ConnectingText {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("ConnectingText", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.ConnectingText;
+            }
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("ConnectingText", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.ConnectingText = value;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(6)]
+        public virtual short Connected {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("Connected", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.Connected;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(12)]
+        public virtual int DesktopWidth {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("DesktopWidth", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.DesktopWidth;
+            }
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("DesktopWidth", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.DesktopWidth = value;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(13)]
+        public virtual int DesktopHeight {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("DesktopHeight", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.DesktopHeight;
+            }
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("DesktopHeight", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.DesktopHeight = value;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(16)]
+        public virtual int StartConnected {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("StartConnected", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.StartConnected;
+            }
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("StartConnected", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.StartConnected = value;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(17)]
+        public virtual int HorizontalScrollBarVisible {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("HorizontalScrollBarVisible", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.HorizontalScrollBarVisible;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(18)]
+        public virtual int VerticalScrollBarVisible {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("VerticalScrollBarVisible", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.VerticalScrollBarVisible;
+            }
+        }
+        
+        [System.ComponentModel.Browsable(false)]
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(19)]
+        public virtual string FullScreenTitle {
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("FullScreenTitle", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.FullScreenTitle = value;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(20)]
+        public virtual int CipherStrength {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("CipherStrength", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.CipherStrength;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(21)]
+        public virtual string Version {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("Version", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.Version;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(22)]
+        public virtual int SecuredSettingsEnabled {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("SecuredSettingsEnabled", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.SecuredSettingsEnabled;
+            }
+        }
+        
+        [System.ComponentModel.Browsable(false)]
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(97)]
+        public virtual MSTSCLib.IMsTscSecuredSettings SecuredSettings {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("SecuredSettings", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.SecuredSettings;
+            }
+        }
+        
+        [System.ComponentModel.Browsable(false)]
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(98)]
+        public virtual MSTSCLib.IMsTscAdvancedSettings AdvancedSettings {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("AdvancedSettings", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.AdvancedSettings;
+            }
+        }
+        
+        [System.ComponentModel.Browsable(false)]
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(99)]
+        public virtual MSTSCLib.IMsTscDebug Debugger {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("Debugger", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.Debugger;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(100)]
+        public virtual int ColorDepth {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("ColorDepth", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.ColorDepth;
+            }
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("ColorDepth", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.ColorDepth = value;
+            }
+        }
+        
+        [System.ComponentModel.Browsable(false)]
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(101)]
+        public virtual MSTSCLib.IMsRdpClientAdvancedSettings AdvancedSettings2 {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("AdvancedSettings2", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.AdvancedSettings2;
+            }
+        }
+        
+        [System.ComponentModel.Browsable(false)]
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(102)]
+        public virtual MSTSCLib.IMsRdpClientSecuredSettings SecuredSettings2 {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("SecuredSettings2", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.SecuredSettings2;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(103)]
+        public virtual MSTSCLib.ExtendedDisconnectReasonCode ExtendedDisconnectReason {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("ExtendedDisconnectReason", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.ExtendedDisconnectReason;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(104)]
+        public virtual bool FullScreen {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("FullScreen", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.FullScreen;
+            }
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("FullScreen", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.FullScreen = value;
+            }
+        }
+        
+        [System.ComponentModel.Browsable(false)]
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(200)]
+        public virtual MSTSCLib.IMsRdpClientAdvancedSettings2 AdvancedSettings3 {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("AdvancedSettings3", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.AdvancedSettings3;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(201)]
+        public virtual string ConnectedStatusText {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("ConnectedStatusText", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.ConnectedStatusText;
+            }
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("ConnectedStatusText", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.ConnectedStatusText = value;
+            }
+        }
+        
+        public event System.EventHandler OnConnecting;
+        
+        public event System.EventHandler OnConnected;
+        
+        public event System.EventHandler OnLoginComplete;
+        
+        public event IMsTscAxEvents_OnDisconnectedEventHandler OnDisconnected;
+        
+        public event System.EventHandler OnEnterFullScreenMode;
+        
+        public event System.EventHandler OnLeaveFullScreenMode;
+        
+        public event IMsTscAxEvents_OnChannelReceivedDataEventHandler OnChannelReceivedData;
+        
+        public event System.EventHandler OnRequestGoFullScreen;
+        
+        public event System.EventHandler OnRequestLeaveFullScreen;
+        
+        public event IMsTscAxEvents_OnFatalErrorEventHandler OnFatalError;
+        
+        public event IMsTscAxEvents_OnWarningEventHandler OnWarning;
+        
+        public event IMsTscAxEvents_OnRemoteDesktopSizeChangeEventHandler OnRemoteDesktopSizeChange;
+        
+        public event System.EventHandler OnIdleTimeoutNotification;
+        
+        public event System.EventHandler OnRequestContainerMinimize;
+        
+        public event IMsTscAxEvents_OnConfirmCloseEventHandler OnConfirmClose;
+        
+        public event IMsTscAxEvents_OnReceivedTSPublicKeyEventHandler OnReceivedTSPublicKey;
+        
+        public event IMsTscAxEvents_OnAutoReconnectingEventHandler OnAutoReconnecting;
+        
+        public event System.EventHandler OnAuthenticationWarningDisplayed;
+        
+        public event System.EventHandler OnAuthenticationWarningDismissed;
+        
+        public event IMsTscAxEvents_OnRemoteProgramResultEventHandler OnRemoteProgramResult;
+        
+        public event IMsTscAxEvents_OnRemoteProgramDisplayedEventHandler OnRemoteProgramDisplayed;
+        
+        public event IMsTscAxEvents_OnLogonErrorEventHandler OnLogonError;
+        
+        public event IMsTscAxEvents_OnFocusReleasedEventHandler OnFocusReleased;
+        
+        public event IMsTscAxEvents_OnUserNameAcquiredEventHandler OnUserNameAcquired;
+        
+        public event IMsTscAxEvents_OnMouseInputModeChangedEventHandler OnMouseInputModeChanged;
+        
+        public virtual void Connect() {
+            if ((this.ocx == null)) {
+                throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("Connect", System.Windows.Forms.AxHost.ActiveXInvokeKind.MethodInvoke);
+            }
+            this.ocx.Connect();
+        }
+        
+        public virtual void Disconnect() {
+            if ((this.ocx == null)) {
+                throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("Disconnect", System.Windows.Forms.AxHost.ActiveXInvokeKind.MethodInvoke);
+            }
+            this.ocx.Disconnect();
+        }
+        
+        public virtual void CreateVirtualChannels(string newVal) {
+            if ((this.ocx == null)) {
+                throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("CreateVirtualChannels", System.Windows.Forms.AxHost.ActiveXInvokeKind.MethodInvoke);
+            }
+            this.ocx.CreateVirtualChannels(newVal);
+        }
+        
+        public virtual void SendOnVirtualChannel(string chanName, string chanData) {
+            if ((this.ocx == null)) {
+                throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("SendOnVirtualChannel", System.Windows.Forms.AxHost.ActiveXInvokeKind.MethodInvoke);
+            }
+            this.ocx.SendOnVirtualChannel(chanName, chanData);
+        }
+        
+        public virtual void SetVirtualChannelOptions(string chanName, int chanOptions) {
+            if ((this.ocx == null)) {
+                throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("SetVirtualChannelOptions", System.Windows.Forms.AxHost.ActiveXInvokeKind.MethodInvoke);
+            }
+            this.ocx.SetVirtualChannelOptions(chanName, chanOptions);
+        }
+        
+        public virtual int GetVirtualChannelOptions(string chanName) {
+            if ((this.ocx == null)) {
+                throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("GetVirtualChannelOptions", System.Windows.Forms.AxHost.ActiveXInvokeKind.MethodInvoke);
+            }
+            int returnValue = ((int)(this.ocx.GetVirtualChannelOptions(chanName)));
+            return returnValue;
+        }
+        
+        public virtual MSTSCLib.ControlCloseStatus RequestClose() {
+            if ((this.ocx == null)) {
+                throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("RequestClose", System.Windows.Forms.AxHost.ActiveXInvokeKind.MethodInvoke);
+            }
+            MSTSCLib.ControlCloseStatus returnValue = ((MSTSCLib.ControlCloseStatus)(this.ocx.RequestClose()));
+            return returnValue;
+        }
+        
+        protected override void CreateSink() {
+            try {
+                this.eventMulticaster = new AxMsRdpClient2NotSafeForScriptingEventMulticaster(this);
+                this.cookie = new System.Windows.Forms.AxHost.ConnectionPointCookie(this.ocx, this.eventMulticaster, typeof(MSTSCLib.IMsTscAxEvents));
+            }
+            catch (System.Exception ) {
+            }
+        }
+        
+        protected override void DetachSink() {
+            try {
+                this.cookie.Disconnect();
+            }
+            catch (System.Exception ) {
+            }
+        }
+        
+        protected override void AttachInterfaces() {
+            try {
+                this.ocx = ((MSTSCLib.IMsRdpClient2)(this.GetOcx()));
+            }
+            catch (System.Exception ) {
+            }
+        }
+        
+        internal void RaiseOnOnConnecting(object sender, System.EventArgs e) {
+            if ((this.OnConnecting != null)) {
+                this.OnConnecting(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnConnected(object sender, System.EventArgs e) {
+            if ((this.OnConnected != null)) {
+                this.OnConnected(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnLoginComplete(object sender, System.EventArgs e) {
+            if ((this.OnLoginComplete != null)) {
+                this.OnLoginComplete(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnDisconnected(object sender, IMsTscAxEvents_OnDisconnectedEvent e) {
+            if ((this.OnDisconnected != null)) {
+                this.OnDisconnected(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnEnterFullScreenMode(object sender, System.EventArgs e) {
+            if ((this.OnEnterFullScreenMode != null)) {
+                this.OnEnterFullScreenMode(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnLeaveFullScreenMode(object sender, System.EventArgs e) {
+            if ((this.OnLeaveFullScreenMode != null)) {
+                this.OnLeaveFullScreenMode(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnChannelReceivedData(object sender, IMsTscAxEvents_OnChannelReceivedDataEvent e) {
+            if ((this.OnChannelReceivedData != null)) {
+                this.OnChannelReceivedData(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnRequestGoFullScreen(object sender, System.EventArgs e) {
+            if ((this.OnRequestGoFullScreen != null)) {
+                this.OnRequestGoFullScreen(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnRequestLeaveFullScreen(object sender, System.EventArgs e) {
+            if ((this.OnRequestLeaveFullScreen != null)) {
+                this.OnRequestLeaveFullScreen(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnFatalError(object sender, IMsTscAxEvents_OnFatalErrorEvent e) {
+            if ((this.OnFatalError != null)) {
+                this.OnFatalError(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnWarning(object sender, IMsTscAxEvents_OnWarningEvent e) {
+            if ((this.OnWarning != null)) {
+                this.OnWarning(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnRemoteDesktopSizeChange(object sender, IMsTscAxEvents_OnRemoteDesktopSizeChangeEvent e) {
+            if ((this.OnRemoteDesktopSizeChange != null)) {
+                this.OnRemoteDesktopSizeChange(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnIdleTimeoutNotification(object sender, System.EventArgs e) {
+            if ((this.OnIdleTimeoutNotification != null)) {
+                this.OnIdleTimeoutNotification(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnRequestContainerMinimize(object sender, System.EventArgs e) {
+            if ((this.OnRequestContainerMinimize != null)) {
+                this.OnRequestContainerMinimize(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnConfirmClose(object sender, IMsTscAxEvents_OnConfirmCloseEvent e) {
+            if ((this.OnConfirmClose != null)) {
+                this.OnConfirmClose(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnReceivedTSPublicKey(object sender, IMsTscAxEvents_OnReceivedTSPublicKeyEvent e) {
+            if ((this.OnReceivedTSPublicKey != null)) {
+                this.OnReceivedTSPublicKey(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnAutoReconnecting(object sender, IMsTscAxEvents_OnAutoReconnectingEvent e) {
+            if ((this.OnAutoReconnecting != null)) {
+                this.OnAutoReconnecting(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnAuthenticationWarningDisplayed(object sender, System.EventArgs e) {
+            if ((this.OnAuthenticationWarningDisplayed != null)) {
+                this.OnAuthenticationWarningDisplayed(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnAuthenticationWarningDismissed(object sender, System.EventArgs e) {
+            if ((this.OnAuthenticationWarningDismissed != null)) {
+                this.OnAuthenticationWarningDismissed(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnRemoteProgramResult(object sender, IMsTscAxEvents_OnRemoteProgramResultEvent e) {
+            if ((this.OnRemoteProgramResult != null)) {
+                this.OnRemoteProgramResult(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnRemoteProgramDisplayed(object sender, IMsTscAxEvents_OnRemoteProgramDisplayedEvent e) {
+            if ((this.OnRemoteProgramDisplayed != null)) {
+                this.OnRemoteProgramDisplayed(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnLogonError(object sender, IMsTscAxEvents_OnLogonErrorEvent e) {
+            if ((this.OnLogonError != null)) {
+                this.OnLogonError(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnFocusReleased(object sender, IMsTscAxEvents_OnFocusReleasedEvent e) {
+            if ((this.OnFocusReleased != null)) {
+                this.OnFocusReleased(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnUserNameAcquired(object sender, IMsTscAxEvents_OnUserNameAcquiredEvent e) {
+            if ((this.OnUserNameAcquired != null)) {
+                this.OnUserNameAcquired(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnMouseInputModeChanged(object sender, IMsTscAxEvents_OnMouseInputModeChangedEvent e) {
+            if ((this.OnMouseInputModeChanged != null)) {
+                this.OnMouseInputModeChanged(sender, e);
+            }
+        }
+    }
+    
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    public class AxMsRdpClient2NotSafeForScriptingEventMulticaster : MSTSCLib.IMsTscAxEvents {
+        
+        private AxMsRdpClient2NotSafeForScripting parent;
+        
+        public AxMsRdpClient2NotSafeForScriptingEventMulticaster(AxMsRdpClient2NotSafeForScripting parent) {
+            this.parent = parent;
+        }
+        
+        public virtual void OnConnecting() {
+            System.EventArgs onconnectingEvent = new System.EventArgs();
+            this.parent.RaiseOnOnConnecting(this.parent, onconnectingEvent);
+        }
+        
+        public virtual void OnConnected() {
+            System.EventArgs onconnectedEvent = new System.EventArgs();
+            this.parent.RaiseOnOnConnected(this.parent, onconnectedEvent);
+        }
+        
+        public virtual void OnLoginComplete() {
+            System.EventArgs onlogincompleteEvent = new System.EventArgs();
+            this.parent.RaiseOnOnLoginComplete(this.parent, onlogincompleteEvent);
+        }
+        
+        public virtual void OnDisconnected(int discReason) {
+            IMsTscAxEvents_OnDisconnectedEvent ondisconnectedEvent = new IMsTscAxEvents_OnDisconnectedEvent(discReason);
+            this.parent.RaiseOnOnDisconnected(this.parent, ondisconnectedEvent);
+        }
+        
+        public virtual void OnEnterFullScreenMode() {
+            System.EventArgs onenterfullscreenmodeEvent = new System.EventArgs();
+            this.parent.RaiseOnOnEnterFullScreenMode(this.parent, onenterfullscreenmodeEvent);
+        }
+        
+        public virtual void OnLeaveFullScreenMode() {
+            System.EventArgs onleavefullscreenmodeEvent = new System.EventArgs();
+            this.parent.RaiseOnOnLeaveFullScreenMode(this.parent, onleavefullscreenmodeEvent);
+        }
+        
+        public virtual void OnChannelReceivedData(string chanName, string data) {
+            IMsTscAxEvents_OnChannelReceivedDataEvent onchannelreceiveddataEvent = new IMsTscAxEvents_OnChannelReceivedDataEvent(chanName, data);
+            this.parent.RaiseOnOnChannelReceivedData(this.parent, onchannelreceiveddataEvent);
+        }
+        
+        public virtual void OnRequestGoFullScreen() {
+            System.EventArgs onrequestgofullscreenEvent = new System.EventArgs();
+            this.parent.RaiseOnOnRequestGoFullScreen(this.parent, onrequestgofullscreenEvent);
+        }
+        
+        public virtual void OnRequestLeaveFullScreen() {
+            System.EventArgs onrequestleavefullscreenEvent = new System.EventArgs();
+            this.parent.RaiseOnOnRequestLeaveFullScreen(this.parent, onrequestleavefullscreenEvent);
+        }
+        
+        public virtual void OnFatalError(int errorCode) {
+            IMsTscAxEvents_OnFatalErrorEvent onfatalerrorEvent = new IMsTscAxEvents_OnFatalErrorEvent(errorCode);
+            this.parent.RaiseOnOnFatalError(this.parent, onfatalerrorEvent);
+        }
+        
+        public virtual void OnWarning(int warningCode) {
+            IMsTscAxEvents_OnWarningEvent onwarningEvent = new IMsTscAxEvents_OnWarningEvent(warningCode);
+            this.parent.RaiseOnOnWarning(this.parent, onwarningEvent);
+        }
+        
+        public virtual void OnRemoteDesktopSizeChange(int width, int height) {
+            IMsTscAxEvents_OnRemoteDesktopSizeChangeEvent onremotedesktopsizechangeEvent = new IMsTscAxEvents_OnRemoteDesktopSizeChangeEvent(width, height);
+            this.parent.RaiseOnOnRemoteDesktopSizeChange(this.parent, onremotedesktopsizechangeEvent);
+        }
+        
+        public virtual void OnIdleTimeoutNotification() {
+            System.EventArgs onidletimeoutnotificationEvent = new System.EventArgs();
+            this.parent.RaiseOnOnIdleTimeoutNotification(this.parent, onidletimeoutnotificationEvent);
+        }
+        
+        public virtual void OnRequestContainerMinimize() {
+            System.EventArgs onrequestcontainerminimizeEvent = new System.EventArgs();
+            this.parent.RaiseOnOnRequestContainerMinimize(this.parent, onrequestcontainerminimizeEvent);
+        }
+        
+        public virtual void OnConfirmClose(out bool pfAllowClose) {
+            IMsTscAxEvents_OnConfirmCloseEvent onconfirmcloseEvent = new IMsTscAxEvents_OnConfirmCloseEvent();
+            this.parent.RaiseOnOnConfirmClose(this.parent, onconfirmcloseEvent);
+            pfAllowClose = onconfirmcloseEvent.pfAllowClose;
+        }
+        
+        public virtual void OnReceivedTSPublicKey(string publicKey, out bool pfContinueLogon) {
+            IMsTscAxEvents_OnReceivedTSPublicKeyEvent onreceivedtspublickeyEvent = new IMsTscAxEvents_OnReceivedTSPublicKeyEvent(publicKey);
+            this.parent.RaiseOnOnReceivedTSPublicKey(this.parent, onreceivedtspublickeyEvent);
+            pfContinueLogon = onreceivedtspublickeyEvent.pfContinueLogon;
+        }
+        
+        public virtual void OnAutoReconnecting(int disconnectReason, int attemptCount, out MSTSCLib.AutoReconnectContinueState pArcContinueStatus) {
+            IMsTscAxEvents_OnAutoReconnectingEvent onautoreconnectingEvent = new IMsTscAxEvents_OnAutoReconnectingEvent(disconnectReason, attemptCount);
+            this.parent.RaiseOnOnAutoReconnecting(this.parent, onautoreconnectingEvent);
+            pArcContinueStatus = onautoreconnectingEvent.pArcContinueStatus;
+        }
+        
+        public virtual void OnAuthenticationWarningDisplayed() {
+            System.EventArgs onauthenticationwarningdisplayedEvent = new System.EventArgs();
+            this.parent.RaiseOnOnAuthenticationWarningDisplayed(this.parent, onauthenticationwarningdisplayedEvent);
+        }
+        
+        public virtual void OnAuthenticationWarningDismissed() {
+            System.EventArgs onauthenticationwarningdismissedEvent = new System.EventArgs();
+            this.parent.RaiseOnOnAuthenticationWarningDismissed(this.parent, onauthenticationwarningdismissedEvent);
+        }
+        
+        public virtual void OnRemoteProgramResult(string bstrRemoteProgram, MSTSCLib.RemoteProgramResult lError, bool vbIsExecutable) {
+            IMsTscAxEvents_OnRemoteProgramResultEvent onremoteprogramresultEvent = new IMsTscAxEvents_OnRemoteProgramResultEvent(bstrRemoteProgram, lError, vbIsExecutable);
+            this.parent.RaiseOnOnRemoteProgramResult(this.parent, onremoteprogramresultEvent);
+        }
+        
+        public virtual void OnRemoteProgramDisplayed(bool vbDisplayed, uint uDisplayInformation) {
+            IMsTscAxEvents_OnRemoteProgramDisplayedEvent onremoteprogramdisplayedEvent = new IMsTscAxEvents_OnRemoteProgramDisplayedEvent(vbDisplayed, uDisplayInformation);
+            this.parent.RaiseOnOnRemoteProgramDisplayed(this.parent, onremoteprogramdisplayedEvent);
+        }
+        
+        public virtual void OnLogonError(int lError) {
+            IMsTscAxEvents_OnLogonErrorEvent onlogonerrorEvent = new IMsTscAxEvents_OnLogonErrorEvent(lError);
+            this.parent.RaiseOnOnLogonError(this.parent, onlogonerrorEvent);
+        }
+        
+        public virtual void OnFocusReleased(int iDirection) {
+            IMsTscAxEvents_OnFocusReleasedEvent onfocusreleasedEvent = new IMsTscAxEvents_OnFocusReleasedEvent(iDirection);
+            this.parent.RaiseOnOnFocusReleased(this.parent, onfocusreleasedEvent);
+        }
+        
+        public virtual void OnUserNameAcquired(string bstrUserName) {
+            IMsTscAxEvents_OnUserNameAcquiredEvent onusernameacquiredEvent = new IMsTscAxEvents_OnUserNameAcquiredEvent(bstrUserName);
+            this.parent.RaiseOnOnUserNameAcquired(this.parent, onusernameacquiredEvent);
+        }
+        
+        public virtual void OnMouseInputModeChanged(bool fMouseModeRelative) {
+            IMsTscAxEvents_OnMouseInputModeChangedEvent onmouseinputmodechangedEvent = new IMsTscAxEvents_OnMouseInputModeChangedEvent(fMouseModeRelative);
+            this.parent.RaiseOnOnMouseInputModeChanged(this.parent, onmouseinputmodechangedEvent);
+        }
+    }
+    
+    [System.Windows.Forms.AxHost.ClsidAttribute("{3523c2fb-4031-44e4-9a3b-f1e94986ee7f}")]
+    [System.ComponentModel.DesignTimeVisibleAttribute(true)]
+    [System.ComponentModel.DefaultEvent("OnConnecting")]
+    public class AxMsRdpClient2 : System.Windows.Forms.AxHost {
+        
+        private MSTSCLib.IMsRdpClient2 ocx;
+        
+        private AxMsRdpClient2EventMulticaster eventMulticaster;
+        
+        private System.Windows.Forms.AxHost.ConnectionPointCookie cookie;
+        
+        public AxMsRdpClient2() : 
+                base("3523c2fb-4031-44e4-9a3b-f1e94986ee7f") {
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(1)]
+        public virtual string Server {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("Server", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.Server;
+            }
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("Server", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.Server = value;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(2)]
+        public virtual string Domain {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("Domain", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.Domain;
+            }
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("Domain", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.Domain = value;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(3)]
+        public virtual string UserName {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("UserName", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.UserName;
+            }
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("UserName", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.UserName = value;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(4)]
+        public virtual string DisconnectedText {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("DisconnectedText", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.DisconnectedText;
+            }
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("DisconnectedText", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.DisconnectedText = value;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(5)]
+        public virtual string ConnectingText {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("ConnectingText", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.ConnectingText;
+            }
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("ConnectingText", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.ConnectingText = value;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(6)]
+        public virtual short Connected {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("Connected", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.Connected;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(12)]
+        public virtual int DesktopWidth {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("DesktopWidth", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.DesktopWidth;
+            }
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("DesktopWidth", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.DesktopWidth = value;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(13)]
+        public virtual int DesktopHeight {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("DesktopHeight", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.DesktopHeight;
+            }
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("DesktopHeight", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.DesktopHeight = value;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(16)]
+        public virtual int StartConnected {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("StartConnected", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.StartConnected;
+            }
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("StartConnected", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.StartConnected = value;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(17)]
+        public virtual int HorizontalScrollBarVisible {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("HorizontalScrollBarVisible", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.HorizontalScrollBarVisible;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(18)]
+        public virtual int VerticalScrollBarVisible {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("VerticalScrollBarVisible", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.VerticalScrollBarVisible;
+            }
+        }
+        
+        [System.ComponentModel.Browsable(false)]
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(19)]
+        public virtual string FullScreenTitle {
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("FullScreenTitle", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.FullScreenTitle = value;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(20)]
+        public virtual int CipherStrength {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("CipherStrength", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.CipherStrength;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(21)]
+        public virtual string Version {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("Version", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.Version;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(22)]
+        public virtual int SecuredSettingsEnabled {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("SecuredSettingsEnabled", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.SecuredSettingsEnabled;
+            }
+        }
+        
+        [System.ComponentModel.Browsable(false)]
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(97)]
+        public virtual MSTSCLib.IMsTscSecuredSettings SecuredSettings {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("SecuredSettings", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.SecuredSettings;
+            }
+        }
+        
+        [System.ComponentModel.Browsable(false)]
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(98)]
+        public virtual MSTSCLib.IMsTscAdvancedSettings AdvancedSettings {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("AdvancedSettings", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.AdvancedSettings;
+            }
+        }
+        
+        [System.ComponentModel.Browsable(false)]
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(99)]
+        public virtual MSTSCLib.IMsTscDebug Debugger {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("Debugger", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.Debugger;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(100)]
+        public virtual int ColorDepth {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("ColorDepth", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.ColorDepth;
+            }
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("ColorDepth", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.ColorDepth = value;
+            }
+        }
+        
+        [System.ComponentModel.Browsable(false)]
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(101)]
+        public virtual MSTSCLib.IMsRdpClientAdvancedSettings AdvancedSettings2 {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("AdvancedSettings2", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.AdvancedSettings2;
+            }
+        }
+        
+        [System.ComponentModel.Browsable(false)]
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(102)]
+        public virtual MSTSCLib.IMsRdpClientSecuredSettings SecuredSettings2 {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("SecuredSettings2", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.SecuredSettings2;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(103)]
+        public virtual MSTSCLib.ExtendedDisconnectReasonCode ExtendedDisconnectReason {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("ExtendedDisconnectReason", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.ExtendedDisconnectReason;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(104)]
+        public virtual bool FullScreen {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("FullScreen", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.FullScreen;
+            }
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("FullScreen", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.FullScreen = value;
+            }
+        }
+        
+        [System.ComponentModel.Browsable(false)]
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(200)]
+        public virtual MSTSCLib.IMsRdpClientAdvancedSettings2 AdvancedSettings3 {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("AdvancedSettings3", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.AdvancedSettings3;
+            }
+        }
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [System.Runtime.InteropServices.DispIdAttribute(201)]
+        public virtual string ConnectedStatusText {
+            get {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("ConnectedStatusText", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertyGet);
+                }
+                return this.ocx.ConnectedStatusText;
+            }
+            set {
+                if ((this.ocx == null)) {
+                    throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("ConnectedStatusText", System.Windows.Forms.AxHost.ActiveXInvokeKind.PropertySet);
+                }
+                this.ocx.ConnectedStatusText = value;
+            }
+        }
+        
+        public event System.EventHandler OnConnecting;
+        
+        public event System.EventHandler OnConnected;
+        
+        public event System.EventHandler OnLoginComplete;
+        
+        public event IMsTscAxEvents_OnDisconnectedEventHandler OnDisconnected;
+        
+        public event System.EventHandler OnEnterFullScreenMode;
+        
+        public event System.EventHandler OnLeaveFullScreenMode;
+        
+        public event IMsTscAxEvents_OnChannelReceivedDataEventHandler OnChannelReceivedData;
+        
+        public event System.EventHandler OnRequestGoFullScreen;
+        
+        public event System.EventHandler OnRequestLeaveFullScreen;
+        
+        public event IMsTscAxEvents_OnFatalErrorEventHandler OnFatalError;
+        
+        public event IMsTscAxEvents_OnWarningEventHandler OnWarning;
+        
+        public event IMsTscAxEvents_OnRemoteDesktopSizeChangeEventHandler OnRemoteDesktopSizeChange;
+        
+        public event System.EventHandler OnIdleTimeoutNotification;
+        
+        public event System.EventHandler OnRequestContainerMinimize;
+        
+        public event IMsTscAxEvents_OnConfirmCloseEventHandler OnConfirmClose;
+        
+        public event IMsTscAxEvents_OnReceivedTSPublicKeyEventHandler OnReceivedTSPublicKey;
+        
+        public event IMsTscAxEvents_OnAutoReconnectingEventHandler OnAutoReconnecting;
+        
+        public event System.EventHandler OnAuthenticationWarningDisplayed;
+        
+        public event System.EventHandler OnAuthenticationWarningDismissed;
+        
+        public event IMsTscAxEvents_OnRemoteProgramResultEventHandler OnRemoteProgramResult;
+        
+        public event IMsTscAxEvents_OnRemoteProgramDisplayedEventHandler OnRemoteProgramDisplayed;
+        
+        public event IMsTscAxEvents_OnLogonErrorEventHandler OnLogonError;
+        
+        public event IMsTscAxEvents_OnFocusReleasedEventHandler OnFocusReleased;
+        
+        public event IMsTscAxEvents_OnUserNameAcquiredEventHandler OnUserNameAcquired;
+        
+        public event IMsTscAxEvents_OnMouseInputModeChangedEventHandler OnMouseInputModeChanged;
+        
+        public virtual void Connect() {
+            if ((this.ocx == null)) {
+                throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("Connect", System.Windows.Forms.AxHost.ActiveXInvokeKind.MethodInvoke);
+            }
+            this.ocx.Connect();
+        }
+        
+        public virtual void Disconnect() {
+            if ((this.ocx == null)) {
+                throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("Disconnect", System.Windows.Forms.AxHost.ActiveXInvokeKind.MethodInvoke);
+            }
+            this.ocx.Disconnect();
+        }
+        
+        public virtual void CreateVirtualChannels(string newVal) {
+            if ((this.ocx == null)) {
+                throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("CreateVirtualChannels", System.Windows.Forms.AxHost.ActiveXInvokeKind.MethodInvoke);
+            }
+            this.ocx.CreateVirtualChannels(newVal);
+        }
+        
+        public virtual void SendOnVirtualChannel(string chanName, string chanData) {
+            if ((this.ocx == null)) {
+                throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("SendOnVirtualChannel", System.Windows.Forms.AxHost.ActiveXInvokeKind.MethodInvoke);
+            }
+            this.ocx.SendOnVirtualChannel(chanName, chanData);
+        }
+        
+        public virtual void SetVirtualChannelOptions(string chanName, int chanOptions) {
+            if ((this.ocx == null)) {
+                throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("SetVirtualChannelOptions", System.Windows.Forms.AxHost.ActiveXInvokeKind.MethodInvoke);
+            }
+            this.ocx.SetVirtualChannelOptions(chanName, chanOptions);
+        }
+        
+        public virtual int GetVirtualChannelOptions(string chanName) {
+            if ((this.ocx == null)) {
+                throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("GetVirtualChannelOptions", System.Windows.Forms.AxHost.ActiveXInvokeKind.MethodInvoke);
+            }
+            int returnValue = ((int)(this.ocx.GetVirtualChannelOptions(chanName)));
+            return returnValue;
+        }
+        
+        public virtual MSTSCLib.ControlCloseStatus RequestClose() {
+            if ((this.ocx == null)) {
+                throw new System.Windows.Forms.AxHost.InvalidActiveXStateException("RequestClose", System.Windows.Forms.AxHost.ActiveXInvokeKind.MethodInvoke);
+            }
+            MSTSCLib.ControlCloseStatus returnValue = ((MSTSCLib.ControlCloseStatus)(this.ocx.RequestClose()));
+            return returnValue;
+        }
+        
+        protected override void CreateSink() {
+            try {
+                this.eventMulticaster = new AxMsRdpClient2EventMulticaster(this);
+                this.cookie = new System.Windows.Forms.AxHost.ConnectionPointCookie(this.ocx, this.eventMulticaster, typeof(MSTSCLib.IMsTscAxEvents));
+            }
+            catch (System.Exception ) {
+            }
+        }
+        
+        protected override void DetachSink() {
+            try {
+                this.cookie.Disconnect();
+            }
+            catch (System.Exception ) {
+            }
+        }
+        
+        protected override void AttachInterfaces() {
+            try {
+                this.ocx = ((MSTSCLib.IMsRdpClient2)(this.GetOcx()));
+            }
+            catch (System.Exception ) {
+            }
+        }
+        
+        internal void RaiseOnOnConnecting(object sender, System.EventArgs e) {
+            if ((this.OnConnecting != null)) {
+                this.OnConnecting(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnConnected(object sender, System.EventArgs e) {
+            if ((this.OnConnected != null)) {
+                this.OnConnected(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnLoginComplete(object sender, System.EventArgs e) {
+            if ((this.OnLoginComplete != null)) {
+                this.OnLoginComplete(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnDisconnected(object sender, IMsTscAxEvents_OnDisconnectedEvent e) {
+            if ((this.OnDisconnected != null)) {
+                this.OnDisconnected(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnEnterFullScreenMode(object sender, System.EventArgs e) {
+            if ((this.OnEnterFullScreenMode != null)) {
+                this.OnEnterFullScreenMode(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnLeaveFullScreenMode(object sender, System.EventArgs e) {
+            if ((this.OnLeaveFullScreenMode != null)) {
+                this.OnLeaveFullScreenMode(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnChannelReceivedData(object sender, IMsTscAxEvents_OnChannelReceivedDataEvent e) {
+            if ((this.OnChannelReceivedData != null)) {
+                this.OnChannelReceivedData(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnRequestGoFullScreen(object sender, System.EventArgs e) {
+            if ((this.OnRequestGoFullScreen != null)) {
+                this.OnRequestGoFullScreen(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnRequestLeaveFullScreen(object sender, System.EventArgs e) {
+            if ((this.OnRequestLeaveFullScreen != null)) {
+                this.OnRequestLeaveFullScreen(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnFatalError(object sender, IMsTscAxEvents_OnFatalErrorEvent e) {
+            if ((this.OnFatalError != null)) {
+                this.OnFatalError(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnWarning(object sender, IMsTscAxEvents_OnWarningEvent e) {
+            if ((this.OnWarning != null)) {
+                this.OnWarning(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnRemoteDesktopSizeChange(object sender, IMsTscAxEvents_OnRemoteDesktopSizeChangeEvent e) {
+            if ((this.OnRemoteDesktopSizeChange != null)) {
+                this.OnRemoteDesktopSizeChange(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnIdleTimeoutNotification(object sender, System.EventArgs e) {
+            if ((this.OnIdleTimeoutNotification != null)) {
+                this.OnIdleTimeoutNotification(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnRequestContainerMinimize(object sender, System.EventArgs e) {
+            if ((this.OnRequestContainerMinimize != null)) {
+                this.OnRequestContainerMinimize(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnConfirmClose(object sender, IMsTscAxEvents_OnConfirmCloseEvent e) {
+            if ((this.OnConfirmClose != null)) {
+                this.OnConfirmClose(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnReceivedTSPublicKey(object sender, IMsTscAxEvents_OnReceivedTSPublicKeyEvent e) {
+            if ((this.OnReceivedTSPublicKey != null)) {
+                this.OnReceivedTSPublicKey(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnAutoReconnecting(object sender, IMsTscAxEvents_OnAutoReconnectingEvent e) {
+            if ((this.OnAutoReconnecting != null)) {
+                this.OnAutoReconnecting(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnAuthenticationWarningDisplayed(object sender, System.EventArgs e) {
+            if ((this.OnAuthenticationWarningDisplayed != null)) {
+                this.OnAuthenticationWarningDisplayed(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnAuthenticationWarningDismissed(object sender, System.EventArgs e) {
+            if ((this.OnAuthenticationWarningDismissed != null)) {
+                this.OnAuthenticationWarningDismissed(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnRemoteProgramResult(object sender, IMsTscAxEvents_OnRemoteProgramResultEvent e) {
+            if ((this.OnRemoteProgramResult != null)) {
+                this.OnRemoteProgramResult(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnRemoteProgramDisplayed(object sender, IMsTscAxEvents_OnRemoteProgramDisplayedEvent e) {
+            if ((this.OnRemoteProgramDisplayed != null)) {
+                this.OnRemoteProgramDisplayed(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnLogonError(object sender, IMsTscAxEvents_OnLogonErrorEvent e) {
+            if ((this.OnLogonError != null)) {
+                this.OnLogonError(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnFocusReleased(object sender, IMsTscAxEvents_OnFocusReleasedEvent e) {
+            if ((this.OnFocusReleased != null)) {
+                this.OnFocusReleased(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnUserNameAcquired(object sender, IMsTscAxEvents_OnUserNameAcquiredEvent e) {
+            if ((this.OnUserNameAcquired != null)) {
+                this.OnUserNameAcquired(sender, e);
+            }
+        }
+        
+        internal void RaiseOnOnMouseInputModeChanged(object sender, IMsTscAxEvents_OnMouseInputModeChangedEvent e) {
+            if ((this.OnMouseInputModeChanged != null)) {
+                this.OnMouseInputModeChanged(sender, e);
+            }
+        }
+    }
+    
+    [System.Runtime.InteropServices.ClassInterface(System.Runtime.InteropServices.ClassInterfaceType.None)]
+    public class AxMsRdpClient2EventMulticaster : MSTSCLib.IMsTscAxEvents {
+        
+        private AxMsRdpClient2 parent;
+        
+        public AxMsRdpClient2EventMulticaster(AxMsRdpClient2 parent) {
             this.parent = parent;
         }
         
