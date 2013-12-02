@@ -71,7 +71,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
         public string NetworkID
         {
-            get { return rasd.InstanceID.Value; }
+            get { return rasd.InstanceID == null ? null : rasd.InstanceID.Value; }
         }
     }
 
