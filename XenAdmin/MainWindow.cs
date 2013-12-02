@@ -1759,6 +1759,7 @@ namespace XenAdmin
                     {
                         var objectsView = rootNodeGrouping.Grouping as OrganizationViewObjects;
                         var vappsView = rootNodeGrouping.Grouping as OrganizationViewVapps;
+                        var foldersView = rootNodeGrouping.Grouping as OrganizationViewFolders;
 
                         if (vappsView != null)
                         {
@@ -1771,6 +1772,11 @@ namespace XenAdmin
                                              ?? SelectionManager.Selection.GroupAncestor;
 
                             SearchPage.Search = Search.SearchForNonVappGroup(gt.Grouping, gt.Parent, gt.Group);
+                        }
+                        else if (foldersView != null)
+                        {
+                            SearchPage.Search = Search.SearchForFolderGroup(rootNodeGrouping.Grouping,
+                                  rootNodeGrouping.Parent, rootNodeGrouping.Group);
                         }
                         else
                         {
