@@ -624,37 +624,35 @@ namespace XenAdmin.XenSearch
         public static Search SearchForTags()
         {
             var tagsQuery = new ListEmptyQuery<String>(PropertyNames.tags, false);
-            var groupQuery = new GroupQuery(new QueryFilter[] {tagsQuery}, GroupQuery.GroupQueryType.Or);
-
-            Query query = new Query(new QueryScope(ObjectTypes.AllIncFolders), groupQuery);
+            Query query = new Query(new QueryScope(ObjectTypes.AllIncFolders), tagsQuery);
             return new Search(query, null, false, "", null, false);
         }
 
         public static Search SearchForFolders()
         {
             var foldersQuery = new NullQuery<Folder>(PropertyNames.folder, false);
-           var groupQuery = new GroupQuery(new QueryFilter[] { foldersQuery }, GroupQuery.GroupQueryType.Or);
-
-            Query query = new Query(new QueryScope(ObjectTypes.AllIncFolders), groupQuery);
+            Query query = new Query(new QueryScope(ObjectTypes.AllIncFolders), foldersQuery);
             return new Search(query, null, false, "", null, false);
         }
 
         public static Search SearchForCustomFields()
         {
             var fieldsQuery = new BooleanQuery(PropertyNames.has_custom_fields, true);
-            var groupQuery = new GroupQuery(new QueryFilter[] { fieldsQuery }, GroupQuery.GroupQueryType.Or);
-
-            Query query = new Query(new QueryScope(ObjectTypes.AllIncFolders), groupQuery);
+            Query query = new Query(new QueryScope(ObjectTypes.AllIncFolders), fieldsQuery);
             return new Search(query, null, false, "", null, false);
         }
 
         public static Search SearchForVapps()
         {
             var vAppsQuery = new BooleanQuery(PropertyNames.in_any_appliance, true);
-            var groupQuery = new GroupQuery(new QueryFilter[] { vAppsQuery }, GroupQuery.GroupQueryType.Or);
-
-            Query query = new Query(new QueryScope(ObjectTypes.AllIncFolders), groupQuery);
+            Query query = new Query(new QueryScope(ObjectTypes.AllIncFolders), vAppsQuery);
             return new Search(query, null, false, "", null, false);
+        }
+
+        public static Search SearchForFolderGroup(Grouping grouping, object parent, object v)
+        {
+            return new Search(new Query(new QueryScope(ObjectTypes.AllIncFolders), grouping.GetSubquery(parent, v)),
+                              grouping.GetSubgrouping(v), false, grouping.GetGroupName(v), "", false);
         }
 
         public static Search SearchForNonVappGroup(Grouping grouping, object parent, object v)

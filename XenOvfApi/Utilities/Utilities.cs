@@ -311,7 +311,7 @@ namespace XenOvf.Utilities
             EnvelopeType ovfEnv = null;
             try
             {
-                ovfEnv = Tools.DeserializeXml<EnvelopeType>(ovfxml);
+                ovfEnv = (EnvelopeType)Deserialize(ovfxml, typeof(EnvelopeType));
             }
             catch (Exception ex)
             {
@@ -323,28 +323,27 @@ namespace XenOvf.Utilities
                 foreach (XmlAttribute xa in ovfEnv.AnyAttr)
                 {
                     if (xa.Prefix.ToLower().Equals(Properties.Settings.Default.vmwNamespacePrefix) ||
-                        xa.NamespaceURI.Equals(Properties.Settings.Default.vmwNameSpace))
+                        xa.NamespaceURI.Equals(Properties.Settings.Default.vmwNameSpace) ||
+                        xa.Prefix.ToLower() == Properties.Settings.Default.VMwareNamespacePrefix ||
+                        xa.NamespaceURI == Properties.Settings.Default.VMwareNamespace)
                     {
                         isVmware = true;
                         break;
                     }
                 }
 
+                //always call the vc4 conversion; even if the ovf is newer the
+                //replacements in the method (if they happen) are harmless
+                //and the only cost is the re-deserialization of the xml
                 if (isVmware)
-                {
-                    // If we have these then its a newer/valid OVF from VMWare.
-                    if (ovfEnv.References == null && ovfEnv.Sections == null && ovfEnv.Item == null)
-                    {
-                        ovfEnv = Tools.LoadVmw40OvfXml(ovfxml);
-                    }
-                }
+                    ovfEnv = LoadVmw40OvfXml(ovfxml);
             }
             if (ovfEnv == null)
             {
                 ovfEnv = LoadVmw35OvfXml(ovfxml);
+                Log.Error("Last Change Convert died.");
             }
 
-            
             return ovfEnv;
         }
         /// <summary>
@@ -551,18 +550,9 @@ namespace XenOvf.Utilities
         [SecurityPermission(SecurityAction.LinkDemand)]
         public static T LoadFileXml<T>(string filename)
         {
-            return (T)DeserializeXml<T>(LoadFile(filename));
+            return (T)Deserialize(LoadFile(filename), typeof(T));
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="xmlstring"></param>
-        /// <returns></returns>
-        public static T DeserializeXml<T>(string xmlstring)
-        {
-            return (T)Tools.Deserialize(xmlstring, typeof(T));
-        }
+
         #endregion
 
         #region STREAM
@@ -602,36 +592,38 @@ namespace XenOvf.Utilities
 
             return isValid;
         }
-        private static EnvelopeType LoadVmw40OvfXml(string xmldoc)
+        private static EnvelopeType LoadVmw40OvfXml(string ovfxml)
         {
-            EnvelopeType vmwOvf = null;
-            //
+            if (string.IsNullOrEmpty(ovfxml))
+                return null;
+
             // With what VMWare currently publishes with VC4, we need to update the XML
-            //
-            xmldoc = xmldoc.Replace("<References", "<ovf:References")  .Replace("</References", "</ovf:References")
-                           .Replace("<Section", "<ovf:Section")        .Replace("</Section", "</ovf:Section")
-                           .Replace("<Content", "<ovf:Content")        .Replace("</Content", "</ovf:Content")
-                           .Replace("<File", "<ovf:File")              .Replace("</File", "</ovf:File")
-                           .Replace("<Disk", "<ovf:Disk")              .Replace("</Disk", "</ovf:Disk")
-                           .Replace("<Info", "<ovf:Info")              .Replace("</Info", "</ovf:Info")
-                           .Replace("<Network", "<ovf:Network")        .Replace("</Network", "</ovf:Network")
+
+            ovfxml = ovfxml.Replace("<References", "<ovf:References").Replace("</References", "</ovf:References")
+                           .Replace("<Section", "<ovf:Section").Replace("</Section", "</ovf:Section")
+                           .Replace("<Content", "<ovf:Content").Replace("</Content", "</ovf:Content")
+                           .Replace("<File", "<ovf:File").Replace("</File", "</ovf:File")
+                           .Replace("<Disk", "<ovf:Disk").Replace("</Disk", "</ovf:Disk")
+                           .Replace("<Info", "<ovf:Info").Replace("</Info", "</ovf:Info")
+                           .Replace("<Network", "<ovf:Network").Replace("</Network", "</ovf:Network")
                            .Replace("<Description", "<ovf:Description").Replace("</Description", "</ovf:Description")
                            .Replace("<License", "<ovf:License").Replace("</License", "</ovf:License")
                            .Replace("<System", "<ovf:System").Replace("</System", "</ovf:System")
                            .Replace("<rasd:InstanceId", "<rasd:InstanceID").Replace("</rasd:InstanceId", "</rasd:InstanceID")
                            .Replace("<Item", "<ovf:Item").Replace("</Item", "</ovf:Item");
 
-            vmwOvf = (EnvelopeType)Deserialize(xmldoc, typeof(EnvelopeType));
-            Log.Debug("LoadVmw40OvfXml leaving");
-            return vmwOvf;
+            EnvelopeType ovfEnv = (EnvelopeType)Deserialize(ovfxml, typeof(EnvelopeType));
+            Log.Debug("Finished LoadVmw40OvfXml");
+            return ovfEnv;
         }
-        private static EnvelopeType LoadVmw35OvfXml(string xmldoc)
+        private static EnvelopeType LoadVmw35OvfXml(string ovfxml)
         {
-            EnvelopeType vmwOvf = null;
-            //
+            if (string.IsNullOrEmpty(ovfxml))
+                return null;
+
             // With what VMWare currently publishes with VC35, we need to update the XML
-            //
-            xmldoc = xmldoc.Replace(Properties.Settings.Default.vmwEnvelopeNamespace, Properties.Settings.Default.cimEnvelopeURI)
+
+            ovfxml = ovfxml.Replace(Properties.Settings.Default.vmwEnvelopeNamespace, Properties.Settings.Default.cimEnvelopeURI)
                            .Replace("<References", "<ovf:References").Replace("</References", "</ovf:References")
                            .Replace("<Section", "<ovf:Section").Replace("</Section", "</ovf:Section")
                            .Replace("<Content", "<ovf:Content").Replace("</Content", "</ovf:Content")
@@ -645,13 +637,9 @@ namespace XenOvf.Utilities
                            .Replace("<rasd:InstanceId", "<rasd:InstanceID").Replace("</rasd:InstanceId", "</rasd:InstanceID")
                            .Replace("<Item", "<ovf:Item").Replace("</Item", "</ovf:Item");
 
-            vmwOvf = (EnvelopeType)Deserialize(xmldoc, typeof(EnvelopeType));
-            Log.Debug("LoadVmw35OvfXml leaving");
-            if (vmwOvf == null)
-            {
-                Log.Error("Last Change Convert died.");
-            }
-            return vmwOvf;
+            EnvelopeType ovfEnv = (EnvelopeType)Deserialize(ovfxml, typeof(EnvelopeType));
+            Log.Debug("Finished LoadVmw35OvfXml");
+            return ovfEnv;
         }
         private static XenMember[] DeserializeXenMembers(XenMember[] members)
         {

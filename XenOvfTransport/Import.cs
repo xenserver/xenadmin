@@ -1323,7 +1323,11 @@ namespace XenOvfTransport
             gpuGroup = null;
             vgpuType = null;
 
-            var datum = system.VirtualSystemOtherConfigurationData.FirstOrDefault(s => s.Name == "vgpu");
+            var data = system.VirtualSystemOtherConfigurationData;
+            if (data == null)
+                return;
+
+            var datum = data.FirstOrDefault(s => s.Name == "vgpu");
             if (datum == null)
                 return;
 

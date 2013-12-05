@@ -288,5 +288,11 @@
     <Setting Name="xenVDIKey" Type="System.String" Scope="Application">
       <Value Profile="(Default)">vdi=</Value>
     </Setting>
+    <Setting Name="VMwareNamespacePrefix" Type="System.String" Scope="User">
+      <Value Profile="(Default)">vmw</Value>
+    </Setting>
+    <Setting Name="VMwareNamespace" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://www.vmware/schema/ovf</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

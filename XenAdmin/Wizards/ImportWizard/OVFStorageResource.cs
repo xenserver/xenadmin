@@ -77,16 +77,16 @@ namespace XenAdmin.Wizards.ImportWizard
         {
             get
             {
-                if(rasd.ElementName == null)
-                    return null;
-
-                return rasd.ElementName.Value;
+                return rasd.ElementName == null ? null : rasd.ElementName.Value;
             }
         }
 
         public object Tag
         {
-            get { return rasd.InstanceID.Value; }
+            get
+            {
+                return rasd.InstanceID == null ? null : rasd.InstanceID.Value;
+            }
         }
 
         public bool SRTypeInvalid

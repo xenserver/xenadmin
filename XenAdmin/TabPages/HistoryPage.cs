@@ -276,7 +276,7 @@ namespace XenAdmin.TabPages
         {
             toolStripDdbFilterStatus.Enabled =
                 toolStripDdbFilterLocation.Enabled =
-                toolStripDdbFilterDates.Enabled = dataGridView.Rows.Count > 0;
+                toolStripDdbFilterDates.Enabled = ConnectionsManager.History.Count > 0;
 
             tsmiDismissAll.Enabled = dataGridView.Rows.Cast<DataGridViewActionRow>().Any(row => row.Action.IsCompleted);
             tsmiDismissSelected.Enabled = dataGridView.SelectedRows.Cast<DataGridViewActionRow>().Any(row => row.Action.IsCompleted);
