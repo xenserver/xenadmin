@@ -582,7 +582,7 @@ namespace XenAdmin.TabPages
             toolStripDropDownSeveritiesFilter.Enabled =
                 toolStripDropDownButtonServerFilter.Enabled =
                 toolStripDropDownButtonDateFilter.Enabled =
-                toolStripButtonExportAll.Enabled = GridViewAlerts.Rows.Count > 0;
+                toolStripButtonExportAll.Enabled = Alert.NonDismissingAlertCount > 0;
 
             // We use the nondismissing alert count here because we dont wan't to
             // offer people the chance to dismiss alerts which are already being

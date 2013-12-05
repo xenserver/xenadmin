@@ -154,7 +154,8 @@ namespace XenAdmin.Controls
                         });
                 }
 
-                Enabled = DropDownItems.Count > 0;
+                if (DropDownItems.Count <= 0)
+                    Enabled = false;
             }
             finally
             {
@@ -384,6 +385,7 @@ namespace XenAdmin.Controls
             {
                 toolStripMenuItemAll.Enabled = false;
                 InitializeHostList();
+                BuildFilterList();
             }
             else
             {
