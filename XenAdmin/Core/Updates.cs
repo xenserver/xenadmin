@@ -70,15 +70,15 @@ namespace XenAdmin.Core
 
                 if (succeeded)
                 {
-                    var xenCenterAlert = NewXenCenterVersionAlert(action.XenCenterVersions, false);
+                    var xenCenterAlert = NewXenCenterVersionAlert(action.XenCenterVersions);
                     if (xenCenterAlert != null)
                         updateAlerts.Add(xenCenterAlert);
 
-                    var xenServerUpdateAlert = NewServerVersionAlert(action.XenServerVersions, false);
+                    var xenServerUpdateAlert = NewServerVersionAlert(action.XenServerVersions);
                     if (xenServerUpdateAlert != null)
                         updateAlerts.Add(xenServerUpdateAlert);
 
-                    var xenServerPatchAlerts = NewServerPatchesAlerts(action.XenServerVersions, action.XenServerPatches, false);
+                    var xenServerPatchAlerts = NewServerPatchesAlerts(action.XenServerVersions, action.XenServerPatches);
                     if (xenServerPatchAlerts != null)
                     {
                         foreach (var xenServerPatchAlert in xenServerPatchAlerts)
@@ -156,14 +156,12 @@ namespace XenAdmin.Core
                    latest.Find(xcv => string.IsNullOrEmpty(xcv.Lang));
         }
 
-        private static XenCenterUpdateAlert NewXenCenterVersionAlert(List<XenCenterVersion> xenCenterVersions,
-            bool checkAlertIsAlreadyDismissed)
+        private static XenCenterUpdateAlert NewXenCenterVersionAlert(List<XenCenterVersion> xenCenterVersions)
         {
-            return NewXenCenterVersionAlert(xenCenterVersions, Program.Version, checkAlertIsAlreadyDismissed);
+            return NewXenCenterVersionAlert(xenCenterVersions, Program.Version);
         }
 
-        public static XenCenterUpdateAlert NewXenCenterVersionAlert(List<XenCenterVersion> xenCenterVersions, Version currentProgramVersion,
-            bool checkAlertIsAlreadyDismissed)
+        public static XenCenterUpdateAlert NewXenCenterVersionAlert(List<XenCenterVersion> xenCenterVersions, Version currentProgramVersion)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
                 return null;
@@ -172,12 +170,6 @@ namespace XenAdmin.Core
 
             if (toUse == null)
                 return null;
-
-            if (checkAlertIsAlreadyDismissed && (toUse.VersionAndLang == Properties.Settings.Default.LatestXenCenterSeen))
-            {
-                log.Info(string.Format("Version {0} detected but already dismissed", toUse.VersionAndLang));
-                return null;
-            }
 
             if (toUse.Version > currentProgramVersion ||
                 (toUse.Version == currentProgramVersion && toUse.Lang == Program.CurrentLanguage &&
@@ -192,13 +184,12 @@ namespace XenAdmin.Core
         }
 
         public static List<XenServerPatchAlert> NewServerPatchesAlerts(List<XenServerVersion> xenServerVersions,
-            List<XenServerPatch> xenServerPatches, bool checkAlertIsAlreadyDismissed)
+            List<XenServerPatch> xenServerPatches)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
                 return null;
 
-            List<XenServerPatchAlert> alerts = GetServerPatchesAlerts(xenServerVersions, xenServerPatches,
-                                                                      checkAlertIsAlreadyDismissed);
+            var alerts = GetServerPatchesAlerts(xenServerVersions, xenServerPatches);
             return alerts.Where(alert => !alert.CanIgnore).ToList();
         }
 
@@ -215,7 +206,7 @@ namespace XenAdmin.Core
         }
 
         private static List<XenServerPatchAlert> GetServerPatchesAlerts(List<XenServerVersion> xenServerVersions,
-            List<XenServerPatch> xenServerPatches, bool checkAlertIsAlreadyDismissed)
+            List<XenServerPatch> xenServerPatches)
         {
             List<XenServerPatchAlert> alerts = new List<XenServerPatchAlert>();
 
@@ -252,18 +243,6 @@ namespace XenAdmin.Core
                     foreach (XenServerPatch xenServerPatch in patches)
                     {
                         XenServerPatchAlert alert = GetServerPatchAlert(alerts, xenServerPatch);
-
-                        if (checkAlertIsAlreadyDismissed && pool.other_config.ContainsKey(IgnorePatchAction.IgnorePatchKey))
-                        {
-                            List<string> ignorelist =
-                                new List<string>(pool.other_config[IgnorePatchAction.IgnorePatchKey].Split(','));
-                            if (ignorelist.Contains(xenServerPatch.Uuid))
-                            {
-                                // we dont want to show the alert
-                                continue;
-                            }
-                        }
-
                         XenServerPatch serverPatch = xenServerPatch;
                         List<Host> noPatchHosts =
                             hosts.Where(host => !host.AppliedPatches().Any(patch => patch.uuid == serverPatch.Uuid)).ToList();
@@ -279,15 +258,7 @@ namespace XenAdmin.Core
             return alerts;
         }
 
-        private static List<string> GetLatestSeenVersion(Pool pool)
-        {
-            if (!pool.other_config.ContainsKey(LastSeenServerVersionKey))
-                return new List<string>();
-            return new List<string>(pool.other_config[LastSeenServerVersionKey].Split(','));
-        }
-
-        public static XenServerUpdateAlert NewServerVersionAlert(List<XenServerVersion> xenServerVersions,
-            bool checkAlertIsAlreadyDismissed)
+        public static XenServerUpdateAlert NewServerVersionAlert(List<XenServerVersion> xenServerVersions)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
                 return null;
@@ -314,10 +285,6 @@ namespace XenAdmin.Core
                 List<Host> hosts = xc.Cache.Hosts.ToList();
                 if (master == null || pool == null)
                     continue;
-
-                //check if the latest version has been already dismissed
-                if (checkAlertIsAlreadyDismissed && GetLatestSeenVersion(pool).Contains(latestVersion.VersionAndOEM))
-                    return null;
 
                 List<Host> outOfDateHosts =
                     hosts.Where(host => new Version(Helpers.HostProductVersion(host)) < latestVersion.Version).ToList();

@@ -115,14 +115,13 @@ namespace CFUValidator
             SetupMocks(xenServerPatches, xenServerVersions);
 
             Status = "Determining XenCenter update required...";
-            XenCenterUpdateAlert xcupdateAlert = XenAdmin.Core.Updates.NewXenCenterVersionAlert(xenCenterVersions, new Version(ServerVersion), false);
+            var xcupdateAlert = XenAdmin.Core.Updates.NewXenCenterVersionAlert(xenCenterVersions, new Version(ServerVersion));
 
             Status = "Determining XenServer update required...";
-            XenServerUpdateAlert updateAlert = XenAdmin.Core.Updates.NewServerVersionAlert(xenServerVersions, false);
+            var updateAlert = XenAdmin.Core.Updates.NewServerVersionAlert(xenServerVersions);
 
             Status = "Determining patches required...";
-            List<XenServerPatchAlert> patchAlerts = XenAdmin.Core.Updates.NewServerPatchesAlerts(xenServerVersions,
-                                                                                                 xenServerPatches, false);
+            var patchAlerts = XenAdmin.Core.Updates.NewServerPatchesAlerts(xenServerVersions, xenServerPatches);
 
             //Build patch checks list
             List<AlertFeatureValidator> validators = new List<AlertFeatureValidator>
@@ -147,7 +146,6 @@ namespace CFUValidator
                 xenServerVersions.ConvertAll(i=>i.Version.ToString()).Distinct().ToList().ForEach(v=>sb.AppendLine(v));
                 throw new CFUValidationException("Could not find the version in the check for updates file: " + ServerVersion + sb);
             }
-                
         }
 
         public string Output { get; private set; }
