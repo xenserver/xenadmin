@@ -115,13 +115,13 @@ namespace CFUValidator
             SetupMocks(xenServerPatches, xenServerVersions);
 
             Status = "Determining XenCenter update required...";
-            var xcupdateAlert = XenAdmin.Core.Updates.NewXenCenterVersionAlert(xenCenterVersions, new Version(ServerVersion));
+            var xcupdateAlert = XenAdmin.Core.Updates.NewXenCenterUpdateAlert(xenCenterVersions, new Version(ServerVersion));
 
             Status = "Determining XenServer update required...";
-            var updateAlert = XenAdmin.Core.Updates.NewServerVersionAlert(xenServerVersions);
+            var updateAlert = XenAdmin.Core.Updates.NewXenServerUpdateAlert(xenServerVersions);
 
             Status = "Determining patches required...";
-            var patchAlerts = XenAdmin.Core.Updates.NewServerPatchesAlerts(xenServerVersions, xenServerPatches);
+            var patchAlerts = XenAdmin.Core.Updates.NewXenServerPatchAlerts(xenServerVersions, xenServerPatches);
 
             //Build patch checks list
             List<AlertFeatureValidator> validators = new List<AlertFeatureValidator>

@@ -123,15 +123,15 @@ namespace XenAdmin.Core
                 XenServerVersions = action.XenServerVersions;
                 XenServerPatches = action.XenServerPatches;
 
-                var xenCenterAlert = NewXenCenterVersionAlert(action.XenCenterVersions, Program.Version);
+                var xenCenterAlert = NewXenCenterUpdateAlert(action.XenCenterVersions, Program.Version);
                 if (xenCenterAlert != null)
                     updateAlerts.Add(xenCenterAlert);
 
-                var xenServerUpdateAlert = NewServerVersionAlert(action.XenServerVersions);
+                var xenServerUpdateAlert = NewXenServerUpdateAlert(action.XenServerVersions);
                 if (xenServerUpdateAlert != null)
                     updateAlerts.Add(xenServerUpdateAlert);
 
-                var xenServerPatchAlerts = NewServerPatchesAlerts(action.XenServerVersions, action.XenServerPatches);
+                var xenServerPatchAlerts = NewXenServerPatchAlerts(action.XenServerVersions, action.XenServerPatches);
                 if (xenServerPatchAlerts != null)
                 {
                     foreach (var xenServerPatchAlert in xenServerPatchAlerts)
@@ -217,7 +217,7 @@ namespace XenAdmin.Core
                    latest.FirstOrDefault(xcv => string.IsNullOrEmpty(xcv.Lang));
         }
 
-        public static XenCenterUpdateAlert NewXenCenterVersionAlert(List<XenCenterVersion> xenCenterVersions, Version currentProgramVersion)
+        public static XenCenterUpdateAlert NewXenCenterUpdateAlert(List<XenCenterVersion> xenCenterVersions, Version currentProgramVersion)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
                 return null;
@@ -239,13 +239,13 @@ namespace XenAdmin.Core
             return null;
         }
 
-        public static List<XenServerPatchAlert> NewServerPatchesAlerts(List<XenServerVersion> xenServerVersions,
+        public static List<XenServerPatchAlert> NewXenServerPatchAlerts(List<XenServerVersion> xenServerVersions,
             List<XenServerPatch> xenServerPatches)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
                 return null;
 
-            var alerts = GetServerPatchesAlerts(xenServerVersions, xenServerPatches);
+            var alerts = GetServerPatchAlerts(xenServerVersions, xenServerPatches);
             return alerts.Where(alert => !alert.CanIgnore).ToList();
         }
 
@@ -261,7 +261,7 @@ namespace XenAdmin.Core
             return alert;
         }
 
-        private static List<XenServerPatchAlert> GetServerPatchesAlerts(List<XenServerVersion> xenServerVersions,
+        private static List<XenServerPatchAlert> GetServerPatchAlerts(List<XenServerVersion> xenServerVersions,
             List<XenServerPatch> xenServerPatches)
         {
             List<XenServerPatchAlert> alerts = new List<XenServerPatchAlert>();
@@ -313,7 +313,7 @@ namespace XenAdmin.Core
             return alerts;
         }
 
-        public static XenServerUpdateAlert NewServerVersionAlert(List<XenServerVersion> xenServerVersions)
+        public static XenServerUpdateAlert NewXenServerUpdateAlert(List<XenServerVersion> xenServerVersions)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
                 return null;
@@ -351,7 +351,7 @@ namespace XenAdmin.Core
             if (!AllowUpdates || !Properties.Settings.Default.AllowXenServerUpdates)
                 return;
 
-            var alert = NewServerVersionAlert(XenServerVersions);
+            var alert = NewXenServerUpdateAlert(XenServerVersions);
             if (alert == null)
                 return;
 
@@ -370,7 +370,7 @@ namespace XenAdmin.Core
             if (!AllowUpdates || !Properties.Settings.Default.AllowPatchesUpdates)
                 return;
 
-            var alerts = GetServerPatchesAlerts(XenServerVersions, XenServerPatches);
+            var alerts = GetServerPatchAlerts(XenServerVersions, XenServerPatches);
 
             foreach (var alert in alerts)
             {
