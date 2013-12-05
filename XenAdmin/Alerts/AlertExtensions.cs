@@ -57,5 +57,26 @@ namespace XenAdmin.Alerts
                                  a.AppliesTo.EscapeQuotes(),
                                  date.EscapeQuotes());
         }
+
+        public static string GetUpdateDetailsCSVQuotes(this Alert a)
+        {
+            string date = String.Empty;
+            string description = String.Empty;
+
+            Program.Invoke(Program.MainWindow, delegate
+            {
+                date = HelpersGUI.DateTimeToString(
+                    a.Timestamp.ToLocalTime(),
+                    Messages.DATEFORMAT_DMY_HM, true);
+                description = a.Description;
+            });
+
+            return String.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\"",
+                                 a.Title.EscapeQuotes(),
+                                 description.EscapeQuotes(),
+                                 a.AppliesTo.EscapeQuotes(),
+                                 date.EscapeQuotes(),
+                                 a.WebPageLabel.EscapeQuotes());
+        }
     }
 }

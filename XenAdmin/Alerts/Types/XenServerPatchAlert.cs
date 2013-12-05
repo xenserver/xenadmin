@@ -125,6 +125,15 @@ namespace XenAdmin.Alerts
                 canIgnore = false;
         }
 
+        public void CopyConnectionsAndHosts(XenServerPatchAlert alert)
+        {
+            connections.Clear();
+            connections.AddRange(alert.connections);
+            hosts.Clear();
+            hosts.AddRange(alert.hosts);
+            canIgnore = connections.Count == 0 && hosts.Count == 0;
+        }
+
         public override string WebPageLabel
         {
             get

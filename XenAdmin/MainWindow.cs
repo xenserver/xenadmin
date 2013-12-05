@@ -194,10 +194,10 @@ namespace XenAdmin
             pluginManager.LoadPlugins();
             contextMenuBuilder = new ContextMenuBuilder(pluginManager, commandInterface);
 
-            updatesPage.UpdatesCollectionChanged += updatesPage_UpdatesCollectionChanged;
             eventsPage.GoToXenObjectRequested += eventsPage_GoToXenObjectRequested;
             SearchPage.SearchChanged += SearchPanel_SearchChanged;
             Alert.RegisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
+            Updates.RegisterCollectionChanged(Updates_CollectionChanged);
 
             FormFontFixer.Fix(this);
 
@@ -222,16 +222,15 @@ namespace XenAdmin
 
         private void XenCenterForm_ApplicationOpenFormsChanged()
         {
+            bool enabled = false;
+
             foreach (Form form in Application.OpenForms)
             {
                 if (form != this && form.Text != "" && !(form is ConnectingToServerDialog))
-                {
-                    windowToolStripMenuItem.Enabled = true;
-                    return;
-                }
+                    enabled = true;
             }
 
-            windowToolStripMenuItem.Enabled = false;
+            Program.BeginInvoke(this, () => { windowToolStripMenuItem.Enabled = enabled; });
         }
 
         private void Default_SettingChanging(object sender, SettingChangingEventArgs e)
@@ -571,14 +570,14 @@ namespace XenAdmin
                 CheckForUpdatesTimer.Interval = 1000 * 60 * 60 * 24; // 24 hours
                 CheckForUpdatesTimer.Tick += CheckForUpdatesTimer_Tick;
                 CheckForUpdatesTimer.Start();
-                Updates.AutomaticCheckForUpdates();
+                Updates.CheckForUpdates(false);
             }
             ProcessCommand(CommandLineArgType, CommandLineParam);
         }
 
         private void CheckForUpdatesTimer_Tick(object sender, EventArgs e)
         {
-            Updates.AutomaticCheckForUpdates();
+            Updates.CheckForUpdates(false);
         }
 
         private void LoadTasksAsMeddlingActions(IXenConnection connection)
@@ -777,8 +776,6 @@ namespace XenAdmin
                     //CA-41228 refresh submenu items when there are no connections
                     SelectionManager.RefreshSelection();
                 }
-                // update ui
-                //XenAdmin.Settings.SaveServerList();
             }
             catch (Exception exn)
             {
@@ -874,6 +871,8 @@ namespace XenAdmin
             if(licenseTimer != null)
                 licenseTimer.CheckActiveServerLicense(connection, false);
 
+            Updates.CheckServerPatches();
+            Updates.CheckServerVersion();
             RequestRefreshTreeView();
         }
 
@@ -970,6 +969,9 @@ namespace XenAdmin
                 case "other_config":
                     // other_config may contain HideFromXenCenter
                     UpdateToolbars();
+                    // other_config contains which patches to ignore
+                    Updates.CheckServerPatches();
+                    Updates.CheckServerVersion();
                     break;
 
                 case "name_label":
@@ -2426,15 +2428,19 @@ namespace XenAdmin
             navigationPane.SelectObject(obj);
         }
 
-        private void updatesPage_UpdatesCollectionChanged(int updatesCount)
+        private void Updates_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
-            navigationPane.UpdateNotificationsButton(NotificationsSubMode.Updates, updatesCount);
+            Program.Invoke(this, () =>
+                {
+                    int updatesCount = Updates.UpdateAlertsCount;
+                    navigationPane.UpdateNotificationsButton(NotificationsSubMode.Updates, updatesCount);
 
-            if (updatesPage.Visible)
-            {
-                TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Updates, updatesCount);
-                TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Updates, updatesCount);
-            }
+                    if (updatesPage.Visible)
+                    {
+                        TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Updates, updatesCount);
+                        TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Updates, updatesCount);
+                    }
+                });
         }
 
         private void CloseWhenActionsCanceled(object o)
@@ -2692,9 +2698,7 @@ namespace XenAdmin
                 alertPage.RefreshAlertList();
 
             if (updatesPage.Visible)
-                updatesPage.CheckForUpdates();
-            else
-                updatesPage.CancelUpdateCheck();
+                updatesPage.RefreshUpdateList();
 
             if (eventsPage.Visible)
             {

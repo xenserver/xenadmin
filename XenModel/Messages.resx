@@ -4415,11 +4415,17 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EXPORTED_SYSTEM_ALERTS" xml:space="preserve">
     <value>Exported system alerts to {0}</value>
   </data>
+  <data name="EXPORTED_UPDATES" xml:space="preserve">
+    <value>Exported updates to {0}.</value>
+  </data>
   <data name="EXPORTING" xml:space="preserve">
     <value>Exporting</value>
   </data>
   <data name="EXPORTING_SYSTEM_ALERTS" xml:space="preserve">
     <value>Exporting system alerts to {0}...</value>
+  </data>
+  <data name="EXPORTING_UPDATES" xml:space="preserve">
+    <value>Exporting updates to {0}...</value>
   </data>
   <data name="EXPORTING_VMS" xml:space="preserve">
     <value>Exporting VMs...</value>
@@ -4525,6 +4531,9 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="EXPORT_SYSTEM_ALERTS" xml:space="preserve">
     <value>Export system alerts to {0}</value>
+  </data>
+  <data name="EXPORT_UPDATES" xml:space="preserve">
+    <value>Exported updates to {0}</value>
   </data>
   <data name="EXPORT_VM_VERIFY_POST_INSTALL" xml:space="preserve">
     <value>&amp;Verify export on completion</value>
@@ -10427,6 +10436,9 @@ Verify that the file is a valid xensearch export.</value>
   <data name="UPDATES_DIALOG_RESTART_VMS_ON_HOST" xml:space="preserve">
     <value>After installing this update, all VMs on server '{0}' must be restarted.</value>
   </data>
+  <data name="UPDATES_DOWNLOAD_AND_INSTALL" xml:space="preserve">
+    <value>Download and Install</value>
+  </data>
   <data name="UPDATES_WIZARD" xml:space="preserve">
     <value>Install Update</value>
   </data>
@@ -10641,6 +10653,9 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_TOOLS_CD" xml:space="preserve">
     <value>VM '{0}' has the tools CD in its drive.</value>
+  </data>
+  <data name="UPDATE_EXPORT_ALL_OR_FILTERED" xml:space="preserve">
+    <value>You have applied filters to the list of updates. Do you wish to export all updates from every connected server, or only the updates you have chosen to view?</value>
   </data>
   <data name="UPDATE_MANAGER_CANNOT_REMOVE_APPLIED_PATCH" xml:space="preserve">
     <value>Cannot remove an update which is applied to any servers.</value>
@@ -11266,6 +11281,9 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   </data>
   <data name="WARNING_DELETE_VD_MULTIPLE" xml:space="preserve">
     <value>This will delete these virtual disks permanently, destroying any data on them.</value>
+  </data>
+  <data name="WEB_PAGE" xml:space="preserve">
+    <value>Web Page</value>
   </data>
   <data name="WEDNESDAY_LONG" xml:space="preserve">
     <value>Wednesday</value>

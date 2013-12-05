@@ -12814,6 +12814,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exported updates to {0}.
+        /// </summary>
+        public static string EXPORT_UPDATES {
+            get {
+                return ResourceManager.GetString("EXPORT_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Verify export on completion.
         /// </summary>
         public static string EXPORT_VM_VERIFY_POST_INSTALL {
@@ -12832,6 +12841,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exported updates to {0}..
+        /// </summary>
+        public static string EXPORTED_UPDATES {
+            get {
+                return ResourceManager.GetString("EXPORTED_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exporting.
         /// </summary>
         public static string EXPORTING {
@@ -12846,6 +12864,15 @@ namespace XenAdmin {
         public static string EXPORTING_SYSTEM_ALERTS {
             get {
                 return ResourceManager.GetString("EXPORTING_SYSTEM_ALERTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exporting updates to {0}....
+        /// </summary>
+        public static string EXPORTING_UPDATES {
+            get {
+                return ResourceManager.GetString("EXPORTING_UPDATES", resourceCulture);
             }
         }
         
@@ -29932,6 +29959,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have applied filters to the list of updates. Do you wish to export all updates from every connected server, or only the updates you have chosen to view?.
+        /// </summary>
+        public static string UPDATE_EXPORT_ALL_OR_FILTERED {
+            get {
+                return ResourceManager.GetString("UPDATE_EXPORT_ALL_OR_FILTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot remove an update which is applied to any servers..
         /// </summary>
         public static string UPDATE_MANAGER_CANNOT_REMOVE_APPLIED_PATCH {
@@ -30145,6 +30181,15 @@ namespace XenAdmin {
         public static string UPDATES_DIALOG_RESTART_VMS_ON_HOST {
             get {
                 return ResourceManager.GetString("UPDATES_DIALOG_RESTART_VMS_ON_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download and Install.
+        /// </summary>
+        public static string UPDATES_DOWNLOAD_AND_INSTALL {
+            get {
+                return ResourceManager.GetString("UPDATES_DOWNLOAD_AND_INSTALL", resourceCulture);
             }
         }
         
@@ -32548,6 +32593,15 @@ namespace XenAdmin {
         public static string WARNING_DELETE_VD_MULTIPLE {
             get {
                 return ResourceManager.GetString("WARNING_DELETE_VD_MULTIPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Web Page.
+        /// </summary>
+        public static string WEB_PAGE {
+            get {
+                return ResourceManager.GetString("WEB_PAGE", resourceCulture);
             }
         }
         
