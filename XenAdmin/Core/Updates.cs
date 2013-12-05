@@ -70,7 +70,7 @@ namespace XenAdmin.Core
 
                 if (succeeded)
                 {
-                    var xenCenterAlert = NewXenCenterVersionAlert(action.XenCenterVersions);
+                    var xenCenterAlert = NewXenCenterVersionAlert(action.XenCenterVersions, Program.Version);
                     if (xenCenterAlert != null)
                         updateAlerts.Add(xenCenterAlert);
 
@@ -147,18 +147,10 @@ namespace XenAdmin.Core
             if (xenCenterVersions.Count == 0 || programVersion == new Version(0, 0, 0, 0))
                 return null;
 
-            List<XenCenterVersion> latest = new List<XenCenterVersion>();
-            foreach (XenCenterVersion v in xenCenterVersions)
-                if (v.IsLatest)
-                    latest.Add(v);
+            var latest = from v in xenCenterVersions where v.IsLatest select v;
 
-            return latest.Find(xcv => xcv.Lang == Program.CurrentLanguage) ??
-                   latest.Find(xcv => string.IsNullOrEmpty(xcv.Lang));
-        }
-
-        private static XenCenterUpdateAlert NewXenCenterVersionAlert(List<XenCenterVersion> xenCenterVersions)
-        {
-            return NewXenCenterVersionAlert(xenCenterVersions, Program.Version);
+            return latest.FirstOrDefault(xcv => xcv.Lang == Program.CurrentLanguage) ??
+                   latest.FirstOrDefault(xcv => string.IsNullOrEmpty(xcv.Lang));
         }
 
         public static XenCenterUpdateAlert NewXenCenterVersionAlert(List<XenCenterVersion> xenCenterVersions, Version currentProgramVersion)
@@ -244,10 +236,9 @@ namespace XenAdmin.Core
                     {
                         XenServerPatchAlert alert = GetServerPatchAlert(alerts, xenServerPatch);
                         XenServerPatch serverPatch = xenServerPatch;
-                        List<Host> noPatchHosts =
-                            hosts.Where(host => !host.AppliedPatches().Any(patch => patch.uuid == serverPatch.Uuid)).ToList();
+                        var noPatchHosts = hosts.Where(host => !host.AppliedPatches().Any(patch => patch.uuid == serverPatch.Uuid));
 
-                        if (noPatchHosts.Count == hosts.Count)
+                        if (noPatchHosts.Count() == hosts.Count)
                             alert.IncludeConnection(xenConnection);
                         else
                             alert.IncludeHosts(noPatchHosts);
@@ -263,19 +254,10 @@ namespace XenAdmin.Core
             if (Helpers.CommonCriteriaCertificationRelease)
                 return null;
 
-            List<XenServerVersion> latestVersions = xenServerVersions.FindAll(item => item.Latest);
-
-            if (latestVersions.Count == 0)
+            var latestVersion = xenServerVersions.FindAll(item => item.Latest).OrderByDescending(v => v.Version).FirstOrDefault();
+            if (latestVersion == null)
                 return null;
-
-            XenServerVersion latestVersion = latestVersions[0];
-            for (int i = 1; i < latestVersions.Count; i++)
-            {
-                XenServerVersion version = latestVersions[i];
-                if (version.Version > latestVersion.Version)
-                    latestVersion = version;
-            }
-
+            
             XenServerUpdateAlert alert = new XenServerUpdateAlert(latestVersion);
 
             foreach (IXenConnection xc in ConnectionsManager.XenConnectionsCopy)
@@ -286,10 +268,9 @@ namespace XenAdmin.Core
                 if (master == null || pool == null)
                     continue;
 
-                List<Host> outOfDateHosts =
-                    hosts.Where(host => new Version(Helpers.HostProductVersion(host)) < latestVersion.Version).ToList();
+                var outOfDateHosts = hosts.Where(host => new Version(Helpers.HostProductVersion(host)) < latestVersion.Version);
 
-                if (outOfDateHosts.Count == hosts.Count)
+                if (outOfDateHosts.Count() == hosts.Count)
                     alert.IncludeConnection(xc);
                 else
                     alert.IncludeHosts(outOfDateHosts);

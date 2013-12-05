@@ -65,7 +65,7 @@ namespace XenAdmin.Alerts
                 canIgnore = false;
         }
 
-        public void IncludeHosts(List<Host> newHosts)
+        public void IncludeHosts(IEnumerable<Host> newHosts)
         {
             hosts.AddRange(newHosts);
             if (hosts.Count > 0)
