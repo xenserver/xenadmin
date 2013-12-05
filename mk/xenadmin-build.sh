@@ -173,7 +173,7 @@ version_brand_csharp "XenAdmin CommandLib XenCenterLib XenModel XenOvfApi XenOvf
 
 run_msbuild()
 {
-  /cygdrive/c/WINDOWS/Microsoft.NET/Framework/v3.5/MSBuild.exe /p:Configuration=Release /p:TargetFrameworkVersion=v3.5
+  /cygdrive/c/WINDOWS/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe /p:Configuration=Release /p:TargetFrameworkVersion=v4.0
 }
 
 run_vcbuild()
