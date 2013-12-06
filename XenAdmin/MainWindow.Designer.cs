@@ -30,9 +30,9 @@ namespace XenAdmin
             pluginManager.Dispose();
 
             OtherConfigAndTagsWatcher.DeregisterEventHandlers();
-
             ConnectionsManager.History.CollectionChanged -= History_CollectionChanged;
             Alert.DeregisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
+            XenAdmin.Core.Updates.DeregisterCollectionChanged(Updates_CollectionChanged);
             XenCenterForm.ApplicationOpenFormsChanged -= XenCenterForm_ApplicationOpenFormsChanged;
             ConnectionsManager.XenConnections.CollectionChanged -= XenConnection_CollectionChanged;
             Program.StorageLinkConnections.CollectionChanged -= StorageLinkConnections_CollectionChanged;

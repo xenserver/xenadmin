@@ -118,11 +118,20 @@ namespace XenAdmin.Alerts
                 canIgnore = false;
         }
 
-        public void IncludeHosts(List<Host> newHosts)
+        public void IncludeHosts(IEnumerable<Host> newHosts)
         {
             hosts.AddRange(newHosts);
             if (hosts.Count > 0)
                 canIgnore = false;
+        }
+
+        public void CopyConnectionsAndHosts(XenServerPatchAlert alert)
+        {
+            connections.Clear();
+            connections.AddRange(alert.connections);
+            hosts.Clear();
+            hosts.AddRange(alert.hosts);
+            canIgnore = connections.Count == 0 && hosts.Count == 0;
         }
 
         public override string WebPageLabel

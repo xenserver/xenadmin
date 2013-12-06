@@ -113,7 +113,9 @@ namespace XenAdmin.Wizards.ImportWizard
             foreach (VirtualSystem_Type vsType in ((VirtualSystemCollection_Type)envelopeType.Item).Content)
             {
                 VirtualHardwareSection_Type vhs = OVF.FindVirtualHardwareSectionByAffinity(envelopeType, vsType.id, "xen");
-                list.AddRange(vhs.VirtualSystemOtherConfigurationData.Where(s => s.Name == "vgpu"));
+                var data = vhs.VirtualSystemOtherConfigurationData;
+                if (data != null)
+                    list.AddRange(vhs.VirtualSystemOtherConfigurationData.Where(s => s.Name == "vgpu"));
             }
 
             return list;

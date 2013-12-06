@@ -64,6 +64,18 @@ namespace XenAdmin.TabPages
         List<Host> hosts = new List<Host>();
         List<VM> vms = new List<VM>();
         private readonly CollectionChangeEventHandler Host_CollectionChangedWithInvoke;
+
+        //solution from: http://stackoverflow.com/questions/2612487/how-to-fix-the-flickering-in-user-controls
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                var cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
+                return cp;
+            }
+        }
+
         public IXenObject XenObject
         {
             set
