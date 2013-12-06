@@ -105,7 +105,8 @@ wget ${WGET_OPT} ${WEB_XE_PHASE_1}/manifest -O ${SCRATCH_DIR}/xe-phase-1-manifes
 wget ${WGET_OPT} ${WEB_XE_PHASE_2}/XenServer-SDK.zip -P ${REPO} && ${UNZIP} -j ${REPO}/XenServer-SDK.zip XenServer-SDK/XenServer.NET/bin/XenServer.dll XenServer-SDK/XenServer.NET/bin/CookComputing.XmlRpcV2.dll -d ${REPO}/XenServer.NET
 
 #bring in some more libraries
-mkdir_clean ${REPO}/NUnit && wget ${WEB_LIB}/{nunit.framework.dll,Moq.dll} -P ${REPO}/NUnit
+mkdir_clean ${REPO}/NUnit && wget ${WEB_LIB}/{nunit.framework.dll,Moq_dotnet4.dll} -P ${REPO}/NUnit
+mv ${REPO}/NUnit/Moq_dotnet4.dll ${REPO}/NUnit/Moq.dll
 wget ${WGET_OPT} ${WEB_LIB}/{wix3.5.2519.0-sources.zip,wix3.5.2519.0-binaries.zip} -P ${SCRATCH_DIR}
 
 #set version numbers and brand info
