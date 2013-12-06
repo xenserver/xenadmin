@@ -62,7 +62,6 @@ using XenAdmin.Network.StorageLink;
 
 using System.Linq;
 
-[assembly: UIPermission(SecurityAction.RequestMinimum, Clipboard = UIPermissionClipboard.AllClipboard)]
 namespace XenAdmin
 {
     [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
