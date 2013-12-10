@@ -696,6 +696,18 @@
   <data name="ACTION_START_VMS_AND_APPLIANCES_TITLE" xml:space="preserve">
     <value>Start VMs and vApps</value>
   </data>
+  <data name="ACTION_STATUS_CANCELLED" xml:space="preserve">
+    <value>Canceled</value>
+  </data>
+  <data name="ACTION_STATUS_FAILED" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="ACTION_STATUS_IN_PROGRESS" xml:space="preserve">
+    <value>In Progress</value>
+  </data>
+  <data name="ACTION_STATUS_SUCCEEDED" xml:space="preserve">
+    <value>Succeeded</value>
+  </data>
   <data name="ACTION_SYSTEM_STATUS_CANCELLED" xml:space="preserve">
     <value>Getting system status canceled</value>
   </data>

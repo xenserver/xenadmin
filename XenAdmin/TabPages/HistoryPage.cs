@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 using XenAdmin.Actions;
@@ -400,6 +401,8 @@ namespace XenAdmin.TabPages
             private ToolStripMenuItem cancelItem = new ToolStripMenuItem(Messages.CANCEL);
             private ToolStripMenuItem dismissItem = new ToolStripMenuItem(Messages.ALERT_DISMISS);
             private ToolStripMenuItem goToItem = new ToolStripMenuItem(Messages.HISTORYPAGE_GOTO);
+            private ToolStripSeparator separatorItem = new ToolStripSeparator();
+            private ToolStripMenuItem copyItem = new ToolStripMenuItem(Messages.COPY);
 
             public event Action<DataGridViewActionRow> DismissalRequested;
             public event Action<IXenObject> GoToXenObjectRequested;
@@ -414,6 +417,7 @@ namespace XenAdmin.TabPages
                 cancelItem.Click += ToolStripMenuItemCancel_Click;
                 dismissItem.Click += ToolStripMenuItemDismiss_Click;
                 goToItem.Click += ToolStripMenuItemGoTo_Click;
+                copyItem.Click += ToolStripMenuItemCopy_Click;
 
                 MinimumHeight = DataGridViewDropDownSplitButtonCell.MIN_ROW_HEIGHT;
                 Cells.AddRange(expanderCell, statusCell, messageCell, locationCell, dateCell, actionCell);
@@ -432,6 +436,11 @@ namespace XenAdmin.TabPages
                 var obj = Action.GetRelevantXenObject();
                 if (obj != null)
                     actionItems.Add(goToItem);
+
+                if (actionItems.Count > 0)
+                    actionItems.Add(separatorItem);
+
+                actionItems.Add(copyItem);
 
                 actionCell.RefreshItems(actionItems.ToArray());
 
@@ -466,6 +475,23 @@ namespace XenAdmin.TabPages
             {
                 if (GoToXenObjectRequested != null)
                     GoToXenObjectRequested(Action.GetRelevantXenObject());
+            }
+
+            private void ToolStripMenuItemCopy_Click(object sender, EventArgs e)
+            {
+                string text = string.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\"",
+                                Action.GetStatusString(), messageCell.Value,
+                                locationCell.Value, dateCell.Value);
+
+                try
+                {
+                    Clipboard.SetText(text);
+                }
+                catch (Exception ex)
+                {
+                    log.Error("Exception while trying to set clipboard text.", ex);
+                    log.Error(ex, ex);
+                }
             }
         }
 

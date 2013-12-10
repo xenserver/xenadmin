@@ -54,26 +54,28 @@ namespace XenAdmin.Core
                                  ? Properties.Resources.tempCancel
                                  : Properties.Resources._000_error_h32bit_16;
 
-            if (action.PercentComplete < 10)
+            if (action.PercentComplete < 9)
                 return Properties.Resources.usagebar_0;
-            if (action.PercentComplete < 20)
+            if (action.PercentComplete < 18)
                 return Properties.Resources.usagebar_1;
-            if (action.PercentComplete < 30)
+            if (action.PercentComplete < 27)
                 return Properties.Resources.usagebar_2;
-            if (action.PercentComplete < 40)
+            if (action.PercentComplete < 36)
                 return Properties.Resources.usagebar_3;
-            if (action.PercentComplete < 50)
+            if (action.PercentComplete < 45)
                 return Properties.Resources.usagebar_4;
-            if (action.PercentComplete < 60)
+            if (action.PercentComplete < 54)
                 return Properties.Resources.usagebar_5;
-            if (action.PercentComplete < 70)
+            if (action.PercentComplete < 63)
                 return Properties.Resources.usagebar_6;
-            if (action.PercentComplete < 80)
+            if (action.PercentComplete < 72)
                 return Properties.Resources.usagebar_7;
-            if (action.PercentComplete < 90)
+            if (action.PercentComplete < 81)
                 return Properties.Resources.usagebar_8;
+            if (action.PercentComplete < 90)
+                return Properties.Resources.usagebar_9;
 
-            return Properties.Resources.usagebar_9;
+            return Properties.Resources.usagebar_10;
         }
 
         internal static string GetDetails(this ActionBase action)
@@ -170,6 +172,18 @@ namespace XenAdmin.Core
                 hostUuids.AddRange(action.Pool.Connection.Cache.Hosts.Where(h => h.uuid != null).Select(h => h.uuid));
 
             return hostUuids;
+        }
+
+        internal static string GetStatusString(this ActionBase action)
+        {
+            if (action.IsCompleted)
+                return action.Succeeded
+                           ? Messages.ACTION_STATUS_SUCCEEDED
+                           : action.Exception is CancelledException
+                                 ? Messages.ACTION_SYSTEM_STATUS_CANCELLED
+                                 : Messages.ACTION_STATUS_FAILED;
+
+            return Messages.ACTION_STATUS_IN_PROGRESS;
         }
 
         #region Comparison (just static non-extension) methods

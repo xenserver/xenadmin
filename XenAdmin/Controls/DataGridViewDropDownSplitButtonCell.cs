@@ -31,12 +31,14 @@
 
 using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace XenAdmin.Controls
 {
     public class DataGridViewDropDownSplitButtonCell : DataGridViewTextBoxCell
     {
+        private bool active;
         private bool disposed;
         private ToolStripItem _defaultItem;
 
@@ -56,7 +58,12 @@ namespace XenAdmin.Controls
         /// </summary>
         public const int MIN_ROW_HEIGHT = 22;
 
-        private bool active;
+        private static readonly Color BUTTON_BORDER_OUTER = Color.FromArgb(112, 112, 112);
+        private static readonly Color BUTTON_BORDER_INNER = Color.FromArgb(252, 252, 252);
+        private static readonly Color BUTTON_FACE_TOP = Color.FromArgb(242, 242, 242);
+        private static readonly Color BUTTON_FACE_MIDDLE_TOP = Color.FromArgb(235, 235, 235);
+        private static readonly Color BUTTON_FACE_MIDDLE_BOTTOM = Color.FromArgb(221, 221, 221);
+        private static readonly Color BUTTON_FACE_BOTTOM = Color.FromArgb(207, 207, 207);
 
         public DataGridViewDropDownSplitButtonCell()
         {
@@ -123,27 +130,94 @@ namespace XenAdmin.Controls
             cellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
 
             base.Paint(graphics, clipBounds, cellBounds, rowIndex, cellState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts);
-
+            
             if (active)
-                using (Pen pen = new Pen(SystemColors.ControlDarkDark, 1))
+            {
+                var mode = graphics.SmoothingMode;
+                graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+                var rec = new Rectangle(cellBounds.Left + cellStyle.Padding.Left,
+                                        cellBounds.Top + cellStyle.Padding.Top,
+                                        cellBounds.Width - cellStyle.Padding.Left - cellStyle.Padding.Right,
+                                        CELL_HEIGHT);
+
+                var innerRec = new Rectangle(rec.Location, rec.Size);
+                innerRec.Inflate(-1, -1);
+
+                using (GraphicsPath path = new GraphicsPath())
                 {
-                    var rec = new Rectangle(cellBounds.Left + cellStyle.Padding.Left,
-                        cellBounds.Top + cellStyle.Padding.Top,
-                        cellBounds.Width - cellStyle.Padding.Left - cellStyle.Padding.Right,
-                        CELL_HEIGHT);
+                    int diameter = 4;
+                    var arc = new Rectangle(rec.Location, new Size(diameter, diameter));
 
-                    graphics.FillRectangle(SystemBrushes.Control, rec);
-                    graphics.DrawRectangle(pen, rec);
+                    //top left corner
+                    path.AddArc(arc, 180, 90);
 
-                    using (var font = new Font(DataGridView.DefaultCellStyle.Font, FontStyle.Regular))
-                        graphics.DrawString(value as string, font, SystemBrushes.ControlText, cellBounds);
+                    // top right corner
+                    arc.X = rec.Right - diameter;
+                    path.AddArc(arc, 270, 90);
 
-                    graphics.DrawLine(pen,
-                        cellBounds.Right - cellStyle.Padding.Right - SPLITTER_FROM_RIGHT,
-                        cellBounds.Top + cellStyle.Padding.Top,
-                        cellBounds.Right - cellStyle.Padding.Right - SPLITTER_FROM_RIGHT,
-                        cellBounds.Top + cellStyle.Padding.Top + CELL_HEIGHT);
+                    // bottom right corner 
+                    arc.Y = rec.Bottom - diameter;
+                    path.AddArc(arc, 0, 90);
+
+                    // bottom left corner
+                    arc.X = rec.Left;
+                    path.AddArc(arc, 90, 90);
+
+                    path.CloseFigure();
+
+                    using (var brush = new LinearGradientBrush(rec, BUTTON_FACE_TOP, BUTTON_FACE_BOTTOM, LinearGradientMode.Vertical))
+                    {
+                        ColorBlend cb = new ColorBlend();
+                        cb.Positions = new[] { 0, 1 / 2f, 1 / 2f, 1 };
+                        cb.Colors = new[] { BUTTON_FACE_TOP, BUTTON_FACE_MIDDLE_TOP, BUTTON_FACE_MIDDLE_BOTTOM, BUTTON_FACE_BOTTOM };
+                        brush.InterpolationColors = cb;
+                        graphics.FillPath(brush, path);
+                    }
+
+                    using (Pen pen = new Pen(BUTTON_BORDER_OUTER, 1))
+                        graphics.DrawPath(pen, path);
                 }
+
+                using (GraphicsPath path = new GraphicsPath())
+                {
+                    int diameter = 4;
+                    var arc = new Rectangle(innerRec.Location, new Size(diameter, diameter));
+
+                    //top left corner
+                    path.AddArc(arc, 180, 90);
+
+                    // top right corner
+                    arc.X = innerRec.Right - diameter;
+                    path.AddArc(arc, 270, 90);
+
+                    // bottom right corner 
+                    arc.Y = innerRec.Bottom - diameter;
+                    path.AddArc(arc, 0, 90);
+
+                    // bottom left corner
+                    arc.X = innerRec.Left;
+                    path.AddArc(arc, 90, 90);
+
+                    path.CloseFigure();
+
+                    using (Pen pen = new Pen(BUTTON_BORDER_INNER, 1))
+                        graphics.DrawPath(pen, path);
+                }
+
+                using (var font = new Font(DataGridView.DefaultCellStyle.Font, FontStyle.Regular))
+                    graphics.DrawString(value as string, font, SystemBrushes.ControlText, cellBounds);
+
+                using (Pen pen = new Pen(BUTTON_BORDER_OUTER, 1))
+                    graphics.DrawLine(pen,
+                                      cellBounds.Right - cellStyle.Padding.Right - SPLITTER_FROM_RIGHT,
+                                      cellBounds.Top + cellStyle.Padding.Top + 2,
+                                      cellBounds.Right - cellStyle.Padding.Right - SPLITTER_FROM_RIGHT,
+                                      cellBounds.Top + cellStyle.Padding.Top + CELL_HEIGHT - 2);
+
+                //reset graphics mode
+                graphics.SmoothingMode = mode;
+            }
 
             var img = Properties.Resources.expanded_triangle;
             graphics.DrawImage(img,

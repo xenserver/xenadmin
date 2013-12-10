@@ -1798,6 +1798,42 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Canceled.
+        /// </summary>
+        public static string ACTION_STATUS_CANCELLED {
+            get {
+                return ResourceManager.GetString("ACTION_STATUS_CANCELLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed.
+        /// </summary>
+        public static string ACTION_STATUS_FAILED {
+            get {
+                return ResourceManager.GetString("ACTION_STATUS_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In Progress.
+        /// </summary>
+        public static string ACTION_STATUS_IN_PROGRESS {
+            get {
+                return ResourceManager.GetString("ACTION_STATUS_IN_PROGRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Succeeded.
+        /// </summary>
+        public static string ACTION_STATUS_SUCCEEDED {
+            get {
+                return ResourceManager.GetString("ACTION_STATUS_SUCCEEDED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Getting system status canceled.
         /// </summary>
         public static string ACTION_SYSTEM_STATUS_CANCELLED {
