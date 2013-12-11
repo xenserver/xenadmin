@@ -47,17 +47,17 @@ namespace XenAdmin.Controls.GPU
             InitializeComponent();
         }
 
-        public GpuRow(IXenConnection connection, List<PGPU> pGpuList)
+        public GpuRow(IXenObject xenObject, List<PGPU> pGpuList)
             : this()
         {
-            this.connection = connection;
+            this.xenObject = xenObject;
             pGpuLabel.Text = pGpuList[0].Name;
             RepopulateAllowedTypes(pGpuList[0]);
             Rebuild(pGpuList);
             SetupPage();
         }
 
-        private readonly IXenConnection connection;
+        private readonly IXenObject xenObject;
 
         private Dictionary<PGPU, CheckBox> pGpus = new Dictionary<PGPU, CheckBox>();
 
@@ -73,14 +73,14 @@ namespace XenAdmin.Controls.GPU
             var oldControls = new List<Control>(shinyBarsContainerPanel.Controls.Count);
             oldControls.AddRange(shinyBarsContainerPanel.Controls.Cast<Control>());
 
-            bool showingHostLabel = connection.Cache.Hosts.Length > 1;
+            bool showingHostLabel = (xenObject is Pool) && xenObject.Connection.Cache.Hosts.Length > 1;
 
             int index = 1;
             XenRef<Host> hostRef = null;
 
             foreach (PGPU pgpu in pGpuList)
             {
-                var host = connection.Resolve(pgpu.host);
+                var host = xenObject.Connection.Resolve(pgpu.host);
 
                 // add host label if needed
                 if (showingHostLabel && (hostRef == null || pgpu.host.opaque_ref != hostRef.opaque_ref))

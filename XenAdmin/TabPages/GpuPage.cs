@@ -97,7 +97,7 @@ namespace XenAdmin.TabPages
             var allPgpus = xenObject.Connection.Cache.PGPUs;
             pGPUs.AddRange(from pGpu in allPgpus
                            let host = xenObject.Connection.Resolve(pGpu.host)
-                           where pGpu.supported_VGPU_types.Count > 0
+                           where pGpu.supported_VGPU_types.Count > 0 && (xenObject is Pool || xenObject == host)
                            orderby host, pGpu.Name ascending
                            select pGpu
                 );
@@ -137,7 +137,7 @@ namespace XenAdmin.TabPages
 
             foreach (GpuSettings settings in listSettings)
             {
-                AddRowToPanel(new GpuRow(xenObject.Connection, settingsToPGPUs[settings]), ref top);
+                AddRowToPanel(new GpuRow(xenObject, settingsToPGPUs[settings]), ref top);
             }
 
             // Remove old controls
