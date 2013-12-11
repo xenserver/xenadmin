@@ -87,7 +87,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             pageVgpu = new GpuEditPage();
 
             if (!Helpers.FeatureForbidden(connection, Host.RestrictVgpu))
-                vgpuCapability = connection.Cache.GPU_groups.Any(g => g.PGPUs.Count > 0 && g.supported_VGPU_types.Count > 0);
+                vgpuCapability = Helpers.VgpuCapability(connection);
 
             #region RBAC Warning Page Checks
             if (connection.Session.IsLocalSuperuser || Helpers.GetMaster(connection).external_auth_type == Auth.AUTH_TYPE_NONE)

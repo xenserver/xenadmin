@@ -1874,5 +1874,10 @@ namespace XenAdmin.Core
 
            return connection.Cache.Hosts.Any(h => h.enabled);
        }
+
+       public static bool VgpuCapability(IXenConnection connection)
+       {
+           return connection != null && connection.Cache.GPU_groups.Any(g => g.PGPUs.Count > 0 && g.supported_VGPU_types.Count > 0);
+       }
     }
 }

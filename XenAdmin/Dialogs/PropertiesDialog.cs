@@ -208,7 +208,8 @@ namespace XenAdmin.Dialogs
                 if (is_pool_or_standalone)
                 {
                     if (Helpers.ClearwaterOrGreater(xenObject.Connection)
-                        && !Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictVgpu))
+                        && !Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictVgpu)
+                        && Helpers.VgpuCapability(xenObjectCopy.Connection)) 
                     ShowTab(PoolGpuEditPage = new PoolGpuEditPage());
                 }
 
