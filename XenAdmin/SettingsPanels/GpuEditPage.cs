@@ -249,9 +249,7 @@ namespace XenAdmin.SettingsPanels
                 }
                 else
                 {
-                    var enabledRefs = GPU_group.get_enabled_VGPU_types(Connection.Session, gpu_group.opaque_ref);
-                    var enabledTypes = Connection.ResolveAll(enabledRefs);
-
+                    var enabledTypes = Connection.ResolveAll(gpu_group.enabled_VGPU_types);
                     var allTypes = Connection.ResolveAll(gpu_group.supported_VGPU_types);
 
                     var disabledTypes = allTypes.FindAll(t => !enabledTypes.Exists(e => e.opaque_ref == t.opaque_ref));
