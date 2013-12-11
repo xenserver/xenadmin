@@ -187,6 +187,14 @@ namespace XenAdmin.Diagnostics.Checks
 
                         return new VMCannotSeeNetwork(this, vm, network);
 
+                    case Failure.VM_HAS_VGPU:
+                        vm = connection.Resolve(vmRef);
+
+                        if (vm == null)
+                            throw new NullReferenceException(Failure.VM_HAS_VGPU);
+
+                        return new VmHasVgpu(this, vm);
+
                     default:
                         throw new NullReferenceException(exception[0]);
                 }

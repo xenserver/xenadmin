@@ -76,6 +76,7 @@ namespace XenAPI
         public const string AUTH_ENABLE_FAILED = "AUTH_ENABLE_FAILED";
         public const string POOL_AUTH_ENABLE_FAILED_WRONG_CREDENTIALS = "POOL_AUTH_ENABLE_FAILED_WRONG_CREDENTIALS";
         public const string HOST_UNKNOWN_TO_MASTER = "HOST_UNKNOWN_TO_MASTER";
+        public const string VM_HAS_VGPU = "VM_HAS_VGPU";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 

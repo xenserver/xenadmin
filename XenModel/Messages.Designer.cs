@@ -30859,6 +30859,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The VM &apos;{0}&apos; has one or more virtual GPUs..
+        /// </summary>
+        public static string UPDATES_WIZARD_VM_HAS_VGPU {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_VM_HAS_VGPU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Updating performance monitoring configuration.
         /// </summary>
         public static string UPDATING_PERFMON {
