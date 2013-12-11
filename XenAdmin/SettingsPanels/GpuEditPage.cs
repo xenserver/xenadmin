@@ -205,7 +205,7 @@ namespace XenAdmin.SettingsPanels
                     else
                     {
                         VGPU_type vgpuType = Connection.Resolve(vgpu.type);
-                        currentGpuTuple = new GpuTuple(vgpuGroup, new[] { vgpuType }, null);
+                        currentGpuTuple = new GpuTuple(vgpuGroup, vgpuType, null);
                     }
                 }
             }
@@ -237,7 +237,7 @@ namespace XenAdmin.SettingsPanels
 
         private void PopulateComboBox()
         {
-            var noneItem = new GpuTuple(null, null, null);
+            var noneItem = new GpuTuple(null, null, null); // "None" item
             comboBoxGpus.Items.Add(noneItem);
 
             Array.Sort(gpu_groups);
@@ -245,7 +245,7 @@ namespace XenAdmin.SettingsPanels
             {
                 if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu))
                 {
-                    comboBoxGpus.Items.Add(new GpuTuple(gpu_group, null, null));
+                    comboBoxGpus.Items.Add(new GpuTuple(gpu_group, null, null));  //GPU pass-through item
                 }
                 else
                 {
@@ -257,20 +257,17 @@ namespace XenAdmin.SettingsPanels
                     if (allTypes.Count > 1)
                     {
                         allTypes.Sort((t1, t2) =>
-                        {
-                            int result = t1.Capacity.CompareTo(t2.Capacity);
-                            if (result != 0)
-                                return result;
-                            return t1.Name.CompareTo(t2.Name);
-                        });
-
-                        comboBoxGpus.Items.Add(new GpuTuple(gpu_group, allTypes.ToArray(), disabledTypes.ToArray()));
-
-                        foreach (var vgpuType in allTypes)
-                            comboBoxGpus.Items.Add(new GpuTuple(gpu_group, new[] { vgpuType }, disabledTypes.ToArray()));
+                                          {
+                                              int result = t1.Capacity.CompareTo(t2.Capacity);
+                                              if (result != 0)
+                                                  return result;
+                                              return t1.Name.CompareTo(t2.Name);
+                                          });
                     }
-                    else
-                        comboBoxGpus.Items.Add(new GpuTuple(gpu_group, null, disabledTypes.ToArray()));
+                    comboBoxGpus.Items.Add(new GpuTuple(gpu_group, allTypes.ToArray())); // Group item
+
+                    foreach (var vgpuType in allTypes)
+                        comboBoxGpus.Items.Add(new GpuTuple(gpu_group, vgpuType, disabledTypes.ToArray())); // GPU_type item
                 }
             }
 

@@ -114,38 +114,58 @@ namespace XenAdmin.Controls
         public readonly bool IsVgpuSubitem;
         public readonly bool IsFractionalVgpu;
         public readonly bool IsNotEnabledVgpu;
-        private readonly string displayName = string.Empty;
+        private string displayName = string.Empty;
 
-        public GpuTuple(GPU_group gpuGroup, VGPU_type[] vgpuTypes, VGPU_type[] disabledVGpuTypes)
+        /// <summary>
+        /// Create a GpuTuple that refers to a vGPU type which is a subitem of a GPU group
+        /// </summary>
+        public GpuTuple(GPU_group gpuGroup, VGPU_type vgpuType, VGPU_type[] disabledVGpuTypes)
+        {
+            GpuGroup = gpuGroup;
+            VgpuTypes = vgpuType == null ? null : new[] {vgpuType};
+            if (vgpuType != null)
+            {
+                IsVgpuSubitem = true;
+                IsFractionalVgpu = vgpuType.max_heads != 0;
+                if (disabledVGpuTypes != null && disabledVGpuTypes.Select(t => t.opaque_ref).Contains(vgpuType.opaque_ref))
+                    IsNotEnabledVgpu = true;
+            }
+            UpdateDisplayName();
+        }
+
+        /// <summary>
+        /// Create a GpuTuple that refers to a GPU group head item, which is also non-selectable
+        /// </summary>
+        public GpuTuple(GPU_group gpuGroup, VGPU_type[] vgpuTypes)
         {
             GpuGroup = gpuGroup;
             VgpuTypes = vgpuTypes;
+            IsGpuHeaderItem = true;
+            UpdateDisplayName();
+        }
 
+        private void UpdateDisplayName()
+        {
             if (GpuGroup == null)
             {
                 //this refers to the item "None"
                 displayName = Messages.GPU_NONE;
             }
-            else if (VgpuTypes == null  || VgpuTypes.Length == 0 || vgpuTypes[0] == null)
+            else if (VgpuTypes == null || VgpuTypes.Length == 0 || VgpuTypes[0] == null)
             {
                 //this refers to an item mapping a GPU with only passthrough type
                 displayName = GpuGroup.Name;
             }
-            else if (VgpuTypes.Length == 1)
+            else if (IsVgpuSubitem)
             {
                 //this refers to vGPU type which is a subitem of a GPU group
                 displayName = VgpuTypes[0].Description;
-                IsVgpuSubitem = true;
-                IsFractionalVgpu = VgpuTypes[0].max_heads != 0;
-                if (disabledVGpuTypes != null && disabledVGpuTypes.Select(t => t.opaque_ref).Contains(VgpuTypes[0].opaque_ref))
-                    IsNotEnabledVgpu = true;
             }
             else
             {
                 //this refers to a GPU group head item, which is also non-selectable
                 displayName = GpuGroup.Name;
-                IsGpuHeaderItem = true;
-            }
+            }    
         }
 
         public bool Equals(GpuTuple other)
