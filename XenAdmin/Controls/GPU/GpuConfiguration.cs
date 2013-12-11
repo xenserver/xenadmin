@@ -112,7 +112,7 @@ namespace XenAdmin.Controls.GPU
 
         private void SetCheckedValues()
         {
-            dataGridViewEx1.Rows.Cast<VGpuDetailWithCheckBoxRow>().ToList().ForEach(r => r.Enabled = !r.IsInUse);
+            dataGridViewEx1.Rows.Cast<VGpuDetailWithCheckBoxRow>().ToList().ForEach(r => r.Enabled = !r.IsReadOnly);
         }
         
         private void okButton_Click(object sender, System.EventArgs e)
@@ -172,11 +172,11 @@ namespace XenAdmin.Controls.GPU
 
         public VGPU_type VGpuType { get; private set; }
         public XenRef<VGPU_type> VGpuTypeRef { get; private set; }
-        public bool IsInUse { get; private set; }
+        public bool IsReadOnly { get; private set; }
 
         public bool NeedsSave
         {
-            get { return !IsInUse  && (allowed != CheckBoxChecked); }
+            get { return (allowed != CheckBoxChecked); }
         }
 
         public bool CheckBoxChecked
@@ -189,7 +189,7 @@ namespace XenAdmin.Controls.GPU
             VGpuTypeRef = vGpuTypeRef;
             VGpuType = vGpuType;
             this.allowed = allowed;
-            IsInUse = isInUse;
+            IsReadOnly = isInUse && allowed;
 
             SetCells();
             Cells.AddRange(checkBoxCell, nameColumn, vGpusPerGpuColumn, maxResolutionColumn, maxDisplaysColumn, videoRamColumn);
@@ -224,7 +224,7 @@ namespace XenAdmin.Controls.GPU
             checkBoxCell.FalseValue = false;
             checkBoxCell.ValueType = typeof(bool);
             checkBoxCell.Value = allowed;
-            checkBoxCell.ReadOnly = IsInUse;
+            checkBoxCell.ReadOnly = IsReadOnly;
         }
     }
 }
