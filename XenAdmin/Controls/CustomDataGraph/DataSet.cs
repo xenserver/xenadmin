@@ -172,7 +172,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
                 dataSet.Type = DataType.Disk;
             }
-            else if (settype.Contains("memory") || settype.Contains("allocation"))
+            else if ((settype.Contains("memory") || settype.Contains("allocation")) && !settype.Contains("utilisation"))
             {
                 dataSet.Type = settype.Contains("gpu") ? DataType.Gpu : DataType.Memory;
 
@@ -272,7 +272,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                 }
                 else if (settype.Contains("utilisation"))
                 {
-                    dataSet.CustomYRange = new DataRange(100, 0, 10, Unit.Percentage, RangeScaleMode.Auto);
+                    dataSet.CustomYRange = new DataRange(100, 0, 10, Unit.Percentage, RangeScaleMode.Fixed);
                     dataSet.MultiplyingFactor = 100;
                 }
                 dataSet.Type = DataType.Gpu;
