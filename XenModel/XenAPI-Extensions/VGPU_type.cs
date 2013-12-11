@@ -94,9 +94,11 @@ namespace XenAPI
                 if (supported_on_PGPUs != null && supported_on_PGPUs.Count > 0)
                 {
                     PGPU pgpu = Connection.Resolve(supported_on_PGPUs[0]);
-                    if (pgpu.supported_VGPU_max_capacities != null && pgpu.supported_VGPU_max_capacities.Count > 0)
+                    if (pgpu != null && pgpu.supported_VGPU_max_capacities != null && pgpu.supported_VGPU_max_capacities.Count > 0)
                     {
-                        capacity = pgpu.supported_VGPU_max_capacities[new XenRef<VGPU_type>(this)];
+                        var vgpuTypeRef = new XenRef<VGPU_type>(this);
+                        if (pgpu.supported_VGPU_max_capacities.ContainsKey(vgpuTypeRef)) 
+                            capacity = pgpu.supported_VGPU_max_capacities[vgpuTypeRef];
                     }
                 }
                 return capacity;
