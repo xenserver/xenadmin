@@ -60,7 +60,8 @@ namespace XenAdmin.Controls.GPU
             foreach (VGPU vgpu in vGPUs)
                 vms[vgpu] = vgpu.Connection.Resolve(vgpu.VM);
 
-            capacity = vGPUs.Count > 0 ? pGPU.supported_VGPU_max_capacities[vGPUs[0].type] : 8;
+            capacity = vGPUs.Count > 0 && pGPU.supported_VGPU_max_capacities.ContainsKey(vGPUs[0].type) 
+                ? pGPU.supported_VGPU_max_capacities[vGPUs[0].type] : 8;
         }
 
         protected override void OnPaint(PaintEventArgs e)
