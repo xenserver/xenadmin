@@ -101,6 +101,7 @@ namespace XenAdmin.Wizards.GenericPages
 		private ulong m_totalSpaceRequired;
 		private Dictionary<string, VmMapping> m_vmMappings;
         private bool m_buttonNextEnabled;
+        private bool m_buttonPreviousEnabled;
 
 		#endregion
 
@@ -142,11 +143,17 @@ namespace XenAdmin.Wizards.GenericPages
 		{
 		    TargetConnection = null;
 
-			if (direction == PageLoadedDirection.Forward && IsDirty && ImplementsIsDirty())
+			if (!cancel && direction == PageLoadedDirection.Forward && IsDirty && ImplementsIsDirty())
 					cancel = !PerformCheck(CheckStorageRequirements);
 
 			base.PageLeave(direction, ref cancel);
-		}
+        }
+
+        public override void PageLoaded(PageLoadedDirection direction)
+        {
+            base.PageLoaded(direction);//call first so the page gets populated
+            SetButtonPreviousEnabled(true);
+        }
 
 	    public abstract StorageResourceContainer ResourceData(string sysId);
 
@@ -292,6 +299,11 @@ namespace XenAdmin.Wizards.GenericPages
             return m_buttonNextEnabled;
         }
 
+        public override bool EnablePrevious()
+        {
+            return m_buttonPreviousEnabled;
+        }
+
 	    #endregion
 
 		#region Accessors
@@ -341,9 +353,15 @@ namespace XenAdmin.Wizards.GenericPages
             return success;
         }
 
-        private void SetButtonNextEnabled(bool enabled)
+        protected void SetButtonNextEnabled(bool enabled)
         {
             m_buttonNextEnabled = enabled;
+            OnPageUpdated();
+        }
+
+        protected void SetButtonPreviousEnabled(bool enabled)
+        {
+            m_buttonPreviousEnabled = enabled;
             OnPageUpdated();
         }
 

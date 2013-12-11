@@ -204,6 +204,9 @@ namespace XenAdmin.Wizards.GenericPages
             foreach (var pair in mapping.Storage)
             {
                 VDI vdi = connection.Resolve(new XenRef<VDI>(pair.Key));
+                if (vdi == null)
+                    continue;
+
                 string valueToAdd = vdi.Name + separatorText + pair.Value.Name;
 
                 if (pair.Key == mapping.Storage.First().Key)

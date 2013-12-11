@@ -128,7 +128,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
             m_pageStorage = new CrossPoolMigrateStoragePage();
             m_pageNetwork = new CrossPoolMigrateNetworkingPage();
-            m_pageTransferNetwork = new CrossPoolMigrateTransferNetworkPage();
+            m_pageTransferNetwork = new CrossPoolMigrateTransferNetworkPage(VmsFromSelection(selection));
             m_pageFinish = new CrossPoolMigrateFinishPage {SummaryRetreiver = GetVMMappingSummary};
             m_pageTargetRbac = new RBACWarningPage();
 
@@ -143,6 +143,12 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         protected override void FinishWizard()
         {
+            if (!AllVMsAvailable(m_vmMappings, xenConnection))
+            {
+                base.FinishWizard();
+                return;
+            }
+
             foreach (KeyValuePair<string, VmMapping> pair in m_vmMappings)
             {
                 VM vm = xenConnection.Resolve(new XenRef<VM>(pair.Key));
@@ -313,6 +319,59 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 summary = new SummarySplitter(summary);
             }
             return summary.Details;
+        }
+
+        /// <summary>
+        /// Checks if all VMs are still available for migration and shows a warning message if the check fails
+        /// </summary>
+        /// <returns>true if check succeded, false if failed</returns>
+        internal static bool AllVMsAvailable(List<VM> vms)
+        {
+            Func<bool> vmCheck = delegate
+                                     {
+                                         if (vms == null || vms.Count == 0 || vms[0] == null || vms[0].Connection == null)
+                                             return false;
+                                         var connection = vms[0].Connection; // the connection on which to check VM availability
+                                         return vms.All(vm => connection.Resolve(new XenRef<VM>(vm.opaque_ref)) != null);
+                                     };
+
+            return PerformCheck(vmCheck);
+        }
+
+        /// <summary>
+        /// Checks if all VMs are still available for migration and shows a warning message if the check fails
+        /// </summary>
+        /// <returns>true if check succeded, false if failed</returns>
+        internal static bool AllVMsAvailable(Dictionary<string, VmMapping> vmMappings, IXenConnection connection)
+        {
+            Func<bool> vmCheck = delegate
+            {
+                if (vmMappings == null || vmMappings.Count == 0 || connection == null)
+                    return false;
+                return vmMappings.All(kvp => connection.Resolve(new XenRef<VM>(kvp.Key)) != null);
+            };
+
+            return PerformCheck(vmCheck);
+        }
+
+        /// <summary>
+        /// Performs a certain check and shows a warning message if the check fails
+        /// </summary>
+        /// <param name="check">The check to perform</param>
+        /// <returns>true if check succeded, false if failed</returns>
+        private static bool PerformCheck(Func<bool> check)
+        {
+            if (check())
+                return true;
+            ShowWarningMessageBox(Messages.CPM_WIZARD_VM_MISSING_ERROR);
+            return false;
+        }
+
+        internal static void ShowWarningMessageBox(string message)
+        {
+            new ThreeButtonDialog(
+                new ThreeButtonDialog.Details(SystemIcons.Warning, message, Messages.CPM_WIZARD_TITLE)).ShowDialog(
+                    Program.MainWindow);
         }
 	}
 }

@@ -29,8 +29,10 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using XenAdmin.Controls;
 using XenAdmin.Wizards.GenericPages;
 using XenAPI;
 
@@ -75,9 +77,25 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         public override StorageResourceContainer ResourceData(string sysId)
         {
             VM vm = Connection.Resolve(new XenRef<VM>(sysId));
+
+            if (vm == null)
+                return null;
+
             List<VDI> vdis = Connection.ResolveAll(vm.VBDs).Select(v => vm.Connection.Resolve(v.VDI)).ToList();
             vdis.RemoveAll(vdi => vdi == null || Connection.Resolve(vdi.SR).GetSRType(true) == SR.SRTypes.iso);
             return new CrossPoolMigrationStorageResourceContainer(vdis);
+        }
+
+        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        {
+            if (!CrossPoolMigrateWizard.AllVMsAvailable(VmMappings, Connection))
+            {
+                cancel = true;
+                SetButtonNextEnabled(false);
+                SetButtonPreviousEnabled(false);
+            }
+
+            base.PageLeave(direction, ref cancel);
         }
     }
 }

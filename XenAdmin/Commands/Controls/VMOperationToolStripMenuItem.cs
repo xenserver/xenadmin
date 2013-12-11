@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.ComponentModel;
@@ -174,8 +175,10 @@ namespace XenAdmin.Commands
                 VMOperationToolStripMenuSubItem firstItem = (VMOperationToolStripMenuSubItem)base.DropDownItems[0];
                 firstItem.Command = commandForFirstMenuItem;
             });
-
-            foreach (VMOperationToolStripMenuSubItem item in base.DropDownItems)
+            
+            List<VMOperationToolStripMenuSubItem> dropDownItems = DropDownItems.Cast<VMOperationToolStripMenuSubItem>().ToList();
+            
+            foreach (VMOperationToolStripMenuSubItem item in dropDownItems)
             {
                 if (item.Tag is Host)
                 {
