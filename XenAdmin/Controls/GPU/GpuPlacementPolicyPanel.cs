@@ -144,9 +144,9 @@ namespace XenAdmin.Controls
 
         private void editPlacementPolicyButton_Click(object sender, System.EventArgs e)
         {
-            var pool = Helpers.GetPoolOfOne(xenObject.Connection);
+            var pool = Helpers.GetPool(xenObject.Connection);
 
-            using (PropertiesDialog propertiesDialog = new PropertiesDialog(pool))
+            using (PropertiesDialog propertiesDialog = new PropertiesDialog(pool ?? xenObject))
             {
                 propertiesDialog.SelectPage(propertiesDialog.PoolGpuEditPage);
                 propertiesDialog.ShowDialog(this);
