@@ -263,8 +263,8 @@ namespace XenAdmin.SettingsPanels
                                                   return result;
                                               return t1.Name.CompareTo(t2.Name);
                                           });
+                        comboBoxGpus.Items.Add(new GpuTuple(gpu_group, allTypes.ToArray())); // Group item
                     }
-                    comboBoxGpus.Items.Add(new GpuTuple(gpu_group, allTypes.ToArray())); // Group item
 
                     foreach (var vgpuType in allTypes)
                         comboBoxGpus.Items.Add(new GpuTuple(gpu_group, vgpuType, disabledTypes.ToArray())); // GPU_type item
