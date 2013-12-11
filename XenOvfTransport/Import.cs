@@ -1339,6 +1339,7 @@ namespace XenOvfTransport
 
             var gpuGroups = GPU_group.get_all_records(xenSession);
             var gpuKvp = gpuGroups.FirstOrDefault(g =>
+                g.Value.supported_VGPU_types.Count > 0 &&
                 g.Value.GPU_types.Length == types.Length &&
                 g.Value.GPU_types.Intersect(types).Count() == types.Length);
 
