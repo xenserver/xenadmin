@@ -107,17 +107,9 @@ namespace XenAdmin.TabPages
                 RegisterPgpuHandlers(pGpu);
 
                 var enabledTypes = pGpu.Connection.ResolveAll(pGpu.enabled_VGPU_types);
+                var supportedTypes = pGpu.Connection.ResolveAll(pGpu.supported_VGPU_types);
 
-                if (enabledTypes.Count > 1)
-                {
-                    enabledTypes.Sort((t1, t2) =>
-                                          {
-                                              int result = t1.Capacity.CompareTo(t2.Capacity);
-                                              return result != 0 ? result : t1.Name.CompareTo(t2.Name);
-                                          });
-                }
-
-                var newSettings = new GpuSettings(enabledTypes.ToArray());
+                var newSettings = new GpuSettings(enabledTypes.ToArray(), supportedTypes.ToArray(), pGpu.Name);
                 
                 var existingSettings = settingsToPGPUs.Keys.FirstOrDefault(ss => ss.Equals(newSettings));
 
@@ -289,33 +281,49 @@ namespace XenAdmin.TabPages
         internal class GpuSettings : IEquatable<GpuSettings>
         {
             public readonly VGPU_type[] EnabledVgpuTypes;
+            public readonly VGPU_type[] SupportedVgpuTypes;
+            public readonly string GpuName;
 
-            public GpuSettings(VGPU_type[] vgpuTypes)
+            public GpuSettings(VGPU_type[] enabledVgpuTypes, VGPU_type[] supportedVgpuTypes, string name)
             {
-                EnabledVgpuTypes = vgpuTypes;
+                EnabledVgpuTypes = enabledVgpuTypes;
+                Array.Sort(EnabledVgpuTypes);
+
+                SupportedVgpuTypes = supportedVgpuTypes;
+                Array.Sort(SupportedVgpuTypes);
+
+                GpuName = name;
             }
 
-            public bool Equals(GpuSettings other)
+            private static bool EqualArrays(VGPU_type[] x, VGPU_type[] y)
             {
-                if ((EnabledVgpuTypes == null || EnabledVgpuTypes.Length == 0) &&
-                    (other.EnabledVgpuTypes == null || other.EnabledVgpuTypes.Length == 0))
+                if ((x == null || x.Length == 0) &&
+                    (y == null || y.Length == 0))
                     return true;
 
-                if ((EnabledVgpuTypes == null || EnabledVgpuTypes.Length == 0) ||
-                    (other.EnabledVgpuTypes == null || other.EnabledVgpuTypes.Length == 0))
+                if ((x == null || x.Length == 0) ||
+                    (y == null || y.Length == 0))
                     return false;
 
-                if (EnabledVgpuTypes.Length != other.EnabledVgpuTypes.Length)
+                if (x.Length != y.Length)
                     return false;
 
-                for (int i = 0; i < EnabledVgpuTypes.Length; i++)
+                for (int i = 0; i < x.Length; i++)
                 {
-                    if (!EnabledVgpuTypes[i].Equals(other.EnabledVgpuTypes[i]))
+                    if (!x[i].Equals(y[i]))
                         return false;
                 }
 
                 return true;
             }
+
+
+            public bool Equals(GpuSettings other)
+            {
+                return GpuName.Equals(other.GpuName) && EqualArrays(EnabledVgpuTypes, other.EnabledVgpuTypes)
+                    && EqualArrays(SupportedVgpuTypes, other.SupportedVgpuTypes);
+            }
+
 
             public override string ToString()
             {
