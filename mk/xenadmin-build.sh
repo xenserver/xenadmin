@@ -383,7 +383,7 @@ mkisofs -J -r -v -hfs -probe -publisher "${COMPANY_NAME_LEGAL}" -p "${COMPANY_NA
 L10N_ISO_DIR=${SCRATCH_DIR}/l10n-iso-staging
 mkdir_clean ${L10N_ISO_DIR}
 # -o root -g root 
-install -m 755 ${L10N_CD_DIR}/XenCenter.l10n.exe ${L10N_ISO_DIR}/XenCenterSetup.exe
+install -m 755 ${L10N_CD_DIR}/XenCenterSetup.l10n.exe ${L10N_ISO_DIR}/XenCenterSetup.exe
 cp ${REPO}/mk/ISO_files/* ${L10N_ISO_DIR}
 cp ${EN_CD_DIR}/XenCenter.ico ${L10N_ISO_DIR}/XenCenter.ico
 mkisofs -J -r -v -hfs -probe -publisher "${COMPANY_NAME_LEGAL}" -p "${COMPANY_NAME_LEGAL}" -V "XenCenter" -o "${OUTPUT_DIR}/XenCenter.l10n.iso" "${L10N_ISO_DIR}"
