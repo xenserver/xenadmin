@@ -51,10 +51,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             _host.Connection.ExpectDisruption = true;
             try
             {
-                base.WaitForReboot(ref session, delegate(Session _session)
-                                                    {
-                                                        XenAPI.Host.async_reboot(_session, Host.opaque_ref);
-                                                    });
+                base.WaitForReboot(ref session, _session => XenAPI.Host.async_reboot(_session, Host.opaque_ref));
                 foreach (var host in _host.Connection.Cache.Hosts)
                     host.CheckAndPlugPBDs();  // Wait for PBDs to become plugged on all hosts
             }

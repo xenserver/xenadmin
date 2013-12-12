@@ -258,10 +258,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                 log.DebugFormat("{0}._WaitForReboot connecting up...", GetType().Name);
 
-                Program.Invoke(Program.MainWindow, delegate()
-                {
-                    XenConnectionUI.BeginConnect(Connection, false, null, false);
-                });
+                Program.Invoke(Program.MainWindow, () => XenConnectionUI.BeginConnect(Connection, false, null, false));
             }
         }
 
@@ -282,7 +279,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 {
                     session = Connection.DuplicateSession();
                 }
-                catch
+                catch (Exception e)
                 {
                     session = null;
                     Thread.Sleep(5000);
@@ -296,7 +293,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                     lastMinDebug = currMin;
 
-                    log.DebugFormat("{0}._WaitForReboot still waiting for connection after {1}...", GetType().Name, DateTime.Now - waitForReconnect);
+                    log.Debug(string.Format("{0}._WaitForReboot still waiting for connection after {1}...",
+                        GetType().Name, DateTime.Now - waitForReconnect),e);
                 }
             }
             while (session == null);

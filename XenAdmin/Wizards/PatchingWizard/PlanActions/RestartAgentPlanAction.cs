@@ -51,10 +51,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         protected override void RunWithSession(ref Session session)
         {
 
-            base.WaitForAgent(ref session, delegate(Session _session)
-                                               {
-                                                   XenAPI.Host.async_restart_agent(_session, Host.opaque_ref);
-                                               });
+            base.WaitForAgent(ref session, _session => XenAPI.Host.async_restart_agent(_session, Host.opaque_ref));
         }
     }
 }

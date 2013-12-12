@@ -42,6 +42,8 @@ namespace XenAPI
 {
     partial class PBD
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private static bool WaitForPlug(Session session, string pbdOpaqueRef)
         {
             int timeout = 120; //Wait 2 min for PBD to plug
@@ -86,23 +88,6 @@ namespace XenAPI
             return pbds;
         }
 
-        /// <summary>
-        /// Wrapper for the plug method making a best effort at plugging the PBD
-        /// i.e. if the plug throws an exception due to a failure this is masked
-        /// </summary>
-        /// <param name="session">session</param>
-        /// <param name="selfOpaqueRef">Opaque reference to self</param>
-        public static void NonchalantPlug(Session session, string selfOpaqueRef )
-        {
-            try
-            {
-                plug(session, selfOpaqueRef); 
-            }
-            catch //All exceptions from plug are masked here
-            {
-            }
-        }
-
         private enum PlugMode
         {
             NORMAL,     //Exception raised in the plug are propagated
@@ -144,8 +129,6 @@ namespace XenAPI
 
         private static void CheckAndPlugPBDsFor(List<VM> vms, PlugMode plugMode)
         {
-            //Program.AssertOffEventThread();
-
             List<PBD> pbds = PBD.GetPBDsFor(vms);
 
             // Now lets see if they're all plugged
@@ -163,16 +146,25 @@ namespace XenAPI
             {
                 Session session = pbd.Connection.DuplicateSession();
 
+                log.DebugFormat("Waiting for PBDs {0} to become plugged", pbd.Name);
                 // Wait 2 min for PBD to become plugged
                 if (WaitForPlug(session, pbd.opaque_ref))
                     continue;
 
                 // If we still havent plugged, then try and plug it - this will probably
                 // fail, but at least we'll get a better error message.
-                if( plugMode == PlugMode.NONCHALANT )
-                    NonchalantPlug(session, pbd.opaque_ref);
-                else
+                try
+                {
+                    log.DebugFormat("Plugging PBD {0}", pbd.Name);
                     plug(session, pbd.opaque_ref);
+                }
+                catch (Exception e)
+                {
+                    log.Debug(string.Format("Error plugging PBD {0}", pbd.Name), e);
+
+                    if (plugMode != PlugMode.NONCHALANT)
+                        throw;
+                }
             }
         }
 

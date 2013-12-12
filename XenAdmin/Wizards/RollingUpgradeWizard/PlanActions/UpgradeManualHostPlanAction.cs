@@ -39,20 +39,18 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     public class UpgradeManualHostPlanAction : RebootPlanAction
     {
-
         private readonly Host _host;
 
         public Timer timer = new Timer();
 
-
         public UpgradeManualHostPlanAction(Host host)
             : base(host.Connection, new XenRef<Host>(host.opaque_ref), string.Format(Messages.UPGRADING_SERVER, host))
         {
-            base.TitlePlan = Messages.UPGRADING;
+            TitlePlan = Messages.UPGRADING;
             _host = host;
             timer.Interval = 20 * 60000;
             timer.AutoReset = true;
-            timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
+            timer.Elapsed += timer_Elapsed;
         }
 
         protected override PlanActionStatusChangedEventArgs StatusChangedEventArg
@@ -80,22 +78,29 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             try
             {
                 Status = Messages.PLAN_ACTION_STATUS_DISABLING_HOST_SERVER;
-                log.DebugFormat("Disabling host {0}", Host.Name);
+
                 if (Host.enabled)
+                {
+                    log.DebugFormat("Disabling host {0}", Host.Name);
                     XenAPI.Host.disable(session, Host.opaque_ref);
+                }
+
                 timer.Start();
                 rebooting = true;
+                
                 log.DebugFormat("Upgrading host {0}", Host.Name);
                 Status = Messages.PLAN_ACTION_STATUS_INSTALLING_XENSERVER;
-                base.WaitForReboot(ref session, delegate(Session _session)
-                                                   {
-                                                       XenAPI.Host.async_reboot(_session, Host.opaque_ref);
-                                                   });
+                
+                log.DebugFormat("Waiting for host {0} to reboot", Host.Name);
+                WaitForReboot(ref session, _session => XenAPI.Host.async_reboot(_session, Host.opaque_ref));
 
                 Status = Messages.PLAN_ACTION_STATUS_RECONNECTING_STORAGE;
                 foreach (var host in _host.Connection.Cache.Hosts)
                     host.CheckAndPlugPBDs();  // Wait for PBDs to become plugged on all hosts
+                
                 rebooting = false;
+                log.DebugFormat("Host {0} rebooted", Host.Name);
+                
                 Status = Messages.PLAN_ACTION_STATUS_HOST_UPGRADED;
                 log.DebugFormat("Upgraded host {0}",Host.Name);
             }

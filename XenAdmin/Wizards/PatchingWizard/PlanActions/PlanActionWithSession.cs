@@ -56,12 +56,12 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected T TryResolveWithTimeout<T>(XenRef<T> t) where T : XenObject<T>
         {
-            T obj;
+            log.DebugFormat("Resolving {0} {1}", t, t.opaque_ref);
             int timeout = 120; // two minutes;
 
             while (timeout > 0)
             {
-                obj = Connection.Resolve(t);
+                T obj = Connection.Resolve(t);
                 if (obj != null)
                     return obj;
 
@@ -69,7 +69,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 timeout = timeout - 1;
             }
 
-            throw new Failure(new List<String>(new String[] { Failure.HANDLE_INVALID, t.opaque_ref }));
+            throw new Failure(new List<String>(new [] { Failure.HANDLE_INVALID, t.opaque_ref }));
         }
 
         protected abstract void RunWithSession(ref Session session);

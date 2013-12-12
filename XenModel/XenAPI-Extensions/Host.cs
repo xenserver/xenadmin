@@ -43,6 +43,8 @@ namespace XenAPI
 {
     public partial class Host : IComparable<Host>, IEquatable<Host>
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public enum Edition
         {
             Free,
@@ -892,8 +894,6 @@ namespace XenAPI
 
         public void ClearEvacuatedVMs(Session session)
         {
-            //Program.AssertOffEventThread();
-
             XenRef<Host> serverOpaqueRef1 = get_by_uuid(session, uuid);
             remove_from_other_config(session, serverOpaqueRef1, MAINTENANCE_MODE_EVACUATED_VMS_MIGRATED);
             remove_from_other_config(session, serverOpaqueRef1, MAINTENANCE_MODE_EVACUATED_VMS_HALTED);
@@ -1178,6 +1178,8 @@ namespace XenAPI
         {
             bool allPBDsReady = false;
             int timeout = 120;
+            log.DebugFormat("Waiting for PBDs on host {0} to become plugged", Name);
+            
             do
             {
                 if (this.enabled)  // if the Host is not yet enabled, pbd.currently_attached may not be accurate: see CA-66496.
@@ -1192,23 +1194,35 @@ namespace XenAPI
                         }
                     }
                 }
+
                 if (!allPBDsReady)
                 {
                     Thread.Sleep(1000);
                     timeout--;
                 }
             } while (!allPBDsReady && timeout > 0);
-            if (!allPBDsReady)
+
+            if (allPBDsReady)
+                return;
+
+            foreach (var pbd in Connection.ResolveAll(PBDs))
             {
-                foreach (var pbd in Connection.ResolveAll(PBDs))
+                if (pbd.currently_attached)
+                    continue;
+
+                Session session = Connection.DuplicateSession();
+
+                // If we still havent plugged, then try and plug it - this will probably
+                // fail, but at least we'll get a better error message.
+
+                try
                 {
-                    if (!pbd.currently_attached)
-                    {
-                        Session session = Connection.DuplicateSession();
-                        // If we still havent plugged, then try and plug it - this will probably
-                        // fail, but at least we'll get a better error message.
-                        PBD.NonchalantPlug(session, pbd.opaque_ref);
-                    }
+                    log.DebugFormat("Plugging PBD {0} on host {1}", pbd.Name, Name);
+                    PBD.plug(session, pbd.opaque_ref);
+                }
+                catch (Exception e)
+                {
+                    log.Debug(string.Format("Error plugging PBD {0} on host {1}", pbd.Name, Name), e);
                 }
             }
         }

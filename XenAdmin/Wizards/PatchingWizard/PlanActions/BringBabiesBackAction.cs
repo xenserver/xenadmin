@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using XenAdmin.Core;
@@ -39,10 +40,13 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     public class BringBabiesBackAction : PlanActionWithSession
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly XenRef<Host> _host;
         private readonly Host currentHost;
         private readonly List<XenRef<VM>> _vms;
         private readonly bool _enableOnly = false;
+        
         public BringBabiesBackAction(List<XenRef<VM>> vms, Host host,bool enableOnly)
             : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_EXITING_MAINTENANCE_MODE,host.Name))
         {
@@ -83,10 +87,12 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 {
                     Host.enable(session, _host.opaque_ref);
                 }
-                catch
+                catch (Exception e)
                 {
                     if (retries > 60)
                         throw;
+
+                    log.Debug(string.Format("Cannot enable host {0}. Retrying in 1 sec.", _host.opaque_ref), e);
                 }
             }
 
@@ -110,18 +116,26 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     try
                     {
                         Status = string.Format(Messages.PLAN_ACTION_STATUS_MIGRATING_VM_X_OF_Y, vmNumber + 1, vmCount);
+                        
                         log.DebugFormat("Migrating VM '{0}' back to Host '{1}'", Helpers.GetName(vm),
                                         Helpers.GetName(Connection.Resolve(_host)));
-                        PollTaskForResultAndDestroy(Connection, ref session, VM.async_live_migrate(session, vm.opaque_ref, _host.opaque_ref), (vmNumber * 100) / vmCount, ((vmNumber + 1) * 100) / vmCount);
+                        
+                        PollTaskForResultAndDestroy(Connection, ref session,
+                            VM.async_live_migrate(session, vm.opaque_ref, _host.opaque_ref),
+                            (vmNumber * 100) / vmCount, ((vmNumber + 1) * 100) / vmCount);
+                        
                         vmNumber++;
                     }
-                    catch (Failure)
+                    catch (Failure e)
                     {
                         // When trying to put the first vm back, we get all sorts 
                         // of errors ie storage not plugged yet etc.  Just ignore them for now
 
                         if (vmNumber > 0 || tries > 24)
                             throw;
+
+                        log.Debug(string.Format("Error migrating VM '{0}' back to Host '{1}'",
+                            Helpers.GetName(vm), Helpers.GetName(Connection.Resolve(_host))), e);
 
                         Thread.Sleep(5000);
                     }
@@ -130,7 +144,10 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
             Host hostModelObject = Connection.Resolve(_host);
             if (hostModelObject != null)
+            {
+                log.DebugFormat("Cleaning up evacuated VMs from Host '{0}'", hostModelObject.Name);
                 hostModelObject.ClearEvacuatedVMs(session);
+            }
         }
     }
 }

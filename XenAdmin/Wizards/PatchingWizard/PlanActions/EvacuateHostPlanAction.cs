@@ -36,6 +36,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     public class EvacuateHostPlanAction : PlanActionWithSession
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly XenRef<Host> _host;
         private readonly Host currentHost;
 
@@ -58,13 +60,14 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
             PBD.CheckAndPlugPBDsFor(Connection.ResolveAll(hostObject.resident_VMs));
 
+            log.DebugFormat("Disabling host {0}", hostObject.Name);
             Host.disable(session, _host.opaque_ref);
 
             Status = Messages.PLAN_ACTION_STATUS_MIGRATING_VMS_FROM_HOST;
+            log.DebugFormat("Migrating VMs from host {0}", hostObject.Name);
             XenRef<Task> task = Host.async_evacuate(session, _host.opaque_ref);
 
             PollTaskForResultAndDestroy(Connection, ref session, task);
-
         }
     }
 }
