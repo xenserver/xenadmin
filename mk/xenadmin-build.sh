@@ -312,6 +312,24 @@ cd ${WIX} && wscript WiSubStg.vbs XenCenter.l10n.msi zh-tw.mst 1028
 #sign again the combined msi because it seems the embedding breaks the signature
 cd ${WIX} && chmod a+rw XenCenter.l10n.msi && ${REPO}/sign.bat XenCenter.l10n.msi
 
+#create bundle exe installers - msi installers embedded
+DOTNETINST=${REPO}/dotNetInstaller
+DOTNETINST_BIN='/cygdrive/c/Program Files/dotNetInstaller/Bin'
+cp ${WIX}/outXenCenter/XenCenter.msi ${DOTNETINST}
+cp ${WIX}/XenCenter.l10n.msi ${DOTNETINST}
+cp "${DOTNETINST_BIN}"/* ${DOTNETINST}
+cd ${DOTNETINST} && "${DOTNETINST}/InstallerLinker.exe" "/Output:XenCenterSetup.exe" "/Template:dotNetInstaller.exe" "/Configuration:XenCenterSetupBootstrapper.xml" "/e+" "/v+"
+cd ${DOTNETINST} && "${DOTNETINST}/InstallerLinker.exe" "/Output:XenCenterSetup.l10n.exe" "/Template:dotNetInstaller.exe" "/Configuration:XenCenterSetupBootstrapper_l10n.xml" "/e+" "/v+"
+
+sign_files()
+{
+	for file in $1
+	do
+		chmod a+rw ${file} && ${REPO}/sign.bat ${file}
+	done
+}
+sign_files "XenCenterSetup.exe XenCenterSetup.l10n.exe"
+
 #create VNCCntrol installer
 sed -e "s/${WIX_INSTALLER_DEFAULT_GUID_VNCCONTROL}/${PRODUCT_GUID_VNCCONTROL}/g" \
     -e "s/${WIX_INSTALLER_DEFAULT_VERSION}/${XC_PRODUCT_VERSION}/g" \
@@ -336,11 +354,11 @@ cd ${REPO}/CFUValidator/bin/ && tar -czf CFUValidator.tgz ./Release
 #collect output and extra files to the OUTPUT_DIR
 EN_CD_DIR=${OUTPUT_DIR}/CD_FILES.main/client_install
 mkdir_clean ${EN_CD_DIR}
-cp ${WIX}/outXenCenter/XenCenter.msi ${EN_CD_DIR}
+cp ${DOTNETINST}/XenCenterSetup.exe ${EN_CD_DIR}
 cp ${REPO}/XenAdmin/AppIcon.ico ${EN_CD_DIR}/XenCenter.ico
 L10N_CD_DIR=${OUTPUT_DIR}/client_install
 mkdir_clean ${L10N_CD_DIR}
-cp ${WIX}/XenCenter.l10n.msi ${L10N_CD_DIR}
+cp ${DOTNETINST}/XenCenterSetup.l10n.exe ${L10N_CD_DIR}
 
 cp ${WIX}/outVNCControl/VNCControl.msi ${OUTPUT_DIR}/VNCControl.msi
 cd ${REPO}/XenAdmin/TestResources && tar -cf ${OUTPUT_DIR}/XenCenterTestResources.tar * 
@@ -356,7 +374,7 @@ cp ${REPO}/XenAdmin/bin/Release/{XS56EFP1002,XS56E008,XS60E001,XS60E009}.xsupdat
 #create english iso files
 ISO_DIR=${SCRATCH_DIR}/iso-staging
 mkdir_clean ${ISO_DIR}
-install -m 755 ${EN_CD_DIR}/XenCenter.msi ${ISO_DIR}/XenCenter.msi
+install -m 755 ${EN_CD_DIR}/XenCenterSetup.exe ${ISO_DIR}/XenCenterSetup.exe
 cp ${REPO}/mk/ISO_files/* ${ISO_DIR}
 cp ${EN_CD_DIR}/XenCenter.ico ${ISO_DIR}/XenCenter.ico
 mkisofs -J -r -v -hfs -probe -publisher "${COMPANY_NAME_LEGAL}" -p "${COMPANY_NAME_LEGAL}" -V "XenCenter" -o "${OUTPUT_DIR}/XenCenter.iso" "${ISO_DIR}"
@@ -365,7 +383,7 @@ mkisofs -J -r -v -hfs -probe -publisher "${COMPANY_NAME_LEGAL}" -p "${COMPANY_NA
 L10N_ISO_DIR=${SCRATCH_DIR}/l10n-iso-staging
 mkdir_clean ${L10N_ISO_DIR}
 # -o root -g root 
-install -m 755 ${L10N_CD_DIR}/XenCenter.l10n.msi ${L10N_ISO_DIR}/XenCenter.msi
+install -m 755 ${L10N_CD_DIR}/XenCenter.l10n.exe ${L10N_ISO_DIR}/XenCenterSetup.exe
 cp ${REPO}/mk/ISO_files/* ${L10N_ISO_DIR}
 cp ${EN_CD_DIR}/XenCenter.ico ${L10N_ISO_DIR}/XenCenter.ico
 mkisofs -J -r -v -hfs -probe -publisher "${COMPANY_NAME_LEGAL}" -p "${COMPANY_NAME_LEGAL}" -V "XenCenter" -o "${OUTPUT_DIR}/XenCenter.l10n.iso" "${L10N_ISO_DIR}"
