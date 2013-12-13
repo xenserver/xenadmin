@@ -5634,7 +5634,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deleting the XenServer tools ISO storage is not supported..
+        ///   Looks up a localized string similar to Deleting the XenServer Tools ISO storage is not supported..
         /// </summary>
         public static string CANNOT_DELETE_TOOLS_SR {
             get {
@@ -31828,15 +31828,6 @@ namespace XenAdmin {
         public static string VIRTUAL_MACHINES {
             get {
                 return ResourceManager.GetString("VIRTUAL_MACHINES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XenServer tools not installed.
-        /// </summary>
-        public static string VIRTUALIZATION_NOT_INSTALLED {
-            get {
-                return ResourceManager.GetString("VIRTUALIZATION_NOT_INSTALLED", resourceCulture);
             }
         }
         

@@ -2055,7 +2055,7 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
     <value>This snapshot is currently in use and cannot be deleted.</value>
   </data>
   <data name="CANNOT_DELETE_TOOLS_SR" xml:space="preserve">
-    <value>Deleting the XenServer tools ISO storage is not supported.</value>
+    <value>Deleting the XenServer Tools ISO storage is not supported.</value>
   </data>
   <data name="CANNOT_DELETE_VDI_ACTIVE_ON" xml:space="preserve">
     <value>This virtual disk is active on VM '{0}'. Deactivate the virtual disk before deleting.</value>
@@ -11014,9 +11014,6 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   </data>
   <data name="VIF_VSWITCH_CONTROLLER" xml:space="preserve">
     <value>QoS settings should be configured using the vSwitch Controller</value>
-  </data>
-  <data name="VIRTUALIZATION_NOT_INSTALLED" xml:space="preserve">
-    <value>XenServer tools not installed</value>
   </data>
   <data name="VIRTUALIZATION_OPTIMIZED" xml:space="preserve">
     <value>Optimized (version {0} installed)</value>

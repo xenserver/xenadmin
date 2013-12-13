@@ -1308,7 +1308,7 @@ namespace XenAPI
                     case VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE:
                         return string.Format(Messages.VIRTUALIZATION_OUT_OF_DATE, VirtualisationVersion);
                     case VM.VirtualisationStatus.PV_DRIVERS_NOT_INSTALLED:
-                        return Messages.VIRTUALIZATION_NOT_INSTALLED;
+                        return Messages.PV_DRIVERS_NOT_INSTALLED;
                     default:
                         return Messages.VIRTUALIZATION_UNKNOWN;
                 }
