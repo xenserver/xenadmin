@@ -216,7 +216,7 @@ namespace XenAdmin.Controls
             contextMenuStrip1.Items.Clear();
             contextMenuStrip1.Items.Add(copyToolStripMenuItem);
 
-            var menuItems = row.Tag as List<ToolStripMenuItem>;
+            var menuItems = row.Tag as IEnumerable<ToolStripMenuItem>;
             if (menuItems != null)
             {
                 contextMenuStrip1.Items.Add(new ToolStripSeparator());
@@ -376,7 +376,7 @@ namespace XenAdmin.Controls
             AddRow(r);
         }
 
-        public void AddEntry(string Key, string Value, List<ToolStripMenuItem> contextMenuItems)
+        public void AddEntry(string Key, string Value, IEnumerable<ToolStripMenuItem> contextMenuItems)
         {
             if (!String.IsNullOrEmpty(Key))
                 Key += Messages.GENERAL_PAGE_KVP_SEPARATOR;
@@ -388,7 +388,7 @@ namespace XenAdmin.Controls
             AddRow(r);
         }
         
-        public void AddEntry(string Key, string Value, List<ToolStripMenuItem> contextMenuItems, string toolTipText)
+        public void AddEntry(string Key, string Value, IEnumerable<ToolStripMenuItem> contextMenuItems, string toolTipText)
         {
             AddEntry(Key, Value, contextMenuItems);
             if (toolTipText != Key)
@@ -408,7 +408,7 @@ namespace XenAdmin.Controls
             dataGridViewEx1.DefaultCellStyle = new DataGridViewCellStyle();
         }
 
-        public void AddEntry(string Key, string Value, List<ToolStripMenuItem> contextMenuItems, Color fontColor)
+        public void AddEntry(string Key, string Value, IEnumerable<ToolStripMenuItem> contextMenuItems, Color fontColor)
         {
             if (!String.IsNullOrEmpty(Key))
                 Key += Messages.GENERAL_PAGE_KVP_SEPARATOR;
@@ -422,7 +422,7 @@ namespace XenAdmin.Controls
             dataGridViewEx1.DefaultCellStyle = new DataGridViewCellStyle();
         }
 
-        public void AddEntry(string Key, FolderListItem Value, List<ToolStripMenuItem> contextMenuItems)
+        public void AddEntry(string Key, FolderListItem Value, IEnumerable<ToolStripMenuItem> contextMenuItems)
         {
             // Special case for folders: CA-33311
 
@@ -436,7 +436,7 @@ namespace XenAdmin.Controls
             AddRow(r);
         }
 
-        internal void AddEntryLink(string Key, string Value, List<ToolStripMenuItem> contextMenuItems, Command command)
+        internal void AddEntryLink(string Key, string Value, IEnumerable<ToolStripMenuItem> contextMenuItems, Command command)
         {
             if (!String.IsNullOrEmpty(Key))
                 Key += Messages.GENERAL_PAGE_KVP_SEPARATOR;
@@ -450,7 +450,7 @@ namespace XenAdmin.Controls
             AddRow(r);
         }
 
-        internal void AddEntryLink(string Key, string Value, List<ToolStripMenuItem> contextMenuItems, Action action)
+        internal void AddEntryLink(string Key, string Value, IEnumerable<ToolStripMenuItem> contextMenuItems, Action action)
         {
             if (!String.IsNullOrEmpty(Key))
                 Key += Messages.GENERAL_PAGE_KVP_SEPARATOR;

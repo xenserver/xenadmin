@@ -38,14 +38,12 @@ using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.CustomFields;
 using XenAdmin.Model;
-using XenAdmin.Utils;
 using XenAPI;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.SettingsPanels;
 using XenAdmin.Network;
 using XenAdmin.Commands;
-using LicenseManager = XenAdmin.Dialogs.LicenseManager;
 
 
 namespace XenAdmin.TabPages
@@ -505,8 +503,8 @@ namespace XenAdmin.TabPages
                     NetworkingProperties p = new NetworkingProperties(Host, null);
                     p.ShowDialog(Program.MainWindow);
                 };
-            List<ToolStripMenuItem> menuItems = new List<ToolStripMenuItem>();
-            menuItems.Add(editValue);
+
+            var menuItems = new[] { editValue };
 
             if (!string.IsNullOrEmpty(Host.hostname))
             {
@@ -564,8 +562,8 @@ namespace XenAdmin.TabPages
                         dialog.SelectPage(dialog.CustomFieldsEditPage);
                         dialog.ShowDialog();
                     };
-                List<ToolStripMenuItem> menuItems = new List<ToolStripMenuItem>();
-                menuItems.Add(editValue);
+
+                var menuItems = new[] { editValue };
                 CustomFieldWrapper cfWrapper = new CustomFieldWrapper(xenObject, customField.Definition);
 
                 s.AddEntry(customField.Definition.Name.Ellipsise(30), cfWrapper.ToString(), menuItems, customField.Definition.Name);
@@ -602,8 +600,7 @@ namespace XenAdmin.TabPages
             CommandToolStripMenuItem applypatch = new CommandToolStripMenuItem(
                 new InstallNewUpdateCommand(Program.MainWindow.CommandInterface), true);
 
-            List<ToolStripMenuItem> menuItems = new List<ToolStripMenuItem>();
-            menuItems.Add(applypatch);
+            var menuItems = new[] { applypatch };
 
             var poolPartPatches = poolPartialPatches();
             if (!string.IsNullOrEmpty(poolPartPatches))
@@ -643,8 +640,7 @@ namespace XenAdmin.TabPages
                            new CommandToolStripMenuItem(
                                new InstallNewUpdateCommand(Program.MainWindow.CommandInterface), true);
 
-                List<ToolStripMenuItem> menuItems = new List<ToolStripMenuItem>();
-                menuItems.Add(applypatch);
+                var menuItems = new[] { applypatch };
                 s.AddEntry(FriendlyName("Pool_patch.not_applied"), hostUnappliedPatches(host), menuItems, Color.Red);
             }
         }
@@ -661,9 +657,7 @@ namespace XenAdmin.TabPages
 
             PDSection s = pdSectionHighAvailability;
 
-            List<ToolStripMenuItem> menuItems = new List<ToolStripMenuItem>();
-            menuItems.Add(EditMenuItem("VMHAEditPage", "comboBoxProtectionLevel"));
-
+            var menuItems = new[] { EditMenuItem("VMHAEditPage", "comboBoxProtectionLevel") };
             s.AddEntry(FriendlyName("VM.ha_restart_priority"), Helpers.RestartPriorityI18n(vm.HARestartPriority), menuItems);
         }
 
@@ -680,7 +674,6 @@ namespace XenAdmin.TabPages
             bool broken = sr.IsBroken() || !sr.MultipathAOK || sr.NeedsUpgrading;
             bool detached = !sr.HasPBDs;
 
-            List<ToolStripMenuItem> menuItems = new List<ToolStripMenuItem>();
             ToolStripMenuItem repair = new ToolStripMenuItem
                 {
                     Text = sr.NeedsUpgrading ? Messages.UPGRADE_SR : Messages.GENERAL_SR_CONTEXT_REPAIR,
@@ -693,7 +686,8 @@ namespace XenAdmin.TabPages
                     else
                         Program.MainWindow.ShowPerConnectionWizard(xenObject.Connection, new RepairSRDialog(sr));
                 };
-            menuItems.Add(repair);
+
+            var menuItems = new[] { repair };
 
             if (broken && !detached)
                 s.AddEntry(FriendlyName("SR.state"), sr.StatusString, menuItems);
@@ -895,24 +889,21 @@ namespace XenAdmin.TabPages
 
             PDSection s = pdSectionBootOptions;
 
-            List<ToolStripMenuItem> menuItems = new List<ToolStripMenuItem>();
-
-			if (!Helpers.BostonOrGreater(vm.Connection))
+            if (!Helpers.BostonOrGreater(vm.Connection))
 			{
-				menuItems.Add(EditMenuItem("StartupOptionsEditPage", "ckbAutoBoot"));
-				s.AddEntry(FriendlyName("VM.auto_boot"), Helpers.BoolToString(vm.AutoPowerOn), menuItems);
-				menuItems.Clear();
+			    s.AddEntry(FriendlyName("VM.auto_boot"), Helpers.BoolToString(vm.AutoPowerOn),
+			               new[] { EditMenuItem("StartupOptionsEditPage", "ckbAutoBoot") });
 			}
 
         	if (vm.IsHVM)
             {	
-                menuItems.Add(EditMenuItem("StartupOptionsEditPage", "lstOrder"));
-                s.AddEntry(FriendlyName("VM.BootOrder"), HVMBootOrder(vm), menuItems);
+                s.AddEntry(FriendlyName("VM.BootOrder"), HVMBootOrder(vm),
+                    new[] { EditMenuItem("StartupOptionsEditPage", "lstOrder") });
             }
             else
             {
-                menuItems.Add(EditMenuItem("StartupOptionsEditPage", "txtOSParams"));
-                s.AddEntry(FriendlyName("VM.PV_args"), vm.PV_args, menuItems);
+                s.AddEntry(FriendlyName("VM.PV_args"), vm.PV_args,
+                    new[] { EditMenuItem("StartupOptionsEditPage", "txtOSParams") });
             }
         }
 
@@ -946,8 +937,8 @@ namespace XenAdmin.TabPages
                     };
 
                 GeneralTabLicenseStatusStringifier ss = new GeneralTabLicenseStatusStringifier(licenseStatus);
-                s.AddEntry(Messages.LICENSE_STATUS, ss.ExpiryStatus, new List<ToolStripMenuItem>(new [] { editItem }));
-                s.AddEntry(FriendlyName("host.license_params-expiry"), ss.ExpiryDate, new List<ToolStripMenuItem>(new [] { editItem }));
+                s.AddEntry(Messages.LICENSE_STATUS, ss.ExpiryStatus, new [] { editItem });
+                s.AddEntry(FriendlyName("host.license_params-expiry"), ss.ExpiryDate, new [] { editItem });
                 info.Remove("expiry");
             }
 
@@ -1069,7 +1060,7 @@ namespace XenAdmin.TabPages
             PDSection s = pdSectionGeneral;
 
             s.AddEntry(FriendlyName("host.name_label"), Helpers.GetName(xenObject),
-                new List<ToolStripMenuItem>(new ToolStripMenuItem[] { EditMenuItem("GeneralEditPage", "txtName") }));
+                new [] { EditMenuItem("GeneralEditPage", "txtName") });
 
             if (!(xenObject is IStorageLinkObject))
             {
@@ -1077,7 +1068,7 @@ namespace XenAdmin.TabPages
                 if (vm == null || vm.DescriptionType != VM.VmDescriptionType.None)
                 {
                     s.AddEntry(FriendlyName("host.name_description"), xenObject.Description,
-                               new List<ToolStripMenuItem>(new[] {EditMenuItem("GeneralEditPage", "txtDescription")}));
+                               new[] { EditMenuItem("GeneralEditPage", "txtDescription") });
                 }
 
                 GenTagRow(s);
@@ -1105,7 +1096,7 @@ namespace XenAdmin.TabPages
                         };
                     s.AddEntry(FriendlyName("host.enabled"),
                                host.MaintenanceMode ? Messages.HOST_IN_MAINTENANCE_MODE : Messages.DISABLED,
-                               new List<ToolStripMenuItem>(new[] { item }),
+                               new[] { item },
                                Color.Red);
                 }
                 else
@@ -1116,14 +1107,13 @@ namespace XenAdmin.TabPages
                             new HostMaintenanceModeCommand(Program.MainWindow.CommandInterface, host,
                                 HostMaintenanceModeCommandParameter.Enter).Execute();
                         };
-                    s.AddEntry(FriendlyName("host.enabled"), Messages.YES,
-                                 new List<ToolStripMenuItem>(new [] {item}));
+                    s.AddEntry(FriendlyName("host.enabled"), Messages.YES, new[] { item });
                 }
 
                 s.AddEntry(FriendlyName("host.iscsi_iqn"), host.iscsi_iqn,
-                    new List<ToolStripMenuItem>(new [] { EditMenuItem("GeneralEditPage", "txtIQN") }));
+                    new [] { EditMenuItem("GeneralEditPage", "txtIQN") });
                 s.AddEntry(FriendlyName("host.log_destination"), host.SysLogDestination ?? Messages.HOST_LOG_DESTINATION_LOCAL,
-                    new List<ToolStripMenuItem>(new [] { EditMenuItem("LogDestinationEditPage", "localRadioButton") }));
+                    new [] { EditMenuItem("LogDestinationEditPage", "localRadioButton") });
 
                 PrettyTimeSpan uptime = host.Uptime;
                 PrettyTimeSpan agentUptime = host.AgentUptime;
@@ -1157,7 +1147,7 @@ namespace XenAdmin.TabPages
 					                    propertiesDialog.ShowDialog(this);
 					            };
 
-						s.AddEntryLink(Messages.VM_APPLIANCE, appl.Name, new List<ToolStripMenuItem>(new[] { applProperties }),
+						s.AddEntryLink(Messages.VM_APPLIANCE, appl.Name, new[] { applProperties },
 									   () =>
 									   {
 										   using (PropertiesDialog propertiesDialog = new PropertiesDialog(appl))
@@ -1189,7 +1179,7 @@ namespace XenAdmin.TabPages
                                         new InstallToolsCommand(Program.MainWindow.CommandInterface, vm).Execute();
                                     };
                                 s.AddEntryLink(FriendlyName("VM.VirtualizationState"), vm.VirtualisationStatusString,
-                                    new List<ToolStripMenuItem>(new [] { installtools }),
+                                    new[] { installtools },
                                     new InstallToolsCommand(Program.MainWindow.CommandInterface, vm));
                             }
                             else
@@ -1217,7 +1207,7 @@ namespace XenAdmin.TabPages
                     if (VMCanChooseHomeServer(vm))
                     {
                         s.AddEntry(FriendlyName("VM.affinity"), vm.AffinityServerString,
-                            new List<ToolStripMenuItem>(new ToolStripMenuItem[] { EditMenuItem("HomeServerPage", "picker") }));
+                            new[] { EditMenuItem("HomeServerPage", "picker") });
                     }
                 }
             }
@@ -1376,9 +1366,8 @@ namespace XenAdmin.TabPages
 
         private void GenTagRow(PDSection s)
         {
-            List<ToolStripMenuItem> toolStrip = new List<ToolStripMenuItem>(new [] { EditMenuItem("GeneralEditPage", "") });
-
             string[] tags = Tags.GetTags(xenObject);
+            
             if (tags != null && tags.Length > 0)
             {
                 ToolStripMenuItem goToTag = new ToolStripMenuItem(Messages.VIEW_TAG_MENU_OPTION);
@@ -1389,11 +1378,12 @@ namespace XenAdmin.TabPages
                     item.Click += delegate { Program.MainWindow.SearchForTag(tag); };
                     goToTag.DropDownItems.Add(item);
                 }
-                toolStrip.Insert(0, goToTag);
-                s.AddEntry(Messages.TAGS, TagsString(), toolStrip);
+
+                s.AddEntry(Messages.TAGS, TagsString(), new[] { goToTag, EditMenuItem("GeneralEditPage", "") });
                 return;
             }
-            s.AddEntry(Messages.TAGS, Messages.NONE, toolStrip);
+
+            s.AddEntry(Messages.TAGS, Messages.NONE, new[] { EditMenuItem("GeneralEditPage", "") });
         }
 
         private string TagsString()
@@ -1402,9 +1392,7 @@ namespace XenAdmin.TabPages
             if (tags == null || tags.Length == 0)
                 return Messages.NONE;
 
-            List<string> tagsList = new List<string>(tags);
-            tagsList.Sort();
-            return string.Join(", ", tagsList.ToArray());
+            return string.Join(", ", tags.OrderBy(s => s).ToArray());
         }
 
         private void GenFolderRow(PDSection s)
@@ -1629,7 +1617,7 @@ namespace XenAdmin.TabPages
 
         private void SetStatesOfExpandingLinks()
         {
-            List<PDSection> sectionsVisible = sections.Where(section => section.Parent.Visible).ToList();
+            var sectionsVisible = sections.Where(section => section.Parent.Visible);
             bool anyExpanded = sectionsVisible.Any(s => s.IsExpanded);
             bool anyCollapsed = sectionsVisible.Any(s => !s.IsExpanded);
             linkLabelExpand.Enabled = anyCollapsed;
