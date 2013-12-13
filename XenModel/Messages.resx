@@ -892,7 +892,7 @@
     <value>Migrated</value>
   </data>
   <data name="ACTION_VM_MIGRATE_CANCELLED" xml:space="preserve">
-    <value>Migrating {0} cancelled</value>
+    <value>Migrating {0} canceled</value>
   </data>
   <data name="ACTION_VM_MIGRATING" xml:space="preserve">
     <value>Migrating</value>
@@ -1000,7 +1000,7 @@
     <value>Downloading WLB report '{0}' from '{1}' ({2})</value>
   </data>
   <data name="ACTION_WLB_REPORT_CANCELLED" xml:space="preserve">
-    <value>Download cancelled</value>
+    <value>Download canceled</value>
   </data>
   <data name="ACTION_WLB_REPORT_DOWNLOADING" xml:space="preserve">
     <value>Downloading...</value>
@@ -2729,7 +2729,7 @@ You can only connect to a single Citrix XenServer Express Edition server at a ti
     <value>Create a full copy of the existing template on this storage repository:</value>
   </data>
   <data name="COPY_TO_SHARED_CANCELLED" xml:space="preserve">
-    <value>Copying {0} cancelled.</value>
+    <value>Copying {0} canceled.</value>
   </data>
   <data name="COPY_VM" xml:space="preserve">
     <value>Copy Virtual Machine</value>
@@ -3487,7 +3487,7 @@ This will also delete its subfolders.</value>
     <value>Do&amp;n't disconnect</value>
   </data>
   <data name="DISCONNECT_WARNING" xml:space="preserve">
-    <value>Unfinished tasks will be cancelled if you disconnect from '{0}' before they finish.</value>
+    <value>Unfinished tasks will be canceled if you disconnect from '{0}' before they finish.</value>
   </data>
   <data name="DISKMEMORY_SNAPSHOTS" xml:space="preserve">
     <value>Disk and memory snapshots</value>
@@ -3574,7 +3574,7 @@ This will also delete its subfolders.</value>
     <value>Downloading {0} ({1} of {2})</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOAD_CANCELLED_DESC" xml:space="preserve">
-    <value>Download cancelled</value>
+    <value>Download canceled</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_EXTRACTING_DESC" xml:space="preserve">
     <value>Extracting {0}</value>
@@ -4406,7 +4406,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>User Canceled</value>
   </data>
   <data name="EXCEPTION_USER_CANCELLED_MASTER" xml:space="preserve">
-    <value>User cancelled. Master needs to be upgraded first.</value>
+    <value>User canceled. Master needs to be upgraded first.</value>
   </data>
   <data name="EXIT_MAINTENANCE_MODE" xml:space="preserve">
     <value>Exit &amp;Maintenance Mode</value>
@@ -7005,7 +7005,7 @@ To learn more about the XenServer Live VDI Migration feature or to start a XenSe
     <value>Moved</value>
   </data>
   <data name="MOVE_CANCELLED" xml:space="preserve">
-    <value>Moving {0} cancelled</value>
+    <value>Moving {0} canceled</value>
   </data>
   <data name="MOVE_OBJECTS_TO_FOLDER" xml:space="preserve">
     <value>Move selected objects to folder '{0}'...</value>

@@ -132,7 +132,7 @@
     <value>0</value>
   </data>
   <data name="labelMessage.Text" xml:space="preserve">
-    <value>Cancelling the wizard now will leave Workload Balancing initialized with default configuration, but not enabled.
+    <value>Canceling the wizard now will leave Workload Balancing initialized with default configuration, but not enabled.
 
 Do you want to completely deconfigure Workload balancing?</value>
   </data>

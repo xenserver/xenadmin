@@ -2338,7 +2338,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Migrating {0} cancelled.
+        ///   Looks up a localized string similar to Migrating {0} canceled.
         /// </summary>
         public static string ACTION_VM_MIGRATE_CANCELLED {
             get {
@@ -2707,7 +2707,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download cancelled.
+        ///   Looks up a localized string similar to Download canceled.
         /// </summary>
         public static string ACTION_WLB_REPORT_CANCELLED {
             get {
@@ -7515,7 +7515,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copying {0} cancelled..
+        ///   Looks up a localized string similar to Copying {0} canceled..
         /// </summary>
         public static string COPY_TO_SHARED_CANCELLED {
             get {
@@ -9749,7 +9749,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unfinished tasks will be cancelled if you disconnect from &apos;{0}&apos; before they finish..
+        ///   Looks up a localized string similar to Unfinished tasks will be canceled if you disconnect from &apos;{0}&apos; before they finish..
         /// </summary>
         public static string DISCONNECT_WARNING {
             get {
@@ -10010,7 +10010,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download cancelled.
+        ///   Looks up a localized string similar to Download canceled.
         /// </summary>
         public static string DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOAD_CANCELLED_DESC {
             get {
@@ -12507,7 +12507,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User cancelled. Master needs to be upgraded first..
+        ///   Looks up a localized string similar to User canceled. Master needs to be upgraded first..
         /// </summary>
         public static string EXCEPTION_USER_CANCELLED_MASTER {
             get {
@@ -20087,7 +20087,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Moving {0} cancelled.
+        ///   Looks up a localized string similar to Moving {0} canceled.
         /// </summary>
         public static string MOVE_CANCELLED {
             get {
