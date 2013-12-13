@@ -721,6 +721,10 @@ namespace XenAdmin.Commands
                     items.Add(drItem);
                 }
 
+                var pool = selection.FirstAsXenObject as Pool;
+                if (pool != null && !pool.IsPoolFullyUpgraded)
+                    items.Add(new RollingUpgradeCommand(mainWindow));
+
                 items.AddSeparator();
                 items.Add(new AddHostToSelectedPoolToolStripMenuItem(mainWindow, selection, true));
                 items.Add(new DisconnectPoolCommand(mainWindow, selection));

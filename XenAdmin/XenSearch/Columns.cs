@@ -147,6 +147,20 @@ namespace XenAdmin.XenSearch
                 return true;
             }
 
+            Pool pool = o as Pool;
+            if (pool != null && !pool.IsPoolFullyUpgraded)
+            {
+                if (property == PropertyNames.memoryValue)
+                    item = new GridStringItem(Messages.POOL_VERSIONS_LINK_TEXT,
+                                  HorizontalAlignment.Center, VerticalAlignment.Middle, false, false,
+                                  QueryPanel.LinkBrush, Program.DefaultFontUnderline, QueryPanel.LinkBrush,
+                                  Program.DefaultFontUnderline, 3,
+                                  (sender, args) => new RollingUpgradeCommand(Program.MainWindow.CommandInterface).Execute(),
+                                  null);
+
+                return true;
+            }
+
             return false;
         }
     }

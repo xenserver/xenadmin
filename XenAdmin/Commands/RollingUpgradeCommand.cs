@@ -38,7 +38,7 @@ using XenAdmin.Wizards.RollingUpgradeWizard;
 namespace XenAdmin.Commands
 {
     /// <summary>
-    /// Shows the patching wizard.
+    /// Shows the rolling pool upgrade wizard.
     /// </summary>
     internal class RollingUpgradeCommand : Command
     {
@@ -72,19 +72,11 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        public override Image ContextMenuImage
-        {
-            get
-            {
-                return Resources._000_HostUnpatched_h32bit_16;
-            }
-        }
-
         public override string ContextMenuText
         {
             get
             {
-                return Messages.INSTALL_PENDING_UPDATES;
+                return Messages.ROLLING_POOL_UPGRADE_ELLIPSIS;
             }
         }
     }

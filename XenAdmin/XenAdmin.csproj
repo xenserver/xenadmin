@@ -4016,6 +4016,7 @@
     <None Include="Images\tempUpdates.png" />
     <None Include="Images\tempErrorEvents.png" />
     <None Include="Images\tempNotif16Errors.png" />
+    <None Include="Images\tempHalfUpgradedPool.png" />
     <Content Include="Images\tools_notinstalled_16x.png" />
     <Content Include="Images\tools_outofdate_16x.png" />
     <Content Include="Images\tools_uptodate_16x.png" />

@@ -1251,6 +1251,18 @@ namespace XenAdmin.TabPages
                     s.AddEntry(Messages.POOL_LICENSE, p.LicenseString);
                     if (Helpers.ClearwaterOrGreater(p.Connection))
                         s.AddEntry(Messages.NUMBER_OF_SOCKETS, p.CpuSockets.ToString());
+
+                    if (!p.IsPoolFullyUpgraded)
+                    {
+                        var cmd = new RollingUpgradeCommand(Program.MainWindow.CommandInterface);
+                        var runRpuWizard = new ToolStripMenuItem(Messages.ROLLING_POOL_UPGRADE_ELLIPSIS,
+                                                                 null,
+                                                                 (sender, args) => cmd.Execute());
+
+                        s.AddEntryLink(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, Messages.POOL_VERSIONS_LINK_TEXT,
+                                       new[] { runRpuWizard },
+                                       cmd);
+                    }
                 }
             }
             else if (xenObject is StorageLinkPool)

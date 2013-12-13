@@ -84,7 +84,7 @@ namespace XenAdmin.XenSearch
 
     public enum PropertyNames
     {
-        [HelpString("The type of the selected object, e.g., VM, Network")]
+        [HelpString("The type of the selected object, e.g. VM, Network")]
         type,
         [HelpString("The label of the selected object")]
         label,
@@ -124,6 +124,8 @@ namespace XenAdmin.XenSearch
         uptime,
         [HelpString("true if HA is enabled, false otherwise")]
         ha_enabled,
+        [HelpString("true if at least one of the slaves has different XenServer version from the master, false otherwise")]
+        isNotFullyUpgraded,
 		[HelpString("A logical set of VMs")]
 		appliance,
         [HelpString("Applicable to storage, true if storage is shared, false otherwise")]
@@ -271,6 +273,7 @@ namespace XenAdmin.XenSearch
             PropertyNames_i18n[PropertyNames.tags] = Messages.TAGS;
             PropertyNames_i18n[PropertyNames.shared] = Messages.SHARED;
             PropertyNames_i18n[PropertyNames.ha_enabled] = Messages.HA;
+            PropertyNames_i18n[PropertyNames.isNotFullyUpgraded] = Messages.POOL_VERSIONS_LINK_TEXT_SHORT;
             PropertyNames_i18n[PropertyNames.ip_address] = Messages.ADDRESS;
             PropertyNames_i18n[PropertyNames.vm] = Messages.VM;
             PropertyNames_i18n[PropertyNames.memory] = Messages.MEMORY;
@@ -507,6 +510,7 @@ namespace XenAdmin.XenSearch
             properties[PropertyNames.folders] = Folders.GetAncestorFolders;
             properties[PropertyNames.haText] = HATextProperty;
             properties[PropertyNames.ha_enabled] = HAEnabledProperty;
+            properties[PropertyNames.isNotFullyUpgraded] = IsNotFullyUpgradedProperty;
             properties[PropertyNames.ip_address] = IPAddressProperty;
             properties[PropertyNames.license] = LicenseProperty;
             properties[PropertyNames.memoryText] = MemoryTextProperty;
@@ -846,6 +850,12 @@ namespace XenAdmin.XenSearch
         {
             Pool pool = o as Pool;
             return pool == null ? null : (IComparable)pool.ha_enabled;
+        }
+
+        private static IComparable IsNotFullyUpgradedProperty(IXenObject o)
+        {
+            Pool pool = o as Pool;
+            return pool == null ? null : (IComparable)(!pool.IsPoolFullyUpgraded);
         }
 
         private static IComparable TypeProperty(IXenObject o)

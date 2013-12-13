@@ -8626,6 +8626,12 @@ The VM protection policy for this VM does not have automatic archiving configure
   <data name="POOL_PICKER_BLURB_NO_AFFINITY" xml:space="preserve">
     <value>Select a pool or stand alone server to import this VM to. The home server setting will be taken from the template.\n\nIf this value does not correspond to a server within the selected resource pool then it will be ignored for all resourcing decisions.</value>
   </data>
+  <data name="POOL_VERSIONS_LINK_TEXT" xml:space="preserve">
+    <value>Mixed XenServer versions coexisting</value>
+  </data>
+  <data name="POOL_VERSIONS_LINK_TEXT_SHORT" xml:space="preserve">
+    <value>Mixed versions</value>
+  </data>
   <data name="POOL_X" xml:space="preserve">
     <value>pool '{0}'</value>
   </data>
@@ -9186,6 +9192,9 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   </data>
   <data name="ROLLING_POOL_UPGRADE" xml:space="preserve">
     <value>Rolling Pool Upgrade</value>
+  </data>
+  <data name="ROLLING_POOL_UPGRADE_ELLIPSIS" xml:space="preserve">
+    <value>Rolling Pool Upgrade...</value>
   </data>
   <data name="ROLLING_UPGRADE_CAN_RESUME_UPGRADE" xml:space="preserve">
     <value>This upgrade can be resumed by launching the Rolling Pool Upgrade wizard again.</value>

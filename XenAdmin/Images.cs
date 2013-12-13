@@ -90,6 +90,7 @@ namespace XenAdmin
             ImageList16.Images.Add("_000_ScheduledVMsnapshotDiskOnly_h32bit_16.png", XenAdmin.Properties.Resources._000_ScheduledVMsnapshotDiskOnly_h32bit_16);
             ImageList16.Images.Add("_000_ScheduledVMsnapshotDiskMemory_h32bit_16.png", XenAdmin.Properties.Resources._000_ScheduledVMsnapshotDiskMemory_h32bit_16);
             ImageList16.Images.Add("000_PoolConnected_h32bit_16.png", XenAdmin.Properties.Resources._000_PoolConnected_h32bit_16);
+            ImageList16.Images.Add("tempHalfUpgradedPool.png", XenAdmin.Properties.Resources.tempHalfUpgradedPool);
 
             ImageList16.Images.Add("000_Storage_h32bit_16.png", XenAdmin.Properties.Resources._000_Storage_h32bit_16);
             ImageList16.Images.Add("000_StorageBroken_h32bit_16.png", XenAdmin.Properties.Resources._000_StorageBroken_h32bit_16);
@@ -242,7 +243,7 @@ namespace XenAdmin
 
             Pool pool = o as Pool;
             if (pool != null)
-                return pool.GetIcon;
+                return GetIconFor(pool);
 
             XenAPI.Network network = o as XenAPI.Network;
             if (network != null)
@@ -465,7 +466,11 @@ namespace XenAdmin
 
         public static Icons GetIconFor(Pool pool)
         {
-            return pool.Connection.IsConnected ? Icons.PoolConnected : Icons.HostDisconnected;
+            return pool.Connection.IsConnected
+                       ? pool.IsPoolFullyUpgraded
+                             ? Icons.PoolConnected
+                             : Icons.PoolNotFullyUpgraded
+                       : Icons.HostDisconnected;
         }
 
         public static Icons GetIconFor(XenAPI.Network network)

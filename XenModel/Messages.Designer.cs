@@ -24724,6 +24724,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mixed XenServer versions coexisting.
+        /// </summary>
+        public static string POOL_VERSIONS_LINK_TEXT {
+            get {
+                return ResourceManager.GetString("POOL_VERSIONS_LINK_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mixed versions.
+        /// </summary>
+        public static string POOL_VERSIONS_LINK_TEXT_SHORT {
+            get {
+                return ResourceManager.GetString("POOL_VERSIONS_LINK_TEXT_SHORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to pool &apos;{0}&apos;.
         /// </summary>
         public static string POOL_X {
@@ -26406,6 +26424,15 @@ namespace XenAdmin {
         public static string ROLLING_POOL_UPGRADE {
             get {
                 return ResourceManager.GetString("ROLLING_POOL_UPGRADE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rolling Pool Upgrade....
+        /// </summary>
+        public static string ROLLING_POOL_UPGRADE_ELLIPSIS {
+            get {
+                return ResourceManager.GetString("ROLLING_POOL_UPGRADE_ELLIPSIS", resourceCulture);
             }
         }
         

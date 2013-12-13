@@ -174,12 +174,6 @@ namespace XenAPI
             }
         }
 
-
-        public Icons GetIcon
-        {
-            get { return Connection.IsConnected ? Icons.PoolConnected : Icons.HostDisconnected; }
-        }
-
         private const String ROLLING_UPGRADE_IN_PROGRESS = "rolling_upgrade_in_progress";
 
         public bool RollingUpgrade
@@ -344,12 +338,26 @@ namespace XenAPI
                 var master = Helpers.GetMaster(Connection);
 
                 List<XenAPI.Host> result = IsMasterUpgraded
-                                               ? Connection.Cache.Hosts.Where(
-                                                   host => host.LongProductVersion != master.LongProductVersion).ToList()
-                                               : Connection.Cache.Hosts.ToList();
+                               ? Connection.Cache.Hosts.Where(host => host.LongProductVersion != master.LongProductVersion).ToList()
+                               : Connection.Cache.Hosts.ToList();
                 result.Sort();
                 
                 return result;
+            }
+        }
+
+        public bool IsPoolFullyUpgraded
+        {
+            get
+            {
+                Host master = Helpers.GetMaster(this);
+
+                foreach (var host in this.Connection.Cache.Hosts)
+                {
+                    if (host.LongProductVersion != master.LongProductVersion)
+                        return false;
+                }
+                return true;
             }
         }
 

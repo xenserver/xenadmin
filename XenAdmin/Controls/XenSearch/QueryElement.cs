@@ -82,6 +82,7 @@ namespace XenAdmin.Controls.XenSearch
             queryTypes.Add(new LongQueryType(4, ObjectTypes.VDI, Messages.SIZE, PropertyNames.size, Util.BINARY_GIGA, Messages.VAL_GIGB));
             queryTypes.Add(new BooleanQueryType(4, ObjectTypes.LocalSR | ObjectTypes.RemoteSR | ObjectTypes.VDI, PropertyNames.shared));
             queryTypes.Add(new BooleanQueryType(4, ObjectTypes.Pool, PropertyNames.ha_enabled));
+            queryTypes.Add(new BooleanQueryType(4, ObjectTypes.Pool, PropertyNames.isNotFullyUpgraded));
             queryTypes.Add(new NullQueryType<Pool>(4, ObjectTypes.Server | ObjectTypes.VM, PropertyNames.pool, false, Messages.IS_IN_A_POOL));
             queryTypes.Add(new NullQueryType<Pool>(4, ObjectTypes.Server | ObjectTypes.VM, PropertyNames.pool, true, Messages.IS_STANDALONE));
 
