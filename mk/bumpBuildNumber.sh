@@ -30,7 +30,7 @@
 
 set -eu
 
-JENKINS_SERVER=http://10.80.237.186:8080
+JENKINS_SERVER=http://tocco.uk.xensource.com:8080
 
 source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
 
