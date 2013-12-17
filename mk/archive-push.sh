@@ -30,7 +30,7 @@
 
 set -eu
 
-DISABLE_PUSH=1
+#DISABLE_PUSH=1
 source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
 
 if [ ${XS_BRANCH} = "trunk" ]
@@ -39,6 +39,7 @@ then
   TRUNK_COLOUR_L=$(echo ${TRUNK_COLOUR} | tr [:upper:] [:lower:])
   if [ ${TRUNK_COLOUR_L} != "green" ]
   then
+	echo "trunk is not green, disabling push"
     DISABLE_PUSH=1
   fi
 fi
