@@ -95,15 +95,6 @@ namespace XenAdmin.Wizards.GenericPages
         public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
         {
             targetConnection = null;
-
-            if (VmMappings.Select(kvp => kvp.Key).Any(sysId => NetworkData(sysId) == null))
-            {
-                ShowWarningMessageBox(Messages.CPM_WIZARD_VM_MISSING_ERROR);
-                cancel = true;
-                SetButtonNextEnabled(false);
-                SetButtonPreviousEnabled(false);
-            }
-
             base.PageLeave(direction, ref cancel);
         }
 
@@ -288,13 +279,5 @@ namespace XenAdmin.Wizards.GenericPages
 			m_dataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
 			IsDirty = true;
 		}
-
-        private void ShowWarningMessageBox(string message)
-        {
-            new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning, message, Messages.CPM_WIZARD_TITLE)).ShowDialog(
-                    Program.MainWindow);
-        }
-
 	}
 }

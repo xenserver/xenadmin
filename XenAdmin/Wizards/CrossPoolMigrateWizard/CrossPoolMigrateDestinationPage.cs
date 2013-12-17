@@ -103,13 +103,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             return filters;
         }
         
-        private void ShowWarningMessageBox(string message)
-        {
-            new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning, message, Messages.CPM_WIZARD_TITLE)).ShowDialog(
-                    Program.MainWindow);
-        }
-
         public override void PageLeave(XenAdmin.Controls.PageLoadedDirection direction, ref bool cancel)
         {
             if (!cancel)
@@ -120,12 +113,19 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                                    {
                                        if (Connection == null || !Connection.IsConnected)
                                        {
-                                           ShowWarningMessageBox(Messages.CPM_WIZARD_ERROR_TARGET_DISCONNECTED);
+                                           CrossPoolMigrateWizard.ShowWarningMessageBox(Messages.CPM_WIZARD_ERROR_TARGET_DISCONNECTED);
                                            targetDisconnected = true;
                                        }
                                    });
                 cancel = targetDisconnected;
             }
+
+            if (!cancel && !CrossPoolMigrateWizard.AllVMsAvailable(selectedVMs))
+            {
+                cancel = true;
+                SetButtonNextEnabled(false);
+            }
+
             base.PageLeave(direction, ref cancel);
         }
     }

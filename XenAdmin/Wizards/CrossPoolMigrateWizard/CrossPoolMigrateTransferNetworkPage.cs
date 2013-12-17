@@ -31,13 +31,17 @@
 
 using System.Collections.Generic;
 using XenAdmin.Controls;
+using XenAPI;
 
 namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 {
     public partial class CrossPoolMigrateTransferNetworkPage : XenTabPage
     {
-        public CrossPoolMigrateTransferNetworkPage()
+        private List<VM> selectedVMs;
+
+        public CrossPoolMigrateTransferNetworkPage(List<VM> selectedVMs)
         {
+            this.selectedVMs = selectedVMs; 
             InitializeComponent();
             InitializeCustomPageElements();
         }
@@ -48,6 +52,9 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             networkComboBox.IncludeOnlyEnabledNetworksInComboBox = true;
             networkComboBox.IncludeOnlyNetworksWithIPAddresses = true;
         }
+
+        private bool m_buttonNextEnabled;
+        private bool m_buttonPreviousEnabled;
 
         #region Base class (XenTabPage) overrides
 
@@ -74,7 +81,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         public override void PageLoaded(PageLoadedDirection direction)
         {
             base.PageLoaded(direction);//call first so the page gets populated
-            OnPageUpdated();
+            SetButtonsEnabled(true);
         }
 
         public override void PopulatePage()
@@ -89,7 +96,33 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             get { return networkComboBox.SelectedNetworkUuid; }
         }
 
+        public override bool EnableNext()
+        {
+            return m_buttonNextEnabled;
+        }
+
+        public override bool EnablePrevious()
+        {
+            return m_buttonPreviousEnabled;
+        }
+
+        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        {
+            if (!CrossPoolMigrateWizard.AllVMsAvailable(selectedVMs))
+            {
+                cancel = true;
+                SetButtonsEnabled(false);
+            }
+
+            base.PageLeave(direction, ref cancel);
+        }
         #endregion
 
+        protected void SetButtonsEnabled(bool enabled)
+        {
+            m_buttonNextEnabled = enabled;
+            m_buttonPreviousEnabled = enabled;
+            OnPageUpdated();
+        }
     }
 }
