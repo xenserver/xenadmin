@@ -179,7 +179,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             base.FinishWizard();
         }
 
-        private void ShowErrorMessageBox(string message)
+        private static void ShowErrorMessageBox(string message)
         {
             new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, message)).ShowDialog(Program.MainWindow);
         }
@@ -363,7 +363,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         {
             if (check())
                 return true;
-            ShowWarningMessageBox(Messages.CPM_WIZARD_VM_MISSING_ERROR);
+            ShowErrorMessageBox(Messages.CPM_WIZARD_VM_MISSING_ERROR);
             return false;
         }
 
