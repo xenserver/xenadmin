@@ -396,7 +396,7 @@ namespace XenOvf.Utilities
 
                 xmlStream = new FileStream(ovfname, FileMode.Open, FileAccess.Read, FileShare.Read);
                 XmlReaderSettings settings = new XmlReaderSettings();
-                settings.ProhibitDtd = false;
+                settings.DtdProcessing = DtdProcessing.Parse; //Upgrading to .Net 4.0: ProhibitDtd=false is obsolete, this line is the replacement according to: http://msdn.microsoft.com/en-us/library/system.xml.xmlreadersettings.prohibitdtd%28v=vs.100%29.aspx
                 XmlSchema schema = new XmlSchema();
                 bool useOnlineSchema = Convert.ToBoolean(Properties.Settings.Default.useOnlineSchema);
                 if (useOnlineSchema)

@@ -263,6 +263,7 @@ namespace XenAdminTests.TabsAndMenus
         //}
 
         [Test]
+        [Ignore("Ignore this test, the test needs to be fixed, see CA-123967.")]
         public void ContextMenu_VMWithTools()
         {
             foreach (VM vm in GetAllXenObjects<VM>(HasTools))
