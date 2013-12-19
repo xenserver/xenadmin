@@ -24724,7 +24724,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mixed XenServer versions coexisting.
+        ///   Looks up a localized string similar to Pool partially upgraded to XenServer {0}.
         /// </summary>
         public static string POOL_VERSIONS_LINK_TEXT {
             get {
@@ -24733,7 +24733,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mixed versions.
+        ///   Looks up a localized string similar to Partially upgraded.
         /// </summary>
         public static string POOL_VERSIONS_LINK_TEXT_SHORT {
             get {

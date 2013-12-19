@@ -151,12 +151,16 @@ namespace XenAdmin.XenSearch
             if (pool != null && !pool.IsPoolFullyUpgraded)
             {
                 if (property == PropertyNames.memoryValue)
-                    item = new GridStringItem(Messages.POOL_VERSIONS_LINK_TEXT,
+                {
+                    var master = pool.Connection.Resolve(pool.master);
+
+                    item = new GridStringItem(string.Format(Messages.POOL_VERSIONS_LINK_TEXT, master.ProductVersionText),
                                   HorizontalAlignment.Center, VerticalAlignment.Middle, false, false,
                                   QueryPanel.LinkBrush, Program.DefaultFontUnderline, QueryPanel.LinkBrush,
                                   Program.DefaultFontUnderline, 3,
                                   (sender, args) => new RollingUpgradeCommand(Program.MainWindow.CommandInterface).Execute(),
                                   null);
+                }
 
                 return true;
             }

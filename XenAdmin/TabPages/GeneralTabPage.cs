@@ -1252,14 +1252,21 @@ namespace XenAdmin.TabPages
                     if (Helpers.ClearwaterOrGreater(p.Connection))
                         s.AddEntry(Messages.NUMBER_OF_SOCKETS, p.CpuSockets.ToString());
 
-                    if (!p.IsPoolFullyUpgraded)
+                    var master = p.Connection.Resolve(p.master);
+
+                    if (p.IsPoolFullyUpgraded)
+                    {
+                        s.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, master.ProductVersionText);
+                    }
+                    else
                     {
                         var cmd = new RollingUpgradeCommand(Program.MainWindow.CommandInterface);
                         var runRpuWizard = new ToolStripMenuItem(Messages.ROLLING_POOL_UPGRADE_ELLIPSIS,
                                                                  null,
                                                                  (sender, args) => cmd.Execute());
 
-                        s.AddEntryLink(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, Messages.POOL_VERSIONS_LINK_TEXT,
+                        s.AddEntryLink(Messages.SOFTWARE_VERSION_PRODUCT_VERSION,
+                                       string.Format(Messages.POOL_VERSIONS_LINK_TEXT, master.ProductVersionText),
                                        new[] { runRpuWizard },
                                        cmd);
                     }

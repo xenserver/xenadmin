@@ -8627,10 +8627,10 @@ The VM protection policy for this VM does not have automatic archiving configure
     <value>Select a pool or stand alone server to import this VM to. The home server setting will be taken from the template.\n\nIf this value does not correspond to a server within the selected resource pool then it will be ignored for all resourcing decisions.</value>
   </data>
   <data name="POOL_VERSIONS_LINK_TEXT" xml:space="preserve">
-    <value>Mixed XenServer versions coexisting</value>
+    <value>Pool partially upgraded to XenServer {0}</value>
   </data>
   <data name="POOL_VERSIONS_LINK_TEXT_SHORT" xml:space="preserve">
-    <value>Mixed versions</value>
+    <value>Partially upgraded</value>
   </data>
   <data name="POOL_X" xml:space="preserve">
     <value>pool '{0}'</value>

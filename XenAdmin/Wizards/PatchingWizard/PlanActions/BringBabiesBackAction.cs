@@ -40,8 +40,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     public class BringBabiesBackAction : PlanActionWithSession
     {
-        private static new readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         private readonly XenRef<Host> _host;
         private readonly Host currentHost;
         private readonly List<XenRef<VM>> _vms;
