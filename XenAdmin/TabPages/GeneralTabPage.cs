@@ -1253,22 +1253,24 @@ namespace XenAdmin.TabPages
                         s.AddEntry(Messages.NUMBER_OF_SOCKETS, p.CpuSockets.ToString());
 
                     var master = p.Connection.Resolve(p.master);
-
-                    if (p.IsPoolFullyUpgraded)
+                    if (master != null)
                     {
-                        s.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, master.ProductVersionText);
-                    }
-                    else
-                    {
-                        var cmd = new RollingUpgradeCommand(Program.MainWindow.CommandInterface);
-                        var runRpuWizard = new ToolStripMenuItem(Messages.ROLLING_POOL_UPGRADE_ELLIPSIS,
-                                                                 null,
-                                                                 (sender, args) => cmd.Execute());
+                        if (p.IsPoolFullyUpgraded)
+                        {
+                            s.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, master.ProductVersionText);
+                        }
+                        else
+                        {
+                            var cmd = new RollingUpgradeCommand(Program.MainWindow.CommandInterface);
+                            var runRpuWizard = new ToolStripMenuItem(Messages.ROLLING_POOL_UPGRADE_ELLIPSIS,
+                                                                     null,
+                                                                     (sender, args) => cmd.Execute());
 
-                        s.AddEntryLink(Messages.SOFTWARE_VERSION_PRODUCT_VERSION,
-                                       string.Format(Messages.POOL_VERSIONS_LINK_TEXT, master.ProductVersionText),
-                                       new[] { runRpuWizard },
-                                       cmd);
+                            s.AddEntryLink(Messages.SOFTWARE_VERSION_PRODUCT_VERSION,
+                                           string.Format(Messages.POOL_VERSIONS_LINK_TEXT, master.ProductVersionText),
+                                           new[] { runRpuWizard },
+                                           cmd);
+                        }
                     }
                 }
             }
