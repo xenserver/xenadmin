@@ -3429,6 +3429,7 @@
       <DependentUpon>TvmIpPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\PatchingWizard\PatchingWizardModeGuidanceBuilder.cs" />
+    <Compile Include="Wizards\RollingUpgradeWizard\PlanActions\BackgroundThreadBase.cs" />
     <Compile Include="Wizards\RollingUpgradeWizard\RollingUpgradeReadyToUpgradePage.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -31,9 +31,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Threading;
-using log4net;
 using XenAdmin.Core;
 using XenAdmin.Wizards.PatchingWizard.PlanActions;
 using XenAPI;
@@ -41,21 +39,8 @@ using XenAPI;
 
 namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
 {
-    class AutomaticBackgroundThread
+    class AutomaticBackgroundThread : BackgroundThreadBase
     {
-
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private Thread _bw;
-        private IDictionary<Host, List<PlanAction>> _planActions;
-        private PlanAction _revertAction;
-        private IEnumerable<Host> _mastersToUpgrade;
-
-        public event EventHandler<ReportHostDoneArgs> ReportHostDone;
-        public event EventHandler<ReportRunningArgs> ReportRunning;
-        public event EventHandler<ReportExceptionArgs> ReportException;
-        public event EventHandler<ReportRevertDoneArgs> ReportRevertDone;
-        public event EventHandler Completed;
-
         public AutomaticBackgroundThread(IEnumerable<Host> mastersToUpgrade, IDictionary<Host, List<PlanAction>> planActions, PlanAction revertAction)
         {
             _planActions = planActions;
@@ -63,14 +48,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
             _revertAction = revertAction;
             _bw = new Thread(BworkerDoWork) { IsBackground = true };
         }
-
-        public void Start()
-        {
-            _bw.Start();
-        }
-
-
-
 
         private void BworkerDoWork()
         {
@@ -81,52 +58,55 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                 {
                     if (_cancel)
                         return;
+
                     Pool pool = Helpers.GetPoolOfOne(selectedMaster.Connection);
                     foreach (var host in pool.HostsToUpgrade)
                     {
                         log.InfoFormat("Host '{0}' upgrading from version '{1}'", host.Name, host.LongProductVersion);
                         currentHost = host;
                         bool allactionsDone = true;
+                        
                         foreach (var planAction in _planActions[host])
                         {
                             try
                             {
                                 string hostVersion = host.LongProductVersion;
-                                ReportRunning(this, new ReportRunningArgs(planAction, host));
+                                OnReportRunning(planAction, host);
+                                
                                 planAction.Run();
+                                
                                 if (_cancel)
                                     return;
+                                
                                 if (planAction is UpgradeHostPlanAction)
                                 {
                                     Host hostAfterReboot = host.Connection.Resolve(new XenRef<Host>(host.opaque_ref));
                                     if (Helpers.SameServerVersion(hostAfterReboot, hostVersion))
                                     {
                                         log.ErrorFormat("Host '{0}' rebooted with the same version '{1}'", hostAfterReboot.Name, hostAfterReboot.LongProductVersion);
-                                        ReportException.Raise(this,
-                                                                new ReportExceptionArgs(
-                                                                    new Exception(Messages.REBOOT_WITH_SAME_VERSION),
-                                                                    planAction, host));
+                                        OnReportException(new Exception(Messages.REBOOT_WITH_SAME_VERSION),
+                                                          planAction, host);
                                         allactionsDone = false;
                                         if (hostAfterReboot.IsMaster())
                                             _cancel = true;
                                     }
                                     log.InfoFormat("Host '{0}' upgraded with version '{1}'", hostAfterReboot.Name, hostAfterReboot.LongProductVersion);
                                 }
-
                             }
                             catch (Exception e)
                             {
-                                ReportException.Raise(this, new ReportExceptionArgs(e, planAction, host));
+                                OnReportException(e, planAction, host);
                                 allactionsDone = false;
                                 _cancel = true;
                             }
+
                             if (_cancel)
                                 return;
                         }
-                        if (allactionsDone)
-                            ReportHostDone.Raise(this, new ReportHostDoneArgs(host));
-                    }
 
+                        if (allactionsDone)
+                            OnReportHostDone(host);
+                    }
                 }
             }
             catch (Exception excep)
@@ -139,29 +119,19 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                 try
                 {
                     log.Debug("Reverting prechecks");
-                    ReportRunning.Raise(this, () => new ReportRunningArgs(_revertAction, currentHost));
+                    OnReportRunning(_revertAction, currentHost);
                     _revertAction.Run();
-                    ReportRevertDone.Raise(this, () => new ReportRevertDoneArgs(_revertAction));
+
+                    OnReportRevertDone();
                 }
                 catch (Exception excep)
                 {
                     log.Error("Exception reverting prechecks", excep);
-                    ReportException.Raise(this, () => new ReportExceptionArgs(excep, _revertAction, currentHost));
+                    OnReportException(excep, _revertAction, currentHost);
                 }
 
-                Completed.Raise(this);
+                OnCompleted();
             }
-
-
-            Completed.Raise(this);
-
-        }
-
-        private volatile bool _cancel = false;
-        internal void Cancel()
-        {
-            _cancel = true;
         }
     }
-
 }

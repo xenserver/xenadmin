@@ -31,29 +31,15 @@
 
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Threading;
-using log4net;
 using XenAdmin.Wizards.PatchingWizard.PlanActions;
 using XenAPI;
 
 namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
 {
-    class SemiAutomaticBackgroundThread
+    class SemiAutomaticBackgroundThread : BackgroundThreadBase
     {
-
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private Thread _bw;
-        private IDictionary<Host, List<PlanAction>> _planActions;
-        private PlanAction _revertAction;
-        private IEnumerable<Host> _mastersToUpgrade;
-
-        public event EventHandler<ReportHostDoneArgs> ReportHostDone;
-        public event EventHandler<ManageSemiAutomaticPlanActionArgs> ManageSemiAutomaticPlanAction;
-        public event EventHandler<ReportRunningArgs> ReportRunning;
-        public event EventHandler<ReportExceptionArgs> ReportException;
-        public event EventHandler<ReportRevertDoneArgs> ReportRevertDone;
-        public event EventHandler Completed;
+        public event Action<UpgradeManualHostPlanAction> ManageSemiAutomaticPlanAction;
 
         public SemiAutomaticBackgroundThread(IEnumerable<Host> mastersToUpgrade, IDictionary<Host, List<PlanAction>> planActions, PlanAction revertAction)
         {
@@ -62,12 +48,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
             _revertAction = revertAction;
             _bw = new Thread(BworkerDoWork) { IsBackground = true };
         }
-
-        public void Start()
-        {
-            _bw.Start();
-        }
-
 
         private static List<Host> GetAllHosts(IEnumerable<Host> masters)
         {
@@ -113,7 +93,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
             Host currentHost = null;
             try
             {
-
                 List<Host> hosts = GetAllHosts(_mastersToUpgrade);
 
                 bool currentMasterFailed = false;
@@ -147,14 +126,17 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                         if (_cancel && !(planAction is BringBabiesBackAction)) 
                             continue;
 
-                        PlanAction action = planAction;
-                        ReportRunning.Raise(this, () => new ReportRunningArgs(action, host));
+                        OnReportRunning(planAction, host);
+
                         try
                         {
                             if (planAction is UpgradeManualHostPlanAction)
                             {
                                 var upgradeAction = (UpgradeManualHostPlanAction)planAction;
-                                ManageSemiAutomaticPlanAction.Raise(this, () => new ManageSemiAutomaticPlanActionArgs(upgradeAction));
+                                
+                                if (ManageSemiAutomaticPlanAction != null)
+                                    ManageSemiAutomaticPlanAction(upgradeAction);
+                                
                                 if (host.IsMaster())
                                     poolHigherProductVersion = upgradeAction.Host.LongProductVersion;
                             }
@@ -166,7 +148,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                         {
                             log.Error(string.Format("Exception in host '{0}' while it was upgraded", host.Name), excep);
                             PlanAction action1 = planAction;
-                            ReportException.Raise(this, () => new ReportExceptionArgs(excep, action1, host));
+
+                            OnReportException(excep, action1, host);
+                            
                             if (host.IsMaster())
                                 currentMasterFailed = true;
                             allActionsDone = false;
@@ -175,9 +159,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                     }
 
                     if (allActionsDone)
-                    {
-                        ReportHostDone.Raise(this, () => new ReportHostDoneArgs(host));
-                    }
+                        OnReportHostDone(host);
 
                     //Skip slaves if master failed
                     if (currentMasterFailed)
@@ -185,8 +167,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                         i = SkipSlaves(hosts, i);
                     }
                 }
-
-
             }
             catch (Exception excep)
             {
@@ -198,82 +178,18 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                 try
                 {
                     log.Debug("Reverting prechecks");
-                    ReportRunning.Raise(this, () => new ReportRunningArgs(_revertAction, currentHost));
+                    OnReportRunning(_revertAction, currentHost);
                     _revertAction.Run();
-                    ReportRevertDone.Raise(this, () => new ReportRevertDoneArgs(_revertAction));
+
+                    OnReportRevertDone();
                 }
                 catch (Exception excep)
                 {
                     log.Error("Exception reverting prechecks", excep);
-                    ReportException.Raise(this, () => new ReportExceptionArgs(excep, _revertAction, currentHost));
+                    OnReportException(excep, _revertAction, currentHost);
                 }
-
-                Completed.Raise(this);
+                OnCompleted();
             }
-
         }
-
-        private volatile bool _cancel = false;
-        internal void Cancel()
-        {
-            _cancel = true;
-        }
-    }
-
-    internal class ReportRevertDoneArgs : EventArgs
-    {
-
-        public ReportRevertDoneArgs(PlanAction planAction)
-        {
-            PlanAction = planAction;
-        }
-
-        public PlanAction PlanAction { get; private set; }
-    }
-
-    internal class ReportExceptionArgs : EventArgs
-    {
-        public ReportExceptionArgs(Exception excep, PlanAction action, Host host)
-        {
-            Exception = excep;
-            Action = action;
-            Host = host;
-        }
-
-        public Exception Exception { get; private set; }
-        public PlanAction Action { get; private set; }
-        public Host Host { get; private set; }
-    }
-
-    internal class ReportRunningArgs : EventArgs
-    {
-
-        public ReportRunningArgs(PlanAction action, Host host)
-        {
-            Host = host;
-            Action = action;
-        }
-
-        public Host Host { get; private set; }
-        public PlanAction Action { get; private set; }
-    }
-
-
-    internal class ManageSemiAutomaticPlanActionArgs : EventArgs
-    {
-        public ManageSemiAutomaticPlanActionArgs(UpgradeManualHostPlanAction action)
-        {
-            Action = action;
-        }
-        public UpgradeManualHostPlanAction Action { get; private set; }
-    }
-
-    internal class ReportHostDoneArgs : EventArgs
-    {
-        public ReportHostDoneArgs(Host host)
-        {
-            Host = host;
-        }
-        public Host Host { get; private set; }
     }
 }

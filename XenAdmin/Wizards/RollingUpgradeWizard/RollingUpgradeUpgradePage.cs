@@ -218,7 +218,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             UpgradeStatus = RollingUpgradeStatus.Started;
         }
 
-        private void ReportRevertDone(object sender, ReportRevertDoneArgs e)
+        private void ReportRevertDone()
         {
             Program.BeginInvoke(this, () =>
                                           {
@@ -227,7 +227,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                                           });
         }
 
-        private void Completed(object sender, EventArgs eventArgs)
+        private void Completed()
         {
             Program.BeginInvoke(this, () =>
                                           {
@@ -238,29 +238,29 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                                           });
         }
 
-        private void ReportRunning(object sender, ReportRunningArgs reportRunningArgs)
+        private void ReportRunning(PlanAction planAction, Host host)
         {
             Program.BeginInvoke(this, () =>
                                           {
                                               progressBar1.Value = progressBar1.Value < 100
                                                                        ? progressBar1.Value + 2
                                                                        : progressBar1.Value;
-                                              var row = reportRunningArgs.Action is UnwindProblemsAction
+                                              var row = planAction is UnwindProblemsAction
                                                         ? FindRow(null)
-                                                        : FindRow(reportRunningArgs.Host);
+                                                        : FindRow(host);
                                               if (row != null)
-                                                  row.UpdateStatus(HostUpgradeState.Upgrading, reportRunningArgs.Action.TitlePlan);
+                                                  row.UpdateStatus(HostUpgradeState.Upgrading, planAction.TitlePlan);
                                           });
         }
 
-        private void ManageSemiAutomaticPlanAction(object sender, ManageSemiAutomaticPlanActionArgs e)
+        private void ManageSemiAutomaticPlanAction(UpgradeManualHostPlanAction planAction)
         {
             if (UpgradeStatus == RollingUpgradeStatus.Cancelled)
                 return;
 
-            var upgradeHostPlanAction = e.Action;
+            var upgradeHostPlanAction = planAction;
             //Show dialog prepare host boot from CD or PXE boot and click OK to reboot
-            string msg = string.Format(Messages.ROLLING_UPGRADE_REBOOT_MESSAGE, upgradeHostPlanAction.Host.Name);
+            string msg = string.Format(Messages.ROLLING_UPGRADE_REBOOT_MESSAGE, planAction.Host.Name);
 
             UpgradeManualHostPlanAction action = upgradeHostPlanAction;
 
@@ -327,21 +327,21 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             }
         }
 
-        private void ReportException(object sender, ReportExceptionArgs reportExceptionArgs)
+        private void ReportException(Exception exception, PlanAction planAction, Host host)
         {
             Program.Invoke(this, () =>
                                      {
-                                         if (reportExceptionArgs.Host != null && !reportExceptionArgs.Host.enabled)
-                                             new EnableHostAction(reportExceptionArgs.Host, false,
-                                                                  AddHostToPoolCommand.EnableNtolDialog).RunExternal(reportExceptionArgs.Host.Connection.Session);
+                                         if (host != null && !host.enabled)
+                                             new EnableHostAction(host, false,
+                                                                  AddHostToPoolCommand.EnableNtolDialog).RunExternal(host.Connection.Session);
                                      });
             Program.BeginInvoke(this, () =>
                                           {
-                                              var row = reportExceptionArgs.Action is UnwindProblemsAction
+                                              var row = planAction is UnwindProblemsAction
                                                         ? FindRow(null)
-                                                        : FindRow(reportExceptionArgs.Host);
+                                                        : FindRow(host);
 
-                                              row.UpdateStatus(HostUpgradeState.Error, reportExceptionArgs.Exception.Message);
+                                              row.UpdateStatus(HostUpgradeState.Error, exception.Message);
                                               
                                               UpgradeProgress(row.Index + 1);
 
@@ -350,11 +350,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         }
 
-        private void ReportHostDone(object sender, ReportHostDoneArgs reportHostDoneArgs)
+        private void ReportHostDone(Host host)
         {
             Program.BeginInvoke(this, () =>
                                           {
-                                              var row = FindRow(reportHostDoneArgs.Host);
+                                              var row = FindRow(host);
                                               row.UpdateStatus(HostUpgradeState.Upgraded, Messages.COMPLETED);
 
                                               labelOverallProgress.Text = string.Format(Messages.OVERALL_PROGRESS, row.Index + 1, dataGridView1.Rows.Count - 1);
