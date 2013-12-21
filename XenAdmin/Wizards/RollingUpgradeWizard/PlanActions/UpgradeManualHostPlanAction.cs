@@ -53,9 +53,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             timer.Elapsed += timer_Elapsed;
         }
 
-        protected override PlanActionStatusChangedEventArgs StatusChangedEventArg
+        protected override Host CurrentHost
         {
-            get { return new PlanActionStatusChangedEventArgs(_host); }
+            get { return _host; }
         }
 
         public new Host Host { get { return TryResolveWithTimeout(base.Host); } }

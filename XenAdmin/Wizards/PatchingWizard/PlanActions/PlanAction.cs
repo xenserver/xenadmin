@@ -39,18 +39,6 @@ using XenAPI;
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
-
-    public class PlanActionStatusChangedEventArgs : EventArgs
-    {
-        public IXenObject XenObject { get; private set; }
-        public PlanActionStatusChangedEventArgs(){}
-
-        public PlanActionStatusChangedEventArgs(IXenObject xenObject)
-        {
-            XenObject = xenObject;
-        }
-    }
-
     public abstract class PlanAction
     {
         protected static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -58,8 +46,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private int _percentComplete;
         public event EventHandler OnPercentCompleteChange;
         public event EventHandler OnActionError;
-        public event OnStatusChangedEventHandler OnStatusChange;
-        public delegate void OnStatusChangedEventHandler(object sender, PlanActionStatusChangedEventArgs e);
+        public event Action<PlanAction, Host> StatusChanged;
         public Exception Error;
 
         private string status;
@@ -71,19 +58,13 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 if(value != status)
                 {
                     status = value;
-                    if (OnStatusChange != null)
-                        OnStatusChange(this, StatusChangedEventArg);
+                    if (StatusChanged != null)
+                        StatusChanged(this, CurrentHost);
                 }
             }
         }
 
-        /// <summary>
-        /// Provides the PlanActionStatusChangedEventArgs - can be overridden if required
-        /// </summary>
-        protected virtual PlanActionStatusChangedEventArgs StatusChangedEventArg
-        {
-           get{ return new PlanActionStatusChangedEventArgs();}
-        }
+        protected virtual Host CurrentHost { get { return null; } }
 
         public int PercentComplete
         {

@@ -47,9 +47,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             currentHost = host;
         }
 
-        protected override PlanActionStatusChangedEventArgs StatusChangedEventArg
+        protected override Host CurrentHost
         {
-            get { return new PlanActionStatusChangedEventArgs(currentHost); }
+            get { return currentHost; }
         }
 
         protected override void RunWithSession(ref Session session)

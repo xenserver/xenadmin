@@ -389,7 +389,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             {
                 foreach (PlanAction planAction in kvp.Value)
                 {
-                    planAction.OnStatusChange += action_statusUpdated;
+                    planAction.StatusChanged += planAction_StatusChanged;
                 }
             }
         }
@@ -403,20 +403,15 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             {
                 foreach (PlanAction planAction in kvp.Value)
                 {
-                    planAction.OnStatusChange -= action_statusUpdated;
+                    planAction.StatusChanged -= planAction_StatusChanged;
                 }  
             }
             
         }
 
-        private void action_statusUpdated(object sender, PlanActionStatusChangedEventArgs e)
+        private void planAction_StatusChanged(PlanAction plan, Host senderHost)
         {
-            Host senderHost = e.XenObject as Host;
-            if(senderHost == null)
-                return;
-
-            PlanAction plan = sender as PlanAction;
-            if (plan == null)
+            if(senderHost == null || plan == null)
                 return;
 
             List<DataGridViewRowUpgrade> rowsForHost = (from DataGridViewRowUpgrade row in dataGridView1.Rows
