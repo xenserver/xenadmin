@@ -558,9 +558,11 @@ namespace XenAdmin.TabPages
                 ToolStripMenuItem editValue = new ToolStripMenuItem(Messages.EDIT){Image= Properties.Resources.edit_16};
                 editValue.Click += delegate
                     {
-                        PropertiesDialog dialog = new PropertiesDialog(xenObject);
-                        dialog.SelectPage(dialog.CustomFieldsEditPage);
-                        dialog.ShowDialog();
+                        using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
+                        {
+                            dialog.SelectCustomFieldsEditPage();
+                            dialog.ShowDialog();
+                        }
                     };
 
                 var menuItems = new[] { editValue };
@@ -657,7 +659,7 @@ namespace XenAdmin.TabPages
 
             PDSection s = pdSectionHighAvailability;
 
-            var menuItems = new[] { EditMenuItem("VMHAEditPage", "comboBoxProtectionLevel") };
+            var menuItems = new[] { new PropertiesToolStripMenuItem(new VmEditHaCommand(Program.MainWindow.CommandInterface, xenObject, "comboBoxProtectionLevel")) };
             s.AddEntry(FriendlyName("VM.ha_restart_priority"), Helpers.RestartPriorityI18n(vm.HARestartPriority), menuItems);
         }
 
@@ -892,18 +894,18 @@ namespace XenAdmin.TabPages
             if (!Helpers.BostonOrGreater(vm.Connection))
 			{
 			    s.AddEntry(FriendlyName("VM.auto_boot"), Helpers.BoolToString(vm.AutoPowerOn),
-			               new[] { EditMenuItem("StartupOptionsEditPage", "ckbAutoBoot") });
+                    new[] { new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow.CommandInterface, vm, "ckbAutoBoot")) });
 			}
 
         	if (vm.IsHVM)
             {	
                 s.AddEntry(FriendlyName("VM.BootOrder"), HVMBootOrder(vm),
-                    new[] { EditMenuItem("StartupOptionsEditPage", "lstOrder") });
+                    new[] { new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow.CommandInterface, vm, "lstOrder")) });
             }
             else
             {
                 s.AddEntry(FriendlyName("VM.PV_args"), vm.PV_args,
-                    new[] { EditMenuItem("StartupOptionsEditPage", "txtOSParams") });
+                    new[] { new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow.CommandInterface, vm, "txtOSParams")) });
             }
         }
 
@@ -1060,7 +1062,7 @@ namespace XenAdmin.TabPages
             PDSection s = pdSectionGeneral;
 
             s.AddEntry(FriendlyName("host.name_label"), Helpers.GetName(xenObject),
-                new [] { EditMenuItem("GeneralEditPage", "txtName") });
+                new[] { new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow.CommandInterface, xenObject)) });
 
             if (!(xenObject is IStorageLinkObject))
             {
@@ -1068,7 +1070,7 @@ namespace XenAdmin.TabPages
                 if (vm == null || vm.DescriptionType != VM.VmDescriptionType.None)
                 {
                     s.AddEntry(FriendlyName("host.name_description"), xenObject.Description,
-                               new[] { EditMenuItem("GeneralEditPage", "txtDescription") });
+                               new[] { new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow.CommandInterface, xenObject, "txtDescription")) });
                 }
 
                 GenTagRow(s);
@@ -1111,9 +1113,9 @@ namespace XenAdmin.TabPages
                 }
 
                 s.AddEntry(FriendlyName("host.iscsi_iqn"), host.iscsi_iqn,
-                    new [] { EditMenuItem("GeneralEditPage", "txtIQN") });
+                    new[] { new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow.CommandInterface, xenObject, "txtIQN")) });
                 s.AddEntry(FriendlyName("host.log_destination"), host.SysLogDestination ?? Messages.HOST_LOG_DESTINATION_LOCAL,
-                    new [] { EditMenuItem("LogDestinationEditPage", "localRadioButton") });
+                    new[] { new PropertiesToolStripMenuItem(new HostEditLogDestinationCommand(Program.MainWindow.CommandInterface, xenObject, "localRadioButton")) });
 
                 PrettyTimeSpan uptime = host.Uptime;
                 PrettyTimeSpan agentUptime = host.AgentUptime;
@@ -1207,7 +1209,7 @@ namespace XenAdmin.TabPages
                     if (VMCanChooseHomeServer(vm))
                     {
                         s.AddEntry(FriendlyName("VM.affinity"), vm.AffinityServerString,
-                            new[] { EditMenuItem("HomeServerPage", "picker") });
+                            new[] { new PropertiesToolStripMenuItem(new VmEditHomeServerCommand(Program.MainWindow.CommandInterface, xenObject, "picker")) });
                     }
                 }
             }
@@ -1400,11 +1402,11 @@ namespace XenAdmin.TabPages
                     goToTag.DropDownItems.Add(item);
                 }
 
-                s.AddEntry(Messages.TAGS, TagsString(), new[] { goToTag, EditMenuItem("GeneralEditPage", "") });
+                s.AddEntry(Messages.TAGS, TagsString(), new[] { goToTag, new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow.CommandInterface, xenObject)) });
                 return;
             }
 
-            s.AddEntry(Messages.TAGS, Messages.NONE, new[] { EditMenuItem("GeneralEditPage", "") });
+            s.AddEntry(Messages.TAGS, Messages.NONE, new[] { new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow.CommandInterface, xenObject)) });
         }
 
         private string TagsString()
@@ -1425,7 +1427,7 @@ namespace XenAdmin.TabPages
                 item.Click += delegate { Program.MainWindow.SearchForFolder(xenObject.Path); };
                 menuItems.Add(item);
             }
-            menuItems.Add(EditMenuItem("GeneralEditPage", ""));
+            menuItems.Add(new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow.CommandInterface, xenObject)));
             s.AddEntry(
                 Messages.FOLDER,
                 new FolderListItem(xenObject.Path, FolderListItem.AllowSearch.None, false),
@@ -1534,12 +1536,6 @@ namespace XenAdmin.TabPages
         }
 
         #endregion
-
-        private ToolStripMenuItem EditMenuItem(string tabname, string controlname)
-        {
-            return new CommandToolStripMenuItem(new PropertiesCommand(Program.MainWindow.CommandInterface, xenObject, tabname, controlname), Messages.EDIT, Properties.Resources.edit_16);
-        }
-
 
         /// <summary>
         /// Checks for reboot warnings on all hosts in the pool and returns them as a list

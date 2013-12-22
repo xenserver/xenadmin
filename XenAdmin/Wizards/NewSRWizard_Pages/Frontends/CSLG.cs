@@ -642,7 +642,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             if (o != null)
             {
                 var dialog = new PropertiesDialog(o);
-                dialog.Load += (s, ee) => dialog.SelectPage(dialog.StorageLinkPage);
+                dialog.Load += (s, ee) => dialog.SelectStorageLinkPage();
 
                 dialog.FormClosing += (s, ee) =>
                 {

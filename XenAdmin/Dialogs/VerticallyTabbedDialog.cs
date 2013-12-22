@@ -73,19 +73,7 @@ namespace XenAdmin.Dialogs
             get { return verticalTabs.SelectedItem as VerticalTabs.VerticalTab; }
         }
 
-        public void SelectTab(string name)
-        {
-            if (!ContentPanel.Controls.ContainsKey(name))
-                return;
-
-            VerticalTabs.VerticalTab page = ContentPanel.Controls[name] as VerticalTabs.VerticalTab;
-            if (page == null)
-                return;
-
-            SelectPage(page);
-        }
-
-        public void SelectPage(VerticalTabs.VerticalTab page)
+        protected void SelectPage(VerticalTabs.VerticalTab page)
         {
             if (page == null || !verticalTabs.Items.Contains(page))
                 return;
@@ -125,12 +113,12 @@ namespace XenAdmin.Dialogs
             return verticalTab != null ? verticalTab.Text : String.Empty;
         }
 
-        internal void SelectControl(String name)
+        internal void SelectControl(string name)
         {
             SelectControlOfControl(ContentPanel, name);
         }
 
-        private bool SelectControlOfControl(Control c, String name)
+        private bool SelectControlOfControl(Control c, string name)
         {
             if (c.Controls.ContainsKey(name))
             {

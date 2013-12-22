@@ -48,25 +48,25 @@ namespace XenAdmin.Dialogs
     public partial class PropertiesDialog : VerticallyTabbedDialog
     {
         #region Tabs
-        public CPUMemoryEditPage VCpuMemoryEditPage;
-        public HostMultipathPage hostMultipathPage1;
-        public CustomFieldsDisplayPage CustomFieldsEditPage;
-        public LogDestinationEditPage LogDestinationEditPage;
-        public HomeServerEditPage HomeServerPage;
-        public BootOptionsEditPage StartupOptionsEditPage;
-        public VMAdvancedEditPage VMAdvancedEditPage;
-        public PerfmonAlertEditPage PerfmonAlertEditPage;
-        public EditNetworkPage editNetworkPage;
-        public VDISizeLocationPage vdiSizeLocation;
-        public VMHAEditPage VMHAEditPage;
-        public GeneralEditPage GeneralEditPage;
+        private CPUMemoryEditPage VCpuMemoryEditPage;
+        private HostMultipathPage hostMultipathPage1;
+        private CustomFieldsDisplayPage CustomFieldsEditPage;
+        private LogDestinationEditPage LogDestinationEditPage;
+        private HomeServerEditPage HomeServerPage;
+        private BootOptionsEditPage StartupOptionsEditPage;
+        private VMAdvancedEditPage VMAdvancedEditPage;
+        private PerfmonAlertEditPage PerfmonAlertEditPage;
+        private EditNetworkPage editNetworkPage;
+        private VDISizeLocationPage vdiSizeLocation;
+        private VMHAEditPage VMHAEditPage;
+        private GeneralEditPage GeneralEditPage;
         private UpsellPage PerfmonAlertUpsellEditPage;
         private UpsellPage VMHAUpsellEditPage;
         private UpsellPage PerfmonAlertOptionsUpsellEditPage;
-        public PerfmonAlertOptionsPage PerfmonAlertOptionsEditPage;
-        public HostPowerONEditPage HostPowerONEditPage;
-        public PoolPowerONEditPage PoolPowerONEditPage;
-        public StorageLinkEditPage StorageLinkPage;
+        private PerfmonAlertOptionsPage PerfmonAlertOptionsEditPage;
+        private HostPowerONEditPage HostPowerONEditPage;
+        private PoolPowerONEditPage PoolPowerONEditPage;
+        private StorageLinkEditPage StorageLinkPage;
         private NewPolicySnapshotFrequencyPage newPolicySnapshotFrequencyPage1;
         private NewPolicySnapshotTypePage newPolicySnapshotTypePage1;
         private NewPolicyArchivePage newPolicyArchivePage1;
@@ -76,7 +76,7 @@ namespace XenAdmin.Dialogs
         private NewVMApplianceVMOrderAndDelaysPage newVmApplianceVmOrderAndDelaysPage1;
         private UpsellPage GpuUpsellEditPage;
         private GpuEditPage GpuEditPage;
-        public PoolGpuEditPage PoolGpuEditPage;
+        private PoolGpuEditPage PoolGpuEditPage;
         #endregion
 
         private IXenObject xenObject, xenObjectBefore, xenObjectCopy;
@@ -492,7 +492,27 @@ namespace XenAdmin.Dialogs
             timer.Stop();
         }
 
-        #region Select Page methods
+        #region Select page methods
+
+        public void SelectGeneralEditPage()
+        {
+            SelectPage(GeneralEditPage);
+        }
+
+        public void SelectCustomFieldsEditPage()
+        {
+            SelectPage(CustomFieldsEditPage);
+        }
+
+        public void SelectPoolGpuEditPage()
+        {
+            SelectPage(GpuEditPage);
+        }
+
+        public void SelectStorageLinkPage()
+        {
+            SelectPage(StorageLinkPage);
+        }
 
         public void SelectPerfmonAlertEditPage()
         {
@@ -502,6 +522,26 @@ namespace XenAdmin.Dialogs
         public void SelectNewPolicyArchivePage()
         {
             SelectPage(newPolicyArchivePage1);
+        }
+
+        public void SelectStartupOptionsEditPage()
+        {
+            SelectPage(StartupOptionsEditPage);
+        }
+
+        public void SelectHomeServerEditPage()
+        {
+            SelectPage(HomeServerPage);
+        }
+
+        public void SelectLogDestinationEditPage()
+        {
+            SelectPage(LogDestinationEditPage);
+        }
+
+        public void SelectVMHAEditPage()
+        {
+            SelectPage(VMHAEditPage);
         }
 
         #endregion

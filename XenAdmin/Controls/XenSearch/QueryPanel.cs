@@ -593,9 +593,11 @@ namespace XenAdmin.Controls.XenSearch
                     false, false, TextBrush, Program.DefaultFont,
                     new EventHandler(delegate
                     {
-                        PropertiesDialog dialog = new PropertiesDialog(o);
-                        dialog.SelectPage(dialog.CustomFieldsEditPage);
-                        dialog.ShowDialog();
+                        using (PropertiesDialog dialog = new PropertiesDialog(o))
+                        {
+                            dialog.SelectCustomFieldsEditPage();
+                            dialog.ShowDialog();
+                        }
                     }));
 
                 row.AddItem(CustomFieldsManager.CUSTOM_FIELD + customFieldDefinition.Name, customFieldItem);

@@ -98,7 +98,7 @@ namespace XenAdmin.Commands
         /// <param name="mainWindow">The application main window.</param>
         /// <param name="selection">The selection context for the Command.</param>
         protected Command(IMainWindow mainWindow, SelectedItem selection)
-            : this(mainWindow, new SelectedItem[] { selection })
+            : this(mainWindow, new [] { selection })
         {
         }
 
@@ -106,9 +106,9 @@ namespace XenAdmin.Commands
         /// Initializes a new instance of the <see cref="Command"/> class.
         /// </summary>
         /// <param name="mainWindow">The application main window.</param>
-        /// <param name="selection">The selection context for the Command.</param>
-        protected Command(IMainWindow mainWindow, IXenObject selection)
-            : this(mainWindow, new SelectedItem(selection))
+        /// <param name="xenObject">The selection context for the Command.</param>
+        protected Command(IMainWindow mainWindow, IXenObject xenObject)
+            : this(mainWindow, new SelectedItem(xenObject))
         {
         }
 

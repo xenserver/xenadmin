@@ -48,14 +48,13 @@ namespace XenAdmin.Commands
     /// </summary>
     internal class PropertiesCommand : Command
     {
-        private readonly string _tab = "GeneralEditPage";
-        private readonly string _control = "txtName";
+        protected string _control = "txtName";
 
         /// <summary>
         /// Initializes a new instance of this Command. The parameter-less constructor is required if 
         /// this Command is to be attached to a ToolStrip menu item or button. It should not be used in any other scenario.
         /// </summary>
-        public PropertiesCommand()
+        protected PropertiesCommand()
         {
         }
 
@@ -65,23 +64,24 @@ namespace XenAdmin.Commands
         }
 
         public PropertiesCommand(IMainWindow mainWindow, IXenObject xenObject)
-            : base(mainWindow, new SelectedItem(xenObject))
+            : base(mainWindow, xenObject)
         {
         }
 
-        public PropertiesCommand(IMainWindow mainWindow, IXenObject xenObject, string tab, string control)
+        public PropertiesCommand(IMainWindow mainWindow, IXenObject xenObject, string control)
             : this(mainWindow, xenObject)
         {
-            _tab = tab;
             _control = control;
         }
 
-        protected void Execute(IXenObject xenObject)
+        protected virtual void Execute(IXenObject xenObject)
         {
-            PropertiesDialog dialog = new PropertiesDialog(xenObject);
-            dialog.SelectTab(_tab);
-            dialog.SelectControl(_control);
-            dialog.ShowDialog(Parent);
+            using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
+            {
+                dialog.SelectGeneralEditPage();
+                dialog.SelectControl(_control);
+                dialog.ShowDialog(Parent);
+            }
         }
 
         protected override void ExecuteCore(SelectedItemCollection selection)
@@ -121,29 +121,6 @@ namespace XenAdmin.Commands
     /// </summary>
     internal class VMPropertiesCommand : PropertiesCommand
     {
-        /// <summary>
-        /// Initializes a new instance of this Command. The parameter-less constructor is required if 
-        /// this Command is to be attached to a ToolStrip menu item or button. It should not be used in any other scenario.
-        /// </summary>
-        public VMPropertiesCommand()
-        {
-        }
-
-        public VMPropertiesCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection)
-            : base(mainWindow, selection)
-        {
-        }
-
-        public VMPropertiesCommand(IMainWindow mainWindow, VM vm)
-            : base(mainWindow, vm)
-        {
-        }
-
-        public VMPropertiesCommand(IMainWindow mainWindow, VM vm, string tab, string control)
-            : base(mainWindow, vm, tab, control)
-        {
-        }
-
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
@@ -160,29 +137,6 @@ namespace XenAdmin.Commands
     /// </summary>
     internal class SRPropertiesCommand : PropertiesCommand
     {
-        /// <summary>
-        /// Initializes a new instance of this Command. The parameter-less constructor is required if 
-        /// this Command is to be attached to a ToolStrip menu item or button. It should not be used in any other scenario.
-        /// </summary>
-        public SRPropertiesCommand()
-        {
-        }
-
-        public SRPropertiesCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection)
-            : base(mainWindow, selection)
-        {
-        }
-
-        public SRPropertiesCommand(IMainWindow mainWindow, SR sr)
-            : base(mainWindow, sr)
-        {
-        }
-
-        public SRPropertiesCommand(IMainWindow mainWindow, SR sr, string tab, string control)
-            : base(mainWindow, sr, tab, control)
-        {
-        }
-
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
@@ -209,16 +163,6 @@ namespace XenAdmin.Commands
 
         public PoolPropertiesCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection)
             : base(mainWindow, selection)
-        {
-        }
-
-        public PoolPropertiesCommand(IMainWindow mainWindow, Pool pool)
-            : base(mainWindow, pool)
-        {
-        }
-
-        public PoolPropertiesCommand(IMainWindow mainWindow, Pool pool, string tab, string control)
-            : base(mainWindow, pool, tab, control)
         {
         }
 
@@ -258,16 +202,6 @@ namespace XenAdmin.Commands
         {
         }
 
-        public HostPropertiesCommand(IMainWindow mainWindow, Host host)
-            : base(mainWindow, host)
-        {
-        }
-
-        public HostPropertiesCommand(IMainWindow mainWindow, Host host, string tab, string control)
-            : base(mainWindow, host, tab, control)
-        {
-        }
-
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
             Execute(selection[0].HostAncestor);
@@ -292,29 +226,6 @@ namespace XenAdmin.Commands
     /// </summary>
     internal class TemplatePropertiesCommand : PropertiesCommand
     {
-        /// <summary>
-        /// Initializes a new instance of this Command. The parameter-less constructor is required if 
-        /// this Command is to be attached to a ToolStrip menu item or button. It should not be used in any other scenario.
-        /// </summary>
-        public TemplatePropertiesCommand()
-        {
-        }
-
-        public TemplatePropertiesCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection)
-            : base(mainWindow, selection)
-        {
-        }
-
-        public TemplatePropertiesCommand(IMainWindow mainWindow, VM template)
-            : base(mainWindow, template)
-        {
-        }
-
-        public TemplatePropertiesCommand(IMainWindow mainWindow, VM template, string tab, string control)
-            : base(mainWindow, template, tab, control)
-        {
-        }
-
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
@@ -324,6 +235,78 @@ namespace XenAdmin.Commands
                 return vm != null && vm.is_a_template && !vm.is_a_snapshot && !vm.Locked;
             }
             return false;
+        }
+    }
+
+    internal class VmEditStartupOptionsCommand : PropertiesCommand
+    {
+        public VmEditStartupOptionsCommand(IMainWindow mainWindow, IXenObject xenObject, string control)
+            : base(mainWindow, xenObject, control)
+        {
+        }
+
+        protected override void Execute(IXenObject xenObject)
+        {
+            using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
+            {
+                dialog.SelectStartupOptionsEditPage();
+                dialog.SelectControl(_control);
+                dialog.ShowDialog(Parent);
+            }
+        }
+    }
+
+    internal class VmEditHomeServerCommand : PropertiesCommand
+    {
+        public VmEditHomeServerCommand(IMainWindow mainWindow, IXenObject xenObject, string control)
+            : base(mainWindow, xenObject, control)
+        {
+        }
+
+        protected override void Execute(IXenObject xenObject)
+        {
+            using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
+            {
+                dialog.SelectHomeServerEditPage();
+                dialog.SelectControl(_control);
+                dialog.ShowDialog(Parent);
+            }
+        }
+    }
+
+    internal class VmEditHaCommand : PropertiesCommand
+    {
+        public VmEditHaCommand(IMainWindow mainWindow, IXenObject xenObject, string control)
+            : base(mainWindow, xenObject, control)
+        {
+        }
+
+        protected override void Execute(IXenObject xenObject)
+        {
+            using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
+            {
+                dialog.SelectVMHAEditPage();
+                dialog.SelectControl(_control);
+                dialog.ShowDialog(Parent);
+            }
+        }
+    }
+
+    internal class HostEditLogDestinationCommand : PropertiesCommand
+    {
+        public HostEditLogDestinationCommand(IMainWindow mainWindow, IXenObject xenObject, string control)
+            : base(mainWindow, xenObject, control)
+        {
+        }
+
+        protected override void Execute(IXenObject xenObject)
+        {
+            using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
+            {
+                dialog.SelectLogDestinationEditPage();
+                dialog.SelectControl(_control);
+                dialog.ShowDialog(Parent);
+            }
         }
     }
 }

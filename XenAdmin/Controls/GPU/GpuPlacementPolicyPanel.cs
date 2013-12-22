@@ -148,7 +148,7 @@ namespace XenAdmin.Controls
 
             using (PropertiesDialog propertiesDialog = new PropertiesDialog(pool ?? xenObject))
             {
-                propertiesDialog.SelectPage(propertiesDialog.PoolGpuEditPage);
+                propertiesDialog.SelectPoolGpuEditPage();
                 propertiesDialog.ShowDialog(this);
             }
         }

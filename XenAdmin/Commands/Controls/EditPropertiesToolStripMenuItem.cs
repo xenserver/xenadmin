@@ -29,41 +29,18 @@
  * SUCH DAMAGE.
  */
 
-using System;
 
-using XenAdmin.Commands;
-
-using XenAPI;
-using XenAdmin.Core;
-using XenAdmin.Dialogs;
-
-
-namespace XenAdmin.Alerts
+namespace XenAdmin.Commands
 {
-    public abstract class IqnAlert : Alert
+    internal class PropertiesToolStripMenuItem : CommandToolStripMenuItem
     {
-        protected readonly Host Host;
-
-        protected IqnAlert(Host host)
+        public PropertiesToolStripMenuItem()
         {
-            Host = host;
-            HostUuid = host.uuid;
-            _timestamp = DateTime.UtcNow;
-            Connection = host.Connection;
+
         }
 
-        public override AlertPriority Priority { get { return AlertPriority.Priority3; } }
-
-        public override string AppliesTo { get { return Helpers.GetName(Host); } }
-
-        public override string FixLinkText { get { return Messages.IQN_CHECK_EDIT; } }
-
-        public override FixLinkDelegate FixLinkAction
-        {
-            get
-            {
-                return () => new PropertiesCommand(Program.MainWindow.CommandInterface, Host, "txtIQN").Execute();
-            }
-        }
+        public PropertiesToolStripMenuItem(PropertiesCommand cmd)
+            : base(cmd, Messages.EDIT, Properties.Resources.edit_16)
+        { }
     }
 }

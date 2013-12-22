@@ -58,9 +58,11 @@ namespace XenAdmin.Dialogs
             Properties.Settings.Default.SeenAllowUpdatesDialog = true;
             if (checkBox1.Checked)
             {
-                OptionsDialog dialog = new OptionsDialog(m_pluginManager);
-                dialog.SelectTab("connectionOptionsPage1");
-                dialog.ShowDialog(this);
+                using (var dialog = new OptionsDialog(m_pluginManager))
+                {
+                    dialog.SelectConnectionOptionsPage();
+                    dialog.ShowDialog(this);
+                }
             }
             Settings.TrySaveSettings();
         }
