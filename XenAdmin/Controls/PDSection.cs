@@ -376,6 +376,11 @@ namespace XenAdmin.Controls
             AddRow(r);
         }
 
+        public void AddEntry(string Key, string Value, ToolStripMenuItem contextMenuItem)
+        {
+            AddEntry(Key, Value, new[] { contextMenuItem });
+        }
+
         public void AddEntry(string Key, string Value, IEnumerable<ToolStripMenuItem> contextMenuItems)
         {
             if (!String.IsNullOrEmpty(Key))

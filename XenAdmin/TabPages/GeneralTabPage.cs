@@ -504,29 +504,27 @@ namespace XenAdmin.TabPages
                     p.ShowDialog(Program.MainWindow);
                 };
 
-            var menuItems = new[] { editValue };
-
             if (!string.IsNullOrEmpty(Host.hostname))
             {
                 if (!includeHostSuffix)
-                    s.AddEntry(FriendlyName("host.hostname"), Host.hostname, menuItems);
+                    s.AddEntry(FriendlyName("host.hostname"), Host.hostname, editValue);
                 else
                     s.AddEntry(
                         string.Format(Messages.PROPERTY_ON_OBJECT, FriendlyName("host.hostname"), Helpers.GetName(Host)),
                         Host.hostname,
-                        menuItems);
+                        editValue);
             }
             foreach (PIF pif in xenObject.Connection.ResolveAll<PIF>(Host.PIFs))
             {
                 if (pif.management)
                 {
                     if (!includeHostSuffix)
-                        s.AddEntry(Messages.MANAGEMENT_INTERFACE, pif.FriendlyIPAddress, menuItems);
+                        s.AddEntry(Messages.MANAGEMENT_INTERFACE, pif.FriendlyIPAddress, editValue);
                     else
                         s.AddEntry(
                             string.Format(Messages.PROPERTY_ON_OBJECT, Messages.MANAGEMENT_INTERFACE, Helpers.GetName(Host)),
                             pif.FriendlyIPAddress,
-                            menuItems);
+                            editValue);
                 }
             }
 
@@ -535,12 +533,12 @@ namespace XenAdmin.TabPages
                 if (pif.IsSecondaryManagementInterface(Properties.Settings.Default.ShowHiddenVMs))
                 {
                     if (!includeHostSuffix)
-                        s.AddEntry(pif.ManagementPurpose.Ellipsise(30), pif.FriendlyIPAddress, menuItems);
+                        s.AddEntry(pif.ManagementPurpose.Ellipsise(30), pif.FriendlyIPAddress, editValue);
                     else
                         s.AddEntry(
                             string.Format(Messages.PROPERTY_ON_OBJECT, pif.ManagementPurpose.Ellipsise(30), Helpers.GetName(Host)),
                             pif.FriendlyIPAddress,
-                            menuItems);
+                            editValue);
                 }
             }
         }
@@ -659,8 +657,8 @@ namespace XenAdmin.TabPages
 
             PDSection s = pdSectionHighAvailability;
 
-            var menuItems = new[] { new PropertiesToolStripMenuItem(new VmEditHaCommand(Program.MainWindow.CommandInterface, xenObject, "comboBoxProtectionLevel")) };
-            s.AddEntry(FriendlyName("VM.ha_restart_priority"), Helpers.RestartPriorityI18n(vm.HARestartPriority), menuItems);
+            s.AddEntry(FriendlyName("VM.ha_restart_priority"), Helpers.RestartPriorityI18n(vm.HARestartPriority),
+                new PropertiesToolStripMenuItem(new VmEditHaCommand(Program.MainWindow.CommandInterface, xenObject, "comboBoxProtectionLevel")));
         }
 
       
@@ -894,18 +892,18 @@ namespace XenAdmin.TabPages
             if (!Helpers.BostonOrGreater(vm.Connection))
 			{
 			    s.AddEntry(FriendlyName("VM.auto_boot"), Helpers.BoolToString(vm.AutoPowerOn),
-                    new[] { new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow.CommandInterface, vm, "ckbAutoBoot")) });
+                    new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow.CommandInterface, vm, "ckbAutoBoot")));
 			}
 
         	if (vm.IsHVM)
             {	
                 s.AddEntry(FriendlyName("VM.BootOrder"), HVMBootOrder(vm),
-                    new[] { new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow.CommandInterface, vm, "lstOrder")) });
+                   new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow.CommandInterface, vm, "lstOrder")));
             }
             else
             {
                 s.AddEntry(FriendlyName("VM.PV_args"), vm.PV_args,
-                    new[] { new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow.CommandInterface, vm, "txtOSParams")) });
+                    new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow.CommandInterface, vm, "txtOSParams")));
             }
         }
 
@@ -939,8 +937,8 @@ namespace XenAdmin.TabPages
                     };
 
                 GeneralTabLicenseStatusStringifier ss = new GeneralTabLicenseStatusStringifier(licenseStatus);
-                s.AddEntry(Messages.LICENSE_STATUS, ss.ExpiryStatus, new [] { editItem });
-                s.AddEntry(FriendlyName("host.license_params-expiry"), ss.ExpiryDate, new [] { editItem });
+                s.AddEntry(Messages.LICENSE_STATUS, ss.ExpiryStatus, editItem);
+                s.AddEntry(FriendlyName("host.license_params-expiry"), ss.ExpiryDate, editItem);
                 info.Remove("expiry");
             }
 
@@ -1062,7 +1060,7 @@ namespace XenAdmin.TabPages
             PDSection s = pdSectionGeneral;
 
             s.AddEntry(FriendlyName("host.name_label"), Helpers.GetName(xenObject),
-                new[] { new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow.CommandInterface, xenObject)) });
+                new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow.CommandInterface, xenObject)));
 
             if (!(xenObject is IStorageLinkObject))
             {
@@ -1070,7 +1068,7 @@ namespace XenAdmin.TabPages
                 if (vm == null || vm.DescriptionType != VM.VmDescriptionType.None)
                 {
                     s.AddEntry(FriendlyName("host.name_description"), xenObject.Description,
-                               new[] { new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow.CommandInterface, xenObject, "txtDescription")) });
+                               new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow.CommandInterface, xenObject, "txtDescription")));
                 }
 
                 GenTagRow(s);
@@ -1109,13 +1107,13 @@ namespace XenAdmin.TabPages
                             new HostMaintenanceModeCommand(Program.MainWindow.CommandInterface, host,
                                 HostMaintenanceModeCommandParameter.Enter).Execute();
                         };
-                    s.AddEntry(FriendlyName("host.enabled"), Messages.YES, new[] { item });
+                    s.AddEntry(FriendlyName("host.enabled"), Messages.YES, item);
                 }
 
                 s.AddEntry(FriendlyName("host.iscsi_iqn"), host.iscsi_iqn,
-                    new[] { new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow.CommandInterface, xenObject, "txtIQN")) });
+                    new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow.CommandInterface, xenObject, "txtIQN")));
                 s.AddEntry(FriendlyName("host.log_destination"), host.SysLogDestination ?? Messages.HOST_LOG_DESTINATION_LOCAL,
-                    new[] { new PropertiesToolStripMenuItem(new HostEditLogDestinationCommand(Program.MainWindow.CommandInterface, xenObject, "localRadioButton")) });
+                   new PropertiesToolStripMenuItem(new HostEditLogDestinationCommand(Program.MainWindow.CommandInterface, xenObject, "localRadioButton")));
 
                 PrettyTimeSpan uptime = host.Uptime;
                 PrettyTimeSpan agentUptime = host.AgentUptime;
@@ -1209,7 +1207,7 @@ namespace XenAdmin.TabPages
                     if (VMCanChooseHomeServer(vm))
                     {
                         s.AddEntry(FriendlyName("VM.affinity"), vm.AffinityServerString,
-                            new[] { new PropertiesToolStripMenuItem(new VmEditHomeServerCommand(Program.MainWindow.CommandInterface, xenObject, "picker")) });
+                            new PropertiesToolStripMenuItem(new VmEditHomeServerCommand(Program.MainWindow.CommandInterface, xenObject, "picker")));
                     }
                 }
             }
@@ -1406,7 +1404,7 @@ namespace XenAdmin.TabPages
                 return;
             }
 
-            s.AddEntry(Messages.TAGS, Messages.NONE, new[] { new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow.CommandInterface, xenObject)) });
+            s.AddEntry(Messages.TAGS, Messages.NONE, new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow.CommandInterface, xenObject)));
         }
 
         private string TagsString()
