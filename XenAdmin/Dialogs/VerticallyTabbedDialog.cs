@@ -85,14 +85,6 @@ namespace XenAdmin.Dialogs
             SelectPage(page);
         }
 
-        public void SelectTab(int selectedTabIndex)
-        {
-            if (selectedTabIndex < 0 || selectedTabIndex >= verticalTabs.Items.Count)
-                return;
-
-            verticalTabs.SelectedIndex = selectedTabIndex;
-        }
-
         public void SelectPage(VerticalTabs.VerticalTab page)
         {
             if (page == null || !verticalTabs.Items.Contains(page))

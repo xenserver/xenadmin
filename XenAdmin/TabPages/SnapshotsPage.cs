@@ -1574,7 +1574,7 @@ namespace XenAdmin.TabPages
                         ThreeButtonDialog.ButtonNo).ShowDialog() == DialogResult.Yes)
                 {
                     var dialog = new PropertiesDialog(vmpp);
-                    dialog.SelectTab(4);
+                    dialog.SelectNewPolicyArchivePage();
                     dialog.ShowDialog(this);
                 }
             }

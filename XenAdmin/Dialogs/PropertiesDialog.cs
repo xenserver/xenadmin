@@ -491,6 +491,20 @@ namespace XenAdmin.Dialogs
         {
             timer.Stop();
         }
+
+        #region Select Page methods
+
+        public void SelectPerfmonAlertEditPage()
+        {
+            SelectPage(PerfmonAlertEditPage);
+        }
+
+        public void SelectNewPolicyArchivePage()
+        {
+            SelectPage(newPolicyArchivePage1);
+        }
+
+        #endregion
     }
 
     public class PropertiesDialogClosingEventArgs : EventArgs

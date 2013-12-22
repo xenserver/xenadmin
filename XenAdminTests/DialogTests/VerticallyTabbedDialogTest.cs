@@ -60,8 +60,8 @@ namespace XenAdminTests.DialogTests
                 int index = i;
                 MW(() =>
                     {
-                        dialog.SelectTab(index);
-
+                        var verticalTabs = TestUtils.GetFieldDeep<VerticalTabs>(dialog, "verticalTabs");
+                        verticalTabs.SelectedIndex = index;
                         var vtab = dialog.SelectedTab;
                         Assert.IsNotNull(vtab, "Failed to select tab number " + index);
                         Assert.AreEqual(tabNames[index], vtab.Text, "Wrong tabs found at position " + index);

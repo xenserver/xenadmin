@@ -228,18 +228,15 @@ namespace XenAdmin.Alerts
                 return () =>
                     {
                         IXenObject xenObject = null;
-                        int tabIndex = 0;
 
-                        if (this.XenObject is Host)
+                        if (XenObject is Host)
                         {
                             //sr is only set when it's AlarmType.Storage 
-                            xenObject = sr ?? this.XenObject;
-                            tabIndex = 2;
+                            xenObject = sr ?? XenObject;
                         }
-                        else if (this.XenObject is VM)
+                        else if (XenObject is VM)
                         {
-                            xenObject = this.XenObject;
-                            tabIndex = 5;
+                            xenObject = XenObject;
                         }
 
                         if (xenObject == null)
@@ -247,7 +244,7 @@ namespace XenAdmin.Alerts
 
                         using (var dialog = new PropertiesDialog(xenObject) { TopMost = true })
                         {
-                            dialog.SelectTab(tabIndex);
+                            dialog.SelectPerfmonAlertEditPage();
                             dialog.ShowDialog(Program.MainWindow);
                         }
                     };
