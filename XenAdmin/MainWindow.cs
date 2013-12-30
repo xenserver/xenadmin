@@ -208,8 +208,6 @@ namespace XenAdmin
             loggedInLabel1.SetTextColor(Program.TitleBarForeColor);
 
             statusProgressBar.Visible = false;
-            windowToolStripMenuItem.Enabled = false;
-            XenCenterForm.ApplicationOpenFormsChanged += XenCenterForm_ApplicationOpenFormsChanged;
 
             SelectionManager.BindTo(MainMenuBar.Items, commandInterface);
             SelectionManager.BindTo(ToolStrip.Items, commandInterface);
@@ -217,19 +215,6 @@ namespace XenAdmin
 
             licenseTimer = new LicenseTimer(licenseManagerLauncher);
             GeneralPage.LicenseLauncher = licenseManagerLauncher;
-        }
-
-        private void XenCenterForm_ApplicationOpenFormsChanged()
-        {
-            bool enabled = false;
-
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form != this && form.Text != "" && !(form is ConnectingToServerDialog))
-                    enabled = true;
-            }
-
-            Program.BeginInvoke(this, () => { windowToolStripMenuItem.Enabled = enabled; });
         }
 
         private void Default_SettingChanging(object sender, SettingChangingEventArgs e)

@@ -33,7 +33,6 @@ namespace XenAdmin
             ConnectionsManager.History.CollectionChanged -= History_CollectionChanged;
             Alert.DeregisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
             XenAdmin.Core.Updates.DeregisterCollectionChanged(Updates_CollectionChanged);
-            XenCenterForm.ApplicationOpenFormsChanged -= XenCenterForm_ApplicationOpenFormsChanged;
             ConnectionsManager.XenConnections.CollectionChanged -= XenConnection_CollectionChanged;
             Program.StorageLinkConnections.CollectionChanged -= StorageLinkConnections_CollectionChanged;
             Program.StorageLinkConnections.Dispose();
@@ -1820,8 +1819,6 @@ namespace XenAdmin
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        // A custom MenuStrip to allow click-through
-        // A custom ToolStrip to allow click-through
         private XenAdmin.Controls.ToolStripEx ToolStrip;
         private CommandToolStripButton NewVmToolbarButton;
         private CommandToolStripButton AddServerToolbarButton;

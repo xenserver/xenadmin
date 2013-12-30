@@ -38,7 +38,7 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Dialogs
 {
-    public partial class XenDialogBase : XenCenterForm
+    public partial class XenDialogBase : Form
     {
         private static Dictionary<IXenConnection, List<XenDialogBase>> instances = new Dictionary<IXenConnection, List<XenDialogBase>>();
 

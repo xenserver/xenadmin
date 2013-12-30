@@ -2320,9 +2320,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\ComboBoxes\NetworkComboBoxItem.cs" />
-    <Compile Include="Core\XenCenterForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Diagnostics\Problems\VMProblem\VmHasVgpu.cs" />
     <Compile Include="OrganizationalView.cs" />
     <Compile Include="Controls\SrPickerItem.cs" />

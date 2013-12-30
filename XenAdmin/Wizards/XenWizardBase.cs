@@ -40,7 +40,7 @@ using XenAdmin.Network;
 
 namespace XenAdmin.Wizards
 {
-    public partial class XenWizardBase : XenCenterForm
+    public partial class XenWizardBase : Form
     {
         protected static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
