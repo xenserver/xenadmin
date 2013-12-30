@@ -112,37 +112,34 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="labelScanning.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="labelScanning.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="labelScanning.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="labelScanning.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="labelScanning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>240, 3</value>
+    <value>240, 6</value>
   </data>
   <data name="labelScanning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="labelScanning.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 10, 0, 0</value>
+    <value>3, 6, 3, 6</value>
   </data>
   <data name="labelScanning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 23</value>
+    <value>134, 13</value>
   </data>
   <data name="labelScanning.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>0</value>
   </data>
   <data name="labelScanning.Text" xml:space="preserve">
     <value>Determining if VM is agile...</value>
@@ -157,7 +154,7 @@
     <value>labelScanning</value>
   </data>
   <data name="&gt;&gt;labelScanning.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelScanning.Parent" xml:space="preserve">
     <value>m_tlpScanning</value>
@@ -187,7 +184,7 @@
     <value>labelRestartPriority</value>
   </data>
   <data name="&gt;&gt;labelRestartPriority.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="groupBoxStartupOptions.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -217,7 +214,7 @@
     <value>nudOrder</value>
   </data>
   <data name="&gt;&gt;nudOrder.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;nudOrder.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -225,26 +222,23 @@
   <data name="&gt;&gt;nudOrder.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="labelStartOrder.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="labelStartOrder.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="labelStartOrder.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="labelStartOrder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="labelStartOrder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 58</value>
-  </data>
-  <data name="labelStartOrder.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+    <value>3, 60</value>
   </data>
   <data name="labelStartOrder.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 0, 0</value>
   </data>
   <data name="labelStartOrder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 20</value>
+    <value>59, 16</value>
   </data>
   <data name="labelStartOrder.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -256,7 +250,7 @@
     <value>labelStartOrder</value>
   </data>
   <data name="&gt;&gt;labelStartOrder.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelStartOrder.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -264,26 +258,23 @@
   <data name="&gt;&gt;labelStartOrder.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="labelStartDelay.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="labelStartDelay.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="labelStartDelay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="labelStartDelay.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="labelStartDelay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 84</value>
-  </data>
-  <data name="labelStartDelay.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+    <value>3, 86</value>
   </data>
   <data name="labelStartDelay.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 0, 0</value>
   </data>
   <data name="labelStartDelay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 20</value>
+    <value>147, 16</value>
   </data>
   <data name="labelStartDelay.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -295,7 +286,7 @@
     <value>labelStartDelay</value>
   </data>
   <data name="&gt;&gt;labelStartDelay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelStartDelay.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -352,7 +343,7 @@
     <value>nudStartDelay</value>
   </data>
   <data name="&gt;&gt;nudStartDelay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;nudStartDelay.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -360,29 +351,26 @@
   <data name="&gt;&gt;nudStartDelay.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="labelStartDelayUnits.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="labelStartDelayUnits.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="labelStartDelayUnits.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="labelStartDelayUnits.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="labelStartDelayUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>282, 84</value>
-  </data>
-  <data name="labelStartDelayUnits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+    <value>282, 86</value>
   </data>
   <data name="labelStartDelayUnits.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 0, 0</value>
   </data>
   <data name="labelStartDelayUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>345, 20</value>
+    <value>47, 16</value>
   </data>
   <data name="labelStartDelayUnits.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>5</value>
   </data>
   <data name="labelStartDelayUnits.Text" xml:space="preserve">
     <value>seconds</value>
@@ -391,7 +379,7 @@
     <value>labelStartDelayUnits</value>
   </data>
   <data name="&gt;&gt;labelStartDelayUnits.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelStartDelayUnits.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -412,13 +400,13 @@
     <value>630, 127</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
     <value>groupBoxStartupOptions</value>
@@ -439,7 +427,7 @@
     <value>636, 146</value>
   </data>
   <data name="groupBoxStartupOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>0</value>
   </data>
   <data name="groupBoxStartupOptions.Text" xml:space="preserve">
     <value>Startup sequence</value>
@@ -448,7 +436,7 @@
     <value>groupBoxStartupOptions</value>
   </data>
   <data name="&gt;&gt;groupBoxStartupOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBoxStartupOptions.Parent" xml:space="preserve">
     <value>m_tlpMain</value>
@@ -456,23 +444,20 @@
   <data name="&gt;&gt;groupBoxStartupOptions.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="labelProtectionLevel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="labelProtectionLevel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="labelProtectionLevel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="labelProtectionLevel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="labelProtectionLevel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="labelProtectionLevel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+    <value>3, 7</value>
   </data>
   <data name="labelProtectionLevel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 21</value>
+    <value>90, 13</value>
   </data>
   <data name="labelProtectionLevel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -487,7 +472,7 @@
     <value>labelProtectionLevel</value>
   </data>
   <data name="&gt;&gt;labelProtectionLevel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelProtectionLevel.Parent" xml:space="preserve">
     <value>m_tlpPriority</value>
@@ -511,7 +496,7 @@
     <value>m_comboBoxProtectionLevel</value>
   </data>
   <data name="&gt;&gt;m_comboBoxProtectionLevel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;m_comboBoxProtectionLevel.Parent" xml:space="preserve">
     <value>m_tlpPriority</value>
@@ -531,14 +516,14 @@
   <data name="m_tlpScanning.ColumnCount" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="pictureBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
+  <data name="pictureBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>380, 10</value>
+    <value>380, 4</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -550,7 +535,7 @@
     <value>pictureBox1</value>
   </data>
   <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
     <value>m_tlpScanning</value>
@@ -568,16 +553,16 @@
     <value>1</value>
   </data>
   <data name="m_tlpScanning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>636, 29</value>
+    <value>636, 25</value>
   </data>
   <data name="m_tlpScanning.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;m_tlpScanning.Name" xml:space="preserve">
     <value>m_tlpScanning</value>
   </data>
   <data name="&gt;&gt;m_tlpScanning.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;m_tlpScanning.Parent" xml:space="preserve">
     <value>m_tlpMain</value>
@@ -612,23 +597,20 @@
   <data name="m_tlpPriority.ColumnCount" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
+  <data name="comboLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="comboLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="comboLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="comboLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="comboLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>354, 3</value>
-  </data>
-  <data name="comboLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+    <value>354, 7</value>
   </data>
   <data name="comboLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 21</value>
+    <value>211, 13</value>
   </data>
   <data name="comboLabel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -643,7 +625,7 @@
     <value>comboLabel</value>
   </data>
   <data name="&gt;&gt;comboLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;comboLabel.Parent" xml:space="preserve">
     <value>m_tlpPriority</value>
@@ -670,7 +652,7 @@
     <value>m_tlpPriority</value>
   </data>
   <data name="&gt;&gt;m_tlpPriority.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;m_tlpPriority.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
@@ -700,7 +682,7 @@
     <value>pictureBox2</value>
   </data>
   <data name="&gt;&gt;pictureBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBox2.Parent" xml:space="preserve">
     <value>m_tlpHaConfig</value>
@@ -708,26 +690,23 @@
   <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="m_labelHaStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="m_labelHaStatus.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="m_labelHaStatus.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="m_labelHaStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="m_labelHaStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 3</value>
-  </data>
-  <data name="m_labelHaStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+    <value>25, 4</value>
   </data>
   <data name="m_labelHaStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>596, 16</value>
+    <value>87, 13</value>
   </data>
   <data name="m_labelHaStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="m_labelHaStatus.Text" xml:space="preserve">
     <value>m_labelHaStatus</value>
@@ -736,7 +715,7 @@
     <value>m_labelHaStatus</value>
   </data>
   <data name="&gt;&gt;m_labelHaStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;m_labelHaStatus.Parent" xml:space="preserve">
     <value>m_tlpHaConfig</value>
@@ -760,7 +739,7 @@
     <value>596, 80</value>
   </data>
   <data name="haNtolIndicator.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;haNtolIndicator.Name" xml:space="preserve">
     <value>haNtolIndicator</value>
@@ -790,7 +769,7 @@
     <value>28, 13</value>
   </data>
   <data name="m_linkLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="m_linkLabel.Text" xml:space="preserve">
     <value>here</value>
@@ -799,7 +778,7 @@
     <value>m_linkLabel</value>
   </data>
   <data name="&gt;&gt;m_linkLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;m_linkLabel.Parent" xml:space="preserve">
     <value>m_tlpHaConfig</value>
@@ -817,16 +796,16 @@
     <value>3</value>
   </data>
   <data name="m_tlpHaConfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 192</value>
+    <value>624, 196</value>
   </data>
   <data name="m_tlpHaConfig.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;m_tlpHaConfig.Name" xml:space="preserve">
     <value>m_tlpHaConfig</value>
   </data>
   <data name="&gt;&gt;m_tlpHaConfig.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;m_tlpHaConfig.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
@@ -847,7 +826,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>630, 231</value>
+    <value>630, 235</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -856,7 +835,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
     <value>groupBoxHA</value>
@@ -871,13 +850,13 @@
     <value>Fill</value>
   </data>
   <data name="groupBoxHA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 190</value>
+    <value>3, 186</value>
   </data>
   <data name="groupBoxHA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>636, 250</value>
+    <value>636, 254</value>
   </data>
   <data name="groupBoxHA.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>2</value>
   </data>
   <data name="groupBoxHA.Text" xml:space="preserve">
     <value>HA restart priority</value>
@@ -886,7 +865,7 @@
     <value>groupBoxHA</value>
   </data>
   <data name="&gt;&gt;groupBoxHA.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBoxHA.Parent" xml:space="preserve">
     <value>m_tlpMain</value>
@@ -907,13 +886,13 @@
     <value>642, 443</value>
   </data>
   <data name="m_tlpMain.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;m_tlpMain.Name" xml:space="preserve">
     <value>m_tlpMain</value>
   </data>
   <data name="&gt;&gt;m_tlpMain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;m_tlpMain.Parent" xml:space="preserve">
     <value>$this</value>
@@ -924,7 +903,7 @@
   <data name="m_tlpMain.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="groupBoxStartupOptions" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="m_tlpScanning" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="groupBoxHA" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
@@ -937,6 +916,6 @@
     <value>VMHAEditPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

@@ -262,7 +262,7 @@
     <value>62, 17</value>
   </data>
   <data name="RemoteRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="RemoteRadioButton.Text" xml:space="preserve">
     <value>&amp;Remote</value>

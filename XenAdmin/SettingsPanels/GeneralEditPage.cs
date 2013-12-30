@@ -135,6 +135,21 @@ namespace XenAdmin.SettingsPanels
             InvalidParamToolTip.ToolTipTitle = Messages.INVALID_PARAMETER;
         }
 
+        internal void SelectName()
+        {
+            txtName.Select();
+        }
+
+        internal void SelectDescription()
+        {
+            txtDescription.Select();
+        }
+
+        internal void SelectIqn()
+        {
+            txtIQN.Select();
+        }
+
         public Image Image
         {
             get

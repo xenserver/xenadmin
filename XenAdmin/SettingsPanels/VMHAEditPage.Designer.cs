@@ -36,7 +36,6 @@ namespace XenAdmin.SettingsPanels
             this.nudOrder = new System.Windows.Forms.NumericUpDown();
             this.labelStartOrder = new System.Windows.Forms.Label();
             this.labelStartDelay = new System.Windows.Forms.Label();
-            this.autoHeightLabel1 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.nudStartDelay = new System.Windows.Forms.NumericUpDown();
             this.labelStartDelayUnits = new System.Windows.Forms.Label();
             this.labelProtectionLevel = new System.Windows.Forms.Label();
@@ -50,8 +49,9 @@ namespace XenAdmin.SettingsPanels
             this.comboLabel = new System.Windows.Forms.Label();
             this.m_tlpHaConfig = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.m_linkLabel = new System.Windows.Forms.LinkLabel();
             this.m_labelHaStatus = new System.Windows.Forms.Label();
+            this.m_linkLabel = new System.Windows.Forms.LinkLabel();
+            this.autoHeightLabel1 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.haNtolIndicator = new XenAdmin.Controls.HaNtolIndicatorSimple();
             this.groupBoxStartupOptions.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -109,12 +109,6 @@ namespace XenAdmin.SettingsPanels
             // 
             resources.ApplyResources(this.labelStartDelay, "labelStartDelay");
             this.labelStartDelay.Name = "labelStartDelay";
-            // 
-            // autoHeightLabel1
-            // 
-            resources.ApplyResources(this.autoHeightLabel1, "autoHeightLabel1");
-            this.tableLayoutPanel2.SetColumnSpan(this.autoHeightLabel1, 3);
-            this.autoHeightLabel1.Name = "autoHeightLabel1";
             // 
             // nudStartDelay
             // 
@@ -204,6 +198,11 @@ namespace XenAdmin.SettingsPanels
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.TabStop = false;
             // 
+            // m_labelHaStatus
+            // 
+            resources.ApplyResources(this.m_labelHaStatus, "m_labelHaStatus");
+            this.m_labelHaStatus.Name = "m_labelHaStatus";
+            // 
             // m_linkLabel
             // 
             resources.ApplyResources(this.m_linkLabel, "m_linkLabel");
@@ -211,15 +210,17 @@ namespace XenAdmin.SettingsPanels
             this.m_linkLabel.TabStop = true;
             this.m_linkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.m_linkLabel_LinkClicked);
             // 
-            // m_labelHaStatus
+            // autoHeightLabel1
             // 
-            resources.ApplyResources(this.m_labelHaStatus, "m_labelHaStatus");
-            this.m_labelHaStatus.Name = "m_labelHaStatus";
+            resources.ApplyResources(this.autoHeightLabel1, "autoHeightLabel1");
+            this.tableLayoutPanel2.SetColumnSpan(this.autoHeightLabel1, 3);
+            this.autoHeightLabel1.Name = "autoHeightLabel1";
             // 
             // haNtolIndicator
             // 
             resources.ApplyResources(this.haNtolIndicator, "haNtolIndicator");
             this.haNtolIndicator.Name = "haNtolIndicator";
+            this.haNtolIndicator.TabStop = false;
             // 
             // VMHAEditPage
             // 

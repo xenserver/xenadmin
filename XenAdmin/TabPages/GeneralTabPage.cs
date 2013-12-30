@@ -658,7 +658,7 @@ namespace XenAdmin.TabPages
             PDSection s = pdSectionHighAvailability;
 
             s.AddEntry(FriendlyName("VM.ha_restart_priority"), Helpers.RestartPriorityI18n(vm.HARestartPriority),
-                new PropertiesToolStripMenuItem(new VmEditHaCommand(Program.MainWindow.CommandInterface, xenObject, "comboBoxProtectionLevel")));
+                new PropertiesToolStripMenuItem(new VmEditHaCommand(Program.MainWindow.CommandInterface, xenObject)));
         }
 
       
@@ -892,18 +892,18 @@ namespace XenAdmin.TabPages
             if (!Helpers.BostonOrGreater(vm.Connection))
 			{
 			    s.AddEntry(FriendlyName("VM.auto_boot"), Helpers.BoolToString(vm.AutoPowerOn),
-                    new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow.CommandInterface, vm, "ckbAutoBoot")));
+                    new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow.CommandInterface, vm)));
 			}
 
         	if (vm.IsHVM)
             {	
                 s.AddEntry(FriendlyName("VM.BootOrder"), HVMBootOrder(vm),
-                   new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow.CommandInterface, vm, "lstOrder")));
+                   new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow.CommandInterface, vm)));
             }
             else
             {
                 s.AddEntry(FriendlyName("VM.PV_args"), vm.PV_args,
-                    new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow.CommandInterface, vm, "txtOSParams")));
+                    new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow.CommandInterface, vm)));
             }
         }
 
@@ -1068,7 +1068,7 @@ namespace XenAdmin.TabPages
                 if (vm == null || vm.DescriptionType != VM.VmDescriptionType.None)
                 {
                     s.AddEntry(FriendlyName("host.name_description"), xenObject.Description,
-                               new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow.CommandInterface, xenObject, "txtDescription")));
+                               new PropertiesToolStripMenuItem(new DescriptionPropertiesCommand(Program.MainWindow.CommandInterface, xenObject)));
                 }
 
                 GenTagRow(s);
@@ -1111,9 +1111,9 @@ namespace XenAdmin.TabPages
                 }
 
                 s.AddEntry(FriendlyName("host.iscsi_iqn"), host.iscsi_iqn,
-                    new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow.CommandInterface, xenObject, "txtIQN")));
+                    new PropertiesToolStripMenuItem(new IqnPropertiesCommand(Program.MainWindow.CommandInterface, xenObject)));
                 s.AddEntry(FriendlyName("host.log_destination"), host.SysLogDestination ?? Messages.HOST_LOG_DESTINATION_LOCAL,
-                   new PropertiesToolStripMenuItem(new HostEditLogDestinationCommand(Program.MainWindow.CommandInterface, xenObject, "localRadioButton")));
+                   new PropertiesToolStripMenuItem(new HostEditLogDestinationCommand(Program.MainWindow.CommandInterface, xenObject)));
 
                 PrettyTimeSpan uptime = host.Uptime;
                 PrettyTimeSpan agentUptime = host.AgentUptime;
@@ -1207,8 +1207,7 @@ namespace XenAdmin.TabPages
                     if (VMCanChooseHomeServer(vm))
                     {
                         s.AddEntry(FriendlyName("VM.affinity"), vm.AffinityServerString,
-                            new PropertiesToolStripMenuItem(new VmEditHomeServerCommand(Program.MainWindow.CommandInterface, xenObject, "picker")));
-                    }
+                            new PropertiesToolStripMenuItem(new VmEditHomeServerCommand(Program.MainWindow.CommandInterface, xenObject)));}
                 }
             }
             else if (xenObject is XenObject<SR>)

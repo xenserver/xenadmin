@@ -62,7 +62,7 @@ namespace XenAdmin.Alerts
         {
             get
             {
-                return () => new PropertiesCommand(Program.MainWindow.CommandInterface, Host, "txtIQN").Execute();
+                return () => new IqnPropertiesCommand(Program.MainWindow.CommandInterface, Host).Execute();
             }
         }
     }

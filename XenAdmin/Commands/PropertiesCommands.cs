@@ -48,8 +48,6 @@ namespace XenAdmin.Commands
     /// </summary>
     internal class PropertiesCommand : Command
     {
-        protected string _control = "txtName";
-
         /// <summary>
         /// Initializes a new instance of this Command. The parameter-less constructor is required if 
         /// this Command is to be attached to a ToolStrip menu item or button. It should not be used in any other scenario.
@@ -68,18 +66,11 @@ namespace XenAdmin.Commands
         {
         }
 
-        public PropertiesCommand(IMainWindow mainWindow, IXenObject xenObject, string control)
-            : this(mainWindow, xenObject)
-        {
-            _control = control;
-        }
-
         protected virtual void Execute(IXenObject xenObject)
         {
             using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
             {
-                dialog.SelectGeneralEditPage();
-                dialog.SelectControl(_control);
+                dialog.EditName();
                 dialog.ShowDialog(Parent);
             }
         }
@@ -112,6 +103,40 @@ namespace XenAdmin.Commands
             get
             {
                 return Resources.edit_16;
+            }
+        }
+    }
+
+    internal class DescriptionPropertiesCommand : PropertiesCommand
+    {
+        public DescriptionPropertiesCommand(IMainWindow mainWindow, IXenObject xenObject)
+            : base(mainWindow, xenObject)
+        {
+        }
+
+        protected override void Execute(IXenObject xenObject)
+        {
+            using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
+            {
+                dialog.EditDescription();
+                dialog.ShowDialog(Parent);
+            }
+        }
+    }
+
+    internal class IqnPropertiesCommand : PropertiesCommand
+    {
+        public IqnPropertiesCommand(IMainWindow mainWindow, IXenObject xenObject)
+            : base(mainWindow, xenObject)
+        {
+        }
+
+        protected override void Execute(IXenObject xenObject)
+        {
+            using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
+            {
+                dialog.EditIqn();
+                dialog.ShowDialog(Parent);
             }
         }
     }
@@ -240,8 +265,8 @@ namespace XenAdmin.Commands
 
     internal class VmEditStartupOptionsCommand : PropertiesCommand
     {
-        public VmEditStartupOptionsCommand(IMainWindow mainWindow, IXenObject xenObject, string control)
-            : base(mainWindow, xenObject, control)
+        public VmEditStartupOptionsCommand(IMainWindow mainWindow, IXenObject xenObject)
+            : base(mainWindow, xenObject)
         {
         }
 
@@ -250,7 +275,6 @@ namespace XenAdmin.Commands
             using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
             {
                 dialog.SelectStartupOptionsEditPage();
-                dialog.SelectControl(_control);
                 dialog.ShowDialog(Parent);
             }
         }
@@ -258,8 +282,8 @@ namespace XenAdmin.Commands
 
     internal class VmEditHomeServerCommand : PropertiesCommand
     {
-        public VmEditHomeServerCommand(IMainWindow mainWindow, IXenObject xenObject, string control)
-            : base(mainWindow, xenObject, control)
+        public VmEditHomeServerCommand(IMainWindow mainWindow, IXenObject xenObject)
+            : base(mainWindow, xenObject)
         {
         }
 
@@ -268,7 +292,6 @@ namespace XenAdmin.Commands
             using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
             {
                 dialog.SelectHomeServerEditPage();
-                dialog.SelectControl(_control);
                 dialog.ShowDialog(Parent);
             }
         }
@@ -276,8 +299,8 @@ namespace XenAdmin.Commands
 
     internal class VmEditHaCommand : PropertiesCommand
     {
-        public VmEditHaCommand(IMainWindow mainWindow, IXenObject xenObject, string control)
-            : base(mainWindow, xenObject, control)
+        public VmEditHaCommand(IMainWindow mainWindow, IXenObject xenObject)
+            : base(mainWindow, xenObject)
         {
         }
 
@@ -286,7 +309,6 @@ namespace XenAdmin.Commands
             using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
             {
                 dialog.SelectVMHAEditPage();
-                dialog.SelectControl(_control);
                 dialog.ShowDialog(Parent);
             }
         }
@@ -294,8 +316,8 @@ namespace XenAdmin.Commands
 
     internal class HostEditLogDestinationCommand : PropertiesCommand
     {
-        public HostEditLogDestinationCommand(IMainWindow mainWindow, IXenObject xenObject, string control)
-            : base(mainWindow, xenObject, control)
+        public HostEditLogDestinationCommand(IMainWindow mainWindow, IXenObject xenObject)
+            : base(mainWindow, xenObject)
         {
         }
 
@@ -304,7 +326,6 @@ namespace XenAdmin.Commands
             using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
             {
                 dialog.SelectLogDestinationEditPage();
-                dialog.SelectControl(_control);
                 dialog.ShowDialog(Parent);
             }
         }

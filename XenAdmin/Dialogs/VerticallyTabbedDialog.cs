@@ -113,26 +113,6 @@ namespace XenAdmin.Dialogs
             return verticalTab != null ? verticalTab.Text : String.Empty;
         }
 
-        internal void SelectControl(string name)
-        {
-            SelectControlOfControl(ContentPanel, name);
-        }
-
-        private bool SelectControlOfControl(Control c, string name)
-        {
-            if (c.Controls.ContainsKey(name))
-            {
-                c.Controls[name].Select();
-                return true;
-            }
-
-            foreach (Control con in c.Controls)
-                if (SelectControlOfControl(con, name))
-                    return true;
-
-            return false;
-        }
-
         /// <summary>
         /// When in design mode, auto add tabs to the list
         /// </summary>

@@ -494,9 +494,22 @@ namespace XenAdmin.Dialogs
 
         #region Select page methods
 
-        public void SelectGeneralEditPage()
+        public void EditName()
         {
             SelectPage(GeneralEditPage);
+            GeneralEditPage.SelectName();
+        }
+
+        public void EditDescription()
+        {
+            SelectPage(GeneralEditPage);
+            GeneralEditPage.SelectDescription();
+        }
+
+        public void EditIqn()
+        {
+            SelectPage(GeneralEditPage);
+            GeneralEditPage.SelectIqn();
         }
 
         public void SelectCustomFieldsEditPage()
