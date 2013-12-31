@@ -46,6 +46,14 @@ namespace XenAdmin.Controls.MainWindowControls
             Overflow = ToolStripItemOverflow.Never;
         }
 
+        protected override void OnClick(EventArgs e)
+        {
+            base.OnClick(e);
+
+            if (!Checked)
+                Checked = true;
+        }
+
         protected override void OnCheckedChanged(EventArgs e)
         {
             base.OnCheckedChanged(e);

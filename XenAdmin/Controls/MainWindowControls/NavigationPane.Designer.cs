@@ -48,6 +48,7 @@
             this.buttonOrganizationSmall = new XenAdmin.Controls.MainWindowControls.NavigationDropDownButtonSmall();
             this.buttonObjectsSmall = new XenAdmin.Controls.MainWindowControls.NavigationButtonSmall();
             this.buttonInfraSmall = new XenAdmin.Controls.MainWindowControls.NavigationButtonSmall();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -76,13 +77,13 @@
             this.navigationView.InSearchMode = false;
             this.navigationView.Name = "navigationView";
             this.navigationView.NavigationMode = XenAdmin.Controls.MainWindowControls.NavigationPane.NavigationMode.Infrastructure;
-            this.navigationView.TreeViewRefreshResumed += new System.Action(this.navigationView_TreeViewRefreshResumed);
-            this.navigationView.TreeViewRefreshSuspended += new System.Action(this.navigationView_TreeViewRefreshSuspended);
             this.navigationView.TreeViewSelectionChanged += new System.Action(this.navigationView_TreeViewSelectionChanged);
+            this.navigationView.TreeNodeBeforeSelected += new System.Action(this.navigationView_TreeNodeBeforeSelected);
             this.navigationView.TreeNodeClicked += new System.Action(this.navigationView_TreeNodeClicked);
             this.navigationView.TreeNodeRightClicked += new System.Action(this.navigationView_TreeNodeRightClicked);
-            this.navigationView.TreeNodeBeforeSelected += new System.Action(this.navigationView_TreeNodeBeforeSelected);
             this.navigationView.TreeViewRefreshed += new System.Action(this.navigationView_TreeViewRefreshed);
+            this.navigationView.TreeViewRefreshSuspended += new System.Action(this.navigationView_TreeViewRefreshSuspended);
+            this.navigationView.TreeViewRefreshResumed += new System.Action(this.navigationView_TreeViewRefreshResumed);
             // 
             // notificationsView
             // 
@@ -103,14 +104,11 @@
             this.buttonSearchesBig,
             this.buttonNotifyBig});
             this.toolStripBig.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.toolStripBig.MaximumSize = new System.Drawing.Size(0, 157);
-            this.toolStripBig.MinimumSize = new System.Drawing.Size(215, 0);
             this.toolStripBig.Name = "toolStripBig";
             this.toolStripBig.LayoutCompleted += new System.EventHandler(this.toolStripBig_LayoutCompleted);
             // 
             // buttonInfraBig
             // 
-            this.buttonInfraBig.CheckOnClick = true;
             this.buttonInfraBig.Image = global::XenAdmin.Properties.Resources.tempInfra24;
             resources.ApplyResources(this.buttonInfraBig, "buttonInfraBig");
             this.buttonInfraBig.Name = "buttonInfraBig";
@@ -119,7 +117,6 @@
             // 
             // buttonObjectsBig
             // 
-            this.buttonObjectsBig.CheckOnClick = true;
             this.buttonObjectsBig.Image = global::XenAdmin.Properties.Resources.tempObj24;
             resources.ApplyResources(this.buttonObjectsBig, "buttonObjectsBig");
             this.buttonObjectsBig.Name = "buttonObjectsBig";
@@ -173,7 +170,6 @@
             // 
             // buttonNotifyBig
             // 
-            this.buttonNotifyBig.CheckOnClick = true;
             this.buttonNotifyBig.Image = global::XenAdmin.Properties.Resources.tempNotif24;
             resources.ApplyResources(this.buttonNotifyBig, "buttonNotifyBig");
             this.buttonNotifyBig.Name = "buttonNotifyBig";
@@ -199,7 +195,6 @@
             // buttonNotifySmall
             // 
             this.buttonNotifySmall.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.buttonNotifySmall.CheckOnClick = true;
             this.buttonNotifySmall.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.buttonNotifySmall.Image = global::XenAdmin.Properties.Resources.tempNotif16;
             resources.ApplyResources(this.buttonNotifySmall, "buttonNotifySmall");
@@ -231,7 +226,6 @@
             // buttonObjectsSmall
             // 
             this.buttonObjectsSmall.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.buttonObjectsSmall.CheckOnClick = true;
             this.buttonObjectsSmall.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.buttonObjectsSmall.Image = global::XenAdmin.Properties.Resources.tempObj16;
             resources.ApplyResources(this.buttonObjectsSmall, "buttonObjectsSmall");
@@ -242,7 +236,6 @@
             // buttonInfraSmall
             // 
             this.buttonInfraSmall.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.buttonInfraSmall.CheckOnClick = true;
             this.buttonInfraSmall.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.buttonInfraSmall.Image = global::XenAdmin.Properties.Resources.tempInfra16;
             resources.ApplyResources(this.buttonInfraSmall, "buttonInfraSmall");
@@ -259,6 +252,7 @@
             this.Name = "NavigationPane";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.toolStripBig.ResumeLayout(false);
             this.toolStripBig.PerformLayout();
