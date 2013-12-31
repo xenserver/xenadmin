@@ -190,6 +190,7 @@ namespace XenAdmin
 
             commandInterface = new MainWindowCommandInterface(this);
             pluginManager = new PluginManager();
+            pluginManager.PluginsChanged += pluginManager_PluginsChanged;
             pluginManager.LoadPlugins();
             contextMenuBuilder = new ContextMenuBuilder(pluginManager, commandInterface);
 
@@ -1484,76 +1485,74 @@ namespace XenAdmin
             return -1;
         }
 
-        private void topLevelMenu_DropDownOpening(object sender, EventArgs e)
+        private void pluginManager_PluginsChanged()
         {
-            ToolStripMenuItem menu = (ToolStripMenuItem)sender;
-
-            //clear existing plugin items
-            for (int i = menu.DropDownItems.Count - 1; i >= 0; i--)
+            foreach (ToolStripMenuItem menu in MainMenuBar.Items)
             {
-                CommandToolStripMenuItem commandMenuItem = menu.DropDownItems[i] as CommandToolStripMenuItem;
-
-                if (commandMenuItem != null && (commandMenuItem.Command is MenuItemFeatureCommand || commandMenuItem.Command is ParentMenuItemFeatureCommand))
+                //clear existing plugin items
+                for (int i = menu.DropDownItems.Count - 1; i >= 0; i--)
                 {
-                    menu.DropDownItems.RemoveAt(i);
+                    CommandToolStripMenuItem commandMenuItem = menu.DropDownItems[i] as CommandToolStripMenuItem;
 
-                    if (menu.DropDownItems[i] is ToolStripSeparator)
+                    if (commandMenuItem != null && (commandMenuItem.Command is MenuItemFeatureCommand 
+                                                 || commandMenuItem.Command is ParentMenuItemFeatureCommand))
                     {
                         menu.DropDownItems.RemoveAt(i);
+
+                        if (menu.DropDownItems.Count > 0 && menu.DropDownItems[i] is ToolStripSeparator)
+                            menu.DropDownItems.RemoveAt(i);
                     }
                 }
-            }
 
-            // get insert index using the placeholder
-            int insertIndex = pluginMenuItemStartIndexes[menu];
+                // get insert index using the placeholder
+                int insertIndex = pluginMenuItemStartIndexes[menu];
 
-            bool addSeparatorAtEnd = false;
+                bool itemAdded = false;
 
-            // add plugin items for this menu at insertIndex
-            foreach (PluginDescriptor plugin in pluginManager.Plugins)
-            {
-                if (!plugin.Enabled)
+                // add plugin items for this menu at insertIndex
+                foreach (PluginDescriptor plugin in pluginManager.Plugins)
                 {
-                    continue;
-                }
+                    if (!plugin.Enabled)
+                        continue;
 
-                foreach (Feature feature in plugin.Features)
-                {
-                    MenuItemFeature menuItemFeature = feature as MenuItemFeature;
-
-                    if (menuItemFeature != null && menuItemFeature.ParentFeature == null && (int)menuItemFeature.Menu == MainMenuBar.Items.IndexOf(menu))
+                    foreach (Feature feature in plugin.Features)
                     {
-                        Command cmd = menuItemFeature.GetCommand(commandInterface, SelectionManager.Selection);
+                        var menuItemFeature = feature as MenuItemFeature;
 
-                        menu.DropDownItems.Insert(insertIndex, new CommandToolStripMenuItem(cmd));
-                        insertIndex++;
-                        addSeparatorAtEnd = true;
-                    }
-
-                    ParentMenuItemFeature parentMenuItemFeature = feature as ParentMenuItemFeature;
-
-                    if (parentMenuItemFeature != null && (int)parentMenuItemFeature.Menu == MainMenuBar.Items.IndexOf(menu))
-                    {
-                        Command cmd = parentMenuItemFeature.GetCommand(commandInterface, SelectionManager.Selection);
-                        CommandToolStripMenuItem parentMenuItem = new CommandToolStripMenuItem(cmd);
-
-                        menu.DropDownItems.Insert(insertIndex, parentMenuItem);
-                        insertIndex++;
-                        addSeparatorAtEnd = true;
-
-                        foreach (MenuItemFeature childFeature in parentMenuItemFeature.Features)
+                        if (menuItemFeature != null && menuItemFeature.ParentFeature == null && (int)menuItemFeature.Menu == MainMenuBar.Items.IndexOf(menu))
                         {
-                            Command childCommand = childFeature.GetCommand(commandInterface, SelectionManager.Selection);
-                            parentMenuItem.DropDownItems.Add(new CommandToolStripMenuItem(childCommand));
+                            Command cmd = menuItemFeature.GetCommand(commandInterface, SelectionManager.Selection);
+
+                            menu.DropDownItems.Insert(insertIndex, new CommandToolStripMenuItem(cmd));
+                            insertIndex++;
+                            itemAdded = true;
+                        }
+
+                        var parentMenuItemFeature = feature as ParentMenuItemFeature;
+
+                        if (parentMenuItemFeature != null && (int)parentMenuItemFeature.Menu == MainMenuBar.Items.IndexOf(menu))
+                        {
+                            Command cmd = parentMenuItemFeature.GetCommand(commandInterface, SelectionManager.Selection);
+                            CommandToolStripMenuItem parentMenuItem = new CommandToolStripMenuItem(cmd);
+
+                            menu.DropDownItems.Insert(insertIndex, parentMenuItem);
+                            insertIndex++;
+                            itemAdded = true;
+
+                            foreach (MenuItemFeature childFeature in parentMenuItemFeature.Features)
+                            {
+                                Command childCommand = childFeature.GetCommand(commandInterface, SelectionManager.Selection);
+                                parentMenuItem.DropDownItems.Add(new CommandToolStripMenuItem(childCommand));
+                            }
                         }
                     }
                 }
+
+                if (itemAdded && insertIndex != menu.DropDownItems.Count)
+                    menu.DropDownItems.Insert(insertIndex, new ToolStripSeparator());
             }
 
-            if (addSeparatorAtEnd)
-            {
-                menu.DropDownItems.Insert(insertIndex, new ToolStripSeparator());
-            }
+            windowToolStripMenuItem.Visible = windowToolStripMenuItem.DropDownItems.Count > 0;
         }
 
         private void MainMenuBar_MenuActivate(object sender, EventArgs e)
@@ -2131,7 +2130,7 @@ namespace XenAdmin
         /// <param name="args">The arguments to pass to the form's consructor</param>
         public void ShowForm(Type type, object[] args)
         {
-             foreach (Form form in Application.OpenForms)
+            foreach (Form form in Application.OpenForms)
             {
                 if (form.GetType() == type)
                 {

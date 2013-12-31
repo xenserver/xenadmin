@@ -27,6 +27,7 @@ namespace XenAdmin
 
             XenAdmin.Core.Clip.UnregisterClipboardViewer();
 
+            pluginManager.PluginsChanged -= pluginManager_PluginsChanged;
             pluginManager.Dispose();
 
             OtherConfigAndTagsWatcher.DeregisterEventHandlers();
@@ -714,7 +715,6 @@ namespace XenAdmin
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
-            this.fileToolStripMenuItem.DropDownOpening += new System.EventHandler(this.topLevelMenu_DropDownOpening);
             // 
             // FileImportVMToolStripMenuItem
             // 
@@ -774,7 +774,6 @@ namespace XenAdmin
             this.toolbarToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             resources.ApplyResources(this.viewToolStripMenuItem, "viewToolStripMenuItem");
-            this.viewToolStripMenuItem.DropDownOpening += new System.EventHandler(this.topLevelMenu_DropDownOpening);
             // 
             // customTemplatesToolStripMenuItem
             // 
@@ -842,7 +841,6 @@ namespace XenAdmin
             this.PoolPropertiesToolStripMenuItem});
             this.poolToolStripMenuItem.Name = "poolToolStripMenuItem";
             resources.ApplyResources(this.poolToolStripMenuItem, "poolToolStripMenuItem");
-            this.poolToolStripMenuItem.DropDownOpening += new System.EventHandler(this.topLevelMenu_DropDownOpening);
             // 
             // AddPoolToolStripMenuItem
             // 
@@ -1006,7 +1004,6 @@ namespace XenAdmin
             this.ServerPropertiesToolStripMenuItem});
             this.HostMenuItem.Name = "HostMenuItem";
             resources.ApplyResources(this.HostMenuItem, "HostMenuItem");
-            this.HostMenuItem.DropDownOpening += new System.EventHandler(this.topLevelMenu_DropDownOpening);
             // 
             // AddHostToolStripMenuItem
             // 
@@ -1218,7 +1215,6 @@ namespace XenAdmin
             this.VMPropertiesToolStripMenuItem});
             this.VMToolStripMenuItem.Name = "VMToolStripMenuItem";
             resources.ApplyResources(this.VMToolStripMenuItem, "VMToolStripMenuItem");
-            this.VMToolStripMenuItem.DropDownOpening += new System.EventHandler(this.topLevelMenu_DropDownOpening);
             // 
             // NewVmToolStripMenuItem
             // 
@@ -1369,7 +1365,6 @@ namespace XenAdmin
             this.SRPropertiesToolStripMenuItem});
             this.StorageToolStripMenuItem.Name = "StorageToolStripMenuItem";
             resources.ApplyResources(this.StorageToolStripMenuItem, "StorageToolStripMenuItem");
-            this.StorageToolStripMenuItem.DropDownOpening += new System.EventHandler(this.topLevelMenu_DropDownOpening);
             // 
             // AddStorageToolStripMenuItem
             // 
@@ -1500,7 +1495,6 @@ namespace XenAdmin
             this.templatePropertiesToolStripMenuItem});
             this.templatesToolStripMenuItem.Name = "templatesToolStripMenuItem";
             resources.ApplyResources(this.templatesToolStripMenuItem, "templatesToolStripMenuItem");
-            this.templatesToolStripMenuItem.DropDownOpening += new System.EventHandler(this.topLevelMenu_DropDownOpening);
             // 
             // CreateVmFromTemplateToolStripMenuItem
             // 
@@ -1584,7 +1578,6 @@ namespace XenAdmin
             this.preferencesToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             resources.ApplyResources(this.toolsToolStripMenuItem, "toolsToolStripMenuItem");
-            this.toolsToolStripMenuItem.DropDownOpening += new System.EventHandler(this.topLevelMenu_DropDownOpening);
             // 
             // bugToolToolStripMenuItem
             // 
@@ -1663,7 +1656,6 @@ namespace XenAdmin
             this.xenCenterPluginsOnlineToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
-            this.helpToolStripMenuItem.DropDownOpening += new System.EventHandler(this.topLevelMenu_DropDownOpening);
             // 
             // helpTopicsToolStripMenuItem
             // 

@@ -46,9 +46,10 @@ namespace XenAdmin.Plugins
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly List<PluginDescriptor> _plugins = new List<PluginDescriptor>();
         private static readonly string PLUGIN_FOLDER = Path.Combine(Program.AssemblyDir, "Plugins");
-        private bool _enabled;
 
-        public const string ROOT_ELEMENT_NAME = "XenCenterPlugin";
+        private const string ROOT_ELEMENT_NAME = "XenCenterPlugin";
+
+        public event Action PluginsChanged;
 
         /// <summary>
         /// Gets the plugins loaded from the Plugin directory.
@@ -92,10 +93,7 @@ namespace XenAdmin.Plugins
         /// <value><c>true</c> if enabled; otherwise, <c>false</c>.</value>
         public bool Enabled
         {
-            get
-            {
-                return _enabled;
-            }
+            get { return !Registry.DisablePlugins; }
         }
 
         /// <summary>
@@ -120,9 +118,7 @@ namespace XenAdmin.Plugins
         /// <param name="folder">The folder.</param>
         public void LoadPlugins(string folder)
         {
-            _enabled = !Registry.DisablePlugins;
-
-            if (_enabled)
+            if (Enabled)
             {
                 // catch all exceptions, the most likely cause of errors is user mistakes with plugin creation.
                 // we must not let this kill XenCenter
@@ -158,6 +154,9 @@ namespace XenAdmin.Plugins
                 {
                     log.Error("Error loading plugins.", ex);
                 }
+
+                if (PluginsChanged != null)
+                    PluginsChanged();
             }
         }
 
@@ -184,6 +183,9 @@ namespace XenAdmin.Plugins
                 plugin.Dispose();
             }
             _plugins.Clear();
+
+            if (PluginsChanged != null)
+                PluginsChanged();
         }
 
         public void ReloadPlugins()
