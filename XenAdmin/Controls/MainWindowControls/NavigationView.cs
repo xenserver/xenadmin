@@ -488,6 +488,14 @@ namespace XenAdmin.Controls.MainWindowControls
                     TreeContextMenu.Items.Add(new CommandToolStripMenuItem(new ConnectAllHostsCommand(Program.MainWindow.CommandInterface), true));
                     TreeContextMenu.Items.Add(new CommandToolStripMenuItem(new DisconnectAllHostsCommand(Program.MainWindow.CommandInterface), true));
                 }
+                else
+                {
+                    var groupingTag = e.Node.Tag as GroupingTag;
+                    if (groupingTag != null && groupingTag.Grouping as OrganizationViewFolders != null)
+                        TreeContextMenu.Items.Add(new CommandToolStripMenuItem(
+                            new NewFolderCommand(Program.MainWindow.CommandInterface, new[] { new SelectedItem(groupingTag, e.Node) }),
+                            true));
+                }
             }
             else
             {

@@ -144,7 +144,9 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            return selection.ContainsOneItemOfType<Folder>() && ConnectionAvailable();
+            return (selection.ContainsOneItemOfType<Folder>()
+                    || selection.ContainsOneItemOfType<GroupingTag>(t => t.Grouping is OrganizationViewFolders))
+                   && ConnectionAvailable();
         }
 
         private bool ConnectionAvailable()
