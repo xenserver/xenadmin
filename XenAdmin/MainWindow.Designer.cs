@@ -1642,8 +1642,6 @@ namespace XenAdmin
             this.pluginItemsPlaceHolderToolStripMenuItem9});
             this.windowToolStripMenuItem.Name = "windowToolStripMenuItem";
             resources.ApplyResources(this.windowToolStripMenuItem, "windowToolStripMenuItem");
-            this.windowToolStripMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.windowToolStripMenuItem_DropDownItemClicked);
-            this.windowToolStripMenuItem.DropDownOpening += new System.EventHandler(this.windowToolStripMenuItem_DropDownOpening);
             // 
             // pluginItemsPlaceHolderToolStripMenuItem9
             // 

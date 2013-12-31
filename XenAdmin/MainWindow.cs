@@ -1872,45 +1872,6 @@ namespace XenAdmin
             }
         }
 
-        #region "Window" main menu item
-
-        private void windowToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
-        {
-            windowToolStripMenuItem.DropDown.Items.Clear();
-
-            topLevelMenu_DropDownOpening(sender, e);
-
-            foreach (Form form in GetAuxWindows())
-            {
-                ToolStripMenuItem item = new ToolStripMenuItem(form.Text.EscapeAmpersands());
-                item.Tag = form;
-                windowToolStripMenuItem.DropDown.Items.Add(item);
-            }
-        }
-
-        private List<Form> GetAuxWindows()
-        {
-            List<Form> result = new List<Form>();
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form != this && form.Text != "" && !(form is ConnectingToServerDialog))
-                {
-                    result.Add(form);
-                }
-            }
-            return result;
-        }
-
-        private void windowToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            if (e.ClickedItem.Tag is Form)
-            {
-                HelpersGUI.BringFormToFront((Form)e.ClickedItem.Tag);
-            }
-        }
-
-        #endregion
-
         private void templatesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             templatesToolStripMenuItem1.Checked = !templatesToolStripMenuItem1.Checked;

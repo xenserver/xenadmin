@@ -61,7 +61,7 @@ namespace XenAdmin.Commands
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
-           new PatchingWizard().Show();
+            MainWindowCommandInterface.ShowForm(typeof(PatchingWizard));
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
