@@ -51,6 +51,7 @@ namespace XenAdminTests
 
         private string[] databases;
         private bool readOnly = false;
+        private static Thread oldMainWindowThread;
 
         public MainWindowLauncher(params string[] databases)
         {
@@ -74,13 +75,19 @@ namespace XenAdminTests
         {
             object oldMainWindow = Program.MainWindow;
 
-            mainWindowThread = new Thread(delegate()
+            if (oldMainWindowThread != null && oldMainWindowThread.IsAlive)
             {
-                Program.Main(new string[0]);
-            });
+                log.DebugFormat("Cleaning leftover MainWindowThread from previous test");
+                RemoveStateDBs();
+                KillMainWindow();
+                oldMainWindowThread.Join();
+            }
+
+            mainWindowThread = new Thread(() => Program.Main(new string[0]));
             mainWindowThread.Name = "MainWindowThread";
             mainWindowThread.SetApartmentState(ApartmentState.STA);
             mainWindowThread.Start();
+            oldMainWindowThread = mainWindowThread;
 
             while (Program.MainWindow == null || !Program.MainWindow.IsHandleCreated || Program.MainWindow == oldMainWindow)
                 Thread.Sleep(500);
@@ -99,7 +106,7 @@ namespace XenAdminTests
 
                 foreach (string name in names)
                 {
-                    connections.Add(MW<IXenConnection>(() => LoadDB(name, readOnly ? "readonly" : "root")));
+                    connections.Add(MW(() => LoadDB(name, readOnly ? "readonly" : "root")));
                 }
 
                 MWWaitFor(() => TreeViewContainsConnections(connections), "Couldn't connect to db.");
@@ -124,7 +131,7 @@ namespace XenAdminTests
         {
             foreach (IXenConnection c in ConnectionsManager.XenConnectionsCopy)
             {
-                MW(delegate { c.Cache.Clear(); } );
+                MW(() => c.Cache.Clear());
                 c.EndConnect(false);
                 c.Dispose();
             }
