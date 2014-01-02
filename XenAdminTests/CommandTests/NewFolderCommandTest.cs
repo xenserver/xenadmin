@@ -32,6 +32,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+
+using XenAdmin;
 using XenAdmin.Commands;
 using XenAdmin.Controls.MainWindowControls;
 using XenAdmin.Model;
@@ -94,21 +96,35 @@ namespace XenAdminTests.CommandTests
                 // choose new folder name
                 string newFolderName = Guid.NewGuid().ToString();
 
-                if (folder.IsRootFolder)
+                if (folder == null)
                 {
-                    HandleModalDialog("New Folder", Command.Execute, delegate(NameAndConnectionPromptWrapper p)
-                        {
-                            p.NameTextBox.Text = newFolderName;
-                            p.OKButton.PerformClick();
-                        });
+                    GroupingTag tag = selection[0].GroupingTag;
+
+                    if (tag != null && tag.Grouping is OrganizationViewFolders)
+                        HandleModalDialog("New Folder", Command.Execute, delegate(NameAndConnectionPromptWrapper p)
+                            {
+                                p.NameTextBox.Text = newFolderName;
+                                p.OKButton.PerformClick();
+                            });
                 }
                 else
                 {
-                    HandleModalDialog("New Folder", Command.Execute, delegate(InputPromptDialogWrapper p)
-                        {
-                            p.NameTextBox.Text = newFolderName;
-                            p.OKButton.PerformClick();
-                        });
+                    if (folder.IsRootFolder)
+                    {
+                        HandleModalDialog("New Folder", Command.Execute, delegate(NameAndConnectionPromptWrapper p)
+                            {
+                                p.NameTextBox.Text = newFolderName;
+                                p.OKButton.PerformClick();
+                            });
+                    }
+                    else
+                    {
+                        HandleModalDialog("New Folder", Command.Execute, delegate(InputPromptDialogWrapper p)
+                            {
+                                p.NameTextBox.Text = newFolderName;
+                                p.OKButton.PerformClick();
+                            });
+                    }
                 }
 
                 // now check to see if new folder exists and is selected, and is visible.
