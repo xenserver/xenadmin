@@ -104,6 +104,12 @@ namespace XenAdmin.Plugins
             get { return (from PluginDescriptor plugin in _plugins where plugin.Enabled select plugin).Count(); }
         }
 
+        public void OnPluginsChanged()
+        {
+            if (PluginsChanged != null)
+                PluginsChanged();
+        }
+
         /// <summary>
         /// Loads the plugins from the default Plugins folder.
         /// </summary>
@@ -154,9 +160,8 @@ namespace XenAdmin.Plugins
                 {
                     log.Error("Error loading plugins.", ex);
                 }
-
-                if (PluginsChanged != null)
-                    PluginsChanged();
+                
+                OnPluginsChanged();
             }
         }
 
@@ -184,8 +189,7 @@ namespace XenAdmin.Plugins
             }
             _plugins.Clear();
 
-            if (PluginsChanged != null)
-                PluginsChanged();
+            OnPluginsChanged();
         }
 
         public void ReloadPlugins()

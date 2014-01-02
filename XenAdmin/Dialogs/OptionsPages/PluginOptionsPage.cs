@@ -118,7 +118,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         #endregion
 
-       #region Control event handlers
+        #region Control event handlers
 
         private void refreshButton_Click(object sender, EventArgs e)
         {
@@ -288,6 +288,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
             Settings.UpdateDisabledPluginsList(disabled);
             Program.MainWindow.UpdateToolbarsCore();
+            _pluginManager.OnPluginsChanged();
         }
 
         #endregion
