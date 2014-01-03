@@ -68,18 +68,7 @@ namespace XenAdmin.Alerts
         {
             get
             {
-                return string.Format(Messages.ALERT_NEW_VERSION_DETAILS, NewVersion.Name,
-                    HelpersGUI.DateTimeToString(NewVersion.TimeStamp, Messages.DATEFORMAT_DMY_LONG, false));
-            }
-        }
-
-        public override string DescriptionInvariant
-        {
-            get
-            {
-                return string.Format("{0} ({1})",
-                     string.Format(Messages.ALERT_NEW_VERSION_DETAILS, NewVersion.Name),
-                     HelpersGUI.DateTimeToString(NewVersion.TimeStamp, Messages.DATEFORMAT_DMY_LONG, false));
+                return string.Format(Messages.ALERT_NEW_VERSION_DETAILS, NewVersion.Name);
             }
         }
 

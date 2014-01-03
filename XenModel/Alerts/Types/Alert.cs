@@ -66,7 +66,7 @@ namespace XenAdmin.Alerts
             lock (XenCenterAlertsLock)
                 XenCenterAlerts.Remove(a);
 
-            log.InfoFormat("Removed {0}: {1} - {2}", a.GetType().Name, a.Title, a.DescriptionInvariant);
+            log.InfoFormat("Removed {0}: {1} - {2}", a.GetType().Name, a.Title, a.Description);
         }
 
         public static void RemoveAlert(Predicate<Alert> predicate)
@@ -194,8 +194,7 @@ namespace XenAdmin.Alerts
         /// <param name="username">The name of whoever is dismissing the Alert. Must not be null.</param>
         public virtual void Dismiss()
         {
-            log.InfoFormat("{0} dismissed: {1} - {2}", GetType().Name, Title, DescriptionInvariant);
-            Alert.RemoveAlert(this);
+            RemoveAlert(this);
         }
 
         /// <summary>
@@ -222,14 +221,6 @@ namespace XenAdmin.Alerts
         /// Specifies the icon to use for the alert
         /// </summary>
         public abstract AlertPriority Priority { get; }
-
-        /// <summary>
-        /// Non-i18n'ed description, if different (see CA-46983)
-        /// </summary>
-        public virtual string DescriptionInvariant
-        {
-            get { return Description; }
-        }
 
         public abstract string AppliesTo { get; }
 

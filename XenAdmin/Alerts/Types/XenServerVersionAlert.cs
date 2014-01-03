@@ -35,7 +35,6 @@ using System.Text;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAdmin.Actions;
-using XenAPI;
 
 
 namespace XenAdmin.Alerts
@@ -69,16 +68,6 @@ namespace XenAdmin.Alerts
         public override string Description
         {
             get { return string.Format(Messages.DOWNLOAD_LATEST_XS_BODY, Version.Name); }
-        }
-
-        public override string DescriptionInvariant
-        {
-            get
-            {
-                return string.Format("{0} ({1})",
-                     string.Format(Messages.DOWNLOAD_LATEST_XS_BODY, Version.Name),
-                     HelpersGUI.DateTimeToString(Version.TimeStamp, Messages.DATEFORMAT_DMY_LONG, false));
-            }
         }
 
         public override string FixLinkText

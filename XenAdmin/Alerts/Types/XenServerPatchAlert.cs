@@ -116,14 +116,6 @@ namespace XenAdmin.Alerts
             get { return Patch.Description; }
         }
 
-        public override string DescriptionInvariant
-        {
-            get
-            {
-                return string.Format("{0} ({1})", Patch.Description, HelpersGUI.DateTimeToString(Patch.TimeStamp, Messages.DATEFORMAT_DMY_LONG, false));
-            }
-        }
-
         public override string Name
         {
             get { return Patch.Name; }
