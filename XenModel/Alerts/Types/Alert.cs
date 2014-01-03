@@ -230,13 +230,11 @@ namespace XenAdmin.Alerts
         /// </summary>
         public abstract string FixLinkText { get; }
 
-        public delegate void FixLinkDelegate();
-
         /// <summary>
         /// The delegate called when the 'click here to fix...' link is clicked. The calling
         /// Alert is passed in. May only return null if FixLinkText is null.
         /// </summary>
-        public abstract FixLinkDelegate FixLinkAction { get; }
+        public abstract Action FixLinkAction { get; }
 
         /// <summary>
         /// The text for the 'click here for help...' link.

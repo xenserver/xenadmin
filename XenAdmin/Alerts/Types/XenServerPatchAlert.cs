@@ -121,7 +121,7 @@ namespace XenAdmin.Alerts
             get { return Patch.Name; }
         }
 
-        public override FixLinkDelegate FixLinkAction
+        public override Action FixLinkAction
         {
             get { return () => Program.OpenURL(Patch.Url); }
         }

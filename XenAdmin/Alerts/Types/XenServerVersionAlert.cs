@@ -82,8 +82,8 @@ namespace XenAdmin.Alerts
         {
             get { return AlertPriority.Priority5; }
         }
-        
-        public override FixLinkDelegate FixLinkAction
+
+        public override Action FixLinkAction
         {
             get { return () => Program.OpenURL(Version.Url); }
         }

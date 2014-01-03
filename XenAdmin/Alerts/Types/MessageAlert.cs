@@ -32,7 +32,6 @@
 using System;
 using System.Collections.Generic;
 using XenAPI;
-using XenAdmin.Model;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Help;
@@ -321,7 +320,7 @@ namespace XenAdmin.Alerts
             return bond == null ? Messages.UNKNOWN : bond.Name;
         }
 
-        public override FixLinkDelegate FixLinkAction
+        public override Action FixLinkAction
         {
 			get
 			{

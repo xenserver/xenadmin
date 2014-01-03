@@ -58,7 +58,7 @@ namespace XenAdmin.Alerts
 
         public override string FixLinkText { get { return Messages.IQN_CHECK_EDIT; } }
 
-        public override FixLinkDelegate FixLinkAction
+        public override Action FixLinkAction
         {
             get
             {

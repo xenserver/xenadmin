@@ -87,7 +87,7 @@ namespace XenAdmin.Alerts
             get { return Messages.LAUNCH_LICENSE_MANAGER; }
         }
 
-        public override FixLinkDelegate FixLinkAction
+        public override Action FixLinkAction
         {
             get
             {
