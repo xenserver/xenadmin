@@ -249,10 +249,15 @@ namespace XenAdmin.TabPages
         /// <param name="alert"></param>
         private bool FilterAlert(Alert alert)
         {
+            var hosts = new List<string>();
+            var serverUpdate = alert as XenServerUpdateAlert;
+            if (serverUpdate != null)
+                hosts = serverUpdate.DistinctHosts.Select(h => h.uuid).ToList();
+
             bool hide = false;
             Program.Invoke(this, () =>
                                  hide = toolStripDropDownButtonDateFilter.HideByDate(alert.Timestamp.ToLocalTime())
-                                        || toolStripDropDownButtonServerFilter.HideByLocation(alert.HostUuid));
+                                        || toolStripDropDownButtonServerFilter.HideByLocation(hosts));
             return hide;
         }
 
@@ -383,9 +388,11 @@ namespace XenAdmin.TabPages
                 wizard.NextStep();
                 wizard.AddFile(action.PatchPath);
                 wizard.NextStep();
-                if (patchAlert.Hosts.Count > 0)
+
+                var hosts = patchAlert.DistinctHosts;
+                if (hosts.Count > 0)
                 {
-                    wizard.SelectServers(patchAlert.Hosts);
+                    wizard.SelectServers(hosts);
                     if (wizard.CurrentStepTabPage.EnableNext())
                         wizard.NextStep();
                 }

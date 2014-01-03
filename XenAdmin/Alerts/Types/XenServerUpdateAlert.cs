@@ -51,6 +51,22 @@ namespace XenAdmin.Alerts
             get { return canIgnore; }
         }
 
+        public List<Host> DistinctHosts
+        {
+            get
+            {
+                List<Host> result = new List<Host>();
+
+                foreach (Host host in hosts)
+                    result.Add(host);
+
+                foreach (IXenConnection connection in connections)
+                    result.AddRange(connection.Cache.Hosts);
+
+                return result.Distinct().ToList();
+            }
+        }
+
         public void IncludeConnection(IXenConnection newConnection)
         {
             connections.Add(newConnection);

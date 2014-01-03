@@ -42,22 +42,6 @@ namespace XenAdmin.Alerts
 {
     public class XenServerPatchAlert : XenServerUpdateAlert
     {
-        public List<Host> Hosts
-        {
-            get
-            {
-                List<Host> result = new List<Host>();
-
-                foreach (Host host in hosts)
-                    result.Add(host);
-
-                foreach (IXenConnection connection in connections)
-                    result.AddRange(connection.Cache.Hosts);
-
-                return result.Distinct().ToList();
-            }
-        }
-
         public XenServerPatch Patch;
 
         /// <summary>
@@ -65,17 +49,19 @@ namespace XenAdmin.Alerts
         /// </summary>
         public bool CanApply
         {
-            get 
-            { 
-                if(Hosts != null)
+            get
+            {
+                var distinctHosts = DistinctHosts;
+
+                if (distinctHosts != null)
                 {
-                    if(Hosts.All(IsHostLicenseRestricted))
+                    if (distinctHosts.All(IsHostLicenseRestricted))
                     {
                         CannotApplyReason = Messages.MANUAL_CHECK_FOR_UPDATES_UNLICENSED_INFO;
                         return false;
                     }
 
-                    if (Hosts.Any(IsHostLicenseRestricted))
+                    if (distinctHosts.Any(IsHostLicenseRestricted))
                     {
                         CannotApplyReason = Messages.MANUAL_CHECK_FOR_UPDATES_PARTIAL_UNLICENSED_INFO;
                         return true;

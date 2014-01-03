@@ -181,23 +181,12 @@ namespace XenAdmin.Controls
             return false;
         }
 
-        /// <summary>
-        /// To be used for items that apply to pools, i.e. all their hosts. The
-        /// reason is that we only store host check states because the pools may
-        /// be in an indeterminate state.
-        /// </summary>
         public bool HideByLocation(List<string> hostUuids)
         {
             if (hostUuids.Count == 0)
                 return false;
 
-            foreach (string uuid in hostUuids)
-            {
-                if (HostCheckStates.ContainsKey(uuid) && !HostCheckStates[uuid])
-                    return true;
-            }
-
-            return false;
+            return hostUuids.TrueForAll(uuid => HostCheckStates.ContainsKey(uuid) && !HostCheckStates[uuid]);
         }
         
         public bool FilterIsOn
