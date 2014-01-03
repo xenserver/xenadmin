@@ -194,16 +194,16 @@
             this.dataGridViewUpdates.MultiSelect = true;
             this.dataGridViewUpdates.Name = "dataGridViewUpdates";
             this.dataGridViewUpdates.ReadOnly = true;
-            this.dataGridViewUpdates.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dataGridViewUpdates_SortCompare);
+            this.dataGridViewUpdates.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUpdates_CellClick);
             this.dataGridViewUpdates.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUpdates_CellDoubleClick);
             this.dataGridViewUpdates.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewUpdates_ColumnHeaderMouseClick);
-            this.dataGridViewUpdates.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUpdates_CellClick);
-            this.dataGridViewUpdates.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridViewUpdates_KeyDown);
             this.dataGridViewUpdates.SelectionChanged += new System.EventHandler(this.dataGridViewUpdates_SelectionChanged);
+            this.dataGridViewUpdates.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dataGridViewUpdates_SortCompare);
+            this.dataGridViewUpdates.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridViewUpdates_KeyDown);
             // 
             // ColumnExpand
             // 
-            this.ColumnExpand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ColumnExpand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
             dataGridViewCellStyle1.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle1.NullValue")));
             dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
@@ -211,10 +211,10 @@
             resources.ApplyResources(this.ColumnExpand, "ColumnExpand");
             this.ColumnExpand.Name = "ColumnExpand";
             this.ColumnExpand.ReadOnly = true;
+            this.ColumnExpand.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // ColumnMessage
             // 
-            this.ColumnMessage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.ColumnMessage.DefaultCellStyle = dataGridViewCellStyle2;
@@ -225,7 +225,6 @@
             // 
             // ColumnLocation
             // 
-            this.ColumnLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             this.ColumnLocation.DefaultCellStyle = dataGridViewCellStyle3;
             this.ColumnLocation.FillWeight = 20F;
@@ -236,7 +235,6 @@
             // 
             // ColumnDate
             // 
-            this.ColumnDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             this.ColumnDate.DefaultCellStyle = dataGridViewCellStyle4;
             this.ColumnDate.FillWeight = 20F;
