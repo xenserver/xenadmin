@@ -40,10 +40,8 @@ using XenAPI;
 
 namespace XenAdmin.Alerts
 {
-    public class XenServerPatchAlert : Alert
+    public class XenServerPatchAlert : XenServerUpdateAlert
     {
-        private readonly List<IXenConnection> connections = new List<IXenConnection>();
-        private readonly List<Host> hosts = new List<Host>();
         public List<Host> Hosts
         {
             get
@@ -59,10 +57,6 @@ namespace XenAdmin.Alerts
                 return result.Distinct().ToList();
             }
         }
-
-        private bool canIgnore;
-        public bool CanIgnore
-        { get { return canIgnore; } }
 
         public XenServerPatch Patch;
 
@@ -110,29 +104,6 @@ namespace XenAdmin.Alerts
             _timestamp = Patch.TimeStamp;
             canIgnore = true;
         }
-        
-        public void IncludeConnection(IXenConnection newConnection)
-        {
-            connections.Add(newConnection);
-            if (connections.Count > 0)
-                canIgnore = false;
-        }
-
-        public void IncludeHosts(IEnumerable<Host> newHosts)
-        {
-            hosts.AddRange(newHosts);
-            if (hosts.Count > 0)
-                canIgnore = false;
-        }
-
-        public void CopyConnectionsAndHosts(XenServerPatchAlert alert)
-        {
-            connections.Clear();
-            connections.AddRange(alert.connections);
-            hosts.Clear();
-            hosts.AddRange(alert.hosts);
-            canIgnore = connections.Count == 0 && hosts.Count == 0;
-        }
 
         public override string WebPageLabel
         {
@@ -151,22 +122,6 @@ namespace XenAdmin.Alerts
                     return (AlertPriority)_priority;
 
                 return AlertPriority.Priority2;
-            }
-        }
-
-        public override string AppliesTo
-        {
-            get
-            {
-                List<string> names = new List<string>();
-
-                foreach (Host host in hosts)
-                    names.Add(host.Name);
-
-                foreach (IXenConnection connection in connections)
-                    names.Add(Helpers.GetName(connection));
-
-                return string.Join(", ", names.ToArray());
             }
         }
 
@@ -218,9 +173,7 @@ namespace XenAdmin.Alerts
         {
             base.Dismiss();
             foreach (IXenConnection connection in connections)
-            {
                 new IgnorePatchAction(connection, Patch).RunAsync();
-            }
         }
 
         public override bool Equals(Alert other)

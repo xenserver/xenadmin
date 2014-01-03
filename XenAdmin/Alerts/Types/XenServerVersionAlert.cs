@@ -40,15 +40,8 @@ using XenAPI;
 
 namespace XenAdmin.Alerts
 {
-    public class XenServerVersionAlert : Alert
+    public class XenServerVersionAlert : XenServerUpdateAlert
     {
-        private readonly List<IXenConnection> connections = new List<IXenConnection>();
-        private readonly List<Host> hosts = new List<Host>();
-
-        private bool canIgnore;
-        public bool CanIgnore
-        { get { return canIgnore; } }
-
         public XenServerVersion Version;
 
         public XenServerVersionAlert(XenServerVersion version)
@@ -56,29 +49,6 @@ namespace XenAdmin.Alerts
             Version = version;
             _timestamp = version.TimeStamp;
             canIgnore = true;
-        }
-        
-        public void IncludeConnection(IXenConnection newConnection)
-        {
-            connections.Add(newConnection);
-            if (connections.Count > 0)
-                canIgnore = false;
-        }
-
-        public void IncludeHosts(IEnumerable<Host> newHosts)
-        {
-            hosts.AddRange(newHosts);
-            if (hosts.Count > 0)
-                canIgnore = false;
-        }
-
-        public void CopyConnectionsAndHosts(XenServerVersionAlert alert)
-        {
-            connections.Clear();
-            connections.AddRange(alert.connections);
-            hosts.Clear();
-            hosts.AddRange(alert.hosts);
-            canIgnore = connections.Count == 0 && hosts.Count == 0;
         }
 
         public override string WebPageLabel
@@ -108,22 +78,6 @@ namespace XenAdmin.Alerts
                 return string.Format("{0} ({1})",
                      string.Format(Messages.DOWNLOAD_LATEST_XS_BODY, Version.Name),
                      HelpersGUI.DateTimeToString(Version.TimeStamp, Messages.DATEFORMAT_DMY_LONG, false));
-            }
-        }
-
-        public override string AppliesTo
-        {
-            get
-            {
-                List<string> names = new List<string>();
-
-                foreach (Host host in hosts)
-                    names.Add(host.Name);
-
-                foreach (IXenConnection connection in connections)
-                    names.Add(Helpers.GetName(connection));
-
-                return string.Join(", ", names.ToArray());
             }
         }
 
