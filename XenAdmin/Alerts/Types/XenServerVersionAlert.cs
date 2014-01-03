@@ -40,7 +40,7 @@ using XenAPI;
 
 namespace XenAdmin.Alerts
 {
-    public class XenServerUpdateAlert : Alert
+    public class XenServerVersionAlert : Alert
     {
         private readonly List<IXenConnection> connections = new List<IXenConnection>();
         private readonly List<Host> hosts = new List<Host>();
@@ -51,7 +51,7 @@ namespace XenAdmin.Alerts
 
         public XenServerVersion Version;
 
-        public XenServerUpdateAlert(XenServerVersion version)
+        public XenServerVersionAlert(XenServerVersion version)
         {
             Version = version;
             _timestamp = version.TimeStamp;
@@ -72,7 +72,7 @@ namespace XenAdmin.Alerts
                 canIgnore = false;
         }
 
-        public void CopyConnectionsAndHosts(XenServerUpdateAlert alert)
+        public void CopyConnectionsAndHosts(XenServerVersionAlert alert)
         {
             connections.Clear();
             connections.AddRange(alert.connections);
@@ -162,9 +162,9 @@ namespace XenAdmin.Alerts
 
         public override bool Equals(Alert other)
         {
-            if (other is XenServerUpdateAlert)
+            if (other is XenServerVersionAlert)
             {
-                return Version.VersionAndOEM == ((XenServerUpdateAlert)other).Version.VersionAndOEM;
+                return Version.VersionAndOEM == ((XenServerVersionAlert)other).Version.VersionAndOEM;
             }
             return base.Equals(other);
         }

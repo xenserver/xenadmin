@@ -127,7 +127,7 @@ namespace XenAdmin.Core
                 if (xenCenterAlert != null)
                     updateAlerts.Add(xenCenterAlert);
 
-                var xenServerUpdateAlert = NewXenServerUpdateAlert(action.XenServerVersions);
+                var xenServerUpdateAlert = NewXenServerVersionAlert(action.XenServerVersions);
                 if (xenServerUpdateAlert != null)
                     updateAlerts.Add(xenServerUpdateAlert);
 
@@ -313,7 +313,7 @@ namespace XenAdmin.Core
             return alerts;
         }
 
-        public static XenServerUpdateAlert NewXenServerUpdateAlert(List<XenServerVersion> xenServerVersions)
+        public static XenServerVersionAlert NewXenServerVersionAlert(List<XenServerVersion> xenServerVersions)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
                 return null;
@@ -321,8 +321,8 @@ namespace XenAdmin.Core
             var latestVersion = xenServerVersions.FindAll(item => item.Latest).OrderByDescending(v => v.Version).FirstOrDefault();
             if (latestVersion == null)
                 return null;
-            
-            XenServerUpdateAlert alert = new XenServerUpdateAlert(latestVersion);
+
+            var alert = new XenServerVersionAlert(latestVersion);
 
             foreach (IXenConnection xc in ConnectionsManager.XenConnectionsCopy)
             {
@@ -351,7 +351,7 @@ namespace XenAdmin.Core
             if (!AllowUpdates || !Properties.Settings.Default.AllowXenServerUpdates)
                 return;
 
-            var alert = NewXenServerUpdateAlert(XenServerVersions);
+            var alert = NewXenServerVersionAlert(XenServerVersions);
             if (alert == null)
                 return;
 
@@ -360,7 +360,7 @@ namespace XenAdmin.Core
             if (existingAlert != null && alert.CanIgnore)
                 RemoveUpdate(existingAlert);
             else if (existingAlert != null)
-                ((XenServerUpdateAlert)existingAlert).CopyConnectionsAndHosts(alert);
+                ((XenServerVersionAlert)existingAlert).CopyConnectionsAndHosts(alert);
             else if (!alert.CanIgnore)
                 AddUpate(alert);
         }

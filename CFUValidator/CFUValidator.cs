@@ -118,7 +118,7 @@ namespace CFUValidator
             var xcupdateAlert = XenAdmin.Core.Updates.NewXenCenterUpdateAlert(xenCenterVersions, new Version(ServerVersion));
 
             Status = "Determining XenServer update required...";
-            var updateAlert = XenAdmin.Core.Updates.NewXenServerUpdateAlert(xenServerVersions);
+            var updateAlert = XenAdmin.Core.Updates.NewXenServerVersionAlert(xenServerVersions);
 
             Status = "Determining patches required...";
             var patchAlerts = XenAdmin.Core.Updates.NewXenServerPatchAlerts(xenServerVersions, xenServerPatches);
@@ -196,7 +196,7 @@ namespace CFUValidator
         }
 
         private void GeneratePatchSummary(List<XenServerPatchAlert> alerts, List<AlertFeatureValidator> validators,
-                                          XenServerUpdateAlert updateAlert, XenCenterUpdateAlert xcupdateAlert)
+                                          XenServerVersionAlert updateAlert, XenCenterUpdateAlert xcupdateAlert)
         {
             OuputComponent oc = new OutputTextOuputComponent(XmlLocation, ServerVersion);
             XenCenterUpdateDecorator xcud = new XenCenterUpdateDecorator(oc, xcupdateAlert);

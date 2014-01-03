@@ -118,7 +118,7 @@
     <Compile Include="Alerts\Types\GuiOldAlert.cs" />
     <Compile Include="Alerts\Types\MessageAlert.cs" />
     <Compile Include="Alerts\Types\XenServerPatchAlert.cs" />
-    <Compile Include="Alerts\Types\XenServerUpdateAlert.cs" />
+    <Compile Include="Alerts\Types\XenServerVersionAlert.cs" />
     <Compile Include="Commands\Controls\EditPropertiesToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>

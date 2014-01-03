@@ -39,11 +39,11 @@ namespace CFUValidator.OutputDecorators
 {
     class XenServerUpdateDecorator : Decorator
     {
-        private readonly XenServerUpdateAlert alert;
+        private readonly XenServerVersionAlert alert;
         private const string header = "XenServer updates required:";
         private const string updateNotFound = "XenServer update could not be found";
 
-        public XenServerUpdateDecorator(OuputComponent ouputComponent, XenServerUpdateAlert alert)
+        public XenServerUpdateDecorator(OuputComponent ouputComponent, XenServerVersionAlert alert)
         {
             SetComponent(ouputComponent);
             this.alert = alert;

@@ -53,7 +53,7 @@ namespace XenAdminTests.UnitTests.AlertTests
         public void TestAlertWithConnectionAndHosts()
         {
             XenServerVersion ver = new XenServerVersion("1.2.3", "name", true, "http://url", new List<XenServerPatch>(), new DateTime(2011,4,1).ToString(), "123");
-            XenServerUpdateAlert alert = new XenServerUpdateAlert(ver);
+            var alert = new XenServerVersionAlert(ver);
             alert.IncludeConnection(connA.Object);
             alert.IncludeConnection(connB.Object);
             alert.IncludeHosts(new List<Host>() { hostA.Object, hostB.Object });
@@ -81,8 +81,8 @@ namespace XenAdminTests.UnitTests.AlertTests
         public void TestAlertWithHostsAndNoConnection()
         {
             XenServerVersion ver = new XenServerVersion("1.2.3", "name", true, "http://url", new List<XenServerPatch>(), new DateTime(2011, 4, 1).ToString(), "123");
-            XenServerUpdateAlert alert = new XenServerUpdateAlert(ver);
-            alert.IncludeHosts(new List<Host>() { hostA.Object, hostB.Object });
+            var alert = new XenServerVersionAlert(ver);
+            alert.IncludeHosts(new List<Host> { hostA.Object, hostB.Object });
 
             IUnitTestVerifier validator = new VerifyGetters(alert);
 
@@ -107,7 +107,7 @@ namespace XenAdminTests.UnitTests.AlertTests
         public void TestAlertWithConnectionAndNoHosts()
         {
             XenServerVersion ver = new XenServerVersion("1.2.3", "name", true, "http://url", new List<XenServerPatch>(), new DateTime(2011, 4, 1).ToString(), "123");
-            XenServerUpdateAlert alert = new XenServerUpdateAlert(ver);
+            var alert = new XenServerVersionAlert(ver);
             alert.IncludeConnection(connA.Object);
             alert.IncludeConnection(connB.Object);
 
@@ -134,7 +134,7 @@ namespace XenAdminTests.UnitTests.AlertTests
         public void TestAlertWithNoConnectionAndNoHosts()
         {
             XenServerVersion ver = new XenServerVersion("1.2.3", "name", true, "http://url", new List<XenServerPatch>(), new DateTime(2011, 4, 1).ToString(), "123");
-            XenServerUpdateAlert alert = new XenServerUpdateAlert(ver);
+            var alert = new XenServerVersionAlert(ver);
 
             IUnitTestVerifier validator = new VerifyGetters(alert);
 
@@ -158,7 +158,7 @@ namespace XenAdminTests.UnitTests.AlertTests
         [Test, ExpectedException(typeof(NullReferenceException))]
         public void TestAlertWithNullVersion()
         {
-            XenServerUpdateAlert alert = new XenServerUpdateAlert(null);
+            var alert = new XenServerVersionAlert(null);
         }
 
         private void VerifyConnExpectations(Func<Times> times)
