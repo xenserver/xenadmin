@@ -2666,7 +2666,6 @@
     <Compile Include="Controls\Wlb\WlbReportView.Designer.cs">
       <DependentUpon>WlbReportView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\EventArgs.cs" />
     <Compile Include="Core\HelpersGUI.cs" />
     <Compile Include="Dialogs\AddStorageLinkSystemDialog.cs">
       <SubType>Form</SubType>
