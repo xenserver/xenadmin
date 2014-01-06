@@ -47,6 +47,10 @@ namespace XenOvf
 {
     public partial class OVF
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog auditLog = log4net.LogManager.GetLogger("Audit");
+        private static readonly log4net.ILog traceLog = log4net.LogManager.GetLogger("Trace");
+
         /// <summary>
         /// Event Registration of changes in Ovf state.
         /// </summary>
@@ -83,8 +87,8 @@ namespace XenOvf
         public OVF()
         {
             UnLoad();
-            Log.Info("XenOvf.Message.resources {0}", Messages.RESOURCES_LOADED);
-            Log.Info("XenOvf.Content.resources {0}", Messages.RESOURCES_LOADED);
+            log.InfoFormat("XenOvf.Message.resources {0}", Messages.RESOURCES_LOADED);
+            log.InfoFormat("XenOvf.Content.resources {0}", Messages.RESOURCES_LOADED);
         }
         #endregion
 
@@ -141,10 +145,15 @@ namespace XenOvf
         /// <param name="filename"></param>
         public static void SaveAs(string OvfXml, string filename)
         {
-            Log.Debug("OVF.SaveAs: {0}", filename);
-            if (OvfXml == null || filename == null)
+            log.DebugFormat("OVF.SaveAs: {0}", filename);
+            if (OvfXml == null)
             {
-                Log.Error("SaveAs::NULL input cannot save OvfXml[{0}] Filename[{1}]", (OvfXml == null) ? "NULL" : "OK", (filename == null) ? "NULL" : "OK");
+                log.Error("SaveAs: cannot save NULL string OvfXml");
+                throw new ArgumentNullException();
+            }
+            if (filename == null)
+            {
+                log.Error("SaveAs: cannot save OvfXml. Filename was NULL");
                 throw new ArgumentNullException();
             }
 
@@ -162,7 +171,7 @@ namespace XenOvf
             }
             catch (Exception ex)
             {
-                Log.Error("File handling error. {0}", ex.Message);
+                log.ErrorFormat("File handling error. {0}", ex.Message);
             }
             FileStream fs = null;
             StreamWriter sw = null;
@@ -175,8 +184,8 @@ namespace XenOvf
             }
             catch (Exception ex)
             {
-                Log.Error("SaveAs FAILED: {0} with {1}", filename, ex.Message);
-                throw ex;
+                log.ErrorFormat("SaveAs FAILED: {0} with {1}", filename, ex.Message);
+                throw;
             }
             finally
             {
@@ -184,7 +193,7 @@ namespace XenOvf
                 if (fs != null) fs.Close();
             }
             if (File.Exists(oldfile)) { File.Delete(oldfile); }
-            Log.Debug("OVF.SaveAs completed");
+            log.Debug("OVF.SaveAs completed");
         }
         #endregion
 
@@ -264,12 +273,12 @@ namespace XenOvf
             {
                 if (File.Exists(findfile))
                 {
-                    Log.Info("File: OVF: {0} found file with (.{1}) extension", filename, extension);
+                    log.InfoFormat("File: OVF: {0} found file with (.{1}) extension", filename, extension);
                     foundfile = true;
                 }
                 else
                 {
-                    Log.Info("File: OVF: {0} did not find file with (.{1}) extension", filename, extension);
+                    log.InfoFormat("File: OVF: {0} did not find file with (.{1}) extension", filename, extension);
                     foundfile = false;
                 }
             }
@@ -287,7 +296,7 @@ namespace XenOvf
                 {
                     if (ext.ToLower().EndsWith("gz") || ext.ToLower().EndsWith("bz2"))  // need to decompress.
                     {
-                        Log.Info("OVA is compressed, de-compression stream inserted");
+                        log.Info("OVA is compressed, de-compression stream inserted");
                         string ovaext = Path.GetExtension(ovfname);
                         if (ovaext.ToLower().EndsWith("ova"))
                         {
@@ -333,10 +342,10 @@ namespace XenOvf
                     while(tar.HasNext())
                     {
                         string ovaext = Path.GetExtension(tar.CurrentFileName());
-                        Log.Debug("OVA: File: {0}", tar.CurrentFileName());
+                        log.DebugFormat("OVA: File: {0}", tar.CurrentFileName());
                         if (tar.CurrentFileName() != null && ovaext.ToLower().Contains(extension.ToLower()))
                         {
-                            Log.Info("OVF: File: {0} found file with (.{1}) extension", tar.CurrentFileName(), extension);
+                            log.InfoFormat("OVF: File: {0} found file with (.{1}) extension", tar.CurrentFileName(), extension);
                             foundfile = true;
                             break;
                         }
@@ -352,7 +361,7 @@ namespace XenOvf
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("OVA search FAILED with {0}", ex.Message);
+                    log.ErrorFormat("OVA search FAILED with {0}", ex.Message);
                     throw;
                 }
                 finally
@@ -365,7 +374,7 @@ namespace XenOvf
             }
             else
             {
-                Log.Info("Unknown extension {0}", ext);
+                log.InfoFormat("Unknown extension {0}", ext);
                 foundfile = false;
             }
             return foundfile;
@@ -460,7 +469,7 @@ namespace XenOvf
 
             AddRasdToAllVHS(ovfObj, vsId, rasd);
 
-            Log.Debug("OVF.AddCDDrive completed");
+            log.Debug("OVF.AddCDDrive completed");
             return rasd.InstanceID.Value;
         }
         /// <summary>
@@ -495,7 +504,7 @@ namespace XenOvf
                 AddControllerToVHS(vhs, lang, type, deviceId, iteration);
             }
 
-            Log.Debug("OVF.AddController completed");
+            log.Debug("OVF.AddController completed");
         }
         /// <summary>
         /// Add a controller to the mix.
@@ -555,7 +564,7 @@ namespace XenOvf
 
             vhs.Item = rasds.ToArray();
 
-            Log.Debug("OVF.AddController completed");
+            log.Debug("OVF.AddController completed");
         }
         /// <summary>
         /// 
@@ -666,7 +675,7 @@ namespace XenOvf
                     }
                 }
             }
-            Log.Debug("OVF.AddDeviceToController completed");
+            log.Debug("OVF.AddDeviceToController completed");
             return;
         }
         /// <summary>
@@ -797,7 +806,7 @@ namespace XenOvf
 
             ovfEnv.Sections = sections.ToArray();
             ovfEnv.References.File = files.ToArray();
-            Log.Debug("OVF.AddDisk completed");
+            log.Debug("OVF.AddDisk completed");
         }
         /// <summary>
         /// 
@@ -1095,7 +1104,7 @@ namespace XenOvf
             netsection.Network = ns.ToArray();
             sections.Add(netsection);
             ovfEnv.Sections = sections.ToArray();
-            Log.Debug("OVF.AddNetwork completed");
+            log.Debug("OVF.AddNetwork completed");
         }
         /// <summary>
         /// 
@@ -1171,7 +1180,7 @@ namespace XenOvf
                 throw new ArgumentNullException(Messages.FAILED_TO_ADD_OS_SECTION);
             }
             AddContent((VirtualSystemCollection_Type)ovfEnv.Item, vsId, oss);
-            Log.Debug("OVF.AddOperatingSystemSection completed {0}", vsId);
+            log.DebugFormat("OVF.AddOperatingSystemSection completed {0}", vsId);
         }
         /// <summary>
         /// 
@@ -1211,7 +1220,7 @@ namespace XenOvf
 
             if (vhs == null)
             {
-                Log.Warning("OVF.AddOtherSystemSettingData: could not find 'xen' or 'hvm' system type VHS, skipping.");
+                log.Warn("OVF.AddOtherSystemSettingData: could not find 'xen' or 'hvm' system type VHS, skipping.");
                 return null;
             }
 
@@ -1238,7 +1247,7 @@ namespace XenOvf
             xencfg.Add(xenother);
 
             vhs.VirtualSystemOtherConfigurationData = xencfg.ToArray();
-            Log.Debug("OVF.AddOtherSystemSettingData completed");
+            log.Debug("OVF.AddOtherSystemSettingData completed");
             return xenother.id;
         }
 
@@ -1457,7 +1466,7 @@ namespace XenOvf
             string elementname = _ovfrm.GetString("RASD_UNKNOWN_ELEMENTNAME");
             if (lRasd.ElementName != null && !string.IsNullOrEmpty(lRasd.ElementName.Value))
                 elementname = lRasd.ElementName.Value;
-            Log.Debug("OVF.AddRasd added: {0}:{1}", elementname, lRasd.InstanceID.Value);
+            log.DebugFormat("OVF.AddRasd added: {0}:{1}", elementname, lRasd.InstanceID.Value);
             return lRasd.InstanceID.Value;
         }
         /// <summary>
@@ -1586,7 +1595,7 @@ namespace XenOvf
 
 			sections.Add(startupSection);
 			env.Sections = sections.ToArray();
-			Log.Debug("OVF.AddStartupOptions completed");
+			log.Debug("OVF.AddStartupOptions completed");
 
 			return startupSection.Id;
         }
@@ -1685,7 +1694,7 @@ namespace XenOvf
                 throw new ArgumentNullException(Messages.FAILED_TO_ADD_VIRTUAL_HARDWARE_SECTION);
             }
             AddContent((VirtualSystemCollection_Type)ovfEnv.Item, vsId, vhs);
-            Log.Debug("OVF.AddVirtualHardwareSection completed {0}", vsId);
+            log.DebugFormat("OVF.AddVirtualHardwareSection completed {0}", vsId);
             return vhs.Id;
         }
         /// <summary>
@@ -1750,7 +1759,7 @@ namespace XenOvf
             AddVirtualSystem(ovfObj, vs);
             AddOperatingSystemSection(ovfObj, vs.id, lang, null, null);
 
-            Log.Debug("OVF.AddVirtualSystem(obj,lang,ovfname) completed");
+            log.Debug("OVF.AddVirtualSystem(obj,lang,ovfname) completed");
             return vs.id;
         }
         /// <summary>
@@ -1771,7 +1780,7 @@ namespace XenOvf
             }
             virtualsystems.Add(vs);
             ((VirtualSystemCollection_Type)ovfEnv.Item).Content = virtualsystems.ToArray();
-            Log.Debug("OVF.AddVirtualSystem(obj, vs)");
+            log.Debug("OVF.AddVirtualSystem(obj, vs)");
         }
         /// <summary>
         /// 
@@ -1819,7 +1828,7 @@ namespace XenOvf
             }
 
             vhs.System = vssd;
-            Log.Debug("OVF.AddVirtualSystemSettingData completed");
+            log.Debug("OVF.AddVirtualSystemSettingData completed");
         }
         #endregion
 
@@ -1882,7 +1891,7 @@ namespace XenOvf
             vscontent.id = Guid.NewGuid().ToString();
             vscontent.Content = null;
 
-            Log.Debug("OVF.CreateEnvelope {0} created {1}", ovfEnv.Name, ovfEnv.id);
+            log.DebugFormat("OVF.CreateEnvelope {0} created {1}", ovfEnv.Name, ovfEnv.id);
 
             return ovfEnv;
         }
@@ -1974,7 +1983,7 @@ namespace XenOvf
                     rasd.Connection[0].Value = sb.ToString();
                 }
             }
-            Log.Debug("OVF.RemoveConnectionInRASD completed {0}", vsId);
+            log.DebugFormat("OVF.RemoveConnectionInRASD completed {0}", vsId);
             return rasd;
         }
         /// <summary>
@@ -2288,13 +2297,13 @@ namespace XenOvf
                             string elementname = _ovfrm.GetString("RASD_UNKNOWN_ELEMENTNAME");
                             if (!string.IsNullOrEmpty(_rasd.ElementName.Value))
                                 elementname = _rasd.ElementName.Value;
-                            Log.Debug("OVF.RemoveRasd deleted: {0}:{1}", elementname, _rasd.InstanceID.Value);
+                            log.DebugFormat("OVF.RemoveRasd deleted: {0}:{1}", elementname, _rasd.InstanceID.Value);
                         }
                     }
                 }
                 vhs.Item = rasds.ToArray();
             }
-            Log.Debug("OVF.RemoveRasd completed");
+            log.Debug("OVF.RemoveRasd completed");
         }
         /// <summary>
         /// 
@@ -2464,7 +2473,7 @@ namespace XenOvf
                     }
                 }
             }
-            Log.Trace("UpdateAnnotation Exit");
+           traceLog.Debug("UpdateAnnotation Exit");
         }
         /// <summary>
         /// Add a CD/DVD Drive
@@ -2513,7 +2522,7 @@ namespace XenOvf
                 rasd.Description = new cimString(description);
             }
 
-            Log.Debug("OVF.UpdateCDROM Exit");
+            log.Debug("OVF.UpdateCDROM Exit");
         }
         /// <summary>
         /// Add a controller to the mix.
@@ -2560,7 +2569,7 @@ namespace XenOvf
                 rasd.Address.Value = Convert.ToString(iteration);
             }
 
-            Log.Debug("OVF.UpdateController exit");
+            log.Debug("OVF.UpdateController exit");
         }
         /// <summary>
         /// Update a defined Deployment Option
@@ -2667,7 +2676,7 @@ namespace XenOvf
                         {
                             if (_rasd.ResourceType.Value == 15 || _rasd.ResourceType.Value == 16)
                             {
-                                Log.Info("Found CD in connection, skipped");
+                                log.Info("Found CD in connection, skipped");
                                 break;
                             }
                             rasdList.Add(_rasd);
@@ -2741,7 +2750,7 @@ namespace XenOvf
                 disk.populatedSizeSpecified = true;
             }
             file.href = string.Format(Properties.Settings.Default.FileURI, vhdFileName);
-            Log.Debug("OVF.UpdateDisk.1 completed");
+            log.Debug("OVF.UpdateDisk.1 completed");
         }
         /// <summary>
         /// Update a EULA to the OVF
@@ -2800,7 +2809,7 @@ namespace XenOvf
             PropertyInfo p = targetobj.GetType().GetProperty(fieldname);
             if (p == null)
             {
-                Log.Error("PROPERTY: {0}.{1} does not exist", targetobj.GetType().Name, fieldname);
+                log.ErrorFormat("PROPERTY: {0}.{1} does not exist", targetobj.GetType().Name, fieldname);
             }
             else
             {
@@ -2841,10 +2850,10 @@ namespace XenOvf
                 }
                 else
                 {
-                    Log.Error("{0} has no set method, read only", p.Name);
+                    log.ErrorFormat("{0} has no set method, read only", p.Name);
                 }
             }
-            Log.Debug("OVF.UpdateField completed {0}", fieldname);
+            log.DebugFormat("OVF.UpdateField completed {0}", fieldname);
         }
         /// <summary>
         /// Update DISK information by RASD InstanceID
@@ -2867,12 +2876,12 @@ namespace XenOvf
             }
             else
             {
-                Log.Error("Cannot replace {0} with {1} because OVF does not contain a References Section.", oldfilename, newfilename);
+                log.ErrorFormat("Cannot replace {0} with {1} because OVF does not contain a References Section.", oldfilename, newfilename);
                 throw new ArgumentException(Messages.OVF_REFERENCE_SECTION_MISSING);
             }
             #endregion
 
-            Log.Debug("OVF.UpdateFilename completed");
+            log.Debug("OVF.UpdateFilename completed");
         }
         /// <summary>
         /// 
@@ -2925,7 +2934,7 @@ namespace XenOvf
             }
             #endregion
 
-            Log.Debug("OVF.UpdateFileSize completed");
+            log.Debug("OVF.UpdateFileSize completed");
         }
         /// <summary>
         /// The InstallSection indicates that the virtual machine needs to be booted once in order to install and or configure the guest software.
@@ -3009,7 +3018,7 @@ namespace XenOvf
                     rasd.Address = null;
                 }
             }
-            Log.Debug("OVF.UpdateNetwork completed");
+            log.Debug("OVF.UpdateNetwork completed");
         }
         /// <summary>
         /// Update the Operating System Section
@@ -3403,7 +3412,7 @@ namespace XenOvf
                     }
                 }
             }
-            Log.Debug("OVF.UpdateResourceAllocationSettingData completed");
+            log.Debug("OVF.UpdateResourceAllocationSettingData completed");
         }
         /// <summary>
         /// Startup Section wrapper.
@@ -3539,7 +3548,7 @@ namespace XenOvf
             }
             else
             {
-                Log.Info("No String Section, operation skipped");
+                log.Info("No String Section, operation skipped");
                 return message;
             }
             if (currentLanguage == null)
@@ -3605,7 +3614,7 @@ namespace XenOvf
             {
                 vs.Name = new Msg_Type[1] { new Msg_Type(AddToStringSection(ovfObj, lang, name), name) };
             }
-            Log.Debug("OVF.UpdateVirtualSystem completed");
+            log.Debug("OVF.UpdateVirtualSystem completed");
         }
         /// <summary>
         /// Update the name field, over write[0] if present add if not.
@@ -3669,7 +3678,7 @@ namespace XenOvf
                 }
                 UpdateField(vhs.System, fieldname, value);
             }
-            Log.Debug("OVF.UpdateResourceAllocationSettingData completed");
+            log.Debug("OVF.UpdateResourceAllocationSettingData completed");
         }
         /// <summary>
         /// 
@@ -3688,7 +3697,7 @@ namespace XenOvf
                 vhs.System.InstanceID = new cimString(Guid.NewGuid().ToString());
             }
             UpdateField(vhs.System, fieldname, value);
-            Log.Debug("OVF.UpdateResourceAllocationSettingData completed");
+            log.Debug("OVF.UpdateResourceAllocationSettingData completed");
         }
         #endregion
 
@@ -3859,7 +3868,7 @@ namespace XenOvf
                     }
                 }
             }
-            Log.Debug("OVF.FindDiskRasds completed, {0} found", diskRasds.Count);
+            log.DebugFormat("OVF.FindDiskRasds completed, {0} found", diskRasds.Count);
             return diskRasds.ToArray();
         }
         /// <summary>
@@ -3886,7 +3895,7 @@ namespace XenOvf
                     returnRasds.AddRange(FindRasdByType(item, resourceType));
                 }
             }
-            Log.Debug("OVF.FindRasdByType completed");
+            log.Debug("OVF.FindRasdByType completed");
             return returnRasds.ToArray();
         }
         /// <summary>
@@ -3910,7 +3919,7 @@ namespace XenOvf
                     rasds.Add(_rasd);
                 }
             }
-            Log.Debug("OVF.FindRasdByType completed, {0} found", rasds.Count);
+            log.DebugFormat("OVF.FindRasdByType completed, {0} found", rasds.Count);
             return rasds.ToArray();
         }
         /// <summary>
@@ -3939,7 +3948,7 @@ namespace XenOvf
                     break;
             }
 
-            Log.Debug("OVF.FindRasdById completed");
+            log.Debug("OVF.FindRasdById completed");
             return returnRasd;
         }
         /// <summary>
@@ -3959,11 +3968,11 @@ namespace XenOvf
             {
                 if (_rasd.InstanceID.Value.Equals(instanceId))
                 {
-                    Log.Debug("OVF.FindRasdById completed, found");
+                    log.Debug("OVF.FindRasdById completed, found");
                     return _rasd;
                 }
             }
-            Log.Debug("OVF.FindRasdById completed, not found");
+            log.Debug("OVF.FindRasdById completed, not found");
             return null;
         }
         /// <summary>
@@ -4207,7 +4216,7 @@ namespace XenOvf
             {
                 systemIds.Add(vSystem.id);
             }
-            Log.Debug("OVF.FindSystemIds completed, {0} found", systemIds.Count);
+            log.DebugFormat("OVF.FindSystemIds completed, {0} found", systemIds.Count);
             return systemIds.ToArray();
         }
         /// <summary>
@@ -4573,7 +4582,7 @@ namespace XenOvf
                                             }
                                         }
 
-                                        Log.Debug("OVF.FindSizes: Id {0} Size {1} Type {2}", diskDetails.DriveId, diskDetails.CapacitySize, (diskDetails.DiskType == 0) ? "HDD" : "CD/DVD/Other");
+                                        log.DebugFormat("OVF.FindSizes: Id {0} Size {1} Type {2}", diskDetails.DriveId, diskDetails.CapacitySize, (diskDetails.DiskType == 0) ? "HDD" : "CD/DVD/Other");
                                         di.Add(diskDetails);
                                         AtVDI = false;
                                     }
@@ -4615,7 +4624,7 @@ namespace XenOvf
                 }
             }
             mappings.Clear();
-            Log.Debug("OVF.FindSizes completed");
+            log.Debug("OVF.FindSizes completed");
             return di.ToArray();
         }
         /// <summary>
@@ -4789,7 +4798,7 @@ namespace XenOvf
                 }
             }
 
-            Log.Debug("OVF.FindVirtualHardwareSection {0} found.", vhs.Count);
+            log.DebugFormat("OVF.FindVirtualHardwareSection {0} found.", vhs.Count);
             return vhs.ToArray();
         }
         /// <summary>
@@ -4827,7 +4836,7 @@ namespace XenOvf
                 }
             }
 
-            Log.Debug("OVF.FindVirtualHardwareSection completed {0} ", vsId);
+            log.DebugFormat("OVF.FindVirtualHardwareSection completed {0} ", vsId);
             return vhs;
         }
         /// <summary>
@@ -4853,15 +4862,15 @@ namespace XenOvf
                 if (_vhs.System == null)
                 {
                     vhs = _vhs;
-                    Log.Info("Import.Process: Found an Unknown Virtual Hardware Section (Rating: 5) [Unknown]");
-                    Log.Info("Import.Process: Results may vary depending on hard disk image format.");
+                    log.Info("Import.Process: Found an Unknown Virtual Hardware Section (Rating: 5) [Unknown]");
+                    log.Info("Import.Process: Results may vary depending on hard disk image format.");
                     priority = 5;
                 }
                 else if (_vhs.System.VirtualSystemType.Value.ToLower().StartsWith(typeAffinity))
                 {
                     vhs = _vhs;
                     priority = 0;
-                    Log.Info("Import.Process: Found closest affinity Virtual Hardware Section (Rating: 0) [{0}]", _vhs.System.VirtualSystemType.Value);
+                    log.InfoFormat("Import.Process: Found closest affinity Virtual Hardware Section (Rating: 0) [{0}]", _vhs.System.VirtualSystemType.Value);
                     break;
                 }
                 else if (_vhs.System.VirtualSystemType.Value.ToLower().StartsWith("xen") ||
@@ -4871,7 +4880,7 @@ namespace XenOvf
                     {
                         vhs = _vhs;
                         priority = 1;
-                        Log.Info("Import.Process: Found a XEN PV'd Virtual Hardware Section (Rating: 1) [{0}]", _vhs.System.VirtualSystemType.Value);
+                        log.InfoFormat("Import.Process: Found a XEN PV'd Virtual Hardware Section (Rating: 1) [{0}]", _vhs.System.VirtualSystemType.Value);
                     }
                 }
                 else if (_vhs.System.VirtualSystemType.Value.ToLower().StartsWith("hvm") ||
@@ -4881,7 +4890,7 @@ namespace XenOvf
                     {
                         vhs = _vhs;
                         priority = 2;
-                        Log.Info("Import.Process: Found a XEN Non-PV'd Virtual Hardware Section (Rating: 2) [{0}]", _vhs.System.VirtualSystemType.Value);
+                        log.InfoFormat("Import.Process: Found a XEN Non-PV'd Virtual Hardware Section (Rating: 2) [{0}]", _vhs.System.VirtualSystemType.Value);
                     }
                 }
                 else if (_vhs.System.VirtualSystemType.Value.ToLower().StartsWith("301"))
@@ -4891,7 +4900,7 @@ namespace XenOvf
                         vhs = _vhs;
                         priority = 3;
                     }
-                    Log.Info("Import.Process: Found a Microsoft Virtual Hardware Section (Rating: 3) [{0}]", _vhs.System.VirtualSystemType.Value);
+                    log.InfoFormat("Import.Process: Found a Microsoft Virtual Hardware Section (Rating: 3) [{0}]", _vhs.System.VirtualSystemType.Value);
                 }
                 else if (_vhs.System.VirtualSystemType.Value.ToLower().StartsWith("vmx"))
                 {
@@ -4899,7 +4908,7 @@ namespace XenOvf
                     {
                         vhs = _vhs;
                         priority = 4;
-                        Log.Info("Import.Process: Found a VMWare Virtual Hardware Section (Rating: 4) [{0}]", _vhs.System.VirtualSystemType.Value);
+                        log.InfoFormat("Import.Process: Found a VMWare Virtual Hardware Section (Rating: 4) [{0}]", _vhs.System.VirtualSystemType.Value);
                     }
                 }
                 else
@@ -4907,8 +4916,8 @@ namespace XenOvf
                     if (priority >= 5)
                     {
                         vhs = _vhs;
-                        Log.Info("Import.Process: Found an Unknown Virtual Hardware Section (Rating: 5) [{0}]", _vhs.System.VirtualSystemType.Value);
-                        Log.Info("Import.Process: Results may vary depending on hard disk image format.");
+                        log.InfoFormat("Import.Process: Found an Unknown Virtual Hardware Section (Rating: 5) [{0}]", _vhs.System.VirtualSystemType.Value);
+                        log.InfoFormat("Import.Process: Results may vary depending on hard disk image format.");
                         priority = 5;
                     }
                 }
@@ -4917,7 +4926,7 @@ namespace XenOvf
 
             if (vhs == null)
             {
-                Log.Error("Import.Process: No VirtualHardwareSection_Type Exists");
+                log.Error("Import.Process: No VirtualHardwareSection_Type Exists");
                 throw new InvalidDataException(Messages.OVF_VHS_MISSING);
             }
             return vhs;
@@ -4975,7 +4984,7 @@ namespace XenOvf
 
                 vhs.Item = rasds.ToArray();
             }
-            Log.Debug("OVF.SetCPUs completed");
+            log.Debug("OVF.SetCPUs completed");
         }
         /// <summary>
         /// Set Memory Setting Information
@@ -5039,7 +5048,7 @@ namespace XenOvf
 
                 vhs.Item = rasds.ToArray();
             }
-            Log.Debug("OVF.SetMemory completed");
+            log.Debug("OVF.SetMemory completed");
         }
         /// <summary>
         /// Helper to set the target userdevice to connect the resources.
@@ -5055,7 +5064,7 @@ namespace XenOvf
             if (nbr < 0 || nbr > 15)
             {
                 var message = string.Format(Messages.OVF_DEVICE_OUT_OF_RANGE, device);
-                Log.Error(message);
+                log.Error(message);
                 throw new ArgumentOutOfRangeException(message);
             }
 
@@ -5066,7 +5075,7 @@ namespace XenOvf
             }
             rasd.AddressOnParent.Value = device;
 
-            Log.Debug("OVF.SetTargetDeviceInRASD completed {0} device {1}", vsId, device);
+            log.DebugFormat("OVF.SetTargetDeviceInRASD completed {0} device {1}", vsId, device);
         }
         /// <summary>
         /// Helper to add an ISO into the Envelope
@@ -5078,7 +5087,7 @@ namespace XenOvf
 		public static void SetTargetISOSRInRASD(EnvelopeType ovfObj, string vsId, string rasdId, string sruuid)
         {
             SetConnectionInRASD(ovfObj, vsId, rasdId, Properties.Settings.Default.xenSRKey, sruuid);
-            Log.Debug("OVF.SetTargetISOSRInRASD completed {0}", vsId);
+            log.DebugFormat("OVF.SetTargetISOSRInRASD completed {0}", vsId);
         }
         /// <summary>
         /// Helper to set the destination Storage Repository for the VM drives.
@@ -5090,7 +5099,7 @@ namespace XenOvf
 		public static void SetTargetSRInRASD(EnvelopeType ovfObj, string vsId, string rasdId, string sruuid)
         {
             SetConnectionInRASD(ovfObj, vsId, rasdId, Properties.Settings.Default.xenSRKey, sruuid);
-            Log.Debug("OVF.SetTargetSRInRASD completed {0}", vsId);
+            log.DebugFormat("OVF.SetTargetSRInRASD completed {0}", vsId);
         }
 
         /// <summary>
@@ -5103,7 +5112,7 @@ namespace XenOvf
         public static void SetTargetVDIInRASD(EnvelopeType ovfObj, string vsId, string rasdId, string vdiuuid)
         {
             SetConnectionInRASD(ovfObj, vsId, rasdId, Properties.Settings.Default.xenVDIKey, vdiuuid);
-            Log.Debug("OVF.SetTargetVDIInRASD completed {0}", vsId);
+            log.DebugFormat("OVF.SetTargetVDIInRASD completed {0}", vsId);
         }
 
         /// <summary>
@@ -5116,7 +5125,7 @@ namespace XenOvf
 		public static void SetTargetNetworkInRASD(EnvelopeType ovfObj, string vsId, string rasdId, string netuuid)
         {
             SetConnectionInRASD(ovfObj, vsId, rasdId, Properties.Settings.Default.xenNetworkKey, netuuid);
-            Log.Debug("OVF.SetTargetNetworkInRASD completed {0}", vsId);
+            log.DebugFormat("OVF.SetTargetNetworkInRASD completed {0}", vsId);
         }
         /// <summary>
         /// Add information to the RASD.Connection[0].Value,  This field is used to define
@@ -5162,7 +5171,7 @@ namespace XenOvf
             {
                 rasd.Connection = new cimString[] { new cimString(string.Format("{0}{1}", prompt, uuid)) };
             }
-            Log.Debug("OVF.SetConnectionInRASD completed {0}", vsId);
+            log.DebugFormat("OVF.SetConnectionInRASD completed {0}", vsId);
             return rasd;
         }
         /// <summary>
@@ -5244,7 +5253,7 @@ namespace XenOvf
                         {
                             ident = vhs.System.InstanceID.Value;
                         }
-                        Log.Info("Booting a Paravirtualized disk to CDROM is not valid, skipping: {0}", ident);
+                        log.InfoFormat("Booting a Paravirtualized disk to CDROM is not valid, skipping: {0}", ident);
                         continue;
                     }
                 }
@@ -5286,7 +5295,7 @@ namespace XenOvf
                 }
                 else
                 {
-                    Log.Warning("SetRunOnceBootCDROM: Missing ISO: {0} find and copy to: {1}", srcFile, destFile);
+                    log.WarnFormat("SetRunOnceBootCDROM: Missing ISO: {0} find and copy to: {1}", srcFile, destFile);
                 }
             }
             return cdId;
@@ -5355,7 +5364,7 @@ namespace XenOvf
         {
             _processId = System.Diagnostics.Process.GetCurrentProcess().Id;
             _touchFile = Path.Combine(pathToOva, "xen__" + _processId);
-            Log.Info("OVF.OpenOva: TouchFile: {0}", _touchFile);
+            log.InfoFormat("OVF.OpenOva: TouchFile: {0}", _touchFile);
             if (!File.Exists(_touchFile))
             {
                 FileStream fs = File.Create(_touchFile); fs.Close();
@@ -5373,7 +5382,7 @@ namespace XenOvf
                 {
                     if (ext.ToLower().EndsWith("gz") || ext.ToLower().EndsWith("bz2"))  // need to decompress.
                     {
-                        Log.Info("OVA is compressed, de-compression stream inserted");
+                        log.Info("OVA is compressed, de-compression stream inserted");
                         ovafilename = string.Format(@"{0}", Path.GetFileNameWithoutExtension(ovaFileName));
                         string ovaext = Path.GetExtension(ovafilename);
                         if (ovaext.ToLower().EndsWith("ova"))
@@ -5411,8 +5420,8 @@ namespace XenOvf
                         inputStream.Close();
                         inputStream = null;
                     }
-                    Log.Error("OVF.OpenOva: open failure {0}", ex.Message);
-                    throw ex;
+                    log.ErrorFormat("OVF.OpenOva: open failure {0}", ex.Message);
+                    throw;
                 }
                 #endregion
 
@@ -5425,7 +5434,7 @@ namespace XenOvf
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("OVF.OpenOva: Exception: {0}", ex.Message);
+                    log.ErrorFormat("OVF.OpenOva: Exception: {0}", ex.Message);
                 }
                 finally
                 {
@@ -5445,14 +5454,14 @@ namespace XenOvf
                         inputStream = null;
                     }
                     Directory.SetCurrentDirectory(origDir);
-                    Log.Debug("OVF.OpenOva: Finally block");
+                    log.Debug("OVF.OpenOva: Finally block");
                 }
                 #endregion
-                Log.Debug("OVF.OpenOva completed");
+                log.Debug("OVF.OpenOva completed");
             }
             else
             {
-                Log.Info("OVF.OpenOva: Previously Opened, using extracted files.");
+                log.Info("OVF.OpenOva: Previously Opened, using extracted files.");
             }
         }
         /// <summary>
@@ -5473,7 +5482,7 @@ namespace XenOvf
 
 				if (ovapath.ToLower().EndsWith("gz") || ovapath.ToLower().EndsWith("bz2")) // need to decompress.
 				{
-					Log.Info("OVA is compressed, de-compression stream inserted");
+					log.Info("OVA is compressed, de-compression stream inserted");
 					string ovaext = Path.GetExtension(Path.GetFileNameWithoutExtension(ovapath));
 
 					if (ovaext.ToLower().EndsWith("ova"))
@@ -5583,7 +5592,7 @@ namespace XenOvf
 
             if (systems.Count <= 0)
             {
-                Log.Error("Finalize Envelope FAILED, no Virtual Systems Defined.");
+                log.Error("Finalize Envelope FAILED, no Virtual Systems Defined.");
                 return;
             }
 
@@ -5652,7 +5661,7 @@ namespace XenOvf
             {
                 ovfEnv.Item = (Content_Type)systems[0];
             }
-            Log.Debug("OVF.FinalizeEnvelope completed.");
+            log.Debug("OVF.FinalizeEnvelope completed.");
         }
         /// <summary>
         /// 
@@ -5995,12 +6004,12 @@ namespace XenOvf
             bool useHostResource = false;
             if (Tools.ValidateProperty("HostResource", rasd))
             {
-                Log.Debug("Using HostResource to find Disk");
+                log.Debug("Using HostResource to find Disk");
                 useHostResource = true;
             }
             else
             {
-                Log.Debug("Using InstanceID to find Disk");
+                log.Debug("Using InstanceID to find Disk");
             }
 
             foreach (VirtualDiskDesc_Type disk in disks)
@@ -6102,7 +6111,7 @@ namespace XenOvf
                     }
                 }
             }
-            Log.Debug("OVF.AddContent completed {0}", vsId);
+            log.DebugFormat("OVF.AddContent completed {0}", vsId);
         }
         private static void AddRasdToAllVHS(EnvelopeType ovfEnv, string vsId, RASD_Type rasd)
         {
@@ -6143,7 +6152,7 @@ namespace XenOvf
                 }
                 if (antecedent == null)
                 {
-                    Log.Trace("PCI Association not available, continuing.");
+                    traceLog.Debug("PCI Association not available, continuing.");
                     continue;
                 }
                 #endregion
@@ -6152,7 +6161,7 @@ namespace XenOvf
                     References.Add(mgtobj);
                 }
             }
-            Log.Debug("OVF.FindDeviceReferences completed {0} {1}", classname, deviceId);
+            log.DebugFormat("OVF.FindDeviceReferences completed {0} {1}", classname, deviceId);
             return References;
         }
         private bool IsBootDisk(string deviceID)
@@ -6178,7 +6187,7 @@ namespace XenOvf
                     }
                     if (_antecedent == null || _dependent == null)
                     {
-                        Log.Trace("Win32_DiskDriveToDiskPartition Association not available, continuing.");
+                        traceLog.Debug("Win32_DiskDriveToDiskPartition Association not available, continuing.");
                         continue;
                     }
                     #endregion
@@ -6203,7 +6212,7 @@ namespace XenOvf
                             }
                             if (_deviceid == null)
                             {
-                                Log.Trace("Win32_DiskPartition DeviceID not available, continuing.");
+                                traceLog.Debug("Win32_DiskPartition DeviceID not available, continuing.");
                                 continue;
                             }
                             #endregion
@@ -6217,9 +6226,9 @@ namespace XenOvf
             }
             catch (Exception ex)
             {
-                Log.Error("OVF.IsBootDisk failed, could not determine if bootable, {0}", ex.Message);
+                log.ErrorFormat("OVF.IsBootDisk failed, could not determine if bootable, {0}", ex.Message);
             }
-            Log.Debug("OVF.IsBootDisk completed Bootable = {0}", bootable);
+            log.DebugFormat("OVF.IsBootDisk completed Bootable = {0}", bootable);
             return bootable;
         }
         private bool FillEmptyRequiredFields(RASD_Type rasd)

@@ -153,13 +153,13 @@ namespace XenOvf
                     {
                         if (Properties.Settings.Default.useGZip)
                         {
-                            Log.Info("OVF.ConvertOVFtoOVA GZIP compression stream inserted");
+                            log.Info("OVF.ConvertOVFtoOVA GZIP compression stream inserted");
                             FileStream fsStream = new FileStream(ovafilename + ".gz", FileMode.CreateNew, FileAccess.Write, FileShare.None);
                             ovaStream = CompressionFactory.Writer(CompressionFactory.Type.Gz, fsStream);
                         }
                         else
                         {
-                            Log.Info("OVF.ConvertOVFtoOVA BZIP2 compression stream inserted");
+                            log.Info("OVF.ConvertOVFtoOVA BZIP2 compression stream inserted");
                             FileStream fsStream = new FileStream(ovafilename + ".bz2", FileMode.CreateNew, FileAccess.Write, FileShare.None);
                             ovaStream = CompressionFactory.Writer(CompressionFactory.Type.Bz2, fsStream);
                         }
@@ -178,7 +178,7 @@ namespace XenOvf
 
                         if (File.Exists(ovfFileName))
                         {
-                            Log.Info("OVF.ConvertOVFtoOVA: added file: {0}", ovfFileName);
+                            log.InfoFormat("OVF.ConvertOVFtoOVA: added file: {0}", ovfFileName);
                             AddFileToArchiveWriter(tar, ovfFileName);
                             if (cleanup) File.Delete(ovfFileName);
                         }
@@ -191,13 +191,13 @@ namespace XenOvf
                         if (File.Exists(manifestfile))
                         {
                             AddFileToArchiveWriter(tar, manifestfile);
-                            Log.Info("OVF.ConvertOVFtoOVA: added file: {0}", manifestfile);
+                            log.InfoFormat("OVF.ConvertOVFtoOVA: added file: {0}", manifestfile);
                             if (cleanup) File.Delete(manifestfile);
                             // Cannot exist with out manifest file.
                             if (File.Exists(signaturefile))
                             {
                                 AddFileToArchiveWriter(tar, signaturefile);
-                                Log.Info("OVF.ConvertOVFtoOVA: added file: {0}", signaturefile);
+                                log.InfoFormat("OVF.ConvertOVFtoOVA: added file: {0}", signaturefile);
                                 if (cleanup) File.Delete(signaturefile);
                             }
                         }
@@ -208,7 +208,7 @@ namespace XenOvf
                             foreach (File_Type file in filelist)
                             {
                                 AddFileToArchiveWriter(tar, file.href);
-                                Log.Info("OVF.ConvertOVFtoOVA: added file: {0}", file.href);
+                                log.InfoFormat("OVF.ConvertOVFtoOVA: added file: {0}", file.href);
                                 if (cleanup) File.Delete(file.href);
                             }
                         }
@@ -223,7 +223,7 @@ namespace XenOvf
             }
             catch (Exception ex)
             {
-                Log.Error("{0} {1}", Messages.CONVERSION_FAILED, ex.Message);
+                log.ErrorFormat("{0} {1}", Messages.CONVERSION_FAILED, ex.Message);
                 throw new Exception(Messages.CONVERSION_FAILED, ex);
             }
             finally
@@ -235,7 +235,7 @@ namespace XenOvf
                     File.Delete(_touchFile);
                 }
             }
-            Log.Debug("OVF.ConvertOVFtoOVA completed");
+            log.Debug("OVF.ConvertOVFtoOVA completed");
         }
 
         private static void AddFileToArchiveWriter(ArchiveWriter tar, string fileName)
@@ -288,7 +288,7 @@ namespace XenOvf
             }
             #endregion
 			FinalizeEnvelope(env);
-            Log.Debug("OVF.Create completed, {0}", ovfName);
+            log.DebugFormat("OVF.Create completed, {0}", ovfName);
 			return env;
         }
         /// <summary>
@@ -317,7 +317,7 @@ namespace XenOvf
             XenXva xenobj = Tools.DeserializeOvaXml(ovaxml);
             EnvelopeType env = ConvertFromXenOVA(xenobj, vhdExports, ovfFilePath, ovfName, lang);
             string xmlstring = Tools.Serialize(env, typeof(EnvelopeType), Tools.LoadNamespaces());
-            Log.Debug("OVF.ConvertXVAtoOVF completed");
+            log.Debug("OVF.ConvertXVAtoOVF completed");
             return xmlstring;
         }
         /// <summary>
@@ -438,7 +438,7 @@ namespace XenOvf
             {
                 EnvelopeType env = ConvertFromHyperVXml(hvobj, ovfName, lang);
                 xmlstring = Tools.Serialize(env, typeof(EnvelopeType), Tools.LoadNamespaces());
-                Log.Debug("XenOvf::ConvertHyperVtoOVF completed");
+                log.Debug("XenOvf::ConvertHyperVtoOVF completed");
             }
             else
             {
@@ -594,7 +594,7 @@ namespace XenOvf
                                         }
                                         else
                                         {
-                                            Log.Error("Could not find the details for disk, {0}", reference);
+                                            log.ErrorFormat("Could not find the details for disk, {0}", reference);
                                         }
                                         AtVDI = false;
                                     }
@@ -612,7 +612,7 @@ namespace XenOvf
                 }
             }
             FinalizeEnvelope(env);
-            Log.Debug("OVF.ConvertFromXenOVA completed {0}", ovfname);
+            log.DebugFormat("OVF.ConvertFromXenOVA completed {0}", ovfname);
             mappings.Clear();
             return env;
         }
@@ -673,7 +673,7 @@ namespace XenOvf
             }
 
             FinalizeEnvelope(env);
-            Log.Debug("OVF.ConvertFromXenOVAv1 completed {0}", ovfname);
+            log.DebugFormat("OVF.ConvertFromXenOVAv1 completed {0}", ovfname);
             mappings.Clear();
             return env;
         }
@@ -971,7 +971,7 @@ namespace XenOvf
             }
 
             FinalizeEnvelope(env);
-            Log.Debug("OVF.ConvertFromVPCXml completed {0}", ovfname);
+            log.DebugFormat("OVF.ConvertFromVPCXml completed {0}", ovfname);
             mappings.Clear();
             return env;
         }
@@ -1138,7 +1138,7 @@ namespace XenOvf
             AddOtherSystemSettingData(env, vsId, lang, "HVM_boot_params", Properties.Settings.Default.xenBootOrder, _ovfrm.GetString("XENSERVER_SPECIFIC_DESCRIPTION"));
             AddOtherSystemSettingData(env, vsId, lang, "platform", Properties.Settings.Default.xenPlatformSetting, _ovfrm.GetString("XENSERVER_PLATFORM_DESCRIPTION"));
             FinalizeEnvelope(env);
-            Log.Debug("OVF.ConvertFromVMXcfg completed {0}", ovfname);
+            log.DebugFormat("OVF.ConvertFromVMXcfg completed {0}", ovfname);
             mappings.Clear();
             return env;
         }
@@ -1265,7 +1265,7 @@ namespace XenOvf
                     }
                 }
             }
-            Log.Debug("OVF.TransformXvaOvf_VM completed {0}", vsId);
+            log.DebugFormat("OVF.TransformXvaOvf_VM completed {0}", vsId);
         }
         private void TransformXvaOvf_VBD(EnvelopeType env, string vsId, string lang, XenStruct vmstruct)
         {
@@ -1374,7 +1374,7 @@ namespace XenOvf
             {
                 AddCDROM(env, vsId, diskId, caption, description);
             }
-            Log.Debug("OVF.TransformXvaOvf_VBD completed {0}", vsId);
+            log.DebugFormat("OVF.TransformXvaOvf_VBD completed {0}", vsId);
         }
         private void TransformXvaOvf_VIF(EnvelopeType env, string vsId, string lang, XenStruct vmstruct)
         {
@@ -1420,7 +1420,7 @@ namespace XenOvf
                 }
             }
             AddNetwork(env, vsId, lang, vifuuid, null, mac);
-            Log.Debug("OVF.TransformXvaOvf_VIF completed {0}", vsId);
+            log.DebugFormat("OVF.TransformXvaOvf_VIF completed {0}", vsId);
         }
         private void TransformXvaOvf_Network(EnvelopeType env, string vsId, string lang, string refId, XenStruct vmstruct)
         {
@@ -1459,7 +1459,7 @@ namespace XenOvf
                     break;
                 }
             }
-            Log.Debug("OVF.TransformXvaOvf_Network completed {0}", vsId);
+            log.DebugFormat("OVF.TransformXvaOvf_Network completed {0}", vsId);
         }
         private void TransformXvaOvf_VDI(EnvelopeType env, string vsId, string lang, string refId, DiskInfo di, XenStruct vmstruct)
         {
@@ -1490,7 +1490,7 @@ namespace XenOvf
             }
             freespace = capacity - filesize;
             UpdateDisk(env, vsId, instanceId, description, vhdfilename, filesize, capacity, freespace);
-            Log.Debug("OVF.TransformXvaOvf_VDI completed {0}", vsId);
+            log.DebugFormat("OVF.TransformXvaOvf_VDI completed {0}", vsId);
         }
         private void TransformXvaOvf_SR(EnvelopeType env, string vsId, string lang, XenStruct vmstruct)
         {
@@ -1499,7 +1499,7 @@ namespace XenOvf
             // even if the VM is in this SR it may not exist in the target server therefore
             // it is not required in the OVF.
             //
-            Log.Debug("OVF.TransformXvaOvf_SR completed {0}", vsId);
+            log.DebugFormat("OVF.TransformXvaOvf_SR completed {0}", vsId);
         }
 
 
@@ -1530,11 +1530,11 @@ namespace XenOvf
                     Win32_ComputerSystem = mgtobj;  // only want one.
                     break;
                 }
-                Log.Debug("OVF.CollectionInformation {0}.{1}", "Win32_ComputerSystem", 1);
+                log.Debug("OVF.CollectionInformation Win32_ComputerSystem.1");
             }
             catch (Exception ex)
             {
-                Log.Warning("OVF.CollectionInformation: call to Win32_ComputerSystem failed. Exception: {0}", ex.Message);
+                log.WarnFormat("OVF.CollectionInformation: call to Win32_ComputerSystem failed. Exception: {0}", ex.Message);
             }
             finally
             {
@@ -1553,11 +1553,11 @@ namespace XenOvf
                     Win32_Processor.Add(mgtobj);  // only want one.
                     break;
                 }
-                Log.Debug("OVF.CollectionInformation {0}.{1}", "Win32_Processor", Win32_Processor.Count);
+                log.DebugFormat("OVF.CollectionInformation Win32_Processor.{0}", Win32_Processor.Count);
             }
             catch (Exception ex)
             {
-                Log.Warning("OVF.CollectionInformation: call to Win32_Processor failed. Exception: {0}", ex.Message);
+                log.WarnFormat("OVF.CollectionInformation: call to Win32_Processor failed. Exception: {0}", ex.Message);
             }
             finally
             {
@@ -1575,11 +1575,11 @@ namespace XenOvf
                 {
                     Win32_CDROMDrive.Add(mgtobj);
                 }
-                Log.Debug("OVF.CollectionInformation {0}.{1}", "Win32_CDROMDrive", Win32_CDROMDrive.Count);
+                log.DebugFormat("OVF.CollectionInformation Win32_CDROMDrive.{0}", Win32_CDROMDrive.Count);
             }
             catch (Exception ex)
             {
-                Log.Warning("OVF.CollectionInformation: call to Win32_CDROMDrive failed. Exception: {0}", ex.Message);
+                log.WarnFormat("OVF.CollectionInformation: call to Win32_CDROMDrive failed. Exception: {0}", ex.Message);
             }
             finally
             {
@@ -1597,11 +1597,11 @@ namespace XenOvf
                 {
                     Win32_DiskDrive.Add(mgtobj);
                 }
-                Log.Debug("OVF.CollectionInformation {0}.{1}", "Win32_DiskDrive", Win32_DiskDrive.Count);
+                log.DebugFormat("OVF.CollectionInformation Win32_DiskDrive.{0}", Win32_DiskDrive.Count);
             }
             catch (Exception ex)
             {
-                Log.Warning("OVF.CollectionInformation: call to Win32_CDROMDrive failed. Exception: {0}", ex.Message);
+                log.WarnFormat("OVF.CollectionInformation: call to Win32_CDROMDrive failed. Exception: {0}", ex.Message);
             }
             finally
             {
@@ -1619,11 +1619,11 @@ namespace XenOvf
                 {
                     Win32_NetworkAdapter.Add(mgtobj);
                 }
-                Log.Debug("OVF.CollectionInformation {0}.{1}", "Win32_NetworkAdapter", Win32_NetworkAdapter.Count);
+                log.DebugFormat("OVF.CollectionInformation Win32_NetworkAdapter.{0}", Win32_NetworkAdapter.Count);
             }
             catch (Exception ex)
             {
-                Log.Warning("OVF.CollectionInformation: call to Win32_NetworkAdapter failed. Exception: {0}", ex.Message);
+                log.WarnFormat("OVF.CollectionInformation: call to Win32_NetworkAdapter failed. Exception: {0}", ex.Message);
             }
             finally
             {
@@ -1641,11 +1641,11 @@ namespace XenOvf
                 {
                     Win32_IDEController.Add(mgtobj);
                 }
-                Log.Debug("OVF.CollectionInformation {0}.{1}", "Win32_IDEController", Win32_IDEController.Count);
+                log.DebugFormat("OVF.CollectionInformation Win32_IDEController.{0}", Win32_IDEController.Count);
             }
             catch (Exception ex)
             {
-                Log.Warning("OVF.CollectionInformation: call for Win32_IDEController failed. Exception: {0}", ex.Message);
+                log.WarnFormat("OVF.CollectionInformation: call for Win32_IDEController failed. Exception: {0}", ex.Message);
             }
             finally
             {
@@ -1663,11 +1663,11 @@ namespace XenOvf
                 {
                     Win32_SCSIController.Add(mgtobj);
                 }
-                Log.Debug("OVF.CollectionInformation {0}.{1}", "Win32_SCSIController", Win32_SCSIController.Count);
+                log.DebugFormat("OVF.CollectionInformation Win32_SCSIController.{0}", Win32_SCSIController.Count);
             }
             catch (Exception ex)
             {
-                Log.Warning("OVF.CollectionInformation: call for Win32_SCSIController failed. Exception: {0}", ex.Message);
+                log.WarnFormat("OVF.CollectionInformation: call for Win32_SCSIController failed. Exception: {0}", ex.Message);
             }
             finally
             {
@@ -1685,11 +1685,11 @@ namespace XenOvf
                 {
                     Win32_DiskPartition.Add(mgtobj);
                 }
-                Log.Debug("OVF.CollectionInformation {0}.{1}", "Win32_DiskPartition", Win32_DiskPartition.Count);
+                log.DebugFormat("OVF.CollectionInformation Win32_DiskPartition.{0}", Win32_DiskPartition.Count);
             }
             catch (Exception ex)
             {
-                Log.Warning("OVF.CollectionInformation: call for Win32_DiskPartition failed. Exception: {0}", ex.Message);
+                log.WarnFormat("OVF.CollectionInformation: call for Win32_DiskPartition failed. Exception: {0}", ex.Message);
             }
             finally
             {
@@ -1707,11 +1707,11 @@ namespace XenOvf
                 {
                     Win32_DiskDriveToDiskPartition.Add(mgtobj);
                 }
-                Log.Debug("OVF.CollectionInformation {0}.{1}", "Win32_DiskDriveToDiskPartition", Win32_DiskDriveToDiskPartition.Count);
+                log.DebugFormat("OVF.CollectionInformation Win32_DiskDriveToDiskPartition.{0}", Win32_DiskDriveToDiskPartition.Count);
             }
             catch (Exception ex)
             {
-                Log.Warning("OVF.CollectionInformation: call for Win32_DiskDriveToDiskPartition failed, Exception: {0}", ex.Message);
+                log.WarnFormat("OVF.CollectionInformation: call for Win32_DiskDriveToDiskPartition failed, Exception: {0}", ex.Message);
             }
             finally
             {
@@ -1781,9 +1781,9 @@ namespace XenOvf
                                             description,
                                             Guid.NewGuid().ToString(),
                                             "301");
-                Log.Warning("System definition not available, created defaults");
+                log.Warn("System definition not available, created defaults");
             }
-            Log.Debug("OVF.AddVssd completed");
+            log.Debug("OVF.AddVssd completed");
         }
 
         private void AddNetworks(EnvelopeType ovfEnv, string vsId)
@@ -1880,9 +1880,9 @@ namespace XenOvf
             }
             else
             {
-                Log.Warning("No networks defined, If a network interface is required, the administrator will need to add it after import of OVF/OVA Package.");
+                log.Warn("No networks defined, If a network interface is required, the administrator will need to add it after import of OVF/OVA Package.");
             }
-            Log.Debug("OVF.AddNetworks completed {0}", vsId);
+            log.DebugFormat("OVF.AddNetworks completed {0}", vsId);
         }
 
         private void AddCPUs(EnvelopeType ovfEnv, string vsId)
@@ -1917,9 +1917,9 @@ namespace XenOvf
             else
             {
                 SetCPUs(ovfEnv, vsId, 1);
-                Log.Warning("OVF.AddCPUs, set using default (1) CPU");
+                log.Warn("OVF.AddCPUs, set using default (1) CPU");
             }
-            Log.Debug("OVF.AddCPUs completed {0} cpus {1}", vsId, cpucount);
+            log.DebugFormat("OVF.AddCPUs completed {0} cpus {1}", vsId, cpucount);
         }
 
         private void AddMemory(EnvelopeType ovfEnv, string vsId)
@@ -1951,11 +1951,11 @@ namespace XenOvf
             }
             else
             {
-                Log.Warning("OVF.AddMemory: could not determine system memory, defaulting to 512MB");
+                log.Warn("OVF.AddMemory: could not determine system memory, defaulting to 512MB");
                 memory = 512L;
             }
             SetMemory(ovfEnv, vsId, memory, "byte * 2^20");
-            Log.Debug("OVF.AddMemory completed {0} memory {1} ({2})", vsId, memory, "byte * 2 ^ 20");
+            log.DebugFormat("OVF.AddMemory completed {0} memory {1} (byte * 2 ^ 20)", vsId, memory);
         }
 
         private void CreateConnectedDevices(EnvelopeType ovfEnv, string vsId, DiskInfo[] vhdExports)
@@ -1987,7 +1987,7 @@ namespace XenOvf
 
                     if (deviceid == null)
                     {
-                        Log.Trace("No device id defined, continuing");
+                        traceLog.Debug("No device id defined, continuing");
                         continue;
                     }
                     List<ManagementObject> ControllerAssociations = FindDeviceReferences("Win32_IDEControllerDevice", deviceid);
@@ -2007,7 +2007,7 @@ namespace XenOvf
                         }
                         if (_dependent == null)
                         {
-                            Log.Trace("PCI Association not available, continuing.");
+                            traceLog.Debug("PCI Association not available, continuing.");
                             continue;
                         }
                         #endregion
@@ -2018,7 +2018,7 @@ namespace XenOvf
 
                         if (startswith.ToUpper().StartsWith(@"IDEDISK"))
                         {
-                            Log.Debug("OVF.CreateConnectedDevices Checking IDEDISK");
+                            log.Debug("OVF.CreateConnectedDevices Checking IDEDISK");
                             foreach (ManagementObject md in Win32_DiskDrive)
                             {
                                 #region FIND BY PROPERTIES NOT EXPLICID
@@ -2052,7 +2052,7 @@ namespace XenOvf
                                         {
                                             try
                                             {
-                                                Log.Debug("OVF.CreateConnectedDevices: Dependent: {0}  Device: {1}", dependentId, _deviceid);
+                                                log.DebugFormat("OVF.CreateConnectedDevices: Dependent: {0}  Device: {1}", dependentId, _deviceid);
                                                 string diskInstanceId = Guid.NewGuid().ToString();
                                                 int lastAmp = dependentId.LastIndexOf('&');
                                                 if (lastAmp < 0) lastAmp = 0;
@@ -2075,12 +2075,12 @@ namespace XenOvf
                                                         Convert.ToUInt64(di.PhysicalSize), Convert.ToUInt64(di.CapacitySize));
                                                 AddDeviceToController(ovfEnv, vsId, diskInstanceId, controllerInstanceId, address);
                                                 di.Added = true;
-                                                Log.Debug("OVF.CreateConnectedDevices: {0} ({1}) added to {2}", di.DriveId, di.VhdFileName, dependentId);
+                                                log.DebugFormat("OVF.CreateConnectedDevices: {0} ({1}) added to {2}", di.DriveId, di.VhdFileName, dependentId);
                                             }
                                             catch (Exception ex)
                                             {
                                                 string msg = string.Format("{0} [{1}] controller connection could not be identified.", "IDEDISK", _pnpdeviceid);
-                                                Log.Error("OVF.CreateConnectedDevices: {0}", msg);
+                                                log.ErrorFormat("OVF.CreateConnectedDevices: {0}", msg);
                                                 throw new Exception(msg, ex);
                                             }
                                         }
@@ -2090,7 +2090,7 @@ namespace XenOvf
                         }
                         else if (startswith.ToUpper().StartsWith(@"IDECDROM"))
                         {
-                            Log.Debug("OVF.CreateConnectedDevices Checking IDECDROM");
+                            log.Debug("OVF.CreateConnectedDevices Checking IDECDROM");
                             foreach (ManagementObject md in Win32_CDROMDrive)
                             {
                                 #region FIND BY PROPERTIES NOT EXPLICID
@@ -2104,14 +2104,14 @@ namespace XenOvf
                                 }
                                 if (_pnpdeviceid == null)
                                 {
-                                    Log.Trace("PNPDeviceID not available, continuing.");
+                                    traceLog.Debug("PNPDeviceID not available, continuing.");
                                     continue;
                                 }
                                 #endregion
                                 _pnpdeviceid = _pnpdeviceid.Replace(@"\", "");
                                 if (_pnpdeviceid.Equals(dependentId))
                                 {
-                                    Log.Debug("OVF.CreateConnectedDevices: Dependent: {0}  Device: {1}", dependentId, _pnpdeviceid);
+                                    log.DebugFormat("OVF.CreateConnectedDevices: Dependent: {0}  Device: {1}", dependentId, _pnpdeviceid);
                                     try
                                     {
                                         string diskInstanceId = Guid.NewGuid().ToString();
@@ -2127,11 +2127,11 @@ namespace XenOvf
                                         }
                                         AddCDROM(ovfEnv, vsId, diskInstanceId, _ovfrm.GetString("RASD_16_CAPTION"), _ovfrm.GetString("RASD_16_ELEMENTNAME"));
                                         AddDeviceToController(ovfEnv, vsId, diskInstanceId, controllerInstanceId, address);
-                                        Log.Debug("OVF.CreateConnectedDevices: {0} added to {1}", "CDROM", dependentId);
+                                        log.DebugFormat("OVF.CreateConnectedDevices: CDROM added to {0}", dependentId);
                                     }
                                     catch
                                     {
-                                        Log.Warning("OVF.CreateConnectedDevices: {0} [{1}] controller connection could not be identified, skipped.", "CDROM", _pnpdeviceid);
+                                        log.WarnFormat("OVF.CreateConnectedDevices: CDROM [{0}] controller connection could not be identified, skipped.", _pnpdeviceid);
                                     }
                                 }
                             }
@@ -2141,9 +2141,9 @@ namespace XenOvf
             }
             else
             {
-                Log.Info("OVF.CreateConnectedDevices NO IDE controllers detected.");
+                log.Info("OVF.CreateConnectedDevices NO IDE controllers detected.");
             }
-            Log.Debug("OVF.CreateConnectedDevices IDE Controllers completed.");
+            log.Debug("OVF.CreateConnectedDevices IDE Controllers completed.");
             #endregion
 
             #region SCSI
@@ -2162,7 +2162,7 @@ namespace XenOvf
                     }
                     if (_deviceid == null)
                     {
-                        Log.Trace("SCSI DeviceID not available, continuing.");
+                        traceLog.Debug("SCSI DeviceID not available, continuing.");
                         continue;
                     }
                     #endregion
@@ -2171,7 +2171,7 @@ namespace XenOvf
 
                     if (ControllerAssociations == null || ControllerAssociations.Count <= 0)
                     {
-                        Log.Trace("No Controller associations for {0}", _deviceid);
+                        traceLog.DebugFormat("No Controller associations for {0}", _deviceid);
                         continue;
                     }
 
@@ -2189,7 +2189,7 @@ namespace XenOvf
                         }
                         if (_dependent == null)
                         {
-                            Log.Trace("SCSI Association not available, continuing.");
+                            traceLog.Debug("SCSI Association not available, continuing.");
                             continue;
                         }
                         #endregion
@@ -2244,7 +2244,7 @@ namespace XenOvf
                                 }
                                 if (__deviceid == null)
                                 {
-                                    Log.Trace("SCSI DeviceID not available, continuing.");
+                                    traceLog.Debug("SCSI DeviceID not available, continuing.");
                                     continue;
                                 }
                                 #endregion
@@ -2262,7 +2262,7 @@ namespace XenOvf
                                             AddDisk(ovfEnv, vsId, diskInstanceId, lang, di.VhdFileName, bootable, _ovfrm.GetString("RASD_19_CAPTION"), _description, Convert.ToUInt64(di.PhysicalSize), Convert.ToUInt64(di.CapacitySize));
                                             AddDeviceToController(ovfEnv, vsId, diskInstanceId, controllerInstanceId, Convert.ToString(__scsiport));
                                             di.Added = true;
-                                            Log.Debug("CreateConnectedDevices: {0} ({1}) added to {2}", di.DriveId, di.VhdFileName, dependentId);
+                                            log.DebugFormat("CreateConnectedDevices: {0} ({1}) added to {2}", di.DriveId, di.VhdFileName, dependentId);
                                         }
                                     }
                                 }
@@ -2308,7 +2308,7 @@ namespace XenOvf
                                 }
                                 if (__deviceid == null)
                                 {
-                                    Log.Trace("SCSI DeviceID not available, continuing.");
+                                    traceLog.Debug("SCSI DeviceID not available, continuing.");
                                     continue;
                                 }
                                 #endregion
@@ -2319,7 +2319,7 @@ namespace XenOvf
                                     string caption = string.Format(_ovfrm.GetString("RASD_CONTROLLER_SCSI_DESCRIPTION"), __scsibus, __scsilogicalunit, __scsiport, __scsitargetid);
                                     AddCDROM(ovfEnv, vsId, diskInstanceId, caption, _ovfrm.GetString("RASD_16_DESCRIPTION"));
                                     AddDeviceToController(ovfEnv, vsId, diskInstanceId, controllerInstanceId, Convert.ToString(__scsiport));
-                                    Log.Debug("CreateConnectedDevices: {0} added to {1}", "CDROM", dependentId);
+                                    log.DebugFormat("CreateConnectedDevices: CDROM added to {0}", dependentId);
                                 }
                             }
                         }
@@ -2328,9 +2328,9 @@ namespace XenOvf
             }
             else
             {
-                Log.Info("OVF.CreateConnectedDevices no SCSI Controllers detected.");
+                log.Info("OVF.CreateConnectedDevices no SCSI Controllers detected.");
             }
-            Log.Debug("OVF.CreateConnectedDevices SCSI Controllers completed {0} ", vsId);
+            log.DebugFormat("OVF.CreateConnectedDevices SCSI Controllers completed {0} ", vsId);
             #endregion
 
             #region OTHER CONTROLLER DISKS
@@ -2369,10 +2369,10 @@ namespace XenOvf
                     bool bootable = IsBootDisk(di.DriveId);
                     AddDisk(ovfEnv, vsId, diskInstanceId, lang, di.VhdFileName, bootable, _ovfrm.GetString("RASD_19_CAPTION"), _mediatype, Convert.ToUInt64(di.PhysicalSize), Convert.ToUInt64(di.CapacitySize));
                     di.Added = true;
-                    Log.Debug("CreateConnectedDevices: {0} ({1}) added to {2}", di.DriveId, di.VhdFileName, _mediatype);
+                    log.DebugFormat("CreateConnectedDevices: {0} ({1}) added to {2}", di.DriveId, di.VhdFileName, _mediatype);
                 }
             }
-            Log.Debug("OVF.CreateConnectedDevices OTHER Controllers completed {0} ", vsId);
+            log.DebugFormat("OVF.CreateConnectedDevices OTHER Controllers completed {0} ", vsId);
             #endregion
 
             #region CHECK ALL DISKS WERE DEFINED
@@ -2382,13 +2382,13 @@ namespace XenOvf
                 {
                     AddDisk(ovfEnv, vsId, Guid.NewGuid().ToString(), lang, di.VhdFileName, false, _ovfrm.GetString("RASD_19_CAPTION"), _ovfrm.GetString("RASD_19_DESCRIPTION"), Convert.ToUInt64(di.PhysicalSize), Convert.ToUInt64(di.CapacitySize));
                     di.Added = true;
-                    Log.Warning("CreateConnectedDevices: MANUAL Update of OVF REQUIRED TO DEFINE: Disk Size and Capacity");
-                    Log.Warning("CreateConnectedDevices: {0} ({1}) NOT FOUND, added as Unknown with 0 Size", di.DriveId, di.VhdFileName);
+                    log.Warn("CreateConnectedDevices: MANUAL Update of OVF REQUIRED TO DEFINE: Disk Size and Capacity");
+                    log.WarnFormat("CreateConnectedDevices: {0} ({1}) NOT FOUND, added as Unknown with 0 Size", di.DriveId, di.VhdFileName);
                 }
             }
             #endregion
 
-            Log.Debug("OVF.CreateConnectedDevices completed {0} ", vsId);
+            log.DebugFormat("OVF.CreateConnectedDevices completed {0} ", vsId);
         }   
         #endregion
     }

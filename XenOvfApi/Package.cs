@@ -534,7 +534,7 @@ namespace XenOvf
                     if (!fileDigest.WasVerified)
                     {
                         // A manifest entry was missing.
-                        XenOvf.Utilities.Log.Error(string.Format(Messages.FILE_MISSING, fileDigest.Name));
+                        log.ErrorFormat(string.Format(Messages.FILE_MISSING, fileDigest.Name));
                     }
                 }
 
@@ -551,6 +551,8 @@ namespace XenOvf
     // Abstract class to access any time of package.
     public abstract class Package
     {
+        protected static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         // Package factory.
         public static Package Create(string path)
         {

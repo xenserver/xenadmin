@@ -61,6 +61,8 @@ namespace XenOvf.Utilities
     /// </summary>
     public sealed class Tools
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private const long KB = 1024;
         private const long MB = (KB * 1024);
         private const long GB = (MB * 1024);
@@ -106,8 +108,8 @@ namespace XenOvf.Utilities
             }
             catch (Exception ex)
             {
-                Log.Error("Utilities.LoadFile: failed: {0}", ex.Message);
-                throw ex;
+                log.ErrorFormat("Utilities.LoadFile: failed: {0}", ex.Message);
+                throw;
             }
             finally
             {
@@ -144,7 +146,7 @@ namespace XenOvf.Utilities
             }
             catch (Exception ex)
             {
-                Log.Debug("Tools.Deserialize failed attempt (may get retried)", ex.Message);
+                log.DebugFormat("Tools.Deserialize failed attempt (may get retried) {0}", ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message.ToLower().Contains("hexadecimal value 0x00"))
                 {
                     throw new InvalidDataException(Messages.INVALID_DATA_IN_OVF, ex);
@@ -199,7 +201,7 @@ namespace XenOvf.Utilities
             }
             catch (Exception ex)
             {
-                Log.Error("OVF.Tools.Serialize failed {0}", ex.Message);
+                log.ErrorFormat("OVF.Tools.Serialize failed {0}", ex.Message);
                 throw new CtxUtilitiesException(ex.Message,ex);
             }
             finally
@@ -293,7 +295,7 @@ namespace XenOvf.Utilities
 
             if (!File.Exists(ovfFilePath))
             {
-                Log.Error("Utilities.LoadOvfXml: File not found: {0}", ovfFilePath);
+                log.ErrorFormat("Utilities.LoadOvfXml: File not found: {0}", ovfFilePath);
                 throw new FileNotFoundException(string.Format(Messages.FILE_MISSING, ovfFilePath));
             }
 
@@ -315,7 +317,7 @@ namespace XenOvf.Utilities
             }
             catch (Exception ex)
             {
-                Log.Info("Attempt reading xml failed. {0}", ex.Message);
+                log.InfoFormat("Attempt reading xml failed. {0}", ex.Message);
             }
 
             if (ovfEnv != null && ovfEnv.AnyAttr != null)
@@ -341,7 +343,7 @@ namespace XenOvf.Utilities
             if (ovfEnv == null)
             {
                 ovfEnv = LoadVmw35OvfXml(ovfxml);
-                Log.Error("Last Change Convert died.");
+                log.Error("Last Change Convert died.");
             }
 
             return ovfEnv;
@@ -422,18 +424,18 @@ namespace XenOvf.Utilities
 
             }
             catch (XmlException xmlex)
-            {                
-                Log.Error("ValidateXmlToSchema XML Exception: {0}", xmlex.Message);
+            {
+                log.ErrorFormat("ValidateXmlToSchema XML Exception: {0}", xmlex.Message);
                 throw new Exception(xmlex.Message, xmlex);
             }
             catch (XmlSchemaException schemaex)
             {
-                Log.Error("ValidateXmlToSchema Schema Exception: {0}", schemaex.Message);
+                log.ErrorFormat("ValidateXmlToSchema Schema Exception: {0}", schemaex.Message);
                 throw new Exception(schemaex.Message, schemaex);
             }
             catch (Exception ex)
             {
-                Log.Error("ValidateXmlToSchema Exception: {0}", ex.Message);
+                log.ErrorFormat("ValidateXmlToSchema Exception: {0}", ex.Message);
                 throw new Exception(ex.Message, ex);
             }
             finally
@@ -584,7 +586,7 @@ namespace XenOvf.Utilities
 
         private static void ShowSchemaValidationCompileErrors(object sender, ValidationEventArgs args)
         {
-            Log.Error("ShowSchemaValidationCompileErrors: {0}", args.Message);
+            log.ErrorFormat("ShowSchemaValidationCompileErrors: {0}", args.Message);
         }
         private static bool ValidateField(string name, object target)
         {
@@ -613,7 +615,7 @@ namespace XenOvf.Utilities
                            .Replace("<Item", "<ovf:Item").Replace("</Item", "</ovf:Item");
 
             EnvelopeType ovfEnv = (EnvelopeType)Deserialize(ovfxml, typeof(EnvelopeType));
-            Log.Debug("Finished LoadVmw40OvfXml");
+            log.Debug("Finished LoadVmw40OvfXml");
             return ovfEnv;
         }
         private static EnvelopeType LoadVmw35OvfXml(string ovfxml)
@@ -638,7 +640,7 @@ namespace XenOvf.Utilities
                            .Replace("<Item", "<ovf:Item").Replace("</Item", "</ovf:Item");
 
             EnvelopeType ovfEnv = (EnvelopeType)Deserialize(ovfxml, typeof(EnvelopeType));
-            Log.Debug("Finished LoadVmw35OvfXml");
+            log.Debug("Finished LoadVmw35OvfXml");
             return ovfEnv;
         }
         private static XenMember[] DeserializeXenMembers(XenMember[] members)
@@ -719,19 +721,16 @@ namespace XenOvf.Utilities
             }
             catch (Exception ex)
             {
-                Log.Error("Tools.Deserialize FAILED", ex.Message);
-            }
-            finally
-            {
+                log.ErrorFormat("Tools.Deserialize FAILED {0}", ex.Message);
             }
             return (T) new object();
         }
         private static void OpenArchive(string filename)
         {
-            Log.Info("Utilities.OpenArchive: Opening OVF Archive: {0}", filename);
+            log.InfoFormat("Utilities.OpenArchive: Opening OVF Archive: {0}", filename);
             if (!File.Exists(filename))
             {
-                Log.Error("Utilities.OpenArchive: Cannot find file: {0}", filename);
+                log.ErrorFormat("Utilities.OpenArchive: Cannot find file: {0}", filename);
                 throw new FileNotFoundException(string.Format(Messages.FILE_MISSING, filename));
             }
             OVF.OpenOva(Path.GetDirectoryName(filename), Path.GetFileName(filename));

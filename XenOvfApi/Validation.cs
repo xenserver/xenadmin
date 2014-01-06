@@ -178,7 +178,7 @@ namespace XenOvf
             {
                 isValid = false;
                 var message = string.Format(Messages.VALIDATION_INVALID_TYPE, ovfEnv.Item.GetType().ToString());
-                Log.Error(message);
+                log.Error(message);
                 validationErrorMessages.Add(message);
             }
             #endregion
@@ -215,7 +215,11 @@ namespace XenOvf
             if (!isValid)
             {
 				bool enforceValidation = Properties.Settings.Default.enforceValidation;
-                Log.Error("OVF Failed Validation, {0}", enforceValidation ? "return failure" : "OVERRIDE return success");
+
+                log.Error(enforceValidation
+                              ? "OVF Failed Validation, return failure"
+                              : "OVF Failed Validation, OVERRIDE return success");
+
                 if (!enforceValidation)
                     isValid = true;
             }
@@ -248,7 +252,7 @@ namespace XenOvf
                     }
                     if (ovfEnv.version == null)
                     {
-                        Log.Warning("Version not set, applying 1.0.0");
+                        log.Warn("Version not set, applying 1.0.0");
                         ovfEnv.version = "1.0.0";
                     }
                 }
@@ -256,7 +260,7 @@ namespace XenOvf
                 {
                     isValid = false;
                     var message = string.Format(Messages.VALIDATION_INVALID_VERSION, ovfEnv.version);
-                    Log.Warning(message);
+                    log.Warn(message);
                     validationErrorMessages.Add(message);
                 }
             }
@@ -276,13 +280,13 @@ namespace XenOvf
                 {    
                     if (!Properties.Settings.Default.knownFileExtensions.ToLower().Contains(ext))
                     {
-                        Log.Warning(Messages.VALIDATION_INVALID_FILETYPE, file.href);
+                        log.WarnFormat(Messages.VALIDATION_INVALID_FILETYPE, file.href);
                     }
                 }
                 else
                 {
                     var message = string.Format(Messages.VALIDATION_FILE_NOTFOUND, file.href);
-                    Log.Error(message);
+                    log.Error(message);
                     throw new Exception(message);
                 }
             }
@@ -308,14 +312,14 @@ namespace XenOvf
                         {
                             var message = string.Format(Messages.VALIDATION_FILE_NOTFOUND, file.href);
                             validationErrorMessages.Add(message);
-                            Log.Error(message);
+                            log.Error(message);
                             throw new Exception(message);
                         }
                     }
                 }
                 else
                 {
-                    Log.Info("ValidateFiles: no attached files defined, continuing");
+                    log.Info("ValidateFiles: no attached files defined, continuing");
                     return isValid;
                 }
                 if (isValid)
@@ -354,7 +358,7 @@ namespace XenOvf
                         }
                         if (!validlink)
                         {
-                            Log.Warning("Disk linkage [File to RASD] does not exist: {0}", file.href);
+                            log.WarnFormat("Disk linkage [File to RASD] does not exist: {0}", file.href);
                             break;
                         }
                     }
@@ -374,21 +378,21 @@ namespace XenOvf
                         if (rasd.VirtualQuantity == null || rasd.VirtualQuantity.Value <= 0)
                         {
                             var message = string.Format(Messages.VALIDATION_INVALID_CPU_QUANTITY, rasd.VirtualQuantity.Value);
-                            Log.Error(message);
+                            log.Error(message);
                             validationErrorMessages.Add(message);
                             break;
                         }
                         if (rasd.Limit != null && rasd.VirtualQuantity.Value > rasd.Limit.Value)
                         {
                             var message = string.Format(Messages.VALIDATION_INVALID_CPU_EXCEEDS_LIMIT, rasd.VirtualQuantity.Value, rasd.Limit.Value);
-                            Log.Error(message);
+                            log.Error(message);
                             validationErrorMessages.Add(message);
                             isValid = false;
                             break;
                         }
                         if (rasd.InstanceID == null || rasd.InstanceID.Value.Length <= 0)
                         {
-                            Log.Info("CPU has an invalid InstanceID, creating new.");
+                            log.Info("CPU has an invalid InstanceID, creating new.");
                             validationErrorMessages.Add(Messages.VALIDATION_INVALID_INSTANCEID);
                             rasd.InstanceID = new cimString(Guid.NewGuid().ToString());
                             break;
@@ -409,21 +413,21 @@ namespace XenOvf
                     {
                         if (rasd.VirtualQuantity == null || rasd.VirtualQuantity.Value <= 0)
                         {
-                            Log.Error("Memory invalid Virtual Quantity");
+                            log.Error("Memory invalid Virtual Quantity");
                             validationErrorMessages.Add(Messages.VALIDATION_INVALID_MEMORY_QUANTITY);
                             isValid = false;
                             break;
                         }
                         if (rasd.AllocationUnits == null || rasd.AllocationUnits.Value.Length <= 0)
                         {
-                            Log.Error("Memory AllocationUnits not valid");
+                            log.Error("Memory AllocationUnits not valid");
                             validationErrorMessages.Add(Messages.VALIDATION_INVALID_MEMORY_ALLOCATIONUNITS);
                             isValid = false;
                             break;
                         }
                         if (rasd.InstanceID == null || rasd.InstanceID.Value.Length <= 0)
                         {
-                            Log.Info("Memory has an invalid InstanceID, creating new.");
+                            log.Info("Memory has an invalid InstanceID, creating new.");
                             validationErrorMessages.Add(Messages.VALIDATION_INVALID_INSTANCEID);
                             rasd.InstanceID = new cimString(Guid.NewGuid().ToString());
                             break;
@@ -445,7 +449,7 @@ namespace XenOvf
                         bool linkage = false;
                         if (rasd.InstanceID == null || rasd.InstanceID.Value.Length <= 0)
                         {
-                            Log.Info("Network has an invalid InstanceID, creating new.");
+                            log.Info("Network has an invalid InstanceID, creating new.");
                             validationErrorMessages.Add(Messages.VALIDATION_INVALID_INSTANCEID);
                             rasd.InstanceID = new cimString(Guid.NewGuid().ToString());
                             break;
@@ -465,7 +469,7 @@ namespace XenOvf
                         }
                         if (!linkage)
                         {
-                            Log.Error(Messages.VALIDATION_NETWORK_NO_DEVICE);
+                            log.Error(Messages.VALIDATION_NETWORK_NO_DEVICE);
                             validationErrorMessages.Add(Messages.VALIDATION_NETWORK_NO_DEVICE);
                             isValid = false;
                             break;
@@ -530,7 +534,7 @@ namespace XenOvf
                                 if (rasd.required)
                                 {
                                     var message = string.Format(Messages.VALIDATION_REQUIRED_ELEMENT_NOT_RECOGNIZED, rasd.ResourceType.Value, rasd.ElementName.Value);
-                                    Log.Error(message);
+                                    log.Error(message);
                                     validationErrorMessages.Add(message);
                                     isValid = false;
                                 }
@@ -560,7 +564,7 @@ namespace XenOvf
                 if (!isValid)
                 {
                     isValid = false;
-                    Log.Error(Messages.VALIDATION_SCHEMA_FAILED);
+                    log.Error(Messages.VALIDATION_SCHEMA_FAILED);
                     validationErrorMessages.Add(Messages.VALIDATION_SCHEMA_FAILED);                    
                 }
             }
@@ -580,7 +584,7 @@ namespace XenOvf
                         if (!Properties.Settings.Default.knownVirtualSystemTypes.Contains(vhs.System.VirtualSystemType.Value))
                         {
                             var message = string.Format(Messages.VALIDATION_UNKNOWN_HARDWARE_TYPE, vhs.System.VirtualSystemType.Value);
-                            Log.Warning(message);
+                            log.Warn(message);
                             validationErrorMessages.Add(message);
                             isValid = false;
                         }
