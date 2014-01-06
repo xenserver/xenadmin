@@ -54,6 +54,8 @@
     <Compile Include="Conversions.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DiskInfo.cs" />
+    <Compile Include="OvfEventArgs.cs" />
     <Compile Include="Definitions\Microsoft.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -194,7 +196,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties Reset="1" AssemblyVersion="1" AssemblyFileVersion="1" StartDate="20090814" />
+      <UserProperties StartDate="20090814" AssemblyFileVersion="1" AssemblyVersion="1" Reset="1" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
