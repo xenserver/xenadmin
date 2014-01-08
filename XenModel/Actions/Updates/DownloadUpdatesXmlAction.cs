@@ -31,12 +31,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAPI;
 using System.IO;
 using System.Xml;
-using System.Net;
 using XenAdmin.Core;
+
 
 namespace XenAdmin.Actions
 {
@@ -48,16 +47,23 @@ namespace XenAdmin.Actions
         private const string PatchesNode = "patches";
         private const string UpdateXmlUrl = @"http://updates.xensource.com/XenServer/updates.xml";
 
-        public List<XenCenterVersion> XenCenterVersions { get; set; }
-        public List<XenServerVersion> XenServerVersions { get; set; }
-        public List<XenServerPatch> XenServerPatches { get; set; }
+        public List<XenCenterVersion> XenCenterVersions { get; private set; }
+        public List<XenServerVersion> XenServerVersions { get; private set; }
+        public List<XenServerPatch> XenServerPatches { get; private set; }
+        private readonly bool _checkForXenCenter;
+        private readonly bool _checkForServerVersion;
+        private readonly bool _checkForPatches;
 
-        public DownloadUpdatesXmlAction()
+        public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches)
             : base(null, "_get_updates", "_get_updates", true)
         {
             XenServerPatches = new List<XenServerPatch>();
             XenServerVersions = new List<XenServerVersion>();
             XenCenterVersions = new List<XenCenterVersion>();
+
+            _checkForXenCenter = checkForXenCenter;
+            _checkForServerVersion = checkForServerVersion;
+            _checkForPatches = checkForPatches;
         }
 
         protected override void Run()
@@ -66,7 +72,16 @@ namespace XenAdmin.Actions
 
             XmlDocument xdoc = FetchCheckForUpdatesXml(UpdateXmlUrl);
 
-            // XenCenter Versions
+            GetXenCenterVersions(xdoc);
+            GetXenServerPatches(xdoc);
+            GetXenServerVersions(xdoc);
+        }
+
+        private void GetXenCenterVersions(XmlDocument xdoc)
+        {
+            if (!_checkForXenCenter)
+                return;
+
             foreach (XmlNode versions in xdoc.GetElementsByTagName(XenCenterVersionsNode))
             {
                 foreach (XmlNode version in versions.ChildNodes)
@@ -94,8 +109,13 @@ namespace XenAdmin.Actions
                     XenCenterVersions.Add(new XenCenterVersion(version_lang, name, is_latest, url, timestamp));
                 }
             }
+        }
 
-            // Patches
+        private void GetXenServerPatches(XmlDocument xdoc)
+        {
+            if (!_checkForPatches)
+                return;
+
             foreach (XmlNode versions in xdoc.GetElementsByTagName(PatchesNode))
             {
                 foreach (XmlNode version in versions.ChildNodes)
@@ -136,8 +156,13 @@ namespace XenAdmin.Actions
                                                             patchUrl, timestamp, priority));
                 }
             }
+        }
 
-            // XenServer Versions
+        private void GetXenServerVersions(XmlDocument xdoc)
+        {
+            if (!_checkForServerVersion)
+                return;
+
             foreach (XmlNode versions in xdoc.GetElementsByTagName(XenServerVersionsNode))
             {
                 foreach (XmlNode version in versions.ChildNodes)
@@ -171,7 +196,7 @@ namespace XenAdmin.Actions
                     {
                         if (childnode.Name != "patch")
                             continue;
-                        XenServerPatch patch = XenServerPatches.Find(new Predicate<XenServerPatch>(delegate(XenServerPatch item) { return item.Uuid == childnode.Attributes["uuid"].Value; }));
+                        XenServerPatch patch = XenServerPatches.Find(item => item.Uuid == childnode.Attributes["uuid"].Value);
                         if (patch == null)
                             continue;
                         patches.Add(patch);
