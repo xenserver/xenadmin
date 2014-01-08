@@ -47,7 +47,6 @@ namespace XenAdmin.Alerts
         {
             Version = version;
             _timestamp = version.TimeStamp;
-            canIgnore = true;
         }
 
         public override string WebPageLabel
@@ -98,7 +97,7 @@ namespace XenAdmin.Alerts
 
         public override void Dismiss()
         {
-            foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
+            foreach (IXenConnection connection in connections)
                 new IgnoreServerAction(connection, Version).RunAsync();
             base.Dismiss();
         }

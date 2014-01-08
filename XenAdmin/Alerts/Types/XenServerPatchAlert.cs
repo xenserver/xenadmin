@@ -88,7 +88,6 @@ namespace XenAdmin.Alerts
             Patch = patch;
             _priority = patch.Priority;
             _timestamp = Patch.TimeStamp;
-            canIgnore = true;
         }
 
         public override string WebPageLabel
