@@ -48,7 +48,6 @@ namespace XenAdmin.Core
         public static event Action<bool, string> CheckForUpdatesCompleted;
         public static event Action CheckForUpdatesStarted;
 
-        public const string LastSeenServerVersionKey = "XenCenter.LastSeenServerVersion";
 
         private static List<XenServerVersion> XenServerVersions = new List<XenServerVersion>();
         private static List<XenServerPatch> XenServerPatches = new List<XenServerPatch>();
