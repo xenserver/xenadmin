@@ -30,6 +30,7 @@
  */
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using System.IO;
@@ -39,6 +40,7 @@ using Citrix.XenCenter;
 using XenAPI;
 
 using XenAdmin.Core;
+using System.Threading.Tasks;
 
 namespace XenAdmin.XenSearch
 {
@@ -53,20 +55,16 @@ namespace XenAdmin.XenSearch
         private readonly object _sleepMonitor = new object();
         private bool _skip_sleep;
 
-        private object updateLock = new object();
-
         private readonly Thread _metricUpdaterThread;
 
         private readonly object _hostsLock = new object();
-        private Dictionary<Host, HostMetric> _hosts = new Dictionary<Host, HostMetric>();
+        private ConcurrentDictionary<Host, HostMetric> _hosts = new ConcurrentDictionary<Host, HostMetric>();
 
         public event EventHandler MetricsUpdated;
 
         public MetricUpdater()
         {
-            _metricUpdaterThread = new Thread(UpdateMetrics);
-            _metricUpdaterThread.IsBackground = true;
-            _metricUpdaterThread.Name = "MetricUpdater";
+            _metricUpdaterThread = new Thread(UpdateMetrics) {IsBackground = true, Name = "MetricUpdater"};
         }
 
         /// <summary>
@@ -115,37 +113,28 @@ namespace XenAdmin.XenSearch
                 // Sometimes _hosts can be changed by SetXenModelObjects while we're updating,
                 // but that's OK: we've done an unnecessary update of a data structure that's
                 // about to go away, but we'll populate the new structure soon.
-                Dictionary<Host, HostMetric> hosts;
+                ConcurrentDictionary<Host, HostMetric> hosts;
 
                 lock (_hostsLock)
                 {
                     hosts = _hosts;
                 }
 
-                List<Thread> updateThreads = new List<Thread>();
-                foreach (Host host in hosts.Keys)
-                {
-                    if (!host.Connection.IsConnected )
-                        continue;
-
-                    HostMetric hm = hosts[host];
-                    Host h2 = host;
-                    Thread t = new Thread(delegate()
+                Parallel.ForEach(hosts.Keys,
+                    host => 
                     {
-                        // Value for is the function that can take a long time in the error case
-                        Dictionary<string, double> value = ValueFor(h2);
-                        // Distribute values is fast, but we want to keep it synchronized
-                        lock (updateLock)
-                            DistributeValues(value, hm);
-                    });
-                    t.Name = string.Format("Metric Updater for '{0}'", Helpers.GetName(host));
-                    t.IsBackground = true;
-                    updateThreads.Add(t);
-                    t.Start();
-                }
+                        if (!host.Connection.IsConnected)
+                            return;
 
-                foreach (Thread t in updateThreads)
-                    t.Join();
+                        HostMetric hm;
+                        //Intentionally using TryGetValue (instead of indexer's getter), because there is a slight chance 'host' is not in 'hosts.Keys' anymore.
+                        //This means that metrics of such 'host' can be ignored safely (no else implemented below).
+                        if (hosts.TryGetValue(host, out hm)) 
+                        {
+                            var values = ValuesFor(host);
+                            DistributeValues(values, hm);
+                        }
+                    });
                 
                 OnMetricsUpdate(EventArgs.Empty);
 
@@ -165,26 +154,30 @@ namespace XenAdmin.XenSearch
 
         private static void DistributeValues(Dictionary<string, double> value, HostMetric host)
         {
-            foreach (KeyValuePair<string, double> val in value)
+            foreach (KeyValuePair<string, double> kvp in value)
             {
-                string[] bits = val.Key.Split(':');
+                string[] bits = kvp.Key.Split(':');
                 if (bits.Length < 4)
                     continue;
+
+                double currentValue = kvp.Value;
+                string key = GetSetName(kvp.Key);
+
                 if (bits[1].ToLowerInvariant() == "host")
                 {
-                    host.Values[GetSetName(val.Key)] = val.Value;
+                    host.Values[key] = currentValue;
                 }
                 else
                 {
                     VmMetric vm = host.GetVmByUuid(bits[2]);
                     if (vm == null)
                         continue;
-                    vm.Values[GetSetName(val.Key)] = val.Value;
+                    vm.Values[key] = currentValue;
                 }
             }
         }
 
-        private static Dictionary<string, double> ValueFor(Host host)
+        private static Dictionary<string, double> ValuesFor(Host host)
         {
             if (host.address == null)
                 return new Dictionary<string, double>();
@@ -204,34 +197,36 @@ namespace XenAdmin.XenSearch
 
         private static Dictionary<string, double> AllValues(Stream httpstream)
         {
-            Dictionary<string, double> result = new Dictionary<string, double>();
-            List<string> keys = new List<string>();
-            XmlReader reader = XmlReader.Create(httpstream);
-            string lastnode = "";
-            int lastkey = 0;
+            var result = new Dictionary<string, double>();
+            var keys = new List<string>();
 
-            while (reader.Read())
+            using (var reader = XmlReader.Create(httpstream))
             {
-                if (reader.NodeType == XmlNodeType.Element)
+                string lastnode = "";
+                int lastkey = 0;
+
+                while (reader.Read())
                 {
-                    lastnode = reader.Name;
-                    if (lastnode == "row")
-                        lastkey = 0;
-                }
+                    if (reader.NodeType == XmlNodeType.Element)
+                    {
+                        lastnode = reader.Name;
+                        if (lastnode == "row")
+                            lastkey = 0;
+                    }
 
-                if (reader.NodeType != XmlNodeType.Text)
-                    continue;
+                    if (reader.NodeType != XmlNodeType.Text)
+                        continue;
 
-                if (lastnode == "entry")
-                    keys.Add(reader.ReadContentAsString());
+                    if (lastnode == "entry")
+                        keys.Add(reader.ReadContentAsString());
 
-                if (lastnode == "v")
-                {
-                    result[keys[lastkey]] = Helpers.StringToDouble(reader.ReadContentAsString());
-                    lastkey++;
+                    if (lastnode == "v")
+                    {
+                        result[keys[lastkey]] = Helpers.StringToDouble(reader.ReadContentAsString());
+                        lastkey++;
+                    }
                 }
             }
-
             return result;
         }
 
@@ -248,7 +243,7 @@ namespace XenAdmin.XenSearch
             if (!AnyNewObjects(objects))
                 return;
 
-            Dictionary<Host, HostMetric> hosts = new Dictionary<Host, HostMetric>();
+            var hosts = new ConcurrentDictionary<Host, HostMetric>();
 
             // Create HostMetric's for all the hosts
             foreach (IXenObject obj in objects)
@@ -267,13 +262,7 @@ namespace XenAdmin.XenSearch
                     Host host = GetHost(vm);
                     if (host != null)
                     {
-                        HostMetric hm;
-                        if (!hosts.TryGetValue(host, out hm))
-                        {
-                            hm = new HostMetric();
-                            hosts[host] = hm;
-                        }
-
+                        var hm = hosts.GetOrAdd(host, new HostMetric());
                         string uuid = Helpers.GetUuid(vm);
                         hm.VMs[uuid] = new VmMetric();
                     }
@@ -292,68 +281,67 @@ namespace XenAdmin.XenSearch
 
         private bool AnyNewObjects(IXenObject[] objects)
         {
-            lock (_hostsLock)
+            foreach (IXenObject obj in objects)
             {
-                foreach (IXenObject obj in objects)
+                Host host = obj as Host;
+                if (host != null)
                 {
-                    Host host = obj as Host;
-                    if (host != null)
-                    {
-                        if (!_hosts.ContainsKey(host))
-                            return true;
-                        continue;
-                    }
-
-                    VM vm = obj as VM;
-                    if (vm != null)
-                    {
-                        Host vmHost = GetHost(vm);
-
-                        if (vmHost != null)
-                        {
-                            HostMetric hm;
-                            if (!_hosts.TryGetValue(vmHost, out hm))
-                                return true;
-                            string uuid = Helpers.GetUuid(vm);
-                            if (!hm.VMs.ContainsKey(uuid))
-                                return true;
-                        }
-                    }
+                    if (!_hosts.ContainsKey(host))
+                        return true;
+                    continue;
                 }
 
-                return false;
+                VM vm = obj as VM;
+                if (vm != null)
+                {
+                    Host vmHost = GetHost(vm);
+
+                    if (vmHost != null)
+                    {
+                        HostMetric hm;
+                        if (!_hosts.TryGetValue(vmHost, out hm))
+                            return true;
+                        string uuid = Helpers.GetUuid(vm);
+                        if (!hm.VMs.ContainsKey(uuid))
+                            return true;
+                    }
+                }
             }
+
+            return false;
         }
 
         public double GetValue(IXenObject obj, string property)
         {
-            lock (_hostsLock)
+            Host host = GetHost(obj);
+            if (host == null)
+                return 0d;
+
+            HostMetric host_resident;
+            if (!_hosts.TryGetValue(host, out host_resident))
+                return 0d;
+
+            if (obj is Host)
             {
-                Host host = GetHost(obj);
-                if (host == null)
-                    return 0d;
-
-                HostMetric host_resident;
-                if (!_hosts.TryGetValue(host, out host_resident))
-                    return 0d;
-
-                if (obj is Host)
-                {
-                    if (host_resident.Values.ContainsKey(property))
-                        return host_resident.Values[property];
-                    return 0d;
-                }
-
-                string uuid = Helpers.GetUuid(obj);
-
-                VmMetric vm = host_resident.GetVmByUuid(uuid);
-
-                if (vm == null || !vm.Values.ContainsKey(property))
-                    return 0d;
-
-                return vm.Values[property];
+                double result;
+                if (host_resident.Values.TryGetValue(property, out result))
+                    return result;
+                return 0d;
             }
-        }
+
+            string uuid = Helpers.GetUuid(obj);
+
+            VmMetric vm = host_resident.GetVmByUuid(uuid);
+
+            if (vm != null)
+            {
+                double result;
+                if (vm.Values.TryGetValue(property, out result))
+                    return result;
+            }
+
+            return 0d;
+       }
 
         private const string RrdUpdatesPath = "rrd_updates";
         private const string RrdHostAndVmUpdatesQuery = "session_id={0}&start={1}&cf={2}&interval={3}&host=true";
@@ -410,22 +398,21 @@ namespace XenAdmin.XenSearch
 
         private class HostMetric
         {
-            public Dictionary<string, double> Values = new Dictionary<string, double>();
-            public Dictionary<string, VmMetric> VMs = new Dictionary<string, VmMetric>();  // VMs under this host, indexed by uuid
+            public readonly ConcurrentDictionary<string, double> Values = new ConcurrentDictionary<string, double>();
+            public readonly ConcurrentDictionary<string, VmMetric> VMs = new ConcurrentDictionary<string, VmMetric>();  // VMs under this host, indexed by uuid
 
             public VmMetric GetVmByUuid(string uuid)
             {
                 VmMetric ans;
                 if (VMs.TryGetValue(uuid, out ans))
                     return ans;
-                else
-                    return null;
+                return null;
             }
         }
 
         private class VmMetric
         {
-            public Dictionary<string, double> Values = new Dictionary<string, double>();
+            public readonly ConcurrentDictionary<string, double> Values = new ConcurrentDictionary<string, double>();
         }
     }
 }
