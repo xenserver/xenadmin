@@ -49,6 +49,13 @@ namespace XenAdmin.Core
             OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Add, item));
         }
 
+        public new void AddRange(IEnumerable<T> collection)
+        {
+            System.Diagnostics.Debug.Assert(collection != null, "Collection cannot be null");
+            base.AddRange(collection);
+            OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Add, collection));
+        }
+
         public new void Insert(int index, T item)
         {
             System.Diagnostics.Debug.Assert(item != null, "Item cannot be null");

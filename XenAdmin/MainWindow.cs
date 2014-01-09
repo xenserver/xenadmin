@@ -781,6 +781,8 @@ namespace XenAdmin
             IXenConnection connection = (IXenConnection)sender;
             closeActiveWizards(connection);
             Alert.RemoveAlert(alert => alert.Connection != null && alert.Connection.Equals(connection));
+            Updates.CheckServerPatches();
+            Updates.CheckServerVersion();
         }
 
         void connection_CachePopulated(object sender, EventArgs e)

@@ -39,6 +39,10 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\log4net\build\bin\net\2.0\release\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -54,6 +58,8 @@
     <Compile Include="Conversions.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DiskInfo.cs" />
+    <Compile Include="OvfEventArgs.cs" />
     <Compile Include="Definitions\Microsoft.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -97,7 +103,6 @@
     <Compile Include="Security.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Utilities\Log.cs" />
     <Compile Include="Utilities\Utilities.cs" />
     <Compile Include="Utilities\ValueMaps.cs" />
     <Compile Include="Validation.cs">

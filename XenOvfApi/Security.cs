@@ -115,7 +115,7 @@ namespace XenOvf
             CryptoFileWrapper(env, ovfFileName, password, true);
             if (_cancelEncrypt)
             {
-                Log.Info("Encrypt: CANCELLED successfully.");
+                log.Info("Encrypt: CANCELLED successfully.");
             }
             else
             {
@@ -146,7 +146,7 @@ namespace XenOvf
             CryptoFileWrapper(env, ovfFileName, password, false);
             if (_cancelEncrypt)
             {
-                Log.Info("Encrypt: CANCELLED successfully.");
+                log.Info("Encrypt: CANCELLED successfully.");
             }
             else
             {
@@ -370,14 +370,7 @@ namespace XenOvf
                 }
 
             }
-            if (isValid)
-            {
-                Log.Audit(Messages.PASSWORD_SUCCESS);
-            }
-            else
-            {
-                Log.Audit(Messages.PASSWORD_FAILED);
-            }
+            auditLog.Debug(isValid ? Messages.PASSWORD_SUCCESS : Messages.PASSWORD_FAILED);
             return isValid;
         }
         /// <summary>
@@ -439,8 +432,8 @@ namespace XenOvf
 			}
 			catch (Exception ex)
 			{
-				Log.Error("OVF.Security.Manifest: {0}", ex.Message);
-				throw ex;
+				log.ErrorFormat("OVF.Security.Manifest: {0}", ex.Message);
+				throw;
 			}
 
         	if (ovfenv != null && ovfenv.References != null && ovfenv.References.File != null && ovfenv.References.File.Length > 0)
@@ -480,7 +473,7 @@ namespace XenOvf
         		}
         	}
 
-        	Log.Debug("OVF.Manifest completed");
+        	log.Debug("OVF.Manifest completed");
         }
 
 
@@ -580,7 +573,7 @@ namespace XenOvf
                 (env.References.File == null) ||
                 (env.References.File.Length == 0))
             {
-                Log.Info("OVF.Security: No files to encrypt/decrypt.");
+                log.Info("OVF.Security: No files to encrypt/decrypt.");
                 return;
             }
             try
@@ -649,7 +642,7 @@ namespace XenOvf
                         }
                         else
                         {
-                            Log.Info("File already encrypted, skipping. [{0}]", file.href);
+                            log.InfoFormat("File already encrypted, skipping. [{0}]", file.href);
                             process = false;
                         }
                     }
@@ -665,14 +658,14 @@ namespace XenOvf
                         else
                         {
                             process = false;
-                            Log.Info("File is not encrypted, skipping. [{0}]", file.href);
+                            log.InfoFormat("File is not encrypted, skipping. [{0}]", file.href);
                         }
                     }
 
                     if (process)
                     {
                         string fullname = string.Format(@"{0}\{1}", Path.GetDirectoryName(ovffilename), file.href);
-                        Log.Debug(@"{0} : {1}", encrypt ? "Encrypt" : "Decrypt", fullname);
+                        log.DebugFormat(encrypt ? "Encrypt: {0}" : "Decrypt: {0}", fullname);
                         ICryptoTransform trans = CryptoSetup(cryptoclassname, password, encrypt, version);                        
                         CryptoFile(trans, fullname, fullname + ".tmp", encrypt);
                         if (_cancelEncrypt)
@@ -753,8 +746,8 @@ namespace XenOvf
             }
             catch (Exception ex)
             {
-                Log.Error("OVF.Security: Cryptography error: {0}", ex.Message);
-                throw ex;
+                log.ErrorFormat("OVF.Security: Cryptography error: {0}", ex.Message);
+                throw;
             }
         }
         private static CryptoStream CryptoStreamWrapper(Stream inputStream, string password, bool encrypt, string version)
@@ -774,7 +767,7 @@ namespace XenOvf
         private static ICryptoTransform CryptoSetup(string cryptoclassname, string password, bool encrypt, string version)
         {
 
-            Log.Debug(@"{0} : using {1}", "CryptoSetup", cryptoclassname);
+            log.DebugFormat("CryptoSetup: using {0}", cryptoclassname);
             SymmetricAlgorithm cryptObject = null;
             try
             {
@@ -787,13 +780,13 @@ namespace XenOvf
             }
             catch (Exception ex)
             {
-                Log.Error("Encryption class error: {0}", ex.Message);
+                log.ErrorFormat("Encryption class error: {0}", ex.Message);
                 throw;
             }
 
             if (cryptObject == null)
             {
-                Log.Error("Encryption class could not be created");
+                log.Error("Encryption class could not be created");
                 throw new ArgumentNullException();
             }
 
@@ -882,7 +875,7 @@ namespace XenOvf
                 if (inputFile.Length > outputFile.Length && !_cancelEncrypt)
                 {
                     byte[] missing = new byte[inputFile.Length - outputFile.Length];
-                    Log.Warning("PADDING Unencrypted VHD, with {0} zeros", (inputFile.Length - outputFile.Length));
+                    log.WarnFormat("PADDING Unencrypted VHD, with {0} zeros", (inputFile.Length - outputFile.Length));
                     outputFile.Write(missing, 0, missing.Length);
                 }
             }
@@ -908,7 +901,7 @@ namespace XenOvf
             catch (CryptographicException ce)
             {
                 // If we get here the password is considered invalid
-                Log.Debug("InternalCheckPassword: Invalid password. {0}", ce.Message);                    
+                log.DebugFormat("InternalCheckPassword: Invalid password. {0}", ce.Message);                    
             }
             return isValid;
         }
@@ -918,19 +911,20 @@ namespace XenOvf
             MemoryStream ms = new MemoryStream(bytearray);
             MemoryStream os = new MemoryStream();
             Stream checkStream = CryptoStreamWrapper(ms, password, false, version);
-            int r = -1;
             while (true)
             {
+                int r = -1;
                 try
                 {
                     r = checkStream.ReadByte();
                 }
                 catch (Exception ex)
                 {
-                    Log.Equals("CRYPTO Error: {0}", ex.Message);
+                    log.ErrorFormat("CRYPTO Error: {0}", ex.Message);
                     break;
                 }
-                if (r == -1) break;
+                if (r == -1)
+                    break;
                 os.WriteByte((byte)r);
             }
             os.Position = 0;

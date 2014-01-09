@@ -72,7 +72,7 @@ namespace XenAdmin.Alerts
             }
         }
 
-        public override FixLinkDelegate FixLinkAction
+        public override Action FixLinkAction
         {
             get { return () => Program.OpenURL(NewVersion.Url); }
         }

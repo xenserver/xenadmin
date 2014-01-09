@@ -43,12 +43,11 @@ namespace XenAdmin.Alerts
     public abstract class XenServerUpdateAlert : Alert
     {
         protected readonly List<IXenConnection> connections = new List<IXenConnection>();
-        protected readonly List<Host> hosts = new List<Host>();
+        private readonly List<Host> hosts = new List<Host>();
 
-        protected bool canIgnore;
         public bool CanIgnore
         {
-            get { return canIgnore; }
+            get { return connections.Count == 0 && hosts.Count == 0; }
         }
 
         public List<Host> DistinctHosts
@@ -70,15 +69,11 @@ namespace XenAdmin.Alerts
         public void IncludeConnection(IXenConnection newConnection)
         {
             connections.Add(newConnection);
-            if (connections.Count > 0)
-                canIgnore = false;
         }
 
         public void IncludeHosts(IEnumerable<Host> newHosts)
         {
             hosts.AddRange(newHosts);
-            if (hosts.Count > 0)
-                canIgnore = false;
         }
 
         public void CopyConnectionsAndHosts(XenServerUpdateAlert alert)
@@ -87,7 +82,6 @@ namespace XenAdmin.Alerts
             connections.AddRange(alert.connections);
             hosts.Clear();
             hosts.AddRange(alert.hosts);
-            canIgnore = connections.Count == 0 && hosts.Count == 0;
         }
 
         public override string AppliesTo

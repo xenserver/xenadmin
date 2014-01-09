@@ -43,6 +43,8 @@ namespace XenAdmin.Actions
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private XenServerVersion Version;
 
+        private const string LAST_SEEN_SERVER_VERSION_KEY = "XenCenter.LastSeenServerVersion";
+
         public IgnoreServerAction(IXenConnection connection, XenServerVersion version)
             : base(connection, "ignore_patch", "ignore_patch", true)
         {
@@ -57,17 +59,17 @@ namespace XenAdmin.Actions
 
             Dictionary<string, string> other_config = pool.other_config;
 
-            if (other_config.ContainsKey(Updates.LastSeenServerVersionKey))
+            if (other_config.ContainsKey(LAST_SEEN_SERVER_VERSION_KEY))
             {
-                List<string> current = new List<string>(other_config[Updates.LastSeenServerVersionKey].Split(','));
+                List<string> current = new List<string>(other_config[LAST_SEEN_SERVER_VERSION_KEY].Split(','));
                 if (current.Contains(Version.VersionAndOEM))
                     return;
                 current.Add(Version.VersionAndOEM);
-                other_config[Updates.LastSeenServerVersionKey] = string.Join(",", current.ToArray());
+                other_config[LAST_SEEN_SERVER_VERSION_KEY] = string.Join(",", current.ToArray());
             }
             else
             {
-                other_config.Add(Updates.LastSeenServerVersionKey, Version.VersionAndOEM);
+                other_config.Add(LAST_SEEN_SERVER_VERSION_KEY, Version.VersionAndOEM);
             }
 
             XenAPI.Pool.set_other_config(Session, pool.opaque_ref, other_config);

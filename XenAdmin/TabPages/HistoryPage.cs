@@ -281,7 +281,20 @@ namespace XenAdmin.TabPages
 
             tsmiDismissAll.Enabled = dataGridView.Rows.Cast<DataGridViewActionRow>().Any(row => row.Action.IsCompleted);
             tsmiDismissSelected.Enabled = dataGridView.SelectedRows.Cast<DataGridViewActionRow>().Any(row => row.Action.IsCompleted);
-            toolStripSplitButtonDismiss.Enabled = tsmiDismissAll.Enabled && tsmiDismissSelected.Enabled;
+            toolStripSplitButtonDismiss.Enabled = tsmiDismissAll.Enabled || tsmiDismissSelected.Enabled;
+
+            if (toolStripSplitButtonDismiss.DefaultItem != null && !toolStripSplitButtonDismiss.DefaultItem.Enabled)
+            {
+                foreach (ToolStripItem item in toolStripSplitButtonDismiss.DropDownItems)
+                {
+                    if (item.Enabled)
+                    {
+                        toolStripSplitButtonDismiss.DefaultItem = item;
+                        toolStripSplitButtonDismiss.Text = item.Text;
+                        break;
+                    }
+                }
+            }
         }
 
         #region Control event handlers

@@ -458,10 +458,7 @@ namespace XenAdmin.TabPages
                     return;
             }
 
-            Alert[] selectedAlerts = new Alert[GridViewAlerts.SelectedRows.Count];
-            for (int i = 0; i < selectedAlerts.Length; i++)
-                selectedAlerts[i] = (Alert)GridViewAlerts.SelectedRows[i].Tag;
-
+            var selectedAlerts = from DataGridViewRow row in GridViewAlerts.SelectedRows select row.Tag as Alert;
             DismissAlerts(selectedAlerts);
         }
 
@@ -494,66 +491,11 @@ namespace XenAdmin.TabPages
             if (result == DialogResult.Cancel)
                 return;
 
-            List<Alert> dismissingAlerts = new List<Alert>();
+            var alerts = result == DialogResult.No
+                             ? (from DataGridViewRow row in GridViewAlerts.Rows select row.Tag as Alert)
+                             : Alert.Alerts;
 
-            if (result == DialogResult.No)
-            {
-                //Dismiss Filtered
-                for (int i = 0; i < GridViewAlerts.Rows.Count; i++)
-                    dismissingAlerts.Add((Alert)GridViewAlerts.Rows[i].Tag);
-            }
-            else
-            {
-                //Dismiss All
-                dismissingAlerts.AddRange(Alert.Alerts);
-            }
-            dismissingAlerts.RemoveAll(a => !AllowedToDismiss(a.Connection));
-            DismissAlerts(dismissingAlerts.ToArray());
-        }
-
-        private void DismissAlerts(Alert[] alerts)
-        {
-            List<Alert> local_alerts = new List<Alert>();
-            // we group the alerts by connection ready for dismissal
-            Dictionary<IXenConnection, List<Alert>> alertGroups = new Dictionary<IXenConnection, List<Alert>>();
-
-            foreach (Alert a in alerts)
-            {
-                if (a.Dismissing)
-                    continue;
-                IXenConnection c = a.Connection;
-                if (c == null)
-                {
-                    local_alerts.Add(a);
-                }
-                else
-                {
-                    if (!alertGroups.ContainsKey(c))
-                        alertGroups[c] = new List<Alert>();
-                    List<Alert> l = alertGroups[c];
-                    l.Add(a);
-                }
-                a.Dismissing = true;
-            }
-            // When we refresh now the alerts we are dismissing will be removed from the GridViewAlerts control as their dismissing flag
-            // is set. This also updates the numbers in the filter list correctly.
-            toolStripDropDownButtonServerFilter.RefreshLists();
-
-            foreach (IXenConnection c in alertGroups.Keys)
-            {
-                DismissAlerts(c, alertGroups[c]);
-            }
-
-            if (local_alerts.Count > 0)
-                DismissAlerts(null, local_alerts);
-        }
-
-        /// <param name="connection">
-        /// May be null, in which case this is expected to be for client-side alerts.
-        /// </param>
-        private static void DismissAlerts(IXenConnection connection, List<Alert> alerts)
-        {
-            new DeleteAllAlertsAction(connection, alerts).RunAsync();
+            DismissAlerts(alerts);
         }
 
         private void AlertsCollectionChanged(object sender, CollectionChangeEventArgs e)
@@ -584,11 +526,7 @@ namespace XenAdmin.TabPages
                 toolStripDropDownButtonDateFilter.Enabled =
                 toolStripButtonExportAll.Enabled = Alert.NonDismissingAlertCount > 0;
 
-            // We use the nondismissing alert count here because we dont wan't to
-            // offer people the chance to dismiss alerts which are already being
-            // dismissed... they aren't even shown in the datagridview
-
-            tsmiDismissAll.Enabled = AllowedToDismissAtLeastOne();
+            tsmiDismissAll.Enabled = AllowedToDismiss(Alert.Alerts);
             tsmiDismissAll.AutoToolTip = !tsmiDismissAll.Enabled;
             tsmiDismissAll.ToolTipText = tsmiDismissAll.Enabled
                                                           ? string.Empty
@@ -596,75 +534,61 @@ namespace XenAdmin.TabPages
                                                                 ? Messages.DELETE_ANY_MESSAGE_RBAC_BLOCKED
                                                                 : Messages.NO_MESSAGES_TO_DISMISS;
 
-            tsmiDismissSelected.Enabled = AllowedToDismissSelected();
+            var selectedAlerts = from DataGridViewRow row in GridViewAlerts.SelectedRows
+                                 select row.Tag as Alert;
+
+            tsmiDismissSelected.Enabled = AllowedToDismiss(selectedAlerts);
             tsmiDismissSelected.AutoToolTip = !tsmiDismissSelected.Enabled;
             tsmiDismissSelected.ToolTipText = tsmiDismissSelected.Enabled
                                                   ? string.Empty
                                                   : Messages.DELETE_MESSAGE_RBAC_BLOCKED;
 
-            toolStripSplitButtonDismiss.Enabled = tsmiDismissAll.Enabled && tsmiDismissSelected.Enabled;
-        }
+            toolStripSplitButtonDismiss.Enabled = tsmiDismissAll.Enabled || tsmiDismissSelected.Enabled;
 
-        /// <summary>
-        /// Check that there exists a non dismissing alert that can be dismissed.
-        /// </summary>
-        /// <returns></returns>
-        private bool AllowedToDismissAtLeastOne()
-        {
-            Dictionary<IXenConnection, bool> connectionsChecked = new Dictionary<IXenConnection, bool>();
-            foreach (Alert a in Alert.Alerts)
+            if (toolStripSplitButtonDismiss.DefaultItem != null && !toolStripSplitButtonDismiss.DefaultItem.Enabled)
             {
-                if (a.Connection != null && connectionsChecked.ContainsKey(a.Connection))
-                    continue;
-
-                if (a.Dismissing)
-                    continue;
-
-                if (AllowedToDismiss(a.Connection))
-                    return true;
-
-                // we can't dismiss from this connection, so don't bother checking in future
-                connectionsChecked.Add(a.Connection, true);
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Checks that each alert which is currently selected comes from a connection where the user has sufficient RBAC
-        /// privileges to clear the alert.
-        /// </summary>
-        /// <returns></returns>
-        private bool AllowedToDismissSelected()
-        {
-            List<IXenConnection> selectedAlertConnections = new List<IXenConnection>();
-            foreach (DataGridViewRow r in GridViewAlerts.SelectedRows)
-            {
-                Alert alert = r.Tag as Alert;
-                if (alert != null && alert.Connection != null &&
-                    !selectedAlertConnections.Contains(alert.Connection))
+                foreach (ToolStripItem item in toolStripSplitButtonDismiss.DropDownItems)
                 {
-                    selectedAlertConnections.Add(alert.Connection);
+                    if (item.Enabled)
+                    {
+                        toolStripSplitButtonDismiss.DefaultItem = item;
+                        toolStripSplitButtonDismiss.Text = item.Text;
+                        break;
+                    }
                 }
             }
-
-            if (selectedAlertConnections.Count == 0)
-                return false;
-
-            foreach (IXenConnection c in selectedAlertConnections)
-            {
-                if (!AllowedToDismiss(c))
-                    return false;
-            }
-            return true;
         }
 
+        #region Alert dismissal
+
+        private bool AllowedToDismiss(Alert alert)
+        {
+            return AllowedToDismiss(new[] { alert });
+        }
+
+        private bool AllowedToDismiss(IEnumerable<Alert> alerts)
+        {
+            var alertConnections = (from Alert alert in alerts
+                                    where alert != null && !alert.Dismissing
+                                    let con = alert.Connection
+                                    select con).Distinct();
+
+            if (alertConnections.Count() == 0)
+                return false;
+
+            return alertConnections.Any(AllowedToDismiss);
+        }
+
+        /// <summary>
+        /// Checks the user has sufficient RBAC privileges to clear alerts on a given connection
+        /// </summary>
         private bool AllowedToDismiss(IXenConnection c)
         {
             // check if local alert
             if (c == null)
                 return true;
 
-            // have we disconnected? Alert will dissapear soon, but for now block dismissal.
+            // have we disconnected? Alert will disappear soon, but for now block dismissal.
             if (c.Session == null)
                 return false;
 
@@ -675,18 +599,35 @@ namespace XenAdmin.TabPages
             foreach (Role possibleRole in rolesAbleToCompleteAction)
             {
                 if (c.Session.Roles.Contains(possibleRole))
-                {
                     return true;
-                }
             }
             return false;
         }
+
+        private void DismissAlerts(IEnumerable<Alert> alerts)
+        {
+            var groups = from Alert alert in alerts
+                         where alert != null && !alert.Dismissing
+                         group alert by alert.Connection
+                         into g
+                         select new { Connection = g.Key, Alerts = g };
+
+            foreach (var g in groups)
+            {
+                if (AllowedToDismiss(g.Connection))
+                    new DeleteAllAlertsAction(g.Connection, g.Alerts).RunAsync();
+            }
+
+            Rebuild();
+        }
+
+        #endregion
 
         private List<ToolStripItem> GetAlertActionItems(Alert alert)
         {
             var items = new List<ToolStripItem>();
 
-            if (AllowedToDismissSelected())
+            if (AllowedToDismiss(alert))
             {
                 var dismiss = new ToolStripMenuItem(Messages.ALERT_DISMISS);
                 dismiss.Click += ToolStripMenuItemDismiss_Click;
@@ -793,14 +734,17 @@ namespace XenAdmin.TabPages
                         if (exportAll)
                         {
                             foreach (Alert a in Alert.Alerts)
-                                stream.WriteLine(a.GetAlertDetailsCSVQuotes());
+                            {
+                                if (!a.Dismissing)
+                                    stream.WriteLine(a.GetAlertDetailsCSVQuotes());
+                            }
                         }
                         else
                         {
                             foreach (DataGridViewRow row in GridViewAlerts.Rows)
                             {
                                 var a = row.Tag as Alert;
-                                if (a != null)
+                                if (a != null && !a.Dismissing)
                                     stream.WriteLine(a.GetAlertDetailsCSVQuotes());
                             }
                         }

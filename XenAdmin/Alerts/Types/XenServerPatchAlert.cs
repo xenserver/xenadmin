@@ -88,7 +88,6 @@ namespace XenAdmin.Alerts
             Patch = patch;
             _priority = patch.Priority;
             _timestamp = Patch.TimeStamp;
-            canIgnore = true;
         }
 
         public override string WebPageLabel
@@ -121,7 +120,7 @@ namespace XenAdmin.Alerts
             get { return Patch.Name; }
         }
 
-        public override FixLinkDelegate FixLinkAction
+        public override Action FixLinkAction
         {
             get { return () => Program.OpenURL(Patch.Url); }
         }

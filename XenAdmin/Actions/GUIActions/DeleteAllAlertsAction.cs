@@ -31,24 +31,23 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using XenAdmin.Alerts;
 using XenAdmin.Network;
 using XenAdmin.Core;
 using XenAPI;
-using System.Windows.Forms;
-
 
 
 namespace XenAdmin.Actions
 {
     public class DeleteAllAlertsAction : AsyncAction
     {
-        private readonly List<Alert> Alerts;
+        private readonly IEnumerable<Alert> Alerts;
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <param name="connection">May be null, in which case this is expected to be for client-side alerts.</param>
-        public DeleteAllAlertsAction(IXenConnection connection, List<Alert> alerts)
+        public DeleteAllAlertsAction(IXenConnection connection, IEnumerable<Alert> alerts)
             : base(connection,
                    connection == null ? Messages.ACTION_REMOVE_ALERTS_ON_CLIENT_TITLE : string.Format(Messages.ACTION_REMOVE_ALERTS_ON_CONNECTION_TITLE, Helpers.GetName(connection)),
                    Messages.ACTION_REMOVE_ALERTS_DESCRIPTION)
@@ -65,9 +64,10 @@ namespace XenAdmin.Actions
         protected override void Run()
         {
             int i = 0;
-            int max = Alerts.Count;
+            int max = Alerts.Count();
             Exception e = null;
             LogDescriptionChanges = false;
+
             try
             {
                 foreach (Alert a in Alerts)
@@ -75,11 +75,14 @@ namespace XenAdmin.Actions
                     PercentComplete = (i * 100) / max;
                     i++;
                     Description = string.Format(Messages.ACTION_REMOVE_ALERTS_PROGRESS_DESCRIPTION, i, max);
-                    BestEffort(ref e, delegate()
+
+                    Alert a1 = a;
+                    BestEffort(ref e, delegate
                         {
                             try
                             {
-                                a.DismissSingle(Session);
+                                a1.Dismissing = true;
+                                a1.DismissSingle(Session);
                             }
                             catch (Failure exn)
                             {
@@ -96,6 +99,5 @@ namespace XenAdmin.Actions
 
             Description = max == 1 ? Messages.ACTION_REMOVE_ALERTS_DONE_ONE : string.Format(Messages.ACTION_REMOVE_ALERTS_DONE, max);
         }
-
     }
 }

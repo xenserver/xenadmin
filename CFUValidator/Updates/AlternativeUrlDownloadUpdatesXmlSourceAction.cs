@@ -43,7 +43,9 @@ namespace CFUValidator.Updates
     class AlternativeUrlDownloadUpdatesXmlSourceAction : DownloadUpdatesXmlAction, ICheckForUpdatesXMLSource
     {
         private readonly string newLocation;
+
         public AlternativeUrlDownloadUpdatesXmlSourceAction(string url)
+            : base(true, true, true)
         {
             newLocation = url;
             ErrorRaised = null;

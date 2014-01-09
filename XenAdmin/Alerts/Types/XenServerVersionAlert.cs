@@ -47,7 +47,6 @@ namespace XenAdmin.Alerts
         {
             Version = version;
             _timestamp = version.TimeStamp;
-            canIgnore = true;
         }
 
         public override string WebPageLabel
@@ -82,8 +81,8 @@ namespace XenAdmin.Alerts
         {
             get { return AlertPriority.Priority5; }
         }
-        
-        public override FixLinkDelegate FixLinkAction
+
+        public override Action FixLinkAction
         {
             get { return () => Program.OpenURL(Version.Url); }
         }
@@ -98,7 +97,7 @@ namespace XenAdmin.Alerts
 
         public override void Dismiss()
         {
-            foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
+            foreach (IXenConnection connection in connections)
                 new IgnoreServerAction(connection, Version).RunAsync();
             base.Dismiss();
         }

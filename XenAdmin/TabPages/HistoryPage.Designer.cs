@@ -145,9 +145,10 @@ namespace XenAdmin.TabPages
             this.columnActions});
             resources.ApplyResources(this.dataGridView, "dataGridView");
             this.dataGridView.GridColor = System.Drawing.SystemColors.Control;
+            this.dataGridView.MultiSelect = true;
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_ColumnHeaderMouseClick);
             this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
+            this.dataGridView.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_ColumnHeaderMouseClick);
             this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView_SelectionChanged);
             // 
             // columnExpander

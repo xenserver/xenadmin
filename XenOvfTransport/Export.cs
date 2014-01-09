@@ -47,6 +47,8 @@ namespace XenOvfTransport
     public class Export : XenOvfTransportBase
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog auditLog = log4net.LogManager.GetLogger("Audit");
+        private static readonly log4net.ILog traceLog = log4net.LogManager.GetLogger("Trace");
 
         private const long KB = 1024;
         private const long MB = (KB * 1024);
@@ -90,7 +92,7 @@ namespace XenOvfTransport
 
             try
             {
-                log.InfoFormat("Export: {0}, {1}", ovfname, targetPath);
+                auditLog.DebugFormat("Export: {0}, {1}", ovfname, targetPath);
 
                 #region GET VM Reference
                 XenRef<VM> vmRef = null;
@@ -110,7 +112,7 @@ namespace XenOvfTransport
 					{
 						List<XenRef<VM>> vmRefs = VM.get_by_name_label(xenSession, vmUuid);
 						vmRef = vmRefs[0];
-					    log.DebugFormat("{0} VM(s) found by label {1}", vmRefs.Count, vmUuid);
+					    traceLog.DebugFormat("{0} VM(s) found by label {1}", vmRefs.Count, vmUuid);
                         if (vmRefs.Count > 1)
                             log.WarnFormat("Only exporting FIRST VM with name {0}", vmUuid);
 					}

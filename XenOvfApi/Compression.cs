@@ -31,7 +31,6 @@
 
 using System;
 using System.IO;
-using XenCenterLib.Archive;
 using XenCenterLib.Compression;
 using XenOvf.Definitions;
 using XenOvf.Utilities;
@@ -40,6 +39,8 @@ namespace XenOvf
 {
     public class OvfCompressor
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
     	/// <summary>
     	/// Set to TRUE to Cancel current Compression process.
     	/// </summary>
@@ -167,8 +168,8 @@ namespace XenOvf
                 {
 					if (ex is OperationCanceledException)
 						throw;
-                    Log.Warning("Uncompression issue: {0}",  ex);
-                    Log.Warning("Previous warning may be ok, continuing with import, failures continue then this is the issue");
+                    log.WarnFormat("Uncompression issue: {0}", ex);
+                    log.Warn("Previous warning may be ok, continuing with import, failures continue then this is the issue");
                 }
                 finally
                 {
@@ -202,12 +203,12 @@ namespace XenOvf
                     {
                         if (file.compression == null)
                         {
-                            Log.Info("File {0} was not marked as compressed, skipped.", file.href);
+                            log.InfoFormat("File {0} was not marked as compressed, skipped.", file.href);
                             continue;
                         }
 						if (file.compression.ToLower() != "gzip" && file.compression.ToLower() != "bzip2")
                         {
-                            Log.Error("Invalid compression method File: {0} Method: {1}, must be Gzip or BZip2", file.href, file.compression);
+                            log.ErrorFormat("Invalid compression method File: {0} Method: {1}, must be Gzip or BZip2", file.href, file.compression);
                             continue;
                         }
 
@@ -251,14 +252,14 @@ namespace XenOvf
                     }
                     catch (EndOfStreamException eose)
                     {
-                        Log.Error("End of Stream: {0}", eose.Message);
+                        log.ErrorFormat("End of Stream: {0}", eose.Message);
                     }
                     catch (Exception ex)
                     {
 						if (ex is OperationCanceledException)
 							throw;
                         var message = string.Format(Messages.COMPRESS_FAILED, filename);
-                        Log.Error("{0} {1}", message, ex.Message);
+                        log.ErrorFormat("{0} {1}", message, ex.Message);
                         throw new Exception(message, ex);
                     }
                     finally

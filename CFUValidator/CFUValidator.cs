@@ -121,7 +121,7 @@ namespace CFUValidator
             var updateAlert = XenAdmin.Core.Updates.NewXenServerVersionAlert(xenServerVersions);
 
             Status = "Determining patches required...";
-            var patchAlerts = XenAdmin.Core.Updates.NewXenServerPatchAlerts(xenServerVersions, xenServerPatches);
+            var patchAlerts = XenAdmin.Core.Updates.NewXenServerPatchAlerts(xenServerVersions, xenServerPatches).Where(alert => !alert.CanIgnore).ToList();
 
             //Build patch checks list
             List<AlertFeatureValidator> validators = new List<AlertFeatureValidator>
