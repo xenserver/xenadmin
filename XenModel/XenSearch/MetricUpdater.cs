@@ -41,6 +41,7 @@ using XenAPI;
 
 using XenAdmin.Core;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace XenAdmin.XenSearch
 {
@@ -120,12 +121,9 @@ namespace XenAdmin.XenSearch
                     hosts = _hosts;
                 }
 
-                Parallel.ForEach(hosts.Keys,
+                Parallel.ForEach(hosts.Keys.Where(h => h.Connection.IsConnected),
                     host => 
                     {
-                        if (!host.Connection.IsConnected)
-                            return;
-
                         HostMetric hm;
                         //Intentionally using TryGetValue (instead of indexer's getter), because there is a slight chance 'host' is not in 'hosts.Keys' anymore.
                         //This means that metrics of such 'host' can be ignored safely (no else implemented below).
