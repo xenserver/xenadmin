@@ -23,8 +23,9 @@ xs-devel@lists.xenserver.org.
       Certificate of Origin" (DCO) and should include a Signed-off-by:
       line.
 	  
-4.    All contributions to the project must be sent as patches to the 
-      xs-devel@lists.xenserver.org mailing list. 
+4.    Make your patch(es) available by creating one or more github pull requests. 
+      Each pull request should be separately reviewable and mergable. Only patches 
+      which must be committed together should be in the same pull request.
 
 5.    Each patch should include a descriptive commit comment that helps
       understand why the patch is necessary and why it works. This will

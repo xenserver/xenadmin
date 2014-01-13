@@ -12,9 +12,12 @@ XenCenter is written mostly in C#.
 Contributions
 -------------
 
-The preferable way to contribute is to submit your patches to the 
-xs-devel@lists.xenserver.org mailing list rather than submitting pull requests. 
-Please see the CONTRIB file for some general guidelines on submitting changes.
+The preferable way to contribute patches is to fork the repository on Github and 
+then submit a pull request. If for some reason you can't use Github to submit a 
+pull request, then you may send your patch for review to the 
+xs-devel@lists.xenserver.org mailing list, with a link to a public git repository 
+for review. Please see the CONTRIB.md file for some general guidelines on submitting 
+changes.
 
 License
 -------
