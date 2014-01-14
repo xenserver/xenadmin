@@ -11,5 +11,5 @@
     <String Id="XenServer_Update_File">XenServer アップデート ファイル</String>
     <String Id="XenServer_OEM_Update_File">XenServer OEM アップデート ファイル</String>
     <String Id="XenCenter_Saved_Search">XenCenter 保存された検索条件</String>
-    <String Id="Required_For_Installation">この製品をインストールするには、.NET Framework 3.5 が必要です。</String>
+    <String Id="Required_For_Installation">この製品をインストールするには、.NET Framework 4 が必要です。</String>
 </WixLocalization>
