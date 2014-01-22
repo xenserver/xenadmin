@@ -117,7 +117,7 @@ namespace XenAdmin.Commands
                     if (!vbd.currently_attached)
                         continue;
 
-                    DeactivateVBDCommand cmd = new DeactivateVBDCommand(Program.MainWindow.CommandInterface, vbd);
+                    DeactivateVBDCommand cmd = new DeactivateVBDCommand(Program.MainWindow, vbd);
                     if (!cmd.CanExecute())
                         return false;
                 }
@@ -140,7 +140,7 @@ namespace XenAdmin.Commands
                     if (!vbd.currently_attached)
                         continue;
 
-                    DeactivateVBDCommand cmd = new DeactivateVBDCommand(Program.MainWindow.CommandInterface, vbd);
+                    DeactivateVBDCommand cmd = new DeactivateVBDCommand(Program.MainWindow, vbd);
                     if (!cmd.CanExecute())
                         return cmd.ToolTipText;
                 }

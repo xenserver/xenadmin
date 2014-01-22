@@ -507,7 +507,7 @@ namespace XenAdmin.Controls.NetworkingTab
 
                 Proxy_VIF pVif = d.GetNewSettings();
                 pVif.VM = vm.opaque_ref;
-                CreateVIFCommand action = new CreateVIFCommand(Program.MainWindow.CommandInterface,vm, pVif);
+                CreateVIFCommand action = new CreateVIFCommand(Program.MainWindow, vm, pVif);
                 action.Execute();
             }
             else if (XenObject is Host)
@@ -568,7 +568,7 @@ namespace XenAdmin.Controls.NetworkingTab
             XenAPI.Network network = SelectedNetwork;
             if (network != null && network.IsBond)
             {
-                var destroyBondCommand = new DestroyBondCommand(Program.MainWindow.CommandInterface, network);
+                var destroyBondCommand = new DestroyBondCommand(Program.MainWindow, network);
                 destroyBondCommand.Execute();
             }
             else
@@ -730,7 +730,7 @@ namespace XenAdmin.Controls.NetworkingTab
                 return;
 
             Proxy_VIF proxyVIF = d.GetNewSettings();
-            UpdateVIFCommand command = new UpdateVIFCommand(Program.MainWindow.CommandInterface,vm, vif, proxyVIF);
+            UpdateVIFCommand command = new UpdateVIFCommand(Program.MainWindow, vm, vif, proxyVIF);
             InBuildList = true;
             command.Completed += new EventHandler((s, f) => Program.Invoke(this, () =>
                                                                                      {

@@ -120,7 +120,7 @@ namespace XenAdminTests.TabsAndMenus
         [Test]
         public void TestContextMenuFontCorrect()
         {
-            ContextMenuBuilder builder = new ContextMenuBuilder(MainWindowWrapper.PluginManager, Program.MainWindow.CommandInterface);
+            ContextMenuBuilder builder = new ContextMenuBuilder(MainWindowWrapper.PluginManager, Program.MainWindow);
             MW(() => TestMenuFontCorrect(builder.Build(GetAnyVM())));
         }
 

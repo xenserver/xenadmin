@@ -65,7 +65,7 @@ namespace XenAdmin.Wizards.GenericPages
 
             public void ExecuteCommand(Control parent)
             {
-                new AddHostCommand(Program.MainWindow.CommandInterface, parent).Execute();
+                new AddHostCommand(Program.MainWindow, parent).Execute();
             }
 
             public bool Enabled

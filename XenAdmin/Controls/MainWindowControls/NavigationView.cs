@@ -429,17 +429,17 @@ namespace XenAdmin.Controls.MainWindowControls
         private List<DragDropCommand> GetDragDropCommands(VirtualTreeNode targetNode, IDataObject dragData)
         {
             List<DragDropCommand> commands = new List<DragDropCommand>();
-            commands.Add(new DragDropAddHostToPoolCommand(Program.MainWindow.CommandInterface, targetNode, dragData));
-            commands.Add(new DragDropMigrateVMCommand(Program.MainWindow.CommandInterface, targetNode, dragData));
-            commands.Add(new DragDropRemoveHostFromPoolCommand(Program.MainWindow.CommandInterface, targetNode, dragData));
+            commands.Add(new DragDropAddHostToPoolCommand(Program.MainWindow, targetNode, dragData));
+            commands.Add(new DragDropMigrateVMCommand(Program.MainWindow, targetNode, dragData));
+            commands.Add(new DragDropRemoveHostFromPoolCommand(Program.MainWindow, targetNode, dragData));
 
             if (NavigationMode == NavigationPane.NavigationMode.Tags
                 || NavigationMode == NavigationPane.NavigationMode.Folders
                 || NavigationMode == NavigationPane.NavigationMode.CustomFields
                 || NavigationMode == NavigationPane.NavigationMode.vApps)
             {
-                commands.Add(new DragDropTagCommand(Program.MainWindow.CommandInterface, targetNode, dragData));
-                commands.Add(new DragDropIntoFolderCommand(Program.MainWindow.CommandInterface, targetNode, dragData));
+                commands.Add(new DragDropTagCommand(Program.MainWindow, targetNode, dragData));
+                commands.Add(new DragDropIntoFolderCommand(Program.MainWindow, targetNode, dragData));
             }
 
             return commands;
@@ -483,17 +483,17 @@ namespace XenAdmin.Controls.MainWindowControls
             {
                 if (e.Node.Tag == null)// XenCenter (top most)
                 {
-                    TreeContextMenu.Items.Add(new CommandToolStripMenuItem(new AddHostCommand(Program.MainWindow.CommandInterface), true));
-                    TreeContextMenu.Items.Add(new CommandToolStripMenuItem(new NewPoolCommand(Program.MainWindow.CommandInterface, new SelectedItem[0]), true));
-                    TreeContextMenu.Items.Add(new CommandToolStripMenuItem(new ConnectAllHostsCommand(Program.MainWindow.CommandInterface), true));
-                    TreeContextMenu.Items.Add(new CommandToolStripMenuItem(new DisconnectAllHostsCommand(Program.MainWindow.CommandInterface), true));
+                    TreeContextMenu.Items.Add(new CommandToolStripMenuItem(new AddHostCommand(Program.MainWindow), true));
+                    TreeContextMenu.Items.Add(new CommandToolStripMenuItem(new NewPoolCommand(Program.MainWindow, new SelectedItem[0]), true));
+                    TreeContextMenu.Items.Add(new CommandToolStripMenuItem(new ConnectAllHostsCommand(Program.MainWindow), true));
+                    TreeContextMenu.Items.Add(new CommandToolStripMenuItem(new DisconnectAllHostsCommand(Program.MainWindow), true));
                 }
                 else
                 {
                     var groupingTag = e.Node.Tag as GroupingTag;
                     if (groupingTag != null && groupingTag.Grouping as OrganizationViewFolders != null)
                         TreeContextMenu.Items.Add(new CommandToolStripMenuItem(
-                            new NewFolderCommand(Program.MainWindow.CommandInterface, new[] { new SelectedItem(groupingTag, e.Node) }),
+                            new NewFolderCommand(Program.MainWindow, new[] { new SelectedItem(groupingTag, e.Node) }),
                             true));
                 }
             }
@@ -526,11 +526,11 @@ namespace XenAdmin.Controls.MainWindowControls
             if (nodes.Count == 1 && nodes[0].Nodes.Count == 0)
                 return;
 
-            Command cmd = new CollapseChildTreeNodesCommand(Program.MainWindow.CommandInterface, nodes);
+            Command cmd = new CollapseChildTreeNodesCommand(Program.MainWindow, nodes);
             if (cmd.CanExecute())
                 TreeContextMenu.Items.Insert(insertIndex, new CommandToolStripMenuItem(cmd, true));
 
-            cmd = new ExpandTreeNodesCommand(Program.MainWindow.CommandInterface, nodes);
+            cmd = new ExpandTreeNodesCommand(Program.MainWindow, nodes);
             if (cmd.CanExecute())
                 TreeContextMenu.Items.Insert(insertIndex, new CommandToolStripMenuItem(cmd, true));
         }
@@ -545,12 +545,12 @@ namespace XenAdmin.Controls.MainWindowControls
                 return;
             }
 
-            Command cmd = new RemoveFromFolderCommand(Program.MainWindow.CommandInterface, nodes);
+            Command cmd = new RemoveFromFolderCommand(Program.MainWindow, nodes);
 
             if (cmd.CanExecute())
                 TreeContextMenu.Items.Insert(insertIndex, new CommandToolStripMenuItem(cmd, true));
 
-            cmd = new UntagCommand(Program.MainWindow.CommandInterface, nodes);
+            cmd = new UntagCommand(Program.MainWindow, nodes);
 
             if (cmd.CanExecute())
                 TreeContextMenu.Items.Insert(insertIndex, new CommandToolStripMenuItem(cmd, true));
@@ -593,14 +593,14 @@ namespace XenAdmin.Controls.MainWindowControls
             {
                 if (folder != null)
                 {
-                    RenameFolderCommand cmd = new RenameFolderCommand(Program.MainWindow.CommandInterface, folder, e.Label);
+                    RenameFolderCommand cmd = new RenameFolderCommand(Program.MainWindow, folder, e.Label);
                     command = cmd;
                     cmd.Completed += completed;
                     newTag = new Folder(null, e.Label);
                 }
                 else if (groupingTag != null)
                 {
-                    RenameTagCommand cmd = new RenameTagCommand(Program.MainWindow.CommandInterface, groupingTag.Group.ToString(), e.Label);
+                    RenameTagCommand cmd = new RenameTagCommand(Program.MainWindow, groupingTag.Group.ToString(), e.Label);
                     command = cmd;
                     cmd.Completed += completed;
                     newTag = new GroupingTag(groupingTag.Grouping, groupingTag.Parent, e.Label);
@@ -759,7 +759,7 @@ namespace XenAdmin.Controls.MainWindowControls
                     break;
 
                 case Keys.F2:
-                    var cmd = new PropertiesCommand(Program.MainWindow.CommandInterface, Program.MainWindow.SelectionManager.Selection);
+                    var cmd = new PropertiesCommand(Program.MainWindow, Program.MainWindow.SelectionManager.Selection);
                     if (cmd.CanExecute())
                         cmd.Execute();
                     break;
@@ -802,7 +802,7 @@ namespace XenAdmin.Controls.MainWindowControls
             }
             if (conn != null && !conn.IsConnected)
             {
-                new ReconnectHostCommand(Program.MainWindow.CommandInterface, conn).Execute();
+                new ReconnectHostCommand(Program.MainWindow, conn).Execute();
                 return;
             }
 
@@ -813,15 +813,15 @@ namespace XenAdmin.Controls.MainWindowControls
 
                 if (vm.is_a_template)
                 {
-                    cmd = new NewVMCommand(Program.MainWindow.CommandInterface, Program.MainWindow.SelectionManager.Selection);
+                    cmd = new NewVMCommand(Program.MainWindow, Program.MainWindow.SelectionManager.Selection);
                 }
                 else if (vm.power_state == vm_power_state.Halted && vm.allowed_operations.Contains(vm_operations.start))
                 {
-                    cmd = new StartVMCommand(Program.MainWindow.CommandInterface, Program.MainWindow.SelectionManager.Selection);
+                    cmd = new StartVMCommand(Program.MainWindow, Program.MainWindow.SelectionManager.Selection);
                 }
                 else if (vm.power_state == vm_power_state.Suspended && vm.allowed_operations.Contains(vm_operations.resume))
                 {
-                    cmd = new ResumeVMCommand(Program.MainWindow.CommandInterface, Program.MainWindow.SelectionManager.Selection);
+                    cmd = new ResumeVMCommand(Program.MainWindow, Program.MainWindow.SelectionManager.Selection);
                 }
 
                 if (cmd != null && cmd.CanExecute())
@@ -835,7 +835,7 @@ namespace XenAdmin.Controls.MainWindowControls
             Host host = e.Node.Tag as Host;
             if (host != null)
             {
-                Command cmd = new PowerOnHostCommand(Program.MainWindow.CommandInterface, host);
+                Command cmd = new PowerOnHostCommand(Program.MainWindow, host);
                 if (cmd.CanExecute())
                 {
                     treeView.SelectedNode = e.Node;

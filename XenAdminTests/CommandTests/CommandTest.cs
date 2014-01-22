@@ -90,7 +90,7 @@ namespace XenAdminTests.CommandTests
         {           
             Command = CreateCommand();
 
-            ((ICommand)Command).SetMainWindow(Program.MainWindow.CommandInterface);
+            ((ICommand)Command).SetMainWindow(Program.MainWindow);
 
             bool noneExecuted = true;
 

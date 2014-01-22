@@ -144,7 +144,7 @@ namespace XenAdmin.TabPages
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            new PropertiesCommand(Program.MainWindow.CommandInterface, xenObject).Execute();
+            new PropertiesCommand(Program.MainWindow, xenObject).Execute();
         }
 
         private IXenObject xenObject;
@@ -598,7 +598,7 @@ namespace XenAdmin.TabPages
             }
 
             CommandToolStripMenuItem applypatch = new CommandToolStripMenuItem(
-                new InstallNewUpdateCommand(Program.MainWindow.CommandInterface), true);
+                new InstallNewUpdateCommand(Program.MainWindow), true);
 
             var menuItems = new[] { applypatch };
 
@@ -638,7 +638,7 @@ namespace XenAdmin.TabPages
             {
                 CommandToolStripMenuItem applypatch =
                            new CommandToolStripMenuItem(
-                               new InstallNewUpdateCommand(Program.MainWindow.CommandInterface), true);
+                               new InstallNewUpdateCommand(Program.MainWindow), true);
 
                 var menuItems = new[] { applypatch };
                 s.AddEntry(FriendlyName("Pool_patch.not_applied"), hostUnappliedPatches(host), menuItems, Color.Red);
@@ -658,7 +658,7 @@ namespace XenAdmin.TabPages
             PDSection s = pdSectionHighAvailability;
 
             s.AddEntry(FriendlyName("VM.ha_restart_priority"), Helpers.RestartPriorityI18n(vm.HARestartPriority),
-                new PropertiesToolStripMenuItem(new VmEditHaCommand(Program.MainWindow.CommandInterface, xenObject)));
+                new PropertiesToolStripMenuItem(new VmEditHaCommand(Program.MainWindow, xenObject)));
         }
 
       
@@ -682,7 +682,7 @@ namespace XenAdmin.TabPages
             repair.Click += delegate
                 {
                     if (sr.NeedsUpgrading)
-                        new UpgradeSRCommand(Program.MainWindow.CommandInterface, sr).Execute();
+                        new UpgradeSRCommand(Program.MainWindow, sr).Execute();
                     else
                         Program.MainWindow.ShowPerConnectionWizard(xenObject.Connection, new RepairSRDialog(sr));
                 };
@@ -892,18 +892,18 @@ namespace XenAdmin.TabPages
             if (!Helpers.BostonOrGreater(vm.Connection))
 			{
 			    s.AddEntry(FriendlyName("VM.auto_boot"), Helpers.BoolToString(vm.AutoPowerOn),
-                    new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow.CommandInterface, vm)));
+                    new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow, vm)));
 			}
 
         	if (vm.IsHVM)
             {	
                 s.AddEntry(FriendlyName("VM.BootOrder"), HVMBootOrder(vm),
-                   new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow.CommandInterface, vm)));
+                   new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow, vm)));
             }
             else
             {
                 s.AddEntry(FriendlyName("VM.PV_args"), vm.PV_args,
-                    new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow.CommandInterface, vm)));
+                    new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow, vm)));
             }
         }
 
@@ -1060,7 +1060,7 @@ namespace XenAdmin.TabPages
             PDSection s = pdSectionGeneral;
 
             s.AddEntry(FriendlyName("host.name_label"), Helpers.GetName(xenObject),
-                new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow.CommandInterface, xenObject)));
+                new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow, xenObject)));
 
             if (!(xenObject is IStorageLinkObject))
             {
@@ -1068,7 +1068,7 @@ namespace XenAdmin.TabPages
                 if (vm == null || vm.DescriptionType != VM.VmDescriptionType.None)
                 {
                     s.AddEntry(FriendlyName("host.name_description"), xenObject.Description,
-                               new PropertiesToolStripMenuItem(new DescriptionPropertiesCommand(Program.MainWindow.CommandInterface, xenObject)));
+                               new PropertiesToolStripMenuItem(new DescriptionPropertiesCommand(Program.MainWindow, xenObject)));
                 }
 
                 GenTagRow(s);
@@ -1091,7 +1091,7 @@ namespace XenAdmin.TabPages
                     var item = new ToolStripMenuItem(Messages.EXIT_MAINTENANCE_MODE);
                     item.Click += delegate
                         {
-                            new HostMaintenanceModeCommand(Program.MainWindow.CommandInterface, host,
+                            new HostMaintenanceModeCommand(Program.MainWindow, host,
                                                            HostMaintenanceModeCommandParameter.Exit).Execute();
                         };
                     s.AddEntry(FriendlyName("host.enabled"),
@@ -1104,16 +1104,16 @@ namespace XenAdmin.TabPages
                     var item = new ToolStripMenuItem(Messages.ENTER_MAINTENANCE_MODE);
                     item.Click += delegate
                         {
-                            new HostMaintenanceModeCommand(Program.MainWindow.CommandInterface, host,
+                            new HostMaintenanceModeCommand(Program.MainWindow, host,
                                 HostMaintenanceModeCommandParameter.Enter).Execute();
                         };
                     s.AddEntry(FriendlyName("host.enabled"), Messages.YES, item);
                 }
 
                 s.AddEntry(FriendlyName("host.iscsi_iqn"), host.iscsi_iqn,
-                    new PropertiesToolStripMenuItem(new IqnPropertiesCommand(Program.MainWindow.CommandInterface, xenObject)));
+                    new PropertiesToolStripMenuItem(new IqnPropertiesCommand(Program.MainWindow, xenObject)));
                 s.AddEntry(FriendlyName("host.log_destination"), host.SysLogDestination ?? Messages.HOST_LOG_DESTINATION_LOCAL,
-                   new PropertiesToolStripMenuItem(new HostEditLogDestinationCommand(Program.MainWindow.CommandInterface, xenObject)));
+                   new PropertiesToolStripMenuItem(new HostEditLogDestinationCommand(Program.MainWindow, xenObject)));
 
                 PrettyTimeSpan uptime = host.Uptime;
                 PrettyTimeSpan agentUptime = host.AgentUptime;
@@ -1176,11 +1176,11 @@ namespace XenAdmin.TabPages
                                 var installtools = new ToolStripMenuItem(Messages.INSTALL_XENSERVER_TOOLS_DOTS);
                                 installtools.Click += delegate
                                     {
-                                        new InstallToolsCommand(Program.MainWindow.CommandInterface, vm).Execute();
+                                        new InstallToolsCommand(Program.MainWindow, vm).Execute();
                                     };
                                 s.AddEntryLink(FriendlyName("VM.VirtualizationState"), vm.VirtualisationStatusString,
                                     new[] { installtools },
-                                    new InstallToolsCommand(Program.MainWindow.CommandInterface, vm));
+                                    new InstallToolsCommand(Program.MainWindow, vm));
                             }
                             else
                             {
@@ -1207,7 +1207,7 @@ namespace XenAdmin.TabPages
                     if (VMCanChooseHomeServer(vm))
                     {
                         s.AddEntry(FriendlyName("VM.affinity"), vm.AffinityServerString,
-                            new PropertiesToolStripMenuItem(new VmEditHomeServerCommand(Program.MainWindow.CommandInterface, xenObject)));}
+                            new PropertiesToolStripMenuItem(new VmEditHomeServerCommand(Program.MainWindow, xenObject)));}
                 }
             }
             else if (xenObject is XenObject<SR>)
@@ -1260,7 +1260,7 @@ namespace XenAdmin.TabPages
                         }
                         else
                         {
-                            var cmd = new RollingUpgradeCommand(Program.MainWindow.CommandInterface);
+                            var cmd = new RollingUpgradeCommand(Program.MainWindow);
                             var runRpuWizard = new ToolStripMenuItem(Messages.ROLLING_POOL_UPGRADE_ELLIPSIS,
                                                                      null,
                                                                      (sender, args) => cmd.Execute());
@@ -1399,11 +1399,11 @@ namespace XenAdmin.TabPages
                     goToTag.DropDownItems.Add(item);
                 }
 
-                s.AddEntry(Messages.TAGS, TagsString(), new[] { goToTag, new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow.CommandInterface, xenObject)) });
+                s.AddEntry(Messages.TAGS, TagsString(), new[] { goToTag, new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow, xenObject)) });
                 return;
             }
 
-            s.AddEntry(Messages.TAGS, Messages.NONE, new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow.CommandInterface, xenObject)));
+            s.AddEntry(Messages.TAGS, Messages.NONE, new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow, xenObject)));
         }
 
         private string TagsString()
@@ -1424,7 +1424,7 @@ namespace XenAdmin.TabPages
                 item.Click += delegate { Program.MainWindow.SearchForFolder(xenObject.Path); };
                 menuItems.Add(item);
             }
-            menuItems.Add(new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow.CommandInterface, xenObject)));
+            menuItems.Add(new PropertiesToolStripMenuItem(new PropertiesCommand(Program.MainWindow, xenObject)));
             s.AddEntry(
                 Messages.FOLDER,
                 new FolderListItem(xenObject.Path, FolderListItem.AllowSearch.None, false),

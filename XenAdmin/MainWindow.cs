@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
@@ -66,7 +67,7 @@ namespace XenAdmin
 {
     [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
     [ComVisibleAttribute(true)]
-    public partial class MainWindow : Form, ISynchronizeInvoke
+    public partial class MainWindow : Form, ISynchronizeInvoke, IMainWindow
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -118,7 +119,6 @@ namespace XenAdmin
 
         private readonly PluginManager pluginManager;
         private readonly ContextMenuBuilder contextMenuBuilder;
-        private readonly MainWindowCommandInterface commandInterface;
 
         private readonly LicenseManagerLauncher licenseManagerLauncher;
         private readonly LicenseTimer licenseTimer;
@@ -188,11 +188,10 @@ namespace XenAdmin
             CommandLineArgType = argType;
             CommandLineParam = args;
 
-            commandInterface = new MainWindowCommandInterface(this);
             pluginManager = new PluginManager();
             pluginManager.PluginsChanged += pluginManager_PluginsChanged;
             pluginManager.LoadPlugins();
-            contextMenuBuilder = new ContextMenuBuilder(pluginManager, commandInterface);
+            contextMenuBuilder = new ContextMenuBuilder(pluginManager, this);
 
             eventsPage.GoToXenObjectRequested += eventsPage_GoToXenObjectRequested;
             SearchPage.SearchChanged += SearchPanel_SearchChanged;
@@ -210,8 +209,8 @@ namespace XenAdmin
 
             statusProgressBar.Visible = false;
 
-            SelectionManager.BindTo(MainMenuBar.Items, commandInterface);
-            SelectionManager.BindTo(ToolStrip.Items, commandInterface);
+            SelectionManager.BindTo(MainMenuBar.Items, this);
+            SelectionManager.BindTo(ToolStrip.Items, this);
             Properties.Settings.Default.SettingChanging += Default_SettingChanging;
 
             licenseTimer = new LicenseTimer(licenseManagerLauncher);
@@ -265,14 +264,6 @@ namespace XenAdmin
             get
             {
                 return contextMenuBuilder;
-            }
-        }
-
-        internal IMainWindow CommandInterface
-        {
-            get
-            {
-                return commandInterface;
             }
         }
 
@@ -637,7 +628,7 @@ namespace XenAdmin
                     break;
                 case ArgType.Restore:
                     log.DebugFormat("Restoring host backup from {0}", args[0]);
-                    new RestoreHostFromBackupCommand(commandInterface, null, args[0]).Execute();
+                    new RestoreHostFromBackupCommand(this, null, args[0]).Execute();
                     break;
                 case ArgType.Update:
                     log.DebugFormat("Installing server update from {0}", args[0]);
@@ -645,7 +636,7 @@ namespace XenAdmin
                     break;
                 case ArgType.XenSearch:
                     log.DebugFormat("Importing saved XenSearch from '{0}'", args[0]);
-                    new ImportSearchCommand(commandInterface, args[0]).Execute();
+                    new ImportSearchCommand(this, args[0]).Execute();
                     break;
                 case ArgType.Connect:
                     log.DebugFormat("Connecting to server '{0}'", args[0]);
@@ -667,7 +658,7 @@ namespace XenAdmin
                     {
                         // The user has launched the splash screen, but we're already running.
                         // Draw his attention.
-                        BringToFront();
+                        HelpersGUI.BringFormToFront(this);
                         Activate();
                     }
                     break;
@@ -779,7 +770,7 @@ namespace XenAdmin
         private void connection_ClearingCache(object sender, EventArgs e)
         {
             IXenConnection connection = (IXenConnection)sender;
-            closeActiveWizards(connection);
+            CloseActiveWizards(connection);
             Alert.RemoveAlert(alert => alert.Connection != null && alert.Connection.Equals(connection));
             Updates.CheckServerPatches();
             Updates.CheckServerVersion();
@@ -883,7 +874,7 @@ namespace XenAdmin
         {
             if (host.IsLive && host.MaintenanceMode && host.enabled)
             {
-                Program.MainWindow.closeActiveWizards(host);
+                Program.MainWindow.CloseActiveWizards(host);
 
                 var action = new DisableHostAction(host);
                 action.Completed += action_Completed;
@@ -940,11 +931,11 @@ namespace XenAdmin
                 {
                     VM vm = (VM)e.Element;
                     ConsolePanel.closeVNCForSource(vm);
-                    closeActiveWizards(vm);
+                    CloseActiveWizards(vm);
                 }
 
                 selectedTabs.Remove(o);
-                pluginManager.DisposeURLs((IXenObject)o);
+                pluginManager.DisposeURLs(o);
             }
         }
 
@@ -1119,7 +1110,7 @@ namespace XenAdmin
             try
             {
                 IXenConnection connection = (IXenConnection)sender;
-                closeActiveWizards(connection);
+                CloseActiveWizards(connection);
 
                 UpdateToolbars();
             }
@@ -1523,7 +1514,7 @@ namespace XenAdmin
 
                         if (menuItemFeature != null && menuItemFeature.ParentFeature == null && (int)menuItemFeature.Menu == MainMenuBar.Items.IndexOf(menu))
                         {
-                            Command cmd = menuItemFeature.GetCommand(commandInterface, SelectionManager.Selection);
+                            Command cmd = menuItemFeature.GetCommand(this, SelectionManager.Selection);
 
                             menu.DropDownItems.Insert(insertIndex, new CommandToolStripMenuItem(cmd));
                             insertIndex++;
@@ -1534,7 +1525,7 @@ namespace XenAdmin
 
                         if (parentMenuItemFeature != null && (int)parentMenuItemFeature.Menu == MainMenuBar.Items.IndexOf(menu))
                         {
-                            Command cmd = parentMenuItemFeature.GetCommand(commandInterface, SelectionManager.Selection);
+                            Command cmd = parentMenuItemFeature.GetCommand(this, SelectionManager.Selection);
                             CommandToolStripMenuItem parentMenuItem = new CommandToolStripMenuItem(cmd);
 
                             menu.DropDownItems.Insert(insertIndex, parentMenuItem);
@@ -1543,7 +1534,7 @@ namespace XenAdmin
 
                             foreach (MenuItemFeature childFeature in parentMenuItemFeature.Features)
                             {
-                                Command childCommand = childFeature.GetCommand(commandInterface, SelectionManager.Selection);
+                                Command childCommand = childFeature.GetCommand(this, SelectionManager.Selection);
                                 parentMenuItem.DropDownItems.Add(new CommandToolStripMenuItem(childCommand));
                             }
                         }
@@ -1791,7 +1782,7 @@ namespace XenAdmin
                 }
                 else if (t == TabPagePhysicalStorage)
                 {
-                    PhysicalStoragePage.SetSelectionBroadcaster(SelectionManager, commandInterface);
+                    PhysicalStoragePage.SetSelectionBroadcaster(SelectionManager, this);
                     PhysicalStoragePage.Host = SelectionManager.Selection.First as Host;
                     PhysicalStoragePage.Connection = SelectionManager.Selection.GetConnectionOfFirstItem();
                 }
@@ -2002,18 +1993,20 @@ namespace XenAdmin
             ConsolePanel.SendCAD();
         }
 
+        #region IMainWindowCommandInterface Members
+
         /// <summary>
         /// Closes all per-Connection and per-VM wizards for the given connection.
         /// </summary>
         /// <param name="connection"></param>
-        public void closeActiveWizards(IXenConnection connection)
+        public void CloseActiveWizards(IXenConnection connection)
         {
             Program.Invoke(Program.MainWindow, delegate
             {
                 // Close and remove any active wizards for any VMs
                 foreach (VM vm in connection.Cache.VMs)
                 {
-                    closeActiveWizards(vm);
+                    CloseActiveWizards(vm);
                 }
                 closeActivePoolWizards(connection);
             });
@@ -2044,7 +2037,7 @@ namespace XenAdmin
         /// Closes all per-XenObject wizards.
         /// </summary>
         /// <param name="obj"></param>
-        public void closeActiveWizards(IXenObject obj)
+        public void CloseActiveWizards(IXenObject obj)
         {
             Program.Invoke(Program.MainWindow, delegate
             {
@@ -2067,7 +2060,7 @@ namespace XenAdmin
         /// <param name="wizard">The new wizard to show</param>
         public void ShowPerXenModelObjectWizard(IXenObject obj, Form wizard)
         {
-            closeActiveWizards(obj);
+            CloseActiveWizards(obj);
             activeXenModelObjectWizards.Add(obj, wizard);
             wizard.Show(this);
         }
@@ -2144,6 +2137,64 @@ namespace XenAdmin
             Form newForm = (Form)Activator.CreateInstance(type, args);
             newForm.Show(this);
         }
+
+        public Form Form
+        {
+            get { return this; }
+        }
+
+        public void Invoke(MethodInvoker method)
+        {
+            Program.Invoke(this, method);
+        }
+
+        public bool SelectObjectInTree(IXenObject xenObject)
+        {
+            return SelectObject(xenObject);
+        }
+
+        public Collection<IXenConnection> GetXenConnectionsCopy()
+        {
+            return new Collection<IXenConnection>(ConnectionsManager.XenConnectionsCopy);
+        }
+
+        public void SaveServerList()
+        {
+            Settings.SaveServerList();
+        }
+
+        public bool RunInAutomatedTestMode
+        {
+            get { return Program.RunInAutomatedTestMode; }
+        }
+
+        public void RemoveConnection(IXenConnection connection)
+        {
+            ConnectionsManager.ClearCacheAndRemoveConnection(connection);
+        }
+
+        public void PutSelectedNodeIntoEditMode()
+        {
+            EditSelectedNodeInTreeView();
+        }
+
+
+        public void TrySelectNewObjectInTree(Predicate<object> tagMatch, bool selectNode, bool expandNode, bool ensureNodeVisible)
+        {
+            TrySelectNewNode(tagMatch, selectNode, expandNode, ensureNodeVisible);
+        }
+
+        public void TrySelectNewObjectInTree(IXenConnection c, bool selectNode, bool expandNode, bool ensureNodeVisible)
+        {
+            TrySelectNewNode(c, selectNode, expandNode, ensureNodeVisible);
+        }
+
+        public bool MenuShortcutsEnabled
+        {
+            get { return _menuShortcuts; }
+        }
+
+        #endregion
 
         #region Help
 
@@ -2472,7 +2523,7 @@ namespace XenAdmin
             }
         }
 
-        private bool DoSearch(string filename)
+        public bool DoSearch(string filename)
         {
             List<Search> searches = Search.LoadFile(filename);
             if (searches != null && searches.Count > 0)

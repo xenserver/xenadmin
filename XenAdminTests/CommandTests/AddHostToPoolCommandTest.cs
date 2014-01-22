@@ -76,7 +76,7 @@ namespace XenAdminTests.CommandTests
     {
         internal override Command CreateCommand()
         {
-            return new AddHostToPoolCommand(Program.MainWindow.CommandInterface, new List<Host> { GetAnyHost(h => h.name_label == "krakout") }, GetAnyPool(), false);
+            return new AddHostToPoolCommand(Program.MainWindow, new List<Host> { GetAnyHost(h => h.name_label == "krakout") }, GetAnyPool(), false);
         }
 
         private bool Finished()

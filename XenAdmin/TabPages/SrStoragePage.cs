@@ -349,7 +349,7 @@ namespace XenAdmin.TabPages
 
             contextMenuStrip1.Items.Clear();
 
-            DeleteVirtualDiskCommand deleteCmd = new DeleteVirtualDiskCommand(Program.MainWindow.CommandInterface, vdis);
+            DeleteVirtualDiskCommand deleteCmd = new DeleteVirtualDiskCommand(Program.MainWindow, vdis);
             contextMenuStrip1.Items.Add(new CommandToolStripMenuItem(deleteCmd, true));
 
             contextMenuStrip1.Items.Add(new CommandToolStripMenuItem(MoveMigrateCommand(vdis), true));
@@ -360,12 +360,12 @@ namespace XenAdmin.TabPages
 
         private Command MoveMigrateCommand(IEnumerable<SelectedItem> selection)
         {
-            MoveVirtualDiskCommand moveCmd = new MoveVirtualDiskCommand(Program.MainWindow.CommandInterface, selection);
+            MoveVirtualDiskCommand moveCmd = new MoveVirtualDiskCommand(Program.MainWindow, selection);
 
             if (moveCmd.CanExecute())
                 return moveCmd;
             
-            return new MigrateVirtualDiskCommand(Program.MainWindow.CommandInterface, selection);
+            return new MigrateVirtualDiskCommand(Program.MainWindow, selection);
         }
 
         private void RefreshButtons()
@@ -374,7 +374,7 @@ namespace XenAdmin.TabPages
             SelectedItemCollection vdis = SelectedVDIs;
 
             // Delete button
-            DeleteVirtualDiskCommand deleteCmd = new DeleteVirtualDiskCommand(Program.MainWindow.CommandInterface, vdis);
+            DeleteVirtualDiskCommand deleteCmd = new DeleteVirtualDiskCommand(Program.MainWindow, vdis);
             // User has visibility that this disk is related to all it's VM. Allow deletion with multiple VBDs (non default behaviour),
             // but don't allow them to delete if a running vm is using the disk (default behaviour).
             deleteCmd.AllowMultipleVBDDelete = true;
@@ -441,10 +441,10 @@ namespace XenAdmin.TabPages
             SelectedItemCollection vdis = SelectedVDIs;
             if (vdis.Count > 0)
             {
-                Command cmd = new DeleteVirtualDiskCommand(Program.MainWindow.CommandInterface, vdis);
+                Command cmd = new DeleteVirtualDiskCommand(Program.MainWindow, vdis);
                 removeContextMenuStrip.Items.Add(new CommandToolStripMenuItem(cmd, Messages.DELETE_VIRTUAL_DISK));
 
-                cmd = new RemoveStorageLinkVolumeCommand(Program.MainWindow.CommandInterface, sr.StorageLinkRepository(Program.StorageLinkConnections), vdis);
+                cmd = new RemoveStorageLinkVolumeCommand(Program.MainWindow, sr.StorageLinkRepository(Program.StorageLinkConnections), vdis);
                 removeContextMenuStrip.Items.Add(new CommandToolStripMenuItem(cmd, Messages.DELETE_SL_VOLUME_CONTEXT_MENU_ELIPS));
             }
         }
@@ -453,10 +453,10 @@ namespace XenAdmin.TabPages
         {
             addContextMenuStrip.Items.Clear();
 
-            Command cmd = new AddVirtualDiskCommand(Program.MainWindow.CommandInterface, sr);
+            Command cmd = new AddVirtualDiskCommand(Program.MainWindow, sr);
             addContextMenuStrip.Items.Add(new CommandToolStripMenuItem(cmd, Messages.ADD_VIRTUAL_DISK));
 
-            cmd = new ImportStorageLinkVolumeCommand(Program.MainWindow.CommandInterface, sr.StorageLinkRepository(Program.StorageLinkConnections));
+            cmd = new ImportStorageLinkVolumeCommand(Program.MainWindow, sr.StorageLinkRepository(Program.StorageLinkConnections));
             addContextMenuStrip.Items.Add(new CommandToolStripMenuItem(cmd, Messages.ADD_SL_VOLUME));
         }
         #endregion
@@ -465,7 +465,7 @@ namespace XenAdmin.TabPages
         private void removeVirtualDisk_Click(object sender, EventArgs e)
         {
             SelectedItemCollection vdis = SelectedVDIs;
-            DeleteVirtualDiskCommand cmd = new DeleteVirtualDiskCommand(Program.MainWindow.CommandInterface, vdis);
+            DeleteVirtualDiskCommand cmd = new DeleteVirtualDiskCommand(Program.MainWindow, vdis);
             cmd.AllowMultipleVBDDelete = true;
             if (cmd.CanExecute())
                 cmd.Execute();

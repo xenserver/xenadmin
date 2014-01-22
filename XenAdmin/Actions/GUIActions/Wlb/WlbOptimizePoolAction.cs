@@ -172,7 +172,7 @@ namespace XenAdmin.Actions.Wlb
                                         // Set new ntol, then retry action
                                         XenAPI.Pool.set_ha_host_failures_to_tolerate(session, this.Pool.opaque_ref, newNtol);
                                         // ntol set succeeded, start new action
-                                        Program.MainWindow.closeActiveWizards(vm);
+                                        Program.MainWindow.CloseActiveWizards(vm);
                                         new VMMigrateAction(vm,toHost).RunAsync();
                                     });
                                     action.RunAsync();

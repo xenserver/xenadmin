@@ -682,7 +682,7 @@ namespace XenAdmin.TabPages
 
         private void buttonReports_Click(object sender, EventArgs e)
         {
-            ViewWorkloadReportsCommand viewWorkloadReportsCommand = new ViewWorkloadReportsCommand(Program.MainWindow.CommandInterface, _pool);
+            ViewWorkloadReportsCommand viewWorkloadReportsCommand = new ViewWorkloadReportsCommand(Program.MainWindow, _pool);
             viewWorkloadReportsCommand.Execute();
         }
 

@@ -2709,9 +2709,7 @@
     <Compile Include="Commands\Controls\CommandEditorControl.Designer.cs">
       <DependentUpon>CommandEditorControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Commands\Controls\MainWindowCommandInterface.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="IMainWindow.cs" />
     <Compile Include="Commands\Controls\VMLifeCycleToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>

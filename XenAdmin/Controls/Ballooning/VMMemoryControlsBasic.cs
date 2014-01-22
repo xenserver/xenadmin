@@ -254,7 +254,7 @@ namespace XenAdmin.Controls.Ballooning
             if (e.Button != MouseButtons.Left)
                 return;
 
-            if (new InstallToolsCommand(Program.MainWindow.CommandInterface, vms).ConfirmAndExecute())
+            if (new InstallToolsCommand(Program.MainWindow, vms).ConfirmAndExecute())
                 OnInstallTools();
         }
 

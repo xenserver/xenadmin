@@ -305,7 +305,7 @@ namespace XenAdmin.TabPages
 
         private void UpdateButtons()
         {
-            AttachVirtualDiskCommand attachCmd = new AttachVirtualDiskCommand(Program.MainWindow.CommandInterface, vm);
+            AttachVirtualDiskCommand attachCmd = new AttachVirtualDiskCommand(Program.MainWindow, vm);
             AttachButton.Enabled = attachCmd.CanExecute();
             AddButton.Enabled = attachCmd.CanExecute();
 
@@ -330,7 +330,7 @@ namespace XenAdmin.TabPages
                 selectedVDIs.Add(new SelectedItem(r.VDI));
                 selectedVBDs.Add(new SelectedItem(r.VBD));
             }
-            DeleteVirtualDiskCommand deleteCmd = new DeleteVirtualDiskCommand(Program.MainWindow.CommandInterface, selectedVDIs);
+            DeleteVirtualDiskCommand deleteCmd = new DeleteVirtualDiskCommand(Program.MainWindow, selectedVDIs);
             // User has visibility that this disk in use by this VM. Allow unplug + delete in single step (non default behaviour),
             // but only if we are the only VBD (default behaviour)
             deleteCmd.AllowRunningVMDelete = true;
@@ -352,14 +352,14 @@ namespace XenAdmin.TabPages
             {
                 // no VBDs are attached so we are deactivating
                 DeactivateButton.Text = Messages.DEACTIVATE;
-                activationCmd = new DeactivateVBDCommand(Program.MainWindow.CommandInterface, selectedVBDs);
+                activationCmd = new DeactivateVBDCommand(Program.MainWindow, selectedVBDs);
             }
             else
             {
                 // this is the default cause in the mixed attached/detatched scenario. We try to activate all the selection
                 // The command error reports afterwards about the ones which are already attached
                 DeactivateButton.Text = Messages.ACTIVATE;
-                activationCmd = new ActivateVBDCommand(Program.MainWindow.CommandInterface, selectedVBDs);
+                activationCmd = new ActivateVBDCommand(Program.MainWindow, selectedVBDs);
             }
 
             if (activationCmd.CanExecute())
@@ -373,7 +373,7 @@ namespace XenAdmin.TabPages
                 DeactivateButton.Enabled = false;
             }
 
-            DetachVirtualDiskCommand detachCmd = new DetachVirtualDiskCommand(Program.MainWindow.CommandInterface, selectedVDIs, vm);
+            DetachVirtualDiskCommand detachCmd = new DetachVirtualDiskCommand(Program.MainWindow, selectedVDIs, vm);
             if (detachCmd.CanExecute())
             {
                 DetachButtonContainer.RemoveAll();
@@ -401,17 +401,17 @@ namespace XenAdmin.TabPages
 
         private Command MoveMigrateCommand(IEnumerable<SelectedItem> selection)
         {
-            MoveVirtualDiskCommand moveCmd = new MoveVirtualDiskCommand(Program.MainWindow.CommandInterface, selection);
+            MoveVirtualDiskCommand moveCmd = new MoveVirtualDiskCommand(Program.MainWindow, selection);
 
             if (moveCmd.CanExecute())
                 return moveCmd;
 
-            return new MigrateVirtualDiskCommand(Program.MainWindow.CommandInterface, selection);
+            return new MigrateVirtualDiskCommand(Program.MainWindow, selection);
         }
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            var cmd = new AddVirtualDiskCommand(Program.MainWindow.CommandInterface, vm);
+            var cmd = new AddVirtualDiskCommand(Program.MainWindow, vm);
             if (cmd.CanExecute())
                 cmd.Execute();
 
@@ -421,7 +421,7 @@ namespace XenAdmin.TabPages
 
         private void AttachButton_Click(object sender, EventArgs e)
         {
-            AttachVirtualDiskCommand cmd = new AttachVirtualDiskCommand(Program.MainWindow.CommandInterface, vm);
+            AttachVirtualDiskCommand cmd = new AttachVirtualDiskCommand(Program.MainWindow, vm);
             if (cmd.CanExecute())
                 cmd.Execute();
 
@@ -454,7 +454,7 @@ namespace XenAdmin.TabPages
             foreach (VBDRow r in rows)
                 l.Add(new SelectedItem(r.VDI));
 
-            DetachVirtualDiskCommand cmd = new DetachVirtualDiskCommand(Program.MainWindow.CommandInterface, l, vm);
+            DetachVirtualDiskCommand cmd = new DetachVirtualDiskCommand(Program.MainWindow, l, vm);
             if (cmd.CanExecute())
                 cmd.Execute();
         }
@@ -468,7 +468,7 @@ namespace XenAdmin.TabPages
             foreach (VBDRow r in rows)
                 l.Add(new SelectedItem(r.VDI));
 
-            DeleteVirtualDiskCommand cmd = new DeleteVirtualDiskCommand(Program.MainWindow.CommandInterface, l);
+            DeleteVirtualDiskCommand cmd = new DeleteVirtualDiskCommand(Program.MainWindow, l);
             // User has visibility that this disk in use by this VM. Allow unplug + delete in single step (non default behaviour),
             // but only if we are the only VBD (default behaviour)
             cmd.AllowRunningVMDelete = true;
@@ -560,9 +560,9 @@ namespace XenAdmin.TabPages
             SelectedItemCollection col = new SelectedItemCollection(l);
             Command cmd = null;
             if (col.AsXenObjects<VBD>().Find(vbd => !vbd.currently_attached) == null)
-                cmd = new DeactivateVBDCommand(Program.MainWindow.CommandInterface, l);
+                cmd = new DeactivateVBDCommand(Program.MainWindow, l);
             else
-                cmd = new ActivateVBDCommand(Program.MainWindow.CommandInterface, l);
+                cmd = new ActivateVBDCommand(Program.MainWindow, l);
 
             if (cmd.CanExecute())
                 cmd.Execute();

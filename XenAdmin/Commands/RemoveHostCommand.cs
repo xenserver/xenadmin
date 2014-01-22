@@ -80,7 +80,7 @@ namespace XenAdmin.Commands
             }
 
             MainWindowCommandInterface.SaveServerList();
-            MainWindowCommandInterface.Refresh();
+            MainWindowCommandInterface.RequestRefreshTreeView();
         }
 
         private static bool CanExecute(Host host)

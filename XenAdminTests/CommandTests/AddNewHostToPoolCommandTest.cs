@@ -61,7 +61,7 @@ namespace XenAdminTests.CommandTests
     {
         internal override Command CreateCommand()
         {
-            return new AddNewHostToPoolCommand(Program.MainWindow.CommandInterface, GetAnyPool());
+            return new AddNewHostToPoolCommand(Program.MainWindow, GetAnyPool());
         }
 
         public void TestRbacGeorge()

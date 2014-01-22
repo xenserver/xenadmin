@@ -82,7 +82,7 @@ namespace XenAdmin.Dialogs
         private List<VDI> VdisToMove()
         {
            return (from vdi in vdis
-                   let moveCmd = new MoveVirtualDiskCommand(Program.MainWindow.CommandInterface, vdi)
+                   let moveCmd = new MoveVirtualDiskCommand(Program.MainWindow, vdi)
                    where moveCmd.CanExecute()
                    select vdi).ToList();
         }
@@ -90,7 +90,7 @@ namespace XenAdmin.Dialogs
         private List<VDI> VdisToMigrate()
         {
             return (from vdi in vdis
-                    let cmd = new MigrateVirtualDiskCommand(Program.MainWindow.CommandInterface, vdi)
+                    let cmd = new MigrateVirtualDiskCommand(Program.MainWindow, vdi)
                     where cmd.CanExecute()
                     select vdi).ToList();
         }

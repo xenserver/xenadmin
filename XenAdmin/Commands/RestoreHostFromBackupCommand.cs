@@ -84,7 +84,7 @@ namespace XenAdmin.Commands
 
         private void Execute(Host host, string filepath)
         {
-            MainWindowCommandInterface.BringToFront();
+            HelpersGUI.BringFormToFront(MainWindowCommandInterface.Form);
 
             if (filepath == "")
             {

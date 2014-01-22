@@ -77,7 +77,7 @@ namespace XenAdmin.Commands
         {
             foreach (VM vm in vms)
             {
-                foreach (ActionBase action in MainWindowCommandInterface.History)
+                foreach (ActionBase action in ConnectionsManager.History)
                 {
                     if (vm.Equals(action.VM) && !action.IsCompleted && action.CanCancel)
                     {
