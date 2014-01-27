@@ -1751,9 +1751,11 @@ namespace XenAdmin
             this.statusLabel,
             this.statusProgressBar});
             this.StatusStrip.Name = "StatusStrip";
+            this.StatusStrip.ShowItemToolTips = true;
             // 
             // statusLabel
             // 
+            this.statusLabel.AutoToolTip = true;
             resources.ApplyResources(this.statusLabel, "statusLabel");
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
