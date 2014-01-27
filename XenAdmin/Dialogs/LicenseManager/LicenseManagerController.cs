@@ -273,7 +273,7 @@ namespace XenAdmin.Dialogs
 
         protected virtual IMainWindow CommandInterface
         {
-            get { return Program.MainWindow.CommandInterface; }
+            get { return Program.MainWindow; }
         }
 
         private void SetRowInformation(List<LicenseDataGridViewRow> rows, string information)

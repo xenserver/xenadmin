@@ -308,7 +308,7 @@ namespace XenAdmin.TabPages
 
         private void newSRButton_Click(object sender, EventArgs e)
         {
-            new NewSRCommand(Program.MainWindow.CommandInterface, connection).Execute();
+            new NewSRCommand(Program.MainWindow, connection).Execute();
         }
 
         /// <summary>

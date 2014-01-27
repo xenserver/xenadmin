@@ -59,7 +59,7 @@ namespace XenAdminTests.TabsAndMenus
             IXenConnection connection = GetAnyPool().Connection;
 
             // now disconnect
-            MW<bool>(new DisconnectCommand(Program.MainWindow.CommandInterface, connection, false).Execute);
+            MW<bool>(new DisconnectCommand(Program.MainWindow, connection, false).Execute);
 
             // wait until the New Storage button is disabled.
             MWWaitFor(() => !MainWindowWrapper.MainToolStrip.Items[6].Enabled);

@@ -1086,7 +1086,7 @@ namespace XenAdmin.TabPages
 
         private void takeSnapshotToolStripButton_Click(object sender, EventArgs e)
         {
-            TakeSnapshotCommand command = new TakeSnapshotCommand(Program.MainWindow.CommandInterface, VM);
+            TakeSnapshotCommand command = new TakeSnapshotCommand(Program.MainWindow, VM);
             command.Execute();
         }
 
@@ -1247,17 +1247,17 @@ namespace XenAdmin.TabPages
 
         private void saveAsATemplateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new NewTemplateFromSnapshotCommand(Program.MainWindow.CommandInterface, GetSelectedSnapshot()).Execute();
+            new NewTemplateFromSnapshotCommand(Program.MainWindow, GetSelectedSnapshot()).Execute();
         }
 
         private void saveAsAVirtualMachineToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new NewVMFromSnapshotCommand(Program.MainWindow.CommandInterface, GetSelectedSnapshot()).Execute();
+            new NewVMFromSnapshotCommand(Program.MainWindow, GetSelectedSnapshot()).Execute();
         }
 
         private void exportSnapshotToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new ExportSnapshotAsTemplateCommand(Program.MainWindow.CommandInterface, GetSelectedSnapshot()).Execute();
+            new ExportSnapshotAsTemplateCommand(Program.MainWindow, GetSelectedSnapshot()).Execute();
         }
 
         private void snapshotTreeView1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -1345,17 +1345,17 @@ namespace XenAdmin.TabPages
 
         private void saveAsTemplateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new NewTemplateFromSnapshotCommand(Program.MainWindow.CommandInterface, GetSelectedSnapshot()).Execute();
+            new NewTemplateFromSnapshotCommand(Program.MainWindow, GetSelectedSnapshot()).Execute();
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            new NewVMFromSnapshotCommand(Program.MainWindow.CommandInterface, GetSelectedSnapshot()).Execute();
+            new NewVMFromSnapshotCommand(Program.MainWindow, GetSelectedSnapshot()).Execute();
         }
 
         private void exportAsBackupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new ExportSnapshotAsTemplateCommand(Program.MainWindow.CommandInterface, GetSelectedSnapshot()).Execute();
+            new ExportSnapshotAsTemplateCommand(Program.MainWindow, GetSelectedSnapshot()).Execute();
         }
 
         private void gridToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1414,7 +1414,7 @@ namespace XenAdmin.TabPages
         {
 
             DeleteSnapshotCommand deleteSnapshotCommand = new DeleteSnapshotCommand(
-                Program.MainWindow.CommandInterface, snapshots.ConvertAll<SelectedItem>(input => new SelectedItem(input)));
+                Program.MainWindow, snapshots.ConvertAll<SelectedItem>(input => new SelectedItem(input)));
             deleteSnapshotCommand.Execute();
 
         }
@@ -1424,7 +1424,7 @@ namespace XenAdmin.TabPages
         {
             if (vm.current_operations.Count == 0)
             {
-                RevertToSnapshotCommand cmd = new RevertToSnapshotCommand(Program.MainWindow.CommandInterface, vm, snapshot);
+                RevertToSnapshotCommand cmd = new RevertToSnapshotCommand(Program.MainWindow, vm, snapshot);
                 cmd.Execute();
             }
         }
@@ -1599,7 +1599,7 @@ namespace XenAdmin.TabPages
             }
             else
             {
-                var command = new VMGroupCommand<VMPP>(Program.MainWindow.CommandInterface, VM);
+                var command = new VMGroupCommand<VMPP>(Program.MainWindow, VM);
                 command.Execute();
             }
         }

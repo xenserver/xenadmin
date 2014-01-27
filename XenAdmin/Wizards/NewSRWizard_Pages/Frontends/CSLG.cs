@@ -426,7 +426,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 return;
 
             var systemsBefore = new List<StorageLinkSystem>(slCon.Cache.StorageSystems);
-            AddStorageLinkSystemCommand command = new AddStorageLinkSystemCommand(Program.MainWindow.CommandInterface, slCon.Cache.Server, Parent);
+            AddStorageLinkSystemCommand command = new AddStorageLinkSystemCommand(Program.MainWindow, slCon.Cache.Server, Parent);
 
                 command.Completed += (s, ee) =>
                     {

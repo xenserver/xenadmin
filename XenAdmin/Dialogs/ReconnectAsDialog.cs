@@ -63,7 +63,7 @@ namespace XenAdmin.Dialogs
             // start logout then wait for connection to become disconnected
             xc.ConnectionStateChanged += new EventHandler<EventArgs>(xc_ConnectionStateChanged);
 
-            if (!new DisconnectCommand(Program.MainWindow.CommandInterface, xc, true).Execute())
+            if (!new DisconnectCommand(Program.MainWindow, xc, true).Execute())
             {
                 // User wimped out
                 xc.ConnectionStateChanged -= xc_ConnectionStateChanged;
@@ -96,7 +96,7 @@ namespace XenAdmin.Dialogs
         void xc_CachePopulated(object sender, EventArgs e)
         {
             xc.CachePopulated -= new EventHandler<EventArgs>(xc_CachePopulated);
-            Program.MainWindow.CommandInterface.TrySelectNewObjectInTree(xc, true, true, false);
+            Program.MainWindow.TrySelectNewObjectInTree(xc, true, true, false);
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

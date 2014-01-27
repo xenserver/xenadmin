@@ -150,7 +150,7 @@ namespace XenAdmin.Commands
             XenDialogBase.CloseAll(connection);
             connection.EndConnect();
             MainWindowCommandInterface.SaveServerList();
-            MainWindowCommandInterface.Refresh();
+            MainWindowCommandInterface.RequestRefreshTreeView();
         }
     }
 }

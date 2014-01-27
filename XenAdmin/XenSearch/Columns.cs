@@ -112,10 +112,7 @@ namespace XenAdmin.XenSearch
                                                   QueryPanel.LinkBrush,
                                                   Program.DefaultFontUnderline,
                                                   3,
-                                                  new EventHandler(delegate
-                                                                       {
-                                                                           new InstallToolsCommand(Program.MainWindow.CommandInterface, vm).Execute();
-                                                                       }), null);
+                                                  (sender, args) => new InstallToolsCommand(Program.MainWindow, vm).Execute(), null);
                     }
                     else
                     {
@@ -139,10 +136,7 @@ namespace XenAdmin.XenSearch
                     item = new GridStringItem(Messages.UPGRADE_SR_WARNING,
                                               HorizontalAlignment.Center, VerticalAlignment.Middle, false, false,
                                               QueryPanel.LinkBrush, Program.DefaultFontUnderline, QueryPanel.LinkBrush, Program.DefaultFontUnderline, 3,
-                                              new EventHandler(delegate
-                                                                   {
-                                                                       new UpgradeSRCommand(Program.MainWindow.CommandInterface, sr).Execute();
-                                                                   }), null);
+                                              (sender, args) => new UpgradeSRCommand(Program.MainWindow, sr).Execute(), null);
 
                 return true;
             }
@@ -158,7 +152,7 @@ namespace XenAdmin.XenSearch
                                   HorizontalAlignment.Center, VerticalAlignment.Middle, false, false,
                                   QueryPanel.LinkBrush, Program.DefaultFontUnderline, QueryPanel.LinkBrush,
                                   Program.DefaultFontUnderline, 3,
-                                  (sender, args) => new RollingUpgradeCommand(Program.MainWindow.CommandInterface).Execute(),
+                                  (sender, args) => new RollingUpgradeCommand(Program.MainWindow).Execute(),
                                   null);
                 }
 

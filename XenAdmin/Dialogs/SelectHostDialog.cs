@@ -75,7 +75,7 @@ namespace XenAdmin.Dialogs
 
         private void button3_Click(object sender, EventArgs e)
         {
-            new AddHostCommand(Program.MainWindow.CommandInterface, this).Execute();
+            new AddHostCommand(Program.MainWindow, this).Execute();
         }
 
         public Host TheHost

@@ -61,7 +61,7 @@ namespace XenAdminTests
             return false;
         }
 
-        public void Refresh()
+        public void RequestRefreshTreeView()
         {
         }
 
@@ -105,11 +105,6 @@ namespace XenAdminTests
             throw new Exception("The method or operation is not implemented.");
         }
 
-        public System.Collections.ObjectModel.ReadOnlyCollection<XenAdmin.Actions.ActionBase> History
-        {
-            get { throw new Exception("The method or operation is not implemented."); }
-        }
-
         public bool DoSearch(string filename)
         {
             throw new Exception("The method or operation is not implemented.");
@@ -121,11 +116,6 @@ namespace XenAdminTests
         }
 
         public void RemoveConnection(IXenConnection connection)
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        public void BringToFront()
         {
             throw new Exception("The method or operation is not implemented.");
         }

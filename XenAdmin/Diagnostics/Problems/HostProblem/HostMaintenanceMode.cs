@@ -52,7 +52,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
         protected override AsyncAction CreateAction(out bool cancelled)
         {
             cancelled = false;
-            Program.MainWindow.closeActiveWizards(Server.Connection);
+            Program.MainWindow.CloseActiveWizards(Server.Connection);
             return new EnableHostAction(Server, false, AddHostToPoolCommand.EnableNtolDialog);
         }
 
@@ -63,7 +63,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
         public override AsyncAction UnwindChanges()
         {
-            Program.MainWindow.closeActiveWizards(Server.Connection);
+            Program.MainWindow.CloseActiveWizards(Server.Connection);
             return new DisableHostAction(Server); ;
         }
 

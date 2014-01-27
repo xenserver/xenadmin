@@ -568,7 +568,7 @@ namespace XenAdmin.Dialogs
                         break;
 
                     case Solution.InstallPVDrivers:
-                        a = new InstallToolsCommand(Program.MainWindow.CommandInterface, vm).ExecuteGetAction();
+                        a = new InstallToolsCommand(Program.MainWindow, vm).ExecuteGetAction();
                         // The install pv tools action is marked as complete after they have taken the user to the console and loaded the disc
                         // Rescanning when the action is 'complete' in this case doesn't gain us anything then. Keep showing the "Click here to install PV drivers" text.
                         dialog.SetSession(a);
@@ -602,7 +602,7 @@ namespace XenAdmin.Dialogs
             Program.MainWindow.UpdateToolbars();
 
             //Closes all per-Connection and per-VM wizards for the given connection.
-            Program.MainWindow.closeActiveWizards(host.Connection);
+            Program.MainWindow.CloseActiveWizards(host.Connection);
 
             EvacuateButton.Enabled = false; // disable evac button, it will get re-enabled when action completes
 

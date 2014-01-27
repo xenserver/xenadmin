@@ -78,7 +78,7 @@ namespace XenAdmin.Commands
                 }
             }
 
-            MainWindowCommandInterface.Refresh();
+            MainWindowCommandInterface.RequestRefreshTreeView();
         }
 
         private void Connection_CachePopulated(object sender, EventArgs e)

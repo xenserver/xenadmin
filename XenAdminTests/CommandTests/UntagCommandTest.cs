@@ -102,7 +102,7 @@ namespace XenAdminTests.CommandTests
 
             MW(() => _node.EnsureVisible());
 
-            return new UntagCommand(Program.MainWindow.CommandInterface, new List<VirtualTreeNode> { _node });
+            return new UntagCommand(Program.MainWindow, new List<VirtualTreeNode> { _node });
         }
 
         public void Test()

@@ -229,7 +229,7 @@ namespace XenAdmin.Dialogs
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            new NewFolderCommand(Program.MainWindow.CommandInterface, null, this).Execute();
+            new NewFolderCommand(Program.MainWindow, null, this).Execute();
         }
 
         private void newMenuItem_Click(object sender, EventArgs e)
@@ -242,7 +242,7 @@ namespace XenAdmin.Dialogs
             if (folder == null)
                 return;
 
-            new NewFolderCommand(Program.MainWindow.CommandInterface, folder, this).Execute();
+            new NewFolderCommand(Program.MainWindow, folder, this).Execute();
         }
 
         private void treeView_NodeMouseClick(object sender, VirtualTreeNodeMouseClickEventArgs e)

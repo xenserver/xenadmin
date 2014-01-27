@@ -89,7 +89,7 @@ namespace XenAdminTests.CommandTests
                 string tempFile = Path.GetTempFileName();
                 try
                 {
-                    MW(new BackupHostCommand(Program.MainWindow.CommandInterface, host, tempFile).Execute);
+                    MW(new BackupHostCommand(Program.MainWindow, host, tempFile).Execute);
 
                     Func<bool> finished = delegate
                     {

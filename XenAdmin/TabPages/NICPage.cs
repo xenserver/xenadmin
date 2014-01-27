@@ -250,13 +250,13 @@ namespace XenAdmin.TabPages
             PIF pif = ((PIFRow)dataGridView1.SelectedRows[0]).pif;
             System.Diagnostics.Trace.Assert(pif.IsBondNIC);
             XenAPI.Network network = pif.Connection.Resolve(pif.network);
-            var destroyBondCommand = new DestroyBondCommand(Program.MainWindow.CommandInterface, network);
+            var destroyBondCommand = new DestroyBondCommand(Program.MainWindow, network);
             destroyBondCommand.Execute();
         }
 
         private void buttonRescan_Click(object sender, EventArgs e)
         {
-            RescanPIFsCommand cmd = new RescanPIFsCommand(Program.MainWindow.CommandInterface, host);
+            RescanPIFsCommand cmd = new RescanPIFsCommand(Program.MainWindow, host);
             if (cmd.CanExecute())
                 cmd.Execute();
         }

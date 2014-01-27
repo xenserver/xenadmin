@@ -316,7 +316,7 @@ namespace XenAdmin.TabPages
 
         private void buttonImport_Click(object sender, EventArgs e)
         {
-            new ImportSearchCommand(Program.MainWindow.CommandInterface).Execute();
+            new ImportSearchCommand(Program.MainWindow).Execute();
         }
 
         private void applySavedSearch_Click(object sender, EventArgs e)

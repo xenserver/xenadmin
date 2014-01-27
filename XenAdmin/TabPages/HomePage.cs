@@ -79,7 +79,7 @@ namespace XenAdmin.TabPages
 
         private void panelAdd_Click(object sender, EventArgs e)
         {
-            new AddHostCommand(Program.MainWindow.CommandInterface).Execute();
+            new AddHostCommand(Program.MainWindow).Execute();
         }
 
         private void panelGet_Click(object sender, EventArgs e)

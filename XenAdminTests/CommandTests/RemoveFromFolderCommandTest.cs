@@ -90,7 +90,7 @@ namespace XenAdminTests.CommandTests
 
             MW(() => _node.EnsureVisible());
 
-            return new RemoveFromFolderCommand(Program.MainWindow.CommandInterface, new List<VirtualTreeNode> { _node });
+            return new RemoveFromFolderCommand(Program.MainWindow, new List<VirtualTreeNode> { _node });
         }
 
         public void Test()

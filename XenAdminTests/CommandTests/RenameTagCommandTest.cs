@@ -60,7 +60,7 @@ namespace XenAdminTests.CommandTests
 
         internal override Command CreateCommand()
         {
-            return new RenameTagCommand(Program.MainWindow.CommandInterface, oldTag, newTag);
+            return new RenameTagCommand(Program.MainWindow, oldTag, newTag);
         }
 
         public void Test()

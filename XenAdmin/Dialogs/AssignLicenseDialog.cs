@@ -139,7 +139,7 @@ namespace XenAdmin.Dialogs
         private void okButton_Click(object sender, EventArgs e)
         {
 
-            ApplyLicenseEditionCommand command = new ApplyLicenseEditionCommand(Program.MainWindow.CommandInterface, xos, GetCheckedEdition(), licenseServerNameTextBox.Text, licenseServerPortTextBox.Text, this);
+            ApplyLicenseEditionCommand command = new ApplyLicenseEditionCommand(Program.MainWindow, xos, GetCheckedEdition(), licenseServerNameTextBox.Text, licenseServerPortTextBox.Text, this);
 
             command.Succedded += delegate
                                      {

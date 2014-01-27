@@ -58,7 +58,7 @@ namespace XenAdminTests.CommandTests
     {
         internal override Command CreateCommand()
         {
-            return new AddHostCommand(Program.MainWindow.CommandInterface);
+            return new AddHostCommand(Program.MainWindow);
         }
 
         public void Test()

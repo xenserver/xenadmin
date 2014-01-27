@@ -501,7 +501,7 @@ namespace XenAdmin.ConsoleView
 
         private void cdLabel_Click(object sender, EventArgs e)
         {
-            new InstallToolsCommand(Program.MainWindow.CommandInterface, source, this).Execute();
+            new InstallToolsCommand(Program.MainWindow, source, this).Execute();
         }
 
         private void updatePowerState()
@@ -644,7 +644,7 @@ namespace XenAdmin.ConsoleView
                     {
                         DisablePowerStateLabel(powerStateLabel.Text);
 
-                        new StartVMCommand(Program.MainWindow.CommandInterface, source).Execute();
+                        new StartVMCommand(Program.MainWindow, source).Execute();
                     }
                     break;
                 case vm_power_state.Paused:
@@ -657,7 +657,7 @@ namespace XenAdmin.ConsoleView
                     if (source.allowed_operations.Contains(vm_operations.resume))
                     {
                         DisablePowerStateLabel(powerStateLabel.Text);
-                        new ResumeVMCommand(Program.MainWindow.CommandInterface, source).Execute();
+                        new ResumeVMCommand(Program.MainWindow, source).Execute();
                     }
                     break;
             }
@@ -1261,18 +1261,18 @@ namespace XenAdmin.ConsoleView
                 // We're looking at the host console
                 if (host.Connection.IsConnected)
                 {
-                    contextMenuItems.Add(new ShutDownHostCommand(Program.MainWindow.CommandInterface, host, this));
-                    contextMenuItems.Add(new RebootHostCommand(Program.MainWindow.CommandInterface, host, this));
+                    contextMenuItems.Add(new ShutDownHostCommand(Program.MainWindow, host, this));
+                    contextMenuItems.Add(new RebootHostCommand(Program.MainWindow, host, this));
                 }
             }
             else
             {
-                contextMenuItems.AddIfEnabled(new ShutDownVMCommand(Program.MainWindow.CommandInterface, source, this));
-                contextMenuItems.AddIfEnabled(new RebootVMCommand(Program.MainWindow.CommandInterface, source, this));
-                contextMenuItems.AddIfEnabled(new SuspendVMCommand(Program.MainWindow.CommandInterface, source, this));
-                contextMenuItems.AddIfEnabled(new InstallToolsCommand(Program.MainWindow.CommandInterface, source, this));
-                contextMenuItems.AddIfEnabled(new ForceVMShutDownCommand(Program.MainWindow.CommandInterface, source, this));
-                contextMenuItems.AddIfEnabled(new ForceVMRebootCommand(Program.MainWindow.CommandInterface, source, this));
+                contextMenuItems.AddIfEnabled(new ShutDownVMCommand(Program.MainWindow, source, this));
+                contextMenuItems.AddIfEnabled(new RebootVMCommand(Program.MainWindow, source, this));
+                contextMenuItems.AddIfEnabled(new SuspendVMCommand(Program.MainWindow, source, this));
+                contextMenuItems.AddIfEnabled(new InstallToolsCommand(Program.MainWindow, source, this));
+                contextMenuItems.AddIfEnabled(new ForceVMShutDownCommand(Program.MainWindow, source, this));
+                contextMenuItems.AddIfEnabled(new ForceVMRebootCommand(Program.MainWindow, source, this));
             }
 
             LifeCycleMenuStrip.Items.Clear();

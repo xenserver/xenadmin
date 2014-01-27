@@ -199,7 +199,7 @@ namespace XenAdmin.Commands
                         MainWindowCommandInterface.Invoke(delegate
                         {
                             XenConnectionUI.BeginConnect(connection, false, null, false);
-                            MainWindowCommandInterface.Refresh();
+                            MainWindowCommandInterface.RequestRefreshTreeView();
                         });
                         return;
                     }

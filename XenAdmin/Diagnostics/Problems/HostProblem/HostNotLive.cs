@@ -68,7 +68,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             bool canStartHost = false;
             Program.Invoke(Program.MainWindow, delegate
                {
-                   var powerOnCommand = new PowerOnHostCommand(Program.MainWindow.CommandInterface, Server);
+                   var powerOnCommand = new PowerOnHostCommand(Program.MainWindow, Server);
                    canStartHost = powerOnCommand.CanExecute();
                });
             return canStartHost;
