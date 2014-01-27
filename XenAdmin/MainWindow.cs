@@ -472,7 +472,6 @@ namespace XenAdmin
 
             statusLabel.Image = image;
             statusLabel.Text = Helpers.FirstLine(message);
-            statusToolTip.SetToolTip(StatusStrip, message);
         }
 
         public void SetProgressBar(bool visible, int progress)

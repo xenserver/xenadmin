@@ -315,7 +315,6 @@ namespace XenAdmin
             logSystemDetails();
             OptionsDialog.Log();
 
-            log.Info("Environment.CommandLine: " + Environment.CommandLine);
             if (Args.Length > 0)
                 log.InfoFormat("Args[0]: {0}", Args[0]);
 
