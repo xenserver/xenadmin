@@ -55,7 +55,7 @@ namespace XenAdmin.SettingsPanels
         {
             InitializeComponent();
             Text = Messages.HOME_SERVER;
-           
+            picker.AutoSelectAffinity = false;
         }
 
         #region IEditPage Members

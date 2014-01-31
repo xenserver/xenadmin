@@ -49,6 +49,13 @@ namespace XenAdmin.Controls
         private Host SrHost;
         private Host Affinity;
 
+        /// <summary>
+        /// Should always be true if the AffinityPicker is used to create a VM.
+        /// If set to false (e.g. on Edit VM) and Affinity is null, then the "no home server" radio button remains enabled, 
+        /// meaning that the VM already has no affinity and should not try to automatically select one.
+        /// </summary>
+        internal bool AutoSelectAffinity = true;
+
         public event EventHandler SelectedAffinityChanged = new EventHandler(OnSelectedAffinityChanged);
 
         private static void OnSelectedAffinityChanged(object obj, EventArgs e) { }
@@ -96,7 +103,8 @@ namespace XenAdmin.Controls
                 return;
 
             // Update enablement
-            DynamicRadioButton.Enabled = (Helpers.HasFullyConnectedSharedStorage(Connection) && SrHost == null) || Affinity == null;
+            DynamicRadioButton.Enabled = (Helpers.HasFullyConnectedSharedStorage(Connection) && SrHost == null) ||
+                                         (Affinity == null && !AutoSelectAffinity);
             ServersGridView.Enabled = StaticRadioButton.Checked;
             DynamicRadioButton.Text = Helpers.HasFullyConnectedSharedStorage(Connection)
                                           ? Messages.AFFINITY_PICKER_DYNAMIC_SHARED_SR
