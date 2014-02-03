@@ -168,8 +168,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                         }
                     }
                 }
-                planActions.Add(new UnwindProblemsAction(ProblemsResolvedPreCheck));
             }
+            planActions.Add(new UnwindProblemsAction(ProblemsResolvedPreCheck));
 
             actionsWorker = new BackgroundWorker();
             actionsWorker.DoWork += new DoWorkEventHandler(PatchingWizardAutomaticPatchWork);
