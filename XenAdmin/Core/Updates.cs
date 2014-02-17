@@ -291,7 +291,31 @@ namespace XenAdmin.Core
                             continue;
 
                         XenServerPatch serverPatch = xenServerPatch;
-                        var noPatchHosts = hosts.Where(host => !host.AppliedPatches().Any(patch => patch.uuid == serverPatch.Uuid));
+
+                        // A patch can be installed on a host if:
+                        // 1. it is not already installed and
+                        // 2. the host has all the required patches installed and
+                        // 3. the host doesn't have any of the conflicting patches installed
+
+                        var noPatchHosts = hosts.Where(host =>
+                            {
+                                var appliedPatches = host.AppliedPatches();
+                                // 1. patch is not already installed 
+                                if (appliedPatches.Any(patch => patch.uuid == serverPatch.Uuid))
+                                    return false;
+
+                                // 2. the host has all the required patches installed
+                                if (serverPatch.RequiredPatches != null && serverPatch.RequiredPatches.Count > 0 &&
+                                    !serverPatch.RequiredPatches.All(requiredPatchUuid => appliedPatches.Any(patch => patch.uuid == requiredPatchUuid)))
+                                    return false;
+
+                                // 3. the host doesn't have any of the conflicting patches installed
+                                if (serverPatch.ConflictingPatches != null && serverPatch.ConflictingPatches.Count > 0 &&
+                                    serverPatch.ConflictingPatches.Any(conflictingPatchUuid => appliedPatches.Any(patch => patch.uuid == conflictingPatchUuid)))
+                                    return false;
+
+                                return true;
+                            });
 
                         if (noPatchHosts.Count() == hosts.Count)
                             alert.IncludeConnection(xenConnection);

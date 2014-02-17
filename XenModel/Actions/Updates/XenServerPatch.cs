@@ -30,6 +30,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 
 namespace XenAdmin.Core
 {
@@ -44,6 +45,9 @@ namespace XenAdmin.Core
         public readonly string PatchUrl;
         public readonly DateTime TimeStamp;
         public readonly int Priority;
+
+        public readonly List<string> ConflictingPatches;
+        public readonly List<string> RequiredPatches;
 
         private const int DEFAULT_PRIORITY = 2;
 
@@ -62,6 +66,14 @@ namespace XenAdmin.Core
             DateTime.TryParse(timestamp, out TimeStamp);
             if (!Int32.TryParse(priority, out Priority))
                 Priority = DEFAULT_PRIORITY;
+        }
+
+        public XenServerPatch(string uuid, string name, string description, string guidance, string version, string url,
+            string patchUrl, string timestamp, string priority, List<string> conflictingPatches, List<string> requiredPatches)
+            :this(uuid, name, description, guidance, version, url, patchUrl, timestamp, priority)
+        {
+            ConflictingPatches = conflictingPatches;
+            RequiredPatches = requiredPatches;
         }
 
         public string Uuid

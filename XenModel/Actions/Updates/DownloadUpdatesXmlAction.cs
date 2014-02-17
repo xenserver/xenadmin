@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using XenAPI;
 using System.IO;
 using System.Xml;
@@ -45,6 +46,8 @@ namespace XenAdmin.Actions
         private const string XenCenterVersionsNode = "xencenterversions";
         private const string XenServerVersionsNode = "serverversions";
         private const string PatchesNode = "patches";
+        private const string ConflictingPatchesNode = "conflictingpatches";
+        private const string RequiredPatchesNode = "requiredpatches";
         private const string UpdateXmlUrl = @"http://updates.xensource.com/XenServer/updates.xml";
 
         public List<XenCenterVersion> XenCenterVersions { get; private set; }
@@ -152,8 +155,29 @@ namespace XenAdmin.Actions
                             priority = attrib.Value;
                     }
 
+                    var conflictingPatches = new List<string>();
+                    var requiredPatches = new List<string>();
+
+                    var conflictingPatchesNode = version.ChildNodes.Cast<XmlNode>().FirstOrDefault(childNode => childNode.Name == ConflictingPatchesNode);
+
+                    if (conflictingPatchesNode != null)
+                    {
+                        conflictingPatches.AddRange(from XmlNode node in conflictingPatchesNode.ChildNodes
+                                                    where node.Attributes != null
+                                                    select node.Attributes.Cast<XmlAttribute>().First(attrib => attrib.Name == "uuid").Value);
+                    }
+
+                    var requiredPatchesNode = version.ChildNodes.Cast<XmlNode>().FirstOrDefault(childNode => childNode.Name == RequiredPatchesNode);
+
+                    if (requiredPatchesNode != null)
+                    {
+                        requiredPatches.AddRange(from XmlNode node in requiredPatchesNode.ChildNodes
+                                                    where node.Attributes != null
+                                                    select node.Attributes.Cast<XmlAttribute>().First(attrib => attrib.Name == "uuid").Value);
+                    }
+
                     XenServerPatches.Add(new XenServerPatch(uuid, name, description, guidance, patchVersion, url,
-                                                            patchUrl, timestamp, priority));
+                                                            patchUrl, timestamp, priority, conflictingPatches, requiredPatches));
                 }
             }
         }
