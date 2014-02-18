@@ -59,6 +59,7 @@ COMPANY_NAME_LEGAL=$(cat ${SCRATCH_DIR}/globals | grep -w COMPANY_NAME_LEGAL | s
 COMPANY_NAME_SHORT=$(cat ${SCRATCH_DIR}/globals | grep -w COMPANY_NAME_SHORT | sed -e 's/COMPANY_NAME_SHORT=//g' -e 's/"//g')
 COPYRIGHT_YEARS=$(cat ${SCRATCH_DIR}/globals | grep -w COPYRIGHT_YEARS | sed -e 's/COPYRIGHT_YEARS=//g' -e 's/"//g')
 PRODUCT_VERSION=$(cat ${SCRATCH_DIR}/globals | grep -w PRODUCT_VERSION | sed -e 's/PRODUCT_VERSION=//g' -e 's/"//g')
+PRODUCT_VERSION_TEXT=$(cat ${SCRATCH_DIR}/globals | grep -w PRODUCT_VERSION_TEXT | sed -e 's/PRODUCT_VERSION_TEXT=//g' -e 's/"//g')
 PRODUCT_MAJOR_VERSION=$(cat ${SCRATCH_DIR}/globals | grep -w PRODUCT_MAJOR_VERSION | sed -e 's/PRODUCT_MAJOR_VERSION=//g' -e 's/"//g')
 PRODUCT_MINOR_VERSION=$(cat ${SCRATCH_DIR}/globals | grep -w PRODUCT_MINOR_VERSION | sed -e 's/PRODUCT_MINOR_VERSION=//g' -e 's/"//g')
 
@@ -142,6 +143,7 @@ subst_globals()
       -e "s/@COPYRIGHT_YEARS@/${COPYRIGHT_YEARS}/g" \
       -e "s/@BRAND_CONSOLE@/${BRAND_CONSOLE}/g" \
       -e "s/@PRODUCT_VERSION@/${XC_PRODUCT_VERSION}/g" \
+      -e "s/@PRODUCT_VERSION_TEXT@/${PRODUCT_VERSION_TEXT}/g" \
       $1 > $1.tmp
   mv -f $1.tmp $1
 }

@@ -785,9 +785,10 @@ namespace XenAdmin
             if (master == null)
                 return;
 
-            log.InfoFormat("Connected to {0} (version {1}, build {2}.{3}) with XenCenter {4} (build {5})",
+            log.InfoFormat("Connected to {0} (version {1}, build {2}.{3}) with XenCenter {4} (build {5}.{6})",
                 Helpers.GetName(master), Helpers.HostProductVersionText(master), Helpers.HostProductVersion(master),
-                Helpers.HostBuildNumber(master), Branding.XENCENTER_VERSION, Program.Version.Revision);
+                Helpers.HostBuildNumber(master), Branding.PRODUCT_VERSION_TEXT,
+                Branding.XENCENTER_VERSION, Program.Version.Revision);
 
             // When releasing a new version of the server, we should set xencenter_min and xencenter_max on the server
             // as follows:
