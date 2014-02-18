@@ -51,7 +51,7 @@ namespace XenAdmin.Dialogs
                                    ? string.Format("{0}: {1}", Program.Version.Revision, Messages.COMMON_CRITERIA_TEXT)
                                    : Program.Version.Revision.ToString();
 
-            VersionLabel.Text = string.Format(Messages.VERSION_NUMBER, Branding.PRODUCT_VERSION_TEXT, buildText, IntPtr.Size * 8);
+            VersionLabel.Text = string.Format(Messages.VERSION_NUMBER, Branding.XENCENTER_VERSION, buildText, IntPtr.Size * 8);
             label2.Text = string.Format(Messages.COPYRIGHT, Branding.COMPANY_NAME_LEGAL);
         }
 
