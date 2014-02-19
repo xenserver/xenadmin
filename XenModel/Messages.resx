@@ -11001,7 +11001,7 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
     <value>Signature verification failed. {0}</value>
   </data>
   <data name="VERSION_NUMBER" xml:space="preserve">
-    <value>XenCenter version {0} (build {1}) {2}-bit</value>
+    <value>XenCenter version {0} (build {1}.{2}) {3}-bit</value>
   </data>
   <data name="VGPU_DESCRIPTION" xml:space="preserve">
     <value>{0} vGPU ({1} per GPU, {2}, {3} displays)</value>
