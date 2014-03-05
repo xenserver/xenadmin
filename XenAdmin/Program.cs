@@ -596,8 +596,8 @@ namespace XenAdmin
                            Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE));
 
                     // CA-44733
-                    if (Program.MainWindow != null && !Program.MainWindow.InvokeRequired)
-                        d.ShowDialog(Program.MainWindow);
+                    if (MainWindow != null && !IsExiting(MainWindow) && !MainWindow.InvokeRequired)
+                        d.ShowDialog(MainWindow);
                     else
                         d.ShowDialog();
                 }

@@ -337,6 +337,9 @@ namespace XenAdmin.Controls.MainWindowControls
 
         private void RefreshTreeView()
         {
+            if (Disposing || IsDisposed || Program.Exiting)
+                return;
+
             Program.Invoke(this, () =>
             {
                 if (ignoreRefreshTreeView > 0)
