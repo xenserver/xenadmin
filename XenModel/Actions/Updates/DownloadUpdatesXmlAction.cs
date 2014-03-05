@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using XenAPI;
 using System.IO;
 using System.Xml;
@@ -45,6 +46,11 @@ namespace XenAdmin.Actions
         private const string XenCenterVersionsNode = "xencenterversions";
         private const string XenServerVersionsNode = "serverversions";
         private const string PatchesNode = "patches";
+        private const string ConflictingPatchesNode = "conflictingpatches";
+        private const string RequiredPatchesNode = "requiredpatches";
+        private const string ConflictingPatchNode = "conflictingpatch";
+        private const string RequiredPatchNode = "requiredpatch";
+
         private const string UpdateXmlUrl = @"http://updates.xensource.com/XenServer/updates.xml";
 
         public List<XenCenterVersion> XenCenterVersions { get; private set; }
@@ -152,10 +158,38 @@ namespace XenAdmin.Actions
                             priority = attrib.Value;
                     }
 
-                    XenServerPatches.Add(new XenServerPatch(uuid, name, description, guidance, patchVersion, url,
-                                                            patchUrl, timestamp, priority));
+                    var conflictingPatches = GetPatchDependencies(version, ConflictingPatchesNode, ConflictingPatchNode);
+                    var requiredPatches = GetPatchDependencies(version, RequiredPatchesNode, RequiredPatchNode);
+
+					XenServerPatches.Add(new XenServerPatch(uuid, name, description, guidance, patchVersion, url,
+                                                            patchUrl, timestamp, priority, conflictingPatches, requiredPatches));
                 }
             }
+        }
+
+        // dependencies patches are listed in the xml as below:
+        // <conflictingpatches>
+        //    <conflictingpatch uuid="00000000-0000-0000-0000-000000000000">
+        //    </conflictingpatch>
+        // </conflictingpatches>
+        // <requiredpatches>
+        //    <requiredgpatch uuid="00000000-0000-0000-0000-000000000000">
+        //    </requiredgpatch>
+        // </requiredpatches>
+        private static List<string> GetPatchDependencies(XmlNode patchsNode, string dependenciesNodeName, string dependencyNodeName)
+                    {
+            var dependenciesNode = patchsNode.ChildNodes.Cast<XmlNode>().FirstOrDefault(childNode => childNode.Name == dependenciesNodeName);
+
+            if (dependenciesNode == null)
+                return null;
+
+            var dependencies = new List<string>();
+
+            dependencies.AddRange(from XmlNode node in dependenciesNode.ChildNodes
+                                  from XmlAttribute attrib in node.Attributes
+                                  where node.Name == dependencyNodeName && node.Attributes != null && attrib.Name == "uuid"
+                                  select attrib.Value);
+            return dependencies;
         }
 
         private void GetXenServerVersions(XmlDocument xdoc)
