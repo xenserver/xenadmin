@@ -48,6 +48,9 @@ namespace XenAdmin.Actions
         private const string PatchesNode = "patches";
         private const string ConflictingPatchesNode = "conflictingpatches";
         private const string RequiredPatchesNode = "requiredpatches";
+        private const string ConflictingPatchNode = "conflictingpatch";
+        private const string RequiredPatchNode = "requiredpatch";
+
         private const string UpdateXmlUrl = @"http://updates.xensource.com/XenServer/updates.xml";
 
         public List<XenCenterVersion> XenCenterVersions { get; private set; }
@@ -155,31 +158,38 @@ namespace XenAdmin.Actions
                             priority = attrib.Value;
                     }
 
-                    var conflictingPatches = new List<string>();
-                    var requiredPatches = new List<string>();
+                    var conflictingPatches = GetPatchDependencies(version, ConflictingPatchesNode, ConflictingPatchNode);
+                    var requiredPatches = GetPatchDependencies(version, RequiredPatchesNode, RequiredPatchNode);
 
-                    var conflictingPatchesNode = version.ChildNodes.Cast<XmlNode>().FirstOrDefault(childNode => childNode.Name == ConflictingPatchesNode);
-
-                    if (conflictingPatchesNode != null)
-                    {
-                        conflictingPatches.AddRange(from XmlNode node in conflictingPatchesNode.ChildNodes
-                                                    where node.Attributes != null
-                                                    select node.Attributes.Cast<XmlAttribute>().First(attrib => attrib.Name == "uuid").Value);
-                    }
-
-                    var requiredPatchesNode = version.ChildNodes.Cast<XmlNode>().FirstOrDefault(childNode => childNode.Name == RequiredPatchesNode);
-
-                    if (requiredPatchesNode != null)
-                    {
-                        requiredPatches.AddRange(from XmlNode node in requiredPatchesNode.ChildNodes
-                                                    where node.Attributes != null
-                                                    select node.Attributes.Cast<XmlAttribute>().First(attrib => attrib.Name == "uuid").Value);
-                    }
-
-                    XenServerPatches.Add(new XenServerPatch(uuid, name, description, guidance, patchVersion, url,
+					XenServerPatches.Add(new XenServerPatch(uuid, name, description, guidance, patchVersion, url,
                                                             patchUrl, timestamp, priority, conflictingPatches, requiredPatches));
                 }
             }
+        }
+
+        // dependencies patches are listed in the xml as below:
+        // <conflictingpatches>
+        //    <conflictingpatch uuid="00000000-0000-0000-0000-000000000000">
+        //    </conflictingpatch>
+        // </conflictingpatches>
+        // <requiredpatches>
+        //    <requiredgpatch uuid="00000000-0000-0000-0000-000000000000">
+        //    </requiredgpatch>
+        // </requiredpatches>
+        private static List<string> GetPatchDependencies(XmlNode patchsNode, string dependenciesNodeName, string dependencyNodeName)
+                    {
+            var dependenciesNode = patchsNode.ChildNodes.Cast<XmlNode>().FirstOrDefault(childNode => childNode.Name == dependenciesNodeName);
+
+            if (dependenciesNode == null)
+                return null;
+
+            var dependencies = new List<string>();
+
+            dependencies.AddRange(from XmlNode node in dependenciesNode.ChildNodes
+                                  from XmlAttribute attrib in node.Attributes
+                                  where node.Name == dependencyNodeName && node.Attributes != null && attrib.Name == "uuid"
+                                  select attrib.Value);
+            return dependencies;
         }
 
         private void GetXenServerVersions(XmlDocument xdoc)
