@@ -1909,19 +1909,19 @@ namespace XenAdmin
             bool currentTasks = false;
             foreach (ActionBase a in ConnectionsManager.History)
             {
-                if (!(a is MeddlingAction) && !a.IsCompleted)
-                {
-                    currentTasks = true;
-                    break;
-                }
+                if (a is MeddlingAction || a.IsCompleted)
+                    continue;
+
+                currentTasks = true;
+                break;
             }
 
             if (currentTasks)
             {
                 e.Cancel = true;
-                DialogResult result = Program.RunInAutomatedTestMode ? DialogResult.OK :
-                    new Dialogs.WarningDialogs.CloseXenCenterWarningDialog().ShowDialog(this);
-                if (result == DialogResult.OK)
+
+                if (Program.RunInAutomatedTestMode ||
+                    new Dialogs.WarningDialogs.CloseXenCenterWarningDialog().ShowDialog(this) == DialogResult.OK)
                 {
                     this.Hide();
 
@@ -1960,7 +1960,7 @@ namespace XenAdmin
                                 a.Cancel();
                         }
                     }
-                    System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(CloseWhenActionsCanceled));
+                    ThreadPool.QueueUserWorkItem(CloseWhenActionsCanceled);
                 }
                 return;
             }
