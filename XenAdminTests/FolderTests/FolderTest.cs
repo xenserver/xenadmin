@@ -33,11 +33,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
-using System.Windows.Forms;
 using System.Xml;
 using NUnit.Framework;
 using XenAdmin;
 using XenAdmin.Actions;
+using XenAdmin.Actions.GUIActions;
 using XenAdmin.Model;
 using XenAdmin.Network;
 using XenAdmin.XenSearch;
@@ -66,7 +66,7 @@ namespace XenAdminTests.FolderTests
         {
             Search search = EverythingInFolders();
             XmlNode expectedResults = GetExpectedResults(after);
-            MW(delegate() { ComparerAdapter.CompareResults(search, expectedResults); });
+            MW(() => ComparerAdapter.CompareResults(search, expectedResults));
         }
 
         protected void WaitForActions()
@@ -91,10 +91,12 @@ namespace XenAdminTests.FolderTests
 
         private bool HasOutstandingActions()
         {
-            foreach (XenAdmin.Actions.ActionBase a in ConnectionsManager.History)
+            foreach (ActionBase a in ConnectionsManager.History)
             {
-                if (!a.IsCompleted)
-                    return true;
+                if (a is MeddlingAction || a.IsCompleted)
+                    continue;
+
+                return true;
             }
             return false;
         }

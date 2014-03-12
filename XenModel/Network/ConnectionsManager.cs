@@ -106,43 +106,17 @@ namespace XenAdmin
         /// </summary>
         public static readonly ChangeableList<Actions.ActionBase> History = new ChangeableList<Actions.ActionBase>();
 
-        /// <summary>
-        /// Use to find out if all actions are completed on the provided connection.
-        /// </summary>
-        /// <param name="connection"></param>
-        /// <returns></returns>
-        public static bool AllActionsFinished(IXenConnection connection)
-        {
-            foreach (ActionBase action in History)
-            {
-                IXenObject xo = (action.Pool as IXenObject) ??
-                                (action.Host as IXenObject) ??
-                                (action.VM as IXenObject) ??
-                                (action.SR as IXenObject);
-
-                if (xo == null || xo.Connection != connection)
-                    continue;
-
-                if (!action.IsCompleted)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
         public static void CancelAllActions(IXenConnection connection)
         {
             foreach (ActionBase action in History)
             {
-                IXenObject xo = (action.Pool as IXenObject) ?? (action.Host as IXenObject) ?? (action.VM as IXenObject) ?? (action.SR as IXenObject);
+                IXenObject xo = action.Pool ?? action.Host ?? action.VM ?? action.SR as IXenObject;
                 if (xo == null || xo.Connection != connection)
                     continue;
 
-                if (!action.IsCompleted)
-                {
+                AsyncAction a = action as AsyncAction;
+                if (a != null && !a.IsCompleted)
                     action.Cancel();
-                }
             }
         }
     }

@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 using XenAdmin.Actions;
+using XenAdmin.Actions.GUIActions;
 using XenAdmin.Network;
 using XenAdmin.Core;
 using XenAPI;
@@ -100,17 +101,21 @@ namespace XenAdmin.Dialogs.WarningDialogs
 
         private bool CanAddRowAction(ActionBase action)
         {
-            if (connection == null)
-                return !action.IsCompleted;
+            if (action.IsCompleted || action is MeddlingAction)
+                return false;
 
             AsyncAction a = action as AsyncAction;
-            if (!action.IsCompleted && (a == null || !a.Cancelling))
-            {
-                var xo = action.Pool ?? action.Host ?? action.VM ?? action.SR as IXenObject;
-                if (xo != null && xo.Connection == connection)
-                    return true;
-            }
-            return false;
+            if (a != null && a.Cancelling)
+                return false;
+
+            if (connection == null)
+                return true;
+
+            var xo = action.Pool ?? action.Host ?? action.VM ?? action.SR as IXenObject;
+            if (xo == null || xo.Connection != connection)
+                return false;
+
+            return true;
         }
 
         private void RemoveActionRow(ActionBase action)

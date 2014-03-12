@@ -361,23 +361,6 @@ namespace XenAdmin.Actions
             }
         }
 
-        public static bool AllActionsFinishedOrCanceling(IXenConnection connection, IEnumerable<ActionBase> actionBases)
-        {
-            foreach (ActionBase action in actionBases)
-            {
-                IXenObject xo = (action.Pool as IXenObject) ?? (action.Host as IXenObject) ?? (action.VM as IXenObject) ?? (action.SR as IXenObject);
-                if (xo == null || xo.Connection != connection)
-                    continue;
-
-                AsyncAction a = action as AsyncAction;
-                if (!action.IsCompleted && (a == null || !a.Cancelling))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
         protected static void BestEffort(ref Exception caught, bool expectDisruption, Action func)
         {
             try

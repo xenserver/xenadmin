@@ -32,6 +32,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+
+using XenAdmin.Actions.GUIActions;
 using XenAdmin.Network;
 using System.Collections.ObjectModel;
 using XenAdmin.Actions;
@@ -93,7 +95,7 @@ namespace XenAdmin.Commands
                 return PromptAndDisconnectServer(connection);
             }
             
-            // no prompt. All tasks are cancelled and the server d/c
+            // no prompt. All tasks are cancelled and the server disconnected
             ConnectionsManager.CancelAllActions(connection);
             DoDisconnect(connection);
             return true;
@@ -106,35 +108,37 @@ namespace XenAdmin.Commands
         /// <returns>True if the user agreed to d/c and cancel their tasks, false if we are going to remain connected</returns>
         private bool PromptAndDisconnectServer(IXenConnection connection)
         {
-            if (!AsyncAction.AllActionsFinishedOrCanceling(connection,ConnectionsManager.History))
+            if (!AllActionsFinished(connection, true))
             {
-                if (MainWindowCommandInterface.RunInAutomatedTestMode || new CloseXenCenterWarningDialog(connection).ShowDialog(Parent) == DialogResult.OK)
+                if (MainWindowCommandInterface.RunInAutomatedTestMode ||
+                    new CloseXenCenterWarningDialog(connection).ShowDialog(Parent) == DialogResult.OK)
                 {
                     ConnectionsManager.CancelAllActions(connection);
 
-                    DelegatedAsyncAction WaitForCancelAction = new DelegatedAsyncAction(connection, Messages.CANCELING_TASKS, Messages.CANCELING, Messages.COMPLETED,
-                        delegate(Session s)
+                    DelegatedAsyncAction waitForCancelAction = new DelegatedAsyncAction(connection,
+                        Messages.CANCELING_TASKS, Messages.CANCELING, Messages.COMPLETED,
+                        delegate
                         {
                             DateTime startTime = DateTime.Now;
-                            while (((TimeSpan)(DateTime.Now - startTime)).TotalSeconds < 6.0)
+                            while ((DateTime.Now - startTime).TotalSeconds < 6.0)
                             {
-                                if (ConnectionsManager.AllActionsFinished(connection))
+                                if (AllActionsFinished(connection, false))
                                     break;
-                                else
-                                    Thread.Sleep(2000);
+
+                                Thread.Sleep(2000);
                             }
                         });
-                    ActionProgressDialog pd = new ActionProgressDialog(WaitForCancelAction, ProgressBarStyle.Marquee);
-                    pd.ShowDialog(Parent);
 
+                    ActionProgressDialog pd = new ActionProgressDialog(waitForCancelAction, ProgressBarStyle.Marquee);
+                    pd.ShowDialog(Parent);
                 }
                 else
                 {
                     return false;
                 }
             }
-            DoDisconnect(connection);
 
+            DoDisconnect(connection);
             return true;
         }
 
@@ -151,6 +155,29 @@ namespace XenAdmin.Commands
             connection.EndConnect();
             MainWindowCommandInterface.SaveServerList();
             MainWindowCommandInterface.RequestRefreshTreeView();
+        }
+
+        private bool AllActionsFinished(IXenConnection connection, bool treatCancelingAsFinished)
+        {
+            foreach (ActionBase action in ConnectionsManager.History)
+            {
+                if (action.IsCompleted || action is MeddlingAction)
+                    continue;
+
+                if (treatCancelingAsFinished)
+                {
+                    AsyncAction a = action as AsyncAction;
+                    if (a != null && a.Cancelling)
+                        continue;
+                }
+
+                IXenObject xo = action.Pool ?? action.Host ?? action.VM ?? action.SR as IXenObject;
+                if (xo == null || xo.Connection != connection)
+                    continue;
+
+                return false;
+            }
+            return true;
         }
     }
 }
