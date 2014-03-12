@@ -108,7 +108,7 @@ namespace XenAdmin.Commands
         /// <returns>True if the user agreed to d/c and cancel their tasks, false if we are going to remain connected</returns>
         private bool PromptAndDisconnectServer(IXenConnection connection)
         {
-            if (!AllActionsFinishedOrCanceling(connection))
+            if (!AllActionsFinished(connection, true))
             {
                 if (MainWindowCommandInterface.RunInAutomatedTestMode ||
                     new CloseXenCenterWarningDialog(connection).ShowDialog(Parent) == DialogResult.OK)
@@ -122,7 +122,7 @@ namespace XenAdmin.Commands
                             DateTime startTime = DateTime.Now;
                             while ((DateTime.Now - startTime).TotalSeconds < 6.0)
                             {
-                                if (AllActionsFinished(connection))
+                                if (AllActionsFinished(connection, false))
                                     break;
 
                                 Thread.Sleep(2000);
@@ -157,35 +157,19 @@ namespace XenAdmin.Commands
             MainWindowCommandInterface.RequestRefreshTreeView();
         }
 
-        private bool AllActionsFinishedOrCanceling(IXenConnection connection)
+        private bool AllActionsFinished(IXenConnection connection, bool treatCancelingAsFinished)
         {
             foreach (ActionBase action in ConnectionsManager.History)
             {
                 if (action.IsCompleted || action is MeddlingAction)
                     continue;
 
-                AsyncAction a = action as AsyncAction;
-                if (a != null && a.Cancelling)
-                    continue;
-
-                IXenObject xo = action.Pool ?? action.Host ?? action.VM ?? action.SR as IXenObject;
-                if (xo == null || xo.Connection != connection)
-                    continue;
-
-                return false;
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// Use to find out if all actions are completed on the provided connection.
-        /// </summary>
-        private bool AllActionsFinished(IXenConnection connection)
-        {
-            foreach (ActionBase action in ConnectionsManager.History)
-            {
-                if (action.IsCompleted || action is MeddlingAction)
-                    continue;
+                if (treatCancelingAsFinished)
+                {
+                    AsyncAction a = action as AsyncAction;
+                    if (a != null && a.Cancelling)
+                        continue;
+                }
 
                 IXenObject xo = action.Pool ?? action.Host ?? action.VM ?? action.SR as IXenObject;
                 if (xo == null || xo.Connection != connection)
