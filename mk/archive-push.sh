@@ -30,7 +30,7 @@
 
 set -eu
 
-DISABLE_PUSH=1
+#DISABLE_PUSH=1
 source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
 
 if [ ${XS_BRANCH} = "trunk" ]
