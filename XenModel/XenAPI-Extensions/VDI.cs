@@ -53,10 +53,7 @@ namespace XenAPI
                     {
                         Host host = sr.GetStorageHost();
                         if (sr.Physical && host != null)
-                        {
-                            //TODO: we need to find a way to number the DVDs 
-                            return string.Format(Messages.ISOCOMBOBOX_CD_DRIVE, 0, host.Name);
-                        }
+                            return string.Format(Messages.CD_DRIVE, host.Name);
 
                     }
                 }
