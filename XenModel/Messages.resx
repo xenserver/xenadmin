@@ -2109,6 +2109,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
 
 {1}</value>
   </data>
+  <data name="CD_DRIVE" xml:space="preserve">
+    <value>DVD drive on {0}</value>
+  </data>
   <data name="CHANGE" xml:space="preserve">
     <value>Change...</value>
   </data>
