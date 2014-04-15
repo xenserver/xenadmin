@@ -37,6 +37,7 @@ using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Controls.CheckableDataGridView;
 using XenAdmin.Controls.SummaryPanel;
+using XenAdmin.Core;
 using XenAdmin.Properties;
 using XenAPI;
 
@@ -205,7 +206,7 @@ namespace XenAdmin.Dialogs
 
                                          summaryPanel.Title = lRow.XenObject.Name;
                                          summaryPanel.HelperUrl = Messages.LICENSE_MANAGER_BUY_LICENSE_LINK_TEXT;
-                                         summaryPanel.HelperUrlVisible = true;
+                                         summaryPanel.HelperUrlVisible = Helpers.ClearwaterOrGreater(lRow.XenObject.Connection);  // CA-115256
                                          summaryPanel.WarningVisible = lRow.WarningRequired;
                                          summaryPanel.WarningText = lRow.WarningText;
                                          summaryPanel.SummaryText = summaryComponent;
