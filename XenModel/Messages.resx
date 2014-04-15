@@ -2389,7 +2389,7 @@ This will also delete its VMs.</value>
     <value>Are you sure you want to destroy '{0}'?
 
 You should only need to destroy a XenServer if it has physically failed.
-Destroying this server will permanently remove it from the pool along with its local SRs, DVD drives and removable storage.
+Destroying this server will permanently remove it from the pool along with its local SRs, DVD drives and removable storage. The server will need to be reinstalled before it can be used again.
 
 This action is final and unrecoverable.</value>
   </data>
