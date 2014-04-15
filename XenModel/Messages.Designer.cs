@@ -5791,6 +5791,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DVD drive on {0}.
+        /// </summary>
+        public static string CD_DRIVE {
+            get {
+                return ResourceManager.GetString("CD_DRIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change....
         /// </summary>
         public static string CHANGE {
