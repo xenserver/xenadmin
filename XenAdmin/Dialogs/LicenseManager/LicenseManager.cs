@@ -206,7 +206,7 @@ namespace XenAdmin.Dialogs
 
                                          summaryPanel.Title = lRow.XenObject.Name;
                                          summaryPanel.HelperUrl = Messages.LICENSE_MANAGER_BUY_LICENSE_LINK_TEXT;
-                                         summaryPanel.HelperUrlVisible = Helpers.ClearwaterOrGreater(lRow.XenObject.Connection);  // CA-115256
+                                         summaryPanel.HelperUrlVisible = lRow.HelperUrlRequired;
                                          summaryPanel.WarningVisible = lRow.WarningRequired;
                                          summaryPanel.WarningText = lRow.WarningText;
                                          summaryPanel.SummaryText = summaryComponent;
