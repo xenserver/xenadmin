@@ -199,7 +199,7 @@ namespace XenAdminTests.TabsAndMenus
                 Assert.AreEqual("window_ShellTest1", GetVisibleToolStripItems(MainWindowWrapper.WindowMenu.DropDownItems)[0].Text);
 
                 MainWindowWrapper.HelpMenu.ShowDropDown();
-                Assert.AreEqual("help_ShellTest1", GetVisibleToolStripItems(MainWindowWrapper.HelpMenu.DropDownItems)[7].Text);
+                Assert.AreEqual("help_ShellTest1", GetVisibleToolStripItems(MainWindowWrapper.HelpMenu.DropDownItems)[8].Text);
             });
         }
 
