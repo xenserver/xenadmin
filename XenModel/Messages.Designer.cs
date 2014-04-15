@@ -6550,7 +6550,7 @@ namespace XenAdmin {
         ///   Looks up a localized string similar to Are you sure you want to destroy &apos;{0}&apos;?
         ///
         ///You should only need to destroy a XenServer if it has physically failed.
-        ///Destroying this server will permanently remove it from the pool along with its local SRs, DVD drives and removable storage.
+        ///Destroying this server will permanently remove it from the pool along with its local SRs, DVD drives and removable storage. The server will need to be reinstalled before it can be used again.
         ///
         ///This action is final and unrecoverable..
         /// </summary>
