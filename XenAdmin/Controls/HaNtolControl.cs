@@ -44,7 +44,7 @@ using XenAPI;
 
 namespace XenAdmin.Controls
 {
-    public abstract class HaNtolControl : UserControl
+    public class HaNtolControl : UserControl
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -243,9 +243,11 @@ namespace XenAdmin.Controls
             log.Debug("Thread exiting");
         }
 
-        protected abstract void LoadCalculatingMode();
-        protected abstract void LoadCalculationSucceededMode(decimal value);
-        protected abstract void LoadCalculationFailedMode();
+        // These functions should be abstract, but the Designer can't display
+        // a control that is derived from an abstract base class.
+        protected virtual void LoadCalculatingMode() { }
+        protected virtual void LoadCalculationSucceededMode(decimal value) { }
+        protected virtual void LoadCalculationFailedMode() { }
 
         internal void StartNtolUpdate()
         {
