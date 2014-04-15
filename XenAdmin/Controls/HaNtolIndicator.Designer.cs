@@ -33,12 +33,12 @@ namespace XenAdmin.Controls
             this.tableServerFailureLimit = new System.Windows.Forms.TableLayoutPanel();
             this.tableStatus = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBoxStatus = new System.Windows.Forms.PictureBox();
+            this.labelStatus = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.labelMax = new System.Windows.Forms.Label();
             this.spinner = new System.Windows.Forms.PictureBox();
             this.numericUpDownCapacity = new System.Windows.Forms.NumericUpDown();
             this.labelNumberOfServers = new System.Windows.Forms.Label();
-            this.labelStatus = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.groupBoxControls.SuspendLayout();
             this.tableServerFailureLimit.SuspendLayout();
             this.tableStatus.SuspendLayout();
@@ -81,6 +81,12 @@ namespace XenAdmin.Controls
             this.pictureBoxStatus.Name = "pictureBoxStatus";
             this.pictureBoxStatus.TabStop = false;
             // 
+            // labelStatus
+            // 
+            resources.ApplyResources(this.labelStatus, "labelStatus");
+            this.labelStatus.ForeColor = System.Drawing.Color.Red;
+            this.labelStatus.Name = "labelStatus";
+            // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
@@ -113,12 +119,6 @@ namespace XenAdmin.Controls
             // 
             resources.ApplyResources(this.labelNumberOfServers, "labelNumberOfServers");
             this.labelNumberOfServers.Name = "labelNumberOfServers";
-            // 
-            // labelStatus
-            // 
-            resources.ApplyResources(this.labelStatus, "labelStatus");
-            this.labelStatus.ForeColor = System.Drawing.Color.Red;
-            this.labelStatus.Name = "labelStatus";
             // 
             // HaNtolIndicator
             // 
