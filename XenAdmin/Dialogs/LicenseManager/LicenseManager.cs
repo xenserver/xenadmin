@@ -200,7 +200,7 @@ namespace XenAdmin.Dialogs
             Program.Invoke(this, delegate
                                      {
                                          LicenseDataGridViewRow lRow = row as LicenseDataGridViewRow;
-                                         if(lRow == null)
+                                         if(lRow == null || lRow.XenObject == null)
                                              return;
 
                                          summaryPanel.Title = lRow.XenObject.Name;
