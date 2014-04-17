@@ -159,7 +159,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
         public override void PageLoaded(PageLoadedDirection direction)
         {
             Pool pool = Helpers.GetPoolOfOne(Connection);
-            SetDeprecationBanner(pool.vSwitchController);
+            SetDeprecationBanner(false);
             base.PageLoaded(direction);
         }
 
