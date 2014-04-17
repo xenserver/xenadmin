@@ -127,6 +127,8 @@ namespace XenAdmin.Network
                 GetServerTime();
 
                 // Now that we've successfully received a heartbeat, reset our 'second chance' for the server to timeout
+                if (retrying)
+                    log.DebugFormat("Heartbeat for {0} has come back", session == null ? "null" : session.Url);
                 retrying = false;
             }
             catch (TargetInvocationException exn)
