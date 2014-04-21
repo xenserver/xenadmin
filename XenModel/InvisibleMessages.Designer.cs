@@ -106,15 +106,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://support.citrix.com/article/CTX137336.
-        /// </summary>
-        public static string DVSC_DEPRECATION_URL {
-            get {
-                return ResourceManager.GetString("DVSC_DEPRECATION_URL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to http://www.citrix.com/xenserver.
         /// </summary>
         public static string HOMEPAGE {

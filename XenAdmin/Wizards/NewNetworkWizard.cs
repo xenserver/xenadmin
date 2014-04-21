@@ -79,7 +79,7 @@ namespace XenAdmin.Wizards
         {
             InitializeComponent();
 
-            pageNetworkType = new NetWTypeSelect {Banner = Banner};
+            pageNetworkType = new NetWTypeSelect();
             pageName = new NetWName();
             pageNetworkDetails = new NetWDetails();
             pageBondDetails = new NetWBondDetails();

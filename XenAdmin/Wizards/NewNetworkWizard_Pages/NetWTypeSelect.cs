@@ -61,8 +61,6 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             Update(Connection);
         }
 
-        public DeprecationBanner Banner { set; private get; }
-
         public NetworkTypes SelectedNetworkType
         {
             get
@@ -120,18 +118,6 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             }
         }
 
-        public void SetDeprecationBanner(bool visible)
-        {
-            if(Banner != null)
-            {
-                Banner.AppliesToVersion = Messages.XENSERVER_6_2;
-                Banner.BannerType = DeprecationBanner.Type.Deprecation;
-                Banner.FeatureName = Messages.DVSCS;
-                Banner.LinkUri = new Uri(InvisibleMessages.DVSC_DEPRECATION_URL);
-                Banner.Visible = visible;
-            }
-        }
-
         private void RemoveFromToolTip(ToolTipContainer container, Panel panel)
         {
             // We have to remove the controls from the panel (rather than just
@@ -154,19 +140,6 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             }
 
             Controls.Remove(container);
-        }
-
-        public override void PageLoaded(PageLoadedDirection direction)
-        {
-            Pool pool = Helpers.GetPoolOfOne(Connection);
-            SetDeprecationBanner(false);
-            base.PageLoaded(direction);
-        }
-
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
-        {
-            SetDeprecationBanner(false);
-            base.PageLeave(direction, ref cancel);
         }
     }
 }
