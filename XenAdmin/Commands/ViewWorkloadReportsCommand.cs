@@ -107,10 +107,6 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            //Removed for clearwater
-            if(selection.Any(s=>Helpers.ClearwaterOrGreater(s.Connection)))
-                return false;
-
             if (selection.Count == 1)
             {
                 IXenConnection connection = selection[0].Connection;

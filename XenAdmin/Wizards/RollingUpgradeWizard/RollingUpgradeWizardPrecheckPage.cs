@@ -160,10 +160,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 if(host == null) 
                     continue;
 
-                //WLB warning
-                if (!Helpers.ClearwaterOrGreater(host.Connection))
-                    checkGroup.Add(new HostHasWlbCheck(host));
-
                 checkGroup.Add(new HAOffCheck(host));
             }
 

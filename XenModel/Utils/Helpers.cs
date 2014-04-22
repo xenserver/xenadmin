@@ -469,9 +469,6 @@ namespace XenAdmin.Core
         /// <returns>true when wlb is enabled, otherwise false</returns>
         public static bool WlbEnabled(IXenConnection connection)
         {
-            if (ClearwaterOrGreater(connection))
-                return false;
-
             Pool pool = GetPoolOfOne(connection);
             if (pool == null)
                 return false;
@@ -486,9 +483,6 @@ namespace XenAdmin.Core
 
         public static bool WlbConfigured(IXenConnection conn)
         {
-            if (ClearwaterOrGreater(conn))
-                return false;
-
             Pool p = GetPoolOfOne(conn);
             return (p != null && !String.IsNullOrEmpty(p.wlb_url));
         }

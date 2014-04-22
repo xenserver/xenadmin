@@ -40,8 +40,6 @@
             this.subscriptionView1 = new XenAdmin.Controls.Wlb.WlbReportSubscriptionView();
             this.contextMenuReports = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.runReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.deprecationBanner = new XenAdmin.Controls.DeprecationBanner();
             this.splitContainerLeftPane.Panel1.SuspendLayout();
             this.splitContainerLeftPane.Panel2.SuspendLayout();
             this.splitContainerLeftPane.SuspendLayout();
@@ -49,7 +47,6 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.contextMenuReports.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainerLeftPane
@@ -149,25 +146,11 @@
             this.runReportToolStripMenuItem.Name = "runReportToolStripMenuItem";
             resources.ApplyResources(this.runReportToolStripMenuItem, "runReportToolStripMenuItem");
             // 
-            // tableLayoutPanel1
-            // 
-            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.deprecationBanner, 1, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // deprecationBanner
-            // 
-            resources.ApplyResources(this.deprecationBanner, "deprecationBanner");
-            this.deprecationBanner.BackColor = System.Drawing.Color.LightCoral;
-            this.deprecationBanner.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.deprecationBanner.Name = "deprecationBanner";
-            // 
             // WorkloadReports
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.HelpButton = true;
             this.Icon = global::XenAdmin.Properties.Resources.AppIcon;
@@ -184,8 +167,6 @@
             this.splitContainer1.Panel2.PerformLayout();
             this.splitContainer1.ResumeLayout(false);
             this.contextMenuReports.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,7 +184,5 @@
         private XenAdmin.Controls.Wlb.WlbReportSubscriptionView subscriptionView1;
         private System.Windows.Forms.ContextMenuStrip contextMenuReports;
         private System.Windows.Forms.ToolStripMenuItem runReportToolStripMenuItem;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private XenAdmin.Controls.DeprecationBanner deprecationBanner;
     }
 }

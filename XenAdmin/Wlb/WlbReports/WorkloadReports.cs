@@ -69,6 +69,7 @@ namespace XenAdmin
 
         private List<string> _midnightRideReports = new List<string>(new [] 
                                                                     { 
+                                                                        Messages.WLBREPORT_POOL_AUDIT_HISTORY,
                                                                         Messages.WLBREPORT_POOL_OPTIMIZATION_HISTORY
                                                                     });
 
@@ -115,7 +116,6 @@ namespace XenAdmin
             InitializeComponent();
             _reportFile = reportFile;
             _runReport = run;
-            SetupDeprecationBanner();
         }
 
         #endregion
@@ -126,15 +126,6 @@ namespace XenAdmin
         }
 
         #region Private Methods
-
-        private void SetupDeprecationBanner()
-        {
-            deprecationBanner.FeatureName = Messages.WLB;
-            deprecationBanner.AppliesToVersion = Messages.XENSERVER_6_2;
-            deprecationBanner.BannerType = DeprecationBanner.Type.Removal;
-            deprecationBanner.LinkUri = new Uri(InvisibleMessages.WLB_DEPRECATION_URL);
-            deprecationBanner.Visible = true;
-        }
 
         /// <summary>
         /// Populates the treeview with ReportInfo and SubscriptionInfo nodes

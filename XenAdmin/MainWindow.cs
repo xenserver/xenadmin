@@ -1320,9 +1320,7 @@ namespace XenAdmin
             ShowTab(ha_upsell ? TabPageHAUpsell : TabPageHA, !multi && !SearchMode && isPoolSelected && has_ha_license_flag);
             ShowTab(TabPageSnapshots, !multi && !SearchMode && george_or_greater && isRealVMSelected);
             
-            //Disable the WLB tab from Clearwater onwards
-            if(SelectionManager.Selection.All(s=>!Helpers.ClearwaterOrGreater(s.Connection)))
-                ShowTab(wlb_upsell ? TabPageWLBUpsell : TabPageWLB, !multi && !SearchMode && isPoolSelected && george_or_greater);
+            ShowTab(wlb_upsell ? TabPageWLBUpsell : TabPageWLB, !multi && !SearchMode && isPoolSelected && george_or_greater);
             
             ShowTab(TabPageAD, !multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive) && george_or_greater);
 
