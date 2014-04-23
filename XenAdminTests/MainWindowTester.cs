@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -219,7 +220,7 @@ namespace XenAdminTests
 
         public static string GetTestResource(string name)
         {
-            return (Program.AssemblyDir + @"\TestResources\" + name);
+            return (Directory.GetCurrentDirectory() + @"\TestResources\" + name);
         }
 
 

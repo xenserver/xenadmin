@@ -43,3 +43,4 @@ glob:Nunit/nunit.framework.dll
 glob:XenOvfApi/External Tools/xenserver-linuxfixup-disk.iso
 *.opensdf
 *.sdf
+packages/*

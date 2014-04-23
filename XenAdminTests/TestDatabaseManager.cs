@@ -182,7 +182,7 @@ namespace XenAdminTests
 
         private string TestResource(string name)
         {
-            return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\TestResources\" + name;
+            return Directory.GetCurrentDirectory() + @"\TestResources\" + name;
         }
 
         /// <summary>
