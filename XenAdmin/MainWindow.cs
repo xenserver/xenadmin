@@ -1321,8 +1321,9 @@ namespace XenAdmin
             ShowTab(TabPageSnapshots, !multi && !SearchMode && george_or_greater && isRealVMSelected);
 
             //Any Clearwater XenServer, or an unlicensed >=Creedence XenServer, the WLB tab and any WLB menu items disappear completely.
-            if(SelectionManager.Selection.All(s => !Helpers.Clearwater(s.Connection)))
-                ShowTab(wlb_upsell ? TabPageWLBUpsell : TabPageWLB, !multi && !SearchMode && isPoolSelected && george_or_greater);
+            if(!(SelectionManager.Selection.All(s => Helpers.Clearwater(s.Connection)) ||
+                 (wlb_upsell && SelectionManager.Selection.All(s => Helpers.CreedenceOrGreater(s.Connection)))))
+                ShowTab(TabPageWLB, !multi && !SearchMode && isPoolSelected && george_or_greater);
 
             ShowTab(TabPageAD, !multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive) && george_or_greater);
 
