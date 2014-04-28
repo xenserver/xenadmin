@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Globalization;
 using System.Net;
 using System.Reflection;
@@ -39,7 +38,6 @@ using System.Threading;
 using CookComputing.XmlRpc;
 using XenAdmin.Actions;
 using XenAdmin.Core;
-using XenAdmin.ServerDBs;
 using XenAPI;
 using System.Diagnostics;
 
@@ -996,10 +994,9 @@ namespace XenAdmin.Network
             }
 
             log.InfoFormat("Connected to {0} ({1}:{2})", FriendlyName, taskHostname, task_port);
-            string name =
-                string.IsNullOrEmpty(FriendlyName) || FriendlyName == taskHostname ?
-                    taskHostname :
-                    string.Format("{0} ({1})", FriendlyName, taskHostname);
+            string name = string.IsNullOrEmpty(FriendlyName) || FriendlyName == taskHostname
+                              ? taskHostname
+                              : string.Format("{0} ({1})", FriendlyName, taskHostname);
             string title = string.Format(Messages.CONNECTING_NOTICE_TITLE, name);
             string msg = string.Format(Messages.CONNECTING_NOTICE_TEXT, name);
             log.Info(msg);
@@ -1481,11 +1478,10 @@ namespace XenAdmin.Network
 
                     ExpressRestriction e = (ExpressRestriction)error;
                     string msg = string.Format(Messages.CONNECTION_RESTRICTED_MESSAGE, e.HostName, e.ExistingHostName);
-                    log.Info(msg);
                     // Add an informational log message saying why the connection attempt failed
-                    ActionBase action = new ActionBase(
-                        string.Format(Messages.CONNECTION_RESTRICTED_NOTICE_TITLE, e.HostName),
-                        msg, false, true, Messages.CONNECTION_RESTRICTED_NOTICE_TITLE);
+                    log.Info(msg);
+                    string title = string.Format(Messages.CONNECTION_RESTRICTED_NOTICE_TITLE, e.HostName);
+                    ActionBase action = new ActionBase(title, msg, false, true, msg);
                     SetPoolAndHostInAction(action, pool, PoolOpaqueRef);
 
                     OnConnectionResult(false, Messages.CONNECTION_RESTRICTED_MESSAGE, error);
@@ -1511,14 +1507,25 @@ namespace XenAdmin.Network
                 {
                     // We never connected
                     string reason = GetReason(error);
-                    log.WarnFormat("IXenConnection: failed to connect to {0}: {1}", this.HostnameWithPort, reason);
-
-                    // Create a new log message to say the connection attempt failed
-                    string title = string.Format(Messages.CONNECTION_FAILED_TITLE, HostnameWithPort);
-                    ActionBase n = new ActionBase(title, reason, false, true, title);
-                    SetPoolAndHostInAction(n, pool, PoolOpaqueRef);
+                    log.WarnFormat("IXenConnection: failed to connect to {0}: {1}", HostnameWithPort, reason);
 
                     Failure f = error as Failure;
+                    if (f != null && f.ErrorDescription[0] == Failure.HOST_IS_SLAVE)
+                    {
+                        //do not log an event in this case
+                    }
+                    else if (error is ConnectionExists)
+                    {
+                        //do not log an event in this case
+                    }
+                    else
+                    {
+                        // Create a new log message to say the connection attempt failed
+                        string title = string.Format(Messages.CONNECTION_FAILED_TITLE, HostnameWithPort);
+                        ActionBase n = new ActionBase(title, reason, false, true, reason);
+                        SetPoolAndHostInAction(n, pool, PoolOpaqueRef);
+                    }
+
                     // We only want to continue the master search in certain circumstances
                     if (FindingNewMaster && (error is WebException || (f != null && f.ErrorDescription[0] != Failure.RBAC_PERMISSION_DENIED)))
                     {
@@ -1662,7 +1669,7 @@ namespace XenAdmin.Network
 
             string title = string.Format(Messages.CONNECTION_LOST_NOTICE_TITLE,
                                          LastConnectionFullName);
-            ActionBase n = new ActionBase(title, description, false, true, title);
+            ActionBase n = new ActionBase(title, description, false, true, description);
             SetPoolAndHostInAction(n, pool, poolopaqueref);
             OnConnectionLost();
         }
@@ -1814,10 +1821,9 @@ namespace XenAdmin.Network
         private void ReconnectMaster()
         {
             // Add an informational entry to the log
-            ActionBase action = new ActionBase(
-                string.Format(Messages.CONNECTION_FINDING_MASTER_TITLE, LastConnectionFullName),
-                string.Format(Messages.CONNECTION_FINDING_MASTER_DESCRIPTION, LastConnectionFullName, Hostname),
-                false, true);
+            string title = string.Format(Messages.CONNECTION_FINDING_MASTER_TITLE, LastConnectionFullName);
+            string descr = string.Format(Messages.CONNECTION_FINDING_MASTER_DESCRIPTION, LastConnectionFullName, Hostname);
+            ActionBase action = new ActionBase(title, descr, false, true);
             SetPoolAndHostInAction(action, null, PoolOpaqueRef);
             log.DebugFormat("Looking for master for {0} on {1}...", LastConnectionFullName, Hostname);
 
