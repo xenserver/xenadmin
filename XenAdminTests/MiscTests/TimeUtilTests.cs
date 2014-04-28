@@ -92,7 +92,7 @@ namespace XenAdminTests.MiscTests
         [Test]
         public void ToISODateTime()
         {
-            string derived = TimeUtil.ToISO8601DateTime(new DateTime(2011, 12, 25, 10, 20, 37));
+            string derived = TimeUtil.ToISO8601DateTime(new DateTime(2011, 12, 25, 10, 20, 37, DateTimeKind.Utc));
             Assert.AreEqual("20111225T10:20:37Z", derived);
         }
 
