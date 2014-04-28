@@ -144,6 +144,9 @@ namespace XenAdmin.TabPages
 
         private void BuildRowList()
         {
+            if (!Visible)
+                return;
+
             try
             {
                 dataGridView.SuspendLayout();
