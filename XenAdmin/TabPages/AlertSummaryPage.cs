@@ -105,6 +105,9 @@ namespace XenAdmin.TabPages
 
         private void Rebuild()
         {
+            if (!Visible)
+                return;
+
             log.Debug("Rebuilding alertList");
             Thread t = new Thread(_Rebuild);
             t.Name = "Building alert list";

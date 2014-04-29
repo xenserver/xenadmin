@@ -433,7 +433,7 @@ namespace XenAdmin
             if (action.Exception != null && !(action.Exception is CancelledException))
             {
                 if (meddlingAction == null)
-                    SetStatusBar(XenAdmin.Properties.Resources._000_error_h32bit_16, action.Exception.Message);
+                    SetStatusBar(Properties.Resources._000_error_h32bit_16, action.Exception.Message);
 
                 IXenObject model =
                         (IXenObject)action.VM ??
@@ -447,11 +447,13 @@ namespace XenAdmin
             }
             else if (meddlingAction == null)
             {
-                SetStatusBar(null,
-                    action.IsCompleted ? null :
-                    !string.IsNullOrEmpty(action.Description) ? action.Description :
-                    !string.IsNullOrEmpty(action.Title) ? action.Title :
-                                                                null);
+                SetStatusBar(null, action.IsCompleted
+                                       ? null
+                                       : !string.IsNullOrEmpty(action.Description)
+                                             ? action.Description
+                                             : !string.IsNullOrEmpty(action.Title)
+                                                   ? action.Title
+                                                   : null);
             }
 
             int errors = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded);
