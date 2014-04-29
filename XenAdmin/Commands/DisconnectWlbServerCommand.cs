@@ -90,7 +90,7 @@ namespace XenAdmin.Commands
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
             //Clearwater doesn't has WLB
-            if (selection.Any(s => Helpers.Clearwater(s.Connection)))
+            if (selection.Any(s => Helpers.IsClearwater(s.Connection)))
                 return false;
 
             if (selection.Count == 1)

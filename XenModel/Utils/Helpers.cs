@@ -425,7 +425,7 @@ namespace XenAdmin.Core
             return conn == null ? true : CreedenceOrGreater(Helpers.GetMaster(conn));
         }
 
-        /// Creedence is ver. ???1.8.000??
+        /// Creedence is ver. 1.9.0
         /// <param name="host">May be null, in which case true is returned.</param>
         public static bool CreedenceOrGreater(Host host)
         {
@@ -434,28 +434,19 @@ namespace XenAdmin.Core
 
             string platform_version = HostPlatformVersion(host);
             return
-                platform_version != null && productVersionCompare(platform_version, "1.8.000") >= 0 ||
+                platform_version != null && productVersionCompare(platform_version, "1.8.900") >= 0 ||
                 HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
-        }
-
-        /// <param name="conn">May be null, in which case true is returned.</param>
-        public static bool Clearwater(IXenConnection conn)
-        {
-            return conn == null ? true : Clearwater(Helpers.GetMaster(conn));
         }
 
         /// Clearwater is ver. 1.7.0
-        /// <param name="host">May be null, in which case true is returned.</param>
-        public static bool Clearwater(Host host)
+        /// <param name="conn">May be null, in which case true is returned.</param>
+        public static bool IsClearwater(IXenConnection conn)
         {
-            if (host == null)
-                return true;
-
-            string platform_version = HostPlatformVersion(host);
-            return
-                platform_version != null && 
-                (productVersionCompare(platform_version, "1.6.900") >= 0 && productVersionCompare(platform_version, "1.7.900") < 0) ||
-                HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+            if(conn == null) return true;
+            else {
+                Host host = Helpers.GetMaster(conn);
+                return (ClearwaterOrGreater(host) && !CreedenceOrGreater(host));
+            }
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
@@ -491,7 +482,7 @@ namespace XenAdmin.Core
 
             string platform_version = HostPlatformVersion(host);
             return
-                platform_version != null && productVersionCompare(platform_version, "1.8.50") >= 0 ||
+                platform_version != null && productVersionCompare(platform_version, "1.9.50") >= 0 ||
                 HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
         }
 
@@ -509,7 +500,7 @@ namespace XenAdmin.Core
         public static bool WlbEnabled(IXenConnection connection)
         {
             //Clearwater doesn't has WLB
-            if (Clearwater(connection))
+            if (IsClearwater(connection))
                 return false;
 
             Pool pool = GetPoolOfOne(connection);
@@ -527,7 +518,7 @@ namespace XenAdmin.Core
         public static bool WlbConfigured(IXenConnection conn)
         {
             //Clearwater doesn't has WLB
-            if (Clearwater(conn))
+            if (IsClearwater(conn))
                 return false;
 
             Pool p = GetPoolOfOne(conn);
