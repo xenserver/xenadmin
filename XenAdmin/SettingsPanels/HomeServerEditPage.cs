@@ -135,17 +135,5 @@ namespace XenAdmin.SettingsPanels
         }
 
         #endregion
-
-        private void picker_VisibleChanged(object sender, EventArgs e)
-        {
-            if (vm != null)
-            {
-                Host currentAffinity = vm.Connection.Resolve(vm.affinity);
-                picker.SetAffinity(vm.Connection, currentAffinity,
-                                       vm.HasNoDisksAndNoLocalCD
-                                           ? null
-                                           : vm.GetStorageHost(false));
-            }
-        }
     }
 }

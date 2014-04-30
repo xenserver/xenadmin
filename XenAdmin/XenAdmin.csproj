@@ -2312,7 +2312,6 @@
     <Compile Include="OrganizationalView.cs" />
     <Compile Include="Controls\SrPickerItem.cs" />
     <Compile Include="Controls\SummaryPanel\ISummaryPanelView.cs" />
-    <Compile Include="Diagnostics\Checks\HostHasWlbCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostMaintenanceModeCheck.cs" />
     <Compile Include="Diagnostics\Checks\UpgradingFromTampaAndOlderCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostHasWssCheck.cs" />
@@ -2321,7 +2320,6 @@
     <Compile Include="Diagnostics\Problems\ConnectionProblem\VmprActivatedWarning.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostHasWssWarning.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\MissingMultipleFCSRsProblem.cs" />
-    <Compile Include="Diagnostics\Problems\PoolProblem\PoolHasWlbRemovalProblem.cs" />
     <Compile Include="Diagnostics\Problems\WarningWithInformationUrl.cs" />
     <Compile Include="Dialogs\ConnectionRefusedDialog.cs">
       <SubType>Form</SubType>

@@ -68,12 +68,14 @@ namespace XenAdmin.Alerts
 
         public void IncludeConnection(IXenConnection newConnection)
         {
-            connections.Add(newConnection);
+            if (!connections.Contains(newConnection))
+                connections.Add(newConnection);
         }
 
         public void IncludeHosts(IEnumerable<Host> newHosts)
         {
-            hosts.AddRange(newHosts);
+            var notContained = newHosts.Where(h => !hosts.Contains(h));
+            hosts.AddRange(notContained);
         }
 
         public void CopyConnectionsAndHosts(XenServerUpdateAlert alert)

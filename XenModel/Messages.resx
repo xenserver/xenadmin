@@ -2210,14 +2210,11 @@ Do you want to assign it to the policy '{2}' instead?</value>
   <data name="CHECKING_VMPR_STATUS" xml:space="preserve">
     <value>Checking the presence of VM Protection Policies</value>
   </data>
-  <data name="CHECKING_WLB_STATUS" xml:space="preserve">
-    <value>Checking the presence of WLB</value>
-  </data>
   <data name="CHECKING_WSS_STATUS" xml:space="preserve">
     <value>Checking the possible presence of WSS appliances</value>
   </data>
   <data name="CHECK_WLB_ENABLED" xml:space="preserve">
-    <value>Pool '{0}' must be removed from WLB</value>
+    <value>Pool '{0}' cannot have WLB enabled</value>
   </data>
   <data name="CHIN" xml:space="preserve">
     <value>Cross-server private network</value>
@@ -3133,9 +3130,6 @@ Please reconnect the host and try again.</value>
   </data>
   <data name="DEBIAN_SARGE_31" xml:space="preserve">
     <value>Debian Sarge 3.1</value>
-  </data>
-  <data name="DECONFIGURE_WLB" xml:space="preserve">
-    <value>Deconfigure WLB</value>
   </data>
   <data name="DECONFIGURING_WLB" xml:space="preserve">
     <value>Disconnecting Workload Balancing.</value>
@@ -5326,7 +5320,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Help</value>
   </data>
   <data name="HELP_MESSAGE_DISABLE_WLB" xml:space="preserve">
-    <value>Remove</value>
+    <value>Pause WLB</value>
   </data>
   <data name="HIDE_DETAILS" xml:space="preserve">
     <value>Hide Details</value>
@@ -8316,6 +8310,12 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
     <value>XenServer Updates|*.xsupdate;*.xsoem</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
+    <value>Subscription Advantage required</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED" xml:space="preserve">
+    <value>Update already applied</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TEXT" xml:space="preserve">
     <value>Select Servers</value>
   </data>
@@ -9252,9 +9252,6 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   </data>
   <data name="RPU_WIZARD_VMPR_VMPP_DEPRECATION" xml:space="preserve">
     <value>'{0}': VM Protection Policies have been removed in XenServer 6.2</value>
-  </data>
-  <data name="RPU_WIZARD_WLB_REMOVAL" xml:space="preserve">
-    <value>'{0}': WLB has been removed in XenServer 6.2</value>
   </data>
   <data name="RPU_WIZARD_WSS_DEPRECATED" xml:space="preserve">
     <value>'{0}': The use of WSS servers has been removed in XenServer 6.2</value>

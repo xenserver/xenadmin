@@ -56,7 +56,7 @@ namespace XenAdminTests.UnitTests.AlertTests
             XenServerPatchAlert alert = new XenServerPatchAlert(p);
             alert.IncludeConnection(connA.Object);
             alert.IncludeConnection(connB.Object);
-            alert.IncludeHosts(new List<Host>() { hostA.Object, hostB.Object });
+            alert.IncludeHosts(new List<Host> { hostA.Object, hostB.Object });
 
             IUnitTestVerifier validator = new VerifyGetters(alert);
 
@@ -184,9 +184,11 @@ namespace XenAdminTests.UnitTests.AlertTests
             
             hostA = new Mock<Host>(MockBehavior.Strict);
             hostA.Setup(n => n.Name).Returns("HostAName");
+            hostA.Setup(n => n.Equals(It.IsAny<object>())).Returns((object o) => ReferenceEquals(o, hostA.Object));
 
             hostB = new Mock<Host>(MockBehavior.Strict);
             hostB.Setup(n => n.Name).Returns("HostBName");
+            hostB.Setup(n => n.Equals(It.IsAny<object>())).Returns((object o) => ReferenceEquals(o, hostB.Object));
         }
 
         [TearDown]

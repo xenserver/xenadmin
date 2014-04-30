@@ -35,14 +35,11 @@ namespace XenAdmin.Dialogs.Wlb
             this.wlbMetricWeightingPage = new XenAdmin.SettingsPanels.WlbMetricWeightingPage();
             this.wlbHostExclusionPage = new XenAdmin.SettingsPanels.WlbHostExclusionPage();
             this.wlbAdvancedSettingsPage = new XenAdmin.SettingsPanels.WlbAdvancedSettingsPage();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.deprecationBanner = new XenAdmin.Controls.DeprecationBanner();
             this.ContentPanel.SuspendLayout();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
             this.blueBorder.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ContentPanel
@@ -166,35 +163,18 @@ namespace XenAdmin.Dialogs.Wlb
             this.wlbAdvancedSettingsPage.MinimumSize = new System.Drawing.Size(560, 560);
             this.wlbAdvancedSettingsPage.Name = "wlbAdvancedSettingsPage";
             // 
-            // tableLayoutPanel1
-            // 
-            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.deprecationBanner, 1, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // deprecationBanner
-            // 
-            resources.ApplyResources(this.deprecationBanner, "deprecationBanner");
-            this.deprecationBanner.BackColor = System.Drawing.Color.LightCoral;
-            this.deprecationBanner.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.deprecationBanner.Name = "deprecationBanner";
-            // 
             // WlbConfigurationDialog
             // 
             resources.ApplyResources(this, "$this");
-            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "WlbConfigurationDialog";
             this.Controls.SetChildIndex(this.cancelButton, 0);
             this.Controls.SetChildIndex(this.okButton, 0);
-            this.Controls.SetChildIndex(this.tableLayoutPanel1, 0);
             this.Controls.SetChildIndex(this.splitContainer, 0);
             this.ContentPanel.ResumeLayout(false);
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
             this.splitContainer.ResumeLayout(false);
             this.blueBorder.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -209,7 +189,5 @@ namespace XenAdmin.Dialogs.Wlb
         private XenAdmin.SettingsPanels.WlbMetricWeightingPage wlbMetricWeightingPage;
         private XenAdmin.SettingsPanels.WlbHostExclusionPage wlbHostExclusionPage;
         private XenAdmin.SettingsPanels.WlbAdvancedSettingsPage wlbAdvancedSettingsPage;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private XenAdmin.Controls.DeprecationBanner deprecationBanner;
     }
 }

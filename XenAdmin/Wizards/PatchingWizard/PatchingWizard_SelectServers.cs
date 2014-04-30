@@ -137,6 +137,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if(!host.CanApplyHotfixes)
             {
                 row.Enabled = false;
+                row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED;
                 return;
             }
                 
@@ -154,7 +155,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                     if (host.isOEM)
                         row.Enabled = false;
                     if (Patch.IsAppliedTo(host,ConnectionsManager.XenConnectionsCopy))
+                    {
                         row.Enabled = false;
+                        row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED;
+                    }
                     break;
             }
         }
@@ -691,8 +695,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                 else
                     _poolIconHostCheckCell = new DataGridViewCheckBoxCell();
 
+
                 _nameCell = new DataGridViewNameCell();
                 _versionCell = new DataGridViewTextBoxCell();
+
+
 
                 Cells.AddRange(new[] { _expansionCell, _poolCheckBoxCell, _poolIconHostCheckCell, _nameCell, _versionCell });
 

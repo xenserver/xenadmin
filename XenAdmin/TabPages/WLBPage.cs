@@ -95,18 +95,7 @@ namespace XenAdmin.TabPages
             pdSectionConfiguration.fixFirstColumnWidth(200);
             pictureBoxWarningTriangle.Image = SystemIcons.Warning.ToBitmap();
 
-            SetUpDeprecationBanner();
-
             RefreshControls();
-        }
-
-        private void SetUpDeprecationBanner()
-        {
-            Banner.AppliesToVersion = Messages.XENSERVER_6_2;
-            Banner.BannerType = DeprecationBanner.Type.Removal;
-            Banner.FeatureName = Messages.WLB;
-            Banner.LinkUri = new Uri(InvisibleMessages.WLB_DEPRECATION_URL);
-            Banner.Visible = true;
         }
 
         #region ControlEvents

@@ -182,6 +182,9 @@ namespace XenAdmin.TabPages
         {
             Program.AssertOnEventThread();
 
+            if (!Visible)
+                return;
+
             if (checksQueue > 0)
                 return;
 

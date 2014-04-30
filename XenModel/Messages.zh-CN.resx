@@ -2159,14 +2159,11 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   <data name="CHECKING_VMPR_STATUS" xml:space="preserve">
     <value>正在检查是否存在 VM 保护策略</value>
   </data>
-  <data name="CHECKING_WLB_STATUS" xml:space="preserve">
-    <value>正在检查是否存在 WLB</value>
-  </data>
   <data name="CHECKING_WSS_STATUS" xml:space="preserve">
     <value>正在检查是否可能存在 WSS 设备</value>
   </data>
   <data name="CHECK_WLB_ENABLED" xml:space="preserve">
-    <value>必须从 WLB 中删除池“{0}”</value>
+    <value>池“{0}”中的WLB功能不能被激活</value>
   </data>
   <data name="CHIN" xml:space="preserve">
     <value>跨服务器专用网络</value>
@@ -3070,9 +3067,6 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   </data>
   <data name="DEBIAN_SARGE_31" xml:space="preserve">
     <value>Debian Sarge 3.1</value>
-  </data>
-  <data name="DECONFIGURE_WLB" xml:space="preserve">
-    <value>取消配置 WLB</value>
   </data>
   <data name="DECONFIGURING_WLB" xml:space="preserve">
     <value>断开 Workload Balancing 的连接。</value>
@@ -5245,7 +5239,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>帮助</value>
   </data>
   <data name="HELP_MESSAGE_DISABLE_WLB" xml:space="preserve">
-    <value>删除</value>
+    <value>暂停</value>
   </data>
   <data name="HIDE_DETAILS" xml:space="preserve">
     <value>隐藏详细信息</value>
@@ -9041,9 +9035,6 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="RPU_WIZARD_VMPR_VMPP_DEPRECATION" xml:space="preserve">
     <value>{0}: 已在 XenServer 6.2 中删除 VM 保护策略</value>
-  </data>
-  <data name="RPU_WIZARD_WLB_REMOVAL" xml:space="preserve">
-    <value>{0}: 已在 XenServer 6.2 中删除 WLB</value>
   </data>
   <data name="RPU_WIZARD_WSS_DEPRECATED" xml:space="preserve">
     <value>{0}: 已在 XenServer 6.2 中删除对 WSS 服务器的使用</value>

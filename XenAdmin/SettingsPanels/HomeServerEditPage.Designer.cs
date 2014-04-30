@@ -36,7 +36,6 @@ namespace XenAdmin.SettingsPanels
             // 
             resources.ApplyResources(this.picker, "picker");
             this.picker.Name = "picker";
-            this.picker.VisibleChanged += new System.EventHandler(this.picker_VisibleChanged);
             // 
             // HomeServerEditPage
             // 

@@ -200,12 +200,12 @@ namespace XenAdmin.Dialogs
             Program.Invoke(this, delegate
                                      {
                                          LicenseDataGridViewRow lRow = row as LicenseDataGridViewRow;
-                                         if(lRow == null)
+                                         if(lRow == null || lRow.XenObject == null)
                                              return;
 
                                          summaryPanel.Title = lRow.XenObject.Name;
                                          summaryPanel.HelperUrl = Messages.LICENSE_MANAGER_BUY_LICENSE_LINK_TEXT;
-                                         summaryPanel.HelperUrlVisible = true;
+                                         summaryPanel.HelperUrlVisible = lRow.HelperUrlRequired;
                                          summaryPanel.WarningVisible = lRow.WarningRequired;
                                          summaryPanel.WarningText = lRow.WarningText;
                                          summaryPanel.SummaryText = summaryComponent;

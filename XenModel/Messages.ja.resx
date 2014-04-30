@@ -2159,14 +2159,11 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
   <data name="CHECKING_VMPR_STATUS" xml:space="preserve">
     <value>VM 保護ポリシーの存在を確認しています</value>
   </data>
-  <data name="CHECKING_WLB_STATUS" xml:space="preserve">
-    <value>WLB の存在を確認しています</value>
-  </data>
   <data name="CHECKING_WSS_STATUS" xml:space="preserve">
     <value>WSS アプライアンスの存在を確認しています</value>
   </data>
   <data name="CHECK_WLB_ENABLED" xml:space="preserve">
-    <value>プール '{0}' を WLB から除外する必要があります</value>
+    <value>プール '{0}' 中の WLB 機能をアクティブにすることができません</value>
   </data>
   <data name="CHIN" xml:space="preserve">
     <value>サーバー間のプライベート ネットワーク</value>
@@ -3070,9 +3067,6 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   </data>
   <data name="DEBIAN_SARGE_31" xml:space="preserve">
     <value>Debian Sarge 3.1</value>
-  </data>
-  <data name="DECONFIGURE_WLB" xml:space="preserve">
-    <value>WLB の設定解除</value>
   </data>
   <data name="DECONFIGURING_WLB" xml:space="preserve">
     <value>ワークロード バランスを切断しています。</value>
@@ -5247,7 +5241,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>ヘルプ</value>
   </data>
   <data name="HELP_MESSAGE_DISABLE_WLB" xml:space="preserve">
-    <value>削除</value>
+    <value>サスペンド</value>
   </data>
   <data name="HIDE_DETAILS" xml:space="preserve">
     <value>詳細を非表示</value>
@@ -9039,9 +9033,6 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   </data>
   <data name="RPU_WIZARD_VMPR_VMPP_DEPRECATION" xml:space="preserve">
     <value>'{0}': VM 保護ポリシーは、XenServer 6.2 から削除されています</value>
-  </data>
-  <data name="RPU_WIZARD_WLB_REMOVAL" xml:space="preserve">
-    <value>'{0}': WLB は、XenServer 6.2 から削除されています</value>
   </data>
   <data name="RPU_WIZARD_WSS_DEPRECATED" xml:space="preserve">
     <value>'{0}': WSS サーバーのサポートは、XenServer 6.2 から削除されています</value>

@@ -132,9 +132,6 @@
   <data name="COMMUNITY_URL" xml:space="preserve">
     <value>http://xenserver.org/</value>
   </data>
-  <data name="DVSC_DEPRECATION_URL" xml:space="preserve">
-    <value>http://support.citrix.com/article/CTX137336</value>
-  </data>
   <data name="HOMEPAGE" xml:space="preserve">
     <value>http://www.citrix.com/xenserver</value>
   </data>
@@ -224,9 +221,6 @@
   </data>
   <data name="VMPR_DEPRECATION_URL" xml:space="preserve">
     <value>http://support.citrix.com/article/CTX137335</value>
-  </data>
-  <data name="WLB_DEPRECATION_URL" xml:space="preserve">
-    <value>http://support.citrix.com/article/CTX137333</value>
   </data>
   <data name="WSS_DEPRECATION_URL" xml:space="preserve">
     <value>http://support.citrix.com/article/CTX137334</value>

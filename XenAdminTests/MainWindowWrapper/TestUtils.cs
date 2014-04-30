@@ -146,6 +146,11 @@ namespace XenAdminTests
             return GetFieldDeep<NavigationView>(o, name);
         }
 
+        public static NotificationsView GetNotificationsView(object o, string name)
+        {
+            return GetFieldDeep<NotificationsView>(o, name);
+        }
+
         public static DataGridViewEx GetDataGridViewEx(object o, string name)
         {
             return GetFieldDeep<DataGridViewEx>(o, name);
