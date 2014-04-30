@@ -129,13 +129,10 @@ namespace XenAdmin.Actions
                 catch (Failure f)
                 {
                     // Need to check if the patch already exists.  
-                    // If it does, and we're upload multiple patches
-                    // (ie from the wizard) then we don't care about 
-                    // throwing the error
+                    // If it does then we use it and ignore the PATCH_ALREADY_EXISTS error (CA-110209).
                     if (f.ErrorDescription != null
                         && f.ErrorDescription.Count > 1
-                        && f.ErrorDescription[0] == XenAPI.Failure.PATCH_ALREADY_EXISTS
-                        && embeddedHosts.Count + retailHosts.Count > 1)
+                        && f.ErrorDescription[0] == XenAPI.Failure.PATCH_ALREADY_EXISTS)
                     {
                         string uuid = f.ErrorDescription[1];
                         Session session = host.Connection.DuplicateSession();
