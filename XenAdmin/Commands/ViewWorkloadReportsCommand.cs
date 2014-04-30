@@ -107,8 +107,8 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            //Removed for clearwater
-            if(selection.Any(s=>Helpers.ClearwaterOrGreater(s.Connection)))
+            //Clearwater doesn't has WLB
+            if (selection.Any(s => Helpers.IsClearwater(s.Connection)))
                 return false;
 
             if (selection.Count == 1)

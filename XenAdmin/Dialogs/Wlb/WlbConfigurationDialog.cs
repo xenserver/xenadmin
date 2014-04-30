@@ -54,17 +54,7 @@ namespace XenAdmin.Dialogs.Wlb
             InitializeComponent();
 
             Text = String.Format(Messages.WLB_CONFIGURATION_DIALOG, Helpers.GetName(_pool));
-            SetupDeprecationBanner();
             Build();
-        }
-
-        private void SetupDeprecationBanner()
-        {
-            deprecationBanner.AppliesToVersion = Messages.XENSERVER_6_2;
-            deprecationBanner.FeatureName = Messages.WLB;
-            deprecationBanner.BannerType = DeprecationBanner.Type.Removal;
-            deprecationBanner.LinkUri = new Uri(InvisibleMessages.WLB_DEPRECATION_URL);
-            deprecationBanner.Visible = true;
         }
 
         private void Build()

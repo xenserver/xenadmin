@@ -62,7 +62,7 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             return new DelegatedAsyncAction(Pool.Connection, Messages.HELP_MESSAGE_DISABLE_WLB, "", "",
                                             ss =>
                                                 {
-                                                    var action = new DisableWLBAction(Pool, true);
+                                                    var action = new DisableWLBAction(Pool, false);
                                                     action.RunExternal(ss);
                                                     int count = 0;
                                                     while (Helpers.WlbEnabled(Pool.Connection) && count < 10)

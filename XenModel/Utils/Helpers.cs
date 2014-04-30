@@ -420,6 +420,36 @@ namespace XenAdmin.Core
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
+        public static bool CreedenceOrGreater(IXenConnection conn)
+        {
+            return conn == null ? true : CreedenceOrGreater(Helpers.GetMaster(conn));
+        }
+
+        /// Creedence is ver. 1.9.0
+        /// <param name="host">May be null, in which case true is returned.</param>
+        public static bool CreedenceOrGreater(Host host)
+        {
+            if (host == null)
+                return true;
+
+            string platform_version = HostPlatformVersion(host);
+            return
+                platform_version != null && productVersionCompare(platform_version, "1.8.900") >= 0 ||
+                HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+        }
+
+        /// Clearwater is ver. 1.7.0
+        /// <param name="conn">May be null, in which case true is returned.</param>
+        public static bool IsClearwater(IXenConnection conn)
+        {
+            if(conn == null) return true;
+            else {
+                Host host = Helpers.GetMaster(conn);
+                return (ClearwaterOrGreater(host) && !CreedenceOrGreater(host));
+            }
+        }
+
+        /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool ClearwaterOrGreater(IXenConnection conn)
         {
             return conn == null ? true : ClearwaterOrGreater(Helpers.GetMaster(conn));
@@ -452,7 +482,7 @@ namespace XenAdmin.Core
 
             string platform_version = HostPlatformVersion(host);
             return
-                platform_version != null && productVersionCompare(platform_version, "1.8.50") >= 0 ||
+                platform_version != null && productVersionCompare(platform_version, "1.9.50") >= 0 ||
                 HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
         }
 
@@ -469,7 +499,8 @@ namespace XenAdmin.Core
         /// <returns>true when wlb is enabled, otherwise false</returns>
         public static bool WlbEnabled(IXenConnection connection)
         {
-            if (ClearwaterOrGreater(connection))
+            //Clearwater doesn't has WLB
+            if (IsClearwater(connection))
                 return false;
 
             Pool pool = GetPoolOfOne(connection);
@@ -486,7 +517,8 @@ namespace XenAdmin.Core
 
         public static bool WlbConfigured(IXenConnection conn)
         {
-            if (ClearwaterOrGreater(conn))
+            //Clearwater doesn't has WLB
+            if (IsClearwater(conn))
                 return false;
 
             Pool p = GetPoolOfOne(conn);

@@ -5988,7 +5988,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pool &apos;{0}&apos; must be removed from WLB.
+        ///   Looks up a localized string similar to Pool &apos;{0}&apos; cannot have WLB enabled.
         /// </summary>
         public static string CHECK_WLB_ENABLED {
             get {
@@ -6085,16 +6085,7 @@ namespace XenAdmin {
                 return ResourceManager.GetString("CHECKING_VMPR_STATUS", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Checking the presence of WLB.
-        /// </summary>
-        public static string CHECKING_WLB_STATUS {
-            get {
-                return ResourceManager.GetString("CHECKING_WLB_STATUS", resourceCulture);
-            }
-        }
-        
+                
         /// <summary>
         ///   Looks up a localized string similar to Checking the possible presence of WSS appliances.
         /// </summary>
@@ -8732,16 +8723,7 @@ namespace XenAdmin {
                 return ResourceManager.GetString("DEBIAN_SARGE_31", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Deconfigure WLB.
-        /// </summary>
-        public static string DECONFIGURE_WLB {
-            get {
-                return ResourceManager.GetString("DECONFIGURE_WLB", resourceCulture);
-            }
-        }
-        
+                
         /// <summary>
         ///   Looks up a localized string similar to Disconnecting Workload Balancing..
         /// </summary>
@@ -15161,7 +15143,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove.
+        ///   Looks up a localized string similar to Pause WLB.
         /// </summary>
         public static string HELP_MESSAGE_DISABLE_WLB {
             get {
@@ -26588,16 +26570,7 @@ namespace XenAdmin {
                 return ResourceManager.GetString("RPU_WIZARD_VMPR_VMPP_DEPRECATION", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos;: WLB has been removed in XenServer 6.2.
-        /// </summary>
-        public static string RPU_WIZARD_WLB_REMOVAL {
-            get {
-                return ResourceManager.GetString("RPU_WIZARD_WLB_REMOVAL", resourceCulture);
-            }
-        }
-        
+                
         /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos;: The use of WSS servers has been removed in XenServer 6.2.
         /// </summary>

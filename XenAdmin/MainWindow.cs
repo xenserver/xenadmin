@@ -1321,11 +1321,12 @@ namespace XenAdmin
             ShowTab(TabPagePeformance, !multi && !SearchMode && (isRealVMSelected || (isHostSelected && isHostLive)));
             ShowTab(ha_upsell ? TabPageHAUpsell : TabPageHA, !multi && !SearchMode && isPoolSelected && has_ha_license_flag);
             ShowTab(TabPageSnapshots, !multi && !SearchMode && george_or_greater && isRealVMSelected);
-            
-            //Disable the WLB tab from Clearwater onwards
-            if(SelectionManager.Selection.All(s=>!Helpers.ClearwaterOrGreater(s.Connection)))
-                ShowTab(wlb_upsell ? TabPageWLBUpsell : TabPageWLB, !multi && !SearchMode && isPoolSelected && george_or_greater);
-            
+
+            //Any Clearwater XenServer, or an unlicensed >=Creedence XenServer, the WLB tab and any WLB menu items disappear completely.
+            if(!(SelectionManager.Selection.All(s => Helpers.IsClearwater(s.Connection)) ||
+                 (wlb_upsell && SelectionManager.Selection.All(s => Helpers.CreedenceOrGreater(s.Connection)))))
+                ShowTab(TabPageWLB, !multi && !SearchMode && isPoolSelected && george_or_greater);
+
             ShowTab(TabPageAD, !multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive) && george_or_greater);
 
             foreach (TabPageFeature f in pluginManager.GetAllFeatures<TabPageFeature>(f => !f.IsConsoleReplacement && !multi && f.ShowTab))
