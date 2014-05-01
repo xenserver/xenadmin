@@ -221,7 +221,7 @@ namespace XenAdmin.ServerDBs
                     break;
                 default:
                     //Support for export
-                    if (param[1].StartsWith("session_id="))
+                    if (param[0].StartsWith("/%3Fsession_id="))
                     {
                         HttpResponse = GetVMExportResponse();
                     }
