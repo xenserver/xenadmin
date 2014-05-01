@@ -341,7 +341,8 @@ namespace XenAdmin.Controls.NetworkingTab
                     List<NetworkRow> networkRowsToAdd = new List<NetworkRow>();
                     for (int i = 0; i < networks.Length; i++)
                     {
-                        if (!networks[i].Show(XenAdmin.Properties.Settings.Default.ShowHiddenVMs))
+                        if (!networks[i].Show(XenAdmin.Properties.Settings.Default.ShowHiddenVMs) ||
+                            Helpers.FindPIF(networks[i], XenObject as Host) == null)
                             continue;
                         networkRowsToAdd.Add(new NetworkRow(networks[i], XenObject));
                     }
