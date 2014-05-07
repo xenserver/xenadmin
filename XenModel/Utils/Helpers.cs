@@ -434,7 +434,7 @@ namespace XenAdmin.Core
 
             string platform_version = HostPlatformVersion(host);
             return
-                platform_version != null && productVersionCompare(platform_version, "1.8.900") >= 0 ||
+                platform_version != null && productVersionCompare(platform_version, "1.8.90") >= 0 ||
                 HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
         }
 
