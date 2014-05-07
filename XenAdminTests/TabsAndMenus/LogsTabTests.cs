@@ -36,6 +36,7 @@ using System.Windows.Forms;
 
 using NUnit.Framework;
 using XenAdmin;
+using XenAdmin.Controls.MainWindowControls;
 using XenAdmin.Core;
 using XenAdmin.TabPages;
 using XenAdmin.Controls;
@@ -168,10 +169,17 @@ namespace XenAdminTests.TabsAndMenus
             var rows = GetVisibleRows();
             Assert.AreEqual(1, rows.Count, "No connection item found.");
             Assert.IsFalse(showAllButton.Enabled);
+            MW(() =>
+                {
+                    TestUtils.GetToolStripItem(MainWindowWrapper.Item,
+                        "navigationPane.buttonNotifySmall").PerformClick();
+                    TestUtils.GetNotificationsView(MainWindowWrapper.Item,
+                        "navigationPane.notificationsView").SelectNotificationsSubMode(NotificationsSubMode.Events);
+                });
 
             // this should clear all items as they are all completed.
             MW(() => TestUtils.GetToolStripMenuItem(MainWindowWrapper.Item,
-                "eventsPage.toolStripDdbFilterStatus.toolStripMenuItemComplete").PerformClick());
+                        "eventsPage.toolStripDdbFilterStatus.toolStripMenuItemComplete").PerformClick());
             rows = GetVisibleRows();
             Assert.AreEqual(0, rows.Count, "Items weren't cleared.");
             Assert.IsTrue(showAllButton.Enabled);

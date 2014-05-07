@@ -99,7 +99,9 @@ namespace XenAdmin.Actions
             {
                 _pool = value;
                 SetAppliesTo(Pool);
-                if(Pool!=null&&Pool.Connection!=null&&Helpers.GetPool(Pool.Connection)==null&& Pool.Connection.Cache.Hosts.Length == 1)
+                if (Pool != null && Pool.Connection != null &&
+                    Helpers.GetPool(Pool.Connection) == null &&
+                    Pool.Connection.Cache.Hosts.Length == 1)
                 {
                     SetAppliesTo(Pool.Connection.Cache.Hosts[0]);
                 }
@@ -291,7 +293,16 @@ namespace XenAdmin.Actions
         public string Description
         {
             get { return _description; }
-            set { if (_description != value) { _description = value; if (LogDescriptionChanges) log.Debug(_description); OnChanged(); } }
+            set
+            {
+                if (_description != value)
+                {
+                    _description = value;
+                    if (LogDescriptionChanges)
+                        log.Debug(_description);
+                    OnChanged();
+                }
+            }
         }
 
         public bool IsCompleted

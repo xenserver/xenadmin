@@ -221,6 +221,11 @@ namespace XenAdmin.Dialogs
             }
         }
 
+        public bool HelperUrlRequired
+        {
+            get { return XenObject == null ? false : Helpers.ClearwaterOrGreater(XenObject.Connection); }  // CA-115256
+        }
+
         public Status RowStatus
         {
             get

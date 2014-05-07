@@ -196,7 +196,7 @@
     <value>NoControl</value>
   </data>
   <data name="rbtnBondedNetwork.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 233</value>
+    <value>20, 208</value>
   </data>
   <data name="rbtnBondedNetwork.Size" type="System.Drawing.Size, System.Drawing">
     <value>117, 17</value>
@@ -257,7 +257,7 @@ This can be used as a private connection between VMs on the same host.</value>
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>38, 253</value>
+    <value>38, 228</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>320, 26</value>
@@ -294,7 +294,7 @@ This will create a single higher performing channel.</value>
     <value>19, 20</value>
   </data>
   <data name="labelCHIN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 65</value>
+    <value>331, 39</value>
   </data>
   <data name="labelCHIN.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -302,9 +302,7 @@ This will create a single higher performing channel.</value>
   <data name="labelCHIN.Text" xml:space="preserve">
     <value>Create a network that does not leave the XenServer pool.
 This can be used as a private connection between VMs in the pool.
-This type of network requires the vSwitch Controller to be running. 
-This feature is deprecated in XenServer 6.2 and may be removed
-in future versions.</value>
+This type of network requires the vSwitch Controller to be running.</value>
   </data>
   <data name="&gt;&gt;labelCHIN.Name" xml:space="preserve">
     <value>labelCHIN</value>
@@ -370,7 +368,7 @@ in future versions.</value>
     <value>19, 134</value>
   </data>
   <data name="toolTipContainerCHIN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 92</value>
+    <value>380, 72</value>
   </data>
   <data name="toolTipContainerCHIN.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -406,7 +404,7 @@ in future versions.</value>
     <value>0, 0</value>
   </data>
   <data name="panelCHIN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 92</value>
+    <value>380, 72</value>
   </data>
   <data name="panelCHIN.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -574,7 +572,7 @@ in future versions.</value>
     <value>0, 32, 0, 0</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>416, 297</value>
+    <value>416, 269</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Select Type</value>

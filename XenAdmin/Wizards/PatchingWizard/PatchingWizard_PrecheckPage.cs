@@ -376,7 +376,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             bool result = _worker != null && !_worker.IsBusy && !problemsFound;
-            panelErrorsFound.Visible = !result;
+            panelErrorsFound.Visible = problemsFound;
             return result;
         }
 
