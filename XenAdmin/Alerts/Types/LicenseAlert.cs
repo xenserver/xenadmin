@@ -52,6 +52,7 @@ namespace XenAdmin.Alerts
             hostName = hostname;
             nowDate = now;
             expiryDate = expiry;
+            _timestamp = now;
         }
 
         public LicenseManagerLauncher LicenseManagerLauncher { get; set; }
@@ -67,6 +68,9 @@ namespace XenAdmin.Alerts
         {
             get
             {
+                if (expiryDate < nowDate)
+                    return string.Format(Messages.MAINWINDOW_EXPIRE_MESSAGE_TOO_LATE, hostName.Ellipsise(25));
+
                 string timeleft = GetLicenseTimeLeftString(expiryDate.Subtract(nowDate), false);
                 return string.Format(Messages.MAINWINDOW_EXPIRE_MESSAGE, hostName.Ellipsise(25), timeleft);
             }
@@ -74,7 +78,12 @@ namespace XenAdmin.Alerts
 
         public override AlertPriority Priority
         {
-            get { return AlertPriority.Priority3; }
+            get
+            {
+                return expiryDate < nowDate
+                           ? AlertPriority.Priority2
+                           : AlertPriority.Priority3;
+            }
         }
 
         public override string AppliesTo

@@ -6445,6 +6445,9 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MAINWINDOW_EXPIRE_MESSAGE" xml:space="preserve">
     <value>The XenServer license on '{0}' will expire in {1}.</value>
   </data>
+  <data name="MAINWINDOW_EXPIRE_MESSAGE_TOO_LATE" xml:space="preserve">
+    <value>The XenServer license on '{0}' has expired.</value>
+  </data>
   <data name="MAINWINDOW_EXPORT_TEMPLATE" xml:space="preserve">
     <value>&amp;Export to File...</value>
   </data>
