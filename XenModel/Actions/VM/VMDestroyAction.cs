@@ -101,11 +101,15 @@ namespace XenAdmin.Actions.VMActions
                 }
             }
 
-            //CA-91072: Delete Suspend image VDI
-            VDI suspendVDI = vm.Connection.Resolve(vm.suspend_VDI);
-            if (suspendVDI != null)
-                vdiRefs.Add(vm.suspend_VDI);
-
+            //CA-115429: XAPI does delete suspend VM VDIs on destroy (from version 1.7/Midnight Ride),
+            //so we should delete them here only when connected to older XS
+            if (!Helper.APIVersionMeets(session, API_Version.API_1_7))
+            {
+                //CA-91072: Delete Suspend image VDI
+                VDI suspendVDI = vm.Connection.Resolve(vm.suspend_VDI);
+                if (suspendVDI != null)
+                    vdiRefs.Add(vm.suspend_VDI);
+            }
 
             XenAPI.VM.destroy(session, vm.opaque_ref);
 
