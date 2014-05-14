@@ -101,12 +101,6 @@ namespace XenAdmin.Actions.VMActions
                 }
             }
 
-            //CA-91072: Delete Suspend image VDI
-            VDI suspendVDI = vm.Connection.Resolve(vm.suspend_VDI);
-            if (suspendVDI != null)
-                vdiRefs.Add(vm.suspend_VDI);
-
-
             XenAPI.VM.destroy(session, vm.opaque_ref);
 
 
