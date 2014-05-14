@@ -90,10 +90,7 @@ namespace XenAdmin
                 if (expiryDate < now)
                 {
                     // License has expired. Pop up the License Manager.
-                    Program.Invoke(Program.MainWindow, delegate()
-                    {
-                        showLicenseSummaryExpired(host, expiryDate);
-                    });
+                    Program.Invoke(Program.MainWindow, () => showLicenseSummaryExpired(host, now, expiryDate));
                     return true;
                 }
                 if (timeToExpiry < CONNECTION_WARN_THRESHOLD &&
@@ -103,10 +100,7 @@ namespace XenAdmin
                     // If it's a periodic check, only warn if XC has been open for one day
                     if (periodicCheck)
                         lastPeriodicLicenseWarning = DateTime.UtcNow;
-                    Program.Invoke(Program.MainWindow, delegate()
-                    {
-                        showLicenseSummaryWarning(Helpers.GetName(host), now, expiryDate);
-                    });
+                    Program.Invoke(Program.MainWindow, () => showLicenseSummaryWarning(Helpers.GetName(host), now, expiryDate));
                     return true;
                 }
             }
@@ -154,12 +148,19 @@ namespace XenAdmin
         /// Shows the license summary dialog to the user as their license has expired.
         /// </summary>
         /// <param name="host"></param>
+        /// <param name="now"></param>
         /// <param name="expiryDate">Should be expressed in local time.</param>
-        private void showLicenseSummaryExpired(Host host, DateTime expiryDate)
+        private void showLicenseSummaryExpired(Host host, DateTime now, DateTime expiryDate)
         {
             Program.AssertOnEventThread();
 
-            log.InfoFormat("Server {0} has expired ({1}). Show License Summary if needed", host.Name, HelpersGUI.DateTimeToString(expiryDate, Messages.DATEFORMAT_DMY_HMS, true));
+            log.InfoFormat("Server {0} has expired ({1}). Show License Summary if needed",
+                host.Name,
+                HelpersGUI.DateTimeToString(expiryDate, Messages.DATEFORMAT_DMY_HMS, true));
+
+            var alert = new LicenseAlert(host.Name, now, expiryDate) { LicenseManagerLauncher = licenseManagerLauncher };
+            Alert.AddAlert(alert);
+
             if (Program.RunInAutomatedTestMode)
                 log.DebugFormat("In automated test mode: quashing license expiry warning");
             else

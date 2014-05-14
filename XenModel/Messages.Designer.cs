@@ -6085,7 +6085,7 @@ namespace XenAdmin {
                 return ResourceManager.GetString("CHECKING_VMPR_STATUS", resourceCulture);
             }
         }
-                
+        
         /// <summary>
         ///   Looks up a localized string similar to Checking the possible presence of WSS appliances.
         /// </summary>
@@ -8723,7 +8723,7 @@ namespace XenAdmin {
                 return ResourceManager.GetString("DEBIAN_SARGE_31", resourceCulture);
             }
         }
-                
+        
         /// <summary>
         ///   Looks up a localized string similar to Disconnecting Workload Balancing..
         /// </summary>
@@ -18487,6 +18487,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The XenServer license on &apos;{0}&apos; has expired..
+        /// </summary>
+        public static string MAINWINDOW_EXPIRE_MESSAGE_TOO_LATE {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_EXPIRE_MESSAGE_TOO_LATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Export to File....
         /// </summary>
         public static string MAINWINDOW_EXPORT_TEMPLATE {
@@ -26588,7 +26597,7 @@ namespace XenAdmin {
                 return ResourceManager.GetString("RPU_WIZARD_VMPR_VMPP_DEPRECATION", resourceCulture);
             }
         }
-                
+        
         /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos;: The use of WSS servers has been removed in XenServer 6.2.
         /// </summary>
