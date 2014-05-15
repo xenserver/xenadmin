@@ -3349,7 +3349,7 @@ This will also delete its subfolders.</value>
     <value>Destroying servers</value>
   </data>
   <data name="DESTROYING_POOL" xml:space="preserve">
-    <value>Destroying pool '{0}'</value>
+    <value>Making pool '{0}' into standalone server</value>
   </data>
   <data name="DESTROY_HOST_ACTION_COMPLETED_DESC" xml:space="preserve">
     <value>Host destroyed</value>
@@ -6404,10 +6404,7 @@ This will permanently delete and reinitialize all local storage on the servers. 
     <value>De&amp;lete...</value>
   </data>
   <data name="MAINWINDOW_DELETE_POOL" xml:space="preserve">
-    <value>&amp;Delete Pool...</value>
-  </data>
-  <data name="MAINWINDOW_DELETE_POOL_CONTEXT_MENU" xml:space="preserve">
-    <value>Delete &amp;Pool...</value>
+    <value>Mak&amp;e into standalone server</value>
   </data>
   <data name="MAINWINDOW_DELETE_TAG" xml:space="preserve">
     <value>&amp;Delete Tag...</value>
@@ -8567,10 +8564,10 @@ The VM protection policy for this VM does not have automatic archiving configure
     <value>Creating pool</value>
   </data>
   <data name="POOLCREATE_DESTROYED" xml:space="preserve">
-    <value>Destroyed pool</value>
+    <value>Made pool into standalone server</value>
   </data>
   <data name="POOLCREATE_DESTROYING" xml:space="preserve">
-    <value>Destroying pool</value>
+    <value>Making pool into standalone server</value>
   </data>
   <data name="POOLCREATE_REMOVED" xml:space="preserve">
     <value>Removed from pool</value>
