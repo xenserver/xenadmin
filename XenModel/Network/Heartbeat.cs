@@ -172,6 +172,7 @@ namespace XenAdmin.Network
                 log.DebugFormat("Heartbeat for {0} has failed for the second time; closing the main connection",
                                 session == null ? "null" : session.Url);
                 connection.Interrupt();
+                DropSession();
             }
             else
             {
@@ -179,7 +180,6 @@ namespace XenAdmin.Network
                                 session == null ? "null" : session.Url);
                 retrying = true;
             }
-            DropSession();
         }
 
         /// Drop the session so that we'll get a new one the next time.
