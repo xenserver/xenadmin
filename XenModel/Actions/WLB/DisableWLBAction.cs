@@ -82,13 +82,13 @@ namespace XenAdmin.Actions.Wlb
                     log.Debug("Success disconnecting Workload Balancing on pool " + Pool.Name);
                     this.Description = Messages.COMPLETED;
 
-                    WlbServerState.SetState(Pool, WlbServerState.ServerState.NotConfigured);
+                    WlbServerState.SetState(this.Session, Pool, WlbServerState.ServerState.NotConfigured);
                 }
                 catch (Exception ex)
                 {
                     //Force disabling of WLB
                     XenAPI.Pool.set_wlb_enabled(this.Session, Pool.opaque_ref, false);
-                    WlbServerState.SetState(Pool, WlbServerState.ServerState.ConnectionError, (Failure)ex);
+                    WlbServerState.SetState(this.Session, Pool, WlbServerState.ServerState.ConnectionError, (Failure)ex);
                     log.Debug(string.Format(Messages.ACTION_WLB_DECONFIGURE_FAILED, Pool.Name, ex.Message));
                     throw new Exception(string.Format(Messages.ACTION_WLB_DECONFIGURE_FAILED, Pool.Name, ex.Message));
                 }
@@ -106,13 +106,13 @@ namespace XenAdmin.Actions.Wlb
                     XenAPI.Pool.set_wlb_enabled(this.Session, Pool.opaque_ref, false); 
                     log.Debug("Success pausing Workload Balancing on pool " + Pool.Name);
                     this.Description = Messages.COMPLETED;
-                    WlbServerState.SetState(Pool, WlbServerState.ServerState.Disabled);
+                    WlbServerState.SetState(this.Session, Pool, WlbServerState.ServerState.Disabled);
                 }
                 catch (Exception ex)
                 {
                     if (ex is Failure)
                     {
-                        WlbServerState.SetState(Pool, WlbServerState.ServerState.ConnectionError, (Failure)ex);
+                        WlbServerState.SetState(this.Session, Pool, WlbServerState.ServerState.ConnectionError, (Failure)ex);
                     }
                     throw ex;
                 }
