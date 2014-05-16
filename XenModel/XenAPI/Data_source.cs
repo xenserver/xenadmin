@@ -38,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// Data sources for logging in RRDs
+    /// First published in XenServer 5.0.
+    /// </summary>
     public partial class Data_source : XenObject<Data_source>
     {
         public Data_source()
@@ -155,60 +159,158 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
-
+        /// <summary>
+        /// Get all the data_source Records at once, in a single XML RPC call
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<Data_source>, Data_source> get_all_records(Session session)
         {
             return XenRef<Data_source>.Create<Proxy_Data_source>(session.proxy.data_source_get_all_records(session.uuid).parse());
         }
 
+        /// <summary>
+        /// a human-readable name
+        /// </summary>
+        public virtual string name_label
+        {
+            get { return _name_label; }
+            set
+            {
+                if (!Helper.AreEqual(value, _name_label))
+                {
+                    _name_label = value;
+                    Changed = true;
+                    NotifyPropertyChanged("name_label");
+                }
+            }
+        }
         private string _name_label;
-        public virtual string name_label {
-             get { return _name_label; }
-             set { if (!Helper.AreEqual(value, _name_label)) { _name_label = value; Changed = true; NotifyPropertyChanged("name_label"); } }
-         }
 
+        /// <summary>
+        /// a notes field containing human-readable description
+        /// </summary>
+        public virtual string name_description
+        {
+            get { return _name_description; }
+            set
+            {
+                if (!Helper.AreEqual(value, _name_description))
+                {
+                    _name_description = value;
+                    Changed = true;
+                    NotifyPropertyChanged("name_description");
+                }
+            }
+        }
         private string _name_description;
-        public virtual string name_description {
-             get { return _name_description; }
-             set { if (!Helper.AreEqual(value, _name_description)) { _name_description = value; Changed = true; NotifyPropertyChanged("name_description"); } }
-         }
 
+        /// <summary>
+        /// true if the data source is being logged
+        /// </summary>
+        public virtual bool enabled
+        {
+            get { return _enabled; }
+            set
+            {
+                if (!Helper.AreEqual(value, _enabled))
+                {
+                    _enabled = value;
+                    Changed = true;
+                    NotifyPropertyChanged("enabled");
+                }
+            }
+        }
         private bool _enabled;
-        public virtual bool enabled {
-             get { return _enabled; }
-             set { if (!Helper.AreEqual(value, _enabled)) { _enabled = value; Changed = true; NotifyPropertyChanged("enabled"); } }
-         }
 
+        /// <summary>
+        /// true if the data source is enabled by default. Non-default data sources cannot be disabled
+        /// </summary>
+        public virtual bool standard
+        {
+            get { return _standard; }
+            set
+            {
+                if (!Helper.AreEqual(value, _standard))
+                {
+                    _standard = value;
+                    Changed = true;
+                    NotifyPropertyChanged("standard");
+                }
+            }
+        }
         private bool _standard;
-        public virtual bool standard {
-             get { return _standard; }
-             set { if (!Helper.AreEqual(value, _standard)) { _standard = value; Changed = true; NotifyPropertyChanged("standard"); } }
-         }
 
+        /// <summary>
+        /// the units of the value
+        /// </summary>
+        public virtual string units
+        {
+            get { return _units; }
+            set
+            {
+                if (!Helper.AreEqual(value, _units))
+                {
+                    _units = value;
+                    Changed = true;
+                    NotifyPropertyChanged("units");
+                }
+            }
+        }
         private string _units;
-        public virtual string units {
-             get { return _units; }
-             set { if (!Helper.AreEqual(value, _units)) { _units = value; Changed = true; NotifyPropertyChanged("units"); } }
-         }
 
+        /// <summary>
+        /// the minimum value of the data source
+        /// </summary>
+        public virtual double min
+        {
+            get { return _min; }
+            set
+            {
+                if (!Helper.AreEqual(value, _min))
+                {
+                    _min = value;
+                    Changed = true;
+                    NotifyPropertyChanged("min");
+                }
+            }
+        }
         private double _min;
-        public virtual double min {
-             get { return _min; }
-             set { if (!Helper.AreEqual(value, _min)) { _min = value; Changed = true; NotifyPropertyChanged("min"); } }
-         }
 
+        /// <summary>
+        /// the maximum value of the data source
+        /// </summary>
+        public virtual double max
+        {
+            get { return _max; }
+            set
+            {
+                if (!Helper.AreEqual(value, _max))
+                {
+                    _max = value;
+                    Changed = true;
+                    NotifyPropertyChanged("max");
+                }
+            }
+        }
         private double _max;
-        public virtual double max {
-             get { return _max; }
-             set { if (!Helper.AreEqual(value, _max)) { _max = value; Changed = true; NotifyPropertyChanged("max"); } }
-         }
 
+        /// <summary>
+        /// current value of the data source
+        /// </summary>
+        public virtual double value
+        {
+            get { return _value; }
+            set
+            {
+                if (!Helper.AreEqual(value, _value))
+                {
+                    _value = value;
+                    Changed = true;
+                    NotifyPropertyChanged("value");
+                }
+            }
+        }
         private double _value;
-        public virtual double value {
-             get { return _value; }
-             set { if (!Helper.AreEqual(value, _value)) { _value = value; Changed = true; NotifyPropertyChanged("value"); } }
-         }
-
-
     }
 }

@@ -38,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// A virtual machine (or 'guest').
+    /// First published in XenServer 4.0.
+    /// </summary>
     public partial class VM : XenObject<VM>
     {
         public VM()
@@ -783,1697 +787,4320 @@ namespace XenAPI
                 return null;
             }
         }
-
+        /// <summary>
+        /// Get a record containing the current state of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static VM get_record(Session session, string _vm)
         {
             return new VM((Proxy_VM)session.proxy.vm_get_record(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get a reference to the VM instance with the specified UUID.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<VM> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<VM>.Create(session.proxy.vm_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
         }
 
+        /// <summary>
+        /// Create a new VM instance, and return its handle.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_record">All constructor arguments</param>
         public static XenRef<VM> create(Session session, VM _record)
         {
             return XenRef<VM>.Create(session.proxy.vm_create(session.uuid, _record.ToProxy()).parse());
         }
 
+        /// <summary>
+        /// Create a new VM instance, and return its handle.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_record">All constructor arguments</param>
         public static XenRef<Task> async_create(Session session, VM _record)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_create(session.uuid, _record.ToProxy()).parse());
         }
 
+        /// <summary>
+        /// Destroy the specified VM.  The VM is completely removed from the system.  This function can only be called when the VM is in the Halted State.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void destroy(Session session, string _vm)
         {
             session.proxy.vm_destroy(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Destroy the specified VM.  The VM is completely removed from the system.  This function can only be called when the VM is in the Halted State.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_destroy(Session session, string _vm)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_destroy(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get all the VM instances with the given label.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_label">label of object to return</param>
         public static List<XenRef<VM>> get_by_name_label(Session session, string _label)
         {
             return XenRef<VM>.Create(session.proxy.vm_get_by_name_label(session.uuid, (_label != null) ? _label : "").parse());
         }
 
+        /// <summary>
+        /// Get the uuid field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_uuid(Session session, string _vm)
         {
             return (string)session.proxy.vm_get_uuid(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the allowed_operations field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<vm_operations> get_allowed_operations(Session session, string _vm)
         {
             return Helper.StringArrayToEnumList<vm_operations>(session.proxy.vm_get_allowed_operations(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the current_operations field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<string, vm_operations> get_current_operations(Session session, string _vm)
         {
             return Maps.convert_from_proxy_string_vm_operations(session.proxy.vm_get_current_operations(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the power_state field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static vm_power_state get_power_state(Session session, string _vm)
         {
             return (vm_power_state)Helper.EnumParseDefault(typeof(vm_power_state), (string)session.proxy.vm_get_power_state(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the name/label field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_name_label(Session session, string _vm)
         {
             return (string)session.proxy.vm_get_name_label(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the name/description field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_name_description(Session session, string _vm)
         {
             return (string)session.proxy.vm_get_name_description(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the user_version field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_user_version(Session session, string _vm)
         {
             return long.Parse((string)session.proxy.vm_get_user_version(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the is_a_template field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static bool get_is_a_template(Session session, string _vm)
         {
             return (bool)session.proxy.vm_get_is_a_template(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the suspend_VDI field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<VDI> get_suspend_VDI(Session session, string _vm)
         {
             return XenRef<VDI>.Create(session.proxy.vm_get_suspend_vdi(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the resident_on field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Host> get_resident_on(Session session, string _vm)
         {
             return XenRef<Host>.Create(session.proxy.vm_get_resident_on(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the affinity field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Host> get_affinity(Session session, string _vm)
         {
             return XenRef<Host>.Create(session.proxy.vm_get_affinity(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the memory/overhead field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_memory_overhead(Session session, string _vm)
         {
             return long.Parse((string)session.proxy.vm_get_memory_overhead(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the memory/target field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_memory_target(Session session, string _vm)
         {
             return long.Parse((string)session.proxy.vm_get_memory_target(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the memory/static_max field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_memory_static_max(Session session, string _vm)
         {
             return long.Parse((string)session.proxy.vm_get_memory_static_max(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the memory/dynamic_max field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_memory_dynamic_max(Session session, string _vm)
         {
             return long.Parse((string)session.proxy.vm_get_memory_dynamic_max(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the memory/dynamic_min field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_memory_dynamic_min(Session session, string _vm)
         {
             return long.Parse((string)session.proxy.vm_get_memory_dynamic_min(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the memory/static_min field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_memory_static_min(Session session, string _vm)
         {
             return long.Parse((string)session.proxy.vm_get_memory_static_min(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the VCPUs/params field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<string, string> get_VCPUs_params(Session session, string _vm)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vm_get_vcpus_params(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the VCPUs/max field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_VCPUs_max(Session session, string _vm)
         {
             return long.Parse((string)session.proxy.vm_get_vcpus_max(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the VCPUs/at_startup field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_VCPUs_at_startup(Session session, string _vm)
         {
             return long.Parse((string)session.proxy.vm_get_vcpus_at_startup(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the actions/after_shutdown field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static on_normal_exit get_actions_after_shutdown(Session session, string _vm)
         {
             return (on_normal_exit)Helper.EnumParseDefault(typeof(on_normal_exit), (string)session.proxy.vm_get_actions_after_shutdown(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the actions/after_reboot field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static on_normal_exit get_actions_after_reboot(Session session, string _vm)
         {
             return (on_normal_exit)Helper.EnumParseDefault(typeof(on_normal_exit), (string)session.proxy.vm_get_actions_after_reboot(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the actions/after_crash field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static on_crash_behaviour get_actions_after_crash(Session session, string _vm)
         {
             return (on_crash_behaviour)Helper.EnumParseDefault(typeof(on_crash_behaviour), (string)session.proxy.vm_get_actions_after_crash(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the consoles field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<XenRef<Console>> get_consoles(Session session, string _vm)
         {
             return XenRef<Console>.Create(session.proxy.vm_get_consoles(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the VIFs field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<XenRef<VIF>> get_VIFs(Session session, string _vm)
         {
             return XenRef<VIF>.Create(session.proxy.vm_get_vifs(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the VBDs field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<XenRef<VBD>> get_VBDs(Session session, string _vm)
         {
             return XenRef<VBD>.Create(session.proxy.vm_get_vbds(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the crash_dumps field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<XenRef<Crashdump>> get_crash_dumps(Session session, string _vm)
         {
             return XenRef<Crashdump>.Create(session.proxy.vm_get_crash_dumps(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the VTPMs field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<XenRef<VTPM>> get_VTPMs(Session session, string _vm)
         {
             return XenRef<VTPM>.Create(session.proxy.vm_get_vtpms(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the PV/bootloader field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_PV_bootloader(Session session, string _vm)
         {
             return (string)session.proxy.vm_get_pv_bootloader(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the PV/kernel field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_PV_kernel(Session session, string _vm)
         {
             return (string)session.proxy.vm_get_pv_kernel(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the PV/ramdisk field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_PV_ramdisk(Session session, string _vm)
         {
             return (string)session.proxy.vm_get_pv_ramdisk(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the PV/args field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_PV_args(Session session, string _vm)
         {
             return (string)session.proxy.vm_get_pv_args(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the PV/bootloader_args field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_PV_bootloader_args(Session session, string _vm)
         {
             return (string)session.proxy.vm_get_pv_bootloader_args(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the PV/legacy_args field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_PV_legacy_args(Session session, string _vm)
         {
             return (string)session.proxy.vm_get_pv_legacy_args(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the HVM/boot_policy field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_HVM_boot_policy(Session session, string _vm)
         {
             return (string)session.proxy.vm_get_hvm_boot_policy(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the HVM/boot_params field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<string, string> get_HVM_boot_params(Session session, string _vm)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vm_get_hvm_boot_params(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the HVM/shadow_multiplier field of the given VM.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static double get_HVM_shadow_multiplier(Session session, string _vm)
         {
             return Convert.ToDouble(session.proxy.vm_get_hvm_shadow_multiplier(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the platform field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<string, string> get_platform(Session session, string _vm)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vm_get_platform(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the PCI_bus field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_PCI_bus(Session session, string _vm)
         {
             return (string)session.proxy.vm_get_pci_bus(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the other_config field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<string, string> get_other_config(Session session, string _vm)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vm_get_other_config(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the domid field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_domid(Session session, string _vm)
         {
             return long.Parse((string)session.proxy.vm_get_domid(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the domarch field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_domarch(Session session, string _vm)
         {
             return (string)session.proxy.vm_get_domarch(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the last_boot_CPU_flags field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<string, string> get_last_boot_CPU_flags(Session session, string _vm)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vm_get_last_boot_cpu_flags(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the is_control_domain field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static bool get_is_control_domain(Session session, string _vm)
         {
             return (bool)session.proxy.vm_get_is_control_domain(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the metrics field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<VM_metrics> get_metrics(Session session, string _vm)
         {
             return XenRef<VM_metrics>.Create(session.proxy.vm_get_metrics(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the guest_metrics field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<VM_guest_metrics> get_guest_metrics(Session session, string _vm)
         {
             return XenRef<VM_guest_metrics>.Create(session.proxy.vm_get_guest_metrics(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the last_booted_record field of the given VM.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_last_booted_record(Session session, string _vm)
         {
             return (string)session.proxy.vm_get_last_booted_record(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the recommendations field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_recommendations(Session session, string _vm)
         {
             return (string)session.proxy.vm_get_recommendations(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the xenstore_data field of the given VM.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<string, string> get_xenstore_data(Session session, string _vm)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vm_get_xenstore_data(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the ha_always_run field of the given VM.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static bool get_ha_always_run(Session session, string _vm)
         {
             return (bool)session.proxy.vm_get_ha_always_run(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the ha_restart_priority field of the given VM.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_ha_restart_priority(Session session, string _vm)
         {
             return (string)session.proxy.vm_get_ha_restart_priority(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the is_a_snapshot field of the given VM.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static bool get_is_a_snapshot(Session session, string _vm)
         {
             return (bool)session.proxy.vm_get_is_a_snapshot(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the snapshot_of field of the given VM.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<VM> get_snapshot_of(Session session, string _vm)
         {
             return XenRef<VM>.Create(session.proxy.vm_get_snapshot_of(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the snapshots field of the given VM.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<XenRef<VM>> get_snapshots(Session session, string _vm)
         {
             return XenRef<VM>.Create(session.proxy.vm_get_snapshots(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the snapshot_time field of the given VM.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static DateTime get_snapshot_time(Session session, string _vm)
         {
             return session.proxy.vm_get_snapshot_time(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the transportable_snapshot_id field of the given VM.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_transportable_snapshot_id(Session session, string _vm)
         {
             return (string)session.proxy.vm_get_transportable_snapshot_id(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the blobs field of the given VM.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<string, XenRef<Blob>> get_blobs(Session session, string _vm)
         {
             return Maps.convert_from_proxy_string_XenRefBlob(session.proxy.vm_get_blobs(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the tags field of the given VM.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string[] get_tags(Session session, string _vm)
         {
             return (string [])session.proxy.vm_get_tags(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the blocked_operations field of the given VM.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<vm_operations, string> get_blocked_operations(Session session, string _vm)
         {
             return Maps.convert_from_proxy_vm_operations_string(session.proxy.vm_get_blocked_operations(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the snapshot_info field of the given VM.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<string, string> get_snapshot_info(Session session, string _vm)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vm_get_snapshot_info(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the snapshot_metadata field of the given VM.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_snapshot_metadata(Session session, string _vm)
         {
             return (string)session.proxy.vm_get_snapshot_metadata(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the parent field of the given VM.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<VM> get_parent(Session session, string _vm)
         {
             return XenRef<VM>.Create(session.proxy.vm_get_parent(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the children field of the given VM.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<XenRef<VM>> get_children(Session session, string _vm)
         {
             return XenRef<VM>.Create(session.proxy.vm_get_children(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the bios_strings field of the given VM.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<string, string> get_bios_strings(Session session, string _vm)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vm_get_bios_strings(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the protection_policy field of the given VM.
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<VMPP> get_protection_policy(Session session, string _vm)
         {
             return XenRef<VMPP>.Create(session.proxy.vm_get_protection_policy(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the is_snapshot_from_vmpp field of the given VM.
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static bool get_is_snapshot_from_vmpp(Session session, string _vm)
         {
             return (bool)session.proxy.vm_get_is_snapshot_from_vmpp(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Get the appliance field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<VM_appliance> get_appliance(Session session, string _vm)
         {
             return XenRef<VM_appliance>.Create(session.proxy.vm_get_appliance(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the start_delay field of the given VM.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_start_delay(Session session, string _vm)
         {
             return long.Parse((string)session.proxy.vm_get_start_delay(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the shutdown_delay field of the given VM.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_shutdown_delay(Session session, string _vm)
         {
             return long.Parse((string)session.proxy.vm_get_shutdown_delay(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the order field of the given VM.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_order(Session session, string _vm)
         {
             return long.Parse((string)session.proxy.vm_get_order(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the VGPUs field of the given VM.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<XenRef<VGPU>> get_VGPUs(Session session, string _vm)
         {
             return XenRef<VGPU>.Create(session.proxy.vm_get_vgpus(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the attached_PCIs field of the given VM.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<XenRef<PCI>> get_attached_PCIs(Session session, string _vm)
         {
             return XenRef<PCI>.Create(session.proxy.vm_get_attached_pcis(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the suspend_SR field of the given VM.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<SR> get_suspend_SR(Session session, string _vm)
         {
             return XenRef<SR>.Create(session.proxy.vm_get_suspend_sr(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the version field of the given VM.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_version(Session session, string _vm)
         {
             return long.Parse((string)session.proxy.vm_get_version(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Get the generation_id field of the given VM.
+        /// First published in XenServer 6.2.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_generation_id(Session session, string _vm)
         {
             return (string)session.proxy.vm_get_generation_id(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Set the name/label field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_label">New value to set</param>
         public static void set_name_label(Session session, string _vm, string _label)
         {
             session.proxy.vm_set_name_label(session.uuid, (_vm != null) ? _vm : "", (_label != null) ? _label : "").parse();
         }
 
+        /// <summary>
+        /// Set the name/description field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_description">New value to set</param>
         public static void set_name_description(Session session, string _vm, string _description)
         {
             session.proxy.vm_set_name_description(session.uuid, (_vm != null) ? _vm : "", (_description != null) ? _description : "").parse();
         }
 
+        /// <summary>
+        /// Set the user_version field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_user_version">New value to set</param>
         public static void set_user_version(Session session, string _vm, long _user_version)
         {
             session.proxy.vm_set_user_version(session.uuid, (_vm != null) ? _vm : "", _user_version.ToString()).parse();
         }
 
+        /// <summary>
+        /// Set the is_a_template field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_is_a_template">New value to set</param>
         public static void set_is_a_template(Session session, string _vm, bool _is_a_template)
         {
             session.proxy.vm_set_is_a_template(session.uuid, (_vm != null) ? _vm : "", _is_a_template).parse();
         }
 
+        /// <summary>
+        /// Set the affinity field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_affinity">New value to set</param>
         public static void set_affinity(Session session, string _vm, string _affinity)
         {
             session.proxy.vm_set_affinity(session.uuid, (_vm != null) ? _vm : "", (_affinity != null) ? _affinity : "").parse();
         }
 
+        /// <summary>
+        /// Set the VCPUs/params field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_params">New value to set</param>
         public static void set_VCPUs_params(Session session, string _vm, Dictionary<string, string> _params)
         {
             session.proxy.vm_set_vcpus_params(session.uuid, (_vm != null) ? _vm : "", Maps.convert_to_proxy_string_string(_params)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the VCPUs/params field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_VCPUs_params(Session session, string _vm, string _key, string _value)
         {
             session.proxy.vm_add_to_vcpus_params(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the VCPUs/params field of the given VM.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_VCPUs_params(Session session, string _vm, string _key)
         {
             session.proxy.vm_remove_from_vcpus_params(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Set the actions/after_shutdown field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_after_shutdown">New value to set</param>
         public static void set_actions_after_shutdown(Session session, string _vm, on_normal_exit _after_shutdown)
         {
             session.proxy.vm_set_actions_after_shutdown(session.uuid, (_vm != null) ? _vm : "", on_normal_exit_helper.ToString(_after_shutdown)).parse();
         }
 
+        /// <summary>
+        /// Set the actions/after_reboot field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_after_reboot">New value to set</param>
         public static void set_actions_after_reboot(Session session, string _vm, on_normal_exit _after_reboot)
         {
             session.proxy.vm_set_actions_after_reboot(session.uuid, (_vm != null) ? _vm : "", on_normal_exit_helper.ToString(_after_reboot)).parse();
         }
 
+        /// <summary>
+        /// Set the actions/after_crash field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_after_crash">New value to set</param>
         public static void set_actions_after_crash(Session session, string _vm, on_crash_behaviour _after_crash)
         {
             session.proxy.vm_set_actions_after_crash(session.uuid, (_vm != null) ? _vm : "", on_crash_behaviour_helper.ToString(_after_crash)).parse();
         }
 
+        /// <summary>
+        /// Set the PV/bootloader field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_bootloader">New value to set</param>
         public static void set_PV_bootloader(Session session, string _vm, string _bootloader)
         {
             session.proxy.vm_set_pv_bootloader(session.uuid, (_vm != null) ? _vm : "", (_bootloader != null) ? _bootloader : "").parse();
         }
 
+        /// <summary>
+        /// Set the PV/kernel field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_kernel">New value to set</param>
         public static void set_PV_kernel(Session session, string _vm, string _kernel)
         {
             session.proxy.vm_set_pv_kernel(session.uuid, (_vm != null) ? _vm : "", (_kernel != null) ? _kernel : "").parse();
         }
 
+        /// <summary>
+        /// Set the PV/ramdisk field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_ramdisk">New value to set</param>
         public static void set_PV_ramdisk(Session session, string _vm, string _ramdisk)
         {
             session.proxy.vm_set_pv_ramdisk(session.uuid, (_vm != null) ? _vm : "", (_ramdisk != null) ? _ramdisk : "").parse();
         }
 
+        /// <summary>
+        /// Set the PV/args field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_args">New value to set</param>
         public static void set_PV_args(Session session, string _vm, string _args)
         {
             session.proxy.vm_set_pv_args(session.uuid, (_vm != null) ? _vm : "", (_args != null) ? _args : "").parse();
         }
 
+        /// <summary>
+        /// Set the PV/bootloader_args field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_bootloader_args">New value to set</param>
         public static void set_PV_bootloader_args(Session session, string _vm, string _bootloader_args)
         {
             session.proxy.vm_set_pv_bootloader_args(session.uuid, (_vm != null) ? _vm : "", (_bootloader_args != null) ? _bootloader_args : "").parse();
         }
 
+        /// <summary>
+        /// Set the PV/legacy_args field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_legacy_args">New value to set</param>
         public static void set_PV_legacy_args(Session session, string _vm, string _legacy_args)
         {
             session.proxy.vm_set_pv_legacy_args(session.uuid, (_vm != null) ? _vm : "", (_legacy_args != null) ? _legacy_args : "").parse();
         }
 
+        /// <summary>
+        /// Set the HVM/boot_policy field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_boot_policy">New value to set</param>
         public static void set_HVM_boot_policy(Session session, string _vm, string _boot_policy)
         {
             session.proxy.vm_set_hvm_boot_policy(session.uuid, (_vm != null) ? _vm : "", (_boot_policy != null) ? _boot_policy : "").parse();
         }
 
+        /// <summary>
+        /// Set the HVM/boot_params field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_boot_params">New value to set</param>
         public static void set_HVM_boot_params(Session session, string _vm, Dictionary<string, string> _boot_params)
         {
             session.proxy.vm_set_hvm_boot_params(session.uuid, (_vm != null) ? _vm : "", Maps.convert_to_proxy_string_string(_boot_params)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the HVM/boot_params field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_HVM_boot_params(Session session, string _vm, string _key, string _value)
         {
             session.proxy.vm_add_to_hvm_boot_params(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the HVM/boot_params field of the given VM.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_HVM_boot_params(Session session, string _vm, string _key)
         {
             session.proxy.vm_remove_from_hvm_boot_params(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Set the platform field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_platform">New value to set</param>
         public static void set_platform(Session session, string _vm, Dictionary<string, string> _platform)
         {
             session.proxy.vm_set_platform(session.uuid, (_vm != null) ? _vm : "", Maps.convert_to_proxy_string_string(_platform)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the platform field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_platform(Session session, string _vm, string _key, string _value)
         {
             session.proxy.vm_add_to_platform(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the platform field of the given VM.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_platform(Session session, string _vm, string _key)
         {
             session.proxy.vm_remove_from_platform(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Set the PCI_bus field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_pci_bus">New value to set</param>
         public static void set_PCI_bus(Session session, string _vm, string _pci_bus)
         {
             session.proxy.vm_set_pci_bus(session.uuid, (_vm != null) ? _vm : "", (_pci_bus != null) ? _pci_bus : "").parse();
         }
 
+        /// <summary>
+        /// Set the other_config field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _vm, Dictionary<string, string> _other_config)
         {
             session.proxy.vm_set_other_config(session.uuid, (_vm != null) ? _vm : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the other_config field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _vm, string _key, string _value)
         {
             session.proxy.vm_add_to_other_config(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the other_config field of the given VM.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _vm, string _key)
         {
             session.proxy.vm_remove_from_other_config(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Set the recommendations field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_recommendations">New value to set</param>
         public static void set_recommendations(Session session, string _vm, string _recommendations)
         {
             session.proxy.vm_set_recommendations(session.uuid, (_vm != null) ? _vm : "", (_recommendations != null) ? _recommendations : "").parse();
         }
 
+        /// <summary>
+        /// Set the xenstore_data field of the given VM.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_xenstore_data">New value to set</param>
         public static void set_xenstore_data(Session session, string _vm, Dictionary<string, string> _xenstore_data)
         {
             session.proxy.vm_set_xenstore_data(session.uuid, (_vm != null) ? _vm : "", Maps.convert_to_proxy_string_string(_xenstore_data)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the xenstore_data field of the given VM.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_xenstore_data(Session session, string _vm, string _key, string _value)
         {
             session.proxy.vm_add_to_xenstore_data(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the xenstore_data field of the given VM.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_xenstore_data(Session session, string _vm, string _key)
         {
             session.proxy.vm_remove_from_xenstore_data(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Set the tags field of the given VM.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_tags">New value to set</param>
         public static void set_tags(Session session, string _vm, string[] _tags)
         {
             session.proxy.vm_set_tags(session.uuid, (_vm != null) ? _vm : "", _tags).parse();
         }
 
+        /// <summary>
+        /// Add the given value to the tags field of the given VM.  If the value is already in that Set, then do nothing.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">New value to add</param>
         public static void add_tags(Session session, string _vm, string _value)
         {
             session.proxy.vm_add_tags(session.uuid, (_vm != null) ? _vm : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given value from the tags field of the given VM.  If the value is not in that Set, then do nothing.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">Value to remove</param>
         public static void remove_tags(Session session, string _vm, string _value)
         {
             session.proxy.vm_remove_tags(session.uuid, (_vm != null) ? _vm : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Set the blocked_operations field of the given VM.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_blocked_operations">New value to set</param>
         public static void set_blocked_operations(Session session, string _vm, Dictionary<vm_operations, string> _blocked_operations)
         {
             session.proxy.vm_set_blocked_operations(session.uuid, (_vm != null) ? _vm : "", Maps.convert_to_proxy_vm_operations_string(_blocked_operations)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the blocked_operations field of the given VM.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_blocked_operations(Session session, string _vm, vm_operations _key, string _value)
         {
             session.proxy.vm_add_to_blocked_operations(session.uuid, (_vm != null) ? _vm : "", vm_operations_helper.ToString(_key), (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the blocked_operations field of the given VM.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_blocked_operations(Session session, string _vm, vm_operations _key)
         {
             session.proxy.vm_remove_from_blocked_operations(session.uuid, (_vm != null) ? _vm : "", vm_operations_helper.ToString(_key)).parse();
         }
 
+        /// <summary>
+        /// Set the suspend_SR field of the given VM.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_suspend_sr">New value to set</param>
         public static void set_suspend_SR(Session session, string _vm, string _suspend_sr)
         {
             session.proxy.vm_set_suspend_sr(session.uuid, (_vm != null) ? _vm : "", (_suspend_sr != null) ? _suspend_sr : "").parse();
         }
 
+        /// <summary>
+        /// Snapshots the specified VM, making a new VM. Snapshot automatically exploits the capabilities of the underlying storage repository in which the VM's disk images are stored (e.g. Copy on Write).
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_new_name">The name of the snapshotted VM</param>
         public static XenRef<VM> snapshot(Session session, string _vm, string _new_name)
         {
             return XenRef<VM>.Create(session.proxy.vm_snapshot(session.uuid, (_vm != null) ? _vm : "", (_new_name != null) ? _new_name : "").parse());
         }
 
+        /// <summary>
+        /// Snapshots the specified VM, making a new VM. Snapshot automatically exploits the capabilities of the underlying storage repository in which the VM's disk images are stored (e.g. Copy on Write).
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_new_name">The name of the snapshotted VM</param>
         public static XenRef<Task> async_snapshot(Session session, string _vm, string _new_name)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_snapshot(session.uuid, (_vm != null) ? _vm : "", (_new_name != null) ? _new_name : "").parse());
         }
 
+        /// <summary>
+        /// Snapshots the specified VM with quiesce, making a new VM. Snapshot automatically exploits the capabilities of the underlying storage repository in which the VM's disk images are stored (e.g. Copy on Write).
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_new_name">The name of the snapshotted VM</param>
         public static XenRef<VM> snapshot_with_quiesce(Session session, string _vm, string _new_name)
         {
             return XenRef<VM>.Create(session.proxy.vm_snapshot_with_quiesce(session.uuid, (_vm != null) ? _vm : "", (_new_name != null) ? _new_name : "").parse());
         }
 
+        /// <summary>
+        /// Snapshots the specified VM with quiesce, making a new VM. Snapshot automatically exploits the capabilities of the underlying storage repository in which the VM's disk images are stored (e.g. Copy on Write).
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_new_name">The name of the snapshotted VM</param>
         public static XenRef<Task> async_snapshot_with_quiesce(Session session, string _vm, string _new_name)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_snapshot_with_quiesce(session.uuid, (_vm != null) ? _vm : "", (_new_name != null) ? _new_name : "").parse());
         }
 
+        /// <summary>
+        /// Clones the specified VM, making a new VM. Clone automatically exploits the capabilities of the underlying storage repository in which the VM's disk images are stored (e.g. Copy on Write).   This function can only be called when the VM is in the Halted State.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_new_name">The name of the cloned VM</param>
         public static XenRef<VM> clone(Session session, string _vm, string _new_name)
         {
             return XenRef<VM>.Create(session.proxy.vm_clone(session.uuid, (_vm != null) ? _vm : "", (_new_name != null) ? _new_name : "").parse());
         }
 
+        /// <summary>
+        /// Clones the specified VM, making a new VM. Clone automatically exploits the capabilities of the underlying storage repository in which the VM's disk images are stored (e.g. Copy on Write).   This function can only be called when the VM is in the Halted State.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_new_name">The name of the cloned VM</param>
         public static XenRef<Task> async_clone(Session session, string _vm, string _new_name)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_clone(session.uuid, (_vm != null) ? _vm : "", (_new_name != null) ? _new_name : "").parse());
         }
 
+        /// <summary>
+        /// Copied the specified VM, making a new VM. Unlike clone, copy does not exploits the capabilities of the underlying storage repository in which the VM's disk images are stored. Instead, copy guarantees that the disk images of the newly created VM will be 'full disks' - i.e. not part of a CoW chain.  This function can only be called when the VM is in the Halted State.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_new_name">The name of the copied VM</param>
+        /// <param name="_sr">An SR to copy all the VM's disks into (if an invalid reference then it uses the existing SRs)</param>
         public static XenRef<VM> copy(Session session, string _vm, string _new_name, string _sr)
         {
             return XenRef<VM>.Create(session.proxy.vm_copy(session.uuid, (_vm != null) ? _vm : "", (_new_name != null) ? _new_name : "", (_sr != null) ? _sr : "").parse());
         }
 
+        /// <summary>
+        /// Copied the specified VM, making a new VM. Unlike clone, copy does not exploits the capabilities of the underlying storage repository in which the VM's disk images are stored. Instead, copy guarantees that the disk images of the newly created VM will be 'full disks' - i.e. not part of a CoW chain.  This function can only be called when the VM is in the Halted State.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_new_name">The name of the copied VM</param>
+        /// <param name="_sr">An SR to copy all the VM's disks into (if an invalid reference then it uses the existing SRs)</param>
         public static XenRef<Task> async_copy(Session session, string _vm, string _new_name, string _sr)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_copy(session.uuid, (_vm != null) ? _vm : "", (_new_name != null) ? _new_name : "", (_sr != null) ? _sr : "").parse());
         }
 
-        public static void revert(Session session, string _snapshot)
+        /// <summary>
+        /// Reverts the specified VM to a previous state.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given snapshotted state</param>
+        public static void revert(Session session, string _vm)
         {
-            session.proxy.vm_revert(session.uuid, (_snapshot != null) ? _snapshot : "").parse();
+            session.proxy.vm_revert(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
-        public static XenRef<Task> async_revert(Session session, string _snapshot)
+        /// <summary>
+        /// Reverts the specified VM to a previous state.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given snapshotted state</param>
+        public static XenRef<Task> async_revert(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_revert(session.uuid, (_snapshot != null) ? _snapshot : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_revert(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Checkpoints the specified VM, making a new VM. Checkpoint automatically exploits the capabilities of the underlying storage repository in which the VM's disk images are stored (e.g. Copy on Write) and saves the memory image as well.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_new_name">The name of the checkpointed VM</param>
         public static XenRef<VM> checkpoint(Session session, string _vm, string _new_name)
         {
             return XenRef<VM>.Create(session.proxy.vm_checkpoint(session.uuid, (_vm != null) ? _vm : "", (_new_name != null) ? _new_name : "").parse());
         }
 
+        /// <summary>
+        /// Checkpoints the specified VM, making a new VM. Checkpoint automatically exploits the capabilities of the underlying storage repository in which the VM's disk images are stored (e.g. Copy on Write) and saves the memory image as well.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_new_name">The name of the checkpointed VM</param>
         public static XenRef<Task> async_checkpoint(Session session, string _vm, string _new_name)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_checkpoint(session.uuid, (_vm != null) ? _vm : "", (_new_name != null) ? _new_name : "").parse());
         }
 
+        /// <summary>
+        /// Inspects the disk configuration contained within the VM's other_config, creates VDIs and VBDs and then executes any applicable post-install script.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void provision(Session session, string _vm)
         {
             session.proxy.vm_provision(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Inspects the disk configuration contained within the VM's other_config, creates VDIs and VBDs and then executes any applicable post-install script.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_provision(Session session, string _vm)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_provision(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Start the specified VM.  This function can only be called with the VM is in the Halted State.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_start_paused">Instantiate VM in paused state if set to true.</param>
+        /// <param name="_force">Attempt to force the VM to start. If this flag is false then the VM may fail pre-boot safety checks (e.g. if the CPU the VM last booted on looks substantially different to the current one)</param>
         public static void start(Session session, string _vm, bool _start_paused, bool _force)
         {
             session.proxy.vm_start(session.uuid, (_vm != null) ? _vm : "", _start_paused, _force).parse();
         }
 
+        /// <summary>
+        /// Start the specified VM.  This function can only be called with the VM is in the Halted State.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_start_paused">Instantiate VM in paused state if set to true.</param>
+        /// <param name="_force">Attempt to force the VM to start. If this flag is false then the VM may fail pre-boot safety checks (e.g. if the CPU the VM last booted on looks substantially different to the current one)</param>
         public static XenRef<Task> async_start(Session session, string _vm, bool _start_paused, bool _force)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_start(session.uuid, (_vm != null) ? _vm : "", _start_paused, _force).parse());
         }
 
+        /// <summary>
+        /// Start the specified VM on a particular host.  This function can only be called with the VM is in the Halted State.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_host">The Host on which to start the VM</param>
+        /// <param name="_start_paused">Instantiate VM in paused state if set to true.</param>
+        /// <param name="_force">Attempt to force the VM to start. If this flag is false then the VM may fail pre-boot safety checks (e.g. if the CPU the VM last booted on looks substantially different to the current one)</param>
         public static void start_on(Session session, string _vm, string _host, bool _start_paused, bool _force)
         {
             session.proxy.vm_start_on(session.uuid, (_vm != null) ? _vm : "", (_host != null) ? _host : "", _start_paused, _force).parse();
         }
 
+        /// <summary>
+        /// Start the specified VM on a particular host.  This function can only be called with the VM is in the Halted State.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_host">The Host on which to start the VM</param>
+        /// <param name="_start_paused">Instantiate VM in paused state if set to true.</param>
+        /// <param name="_force">Attempt to force the VM to start. If this flag is false then the VM may fail pre-boot safety checks (e.g. if the CPU the VM last booted on looks substantially different to the current one)</param>
         public static XenRef<Task> async_start_on(Session session, string _vm, string _host, bool _start_paused, bool _force)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_start_on(session.uuid, (_vm != null) ? _vm : "", (_host != null) ? _host : "", _start_paused, _force).parse());
         }
 
+        /// <summary>
+        /// Pause the specified VM. This can only be called when the specified VM is in the Running state.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void pause(Session session, string _vm)
         {
             session.proxy.vm_pause(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Pause the specified VM. This can only be called when the specified VM is in the Running state.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_pause(Session session, string _vm)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_pause(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Resume the specified VM. This can only be called when the specified VM is in the Paused state.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void unpause(Session session, string _vm)
         {
             session.proxy.vm_unpause(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Resume the specified VM. This can only be called when the specified VM is in the Paused state.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_unpause(Session session, string _vm)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_unpause(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Attempt to cleanly shutdown the specified VM. (Note: this may not be supported---e.g. if a guest agent is not installed). This can only be called when the specified VM is in the Running state.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void clean_shutdown(Session session, string _vm)
         {
             session.proxy.vm_clean_shutdown(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Attempt to cleanly shutdown the specified VM. (Note: this may not be supported---e.g. if a guest agent is not installed). This can only be called when the specified VM is in the Running state.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_clean_shutdown(Session session, string _vm)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_clean_shutdown(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Attempts to first clean shutdown a VM and if it should fail then perform a hard shutdown on it.
+        /// First published in XenServer 6.2.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void shutdown(Session session, string _vm)
         {
             session.proxy.vm_shutdown(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Attempts to first clean shutdown a VM and if it should fail then perform a hard shutdown on it.
+        /// First published in XenServer 6.2.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_shutdown(Session session, string _vm)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_shutdown(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Attempt to cleanly shutdown the specified VM (Note: this may not be supported---e.g. if a guest agent is not installed). This can only be called when the specified VM is in the Running state.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void clean_reboot(Session session, string _vm)
         {
             session.proxy.vm_clean_reboot(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Attempt to cleanly shutdown the specified VM (Note: this may not be supported---e.g. if a guest agent is not installed). This can only be called when the specified VM is in the Running state.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_clean_reboot(Session session, string _vm)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_clean_reboot(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Stop executing the specified VM without attempting a clean shutdown.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void hard_shutdown(Session session, string _vm)
         {
             session.proxy.vm_hard_shutdown(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Stop executing the specified VM without attempting a clean shutdown.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_hard_shutdown(Session session, string _vm)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_hard_shutdown(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Reset the power-state of the VM to halted in the database only. (Used to recover from slave failures in pooling scenarios by resetting the power-states of VMs running on dead slaves to halted.) This is a potentially dangerous operation; use with care.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void power_state_reset(Session session, string _vm)
         {
             session.proxy.vm_power_state_reset(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Reset the power-state of the VM to halted in the database only. (Used to recover from slave failures in pooling scenarios by resetting the power-states of VMs running on dead slaves to halted.) This is a potentially dangerous operation; use with care.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_power_state_reset(Session session, string _vm)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_power_state_reset(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Stop executing the specified VM without attempting a clean shutdown and immediately restart the VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void hard_reboot(Session session, string _vm)
         {
             session.proxy.vm_hard_reboot(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Stop executing the specified VM without attempting a clean shutdown and immediately restart the VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_hard_reboot(Session session, string _vm)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_hard_reboot(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Suspend the specified VM to disk.  This can only be called when the specified VM is in the Running state.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void suspend(Session session, string _vm)
         {
             session.proxy.vm_suspend(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Suspend the specified VM to disk.  This can only be called when the specified VM is in the Running state.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_suspend(Session session, string _vm)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_suspend(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Awaken the specified VM and resume it.  This can only be called when the specified VM is in the Suspended state.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_start_paused">Resume VM in paused state if set to true.</param>
+        /// <param name="_force">Attempt to force the VM to resume. If this flag is false then the VM may fail pre-resume safety checks (e.g. if the CPU the VM was running on looks substantially different to the current one)</param>
         public static void resume(Session session, string _vm, bool _start_paused, bool _force)
         {
             session.proxy.vm_resume(session.uuid, (_vm != null) ? _vm : "", _start_paused, _force).parse();
         }
 
+        /// <summary>
+        /// Awaken the specified VM and resume it.  This can only be called when the specified VM is in the Suspended state.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_start_paused">Resume VM in paused state if set to true.</param>
+        /// <param name="_force">Attempt to force the VM to resume. If this flag is false then the VM may fail pre-resume safety checks (e.g. if the CPU the VM was running on looks substantially different to the current one)</param>
         public static XenRef<Task> async_resume(Session session, string _vm, bool _start_paused, bool _force)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_resume(session.uuid, (_vm != null) ? _vm : "", _start_paused, _force).parse());
         }
 
+        /// <summary>
+        /// Awaken the specified VM and resume it on a particular Host.  This can only be called when the specified VM is in the Suspended state.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_host">The Host on which to resume the VM</param>
+        /// <param name="_start_paused">Resume VM in paused state if set to true.</param>
+        /// <param name="_force">Attempt to force the VM to resume. If this flag is false then the VM may fail pre-resume safety checks (e.g. if the CPU the VM was running on looks substantially different to the current one)</param>
         public static void resume_on(Session session, string _vm, string _host, bool _start_paused, bool _force)
         {
             session.proxy.vm_resume_on(session.uuid, (_vm != null) ? _vm : "", (_host != null) ? _host : "", _start_paused, _force).parse();
         }
 
+        /// <summary>
+        /// Awaken the specified VM and resume it on a particular Host.  This can only be called when the specified VM is in the Suspended state.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_host">The Host on which to resume the VM</param>
+        /// <param name="_start_paused">Resume VM in paused state if set to true.</param>
+        /// <param name="_force">Attempt to force the VM to resume. If this flag is false then the VM may fail pre-resume safety checks (e.g. if the CPU the VM was running on looks substantially different to the current one)</param>
         public static XenRef<Task> async_resume_on(Session session, string _vm, string _host, bool _start_paused, bool _force)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_resume_on(session.uuid, (_vm != null) ? _vm : "", (_host != null) ? _host : "", _start_paused, _force).parse());
         }
 
+        /// <summary>
+        /// Migrate a VM to another Host. This can only be called when the specified VM is in the Running state.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_host">The target host</param>
+        /// <param name="_options">Extra configuration operations</param>
         public static void pool_migrate(Session session, string _vm, string _host, Dictionary<string, string> _options)
         {
             session.proxy.vm_pool_migrate(session.uuid, (_vm != null) ? _vm : "", (_host != null) ? _host : "", Maps.convert_to_proxy_string_string(_options)).parse();
         }
 
+        /// <summary>
+        /// Migrate a VM to another Host. This can only be called when the specified VM is in the Running state.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_host">The target host</param>
+        /// <param name="_options">Extra configuration operations</param>
         public static XenRef<Task> async_pool_migrate(Session session, string _vm, string _host, Dictionary<string, string> _options)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_pool_migrate(session.uuid, (_vm != null) ? _vm : "", (_host != null) ? _host : "", Maps.convert_to_proxy_string_string(_options)).parse());
         }
 
-        public static void set_VCPUs_number_live(Session session, string _self, long _nvcpu)
+        /// <summary>
+        /// Set the number of VCPUs for a running VM
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_nvcpu">The number of VCPUs</param>
+        public static void set_VCPUs_number_live(Session session, string _vm, long _nvcpu)
         {
-            session.proxy.vm_set_vcpus_number_live(session.uuid, (_self != null) ? _self : "", _nvcpu.ToString()).parse();
+            session.proxy.vm_set_vcpus_number_live(session.uuid, (_vm != null) ? _vm : "", _nvcpu.ToString()).parse();
         }
 
-        public static XenRef<Task> async_set_VCPUs_number_live(Session session, string _self, long _nvcpu)
+        /// <summary>
+        /// Set the number of VCPUs for a running VM
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_nvcpu">The number of VCPUs</param>
+        public static XenRef<Task> async_set_VCPUs_number_live(Session session, string _vm, long _nvcpu)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_vcpus_number_live(session.uuid, (_self != null) ? _self : "", _nvcpu.ToString()).parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_set_vcpus_number_live(session.uuid, (_vm != null) ? _vm : "", _nvcpu.ToString()).parse());
         }
 
-        public static void add_to_VCPUs_params_live(Session session, string _self, string _key, string _value)
+        /// <summary>
+        /// Add the given key-value pair to VM.VCPUs_params, and apply that value on the running VM
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_key">The key</param>
+        /// <param name="_value">The value</param>
+        public static void add_to_VCPUs_params_live(Session session, string _vm, string _key, string _value)
         {
-            session.proxy.vm_add_to_vcpus_params_live(session.uuid, (_self != null) ? _self : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.vm_add_to_vcpus_params_live(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
-        public static XenRef<Task> async_add_to_VCPUs_params_live(Session session, string _self, string _key, string _value)
+        /// <summary>
+        /// Add the given key-value pair to VM.VCPUs_params, and apply that value on the running VM
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_key">The key</param>
+        /// <param name="_value">The value</param>
+        public static XenRef<Task> async_add_to_VCPUs_params_live(Session session, string _vm, string _key, string _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_add_to_vcpus_params_live(session.uuid, (_self != null) ? _self : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_add_to_vcpus_params_live(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse());
         }
 
-        public static void set_ha_restart_priority(Session session, string _self, string _value)
+        /// <summary>
+        /// Set the value of the ha_restart_priority field
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The value</param>
+        public static void set_ha_restart_priority(Session session, string _vm, string _value)
         {
-            session.proxy.vm_set_ha_restart_priority(session.uuid, (_self != null) ? _self : "", (_value != null) ? _value : "").parse();
+            session.proxy.vm_set_ha_restart_priority(session.uuid, (_vm != null) ? _vm : "", (_value != null) ? _value : "").parse();
         }
 
-        public static void set_ha_always_run(Session session, string _self, bool _value)
+        /// <summary>
+        /// Set the value of the ha_always_run
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The value</param>
+        public static void set_ha_always_run(Session session, string _vm, bool _value)
         {
-            session.proxy.vm_set_ha_always_run(session.uuid, (_self != null) ? _self : "", _value).parse();
+            session.proxy.vm_set_ha_always_run(session.uuid, (_vm != null) ? _vm : "", _value).parse();
         }
 
+        /// <summary>
+        /// Computes the virtualization memory overhead of a VM.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long compute_memory_overhead(Session session, string _vm)
         {
             return long.Parse((string)session.proxy.vm_compute_memory_overhead(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Computes the virtualization memory overhead of a VM.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_compute_memory_overhead(Session session, string _vm)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_compute_memory_overhead(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
-        public static void set_memory_dynamic_max(Session session, string _self, long _value)
+        /// <summary>
+        /// Set the value of the memory_dynamic_max field
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The new value of memory_dynamic_max</param>
+        public static void set_memory_dynamic_max(Session session, string _vm, long _value)
         {
-            session.proxy.vm_set_memory_dynamic_max(session.uuid, (_self != null) ? _self : "", _value.ToString()).parse();
+            session.proxy.vm_set_memory_dynamic_max(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse();
         }
 
-        public static void set_memory_dynamic_min(Session session, string _self, long _value)
+        /// <summary>
+        /// Set the value of the memory_dynamic_min field
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The new value of memory_dynamic_min</param>
+        public static void set_memory_dynamic_min(Session session, string _vm, long _value)
         {
-            session.proxy.vm_set_memory_dynamic_min(session.uuid, (_self != null) ? _self : "", _value.ToString()).parse();
+            session.proxy.vm_set_memory_dynamic_min(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse();
         }
 
-        public static void set_memory_dynamic_range(Session session, string _self, long _min, long _max)
+        /// <summary>
+        /// Set the minimum and maximum amounts of physical memory the VM is allowed to use.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_min">The new minimum value</param>
+        /// <param name="_max">The new maximum value</param>
+        public static void set_memory_dynamic_range(Session session, string _vm, long _min, long _max)
         {
-            session.proxy.vm_set_memory_dynamic_range(session.uuid, (_self != null) ? _self : "", _min.ToString(), _max.ToString()).parse();
+            session.proxy.vm_set_memory_dynamic_range(session.uuid, (_vm != null) ? _vm : "", _min.ToString(), _max.ToString()).parse();
         }
 
-        public static XenRef<Task> async_set_memory_dynamic_range(Session session, string _self, long _min, long _max)
+        /// <summary>
+        /// Set the minimum and maximum amounts of physical memory the VM is allowed to use.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_min">The new minimum value</param>
+        /// <param name="_max">The new maximum value</param>
+        public static XenRef<Task> async_set_memory_dynamic_range(Session session, string _vm, long _min, long _max)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_memory_dynamic_range(session.uuid, (_self != null) ? _self : "", _min.ToString(), _max.ToString()).parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_set_memory_dynamic_range(session.uuid, (_vm != null) ? _vm : "", _min.ToString(), _max.ToString()).parse());
         }
 
-        public static void set_memory_static_max(Session session, string _self, long _value)
+        /// <summary>
+        /// Set the value of the memory_static_max field
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The new value of memory_static_max</param>
+        public static void set_memory_static_max(Session session, string _vm, long _value)
         {
-            session.proxy.vm_set_memory_static_max(session.uuid, (_self != null) ? _self : "", _value.ToString()).parse();
+            session.proxy.vm_set_memory_static_max(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse();
         }
 
-        public static void set_memory_static_min(Session session, string _self, long _value)
+        /// <summary>
+        /// Set the value of the memory_static_min field
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The new value of memory_static_min</param>
+        public static void set_memory_static_min(Session session, string _vm, long _value)
         {
-            session.proxy.vm_set_memory_static_min(session.uuid, (_self != null) ? _self : "", _value.ToString()).parse();
+            session.proxy.vm_set_memory_static_min(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse();
         }
 
-        public static void set_memory_static_range(Session session, string _self, long _min, long _max)
+        /// <summary>
+        /// Set the static (ie boot-time) range of virtual memory that the VM is allowed to use.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_min">The new minimum value</param>
+        /// <param name="_max">The new maximum value</param>
+        public static void set_memory_static_range(Session session, string _vm, long _min, long _max)
         {
-            session.proxy.vm_set_memory_static_range(session.uuid, (_self != null) ? _self : "", _min.ToString(), _max.ToString()).parse();
+            session.proxy.vm_set_memory_static_range(session.uuid, (_vm != null) ? _vm : "", _min.ToString(), _max.ToString()).parse();
         }
 
-        public static XenRef<Task> async_set_memory_static_range(Session session, string _self, long _min, long _max)
+        /// <summary>
+        /// Set the static (ie boot-time) range of virtual memory that the VM is allowed to use.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_min">The new minimum value</param>
+        /// <param name="_max">The new maximum value</param>
+        public static XenRef<Task> async_set_memory_static_range(Session session, string _vm, long _min, long _max)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_memory_static_range(session.uuid, (_self != null) ? _self : "", _min.ToString(), _max.ToString()).parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_set_memory_static_range(session.uuid, (_vm != null) ? _vm : "", _min.ToString(), _max.ToString()).parse());
         }
 
-        public static void set_memory_limits(Session session, string _self, long _static_min, long _static_max, long _dynamic_min, long _dynamic_max)
+        /// <summary>
+        /// Set the memory limits of this VM.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_static_min">The new value of memory_static_min.</param>
+        /// <param name="_static_max">The new value of memory_static_max.</param>
+        /// <param name="_dynamic_min">The new value of memory_dynamic_min.</param>
+        /// <param name="_dynamic_max">The new value of memory_dynamic_max.</param>
+        public static void set_memory_limits(Session session, string _vm, long _static_min, long _static_max, long _dynamic_min, long _dynamic_max)
         {
-            session.proxy.vm_set_memory_limits(session.uuid, (_self != null) ? _self : "", _static_min.ToString(), _static_max.ToString(), _dynamic_min.ToString(), _dynamic_max.ToString()).parse();
+            session.proxy.vm_set_memory_limits(session.uuid, (_vm != null) ? _vm : "", _static_min.ToString(), _static_max.ToString(), _dynamic_min.ToString(), _dynamic_max.ToString()).parse();
         }
 
-        public static XenRef<Task> async_set_memory_limits(Session session, string _self, long _static_min, long _static_max, long _dynamic_min, long _dynamic_max)
+        /// <summary>
+        /// Set the memory limits of this VM.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_static_min">The new value of memory_static_min.</param>
+        /// <param name="_static_max">The new value of memory_static_max.</param>
+        /// <param name="_dynamic_min">The new value of memory_dynamic_min.</param>
+        /// <param name="_dynamic_max">The new value of memory_dynamic_max.</param>
+        public static XenRef<Task> async_set_memory_limits(Session session, string _vm, long _static_min, long _static_max, long _dynamic_min, long _dynamic_max)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_memory_limits(session.uuid, (_self != null) ? _self : "", _static_min.ToString(), _static_max.ToString(), _dynamic_min.ToString(), _dynamic_max.ToString()).parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_set_memory_limits(session.uuid, (_vm != null) ? _vm : "", _static_min.ToString(), _static_max.ToString(), _dynamic_min.ToString(), _dynamic_max.ToString()).parse());
         }
 
-        public static void set_memory_target_live(Session session, string _self, long _target)
+        /// <summary>
+        /// Set the memory target for a running VM
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_target">The target in bytes</param>
+        public static void set_memory_target_live(Session session, string _vm, long _target)
         {
-            session.proxy.vm_set_memory_target_live(session.uuid, (_self != null) ? _self : "", _target.ToString()).parse();
+            session.proxy.vm_set_memory_target_live(session.uuid, (_vm != null) ? _vm : "", _target.ToString()).parse();
         }
 
-        public static XenRef<Task> async_set_memory_target_live(Session session, string _self, long _target)
+        /// <summary>
+        /// Set the memory target for a running VM
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_target">The target in bytes</param>
+        public static XenRef<Task> async_set_memory_target_live(Session session, string _vm, long _target)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_memory_target_live(session.uuid, (_self != null) ? _self : "", _target.ToString()).parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_set_memory_target_live(session.uuid, (_vm != null) ? _vm : "", _target.ToString()).parse());
         }
 
-        public static void wait_memory_target_live(Session session, string _self)
+        /// <summary>
+        /// Wait for a running VM to reach its current memory target
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static void wait_memory_target_live(Session session, string _vm)
         {
-            session.proxy.vm_wait_memory_target_live(session.uuid, (_self != null) ? _self : "").parse();
+            session.proxy.vm_wait_memory_target_live(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
-        public static XenRef<Task> async_wait_memory_target_live(Session session, string _self)
+        /// <summary>
+        /// Wait for a running VM to reach its current memory target
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static XenRef<Task> async_wait_memory_target_live(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_wait_memory_target_live(session.uuid, (_self != null) ? _self : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_wait_memory_target_live(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
-        public static bool get_cooperative(Session session, string _self)
+        /// <summary>
+        /// Return true if the VM is currently 'co-operative' i.e. is expected to reach a balloon target and actually has done
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static bool get_cooperative(Session session, string _vm)
         {
-            return (bool)session.proxy.vm_get_cooperative(session.uuid, (_self != null) ? _self : "").parse();
+            return (bool)session.proxy.vm_get_cooperative(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
-        public static XenRef<Task> async_get_cooperative(Session session, string _self)
+        /// <summary>
+        /// Return true if the VM is currently 'co-operative' i.e. is expected to reach a balloon target and actually has done
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static XenRef<Task> async_get_cooperative(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_get_cooperative(session.uuid, (_self != null) ? _self : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_get_cooperative(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
-        public static void set_HVM_shadow_multiplier(Session session, string _self, double _value)
+        /// <summary>
+        /// Set the shadow memory multiplier on a halted VM
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The new shadow memory multiplier to set</param>
+        public static void set_HVM_shadow_multiplier(Session session, string _vm, double _value)
         {
-            session.proxy.vm_set_hvm_shadow_multiplier(session.uuid, (_self != null) ? _self : "", _value).parse();
+            session.proxy.vm_set_hvm_shadow_multiplier(session.uuid, (_vm != null) ? _vm : "", _value).parse();
         }
 
-        public static void set_shadow_multiplier_live(Session session, string _self, double _multiplier)
+        /// <summary>
+        /// Set the shadow memory multiplier on a running VM
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_multiplier">The new shadow memory multiplier to set</param>
+        public static void set_shadow_multiplier_live(Session session, string _vm, double _multiplier)
         {
-            session.proxy.vm_set_shadow_multiplier_live(session.uuid, (_self != null) ? _self : "", _multiplier).parse();
+            session.proxy.vm_set_shadow_multiplier_live(session.uuid, (_vm != null) ? _vm : "", _multiplier).parse();
         }
 
-        public static XenRef<Task> async_set_shadow_multiplier_live(Session session, string _self, double _multiplier)
+        /// <summary>
+        /// Set the shadow memory multiplier on a running VM
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_multiplier">The new shadow memory multiplier to set</param>
+        public static XenRef<Task> async_set_shadow_multiplier_live(Session session, string _vm, double _multiplier)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_shadow_multiplier_live(session.uuid, (_self != null) ? _self : "", _multiplier).parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_set_shadow_multiplier_live(session.uuid, (_vm != null) ? _vm : "", _multiplier).parse());
         }
 
-        public static void set_VCPUs_max(Session session, string _self, long _value)
+        /// <summary>
+        /// Set the maximum number of VCPUs for a halted VM
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The new maximum number of VCPUs</param>
+        public static void set_VCPUs_max(Session session, string _vm, long _value)
         {
-            session.proxy.vm_set_vcpus_max(session.uuid, (_self != null) ? _self : "", _value.ToString()).parse();
+            session.proxy.vm_set_vcpus_max(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse();
         }
 
-        public static void set_VCPUs_at_startup(Session session, string _self, long _value)
+        /// <summary>
+        /// Set the number of startup VCPUs for a halted VM
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The new maximum number of VCPUs</param>
+        public static void set_VCPUs_at_startup(Session session, string _vm, long _value)
         {
-            session.proxy.vm_set_vcpus_at_startup(session.uuid, (_self != null) ? _self : "", _value.ToString()).parse();
+            session.proxy.vm_set_vcpus_at_startup(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse();
         }
 
+        /// <summary>
+        /// Send the given key as a sysrq to this VM.  The key is specified as a single character (a String of length 1).  This can only be called when the specified VM is in the Running state.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_key">The key to send</param>
         public static void send_sysrq(Session session, string _vm, string _key)
         {
             session.proxy.vm_send_sysrq(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Send the given key as a sysrq to this VM.  The key is specified as a single character (a String of length 1).  This can only be called when the specified VM is in the Running state.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_key">The key to send</param>
         public static XenRef<Task> async_send_sysrq(Session session, string _vm, string _key)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_send_sysrq(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "").parse());
         }
 
+        /// <summary>
+        /// Send the named trigger to this VM.  This can only be called when the specified VM is in the Running state.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_trigger">The trigger to send</param>
         public static void send_trigger(Session session, string _vm, string _trigger)
         {
             session.proxy.vm_send_trigger(session.uuid, (_vm != null) ? _vm : "", (_trigger != null) ? _trigger : "").parse();
         }
 
+        /// <summary>
+        /// Send the named trigger to this VM.  This can only be called when the specified VM is in the Running state.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_trigger">The trigger to send</param>
         public static XenRef<Task> async_send_trigger(Session session, string _vm, string _trigger)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_send_trigger(session.uuid, (_vm != null) ? _vm : "", (_trigger != null) ? _trigger : "").parse());
         }
 
-        public static long maximise_memory(Session session, string _self, long _total, bool _approximate)
+        /// <summary>
+        /// Returns the maximum amount of guest memory which will fit, together with overheads, in the supplied amount of physical memory. If 'exact' is true then an exact calculation is performed using the VM's current settings. If 'exact' is false then a more conservative approximation is used
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_total">Total amount of physical RAM to fit within</param>
+        /// <param name="_approximate">If false the limit is calculated with the guest's current exact configuration. Otherwise a more approximate calculation is performed</param>
+        public static long maximise_memory(Session session, string _vm, long _total, bool _approximate)
         {
-            return long.Parse((string)session.proxy.vm_maximise_memory(session.uuid, (_self != null) ? _self : "", _total.ToString(), _approximate).parse());
+            return long.Parse((string)session.proxy.vm_maximise_memory(session.uuid, (_vm != null) ? _vm : "", _total.ToString(), _approximate).parse());
         }
 
-        public static XenRef<Task> async_maximise_memory(Session session, string _self, long _total, bool _approximate)
+        /// <summary>
+        /// Returns the maximum amount of guest memory which will fit, together with overheads, in the supplied amount of physical memory. If 'exact' is true then an exact calculation is performed using the VM's current settings. If 'exact' is false then a more conservative approximation is used
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_total">Total amount of physical RAM to fit within</param>
+        /// <param name="_approximate">If false the limit is calculated with the guest's current exact configuration. Otherwise a more approximate calculation is performed</param>
+        public static XenRef<Task> async_maximise_memory(Session session, string _vm, long _total, bool _approximate)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_maximise_memory(session.uuid, (_self != null) ? _self : "", _total.ToString(), _approximate).parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_maximise_memory(session.uuid, (_vm != null) ? _vm : "", _total.ToString(), _approximate).parse());
         }
 
+        /// <summary>
+        /// Migrate the VM to another host.  This can only be called when the specified VM is in the Running state.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_dest">The result of a Host.migrate_receive call.</param>
+        /// <param name="_live">Live migration</param>
+        /// <param name="_vdi_map">Map of source VDI to destination SR</param>
+        /// <param name="_vif_map">Map of source VIF to destination network</param>
+        /// <param name="_options">Other parameters</param>
         public static void migrate_send(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options)
         {
             session.proxy.vm_migrate_send(session.uuid, (_vm != null) ? _vm : "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options)).parse();
         }
 
+        /// <summary>
+        /// Migrate the VM to another host.  This can only be called when the specified VM is in the Running state.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_dest">The result of a Host.migrate_receive call.</param>
+        /// <param name="_live">Live migration</param>
+        /// <param name="_vdi_map">Map of source VDI to destination SR</param>
+        /// <param name="_vif_map">Map of source VIF to destination network</param>
+        /// <param name="_options">Other parameters</param>
         public static XenRef<Task> async_migrate_send(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_migrate_send(session.uuid, (_vm != null) ? _vm : "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options)).parse());
         }
 
+        /// <summary>
+        /// Assert whether a VM can be migrated to the specified destination.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_dest">The result of a VM.migrate_receive call.</param>
+        /// <param name="_live">Live migration</param>
+        /// <param name="_vdi_map">Map of source VDI to destination SR</param>
+        /// <param name="_vif_map">Map of source VIF to destination network</param>
+        /// <param name="_options">Other parameters</param>
         public static void assert_can_migrate(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options)
         {
             session.proxy.vm_assert_can_migrate(session.uuid, (_vm != null) ? _vm : "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options)).parse();
         }
 
+        /// <summary>
+        /// Assert whether a VM can be migrated to the specified destination.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_dest">The result of a VM.migrate_receive call.</param>
+        /// <param name="_live">Live migration</param>
+        /// <param name="_vdi_map">Map of source VDI to destination SR</param>
+        /// <param name="_vif_map">Map of source VIF to destination network</param>
+        /// <param name="_options">Other parameters</param>
         public static XenRef<Task> async_assert_can_migrate(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_assert_can_migrate(session.uuid, (_vm != null) ? _vm : "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options)).parse());
         }
 
-        public static VM get_boot_record(Session session, string _self)
+        /// <summary>
+        /// Returns a record describing the VM's dynamic state, initialised when the VM boots and updated to reflect runtime configuration changes e.g. CPU hotplug
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static VM get_boot_record(Session session, string _vm)
         {
-            return new VM((Proxy_VM)session.proxy.vm_get_boot_record(session.uuid, (_self != null) ? _self : "").parse());
+            return new VM((Proxy_VM)session.proxy.vm_get_boot_record(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
-        public static List<Data_source> get_data_sources(Session session, string _self)
+        /// <summary>
+        /// 
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static List<Data_source> get_data_sources(Session session, string _vm)
         {
-            return Helper.Proxy_Data_sourceArrayToData_sourceList(session.proxy.vm_get_data_sources(session.uuid, (_self != null) ? _self : "").parse());
+            return Helper.Proxy_Data_sourceArrayToData_sourceList(session.proxy.vm_get_data_sources(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
-        public static void record_data_source(Session session, string _self, string _data_source)
+        /// <summary>
+        /// Start recording the specified data source
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_data_source">The data source to record</param>
+        public static void record_data_source(Session session, string _vm, string _data_source)
         {
-            session.proxy.vm_record_data_source(session.uuid, (_self != null) ? _self : "", (_data_source != null) ? _data_source : "").parse();
+            session.proxy.vm_record_data_source(session.uuid, (_vm != null) ? _vm : "", (_data_source != null) ? _data_source : "").parse();
         }
 
-        public static double query_data_source(Session session, string _self, string _data_source)
+        /// <summary>
+        /// Query the latest value of the specified data source
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_data_source">The data source to query</param>
+        public static double query_data_source(Session session, string _vm, string _data_source)
         {
-            return Convert.ToDouble(session.proxy.vm_query_data_source(session.uuid, (_self != null) ? _self : "", (_data_source != null) ? _data_source : "").parse());
+            return Convert.ToDouble(session.proxy.vm_query_data_source(session.uuid, (_vm != null) ? _vm : "", (_data_source != null) ? _data_source : "").parse());
         }
 
-        public static void forget_data_source_archives(Session session, string _self, string _data_source)
+        /// <summary>
+        /// Forget the recorded statistics related to the specified data source
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_data_source">The data source whose archives are to be forgotten</param>
+        public static void forget_data_source_archives(Session session, string _vm, string _data_source)
         {
-            session.proxy.vm_forget_data_source_archives(session.uuid, (_self != null) ? _self : "", (_data_source != null) ? _data_source : "").parse();
+            session.proxy.vm_forget_data_source_archives(session.uuid, (_vm != null) ? _vm : "", (_data_source != null) ? _data_source : "").parse();
         }
 
-        public static void assert_operation_valid(Session session, string _self, vm_operations _op)
+        /// <summary>
+        /// Check to see whether this operation is acceptable in the current state of the system, raising an error if the operation is invalid for some reason
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_op">proposed operation</param>
+        public static void assert_operation_valid(Session session, string _vm, vm_operations _op)
         {
-            session.proxy.vm_assert_operation_valid(session.uuid, (_self != null) ? _self : "", vm_operations_helper.ToString(_op)).parse();
+            session.proxy.vm_assert_operation_valid(session.uuid, (_vm != null) ? _vm : "", vm_operations_helper.ToString(_op)).parse();
         }
 
-        public static XenRef<Task> async_assert_operation_valid(Session session, string _self, vm_operations _op)
+        /// <summary>
+        /// Check to see whether this operation is acceptable in the current state of the system, raising an error if the operation is invalid for some reason
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_op">proposed operation</param>
+        public static XenRef<Task> async_assert_operation_valid(Session session, string _vm, vm_operations _op)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_assert_operation_valid(session.uuid, (_self != null) ? _self : "", vm_operations_helper.ToString(_op)).parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_assert_operation_valid(session.uuid, (_vm != null) ? _vm : "", vm_operations_helper.ToString(_op)).parse());
         }
 
-        public static void update_allowed_operations(Session session, string _self)
+        /// <summary>
+        /// Recomputes the list of acceptable operations
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static void update_allowed_operations(Session session, string _vm)
         {
-            session.proxy.vm_update_allowed_operations(session.uuid, (_self != null) ? _self : "").parse();
+            session.proxy.vm_update_allowed_operations(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
-        public static XenRef<Task> async_update_allowed_operations(Session session, string _self)
+        /// <summary>
+        /// Recomputes the list of acceptable operations
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static XenRef<Task> async_update_allowed_operations(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_update_allowed_operations(session.uuid, (_self != null) ? _self : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_update_allowed_operations(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Returns a list of the allowed values that a VBD device field can take
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string[] get_allowed_VBD_devices(Session session, string _vm)
         {
             return (string [])session.proxy.vm_get_allowed_vbd_devices(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Returns a list of the allowed values that a VIF device field can take
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string[] get_allowed_VIF_devices(Session session, string _vm)
         {
             return (string [])session.proxy.vm_get_allowed_vif_devices(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
+        /// <summary>
+        /// Return the list of hosts on which this VM may run.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<XenRef<Host>> get_possible_hosts(Session session, string _vm)
         {
             return XenRef<Host>.Create(session.proxy.vm_get_possible_hosts(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Return the list of hosts on which this VM may run.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_get_possible_hosts(Session session, string _vm)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_get_possible_hosts(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
-        public static void assert_can_boot_here(Session session, string _self, string _host)
+        /// <summary>
+        /// Returns an error if the VM could not boot on this host for some reason
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_host">The host</param>
+        public static void assert_can_boot_here(Session session, string _vm, string _host)
         {
-            session.proxy.vm_assert_can_boot_here(session.uuid, (_self != null) ? _self : "", (_host != null) ? _host : "").parse();
+            session.proxy.vm_assert_can_boot_here(session.uuid, (_vm != null) ? _vm : "", (_host != null) ? _host : "").parse();
         }
 
-        public static XenRef<Task> async_assert_can_boot_here(Session session, string _self, string _host)
+        /// <summary>
+        /// Returns an error if the VM could not boot on this host for some reason
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_host">The host</param>
+        public static XenRef<Task> async_assert_can_boot_here(Session session, string _vm, string _host)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_assert_can_boot_here(session.uuid, (_self != null) ? _self : "", (_host != null) ? _host : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_assert_can_boot_here(session.uuid, (_vm != null) ? _vm : "", (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Create a placeholder for a named binary blob of data that is associated with this VM
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_name">The name associated with the blob</param>
+        /// <param name="_mime_type">The mime type for the data. Empty string translates to application/octet-stream</param>
+        public static XenRef<Blob> create_new_blob(Session session, string _vm, string _name, string _mime_type)
+        {
+            return XenRef<Blob>.Create(session.proxy.vm_create_new_blob(session.uuid, (_vm != null) ? _vm : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "").parse());
+        }
+
+        /// <summary>
+        /// Create a placeholder for a named binary blob of data that is associated with this VM
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_name">The name associated with the blob</param>
+        /// <param name="_mime_type">The mime type for the data. Empty string translates to application/octet-stream</param>
+        public static XenRef<Task> async_create_new_blob(Session session, string _vm, string _name, string _mime_type)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vm_create_new_blob(session.uuid, (_vm != null) ? _vm : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "").parse());
+        }
+
+        /// <summary>
+        /// Create a placeholder for a named binary blob of data that is associated with this VM
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_name">The name associated with the blob</param>
+        /// <param name="_mime_type">The mime type for the data. Empty string translates to application/octet-stream</param>
+        /// <param name="_public">True if the blob should be publicly available First published in XenServer 6.1.</param>
         public static XenRef<Blob> create_new_blob(Session session, string _vm, string _name, string _mime_type, bool _public)
         {
             return XenRef<Blob>.Create(session.proxy.vm_create_new_blob(session.uuid, (_vm != null) ? _vm : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "", _public).parse());
         }
 
+        /// <summary>
+        /// Create a placeholder for a named binary blob of data that is associated with this VM
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_name">The name associated with the blob</param>
+        /// <param name="_mime_type">The mime type for the data. Empty string translates to application/octet-stream</param>
+        /// <param name="_public">True if the blob should be publicly available First published in XenServer 6.1.</param>
         public static XenRef<Task> async_create_new_blob(Session session, string _vm, string _name, string _mime_type, bool _public)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_create_new_blob(session.uuid, (_vm != null) ? _vm : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "", _public).parse());
         }
 
-        public static void assert_agile(Session session, string _self)
+        /// <summary>
+        /// Returns an error if the VM is not considered agile e.g. because it is tied to a resource local to a host
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static void assert_agile(Session session, string _vm)
         {
-            session.proxy.vm_assert_agile(session.uuid, (_self != null) ? _self : "").parse();
+            session.proxy.vm_assert_agile(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
-        public static XenRef<Task> async_assert_agile(Session session, string _self)
+        /// <summary>
+        /// Returns an error if the VM is not considered agile e.g. because it is tied to a resource local to a host
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static XenRef<Task> async_assert_agile(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_assert_agile(session.uuid, (_self != null) ? _self : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_assert_agile(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Returns mapping of hosts to ratings, indicating the suitability of starting the VM at that location according to wlb. Rating is replaced with an error if the VM cannot boot there.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<XenRef<Host>, string[]> retrieve_wlb_recommendations(Session session, string _vm)
         {
             return Maps.convert_from_proxy_XenRefHost_string_array(session.proxy.vm_retrieve_wlb_recommendations(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Returns mapping of hosts to ratings, indicating the suitability of starting the VM at that location according to wlb. Rating is replaced with an error if the VM cannot boot there.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_retrieve_wlb_recommendations(Session session, string _vm)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_retrieve_wlb_recommendations(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Copy the BIOS strings from the given host to this VM
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_host">The host to copy the BIOS strings from</param>
         public static void copy_bios_strings(Session session, string _vm, string _host)
         {
             session.proxy.vm_copy_bios_strings(session.uuid, (_vm != null) ? _vm : "", (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Copy the BIOS strings from the given host to this VM
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_host">The host to copy the BIOS strings from</param>
         public static XenRef<Task> async_copy_bios_strings(Session session, string _vm, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_copy_bios_strings(session.uuid, (_vm != null) ? _vm : "", (_host != null) ? _host : "").parse());
         }
 
-        public static void set_protection_policy(Session session, string _self, string _value)
+        /// <summary>
+        /// Set the value of the protection_policy field
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The value</param>
+        public static void set_protection_policy(Session session, string _vm, string _value)
         {
-            session.proxy.vm_set_protection_policy(session.uuid, (_self != null) ? _self : "", (_value != null) ? _value : "").parse();
+            session.proxy.vm_set_protection_policy(session.uuid, (_vm != null) ? _vm : "", (_value != null) ? _value : "").parse();
         }
 
-        public static void set_start_delay(Session session, string _self, long _value)
+        /// <summary>
+        /// Set this VM's start delay in seconds
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">This VM's start delay in seconds</param>
+        public static void set_start_delay(Session session, string _vm, long _value)
         {
-            session.proxy.vm_set_start_delay(session.uuid, (_self != null) ? _self : "", _value.ToString()).parse();
+            session.proxy.vm_set_start_delay(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse();
         }
 
-        public static XenRef<Task> async_set_start_delay(Session session, string _self, long _value)
+        /// <summary>
+        /// Set this VM's start delay in seconds
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">This VM's start delay in seconds</param>
+        public static XenRef<Task> async_set_start_delay(Session session, string _vm, long _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_start_delay(session.uuid, (_self != null) ? _self : "", _value.ToString()).parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_set_start_delay(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse());
         }
 
-        public static void set_shutdown_delay(Session session, string _self, long _value)
+        /// <summary>
+        /// Set this VM's shutdown delay in seconds
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">This VM's shutdown delay in seconds</param>
+        public static void set_shutdown_delay(Session session, string _vm, long _value)
         {
-            session.proxy.vm_set_shutdown_delay(session.uuid, (_self != null) ? _self : "", _value.ToString()).parse();
+            session.proxy.vm_set_shutdown_delay(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse();
         }
 
-        public static XenRef<Task> async_set_shutdown_delay(Session session, string _self, long _value)
+        /// <summary>
+        /// Set this VM's shutdown delay in seconds
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">This VM's shutdown delay in seconds</param>
+        public static XenRef<Task> async_set_shutdown_delay(Session session, string _vm, long _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_shutdown_delay(session.uuid, (_self != null) ? _self : "", _value.ToString()).parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_set_shutdown_delay(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse());
         }
 
-        public static void set_order(Session session, string _self, long _value)
+        /// <summary>
+        /// Set this VM's boot order
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">This VM's boot order</param>
+        public static void set_order(Session session, string _vm, long _value)
         {
-            session.proxy.vm_set_order(session.uuid, (_self != null) ? _self : "", _value.ToString()).parse();
+            session.proxy.vm_set_order(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse();
         }
 
-        public static XenRef<Task> async_set_order(Session session, string _self, long _value)
+        /// <summary>
+        /// Set this VM's boot order
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">This VM's boot order</param>
+        public static XenRef<Task> async_set_order(Session session, string _vm, long _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_order(session.uuid, (_self != null) ? _self : "", _value.ToString()).parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_set_order(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse());
         }
 
-        public static void set_suspend_VDI(Session session, string _self, string _value)
+        /// <summary>
+        /// Set this VM's suspend VDI, which must be indentical to its current one
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The suspend VDI uuid</param>
+        public static void set_suspend_VDI(Session session, string _vm, string _value)
         {
-            session.proxy.vm_set_suspend_vdi(session.uuid, (_self != null) ? _self : "", (_value != null) ? _value : "").parse();
+            session.proxy.vm_set_suspend_vdi(session.uuid, (_vm != null) ? _vm : "", (_value != null) ? _value : "").parse();
         }
 
-        public static XenRef<Task> async_set_suspend_VDI(Session session, string _self, string _value)
+        /// <summary>
+        /// Set this VM's suspend VDI, which must be indentical to its current one
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The suspend VDI uuid</param>
+        public static XenRef<Task> async_set_suspend_VDI(Session session, string _vm, string _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_suspend_vdi(session.uuid, (_self != null) ? _self : "", (_value != null) ? _value : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_set_suspend_vdi(session.uuid, (_vm != null) ? _vm : "", (_value != null) ? _value : "").parse());
         }
 
-        public static void assert_can_be_recovered(Session session, string _self, string _session_to)
+        /// <summary>
+        /// Assert whether all SRs required to recover this VM are available.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_session_to">The session to which the VM is to be recovered.</param>
+        public static void assert_can_be_recovered(Session session, string _vm, string _session_to)
         {
-            session.proxy.vm_assert_can_be_recovered(session.uuid, (_self != null) ? _self : "", (_session_to != null) ? _session_to : "").parse();
+            session.proxy.vm_assert_can_be_recovered(session.uuid, (_vm != null) ? _vm : "", (_session_to != null) ? _session_to : "").parse();
         }
 
-        public static XenRef<Task> async_assert_can_be_recovered(Session session, string _self, string _session_to)
+        /// <summary>
+        /// Assert whether all SRs required to recover this VM are available.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_session_to">The session to which the VM is to be recovered.</param>
+        public static XenRef<Task> async_assert_can_be_recovered(Session session, string _vm, string _session_to)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_assert_can_be_recovered(session.uuid, (_self != null) ? _self : "", (_session_to != null) ? _session_to : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_assert_can_be_recovered(session.uuid, (_vm != null) ? _vm : "", (_session_to != null) ? _session_to : "").parse());
         }
 
-        public static List<XenRef<SR>> get_SRs_required_for_recovery(Session session, string _self, string _session_to)
+        /// <summary>
+        /// List all the SR's that are required for the VM to be recovered
+        /// First published in XenServer 6.2.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given VM</param>
+        /// <param name="_session_to">The session to which the SRs of the VM have to be recovered.</param>
+        public static List<XenRef<SR>> get_SRs_required_for_recovery(Session session, string _vm, string _session_to)
         {
-            return XenRef<SR>.Create(session.proxy.vm_get_srs_required_for_recovery(session.uuid, (_self != null) ? _self : "", (_session_to != null) ? _session_to : "").parse());
+            return XenRef<SR>.Create(session.proxy.vm_get_srs_required_for_recovery(session.uuid, (_vm != null) ? _vm : "", (_session_to != null) ? _session_to : "").parse());
         }
 
-        public static XenRef<Task> async_get_SRs_required_for_recovery(Session session, string _self, string _session_to)
+        /// <summary>
+        /// List all the SR's that are required for the VM to be recovered
+        /// First published in XenServer 6.2.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given VM</param>
+        /// <param name="_session_to">The session to which the SRs of the VM have to be recovered.</param>
+        public static XenRef<Task> async_get_SRs_required_for_recovery(Session session, string _vm, string _session_to)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_get_srs_required_for_recovery(session.uuid, (_self != null) ? _self : "", (_session_to != null) ? _session_to : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_get_srs_required_for_recovery(session.uuid, (_vm != null) ? _vm : "", (_session_to != null) ? _session_to : "").parse());
         }
 
-        public static void recover(Session session, string _self, string _session_to, bool _force)
+        /// <summary>
+        /// Recover the VM
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_session_to">The session to which the VM is to be recovered.</param>
+        /// <param name="_force">Whether the VM should replace newer versions of itself.</param>
+        public static void recover(Session session, string _vm, string _session_to, bool _force)
         {
-            session.proxy.vm_recover(session.uuid, (_self != null) ? _self : "", (_session_to != null) ? _session_to : "", _force).parse();
+            session.proxy.vm_recover(session.uuid, (_vm != null) ? _vm : "", (_session_to != null) ? _session_to : "", _force).parse();
         }
 
-        public static XenRef<Task> async_recover(Session session, string _self, string _session_to, bool _force)
+        /// <summary>
+        /// Recover the VM
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_session_to">The session to which the VM is to be recovered.</param>
+        /// <param name="_force">Whether the VM should replace newer versions of itself.</param>
+        public static XenRef<Task> async_recover(Session session, string _vm, string _session_to, bool _force)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_recover(session.uuid, (_self != null) ? _self : "", (_session_to != null) ? _session_to : "", _force).parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_recover(session.uuid, (_vm != null) ? _vm : "", (_session_to != null) ? _session_to : "", _force).parse());
         }
 
+        /// <summary>
+        /// Import using a conversion service.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_type">Type of the conversion</param>
+        /// <param name="_username">Admin username on the host</param>
+        /// <param name="_password">Password on the host</param>
+        /// <param name="_sr">The destination SR</param>
+        /// <param name="_remote_config">Remote configuration options</param>
         public static void import_convert(Session session, string _type, string _username, string _password, string _sr, Dictionary<string, string> _remote_config)
         {
             session.proxy.vm_import_convert(session.uuid, (_type != null) ? _type : "", (_username != null) ? _username : "", (_password != null) ? _password : "", (_sr != null) ? _sr : "", Maps.convert_to_proxy_string_string(_remote_config)).parse();
         }
 
+        /// <summary>
+        /// Import using a conversion service.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_type">Type of the conversion</param>
+        /// <param name="_username">Admin username on the host</param>
+        /// <param name="_password">Password on the host</param>
+        /// <param name="_sr">The destination SR</param>
+        /// <param name="_remote_config">Remote configuration options</param>
         public static XenRef<Task> async_import_convert(Session session, string _type, string _username, string _password, string _sr, Dictionary<string, string> _remote_config)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_import_convert(session.uuid, (_type != null) ? _type : "", (_username != null) ? _username : "", (_password != null) ? _password : "", (_sr != null) ? _sr : "", Maps.convert_to_proxy_string_string(_remote_config)).parse());
         }
 
-        public static void set_appliance(Session session, string _self, string _value)
+        /// <summary>
+        /// Assign this VM to an appliance.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The appliance to which this VM should be assigned.</param>
+        public static void set_appliance(Session session, string _vm, string _value)
         {
-            session.proxy.vm_set_appliance(session.uuid, (_self != null) ? _self : "", (_value != null) ? _value : "").parse();
+            session.proxy.vm_set_appliance(session.uuid, (_vm != null) ? _vm : "", (_value != null) ? _value : "").parse();
         }
 
-        public static XenRef<Task> async_set_appliance(Session session, string _self, string _value)
+        /// <summary>
+        /// Assign this VM to an appliance.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The appliance to which this VM should be assigned.</param>
+        public static XenRef<Task> async_set_appliance(Session session, string _vm, string _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_appliance(session.uuid, (_self != null) ? _self : "", (_value != null) ? _value : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_set_appliance(session.uuid, (_vm != null) ? _vm : "", (_value != null) ? _value : "").parse());
         }
 
-        public static Dictionary<string, string> query_services(Session session, string _self)
+        /// <summary>
+        /// Query the system services advertised by this VM and register them. This can only be applied to a system domain.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static Dictionary<string, string> query_services(Session session, string _vm)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vm_query_services(session.uuid, (_self != null) ? _self : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.vm_query_services(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
-        public static XenRef<Task> async_query_services(Session session, string _self)
+        /// <summary>
+        /// Query the system services advertised by this VM and register them. This can only be applied to a system domain.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static XenRef<Task> async_query_services(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_query_services(session.uuid, (_self != null) ? _self : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vm_query_services(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
+        /// <summary>
+        /// Return a list of all the VMs known to the system.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static List<XenRef<VM>> get_all(Session session)
         {
             return XenRef<VM>.Create(session.proxy.vm_get_all(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Get all the VM Records at once, in a single XML RPC call
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<VM>, VM> get_all_records(Session session)
         {
             return XenRef<VM>.Create<Proxy_VM>(session.proxy.vm_get_all_records(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Unique identifier/object reference
+        /// </summary>
+        public virtual string uuid
+        {
+            get { return _uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _uuid))
+                {
+                    _uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("uuid");
+                }
+            }
+        }
         private string _uuid;
-        public virtual string uuid {
-             get { return _uuid; }
-             set { if (!Helper.AreEqual(value, _uuid)) { _uuid = value; Changed = true; NotifyPropertyChanged("uuid"); } }
-         }
 
+        /// <summary>
+        /// list of the operations allowed in this state. This list is advisory only and the server state may have changed by the time this field is read by a client.
+        /// </summary>
+        public virtual List<vm_operations> allowed_operations
+        {
+            get { return _allowed_operations; }
+            set
+            {
+                if (!Helper.AreEqual(value, _allowed_operations))
+                {
+                    _allowed_operations = value;
+                    Changed = true;
+                    NotifyPropertyChanged("allowed_operations");
+                }
+            }
+        }
         private List<vm_operations> _allowed_operations;
-        public virtual List<vm_operations> allowed_operations {
-             get { return _allowed_operations; }
-             set { if (!Helper.AreEqual(value, _allowed_operations)) { _allowed_operations = value; Changed = true; NotifyPropertyChanged("allowed_operations"); } }
-         }
 
+        /// <summary>
+        /// links each of the running tasks using this object (by reference) to a current_operation enum which describes the nature of the task.
+        /// </summary>
+        public virtual Dictionary<string, vm_operations> current_operations
+        {
+            get { return _current_operations; }
+            set
+            {
+                if (!Helper.AreEqual(value, _current_operations))
+                {
+                    _current_operations = value;
+                    Changed = true;
+                    NotifyPropertyChanged("current_operations");
+                }
+            }
+        }
         private Dictionary<string, vm_operations> _current_operations;
-        public virtual Dictionary<string, vm_operations> current_operations {
-             get { return _current_operations; }
-             set { if (!Helper.AreEqual(value, _current_operations)) { _current_operations = value; Changed = true; NotifyPropertyChanged("current_operations"); } }
-         }
 
+        /// <summary>
+        /// Current power state of the machine
+        /// </summary>
+        public virtual vm_power_state power_state
+        {
+            get { return _power_state; }
+            set
+            {
+                if (!Helper.AreEqual(value, _power_state))
+                {
+                    _power_state = value;
+                    Changed = true;
+                    NotifyPropertyChanged("power_state");
+                }
+            }
+        }
         private vm_power_state _power_state;
-        public virtual vm_power_state power_state {
-             get { return _power_state; }
-             set { if (!Helper.AreEqual(value, _power_state)) { _power_state = value; Changed = true; NotifyPropertyChanged("power_state"); } }
-         }
 
+        /// <summary>
+        /// a human-readable name
+        /// </summary>
+        public virtual string name_label
+        {
+            get { return _name_label; }
+            set
+            {
+                if (!Helper.AreEqual(value, _name_label))
+                {
+                    _name_label = value;
+                    Changed = true;
+                    NotifyPropertyChanged("name_label");
+                }
+            }
+        }
         private string _name_label;
-        public virtual string name_label {
-             get { return _name_label; }
-             set { if (!Helper.AreEqual(value, _name_label)) { _name_label = value; Changed = true; NotifyPropertyChanged("name_label"); } }
-         }
 
+        /// <summary>
+        /// a notes field containing human-readable description
+        /// </summary>
+        public virtual string name_description
+        {
+            get { return _name_description; }
+            set
+            {
+                if (!Helper.AreEqual(value, _name_description))
+                {
+                    _name_description = value;
+                    Changed = true;
+                    NotifyPropertyChanged("name_description");
+                }
+            }
+        }
         private string _name_description;
-        public virtual string name_description {
-             get { return _name_description; }
-             set { if (!Helper.AreEqual(value, _name_description)) { _name_description = value; Changed = true; NotifyPropertyChanged("name_description"); } }
-         }
 
+        /// <summary>
+        /// a user version number for this machine
+        /// </summary>
+        public virtual long user_version
+        {
+            get { return _user_version; }
+            set
+            {
+                if (!Helper.AreEqual(value, _user_version))
+                {
+                    _user_version = value;
+                    Changed = true;
+                    NotifyPropertyChanged("user_version");
+                }
+            }
+        }
         private long _user_version;
-        public virtual long user_version {
-             get { return _user_version; }
-             set { if (!Helper.AreEqual(value, _user_version)) { _user_version = value; Changed = true; NotifyPropertyChanged("user_version"); } }
-         }
 
+        /// <summary>
+        /// true if this is a template. Template VMs can never be started, they are used only for cloning other VMs
+        /// </summary>
+        public virtual bool is_a_template
+        {
+            get { return _is_a_template; }
+            set
+            {
+                if (!Helper.AreEqual(value, _is_a_template))
+                {
+                    _is_a_template = value;
+                    Changed = true;
+                    NotifyPropertyChanged("is_a_template");
+                }
+            }
+        }
         private bool _is_a_template;
-        public virtual bool is_a_template {
-             get { return _is_a_template; }
-             set { if (!Helper.AreEqual(value, _is_a_template)) { _is_a_template = value; Changed = true; NotifyPropertyChanged("is_a_template"); } }
-         }
 
+        /// <summary>
+        /// The VDI that a suspend image is stored on. (Only has meaning if VM is currently suspended)
+        /// </summary>
+        public virtual XenRef<VDI> suspend_VDI
+        {
+            get { return _suspend_VDI; }
+            set
+            {
+                if (!Helper.AreEqual(value, _suspend_VDI))
+                {
+                    _suspend_VDI = value;
+                    Changed = true;
+                    NotifyPropertyChanged("suspend_VDI");
+                }
+            }
+        }
         private XenRef<VDI> _suspend_VDI;
-        public virtual XenRef<VDI> suspend_VDI {
-             get { return _suspend_VDI; }
-             set { if (!Helper.AreEqual(value, _suspend_VDI)) { _suspend_VDI = value; Changed = true; NotifyPropertyChanged("suspend_VDI"); } }
-         }
 
+        /// <summary>
+        /// the host the VM is currently resident on
+        /// </summary>
+        public virtual XenRef<Host> resident_on
+        {
+            get { return _resident_on; }
+            set
+            {
+                if (!Helper.AreEqual(value, _resident_on))
+                {
+                    _resident_on = value;
+                    Changed = true;
+                    NotifyPropertyChanged("resident_on");
+                }
+            }
+        }
         private XenRef<Host> _resident_on;
-        public virtual XenRef<Host> resident_on {
-             get { return _resident_on; }
-             set { if (!Helper.AreEqual(value, _resident_on)) { _resident_on = value; Changed = true; NotifyPropertyChanged("resident_on"); } }
-         }
 
+        /// <summary>
+        /// a host which the VM has some affinity for (or NULL). This is used as a hint to the start call when it decides where to run the VM. Implementations are free to ignore this field.
+        /// </summary>
+        public virtual XenRef<Host> affinity
+        {
+            get { return _affinity; }
+            set
+            {
+                if (!Helper.AreEqual(value, _affinity))
+                {
+                    _affinity = value;
+                    Changed = true;
+                    NotifyPropertyChanged("affinity");
+                }
+            }
+        }
         private XenRef<Host> _affinity;
-        public virtual XenRef<Host> affinity {
-             get { return _affinity; }
-             set { if (!Helper.AreEqual(value, _affinity)) { _affinity = value; Changed = true; NotifyPropertyChanged("affinity"); } }
-         }
 
+        /// <summary>
+        /// Virtualization memory overhead (bytes).
+        /// </summary>
+        public virtual long memory_overhead
+        {
+            get { return _memory_overhead; }
+            set
+            {
+                if (!Helper.AreEqual(value, _memory_overhead))
+                {
+                    _memory_overhead = value;
+                    Changed = true;
+                    NotifyPropertyChanged("memory_overhead");
+                }
+            }
+        }
         private long _memory_overhead;
-        public virtual long memory_overhead {
-             get { return _memory_overhead; }
-             set { if (!Helper.AreEqual(value, _memory_overhead)) { _memory_overhead = value; Changed = true; NotifyPropertyChanged("memory_overhead"); } }
-         }
 
+        /// <summary>
+        /// Dynamically-set memory target (bytes). The value of this field indicates the current target for memory available to this VM.
+        /// </summary>
+        public virtual long memory_target
+        {
+            get { return _memory_target; }
+            set
+            {
+                if (!Helper.AreEqual(value, _memory_target))
+                {
+                    _memory_target = value;
+                    Changed = true;
+                    NotifyPropertyChanged("memory_target");
+                }
+            }
+        }
         private long _memory_target;
-        public virtual long memory_target {
-             get { return _memory_target; }
-             set { if (!Helper.AreEqual(value, _memory_target)) { _memory_target = value; Changed = true; NotifyPropertyChanged("memory_target"); } }
-         }
 
+        /// <summary>
+        /// Statically-set (i.e. absolute) maximum (bytes). The value of this field at VM start time acts as a hard limit of the amount of memory a guest can use. New values only take effect on reboot.
+        /// </summary>
+        public virtual long memory_static_max
+        {
+            get { return _memory_static_max; }
+            set
+            {
+                if (!Helper.AreEqual(value, _memory_static_max))
+                {
+                    _memory_static_max = value;
+                    Changed = true;
+                    NotifyPropertyChanged("memory_static_max");
+                }
+            }
+        }
         private long _memory_static_max;
-        public virtual long memory_static_max {
-             get { return _memory_static_max; }
-             set { if (!Helper.AreEqual(value, _memory_static_max)) { _memory_static_max = value; Changed = true; NotifyPropertyChanged("memory_static_max"); } }
-         }
 
+        /// <summary>
+        /// Dynamic maximum (bytes)
+        /// </summary>
+        public virtual long memory_dynamic_max
+        {
+            get { return _memory_dynamic_max; }
+            set
+            {
+                if (!Helper.AreEqual(value, _memory_dynamic_max))
+                {
+                    _memory_dynamic_max = value;
+                    Changed = true;
+                    NotifyPropertyChanged("memory_dynamic_max");
+                }
+            }
+        }
         private long _memory_dynamic_max;
-        public virtual long memory_dynamic_max {
-             get { return _memory_dynamic_max; }
-             set { if (!Helper.AreEqual(value, _memory_dynamic_max)) { _memory_dynamic_max = value; Changed = true; NotifyPropertyChanged("memory_dynamic_max"); } }
-         }
 
+        /// <summary>
+        /// Dynamic minimum (bytes)
+        /// </summary>
+        public virtual long memory_dynamic_min
+        {
+            get { return _memory_dynamic_min; }
+            set
+            {
+                if (!Helper.AreEqual(value, _memory_dynamic_min))
+                {
+                    _memory_dynamic_min = value;
+                    Changed = true;
+                    NotifyPropertyChanged("memory_dynamic_min");
+                }
+            }
+        }
         private long _memory_dynamic_min;
-        public virtual long memory_dynamic_min {
-             get { return _memory_dynamic_min; }
-             set { if (!Helper.AreEqual(value, _memory_dynamic_min)) { _memory_dynamic_min = value; Changed = true; NotifyPropertyChanged("memory_dynamic_min"); } }
-         }
 
+        /// <summary>
+        /// Statically-set (i.e. absolute) mininum (bytes). The value of this field indicates the least amount of memory this VM can boot with without crashing.
+        /// </summary>
+        public virtual long memory_static_min
+        {
+            get { return _memory_static_min; }
+            set
+            {
+                if (!Helper.AreEqual(value, _memory_static_min))
+                {
+                    _memory_static_min = value;
+                    Changed = true;
+                    NotifyPropertyChanged("memory_static_min");
+                }
+            }
+        }
         private long _memory_static_min;
-        public virtual long memory_static_min {
-             get { return _memory_static_min; }
-             set { if (!Helper.AreEqual(value, _memory_static_min)) { _memory_static_min = value; Changed = true; NotifyPropertyChanged("memory_static_min"); } }
-         }
 
+        /// <summary>
+        /// configuration parameters for the selected VCPU policy
+        /// </summary>
+        public virtual Dictionary<string, string> VCPUs_params
+        {
+            get { return _VCPUs_params; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VCPUs_params))
+                {
+                    _VCPUs_params = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VCPUs_params");
+                }
+            }
+        }
         private Dictionary<string, string> _VCPUs_params;
-        public virtual Dictionary<string, string> VCPUs_params {
-             get { return _VCPUs_params; }
-             set { if (!Helper.AreEqual(value, _VCPUs_params)) { _VCPUs_params = value; Changed = true; NotifyPropertyChanged("VCPUs_params"); } }
-         }
 
+        /// <summary>
+        /// Max number of VCPUs
+        /// </summary>
+        public virtual long VCPUs_max
+        {
+            get { return _VCPUs_max; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VCPUs_max))
+                {
+                    _VCPUs_max = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VCPUs_max");
+                }
+            }
+        }
         private long _VCPUs_max;
-        public virtual long VCPUs_max {
-             get { return _VCPUs_max; }
-             set { if (!Helper.AreEqual(value, _VCPUs_max)) { _VCPUs_max = value; Changed = true; NotifyPropertyChanged("VCPUs_max"); } }
-         }
 
+        /// <summary>
+        /// Boot number of VCPUs
+        /// </summary>
+        public virtual long VCPUs_at_startup
+        {
+            get { return _VCPUs_at_startup; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VCPUs_at_startup))
+                {
+                    _VCPUs_at_startup = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VCPUs_at_startup");
+                }
+            }
+        }
         private long _VCPUs_at_startup;
-        public virtual long VCPUs_at_startup {
-             get { return _VCPUs_at_startup; }
-             set { if (!Helper.AreEqual(value, _VCPUs_at_startup)) { _VCPUs_at_startup = value; Changed = true; NotifyPropertyChanged("VCPUs_at_startup"); } }
-         }
 
+        /// <summary>
+        /// action to take after the guest has shutdown itself
+        /// </summary>
+        public virtual on_normal_exit actions_after_shutdown
+        {
+            get { return _actions_after_shutdown; }
+            set
+            {
+                if (!Helper.AreEqual(value, _actions_after_shutdown))
+                {
+                    _actions_after_shutdown = value;
+                    Changed = true;
+                    NotifyPropertyChanged("actions_after_shutdown");
+                }
+            }
+        }
         private on_normal_exit _actions_after_shutdown;
-        public virtual on_normal_exit actions_after_shutdown {
-             get { return _actions_after_shutdown; }
-             set { if (!Helper.AreEqual(value, _actions_after_shutdown)) { _actions_after_shutdown = value; Changed = true; NotifyPropertyChanged("actions_after_shutdown"); } }
-         }
 
+        /// <summary>
+        /// action to take after the guest has rebooted itself
+        /// </summary>
+        public virtual on_normal_exit actions_after_reboot
+        {
+            get { return _actions_after_reboot; }
+            set
+            {
+                if (!Helper.AreEqual(value, _actions_after_reboot))
+                {
+                    _actions_after_reboot = value;
+                    Changed = true;
+                    NotifyPropertyChanged("actions_after_reboot");
+                }
+            }
+        }
         private on_normal_exit _actions_after_reboot;
-        public virtual on_normal_exit actions_after_reboot {
-             get { return _actions_after_reboot; }
-             set { if (!Helper.AreEqual(value, _actions_after_reboot)) { _actions_after_reboot = value; Changed = true; NotifyPropertyChanged("actions_after_reboot"); } }
-         }
 
+        /// <summary>
+        /// action to take if the guest crashes
+        /// </summary>
+        public virtual on_crash_behaviour actions_after_crash
+        {
+            get { return _actions_after_crash; }
+            set
+            {
+                if (!Helper.AreEqual(value, _actions_after_crash))
+                {
+                    _actions_after_crash = value;
+                    Changed = true;
+                    NotifyPropertyChanged("actions_after_crash");
+                }
+            }
+        }
         private on_crash_behaviour _actions_after_crash;
-        public virtual on_crash_behaviour actions_after_crash {
-             get { return _actions_after_crash; }
-             set { if (!Helper.AreEqual(value, _actions_after_crash)) { _actions_after_crash = value; Changed = true; NotifyPropertyChanged("actions_after_crash"); } }
-         }
 
+        /// <summary>
+        /// virtual console devices
+        /// </summary>
+        public virtual List<XenRef<Console>> consoles
+        {
+            get { return _consoles; }
+            set
+            {
+                if (!Helper.AreEqual(value, _consoles))
+                {
+                    _consoles = value;
+                    Changed = true;
+                    NotifyPropertyChanged("consoles");
+                }
+            }
+        }
         private List<XenRef<Console>> _consoles;
-        public virtual List<XenRef<Console>> consoles {
-             get { return _consoles; }
-             set { if (!Helper.AreEqual(value, _consoles)) { _consoles = value; Changed = true; NotifyPropertyChanged("consoles"); } }
-         }
 
+        /// <summary>
+        /// virtual network interfaces
+        /// </summary>
+        public virtual List<XenRef<VIF>> VIFs
+        {
+            get { return _VIFs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VIFs))
+                {
+                    _VIFs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VIFs");
+                }
+            }
+        }
         private List<XenRef<VIF>> _VIFs;
-        public virtual List<XenRef<VIF>> VIFs {
-             get { return _VIFs; }
-             set { if (!Helper.AreEqual(value, _VIFs)) { _VIFs = value; Changed = true; NotifyPropertyChanged("VIFs"); } }
-         }
 
+        /// <summary>
+        /// virtual block devices
+        /// </summary>
+        public virtual List<XenRef<VBD>> VBDs
+        {
+            get { return _VBDs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VBDs))
+                {
+                    _VBDs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VBDs");
+                }
+            }
+        }
         private List<XenRef<VBD>> _VBDs;
-        public virtual List<XenRef<VBD>> VBDs {
-             get { return _VBDs; }
-             set { if (!Helper.AreEqual(value, _VBDs)) { _VBDs = value; Changed = true; NotifyPropertyChanged("VBDs"); } }
-         }
 
+        /// <summary>
+        /// crash dumps associated with this VM
+        /// </summary>
+        public virtual List<XenRef<Crashdump>> crash_dumps
+        {
+            get { return _crash_dumps; }
+            set
+            {
+                if (!Helper.AreEqual(value, _crash_dumps))
+                {
+                    _crash_dumps = value;
+                    Changed = true;
+                    NotifyPropertyChanged("crash_dumps");
+                }
+            }
+        }
         private List<XenRef<Crashdump>> _crash_dumps;
-        public virtual List<XenRef<Crashdump>> crash_dumps {
-             get { return _crash_dumps; }
-             set { if (!Helper.AreEqual(value, _crash_dumps)) { _crash_dumps = value; Changed = true; NotifyPropertyChanged("crash_dumps"); } }
-         }
 
+        /// <summary>
+        /// virtual TPMs
+        /// </summary>
+        public virtual List<XenRef<VTPM>> VTPMs
+        {
+            get { return _VTPMs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VTPMs))
+                {
+                    _VTPMs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VTPMs");
+                }
+            }
+        }
         private List<XenRef<VTPM>> _VTPMs;
-        public virtual List<XenRef<VTPM>> VTPMs {
-             get { return _VTPMs; }
-             set { if (!Helper.AreEqual(value, _VTPMs)) { _VTPMs = value; Changed = true; NotifyPropertyChanged("VTPMs"); } }
-         }
 
+        /// <summary>
+        /// name of or path to bootloader
+        /// </summary>
+        public virtual string PV_bootloader
+        {
+            get { return _PV_bootloader; }
+            set
+            {
+                if (!Helper.AreEqual(value, _PV_bootloader))
+                {
+                    _PV_bootloader = value;
+                    Changed = true;
+                    NotifyPropertyChanged("PV_bootloader");
+                }
+            }
+        }
         private string _PV_bootloader;
-        public virtual string PV_bootloader {
-             get { return _PV_bootloader; }
-             set { if (!Helper.AreEqual(value, _PV_bootloader)) { _PV_bootloader = value; Changed = true; NotifyPropertyChanged("PV_bootloader"); } }
-         }
 
+        /// <summary>
+        /// path to the kernel
+        /// </summary>
+        public virtual string PV_kernel
+        {
+            get { return _PV_kernel; }
+            set
+            {
+                if (!Helper.AreEqual(value, _PV_kernel))
+                {
+                    _PV_kernel = value;
+                    Changed = true;
+                    NotifyPropertyChanged("PV_kernel");
+                }
+            }
+        }
         private string _PV_kernel;
-        public virtual string PV_kernel {
-             get { return _PV_kernel; }
-             set { if (!Helper.AreEqual(value, _PV_kernel)) { _PV_kernel = value; Changed = true; NotifyPropertyChanged("PV_kernel"); } }
-         }
 
+        /// <summary>
+        /// path to the initrd
+        /// </summary>
+        public virtual string PV_ramdisk
+        {
+            get { return _PV_ramdisk; }
+            set
+            {
+                if (!Helper.AreEqual(value, _PV_ramdisk))
+                {
+                    _PV_ramdisk = value;
+                    Changed = true;
+                    NotifyPropertyChanged("PV_ramdisk");
+                }
+            }
+        }
         private string _PV_ramdisk;
-        public virtual string PV_ramdisk {
-             get { return _PV_ramdisk; }
-             set { if (!Helper.AreEqual(value, _PV_ramdisk)) { _PV_ramdisk = value; Changed = true; NotifyPropertyChanged("PV_ramdisk"); } }
-         }
 
+        /// <summary>
+        /// kernel command-line arguments
+        /// </summary>
+        public virtual string PV_args
+        {
+            get { return _PV_args; }
+            set
+            {
+                if (!Helper.AreEqual(value, _PV_args))
+                {
+                    _PV_args = value;
+                    Changed = true;
+                    NotifyPropertyChanged("PV_args");
+                }
+            }
+        }
         private string _PV_args;
-        public virtual string PV_args {
-             get { return _PV_args; }
-             set { if (!Helper.AreEqual(value, _PV_args)) { _PV_args = value; Changed = true; NotifyPropertyChanged("PV_args"); } }
-         }
 
+        /// <summary>
+        /// miscellaneous arguments for the bootloader
+        /// </summary>
+        public virtual string PV_bootloader_args
+        {
+            get { return _PV_bootloader_args; }
+            set
+            {
+                if (!Helper.AreEqual(value, _PV_bootloader_args))
+                {
+                    _PV_bootloader_args = value;
+                    Changed = true;
+                    NotifyPropertyChanged("PV_bootloader_args");
+                }
+            }
+        }
         private string _PV_bootloader_args;
-        public virtual string PV_bootloader_args {
-             get { return _PV_bootloader_args; }
-             set { if (!Helper.AreEqual(value, _PV_bootloader_args)) { _PV_bootloader_args = value; Changed = true; NotifyPropertyChanged("PV_bootloader_args"); } }
-         }
 
+        /// <summary>
+        /// to make Zurich guests boot
+        /// </summary>
+        public virtual string PV_legacy_args
+        {
+            get { return _PV_legacy_args; }
+            set
+            {
+                if (!Helper.AreEqual(value, _PV_legacy_args))
+                {
+                    _PV_legacy_args = value;
+                    Changed = true;
+                    NotifyPropertyChanged("PV_legacy_args");
+                }
+            }
+        }
         private string _PV_legacy_args;
-        public virtual string PV_legacy_args {
-             get { return _PV_legacy_args; }
-             set { if (!Helper.AreEqual(value, _PV_legacy_args)) { _PV_legacy_args = value; Changed = true; NotifyPropertyChanged("PV_legacy_args"); } }
-         }
 
+        /// <summary>
+        /// HVM boot policy
+        /// </summary>
+        public virtual string HVM_boot_policy
+        {
+            get { return _HVM_boot_policy; }
+            set
+            {
+                if (!Helper.AreEqual(value, _HVM_boot_policy))
+                {
+                    _HVM_boot_policy = value;
+                    Changed = true;
+                    NotifyPropertyChanged("HVM_boot_policy");
+                }
+            }
+        }
         private string _HVM_boot_policy;
-        public virtual string HVM_boot_policy {
-             get { return _HVM_boot_policy; }
-             set { if (!Helper.AreEqual(value, _HVM_boot_policy)) { _HVM_boot_policy = value; Changed = true; NotifyPropertyChanged("HVM_boot_policy"); } }
-         }
 
+        /// <summary>
+        /// HVM boot params
+        /// </summary>
+        public virtual Dictionary<string, string> HVM_boot_params
+        {
+            get { return _HVM_boot_params; }
+            set
+            {
+                if (!Helper.AreEqual(value, _HVM_boot_params))
+                {
+                    _HVM_boot_params = value;
+                    Changed = true;
+                    NotifyPropertyChanged("HVM_boot_params");
+                }
+            }
+        }
         private Dictionary<string, string> _HVM_boot_params;
-        public virtual Dictionary<string, string> HVM_boot_params {
-             get { return _HVM_boot_params; }
-             set { if (!Helper.AreEqual(value, _HVM_boot_params)) { _HVM_boot_params = value; Changed = true; NotifyPropertyChanged("HVM_boot_params"); } }
-         }
 
+        /// <summary>
+        /// multiplier applied to the amount of shadow that will be made available to the guest
+        /// First published in XenServer 4.1.
+        /// </summary>
+        public virtual double HVM_shadow_multiplier
+        {
+            get { return _HVM_shadow_multiplier; }
+            set
+            {
+                if (!Helper.AreEqual(value, _HVM_shadow_multiplier))
+                {
+                    _HVM_shadow_multiplier = value;
+                    Changed = true;
+                    NotifyPropertyChanged("HVM_shadow_multiplier");
+                }
+            }
+        }
         private double _HVM_shadow_multiplier;
-        public virtual double HVM_shadow_multiplier {
-             get { return _HVM_shadow_multiplier; }
-             set { if (!Helper.AreEqual(value, _HVM_shadow_multiplier)) { _HVM_shadow_multiplier = value; Changed = true; NotifyPropertyChanged("HVM_shadow_multiplier"); } }
-         }
 
+        /// <summary>
+        /// platform-specific configuration
+        /// </summary>
+        public virtual Dictionary<string, string> platform
+        {
+            get { return _platform; }
+            set
+            {
+                if (!Helper.AreEqual(value, _platform))
+                {
+                    _platform = value;
+                    Changed = true;
+                    NotifyPropertyChanged("platform");
+                }
+            }
+        }
         private Dictionary<string, string> _platform;
-        public virtual Dictionary<string, string> platform {
-             get { return _platform; }
-             set { if (!Helper.AreEqual(value, _platform)) { _platform = value; Changed = true; NotifyPropertyChanged("platform"); } }
-         }
 
+        /// <summary>
+        /// PCI bus path for pass-through devices
+        /// </summary>
+        public virtual string PCI_bus
+        {
+            get { return _PCI_bus; }
+            set
+            {
+                if (!Helper.AreEqual(value, _PCI_bus))
+                {
+                    _PCI_bus = value;
+                    Changed = true;
+                    NotifyPropertyChanged("PCI_bus");
+                }
+            }
+        }
         private string _PCI_bus;
-        public virtual string PCI_bus {
-             get { return _PCI_bus; }
-             set { if (!Helper.AreEqual(value, _PCI_bus)) { _PCI_bus = value; Changed = true; NotifyPropertyChanged("PCI_bus"); } }
-         }
 
+        /// <summary>
+        /// additional configuration
+        /// </summary>
+        public virtual Dictionary<string, string> other_config
+        {
+            get { return _other_config; }
+            set
+            {
+                if (!Helper.AreEqual(value, _other_config))
+                {
+                    _other_config = value;
+                    Changed = true;
+                    NotifyPropertyChanged("other_config");
+                }
+            }
+        }
         private Dictionary<string, string> _other_config;
-        public virtual Dictionary<string, string> other_config {
-             get { return _other_config; }
-             set { if (!Helper.AreEqual(value, _other_config)) { _other_config = value; Changed = true; NotifyPropertyChanged("other_config"); } }
-         }
 
+        /// <summary>
+        /// domain ID (if available, -1 otherwise)
+        /// </summary>
+        public virtual long domid
+        {
+            get { return _domid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _domid))
+                {
+                    _domid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("domid");
+                }
+            }
+        }
         private long _domid;
-        public virtual long domid {
-             get { return _domid; }
-             set { if (!Helper.AreEqual(value, _domid)) { _domid = value; Changed = true; NotifyPropertyChanged("domid"); } }
-         }
 
+        /// <summary>
+        /// Domain architecture (if available, null string otherwise)
+        /// </summary>
+        public virtual string domarch
+        {
+            get { return _domarch; }
+            set
+            {
+                if (!Helper.AreEqual(value, _domarch))
+                {
+                    _domarch = value;
+                    Changed = true;
+                    NotifyPropertyChanged("domarch");
+                }
+            }
+        }
         private string _domarch;
-        public virtual string domarch {
-             get { return _domarch; }
-             set { if (!Helper.AreEqual(value, _domarch)) { _domarch = value; Changed = true; NotifyPropertyChanged("domarch"); } }
-         }
 
+        /// <summary>
+        /// describes the CPU flags on which the VM was last booted
+        /// </summary>
+        public virtual Dictionary<string, string> last_boot_CPU_flags
+        {
+            get { return _last_boot_CPU_flags; }
+            set
+            {
+                if (!Helper.AreEqual(value, _last_boot_CPU_flags))
+                {
+                    _last_boot_CPU_flags = value;
+                    Changed = true;
+                    NotifyPropertyChanged("last_boot_CPU_flags");
+                }
+            }
+        }
         private Dictionary<string, string> _last_boot_CPU_flags;
-        public virtual Dictionary<string, string> last_boot_CPU_flags {
-             get { return _last_boot_CPU_flags; }
-             set { if (!Helper.AreEqual(value, _last_boot_CPU_flags)) { _last_boot_CPU_flags = value; Changed = true; NotifyPropertyChanged("last_boot_CPU_flags"); } }
-         }
 
+        /// <summary>
+        /// true if this is a control domain (domain 0 or a driver domain)
+        /// </summary>
+        public virtual bool is_control_domain
+        {
+            get { return _is_control_domain; }
+            set
+            {
+                if (!Helper.AreEqual(value, _is_control_domain))
+                {
+                    _is_control_domain = value;
+                    Changed = true;
+                    NotifyPropertyChanged("is_control_domain");
+                }
+            }
+        }
         private bool _is_control_domain;
-        public virtual bool is_control_domain {
-             get { return _is_control_domain; }
-             set { if (!Helper.AreEqual(value, _is_control_domain)) { _is_control_domain = value; Changed = true; NotifyPropertyChanged("is_control_domain"); } }
-         }
 
+        /// <summary>
+        /// metrics associated with this VM
+        /// </summary>
+        public virtual XenRef<VM_metrics> metrics
+        {
+            get { return _metrics; }
+            set
+            {
+                if (!Helper.AreEqual(value, _metrics))
+                {
+                    _metrics = value;
+                    Changed = true;
+                    NotifyPropertyChanged("metrics");
+                }
+            }
+        }
         private XenRef<VM_metrics> _metrics;
-        public virtual XenRef<VM_metrics> metrics {
-             get { return _metrics; }
-             set { if (!Helper.AreEqual(value, _metrics)) { _metrics = value; Changed = true; NotifyPropertyChanged("metrics"); } }
-         }
 
+        /// <summary>
+        /// metrics associated with the running guest
+        /// </summary>
+        public virtual XenRef<VM_guest_metrics> guest_metrics
+        {
+            get { return _guest_metrics; }
+            set
+            {
+                if (!Helper.AreEqual(value, _guest_metrics))
+                {
+                    _guest_metrics = value;
+                    Changed = true;
+                    NotifyPropertyChanged("guest_metrics");
+                }
+            }
+        }
         private XenRef<VM_guest_metrics> _guest_metrics;
-        public virtual XenRef<VM_guest_metrics> guest_metrics {
-             get { return _guest_metrics; }
-             set { if (!Helper.AreEqual(value, _guest_metrics)) { _guest_metrics = value; Changed = true; NotifyPropertyChanged("guest_metrics"); } }
-         }
 
+        /// <summary>
+        /// marshalled value containing VM record at time of last boot, updated dynamically to reflect the runtime state of the domain
+        /// First published in XenServer 4.1.
+        /// </summary>
+        public virtual string last_booted_record
+        {
+            get { return _last_booted_record; }
+            set
+            {
+                if (!Helper.AreEqual(value, _last_booted_record))
+                {
+                    _last_booted_record = value;
+                    Changed = true;
+                    NotifyPropertyChanged("last_booted_record");
+                }
+            }
+        }
         private string _last_booted_record;
-        public virtual string last_booted_record {
-             get { return _last_booted_record; }
-             set { if (!Helper.AreEqual(value, _last_booted_record)) { _last_booted_record = value; Changed = true; NotifyPropertyChanged("last_booted_record"); } }
-         }
 
+        /// <summary>
+        /// An XML specification of recommended values and ranges for properties of this VM
+        /// </summary>
+        public virtual string recommendations
+        {
+            get { return _recommendations; }
+            set
+            {
+                if (!Helper.AreEqual(value, _recommendations))
+                {
+                    _recommendations = value;
+                    Changed = true;
+                    NotifyPropertyChanged("recommendations");
+                }
+            }
+        }
         private string _recommendations;
-        public virtual string recommendations {
-             get { return _recommendations; }
-             set { if (!Helper.AreEqual(value, _recommendations)) { _recommendations = value; Changed = true; NotifyPropertyChanged("recommendations"); } }
-         }
 
+        /// <summary>
+        /// data to be inserted into the xenstore tree (/local/domain/<domid>/vm-data) after the VM is created.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        public virtual Dictionary<string, string> xenstore_data
+        {
+            get { return _xenstore_data; }
+            set
+            {
+                if (!Helper.AreEqual(value, _xenstore_data))
+                {
+                    _xenstore_data = value;
+                    Changed = true;
+                    NotifyPropertyChanged("xenstore_data");
+                }
+            }
+        }
         private Dictionary<string, string> _xenstore_data;
-        public virtual Dictionary<string, string> xenstore_data {
-             get { return _xenstore_data; }
-             set { if (!Helper.AreEqual(value, _xenstore_data)) { _xenstore_data = value; Changed = true; NotifyPropertyChanged("xenstore_data"); } }
-         }
 
+        /// <summary>
+        /// if true then the system will attempt to keep the VM running as much as possible.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual bool ha_always_run
+        {
+            get { return _ha_always_run; }
+            set
+            {
+                if (!Helper.AreEqual(value, _ha_always_run))
+                {
+                    _ha_always_run = value;
+                    Changed = true;
+                    NotifyPropertyChanged("ha_always_run");
+                }
+            }
+        }
         private bool _ha_always_run;
-        public virtual bool ha_always_run {
-             get { return _ha_always_run; }
-             set { if (!Helper.AreEqual(value, _ha_always_run)) { _ha_always_run = value; Changed = true; NotifyPropertyChanged("ha_always_run"); } }
-         }
 
+        /// <summary>
+        /// has possible values: "best-effort" meaning "try to restart this VM if possible but don't consider the Pool to be overcommitted if this is not possible"; "restart" meaning "this VM should be restarted"; "" meaning "do not try to restart this VM"
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual string ha_restart_priority
+        {
+            get { return _ha_restart_priority; }
+            set
+            {
+                if (!Helper.AreEqual(value, _ha_restart_priority))
+                {
+                    _ha_restart_priority = value;
+                    Changed = true;
+                    NotifyPropertyChanged("ha_restart_priority");
+                }
+            }
+        }
         private string _ha_restart_priority;
-        public virtual string ha_restart_priority {
-             get { return _ha_restart_priority; }
-             set { if (!Helper.AreEqual(value, _ha_restart_priority)) { _ha_restart_priority = value; Changed = true; NotifyPropertyChanged("ha_restart_priority"); } }
-         }
 
+        /// <summary>
+        /// true if this is a snapshot. Snapshotted VMs can never be started, they are used only for cloning other VMs
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual bool is_a_snapshot
+        {
+            get { return _is_a_snapshot; }
+            set
+            {
+                if (!Helper.AreEqual(value, _is_a_snapshot))
+                {
+                    _is_a_snapshot = value;
+                    Changed = true;
+                    NotifyPropertyChanged("is_a_snapshot");
+                }
+            }
+        }
         private bool _is_a_snapshot;
-        public virtual bool is_a_snapshot {
-             get { return _is_a_snapshot; }
-             set { if (!Helper.AreEqual(value, _is_a_snapshot)) { _is_a_snapshot = value; Changed = true; NotifyPropertyChanged("is_a_snapshot"); } }
-         }
 
+        /// <summary>
+        /// Ref pointing to the VM this snapshot is of.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual XenRef<VM> snapshot_of
+        {
+            get { return _snapshot_of; }
+            set
+            {
+                if (!Helper.AreEqual(value, _snapshot_of))
+                {
+                    _snapshot_of = value;
+                    Changed = true;
+                    NotifyPropertyChanged("snapshot_of");
+                }
+            }
+        }
         private XenRef<VM> _snapshot_of;
-        public virtual XenRef<VM> snapshot_of {
-             get { return _snapshot_of; }
-             set { if (!Helper.AreEqual(value, _snapshot_of)) { _snapshot_of = value; Changed = true; NotifyPropertyChanged("snapshot_of"); } }
-         }
 
+        /// <summary>
+        /// List pointing to all the VM snapshots.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual List<XenRef<VM>> snapshots
+        {
+            get { return _snapshots; }
+            set
+            {
+                if (!Helper.AreEqual(value, _snapshots))
+                {
+                    _snapshots = value;
+                    Changed = true;
+                    NotifyPropertyChanged("snapshots");
+                }
+            }
+        }
         private List<XenRef<VM>> _snapshots;
-        public virtual List<XenRef<VM>> snapshots {
-             get { return _snapshots; }
-             set { if (!Helper.AreEqual(value, _snapshots)) { _snapshots = value; Changed = true; NotifyPropertyChanged("snapshots"); } }
-         }
 
+        /// <summary>
+        /// Date/time when this snapshot was created.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual DateTime snapshot_time
+        {
+            get { return _snapshot_time; }
+            set
+            {
+                if (!Helper.AreEqual(value, _snapshot_time))
+                {
+                    _snapshot_time = value;
+                    Changed = true;
+                    NotifyPropertyChanged("snapshot_time");
+                }
+            }
+        }
         private DateTime _snapshot_time;
-        public virtual DateTime snapshot_time {
-             get { return _snapshot_time; }
-             set { if (!Helper.AreEqual(value, _snapshot_time)) { _snapshot_time = value; Changed = true; NotifyPropertyChanged("snapshot_time"); } }
-         }
 
+        /// <summary>
+        /// Transportable ID of the snapshot VM
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual string transportable_snapshot_id
+        {
+            get { return _transportable_snapshot_id; }
+            set
+            {
+                if (!Helper.AreEqual(value, _transportable_snapshot_id))
+                {
+                    _transportable_snapshot_id = value;
+                    Changed = true;
+                    NotifyPropertyChanged("transportable_snapshot_id");
+                }
+            }
+        }
         private string _transportable_snapshot_id;
-        public virtual string transportable_snapshot_id {
-             get { return _transportable_snapshot_id; }
-             set { if (!Helper.AreEqual(value, _transportable_snapshot_id)) { _transportable_snapshot_id = value; Changed = true; NotifyPropertyChanged("transportable_snapshot_id"); } }
-         }
 
+        /// <summary>
+        /// Binary blobs associated with this VM
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual Dictionary<string, XenRef<Blob>> blobs
+        {
+            get { return _blobs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _blobs))
+                {
+                    _blobs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("blobs");
+                }
+            }
+        }
         private Dictionary<string, XenRef<Blob>> _blobs;
-        public virtual Dictionary<string, XenRef<Blob>> blobs {
-             get { return _blobs; }
-             set { if (!Helper.AreEqual(value, _blobs)) { _blobs = value; Changed = true; NotifyPropertyChanged("blobs"); } }
-         }
 
+        /// <summary>
+        /// user-specified tags for categorization purposes
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual string[] tags
+        {
+            get { return _tags; }
+            set
+            {
+                if (!Helper.AreEqual(value, _tags))
+                {
+                    _tags = value;
+                    Changed = true;
+                    NotifyPropertyChanged("tags");
+                }
+            }
+        }
         private string[] _tags;
-        public virtual string[] tags {
-             get { return _tags; }
-             set { if (!Helper.AreEqual(value, _tags)) { _tags = value; Changed = true; NotifyPropertyChanged("tags"); } }
-         }
 
+        /// <summary>
+        /// List of operations which have been explicitly blocked and an error code
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual Dictionary<vm_operations, string> blocked_operations
+        {
+            get { return _blocked_operations; }
+            set
+            {
+                if (!Helper.AreEqual(value, _blocked_operations))
+                {
+                    _blocked_operations = value;
+                    Changed = true;
+                    NotifyPropertyChanged("blocked_operations");
+                }
+            }
+        }
         private Dictionary<vm_operations, string> _blocked_operations;
-        public virtual Dictionary<vm_operations, string> blocked_operations {
-             get { return _blocked_operations; }
-             set { if (!Helper.AreEqual(value, _blocked_operations)) { _blocked_operations = value; Changed = true; NotifyPropertyChanged("blocked_operations"); } }
-         }
 
+        /// <summary>
+        /// Human-readable information concerning this snapshot
+        /// First published in XenServer 5.6.
+        /// </summary>
+        public virtual Dictionary<string, string> snapshot_info
+        {
+            get { return _snapshot_info; }
+            set
+            {
+                if (!Helper.AreEqual(value, _snapshot_info))
+                {
+                    _snapshot_info = value;
+                    Changed = true;
+                    NotifyPropertyChanged("snapshot_info");
+                }
+            }
+        }
         private Dictionary<string, string> _snapshot_info;
-        public virtual Dictionary<string, string> snapshot_info {
-             get { return _snapshot_info; }
-             set { if (!Helper.AreEqual(value, _snapshot_info)) { _snapshot_info = value; Changed = true; NotifyPropertyChanged("snapshot_info"); } }
-         }
 
+        /// <summary>
+        /// Encoded information about the VM's metadata this is a snapshot of
+        /// First published in XenServer 5.6.
+        /// </summary>
+        public virtual string snapshot_metadata
+        {
+            get { return _snapshot_metadata; }
+            set
+            {
+                if (!Helper.AreEqual(value, _snapshot_metadata))
+                {
+                    _snapshot_metadata = value;
+                    Changed = true;
+                    NotifyPropertyChanged("snapshot_metadata");
+                }
+            }
+        }
         private string _snapshot_metadata;
-        public virtual string snapshot_metadata {
-             get { return _snapshot_metadata; }
-             set { if (!Helper.AreEqual(value, _snapshot_metadata)) { _snapshot_metadata = value; Changed = true; NotifyPropertyChanged("snapshot_metadata"); } }
-         }
 
+        /// <summary>
+        /// Ref pointing to the parent of this VM
+        /// First published in XenServer 5.6.
+        /// </summary>
+        public virtual XenRef<VM> parent
+        {
+            get { return _parent; }
+            set
+            {
+                if (!Helper.AreEqual(value, _parent))
+                {
+                    _parent = value;
+                    Changed = true;
+                    NotifyPropertyChanged("parent");
+                }
+            }
+        }
         private XenRef<VM> _parent;
-        public virtual XenRef<VM> parent {
-             get { return _parent; }
-             set { if (!Helper.AreEqual(value, _parent)) { _parent = value; Changed = true; NotifyPropertyChanged("parent"); } }
-         }
 
+        /// <summary>
+        /// List pointing to all the children of this VM
+        /// First published in XenServer 5.6.
+        /// </summary>
+        public virtual List<XenRef<VM>> children
+        {
+            get { return _children; }
+            set
+            {
+                if (!Helper.AreEqual(value, _children))
+                {
+                    _children = value;
+                    Changed = true;
+                    NotifyPropertyChanged("children");
+                }
+            }
+        }
         private List<XenRef<VM>> _children;
-        public virtual List<XenRef<VM>> children {
-             get { return _children; }
-             set { if (!Helper.AreEqual(value, _children)) { _children = value; Changed = true; NotifyPropertyChanged("children"); } }
-         }
 
+        /// <summary>
+        /// BIOS strings
+        /// First published in XenServer 5.6.
+        /// </summary>
+        public virtual Dictionary<string, string> bios_strings
+        {
+            get { return _bios_strings; }
+            set
+            {
+                if (!Helper.AreEqual(value, _bios_strings))
+                {
+                    _bios_strings = value;
+                    Changed = true;
+                    NotifyPropertyChanged("bios_strings");
+                }
+            }
+        }
         private Dictionary<string, string> _bios_strings;
-        public virtual Dictionary<string, string> bios_strings {
-             get { return _bios_strings; }
-             set { if (!Helper.AreEqual(value, _bios_strings)) { _bios_strings = value; Changed = true; NotifyPropertyChanged("bios_strings"); } }
-         }
 
+        /// <summary>
+        /// Ref pointing to a protection policy for this VM
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        public virtual XenRef<VMPP> protection_policy
+        {
+            get { return _protection_policy; }
+            set
+            {
+                if (!Helper.AreEqual(value, _protection_policy))
+                {
+                    _protection_policy = value;
+                    Changed = true;
+                    NotifyPropertyChanged("protection_policy");
+                }
+            }
+        }
         private XenRef<VMPP> _protection_policy;
-        public virtual XenRef<VMPP> protection_policy {
-             get { return _protection_policy; }
-             set { if (!Helper.AreEqual(value, _protection_policy)) { _protection_policy = value; Changed = true; NotifyPropertyChanged("protection_policy"); } }
-         }
 
+        /// <summary>
+        /// true if this snapshot was created by the protection policy
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        public virtual bool is_snapshot_from_vmpp
+        {
+            get { return _is_snapshot_from_vmpp; }
+            set
+            {
+                if (!Helper.AreEqual(value, _is_snapshot_from_vmpp))
+                {
+                    _is_snapshot_from_vmpp = value;
+                    Changed = true;
+                    NotifyPropertyChanged("is_snapshot_from_vmpp");
+                }
+            }
+        }
         private bool _is_snapshot_from_vmpp;
-        public virtual bool is_snapshot_from_vmpp {
-             get { return _is_snapshot_from_vmpp; }
-             set { if (!Helper.AreEqual(value, _is_snapshot_from_vmpp)) { _is_snapshot_from_vmpp = value; Changed = true; NotifyPropertyChanged("is_snapshot_from_vmpp"); } }
-         }
 
+        /// <summary>
+        /// the appliance to which this VM belongs
+        /// </summary>
+        public virtual XenRef<VM_appliance> appliance
+        {
+            get { return _appliance; }
+            set
+            {
+                if (!Helper.AreEqual(value, _appliance))
+                {
+                    _appliance = value;
+                    Changed = true;
+                    NotifyPropertyChanged("appliance");
+                }
+            }
+        }
         private XenRef<VM_appliance> _appliance;
-        public virtual XenRef<VM_appliance> appliance {
-             get { return _appliance; }
-             set { if (!Helper.AreEqual(value, _appliance)) { _appliance = value; Changed = true; NotifyPropertyChanged("appliance"); } }
-         }
 
+        /// <summary>
+        /// The delay to wait before proceeding to the next order in the startup sequence (seconds)
+        /// First published in XenServer 6.0.
+        /// </summary>
+        public virtual long start_delay
+        {
+            get { return _start_delay; }
+            set
+            {
+                if (!Helper.AreEqual(value, _start_delay))
+                {
+                    _start_delay = value;
+                    Changed = true;
+                    NotifyPropertyChanged("start_delay");
+                }
+            }
+        }
         private long _start_delay;
-        public virtual long start_delay {
-             get { return _start_delay; }
-             set { if (!Helper.AreEqual(value, _start_delay)) { _start_delay = value; Changed = true; NotifyPropertyChanged("start_delay"); } }
-         }
 
+        /// <summary>
+        /// The delay to wait before proceeding to the next order in the shutdown sequence (seconds)
+        /// First published in XenServer 6.0.
+        /// </summary>
+        public virtual long shutdown_delay
+        {
+            get { return _shutdown_delay; }
+            set
+            {
+                if (!Helper.AreEqual(value, _shutdown_delay))
+                {
+                    _shutdown_delay = value;
+                    Changed = true;
+                    NotifyPropertyChanged("shutdown_delay");
+                }
+            }
+        }
         private long _shutdown_delay;
-        public virtual long shutdown_delay {
-             get { return _shutdown_delay; }
-             set { if (!Helper.AreEqual(value, _shutdown_delay)) { _shutdown_delay = value; Changed = true; NotifyPropertyChanged("shutdown_delay"); } }
-         }
 
+        /// <summary>
+        /// The point in the startup or shutdown sequence at which this VM will be started
+        /// First published in XenServer 6.0.
+        /// </summary>
+        public virtual long order
+        {
+            get { return _order; }
+            set
+            {
+                if (!Helper.AreEqual(value, _order))
+                {
+                    _order = value;
+                    Changed = true;
+                    NotifyPropertyChanged("order");
+                }
+            }
+        }
         private long _order;
-        public virtual long order {
-             get { return _order; }
-             set { if (!Helper.AreEqual(value, _order)) { _order = value; Changed = true; NotifyPropertyChanged("order"); } }
-         }
 
+        /// <summary>
+        /// Virtual GPUs
+        /// First published in XenServer 6.0.
+        /// </summary>
+        public virtual List<XenRef<VGPU>> VGPUs
+        {
+            get { return _VGPUs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VGPUs))
+                {
+                    _VGPUs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VGPUs");
+                }
+            }
+        }
         private List<XenRef<VGPU>> _VGPUs;
-        public virtual List<XenRef<VGPU>> VGPUs {
-             get { return _VGPUs; }
-             set { if (!Helper.AreEqual(value, _VGPUs)) { _VGPUs = value; Changed = true; NotifyPropertyChanged("VGPUs"); } }
-         }
 
+        /// <summary>
+        /// Currently passed-through PCI devices
+        /// First published in XenServer 6.0.
+        /// </summary>
+        public virtual List<XenRef<PCI>> attached_PCIs
+        {
+            get { return _attached_PCIs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _attached_PCIs))
+                {
+                    _attached_PCIs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("attached_PCIs");
+                }
+            }
+        }
         private List<XenRef<PCI>> _attached_PCIs;
-        public virtual List<XenRef<PCI>> attached_PCIs {
-             get { return _attached_PCIs; }
-             set { if (!Helper.AreEqual(value, _attached_PCIs)) { _attached_PCIs = value; Changed = true; NotifyPropertyChanged("attached_PCIs"); } }
-         }
 
+        /// <summary>
+        /// The SR on which a suspend image is stored
+        /// First published in XenServer 6.0.
+        /// </summary>
+        public virtual XenRef<SR> suspend_SR
+        {
+            get { return _suspend_SR; }
+            set
+            {
+                if (!Helper.AreEqual(value, _suspend_SR))
+                {
+                    _suspend_SR = value;
+                    Changed = true;
+                    NotifyPropertyChanged("suspend_SR");
+                }
+            }
+        }
         private XenRef<SR> _suspend_SR;
-        public virtual XenRef<SR> suspend_SR {
-             get { return _suspend_SR; }
-             set { if (!Helper.AreEqual(value, _suspend_SR)) { _suspend_SR = value; Changed = true; NotifyPropertyChanged("suspend_SR"); } }
-         }
 
+        /// <summary>
+        /// The number of times this VM has been recovered
+        /// First published in XenServer 6.0.
+        /// </summary>
+        public virtual long version
+        {
+            get { return _version; }
+            set
+            {
+                if (!Helper.AreEqual(value, _version))
+                {
+                    _version = value;
+                    Changed = true;
+                    NotifyPropertyChanged("version");
+                }
+            }
+        }
         private long _version;
-        public virtual long version {
-             get { return _version; }
-             set { if (!Helper.AreEqual(value, _version)) { _version = value; Changed = true; NotifyPropertyChanged("version"); } }
-         }
 
+        /// <summary>
+        /// Generation ID of the VM
+        /// First published in XenServer 6.2.
+        /// </summary>
+        public virtual string generation_id
+        {
+            get { return _generation_id; }
+            set
+            {
+                if (!Helper.AreEqual(value, _generation_id))
+                {
+                    _generation_id = value;
+                    Changed = true;
+                    NotifyPropertyChanged("generation_id");
+                }
+            }
+        }
         private string _generation_id;
-        public virtual string generation_id {
-             get { return _generation_id; }
-             set { if (!Helper.AreEqual(value, _generation_id)) { _generation_id = value; Changed = true; NotifyPropertyChanged("generation_id"); } }
-         }
-
-
     }
 }

@@ -38,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// A storage manager plugin
+    /// First published in XenServer 4.0.
+    /// </summary>
     public partial class SM : XenObject<SM>
     {
         public SM()
@@ -195,190 +199,474 @@ namespace XenAPI
                 return null;
             }
         }
-
+        /// <summary>
+        /// Get a record containing the current state of the given SM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sm">The opaque_ref of the given sm</param>
         public static SM get_record(Session session, string _sm)
         {
             return new SM((Proxy_SM)session.proxy.sm_get_record(session.uuid, (_sm != null) ? _sm : "").parse());
         }
 
+        /// <summary>
+        /// Get a reference to the SM instance with the specified UUID.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<SM> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<SM>.Create(session.proxy.sm_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
         }
 
+        /// <summary>
+        /// Get all the SM instances with the given label.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_label">label of object to return</param>
         public static List<XenRef<SM>> get_by_name_label(Session session, string _label)
         {
             return XenRef<SM>.Create(session.proxy.sm_get_by_name_label(session.uuid, (_label != null) ? _label : "").parse());
         }
 
+        /// <summary>
+        /// Get the uuid field of the given SM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_uuid(Session session, string _sm)
         {
             return (string)session.proxy.sm_get_uuid(session.uuid, (_sm != null) ? _sm : "").parse();
         }
 
+        /// <summary>
+        /// Get the name/label field of the given SM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_name_label(Session session, string _sm)
         {
             return (string)session.proxy.sm_get_name_label(session.uuid, (_sm != null) ? _sm : "").parse();
         }
 
+        /// <summary>
+        /// Get the name/description field of the given SM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_name_description(Session session, string _sm)
         {
             return (string)session.proxy.sm_get_name_description(session.uuid, (_sm != null) ? _sm : "").parse();
         }
 
+        /// <summary>
+        /// Get the type field of the given SM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_type(Session session, string _sm)
         {
             return (string)session.proxy.sm_get_type(session.uuid, (_sm != null) ? _sm : "").parse();
         }
 
+        /// <summary>
+        /// Get the vendor field of the given SM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_vendor(Session session, string _sm)
         {
             return (string)session.proxy.sm_get_vendor(session.uuid, (_sm != null) ? _sm : "").parse();
         }
 
+        /// <summary>
+        /// Get the copyright field of the given SM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_copyright(Session session, string _sm)
         {
             return (string)session.proxy.sm_get_copyright(session.uuid, (_sm != null) ? _sm : "").parse();
         }
 
+        /// <summary>
+        /// Get the version field of the given SM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_version(Session session, string _sm)
         {
             return (string)session.proxy.sm_get_version(session.uuid, (_sm != null) ? _sm : "").parse();
         }
 
+        /// <summary>
+        /// Get the required_api_version field of the given SM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_required_api_version(Session session, string _sm)
         {
             return (string)session.proxy.sm_get_required_api_version(session.uuid, (_sm != null) ? _sm : "").parse();
         }
 
+        /// <summary>
+        /// Get the configuration field of the given SM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sm">The opaque_ref of the given sm</param>
         public static Dictionary<string, string> get_configuration(Session session, string _sm)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.sm_get_configuration(session.uuid, (_sm != null) ? _sm : "").parse());
         }
 
+        /// <summary>
+        /// Get the capabilities field of the given SM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string[] get_capabilities(Session session, string _sm)
         {
             return (string [])session.proxy.sm_get_capabilities(session.uuid, (_sm != null) ? _sm : "").parse();
         }
 
+        /// <summary>
+        /// Get the features field of the given SM.
+        /// First published in XenServer 6.2.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sm">The opaque_ref of the given sm</param>
         public static Dictionary<string, long> get_features(Session session, string _sm)
         {
             return Maps.convert_from_proxy_string_long(session.proxy.sm_get_features(session.uuid, (_sm != null) ? _sm : "").parse());
         }
 
+        /// <summary>
+        /// Get the other_config field of the given SM.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sm">The opaque_ref of the given sm</param>
         public static Dictionary<string, string> get_other_config(Session session, string _sm)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.sm_get_other_config(session.uuid, (_sm != null) ? _sm : "").parse());
         }
 
+        /// <summary>
+        /// Get the driver_filename field of the given SM.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_driver_filename(Session session, string _sm)
         {
             return (string)session.proxy.sm_get_driver_filename(session.uuid, (_sm != null) ? _sm : "").parse();
         }
 
+        /// <summary>
+        /// Set the other_config field of the given SM.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sm">The opaque_ref of the given sm</param>
+        /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _sm, Dictionary<string, string> _other_config)
         {
             session.proxy.sm_set_other_config(session.uuid, (_sm != null) ? _sm : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the other_config field of the given SM.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sm">The opaque_ref of the given sm</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _sm, string _key, string _value)
         {
             session.proxy.sm_add_to_other_config(session.uuid, (_sm != null) ? _sm : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the other_config field of the given SM.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_sm">The opaque_ref of the given sm</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _sm, string _key)
         {
             session.proxy.sm_remove_from_other_config(session.uuid, (_sm != null) ? _sm : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Return a list of all the SMs known to the system.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static List<XenRef<SM>> get_all(Session session)
         {
             return XenRef<SM>.Create(session.proxy.sm_get_all(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Get all the SM Records at once, in a single XML RPC call
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<SM>, SM> get_all_records(Session session)
         {
             return XenRef<SM>.Create<Proxy_SM>(session.proxy.sm_get_all_records(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Unique identifier/object reference
+        /// </summary>
+        public virtual string uuid
+        {
+            get { return _uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _uuid))
+                {
+                    _uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("uuid");
+                }
+            }
+        }
         private string _uuid;
-        public virtual string uuid {
-             get { return _uuid; }
-             set { if (!Helper.AreEqual(value, _uuid)) { _uuid = value; Changed = true; NotifyPropertyChanged("uuid"); } }
-         }
 
+        /// <summary>
+        /// a human-readable name
+        /// </summary>
+        public virtual string name_label
+        {
+            get { return _name_label; }
+            set
+            {
+                if (!Helper.AreEqual(value, _name_label))
+                {
+                    _name_label = value;
+                    Changed = true;
+                    NotifyPropertyChanged("name_label");
+                }
+            }
+        }
         private string _name_label;
-        public virtual string name_label {
-             get { return _name_label; }
-             set { if (!Helper.AreEqual(value, _name_label)) { _name_label = value; Changed = true; NotifyPropertyChanged("name_label"); } }
-         }
 
+        /// <summary>
+        /// a notes field containing human-readable description
+        /// </summary>
+        public virtual string name_description
+        {
+            get { return _name_description; }
+            set
+            {
+                if (!Helper.AreEqual(value, _name_description))
+                {
+                    _name_description = value;
+                    Changed = true;
+                    NotifyPropertyChanged("name_description");
+                }
+            }
+        }
         private string _name_description;
-        public virtual string name_description {
-             get { return _name_description; }
-             set { if (!Helper.AreEqual(value, _name_description)) { _name_description = value; Changed = true; NotifyPropertyChanged("name_description"); } }
-         }
 
+        /// <summary>
+        /// SR.type
+        /// </summary>
+        public virtual string type
+        {
+            get { return _type; }
+            set
+            {
+                if (!Helper.AreEqual(value, _type))
+                {
+                    _type = value;
+                    Changed = true;
+                    NotifyPropertyChanged("type");
+                }
+            }
+        }
         private string _type;
-        public virtual string type {
-             get { return _type; }
-             set { if (!Helper.AreEqual(value, _type)) { _type = value; Changed = true; NotifyPropertyChanged("type"); } }
-         }
 
+        /// <summary>
+        /// Vendor who created this plugin
+        /// </summary>
+        public virtual string vendor
+        {
+            get { return _vendor; }
+            set
+            {
+                if (!Helper.AreEqual(value, _vendor))
+                {
+                    _vendor = value;
+                    Changed = true;
+                    NotifyPropertyChanged("vendor");
+                }
+            }
+        }
         private string _vendor;
-        public virtual string vendor {
-             get { return _vendor; }
-             set { if (!Helper.AreEqual(value, _vendor)) { _vendor = value; Changed = true; NotifyPropertyChanged("vendor"); } }
-         }
 
+        /// <summary>
+        /// Entity which owns the copyright of this plugin
+        /// </summary>
+        public virtual string copyright
+        {
+            get { return _copyright; }
+            set
+            {
+                if (!Helper.AreEqual(value, _copyright))
+                {
+                    _copyright = value;
+                    Changed = true;
+                    NotifyPropertyChanged("copyright");
+                }
+            }
+        }
         private string _copyright;
-        public virtual string copyright {
-             get { return _copyright; }
-             set { if (!Helper.AreEqual(value, _copyright)) { _copyright = value; Changed = true; NotifyPropertyChanged("copyright"); } }
-         }
 
+        /// <summary>
+        /// Version of the plugin
+        /// </summary>
+        public virtual string version
+        {
+            get { return _version; }
+            set
+            {
+                if (!Helper.AreEqual(value, _version))
+                {
+                    _version = value;
+                    Changed = true;
+                    NotifyPropertyChanged("version");
+                }
+            }
+        }
         private string _version;
-        public virtual string version {
-             get { return _version; }
-             set { if (!Helper.AreEqual(value, _version)) { _version = value; Changed = true; NotifyPropertyChanged("version"); } }
-         }
 
+        /// <summary>
+        /// Minimum SM API version required on the server
+        /// </summary>
+        public virtual string required_api_version
+        {
+            get { return _required_api_version; }
+            set
+            {
+                if (!Helper.AreEqual(value, _required_api_version))
+                {
+                    _required_api_version = value;
+                    Changed = true;
+                    NotifyPropertyChanged("required_api_version");
+                }
+            }
+        }
         private string _required_api_version;
-        public virtual string required_api_version {
-             get { return _required_api_version; }
-             set { if (!Helper.AreEqual(value, _required_api_version)) { _required_api_version = value; Changed = true; NotifyPropertyChanged("required_api_version"); } }
-         }
 
+        /// <summary>
+        /// names and descriptions of device config keys
+        /// </summary>
+        public virtual Dictionary<string, string> configuration
+        {
+            get { return _configuration; }
+            set
+            {
+                if (!Helper.AreEqual(value, _configuration))
+                {
+                    _configuration = value;
+                    Changed = true;
+                    NotifyPropertyChanged("configuration");
+                }
+            }
+        }
         private Dictionary<string, string> _configuration;
-        public virtual Dictionary<string, string> configuration {
-             get { return _configuration; }
-             set { if (!Helper.AreEqual(value, _configuration)) { _configuration = value; Changed = true; NotifyPropertyChanged("configuration"); } }
-         }
 
+        /// <summary>
+        /// capabilities of the SM plugin
+        /// </summary>
+        public virtual string[] capabilities
+        {
+            get { return _capabilities; }
+            set
+            {
+                if (!Helper.AreEqual(value, _capabilities))
+                {
+                    _capabilities = value;
+                    Changed = true;
+                    NotifyPropertyChanged("capabilities");
+                }
+            }
+        }
         private string[] _capabilities;
-        public virtual string[] capabilities {
-             get { return _capabilities; }
-             set { if (!Helper.AreEqual(value, _capabilities)) { _capabilities = value; Changed = true; NotifyPropertyChanged("capabilities"); } }
-         }
 
+        /// <summary>
+        /// capabilities of the SM plugin, with capability version numbers
+        /// First published in XenServer 6.2.
+        /// </summary>
+        public virtual Dictionary<string, long> features
+        {
+            get { return _features; }
+            set
+            {
+                if (!Helper.AreEqual(value, _features))
+                {
+                    _features = value;
+                    Changed = true;
+                    NotifyPropertyChanged("features");
+                }
+            }
+        }
         private Dictionary<string, long> _features;
-        public virtual Dictionary<string, long> features {
-             get { return _features; }
-             set { if (!Helper.AreEqual(value, _features)) { _features = value; Changed = true; NotifyPropertyChanged("features"); } }
-         }
 
+        /// <summary>
+        /// additional configuration
+        /// First published in XenServer 4.1.
+        /// </summary>
+        public virtual Dictionary<string, string> other_config
+        {
+            get { return _other_config; }
+            set
+            {
+                if (!Helper.AreEqual(value, _other_config))
+                {
+                    _other_config = value;
+                    Changed = true;
+                    NotifyPropertyChanged("other_config");
+                }
+            }
+        }
         private Dictionary<string, string> _other_config;
-        public virtual Dictionary<string, string> other_config {
-             get { return _other_config; }
-             set { if (!Helper.AreEqual(value, _other_config)) { _other_config = value; Changed = true; NotifyPropertyChanged("other_config"); } }
-         }
 
+        /// <summary>
+        /// filename of the storage driver
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual string driver_filename
+        {
+            get { return _driver_filename; }
+            set
+            {
+                if (!Helper.AreEqual(value, _driver_filename))
+                {
+                    _driver_filename = value;
+                    Changed = true;
+                    NotifyPropertyChanged("driver_filename");
+                }
+            }
+        }
         private string _driver_filename;
-        public virtual string driver_filename {
-             get { return _driver_filename; }
-             set { if (!Helper.AreEqual(value, _driver_filename)) { _driver_filename = value; Changed = true; NotifyPropertyChanged("driver_filename"); } }
-         }
-
-
     }
 }

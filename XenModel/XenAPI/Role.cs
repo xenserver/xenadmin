@@ -38,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// A set of permissions associated with a subject
+    /// First published in XenServer 5.6.
+    /// </summary>
     public partial class Role : XenObject<Role>
     {
         public Role()
@@ -127,96 +131,217 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
-
+        /// <summary>
+        /// Get a record containing the current state of the given role.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_role">The opaque_ref of the given role</param>
         public static Role get_record(Session session, string _role)
         {
             return new Role((Proxy_Role)session.proxy.role_get_record(session.uuid, (_role != null) ? _role : "").parse());
         }
 
+        /// <summary>
+        /// Get a reference to the role instance with the specified UUID.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Role> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<Role>.Create(session.proxy.role_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
         }
 
+        /// <summary>
+        /// Get all the role instances with the given label.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_label">label of object to return</param>
         public static List<XenRef<Role>> get_by_name_label(Session session, string _label)
         {
             return XenRef<Role>.Create(session.proxy.role_get_by_name_label(session.uuid, (_label != null) ? _label : "").parse());
         }
 
+        /// <summary>
+        /// Get the uuid field of the given role.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_role">The opaque_ref of the given role</param>
         public static string get_uuid(Session session, string _role)
         {
             return (string)session.proxy.role_get_uuid(session.uuid, (_role != null) ? _role : "").parse();
         }
 
+        /// <summary>
+        /// Get the name/label field of the given role.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_role">The opaque_ref of the given role</param>
         public static string get_name_label(Session session, string _role)
         {
             return (string)session.proxy.role_get_name_label(session.uuid, (_role != null) ? _role : "").parse();
         }
 
+        /// <summary>
+        /// Get the name/description field of the given role.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_role">The opaque_ref of the given role</param>
         public static string get_name_description(Session session, string _role)
         {
             return (string)session.proxy.role_get_name_description(session.uuid, (_role != null) ? _role : "").parse();
         }
 
+        /// <summary>
+        /// Get the subroles field of the given role.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_role">The opaque_ref of the given role</param>
         public static List<XenRef<Role>> get_subroles(Session session, string _role)
         {
             return XenRef<Role>.Create(session.proxy.role_get_subroles(session.uuid, (_role != null) ? _role : "").parse());
         }
 
-        public static List<XenRef<Role>> get_permissions(Session session, string _self)
+        /// <summary>
+        /// This call returns a list of permissions given a role
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_role">The opaque_ref of the given role</param>
+        public static List<XenRef<Role>> get_permissions(Session session, string _role)
         {
-            return XenRef<Role>.Create(session.proxy.role_get_permissions(session.uuid, (_self != null) ? _self : "").parse());
+            return XenRef<Role>.Create(session.proxy.role_get_permissions(session.uuid, (_role != null) ? _role : "").parse());
         }
 
-        public static string[] get_permissions_name_label(Session session, string _self)
+        /// <summary>
+        /// This call returns a list of permission names given a role
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_role">The opaque_ref of the given role</param>
+        public static string[] get_permissions_name_label(Session session, string _role)
         {
-            return (string [])session.proxy.role_get_permissions_name_label(session.uuid, (_self != null) ? _self : "").parse();
+            return (string [])session.proxy.role_get_permissions_name_label(session.uuid, (_role != null) ? _role : "").parse();
         }
 
-        public static List<XenRef<Role>> get_by_permission(Session session, string _permission)
+        /// <summary>
+        /// This call returns a list of roles given a permission
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_role">The opaque_ref of the given permission</param>
+        public static List<XenRef<Role>> get_by_permission(Session session, string _role)
         {
-            return XenRef<Role>.Create(session.proxy.role_get_by_permission(session.uuid, (_permission != null) ? _permission : "").parse());
+            return XenRef<Role>.Create(session.proxy.role_get_by_permission(session.uuid, (_role != null) ? _role : "").parse());
         }
 
+        /// <summary>
+        /// This call returns a list of roles given a permission name
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_label">The short friendly name of the role</param>
         public static List<XenRef<Role>> get_by_permission_name_label(Session session, string _label)
         {
             return XenRef<Role>.Create(session.proxy.role_get_by_permission_name_label(session.uuid, (_label != null) ? _label : "").parse());
         }
 
+        /// <summary>
+        /// Return a list of all the roles known to the system.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static List<XenRef<Role>> get_all(Session session)
         {
             return XenRef<Role>.Create(session.proxy.role_get_all(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Get all the role Records at once, in a single XML RPC call
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<Role>, Role> get_all_records(Session session)
         {
             return XenRef<Role>.Create<Proxy_Role>(session.proxy.role_get_all_records(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Unique identifier/object reference
+        /// </summary>
+        public virtual string uuid
+        {
+            get { return _uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _uuid))
+                {
+                    _uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("uuid");
+                }
+            }
+        }
         private string _uuid;
-        public virtual string uuid {
-             get { return _uuid; }
-             set { if (!Helper.AreEqual(value, _uuid)) { _uuid = value; Changed = true; NotifyPropertyChanged("uuid"); } }
-         }
 
+        /// <summary>
+        /// a short user-friendly name for the role
+        /// </summary>
+        public virtual string name_label
+        {
+            get { return _name_label; }
+            set
+            {
+                if (!Helper.AreEqual(value, _name_label))
+                {
+                    _name_label = value;
+                    Changed = true;
+                    NotifyPropertyChanged("name_label");
+                }
+            }
+        }
         private string _name_label;
-        public virtual string name_label {
-             get { return _name_label; }
-             set { if (!Helper.AreEqual(value, _name_label)) { _name_label = value; Changed = true; NotifyPropertyChanged("name_label"); } }
-         }
 
+        /// <summary>
+        /// what this role is for
+        /// </summary>
+        public virtual string name_description
+        {
+            get { return _name_description; }
+            set
+            {
+                if (!Helper.AreEqual(value, _name_description))
+                {
+                    _name_description = value;
+                    Changed = true;
+                    NotifyPropertyChanged("name_description");
+                }
+            }
+        }
         private string _name_description;
-        public virtual string name_description {
-             get { return _name_description; }
-             set { if (!Helper.AreEqual(value, _name_description)) { _name_description = value; Changed = true; NotifyPropertyChanged("name_description"); } }
-         }
 
+        /// <summary>
+        /// a list of pointers to other roles or permissions
+        /// </summary>
+        public virtual List<XenRef<Role>> subroles
+        {
+            get { return _subroles; }
+            set
+            {
+                if (!Helper.AreEqual(value, _subroles))
+                {
+                    _subroles = value;
+                    Changed = true;
+                    NotifyPropertyChanged("subroles");
+                }
+            }
+        }
         private List<XenRef<Role>> _subroles;
-        public virtual List<XenRef<Role>> subroles {
-             get { return _subroles; }
-             set { if (!Helper.AreEqual(value, _subroles)) { _subroles = value; Changed = true; NotifyPropertyChanged("subroles"); } }
-         }
-
-
     }
 }

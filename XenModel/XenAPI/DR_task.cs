@@ -38,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// DR task
+    /// First published in XenServer 6.0.
+    /// </summary>
     public partial class DR_task : XenObject<DR_task>
     {
         public DR_task()
@@ -113,69 +117,152 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
-
+        /// <summary>
+        /// Get a record containing the current state of the given DR_task.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_dr_task">The opaque_ref of the given dr_task</param>
         public static DR_task get_record(Session session, string _dr_task)
         {
             return new DR_task((Proxy_DR_task)session.proxy.dr_task_get_record(session.uuid, (_dr_task != null) ? _dr_task : "").parse());
         }
 
+        /// <summary>
+        /// Get a reference to the DR_task instance with the specified UUID.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<DR_task> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<DR_task>.Create(session.proxy.dr_task_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
         }
 
+        /// <summary>
+        /// Get the uuid field of the given DR_task.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_dr_task">The opaque_ref of the given dr_task</param>
         public static string get_uuid(Session session, string _dr_task)
         {
             return (string)session.proxy.dr_task_get_uuid(session.uuid, (_dr_task != null) ? _dr_task : "").parse();
         }
 
+        /// <summary>
+        /// Get the introduced_SRs field of the given DR_task.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_dr_task">The opaque_ref of the given dr_task</param>
         public static List<XenRef<SR>> get_introduced_SRs(Session session, string _dr_task)
         {
             return XenRef<SR>.Create(session.proxy.dr_task_get_introduced_srs(session.uuid, (_dr_task != null) ? _dr_task : "").parse());
         }
 
+        /// <summary>
+        /// Create a disaster recovery task which will query the supplied list of devices
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_type">The SR driver type of the SRs to introduce</param>
+        /// <param name="_device_config">The device configuration of the SRs to introduce</param>
+        /// <param name="_whitelist">The devices to use for disaster recovery</param>
         public static XenRef<DR_task> create(Session session, string _type, Dictionary<string, string> _device_config, string[] _whitelist)
         {
             return XenRef<DR_task>.Create(session.proxy.dr_task_create(session.uuid, (_type != null) ? _type : "", Maps.convert_to_proxy_string_string(_device_config), _whitelist).parse());
         }
 
+        /// <summary>
+        /// Create a disaster recovery task which will query the supplied list of devices
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_type">The SR driver type of the SRs to introduce</param>
+        /// <param name="_device_config">The device configuration of the SRs to introduce</param>
+        /// <param name="_whitelist">The devices to use for disaster recovery</param>
         public static XenRef<Task> async_create(Session session, string _type, Dictionary<string, string> _device_config, string[] _whitelist)
         {
             return XenRef<Task>.Create(session.proxy.async_dr_task_create(session.uuid, (_type != null) ? _type : "", Maps.convert_to_proxy_string_string(_device_config), _whitelist).parse());
         }
 
-        public static void destroy(Session session, string _self)
+        /// <summary>
+        /// Destroy the disaster recovery task, detaching and forgetting any SRs introduced which are no longer required
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_dr_task">The opaque_ref of the given dr_task</param>
+        public static void destroy(Session session, string _dr_task)
         {
-            session.proxy.dr_task_destroy(session.uuid, (_self != null) ? _self : "").parse();
+            session.proxy.dr_task_destroy(session.uuid, (_dr_task != null) ? _dr_task : "").parse();
         }
 
-        public static XenRef<Task> async_destroy(Session session, string _self)
+        /// <summary>
+        /// Destroy the disaster recovery task, detaching and forgetting any SRs introduced which are no longer required
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_dr_task">The opaque_ref of the given dr_task</param>
+        public static XenRef<Task> async_destroy(Session session, string _dr_task)
         {
-            return XenRef<Task>.Create(session.proxy.async_dr_task_destroy(session.uuid, (_self != null) ? _self : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_dr_task_destroy(session.uuid, (_dr_task != null) ? _dr_task : "").parse());
         }
 
+        /// <summary>
+        /// Return a list of all the DR_tasks known to the system.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static List<XenRef<DR_task>> get_all(Session session)
         {
             return XenRef<DR_task>.Create(session.proxy.dr_task_get_all(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Get all the DR_task Records at once, in a single XML RPC call
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<DR_task>, DR_task> get_all_records(Session session)
         {
             return XenRef<DR_task>.Create<Proxy_DR_task>(session.proxy.dr_task_get_all_records(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Unique identifier/object reference
+        /// </summary>
+        public virtual string uuid
+        {
+            get { return _uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _uuid))
+                {
+                    _uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("uuid");
+                }
+            }
+        }
         private string _uuid;
-        public virtual string uuid {
-             get { return _uuid; }
-             set { if (!Helper.AreEqual(value, _uuid)) { _uuid = value; Changed = true; NotifyPropertyChanged("uuid"); } }
-         }
 
+        /// <summary>
+        /// All SRs introduced by this appliance
+        /// </summary>
+        public virtual List<XenRef<SR>> introduced_SRs
+        {
+            get { return _introduced_SRs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _introduced_SRs))
+                {
+                    _introduced_SRs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("introduced_SRs");
+                }
+            }
+        }
         private List<XenRef<SR>> _introduced_SRs;
-        public virtual List<XenRef<SR>> introduced_SRs {
-             get { return _introduced_SRs; }
-             set { if (!Helper.AreEqual(value, _introduced_SRs)) { _introduced_SRs = value; Changed = true; NotifyPropertyChanged("introduced_SRs"); } }
-         }
-
-
     }
 }

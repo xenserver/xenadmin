@@ -38,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// A virtual network
+    /// First published in XenServer 4.0.
+    /// </summary>
     public partial class Network : XenObject<Network>
     {
         public Network()
@@ -213,260 +217,669 @@ namespace XenAPI
                 return null;
             }
         }
-
+        /// <summary>
+        /// Get a record containing the current state of the given network.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
         public static Network get_record(Session session, string _network)
         {
             return new Network((Proxy_Network)session.proxy.network_get_record(session.uuid, (_network != null) ? _network : "").parse());
         }
 
+        /// <summary>
+        /// Get a reference to the network instance with the specified UUID.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Network> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<Network>.Create(session.proxy.network_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
         }
 
+        /// <summary>
+        /// Create a new network instance, and return its handle.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_record">All constructor arguments</param>
         public static XenRef<Network> create(Session session, Network _record)
         {
             return XenRef<Network>.Create(session.proxy.network_create(session.uuid, _record.ToProxy()).parse());
         }
 
+        /// <summary>
+        /// Create a new network instance, and return its handle.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_record">All constructor arguments</param>
         public static XenRef<Task> async_create(Session session, Network _record)
         {
             return XenRef<Task>.Create(session.proxy.async_network_create(session.uuid, _record.ToProxy()).parse());
         }
 
+        /// <summary>
+        /// Destroy the specified network instance.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
         public static void destroy(Session session, string _network)
         {
             session.proxy.network_destroy(session.uuid, (_network != null) ? _network : "").parse();
         }
 
+        /// <summary>
+        /// Destroy the specified network instance.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
         public static XenRef<Task> async_destroy(Session session, string _network)
         {
             return XenRef<Task>.Create(session.proxy.async_network_destroy(session.uuid, (_network != null) ? _network : "").parse());
         }
 
+        /// <summary>
+        /// Get all the network instances with the given label.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_label">label of object to return</param>
         public static List<XenRef<Network>> get_by_name_label(Session session, string _label)
         {
             return XenRef<Network>.Create(session.proxy.network_get_by_name_label(session.uuid, (_label != null) ? _label : "").parse());
         }
 
+        /// <summary>
+        /// Get the uuid field of the given network.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
         public static string get_uuid(Session session, string _network)
         {
             return (string)session.proxy.network_get_uuid(session.uuid, (_network != null) ? _network : "").parse();
         }
 
+        /// <summary>
+        /// Get the name/label field of the given network.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
         public static string get_name_label(Session session, string _network)
         {
             return (string)session.proxy.network_get_name_label(session.uuid, (_network != null) ? _network : "").parse();
         }
 
+        /// <summary>
+        /// Get the name/description field of the given network.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
         public static string get_name_description(Session session, string _network)
         {
             return (string)session.proxy.network_get_name_description(session.uuid, (_network != null) ? _network : "").parse();
         }
 
+        /// <summary>
+        /// Get the allowed_operations field of the given network.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
         public static List<network_operations> get_allowed_operations(Session session, string _network)
         {
             return Helper.StringArrayToEnumList<network_operations>(session.proxy.network_get_allowed_operations(session.uuid, (_network != null) ? _network : "").parse());
         }
 
+        /// <summary>
+        /// Get the current_operations field of the given network.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
         public static Dictionary<string, network_operations> get_current_operations(Session session, string _network)
         {
             return Maps.convert_from_proxy_string_network_operations(session.proxy.network_get_current_operations(session.uuid, (_network != null) ? _network : "").parse());
         }
 
+        /// <summary>
+        /// Get the VIFs field of the given network.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
         public static List<XenRef<VIF>> get_VIFs(Session session, string _network)
         {
             return XenRef<VIF>.Create(session.proxy.network_get_vifs(session.uuid, (_network != null) ? _network : "").parse());
         }
 
+        /// <summary>
+        /// Get the PIFs field of the given network.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
         public static List<XenRef<PIF>> get_PIFs(Session session, string _network)
         {
             return XenRef<PIF>.Create(session.proxy.network_get_pifs(session.uuid, (_network != null) ? _network : "").parse());
         }
 
+        /// <summary>
+        /// Get the MTU field of the given network.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
         public static long get_MTU(Session session, string _network)
         {
             return long.Parse((string)session.proxy.network_get_mtu(session.uuid, (_network != null) ? _network : "").parse());
         }
 
+        /// <summary>
+        /// Get the other_config field of the given network.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
         public static Dictionary<string, string> get_other_config(Session session, string _network)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.network_get_other_config(session.uuid, (_network != null) ? _network : "").parse());
         }
 
+        /// <summary>
+        /// Get the bridge field of the given network.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
         public static string get_bridge(Session session, string _network)
         {
             return (string)session.proxy.network_get_bridge(session.uuid, (_network != null) ? _network : "").parse();
         }
 
+        /// <summary>
+        /// Get the blobs field of the given network.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
         public static Dictionary<string, XenRef<Blob>> get_blobs(Session session, string _network)
         {
             return Maps.convert_from_proxy_string_XenRefBlob(session.proxy.network_get_blobs(session.uuid, (_network != null) ? _network : "").parse());
         }
 
+        /// <summary>
+        /// Get the tags field of the given network.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
         public static string[] get_tags(Session session, string _network)
         {
             return (string [])session.proxy.network_get_tags(session.uuid, (_network != null) ? _network : "").parse();
         }
 
+        /// <summary>
+        /// Get the default_locking_mode field of the given network.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
         public static network_default_locking_mode get_default_locking_mode(Session session, string _network)
         {
             return (network_default_locking_mode)Helper.EnumParseDefault(typeof(network_default_locking_mode), (string)session.proxy.network_get_default_locking_mode(session.uuid, (_network != null) ? _network : "").parse());
         }
 
+        /// <summary>
+        /// Set the name/label field of the given network.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
+        /// <param name="_label">New value to set</param>
         public static void set_name_label(Session session, string _network, string _label)
         {
             session.proxy.network_set_name_label(session.uuid, (_network != null) ? _network : "", (_label != null) ? _label : "").parse();
         }
 
+        /// <summary>
+        /// Set the name/description field of the given network.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
+        /// <param name="_description">New value to set</param>
         public static void set_name_description(Session session, string _network, string _description)
         {
             session.proxy.network_set_name_description(session.uuid, (_network != null) ? _network : "", (_description != null) ? _description : "").parse();
         }
 
+        /// <summary>
+        /// Set the MTU field of the given network.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
+        /// <param name="_mtu">New value to set</param>
         public static void set_MTU(Session session, string _network, long _mtu)
         {
             session.proxy.network_set_mtu(session.uuid, (_network != null) ? _network : "", _mtu.ToString()).parse();
         }
 
+        /// <summary>
+        /// Set the other_config field of the given network.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
+        /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _network, Dictionary<string, string> _other_config)
         {
             session.proxy.network_set_other_config(session.uuid, (_network != null) ? _network : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the other_config field of the given network.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _network, string _key, string _value)
         {
             session.proxy.network_add_to_other_config(session.uuid, (_network != null) ? _network : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the other_config field of the given network.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _network, string _key)
         {
             session.proxy.network_remove_from_other_config(session.uuid, (_network != null) ? _network : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Set the tags field of the given network.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
+        /// <param name="_tags">New value to set</param>
         public static void set_tags(Session session, string _network, string[] _tags)
         {
             session.proxy.network_set_tags(session.uuid, (_network != null) ? _network : "", _tags).parse();
         }
 
+        /// <summary>
+        /// Add the given value to the tags field of the given network.  If the value is already in that Set, then do nothing.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
+        /// <param name="_value">New value to add</param>
         public static void add_tags(Session session, string _network, string _value)
         {
             session.proxy.network_add_tags(session.uuid, (_network != null) ? _network : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given value from the tags field of the given network.  If the value is not in that Set, then do nothing.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
+        /// <param name="_value">Value to remove</param>
         public static void remove_tags(Session session, string _network, string _value)
         {
             session.proxy.network_remove_tags(session.uuid, (_network != null) ? _network : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Create a placeholder for a named binary blob of data that is associated with this pool
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
+        /// <param name="_name">The name associated with the blob</param>
+        /// <param name="_mime_type">The mime type for the data. Empty string translates to application/octet-stream</param>
+        public static XenRef<Blob> create_new_blob(Session session, string _network, string _name, string _mime_type)
+        {
+            return XenRef<Blob>.Create(session.proxy.network_create_new_blob(session.uuid, (_network != null) ? _network : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "").parse());
+        }
+
+        /// <summary>
+        /// Create a placeholder for a named binary blob of data that is associated with this pool
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
+        /// <param name="_name">The name associated with the blob</param>
+        /// <param name="_mime_type">The mime type for the data. Empty string translates to application/octet-stream</param>
+        public static XenRef<Task> async_create_new_blob(Session session, string _network, string _name, string _mime_type)
+        {
+            return XenRef<Task>.Create(session.proxy.async_network_create_new_blob(session.uuid, (_network != null) ? _network : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "").parse());
+        }
+
+        /// <summary>
+        /// Create a placeholder for a named binary blob of data that is associated with this pool
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
+        /// <param name="_name">The name associated with the blob</param>
+        /// <param name="_mime_type">The mime type for the data. Empty string translates to application/octet-stream</param>
+        /// <param name="_public">True if the blob should be publicly available First published in XenServer 6.1.</param>
         public static XenRef<Blob> create_new_blob(Session session, string _network, string _name, string _mime_type, bool _public)
         {
             return XenRef<Blob>.Create(session.proxy.network_create_new_blob(session.uuid, (_network != null) ? _network : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "", _public).parse());
         }
 
+        /// <summary>
+        /// Create a placeholder for a named binary blob of data that is associated with this pool
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
+        /// <param name="_name">The name associated with the blob</param>
+        /// <param name="_mime_type">The mime type for the data. Empty string translates to application/octet-stream</param>
+        /// <param name="_public">True if the blob should be publicly available First published in XenServer 6.1.</param>
         public static XenRef<Task> async_create_new_blob(Session session, string _network, string _name, string _mime_type, bool _public)
         {
             return XenRef<Task>.Create(session.proxy.async_network_create_new_blob(session.uuid, (_network != null) ? _network : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "", _public).parse());
         }
 
+        /// <summary>
+        /// Set the default locking mode for VIFs attached to this network
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
+        /// <param name="_value">The default locking mode for VIFs attached to this network.</param>
         public static void set_default_locking_mode(Session session, string _network, network_default_locking_mode _value)
         {
             session.proxy.network_set_default_locking_mode(session.uuid, (_network != null) ? _network : "", network_default_locking_mode_helper.ToString(_value)).parse();
         }
 
+        /// <summary>
+        /// Set the default locking mode for VIFs attached to this network
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
+        /// <param name="_value">The default locking mode for VIFs attached to this network.</param>
         public static XenRef<Task> async_set_default_locking_mode(Session session, string _network, network_default_locking_mode _value)
         {
             return XenRef<Task>.Create(session.proxy.async_network_set_default_locking_mode(session.uuid, (_network != null) ? _network : "", network_default_locking_mode_helper.ToString(_value)).parse());
         }
 
+        /// <summary>
+        /// Return a list of all the networks known to the system.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static List<XenRef<Network>> get_all(Session session)
         {
             return XenRef<Network>.Create(session.proxy.network_get_all(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Get all the network Records at once, in a single XML RPC call
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<Network>, Network> get_all_records(Session session)
         {
             return XenRef<Network>.Create<Proxy_Network>(session.proxy.network_get_all_records(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Unique identifier/object reference
+        /// </summary>
+        public virtual string uuid
+        {
+            get { return _uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _uuid))
+                {
+                    _uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("uuid");
+                }
+            }
+        }
         private string _uuid;
-        public virtual string uuid {
-             get { return _uuid; }
-             set { if (!Helper.AreEqual(value, _uuid)) { _uuid = value; Changed = true; NotifyPropertyChanged("uuid"); } }
-         }
 
+        /// <summary>
+        /// a human-readable name
+        /// </summary>
+        public virtual string name_label
+        {
+            get { return _name_label; }
+            set
+            {
+                if (!Helper.AreEqual(value, _name_label))
+                {
+                    _name_label = value;
+                    Changed = true;
+                    NotifyPropertyChanged("name_label");
+                }
+            }
+        }
         private string _name_label;
-        public virtual string name_label {
-             get { return _name_label; }
-             set { if (!Helper.AreEqual(value, _name_label)) { _name_label = value; Changed = true; NotifyPropertyChanged("name_label"); } }
-         }
 
+        /// <summary>
+        /// a notes field containing human-readable description
+        /// </summary>
+        public virtual string name_description
+        {
+            get { return _name_description; }
+            set
+            {
+                if (!Helper.AreEqual(value, _name_description))
+                {
+                    _name_description = value;
+                    Changed = true;
+                    NotifyPropertyChanged("name_description");
+                }
+            }
+        }
         private string _name_description;
-        public virtual string name_description {
-             get { return _name_description; }
-             set { if (!Helper.AreEqual(value, _name_description)) { _name_description = value; Changed = true; NotifyPropertyChanged("name_description"); } }
-         }
 
+        /// <summary>
+        /// list of the operations allowed in this state. This list is advisory only and the server state may have changed by the time this field is read by a client.
+        /// </summary>
+        public virtual List<network_operations> allowed_operations
+        {
+            get { return _allowed_operations; }
+            set
+            {
+                if (!Helper.AreEqual(value, _allowed_operations))
+                {
+                    _allowed_operations = value;
+                    Changed = true;
+                    NotifyPropertyChanged("allowed_operations");
+                }
+            }
+        }
         private List<network_operations> _allowed_operations;
-        public virtual List<network_operations> allowed_operations {
-             get { return _allowed_operations; }
-             set { if (!Helper.AreEqual(value, _allowed_operations)) { _allowed_operations = value; Changed = true; NotifyPropertyChanged("allowed_operations"); } }
-         }
 
+        /// <summary>
+        /// links each of the running tasks using this object (by reference) to a current_operation enum which describes the nature of the task.
+        /// </summary>
+        public virtual Dictionary<string, network_operations> current_operations
+        {
+            get { return _current_operations; }
+            set
+            {
+                if (!Helper.AreEqual(value, _current_operations))
+                {
+                    _current_operations = value;
+                    Changed = true;
+                    NotifyPropertyChanged("current_operations");
+                }
+            }
+        }
         private Dictionary<string, network_operations> _current_operations;
-        public virtual Dictionary<string, network_operations> current_operations {
-             get { return _current_operations; }
-             set { if (!Helper.AreEqual(value, _current_operations)) { _current_operations = value; Changed = true; NotifyPropertyChanged("current_operations"); } }
-         }
 
+        /// <summary>
+        /// list of connected vifs
+        /// </summary>
+        public virtual List<XenRef<VIF>> VIFs
+        {
+            get { return _VIFs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VIFs))
+                {
+                    _VIFs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VIFs");
+                }
+            }
+        }
         private List<XenRef<VIF>> _VIFs;
-        public virtual List<XenRef<VIF>> VIFs {
-             get { return _VIFs; }
-             set { if (!Helper.AreEqual(value, _VIFs)) { _VIFs = value; Changed = true; NotifyPropertyChanged("VIFs"); } }
-         }
 
+        /// <summary>
+        /// list of connected pifs
+        /// </summary>
+        public virtual List<XenRef<PIF>> PIFs
+        {
+            get { return _PIFs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _PIFs))
+                {
+                    _PIFs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("PIFs");
+                }
+            }
+        }
         private List<XenRef<PIF>> _PIFs;
-        public virtual List<XenRef<PIF>> PIFs {
-             get { return _PIFs; }
-             set { if (!Helper.AreEqual(value, _PIFs)) { _PIFs = value; Changed = true; NotifyPropertyChanged("PIFs"); } }
-         }
 
+        /// <summary>
+        /// MTU in octets
+        /// First published in XenServer 5.6.
+        /// </summary>
+        public virtual long MTU
+        {
+            get { return _MTU; }
+            set
+            {
+                if (!Helper.AreEqual(value, _MTU))
+                {
+                    _MTU = value;
+                    Changed = true;
+                    NotifyPropertyChanged("MTU");
+                }
+            }
+        }
         private long _MTU;
-        public virtual long MTU {
-             get { return _MTU; }
-             set { if (!Helper.AreEqual(value, _MTU)) { _MTU = value; Changed = true; NotifyPropertyChanged("MTU"); } }
-         }
 
+        /// <summary>
+        /// additional configuration
+        /// </summary>
+        public virtual Dictionary<string, string> other_config
+        {
+            get { return _other_config; }
+            set
+            {
+                if (!Helper.AreEqual(value, _other_config))
+                {
+                    _other_config = value;
+                    Changed = true;
+                    NotifyPropertyChanged("other_config");
+                }
+            }
+        }
         private Dictionary<string, string> _other_config;
-        public virtual Dictionary<string, string> other_config {
-             get { return _other_config; }
-             set { if (!Helper.AreEqual(value, _other_config)) { _other_config = value; Changed = true; NotifyPropertyChanged("other_config"); } }
-         }
 
+        /// <summary>
+        /// name of the bridge corresponding to this network on the local host
+        /// </summary>
+        public virtual string bridge
+        {
+            get { return _bridge; }
+            set
+            {
+                if (!Helper.AreEqual(value, _bridge))
+                {
+                    _bridge = value;
+                    Changed = true;
+                    NotifyPropertyChanged("bridge");
+                }
+            }
+        }
         private string _bridge;
-        public virtual string bridge {
-             get { return _bridge; }
-             set { if (!Helper.AreEqual(value, _bridge)) { _bridge = value; Changed = true; NotifyPropertyChanged("bridge"); } }
-         }
 
+        /// <summary>
+        /// Binary blobs associated with this network
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual Dictionary<string, XenRef<Blob>> blobs
+        {
+            get { return _blobs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _blobs))
+                {
+                    _blobs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("blobs");
+                }
+            }
+        }
         private Dictionary<string, XenRef<Blob>> _blobs;
-        public virtual Dictionary<string, XenRef<Blob>> blobs {
-             get { return _blobs; }
-             set { if (!Helper.AreEqual(value, _blobs)) { _blobs = value; Changed = true; NotifyPropertyChanged("blobs"); } }
-         }
 
+        /// <summary>
+        /// user-specified tags for categorization purposes
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual string[] tags
+        {
+            get { return _tags; }
+            set
+            {
+                if (!Helper.AreEqual(value, _tags))
+                {
+                    _tags = value;
+                    Changed = true;
+                    NotifyPropertyChanged("tags");
+                }
+            }
+        }
         private string[] _tags;
-        public virtual string[] tags {
-             get { return _tags; }
-             set { if (!Helper.AreEqual(value, _tags)) { _tags = value; Changed = true; NotifyPropertyChanged("tags"); } }
-         }
 
+        /// <summary>
+        /// The network will use this value to determine the behaviour of all VIFs where locking_mode = default
+        /// First published in XenServer 6.1.
+        /// </summary>
+        public virtual network_default_locking_mode default_locking_mode
+        {
+            get { return _default_locking_mode; }
+            set
+            {
+                if (!Helper.AreEqual(value, _default_locking_mode))
+                {
+                    _default_locking_mode = value;
+                    Changed = true;
+                    NotifyPropertyChanged("default_locking_mode");
+                }
+            }
+        }
         private network_default_locking_mode _default_locking_mode;
-        public virtual network_default_locking_mode default_locking_mode {
-             get { return _default_locking_mode; }
-             set { if (!Helper.AreEqual(value, _default_locking_mode)) { _default_locking_mode = value; Changed = true; NotifyPropertyChanged("default_locking_mode"); } }
-         }
-
-
     }
 }

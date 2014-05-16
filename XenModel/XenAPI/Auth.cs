@@ -38,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// Management of remote authentication services
+    /// First published in XenServer 5.5.
+    /// </summary>
     public partial class Auth : XenObject<Auth>
     {
         public Auth()
@@ -97,27 +101,47 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
-
+        /// <summary>
+        /// This call queries the external directory service to obtain the subject_identifier as a string from the human-readable subject_name
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_subject_name">The human-readable subject_name, such as a username or a groupname</param>
         public static string get_subject_identifier(Session session, string _subject_name)
         {
             return (string)session.proxy.auth_get_subject_identifier(session.uuid, (_subject_name != null) ? _subject_name : "").parse();
         }
 
+        /// <summary>
+        /// This call queries the external directory service to obtain the user information (e.g. username, organization etc) from the specified subject_identifier
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_subject_identifier">A string containing the subject_identifier, unique in the external directory service</param>
         public static Dictionary<string, string> get_subject_information_from_identifier(Session session, string _subject_identifier)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.auth_get_subject_information_from_identifier(session.uuid, (_subject_identifier != null) ? _subject_identifier : "").parse());
         }
 
+        /// <summary>
+        /// This calls queries the external directory service to obtain the transitively-closed set of groups that the the subject_identifier is member of.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_subject_identifier">A string containing the subject_identifier, unique in the external directory service</param>
         public static string[] get_group_membership(Session session, string _subject_identifier)
         {
             return (string [])session.proxy.auth_get_group_membership(session.uuid, (_subject_identifier != null) ? _subject_identifier : "").parse();
         }
 
+        /// <summary>
+        /// Get all the auth Records at once, in a single XML RPC call
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<Auth>, Auth> get_all_records(Session session)
         {
             return XenRef<Auth>.Create<Proxy_Auth>(session.proxy.auth_get_all_records(session.uuid).parse());
         }
-
-
     }
 }

@@ -38,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// A placeholder for a binary blob
+    /// First published in XenServer 5.0.
+    /// </summary>
     public partial class Blob : XenObject<Blob>
     {
         public Blob()
@@ -157,134 +161,331 @@ namespace XenAPI
                 return null;
             }
         }
-
+        /// <summary>
+        /// Get a record containing the current state of the given blob.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_blob">The opaque_ref of the given blob</param>
         public static Blob get_record(Session session, string _blob)
         {
             return new Blob((Proxy_Blob)session.proxy.blob_get_record(session.uuid, (_blob != null) ? _blob : "").parse());
         }
 
+        /// <summary>
+        /// Get a reference to the blob instance with the specified UUID.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Blob> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<Blob>.Create(session.proxy.blob_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
         }
 
+        /// <summary>
+        /// Get all the blob instances with the given label.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_label">label of object to return</param>
         public static List<XenRef<Blob>> get_by_name_label(Session session, string _label)
         {
             return XenRef<Blob>.Create(session.proxy.blob_get_by_name_label(session.uuid, (_label != null) ? _label : "").parse());
         }
 
+        /// <summary>
+        /// Get the uuid field of the given blob.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_blob">The opaque_ref of the given blob</param>
         public static string get_uuid(Session session, string _blob)
         {
             return (string)session.proxy.blob_get_uuid(session.uuid, (_blob != null) ? _blob : "").parse();
         }
 
+        /// <summary>
+        /// Get the name/label field of the given blob.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_blob">The opaque_ref of the given blob</param>
         public static string get_name_label(Session session, string _blob)
         {
             return (string)session.proxy.blob_get_name_label(session.uuid, (_blob != null) ? _blob : "").parse();
         }
 
+        /// <summary>
+        /// Get the name/description field of the given blob.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_blob">The opaque_ref of the given blob</param>
         public static string get_name_description(Session session, string _blob)
         {
             return (string)session.proxy.blob_get_name_description(session.uuid, (_blob != null) ? _blob : "").parse();
         }
 
+        /// <summary>
+        /// Get the size field of the given blob.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_blob">The opaque_ref of the given blob</param>
         public static long get_size(Session session, string _blob)
         {
             return long.Parse((string)session.proxy.blob_get_size(session.uuid, (_blob != null) ? _blob : "").parse());
         }
 
+        /// <summary>
+        /// Get the public field of the given blob.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_blob">The opaque_ref of the given blob</param>
         public static bool get_public(Session session, string _blob)
         {
             return (bool)session.proxy.blob_get_public(session.uuid, (_blob != null) ? _blob : "").parse();
         }
 
+        /// <summary>
+        /// Get the last_updated field of the given blob.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_blob">The opaque_ref of the given blob</param>
         public static DateTime get_last_updated(Session session, string _blob)
         {
             return session.proxy.blob_get_last_updated(session.uuid, (_blob != null) ? _blob : "").parse();
         }
 
+        /// <summary>
+        /// Get the mime_type field of the given blob.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_blob">The opaque_ref of the given blob</param>
         public static string get_mime_type(Session session, string _blob)
         {
             return (string)session.proxy.blob_get_mime_type(session.uuid, (_blob != null) ? _blob : "").parse();
         }
 
+        /// <summary>
+        /// Set the name/label field of the given blob.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_blob">The opaque_ref of the given blob</param>
+        /// <param name="_label">New value to set</param>
         public static void set_name_label(Session session, string _blob, string _label)
         {
             session.proxy.blob_set_name_label(session.uuid, (_blob != null) ? _blob : "", (_label != null) ? _label : "").parse();
         }
 
+        /// <summary>
+        /// Set the name/description field of the given blob.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_blob">The opaque_ref of the given blob</param>
+        /// <param name="_description">New value to set</param>
         public static void set_name_description(Session session, string _blob, string _description)
         {
             session.proxy.blob_set_name_description(session.uuid, (_blob != null) ? _blob : "", (_description != null) ? _description : "").parse();
         }
 
+        /// <summary>
+        /// Set the public field of the given blob.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_blob">The opaque_ref of the given blob</param>
+        /// <param name="_public">New value to set</param>
         public static void set_public(Session session, string _blob, bool _public)
         {
             session.proxy.blob_set_public(session.uuid, (_blob != null) ? _blob : "", _public).parse();
         }
 
+        /// <summary>
+        /// Create a placeholder for a binary blob
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_mime_type">The mime-type of the blob. Defaults to 'application/octet-stream' if the empty string is supplied</param>
+        public static XenRef<Blob> create(Session session, string _mime_type)
+        {
+            return XenRef<Blob>.Create(session.proxy.blob_create(session.uuid, (_mime_type != null) ? _mime_type : "").parse());
+        }
+
+        /// <summary>
+        /// Create a placeholder for a binary blob
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_mime_type">The mime-type of the blob. Defaults to 'application/octet-stream' if the empty string is supplied</param>
+        /// <param name="_public">True if the blob should be publicly available First published in XenServer 6.1.</param>
         public static XenRef<Blob> create(Session session, string _mime_type, bool _public)
         {
             return XenRef<Blob>.Create(session.proxy.blob_create(session.uuid, (_mime_type != null) ? _mime_type : "", _public).parse());
         }
 
-        public static void destroy(Session session, string _self)
+        /// <summary>
+        /// 
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_blob">The opaque_ref of the given blob</param>
+        public static void destroy(Session session, string _blob)
         {
-            session.proxy.blob_destroy(session.uuid, (_self != null) ? _self : "").parse();
+            session.proxy.blob_destroy(session.uuid, (_blob != null) ? _blob : "").parse();
         }
 
+        /// <summary>
+        /// Return a list of all the blobs known to the system.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static List<XenRef<Blob>> get_all(Session session)
         {
             return XenRef<Blob>.Create(session.proxy.blob_get_all(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Get all the blob Records at once, in a single XML RPC call
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<Blob>, Blob> get_all_records(Session session)
         {
             return XenRef<Blob>.Create<Proxy_Blob>(session.proxy.blob_get_all_records(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Unique identifier/object reference
+        /// </summary>
+        public virtual string uuid
+        {
+            get { return _uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _uuid))
+                {
+                    _uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("uuid");
+                }
+            }
+        }
         private string _uuid;
-        public virtual string uuid {
-             get { return _uuid; }
-             set { if (!Helper.AreEqual(value, _uuid)) { _uuid = value; Changed = true; NotifyPropertyChanged("uuid"); } }
-         }
 
+        /// <summary>
+        /// a human-readable name
+        /// </summary>
+        public virtual string name_label
+        {
+            get { return _name_label; }
+            set
+            {
+                if (!Helper.AreEqual(value, _name_label))
+                {
+                    _name_label = value;
+                    Changed = true;
+                    NotifyPropertyChanged("name_label");
+                }
+            }
+        }
         private string _name_label;
-        public virtual string name_label {
-             get { return _name_label; }
-             set { if (!Helper.AreEqual(value, _name_label)) { _name_label = value; Changed = true; NotifyPropertyChanged("name_label"); } }
-         }
 
+        /// <summary>
+        /// a notes field containing human-readable description
+        /// </summary>
+        public virtual string name_description
+        {
+            get { return _name_description; }
+            set
+            {
+                if (!Helper.AreEqual(value, _name_description))
+                {
+                    _name_description = value;
+                    Changed = true;
+                    NotifyPropertyChanged("name_description");
+                }
+            }
+        }
         private string _name_description;
-        public virtual string name_description {
-             get { return _name_description; }
-             set { if (!Helper.AreEqual(value, _name_description)) { _name_description = value; Changed = true; NotifyPropertyChanged("name_description"); } }
-         }
 
+        /// <summary>
+        /// Size of the binary data, in bytes
+        /// </summary>
+        public virtual long size
+        {
+            get { return _size; }
+            set
+            {
+                if (!Helper.AreEqual(value, _size))
+                {
+                    _size = value;
+                    Changed = true;
+                    NotifyPropertyChanged("size");
+                }
+            }
+        }
         private long _size;
-        public virtual long size {
-             get { return _size; }
-             set { if (!Helper.AreEqual(value, _size)) { _size = value; Changed = true; NotifyPropertyChanged("size"); } }
-         }
 
+        /// <summary>
+        /// True if the blob is publicly accessible
+        /// First published in XenServer 6.1.
+        /// </summary>
+        public virtual bool pubblic
+        {
+            get { return _pubblic; }
+            set
+            {
+                if (!Helper.AreEqual(value, _pubblic))
+                {
+                    _pubblic = value;
+                    Changed = true;
+                    NotifyPropertyChanged("pubblic");
+                }
+            }
+        }
         private bool _pubblic;
-        public virtual bool pubblic {
-             get { return _pubblic; }
-             set { if (!Helper.AreEqual(value, _pubblic)) { _pubblic = value; Changed = true; NotifyPropertyChanged("pubblic"); } }
-         }
 
+        /// <summary>
+        /// Time at which the data in the blob was last updated
+        /// </summary>
+        public virtual DateTime last_updated
+        {
+            get { return _last_updated; }
+            set
+            {
+                if (!Helper.AreEqual(value, _last_updated))
+                {
+                    _last_updated = value;
+                    Changed = true;
+                    NotifyPropertyChanged("last_updated");
+                }
+            }
+        }
         private DateTime _last_updated;
-        public virtual DateTime last_updated {
-             get { return _last_updated; }
-             set { if (!Helper.AreEqual(value, _last_updated)) { _last_updated = value; Changed = true; NotifyPropertyChanged("last_updated"); } }
-         }
 
+        /// <summary>
+        /// The mime type associated with this object. Defaults to 'application/octet-stream' if the empty string is supplied
+        /// </summary>
+        public virtual string mime_type
+        {
+            get { return _mime_type; }
+            set
+            {
+                if (!Helper.AreEqual(value, _mime_type))
+                {
+                    _mime_type = value;
+                    Changed = true;
+                    NotifyPropertyChanged("mime_type");
+                }
+            }
+        }
         private string _mime_type;
-        public virtual string mime_type {
-             get { return _mime_type; }
-             set { if (!Helper.AreEqual(value, _mime_type)) { _mime_type = value; Changed = true; NotifyPropertyChanged("mime_type"); } }
-         }
-
-
     }
 }

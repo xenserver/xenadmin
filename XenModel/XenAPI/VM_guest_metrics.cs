@@ -38,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// The metrics reported by the guest (as opposed to inferred from outside)
+    /// First published in XenServer 4.0.
+    /// </summary>
     public partial class VM_guest_metrics : XenObject<VM_guest_metrics>
     {
         public VM_guest_metrics()
@@ -181,163 +185,404 @@ namespace XenAPI
                 return null;
             }
         }
-
+        /// <summary>
+        /// Get a record containing the current state of the given VM_guest_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static VM_guest_metrics get_record(Session session, string _vm_guest_metrics)
         {
             return new VM_guest_metrics((Proxy_VM_guest_metrics)session.proxy.vm_guest_metrics_get_record(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Get a reference to the VM_guest_metrics instance with the specified UUID.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<VM_guest_metrics> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<VM_guest_metrics>.Create(session.proxy.vm_guest_metrics_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
         }
 
+        /// <summary>
+        /// Get the uuid field of the given VM_guest_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static string get_uuid(Session session, string _vm_guest_metrics)
         {
             return (string)session.proxy.vm_guest_metrics_get_uuid(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse();
         }
 
+        /// <summary>
+        /// Get the os_version field of the given VM_guest_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static Dictionary<string, string> get_os_version(Session session, string _vm_guest_metrics)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_os_version(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Get the PV_drivers_version field of the given VM_guest_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static Dictionary<string, string> get_PV_drivers_version(Session session, string _vm_guest_metrics)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_pv_drivers_version(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Get the PV_drivers_up_to_date field of the given VM_guest_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static bool get_PV_drivers_up_to_date(Session session, string _vm_guest_metrics)
         {
             return (bool)session.proxy.vm_guest_metrics_get_pv_drivers_up_to_date(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse();
         }
 
+        /// <summary>
+        /// Get the memory field of the given VM_guest_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static Dictionary<string, string> get_memory(Session session, string _vm_guest_metrics)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_memory(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Get the disks field of the given VM_guest_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static Dictionary<string, string> get_disks(Session session, string _vm_guest_metrics)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_disks(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Get the networks field of the given VM_guest_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static Dictionary<string, string> get_networks(Session session, string _vm_guest_metrics)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_networks(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Get the other field of the given VM_guest_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static Dictionary<string, string> get_other(Session session, string _vm_guest_metrics)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_other(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Get the last_updated field of the given VM_guest_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static DateTime get_last_updated(Session session, string _vm_guest_metrics)
         {
             return session.proxy.vm_guest_metrics_get_last_updated(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse();
         }
 
+        /// <summary>
+        /// Get the other_config field of the given VM_guest_metrics.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static Dictionary<string, string> get_other_config(Session session, string _vm_guest_metrics)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_other_config(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Get the live field of the given VM_guest_metrics.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static bool get_live(Session session, string _vm_guest_metrics)
         {
             return (bool)session.proxy.vm_guest_metrics_get_live(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse();
         }
 
+        /// <summary>
+        /// Set the other_config field of the given VM_guest_metrics.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
+        /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _vm_guest_metrics, Dictionary<string, string> _other_config)
         {
             session.proxy.vm_guest_metrics_set_other_config(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the other_config field of the given VM_guest_metrics.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _vm_guest_metrics, string _key, string _value)
         {
             session.proxy.vm_guest_metrics_add_to_other_config(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the other_config field of the given VM_guest_metrics.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _vm_guest_metrics, string _key)
         {
             session.proxy.vm_guest_metrics_remove_from_other_config(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Return a list of all the VM_guest_metrics instances known to the system.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static List<XenRef<VM_guest_metrics>> get_all(Session session)
         {
             return XenRef<VM_guest_metrics>.Create(session.proxy.vm_guest_metrics_get_all(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Get all the VM_guest_metrics Records at once, in a single XML RPC call
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<VM_guest_metrics>, VM_guest_metrics> get_all_records(Session session)
         {
             return XenRef<VM_guest_metrics>.Create<Proxy_VM_guest_metrics>(session.proxy.vm_guest_metrics_get_all_records(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Unique identifier/object reference
+        /// </summary>
+        public virtual string uuid
+        {
+            get { return _uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _uuid))
+                {
+                    _uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("uuid");
+                }
+            }
+        }
         private string _uuid;
-        public virtual string uuid {
-             get { return _uuid; }
-             set { if (!Helper.AreEqual(value, _uuid)) { _uuid = value; Changed = true; NotifyPropertyChanged("uuid"); } }
-         }
 
+        /// <summary>
+        /// version of the OS
+        /// </summary>
+        public virtual Dictionary<string, string> os_version
+        {
+            get { return _os_version; }
+            set
+            {
+                if (!Helper.AreEqual(value, _os_version))
+                {
+                    _os_version = value;
+                    Changed = true;
+                    NotifyPropertyChanged("os_version");
+                }
+            }
+        }
         private Dictionary<string, string> _os_version;
-        public virtual Dictionary<string, string> os_version {
-             get { return _os_version; }
-             set { if (!Helper.AreEqual(value, _os_version)) { _os_version = value; Changed = true; NotifyPropertyChanged("os_version"); } }
-         }
 
+        /// <summary>
+        /// version of the PV drivers
+        /// </summary>
+        public virtual Dictionary<string, string> PV_drivers_version
+        {
+            get { return _PV_drivers_version; }
+            set
+            {
+                if (!Helper.AreEqual(value, _PV_drivers_version))
+                {
+                    _PV_drivers_version = value;
+                    Changed = true;
+                    NotifyPropertyChanged("PV_drivers_version");
+                }
+            }
+        }
         private Dictionary<string, string> _PV_drivers_version;
-        public virtual Dictionary<string, string> PV_drivers_version {
-             get { return _PV_drivers_version; }
-             set { if (!Helper.AreEqual(value, _PV_drivers_version)) { _PV_drivers_version = value; Changed = true; NotifyPropertyChanged("PV_drivers_version"); } }
-         }
 
+        /// <summary>
+        /// true if the PV drivers appear to be up to date
+        /// </summary>
+        public virtual bool PV_drivers_up_to_date
+        {
+            get { return _PV_drivers_up_to_date; }
+            set
+            {
+                if (!Helper.AreEqual(value, _PV_drivers_up_to_date))
+                {
+                    _PV_drivers_up_to_date = value;
+                    Changed = true;
+                    NotifyPropertyChanged("PV_drivers_up_to_date");
+                }
+            }
+        }
         private bool _PV_drivers_up_to_date;
-        public virtual bool PV_drivers_up_to_date {
-             get { return _PV_drivers_up_to_date; }
-             set { if (!Helper.AreEqual(value, _PV_drivers_up_to_date)) { _PV_drivers_up_to_date = value; Changed = true; NotifyPropertyChanged("PV_drivers_up_to_date"); } }
-         }
 
+        /// <summary>
+        /// free/used/total memory
+        /// </summary>
+        public virtual Dictionary<string, string> memory
+        {
+            get { return _memory; }
+            set
+            {
+                if (!Helper.AreEqual(value, _memory))
+                {
+                    _memory = value;
+                    Changed = true;
+                    NotifyPropertyChanged("memory");
+                }
+            }
+        }
         private Dictionary<string, string> _memory;
-        public virtual Dictionary<string, string> memory {
-             get { return _memory; }
-             set { if (!Helper.AreEqual(value, _memory)) { _memory = value; Changed = true; NotifyPropertyChanged("memory"); } }
-         }
 
+        /// <summary>
+        /// disk configuration/free space
+        /// </summary>
+        public virtual Dictionary<string, string> disks
+        {
+            get { return _disks; }
+            set
+            {
+                if (!Helper.AreEqual(value, _disks))
+                {
+                    _disks = value;
+                    Changed = true;
+                    NotifyPropertyChanged("disks");
+                }
+            }
+        }
         private Dictionary<string, string> _disks;
-        public virtual Dictionary<string, string> disks {
-             get { return _disks; }
-             set { if (!Helper.AreEqual(value, _disks)) { _disks = value; Changed = true; NotifyPropertyChanged("disks"); } }
-         }
 
+        /// <summary>
+        /// network configuration
+        /// </summary>
+        public virtual Dictionary<string, string> networks
+        {
+            get { return _networks; }
+            set
+            {
+                if (!Helper.AreEqual(value, _networks))
+                {
+                    _networks = value;
+                    Changed = true;
+                    NotifyPropertyChanged("networks");
+                }
+            }
+        }
         private Dictionary<string, string> _networks;
-        public virtual Dictionary<string, string> networks {
-             get { return _networks; }
-             set { if (!Helper.AreEqual(value, _networks)) { _networks = value; Changed = true; NotifyPropertyChanged("networks"); } }
-         }
 
+        /// <summary>
+        /// anything else
+        /// </summary>
+        public virtual Dictionary<string, string> other
+        {
+            get { return _other; }
+            set
+            {
+                if (!Helper.AreEqual(value, _other))
+                {
+                    _other = value;
+                    Changed = true;
+                    NotifyPropertyChanged("other");
+                }
+            }
+        }
         private Dictionary<string, string> _other;
-        public virtual Dictionary<string, string> other {
-             get { return _other; }
-             set { if (!Helper.AreEqual(value, _other)) { _other = value; Changed = true; NotifyPropertyChanged("other"); } }
-         }
 
+        /// <summary>
+        /// Time at which this information was last updated
+        /// </summary>
+        public virtual DateTime last_updated
+        {
+            get { return _last_updated; }
+            set
+            {
+                if (!Helper.AreEqual(value, _last_updated))
+                {
+                    _last_updated = value;
+                    Changed = true;
+                    NotifyPropertyChanged("last_updated");
+                }
+            }
+        }
         private DateTime _last_updated;
-        public virtual DateTime last_updated {
-             get { return _last_updated; }
-             set { if (!Helper.AreEqual(value, _last_updated)) { _last_updated = value; Changed = true; NotifyPropertyChanged("last_updated"); } }
-         }
 
+        /// <summary>
+        /// additional configuration
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual Dictionary<string, string> other_config
+        {
+            get { return _other_config; }
+            set
+            {
+                if (!Helper.AreEqual(value, _other_config))
+                {
+                    _other_config = value;
+                    Changed = true;
+                    NotifyPropertyChanged("other_config");
+                }
+            }
+        }
         private Dictionary<string, string> _other_config;
-        public virtual Dictionary<string, string> other_config {
-             get { return _other_config; }
-             set { if (!Helper.AreEqual(value, _other_config)) { _other_config = value; Changed = true; NotifyPropertyChanged("other_config"); } }
-         }
 
+        /// <summary>
+        /// True if the guest is sending heartbeat messages via the guest agent
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual bool live
+        {
+            get { return _live; }
+            set
+            {
+                if (!Helper.AreEqual(value, _live))
+                {
+                    _live = value;
+                    Changed = true;
+                    NotifyPropertyChanged("live");
+                }
+            }
+        }
         private bool _live;
-        public virtual bool live {
-             get { return _live; }
-             set { if (!Helper.AreEqual(value, _live)) { _live = value; Changed = true; NotifyPropertyChanged("live"); } }
-         }
-
-
     }
 }
