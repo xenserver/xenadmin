@@ -9425,7 +9425,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Destroying pool &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Making pool &apos;{0}&apos; into standalone server.
         /// </summary>
         public static string DESTROYING_POOL {
             get {
@@ -18361,20 +18361,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Delete Pool....
+        ///   Looks up a localized string similar to Mak&amp;e into standalone server.
         /// </summary>
         public static string MAINWINDOW_DELETE_POOL {
             get {
                 return ResourceManager.GetString("MAINWINDOW_DELETE_POOL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete &amp;Pool....
-        /// </summary>
-        public static string MAINWINDOW_DELETE_POOL_CONTEXT_MENU {
-            get {
-                return ResourceManager.GetString("MAINWINDOW_DELETE_POOL_CONTEXT_MENU", resourceCulture);
             }
         }
         
@@ -24805,7 +24796,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Destroyed pool.
+        ///   Looks up a localized string similar to Made pool into standalone server.
         /// </summary>
         public static string POOLCREATE_DESTROYED {
             get {
@@ -24814,7 +24805,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Destroying pool.
+        ///   Looks up a localized string similar to Making pool into standalone server.
         /// </summary>
         public static string POOLCREATE_DESTROYING {
             get {

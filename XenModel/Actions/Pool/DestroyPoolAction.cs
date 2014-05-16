@@ -29,6 +29,8 @@
  * SUCH DAMAGE.
  */
 
+using System;
+
 namespace XenAdmin.Actions
 {
     public class DestroyPoolAction: PureAsyncAction
@@ -36,7 +38,6 @@ namespace XenAdmin.Actions
         public DestroyPoolAction(XenAPI.Pool pool)
             : base(pool.Connection, string.Format(Messages.DESTROYING_POOL, pool.Name))
         {
-
             System.Diagnostics.Trace.Assert(pool != null);
             Pool = pool;
             this.Description = Messages.WAITING;
@@ -46,21 +47,8 @@ namespace XenAdmin.Actions
         {
 
             this.Description = Messages.POOLCREATE_DESTROYING;
-            int n = Connection.Cache.HostCount;
-            string master = Pool.master;
-            double p = 100.0 / n;  // We have n - 1 to eject, and then 1 to rename.
-            int i = 0;
-            foreach (XenAPI.Host host in Connection.Cache.Hosts)
-            {
-                if (host.opaque_ref != master)
-                {
-                    int lo = (int)(i * p);
-                    int hi = (int)((i + 1) * p);
-                    RelatedTask = XenAPI.Pool.async_eject(Session, host.opaque_ref);
-                    PollToCompletion(lo, hi);
-                    i++;
-                }
-            }
+            if (Connection.Cache.HostCount != 1)
+                throw new Exception("Cannot destroy a pool of more than one host");  // We should not have any UI to reach here, and must not be allowed to proceed
             XenAPI.Pool.set_name_label(Session, Pool.opaque_ref, "");
             XenAPI.Pool.set_name_description(Session, Pool.opaque_ref, "");
             this.Description = Messages.POOLCREATE_DESTROYED;

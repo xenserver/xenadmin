@@ -74,12 +74,9 @@ namespace XenAdmin.Commands
                 return;
             }
 
-            if (ShowConfirmationDialog())
+            if (conn.IsConnected)
             {
-                if (conn.IsConnected)
-                {
-                    new DestroyPoolAction(pool).RunAsync();
-                }
+                new DestroyPoolAction(pool).RunAsync();
             }
         }
 
@@ -101,24 +98,6 @@ namespace XenAdmin.Commands
             get
             {
                 return Messages.MAINWINDOW_DELETE_POOL;
-            }
-        }
-
-        protected override string ConfirmationDialogText
-        {
-            get
-            {
-                SelectedItemCollection selection = GetSelection();
-                Pool pool = (Pool)selection[0].PoolAncestor;
-                return string.Format(Messages.MESSAGEBOX_POOL_DELETE, pool.Name);
-            }
-        }
-
-        public override string ContextMenuText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_DELETE_POOL_CONTEXT_MENU;
             }
         }
     }
