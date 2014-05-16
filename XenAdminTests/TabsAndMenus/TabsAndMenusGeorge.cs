@@ -341,9 +341,6 @@ namespace XenAdminTests.TabsAndMenus
                                    new ExpectedTextMenuItem("&Disconnect", true),
                                    new ExpectedTextMenuItem("Reconnec&t As...", true),
                                    new ExpectedSeparator(),
-                                   new ExpectedTextMenuItem("Delete &Pool...",
-                                                            pool.Connection.Cache.Hosts.Length > 1 ? false : true),
-                                   new ExpectedSeparator(),
                                    new ExpectedTextMenuItem("E&xpand All", true),
                                    new ExpectedTextMenuItem("P&roperties", true)
                                });
