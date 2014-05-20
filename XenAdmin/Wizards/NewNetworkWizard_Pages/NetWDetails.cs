@@ -76,6 +76,8 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
         {
             PopulateHostNicList(Host, Connection);
             UpdateEnablement(SelectedNetworkType == NetworkTypes.External, Host);
+            //set minimum value for VLAN
+            numericUpDownVLAN.Minimum = Helpers.VLAN0Allowed(Connection) ? 0 : 1; 
         }
 
         private int CurrentVLANValue
@@ -198,7 +200,10 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             //CA-72484: check whether the currently selected VLAN is available and keep it
             int curVlan = CurrentVLANValue;
             if (!vlans.Contains(curVlan))
+            {
+                SetError(null);
                 return;
+            }
 
             int avail_vlan = GetFirstAvailableVLAN(vlans);
 
@@ -225,7 +230,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             labelVlanError.Visible = visible;
             if (visible)
                 labelVlanError.Text = error;
-            
+            labelVLAN0Info.Visible = !visible && numericUpDownVLAN.Value == 0;
             if (updatePage)
                 OnPageUpdated();
         }
