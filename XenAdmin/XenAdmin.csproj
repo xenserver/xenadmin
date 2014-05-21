@@ -192,6 +192,9 @@
     <Compile Include="Controls\UpsellPage.designer.cs">
       <DependentUpon>UpsellPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Diagnostics\Checks\AssertCanEvacuateCheck.cs" />
+    <Compile Include="Diagnostics\Checks\HostHasUnsupportedStorageLinkSRCheck.cs" />
+    <Compile Include="Diagnostics\Problems\SRProblem\UnsupportedStorageLinkSrIsPresentProblem.cs" />
     <Compile Include="Dialogs\ExportVMDialog.cs">
     </Compile>
     <Compile Include="Dialogs\ResolvingSubjectsDialog.cs">
@@ -1117,7 +1120,6 @@
       <DependentUpon>HAWizard.cs</DependentUpon>
     </Compile>
     <Compile Include="Diagnostics\Problems\SRProblem\BrokenSR.cs" />
-    <Compile Include="Diagnostics\Checks\AssertCanEvacuateCheck.cs" />
     <Compile Include="Diagnostics\Checks\Check.cs" />
     <Compile Include="Diagnostics\Checks\HostLivenessCheck.cs" />
     <Compile Include="Diagnostics\Checks\PatchPrecheckCheck.cs" />
@@ -2438,7 +2440,6 @@
       <DependentUpon>SectionHeaderLabel.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\ExtensionMethods.cs" />
-    <Compile Include="Diagnostics\Checks\AssertCanEvacuateUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\DR\AssertCanBeRecoveredCheck.cs" />
     <Compile Include="Diagnostics\Checks\DR\DrHAEnabledCheck.cs" />
     <Compile Include="Diagnostics\Checks\DR\ExistingVmApplianceCheck.cs" />
@@ -2456,7 +2457,6 @@
     <Compile Include="Diagnostics\Problems\VmApplianceProblem\RunningVmApplianceProblem.cs" />
     <Compile Include="Diagnostics\Problems\VmApplianceProblem\VmApplianceProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\ExistingVmProblem.cs" />
-    <Compile Include="Diagnostics\Problems\VMProblem\IsInStorageLinkLegacySR.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\MissingSRProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\RunningVMProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\ExistingVmWarning.cs" />

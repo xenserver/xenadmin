@@ -6069,6 +6069,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking StorageLink status.
+        /// </summary>
+        public static string CHECKING_STORAGELINK_STATUS {
+            get {
+                return ResourceManager.GetString("CHECKING_STORAGELINK_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking upgrade hotfix status.
         /// </summary>
         public static string CHECKING_UPGRADE_HOTFIX_STATUS {
@@ -24967,6 +24976,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unsupported StorageLink SR is present..
+        /// </summary>
+        public static string PROBLEM_UNSUPPORTED_STORAGELINK_SR {
+            get {
+                return ResourceManager.GetString("PROBLEM_UNSUPPORTED_STORAGELINK_SR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove StorageLink SR before upgrading..
+        /// </summary>
+        public static string PROBLEM_UNSUPPORTED_STORAGELINK_SR_HELP {
+            get {
+                return ResourceManager.GetString("PROBLEM_UNSUPPORTED_STORAGELINK_SR_HELP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to vApp {0}.
         /// </summary>
         public static string PROBLEM_VMAPPLIANCEPROBLEM_TITLE {
@@ -28954,6 +28981,15 @@ namespace XenAdmin {
         public static string STORAGELINK_UNABLE_TO_CONNECT {
             get {
                 return ResourceManager.GetString("STORAGELINK_UNABLE_TO_CONNECT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StorageLink SR status.
+        /// </summary>
+        public static string STORAGELINK_UPGRADE_TEST {
+            get {
+                return ResourceManager.GetString("STORAGELINK_UPGRADE_TEST", resourceCulture);
             }
         }
         
