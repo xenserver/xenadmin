@@ -34,16 +34,19 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.labelNIC = new System.Windows.Forms.Label();
             this.labelVLAN = new System.Windows.Forms.Label();
             this.lblNicHelp = new System.Windows.Forms.Label();
-            this.labelVlanError = new System.Windows.Forms.Label();
             this.numericUpDownVLAN = new System.Windows.Forms.NumericUpDown();
             this.comboBoxNICList = new System.Windows.Forms.ComboBox();
             this.checkBoxAutomatic = new System.Windows.Forms.CheckBox();
             this.labelMTU = new System.Windows.Forms.Label();
             this.numericUpDownMTU = new System.Windows.Forms.NumericUpDown();
+            this.panelVLANInfo = new System.Windows.Forms.Panel();
+            this.labelVlanError = new System.Windows.Forms.Label();
+            this.labelVLAN0Info = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownVLAN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMTU)).BeginInit();
+            this.panelVLANInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -59,12 +62,12 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.tableLayoutPanel1.Controls.Add(this.labelNIC, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.labelVLAN, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.lblNicHelp, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelVlanError, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.numericUpDownVLAN, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxNICList, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.checkBoxAutomatic, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.labelMTU, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.numericUpDownMTU, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.panelVLANInfo, 2, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // labelNIC
@@ -82,13 +85,6 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             resources.ApplyResources(this.lblNicHelp, "lblNicHelp");
             this.tableLayoutPanel1.SetColumnSpan(this.lblNicHelp, 4);
             this.lblNicHelp.Name = "lblNicHelp";
-            // 
-            // labelVlanError
-            // 
-            resources.ApplyResources(this.labelVlanError, "labelVlanError");
-            this.tableLayoutPanel1.SetColumnSpan(this.labelVlanError, 2);
-            this.labelVlanError.ForeColor = System.Drawing.Color.Red;
-            this.labelVlanError.Name = "labelVlanError";
             // 
             // numericUpDownVLAN
             // 
@@ -139,6 +135,26 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             resources.ApplyResources(this.numericUpDownMTU, "numericUpDownMTU");
             this.numericUpDownMTU.Name = "numericUpDownMTU";
             // 
+            // panelVLANInfo
+            // 
+            resources.ApplyResources(this.panelVLANInfo, "panelVLANInfo");
+            this.tableLayoutPanel1.SetColumnSpan(this.panelVLANInfo, 2);
+            this.panelVLANInfo.Controls.Add(this.labelVlanError);
+            this.panelVLANInfo.Controls.Add(this.labelVLAN0Info);
+            this.panelVLANInfo.Name = "panelVLANInfo";
+            // 
+            // labelVlanError
+            // 
+            resources.ApplyResources(this.labelVlanError, "labelVlanError");
+            this.labelVlanError.ForeColor = System.Drawing.Color.Red;
+            this.labelVlanError.Name = "labelVlanError";
+            // 
+            // labelVLAN0Info
+            // 
+            resources.ApplyResources(this.labelVLAN0Info, "labelVLAN0Info");
+            this.labelVLAN0Info.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.labelVLAN0Info.Name = "labelVLAN0Info";
+            // 
             // NetWDetails
             // 
             resources.ApplyResources(this, "$this");
@@ -151,6 +167,8 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownVLAN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMTU)).EndInit();
+            this.panelVLANInfo.ResumeLayout(false);
+            this.panelVLANInfo.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -168,5 +186,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
         private System.Windows.Forms.Label labelVlanError;
         private System.Windows.Forms.Label labelMTU;
         private System.Windows.Forms.NumericUpDown numericUpDownMTU;
+        private System.Windows.Forms.Panel panelVLANInfo;
+        private System.Windows.Forms.Label labelVLAN0Info;
     }
 }

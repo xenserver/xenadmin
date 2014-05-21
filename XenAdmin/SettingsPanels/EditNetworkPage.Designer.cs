@@ -36,6 +36,7 @@ namespace XenAdmin.SettingsPanels
             this.numUpDownVLAN = new System.Windows.Forms.NumericUpDown();
             this.nicHelpLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelVLAN0Info = new System.Windows.Forms.Label();
             this.panelLACPWarning = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -77,12 +78,12 @@ namespace XenAdmin.SettingsPanels
             // autoCheckBox
             // 
             resources.ApplyResources(this.autoCheckBox, "autoCheckBox");
-            this.tableLayoutPanel1.SetColumnSpan(this.autoCheckBox, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.autoCheckBox, 4);
             this.autoCheckBox.Name = "autoCheckBox";
             // 
             // HostPNICList
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.HostPNICList, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.HostPNICList, 3);
             this.HostPNICList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.HostPNICList, "HostPNICList");
             this.HostPNICList.FormattingEnabled = true;
@@ -114,13 +115,14 @@ namespace XenAdmin.SettingsPanels
             // nicHelpLabel
             // 
             resources.ApplyResources(this.nicHelpLabel, "nicHelpLabel");
-            this.tableLayoutPanel1.SetColumnSpan(this.nicHelpLabel, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.nicHelpLabel, 3);
             this.nicHelpLabel.ForeColor = System.Drawing.SystemColors.GrayText;
             this.nicHelpLabel.Name = "nicHelpLabel";
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.labelVLAN0Info, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.panelLACPWarning, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.labelBlurb, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.numUpDownVLAN, 1, 3);
@@ -137,10 +139,16 @@ namespace XenAdmin.SettingsPanels
             this.tableLayoutPanel1.Controls.Add(this.groupBoxBondMode, 0, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
+            // labelVLAN0Info
+            // 
+            resources.ApplyResources(this.labelVLAN0Info, "labelVLAN0Info");
+            this.tableLayoutPanel1.SetColumnSpan(this.labelVLAN0Info, 2);
+            this.labelVLAN0Info.Name = "labelVLAN0Info";
+            // 
             // panelLACPWarning
             // 
             resources.ApplyResources(this.panelLACPWarning, "panelLACPWarning");
-            this.tableLayoutPanel1.SetColumnSpan(this.panelLACPWarning, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.panelLACPWarning, 4);
             this.panelLACPWarning.Controls.Add(this.label2);
             this.panelLACPWarning.Controls.Add(this.pictureBox2);
             this.panelLACPWarning.Name = "panelLACPWarning";
@@ -160,12 +168,12 @@ namespace XenAdmin.SettingsPanels
             // labelBlurb
             // 
             resources.ApplyResources(this.labelBlurb, "labelBlurb");
-            this.tableLayoutPanel1.SetColumnSpan(this.labelBlurb, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.labelBlurb, 4);
             this.labelBlurb.Name = "labelBlurb";
             // 
             // panelDisruptionWarning
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.panelDisruptionWarning, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.panelDisruptionWarning, 4);
             this.panelDisruptionWarning.Controls.Add(this.label1);
             this.panelDisruptionWarning.Controls.Add(this.pictureBox1);
             resources.ApplyResources(this.panelDisruptionWarning, "panelDisruptionWarning");
@@ -197,19 +205,19 @@ namespace XenAdmin.SettingsPanels
             // warningText
             // 
             resources.ApplyResources(this.warningText, "warningText");
-            this.tableLayoutPanel1.SetColumnSpan(this.warningText, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.warningText, 4);
             this.warningText.Name = "warningText";
             // 
             // labelCannotConfigureMTU
             // 
             resources.ApplyResources(this.labelCannotConfigureMTU, "labelCannotConfigureMTU");
-            this.tableLayoutPanel1.SetColumnSpan(this.labelCannotConfigureMTU, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.labelCannotConfigureMTU, 4);
             this.labelCannotConfigureMTU.Name = "labelCannotConfigureMTU";
             // 
             // groupBoxBondMode
             // 
             resources.ApplyResources(this.groupBoxBondMode, "groupBoxBondMode");
-            this.tableLayoutPanel1.SetColumnSpan(this.groupBoxBondMode, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.groupBoxBondMode, 3);
             this.groupBoxBondMode.Controls.Add(this.tableLayoutPanelBondMode);
             this.groupBoxBondMode.Name = "groupBoxBondMode";
             this.groupBoxBondMode.TabStop = false;
@@ -221,7 +229,6 @@ namespace XenAdmin.SettingsPanels
             this.tableLayoutPanelBondMode.Controls.Add(this.radioButtonBalanceSlb, 0, 0);
             this.tableLayoutPanelBondMode.Controls.Add(this.radioButtonActiveBackup, 0, 1);
             this.tableLayoutPanelBondMode.Controls.Add(this.radioButtonLacpSrcMac, 0, 3);
-            this.tableLayoutPanelBondMode.MinimumSize = new System.Drawing.Size(0, 40);
             this.tableLayoutPanelBondMode.Name = "tableLayoutPanelBondMode";
             // 
             // radioButtonLacpTcpudpPorts
@@ -306,6 +313,7 @@ namespace XenAdmin.SettingsPanels
         private System.Windows.Forms.Panel panelLACPWarning;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label labelVLAN0Info;
 
     }
 }

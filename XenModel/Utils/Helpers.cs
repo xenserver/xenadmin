@@ -1911,5 +1911,15 @@ namespace XenAdmin.Core
        {
            return connection != null && connection.Cache.GPU_groups.Any(g => g.PGPUs.Count > 0 && g.supported_VGPU_types.Count > 0);
        }
+
+       /// <summary>
+       /// Whether creation of VLAN 0 is allowed.
+       /// </summary>
+       public static bool VLAN0Allowed(IXenConnection connection)
+       {
+           Host master = GetMaster(connection);
+           // For Creedence or later on the vSwitch backend, we allow creation of VLAN 0
+           return master != null && CreedenceOrGreater(master) && master.vSwitchNetworkBackend;
+       }
     }
 }
