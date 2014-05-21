@@ -163,14 +163,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 checkGroup.Add(new HAOffCheck(host));
             }
 
-            //Checking can evacuate host
-            checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_CANEVACUATE_STATUS, new List<Check>()));
-            checkGroup = checks[checks.Count - 1].Value;
-            foreach (Host host in SelectedServers)
-            {
-                checkGroup.Add(new AssertCanEvacuateUpgradeCheck(host));
-            }
-
             //PBDsPluggedCheck
             checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_STORAGE_CONNECTIONS_STATUS, new List<Check>()));
             checkGroup = checks[checks.Count - 1].Value;
@@ -195,6 +187,14 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                     }
                     checkGroup.Add(new HostHasHotfixCheck(host));
                 }
+            }
+
+            //iSL (StorageLink) check
+            checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_STORAGELINK_STATUS, new List<Check>()));
+            checkGroup = checks[checks.Count - 1].Value;
+            foreach (Host host in SelectedServers)
+            {
+                checkGroup.Add(new HostHasUnsupportedStorageLinkSRCheck(host));
             }
 
             //Upgrading to Clearwater and above - license changes warning and deprecations

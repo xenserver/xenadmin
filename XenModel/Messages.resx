@@ -2201,6 +2201,9 @@ Do you want to assign it to the policy '{2}' instead?</value>
   <data name="CHECKING_STORAGELINK_CONNECTIONS" xml:space="preserve">
     <value>Checking StorageLink connections</value>
   </data>
+  <data name="CHECKING_STORAGELINK_STATUS" xml:space="preserve">
+    <value>Checking StorageLink status</value>
+  </data>
   <data name="CHECKING_STORAGE_CONNECTIONS_STATUS" xml:space="preserve">
     <value>Checking storage connections status</value>
   </data>
@@ -8683,6 +8686,12 @@ The VM protection policy for this VM does not have automatic archiving configure
   <data name="PROBLEM_STORAGELINK_CONNECTION_FAILED" xml:space="preserve">
     <value>An error has occurred while attempting to connect to Storage Link Gateway: \n\n{0}\n\nPlease review the settings for this host and reconnect.</value>
   </data>
+  <data name="PROBLEM_UNSUPPORTED_STORAGELINK_SR" xml:space="preserve">
+    <value>Unsupported StorageLink SR is present.</value>
+  </data>
+  <data name="PROBLEM_UNSUPPORTED_STORAGELINK_SR_HELP" xml:space="preserve">
+    <value>Remove StorageLink SR before upgrading.</value>
+  </data>
   <data name="PROBLEM_VMAPPLIANCEPROBLEM_TITLE" xml:space="preserve">
     <value>vApp {0}</value>
   </data>
@@ -10030,6 +10039,9 @@ Do you want to connect to the pool master '{1}'?</value>
   </data>
   <data name="STORAGELINK_UNABLE_TO_CONNECT" xml:space="preserve">
     <value>Unable to connect to StorageLink server on {0}.</value>
+  </data>
+  <data name="STORAGELINK_UPGRADE_TEST" xml:space="preserve">
+    <value>StorageLink SR status</value>
   </data>
   <data name="STORAGEPOOLS" xml:space="preserve">
     <value>Storage Pools</value>

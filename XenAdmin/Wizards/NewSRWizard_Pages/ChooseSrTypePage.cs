@@ -87,6 +87,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
         public override void PopulatePage()
         {
+            radioButtonCslg.Visible = !Helpers.CreedenceOrGreater(Connection); //Hide iSL radio button for Creedence or higher (StorageLink is not supported)
+
             foreach (var radioButton in RadioButtons)
             {
                 var frontend = (SrWizardType)radioButton.Tag;
