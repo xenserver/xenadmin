@@ -536,10 +536,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             else
             {
-                if (preCheckHostRow.Problem is IsInStorageLinkLegacySR)
-                    new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.ROLLING_UPGRADE_WARNING_SL)).ShowDialog();
-
-                else if (preCheckHostRow.Problem is WarningWithInformationUrl)
+                if (preCheckHostRow.Problem is WarningWithInformationUrl)
                     (preCheckHostRow.Problem as WarningWithInformationUrl).LaunchUrlInBrowser();
 
                 else if (!cancelled)

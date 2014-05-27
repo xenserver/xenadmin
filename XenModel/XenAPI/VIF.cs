@@ -38,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// A virtual network interface
+    /// First published in XenServer 4.0.
+    /// </summary>
     public partial class VIF : XenObject<VIF>
     {
         public VIF()
@@ -273,413 +277,1023 @@ namespace XenAPI
                 return null;
             }
         }
-
+        /// <summary>
+        /// Get a record containing the current state of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static VIF get_record(Session session, string _vif)
         {
             return new VIF((Proxy_VIF)session.proxy.vif_get_record(session.uuid, (_vif != null) ? _vif : "").parse());
         }
 
+        /// <summary>
+        /// Get a reference to the VIF instance with the specified UUID.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<VIF> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<VIF>.Create(session.proxy.vif_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
         }
 
+        /// <summary>
+        /// Create a new VIF instance, and return its handle.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_record">All constructor arguments</param>
         public static XenRef<VIF> create(Session session, VIF _record)
         {
             return XenRef<VIF>.Create(session.proxy.vif_create(session.uuid, _record.ToProxy()).parse());
         }
 
+        /// <summary>
+        /// Create a new VIF instance, and return its handle.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_record">All constructor arguments</param>
         public static XenRef<Task> async_create(Session session, VIF _record)
         {
             return XenRef<Task>.Create(session.proxy.async_vif_create(session.uuid, _record.ToProxy()).parse());
         }
 
+        /// <summary>
+        /// Destroy the specified VIF instance.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static void destroy(Session session, string _vif)
         {
             session.proxy.vif_destroy(session.uuid, (_vif != null) ? _vif : "").parse();
         }
 
+        /// <summary>
+        /// Destroy the specified VIF instance.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static XenRef<Task> async_destroy(Session session, string _vif)
         {
             return XenRef<Task>.Create(session.proxy.async_vif_destroy(session.uuid, (_vif != null) ? _vif : "").parse());
         }
 
+        /// <summary>
+        /// Get the uuid field of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static string get_uuid(Session session, string _vif)
         {
             return (string)session.proxy.vif_get_uuid(session.uuid, (_vif != null) ? _vif : "").parse();
         }
 
+        /// <summary>
+        /// Get the allowed_operations field of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static List<vif_operations> get_allowed_operations(Session session, string _vif)
         {
             return Helper.StringArrayToEnumList<vif_operations>(session.proxy.vif_get_allowed_operations(session.uuid, (_vif != null) ? _vif : "").parse());
         }
 
+        /// <summary>
+        /// Get the current_operations field of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static Dictionary<string, vif_operations> get_current_operations(Session session, string _vif)
         {
             return Maps.convert_from_proxy_string_vif_operations(session.proxy.vif_get_current_operations(session.uuid, (_vif != null) ? _vif : "").parse());
         }
 
+        /// <summary>
+        /// Get the device field of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static string get_device(Session session, string _vif)
         {
             return (string)session.proxy.vif_get_device(session.uuid, (_vif != null) ? _vif : "").parse();
         }
 
+        /// <summary>
+        /// Get the network field of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static XenRef<Network> get_network(Session session, string _vif)
         {
             return XenRef<Network>.Create(session.proxy.vif_get_network(session.uuid, (_vif != null) ? _vif : "").parse());
         }
 
+        /// <summary>
+        /// Get the VM field of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static XenRef<VM> get_VM(Session session, string _vif)
         {
             return XenRef<VM>.Create(session.proxy.vif_get_vm(session.uuid, (_vif != null) ? _vif : "").parse());
         }
 
+        /// <summary>
+        /// Get the MAC field of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static string get_MAC(Session session, string _vif)
         {
             return (string)session.proxy.vif_get_mac(session.uuid, (_vif != null) ? _vif : "").parse();
         }
 
+        /// <summary>
+        /// Get the MTU field of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static long get_MTU(Session session, string _vif)
         {
             return long.Parse((string)session.proxy.vif_get_mtu(session.uuid, (_vif != null) ? _vif : "").parse());
         }
 
+        /// <summary>
+        /// Get the other_config field of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static Dictionary<string, string> get_other_config(Session session, string _vif)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vif_get_other_config(session.uuid, (_vif != null) ? _vif : "").parse());
         }
 
+        /// <summary>
+        /// Get the currently_attached field of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static bool get_currently_attached(Session session, string _vif)
         {
             return (bool)session.proxy.vif_get_currently_attached(session.uuid, (_vif != null) ? _vif : "").parse();
         }
 
+        /// <summary>
+        /// Get the status_code field of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static long get_status_code(Session session, string _vif)
         {
             return long.Parse((string)session.proxy.vif_get_status_code(session.uuid, (_vif != null) ? _vif : "").parse());
         }
 
+        /// <summary>
+        /// Get the status_detail field of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static string get_status_detail(Session session, string _vif)
         {
             return (string)session.proxy.vif_get_status_detail(session.uuid, (_vif != null) ? _vif : "").parse();
         }
 
+        /// <summary>
+        /// Get the runtime_properties field of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static Dictionary<string, string> get_runtime_properties(Session session, string _vif)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vif_get_runtime_properties(session.uuid, (_vif != null) ? _vif : "").parse());
         }
 
+        /// <summary>
+        /// Get the qos/algorithm_type field of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static string get_qos_algorithm_type(Session session, string _vif)
         {
             return (string)session.proxy.vif_get_qos_algorithm_type(session.uuid, (_vif != null) ? _vif : "").parse();
         }
 
+        /// <summary>
+        /// Get the qos/algorithm_params field of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static Dictionary<string, string> get_qos_algorithm_params(Session session, string _vif)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vif_get_qos_algorithm_params(session.uuid, (_vif != null) ? _vif : "").parse());
         }
 
+        /// <summary>
+        /// Get the qos/supported_algorithms field of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static string[] get_qos_supported_algorithms(Session session, string _vif)
         {
             return (string [])session.proxy.vif_get_qos_supported_algorithms(session.uuid, (_vif != null) ? _vif : "").parse();
         }
 
+        /// <summary>
+        /// Get the metrics field of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static XenRef<VIF_metrics> get_metrics(Session session, string _vif)
         {
             return XenRef<VIF_metrics>.Create(session.proxy.vif_get_metrics(session.uuid, (_vif != null) ? _vif : "").parse());
         }
 
+        /// <summary>
+        /// Get the MAC_autogenerated field of the given VIF.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static bool get_MAC_autogenerated(Session session, string _vif)
         {
             return (bool)session.proxy.vif_get_mac_autogenerated(session.uuid, (_vif != null) ? _vif : "").parse();
         }
 
+        /// <summary>
+        /// Get the locking_mode field of the given VIF.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static vif_locking_mode get_locking_mode(Session session, string _vif)
         {
             return (vif_locking_mode)Helper.EnumParseDefault(typeof(vif_locking_mode), (string)session.proxy.vif_get_locking_mode(session.uuid, (_vif != null) ? _vif : "").parse());
         }
 
+        /// <summary>
+        /// Get the ipv4_allowed field of the given VIF.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static string[] get_ipv4_allowed(Session session, string _vif)
         {
             return (string [])session.proxy.vif_get_ipv4_allowed(session.uuid, (_vif != null) ? _vif : "").parse();
         }
 
+        /// <summary>
+        /// Get the ipv6_allowed field of the given VIF.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
         public static string[] get_ipv6_allowed(Session session, string _vif)
         {
             return (string [])session.proxy.vif_get_ipv6_allowed(session.uuid, (_vif != null) ? _vif : "").parse();
         }
 
+        /// <summary>
+        /// Set the other_config field of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _vif, Dictionary<string, string> _other_config)
         {
             session.proxy.vif_set_other_config(session.uuid, (_vif != null) ? _vif : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the other_config field of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _vif, string _key, string _value)
         {
             session.proxy.vif_add_to_other_config(session.uuid, (_vif != null) ? _vif : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the other_config field of the given VIF.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _vif, string _key)
         {
             session.proxy.vif_remove_from_other_config(session.uuid, (_vif != null) ? _vif : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Set the qos/algorithm_type field of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_algorithm_type">New value to set</param>
         public static void set_qos_algorithm_type(Session session, string _vif, string _algorithm_type)
         {
             session.proxy.vif_set_qos_algorithm_type(session.uuid, (_vif != null) ? _vif : "", (_algorithm_type != null) ? _algorithm_type : "").parse();
         }
 
+        /// <summary>
+        /// Set the qos/algorithm_params field of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_algorithm_params">New value to set</param>
         public static void set_qos_algorithm_params(Session session, string _vif, Dictionary<string, string> _algorithm_params)
         {
             session.proxy.vif_set_qos_algorithm_params(session.uuid, (_vif != null) ? _vif : "", Maps.convert_to_proxy_string_string(_algorithm_params)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the qos/algorithm_params field of the given VIF.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_qos_algorithm_params(Session session, string _vif, string _key, string _value)
         {
             session.proxy.vif_add_to_qos_algorithm_params(session.uuid, (_vif != null) ? _vif : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the qos/algorithm_params field of the given VIF.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_qos_algorithm_params(Session session, string _vif, string _key)
         {
             session.proxy.vif_remove_from_qos_algorithm_params(session.uuid, (_vif != null) ? _vif : "", (_key != null) ? _key : "").parse();
         }
 
-        public static void plug(Session session, string _self)
+        /// <summary>
+        /// Hotplug the specified VIF, dynamically attaching it to the running VM
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        public static void plug(Session session, string _vif)
         {
-            session.proxy.vif_plug(session.uuid, (_self != null) ? _self : "").parse();
+            session.proxy.vif_plug(session.uuid, (_vif != null) ? _vif : "").parse();
         }
 
-        public static XenRef<Task> async_plug(Session session, string _self)
+        /// <summary>
+        /// Hotplug the specified VIF, dynamically attaching it to the running VM
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        public static XenRef<Task> async_plug(Session session, string _vif)
         {
-            return XenRef<Task>.Create(session.proxy.async_vif_plug(session.uuid, (_self != null) ? _self : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vif_plug(session.uuid, (_vif != null) ? _vif : "").parse());
         }
 
-        public static void unplug(Session session, string _self)
+        /// <summary>
+        /// Hot-unplug the specified VIF, dynamically unattaching it from the running VM
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        public static void unplug(Session session, string _vif)
         {
-            session.proxy.vif_unplug(session.uuid, (_self != null) ? _self : "").parse();
+            session.proxy.vif_unplug(session.uuid, (_vif != null) ? _vif : "").parse();
         }
 
-        public static XenRef<Task> async_unplug(Session session, string _self)
+        /// <summary>
+        /// Hot-unplug the specified VIF, dynamically unattaching it from the running VM
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        public static XenRef<Task> async_unplug(Session session, string _vif)
         {
-            return XenRef<Task>.Create(session.proxy.async_vif_unplug(session.uuid, (_self != null) ? _self : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vif_unplug(session.uuid, (_vif != null) ? _vif : "").parse());
         }
 
-        public static void unplug_force(Session session, string _self)
+        /// <summary>
+        /// Forcibly unplug the specified VIF
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        public static void unplug_force(Session session, string _vif)
         {
-            session.proxy.vif_unplug_force(session.uuid, (_self != null) ? _self : "").parse();
+            session.proxy.vif_unplug_force(session.uuid, (_vif != null) ? _vif : "").parse();
         }
 
-        public static XenRef<Task> async_unplug_force(Session session, string _self)
+        /// <summary>
+        /// Forcibly unplug the specified VIF
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        public static XenRef<Task> async_unplug_force(Session session, string _vif)
         {
-            return XenRef<Task>.Create(session.proxy.async_vif_unplug_force(session.uuid, (_self != null) ? _self : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vif_unplug_force(session.uuid, (_vif != null) ? _vif : "").parse());
         }
 
-        public static void set_locking_mode(Session session, string _self, vif_locking_mode _value)
+        /// <summary>
+        /// Set the locking mode for this VIF
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_value">The new locking mode for the VIF</param>
+        public static void set_locking_mode(Session session, string _vif, vif_locking_mode _value)
         {
-            session.proxy.vif_set_locking_mode(session.uuid, (_self != null) ? _self : "", vif_locking_mode_helper.ToString(_value)).parse();
+            session.proxy.vif_set_locking_mode(session.uuid, (_vif != null) ? _vif : "", vif_locking_mode_helper.ToString(_value)).parse();
         }
 
-        public static XenRef<Task> async_set_locking_mode(Session session, string _self, vif_locking_mode _value)
+        /// <summary>
+        /// Set the locking mode for this VIF
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_value">The new locking mode for the VIF</param>
+        public static XenRef<Task> async_set_locking_mode(Session session, string _vif, vif_locking_mode _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vif_set_locking_mode(session.uuid, (_self != null) ? _self : "", vif_locking_mode_helper.ToString(_value)).parse());
+            return XenRef<Task>.Create(session.proxy.async_vif_set_locking_mode(session.uuid, (_vif != null) ? _vif : "", vif_locking_mode_helper.ToString(_value)).parse());
         }
 
-        public static void set_ipv4_allowed(Session session, string _self, string[] _value)
+        /// <summary>
+        /// Set the IPv4 addresses to which traffic on this VIF can be restricted
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_value">The IP addresses which will be associated with the VIF</param>
+        public static void set_ipv4_allowed(Session session, string _vif, string[] _value)
         {
-            session.proxy.vif_set_ipv4_allowed(session.uuid, (_self != null) ? _self : "", _value).parse();
+            session.proxy.vif_set_ipv4_allowed(session.uuid, (_vif != null) ? _vif : "", _value).parse();
         }
 
-        public static XenRef<Task> async_set_ipv4_allowed(Session session, string _self, string[] _value)
+        /// <summary>
+        /// Set the IPv4 addresses to which traffic on this VIF can be restricted
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_value">The IP addresses which will be associated with the VIF</param>
+        public static XenRef<Task> async_set_ipv4_allowed(Session session, string _vif, string[] _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vif_set_ipv4_allowed(session.uuid, (_self != null) ? _self : "", _value).parse());
+            return XenRef<Task>.Create(session.proxy.async_vif_set_ipv4_allowed(session.uuid, (_vif != null) ? _vif : "", _value).parse());
         }
 
-        public static void add_ipv4_allowed(Session session, string _self, string _value)
+        /// <summary>
+        /// Associates an IPv4 address with this VIF
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_value">The IP address which will be associated with the VIF</param>
+        public static void add_ipv4_allowed(Session session, string _vif, string _value)
         {
-            session.proxy.vif_add_ipv4_allowed(session.uuid, (_self != null) ? _self : "", (_value != null) ? _value : "").parse();
+            session.proxy.vif_add_ipv4_allowed(session.uuid, (_vif != null) ? _vif : "", (_value != null) ? _value : "").parse();
         }
 
-        public static XenRef<Task> async_add_ipv4_allowed(Session session, string _self, string _value)
+        /// <summary>
+        /// Associates an IPv4 address with this VIF
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_value">The IP address which will be associated with the VIF</param>
+        public static XenRef<Task> async_add_ipv4_allowed(Session session, string _vif, string _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vif_add_ipv4_allowed(session.uuid, (_self != null) ? _self : "", (_value != null) ? _value : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vif_add_ipv4_allowed(session.uuid, (_vif != null) ? _vif : "", (_value != null) ? _value : "").parse());
         }
 
-        public static void remove_ipv4_allowed(Session session, string _self, string _value)
+        /// <summary>
+        /// Removes an IPv4 address from this VIF
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_value">The IP address which will be removed from the VIF</param>
+        public static void remove_ipv4_allowed(Session session, string _vif, string _value)
         {
-            session.proxy.vif_remove_ipv4_allowed(session.uuid, (_self != null) ? _self : "", (_value != null) ? _value : "").parse();
+            session.proxy.vif_remove_ipv4_allowed(session.uuid, (_vif != null) ? _vif : "", (_value != null) ? _value : "").parse();
         }
 
-        public static XenRef<Task> async_remove_ipv4_allowed(Session session, string _self, string _value)
+        /// <summary>
+        /// Removes an IPv4 address from this VIF
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_value">The IP address which will be removed from the VIF</param>
+        public static XenRef<Task> async_remove_ipv4_allowed(Session session, string _vif, string _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vif_remove_ipv4_allowed(session.uuid, (_self != null) ? _self : "", (_value != null) ? _value : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vif_remove_ipv4_allowed(session.uuid, (_vif != null) ? _vif : "", (_value != null) ? _value : "").parse());
         }
 
-        public static void set_ipv6_allowed(Session session, string _self, string[] _value)
+        /// <summary>
+        /// Set the IPv6 addresses to which traffic on this VIF can be restricted
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_value">The IP addresses which will be associated with the VIF</param>
+        public static void set_ipv6_allowed(Session session, string _vif, string[] _value)
         {
-            session.proxy.vif_set_ipv6_allowed(session.uuid, (_self != null) ? _self : "", _value).parse();
+            session.proxy.vif_set_ipv6_allowed(session.uuid, (_vif != null) ? _vif : "", _value).parse();
         }
 
-        public static XenRef<Task> async_set_ipv6_allowed(Session session, string _self, string[] _value)
+        /// <summary>
+        /// Set the IPv6 addresses to which traffic on this VIF can be restricted
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_value">The IP addresses which will be associated with the VIF</param>
+        public static XenRef<Task> async_set_ipv6_allowed(Session session, string _vif, string[] _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vif_set_ipv6_allowed(session.uuid, (_self != null) ? _self : "", _value).parse());
+            return XenRef<Task>.Create(session.proxy.async_vif_set_ipv6_allowed(session.uuid, (_vif != null) ? _vif : "", _value).parse());
         }
 
-        public static void add_ipv6_allowed(Session session, string _self, string _value)
+        /// <summary>
+        /// Associates an IPv6 address with this VIF
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_value">The IP address which will be associated with the VIF</param>
+        public static void add_ipv6_allowed(Session session, string _vif, string _value)
         {
-            session.proxy.vif_add_ipv6_allowed(session.uuid, (_self != null) ? _self : "", (_value != null) ? _value : "").parse();
+            session.proxy.vif_add_ipv6_allowed(session.uuid, (_vif != null) ? _vif : "", (_value != null) ? _value : "").parse();
         }
 
-        public static XenRef<Task> async_add_ipv6_allowed(Session session, string _self, string _value)
+        /// <summary>
+        /// Associates an IPv6 address with this VIF
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_value">The IP address which will be associated with the VIF</param>
+        public static XenRef<Task> async_add_ipv6_allowed(Session session, string _vif, string _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vif_add_ipv6_allowed(session.uuid, (_self != null) ? _self : "", (_value != null) ? _value : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vif_add_ipv6_allowed(session.uuid, (_vif != null) ? _vif : "", (_value != null) ? _value : "").parse());
         }
 
-        public static void remove_ipv6_allowed(Session session, string _self, string _value)
+        /// <summary>
+        /// Removes an IPv6 address from this VIF
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_value">The IP address which will be removed from the VIF</param>
+        public static void remove_ipv6_allowed(Session session, string _vif, string _value)
         {
-            session.proxy.vif_remove_ipv6_allowed(session.uuid, (_self != null) ? _self : "", (_value != null) ? _value : "").parse();
+            session.proxy.vif_remove_ipv6_allowed(session.uuid, (_vif != null) ? _vif : "", (_value != null) ? _value : "").parse();
         }
 
-        public static XenRef<Task> async_remove_ipv6_allowed(Session session, string _self, string _value)
+        /// <summary>
+        /// Removes an IPv6 address from this VIF
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vif">The opaque_ref of the given vif</param>
+        /// <param name="_value">The IP address which will be removed from the VIF</param>
+        public static XenRef<Task> async_remove_ipv6_allowed(Session session, string _vif, string _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vif_remove_ipv6_allowed(session.uuid, (_self != null) ? _self : "", (_value != null) ? _value : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vif_remove_ipv6_allowed(session.uuid, (_vif != null) ? _vif : "", (_value != null) ? _value : "").parse());
         }
 
+        /// <summary>
+        /// Return a list of all the VIFs known to the system.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static List<XenRef<VIF>> get_all(Session session)
         {
             return XenRef<VIF>.Create(session.proxy.vif_get_all(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Get all the VIF Records at once, in a single XML RPC call
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<VIF>, VIF> get_all_records(Session session)
         {
             return XenRef<VIF>.Create<Proxy_VIF>(session.proxy.vif_get_all_records(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Unique identifier/object reference
+        /// </summary>
+        public virtual string uuid
+        {
+            get { return _uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _uuid))
+                {
+                    _uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("uuid");
+                }
+            }
+        }
         private string _uuid;
-        public virtual string uuid {
-             get { return _uuid; }
-             set { if (!Helper.AreEqual(value, _uuid)) { _uuid = value; Changed = true; NotifyPropertyChanged("uuid"); } }
-         }
 
+        /// <summary>
+        /// list of the operations allowed in this state. This list is advisory only and the server state may have changed by the time this field is read by a client.
+        /// </summary>
+        public virtual List<vif_operations> allowed_operations
+        {
+            get { return _allowed_operations; }
+            set
+            {
+                if (!Helper.AreEqual(value, _allowed_operations))
+                {
+                    _allowed_operations = value;
+                    Changed = true;
+                    NotifyPropertyChanged("allowed_operations");
+                }
+            }
+        }
         private List<vif_operations> _allowed_operations;
-        public virtual List<vif_operations> allowed_operations {
-             get { return _allowed_operations; }
-             set { if (!Helper.AreEqual(value, _allowed_operations)) { _allowed_operations = value; Changed = true; NotifyPropertyChanged("allowed_operations"); } }
-         }
 
+        /// <summary>
+        /// links each of the running tasks using this object (by reference) to a current_operation enum which describes the nature of the task.
+        /// </summary>
+        public virtual Dictionary<string, vif_operations> current_operations
+        {
+            get { return _current_operations; }
+            set
+            {
+                if (!Helper.AreEqual(value, _current_operations))
+                {
+                    _current_operations = value;
+                    Changed = true;
+                    NotifyPropertyChanged("current_operations");
+                }
+            }
+        }
         private Dictionary<string, vif_operations> _current_operations;
-        public virtual Dictionary<string, vif_operations> current_operations {
-             get { return _current_operations; }
-             set { if (!Helper.AreEqual(value, _current_operations)) { _current_operations = value; Changed = true; NotifyPropertyChanged("current_operations"); } }
-         }
 
+        /// <summary>
+        /// order in which VIF backends are created by xapi
+        /// </summary>
+        public virtual string device
+        {
+            get { return _device; }
+            set
+            {
+                if (!Helper.AreEqual(value, _device))
+                {
+                    _device = value;
+                    Changed = true;
+                    NotifyPropertyChanged("device");
+                }
+            }
+        }
         private string _device;
-        public virtual string device {
-             get { return _device; }
-             set { if (!Helper.AreEqual(value, _device)) { _device = value; Changed = true; NotifyPropertyChanged("device"); } }
-         }
 
+        /// <summary>
+        /// virtual network to which this vif is connected
+        /// </summary>
+        public virtual XenRef<Network> network
+        {
+            get { return _network; }
+            set
+            {
+                if (!Helper.AreEqual(value, _network))
+                {
+                    _network = value;
+                    Changed = true;
+                    NotifyPropertyChanged("network");
+                }
+            }
+        }
         private XenRef<Network> _network;
-        public virtual XenRef<Network> network {
-             get { return _network; }
-             set { if (!Helper.AreEqual(value, _network)) { _network = value; Changed = true; NotifyPropertyChanged("network"); } }
-         }
 
+        /// <summary>
+        /// virtual machine to which this vif is connected
+        /// </summary>
+        public virtual XenRef<VM> VM
+        {
+            get { return _VM; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VM))
+                {
+                    _VM = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VM");
+                }
+            }
+        }
         private XenRef<VM> _VM;
-        public virtual XenRef<VM> VM {
-             get { return _VM; }
-             set { if (!Helper.AreEqual(value, _VM)) { _VM = value; Changed = true; NotifyPropertyChanged("VM"); } }
-         }
 
+        /// <summary>
+        /// ethernet MAC address of virtual interface, as exposed to guest
+        /// </summary>
+        public virtual string MAC
+        {
+            get { return _MAC; }
+            set
+            {
+                if (!Helper.AreEqual(value, _MAC))
+                {
+                    _MAC = value;
+                    Changed = true;
+                    NotifyPropertyChanged("MAC");
+                }
+            }
+        }
         private string _MAC;
-        public virtual string MAC {
-             get { return _MAC; }
-             set { if (!Helper.AreEqual(value, _MAC)) { _MAC = value; Changed = true; NotifyPropertyChanged("MAC"); } }
-         }
 
+        /// <summary>
+        /// MTU in octets
+        /// </summary>
+        public virtual long MTU
+        {
+            get { return _MTU; }
+            set
+            {
+                if (!Helper.AreEqual(value, _MTU))
+                {
+                    _MTU = value;
+                    Changed = true;
+                    NotifyPropertyChanged("MTU");
+                }
+            }
+        }
         private long _MTU;
-        public virtual long MTU {
-             get { return _MTU; }
-             set { if (!Helper.AreEqual(value, _MTU)) { _MTU = value; Changed = true; NotifyPropertyChanged("MTU"); } }
-         }
 
+        /// <summary>
+        /// additional configuration
+        /// </summary>
+        public virtual Dictionary<string, string> other_config
+        {
+            get { return _other_config; }
+            set
+            {
+                if (!Helper.AreEqual(value, _other_config))
+                {
+                    _other_config = value;
+                    Changed = true;
+                    NotifyPropertyChanged("other_config");
+                }
+            }
+        }
         private Dictionary<string, string> _other_config;
-        public virtual Dictionary<string, string> other_config {
-             get { return _other_config; }
-             set { if (!Helper.AreEqual(value, _other_config)) { _other_config = value; Changed = true; NotifyPropertyChanged("other_config"); } }
-         }
 
+        /// <summary>
+        /// is the device currently attached (erased on reboot)
+        /// </summary>
+        public virtual bool currently_attached
+        {
+            get { return _currently_attached; }
+            set
+            {
+                if (!Helper.AreEqual(value, _currently_attached))
+                {
+                    _currently_attached = value;
+                    Changed = true;
+                    NotifyPropertyChanged("currently_attached");
+                }
+            }
+        }
         private bool _currently_attached;
-        public virtual bool currently_attached {
-             get { return _currently_attached; }
-             set { if (!Helper.AreEqual(value, _currently_attached)) { _currently_attached = value; Changed = true; NotifyPropertyChanged("currently_attached"); } }
-         }
 
+        /// <summary>
+        /// error/success code associated with last attach-operation (erased on reboot)
+        /// </summary>
+        public virtual long status_code
+        {
+            get { return _status_code; }
+            set
+            {
+                if (!Helper.AreEqual(value, _status_code))
+                {
+                    _status_code = value;
+                    Changed = true;
+                    NotifyPropertyChanged("status_code");
+                }
+            }
+        }
         private long _status_code;
-        public virtual long status_code {
-             get { return _status_code; }
-             set { if (!Helper.AreEqual(value, _status_code)) { _status_code = value; Changed = true; NotifyPropertyChanged("status_code"); } }
-         }
 
+        /// <summary>
+        /// error/success information associated with last attach-operation status (erased on reboot)
+        /// </summary>
+        public virtual string status_detail
+        {
+            get { return _status_detail; }
+            set
+            {
+                if (!Helper.AreEqual(value, _status_detail))
+                {
+                    _status_detail = value;
+                    Changed = true;
+                    NotifyPropertyChanged("status_detail");
+                }
+            }
+        }
         private string _status_detail;
-        public virtual string status_detail {
-             get { return _status_detail; }
-             set { if (!Helper.AreEqual(value, _status_detail)) { _status_detail = value; Changed = true; NotifyPropertyChanged("status_detail"); } }
-         }
 
+        /// <summary>
+        /// Device runtime properties
+        /// </summary>
+        public virtual Dictionary<string, string> runtime_properties
+        {
+            get { return _runtime_properties; }
+            set
+            {
+                if (!Helper.AreEqual(value, _runtime_properties))
+                {
+                    _runtime_properties = value;
+                    Changed = true;
+                    NotifyPropertyChanged("runtime_properties");
+                }
+            }
+        }
         private Dictionary<string, string> _runtime_properties;
-        public virtual Dictionary<string, string> runtime_properties {
-             get { return _runtime_properties; }
-             set { if (!Helper.AreEqual(value, _runtime_properties)) { _runtime_properties = value; Changed = true; NotifyPropertyChanged("runtime_properties"); } }
-         }
 
+        /// <summary>
+        /// QoS algorithm to use
+        /// </summary>
+        public virtual string qos_algorithm_type
+        {
+            get { return _qos_algorithm_type; }
+            set
+            {
+                if (!Helper.AreEqual(value, _qos_algorithm_type))
+                {
+                    _qos_algorithm_type = value;
+                    Changed = true;
+                    NotifyPropertyChanged("qos_algorithm_type");
+                }
+            }
+        }
         private string _qos_algorithm_type;
-        public virtual string qos_algorithm_type {
-             get { return _qos_algorithm_type; }
-             set { if (!Helper.AreEqual(value, _qos_algorithm_type)) { _qos_algorithm_type = value; Changed = true; NotifyPropertyChanged("qos_algorithm_type"); } }
-         }
 
+        /// <summary>
+        /// parameters for chosen QoS algorithm
+        /// </summary>
+        public virtual Dictionary<string, string> qos_algorithm_params
+        {
+            get { return _qos_algorithm_params; }
+            set
+            {
+                if (!Helper.AreEqual(value, _qos_algorithm_params))
+                {
+                    _qos_algorithm_params = value;
+                    Changed = true;
+                    NotifyPropertyChanged("qos_algorithm_params");
+                }
+            }
+        }
         private Dictionary<string, string> _qos_algorithm_params;
-        public virtual Dictionary<string, string> qos_algorithm_params {
-             get { return _qos_algorithm_params; }
-             set { if (!Helper.AreEqual(value, _qos_algorithm_params)) { _qos_algorithm_params = value; Changed = true; NotifyPropertyChanged("qos_algorithm_params"); } }
-         }
 
+        /// <summary>
+        /// supported QoS algorithms for this VIF
+        /// </summary>
+        public virtual string[] qos_supported_algorithms
+        {
+            get { return _qos_supported_algorithms; }
+            set
+            {
+                if (!Helper.AreEqual(value, _qos_supported_algorithms))
+                {
+                    _qos_supported_algorithms = value;
+                    Changed = true;
+                    NotifyPropertyChanged("qos_supported_algorithms");
+                }
+            }
+        }
         private string[] _qos_supported_algorithms;
-        public virtual string[] qos_supported_algorithms {
-             get { return _qos_supported_algorithms; }
-             set { if (!Helper.AreEqual(value, _qos_supported_algorithms)) { _qos_supported_algorithms = value; Changed = true; NotifyPropertyChanged("qos_supported_algorithms"); } }
-         }
 
+        /// <summary>
+        /// metrics associated with this VIF
+        /// </summary>
+        public virtual XenRef<VIF_metrics> metrics
+        {
+            get { return _metrics; }
+            set
+            {
+                if (!Helper.AreEqual(value, _metrics))
+                {
+                    _metrics = value;
+                    Changed = true;
+                    NotifyPropertyChanged("metrics");
+                }
+            }
+        }
         private XenRef<VIF_metrics> _metrics;
-        public virtual XenRef<VIF_metrics> metrics {
-             get { return _metrics; }
-             set { if (!Helper.AreEqual(value, _metrics)) { _metrics = value; Changed = true; NotifyPropertyChanged("metrics"); } }
-         }
 
+        /// <summary>
+        /// true if the MAC was autogenerated; false indicates it was set manually
+        /// First published in XenServer 5.5.
+        /// </summary>
+        public virtual bool MAC_autogenerated
+        {
+            get { return _MAC_autogenerated; }
+            set
+            {
+                if (!Helper.AreEqual(value, _MAC_autogenerated))
+                {
+                    _MAC_autogenerated = value;
+                    Changed = true;
+                    NotifyPropertyChanged("MAC_autogenerated");
+                }
+            }
+        }
         private bool _MAC_autogenerated;
-        public virtual bool MAC_autogenerated {
-             get { return _MAC_autogenerated; }
-             set { if (!Helper.AreEqual(value, _MAC_autogenerated)) { _MAC_autogenerated = value; Changed = true; NotifyPropertyChanged("MAC_autogenerated"); } }
-         }
 
+        /// <summary>
+        /// current locking mode of the VIF
+        /// First published in XenServer 6.1.
+        /// </summary>
+        public virtual vif_locking_mode locking_mode
+        {
+            get { return _locking_mode; }
+            set
+            {
+                if (!Helper.AreEqual(value, _locking_mode))
+                {
+                    _locking_mode = value;
+                    Changed = true;
+                    NotifyPropertyChanged("locking_mode");
+                }
+            }
+        }
         private vif_locking_mode _locking_mode;
-        public virtual vif_locking_mode locking_mode {
-             get { return _locking_mode; }
-             set { if (!Helper.AreEqual(value, _locking_mode)) { _locking_mode = value; Changed = true; NotifyPropertyChanged("locking_mode"); } }
-         }
 
+        /// <summary>
+        /// A list of IPv4 addresses which can be used to filter traffic passing through this VIF
+        /// First published in XenServer 6.1.
+        /// </summary>
+        public virtual string[] ipv4_allowed
+        {
+            get { return _ipv4_allowed; }
+            set
+            {
+                if (!Helper.AreEqual(value, _ipv4_allowed))
+                {
+                    _ipv4_allowed = value;
+                    Changed = true;
+                    NotifyPropertyChanged("ipv4_allowed");
+                }
+            }
+        }
         private string[] _ipv4_allowed;
-        public virtual string[] ipv4_allowed {
-             get { return _ipv4_allowed; }
-             set { if (!Helper.AreEqual(value, _ipv4_allowed)) { _ipv4_allowed = value; Changed = true; NotifyPropertyChanged("ipv4_allowed"); } }
-         }
 
+        /// <summary>
+        /// A list of IPv6 addresses which can be used to filter traffic passing through this VIF
+        /// First published in XenServer 6.1.
+        /// </summary>
+        public virtual string[] ipv6_allowed
+        {
+            get { return _ipv6_allowed; }
+            set
+            {
+                if (!Helper.AreEqual(value, _ipv6_allowed))
+                {
+                    _ipv6_allowed = value;
+                    Changed = true;
+                    NotifyPropertyChanged("ipv6_allowed");
+                }
+            }
+        }
         private string[] _ipv6_allowed;
-        public virtual string[] ipv6_allowed {
-             get { return _ipv6_allowed; }
-             set { if (!Helper.AreEqual(value, _ipv6_allowed)) { _ipv6_allowed = value; Changed = true; NotifyPropertyChanged("ipv6_allowed"); } }
-         }
-
-
     }
 }

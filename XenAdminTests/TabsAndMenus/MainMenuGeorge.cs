@@ -80,7 +80,7 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedSeparator(),
                 new ExpectedTextMenuItem("Change Server Pass&word...", false, false  ),
 	            new ExpectedSeparator(),
-	            new ExpectedTextMenuItem("&Delete Pool...", false, false  ),
+	            new ExpectedTextMenuItem("Mak&e into standalone server", false, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", false, false  )
             };
@@ -188,7 +188,7 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedSeparator(),
                 new ExpectedTextMenuItem("Change Server Pass&word...", true, false  ),
 	            new ExpectedSeparator(),
-	            new ExpectedTextMenuItem("&Delete Pool...", false, false  ),
+	            new ExpectedTextMenuItem("Mak&e into standalone server", false, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", true, false  )
             };
@@ -298,7 +298,7 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedSeparator(),
                     new ExpectedTextMenuItem("Change Server Pass&word...", true, false  ),
 	                new ExpectedSeparator(),
-	                new ExpectedTextMenuItem("&Delete Pool...", false, false  ),
+	                new ExpectedTextMenuItem("Mak&e into standalone server", false, false  ),
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("P&roperties", true, false  )
                 };
@@ -408,7 +408,7 @@ namespace XenAdminTests.TabsAndMenus
                 new ExpectedSeparator(),
                 new ExpectedTextMenuItem("Change Server Pass&word...", false, false  ),
 	            new ExpectedSeparator(),
-	            new ExpectedTextMenuItem("&Delete Pool...", false, false  ),
+	            new ExpectedTextMenuItem("Mak&e into standalone server", false, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", true, false  )
             };
@@ -519,7 +519,7 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedSeparator(),
                     new ExpectedTextMenuItem("Change Server Pass&word...", false, false  ),
 	                new ExpectedSeparator(),
-	                new ExpectedTextMenuItem("&Delete Pool...", false, false  ),
+	                new ExpectedTextMenuItem("Mak&e into standalone server", false, false  ),
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("P&roperties", true, false  )
                 };
@@ -632,7 +632,7 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedSeparator(),
                     new ExpectedTextMenuItem("Change Server Pass&word...", false, false  ),
 	                new ExpectedSeparator(),
-	                new ExpectedTextMenuItem("&Delete Pool...", false, false  ),
+	                new ExpectedTextMenuItem("Mak&e into standalone server", false, false  ),
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("P&roperties", true, false  )
                 };
@@ -746,7 +746,7 @@ namespace XenAdminTests.TabsAndMenus
 	                    new ExpectedSeparator(),
                         new ExpectedTextMenuItem("Change Server Pass&word...", false, false  ),
 	                    new ExpectedSeparator(),
-	                    new ExpectedTextMenuItem("&Delete Pool...", false, false  ),
+	                    new ExpectedTextMenuItem("Mak&e into standalone server", false, false  ),
 	                    new ExpectedSeparator(),
 	                    new ExpectedTextMenuItem("P&roperties", false, false  )
                     };
@@ -863,7 +863,7 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("Change Server Pass&word...", false, false  ),
                     new ExpectedSeparator(),
-                    new ExpectedTextMenuItem("&Delete Pool...", false, false  ),
+                    new ExpectedTextMenuItem("Mak&e into standalone server", false, false  ),
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("P&roperties", false, false  )
                 };
@@ -981,7 +981,7 @@ namespace XenAdminTests.TabsAndMenus
 	                    new ExpectedSeparator(),
                         new ExpectedTextMenuItem("Change Server Pass&word...", false, false  ),
 	                    new ExpectedSeparator(),
-	                    new ExpectedTextMenuItem("&Delete Pool...", false, false  ),
+	                    new ExpectedTextMenuItem("Mak&e into standalone server", false, false  ),
 	                    new ExpectedSeparator(),
 	                    new ExpectedTextMenuItem("P&roperties", false, false  )
                     };
@@ -1100,7 +1100,7 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("Change Server Pass&word...", false, false  ),
                     new ExpectedSeparator(),
-                    new ExpectedTextMenuItem("&Delete Pool...", false, false  ),
+                    new ExpectedTextMenuItem("Mak&e into standalone server", false, false  ),
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("P&roperties", false, false  )
                 };
@@ -1220,7 +1220,7 @@ namespace XenAdminTests.TabsAndMenus
 	                    new ExpectedSeparator(),
                         new ExpectedTextMenuItem("Change Server Pass&word...", false, false  ),
 	                    new ExpectedSeparator(),
-	                    new ExpectedTextMenuItem("&Delete Pool...", false, false  ),
+	                    new ExpectedTextMenuItem("Mak&e into standalone server", false, false  ),
 	                    new ExpectedSeparator(),
 	                    new ExpectedTextMenuItem("P&roperties", false, false  )
                     };
@@ -1335,7 +1335,7 @@ namespace XenAdminTests.TabsAndMenus
                 new ExpectedSeparator(),
                 new ExpectedTextMenuItem("Change Server Pass&word...", true, false  ),
                 new ExpectedSeparator(),
-                new ExpectedTextMenuItem("&Delete Pool...", false, false  ),
+                new ExpectedTextMenuItem("Mak&e into standalone server", false, false  ),
                 new ExpectedSeparator(),
                 new ExpectedTextMenuItem("P&roperties", true, false  )
             };
@@ -1443,7 +1443,7 @@ namespace XenAdminTests.TabsAndMenus
                 new ExpectedSeparator(),
                 new ExpectedTextMenuItem("Change Server Pass&word...", true, false  ),
                 new ExpectedSeparator(),
-                new ExpectedTextMenuItem("&Delete Pool...", false, false  ),
+                new ExpectedTextMenuItem("Mak&e into standalone server", false, false  ),
                 new ExpectedSeparator(),
                 new ExpectedTextMenuItem("P&roperties", true, false  )
             };
@@ -1553,7 +1553,7 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("Change Server Pass&word...", false, false  ),
                     new ExpectedSeparator(),
-                    new ExpectedTextMenuItem("&Delete Pool...", false, false  ),
+                    new ExpectedTextMenuItem("Mak&e into standalone server", false, false  ),
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("P&roperties", true, false  )
                 };
@@ -1691,7 +1691,7 @@ namespace XenAdminTests.TabsAndMenus
                 new ExpectedSeparator(),
                 new ExpectedTextMenuItem("Change Server Pass&word...", false, false  ),
                 new ExpectedSeparator(),
-                new ExpectedTextMenuItem("&Delete Pool...", false, false  ),
+                new ExpectedTextMenuItem("Mak&e into standalone server", false, false  ),
                 new ExpectedSeparator(),
                 new ExpectedTextMenuItem("P&roperties", true, false  )
             };
@@ -1815,7 +1815,7 @@ namespace XenAdminTests.TabsAndMenus
                 new ExpectedSeparator(),
                 new ExpectedTextMenuItem("Change Server Pass&word...", false, false  ),
                 new ExpectedSeparator(),
-                new ExpectedTextMenuItem("&Delete Pool...", false, false  ),
+                new ExpectedTextMenuItem("Mak&e into standalone server", false, false  ),
                 new ExpectedSeparator(),
                 new ExpectedTextMenuItem("P&roperties", true, false  )
             };

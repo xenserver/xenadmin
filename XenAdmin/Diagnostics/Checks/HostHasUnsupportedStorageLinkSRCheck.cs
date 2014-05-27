@@ -29,30 +29,39 @@
  * SUCH DAMAGE.
  */
 
-using System;
+using System.Linq;
+using XenAdmin.Diagnostics.Problems.SRProblem;
+using XenAPI;
+using XenAdmin.Diagnostics.Problems;
+using XenAdmin.Diagnostics.Problems.HostProblem;
+using XenAdmin.Core;
 
-namespace XenAdmin.Actions
+namespace XenAdmin.Diagnostics.Checks
 {
-    public class DestroyPoolAction: PureAsyncAction
+    class HostHasUnsupportedStorageLinkSRCheck : Check
     {
-        public DestroyPoolAction(XenAPI.Pool pool)
-            : base(pool.Connection, string.Format(Messages.DESTROYING_POOL, pool.Name))
+
+        public HostHasUnsupportedStorageLinkSRCheck(Host host)
+            : base(host)
         {
-            System.Diagnostics.Trace.Assert(pool != null);
-            Pool = pool;
-            this.Description = Messages.WAITING;
         }
 
-        protected override void Run()
+        public override Problem RunCheck()
         {
-
-            this.Description = Messages.POOLCREATE_DESTROYING;
-            if (Connection.Cache.HostCount != 1)
-                throw new Exception("Cannot destroy a pool of more than one host");  // We should not have any UI to reach here, and must not be allowed to proceed
-            XenAPI.Pool.set_name_label(Session, Pool.opaque_ref, "");
-            XenAPI.Pool.set_name_description(Session, Pool.opaque_ref, "");
-            this.Description = Messages.POOLCREATE_DESTROYED;
+            foreach (var sr in Host.Connection.Cache.SRs.Where(sr => sr.GetSRType(true) == SR.SRTypes.cslg))
+            {
+                return new UnsupportedStorageLinkSrIsPresentProblem(this, sr);
+            }
+            
+            return null;
         }
-        
+
+        public override string Description
+        {
+            get
+            {
+                return Messages.STORAGELINK_UPGRADE_TEST;
+            }
+        }
     }
 }

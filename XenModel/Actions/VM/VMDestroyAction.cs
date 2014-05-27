@@ -39,6 +39,8 @@ namespace XenAdmin.Actions.VMActions
 {
     public class VMDestroyAction : PureAsyncAction
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private List<VBD> _deleteDisks;
         private List<VM> _deleteSnapshots;
 
@@ -106,7 +108,6 @@ namespace XenAdmin.Actions.VMActions
             if (suspendVDI != null)
                 vdiRefs.Add(vm.suspend_VDI);
 
-
             XenAPI.VM.destroy(session, vm.opaque_ref);
 
 
@@ -114,6 +115,14 @@ namespace XenAdmin.Actions.VMActions
             {
                 XenRef<VDI> vdi = vdiRef;
                 BestEffort(ref caught, session.Connection.ExpectDisruption, () => XenAPI.VDI.destroy(session, vdi.opaque_ref));
+
+                //CA-115249. XenAPI could have already deleted the VDI. Destroy suspended VM and destroy snapshot functions are affected.
+                var failure = caught as Failure;
+                if (failure != null && failure.ErrorDescription != null && failure.ErrorDescription.Count > 0 && failure.ErrorDescription[0] == "HANDLE_INVALID")
+                {
+                    log.InfoFormat("VDI:{0} has already been deleted -- ignoring exception.", vdi.opaque_ref);
+                    caught = null;
+                }
             }
 
             if (caught != null)

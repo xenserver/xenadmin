@@ -38,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// A secret
+    /// First published in XenServer 5.6.
+    /// </summary>
     public partial class Secret : XenObject<Secret>
     {
         public Secret()
@@ -129,100 +133,226 @@ namespace XenAPI
                 return null;
             }
         }
-
+        /// <summary>
+        /// Get a record containing the current state of the given secret.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_secret">The opaque_ref of the given secret</param>
         public static Secret get_record(Session session, string _secret)
         {
             return new Secret((Proxy_Secret)session.proxy.secret_get_record(session.uuid, (_secret != null) ? _secret : "").parse());
         }
 
+        /// <summary>
+        /// Get a reference to the secret instance with the specified UUID.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Secret> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<Secret>.Create(session.proxy.secret_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
         }
 
+        /// <summary>
+        /// Create a new secret instance, and return its handle.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_record">All constructor arguments</param>
         public static XenRef<Secret> create(Session session, Secret _record)
         {
             return XenRef<Secret>.Create(session.proxy.secret_create(session.uuid, _record.ToProxy()).parse());
         }
 
+        /// <summary>
+        /// Create a new secret instance, and return its handle.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_record">All constructor arguments</param>
         public static XenRef<Task> async_create(Session session, Secret _record)
         {
             return XenRef<Task>.Create(session.proxy.async_secret_create(session.uuid, _record.ToProxy()).parse());
         }
 
+        /// <summary>
+        /// Destroy the specified secret instance.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_secret">The opaque_ref of the given secret</param>
         public static void destroy(Session session, string _secret)
         {
             session.proxy.secret_destroy(session.uuid, (_secret != null) ? _secret : "").parse();
         }
 
+        /// <summary>
+        /// Destroy the specified secret instance.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_secret">The opaque_ref of the given secret</param>
         public static XenRef<Task> async_destroy(Session session, string _secret)
         {
             return XenRef<Task>.Create(session.proxy.async_secret_destroy(session.uuid, (_secret != null) ? _secret : "").parse());
         }
 
+        /// <summary>
+        /// Get the uuid field of the given secret.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_secret">The opaque_ref of the given secret</param>
         public static string get_uuid(Session session, string _secret)
         {
             return (string)session.proxy.secret_get_uuid(session.uuid, (_secret != null) ? _secret : "").parse();
         }
 
+        /// <summary>
+        /// Get the value field of the given secret.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_secret">The opaque_ref of the given secret</param>
         public static string get_value(Session session, string _secret)
         {
             return (string)session.proxy.secret_get_value(session.uuid, (_secret != null) ? _secret : "").parse();
         }
 
+        /// <summary>
+        /// Get the other_config field of the given secret.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_secret">The opaque_ref of the given secret</param>
         public static Dictionary<string, string> get_other_config(Session session, string _secret)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.secret_get_other_config(session.uuid, (_secret != null) ? _secret : "").parse());
         }
 
+        /// <summary>
+        /// Set the value field of the given secret.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_secret">The opaque_ref of the given secret</param>
+        /// <param name="_value">New value to set</param>
         public static void set_value(Session session, string _secret, string _value)
         {
             session.proxy.secret_set_value(session.uuid, (_secret != null) ? _secret : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Set the other_config field of the given secret.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_secret">The opaque_ref of the given secret</param>
+        /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _secret, Dictionary<string, string> _other_config)
         {
             session.proxy.secret_set_other_config(session.uuid, (_secret != null) ? _secret : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the other_config field of the given secret.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_secret">The opaque_ref of the given secret</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _secret, string _key, string _value)
         {
             session.proxy.secret_add_to_other_config(session.uuid, (_secret != null) ? _secret : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the other_config field of the given secret.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_secret">The opaque_ref of the given secret</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _secret, string _key)
         {
             session.proxy.secret_remove_from_other_config(session.uuid, (_secret != null) ? _secret : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Return a list of all the secrets known to the system.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static List<XenRef<Secret>> get_all(Session session)
         {
             return XenRef<Secret>.Create(session.proxy.secret_get_all(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Get all the secret Records at once, in a single XML RPC call
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<Secret>, Secret> get_all_records(Session session)
         {
             return XenRef<Secret>.Create<Proxy_Secret>(session.proxy.secret_get_all_records(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Unique identifier/object reference
+        /// </summary>
+        public virtual string uuid
+        {
+            get { return _uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _uuid))
+                {
+                    _uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("uuid");
+                }
+            }
+        }
         private string _uuid;
-        public virtual string uuid {
-             get { return _uuid; }
-             set { if (!Helper.AreEqual(value, _uuid)) { _uuid = value; Changed = true; NotifyPropertyChanged("uuid"); } }
-         }
 
+        /// <summary>
+        /// the secret
+        /// </summary>
+        public virtual string value
+        {
+            get { return _value; }
+            set
+            {
+                if (!Helper.AreEqual(value, _value))
+                {
+                    _value = value;
+                    Changed = true;
+                    NotifyPropertyChanged("value");
+                }
+            }
+        }
         private string _value;
-        public virtual string value {
-             get { return _value; }
-             set { if (!Helper.AreEqual(value, _value)) { _value = value; Changed = true; NotifyPropertyChanged("value"); } }
-         }
 
+        /// <summary>
+        /// other_config
+        /// </summary>
+        public virtual Dictionary<string, string> other_config
+        {
+            get { return _other_config; }
+            set
+            {
+                if (!Helper.AreEqual(value, _other_config))
+                {
+                    _other_config = value;
+                    Changed = true;
+                    NotifyPropertyChanged("other_config");
+                }
+            }
+        }
         private Dictionary<string, string> _other_config;
-        public virtual Dictionary<string, string> other_config {
-             get { return _other_config; }
-             set { if (!Helper.AreEqual(value, _other_config)) { _other_config = value; Changed = true; NotifyPropertyChanged("other_config"); } }
-         }
-
-
     }
 }

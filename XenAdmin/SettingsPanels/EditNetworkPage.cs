@@ -102,6 +102,7 @@ namespace XenAdmin.SettingsPanels
             SetNetSettingsEnablement();
             panelDisruptionWarning.Visible = WillDisrupt();
             ShowHideLacpWarning();
+            labelVLAN0Info.Visible = numUpDownVLAN.Enabled && numUpDownVLAN.Value == 0;
         }
 
         private bool VLANEnabled
@@ -301,6 +302,9 @@ namespace XenAdmin.SettingsPanels
             nolicenseRestriction = host != null && !host.RestrictVLAN;
 
             populateHostNicList();
+
+            //set minimum value for VLAN
+            numUpDownVLAN.Minimum = Helpers.VLAN0Allowed(network.Connection) ? 0 : 1;
 
             PIF pif = GetNetworksPIF();
 

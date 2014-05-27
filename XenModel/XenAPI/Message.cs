@@ -38,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// An message for the attention of the administrator
+    /// First published in XenServer 5.0.
+    /// </summary>
     public partial class Message : XenObject<Message>
     {
         public enum MessageType { BOND_STATUS_CHANGED, VMPP_SNAPSHOT_ARCHIVE_ALREADY_EXISTS, VMPP_ARCHIVE_MISSED_EVENT, VMPP_SNAPSHOT_MISSED_EVENT, VMPP_XAPI_LOGON_FAILURE, VMPP_LICENSE_ERROR, VMPP_ARCHIVE_TARGET_UNMOUNT_FAILED, VMPP_ARCHIVE_TARGET_MOUNT_FAILED, VMPP_ARCHIVE_SUCCEEDED, VMPP_ARCHIVE_FAILED_0, VMPP_ARCHIVE_LOCK_FAILED, VMPP_SNAPSHOT_FAILED, VMPP_SNAPSHOT_SUCCEEDED, VMPP_SNAPSHOT_LOCK_FAILED, LICENSE_SERVER_UNREACHABLE, LICENSE_NOT_AVAILABLE, GRACE_LICENSE, LICENSE_EXPIRED, LICENSE_SERVER_UNAVAILABLE, LICENSE_SERVER_CONNECTED, MULTIPATH_PERIODIC_ALERT, EXTAUTH_IN_POOL_IS_NON_HOMOGENEOUS, EXTAUTH_INIT_IN_HOST_FAILED, WLB_OPTIMIZATION_ALERT, WLB_CONSULTATION_FAILED, ALARM, PBD_PLUG_FAILED_ON_SERVER_START, POOL_MASTER_TRANSITION, HOST_CLOCK_WENT_BACKWARDS, HOST_CLOCK_SKEW_DETECTED, HOST_SYNC_DATA_FAILED, VM_CLONED, VM_CRASHED, VM_RESUMED, VM_SUSPENDED, VM_REBOOTED, VM_SHUTDOWN, VM_STARTED, VCPU_QOS_FAILED, VBD_QOS_FAILED, VIF_QOS_FAILED, IP_CONFIGURED_PIF_CAN_UNPLUG, METADATA_LUN_BROKEN, METADATA_LUN_HEALTHY, HA_HOST_WAS_FENCED, HA_HOST_FAILED, HA_PROTECTED_VM_RESTART_FAILED, HA_POOL_DROP_IN_PLAN_EXISTS_FOR, HA_POOL_OVERCOMMITTED, HA_NETWORK_BONDING_ERROR, HA_XAPI_HEALTHCHECK_APPROACHING_TIMEOUT, HA_STATEFILE_APPROACHING_TIMEOUT, HA_HEARTBEAT_APPROACHING_TIMEOUT, HA_STATEFILE_LOST, LICENSE_EXPIRES_SOON, LICENSE_DOES_NOT_SUPPORT_POOLING, unknown };
@@ -274,89 +278,222 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
-
+        /// <summary>
+        /// 
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_name">The name of the message</param>
+        /// <param name="_priority">The priority of the message</param>
+        /// <param name="_cls">The class of object this message is associated with</param>
+        /// <param name="_obj_uuid">The uuid of the object this message is associated with</param>
+        /// <param name="_body">The body of the message</param>
         public static XenRef<Message> create(Session session, string _name, long _priority, cls _cls, string _obj_uuid, string _body)
         {
             return XenRef<Message>.Create(session.proxy.message_create(session.uuid, (_name != null) ? _name : "", _priority.ToString(), cls_helper.ToString(_cls), (_obj_uuid != null) ? _obj_uuid : "", (_body != null) ? _body : "").parse());
         }
 
-        public static void destroy(Session session, string _self)
+        /// <summary>
+        /// 
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_message">The opaque_ref of the given message</param>
+        public static void destroy(Session session, string _message)
         {
-            session.proxy.message_destroy(session.uuid, (_self != null) ? _self : "").parse();
+            session.proxy.message_destroy(session.uuid, (_message != null) ? _message : "").parse();
         }
 
+        /// <summary>
+        /// 
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_cls">The class of object</param>
+        /// <param name="_obj_uuid">The uuid of the object</param>
+        /// <param name="_since">The cutoff time</param>
         public static Dictionary<XenRef<Message>, Message> get(Session session, cls _cls, string _obj_uuid, DateTime _since)
         {
             return XenRef<Message>.Create<Proxy_Message>(session.proxy.message_get(session.uuid, cls_helper.ToString(_cls), (_obj_uuid != null) ? _obj_uuid : "", _since).parse());
         }
 
+        /// <summary>
+        /// 
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static List<XenRef<Message>> get_all(Session session)
         {
             return XenRef<Message>.Create(session.proxy.message_get_all(session.uuid).parse());
         }
 
+        /// <summary>
+        /// 
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_since">The cutoff time</param>
         public static Dictionary<XenRef<Message>, Message> get_since(Session session, DateTime _since)
         {
             return XenRef<Message>.Create<Proxy_Message>(session.proxy.message_get_since(session.uuid, _since).parse());
         }
 
-        public static Message get_record(Session session, string _self)
+        /// <summary>
+        /// 
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_message">The opaque_ref of the given message</param>
+        public static Message get_record(Session session, string _message)
         {
-            return new Message((Proxy_Message)session.proxy.message_get_record(session.uuid, (_self != null) ? _self : "").parse());
+            return new Message((Proxy_Message)session.proxy.message_get_record(session.uuid, (_message != null) ? _message : "").parse());
         }
 
+        /// <summary>
+        /// 
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">The uuid of the message</param>
         public static XenRef<Message> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<Message>.Create(session.proxy.message_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
         }
 
+        /// <summary>
+        /// 
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<Message>, Message> get_all_records(Session session)
         {
             return XenRef<Message>.Create<Proxy_Message>(session.proxy.message_get_all_records(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Unique identifier/object reference
+        /// </summary>
+        public virtual string uuid
+        {
+            get { return _uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _uuid))
+                {
+                    _uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("uuid");
+                }
+            }
+        }
         private string _uuid;
-        public virtual string uuid {
-             get { return _uuid; }
-             set { if (!Helper.AreEqual(value, _uuid)) { _uuid = value; Changed = true; NotifyPropertyChanged("uuid"); } }
-         }
 
+        /// <summary>
+        /// The name of the message
+        /// </summary>
+        public virtual string name
+        {
+            get { return _name; }
+            set
+            {
+                if (!Helper.AreEqual(value, _name))
+                {
+                    _name = value;
+                    Changed = true;
+                    NotifyPropertyChanged("name");
+                }
+            }
+        }
         private string _name;
-        public virtual string name {
-             get { return _name; }
-             set { if (!Helper.AreEqual(value, _name)) { _name = value; Changed = true; NotifyPropertyChanged("name"); } }
-         }
 
+        /// <summary>
+        /// The message priority, 0 being low priority
+        /// </summary>
+        public virtual long priority
+        {
+            get { return _priority; }
+            set
+            {
+                if (!Helper.AreEqual(value, _priority))
+                {
+                    _priority = value;
+                    Changed = true;
+                    NotifyPropertyChanged("priority");
+                }
+            }
+        }
         private long _priority;
-        public virtual long priority {
-             get { return _priority; }
-             set { if (!Helper.AreEqual(value, _priority)) { _priority = value; Changed = true; NotifyPropertyChanged("priority"); } }
-         }
 
+        /// <summary>
+        /// The class of the object this message is associated with
+        /// </summary>
+        public virtual cls cls
+        {
+            get { return _cls; }
+            set
+            {
+                if (!Helper.AreEqual(value, _cls))
+                {
+                    _cls = value;
+                    Changed = true;
+                    NotifyPropertyChanged("cls");
+                }
+            }
+        }
         private cls _cls;
-        public virtual cls cls {
-             get { return _cls; }
-             set { if (!Helper.AreEqual(value, _cls)) { _cls = value; Changed = true; NotifyPropertyChanged("cls"); } }
-         }
 
+        /// <summary>
+        /// The uuid of the object this message is associated with
+        /// </summary>
+        public virtual string obj_uuid
+        {
+            get { return _obj_uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _obj_uuid))
+                {
+                    _obj_uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("obj_uuid");
+                }
+            }
+        }
         private string _obj_uuid;
-        public virtual string obj_uuid {
-             get { return _obj_uuid; }
-             set { if (!Helper.AreEqual(value, _obj_uuid)) { _obj_uuid = value; Changed = true; NotifyPropertyChanged("obj_uuid"); } }
-         }
 
+        /// <summary>
+        /// The time at which the message was created
+        /// </summary>
+        public virtual DateTime timestamp
+        {
+            get { return _timestamp; }
+            set
+            {
+                if (!Helper.AreEqual(value, _timestamp))
+                {
+                    _timestamp = value;
+                    Changed = true;
+                    NotifyPropertyChanged("timestamp");
+                }
+            }
+        }
         private DateTime _timestamp;
-        public virtual DateTime timestamp {
-             get { return _timestamp; }
-             set { if (!Helper.AreEqual(value, _timestamp)) { _timestamp = value; Changed = true; NotifyPropertyChanged("timestamp"); } }
-         }
 
+        /// <summary>
+        /// The body of the message
+        /// </summary>
+        public virtual string body
+        {
+            get { return _body; }
+            set
+            {
+                if (!Helper.AreEqual(value, _body))
+                {
+                    _body = value;
+                    Changed = true;
+                    NotifyPropertyChanged("body");
+                }
+            }
+        }
         private string _body;
-        public virtual string body {
-             get { return _body; }
-             set { if (!Helper.AreEqual(value, _body)) { _body = value; Changed = true; NotifyPropertyChanged("body"); } }
-         }
-
-
     }
 }

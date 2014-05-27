@@ -78,9 +78,8 @@ namespace XenAdmin.Wlb
         /// <param name="state">The current state of the pool's Wlb Server State</param>
         public static void SetState(Pool pool, ServerState state)
         {
-            SetState(pool, state, null);
+            SetState(pool.Connection.Session, pool, state, null);
         }
-
         /// <summary>
         /// Public method for updating the Wlb Server state.  If the state is ConnectionFailure and
         /// a Failure is supplied, it's message is stored in the OtherConfig
@@ -90,6 +89,29 @@ namespace XenAdmin.Wlb
         /// <param name="failure">The Failure (if any) describing the Connection Error</param>
         public static void SetState(Pool pool, ServerState state, Failure failure)
         {
+            SetState(pool.Connection.Session, pool, state, failure);
+        }
+        /// <summary>
+        /// Public method for updating the Wlb Server state when there is no error (Failure) and need specific seesion information.
+        /// This method clears any existing failure message for the connection
+        /// </summary>
+        /// <param name="session">The User session use to do this operation</param>
+        /// <param name="pool">The pool who's Wlb connection state we are updating</param>
+        /// <param name="state">The current state of the pool's Wlb Server State</param>
+        public static void SetState(Session session, Pool pool, ServerState state)
+        {
+            SetState(session, pool, state, null);
+        }
+        /// <summary>
+        /// Public method for updating the Wlb Server state.  If the state is ConnectionFailure and
+        /// a Failure is supplied, it's message is stored in the OtherConfig
+        /// </summary>
+        /// <param name="session">The User session use to do this operation</param>
+        /// <param name="pool">The pool who's Wlb connection state we are updating</param>
+        /// <param name="state">The current state of the pool's Wlb Server State</param>
+        /// <param name="failure">The Failure (if any) describing the Connection Error</param>
+        public static void SetState(Session session, Pool pool, ServerState state, Failure failure)
+        {
             //only update the state if new value if different than current value
             //  this is to cut down on unneeded Pool_PropertiesChanged events
             if (GetState(pool) != state) 
@@ -97,7 +119,7 @@ namespace XenAdmin.Wlb
                 // set a lock so we are setting state one at a time
                 lock (_lockObject)
                 {
-                    Helpers.SetOtherConfig(pool.Connection.Session, pool, WLB_CONNECTION_STATUS, state.ToString());
+                    Helpers.SetOtherConfig(session, pool, WLB_CONNECTION_STATUS, state.ToString());
 
                     if (null != failure && state == ServerState.ConnectionError)
                     {
@@ -110,11 +132,11 @@ namespace XenAdmin.Wlb
                         {
                             error = failure.Message;
                         }
-                        Helpers.SetOtherConfig(pool.Connection.Session, pool, WLB_CONNECTION_ERROR, error);
+                        Helpers.SetOtherConfig(session, pool, WLB_CONNECTION_ERROR, error);
                     }
                     else
                     {
-                        Helpers.SetOtherConfig(pool.Connection.Session, pool, WLB_CONNECTION_ERROR, String.Empty);
+                        Helpers.SetOtherConfig(session, pool, WLB_CONNECTION_ERROR, String.Empty);
                     }
                 }
             }

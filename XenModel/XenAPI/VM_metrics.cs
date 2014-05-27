@@ -38,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// The metrics associated with a VM
+    /// First published in XenServer 4.0.
+    /// </summary>
     public partial class VM_metrics : XenObject<VM_metrics>
     {
         public VM_metrics()
@@ -188,174 +192,432 @@ namespace XenAPI
                 return null;
             }
         }
-
+        /// <summary>
+        /// Get a record containing the current state of the given VM_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static VM_metrics get_record(Session session, string _vm_metrics)
         {
             return new VM_metrics((Proxy_VM_metrics)session.proxy.vm_metrics_get_record(session.uuid, (_vm_metrics != null) ? _vm_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Get a reference to the VM_metrics instance with the specified UUID.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<VM_metrics> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<VM_metrics>.Create(session.proxy.vm_metrics_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
         }
 
+        /// <summary>
+        /// Get the uuid field of the given VM_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static string get_uuid(Session session, string _vm_metrics)
         {
             return (string)session.proxy.vm_metrics_get_uuid(session.uuid, (_vm_metrics != null) ? _vm_metrics : "").parse();
         }
 
+        /// <summary>
+        /// Get the memory/actual field of the given VM_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static long get_memory_actual(Session session, string _vm_metrics)
         {
             return long.Parse((string)session.proxy.vm_metrics_get_memory_actual(session.uuid, (_vm_metrics != null) ? _vm_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Get the VCPUs/number field of the given VM_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static long get_VCPUs_number(Session session, string _vm_metrics)
         {
             return long.Parse((string)session.proxy.vm_metrics_get_vcpus_number(session.uuid, (_vm_metrics != null) ? _vm_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Get the VCPUs/utilisation field of the given VM_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static Dictionary<long, double> get_VCPUs_utilisation(Session session, string _vm_metrics)
         {
             return Maps.convert_from_proxy_long_double(session.proxy.vm_metrics_get_vcpus_utilisation(session.uuid, (_vm_metrics != null) ? _vm_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Get the VCPUs/CPU field of the given VM_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static Dictionary<long, long> get_VCPUs_CPU(Session session, string _vm_metrics)
         {
             return Maps.convert_from_proxy_long_long(session.proxy.vm_metrics_get_vcpus_cpu(session.uuid, (_vm_metrics != null) ? _vm_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Get the VCPUs/params field of the given VM_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static Dictionary<string, string> get_VCPUs_params(Session session, string _vm_metrics)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vm_metrics_get_vcpus_params(session.uuid, (_vm_metrics != null) ? _vm_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Get the VCPUs/flags field of the given VM_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static Dictionary<long, string[]> get_VCPUs_flags(Session session, string _vm_metrics)
         {
             return Maps.convert_from_proxy_long_string_array(session.proxy.vm_metrics_get_vcpus_flags(session.uuid, (_vm_metrics != null) ? _vm_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Get the state field of the given VM_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static string[] get_state(Session session, string _vm_metrics)
         {
             return (string [])session.proxy.vm_metrics_get_state(session.uuid, (_vm_metrics != null) ? _vm_metrics : "").parse();
         }
 
+        /// <summary>
+        /// Get the start_time field of the given VM_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static DateTime get_start_time(Session session, string _vm_metrics)
         {
             return session.proxy.vm_metrics_get_start_time(session.uuid, (_vm_metrics != null) ? _vm_metrics : "").parse();
         }
 
+        /// <summary>
+        /// Get the install_time field of the given VM_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static DateTime get_install_time(Session session, string _vm_metrics)
         {
             return session.proxy.vm_metrics_get_install_time(session.uuid, (_vm_metrics != null) ? _vm_metrics : "").parse();
         }
 
+        /// <summary>
+        /// Get the last_updated field of the given VM_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static DateTime get_last_updated(Session session, string _vm_metrics)
         {
             return session.proxy.vm_metrics_get_last_updated(session.uuid, (_vm_metrics != null) ? _vm_metrics : "").parse();
         }
 
+        /// <summary>
+        /// Get the other_config field of the given VM_metrics.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static Dictionary<string, string> get_other_config(Session session, string _vm_metrics)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vm_metrics_get_other_config(session.uuid, (_vm_metrics != null) ? _vm_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Set the other_config field of the given VM_metrics.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
+        /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _vm_metrics, Dictionary<string, string> _other_config)
         {
             session.proxy.vm_metrics_set_other_config(session.uuid, (_vm_metrics != null) ? _vm_metrics : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the other_config field of the given VM_metrics.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _vm_metrics, string _key, string _value)
         {
             session.proxy.vm_metrics_add_to_other_config(session.uuid, (_vm_metrics != null) ? _vm_metrics : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the other_config field of the given VM_metrics.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _vm_metrics, string _key)
         {
             session.proxy.vm_metrics_remove_from_other_config(session.uuid, (_vm_metrics != null) ? _vm_metrics : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Return a list of all the VM_metrics instances known to the system.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static List<XenRef<VM_metrics>> get_all(Session session)
         {
             return XenRef<VM_metrics>.Create(session.proxy.vm_metrics_get_all(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Get all the VM_metrics Records at once, in a single XML RPC call
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<VM_metrics>, VM_metrics> get_all_records(Session session)
         {
             return XenRef<VM_metrics>.Create<Proxy_VM_metrics>(session.proxy.vm_metrics_get_all_records(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Unique identifier/object reference
+        /// </summary>
+        public virtual string uuid
+        {
+            get { return _uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _uuid))
+                {
+                    _uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("uuid");
+                }
+            }
+        }
         private string _uuid;
-        public virtual string uuid {
-             get { return _uuid; }
-             set { if (!Helper.AreEqual(value, _uuid)) { _uuid = value; Changed = true; NotifyPropertyChanged("uuid"); } }
-         }
 
+        /// <summary>
+        /// Guest's actual memory (bytes)
+        /// </summary>
+        public virtual long memory_actual
+        {
+            get { return _memory_actual; }
+            set
+            {
+                if (!Helper.AreEqual(value, _memory_actual))
+                {
+                    _memory_actual = value;
+                    Changed = true;
+                    NotifyPropertyChanged("memory_actual");
+                }
+            }
+        }
         private long _memory_actual;
-        public virtual long memory_actual {
-             get { return _memory_actual; }
-             set { if (!Helper.AreEqual(value, _memory_actual)) { _memory_actual = value; Changed = true; NotifyPropertyChanged("memory_actual"); } }
-         }
 
+        /// <summary>
+        /// Current number of VCPUs
+        /// </summary>
+        public virtual long VCPUs_number
+        {
+            get { return _VCPUs_number; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VCPUs_number))
+                {
+                    _VCPUs_number = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VCPUs_number");
+                }
+            }
+        }
         private long _VCPUs_number;
-        public virtual long VCPUs_number {
-             get { return _VCPUs_number; }
-             set { if (!Helper.AreEqual(value, _VCPUs_number)) { _VCPUs_number = value; Changed = true; NotifyPropertyChanged("VCPUs_number"); } }
-         }
 
+        /// <summary>
+        /// Utilisation for all of guest's current VCPUs
+        /// </summary>
+        public virtual Dictionary<long, double> VCPUs_utilisation
+        {
+            get { return _VCPUs_utilisation; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VCPUs_utilisation))
+                {
+                    _VCPUs_utilisation = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VCPUs_utilisation");
+                }
+            }
+        }
         private Dictionary<long, double> _VCPUs_utilisation;
-        public virtual Dictionary<long, double> VCPUs_utilisation {
-             get { return _VCPUs_utilisation; }
-             set { if (!Helper.AreEqual(value, _VCPUs_utilisation)) { _VCPUs_utilisation = value; Changed = true; NotifyPropertyChanged("VCPUs_utilisation"); } }
-         }
 
+        /// <summary>
+        /// VCPU to PCPU map
+        /// </summary>
+        public virtual Dictionary<long, long> VCPUs_CPU
+        {
+            get { return _VCPUs_CPU; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VCPUs_CPU))
+                {
+                    _VCPUs_CPU = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VCPUs_CPU");
+                }
+            }
+        }
         private Dictionary<long, long> _VCPUs_CPU;
-        public virtual Dictionary<long, long> VCPUs_CPU {
-             get { return _VCPUs_CPU; }
-             set { if (!Helper.AreEqual(value, _VCPUs_CPU)) { _VCPUs_CPU = value; Changed = true; NotifyPropertyChanged("VCPUs_CPU"); } }
-         }
 
+        /// <summary>
+        /// The live equivalent to VM.VCPUs_params
+        /// </summary>
+        public virtual Dictionary<string, string> VCPUs_params
+        {
+            get { return _VCPUs_params; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VCPUs_params))
+                {
+                    _VCPUs_params = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VCPUs_params");
+                }
+            }
+        }
         private Dictionary<string, string> _VCPUs_params;
-        public virtual Dictionary<string, string> VCPUs_params {
-             get { return _VCPUs_params; }
-             set { if (!Helper.AreEqual(value, _VCPUs_params)) { _VCPUs_params = value; Changed = true; NotifyPropertyChanged("VCPUs_params"); } }
-         }
 
+        /// <summary>
+        /// CPU flags (blocked,online,running)
+        /// </summary>
+        public virtual Dictionary<long, string[]> VCPUs_flags
+        {
+            get { return _VCPUs_flags; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VCPUs_flags))
+                {
+                    _VCPUs_flags = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VCPUs_flags");
+                }
+            }
+        }
         private Dictionary<long, string[]> _VCPUs_flags;
-        public virtual Dictionary<long, string[]> VCPUs_flags {
-             get { return _VCPUs_flags; }
-             set { if (!Helper.AreEqual(value, _VCPUs_flags)) { _VCPUs_flags = value; Changed = true; NotifyPropertyChanged("VCPUs_flags"); } }
-         }
 
+        /// <summary>
+        /// The state of the guest, eg blocked, dying etc
+        /// </summary>
+        public virtual string[] state
+        {
+            get { return _state; }
+            set
+            {
+                if (!Helper.AreEqual(value, _state))
+                {
+                    _state = value;
+                    Changed = true;
+                    NotifyPropertyChanged("state");
+                }
+            }
+        }
         private string[] _state;
-        public virtual string[] state {
-             get { return _state; }
-             set { if (!Helper.AreEqual(value, _state)) { _state = value; Changed = true; NotifyPropertyChanged("state"); } }
-         }
 
+        /// <summary>
+        /// Time at which this VM was last booted
+        /// </summary>
+        public virtual DateTime start_time
+        {
+            get { return _start_time; }
+            set
+            {
+                if (!Helper.AreEqual(value, _start_time))
+                {
+                    _start_time = value;
+                    Changed = true;
+                    NotifyPropertyChanged("start_time");
+                }
+            }
+        }
         private DateTime _start_time;
-        public virtual DateTime start_time {
-             get { return _start_time; }
-             set { if (!Helper.AreEqual(value, _start_time)) { _start_time = value; Changed = true; NotifyPropertyChanged("start_time"); } }
-         }
 
+        /// <summary>
+        /// Time at which the VM was installed
+        /// </summary>
+        public virtual DateTime install_time
+        {
+            get { return _install_time; }
+            set
+            {
+                if (!Helper.AreEqual(value, _install_time))
+                {
+                    _install_time = value;
+                    Changed = true;
+                    NotifyPropertyChanged("install_time");
+                }
+            }
+        }
         private DateTime _install_time;
-        public virtual DateTime install_time {
-             get { return _install_time; }
-             set { if (!Helper.AreEqual(value, _install_time)) { _install_time = value; Changed = true; NotifyPropertyChanged("install_time"); } }
-         }
 
+        /// <summary>
+        /// Time at which this information was last updated
+        /// </summary>
+        public virtual DateTime last_updated
+        {
+            get { return _last_updated; }
+            set
+            {
+                if (!Helper.AreEqual(value, _last_updated))
+                {
+                    _last_updated = value;
+                    Changed = true;
+                    NotifyPropertyChanged("last_updated");
+                }
+            }
+        }
         private DateTime _last_updated;
-        public virtual DateTime last_updated {
-             get { return _last_updated; }
-             set { if (!Helper.AreEqual(value, _last_updated)) { _last_updated = value; Changed = true; NotifyPropertyChanged("last_updated"); } }
-         }
 
+        /// <summary>
+        /// additional configuration
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual Dictionary<string, string> other_config
+        {
+            get { return _other_config; }
+            set
+            {
+                if (!Helper.AreEqual(value, _other_config))
+                {
+                    _other_config = value;
+                    Changed = true;
+                    NotifyPropertyChanged("other_config");
+                }
+            }
+        }
         private Dictionary<string, string> _other_config;
-        public virtual Dictionary<string, string> other_config {
-             get { return _other_config; }
-             set { if (!Helper.AreEqual(value, _other_config)) { _other_config = value; Changed = true; NotifyPropertyChanged("other_config"); } }
-         }
-
-
     }
 }

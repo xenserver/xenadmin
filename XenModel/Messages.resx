@@ -2201,6 +2201,9 @@ Do you want to assign it to the policy '{2}' instead?</value>
   <data name="CHECKING_STORAGELINK_CONNECTIONS" xml:space="preserve">
     <value>Checking StorageLink connections</value>
   </data>
+  <data name="CHECKING_STORAGELINK_STATUS" xml:space="preserve">
+    <value>Checking StorageLink status</value>
+  </data>
   <data name="CHECKING_STORAGE_CONNECTIONS_STATUS" xml:space="preserve">
     <value>Checking storage connections status</value>
   </data>
@@ -3349,7 +3352,7 @@ This will also delete its subfolders.</value>
     <value>Destroying servers</value>
   </data>
   <data name="DESTROYING_POOL" xml:space="preserve">
-    <value>Destroying pool '{0}'</value>
+    <value>Making pool '{0}' into standalone server</value>
   </data>
   <data name="DESTROY_HOST_ACTION_COMPLETED_DESC" xml:space="preserve">
     <value>Host destroyed</value>
@@ -6404,10 +6407,7 @@ This will permanently delete and reinitialize all local storage on the servers. 
     <value>De&amp;lete...</value>
   </data>
   <data name="MAINWINDOW_DELETE_POOL" xml:space="preserve">
-    <value>&amp;Delete Pool...</value>
-  </data>
-  <data name="MAINWINDOW_DELETE_POOL_CONTEXT_MENU" xml:space="preserve">
-    <value>Delete &amp;Pool...</value>
+    <value>Mak&amp;e into standalone server</value>
   </data>
   <data name="MAINWINDOW_DELETE_TAG" xml:space="preserve">
     <value>&amp;Delete Tag...</value>
@@ -6444,6 +6444,9 @@ This will permanently delete and reinitialize all local storage on the servers. 
   </data>
   <data name="MAINWINDOW_EXPIRE_MESSAGE" xml:space="preserve">
     <value>The XenServer license on '{0}' will expire in {1}.</value>
+  </data>
+  <data name="MAINWINDOW_EXPIRE_MESSAGE_TOO_LATE" xml:space="preserve">
+    <value>The XenServer license on '{0}' has expired.</value>
   </data>
   <data name="MAINWINDOW_EXPORT_TEMPLATE" xml:space="preserve">
     <value>&amp;Export to File...</value>
@@ -8564,10 +8567,10 @@ The VM protection policy for this VM does not have automatic archiving configure
     <value>Creating pool</value>
   </data>
   <data name="POOLCREATE_DESTROYED" xml:space="preserve">
-    <value>Destroyed pool</value>
+    <value>Made pool into standalone server</value>
   </data>
   <data name="POOLCREATE_DESTROYING" xml:space="preserve">
-    <value>Destroying pool</value>
+    <value>Making pool into standalone server</value>
   </data>
   <data name="POOLCREATE_REMOVED" xml:space="preserve">
     <value>Removed from pool</value>
@@ -8682,6 +8685,12 @@ The VM protection policy for this VM does not have automatic archiving configure
   </data>
   <data name="PROBLEM_STORAGELINK_CONNECTION_FAILED" xml:space="preserve">
     <value>An error has occurred while attempting to connect to Storage Link Gateway: \n\n{0}\n\nPlease review the settings for this host and reconnect.</value>
+  </data>
+  <data name="PROBLEM_UNSUPPORTED_STORAGELINK_SR" xml:space="preserve">
+    <value>Unsupported StorageLink SR is present.</value>
+  </data>
+  <data name="PROBLEM_UNSUPPORTED_STORAGELINK_SR_HELP" xml:space="preserve">
+    <value>Remove StorageLink SR before upgrading.</value>
   </data>
   <data name="PROBLEM_VMAPPLIANCEPROBLEM_TITLE" xml:space="preserve">
     <value>vApp {0}</value>
@@ -10030,6 +10039,9 @@ Do you want to connect to the pool master '{1}'?</value>
   </data>
   <data name="STORAGELINK_UNABLE_TO_CONNECT" xml:space="preserve">
     <value>Unable to connect to StorageLink server on {0}.</value>
+  </data>
+  <data name="STORAGELINK_UPGRADE_TEST" xml:space="preserve">
+    <value>StorageLink SR status</value>
   </data>
   <data name="STORAGEPOOLS" xml:space="preserve">
     <value>Storage Pools</value>

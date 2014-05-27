@@ -6069,6 +6069,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking StorageLink status.
+        /// </summary>
+        public static string CHECKING_STORAGELINK_STATUS {
+            get {
+                return ResourceManager.GetString("CHECKING_STORAGELINK_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking upgrade hotfix status.
         /// </summary>
         public static string CHECKING_UPGRADE_HOTFIX_STATUS {
@@ -6085,7 +6094,7 @@ namespace XenAdmin {
                 return ResourceManager.GetString("CHECKING_VMPR_STATUS", resourceCulture);
             }
         }
-                
+        
         /// <summary>
         ///   Looks up a localized string similar to Checking the possible presence of WSS appliances.
         /// </summary>
@@ -8723,7 +8732,7 @@ namespace XenAdmin {
                 return ResourceManager.GetString("DEBIAN_SARGE_31", resourceCulture);
             }
         }
-                
+        
         /// <summary>
         ///   Looks up a localized string similar to Disconnecting Workload Balancing..
         /// </summary>
@@ -9425,7 +9434,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Destroying pool &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Making pool &apos;{0}&apos; into standalone server.
         /// </summary>
         public static string DESTROYING_POOL {
             get {
@@ -18361,20 +18370,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Delete Pool....
+        ///   Looks up a localized string similar to Mak&amp;e into standalone server.
         /// </summary>
         public static string MAINWINDOW_DELETE_POOL {
             get {
                 return ResourceManager.GetString("MAINWINDOW_DELETE_POOL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete &amp;Pool....
-        /// </summary>
-        public static string MAINWINDOW_DELETE_POOL_CONTEXT_MENU {
-            get {
-                return ResourceManager.GetString("MAINWINDOW_DELETE_POOL_CONTEXT_MENU", resourceCulture);
             }
         }
         
@@ -18483,6 +18483,15 @@ namespace XenAdmin {
         public static string MAINWINDOW_EXPIRE_MESSAGE {
             get {
                 return ResourceManager.GetString("MAINWINDOW_EXPIRE_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The XenServer license on &apos;{0}&apos; has expired..
+        /// </summary>
+        public static string MAINWINDOW_EXPIRE_MESSAGE_TOO_LATE {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_EXPIRE_MESSAGE_TOO_LATE", resourceCulture);
             }
         }
         
@@ -24796,7 +24805,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Destroyed pool.
+        ///   Looks up a localized string similar to Made pool into standalone server.
         /// </summary>
         public static string POOLCREATE_DESTROYED {
             get {
@@ -24805,7 +24814,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Destroying pool.
+        ///   Looks up a localized string similar to Making pool into standalone server.
         /// </summary>
         public static string POOLCREATE_DESTROYING {
             get {
@@ -24963,6 +24972,24 @@ namespace XenAdmin {
         public static string PROBLEM_STORAGELINK_CONNECTION_FAILED {
             get {
                 return ResourceManager.GetString("PROBLEM_STORAGELINK_CONNECTION_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsupported StorageLink SR is present..
+        /// </summary>
+        public static string PROBLEM_UNSUPPORTED_STORAGELINK_SR {
+            get {
+                return ResourceManager.GetString("PROBLEM_UNSUPPORTED_STORAGELINK_SR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove StorageLink SR before upgrading..
+        /// </summary>
+        public static string PROBLEM_UNSUPPORTED_STORAGELINK_SR_HELP {
+            get {
+                return ResourceManager.GetString("PROBLEM_UNSUPPORTED_STORAGELINK_SR_HELP", resourceCulture);
             }
         }
         
@@ -26588,7 +26615,7 @@ namespace XenAdmin {
                 return ResourceManager.GetString("RPU_WIZARD_VMPR_VMPP_DEPRECATION", resourceCulture);
             }
         }
-                
+        
         /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos;: The use of WSS servers has been removed in XenServer 6.2.
         /// </summary>
@@ -28954,6 +28981,15 @@ namespace XenAdmin {
         public static string STORAGELINK_UNABLE_TO_CONNECT {
             get {
                 return ResourceManager.GetString("STORAGELINK_UNABLE_TO_CONNECT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StorageLink SR status.
+        /// </summary>
+        public static string STORAGELINK_UPGRADE_TEST {
+            get {
+                return ResourceManager.GetString("STORAGELINK_UPGRADE_TEST", resourceCulture);
             }
         }
         

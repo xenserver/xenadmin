@@ -38,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// A physical host
+    /// First published in XenServer 4.0.
+    /// </summary>
     public partial class Host : XenObject<Host>
     {
         public Host()
@@ -482,1075 +486,2700 @@ namespace XenAPI
                 return null;
             }
         }
-
+        /// <summary>
+        /// Get a record containing the current state of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static Host get_record(Session session, string _host)
         {
             return new Host((Proxy_Host)session.proxy.host_get_record(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get a reference to the host instance with the specified UUID.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Host> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<Host>.Create(session.proxy.host_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
         }
 
+        /// <summary>
+        /// Get all the host instances with the given label.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_label">label of object to return</param>
         public static List<XenRef<Host>> get_by_name_label(Session session, string _label)
         {
             return XenRef<Host>.Create(session.proxy.host_get_by_name_label(session.uuid, (_label != null) ? _label : "").parse());
         }
 
+        /// <summary>
+        /// Get the uuid field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static string get_uuid(Session session, string _host)
         {
             return (string)session.proxy.host_get_uuid(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Get the name/label field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static string get_name_label(Session session, string _host)
         {
             return (string)session.proxy.host_get_name_label(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Get the name/description field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static string get_name_description(Session session, string _host)
         {
             return (string)session.proxy.host_get_name_description(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Get the memory/overhead field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static long get_memory_overhead(Session session, string _host)
         {
             return long.Parse((string)session.proxy.host_get_memory_overhead(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the allowed_operations field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static List<host_allowed_operations> get_allowed_operations(Session session, string _host)
         {
             return Helper.StringArrayToEnumList<host_allowed_operations>(session.proxy.host_get_allowed_operations(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the current_operations field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static Dictionary<string, host_allowed_operations> get_current_operations(Session session, string _host)
         {
             return Maps.convert_from_proxy_string_host_allowed_operations(session.proxy.host_get_current_operations(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the API_version/major field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static long get_API_version_major(Session session, string _host)
         {
             return long.Parse((string)session.proxy.host_get_api_version_major(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the API_version/minor field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static long get_API_version_minor(Session session, string _host)
         {
             return long.Parse((string)session.proxy.host_get_api_version_minor(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the API_version/vendor field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static string get_API_version_vendor(Session session, string _host)
         {
             return (string)session.proxy.host_get_api_version_vendor(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Get the API_version/vendor_implementation field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static Dictionary<string, string> get_API_version_vendor_implementation(Session session, string _host)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.host_get_api_version_vendor_implementation(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the enabled field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static bool get_enabled(Session session, string _host)
         {
             return (bool)session.proxy.host_get_enabled(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Get the software_version field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static Dictionary<string, string> get_software_version(Session session, string _host)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.host_get_software_version(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the other_config field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static Dictionary<string, string> get_other_config(Session session, string _host)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.host_get_other_config(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the capabilities field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static string[] get_capabilities(Session session, string _host)
         {
             return (string [])session.proxy.host_get_capabilities(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Get the cpu_configuration field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static Dictionary<string, string> get_cpu_configuration(Session session, string _host)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.host_get_cpu_configuration(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the sched_policy field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static string get_sched_policy(Session session, string _host)
         {
             return (string)session.proxy.host_get_sched_policy(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Get the supported_bootloaders field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static string[] get_supported_bootloaders(Session session, string _host)
         {
             return (string [])session.proxy.host_get_supported_bootloaders(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Get the resident_VMs field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static List<XenRef<VM>> get_resident_VMs(Session session, string _host)
         {
             return XenRef<VM>.Create(session.proxy.host_get_resident_vms(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the logging field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static Dictionary<string, string> get_logging(Session session, string _host)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.host_get_logging(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the PIFs field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static List<XenRef<PIF>> get_PIFs(Session session, string _host)
         {
             return XenRef<PIF>.Create(session.proxy.host_get_pifs(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the suspend_image_sr field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<SR> get_suspend_image_sr(Session session, string _host)
         {
             return XenRef<SR>.Create(session.proxy.host_get_suspend_image_sr(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the crash_dump_sr field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<SR> get_crash_dump_sr(Session session, string _host)
         {
             return XenRef<SR>.Create(session.proxy.host_get_crash_dump_sr(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the crashdumps field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static List<XenRef<Host_crashdump>> get_crashdumps(Session session, string _host)
         {
             return XenRef<Host_crashdump>.Create(session.proxy.host_get_crashdumps(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the patches field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static List<XenRef<Host_patch>> get_patches(Session session, string _host)
         {
             return XenRef<Host_patch>.Create(session.proxy.host_get_patches(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the PBDs field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static List<XenRef<PBD>> get_PBDs(Session session, string _host)
         {
             return XenRef<PBD>.Create(session.proxy.host_get_pbds(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the host_CPUs field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static List<XenRef<Host_cpu>> get_host_CPUs(Session session, string _host)
         {
             return XenRef<Host_cpu>.Create(session.proxy.host_get_host_cpus(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the cpu_info field of the given host.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static Dictionary<string, string> get_cpu_info(Session session, string _host)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.host_get_cpu_info(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the hostname field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static string get_hostname(Session session, string _host)
         {
             return (string)session.proxy.host_get_hostname(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Get the address field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static string get_address(Session session, string _host)
         {
             return (string)session.proxy.host_get_address(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Get the metrics field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<Host_metrics> get_metrics(Session session, string _host)
         {
             return XenRef<Host_metrics>.Create(session.proxy.host_get_metrics(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the license_params field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static Dictionary<string, string> get_license_params(Session session, string _host)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.host_get_license_params(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the ha_statefiles field of the given host.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static string[] get_ha_statefiles(Session session, string _host)
         {
             return (string [])session.proxy.host_get_ha_statefiles(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Get the ha_network_peers field of the given host.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static string[] get_ha_network_peers(Session session, string _host)
         {
             return (string [])session.proxy.host_get_ha_network_peers(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Get the blobs field of the given host.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static Dictionary<string, XenRef<Blob>> get_blobs(Session session, string _host)
         {
             return Maps.convert_from_proxy_string_XenRefBlob(session.proxy.host_get_blobs(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the tags field of the given host.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static string[] get_tags(Session session, string _host)
         {
             return (string [])session.proxy.host_get_tags(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Get the external_auth_type field of the given host.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static string get_external_auth_type(Session session, string _host)
         {
             return (string)session.proxy.host_get_external_auth_type(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Get the external_auth_service_name field of the given host.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static string get_external_auth_service_name(Session session, string _host)
         {
             return (string)session.proxy.host_get_external_auth_service_name(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Get the external_auth_configuration field of the given host.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static Dictionary<string, string> get_external_auth_configuration(Session session, string _host)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.host_get_external_auth_configuration(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the edition field of the given host.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static string get_edition(Session session, string _host)
         {
             return (string)session.proxy.host_get_edition(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Get the license_server field of the given host.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static Dictionary<string, string> get_license_server(Session session, string _host)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.host_get_license_server(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the bios_strings field of the given host.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static Dictionary<string, string> get_bios_strings(Session session, string _host)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.host_get_bios_strings(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the power_on_mode field of the given host.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static string get_power_on_mode(Session session, string _host)
         {
             return (string)session.proxy.host_get_power_on_mode(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Get the power_on_config field of the given host.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static Dictionary<string, string> get_power_on_config(Session session, string _host)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.host_get_power_on_config(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the local_cache_sr field of the given host.
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<SR> get_local_cache_sr(Session session, string _host)
         {
             return XenRef<SR>.Create(session.proxy.host_get_local_cache_sr(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the chipset_info field of the given host.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static Dictionary<string, string> get_chipset_info(Session session, string _host)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.host_get_chipset_info(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the PCIs field of the given host.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static List<XenRef<PCI>> get_PCIs(Session session, string _host)
         {
             return XenRef<PCI>.Create(session.proxy.host_get_pcis(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the PGPUs field of the given host.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static List<XenRef<PGPU>> get_PGPUs(Session session, string _host)
         {
             return XenRef<PGPU>.Create(session.proxy.host_get_pgpus(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the guest_VCPUs_params field of the given host.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static Dictionary<string, string> get_guest_VCPUs_params(Session session, string _host)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.host_get_guest_vcpus_params(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Set the name/label field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_label">New value to set</param>
         public static void set_name_label(Session session, string _host, string _label)
         {
             session.proxy.host_set_name_label(session.uuid, (_host != null) ? _host : "", (_label != null) ? _label : "").parse();
         }
 
+        /// <summary>
+        /// Set the name/description field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_description">New value to set</param>
         public static void set_name_description(Session session, string _host, string _description)
         {
             session.proxy.host_set_name_description(session.uuid, (_host != null) ? _host : "", (_description != null) ? _description : "").parse();
         }
 
+        /// <summary>
+        /// Set the other_config field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _host, Dictionary<string, string> _other_config)
         {
             session.proxy.host_set_other_config(session.uuid, (_host != null) ? _host : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the other_config field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _host, string _key, string _value)
         {
             session.proxy.host_add_to_other_config(session.uuid, (_host != null) ? _host : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the other_config field of the given host.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _host, string _key)
         {
             session.proxy.host_remove_from_other_config(session.uuid, (_host != null) ? _host : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Set the logging field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_logging">New value to set</param>
         public static void set_logging(Session session, string _host, Dictionary<string, string> _logging)
         {
             session.proxy.host_set_logging(session.uuid, (_host != null) ? _host : "", Maps.convert_to_proxy_string_string(_logging)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the logging field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_logging(Session session, string _host, string _key, string _value)
         {
             session.proxy.host_add_to_logging(session.uuid, (_host != null) ? _host : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the logging field of the given host.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_logging(Session session, string _host, string _key)
         {
             session.proxy.host_remove_from_logging(session.uuid, (_host != null) ? _host : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Set the suspend_image_sr field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_suspend_image_sr">New value to set</param>
         public static void set_suspend_image_sr(Session session, string _host, string _suspend_image_sr)
         {
             session.proxy.host_set_suspend_image_sr(session.uuid, (_host != null) ? _host : "", (_suspend_image_sr != null) ? _suspend_image_sr : "").parse();
         }
 
+        /// <summary>
+        /// Set the crash_dump_sr field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_crash_dump_sr">New value to set</param>
         public static void set_crash_dump_sr(Session session, string _host, string _crash_dump_sr)
         {
             session.proxy.host_set_crash_dump_sr(session.uuid, (_host != null) ? _host : "", (_crash_dump_sr != null) ? _crash_dump_sr : "").parse();
         }
 
+        /// <summary>
+        /// Set the hostname field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_hostname">New value to set</param>
         public static void set_hostname(Session session, string _host, string _hostname)
         {
             session.proxy.host_set_hostname(session.uuid, (_host != null) ? _host : "", (_hostname != null) ? _hostname : "").parse();
         }
 
+        /// <summary>
+        /// Set the address field of the given host.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_address">New value to set</param>
         public static void set_address(Session session, string _host, string _address)
         {
             session.proxy.host_set_address(session.uuid, (_host != null) ? _host : "", (_address != null) ? _address : "").parse();
         }
 
+        /// <summary>
+        /// Set the tags field of the given host.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_tags">New value to set</param>
         public static void set_tags(Session session, string _host, string[] _tags)
         {
             session.proxy.host_set_tags(session.uuid, (_host != null) ? _host : "", _tags).parse();
         }
 
+        /// <summary>
+        /// Add the given value to the tags field of the given host.  If the value is already in that Set, then do nothing.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_value">New value to add</param>
         public static void add_tags(Session session, string _host, string _value)
         {
             session.proxy.host_add_tags(session.uuid, (_host != null) ? _host : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given value from the tags field of the given host.  If the value is not in that Set, then do nothing.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_value">Value to remove</param>
         public static void remove_tags(Session session, string _host, string _value)
         {
             session.proxy.host_remove_tags(session.uuid, (_host != null) ? _host : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Set the license_server field of the given host.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_license_server">New value to set</param>
         public static void set_license_server(Session session, string _host, Dictionary<string, string> _license_server)
         {
             session.proxy.host_set_license_server(session.uuid, (_host != null) ? _host : "", Maps.convert_to_proxy_string_string(_license_server)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the license_server field of the given host.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_license_server(Session session, string _host, string _key, string _value)
         {
             session.proxy.host_add_to_license_server(session.uuid, (_host != null) ? _host : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the license_server field of the given host.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_license_server(Session session, string _host, string _key)
         {
             session.proxy.host_remove_from_license_server(session.uuid, (_host != null) ? _host : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Set the guest_VCPUs_params field of the given host.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_guest_vcpus_params">New value to set</param>
         public static void set_guest_VCPUs_params(Session session, string _host, Dictionary<string, string> _guest_vcpus_params)
         {
             session.proxy.host_set_guest_vcpus_params(session.uuid, (_host != null) ? _host : "", Maps.convert_to_proxy_string_string(_guest_vcpus_params)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the guest_VCPUs_params field of the given host.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_guest_VCPUs_params(Session session, string _host, string _key, string _value)
         {
             session.proxy.host_add_to_guest_vcpus_params(session.uuid, (_host != null) ? _host : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the guest_VCPUs_params field of the given host.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_guest_VCPUs_params(Session session, string _host, string _key)
         {
             session.proxy.host_remove_from_guest_vcpus_params(session.uuid, (_host != null) ? _host : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Puts the host into a state in which no new VMs can be started. Currently active VMs on the host continue to execute.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static void disable(Session session, string _host)
         {
             session.proxy.host_disable(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Puts the host into a state in which no new VMs can be started. Currently active VMs on the host continue to execute.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<Task> async_disable(Session session, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_host_disable(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Puts the host into a state in which new VMs can be started.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static void enable(Session session, string _host)
         {
             session.proxy.host_enable(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Puts the host into a state in which new VMs can be started.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<Task> async_enable(Session session, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_host_enable(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Shutdown the host. (This function can only be called if there are no currently running VMs on the host and it is disabled.)
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static void shutdown(Session session, string _host)
         {
             session.proxy.host_shutdown(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Shutdown the host. (This function can only be called if there are no currently running VMs on the host and it is disabled.)
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<Task> async_shutdown(Session session, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_host_shutdown(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Reboot the host. (This function can only be called if there are no currently running VMs on the host and it is disabled.)
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static void reboot(Session session, string _host)
         {
             session.proxy.host_reboot(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Reboot the host. (This function can only be called if there are no currently running VMs on the host and it is disabled.)
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<Task> async_reboot(Session session, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_host_reboot(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the host xen dmesg.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static string dmesg(Session session, string _host)
         {
             return (string)session.proxy.host_dmesg(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Get the host xen dmesg.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<Task> async_dmesg(Session session, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_host_dmesg(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the host xen dmesg, and clear the buffer.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static string dmesg_clear(Session session, string _host)
         {
             return (string)session.proxy.host_dmesg_clear(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Get the host xen dmesg, and clear the buffer.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<Task> async_dmesg_clear(Session session, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_host_dmesg_clear(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the host's log file
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static string get_log(Session session, string _host)
         {
             return (string)session.proxy.host_get_log(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Get the host's log file
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<Task> async_get_log(Session session, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_host_get_log(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Inject the given string as debugging keys into Xen
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_keys">The keys to send</param>
         public static void send_debug_keys(Session session, string _host, string _keys)
         {
             session.proxy.host_send_debug_keys(session.uuid, (_host != null) ? _host : "", (_keys != null) ? _keys : "").parse();
         }
 
+        /// <summary>
+        /// Inject the given string as debugging keys into Xen
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_keys">The keys to send</param>
         public static XenRef<Task> async_send_debug_keys(Session session, string _host, string _keys)
         {
             return XenRef<Task>.Create(session.proxy.async_host_send_debug_keys(session.uuid, (_host != null) ? _host : "", (_keys != null) ? _keys : "").parse());
         }
 
+        /// <summary>
+        /// Run xen-bugtool --yestoall and upload the output to Citrix support
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_url">The URL to upload to</param>
+        /// <param name="_options">Extra configuration operations</param>
         public static void bugreport_upload(Session session, string _host, string _url, Dictionary<string, string> _options)
         {
             session.proxy.host_bugreport_upload(session.uuid, (_host != null) ? _host : "", (_url != null) ? _url : "", Maps.convert_to_proxy_string_string(_options)).parse();
         }
 
+        /// <summary>
+        /// Run xen-bugtool --yestoall and upload the output to Citrix support
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_url">The URL to upload to</param>
+        /// <param name="_options">Extra configuration operations</param>
         public static XenRef<Task> async_bugreport_upload(Session session, string _host, string _url, Dictionary<string, string> _options)
         {
             return XenRef<Task>.Create(session.proxy.async_host_bugreport_upload(session.uuid, (_host != null) ? _host : "", (_url != null) ? _url : "", Maps.convert_to_proxy_string_string(_options)).parse());
         }
 
+        /// <summary>
+        /// List all supported methods
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static string[] list_methods(Session session)
         {
             return (string [])session.proxy.host_list_methods(session.uuid).parse();
         }
 
+        /// <summary>
+        /// Apply a new license to a host
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_contents">The contents of the license file, base64 encoded</param>
         public static void license_apply(Session session, string _host, string _contents)
         {
             session.proxy.host_license_apply(session.uuid, (_host != null) ? _host : "", (_contents != null) ? _contents : "").parse();
         }
 
+        /// <summary>
+        /// Apply a new license to a host
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_contents">The contents of the license file, base64 encoded</param>
         public static XenRef<Task> async_license_apply(Session session, string _host, string _contents)
         {
             return XenRef<Task>.Create(session.proxy.async_host_license_apply(session.uuid, (_host != null) ? _host : "", (_contents != null) ? _contents : "").parse());
         }
 
-        public static void destroy(Session session, string _self)
+        /// <summary>
+        /// Destroy specified host record in database
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static void destroy(Session session, string _host)
         {
-            session.proxy.host_destroy(session.uuid, (_self != null) ? _self : "").parse();
+            session.proxy.host_destroy(session.uuid, (_host != null) ? _host : "").parse();
         }
 
-        public static XenRef<Task> async_destroy(Session session, string _self)
+        /// <summary>
+        /// Destroy specified host record in database
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static XenRef<Task> async_destroy(Session session, string _host)
         {
-            return XenRef<Task>.Create(session.proxy.async_host_destroy(session.uuid, (_self != null) ? _self : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_host_destroy(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Attempt to power-on the host (if the capability exists).
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static void power_on(Session session, string _host)
         {
             session.proxy.host_power_on(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Attempt to power-on the host (if the capability exists).
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<Task> async_power_on(Session session, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_host_power_on(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// This call disables HA on the local host. This should only be used with extreme care.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static void emergency_ha_disable(Session session)
         {
             session.proxy.host_emergency_ha_disable(session.uuid).parse();
         }
 
+        /// <summary>
+        /// 
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static List<Data_source> get_data_sources(Session session, string _host)
         {
             return Helper.Proxy_Data_sourceArrayToData_sourceList(session.proxy.host_get_data_sources(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Start recording the specified data source
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_data_source">The data source to record</param>
         public static void record_data_source(Session session, string _host, string _data_source)
         {
             session.proxy.host_record_data_source(session.uuid, (_host != null) ? _host : "", (_data_source != null) ? _data_source : "").parse();
         }
 
+        /// <summary>
+        /// Query the latest value of the specified data source
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_data_source">The data source to query</param>
         public static double query_data_source(Session session, string _host, string _data_source)
         {
             return Convert.ToDouble(session.proxy.host_query_data_source(session.uuid, (_host != null) ? _host : "", (_data_source != null) ? _data_source : "").parse());
         }
 
+        /// <summary>
+        /// Forget the recorded statistics related to the specified data source
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_data_source">The data source whose archives are to be forgotten</param>
         public static void forget_data_source_archives(Session session, string _host, string _data_source)
         {
             session.proxy.host_forget_data_source_archives(session.uuid, (_host != null) ? _host : "", (_data_source != null) ? _data_source : "").parse();
         }
 
+        /// <summary>
+        /// Check this host can be evacuated.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static void assert_can_evacuate(Session session, string _host)
         {
             session.proxy.host_assert_can_evacuate(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Check this host can be evacuated.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<Task> async_assert_can_evacuate(Session session, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_host_assert_can_evacuate(session.uuid, (_host != null) ? _host : "").parse());
         }
 
-        public static Dictionary<XenRef<VM>, string[]> get_vms_which_prevent_evacuation(Session session, string _self)
+        /// <summary>
+        /// Return a set of VMs which prevent the host being evacuated, with per-VM error codes
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static Dictionary<XenRef<VM>, string[]> get_vms_which_prevent_evacuation(Session session, string _host)
         {
-            return Maps.convert_from_proxy_XenRefVM_string_array(session.proxy.host_get_vms_which_prevent_evacuation(session.uuid, (_self != null) ? _self : "").parse());
+            return Maps.convert_from_proxy_XenRefVM_string_array(session.proxy.host_get_vms_which_prevent_evacuation(session.uuid, (_host != null) ? _host : "").parse());
         }
 
-        public static XenRef<Task> async_get_vms_which_prevent_evacuation(Session session, string _self)
+        /// <summary>
+        /// Return a set of VMs which prevent the host being evacuated, with per-VM error codes
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static XenRef<Task> async_get_vms_which_prevent_evacuation(Session session, string _host)
         {
-            return XenRef<Task>.Create(session.proxy.async_host_get_vms_which_prevent_evacuation(session.uuid, (_self != null) ? _self : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_host_get_vms_which_prevent_evacuation(session.uuid, (_host != null) ? _host : "").parse());
         }
 
-        public static List<XenRef<VM>> get_uncooperative_resident_VMs(Session session, string _self)
+        /// <summary>
+        /// Return a set of VMs which are not co-operating with the host's memory control system
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static List<XenRef<VM>> get_uncooperative_resident_VMs(Session session, string _host)
         {
-            return XenRef<VM>.Create(session.proxy.host_get_uncooperative_resident_vms(session.uuid, (_self != null) ? _self : "").parse());
+            return XenRef<VM>.Create(session.proxy.host_get_uncooperative_resident_vms(session.uuid, (_host != null) ? _host : "").parse());
         }
 
-        public static XenRef<Task> async_get_uncooperative_resident_VMs(Session session, string _self)
+        /// <summary>
+        /// Return a set of VMs which are not co-operating with the host's memory control system
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static XenRef<Task> async_get_uncooperative_resident_VMs(Session session, string _host)
         {
-            return XenRef<Task>.Create(session.proxy.async_host_get_uncooperative_resident_vms(session.uuid, (_self != null) ? _self : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_host_get_uncooperative_resident_vms(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Migrate all VMs off of this host, where possible.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static void evacuate(Session session, string _host)
         {
             session.proxy.host_evacuate(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Migrate all VMs off of this host, where possible.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<Task> async_evacuate(Session session, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_host_evacuate(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Re-configure syslog logging
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static void syslog_reconfigure(Session session, string _host)
         {
             session.proxy.host_syslog_reconfigure(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Re-configure syslog logging
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<Task> async_syslog_reconfigure(Session session, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_host_syslog_reconfigure(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Reconfigure the management network interface
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pif">reference to a PIF object corresponding to the management interface</param>
         public static void management_reconfigure(Session session, string _pif)
         {
             session.proxy.host_management_reconfigure(session.uuid, (_pif != null) ? _pif : "").parse();
         }
 
+        /// <summary>
+        /// Reconfigure the management network interface
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pif">reference to a PIF object corresponding to the management interface</param>
         public static XenRef<Task> async_management_reconfigure(Session session, string _pif)
         {
             return XenRef<Task>.Create(session.proxy.async_host_management_reconfigure(session.uuid, (_pif != null) ? _pif : "").parse());
         }
 
+        /// <summary>
+        /// Reconfigure the management network interface. Should only be used if Host.management_reconfigure is impossible because the network configuration is broken.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_interface">name of the interface to use as a management interface</param>
         public static void local_management_reconfigure(Session session, string _interface)
         {
             session.proxy.host_local_management_reconfigure(session.uuid, (_interface != null) ? _interface : "").parse();
         }
 
+        /// <summary>
+        /// Disable the management network interface
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static void management_disable(Session session)
         {
             session.proxy.host_management_disable(session.uuid).parse();
         }
 
+        /// <summary>
+        /// Returns the management interface for the specified host
+        /// Experimental. First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<PIF> get_management_interface(Session session, string _host)
         {
             return XenRef<PIF>.Create(session.proxy.host_get_management_interface(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Returns the management interface for the specified host
+        /// Experimental. First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<Task> async_get_management_interface(Session session, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_host_get_management_interface(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// 
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static string get_system_status_capabilities(Session session, string _host)
         {
             return (string)session.proxy.host_get_system_status_capabilities(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Restarts the agent after a 10 second pause. WARNING: this is a dangerous operation. Any operations in progress will be aborted, and unrecoverable data loss may occur. The caller is responsible for ensuring that there are no operations in progress when this method is called.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static void restart_agent(Session session, string _host)
         {
             session.proxy.host_restart_agent(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Restarts the agent after a 10 second pause. WARNING: this is a dangerous operation. Any operations in progress will be aborted, and unrecoverable data loss may occur. The caller is responsible for ensuring that there are no operations in progress when this method is called.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<Task> async_restart_agent(Session session, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_host_restart_agent(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Shuts the agent down after a 10 second pause. WARNING: this is a dangerous operation. Any operations in progress will be aborted, and unrecoverable data loss may occur. The caller is responsible for ensuring that there are no operations in progress when this method is called.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static void shutdown_agent(Session session)
         {
             session.proxy.host_shutdown_agent(session.uuid).parse();
         }
 
+        /// <summary>
+        /// Sets the host name to the specified string.  Both the API and lower-level system hostname are changed immediately.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_hostname">The new host name</param>
         public static void set_hostname_live(Session session, string _host, string _hostname)
         {
             session.proxy.host_set_hostname_live(session.uuid, (_host != null) ? _host : "", (_hostname != null) ? _hostname : "").parse();
         }
 
+        /// <summary>
+        /// Computes the amount of free memory on the host.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static long compute_free_memory(Session session, string _host)
         {
             return long.Parse((string)session.proxy.host_compute_free_memory(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Computes the amount of free memory on the host.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<Task> async_compute_free_memory(Session session, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_host_compute_free_memory(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Computes the virtualization memory overhead of a host.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static long compute_memory_overhead(Session session, string _host)
         {
             return long.Parse((string)session.proxy.host_compute_memory_overhead(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Computes the virtualization memory overhead of a host.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<Task> async_compute_memory_overhead(Session session, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_host_compute_memory_overhead(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// This causes the synchronisation of the non-database data (messages, RRDs and so on) stored on the master to be synchronised with the host
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static void sync_data(Session session, string _host)
         {
             session.proxy.host_sync_data(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// This causes the RRDs to be backed up to the master
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_delay">Delay in seconds from when the call is received to perform the backup</param>
         public static void backup_rrds(Session session, string _host, double _delay)
         {
             session.proxy.host_backup_rrds(session.uuid, (_host != null) ? _host : "", _delay).parse();
         }
 
+        /// <summary>
+        /// Create a placeholder for a named binary blob of data that is associated with this host
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_name">The name associated with the blob</param>
+        /// <param name="_mime_type">The mime type for the data. Empty string translates to application/octet-stream</param>
+        public static XenRef<Blob> create_new_blob(Session session, string _host, string _name, string _mime_type)
+        {
+            return XenRef<Blob>.Create(session.proxy.host_create_new_blob(session.uuid, (_host != null) ? _host : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "").parse());
+        }
+
+        /// <summary>
+        /// Create a placeholder for a named binary blob of data that is associated with this host
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_name">The name associated with the blob</param>
+        /// <param name="_mime_type">The mime type for the data. Empty string translates to application/octet-stream</param>
+        public static XenRef<Task> async_create_new_blob(Session session, string _host, string _name, string _mime_type)
+        {
+            return XenRef<Task>.Create(session.proxy.async_host_create_new_blob(session.uuid, (_host != null) ? _host : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "").parse());
+        }
+
+        /// <summary>
+        /// Create a placeholder for a named binary blob of data that is associated with this host
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_name">The name associated with the blob</param>
+        /// <param name="_mime_type">The mime type for the data. Empty string translates to application/octet-stream</param>
+        /// <param name="_public">True if the blob should be publicly available First published in XenServer 6.1.</param>
         public static XenRef<Blob> create_new_blob(Session session, string _host, string _name, string _mime_type, bool _public)
         {
             return XenRef<Blob>.Create(session.proxy.host_create_new_blob(session.uuid, (_host != null) ? _host : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "", _public).parse());
         }
 
+        /// <summary>
+        /// Create a placeholder for a named binary blob of data that is associated with this host
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_name">The name associated with the blob</param>
+        /// <param name="_mime_type">The mime type for the data. Empty string translates to application/octet-stream</param>
+        /// <param name="_public">True if the blob should be publicly available First published in XenServer 6.1.</param>
         public static XenRef<Task> async_create_new_blob(Session session, string _host, string _name, string _mime_type, bool _public)
         {
             return XenRef<Task>.Create(session.proxy.async_host_create_new_blob(session.uuid, (_host != null) ? _host : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "", _public).parse());
         }
 
+        /// <summary>
+        /// Call a XenAPI plugin on this host
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_plugin">The name of the plugin</param>
+        /// <param name="_fn">The name of the function within the plugin</param>
+        /// <param name="_args">Arguments for the function</param>
         public static string call_plugin(Session session, string _host, string _plugin, string _fn, Dictionary<string, string> _args)
         {
             return (string)session.proxy.host_call_plugin(session.uuid, (_host != null) ? _host : "", (_plugin != null) ? _plugin : "", (_fn != null) ? _fn : "", Maps.convert_to_proxy_string_string(_args)).parse();
         }
 
+        /// <summary>
+        /// Call a XenAPI plugin on this host
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_plugin">The name of the plugin</param>
+        /// <param name="_fn">The name of the function within the plugin</param>
+        /// <param name="_args">Arguments for the function</param>
         public static XenRef<Task> async_call_plugin(Session session, string _host, string _plugin, string _fn, Dictionary<string, string> _args)
         {
             return XenRef<Task>.Create(session.proxy.async_host_call_plugin(session.uuid, (_host != null) ? _host : "", (_plugin != null) ? _plugin : "", (_fn != null) ? _fn : "", Maps.convert_to_proxy_string_string(_args)).parse());
         }
 
+        /// <summary>
+        /// This call queries the host's clock for the current time
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static DateTime get_servertime(Session session, string _host)
         {
             return session.proxy.host_get_servertime(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// This call queries the host's clock for the current time in the host's local timezone
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static DateTime get_server_localtime(Session session, string _host)
         {
             return session.proxy.host_get_server_localtime(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// This call enables external authentication on a host
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_config">A list of key-values containing the configuration data</param>
+        /// <param name="_service_name">The name of the service</param>
+        /// <param name="_auth_type">The type of authentication (e.g. AD for Active Directory)</param>
         public static void enable_external_auth(Session session, string _host, Dictionary<string, string> _config, string _service_name, string _auth_type)
         {
             session.proxy.host_enable_external_auth(session.uuid, (_host != null) ? _host : "", Maps.convert_to_proxy_string_string(_config), (_service_name != null) ? _service_name : "", (_auth_type != null) ? _auth_type : "").parse();
         }
 
+        /// <summary>
+        /// This call disables external authentication on the local host
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_config">Optional parameters as a list of key-values containing the configuration data</param>
         public static void disable_external_auth(Session session, string _host, Dictionary<string, string> _config)
         {
             session.proxy.host_disable_external_auth(session.uuid, (_host != null) ? _host : "", Maps.convert_to_proxy_string_string(_config)).parse();
         }
 
-        public static Dictionary<XenRef<VM>, string[]> retrieve_wlb_evacuate_recommendations(Session session, string _self)
+        /// <summary>
+        /// Retrieves recommended host migrations to perform when evacuating the host from the wlb server. If a VM cannot be migrated from the host the reason is listed instead of a recommendation.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static Dictionary<XenRef<VM>, string[]> retrieve_wlb_evacuate_recommendations(Session session, string _host)
         {
-            return Maps.convert_from_proxy_XenRefVM_string_array(session.proxy.host_retrieve_wlb_evacuate_recommendations(session.uuid, (_self != null) ? _self : "").parse());
+            return Maps.convert_from_proxy_XenRefVM_string_array(session.proxy.host_retrieve_wlb_evacuate_recommendations(session.uuid, (_host != null) ? _host : "").parse());
         }
 
-        public static XenRef<Task> async_retrieve_wlb_evacuate_recommendations(Session session, string _self)
+        /// <summary>
+        /// Retrieves recommended host migrations to perform when evacuating the host from the wlb server. If a VM cannot be migrated from the host the reason is listed instead of a recommendation.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static XenRef<Task> async_retrieve_wlb_evacuate_recommendations(Session session, string _host)
         {
-            return XenRef<Task>.Create(session.proxy.async_host_retrieve_wlb_evacuate_recommendations(session.uuid, (_self != null) ? _self : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_host_retrieve_wlb_evacuate_recommendations(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Get the installed server SSL certificate.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static string get_server_certificate(Session session, string _host)
         {
             return (string)session.proxy.host_get_server_certificate(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Get the installed server SSL certificate.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<Task> async_get_server_certificate(Session session, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_host_get_server_certificate(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Change to another edition, or reactivate the current edition after a license has expired. This may be subject to the successful checkout of an appropriate license.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_edition">The requested edition</param>
+        public static void apply_edition(Session session, string _host, string _edition)
+        {
+            session.proxy.host_apply_edition(session.uuid, (_host != null) ? _host : "", (_edition != null) ? _edition : "").parse();
+        }
+
+        /// <summary>
+        /// Change to another edition, or reactivate the current edition after a license has expired. This may be subject to the successful checkout of an appropriate license.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_edition">The requested edition</param>
+        /// <param name="_force">Update the license params even if the apply call fails First published in XenServer 6.2.</param>
         public static void apply_edition(Session session, string _host, string _edition, bool _force)
         {
             session.proxy.host_apply_edition(session.uuid, (_host != null) ? _host : "", (_edition != null) ? _edition : "", _force).parse();
         }
 
+        /// <summary>
+        /// Refresh the list of installed Supplemental Packs.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static void refresh_pack_info(Session session, string _host)
         {
             session.proxy.host_refresh_pack_info(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Refresh the list of installed Supplemental Packs.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<Task> async_refresh_pack_info(Session session, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_host_refresh_pack_info(session.uuid, (_host != null) ? _host : "").parse());
         }
 
-        public static void set_power_on_mode(Session session, string _self, string _power_on_mode, Dictionary<string, string> _power_on_config)
+        /// <summary>
+        /// Set the power-on-mode, host, user and password 
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_power_on_mode">power-on-mode can be empty,iLO,wake-on-lan, DRAC or other</param>
+        /// <param name="_power_on_config">Power on config</param>
+        public static void set_power_on_mode(Session session, string _host, string _power_on_mode, Dictionary<string, string> _power_on_config)
         {
-            session.proxy.host_set_power_on_mode(session.uuid, (_self != null) ? _self : "", (_power_on_mode != null) ? _power_on_mode : "", Maps.convert_to_proxy_string_string(_power_on_config)).parse();
+            session.proxy.host_set_power_on_mode(session.uuid, (_host != null) ? _host : "", (_power_on_mode != null) ? _power_on_mode : "", Maps.convert_to_proxy_string_string(_power_on_config)).parse();
         }
 
-        public static XenRef<Task> async_set_power_on_mode(Session session, string _self, string _power_on_mode, Dictionary<string, string> _power_on_config)
+        /// <summary>
+        /// Set the power-on-mode, host, user and password 
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_power_on_mode">power-on-mode can be empty,iLO,wake-on-lan, DRAC or other</param>
+        /// <param name="_power_on_config">Power on config</param>
+        public static XenRef<Task> async_set_power_on_mode(Session session, string _host, string _power_on_mode, Dictionary<string, string> _power_on_config)
         {
-            return XenRef<Task>.Create(session.proxy.async_host_set_power_on_mode(session.uuid, (_self != null) ? _self : "", (_power_on_mode != null) ? _power_on_mode : "", Maps.convert_to_proxy_string_string(_power_on_config)).parse());
+            return XenRef<Task>.Create(session.proxy.async_host_set_power_on_mode(session.uuid, (_host != null) ? _host : "", (_power_on_mode != null) ? _power_on_mode : "", Maps.convert_to_proxy_string_string(_power_on_config)).parse());
         }
 
+        /// <summary>
+        /// Set the CPU features to be used after a reboot, if the given features string is valid.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_features">The features string (32 hexadecimal digits)</param>
         public static void set_cpu_features(Session session, string _host, string _features)
         {
             session.proxy.host_set_cpu_features(session.uuid, (_host != null) ? _host : "", (_features != null) ? _features : "").parse();
         }
 
+        /// <summary>
+        /// Remove the feature mask, such that after a reboot all features of the CPU are enabled.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static void reset_cpu_features(Session session, string _host)
         {
             session.proxy.host_reset_cpu_features(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Enable the use of a local SR for caching purposes
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_sr">The SR to use as a local cache</param>
         public static void enable_local_storage_caching(Session session, string _host, string _sr)
         {
             session.proxy.host_enable_local_storage_caching(session.uuid, (_host != null) ? _host : "", (_sr != null) ? _sr : "").parse();
         }
 
+        /// <summary>
+        /// Disable the use of a local SR for caching purposes
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static void disable_local_storage_caching(Session session, string _host)
         {
             session.proxy.host_disable_local_storage_caching(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Prepare to receive a VM, returning a token which can be passed to VM.migrate.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_network">The network through which migration traffic should be received.</param>
+        /// <param name="_options">Extra configuration operations</param>
         public static Dictionary<string, string> migrate_receive(Session session, string _host, string _network, Dictionary<string, string> _options)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.host_migrate_receive(session.uuid, (_host != null) ? _host : "", (_network != null) ? _network : "", Maps.convert_to_proxy_string_string(_options)).parse());
         }
 
+        /// <summary>
+        /// Prepare to receive a VM, returning a token which can be passed to VM.migrate.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_network">The network through which migration traffic should be received.</param>
+        /// <param name="_options">Extra configuration operations</param>
         public static XenRef<Task> async_migrate_receive(Session session, string _host, string _network, Dictionary<string, string> _options)
         {
             return XenRef<Task>.Create(session.proxy.async_host_migrate_receive(session.uuid, (_host != null) ? _host : "", (_network != null) ? _network : "", Maps.convert_to_proxy_string_string(_options)).parse());
         }
 
+        /// <summary>
+        /// Declare that a host is dead. This is a dangerous operation, and should only be called if the administrator is absolutely sure the host is definitely dead
+        /// First published in XenServer 6.2.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static void declare_dead(Session session, string _host)
         {
             session.proxy.host_declare_dead(session.uuid, (_host != null) ? _host : "").parse();
         }
 
+        /// <summary>
+        /// Declare that a host is dead. This is a dangerous operation, and should only be called if the administrator is absolutely sure the host is definitely dead
+        /// First published in XenServer 6.2.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         public static XenRef<Task> async_declare_dead(Session session, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_host_declare_dead(session.uuid, (_host != null) ? _host : "").parse());
         }
 
+        /// <summary>
+        /// Return a list of all the hosts known to the system.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static List<XenRef<Host>> get_all(Session session)
         {
             return XenRef<Host>.Create(session.proxy.host_get_all(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Get all the host Records at once, in a single XML RPC call
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<Host>, Host> get_all_records(Session session)
         {
             return XenRef<Host>.Create<Proxy_Host>(session.proxy.host_get_all_records(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Unique identifier/object reference
+        /// </summary>
+        public virtual string uuid
+        {
+            get { return _uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _uuid))
+                {
+                    _uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("uuid");
+                }
+            }
+        }
         private string _uuid;
-        public virtual string uuid {
-             get { return _uuid; }
-             set { if (!Helper.AreEqual(value, _uuid)) { _uuid = value; Changed = true; NotifyPropertyChanged("uuid"); } }
-         }
 
+        /// <summary>
+        /// a human-readable name
+        /// </summary>
+        public virtual string name_label
+        {
+            get { return _name_label; }
+            set
+            {
+                if (!Helper.AreEqual(value, _name_label))
+                {
+                    _name_label = value;
+                    Changed = true;
+                    NotifyPropertyChanged("name_label");
+                }
+            }
+        }
         private string _name_label;
-        public virtual string name_label {
-             get { return _name_label; }
-             set { if (!Helper.AreEqual(value, _name_label)) { _name_label = value; Changed = true; NotifyPropertyChanged("name_label"); } }
-         }
 
+        /// <summary>
+        /// a notes field containing human-readable description
+        /// </summary>
+        public virtual string name_description
+        {
+            get { return _name_description; }
+            set
+            {
+                if (!Helper.AreEqual(value, _name_description))
+                {
+                    _name_description = value;
+                    Changed = true;
+                    NotifyPropertyChanged("name_description");
+                }
+            }
+        }
         private string _name_description;
-        public virtual string name_description {
-             get { return _name_description; }
-             set { if (!Helper.AreEqual(value, _name_description)) { _name_description = value; Changed = true; NotifyPropertyChanged("name_description"); } }
-         }
 
+        /// <summary>
+        /// Virtualization memory overhead (bytes).
+        /// </summary>
+        public virtual long memory_overhead
+        {
+            get { return _memory_overhead; }
+            set
+            {
+                if (!Helper.AreEqual(value, _memory_overhead))
+                {
+                    _memory_overhead = value;
+                    Changed = true;
+                    NotifyPropertyChanged("memory_overhead");
+                }
+            }
+        }
         private long _memory_overhead;
-        public virtual long memory_overhead {
-             get { return _memory_overhead; }
-             set { if (!Helper.AreEqual(value, _memory_overhead)) { _memory_overhead = value; Changed = true; NotifyPropertyChanged("memory_overhead"); } }
-         }
 
+        /// <summary>
+        /// list of the operations allowed in this state. This list is advisory only and the server state may have changed by the time this field is read by a client.
+        /// </summary>
+        public virtual List<host_allowed_operations> allowed_operations
+        {
+            get { return _allowed_operations; }
+            set
+            {
+                if (!Helper.AreEqual(value, _allowed_operations))
+                {
+                    _allowed_operations = value;
+                    Changed = true;
+                    NotifyPropertyChanged("allowed_operations");
+                }
+            }
+        }
         private List<host_allowed_operations> _allowed_operations;
-        public virtual List<host_allowed_operations> allowed_operations {
-             get { return _allowed_operations; }
-             set { if (!Helper.AreEqual(value, _allowed_operations)) { _allowed_operations = value; Changed = true; NotifyPropertyChanged("allowed_operations"); } }
-         }
 
+        /// <summary>
+        /// links each of the running tasks using this object (by reference) to a current_operation enum which describes the nature of the task.
+        /// </summary>
+        public virtual Dictionary<string, host_allowed_operations> current_operations
+        {
+            get { return _current_operations; }
+            set
+            {
+                if (!Helper.AreEqual(value, _current_operations))
+                {
+                    _current_operations = value;
+                    Changed = true;
+                    NotifyPropertyChanged("current_operations");
+                }
+            }
+        }
         private Dictionary<string, host_allowed_operations> _current_operations;
-        public virtual Dictionary<string, host_allowed_operations> current_operations {
-             get { return _current_operations; }
-             set { if (!Helper.AreEqual(value, _current_operations)) { _current_operations = value; Changed = true; NotifyPropertyChanged("current_operations"); } }
-         }
 
+        /// <summary>
+        /// major version number
+        /// </summary>
+        public virtual long API_version_major
+        {
+            get { return _API_version_major; }
+            set
+            {
+                if (!Helper.AreEqual(value, _API_version_major))
+                {
+                    _API_version_major = value;
+                    Changed = true;
+                    NotifyPropertyChanged("API_version_major");
+                }
+            }
+        }
         private long _API_version_major;
-        public virtual long API_version_major {
-             get { return _API_version_major; }
-             set { if (!Helper.AreEqual(value, _API_version_major)) { _API_version_major = value; Changed = true; NotifyPropertyChanged("API_version_major"); } }
-         }
 
+        /// <summary>
+        /// minor version number
+        /// </summary>
+        public virtual long API_version_minor
+        {
+            get { return _API_version_minor; }
+            set
+            {
+                if (!Helper.AreEqual(value, _API_version_minor))
+                {
+                    _API_version_minor = value;
+                    Changed = true;
+                    NotifyPropertyChanged("API_version_minor");
+                }
+            }
+        }
         private long _API_version_minor;
-        public virtual long API_version_minor {
-             get { return _API_version_minor; }
-             set { if (!Helper.AreEqual(value, _API_version_minor)) { _API_version_minor = value; Changed = true; NotifyPropertyChanged("API_version_minor"); } }
-         }
 
+        /// <summary>
+        /// identification of vendor
+        /// </summary>
+        public virtual string API_version_vendor
+        {
+            get { return _API_version_vendor; }
+            set
+            {
+                if (!Helper.AreEqual(value, _API_version_vendor))
+                {
+                    _API_version_vendor = value;
+                    Changed = true;
+                    NotifyPropertyChanged("API_version_vendor");
+                }
+            }
+        }
         private string _API_version_vendor;
-        public virtual string API_version_vendor {
-             get { return _API_version_vendor; }
-             set { if (!Helper.AreEqual(value, _API_version_vendor)) { _API_version_vendor = value; Changed = true; NotifyPropertyChanged("API_version_vendor"); } }
-         }
 
+        /// <summary>
+        /// details of vendor implementation
+        /// </summary>
+        public virtual Dictionary<string, string> API_version_vendor_implementation
+        {
+            get { return _API_version_vendor_implementation; }
+            set
+            {
+                if (!Helper.AreEqual(value, _API_version_vendor_implementation))
+                {
+                    _API_version_vendor_implementation = value;
+                    Changed = true;
+                    NotifyPropertyChanged("API_version_vendor_implementation");
+                }
+            }
+        }
         private Dictionary<string, string> _API_version_vendor_implementation;
-        public virtual Dictionary<string, string> API_version_vendor_implementation {
-             get { return _API_version_vendor_implementation; }
-             set { if (!Helper.AreEqual(value, _API_version_vendor_implementation)) { _API_version_vendor_implementation = value; Changed = true; NotifyPropertyChanged("API_version_vendor_implementation"); } }
-         }
 
+        /// <summary>
+        /// True if the host is currently enabled
+        /// </summary>
+        public virtual bool enabled
+        {
+            get { return _enabled; }
+            set
+            {
+                if (!Helper.AreEqual(value, _enabled))
+                {
+                    _enabled = value;
+                    Changed = true;
+                    NotifyPropertyChanged("enabled");
+                }
+            }
+        }
         private bool _enabled;
-        public virtual bool enabled {
-             get { return _enabled; }
-             set { if (!Helper.AreEqual(value, _enabled)) { _enabled = value; Changed = true; NotifyPropertyChanged("enabled"); } }
-         }
 
+        /// <summary>
+        /// version strings
+        /// </summary>
+        public virtual Dictionary<string, string> software_version
+        {
+            get { return _software_version; }
+            set
+            {
+                if (!Helper.AreEqual(value, _software_version))
+                {
+                    _software_version = value;
+                    Changed = true;
+                    NotifyPropertyChanged("software_version");
+                }
+            }
+        }
         private Dictionary<string, string> _software_version;
-        public virtual Dictionary<string, string> software_version {
-             get { return _software_version; }
-             set { if (!Helper.AreEqual(value, _software_version)) { _software_version = value; Changed = true; NotifyPropertyChanged("software_version"); } }
-         }
 
+        /// <summary>
+        /// additional configuration
+        /// </summary>
+        public virtual Dictionary<string, string> other_config
+        {
+            get { return _other_config; }
+            set
+            {
+                if (!Helper.AreEqual(value, _other_config))
+                {
+                    _other_config = value;
+                    Changed = true;
+                    NotifyPropertyChanged("other_config");
+                }
+            }
+        }
         private Dictionary<string, string> _other_config;
-        public virtual Dictionary<string, string> other_config {
-             get { return _other_config; }
-             set { if (!Helper.AreEqual(value, _other_config)) { _other_config = value; Changed = true; NotifyPropertyChanged("other_config"); } }
-         }
 
+        /// <summary>
+        /// Xen capabilities
+        /// </summary>
+        public virtual string[] capabilities
+        {
+            get { return _capabilities; }
+            set
+            {
+                if (!Helper.AreEqual(value, _capabilities))
+                {
+                    _capabilities = value;
+                    Changed = true;
+                    NotifyPropertyChanged("capabilities");
+                }
+            }
+        }
         private string[] _capabilities;
-        public virtual string[] capabilities {
-             get { return _capabilities; }
-             set { if (!Helper.AreEqual(value, _capabilities)) { _capabilities = value; Changed = true; NotifyPropertyChanged("capabilities"); } }
-         }
 
+        /// <summary>
+        /// The CPU configuration on this host.  May contain keys such as "nr_nodes", "sockets_per_node", "cores_per_socket", or "threads_per_core"
+        /// </summary>
+        public virtual Dictionary<string, string> cpu_configuration
+        {
+            get { return _cpu_configuration; }
+            set
+            {
+                if (!Helper.AreEqual(value, _cpu_configuration))
+                {
+                    _cpu_configuration = value;
+                    Changed = true;
+                    NotifyPropertyChanged("cpu_configuration");
+                }
+            }
+        }
         private Dictionary<string, string> _cpu_configuration;
-        public virtual Dictionary<string, string> cpu_configuration {
-             get { return _cpu_configuration; }
-             set { if (!Helper.AreEqual(value, _cpu_configuration)) { _cpu_configuration = value; Changed = true; NotifyPropertyChanged("cpu_configuration"); } }
-         }
 
+        /// <summary>
+        /// Scheduler policy currently in force on this host
+        /// </summary>
+        public virtual string sched_policy
+        {
+            get { return _sched_policy; }
+            set
+            {
+                if (!Helper.AreEqual(value, _sched_policy))
+                {
+                    _sched_policy = value;
+                    Changed = true;
+                    NotifyPropertyChanged("sched_policy");
+                }
+            }
+        }
         private string _sched_policy;
-        public virtual string sched_policy {
-             get { return _sched_policy; }
-             set { if (!Helper.AreEqual(value, _sched_policy)) { _sched_policy = value; Changed = true; NotifyPropertyChanged("sched_policy"); } }
-         }
 
+        /// <summary>
+        /// a list of the bootloaders installed on the machine
+        /// </summary>
+        public virtual string[] supported_bootloaders
+        {
+            get { return _supported_bootloaders; }
+            set
+            {
+                if (!Helper.AreEqual(value, _supported_bootloaders))
+                {
+                    _supported_bootloaders = value;
+                    Changed = true;
+                    NotifyPropertyChanged("supported_bootloaders");
+                }
+            }
+        }
         private string[] _supported_bootloaders;
-        public virtual string[] supported_bootloaders {
-             get { return _supported_bootloaders; }
-             set { if (!Helper.AreEqual(value, _supported_bootloaders)) { _supported_bootloaders = value; Changed = true; NotifyPropertyChanged("supported_bootloaders"); } }
-         }
 
+        /// <summary>
+        /// list of VMs currently resident on host
+        /// </summary>
+        public virtual List<XenRef<VM>> resident_VMs
+        {
+            get { return _resident_VMs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _resident_VMs))
+                {
+                    _resident_VMs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("resident_VMs");
+                }
+            }
+        }
         private List<XenRef<VM>> _resident_VMs;
-        public virtual List<XenRef<VM>> resident_VMs {
-             get { return _resident_VMs; }
-             set { if (!Helper.AreEqual(value, _resident_VMs)) { _resident_VMs = value; Changed = true; NotifyPropertyChanged("resident_VMs"); } }
-         }
 
+        /// <summary>
+        /// logging configuration
+        /// </summary>
+        public virtual Dictionary<string, string> logging
+        {
+            get { return _logging; }
+            set
+            {
+                if (!Helper.AreEqual(value, _logging))
+                {
+                    _logging = value;
+                    Changed = true;
+                    NotifyPropertyChanged("logging");
+                }
+            }
+        }
         private Dictionary<string, string> _logging;
-        public virtual Dictionary<string, string> logging {
-             get { return _logging; }
-             set { if (!Helper.AreEqual(value, _logging)) { _logging = value; Changed = true; NotifyPropertyChanged("logging"); } }
-         }
 
+        /// <summary>
+        /// physical network interfaces
+        /// </summary>
+        public virtual List<XenRef<PIF>> PIFs
+        {
+            get { return _PIFs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _PIFs))
+                {
+                    _PIFs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("PIFs");
+                }
+            }
+        }
         private List<XenRef<PIF>> _PIFs;
-        public virtual List<XenRef<PIF>> PIFs {
-             get { return _PIFs; }
-             set { if (!Helper.AreEqual(value, _PIFs)) { _PIFs = value; Changed = true; NotifyPropertyChanged("PIFs"); } }
-         }
 
+        /// <summary>
+        /// The SR in which VDIs for suspend images are created
+        /// </summary>
+        public virtual XenRef<SR> suspend_image_sr
+        {
+            get { return _suspend_image_sr; }
+            set
+            {
+                if (!Helper.AreEqual(value, _suspend_image_sr))
+                {
+                    _suspend_image_sr = value;
+                    Changed = true;
+                    NotifyPropertyChanged("suspend_image_sr");
+                }
+            }
+        }
         private XenRef<SR> _suspend_image_sr;
-        public virtual XenRef<SR> suspend_image_sr {
-             get { return _suspend_image_sr; }
-             set { if (!Helper.AreEqual(value, _suspend_image_sr)) { _suspend_image_sr = value; Changed = true; NotifyPropertyChanged("suspend_image_sr"); } }
-         }
 
+        /// <summary>
+        /// The SR in which VDIs for crash dumps are created
+        /// </summary>
+        public virtual XenRef<SR> crash_dump_sr
+        {
+            get { return _crash_dump_sr; }
+            set
+            {
+                if (!Helper.AreEqual(value, _crash_dump_sr))
+                {
+                    _crash_dump_sr = value;
+                    Changed = true;
+                    NotifyPropertyChanged("crash_dump_sr");
+                }
+            }
+        }
         private XenRef<SR> _crash_dump_sr;
-        public virtual XenRef<SR> crash_dump_sr {
-             get { return _crash_dump_sr; }
-             set { if (!Helper.AreEqual(value, _crash_dump_sr)) { _crash_dump_sr = value; Changed = true; NotifyPropertyChanged("crash_dump_sr"); } }
-         }
 
+        /// <summary>
+        /// Set of host crash dumps
+        /// </summary>
+        public virtual List<XenRef<Host_crashdump>> crashdumps
+        {
+            get { return _crashdumps; }
+            set
+            {
+                if (!Helper.AreEqual(value, _crashdumps))
+                {
+                    _crashdumps = value;
+                    Changed = true;
+                    NotifyPropertyChanged("crashdumps");
+                }
+            }
+        }
         private List<XenRef<Host_crashdump>> _crashdumps;
-        public virtual List<XenRef<Host_crashdump>> crashdumps {
-             get { return _crashdumps; }
-             set { if (!Helper.AreEqual(value, _crashdumps)) { _crashdumps = value; Changed = true; NotifyPropertyChanged("crashdumps"); } }
-         }
 
+        /// <summary>
+        /// Set of host patches
+        /// </summary>
+        public virtual List<XenRef<Host_patch>> patches
+        {
+            get { return _patches; }
+            set
+            {
+                if (!Helper.AreEqual(value, _patches))
+                {
+                    _patches = value;
+                    Changed = true;
+                    NotifyPropertyChanged("patches");
+                }
+            }
+        }
         private List<XenRef<Host_patch>> _patches;
-        public virtual List<XenRef<Host_patch>> patches {
-             get { return _patches; }
-             set { if (!Helper.AreEqual(value, _patches)) { _patches = value; Changed = true; NotifyPropertyChanged("patches"); } }
-         }
 
+        /// <summary>
+        /// physical blockdevices
+        /// </summary>
+        public virtual List<XenRef<PBD>> PBDs
+        {
+            get { return _PBDs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _PBDs))
+                {
+                    _PBDs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("PBDs");
+                }
+            }
+        }
         private List<XenRef<PBD>> _PBDs;
-        public virtual List<XenRef<PBD>> PBDs {
-             get { return _PBDs; }
-             set { if (!Helper.AreEqual(value, _PBDs)) { _PBDs = value; Changed = true; NotifyPropertyChanged("PBDs"); } }
-         }
 
+        /// <summary>
+        /// The physical CPUs on this host
+        /// </summary>
+        public virtual List<XenRef<Host_cpu>> host_CPUs
+        {
+            get { return _host_CPUs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _host_CPUs))
+                {
+                    _host_CPUs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("host_CPUs");
+                }
+            }
+        }
         private List<XenRef<Host_cpu>> _host_CPUs;
-        public virtual List<XenRef<Host_cpu>> host_CPUs {
-             get { return _host_CPUs; }
-             set { if (!Helper.AreEqual(value, _host_CPUs)) { _host_CPUs = value; Changed = true; NotifyPropertyChanged("host_CPUs"); } }
-         }
 
+        /// <summary>
+        /// Details about the physical CPUs on this host
+        /// First published in XenServer 5.6.
+        /// </summary>
+        public virtual Dictionary<string, string> cpu_info
+        {
+            get { return _cpu_info; }
+            set
+            {
+                if (!Helper.AreEqual(value, _cpu_info))
+                {
+                    _cpu_info = value;
+                    Changed = true;
+                    NotifyPropertyChanged("cpu_info");
+                }
+            }
+        }
         private Dictionary<string, string> _cpu_info;
-        public virtual Dictionary<string, string> cpu_info {
-             get { return _cpu_info; }
-             set { if (!Helper.AreEqual(value, _cpu_info)) { _cpu_info = value; Changed = true; NotifyPropertyChanged("cpu_info"); } }
-         }
 
+        /// <summary>
+        /// The hostname of this host
+        /// </summary>
+        public virtual string hostname
+        {
+            get { return _hostname; }
+            set
+            {
+                if (!Helper.AreEqual(value, _hostname))
+                {
+                    _hostname = value;
+                    Changed = true;
+                    NotifyPropertyChanged("hostname");
+                }
+            }
+        }
         private string _hostname;
-        public virtual string hostname {
-             get { return _hostname; }
-             set { if (!Helper.AreEqual(value, _hostname)) { _hostname = value; Changed = true; NotifyPropertyChanged("hostname"); } }
-         }
 
+        /// <summary>
+        /// The address by which this host can be contacted from any other host in the pool
+        /// </summary>
+        public virtual string address
+        {
+            get { return _address; }
+            set
+            {
+                if (!Helper.AreEqual(value, _address))
+                {
+                    _address = value;
+                    Changed = true;
+                    NotifyPropertyChanged("address");
+                }
+            }
+        }
         private string _address;
-        public virtual string address {
-             get { return _address; }
-             set { if (!Helper.AreEqual(value, _address)) { _address = value; Changed = true; NotifyPropertyChanged("address"); } }
-         }
 
+        /// <summary>
+        /// metrics associated with this host
+        /// </summary>
+        public virtual XenRef<Host_metrics> metrics
+        {
+            get { return _metrics; }
+            set
+            {
+                if (!Helper.AreEqual(value, _metrics))
+                {
+                    _metrics = value;
+                    Changed = true;
+                    NotifyPropertyChanged("metrics");
+                }
+            }
+        }
         private XenRef<Host_metrics> _metrics;
-        public virtual XenRef<Host_metrics> metrics {
-             get { return _metrics; }
-             set { if (!Helper.AreEqual(value, _metrics)) { _metrics = value; Changed = true; NotifyPropertyChanged("metrics"); } }
-         }
 
+        /// <summary>
+        /// State of the current license
+        /// </summary>
+        public virtual Dictionary<string, string> license_params
+        {
+            get { return _license_params; }
+            set
+            {
+                if (!Helper.AreEqual(value, _license_params))
+                {
+                    _license_params = value;
+                    Changed = true;
+                    NotifyPropertyChanged("license_params");
+                }
+            }
+        }
         private Dictionary<string, string> _license_params;
-        public virtual Dictionary<string, string> license_params {
-             get { return _license_params; }
-             set { if (!Helper.AreEqual(value, _license_params)) { _license_params = value; Changed = true; NotifyPropertyChanged("license_params"); } }
-         }
 
+        /// <summary>
+        /// The set of statefiles accessible from this host
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual string[] ha_statefiles
+        {
+            get { return _ha_statefiles; }
+            set
+            {
+                if (!Helper.AreEqual(value, _ha_statefiles))
+                {
+                    _ha_statefiles = value;
+                    Changed = true;
+                    NotifyPropertyChanged("ha_statefiles");
+                }
+            }
+        }
         private string[] _ha_statefiles;
-        public virtual string[] ha_statefiles {
-             get { return _ha_statefiles; }
-             set { if (!Helper.AreEqual(value, _ha_statefiles)) { _ha_statefiles = value; Changed = true; NotifyPropertyChanged("ha_statefiles"); } }
-         }
 
+        /// <summary>
+        /// The set of hosts visible via the network from this host
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual string[] ha_network_peers
+        {
+            get { return _ha_network_peers; }
+            set
+            {
+                if (!Helper.AreEqual(value, _ha_network_peers))
+                {
+                    _ha_network_peers = value;
+                    Changed = true;
+                    NotifyPropertyChanged("ha_network_peers");
+                }
+            }
+        }
         private string[] _ha_network_peers;
-        public virtual string[] ha_network_peers {
-             get { return _ha_network_peers; }
-             set { if (!Helper.AreEqual(value, _ha_network_peers)) { _ha_network_peers = value; Changed = true; NotifyPropertyChanged("ha_network_peers"); } }
-         }
 
+        /// <summary>
+        /// Binary blobs associated with this host
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual Dictionary<string, XenRef<Blob>> blobs
+        {
+            get { return _blobs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _blobs))
+                {
+                    _blobs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("blobs");
+                }
+            }
+        }
         private Dictionary<string, XenRef<Blob>> _blobs;
-        public virtual Dictionary<string, XenRef<Blob>> blobs {
-             get { return _blobs; }
-             set { if (!Helper.AreEqual(value, _blobs)) { _blobs = value; Changed = true; NotifyPropertyChanged("blobs"); } }
-         }
 
+        /// <summary>
+        /// user-specified tags for categorization purposes
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual string[] tags
+        {
+            get { return _tags; }
+            set
+            {
+                if (!Helper.AreEqual(value, _tags))
+                {
+                    _tags = value;
+                    Changed = true;
+                    NotifyPropertyChanged("tags");
+                }
+            }
+        }
         private string[] _tags;
-        public virtual string[] tags {
-             get { return _tags; }
-             set { if (!Helper.AreEqual(value, _tags)) { _tags = value; Changed = true; NotifyPropertyChanged("tags"); } }
-         }
 
+        /// <summary>
+        /// type of external authentication service configured; empty if none configured.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        public virtual string external_auth_type
+        {
+            get { return _external_auth_type; }
+            set
+            {
+                if (!Helper.AreEqual(value, _external_auth_type))
+                {
+                    _external_auth_type = value;
+                    Changed = true;
+                    NotifyPropertyChanged("external_auth_type");
+                }
+            }
+        }
         private string _external_auth_type;
-        public virtual string external_auth_type {
-             get { return _external_auth_type; }
-             set { if (!Helper.AreEqual(value, _external_auth_type)) { _external_auth_type = value; Changed = true; NotifyPropertyChanged("external_auth_type"); } }
-         }
 
+        /// <summary>
+        /// name of external authentication service configured; empty if none configured.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        public virtual string external_auth_service_name
+        {
+            get { return _external_auth_service_name; }
+            set
+            {
+                if (!Helper.AreEqual(value, _external_auth_service_name))
+                {
+                    _external_auth_service_name = value;
+                    Changed = true;
+                    NotifyPropertyChanged("external_auth_service_name");
+                }
+            }
+        }
         private string _external_auth_service_name;
-        public virtual string external_auth_service_name {
-             get { return _external_auth_service_name; }
-             set { if (!Helper.AreEqual(value, _external_auth_service_name)) { _external_auth_service_name = value; Changed = true; NotifyPropertyChanged("external_auth_service_name"); } }
-         }
 
+        /// <summary>
+        /// configuration specific to external authentication service
+        /// First published in XenServer 5.5.
+        /// </summary>
+        public virtual Dictionary<string, string> external_auth_configuration
+        {
+            get { return _external_auth_configuration; }
+            set
+            {
+                if (!Helper.AreEqual(value, _external_auth_configuration))
+                {
+                    _external_auth_configuration = value;
+                    Changed = true;
+                    NotifyPropertyChanged("external_auth_configuration");
+                }
+            }
+        }
         private Dictionary<string, string> _external_auth_configuration;
-        public virtual Dictionary<string, string> external_auth_configuration {
-             get { return _external_auth_configuration; }
-             set { if (!Helper.AreEqual(value, _external_auth_configuration)) { _external_auth_configuration = value; Changed = true; NotifyPropertyChanged("external_auth_configuration"); } }
-         }
 
+        /// <summary>
+        /// XenServer edition
+        /// First published in XenServer 5.6.
+        /// </summary>
+        public virtual string edition
+        {
+            get { return _edition; }
+            set
+            {
+                if (!Helper.AreEqual(value, _edition))
+                {
+                    _edition = value;
+                    Changed = true;
+                    NotifyPropertyChanged("edition");
+                }
+            }
+        }
         private string _edition;
-        public virtual string edition {
-             get { return _edition; }
-             set { if (!Helper.AreEqual(value, _edition)) { _edition = value; Changed = true; NotifyPropertyChanged("edition"); } }
-         }
 
+        /// <summary>
+        /// Contact information of the license server
+        /// First published in XenServer 5.6.
+        /// </summary>
+        public virtual Dictionary<string, string> license_server
+        {
+            get { return _license_server; }
+            set
+            {
+                if (!Helper.AreEqual(value, _license_server))
+                {
+                    _license_server = value;
+                    Changed = true;
+                    NotifyPropertyChanged("license_server");
+                }
+            }
+        }
         private Dictionary<string, string> _license_server;
-        public virtual Dictionary<string, string> license_server {
-             get { return _license_server; }
-             set { if (!Helper.AreEqual(value, _license_server)) { _license_server = value; Changed = true; NotifyPropertyChanged("license_server"); } }
-         }
 
+        /// <summary>
+        /// BIOS strings
+        /// First published in XenServer 5.6.
+        /// </summary>
+        public virtual Dictionary<string, string> bios_strings
+        {
+            get { return _bios_strings; }
+            set
+            {
+                if (!Helper.AreEqual(value, _bios_strings))
+                {
+                    _bios_strings = value;
+                    Changed = true;
+                    NotifyPropertyChanged("bios_strings");
+                }
+            }
+        }
         private Dictionary<string, string> _bios_strings;
-        public virtual Dictionary<string, string> bios_strings {
-             get { return _bios_strings; }
-             set { if (!Helper.AreEqual(value, _bios_strings)) { _bios_strings = value; Changed = true; NotifyPropertyChanged("bios_strings"); } }
-         }
 
+        /// <summary>
+        /// The power on mode
+        /// First published in XenServer 5.6.
+        /// </summary>
+        public virtual string power_on_mode
+        {
+            get { return _power_on_mode; }
+            set
+            {
+                if (!Helper.AreEqual(value, _power_on_mode))
+                {
+                    _power_on_mode = value;
+                    Changed = true;
+                    NotifyPropertyChanged("power_on_mode");
+                }
+            }
+        }
         private string _power_on_mode;
-        public virtual string power_on_mode {
-             get { return _power_on_mode; }
-             set { if (!Helper.AreEqual(value, _power_on_mode)) { _power_on_mode = value; Changed = true; NotifyPropertyChanged("power_on_mode"); } }
-         }
 
+        /// <summary>
+        /// The power on config
+        /// First published in XenServer 5.6.
+        /// </summary>
+        public virtual Dictionary<string, string> power_on_config
+        {
+            get { return _power_on_config; }
+            set
+            {
+                if (!Helper.AreEqual(value, _power_on_config))
+                {
+                    _power_on_config = value;
+                    Changed = true;
+                    NotifyPropertyChanged("power_on_config");
+                }
+            }
+        }
         private Dictionary<string, string> _power_on_config;
-        public virtual Dictionary<string, string> power_on_config {
-             get { return _power_on_config; }
-             set { if (!Helper.AreEqual(value, _power_on_config)) { _power_on_config = value; Changed = true; NotifyPropertyChanged("power_on_config"); } }
-         }
 
+        /// <summary>
+        /// The SR that is used as a local cache
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        public virtual XenRef<SR> local_cache_sr
+        {
+            get { return _local_cache_sr; }
+            set
+            {
+                if (!Helper.AreEqual(value, _local_cache_sr))
+                {
+                    _local_cache_sr = value;
+                    Changed = true;
+                    NotifyPropertyChanged("local_cache_sr");
+                }
+            }
+        }
         private XenRef<SR> _local_cache_sr;
-        public virtual XenRef<SR> local_cache_sr {
-             get { return _local_cache_sr; }
-             set { if (!Helper.AreEqual(value, _local_cache_sr)) { _local_cache_sr = value; Changed = true; NotifyPropertyChanged("local_cache_sr"); } }
-         }
 
+        /// <summary>
+        /// Information about chipset features
+        /// First published in XenServer 6.0.
+        /// </summary>
+        public virtual Dictionary<string, string> chipset_info
+        {
+            get { return _chipset_info; }
+            set
+            {
+                if (!Helper.AreEqual(value, _chipset_info))
+                {
+                    _chipset_info = value;
+                    Changed = true;
+                    NotifyPropertyChanged("chipset_info");
+                }
+            }
+        }
         private Dictionary<string, string> _chipset_info;
-        public virtual Dictionary<string, string> chipset_info {
-             get { return _chipset_info; }
-             set { if (!Helper.AreEqual(value, _chipset_info)) { _chipset_info = value; Changed = true; NotifyPropertyChanged("chipset_info"); } }
-         }
 
+        /// <summary>
+        /// List of PCI devices in the host
+        /// First published in XenServer 6.0.
+        /// </summary>
+        public virtual List<XenRef<PCI>> PCIs
+        {
+            get { return _PCIs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _PCIs))
+                {
+                    _PCIs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("PCIs");
+                }
+            }
+        }
         private List<XenRef<PCI>> _PCIs;
-        public virtual List<XenRef<PCI>> PCIs {
-             get { return _PCIs; }
-             set { if (!Helper.AreEqual(value, _PCIs)) { _PCIs = value; Changed = true; NotifyPropertyChanged("PCIs"); } }
-         }
 
+        /// <summary>
+        /// List of physical GPUs in the host
+        /// First published in XenServer 6.0.
+        /// </summary>
+        public virtual List<XenRef<PGPU>> PGPUs
+        {
+            get { return _PGPUs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _PGPUs))
+                {
+                    _PGPUs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("PGPUs");
+                }
+            }
+        }
         private List<XenRef<PGPU>> _PGPUs;
-        public virtual List<XenRef<PGPU>> PGPUs {
-             get { return _PGPUs; }
-             set { if (!Helper.AreEqual(value, _PGPUs)) { _PGPUs = value; Changed = true; NotifyPropertyChanged("PGPUs"); } }
-         }
 
+        /// <summary>
+        /// VCPUs params to apply to all resident guests
+        /// First published in XenServer 6.1.
+        /// </summary>
+        public virtual Dictionary<string, string> guest_VCPUs_params
+        {
+            get { return _guest_VCPUs_params; }
+            set
+            {
+                if (!Helper.AreEqual(value, _guest_VCPUs_params))
+                {
+                    _guest_VCPUs_params = value;
+                    Changed = true;
+                    NotifyPropertyChanged("guest_VCPUs_params");
+                }
+            }
+        }
         private Dictionary<string, string> _guest_VCPUs_params;
-        public virtual Dictionary<string, string> guest_VCPUs_params {
-             get { return _guest_VCPUs_params; }
-             set { if (!Helper.AreEqual(value, _guest_VCPUs_params)) { _guest_VCPUs_params = value; Changed = true; NotifyPropertyChanged("guest_VCPUs_params"); } }
-         }
-
-
     }
 }

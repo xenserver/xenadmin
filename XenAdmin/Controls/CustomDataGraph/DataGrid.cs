@@ -117,6 +117,10 @@ namespace XenAdmin.Controls.CustomDataGraph
 
             for (double i = args.Range.Min; i <= args.Range.Max; i += args.Range.Resolution)
             {
+                // make sure that the last point is args.Range.Max
+                if (i + args.Range.Resolution > args.Range.Max)
+                    i = args.Range.Max; 
+
                 string label = args.Range.GetRelativeString(i);
                 LongPoint pt = LongPoint.TranslateToScreen(new LongPoint(0, (long)i), DataTimeRange.UnitRange, args.Range, new LongRectangle(args.Rectangle));
 

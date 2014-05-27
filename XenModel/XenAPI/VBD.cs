@@ -38,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// A virtual block device
+    /// First published in XenServer 4.0.
+    /// </summary>
     public partial class VBD : XenObject<VBD>
     {
         public VBD()
@@ -288,409 +292,1009 @@ namespace XenAPI
                 return null;
             }
         }
-
+        /// <summary>
+        /// Get a record containing the current state of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static VBD get_record(Session session, string _vbd)
         {
             return new VBD((Proxy_VBD)session.proxy.vbd_get_record(session.uuid, (_vbd != null) ? _vbd : "").parse());
         }
 
+        /// <summary>
+        /// Get a reference to the VBD instance with the specified UUID.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<VBD> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<VBD>.Create(session.proxy.vbd_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
         }
 
+        /// <summary>
+        /// Create a new VBD instance, and return its handle.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_record">All constructor arguments</param>
         public static XenRef<VBD> create(Session session, VBD _record)
         {
             return XenRef<VBD>.Create(session.proxy.vbd_create(session.uuid, _record.ToProxy()).parse());
         }
 
+        /// <summary>
+        /// Create a new VBD instance, and return its handle.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_record">All constructor arguments</param>
         public static XenRef<Task> async_create(Session session, VBD _record)
         {
             return XenRef<Task>.Create(session.proxy.async_vbd_create(session.uuid, _record.ToProxy()).parse());
         }
 
+        /// <summary>
+        /// Destroy the specified VBD instance.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static void destroy(Session session, string _vbd)
         {
             session.proxy.vbd_destroy(session.uuid, (_vbd != null) ? _vbd : "").parse();
         }
 
+        /// <summary>
+        /// Destroy the specified VBD instance.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static XenRef<Task> async_destroy(Session session, string _vbd)
         {
             return XenRef<Task>.Create(session.proxy.async_vbd_destroy(session.uuid, (_vbd != null) ? _vbd : "").parse());
         }
 
+        /// <summary>
+        /// Get the uuid field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static string get_uuid(Session session, string _vbd)
         {
             return (string)session.proxy.vbd_get_uuid(session.uuid, (_vbd != null) ? _vbd : "").parse();
         }
 
+        /// <summary>
+        /// Get the allowed_operations field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static List<vbd_operations> get_allowed_operations(Session session, string _vbd)
         {
             return Helper.StringArrayToEnumList<vbd_operations>(session.proxy.vbd_get_allowed_operations(session.uuid, (_vbd != null) ? _vbd : "").parse());
         }
 
+        /// <summary>
+        /// Get the current_operations field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static Dictionary<string, vbd_operations> get_current_operations(Session session, string _vbd)
         {
             return Maps.convert_from_proxy_string_vbd_operations(session.proxy.vbd_get_current_operations(session.uuid, (_vbd != null) ? _vbd : "").parse());
         }
 
+        /// <summary>
+        /// Get the VM field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static XenRef<VM> get_VM(Session session, string _vbd)
         {
             return XenRef<VM>.Create(session.proxy.vbd_get_vm(session.uuid, (_vbd != null) ? _vbd : "").parse());
         }
 
+        /// <summary>
+        /// Get the VDI field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static XenRef<VDI> get_VDI(Session session, string _vbd)
         {
             return XenRef<VDI>.Create(session.proxy.vbd_get_vdi(session.uuid, (_vbd != null) ? _vbd : "").parse());
         }
 
+        /// <summary>
+        /// Get the device field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static string get_device(Session session, string _vbd)
         {
             return (string)session.proxy.vbd_get_device(session.uuid, (_vbd != null) ? _vbd : "").parse();
         }
 
+        /// <summary>
+        /// Get the userdevice field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static string get_userdevice(Session session, string _vbd)
         {
             return (string)session.proxy.vbd_get_userdevice(session.uuid, (_vbd != null) ? _vbd : "").parse();
         }
 
+        /// <summary>
+        /// Get the bootable field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static bool get_bootable(Session session, string _vbd)
         {
             return (bool)session.proxy.vbd_get_bootable(session.uuid, (_vbd != null) ? _vbd : "").parse();
         }
 
+        /// <summary>
+        /// Get the mode field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static vbd_mode get_mode(Session session, string _vbd)
         {
             return (vbd_mode)Helper.EnumParseDefault(typeof(vbd_mode), (string)session.proxy.vbd_get_mode(session.uuid, (_vbd != null) ? _vbd : "").parse());
         }
 
+        /// <summary>
+        /// Get the type field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static vbd_type get_type(Session session, string _vbd)
         {
             return (vbd_type)Helper.EnumParseDefault(typeof(vbd_type), (string)session.proxy.vbd_get_type(session.uuid, (_vbd != null) ? _vbd : "").parse());
         }
 
+        /// <summary>
+        /// Get the unpluggable field of the given VBD.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static bool get_unpluggable(Session session, string _vbd)
         {
             return (bool)session.proxy.vbd_get_unpluggable(session.uuid, (_vbd != null) ? _vbd : "").parse();
         }
 
+        /// <summary>
+        /// Get the storage_lock field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static bool get_storage_lock(Session session, string _vbd)
         {
             return (bool)session.proxy.vbd_get_storage_lock(session.uuid, (_vbd != null) ? _vbd : "").parse();
         }
 
+        /// <summary>
+        /// Get the empty field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static bool get_empty(Session session, string _vbd)
         {
             return (bool)session.proxy.vbd_get_empty(session.uuid, (_vbd != null) ? _vbd : "").parse();
         }
 
+        /// <summary>
+        /// Get the other_config field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static Dictionary<string, string> get_other_config(Session session, string _vbd)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vbd_get_other_config(session.uuid, (_vbd != null) ? _vbd : "").parse());
         }
 
+        /// <summary>
+        /// Get the currently_attached field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static bool get_currently_attached(Session session, string _vbd)
         {
             return (bool)session.proxy.vbd_get_currently_attached(session.uuid, (_vbd != null) ? _vbd : "").parse();
         }
 
+        /// <summary>
+        /// Get the status_code field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static long get_status_code(Session session, string _vbd)
         {
             return long.Parse((string)session.proxy.vbd_get_status_code(session.uuid, (_vbd != null) ? _vbd : "").parse());
         }
 
+        /// <summary>
+        /// Get the status_detail field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static string get_status_detail(Session session, string _vbd)
         {
             return (string)session.proxy.vbd_get_status_detail(session.uuid, (_vbd != null) ? _vbd : "").parse();
         }
 
+        /// <summary>
+        /// Get the runtime_properties field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static Dictionary<string, string> get_runtime_properties(Session session, string _vbd)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vbd_get_runtime_properties(session.uuid, (_vbd != null) ? _vbd : "").parse());
         }
 
+        /// <summary>
+        /// Get the qos/algorithm_type field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static string get_qos_algorithm_type(Session session, string _vbd)
         {
             return (string)session.proxy.vbd_get_qos_algorithm_type(session.uuid, (_vbd != null) ? _vbd : "").parse();
         }
 
+        /// <summary>
+        /// Get the qos/algorithm_params field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static Dictionary<string, string> get_qos_algorithm_params(Session session, string _vbd)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.vbd_get_qos_algorithm_params(session.uuid, (_vbd != null) ? _vbd : "").parse());
         }
 
+        /// <summary>
+        /// Get the qos/supported_algorithms field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static string[] get_qos_supported_algorithms(Session session, string _vbd)
         {
             return (string [])session.proxy.vbd_get_qos_supported_algorithms(session.uuid, (_vbd != null) ? _vbd : "").parse();
         }
 
+        /// <summary>
+        /// Get the metrics field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static XenRef<VBD_metrics> get_metrics(Session session, string _vbd)
         {
             return XenRef<VBD_metrics>.Create(session.proxy.vbd_get_metrics(session.uuid, (_vbd != null) ? _vbd : "").parse());
         }
 
+        /// <summary>
+        /// Set the userdevice field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        /// <param name="_userdevice">New value to set</param>
         public static void set_userdevice(Session session, string _vbd, string _userdevice)
         {
             session.proxy.vbd_set_userdevice(session.uuid, (_vbd != null) ? _vbd : "", (_userdevice != null) ? _userdevice : "").parse();
         }
 
+        /// <summary>
+        /// Set the bootable field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        /// <param name="_bootable">New value to set</param>
         public static void set_bootable(Session session, string _vbd, bool _bootable)
         {
             session.proxy.vbd_set_bootable(session.uuid, (_vbd != null) ? _vbd : "", _bootable).parse();
         }
 
+        /// <summary>
+        /// Set the mode field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        /// <param name="_mode">New value to set</param>
         public static void set_mode(Session session, string _vbd, vbd_mode _mode)
         {
             session.proxy.vbd_set_mode(session.uuid, (_vbd != null) ? _vbd : "", vbd_mode_helper.ToString(_mode)).parse();
         }
 
+        /// <summary>
+        /// Set the type field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        /// <param name="_type">New value to set</param>
         public static void set_type(Session session, string _vbd, vbd_type _type)
         {
             session.proxy.vbd_set_type(session.uuid, (_vbd != null) ? _vbd : "", vbd_type_helper.ToString(_type)).parse();
         }
 
+        /// <summary>
+        /// Set the unpluggable field of the given VBD.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        /// <param name="_unpluggable">New value to set</param>
         public static void set_unpluggable(Session session, string _vbd, bool _unpluggable)
         {
             session.proxy.vbd_set_unpluggable(session.uuid, (_vbd != null) ? _vbd : "", _unpluggable).parse();
         }
 
+        /// <summary>
+        /// Set the other_config field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _vbd, Dictionary<string, string> _other_config)
         {
             session.proxy.vbd_set_other_config(session.uuid, (_vbd != null) ? _vbd : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the other_config field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _vbd, string _key, string _value)
         {
             session.proxy.vbd_add_to_other_config(session.uuid, (_vbd != null) ? _vbd : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the other_config field of the given VBD.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _vbd, string _key)
         {
             session.proxy.vbd_remove_from_other_config(session.uuid, (_vbd != null) ? _vbd : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Set the qos/algorithm_type field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        /// <param name="_algorithm_type">New value to set</param>
         public static void set_qos_algorithm_type(Session session, string _vbd, string _algorithm_type)
         {
             session.proxy.vbd_set_qos_algorithm_type(session.uuid, (_vbd != null) ? _vbd : "", (_algorithm_type != null) ? _algorithm_type : "").parse();
         }
 
+        /// <summary>
+        /// Set the qos/algorithm_params field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        /// <param name="_algorithm_params">New value to set</param>
         public static void set_qos_algorithm_params(Session session, string _vbd, Dictionary<string, string> _algorithm_params)
         {
             session.proxy.vbd_set_qos_algorithm_params(session.uuid, (_vbd != null) ? _vbd : "", Maps.convert_to_proxy_string_string(_algorithm_params)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the qos/algorithm_params field of the given VBD.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_qos_algorithm_params(Session session, string _vbd, string _key, string _value)
         {
             session.proxy.vbd_add_to_qos_algorithm_params(session.uuid, (_vbd != null) ? _vbd : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the qos/algorithm_params field of the given VBD.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_qos_algorithm_params(Session session, string _vbd, string _key)
         {
             session.proxy.vbd_remove_from_qos_algorithm_params(session.uuid, (_vbd != null) ? _vbd : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Remove the media from the device and leave it empty
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static void eject(Session session, string _vbd)
         {
             session.proxy.vbd_eject(session.uuid, (_vbd != null) ? _vbd : "").parse();
         }
 
+        /// <summary>
+        /// Remove the media from the device and leave it empty
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static XenRef<Task> async_eject(Session session, string _vbd)
         {
             return XenRef<Task>.Create(session.proxy.async_vbd_eject(session.uuid, (_vbd != null) ? _vbd : "").parse());
         }
 
+        /// <summary>
+        /// Insert new media into the device
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        /// <param name="_vdi">The new VDI to 'insert'</param>
         public static void insert(Session session, string _vbd, string _vdi)
         {
             session.proxy.vbd_insert(session.uuid, (_vbd != null) ? _vbd : "", (_vdi != null) ? _vdi : "").parse();
         }
 
+        /// <summary>
+        /// Insert new media into the device
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        /// <param name="_vdi">The new VDI to 'insert'</param>
         public static XenRef<Task> async_insert(Session session, string _vbd, string _vdi)
         {
             return XenRef<Task>.Create(session.proxy.async_vbd_insert(session.uuid, (_vbd != null) ? _vbd : "", (_vdi != null) ? _vdi : "").parse());
         }
 
-        public static void plug(Session session, string _self)
+        /// <summary>
+        /// Hotplug the specified VBD, dynamically attaching it to the running VM
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        public static void plug(Session session, string _vbd)
         {
-            session.proxy.vbd_plug(session.uuid, (_self != null) ? _self : "").parse();
+            session.proxy.vbd_plug(session.uuid, (_vbd != null) ? _vbd : "").parse();
         }
 
-        public static XenRef<Task> async_plug(Session session, string _self)
+        /// <summary>
+        /// Hotplug the specified VBD, dynamically attaching it to the running VM
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        public static XenRef<Task> async_plug(Session session, string _vbd)
         {
-            return XenRef<Task>.Create(session.proxy.async_vbd_plug(session.uuid, (_self != null) ? _self : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vbd_plug(session.uuid, (_vbd != null) ? _vbd : "").parse());
         }
 
-        public static void unplug(Session session, string _self)
+        /// <summary>
+        /// Hot-unplug the specified VBD, dynamically unattaching it from the running VM
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        public static void unplug(Session session, string _vbd)
         {
-            session.proxy.vbd_unplug(session.uuid, (_self != null) ? _self : "").parse();
+            session.proxy.vbd_unplug(session.uuid, (_vbd != null) ? _vbd : "").parse();
         }
 
-        public static XenRef<Task> async_unplug(Session session, string _self)
+        /// <summary>
+        /// Hot-unplug the specified VBD, dynamically unattaching it from the running VM
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        public static XenRef<Task> async_unplug(Session session, string _vbd)
         {
-            return XenRef<Task>.Create(session.proxy.async_vbd_unplug(session.uuid, (_self != null) ? _self : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vbd_unplug(session.uuid, (_vbd != null) ? _vbd : "").parse());
         }
 
-        public static void unplug_force(Session session, string _self)
+        /// <summary>
+        /// Forcibly unplug the specified VBD
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        public static void unplug_force(Session session, string _vbd)
         {
-            session.proxy.vbd_unplug_force(session.uuid, (_self != null) ? _self : "").parse();
+            session.proxy.vbd_unplug_force(session.uuid, (_vbd != null) ? _vbd : "").parse();
         }
 
-        public static XenRef<Task> async_unplug_force(Session session, string _self)
+        /// <summary>
+        /// Forcibly unplug the specified VBD
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        public static XenRef<Task> async_unplug_force(Session session, string _vbd)
         {
-            return XenRef<Task>.Create(session.proxy.async_vbd_unplug_force(session.uuid, (_self != null) ? _self : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vbd_unplug_force(session.uuid, (_vbd != null) ? _vbd : "").parse());
         }
 
-        public static void assert_attachable(Session session, string _self)
+        /// <summary>
+        /// Throws an error if this VBD could not be attached to this VM if the VM were running. Intended for debugging.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        public static void assert_attachable(Session session, string _vbd)
         {
-            session.proxy.vbd_assert_attachable(session.uuid, (_self != null) ? _self : "").parse();
+            session.proxy.vbd_assert_attachable(session.uuid, (_vbd != null) ? _vbd : "").parse();
         }
 
-        public static XenRef<Task> async_assert_attachable(Session session, string _self)
+        /// <summary>
+        /// Throws an error if this VBD could not be attached to this VM if the VM were running. Intended for debugging.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        public static XenRef<Task> async_assert_attachable(Session session, string _vbd)
         {
-            return XenRef<Task>.Create(session.proxy.async_vbd_assert_attachable(session.uuid, (_self != null) ? _self : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vbd_assert_attachable(session.uuid, (_vbd != null) ? _vbd : "").parse());
         }
 
+        /// <summary>
+        /// Return a list of all the VBDs known to the system.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static List<XenRef<VBD>> get_all(Session session)
         {
             return XenRef<VBD>.Create(session.proxy.vbd_get_all(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Get all the VBD Records at once, in a single XML RPC call
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<VBD>, VBD> get_all_records(Session session)
         {
             return XenRef<VBD>.Create<Proxy_VBD>(session.proxy.vbd_get_all_records(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Unique identifier/object reference
+        /// </summary>
+        public virtual string uuid
+        {
+            get { return _uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _uuid))
+                {
+                    _uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("uuid");
+                }
+            }
+        }
         private string _uuid;
-        public virtual string uuid {
-             get { return _uuid; }
-             set { if (!Helper.AreEqual(value, _uuid)) { _uuid = value; Changed = true; NotifyPropertyChanged("uuid"); } }
-         }
 
+        /// <summary>
+        /// list of the operations allowed in this state. This list is advisory only and the server state may have changed by the time this field is read by a client.
+        /// </summary>
+        public virtual List<vbd_operations> allowed_operations
+        {
+            get { return _allowed_operations; }
+            set
+            {
+                if (!Helper.AreEqual(value, _allowed_operations))
+                {
+                    _allowed_operations = value;
+                    Changed = true;
+                    NotifyPropertyChanged("allowed_operations");
+                }
+            }
+        }
         private List<vbd_operations> _allowed_operations;
-        public virtual List<vbd_operations> allowed_operations {
-             get { return _allowed_operations; }
-             set { if (!Helper.AreEqual(value, _allowed_operations)) { _allowed_operations = value; Changed = true; NotifyPropertyChanged("allowed_operations"); } }
-         }
 
+        /// <summary>
+        /// links each of the running tasks using this object (by reference) to a current_operation enum which describes the nature of the task.
+        /// </summary>
+        public virtual Dictionary<string, vbd_operations> current_operations
+        {
+            get { return _current_operations; }
+            set
+            {
+                if (!Helper.AreEqual(value, _current_operations))
+                {
+                    _current_operations = value;
+                    Changed = true;
+                    NotifyPropertyChanged("current_operations");
+                }
+            }
+        }
         private Dictionary<string, vbd_operations> _current_operations;
-        public virtual Dictionary<string, vbd_operations> current_operations {
-             get { return _current_operations; }
-             set { if (!Helper.AreEqual(value, _current_operations)) { _current_operations = value; Changed = true; NotifyPropertyChanged("current_operations"); } }
-         }
 
+        /// <summary>
+        /// the virtual machine
+        /// </summary>
+        public virtual XenRef<VM> VM
+        {
+            get { return _VM; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VM))
+                {
+                    _VM = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VM");
+                }
+            }
+        }
         private XenRef<VM> _VM;
-        public virtual XenRef<VM> VM {
-             get { return _VM; }
-             set { if (!Helper.AreEqual(value, _VM)) { _VM = value; Changed = true; NotifyPropertyChanged("VM"); } }
-         }
 
+        /// <summary>
+        /// the virtual disk
+        /// </summary>
+        public virtual XenRef<VDI> VDI
+        {
+            get { return _VDI; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VDI))
+                {
+                    _VDI = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VDI");
+                }
+            }
+        }
         private XenRef<VDI> _VDI;
-        public virtual XenRef<VDI> VDI {
-             get { return _VDI; }
-             set { if (!Helper.AreEqual(value, _VDI)) { _VDI = value; Changed = true; NotifyPropertyChanged("VDI"); } }
-         }
 
+        /// <summary>
+        /// device seen by the guest e.g. hda1
+        /// </summary>
+        public virtual string device
+        {
+            get { return _device; }
+            set
+            {
+                if (!Helper.AreEqual(value, _device))
+                {
+                    _device = value;
+                    Changed = true;
+                    NotifyPropertyChanged("device");
+                }
+            }
+        }
         private string _device;
-        public virtual string device {
-             get { return _device; }
-             set { if (!Helper.AreEqual(value, _device)) { _device = value; Changed = true; NotifyPropertyChanged("device"); } }
-         }
 
+        /// <summary>
+        /// user-friendly device name e.g. 0,1,2,etc.
+        /// </summary>
+        public virtual string userdevice
+        {
+            get { return _userdevice; }
+            set
+            {
+                if (!Helper.AreEqual(value, _userdevice))
+                {
+                    _userdevice = value;
+                    Changed = true;
+                    NotifyPropertyChanged("userdevice");
+                }
+            }
+        }
         private string _userdevice;
-        public virtual string userdevice {
-             get { return _userdevice; }
-             set { if (!Helper.AreEqual(value, _userdevice)) { _userdevice = value; Changed = true; NotifyPropertyChanged("userdevice"); } }
-         }
 
+        /// <summary>
+        /// true if this VBD is bootable
+        /// </summary>
+        public virtual bool bootable
+        {
+            get { return _bootable; }
+            set
+            {
+                if (!Helper.AreEqual(value, _bootable))
+                {
+                    _bootable = value;
+                    Changed = true;
+                    NotifyPropertyChanged("bootable");
+                }
+            }
+        }
         private bool _bootable;
-        public virtual bool bootable {
-             get { return _bootable; }
-             set { if (!Helper.AreEqual(value, _bootable)) { _bootable = value; Changed = true; NotifyPropertyChanged("bootable"); } }
-         }
 
+        /// <summary>
+        /// the mode the VBD should be mounted with
+        /// </summary>
+        public virtual vbd_mode mode
+        {
+            get { return _mode; }
+            set
+            {
+                if (!Helper.AreEqual(value, _mode))
+                {
+                    _mode = value;
+                    Changed = true;
+                    NotifyPropertyChanged("mode");
+                }
+            }
+        }
         private vbd_mode _mode;
-        public virtual vbd_mode mode {
-             get { return _mode; }
-             set { if (!Helper.AreEqual(value, _mode)) { _mode = value; Changed = true; NotifyPropertyChanged("mode"); } }
-         }
 
+        /// <summary>
+        /// how the VBD will appear to the guest (e.g. disk or CD)
+        /// </summary>
+        public virtual vbd_type type
+        {
+            get { return _type; }
+            set
+            {
+                if (!Helper.AreEqual(value, _type))
+                {
+                    _type = value;
+                    Changed = true;
+                    NotifyPropertyChanged("type");
+                }
+            }
+        }
         private vbd_type _type;
-        public virtual vbd_type type {
-             get { return _type; }
-             set { if (!Helper.AreEqual(value, _type)) { _type = value; Changed = true; NotifyPropertyChanged("type"); } }
-         }
 
+        /// <summary>
+        /// true if this VBD will support hot-unplug
+        /// First published in XenServer 4.1.
+        /// </summary>
+        public virtual bool unpluggable
+        {
+            get { return _unpluggable; }
+            set
+            {
+                if (!Helper.AreEqual(value, _unpluggable))
+                {
+                    _unpluggable = value;
+                    Changed = true;
+                    NotifyPropertyChanged("unpluggable");
+                }
+            }
+        }
         private bool _unpluggable;
-        public virtual bool unpluggable {
-             get { return _unpluggable; }
-             set { if (!Helper.AreEqual(value, _unpluggable)) { _unpluggable = value; Changed = true; NotifyPropertyChanged("unpluggable"); } }
-         }
 
+        /// <summary>
+        /// true if a storage level lock was acquired
+        /// </summary>
+        public virtual bool storage_lock
+        {
+            get { return _storage_lock; }
+            set
+            {
+                if (!Helper.AreEqual(value, _storage_lock))
+                {
+                    _storage_lock = value;
+                    Changed = true;
+                    NotifyPropertyChanged("storage_lock");
+                }
+            }
+        }
         private bool _storage_lock;
-        public virtual bool storage_lock {
-             get { return _storage_lock; }
-             set { if (!Helper.AreEqual(value, _storage_lock)) { _storage_lock = value; Changed = true; NotifyPropertyChanged("storage_lock"); } }
-         }
 
+        /// <summary>
+        /// if true this represents an empty drive
+        /// </summary>
+        public virtual bool empty
+        {
+            get { return _empty; }
+            set
+            {
+                if (!Helper.AreEqual(value, _empty))
+                {
+                    _empty = value;
+                    Changed = true;
+                    NotifyPropertyChanged("empty");
+                }
+            }
+        }
         private bool _empty;
-        public virtual bool empty {
-             get { return _empty; }
-             set { if (!Helper.AreEqual(value, _empty)) { _empty = value; Changed = true; NotifyPropertyChanged("empty"); } }
-         }
 
+        /// <summary>
+        /// additional configuration
+        /// </summary>
+        public virtual Dictionary<string, string> other_config
+        {
+            get { return _other_config; }
+            set
+            {
+                if (!Helper.AreEqual(value, _other_config))
+                {
+                    _other_config = value;
+                    Changed = true;
+                    NotifyPropertyChanged("other_config");
+                }
+            }
+        }
         private Dictionary<string, string> _other_config;
-        public virtual Dictionary<string, string> other_config {
-             get { return _other_config; }
-             set { if (!Helper.AreEqual(value, _other_config)) { _other_config = value; Changed = true; NotifyPropertyChanged("other_config"); } }
-         }
 
+        /// <summary>
+        /// is the device currently attached (erased on reboot)
+        /// </summary>
+        public virtual bool currently_attached
+        {
+            get { return _currently_attached; }
+            set
+            {
+                if (!Helper.AreEqual(value, _currently_attached))
+                {
+                    _currently_attached = value;
+                    Changed = true;
+                    NotifyPropertyChanged("currently_attached");
+                }
+            }
+        }
         private bool _currently_attached;
-        public virtual bool currently_attached {
-             get { return _currently_attached; }
-             set { if (!Helper.AreEqual(value, _currently_attached)) { _currently_attached = value; Changed = true; NotifyPropertyChanged("currently_attached"); } }
-         }
 
+        /// <summary>
+        /// error/success code associated with last attach-operation (erased on reboot)
+        /// </summary>
+        public virtual long status_code
+        {
+            get { return _status_code; }
+            set
+            {
+                if (!Helper.AreEqual(value, _status_code))
+                {
+                    _status_code = value;
+                    Changed = true;
+                    NotifyPropertyChanged("status_code");
+                }
+            }
+        }
         private long _status_code;
-        public virtual long status_code {
-             get { return _status_code; }
-             set { if (!Helper.AreEqual(value, _status_code)) { _status_code = value; Changed = true; NotifyPropertyChanged("status_code"); } }
-         }
 
+        /// <summary>
+        /// error/success information associated with last attach-operation status (erased on reboot)
+        /// </summary>
+        public virtual string status_detail
+        {
+            get { return _status_detail; }
+            set
+            {
+                if (!Helper.AreEqual(value, _status_detail))
+                {
+                    _status_detail = value;
+                    Changed = true;
+                    NotifyPropertyChanged("status_detail");
+                }
+            }
+        }
         private string _status_detail;
-        public virtual string status_detail {
-             get { return _status_detail; }
-             set { if (!Helper.AreEqual(value, _status_detail)) { _status_detail = value; Changed = true; NotifyPropertyChanged("status_detail"); } }
-         }
 
+        /// <summary>
+        /// Device runtime properties
+        /// </summary>
+        public virtual Dictionary<string, string> runtime_properties
+        {
+            get { return _runtime_properties; }
+            set
+            {
+                if (!Helper.AreEqual(value, _runtime_properties))
+                {
+                    _runtime_properties = value;
+                    Changed = true;
+                    NotifyPropertyChanged("runtime_properties");
+                }
+            }
+        }
         private Dictionary<string, string> _runtime_properties;
-        public virtual Dictionary<string, string> runtime_properties {
-             get { return _runtime_properties; }
-             set { if (!Helper.AreEqual(value, _runtime_properties)) { _runtime_properties = value; Changed = true; NotifyPropertyChanged("runtime_properties"); } }
-         }
 
+        /// <summary>
+        /// QoS algorithm to use
+        /// </summary>
+        public virtual string qos_algorithm_type
+        {
+            get { return _qos_algorithm_type; }
+            set
+            {
+                if (!Helper.AreEqual(value, _qos_algorithm_type))
+                {
+                    _qos_algorithm_type = value;
+                    Changed = true;
+                    NotifyPropertyChanged("qos_algorithm_type");
+                }
+            }
+        }
         private string _qos_algorithm_type;
-        public virtual string qos_algorithm_type {
-             get { return _qos_algorithm_type; }
-             set { if (!Helper.AreEqual(value, _qos_algorithm_type)) { _qos_algorithm_type = value; Changed = true; NotifyPropertyChanged("qos_algorithm_type"); } }
-         }
 
+        /// <summary>
+        /// parameters for chosen QoS algorithm
+        /// </summary>
+        public virtual Dictionary<string, string> qos_algorithm_params
+        {
+            get { return _qos_algorithm_params; }
+            set
+            {
+                if (!Helper.AreEqual(value, _qos_algorithm_params))
+                {
+                    _qos_algorithm_params = value;
+                    Changed = true;
+                    NotifyPropertyChanged("qos_algorithm_params");
+                }
+            }
+        }
         private Dictionary<string, string> _qos_algorithm_params;
-        public virtual Dictionary<string, string> qos_algorithm_params {
-             get { return _qos_algorithm_params; }
-             set { if (!Helper.AreEqual(value, _qos_algorithm_params)) { _qos_algorithm_params = value; Changed = true; NotifyPropertyChanged("qos_algorithm_params"); } }
-         }
 
+        /// <summary>
+        /// supported QoS algorithms for this VBD
+        /// </summary>
+        public virtual string[] qos_supported_algorithms
+        {
+            get { return _qos_supported_algorithms; }
+            set
+            {
+                if (!Helper.AreEqual(value, _qos_supported_algorithms))
+                {
+                    _qos_supported_algorithms = value;
+                    Changed = true;
+                    NotifyPropertyChanged("qos_supported_algorithms");
+                }
+            }
+        }
         private string[] _qos_supported_algorithms;
-        public virtual string[] qos_supported_algorithms {
-             get { return _qos_supported_algorithms; }
-             set { if (!Helper.AreEqual(value, _qos_supported_algorithms)) { _qos_supported_algorithms = value; Changed = true; NotifyPropertyChanged("qos_supported_algorithms"); } }
-         }
 
+        /// <summary>
+        /// metrics associated with this VBD
+        /// </summary>
+        public virtual XenRef<VBD_metrics> metrics
+        {
+            get { return _metrics; }
+            set
+            {
+                if (!Helper.AreEqual(value, _metrics))
+                {
+                    _metrics = value;
+                    Changed = true;
+                    NotifyPropertyChanged("metrics");
+                }
+            }
+        }
         private XenRef<VBD_metrics> _metrics;
-        public virtual XenRef<VBD_metrics> metrics {
-             get { return _metrics; }
-             set { if (!Helper.AreEqual(value, _metrics)) { _metrics = value; Changed = true; NotifyPropertyChanged("metrics"); } }
-         }
-
-
     }
 }

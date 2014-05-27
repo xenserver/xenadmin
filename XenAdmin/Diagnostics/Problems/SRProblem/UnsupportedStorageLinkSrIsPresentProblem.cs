@@ -29,30 +29,33 @@
  * SUCH DAMAGE.
  */
 
-using System;
+using XenAdmin.Diagnostics.Checks;
+using XenAPI;
 
-namespace XenAdmin.Actions
+
+namespace XenAdmin.Diagnostics.Problems.SRProblem
 {
-    public class DestroyPoolAction: PureAsyncAction
+    class UnsupportedStorageLinkSrIsPresentProblem : SRProblem
     {
-        public DestroyPoolAction(XenAPI.Pool pool)
-            : base(pool.Connection, string.Format(Messages.DESTROYING_POOL, pool.Name))
+        public UnsupportedStorageLinkSrIsPresentProblem(Check check, SR sr)
+            : base(check, sr)
         {
-            System.Diagnostics.Trace.Assert(pool != null);
-            Pool = pool;
-            this.Description = Messages.WAITING;
         }
 
-        protected override void Run()
+        public override string Description
         {
-
-            this.Description = Messages.POOLCREATE_DESTROYING;
-            if (Connection.Cache.HostCount != 1)
-                throw new Exception("Cannot destroy a pool of more than one host");  // We should not have any UI to reach here, and must not be allowed to proceed
-            XenAPI.Pool.set_name_label(Session, Pool.opaque_ref, "");
-            XenAPI.Pool.set_name_description(Session, Pool.opaque_ref, "");
-            this.Description = Messages.POOLCREATE_DESTROYED;
+            get
+            {
+                return Messages.PROBLEM_UNSUPPORTED_STORAGELINK_SR;
+            }
         }
-        
+
+        public override string HelpMessage
+        {
+            get
+            {
+                return Messages.PROBLEM_UNSUPPORTED_STORAGELINK_SR_HELP;
+            }
+        }
     }
 }

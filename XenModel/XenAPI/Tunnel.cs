@@ -38,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// A tunnel for network traffic
+    /// First published in XenServer 5.6 FP1.
+    /// </summary>
     public partial class Tunnel : XenObject<Tunnel>
     {
         public Tunnel()
@@ -143,132 +147,311 @@ namespace XenAPI
                 return null;
             }
         }
-
+        /// <summary>
+        /// Get a record containing the current state of the given tunnel.
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_tunnel">The opaque_ref of the given tunnel</param>
         public static Tunnel get_record(Session session, string _tunnel)
         {
             return new Tunnel((Proxy_Tunnel)session.proxy.tunnel_get_record(session.uuid, (_tunnel != null) ? _tunnel : "").parse());
         }
 
+        /// <summary>
+        /// Get a reference to the tunnel instance with the specified UUID.
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Tunnel> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<Tunnel>.Create(session.proxy.tunnel_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
         }
 
+        /// <summary>
+        /// Get the uuid field of the given tunnel.
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_tunnel">The opaque_ref of the given tunnel</param>
         public static string get_uuid(Session session, string _tunnel)
         {
             return (string)session.proxy.tunnel_get_uuid(session.uuid, (_tunnel != null) ? _tunnel : "").parse();
         }
 
+        /// <summary>
+        /// Get the access_PIF field of the given tunnel.
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_tunnel">The opaque_ref of the given tunnel</param>
         public static XenRef<PIF> get_access_PIF(Session session, string _tunnel)
         {
             return XenRef<PIF>.Create(session.proxy.tunnel_get_access_pif(session.uuid, (_tunnel != null) ? _tunnel : "").parse());
         }
 
+        /// <summary>
+        /// Get the transport_PIF field of the given tunnel.
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_tunnel">The opaque_ref of the given tunnel</param>
         public static XenRef<PIF> get_transport_PIF(Session session, string _tunnel)
         {
             return XenRef<PIF>.Create(session.proxy.tunnel_get_transport_pif(session.uuid, (_tunnel != null) ? _tunnel : "").parse());
         }
 
+        /// <summary>
+        /// Get the status field of the given tunnel.
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_tunnel">The opaque_ref of the given tunnel</param>
         public static Dictionary<string, string> get_status(Session session, string _tunnel)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.tunnel_get_status(session.uuid, (_tunnel != null) ? _tunnel : "").parse());
         }
 
+        /// <summary>
+        /// Get the other_config field of the given tunnel.
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_tunnel">The opaque_ref of the given tunnel</param>
         public static Dictionary<string, string> get_other_config(Session session, string _tunnel)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.tunnel_get_other_config(session.uuid, (_tunnel != null) ? _tunnel : "").parse());
         }
 
+        /// <summary>
+        /// Set the status field of the given tunnel.
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_tunnel">The opaque_ref of the given tunnel</param>
+        /// <param name="_status">New value to set</param>
         public static void set_status(Session session, string _tunnel, Dictionary<string, string> _status)
         {
             session.proxy.tunnel_set_status(session.uuid, (_tunnel != null) ? _tunnel : "", Maps.convert_to_proxy_string_string(_status)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the status field of the given tunnel.
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_tunnel">The opaque_ref of the given tunnel</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_status(Session session, string _tunnel, string _key, string _value)
         {
             session.proxy.tunnel_add_to_status(session.uuid, (_tunnel != null) ? _tunnel : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the status field of the given tunnel.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_tunnel">The opaque_ref of the given tunnel</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_status(Session session, string _tunnel, string _key)
         {
             session.proxy.tunnel_remove_from_status(session.uuid, (_tunnel != null) ? _tunnel : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Set the other_config field of the given tunnel.
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_tunnel">The opaque_ref of the given tunnel</param>
+        /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _tunnel, Dictionary<string, string> _other_config)
         {
             session.proxy.tunnel_set_other_config(session.uuid, (_tunnel != null) ? _tunnel : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the other_config field of the given tunnel.
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_tunnel">The opaque_ref of the given tunnel</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _tunnel, string _key, string _value)
         {
             session.proxy.tunnel_add_to_other_config(session.uuid, (_tunnel != null) ? _tunnel : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the other_config field of the given tunnel.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_tunnel">The opaque_ref of the given tunnel</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _tunnel, string _key)
         {
             session.proxy.tunnel_remove_from_other_config(session.uuid, (_tunnel != null) ? _tunnel : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Create a tunnel
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_transport_pif">PIF which receives the tagged traffic</param>
+        /// <param name="_network">Network to receive the tunnelled traffic</param>
         public static XenRef<Tunnel> create(Session session, string _transport_pif, string _network)
         {
             return XenRef<Tunnel>.Create(session.proxy.tunnel_create(session.uuid, (_transport_pif != null) ? _transport_pif : "", (_network != null) ? _network : "").parse());
         }
 
+        /// <summary>
+        /// Create a tunnel
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_transport_pif">PIF which receives the tagged traffic</param>
+        /// <param name="_network">Network to receive the tunnelled traffic</param>
         public static XenRef<Task> async_create(Session session, string _transport_pif, string _network)
         {
             return XenRef<Task>.Create(session.proxy.async_tunnel_create(session.uuid, (_transport_pif != null) ? _transport_pif : "", (_network != null) ? _network : "").parse());
         }
 
-        public static void destroy(Session session, string _self)
+        /// <summary>
+        /// Destroy a tunnel
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_tunnel">The opaque_ref of the given tunnel</param>
+        public static void destroy(Session session, string _tunnel)
         {
-            session.proxy.tunnel_destroy(session.uuid, (_self != null) ? _self : "").parse();
+            session.proxy.tunnel_destroy(session.uuid, (_tunnel != null) ? _tunnel : "").parse();
         }
 
-        public static XenRef<Task> async_destroy(Session session, string _self)
+        /// <summary>
+        /// Destroy a tunnel
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_tunnel">The opaque_ref of the given tunnel</param>
+        public static XenRef<Task> async_destroy(Session session, string _tunnel)
         {
-            return XenRef<Task>.Create(session.proxy.async_tunnel_destroy(session.uuid, (_self != null) ? _self : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_tunnel_destroy(session.uuid, (_tunnel != null) ? _tunnel : "").parse());
         }
 
+        /// <summary>
+        /// Return a list of all the tunnels known to the system.
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static List<XenRef<Tunnel>> get_all(Session session)
         {
             return XenRef<Tunnel>.Create(session.proxy.tunnel_get_all(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Get all the tunnel Records at once, in a single XML RPC call
+        /// First published in XenServer 5.6 FP1.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<Tunnel>, Tunnel> get_all_records(Session session)
         {
             return XenRef<Tunnel>.Create<Proxy_Tunnel>(session.proxy.tunnel_get_all_records(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Unique identifier/object reference
+        /// </summary>
+        public virtual string uuid
+        {
+            get { return _uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _uuid))
+                {
+                    _uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("uuid");
+                }
+            }
+        }
         private string _uuid;
-        public virtual string uuid {
-             get { return _uuid; }
-             set { if (!Helper.AreEqual(value, _uuid)) { _uuid = value; Changed = true; NotifyPropertyChanged("uuid"); } }
-         }
 
+        /// <summary>
+        /// The interface through which the tunnel is accessed
+        /// </summary>
+        public virtual XenRef<PIF> access_PIF
+        {
+            get { return _access_PIF; }
+            set
+            {
+                if (!Helper.AreEqual(value, _access_PIF))
+                {
+                    _access_PIF = value;
+                    Changed = true;
+                    NotifyPropertyChanged("access_PIF");
+                }
+            }
+        }
         private XenRef<PIF> _access_PIF;
-        public virtual XenRef<PIF> access_PIF {
-             get { return _access_PIF; }
-             set { if (!Helper.AreEqual(value, _access_PIF)) { _access_PIF = value; Changed = true; NotifyPropertyChanged("access_PIF"); } }
-         }
 
+        /// <summary>
+        /// The interface used by the tunnel
+        /// </summary>
+        public virtual XenRef<PIF> transport_PIF
+        {
+            get { return _transport_PIF; }
+            set
+            {
+                if (!Helper.AreEqual(value, _transport_PIF))
+                {
+                    _transport_PIF = value;
+                    Changed = true;
+                    NotifyPropertyChanged("transport_PIF");
+                }
+            }
+        }
         private XenRef<PIF> _transport_PIF;
-        public virtual XenRef<PIF> transport_PIF {
-             get { return _transport_PIF; }
-             set { if (!Helper.AreEqual(value, _transport_PIF)) { _transport_PIF = value; Changed = true; NotifyPropertyChanged("transport_PIF"); } }
-         }
 
+        /// <summary>
+        /// Status information about the tunnel
+        /// </summary>
+        public virtual Dictionary<string, string> status
+        {
+            get { return _status; }
+            set
+            {
+                if (!Helper.AreEqual(value, _status))
+                {
+                    _status = value;
+                    Changed = true;
+                    NotifyPropertyChanged("status");
+                }
+            }
+        }
         private Dictionary<string, string> _status;
-        public virtual Dictionary<string, string> status {
-             get { return _status; }
-             set { if (!Helper.AreEqual(value, _status)) { _status = value; Changed = true; NotifyPropertyChanged("status"); } }
-         }
 
+        /// <summary>
+        /// Additional configuration
+        /// </summary>
+        public virtual Dictionary<string, string> other_config
+        {
+            get { return _other_config; }
+            set
+            {
+                if (!Helper.AreEqual(value, _other_config))
+                {
+                    _other_config = value;
+                    Changed = true;
+                    NotifyPropertyChanged("other_config");
+                }
+            }
+        }
         private Dictionary<string, string> _other_config;
-        public virtual Dictionary<string, string> other_config {
-             get { return _other_config; }
-             set { if (!Helper.AreEqual(value, _other_config)) { _other_config = value; Changed = true; NotifyPropertyChanged("other_config"); } }
-         }
-
-
     }
 }
