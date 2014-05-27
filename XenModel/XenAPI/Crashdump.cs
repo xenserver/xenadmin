@@ -38,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// A VM crashdump
+    /// First published in XenServer 4.0.
+    /// </summary>
     public partial class Crashdump : XenObject<Crashdump>
     {
         public Crashdump()
@@ -132,96 +136,222 @@ namespace XenAPI
                 return null;
             }
         }
-
+        /// <summary>
+        /// Get a record containing the current state of the given crashdump.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_crashdump">The opaque_ref of the given crashdump</param>
         public static Crashdump get_record(Session session, string _crashdump)
         {
             return new Crashdump((Proxy_Crashdump)session.proxy.crashdump_get_record(session.uuid, (_crashdump != null) ? _crashdump : "").parse());
         }
 
+        /// <summary>
+        /// Get a reference to the crashdump instance with the specified UUID.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Crashdump> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<Crashdump>.Create(session.proxy.crashdump_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
         }
 
+        /// <summary>
+        /// Get the uuid field of the given crashdump.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_crashdump">The opaque_ref of the given crashdump</param>
         public static string get_uuid(Session session, string _crashdump)
         {
             return (string)session.proxy.crashdump_get_uuid(session.uuid, (_crashdump != null) ? _crashdump : "").parse();
         }
 
+        /// <summary>
+        /// Get the VM field of the given crashdump.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_crashdump">The opaque_ref of the given crashdump</param>
         public static XenRef<VM> get_VM(Session session, string _crashdump)
         {
             return XenRef<VM>.Create(session.proxy.crashdump_get_vm(session.uuid, (_crashdump != null) ? _crashdump : "").parse());
         }
 
+        /// <summary>
+        /// Get the VDI field of the given crashdump.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_crashdump">The opaque_ref of the given crashdump</param>
         public static XenRef<VDI> get_VDI(Session session, string _crashdump)
         {
             return XenRef<VDI>.Create(session.proxy.crashdump_get_vdi(session.uuid, (_crashdump != null) ? _crashdump : "").parse());
         }
 
+        /// <summary>
+        /// Get the other_config field of the given crashdump.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_crashdump">The opaque_ref of the given crashdump</param>
         public static Dictionary<string, string> get_other_config(Session session, string _crashdump)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.crashdump_get_other_config(session.uuid, (_crashdump != null) ? _crashdump : "").parse());
         }
 
+        /// <summary>
+        /// Set the other_config field of the given crashdump.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_crashdump">The opaque_ref of the given crashdump</param>
+        /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _crashdump, Dictionary<string, string> _other_config)
         {
             session.proxy.crashdump_set_other_config(session.uuid, (_crashdump != null) ? _crashdump : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the other_config field of the given crashdump.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_crashdump">The opaque_ref of the given crashdump</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _crashdump, string _key, string _value)
         {
             session.proxy.crashdump_add_to_other_config(session.uuid, (_crashdump != null) ? _crashdump : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the other_config field of the given crashdump.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_crashdump">The opaque_ref of the given crashdump</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _crashdump, string _key)
         {
             session.proxy.crashdump_remove_from_other_config(session.uuid, (_crashdump != null) ? _crashdump : "", (_key != null) ? _key : "").parse();
         }
 
-        public static void destroy(Session session, string _self)
+        /// <summary>
+        /// Destroy the specified crashdump
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_crashdump">The opaque_ref of the given crashdump</param>
+        public static void destroy(Session session, string _crashdump)
         {
-            session.proxy.crashdump_destroy(session.uuid, (_self != null) ? _self : "").parse();
+            session.proxy.crashdump_destroy(session.uuid, (_crashdump != null) ? _crashdump : "").parse();
         }
 
-        public static XenRef<Task> async_destroy(Session session, string _self)
+        /// <summary>
+        /// Destroy the specified crashdump
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_crashdump">The opaque_ref of the given crashdump</param>
+        public static XenRef<Task> async_destroy(Session session, string _crashdump)
         {
-            return XenRef<Task>.Create(session.proxy.async_crashdump_destroy(session.uuid, (_self != null) ? _self : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_crashdump_destroy(session.uuid, (_crashdump != null) ? _crashdump : "").parse());
         }
 
+        /// <summary>
+        /// Return a list of all the crashdumps known to the system.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static List<XenRef<Crashdump>> get_all(Session session)
         {
             return XenRef<Crashdump>.Create(session.proxy.crashdump_get_all(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Get all the crashdump Records at once, in a single XML RPC call
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<Crashdump>, Crashdump> get_all_records(Session session)
         {
             return XenRef<Crashdump>.Create<Proxy_Crashdump>(session.proxy.crashdump_get_all_records(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Unique identifier/object reference
+        /// </summary>
+        public virtual string uuid
+        {
+            get { return _uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _uuid))
+                {
+                    _uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("uuid");
+                }
+            }
+        }
         private string _uuid;
-        public virtual string uuid {
-             get { return _uuid; }
-             set { if (!Helper.AreEqual(value, _uuid)) { _uuid = value; Changed = true; NotifyPropertyChanged("uuid"); } }
-         }
 
+        /// <summary>
+        /// the virtual machine
+        /// </summary>
+        public virtual XenRef<VM> VM
+        {
+            get { return _VM; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VM))
+                {
+                    _VM = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VM");
+                }
+            }
+        }
         private XenRef<VM> _VM;
-        public virtual XenRef<VM> VM {
-             get { return _VM; }
-             set { if (!Helper.AreEqual(value, _VM)) { _VM = value; Changed = true; NotifyPropertyChanged("VM"); } }
-         }
 
+        /// <summary>
+        /// the virtual disk
+        /// </summary>
+        public virtual XenRef<VDI> VDI
+        {
+            get { return _VDI; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VDI))
+                {
+                    _VDI = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VDI");
+                }
+            }
+        }
         private XenRef<VDI> _VDI;
-        public virtual XenRef<VDI> VDI {
-             get { return _VDI; }
-             set { if (!Helper.AreEqual(value, _VDI)) { _VDI = value; Changed = true; NotifyPropertyChanged("VDI"); } }
-         }
 
+        /// <summary>
+        /// additional configuration
+        /// First published in XenServer 4.1.
+        /// </summary>
+        public virtual Dictionary<string, string> other_config
+        {
+            get { return _other_config; }
+            set
+            {
+                if (!Helper.AreEqual(value, _other_config))
+                {
+                    _other_config = value;
+                    Changed = true;
+                    NotifyPropertyChanged("other_config");
+                }
+            }
+        }
         private Dictionary<string, string> _other_config;
-        public virtual Dictionary<string, string> other_config {
-             get { return _other_config; }
-             set { if (!Helper.AreEqual(value, _other_config)) { _other_config = value; Changed = true; NotifyPropertyChanged("other_config"); } }
-         }
-
-
     }
 }

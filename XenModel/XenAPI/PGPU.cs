@@ -38,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// A physical GPU (pGPU)
+    /// First published in XenServer 6.0.
+    /// </summary>
     public partial class PGPU : XenObject<PGPU>
     {
         public PGPU()
@@ -171,191 +175,468 @@ namespace XenAPI
                 return null;
             }
         }
-
+        /// <summary>
+        /// Get a record containing the current state of the given PGPU.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
         public static PGPU get_record(Session session, string _pgpu)
         {
             return new PGPU((Proxy_PGPU)session.proxy.pgpu_get_record(session.uuid, (_pgpu != null) ? _pgpu : "").parse());
         }
 
+        /// <summary>
+        /// Get a reference to the PGPU instance with the specified UUID.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<PGPU> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<PGPU>.Create(session.proxy.pgpu_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
         }
 
+        /// <summary>
+        /// Get the uuid field of the given PGPU.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
         public static string get_uuid(Session session, string _pgpu)
         {
             return (string)session.proxy.pgpu_get_uuid(session.uuid, (_pgpu != null) ? _pgpu : "").parse();
         }
 
+        /// <summary>
+        /// Get the PCI field of the given PGPU.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
         public static XenRef<PCI> get_PCI(Session session, string _pgpu)
         {
             return XenRef<PCI>.Create(session.proxy.pgpu_get_pci(session.uuid, (_pgpu != null) ? _pgpu : "").parse());
         }
 
+        /// <summary>
+        /// Get the GPU_group field of the given PGPU.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
         public static XenRef<GPU_group> get_GPU_group(Session session, string _pgpu)
         {
             return XenRef<GPU_group>.Create(session.proxy.pgpu_get_gpu_group(session.uuid, (_pgpu != null) ? _pgpu : "").parse());
         }
 
+        /// <summary>
+        /// Get the host field of the given PGPU.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
         public static XenRef<Host> get_host(Session session, string _pgpu)
         {
             return XenRef<Host>.Create(session.proxy.pgpu_get_host(session.uuid, (_pgpu != null) ? _pgpu : "").parse());
         }
 
+        /// <summary>
+        /// Get the other_config field of the given PGPU.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
         public static Dictionary<string, string> get_other_config(Session session, string _pgpu)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.pgpu_get_other_config(session.uuid, (_pgpu != null) ? _pgpu : "").parse());
         }
 
+        /// <summary>
+        /// Get the supported_VGPU_types field of the given PGPU.
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
         public static List<XenRef<VGPU_type>> get_supported_VGPU_types(Session session, string _pgpu)
         {
             return XenRef<VGPU_type>.Create(session.proxy.pgpu_get_supported_vgpu_types(session.uuid, (_pgpu != null) ? _pgpu : "").parse());
         }
 
+        /// <summary>
+        /// Get the enabled_VGPU_types field of the given PGPU.
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
         public static List<XenRef<VGPU_type>> get_enabled_VGPU_types(Session session, string _pgpu)
         {
             return XenRef<VGPU_type>.Create(session.proxy.pgpu_get_enabled_vgpu_types(session.uuid, (_pgpu != null) ? _pgpu : "").parse());
         }
 
+        /// <summary>
+        /// Get the resident_VGPUs field of the given PGPU.
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
         public static List<XenRef<VGPU>> get_resident_VGPUs(Session session, string _pgpu)
         {
             return XenRef<VGPU>.Create(session.proxy.pgpu_get_resident_vgpus(session.uuid, (_pgpu != null) ? _pgpu : "").parse());
         }
 
+        /// <summary>
+        /// Get the supported_VGPU_max_capacities field of the given PGPU.
+        /// First published in XenServer 6.2 SP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
         public static Dictionary<XenRef<VGPU_type>, long> get_supported_VGPU_max_capacities(Session session, string _pgpu)
         {
             return Maps.convert_from_proxy_XenRefVGPU_type_long(session.proxy.pgpu_get_supported_vgpu_max_capacities(session.uuid, (_pgpu != null) ? _pgpu : "").parse());
         }
 
+        /// <summary>
+        /// Set the other_config field of the given PGPU.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
+        /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _pgpu, Dictionary<string, string> _other_config)
         {
             session.proxy.pgpu_set_other_config(session.uuid, (_pgpu != null) ? _pgpu : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the other_config field of the given PGPU.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _pgpu, string _key, string _value)
         {
             session.proxy.pgpu_add_to_other_config(session.uuid, (_pgpu != null) ? _pgpu : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the other_config field of the given PGPU.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _pgpu, string _key)
         {
             session.proxy.pgpu_remove_from_other_config(session.uuid, (_pgpu != null) ? _pgpu : "", (_key != null) ? _key : "").parse();
         }
 
-        public static void add_enabled_VGPU_types(Session session, string _self, string _value)
+        /// <summary>
+        /// 
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
+        /// <param name="_value">The VGPU type to enable</param>
+        public static void add_enabled_VGPU_types(Session session, string _pgpu, string _value)
         {
-            session.proxy.pgpu_add_enabled_vgpu_types(session.uuid, (_self != null) ? _self : "", (_value != null) ? _value : "").parse();
+            session.proxy.pgpu_add_enabled_vgpu_types(session.uuid, (_pgpu != null) ? _pgpu : "", (_value != null) ? _value : "").parse();
         }
 
-        public static XenRef<Task> async_add_enabled_VGPU_types(Session session, string _self, string _value)
+        /// <summary>
+        /// 
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
+        /// <param name="_value">The VGPU type to enable</param>
+        public static XenRef<Task> async_add_enabled_VGPU_types(Session session, string _pgpu, string _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_pgpu_add_enabled_vgpu_types(session.uuid, (_self != null) ? _self : "", (_value != null) ? _value : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pgpu_add_enabled_vgpu_types(session.uuid, (_pgpu != null) ? _pgpu : "", (_value != null) ? _value : "").parse());
         }
 
-        public static void remove_enabled_VGPU_types(Session session, string _self, string _value)
+        /// <summary>
+        /// 
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
+        /// <param name="_value">The VGPU type to disable</param>
+        public static void remove_enabled_VGPU_types(Session session, string _pgpu, string _value)
         {
-            session.proxy.pgpu_remove_enabled_vgpu_types(session.uuid, (_self != null) ? _self : "", (_value != null) ? _value : "").parse();
+            session.proxy.pgpu_remove_enabled_vgpu_types(session.uuid, (_pgpu != null) ? _pgpu : "", (_value != null) ? _value : "").parse();
         }
 
-        public static XenRef<Task> async_remove_enabled_VGPU_types(Session session, string _self, string _value)
+        /// <summary>
+        /// 
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
+        /// <param name="_value">The VGPU type to disable</param>
+        public static XenRef<Task> async_remove_enabled_VGPU_types(Session session, string _pgpu, string _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_pgpu_remove_enabled_vgpu_types(session.uuid, (_self != null) ? _self : "", (_value != null) ? _value : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pgpu_remove_enabled_vgpu_types(session.uuid, (_pgpu != null) ? _pgpu : "", (_value != null) ? _value : "").parse());
         }
 
-        public static void set_enabled_VGPU_types(Session session, string _self, List<XenRef<VGPU_type>> _value)
+        /// <summary>
+        /// 
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
+        /// <param name="_value">The VGPU types to enable</param>
+        public static void set_enabled_VGPU_types(Session session, string _pgpu, List<XenRef<VGPU_type>> _value)
         {
-            session.proxy.pgpu_set_enabled_vgpu_types(session.uuid, (_self != null) ? _self : "", (_value != null) ? Helper.RefListToStringArray(_value) : new string[] {}).parse();
+            session.proxy.pgpu_set_enabled_vgpu_types(session.uuid, (_pgpu != null) ? _pgpu : "", (_value != null) ? Helper.RefListToStringArray(_value) : new string[] {}).parse();
         }
 
-        public static XenRef<Task> async_set_enabled_VGPU_types(Session session, string _self, List<XenRef<VGPU_type>> _value)
+        /// <summary>
+        /// 
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
+        /// <param name="_value">The VGPU types to enable</param>
+        public static XenRef<Task> async_set_enabled_VGPU_types(Session session, string _pgpu, List<XenRef<VGPU_type>> _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_pgpu_set_enabled_vgpu_types(session.uuid, (_self != null) ? _self : "", (_value != null) ? Helper.RefListToStringArray(_value) : new string[] {}).parse());
+            return XenRef<Task>.Create(session.proxy.async_pgpu_set_enabled_vgpu_types(session.uuid, (_pgpu != null) ? _pgpu : "", (_value != null) ? Helper.RefListToStringArray(_value) : new string[] {}).parse());
         }
 
-        public static void set_GPU_group(Session session, string _self, string _value)
+        /// <summary>
+        /// 
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
+        /// <param name="_value">The group to which the PGPU will be moved</param>
+        public static void set_GPU_group(Session session, string _pgpu, string _value)
         {
-            session.proxy.pgpu_set_gpu_group(session.uuid, (_self != null) ? _self : "", (_value != null) ? _value : "").parse();
+            session.proxy.pgpu_set_gpu_group(session.uuid, (_pgpu != null) ? _pgpu : "", (_value != null) ? _value : "").parse();
         }
 
-        public static XenRef<Task> async_set_GPU_group(Session session, string _self, string _value)
+        /// <summary>
+        /// 
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
+        /// <param name="_value">The group to which the PGPU will be moved</param>
+        public static XenRef<Task> async_set_GPU_group(Session session, string _pgpu, string _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_pgpu_set_gpu_group(session.uuid, (_self != null) ? _self : "", (_value != null) ? _value : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pgpu_set_gpu_group(session.uuid, (_pgpu != null) ? _pgpu : "", (_value != null) ? _value : "").parse());
         }
 
-        public static long get_remaining_capacity(Session session, string _self, string _vgpu_type)
+        /// <summary>
+        /// 
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
+        /// <param name="_vgpu_type">The VGPU type for which we want to find the number of VGPUs which can still be started on this PGPU</param>
+        public static long get_remaining_capacity(Session session, string _pgpu, string _vgpu_type)
         {
-            return long.Parse((string)session.proxy.pgpu_get_remaining_capacity(session.uuid, (_self != null) ? _self : "", (_vgpu_type != null) ? _vgpu_type : "").parse());
+            return long.Parse((string)session.proxy.pgpu_get_remaining_capacity(session.uuid, (_pgpu != null) ? _pgpu : "", (_vgpu_type != null) ? _vgpu_type : "").parse());
         }
 
-        public static XenRef<Task> async_get_remaining_capacity(Session session, string _self, string _vgpu_type)
+        /// <summary>
+        /// 
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
+        /// <param name="_vgpu_type">The VGPU type for which we want to find the number of VGPUs which can still be started on this PGPU</param>
+        public static XenRef<Task> async_get_remaining_capacity(Session session, string _pgpu, string _vgpu_type)
         {
-            return XenRef<Task>.Create(session.proxy.async_pgpu_get_remaining_capacity(session.uuid, (_self != null) ? _self : "", (_vgpu_type != null) ? _vgpu_type : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pgpu_get_remaining_capacity(session.uuid, (_pgpu != null) ? _pgpu : "", (_vgpu_type != null) ? _vgpu_type : "").parse());
         }
 
+        /// <summary>
+        /// Return a list of all the PGPUs known to the system.
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static List<XenRef<PGPU>> get_all(Session session)
         {
             return XenRef<PGPU>.Create(session.proxy.pgpu_get_all(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Get all the PGPU Records at once, in a single XML RPC call
+        /// First published in XenServer 6.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<PGPU>, PGPU> get_all_records(Session session)
         {
             return XenRef<PGPU>.Create<Proxy_PGPU>(session.proxy.pgpu_get_all_records(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Unique identifier/object reference
+        /// </summary>
+        public virtual string uuid
+        {
+            get { return _uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _uuid))
+                {
+                    _uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("uuid");
+                }
+            }
+        }
         private string _uuid;
-        public virtual string uuid {
-             get { return _uuid; }
-             set { if (!Helper.AreEqual(value, _uuid)) { _uuid = value; Changed = true; NotifyPropertyChanged("uuid"); } }
-         }
 
+        /// <summary>
+        /// Link to underlying PCI device
+        /// </summary>
+        public virtual XenRef<PCI> PCI
+        {
+            get { return _PCI; }
+            set
+            {
+                if (!Helper.AreEqual(value, _PCI))
+                {
+                    _PCI = value;
+                    Changed = true;
+                    NotifyPropertyChanged("PCI");
+                }
+            }
+        }
         private XenRef<PCI> _PCI;
-        public virtual XenRef<PCI> PCI {
-             get { return _PCI; }
-             set { if (!Helper.AreEqual(value, _PCI)) { _PCI = value; Changed = true; NotifyPropertyChanged("PCI"); } }
-         }
 
+        /// <summary>
+        /// GPU group the pGPU is contained in
+        /// </summary>
+        public virtual XenRef<GPU_group> GPU_group
+        {
+            get { return _GPU_group; }
+            set
+            {
+                if (!Helper.AreEqual(value, _GPU_group))
+                {
+                    _GPU_group = value;
+                    Changed = true;
+                    NotifyPropertyChanged("GPU_group");
+                }
+            }
+        }
         private XenRef<GPU_group> _GPU_group;
-        public virtual XenRef<GPU_group> GPU_group {
-             get { return _GPU_group; }
-             set { if (!Helper.AreEqual(value, _GPU_group)) { _GPU_group = value; Changed = true; NotifyPropertyChanged("GPU_group"); } }
-         }
 
+        /// <summary>
+        /// Host that own the GPU
+        /// </summary>
+        public virtual XenRef<Host> host
+        {
+            get { return _host; }
+            set
+            {
+                if (!Helper.AreEqual(value, _host))
+                {
+                    _host = value;
+                    Changed = true;
+                    NotifyPropertyChanged("host");
+                }
+            }
+        }
         private XenRef<Host> _host;
-        public virtual XenRef<Host> host {
-             get { return _host; }
-             set { if (!Helper.AreEqual(value, _host)) { _host = value; Changed = true; NotifyPropertyChanged("host"); } }
-         }
 
+        /// <summary>
+        /// Additional configuration
+        /// </summary>
+        public virtual Dictionary<string, string> other_config
+        {
+            get { return _other_config; }
+            set
+            {
+                if (!Helper.AreEqual(value, _other_config))
+                {
+                    _other_config = value;
+                    Changed = true;
+                    NotifyPropertyChanged("other_config");
+                }
+            }
+        }
         private Dictionary<string, string> _other_config;
-        public virtual Dictionary<string, string> other_config {
-             get { return _other_config; }
-             set { if (!Helper.AreEqual(value, _other_config)) { _other_config = value; Changed = true; NotifyPropertyChanged("other_config"); } }
-         }
 
+        /// <summary>
+        /// List of VGPU types supported by the underlying hardware
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        public virtual List<XenRef<VGPU_type>> supported_VGPU_types
+        {
+            get { return _supported_VGPU_types; }
+            set
+            {
+                if (!Helper.AreEqual(value, _supported_VGPU_types))
+                {
+                    _supported_VGPU_types = value;
+                    Changed = true;
+                    NotifyPropertyChanged("supported_VGPU_types");
+                }
+            }
+        }
         private List<XenRef<VGPU_type>> _supported_VGPU_types;
-        public virtual List<XenRef<VGPU_type>> supported_VGPU_types {
-             get { return _supported_VGPU_types; }
-             set { if (!Helper.AreEqual(value, _supported_VGPU_types)) { _supported_VGPU_types = value; Changed = true; NotifyPropertyChanged("supported_VGPU_types"); } }
-         }
 
+        /// <summary>
+        /// List of VGPU types which have been enabled for this PGPU
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        public virtual List<XenRef<VGPU_type>> enabled_VGPU_types
+        {
+            get { return _enabled_VGPU_types; }
+            set
+            {
+                if (!Helper.AreEqual(value, _enabled_VGPU_types))
+                {
+                    _enabled_VGPU_types = value;
+                    Changed = true;
+                    NotifyPropertyChanged("enabled_VGPU_types");
+                }
+            }
+        }
         private List<XenRef<VGPU_type>> _enabled_VGPU_types;
-        public virtual List<XenRef<VGPU_type>> enabled_VGPU_types {
-             get { return _enabled_VGPU_types; }
-             set { if (!Helper.AreEqual(value, _enabled_VGPU_types)) { _enabled_VGPU_types = value; Changed = true; NotifyPropertyChanged("enabled_VGPU_types"); } }
-         }
 
+        /// <summary>
+        /// List of VGPUs running on this PGPU
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        public virtual List<XenRef<VGPU>> resident_VGPUs
+        {
+            get { return _resident_VGPUs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _resident_VGPUs))
+                {
+                    _resident_VGPUs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("resident_VGPUs");
+                }
+            }
+        }
         private List<XenRef<VGPU>> _resident_VGPUs;
-        public virtual List<XenRef<VGPU>> resident_VGPUs {
-             get { return _resident_VGPUs; }
-             set { if (!Helper.AreEqual(value, _resident_VGPUs)) { _resident_VGPUs = value; Changed = true; NotifyPropertyChanged("resident_VGPUs"); } }
-         }
 
+        /// <summary>
+        /// A map relating each VGPU type supported on this GPU to the maximum number of VGPUs of that type which can run simultaneously on this GPU
+        /// First published in XenServer 6.2 SP1.
+        /// </summary>
+        public virtual Dictionary<XenRef<VGPU_type>, long> supported_VGPU_max_capacities
+        {
+            get { return _supported_VGPU_max_capacities; }
+            set
+            {
+                if (!Helper.AreEqual(value, _supported_VGPU_max_capacities))
+                {
+                    _supported_VGPU_max_capacities = value;
+                    Changed = true;
+                    NotifyPropertyChanged("supported_VGPU_max_capacities");
+                }
+            }
+        }
         private Dictionary<XenRef<VGPU_type>, long> _supported_VGPU_max_capacities;
-        public virtual Dictionary<XenRef<VGPU_type>, long> supported_VGPU_max_capacities {
-             get { return _supported_VGPU_max_capacities; }
-             set { if (!Helper.AreEqual(value, _supported_VGPU_max_capacities)) { _supported_VGPU_max_capacities = value; Changed = true; NotifyPropertyChanged("supported_VGPU_max_capacities"); } }
-         }
-
-
     }
 }

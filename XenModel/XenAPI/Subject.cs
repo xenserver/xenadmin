@@ -38,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// A user or group that can log in xapi
+    /// First published in XenServer 5.5.
+    /// </summary>
     public partial class Subject : XenObject<Subject>
     {
         public Subject()
@@ -127,106 +131,242 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
-
+        /// <summary>
+        /// Get a record containing the current state of the given subject.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_subject">The opaque_ref of the given subject</param>
         public static Subject get_record(Session session, string _subject)
         {
             return new Subject((Proxy_Subject)session.proxy.subject_get_record(session.uuid, (_subject != null) ? _subject : "").parse());
         }
 
+        /// <summary>
+        /// Get a reference to the subject instance with the specified UUID.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Subject> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<Subject>.Create(session.proxy.subject_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
         }
 
+        /// <summary>
+        /// Create a new subject instance, and return its handle.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_record">All constructor arguments</param>
         public static XenRef<Subject> create(Session session, Subject _record)
         {
             return XenRef<Subject>.Create(session.proxy.subject_create(session.uuid, _record.ToProxy()).parse());
         }
 
+        /// <summary>
+        /// Create a new subject instance, and return its handle.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_record">All constructor arguments</param>
         public static XenRef<Task> async_create(Session session, Subject _record)
         {
             return XenRef<Task>.Create(session.proxy.async_subject_create(session.uuid, _record.ToProxy()).parse());
         }
 
+        /// <summary>
+        /// Destroy the specified subject instance.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_subject">The opaque_ref of the given subject</param>
         public static void destroy(Session session, string _subject)
         {
             session.proxy.subject_destroy(session.uuid, (_subject != null) ? _subject : "").parse();
         }
 
+        /// <summary>
+        /// Destroy the specified subject instance.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_subject">The opaque_ref of the given subject</param>
         public static XenRef<Task> async_destroy(Session session, string _subject)
         {
             return XenRef<Task>.Create(session.proxy.async_subject_destroy(session.uuid, (_subject != null) ? _subject : "").parse());
         }
 
+        /// <summary>
+        /// Get the uuid field of the given subject.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_subject">The opaque_ref of the given subject</param>
         public static string get_uuid(Session session, string _subject)
         {
             return (string)session.proxy.subject_get_uuid(session.uuid, (_subject != null) ? _subject : "").parse();
         }
 
+        /// <summary>
+        /// Get the subject_identifier field of the given subject.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_subject">The opaque_ref of the given subject</param>
         public static string get_subject_identifier(Session session, string _subject)
         {
             return (string)session.proxy.subject_get_subject_identifier(session.uuid, (_subject != null) ? _subject : "").parse();
         }
 
+        /// <summary>
+        /// Get the other_config field of the given subject.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_subject">The opaque_ref of the given subject</param>
         public static Dictionary<string, string> get_other_config(Session session, string _subject)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.subject_get_other_config(session.uuid, (_subject != null) ? _subject : "").parse());
         }
 
+        /// <summary>
+        /// Get the roles field of the given subject.
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_subject">The opaque_ref of the given subject</param>
         public static List<XenRef<Role>> get_roles(Session session, string _subject)
         {
             return XenRef<Role>.Create(session.proxy.subject_get_roles(session.uuid, (_subject != null) ? _subject : "").parse());
         }
 
-        public static void add_to_roles(Session session, string _self, string _role)
+        /// <summary>
+        /// This call adds a new role to a subject
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_subject">The opaque_ref of the given subject</param>
+        /// <param name="_role">The unique role reference</param>
+        public static void add_to_roles(Session session, string _subject, string _role)
         {
-            session.proxy.subject_add_to_roles(session.uuid, (_self != null) ? _self : "", (_role != null) ? _role : "").parse();
+            session.proxy.subject_add_to_roles(session.uuid, (_subject != null) ? _subject : "", (_role != null) ? _role : "").parse();
         }
 
-        public static void remove_from_roles(Session session, string _self, string _role)
+        /// <summary>
+        /// This call removes a role from a subject
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_subject">The opaque_ref of the given subject</param>
+        /// <param name="_role">The unique role reference in the subject's roles field</param>
+        public static void remove_from_roles(Session session, string _subject, string _role)
         {
-            session.proxy.subject_remove_from_roles(session.uuid, (_self != null) ? _self : "", (_role != null) ? _role : "").parse();
+            session.proxy.subject_remove_from_roles(session.uuid, (_subject != null) ? _subject : "", (_role != null) ? _role : "").parse();
         }
 
-        public static string[] get_permissions_name_label(Session session, string _self)
+        /// <summary>
+        /// This call returns a list of permission names given a subject
+        /// First published in XenServer 5.6.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_subject">The opaque_ref of the given subject</param>
+        public static string[] get_permissions_name_label(Session session, string _subject)
         {
-            return (string [])session.proxy.subject_get_permissions_name_label(session.uuid, (_self != null) ? _self : "").parse();
+            return (string [])session.proxy.subject_get_permissions_name_label(session.uuid, (_subject != null) ? _subject : "").parse();
         }
 
+        /// <summary>
+        /// Return a list of all the subjects known to the system.
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static List<XenRef<Subject>> get_all(Session session)
         {
             return XenRef<Subject>.Create(session.proxy.subject_get_all(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Get all the subject Records at once, in a single XML RPC call
+        /// First published in XenServer 5.5.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<Subject>, Subject> get_all_records(Session session)
         {
             return XenRef<Subject>.Create<Proxy_Subject>(session.proxy.subject_get_all_records(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Unique identifier/object reference
+        /// </summary>
+        public virtual string uuid
+        {
+            get { return _uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _uuid))
+                {
+                    _uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("uuid");
+                }
+            }
+        }
         private string _uuid;
-        public virtual string uuid {
-             get { return _uuid; }
-             set { if (!Helper.AreEqual(value, _uuid)) { _uuid = value; Changed = true; NotifyPropertyChanged("uuid"); } }
-         }
 
+        /// <summary>
+        /// the subject identifier, unique in the external directory service
+        /// </summary>
+        public virtual string subject_identifier
+        {
+            get { return _subject_identifier; }
+            set
+            {
+                if (!Helper.AreEqual(value, _subject_identifier))
+                {
+                    _subject_identifier = value;
+                    Changed = true;
+                    NotifyPropertyChanged("subject_identifier");
+                }
+            }
+        }
         private string _subject_identifier;
-        public virtual string subject_identifier {
-             get { return _subject_identifier; }
-             set { if (!Helper.AreEqual(value, _subject_identifier)) { _subject_identifier = value; Changed = true; NotifyPropertyChanged("subject_identifier"); } }
-         }
 
+        /// <summary>
+        /// additional configuration
+        /// </summary>
+        public virtual Dictionary<string, string> other_config
+        {
+            get { return _other_config; }
+            set
+            {
+                if (!Helper.AreEqual(value, _other_config))
+                {
+                    _other_config = value;
+                    Changed = true;
+                    NotifyPropertyChanged("other_config");
+                }
+            }
+        }
         private Dictionary<string, string> _other_config;
-        public virtual Dictionary<string, string> other_config {
-             get { return _other_config; }
-             set { if (!Helper.AreEqual(value, _other_config)) { _other_config = value; Changed = true; NotifyPropertyChanged("other_config"); } }
-         }
 
+        /// <summary>
+        /// the roles associated with this subject
+        /// First published in XenServer 5.6.
+        /// </summary>
+        public virtual List<XenRef<Role>> roles
+        {
+            get { return _roles; }
+            set
+            {
+                if (!Helper.AreEqual(value, _roles))
+                {
+                    _roles = value;
+                    Changed = true;
+                    NotifyPropertyChanged("roles");
+                }
+            }
+        }
         private List<XenRef<Role>> _roles;
-        public virtual List<XenRef<Role>> roles {
-             get { return _roles; }
-             set { if (!Helper.AreEqual(value, _roles)) { _roles = value; Changed = true; NotifyPropertyChanged("roles"); } }
-         }
-
-
     }
 }

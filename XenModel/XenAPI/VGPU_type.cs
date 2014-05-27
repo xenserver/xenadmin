@@ -28,6 +28,7 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -37,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// A type of virtual GPU
+    /// First published in XenServer 6.2 SP1 Tech-Preview.
+    /// </summary>
     public partial class VGPU_type : XenObject<VGPU_type>
     {
         public VGPU_type()
@@ -182,159 +187,398 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
-
+        /// <summary>
+        /// Get a record containing the current state of the given VGPU_type.
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
         public static VGPU_type get_record(Session session, string _vgpu_type)
         {
             return new VGPU_type((Proxy_VGPU_type)session.proxy.vgpu_type_get_record(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse());
         }
 
+        /// <summary>
+        /// Get a reference to the VGPU_type instance with the specified UUID.
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<VGPU_type> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<VGPU_type>.Create(session.proxy.vgpu_type_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
         }
 
+        /// <summary>
+        /// Get the uuid field of the given VGPU_type.
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
         public static string get_uuid(Session session, string _vgpu_type)
         {
             return (string)session.proxy.vgpu_type_get_uuid(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse();
         }
 
+        /// <summary>
+        /// Get the vendor_name field of the given VGPU_type.
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
         public static string get_vendor_name(Session session, string _vgpu_type)
         {
             return (string)session.proxy.vgpu_type_get_vendor_name(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse();
         }
 
+        /// <summary>
+        /// Get the model_name field of the given VGPU_type.
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
         public static string get_model_name(Session session, string _vgpu_type)
         {
             return (string)session.proxy.vgpu_type_get_model_name(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse();
         }
 
+        /// <summary>
+        /// Get the framebuffer_size field of the given VGPU_type.
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
         public static long get_framebuffer_size(Session session, string _vgpu_type)
         {
             return long.Parse((string)session.proxy.vgpu_type_get_framebuffer_size(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse());
         }
 
+        /// <summary>
+        /// Get the max_heads field of the given VGPU_type.
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
         public static long get_max_heads(Session session, string _vgpu_type)
         {
             return long.Parse((string)session.proxy.vgpu_type_get_max_heads(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse());
         }
 
+        /// <summary>
+        /// Get the max_resolution_x field of the given VGPU_type.
+        /// First published in XenServer 6.2 SP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
         public static long get_max_resolution_x(Session session, string _vgpu_type)
         {
             return long.Parse((string)session.proxy.vgpu_type_get_max_resolution_x(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse());
         }
 
+        /// <summary>
+        /// Get the max_resolution_y field of the given VGPU_type.
+        /// First published in XenServer 6.2 SP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
         public static long get_max_resolution_y(Session session, string _vgpu_type)
         {
             return long.Parse((string)session.proxy.vgpu_type_get_max_resolution_y(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse());
         }
 
+        /// <summary>
+        /// Get the supported_on_PGPUs field of the given VGPU_type.
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
         public static List<XenRef<PGPU>> get_supported_on_PGPUs(Session session, string _vgpu_type)
         {
             return XenRef<PGPU>.Create(session.proxy.vgpu_type_get_supported_on_pgpus(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse());
         }
 
+        /// <summary>
+        /// Get the enabled_on_PGPUs field of the given VGPU_type.
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
         public static List<XenRef<PGPU>> get_enabled_on_PGPUs(Session session, string _vgpu_type)
         {
             return XenRef<PGPU>.Create(session.proxy.vgpu_type_get_enabled_on_pgpus(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse());
         }
 
+        /// <summary>
+        /// Get the VGPUs field of the given VGPU_type.
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
         public static List<XenRef<VGPU>> get_VGPUs(Session session, string _vgpu_type)
         {
             return XenRef<VGPU>.Create(session.proxy.vgpu_type_get_vgpus(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse());
         }
 
+        /// <summary>
+        /// Get the supported_on_GPU_groups field of the given VGPU_type.
+        /// First published in XenServer 6.2 SP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
         public static List<XenRef<GPU_group>> get_supported_on_GPU_groups(Session session, string _vgpu_type)
         {
             return XenRef<GPU_group>.Create(session.proxy.vgpu_type_get_supported_on_gpu_groups(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse());
         }
 
+        /// <summary>
+        /// Get the enabled_on_GPU_groups field of the given VGPU_type.
+        /// First published in XenServer 6.2 SP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
         public static List<XenRef<GPU_group>> get_enabled_on_GPU_groups(Session session, string _vgpu_type)
         {
             return XenRef<GPU_group>.Create(session.proxy.vgpu_type_get_enabled_on_gpu_groups(session.uuid, (_vgpu_type != null) ? _vgpu_type : "").parse());
         }
 
+        /// <summary>
+        /// Return a list of all the VGPU_types known to the system.
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static List<XenRef<VGPU_type>> get_all(Session session)
         {
             return XenRef<VGPU_type>.Create(session.proxy.vgpu_type_get_all(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Get all the VGPU_type Records at once, in a single XML RPC call
+        /// First published in XenServer 6.2 SP1 Tech-Preview.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<VGPU_type>, VGPU_type> get_all_records(Session session)
         {
             return XenRef<VGPU_type>.Create<Proxy_VGPU_type>(session.proxy.vgpu_type_get_all_records(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Unique identifier/object reference
+        /// </summary>
+        public virtual string uuid
+        {
+            get { return _uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _uuid))
+                {
+                    _uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("uuid");
+                }
+            }
+        }
         private string _uuid;
-        public virtual string uuid {
-             get { return _uuid; }
-             set { if (!Helper.AreEqual(value, _uuid)) { _uuid = value; Changed = true; NotifyPropertyChanged("uuid"); } }
-         }
 
+        /// <summary>
+        /// Name of VGPU vendor
+        /// </summary>
+        public virtual string vendor_name
+        {
+            get { return _vendor_name; }
+            set
+            {
+                if (!Helper.AreEqual(value, _vendor_name))
+                {
+                    _vendor_name = value;
+                    Changed = true;
+                    NotifyPropertyChanged("vendor_name");
+                }
+            }
+        }
         private string _vendor_name;
-        public virtual string vendor_name {
-             get { return _vendor_name; }
-             set { if (!Helper.AreEqual(value, _vendor_name)) { _vendor_name = value; Changed = true; NotifyPropertyChanged("vendor_name"); } }
-         }
 
+        /// <summary>
+        /// Model name associated with the VGPU type
+        /// </summary>
+        public virtual string model_name
+        {
+            get { return _model_name; }
+            set
+            {
+                if (!Helper.AreEqual(value, _model_name))
+                {
+                    _model_name = value;
+                    Changed = true;
+                    NotifyPropertyChanged("model_name");
+                }
+            }
+        }
         private string _model_name;
-        public virtual string model_name {
-             get { return _model_name; }
-             set { if (!Helper.AreEqual(value, _model_name)) { _model_name = value; Changed = true; NotifyPropertyChanged("model_name"); } }
-         }
 
+        /// <summary>
+        /// Framebuffer size of the VGPU type, in bytes
+        /// </summary>
+        public virtual long framebuffer_size
+        {
+            get { return _framebuffer_size; }
+            set
+            {
+                if (!Helper.AreEqual(value, _framebuffer_size))
+                {
+                    _framebuffer_size = value;
+                    Changed = true;
+                    NotifyPropertyChanged("framebuffer_size");
+                }
+            }
+        }
         private long _framebuffer_size;
-        public virtual long framebuffer_size {
-             get { return _framebuffer_size; }
-             set { if (!Helper.AreEqual(value, _framebuffer_size)) { _framebuffer_size = value; Changed = true; NotifyPropertyChanged("framebuffer_size"); } }
-         }
 
+        /// <summary>
+        /// Maximum number of displays supported by the VGPU type
+        /// </summary>
+        public virtual long max_heads
+        {
+            get { return _max_heads; }
+            set
+            {
+                if (!Helper.AreEqual(value, _max_heads))
+                {
+                    _max_heads = value;
+                    Changed = true;
+                    NotifyPropertyChanged("max_heads");
+                }
+            }
+        }
         private long _max_heads;
-        public virtual long max_heads {
-             get { return _max_heads; }
-             set { if (!Helper.AreEqual(value, _max_heads)) { _max_heads = value; Changed = true; NotifyPropertyChanged("max_heads"); } }
-         }
 
+        /// <summary>
+        /// Maximum resultion (width) supported by the VGPU type
+        /// First published in XenServer 6.2 SP1.
+        /// </summary>
+        public virtual long max_resolution_x
+        {
+            get { return _max_resolution_x; }
+            set
+            {
+                if (!Helper.AreEqual(value, _max_resolution_x))
+                {
+                    _max_resolution_x = value;
+                    Changed = true;
+                    NotifyPropertyChanged("max_resolution_x");
+                }
+            }
+        }
         private long _max_resolution_x;
-        public virtual long max_resolution_x {
-             get { return _max_resolution_x; }
-             set { if (!Helper.AreEqual(value, _max_resolution_x)) { _max_resolution_x = value; Changed = true; NotifyPropertyChanged("max_resolution_x"); } }
-         }
 
+        /// <summary>
+        /// Maximum resoltion (height) supported by the VGPU type
+        /// First published in XenServer 6.2 SP1.
+        /// </summary>
+        public virtual long max_resolution_y
+        {
+            get { return _max_resolution_y; }
+            set
+            {
+                if (!Helper.AreEqual(value, _max_resolution_y))
+                {
+                    _max_resolution_y = value;
+                    Changed = true;
+                    NotifyPropertyChanged("max_resolution_y");
+                }
+            }
+        }
         private long _max_resolution_y;
-        public virtual long max_resolution_y {
-             get { return _max_resolution_y; }
-             set { if (!Helper.AreEqual(value, _max_resolution_y)) { _max_resolution_y = value; Changed = true; NotifyPropertyChanged("max_resolution_y"); } }
-         }
 
+        /// <summary>
+        /// List of PGPUs that support this VGPU type
+        /// </summary>
+        public virtual List<XenRef<PGPU>> supported_on_PGPUs
+        {
+            get { return _supported_on_PGPUs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _supported_on_PGPUs))
+                {
+                    _supported_on_PGPUs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("supported_on_PGPUs");
+                }
+            }
+        }
         private List<XenRef<PGPU>> _supported_on_PGPUs;
-        public virtual List<XenRef<PGPU>> supported_on_PGPUs {
-             get { return _supported_on_PGPUs; }
-             set { if (!Helper.AreEqual(value, _supported_on_PGPUs)) { _supported_on_PGPUs = value; Changed = true; NotifyPropertyChanged("supported_on_PGPUs"); } }
-         }
 
+        /// <summary>
+        /// List of PGPUs that have this VGPU type enabled
+        /// </summary>
+        public virtual List<XenRef<PGPU>> enabled_on_PGPUs
+        {
+            get { return _enabled_on_PGPUs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _enabled_on_PGPUs))
+                {
+                    _enabled_on_PGPUs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("enabled_on_PGPUs");
+                }
+            }
+        }
         private List<XenRef<PGPU>> _enabled_on_PGPUs;
-        public virtual List<XenRef<PGPU>> enabled_on_PGPUs {
-             get { return _enabled_on_PGPUs; }
-             set { if (!Helper.AreEqual(value, _enabled_on_PGPUs)) { _enabled_on_PGPUs = value; Changed = true; NotifyPropertyChanged("enabled_on_PGPUs"); } }
-         }
 
+        /// <summary>
+        /// List of VGPUs of this type
+        /// </summary>
+        public virtual List<XenRef<VGPU>> VGPUs
+        {
+            get { return _VGPUs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VGPUs))
+                {
+                    _VGPUs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VGPUs");
+                }
+            }
+        }
         private List<XenRef<VGPU>> _VGPUs;
-        public virtual List<XenRef<VGPU>> VGPUs {
-             get { return _VGPUs; }
-             set { if (!Helper.AreEqual(value, _VGPUs)) { _VGPUs = value; Changed = true; NotifyPropertyChanged("VGPUs"); } }
-         }
 
+        /// <summary>
+        /// List of GPU groups in which at least one PGPU supports this VGPU type
+        /// First published in XenServer 6.2 SP1.
+        /// </summary>
+        public virtual List<XenRef<GPU_group>> supported_on_GPU_groups
+        {
+            get { return _supported_on_GPU_groups; }
+            set
+            {
+                if (!Helper.AreEqual(value, _supported_on_GPU_groups))
+                {
+                    _supported_on_GPU_groups = value;
+                    Changed = true;
+                    NotifyPropertyChanged("supported_on_GPU_groups");
+                }
+            }
+        }
         private List<XenRef<GPU_group>> _supported_on_GPU_groups;
-        public virtual List<XenRef<GPU_group>> supported_on_GPU_groups {
-             get { return _supported_on_GPU_groups; }
-             set { if (!Helper.AreEqual(value, _supported_on_GPU_groups)) { _supported_on_GPU_groups = value; Changed = true; NotifyPropertyChanged("supported_on_GPU_groups"); } }
-         }
 
+        /// <summary>
+        /// List of GPU groups in which at least one have this VGPU type enabled
+        /// First published in XenServer 6.2 SP1.
+        /// </summary>
+        public virtual List<XenRef<GPU_group>> enabled_on_GPU_groups
+        {
+            get { return _enabled_on_GPU_groups; }
+            set
+            {
+                if (!Helper.AreEqual(value, _enabled_on_GPU_groups))
+                {
+                    _enabled_on_GPU_groups = value;
+                    Changed = true;
+                    NotifyPropertyChanged("enabled_on_GPU_groups");
+                }
+            }
+        }
         private List<XenRef<GPU_group>> _enabled_on_GPU_groups;
-        public virtual List<XenRef<GPU_group>> enabled_on_GPU_groups {
-             get { return _enabled_on_GPU_groups; }
-             set { if (!Helper.AreEqual(value, _enabled_on_GPU_groups)) { _enabled_on_GPU_groups = value; Changed = true; NotifyPropertyChanged("enabled_on_GPU_groups"); } }
-         }
-
-
     }
 }

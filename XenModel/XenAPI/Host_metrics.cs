@@ -38,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// The metrics associated with a host
+    /// First published in XenServer 4.0.
+    /// </summary>
     public partial class Host_metrics : XenObject<Host_metrics>
     {
         public Host_metrics()
@@ -146,108 +150,258 @@ namespace XenAPI
                 return null;
             }
         }
-
+        /// <summary>
+        /// Get a record containing the current state of the given host_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host_metrics">The opaque_ref of the given host_metrics</param>
         public static Host_metrics get_record(Session session, string _host_metrics)
         {
             return new Host_metrics((Proxy_Host_metrics)session.proxy.host_metrics_get_record(session.uuid, (_host_metrics != null) ? _host_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Get a reference to the host_metrics instance with the specified UUID.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Host_metrics> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<Host_metrics>.Create(session.proxy.host_metrics_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
         }
 
+        /// <summary>
+        /// Get the uuid field of the given host_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host_metrics">The opaque_ref of the given host_metrics</param>
         public static string get_uuid(Session session, string _host_metrics)
         {
             return (string)session.proxy.host_metrics_get_uuid(session.uuid, (_host_metrics != null) ? _host_metrics : "").parse();
         }
 
+        /// <summary>
+        /// Get the memory/total field of the given host_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host_metrics">The opaque_ref of the given host_metrics</param>
         public static long get_memory_total(Session session, string _host_metrics)
         {
             return long.Parse((string)session.proxy.host_metrics_get_memory_total(session.uuid, (_host_metrics != null) ? _host_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Get the memory/free field of the given host_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host_metrics">The opaque_ref of the given host_metrics</param>
         public static long get_memory_free(Session session, string _host_metrics)
         {
             return long.Parse((string)session.proxy.host_metrics_get_memory_free(session.uuid, (_host_metrics != null) ? _host_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Get the live field of the given host_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host_metrics">The opaque_ref of the given host_metrics</param>
         public static bool get_live(Session session, string _host_metrics)
         {
             return (bool)session.proxy.host_metrics_get_live(session.uuid, (_host_metrics != null) ? _host_metrics : "").parse();
         }
 
+        /// <summary>
+        /// Get the last_updated field of the given host_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host_metrics">The opaque_ref of the given host_metrics</param>
         public static DateTime get_last_updated(Session session, string _host_metrics)
         {
             return session.proxy.host_metrics_get_last_updated(session.uuid, (_host_metrics != null) ? _host_metrics : "").parse();
         }
 
+        /// <summary>
+        /// Get the other_config field of the given host_metrics.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host_metrics">The opaque_ref of the given host_metrics</param>
         public static Dictionary<string, string> get_other_config(Session session, string _host_metrics)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.host_metrics_get_other_config(session.uuid, (_host_metrics != null) ? _host_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Set the other_config field of the given host_metrics.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host_metrics">The opaque_ref of the given host_metrics</param>
+        /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _host_metrics, Dictionary<string, string> _other_config)
         {
             session.proxy.host_metrics_set_other_config(session.uuid, (_host_metrics != null) ? _host_metrics : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the other_config field of the given host_metrics.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host_metrics">The opaque_ref of the given host_metrics</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _host_metrics, string _key, string _value)
         {
             session.proxy.host_metrics_add_to_other_config(session.uuid, (_host_metrics != null) ? _host_metrics : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the other_config field of the given host_metrics.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host_metrics">The opaque_ref of the given host_metrics</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _host_metrics, string _key)
         {
             session.proxy.host_metrics_remove_from_other_config(session.uuid, (_host_metrics != null) ? _host_metrics : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Return a list of all the host_metrics instances known to the system.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static List<XenRef<Host_metrics>> get_all(Session session)
         {
             return XenRef<Host_metrics>.Create(session.proxy.host_metrics_get_all(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Get all the host_metrics Records at once, in a single XML RPC call
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<Host_metrics>, Host_metrics> get_all_records(Session session)
         {
             return XenRef<Host_metrics>.Create<Proxy_Host_metrics>(session.proxy.host_metrics_get_all_records(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Unique identifier/object reference
+        /// </summary>
+        public virtual string uuid
+        {
+            get { return _uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _uuid))
+                {
+                    _uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("uuid");
+                }
+            }
+        }
         private string _uuid;
-        public virtual string uuid {
-             get { return _uuid; }
-             set { if (!Helper.AreEqual(value, _uuid)) { _uuid = value; Changed = true; NotifyPropertyChanged("uuid"); } }
-         }
 
+        /// <summary>
+        /// Total host memory (bytes)
+        /// </summary>
+        public virtual long memory_total
+        {
+            get { return _memory_total; }
+            set
+            {
+                if (!Helper.AreEqual(value, _memory_total))
+                {
+                    _memory_total = value;
+                    Changed = true;
+                    NotifyPropertyChanged("memory_total");
+                }
+            }
+        }
         private long _memory_total;
-        public virtual long memory_total {
-             get { return _memory_total; }
-             set { if (!Helper.AreEqual(value, _memory_total)) { _memory_total = value; Changed = true; NotifyPropertyChanged("memory_total"); } }
-         }
 
+        /// <summary>
+        /// Free host memory (bytes)
+        /// </summary>
+        public virtual long memory_free
+        {
+            get { return _memory_free; }
+            set
+            {
+                if (!Helper.AreEqual(value, _memory_free))
+                {
+                    _memory_free = value;
+                    Changed = true;
+                    NotifyPropertyChanged("memory_free");
+                }
+            }
+        }
         private long _memory_free;
-        public virtual long memory_free {
-             get { return _memory_free; }
-             set { if (!Helper.AreEqual(value, _memory_free)) { _memory_free = value; Changed = true; NotifyPropertyChanged("memory_free"); } }
-         }
 
+        /// <summary>
+        /// Pool master thinks this host is live
+        /// </summary>
+        public virtual bool live
+        {
+            get { return _live; }
+            set
+            {
+                if (!Helper.AreEqual(value, _live))
+                {
+                    _live = value;
+                    Changed = true;
+                    NotifyPropertyChanged("live");
+                }
+            }
+        }
         private bool _live;
-        public virtual bool live {
-             get { return _live; }
-             set { if (!Helper.AreEqual(value, _live)) { _live = value; Changed = true; NotifyPropertyChanged("live"); } }
-         }
 
+        /// <summary>
+        /// Time at which this information was last updated
+        /// </summary>
+        public virtual DateTime last_updated
+        {
+            get { return _last_updated; }
+            set
+            {
+                if (!Helper.AreEqual(value, _last_updated))
+                {
+                    _last_updated = value;
+                    Changed = true;
+                    NotifyPropertyChanged("last_updated");
+                }
+            }
+        }
         private DateTime _last_updated;
-        public virtual DateTime last_updated {
-             get { return _last_updated; }
-             set { if (!Helper.AreEqual(value, _last_updated)) { _last_updated = value; Changed = true; NotifyPropertyChanged("last_updated"); } }
-         }
 
+        /// <summary>
+        /// additional configuration
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual Dictionary<string, string> other_config
+        {
+            get { return _other_config; }
+            set
+            {
+                if (!Helper.AreEqual(value, _other_config))
+                {
+                    _other_config = value;
+                    Changed = true;
+                    NotifyPropertyChanged("other_config");
+                }
+            }
+        }
         private Dictionary<string, string> _other_config;
-        public virtual Dictionary<string, string> other_config {
-             get { return _other_config; }
-             set { if (!Helper.AreEqual(value, _other_config)) { _other_config = value; Changed = true; NotifyPropertyChanged("other_config"); } }
-         }
-
-
     }
 }

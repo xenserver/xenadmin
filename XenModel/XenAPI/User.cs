@@ -38,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// A user of the system
+    /// First published in XenServer 4.0.
+    /// </summary>
     public partial class User : XenObject<User>
     {
         public User()
@@ -136,106 +140,246 @@ namespace XenAPI
                 return null;
             }
         }
-
+        /// <summary>
+        /// Get a record containing the current state of the given user.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_user">The opaque_ref of the given user</param>
         public static User get_record(Session session, string _user)
         {
             return new User((Proxy_User)session.proxy.user_get_record(session.uuid, (_user != null) ? _user : "").parse());
         }
 
+        /// <summary>
+        /// Get a reference to the user instance with the specified UUID.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<User> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<User>.Create(session.proxy.user_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
         }
 
+        /// <summary>
+        /// Create a new user instance, and return its handle.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_record">All constructor arguments</param>
         public static XenRef<User> create(Session session, User _record)
         {
             return XenRef<User>.Create(session.proxy.user_create(session.uuid, _record.ToProxy()).parse());
         }
 
+        /// <summary>
+        /// Create a new user instance, and return its handle.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_record">All constructor arguments</param>
         public static XenRef<Task> async_create(Session session, User _record)
         {
             return XenRef<Task>.Create(session.proxy.async_user_create(session.uuid, _record.ToProxy()).parse());
         }
 
+        /// <summary>
+        /// Destroy the specified user instance.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_user">The opaque_ref of the given user</param>
         public static void destroy(Session session, string _user)
         {
             session.proxy.user_destroy(session.uuid, (_user != null) ? _user : "").parse();
         }
 
+        /// <summary>
+        /// Destroy the specified user instance.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_user">The opaque_ref of the given user</param>
         public static XenRef<Task> async_destroy(Session session, string _user)
         {
             return XenRef<Task>.Create(session.proxy.async_user_destroy(session.uuid, (_user != null) ? _user : "").parse());
         }
 
+        /// <summary>
+        /// Get the uuid field of the given user.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_user">The opaque_ref of the given user</param>
         public static string get_uuid(Session session, string _user)
         {
             return (string)session.proxy.user_get_uuid(session.uuid, (_user != null) ? _user : "").parse();
         }
 
+        /// <summary>
+        /// Get the short_name field of the given user.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_user">The opaque_ref of the given user</param>
         public static string get_short_name(Session session, string _user)
         {
             return (string)session.proxy.user_get_short_name(session.uuid, (_user != null) ? _user : "").parse();
         }
 
+        /// <summary>
+        /// Get the fullname field of the given user.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_user">The opaque_ref of the given user</param>
         public static string get_fullname(Session session, string _user)
         {
             return (string)session.proxy.user_get_fullname(session.uuid, (_user != null) ? _user : "").parse();
         }
 
+        /// <summary>
+        /// Get the other_config field of the given user.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_user">The opaque_ref of the given user</param>
         public static Dictionary<string, string> get_other_config(Session session, string _user)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.user_get_other_config(session.uuid, (_user != null) ? _user : "").parse());
         }
 
+        /// <summary>
+        /// Set the fullname field of the given user.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_user">The opaque_ref of the given user</param>
+        /// <param name="_fullname">New value to set</param>
         public static void set_fullname(Session session, string _user, string _fullname)
         {
             session.proxy.user_set_fullname(session.uuid, (_user != null) ? _user : "", (_fullname != null) ? _fullname : "").parse();
         }
 
+        /// <summary>
+        /// Set the other_config field of the given user.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_user">The opaque_ref of the given user</param>
+        /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _user, Dictionary<string, string> _other_config)
         {
             session.proxy.user_set_other_config(session.uuid, (_user != null) ? _user : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the other_config field of the given user.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_user">The opaque_ref of the given user</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _user, string _key, string _value)
         {
             session.proxy.user_add_to_other_config(session.uuid, (_user != null) ? _user : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the other_config field of the given user.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_user">The opaque_ref of the given user</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _user, string _key)
         {
             session.proxy.user_remove_from_other_config(session.uuid, (_user != null) ? _user : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Get all the user Records at once, in a single XML RPC call
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<User>, User> get_all_records(Session session)
         {
             return XenRef<User>.Create<Proxy_User>(session.proxy.user_get_all_records(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Unique identifier/object reference
+        /// </summary>
+        public virtual string uuid
+        {
+            get { return _uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _uuid))
+                {
+                    _uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("uuid");
+                }
+            }
+        }
         private string _uuid;
-        public virtual string uuid {
-             get { return _uuid; }
-             set { if (!Helper.AreEqual(value, _uuid)) { _uuid = value; Changed = true; NotifyPropertyChanged("uuid"); } }
-         }
 
+        /// <summary>
+        /// short name (e.g. userid)
+        /// </summary>
+        public virtual string short_name
+        {
+            get { return _short_name; }
+            set
+            {
+                if (!Helper.AreEqual(value, _short_name))
+                {
+                    _short_name = value;
+                    Changed = true;
+                    NotifyPropertyChanged("short_name");
+                }
+            }
+        }
         private string _short_name;
-        public virtual string short_name {
-             get { return _short_name; }
-             set { if (!Helper.AreEqual(value, _short_name)) { _short_name = value; Changed = true; NotifyPropertyChanged("short_name"); } }
-         }
 
+        /// <summary>
+        /// full name
+        /// </summary>
+        public virtual string fullname
+        {
+            get { return _fullname; }
+            set
+            {
+                if (!Helper.AreEqual(value, _fullname))
+                {
+                    _fullname = value;
+                    Changed = true;
+                    NotifyPropertyChanged("fullname");
+                }
+            }
+        }
         private string _fullname;
-        public virtual string fullname {
-             get { return _fullname; }
-             set { if (!Helper.AreEqual(value, _fullname)) { _fullname = value; Changed = true; NotifyPropertyChanged("fullname"); } }
-         }
 
+        /// <summary>
+        /// additional configuration
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual Dictionary<string, string> other_config
+        {
+            get { return _other_config; }
+            set
+            {
+                if (!Helper.AreEqual(value, _other_config))
+                {
+                    _other_config = value;
+                    Changed = true;
+                    NotifyPropertyChanged("other_config");
+                }
+            }
+        }
         private Dictionary<string, string> _other_config;
-        public virtual Dictionary<string, string> other_config {
-             get { return _other_config; }
-             set { if (!Helper.AreEqual(value, _other_config)) { _other_config = value; Changed = true; NotifyPropertyChanged("other_config"); } }
-         }
-
-
     }
 }

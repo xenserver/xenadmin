@@ -38,6 +38,10 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
+    /// <summary>
+    /// The metrics associated with a physical network interface
+    /// First published in XenServer 4.0.
+    /// </summary>
     public partial class PIF_metrics : XenObject<PIF_metrics>
     {
         public PIF_metrics()
@@ -195,185 +199,461 @@ namespace XenAPI
                 return null;
             }
         }
-
+        /// <summary>
+        /// Get a record containing the current state of the given PIF_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static PIF_metrics get_record(Session session, string _pif_metrics)
         {
             return new PIF_metrics((Proxy_PIF_metrics)session.proxy.pif_metrics_get_record(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Get a reference to the PIF_metrics instance with the specified UUID.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<PIF_metrics> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<PIF_metrics>.Create(session.proxy.pif_metrics_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
         }
 
+        /// <summary>
+        /// Get the uuid field of the given PIF_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static string get_uuid(Session session, string _pif_metrics)
         {
             return (string)session.proxy.pif_metrics_get_uuid(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse();
         }
 
+        /// <summary>
+        /// Get the io/read_kbs field of the given PIF_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static double get_io_read_kbs(Session session, string _pif_metrics)
         {
             return Convert.ToDouble(session.proxy.pif_metrics_get_io_read_kbs(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Get the io/write_kbs field of the given PIF_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static double get_io_write_kbs(Session session, string _pif_metrics)
         {
             return Convert.ToDouble(session.proxy.pif_metrics_get_io_write_kbs(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Get the carrier field of the given PIF_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static bool get_carrier(Session session, string _pif_metrics)
         {
             return (bool)session.proxy.pif_metrics_get_carrier(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse();
         }
 
+        /// <summary>
+        /// Get the vendor_id field of the given PIF_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static string get_vendor_id(Session session, string _pif_metrics)
         {
             return (string)session.proxy.pif_metrics_get_vendor_id(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse();
         }
 
+        /// <summary>
+        /// Get the vendor_name field of the given PIF_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static string get_vendor_name(Session session, string _pif_metrics)
         {
             return (string)session.proxy.pif_metrics_get_vendor_name(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse();
         }
 
+        /// <summary>
+        /// Get the device_id field of the given PIF_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static string get_device_id(Session session, string _pif_metrics)
         {
             return (string)session.proxy.pif_metrics_get_device_id(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse();
         }
 
+        /// <summary>
+        /// Get the device_name field of the given PIF_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static string get_device_name(Session session, string _pif_metrics)
         {
             return (string)session.proxy.pif_metrics_get_device_name(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse();
         }
 
+        /// <summary>
+        /// Get the speed field of the given PIF_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static long get_speed(Session session, string _pif_metrics)
         {
             return long.Parse((string)session.proxy.pif_metrics_get_speed(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Get the duplex field of the given PIF_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static bool get_duplex(Session session, string _pif_metrics)
         {
             return (bool)session.proxy.pif_metrics_get_duplex(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse();
         }
 
+        /// <summary>
+        /// Get the pci_bus_path field of the given PIF_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static string get_pci_bus_path(Session session, string _pif_metrics)
         {
             return (string)session.proxy.pif_metrics_get_pci_bus_path(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse();
         }
 
+        /// <summary>
+        /// Get the last_updated field of the given PIF_metrics.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static DateTime get_last_updated(Session session, string _pif_metrics)
         {
             return session.proxy.pif_metrics_get_last_updated(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse();
         }
 
+        /// <summary>
+        /// Get the other_config field of the given PIF_metrics.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static Dictionary<string, string> get_other_config(Session session, string _pif_metrics)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.pif_metrics_get_other_config(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse());
         }
 
+        /// <summary>
+        /// Set the other_config field of the given PIF_metrics.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
+        /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _pif_metrics, Dictionary<string, string> _other_config)
         {
             session.proxy.pif_metrics_set_other_config(session.uuid, (_pif_metrics != null) ? _pif_metrics : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
+        /// <summary>
+        /// Add the given key-value pair to the other_config field of the given PIF_metrics.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _pif_metrics, string _key, string _value)
         {
             session.proxy.pif_metrics_add_to_other_config(session.uuid, (_pif_metrics != null) ? _pif_metrics : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
         }
 
+        /// <summary>
+        /// Remove the given key and its corresponding value from the other_config field of the given PIF_metrics.  If the key is not in that Map, then do nothing.
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
+        /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _pif_metrics, string _key)
         {
             session.proxy.pif_metrics_remove_from_other_config(session.uuid, (_pif_metrics != null) ? _pif_metrics : "", (_key != null) ? _key : "").parse();
         }
 
+        /// <summary>
+        /// Return a list of all the PIF_metrics instances known to the system.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static List<XenRef<PIF_metrics>> get_all(Session session)
         {
             return XenRef<PIF_metrics>.Create(session.proxy.pif_metrics_get_all(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Get all the PIF_metrics Records at once, in a single XML RPC call
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
         public static Dictionary<XenRef<PIF_metrics>, PIF_metrics> get_all_records(Session session)
         {
             return XenRef<PIF_metrics>.Create<Proxy_PIF_metrics>(session.proxy.pif_metrics_get_all_records(session.uuid).parse());
         }
 
+        /// <summary>
+        /// Unique identifier/object reference
+        /// </summary>
+        public virtual string uuid
+        {
+            get { return _uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _uuid))
+                {
+                    _uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("uuid");
+                }
+            }
+        }
         private string _uuid;
-        public virtual string uuid {
-             get { return _uuid; }
-             set { if (!Helper.AreEqual(value, _uuid)) { _uuid = value; Changed = true; NotifyPropertyChanged("uuid"); } }
-         }
 
+        /// <summary>
+        /// Read bandwidth (KiB/s)
+        /// </summary>
+        public virtual double io_read_kbs
+        {
+            get { return _io_read_kbs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _io_read_kbs))
+                {
+                    _io_read_kbs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("io_read_kbs");
+                }
+            }
+        }
         private double _io_read_kbs;
-        public virtual double io_read_kbs {
-             get { return _io_read_kbs; }
-             set { if (!Helper.AreEqual(value, _io_read_kbs)) { _io_read_kbs = value; Changed = true; NotifyPropertyChanged("io_read_kbs"); } }
-         }
 
+        /// <summary>
+        /// Write bandwidth (KiB/s)
+        /// </summary>
+        public virtual double io_write_kbs
+        {
+            get { return _io_write_kbs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _io_write_kbs))
+                {
+                    _io_write_kbs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("io_write_kbs");
+                }
+            }
+        }
         private double _io_write_kbs;
-        public virtual double io_write_kbs {
-             get { return _io_write_kbs; }
-             set { if (!Helper.AreEqual(value, _io_write_kbs)) { _io_write_kbs = value; Changed = true; NotifyPropertyChanged("io_write_kbs"); } }
-         }
 
+        /// <summary>
+        /// Report if the PIF got a carrier or not
+        /// </summary>
+        public virtual bool carrier
+        {
+            get { return _carrier; }
+            set
+            {
+                if (!Helper.AreEqual(value, _carrier))
+                {
+                    _carrier = value;
+                    Changed = true;
+                    NotifyPropertyChanged("carrier");
+                }
+            }
+        }
         private bool _carrier;
-        public virtual bool carrier {
-             get { return _carrier; }
-             set { if (!Helper.AreEqual(value, _carrier)) { _carrier = value; Changed = true; NotifyPropertyChanged("carrier"); } }
-         }
 
+        /// <summary>
+        /// Report vendor ID
+        /// </summary>
+        public virtual string vendor_id
+        {
+            get { return _vendor_id; }
+            set
+            {
+                if (!Helper.AreEqual(value, _vendor_id))
+                {
+                    _vendor_id = value;
+                    Changed = true;
+                    NotifyPropertyChanged("vendor_id");
+                }
+            }
+        }
         private string _vendor_id;
-        public virtual string vendor_id {
-             get { return _vendor_id; }
-             set { if (!Helper.AreEqual(value, _vendor_id)) { _vendor_id = value; Changed = true; NotifyPropertyChanged("vendor_id"); } }
-         }
 
+        /// <summary>
+        /// Report vendor name
+        /// </summary>
+        public virtual string vendor_name
+        {
+            get { return _vendor_name; }
+            set
+            {
+                if (!Helper.AreEqual(value, _vendor_name))
+                {
+                    _vendor_name = value;
+                    Changed = true;
+                    NotifyPropertyChanged("vendor_name");
+                }
+            }
+        }
         private string _vendor_name;
-        public virtual string vendor_name {
-             get { return _vendor_name; }
-             set { if (!Helper.AreEqual(value, _vendor_name)) { _vendor_name = value; Changed = true; NotifyPropertyChanged("vendor_name"); } }
-         }
 
+        /// <summary>
+        /// Report device ID
+        /// </summary>
+        public virtual string device_id
+        {
+            get { return _device_id; }
+            set
+            {
+                if (!Helper.AreEqual(value, _device_id))
+                {
+                    _device_id = value;
+                    Changed = true;
+                    NotifyPropertyChanged("device_id");
+                }
+            }
+        }
         private string _device_id;
-        public virtual string device_id {
-             get { return _device_id; }
-             set { if (!Helper.AreEqual(value, _device_id)) { _device_id = value; Changed = true; NotifyPropertyChanged("device_id"); } }
-         }
 
+        /// <summary>
+        /// Report device name
+        /// </summary>
+        public virtual string device_name
+        {
+            get { return _device_name; }
+            set
+            {
+                if (!Helper.AreEqual(value, _device_name))
+                {
+                    _device_name = value;
+                    Changed = true;
+                    NotifyPropertyChanged("device_name");
+                }
+            }
+        }
         private string _device_name;
-        public virtual string device_name {
-             get { return _device_name; }
-             set { if (!Helper.AreEqual(value, _device_name)) { _device_name = value; Changed = true; NotifyPropertyChanged("device_name"); } }
-         }
 
+        /// <summary>
+        /// Speed of the link (if available)
+        /// </summary>
+        public virtual long speed
+        {
+            get { return _speed; }
+            set
+            {
+                if (!Helper.AreEqual(value, _speed))
+                {
+                    _speed = value;
+                    Changed = true;
+                    NotifyPropertyChanged("speed");
+                }
+            }
+        }
         private long _speed;
-        public virtual long speed {
-             get { return _speed; }
-             set { if (!Helper.AreEqual(value, _speed)) { _speed = value; Changed = true; NotifyPropertyChanged("speed"); } }
-         }
 
+        /// <summary>
+        /// Full duplex capability of the link (if available)
+        /// </summary>
+        public virtual bool duplex
+        {
+            get { return _duplex; }
+            set
+            {
+                if (!Helper.AreEqual(value, _duplex))
+                {
+                    _duplex = value;
+                    Changed = true;
+                    NotifyPropertyChanged("duplex");
+                }
+            }
+        }
         private bool _duplex;
-        public virtual bool duplex {
-             get { return _duplex; }
-             set { if (!Helper.AreEqual(value, _duplex)) { _duplex = value; Changed = true; NotifyPropertyChanged("duplex"); } }
-         }
 
+        /// <summary>
+        /// PCI bus path of the pif (if available)
+        /// </summary>
+        public virtual string pci_bus_path
+        {
+            get { return _pci_bus_path; }
+            set
+            {
+                if (!Helper.AreEqual(value, _pci_bus_path))
+                {
+                    _pci_bus_path = value;
+                    Changed = true;
+                    NotifyPropertyChanged("pci_bus_path");
+                }
+            }
+        }
         private string _pci_bus_path;
-        public virtual string pci_bus_path {
-             get { return _pci_bus_path; }
-             set { if (!Helper.AreEqual(value, _pci_bus_path)) { _pci_bus_path = value; Changed = true; NotifyPropertyChanged("pci_bus_path"); } }
-         }
 
+        /// <summary>
+        /// Time at which this information was last updated
+        /// </summary>
+        public virtual DateTime last_updated
+        {
+            get { return _last_updated; }
+            set
+            {
+                if (!Helper.AreEqual(value, _last_updated))
+                {
+                    _last_updated = value;
+                    Changed = true;
+                    NotifyPropertyChanged("last_updated");
+                }
+            }
+        }
         private DateTime _last_updated;
-        public virtual DateTime last_updated {
-             get { return _last_updated; }
-             set { if (!Helper.AreEqual(value, _last_updated)) { _last_updated = value; Changed = true; NotifyPropertyChanged("last_updated"); } }
-         }
 
+        /// <summary>
+        /// additional configuration
+        /// First published in XenServer 5.0.
+        /// </summary>
+        public virtual Dictionary<string, string> other_config
+        {
+            get { return _other_config; }
+            set
+            {
+                if (!Helper.AreEqual(value, _other_config))
+                {
+                    _other_config = value;
+                    Changed = true;
+                    NotifyPropertyChanged("other_config");
+                }
+            }
+        }
         private Dictionary<string, string> _other_config;
-        public virtual Dictionary<string, string> other_config {
-             get { return _other_config; }
-             set { if (!Helper.AreEqual(value, _other_config)) { _other_config = value; Changed = true; NotifyPropertyChanged("other_config"); } }
-         }
-
-
     }
 }

@@ -162,11 +162,17 @@
   <data name="BOOTLOADER_FAILED" xml:space="preserve">
     <value>The bootloader for this VM returned an error -- did the VM installation succeed?  {1}</value>
   </data>
+  <data name="BRIDGE_NOT_AVAILABLE" xml:space="preserve">
+    <value>Could not find bridge required by VM.</value>
+  </data>
   <data name="CANNOT_ADD_TUNNEL_TO_BOND_SLAVE" xml:space="preserve">
     <value>This PIF is a bond slave and cannot have a tunnel on it.</value>
   </data>
   <data name="CANNOT_ADD_VLAN_TO_BOND_SLAVE" xml:space="preserve">
     <value>This PIF is a bond slave and cannot have a VLAN on it.</value>
+  </data>
+  <data name="CANNOT_CHANGE_PIF_PROPERTIES" xml:space="preserve">
+    <value>This properties of this PIF cannot be changed. Only the properties of non-bonded physical PIFs, or bond masters can be changed.</value>
   </data>
   <data name="CANNOT_CONTACT_HOST" xml:space="preserve">
     <value>Cannot forward messages because the server cannot be contacted.  The server may be switched off or there may be network connectivity problems.</value>
@@ -501,6 +507,9 @@
   <data name="IMPORT_INCOMPATIBLE_VERSION" xml:space="preserve">
     <value>Cannot import on this server because it was saved on an incompatible version</value>
   </data>
+  <data name="INCOMPATIBLE_PIF_PROPERTIES" xml:space="preserve">
+    <value>These PIFs can not be bonded, because their properties are different.</value>
+  </data>
   <data name="INTERFACE_HAS_NO_IP" xml:space="preserve">
     <value>The specified interface cannot be used because it has no IP address</value>
   </data>
@@ -572,6 +581,9 @@
   </data>
   <data name="LICENSE_FILE_DEPRECATED" xml:space="preserve">
     <value>This type of license file is for previous versions of XenServer. Please upgrade to the new licensing system.</value>
+  </data>
+  <data name="LICENSE_HOST_POOL_MISMATCH" xml:space="preserve">
+    <value>Host and pool have incompatible licenses (editions).</value>
   </data>
   <data name="LICENSE_PROCESSING_ERROR" xml:space="preserve">
     <value>There was an error processing your license.  Please contact your support representative</value>
@@ -755,6 +767,9 @@
   </data>
   <data name="PIF_TUNNEL_STILL_EXISTS" xml:space="preserve">
     <value>Operation cannot proceed while a tunnel exists on this interface.</value>
+  </data>
+  <data name="PIF_UNMANAGED" xml:space="preserve">
+    <value>The operation you requested cannot be performed because the specified PIF is not managed by xapi.</value>
   </data>
   <data name="PIF_VLAN_EXISTS" xml:space="preserve">
     <value>VLAN tag already in use</value>
@@ -1547,8 +1562,14 @@ Authorized Roles: {1}</value>
   <data name="VDI_NOT_MANAGED" xml:space="preserve">
     <value>This operation cannot be performed because the system does not manage this VDI</value>
   </data>
+  <data name="VDI_NOT_SPARSE" xml:space="preserve">
+    <value>The VDI is not stored using a sparse format. It is not possible to query and manipulate only the changed blocks (or 'block differences' or 'disk deltas') between two VDIs. Please select a VDI which uses a sparse-aware technology such as VHD.</value>
+  </data>
   <data name="VDI_READONLY" xml:space="preserve">
     <value>The operation required write access but VDI {0} is read-only</value>
+  </data>
+  <data name="VDI_TOO_SMALL" xml:space="preserve">
+    <value>The VDI is too small. Please resize it to at least the minimum size.</value>
   </data>
   <data name="VGPU_TYPE_NOT_COMPATIBLE_WITH_RUNNING_TYPE" xml:space="preserve">
     <value>vGPU type is not compatible with one or more of the vGPU types currently running on this pGPU</value>
