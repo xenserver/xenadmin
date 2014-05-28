@@ -319,7 +319,7 @@
     <value>3</value>
   </data>
   <data name="line1Upgrade.Text" xml:space="preserve">
-    <value>XenServer</value>
+    <value>support</value>
   </data>
   <data name="line1Upgrade.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
@@ -355,7 +355,7 @@
     <value>2</value>
   </data>
   <data name="titleUpgrade.Text" xml:space="preserve">
-    <value>LICENSE</value>
+    <value>PURCHASE</value>
   </data>
   <data name="titleUpgrade.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
