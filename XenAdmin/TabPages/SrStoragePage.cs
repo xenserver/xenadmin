@@ -113,8 +113,8 @@ namespace XenAdmin.TabPages
         {
             if (sr != null && SR.IsIslOrIslLegacy(sr))
             {
-                Banner.AppliesToVersion = Messages.XENSERVER_6_2;
-                Banner.BannerType = DeprecationBanner.Type.Deprecation;
+                Banner.AppliesToVersion = Messages.XENSERVER_6_5;
+                Banner.BannerType = DeprecationBanner.Type.Removal;
                 Banner.FeatureName = Messages.ISL_SR;
                 Banner.LinkUri = new Uri(InvisibleMessages.ISL_DEPRECATION_URL);
                 Banner.Visible = true;
