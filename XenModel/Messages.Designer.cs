@@ -11344,15 +11344,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cross-Server Private Network.
-        /// </summary>
-        public static string DVSCS {
-            get {
-                return ResourceManager.GetString("DVSCS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Maximum memory.
         /// </summary>
         public static string DYNAMIC_MAX {
@@ -26608,7 +26599,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos;: VM Protection Policies have been removed in XenServer 6.2.
+        ///   Looks up a localized string similar to &apos;{0}&apos;: VM Protection Policies were removed in XenServer 6.2.
         /// </summary>
         public static string RPU_WIZARD_VMPR_VMPP_DEPRECATION {
             get {
@@ -26617,7 +26608,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos;: The use of WSS servers has been removed in XenServer 6.2.
+        ///   Looks up a localized string similar to &apos;{0}&apos;: The use of WSS servers was removed in XenServer 6.2.
         /// </summary>
         public static string RPU_WIZARD_WSS_DEPRECATED {
             get {
@@ -34791,7 +34782,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The {0} feature is deprecated in {1} and may be unavailable in future versions.
+        ///   Looks up a localized string similar to The {0} feature was deprecated in {1} and may be unavailable in future versions.
         /// </summary>
         public static string X_IS_DEPRECATED_IN_X {
             get {
@@ -34800,7 +34791,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The {0} feature is not available in {1}.
+        ///   Looks up a localized string similar to The {0} feature is not available in {1} and later versions.
         /// </summary>
         public static string X_IS_REMOVED_IN_X {
             get {
@@ -34931,6 +34922,15 @@ namespace XenAdmin {
         public static string XENSERVER_6_2 {
             get {
                 return ResourceManager.GetString("XENSERVER_6_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XenServer 6.5.
+        /// </summary>
+        public static string XENSERVER_6_5 {
+            get {
+                return ResourceManager.GetString("XENSERVER_6_5", resourceCulture);
             }
         }
         
