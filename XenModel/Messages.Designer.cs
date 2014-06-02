@@ -7616,7 +7616,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to cps.
+        ///   Looks up a localized string similar to /sec.
         /// </summary>
         public static string COUNTS_PER_SEC_UNIT {
             get {
