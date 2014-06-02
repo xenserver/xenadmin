@@ -202,7 +202,6 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private void RowsChanged()
         {
-            panelDebianLenny.Visible = false;
             if (TemplatesGridView.SelectedRows.Count == 0 || !TemplatesGridView.SelectedRows[0].Visible)
             {
                 DescriptionBox.Visible = false;
@@ -223,8 +222,6 @@ namespace XenAdmin.Wizards.NewVMWizard
                 }
 
                 checkBoxCopyBiosStrings.Enabled = item.Template.DefaultTemplate && item.Template.IsHVM;
-                if (item.Template.name_label == "Debian Lenny 5.0")
-                    panelDebianLenny.Visible = true;
             }
 
             OnPageUpdated();
@@ -266,11 +263,6 @@ namespace XenAdmin.Wizards.NewVMWizard
                         return xItem.Template.opaque_ref.CompareTo(yItem.Template.opaque_ref);
                 }
             }
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Program.OpenURL(linkLabel1.Text.Substring(e.Link.Start, e.Link.Length));
         }
 
         public class TemplatesGridViewItem : DataGridViewRow, IEquatable<TemplatesGridViewItem>

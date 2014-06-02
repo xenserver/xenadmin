@@ -38,15 +38,10 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.DescriptionLabel = new System.Windows.Forms.Label();
             this.DescriptionBox = new System.Windows.Forms.GroupBox();
             this.checkBoxCopyBiosStrings = new System.Windows.Forms.CheckBox();
-            this.panelDebianLenny = new System.Windows.Forms.Panel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.searchTextBox1 = new XenAdmin.Controls.SearchTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.TemplatesGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.DescriptionBox.SuspendLayout();
-            this.panelDebianLenny.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // TemplatesGridView
@@ -116,30 +111,6 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.checkBoxCopyBiosStrings.Name = "checkBoxCopyBiosStrings";
             this.checkBoxCopyBiosStrings.UseVisualStyleBackColor = true;
             // 
-            // panelDebianLenny
-            // 
-            resources.ApplyResources(this.panelDebianLenny, "panelDebianLenny");
-            this.panelDebianLenny.Controls.Add(this.linkLabel1);
-            this.panelDebianLenny.Controls.Add(this.pictureBox1);
-            this.panelDebianLenny.Name = "panelDebianLenny";
-            // 
-            // linkLabel1
-            // 
-            resources.ApplyResources(this.linkLabel1, "linkLabel1");
-            this.linkLabel1.AutoEllipsis = true;
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.UseCompatibleTextRendering = true;
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
-            this.pictureBox1.InitialImage = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
-            // 
             // searchTextBox1
             // 
             resources.ApplyResources(this.searchTextBox1, "searchTextBox1");
@@ -151,7 +122,6 @@ namespace XenAdmin.Wizards.NewVMWizard
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.searchTextBox1);
-            this.Controls.Add(this.panelDebianLenny);
             this.Controls.Add(this.checkBoxCopyBiosStrings);
             this.Controls.Add(this.TemplatesGridView);
             this.Controls.Add(this.DescriptionBox);
@@ -159,8 +129,6 @@ namespace XenAdmin.Wizards.NewVMWizard
             ((System.ComponentModel.ISupportInitialize)(this.TemplatesGridView)).EndInit();
             this.panel1.ResumeLayout(false);
             this.DescriptionBox.ResumeLayout(false);
-            this.panelDebianLenny.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -176,9 +144,6 @@ namespace XenAdmin.Wizards.NewVMWizard
         private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeColumn;
         private System.Windows.Forms.CheckBox checkBoxCopyBiosStrings;
-        private System.Windows.Forms.Panel panelDebianLenny;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.LinkLabel linkLabel1;
         private XenAdmin.Controls.SearchTextBox searchTextBox1;
     }
 }
