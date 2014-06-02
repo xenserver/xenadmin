@@ -104,8 +104,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             get { return SrDescriptors.Count > 0 ? SrDescriptors[0].Name : null; }
             set
             {
-                if (string.IsNullOrEmpty(value))
-                    return;
                 if (SrDescriptors.Count == 0)
                     SrDescriptors.Add(new SrDescriptor());
                 SrDescriptors[0].Name = value;
@@ -116,8 +114,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             get { return SrDescriptors.Count > 0 ? SrDescriptors[0].UUID : null; }
             set
             {
-                if (string.IsNullOrEmpty(value))
-                    return;
                 if (SrDescriptors.Count == 0)
                     SrDescriptors.Add(new SrDescriptor());
                 SrDescriptors[0].UUID = value;
@@ -128,8 +124,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             get { return SrDescriptors.Count > 0 ? SrDescriptors[0].DeviceConfig : null; }
             set
             {
-                if (value == null)
-                    return;
                 if (SrDescriptors.Count == 0)
                     SrDescriptors.Add(new SrDescriptor());
                 SrDescriptors[0].DeviceConfig = value;
@@ -140,8 +134,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             get { return SrDescriptors.Count > 0 ? SrDescriptors[0].Description : null; }
             set
             {
-                if (string.IsNullOrEmpty(value))
-                    return;
                 if (SrDescriptors.Count == 0)
                     SrDescriptors.Add(new SrDescriptor());
                 SrDescriptors[0].Description = value;
