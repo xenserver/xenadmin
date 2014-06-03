@@ -35,7 +35,7 @@ namespace XenAdmin.Controls.XenSearch
             // AddGroupButton
             // 
             resources.ApplyResources(this.AddGroupButton, "AddGroupButton");
-            this.AddGroupButton.Image = global::XenAdmin.Properties.Resources.tempAdd;
+            this.AddGroupButton.Image = global::XenAdmin.Properties.Resources.more_16;
             this.AddGroupButton.Name = "AddGroupButton";
             this.AddGroupButton.UseVisualStyleBackColor = true;
             this.AddGroupButton.Click += new System.EventHandler(this.AddGroupButton_Click);

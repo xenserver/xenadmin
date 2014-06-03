@@ -442,9 +442,6 @@
   <data name="tshadowtopright" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\tshadowtopright.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="_000_ServerUp_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\000_ServerUp_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="copy_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\copy_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -586,9 +583,6 @@
   <data name="XS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\XS.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="_000_PiiCustomised_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\000_PiiCustomised_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="memory_dynmin_slider_noedit_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\memory_dynmin_slider_noedit_small.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -628,9 +622,6 @@
   <data name="_000_ViewModeList_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_ViewModeList_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="_000_date_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\000_date_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\minus.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -640,9 +631,6 @@
   <data name="graphline" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\graphline.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="_000_PiiNo_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\000_PiiNo_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="_000_ImportVirtualAppliance_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_ImportVirtualAppliance_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -651,9 +639,6 @@
   </data>
   <data name="_000_Storage_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_Storage_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="_000_PiiYes_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\000_PiiYes_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="homepage_try_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\homepage_try_icon.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -733,9 +718,6 @@
   <data name="centos_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\centos_16x.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="_000_Tick_h32bit_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\000_Tick_h32bit_24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="_000_StartVM_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_StartVM_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -774,9 +756,6 @@
   </data>
   <data name="_000_host_1_star" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_host_1_star.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="_000_UpgradePool_h32bit_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\000_UpgradePool_h32bit_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DateTime16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\DateTime16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -873,9 +852,6 @@
   </data>
   <data name="_000_ScheduledVMsnapshotDiskMemory_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_ScheduledVMsnapshotDiskMemory_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="_000_PiiMaybe_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\000_PiiMaybe_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_000_VM_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_VM_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1021,58 +997,85 @@
   <data name="_000_FilterSeverity_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_FilterSeverity_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="_000_Severity5_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\000_Severity5_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="alert1_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\alert1_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tempAdd" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\tempAdd.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="alert2_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\alert2_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tempCancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\tempCancel.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="alert3_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\alert3_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tempInfra16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\tempInfra16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="alert4_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\alert4_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tempInfra24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\tempInfra24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="alert5_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\alert5_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tempNotif16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\tempNotif16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="alert6_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\alert6_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tempNotif24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\tempNotif24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="cancelled_action_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\cancelled_action_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tempObj16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\tempObj16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="close_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\close_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tempObj24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\tempObj24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="infra_view_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\infra_view_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tempSearch16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\tempSearch16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="more_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\more_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tempSearch24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\tempSearch24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="notif_alerts_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\notif_alerts_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tempTags16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\tempTags16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="notif_events_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\notif_events_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tempTags24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\tempTags24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="notif_events_errors_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\notif_events_errors_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tempUpdates" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\tempUpdates.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="notif_none_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\notif_none_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tempErrorEvents" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\tempErrorEvents.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="notif_none_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\notif_none_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tempNotif16Errors" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\tempNotif16Errors.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="notif_updates_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\notif_updates_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tempHalfUpgradedPool" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\tempHalfUpgradedPool.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="objects_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\objects_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tempSeverityUnknown" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\tempSeverityUnknown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="objects_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\objects_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="org_view_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\org_view_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="org_view_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\org_view_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pool_up_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\pool_up_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="saved_searches_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\saved_searches_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="server_up_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\server_up_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="infra_view_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\infra_view_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="infra_view_16_textured" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\infra_view_16_textured.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="saved_searches_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\saved_searches_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_000_UpgradePool_h32bit_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\000_UpgradePool_h32bit_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

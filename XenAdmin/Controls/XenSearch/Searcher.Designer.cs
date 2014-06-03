@@ -65,7 +65,7 @@ namespace XenAdmin.Controls.XenSearch
             // buttonClose
             // 
             resources.ApplyResources(this.buttonClose, "buttonClose");
-            this.buttonClose.Image = global::XenAdmin.Properties.Resources._000_Abort_h32bit_16;
+            this.buttonClose.Image = global::XenAdmin.Properties.Resources.close_16;
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);

@@ -3912,13 +3912,21 @@
     <None Include="Images\000_TestFailover_h32bit_32.png" />
     <None Include="Images\015_Download_h32bit_32.png" />
     <Content Include="Images\000_Severity5_h32bit_16.png" />
+    <None Include="Images\alert1_16.png" />
+    <None Include="Images\alert2_16.png" />
+    <None Include="Images\alert3_16.png" />
+    <None Include="Images\alert4_16.png" />
+    <None Include="Images\alert5_16.png" />
+    <None Include="Images\alert6_16.png" />
     <Content Include="Images\alerts_32.png" />
     <Content Include="Images\asterisk.png" />
     <Content Include="Images\attach_24.png" />
+    <None Include="Images\cancelled_action_16.png" />
     <Content Include="Images\centos_16x.png" />
     <Content Include="Images\change_password_16.png" />
     <Content Include="Images\change_password_32.png" />
     <Content Include="Images\clonevm_16.png" />
+    <None Include="Images\close_16.png" />
     <Content Include="Images\commands_16.png" />
     <Content Include="Images\console_16.png" />
     <Content Include="Images\cross.png" />
@@ -3928,13 +3936,33 @@
     <None Include="Images\sl_add_storage_system_small_16.png" />
     <None Include="Images\detach_24.png" />
     <Content Include="Images\export_32.png" />
+    <None Include="Images\failed_action_16.png" />
     <Content Include="Images\help_16_hover.png" />
     <Content Include="Images\help_24.png" />
     <Content Include="Images\help_24_hover.png" />
     <Content Include="Images\help_32_hover.png" />
     <Content Include="Images\import_32.png" />
+    <None Include="Images\infra_view_16.png" />
+    <None Include="Images\infra_view_24.png" />
+    <None Include="Images\infra_view_16_textured.png" />
     <Content Include="Images\Logo.png" />
+    <None Include="Images\more_16.png" />
+    <None Include="Images\notif_alerts_16.png" />
+    <None Include="Images\notif_events_16.png" />
+    <None Include="Images\notif_events_errors_16.png" />
+    <None Include="Images\notif_none_16.png" />
+    <None Include="Images\notif_none_24.png" />
+    <None Include="Images\notif_updates_16.png" />
+    <None Include="Images\objects_16.png" />
+    <None Include="Images\objects_24.png" />
+    <None Include="Images\org_view_16.png" />
+    <None Include="Images\org_view_24.png" />
+    <None Include="Images\pool_up_16.png" />
+    <None Include="Images\pool_up_32.png" />
     <Content Include="Images\Refresh16.png" />
+    <None Include="Images\saved_searches_16.png" />
+    <None Include="Images\server_up_16.png" />
+    <None Include="Images\saved_searches_24.png" />
     <Content Include="Images\sl_luns_16.png" />
     <Content Include="Images\debian_16x.png" />
     <None Include="Images\desktop.jpg" />
@@ -4000,6 +4028,7 @@
     <None Include="Images\SpinningFrame6.png" />
     <None Include="Images\SpinningFrame7.png" />
     <Content Include="Images\subscribe.png" />
+    <None Include="Images\success_action_16.png" />
     <Content Include="Images\suse_16x.png" />
     <Content Include="Images\tempAdd.png" />
     <None Include="Images\tempCancel.png" />
@@ -5311,7 +5340,9 @@
     <EmbeddedResource Include="Plugins\UI\TabPageCredentialsDialog.zh-CN.resx">
       <DependentUpon>TabPageCredentialsDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.ja.resx" />
+    <EmbeddedResource Include="Properties\Resources.ja.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.zh-CN.resx" />
     <EmbeddedResource Include="SettingsPanels\BootOptionsEditPage.zh-CN.resx">
       <DependentUpon>BootOptionsEditPage.cs</DependentUpon>

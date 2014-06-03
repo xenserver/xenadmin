@@ -109,7 +109,7 @@
             // 
             // buttonInfraBig
             // 
-            this.buttonInfraBig.Image = global::XenAdmin.Properties.Resources.tempInfra24;
+            this.buttonInfraBig.Image = global::XenAdmin.Properties.Resources.infra_view_24;
             resources.ApplyResources(this.buttonInfraBig, "buttonInfraBig");
             this.buttonInfraBig.Name = "buttonInfraBig";
             this.buttonInfraBig.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
@@ -117,7 +117,7 @@
             // 
             // buttonObjectsBig
             // 
-            this.buttonObjectsBig.Image = global::XenAdmin.Properties.Resources.tempObj24;
+            this.buttonObjectsBig.Image = global::XenAdmin.Properties.Resources.objects_24;
             resources.ApplyResources(this.buttonObjectsBig, "buttonObjectsBig");
             this.buttonObjectsBig.Name = "buttonObjectsBig";
             this.buttonObjectsBig.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
@@ -130,7 +130,7 @@
             this.toolStripMenuItemFolders,
             this.toolStripMenuItemFields,
             this.toolStripMenuItemVapps});
-            this.buttonOrganizationBig.Image = global::XenAdmin.Properties.Resources.tempTags24;
+            this.buttonOrganizationBig.Image = global::XenAdmin.Properties.Resources.org_view_24;
             resources.ApplyResources(this.buttonOrganizationBig, "buttonOrganizationBig");
             this.buttonOrganizationBig.Name = "buttonOrganizationBig";
             this.buttonOrganizationBig.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
@@ -162,7 +162,7 @@
             // 
             // buttonSearchesBig
             // 
-            this.buttonSearchesBig.Image = global::XenAdmin.Properties.Resources.tempSearch24;
+            this.buttonSearchesBig.Image = global::XenAdmin.Properties.Resources.saved_searches_24;
             resources.ApplyResources(this.buttonSearchesBig, "buttonSearchesBig");
             this.buttonSearchesBig.Name = "buttonSearchesBig";
             this.buttonSearchesBig.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
@@ -170,7 +170,7 @@
             // 
             // buttonNotifyBig
             // 
-            this.buttonNotifyBig.Image = global::XenAdmin.Properties.Resources.tempNotif24;
+            this.buttonNotifyBig.Image = global::XenAdmin.Properties.Resources.notif_none_24;
             resources.ApplyResources(this.buttonNotifyBig, "buttonNotifyBig");
             this.buttonNotifyBig.Name = "buttonNotifyBig";
             this.buttonNotifyBig.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
@@ -196,7 +196,7 @@
             // 
             this.buttonNotifySmall.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.buttonNotifySmall.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonNotifySmall.Image = global::XenAdmin.Properties.Resources.tempNotif16;
+            this.buttonNotifySmall.Image = global::XenAdmin.Properties.Resources.notif_none_16;
             resources.ApplyResources(this.buttonNotifySmall, "buttonNotifySmall");
             this.buttonNotifySmall.Name = "buttonNotifySmall";
             this.buttonNotifySmall.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
@@ -207,7 +207,7 @@
             // 
             this.buttonSearchesSmall.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.buttonSearchesSmall.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonSearchesSmall.Image = global::XenAdmin.Properties.Resources.tempSearch16;
+            this.buttonSearchesSmall.Image = global::XenAdmin.Properties.Resources.saved_searches_16;
             resources.ApplyResources(this.buttonSearchesSmall, "buttonSearchesSmall");
             this.buttonSearchesSmall.Name = "buttonSearchesSmall";
             this.buttonSearchesSmall.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
@@ -217,7 +217,7 @@
             // 
             this.buttonOrganizationSmall.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.buttonOrganizationSmall.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonOrganizationSmall.Image = global::XenAdmin.Properties.Resources.tempTags16;
+            this.buttonOrganizationSmall.Image = global::XenAdmin.Properties.Resources.org_view_16;
             resources.ApplyResources(this.buttonOrganizationSmall, "buttonOrganizationSmall");
             this.buttonOrganizationSmall.Name = "buttonOrganizationSmall";
             this.buttonOrganizationSmall.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
@@ -227,7 +227,7 @@
             // 
             this.buttonObjectsSmall.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.buttonObjectsSmall.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonObjectsSmall.Image = global::XenAdmin.Properties.Resources.tempObj16;
+            this.buttonObjectsSmall.Image = global::XenAdmin.Properties.Resources.objects_16;
             resources.ApplyResources(this.buttonObjectsSmall, "buttonObjectsSmall");
             this.buttonObjectsSmall.Name = "buttonObjectsSmall";
             this.buttonObjectsSmall.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
@@ -237,7 +237,7 @@
             // 
             this.buttonInfraSmall.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.buttonInfraSmall.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonInfraSmall.Image = global::XenAdmin.Properties.Resources.tempInfra16;
+            this.buttonInfraSmall.Image = global::XenAdmin.Properties.Resources.infra_view_16;
             resources.ApplyResources(this.buttonInfraSmall, "buttonInfraSmall");
             this.buttonInfraSmall.Name = "buttonInfraSmall";
             this.buttonInfraSmall.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
