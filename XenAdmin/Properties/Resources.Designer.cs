@@ -2553,6 +2553,16 @@ namespace XenAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap objects_16_textured {
+            get {
+                object obj = ResourceManager.GetObject("objects_16_textured", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap objects_24 {
             get {
                 object obj = ResourceManager.GetObject("objects_24", resourceCulture);

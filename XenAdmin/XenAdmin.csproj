@@ -3959,6 +3959,7 @@
     <None Include="Images\org_view_24.png" />
     <None Include="Images\pool_up_16.png" />
     <None Include="Images\pool_up_32.png" />
+    <None Include="Images\objects_16_textured.png" />
     <Content Include="Images\Refresh16.png" />
     <None Include="Images\saved_searches_16.png" />
     <None Include="Images\server_up_16.png" />

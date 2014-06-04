@@ -169,7 +169,7 @@ namespace XenAdmin
             ImageList16.Images.Add("_000_ManagementInterface_h32bit_16.png", Properties.Resources._000_ManagementInterface_h32bit_16);
             ImageList16.Images.Add("000_TCP_IPGroup_h32bit_16.png", Properties.Resources._000_TCP_IPGroup_h32bit_16);
             ImageList16.Images.Add("infra_view_16_textured.png", Properties.Resources.infra_view_16_textured);
-            ImageList16.Images.Add("objects_16.png", Properties.Resources.objects_16);
+            ImageList16.Images.Add("objects_16_textured.png", Properties.Resources.objects_16_textured);
 
             System.Diagnostics.Trace.Assert(ImageList16.Images.Count == Enum.GetValues(typeof(Icons)).Length,
                 "Programmer error - you must add an entry to the image list when you add a new icon to the enum");

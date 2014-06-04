@@ -1078,4 +1078,7 @@
   <data name="_000_UpgradePool_h32bit_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_UpgradePool_h32bit_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="objects_16_textured" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\objects_16_textured.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
