@@ -64,14 +64,14 @@ namespace XenAdmin
             // of a known bug in ImageList with transparency. 
             // See http://www.codeproject.com/cs/miscctrl/AlphaImageImagelist.asp?df=100&forumid=137678&exp=0&select=1392020#xx1392020xx
             // To workaround the bug, we just add the images from the resource file.
-            // Note that this list is in the same order as the enum above.
+            // Note that this list is in the same order as the enum in Icons.cs.
             ImageList16.Images.Add("Logo.png", XenAdmin.Properties.Resources.Logo);
             ImageList16.Images.Add("000_ServerInProgress_h32bit_16.png", XenAdmin.Properties.Resources._000_ServerInProgress_h32bit_16);
             ImageList16.Images.Add("000_TreeConnected_h32bit_16.png", XenAdmin.Properties.Resources._000_TreeConnected_h32bit_16);
             ImageList16.Images.Add("000_ServerDisconnected_h32bit_16.png", XenAdmin.Properties.Resources._000_ServerDisconnected_h32bit_16);
             ImageList16.Images.Add("000_ServerMaintenance_h32bit_16.png", XenAdmin.Properties.Resources._000_ServerMaintenance_h32bit_16);
             ImageList16.Images.Add("000_HostUnpatched_h32bit_16.png", XenAdmin.Properties.Resources._000_HostUnpatched_h32bit_16);
-            ImageList16.Images.Add("000_ServerUp_h32bit_16.png", XenAdmin.Properties.Resources._000_ServerUp_h32bit_16);
+            ImageList16.Images.Add("server_up_16.png", XenAdmin.Properties.Resources.server_up_16);
             ImageList16.Images.Add("000_ServerErrorFile_h32bit_16.png", XenAdmin.Properties.Resources._000_ServerErrorFile_h32bit_16);
             ImageList16.Images.Add("000_StartVM_h32bit_16.png", XenAdmin.Properties.Resources._000_StartVM_h32bit_16);
             ImageList16.Images.Add("000_VMDisabled_h32bit_16.png", XenAdmin.Properties.Resources._000_VMDisabled_h32bit_16);
@@ -90,7 +90,7 @@ namespace XenAdmin
             ImageList16.Images.Add("_000_ScheduledVMsnapshotDiskOnly_h32bit_16.png", XenAdmin.Properties.Resources._000_ScheduledVMsnapshotDiskOnly_h32bit_16);
             ImageList16.Images.Add("_000_ScheduledVMsnapshotDiskMemory_h32bit_16.png", XenAdmin.Properties.Resources._000_ScheduledVMsnapshotDiskMemory_h32bit_16);
             ImageList16.Images.Add("000_PoolConnected_h32bit_16.png", XenAdmin.Properties.Resources._000_PoolConnected_h32bit_16);
-            ImageList16.Images.Add("tempHalfUpgradedPool.png", XenAdmin.Properties.Resources.tempHalfUpgradedPool);
+            ImageList16.Images.Add("pool_up_16.png", XenAdmin.Properties.Resources.pool_up_16);
 
             ImageList16.Images.Add("000_Storage_h32bit_16.png", XenAdmin.Properties.Resources._000_Storage_h32bit_16);
             ImageList16.Images.Add("000_StorageBroken_h32bit_16.png", XenAdmin.Properties.Resources._000_StorageBroken_h32bit_16);
@@ -118,11 +118,11 @@ namespace XenAdmin
 
             ImageList16.Images.Add("Logo.png", Properties.Resources.Logo);
 
-            ImageList16.Images.Add("000_PiiYes_h32bit_16.png", Properties.Resources._000_PiiYes_h32bit_16);
-            ImageList16.Images.Add("000_PiiMaybe_h32bit_16.png", Properties.Resources._000_PiiMaybe_h32bit_16);
-            ImageList16.Images.Add("000_PiiCustomised_h32bit_16.png", Properties.Resources._000_PiiCustomised_h32bit_16);
-            ImageList16.Images.Add("000_PiiNo_h32bit_16.png", Properties.Resources._000_PiiNo_h32bit_16);
-            ImageList16.Images.Add("poolball5.png", Properties.Resources._000_Severity5_h32bit_16);
+            ImageList16.Images.Add("alert1_16.png", Properties.Resources.alert1_16);
+            ImageList16.Images.Add("alert2_16.png", Properties.Resources.alert2_16);
+            ImageList16.Images.Add("alert3_16.png", Properties.Resources.alert3_16);
+            ImageList16.Images.Add("alert4_16.png", Properties.Resources.alert4_16);
+            ImageList16.Images.Add("alert5_16.png", Properties.Resources.alert5_16);
 
             #endregion
 
@@ -168,8 +168,8 @@ namespace XenAdmin
 
             ImageList16.Images.Add("_000_ManagementInterface_h32bit_16.png", Properties.Resources._000_ManagementInterface_h32bit_16);
             ImageList16.Images.Add("000_TCP_IPGroup_h32bit_16.png", Properties.Resources._000_TCP_IPGroup_h32bit_16);
-            ImageList16.Images.Add("tempInfra16.png", Properties.Resources.tempInfra16);
-            ImageList16.Images.Add("tempObj16.png", Properties.Resources.tempObj16);
+            ImageList16.Images.Add("infra_view_16_textured.png", Properties.Resources.infra_view_16_textured);
+            ImageList16.Images.Add("objects_16_textured.png", Properties.Resources.objects_16_textured);
 
             System.Diagnostics.Trace.Assert(ImageList16.Images.Count == Enum.GetValues(typeof(Icons)).Length,
                 "Programmer error - you must add an entry to the image list when you add a new icon to the enum");

@@ -141,12 +141,12 @@ namespace XenAdmin.Controls.MainWindowControls
                 if (unreadEntries > 0)
                 {
                     Text = ToolTipText = string.Format(Messages.NOTIFICATIONS_TOTAL, unreadEntries);
-                    Image = Properties.Resources.tempNotif16Errors;
+                    Image = Properties.Resources.notif_alerts_16;
                 }
                 else
                 {
                     Text = ToolTipText = Messages.NOTIFICATIONS_TOTAL_ZERO;
-                    Image = Properties.Resources.tempNotif16;
+                    Image = Properties.Resources.notif_none_16;
                 }
 
                 Invalidate();

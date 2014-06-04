@@ -183,11 +183,11 @@ namespace XenAdmin.Controls.MainWindowControls
                 case NotificationsSubMode.Alerts:
                     return Properties.Resources._000_Alert2_h32bit_16;
                 case NotificationsSubMode.Updates:
-                    return Properties.Resources.tempUpdates;
+                    return Properties.Resources.notif_updates_16;
                 case NotificationsSubMode.Events:
                     return unreadEntries == 0
-                               ? Properties.Resources._000_date_h32bit_16
-                               : Properties.Resources.tempErrorEvents;
+                               ? Properties.Resources.notif_events_16
+                               : Properties.Resources.notif_events_errors_16;
                 default:
                     return null;
             }

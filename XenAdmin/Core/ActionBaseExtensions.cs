@@ -51,7 +51,7 @@ namespace XenAdmin.Core
                 return action.Succeeded
                            ? Properties.Resources._000_Tick_h32bit_16
                            : action.Exception is CancelledException
-                                 ? Properties.Resources.tempCancel
+                                 ? Properties.Resources.cancelled_action_16
                                  : Properties.Resources._000_error_h32bit_16;
 
             if (action.PercentComplete < 9)

@@ -76,7 +76,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         public Image Image
         {
-            get { return Properties.Resources._000_date_h32bit_16; }
+            get { return Properties.Resources.notif_events_16; }
         }
 
         public override string PageTitle
