@@ -2882,6 +2882,21 @@ Please reconnect the host and try again.</value>
   <data name="CPU_SUB" xml:space="preserve">
     <value>{0} vCPU(s)</value>
   </data>
+  <data name="CPU_TOPOLOGY_STRING_1_SOCKET_1_CORE" xml:space="preserve">
+    <value>1 socket with 1 core per socket</value>
+  </data>
+  <data name="CPU_TOPOLOGY_STRING_1_SOCKET_N_CORE" xml:space="preserve">
+    <value>1 socket with {0} cores per socket</value>
+  </data>
+  <data name="CPU_TOPOLOGY_STRING_INVALID_VALUE" xml:space="preserve">
+    <value>{0} cores per socket (Invalid configuration)</value>
+  </data>
+  <data name="CPU_TOPOLOGY_STRING_N_SOCKET_1_CORE" xml:space="preserve">
+    <value>{0} sockets with 1 core per socket</value>
+  </data>
+  <data name="CPU_TOPOLOGY_STRING_N_SOCKET_N_CORE" xml:space="preserve">
+    <value>{0} sockets with {1} cores per socket</value>
+  </data>
   <data name="CREATEDVM_CLONE" xml:space="preserve">
     <value>Created '{0}' by cloning '{1}'</value>
   </data>
@@ -10986,7 +11001,7 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
     <value>The disk is attached to a VM that is not in halted state.</value>
   </data>
   <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
-    <value>The number of VCPUs can only be changed when the VM is shut down</value>
+    <value>The VCPUs can only be changed when the VM is shut down</value>
   </data>
   <data name="VDI_COPIED" xml:space="preserve">
     <value>Copied disk '{0}' from SR '{1}' to SR '{2}'</value>

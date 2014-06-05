@@ -31,16 +31,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAPI;
-using XenAdmin.Network;
 using XenAdmin.Dialogs;
 
 
@@ -204,6 +200,7 @@ namespace XenAdmin.SettingsPanels
             if (MROrGreater && vm.power_state != vm_power_state.Halted)
             {
                 nudVCPUs.Enabled = false;
+                comboBoxTopology.Enabled = false;
                 VCPUWarningLabel.Text = Messages.VCPU_ONLY_WHEN_HALTED;
                 VCPUWarningLabel.ForeColor = SystemColors.ControlText;
                 VCPUWarningLabel.Visible = true;
@@ -271,16 +268,15 @@ namespace XenAdmin.SettingsPanels
             _OrigMemory = nudMemory.Value;
             _OrigVCPUs = nudVCPUs.Value;
             _OrigVCPUWeight = _CurrentVCPUWeight;
+            
+            comboBoxTopology.Populate(vm.VCPUs_at_startup, vm.VCPUs_max, vm.CoresPerSocket, vm.MaxCoresPerSocket);
 
             _ValidToSave = true;
         }
 
         public bool HasChanged
         {
-            get
-            {
-                return HasVCPUChanged || HasMemoryChanged;
-            }
+            get { return HasVCPUChanged || HasMemoryChanged || HasTopologyChanged; }
         }
 
         private bool HasMemoryChanged
@@ -299,6 +295,14 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
+        private bool HasTopologyChanged
+        {
+            get
+            {
+                return vm.CoresPerSocket != comboBoxTopology.CoresPerSocket;
+            }
+        }
+
         public AsyncAction SaveSettings()
         {
             List<AsyncAction> actions = new List<AsyncAction>();
@@ -308,6 +312,11 @@ namespace XenAdmin.SettingsPanels
                 vm.VCPUWeight = Convert.ToInt32(_CurrentVCPUWeight);
                 if (_OrigVCPUs != nudVCPUs.Value)
                     actions.Add(new ChangeVCPUSettingsAction(vm, Convert.ToInt64(nudVCPUs.Value)));
+            }
+
+            if (HasTopologyChanged)
+            {
+                vm.CoresPerSocket = comboBoxTopology.CoresPerSocket;
             }
 
             if (HasMemoryChanged)
@@ -390,6 +399,7 @@ namespace XenAdmin.SettingsPanels
         private void nudVCPUs_ValueChanged(object sender, EventArgs e)
         {
             ShowVcpuError(false, true);
+            comboBoxTopology.Update((long)(nudVCPUs.Value));
         }
 
         private void ShowVcpuError(bool showAlways, bool testValue)
