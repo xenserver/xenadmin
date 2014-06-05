@@ -22160,6 +22160,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Topology.
+        /// </summary>
+        public static string NEWVMWIZARD_CPUMEMPAGE_TOPOLOGY {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_TOPOLOGY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to vCPUs.
         /// </summary>
         public static string NEWVMWIZARD_CPUMEMPAGE_VCPUS {

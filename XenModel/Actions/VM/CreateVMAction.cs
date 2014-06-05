@@ -66,6 +66,7 @@ namespace XenAdmin.Actions.VMActions
         private readonly SR FullCopySR;
         private readonly GPU_group GpuGroup;
         private readonly VGPU_type VgpuType;
+        private readonly long CoresPerSocket;
 
         private Action<VMStartAbstractAction, Failure> _startDiagnosisForm;
         private Action<VM, bool> _warningDialogHAInvalidConfig;
@@ -101,7 +102,8 @@ namespace XenAdmin.Actions.VMActions
             "vbd.destroy",
             "vdi.copy",
             // Add networks
-            "vif.create"
+            "vif.create",
+            "vm.set_platform"
         );
 
         public CreateVMAction(IXenConnection connection, VM template, Host copyBiosStringsFrom,
@@ -111,7 +113,7 @@ namespace XenAdmin.Actions.VMActions
             List<DiskDescription> disks, SR fullCopySR, List<VIF> vifs, bool startAfter,
             Action<VM, bool> warningDialogHAInvalidConfig,
             Action<VMStartAbstractAction, Failure> startDiagnosisForm,
-            GPU_group gpuGroup, VGPU_type vgpuType)
+            GPU_group gpuGroup, VGPU_type vgpuType, long coresPerSocket)
             : base(connection, string.Format(Messages.CREATE_VM, name),
             string.Format(Messages.CREATE_VM_FROM_TEMPLATE, name, Helpers.GetName(template)))
         {
@@ -136,6 +138,7 @@ namespace XenAdmin.Actions.VMActions
             _startDiagnosisForm = startDiagnosisForm;
             GpuGroup = gpuGroup;
             VgpuType = vgpuType;
+            CoresPerSocket = coresPerSocket;
 
             Pool pool_of_one = Helpers.GetPoolOfOne(Connection);
             if (HomeServer != null || pool_of_one != null) // otherwise we have no where to put the action
@@ -241,6 +244,13 @@ namespace XenAdmin.Actions.VMActions
             XenAPI.VM.set_name_description(Session, VM.opaque_ref, NameDescription);
             ChangeVCPUSettingsAction vcpuAction = new ChangeVCPUSettingsAction(VM, Vcpus);
             vcpuAction.RunExternal(Session);
+
+            // set cores-per-socket
+            Dictionary<string, string> platform = VM.platform == null ?
+                            new Dictionary<string, string>() :
+                            new Dictionary<string, string>(VM.platform);
+            platform["cores-per-socket"] = CoresPerSocket.ToString();
+            VM.set_platform(Session, VM.opaque_ref, platform);
 
             // Check these values have changed before setting them, as they are RBAC protected
             if (HomeServerChanged())

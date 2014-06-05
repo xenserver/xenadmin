@@ -7572,6 +7572,9 @@ You will not be able to start this VM without freeing some space on one of the s
   <data name="NEWVMWIZARD_CPUMEMPAGE_TITLE" xml:space="preserve">
     <value>Allocate processor and memory resources</value>
   </data>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_TOPOLOGY" xml:space="preserve">
+    <value>Topology</value>
+  </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_VCPUS" xml:space="preserve">
     <value>vCPUs</value>
   </data>
