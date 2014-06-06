@@ -4457,7 +4457,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can evacuate host check.
+        ///   Looks up a localized string similar to VM migration status.
         /// </summary>
         public static string ASSERT_CAN_EVACUATE_CHECK_DESCRIPTION {
             get {
@@ -5997,7 +5997,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checking can evacuate host status.
+        ///   Looks up a localized string similar to Checking VM migration status.
         /// </summary>
         public static string CHECKING_CANEVACUATE_STATUS {
             get {
@@ -31237,6 +31237,24 @@ namespace XenAdmin {
         public static string UPGRADEWIZARD_PRECHECK_TITLE {
             get {
                 return ResourceManager.GetString("UPGRADEWIZARD_PRECHECK_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VM &apos;{0}&apos; has invalid vCPU settings..
+        /// </summary>
+        public static string UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS {
+            get {
+                return ResourceManager.GetString("UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fix vCPU configuration.
+        /// </summary>
+        public static string UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS_HELPMESSAGE {
+            get {
+                return ResourceManager.GetString("UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS_HELPMESSAGE", resourceCulture);
             }
         }
         

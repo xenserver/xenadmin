@@ -557,6 +557,11 @@ namespace XenAdmin.Dialogs
             SelectPage(VMHAEditPage);
         }
 
+        public void SelectVMCPUEditPage()
+        {
+            SelectPage(VCpuMemoryEditPage);
+        }
+
         #endregion
     }
 

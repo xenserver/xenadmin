@@ -1640,7 +1640,7 @@ Archive destination: {0}</value>
     <value>A-SIS capable</value>
   </data>
   <data name="ASSERT_CAN_EVACUATE_CHECK_DESCRIPTION" xml:space="preserve">
-    <value>Can evacuate host check</value>
+    <value>VM migration status</value>
   </data>
   <data name="ASSERT_VM_CAN_BE_RECOVERED_CHECK_DESCRIPTION" xml:space="preserve">
     <value>{0}: Can recover VM check</value>
@@ -2181,7 +2181,7 @@ Do you want to assign these VMs to the policy '{0}' instead?</value>
 Do you want to assign it to the policy '{2}' instead?</value>
   </data>
   <data name="CHECKING_CANEVACUATE_STATUS" xml:space="preserve">
-    <value>Checking can evacuate host status</value>
+    <value>Checking VM migration status</value>
   </data>
   <data name="CHECKING_HA_STATUS" xml:space="preserve">
     <value>Checking HA and WLB status</value>
@@ -10758,6 +10758,12 @@ Check your settings and try again.</value>
   </data>
   <data name="UPGRADEWIZARD_PRECHECK_TITLE" xml:space="preserve">
     <value>Problems encountered when perfoming upgrade prechecks.</value>
+  </data>
+  <data name="UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS" xml:space="preserve">
+    <value>VM '{0}' has invalid vCPU settings.</value>
+  </data>
+  <data name="UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS_HELPMESSAGE" xml:space="preserve">
+    <value>Fix vCPU configuration</value>
   </data>
   <data name="UPGRADEWIZARD_SELECTSERVERS_TITLE" xml:space="preserve">
     <value>Select the servers you wish to upgrade.</value>
