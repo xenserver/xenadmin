@@ -310,6 +310,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             comboBoxTopology.Update((long)(VcpuSpinner.Value));
             ValuesUpdated();
+            ValidateVCPUSettings();
         }
 
         private void memory_ValueChanged(object sender, EventArgs e)
@@ -325,6 +326,16 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             if (sender is NumericUpDown)
                 ((Control)sender).Text = ((NumericUpDown)sender).Value.ToString();
+        }
+        
+        private void ValidateVCPUSettings()
+        {
+            labelInvalidVCPUWarning.Visible = !VM.ValidVCPUConfiguration((long)(VcpuSpinner.Value), comboBoxTopology.CoresPerSocket);
+        }
+
+        private void comboBoxTopology_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ValidateVCPUSettings();
         }
     }
 }

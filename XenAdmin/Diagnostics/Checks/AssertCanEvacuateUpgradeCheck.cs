@@ -54,7 +54,7 @@ namespace XenAdmin.Diagnostics.Checks
             //vCPU configuration check
             foreach (var vm in Host.Connection.Cache.VMs.Where(vm => vm.is_a_real_vm))
             {
-                if (vm.CoresPerSocket > 0 && vm.VCPUs_max % vm.CoresPerSocket != 0)
+                if (!vm.HasValidVCPUConfiguration)
                     return new InvalidVCPUConfiguration(this, vm);
             }
 

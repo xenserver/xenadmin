@@ -1486,6 +1486,16 @@ namespace XenAPI
                 return maxCoresPerSocket;
             }
         }
+
+        public bool HasValidVCPUConfiguration
+        {
+            get { return ValidVCPUConfiguration(VCPUs_max, CoresPerSocket); }
+        }
+
+        public static bool ValidVCPUConfiguration(long noOfVCPUs, long coresPerSocket)
+        {
+            return coresPerSocket > 0 && noOfVCPUs % coresPerSocket == 0;
+        }
     }
 
     public struct VMStartupOptions

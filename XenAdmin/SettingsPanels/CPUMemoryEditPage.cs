@@ -400,6 +400,7 @@ namespace XenAdmin.SettingsPanels
         {
             ShowVcpuError(false, true);
             comboBoxTopology.Update((long)(nudVCPUs.Value));
+            ValidateVCPUSettings();
         }
 
         private void ShowVcpuError(bool showAlways, bool testValue)
@@ -428,6 +429,16 @@ namespace XenAdmin.SettingsPanels
                     String.Format(Messages.CPU_AND_MEMORY_SUB, nudVCPUs.Value, nudMemory.Value) :
                     String.Format(Messages.CPU_SUB, nudVCPUs.Value);
             }
+        }
+        
+        private void comboBoxTopology_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ValidateVCPUSettings();
+        }
+
+        private void ValidateVCPUSettings()
+        {
+            labelInvalidVCPUWarning.Visible = !VM.ValidVCPUConfiguration((long)(nudVCPUs.Value), comboBoxTopology.CoresPerSocket);
         }
     }
 }

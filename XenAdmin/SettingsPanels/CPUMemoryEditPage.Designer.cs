@@ -35,9 +35,8 @@ namespace XenAdmin.SettingsPanels
             this.lblSliderNormal = new System.Windows.Forms.Label();
             this.lblSliderLowest = new System.Windows.Forms.Label();
             this.lblPriority = new System.Windows.Forms.Label();
-            this.transparentTrackBar1 = new XenAdmin.Controls.TransparentTrackBar();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.comboBoxTopology = new XenAdmin.Controls.CPUTopologyComboBox();
+            this.labelInvalidVCPUWarning = new System.Windows.Forms.Label();
             this.labelTopology = new System.Windows.Forms.Label();
             this.MemWarningLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -50,6 +49,8 @@ namespace XenAdmin.SettingsPanels
             this.nudVCPUs = new System.Windows.Forms.NumericUpDown();
             this.VCPUWarningLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxTopology = new XenAdmin.Controls.CPUTopologyComboBox();
+            this.transparentTrackBar1 = new XenAdmin.Controls.TransparentTrackBar();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudMemory)).BeginInit();
@@ -82,39 +83,31 @@ namespace XenAdmin.SettingsPanels
             this.lblPriority.Name = "lblPriority";
             this.licenseRestrictionTip.SetToolTip(this.lblPriority, resources.GetString("lblPriority.ToolTip"));
             // 
-            // transparentTrackBar1
-            // 
-            resources.ApplyResources(this.transparentTrackBar1, "transparentTrackBar1");
-            this.transparentTrackBar1.BackColor = System.Drawing.Color.Transparent;
-            this.transparentTrackBar1.Name = "transparentTrackBar1";
-            this.transparentTrackBar1.TabStop = false;
-            this.licenseRestrictionTip.SetToolTip(this.transparentTrackBar1, resources.GetString("transparentTrackBar1.ToolTip"));
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.labelInvalidVCPUWarning, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxTopology, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.labelTopology, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.MemWarningLabel, 2, 7);
-            this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 7);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.lblPriority, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.MemWarningLabel, 2, 8);
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 8);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.lblPriority, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.lblVCPUs, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.lblVcpuWarning, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblMemory, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.lblMemory, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.nudVCPUs, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.VCPUWarningLabel, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
-            // comboBoxTopology
+            // labelInvalidVCPUWarning
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.comboBoxTopology, 2);
-            this.comboBoxTopology.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.comboBoxTopology, "comboBoxTopology");
-            this.comboBoxTopology.FormattingEnabled = true;
-            this.comboBoxTopology.Name = "comboBoxTopology";
+            resources.ApplyResources(this.labelInvalidVCPUWarning, "labelInvalidVCPUWarning");
+            this.tableLayoutPanel1.SetColumnSpan(this.labelInvalidVCPUWarning, 2);
+            this.labelInvalidVCPUWarning.ForeColor = System.Drawing.Color.Red;
+            this.labelInvalidVCPUWarning.Name = "labelInvalidVCPUWarning";
             // 
             // labelTopology
             // 
@@ -224,6 +217,23 @@ namespace XenAdmin.SettingsPanels
             this.tableLayoutPanel1.SetColumnSpan(this.label1, 3);
             this.label1.Name = "label1";
             // 
+            // comboBoxTopology
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.comboBoxTopology, 2);
+            this.comboBoxTopology.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.comboBoxTopology, "comboBoxTopology");
+            this.comboBoxTopology.FormattingEnabled = true;
+            this.comboBoxTopology.Name = "comboBoxTopology";
+            this.comboBoxTopology.SelectedIndexChanged += new System.EventHandler(this.comboBoxTopology_SelectedIndexChanged);
+            // 
+            // transparentTrackBar1
+            // 
+            resources.ApplyResources(this.transparentTrackBar1, "transparentTrackBar1");
+            this.transparentTrackBar1.BackColor = System.Drawing.Color.Transparent;
+            this.transparentTrackBar1.Name = "transparentTrackBar1";
+            this.transparentTrackBar1.TabStop = false;
+            this.licenseRestrictionTip.SetToolTip(this.transparentTrackBar1, resources.GetString("transparentTrackBar1.ToolTip"));
+            // 
             // CPUMemoryEditPage
             // 
             resources.ApplyResources(this, "$this");
@@ -268,5 +278,6 @@ namespace XenAdmin.SettingsPanels
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelTopology;
         private XenAdmin.Controls.CPUTopologyComboBox comboBoxTopology;
+        private System.Windows.Forms.Label labelInvalidVCPUWarning;
     }
 }
