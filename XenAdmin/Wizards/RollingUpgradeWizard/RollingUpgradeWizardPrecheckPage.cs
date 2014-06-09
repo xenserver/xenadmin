@@ -168,7 +168,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             checkGroup = checks[checks.Count - 1].Value;
             foreach (Host host in SelectedServers)
             {
-                checkGroup.Add(new AssertCanEvacuateCheck(host));
+                checkGroup.Add(new AssertCanEvacuateUpgradeCheck(host));
             }
 
             //PBDsPluggedCheck

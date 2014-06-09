@@ -148,6 +148,9 @@
     <Compile Include="Controls\ChevronButton.Designer.cs">
       <DependentUpon>ChevronButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ComboBoxes\CPUTopologyComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DataGridViewEx\DataGridViewEx.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -193,8 +196,10 @@
       <DependentUpon>UpsellPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateCheck.cs" />
+    <Compile Include="Diagnostics\Checks\AssertCanEvacuateUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostHasUnsupportedStorageLinkSRCheck.cs" />
     <Compile Include="Diagnostics\Problems\SRProblem\UnsupportedStorageLinkSrIsPresentProblem.cs" />
+    <Compile Include="Diagnostics\Problems\VMProblem\InvalidVCPUConfiguration.cs" />
     <Compile Include="Dialogs\ExportVMDialog.cs">
     </Compile>
     <Compile Include="Dialogs\ResolvingSubjectsDialog.cs">

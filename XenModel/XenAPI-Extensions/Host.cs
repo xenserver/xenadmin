@@ -1263,6 +1263,46 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// The number of cpus the host has
+        /// Return 0 if a problem is found
+        /// </summary>
+        public int CpuCount
+        {
+            get
+            {
+                const string key = "cpu_count";
+                const int defaultCpuCount = 0;
+
+                if (cpu_info == null || !cpu_info.ContainsKey(key))
+                    return defaultCpuCount;
+
+                int cpuCount;
+                bool parsed = int.TryParse(cpu_info[key], out cpuCount);
+                if (!parsed)
+                    return defaultCpuCount;
+
+                return cpuCount;
+            }
+        }
+
+        /// <summary>
+        /// The number of cores per socket the host has
+        /// Return 0 if a problem is found
+        /// </summary>
+        public int CoresPerSocket
+        {
+            get
+            {
+                var sockets = CpuSockets;
+                var cpuCount = CpuCount;
+                if (sockets > 0 && cpuCount > 0)
+                    return (cpuCount/sockets);
+
+                return 0;
+            }
+        }
+
+        /// <summary>
         /// Is the host allowed to install hotfixes or are they restricted?
         /// </summary>
         public virtual bool CanApplyHotfixes

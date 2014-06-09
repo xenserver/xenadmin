@@ -4457,7 +4457,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can evacuate host check.
+        ///   Looks up a localized string similar to VM migration status.
         /// </summary>
         public static string ASSERT_CAN_EVACUATE_CHECK_DESCRIPTION {
             get {
@@ -5997,7 +5997,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checking can evacuate host status.
+        ///   Looks up a localized string similar to Checking VM migration status.
         /// </summary>
         public static string CHECKING_CANEVACUATE_STATUS {
             get {
@@ -7974,6 +7974,51 @@ namespace XenAdmin {
         public static string CPU_SUB {
             get {
                 return ResourceManager.GetString("CPU_SUB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 socket with 1 core per socket.
+        /// </summary>
+        public static string CPU_TOPOLOGY_STRING_1_SOCKET_1_CORE {
+            get {
+                return ResourceManager.GetString("CPU_TOPOLOGY_STRING_1_SOCKET_1_CORE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 socket with {0} cores per socket.
+        /// </summary>
+        public static string CPU_TOPOLOGY_STRING_1_SOCKET_N_CORE {
+            get {
+                return ResourceManager.GetString("CPU_TOPOLOGY_STRING_1_SOCKET_N_CORE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} cores per socket (Invalid configuration).
+        /// </summary>
+        public static string CPU_TOPOLOGY_STRING_INVALID_VALUE {
+            get {
+                return ResourceManager.GetString("CPU_TOPOLOGY_STRING_INVALID_VALUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} sockets with 1 core per socket.
+        /// </summary>
+        public static string CPU_TOPOLOGY_STRING_N_SOCKET_1_CORE {
+            get {
+                return ResourceManager.GetString("CPU_TOPOLOGY_STRING_N_SOCKET_1_CORE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} sockets with {1} cores per socket.
+        /// </summary>
+        public static string CPU_TOPOLOGY_STRING_N_SOCKET_N_CORE {
+            get {
+                return ResourceManager.GetString("CPU_TOPOLOGY_STRING_N_SOCKET_N_CORE", resourceCulture);
             }
         }
         
@@ -22115,6 +22160,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Topology.
+        /// </summary>
+        public static string NEWVMWIZARD_CPUMEMPAGE_TOPOLOGY {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_TOPOLOGY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to vCPUs.
         /// </summary>
         public static string NEWVMWIZARD_CPUMEMPAGE_VCPUS {
@@ -31187,6 +31241,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VM &apos;{0}&apos; has invalid vCPU settings..
+        /// </summary>
+        public static string UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS {
+            get {
+                return ResourceManager.GetString("UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fix vCPU configuration.
+        /// </summary>
+        public static string UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS_HELPMESSAGE {
+            get {
+                return ResourceManager.GetString("UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS_HELPMESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select the servers you wish to upgrade..
         /// </summary>
         public static string UPGRADEWIZARD_SELECTSERVERS_TITLE {
@@ -31706,7 +31778,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The number of VCPUs can only be changed when the VM is shut down.
+        ///   Looks up a localized string similar to The VCPUs can only be changed when the VM is shut down.
         /// </summary>
         public static string VCPU_ONLY_WHEN_HALTED {
             get {
