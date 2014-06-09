@@ -511,8 +511,15 @@ namespace XenAdmin.Core
                 TimeSpan timeDiff = h.LicenseExpiryUTC.Subtract(referenceDate);
 
                 if (timeDiff.TotalDays < 3653)
-                    return DateTimeToString(h.LicenseExpiryUTC.ToLocalTime(),
-                        longFormat ? Messages.DATEFORMAT_DMY_LONG : Messages.DATEFORMAT_DMY, true);
+                {
+                    var expiryString = "";
+                    Program.Invoke(Program.MainWindow, delegate
+                    {
+                        expiryString = DateTimeToString(h.LicenseExpiryUTC.ToLocalTime(),
+                            longFormat ? Messages.DATEFORMAT_DMY_LONG : Messages.DATEFORMAT_DMY, true);
+                    });
+                    return expiryString;
+                }
 
                 return Messages.LICENSE_NEVER;
             }
