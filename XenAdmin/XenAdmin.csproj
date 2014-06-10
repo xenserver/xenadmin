@@ -2569,6 +2569,9 @@
       <DependentUpon>LVMoHBAWarningDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Network\XenConnectionUI.cs" />
+    <Compile Include="RDP\MsRdpClient2.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="RDP\MsRdpClient6.cs">
       <SubType>Component</SubType>
     </Compile>
