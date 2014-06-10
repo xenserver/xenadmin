@@ -52,8 +52,8 @@ namespace XenAdmin.Diagnostics.Checks
             if (!Host.IsLive)
                 return new HostNotLive(this, Host);
 
-            if (Helpers.SanibelOrGreater(Host) && !Helpers.TampaOrGreater(Host)
-                && hotfixFactory.Hotfix(HotfixFactory.HotfixableServerVersion.Sanibel).ShouldBeAppliedTo(Host))
+            if (Helpers.SanibelOrGreater(Host) && !Helpers.CreedenceOrGreater(Host)
+                && hotfixFactory.Hotfix(HotfixFactory.HotfixableServerVersion.SanibelToClearwater).ShouldBeAppliedTo(Host))
             {
                 return new HostDoesNotHaveHotfix(this, Host);
             }
