@@ -59,7 +59,7 @@ namespace XenAdminTests.UnitTests.Diagnostics
             string[] enumNames = Enum.GetNames(typeof (HotfixFactory.HotfixableServerVersion));
             Array.Sort(enumNames);
 
-            string[] expectedNames = new []{"Cowley", "MNR", "Boston", "Sanibel"};
+            string[] expectedNames = new []{"Cowley", "MNR", "Boston", "SanibelToClearwater"};
             Array.Sort(expectedNames);
 
             CollectionAssert.AreEqual(expectedNames, enumNames, "Expected contents of HotfixableServerVersion enum");
@@ -68,7 +68,7 @@ namespace XenAdminTests.UnitTests.Diagnostics
         [Test]
         public void UUIDLookedUpFromEnum()
         {
-            Assert.AreEqual("8d7ba04f-bcdf-4f34-afdf-acd3206b59ec;95ac709c-e408-423f-8d22-84b8134a149e", 
+            Assert.AreEqual("95ac709c-e408-423f-8d22-84b8134a149e;b412a910-0453-42ed-bae0-982cc48b00d6", 
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Boston).UUID,
                             "Boston UUID lookup from enum");
 
@@ -80,15 +80,15 @@ namespace XenAdminTests.UnitTests.Diagnostics
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.MNR).UUID,
                             "MNR UUID lookup from enum");
 
-            Assert.AreEqual("8d7ba04f-bcdf-4f34-afdf-acd3206b59ec",
-                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.Sanibel).UUID,
-                            "Sanibel UUID lookup from enum");
+            Assert.AreEqual("b412a910-0453-42ed-bae0-982cc48b00d6", 
+                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.SanibelToClearwater).UUID,
+                            "SanibelToClearwater UUID lookup from enum");
         }
 
         [Test]
         public void FilenameLookedUpFromEnum()
         {
-            Assert.AreEqual("XS60E001.xsupdate;XS60E009.xsupdate",
+            Assert.AreEqual("XS60E001.xsupdate;XS62E006.xsupdate",
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Boston).Filename,
                             "Boston Filename lookup from enum");
 
@@ -100,15 +100,15 @@ namespace XenAdminTests.UnitTests.Diagnostics
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.MNR).Filename,
                             "MNR Filename lookup from enum");
 
-            Assert.AreEqual("XS60E009.xsupdate",
-                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.Sanibel).Filename,
-                            "Sanibel Filename lookup from enum");
+            Assert.AreEqual("XS62E006.xsupdate",
+                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.SanibelToClearwater).Filename,
+                            "SanibelToClearwater Filename lookup from enum");
         }
 
         [Test]
-        [TestCase("1.6.10", Description = "Tampa")]
+        [TestCase("1.9.0", Description = "Creedence")]
         [TestCase("9999.9999.9999", Description = "Future")]
-        public void TestPlatformVersionNumbersTampaOrGreaterGiveNulls(string platformVersion)
+        public void TestPlatformVersionNumbersCreedenceOrGreaterGiveNulls(string platformVersion)
         {
             Mock<Host> host = ObjectManager.NewXenObject<Host>(id);
             host.Setup(h => h.PlatformVersion).Returns(platformVersion);
@@ -116,8 +116,8 @@ namespace XenAdminTests.UnitTests.Diagnostics
         }
 
         [Test]
-        [TestCase("6.0.2", "XS60E009.xsupdate", Description = "Sanibel")]
-        [TestCase("6.0.0", "XS60E001.xsupdate;XS60E009.xsupdate", Description = "Boston")]
+        [TestCase("6.0.2", "XS62E006.xsupdate", Description = "Sanibel")]
+        [TestCase("6.0.0", "XS60E001.xsupdate;XS62E006.xsupdate", Description = "Boston")]
         [TestCase("5.6.100", "XS56EFP1002.xsupdate", Description = "Cowley")]
         [TestCase("5.6.0", "XS56E008.xsupdate", Description = "MNR")]
         public void TestProductVersionNumbersWithHotfixes(string productVersion, string filenames)
@@ -128,7 +128,9 @@ namespace XenAdminTests.UnitTests.Diagnostics
         }
 
         [Test]
-        [TestCase("1.6.10", Description = "Tampa", Result = false)]
+        [TestCase("1.9.0", Description = "Creedence", Result = false)]
+        [TestCase("1.8.0", Description = "Clearwater", Result = true)]
+        [TestCase("1.6.10", Description = "Tampa", Result = true)]
         [TestCase("9999.9999.9999", Description = "Future", Result = false)]
         public bool TestIsHotfixRequiredBasedOnPlatformVersion(string version)
         {
