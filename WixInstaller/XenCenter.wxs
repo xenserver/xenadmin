@@ -83,7 +83,7 @@
                             <File Id="hotfixCowley" Source="..\XenAdmin\XS56EFP1002.xsupdate" />
                             <File Id="hotfixMNR" Source="..\XenAdmin\XS56E008.xsupdate" />
                             <File Id="hotfixBoston" Source="..\XenAdmin\XS60E001.xsupdate" />
-			    <File Id="hotfixSanibelToClearwater" Source="..\XenAdmin\XS60E006.xsupdate" />
+							<File Id="hotfixSanibelToClearwater" Source="..\XenAdmin\XS62E006.xsupdate" />
                             <File Id="XvaIcon" Source="..\XenAdmin\Images\file_vm.ico" />
                             <File Id="XslicIcon" Source="..\XenAdmin\Images\file_license.ico" />
                             <File Id="XkbIcon" Source="..\XenAdmin\Images\file_backup.ico" />
