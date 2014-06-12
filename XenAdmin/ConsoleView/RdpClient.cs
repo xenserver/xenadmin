@@ -170,9 +170,9 @@ namespace XenAdmin.ConsoleView
             }
         }
 
-        private int Connected
+        private bool Connected
         {
-            get { return rdpControl == null ? 0 : (rdpClient6 == null ? rdpClient2.Connected : rdpClient6.Connected); }
+            get { return rdpControl == null ? false : (rdpClient6 == null ? rdpClient2.Connected == 1 : rdpClient6.Connected == 1); }
         }
 
         private int DesktopHeight
@@ -216,7 +216,7 @@ namespace XenAdmin.ConsoleView
         {
             try
             {
-                if (Connected == 1)
+                if (Connected)
                 {
                     if (rdpClient6 == null)
                         rdpClient2.Disconnect();
