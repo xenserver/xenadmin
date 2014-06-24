@@ -4095,6 +4095,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot reclaim freed space because the SR is already busy.
+        /// </summary>
+        public static string Message_name_SRUnavailable {
+            get {
+                return ResourceManager.GetString("Message.name-SRUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An unknown error occurred when reclaiming freed space.
+        /// </summary>
+        public static string Message_name_UnknownTrimException {
+            get {
+                return ResourceManager.GetString("Message.name-UnknownTrimException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reclaiming freed space not supported on this SR.
+        /// </summary>
+        public static string Message_name_UnsupportedSRForTrim {
+            get {
+                return ResourceManager.GetString("Message.name-UnsupportedSRForTrim", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VM Disk QoS Failed.
         /// </summary>
         public static string Message_name_vbd_qos_failed {

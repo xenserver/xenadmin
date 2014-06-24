@@ -91,6 +91,7 @@
     <Compile Include="Actions\Pool_Patch\CopyPatchFromHostToOther.cs" />
     <Compile Include="Actions\Pool_Patch\UploadPatchAction.cs" />
     <Compile Include="Actions\ProduceConsumerQueue.cs" />
+    <Compile Include="Actions\SR\SrTrimAction.cs" />
     <Compile Include="Actions\StorageLink\SrCslgAdaptersScanAction.cs" />
     <Compile Include="Actions\Updates\DownloadAndUnzipXenServerPatchAction.cs" />
     <Compile Include="Actions\Updates\DownloadUpdatesXmlAction.cs" />

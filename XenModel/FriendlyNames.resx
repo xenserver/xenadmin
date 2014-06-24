@@ -1679,4 +1679,13 @@
   <data name="Label-host.edition-free/libre" xml:space="preserve">
     <value>Citrix XenServer</value>
   </data>
+  <data name="Message.name-SRUnavailable" xml:space="preserve">
+    <value>Cannot reclaim freed space because the SR is already busy</value>
+  </data>
+  <data name="Message.name-UnknownTrimException" xml:space="preserve">
+    <value>An unknown error occurred when reclaiming freed space</value>
+  </data>
+  <data name="Message.name-UnsupportedSRForTrim" xml:space="preserve">
+    <value>Reclaiming freed space not supported on this SR</value>
+  </data>
 </root>

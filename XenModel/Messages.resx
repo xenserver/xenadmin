@@ -681,6 +681,15 @@
   <data name="ACTION_SR_SHARING" xml:space="preserve">
     <value>Sharing SR {0}</value>
   </data>
+  <data name="ACTION_SR_TRIM_DESCRIPTION" xml:space="preserve">
+    <value>Reclaiming freed space</value>
+  </data>
+  <data name="ACTION_SR_TRIM_DONE" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="ACTION_SR_TRIM_TITLE" xml:space="preserve">
+    <value>Reclaiming freed space on SR '{0}'</value>
+  </data>
   <data name="ACTION_SR_UPGRADE" xml:space="preserve">
     <value>Upgrade SR '{0}' on '{1}'</value>
   </data>

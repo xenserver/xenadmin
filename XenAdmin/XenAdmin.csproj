@@ -123,6 +123,7 @@
     <Compile Include="Commands\Controls\EditPropertiesToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Commands\TrimSRCommand.cs" />
     <Compile Include="Controls\AffinityPicker.cs">
       <SubType>UserControl</SubType>
     </Compile>

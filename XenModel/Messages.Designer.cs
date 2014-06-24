@@ -1690,6 +1690,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reclaiming freed space.
+        /// </summary>
+        public static string ACTION_SR_TRIM_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_SR_TRIM_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completed.
+        /// </summary>
+        public static string ACTION_SR_TRIM_DONE {
+            get {
+                return ResourceManager.GetString("ACTION_SR_TRIM_DONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reclaiming freed space on SR &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_SR_TRIM_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_SR_TRIM_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upgrade SR &apos;{0}&apos; on &apos;{1}&apos;.
         /// </summary>
         public static string ACTION_SR_UPGRADE {
