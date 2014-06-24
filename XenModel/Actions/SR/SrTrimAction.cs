@@ -131,8 +131,7 @@ namespace XenAdmin.Actions
         {
             if (errCode == null)
                 return null;
-            var messageKey = "SR_TRIM_ERROR_" + errCode.ToUpper();
-            return Messages.ResourceManager.GetString(messageKey);
+            return PropertyManager.GetFriendlyName("Message.name-" + errCode);
         }
     }
 }

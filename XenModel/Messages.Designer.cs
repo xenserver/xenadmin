@@ -28328,33 +28328,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to get SR lock.
-        /// </summary>
-        public static string SR_TRIM_ERROR_SRUNAVAILABLE {
-            get {
-                return ResourceManager.GetString("SR_TRIM_ERROR_SRUNAVAILABLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An unknown exception occurred.
-        /// </summary>
-        public static string SR_TRIM_ERROR_UNKNOWNTRIMEXCEPTION {
-            get {
-                return ResourceManager.GetString("SR_TRIM_ERROR_UNKNOWNTRIMEXCEPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Operation not supported.
-        /// </summary>
-        public static string SR_TRIM_ERROR_UNSUPPORTEDSRFORTRIM {
-            get {
-                return ResourceManager.GetString("SR_TRIM_ERROR_UNSUPPORTEDSRFORTRIM", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Unable to connect to iSCSI target.
         /// </summary>
         public static string SR_UNABLE_TO_CONNECT_TO_SCSI_TARGET {

@@ -1044,7 +1044,7 @@ namespace XenAPI
                 System.Diagnostics.Trace.Assert(Connection != null, "Connection must not be null");
 
                 SM sm = SM.GetByType(Connection, type);
-                return sm != null && sm.features.ContainsKey("SR_TRIM");
+                return sm != null && sm.features != null && sm.features.ContainsKey("SR_TRIM");
             }
         }
 

@@ -74,7 +74,7 @@ namespace XenAdmin.Commands
 
         private static bool CanExecute(SR sr)
         {
-            return sr != null && sr.SupportsTrim && !HelpersGUI.GetActionInProgress(sr);
+            return sr != null && sr.SupportsTrim;
         }
     }
 }
