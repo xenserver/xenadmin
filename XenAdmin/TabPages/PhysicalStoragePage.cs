@@ -374,6 +374,30 @@ namespace XenAdmin.TabPages
         private void RefreshButtons()
         {
             buttonProperties.Enabled = listViewSrs.SelectedItems.Count == 1;
+            
+            // Trim button
+            if (listViewSrs.SelectedItems.Count == 1)
+            {
+                SR sr = (SR)listViewSrs.SelectedItems[0].Tag;
+                TrimSRCommand trimCmd = new TrimSRCommand(Program.MainWindow, sr);
+                trimButton.Visible = trimCmd.CanExecute(); 
+            }
+            else
+            {
+                trimButton.Visible = false;
+            }
+        }
+
+        private void trimButton_Click(object sender, EventArgs e)
+        {
+            if (listViewSrs.SelectedItems.Count != 1)
+                return;
+
+            SR sr = (SR)listViewSrs.SelectedItems[0].Tag;
+            TrimSRCommand trimCmd = new TrimSRCommand(Program.MainWindow, sr);
+            if (trimCmd.CanExecute())
+                trimCmd.Execute();
+
         }
 
     }

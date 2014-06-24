@@ -681,6 +681,15 @@
   <data name="ACTION_SR_SHARING" xml:space="preserve">
     <value>Sharing SR {0}</value>
   </data>
+  <data name="ACTION_SR_TRIM_DESCRIPTION" xml:space="preserve">
+    <value>Reclaiming freed space</value>
+  </data>
+  <data name="ACTION_SR_TRIM_DONE" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="ACTION_SR_TRIM_TITLE" xml:space="preserve">
+    <value>Reclaiming freed space on SR '{0}'</value>
+  </data>
   <data name="ACTION_SR_UPGRADE" xml:space="preserve">
     <value>Upgrade SR '{0}' on '{1}'</value>
   </data>
@@ -9856,6 +9865,15 @@ Do you want to connect to the pool master '{1}'?</value>
   </data>
   <data name="SR_SIZE_USED" xml:space="preserve">
     <value>{0} used of {1} total ({2} allocated)</value>
+  </data>
+  <data name="SR_TRIM_ERROR_SRUNAVAILABLE" xml:space="preserve">
+    <value>Unable to get SR lock</value>
+  </data>
+  <data name="SR_TRIM_ERROR_UNKNOWNTRIMEXCEPTION" xml:space="preserve">
+    <value>An unknown exception occurred</value>
+  </data>
+  <data name="SR_TRIM_ERROR_UNSUPPORTEDSRFORTRIM" xml:space="preserve">
+    <value>Operation not supported</value>
   </data>
   <data name="SR_UNABLE_TO_CONNECT_TO_SCSI_TARGET" xml:space="preserve">
     <value>Unable to connect to iSCSI target</value>

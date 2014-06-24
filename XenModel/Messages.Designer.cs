@@ -1690,6 +1690,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reclaiming freed space.
+        /// </summary>
+        public static string ACTION_SR_TRIM_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_SR_TRIM_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completed.
+        /// </summary>
+        public static string ACTION_SR_TRIM_DONE {
+            get {
+                return ResourceManager.GetString("ACTION_SR_TRIM_DONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reclaiming freed space on SR &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_SR_TRIM_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_SR_TRIM_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upgrade SR &apos;{0}&apos; on &apos;{1}&apos;.
         /// </summary>
         public static string ACTION_SR_UPGRADE {
@@ -28297,6 +28324,33 @@ namespace XenAdmin {
         public static string SR_SIZE_USED {
             get {
                 return ResourceManager.GetString("SR_SIZE_USED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to get SR lock.
+        /// </summary>
+        public static string SR_TRIM_ERROR_SRUNAVAILABLE {
+            get {
+                return ResourceManager.GetString("SR_TRIM_ERROR_SRUNAVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An unknown exception occurred.
+        /// </summary>
+        public static string SR_TRIM_ERROR_UNKNOWNTRIMEXCEPTION {
+            get {
+                return ResourceManager.GetString("SR_TRIM_ERROR_UNKNOWNTRIMEXCEPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operation not supported.
+        /// </summary>
+        public static string SR_TRIM_ERROR_UNSUPPORTEDSRFORTRIM {
+            get {
+                return ResourceManager.GetString("SR_TRIM_ERROR_UNSUPPORTEDSRFORTRIM", resourceCulture);
             }
         }
         

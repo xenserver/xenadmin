@@ -35,21 +35,24 @@ namespace XenAdmin.TabPages
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PhysicalStoragePage));
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.listViewSrs = new XenAdmin.Controls.ListViewEx();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.labelNetworkheadings = new System.Windows.Forms.Label();
             this.TitleLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.newSRButton = new XenAdmin.Commands.CommandButton();
+            this.trimButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonProperties = new System.Windows.Forms.Button();
-            this.newSRButton = new XenAdmin.Commands.CommandButton();
             this.pageContainerPanel.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pageContainerPanel
@@ -67,7 +70,6 @@ namespace XenAdmin.TabPages
             // listViewSrs
             // 
             this.listViewSrs.AllowColumnReorder = true;
-            resources.ApplyResources(this.listViewSrs, "listViewSrs");
             this.listViewSrs.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
@@ -77,6 +79,7 @@ namespace XenAdmin.TabPages
             this.columnHeader6,
             this.columnHeader7});
             this.listViewSrs.ContextMenuStrip = this.contextMenuStrip;
+            resources.ApplyResources(this.listViewSrs, "listViewSrs");
             this.listViewSrs.HideSelection = false;
             this.listViewSrs.MultiSelect = false;
             this.listViewSrs.Name = "listViewSrs";
@@ -126,12 +129,32 @@ namespace XenAdmin.TabPages
             // panel1
             // 
             resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Controls.Add(this.buttonProperties);
-            this.panel1.Controls.Add(this.newSRButton);
             this.panel1.Controls.Add(this.listViewSrs);
-            this.panel1.MaximumSize = new System.Drawing.Size(900, 400);
+            this.panel1.Controls.Add(this.flowLayoutPanel1);
             this.panel1.Name = "panel1";
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.newSRButton);
+            this.flowLayoutPanel1.Controls.Add(this.trimButton);
+            this.flowLayoutPanel1.Controls.Add(this.groupBox1);
+            this.flowLayoutPanel1.Controls.Add(this.buttonProperties);
+            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            // 
+            // newSRButton
+            // 
+            this.newSRButton.Command = new XenAdmin.Commands.NewSRCommand();
+            resources.ApplyResources(this.newSRButton, "newSRButton");
+            this.newSRButton.Name = "newSRButton";
+            this.newSRButton.UseVisualStyleBackColor = true;
+            // 
+            // trimButton
+            // 
+            resources.ApplyResources(this.trimButton, "trimButton");
+            this.trimButton.Name = "trimButton";
+            this.trimButton.UseVisualStyleBackColor = true;
+            this.trimButton.Click += new System.EventHandler(this.trimButton_Click);
             // 
             // groupBox1
             // 
@@ -146,13 +169,6 @@ namespace XenAdmin.TabPages
             this.buttonProperties.UseVisualStyleBackColor = true;
             this.buttonProperties.Click += new System.EventHandler(this.buttonProperties_Click);
             // 
-            // newSRButton
-            // 
-            resources.ApplyResources(this.newSRButton, "newSRButton");
-            this.newSRButton.Command = new XenAdmin.Commands.NewSRCommand();
-            this.newSRButton.Name = "newSRButton";
-            this.newSRButton.UseVisualStyleBackColor = true;
-            // 
             // PhysicalStoragePage
             // 
             resources.ApplyResources(this, "$this");
@@ -164,7 +180,9 @@ namespace XenAdmin.TabPages
             this.pageContainerPanel.ResumeLayout(false);
             this.pageContainerPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -185,5 +203,7 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.Button buttonProperties;
         private System.Windows.Forms.GroupBox groupBox1;
         private XenAdmin.Commands.CommandButton newSRButton;
+        private System.Windows.Forms.Button trimButton;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

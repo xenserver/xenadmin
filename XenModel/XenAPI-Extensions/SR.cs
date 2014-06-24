@@ -1032,7 +1032,21 @@ namespace XenAPI
             SRTypes currentType = sr.GetSRType(true);
             return currentType == SRTypes.cslg || currentType == SRTypes.equal || currentType == SRTypes.netapp;
         }
-            
+
+        /// <summary>
+        /// Whether the underlying SR backend supports SR_TRIM
+        /// </summary>
+        /// <returns></returns>
+        public bool SupportsTrim
+        {
+            get
+            {
+                System.Diagnostics.Trace.Assert(Connection != null, "Connection must not be null");
+
+                SM sm = SM.GetByType(Connection, type);
+                return sm != null && sm.features.ContainsKey("SR_TRIM");
+            }
+        }
 
         #region IEquatable<SR> Members
 
