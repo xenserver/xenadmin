@@ -27598,7 +27598,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Value should be a number greater than 0.1.
+        ///   Looks up a localized string similar to Value should be a number greater than or equal to 1.0.
         /// </summary>
         public static string SHADOW_MEMORY_MULTIPLIER_VALUE {
             get {

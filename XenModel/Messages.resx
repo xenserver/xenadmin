@@ -9590,7 +9590,7 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
     <value>Shadow memory multiplier: {0}</value>
   </data>
   <data name="SHADOW_MEMORY_MULTIPLIER_VALUE" xml:space="preserve">
-    <value>Value should be a number greater than 0.1</value>
+    <value>Value should be a number greater than or equal to 1.0</value>
   </data>
   <data name="SHARED" xml:space="preserve">
     <value>Shared</value>
