@@ -130,25 +130,27 @@ namespace XenAdmin.SettingsPanels
 
         public bool HasChanged
         {
-            get
-            {
-                return ShadowValue != vm.HVM_shadow_multiplier
-                       || ShadowMultiplierTextBox.Text != vm.HVM_shadow_multiplier.ToString();
-            }
+            get { return ShadowValue != vm.HVM_shadow_multiplier; }
         }
 
+        private double _shadowMultiplier;
         private double ShadowValue
         {
             get
             {
-                double v;
-                return double.TryParse(ShadowMultiplierTextBox.Text,  NumberStyles.Any, CultureInfo.InvariantCulture, out v)
-                    ? v 
-                    : SHADOW_MULTIPLIER_GENERAL_USE;
+                if (ShadowMultiplierTextBox.Text != _shadowMultiplier.ToString("N", CultureInfo.InvariantCulture))
+                {
+                    double v;
+                    return double.TryParse(ShadowMultiplierTextBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out v)
+                        ? v
+                        : SHADOW_MULTIPLIER_GENERAL_USE;
+                }
+                return _shadowMultiplier;
             }
             set
             {
-                ShadowMultiplierTextBox.Text = value.ToString("N", CultureInfo.InvariantCulture);
+                _shadowMultiplier = value;
+                ShadowMultiplierTextBox.Text = _shadowMultiplier.ToString("N", CultureInfo.InvariantCulture);
             }
         }
 
