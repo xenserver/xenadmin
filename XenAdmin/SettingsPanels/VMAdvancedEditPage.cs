@@ -150,7 +150,6 @@ namespace XenAdmin.SettingsPanels
 
         public void ShowLocalValidationMessages()
         {
-            double v;
             if (!ValidToSave)
             {
                 HelpersGUI.ShowBalloonMessage(ShadowMultiplierTextBox,
