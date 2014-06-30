@@ -1208,6 +1208,8 @@ namespace XenAdmin.Network
             }
         }
 
+        private readonly string eventNextConnectionGroupName = Guid.NewGuid().ToString(); 
+
         /// <summary>
         /// The main method for a connection to a XenServer. This method runs until the connection is lost, and
         /// contains a loop that after doing an initial cache fill processes events off the wire when they arrive.
@@ -1236,6 +1238,9 @@ namespace XenAdmin.Network
                     session.APIVersion >= API_Version.API_1_6 ?  // Helpers.GeorgeOrGreater, except we can't use that because the cache isn't populated before we fire the first Event.next.
                     DuplicateSession(EVENT_NEXT_TIMEOUT) :
                     session;
+
+                if (session.APIVersion >= API_Version.API_1_6)
+                    eventNextSession.ConnectionGroupName = eventNextConnectionGroupName; // this will force the eventNextSession onto its own set of TCP streams (see CA-108676)
 
                 bool legacyEventSystem = XenObjectDownloader.LegacyEventSystem(session);
 
