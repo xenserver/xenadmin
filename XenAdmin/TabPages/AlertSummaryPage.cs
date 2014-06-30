@@ -413,13 +413,32 @@ namespace XenAdmin.TabPages
 
         #endregion
 
+        private DataGridViewRow FindAlertRow(ToolStripMenuItem toolStripMenuItem)
+        {
+            if (toolStripMenuItem == null)
+                return null;
+
+            return (from DataGridViewRow row in GridViewAlerts.Rows
+                    where row.Cells.Count > 0
+                    let actionCell = row.Cells[row.Cells.Count - 1] as DataGridViewDropDownSplitButtonCell
+                    where actionCell != null && actionCell.ContextMenu.Items.Cast<object>().Any(item => item is ToolStripMenuItem && item == toolStripMenuItem)
+                    select row).FirstOrDefault();
+        }
+
         private void ToolStripMenuItemHelp_Click(object sender, EventArgs e)
         {
             // We should only be here if one item is selected, we dont do multi-help
             if (GridViewAlerts.SelectedRows.Count != 1)
-                log.ErrorFormat("Can only launch help for 1 alert at a time (Attempted to launch {0}). Launching for the first one in the list)", GridViewAlerts.SelectedRows.Count);
+                log.ErrorFormat("Can only launch help for 1 alert at a time (Attempted to launch {0}). Launching for the clicked item)", GridViewAlerts.SelectedRows.Count);
 
-            Alert alert = (Alert)GridViewAlerts.SelectedRows[0].Tag;
+            DataGridViewRow clickedRow = FindAlertRow(sender as ToolStripMenuItem);
+            if (clickedRow == null)
+                return;
+
+            Alert alert = (Alert) clickedRow.Tag;
+            if (alert == null)
+                return;
+
             if (alert.HelpID == null)
             {
                 log.ErrorFormat("Attempted to launch help for alert {0} ({1}) but no helpID available. Not launching.", alert.Title, alert.uuid);
@@ -432,16 +451,20 @@ namespace XenAdmin.TabPages
         private void ToolStripMenuItemFix_Click(object sender, EventArgs e)
         {
             // We should only be here if one item is selected, we dont do multi-fix
-            if (GridViewAlerts.SelectedRows.Count == 0)
+            if (GridViewAlerts.SelectedRows.Count != 1)
+                log.ErrorFormat("Only 1 alert can be fixed at a time (Attempted to fix {0}). Fixing the clicked item.", GridViewAlerts.SelectedRows.Count);
+
+            DataGridViewRow clickedRow = FindAlertRow(sender as ToolStripMenuItem);
+            if (clickedRow == null)
             {
                 log.ErrorFormat("Attempted to fix alert with no alert selected.");
                 return;
             }
 
-            if (GridViewAlerts.SelectedRows.Count != 1)
-                log.ErrorFormat("Only 1 alert can be fixed at a time (Attempted to fix {0}). Fixing the first one in the list.", GridViewAlerts.SelectedRows.Count);
+            Alert alert = (Alert)clickedRow.Tag;
+            if (alert == null)
+                return;
 
-            Alert alert = (Alert)GridViewAlerts.SelectedRows[0].Tag;
             if (alert.FixLinkAction == null)
             {
                 log.ErrorFormat("Attempted to fix alert {0} ({1}) but no fix link action available. Not fixing.", alert.Title, alert.uuid);
@@ -461,8 +484,19 @@ namespace XenAdmin.TabPages
                     return;
             }
 
-            var selectedAlerts = from DataGridViewRow row in GridViewAlerts.SelectedRows select row.Tag as Alert;
-            DismissAlerts(selectedAlerts);
+            DataGridViewRow clickedRow = FindAlertRow(sender as ToolStripMenuItem);
+            if (clickedRow == null)
+                return;
+
+            if (GridViewAlerts.SelectedRows.Count > 1 && GridViewAlerts.SelectedRows.Contains(clickedRow))
+            {
+                var selectedAlerts = from DataGridViewRow row in GridViewAlerts.SelectedRows select row.Tag as Alert;
+                DismissAlerts(selectedAlerts);
+            }
+            else
+            {
+                DismissAlerts(new List<Alert> {(Alert) clickedRow.Tag});
+            }
         }
 
         private void tsmiDismissAll_Click(object sender, EventArgs e)
@@ -765,18 +799,27 @@ namespace XenAdmin.TabPages
 
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // We should only be here if one item is selected, we don't do multi-fix
-            if (GridViewAlerts.SelectedRows.Count == 0)
+            DataGridViewRow clickedRow = FindAlertRow(sender as ToolStripMenuItem);
+            if (clickedRow == null)
             {
                 log.ErrorFormat("Attempted to copy alert with no alert selected.");
                 return;
             }
 
             StringBuilder sb = new StringBuilder();
-            foreach (DataGridViewRow r in GridViewAlerts.SelectedRows)
+            if (GridViewAlerts.SelectedRows.Count > 1 && GridViewAlerts.SelectedRows.Contains(clickedRow))
             {
-                Alert alert = (Alert)r.Tag;
-                sb.AppendLine(alert.GetAlertDetailsCSVQuotes());
+                foreach (DataGridViewRow r in GridViewAlerts.SelectedRows)
+                {
+                    Alert alert = (Alert) r.Tag;
+                    sb.AppendLine(alert.GetAlertDetailsCSVQuotes());
+                }
+            }
+            else
+            {
+                Alert alert = (Alert)clickedRow.Tag;
+                if (alert != null) 
+                    sb.AppendLine(alert.GetUpdateDetailsCSVQuotes());
             }
 
             try
