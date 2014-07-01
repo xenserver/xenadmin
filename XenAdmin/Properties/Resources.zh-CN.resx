@@ -221,7 +221,7 @@
     <value>..\Images\oracle_16x.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_000_Patch_h32bit_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\000_patch_h32bit_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Images\000_Patch_h32bit_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_000_weighting_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_weighting_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -944,10 +944,10 @@
     <value>..\Images\112_RightArrowLong_Blue_24x24_72.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="export_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\export_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Images\export_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="import_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\import_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Images\import_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_000_ExportVirtualAppliance_h32bit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\000_ExportVirtualAppliance_h32bit_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
