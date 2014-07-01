@@ -257,5 +257,11 @@ namespace XenAPI
                 return roles[0].FriendlyName;
             }
         }
+
+        public string ConnectionGroupName
+        {
+            get { return _proxy.ConnectionGroupName; }
+            set { _proxy.ConnectionGroupName = value; }
+        }
     }
 }
