@@ -73,6 +73,8 @@ namespace XenAdmin.Actions.VMActions
 
         private bool PointOfNoReturn;
 
+        private bool assignOrRemoveVgpu;
+
         /// <summary>
         /// These are the RBAC dependencies that you always need to create a VM. Check CreateVMAction constructor for runtime dependent dependencies.
         /// </summary>
@@ -144,6 +146,10 @@ namespace XenAdmin.Actions.VMActions
             if (HomeServer != null || pool_of_one != null) // otherwise we have no where to put the action
                 AppliesTo.Add(HomeServer != null ? HomeServer.opaque_ref : pool_of_one.opaque_ref);
 
+            assignOrRemoveVgpu = (GpuGroup != null && VgpuType != null)
+                             || (!Helpers.FeatureForbidden(Connection, Host.RestrictVgpu)
+                                 && Helpers.VgpuCapability(Connection));
+
             #region RBAC Dependencies
 
             if (StartAfter)
@@ -153,7 +159,7 @@ namespace XenAdmin.Actions.VMActions
             if (Template.memory_dynamic_min != MemoryDynamicMin || Template.memory_dynamic_max != MemoryDynamicMax || Template.memory_static_max != MemoryStaticMax)
                 ApiMethodsToRoleCheck.Add("vm.set_memory_limits");
 
-            if (GpuGroup != null && VgpuType != null)
+            if (assignOrRemoveVgpu)
             {
                 ApiMethodsToRoleCheck.Add("VGPU.destroy");
                 ApiMethodsToRoleCheck.Add("VGPU.create");
@@ -216,7 +222,7 @@ namespace XenAdmin.Actions.VMActions
 
         private void AssignVgpu()
         {
-            if (GpuGroup != null && VgpuType != null)
+            if (assignOrRemoveVgpu)
             {
                 var action = new GpuAssignAction(VM, GpuGroup, VgpuType);
                 action.RunExternal(Session);
