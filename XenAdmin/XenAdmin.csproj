@@ -5561,10 +5561,10 @@
     <EmbeddedResource Include="TabPages\VMStoragePage.zh-CN.resx">
       <DependentUpon>VMStoragePage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\WLBPage.ja.resx">
+    <EmbeddedResource Include="TabPages\WlbPage.ja.resx">
       <DependentUpon>WlbPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\WLBPage.zh-CN.resx">
+    <EmbeddedResource Include="TabPages\WlbPage.zh-CN.resx">
       <DependentUpon>WlbPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestResources\api-version.xml">
