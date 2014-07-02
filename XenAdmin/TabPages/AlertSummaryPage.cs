@@ -429,7 +429,7 @@ namespace XenAdmin.TabPages
         {
             // We should only be here if one item is selected, we dont do multi-help
             if (GridViewAlerts.SelectedRows.Count != 1)
-                log.ErrorFormat("Can only launch help for 1 alert at a time (Attempted to launch {0}). Launching for the clicked item)", GridViewAlerts.SelectedRows.Count);
+                log.DebugFormat("Can only launch help for 1 alert at a time (Attempted to launch {0}). Launching for the clicked item.", GridViewAlerts.SelectedRows.Count);
 
             DataGridViewRow clickedRow = FindAlertRow(sender as ToolStripMenuItem);
             if (clickedRow == null)
@@ -452,12 +452,12 @@ namespace XenAdmin.TabPages
         {
             // We should only be here if one item is selected, we dont do multi-fix
             if (GridViewAlerts.SelectedRows.Count != 1)
-                log.ErrorFormat("Only 1 alert can be fixed at a time (Attempted to fix {0}). Fixing the clicked item.", GridViewAlerts.SelectedRows.Count);
+                log.DebugFormat("Only 1 alert can be fixed at a time (Attempted to fix {0}). Fixing the clicked item.", GridViewAlerts.SelectedRows.Count);
 
             DataGridViewRow clickedRow = FindAlertRow(sender as ToolStripMenuItem);
             if (clickedRow == null)
             {
-                log.ErrorFormat("Attempted to fix alert with no alert selected.");
+                log.Debug("Attempted to fix alert with no alert selected.");
                 return;
             }
 
@@ -802,7 +802,7 @@ namespace XenAdmin.TabPages
             DataGridViewRow clickedRow = FindAlertRow(sender as ToolStripMenuItem);
             if (clickedRow == null)
             {
-                log.ErrorFormat("Attempted to copy alert with no alert selected.");
+                log.Debug("Attempted to copy alert with no alert selected.");
                 return;
             }
 
