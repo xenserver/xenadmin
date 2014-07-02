@@ -354,22 +354,37 @@ namespace XenAdmin.TabPages
 
         #region Actions DropDown event handlers
 
+        private DataGridViewRow FindAlertRow(ToolStripMenuItem toolStripMenuItem)
+        {
+            if (toolStripMenuItem == null)
+                return null;
+
+            return (from DataGridViewRow row in dataGridViewUpdates.Rows
+                    where row.Cells.Count > 0
+                    let actionCell = row.Cells[row.Cells.Count - 1] as DataGridViewDropDownSplitButtonCell
+                    where actionCell != null && actionCell.ContextMenu.Items.Cast<object>().Any(item => item is ToolStripMenuItem && item == toolStripMenuItem)
+                    select row).FirstOrDefault();
+        }
+
         private void ToolStripMenuItemGoToWebPage_Click(object sender, EventArgs e)
         {
-            if (dataGridViewUpdates.SelectedRows.Count > 0)
-            {
-                Alert alert = (Alert)dataGridViewUpdates.SelectedRows[0].Tag;
-                if (alert.FixLinkAction != null)
-                    alert.FixLinkAction.Invoke();
-            }
+            DataGridViewRow clickedRow = FindAlertRow(sender as ToolStripMenuItem);
+            if (clickedRow == null)
+                return;
+
+            Alert alert = (Alert) clickedRow.Tag;
+            if (alert != null && alert.FixLinkAction != null)
+                alert.FixLinkAction.Invoke();
         }
 
         private void ToolStripMenuItemDownload_Click(object sender, EventArgs e)
         {
-            if (dataGridViewUpdates.SelectedRows.Count == 0)
+            DataGridViewRow clickedRow = FindAlertRow(sender as ToolStripMenuItem);
+            if (clickedRow == null)
                 return;
 
-            XenServerPatchAlert patchAlert = dataGridViewUpdates.SelectedRows[0].Tag as XenServerPatchAlert;
+            XenServerPatchAlert patchAlert = (XenServerPatchAlert) clickedRow.Tag;
+
             if (patchAlert == null)
                 return;
 
@@ -401,8 +416,7 @@ namespace XenAdmin.TabPages
                 }
                 else
                 {
-                    string disconnectedServerNames =
-                        dataGridViewUpdates.SelectedRows[0].Cells[ColumnLocation.Index].Value.ToString();
+                    string disconnectedServerNames = clickedRow.Cells[ColumnLocation.Index].Value.ToString();
 
                     new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(SystemIcons.Warning,
@@ -415,14 +429,25 @@ namespace XenAdmin.TabPages
 
         private void ToolStripMenuItemCopy_Click(object sender, EventArgs e)
         {
-            if (dataGridViewUpdates.SelectedRows.Count == 0)
+            DataGridViewRow clickedRow = FindAlertRow(sender as ToolStripMenuItem);
+            if (clickedRow == null)
                 return;
 
             StringBuilder sb = new StringBuilder();
-            foreach (DataGridViewRow r in dataGridViewUpdates.SelectedRows)
+            
+            if (dataGridViewUpdates.SelectedRows.Count > 1 && dataGridViewUpdates.SelectedRows.Contains(clickedRow))
             {
-                Alert alert = (Alert)r.Tag;
-                sb.AppendLine(alert.GetUpdateDetailsCSVQuotes());
+                foreach (DataGridViewRow r in dataGridViewUpdates.SelectedRows)
+                {
+                    Alert alert = (Alert) r.Tag;
+                    sb.AppendLine(alert.GetUpdateDetailsCSVQuotes());
+                }
+            }
+            else
+            {
+                Alert alert = (Alert) clickedRow.Tag;
+                if (alert != null) 
+                    sb.AppendLine(alert.GetUpdateDetailsCSVQuotes());
             }
 
             try
