@@ -76,5 +76,23 @@ namespace XenAdmin.Commands
         {
             return sr != null && sr.SupportsTrim;
         }
+
+        public override string MenuText
+        {
+            get
+            {
+                return Messages.MAINWINDOW_TRIM_SR;
+            }
+        }
+
+        protected override string GetCantExecuteReasonCore(SelectedItem item)
+        {
+            SR sr = item.XenObject as SR;
+            if (sr != null && !sr.SupportsTrim)
+            {
+                return Messages.TOOLTIP_SR_TRIM_UNSUPPORTED;
+            }
+            return base.GetCantExecuteReasonCore(item);
+        }
     }
 }

@@ -6649,6 +6649,9 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MAINWINDOW_TOOLBAR_SUSPENDVM" xml:space="preserve">
     <value>Suspend VM (Ctrl+Y)</value>
   </data>
+  <data name="MAINWINDOW_TRIM_SR" xml:space="preserve">
+    <value>Re&amp;claim freed space</value>
+  </data>
   <data name="MAINWINDOW_UPGRADE_SR" xml:space="preserve">
     <value>&amp;Upgrade</value>
   </data>
@@ -10369,6 +10372,9 @@ Do you want to connect to the pool master '{1}'?</value>
   </data>
   <data name="TOOLTIP_REMOVE_PIF" xml:space="preserve">
     <value>This network cannot be removed because it is a physical device</value>
+  </data>
+  <data name="TOOLTIP_SR_TRIM_UNSUPPORTED" xml:space="preserve">
+    <value>Reclaiming freed space not supported on this SR</value>
   </data>
   <data name="TREESEARCHBOX_DROPDOWN_TOOLTIP" xml:space="preserve">
     <value>Views and Saved Searches</value>

@@ -225,6 +225,7 @@ namespace XenAdmin
             this.addVirtualDiskToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.attachVirtualDiskToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.storageLinkToolStripMenuItem = new XenAdmin.Commands.StorageLinkToolStripMenuItem();
+            this.reclaimFreedSpacetripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
             this.DetachStorageToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.ReattachStorageRepositoryToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
@@ -1356,6 +1357,7 @@ namespace XenAdmin
             this.toolStripSeparator2,
             this.virtualDisksToolStripMenuItem,
             this.storageLinkToolStripMenuItem,
+            this.reclaimFreedSpacetripMenuItem,
             this.toolStripSeparator19,
             this.DetachStorageToolStripMenuItem,
             this.ReattachStorageRepositoryToolStripMenuItem,
@@ -1435,6 +1437,12 @@ namespace XenAdmin
             // 
             this.storageLinkToolStripMenuItem.Name = "storageLinkToolStripMenuItem";
             resources.ApplyResources(this.storageLinkToolStripMenuItem, "storageLinkToolStripMenuItem");
+            // 
+            // reclaimFreedSpacetripMenuItem
+            // 
+            this.reclaimFreedSpacetripMenuItem.Command = new XenAdmin.Commands.TrimSRCommand();
+            this.reclaimFreedSpacetripMenuItem.Name = "reclaimFreedSpacetripMenuItem";
+            resources.ApplyResources(this.reclaimFreedSpacetripMenuItem, "reclaimFreedSpacetripMenuItem");
             // 
             // toolStripSeparator19
             // 
@@ -2022,6 +2030,7 @@ namespace XenAdmin
         private StatusStrip StatusStrip;
         private ToolStripStatusLabel statusLabel;
         private ToolStripProgressBar statusProgressBar;
+        private CommandToolStripMenuItem reclaimFreedSpacetripMenuItem;
     }
 
 }
