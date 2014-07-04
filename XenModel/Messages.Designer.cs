@@ -19099,6 +19099,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Re&amp;claim freed space.
+        /// </summary>
+        public static string MAINWINDOW_TRIM_SR {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_TRIM_SR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Upgrade.
         /// </summary>
         public static string MAINWINDOW_UPGRADE_SR {
@@ -29935,6 +29944,15 @@ namespace XenAdmin {
         public static string TOOLTIP_REMOVE_PIF {
             get {
                 return ResourceManager.GetString("TOOLTIP_REMOVE_PIF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reclaiming freed space not supported on this SR.
+        /// </summary>
+        public static string TOOLTIP_SR_TRIM_UNSUPPORTED {
+            get {
+                return ResourceManager.GetString("TOOLTIP_SR_TRIM_UNSUPPORTED", resourceCulture);
             }
         }
         

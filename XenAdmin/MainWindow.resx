@@ -2174,6 +2174,12 @@
   <data name="storageLinkToolStripMenuItem.Text" xml:space="preserve">
     <value>StorageLink</value>
   </data>
+  <data name="reclaimFreedSpacetripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 22</value>
+  </data>
+  <data name="reclaimFreedSpacetripMenuItem.Text" xml:space="preserve">
+    <value>Re&amp;claim freed space</value>
+  </data>
   <data name="toolStripSeparator19.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 6</value>
   </data>
@@ -3304,6 +3310,12 @@
   </data>
   <data name="&gt;&gt;storageLinkToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.StorageLinkToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;reclaimFreedSpacetripMenuItem.Name" xml:space="preserve">
+    <value>reclaimFreedSpacetripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;reclaimFreedSpacetripMenuItem.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator19.Name" xml:space="preserve">
     <value>toolStripSeparator19</value>
