@@ -133,7 +133,8 @@ namespace XenAdmin.Dialogs
                 Controller.SummariseSelectedRow(checkableDataGridView.GetCheckableRow(e.RowIndex));
             }
 
-            senderGrid.SortAndRefresh();
+            if (e.RefreshGrid)
+                senderGrid.SortAndRefresh();
         }
 
         private void checkableDataGridView_SelectionChanged(object sender, EventArgs e)

@@ -40,7 +40,7 @@ namespace XenAdmin.Controls.CheckableDataGridView
         void DrawRowAsChecked(bool checkStatus, int rowIndex);
         void DrawRowAsHighlighted(bool highlightStatus, int rowIndex);
         void DrawRowAsDisabled(bool disabledStatus, int rowIndex);
-        void TriggerRowUpdatedEvent(int rowUpdated);
+        void TriggerRowUpdatedEvent(int rowUpdated, bool refreshGrid);
         void TriggerRowCheckedEvent(int rowChecked);
         void DrawUpdatedRow(Queue<object> textToUse, bool cellDataLoaded, bool rowDisabled, int rowIndex);
         void DrawAllRowsAsCleared();
