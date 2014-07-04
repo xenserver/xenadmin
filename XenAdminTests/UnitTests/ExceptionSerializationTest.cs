@@ -69,6 +69,7 @@ namespace XenAdminTests.UnitTests
             Assert.AreEqual(failure.ShortMessage, deserializedFailure.ShortMessage, "ShortMessage is different");
             if (failure.ErrorDescription != null)
             {
+                Assert.IsNotNull(deserializedFailure.ErrorDescription);
                 Assert.AreEqual(failure.ErrorDescription.Count, deserializedFailure.ErrorDescription.Count,
                                 "ErrorDescription count is different");
                 for (int i = 0; i < failure.ErrorDescription.Count; i++)
@@ -77,9 +78,19 @@ namespace XenAdminTests.UnitTests
                                     string.Format("ErrorDescription[{0}] count is different", i));
                 }
             }
+            else
+            {
+                Assert.IsNull(deserializedFailure.ErrorDescription);
+            }
+
             if (failure.InnerException != null)
             {
+                Assert.IsNotNull(deserializedFailure.InnerException);
                 Assert.AreEqual(failure.InnerException.Message, deserializedFailure.InnerException.Message, "Message is different");
+            }
+            else
+            {
+                Assert.IsNull(deserializedFailure.InnerException);
             }
 
         }
