@@ -43,6 +43,7 @@ namespace XenAdmin.Controls.CheckableDataGridView
     public class CheckableDataGridViewRowEventArgs : EventArgs
     {
         public int RowIndex { get; set; }
+        public bool RefreshGrid { get; set; }
     }
 
     /// <summary>
@@ -340,11 +341,11 @@ namespace XenAdmin.Controls.CheckableDataGridView
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public void TriggerRowUpdatedEvent(int rowUpdated)
+        public void TriggerRowUpdatedEvent(int rowUpdated, bool refreshGrid)
         {
             RowUpdatedEvent handler = Events[RowUpdatedEventKey] as RowUpdatedEvent;
             if (handler != null)
-                handler.Invoke(this, new CheckableDataGridViewRowEventArgs { RowIndex = rowUpdated });
+                handler.Invoke(this, new CheckableDataGridViewRowEventArgs { RowIndex = rowUpdated, RefreshGrid = refreshGrid });
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
