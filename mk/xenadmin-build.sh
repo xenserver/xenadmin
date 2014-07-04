@@ -85,6 +85,7 @@ LOG4NET_DIR=${REPO}/log4net/build/bin/net/2.0/release
 DOTNETZIP_DIR=${REPO}/dotnetzip/DotNetZip-src/DotNetZip/Zip/bin/Release
 SHARPZIPLIB_DIR=${REPO}/sharpziplib/bin
 DISCUTILS_DIR=${REPO}/DiscUtils/src/bin/Release
+MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR=${REPO}/dotNetFx40_Full_setup
 
 wget ${WGET_OPT} ${WEB_DOTNET}/manifest -O ${SCRATCH_DIR}/dotnet-packages-manifest
 mkdir_clean ${XMLRPC_DIR} && wget ${WGET_OPT} ${WEB_DOTNET}/CookComputing.XmlRpcV2.dll -P ${XMLRPC_DIR}
@@ -92,6 +93,9 @@ mkdir_clean ${LOG4NET_DIR} && wget ${WGET_OPT} ${WEB_DOTNET}/log4net.dll -P ${LO
 mkdir_clean ${SHARPZIPLIB_DIR} && wget ${WGET_OPT} ${WEB_DOTNET}/ICSharpCode.SharpZipLib.dll -P ${SHARPZIPLIB_DIR}
 mkdir_clean ${DOTNETZIP_DIR} && wget ${WGET_OPT} ${WEB_DOTNET}/Ionic.Zip.dll -P ${DOTNETZIP_DIR}
 mkdir_clean ${DISCUTILS_DIR} && wget ${WGET_OPT} ${WEB_DOTNET}/DiscUtils.dll -P ${DISCUTILS_DIR}
+mkdir_clean ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR} && wget ${WGET_OPT} ${WEB_DOTNET}/dotNetFx40_Full_setup.exe -P ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}
+
+
 wget ${WGET_OPT} ${WEB_DOTNET}/sign.bat -P ${REPO} && chmod a+x ${REPO}/sign.bat
 
 #bring in stuff from xencenter-ovf latest xe-phase-1
@@ -315,6 +319,7 @@ cd ${WIX} && chmod a+rw XenCenter.l10n.msi && ${REPO}/sign.bat XenCenter.l10n.ms
 #create bundle exe installers - msi installers embedded
 DOTNETINST=${REPO}/dotNetInstaller
 DOTNETINST_BIN='/cygdrive/c/Program Files/dotNetInstaller/Bin'
+cp ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}/dotNetFx40_Full_setup.exe ${DOTNETINST}
 cp ${WIX}/outXenCenter/XenCenter.msi ${DOTNETINST}
 cp ${WIX}/XenCenter.l10n.msi ${DOTNETINST}
 cp "${DOTNETINST_BIN}"/* ${DOTNETINST}
