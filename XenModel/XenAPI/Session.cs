@@ -249,17 +249,12 @@ namespace XenAPI
             get { return roles; }
         }
 
-        public void login_with_password(string username, string password)
-        {
-            _uuid = proxy.session_login_with_password(username, password).parse();
-            SetAPIVersion();
-        }
-
         public void login_with_password(string username, string password, string version)
         {
             try
             {
-                _uuid = proxy.session_login_with_password(username, password, version).parse();
+                //Providing UserAgent as originator.
+                _uuid = proxy.session_login_with_password(username, password, version, UserAgent).parse();
                 SetAPIVersion();
                 if (APIVersion >= API_Version.API_1_6)
                     SetADDetails();
@@ -269,30 +264,8 @@ namespace XenAPI
                 if (exn.ErrorDescription[0] == Failure.MESSAGE_PARAMETER_COUNT_MISMATCH)
                 {
                     // Call the 1.1 version instead.
-                    login_with_password(username, password);
-                }
-                else
-                {
-                    throw;
-                }
-            }
-        }
-
-        public void login_with_password(string username, string password, string version, string originator)
-        {
-            try
-            {
-                _uuid = proxy.session_login_with_password(username, password, version, originator).parse();
-                SetAPIVersion();
-                if (APIVersion >= API_Version.API_1_6)
-                    SetADDetails();
-            }
-            catch (Failure exn)
-            {
-                if (exn.ErrorDescription[0] == Failure.MESSAGE_PARAMETER_COUNT_MISMATCH)
-                {
-                    // Call the pre-2.0 version instead.
-                    login_with_password(username, password, version);
+                    _uuid = proxy.session_login_with_password(username, password).parse();
+                    SetAPIVersion();
                 }
                 else
                 {
