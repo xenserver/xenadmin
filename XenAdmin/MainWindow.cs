@@ -3087,8 +3087,12 @@ namespace XenAdmin
 
         private void SetSplitterDistance()
         {
-            //CA-71697: chosen min size so the tab contents are visible
-            int chosenPanel2MinSize = splitContainer1.Width/2;
+            //CA-71697: chosen min size for Panel2 so the tab contents are visible, 
+            //but limit it so it can still fit in the main window when this is restored at minimum size (CA-139888)
+            int borderWidth = Width - splitContainer1.Width;
+            int lowerLimitForPanel2MinSize = MinimumSize.Width - splitContainer1.Panel1MinSize -
+                                             splitContainer1.SplitterWidth - borderWidth;
+            int chosenPanel2MinSize = Math.Min(splitContainer1.Width / 2, lowerLimitForPanel2MinSize);
             int min = splitContainer1.Panel1MinSize;
             int max = splitContainer1.Width - chosenPanel2MinSize;
 
