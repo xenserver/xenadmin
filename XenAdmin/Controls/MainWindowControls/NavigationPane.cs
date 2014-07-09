@@ -114,13 +114,14 @@ namespace XenAdmin.Controls.MainWindowControls
 
         protected override void OnResize(EventArgs e)
         {
+            int panel2Height = splitContainer1.Panel2.Height;
+
             base.OnResize(e);
             
             splitContainer1.Panel1MinSize = splitContainer1.ClientSize.Height - toolStripBig.MaximumSize.Height - splitContainer1.SplitterWidth;
 
-            int maxSplitterDistance = splitContainer1.ClientSize.Height - toolStripSmall.MaximumSize.Height - splitContainer1.SplitterWidth;
-            if (splitContainer1.SplitterDistance > maxSplitterDistance)
-                splitContainer1.SplitterDistance = maxSplitterDistance;
+            // Recalculate splitter distance so that Panel2.Height is preserved
+            splitContainer1.SplitterDistance = splitContainer1.ClientSize.Height - panel2Height - splitContainer1.SplitterWidth; 
         }
 
         #region Accessors
