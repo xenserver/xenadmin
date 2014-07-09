@@ -128,7 +128,14 @@ namespace XenAdmin.Dialogs
 
             Controller.SetStatusIcon(e.RowIndex, lRow.RowStatus);
 
-            if (senderGrid.SelectedRows.Count >= 1 && senderGrid.SelectedRows[0].Index == e.RowIndex)
+            bool selected = false;
+            Program.Invoke(this, delegate
+                                     {
+                                         selected = senderGrid.SelectedRows.Count > 0 &&
+                                                    senderGrid.SelectedRows[0].Index == e.RowIndex;
+                                     });
+
+            if (selected)
             {
                 Controller.SummariseSelectedRow(checkableDataGridView.GetCheckableRow(e.RowIndex));
             }
