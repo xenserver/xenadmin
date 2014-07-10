@@ -60,7 +60,7 @@ namespace XenAPI
             _proxy.RequestEvent += LogRequest;
             _proxy.ResponseEvent += LogResponse;
             _proxy.Proxy = Proxy;
-            _proxy.ConnectionGroupName = Guid.NewGuid().ToString(); // this will force the Session onto a different set of TCP streams (see CA-108676)
+            // reverted because of CA-137829/CA-137959: _proxy.ConnectionGroupName = Guid.NewGuid().ToString(); // this will force the Session onto a different set of TCP streams (see CA-108676)
         }
 
         public Session(Proxy proxy, IXenConnection connection)
@@ -256,6 +256,12 @@ namespace XenAPI
                 //Take the highest role
                 return roles[0].FriendlyName;
             }
+        }
+
+        public string ConnectionGroupName
+        {
+            get { return _proxy.ConnectionGroupName; }
+            set { _proxy.ConnectionGroupName = value; }
         }
     }
 }

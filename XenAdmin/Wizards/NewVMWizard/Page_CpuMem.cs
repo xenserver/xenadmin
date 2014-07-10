@@ -110,6 +110,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                     spinnerStatMax.Visible = false;
             }
 
+            comboBoxTopology.Populate(Template.VCPUs_at_startup, Template.VCPUs_max, Template.CoresPerSocket, Template.MaxCoresPerSocket);
+
             SetSpinnerLimits();
 
             VcpuSpinner.Select();
@@ -203,12 +205,21 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
         }
 
+        public long SelectedCoresPerSocket
+        {
+            get
+            {
+                return comboBoxTopology.CoresPerSocket;
+            }
+        }
+
         public override List<KeyValuePair<string, string>> PageSummary
         {
             get
             {
                 List<KeyValuePair<string, string>> sum = new List<KeyValuePair<string, string>>();
                 sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUS, SelectedVcpus.ToString()));
+                sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_CPUMEMPAGE_TOPOLOGY, comboBoxTopology.Text));
                 if (memoryMode == 1)
                     sum.Add(new KeyValuePair<string, string>(Messages.MEMORY, Util.MemorySizeString(SelectedMemoryStaticMax)));
                 else
@@ -297,7 +308,9 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private void vCPU_ValueChanged(object sender, EventArgs e)
         {
+            comboBoxTopology.Update((long)(VcpuSpinner.Value));
             ValuesUpdated();
+            ValidateVCPUSettings();
         }
 
         private void memory_ValueChanged(object sender, EventArgs e)
@@ -313,6 +326,16 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             if (sender is NumericUpDown)
                 ((Control)sender).Text = ((NumericUpDown)sender).Value.ToString();
+        }
+        
+        private void ValidateVCPUSettings()
+        {
+            labelInvalidVCPUWarning.Visible = !VM.ValidVCPUConfiguration((long)(VcpuSpinner.Value), comboBoxTopology.CoresPerSocket);
+        }
+
+        private void comboBoxTopology_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ValidateVCPUSettings();
         }
     }
 }

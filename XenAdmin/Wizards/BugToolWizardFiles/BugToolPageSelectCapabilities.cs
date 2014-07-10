@@ -495,17 +495,17 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 switch(Capability.PII)
                 {
                     case PrivateInformationIncluded.maybe:
-                        cellImage.Value = Properties.Resources._000_PiiMaybe_h32bit_16;
+                        cellImage.Value = Properties.Resources.alert2_16;
                         break;
                     case PrivateInformationIncluded.customized:
-                        cellImage.Value = Properties.Resources._000_PiiCustomised_h32bit_16;
+                        cellImage.Value = Properties.Resources.alert3_16;
                         break;
                     case PrivateInformationIncluded.no:
-                        cellImage.Value = Properties.Resources._000_PiiNo_h32bit_16;
+                        cellImage.Value = Properties.Resources.alert4_16;
                         break;
                     case PrivateInformationIncluded.yes:
                     default:
-                        cellImage.Value = Properties.Resources._000_PiiYes_h32bit_16;
+                        cellImage.Value = Properties.Resources.alert1_16;
                         break;
                 }
 

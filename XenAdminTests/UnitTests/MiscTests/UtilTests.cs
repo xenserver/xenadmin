@@ -277,9 +277,9 @@ namespace XenAdminTests.UnitTests.MiscTests
         {
             var pairs = new Dictionary<double, string>
                 {
-                    {0,"0 cps"},
-                    {0.12,"0.12 cps"},
-                    {1234.56,"1234.56 cps"}
+                    {0,"0 /sec"},
+                    {0.12,"0.12 /sec"},
+                    {1234.56,"1234.56 /sec"}
                 };
 
             foreach (var pair in pairs)

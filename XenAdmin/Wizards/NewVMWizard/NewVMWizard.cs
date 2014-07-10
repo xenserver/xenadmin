@@ -181,7 +181,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                                         VMOperationCommand.WarningDialogHAInvalidConfig,
                                         VMOperationCommand.StartDiagnosisForm,
                                         vgpuCapability ? pageVgpu.GpuGroup : null,
-                                        vgpuCapability ? pageVgpu.VgpuType : null);
+                                        vgpuCapability ? pageVgpu.VgpuType : null,
+                                        page_5_CpuMem.SelectedCoresPerSocket);
             Action.RunAsync();
 
             base.FinishWizard();

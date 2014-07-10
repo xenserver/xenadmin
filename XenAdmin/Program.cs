@@ -204,7 +204,15 @@ namespace XenAdmin
                 {
                     log.Debug("Upgrading settings...");
                     Properties.Settings.Default.Upgrade();
+
+                    // if program's hash has changed (e.g. by upgrading to .NET 4.0), then Upgrade() doesn't import the previous application settings 
+                    // because it cannot locate a previous user.config file. In this case a new user.config file is created with the default settings.
+                    // We will try and find a config file from a previous installation and update the settings from it
+                    if (Properties.Settings.Default.ApplicationVersion == "" && Properties.Settings.Default.DoUpgrade)
+                        SettingsUpdate.Update();
+                    log.DebugFormat("Settings upgraded from '{0}' to '{1}'", Properties.Settings.Default.ApplicationVersion, appVersionString);
                     Properties.Settings.Default.ApplicationVersion = appVersionString;
+                    Settings.TrySaveSettings();
                 }
             }
             catch (ConfigurationErrorsException ex)

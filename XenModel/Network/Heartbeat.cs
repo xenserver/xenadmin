@@ -111,6 +111,8 @@ namespace XenAdmin.Network
             }
         }
 
+        private readonly string heartbeatConnectionGroupName = Guid.NewGuid().ToString(); 
+
         private void DoHeartbeat()
         {
             if (!connection.IsConnected)
@@ -122,6 +124,7 @@ namespace XenAdmin.Network
                 {
                     // Try to get a new session, but only give the server one chance (otherwise we get the default 3x timeout)
                     session = connection.DuplicateSession(connectionTimeout < 5000 ? 5000 : connectionTimeout);
+                    session.ConnectionGroupName = heartbeatConnectionGroupName; // this will force the Heartbeat session onto its own set of TCP streams (see CA-108676)
                 }
 
                 GetServerTime();

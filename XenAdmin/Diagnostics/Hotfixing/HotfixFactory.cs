@@ -43,7 +43,7 @@ namespace XenAdmin.Diagnostics.Hotfixing
             MNR,
             Cowley,
             Boston,
-            Sanibel
+            SanibelToClearwater
         }
 
         private readonly Hotfix mnrHotfix = new SingleHotfix
@@ -69,22 +69,22 @@ namespace XenAdmin.Diagnostics.Hotfixing
                                                          },
                                                           new SingleHotfix
                                                          {
-                                                             Filename = "XS60E009.xsupdate",
-                                                             UUID = "8d7ba04f-bcdf-4f34-afdf-acd3206b59ec"
+                                                             Filename = "XS62E006.xsupdate",
+                                                             UUID = "b412a910-0453-42ed-bae0-982cc48b00d6"
                                                          }
                                                      }
                                         };
 
-        private readonly Hotfix sanibelHotfix = new SingleHotfix
+        private readonly Hotfix sanibelToClearwaterHotfix = new SingleHotfix
                                                          {
-                                                             Filename = "XS60E009.xsupdate",
-                                                             UUID = "8d7ba04f-bcdf-4f34-afdf-acd3206b59ec"
+                                                             Filename = "XS62E006.xsupdate",
+                                                             UUID = "b412a910-0453-42ed-bae0-982cc48b00d6"
                                                          };
 
         public Hotfix Hotfix(Host host)
         {
-            if (Helpers.SanibelOrGreater(host) && !Helpers.TampaOrGreater(host))
-                return Hotfix(HotfixableServerVersion.Sanibel);
+            if (Helpers.SanibelOrGreater(host) && !Helpers.CreedenceOrGreater(host))
+                return Hotfix(HotfixableServerVersion.SanibelToClearwater);
             if (Helpers.BostonOrGreater(host) && !Helpers.SanibelOrGreater(host))
                 return Hotfix(HotfixableServerVersion.Boston);
             if (Helpers.CowleyOrGreater(host) && !Helpers.BostonOrGreater(host))
@@ -97,8 +97,8 @@ namespace XenAdmin.Diagnostics.Hotfixing
 
         public Hotfix Hotfix(HotfixableServerVersion version)
         {
-            if (version == HotfixableServerVersion.Sanibel)
-                return sanibelHotfix;
+            if (version == HotfixableServerVersion.SanibelToClearwater)
+                return sanibelToClearwaterHotfix;
             if (version == HotfixableServerVersion.Boston)
                 return bostonHotfix;
             if (version == HotfixableServerVersion.Cowley)

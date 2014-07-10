@@ -166,7 +166,7 @@
     <value>http://www.citrix.com/xenserver/partneroffers</value>
   </data>
   <data name="PLUGINS_URL" xml:space="preserve">
-    <value>http://community.citrix.com/xencenter/plugins</value>
+    <value>https://wiki.xenserver.org/XenCenter_Plugins</value>
   </data>
   <data name="PRIVACY" xml:space="preserve">
     <value>http://citrix.com/English/aboutCitrix/legal/privacyStatement.asp?ntref=hp_nav_US</value>

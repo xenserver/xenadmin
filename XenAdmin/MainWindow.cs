@@ -2715,8 +2715,14 @@ namespace XenAdmin
             }
             else
             {
+                bool tabControlWasVisible = TheTabControl.Visible;
                 TheTabControl.Visible = true;
                 alertPage.Visible = updatesPage.Visible = eventsPage.Visible = false;
+
+                // force an update of the selected tab when switching back from Notification view, 
+                // as some tabs ignore the update events when not visible (e.g. Snapshots, HA)
+                if (!tabControlWasVisible)
+                    TheTabControl_SelectedIndexChanged(null, null);
             }
 
             UpdateViewMenu(mode);

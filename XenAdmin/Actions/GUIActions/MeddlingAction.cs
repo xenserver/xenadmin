@@ -84,6 +84,9 @@ namespace XenAdmin.Actions.GUIActions
                                                      Description = Messages.COMPLETED;
 
                                                  DestroyUnwantedOperations(task);
+
+                                                 if (deleting)
+                                                     LogoutCancelSession();
                                              });
         }
 

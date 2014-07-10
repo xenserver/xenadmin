@@ -108,7 +108,7 @@ namespace XenAdmin.Controls.CheckableDataGridView
             CheckableDataGridViewRow row = sender as CheckableDataGridViewRow;
             if(row == null)
                 return;
-            UpdateRow(row);
+            UpdateRow(row, true);
         }
 
         public List<CheckableDataGridViewRow> CheckedRows
@@ -122,7 +122,7 @@ namespace XenAdmin.Controls.CheckableDataGridView
                 return;
             storedRows.ForEach(r=>r.Highlighted = false);
             storedRows[rowIndex].Highlighted = true;
-            UpdateRow(storedRows[rowIndex]);
+            UpdateRow(storedRows[rowIndex], false);
             View.DrawRowAsHighlighted(storedRows[rowIndex].Highlighted, rowIndex);
         }
 
@@ -188,7 +188,7 @@ namespace XenAdmin.Controls.CheckableDataGridView
         /// Pass in the replacement row
         /// </summary>
         /// <param name="toUpdate">Replacement Row</param>
-        private void UpdateRow(CheckableDataGridViewRow toUpdate)
+        private void UpdateRow(CheckableDataGridViewRow toUpdate, bool refreshGrid)
         {
             if (toUpdate == null)
                 return;
@@ -208,7 +208,7 @@ namespace XenAdmin.Controls.CheckableDataGridView
                 View.DrawUpdatedRow(storedRows[indexToUpdate].CellText, storedRows[indexToUpdate].CellDataLoaded,
                                     storedRows[indexToUpdate].Disabled, indexToUpdate);
             }
-            View.TriggerRowUpdatedEvent(indexToUpdate);
+            View.TriggerRowUpdatedEvent(indexToUpdate, refreshGrid);
         }
 
         private int ReplaceStoredRow(CheckableDataGridViewRow toUpdate)
@@ -224,6 +224,7 @@ namespace XenAdmin.Controls.CheckableDataGridView
             if (indexToUpdate >= storedRows.Count || indexToUpdate < 0)
             {
                 log.DebugFormat("Unexpected index in ReplaceStoredRow row '{0}'; Stored rows contain '{1}' items", indexToUpdate, storedRows.Count);
+                return -1;
             }
             storedRows.Remove(storedRows[indexToUpdate]);
             storedRows.Insert(indexToUpdate, toUpdate); 

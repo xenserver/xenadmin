@@ -130,11 +130,7 @@ namespace XenAdmin.SettingsPanels
 
         public bool HasChanged
         {
-            get
-            {
-                return ShadowValue != vm.HVM_shadow_multiplier
-                       || ShadowMultiplierTextBox.Text != vm.HVM_shadow_multiplier.ToString();
-            }
+            get { return ShadowValue != vm.HVM_shadow_multiplier; }
         }
 
         private double ShadowValue
@@ -142,21 +138,19 @@ namespace XenAdmin.SettingsPanels
             get
             {
                 double v;
-                return double.TryParse(ShadowMultiplierTextBox.Text,  NumberStyles.Any, CultureInfo.InvariantCulture, out v)
-                    ? v 
-                    : SHADOW_MULTIPLIER_GENERAL_USE;
+                return double.TryParse(ShadowMultiplierTextBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out v)
+                    ? v
+                    : -1;
             }
             set
             {
-                ShadowMultiplierTextBox.Text = value.ToString("N", CultureInfo.InvariantCulture);
+                ShadowMultiplierTextBox.Text = value.ToString(CultureInfo.InvariantCulture);
             }
         }
 
         public void ShowLocalValidationMessages()
         {
-            double v;
-            if (!(double.TryParse(ShadowMultiplierTextBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out v)
-                         && v > 0.1))
+            if (!ValidToSave)
             {
                 HelpersGUI.ShowBalloonMessage(ShadowMultiplierTextBox,
                    Messages.SHADOW_MEMORY_MULTIPLIER_VALUE,
@@ -176,7 +170,7 @@ namespace XenAdmin.SettingsPanels
             {
                 double v;
                 return double.TryParse(ShadowMultiplierTextBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out v)
-                       && v > 0.1;
+                       && v >= 1.0;
             }
         }
 

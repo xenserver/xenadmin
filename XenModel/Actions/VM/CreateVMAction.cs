@@ -66,11 +66,14 @@ namespace XenAdmin.Actions.VMActions
         private readonly SR FullCopySR;
         private readonly GPU_group GpuGroup;
         private readonly VGPU_type VgpuType;
+        private readonly long CoresPerSocket;
 
         private Action<VMStartAbstractAction, Failure> _startDiagnosisForm;
         private Action<VM, bool> _warningDialogHAInvalidConfig;
 
         private bool PointOfNoReturn;
+
+        private bool assignOrRemoveVgpu;
 
         /// <summary>
         /// These are the RBAC dependencies that you always need to create a VM. Check CreateVMAction constructor for runtime dependent dependencies.
@@ -101,7 +104,8 @@ namespace XenAdmin.Actions.VMActions
             "vbd.destroy",
             "vdi.copy",
             // Add networks
-            "vif.create"
+            "vif.create",
+            "vm.set_platform"
         );
 
         public CreateVMAction(IXenConnection connection, VM template, Host copyBiosStringsFrom,
@@ -111,7 +115,7 @@ namespace XenAdmin.Actions.VMActions
             List<DiskDescription> disks, SR fullCopySR, List<VIF> vifs, bool startAfter,
             Action<VM, bool> warningDialogHAInvalidConfig,
             Action<VMStartAbstractAction, Failure> startDiagnosisForm,
-            GPU_group gpuGroup, VGPU_type vgpuType)
+            GPU_group gpuGroup, VGPU_type vgpuType, long coresPerSocket)
             : base(connection, string.Format(Messages.CREATE_VM, name),
             string.Format(Messages.CREATE_VM_FROM_TEMPLATE, name, Helpers.GetName(template)))
         {
@@ -136,10 +140,15 @@ namespace XenAdmin.Actions.VMActions
             _startDiagnosisForm = startDiagnosisForm;
             GpuGroup = gpuGroup;
             VgpuType = vgpuType;
+            CoresPerSocket = coresPerSocket;
 
             Pool pool_of_one = Helpers.GetPoolOfOne(Connection);
             if (HomeServer != null || pool_of_one != null) // otherwise we have no where to put the action
                 AppliesTo.Add(HomeServer != null ? HomeServer.opaque_ref : pool_of_one.opaque_ref);
+
+            assignOrRemoveVgpu = (GpuGroup != null && VgpuType != null)
+                             || (!Helpers.FeatureForbidden(Connection, Host.RestrictVgpu)
+                                 && Helpers.VgpuCapability(Connection));
 
             #region RBAC Dependencies
 
@@ -150,7 +159,7 @@ namespace XenAdmin.Actions.VMActions
             if (Template.memory_dynamic_min != MemoryDynamicMin || Template.memory_dynamic_max != MemoryDynamicMax || Template.memory_static_max != MemoryStaticMax)
                 ApiMethodsToRoleCheck.Add("vm.set_memory_limits");
 
-            if (GpuGroup != null && VgpuType != null)
+            if (assignOrRemoveVgpu)
             {
                 ApiMethodsToRoleCheck.Add("VGPU.destroy");
                 ApiMethodsToRoleCheck.Add("VGPU.create");
@@ -213,7 +222,7 @@ namespace XenAdmin.Actions.VMActions
 
         private void AssignVgpu()
         {
-            if (GpuGroup != null && VgpuType != null)
+            if (assignOrRemoveVgpu)
             {
                 var action = new GpuAssignAction(VM, GpuGroup, VgpuType);
                 action.RunExternal(Session);
@@ -241,6 +250,13 @@ namespace XenAdmin.Actions.VMActions
             XenAPI.VM.set_name_description(Session, VM.opaque_ref, NameDescription);
             ChangeVCPUSettingsAction vcpuAction = new ChangeVCPUSettingsAction(VM, Vcpus);
             vcpuAction.RunExternal(Session);
+
+            // set cores-per-socket
+            Dictionary<string, string> platform = VM.platform == null ?
+                            new Dictionary<string, string>() :
+                            new Dictionary<string, string>(VM.platform);
+            platform["cores-per-socket"] = CoresPerSocket.ToString();
+            VM.set_platform(Session, VM.opaque_ref, platform);
 
             // Check these values have changed before setting them, as they are RBAC protected
             if (HomeServerChanged())

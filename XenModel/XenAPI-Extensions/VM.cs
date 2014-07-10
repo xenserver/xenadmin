@@ -59,6 +59,7 @@ namespace XenAPI
         private const int DEFAULT_NUM_VIFS_ALLOWED = 7;
         private const int DEFAULT_NUM_VBDS_ALLOWED = 7;
         public const long DEFAULT_MEM_ALLOWED = 128 * Util.BINARY_GIGA;
+        public const int DEFAULT_CORES_PER_SOCKET = 1;
         private SnapshotsView _snapshotView = SnapshotsView.None;
 
         private XmlDocument xdRecommendations = null;
@@ -1440,6 +1441,60 @@ namespace XenAPI
             return Helpers.AugustaOrGreater(sessionTo.Connection)
                        ? VM.get_SRs_required_for_recovery(session, vm, sessionTo.uuid)
                        : null;
+        }
+
+        public long CoresPerSocket
+        {
+            get
+            {
+                if (platform != null && platform.ContainsKey("cores-per-socket"))
+                {
+                    long coresPerSocket;
+                    return long.TryParse(platform["cores-per-socket"], out coresPerSocket) ? coresPerSocket : DEFAULT_CORES_PER_SOCKET;
+                }
+                return DEFAULT_CORES_PER_SOCKET;
+            }
+            set
+            {
+                if (value != CoresPerSocket)
+                {
+
+                    Dictionary<string, string> newPlatform =
+                        platform == null ?
+                            new Dictionary<string, string>() :
+                            new Dictionary<string, string>(platform);
+                    newPlatform["cores-per-socket"] = value.ToString();
+                    platform = newPlatform;
+                }
+            }
+        }
+
+        public long MaxCoresPerSocket
+        {
+            get
+            {
+                var homeServer = Home();
+                if (homeServer != null)
+                    return homeServer.CoresPerSocket;
+
+                var maxCoresPerSocket = 0;
+                foreach (var host in this.Connection.Cache.Hosts)
+                {
+                    if (host.CoresPerSocket > maxCoresPerSocket)
+                        maxCoresPerSocket = host.CoresPerSocket;
+                }
+                return maxCoresPerSocket;
+            }
+        }
+
+        public bool HasValidVCPUConfiguration
+        {
+            get { return ValidVCPUConfiguration(VCPUs_max, CoresPerSocket); }
+        }
+
+        public static bool ValidVCPUConfiguration(long noOfVCPUs, long coresPerSocket)
+        {
+            return coresPerSocket > 0 && noOfVCPUs % coresPerSocket == 0;
         }
     }
 

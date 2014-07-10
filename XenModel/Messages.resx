@@ -681,6 +681,15 @@
   <data name="ACTION_SR_SHARING" xml:space="preserve">
     <value>Sharing SR {0}</value>
   </data>
+  <data name="ACTION_SR_TRIM_DESCRIPTION" xml:space="preserve">
+    <value>Reclaiming freed space</value>
+  </data>
+  <data name="ACTION_SR_TRIM_DONE" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="ACTION_SR_TRIM_TITLE" xml:space="preserve">
+    <value>Reclaiming freed space on SR '{0}'</value>
+  </data>
   <data name="ACTION_SR_UPGRADE" xml:space="preserve">
     <value>Upgrade SR '{0}' on '{1}'</value>
   </data>
@@ -1640,7 +1649,7 @@ Archive destination: {0}</value>
     <value>A-SIS capable</value>
   </data>
   <data name="ASSERT_CAN_EVACUATE_CHECK_DESCRIPTION" xml:space="preserve">
-    <value>Can evacuate host check</value>
+    <value>VM migration status</value>
   </data>
   <data name="ASSERT_VM_CAN_BE_RECOVERED_CHECK_DESCRIPTION" xml:space="preserve">
     <value>{0}: Can recover VM check</value>
@@ -2181,7 +2190,7 @@ Do you want to assign these VMs to the policy '{0}' instead?</value>
 Do you want to assign it to the policy '{2}' instead?</value>
   </data>
   <data name="CHECKING_CANEVACUATE_STATUS" xml:space="preserve">
-    <value>Checking can evacuate host status</value>
+    <value>Checking VM migration status</value>
   </data>
   <data name="CHECKING_HA_STATUS" xml:space="preserve">
     <value>Checking HA and WLB status</value>
@@ -2761,7 +2770,7 @@ You can only connect to a single Citrix XenServer Express Edition server at a ti
 {1}</value>
   </data>
   <data name="COUNTS_PER_SEC_UNIT" xml:space="preserve">
-    <value>cps</value>
+    <value>/sec</value>
   </data>
   <data name="CPM_FAILURE_REASON_SAME_AS_RESIDENT_HOST" xml:space="preserve">
     <value>cannot migrate to resident host or pool</value>
@@ -2881,6 +2890,21 @@ Please reconnect the host and try again.</value>
   </data>
   <data name="CPU_SUB" xml:space="preserve">
     <value>{0} vCPU(s)</value>
+  </data>
+  <data name="CPU_TOPOLOGY_STRING_1_SOCKET_1_CORE" xml:space="preserve">
+    <value>1 socket with 1 core per socket</value>
+  </data>
+  <data name="CPU_TOPOLOGY_STRING_1_SOCKET_N_CORE" xml:space="preserve">
+    <value>1 socket with {0} cores per socket</value>
+  </data>
+  <data name="CPU_TOPOLOGY_STRING_INVALID_VALUE" xml:space="preserve">
+    <value>{0} cores per socket (Invalid configuration)</value>
+  </data>
+  <data name="CPU_TOPOLOGY_STRING_N_SOCKET_1_CORE" xml:space="preserve">
+    <value>{0} sockets with 1 core per socket</value>
+  </data>
+  <data name="CPU_TOPOLOGY_STRING_N_SOCKET_N_CORE" xml:space="preserve">
+    <value>{0} sockets with {1} cores per socket</value>
   </data>
   <data name="CREATEDVM_CLONE" xml:space="preserve">
     <value>Created '{0}' by cloning '{1}'</value>
@@ -4015,9 +4039,6 @@ Eject the CD and try again.</value>
   </data>
   <data name="DVD_DRIVE_LABEL_NUMBERED" xml:space="preserve">
     <value>DVD Drive {0}:</value>
-  </data>
-  <data name="DVSCS" xml:space="preserve">
-    <value>Cross-Server Private Network</value>
   </data>
   <data name="DYNAMIC_MAX" xml:space="preserve">
     <value>Maximum memory</value>
@@ -6628,6 +6649,9 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MAINWINDOW_TOOLBAR_SUSPENDVM" xml:space="preserve">
     <value>Suspend VM (Ctrl+Y)</value>
   </data>
+  <data name="MAINWINDOW_TRIM_SR" xml:space="preserve">
+    <value>Re&amp;claim freed space</value>
+  </data>
   <data name="MAINWINDOW_UPGRADE_SR" xml:space="preserve">
     <value>&amp;Upgrade</value>
   </data>
@@ -6961,7 +6985,7 @@ Install an earlier version.</value>
     <value>Select the &amp;destination storage repository</value>
   </data>
   <data name="MIGRATE_VDI_UPSELL_BLURB" xml:space="preserve">
-    <value>Upgrade XenServer to enable VDI live migration. This feature enables you to migrate multiple running VDIs between SRs in the same pool with no VM downtime. 
+    <value>Upgrade your XenServer license to enable VDI live migration. This feature enables you to migrate multiple running VDIs between SRs in the same pool with no VM downtime. 
 
 To learn more about the XenServer Live VDI Migration feature or to start a XenServer trial, click the button below.</value>
   </data>
@@ -7559,6 +7583,9 @@ You will not be able to start this VM without freeing some space on one of the s
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_TITLE" xml:space="preserve">
     <value>Allocate processor and memory resources</value>
+  </data>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_TOPOLOGY" xml:space="preserve">
+    <value>Topology</value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_VCPUS" xml:space="preserve">
     <value>vCPUs</value>
@@ -9260,10 +9287,10 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
     <value>Checking licensing status</value>
   </data>
   <data name="RPU_WIZARD_VMPR_VMPP_DEPRECATION" xml:space="preserve">
-    <value>'{0}': VM Protection Policies have been removed in XenServer 6.2</value>
+    <value>'{0}': VM Protection Policies were removed in XenServer 6.2</value>
   </data>
   <data name="RPU_WIZARD_WSS_DEPRECATED" xml:space="preserve">
-    <value>'{0}': The use of WSS servers has been removed in XenServer 6.2</value>
+    <value>'{0}': The use of WSS servers was removed in XenServer 6.2</value>
   </data>
   <data name="RUNNING_ARCHIVE" xml:space="preserve">
     <value>Archiving</value>
@@ -9566,7 +9593,7 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
     <value>Shadow memory multiplier: {0}</value>
   </data>
   <data name="SHADOW_MEMORY_MULTIPLIER_VALUE" xml:space="preserve">
-    <value>Value should be a number greater than 0.1</value>
+    <value>Value should be a number greater than or equal to 1.0</value>
   </data>
   <data name="SHARED" xml:space="preserve">
     <value>Shared</value>
@@ -10346,6 +10373,9 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="TOOLTIP_REMOVE_PIF" xml:space="preserve">
     <value>This network cannot be removed because it is a physical device</value>
   </data>
+  <data name="TOOLTIP_SR_TRIM_UNSUPPORTED" xml:space="preserve">
+    <value>Reclaiming freed space not supported on this SR</value>
+  </data>
   <data name="TREESEARCHBOX_DROPDOWN_TOOLTIP" xml:space="preserve">
     <value>Views and Saved Searches</value>
   </data>
@@ -10744,6 +10774,12 @@ Check your settings and try again.</value>
   <data name="UPGRADEWIZARD_PRECHECK_TITLE" xml:space="preserve">
     <value>Problems encountered when perfoming upgrade prechecks.</value>
   </data>
+  <data name="UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS" xml:space="preserve">
+    <value>VM '{0}' has invalid vCPU settings.</value>
+  </data>
+  <data name="UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS_HELPMESSAGE" xml:space="preserve">
+    <value>Fix vCPU configuration</value>
+  </data>
   <data name="UPGRADEWIZARD_SELECTSERVERS_TITLE" xml:space="preserve">
     <value>Select the servers you wish to upgrade.</value>
   </data>
@@ -10815,65 +10851,65 @@ Do you want to continue?</value>
     <value>Uploading Update to Server '{0}'...</value>
   </data>
   <data name="UPSELL_BLURB_ALERTS" xml:space="preserve">
-    <value>Upgrade XenServer to enable Alerting and Reporting capabilities. Email based performance and error alerting will proactively notify administrators of error conditions or performance problems before they affect critical services.
+    <value>Upgrade your XenServer license to enable Alerting and Reporting capabilities. Email based performance and error alerting will proactively notify administrators of error conditions or performance problems before they affect critical services.
 
 To learn more about the XenServer Alerting and Reporting feature or to start a XenServer trial, click the button below.</value>
   </data>
   <data name="UPSELL_BLURB_CPM" xml:space="preserve">
-    <value>Upgrade XenServer to enable VM live migration. This feature enables you to migrate running VMs on shared or local storage between servers in the same pool or across pools with no VM downtime. 
+    <value>Upgrade your XenServer license to enable VM live migration. This feature enables you to migrate running VMs on shared or local storage between servers in the same pool or across pools with no VM downtime. 
 
 To learn more about the XenServer Cross-Pool Migration feature or to start a XenServer trial, click the button below.</value>
   </data>
   <data name="UPSELL_BLURB_CPUMASKING" xml:space="preserve">
-    <value>Upgrade XenServer to enable Heterogeneous Pools. Heterogeneous Pools allows hosts with different CPUs to form a resource pool, and allows virtual machines to migrate between them.
+    <value>Upgrade your XenServer license to enable Heterogeneous Pools. Heterogeneous Pools allows hosts with different CPUs to form a resource pool, and allows virtual machines to migrate between them.
 
 To learn more about the XenServer Heterogeneous Pools feature or to start a XenServer trial, click the button below.</value>
   </data>
   <data name="UPSELL_BLURB_DMC" xml:space="preserve">
-    <value>Upgrade XenServer to enable Dynamic Memory Control.  Dynamic Memory Control allows XenServer to adjust the memory of live virtual machines, and respond dynamically to changing demands on the host server.
+    <value>Upgrade your XenServer license to enable Dynamic Memory Control.  Dynamic Memory Control allows XenServer to adjust the memory of live virtual machines, and respond dynamically to changing demands on the host server.
 
 To learn more about the XenServer Dynamic Memory Control feature or to start a XenServer trial, click the button below.</value>
   </data>
   <data name="UPSELL_BLURB_DR" xml:space="preserve">
-    <value>Upgrade XenServer to enable Disaster Recovery. The Disaster Recovery feature allows you to recover your critical VMs and vApps at your DR site in the event of a disaster at your primary production site.
+    <value>Upgrade your XenServer license to enable Disaster Recovery. The Disaster Recovery feature allows you to recover your critical VMs and vApps at your DR site in the event of a disaster at your primary production site.
 
 To learn more about the XenServer Disaster Recovery feature or to start a XenServer trial, click the button below.</value>
   </data>
   <data name="UPSELL_BLURB_ENHANCEDSR" xml:space="preserve">
-    <value>Upgrade XenServer to enable StorageLink™ Technology. StorageLink allows XenServer to leverage all the power of your existing storage hardware and offload storage operations automatically. This allows for high performance and space efficient storage provisioning, cloning, and snapshot capabilities to be handled in hardware using your storage hardware's native features.</value>
+    <value>Upgrade your XenServer license to enable StorageLink™ Technology. StorageLink allows XenServer to leverage all the power of your existing storage hardware and offload storage operations automatically. This allows for high performance and space efficient storage provisioning, cloning, and snapshot capabilities to be handled in hardware using your storage hardware's native features.</value>
   </data>
   <data name="UPSELL_BLURB_GPU" xml:space="preserve">
-    <value>Upgrade XenServer to enable GPU pass-through. The GPU pass-through feature allows you to assign a dedicated graphics processing unit to a VM for higher graphics performance.
+    <value>Upgrade your XenServer license to enable GPU pass-through. The GPU pass-through feature allows you to assign a dedicated graphics processing unit to a VM for higher graphics performance.
 
 To learn more about the XenServer GPU pass-through feature or to start a XenServer trial, click the button below.</value>
   </data>
   <data name="UPSELL_BLURB_HA" xml:space="preserve">
-    <value>Upgrade XenServer to enable High Availability. High Availability allows virtual machines to be automatically restarted in the event of an underlying hardware failure or individual VM failure. If the server fails the VMs will be intelligently restarted on other virtualized servers in the resource pool.
+    <value>Upgrade your XenServer license to enable High Availability. High Availability allows virtual machines to be automatically restarted in the event of an underlying hardware failure or individual VM failure. If the server fails the VMs will be intelligently restarted on other virtualized servers in the resource pool.
 
 To learn more about the XenServer High Availability feature or to start a XenServer trial, click the button below.</value>
   </data>
   <data name="UPSELL_BLURB_PERFORMANCE" xml:space="preserve">
-    <value>Upgrade XenServer to enable Performance Reporting capabilities. Performance Reporting provides guidance on overall environment performance trends and enables you to accurately plan capacity as business needs change.
+    <value>Upgrade your XenServer license to enable Performance Reporting capabilities. Performance Reporting provides guidance on overall environment performance trends and enables you to accurately plan capacity as business needs change.
 
 To learn more about the XenServer Performance Reporting capabilities feature or to start a XenServer trial, click the button below.</value>
   </data>
   <data name="UPSELL_BLURB_RBAC" xml:space="preserve">
-    <value>Upgrade XenServer to enable Role Based Access Control. Using the RBAC feature, you will be able to control access to vital components in your XenServer resource pools, with full audit logging capabilities and seamless integration with your current Active Directory setup.
+    <value>Upgrade your XenServer license to enable Role Based Access Control. Using the RBAC feature, you will be able to control access to vital components in your XenServer resource pools, with full audit logging capabilities and seamless integration with your current Active Directory setup.
 
 To learn more about the XenServer Role Based Access Control feature or to start a XenServer trial, click the button below.</value>
   </data>
   <data name="UPSELL_BLURB_VM_APPLIANCES" xml:space="preserve">
-    <value>Upgrade XenServer to enable vApps. The vApps feature allows you to place your VMs into groups, allowing them to be started or stopped as a unit, and also allowing them to be easily recovered at your DR site in the event of a disaster at your primary production site.
+    <value>Upgrade your XenServer license to enable vApps. The vApps feature allows you to place your VMs into groups, allowing them to be started or stopped as a unit, and also allowing them to be easily recovered at your DR site in the event of a disaster at your primary production site.
 
 To learn more about the vApps feature of XenServer or to start a XenServer trial, click the button below.</value>
   </data>
   <data name="UPSELL_BLURB_VM_PROTECTION" xml:space="preserve">
-    <value>Upgrade XenServer to enable VM Protection and Recovery. VM Protection and Recovery allows you to protect your critical VMs by scheduling automatic snapshots, and optionally, archiving those snapshots to a CIFS or NFS share.
+    <value>Upgrade your XenServer license to enable VM Protection and Recovery. VM Protection and Recovery allows you to protect your critical VMs by scheduling automatic snapshots, and optionally, archiving those snapshots to a CIFS or NFS share.
 
 To learn more about the XenServer VM Protection and Recovery feature or to start a XenServer trial, click the button below.</value>
   </data>
   <data name="UPSELL_BLURB_WLB" xml:space="preserve">
-    <value>Upgrade XenServer to enable Dynamic Workload Balancing. Dynamic Workload Balancing continually profiles your virtual machines’ and XenServer hosts’ performance and will intelligently rebalance and optimally place new workloads to ensure the best use of physical server resources in your resource pool.
+    <value>Upgrade your XenServer license to enable Dynamic Workload Balancing. Dynamic Workload Balancing continually profiles your virtual machines’ and XenServer hosts’ performance and will intelligently rebalance and optimally place new workloads to ensure the best use of physical server resources in your resource pool.
 
 To learn more about the XenServer Dynamic Workload Balancing feature or to start a XenServer trial, click the button below.</value>
   </data>
@@ -10989,7 +11025,7 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
     <value>The disk is attached to a VM that is not in halted state.</value>
   </data>
   <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
-    <value>The number of VCPUs can only be changed when the VM is shut down</value>
+    <value>The VCPUs can only be changed when the VM is shut down</value>
   </data>
   <data name="VDI_COPIED" xml:space="preserve">
     <value>Copied disk '{0}' from SR '{1}' to SR '{2}'</value>
@@ -12060,11 +12096,14 @@ Are you sure you want to enable automated power management for this Host?</value
   <data name="XENSERVER_6_2" xml:space="preserve">
     <value>XenServer 6.2</value>
   </data>
+  <data name="XENSERVER_6_5" xml:space="preserve">
+    <value>XenServer 6.5</value>
+  </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">
     <value>XenServer Templates</value>
   </data>
   <data name="XENSERVER_UPGRADE_REQUIRED" xml:space="preserve">
-    <value>XenServer Upgrade Required</value>
+    <value>License Upgrade Required</value>
   </data>
   <data name="XSOEM" xml:space="preserve">
     <value>XenServer Embedded Edition Update Files ({0})|{0}|All files ({1})|{1}</value>
@@ -12093,10 +12132,10 @@ You will need to navigate to the Console on each of the selected VMs to complete
     <value>{0} (hidden)</value>
   </data>
   <data name="X_IS_DEPRECATED_IN_X" xml:space="preserve">
-    <value>The {0} feature is deprecated in {1} and may be unavailable in future versions</value>
+    <value>The {0} feature was deprecated in {1} and may be unavailable in future versions</value>
   </data>
   <data name="X_IS_REMOVED_IN_X" xml:space="preserve">
-    <value>The {0} feature is not available in {1}</value>
+    <value>The {0} feature is not available in {1} and later versions</value>
   </data>
   <data name="X_WITH_WARNING_X" xml:space="preserve">
     <value>{0} with warning: {1}</value>
