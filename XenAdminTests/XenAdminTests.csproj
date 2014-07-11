@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UnitTests\SubnetworkMaskValidatorTest.cs" />
     <Compile Include="UnitTests\ExceptionSerializationTest.cs" />
     <Compile Include="XenModelTests\ActionTests\ActionTest.cs" />
     <Compile Include="XenModelTests\ActionTests\VMActionsTest.cs" />
