@@ -16,9 +16,12 @@ namespace XenAdmin.TabPages
             Host = null;
             Connection = null;
 
-            if (disposing && (components != null))
+            if (disposing)
             {
-                components.Dispose();
+                if (selectionManager != null)
+                    selectionManager.Dispose();
+                if (components != null)
+                    components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -47,12 +50,14 @@ namespace XenAdmin.TabPages
             this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.newSRButton = new XenAdmin.Commands.CommandButton();
-            this.trimButton = new System.Windows.Forms.Button();
+            this.trimButtonContainer = new XenAdmin.Controls.ToolTipContainer();
+            this.trimButton = new XenAdmin.Commands.CommandButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonProperties = new System.Windows.Forms.Button();
             this.pageContainerPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.trimButtonContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // pageContainerPanel
@@ -80,8 +85,8 @@ namespace XenAdmin.TabPages
             this.columnHeader7});
             this.listViewSrs.ContextMenuStrip = this.contextMenuStrip;
             resources.ApplyResources(this.listViewSrs, "listViewSrs");
+            this.listViewSrs.FullRowSelect = true;
             this.listViewSrs.HideSelection = false;
-            this.listViewSrs.MultiSelect = false;
             this.listViewSrs.Name = "listViewSrs";
             this.listViewSrs.UseCompatibleStateImageBehavior = false;
             this.listViewSrs.View = System.Windows.Forms.View.Details;
@@ -136,7 +141,7 @@ namespace XenAdmin.TabPages
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.newSRButton);
-            this.flowLayoutPanel1.Controls.Add(this.trimButton);
+            this.flowLayoutPanel1.Controls.Add(this.trimButtonContainer);
             this.flowLayoutPanel1.Controls.Add(this.groupBox1);
             this.flowLayoutPanel1.Controls.Add(this.buttonProperties);
             resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
@@ -149,12 +154,18 @@ namespace XenAdmin.TabPages
             this.newSRButton.Name = "newSRButton";
             this.newSRButton.UseVisualStyleBackColor = true;
             // 
+            // trimButtonContainer
+            // 
+            this.trimButtonContainer.Controls.Add(this.trimButton);
+            resources.ApplyResources(this.trimButtonContainer, "trimButtonContainer");
+            this.trimButtonContainer.Name = "trimButtonContainer";
+            // 
             // trimButton
             // 
+            this.trimButton.Command = new XenAdmin.Commands.TrimSRCommand();
             resources.ApplyResources(this.trimButton, "trimButton");
             this.trimButton.Name = "trimButton";
             this.trimButton.UseVisualStyleBackColor = true;
-            this.trimButton.Click += new System.EventHandler(this.trimButton_Click);
             // 
             // groupBox1
             // 
@@ -181,6 +192,7 @@ namespace XenAdmin.TabPages
             this.pageContainerPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.trimButtonContainer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,7 +215,8 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.Button buttonProperties;
         private System.Windows.Forms.GroupBox groupBox1;
         private XenAdmin.Commands.CommandButton newSRButton;
-        private System.Windows.Forms.Button trimButton;
+        private XenAdmin.Commands.CommandButton trimButton;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private Controls.ToolTipContainer trimButtonContainer;
     }
 }
