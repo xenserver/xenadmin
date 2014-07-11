@@ -33,6 +33,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Linq;
+using System.Collections;
 
 namespace XenAdmin.Core
 {
@@ -149,6 +151,59 @@ namespace XenAdmin.Core
 
         private static readonly Regex IPRegex = new Regex(@"^([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})$");
         private static readonly Regex IPRegex0 = new Regex(@"^([0]{1,3})\.([0]{1,3})\.([0]{1,3})\.([0]{1,3})$");
+
+        /// <summary>
+        /// Validates IPv4 subnet mask string (strict)
+        /// Eg. 255.255.240.0 is valid
+        /// </summary>
+        /// <remarks>
+        /// Logically valid values with trailing zeros will not pass validation
+        /// Eg.  255.255.240.00 will return NOT valid
+        /// </remarks>
+        /// <param name="netmask"></param>
+        /// <returns></returns>
+        public static bool IsValidNetmask(string netmask)
+        {
+            if (netmask == null)
+                return false;
+            
+            var netmaskBytes = new List<byte>();
+            var parts = netmask.Split('.').ToList();
+
+            if (parts.Count != 4 || parts.Any(p => p.Length > 3))
+                return false;
+
+            foreach (var part in parts)
+            {
+                byte byteValue;
+
+                //Converting value to byte if possible. The second check is to make sure that valid, but server side not supported values not get through (eg. 000, 00)
+                if (!byte.TryParse(part, System.Globalization.NumberStyles.None, null, out byteValue) || byteValue.ToString() != part)
+                    return false;
+
+                netmaskBytes.Add(byteValue);
+            }
+
+            var bits = new BitArray(netmaskBytes.ToArray());
+            if (bits.Count != 32)
+                return false;
+
+            bool wasZero = false;
+            for (int octetNo = 0; octetNo < 4; octetNo ++)
+                for (int relPos = 7; relPos >=0 ; relPos --) //less significant bit is on the left
+                {
+                    bool val = bits[octetNo * 8 +  relPos];
+                    
+                    //if there is 1 again and there has been any 0 before, netmask is invalid. All other cases (if we get here) are valid.
+                    if (wasZero && val)
+                        return false;
+
+                    if (!val)
+                        wasZero = true;
+                }
+
+            return true;
+        }
 
         public static bool IsIPAddress(string s)
         {

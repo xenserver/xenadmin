@@ -151,7 +151,7 @@ namespace XenAdmin.Dialogs
                 NetworkComboBox.SelectedIndex != -1 &&
                 (DHCPIPRadioButton.Checked ||
                  ((StringUtility.IsIPAddress(IPAddressTextBox.Text)) &&
-                  StringUtility.IsIPAddress(SubnetTextBox.Text) && IsOptionalIPAddress(GatewayTextBox.Text))) &&
+                  StringUtility.IsValidNetmask(SubnetTextBox.Text) && IsOptionalIPAddress(GatewayTextBox.Text))) &&
                 (type == Type.SECONDARY || ((IsOptionalIPAddress(PreferredDNSTextBox.Text) 
                                             && IsOptionalIPAddress(AlternateDNS1TextBox.Text) 
                                             && IsOptionalIPAddress(AlternateDNS2TextBox.Text))));
