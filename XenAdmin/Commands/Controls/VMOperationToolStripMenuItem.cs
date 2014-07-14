@@ -177,10 +177,9 @@ namespace XenAdmin.Commands
                 MenuText = Messages.HOME_SERVER_MENU_ITEM
             };
 
-            var firstItem = (VMOperationToolStripMenuSubItem)base.DropDownItems[0];
-
             Program.Invoke(Program.MainWindow, delegate
             {
+                var firstItem = (VMOperationToolStripMenuSubItem)base.DropDownItems[0];
 
                 bool oldMigrateToHomeCmdCanRun = cmdHome.CanExecute();
                 if (affinityHost == null || !oldMigrateToHomeCmdCanRun && !cpmCmdHome.CanExecute())
@@ -197,7 +196,7 @@ namespace XenAdmin.Commands
                 {
                     Host host = (Host)item.Tag;
 
-                    string hostNameText = Messages.HOME_SERVER_MENU_ITEM != item.Text.Trim() ? host.Name.EscapeAmpersands() : Messages.HOME_SERVER_MENU_ITEM;
+                    string hostNameText = host.Name.EscapeAmpersands();
       
                     VMOperationCommand cmd = new VMOperationHostCommand(Command.MainWindowCommandInterface, selection, delegate { return host; }, hostNameText, _operation, session);
                     VMOperationCommand cpmCmd = new CrossPoolMigrateCommand(Command.MainWindowCommandInterface, selection, host)
