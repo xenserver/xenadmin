@@ -172,10 +172,7 @@ namespace XenAdmin.Commands
             VMOperationCommand cmdHome = new VMOperationHomeServerCommand(Command.MainWindowCommandInterface, selection, _operation, session);
             
             Host affinityHost = connection.Resolve(((VM)Command.GetSelection()[0].XenObject).affinity);
-            VMOperationCommand cpmCmdHome = new CrossPoolMigrateToHomeCommand(Command.MainWindowCommandInterface, selection, affinityHost)
-            {
-                MenuText = Messages.HOME_SERVER_MENU_ITEM
-            };
+            VMOperationCommand cpmCmdHome = new CrossPoolMigrateToHomeCommand(Command.MainWindowCommandInterface, selection, affinityHost);
 
             Program.Invoke(Program.MainWindow, delegate
             {
