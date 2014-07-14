@@ -168,14 +168,27 @@ namespace XenAdmin.Commands
         {
             SelectedItemCollection selection = Command.GetSelection();
             IXenConnection connection = selection[0].Connection;
-            VMOperationCommand commandForFirstMenuItem = new VMOperationHomeServerCommand(Command.MainWindowCommandInterface, selection, _operation, session);
+
+            VMOperationCommand cmdHome = new VMOperationHomeServerCommand(Command.MainWindowCommandInterface, selection, _operation, session);
+            
+            Host affinityHost = connection.Resolve(((VM)Command.GetSelection()[0].XenObject).affinity);
+            VMOperationCommand cpmCmdHome = new CrossPoolMigrateToHomeCommand(Command.MainWindowCommandInterface, selection, affinityHost)
+            {
+                MenuText = Messages.HOME_SERVER_MENU_ITEM
+            };
+
+            var firstItem = (VMOperationToolStripMenuSubItem)base.DropDownItems[0];
 
             Program.Invoke(Program.MainWindow, delegate
             {
-                VMOperationToolStripMenuSubItem firstItem = (VMOperationToolStripMenuSubItem)base.DropDownItems[0];
-                firstItem.Command = commandForFirstMenuItem;
+
+                bool oldMigrateToHomeCmdCanRun = cmdHome.CanExecute();
+                if (affinityHost == null || !oldMigrateToHomeCmdCanRun && !cpmCmdHome.CanExecute())
+                    firstItem.Command = cmdHome;
+                else
+                    firstItem.Command = oldMigrateToHomeCmdCanRun ? cmdHome : cpmCmdHome;
             });
-            
+
             List<VMOperationToolStripMenuSubItem> dropDownItems = DropDownItems.Cast<VMOperationToolStripMenuSubItem>().ToList();
             
             foreach (VMOperationToolStripMenuSubItem item in dropDownItems)
@@ -184,10 +197,12 @@ namespace XenAdmin.Commands
                 {
                     Host host = (Host)item.Tag;
 
-                    VMOperationCommand cmd = new VMOperationHostCommand(Command.MainWindowCommandInterface, selection, delegate { return host; }, host.Name.EscapeAmpersands(), _operation, session);
+                    string hostNameText = Messages.HOME_SERVER_MENU_ITEM != item.Text.Trim() ? host.Name.EscapeAmpersands() : Messages.HOME_SERVER_MENU_ITEM;
+      
+                    VMOperationCommand cmd = new VMOperationHostCommand(Command.MainWindowCommandInterface, selection, delegate { return host; }, hostNameText, _operation, session);
                     VMOperationCommand cpmCmd = new CrossPoolMigrateCommand(Command.MainWindowCommandInterface, selection, host)
                                                     {
-                                                        MenuText = host.Name.EscapeAmpersands()
+                                                        MenuText = hostNameText
                                                     };
 
                     VMOperationToolStripMenuSubItem tempItem = item;
