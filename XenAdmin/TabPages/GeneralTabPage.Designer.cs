@@ -45,7 +45,7 @@ namespace XenAdmin.TabPages
             this.panelUpdates = new System.Windows.Forms.Panel();
             this.pdSectionUpdates = new XenAdmin.Controls.PDSection();
             this.panelMemoryAndVCPUs = new System.Windows.Forms.Panel();
-            this.pdSectionMemoryAndVCPUs = new XenAdmin.Controls.PDSection();
+            this.pdSectionVCPUs = new XenAdmin.Controls.PDSection();
             this.panelMultipathing = new System.Windows.Forms.Panel();
             this.pdSectionMultipathing = new XenAdmin.Controls.PDSection();
             this.panelStatus = new System.Windows.Forms.Panel();
@@ -115,13 +115,11 @@ namespace XenAdmin.TabPages
             this.panel3.Controls.Add(this.linkLabelExpand);
             this.panel3.Controls.Add(this.linkLabelCollapse);
             resources.ApplyResources(this.panel3, "panel3");
-            this.panel3.MaximumSize = new System.Drawing.Size(900, 28);
             this.panel3.Name = "panel3";
             // 
             // linkLabelExpand
             // 
             resources.ApplyResources(this.linkLabelExpand, "linkLabelExpand");
-            this.linkLabelExpand.MinimumSize = new System.Drawing.Size(65, 28);
             this.linkLabelExpand.Name = "linkLabelExpand";
             this.linkLabelExpand.TabStop = true;
             this.linkLabelExpand.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelExpand_LinkClicked);
@@ -129,7 +127,6 @@ namespace XenAdmin.TabPages
             // linkLabelCollapse
             // 
             resources.ApplyResources(this.linkLabelCollapse, "linkLabelCollapse");
-            this.linkLabelCollapse.MinimumSize = new System.Drawing.Size(76, 28);
             this.linkLabelCollapse.Name = "linkLabelCollapse";
             this.linkLabelCollapse.TabStop = true;
             this.linkLabelCollapse.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelCollapse_LinkClicked);
@@ -165,7 +162,6 @@ namespace XenAdmin.TabPages
             // 
             this.pdSectionStorageLinkSystemCapabilities.BackColor = System.Drawing.Color.Gainsboro;
             resources.ApplyResources(this.pdSectionStorageLinkSystemCapabilities, "pdSectionStorageLinkSystemCapabilities");
-            this.pdSectionStorageLinkSystemCapabilities.MinimumSize = new System.Drawing.Size(0, 34);
             this.pdSectionStorageLinkSystemCapabilities.Name = "pdSectionStorageLinkSystemCapabilities";
             this.pdSectionStorageLinkSystemCapabilities.ShowCellToolTips = false;
             // 
@@ -179,7 +175,6 @@ namespace XenAdmin.TabPages
             // 
             this.pdSectionMultipathBoot.BackColor = System.Drawing.Color.Gainsboro;
             resources.ApplyResources(this.pdSectionMultipathBoot, "pdSectionMultipathBoot");
-            this.pdSectionMultipathBoot.MinimumSize = new System.Drawing.Size(0, 34);
             this.pdSectionMultipathBoot.Name = "pdSectionMultipathBoot";
             this.pdSectionMultipathBoot.ShowCellToolTips = false;
             // 
@@ -193,7 +188,6 @@ namespace XenAdmin.TabPages
             // 
             this.pdStorageLink.BackColor = System.Drawing.Color.Gainsboro;
             resources.ApplyResources(this.pdStorageLink, "pdStorageLink");
-            this.pdStorageLink.MinimumSize = new System.Drawing.Size(0, 34);
             this.pdStorageLink.Name = "pdStorageLink";
             this.pdStorageLink.ShowCellToolTips = false;
             this.pdStorageLink.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
@@ -208,7 +202,6 @@ namespace XenAdmin.TabPages
             // 
             this.pdSectionUpdates.BackColor = System.Drawing.Color.Gainsboro;
             resources.ApplyResources(this.pdSectionUpdates, "pdSectionUpdates");
-            this.pdSectionUpdates.MinimumSize = new System.Drawing.Size(0, 34);
             this.pdSectionUpdates.Name = "pdSectionUpdates";
             this.pdSectionUpdates.ShowCellToolTips = false;
             this.pdSectionUpdates.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
@@ -216,17 +209,16 @@ namespace XenAdmin.TabPages
             // panelMemoryAndVCPUs
             // 
             resources.ApplyResources(this.panelMemoryAndVCPUs, "panelMemoryAndVCPUs");
-            this.panelMemoryAndVCPUs.Controls.Add(this.pdSectionMemoryAndVCPUs);
+            this.panelMemoryAndVCPUs.Controls.Add(this.pdSectionVCPUs);
             this.panelMemoryAndVCPUs.Name = "panelMemoryAndVCPUs";
             // 
-            // pdSectionMemoryAndVCPUs
+            // pdSectionVCPUs
             // 
-            this.pdSectionMemoryAndVCPUs.BackColor = System.Drawing.Color.Gainsboro;
-            resources.ApplyResources(this.pdSectionMemoryAndVCPUs, "pdSectionMemoryAndVCPUs");
-            this.pdSectionMemoryAndVCPUs.MinimumSize = new System.Drawing.Size(0, 34);
-            this.pdSectionMemoryAndVCPUs.Name = "pdSectionMemoryAndVCPUs";
-            this.pdSectionMemoryAndVCPUs.ShowCellToolTips = false;
-            this.pdSectionMemoryAndVCPUs.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
+            this.pdSectionVCPUs.BackColor = System.Drawing.Color.Gainsboro;
+            resources.ApplyResources(this.pdSectionVCPUs, "pdSectionVCPUs");
+            this.pdSectionVCPUs.Name = "pdSectionVCPUs";
+            this.pdSectionVCPUs.ShowCellToolTips = false;
+            this.pdSectionVCPUs.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
             // 
             // panelMultipathing
             // 
@@ -238,7 +230,6 @@ namespace XenAdmin.TabPages
             // 
             this.pdSectionMultipathing.BackColor = System.Drawing.Color.Gainsboro;
             resources.ApplyResources(this.pdSectionMultipathing, "pdSectionMultipathing");
-            this.pdSectionMultipathing.MinimumSize = new System.Drawing.Size(0, 34);
             this.pdSectionMultipathing.Name = "pdSectionMultipathing";
             this.pdSectionMultipathing.ShowCellToolTips = false;
             this.pdSectionMultipathing.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
@@ -253,7 +244,6 @@ namespace XenAdmin.TabPages
             // 
             this.pdSectionStatus.BackColor = System.Drawing.Color.Gainsboro;
             resources.ApplyResources(this.pdSectionStatus, "pdSectionStatus");
-            this.pdSectionStatus.MinimumSize = new System.Drawing.Size(0, 34);
             this.pdSectionStatus.Name = "pdSectionStatus";
             this.pdSectionStatus.ShowCellToolTips = false;
             this.pdSectionStatus.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
@@ -268,7 +258,6 @@ namespace XenAdmin.TabPages
             // 
             this.pdSectionHighAvailability.BackColor = System.Drawing.Color.Gainsboro;
             resources.ApplyResources(this.pdSectionHighAvailability, "pdSectionHighAvailability");
-            this.pdSectionHighAvailability.MinimumSize = new System.Drawing.Size(0, 34);
             this.pdSectionHighAvailability.Name = "pdSectionHighAvailability";
             this.pdSectionHighAvailability.ShowCellToolTips = false;
             this.pdSectionHighAvailability.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
@@ -283,7 +272,6 @@ namespace XenAdmin.TabPages
             // 
             this.pdSectionBootOptions.BackColor = System.Drawing.Color.Gainsboro;
             resources.ApplyResources(this.pdSectionBootOptions, "pdSectionBootOptions");
-            this.pdSectionBootOptions.MinimumSize = new System.Drawing.Size(0, 34);
             this.pdSectionBootOptions.Name = "pdSectionBootOptions";
             this.pdSectionBootOptions.ShowCellToolTips = false;
             this.pdSectionBootOptions.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
@@ -298,7 +286,6 @@ namespace XenAdmin.TabPages
             // 
             this.pdSectionCPU.BackColor = System.Drawing.Color.Gainsboro;
             resources.ApplyResources(this.pdSectionCPU, "pdSectionCPU");
-            this.pdSectionCPU.MinimumSize = new System.Drawing.Size(0, 34);
             this.pdSectionCPU.Name = "pdSectionCPU";
             this.pdSectionCPU.ShowCellToolTips = false;
             this.pdSectionCPU.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
@@ -313,7 +300,6 @@ namespace XenAdmin.TabPages
             // 
             this.pdSectionLicense.BackColor = System.Drawing.Color.Gainsboro;
             resources.ApplyResources(this.pdSectionLicense, "pdSectionLicense");
-            this.pdSectionLicense.MinimumSize = new System.Drawing.Size(0, 34);
             this.pdSectionLicense.Name = "pdSectionLicense";
             this.pdSectionLicense.ShowCellToolTips = false;
             this.pdSectionLicense.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
@@ -328,7 +314,6 @@ namespace XenAdmin.TabPages
             // 
             this.pdSectionVersion.BackColor = System.Drawing.Color.Gainsboro;
             resources.ApplyResources(this.pdSectionVersion, "pdSectionVersion");
-            this.pdSectionVersion.MinimumSize = new System.Drawing.Size(0, 34);
             this.pdSectionVersion.Name = "pdSectionVersion";
             this.pdSectionVersion.ShowCellToolTips = false;
             this.pdSectionVersion.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
@@ -343,7 +328,6 @@ namespace XenAdmin.TabPages
             // 
             this.pdSectionMemory.BackColor = System.Drawing.Color.Gainsboro;
             resources.ApplyResources(this.pdSectionMemory, "pdSectionMemory");
-            this.pdSectionMemory.MinimumSize = new System.Drawing.Size(0, 34);
             this.pdSectionMemory.Name = "pdSectionMemory";
             this.pdSectionMemory.ShowCellToolTips = false;
             this.pdSectionMemory.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
@@ -358,7 +342,6 @@ namespace XenAdmin.TabPages
             // 
             this.pdSectionManagementInterfaces.BackColor = System.Drawing.Color.Gainsboro;
             resources.ApplyResources(this.pdSectionManagementInterfaces, "pdSectionManagementInterfaces");
-            this.pdSectionManagementInterfaces.MinimumSize = new System.Drawing.Size(0, 34);
             this.pdSectionManagementInterfaces.Name = "pdSectionManagementInterfaces";
             this.pdSectionManagementInterfaces.ShowCellToolTips = false;
             this.pdSectionManagementInterfaces.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
@@ -373,7 +356,6 @@ namespace XenAdmin.TabPages
             // 
             this.pdSectionCustomFields.BackColor = System.Drawing.Color.Gainsboro;
             resources.ApplyResources(this.pdSectionCustomFields, "pdSectionCustomFields");
-            this.pdSectionCustomFields.MinimumSize = new System.Drawing.Size(0, 34);
             this.pdSectionCustomFields.Name = "pdSectionCustomFields";
             this.pdSectionCustomFields.ShowCellToolTips = true;
             this.pdSectionCustomFields.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
@@ -388,7 +370,6 @@ namespace XenAdmin.TabPages
             // 
             this.pdSectionGeneral.BackColor = System.Drawing.Color.Gainsboro;
             resources.ApplyResources(this.pdSectionGeneral, "pdSectionGeneral");
-            this.pdSectionGeneral.MinimumSize = new System.Drawing.Size(0, 34);
             this.pdSectionGeneral.Name = "pdSectionGeneral";
             this.pdSectionGeneral.ShowCellToolTips = false;
             this.pdSectionGeneral.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
@@ -434,7 +415,7 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.Panel panelGeneral;
         private XenAdmin.Controls.PDSection pdSectionGeneral;
         private System.Windows.Forms.Panel panelMemoryAndVCPUs;
-        private XenAdmin.Controls.PDSection pdSectionMemoryAndVCPUs;
+        private XenAdmin.Controls.PDSection pdSectionVCPUs;
         private System.Windows.Forms.Panel panelBootOptions;
         private XenAdmin.Controls.PDSection pdSectionBootOptions;
         private System.Windows.Forms.Panel panelMultipathing;
