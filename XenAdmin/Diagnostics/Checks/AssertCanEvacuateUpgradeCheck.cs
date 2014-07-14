@@ -49,7 +49,7 @@ namespace XenAdmin.Diagnostics.Checks
         public override Problem RunCheck()
         {
             if (!Host.IsLive)
-                return new HostNotLive(this, Host);
+                return new HostNotLiveWarning(this, Host);
 
             //vCPU configuration check
             foreach (var vm in Host.Connection.Cache.VMs.Where(vm => vm.is_a_real_vm))

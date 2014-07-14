@@ -30693,6 +30693,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: Check skipped because HA is enabled on pool {1}..
+        /// </summary>
+        public static string UPDATES_WIZARD_HA_ON_WARNING {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_HA_ON_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Click here to exit maintenance mode.
         /// </summary>
         public static string UPDATES_WIZARD_HOST_EXIT_MAINTENANCE_MODE {
@@ -30734,6 +30743,15 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_HOST_NOT_LIVE_TITLE {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_HOST_NOT_LIVE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: Check skipped because the server is unreachable..
+        /// </summary>
+        public static string UPDATES_WIZARD_HOST_NOT_LIVE_WARNING {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_HOST_NOT_LIVE_WARNING", resourceCulture);
             }
         }
         
@@ -31071,6 +31089,15 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_VM_HAS_VGPU {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_VM_HAS_VGPU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: Check skipped because WLB is enabled on pool {1}..
+        /// </summary>
+        public static string UPDATES_WIZARD_WLB_ON_WARNING {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_WLB_ON_WARNING", resourceCulture);
             }
         }
         
