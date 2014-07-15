@@ -50,7 +50,7 @@ namespace XenAdmin.Diagnostics.Checks
         public override Problem RunCheck()
         {
             if (!Host.IsLive)
-                return new HostNotLive(this, Host);
+                return new HostNotLiveWarning(this, Host);
 
             if (Helpers.SanibelOrGreater(Host) && !Helpers.CreedenceOrGreater(Host)
                 && hotfixFactory.Hotfix(HotfixFactory.HotfixableServerVersion.SanibelToClearwater).ShouldBeAppliedTo(Host))
