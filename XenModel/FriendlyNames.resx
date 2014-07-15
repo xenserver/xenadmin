@@ -1688,4 +1688,10 @@
   <data name="Message.name-UnsupportedSRForTrim" xml:space="preserve">
     <value>Reclaiming freed space not supported on this SR</value>
   </data>
+  <data name="Description-host.system_status-xcp-rrdd-plugins" xml:space="preserve">
+    <value>Log file from the RRD daemon</value>
+  </data>
+  <data name="Label-host.system_status-xcp-rrdd-plugins" xml:space="preserve">
+    <value>RRD plugin logs</value>
+  </data>
 </root>
