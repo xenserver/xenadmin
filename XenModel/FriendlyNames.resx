@@ -1688,4 +1688,7 @@
   <data name="Message.name-UnsupportedSRForTrim" xml:space="preserve">
     <value>Reclaiming freed space not supported on this SR</value>
   </data>
+  <data name="Label-VM.Topology" xml:space="preserve">
+    <value>Topology</value>
+  </data>
 </root>

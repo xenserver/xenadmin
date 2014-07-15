@@ -131,15 +131,7 @@ namespace XenAdmin.Controls
 
         public override string ToString()
         {
-            if (Sockets == 0) // invalid cores value
-                return string.Format(Messages.CPU_TOPOLOGY_STRING_INVALID_VALUE, Cores);
-            if (Sockets == 1 && Cores == 1)
-                return Messages.CPU_TOPOLOGY_STRING_1_SOCKET_1_CORE;
-            if (Sockets == 1)
-                return string.Format(Messages.CPU_TOPOLOGY_STRING_1_SOCKET_N_CORE, Cores);
-            if (Cores == 1)
-                return string.Format(Messages.CPU_TOPOLOGY_STRING_N_SOCKET_1_CORE, Sockets);
-            return string.Format(Messages.CPU_TOPOLOGY_STRING_N_SOCKET_N_CORE, Sockets, Cores);
+            return VM.GetTopology(Sockets, Cores);
         }
     }
 }
