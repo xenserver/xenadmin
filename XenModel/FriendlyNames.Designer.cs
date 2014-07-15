@@ -2851,6 +2851,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Topology.
+        /// </summary>
+        public static string Label_VM_Topology {
+            get {
+                return ResourceManager.GetString("Label-VM.Topology", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Time since startup.
         /// </summary>
         public static string Label_VM_uptime {

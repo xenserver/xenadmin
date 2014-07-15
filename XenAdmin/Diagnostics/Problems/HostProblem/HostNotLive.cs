@@ -74,4 +74,28 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             return canStartHost;
         }
     }
+
+    class HostNotLiveWarning : Warning
+    {
+        private readonly Host host;
+
+        public HostNotLiveWarning(Check check, Host host)
+            : base(check)
+        {
+            this.host = host;
+        }
+
+        public override string Title
+        {
+            get { return Check.Description; }
+        }
+
+        public override string Description
+        {
+            get
+            {
+                return string.Format(Messages.UPDATES_WIZARD_HOST_NOT_LIVE_WARNING, host);
+            }
+        }
+    }
 }

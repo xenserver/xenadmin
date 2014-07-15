@@ -74,4 +74,30 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
 
         }
     }
+
+    class WLBEnabledWarning : Warning
+    {
+        private readonly Pool pool;
+        private readonly Host host;
+
+        public WLBEnabledWarning(Check check, Pool pool, Host host)
+            : base(check)
+        {
+            this.pool = pool;
+            this.host = host;
+        }
+
+        public override string Title
+        {
+            get { return Check.Description; }
+        }
+
+        public override string Description
+        {
+            get
+            {
+                return string.Format(Messages.UPDATES_WIZARD_WLB_ON_WARNING, host, pool);
+            }
+        }
+    }
 }

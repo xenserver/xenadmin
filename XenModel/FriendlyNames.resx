@@ -1694,4 +1694,7 @@
   <data name="Label-host.system_status-xcp-rrdd-plugins" xml:space="preserve">
     <value>RRD plugin logs</value>
   </data>
+  <data name="Label-VM.Topology" xml:space="preserve">
+    <value>Topology</value>
+  </data>
 </root>

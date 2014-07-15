@@ -48,6 +48,9 @@ namespace XenAdmin.Diagnostics.Checks
 
         public override Problem RunCheck()
         {
+            if (!Host.IsLive)
+                return new HostNotLiveWarning(this, Host);
+
             foreach (var sr in Host.Connection.Cache.SRs.Where(sr => sr.GetSRType(true) == SR.SRTypes.cslg))
             {
                 return new UnsupportedStorageLinkSrIsPresentProblem(this, sr);

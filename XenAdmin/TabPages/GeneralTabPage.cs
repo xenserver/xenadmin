@@ -454,6 +454,7 @@ namespace XenAdmin.TabPages
                 generateStorageLinkBox();
                 generateStorageLinkSystemCapabilitiesBox();
                 generateMultipathBootBox();
+                generateVCPUsBox();
             }
 
             // hide all the sections which haven't been populated, those that have make sure are visible
@@ -1037,7 +1038,17 @@ namespace XenAdmin.TabPages
             }
         }
 
+        private void generateVCPUsBox()
+        {
+            VM vm = xenObject as VM;
+            if (vm == null)
+                return;
 
+            PDSection s = pdSectionVCPUs; 
+            
+            s.AddEntry(FriendlyName("VM.VCPUs"), vm.VCPUs_at_startup.ToString());
+            s.AddEntry(FriendlyName("VM.Topology"), vm.Topology);
+        }
 
         private void generateDisconnectedHostBox()
         {

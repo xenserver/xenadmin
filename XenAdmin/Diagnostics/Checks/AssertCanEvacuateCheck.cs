@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using XenAdmin.Diagnostics.Problems.PoolProblem;
 using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.Diagnostics.Problems;
@@ -211,7 +212,17 @@ namespace XenAdmin.Diagnostics.Checks
         public override Problem RunCheck()
         {
             if (!Host.IsLive)
-                return new HostNotLive(this, Host);
+                return new HostNotLiveWarning(this, Host);
+
+            Pool pool = Helpers.GetPool(Host.Connection);
+            if (pool != null)
+            {
+                if (pool.ha_enabled)
+                    return new HAEnabledWarning(this, pool, Host);
+
+                if (Helpers.WlbEnabled(pool.Connection))
+                    return new WLBEnabledWarning(this, pool, Host);
+            }
             return CheckHost();
         }
 

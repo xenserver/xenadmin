@@ -51,7 +51,7 @@ namespace XenAdmin.Diagnostics.Checks
         public override Problem RunCheck()
         {
             if (!Host.IsLive)
-                return new HostNotLive(this, Host);
+                return new HostNotLiveWarning(this, Host);
 
             IEnumerable<VM> runningOrPausedVMs = GetRunningOrPausedVMs(Host);
             IEnumerable<SR> brokenSRs = PBD.GetSRs(PBD.GetUnpluggedPBDsFor(runningOrPausedVMs));

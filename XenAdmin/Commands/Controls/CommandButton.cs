@@ -35,6 +35,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.ComponentModel;
 using System.Drawing.Design;
+using XenAdmin.Controls;
 
 namespace XenAdmin.Commands
 {
@@ -93,6 +94,9 @@ namespace XenAdmin.Commands
                 {
                     Text = _command.ButtonText;
                 }
+
+                if (Parent is ToolTipContainer)
+                    (Parent as ToolTipContainer).SetToolTip(_command.ToolTipText);
             }
         }
 
