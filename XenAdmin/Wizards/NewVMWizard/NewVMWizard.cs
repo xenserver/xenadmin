@@ -214,7 +214,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 if (page_1_Template.CopyBiosStrings)
                 {
                     // insert after template page
-                    AddPage(page_1b_BiosLocking, 1);
+                    AddAfterPage(page_1_Template, page_1b_BiosLocking);
 
                     page_4_HomeServer.DisableStep = selectedTemplate.DefaultTemplate;
                 }
