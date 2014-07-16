@@ -10376,6 +10376,9 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="TOOLTIP_SR_TRIM_UNSUPPORTED" xml:space="preserve">
     <value>Reclaiming freed space not supported on this SR</value>
   </data>
+  <data name="TOOLTIP_SR_TRIM_UNSUPPORTED_MULTIPLE" xml:space="preserve">
+    <value>Reclaiming freed space not supported on these SRs</value>
+  </data>
   <data name="TREESEARCHBOX_DROPDOWN_TOOLTIP" xml:space="preserve">
     <value>Views and Saved Searches</value>
   </data>
