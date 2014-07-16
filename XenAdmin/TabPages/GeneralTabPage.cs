@@ -1047,6 +1047,8 @@ namespace XenAdmin.TabPages
             PDSection s = pdSectionVCPUs; 
             
             s.AddEntry(FriendlyName("VM.VCPUs"), vm.VCPUs_at_startup.ToString());
+            if (vm.VCPUs_at_startup != vm.VCPUs_max)
+                s.AddEntry(FriendlyName("VM.MaxVCPUs"), vm.VCPUs_max.ToString());
             s.AddEntry(FriendlyName("VM.Topology"), vm.Topology);
         }
 
