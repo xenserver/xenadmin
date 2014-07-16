@@ -9298,6 +9298,9 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   <data name="RUNNING_SNAPSHOTS" xml:space="preserve">
     <value>Taking snapshots</value>
   </data>
+  <data name="RUN_MORE_REPORT" xml:space="preserve">
+    <value>&amp;More</value>
+  </data>
   <data name="RUN_POLICY" xml:space="preserve">
     <value>Running policy '{0}'</value>
   </data>
@@ -9306,6 +9309,9 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   </data>
   <data name="RUN_PRECHECKS_WITH_ACCESS_KEY" xml:space="preserve">
     <value>&amp;Run Prechecks</value>
+  </data>
+  <data name="RUN_REPORT" xml:space="preserve">
+    <value>&amp;Run Report</value>
   </data>
   <data name="SATURDAY_LONG" xml:space="preserve">
     <value>Saturday</value>
@@ -11459,6 +11465,15 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="WLB_ADVANCED_CONFIGURATION_SUBTEXT" xml:space="preserve">
     <value />
   </data>
+  <data name="WLB_AUDIT_LOG_MAXIMUM" xml:space="preserve">
+    <value>Maximum</value>
+  </data>
+  <data name="WLB_AUDIT_LOG_MINIMUM" xml:space="preserve">
+    <value>Minimum</value>
+  </data>
+  <data name="WLB_AUDIT_LOG_NORMAL" xml:space="preserve">
+    <value>Normal</value>
+  </data>
   <data name="WLB_AUTOMATION" xml:space="preserve">
     <value>Automation</value>
   </data>
@@ -11623,6 +11638,9 @@ A {1} user cannot alter the Workload Balancing settings.</value>
   </data>
   <data name="WLB_METRIC_WEIGHTING_SUBTEXT" xml:space="preserve">
     <value>Adjust the weighting of WLB metrics</value>
+  </data>
+  <data name="WLB_MORE_REPORT_BANNER" xml:space="preserve">
+    <value>Please click "More" for more report contents</value>
   </data>
   <data name="WLB_NEXT_OPT_MODE_SCHEDULE_FORMAT" xml:space="preserve">
     <value>{0} at {1}</value>

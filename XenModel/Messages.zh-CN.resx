@@ -9045,6 +9045,9 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="RUNNING_SNAPSHOTS" xml:space="preserve">
     <value>正在生成快照</value>
   </data>
+  <data name="RUN_MORE_REPORT" xml:space="preserve">
+    <value>更多报告(&amp;M)</value>
+  </data>
   <data name="RUN_POLICY" xml:space="preserve">
     <value>正在运行策略“{0}”</value>
   </data>
@@ -9053,6 +9056,9 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="RUN_PRECHECKS_WITH_ACCESS_KEY" xml:space="preserve">
     <value>运行预检查(&amp;R)</value>
+  </data>
+  <data name="RUN_REPORT" xml:space="preserve">
+    <value>运行报告(&amp;R)</value>
   </data>
   <data name="SATURDAY_LONG" xml:space="preserve">
     <value>星期六</value>
@@ -11083,6 +11089,15 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="WLB_ADVANCED_CONFIGURATION_SUBTEXT" xml:space="preserve">
     <value />
   </data>
+  <data name="WLB_AUDIT_LOG_MAXIMUM" xml:space="preserve">
+    <value>最大</value>
+  </data>
+  <data name="WLB_AUDIT_LOG_MINIMUM" xml:space="preserve">
+    <value>最小</value>
+  </data>
+  <data name="WLB_AUDIT_LOG_NORMAL" xml:space="preserve">
+    <value>常规</value>
+  </data>
   <data name="WLB_AUTOMATION" xml:space="preserve">
     <value>自动化</value>
   </data>
@@ -11247,6 +11262,9 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="WLB_METRIC_WEIGHTING_SUBTEXT" xml:space="preserve">
     <value>调整 WLB 指标的加权</value>
+  </data>
+  <data name="WLB_MORE_REPORT_BANNER" xml:space="preserve">
+    <value>请点击“更多报告”获取更多报告内容</value>
   </data>
   <data name="WLB_NEXT_OPT_MODE_SCHEDULE_FORMAT" xml:space="preserve">
     <value>{0} {1}</value>

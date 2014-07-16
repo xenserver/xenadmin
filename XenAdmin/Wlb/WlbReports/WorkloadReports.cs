@@ -31,11 +31,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using System.Web;
 using XenAdmin.Controls;
 using XenAPI;
 using XenAdmin.Core;
@@ -66,6 +68,7 @@ namespace XenAdmin
         private bool _runReport;
         private bool _isMROrLater; // this can be used throughout the page to control feature availability
         private bool _isBostonOrLater;
+        private bool _isCreedenceOrLater;
 
         private List<string> _midnightRideReports = new List<string>(new [] 
                                                                     { 
@@ -157,6 +160,7 @@ namespace XenAdmin
                     this.wlbReportView1.btnSubscribe.Visible = false;
                 }
 
+                this.wlbReportView1.IsCreedenceOrLater = _isCreedenceOrLater;
                 PopulateTreeView();
             }
             catch (XenAdmin.CancelledException xc)
@@ -406,6 +410,7 @@ namespace XenAdmin
                 poolConfiguration = new WlbPoolConfiguration(action.WlbConfiguration);
                 _isMROrLater = poolConfiguration.IsMROrLater;
                 _isBostonOrLater = poolConfiguration.IsBostonOrLater;
+                _isCreedenceOrLater = poolConfiguration.IsCreedenceOrLater;
 
                 if (_isMROrLater && !_isBostonOrLater)
                 {
@@ -523,6 +528,11 @@ namespace XenAdmin
             // Parameters
             Dictionary<string, string> parms = new Dictionary<string, string>();
             parms.Add("LocaleCode", Program.CurrentLanguage);
+            if (_isCreedenceOrLater)
+            {
+                parms.Add("ReportVersion", "Creedence");
+                parms.Add("PoolId", _pool.uuid);
+            }
 
             AsyncAction action = new WlbReportAction(_pool.Connection,
                                                 Helpers.GetMaster(_pool.Connection),
@@ -559,6 +569,91 @@ namespace XenAdmin
             return xmlReportsDoc;
         }
 
+        // To enhance pool audit trail report, WLB server updates RDLC and would send user and object lists.
+        // These values are sent along with parameter keys "AuditUser", "AuditObject".
+        // The GetCustomXmlElement functions are used to retrieve the parameter values from WLB server.
+        private static XmlElement GetCustomXmlElement(XmlElement root)
+        {
+            XmlNodeList labelNodes = root.GetElementsByTagName("Custom");
+            if (labelNodes != null && labelNodes.Count > 0)
+            {
+                string xmlCustom = labelNodes[0].InnerXml;
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.LoadXml("<root>" + xmlCustom + "</root>");
+                return xmlDoc.DocumentElement;
+            }
+            else
+            {
+                XmlDocument xmlDoc = new XmlDocument();
+                string searchStart = "Function Custom() As String";
+                string searchEnd = "\nEnd Function";
+                string xmlDocString = root.InnerXml;
+                int startPos = xmlDocString.IndexOf(searchStart, 0);
+                if (startPos > -1)
+                {
+                    int endPos = xmlDocString.IndexOf(searchEnd, startPos);
+                    string customString = xmlDocString.Substring(startPos + searchStart.Length, endPos - startPos - searchStart.Length);
+                    customString = customString.Trim().Substring("Return".Length).Trim().Trim("\"".ToCharArray());
+                    customString = HttpUtility.HtmlDecode(customString);
+                    xmlDoc.LoadXml(customString);
+                    return xmlDoc.DocumentElement;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        private static XmlElement GetCustomXmlElement(XmlNode root)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml("<root>" + root.InnerXml + "</root>");
+            return GetCustomXmlElement(xmlDoc.DocumentElement);
+        }
+
+        private static XmlElement GetCustomXmlElement(XmlElement root, string version)
+        {
+            XmlElement customXml = GetCustomXmlElement(root);
+            if (customXml != null)
+            {
+                XmlNodeList versionNodes = customXml.GetElementsByTagName("Version");
+                foreach (XmlNode thisNode in versionNodes)
+                {
+                    if (thisNode.Attributes["value"].Value == version)
+                    {
+                        XmlDocument thisDoc = new XmlDocument();
+                        thisDoc.LoadXml("<root>" + thisNode.InnerXml + "</root>");
+                        return thisDoc.DocumentElement;
+                    }
+                }
+            }
+            return null;
+        }
+
+        private static XmlElement GetCustomXmlElement(XmlElement root, string version, string tagName)
+        {
+            XmlElement customXml = GetCustomXmlElement(root, version);
+            if (customXml != null)
+            {
+                XmlNodeList tagNodes = customXml.GetElementsByTagName(tagName);
+                if (tagNodes != null && tagNodes.Count > 0)
+                {
+                    XmlDocument thisDoc = new XmlDocument();
+                    thisDoc.LoadXml("<root>" + tagNodes[0].InnerXml + "</root>");
+                    return thisDoc.DocumentElement;
+                }
+            }
+            return null;
+        }
+
+        private static XmlElement GetCustomXmlElement(XmlNode root, string version, string tagName)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml("<root>" + root.InnerXml + "</root>");
+            return GetCustomXmlElement(xmlDoc.DocumentElement, version, tagName);
+        }
+
 
         /// <summary>
         /// Creates a node of type ReportTreeNode based on information specified from the XML report 
@@ -573,11 +668,15 @@ namespace XenAdmin
             string nodeReportDefinition;
             bool nodeDisplayHosts;
             bool nodeDisplayFilter;
-            List<string> nodeParamList;
+            bool nodeDisplayUsers;
+            bool nodeDisplayAuditObjects;
+            OrderedDictionary nodeParamDict;
             WlbReportInfo reportInfo;
             TreeNode reportTreeNode;
 
             nodeFileName = currentNode.Attributes["File"].Value;
+
+            XmlElement queryParametersXmlElement = GetCustomXmlElement(currentNode, "Creedence", "QueryParameters");
 
             // If the report definition node doesn't exist (old WLB version), load the definition from the 
             // local file system.  Otherwise, the definition is present in the config from the WLB server
@@ -631,9 +730,28 @@ namespace XenAdmin
                 nodeDisplayHosts = true;
             }
 
+            // Boolean variable to determine the display of the User drop down menu
+            if (currentNode.SelectSingleNode(@"QueryParameters/QueryParameter[@Name='AuditUser']") == null)
+            {
+                nodeDisplayUsers = false;
+            }
+            else
+            {
+                nodeDisplayUsers = true;
+            }
+
+            // Boolean variable to determine the display of the Object drop down menu
+            if (currentNode.SelectSingleNode(@"QueryParameters/QueryParameter[@Name='AuditObject']") == null)
+            {
+                nodeDisplayAuditObjects = false;
+            }
+            else
+            {
+                nodeDisplayAuditObjects = true;
+            }
 
             // Get a list of query params
-            nodeParamList = GetSQLQueryParamNames(currentNode);
+            nodeParamDict = GetSQLQueryParamNames(currentNode, queryParametersXmlElement);
 
             // Create a report node and add it to the treeview for the current report
             reportInfo = new WlbReportInfo(nodeNameLabel,
@@ -641,7 +759,9 @@ namespace XenAdmin
                                            nodeReportDefinition,
                                            nodeDisplayHosts,
                                            nodeDisplayFilter,
-                                           nodeParamList);
+                                           nodeDisplayUsers,
+                                           nodeDisplayAuditObjects,
+                                           nodeParamDict);
 
             reportTreeNode = new TreeNode();
             reportTreeNode.Tag = reportInfo;
@@ -677,17 +797,38 @@ namespace XenAdmin
         /// to execute.  These names are specified in the Report XML configuration file.
         /// </summary>
         /// <param name="currentNode">Current report XML node from config file</param>
-        /// <returns>List of parameter names whose values are required by the report SQL query</returns>
-        private List<string> GetSQLQueryParamNames(XmlNode currentNode)
+        /// <param name="queryParametersXmlElement">Current report XML node from config file</param>
+        /// <returns>OrderedDictionary of parameter names and contents whose values are required by the report SQL query</returns>
+        private OrderedDictionary GetSQLQueryParamNames(XmlNode currentNode, XmlElement queryParametersXmlElement)
         {
-            List<string> paramNames = new List<string>();
+            OrderedDictionary paramNames = new OrderedDictionary();
             XmlNodeList paramNameNodes = currentNode.SelectNodes("QueryParameters/QueryParameter");
 
             foreach (XmlNode paramNode in paramNameNodes)
             {
                 if (paramNode.Attributes["Name"] != null)
                 {
-                    paramNames.Add(paramNode.Attributes["Name"].Value);
+                    string value = paramNode.Attributes["Name"].Value;
+                    // To implement the AuditUser and AuditObject dropdowns, the values are set
+                    // along with parameter "AuditUser' and "AuditObject" from WLB server.
+                    // If the query parameters contain values, store them in dictionary.
+                    // Else just store the parameter as key with "" value.
+                    if(_isCreedenceOrLater && queryParametersXmlElement != null)
+                    {
+                        XmlNodeList valueTagNodes = queryParametersXmlElement.GetElementsByTagName(value);
+                        if (valueTagNodes != null && valueTagNodes.Count > 0)
+                        {
+                            paramNames.Add(value, valueTagNodes[0].InnerText);
+                        }
+                        else
+                        {
+                            paramNames.Add(value, "");
+                        }
+                    }
+                    else
+                    {
+                        paramNames.Add(value, "");
+                    }
                 }
             }
 

@@ -128,6 +128,151 @@
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
+  <data name="labelAuditTrail.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelAuditTrail.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelAuditTrail.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="labelAuditTrail.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 522</value>
+  </data>
+  <data name="labelAuditTrail.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>15, 0, 4, 4</value>
+  </data>
+  <data name="labelAuditTrail.Size" type="System.Drawing.Size, System.Drawing">
+    <value>632, 17</value>
+  </data>
+  <data name="labelAuditTrail.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="labelAuditTrail.Text" xml:space="preserve">
+    <value>Select pool audit trail report granularity. Warning: Enabling Maximum would occupy more disk space and memory on WLB server.</value>
+  </data>
+  <data name="&gt;&gt;labelAuditTrail.Name" xml:space="preserve">
+    <value>labelAuditTrail</value>
+  </data>
+  <data name="&gt;&gt;labelAuditTrail.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelAuditTrail.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;labelAuditTrail.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="sectionHeaderLabelAuditTrail.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="comboBoxPoolAuditTrailLevel.Items" xml:space="preserve">
+    <value>Minimum</value>
+  </data>
+  <data name="comboBoxPoolAuditTrailLevel.Items1" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="comboBoxPoolAuditTrailLevel.Items2" xml:space="preserve">
+    <value>Maximum</value>
+  </data>
+  <data name="comboBoxPoolAuditTrailLevel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>48, 3</value>
+  </data>
+  <data name="comboBoxPoolAuditTrailLevel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 21</value>
+  </data>
+  <data name="comboBoxPoolAuditTrailLevel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;comboBoxPoolAuditTrailLevel.Name" xml:space="preserve">
+    <value>comboBoxPoolAuditTrailLevel</value>
+  </data>
+  <data name="&gt;&gt;comboBoxPoolAuditTrailLevel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxPoolAuditTrailLevel.Parent" xml:space="preserve">
+    <value>auditTrailPanel</value>
+  </data>
+  <data name="&gt;&gt;comboBoxPoolAuditTrailLevel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="sectionHeaderLabelAuditTrail.LabelHorizontalAlignment" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="sectionHeaderLabelAuditTrail.LabelPadding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="sectionHeaderLabelAuditTrail.LabelText" xml:space="preserve">
+    <value>&amp;Pool Audit Trail Report Granularity</value>
+  </data>
+  <data name="sectionHeaderLabelAuditTrail.LinePadding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="sectionHeaderLabelAuditTrail.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 505</value>
+  </data>
+  <data name="sectionHeaderLabelAuditTrail.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 14</value>
+  </data>
+  <data name="sectionHeaderLabelAuditTrail.Size" type="System.Drawing.Size, System.Drawing">
+    <value>632, 14</value>
+  </data>
+  <data name="sectionHeaderLabelAuditTrail.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="sectionHeaderLabelAuditTrail.UseMnemonic" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;sectionHeaderLabelAuditTrail.Name" xml:space="preserve">
+    <value>sectionHeaderLabelAuditTrail</value>
+  </data>
+  <data name="&gt;&gt;sectionHeaderLabelAuditTrail.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.SectionHeaderLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;sectionHeaderLabelAuditTrail.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;sectionHeaderLabelAuditTrail.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 479</value>
+  </data>
+  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 10</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>638, 13</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Specify advanced settings for pool audit trail report.</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="sectionHeaderLabelRepSub.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1365,6 +1510,63 @@
   <data name="&gt;&gt;panelRepSub.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
+  <data name="poolAuditTrailNote.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="poolAuditTrailNote.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="poolAuditTrailNote.Location" type="System.Drawing.Point, System.Drawing">
+    <value>186, 0</value>
+  </data>
+  <data name="poolAuditTrailNote.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 0, 0</value>
+  </data>
+  <data name="poolAuditTrailNote.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 18</value>
+  </data>
+  <data name="poolAuditTrailNote.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="poolAuditTrailNote.Text" xml:space="preserve">
+    <value>(Default is Minimum)</value>
+  </data>
+  <data name="&gt;&gt;poolAuditTrailNote.Name" xml:space="preserve">
+    <value>poolAuditTrailNote</value>
+  </data>
+  <data name="&gt;&gt;poolAuditTrailNote.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;poolAuditTrailNote.Parent" xml:space="preserve">
+    <value>auditTrailPanel</value>
+  </data>
+  <data name="&gt;&gt;poolAuditTrailNote.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="auditTrailPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 542</value>
+  </data>
+  <data name="auditTrailPanel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>45, 0, 0, 0</value>
+  </data>
+  <data name="auditTrailPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>632, 29</value>
+  </data>
+  <data name="auditTrailPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="&gt;&gt;auditTrailPanel.Name" xml:space="preserve">
+    <value>auditTrailPanel</value>
+  </data>
+  <data name="&gt;&gt;auditTrailPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;auditTrailPanel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;auditTrailPanel.ZOrder" xml:space="preserve">
+    <value>22</value>
+  </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -1393,7 +1595,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="sectionHeaderLabelRepSub" Row="16" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelHistData" Row="13" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelOptAgr" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelOptAgr" Row="11" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelHistData" Row="14" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelRecSev" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelRepSub" Row="17" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelVmMigInt" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelVmMigInt" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelRecSev" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelVmMigInt" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelRecCnt" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelRecCnt" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelRecCnt" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelRecSev" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelOptAgr" Row="12" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelHistData" Row="15" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelRepSub" Row="18" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelAuditTrail" Row="21" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelAuditTrail" Row="20" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="19" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelRepSub" Row="16" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelHistData" Row="13" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelOptAgr" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelOptAgr" Row="11" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelHistData" Row="14" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelRecSev" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelRepSub" Row="17" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelVmMigInt" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelVmMigInt" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelRecSev" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelVmMigInt" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelRecCnt" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelRecCnt" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelRecCnt" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelRecSev" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelOptAgr" Row="12" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelHistData" Row="15" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelRepSub" Row="18" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="auditTrailPanel" Row="22" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1402,7 +1604,7 @@
     <value>96, 96</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>638, 560</value>
+    <value>638, 571</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>WlbAdvancedSettingsPage</value>

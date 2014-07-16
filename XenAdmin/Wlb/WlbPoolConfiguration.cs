@@ -60,6 +60,14 @@ namespace XenAdmin.Wlb
         Medium,
         High
     }
+
+    public enum WlbAuditTrailLogGranularity
+    {
+        Minimum,
+        Normal,
+        Maximum
+    }
+
 #endregion
 
     public class WlbPoolConfiguration : WlbConfigurationBase
@@ -75,7 +83,8 @@ namespace XenAdmin.Wlb
         private const int WlbVersion_Minor_Boston = 0;
         private const int WlbVersion_Major_Tampa = 6;
         private const int WlbVersion_Minor_Tampa = 1;
-
+        private const int WlbVersion_Major_Creedence = 6;
+        private const int WlbVersion_Minor_Creedence = 5;
 
 #endregion
 
@@ -421,6 +430,23 @@ namespace XenAdmin.Wlb
                     SetConfigValueString("AutoBalanceAggressiveness", value.ToString());
                 }
             }
+        }
+
+        public WlbAuditTrailLogGranularity PoolAuditGranularity
+        {
+            get { return (WlbAuditTrailLogGranularity)Enum.Parse(typeof(WlbAuditTrailLogGranularity), GetConfigValueString("PoolAuditLogGranularity")); }
+            set
+            {
+                if (IsCreedenceOrLater)
+                {
+                    SetConfigValueString("PoolAuditLogGranularity", value.ToString());
+                }
+            }
+        }
+
+        public bool IsCreedenceOrLater
+        {
+            get { return ((this.WlbMajorVersion >= WlbVersion_Major_Creedence) && (this.WlbMinorVersion >= WlbVersion_Minor_Creedence)); }
         }
 
         public bool IsTampaOrLater
