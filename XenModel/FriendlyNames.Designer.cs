@@ -412,7 +412,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Log file from the RRD daemon.
+        ///   Looks up a localized string similar to Log files from the RRD daemon.
         /// </summary>
         public static string Description_host_system_status_xcp_rrdd_plugins {
             get {
