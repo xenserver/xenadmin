@@ -1697,4 +1697,7 @@
   <data name="Label-VM.Topology" xml:space="preserve">
     <value>Topology</value>
   </data>
+  <data name="Label-VM.MaxVCPUs" xml:space="preserve">
+    <value>Max number of vCPUs</value>
+  </data>
 </root>
