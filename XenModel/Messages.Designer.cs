@@ -29957,6 +29957,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reclaiming freed space not supported on these SRs.
+        /// </summary>
+        public static string TOOLTIP_SR_TRIM_UNSUPPORTED_MULTIPLE {
+            get {
+                return ResourceManager.GetString("TOOLTIP_SR_TRIM_UNSUPPORTED_MULTIPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Views and Saved Searches.
         /// </summary>
         public static string TREESEARCHBOX_DROPDOWN_TOOLTIP {
