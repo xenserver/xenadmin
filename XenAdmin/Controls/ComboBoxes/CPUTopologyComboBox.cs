@@ -85,7 +85,7 @@ namespace XenAdmin.Controls
         private static List<TopologyTuple> GetTopologies(long noOfVCPUs, long maxNoOfCoresPerSocket)
         {
             var result = new List<TopologyTuple>();
-            var maxCoresPerSocket = Math.Min(noOfVCPUs, maxNoOfCoresPerSocket);
+            var maxCoresPerSocket = maxNoOfCoresPerSocket > 0 ? Math.Min(noOfVCPUs, maxNoOfCoresPerSocket) : noOfVCPUs;
             for (var cores = 1; cores <= maxCoresPerSocket; cores++)
             {
                 if (noOfVCPUs % cores == 0)
