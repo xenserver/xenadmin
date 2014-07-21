@@ -91,7 +91,7 @@ namespace XenAdmin.Actions
 
             PercentComplete = 100;
             Description = endDescription;
-            if (exceptions.Count > 0)
+            if (exceptions.Count > 1)
             {
                 foreach (Exception e in exceptions)
                     log.Error(e);
