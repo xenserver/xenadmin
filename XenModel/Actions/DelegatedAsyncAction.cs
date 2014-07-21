@@ -66,7 +66,13 @@ namespace XenAdmin.Actions
 
         public DelegatedAsyncAction(IXenConnection connection, string title, string startDescription, string endDescription,
             Action<Session> invoker, params string[] rbacMethods)
-            : this(connection, title, startDescription, endDescription, invoker)
+            : this(connection, title, startDescription, endDescription, invoker, false, rbacMethods)
+        {
+        }
+
+        public DelegatedAsyncAction(IXenConnection connection, string title, string startDescription, string endDescription,
+            Action<Session> invoker, bool suppressHistory, params string[] rbacMethods)
+            : this(connection, title, startDescription, endDescription, invoker, suppressHistory)
         {
             ApiMethodsToRoleCheck = new RbacMethodList(rbacMethods);
         }

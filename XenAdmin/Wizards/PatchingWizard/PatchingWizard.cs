@@ -205,7 +205,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (subActions.Count > 0)
             {
                 using (MultipleAction multipleAction = new MultipleAction(xenConnection, title, startDescription,
-                                                                          endDescription, subActions, true))
+                                                                          endDescription, subActions, false, true))
                 {
                     ActionProgressDialog dialog = new ActionProgressDialog(multipleAction, ProgressBarStyle.Blocks);
                     dialog.ShowDialog(Program.MainWindow);

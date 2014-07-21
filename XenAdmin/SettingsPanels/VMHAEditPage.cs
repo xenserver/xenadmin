@@ -567,11 +567,11 @@ namespace XenAdmin.SettingsPanels
             if (ChangesMadeInHA() && PoolHasHAEnabled)
             {
                 settings[vm] = new VMStartupOptions((long) nudOrder.Value, (long) nudStartDelay.Value, SelectedPriority);
-                return new SetHaPrioritiesAction(vm.Connection, settings, haNtolIndicator.Ntol);
+                return new SetHaPrioritiesAction(vm.Connection, settings, haNtolIndicator.Ntol, true);
             }
 
             settings[vm] = new VMStartupOptions((long)nudOrder.Value, (long)nudStartDelay.Value);
-            return new SetVMStartupOptionsAction(vm.Connection, settings);
+            return new SetVMStartupOptionsAction(vm.Connection, settings, true);
 		}
 
 		#endregion

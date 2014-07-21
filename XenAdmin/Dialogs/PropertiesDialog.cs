@@ -333,7 +333,7 @@ namespace XenAdmin.Dialogs
 
             // Add a save changes on the beginning of the actions to enact the alterations that were just changes to the xenObjectCopy.
             // Must come first because some pages' SaveChanges() rely on modifying the object via the xenObjectCopy before their actions are run.
-            actions.Insert(0, new SaveChangesAction(xenObjectCopy, xenObjectBefore));
+            actions.Insert(0, new SaveChangesAction(xenObjectCopy, xenObjectBefore, true));
 
             _action = new MultipleAction(
                 connection,

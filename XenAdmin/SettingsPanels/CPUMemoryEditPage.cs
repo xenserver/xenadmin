@@ -344,7 +344,7 @@ namespace XenAdmin.SettingsPanels
                 return actions[0];
             else
             {
-                MultipleAction multipleAction = new MultipleAction(vm.Connection, "", "", "", actions);
+                MultipleAction multipleAction = new MultipleAction(vm.Connection, "", "", "", actions, true);
                 return multipleAction;
             }
         }

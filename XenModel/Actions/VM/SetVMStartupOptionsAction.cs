@@ -43,9 +43,8 @@ namespace XenAdmin.Actions
         private readonly Dictionary<VM, VMStartupOptions> settings = new Dictionary<VM, VMStartupOptions>();
         private readonly Pool pool;
 
-
-        public SetVMStartupOptionsAction(IXenConnection connection, Dictionary<VM, VMStartupOptions> settings)
-            : base(connection, Messages.SETTING_VM_STARTUP_OPTIONS)
+        public SetVMStartupOptionsAction(IXenConnection connection, Dictionary<VM, VMStartupOptions> settings, bool suppressHistory)
+            : base(connection, Messages.SETTING_VM_STARTUP_OPTIONS, suppressHistory)
         {
             System.Diagnostics.Trace.Assert(connection != null);
             System.Diagnostics.Trace.Assert(settings != null);

@@ -41,10 +41,10 @@ namespace XenAdmin.Actions
         private VM_appliance _vmAppliance;
         private List<XenRef<VM>> _selectedVMs;
 
-        public AssignVMsToVMApplianceAction(VM_appliance vmAppliance, List<XenRef<VM>> selectedVMs)
+        public AssignVMsToVMApplianceAction(VM_appliance vmAppliance, List<XenRef<VM>> selectedVMs, bool suppressHistory)
             : base(vmAppliance.Connection, selectedVMs.Count == 1 ?
             string.Format(Messages.ASSIGN_VM_TO_VAPP, vmAppliance.Connection.Resolve(selectedVMs[0]), vmAppliance.Name)
-            : string.Format(Messages.ASSIGN_VMS_TO_VAPP, vmAppliance.Name))
+            : string.Format(Messages.ASSIGN_VMS_TO_VAPP, vmAppliance.Name), suppressHistory)
         {
             _vmAppliance = vmAppliance;
             _selectedVMs = selectedVMs;

@@ -194,7 +194,7 @@ namespace XenAdmin.SettingsPanels
                 perfmonOptions = new PerfmonOptionsDefinition(smtpMailHub, EmailAddressTextBox.Text);
             }
 
-            return new PerfmonOptionsDefinitionAction(_XenModelObject.Connection, perfmonOptions);
+            return new PerfmonOptionsDefinitionAction(_XenModelObject.Connection, perfmonOptions, true);
         }
 
         private void EmailNotificationCheckBox_CheckedChanged(object sender, EventArgs e)

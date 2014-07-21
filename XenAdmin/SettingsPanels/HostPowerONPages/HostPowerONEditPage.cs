@@ -92,7 +92,7 @@ namespace XenAdmin.SettingsPanels
             string newMode, ip, user, password;
             Dictionary<string, string> customConfig;
             GetConfig(out newMode, out ip, out user, out password, out customConfig);
-            return new SavePowerOnSettingsAction(_host, newMode, ip, user, password, customConfig);
+            return new SavePowerOnSettingsAction(_host, newMode, ip, user, password, customConfig, true);
         }
 
         protected void GetConfig(out string newMode, out string ip, out string user, out string password, out Dictionary<string, string> customConfig)

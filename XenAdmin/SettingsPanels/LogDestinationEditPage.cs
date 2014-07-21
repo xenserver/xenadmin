@@ -143,6 +143,7 @@ namespace XenAdmin.SettingsPanels
                     string.Format(Messages.ACTION_CHANGING_LOG_DESTINATION_FOR, TheHost),
                     null,
                     delegate(Session session) { Host.syslog_reconfigure(session, TheHost.opaque_ref); },
+                    true,
                     "host.syslog_reconfigure"
                 );
             }

@@ -45,8 +45,8 @@ namespace XenAdmin.Actions
         private readonly Pool pool;
         private readonly PerfmonOptionsDefinition perfmonOptions;
 
-        public PerfmonOptionsDefinitionAction(IXenConnection connection, PerfmonOptionsDefinition perfmonOptions)
-            : base(connection, Messages.ACTION_CHANGE_EMAIL_OPTIONS)
+        public PerfmonOptionsDefinitionAction(IXenConnection connection, PerfmonOptionsDefinition perfmonOptions, bool suppressHistory)
+            : base(connection, Messages.ACTION_CHANGE_EMAIL_OPTIONS, suppressHistory)
         {
             this.perfmonOptions = perfmonOptions;
             pool = Helpers.GetPoolOfOne(connection);

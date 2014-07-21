@@ -106,7 +106,7 @@ namespace XenAdmin.SettingsPanels
 
         public AsyncAction SaveSettings()
         {
-            return new EditMultipathAction(host, multipathCheckBox.Checked);
+            return new EditMultipathAction(host, multipathCheckBox.Checked, true);
         }
 
         public bool ValidToSave

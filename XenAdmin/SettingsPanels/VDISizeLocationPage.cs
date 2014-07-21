@@ -164,6 +164,7 @@ namespace XenAdmin.SettingsPanels
                     string.Format(Messages.ACTION_CHANGING_DISK_SIZE_FOR, vdi),
                     string.Format(Messages.ACTION_CHANGED_DISK_SIZE_FOR, vdi),
                     delegate(Session session) { VDI.resize(session, vdi.opaque_ref, (long)(newSize * Util.BINARY_GIGA)); },
+                    true,
                     "vdi.resize"
                 );
             else
@@ -173,6 +174,7 @@ namespace XenAdmin.SettingsPanels
                     string.Format(Messages.ACTION_CHANGING_DISK_SIZE_FOR, vdi),
                     string.Format(Messages.ACTION_CHANGED_DISK_SIZE_FOR, vdi),
                     delegate(Session session) { VDI.resize_online(session, vdi.opaque_ref, (long)(newSize * Util.BINARY_GIGA)); },
+                    true,
                     "vdi.resize_online"
                 );
         }
