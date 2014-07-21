@@ -341,6 +341,8 @@ namespace XenAdmin.Dialogs
                 Messages.UPDATING_PROPERTIES,
                 Messages.UPDATED_PROPERTIES,
                 actions);
+
+            _action.SetObject(xenObjectCopy);
             
             _action.Completed += action_Completed;
             Close();

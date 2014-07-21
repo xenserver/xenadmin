@@ -154,6 +154,9 @@ namespace XenAdmin.Actions
             {
                 _sR = value;
                 SetAppliesTo(SR);
+
+                if (Host == null)
+                    Host = SR.Home;
             }
         }
 
