@@ -45,8 +45,8 @@ namespace XenAdmin.Actions
         private readonly IXenObject xenObject;
         private readonly List<CustomField> customFields;
 
-        public SaveCustomFieldsAction(IXenObject xenObject, List<CustomField> customFields)
-            : base(xenObject.Connection, Messages.ACTION_SAVE_CUSTOM_FIELDS, string.Format(Messages.ACTION_SAVING_CUSTOM_FIELDS_FOR, xenObject))
+        public SaveCustomFieldsAction(IXenObject xenObject, List<CustomField> customFields, bool suppressHistory)
+            : base(xenObject.Connection, Messages.ACTION_SAVE_CUSTOM_FIELDS, string.Format(Messages.ACTION_SAVING_CUSTOM_FIELDS_FOR, xenObject), suppressHistory)
         {
             this.xenObject = xenObject;
             this.customFields = customFields;

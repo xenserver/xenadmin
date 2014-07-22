@@ -298,7 +298,7 @@ namespace XenAdmin.SettingsPanels
             if (_XenObject is SR && srAlert.Enabled)
                 perfmonDefinitions.Add(srAlert.AlertDefinition);
 
-            return new PerfmonDefinitionAction(_XenObject, perfmonDefinitions);
+            return new PerfmonDefinitionAction(_XenObject, perfmonDefinitions, true);
         }
 
         private void SetAlertIntervalEnablement()

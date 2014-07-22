@@ -191,7 +191,7 @@ namespace XenAdmin.Dialogs
             {
                 // Set the new restart priorities.
                 // This includes a pool-wide database sync to ensure the changed HA settings are communicated to all hosts
-                new SetHaPrioritiesAction(this.pool.Connection, assignPriorities.GetCurrentStartupOptions(), newNtol).RunAsync();
+                new SetHaPrioritiesAction(this.pool.Connection, assignPriorities.GetCurrentStartupOptions(), newNtol, false).RunAsync();
             }
             this.Close();
         }

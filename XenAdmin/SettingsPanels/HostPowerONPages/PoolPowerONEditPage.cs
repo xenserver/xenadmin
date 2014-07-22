@@ -60,7 +60,7 @@ namespace XenAdmin.SettingsPanels
             List<Host> hosts = new List<Host>();
             foreach (DataGridViewRow row in dataGridView2.SelectedRows)
                 hosts.Add((Host)row.Tag);
-            return new SavePowerOnSettingsAction(_pool.Connection, hosts, newMode, ip, user, password, customConfig);
+            return new SavePowerOnSettingsAction(_pool.Connection, hosts, newMode, ip, user, password, customConfig, true);
         }
 
         public override void SetXenObjects(IXenObject orig, IXenObject clone)

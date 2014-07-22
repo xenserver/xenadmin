@@ -73,7 +73,7 @@ namespace XenAdmin.SettingsPanels
                 connections = GetValidConnections();
             }
 
-            return new SetCslgCredentialsAction(connections, textBoxHostAddress.Text.Trim(), textBoxUsername.Text.Trim(), textBoxPassword.Text.Trim());
+            return new SetCslgCredentialsAction(connections, textBoxHostAddress.Text.Trim(), textBoxUsername.Text.Trim(), textBoxPassword.Text.Trim(), true);
         }
 
         public void SetXenObjects(IXenObject orig, IXenObject clone)

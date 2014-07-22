@@ -47,8 +47,8 @@ namespace XenAdmin.Actions
         private readonly IXenObject xo;
         private readonly List<PerfmonDefinition> perfmonDefinitions;
 
-        public PerfmonDefinitionAction(IXenObject xo, List<PerfmonDefinition> perfmonDefinitions)
-            : base(xo.Connection, Messages.ACTION_SAVE_ALERTS, string.Format(Messages.ACTION_SAVING_ALERTS_FOR, xo))
+        public PerfmonDefinitionAction(IXenObject xo, List<PerfmonDefinition> perfmonDefinitions, bool suppressHistory)
+            : base(xo.Connection, Messages.ACTION_SAVE_ALERTS, string.Format(Messages.ACTION_SAVING_ALERTS_FOR, xo), suppressHistory)
         {
             this.xo = xo;
             this.perfmonDefinitions = perfmonDefinitions;

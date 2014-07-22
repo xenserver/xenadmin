@@ -46,8 +46,8 @@ namespace XenAdmin.Actions
         private readonly string newFolder;
         private readonly List<string> oldTags, newTags;
 
-        public GeneralEditPageAction(IXenObject xenObjectOrig, IXenObject xenObjectCopy, string newFolder, List<string> newTags)
-            : base(xenObjectCopy.Connection, Messages.ACTION_SAVE_FOLDER_TAGS, string.Format(Messages.ACTION_SAVING_FOLDER_TAGS_FOR, xenObjectCopy))
+        public GeneralEditPageAction(IXenObject xenObjectOrig, IXenObject xenObjectCopy, string newFolder, List<string> newTags, bool suppressHistory)
+            : base(xenObjectCopy.Connection, Messages.ACTION_SAVE_FOLDER_TAGS, string.Format(Messages.ACTION_SAVING_FOLDER_TAGS_FOR, xenObjectCopy), suppressHistory)
         {
             this.xenObjectOrig = xenObjectOrig;
             this.xenObjectCopy = xenObjectCopy;

@@ -55,6 +55,7 @@ namespace XenAdmin.Actions
             : base(title, description, suppressHistory)
         {
             this.Connection = connection;
+            Pool = Helpers.GetPoolOfOne(connection);
         }
 
         protected AsyncAction(IXenConnection connection, string title, string description)

@@ -119,7 +119,7 @@ namespace XenAdmin.Wizards.NewVMApplianceWizard
 
             var vmSettings = xenTabPageVMOrderAndDelays.getCurrentSettings();
             if (vmSettings != null && vmSettings.Count > 0)
-                new SetVMStartupOptionsAction(Pool.Connection, xenTabPageVMOrderAndDelays.getCurrentSettings()).RunAsync();
+                new SetVMStartupOptionsAction(Pool.Connection, xenTabPageVMOrderAndDelays.getCurrentSettings(), false).RunAsync();
 
             base.FinishWizard();
         }
