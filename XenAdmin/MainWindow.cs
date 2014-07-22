@@ -1546,8 +1546,6 @@ namespace XenAdmin
                 if (itemAdded && insertIndex != menu.DropDownItems.Count)
                     menu.DropDownItems.Insert(insertIndex, new ToolStripSeparator());
             }
-
-            windowToolStripMenuItem.Visible = windowToolStripMenuItem.DropDownItems.Count > 0;
         }
 
         private void MainMenuBar_MenuActivate(object sender, EventArgs e)
