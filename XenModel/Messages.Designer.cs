@@ -7018,6 +7018,25 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The process of reclaiming space may place significant load on the storage controller, temporarily affecting the storage&apos;s performance.
+        ///Would you like to carry out the operation at this time?.
+        /// </summary>
+        public static string CONFIRM_TRIM_SR {
+            get {
+                return ResourceManager.GetString("CONFIRM_TRIM_SR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reclaim freed space.
+        /// </summary>
+        public static string CONFIRM_TRIM_SR_TITLE {
+            get {
+                return ResourceManager.GetString("CONFIRM_TRIM_SR_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not connect to {0}..
         /// </summary>
         public static string CONNCET_CONNECTION_FAILURE {

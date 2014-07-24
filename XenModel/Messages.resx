@@ -2556,6 +2556,13 @@ This will also shut down all the VMs currently running on them.</value>
   <data name="CONFIRM_SUSPEND_VM_TITLE" xml:space="preserve">
     <value>Suspend VM</value>
   </data>
+  <data name="CONFIRM_TRIM_SR" xml:space="preserve">
+    <value>The process of reclaiming space may place significant load on the storage controller, temporarily affecting the storage's performance.
+Would you like to carry out the operation at this time?</value>
+  </data>
+  <data name="CONFIRM_TRIM_SR_TITLE" xml:space="preserve">
+    <value>Reclaim freed space</value>
+  </data>
   <data name="CONNCET_CONNECTION_FAILURE" xml:space="preserve">
     <value>Could not connect to {0}.</value>
   </data>
