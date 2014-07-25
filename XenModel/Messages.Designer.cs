@@ -826,6 +826,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export canceled and deleting destination file &apos;{0}&apos; failed.
+        /// </summary>
+        public static string ACTION_EXPORT_POOL_RESOURCE_CANCEL_AND_FILE_UNDELETE {
+            get {
+                return ResourceManager.GetString("ACTION_EXPORT_POOL_RESOURCE_CANCEL_AND_FILE_UNDELETE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exporting pool resource list from &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_EXPORT_POOL_RESOURCE_LIST_FROM_X {
+            get {
+                return ResourceManager.GetString("ACTION_EXPORT_POOL_RESOURCE_LIST_FROM_X", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exporting {0} to backup file.
         /// </summary>
         public static string ACTION_EXPORT_TASK_DESCRIPTION {
@@ -18559,6 +18577,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to E&amp;xport Resource Data....
+        /// </summary>
+        public static string MAINWINDOW_EXPORT_POOL_RESOURCE_DATA {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_EXPORT_POOL_RESOURCE_DATA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Export to File....
         /// </summary>
         public static string MAINWINDOW_EXPORT_TEMPLATE {
@@ -20209,6 +20236,15 @@ namespace XenAdmin {
         public static string MOVING {
             get {
                 return ResourceManager.GetString("MOVING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MTU.
+        /// </summary>
+        public static string MTU {
+            get {
+                return ResourceManager.GetString("MTU", resourceCulture);
             }
         }
         
@@ -24958,6 +24994,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Power usage (W).
+        /// </summary>
+        public static string POWER_USAGE {
+            get {
+                return ResourceManager.GetString("POWER_USAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Privacy Warning.
         /// </summary>
         public static string PRIVACY_WARNING {
@@ -26739,6 +26784,15 @@ namespace XenAdmin {
         public static string RUNNING_ARCHIVE {
             get {
                 return ResourceManager.GetString("RUNNING_ARCHIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Running on.
+        /// </summary>
+        public static string RUNNING_ON {
+            get {
+                return ResourceManager.GetString("RUNNING_ON", resourceCulture);
             }
         }
         
@@ -29417,6 +29471,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Temperature (°C).
+        /// </summary>
+        public static string TEMPERATURE {
+            get {
+                return ResourceManager.GetString("TEMPERATURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Template.
         /// </summary>
         public static string TEMPLATE {
@@ -31589,6 +31652,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Utilization (%).
+        /// </summary>
+        public static string UTILIZATION {
+            get {
+                return ResourceManager.GetString("UTILIZATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UUID.
+        /// </summary>
+        public static string UUID {
+            get {
+                return ResourceManager.GetString("UUID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Is.
         /// </summary>
         public static string UUID_SEARCH {
@@ -31864,6 +31945,15 @@ namespace XenAdmin {
         public static string VCPU_ONLY_WHEN_HALTED {
             get {
                 return ResourceManager.GetString("VCPU_ONLY_WHEN_HALTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VDI.
+        /// </summary>
+        public static string VDI {
+            get {
+                return ResourceManager.GetString("VDI", resourceCulture);
             }
         }
         

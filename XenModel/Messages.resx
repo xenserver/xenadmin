@@ -372,6 +372,12 @@
   <data name="ACTION_EXPORT_DESCRIPTION_VDI_IN_USE" xml:space="preserve">
     <value>Export failed: disk in use elsewhere.</value>
   </data>
+  <data name="ACTION_EXPORT_POOL_RESOURCE_CANCEL_AND_FILE_UNDELETE" xml:space="preserve">
+    <value>Export canceled and deleting destination file '{0}' failed</value>
+  </data>
+  <data name="ACTION_EXPORT_POOL_RESOURCE_LIST_FROM_X" xml:space="preserve">
+    <value>Exporting pool resource list from '{0}'</value>
+  </data>
   <data name="ACTION_EXPORT_TASK_DESCRIPTION" xml:space="preserve">
     <value>Exporting {0} to backup file</value>
   </data>
@@ -6469,6 +6475,9 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MAINWINDOW_EXPIRE_MESSAGE_TOO_LATE" xml:space="preserve">
     <value>The XenServer license on '{0}' has expired.</value>
   </data>
+  <data name="MAINWINDOW_EXPORT_POOL_RESOURCE_DATA" xml:space="preserve">
+    <value>E&amp;xport Resource Data...</value>
+  </data>
   <data name="MAINWINDOW_EXPORT_TEMPLATE" xml:space="preserve">
     <value>&amp;Export to File...</value>
   </data>
@@ -7042,6 +7051,9 @@ To learn more about the XenServer Live VDI Migration feature or to start a XenSe
   </data>
   <data name="MOVING" xml:space="preserve">
     <value>Moving...</value>
+  </data>
+  <data name="MTU" xml:space="preserve">
+    <value>MTU</value>
   </data>
   <data name="MULTIPATHING" xml:space="preserve">
     <value>Multipathing</value>
@@ -8680,6 +8692,9 @@ The VM protection policy for this VM does not have automatic archiving configure
   <data name="POWER_STATE" xml:space="preserve">
     <value>Power state</value>
   </data>
+  <data name="POWER_USAGE" xml:space="preserve">
+    <value>Power usage (W)</value>
+  </data>
   <data name="PRIVACY_WARNING" xml:space="preserve">
     <value>Privacy Warning</value>
   </data>
@@ -9294,6 +9309,9 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   </data>
   <data name="RUNNING_ARCHIVE" xml:space="preserve">
     <value>Archiving</value>
+  </data>
+  <data name="RUNNING_ON" xml:space="preserve">
+    <value>Running on</value>
   </data>
   <data name="RUNNING_SNAPSHOTS" xml:space="preserve">
     <value>Taking snapshots</value>
@@ -10196,6 +10214,9 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="TELL_ME_MORE" xml:space="preserve">
     <value>Tell me more ...</value>
   </data>
+  <data name="TEMPERATURE" xml:space="preserve">
+    <value>Temperature (°C)</value>
+  </data>
   <data name="TEMPLATE" xml:space="preserve">
     <value>Template</value>
   </data>
@@ -10946,6 +10967,12 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="USES" xml:space="preserve">
     <value>uses</value>
   </data>
+  <data name="UTILIZATION" xml:space="preserve">
+    <value>Utilization (%)</value>
+  </data>
+  <data name="UUID" xml:space="preserve">
+    <value>UUID</value>
+  </data>
   <data name="UUID_SEARCH" xml:space="preserve">
     <value>Is</value>
   </data>
@@ -11038,6 +11065,9 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   </data>
   <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
     <value>The VCPUs can only be changed when the VM is shut down</value>
+  </data>
+  <data name="VDI" xml:space="preserve">
+    <value>VDI</value>
   </data>
   <data name="VDI_COPIED" xml:space="preserve">
     <value>Copied disk '{0}' from SR '{1}' to SR '{2}'</value>
