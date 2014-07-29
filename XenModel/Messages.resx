@@ -511,10 +511,16 @@
     <value>Removed 1 alert</value>
   </data>
   <data name="ACTION_REMOVE_ALERTS_ON_CLIENT_TITLE" xml:space="preserve">
-    <value>Removing all client alerts</value>
+    <value>Removing {0} client alerts</value>
+  </data>
+  <data name="ACTION_REMOVE_ALERTS_ON_CLIENT_TITLE_ONE" xml:space="preserve">
+    <value>Removing client alert</value>
   </data>
   <data name="ACTION_REMOVE_ALERTS_ON_CONNECTION_TITLE" xml:space="preserve">
-    <value>Removing all alerts on '{0}'</value>
+    <value>Removing {0} alerts on '{1}'</value>
+  </data>
+  <data name="ACTION_REMOVE_ALERTS_ON_CONNECTION_TITLE_ONE" xml:space="preserve">
+    <value>Removing alert on '{0}'</value>
   </data>
   <data name="ACTION_REMOVE_ALERTS_PROGRESS_DESCRIPTION" xml:space="preserve">
     <value>Removing alert {0} of {1}...</value>
@@ -1481,6 +1487,11 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
   </data>
   <data name="ALERT_DISMISS_CONFIRM" xml:space="preserve">
     <value>Once a system alert is dismissed it will be removed from the server permanently. Do you wish to continue?</value>
+  </data>
+  <data name="ALERT_DISMISS_SELECTED_CONFIRM" xml:space="preserve">
+    <value>This operation will remove the selected alerts from the servers permanently. Do you wish to continue?
+
+Note that if RBAC is enabled, only alerts which you have privileges to dismiss will be affected.</value>
   </data>
   <data name="ALERT_EXPORT_ALL_BUTTON" xml:space="preserve">
     <value>Export &amp;all</value>
