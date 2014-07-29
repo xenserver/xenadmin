@@ -49,7 +49,7 @@ namespace XenAdmin.Actions
         /// <param name="connection">May be null, in which case this is expected to be for client-side alerts.</param>
         public DeleteAllAlertsAction(IXenConnection connection, IEnumerable<Alert> alerts)
             : base(connection,
-                   connection == null ? Messages.ACTION_REMOVE_ALERTS_ON_CLIENT_TITLE : string.Format(Messages.ACTION_REMOVE_ALERTS_ON_CONNECTION_TITLE, Helpers.GetName(connection)),
+                   GetActionTitle(connection, alerts.Count()), 
                    Messages.ACTION_REMOVE_ALERTS_DESCRIPTION)
         {
             this.Alerts = alerts;
@@ -59,6 +59,17 @@ namespace XenAdmin.Actions
                 Pool = Helpers.GetPoolOfOne(connection);
                 Host = Helpers.GetMaster(connection);
             }
+        }
+
+        private static string GetActionTitle(IXenConnection connection, int alertCount)
+        {
+            return connection == null
+                ? alertCount == 1
+                       ? Messages.ACTION_REMOVE_ALERTS_ON_CLIENT_TITLE_ONE
+                       : string.Format(Messages.ACTION_REMOVE_ALERTS_ON_CLIENT_TITLE, alertCount)
+                : alertCount == 1
+                       ? string.Format(Messages.ACTION_REMOVE_ALERTS_ON_CONNECTION_TITLE_ONE, Helpers.GetName(connection))
+                       : string.Format(Messages.ACTION_REMOVE_ALERTS_ON_CONNECTION_TITLE, alertCount, Helpers.GetName(connection));
         }
 
         protected override void Run()
@@ -81,13 +92,15 @@ namespace XenAdmin.Actions
                         {
                             try
                             {
-                                a1.Dismissing = true;
                                 a1.DismissSingle(Session);
                             }
                             catch (Failure exn)
                             {
                                 if (exn.ErrorDescription[0] != Failure.HANDLE_INVALID)
                                     throw;
+                                //remove alert from XenCenterAlerts; this will trigger the CollectionChanged event, on which we update the alert count
+                                if (Alert.FindAlert(a1) != null)
+                                    Alert.RemoveAlert(a1); 
                             }
                         });
                 }

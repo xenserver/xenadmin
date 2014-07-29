@@ -1240,7 +1240,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Removing all client alerts.
+        ///   Looks up a localized string similar to Removing {0} client alerts.
         /// </summary>
         public static string ACTION_REMOVE_ALERTS_ON_CLIENT_TITLE {
             get {
@@ -1249,11 +1249,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Removing all alerts on &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Removing client alert.
+        /// </summary>
+        public static string ACTION_REMOVE_ALERTS_ON_CLIENT_TITLE_ONE {
+            get {
+                return ResourceManager.GetString("ACTION_REMOVE_ALERTS_ON_CLIENT_TITLE_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removing {0} alerts on &apos;{1}&apos;.
         /// </summary>
         public static string ACTION_REMOVE_ALERTS_ON_CONNECTION_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_REMOVE_ALERTS_ON_CONNECTION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removing alert on &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_REMOVE_ALERTS_ON_CONNECTION_TITLE_ONE {
+            get {
+                return ResourceManager.GetString("ACTION_REMOVE_ALERTS_ON_CONNECTION_TITLE_ONE", resourceCulture);
             }
         }
         
@@ -3975,6 +3993,17 @@ namespace XenAdmin {
         public static string ALERT_DISMISS_CONFIRM {
             get {
                 return ResourceManager.GetString("ALERT_DISMISS_CONFIRM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation will remove the selected alerts from the servers permanently. Do you wish to continue?
+        ///
+        ///Note that if RBAC is enabled, only alerts which you have privileges to dismiss will be affected..
+        /// </summary>
+        public static string ALERT_DISMISS_SELECTED_CONFIRM {
+            get {
+                return ResourceManager.GetString("ALERT_DISMISS_SELECTED_CONFIRM", resourceCulture);
             }
         }
         
