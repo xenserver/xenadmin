@@ -221,9 +221,7 @@ namespace XenAdmin.Controls
             var item = new ToolStripMenuItem
                            {
                                Text = Helpers.GetName(xenObject),
-                               DisplayStyle = ToolStripItemDisplayStyle.ImageAndText,
-                               Tag = xenObjectUuid,
-                               Image = Images.GetImage16For(xenObject)
+                               Tag = xenObjectUuid
                            };
             return item;
         }
