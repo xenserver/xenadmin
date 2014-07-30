@@ -75,6 +75,7 @@ namespace XenAdmin.TabPages
             // 
             // toolStripDdbFilterStatus
             // 
+            this.toolStripDdbFilterStatus.AutoToolTip = false;
             this.toolStripDdbFilterStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.toolStripDdbFilterStatus, "toolStripDdbFilterStatus");
             this.toolStripDdbFilterStatus.Name = "toolStripDdbFilterStatus";
@@ -82,6 +83,7 @@ namespace XenAdmin.TabPages
             // 
             // toolStripDdbFilterLocation
             // 
+            this.toolStripDdbFilterLocation.AutoToolTip = false;
             this.toolStripDdbFilterLocation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.toolStripDdbFilterLocation, "toolStripDdbFilterLocation");
             this.toolStripDdbFilterLocation.Name = "toolStripDdbFilterLocation";
@@ -89,6 +91,7 @@ namespace XenAdmin.TabPages
             // 
             // toolStripDdbFilterDates
             // 
+            this.toolStripDdbFilterDates.AutoToolTip = false;
             this.toolStripDdbFilterDates.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.toolStripDdbFilterDates, "toolStripDdbFilterDates");
             this.toolStripDdbFilterDates.Name = "toolStripDdbFilterDates";
@@ -96,6 +99,7 @@ namespace XenAdmin.TabPages
             // 
             // toolStripSplitButtonDismiss
             // 
+            this.toolStripSplitButtonDismiss.AutoToolTip = false;
             this.toolStripSplitButtonDismiss.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripSplitButtonDismiss.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiDismissAll,

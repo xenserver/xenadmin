@@ -122,6 +122,7 @@
             // 
             // toolStripDropDownButtonDateFilter
             // 
+            this.toolStripDropDownButtonDateFilter.AutoToolTip = false;
             this.toolStripDropDownButtonDateFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.toolStripDropDownButtonDateFilter, "toolStripDropDownButtonDateFilter");
             this.toolStripDropDownButtonDateFilter.Name = "toolStripDropDownButtonDateFilter";
