@@ -56,8 +56,6 @@ namespace XenAdmin.Controls
 
         public FilterSeveritiesToolStripDropDownButton()
         {
-            AutoToolTip = false;
-
             toolStripMenuItem0 = new ToolStripMenuItem
                                      {
                                          Text = Messages.SEVERITY_FILTER_0,
