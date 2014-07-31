@@ -305,7 +305,7 @@ namespace XenAPI
             get
             {
                 if (PIFs.Count == 0)
-                    return Messages.SPACED_HYPHEN;
+                    return Messages.NONE;
 
                 List<PIF.LinkState> states = new List<PIF.LinkState>();
                 foreach (PIF p in Connection.ResolveAll<PIF>(PIFs))

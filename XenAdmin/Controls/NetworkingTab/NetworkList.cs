@@ -341,8 +341,7 @@ namespace XenAdmin.Controls.NetworkingTab
                     List<NetworkRow> networkRowsToAdd = new List<NetworkRow>();
                     for (int i = 0; i < networks.Length; i++)
                     {
-                        if (!networks[i].Show(XenAdmin.Properties.Settings.Default.ShowHiddenVMs) ||
-                            Helpers.FindPIF(networks[i], XenObject as Host) == null)
+                        if (!networks[i].Show(XenAdmin.Properties.Settings.Default.ShowHiddenVMs))
                             continue;
                         networkRowsToAdd.Add(new NetworkRow(networks[i], XenObject));
                     }
@@ -933,7 +932,7 @@ namespace XenAdmin.Controls.NetworkingTab
                 VlanCell.Value = Helpers.VlanString(Pif);
                 AutoCell.Value = Network.AutoPlug ? Messages.YES : Messages.NO;
                 LinkStatusCell.Value = Xmo is Pool ? Network.LinkStatusString : 
-                    Pif == null ? Messages.SPACED_HYPHEN : Pif.LinkStatusString;
+                    Pif == null ? Messages.NONE : Pif.LinkStatusString;
                 MacCell.Value = Pif != null && Pif.IsPhysical ? Pif.MAC : Messages.SPACED_HYPHEN;
                 MtuCell.Value = Network.CanUseJumboFrames ? Network.MTU.ToString() : Messages.SPACED_HYPHEN;
             }
