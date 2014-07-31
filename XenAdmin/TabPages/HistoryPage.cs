@@ -133,13 +133,19 @@ namespace XenAdmin.TabPages
 
         private void SetFilterLabel()
         {
-            bool filterIsOn = toolStripDdbFilterDates.FilterIsOn
-                              || toolStripDdbFilterLocation.FilterIsOn
-                              || toolStripDdbFilterStatus.FilterIsOn;
-
-            toolStripLabelFiltersOnOff.Text = filterIsOn
+            toolStripLabelFiltersOnOff.Text = FilterIsOn
                                                   ? Messages.FILTERS_ON
                                                   : Messages.FILTERS_OFF;
+        }
+
+        private bool FilterIsOn
+        {
+            get
+            {
+                return toolStripDdbFilterDates.FilterIsOn
+                              || toolStripDdbFilterLocation.FilterIsOn
+                              || toolStripDdbFilterStatus.FilterIsOn;
+            }
         }
 
         private void BuildRowList()
@@ -172,6 +178,7 @@ namespace XenAdmin.TabPages
             finally
             {
                 dataGridView.ResumeLayout();
+                UpdateButtons();
             }
         }
 
@@ -278,11 +285,7 @@ namespace XenAdmin.TabPages
 
         private void UpdateButtons()
         {
-            toolStripDdbFilterStatus.Enabled =
-                toolStripDdbFilterLocation.Enabled =
-                toolStripDdbFilterDates.Enabled = ConnectionsManager.History.Count > 0;
-
-            tsmiDismissAll.Enabled = dataGridView.Rows.Cast<DataGridViewActionRow>().Any(row => row.Action.IsCompleted);
+            tsmiDismissAll.Enabled = ConnectionsManager.History.Any(a => a.IsCompleted);
             tsmiDismissSelected.Enabled = dataGridView.SelectedRows.Cast<DataGridViewActionRow>().Any(row => row.Action.IsCompleted);
             toolStripSplitButtonDismiss.Enabled = tsmiDismissAll.Enabled || tsmiDismissSelected.Enabled;
 
@@ -307,7 +310,7 @@ namespace XenAdmin.TabPages
             if (ConnectionsManager.History.Count > 0 &&
                 (Program.RunInAutomatedTestMode ||
                  new ThreeButtonDialog(
-                     new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOG_DELETE, Messages.MESSAGEBOX_LOG_DELETE_TITLE),
+                     new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOG_DELETE),
                      ThreeButtonDialog.ButtonYes,
                      ThreeButtonDialog.ButtonNo).ShowDialog(this) == DialogResult.Yes))
             {
@@ -351,21 +354,49 @@ namespace XenAdmin.TabPages
 
         private void tsmiDismissAll_Click(object sender, EventArgs e)
         {
-            if (ConnectionsManager.History.Count > 0 &&
-                (Program.RunInAutomatedTestMode ||
-                 new ThreeButtonDialog(
-                     new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOGS_DELETE, Messages.MESSAGEBOX_LOGS_DELETE_TITLE),
-                     ThreeButtonDialog.ButtonYes,
-                     ThreeButtonDialog.ButtonNo).ShowDialog(this) == DialogResult.Yes))
+            if (ConnectionsManager.History.Count == 0)
+                return;
+
+            DialogResult result = DialogResult.Yes;
+            if (!Program.RunInAutomatedTestMode)
             {
-                ConnectionsManager.History.RemoveAll(a => a.IsCompleted);
+                if (!FilterIsOn)
+                {
+                    using (var dlog = new ThreeButtonDialog(
+                        new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOGS_DELETE_NO_FILTER),
+                        new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_YES_CONFIRM_BUTTON, DialogResult.Yes),
+                        ThreeButtonDialog.ButtonCancel))
+                    {
+                        result = dlog.ShowDialog(this);
+                    }
+                }
+                else
+                {
+                    using (var dlog = new ThreeButtonDialog(
+                        new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOGS_DELETE),
+                        new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_CONFIRM_BUTTON, DialogResult.Yes),
+                        new ThreeButtonDialog.TBDButton(Messages.DISMISS_FILTERED_CONFIRM_BUTTON, DialogResult.No, ThreeButtonDialog.ButtonType.NONE),
+                        ThreeButtonDialog.ButtonCancel))
+                    {
+                        result = dlog.ShowDialog(this);
+                    }
+                }
+
+                if (result == DialogResult.Cancel)
+                    return;
             }
+
+            var actions = result == DialogResult.No
+                              ? (from DataGridViewActionRow row in dataGridView.Rows where row.Action != null && row.Action.IsCompleted select row.Action)
+                              : ConnectionsManager.History;
+
+            ConnectionsManager.History.RemoveAll(actions.Contains);
         }
 
         private void tsmiDismissSelected_Click(object sender, EventArgs e)
         {
             using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOGS_DELETE_SELECTED, Messages.MESSAGEBOX_LOGS_DELETE_TITLE),
+                    new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOGS_DELETE_SELECTED),
                     ThreeButtonDialog.ButtonYes,
                     ThreeButtonDialog.ButtonNo))
             {

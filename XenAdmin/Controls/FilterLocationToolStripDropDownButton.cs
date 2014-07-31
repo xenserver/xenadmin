@@ -154,8 +154,7 @@ namespace XenAdmin.Controls
                         });
                 }
 
-                if (DropDownItems.Count <= 0)
-                    Enabled = false;
+                Enabled = DropDownItems.Count > 0;
             }
             finally
             {
