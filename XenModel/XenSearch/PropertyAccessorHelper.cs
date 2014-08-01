@@ -47,6 +47,11 @@ namespace XenAdmin.XenSearch
 
         public static string vmCpuUsageString(VM vm)
         {
+            return vmCpuUsageStringByMetric(vm, MetricUpdater);
+        }
+
+        public static string vmCpuUsageStringByMetric(VM vm, MetricUpdater MetricUpdater)
+        {
             VM_metrics metrics = vm.Connection.Resolve(vm.metrics);
             if (metrics == null)
                 return "";
@@ -89,6 +94,11 @@ namespace XenAdmin.XenSearch
         }
 
         public static string vmMemoryUsageString(VM vm)
+        {
+            return vmMemoryUsageStringByMetric(vm, MetricUpdater);
+        }
+
+        public static string vmMemoryUsageStringByMetric(VM vm, MetricUpdater MetricUpdater)
         {
             double free = MetricUpdater.GetValue(vm, "memory_internal_free");
             double total = MetricUpdater.GetValue(vm, "memory");
@@ -165,7 +175,7 @@ namespace XenAdmin.XenSearch
                 return Messages.HYPHEN;
         }
 
-        public static string hostCpuUsageString(Host host)
+        public static string hostCpuUsageStringByMetric(Host host, MetricUpdater MetricUpdater)
         {
             double sum = 0;
             if (host.host_CPUs == null)
@@ -182,6 +192,11 @@ namespace XenAdmin.XenSearch
             return String.Format(Messages.QUERY_PERCENT_OF_CPUS, ((sum * 100) / total).ToString("0."), total);
         }
 
+        public static string hostCpuUsageString(Host host)
+        {
+            return hostCpuUsageStringByMetric(host, MetricUpdater);
+        }
+
         public static int hostCpuUsageRank(Host host)
         {
             double sum = 0;
@@ -195,7 +210,7 @@ namespace XenAdmin.XenSearch
             return (int)Math.Round((sum * 100.0) / (double)total);
         }
 
-        public static string hostMemoryUsageString(Host host)
+        public static string hostMemoryUsageStringByMetric(Host host, MetricUpdater MetricUpdater)
         {
             double free = MetricUpdater.GetValue(host, "memory_free_kib");
             double total = MetricUpdater.GetValue(host, "memory_total_kib");
@@ -204,6 +219,11 @@ namespace XenAdmin.XenSearch
                 return Messages.HYPHEN;
 
             return String.Format(Messages.QUERY_MEMORY_USAGE, Util.MemorySizeStringWithoutUnits((total - free) * Util.BINARY_KILO), Util.MemorySizeString(total * Util.BINARY_KILO));
+        }
+
+        public static string hostMemoryUsageString(Host host)
+        {
+            return hostMemoryUsageStringByMetric(host, MetricUpdater);
         }
 
         public static int hostMemoryUsageRank(Host host)
@@ -222,7 +242,7 @@ namespace XenAdmin.XenSearch
             return total - free;
         }
 
-        public static string hostNetworkUsageString(Host host)
+        public static string hostNetworkUsageStringByMetric(Host host, MetricUpdater MetricUpdater)
         {
             double sum = 0;
             double max = 0;
@@ -241,6 +261,11 @@ namespace XenAdmin.XenSearch
             if (Double.IsNaN(sum))
                 return Messages.HYPHEN;
             return i == 0 ? Messages.HYPHEN : String.Format(Messages.QUERY_DATA_AVG_MAX, (sum / (Util.BINARY_KILO * i)).ToString("0."), (max / Util.BINARY_KILO).ToString("0."));
+        }
+
+        public static string hostNetworkUsageString(Host host)
+        {
+            return hostNetworkUsageStringByMetric(host, MetricUpdater);
         }
 
         public static String GetPoolHAStatus(Pool pool)
@@ -271,6 +296,60 @@ namespace XenAdmin.XenSearch
             if (!vm.is_a_real_vm)
                 return "-";
             return Helpers.RestartPriorityI18n(vm.HARestartPriority);
+        }
+
+        public static string PGPUMemoryUsageString(PGPU pGpu, MetricUpdater MetricUpdater)
+        {
+            PCI pci = pGpu.Connection.Resolve(pGpu.PCI);
+            string pci_id = pci.pci_id.Replace(@":", "/");
+            Host host = pGpu.Connection.Resolve(pGpu.host);
+            double free = MetricUpdater.GetValue(host, String.Format("gpu_memory_free_{0}", pci_id));
+            double used = MetricUpdater.GetValue(host, String.Format("gpu_memory_used_{0}", pci_id));
+            double total = free + used;
+
+            if (total == 0 || Double.IsNaN(total) || Double.IsNaN(free))
+                return Messages.HYPHEN;
+            else
+                return String.Format(Messages.QUERY_MEMORY_USAGE, (used / (free + used) * 100).ToString("0.") + "%", Util.MemorySizeString(free + used));
+
+        }
+
+        public static string PGPUTemperatureString(PGPU pGpu, MetricUpdater MetricUpdater)
+        {
+            PCI pci = pGpu.Connection.Resolve(pGpu.PCI);
+            Host host = pGpu.Connection.Resolve(pGpu.host);
+            string pci_id = pci.pci_id.Replace(@":", "/");
+            double temperture = MetricUpdater.GetValue(host, String.Format("gpu_temperature_{0}", pci_id));
+            if (temperture == 0 || Double.IsNaN(temperture) || Double.IsNaN(temperture))
+                return Messages.HYPHEN;
+            else
+                return temperture.ToString();
+        }
+
+        public static string PGPUPowerUsageString(PGPU pGpu, MetricUpdater MetricUpdater)
+        {
+            PCI pci = pGpu.Connection.Resolve(pGpu.PCI);
+            string pci_id = pci.pci_id.Replace(@":", "/");
+            Host host = pGpu.Connection.Resolve(pGpu.host);
+            double powerUsage = MetricUpdater.GetValue(host, String.Format("gpu_power_usage_{0}", pci_id));
+
+            if (powerUsage == 0 || Double.IsNaN(powerUsage) || Double.IsNaN(powerUsage))
+                return Messages.HYPHEN;
+            else
+                return powerUsage.ToString();
+        }
+
+        public static string PGPUUtilisationString(PGPU pGpu, MetricUpdater MetricUpdater)
+        {
+            PCI pci = pGpu.Connection.Resolve(pGpu.PCI);
+            Host host = pGpu.Connection.Resolve(pGpu.host);
+            string pci_id = pci.pci_id.Replace(@":", "/");
+            double utilisation = MetricUpdater.GetValue(host, String.Format("gpu_utilisation_computer_{0}", pci_id));
+
+            if (utilisation == 0 || Double.IsNaN(utilisation) || Double.IsNaN(utilisation))
+                return Messages.HYPHEN;
+            else
+                return utilisation.ToString();
         }
     }
 }

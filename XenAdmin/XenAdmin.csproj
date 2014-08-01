@@ -105,6 +105,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\GUIActions\ExportResourceReportAction.cs" />
     <Compile Include="Actions\GUIActions\DeleteAllAlertsAction.cs" />
     <Compile Include="Actions\GUIActions\ExternalPluginAction.cs" />
     <Compile Include="Actions\GUIActions\MeddlingAction.cs" />
@@ -125,6 +126,7 @@
     </Compile>
     <Compile Include="Commands\CrossPoolMigrateToHomeCommand.cs" />
     <Compile Include="Commands\TrimSRCommand.cs" />
+    <Compile Include="Commands\ExportResourceReportCommand.cs" />
     <Compile Include="Controls\AffinityPicker.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -6587,5 +6589,8 @@
   -->
   <PropertyGroup>
     <PostBuildEvent Condition=" '$(Configuration)' == 'Release' ">"C:\Program Files\Microsoft SDKs\Windows\v6.0A\bin\mt.exe" -manifest "$(ProjectDir)$(ProjectName).manifest" -outputresource:"$(TargetDir)..\..\bin\$(Configuration)\$(TargetFileName)";#1</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(ProjectDir)\ReportViewer\resource_report.rdlc" "$(TargetDir)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

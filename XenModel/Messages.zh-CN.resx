@@ -375,6 +375,12 @@
   <data name="ACTION_EXPORT_TASK_DESCRIPTION" xml:space="preserve">
     <value>将 {0} 导出到备份文件</value>
   </data>
+  <data name="ACTION_EXPORT_POOL_RESOURCE_CANCEL_AND_FILE_UNDELETE" xml:space="preserve">
+    <value>已取消导出，但目的文件 '{0}'删除失败</value>
+  </data>
+  <data name="ACTION_EXPORT_POOL_RESOURCE_LIST_FROM_X" xml:space="preserve">
+    <value>从池 '{0}' 导出资源统计报表</value>
+  </data>
   <data name="ACTION_EXPORT_TASK_NAME" xml:space="preserve">
     <value>导出 {0}</value>
   </data>
@@ -6336,6 +6342,9 @@ SCSI ID: {2}
   <data name="MAINWINDOW_EXPIRE_MESSAGE" xml:space="preserve">
     <value>“{0}”上的 XenServer 许可证将于 {1}内过期。</value>
   </data>
+  <data name="MAINWINDOW_EXPORT_POOL_RESOURCE_DATA" xml:space="preserve">
+    <value>资源统计报表(&amp;X)...</value>
+  </data>
   <data name="MAINWINDOW_EXPORT_TEMPLATE" xml:space="preserve">
     <value>导出到文件(&amp;E)...</value>
   </data>
@@ -6897,6 +6906,9 @@ SCSI ID: {2}
   </data>
   <data name="MOVING" xml:space="preserve">
     <value>正在移动...</value>
+  </data>
+  <data name="MTU" xml:space="preserve">
+    <value>MTU</value>
   </data>
   <data name="MULTIPATHING" xml:space="preserve">
     <value>多路径</value>
@@ -8442,6 +8454,9 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="POWER_STATE" xml:space="preserve">
     <value>电源状态</value>
   </data>
+  <data name="POWER_USAGE" xml:space="preserve">
+    <value>功耗 (W)</value>
+  </data>
   <data name="PRIVACY_WARNING" xml:space="preserve">
     <value>隐私警告</value>
   </data>
@@ -9041,6 +9056,9 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="RUNNING_ARCHIVE" xml:space="preserve">
     <value>正在存档</value>
+  </data>
+  <data name="RUNNING_ON" xml:space="preserve">
+    <value>运行于</value>
   </data>
   <data name="RUNNING_SNAPSHOTS" xml:space="preserve">
     <value>正在生成快照</value>
@@ -9877,6 +9895,9 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="TELL_ME_MORE" xml:space="preserve">
     <value>了解更多信息 ...</value>
   </data>
+  <data name="TEMPERATURE" xml:space="preserve">
+    <value>温度 (°C)</value>
+  </data>
   <data name="TEMPLATE" xml:space="preserve">
     <value>模板</value>
   </data>
@@ -10600,6 +10621,12 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="USES" xml:space="preserve">
     <value>使用</value>
   </data>
+  <data name="UTILIZATION" xml:space="preserve">
+    <value>利用率 (%)</value>
+  </data>
+  <data name="UUID" xml:space="preserve">
+    <value>UUID</value>
+  </data>
   <data name="UUID_SEARCH" xml:space="preserve">
     <value>是</value>
   </data>
@@ -10680,6 +10707,9 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
     <value>只有关闭 VM 后，才能更改 VCPU 数。</value>
+  </data>
+  <data name="VDI" xml:space="preserve">
+    <value>VDI</value>
   </data>
   <data name="VDI_COPIED" xml:space="preserve">
     <value>磁盘“{0}”已从 SR“{1}”复制到 SR“{2}”</value>

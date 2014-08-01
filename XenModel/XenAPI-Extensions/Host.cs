@@ -391,6 +391,15 @@ namespace XenAPI
             return h._RestrictVgpu;
         }
 
+        private bool _RestrictResourceReport
+        {
+            get { return BoolKeyPreferTrue(license_params, "restrict_resource_report"); }
+        }
+        public static bool RestrictResourceReport(Host h)
+        {
+            return h._RestrictResourceReport;
+        }
+
         public bool HasPBDTo(SR sr)
         {
             foreach (XenRef<PBD> pbd in PBDs)
