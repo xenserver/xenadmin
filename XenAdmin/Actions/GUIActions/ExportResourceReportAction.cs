@@ -127,15 +127,23 @@ namespace XenAdmin.Actions
             {
                 log.Warn(string.Format("Export of Pool {0} failed", this.Connection.Cache.Pools[0].Name), _exception);
                 log.DebugFormat("Progress of the action until exception: {0}", PercentComplete);
-                try
+
+                if (_exception is IOException)
                 {
-                    File.Delete(_filename);
+                    this.Description = string.Format(Messages.ACTION_EXPORT_DESCRIPTION_FAILED_OF_OPEN_FILE, _filename);
                 }
-                catch (Exception e)
+                else
                 {
-                    log.Warn(string.Format("deleting file {0} failed", _filename), e);
+                    try
+                    {
+                        File.Delete(_filename);
+                    }
+                    catch (Exception e)
+                    {
+                        log.Warn(string.Format("deleting file {0} failed", _filename), e);
+                    }
+                    this.Description = Messages.ACTION_EXPORT_DESCRIPTION_FAILED;
                 }
-                this.Description = Messages.ACTION_EXPORT_DESCRIPTION_FAILED;
                 throw new Exception(Description);
             }
             else
@@ -254,13 +262,14 @@ namespace XenAdmin.Actions
         private class NetworkInfo
         {
             public NetworkInfo(string name, string networkVlanID, string networkLinkStatus,
-                string NetworkMac, string NetworkMtu)
+                string NetworkMac, string NetworkMtu, string Type)
             {
                 _name = name;
                 _vlanID = networkVlanID;
                 _linkStatus = networkLinkStatus;
                 _mac = NetworkMac;
                 _mtu = NetworkMtu;
+                _networkType = Type;
             }
             public virtual string Name
             {
@@ -282,11 +291,16 @@ namespace XenAdmin.Actions
             {
                 get { return _mtu; }
             }
+            public virtual string NetworkType
+            {
+                get { return _networkType; }
+            }
             private string _name;
             private string _vlanID;
             private string _linkStatus;
             private string _mac;
             private string _mtu;
+            private string _networkType;
         }
 
         private class VMInfo
@@ -586,7 +600,7 @@ namespace XenAdmin.Actions
                     throw new CancelledException();
 
                 string cpu_usage = PropertyAccessorHelper.hostCpuUsageStringByMetric(host, MetricUpdater);
-                string usage = PropertyAccessorHelper.hostMemoryUsageStringByMetric(host, MetricUpdater);
+                string usage = PropertyAccessorHelper.hostMemoryUsagePercentageStringByMetric(host, MetricUpdater);
                 string network_usage = PropertyAccessorHelper.hostNetworkUsageStringByMetric(host, MetricUpdater);
                 
                 HostInfo buf = new HostInfo(host.name_label, host.address, host.uuid, cpu_usage,
@@ -606,7 +620,7 @@ namespace XenAdmin.Actions
             {
                 if (Cancelling)
                     throw new CancelledException();
-                
+
                 if (network.other_config.ContainsKey("is_guest_installer_network"))
                 {
                     if (network.other_config["is_guest_installer_network"].ToLower() == "true")
@@ -617,12 +631,23 @@ namespace XenAdmin.Actions
                 }
 
                 List<PIF> pifs = network.Connection.ResolveAll(network.PIFs);
-                
+                string type;
+                if (Cancelling)
+                    throw new CancelledException();
+                if (network.IsBond)
+                    type = Messages.BOND;
+                else if (network.IsVLAN)
+                    type = Messages.NETWORKPANEL_VLAN;
+                else if (pifs.Count != 0 && pifs[0].IsTunnelAccessPIF)
+                    type = Messages.CHIN;
+                else
+                    type = Messages.HYPHEN;
+
                 NetworkInfo buf;
                 if (pifs.Count != 0)
-                   buf = new NetworkInfo(network.Name, Helpers.VlanString(pifs[0]), network.LinkStatusString, pifs[0].MAC, network.MTU.ToString());
+                   buf = new NetworkInfo(network.Name, Helpers.VlanString(pifs[0]), network.LinkStatusString, pifs[0].MAC, network.MTU.ToString(), type);
                 else
-                   buf = new NetworkInfo(network.Name, Messages.HYPHEN, network.LinkStatusString, Messages.HYPHEN, network.MTU.ToString());
+                    buf = new NetworkInfo(network.Name, Messages.HYPHEN, network.LinkStatusString, Messages.HYPHEN, network.MTU.ToString(), type);
                 
                 m_Networks.Add(buf);
                 
@@ -738,7 +763,7 @@ namespace XenAdmin.Actions
                     if (vbd != null && !vbd.IsCDROM && !vbd.IsFloppyDrive && vbd.bootable)
                     {
                         VDI vdi = vm.Connection.Resolve(vbd.VDI);
-                        srInfo += vdi.name_label + ":" + vbd.Name + ":" + vdi.SizeText + ";";
+                        srInfo += vdi.name_label + ":" + vdi.SizeText + ";";
                     }
                 }
                 if (srInfo.Length == 0)
@@ -754,7 +779,7 @@ namespace XenAdmin.Actions
                     default_template_name = vm.other_config["base_template_name"];
 
                 VMInfo buf = new VMInfo(vm.Name, vm.uuid, PropertyAccessorHelper.vmCpuUsageStringByMetric(vm, MetricUpdater),
-                    PropertyAccessorHelper.vmMemoryUsageStringByMetric(vm, MetricUpdater), srInfo, Convert.ToString(vm.VIFs.Count),
+                    PropertyAccessorHelper.vmMemoryUsagePercentageStringByMetric(vm, MetricUpdater), srInfo, Convert.ToString(vm.VIFs.Count),
                     Convert.ToString(addresses), MacInfo, OSinfo, Convert.ToString(vm.power_state),
                     Convert.ToString(vm.RunningTime), running_on, default_template_name, vm.Description);
                 
@@ -841,8 +866,6 @@ namespace XenAdmin.Actions
 
             fs = new FileStream(_filename, FileMode.Create);
             fs.Write(bytes, 0, bytes.Length);
-
-            
             PercentComplete = 100;
             if (fs != null)
                 fs.Close();
@@ -1074,8 +1097,8 @@ namespace XenAdmin.Actions
         {
             FileStream fs = null;
             List<string> items = new List<string>();
-
             fs = new FileStream(_filename, FileMode.Create);
+
             //pool information part
             items.Add(Messages.POOL + ":" + Connection.Cache.Pools[0].Name);
             ComposeCSVRow(ref fs, ref items);

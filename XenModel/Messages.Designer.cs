@@ -781,6 +781,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export failed due to open destination file {0} failed.
+        /// </summary>
+        public static string ACTION_EXPORT_DESCRIPTION_FAILED_OF_OPEN_FILE {
+            get {
+                return ResourceManager.GetString("ACTION_EXPORT_DESCRIPTION_FAILED_OF_OPEN_FILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export failed due to a header checksum mismatch.  Please retry the export..
         /// </summary>
         public static string ACTION_EXPORT_DESCRIPTION_HEADER_CHECKSUM_FAILED {
@@ -4986,6 +4995,15 @@ namespace XenAdmin {
         public static string BIOS_STRINGS_COPIED {
             get {
                 return ResourceManager.GetString("BIOS_STRINGS_COPIED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bond.
+        /// </summary>
+        public static string BOND {
+            get {
+                return ResourceManager.GetString("BOND", resourceCulture);
             }
         }
         

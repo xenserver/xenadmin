@@ -357,6 +357,9 @@
   <data name="ACTION_EXPORT_DESCRIPTION_FAILED" xml:space="preserve">
     <value>Export failed</value>
   </data>
+  <data name="ACTION_EXPORT_DESCRIPTION_FAILED_OF_OPEN_FILE" xml:space="preserve">
+    <value>Export failed due to open destination file {0} failed</value>
+  </data>
   <data name="ACTION_EXPORT_DESCRIPTION_HEADER_CHECKSUM_FAILED" xml:space="preserve">
     <value>Export failed due to a header checksum mismatch.  Please retry the export.</value>
   </data>
@@ -1817,6 +1820,9 @@ This is a potentially dangerous operation and is not allowed.</value>
   </data>
   <data name="BIOS_STRINGS_COPIED" xml:space="preserve">
     <value>BIOS strings copied</value>
+  </data>
+  <data name="BOND" xml:space="preserve">
+    <value>Bond</value>
   </data>
   <data name="BOND_CREATE" xml:space="preserve">
     <value>Create Bond</value>

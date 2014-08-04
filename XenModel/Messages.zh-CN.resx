@@ -357,6 +357,9 @@
   <data name="ACTION_EXPORT_DESCRIPTION_FAILED" xml:space="preserve">
     <value>导出失败</value>
   </data>
+  <data name="ACTION_EXPORT_DESCRIPTION_FAILED_OF_OPEN_FILE" xml:space="preserve">
+    <value>导出操作因源文件 {0} 打开失败</value>
+  </data>
   <data name="ACTION_EXPORT_DESCRIPTION_HEADER_CHECKSUM_FAILED" xml:space="preserve">
     <value>导出操作因标头校验和不匹配而失败。请重新尝试导出。</value>
   </data>
@@ -1760,6 +1763,9 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   </data>
   <data name="BIOS_STRINGS_COPIED" xml:space="preserve">
     <value>已复制 BIOS 字符串</value>
+  </data>
+  <data name="BOND" xml:space="preserve">
+    <value>绑定</value>
   </data>
   <data name="BOND_CREATE" xml:space="preserve">
     <value>创建绑定</value>
