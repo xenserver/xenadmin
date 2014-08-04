@@ -1822,7 +1822,7 @@ This is a potentially dangerous operation and is not allowed.</value>
     <value>BIOS strings copied</value>
   </data>
   <data name="BOND" xml:space="preserve">
-    <value>Bond</value>
+    <value>Bonded network</value>
   </data>
   <data name="BOND_CREATE" xml:space="preserve">
     <value>Create Bond</value>
@@ -1965,8 +1965,8 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   <data name="BUGTOOL_SAVING" xml:space="preserve">
     <value>Saving server status report</value>
   </data>
-  <data name="BUILDIN_NETWORK" xml:space="preserve">
-    <value>Build-in network</value>
+  <data name="BUILTIN_NETWORK" xml:space="preserve">
+    <value>Built-in network</value>
   </data>
   <data name="BUS_PATH" xml:space="preserve">
     <value>PCI Bus Path</value>

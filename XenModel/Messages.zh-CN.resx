@@ -1765,7 +1765,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>已复制 BIOS 字符串</value>
   </data>
   <data name="BOND" xml:space="preserve">
-    <value>绑定</value>
+    <value>绑定网路</value>
   </data>
   <data name="BOND_CREATE" xml:space="preserve">
     <value>创建绑定</value>
@@ -1908,7 +1908,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   <data name="BUGTOOL_SAVING" xml:space="preserve">
     <value>正在保存服务器状态报告</value>
   </data>
-  <data name="BUILDIN_NETWORK" xml:space="preserve">
+  <data name="BUILTIN_NETWORK" xml:space="preserve">
     <value>内置网络</value>
   </data>
   <data name="BUS_PATH" xml:space="preserve">
