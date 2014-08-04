@@ -2126,6 +2126,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="XS60E001-src-pkgs.tar.gz">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="XS62E006-src-pkgs.tar.gz">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="XS62E006.xsupdate">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
