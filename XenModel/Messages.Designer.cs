@@ -19849,7 +19849,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have applied filters to the list of events. Do you wish to dismiss all events or only the events you have chosen to view? In both cases only the completed events will be removed..
+        ///   Looks up a localized string similar to You have applied filters to the list of events. Do you wish to dismiss all events or only the events you have chosen to view? In both cases only completed events will be removed..
         /// </summary>
         public static string MESSAGEBOX_LOGS_DELETE {
             get {
