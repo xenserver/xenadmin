@@ -4026,7 +4026,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only export &amp;filtered.
+        ///   Looks up a localized string similar to Only export &amp;visible.
         /// </summary>
         public static string ALERT_EXPORT_FILTERED_BUTTON {
             get {
@@ -10004,7 +10004,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only dismiss &amp;filtered.
+        ///   Looks up a localized string similar to Only dismiss &amp;visible.
         /// </summary>
         public static string DISMISS_FILTERED_CONFIRM_BUTTON {
             get {
@@ -19849,7 +19849,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have applied filters to the list of events. Do you wish to dismiss all events or only the events you have chosen to view? In both cases only the non-active events will be removed..
+        ///   Looks up a localized string similar to You have applied filters to the list of events. Do you wish to dismiss all events or only the events you have chosen to view? In both cases only the completed events will be removed..
         /// </summary>
         public static string MESSAGEBOX_LOGS_DELETE {
             get {
@@ -19858,7 +19858,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation will remove all non-active events. Do you wish to continue?.
+        ///   Looks up a localized string similar to This operation will remove all completed events. Do you wish to continue?.
         /// </summary>
         public static string MESSAGEBOX_LOGS_DELETE_NO_FILTER {
             get {
@@ -19867,7 +19867,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation will remove all selected non-active events. Do you wish to continue?.
+        ///   Looks up a localized string similar to This operation will remove all selected completed events. Do you wish to continue?.
         /// </summary>
         public static string MESSAGEBOX_LOGS_DELETE_SELECTED {
             get {

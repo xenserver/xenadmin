@@ -1500,7 +1500,7 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
     <value>You have applied filters to the list of alerts. Do you wish to export all alerts from every connected server, or only the alerts you have chosen to view?</value>
   </data>
   <data name="ALERT_EXPORT_FILTERED_BUTTON" xml:space="preserve">
-    <value>Only export &amp;filtered</value>
+    <value>Only export &amp;visible</value>
   </data>
   <data name="ALERT_GENERIC_HELP" xml:space="preserve">
     <value>Help</value>
@@ -3565,7 +3565,7 @@ This will also delete its subfolders.</value>
     <value>Yes, Dismiss &amp;all</value>
   </data>
   <data name="DISMISS_FILTERED_CONFIRM_BUTTON" xml:space="preserve">
-    <value>Only dismiss &amp;filtered</value>
+    <value>Only dismiss &amp;visible</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTOOLS" xml:space="preserve">
     <value>A memory range cannot be set because XenServer Tools are not installed on this VM.</value>
@@ -6914,13 +6914,13 @@ This action is final and unrecoverable.</value>
     <value>Log file is missing.</value>
   </data>
   <data name="MESSAGEBOX_LOGS_DELETE" xml:space="preserve">
-    <value>You have applied filters to the list of events. Do you wish to dismiss all events or only the events you have chosen to view? In both cases only the non-active events will be removed.</value>
+    <value>You have applied filters to the list of events. Do you wish to dismiss all events or only the events you have chosen to view? In both cases only the completed events will be removed.</value>
   </data>
   <data name="MESSAGEBOX_LOGS_DELETE_NO_FILTER" xml:space="preserve">
-    <value>This operation will remove all non-active events. Do you wish to continue?</value>
+    <value>This operation will remove all completed events. Do you wish to continue?</value>
   </data>
   <data name="MESSAGEBOX_LOGS_DELETE_SELECTED" xml:space="preserve">
-    <value>This operation will remove all selected non-active events. Do you wish to continue?</value>
+    <value>This operation will remove all selected completed events. Do you wish to continue?</value>
   </data>
   <data name="MESSAGEBOX_LOG_DELETE" xml:space="preserve">
     <value>Are you sure you want to dismiss this event?</value>
