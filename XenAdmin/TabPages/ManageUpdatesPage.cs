@@ -272,9 +272,7 @@ namespace XenAdmin.TabPages
 
         private void UpdateButtonEnablement()
         {
-            toolStripDropDownButtonServerFilter.Enabled =
-                toolStripDropDownButtonDateFilter.Enabled =
-                toolStripButtonExportAll.Enabled = Updates.UpdateAlertsCount > 0;
+            toolStripButtonExportAll.Enabled = Updates.UpdateAlertsCount > 0;
         }
 
         private void ShowInformationHelper(string reason)

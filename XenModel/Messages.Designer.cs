@@ -4026,7 +4026,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only export &amp;filtered.
+        ///   Looks up a localized string similar to Only export &amp;visible.
         /// </summary>
         public static string ALERT_EXPORT_FILTERED_BUTTON {
             get {
@@ -10004,7 +10004,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only dismiss &amp;filtered.
+        ///   Looks up a localized string similar to Only dismiss &amp;visible.
         /// </summary>
         public static string DISMISS_FILTERED_CONFIRM_BUTTON {
             get {
@@ -19831,20 +19831,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to delete this entry?.
+        ///   Looks up a localized string similar to Are you sure you want to dismiss this event?.
         /// </summary>
         public static string MESSAGEBOX_LOG_DELETE {
             get {
                 return ResourceManager.GetString("MESSAGEBOX_LOG_DELETE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Clear entry.
-        /// </summary>
-        public static string MESSAGEBOX_LOG_DELETE_TITLE {
-            get {
-                return ResourceManager.GetString("MESSAGEBOX_LOG_DELETE_TITLE", resourceCulture);
             }
         }
         
@@ -19858,7 +19849,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This will clear all non-active entries in the current view. Do you wish to continue?.
+        ///   Looks up a localized string similar to You have applied filters to the list of events. Do you wish to dismiss all events or only the events you have chosen to view? In both cases only completed events will be removed..
         /// </summary>
         public static string MESSAGEBOX_LOGS_DELETE {
             get {
@@ -19867,20 +19858,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you wish to delete the selected entries?.
+        ///   Looks up a localized string similar to This operation will remove all completed events. Do you wish to continue?.
         /// </summary>
-        public static string MESSAGEBOX_LOGS_DELETE_SELECTED {
+        public static string MESSAGEBOX_LOGS_DELETE_NO_FILTER {
             get {
-                return ResourceManager.GetString("MESSAGEBOX_LOGS_DELETE_SELECTED", resourceCulture);
+                return ResourceManager.GetString("MESSAGEBOX_LOGS_DELETE_NO_FILTER", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clear entries.
+        ///   Looks up a localized string similar to This operation will remove all selected completed events. Do you wish to continue?.
         /// </summary>
-        public static string MESSAGEBOX_LOGS_DELETE_TITLE {
+        public static string MESSAGEBOX_LOGS_DELETE_SELECTED {
             get {
-                return ResourceManager.GetString("MESSAGEBOX_LOGS_DELETE_TITLE", resourceCulture);
+                return ResourceManager.GetString("MESSAGEBOX_LOGS_DELETE_SELECTED", resourceCulture);
             }
         }
         

@@ -578,10 +578,7 @@ namespace XenAdmin.TabPages
 
         private void UpdateActionEnablement()
         {
-            toolStripDropDownSeveritiesFilter.Enabled =
-                toolStripDropDownButtonServerFilter.Enabled =
-                toolStripDropDownButtonDateFilter.Enabled =
-                toolStripButtonExportAll.Enabled = Alert.NonDismissingAlertCount > 0;
+            toolStripButtonExportAll.Enabled = Alert.NonDismissingAlertCount > 0;
 
             tsmiDismissAll.Enabled = AllowedToDismiss(Alert.Alerts);
             tsmiDismissAll.AutoToolTip = !tsmiDismissAll.Enabled;
