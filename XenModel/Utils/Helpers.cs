@@ -468,24 +468,6 @@ namespace XenAdmin.Core
                 HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
         }
 
-        /// <param name="conn">May be null, in which case true is returned.</param>
-        public static bool AugustaOrGreater(IXenConnection conn)
-        {
-            return conn == null ? true : AugustaOrGreater(Helpers.GetMaster(conn));
-        }
-
-        /// <param name="host">May be null, in which case true is returned.</param>
-        public static bool AugustaOrGreater(Host host)
-        {
-            if (host == null)
-                return true;
-
-            string platform_version = HostPlatformVersion(host);
-            return
-                platform_version != null && productVersionCompare(platform_version, "1.9.50") >= 0 ||
-                HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
-        }
-
         // CP-3435: Disable Check for Updates in Common Criteria Certification project
         public static bool CommonCriteriaCertificationRelease
         {
