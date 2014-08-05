@@ -31652,7 +31652,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Utilization (%).
+        ///   Looks up a localized string similar to Computer Utilization (%).
         /// </summary>
         public static string UTILIZATION {
             get {

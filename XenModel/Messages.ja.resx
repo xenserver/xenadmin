@@ -10620,7 +10620,7 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
     <value>以下を使用する</value>
   </data>
   <data name="UTILIZATION" xml:space="preserve">
-    <value>Utilization (%)</value>
+    <value>Computer Utilization (%)</value>
   </data>
   <data name="UUID" xml:space="preserve">
     <value>UUID</value>
