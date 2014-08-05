@@ -10983,7 +10983,7 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
     <value>uses</value>
   </data>
   <data name="UTILIZATION" xml:space="preserve">
-    <value>Utilization (%)</value>
+    <value>Computer Utilization (%)</value>
   </data>
   <data name="UUID" xml:space="preserve">
     <value>UUID</value>
