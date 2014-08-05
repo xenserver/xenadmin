@@ -48,7 +48,6 @@ namespace XenAdmin.Dialogs.RestoreSession
             // 
             resources.ApplyResources(this.noteLabel, "noteLabel");
             this.tableLayoutPanel1.SetColumnSpan(this.noteLabel, 2);
-            this.noteLabel.MaximumSize = new System.Drawing.Size(456, 99999);
             this.noteLabel.Name = "noteLabel";
             // 
             // reEnterMasterLabel
@@ -79,7 +78,6 @@ namespace XenAdmin.Dialogs.RestoreSession
             // 
             resources.ApplyResources(this.masterBlurbLabel, "masterBlurbLabel");
             this.tableLayoutPanel1.SetColumnSpan(this.masterBlurbLabel, 2);
-            this.masterBlurbLabel.MaximumSize = new System.Drawing.Size(456, 99999);
             this.masterBlurbLabel.Name = "masterBlurbLabel";
             // 
             // okButton
