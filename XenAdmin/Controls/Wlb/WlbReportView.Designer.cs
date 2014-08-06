@@ -33,6 +33,7 @@ namespace XenAdmin.Controls.Wlb
             this.labelHostCombo = new System.Windows.Forms.Label();
             this.hostComboBox = new System.Windows.Forms.ComboBox();
             this.btnRunReport = new System.Windows.Forms.Button();
+            this.btnLaterReport = new System.Windows.Forms.Button();
             this.labelEndDate = new System.Windows.Forms.Label();
             this.EndDatePicker = new System.Windows.Forms.DateTimePicker();
             this.labelStartDate = new System.Windows.Forms.Label();
@@ -51,7 +52,7 @@ namespace XenAdmin.Controls.Wlb
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.panelUsers = new System.Windows.Forms.Panel();
-            this.userComboBox = new System.Windows.Forms.ComboBox();
+            this.userComboBox = new XenAdmin.Controls.LongStringComboBox();
             this.labelUsers = new System.Windows.Forms.Label();
             this.panelObjects = new System.Windows.Forms.Panel();
             this.labelObjects = new System.Windows.Forms.Label();
@@ -87,6 +88,13 @@ namespace XenAdmin.Controls.Wlb
             this.btnRunReport.Name = "btnRunReport";
             this.btnRunReport.UseVisualStyleBackColor = true;
             this.btnRunReport.Click += new System.EventHandler(this.btnRunReport_Click);
+            // 
+            // btnLaterReport
+            // 
+            resources.ApplyResources(this.btnLaterReport, "btnLaterReport");
+            this.btnLaterReport.Name = "btnLaterReport";
+            this.btnLaterReport.UseVisualStyleBackColor = true;
+            this.btnLaterReport.Click += new System.EventHandler(this.btnLaterReport_Click);
             // 
             // labelEndDate
             // 
@@ -187,6 +195,7 @@ namespace XenAdmin.Controls.Wlb
             this.flowLayoutPanelButtons.Controls.Add(this.btnClose);
             this.flowLayoutPanelButtons.Controls.Add(this.btnSubscribe);
             this.flowLayoutPanelButtons.Controls.Add(this.btnRunReport);
+            this.flowLayoutPanelButtons.Controls.Add(this.btnLaterReport);
             this.flowLayoutPanelButtons.Name = "flowLayoutPanelButtons";
             // 
             // flowLayoutPanel2
@@ -280,6 +289,7 @@ namespace XenAdmin.Controls.Wlb
         public System.Windows.Forms.Label labelHostCombo;
         public System.Windows.Forms.ComboBox hostComboBox;
         public System.Windows.Forms.Button btnRunReport;
+        public System.Windows.Forms.Button btnLaterReport;
         private System.Windows.Forms.Label labelEndDate;
         private System.Windows.Forms.DateTimePicker EndDatePicker;
         private System.Windows.Forms.Label labelStartDate;
@@ -299,7 +309,7 @@ namespace XenAdmin.Controls.Wlb
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Panel panelUsers;
-        public System.Windows.Forms.ComboBox userComboBox;
+        public XenAdmin.Controls.LongStringComboBox userComboBox;
         public System.Windows.Forms.Label labelUsers;
         private System.Windows.Forms.Panel panelObjects;
         private System.Windows.Forms.Label labelObjects;

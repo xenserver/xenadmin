@@ -160,6 +160,7 @@ namespace XenAdmin
                     this.wlbReportView1.btnSubscribe.Visible = false;
                 }
 
+                this.wlbReportView1.btnLaterReport.Visible = false;
                 this.wlbReportView1.IsCreedenceOrLater = _isCreedenceOrLater;
                 PopulateTreeView();
             }

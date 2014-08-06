@@ -234,7 +234,7 @@ namespace XenAdmin.SettingsPanels
             Dictionary<WlbAuditTrailLogGranularity, string> auditLogGranularity = new Dictionary<WlbAuditTrailLogGranularity, string>();
 
             auditLogGranularity.Add(WlbAuditTrailLogGranularity.Minimum, Messages.WLB_AUDIT_LOG_MINIMUM);
-            auditLogGranularity.Add(WlbAuditTrailLogGranularity.Normal, Messages.WLB_AUDIT_LOG_NORMAL);
+            auditLogGranularity.Add(WlbAuditTrailLogGranularity.Medium, Messages.WLB_AUDIT_LOG_MEDIUM);
             auditLogGranularity.Add(WlbAuditTrailLogGranularity.Maximum, Messages.WLB_AUDIT_LOG_MAXIMUM);
 
             return auditLogGranularity;

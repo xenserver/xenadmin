@@ -64,7 +64,7 @@ namespace XenAdmin.Wlb
     public enum WlbAuditTrailLogGranularity
     {
         Minimum,
-        Normal,
+        Medium,
         Maximum
     }
 

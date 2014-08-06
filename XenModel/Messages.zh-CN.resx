@@ -4513,6 +4513,9 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   <data name="FEATURE_NOT_AVAILABLE_NEED_MR_PLURAL" xml:space="preserve">
     <value>{0} 需要使用 XenServer 5.6 或更高版本</value>
   </data>
+  <data name="FETCH_EARLIER_DATA" xml:space="preserve">
+    <value>后一段报告(&amp;N)</value>
+  </data>
   <data name="FIBRECHANNEL_NO_RESULTS" xml:space="preserve">
     <value>未找到 LUN。请验证硬件配置。</value>
   </data>
@@ -11092,11 +11095,14 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="WLB_AUDIT_LOG_MAXIMUM" xml:space="preserve">
     <value>最大</value>
   </data>
+  <data name="WLB_AUDIT_LOG_MEDIUM" xml:space="preserve">
+    <value>中等</value>
+  </data>
   <data name="WLB_AUDIT_LOG_MINIMUM" xml:space="preserve">
     <value>最小</value>
   </data>
-  <data name="WLB_AUDIT_LOG_NORMAL" xml:space="preserve">
-    <value>常规</value>
+  <data name="WLB_AUDIT_LOG_USER_OBJECT_ALL" xml:space="preserve">
+    <value>全部</value>
   </data>
   <data name="WLB_AUTOMATION" xml:space="preserve">
     <value>自动化</value>
@@ -11262,9 +11268,6 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="WLB_METRIC_WEIGHTING_SUBTEXT" xml:space="preserve">
     <value>调整 WLB 指标的加权</value>
-  </data>
-  <data name="WLB_MORE_REPORT_BANNER" xml:space="preserve">
-    <value>请点击“更多报告”获取更多报告内容</value>
   </data>
   <data name="WLB_NEXT_OPT_MODE_SCHEDULE_FORMAT" xml:space="preserve">
     <value>{0} {1}</value>

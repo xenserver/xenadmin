@@ -77,6 +77,7 @@ namespace XenAdmin.Controls.Wlb
         private int _currentOffsetMinutes;
         private int _startLine;
         private int _endLine;
+        private int _currentReportSection;
 
         // To mitigate the WLB server memory pressure to generate pool audit trail report
         // and decrease the latency to display the report results on XenCenter,
@@ -524,6 +525,7 @@ namespace XenAdmin.Controls.Wlb
                 _isAuditReport = false;
             }
 
+            this.btnLaterReport.Visible = false;
             this.ViewerReportInfo = reportInfo;
 
             if (ResetReportViewer == true)
@@ -533,11 +535,11 @@ namespace XenAdmin.Controls.Wlb
 
             // Enable the run and disable subscribe buttons 
             this.btnRunReport.Enabled = true;
+            this.btnLaterReport.Enabled = false;
             this.btnSubscribe.Enabled = false;
 
-            // Set the run button text and make label invisible
+            // Set the run button text
             this.btnRunReport.Text = Messages.RUN_REPORT;
-            this.lblExported.Visible = false;
 
             // If host is a parameter for the selected report, show it
             if (reportInfo.DisplayHosts == true)
@@ -601,6 +603,7 @@ namespace XenAdmin.Controls.Wlb
                     // Fill user dropdown with user list retrieved from WLB server
                     string audit_users_string = reportInfo.ReportQueryParameterNames["AuditUser"].ToString();
                     string[] audit_users = audit_users_string.Length > 0 ? audit_users_string.Split(',') : (new string[0]);
+                    Array.Sort(audit_users, StringComparer.InvariantCulture);
                     this.SetUserComboBox(audit_users);
                     _userComboSet = true;
                 }
@@ -622,6 +625,7 @@ namespace XenAdmin.Controls.Wlb
                     // Fill object dropdown with object list retrieved from WLB server
                     string audit_objects_string = reportInfo.ReportQueryParameterNames["AuditObject"].ToString();
                     string[] audit_objects = audit_objects_string.Length > 0 ? audit_objects_string.Split(',') : (new string[0]);
+                    Array.Sort(audit_objects, StringComparer.InvariantCulture);
                     this.SetObjectComboBox(audit_objects);
                     _objectComboSet = true;
                 }
@@ -683,17 +687,16 @@ namespace XenAdmin.Controls.Wlb
         {
             if (_users != null)
             {
+                // Add ALL in dropdown to represent all users
+                userComboBox.Items.Add(Messages.WLB_AUDIT_LOG_USER_OBJECT_ALL);
+
                 foreach (string user in _users)
                 {
                     userComboBox.Items.Add(user);
                 }
-                // Add ALL in dropdown to represent all users
-                userComboBox.Items.Add("ALL");
             }
 
-            userComboBox.Sorted = true;
             userComboBox.SelectedIndex = 0;
-
         }
 
         /// <summary>
@@ -703,14 +706,15 @@ namespace XenAdmin.Controls.Wlb
         {
             if (_objects != null)
             {
+                // Add ALL in dropdown to represent all objects
+                objectComboBox.Items.Add(Messages.WLB_AUDIT_LOG_USER_OBJECT_ALL);
+
                 foreach (string auditObject in _objects)
                 {
                     objectComboBox.Items.Add(auditObject);
                 }
-                // Add ALL in dropdown to represent all objects
-                objectComboBox.Items.Add("ALL");
             }
-            objectComboBox.Sorted = true;
+
             objectComboBox.SelectedIndex = 0;
         }
 
@@ -864,12 +868,30 @@ namespace XenAdmin.Controls.Wlb
                             break;
 
                         case "AuditUser":
-                            paramValue = currentParams["AuditUser"].Values.Count == 0 ? userComboBox.SelectedItem.ToString(): currentParams["AuditUser"].Values[0];
+                            if (userComboBox.SelectedIndex == 0)
+                            {
+                                // The first item is ALL in localized characters,
+                                // set it as "ALL" so WLB server could recognize.
+                                paramValue = "ALL";
+                            }
+                            else
+                            {
+                                paramValue = currentParams["AuditUser"].Values.Count == 0 ? userComboBox.SelectedItem.ToString(): currentParams["AuditUser"].Values[0];
+                            }
                             addParam = true;
                             break;
 
                         case "AuditObject":
-                            paramValue = currentParams["AuditObject"].Values.Count == 0 ? objectComboBox.SelectedItem.ToString(): currentParams["AuditObject"].Values[0];
+                            if(objectComboBox.SelectedIndex == 0)
+                            {
+                                // The first item is ALL in localized characters,
+                                // set it as "ALL" so WLB server could recognize.
+                                paramValue = "ALL";
+                            }
+                            else
+                            {
+                                paramValue = currentParams["AuditObject"].Values.Count == 0 ? objectComboBox.SelectedItem.ToString(): currentParams["AuditObject"].Values[0];
+                            }
                             addParam = true;
                             break;
 
@@ -1017,25 +1039,45 @@ namespace XenAdmin.Controls.Wlb
                         if (cnt >= _lineLimit)
                         {
                             // If audit trail report from WLB server exceeds the line limit,
-                            // update _startLine and _endLine for more report,
                             // change the run button text to "More",
                             // display the label to indicate there's more report.
-                            _startLine += _lineLimit;
-                            _endLine += _lineLimit;
-                            this.btnRunReport.Text = Messages.RUN_MORE_REPORT;
-                            this.lblExported.Text = Messages.WLB_MORE_REPORT_BANNER;
-                            this.lblExported.Visible = true;
+
+                            this.btnRunReport.Text = Messages.FETCH_EARLIER_DATA;
+                            this.btnRunReport.Enabled = true;
+
                         }
                         else
                         {
                             // If audit trail report from WLB server doesn't exceed the line limit,
-                            // reset _startLine, _endLine,
+                            // and this is the first section of report,
                             // change the run button text back to "Run Report",
-                            // Hide the label.
-                            _startLine = 1;
-                            _endLine = _lineLimit;
-                            this.btnRunReport.Text = Messages.RUN_REPORT;
-                            this.lblExported.Visible = false;
+                            // or disable the run report button and just keep the later report button.
+                            if(btnLaterReport.Visible == true)
+                            {
+                                this.btnRunReport.Enabled = false;
+                            }
+                            else
+                            {
+                                this.btnRunReport.Text = Messages.RUN_REPORT;
+                            }
+                            
+                        }
+
+                        if(_currentReportSection > 1)
+                        {
+                            this.btnLaterReport.Visible = true;
+                            this.btnLaterReport.Enabled = true;
+                        }
+                        else if (_currentReportSection == 1 && 
+                                 this.btnRunReport.Text == Messages.FETCH_EARLIER_DATA)
+                        {
+                            this.btnLaterReport.Visible = true;
+                            this.btnLaterReport.Enabled = false;                            
+                        }
+                        else
+                        {
+                            this.btnLaterReport.Visible = false;
+                            this.btnLaterReport.Enabled = false;
                         }
                     }
                     
@@ -1169,6 +1211,7 @@ namespace XenAdmin.Controls.Wlb
         private void ReportView_Load(object sender, EventArgs e)
         {
             this.btnRunReport.Enabled = false;
+            this.btnLaterReport.Enabled = false;
             this.btnSubscribe.Enabled = false;
 
             this.hostComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -1224,12 +1267,52 @@ namespace XenAdmin.Controls.Wlb
 
 
         /// <summary>
-        /// Event handler for the "Run Report" button
+        /// Event handler for the "Run Report"/"Next Section" button
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         internal void btnRunReport_Click(object sender, EventArgs e)
         {
+            if(_isAuditReport && _isCreedenceOrLater)
+            {
+                // If the button displays "Run Report",
+                // that means the 1st report section is requested.
+                // Or else the button text is "Next Section",
+                // next report section is requested.
+
+                if(this.btnRunReport.Text == Messages.RUN_REPORT)
+                {
+                    _currentReportSection = 1;
+                    _startLine = 1;
+                    _endLine = _lineLimit;
+                }
+                else
+                {
+                    _currentReportSection += 1;
+                    _startLine += _lineLimit;
+                    _endLine += _lineLimit;
+                }
+            }
+            this.reportViewer1.Reset();
+            this.ExecuteReport();
+        }
+
+
+        /// <summary>
+        /// Event handler for the "Previous Section" button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        internal void btnLaterReport_Click(object sender, EventArgs e)
+        {
+            if(_isAuditReport && _isCreedenceOrLater)
+            {
+                // The previous report section is requested.
+
+                _currentReportSection -= 1;
+                _startLine -= _lineLimit;
+                _endLine -= _lineLimit;
+            }
             this.reportViewer1.Reset();
             this.ExecuteReport();
         }
@@ -1451,8 +1534,10 @@ namespace XenAdmin.Controls.Wlb
             _endTime = String.Empty;
             _startLine = 1;
             _endLine = _lineLimit;
+            _currentReportSection = 0;
+            btnRunReport.Enabled = true;
             btnRunReport.Text = Messages.RUN_REPORT;
-            lblExported.Visible = false;
+            btnLaterReport.Visible = false;
         }
 
     }

@@ -151,7 +151,7 @@
     <value>36</value>
   </data>
   <data name="labelAuditTrail.Text" xml:space="preserve">
-    <value>选择池审核追踪日志详细程度的级别。警告：开启"最大"将会消耗更多 WLB 服务器磁盘空间和内存。</value>
+    <value>选择池审核追踪日志详细程度的级别。请注意更高级别将消耗更多 WLB 服务器磁盘空间和内存。</value>
   </data>
   <data name="&gt;&gt;labelAuditTrail.Name" xml:space="preserve">
     <value>labelAuditTrail</value>
@@ -169,13 +169,13 @@
     <value>Top</value>
   </data>
   <data name="comboBoxPoolAuditTrailLevel.Items" xml:space="preserve">
-    <value>Minimum</value>
+    <value>最小</value>
   </data>
   <data name="comboBoxPoolAuditTrailLevel.Items1" xml:space="preserve">
-    <value>Normal</value>
+    <value>中等</value>
   </data>
   <data name="comboBoxPoolAuditTrailLevel.Items2" xml:space="preserve">
-    <value>Maximum</value>
+    <value>最大</value>
   </data>
   <data name="comboBoxPoolAuditTrailLevel.Location" type="System.Drawing.Point, System.Drawing">
     <value>48, 3</value>
@@ -221,6 +221,9 @@
   </data>
   <data name="sectionHeaderLabelAuditTrail.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
+  </data>
+  <data name="sectionHeaderLabelAuditTrail.TabStop" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="sectionHeaderLabelAuditTrail.UseMnemonic" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -325,6 +328,9 @@
   <data name="sectionHeaderLabelRepSub.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
+  <data name="sectionHeaderLabelRepSub.TabStop" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="sectionHeaderLabelRepSub.UseMnemonic" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -390,6 +396,9 @@
   </data>
   <data name="sectionHeaderLabelHistData.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
+  </data>
+  <data name="sectionHeaderLabelHistData.TabStop" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="sectionHeaderLabelHistData.UseMnemonic" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -465,6 +474,9 @@
   </data>
   <data name="sectionHeaderLabelOptAgr.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
+  </data>
+  <data name="sectionHeaderLabelOptAgr.TabStop" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="sectionHeaderLabelOptAgr.UseMnemonic" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -616,6 +628,9 @@
   <data name="sectionHeaderLabelRecSev.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="sectionHeaderLabelRecSev.TabStop" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="sectionHeaderLabelRecSev.UseMnemonic" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -711,6 +726,9 @@
   </data>
   <data name="sectionHeaderLabelVmMigInt.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="sectionHeaderLabelVmMigInt.TabStop" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="sectionHeaderLabelVmMigInt.UseMnemonic" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -990,6 +1008,9 @@
   </data>
   <data name="sectionHeaderLabelRecCnt.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
+  </data>
+  <data name="sectionHeaderLabelRecCnt.TabStop" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="sectionHeaderLabelRecCnt.UseMnemonic" type="System.Boolean, mscorlib">
     <value>True</value>

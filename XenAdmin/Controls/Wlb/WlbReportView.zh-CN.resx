@@ -207,6 +207,36 @@
   <data name="&gt;&gt;btnRunReport.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="btnLaterReport.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="btnLaterReport.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnLaterReport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="btnLaterReport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 23</value>
+  </data>
+  <data name="btnLaterReport.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="btnLaterReport.Text" xml:space="preserve">
+    <value>前一段报告(&amp;P)</value>
+  </data>
+  <data name="&gt;&gt;btnLaterReport.Name" xml:space="preserve">
+    <value>btnLaterReport</value>
+  </data>
+  <data name="&gt;&gt;btnLaterReport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnLaterReport.Parent" xml:space="preserve">
+    <value>flowLayoutPanelButtons</value>
+  </data>
+  <data name="&gt;&gt;btnLaterReport.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="labelEndDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -217,7 +247,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelEndDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>185, 7</value>
+    <value>184, 7</value>
   </data>
   <data name="labelEndDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 18</value>
@@ -244,7 +274,7 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="EndDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>261, 4</value>
+    <value>259, 4</value>
   </data>
   <data name="EndDatePicker.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 20</value>
@@ -301,7 +331,7 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="StartDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 3</value>
+    <value>77, 3</value>
   </data>
   <data name="StartDatePicker.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 20</value>
@@ -337,7 +367,7 @@
     <value>844, 526</value>
   </data>
   <data name="reportViewer1.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;reportViewer1.Name" xml:space="preserve">
     <value>reportViewer1</value>
@@ -460,7 +490,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="panelHosts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>0, 3</value>
   </data>
   <data name="panelHosts.Size" type="System.Drawing.Size, System.Drawing">
     <value>263, 24</value>
@@ -514,7 +544,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>369, 1</value>
+    <value>362, 1</value>
   </data>
   <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>442, 30</value>
@@ -580,7 +610,7 @@
     <value>324, 29</value>
   </data>
   <data name="flowLayoutPanelButtons.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;flowLayoutPanelButtons.Name" xml:space="preserve">
     <value>flowLayoutPanelButtons</value>
@@ -610,7 +640,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="panelUsers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>0, 3</value>
   </data>
   <data name="panelUsers.Size" type="System.Drawing.Size, System.Drawing">
     <value>158, 24</value>
@@ -670,13 +700,13 @@
     <value>0</value>
   </data>
   <data name="objectComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>52, 0</value>
+    <value>48, 0</value>
   </data>
   <data name="objectComboBox.MaxDropDownItems" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
   <data name="objectComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 21</value>
+    <value>123, 21</value>
   </data>
   <data name="objectComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -715,13 +745,13 @@
     <value>1</value>
   </data>
   <data name="flowLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>369, 0</value>
+    <value>362, 0</value>
   </data>
   <data name="flowLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 30</value>
+    <value>370, 30</value>
   </data>
   <data name="flowLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;flowLayoutPanel2.Name" xml:space="preserve">
     <value>flowLayoutPanel2</value>

@@ -13172,7 +13172,16 @@ namespace XenAdmin {
                 return ResourceManager.GetString("FEATURE_NOT_AVAILABLE_NEED_MR_PLURAL", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to fetch earlier data.
+        /// </summary>
+        public static string FETCH_EARLIER_DATA {
+            get {
+                return ResourceManager.GetString("FETCH_EARLIER_DATA", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to No LUNs were found.  Please verify your hardware configuration..
         /// </summary>
@@ -26741,7 +26750,16 @@ namespace XenAdmin {
                 return ResourceManager.GetString("RUN_PRECHECKS_WITH_ACCESS_KEY", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to run report.
+        /// </summary>
+        public static string RUN_REPORT {
+            get {
+                return ResourceManager.GetString("RUN_REPORT", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Archiving.
         /// </summary>
@@ -33027,16 +33045,7 @@ namespace XenAdmin {
                 return ResourceManager.GetString("WLB_ADVANCED_CONFIGURATION_SUBTEXT", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Minimum.
-        /// </summary>
-        public static string WLB_AUDIT_LOG_MINIMUM {
-            get {
-                return ResourceManager.GetString("WLB_AUDIT_LOG_MINIMUM", resourceCulture);
-            }
-        }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Maximum.
         /// </summary>
@@ -33045,16 +33054,34 @@ namespace XenAdmin {
                 return ResourceManager.GetString("WLB_AUDIT_LOG_MAXIMUM", resourceCulture);
             }
         }
-        
+
         /// <summary>
-        ///   Looks up a localized string similar to Normal.
+        ///   Looks up a localized string similar to Medium.
         /// </summary>
-        public static string WLB_AUDIT_LOG_NORMAL {
+        public static string WLB_AUDIT_LOG_MEDIUM {
             get {
-                return ResourceManager.GetString("WLB_AUDIT_LOG_NORMAL", resourceCulture);
+                return ResourceManager.GetString("WLB_AUDIT_LOG_MEDIUM", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum.
+        /// </summary>
+        public static string WLB_AUDIT_LOG_MINIMUM {
+            get {
+                return ResourceManager.GetString("WLB_AUDIT_LOG_MINIMUM", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to ALL.
+        /// </summary>
+        public static string WLB_AUDIT_LOG_USER_OBJECT_ALL {
+            get {
+                return ResourceManager.GetString("WLB_AUDIT_LOG_USER_OBJECT_ALL", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Automated optimizations.
         /// </summary>
@@ -35242,31 +35269,5 @@ namespace XenAdmin {
             }
         }
 
-        /// <summary>
-        ///   Looks up a localized string similar to run report.
-        /// </summary>
-        public static string RUN_REPORT {
-            get {
-                return ResourceManager.GetString("RUN_REPORT", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to run more report.
-        /// </summary>
-        public static string RUN_MORE_REPORT {
-            get {
-                return ResourceManager.GetString("RUN_MORE_REPORT", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Click "More" for more report contents.
-        /// </summary>
-        public static string WLB_MORE_REPORT_BANNER {
-            get {
-                return ResourceManager.GetString("WLB_MORE_REPORT_BANNER", resourceCulture);
-            }
-        }
     }
 }
