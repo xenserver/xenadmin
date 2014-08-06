@@ -405,14 +405,7 @@ namespace XenAdmin.TabPages
                 wizard.AddFile(action.PatchPath);
                 wizard.NextStep();
 
-                var hosts = patchAlert.DistinctHosts;
-                if (hosts.Count > 0)
-                {
-                    wizard.SelectServers(hosts);
-                    if (wizard.CurrentStepTabPage.EnableNext())
-                        wizard.NextStep();
-                }
-                else
+                if (patchAlert.DistinctHosts.Count == 0)
                 {
                     string disconnectedServerNames = clickedRow.Cells[ColumnLocation.Index].Value.ToString();
 
