@@ -4634,6 +4634,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="FEATURE_NOT_AVAILABLE_NEED_MR_PLURAL" xml:space="preserve">
     <value>{0} require XenServer 5.6 or later</value>
   </data>
+  <data name="FETCH_EARLIER_DATA" xml:space="preserve">
+    <value>&amp;Next Section</value>
+  </data>
   <data name="FIBRECHANNEL_NO_RESULTS" xml:space="preserve">
     <value>No LUNs were found.  Please verify your hardware configuration.</value>
   </data>
@@ -9325,6 +9328,9 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   <data name="RUN_PRECHECKS_WITH_ACCESS_KEY" xml:space="preserve">
     <value>&amp;Run Prechecks</value>
   </data>
+  <data name="RUN_REPORT" xml:space="preserve">
+    <value>&amp;Run Report</value>
+  </data>
   <data name="SATURDAY_LONG" xml:space="preserve">
     <value>Saturday</value>
   </data>
@@ -11488,6 +11494,18 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   </data>
   <data name="WLB_ADVANCED_CONFIGURATION_SUBTEXT" xml:space="preserve">
     <value />
+  </data>
+  <data name="WLB_AUDIT_LOG_MAXIMUM" xml:space="preserve">
+    <value>Maximum</value>
+  </data>
+  <data name="WLB_AUDIT_LOG_MEDIUM" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="WLB_AUDIT_LOG_MINIMUM" xml:space="preserve">
+    <value>Minimum</value>
+  </data>
+  <data name="WLB_AUDIT_LOG_USER_OBJECT_ALL" xml:space="preserve">
+    <value>ALL</value>
   </data>
   <data name="WLB_AUTOMATION" xml:space="preserve">
     <value>Automation</value>

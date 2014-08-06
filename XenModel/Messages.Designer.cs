@@ -13190,7 +13190,16 @@ namespace XenAdmin {
                 return ResourceManager.GetString("FEATURE_NOT_AVAILABLE_NEED_MR_PLURAL", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to fetch earlier data.
+        /// </summary>
+        public static string FETCH_EARLIER_DATA {
+            get {
+                return ResourceManager.GetString("FETCH_EARLIER_DATA", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to No LUNs were found.  Please verify your hardware configuration..
         /// </summary>
@@ -13728,6 +13737,15 @@ namespace XenAdmin {
         public static string FRIDAY_SHORT {
             get {
                 return ResourceManager.GetString("FRIDAY_SHORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning: enable maximum audit trail log needs more disk space and memory on WLB Server!.
+        /// </summary>
+        public static string MAXIMUM_AUDIT_LOG_WARN_MSG {
+            get {
+                return ResourceManager.GetString("MAXIMUM_AUDIT_LOG_WARN_MSG", resourceCulture);
             }
         }
         
@@ -26777,7 +26795,16 @@ namespace XenAdmin {
                 return ResourceManager.GetString("RUN_PRECHECKS_WITH_ACCESS_KEY", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to run report.
+        /// </summary>
+        public static string RUN_REPORT {
+            get {
+                return ResourceManager.GetString("RUN_REPORT", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Archiving.
         /// </summary>
@@ -33108,7 +33135,43 @@ namespace XenAdmin {
                 return ResourceManager.GetString("WLB_ADVANCED_CONFIGURATION_SUBTEXT", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum.
+        /// </summary>
+        public static string WLB_AUDIT_LOG_MAXIMUM {
+            get {
+                return ResourceManager.GetString("WLB_AUDIT_LOG_MAXIMUM", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Medium.
+        /// </summary>
+        public static string WLB_AUDIT_LOG_MEDIUM {
+            get {
+                return ResourceManager.GetString("WLB_AUDIT_LOG_MEDIUM", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum.
+        /// </summary>
+        public static string WLB_AUDIT_LOG_MINIMUM {
+            get {
+                return ResourceManager.GetString("WLB_AUDIT_LOG_MINIMUM", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to ALL.
+        /// </summary>
+        public static string WLB_AUDIT_LOG_USER_OBJECT_ALL {
+            get {
+                return ResourceManager.GetString("WLB_AUDIT_LOG_USER_OBJECT_ALL", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Automated optimizations.
         /// </summary>
@@ -35295,5 +35358,6 @@ namespace XenAdmin {
                 return ResourceManager.GetString("YOU_ARE_HERE", resourceCulture);
             }
         }
+
     }
 }

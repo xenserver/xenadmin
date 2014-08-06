@@ -114,6 +114,7 @@
             resources.ApplyResources(this.wlbReportView1, "wlbReportView1");
             this.wlbReportView1.Hosts = null;
             this.wlbReportView1.MinimumSize = new System.Drawing.Size(350, 350);
+            this.wlbReportView1.IsCreedenceOrLater = false;
             this.wlbReportView1.Name = "wlbReportView1";
             this.wlbReportView1.Pool = null;
             this.wlbReportView1.ResetReportViewer = false;

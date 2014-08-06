@@ -66,6 +66,13 @@ namespace XenAdmin.SettingsPanels
             this.sectionHeaderLabelRecSev = new XenAdmin.Controls.SectionHeaderLabel();
             this.sectionHeaderLabelVmMigInt = new XenAdmin.Controls.SectionHeaderLabel();
             this.sectionHeaderLabelRecCnt = new XenAdmin.Controls.SectionHeaderLabel();
+            this.labelAuditTrail = new System.Windows.Forms.Label();
+            this.sectionHeaderLabelAuditTrail = new XenAdmin.Controls.SectionHeaderLabel();
+            this.comboBoxPoolAuditTrailLevel = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.auditTrailPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.poolAuditTrailNote = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panelVmMigInt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRelocationInterval)).BeginInit();
@@ -76,11 +83,15 @@ namespace XenAdmin.SettingsPanels
             this.panelHistData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownGroomingPeriod)).BeginInit();
             this.panelRepSub.SuspendLayout();
+            this.auditTrailPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.labelAuditTrail, 0, 23);
+            this.tableLayoutPanel1.Controls.Add(this.sectionHeaderLabelAuditTrail, 0, 22);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 21);
             this.tableLayoutPanel1.Controls.Add(this.sectionHeaderLabelRepSub, 0, 16);
             this.tableLayoutPanel1.Controls.Add(this.sectionHeaderLabelHistData, 0, 13);
             this.tableLayoutPanel1.Controls.Add(this.sectionHeaderLabelOptAgr, 0, 10);
@@ -100,7 +111,40 @@ namespace XenAdmin.SettingsPanels
             this.tableLayoutPanel1.Controls.Add(this.panelOptAgr, 0, 12);
             this.tableLayoutPanel1.Controls.Add(this.panelHistData, 0, 15);
             this.tableLayoutPanel1.Controls.Add(this.panelRepSub, 0, 18);
+            this.tableLayoutPanel1.Controls.Add(this.auditTrailPanel, 0, 24);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 20);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // labelAuditTrail
+            // 
+            resources.ApplyResources(this.labelAuditTrail, "labelAuditTrail");
+            this.labelAuditTrail.BackColor = System.Drawing.Color.Transparent;
+            this.labelAuditTrail.Name = "labelAuditTrail";
+            // 
+            // sectionHeaderLabelAuditTrail
+            // 
+            resources.ApplyResources(this.sectionHeaderLabelAuditTrail, "sectionHeaderLabelAuditTrail");
+            this.sectionHeaderLabelAuditTrail.FocusControl = this.comboBoxPoolAuditTrailLevel;
+            this.sectionHeaderLabelAuditTrail.LineColor = System.Drawing.SystemColors.ActiveBorder;
+            this.sectionHeaderLabelAuditTrail.LineLocation = XenAdmin.Controls.SectionHeaderLabel.VerticalAlignment.Middle;
+            this.sectionHeaderLabelAuditTrail.Name = "sectionHeaderLabelAuditTrail";
+            // 
+            // comboBoxPoolAuditTrailLevel
+            // 
+            this.comboBoxPoolAuditTrailLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxPoolAuditTrailLevel.FormattingEnabled = true;
+            this.comboBoxPoolAuditTrailLevel.Items.AddRange(new object[] {
+            resources.GetString("comboBoxPoolAuditTrailLevel.Items"),
+            resources.GetString("comboBoxPoolAuditTrailLevel.Items1"),
+            resources.GetString("comboBoxPoolAuditTrailLevel.Items2")});
+            resources.ApplyResources(this.comboBoxPoolAuditTrailLevel, "comboBoxPoolAuditTrailLevel");
+            this.comboBoxPoolAuditTrailLevel.Name = "comboBoxPoolAuditTrailLevel";
+            this.comboBoxPoolAuditTrailLevel.SelectedIndexChanged += new System.EventHandler(this.comboBoxPoolAuditTrailLevel_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
             // 
             // labelOptAgr
             // 
@@ -392,6 +436,24 @@ namespace XenAdmin.SettingsPanels
             this.sectionHeaderLabelRecCnt.MinimumSize = new System.Drawing.Size(0, 14);
             this.sectionHeaderLabelRecCnt.Name = "sectionHeaderLabelRecCnt";
             // 
+            // auditTrailPanel
+            // 
+            this.auditTrailPanel.Controls.Add(this.comboBoxPoolAuditTrailLevel);
+            this.auditTrailPanel.Controls.Add(this.poolAuditTrailNote);
+            resources.ApplyResources(this.auditTrailPanel, "auditTrailPanel");
+            this.auditTrailPanel.Name = "auditTrailPanel";
+            // 
+            // poolAuditTrailNote
+            // 
+            resources.ApplyResources(this.poolAuditTrailNote, "poolAuditTrailNote");
+            this.poolAuditTrailNote.ForeColor = System.Drawing.Color.Gray;
+            this.poolAuditTrailNote.Name = "poolAuditTrailNote";
+            // label3
+            // 
+            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
             // WlbAdvancedSettingsPage
             // 
             resources.ApplyResources(this, "$this");
@@ -417,6 +479,8 @@ namespace XenAdmin.SettingsPanels
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownGroomingPeriod)).EndInit();
             this.panelRepSub.ResumeLayout(false);
             this.panelRepSub.PerformLayout();
+            this.auditTrailPanel.ResumeLayout(false);
+            this.auditTrailPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -461,5 +525,12 @@ namespace XenAdmin.SettingsPanels
         private XenAdmin.Controls.SectionHeaderLabel sectionHeaderLabelHistData;
         private System.Windows.Forms.FlowLayoutPanel panelHistData;
         private System.Windows.Forms.FlowLayoutPanel panelRepSub;
+        private System.Windows.Forms.Label labelAuditTrail;
+        private Controls.SectionHeaderLabel sectionHeaderLabelAuditTrail;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.FlowLayoutPanel auditTrailPanel;
+        private System.Windows.Forms.ComboBox comboBoxPoolAuditTrailLevel;
+        private System.Windows.Forms.Label poolAuditTrailNote;
+        private System.Windows.Forms.Label label3;
     }
 }
