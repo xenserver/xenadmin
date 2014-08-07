@@ -1965,6 +1965,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   <data name="BUGTOOL_SAVING" xml:space="preserve">
     <value>Saving server status report</value>
   </data>
+  <data name="BUILDIN_NETWORK" xml:space="preserve">
+    <value>Build-in network</value>
+  </data>
   <data name="BUS_PATH" xml:space="preserve">
     <value>PCI Bus Path</value>
   </data>
@@ -4582,6 +4585,9 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="EXPORT_VM_VERIFY_POST_INSTALL" xml:space="preserve">
     <value>&amp;Verify export on completion</value>
+  </data>
+  <data name="EXTERNAL_NETWORK" xml:space="preserve">
+    <value>External network</value>
   </data>
   <data name="EXTERNAL_NETWORKS_REQUIRE_STANDARD" xml:space="preserve">
     <value>External networks require a Standard Edition license.</value>
@@ -9645,6 +9651,9 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   </data>
   <data name="SHUTTING_DOWN_VM_OUT_OF" xml:space="preserve">
     <value>Shutting down VM {0} out of {1}</value>
+  </data>
+  <data name="SINGLE_SERVER_PRIVATE_NETWORK" xml:space="preserve">
+    <value>Single-server private network</value>
   </data>
   <data name="SIGNING_APPLIANCE" xml:space="preserve">
     <value>Applying digital signature to appliance...</value>

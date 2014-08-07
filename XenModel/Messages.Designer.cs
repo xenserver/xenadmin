@@ -5371,6 +5371,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Build-in network.
+        /// </summary>
+        public static string BUILDIN_NETWORK {
+            get {
+                return ResourceManager.GetString("BUILDIN_NETWORK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PCI Bus Path.
         /// </summary>
         public static string BUS_PATH {
@@ -13035,6 +13044,15 @@ namespace XenAdmin {
         public static string EXPORTVM_NOT_HAPPEN {
             get {
                 return ResourceManager.GetString("EXPORTVM_NOT_HAPPEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to External network.
+        /// </summary>
+        public static string EXTERNAL_NETWORK {
+            get {
+                return ResourceManager.GetString("EXTERNAL_NETWORK", resourceCulture);
             }
         }
         
@@ -27774,6 +27792,15 @@ namespace XenAdmin {
         public static string SIGNING_APPLIANCE {
             get {
                 return ResourceManager.GetString("SIGNING_APPLIANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Single-server private network.
+        /// </summary>
+        public static string SINGLE_SERVER_PRIVATE_NETWORK {
+            get {
+                return ResourceManager.GetString("SINGLE_SERVER_PRIVATE_NETWORK", resourceCulture);
             }
         }
         

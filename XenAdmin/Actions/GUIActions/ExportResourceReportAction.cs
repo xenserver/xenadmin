@@ -130,7 +130,7 @@ namespace XenAdmin.Actions
 
                 if (_exception is IOException)
                 {
-                    this.Description = string.Format(Messages.ACTION_EXPORT_DESCRIPTION_FAILED_OF_OPEN_FILE, _filename);
+                    this.Description = _exception.Message;
                 }
                 else
                 {
@@ -621,13 +621,10 @@ namespace XenAdmin.Actions
                 if (Cancelling)
                     throw new CancelledException();
 
-                if (network.other_config.ContainsKey("is_guest_installer_network"))
+                if (network.IsGuestInstallerNetwork)
                 {
-                    if (network.other_config["is_guest_installer_network"].ToLower() == "true")
-                    {
-                        PercentComplete = Convert.ToInt32((++itemIndex) * baseIndex / itemCount);
-                        continue;
-                    }
+                    PercentComplete = Convert.ToInt32((++itemIndex) * baseIndex / itemCount);
+                    continue;
                 }
 
                 List<PIF> pifs = network.Connection.ResolveAll(network.PIFs);
@@ -637,9 +634,13 @@ namespace XenAdmin.Actions
                 if (network.IsBond)
                     type = Messages.BOND;
                 else if (network.IsVLAN)
-                    type = Messages.NETWORKPANEL_VLAN;
+                    type = Messages.EXTERNAL_NETWORK;
+                else if (pifs.Count != 0 && pifs[0].IsPhysical)
+                    type = Messages.BUILDIN_NETWORK;
                 else if (pifs.Count != 0 && pifs[0].IsTunnelAccessPIF)
                     type = Messages.CHIN;
+                else if (pifs.Count == 0)
+                    type = Messages.SINGLE_SERVER_PRIVATE_NETWORK;
                 else
                     type = Messages.HYPHEN;
 
