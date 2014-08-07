@@ -81,6 +81,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public void SelectServers(List<Host> selectedServers)
         {
             PatchingWizard_SelectServers.SelectServers(selectedServers);
+            PatchingWizard_SelectServers.DisableUnselectedServers();
         }
 
         protected override void UpdateWizardContent(XenTabPage senderPage)
