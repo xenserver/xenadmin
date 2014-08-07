@@ -61,7 +61,8 @@ namespace XenAdmin.Alerts
         public const string ALARM_TYPE_NETWORK = "network_usage";
         public const string ALARM_TYPE_DISK = "disk_usage";
         public const string ALARM_TYPE_FILESYSTEM = "fs_usage";
-        public const string ALARM_TYPE_MEMORY = "memory_free_kib";
+        public const string ALARM_TYPE_MEMORY_FREE = "memory_free_kib";
+        public const string ALARM_TYPE_MEMORY_DOM0_USAGE = "mem_usage";
         /// <summary>
         /// This is the name that will be stored in the SR's other-config:perfmon key
         /// </summary>
@@ -103,7 +104,12 @@ namespace XenAdmin.Alerts
 
         public bool IsMemoryUsage
         {
-            get { return name.Equals(ALARM_TYPE_MEMORY); }
+            get { return name.Equals(ALARM_TYPE_MEMORY_FREE); }
+        }
+
+        public bool IsDom0MemoryUsage
+        {
+            get { return name.Equals(ALARM_TYPE_MEMORY_DOM0_USAGE); }
         }
 
         public bool IsSrUsage
