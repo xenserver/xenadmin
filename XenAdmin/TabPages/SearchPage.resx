@@ -139,7 +139,7 @@
     <value>5</value>
   </data>
   <data name="buttonNewSearch.Text" xml:space="preserve">
-    <value>New Search</value>
+    <value>&amp;New Search</value>
   </data>
   <data name="&gt;&gt;buttonNewSearch.Name" xml:space="preserve">
     <value>buttonNewSearch</value>
