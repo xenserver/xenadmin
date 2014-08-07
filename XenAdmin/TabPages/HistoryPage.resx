@@ -160,13 +160,13 @@
     <value>161, 22</value>
   </data>
   <data name="tsmiDismissAll.Text" xml:space="preserve">
-    <value>Dismiss &amp;All</value>
+    <value>&amp;Dismiss All</value>
   </data>
   <data name="tsmiDismissSelected.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 22</value>
   </data>
   <data name="tsmiDismissSelected.Text" xml:space="preserve">
-    <value>Dismiss &amp;Selected</value>
+    <value>&amp;Dismiss Selected</value>
   </data>
   <data name="toolStripSplitButtonDismiss.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
