@@ -29,7 +29,6 @@ namespace XenAdmin.Dialogs.RestoreSession
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChangeMasterPasswordDialog));
-            this.masterBlurbLabel = new System.Windows.Forms.Label();
             this.currentTextBox = new System.Windows.Forms.TextBox();
             this.masterTextBox = new System.Windows.Forms.TextBox();
             this.reEnterMasterTextBox = new System.Windows.Forms.TextBox();
@@ -42,16 +41,11 @@ namespace XenAdmin.Dialogs.RestoreSession
             this.currentPasswordError = new XenAdmin.Controls.Common.PasswordFailure();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.noteLabel = new System.Windows.Forms.Label();
+            this.masterBlurbLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // masterBlurbLabel
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.masterBlurbLabel, 2);
-            resources.ApplyResources(this.masterBlurbLabel, "masterBlurbLabel");
-            this.masterBlurbLabel.Name = "masterBlurbLabel";
             // 
             // currentTextBox
             // 
@@ -117,24 +111,30 @@ namespace XenAdmin.Dialogs.RestoreSession
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.currentLabel, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.currentPasswordError, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.masterTextBox, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.masterLabel, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.noteLabel, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.masterBlurbLabel, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.reEnterMasterTextBox, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.reEnterMasterLabel, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.currentTextBox, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.newPasswordError, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.noteLabel, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.currentLabel, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.currentPasswordError, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.masterTextBox, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.masterLabel, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.reEnterMasterTextBox, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.reEnterMasterLabel, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.currentTextBox, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.newPasswordError, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 7);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // noteLabel
             // 
-            resources.ApplyResources(this.noteLabel, "noteLabel");
             this.tableLayoutPanel1.SetColumnSpan(this.noteLabel, 2);
+            resources.ApplyResources(this.noteLabel, "noteLabel");
             this.noteLabel.Name = "noteLabel";
+            // 
+            // masterBlurbLabel
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.masterBlurbLabel, 2);
+            resources.ApplyResources(this.masterBlurbLabel, "masterBlurbLabel");
+            this.masterBlurbLabel.Name = "masterBlurbLabel";
             // 
             // flowLayoutPanel1
             // 
@@ -162,7 +162,6 @@ namespace XenAdmin.Dialogs.RestoreSession
 
         #endregion
 
-        private System.Windows.Forms.Label masterBlurbLabel;
         private System.Windows.Forms.TextBox currentTextBox;
         private System.Windows.Forms.TextBox masterTextBox;
         private System.Windows.Forms.TextBox reEnterMasterTextBox;
@@ -174,7 +173,8 @@ namespace XenAdmin.Dialogs.RestoreSession
         private XenAdmin.Controls.Common.PasswordFailure newPasswordError;
         private XenAdmin.Controls.Common.PasswordFailure currentPasswordError;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label noteLabel;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Label masterBlurbLabel;
+        private System.Windows.Forms.Label noteLabel;
     }
 }

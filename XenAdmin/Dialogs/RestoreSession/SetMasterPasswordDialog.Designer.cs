@@ -48,7 +48,6 @@ namespace XenAdmin.Dialogs.RestoreSession
             // 
             resources.ApplyResources(this.noteLabel, "noteLabel");
             this.tableLayoutPanel1.SetColumnSpan(this.noteLabel, 2);
-            this.noteLabel.MaximumSize = new System.Drawing.Size(456, 99999);
             this.noteLabel.Name = "noteLabel";
             // 
             // reEnterMasterLabel
@@ -79,7 +78,6 @@ namespace XenAdmin.Dialogs.RestoreSession
             // 
             resources.ApplyResources(this.masterBlurbLabel, "masterBlurbLabel");
             this.tableLayoutPanel1.SetColumnSpan(this.masterBlurbLabel, 2);
-            this.masterBlurbLabel.MaximumSize = new System.Drawing.Size(456, 99999);
             this.masterBlurbLabel.Name = "masterBlurbLabel";
             // 
             // okButton
@@ -105,12 +103,12 @@ namespace XenAdmin.Dialogs.RestoreSession
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.masterLabel, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.newPasswordError, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.masterTextBox, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.noteLabel, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.reEnterMasterTextBox, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.reEnterMasterLabel, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.masterLabel, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.newPasswordError, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.masterTextBox, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.noteLabel, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.reEnterMasterTextBox, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.reEnterMasterLabel, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.masterBlurbLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
