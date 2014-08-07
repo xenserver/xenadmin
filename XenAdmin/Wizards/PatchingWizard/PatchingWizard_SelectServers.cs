@@ -394,6 +394,17 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
+        public void DisableUnselectedServers()
+        {
+            foreach (PatchingHostsDataGridViewRow row in dataGridViewHosts.Rows)
+            {
+                if (row.Enabled && row.CheckValue == UNCHECKED)
+                {
+                    row.Enabled = false;
+                }
+            }
+        }
+
         #endregion
        
         private void buttonSelectAll_Click(object sender, EventArgs e)
@@ -681,6 +692,15 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     base.Enabled = value;
                     UpdateDetails();
+                }
+            }
+
+            public int CheckValue
+            {
+                get {
+                    return Tag is Pool || (Tag is Host && !_hasPool)
+                               ? (int) Cells[POOL_CHECKBOX_COL].Value
+                               : (int) Cells[POOL_ICON_HOST_CHECKBOX_COL].Value;
                 }
             }
 

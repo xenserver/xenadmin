@@ -409,8 +409,6 @@ namespace XenAdmin.TabPages
                 if (hosts.Count > 0)
                 {
                     wizard.SelectServers(hosts);
-                    if (wizard.CurrentStepTabPage.EnableNext())
-                        wizard.NextStep();
                 }
                 else
                 {
