@@ -190,7 +190,8 @@ namespace XenAdmin.Alerts
                     case AlarmType.Dom0MemoryDemand:
                         return string.Format(Messages.ALERT_ALARM_DOM0_MEMORY_DEMAND_DESCRIPTION,
                                              Helpers.GetNameAndObject(XenObject),
-                                             Util.PercentageString(CurrentValue));
+                                             Util.PercentageString(CurrentValue),
+                                             Util.PercentageString(TriggerLevel));
                     case AlarmType.Storage:
                         return string.Format(Messages.ALERT_ALARM_STORAGE_DESCRIPTION,
                                              Helpers.GetNameAndObject(XenObject),
