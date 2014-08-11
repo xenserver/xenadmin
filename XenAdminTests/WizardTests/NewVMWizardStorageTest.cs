@@ -275,7 +275,7 @@ namespace XenAdminTests.WizardTests.state5_xml
         private bool _cloneInvoked;
 
         public NewVMWizardTestDefaultTemplate()
-            : base(new string[] { "Template", "Name", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" }, true, true)
+            : base(new string[] { "Template", "Name", "Installation Media", "Home Server", "CPU && Memory", "Storage", "Networking", "Finish" }, true, true)
         {
             Assert.AreEqual(1, DbProxy.proxys.Count);
             DbProxy.proxys[ConnectionsManager.XenConnectionsCopy[0]].Invoking += DbProxy_Invoking;
