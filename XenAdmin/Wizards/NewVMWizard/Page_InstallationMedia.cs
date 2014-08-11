@@ -60,6 +60,10 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         public Host Affinity { private get; set; }
 
+        public bool ShowInstallationMedia { private get; set; }
+
+        public bool ShowBootParameters { get { return !SelectedTemplate.IsHVM; } }
+        
         public override void PageLoaded(PageLoadedDirection direction)
         {
             base.PageLoaded(direction);
@@ -80,8 +84,21 @@ namespace XenAdmin.Wizards.NewVMWizard
              * 
              *  Custom  -> DVD drive (inc empty)
              * 
-             *  Skip this page if the custom template has no DVD drive (except debian etch template)
+             *  Disable Installation method section if the custom template has no DVD drive (except debian etch template)
              */
+
+            PvBootBox.Visible = ShowBootParameters;
+            PvBootTextBox.Text = m_template.PV_args;
+
+            if (!ShowInstallationMedia)
+            {
+                CdRadioButton.Checked = UrlRadioButton.Checked = false;
+                CdDropDownBox.Items.Clear();
+                UrlTextBox.Text = string.Empty;
+                panelInstallationMethod.Enabled = false;
+                return;
+            }
+            panelInstallationMethod.Enabled = true;
 
             defaultTemplate = m_template.DefaultTemplate;
             userTemplate = !defaultTemplate;
@@ -132,9 +149,6 @@ namespace XenAdmin.Wizards.NewVMWizard
                 UrlRadioButton.Checked = true;
                 CdRadioButton.Enabled = false;
             }
-
-            PvBootBox.Visible = !hvm;
-            PvBootTextBox.Text = m_template.PV_args;
 
             LoadCdBox();
 
@@ -188,7 +202,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             get
             {
-                if (this.DisableStep || m_template.DefaultTemplate && String.IsNullOrEmpty(m_template.InstallMethods))
+                if (!ShowInstallationMedia || m_template.DefaultTemplate && String.IsNullOrEmpty(m_template.InstallMethods))
                     return InstallMethod.None;
                 if (CdRadioButton.Checked)
                     return InstallMethod.CD;
@@ -204,7 +218,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             get
             {
-                return PvBootTextBox.Text;
+                return ShowBootParameters ? PvBootTextBox.Text : string.Empty;
             }
         }
 
@@ -212,10 +226,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             get
             {
-                if (CdRadioButton.Checked)
-                    return CdDropDownBox.SelectedCD;
-
-                return null;
+                return ShowInstallationMedia && CdRadioButton.Checked ? CdDropDownBox.SelectedCD : null;
             }
         }
 
@@ -223,7 +234,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             get
             {
-                return UrlRadioButton.Checked ? UrlTextBox.Text : string.Empty;
+                return ShowInstallationMedia && UrlRadioButton.Checked ? UrlTextBox.Text : string.Empty;
             }
         }
 
@@ -231,7 +242,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         public override bool EnableNext()
         {
-            return CdRadioButton.Checked || UrlRadioButton.Checked;
+            return ShowInstallationMedia ? CdRadioButton.Checked || UrlRadioButton.Checked : true;
         }
 
         public override string Text
@@ -354,7 +365,4 @@ namespace XenAdmin.Wizards.NewVMWizard
         }
 
     }
-
-
-    
 }
