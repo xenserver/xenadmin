@@ -781,6 +781,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export failed due to open destination file {0} failed.
+        /// </summary>
+        public static string ACTION_EXPORT_DESCRIPTION_FAILED_OF_OPEN_FILE {
+            get {
+                return ResourceManager.GetString("ACTION_EXPORT_DESCRIPTION_FAILED_OF_OPEN_FILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export failed due to a header checksum mismatch.  Please retry the export..
         /// </summary>
         public static string ACTION_EXPORT_DESCRIPTION_HEADER_CHECKSUM_FAILED {
@@ -4990,6 +4999,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bond.
+        /// </summary>
+        public static string BOND {
+            get {
+                return ResourceManager.GetString("BOND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create Bond.
         /// </summary>
         public static string BOND_CREATE {
@@ -5349,6 +5367,15 @@ namespace XenAdmin {
         public static string BUGTOOL_SAVING {
             get {
                 return ResourceManager.GetString("BUGTOOL_SAVING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Build-in network.
+        /// </summary>
+        public static string BUILDIN_NETWORK {
+            get {
+                return ResourceManager.GetString("BUILDIN_NETWORK", resourceCulture);
             }
         }
         
@@ -13017,6 +13044,15 @@ namespace XenAdmin {
         public static string EXPORTVM_NOT_HAPPEN {
             get {
                 return ResourceManager.GetString("EXPORTVM_NOT_HAPPEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to External network.
+        /// </summary>
+        public static string EXTERNAL_NETWORK {
+            get {
+                return ResourceManager.GetString("EXTERNAL_NETWORK", resourceCulture);
             }
         }
         
@@ -27783,6 +27819,15 @@ namespace XenAdmin {
         public static string SIGNING_APPLIANCE {
             get {
                 return ResourceManager.GetString("SIGNING_APPLIANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Single-server private network.
+        /// </summary>
+        public static string SINGLE_SERVER_PRIVATE_NETWORK {
+            get {
+                return ResourceManager.GetString("SINGLE_SERVER_PRIVATE_NETWORK", resourceCulture);
             }
         }
         

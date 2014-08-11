@@ -357,6 +357,9 @@
   <data name="ACTION_EXPORT_DESCRIPTION_FAILED" xml:space="preserve">
     <value>エクスポートに失敗しました</value>
   </data>
+  <data name="ACTION_EXPORT_DESCRIPTION_FAILED_OF_OPEN_FILE" xml:space="preserve">
+    <value>Export failed due to open destination file {0} failed</value>
+  </data>
   <data name="ACTION_EXPORT_DESCRIPTION_HEADER_CHECKSUM_FAILED" xml:space="preserve">
     <value>ヘッダーのチェックサムが一致しないため、エクスポートに失敗しました。もう一度エクスポートしてください。</value>
   </data>
@@ -1761,6 +1764,9 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
   <data name="BIOS_STRINGS_COPIED" xml:space="preserve">
     <value>BIOS 文字列のコピー</value>
   </data>
+  <data name="BOND" xml:space="preserve">
+    <value>Bond</value>
+  </data>
   <data name="BOND_CREATE" xml:space="preserve">
     <value>ボンディングの作成</value>
   </data>
@@ -1901,6 +1907,9 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
   </data>
   <data name="BUGTOOL_SAVING" xml:space="preserve">
     <value>サーバーの状態レポートを保存しています</value>
+  </data>
+  <data name="BUILDIN_NETWORK" xml:space="preserve">
+    <value>Build-in network</value>
   </data>
   <data name="BUS_PATH" xml:space="preserve">
     <value>PCI バスのパス</value>
@@ -4462,6 +4471,9 @@ CD をイジェクトしてから再試行してください。</value>
   </data>
   <data name="EXPORT_VM_VERIFY_POST_INSTALL" xml:space="preserve">
     <value>完了時にエクスポートを検証する(&amp;V)</value>
+  </data>
+  <data name="EXTERNAL_NETWORK" xml:space="preserve">
+    <value>External network</value>
   </data>
   <data name="EXTERNAL_NETWORKS_REQUIRE_STANDARD" xml:space="preserve">
     <value>外部ネットワークを使用するには、Standard Edition のライセンスが必要です。</value>
@@ -9330,6 +9342,9 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   </data>
   <data name="SHUTTING_DOWN_VM_OUT_OF" xml:space="preserve">
     <value>VM をシャットダウン中: {0} / {1}</value>
+  </data>
+  <data name="SINGLE_SERVER_PRIVATE_NETWORK" xml:space="preserve">
+    <value>Single-server private network</value>
   </data>
   <data name="SIGNING_APPLIANCE" xml:space="preserve">
     <value>アプライアンスにデジタル署名を適用しています...</value>

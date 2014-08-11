@@ -357,6 +357,9 @@
   <data name="ACTION_EXPORT_DESCRIPTION_FAILED" xml:space="preserve">
     <value>导出失败</value>
   </data>
+  <data name="ACTION_EXPORT_DESCRIPTION_FAILED_OF_OPEN_FILE" xml:space="preserve">
+    <value>导出操作因源文件 {0} 打开失败</value>
+  </data>
   <data name="ACTION_EXPORT_DESCRIPTION_HEADER_CHECKSUM_FAILED" xml:space="preserve">
     <value>导出操作因标头校验和不匹配而失败。请重新尝试导出。</value>
   </data>
@@ -1761,6 +1764,9 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   <data name="BIOS_STRINGS_COPIED" xml:space="preserve">
     <value>已复制 BIOS 字符串</value>
   </data>
+  <data name="BOND" xml:space="preserve">
+    <value>绑定</value>
+  </data>
   <data name="BOND_CREATE" xml:space="preserve">
     <value>创建绑定</value>
   </data>
@@ -1901,6 +1907,9 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   </data>
   <data name="BUGTOOL_SAVING" xml:space="preserve">
     <value>正在保存服务器状态报告</value>
+  </data>
+  <data name="BUILDIN_NETWORK" xml:space="preserve">
+    <value>内置网络</value>
   </data>
   <data name="BUS_PATH" xml:space="preserve">
     <value>PCI 总线路径</value>
@@ -4461,6 +4470,9 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   </data>
   <data name="EXPORT_VM_VERIFY_POST_INSTALL" xml:space="preserve">
     <value>完成时验证导出(&amp;V)</value>
+  </data>
+  <data name="EXTERNAL_NETWORK" xml:space="preserve">
+    <value>外部网络</value>
   </data>
   <data name="EXTERNAL_NETWORKS_REQUIRE_STANDARD" xml:space="preserve">
     <value>外部网络需要使用 Standard Edition 许可证。</value>
@@ -9341,6 +9353,9 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="SHUTTING_DOWN_VM_OUT_OF" xml:space="preserve">
     <value>正在关闭 {1} 个 VM 中的第 {0} 个</value>
+  </data>
+  <data name="SINGLE_SERVER_PRIVATE_NETWORK" xml:space="preserve">
+    <value>单服务器专用网络</value>
   </data>
   <data name="SIGNING_APPLIANCE" xml:space="preserve">
     <value>正在将数字签名应用到设备...</value>

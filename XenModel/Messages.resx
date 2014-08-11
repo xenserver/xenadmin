@@ -357,6 +357,9 @@
   <data name="ACTION_EXPORT_DESCRIPTION_FAILED" xml:space="preserve">
     <value>Export failed</value>
   </data>
+  <data name="ACTION_EXPORT_DESCRIPTION_FAILED_OF_OPEN_FILE" xml:space="preserve">
+    <value>Export failed due to open destination file {0} failed</value>
+  </data>
   <data name="ACTION_EXPORT_DESCRIPTION_HEADER_CHECKSUM_FAILED" xml:space="preserve">
     <value>Export failed due to a header checksum mismatch.  Please retry the export.</value>
   </data>
@@ -1818,6 +1821,9 @@ This is a potentially dangerous operation and is not allowed.</value>
   <data name="BIOS_STRINGS_COPIED" xml:space="preserve">
     <value>BIOS strings copied</value>
   </data>
+  <data name="BOND" xml:space="preserve">
+    <value>Bond</value>
+  </data>
   <data name="BOND_CREATE" xml:space="preserve">
     <value>Create Bond</value>
   </data>
@@ -1958,6 +1964,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   </data>
   <data name="BUGTOOL_SAVING" xml:space="preserve">
     <value>Saving server status report</value>
+  </data>
+  <data name="BUILDIN_NETWORK" xml:space="preserve">
+    <value>Build-in network</value>
   </data>
   <data name="BUS_PATH" xml:space="preserve">
     <value>PCI Bus Path</value>
@@ -4576,6 +4585,9 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="EXPORT_VM_VERIFY_POST_INSTALL" xml:space="preserve">
     <value>&amp;Verify export on completion</value>
+  </data>
+  <data name="EXTERNAL_NETWORK" xml:space="preserve">
+    <value>External network</value>
   </data>
   <data name="EXTERNAL_NETWORKS_REQUIRE_STANDARD" xml:space="preserve">
     <value>External networks require a Standard Edition license.</value>
@@ -9645,6 +9657,9 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   </data>
   <data name="SHUTTING_DOWN_VM_OUT_OF" xml:space="preserve">
     <value>Shutting down VM {0} out of {1}</value>
+  </data>
+  <data name="SINGLE_SERVER_PRIVATE_NETWORK" xml:space="preserve">
+    <value>Single-server private network</value>
   </data>
   <data name="SIGNING_APPLIANCE" xml:space="preserve">
     <value>Applying digital signature to appliance...</value>

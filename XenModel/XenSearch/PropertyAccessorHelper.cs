@@ -109,6 +109,17 @@ namespace XenAdmin.XenSearch
             return String.Format(Messages.QUERY_MEMORY_USAGE, Util.MemorySizeStringWithoutUnits((total - (free * Util.BINARY_KILO))), Util.MemorySizeString(total));
         }
 
+        public static string vmMemoryUsagePercentageStringByMetric(VM vm, MetricUpdater MetricUpdater)
+        {
+            double free = MetricUpdater.GetValue(vm, "memory_internal_free");
+            double total = MetricUpdater.GetValue(vm, "memory");
+
+            if (total == 0 || Double.IsNaN(total) || Double.IsNaN(free))
+                return Messages.HYPHEN;
+
+            return String.Format(Messages.QUERY_MEMORY_PERCENT, ((total - (free * Util.BINARY_KILO))/total * 100.0).ToString("0."), Util.MemorySizeString(total));
+        }
+
         public static int vmMemoryUsageRank(VM vm)
         {
             double free = MetricUpdater.GetValue(vm, "memory_internal_free");
@@ -219,6 +230,17 @@ namespace XenAdmin.XenSearch
                 return Messages.HYPHEN;
 
             return String.Format(Messages.QUERY_MEMORY_USAGE, Util.MemorySizeStringWithoutUnits((total - free) * Util.BINARY_KILO), Util.MemorySizeString(total * Util.BINARY_KILO));
+        }
+
+        public static string hostMemoryUsagePercentageStringByMetric(Host host, MetricUpdater MetricUpdater)
+        {
+            double free = MetricUpdater.GetValue(host, "memory_free_kib");
+            double total = MetricUpdater.GetValue(host, "memory_total_kib");
+
+            if (total == 0 || Double.IsNaN(total) || Double.IsNaN(free))
+                return Messages.HYPHEN;
+
+            return String.Format(Messages.QUERY_MEMORY_PERCENT, ((total - free) / total * 100.0).ToString("0."), Util.MemorySizeString(total * Util.BINARY_KILO));
         }
 
         public static string hostMemoryUsageString(Host host)
