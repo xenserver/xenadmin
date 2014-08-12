@@ -72,6 +72,10 @@
           <DataField>Description</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="SRSizeString">
+          <DataField>SRSizeString</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>DummyDataSource</DataSourceName>
@@ -112,6 +116,10 @@
         </Field>
         <Field Name="NetworkType">
           <DataField>NetworkType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Location">
+          <DataField>Location</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -362,7 +370,7 @@
 
     End Function
   </Code>
-  <Width>55.05292cm</Width>
+  <Width>67.60583cm</Width>
   <Body>
     <ColumnSpacing>1cm</ColumnSpacing>
     <ReportItems>
@@ -370,7 +378,7 @@
         <ZIndex>13</ZIndex>
         <DataSetName>Report_VDIInfo</DataSetName>
         <Top>7.75cm</Top>
-        <Width>38.02646cm</Width>
+        <Width>40.80292cm</Width>
         <Details>
           <TableRows>
             <TableRow>
@@ -558,6 +566,7 @@
                           <Bottom>1pt</Bottom>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -589,6 +598,7 @@
                           <Bottom>1pt</Bottom>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -620,6 +630,7 @@
                           <Bottom>1pt</Bottom>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -651,6 +662,7 @@
                           <Bottom>1pt</Bottom>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -682,6 +694,7 @@
                           <Bottom>1pt</Bottom>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -710,6 +723,7 @@
                           <Bottom>1pt</Bottom>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -728,19 +742,19 @@
         </Header>
         <TableColumns>
           <TableColumn>
-            <Width>6.75cm</Width>
+            <Width>5.75cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>3.75cm</Width>
+            <Width>3cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>8.5cm</Width>
+            <Width>8.52646cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>3.25cm</Width>
+            <Width>2.75cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>8.25cm</Width>
+            <Width>13.25cm</Width>
           </TableColumn>
           <TableColumn>
             <Width>7.52646cm</Width>
@@ -769,7 +783,7 @@
         <ZIndex>11</ZIndex>
         <DataSetName>Report_SRInfo</DataSetName>
         <Top>10.25cm</Top>
-        <Width>39cm</Width>
+        <Width>46.30292cm</Width>
         <Details>
           <TableRows>
             <TableRow>
@@ -951,6 +965,7 @@
                           <Bottom>1pt</Bottom>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -982,6 +997,7 @@
                           <Bottom>1pt</Bottom>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1013,6 +1029,7 @@
                           <Bottom>1pt</Bottom>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1044,6 +1061,7 @@
                           <Bottom>1pt</Bottom>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1075,6 +1093,7 @@
                           <Bottom>1pt</Bottom>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1103,6 +1122,7 @@
                           <Bottom>1pt</Bottom>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1121,19 +1141,19 @@
         </Header>
         <TableColumns>
           <TableColumn>
-            <Width>5.5cm</Width>
+            <Width>5.75cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>2cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>6.5cm</Width>
+            <Width>2.02646cm</Width>
           </TableColumn>
           <TableColumn>
             <Width>8cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>9.25cm</Width>
+            <Width>13.5cm</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>9.27646cm</Width>
           </TableColumn>
           <TableColumn>
             <Width>7.75cm</Width>
@@ -1145,7 +1165,7 @@
         <ZIndex>10</ZIndex>
         <DataSetName>Report_PGPUInfo</DataSetName>
         <Top>15.25cm</Top>
-        <Width>28cm</Width>
+        <Width>39.27646cm</Width>
         <Details>
           <TableRows>
             <TableRow>
@@ -1379,6 +1399,7 @@
                           <Bottom>1pt</Bottom>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1410,6 +1431,7 @@
                           <Bottom>1pt</Bottom>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1440,6 +1462,7 @@
                           <Bottom>1pt</Bottom>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1471,6 +1494,7 @@
                           <Bottom>1pt</Bottom>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1501,6 +1525,7 @@
                           <Bottom>1pt</Bottom>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1532,6 +1557,7 @@
                           <Bottom>1pt</Bottom>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1563,6 +1589,7 @@
                           <Bottom>1pt</Bottom>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1591,6 +1618,7 @@
                           <Bottom>1pt</Bottom>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1609,19 +1637,19 @@
         </Header>
         <TableColumns>
           <TableColumn>
-            <Width>2.5cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>3cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>3.25cm</Width>
-          </TableColumn>
-          <TableColumn>
             <Width>5.75cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>3.75cm</Width>
+            <Width>6cm</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>3.25cm</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>7.75cm</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>3.77646cm</Width>
           </TableColumn>
           <TableColumn>
             <Width>3.25cm</Width>
@@ -1630,7 +1658,7 @@
             <Width>3.75cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>2.75cm</Width>
+            <Width>5.75cm</Width>
           </TableColumn>
         </TableColumns>
         <Height>1.33334cm</Height>
@@ -2020,6 +2048,7 @@
                           <Default>Solid</Default>
                         </BorderStyle>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -2053,6 +2082,7 @@
                           <Bottom>1pt</Bottom>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -2116,6 +2146,7 @@
                           <Bottom>1pt</Bottom>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -2144,6 +2175,7 @@
                           <Right>1pt</Right>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -2164,6 +2196,7 @@
                           <Default>Solid</Default>
                         </BorderStyle>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -2192,6 +2225,7 @@
                           <Left>1pt</Left>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -2220,6 +2254,7 @@
                           <Left>1pt</Left>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -2248,6 +2283,7 @@
                           <Right>1pt</Right>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -2276,6 +2312,7 @@
                           <Left>1pt</Left>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -2304,6 +2341,7 @@
                           <Left>1pt</Left>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -2335,6 +2373,7 @@
                           <Right>1pt</Right>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -2356,6 +2395,7 @@
                           <Default>Solid</Default>
                         </BorderStyle>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -2384,6 +2424,7 @@
                           <Left>1pt</Left>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -2402,7 +2443,7 @@
         </Header>
         <TableColumns>
           <TableColumn>
-            <Width>3.25cm</Width>
+            <Width>5.75cm</Width>
           </TableColumn>
           <TableColumn>
             <Width>2.5cm</Width>
@@ -2411,31 +2452,31 @@
             <Width>2.25cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>5.02646cm</Width>
+            <Width>7.75cm</Width>
           </TableColumn>
           <TableColumn>
             <Width>3.75cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>2.25cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>2.25cm</Width>
+            <Width>1.5cm</Width>
           </TableColumn>
           <TableColumn>
             <Width>4.75cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>3cm</Width>
+            <Width>4.02645cm</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>3.02646cm</Width>
           </TableColumn>
           <TableColumn>
             <Width>3.25cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>3.25cm</Width>
+            <Width>9.5cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>6.5cm</Width>
+            <Width>6.52646cm</Width>
           </TableColumn>
           <TableColumn>
             <Width>6.52646cm</Width>
@@ -2519,7 +2560,7 @@
         <ZIndex>4</ZIndex>
         <DataSetName>Report_NetworkInfo</DataSetName>
         <Top>5.25cm</Top>
-        <Width>20.75cm</Width>
+        <Width>37.77646cm</Width>
         <Details>
           <TableRows>
             <TableRow>
@@ -2545,7 +2586,7 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>5</ZIndex>
+                      <ZIndex>6</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Fields!Name.Value</Value>
                     </Textbox>
@@ -2572,7 +2613,7 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>4</ZIndex>
+                      <ZIndex>5</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Fields!LinkStatus.Value</Value>
                     </Textbox>
@@ -2599,7 +2640,7 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>3</ZIndex>
+                      <ZIndex>4</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Fields!MAC.Value</Value>
                     </Textbox>
@@ -2626,7 +2667,7 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>2</ZIndex>
+                      <ZIndex>3</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Fields!MTU.Value</Value>
                     </Textbox>
@@ -2646,7 +2687,7 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>1</ZIndex>
+                      <ZIndex>2</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Fields!VlanID.Value</Value>
                     </Textbox>
@@ -2665,8 +2706,27 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
+                      <ZIndex>1</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Fields!NetworkType.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="Location">
+                      <rd:DefaultName>Location</rd:DefaultName>
+                      <Style>
+                        <BorderStyle>
+                          <Default>Solid</Default>
+                        </BorderStyle>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                      <CanGrow>true</CanGrow>
+                      <Value>=Fields!Location.Value</Value>
                     </Textbox>
                   </ReportItems>
                 </TableCell>
@@ -2707,7 +2767,7 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>11</ZIndex>
+                      <ZIndex>13</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Code.GetLabel("LBL_HOSTNAME")</Value>
                     </Textbox>
@@ -2729,7 +2789,7 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>10</ZIndex>
+                      <ZIndex>12</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Code.GetLabel("LBL_LINKSTATUS")</Value>
                     </Textbox>
@@ -2757,7 +2817,7 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>9</ZIndex>
+                      <ZIndex>11</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Code.GetLabel("LBL_MAC")</Value>
                     </Textbox>
@@ -2786,7 +2846,7 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>8</ZIndex>
+                      <ZIndex>10</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Code.GetLabel("LBL_MTU")</Value>
                     </Textbox>
@@ -2815,7 +2875,7 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>7</ZIndex>
+                      <ZIndex>9</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Code.GetLabel("LBL_VLAN")</Value>
                     </Textbox>
@@ -2838,14 +2898,44 @@
                           <Left>1pt</Left>
                         </BorderWidth>
                         <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>6</ZIndex>
+                      <ZIndex>8</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Code.GetLabel("LBL_STORAGETYPE")</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox42">
+                      <rd:DefaultName>textbox42</rd:DefaultName>
+                      <Style>
+                        <BackgroundColor>Gray</BackgroundColor>
+                        <BorderColor>
+                          <Left>Black</Left>
+                        </BorderColor>
+                        <BorderStyle>
+                          <Default>Solid</Default>
+                          <Left>Solid</Left>
+                        </BorderStyle>
+                        <BorderWidth>
+                          <Left>1pt</Left>
+                        </BorderWidth>
+                        <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                      <ZIndex>7</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>=Code.GetLabel("LBL_LOCATION")</Value>
                     </Textbox>
                   </ReportItems>
                 </TableCell>
@@ -2856,22 +2946,25 @@
         </Header>
         <TableColumns>
           <TableColumn>
-            <Width>3cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>3cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>3cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>3cm</Width>
-          </TableColumn>
-          <TableColumn>
-            <Width>3cm</Width>
-          </TableColumn>
-          <TableColumn>
             <Width>5.75cm</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>3.02646cm</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>8.5cm</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>2.75cm</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>2.5cm</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>4.75cm</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>10.5cm</Width>
           </TableColumn>
         </TableColumns>
         <Height>1.33334cm</Height>
@@ -2880,7 +2973,7 @@
         <ZIndex>3</ZIndex>
         <DataSetName>Report_HostInfo</DataSetName>
         <Top>2.75cm</Top>
-        <Width>35cm</Width>
+        <Width>53.52646cm</Width>
         <Details>
           <TableRows>
             <TableRow>
@@ -2906,7 +2999,7 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>8</ZIndex>
+                      <ZIndex>9</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Fields!Name.Value</Value>
                     </Textbox>
@@ -2933,9 +3026,36 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>7</ZIndex>
+                      <ZIndex>8</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Fields!Role.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="UUID">
+                      <rd:DefaultName>UUID</rd:DefaultName>
+                      <Style>
+                        <BorderColor>
+                          <Right>Black</Right>
+                        </BorderColor>
+                        <BorderStyle>
+                          <Default>Solid</Default>
+                          <Right>Solid</Right>
+                        </BorderStyle>
+                        <BorderWidth>
+                          <Right>1pt</Right>
+                        </BorderWidth>
+                        <TextAlign>Center</TextAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                      <ZIndex>7</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>=Fields!UUID.Value</Value>
                     </Textbox>
                   </ReportItems>
                 </TableCell>
@@ -2968,33 +3088,6 @@
                 </TableCell>
                 <TableCell>
                   <ReportItems>
-                    <Textbox Name="UUID">
-                      <rd:DefaultName>UUID</rd:DefaultName>
-                      <Style>
-                        <BorderColor>
-                          <Right>Black</Right>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                          <Right>Solid</Right>
-                        </BorderStyle>
-                        <BorderWidth>
-                          <Right>1pt</Right>
-                        </BorderWidth>
-                        <TextAlign>Center</TextAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <ZIndex>5</ZIndex>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Fields!UUID.Value</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
                     <Textbox Name="CpuUsage">
                       <rd:DefaultName>CpuUsage</rd:DefaultName>
                       <Style>
@@ -3014,7 +3107,7 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>4</ZIndex>
+                      <ZIndex>5</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Fields!CpuUsage.Value</Value>
                     </Textbox>
@@ -3041,7 +3134,7 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>3</ZIndex>
+                      <ZIndex>4</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Fields!NetworkUsage.Value</Value>
                     </Textbox>
@@ -3068,9 +3161,35 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>2</ZIndex>
+                      <ZIndex>3</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Fields!MemUsage.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="SRSizeString">
+                      <rd:DefaultName>SRSizeString</rd:DefaultName>
+                      <Style>
+                        <BorderColor>
+                          <Right>Black</Right>
+                        </BorderColor>
+                        <BorderStyle>
+                          <Default>Solid</Default>
+                          <Right>Solid</Right>
+                        </BorderStyle>
+                        <BorderWidth>
+                          <Right>1pt</Right>
+                        </BorderWidth>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                      <ZIndex>2</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>=Fields!SRSizeString.Value</Value>
                     </Textbox>
                   </ReportItems>
                 </TableCell>
@@ -3140,7 +3259,7 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>17</ZIndex>
+                      <ZIndex>19</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Code.GetLabel("LBL_HOSTNAME")</Value>
                     </Textbox>
@@ -3169,37 +3288,9 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>16</ZIndex>
+                      <ZIndex>18</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Code.GetLabel("LBL_POOLMASTER")</Value>
-                    </Textbox>
-                  </ReportItems>
-                </TableCell>
-                <TableCell>
-                  <ReportItems>
-                    <Textbox Name="textbox28">
-                      <Style>
-                        <BackgroundColor>Gray</BackgroundColor>
-                        <BorderColor>
-                          <Left>Black</Left>
-                        </BorderColor>
-                        <BorderStyle>
-                          <Default>Solid</Default>
-                          <Left>Solid</Left>
-                        </BorderStyle>
-                        <BorderWidth>
-                          <Left>1pt</Left>
-                        </BorderWidth>
-                        <FontWeight>700</FontWeight>
-                        <TextAlign>Center</TextAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                      <ZIndex>15</ZIndex>
-                      <CanGrow>true</CanGrow>
-                      <Value>=Code.GetLabel("LBL_ADDRESS")</Value>
                     </Textbox>
                   </ReportItems>
                 </TableCell>
@@ -3225,9 +3316,37 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>14</ZIndex>
+                      <ZIndex>17</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Code.GetLabel("LBL_UUID")</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox28">
+                      <Style>
+                        <BackgroundColor>Gray</BackgroundColor>
+                        <BorderColor>
+                          <Left>Black</Left>
+                        </BorderColor>
+                        <BorderStyle>
+                          <Default>Solid</Default>
+                          <Left>Solid</Left>
+                        </BorderStyle>
+                        <BorderWidth>
+                          <Left>1pt</Left>
+                        </BorderWidth>
+                        <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                      <ZIndex>16</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value>=Code.GetLabel("LBL_ADDRESS")</Value>
                     </Textbox>
                   </ReportItems>
                 </TableCell>
@@ -3253,7 +3372,7 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>13</ZIndex>
+                      <ZIndex>15</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Code.GetLabel("LBL_CPUUSAGE")</Value>
                     </Textbox>
@@ -3281,7 +3400,7 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>12</ZIndex>
+                      <ZIndex>14</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Code.GetLabel("LBL_NETWORKUSAGE")</Value>
                     </Textbox>
@@ -3309,9 +3428,38 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>11</ZIndex>
+                      <ZIndex>13</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Code.GetLabel("LBL_MEMORYUSAGE")</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox40">
+                      <rd:DefaultName>textbox40</rd:DefaultName>
+                      <Style>
+                        <BackgroundColor>Gray</BackgroundColor>
+                        <BorderColor>
+                          <Left>Black</Left>
+                        </BorderColor>
+                        <BorderStyle>
+                          <Default>Solid</Default>
+                          <Left>Solid</Left>
+                        </BorderStyle>
+                        <BorderWidth>
+                          <Left>1pt</Left>
+                        </BorderWidth>
+                        <FontWeight>700</FontWeight>
+                        <TextAlign>Center</TextAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                      <ZIndex>12</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value> =Code.GetLabel("LBL_STORAGE")</Value>
                     </Textbox>
                   </ReportItems>
                 </TableCell>
@@ -3337,7 +3485,7 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>10</ZIndex>
+                      <ZIndex>11</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Code.GetLabel("LBL_UPTIME")</Value>
                     </Textbox>
@@ -3366,7 +3514,7 @@
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                      <ZIndex>9</ZIndex>
+                      <ZIndex>10</ZIndex>
                       <CanGrow>true</CanGrow>
                       <Value>=Code.GetLabel("LBL_DESCRIPTION")</Value>
                     </Textbox>
@@ -3379,16 +3527,16 @@
         </Header>
         <TableColumns>
           <TableColumn>
-            <Width>1.5cm</Width>
+            <Width>5.75cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>2.5cm</Width>
+            <Width>3cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>2.5cm</Width>
+            <Width>8.5cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>6.75cm</Width>
+            <Width>2.75cm</Width>
           </TableColumn>
           <TableColumn>
             <Width>3.25cm</Width>
@@ -3397,7 +3545,10 @@
             <Width>4.25cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>3.75cm</Width>
+            <Width>3.77646cm</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>11.75cm</Width>
           </TableColumn>
           <TableColumn>
             <Width>5.25cm</Width>

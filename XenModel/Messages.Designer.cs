@@ -4999,7 +4999,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bond.
+        ///   Looks up a localized string similar to Bonded network.
         /// </summary>
         public static string BOND {
             get {
@@ -5371,11 +5371,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Build-in network.
+        ///   Looks up a localized string similar to Built-in network.
         /// </summary>
-        public static string BUILDIN_NETWORK {
+        public static string BUILTIN_NETWORK {
             get {
-                return ResourceManager.GetString("BUILDIN_NETWORK", resourceCulture);
+                return ResourceManager.GetString("BUILTIN_NETWORK", resourceCulture);
             }
         }
         

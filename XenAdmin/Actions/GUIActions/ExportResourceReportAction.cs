@@ -156,7 +156,7 @@ namespace XenAdmin.Actions
         private class HostInfo
         {
             public HostInfo(string hostName, string hostAddress, string hostUUID, string hostCpuUsage,
-                string hostRole, string hostnetworkUsage, string hostMemUsage, string hostUptime, string hostDescription)
+                string hostRole, string hostnetworkUsage, string hostMemUsage, string hostUptime, string srSizeString, string hostDescription)
             {
                 _name = hostName;
                 _address = hostAddress;
@@ -167,6 +167,7 @@ namespace XenAdmin.Actions
                 _memUsage = hostMemUsage;
                 _uptime = hostUptime;
                 _description = hostDescription;
+                _srSizeString = srSizeString;
             }
             public virtual string Address
             {
@@ -204,6 +205,10 @@ namespace XenAdmin.Actions
             {
                 get { return _description; }
             }
+            public virtual string SRSizeString
+            {
+                get { return _srSizeString; }
+            }
             private string _name;
             private string _role;
             private string _address;
@@ -213,6 +218,7 @@ namespace XenAdmin.Actions
             private string _memUsage;
             private string _uptime;
             private string _description;
+            private string _srSizeString;
         }
 
         private class SRInfo
@@ -262,7 +268,7 @@ namespace XenAdmin.Actions
         private class NetworkInfo
         {
             public NetworkInfo(string name, string networkVlanID, string networkLinkStatus,
-                string NetworkMac, string NetworkMtu, string Type)
+                string NetworkMac, string NetworkMtu, string Type, string location)
             {
                 _name = name;
                 _vlanID = networkVlanID;
@@ -270,6 +276,7 @@ namespace XenAdmin.Actions
                 _mac = NetworkMac;
                 _mtu = NetworkMtu;
                 _networkType = Type;
+                _location = location;
             }
             public virtual string Name
             {
@@ -295,12 +302,17 @@ namespace XenAdmin.Actions
             {
                 get { return _networkType; }
             }
+            public virtual string Location
+            {
+                get { return _location; }
+            }
             private string _name;
             private string _vlanID;
             private string _linkStatus;
             private string _mac;
             private string _mtu;
             private string _networkType;
+            private string _location;
         }
 
         private class VMInfo
@@ -519,7 +531,7 @@ namespace XenAdmin.Actions
             ParamLabelsStr += "LBL_CPUUSAGE|";
             ParamValuesStr += Messages.OVERVIEW_CPU_USAGE + "|";
             ParamLabelsStr += "LBL_NETWORKUSAGE|";
-            ParamValuesStr += Messages.OVERVIEW_NETWORK + Messages.OVERVIEW_UNITS + "|";
+            ParamValuesStr += Messages.OVERVIEW_NETWORK + "" + Messages.OVERVIEW_UNITS + "|";
             ParamLabelsStr += "LBL_MEMORYUSAGE|";
             ParamValuesStr += Messages.OVERVIEW_MEMORY_USAGE + "|";
             ParamLabelsStr += "LBL_UPTIME|";
@@ -589,23 +601,49 @@ namespace XenAdmin.Actions
             viewer.LocalReport.SetParameters(new ReportParameter[] { ParamLabels, ParamValues });
         }
 
+        private string SRSizeString(XenAPI.SR sr)
+        {
+            int percent = 0;
+            double ratio = 0;
+            if (sr.physical_size > 0)
+            {
+                ratio = sr.physical_utilisation / (double)sr.physical_size;
+                percent = (int)(100.0 * ratio);
+            }
+            string percentString = string.Format(Messages.DISK_PERCENT_USED, percent.ToString(), Util.DiskSizeString(sr.physical_utilisation));
+            return string.Format(Messages.SR_SIZE_USED, percentString, Util.DiskSizeString(sr.physical_size), Util.DiskSizeString(sr.virtual_allocation));
+        }
+
         private void ComposeHostData()
         {
             m_Hosts = new List<HostInfo>();
             var hosts = new List<XenAPI.Host>(Connection.Cache.Hosts);
             hosts.Sort();
+            
             foreach (XenAPI.Host host in hosts)
             {
                 if (Cancelling)
                     throw new CancelledException();
-
+                string srSizeString = "";
+                var PBDs = host.Connection.ResolveAll(host.PBDs);
+                foreach (XenAPI.PBD pbd in PBDs)
+                {
+                    SR sr = pbd.Connection.Resolve(pbd.SR);
+                    if(sr.IsLocalSR && sr.type.ToLower() == "lvm")
+                    {
+                        srSizeString += SRSizeString(sr) + ";\n";
+                    }
+                }
+                if (srSizeString.Length == 0)
+                    srSizeString = Messages.HYPHEN;
                 string cpu_usage = PropertyAccessorHelper.hostCpuUsageStringByMetric(host, MetricUpdater);
                 string usage = PropertyAccessorHelper.hostMemoryUsagePercentageStringByMetric(host, MetricUpdater);
                 string network_usage = PropertyAccessorHelper.hostNetworkUsageStringByMetric(host, MetricUpdater);
+
                 
                 HostInfo buf = new HostInfo(host.name_label, host.address, host.uuid, cpu_usage,
                     host.IsMaster() ? Messages.YES : Messages.NO, network_usage, usage,
-                    Convert.ToString(host.Uptime), host.Description);
+                    Convert.ToString(host.Uptime), srSizeString, host.Description);
                 m_Hosts.Add(buf);
                 PercentComplete = Convert.ToInt32((++itemIndex) * baseIndex / itemCount);
             }
@@ -636,7 +674,7 @@ namespace XenAdmin.Actions
                 else if (network.IsVLAN)
                     type = Messages.EXTERNAL_NETWORK;
                 else if (pifs.Count != 0 && pifs[0].IsPhysical)
-                    type = Messages.BUILDIN_NETWORK;
+                    type = Messages.BUILTIN_NETWORK;
                 else if (pifs.Count != 0 && pifs[0].IsTunnelAccessPIF)
                     type = Messages.CHIN;
                 else if (pifs.Count == 0)
@@ -644,11 +682,20 @@ namespace XenAdmin.Actions
                 else
                     type = Messages.HYPHEN;
 
+                string location = "";
+                foreach (XenAPI.Host host in Connection.Cache.Hosts)
+                {
+                    if (host.CanSeeNetwork(network))
+                        location += host.name_label + ";";
+                }
+                if (location.Length == 0)
+                    location = Messages.HYPHEN;
+
                 NetworkInfo buf;
                 if (pifs.Count != 0)
-                   buf = new NetworkInfo(network.Name, Helpers.VlanString(pifs[0]), network.LinkStatusString, pifs[0].MAC, network.MTU.ToString(), type);
+                    buf = new NetworkInfo(network.Name, Helpers.VlanString(pifs[0]), network.LinkStatusString, pifs[0].MAC, network.MTU.ToString(), type, location);
                 else
-                    buf = new NetworkInfo(network.Name, Messages.HYPHEN, network.LinkStatusString, Messages.HYPHEN, network.MTU.ToString(), type);
+                    buf = new NetworkInfo(network.Name, Messages.HYPHEN, network.LinkStatusString, Messages.HYPHEN, network.MTU.ToString(), type, location);
                 
                 m_Networks.Add(buf);
                 
@@ -665,52 +712,43 @@ namespace XenAdmin.Actions
                 if (Cancelling)
                     throw new CancelledException();
                 
-                string srSizeString;
-                if (sr.physical_size == 0)
-                    srSizeString = Messages.HYPHEN;
-                else
-                    srSizeString = string.Format(Messages.SR_SIZE_USED, (sr.physical_utilisation / sr.physical_size * 100).ToString("0.") + "%",
-                        Util.DiskSizeString(sr.physical_size), Util.DiskSizeString(sr.virtual_allocation));
+                string srSizeString = SRSizeString(sr);
                 
-                string locationStr = Messages.HYPHEN;
+                string locationStr = "";
                 foreach (XenRef<PBD> pbdRef in sr.PBDs)
                 {
-                    PBD pbd = Connection.Resolve(pbdRef);
+                    PBD pbd = sr.Connection.Resolve(pbdRef);
 
                     if (pbd.device_config.ContainsKey("location"))
                     {
-                        if (locationStr == Messages.HYPHEN)
-                            locationStr = "location:" + pbd.device_config["location"] + ";";
-                        else
-                            locationStr += "location:" + pbd.device_config["location"] + ";";
+                       locationStr += "location:" + pbd.device_config["location"] + ";";
                     }
                     if (pbd.device_config.ContainsKey("device"))
                     {
-                        if (locationStr == Messages.HYPHEN)
-                            locationStr = "device:" + pbd.device_config["device"] + ";";
-                        else
-                            locationStr += "device:" + pbd.device_config["device"] + ";";
+                        locationStr += "device:" + pbd.device_config["device"] + ";";
                     }
                     if (pbd.device_config.ContainsKey("SCSIid"))
                     {
-                        if (locationStr == Messages.HYPHEN)
-                            locationStr = "SCSIid:" + pbd.device_config["SCSIid"] + ";";
-                        else
-                            locationStr += "SCSIid:" + pbd.device_config["SCSIid"] + ";";
+                        locationStr += "SCSIid:" + pbd.device_config["SCSIid"] + ";";
                     }
                     if (pbd.device_config.ContainsKey("targetIQN"))
                     {
-                        if (locationStr == Messages.HYPHEN)
-                            locationStr = "targetIQN:" + pbd.device_config["targetIQN"] + ";";
+                        locationStr += "targetIQN:" + pbd.device_config["targetIQN"] + ";";
+                    }
+                    if (pbd.device_config.ContainsKey("server"))
+                    {
+                        locationStr += "server:" + pbd.device_config["server"];
+                        if(pbd.device_config.ContainsKey("serverpath"))
+                            locationStr += pbd.device_config["serverpath"] + ";";
                         else
-                            locationStr += "targetIQN:" + pbd.device_config["targetIQN"] + ";";
+                            locationStr += ";";
                     }
                 }
+                if (locationStr.Length == 0)
+                    locationStr = Messages.HYPHEN;
 
                 SRInfo buf = new SRInfo(sr.Name, sr.uuid, sr.type, srSizeString, locationStr, sr.Description);
-                
                 m_SRs.Add(buf);
-                
                 PercentComplete = Convert.ToInt32((++itemIndex) * baseIndex / itemCount);
             }
         }
@@ -917,6 +955,7 @@ namespace XenAdmin.Actions
             items.Add(Messages.OVERVIEW_CPU_USAGE);
             items.Add(Messages.OVERVIEW_MEMORY_USAGE);
             items.Add(Messages.OVERVIEW_NETWORK + Messages.OVERVIEW_UNITS);
+            items.Add(Messages.STORAGE_DISK);
             items.Add(Messages.UPTIME);
             items.Add(Messages.DESCRIPTION);
             ComposeCSVRow(ref fs, ref items);
@@ -930,6 +969,7 @@ namespace XenAdmin.Actions
                 items.Add(host.CpuUsage);
                 items.Add(host.MemUsage);
                 items.Add(host.NetworkUsage);
+                items.Add(host.SRSizeString);
                 items.Add(host.Uptime);
                 items.Add(host.Description);
                 ComposeCSVRow(ref fs, ref items);
@@ -949,6 +989,7 @@ namespace XenAdmin.Actions
             items.Add(Messages.MAC);
             items.Add(Messages.MTU);
             items.Add(Messages.NETWORKPANEL_VLAN);
+            items.Add(Messages.NEWSR_LOCATION);
             ComposeCSVRow(ref fs, ref items);
 
             foreach (NetworkInfo network in m_Networks)
@@ -958,6 +999,7 @@ namespace XenAdmin.Actions
                 items.Add(network.MAC);
                 items.Add(network.MTU);
                 items.Add(network.VlanID);
+                items.Add(network.Location);
                 ComposeCSVRow(ref fs, ref items);
             }
         }

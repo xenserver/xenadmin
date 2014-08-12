@@ -1765,7 +1765,7 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
     <value>BIOS 文字列のコピー</value>
   </data>
   <data name="BOND" xml:space="preserve">
-    <value>Bond</value>
+    <value>Bonded network</value>
   </data>
   <data name="BOND_CREATE" xml:space="preserve">
     <value>ボンディングの作成</value>
@@ -1908,8 +1908,8 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
   <data name="BUGTOOL_SAVING" xml:space="preserve">
     <value>サーバーの状態レポートを保存しています</value>
   </data>
-  <data name="BUILDIN_NETWORK" xml:space="preserve">
-    <value>Build-in network</value>
+  <data name="BUILTIN_NETWORK" xml:space="preserve">
+    <value>Built-in network</value>
   </data>
   <data name="BUS_PATH" xml:space="preserve">
     <value>PCI バスのパス</value>
