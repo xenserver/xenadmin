@@ -1535,7 +1535,6 @@ namespace XenAdmin.Controls.Wlb
             _startLine = 1;
             _endLine = _lineLimit;
             _currentReportSection = 0;
-            btnRunReport.Enabled = true;
             btnRunReport.Text = Messages.RUN_REPORT;
             btnLaterReport.Visible = false;
         }
