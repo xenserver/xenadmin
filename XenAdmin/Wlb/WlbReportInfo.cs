@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Text;
 using System.Xml;
 using XenAPI;
@@ -58,7 +59,9 @@ namespace XenAdmin.Wlb
         private string _reportDefinition;
         private bool _displayHosts;
         private bool _displayFilter;
-        private List<string> _reportQueryParameterNames;
+        private bool _displayUsers;
+        private bool _displayAuditObjects;
+        private OrderedDictionary _reportQueryParameterNames;
 
         #endregion
 
@@ -71,19 +74,27 @@ namespace XenAdmin.Wlb
         /// <param name="reportName">The name of the report to be rendered</param>
         /// <param name="reportFile">The RDLC file name for the report</param>
         /// <param name="DisplayHosts">Whether or not the report requires a host parameter value</param>
+        /// <param name="DisplayUsers">Whether or not the report requires a user parameter value</param>
+        /// <param name="DisplayAuditObjects">Whether or not the report requires a audit object parameter value</param>
+        /// <param name="UserNames">List of user names whose values are required for the SQL query</param>
+        /// <param name="AuditObjectNames">List of audit object names whose values are required for the SQL query</param>
         /// <param name="reportQueryParameterNames">List of parameter names whose values are required for the SQL query</param>
         public WlbReportInfo(string reportName, 
                              string reportFile, 
                              string reportDefinition, 
                              bool DisplayHosts, 
                              bool DisplayFilter,
-                             List<string> reportQueryParameterNames)
+                             bool DisplayUsers, 
+                             bool DisplayAuditObjects,
+                             OrderedDictionary reportQueryParameterNames)
         {
             this._reportName = reportName;
             this._reportFile = reportFile;
             this._reportDefinition = reportDefinition;
             this._displayHosts = DisplayHosts;
             this._displayFilter = DisplayFilter;
+            this._displayUsers = DisplayUsers;
+            this._displayAuditObjects = DisplayAuditObjects;
             this._reportQueryParameterNames = reportQueryParameterNames;
         }
 
@@ -134,12 +145,31 @@ namespace XenAdmin.Wlb
 
 
         /// <summary>
+        /// Whether or not the report requires a user parameter value
+        /// </summary>
+        public bool DisplayUsers
+        {
+            get { return _displayUsers; }
+        }
+
+
+        /// <summary>
+        /// Whether or not the report requires an audit object parameter value
+        /// </summary>
+        public bool DisplayAuditObjects
+        {
+            get { return _displayAuditObjects; }
+        }
+
+
+        /// <summary>
         /// List of parameter names whose values are required for the SQL query
         /// </summary>
-        public List<string> ReportQueryParameterNames
+        public OrderedDictionary ReportQueryParameterNames
         {
             get { return _reportQueryParameterNames; }
         }
+
 
         #endregion
 

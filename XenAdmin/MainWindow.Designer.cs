@@ -141,6 +141,7 @@ namespace XenAdmin
             this.removeServerToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.poolReconnectAsToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.disconnectPoolToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.exportResourceReportPoolToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator27 = new System.Windows.Forms.ToolStripSeparator();
             this.virtualAppliancesToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator30 = new System.Windows.Forms.ToolStripSeparator();
@@ -832,6 +833,7 @@ namespace XenAdmin
             this.highAvailabilityToolStripMenuItem,
             this.disasterRecoveryToolStripMenuItem,
             this.vMProtectionAndRecoveryToolStripMenuItem,
+            this.exportResourceReportPoolToolStripMenuItem,
             this.wlbReportsToolStripMenuItem,
             this.wlbDisconnectToolStripMenuItem,
             this.toolStripSeparator9,
@@ -927,6 +929,12 @@ namespace XenAdmin
             this.vMProtectionAndRecoveryToolStripMenuItem.Command = new XenAdmin.Commands.VMGroupCommandVMPP();
             this.vMProtectionAndRecoveryToolStripMenuItem.Name = "vMProtectionAndRecoveryToolStripMenuItem";
             resources.ApplyResources(this.vMProtectionAndRecoveryToolStripMenuItem, "vMProtectionAndRecoveryToolStripMenuItem");
+            // 
+            // exportResourceListoolToolStripMenuItem
+            // 
+            this.exportResourceReportPoolToolStripMenuItem.Command = new XenAdmin.Commands.ExportResourceReportCommand();
+            this.exportResourceReportPoolToolStripMenuItem.Name = "exportResourceReportPoolToolStripMenuItem";
+            resources.ApplyResources(this.exportResourceReportPoolToolStripMenuItem, "exportResourceReportPoolToolStripMenuItem");
             // 
             // wlbReportsToolStripMenuItem
             // 
@@ -1860,6 +1868,7 @@ namespace XenAdmin
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private CommandToolStripMenuItem deleteToolStripMenuItem;
         private CommandToolStripMenuItem disconnectPoolToolStripMenuItem;
+        private CommandToolStripMenuItem exportResourceReportPoolToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem HostMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem11;
         private CommandToolStripMenuItem ServerPropertiesToolStripMenuItem;

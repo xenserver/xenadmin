@@ -357,6 +357,9 @@
   <data name="ACTION_EXPORT_DESCRIPTION_FAILED" xml:space="preserve">
     <value>エクスポートに失敗しました</value>
   </data>
+  <data name="ACTION_EXPORT_DESCRIPTION_FAILED_OF_OPEN_FILE" xml:space="preserve">
+    <value>Export failed due to open destination file {0} failed</value>
+  </data>
   <data name="ACTION_EXPORT_DESCRIPTION_HEADER_CHECKSUM_FAILED" xml:space="preserve">
     <value>ヘッダーのチェックサムが一致しないため、エクスポートに失敗しました。もう一度エクスポートしてください。</value>
   </data>
@@ -371,6 +374,12 @@
   </data>
   <data name="ACTION_EXPORT_DESCRIPTION_VDI_IN_USE" xml:space="preserve">
     <value>エクスポートに失敗しました。ディスクが使用中です。</value>
+  </data>
+  <data name="ACTION_EXPORT_POOL_RESOURCE_CANCEL_AND_FILE_UNDELETE" xml:space="preserve">
+    <value>Export canceled and deleting destination file '{0}' failed</value>
+  </data>
+  <data name="ACTION_EXPORT_POOL_RESOURCE_LIST_FROM_X" xml:space="preserve">
+    <value>Exporting resource list from '{0}'</value>
   </data>
   <data name="ACTION_EXPORT_TASK_DESCRIPTION" xml:space="preserve">
     <value>{0} のバックアップ ファイルへのエクスポート</value>
@@ -1755,6 +1764,9 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
   <data name="BIOS_STRINGS_COPIED" xml:space="preserve">
     <value>BIOS 文字列のコピー</value>
   </data>
+  <data name="BOND" xml:space="preserve">
+    <value>Bonded network</value>
+  </data>
   <data name="BOND_CREATE" xml:space="preserve">
     <value>ボンディングの作成</value>
   </data>
@@ -1895,6 +1907,9 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
   </data>
   <data name="BUGTOOL_SAVING" xml:space="preserve">
     <value>サーバーの状態レポートを保存しています</value>
+  </data>
+  <data name="BUILTIN_NETWORK" xml:space="preserve">
+    <value>Built-in network</value>
   </data>
   <data name="BUS_PATH" xml:space="preserve">
     <value>PCI バスのパス</value>
@@ -4457,6 +4472,9 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="EXPORT_VM_VERIFY_POST_INSTALL" xml:space="preserve">
     <value>完了時にエクスポートを検証する(&amp;V)</value>
   </data>
+  <data name="EXTERNAL_NETWORK" xml:space="preserve">
+    <value>External network</value>
+  </data>
   <data name="EXTERNAL_NETWORKS_REQUIRE_STANDARD" xml:space="preserve">
     <value>外部ネットワークを使用するには、Standard Edition のライセンスが必要です。</value>
   </data>
@@ -6338,6 +6356,9 @@ SCSI ID: {2}
   <data name="MAINWINDOW_EXPIRE_MESSAGE" xml:space="preserve">
     <value>'{0}' の XenServer ライセンスの有効期限はあと {1}で切れます。</value>
   </data>
+  <data name="MAINWINDOW_EXPORT_POOL_RESOURCE_DATA" xml:space="preserve">
+    <value>E&amp;xport Resource Data...</value>
+  </data>
   <data name="MAINWINDOW_EXPORT_TEMPLATE" xml:space="preserve">
     <value>ファイルにエクスポート(&amp;E)...</value>
   </data>
@@ -6899,6 +6920,9 @@ SCSI ID: {2}
   </data>
   <data name="MOVING" xml:space="preserve">
     <value>移動しています...</value>
+  </data>
+  <data name="MTU" xml:space="preserve">
+    <value>MTU</value>
   </data>
   <data name="MULTIPATHING" xml:space="preserve">
     <value>マルチパス</value>
@@ -8440,6 +8464,9 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
   <data name="POWER_STATE" xml:space="preserve">
     <value>電源の状態</value>
   </data>
+  <data name="POWER_USAGE" xml:space="preserve">
+    <value>Power usage (W)</value>
+  </data>
   <data name="PRIVACY_WARNING" xml:space="preserve">
     <value>個人情報の警告</value>
   </data>
@@ -9040,6 +9067,9 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   <data name="RUNNING_ARCHIVE" xml:space="preserve">
     <value>アーカイブ中</value>
   </data>
+  <data name="RUNNING_ON" xml:space="preserve">
+    <value>Running on</value>
+  </data>
   <data name="RUNNING_SNAPSHOTS" xml:space="preserve">
     <value>スナップショット作成中</value>
   </data>
@@ -9312,6 +9342,9 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   </data>
   <data name="SHUTTING_DOWN_VM_OUT_OF" xml:space="preserve">
     <value>VM をシャットダウン中: {0} / {1}</value>
+  </data>
+  <data name="SINGLE_SERVER_PRIVATE_NETWORK" xml:space="preserve">
+    <value>Single-server private network</value>
   </data>
   <data name="SIGNING_APPLIANCE" xml:space="preserve">
     <value>アプライアンスにデジタル署名を適用しています...</value>
@@ -9874,6 +9907,9 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   </data>
   <data name="TELL_ME_MORE" xml:space="preserve">
     <value>詳細情報...</value>
+  </data>
+  <data name="TEMPERATURE" xml:space="preserve">
+    <value>Temperature (°C)</value>
   </data>
   <data name="TEMPLATE" xml:space="preserve">
     <value>テンプレート</value>
@@ -10598,6 +10634,12 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   <data name="USES" xml:space="preserve">
     <value>以下を使用する</value>
   </data>
+  <data name="UTILIZATION" xml:space="preserve">
+    <value>Computer Utilization (%)</value>
+  </data>
+  <data name="UUID" xml:space="preserve">
+    <value>UUID</value>
+  </data>
   <data name="UUID_SEARCH" xml:space="preserve">
     <value>＝</value>
   </data>
@@ -10678,6 +10720,9 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   </data>
   <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
     <value>VCPU の数を変更するには、VM をシャットダウンする必要があります</value>
+  </data>
+  <data name="VDI" xml:space="preserve">
+    <value>VDI</value>
   </data>
   <data name="VDI_COPIED" xml:space="preserve">
     <value>SR '{1}' から SR '{2}' にディスク '{0}' をコピーしました</value>

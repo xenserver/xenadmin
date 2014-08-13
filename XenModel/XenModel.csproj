@@ -507,7 +507,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="InvisibleMessages.zh-CN.resx" />
-    <EmbeddedResource Include="Messages.ja.resx" />
+    <EmbeddedResource Include="Messages.ja.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Messages.resx">
       <SubType>Designer</SubType>
       <Generator>PublicResXFileCodeGenerator</Generator>
