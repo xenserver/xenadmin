@@ -531,7 +531,7 @@ namespace XenAdmin.Actions
             ParamLabelsStr += "LBL_CPUUSAGE|";
             ParamValuesStr += Messages.OVERVIEW_CPU_USAGE + "|";
             ParamLabelsStr += "LBL_NETWORKUSAGE|";
-            ParamValuesStr += Messages.OVERVIEW_NETWORK + "" + Messages.OVERVIEW_UNITS + "|";
+            ParamValuesStr += Messages.OVERVIEW_NETWORK + " " + Messages.OVERVIEW_UNITS + "|";
             ParamLabelsStr += "LBL_MEMORYUSAGE|";
             ParamValuesStr += Messages.OVERVIEW_MEMORY_USAGE + "|";
             ParamLabelsStr += "LBL_UPTIME|";
@@ -631,7 +631,7 @@ namespace XenAdmin.Actions
                     SR sr = pbd.Connection.Resolve(pbd.SR);
                     if(sr.IsLocalSR && sr.type.ToLower() == "lvm")
                     {
-                        srSizeString += SRSizeString(sr) + ";\n";
+                        srSizeString += SRSizeString(sr) + ";";
                     }
                 }
                 if (srSizeString.Length == 0)
@@ -686,7 +686,7 @@ namespace XenAdmin.Actions
                 foreach (XenAPI.Host host in Connection.Cache.Hosts)
                 {
                     if (host.CanSeeNetwork(network))
-                        location += host.name_label + ";";
+                        location += host.name_label + ":" + host.uuid + ";";
                 }
                 if (location.Length == 0)
                     location = Messages.HYPHEN;
@@ -715,28 +715,38 @@ namespace XenAdmin.Actions
                 string srSizeString = SRSizeString(sr);
                 
                 string locationStr = "";
+                bool haveLocation = false;
+                bool haveServerPath = false;
+                bool haveDevice = false;
+                bool haveTargetIQN = false;
+                bool haveSCSIid = false;
                 foreach (XenRef<PBD> pbdRef in sr.PBDs)
                 {
                     PBD pbd = sr.Connection.Resolve(pbdRef);
 
-                    if (pbd.device_config.ContainsKey("location"))
+                    if (!haveLocation && pbd.device_config.ContainsKey("location"))
                     {
+                       haveLocation = true;
                        locationStr += "location:" + pbd.device_config["location"] + ";";
                     }
-                    if (pbd.device_config.ContainsKey("device"))
+                    if (!haveDevice && pbd.device_config.ContainsKey("device"))
                     {
+                        haveDevice = true;
                         locationStr += "device:" + pbd.device_config["device"] + ";";
                     }
-                    if (pbd.device_config.ContainsKey("SCSIid"))
+                    if (!haveSCSIid && pbd.device_config.ContainsKey("SCSIid"))
                     {
+                        haveSCSIid = true;
                         locationStr += "SCSIid:" + pbd.device_config["SCSIid"] + ";";
                     }
-                    if (pbd.device_config.ContainsKey("targetIQN"))
+                    if (!haveTargetIQN && pbd.device_config.ContainsKey("targetIQN"))
                     {
+                        haveTargetIQN = true;
                         locationStr += "targetIQN:" + pbd.device_config["targetIQN"] + ";";
                     }
-                    if (pbd.device_config.ContainsKey("server"))
+                    if (!haveServerPath && pbd.device_config.ContainsKey("server"))
                     {
+                        haveServerPath = true;
                         locationStr += "server:" + pbd.device_config["server"];
                         if(pbd.device_config.ContainsKey("serverpath"))
                             locationStr += pbd.device_config["serverpath"] + ";";
@@ -766,8 +776,8 @@ namespace XenAdmin.Actions
 
                 if (Cancelling)
                     throw new CancelledException();
-                
-                if (vm.is_a_snapshot || vm.is_a_template || vm.is_control_domain || vm.is_snapshot_from_vmpp)
+
+                if (!vm.is_a_real_vm)
                 {
                     PercentComplete = Convert.ToInt32((++itemIndex) * baseIndex / itemCount);
                     continue;
