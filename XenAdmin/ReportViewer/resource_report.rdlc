@@ -702,7 +702,7 @@
                       </Style>
                       <ZIndex>7</ZIndex>
                       <CanGrow>true</CanGrow>
-                      <Value>=Code.GetLabel("LBL_LOCATION")</Value>
+                      <Value> =Code.GetLabel("LBL_STORAGE")</Value>
                     </Textbox>
                   </ReportItems>
                 </TableCell>
@@ -2973,7 +2973,7 @@
         <ZIndex>3</ZIndex>
         <DataSetName>Report_HostInfo</DataSetName>
         <Top>2.75cm</Top>
-        <Width>53.52646cm</Width>
+        <Width>54.02646cm</Width>
         <Details>
           <TableRows>
             <TableRow>
@@ -3542,7 +3542,7 @@
             <Width>3.25cm</Width>
           </TableColumn>
           <TableColumn>
-            <Width>4.25cm</Width>
+            <Width>4.75cm</Width>
           </TableColumn>
           <TableColumn>
             <Width>3.77646cm</Width>
