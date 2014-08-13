@@ -412,5 +412,22 @@ namespace XenAdmin.XenSearch
         {
             public readonly ConcurrentDictionary<string, double> Values = new ConcurrentDictionary<string, double>();
         }
+
+        /// <summary>
+        /// This function is used for generate resource report only.
+        /// </summary>
+        public void UpdateMetricsOnce()
+        {
+            Parallel.ForEach(_hosts.Keys.Where(h => h.Connection.IsConnected),
+                host =>
+                {
+                    HostMetric hm;
+                    if (_hosts.TryGetValue(host, out hm))
+                    {
+                        var values = ValuesFor(host);
+                        DistributeValues(values, hm);
+                    }
+                });
+        }
     }
 }

@@ -357,6 +357,9 @@
   <data name="ACTION_EXPORT_DESCRIPTION_FAILED" xml:space="preserve">
     <value>导出失败</value>
   </data>
+  <data name="ACTION_EXPORT_DESCRIPTION_FAILED_OF_OPEN_FILE" xml:space="preserve">
+    <value>导出操作因源文件 {0} 打开失败</value>
+  </data>
   <data name="ACTION_EXPORT_DESCRIPTION_HEADER_CHECKSUM_FAILED" xml:space="preserve">
     <value>导出操作因标头校验和不匹配而失败。请重新尝试导出。</value>
   </data>
@@ -374,6 +377,12 @@
   </data>
   <data name="ACTION_EXPORT_TASK_DESCRIPTION" xml:space="preserve">
     <value>将 {0} 导出到备份文件</value>
+  </data>
+  <data name="ACTION_EXPORT_POOL_RESOURCE_CANCEL_AND_FILE_UNDELETE" xml:space="preserve">
+    <value>已取消导出，但目的文件 '{0}'删除失败</value>
+  </data>
+  <data name="ACTION_EXPORT_POOL_RESOURCE_LIST_FROM_X" xml:space="preserve">
+    <value>从池 '{0}' 导出资源统计报表</value>
   </data>
   <data name="ACTION_EXPORT_TASK_NAME" xml:space="preserve">
     <value>导出 {0}</value>
@@ -1755,6 +1764,9 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   <data name="BIOS_STRINGS_COPIED" xml:space="preserve">
     <value>已复制 BIOS 字符串</value>
   </data>
+  <data name="BOND" xml:space="preserve">
+    <value>绑定网路</value>
+  </data>
   <data name="BOND_CREATE" xml:space="preserve">
     <value>创建绑定</value>
   </data>
@@ -1895,6 +1907,9 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   </data>
   <data name="BUGTOOL_SAVING" xml:space="preserve">
     <value>正在保存服务器状态报告</value>
+  </data>
+  <data name="BUILTIN_NETWORK" xml:space="preserve">
+    <value>内置网络</value>
   </data>
   <data name="BUS_PATH" xml:space="preserve">
     <value>PCI 总线路径</value>
@@ -4456,6 +4471,9 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   <data name="EXPORT_VM_VERIFY_POST_INSTALL" xml:space="preserve">
     <value>完成时验证导出(&amp;V)</value>
   </data>
+  <data name="EXTERNAL_NETWORK" xml:space="preserve">
+    <value>外部网络</value>
+  </data>
   <data name="EXTERNAL_NETWORKS_REQUIRE_STANDARD" xml:space="preserve">
     <value>外部网络需要使用 Standard Edition 许可证。</value>
   </data>
@@ -4512,6 +4530,9 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   </data>
   <data name="FEATURE_NOT_AVAILABLE_NEED_MR_PLURAL" xml:space="preserve">
     <value>{0} 需要使用 XenServer 5.6 或更高版本</value>
+  </data>
+  <data name="FETCH_EARLIER_DATA" xml:space="preserve">
+    <value>后一段报告(&amp;N)</value>
   </data>
   <data name="FIBRECHANNEL_NO_RESULTS" xml:space="preserve">
     <value>未找到 LUN。请验证硬件配置。</value>
@@ -6336,6 +6357,9 @@ SCSI ID: {2}
   <data name="MAINWINDOW_EXPIRE_MESSAGE" xml:space="preserve">
     <value>“{0}”上的 XenServer 许可证将于 {1}内过期。</value>
   </data>
+  <data name="MAINWINDOW_EXPORT_POOL_RESOURCE_DATA" xml:space="preserve">
+    <value>资源统计报表(&amp;X)...</value>
+  </data>
   <data name="MAINWINDOW_EXPORT_TEMPLATE" xml:space="preserve">
     <value>导出到文件(&amp;E)...</value>
   </data>
@@ -6897,6 +6921,9 @@ SCSI ID: {2}
   </data>
   <data name="MOVING" xml:space="preserve">
     <value>正在移动...</value>
+  </data>
+  <data name="MTU" xml:space="preserve">
+    <value>MTU</value>
   </data>
   <data name="MULTIPATHING" xml:space="preserve">
     <value>多路径</value>
@@ -8442,6 +8469,9 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="POWER_STATE" xml:space="preserve">
     <value>电源状态</value>
   </data>
+  <data name="POWER_USAGE" xml:space="preserve">
+    <value>功耗 (W)</value>
+  </data>
   <data name="PRIVACY_WARNING" xml:space="preserve">
     <value>隐私警告</value>
   </data>
@@ -9042,8 +9072,14 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="RUNNING_ARCHIVE" xml:space="preserve">
     <value>正在存档</value>
   </data>
+  <data name="RUNNING_ON" xml:space="preserve">
+    <value>运行于</value>
+  </data>
   <data name="RUNNING_SNAPSHOTS" xml:space="preserve">
     <value>正在生成快照</value>
+  </data>
+  <data name="RUN_MORE_REPORT" xml:space="preserve">
+    <value>更多报告(&amp;M)</value>
   </data>
   <data name="RUN_POLICY" xml:space="preserve">
     <value>正在运行策略“{0}”</value>
@@ -9053,6 +9089,9 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="RUN_PRECHECKS_WITH_ACCESS_KEY" xml:space="preserve">
     <value>运行预检查(&amp;R)</value>
+  </data>
+  <data name="RUN_REPORT" xml:space="preserve">
+    <value>运行报告(&amp;R)</value>
   </data>
   <data name="SATURDAY_LONG" xml:space="preserve">
     <value>星期六</value>
@@ -9314,6 +9353,9 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="SHUTTING_DOWN_VM_OUT_OF" xml:space="preserve">
     <value>正在关闭 {1} 个 VM 中的第 {0} 个</value>
+  </data>
+  <data name="SINGLE_SERVER_PRIVATE_NETWORK" xml:space="preserve">
+    <value>单服务器专用网络</value>
   </data>
   <data name="SIGNING_APPLIANCE" xml:space="preserve">
     <value>正在将数字签名应用到设备...</value>
@@ -9876,6 +9918,9 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="TELL_ME_MORE" xml:space="preserve">
     <value>了解更多信息 ...</value>
+  </data>
+  <data name="TEMPERATURE" xml:space="preserve">
+    <value>温度 (°C)</value>
   </data>
   <data name="TEMPLATE" xml:space="preserve">
     <value>模板</value>
@@ -10600,6 +10645,12 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="USES" xml:space="preserve">
     <value>使用</value>
   </data>
+  <data name="UTILIZATION" xml:space="preserve">
+    <value>利用率 (%)</value>
+  </data>
+  <data name="UUID" xml:space="preserve">
+    <value>UUID</value>
+  </data>
   <data name="UUID_SEARCH" xml:space="preserve">
     <value>是</value>
   </data>
@@ -10680,6 +10731,9 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
     <value>只有关闭 VM 后，才能更改 VCPU 数。</value>
+  </data>
+  <data name="VDI" xml:space="preserve">
+    <value>VDI</value>
   </data>
   <data name="VDI_COPIED" xml:space="preserve">
     <value>磁盘“{0}”已从 SR“{1}”复制到 SR“{2}”</value>
@@ -11082,6 +11136,18 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="WLB_ADVANCED_CONFIGURATION_SUBTEXT" xml:space="preserve">
     <value />
+  </data>
+  <data name="WLB_AUDIT_LOG_MAXIMUM" xml:space="preserve">
+    <value>最大</value>
+  </data>
+  <data name="WLB_AUDIT_LOG_MEDIUM" xml:space="preserve">
+    <value>中等</value>
+  </data>
+  <data name="WLB_AUDIT_LOG_MINIMUM" xml:space="preserve">
+    <value>最小</value>
+  </data>
+  <data name="WLB_AUDIT_LOG_USER_OBJECT_ALL" xml:space="preserve">
+    <value>全部</value>
   </data>
   <data name="WLB_AUTOMATION" xml:space="preserve">
     <value>自动化</value>

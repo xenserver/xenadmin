@@ -55,6 +55,7 @@
                             <File Id="vmPerformanceHistoryRDLC" Source="..\XenAdmin\ReportViewer\vm_performance_history.rdlc" />
                             <File Id="PoolHealthHistoryRDLC" Source="..\XenAdmin\ReportViewer\pool_health_history.rdlc" />
                             <File Id="ReportConfigXML" Source="..\XenAdmin\ReportViewer\reports.xml" />
+                            <File Id="ResourceReportRDLC" Source="..\XenAdmin\ReportViewer\resource_report.rdlc" />
                         </Component>
                         <Component Id="MainExecutable" Guid="64FEF765-7593-4612-8D4D-EE81CF704DEB">
                             <!-- XenCenter EXE -->

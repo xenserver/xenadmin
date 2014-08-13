@@ -781,6 +781,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export failed due to open destination file {0} failed.
+        /// </summary>
+        public static string ACTION_EXPORT_DESCRIPTION_FAILED_OF_OPEN_FILE {
+            get {
+                return ResourceManager.GetString("ACTION_EXPORT_DESCRIPTION_FAILED_OF_OPEN_FILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export failed due to a header checksum mismatch.  Please retry the export..
         /// </summary>
         public static string ACTION_EXPORT_DESCRIPTION_HEADER_CHECKSUM_FAILED {
@@ -822,6 +831,24 @@ namespace XenAdmin {
         public static string ACTION_EXPORT_DESCRIPTION_VDI_IN_USE {
             get {
                 return ResourceManager.GetString("ACTION_EXPORT_DESCRIPTION_VDI_IN_USE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export canceled and deleting destination file &apos;{0}&apos; failed.
+        /// </summary>
+        public static string ACTION_EXPORT_POOL_RESOURCE_CANCEL_AND_FILE_UNDELETE {
+            get {
+                return ResourceManager.GetString("ACTION_EXPORT_POOL_RESOURCE_CANCEL_AND_FILE_UNDELETE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exporting pool resource list from &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_EXPORT_POOL_RESOURCE_LIST_FROM_X {
+            get {
+                return ResourceManager.GetString("ACTION_EXPORT_POOL_RESOURCE_LIST_FROM_X", resourceCulture);
             }
         }
         
@@ -5038,6 +5065,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bonded network.
+        /// </summary>
+        public static string BOND {
+            get {
+                return ResourceManager.GetString("BOND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create Bond.
         /// </summary>
         public static string BOND_CREATE {
@@ -5397,6 +5433,15 @@ namespace XenAdmin {
         public static string BUGTOOL_SAVING {
             get {
                 return ResourceManager.GetString("BUGTOOL_SAVING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Built-in network.
+        /// </summary>
+        public static string BUILTIN_NETWORK {
+            get {
+                return ResourceManager.GetString("BUILTIN_NETWORK", resourceCulture);
             }
         }
         
@@ -13088,6 +13133,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to External network.
+        /// </summary>
+        public static string EXTERNAL_NETWORK {
+            get {
+                return ResourceManager.GetString("EXTERNAL_NETWORK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to External networks require a Standard Edition license..
         /// </summary>
         public static string EXTERNAL_NETWORKS_REQUIRE_STANDARD {
@@ -13257,7 +13311,16 @@ namespace XenAdmin {
                 return ResourceManager.GetString("FEATURE_NOT_AVAILABLE_NEED_MR_PLURAL", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to fetch earlier data.
+        /// </summary>
+        public static string FETCH_EARLIER_DATA {
+            get {
+                return ResourceManager.GetString("FETCH_EARLIER_DATA", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to No LUNs were found.  Please verify your hardware configuration..
         /// </summary>
@@ -13795,6 +13858,15 @@ namespace XenAdmin {
         public static string FRIDAY_SHORT {
             get {
                 return ResourceManager.GetString("FRIDAY_SHORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning: enable maximum audit trail log needs more disk space and memory on WLB Server!.
+        /// </summary>
+        public static string MAXIMUM_AUDIT_LOG_WARN_MSG {
+            get {
+                return ResourceManager.GetString("MAXIMUM_AUDIT_LOG_WARN_MSG", resourceCulture);
             }
         }
         
@@ -18644,6 +18716,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to E&amp;xport Resource Data....
+        /// </summary>
+        public static string MAINWINDOW_EXPORT_POOL_RESOURCE_DATA {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_EXPORT_POOL_RESOURCE_DATA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Export to File....
         /// </summary>
         public static string MAINWINDOW_EXPORT_TEMPLATE {
@@ -20285,6 +20366,15 @@ namespace XenAdmin {
         public static string MOVING {
             get {
                 return ResourceManager.GetString("MOVING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MTU.
+        /// </summary>
+        public static string MTU {
+            get {
+                return ResourceManager.GetString("MTU", resourceCulture);
             }
         }
         
@@ -25034,6 +25124,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Power usage (W).
+        /// </summary>
+        public static string POWER_USAGE {
+            get {
+                return ResourceManager.GetString("POWER_USAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Privacy Warning.
         /// </summary>
         public static string PRIVACY_WARNING {
@@ -26808,13 +26907,31 @@ namespace XenAdmin {
                 return ResourceManager.GetString("RUN_PRECHECKS_WITH_ACCESS_KEY", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to run report.
+        /// </summary>
+        public static string RUN_REPORT {
+            get {
+                return ResourceManager.GetString("RUN_REPORT", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Archiving.
         /// </summary>
         public static string RUNNING_ARCHIVE {
             get {
                 return ResourceManager.GetString("RUNNING_ARCHIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Running on.
+        /// </summary>
+        public static string RUNNING_ON {
+            get {
+                return ResourceManager.GetString("RUNNING_ON", resourceCulture);
             }
         }
         
@@ -27778,6 +27895,15 @@ namespace XenAdmin {
         public static string SIGNING_APPLIANCE {
             get {
                 return ResourceManager.GetString("SIGNING_APPLIANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Single-server private network.
+        /// </summary>
+        public static string SINGLE_SERVER_PRIVATE_NETWORK {
+            get {
+                return ResourceManager.GetString("SINGLE_SERVER_PRIVATE_NETWORK", resourceCulture);
             }
         }
         
@@ -29489,6 +29615,15 @@ namespace XenAdmin {
         public static string TELL_ME_MORE {
             get {
                 return ResourceManager.GetString("TELL_ME_MORE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Temperature (°C).
+        /// </summary>
+        public static string TEMPERATURE {
+            get {
+                return ResourceManager.GetString("TEMPERATURE", resourceCulture);
             }
         }
         
@@ -31665,6 +31800,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Computer Utilization (%).
+        /// </summary>
+        public static string UTILIZATION {
+            get {
+                return ResourceManager.GetString("UTILIZATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UUID.
+        /// </summary>
+        public static string UUID {
+            get {
+                return ResourceManager.GetString("UUID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Is.
         /// </summary>
         public static string UUID_SEARCH {
@@ -31940,6 +32093,15 @@ namespace XenAdmin {
         public static string VCPU_ONLY_WHEN_HALTED {
             get {
                 return ResourceManager.GetString("VCPU_ONLY_WHEN_HALTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VDI.
+        /// </summary>
+        public static string VDI {
+            get {
+                return ResourceManager.GetString("VDI", resourceCulture);
             }
         }
         
@@ -33094,7 +33256,43 @@ namespace XenAdmin {
                 return ResourceManager.GetString("WLB_ADVANCED_CONFIGURATION_SUBTEXT", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum.
+        /// </summary>
+        public static string WLB_AUDIT_LOG_MAXIMUM {
+            get {
+                return ResourceManager.GetString("WLB_AUDIT_LOG_MAXIMUM", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Medium.
+        /// </summary>
+        public static string WLB_AUDIT_LOG_MEDIUM {
+            get {
+                return ResourceManager.GetString("WLB_AUDIT_LOG_MEDIUM", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum.
+        /// </summary>
+        public static string WLB_AUDIT_LOG_MINIMUM {
+            get {
+                return ResourceManager.GetString("WLB_AUDIT_LOG_MINIMUM", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to ALL.
+        /// </summary>
+        public static string WLB_AUDIT_LOG_USER_OBJECT_ALL {
+            get {
+                return ResourceManager.GetString("WLB_AUDIT_LOG_USER_OBJECT_ALL", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Automated optimizations.
         /// </summary>
@@ -35281,5 +35479,6 @@ namespace XenAdmin {
                 return ResourceManager.GetString("YOU_ARE_HERE", resourceCulture);
             }
         }
+
     }
 }
