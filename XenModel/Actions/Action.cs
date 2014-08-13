@@ -154,6 +154,9 @@ namespace XenAdmin.Actions
             {
                 _sR = value;
                 SetAppliesTo(SR);
+
+                if (Host == null)
+                    Host = SR.Home;
             }
         }
 
@@ -325,7 +328,7 @@ namespace XenAdmin.Actions
             set
             {
                 System.Diagnostics.Trace.Assert(value >= 0);
-                _percentComplete = Math.Min(value, 100);
+                _percentComplete = value > 0 ? Math.Min(value, 100) : 0;
                 OnChanged();
             }
         }

@@ -42,8 +42,8 @@ namespace XenAdmin.Actions
         private VMPP _vmpp;
         private List<XenRef<VM>> _selectedVMs;
 
-        public AssignVMsToPolicyAction(VMPP vmpp, List<XenRef<VM>> selectedVMs)
-            : base(vmpp.Connection, Messages.ASSIGN_PROTECTION_POLICY_NOAMP)
+        public AssignVMsToPolicyAction(VMPP vmpp, List<XenRef<VM>> selectedVMs, bool suppressHistory)
+            : base(vmpp.Connection, Messages.ASSIGN_PROTECTION_POLICY_NOAMP, suppressHistory)
         {
             _vmpp = vmpp;
             _selectedVMs = selectedVMs;

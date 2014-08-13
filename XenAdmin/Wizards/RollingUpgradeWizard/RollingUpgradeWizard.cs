@@ -150,7 +150,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 using (MultipleAction multipleAction = new MultipleAction(xenConnection, Messages.REVERT_WIZARD_CHANGES,
                                                                           Messages.REVERTING_WIZARD_CHANGES,
                                                                           Messages.REVERTED_WIZARD_CHANGES,
-                                                                          subActions, true))
+                                                                          subActions, false, true))
                 {
                     ActionProgressDialog dialog = new ActionProgressDialog(multipleAction, ProgressBarStyle.Blocks);
                     dialog.ShowDialog(Program.MainWindow);

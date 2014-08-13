@@ -313,7 +313,7 @@ namespace XenAdmin.SettingsPanels
             }
 
             if (FolderChanged || TagsChanged)
-                return new GeneralEditPageAction(xenObjectOrig, xenObjectCopy, folderEditor.Path, tagsEditor.Tags);
+                return new GeneralEditPageAction(xenObjectOrig, xenObjectCopy, folderEditor.Path, tagsEditor.Tags, true);
             else
                 return null;
         }

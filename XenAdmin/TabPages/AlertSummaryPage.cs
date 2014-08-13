@@ -475,6 +475,20 @@ namespace XenAdmin.TabPages
 
         private void ToolStripMenuItemDismiss_Click(object sender, EventArgs e)
         {
+            if (GridViewAlerts.SelectedRows.Count != 1)
+                log.DebugFormat("Only 1 alert can be dismissed at a time (Attempted to dismiss {0}). Dismissing the clicked item.", GridViewAlerts.SelectedRows.Count);
+
+            DataGridViewRow clickedRow = FindAlertRow(sender as ToolStripMenuItem);
+            if (clickedRow == null)
+            {
+                log.Debug("Attempted to dismiss alert with no alert selected.");
+                return;
+            }
+
+            Alert alert = (Alert)clickedRow.Tag;
+            if (alert == null)
+                return;
+
             using (var dlog = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_CONFIRM, Messages.XENCENTER),
                     ThreeButtonDialog.ButtonYes,
@@ -484,19 +498,7 @@ namespace XenAdmin.TabPages
                     return;
             }
 
-            DataGridViewRow clickedRow = FindAlertRow(sender as ToolStripMenuItem);
-            if (clickedRow == null)
-                return;
-
-            if (GridViewAlerts.SelectedRows.Count > 1 && GridViewAlerts.SelectedRows.Contains(clickedRow))
-            {
-                var selectedAlerts = from DataGridViewRow row in GridViewAlerts.SelectedRows select row.Tag as Alert;
-                DismissAlerts(selectedAlerts);
-            }
-            else
-            {
-                DismissAlerts(new List<Alert> {(Alert) clickedRow.Tag});
-            }
+            DismissAlerts(new List<Alert> {(Alert) clickedRow.Tag});
         }
 
         private void tsmiDismissAll_Click(object sender, EventArgs e)
@@ -535,6 +537,24 @@ namespace XenAdmin.TabPages
             DismissAlerts(alerts);
         }
 
+        private void tsmiDismissSelected_Click(object sender, EventArgs e)
+        {
+            using (var dlog = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(null, Messages.ALERT_DISMISS_SELECTED_CONFIRM, Messages.XENCENTER),
+                    ThreeButtonDialog.ButtonYes,
+                    ThreeButtonDialog.ButtonNo))
+            {
+                if (dlog.ShowDialog(this) != DialogResult.Yes)
+                    return;
+            }
+
+            if (GridViewAlerts.SelectedRows.Count > 0)
+            {
+                var selectedAlerts = from DataGridViewRow row in GridViewAlerts.SelectedRows select row.Tag as Alert;
+                DismissAlerts(selectedAlerts);
+            }
+        }
+
         private void AlertsCollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             Program.AssertOnEventThread();
@@ -558,10 +578,7 @@ namespace XenAdmin.TabPages
 
         private void UpdateActionEnablement()
         {
-            toolStripDropDownSeveritiesFilter.Enabled =
-                toolStripDropDownButtonServerFilter.Enabled =
-                toolStripDropDownButtonDateFilter.Enabled =
-                toolStripButtonExportAll.Enabled = Alert.NonDismissingAlertCount > 0;
+            toolStripButtonExportAll.Enabled = Alert.NonDismissingAlertCount > 0;
 
             tsmiDismissAll.Enabled = AllowedToDismiss(Alert.Alerts);
             tsmiDismissAll.AutoToolTip = !tsmiDismissAll.Enabled;
@@ -652,10 +669,13 @@ namespace XenAdmin.TabPages
             foreach (var g in groups)
             {
                 if (AllowedToDismiss(g.Connection))
+                {
+                    foreach (var alert in g.Alerts)
+                        alert.Dismissing = true;
+                    Rebuild();
                     new DeleteAllAlertsAction(g.Connection, g.Alerts).RunAsync();
+                }
             }
-
-            Rebuild();
         }
 
         #endregion
@@ -799,6 +819,9 @@ namespace XenAdmin.TabPages
 
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (GridViewAlerts.SelectedRows.Count != 1)
+                log.DebugFormat("Only 1 alert can be copied at a time (Attempted to copy {0}). Copying the clicked item.", GridViewAlerts.SelectedRows.Count);
+
             DataGridViewRow clickedRow = FindAlertRow(sender as ToolStripMenuItem);
             if (clickedRow == null)
             {
@@ -806,25 +829,13 @@ namespace XenAdmin.TabPages
                 return;
             }
 
-            StringBuilder sb = new StringBuilder();
-            if (GridViewAlerts.SelectedRows.Count > 1 && GridViewAlerts.SelectedRows.Contains(clickedRow))
-            {
-                foreach (DataGridViewRow r in GridViewAlerts.SelectedRows)
-                {
-                    Alert alert = (Alert) r.Tag;
-                    sb.AppendLine(alert.GetAlertDetailsCSVQuotes());
-                }
-            }
-            else
-            {
-                Alert alert = (Alert)clickedRow.Tag;
-                if (alert != null) 
-                    sb.AppendLine(alert.GetUpdateDetailsCSVQuotes());
-            }
+            Alert alert = (Alert)clickedRow.Tag;
+            if (alert == null)
+                return;
 
             try
             {
-                Clipboard.SetText(sb.ToString());
+                Clipboard.SetText(alert.GetUpdateDetailsCSVQuotes());
             }
             catch (Exception ex)
             {

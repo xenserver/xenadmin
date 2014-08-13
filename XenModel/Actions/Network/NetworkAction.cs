@@ -129,10 +129,11 @@ namespace XenAdmin.Actions
         /// <param name="pif">The PIF representing the physical NIC from which we're basing our new VLAN.
         /// Null iff changePIFs is false or external is false.</param>
         /// <param name="vlan">The new VLAN tag.  Ignored iff changePIFs is false or external is false.</param>
+        /// <param name="suppressHistory"></param>
         public NetworkAction(IXenConnection connection, XenAPI.Network network,
-            bool changePIFs, bool external, PIF pif, long vlan)
+            bool changePIFs, bool external, PIF pif, long vlan, bool suppressHistory)
             : base(connection, string.Format(Messages.NETWORK_ACTION_UPDATING_NETWORK_TITLE,
-            network.Name, Helpers.GetName(connection)))
+            network.Name, Helpers.GetName(connection)), suppressHistory)
         {
             actionType = network_actions.update;
             this.networkClone = network;

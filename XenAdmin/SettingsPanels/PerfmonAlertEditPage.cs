@@ -59,6 +59,7 @@ namespace XenAdmin.SettingsPanels
         private readonly AlertGroup diskAlert;
         private readonly AlertGroup memoryAlert;
         private readonly AlertGroup srAlert;
+        private readonly AlertGroup dom0MemoryAlert;
 
         public PerfmonAlertEditPage()
         {
@@ -127,7 +128,7 @@ namespace XenAdmin.SettingsPanels
                 {
                     AlertEnablementChanged = SetAlertIntervalEnablement,
                     SubTextFormat = Messages.ALERT_MEMORY_SUB_TEXT,
-                    PerfmonDefinitionName = PerfmonDefinition.ALARM_TYPE_MEMORY,
+                    PerfmonDefinitionName = PerfmonDefinition.ALARM_TYPE_MEMORY_FREE,
                     XapiToGuiTriggerLevel = (num => num / 1024),
                     XapiToGuiTriggerPeriod = (num => num / 60),
                     XapiToGuiAlertInterval = (num => num / 60),
@@ -152,11 +153,28 @@ namespace XenAdmin.SettingsPanels
                     GuiToXapiAlertInterval = (num => num * 60),
                 };
 
+
+            dom0MemoryAlert = new AlertGroup(Dom0MemoryAlertCheckBox, Dom0MemoryUsageGroupBox,
+                nudDom0MemUsage, nudDom0MemoryDurationThreshold, nudAlertInterval,
+                new[] { dom0MemoryMinutesLabel, dom0MemoryPercentLabel, Dom0MemoryUsagePercentLabel, Dom0MemoryDurationThresholdLabel })
+            {
+                AlertEnablementChanged = SetAlertIntervalEnablement,
+                SubTextFormat = Messages.ALERT_DOM0_MEMORY_SUB_TEXT,
+                PerfmonDefinitionName = PerfmonDefinition.ALARM_TYPE_MEMORY_DOM0_USAGE,
+                XapiToGuiTriggerLevel = (num => num * 100),
+                XapiToGuiTriggerPeriod = (num => num / 60),
+                XapiToGuiAlertInterval = (num => num / 60),
+                GuiToXapiTriggerLevel = (num => num / 100),
+                GuiToXapiTriggerPeriod = (num => num * 60),
+                GuiToXapiAlertInterval = (num => num * 60),
+            };
+            
             cpuAlert.ToggleAlertGroupEnablement();
             netAlert.ToggleAlertGroupEnablement();
             diskAlert.ToggleAlertGroupEnablement();
             memoryAlert.ToggleAlertGroupEnablement();
             srAlert.ToggleAlertGroupEnablement();
+            dom0MemoryAlert.ToggleAlertGroupEnablement();
         }
 
         public string SubText
@@ -189,6 +207,7 @@ namespace XenAdmin.SettingsPanels
             diskAlert.Show(isVm);
             memoryAlert.Show(isHost && Helpers.ClearwaterOrGreater(_XenObject.Connection));
             srAlert.Show(isSr && Helpers.ClearwaterOrGreater(_XenObject.Connection));
+            dom0MemoryAlert.Show(isHost && Helpers.CreedenceOrGreater(_XenObject.Connection));
 
             if (isHost)
             {
@@ -223,6 +242,8 @@ namespace XenAdmin.SettingsPanels
                         memoryAlert.Populate(perfmonDefinition);
                     else if (perfmonDefinition.IsSrUsage)
                         srAlert.Populate(perfmonDefinition);
+                    else if (perfmonDefinition.IsDom0MemoryUsage)
+                        dom0MemoryAlert.Populate(perfmonDefinition);
                 }
             }
             catch { }
@@ -241,7 +262,7 @@ namespace XenAdmin.SettingsPanels
                 if (_XenObject is VM)
                     return cpuAlert.HasChanged || netAlert.HasChanged || diskAlert.HasChanged;
 
-                return cpuAlert.HasChanged || netAlert.HasChanged || memoryAlert.HasChanged;
+                return cpuAlert.HasChanged || netAlert.HasChanged || memoryAlert.HasChanged || dom0MemoryAlert.HasChanged;
             }
         }
 
@@ -298,13 +319,16 @@ namespace XenAdmin.SettingsPanels
             if (_XenObject is SR && srAlert.Enabled)
                 perfmonDefinitions.Add(srAlert.AlertDefinition);
 
-            return new PerfmonDefinitionAction(_XenObject, perfmonDefinitions);
+            if (_XenObject is Host && dom0MemoryAlert.Enabled)
+                perfmonDefinitions.Add(dom0MemoryAlert.AlertDefinition);
+                
+            return new PerfmonDefinitionAction(_XenObject, perfmonDefinitions, true);
         }
 
         private void SetAlertIntervalEnablement()
         {
             bool enable = cpuAlert.Enabled || netAlert.Enabled || diskAlert.Enabled
-                          || memoryAlert.Enabled || srAlert.Enabled;
+                          || memoryAlert.Enabled || srAlert.Enabled || dom0MemoryAlert.Enabled;
 
             nudAlertInterval.Enabled = enable;
             AlertIntervalMinutesLabel.Enabled = enable;

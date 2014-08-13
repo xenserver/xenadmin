@@ -73,7 +73,7 @@ namespace XenAdmin.SettingsPanels
                 customFields.Add(new CustomField(kvp.Key, newValue));
             }
 
-            return new SaveCustomFieldsAction(xenObject, customFields);
+            return new SaveCustomFieldsAction(xenObject, customFields, true);
         }
 
         private IXenObject xenObject;

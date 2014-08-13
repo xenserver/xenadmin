@@ -110,5 +110,29 @@ namespace XenAdmin.Commands
                 return allUnsuported ? Messages.TOOLTIP_SR_TRIM_UNSUPPORTED_MULTIPLE : base.DisabledToolTipText;
             }
         }
+
+        protected override bool ConfirmationRequired
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        protected override string ConfirmationDialogTitle
+        {
+            get
+            {
+                return Messages.CONFIRM_TRIM_SR_TITLE;
+            }
+        }
+
+        protected override string ConfirmationDialogText
+        {
+            get
+            {
+                return Messages.CONFIRM_TRIM_SR;
+            }
+        }
     }
 }

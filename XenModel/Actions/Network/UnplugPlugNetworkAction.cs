@@ -47,8 +47,8 @@ namespace XenAdmin.Actions
         private List<VIF> VIFs;
         private XenAPI.Network network;
 
-        public UnplugPlugNetworkAction(XenAPI.Network network)
-            : base (network.Connection, Messages.ACTION_PIF_UNPLUG_PLUG_TITLE, Messages.ACTION_PIF_UNPLUG_PLUG_DESC)
+        public UnplugPlugNetworkAction(XenAPI.Network network, bool suppressHistory)
+            : base (network.Connection, Messages.ACTION_PIF_UNPLUG_PLUG_TITLE, Messages.ACTION_PIF_UNPLUG_PLUG_DESC, suppressHistory)
         {
             PIFs = Connection.ResolveAll<PIF>(network.PIFs);
             PIFs.RemoveAll(delegate(PIF p) { return !p.currently_attached; });

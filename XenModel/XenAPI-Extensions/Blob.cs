@@ -53,7 +53,7 @@ namespace XenAPI
             uri.Query = String.Format("ref={0}&session_id={1}",
                 opaque_ref, Uri.EscapeDataString(session.uuid));
 
-            using (Stream outStream = HTTPHelper.PUT(uri.Uri, inStream.Length, true))
+            using (Stream outStream = HTTPHelper.PUT(uri.Uri, inStream.Length, true, true))
             {
                 HTTP.CopyStream(inStream, outStream, null, delegate() { return XenAdminConfigManager.Provider.ForcedExiting; });
             }
@@ -74,7 +74,7 @@ namespace XenAPI
             uri.Query = String.Format("ref={0}&session_id={1}",
                 opaque_ref, Uri.EscapeDataString(session.uuid));
 
-            return HTTPHelper.GET(uri.Uri, Connection, true);
+            return HTTPHelper.GET(uri.Uri, Connection, true, true);
         }
     }
 }

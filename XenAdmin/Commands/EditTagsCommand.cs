@@ -138,7 +138,7 @@ namespace XenAdmin.Commands
                         }
                     }
 
-                    actions.Add(new GeneralEditPageAction(xenObject, xenObject.Clone(), xenObject.Path, newTags));
+                    actions.Add(new GeneralEditPageAction(xenObject, xenObject.Clone(), xenObject.Path, newTags, true));
 
                 }
                 RunMultipleActions(actions, Messages.ACTION_SAVING_TAGS_TITLE, Messages.ACTION_SAVING_TAGS_DESCRIPTION, Messages.ACTION_SAVING_TAGS_DESCRIPTION, true);

@@ -986,7 +986,7 @@ namespace XenAdmin.ConsoleView
                 SessionUUID = activeSession.uuid;
             }
 
-            Stream stream = HTTPHelper.CONNECT(uri, console.Connection, SessionUUID, false);
+            Stream stream = HTTPHelper.CONNECT(uri, console.Connection, SessionUUID, false, true);
 
             InvokeConnection(v, stream, console);
         }

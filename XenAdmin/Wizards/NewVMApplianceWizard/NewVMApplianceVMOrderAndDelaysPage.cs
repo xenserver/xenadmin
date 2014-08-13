@@ -281,7 +281,7 @@ namespace XenAdmin.Wizards.NewVMApplianceWizard
 
         public AsyncAction SaveSettings()
         {
-            return new SetVMStartupOptionsAction(Pool.Connection, getCurrentSettings());
+            return new SetVMStartupOptionsAction(Pool.Connection, getCurrentSettings(), true);
         }
 
         private VM_appliance _clone;

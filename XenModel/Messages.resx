@@ -520,10 +520,16 @@
     <value>Removed 1 alert</value>
   </data>
   <data name="ACTION_REMOVE_ALERTS_ON_CLIENT_TITLE" xml:space="preserve">
-    <value>Removing all client alerts</value>
+    <value>Removing {0} client alerts</value>
+  </data>
+  <data name="ACTION_REMOVE_ALERTS_ON_CLIENT_TITLE_ONE" xml:space="preserve">
+    <value>Removing client alert</value>
   </data>
   <data name="ACTION_REMOVE_ALERTS_ON_CONNECTION_TITLE" xml:space="preserve">
-    <value>Removing all alerts on '{0}'</value>
+    <value>Removing {0} alerts on '{1}'</value>
+  </data>
+  <data name="ACTION_REMOVE_ALERTS_ON_CONNECTION_TITLE_ONE" xml:space="preserve">
+    <value>Removing alert on '{0}'</value>
   </data>
   <data name="ACTION_REMOVE_ALERTS_PROGRESS_DESCRIPTION" xml:space="preserve">
     <value>Removing alert {0} of {1}...</value>
@@ -1440,6 +1446,16 @@ This alarm is set to be triggered when CPU usage is more than {3}.</value>
     <value>Disk usage on {0} has been on average {1} for the last {2}.
 This alarm is set to be triggered when disk usage is more than {3}.</value>
   </data>
+  <data name="ALERT_ALARM_DOM0_MEMORY" xml:space="preserve">
+    <value>Control Domain Memory Usage</value>
+  </data>
+  <data name="ALERT_ALARM_DOM0_MEMORY_DEMAND" xml:space="preserve">
+    <value>Control Domain Memory Demand Alarm</value>
+  </data>
+  <data name="ALERT_ALARM_DOM0_MEMORY_DEMAND_DESCRIPTION" xml:space="preserve">
+    <value>The memory demand on {0}  is about {1} of the physical memory of the domain. Occasional performance degradation can be expected when memory swapping is forced to happen.
+This alarm is set to be triggered when the ratio of the memory demand to the physical memory is beyond {2}.</value>
+  </data>
   <data name="ALERT_ALARM_FILESYSTEM" xml:space="preserve">
     <value>File System on Control Domain Full</value>
   </data>
@@ -1491,6 +1507,14 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
   <data name="ALERT_DISMISS_CONFIRM" xml:space="preserve">
     <value>Once a system alert is dismissed it will be removed from the server permanently. Do you wish to continue?</value>
   </data>
+  <data name="ALERT_DISMISS_SELECTED_CONFIRM" xml:space="preserve">
+    <value>This operation will remove the selected alerts from the servers permanently. Do you wish to continue?
+
+Note that if RBAC is enabled, only alerts which you have privileges to dismiss will be affected.</value>
+  </data>
+  <data name="ALERT_DOM0_MEMORY_SUB_TEXT" xml:space="preserve">
+    <value>When control domain memory usage exceeds {0} for {1} min(s)</value>
+  </data>
   <data name="ALERT_EXPORT_ALL_BUTTON" xml:space="preserve">
     <value>Export &amp;all</value>
   </data>
@@ -1498,7 +1522,7 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
     <value>You have applied filters to the list of alerts. Do you wish to export all alerts from every connected server, or only the alerts you have chosen to view?</value>
   </data>
   <data name="ALERT_EXPORT_FILTERED_BUTTON" xml:space="preserve">
-    <value>Only export &amp;filtered</value>
+    <value>Only export &amp;visible</value>
   </data>
   <data name="ALERT_GENERIC_HELP" xml:space="preserve">
     <value>Help</value>
@@ -2571,6 +2595,13 @@ This will also shut down all the VMs currently running on them.</value>
   <data name="CONFIRM_SUSPEND_VM_TITLE" xml:space="preserve">
     <value>Suspend VM</value>
   </data>
+  <data name="CONFIRM_TRIM_SR" xml:space="preserve">
+    <value>The process of reclaiming space may place significant load on the storage controller, temporarily affecting the storage's performance.
+Would you like to carry out the operation at this time?</value>
+  </data>
+  <data name="CONFIRM_TRIM_SR_TITLE" xml:space="preserve">
+    <value>Reclaim freed space</value>
+  </data>
   <data name="CONNCET_CONNECTION_FAILURE" xml:space="preserve">
     <value>Could not connect to {0}.</value>
   </data>
@@ -3562,7 +3593,7 @@ This will also delete its subfolders.</value>
     <value>Yes, Dismiss &amp;all</value>
   </data>
   <data name="DISMISS_FILTERED_CONFIRM_BUTTON" xml:space="preserve">
-    <value>Only dismiss &amp;filtered</value>
+    <value>Only dismiss &amp;visible</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTOOLS" xml:space="preserve">
     <value>A memory range cannot be set because XenServer Tools are not installed on this VM.</value>
@@ -6920,19 +6951,16 @@ This action is final and unrecoverable.</value>
     <value>Log file is missing.</value>
   </data>
   <data name="MESSAGEBOX_LOGS_DELETE" xml:space="preserve">
-    <value>This will clear all non-active entries in the current view. Do you wish to continue?</value>
+    <value>You have applied filters to the list of events. Do you wish to dismiss all events or only the events you have chosen to view? In both cases only completed events will be removed.</value>
+  </data>
+  <data name="MESSAGEBOX_LOGS_DELETE_NO_FILTER" xml:space="preserve">
+    <value>This operation will remove all completed events. Do you wish to continue?</value>
   </data>
   <data name="MESSAGEBOX_LOGS_DELETE_SELECTED" xml:space="preserve">
-    <value>Do you wish to delete the selected entries?</value>
-  </data>
-  <data name="MESSAGEBOX_LOGS_DELETE_TITLE" xml:space="preserve">
-    <value>Clear entries</value>
+    <value>This operation will remove all selected completed events. Do you wish to continue?</value>
   </data>
   <data name="MESSAGEBOX_LOG_DELETE" xml:space="preserve">
-    <value>Are you sure you want to delete this entry?</value>
-  </data>
-  <data name="MESSAGEBOX_LOG_DELETE_TITLE" xml:space="preserve">
-    <value>Clear entry</value>
+    <value>Are you sure you want to dismiss this event?</value>
   </data>
   <data name="MESSAGEBOX_MOVING_VDI_TITLE" xml:space="preserve">
     <value>Moving Virtual Disk</value>

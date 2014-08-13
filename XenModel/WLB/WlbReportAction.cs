@@ -175,7 +175,7 @@ namespace XenAdmin.Actions.Wlb
             byte[] buf = new byte[BUFSIZE];
             using (MemoryStream ms = new MemoryStream())
             {
-                using (Stream http = HTTPHelper.GET(uri, Connection, false))
+                using (Stream http = HTTPHelper.GET(uri, Connection, false, true))
                 {
                     while (true)
                     {

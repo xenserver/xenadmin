@@ -147,11 +147,11 @@ namespace XenAdmin.Core
             get { return typeof(T) == typeof(VMPP) ? InvisibleMessages.UPSELL_LEARNMOREURL_VM_PROTECTION : InvisibleMessages.UPSELL_LEARNMOREURL_VM_APPLIANCES; }
         }
 
-        internal static AsyncAction AssignVMsToGroupAction(T group, List<XenRef<VM>> vms)
+        internal static AsyncAction AssignVMsToGroupAction(T group, List<XenRef<VM>> vms, bool suppressHistory)
         {
             return typeof(T) == typeof(VMPP) ?
-                (AsyncAction)(new AssignVMsToPolicyAction(group as VMPP, vms)) :
-                (AsyncAction)(new AssignVMsToVMApplianceAction(group as VM_appliance, vms));
+                (AsyncAction)(new AssignVMsToPolicyAction(group as VMPP, vms, suppressHistory)) :
+                (AsyncAction)(new AssignVMsToVMApplianceAction(group as VM_appliance, vms, suppressHistory));
         }
 
         internal static AsyncAction RemoveVMsFromGroupAction(T group, List<XenRef<VM>> vms)

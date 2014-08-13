@@ -118,8 +118,11 @@ namespace XenAdmin.Alerts
                 case PerfmonDefinition.ALARM_TYPE_FILESYSTEM:
                     AlarmType = AlarmType.FileSystem;
                     break;
-                case PerfmonDefinition.ALARM_TYPE_MEMORY:
+                case PerfmonDefinition.ALARM_TYPE_MEMORY_FREE:
                     AlarmType = AlarmType.Memory;
+                    break;
+                case PerfmonDefinition.ALARM_TYPE_MEMORY_DOM0_USAGE:
+                    AlarmType = AlarmType.Dom0MemoryDemand;
                     break;
                 default:
                     {
@@ -184,6 +187,11 @@ namespace XenAdmin.Alerts
                                              Util.MemorySizeString(CurrentValue * Util.BINARY_KILO),//xapi unit is in kib
                                              Util.TimeString(TriggerPeriod),
                                              Util.MemorySizeString(TriggerLevel * Util.BINARY_KILO));
+                    case AlarmType.Dom0MemoryDemand:
+                        return string.Format(Messages.ALERT_ALARM_DOM0_MEMORY_DEMAND_DESCRIPTION,
+                                             Helpers.GetNameAndObject(XenObject),
+                                             Util.PercentageString(CurrentValue),
+                                             Util.PercentageString(TriggerLevel));
                     case AlarmType.Storage:
                         return string.Format(Messages.ALERT_ALARM_STORAGE_DESCRIPTION,
                                              Helpers.GetNameAndObject(XenObject),
@@ -215,6 +223,8 @@ namespace XenAdmin.Alerts
                         return Messages.ALERT_ALARM_MEMORY;
                     case AlarmType.Storage:
                         return Messages.ALERT_ALARM_STORAGE;
+                    case AlarmType.Dom0MemoryDemand:
+                        return Messages.ALERT_ALARM_DOM0_MEMORY;
                     default:
                         return base.Title;
                 }
@@ -289,5 +299,5 @@ namespace XenAdmin.Alerts
         }
     }
 
-    public enum AlarmType { None, Cpu, Net, Disk, FileSystem, Memory, Storage }
+    public enum AlarmType { None, Cpu, Net, Disk, FileSystem, Memory, Storage, Dom0MemoryDemand }
 }

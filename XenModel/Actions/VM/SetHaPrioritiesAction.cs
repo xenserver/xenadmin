@@ -55,8 +55,9 @@ namespace XenAdmin.Actions
         /// </summary>
         /// <param name="connection">May not be null.</param>
         /// <param name="settings">May not be null.</param>
-        public SetHaPrioritiesAction(IXenConnection connection, Dictionary<VM, VMStartupOptions> settings, long ntol)
-            : base(connection, Messages.HA_SETTING_PRIORITIES)
+        /// <param name="suppressHistory"></param>
+        public SetHaPrioritiesAction(IXenConnection connection, Dictionary<VM, VMStartupOptions> settings, long ntol, bool suppressHistory)
+            : base(connection, Messages.HA_SETTING_PRIORITIES, suppressHistory)
         {
             System.Diagnostics.Trace.Assert(connection != null);
             System.Diagnostics.Trace.Assert(settings != null);
