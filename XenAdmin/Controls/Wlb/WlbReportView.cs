@@ -1285,6 +1285,7 @@ namespace XenAdmin.Controls.Wlb
                     _currentReportSection = 1;
                     _startLine = 1;
                     _endLine = _lineLimit;
+                    _endTime = String.Empty;
                 }
                 else
                 {
