@@ -39,7 +39,7 @@ then
 echo -n "Starting tests at "
 date
 
-TIMEOUT=2000
+TIMEOUT=3000
 
 VIADAEMON=./myrepos/xenadmin.hg/mk/viadaemon.py
 
