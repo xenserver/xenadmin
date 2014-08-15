@@ -2382,7 +2382,7 @@
     <value>192, 22</value>
   </data>
   <data name="viewApplicationLogToolStripMenuItem.Text" xml:space="preserve">
-    <value>View XenCenter &amp;Logfiles</value>
+    <value>View XenCenter &amp;Log Files</value>
   </data>
   <data name="toolStripMenuItem17.Size" type="System.Drawing.Size, System.Drawing">
     <value>189, 6</value>
