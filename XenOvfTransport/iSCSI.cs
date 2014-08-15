@@ -491,6 +491,7 @@ namespace XenOvfTransport
                 args.Add("vdi_uuid", vdiuuid);
                 args.Add("transfer_mode", "ISCSI");
                 args.Add("read_only", read_only ? "true" : "false");
+                args.Add("timeout_minutes", "1");
 
                 //Transfer VM IP settings
                 foreach (var kvp in m_networkArgs)
