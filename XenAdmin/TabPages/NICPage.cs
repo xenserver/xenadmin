@@ -61,7 +61,10 @@ namespace XenAdmin.TabPages
 
 
             base.Text = Messages.NIC_TAB_TITLE;
+            PIF_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(PIF_CollectionChanged);
         }
+
+        private readonly CollectionChangeEventHandler PIF_CollectionChangedWithInvoke;
 
         public Host Host
         {
@@ -73,34 +76,18 @@ namespace XenAdmin.TabPages
             {
                 if (host != null)
                 {
-                    host.PropertyChanged -=
-                        new PropertyChangedEventHandler(PropertyChangedEventHandler);
-
+                    host.Connection.Cache.DeregisterCollectionChanged<PIF>(PIF_CollectionChangedWithInvoke);
                     foreach (PIF PIF in host.Connection.ResolveAll(host.PIFs))
                     {
-                        PIF.PropertyChanged -=
-                            new PropertyChangedEventHandler(PIF_PropertyChangedEventHandler);
-                        if (PIF.PIFMetrics != null) 
-                            PIF.PIFMetrics.PropertyChanged -= new PropertyChangedEventHandler(PropertyChangedEventHandler);
+                        UnregisterPIFEventHandlers(PIF);
                     }
-
-
                 }
 
                 host = value;
 
                 if (host != null)
                 {
-                    host.PropertyChanged +=
-                        new PropertyChangedEventHandler(PropertyChangedEventHandler);
-
-                    foreach (PIF PIF in host.Connection.ResolveAll(host.PIFs))
-                    {
-                        PIF.PropertyChanged +=
-                            new PropertyChangedEventHandler(PIF_PropertyChangedEventHandler);
-                        if (PIF.PIFMetrics != null) 
-                            PIF.PIFMetrics.PropertyChanged += new PropertyChangedEventHandler(PropertyChangedEventHandler);
-                    }
+                    host.Connection.Cache.RegisterCollectionChanged<PIF>(PIF_CollectionChangedWithInvoke);
                 }
 
                 updateList();
@@ -110,10 +97,7 @@ namespace XenAdmin.TabPages
 
         void PropertyChangedEventHandler(object sender, PropertyChangedEventArgs e)
         {
-            Program.Invoke(Program.MainWindow, delegate
-            {
-                updateList();
-            });
+            Program.Invoke(Program.MainWindow, updateList);
         }
 
         void PIF_PropertyChangedEventHandler(object sender, PropertyChangedEventArgs e)
@@ -121,10 +105,38 @@ namespace XenAdmin.TabPages
             if (e.PropertyName != "current_operations" &&
                 e.PropertyName != "allowed_operations")
             {
-                Program.Invoke(Program.MainWindow, delegate
-                {
-                    updateList();
-                });
+                Program.Invoke(Program.MainWindow, updateList);
+            }
+        }
+
+        void PIF_CollectionChanged(object sender, CollectionChangeEventArgs e)
+        {
+            if (e.Action == CollectionChangeAction.Remove)
+            {
+                PIF pif = e.Element as PIF;
+                UnregisterPIFEventHandlers(pif);
+            }
+            Program.Invoke(this, updateList);
+        }
+
+        private void RegisterPIFEventHandlers(PIF pif)
+        {
+            pif.PropertyChanged -= PIF_PropertyChangedEventHandler;
+            pif.PropertyChanged += PIF_PropertyChangedEventHandler;
+
+            if (pif.PIFMetrics != null)
+            {
+                pif.PIFMetrics.PropertyChanged -= PropertyChangedEventHandler;
+                pif.PIFMetrics.PropertyChanged += PropertyChangedEventHandler;
+            }
+        }
+
+        private void UnregisterPIFEventHandlers(PIF pif)
+        {
+            pif.PropertyChanged -= PIF_PropertyChangedEventHandler;
+            if (pif.PIFMetrics != null)
+            {
+                pif.PIFMetrics.PropertyChanged -= PropertyChangedEventHandler;
             }
         }
 
@@ -145,6 +157,8 @@ namespace XenAdmin.TabPages
                     {
                         if (!PIF.IsPhysical)
                             continue;
+
+                        RegisterPIFEventHandlers(PIF);
 
                         PIFRow p = new PIFRow(PIF);
                         dataGridView1.Rows.Add(p);

@@ -252,7 +252,7 @@ namespace XenAdmin.Actions
         {
             using (FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write))
             {
-                using (Stream http = HTTPHelper.GET(uri, Connection, true))
+                using (Stream http = HTTPHelper.GET(uri, Connection, true, true))
                 {
                     new Export().verify(http, fs, (Export.cancellingCallback)delegate() { return Cancelling; });
                 }

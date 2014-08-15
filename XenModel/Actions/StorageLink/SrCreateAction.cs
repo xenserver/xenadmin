@@ -163,7 +163,7 @@ namespace XenAdmin.Actions
             {
                 // Destroy secret after the SR creation is complete. This is safe
                 // since all PBDs will have duplicated the secret (CA-113396).
-                if (!string.IsNullOrEmpty(secretuuid) && Helpers.AugustaOrGreater(Connection))
+                if (!string.IsNullOrEmpty(secretuuid) && Helpers.CreedenceOrGreater(Connection))
                 {
                     string opaqref = Secret.get_by_uuid(Session, secretuuid);
                     Secret.destroy(Session, opaqref);

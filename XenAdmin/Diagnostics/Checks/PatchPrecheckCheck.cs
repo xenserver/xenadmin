@@ -59,7 +59,7 @@ namespace XenAdmin.Diagnostics.Checks
         public override Problem RunCheck()
         {
             if (!Host.IsLive)
-                return new HostNotLive(this, Host);
+                return new HostNotLiveWarning(this, Host);
 
             if (!Host.Connection.IsConnected)
                 throw new EndOfStreamException(Helpers.GetName(Host.Connection));

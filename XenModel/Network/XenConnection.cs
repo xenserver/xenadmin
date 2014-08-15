@@ -320,7 +320,7 @@ namespace XenAdmin.Network
 
             try
             {
-                session.login_with_password(user, password, API_Version.LATEST);
+                session.login_with_password(user, password, Helper.APIVersionString(API_Version.LATEST), Session.UserAgent);
 
                 // this is required so connection.IsConnected returns true in the unit tests.
                 connectTask = new ConnectTask("test", 0);
@@ -486,7 +486,7 @@ namespace XenAdmin.Network
                     session.IsElevatedSession = true;
                 try
                 {
-                    session.login_with_password(uname, pwd, !string.IsNullOrEmpty(Version) ? Version : Helper.APIVersionString(API_Version.LATEST));
+                    session.login_with_password(uname, pwd, !string.IsNullOrEmpty(Version) ? Version : Helper.APIVersionString(API_Version.LATEST), Session.UserAgent);
                     return session;
                 }
                 catch (Failure f)

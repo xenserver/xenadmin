@@ -184,7 +184,7 @@ namespace XenAdmin.XenSearch
             {
                 Session session = host.Connection.Session;
                 if (session != null)
-                    return AllValues(HTTPHelper.GET(GetUri(session, host), host.Connection, true));
+                    return AllValues(HTTPHelper.GET(GetUri(session, host), host.Connection, true, false));
             }
             catch (Exception e)
             {
@@ -411,6 +411,23 @@ namespace XenAdmin.XenSearch
         private class VmMetric
         {
             public readonly ConcurrentDictionary<string, double> Values = new ConcurrentDictionary<string, double>();
+        }
+
+        /// <summary>
+        /// This function is used for generate resource report only.
+        /// </summary>
+        public void UpdateMetricsOnce()
+        {
+            Parallel.ForEach(_hosts.Keys.Where(h => h.Connection.IsConnected),
+                host =>
+                {
+                    HostMetric hm;
+                    if (_hosts.TryGetValue(host, out hm))
+                    {
+                        var values = ValuesFor(host);
+                        DistributeValues(values, hm);
+                    }
+                });
         }
     }
 }

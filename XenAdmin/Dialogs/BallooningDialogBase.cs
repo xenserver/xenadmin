@@ -90,7 +90,7 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private static List<ChangeMemorySettingsAction> ConfirmAndCalcActions(IWin32Window parentWindow, List<VM> VMs, long dynamic_min, long dynamic_max, long static_max, long prev_static_max, bool advanced)
+        private static List<ChangeMemorySettingsAction> ConfirmAndCalcActions(IWin32Window parentWindow, List<VM> VMs, long dynamic_min, long dynamic_max, long static_max, long prev_static_max, bool advanced, bool suppressHistory)
         {
             if (prev_static_max / Util.BINARY_MEGA == static_max / Util.BINARY_MEGA)  // don't want to throw warning dialog just for rounding errors
             {
@@ -134,7 +134,7 @@ namespace XenAdmin.Dialogs
                 ChangeMemorySettingsAction action = new ChangeMemorySettingsAction(
                     vm,
                     string.Format(Messages.ACTION_CHANGE_MEMORY_SETTINGS, vm.Name),
-                    vm.memory_static_min, dynamic_min, dynamic_max, static_max,VMOperationCommand.WarningDialogHAInvalidConfig,VMOperationCommand.StartDiagnosisForm);
+                    vm.memory_static_min, dynamic_min, dynamic_max, static_max,VMOperationCommand.WarningDialogHAInvalidConfig,VMOperationCommand.StartDiagnosisForm, suppressHistory);
                 actions.Add(action);
             }
 
@@ -143,7 +143,7 @@ namespace XenAdmin.Dialogs
 
         public static bool ConfirmAndChange(IWin32Window parentWindow, List<VM> VMs, long dynamic_min, long dynamic_max, long static_max, long prev_static_max, bool advanced)
         {
-            List<ChangeMemorySettingsAction> actions = ConfirmAndCalcActions(parentWindow, VMs, dynamic_min, dynamic_max, static_max, prev_static_max, advanced);
+            List<ChangeMemorySettingsAction> actions = ConfirmAndCalcActions(parentWindow, VMs, dynamic_min, dynamic_max, static_max, prev_static_max, advanced, false);
             if (actions == null)
                 return false;
             foreach (ChangeMemorySettingsAction action in actions)
@@ -155,7 +155,7 @@ namespace XenAdmin.Dialogs
         {
             List<VM> vms = new List<VM>(1);
             vms.Add(vm);
-            List<ChangeMemorySettingsAction> actions = ConfirmAndCalcActions(parentWindow, vms, dynamic_min, dynamic_max, static_max, prev_static_max, advanced);
+            List<ChangeMemorySettingsAction> actions = ConfirmAndCalcActions(parentWindow, vms, dynamic_min, dynamic_max, static_max, prev_static_max, advanced, true);
             if (actions == null || actions.Count == 0)
                 return null;
             else

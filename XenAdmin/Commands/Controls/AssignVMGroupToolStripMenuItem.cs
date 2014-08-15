@@ -213,7 +213,7 @@ namespace XenAdmin.Commands
 
                 var selectedRefVMs = selection.AsXenObjects().ConvertAll<XenRef<VM>>(converterVMRefs);
                 selectedRefVMs.AddRange(VMGroup<T>.GroupToVMs(_group));
-                VMGroup<T>.AssignVMsToGroupAction(_group, selectedRefVMs).RunAsync();
+                VMGroup<T>.AssignVMsToGroupAction(_group, selectedRefVMs, false).RunAsync();
             }
 
             private XenRef<VM> converterVMRefs(IXenObject input)

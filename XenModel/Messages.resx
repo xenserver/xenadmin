@@ -357,6 +357,9 @@
   <data name="ACTION_EXPORT_DESCRIPTION_FAILED" xml:space="preserve">
     <value>Export failed</value>
   </data>
+  <data name="ACTION_EXPORT_DESCRIPTION_FAILED_OF_OPEN_FILE" xml:space="preserve">
+    <value>Export failed due to open destination file {0} failed</value>
+  </data>
   <data name="ACTION_EXPORT_DESCRIPTION_HEADER_CHECKSUM_FAILED" xml:space="preserve">
     <value>Export failed due to a header checksum mismatch.  Please retry the export.</value>
   </data>
@@ -371,6 +374,12 @@
   </data>
   <data name="ACTION_EXPORT_DESCRIPTION_VDI_IN_USE" xml:space="preserve">
     <value>Export failed: disk in use elsewhere.</value>
+  </data>
+  <data name="ACTION_EXPORT_POOL_RESOURCE_CANCEL_AND_FILE_UNDELETE" xml:space="preserve">
+    <value>Export canceled and deleting destination file '{0}' failed</value>
+  </data>
+  <data name="ACTION_EXPORT_POOL_RESOURCE_LIST_FROM_X" xml:space="preserve">
+    <value>Exporting pool resource list from '{0}'</value>
   </data>
   <data name="ACTION_EXPORT_TASK_DESCRIPTION" xml:space="preserve">
     <value>Exporting {0} to backup file</value>
@@ -511,10 +520,16 @@
     <value>Removed 1 alert</value>
   </data>
   <data name="ACTION_REMOVE_ALERTS_ON_CLIENT_TITLE" xml:space="preserve">
-    <value>Removing all client alerts</value>
+    <value>Removing {0} client alerts</value>
+  </data>
+  <data name="ACTION_REMOVE_ALERTS_ON_CLIENT_TITLE_ONE" xml:space="preserve">
+    <value>Removing client alert</value>
   </data>
   <data name="ACTION_REMOVE_ALERTS_ON_CONNECTION_TITLE" xml:space="preserve">
-    <value>Removing all alerts on '{0}'</value>
+    <value>Removing {0} alerts on '{1}'</value>
+  </data>
+  <data name="ACTION_REMOVE_ALERTS_ON_CONNECTION_TITLE_ONE" xml:space="preserve">
+    <value>Removing alert on '{0}'</value>
   </data>
   <data name="ACTION_REMOVE_ALERTS_PROGRESS_DESCRIPTION" xml:space="preserve">
     <value>Removing alert {0} of {1}...</value>
@@ -1431,6 +1446,16 @@ This alarm is set to be triggered when CPU usage is more than {3}.</value>
     <value>Disk usage on {0} has been on average {1} for the last {2}.
 This alarm is set to be triggered when disk usage is more than {3}.</value>
   </data>
+  <data name="ALERT_ALARM_DOM0_MEMORY" xml:space="preserve">
+    <value>Control Domain Memory Usage</value>
+  </data>
+  <data name="ALERT_ALARM_DOM0_MEMORY_DEMAND" xml:space="preserve">
+    <value>Control Domain Memory Demand Alarm</value>
+  </data>
+  <data name="ALERT_ALARM_DOM0_MEMORY_DEMAND_DESCRIPTION" xml:space="preserve">
+    <value>The memory demand on {0}  is about {1} of the physical memory of the domain. Occasional performance degradation can be expected when memory swapping is forced to happen.
+This alarm is set to be triggered when the ratio of the memory demand to the physical memory is beyond {2}.</value>
+  </data>
   <data name="ALERT_ALARM_FILESYSTEM" xml:space="preserve">
     <value>File System on Control Domain Full</value>
   </data>
@@ -1482,6 +1507,14 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
   <data name="ALERT_DISMISS_CONFIRM" xml:space="preserve">
     <value>Once a system alert is dismissed it will be removed from the server permanently. Do you wish to continue?</value>
   </data>
+  <data name="ALERT_DISMISS_SELECTED_CONFIRM" xml:space="preserve">
+    <value>This operation will remove the selected alerts from the servers permanently. Do you wish to continue?
+
+Note that if RBAC is enabled, only alerts which you have privileges to dismiss will be affected.</value>
+  </data>
+  <data name="ALERT_DOM0_MEMORY_SUB_TEXT" xml:space="preserve">
+    <value>When control domain memory usage exceeds {0} for {1} min(s)</value>
+  </data>
   <data name="ALERT_EXPORT_ALL_BUTTON" xml:space="preserve">
     <value>Export &amp;all</value>
   </data>
@@ -1489,7 +1522,7 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
     <value>You have applied filters to the list of alerts. Do you wish to export all alerts from every connected server, or only the alerts you have chosen to view?</value>
   </data>
   <data name="ALERT_EXPORT_FILTERED_BUTTON" xml:space="preserve">
-    <value>Only export &amp;filtered</value>
+    <value>Only export &amp;visible</value>
   </data>
   <data name="ALERT_GENERIC_HELP" xml:space="preserve">
     <value>Help</value>
@@ -1812,6 +1845,9 @@ This is a potentially dangerous operation and is not allowed.</value>
   <data name="BIOS_STRINGS_COPIED" xml:space="preserve">
     <value>BIOS strings copied</value>
   </data>
+  <data name="BOND" xml:space="preserve">
+    <value>Bonded network</value>
+  </data>
   <data name="BOND_CREATE" xml:space="preserve">
     <value>Create Bond</value>
   </data>
@@ -1952,6 +1988,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   </data>
   <data name="BUGTOOL_SAVING" xml:space="preserve">
     <value>Saving server status report</value>
+  </data>
+  <data name="BUILTIN_NETWORK" xml:space="preserve">
+    <value>Built-in network</value>
   </data>
   <data name="BUS_PATH" xml:space="preserve">
     <value>PCI Bus Path</value>
@@ -2555,6 +2594,13 @@ This will also shut down all the VMs currently running on them.</value>
   </data>
   <data name="CONFIRM_SUSPEND_VM_TITLE" xml:space="preserve">
     <value>Suspend VM</value>
+  </data>
+  <data name="CONFIRM_TRIM_SR" xml:space="preserve">
+    <value>The process of reclaiming space may place significant load on the storage controller, temporarily affecting the storage's performance.
+Would you like to carry out the operation at this time?</value>
+  </data>
+  <data name="CONFIRM_TRIM_SR_TITLE" xml:space="preserve">
+    <value>Reclaim freed space</value>
   </data>
   <data name="CONNCET_CONNECTION_FAILURE" xml:space="preserve">
     <value>Could not connect to {0}.</value>
@@ -3547,7 +3593,7 @@ This will also delete its subfolders.</value>
     <value>Yes, Dismiss &amp;all</value>
   </data>
   <data name="DISMISS_FILTERED_CONFIRM_BUTTON" xml:space="preserve">
-    <value>Only dismiss &amp;filtered</value>
+    <value>Only dismiss &amp;visible</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTOOLS" xml:space="preserve">
     <value>A memory range cannot be set because XenServer Tools are not installed on this VM.</value>
@@ -4571,6 +4617,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EXPORT_VM_VERIFY_POST_INSTALL" xml:space="preserve">
     <value>&amp;Verify export on completion</value>
   </data>
+  <data name="EXTERNAL_NETWORK" xml:space="preserve">
+    <value>External network</value>
+  </data>
   <data name="EXTERNAL_NETWORKS_REQUIRE_STANDARD" xml:space="preserve">
     <value>External networks require a Standard Edition license.</value>
   </data>
@@ -4627,6 +4676,9 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="FEATURE_NOT_AVAILABLE_NEED_MR_PLURAL" xml:space="preserve">
     <value>{0} require XenServer 5.6 or later</value>
+  </data>
+  <data name="FETCH_EARLIER_DATA" xml:space="preserve">
+    <value>&amp;Next Section</value>
   </data>
   <data name="FIBRECHANNEL_NO_RESULTS" xml:space="preserve">
     <value>No LUNs were found.  Please verify your hardware configuration.</value>
@@ -6469,6 +6521,9 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MAINWINDOW_EXPIRE_MESSAGE_TOO_LATE" xml:space="preserve">
     <value>The XenServer license on '{0}' has expired.</value>
   </data>
+  <data name="MAINWINDOW_EXPORT_POOL_RESOURCE_DATA" xml:space="preserve">
+    <value>E&amp;xport Resource Data...</value>
+  </data>
   <data name="MAINWINDOW_EXPORT_TEMPLATE" xml:space="preserve">
     <value>&amp;Export to File...</value>
   </data>
@@ -6896,19 +6951,16 @@ This action is final and unrecoverable.</value>
     <value>Log file is missing.</value>
   </data>
   <data name="MESSAGEBOX_LOGS_DELETE" xml:space="preserve">
-    <value>This will clear all non-active entries in the current view. Do you wish to continue?</value>
+    <value>You have applied filters to the list of events. Do you wish to dismiss all events or only the events you have chosen to view? In both cases only completed events will be removed.</value>
+  </data>
+  <data name="MESSAGEBOX_LOGS_DELETE_NO_FILTER" xml:space="preserve">
+    <value>This operation will remove all completed events. Do you wish to continue?</value>
   </data>
   <data name="MESSAGEBOX_LOGS_DELETE_SELECTED" xml:space="preserve">
-    <value>Do you wish to delete the selected entries?</value>
-  </data>
-  <data name="MESSAGEBOX_LOGS_DELETE_TITLE" xml:space="preserve">
-    <value>Clear entries</value>
+    <value>This operation will remove all selected completed events. Do you wish to continue?</value>
   </data>
   <data name="MESSAGEBOX_LOG_DELETE" xml:space="preserve">
-    <value>Are you sure you want to delete this entry?</value>
-  </data>
-  <data name="MESSAGEBOX_LOG_DELETE_TITLE" xml:space="preserve">
-    <value>Clear entry</value>
+    <value>Are you sure you want to dismiss this event?</value>
   </data>
   <data name="MESSAGEBOX_MOVING_VDI_TITLE" xml:space="preserve">
     <value>Moving Virtual Disk</value>
@@ -7042,6 +7094,9 @@ To learn more about the XenServer Live VDI Migration feature or to start a XenSe
   </data>
   <data name="MOVING" xml:space="preserve">
     <value>Moving...</value>
+  </data>
+  <data name="MTU" xml:space="preserve">
+    <value>MTU</value>
   </data>
   <data name="MULTIPATHING" xml:space="preserve">
     <value>Multipathing</value>
@@ -8680,6 +8735,9 @@ The VM protection policy for this VM does not have automatic archiving configure
   <data name="POWER_STATE" xml:space="preserve">
     <value>Power state</value>
   </data>
+  <data name="POWER_USAGE" xml:space="preserve">
+    <value>Power usage (W)</value>
+  </data>
   <data name="PRIVACY_WARNING" xml:space="preserve">
     <value>Privacy Warning</value>
   </data>
@@ -9295,6 +9353,9 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   <data name="RUNNING_ARCHIVE" xml:space="preserve">
     <value>Archiving</value>
   </data>
+  <data name="RUNNING_ON" xml:space="preserve">
+    <value>Running on</value>
+  </data>
   <data name="RUNNING_SNAPSHOTS" xml:space="preserve">
     <value>Taking snapshots</value>
   </data>
@@ -9306,6 +9367,9 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   </data>
   <data name="RUN_PRECHECKS_WITH_ACCESS_KEY" xml:space="preserve">
     <value>&amp;Run Prechecks</value>
+  </data>
+  <data name="RUN_REPORT" xml:space="preserve">
+    <value>&amp;Run Report</value>
   </data>
   <data name="SATURDAY_LONG" xml:space="preserve">
     <value>Saturday</value>
@@ -9621,6 +9685,9 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   </data>
   <data name="SHUTTING_DOWN_VM_OUT_OF" xml:space="preserve">
     <value>Shutting down VM {0} out of {1}</value>
+  </data>
+  <data name="SINGLE_SERVER_PRIVATE_NETWORK" xml:space="preserve">
+    <value>Single-server private network</value>
   </data>
   <data name="SIGNING_APPLIANCE" xml:space="preserve">
     <value>Applying digital signature to appliance...</value>
@@ -10196,6 +10263,9 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="TELL_ME_MORE" xml:space="preserve">
     <value>Tell me more ...</value>
   </data>
+  <data name="TEMPERATURE" xml:space="preserve">
+    <value>Temperature (°C)</value>
+  </data>
   <data name="TEMPLATE" xml:space="preserve">
     <value>Template</value>
   </data>
@@ -10375,6 +10445,9 @@ Do you want to connect to the pool master '{1}'?</value>
   </data>
   <data name="TOOLTIP_SR_TRIM_UNSUPPORTED" xml:space="preserve">
     <value>Reclaiming freed space not supported on this SR</value>
+  </data>
+  <data name="TOOLTIP_SR_TRIM_UNSUPPORTED_MULTIPLE" xml:space="preserve">
+    <value>Reclaiming freed space not supported on these SRs</value>
   </data>
   <data name="TREESEARCHBOX_DROPDOWN_TOOLTIP" xml:space="preserve">
     <value>Views and Saved Searches</value>
@@ -10608,6 +10681,9 @@ Check your settings and try again.</value>
   <data name="UPDATES_WIZARD_HA_ON_TITLE" xml:space="preserve">
     <value>HA is enabled on '{0}'</value>
   </data>
+  <data name="UPDATES_WIZARD_HA_ON_WARNING" xml:space="preserve">
+    <value>{0}: Check skipped because HA is enabled on pool {1}.</value>
+  </data>
   <data name="UPDATES_WIZARD_HOST_EXIT_MAINTENANCE_MODE" xml:space="preserve">
     <value>Click here to exit maintenance mode</value>
   </data>
@@ -10622,6 +10698,9 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_HOST_NOT_LIVE_TITLE" xml:space="preserve">
     <value>Server '{0}' unreachable</value>
+  </data>
+  <data name="UPDATES_WIZARD_HOST_NOT_LIVE_WARNING" xml:space="preserve">
+    <value>{0}: Check skipped because the server is unreachable.</value>
   </data>
   <data name="UPDATES_WIZARD_INSTALL_TOOLS" xml:space="preserve">
     <value>Click here to install tools</value>
@@ -10737,6 +10816,9 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_VM_HAS_VGPU" xml:space="preserve">
     <value>The VM '{0}' has one or more virtual GPUs.</value>
+  </data>
+  <data name="UPDATES_WIZARD_WLB_ON_WARNING" xml:space="preserve">
+    <value>{0}: Check skipped because WLB is enabled on pool {1}.</value>
   </data>
   <data name="UPDATE_EXPORT_ALL_OR_FILTERED" xml:space="preserve">
     <value>You have applied filters to the list of updates. Do you wish to export all updates from every connected server, or only the updates you have chosen to view?</value>
@@ -10934,6 +11016,12 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="USES" xml:space="preserve">
     <value>uses</value>
   </data>
+  <data name="UTILIZATION" xml:space="preserve">
+    <value>Computer Utilization (%)</value>
+  </data>
+  <data name="UUID" xml:space="preserve">
+    <value>UUID</value>
+  </data>
   <data name="UUID_SEARCH" xml:space="preserve">
     <value>Is</value>
   </data>
@@ -11026,6 +11114,9 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   </data>
   <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
     <value>The VCPUs can only be changed when the VM is shut down</value>
+  </data>
+  <data name="VDI" xml:space="preserve">
+    <value>VDI</value>
   </data>
   <data name="VDI_COPIED" xml:space="preserve">
     <value>Copied disk '{0}' from SR '{1}' to SR '{2}'</value>
@@ -11446,6 +11537,18 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   </data>
   <data name="WLB_ADVANCED_CONFIGURATION_SUBTEXT" xml:space="preserve">
     <value />
+  </data>
+  <data name="WLB_AUDIT_LOG_MAXIMUM" xml:space="preserve">
+    <value>Maximum</value>
+  </data>
+  <data name="WLB_AUDIT_LOG_MEDIUM" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="WLB_AUDIT_LOG_MINIMUM" xml:space="preserve">
+    <value>Minimum</value>
+  </data>
+  <data name="WLB_AUDIT_LOG_USER_OBJECT_ALL" xml:space="preserve">
+    <value>ALL</value>
   </data>
   <data name="WLB_AUTOMATION" xml:space="preserve">
     <value>Automation</value>

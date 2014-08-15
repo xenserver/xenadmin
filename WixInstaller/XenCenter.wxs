@@ -55,6 +55,7 @@
                             <File Id="vmPerformanceHistoryRDLC" Source="..\XenAdmin\ReportViewer\vm_performance_history.rdlc" />
                             <File Id="PoolHealthHistoryRDLC" Source="..\XenAdmin\ReportViewer\pool_health_history.rdlc" />
                             <File Id="ReportConfigXML" Source="..\XenAdmin\ReportViewer\reports.xml" />
+                            <File Id="ResourceReportRDLC" Source="..\XenAdmin\ReportViewer\resource_report.rdlc" />
                         </Component>
                         <Component Id="MainExecutable" Guid="64FEF765-7593-4612-8D4D-EE81CF704DEB">
                             <!-- XenCenter EXE -->
@@ -83,8 +84,10 @@
                             <File Id="hotfixCowley" Source="..\XenAdmin\XS56EFP1002.xsupdate" />
                             <File Id="hotfixMNR" Source="..\XenAdmin\XS56E008.xsupdate" />
                             <File Id="hotfixBoston" Source="..\XenAdmin\XS60E001.xsupdate" />
+                            <File Id="hotfixBostonSource" Source="..\XenAdmin\XS60E001-src-pkgs.tar.gz" />
 							<File Id="hotfixSanibelToClearwater" Source="..\XenAdmin\XS62E006.xsupdate" />
-                            <File Id="XvaIcon" Source="..\XenAdmin\Images\file_vm.ico" />
+							<File Id="hotfixSanibelToClearwaterSource" Source="..\XenAdmin\XS62E006-src-pkgs.tar.gz" />
+							<File Id="XvaIcon" Source="..\XenAdmin\Images\file_vm.ico" />
                             <File Id="XslicIcon" Source="..\XenAdmin\Images\file_license.ico" />
                             <File Id="XkbIcon" Source="..\XenAdmin\Images\file_backup.ico" />
                             <File Id="XsupdateIcon" Source="..\XenAdmin\Images\file_updates.ico" />

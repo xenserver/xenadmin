@@ -1438,7 +1438,7 @@ namespace XenAPI
 
         public static List<XenRef<SR>> GetDRMissingSRs(Session session, string vm, Session sessionTo)
         {
-            return Helpers.AugustaOrGreater(sessionTo.Connection)
+            return Helpers.CreedenceOrGreater(sessionTo.Connection)
                        ? VM.get_SRs_required_for_recovery(session, vm, sessionTo.uuid)
                        : null;
         }
@@ -1495,6 +1495,29 @@ namespace XenAPI
         public static bool ValidVCPUConfiguration(long noOfVCPUs, long coresPerSocket)
         {
             return coresPerSocket > 0 && noOfVCPUs % coresPerSocket == 0;
+        }
+
+        public string Topology
+        {
+            get
+            {
+                var cores = CoresPerSocket;
+                var sockets = ValidVCPUConfiguration(VCPUs_max, cores) ? VCPUs_max/cores : 0;
+                return GetTopology(sockets, cores);
+            }
+        }
+
+        public static string GetTopology(long sockets, long cores)
+        {
+            if (sockets == 0) // invalid cores value
+                return string.Format(Messages.CPU_TOPOLOGY_STRING_INVALID_VALUE, cores);
+            if (sockets == 1 && cores == 1)
+                return Messages.CPU_TOPOLOGY_STRING_1_SOCKET_1_CORE;
+            if (sockets == 1)
+                return string.Format(Messages.CPU_TOPOLOGY_STRING_1_SOCKET_N_CORE, cores);
+            if (cores == 1)
+                return string.Format(Messages.CPU_TOPOLOGY_STRING_N_SOCKET_1_CORE, sockets);
+            return string.Format(Messages.CPU_TOPOLOGY_STRING_N_SOCKET_N_CORE, sockets, cores);
         }
     }
 

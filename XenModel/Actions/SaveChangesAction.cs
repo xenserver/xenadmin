@@ -57,7 +57,11 @@ namespace XenAdmin.Actions
         private bool lockViolation = false;
 
         protected SaveChangesAction(IXenObject obj)
-            : base(obj.Connection, Messages.ACTION_SAVE_CHANGES_TITLE, Messages.ACTION_SAVE_CHANGES_IN_PROGRESS)
+            :this(obj, false)
+        {}
+
+        protected SaveChangesAction(IXenObject obj, bool suppressHistory)
+            : base(obj.Connection, Messages.ACTION_SAVE_CHANGES_TITLE, Messages.ACTION_SAVE_CHANGES_IN_PROGRESS, suppressHistory)
         {
             // This is lovely. We need to lock the server object (not the copy we have taken) before calling save changes.
             // We don't know the type so we use the MethodInfo object and MakeGenericMethod to do a resolve against the type
@@ -85,8 +89,8 @@ namespace XenAdmin.Actions
             }
         }
 
-        public SaveChangesAction(IXenObject obj, IXenObject beforeObject)
-            : this(obj)
+        public SaveChangesAction(IXenObject obj, IXenObject beforeObject, bool suppressHistory)
+            : this(obj, suppressHistory)
         {
             _beforeObject = beforeObject;
         }

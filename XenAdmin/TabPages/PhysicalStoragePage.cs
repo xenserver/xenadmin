@@ -32,10 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Text;
-using System.Data;
-using System.Text;
+using System.Linq;
 using System.Windows.Forms;
 
 using XenAdmin.Controls;
@@ -55,6 +52,9 @@ namespace XenAdmin.TabPages
 
         private bool NeedBuildList;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
+
+        private SelectionManager selectionManager;
+        private bool showTrimButton;
 
         public PhysicalStoragePage()
         {
@@ -122,6 +122,7 @@ namespace XenAdmin.TabPages
                         pool.PropertyChanged += pool_PropertyChanged;
                 }
 
+                RefreshTrimButton();
                 BuildList();
             }
         }
@@ -181,7 +182,7 @@ namespace XenAdmin.TabPages
             }
             else
             {
-                RefreshRowForSr((SR)sender);
+                Program.Invoke(this, () => RefreshRowForSr((SR)sender));
             }
         }
 
@@ -297,6 +298,12 @@ namespace XenAdmin.TabPages
                     listViewSrs.SelectedIndices.Clear();
                     listViewSrs.SelectedIndices.Add(selectedIndex);
                 }
+                else
+                {
+                    // Select first item
+                    if (listViewSrs.Items.Count > 0)
+                        listViewSrs.SelectedIndices.Add(0);
+                }
             }
             finally
             {
@@ -369,36 +376,33 @@ namespace XenAdmin.TabPages
         void listViewSrs_SelectedIndexChanged(object sender, EventArgs e)
         {
             RefreshButtons();
+            if (showTrimButton)
+            {
+                List<SelectedItem> selectedSRs = (from ListViewItem item in listViewSrs.SelectedItems select new SelectedItem((SR)item.Tag)).ToList();
+                selectionManager.SetSelection(selectedSRs);
+            }
         }
 
         private void RefreshButtons()
         {
             buttonProperties.Enabled = listViewSrs.SelectedItems.Count == 1;
-            
-            // Trim button
-            if (listViewSrs.SelectedItems.Count == 1)
+        }
+
+        private void RefreshTrimButton()
+        {
+            showTrimButton = connection != null && Helpers.CreedenceOrGreater(connection);
+            if (showTrimButton)
             {
-                SR sr = (SR)listViewSrs.SelectedItems[0].Tag;
-                TrimSRCommand trimCmd = new TrimSRCommand(Program.MainWindow, sr);
-                trimButton.Visible = trimCmd.CanExecute(); 
+                trimButtonContainer.Visible = true;
+                if (selectionManager == null)
+                    selectionManager = new SelectionManager();
+                selectionManager.BindTo(trimButton, Program.MainWindow);
             }
             else
             {
-                trimButton.Visible = false;
+                trimButtonContainer.Visible = false;
+                trimButton.SelectionBroadcaster = null;
             }
         }
-
-        private void trimButton_Click(object sender, EventArgs e)
-        {
-            if (listViewSrs.SelectedItems.Count != 1)
-                return;
-
-            SR sr = (SR)listViewSrs.SelectedItems[0].Tag;
-            TrimSRCommand trimCmd = new TrimSRCommand(Program.MainWindow, sr);
-            if (trimCmd.CanExecute())
-                trimCmd.Execute();
-
-        }
-
     }
 }

@@ -506,7 +506,9 @@ namespace XenAdmin.Controls.CustomDataGraph
                 {
                     int setindex = ArchiveMaintainer.Archives[currentwidth].Sets.IndexOf(set);
                     todraw = new List<DataPoint>(ArchiveMaintainer.Archives[currentwidth].Sets[setindex].Points);
-                    set.MergePointCollection(set.BinaryChop(set.Points, new DataTimeRange(ScrollViewLeft.Ticks, todraw[todraw.Count - 1].X, GraphResolution.Ticks)), todraw);
+
+                    if (todraw.Count > 0)
+                        set.MergePointCollection(set.BinaryChop(set.Points, new DataTimeRange(ScrollViewLeft.Ticks, todraw[todraw.Count - 1].X, GraphResolution.Ticks)), todraw);
                 }
 
                 set.RefreshCustomY(everything, todraw);

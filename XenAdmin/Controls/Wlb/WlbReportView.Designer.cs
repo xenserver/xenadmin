@@ -33,6 +33,7 @@ namespace XenAdmin.Controls.Wlb
             this.labelHostCombo = new System.Windows.Forms.Label();
             this.hostComboBox = new System.Windows.Forms.ComboBox();
             this.btnRunReport = new System.Windows.Forms.Button();
+            this.btnLaterReport = new System.Windows.Forms.Button();
             this.labelEndDate = new System.Windows.Forms.Label();
             this.EndDatePicker = new System.Windows.Forms.DateTimePicker();
             this.labelStartDate = new System.Windows.Forms.Label();
@@ -49,10 +50,20 @@ namespace XenAdmin.Controls.Wlb
             this.lblExported = new System.Windows.Forms.Label();
             this.flowLayoutPanelButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panelUsers = new System.Windows.Forms.Panel();
+            this.userComboBox = new XenAdmin.Controls.LongStringComboBox();
+            this.labelUsers = new System.Windows.Forms.Label();
+            this.panelObjects = new System.Windows.Forms.Panel();
+            this.labelObjects = new System.Windows.Forms.Label();
+            this.objectComboBox = new System.Windows.Forms.ComboBox();
             this.panelHosts.SuspendLayout();
             this.panelShow.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanelButtons.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
+            this.panelUsers.SuspendLayout();
+            this.panelObjects.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelHostCombo
@@ -78,6 +89,13 @@ namespace XenAdmin.Controls.Wlb
             this.btnRunReport.UseVisualStyleBackColor = true;
             this.btnRunReport.Click += new System.EventHandler(this.btnRunReport_Click);
             // 
+            // btnLaterReport
+            // 
+            resources.ApplyResources(this.btnLaterReport, "btnLaterReport");
+            this.btnLaterReport.Name = "btnLaterReport";
+            this.btnLaterReport.UseVisualStyleBackColor = true;
+            this.btnLaterReport.Click += new System.EventHandler(this.btnLaterReport_Click);
+            // 
             // labelEndDate
             // 
             resources.ApplyResources(this.labelEndDate, "labelEndDate");
@@ -87,6 +105,7 @@ namespace XenAdmin.Controls.Wlb
             // 
             resources.ApplyResources(this.EndDatePicker, "EndDatePicker");
             this.EndDatePicker.Name = "EndDatePicker";
+            this.EndDatePicker.ValueChanged += new System.EventHandler(this.comboBox_SelectionChanged);
             // 
             // labelStartDate
             // 
@@ -97,6 +116,7 @@ namespace XenAdmin.Controls.Wlb
             // 
             resources.ApplyResources(this.StartDatePicker, "StartDatePicker");
             this.StartDatePicker.Name = "StartDatePicker";
+            this.StartDatePicker.ValueChanged += new System.EventHandler(this.comboBox_SelectionChanged);
             // 
             // reportViewer1
             // 
@@ -175,12 +195,69 @@ namespace XenAdmin.Controls.Wlb
             this.flowLayoutPanelButtons.Controls.Add(this.btnClose);
             this.flowLayoutPanelButtons.Controls.Add(this.btnSubscribe);
             this.flowLayoutPanelButtons.Controls.Add(this.btnRunReport);
+            this.flowLayoutPanelButtons.Controls.Add(this.btnLaterReport);
             this.flowLayoutPanelButtons.Name = "flowLayoutPanelButtons";
+            // 
+            // flowLayoutPanel2
+            // 
+            resources.ApplyResources(this.flowLayoutPanel2, "flowLayoutPanel2");
+            this.flowLayoutPanel2.Controls.Add(this.panelUsers);
+            this.flowLayoutPanel2.Controls.Add(this.panelObjects);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            // 
+            // panelUsers
+            // 
+            resources.ApplyResources(this.panelUsers, "panelUsers");
+            this.panelUsers.Controls.Add(this.userComboBox);
+            this.panelUsers.Controls.Add(this.labelUsers);
+            this.panelUsers.Name = "panelUsers";
+            // 
+            // userComboBox
+            // 
+            this.userComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.userComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.userComboBox.FormattingEnabled = true;
+            resources.ApplyResources(this.userComboBox, "userComboBox");
+            this.userComboBox.Name = "userComboBox";
+            this.userComboBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBox_DrawItem);
+            this.userComboBox.DropDownClosed += new System.EventHandler(this.comboBox_DropDownClosed);
+            this.userComboBox.TextChanged += new System.EventHandler(this.comboBox_SelectionChanged);
+            this.userComboBox.Leave += new System.EventHandler(this.comboBox_DropDownClosed);
+            // 
+            // labelUsers
+            // 
+            resources.ApplyResources(this.labelUsers, "labelUsers");
+            this.labelUsers.Name = "labelUsers";
+            // 
+            // panelObjects
+            // 
+            resources.ApplyResources(this.panelObjects, "panelObjects");
+            this.panelObjects.Controls.Add(this.labelObjects);
+            this.panelObjects.Controls.Add(this.objectComboBox);
+            this.panelObjects.Name = "panelObjects";
+            // 
+            // labelObjects
+            // 
+            resources.ApplyResources(this.labelObjects, "labelObjects");
+            this.labelObjects.Name = "labelObjects";
+            // 
+            // objectComboBox
+            // 
+            this.objectComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.objectComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.objectComboBox.FormattingEnabled = true;
+            resources.ApplyResources(this.objectComboBox, "objectComboBox");
+            this.objectComboBox.Name = "objectComboBox";
+            this.objectComboBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBox_DrawItem);
+            this.objectComboBox.DropDownClosed += new System.EventHandler(this.comboBox_DropDownClosed);
+            this.objectComboBox.TextChanged += new System.EventHandler(this.comboBox_SelectionChanged);
+            this.objectComboBox.Leave += new System.EventHandler(this.comboBox_DropDownClosed);
             // 
             // WlbReportView
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.flowLayoutPanelButtons);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.lblExported);
@@ -197,6 +274,11 @@ namespace XenAdmin.Controls.Wlb
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.flowLayoutPanelButtons.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
+            this.panelUsers.ResumeLayout(false);
+            this.panelUsers.PerformLayout();
+            this.panelObjects.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -207,6 +289,7 @@ namespace XenAdmin.Controls.Wlb
         public System.Windows.Forms.Label labelHostCombo;
         public System.Windows.Forms.ComboBox hostComboBox;
         public System.Windows.Forms.Button btnRunReport;
+        public System.Windows.Forms.Button btnLaterReport;
         private System.Windows.Forms.Label labelEndDate;
         private System.Windows.Forms.DateTimePicker EndDatePicker;
         private System.Windows.Forms.Label labelStartDate;
@@ -224,6 +307,13 @@ namespace XenAdmin.Controls.Wlb
         private System.Windows.Forms.Label lblExported;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelButtons;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Panel panelUsers;
+        public XenAdmin.Controls.LongStringComboBox userComboBox;
+        public System.Windows.Forms.Label labelUsers;
+        private System.Windows.Forms.Panel panelObjects;
+        private System.Windows.Forms.Label labelObjects;
+        private System.Windows.Forms.ComboBox objectComboBox;
 
     }
 }

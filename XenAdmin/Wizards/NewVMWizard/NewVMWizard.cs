@@ -214,7 +214,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 if (page_1_Template.CopyBiosStrings)
                 {
                     // insert after template page
-                    AddPage(page_1b_BiosLocking, 1);
+                    AddAfterPage(page_1_Template, page_1b_BiosLocking);
 
                     page_4_HomeServer.DisableStep = selectedTemplate.DefaultTemplate;
                 }
@@ -225,10 +225,13 @@ namespace XenAdmin.Wizards.NewVMWizard
                 }
 
                 // if custom template has no cd drive (must have been removed via cli) don't add one
-                page_3_InstallationMedia.DisableStep = Helpers.CustomWithNoDVD(selectedTemplate);
+                var noInstallMedia = Helpers.CustomWithNoDVD(selectedTemplate);
 
                 if (selectedTemplate != null && selectedTemplate.DefaultTemplate && string.IsNullOrEmpty(selectedTemplate.InstallMethods))
-                    page_3_InstallationMedia.DisableStep = true;
+                    noInstallMedia = true;
+
+                page_3_InstallationMedia.ShowInstallationMedia = !noInstallMedia;
+                page_3_InstallationMedia.DisableStep = noInstallMedia && !page_3_InstallationMedia.ShowBootParameters;
 
                 // The user cannot set their own affinity, use the one off the template
                 if (BlockAffinitySelection)

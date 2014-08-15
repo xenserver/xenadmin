@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>An activation key can only be applied when the edition is set to 'free'.</value>
@@ -1572,7 +1572,7 @@ Authorized Roles: {1}</value>
     <value>The VDI is too small. Please resize it to at least the minimum size.</value>
   </data>
   <data name="VGPU_TYPE_NOT_COMPATIBLE_WITH_RUNNING_TYPE" xml:space="preserve">
-    <value>vGPU type is not compatible with one or more of the vGPU types currently running on this pGPU</value>
+    <value>The VM cannot start because all GPUs are fully used or are running other types of vGPU</value>
   </data>
   <data name="VGPU_TYPE_NOT_ENABLED" xml:space="preserve">
     <value>vGPU type is not one of the pGPU's enabled types.</value>
@@ -1719,7 +1719,7 @@ Authorized Roles: {1}</value>
     <value>VM cannot be started because it requires a VDI which cannot be attached</value>
   </data>
   <data name="VM_REQUIRES_VGPU" xml:space="preserve">
-    <value>You attempted to run a VM on a host on which the vGPU required by the VM cannot be allocated on any pGPUs in the GPU_group needed by the VM.</value>
+    <value>The VM cannot start because no GPU is available</value>
   </data>
   <data name="VM_REVERT_FAILED" xml:space="preserve">
     <value>An error occurred while reverting the specified virtual machine to the specified snapshot</value>

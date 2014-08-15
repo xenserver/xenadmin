@@ -43,8 +43,8 @@ namespace XenAdmin.Actions
         private Action<VM, bool> _warningDialogHAInvalidConfig;
 
         public ChangeMemorySettingsAction(VM vm, string title,
-            long static_min, long dynamic_min, long dynamic_max, long static_max, Action<VM, bool> warningDialogHAInvalidConfig, Action<VMStartAbstractAction, Failure> startDiagnosticForm)
-            : base(vm.Connection, title)
+            long static_min, long dynamic_min, long dynamic_max, long static_max, Action<VM, bool> warningDialogHAInvalidConfig, Action<VMStartAbstractAction, Failure> startDiagnosticForm, bool suppressHistory)
+            : base(vm.Connection, title, suppressHistory)
         {
             _warningDialogHAInvalidConfig = warningDialogHAInvalidConfig;
             _startDiagnosticForm = startDiagnosticForm;

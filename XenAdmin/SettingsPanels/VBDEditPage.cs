@@ -335,7 +335,7 @@ namespace XenAdmin.SettingsPanels
             }
             WarnUserSwap(vbd, other);
 
-            return new VbdEditAction(vbd, vbdMode, priorityToSet, changeDevicePosition, other, devicePosition);
+            return new VbdEditAction(vbd, vbdMode, priorityToSet, changeDevicePosition, other, devicePosition, true);
         }
 
         private static void WarnUserSwap(VBD vbd, VBD other)

@@ -49,16 +49,20 @@ namespace XenAdmin.Actions
         public string SubActionTitle { get; private set; }
         public string SubActionDescription { get; private set; }
 
-        public MultipleAction(IXenConnection connection, string title, string startDescription, string endDescription, List<AsyncAction> subActions)
-            : base(connection, title, startDescription)
+        public MultipleAction(IXenConnection connection, string title, string startDescription, string endDescription, List<AsyncAction> subActions, bool suppressHistory)
+            : base(connection, title, startDescription, suppressHistory)
         {
             this.endDescription = endDescription;
             this.subActions = subActions;
             this.Completed += MultipleAction_Completed;
         }
 
+        public MultipleAction(IXenConnection connection, string title, string startDescription, string endDescription, List<AsyncAction> subActions)
+            : this(connection, title, startDescription, endDescription, subActions, false)
+        {}
+
         public MultipleAction(IXenConnection connection, string title, string startDescription, string endDescription,
-            List<AsyncAction> subActions, bool showSubActionsDetails)
+            List<AsyncAction> subActions, bool suppressHistory, bool showSubActionsDetails)
             : this(connection, title, startDescription, endDescription, subActions)
         {
             ShowSubActionsDetails = showSubActionsDetails;
@@ -87,7 +91,7 @@ namespace XenAdmin.Actions
 
             PercentComplete = 100;
             Description = endDescription;
-            if (exceptions.Count > 0)
+            if (exceptions.Count > 1)
             {
                 foreach (Exception e in exceptions)
                     log.Error(e);

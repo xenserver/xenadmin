@@ -44,8 +44,8 @@ namespace XenAdmin.Actions
         private readonly string _devicePosition;
         private readonly int _priority;
 
-        public VbdEditAction(VBD vbd, vbd_mode vbdMode, int priority, bool changeDevicePosition, VBD other, string devicePosition)
-            : base(vbd.Connection, string.Format(Messages.ACTION_SAVE_SETTINGS, vbd.Connection.Resolve(vbd.VDI)), string.Format(Messages.ACTION_SAVE_SETTINGS, vbd.Connection.Resolve(vbd.VDI)))
+        public VbdEditAction(VBD vbd, vbd_mode vbdMode, int priority, bool changeDevicePosition, VBD other, string devicePosition, bool suppressHistory)
+            : base(vbd.Connection, string.Format(Messages.ACTION_SAVE_SETTINGS, vbd.Connection.Resolve(vbd.VDI)), string.Format(Messages.ACTION_SAVE_SETTINGS, vbd.Connection.Resolve(vbd.VDI)), suppressHistory)
         {
             this._vbd = vbd;
             _priority = priority;

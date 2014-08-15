@@ -549,11 +549,6 @@ namespace XenAdmin.Wizards
 
             if (m_srWizardType is SrWizardType_LvmoHba)
             {
-                foreach (var asyncAction in actionList)
-                {
-                    asyncAction.Completed += asyncAction_Completed;
-                }
-
                 ActionProgressDialog closureDialog = dialog;
                 // close dialog even when there's an error for HBA SR type as there will be the Summary page displayed.
                 FinalAction.Completed +=
@@ -564,6 +559,14 @@ namespace XenAdmin.Wizards
                         });
             }
             dialog.ShowDialog(this);
+
+            if (m_srWizardType is SrWizardType_LvmoHba)
+            {
+                foreach (var asyncAction in actionList)
+                {
+                    AddActionToSummary(asyncAction);
+                }
+            }
 
             if (!FinalAction.Succeeded && FinalAction is SrReattachAction && _srToReattach.HasPBDs)
             {
@@ -596,9 +599,8 @@ namespace XenAdmin.Wizards
 
         private Dictionary<AsyncAction, SrDescriptor> actionSrDescriptorDict = new Dictionary<AsyncAction, SrDescriptor>();
 
-        void asyncAction_Completed(ActionBase sender)
+        void AddActionToSummary(AsyncAction action)
         {
-            AsyncAction action = sender as AsyncAction;
             if (action == null)
                 return;
 

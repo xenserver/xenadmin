@@ -46,8 +46,8 @@ namespace XenAdmin.Actions
         private readonly string _password;
         private readonly List<IXenConnection> _connections;
 
-        public SetCslgCredentialsAction(IEnumerable<IXenConnection> connections, string host, string username, string password)
-            : base(null, Messages.SET_STORAGELINK_CREDS_ACTION_TITLE, Messages.SET_STORAGELINK_CREDS_ACTION_DESCRIPTION)
+        public SetCslgCredentialsAction(IEnumerable<IXenConnection> connections, string host, string username, string password, bool suppressHistory)
+            : base(null, Messages.SET_STORAGELINK_CREDS_ACTION_TITLE, Messages.SET_STORAGELINK_CREDS_ACTION_DESCRIPTION, suppressHistory)
         {
             Util.ThrowIfEnumerableParameterNullOrEmpty(connections, "connections");
 

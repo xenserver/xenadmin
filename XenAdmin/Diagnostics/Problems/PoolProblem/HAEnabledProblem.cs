@@ -30,14 +30,10 @@
  */
 
 using System;
-using System.Windows.Forms;
 using XenAdmin.Diagnostics.Checks;
 using XenAPI;
-using XenAdmin.Core;
-using System.ComponentModel;
 using XenAdmin.Actions;
 using System.Collections.Generic;
-using XenAdmin.Network;
 
 
 namespace XenAdmin.Diagnostics.Problems.PoolProblem
@@ -78,6 +74,32 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             get
             {
                 return Messages.TURN_HA_OFF;
+            }
+        }
+    }
+
+    class HAEnabledWarning : Warning
+    {
+        private readonly Pool pool;
+        private readonly Host host;
+
+        public HAEnabledWarning(Check check, Pool pool, Host host)
+            : base(check)
+        {
+            this.pool = pool;
+            this.host = host;
+        }
+
+        public override string Title
+        {
+            get { return Check.Description; }
+        }
+
+        public override string Description
+        {
+            get
+            {
+                return string.Format(Messages.UPDATES_WIZARD_HA_ON_WARNING, host, pool);
             }
         }
     }

@@ -109,6 +109,7 @@ namespace XenAdmin.TabPages
             // 
             // toolStripDropDownSeveritiesFilter
             // 
+            this.toolStripDropDownSeveritiesFilter.AutoToolTip = false;
             resources.ApplyResources(this.toolStripDropDownSeveritiesFilter, "toolStripDropDownSeveritiesFilter");
             this.toolStripDropDownSeveritiesFilter.Name = "toolStripDropDownSeveritiesFilter";
             this.toolStripDropDownSeveritiesFilter.FilterChanged += new System.Action(this.toolStripDropDownSeveritiesFilter_FilterChanged);
@@ -123,6 +124,7 @@ namespace XenAdmin.TabPages
             // 
             // toolStripDropDownButtonDateFilter
             // 
+            this.toolStripDropDownButtonDateFilter.AutoToolTip = false;
             this.toolStripDropDownButtonDateFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.toolStripDropDownButtonDateFilter, "toolStripDropDownButtonDateFilter");
             this.toolStripDropDownButtonDateFilter.Name = "toolStripDropDownButtonDateFilter";
@@ -154,6 +156,7 @@ namespace XenAdmin.TabPages
             // 
             // toolStripSplitButtonDismiss
             // 
+            this.toolStripSplitButtonDismiss.AutoToolTip = false;
             this.toolStripSplitButtonDismiss.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripSplitButtonDismiss.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiDismissAll,
@@ -172,7 +175,7 @@ namespace XenAdmin.TabPages
             // 
             this.tsmiDismissSelected.Name = "tsmiDismissSelected";
             resources.ApplyResources(this.tsmiDismissSelected, "tsmiDismissSelected");
-            this.tsmiDismissSelected.Click += new System.EventHandler(this.ToolStripMenuItemDismiss_Click);
+            this.tsmiDismissSelected.Click += new System.EventHandler(this.tsmiDismissSelected_Click);
             // 
             // toolStripLabelFiltersOnOff
             // 
@@ -214,12 +217,12 @@ namespace XenAdmin.TabPages
             this.GridViewAlerts.GridColor = System.Drawing.SystemColors.ControlDark;
             this.GridViewAlerts.MultiSelect = true;
             this.GridViewAlerts.Name = "GridViewAlerts";
-            this.GridViewAlerts.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.GridViewAlerts_SortCompare);
+            this.GridViewAlerts.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridViewAlerts_CellClick);
             this.GridViewAlerts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridViewAlerts_CellDoubleClick);
             this.GridViewAlerts.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GridViewAlerts_ColumnHeaderMouseClick);
-            this.GridViewAlerts.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridViewAlerts_CellClick);
-            this.GridViewAlerts.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GridViewAlerts_KeyDown);
             this.GridViewAlerts.SelectionChanged += new System.EventHandler(this.GridViewAlerts_SelectionChanged);
+            this.GridViewAlerts.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.GridViewAlerts_SortCompare);
+            this.GridViewAlerts.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GridViewAlerts_KeyDown);
             // 
             // ColumnExpand
             // 

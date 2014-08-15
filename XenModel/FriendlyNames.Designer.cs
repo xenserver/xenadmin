@@ -412,6 +412,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Log files from the RRD daemon.
+        /// </summary>
+        public static string Description_host_system_status_xcp_rrdd_plugins {
+            get {
+                return ResourceManager.GetString("Description-host.system_status-xcp-rrdd-plugins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Details of the hypervisor version and its current state.
         /// </summary>
         public static string Description_host_system_status_xen_info {
@@ -1398,6 +1407,15 @@ namespace XenAdmin {
         public static string Label_host_system_status_xapi_subprocess {
             get {
                 return ResourceManager.GetString("Label-host.system_status-xapi-subprocess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RRD plugin logs.
+        /// </summary>
+        public static string Label_host_system_status_xcp_rrdd_plugins {
+            get {
+                return ResourceManager.GetString("Label-host.system_status-xcp-rrdd-plugins", resourceCulture);
             }
         }
         
@@ -2725,6 +2743,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max number of vCPUs.
+        /// </summary>
+        public static string Label_VM_MaxVCPUs {
+            get {
+                return ResourceManager.GetString("Label-VM.MaxVCPUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Memory.
         /// </summary>
         public static string Label_VM_memory_static_max {
@@ -2829,6 +2856,15 @@ namespace XenAdmin {
         public static string Label_VM_PV_args {
             get {
                 return ResourceManager.GetString("Label-VM.PV_args", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Topology.
+        /// </summary>
+        public static string Label_VM_Topology {
+            get {
+                return ResourceManager.GetString("Label-VM.Topology", resourceCulture);
             }
         }
         

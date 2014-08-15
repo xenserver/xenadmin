@@ -184,6 +184,7 @@ namespace XenAdmin.SettingsPanels
                     string.Format(Messages.ACTION_CHANGING_SHADOW_MULTIPLIER_FOR, vm),
                     null,
                     delegate(Session session) { VM.set_shadow_multiplier_live(session, vm.opaque_ref, ShadowValue); },
+                    true,
                     "vm.set_shadow_multiplier_live"
                 );
             }

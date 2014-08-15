@@ -39,17 +39,18 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.label2 = new System.Windows.Forms.Label();
             this.CdDropDownBox = new XenAdmin.Controls.ISODropDownBox();
             this.UrlTextBox = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panelInstallationMethod = new System.Windows.Forms.TableLayoutPanel();
             this.linkLabelAttachNewIsoStore = new System.Windows.Forms.LinkLabel();
             this.comboBoxToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.PvBootBox.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.panelInstallationMethod.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
+            this.panelInstallationMethod.SetColumnSpan(this.label1, 2);
             this.label1.Name = "label1";
             // 
             // CdRadioButton
@@ -110,15 +111,16 @@ namespace XenAdmin.Wizards.NewVMWizard
             resources.ApplyResources(this.UrlTextBox, "UrlTextBox");
             this.UrlTextBox.Name = "UrlTextBox";
             // 
-            // tableLayoutPanel1
+            // panelInstallationMethod
             // 
-            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.CdRadioButton, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.UrlRadioButton, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.CdDropDownBox, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.UrlTextBox, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.linkLabelAttachNewIsoStore, 1, 1);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            resources.ApplyResources(this.panelInstallationMethod, "panelInstallationMethod");
+            this.panelInstallationMethod.Controls.Add(this.CdRadioButton, 0, 1);
+            this.panelInstallationMethod.Controls.Add(this.UrlRadioButton, 0, 3);
+            this.panelInstallationMethod.Controls.Add(this.label1, 0, 0);
+            this.panelInstallationMethod.Controls.Add(this.CdDropDownBox, 0, 2);
+            this.panelInstallationMethod.Controls.Add(this.UrlTextBox, 0, 4);
+            this.panelInstallationMethod.Controls.Add(this.linkLabelAttachNewIsoStore, 1, 2);
+            this.panelInstallationMethod.Name = "panelInstallationMethod";
             // 
             // linkLabelAttachNewIsoStore
             // 
@@ -131,16 +133,15 @@ namespace XenAdmin.Wizards.NewVMWizard
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.panelInstallationMethod);
             this.Controls.Add(this.PvBootBox);
-            this.Controls.Add(this.label1);
             this.Name = "Page_InstallationMedia";
             this.PvBootBox.ResumeLayout(false);
             this.PvBootBox.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.panelInstallationMethod.ResumeLayout(false);
+            this.panelInstallationMethod.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -155,7 +156,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         private System.Windows.Forms.Label label2;
         private XenAdmin.Controls.ISODropDownBox CdDropDownBox;
         private System.Windows.Forms.TextBox UrlTextBox;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel panelInstallationMethod;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.LinkLabel linkLabelAttachNewIsoStore;
         private System.Windows.Forms.ToolTip comboBoxToolTip;

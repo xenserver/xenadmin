@@ -632,12 +632,12 @@ namespace XenAdmin.SettingsPanels
             {
                 // even if we needPlugUnplug this is ok, the network update action destroys/recreates pifs anyway
                 // ASSUMPTION: currently we don't allow network reconfigure that leads us here if ANY VMs are attached, so there are no VIFs to plug/unplug
-                actions.Add(new NetworkAction(network.Connection, network, pifsChanged, external, new_pif, vlan));
+                actions.Add(new NetworkAction(network.Connection, network, pifsChanged, external, new_pif, vlan, true));
             }
             else if (needPlugUnplug)
             {
                 List<PIF> pifs = network.Connection.ResolveAll<PIF>(network.PIFs);
-                AsyncAction a = new UnplugPlugNetworkAction(network);
+                AsyncAction a = new UnplugPlugNetworkAction(network, true);
                 foreach (SelectedItem i in Program.MainWindow.SelectionManager.Selection)
                 {
                     Host h = i.XenObject as Host;
@@ -656,7 +656,7 @@ namespace XenAdmin.SettingsPanels
             return
                 new MultipleAction(network.Connection, Messages.ACTION_SAVE_CHANGES_TITLE,
                 Messages.ACTION_SAVE_CHANGES_IN_PROGRESS, Messages.ACTION_SAVE_CHANGES_SUCCESSFUL,
-                actions);
+                actions, true);
         }
 
         private PIF NICNameToPIF(string p)
@@ -727,6 +727,7 @@ namespace XenAdmin.SettingsPanels
                     Messages.SET_BOND_MODE_ACTION_START,
                     Messages.SET_BOND_MODE_ACTION_END,
                     session => Bond.set_mode(session, b.opaque_ref, NewBondMode),
+                    true,
                     "bond.set_mode"));
             }
             return (ans.Count == 0 ? null : ans);
@@ -743,6 +744,7 @@ namespace XenAdmin.SettingsPanels
                     Messages.SET_BOND_HASHING_ALGORITHM_ACTION_START,
                     Messages.SET_BOND_HASHING_ALGORITHM_ACTION_END,
                     session => Bond.set_property(session, b.opaque_ref, "hashing_algorithm", Bond.HashingAlgoritmToString(NewHashingAlgorithm)),
+                    true,
                     "bond.set_property"));
             }
             return (ans.Count == 0 ? null : ans);

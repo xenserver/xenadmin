@@ -46,8 +46,8 @@ namespace XenAdmin.Actions
         private readonly string newMode, ip, user, password;
         private readonly Dictionary<string, string> customConfig;
 
-        public SavePowerOnSettingsAction(IXenConnection connection, List<Host> hosts, string newMode, string ip, string user, string password, Dictionary<string, string> customConfig)
-            : base(connection, Messages.ACTION_CHANGE_POWER_ON, Messages.ACTION_CHANGING_POWER_ON)
+        public SavePowerOnSettingsAction(IXenConnection connection, List<Host> hosts, string newMode, string ip, string user, string password, Dictionary<string, string> customConfig, bool suppressHistory)
+            : base(connection, Messages.ACTION_CHANGE_POWER_ON, Messages.ACTION_CHANGING_POWER_ON, suppressHistory)
         {
             this.hosts = hosts;
             this.newMode = newMode;
@@ -57,8 +57,8 @@ namespace XenAdmin.Actions
             this.customConfig = customConfig;
         }
 
-        public SavePowerOnSettingsAction(Host host, string newMode, string ip, string user, string password,  Dictionary<string, string> customConfig)
-            : this(host.Connection, new List<Host>(), newMode, ip, user, password, customConfig)
+        public SavePowerOnSettingsAction(Host host, string newMode, string ip, string user, string password,  Dictionary<string, string> customConfig, bool suppressHistory)
+            : this(host.Connection, new List<Host>(), newMode, ip, user, password, customConfig, suppressHistory)
         {
             hosts.Add(host);
         }

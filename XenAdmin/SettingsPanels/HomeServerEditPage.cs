@@ -72,6 +72,7 @@ namespace XenAdmin.SettingsPanels
                 string.Format(Messages.ACTION_CHANGING_HOME_SERVER_FOR, vm),
                 null,
                 delegate(Session session) { VM.set_affinity(session, vm.opaque_ref, affinity); },
+                true,
                 "vm.set_affinity"
             );
         }

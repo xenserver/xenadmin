@@ -45,8 +45,8 @@ namespace XenAdmin.Actions
         private readonly Host host;
         private readonly bool multipath;
 
-        public EditMultipathAction(Host host, bool multipath)
-            : base(host.Connection, Messages.ACTION_CHANGE_MULTIPATH, string.Format(Messages.ACTION_CHANGING_MULTIPATH_FOR, host))
+        public EditMultipathAction(Host host, bool multipath, bool suppressHistory)
+            : base(host.Connection, Messages.ACTION_CHANGE_MULTIPATH, string.Format(Messages.ACTION_CHANGING_MULTIPATH_FOR, host), suppressHistory)
         {
             this.host = host;
             this.multipath = multipath;
