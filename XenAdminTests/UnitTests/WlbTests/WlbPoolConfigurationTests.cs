@@ -43,7 +43,7 @@ namespace XenAdminTests.UnitTests.WlbTests
     {
         private IUnitTestVerifier validator;
         private WlbPoolConfiguration wlbPool;
-        private const int NUMBER_OF_PROPERTIES = 34;
+        private const int NUMBER_OF_PROPERTIES = 36;
 
         [Test, ExpectedException(typeof(Exception))]
         public void NullCtorThrows()
@@ -63,7 +63,8 @@ namespace XenAdminTests.UnitTests.WlbTests
                                           {
                                              "AutoBalanceAggressiveness", //Enum
                                              "AutoBalanceSeverity",       //Enum
-                                             "ReportingSMTPServer"        //Not set
+                                             "ReportingSMTPServer",       //Not set
+                                             "PoolAuditGranularity"       //Enum
                                           };
 
             foreach (PropertyInfo propertyInfo in pi)
