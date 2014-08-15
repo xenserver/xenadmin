@@ -13862,15 +13862,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Warning: enable maximum audit trail log needs more disk space and memory on WLB Server!.
-        /// </summary>
-        public static string MAXIMUM_AUDIT_LOG_WARN_MSG {
-            get {
-                return ResourceManager.GetString("MAXIMUM_AUDIT_LOG_WARN_MSG", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Full Name.
         /// </summary>
         public static string FULL_NAME {
