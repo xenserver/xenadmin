@@ -60,42 +60,6 @@ namespace XenAdmin.Dialogs.Wlb
             this.wlbThresholdsPage,
             this.wlbMetricWeightingPage,
             this.wlbHostExclusionPage,
-            this.wlbAdvancedSettingsPage,
-            this.wlbOptimizationModePage,
-            this.wlbAutomationPage,
-            this.wlbThresholdsPage,
-            this.wlbMetricWeightingPage,
-            this.wlbHostExclusionPage,
-            this.wlbAdvancedSettingsPage,
-            this.wlbOptimizationModePage,
-            this.wlbAutomationPage,
-            this.wlbThresholdsPage,
-            this.wlbMetricWeightingPage,
-            this.wlbHostExclusionPage,
-            this.wlbAdvancedSettingsPage,
-            this.wlbOptimizationModePage,
-            this.wlbAutomationPage,
-            this.wlbThresholdsPage,
-            this.wlbMetricWeightingPage,
-            this.wlbHostExclusionPage,
-            this.wlbAdvancedSettingsPage,
-            this.wlbOptimizationModePage,
-            this.wlbAutomationPage,
-            this.wlbThresholdsPage,
-            this.wlbMetricWeightingPage,
-            this.wlbHostExclusionPage,
-            this.wlbAdvancedSettingsPage,
-            this.wlbOptimizationModePage,
-            this.wlbAutomationPage,
-            this.wlbThresholdsPage,
-            this.wlbMetricWeightingPage,
-            this.wlbHostExclusionPage,
-            this.wlbAdvancedSettingsPage,
-            this.wlbOptimizationModePage,
-            this.wlbAutomationPage,
-            this.wlbThresholdsPage,
-            this.wlbMetricWeightingPage,
-            this.wlbHostExclusionPage,
             this.wlbAdvancedSettingsPage});
             resources.ApplyResources(this.verticalTabs, "verticalTabs");
             // 
@@ -167,6 +131,7 @@ namespace XenAdmin.Dialogs.Wlb
             // 
             resources.ApplyResources(this, "$this");
             this.Name = "WlbConfigurationDialog";
+            this.SizeChanged += new System.EventHandler(this.WlbConfigurationDialog_SizeChanged);
             this.Controls.SetChildIndex(this.cancelButton, 0);
             this.Controls.SetChildIndex(this.okButton, 0);
             this.Controls.SetChildIndex(this.splitContainer, 0);
