@@ -269,6 +269,7 @@ namespace XenAdmin.SettingsPanels
         private void HidePoolAuditTrailGranularitySection()
         {
             label2.Visible = false;
+            label3.Visible = false;
             sectionHeaderLabelAuditTrail.Visible = false;
             labelAuditTrail.Visible = false;
             auditTrailPanel.Visible = false;
