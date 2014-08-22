@@ -75,6 +75,8 @@ namespace XenAdmin.ConsoleView
 
         internal readonly ConsoleKeyHandler KeyHandler = new ConsoleKeyHandler();
 
+        private readonly CollectionChangeEventHandler VM_guest_metrics_CollectionChangedWithInvoke;
+
         public VNCTabView(VNCView parent, VM source, string elevatedUsername, string elevatedPassword)
         {
             Program.AssertOnEventThread();
@@ -139,9 +141,13 @@ namespace XenAdmin.ConsoleView
             this.vncScreen = new XSVNCScreen(source, new EventHandler(RDPorVNCResizeHandler), this, elevatedUsername, elevatedPassword);
             ShowGpuWarningIfRequired();
 
-            if (source.is_control_domain)
+            if (source.is_control_domain || source.IsHVM && !source.HasRDP) //Linux HVM guests should only have one console: the console switch button vanishes altogether.
             {
                 toggleConsoleButton.Visible = false;
+
+                VM_guest_metrics_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(VM_guest_metrics_CollectionChanged);
+                source.Connection.Cache.RegisterCollectionChanged<VM_guest_metrics>(VM_guest_metrics_CollectionChangedWithInvoke);
+                
             }
             else
             {
@@ -182,6 +188,24 @@ namespace XenAdmin.ConsoleView
             UpdateParentMinimumSize();
 
             toggleConsoleButton.EnabledChanged += toggleConsoleButton_EnabledChanged;
+        }
+
+        void VM_guest_metrics_CollectionChanged(object sender, CollectionChangeEventArgs e)
+        {
+            if (!toggleConsoleButton.Visible && source.HasRDP)
+            {
+                // The toogle button is not visible now, because RDP had not been enabled on the VM when we started the console.
+                // However, the current guest_metrics indicates that RDP is now supported (HasRDP==true). (eg. XenTools has been installed in the meantime.)
+                // This means that now we should show and enable the toogle RDP button and start polling (if allowed) RDP as well.
+
+                toggleConsoleButton.Visible = true;
+                toggleConsoleButton.Enabled = true;
+
+                if (Properties.Settings.Default.EnableRDPPolling)
+                {
+                    ThreadPool.QueueUserWorkItem(TryToConnectRDP);
+                }
+            }
         }
 
         //CA-75479 - add to aid debugging
@@ -271,6 +295,7 @@ namespace XenAdmin.ConsoleView
             else
             {
                 source.Connection.Cache.DeregisterCollectionChanged<Host>(Host_CollectionChangedWithInvoke);
+                source.Connection.Cache.DeregisterCollectionChanged<VM_guest_metrics>(VM_guest_metrics_CollectionChangedWithInvoke);
 
                 foreach (Host cachedHost in source.Connection.Cache.Hosts)
                 {
