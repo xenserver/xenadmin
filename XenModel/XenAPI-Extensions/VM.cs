@@ -419,6 +419,33 @@ namespace XenAPI
             get { return HVM_boot_policy != ""; }
         }
 
+        public bool HasRDP
+        {
+            get
+            { 
+                var metrics = Connection.Resolve<VM_metrics>(this.metrics);
+                if (metrics == null)
+                    return false;
+
+                return 0 != IntKey(metrics.other_config, "feature-ts", 0);
+            }
+        }
+
+        public bool CanHaveVGpu
+        {
+            get
+            {
+                if (!IsHVM)
+                    return false;
+
+                var metrics = Connection.Resolve<VM_metrics>(this.metrics);
+                if (metrics == null)
+                    return false;
+
+                return 0 != IntKey(metrics.other_config, "feature-gpu-passthrough", 1);
+            }
+        }
+
         void set_other_config(string key, string value)
         {
             Dictionary<string, string> new_other_config =
