@@ -206,7 +206,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 page_7_Networking.SelectedTemplate = selectedTemplate;
 
                 RemovePage(pageVgpu);
-                if (vgpuCapability && selectedTemplate.IsHVM)
+                if (vgpuCapability && selectedTemplate.CanHaveVGpu)
                     AddAfterPage(page_5_CpuMem, pageVgpu);
 
                 RemovePage(page_1b_BiosLocking);

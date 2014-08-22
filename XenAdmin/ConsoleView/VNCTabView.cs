@@ -139,7 +139,7 @@ namespace XenAdmin.ConsoleView
             this.vncScreen = new XSVNCScreen(source, new EventHandler(RDPorVNCResizeHandler), this, elevatedUsername, elevatedPassword);
             ShowGpuWarningIfRequired();
 
-            if (source.is_control_domain)
+            if (source.is_control_domain || source.IsHVM && !source.HasRDP) //Linux HVM guests should only have one console: the console switch button vanishes altogether.
             {
                 toggleConsoleButton.Visible = false;
             }
@@ -468,11 +468,57 @@ namespace XenAdmin.ConsoleView
                 //The CD device may have changed
                 Program.Invoke(this, setupCD);
             }
+            else if (e.PropertyName == "guest_metrics")
+            {
+                var guestMetrics = source.Connection.Resolve(source.guest_metrics);
+                if (guestMetrics != null)
+                {
+                    guestMetrics.PropertyChanged -= guestMetrics_PropertyChanged;
+                    guestMetrics.PropertyChanged += guestMetrics_PropertyChanged;
+                }
+
+                EnableRDPIfCapable();
+            }
+
             if (source.is_control_domain && e.PropertyName == "name_label")
             {
                 HostLabel.Text = string.Format(Messages.CONSOLE_HOST, source.AffinityServerString);
                 if (parentVNCView != null && parentVNCView.undockedForm != null)
                     parentVNCView.undockedForm.Text = source.AffinityServerString;
+            }
+        }
+
+        private void guestMetrics_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "other")
+            {
+                EnableRDPIfCapable();
+            }
+        }
+
+        private void EnableRDPIfCapable()
+        {
+            if (!toggleConsoleButton.Visible && source.HasRDP)
+            {
+                // The toogle button is not visible now, because RDP had not been enabled on the VM when we started the console.
+                // However, the current guest_metrics indicates that RDP is now supported (HasRDP==true). (eg. XenTools has been installed in the meantime.)
+                // This means that now we should show and enable the toogle RDP button and start polling (if allowed) RDP as well.
+
+                log.DebugFormat( "'{0}' console: Enabling RDP button, because RDP capability has appeared.", source);
+
+                if (Properties.Settings.Default.EnableRDPPolling)
+                {
+                    log.DebugFormat("'{0}' console: Starting RDP polling. (RDP polling is enabled in settings.)", source);
+                    toggleConsoleButton.Visible = true;
+                    toggleConsoleButton.Enabled = false;
+                    ThreadPool.QueueUserWorkItem(TryToConnectRDP);
+                }
+                else
+                {
+                    log.DebugFormat("'{0}' console: Not starting polling. (RDP polling is diabled in settings.)", source);
+                    toggleConsoleButton.Visible = true;
+                    toggleConsoleButton.Enabled = true;
+                }
             }
         }
 
