@@ -118,6 +118,8 @@ namespace XenAdmin.ConsoleView
         [DefaultValue(false)]
         public bool UserWantsToSwitchProtocol { get; set; }
 
+        private bool hasRDP { get { return Source != null ? Source.HasRDP : false; } }
+
         /// <summary>
         /// Whether we have tried to login without providing a password (covers the case where the user
         /// has configured VNC not to require a login password). If no password is saved, passwordless
@@ -285,7 +287,7 @@ namespace XenAdmin.ConsoleView
 
         private void PollRDPPort(Object Sender)
         {
-            if (sourceVM.HasRDP && !Properties.Settings.Default.EnableRDPPolling)
+            if (hasRDP && !Properties.Settings.Default.EnableRDPPolling)
             {
                 if (connectionPoller != null)
                     connectionPoller.Change(Timeout.Infinite, Timeout.Infinite);
@@ -536,7 +538,7 @@ namespace XenAdmin.ConsoleView
             if (RemoteConsole != null && RemoteConsole.ConsoleControl != null)
             {
                 RemoteConsole.KeyHandler = this.KeyHandler;
-                RemoteConsole.SendScanCodes = sourceVM.HasRDP;
+                RemoteConsole.SendScanCodes = hasRDP;
                 RemoteConsole.Scaling = Scaling;
                 RemoteConsole.DisplayBorder = this.displayFocusRectangle;
                 SetKeyboardAndMouseCapture(autoCaptureKeyboardAndMouse);
@@ -689,11 +691,11 @@ namespace XenAdmin.ConsoleView
             //Start the polling again
             if (Source != null && !Source.is_control_domain)
             {
-                if (!sourceVM.IsHVM)
+                if (!Source.IsHVM)
                 {
                     connectionPoller = new Timer(PollVNCPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
                 }
-                else if (sourceVM.HasRDP)
+                else if (hasRDP)
                 {
                     connectionPoller = new Timer(PollRDPPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
                 }
@@ -1007,7 +1009,7 @@ namespace XenAdmin.ConsoleView
                 }
                 else
                 {
-                    v.SendScanCodes = UseSource && sourceVM.HasRDP;
+                    v.SendScanCodes = UseSource && hasRDP;
                     v.SourceVM = sourceVM;
                     v.Console = console;
                     v.connect(stream, this.vncPassword);

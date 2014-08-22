@@ -60,6 +60,7 @@ namespace XenAdmin.ConsoleView
         private readonly VNCView parentVNCView;
         private readonly VM source;
         private readonly Host targetHost;
+        private VM_guest_metrics guestMetrics = null;
         private Form fullscreenForm = null;
         private Form fullscreenHint = null;
         private Size LastDesktopSize;
@@ -74,6 +75,8 @@ namespace XenAdmin.ConsoleView
         private bool ignoreScaleChange = false;
 
         internal readonly ConsoleKeyHandler KeyHandler = new ConsoleKeyHandler();
+
+        private bool hasRDP { get { return source != null ? source.HasRDP : false; } }
 
         public VNCTabView(VNCView parent, VM source, string elevatedUsername, string elevatedPassword)
         {
@@ -139,7 +142,7 @@ namespace XenAdmin.ConsoleView
             this.vncScreen = new XSVNCScreen(source, new EventHandler(RDPorVNCResizeHandler), this, elevatedUsername, elevatedPassword);
             ShowGpuWarningIfRequired();
 
-            if (source.is_control_domain || source.IsHVM && !source.HasRDP) //Linux HVM guests should only have one console: the console switch button vanishes altogether.
+            if (source.is_control_domain || source.IsHVM && !hasRDP) //Linux HVM guests should only have one console: the console switch button vanishes altogether.
             {
                 toggleConsoleButton.Visible = false;
             }
@@ -470,12 +473,14 @@ namespace XenAdmin.ConsoleView
             }
             else if (e.PropertyName == "guest_metrics")
             {
-                var guestMetrics = source.Connection.Resolve(source.guest_metrics);
-                if (guestMetrics != null)
-                {
-                    guestMetrics.PropertyChanged -= guestMetrics_PropertyChanged;
-                    guestMetrics.PropertyChanged += guestMetrics_PropertyChanged;
-                }
+                var newGuestMetrics = source.Connection.Resolve(source.guest_metrics);
+                
+                //unsubscribing from the previous instance's event
+                if (this.guestMetrics != null)
+                    this.guestMetrics.PropertyChanged -= guestMetrics_PropertyChanged; 
+                
+                this.guestMetrics = newGuestMetrics;
+                guestMetrics.PropertyChanged += guestMetrics_PropertyChanged;
 
                 EnableRDPIfCapable();
             }
@@ -498,7 +503,7 @@ namespace XenAdmin.ConsoleView
 
         private void EnableRDPIfCapable()
         {
-            if (!toggleConsoleButton.Visible && source.HasRDP)
+            if (!toggleConsoleButton.Visible && hasRDP)
             {
                 // The toogle button is not visible now, because RDP had not been enabled on the VM when we started the console.
                 // However, the current guest_metrics indicates that RDP is now supported (HasRDP==true). (eg. XenTools has been installed in the meantime.)
