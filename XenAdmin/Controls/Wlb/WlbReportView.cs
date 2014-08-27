@@ -1052,7 +1052,7 @@ namespace XenAdmin.Controls.Wlb
                             // and this is the first section of report,
                             // change the run button text back to "Run Report",
                             // or disable the run report button and just keep the later report button.
-                            if(btnLaterReport.Visible == true)
+                            if(btnLaterReport.Visible)
                             {
                                 this.btnRunReport.Enabled = false;
                             }
@@ -1067,12 +1067,17 @@ namespace XenAdmin.Controls.Wlb
                         {
                             this.btnLaterReport.Visible = true;
                             this.btnLaterReport.Enabled = true;
+                            if (!this.btnRunReport.Enabled)
+                            {
+                                this.btnLaterReport.Select();
+                            }
                         }
                         else if (_currentReportSection == 1 && 
                                  this.btnRunReport.Text == Messages.FETCH_EARLIER_DATA)
                         {
                             this.btnLaterReport.Visible = true;
                             this.btnLaterReport.Enabled = false;                            
+                            this.btnRunReport.Select();
                         }
                         else
                         {
@@ -1526,7 +1531,10 @@ namespace XenAdmin.Controls.Wlb
 
         private void comboBox_SelectionChanged(object sender, EventArgs e)
         {
-            InitializeAuditReport();
+            if(_isAuditReport)
+            {
+                InitializeAuditReport();
+            }
         }
 
         private void InitializeAuditReport()
@@ -1537,6 +1545,7 @@ namespace XenAdmin.Controls.Wlb
             _endLine = _lineLimit;
             _currentReportSection = 0;
             btnRunReport.Text = Messages.RUN_REPORT;
+            btnRunReport.Enabled = true;
             btnLaterReport.Visible = false;
         }
 

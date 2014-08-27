@@ -1588,6 +1588,36 @@
   <data name="&gt;&gt;auditTrailPanel.ZOrder" xml:space="preserve">
     <value>22</value>
   </data>
+  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 489</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>632, 2</value>
+  </data>
+  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -1616,7 +1646,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelAuditTrail" Row="21" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelAuditTrail" Row="20" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="19" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelRepSub" Row="16" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelHistData" Row="13" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelOptAgr" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelOptAgr" Row="11" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelHistData" Row="14" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelRecSev" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelRepSub" Row="17" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelVmMigInt" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelVmMigInt" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelRecSev" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelVmMigInt" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelRecCnt" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelRecCnt" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelRecCnt" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelRecSev" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelOptAgr" Row="12" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelHistData" Row="15" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelRepSub" Row="18" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="auditTrailPanel" Row="22" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelAuditTrail" Row="23" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelAuditTrail" Row="22" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="21" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelRepSub" Row="16" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelHistData" Row="13" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelOptAgr" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelOptAgr" Row="11" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelHistData" Row="14" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelRecSev" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelRepSub" Row="17" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelVmMigInt" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelVmMigInt" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelRecSev" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelVmMigInt" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sectionHeaderLabelRecCnt" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelRecCnt" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelRecCnt" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelRecSev" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelOptAgr" Row="12" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelHistData" Row="15" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelRepSub" Row="18" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="auditTrailPanel" Row="24" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="20" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,10,Absolute,10,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
