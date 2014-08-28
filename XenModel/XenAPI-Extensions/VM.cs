@@ -423,11 +423,11 @@ namespace XenAPI
         {
             get
             { 
-                var metrics = Connection.Resolve<VM_metrics>(this.metrics);
+                var metrics = Connection.Resolve(this.guest_metrics);
                 if (metrics == null)
                     return false;
 
-                return 0 != IntKey(metrics.other_config, "feature-ts", 0);
+                return 0 != IntKey(metrics.other, "feature-ts", 0);
             }
         }
 
@@ -438,11 +438,11 @@ namespace XenAPI
                 if (!IsHVM)
                     return false;
 
-                var metrics = Connection.Resolve<VM_metrics>(this.metrics);
+                var metrics = Connection.Resolve(this.guest_metrics);
                 if (metrics == null)
                     return false;
 
-                return 0 != IntKey(metrics.other_config, "feature-gpu-passthrough", 1);
+                return 0 != IntKey(metrics.other, "feature-gpu-passthrough", 1);
             }
         }
 
