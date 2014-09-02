@@ -431,6 +431,11 @@ namespace XenAPI
             }
         }
 
+        /// <summary>Returns true if
+        /// 1) the guest is HVM and
+        ///   2a) the allow-gpu-passthrough restriction is absent or
+        ///   2b) the allow-gpu-passthrough restriction is non-zero
+        ///</summary>
         public bool CanHaveVGpu
         {
             get
@@ -438,11 +443,24 @@ namespace XenAPI
                 if (!IsHVM)
                     return false;
 
-                var metrics = Connection.Resolve(this.guest_metrics);
-                if (metrics == null)
-                    return false;
+                XmlDocument xd = GetRecommendations();
 
-                return 0 != IntKey(metrics.other, "feature-gpu-passthrough", 1);
+                if (xd == null)
+                    return true;
+
+                try
+                {
+                    XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@property='gpu-passthrough']");
+                    if (xn == null)
+                        return true;
+
+                    return 
+                        Convert.ToInt32(xn.Attributes["max"].Value) != 0;
+                }
+                catch
+                {
+                    return true;
+                }
             }
         }
 
