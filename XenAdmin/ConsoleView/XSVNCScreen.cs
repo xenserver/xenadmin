@@ -654,7 +654,14 @@ namespace XenAdmin.ConsoleView
                 {
                     value.PropertyChanged += new PropertyChangedEventHandler(VM_PropertyChanged);
 
-                    sourceIsPV = !value.IsHVM;
+                    if (Helpers.CreedenceOrGreater(sourceVM.Connection))
+                    {
+                        sourceIsPV = !value.HasRDP;
+                    }
+                    else
+                    {
+                        sourceIsPV = !value.IsHVM;
+                    }
 
                     startPolling();
 
