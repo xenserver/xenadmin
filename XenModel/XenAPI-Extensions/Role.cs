@@ -223,13 +223,16 @@ namespace XenAPI
         /// <param name="validRoleList">The list of roles which can perform all the methods</param>
         public static bool CanPerform(RbacMethodList apiMethodsToRoleCheck, IXenConnection connection, out List<Role> validRoleList, bool debug)
         {
-            validRoleList = ValidRoleList(apiMethodsToRoleCheck, connection, debug);
+            if (!connection.IsConnected)
+            {
+                validRoleList = new List<Role>();
+                return false;
+            }
+            else
+                validRoleList = ValidRoleList(apiMethodsToRoleCheck, connection, debug);
             
             if (Helpers.MidnightRideOrGreater(connection))
             {
-                if (!connection.IsConnected)
-                    return false;
-
                 if (connection.Session.IsLocalSuperuser)
                     return true;
 
