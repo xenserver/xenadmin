@@ -163,11 +163,21 @@ namespace XenAdmin.Actions
             {
                 // Destroy secret after the SR creation is complete. This is safe
                 // since all PBDs will have duplicated the secret (CA-113396).
-                if (!string.IsNullOrEmpty(secretuuid) && Helpers.CreedenceOrGreater(Connection))
+                //
+                // We do this on a best-effort basis because some types of errors
+                // mean the secret was never actually created, so the operation will
+                // fail, masking any earlier error (CA-145254), or causing a successful
+                // SR.create to be reported as an error. The worst that can happen is
+                // that an unused secret will be left lying around without warning.
+                try
                 {
-                    string opaqref = Secret.get_by_uuid(Session, secretuuid);
-                    Secret.destroy(Session, opaqref);
+                    if (!string.IsNullOrEmpty(secretuuid) && Helpers.CreedenceOrGreater(Connection))
+                    {
+                        string opaqref = Secret.get_by_uuid(Session, secretuuid);
+                        Secret.destroy(Session, opaqref);
+                    }
                 }
+                catch { }
             }
 
             log.Debug("Checking that SR.create() actually succeeded");
