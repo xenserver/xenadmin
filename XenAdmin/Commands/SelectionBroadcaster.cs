@@ -109,6 +109,9 @@ namespace XenAdmin.Commands
         /// </summary>
         public event EventHandler SelectionChanged;
 
+        public abstract void SaveAndClearSelection();
+        public abstract void RestoreSavedSelection();
+
         #region IDisposable Members
 
         /// <summary>
