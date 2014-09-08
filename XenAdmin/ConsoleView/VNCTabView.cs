@@ -253,6 +253,9 @@ namespace XenAdmin.ConsoleView
             source.PropertyChanged -= new PropertyChangedEventHandler(Server_PropertyChanged);
             source.Connection.Cache.DeregisterCollectionChanged<VM>(VM_CollectionChangedWithInvoke);
 
+            if (this.guestMetrics != null)
+                this.guestMetrics.PropertyChanged -= guestMetrics_PropertyChanged; 
+
             if (source.is_control_domain)
             {
                 Host host = source.Connection.Resolve<Host>(source.resident_on);
