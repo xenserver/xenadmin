@@ -419,6 +419,51 @@ namespace XenAPI
             get { return HVM_boot_policy != ""; }
         }
 
+        public bool HasRDP
+        {
+            get
+            {
+                var metrics = Connection.Resolve(this.guest_metrics);
+                if (metrics == null)
+                    return false;
+
+                return 0 != IntKey(metrics.other, "feature-ts", 0);
+            }
+        }
+
+        /// <summary>Returns true if
+        /// 1) the guest is HVM and
+        ///   2a) the allow-gpu-passthrough restriction is absent or
+        ///   2b) the allow-gpu-passthrough restriction is non-zero
+        ///</summary>
+        public bool CanHaveVGpu
+        {
+            get
+            {
+                if (!IsHVM)
+                    return false;
+
+                XmlDocument xd = GetRecommendations();
+
+                if (xd == null)
+                    return true;
+
+                try
+                {
+                    XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@property='allow-gpu-passthrough']");
+                    if (xn == null)
+                        return true;
+
+                    return 
+                        Convert.ToInt32(xn.Attributes["value"].Value) != 0;
+                }
+                catch
+                {
+                    return true;
+                }
+            }
+        }
+
         void set_other_config(string key, string value)
         {
             Dictionary<string, string> new_other_config =

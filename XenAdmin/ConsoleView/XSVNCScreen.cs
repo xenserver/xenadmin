@@ -86,7 +86,6 @@ namespace XenAdmin.ConsoleView
         private Timer connectionPoller = null;
 
         private VM sourceVM = null;
-        private bool sourceIsPV = false;
 
         private readonly Object hostedConsolesLock = new Object();
         private List<XenRef<Console>> hostedConsoles = null;
@@ -118,6 +117,8 @@ namespace XenAdmin.ConsoleView
 
         [DefaultValue(false)]
         public bool UserWantsToSwitchProtocol { get; set; }
+
+        private bool hasRDP { get { return Source != null ? Source.HasRDP : false; } }
 
         /// <summary>
         /// Whether we have tried to login without providing a password (covers the case where the user
@@ -286,7 +287,7 @@ namespace XenAdmin.ConsoleView
 
         private void PollRDPPort(Object Sender)
         {
-            if (!sourceIsPV && !Properties.Settings.Default.EnableRDPPolling)
+            if (hasRDP && !Properties.Settings.Default.EnableRDPPolling)
             {
                 if (connectionPoller != null)
                     connectionPoller.Change(Timeout.Infinite, Timeout.Infinite);
@@ -537,7 +538,7 @@ namespace XenAdmin.ConsoleView
             if (RemoteConsole != null && RemoteConsole.ConsoleControl != null)
             {
                 RemoteConsole.KeyHandler = this.KeyHandler;
-                RemoteConsole.SendScanCodes = !this.sourceIsPV;
+                RemoteConsole.SendScanCodes = hasRDP;
                 RemoteConsole.Scaling = Scaling;
                 RemoteConsole.DisplayBorder = this.displayFocusRectangle;
                 SetKeyboardAndMouseCapture(autoCaptureKeyboardAndMouse);
@@ -653,9 +654,7 @@ namespace XenAdmin.ConsoleView
                 if (value != null)
                 {
                     value.PropertyChanged += new PropertyChangedEventHandler(VM_PropertyChanged);
-
-                    sourceIsPV = !value.IsHVM;
-
+                    
                     startPolling();
 
                     lock (hostedConsolesLock)
@@ -692,10 +691,14 @@ namespace XenAdmin.ConsoleView
             //Start the polling again
             if (Source != null && !Source.is_control_domain)
             {
-                    connectionPoller =
-                        new Timer(
-                            sourceIsPV ? (TimerCallback)PollVNCPort : (TimerCallback)PollRDPPort,
-                            null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
+                if (!Source.IsHVM)
+                {
+                    connectionPoller = new Timer(PollVNCPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
+                }
+                else if (hasRDP)
+                {
+                    connectionPoller = new Timer(PollRDPPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
+                }
             }
         }
 
@@ -1006,7 +1009,7 @@ namespace XenAdmin.ConsoleView
                 }
                 else
                 {
-                    v.SendScanCodes = UseSource && !sourceIsPV;
+                    v.SendScanCodes = UseSource && hasRDP;
                     v.SourceVM = sourceVM;
                     v.Console = console;
                     v.connect(stream, this.vncPassword);

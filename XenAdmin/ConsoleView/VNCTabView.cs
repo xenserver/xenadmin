@@ -60,6 +60,7 @@ namespace XenAdmin.ConsoleView
         private readonly VNCView parentVNCView;
         private readonly VM source;
         private readonly Host targetHost;
+        private VM_guest_metrics guestMetrics = null;
         private Form fullscreenForm = null;
         private Form fullscreenHint = null;
         private Size LastDesktopSize;
@@ -74,6 +75,8 @@ namespace XenAdmin.ConsoleView
         private bool ignoreScaleChange = false;
 
         internal readonly ConsoleKeyHandler KeyHandler = new ConsoleKeyHandler();
+
+        private bool hasRDP { get { return source != null ? source.HasRDP : false; } }
 
         public VNCTabView(VNCView parent, VM source, string elevatedUsername, string elevatedPassword)
         {
@@ -139,7 +142,7 @@ namespace XenAdmin.ConsoleView
             this.vncScreen = new XSVNCScreen(source, new EventHandler(RDPorVNCResizeHandler), this, elevatedUsername, elevatedPassword);
             ShowGpuWarningIfRequired();
 
-            if (source.is_control_domain)
+            if (source.is_control_domain || source.IsHVM && !hasRDP) //Linux HVM guests should only have one console: the console switch button vanishes altogether.
             {
                 toggleConsoleButton.Visible = false;
             }
@@ -249,6 +252,9 @@ namespace XenAdmin.ConsoleView
             log.DebugFormat("'{0}' console: Unregister Server_PropertyChanged event listener on {0}", source.Name);
             source.PropertyChanged -= new PropertyChangedEventHandler(Server_PropertyChanged);
             source.Connection.Cache.DeregisterCollectionChanged<VM>(VM_CollectionChangedWithInvoke);
+
+            if (this.guestMetrics != null)
+                this.guestMetrics.PropertyChanged -= guestMetrics_PropertyChanged; 
 
             if (source.is_control_domain)
             {
@@ -468,11 +474,60 @@ namespace XenAdmin.ConsoleView
                 //The CD device may have changed
                 Program.Invoke(this, setupCD);
             }
+            else if (e.PropertyName == "guest_metrics")
+            {
+                var newGuestMetrics = source.Connection.Resolve(source.guest_metrics);
+                
+                //unsubscribing from the previous instance's event
+                if (this.guestMetrics != null)
+                    this.guestMetrics.PropertyChanged -= guestMetrics_PropertyChanged; 
+                
+                this.guestMetrics = newGuestMetrics;
+                if (this.guestMetrics != null)
+                    guestMetrics.PropertyChanged += guestMetrics_PropertyChanged;
+
+                EnableRDPIfCapable();
+            }
+
             if (source.is_control_domain && e.PropertyName == "name_label")
             {
                 HostLabel.Text = string.Format(Messages.CONSOLE_HOST, source.AffinityServerString);
                 if (parentVNCView != null && parentVNCView.undockedForm != null)
                     parentVNCView.undockedForm.Text = source.AffinityServerString;
+            }
+        }
+
+        private void guestMetrics_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "other")
+            {
+                EnableRDPIfCapable();
+            }
+        }
+
+        private void EnableRDPIfCapable()
+        {
+            if (!toggleConsoleButton.Visible && hasRDP)
+            {
+                // The toogle button is not visible now, because RDP had not been enabled on the VM when we started the console.
+                // However, the current guest_metrics indicates that RDP is now supported (HasRDP==true). (eg. XenTools has been installed in the meantime.)
+                // This means that now we should show and enable the toogle RDP button and start polling (if allowed) RDP as well.
+
+                log.DebugFormat( "'{0}' console: Enabling RDP button, because RDP capability has appeared.", source);
+
+                if (Properties.Settings.Default.EnableRDPPolling)
+                {
+                    log.DebugFormat("'{0}' console: Starting RDP polling. (RDP polling is enabled in settings.)", source);
+                    toggleConsoleButton.Visible = true;
+                    toggleConsoleButton.Enabled = false;
+                    ThreadPool.QueueUserWorkItem(TryToConnectRDP);
+                }
+                else
+                {
+                    log.DebugFormat("'{0}' console: Not starting polling. (RDP polling is diabled in settings.)", source);
+                    toggleConsoleButton.Visible = true;
+                    toggleConsoleButton.Enabled = true;
+                }
             }
         }
 
