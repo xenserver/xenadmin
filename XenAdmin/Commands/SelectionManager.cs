@@ -42,6 +42,7 @@ namespace XenAdmin.Commands
     internal class SelectionManager : SelectionBroadcaster
     {
         private SelectedItemCollection _selection = new SelectedItemCollection();
+        private SelectedItemCollection savedSelection = new SelectedItemCollection();
 
         /// <summary>
         /// Sets the main selection for XenCenter.
@@ -85,6 +86,21 @@ namespace XenAdmin.Commands
         public override void RefreshSelection()
         {
             SetSelection(Selection);
+        }
+
+        public override void SaveAndClearSelection()
+        {
+            savedSelection = new SelectedItemCollection(_selection);
+            SetSelection(new SelectedItemCollection());
+        }
+        
+        public override void RestoreSavedSelection() 
+        {
+            if (savedSelection != null)
+            {
+                SetSelection(new SelectedItemCollection(savedSelection));
+                savedSelection = null;
+            }
         }
     }
 }
