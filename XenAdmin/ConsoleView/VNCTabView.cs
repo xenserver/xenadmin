@@ -483,7 +483,8 @@ namespace XenAdmin.ConsoleView
                     this.guestMetrics.PropertyChanged -= guestMetrics_PropertyChanged; 
                 
                 this.guestMetrics = newGuestMetrics;
-                guestMetrics.PropertyChanged += guestMetrics_PropertyChanged;
+                if (this.guestMetrics != null)
+                    guestMetrics.PropertyChanged += guestMetrics_PropertyChanged;
 
                 EnableRDPIfCapable();
             }
