@@ -42,7 +42,7 @@ namespace XenAdmin.Commands
     internal class SelectionManager : SelectionBroadcaster
     {
         private SelectedItemCollection _selection = new SelectedItemCollection();
-        private SelectedItemCollection savedSelection = new SelectedItemCollection();
+        private SelectedItemCollection savedSelection = null;
 
         /// <summary>
         /// Sets the main selection for XenCenter.
