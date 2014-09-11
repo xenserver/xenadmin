@@ -100,7 +100,6 @@ namespace XenAPI
             IXenObject result = (IXenObject)MemberwiseClone();
             result.ClearEventListeners();
             result.Locked = false;
-            result.InError = false;
             return result;
         }
 
@@ -264,17 +263,9 @@ namespace XenAPI
             return s != null && int.TryParse(s, out result) ? result : def;
         }
 
-        private bool in_error;
-
         public virtual string Name
         {
             get { return ""; }
-        }
-
-        public bool InError
-        {
-            get { return in_error; }
-            set { in_error = value; }
         }
     }
 }
