@@ -501,19 +501,12 @@ namespace XenAdmin
                 _index++;
 
                 IXenObject xenObject = obj as IXenObject;
-                bool error = xenObject != null && xenObject.InError;
                 bool highlighted = _highlightedDragTarget != null && obj != null && _highlightedDragTarget.Equals(obj);
 
                 if (highlighted)
                 {
                     result.BackColor = SystemColors.Highlight;
                     result.ForeColor = SystemColors.HighlightText;
-                    result.NodeFont = Program.DefaultFont;
-                }
-                else if (error)
-                {
-                    result.BackColor = Program.ErrorBackColor;
-                    result.ForeColor = Program.ErrorForeColor;
                     result.NodeFont = Program.DefaultFont;
                 }
                 else if (grayed)

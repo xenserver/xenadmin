@@ -2692,12 +2692,7 @@ namespace XenAdmin
 
             if (eventsPage.Visible)
             {
-                // Unmark node if user has now seen error in log tab
-                if (SelectionManager.Selection.FirstAsXenObject != null)
-                    SelectionManager.Selection.FirstAsXenObject.InError = false;
-
                 eventsPage.RefreshDisplayedEvents();
-                RequestRefreshTreeView();
             }
 
             loggedInLabel1.Connection = null;
