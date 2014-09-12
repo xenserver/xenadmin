@@ -434,16 +434,6 @@ namespace XenAdmin
             {
                 if (meddlingAction == null)
                     SetStatusBar(Properties.Resources._000_error_h32bit_16, action.Exception.Message);
-
-                IXenObject model =
-                        (IXenObject)action.VM ??
-                        (IXenObject)action.Host ??
-                        (IXenObject)action.Pool ??
-                        (IXenObject)action.SR;
-                if (model != null)
-                    model.InError = true;
-
-                RequestRefreshTreeView();
             }
             else if (meddlingAction == null)
             {
@@ -2692,12 +2682,7 @@ namespace XenAdmin
 
             if (eventsPage.Visible)
             {
-                // Unmark node if user has now seen error in log tab
-                if (SelectionManager.Selection.FirstAsXenObject != null)
-                    SelectionManager.Selection.FirstAsXenObject.InError = false;
-
                 eventsPage.RefreshDisplayedEvents();
-                RequestRefreshTreeView();
             }
 
             loggedInLabel1.Connection = null;

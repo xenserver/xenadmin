@@ -44,9 +44,6 @@ namespace XenAPI
 
         string Name { get; }
 
-        bool InError { get; set; }
-
-
         IXenConnection Connection { get; set; }
 
         bool Locked { get; set; }
