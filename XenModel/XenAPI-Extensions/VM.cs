@@ -450,7 +450,7 @@ namespace XenAPI
 
                 try
                 {
-                    XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@property='allow-gpu-passthrough']");
+                    XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='allow-gpu-passthrough']");
                     if (xn == null)
                         return true;
 
