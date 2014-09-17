@@ -1737,10 +1737,26 @@ namespace XenAdmin
                         }
                         else if (objectsView != null)
                         {
-                            GroupingTag gt = SelectionManager.Selection.First as GroupingTag
-                                             ?? SelectionManager.Selection.GroupAncestor;
+                            GroupingTag gt = null;
 
-                            SearchPage.Search = Search.SearchForNonVappGroup(gt.Grouping, gt.Parent, gt.Group);
+                            if (SelectionManager.Selection.Count == 1)
+                            {
+                                gt = SelectionManager.Selection.First as GroupingTag
+                                    ?? SelectionManager.Selection[0].GroupAncestor;
+                            }
+                            else
+                            {
+                                gt = SelectionManager.Selection.GroupAncestor;
+                            }
+
+                            if (gt != null)
+                            {
+                                SearchPage.Search = Search.SearchForNonVappGroup(gt.Grouping, gt.Parent, gt.Group);
+                            }
+                            else
+                            {
+                                SearchPage.Search = Search.SearchForNonVappGroup(rootNodeGrouping.Grouping, rootNodeGrouping.Parent, rootNodeGrouping.Group);
+                            }
                         }
                         else if (foldersView != null)
                         {
