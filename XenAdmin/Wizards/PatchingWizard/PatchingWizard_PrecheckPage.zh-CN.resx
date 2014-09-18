@@ -295,7 +295,7 @@
     <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>需要解决发现的问题，然后才能继续操作。</value>
+    <value>需要先解决发现的问题，然后再继续操作。</value>
   </data>
   <data name="label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
