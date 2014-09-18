@@ -300,9 +300,9 @@
     <value>6</value>
   </data>
   <data name="labelCHIN.Text" xml:space="preserve">
-    <value>创建不离开 XenServer 池的网络。
-此网络可用作池中两个 VM 之间的专用连接。
-此类网络需要运行 vSwitch Controller。</value>
+    <value>创建不离开每个 XenServer 池的网络。
+此网络可用作池中的两个 VM 之间的专用连接。
+此类型的网络需要运行 vSwitch Controller。</value>
   </data>
   <data name="&gt;&gt;labelCHIN.Name" xml:space="preserve">
     <value>labelCHIN</value>

@@ -121,6 +121,9 @@
   <data name="labelRubric.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="labelRubric.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="labelRubric.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 3</value>
@@ -133,7 +136,7 @@
     <value>0</value>
   </data>
   <data name="labelRubric.Text" xml:space="preserve">
-    <value>可以通过为此 VM 分配专用图形处理单元(GPU)来改进图形性能。</value>
+    <value>可以通过将虚拟图形处理器(vGPU)分配给此 VM 来提高图形性能。</value>
   </data>
   <data name="&gt;&gt;labelRubric.Name" xml:space="preserve">
     <value>labelRubric</value>
@@ -145,271 +148,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelRubric.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="comboBoxGpus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 0</value>
-  </data>
-  <data name="comboBoxGpus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 3, 3</value>
-  </data>
-  <data name="comboBoxGpus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 20</value>
-  </data>
-  <data name="comboBoxGpus.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;comboBoxGpus.Name" xml:space="preserve">
-    <value>comboBoxGpus</value>
-  </data>
-  <data name="&gt;&gt;comboBoxGpus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;comboBoxGpus.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;comboBoxGpus.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="imgTooManyVMs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="imgTooManyVMs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 73</value>
-  </data>
-  <data name="imgTooManyVMs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
-  </data>
-  <data name="imgTooManyVMs.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="imgTooManyVMs.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;imgTooManyVMs.Name" xml:space="preserve">
-    <value>imgTooManyVMs</value>
-  </data>
-  <data name="&gt;&gt;imgTooManyVMs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;imgTooManyVMs.Parent" xml:space="preserve">
-    <value>warningsTable</value>
-  </data>
-  <data name="&gt;&gt;imgTooManyVMs.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="labelTooManyVMs.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="labelTooManyVMs.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelTooManyVMs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelTooManyVMs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 73</value>
-  </data>
-  <data name="labelTooManyVMs.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="labelTooManyVMs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>584, 29</value>
-  </data>
-  <data name="labelTooManyVMs.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="labelTooManyVMs.Text" xml:space="preserve">
-    <value>分配给此类型 GPU 的 VM 数超过可用 GPU 数。这意味着这些 VM 将无法全部同时运行。</value>
-  </data>
-  <data name="labelTooManyVMs.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;labelTooManyVMs.Name" xml:space="preserve">
-    <value>labelTooManyVMs</value>
-  </data>
-  <data name="&gt;&gt;labelTooManyVMs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelTooManyVMs.Parent" xml:space="preserve">
-    <value>warningsTable</value>
-  </data>
-  <data name="&gt;&gt;labelTooManyVMs.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="warningsTable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="warningsTable.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="imgNeedGpu.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="imgNeedGpu.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 108</value>
-  </data>
-  <data name="imgNeedGpu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
-  </data>
-  <data name="imgNeedGpu.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="imgNeedGpu.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;imgNeedGpu.Name" xml:space="preserve">
-    <value>imgNeedGpu</value>
-  </data>
-  <data name="&gt;&gt;imgNeedGpu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;imgNeedGpu.Parent" xml:space="preserve">
-    <value>warningsTable</value>
-  </data>
-  <data name="&gt;&gt;imgNeedGpu.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="imgStopVM.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="imgStopVM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 131</value>
-  </data>
-  <data name="imgStopVM.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
-  </data>
-  <data name="imgStopVM.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="imgStopVM.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;imgStopVM.Name" xml:space="preserve">
-    <value>imgStopVM</value>
-  </data>
-  <data name="&gt;&gt;imgStopVM.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;imgStopVM.Parent" xml:space="preserve">
-    <value>warningsTable</value>
-  </data>
-  <data name="&gt;&gt;imgStopVM.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="labelStopVM.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="labelStopVM.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelStopVM.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelStopVM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 131</value>
-  </data>
-  <data name="labelStopVM.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="labelStopVM.Size" type="System.Drawing.Size, System.Drawing">
-    <value>584, 17</value>
-  </data>
-  <data name="labelStopVM.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="labelStopVM.Text" xml:space="preserve">
-    <value>只有关闭 VM 后，才能更改 GPU。</value>
-  </data>
-  <data name="labelStopVM.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;labelStopVM.Name" xml:space="preserve">
-    <value>labelStopVM</value>
-  </data>
-  <data name="&gt;&gt;labelStopVM.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelStopVM.Parent" xml:space="preserve">
-    <value>warningsTable</value>
-  </data>
-  <data name="&gt;&gt;labelStopVM.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="labelNeedGpu.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="labelNeedGpu.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelNeedGpu.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelNeedGpu.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 108</value>
-  </data>
-  <data name="labelNeedGpu.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="labelNeedGpu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>584, 17</value>
-  </data>
-  <data name="labelNeedGpu.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="labelNeedGpu.Text" xml:space="preserve">
-    <value>如果在下次启动 VM 时没有正确类型的可用 GPU，VM 将无法启动。</value>
-  </data>
-  <data name="labelNeedGpu.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;labelNeedGpu.Name" xml:space="preserve">
-    <value>labelNeedGpu</value>
-  </data>
-  <data name="&gt;&gt;labelNeedGpu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelNeedGpu.Parent" xml:space="preserve">
-    <value>warningsTable</value>
-  </data>
-  <data name="&gt;&gt;labelNeedGpu.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="labelRDP.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="labelRDP.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelRDP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 3</value>
-  </data>
-  <data name="labelRDP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="labelRDP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>584, 29</value>
-  </data>
-  <data name="labelRDP.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="labelRDP.Text" xml:space="preserve">
-    <value>进行此项更改前，必须确保可以通过远程桌面连接 VM。默认(VNC)桌面不适用于专用 GPU，因此除非通过远程桌面进行连接，否则将无法连接 VM。</value>
-  </data>
-  <data name="labelRDP.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;labelRDP.Name" xml:space="preserve">
-    <value>labelRDP</value>
-  </data>
-  <data name="&gt;&gt;labelRDP.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelRDP.Parent" xml:space="preserve">
-    <value>warningsTable</value>
-  </data>
-  <data name="&gt;&gt;labelRDP.ZOrder" xml:space="preserve">
-    <value>6</value>
   </data>
   <data name="imgRDP.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -438,6 +183,48 @@
   <data name="&gt;&gt;imgRDP.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="labelRDP.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="labelRDP.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelRDP.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelRDP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 3</value>
+  </data>
+  <data name="labelRDP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 10</value>
+  </data>
+  <data name="labelRDP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>584, 42</value>
+  </data>
+  <data name="labelRDP.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelRDP.Text" xml:space="preserve">
+    <value>进行此项更改前，必须确保可以通过远程桌面连接 VM。默认(VNC)桌面不适用于专用 GPU，因此除非通过远程桌面进行连接，否则将无法连接 VM。</value>
+  </data>
+  <data name="labelRDP.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;labelRDP.Name" xml:space="preserve">
+    <value>labelRDP</value>
+  </data>
+  <data name="&gt;&gt;labelRDP.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelRDP.Parent" xml:space="preserve">
+    <value>warningsTable</value>
+  </data>
+  <data name="&gt;&gt;labelRDP.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="imgNeedDriver.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="imgNeedDriver.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 50</value>
   </data>
@@ -465,6 +252,9 @@
   <data name="labelNeedDriver.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="labelNeedDriver.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="labelNeedDriver.Location" type="System.Drawing.Point, System.Drawing">
     <value>25, 50</value>
   </data>
@@ -490,6 +280,204 @@
     <value>warningsTable</value>
   </data>
   <data name="&gt;&gt;labelNeedDriver.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="imgNeedGpu.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="imgNeedGpu.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 88</value>
+  </data>
+  <data name="imgNeedGpu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="imgNeedGpu.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="imgNeedGpu.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;imgNeedGpu.Name" xml:space="preserve">
+    <value>imgNeedGpu</value>
+  </data>
+  <data name="&gt;&gt;imgNeedGpu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;imgNeedGpu.Parent" xml:space="preserve">
+    <value>warningsTable</value>
+  </data>
+  <data name="&gt;&gt;imgNeedGpu.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="labelNeedGpu.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="labelNeedGpu.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelNeedGpu.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelNeedGpu.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 88</value>
+  </data>
+  <data name="labelNeedGpu.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 10</value>
+  </data>
+  <data name="labelNeedGpu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>584, 17</value>
+  </data>
+  <data name="labelNeedGpu.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="labelNeedGpu.Text" xml:space="preserve">
+    <value>如果下次启动 VM 时没有正确类型的可用 vGPU，VM 将无法启动。</value>
+  </data>
+  <data name="labelNeedGpu.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;labelNeedGpu.Name" xml:space="preserve">
+    <value>labelNeedGpu</value>
+  </data>
+  <data name="&gt;&gt;labelNeedGpu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelNeedGpu.Parent" xml:space="preserve">
+    <value>warningsTable</value>
+  </data>
+  <data name="&gt;&gt;labelNeedGpu.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="imgStopVM.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="imgStopVM.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 118</value>
+  </data>
+  <data name="imgStopVM.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="imgStopVM.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="imgStopVM.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;imgStopVM.Name" xml:space="preserve">
+    <value>imgStopVM</value>
+  </data>
+  <data name="&gt;&gt;imgStopVM.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;imgStopVM.Parent" xml:space="preserve">
+    <value>warningsTable</value>
+  </data>
+  <data name="&gt;&gt;imgStopVM.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="labelStopVM.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="labelStopVM.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelStopVM.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelStopVM.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 118</value>
+  </data>
+  <data name="labelStopVM.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 10</value>
+  </data>
+  <data name="labelStopVM.Size" type="System.Drawing.Size, System.Drawing">
+    <value>584, 17</value>
+  </data>
+  <data name="labelStopVM.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="labelStopVM.Text" xml:space="preserve">
+    <value>VM 关闭时只能更改 vGPU。</value>
+  </data>
+  <data name="labelStopVM.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;labelStopVM.Name" xml:space="preserve">
+    <value>labelStopVM</value>
+  </data>
+  <data name="&gt;&gt;labelStopVM.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelStopVM.Parent" xml:space="preserve">
+    <value>warningsTable</value>
+  </data>
+  <data name="&gt;&gt;labelStopVM.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="imgHA.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="imgHA.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 148</value>
+  </data>
+  <data name="imgHA.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="imgHA.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="imgHA.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;imgHA.Name" xml:space="preserve">
+    <value>imgHA</value>
+  </data>
+  <data name="&gt;&gt;imgHA.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;imgHA.Parent" xml:space="preserve">
+    <value>warningsTable</value>
+  </data>
+  <data name="&gt;&gt;imgHA.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="labelHA.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="labelHA.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelHA.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelHA.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 148</value>
+  </data>
+  <data name="labelHA.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 10</value>
+  </data>
+  <data name="labelHA.Size" type="System.Drawing.Size, System.Drawing">
+    <value>584, 17</value>
+  </data>
+  <data name="labelHA.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="labelHA.Text" xml:space="preserve">
+    <value>无法更改 vGPU，因为 VM 当前受 HA 保护。</value>
+  </data>
+  <data name="labelHA.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;labelHA.Name" xml:space="preserve">
+    <value>labelHA</value>
+  </data>
+  <data name="&gt;&gt;labelHA.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelHA.Parent" xml:space="preserve">
+    <value>warningsTable</value>
+  </data>
+  <data name="&gt;&gt;labelHA.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="warningsTable.Location" type="System.Drawing.Point, System.Drawing">
@@ -517,7 +505,7 @@
     <value>1</value>
   </data>
   <data name="warningsTable.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="imgNeedGpu" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="imgStopVM" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelTooManyVMs" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="imgTooManyVMs" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelStopVM" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelNeedGpu" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelRDP" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="imgRDP" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="imgNeedDriver" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelNeedDriver" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,22,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,33.33333,AutoSize,0,AutoSize,0,Percent,66.66666" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="imgRDP" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelRDP" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="imgNeedDriver" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelNeedDriver" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="imgNeedGpu" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelNeedGpu" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="imgStopVM" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelStopVM" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="imgHA" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelHA" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -525,8 +513,14 @@
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="labelGpuType.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="labelGpuType.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="labelGpuType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="labelGpuType.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
@@ -553,6 +547,33 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;labelGpuType.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="comboBoxGpus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="comboBoxGpus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>72, 3</value>
+  </data>
+  <data name="comboBoxGpus.MaxDropDownItems" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="comboBoxGpus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>445, 21</value>
+  </data>
+  <data name="comboBoxGpus.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;comboBoxGpus.Name" xml:space="preserve">
+    <value>comboBoxGpus</value>
+  </data>
+  <data name="&gt;&gt;comboBoxGpus.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.VgpuComboBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;comboBoxGpus.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;comboBoxGpus.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
@@ -580,7 +601,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="comboBoxGpus" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelGpuType" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelGpuType" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxGpus" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -595,6 +616,6 @@
     <value>GpuEditPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

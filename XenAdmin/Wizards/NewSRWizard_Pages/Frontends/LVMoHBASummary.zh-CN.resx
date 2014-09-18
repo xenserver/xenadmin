@@ -134,7 +134,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnDetails.HeaderText" xml:space="preserve">
-    <value>Details</value>
+    <value>详细信息</value>
   </data>
   <data name="ColumnDetails.MinimumWidth" type="System.Int32, mscorlib">
     <value>90</value>
