@@ -34,6 +34,7 @@ using XenAdmin.Core;
 using XenAdmin.TabPages;
 using System.Windows.Forms;
 using XenAdmin.Wizards;
+using XenAdmin.Wizards.NewNetworkWizard_Pages;
 
 namespace XenAdminTests
 {
@@ -55,6 +56,27 @@ namespace XenAdminTests
             {
                 return GetBaseClassField<Button>("buttonNext");
             }
+        }
+
+        public RadioButton SSPNButton
+        {
+            get
+            {
+                var page = new NetWTypeSelectWrapper(GetField<NetWTypeSelect>("pageNetworkType"));
+                return page.SSPNButton;
+            }
+        }
+    }
+
+    internal class NetWTypeSelectWrapper : TestWrapper<NetWTypeSelect>
+    {
+        public NetWTypeSelectWrapper(NetWTypeSelect item)
+            : base(item)
+        { }
+
+        public RadioButton SSPNButton
+        {
+            get { return GetField<RadioButton>("rbtnInternalNetwork"); }
         }
     }
 }
