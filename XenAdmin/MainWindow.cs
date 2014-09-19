@@ -1785,7 +1785,19 @@ namespace XenAdmin
                     }
                     else
                     {
-                        SearchPage.XenObject = null;
+                        // Infrastructure View:
+                        // If XenCenter node or a  disconnected host is selected, show the default search
+                        // Otherwise, find the top-level parent (= pool or standalone server) and show the search restricted to that
+                        // In the case of multiselect, if all the selections are within one pool (or standalone server), then show that report.
+                        // Otherwise show everything, as on the XenCenter node.
+                        var connection = SelectionManager.Selection.GetConnectionOfAllItems(); // null for cross-pool selection
+                        if (connection != null)
+                        {
+                            var pool = Helpers.GetPool(connection);
+                            SearchPage.XenObject = pool ?? (IXenObject)Helpers.GetMaster(connection); // pool or standalone server
+                        }
+                        else
+                            SearchPage.XenObject = null;
                     }
                 }
                 else if (t == TabPageHA)
