@@ -49,7 +49,7 @@ namespace XenAdminTests.TabsAndMenus
         {
         }
 
-        [Test, Timeout(60000)]
+        [Test, Timeout(120000)]
         public void AddALotOfVIFsThenRemoveThemShouldNotThrowAnException()
         {
             const int MAX_VIFS_TO_ADD = 100;
@@ -70,6 +70,7 @@ namespace XenAdminTests.TabsAndMenus
                                                                           MainWindowWrapper.NetworkPage.AddNetworkButton.PerformClick,
                                                                           w =>
                                                                               {
+                                                                                  w.SSPNButton.PerformClick();
                                                                                   w.NextButton.PerformClick();
                                                                                   w.NextButton.PerformClick();
                                                                                   w.NextButton.PerformClick();
