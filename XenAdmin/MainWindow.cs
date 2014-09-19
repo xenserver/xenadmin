@@ -1746,7 +1746,21 @@ namespace XenAdmin
                             }
                             else
                             {
-                                gt = SelectionManager.Selection.GroupAncestor;
+                                var selectedGroups = SelectionManager.Selection.Where(s => s.GroupingTag != null);
+
+                                if (selectedGroups.Count() == 1)
+                                {
+                                    var groupingTag = selectedGroups.First().GroupingTag;
+
+                                    if (SelectionManager.Selection.Where(s => s.GroupingTag == null).All(s => s.GroupAncestor == groupingTag))
+                                        gt = groupingTag;
+                                    else
+                                        gt = null;
+                                }
+                                else
+                                {
+                                    gt = SelectionManager.Selection.GroupAncestor;
+                                }
                             }
 
                             if (gt != null)
