@@ -1737,10 +1737,40 @@ namespace XenAdmin
                         }
                         else if (objectsView != null)
                         {
-                            GroupingTag gt = SelectionManager.Selection.First as GroupingTag
-                                             ?? SelectionManager.Selection.GroupAncestor;
+                            GroupingTag gt = null;
 
-                            SearchPage.Search = Search.SearchForNonVappGroup(gt.Grouping, gt.Parent, gt.Group);
+                            if (SelectionManager.Selection.Count == 1)
+                            {
+                                gt = SelectionManager.Selection.First as GroupingTag
+                                    ?? SelectionManager.Selection[0].GroupAncestor;
+                            }
+                            else
+                            {
+                                var selectedGroups = SelectionManager.Selection.Where(s => s.GroupingTag != null);
+
+                                if (selectedGroups.Count() == 1)
+                                {
+                                    var groupingTag = selectedGroups.First().GroupingTag;
+
+                                    if (SelectionManager.Selection.Where(s => s.GroupingTag == null).All(s => s.GroupAncestor == groupingTag))
+                                        gt = groupingTag;
+                                    else
+                                        gt = null;
+                                }
+                                else
+                                {
+                                    gt = SelectionManager.Selection.GroupAncestor;
+                                }
+                            }
+
+                            if (gt != null)
+                            {
+                                SearchPage.Search = Search.SearchForNonVappGroup(gt.Grouping, gt.Parent, gt.Group);
+                            }
+                            else
+                            {
+                                SearchPage.Search = Search.SearchForNonVappGroup(rootNodeGrouping.Grouping, rootNodeGrouping.Parent, rootNodeGrouping.Group);
+                            }
                         }
                         else if (foldersView != null)
                         {
