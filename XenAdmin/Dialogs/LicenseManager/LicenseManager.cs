@@ -119,25 +119,20 @@ namespace XenAdmin.Dialogs
         private void checkableDataGridView_RowUpdated(object sender, CheckableDataGridViewRowEventArgs e)
         {
             LicenseCheckableDataGridView senderGrid = sender as LicenseCheckableDataGridView;
-            if (senderGrid == null) 
+            if (senderGrid == null || e.RowIndex >= senderGrid.Rows.Count || e.RowIndex < 0)
                 return;
 
-            Program.Invoke(this, delegate
-                                     {
-                                         if (e.RowIndex >= senderGrid.Rows.Count || e.RowIndex < 0)
-                                             return;
+            LicenseDataGridViewRow lRow = senderGrid.Rows[e.RowIndex] as LicenseDataGridViewRow;
+            if (lRow == null)
+                return;
 
-                                         LicenseDataGridViewRow lRow = senderGrid.Rows[e.RowIndex] as LicenseDataGridViewRow;
-                                         if (lRow == null)
-                                             return;
+            Controller.SetStatusIcon(e.RowIndex, lRow.RowStatus);
 
-                                         Controller.SetStatusIcon(e.RowIndex, lRow.RowStatus);
+            if (senderGrid.SelectedRows.Count >= 1 && senderGrid.SelectedRows[0].Index == e.RowIndex)
+            {
+                Controller.SummariseSelectedRow(checkableDataGridView.GetCheckableRow(e.RowIndex));
+            }
 
-                                         if (senderGrid.SelectedRows.Count > 0 && senderGrid.SelectedRows[0].Index == e.RowIndex)
-                                         {
-                                             Controller.SummariseSelectedRow(checkableDataGridView.GetCheckableRow(e.RowIndex));
-                                         }
-                                     });
             if (e.RefreshGrid)
                 senderGrid.SortAndRefresh();
         }
