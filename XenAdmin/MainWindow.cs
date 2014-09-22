@@ -1737,10 +1737,45 @@ namespace XenAdmin
                         }
                         else if (objectsView != null)
                         {
-                            GroupingTag gt = SelectionManager.Selection.First as GroupingTag
-                                             ?? SelectionManager.Selection.GroupAncestor;
+                            //We are in Objects View
+                            GroupingTag gt = null;
 
-                            SearchPage.Search = Search.SearchForNonVappGroup(gt.Grouping, gt.Parent, gt.Group);
+                            if (SelectionManager.Selection.Count == 1)
+                            {
+                                gt = SelectionManager.Selection.First as GroupingTag
+                                    ?? SelectionManager.Selection[0].GroupAncestor;
+                            }
+                            else
+                            {
+                                //If multiple items have been selected we count the number of the grouping tags in the selection
+                                var selectedGroups = SelectionManager.Selection.Where(s => s.GroupingTag != null);
+
+                                //if exactly one grouping tag has been selected we show the search view for that one tag, but only if all the other items in the selection belong to this group/tag
+                                if (selectedGroups.Count() == 1)
+                                {
+                                    var groupingTag = selectedGroups.First().GroupingTag;
+
+                                    if (SelectionManager.Selection.Where(s => s.GroupingTag == null).All(s => s.GroupAncestor == groupingTag))
+                                        gt = groupingTag;
+                                    else
+                                        gt = null;
+                                }
+                                else
+                                {
+                                    gt = SelectionManager.Selection.GroupAncestor;
+                                }
+                            }
+
+                            //if there has been a grouping tag determined above we use that
+                            //if not we show the search view for the root node
+                            if (gt != null)
+                            {
+                                SearchPage.Search = Search.SearchForNonVappGroup(gt.Grouping, gt.Parent, gt.Group);
+                            }
+                            else
+                            {
+                                SearchPage.Search = Search.SearchForNonVappGroup(rootNodeGrouping.Grouping, rootNodeGrouping.Parent, rootNodeGrouping.Group);
+                            }
                         }
                         else if (foldersView != null)
                         {
@@ -1755,7 +1790,19 @@ namespace XenAdmin
                     }
                     else
                     {
-                        SearchPage.XenObject = null;
+                        // Infrastructure View:
+                        // If XenCenter node or a  disconnected host is selected, show the default search
+                        // Otherwise, find the top-level parent (= pool or standalone server) and show the search restricted to that
+                        // In the case of multiselect, if all the selections are within one pool (or standalone server), then show that report.
+                        // Otherwise show everything, as on the XenCenter node.
+                        var connection = SelectionManager.Selection.GetConnectionOfAllItems(); // null for cross-pool selection
+                        if (connection != null)
+                        {
+                            var pool = Helpers.GetPool(connection);
+                            SearchPage.XenObject = pool ?? (IXenObject)Helpers.GetMaster(connection); // pool or standalone server
+                        }
+                        else
+                            SearchPage.XenObject = null;
                     }
                 }
                 else if (t == TabPageHA)
