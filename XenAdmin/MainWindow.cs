@@ -1737,6 +1737,7 @@ namespace XenAdmin
                         }
                         else if (objectsView != null)
                         {
+                            //We are in Objects View
                             GroupingTag gt = null;
 
                             if (SelectionManager.Selection.Count == 1)
@@ -1746,8 +1747,10 @@ namespace XenAdmin
                             }
                             else
                             {
+                                //If multiple items have been selected we count the number of the grouping tags in the selection
                                 var selectedGroups = SelectionManager.Selection.Where(s => s.GroupingTag != null);
 
+                                //if exactly one grouping tag has been selected we show the search view for that one tag, but only if all the other items in the selection belong to this group/tag
                                 if (selectedGroups.Count() == 1)
                                 {
                                     var groupingTag = selectedGroups.First().GroupingTag;
@@ -1763,6 +1766,8 @@ namespace XenAdmin
                                 }
                             }
 
+                            //if there has been a grouping tag determined above we use that
+                            //if not we show the search view for the root node
                             if (gt != null)
                             {
                                 SearchPage.Search = Search.SearchForNonVappGroup(gt.Grouping, gt.Parent, gt.Group);
