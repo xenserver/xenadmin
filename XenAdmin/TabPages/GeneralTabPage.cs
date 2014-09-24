@@ -165,6 +165,10 @@ namespace XenAdmin.TabPages
                     xenObject = sr ?? value;
                     RegisterHandlers();
                     BuildList();
+
+                    if (xenObject == null)
+                        return;
+
                     List<PDSection> listPDSections = null;
                     if (_expandedSections.TryGetValue(xenObject.GetType(), out listPDSections))
                         ResetExpandState(listPDSections);
