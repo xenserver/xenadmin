@@ -93,6 +93,12 @@ namespace XenAdmin.Commands
             savedSelection = new SelectedItemCollection(_selection);
             SetSelection(new SelectedItemCollection());
         }
+
+        public override void ClearSelection()
+        {
+            savedSelection = null;
+            SetSelection(new SelectedItemCollection());
+        }
         
         public override void RestoreSavedSelection() 
         {

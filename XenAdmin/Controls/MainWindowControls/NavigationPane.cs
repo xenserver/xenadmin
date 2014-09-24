@@ -285,7 +285,10 @@ namespace XenAdmin.Controls.MainWindowControls
             }
             else
             {
-                SelectionManager.RestoreSavedSelection();
+                if (currentMode == NavigationMode.SavedSearch)
+                    SelectionManager.ClearSelection();
+                else
+                    SelectionManager.RestoreSavedSelection();
 
                 //show the navigationView first and then hide the notificationsView
                 //to avoid instantaneous appearance of empty panels

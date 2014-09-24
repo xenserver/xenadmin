@@ -110,6 +110,7 @@ namespace XenAdmin.Commands
         public event EventHandler SelectionChanged;
 
         public abstract void SaveAndClearSelection();
+        public abstract void ClearSelection();
         public abstract void RestoreSavedSelection();
 
         #region IDisposable Members
