@@ -42,6 +42,11 @@ namespace XenAdmin.Diagnostics.Problems
         private AsyncAction solutionAction;
         private readonly Check _check;
 
+        public virtual bool IsFixable
+        {
+            get { return true; }
+        }
+
         private void SolutionAction_Completed(ActionBase sender)
         {
             SolutionActionCompleted = true;

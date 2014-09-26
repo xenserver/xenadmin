@@ -46,6 +46,7 @@ using XenAdmin.Dialogs;
 using XenAdmin.Properties;
 using XenAPI;
 using XenAdmin.Diagnostics.Problems.VMProblem;
+using System.Linq;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -156,18 +157,28 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (!e.Cancelled)
                 OnPageUpdated();
             progressBar1.Value = 100;
-            bool problemsFound = false;
+
+            bool showResolveAllButton = false;
             foreach (PreCheckGridRow row in dataGridView1.Rows)
             {
                 PreCheckHostRow hostRow = row as PreCheckHostRow;
                 //CA-65508: if the problem cannot be solved immediately there's no point in enabling the Resolve All button
-                if (hostRow != null && hostRow.IsProblem && !string.IsNullOrEmpty(hostRow.Solution))
+                //gabor: I have changed the code below to enable the Resolve All button only if there is at least one problem and all the problems have solution/fix
+                if (hostRow != null && hostRow.IsProblem)
                 {
-                    problemsFound = true;
-                    break;
+                    if (!hostRow.IsFixable)
+                    {
+                        showResolveAllButton = false;
+                        break;
+                    }
+                    else
+                    {
+                        showResolveAllButton = true;
+                    }
                 }
             }
-            buttonResolveAll.Enabled = problemsFound;
+
+            buttonResolveAll.Enabled = showResolveAllButton;
             buttonReCheckProblems.Enabled = true;
         }
 
@@ -442,6 +453,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                 UpdateRowFields();
             }
 
+            public bool IsFixable 
+            {
+                get
+                {
+                    return Problem != null && Problem.IsFixable && !string.IsNullOrEmpty(this.Solution);
+                }
+            }
+
             private void UpdateRowFields()
             {
                 _iconCell.Value = Problem == null
@@ -463,6 +482,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (Problem is WarningWithInformationUrl)
                     _solutionCell.Value = (Problem as WarningWithInformationUrl).LinkText;
 
+                if (Problem is ProblemWithInformationUrl)
+                    _solutionCell.Value = (Problem as ProblemWithInformationUrl).LinkText;
+
                 _solutionCell.Style.Font = new Font(Program.DefaultFont, FontStyle.Underline);
                 _solutionCell.Style.ForeColor = Color.Blue;
             }
@@ -477,7 +499,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             public string Solution
             {
-                get { return (string) _solutionCell.Value; }
+                get { return (string)_solutionCell.Value; }
             }
             
             public bool IsProblem
@@ -538,7 +560,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (preCheckHostRow.Problem is WarningWithInformationUrl)
                     (preCheckHostRow.Problem as WarningWithInformationUrl).LaunchUrlInBrowser();
-
+                else if (preCheckHostRow.Problem is ProblemWithInformationUrl)
+                    (preCheckHostRow.Problem as ProblemWithInformationUrl).LaunchUrlInBrowser();
+                    
                 else if (!cancelled)
                     new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Information,
                                                                         string.Format(Messages.PATCHING_WIZARD_SOLVE_MANUALLY, preCheckHostRow.Problem.Description).Replace("\\n", "\n"),

@@ -31,15 +31,23 @@
 
 using XenAdmin.Diagnostics.Checks;
 using XenAPI;
+using System;
 
 
 namespace XenAdmin.Diagnostics.Problems.SRProblem
 {
-    class UnsupportedStorageLinkSrIsPresentProblem : SRProblem
+    class UnsupportedStorageLinkSrIsPresentProblem : ProblemWithInformationUrl
     {
-        public UnsupportedStorageLinkSrIsPresentProblem(Check check, SR sr)
-            : base(check, sr)
+        public UnsupportedStorageLinkSrIsPresentProblem(Check check)
+        : base(check)
         {
+        }
+
+        public override Uri UriToLaunch {
+            get
+            {
+                return new Uri(InvisibleMessages.ISL_DEPRECATION_URL);
+            }
         }
 
         public override string Description
@@ -56,6 +64,14 @@ namespace XenAdmin.Diagnostics.Problems.SRProblem
             {
                 return Messages.PROBLEM_UNSUPPORTED_STORAGELINK_SR_HELP;
             }
+        }
+
+        public override string Title 
+        { 
+            get 
+            {
+                return Messages.PROBLEM_UNSUPPORTED_STORAGELINK_SR;
+            } 
         }
     }
 }
