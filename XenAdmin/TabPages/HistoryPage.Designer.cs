@@ -47,13 +47,13 @@ namespace XenAdmin.TabPages
             this.toolStripLabelFiltersOnOff = new System.Windows.Forms.ToolStripLabel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridView = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.columnExpander = new System.Windows.Forms.DataGridViewImageColumn();
             this.columnStatus = new System.Windows.Forms.DataGridViewImageColumn();
             this.columnMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnActions = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.toolStripTop.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -155,6 +155,13 @@ namespace XenAdmin.TabPages
             this.dataGridView.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_ColumnHeaderMouseClick);
             this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView_SelectionChanged);
             // 
+            // tableLayoutPanel2
+            // 
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.BackColor = System.Drawing.Color.Gainsboro;
+            this.tableLayoutPanel2.Controls.Add(this.toolStripTop, 0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            // 
             // columnExpander
             // 
             this.columnExpander.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -205,13 +212,6 @@ namespace XenAdmin.TabPages
             this.columnActions.Name = "columnActions";
             this.columnActions.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // tableLayoutPanel2
-            // 
-            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.BackColor = System.Drawing.Color.Gainsboro;
-            this.tableLayoutPanel2.Controls.Add(this.toolStripTop, 0, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            // 
             // HistoryPage
             // 
             resources.ApplyResources(this, "$this");
@@ -238,17 +238,17 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.ToolStripMenuItem tsmiDismissAll;
         private System.Windows.Forms.ToolStripMenuItem tsmiDismissSelected;
         private XenAdmin.Controls.DataGridViewEx.DataGridViewEx dataGridView;
-        private System.Windows.Forms.DataGridViewImageColumn columnExpander;
-        private System.Windows.Forms.DataGridViewImageColumn columnStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnMessage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnActions;
         private XenAdmin.Controls.FilterStatusToolStripDropDownButton toolStripDdbFilterStatus;
         private XenAdmin.Controls.FilterLocationToolStripDropDownButton toolStripDdbFilterLocation;
         private XenAdmin.Controls.FilterDatesToolStripDropDownButton toolStripDdbFilterDates;
         private System.Windows.Forms.ToolStripLabel toolStripLabelFiltersOnOff;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.DataGridViewImageColumn columnExpander;
+        private System.Windows.Forms.DataGridViewImageColumn columnStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnMessage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnActions;
     }
 }
