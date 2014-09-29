@@ -295,11 +295,12 @@ namespace XenAdmin.Controls.MainWindowControls
                 navigationView.CurrentSearch = Search;
                 navigationView.NavigationMode = currentMode;
                 navigationView.ResetSeachBox();
-                navigationView.RequestRefreshTreeView();
+                navigationView.RefreshTreeView();
                 navigationView.FocusTreeView();
 
                 if (navigationView.SelectionManager.Selection.Count < 1)
                     navigationView.SelectObject(null, false);
+                navigationView.ForceTreeViewSelectionsChanged();
             }
 
             if (NavigationModeChanged != null)

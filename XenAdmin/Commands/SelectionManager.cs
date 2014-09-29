@@ -43,6 +43,7 @@ namespace XenAdmin.Commands
     {
         private SelectedItemCollection _selection = new SelectedItemCollection();
         private SelectedItemCollection savedSelection = null;
+        private bool saved = false;
 
         /// <summary>
         /// Sets the main selection for XenCenter.
@@ -52,17 +53,22 @@ namespace XenAdmin.Commands
         {
             Util.ThrowIfParameterNull(selection, "selection");
 
+            int count = 0;
             foreach (SelectedItem item in selection)
             {
                 if (item == null)
-                {
                     throw new ArgumentException("Null SelectedItem found.", "selection");
-                }
+                count++;
             }
 
-            _selection = new SelectedItemCollection(selection);
-
-            OnSelectionChanged(EventArgs.Empty);
+            if (saved &&  // We have a saved selection: update it instead (CA-147401)
+                count != 0)   // although if the new selection is empty, we're just refreshing the view: don't save that
+                savedSelection = new SelectedItemCollection(selection);
+            else
+            {
+                _selection = new SelectedItemCollection(selection);
+                OnSelectionChanged(EventArgs.Empty);
+            }
         }
 
         /// <summary>
@@ -90,15 +96,17 @@ namespace XenAdmin.Commands
 
         public override void SaveAndClearSelection()
         {
-            savedSelection = new SelectedItemCollection(_selection);
+            savedSelection = _selection;
             SetSelection(new SelectedItemCollection());
+            saved = true;
         }
         
         public override void RestoreSavedSelection() 
         {
-            if (savedSelection != null)
+            if (saved)
             {
-                SetSelection(new SelectedItemCollection(savedSelection));
+                saved = false;
+                SetSelection(savedSelection);
                 savedSelection = null;
             }
         }

@@ -455,7 +455,7 @@ namespace XenAdmin.Controls
         /// <summary>
         /// Forces the SelectionsChanged event to fire.
         /// </summary>
-        protected void ForceSelectionsChanged()
+        public void ForceSelectionsChanged()
         {
             EventHandler handler = SelectionsChanged;
 

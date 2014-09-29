@@ -306,6 +306,11 @@ namespace XenAdmin.Controls.MainWindowControls
             treeView.Focus();
         }
 
+        public void ForceTreeViewSelectionsChanged()
+        {
+            treeView.ForceSelectionsChanged();
+        }
+
         public void RequestRefreshTreeView()
         {
             Program.BeginInvoke(this, treeViewUpdateManager.RequestUpdate);
@@ -335,7 +340,7 @@ namespace XenAdmin.Controls.MainWindowControls
                 TreeViewRefreshResumed();
         }
 
-        private void RefreshTreeView()
+        public void RefreshTreeView()
         {
             if (Disposing || IsDisposed || Program.Exiting)
                 return;
