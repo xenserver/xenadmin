@@ -521,7 +521,7 @@ namespace XenAdmin.Dialogs
 
         public void SelectPoolGpuEditPage()
         {
-            SelectPage(GpuEditPage);
+            SelectPage(PoolGpuEditPage);
         }
 
         public void SelectStorageLinkPage()
