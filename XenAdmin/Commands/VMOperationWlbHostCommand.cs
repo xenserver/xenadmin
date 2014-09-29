@@ -57,7 +57,9 @@ namespace XenAdmin.Commands
 
             _host = host;
             _menuText = _host.Name.EscapeAmpersands();
-            _secondImage = Resources._000_host_0_star;
+            
+            //Default or failure case, there is no score/star rating actually, just don't display star
+            _secondImage = null;
             _menuImage = Resources._000_ServerDisconnected_h32bit_16;
             _recommendation = recommendation;
 
