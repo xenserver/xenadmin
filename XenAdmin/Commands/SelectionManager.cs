@@ -51,6 +51,7 @@ namespace XenAdmin.Commands
         /// <param name="selection">The selection.</param>
         public void SetSelection(IEnumerable<SelectedItem> selection)
         {
+            Program.AssertOnEventThread();
             Util.ThrowIfParameterNull(selection, "selection");
 
             int count = 0;
@@ -96,6 +97,7 @@ namespace XenAdmin.Commands
 
         public override void SaveAndClearSelection()
         {
+            Program.AssertOnEventThread();
             savedSelection = _selection;
             SetSelection(new SelectedItemCollection());
             saved = true;
@@ -103,6 +105,7 @@ namespace XenAdmin.Commands
         
         public override void RestoreSavedSelection() 
         {
+            Program.AssertOnEventThread();
             if (saved)
             {
                 saved = false;
