@@ -145,7 +145,7 @@
     <value>97, 23</value>
   </data>
   <data name="toolStripDdbFilterLocation.Text" xml:space="preserve">
-    <value>Filter by &amp;Server</value>
+    <value>Filter by S&amp;erver</value>
   </data>
   <data name="toolStripDdbFilterDates.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
