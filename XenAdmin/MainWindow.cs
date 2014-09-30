@@ -2609,7 +2609,7 @@ namespace XenAdmin
         /// </summary>
         private void UpdateHeader()
         {
-            if (!TheTabControl.Visible)
+            if (navigationPane.currentMode == NavigationPane.NavigationMode.Notifications)
                 return;
 
             if (SearchMode && SearchPage.Search != null)

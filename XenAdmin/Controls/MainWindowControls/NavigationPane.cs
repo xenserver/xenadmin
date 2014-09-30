@@ -52,7 +52,12 @@ namespace XenAdmin.Controls.MainWindowControls
             SavedSearch, Notifications
         }
 
-        private NavigationMode currentMode;
+        public NavigationMode currentMode
+        {
+            get;
+            private set;
+        }
+
         private NotificationsSubMode lastNotificationsMode = NotificationsSubMode.Alerts;
 
         #region Events
