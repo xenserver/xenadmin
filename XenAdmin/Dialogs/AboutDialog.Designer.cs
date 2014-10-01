@@ -33,7 +33,6 @@ namespace XenAdmin.Dialogs
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.VersionLabel = new System.Windows.Forms.Label();
             this.OkButton = new System.Windows.Forms.Button();
-            this.labelMarathonBlurb = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -68,11 +67,6 @@ namespace XenAdmin.Dialogs
             this.OkButton.UseVisualStyleBackColor = true;
             this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
-            // labelMarathonBlurb
-            // 
-            resources.ApplyResources(this.labelMarathonBlurb, "labelMarathonBlurb");
-            this.labelMarathonBlurb.Name = "labelMarathonBlurb";
-            // 
             // linkLabel1
             // 
             resources.ApplyResources(this.linkLabel1, "linkLabel1");
@@ -87,7 +81,6 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.Controls.Add(this.OkButton, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.linkLabel1, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.labelMarathonBlurb, 0, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // AboutDialog
@@ -115,7 +108,6 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label VersionLabel;
         private System.Windows.Forms.Button OkButton;
-        private System.Windows.Forms.Label labelMarathonBlurb;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }

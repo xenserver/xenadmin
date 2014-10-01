@@ -322,13 +322,13 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButtonDismiss;
         private System.Windows.Forms.ToolStripMenuItem tsmiDismissAll;
         private System.Windows.Forms.ToolStripMenuItem tsmiDismissSelected;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.DataGridViewImageColumn ColumnExpand;
         private System.Windows.Forms.DataGridViewImageColumn ColumnSeverity;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnMessage;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnActions;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
     }
 }

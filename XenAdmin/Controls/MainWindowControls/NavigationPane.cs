@@ -300,6 +300,7 @@ namespace XenAdmin.Controls.MainWindowControls
 
                 if (navigationView.SelectionManager.Selection.Count < 1)
                     navigationView.SelectObject(null, false);
+                navigationView.ForceTreeViewSelectionsChanged();
             }
 
             if (NavigationModeChanged != null)
