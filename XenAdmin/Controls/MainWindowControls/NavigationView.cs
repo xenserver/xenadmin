@@ -340,6 +340,7 @@ namespace XenAdmin.Controls.MainWindowControls
                 TreeViewRefreshResumed();
         }
 
+        // Normally you should call RequestRefreshTreeView() instead of this function
         public void RefreshTreeView()
         {
             if (Disposing || IsDisposed || Program.Exiting)
