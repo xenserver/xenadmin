@@ -63,7 +63,7 @@ namespace XenAdmin.Commands
             }
 
             if (saved &&  // We have a saved selection: update it instead (CA-147401)
-                count != 0)   // although if the new selection is empty, we're just refreshing the view: don't save that
+                count != 0)   // although if the new selection is empty, we're just refreshing the view via RefreshSelection(): don't save that
                 savedSelection = new SelectedItemCollection(selection);
             else
             {
