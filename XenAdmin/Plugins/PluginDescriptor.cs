@@ -214,7 +214,12 @@ namespace XenAdmin.Plugins
             {
                 if (File.Exists(resources))
                 {
-                    return new ResourceManager(Name, Assembly.LoadFile(resources));
+                    // We load this "unsafely" because of CA-144950: the plugin is almost certainly
+                    // downloaded from the web and won't install without this. I considered adding
+                    // a confirmation step, but as all we do with the resources is to extract some
+                    // strings, there is no security implication. (This doesn't affect security
+                    // confirmations on programs called by the plugin).
+                    return new ResourceManager(Name, Assembly.UnsafeLoadFrom(resources));
                 }
             }
             catch (Exception e)

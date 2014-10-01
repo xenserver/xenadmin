@@ -152,6 +152,9 @@ namespace XenAdmin.TabPages
         {
             set
             {
+                if (value == null)
+                    return;
+
                 SetupAnStartLicenseStatus(value);
                 if (xenObject != value)
                 {

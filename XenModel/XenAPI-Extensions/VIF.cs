@@ -55,6 +55,7 @@ namespace XenAPI
                     // [["0/ip", <IPv4 address>], ["0/ipv6/0", <IPv6 address>], ["0/ipv6/1", <IPv6 address>]]
                     List<string> addresses = (from network in vmGuestMetrics.networks
                                               where network.Key.StartsWith(String.Format("{0}/ip", this.device))
+                                              orderby network.Key
                                               select network.Value).ToList();
 
                     if (addresses.Count > 0)

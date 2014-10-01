@@ -271,7 +271,7 @@ namespace XenAdmin.XenSearch
 
         public int CompareTo(Search other)
         {
-            int i = -DefaultSearch.CompareTo(other.DefaultSearch);
+            int i = DefaultSearch.CompareTo(other.DefaultSearch);
             if (i == 0)
                 return Name.CompareTo(other.Name);
 

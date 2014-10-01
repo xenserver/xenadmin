@@ -9444,13 +9444,13 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
     <value>Search...</value>
   </data>
   <data name="SEARCH_TITLE_HOST" xml:space="preserve">
-    <value>{0}: All Servers, VMs, Custom Templates &amp; Remote SRs</value>
+    <value>{0}: Overview</value>
   </data>
   <data name="SEARCH_TITLE_OVERVIEW" xml:space="preserve">
     <value>All Servers, VMs, Custom Templates &amp; Remote SRs</value>
   </data>
   <data name="SEARCH_TITLE_POOL" xml:space="preserve">
-    <value>{0}: All Servers, VMs, Custom Templates &amp; Remote SRs</value>
+    <value>{0}: Overview</value>
   </data>
   <data name="SECRET_ACCESS_KEY_LABLE" xml:space="preserve">
     <value>&amp;Secret access key:</value>

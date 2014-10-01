@@ -51,6 +51,8 @@ namespace XenAdmin.Actions
         private readonly string _licenseServerAddress;
         private readonly string _licenseServerPort;
 
+        public List<LicenseFailure> LicenseFailures { get; private set; }
+
         protected readonly Action<List<LicenseFailure>, string> DoOnLicensingFailure;
 
         /// <summary>
@@ -65,6 +67,7 @@ namespace XenAdmin.Actions
             Action<List<LicenseFailure>, string> DoOnLicensingFailure)
             : base(null, Messages.LICENSE_UPDATING_LICENSES)
         {
+            LicenseFailures = new List<LicenseFailure>();
             Util.ThrowIfEnumerableParameterNullOrEmpty(xos, "xenobjects");
 
             _edition = edition;
@@ -90,8 +93,6 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            List<LicenseFailure> licenseFailures = new List<LicenseFailure>();
-
             // PR-1102: hosts that have been updated, plus the previous edition information - this data will be sent to the licensing server
             Dictionary<Host, LicensingHelper.LicenseDataStruct> updatedHosts = new Dictionary<Host, LicensingHelper.LicenseDataStruct>();
 
@@ -219,7 +220,7 @@ namespace XenAdmin.Actions
                         }
                     }
 
-                    licenseFailures.Add(new LicenseFailure(host, alertText ?? e.Message));
+                    LicenseFailures.Add(new LicenseFailure(host, alertText ?? e.Message));
                     
                     if (pool != null)
                         pool.Connection.Cache.Hosts.ToList().ForEach(h => SetLicenseServer(h, previousLicenseServerAddress, previousLicenseServerPort));
@@ -238,12 +239,12 @@ namespace XenAdmin.Actions
                 LicensingHelper.SendLicenseEditionData(updatedHosts, Host.GetEditionText(_edition));
             }
 
-            if (licenseFailures.Count > 0)
+            if (LicenseFailures.Count > 0)
             {
-                string exceptionText = licenseFailures.Count == 1 ? string.Format(Messages.LICENSE_ERROR_1, licenseFailures[0].Host.Name) : string.Format(Messages.LICENSE_ERROR_MANY, licenseFailures.Count, new List<IXenObject>(xos).Count);
+                string exceptionText = LicenseFailures.Count == 1 ? string.Format(Messages.LICENSE_ERROR_1, LicenseFailures[0].Host.Name) : string.Format(Messages.LICENSE_ERROR_MANY, LicenseFailures.Count, new List<IXenObject>(xos).Count);
 
                 if (DoOnLicensingFailure != null)
-                    DoOnLicensingFailure(licenseFailures, exceptionText);
+                    DoOnLicensingFailure(LicenseFailures, exceptionText);
                 throw new InvalidOperationException(exceptionText);
             }
         }

@@ -238,17 +238,17 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.ToolStripMenuItem tsmiDismissAll;
         private System.Windows.Forms.ToolStripMenuItem tsmiDismissSelected;
         private XenAdmin.Controls.DataGridViewEx.DataGridViewEx dataGridView;
-        private System.Windows.Forms.DataGridViewImageColumn columnExpander;
-        private System.Windows.Forms.DataGridViewImageColumn columnStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnMessage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnActions;
         private XenAdmin.Controls.FilterStatusToolStripDropDownButton toolStripDdbFilterStatus;
         private XenAdmin.Controls.FilterLocationToolStripDropDownButton toolStripDdbFilterLocation;
         private XenAdmin.Controls.FilterDatesToolStripDropDownButton toolStripDdbFilterDates;
         private System.Windows.Forms.ToolStripLabel toolStripLabelFiltersOnOff;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.DataGridViewImageColumn columnExpander;
+        private System.Windows.Forms.DataGridViewImageColumn columnStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnMessage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnActions;
     }
 }

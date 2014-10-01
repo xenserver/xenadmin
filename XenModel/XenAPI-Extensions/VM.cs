@@ -57,7 +57,7 @@ namespace XenAPI
         // or different XenServer versions.
         private const int DEFAULT_NUM_VCPUS_ALLOWED = 16;
         private const int DEFAULT_NUM_VIFS_ALLOWED = 7;
-        private const int DEFAULT_NUM_VBDS_ALLOWED = 7;
+        private const int DEFAULT_NUM_VBDS_ALLOWED = 16;
         public const long DEFAULT_MEM_ALLOWED = 128 * Util.BINARY_GIGA;
         public const int DEFAULT_CORES_PER_SOCKET = 1;
         private SnapshotsView _snapshotView = SnapshotsView.None;
@@ -417,6 +417,51 @@ namespace XenAPI
         public bool IsHVM
         {
             get { return HVM_boot_policy != ""; }
+        }
+
+        public bool HasRDP
+        {
+            get
+            {
+                var metrics = Connection.Resolve(this.guest_metrics);
+                if (metrics == null)
+                    return false;
+
+                return 0 != IntKey(metrics.other, "feature-ts", 0);
+            }
+        }
+
+        /// <summary>Returns true if
+        /// 1) the guest is HVM and
+        ///   2a) the allow-gpu-passthrough restriction is absent or
+        ///   2b) the allow-gpu-passthrough restriction is non-zero
+        ///</summary>
+        public bool CanHaveVGpu
+        {
+            get
+            {
+                if (!IsHVM)
+                    return false;
+
+                XmlDocument xd = GetRecommendations();
+
+                if (xd == null)
+                    return true;
+
+                try
+                {
+                    XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='allow-gpu-passthrough']");
+                    if (xn == null)
+                        return true;
+
+                    return 
+                        Convert.ToInt32(xn.Attributes["value"].Value) != 0;
+                }
+                catch
+                {
+                    return true;
+                }
+            }
         }
 
         void set_other_config(string key, string value)

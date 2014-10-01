@@ -278,11 +278,15 @@ namespace XenAdmin.Controls.MainWindowControls
         {
             if (currentMode == NavigationMode.Notifications)
             {
+                SelectionManager.SaveAndClearSelection();
+
                 //restore the last selected view
                 SwitchToNotificationsView(lastNotificationsMode);
             }
             else
             {
+                SelectionManager.RestoreSavedSelection();
+
                 //show the navigationView first and then hide the notificationsView
                 //to avoid instantaneous appearance of empty panels
                 navigationView.Visible = true;
@@ -296,6 +300,7 @@ namespace XenAdmin.Controls.MainWindowControls
 
                 if (navigationView.SelectionManager.Selection.Count < 1)
                     navigationView.SelectObject(null, false);
+                navigationView.ForceTreeViewSelectionsChanged();
             }
 
             if (NavigationModeChanged != null)
