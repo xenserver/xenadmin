@@ -52,7 +52,7 @@ namespace XenAdminTests.ArchiveTests
 
             foreach (KeyValuePair<ArchiveFactory.Type, Type> pair in validIterators)
             {
-                string target = Path.Combine(Program.AssemblyDir, @"TestResources\emptyfile.bz2");
+                string target = Path.Combine(Directory.GetCurrentDirectory(), @"TestResources\emptyfile.bz2");
                 using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(target)))
                 {
                     ArchiveIterator providedStream = ArchiveFactory.Reader(pair.Key, ms);

@@ -48,9 +48,6 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Management" />
-    <Reference Include="System.Security" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -199,7 +196,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties Reset="1" AssemblyVersion="1" AssemblyFileVersion="1" StartDate="20090814" />
+      <UserProperties StartDate="20090814" AssemblyFileVersion="1" AssemblyVersion="1" Reset="1" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

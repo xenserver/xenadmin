@@ -45,7 +45,6 @@ using System.Threading;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Xml.Schema;
-using System.Data;
 using System.Text;
 
 namespace XenOvf.Definitions

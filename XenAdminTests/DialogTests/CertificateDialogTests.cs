@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using NUnit.Framework;
@@ -107,7 +108,7 @@ namespace XenAdminTests.DialogTests.boston.CertificateDialogTests
         {
             get
             {
-                string certFileName = Program.AssemblyDir + @"\TestResources\TestDevCertificate.cer";
+                string certFileName = Path.Combine(Directory.GetCurrentDirectory(), "TestResources", "TestDevCertificate.cer");
                 return X509Certificate.CreateFromCertFile(certFileName); 
             }
         }

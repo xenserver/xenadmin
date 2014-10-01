@@ -36,6 +36,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace XenAdmin.Core
@@ -139,6 +140,7 @@ namespace XenAdmin.Core
         public static Win32Window GetWindowWithText(string text, Predicate<Win32Window> match)
         {
             Util.ThrowIfParameterNull(match, "match");
+            Thread.Sleep(100);
             foreach (Win32Window window in TopLevelWindows)
             {
                 if (window.Text == text && match(window))
