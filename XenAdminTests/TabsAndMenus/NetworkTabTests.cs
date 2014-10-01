@@ -49,7 +49,7 @@ namespace XenAdminTests.TabsAndMenus
         {
         }
 
-        [Test, Timeout(100000)]
+        [Test, Timeout(120000)]
         public void AddALotOfVIFsThenRemoveThemShouldNotThrowAnException()
         {
             const int MAX_VIFS_TO_ADD = 100;
