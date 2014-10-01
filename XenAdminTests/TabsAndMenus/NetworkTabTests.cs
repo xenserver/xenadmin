@@ -70,6 +70,7 @@ namespace XenAdminTests.TabsAndMenus
                                                                           MainWindowWrapper.NetworkPage.AddNetworkButton.PerformClick,
                                                                           w =>
                                                                               {
+                                                                                  w.SSPNButton.PerformClick();
                                                                                   w.NextButton.PerformClick();
                                                                                   w.NextButton.PerformClick();
                                                                                   w.NextButton.PerformClick();

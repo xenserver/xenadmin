@@ -34,6 +34,10 @@ namespace XenAdmin.SettingsPanels
             this.decentGroupBox1 = new XenAdmin.Controls.DecentGroupBox();
             this.label1DiskWrite = new System.Windows.Forms.Label();
             this.labelDiskRead = new System.Windows.Forms.Label();
+            //CA-134554 - Hide Disk Read/Write until the backend server side is ready
+            this.label1DiskWrite.Visible = false;
+            this.labelDiskRead.Visible = false;
+
             this.labelNetworkWrite = new System.Windows.Forms.Label();
             this.labelNetworkRead = new System.Windows.Forms.Label();
             this.labelFreeMemory = new System.Windows.Forms.Label();

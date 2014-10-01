@@ -306,6 +306,11 @@ namespace XenAdmin.Controls.MainWindowControls
             treeView.Focus();
         }
 
+        public void ForceTreeViewSelectionsChanged()
+        {
+            treeView.ForceSelectionsChanged();
+        }
+
         public void RequestRefreshTreeView()
         {
             Program.BeginInvoke(this, treeViewUpdateManager.RequestUpdate);

@@ -71,17 +71,25 @@ namespace XenAdmin.Commands
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
-            ApplyLicenseEditionAction action = new ApplyLicenseEditionAction(xos, _edition, _licenseServerAddress, _licenseServerPort, ShowLicensingFailureDialog);
+            ApplyLicenseEditionAction action = new ApplyLicenseEditionAction(xos, _edition, _licenseServerAddress, _licenseServerPort, null);
             ActionProgressDialog actionProgress = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
 
             // close dialog even when there's an error as this action shows its own error dialog box.
-            action.Completed += s => Program.Invoke(Program.MainWindow, () =>
-            {
-                Failure f = action.Exception as Failure;
-                if (f != null && f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED_FRIENDLY)
-                    return;
-                actionProgress.Close();
-            });
+            action.Completed += s =>
+                                    {
+                                        Program.Invoke(Program.MainWindow, () =>
+                                        {
+                                            Failure f = action.Exception as Failure;
+                                            if (f != null && f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED_FRIENDLY)
+                                                return;
+                                            actionProgress.Close();
+                                        });
+
+                                        if (action.Exception != null)
+                                        {
+                                            ShowLicensingFailureDialog(action.LicenseFailures, action.Exception.Message, Parent);
+                                        }
+                                    };
 
             actionProgress.ShowDialog(Parent);
 
@@ -93,29 +101,34 @@ namespace XenAdmin.Commands
 
         public static void ShowLicensingFailureDialog(List<LicenseFailure> licenseFailures, string exceptionMessage)
         {
+            ShowLicensingFailureDialog(licenseFailures, exceptionMessage, Program.MainWindow);
+        }
+
+        public static void ShowLicensingFailureDialog(List<LicenseFailure> licenseFailures, string exceptionMessage, Control parent)
+        {
             Debug.Assert(licenseFailures.Count > 0);
 
-           
-            if (licenseFailures.Count == 1)
-            {
-                Program.Invoke(Program.MainWindow, () => new ThreeButtonDialog(
-                                                             new ThreeButtonDialog.Details(SystemIcons.Error, licenseFailures[0].AlertText, 
-                                                                 Messages.LICENSE_ERROR_TITLE),
-                                                             ThreeButtonDialog.ButtonOK).ShowDialog(Program.MainWindow));
-            }
-            else
-            {
-                var failureDic = new Dictionary<SelectedItem, string>();
 
-                foreach (var f in licenseFailures)
-                {
-                    failureDic.Add(new SelectedItem(f.Host), f.AlertText);
-                }
+             if (licenseFailures.Count == 1)
+             {
+                 Program.Invoke(Program.MainWindow, () => new ThreeButtonDialog(
+                                                              new ThreeButtonDialog.Details(SystemIcons.Error, licenseFailures[0].AlertText, 
+                                                                  Messages.LICENSE_ERROR_TITLE),
+                                                              ThreeButtonDialog.ButtonOK).ShowDialog(parent));
+             }
+             else
+             {
+                 var failureDic = new Dictionary<SelectedItem, string>();
 
-                Program.Invoke(Program.MainWindow, () => new CommandErrorDialog(
-                                                             Messages.LICENSE_ERROR_TITLE, exceptionMessage, 
-                                                             failureDic).ShowDialog(Program.MainWindow));
-            }
+                 foreach (var f in licenseFailures)
+                 {
+                     failureDic.Add(new SelectedItem(f.Host), f.AlertText);
+                 }
+
+                 Program.Invoke(Program.MainWindow, () => new CommandErrorDialog(
+                                                              Messages.LICENSE_ERROR_TITLE, exceptionMessage, 
+                                                              failureDic).ShowDialog(parent));
+             }
         }
     }
 }
