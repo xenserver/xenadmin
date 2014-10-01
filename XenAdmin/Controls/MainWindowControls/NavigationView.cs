@@ -340,7 +340,7 @@ namespace XenAdmin.Controls.MainWindowControls
                 TreeViewRefreshResumed();
         }
 
-        private void RefreshTreeView()
+        public void RefreshTreeView()
         {
             if (Disposing || IsDisposed || Program.Exiting)
                 return;
