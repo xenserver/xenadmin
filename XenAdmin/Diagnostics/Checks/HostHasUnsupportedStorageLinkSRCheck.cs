@@ -53,7 +53,7 @@ namespace XenAdmin.Diagnostics.Checks
 
             foreach (var sr in Host.Connection.Cache.SRs.Where(sr => sr.GetSRType(true) == SR.SRTypes.cslg))
             {
-                return new UnsupportedStorageLinkSrIsPresentProblem(this, sr);
+                return new UnsupportedStorageLinkSrIsPresentProblem(this);
             }
             
             return null;
