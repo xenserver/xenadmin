@@ -163,7 +163,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 PreCheckHostRow hostRow = row as PreCheckHostRow;
                 //CA-65508: if the problem cannot be solved immediately there's no point in enabling the Resolve All button
-                //gabor: I have changed the code below to enable the Resolve All button only if there is at least one problem and all the problems have solution/fix
+                //CA-136211: Changed the code below to enable the Resolve All button only when there is at least one problem and all the problems have solution/fix.
                 if (hostRow != null && hostRow.IsProblem)
                 {
                     if (!hostRow.IsFixable)
