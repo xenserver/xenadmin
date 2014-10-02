@@ -62,7 +62,7 @@ namespace XenAdmin.Diagnostics.Problems.SRProblem
         {
             get
             {
-                return Messages.PROBLEM_UNSUPPORTED_STORAGELINK_SR_HELP;
+                return LinkText;
             }
         }
 

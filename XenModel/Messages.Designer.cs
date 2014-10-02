@@ -25223,20 +25223,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The use of StorageLink SRs was removed in XenServer 6.5..
+        ///   Looks up a localized string similar to The use of StorageLink SRs was removed in XenServer 6.5. Remove StorageLink SRs before upgrading..
         /// </summary>
         public static string PROBLEM_UNSUPPORTED_STORAGELINK_SR {
             get {
                 return ResourceManager.GetString("PROBLEM_UNSUPPORTED_STORAGELINK_SR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Remove StorageLink SR before upgrading..
-        /// </summary>
-        public static string PROBLEM_UNSUPPORTED_STORAGELINK_SR_HELP {
-            get {
-                return ResourceManager.GetString("PROBLEM_UNSUPPORTED_STORAGELINK_SR_HELP", resourceCulture);
             }
         }
         

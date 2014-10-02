@@ -8772,10 +8772,7 @@ The VM protection policy for this VM does not have automatic archiving configure
     <value>An error has occurred while attempting to connect to Storage Link Gateway: \n\n{0}\n\nPlease review the settings for this host and reconnect.</value>
   </data>
   <data name="PROBLEM_UNSUPPORTED_STORAGELINK_SR" xml:space="preserve">
-    <value>The use of StorageLink SRs was removed in XenServer 6.5.</value>
-  </data>
-  <data name="PROBLEM_UNSUPPORTED_STORAGELINK_SR_HELP" xml:space="preserve">
-    <value>Remove StorageLink SR before upgrading.</value>
+    <value>The use of StorageLink SRs was removed in XenServer 6.5. Remove StorageLink SRs before upgrading.</value>
   </data>
   <data name="PROBLEM_VMAPPLIANCEPROBLEM_TITLE" xml:space="preserve">
     <value>vApp {0}</value>
