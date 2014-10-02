@@ -1044,7 +1044,7 @@
 {1}</value>
   </data>
   <data name="Message.body-grace_license" xml:space="preserve">
-    <value>A grace license was issued for {0}. This was either because the license server could not be reached or because the host has recently been upgraded.</value>
+    <value>A grace license was issued for {0}. This was because the license server could not be reached, it is an out-of-date version, or because the host has recently been upgraded.</value>
   </data>
   <data name="Message.body-ha_heartbeat_approaching_timeout" xml:space="preserve">
     <value>Server '{0}' is taking too long to respond to the HA networking heartbeat and may fence.</value>
@@ -1699,5 +1699,11 @@
   </data>
   <data name="Label-VM.MaxVCPUs" xml:space="preserve">
     <value>Max number of vCPUs</value>
+  </data>
+  <data name="Message.body-license_server_version_obsolete" xml:space="preserve">
+    <value>The license server for {0} is an out-of-date version.</value>
+  </data>
+  <data name="Message.name-license_server_version_obsolete" xml:space="preserve">
+    <value>The license server is an out-of-date version.</value>
   </data>
 </root>
