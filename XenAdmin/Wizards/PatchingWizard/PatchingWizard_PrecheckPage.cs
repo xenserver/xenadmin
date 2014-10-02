@@ -46,7 +46,6 @@ using XenAdmin.Dialogs;
 using XenAdmin.Properties;
 using XenAPI;
 using XenAdmin.Diagnostics.Problems.VMProblem;
-using System.Linq;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
