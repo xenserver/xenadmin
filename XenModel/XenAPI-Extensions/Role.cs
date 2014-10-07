@@ -233,12 +233,12 @@ namespace XenAPI
             
             if (Helpers.MidnightRideOrGreater(connection))
             {
-                if (connection.Session.IsLocalSuperuser)
+                if (connection.Session != null && connection.Session.IsLocalSuperuser)
                     return true;
 
                 foreach (Role role in validRoleList)
                 {
-                    if (connection.Session.Roles.Contains(role))
+                    if (connection.Session != null && connection.Session.Roles != null && connection.Session.Roles.Contains(role))
                         return true;
                 }
             }
