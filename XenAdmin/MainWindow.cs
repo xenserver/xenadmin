@@ -765,6 +765,8 @@ namespace XenAdmin
             Alert.RemoveAlert(alert => alert.Connection != null && alert.Connection.Equals(connection));
             Updates.CheckServerPatches();
             Updates.CheckServerVersion();
+
+            RequestRefreshTreeView();
         }
 
         void connection_CachePopulated(object sender, EventArgs e)
