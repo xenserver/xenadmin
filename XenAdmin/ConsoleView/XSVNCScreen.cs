@@ -86,6 +86,7 @@ namespace XenAdmin.ConsoleView
         private Timer connectionPoller = null;
 
         private VM sourceVM = null;
+        private bool sourceIsPV = false;
 
         private readonly Object hostedConsolesLock = new Object();
         private List<XenRef<Console>> hostedConsoles = null;
@@ -538,7 +539,7 @@ namespace XenAdmin.ConsoleView
             if (RemoteConsole != null && RemoteConsole.ConsoleControl != null)
             {
                 RemoteConsole.KeyHandler = this.KeyHandler;
-                RemoteConsole.SendScanCodes = hasRDP;
+                RemoteConsole.SendScanCodes = !this.sourceIsPV;
                 RemoteConsole.Scaling = Scaling;
                 RemoteConsole.DisplayBorder = this.displayFocusRectangle;
                 SetKeyboardAndMouseCapture(autoCaptureKeyboardAndMouse);
@@ -654,6 +655,8 @@ namespace XenAdmin.ConsoleView
                 if (value != null)
                 {
                     value.PropertyChanged += new PropertyChangedEventHandler(VM_PropertyChanged);
+
+                    sourceIsPV = !value.IsHVM;
                     
                     startPolling();
 
@@ -1009,7 +1012,7 @@ namespace XenAdmin.ConsoleView
                 }
                 else
                 {
-                    v.SendScanCodes = UseSource && hasRDP;
+                    v.SendScanCodes = UseSource && !this.sourceIsPV;
                     v.SourceVM = sourceVM;
                     v.Console = console;
                     v.connect(stream, this.vncPassword);
