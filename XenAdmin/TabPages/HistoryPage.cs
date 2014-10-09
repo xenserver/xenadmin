@@ -388,7 +388,7 @@ namespace XenAdmin.TabPages
 
             var actions = result == DialogResult.No
                               ? (from DataGridViewActionRow row in dataGridView.Rows where row.Action != null && row.Action.IsCompleted select row.Action)
-                              : ConnectionsManager.History;
+                              : ConnectionsManager.History.Where(action => action != null && action.IsCompleted);
 
             ConnectionsManager.History.RemoveAll(actions.Contains);
         }
