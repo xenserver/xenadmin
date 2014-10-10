@@ -52,7 +52,12 @@ namespace XenAdmin.Controls.MainWindowControls
             SavedSearch, Notifications
         }
 
-        private NavigationMode currentMode;
+        public NavigationMode currentMode
+        {
+            get;
+            private set;
+        }
+
         private NotificationsSubMode lastNotificationsMode = NotificationsSubMode.Alerts;
 
         #region Events
@@ -295,7 +300,7 @@ namespace XenAdmin.Controls.MainWindowControls
                 navigationView.CurrentSearch = Search;
                 navigationView.NavigationMode = currentMode;
                 navigationView.ResetSeachBox();
-                navigationView.RequestRefreshTreeView();
+                navigationView.RefreshTreeView();
                 navigationView.FocusTreeView();
 
                 if (navigationView.SelectionManager.Selection.Count < 1)
