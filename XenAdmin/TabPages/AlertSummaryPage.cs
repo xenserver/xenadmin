@@ -139,7 +139,7 @@ namespace XenAdmin.TabPages
                 // 4) Take the top n as set by the filters
                 // 5) Add them to the control using the optimized AddRange()
 
-                Program.Invoke(this, SetFilterLabel);
+                Program.Invoke(Program.MainWindow, SetFilterLabel);
                 
                 List<Alert> alerts = Alert.NonDismissingAlerts;
                 alerts.RemoveAll(FilterAlert);
@@ -179,7 +179,7 @@ namespace XenAdmin.TabPages
                     alerts.RemoveRange(ALERT_CAP, alerts.Count - ALERT_CAP);
                 }
 
-                Program.Invoke(this, delegate
+                Program.Invoke(Program.MainWindow, delegate
                 {
                     List<DataGridViewRow> gridRows = new List<DataGridViewRow>();
                     log.Debug("Rebuilding alertList: Adding alert rows");
@@ -282,7 +282,7 @@ namespace XenAdmin.TabPages
         private bool FilterAlert(Alert alert)
         {
             bool hide = false;
-            Program.Invoke(this, () =>
+            Program.Invoke(Program.MainWindow, () =>
                                  hide = toolStripDropDownButtonDateFilter.HideByDate(alert.Timestamp.ToLocalTime())
                                         || toolStripDropDownButtonServerFilter.HideByLocation(alert.HostUuid)
                                         || toolStripDropDownSeveritiesFilter.HideBySeverity(alert.Priority));
