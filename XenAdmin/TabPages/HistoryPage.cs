@@ -388,7 +388,7 @@ namespace XenAdmin.TabPages
 
             var actions = result == DialogResult.No
                               ? (from DataGridViewActionRow row in dataGridView.Rows where row.Action != null && row.Action.IsCompleted select row.Action)
-                              : ConnectionsManager.History;
+                              : ConnectionsManager.History.Where(action => action != null && action.IsCompleted);
 
             ConnectionsManager.History.RemoveAll(actions.Contains);
         }
@@ -405,13 +405,7 @@ namespace XenAdmin.TabPages
                     return;
             }
 
-            var actions = new List<ActionBase>();
-            foreach (var row in dataGridView.SelectedRows)
-            {
-                var actionRow = row as DataGridViewActionRow;
-                if (actionRow != null)
-                    actions.Add(actionRow.Action);
-            }
+            var actions = from DataGridViewActionRow row in dataGridView.SelectedRows where row != null && row.Action != null && row.Action.IsCompleted select row.Action;
 
             ConnectionsManager.History.RemoveAll(actions.Contains);
         }
