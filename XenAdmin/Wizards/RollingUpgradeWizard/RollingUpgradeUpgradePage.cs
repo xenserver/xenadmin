@@ -421,7 +421,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             foreach (DataGridViewRowUpgrade row in rowsForHost)
             {
                 DataGridViewRowUpgrade closureRow = row;
-                Program.Invoke(this, () => closureRow.UpdateStatus(HostUpgradeState.Upgrading, plan.Status));
+                Program.Invoke(Program.MainWindow, () => closureRow.UpdateStatus(HostUpgradeState.Upgrading, plan.Status));
             }
         }
 
