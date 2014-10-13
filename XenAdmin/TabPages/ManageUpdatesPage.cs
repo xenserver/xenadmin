@@ -84,12 +84,12 @@ namespace XenAdmin.TabPages
 
         private void UpdatesCollectionChanged(object sender, EventArgs e)
         {
-            Program.Invoke(this, Rebuild);
+            Program.Invoke(Program.MainWindow, Rebuild);
         }
 
         private void CheckForUpdates_CheckForUpdatesStarted()
         {
-            Program.Invoke(this, () =>
+            Program.Invoke(Program.MainWindow, () =>
                 {
                     checksQueue++;
                     if (checksQueue > 1)
@@ -106,7 +106,7 @@ namespace XenAdmin.TabPages
 
         private void CheckForUpdates_CheckForUpdatesCompleted(bool succeeded, string errorMessage)
         {
-            Program.Invoke(this, delegate
+            Program.Invoke(Program.MainWindow, delegate
                 {
                     checksQueue--;
                     toolStripButtonRefresh.Enabled = true;
@@ -258,7 +258,7 @@ namespace XenAdmin.TabPages
                 hosts = serverUpdate.DistinctHosts.Select(h => h.uuid).ToList();
 
             bool hide = false;
-            Program.Invoke(this, () =>
+            Program.Invoke(Program.MainWindow, () =>
                                  hide = toolStripDropDownButtonDateFilter.HideByDate(alert.Timestamp.ToLocalTime())
                                         || toolStripDropDownButtonServerFilter.HideByLocation(hosts));
             return hide;

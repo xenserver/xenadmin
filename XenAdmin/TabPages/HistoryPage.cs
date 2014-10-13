@@ -121,7 +121,7 @@ namespace XenAdmin.TabPages
             if (asyncAction != null)
                 asyncAction.RecomputeCanCancel();
 
-            Program.Invoke(this, () =>
+            Program.Invoke(Program.MainWindow, () =>
                 {
                     var row = FindRowFromAction(sender);
                     if (row != null)
@@ -203,7 +203,7 @@ namespace XenAdmin.TabPages
         private bool FilterAction(ActionBase action)
         {
             bool hide = false;
-            Program.Invoke(this, () =>
+            Program.Invoke(Program.MainWindow, () =>
                                  hide = toolStripDdbFilterDates.HideByDate(action.Started)
                                         || toolStripDdbFilterLocation.HideByLocation(action.GetApplicableHosts())
                                         || toolStripDdbFilterStatus.HideByStatus(action));

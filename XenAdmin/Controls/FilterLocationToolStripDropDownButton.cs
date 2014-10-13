@@ -286,12 +286,12 @@ namespace XenAdmin.Controls
 
         private void connection_ConnectionStateChanged(object sender, EventArgs e)
         {
-            Program.Invoke(Parent, RefreshLists);
+            Program.Invoke(Program.MainWindow, RefreshLists);
         }
 
         private void connection_CachePopulated(object sender, EventArgs e)
         {
-            Program.Invoke(Parent, RefreshLists);
+            Program.Invoke(Program.MainWindow, RefreshLists);
         }
 
         private void XenConnections_CollectionChanged(object sender, CollectionChangeEventArgs e)
