@@ -183,7 +183,7 @@
     <value>True</value>
   </metadata>
   <data name="Column3.HeaderText" xml:space="preserve">
-    <value>VCPU 数</value>
+    <value>vCPU 数</value>
   </data>
   <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

@@ -142,7 +142,7 @@
     <value>4</value>
   </data>
   <data name="GroupsLabel.Text" xml:space="preserve">
-    <value>分组依据</value>
+    <value>分组方式</value>
   </data>
   <data name="&gt;&gt;GroupsLabel.Name" xml:space="preserve">
     <value>GroupsLabel</value>

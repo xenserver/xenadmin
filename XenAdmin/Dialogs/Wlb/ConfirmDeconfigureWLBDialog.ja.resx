@@ -134,7 +134,6 @@
   <data name="labelMessage.Text" xml:space="preserve">
     <value>ここでキャンセルすると、ワークロード バランスがデフォルト設定で初期化されますが、有効にはなりません。
 
-
 ワークロード バランスを無効にしたままウィザードをキャンセルしますか?</value>
   </data>
   <data name="&gt;&gt;labelMessage.Name" xml:space="preserve">

@@ -547,7 +547,7 @@
     <value>2</value>
   </data>
   <data name="lblVCPUs.Text" xml:space="preserve">
-    <value>VCPU の数(&amp;N):</value>
+    <value>vCPU の数(&amp;C):</value>
   </data>
   <data name="lblVCPUs.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
