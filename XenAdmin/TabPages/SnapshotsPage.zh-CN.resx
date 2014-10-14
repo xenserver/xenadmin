@@ -141,7 +141,7 @@
     <value>2</value>
   </data>
   <data name="linkLabelVMPPInfo.Text" xml:space="preserve">
-    <value>了解更多信息...</value>
+    <value>了解更多信息 ...</value>
   </data>
   <data name="&gt;&gt;linkLabelVMPPInfo.Name" xml:space="preserve">
     <value>linkLabelVMPPInfo</value>

@@ -145,7 +145,7 @@
     <value>111, 23</value>
   </data>
   <data name="toolStripDdbFilterLocation.Text" xml:space="preserve">
-    <value>場所によるフィルタ(&amp;C)</value>
+    <value>LN_Filter by S&amp;erver</value>
   </data>
   <data name="toolStripDdbFilterDates.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -160,13 +160,13 @@
     <value>161, 22</value>
   </data>
   <data name="tsmiDismissAll.Text" xml:space="preserve">
-    <value>すべてのアラートをクリア(&amp;A)</value>
+    <value>すべてのアラートをクリア(&amp;D)</value>
   </data>
   <data name="tsmiDismissSelected.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 22</value>
   </data>
   <data name="tsmiDismissSelected.Text" xml:space="preserve">
-    <value>選択をクリア(&amp;D)</value>
+    <value>選択したアラートをクリア(&amp;D)</value>
   </data>
   <data name="toolStripSplitButtonDismiss.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -281,7 +281,7 @@
     <value>True</value>
   </metadata>
   <data name="columnMessage.HeaderText" xml:space="preserve">
-    <value>Message</value>
+    <value>メッセージ</value>
   </data>
   <data name="columnMessage.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>
@@ -290,7 +290,7 @@
     <value>True</value>
   </metadata>
   <data name="columnLocation.HeaderText" xml:space="preserve">
-    <value>場所</value>
+    <value>LN_Server / Pool</value>
   </data>
   <data name="columnLocation.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>

@@ -250,7 +250,7 @@
     <value>111, 23</value>
   </data>
   <data name="toolStripDropDownButtonServerFilter.Text" xml:space="preserve">
-    <value>場所によるフィルタ(&amp;C)</value>
+    <value>LN_Filter by S&amp;erver</value>
   </data>
   <data name="toolStripDropDownButtonDateFilter.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -498,7 +498,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnMessage.HeaderText" xml:space="preserve">
-    <value>Message</value>
+    <value>メッセージ</value>
   </data>
   <data name="ColumnMessage.MinimumWidth" type="System.Int32, mscorlib">
     <value>70</value>
@@ -507,7 +507,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnLocation.HeaderText" xml:space="preserve">
-    <value>場所</value>
+    <value>LN_Server / Pool</value>
   </data>
   <data name="ColumnLocation.MinimumWidth" type="System.Int32, mscorlib">
     <value>95</value>
@@ -525,7 +525,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnWebPage.HeaderText" xml:space="preserve">
-    <value>アクション(&amp;N)</value>
+    <value>アクション</value>
   </data>
   <data name="ColumnWebPage.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>

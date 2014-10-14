@@ -724,7 +724,7 @@
     <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>可以调整您的 VM 及其拓扑可用的 vCPU 数，以及要分配给其他 vCPU 的优先级。</value>
+    <value>可以调整您的 VM 及其拓扑可用的 vCPU 数以及要分配给 vCPU 的优先级。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

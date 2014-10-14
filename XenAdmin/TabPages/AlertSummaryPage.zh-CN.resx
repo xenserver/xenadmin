@@ -232,7 +232,7 @@
     <value>111, 23</value>
   </data>
   <data name="toolStripDropDownButtonServerFilter.Text" xml:space="preserve">
-    <value>按位置过滤(&amp;C)</value>
+    <value>LN_Filter by S&amp;erver</value>
   </data>
   <data name="toolStripDropDownButtonDateFilter.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -280,13 +280,13 @@
     <value>161, 22</value>
   </data>
   <data name="tsmiDismissAll.Text" xml:space="preserve">
-    <value>全部取消(&amp;A)</value>
+    <value>全部消除(&amp;A)</value>
   </data>
   <data name="tsmiDismissSelected.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 22</value>
   </data>
   <data name="tsmiDismissSelected.Text" xml:space="preserve">
-    <value>清除所选内容(&amp;D)</value>
+    <value>消除选定对象(&amp;D)</value>
   </data>
   <data name="toolStripSplitButtonDismiss.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -298,7 +298,7 @@
     <value>63, 23</value>
   </data>
   <data name="toolStripSplitButtonDismiss.Text" xml:space="preserve">
-    <value>取消(&amp;D)</value>
+    <value>消除(&amp;D)</value>
   </data>
   <data name="toolStripLabelFiltersOnOff.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -454,7 +454,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnLocation.HeaderText" xml:space="preserve">
-    <value>位置</value>
+    <value>LN_Server / Pool</value>
   </data>
   <data name="ColumnLocation.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>
