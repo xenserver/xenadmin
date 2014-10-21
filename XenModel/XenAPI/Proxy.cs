@@ -2015,14 +2015,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.VM.assert_can_be_recovered")]
         Response<string>
         async_vm_assert_can_be_recovered(string session, string _vm, string _session_to);
-        
+
         [XmlRpcMethod("VM.get_SRs_required_for_recovery")]
         Response<string []>
-        vm_get_srs_required_for_recovery(string session, string _self, string _session_to);
+        vm_get_srs_required_for_recovery(string session, string _vm, string _session_to);
 
         [XmlRpcMethod("Async.VM.get_SRs_required_for_recovery")]
         Response<string>
-        async_vm_get_srs_required_for_recovery(string session, string _self, string _session_to);
+        async_vm_get_srs_required_for_recovery(string session, string _vm, string _session_to);
 
         [XmlRpcMethod("VM.recover")]
         Response<string>
@@ -2534,11 +2534,11 @@ namespace XenAPI
 
         [XmlRpcMethod("VM_appliance.get_SRs_required_for_recovery")]
         Response<string []>
-        vm_appliance_get_srs_required_for_recovery(string session, string _self, string _session_to);
+        vm_appliance_get_srs_required_for_recovery(string session, string _vm_appliance, string _session_to);
 
         [XmlRpcMethod("Async.VM_appliance.get_SRs_required_for_recovery")]
         Response<string>
-        async_vm_appliance_get_srs_required_for_recovery(string session, string _self, string _session_to);
+        async_vm_appliance_get_srs_required_for_recovery(string session, string _vm_appliance, string _session_to);
 
         [XmlRpcMethod("VM_appliance.recover")]
         Response<string>
@@ -3595,6 +3595,10 @@ namespace XenAPI
         [XmlRpcMethod("network.get_default_locking_mode")]
         Response<string>
         network_get_default_locking_mode(string session, string _network);
+
+        [XmlRpcMethod("network.get_assigned_ips")]
+        Response<Object>
+        network_get_assigned_ips(string session, string _network);
 
         [XmlRpcMethod("network.set_name_label")]
         Response<string>
@@ -6132,6 +6136,14 @@ namespace XenAPI
         Response<Object>
         pci_get_other_config(string session, string _pci);
 
+        [XmlRpcMethod("PCI.get_subsystem_vendor_name")]
+        Response<string>
+        pci_get_subsystem_vendor_name(string session, string _pci);
+
+        [XmlRpcMethod("PCI.get_subsystem_device_name")]
+        Response<string>
+        pci_get_subsystem_device_name(string session, string _pci);
+
         [XmlRpcMethod("PCI.set_other_config")]
         Response<string>
         pci_set_other_config(string session, string _pci, Object _other_config);
@@ -6902,6 +6914,7 @@ namespace XenAPI
         public Object blobs;
         public string [] tags;
         public string default_locking_mode;
+        public Object assigned_ips;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -7243,6 +7256,8 @@ namespace XenAPI
         public string pci_id;
         public string [] dependencies;
         public Object other_config;
+        public string subsystem_vendor_name;
+        public string subsystem_device_name;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
