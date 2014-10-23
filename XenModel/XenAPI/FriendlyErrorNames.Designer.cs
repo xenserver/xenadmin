@@ -574,6 +574,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This MAC seed is already in use by a VM in the pool.
+        /// </summary>
+        public static string DUPLICATE_MAC_SEED {
+            get {
+                return ResourceManager.GetString("DUPLICATE_MAC_SEED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A PIF with this specified device name already exists..
         /// </summary>
         public static string DUPLICATE_PIF_DEVICE_NAME {
@@ -3027,11 +3036,56 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Storage System ID is missing.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_401 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_401", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Storage Pool ID is missing.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_402 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_402", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The storage repository log operation failed.
         /// </summary>
         public static string SR_BACKEND_FAILURE_41 {
             get {
                 return ResourceManager.GetString("SR_BACKEND_FAILURE_41", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The gssi operation to the CSLG server failed.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_410 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_410", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The SR loading operation failed.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_411 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_411", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An invalid storage protocol was specified.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_412 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_412", resourceCulture);
             }
         }
         
@@ -3045,11 +3099,74 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to probe SR.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_414 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_414", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snapshot/Clone failed.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_416 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_416", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Storage assignment failed.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_417 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_417", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Storage un-assignment failed.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_418 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_418", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Storage allocation failed.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_419 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_419", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The specified storage repository already exists.
         /// </summary>
         public static string SR_BACKEND_FAILURE_42 {
             get {
                 return ResourceManager.GetString("SR_BACKEND_FAILURE_42", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Storage deallocation failed.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_420 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_420", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HBA Query failed.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_421 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_421", resourceCulture);
             }
         }
         
@@ -3063,6 +3180,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SCSI device scan failed.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_423 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_423", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to connect to target: please check the hostname or IP address.
         /// </summary>
         public static string SR_BACKEND_FAILURE_424 {
@@ -3072,11 +3198,47 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Storage Node ID is missing.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_425 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_425", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The VDI failed to be introduced to the database.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_426 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_426", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The CSLG software doesn&apos;t seem to be installed.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_427 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_427", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to create multiple sub-pools from parent pool.
         /// </summary>
         public static string SR_BACKEND_FAILURE_428 {
             get {
                 return ResourceManager.GetString("SR_BACKEND_FAILURE_428", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current XML definition is newer version.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_429 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_429", resourceCulture);
             }
         }
         
@@ -3099,6 +3261,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error in storage adapter communication.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_431 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_431", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The adapter id is missing.
         /// </summary>
         public static string SR_BACKEND_FAILURE_432 {
@@ -3108,11 +3279,119 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The username is missing.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_433 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_433", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The password is missing.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_434 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_434", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An invalid storage system ID was specified.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_435 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_435", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to collect storage system information.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_436 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_436", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to collect storage pool information.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_437 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_437", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to delete storage pool.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_438 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_438", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to collect storage volume information.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_439 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_439", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The specified storage repository has insufficient space.
         /// </summary>
         public static string SR_BACKEND_FAILURE_44 {
             get {
                 return ResourceManager.GetString("SR_BACKEND_FAILURE_44", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to list storage volume.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_440 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_440", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to resize storage volume.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_441 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_441", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to list storage target ports.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_442 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_442", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to list storage pool.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_443 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_443", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The tapdisk failed.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_444 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_444", resourceCulture);
             }
         }
         
@@ -3873,6 +4152,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have attempted a function which is not implemented.
+        /// </summary>
+        public static string UNIMPLEMENTED_IN_SM_BACKEND {
+            get {
+                return ResourceManager.GetString("UNIMPLEMENTED_IN_SM_BACKEND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The requested bootloader {1} for VM {0} is unknown.
         /// </summary>
         public static string UNKNOWN_BOOTLOADER {
@@ -4013,6 +4301,15 @@ namespace XenAPI {
         public static string VDI_CONTAINS_METADATA_OF_THIS_POOL {
             get {
                 return ResourceManager.GetString("VDI_CONTAINS_METADATA_OF_THIS_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The VDI copy action has failed.
+        /// </summary>
+        public static string VDI_COPY_FAILED {
+            get {
+                return ResourceManager.GetString("VDI_COPY_FAILED", resourceCulture);
             }
         }
         
