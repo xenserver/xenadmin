@@ -55,7 +55,9 @@ namespace XenAPI
             XenRef<Host> host,
             string pci_id,
             List<XenRef<PCI>> dependencies,
-            Dictionary<string, string> other_config)
+            Dictionary<string, string> other_config,
+            string subsystem_vendor_name,
+            string subsystem_device_name)
         {
             this.uuid = uuid;
             this.class_name = class_name;
@@ -65,6 +67,8 @@ namespace XenAPI
             this.pci_id = pci_id;
             this.dependencies = dependencies;
             this.other_config = other_config;
+            this.subsystem_vendor_name = subsystem_vendor_name;
+            this.subsystem_device_name = subsystem_device_name;
         }
 
         /// <summary>
@@ -86,6 +90,8 @@ namespace XenAPI
             pci_id = update.pci_id;
             dependencies = update.dependencies;
             other_config = update.other_config;
+            subsystem_vendor_name = update.subsystem_vendor_name;
+            subsystem_device_name = update.subsystem_device_name;
         }
 
         internal void UpdateFromProxy(Proxy_PCI proxy)
@@ -98,6 +104,8 @@ namespace XenAPI
             pci_id = proxy.pci_id == null ? null : (string)proxy.pci_id;
             dependencies = proxy.dependencies == null ? null : XenRef<PCI>.Create(proxy.dependencies);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
+            subsystem_vendor_name = proxy.subsystem_vendor_name == null ? null : (string)proxy.subsystem_vendor_name;
+            subsystem_device_name = proxy.subsystem_device_name == null ? null : (string)proxy.subsystem_device_name;
         }
 
         public Proxy_PCI ToProxy()
@@ -111,6 +119,8 @@ namespace XenAPI
             result_.pci_id = (pci_id != null) ? pci_id : "";
             result_.dependencies = (dependencies != null) ? Helper.RefListToStringArray(dependencies) : new string[] {};
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.subsystem_vendor_name = (subsystem_vendor_name != null) ? subsystem_vendor_name : "";
+            result_.subsystem_device_name = (subsystem_device_name != null) ? subsystem_device_name : "";
             return result_;
         }
 
@@ -128,6 +138,8 @@ namespace XenAPI
             pci_id = Marshalling.ParseString(table, "pci_id");
             dependencies = Marshalling.ParseSetRef<PCI>(table, "dependencies");
             other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+            subsystem_vendor_name = Marshalling.ParseString(table, "subsystem_vendor_name");
+            subsystem_device_name = Marshalling.ParseString(table, "subsystem_device_name");
         }
 
         public bool DeepEquals(PCI other)
@@ -144,7 +156,9 @@ namespace XenAPI
                 Helper.AreEqual2(this._host, other._host) &&
                 Helper.AreEqual2(this._pci_id, other._pci_id) &&
                 Helper.AreEqual2(this._dependencies, other._dependencies) &&
-                Helper.AreEqual2(this._other_config, other._other_config);
+                Helper.AreEqual2(this._other_config, other._other_config) &&
+                Helper.AreEqual2(this._subsystem_vendor_name, other._subsystem_vendor_name) &&
+                Helper.AreEqual2(this._subsystem_device_name, other._subsystem_device_name);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, PCI server)
@@ -272,6 +286,28 @@ namespace XenAPI
         public static Dictionary<string, string> get_other_config(Session session, string _pci)
         {
             return Maps.convert_from_proxy_string_string(session.proxy.pci_get_other_config(session.uuid, (_pci != null) ? _pci : "").parse());
+        }
+
+        /// <summary>
+        /// Get the subsystem_vendor_name field of the given PCI.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pci">The opaque_ref of the given pci</param>
+        public static string get_subsystem_vendor_name(Session session, string _pci)
+        {
+            return (string)session.proxy.pci_get_subsystem_vendor_name(session.uuid, (_pci != null) ? _pci : "").parse();
+        }
+
+        /// <summary>
+        /// Get the subsystem_device_name field of the given PCI.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pci">The opaque_ref of the given pci</param>
+        public static string get_subsystem_device_name(Session session, string _pci)
+        {
+            return (string)session.proxy.pci_get_subsystem_device_name(session.uuid, (_pci != null) ? _pci : "").parse();
         }
 
         /// <summary>
@@ -474,5 +510,43 @@ namespace XenAPI
             }
         }
         private Dictionary<string, string> _other_config;
+
+        /// <summary>
+        /// Subsystem vendor name
+        /// First published in .
+        /// </summary>
+        public virtual string subsystem_vendor_name
+        {
+            get { return _subsystem_vendor_name; }
+            set
+            {
+                if (!Helper.AreEqual(value, _subsystem_vendor_name))
+                {
+                    _subsystem_vendor_name = value;
+                    Changed = true;
+                    NotifyPropertyChanged("subsystem_vendor_name");
+                }
+            }
+        }
+        private string _subsystem_vendor_name;
+
+        /// <summary>
+        /// Subsystem device name
+        /// First published in .
+        /// </summary>
+        public virtual string subsystem_device_name
+        {
+            get { return _subsystem_device_name; }
+            set
+            {
+                if (!Helper.AreEqual(value, _subsystem_device_name))
+                {
+                    _subsystem_device_name = value;
+                    Changed = true;
+                    NotifyPropertyChanged("subsystem_device_name");
+                }
+            }
+        }
+        private string _subsystem_device_name;
     }
 }

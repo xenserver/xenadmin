@@ -37,7 +37,7 @@ namespace XenAPI
 {
     public enum task_allowed_operations
     {
-        cancel, unknown
+        cancel, destroy, unknown
     }
 
     public static class task_allowed_operations_helper
@@ -48,6 +48,8 @@ namespace XenAPI
             {
                 case task_allowed_operations.cancel:
                     return "cancel";
+                case task_allowed_operations.destroy:
+                    return "destroy";
                 default:
                     return "unknown";
             }
