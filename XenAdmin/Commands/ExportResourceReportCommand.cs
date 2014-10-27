@@ -83,14 +83,8 @@ namespace XenAdmin.Commands
         private static bool CanExecute(SelectedItem selection)
         {
             if(selection.Connection != null && selection.Connection.IsConnected && selection.PoolAncestor != null)
-            {
-                if (Helpers.ClearwaterOrGreater(selection.Connection))
-                    return !Helpers.FeatureForbidden(selection.Connection, XenAPI.Host.RestrictHotfixApply);
-                else
-                    return !Helpers.FeatureForbidden(selection.Connection, XenAPI.Host.RestrictWLB);
-            }
-            else
-                return false;
+                return !Helpers.FeatureForbidden(selection.Connection, XenAPI.Host.RestrictExportResourceData);
+            return false;
         }
 
         public override string MenuText

@@ -391,6 +391,31 @@ namespace XenAPI
             return h._RestrictVgpu;
         }
 
+        private bool _RestrictExportResourceData
+        {
+            get
+            {
+                if (Helpers.CreedenceOrGreater(Connection)) 
+                {
+                    return BoolKeyPreferTrue(license_params, "restrict_export_resource_data");
+                }
+                // Pre-Creedence hosts:
+                // allowed on Per-Socket edition for Clearwater hosts and Advanced, Enterprise and Platinum editions for older hosts
+                var hostEdition = GetEdition(edition);
+                if (hostEdition == Edition.PerSocket || hostEdition == Edition.Advanced ||
+                    hostEdition == Edition.Enterprise || hostEdition == Edition.Platinum)
+                {
+                    return LicenseExpiryUTC < DateTime.UtcNow - Connection.ServerTimeOffset; // restrict if the license has expired
+                }
+                return true;
+            }
+        }
+
+        public static bool RestrictExportResourceData(Host h)
+        {
+            return h._RestrictExportResourceData;
+        }
+
         public bool HasPBDTo(SR sr)
         {
             foreach (XenRef<PBD> pbd in PBDs)
