@@ -104,17 +104,39 @@ namespace XenAdmin.Dialogs
         /// </summary>
         private void SetOptionsForClearwaterAndNewer()
         {
-            if(xos.TrueForAll(x=> Helpers.ClearwaterOrGreater(x.Connection)))
+            if (xos.TrueForAll(x => Helpers.CreedenceOrGreater(x.Connection)))
             {
                 platinumRadioButton.Visible = false;
                 enterpriseRadioButton.Visible = false;
                 advancedRadioButton.Visible = false;
+                perSocketRadioButton.Visible = false;
+                xenDesktopEnterpriseRadioButton.Visible = false;
+                enterprisePerSocketRadioButton.Checked = true;
+                enterprisePerSocketRadioButton.Text = String.Format(Messages.ENTERPRISE_PERSOCKET_LICENSES_X_REQUIRED,
+                                                          xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets)));
+                standardPerSocketRadioButton.Text = String.Format(Messages.STANDARD_PERSOCKET_LICENSES_X_REQUIRED,
+                                                          xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets)));
+            } else if(xos.TrueForAll(x=> Helpers.ClearwaterOrGreater(x.Connection)))
+            {
+                platinumRadioButton.Visible = false;
+                enterpriseRadioButton.Visible = false;
+                advancedRadioButton.Visible = false;
+                enterprisePerSocketRadioButton.Visible = false;
+                enterprisePerUserRadioButton.Visible = false;
+                standardPerSocketRadioButton.Visible = false;
+                standardPerUsertRadioButton.Visible = false;
+                xenDesktopPlatimuntRadioButton.Visible = false;
                 perSocketRadioButton.Text = String.Format(Messages.PERSOCKET_LICENSES_X_REQUIRED,
                                                           xos.Sum(x => x.Connection.Cache.Hosts.Sum(h=>h.CpuSockets)));
             }
             else
             {
                 perSocketRadioButton.Visible = false;
+                enterprisePerSocketRadioButton.Visible = false;
+                enterprisePerUserRadioButton.Visible = false;
+                standardPerSocketRadioButton.Visible = false;
+                standardPerUsertRadioButton.Visible = false;
+                xenDesktopPlatimuntRadioButton.Visible = false;
                 advancedRadioButton.Checked = true;
             }
         }
@@ -133,7 +155,22 @@ namespace XenAdmin.Dialogs
             if(advancedRadioButton.Checked)
                 return Host.Edition.Advanced;
 
-            return Host.Edition.PerSocket;
+            if (perSocketRadioButton.Checked)
+                return Host.Edition.PerSocket;
+
+            if (enterprisePerSocketRadioButton.Checked)
+                return Host.Edition.EnterprisePerSocket;
+
+            if (enterprisePerUserRadioButton.Checked)
+                return Host.Edition.EnterprisePerUser;
+
+            if (xenDesktopPlatimuntRadioButton.Checked)
+                return Host.Edition.XenDesktopPlatinum;
+
+            if (standardPerSocketRadioButton.Checked)
+                return Host.Edition.StandardPerSocket;
+
+            return Host.Edition.StandardPerUser;
         }
 
         private void okButton_Click(object sender, EventArgs e)

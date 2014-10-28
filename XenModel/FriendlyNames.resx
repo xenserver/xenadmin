@@ -1706,4 +1706,19 @@
   <data name="Message.name-license_server_version_obsolete" xml:space="preserve">
     <value>The license server is an out-of-date version.</value>
   </data>
+  <data name="Label-host.edition-enterprise-per-socket" xml:space="preserve">
+    <value>Citrix XenServer Enterprise Per Socket Edition</value>
+  </data>
+  <data name="Label-host.edition-enterprise-per-user" xml:space="preserve">
+    <value>Citrix XenServer Enterprise Per User Edition</value>
+  </data>
+  <data name="Label-host.edition-standard-per-socket" xml:space="preserve">
+    <value>Citrix XenServer Standard Per Socket Edition</value>
+  </data>
+  <data name="Label-host.edition-standard-per-user" xml:space="preserve">
+    <value>Citrix XenServer Standard Per User Edition</value>
+  </data>
+  <data name="Label-host.edition-xendesktop-platinum" xml:space="preserve">
+    <value>Citrix XenDesktop Platinum</value>
+  </data>
 </root>

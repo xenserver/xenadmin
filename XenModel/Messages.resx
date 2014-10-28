@@ -9467,8 +9467,8 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   <data name="SELECTED_HOST_POOL_NOT_CONNECTED" xml:space="preserve">
     <value>The hosts or pools selected are not connected</value>
   </data>
-  <data name="SELECTION_CANNOT_BE_MIXED_WITH_CLEARWATER" xml:space="preserve">
-    <value>Pre-6.2 and post-6.2 XenServers must be licensed separately</value>
+  <data name="SELECTION_CANNOT_BE_MIXED_FOR_LICENSING" xml:space="preserve">
+    <value>Different versions of XenServer must be licensed separately</value>
   </data>
   <data name="SELECT_A_FILTER" xml:space="preserve">
     <value>Select a filter...</value>
@@ -12251,5 +12251,11 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
+  </data>
+  <data name="ENTERPRISE_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
+    <value>XenServer &amp;Enterprise Per-Socket ({0} required)</value>
+  </data>
+  <data name="STANDARD_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
+    <value>XenServer &amp;Standard Per-Socket ({0} required)</value>
   </data>
 </root>

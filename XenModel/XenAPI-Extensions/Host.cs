@@ -53,7 +53,12 @@ namespace XenAPI
             Platinum,
             EnterpriseXD,
             PerSocket,     //Added in Clearwater (PR-1589)
-            XenDesktop     //Added in Clearwater (PR-1589) and is new form of "EnterpriseXD"
+            XenDesktop,    //Added in Clearwater (PR-1589) and is new form of "EnterpriseXD"
+            EnterprisePerSocket,   // Added in Creedence (enterprise-per-socket)
+            EnterprisePerUser,     // Added in Creedence (enterprise-per-user)
+            XenDesktopPlatinum,    // Added in Creedence (xendesktop-platinum)
+            StandardPerSocket,     // Added in Creedence (standard-per-socket)
+            StandardPerUser        // Added in Creedence (standard-per-user)
         }
 
         public override string Name
@@ -81,6 +86,16 @@ namespace XenAPI
                     return Edition.XenDesktop;
                 case "per-socket":
                     return Edition.PerSocket;
+                case "enterprise-per-socket":
+                    return Edition.EnterprisePerSocket;
+                case "enterprise-per-user":
+                    return Edition.EnterprisePerUser;
+                case "xendesktop-platinum":
+                    return Edition.XenDesktopPlatinum;
+                case "standard-per-socket":
+                    return Edition.StandardPerSocket;
+                case "standard-per-user":
+                    return Edition.StandardPerUser;
                 default:
                     return Edition.Free;
             }
@@ -120,6 +135,16 @@ namespace XenAPI
                     return "xendesktop";
                 case Edition.PerSocket:
                     return "per-socket";
+                case Edition.EnterprisePerSocket:
+                    return "enterprise-per-socket";
+                case Edition.EnterprisePerUser:
+                    return "enterprise-per-user";
+                case Edition.XenDesktopPlatinum:
+                    return "xendesktop-platinum";
+                case Edition.StandardPerSocket:
+                    return "standard-per-socket";
+                case Edition.StandardPerUser:
+                    return "standard-per-user";
                 default:
                     return "free";
             }

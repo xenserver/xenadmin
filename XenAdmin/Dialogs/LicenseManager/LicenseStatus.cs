@@ -33,6 +33,7 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using XenAdmin.Core;
+using XenAdmin.Network;
 using XenAdmin.Utils;
 using XenAPI;
 
@@ -50,6 +51,7 @@ namespace XenAdmin.Dialogs
         void BeginUpdate();
         Host LicencedHost { get; }
         bool IsUsingPerSocketGenerationLicenses { get; }
+        LicenseStatus.LicensingModel PoolLicensingModel { get; }
     }
 
     public class LicenseStatus : ILicenseStatus
@@ -145,6 +147,7 @@ namespace XenAdmin.Dialogs
 
         protected void CalculateLicenseState()
         {
+            PoolLicensingModel = GetLicensingModel(XenObject.Connection);
             LicenseExpiresExactlyIn = CalculateLicenceExpiresIn();
             CurrentState = CalculateCurrentState();
             Updated = true;
@@ -319,6 +322,26 @@ namespace XenAdmin.Dialogs
                     return LicencedHost.LicenseExpiryUTC.ToLocalTime();
                 return null;
             }
+        }
+
+        public LicensingModel PoolLicensingModel { get; private set; }
+        #endregion
+
+        #region LicensingModel
+        public enum LicensingModel
+        {
+            PreClearwater,
+            Clearwater,
+            Creedence
+        }
+
+        public static LicensingModel GetLicensingModel(IXenConnection connection)
+        {
+            if (Helpers.CreedenceOrGreater(connection))
+                return LicensingModel.Creedence;
+            if (Helpers.ClearwaterOrGreater(connection))
+                return LicensingModel.Clearwater;
+            return LicensingModel.PreClearwater;
         }
 
         #endregion
