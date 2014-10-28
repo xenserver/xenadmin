@@ -1101,7 +1101,7 @@
     <value>The license on host '{0}' will expire at {1}.</value>
   </data>
   <data name="Message.body-license_not_available" xml:space="preserve">
-    <value>The license-server did not issue a license for {0} because there were no license of the specified type available.</value>
+    <value>The license server did not issue a license for {0} because there were no licenses of the specified type available.</value>
   </data>
   <data name="Message.body-license_server_connected" xml:space="preserve">
     <value>The server {0} has successfully connected to the license server.</value>

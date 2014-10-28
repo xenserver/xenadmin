@@ -3375,7 +3375,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The license-server did not issue a license for {0} because there were no license of the specified type available..
+        ///   Looks up a localized string similar to The license server did not issue a license for {0} because there were no licenses of the specified type available..
         /// </summary>
         public static string Message_body_license_not_available {
             get {
