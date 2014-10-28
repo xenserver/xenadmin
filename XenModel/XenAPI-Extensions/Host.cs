@@ -1374,6 +1374,26 @@ namespace XenAPI
             get { return license_params.ContainsKey("grace"); }
         }
 
+        public bool EnterpriseFeaturesEnabled
+        {
+            get
+            {
+                var hostEdition = GetEdition(edition);
+                return hostEdition == Edition.EnterprisePerSocket || hostEdition == Edition.EnterprisePerUser;
+            }
+        }
+
+        public bool EligibleForSupport
+        {
+            get
+            {
+                var hostEdition = GetEdition(edition);
+                return hostEdition == Edition.EnterprisePerSocket || hostEdition == Edition.EnterprisePerUser ||
+                       hostEdition == Edition.XenDesktopPlatinum ||
+                       hostEdition == Edition.StandardPerSocket || hostEdition == Edition.StandardPerUser;
+            }
+        }
+
         #region Supplemental Packs
 
         // From http://scale.uk.xensource.com/confluence/display/engp/Supplemental+Pack+product+design+notes#SupplementalPackproductdesignnotes-XenAPI:

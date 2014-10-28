@@ -17890,6 +17890,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not eligible for support.
+        /// </summary>
+        public static string LICENSE_NOT_ELIGIBLE_FOR_SUPPORT {
+            get {
+                return ResourceManager.GetString("LICENSE_NOT_ELIGIBLE_FOR_SUPPORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The license server {0} could not be reached. You have until {1} to reconnect to the license server..
         /// </summary>
         public static string LICENSE_REGULAR_GRACE_TOOLTIP {
@@ -17994,6 +18003,26 @@ namespace XenAdmin {
         public static string LICENSE_STATUS {
             get {
                 return ResourceManager.GetString("LICENSE_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Eligible for support 
+        ///Enterprise features enabled.
+        /// </summary>
+        public static string LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED {
+            get {
+                return ResourceManager.GetString("LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Eligible for support 
+        ///Standard features only.
+        /// </summary>
+        public static string LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED {
+            get {
+                return ResourceManager.GetString("LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED", resourceCulture);
             }
         }
         

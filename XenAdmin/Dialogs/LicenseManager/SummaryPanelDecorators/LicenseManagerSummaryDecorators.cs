@@ -102,7 +102,7 @@ namespace XenAdmin.Dialogs
         {
             StringBuilder sb = base.BuildSummary();
 
-            if(Helpers.ClearwaterOrGreater(Row.XenObject.Connection) && Row.CurrentLicenseState == LicenseStatus.HostState.Expired)
+            if(Helpers.ClearwaterOrGreater(Row.XenObject.Connection) && Row.CurrentLicenseState == LicenseStatus.HostState.Free)
                 return sb;
 
             sb.AppendLine(Messages.LICENSE_MANAGER_SUMMARY_LICENSE_EXPIRES);

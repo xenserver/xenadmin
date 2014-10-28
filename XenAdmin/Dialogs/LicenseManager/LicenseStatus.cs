@@ -50,8 +50,8 @@ namespace XenAdmin.Dialogs
         bool Updated { get; }
         void BeginUpdate();
         Host LicencedHost { get; }
-        bool IsUsingPerSocketGenerationLicenses { get; }
         LicenseStatus.LicensingModel PoolLicensingModel { get; }
+        string LicenseEntitlements { get; }
     }
 
     public class LicenseStatus : ILicenseStatus
@@ -183,11 +183,6 @@ namespace XenAdmin.Dialogs
             return LicencedHost.LicenseExpiryUTC.Subtract(currentRefTime);
         }
 
-        public bool IsUsingPerSocketGenerationLicenses
-        {
-            get { return Helpers.ClearwaterOrGreater(LicencedHost); }
-        }
-
         internal static bool PoolIsMixedFreeAndExpiring(IXenObject xenObject)
         {
             if (xenObject is Pool)
@@ -258,10 +253,10 @@ namespace XenAdmin.Dialogs
             if (PoolIsPartiallyLicensed(XenObject))
                 return HostState.PartiallyLicensed;
 
-            if (IsUsingPerSocketGenerationLicenses)
+            if (PoolLicensingModel != LicensingModel.PreClearwater)
             {
                 if (LicenseEdition == Host.Edition.Free)
-                    return HostState.Expired;
+                    return HostState.Free;
                 
                 if (LicenseExpiresIn.TotalDays >= 30)
                     return HostState.Licensed;
@@ -325,6 +320,30 @@ namespace XenAdmin.Dialogs
         }
 
         public LicensingModel PoolLicensingModel { get; private set; }
+
+        public string LicenseEntitlements
+        {
+            get
+            {
+                if (PoolLicensingModel == LicensingModel.Creedence && CurrentState == HostState.Licensed)
+                {
+                    if (XenObject.Connection.Cache.Hosts.All(h => h.EnterpriseFeaturesEnabled))
+                        return Messages.LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED;
+                    if (XenObject.Connection.Cache.Hosts.All(h => h.EligibleForSupport))
+                        return Messages.LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED;
+                    return Messages.LICENSE_NOT_ELIGIBLE_FOR_SUPPORT;
+                }
+
+                if ((PoolLicensingModel == LicensingModel.Creedence || PoolLicensingModel == LicensingModel.Clearwater)
+                    && CurrentState == HostState.Free)
+                {
+                    return Messages.LICENSE_NOT_ELIGIBLE_FOR_SUPPORT;
+                }
+
+                return Messages.UNKNOWN;
+            }
+        }
+
         #endregion
 
         #region LicensingModel

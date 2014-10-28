@@ -12258,4 +12258,15 @@ You will need to navigate to the Console on each of the selected VMs to complete
   <data name="STANDARD_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
     <value>XenServer &amp;Standard Per-Socket ({0} required)</value>
   </data>
+  <data name="LICENSE_NOT_ELIGIBLE_FOR_SUPPORT" xml:space="preserve">
+    <value>Not eligible for support</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED" xml:space="preserve">
+    <value>Eligible for support 
+Enterprise features enabled</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED" xml:space="preserve">
+    <value>Eligible for support 
+Standard features only</value>
+  </data>
 </root>

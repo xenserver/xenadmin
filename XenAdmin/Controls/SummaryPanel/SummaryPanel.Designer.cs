@@ -53,7 +53,7 @@
             this.tableLayoutPanel1.Controls.Add(this.information, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.informationLayoutPanel, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.helperLink, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.helperLink, 0, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // titleLabel
