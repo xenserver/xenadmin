@@ -118,5 +118,14 @@ namespace XenAdmin.TabPages
             }
         }
 
+        public bool ShowExpiryDate
+        {
+            get
+            {
+                if (Status != null && Status.CurrentState == LicenseStatus.HostState.Free && Status.PoolLicensingModel != LicenseStatus.LicensingModel.PreClearwater)
+                    return false;
+                return true;
+            }
+        }
     }
 }

@@ -100,12 +100,14 @@ namespace XenAdmin.TabPages
 
             GeneralTabLicenseStatusStringifier ss = new GeneralTabLicenseStatusStringifier(licenseStatus);
             Program.Invoke(Program.MainWindow, () => pdSectionLicense.UpdateEntryValueWithKey(
-                                                       FriendlyName("host.license_params-expiry"),
-                                                       ss.ExpiryDate));
+                                            FriendlyName("host.license_params-expiry"),
+                                            ss.ExpiryDate, 
+                                            ss.ShowExpiryDate));
 
             Program.Invoke(Program.MainWindow, () => pdSectionLicense.UpdateEntryValueWithKey(
                                            Messages.LICENSE_STATUS,
-                                           ss.ExpiryStatus));
+                                           ss.ExpiryStatus,
+                                           true));
         }
 
         void s_contentReceivedFocus(PDSection s)
@@ -942,7 +944,7 @@ namespace XenAdmin.TabPages
 
                 GeneralTabLicenseStatusStringifier ss = new GeneralTabLicenseStatusStringifier(licenseStatus);
                 s.AddEntry(Messages.LICENSE_STATUS, ss.ExpiryStatus, editItem);
-                s.AddEntry(FriendlyName("host.license_params-expiry"), ss.ExpiryDate, editItem);
+                s.AddEntry(FriendlyName("host.license_params-expiry"), ss.ExpiryDate, editItem, ss.ShowExpiryDate);
                 info.Remove("expiry");
             }
 

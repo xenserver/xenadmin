@@ -365,7 +365,7 @@ namespace XenAdmin.Controls
             ToggleExpandedState(true);
         }
 
-        public void AddEntry(string Key, string Value)
+        private DataGridViewExRow CreateRow(string Key, string Value)
         {
             if (!String.IsNullOrEmpty(Key))
                 Key += Messages.GENERAL_PAGE_KVP_SEPARATOR;
@@ -373,6 +373,11 @@ namespace XenAdmin.Controls
             r.CreateCells(dataGridViewEx1);
             r.Cells[0].Value = Key;
             r.Cells[1].Value = Value;
+            return r;
+        }
+        public void AddEntry(string Key, string Value)
+        {
+            var r = CreateRow(Key, Value);
             AddRow(r);
         }
 
@@ -383,12 +388,7 @@ namespace XenAdmin.Controls
 
         public void AddEntry(string Key, string Value, IEnumerable<ToolStripMenuItem> contextMenuItems)
         {
-            if (!String.IsNullOrEmpty(Key))
-                Key += Messages.GENERAL_PAGE_KVP_SEPARATOR;
-            DataGridViewExRow r = new DataGridViewExRow();
-            r.CreateCells(dataGridViewEx1);
-            r.Cells[0].Value = Key;
-            r.Cells[1].Value = Value;
+            var r = CreateRow(Key, Value);
             r.Tag = contextMenuItems;
             AddRow(r);
         }
@@ -402,12 +402,7 @@ namespace XenAdmin.Controls
 
         public void AddEntry(string Key, string Value, Color fontColor)
         {
-            if (!String.IsNullOrEmpty(Key))
-                Key += Messages.GENERAL_PAGE_KVP_SEPARATOR;
-            DataGridViewExRow r = new DataGridViewExRow();
-            r.CreateCells(dataGridViewEx1);
-            r.Cells[0].Value = Key;
-            r.Cells[1].Value = Value;
+            var r = CreateRow(Key, Value);
             r.Cells[1].Style.ForeColor = fontColor;
             AddRow(r);
             dataGridViewEx1.DefaultCellStyle = new DataGridViewCellStyle();
@@ -415,12 +410,7 @@ namespace XenAdmin.Controls
 
         public void AddEntry(string Key, string Value, IEnumerable<ToolStripMenuItem> contextMenuItems, Color fontColor)
         {
-            if (!String.IsNullOrEmpty(Key))
-                Key += Messages.GENERAL_PAGE_KVP_SEPARATOR;
-            DataGridViewExRow r = new DataGridViewExRow();
-            r.CreateCells(dataGridViewEx1);
-            r.Cells[0].Value = Key;
-            r.Cells[1].Value = Value;
+            var r = CreateRow(Key, Value);
             r.Cells[1].Style.ForeColor = fontColor;
             r.Tag = contextMenuItems;
             AddRow(r);
@@ -469,17 +459,35 @@ namespace XenAdmin.Controls
             AddRow(r);
         }
 
-        public void UpdateEntryValueWithKey(string Key, string newValue)
+        public void AddEntry(string Key, string Value, ToolStripMenuItem contextMenuItem, bool visible)
+        {
+            AddEntry(Key, Value, new[] { contextMenuItem }, visible);
+        }
+
+        public void AddEntry(string Key, string Value, IEnumerable<ToolStripMenuItem> contextMenuItems, bool visible)
+        {
+            var r = CreateRow(Key, Value);
+            r.Tag = contextMenuItems;
+            r.Visible = visible;
+            AddRow(r);
+        }
+
+        public void UpdateEntryValueWithKey(string Key, string newValue, bool visible)
         {
             List<DataGridViewExRow> matchingRows = (from DataGridViewExRow row in dataGridViewEx1.Rows
                                                    where row.Cells[0].Value.ToString().Contains(Key)
                                                    select row).ToList();
-            
+
             if (matchingRows.Count != 1 || matchingRows[0].Cells.Count < 2)
                 return;
 
             matchingRows[0].Cells[1].Value = newValue;
 
+            if (matchingRows[0].Visible != visible)
+            {
+                matchingRows[0].Visible = visible;
+                RefreshHeight();
+            }
         }
 
         internal void fixFirstColumnWidth(int width)
