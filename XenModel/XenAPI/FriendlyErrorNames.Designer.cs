@@ -1267,7 +1267,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The edition you supplied is invalid. Valid editions are &apos;free&apos;, &apos;enterprise&apos; and &apos;platinum&apos;..
+        ///   Looks up a localized string similar to The edition you supplied is invalid..
         /// </summary>
         public static string INVALID_EDITION {
             get {
