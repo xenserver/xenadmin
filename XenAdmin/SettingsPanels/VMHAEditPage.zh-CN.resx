@@ -589,7 +589,7 @@
     <value>1</value>
   </data>
   <data name="m_tlpPriority.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="m_tlpPriority.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>

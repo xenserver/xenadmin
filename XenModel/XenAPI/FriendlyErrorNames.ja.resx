@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>アクティブ化キーを適用するには、エディションの設定が free である必要があります。</value>
@@ -1244,6 +1244,9 @@
   <data name="SR_BACKEND_FAILURE_448" xml:space="preserve">
     <value>サポートされないカーネル: 2.6 でも 3.x でもありません。</value>
   </data>
+  <data name="SR_BACKEND_FAILURE_449" xml:space="preserve">
+    <value>LN_tapdisk experienced an error</value>
+  </data>
   <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
     <value>VDI が使用できません。</value>
   </data>
@@ -1426,6 +1429,9 @@
   </data>
   <data name="SR_IS_CACHE_SR" xml:space="preserve">
     <value>この SR はローカル キャッシュ SR として使用されています。</value>
+  </data>
+  <data name="SR_NOT_ATTACHED" xml:space="preserve">
+    <value>LN_The SR is not attached.</value>
   </data>
   <data name="SR_NOT_EMPTY" xml:space="preserve">
     <value>SR が空でないため、SR 処理を実行できません。</value>
@@ -1666,6 +1672,15 @@
   </data>
   <data name="VM_IS_TEMPLATE" xml:space="preserve">
     <value>この処理はテンプレートには無効です。</value>
+  </data>
+  <data name="VM_LACKS_FEATURE_SHUTDOWN" xml:space="preserve">
+    <value>LN_You attempted an operation which needs the cooperative shutdown feature on a VM which lacks it.</value>
+  </data>
+  <data name="VM_LACKS_FEATURE_SUSPEND" xml:space="preserve">
+    <value>LN_You attempted an operation which needs the VM cooperative suspend feature on a VM which lacks it.</value>
+  </data>
+  <data name="VM_LACKS_FEATURE_VCPU_HOTPLUG" xml:space="preserve">
+    <value>LN_You attempted an operation which needs the VM hotplug-vcpu feature on a VM which lacks it.</value>
   </data>
   <data name="VM_MEMORY_SIZE_TOO_LOW" xml:space="preserve">
     <value>指定した VM は、メモリが足りないため起動できません。</value>
