@@ -1495,7 +1495,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>消除</value>
   </data>
   <data name="ALERT_DISMISS_ALL_CONTINUE" xml:space="preserve">
-    <value>您已对警报列表应用过滤器。要消除每个已连接的服务器中的所有警报，还是仅消除已选择查看的警报? 在这两种情况下，消除的警报将从服务器中永久删除。
+    <value>您已对警报列表应用过滤器。您想消除每个已连接的服务器中的所有警报，还是仅消除已选择查看的警报? 在这两种情况下，消除的警报都将从服务器中永久删除。
 
 请注意，如果启用了 RBAC，则将仅影响您有权消除的警报。</value>
   </data>
@@ -1505,7 +1505,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
 请注意，如果启用了 RBAC，则将仅影响您有权消除的警报。</value>
   </data>
   <data name="ALERT_DISMISS_CONFIRM" xml:space="preserve">
-    <value>系统警报一旦解除，就将从服务器上永久删除。是否继续?</value>
+    <value>系统警报一旦消除，就将从服务器上永久删除。是否继续?</value>
   </data>
   <data name="ALERT_DISMISS_SELECTED_CONFIRM" xml:space="preserve">
     <value>此操作将从服务器中永久删除选定警报。是否要继续?
@@ -1519,10 +1519,10 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>全部导出(&amp;A)</value>
   </data>
   <data name="ALERT_EXPORT_ALL_OR_FILTERED" xml:space="preserve">
-    <value>您已对警报列表应用过滤器。要从每个已连接的服务器中导出所有警报，还是仅导出已选择查看的警报?</value>
+    <value>您已对警报列表应用过滤器。您想从每个已连接的服务器中导出所有警报，还是仅导出已选择查看的警报?</value>
   </data>
   <data name="ALERT_EXPORT_FILTERED_BUTTON" xml:space="preserve">
-    <value>仅导出可见部分(&amp;V)</value>
+    <value>仅导出可见警报(&amp;V)</value>
   </data>
   <data name="ALERT_GENERIC_HELP" xml:space="preserve">
     <value>帮助</value>
@@ -3283,7 +3283,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>删除标记“{0}”</value>
   </data>
   <data name="DELETE_ANY_MESSAGE_RBAC_BLOCKED" xml:space="preserve">
-    <value>对于当前出现系统警报的每个服务器，您当前的角色没有足够的权限来解除这些警报。</value>
+    <value>对于当前出现系统警报的每个服务器，您当前的角色没有足够的权限来消除这些警报。</value>
   </data>
   <data name="DELETE_BOND" xml:space="preserve">
     <value>删除绑定</value>
@@ -3340,7 +3340,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>是否确实要删除 {0}? 此操作无法撤消。</value>
   </data>
   <data name="DELETE_MESSAGE_RBAC_BLOCKED" xml:space="preserve">
-    <value>剩余的警报您都无权解除。</value>
+    <value>剩余的警报您都无权消除。</value>
   </data>
   <data name="DELETE_PATCH" xml:space="preserve">
     <value>删除修补程序</value>
@@ -3586,13 +3586,13 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>磁盘大小至少需要达到 {0} {1}</value>
   </data>
   <data name="DISMISS_ALL_CONFIRM_BUTTON" xml:space="preserve">
-    <value>全部解除(&amp;A)</value>
+    <value>全部消除(&amp;A)</value>
   </data>
   <data name="DISMISS_ALL_YES_CONFIRM_BUTTON" xml:space="preserve">
-    <value>是，全部解除(&amp;A)</value>
+    <value>是，全部消除(&amp;A)</value>
   </data>
   <data name="DISMISS_FILTERED_CONFIRM_BUTTON" xml:space="preserve">
-    <value>仅消除可见部分(&amp;V)</value>
+    <value>仅消除可见警报(&amp;V)</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTOOLS" xml:space="preserve">
     <value>无法设置内存范围，因为该 VM 上未安装 XenServer Tools。</value>
@@ -4953,7 +4953,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>已损坏</value>
   </data>
   <data name="GENERAL_SR_STATE_OK" xml:space="preserve">
-    <value>确定</value>
+    <value>正常</value>
   </data>
   <data name="GENERAL_UNKNOWN" xml:space="preserve">
     <value>未找到</value>
@@ -6950,7 +6950,7 @@ SCSI ID: {2}
     <value>缺少日志文件。</value>
   </data>
   <data name="MESSAGEBOX_LOGS_DELETE" xml:space="preserve">
-    <value>您已对事件列表应用过滤器。要消除所有事件还是仅消除已选择查看的事件? 在这两种情况下，将仅删除已完成的事件。</value>
+    <value>您已对事件列表应用过滤器。您想消除所有事件还是仅消除已选择查看的事件? 在这两种情况下，都将仅删除已完成的事件。</value>
   </data>
   <data name="MESSAGEBOX_LOGS_DELETE_NO_FILTER" xml:space="preserve">
     <value>此操作将删除所有已完成事件。是否要继续?</value>
@@ -7642,7 +7642,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>拓扑</value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_VCPUS" xml:space="preserve">
-    <value>vCPU</value>
+    <value>vCPU 数</value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN" xml:space="preserve">
     <value>为新 VM 指定的 vCPU 数超过池中任何服务器上的物理 CPU 数
@@ -8121,7 +8121,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>未设置主服务器</value>
   </data>
   <data name="NO_MESSAGES_TO_DISMISS" xml:space="preserve">
-    <value>没有可解除的系统警报。</value>
+    <value>没有可消除的系统警报。</value>
   </data>
   <data name="NO_MORE_USERDEVICES" xml:space="preserve">
     <value>XenServer 无法为此 VM 创建更多磁盘</value>
@@ -8829,7 +8829,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>{1} 的 {0}%</value>
   </data>
   <data name="QUERY_MEMORY_USAGE" xml:space="preserve">
-    <value>{1} 中的 {0}</value>
+    <value>{0}，共 {1}</value>
   </data>
   <data name="QUERY_PERCENT_OF_CPU" xml:space="preserve">
     <value>1 个 CPU 的 {0}%</value>
@@ -9290,7 +9290,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>正在执行池滚动升级...</value>
   </data>
   <data name="ROLLING_UPGRADE_CAN_RESUME_UPGRADE" xml:space="preserve">
-    <value>可以通过重新启动“滚动池升级”向导继续执行此升级。</value>
+    <value>可以通过重新启动“池滚动升级”向导继续执行此升级。</value>
   </data>
   <data name="ROLLING_UPGRADE_DISCONNECTED_SERVER" xml:space="preserve">
     <value>不再连接到 {0}。请核对您所做的选择并重试。</value>
@@ -10293,7 +10293,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>XenServer Tools: 最新</value>
   </data>
   <data name="TEMPLATE_INFO_VCPUS" xml:space="preserve">
-    <value>vCPU: {0}</value>
+    <value>vCPU 数: {0}</value>
   </data>
   <data name="TEMPLATE_LINUX_PACK_NEEDED" xml:space="preserve">
     <value>必须安装 Linux 包才能使用该模板</value>
@@ -10817,7 +10817,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>{0}: 由于在池 {1} 上启用了 WLB，因此已跳过检查。</value>
   </data>
   <data name="UPDATE_EXPORT_ALL_OR_FILTERED" xml:space="preserve">
-    <value>您已对更新列表应用过滤器。要从每个已连接的服务器中导出所有更新，还是仅导出已选择查看的更新?</value>
+    <value>您已对更新列表应用过滤器。您想从每个已连接的服务器中导出所有更新，还是仅导出已选择查看的更新?</value>
   </data>
   <data name="UPDATE_MANAGER_CANNOT_REMOVE_APPLIED_PATCH" xml:space="preserve">
     <value>无法删除应用到任何服务器的更新。</value>
@@ -12234,7 +12234,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>“{0}”功能在 {1} 中已弃用，在将来的版本中可能不提供</value>
   </data>
   <data name="X_IS_REMOVED_IN_X" xml:space="preserve">
-    <value>{0} 功能在 {1} 及更高版本中不提供</value>
+    <value>“{0}”功能在 {1} 及更高版本中不提供</value>
   </data>
   <data name="X_WITH_WARNING_X" xml:space="preserve">
     <value>{0}，警告: {1}</value>
