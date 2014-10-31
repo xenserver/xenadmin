@@ -3870,6 +3870,60 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Help on Licensing.
+        /// </summary>
+        public static string Message_help_license_expired {
+            get {
+                return ResourceManager.GetString("Message.help-license_expired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help on Licensing.
+        /// </summary>
+        public static string Message_help_license_not_available {
+            get {
+                return ResourceManager.GetString("Message.help-license_not_available", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help on Licensing.
+        /// </summary>
+        public static string Message_help_license_server_connected {
+            get {
+                return ResourceManager.GetString("Message.help-license_server_connected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help on Licensing.
+        /// </summary>
+        public static string Message_help_license_server_unavailable {
+            get {
+                return ResourceManager.GetString("Message.help-license_server_unavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help on Licensing.
+        /// </summary>
+        public static string Message_help_license_server_unreachable {
+            get {
+                return ResourceManager.GetString("Message.help-license_server_unreachable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help on Licensing.
+        /// </summary>
+        public static string Message_help_license_server_version_obsolete {
+            get {
+                return ResourceManager.GetString("Message.help-license_server_version_obsolete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Help on Broken Storage.
         /// </summary>
         public static string Message_help_pbd_plug_failed_on_server_start {

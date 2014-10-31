@@ -3581,10 +3581,10 @@ namespace XenAPI
 
         /// <summary>
         /// List all the SR's that are required for the VM to be recovered
-        /// First published in XenServer 6.2.
+        /// First published in XenServer Creedence.
         /// </summary>
         /// <param name="session">The session</param>
-        /// <param name="_vm">The opaque_ref of the given VM</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         /// <param name="_session_to">The session to which the SRs of the VM have to be recovered.</param>
         public static List<XenRef<SR>> get_SRs_required_for_recovery(Session session, string _vm, string _session_to)
         {
@@ -3593,10 +3593,10 @@ namespace XenAPI
 
         /// <summary>
         /// List all the SR's that are required for the VM to be recovered
-        /// First published in XenServer 6.2.
+        /// First published in XenServer Creedence.
         /// </summary>
         /// <param name="session">The session</param>
-        /// <param name="_vm">The opaque_ref of the given VM</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
         /// <param name="_session_to">The session to which the SRs of the VM have to be recovered.</param>
         public static XenRef<Task> async_get_SRs_required_for_recovery(Session session, string _vm, string _session_to)
         {
