@@ -397,7 +397,7 @@
     <value>3</value>
   </data>
   <data name="labelStopVM.Text" xml:space="preserve">
-    <value>VM 关闭时只能更改 vGPU。</value>
+    <value>VM 关闭时才能更改 vGPU。</value>
   </data>
   <data name="labelStopVM.Visible" type="System.Boolean, mscorlib">
     <value>False</value>

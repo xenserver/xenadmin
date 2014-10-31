@@ -160,13 +160,13 @@
     <value>161, 22</value>
   </data>
   <data name="tsmiDismissAll.Text" xml:space="preserve">
-    <value>すべてのアラートをクリア(&amp;D)</value>
+    <value>すべてクリア(&amp;D)</value>
   </data>
   <data name="tsmiDismissSelected.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 22</value>
   </data>
   <data name="tsmiDismissSelected.Text" xml:space="preserve">
-    <value>選択したアラートをクリア(&amp;D)</value>
+    <value>選択をクリア(&amp;D)</value>
   </data>
   <data name="toolStripSplitButtonDismiss.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -178,7 +178,7 @@
     <value>63, 23</value>
   </data>
   <data name="toolStripSplitButtonDismiss.Text" xml:space="preserve">
-    <value>このアラートをクリア(&amp;D)</value>
+    <value>クリア(&amp;D)</value>
   </data>
   <data name="toolStripLabelFiltersOnOff.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -308,7 +308,7 @@
     <value>True</value>
   </metadata>
   <data name="columnActions.HeaderText" xml:space="preserve">
-    <value>アクション(&amp;N)</value>
+    <value>アクション</value>
   </data>
   <data name="columnActions.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>

@@ -151,7 +151,7 @@
     <value>0, 29</value>
   </data>
   <data name="TemplatesGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 203</value>
+    <value>280, 239</value>
   </data>
   <data name="TemplatesGridView.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -232,7 +232,7 @@
     <value>286, 29</value>
   </data>
   <data name="DescriptionBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 203</value>
+    <value>201, 239</value>
   </data>
   <data name="DescriptionBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
