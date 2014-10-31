@@ -315,7 +315,7 @@
     <value>VM イベント</value>
   </data>
   <data name="EventsLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>MiddleCenter</value>
   </data>
   <data name="&gt;&gt;EventsLabel.Name" xml:space="preserve">
     <value>EventsLabel</value>

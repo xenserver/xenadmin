@@ -151,7 +151,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="clearAllButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>412, 375</value>
+    <value>510, 375</value>
   </data>
   <data name="clearAllButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 23</value>
@@ -178,7 +178,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="selectAllButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>525, 375</value>
+    <value>407, 375</value>
   </data>
   <data name="selectAllButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 23</value>

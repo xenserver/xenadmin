@@ -2265,7 +2265,7 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
     <value>WSS アプライアンスの存在を確認しています</value>
   </data>
   <data name="CHECK_WLB_ENABLED" xml:space="preserve">
-    <value>プール '{0}' の WLB は有効にできません</value>
+    <value>プール '{0}' の WLB が有効になっています</value>
   </data>
   <data name="CHIN" xml:space="preserve">
     <value>サーバー間のプライベート ネットワーク</value>

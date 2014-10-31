@@ -277,7 +277,7 @@
     <value>213, 28</value>
   </data>
   <data name="buttonOrganizationBig.Text" xml:space="preserve">
-    <value>組織ビュー</value>
+    <value>属性ビュー</value>
   </data>
   <data name="buttonOrganizationBig.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
