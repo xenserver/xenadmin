@@ -186,7 +186,8 @@ namespace XenAdmin.Dialogs
             {
                 AssignLicenseDialog ald = new AssignLicenseDialog(licenseRows.ConvertAll(r=>r.XenObject),
                                                                   licenseRows.First().LicenseServerAddress,
-                                                                  licenseRows.First().LicenseServerPort);
+                                                                  licenseRows.First().LicenseServerPort,
+                                                                  licenseRows.First().LicenseEdition);
                 ald.ShowDialog(View.Parent);
             }
             else

@@ -198,33 +198,6 @@
   <data name="licenseServerLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="licenseServerNameLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="licenseServerNameLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="licenseServerNameLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="licenseServerNameLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="licenseServerNameLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 8</value>
-  </data>
-  <data name="licenseServerNameLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 29</value>
-  </data>
-  <data name="licenseServerNameLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="licenseServerNameLabel.Text" xml:space="preserve">
-    <value>&amp;License Server:</value>
-  </data>
-  <data name="licenseServerNameLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
   <data name="&gt;&gt;licenseServerNameLabel.Name" xml:space="preserve">
     <value>licenseServerNameLabel</value>
   </data>
@@ -236,18 +209,6 @@
   </data>
   <data name="&gt;&gt;licenseServerNameLabel.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="licenseServerNameTextBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="licenseServerNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>101, 11</value>
-  </data>
-  <data name="licenseServerNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 23</value>
-  </data>
-  <data name="licenseServerNameTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
   </data>
   <data name="&gt;&gt;licenseServerNameTextBox.Name" xml:space="preserve">
     <value>licenseServerNameTextBox</value>
@@ -261,21 +222,6 @@
   <data name="&gt;&gt;licenseServerNameTextBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="licenseServerPortTextBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="licenseServerPortTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>427, 11</value>
-  </data>
-  <data name="licenseServerPortTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 23</value>
-  </data>
-  <data name="licenseServerPortTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="licenseServerPortTextBox.Text" xml:space="preserve">
-    <value>27000</value>
-  </data>
   <data name="&gt;&gt;licenseServerPortTextBox.Name" xml:space="preserve">
     <value>licenseServerPortTextBox</value>
   </data>
@@ -287,30 +233,6 @@
   </data>
   <data name="&gt;&gt;licenseServerPortTextBox.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="colonLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="colonLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="colonLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="colonLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="colonLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>411, 15</value>
-  </data>
-  <data name="colonLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>10, 15</value>
-  </data>
-  <data name="colonLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="colonLabel.Text" xml:space="preserve">
-    <value>:</value>
   </data>
   <data name="&gt;&gt;colonLabel.Name" xml:space="preserve">
     <value>colonLabel</value>
@@ -672,73 +594,73 @@
   <data name="&gt;&gt;standardPerSocketRadioButton.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="standardPerUsertRadioButton.AutoSize" type="System.Boolean, mscorlib">
+  <data name="standardPerUserRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="standardPerUsertRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="standardPerUserRadioButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="standardPerUsertRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="standardPerUserRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="standardPerUsertRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="standardPerUserRadioButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 213</value>
   </data>
-  <data name="standardPerUsertRadioButton.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="standardPerUserRadioButton.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 10</value>
   </data>
-  <data name="standardPerUsertRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="standardPerUserRadioButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 29</value>
   </data>
-  <data name="standardPerUsertRadioButton.TabIndex" type="System.Int32, mscorlib">
+  <data name="standardPerUserRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="standardPerUsertRadioButton.Text" xml:space="preserve">
+  <data name="standardPerUserRadioButton.Text" xml:space="preserve">
     <value>XenServer S&amp;tandard Per-User</value>
   </data>
-  <data name="&gt;&gt;standardPerUsertRadioButton.Name" xml:space="preserve">
-    <value>standardPerUsertRadioButton</value>
+  <data name="&gt;&gt;standardPerUserRadioButton.Name" xml:space="preserve">
+    <value>standardPerUserRadioButton</value>
   </data>
-  <data name="&gt;&gt;standardPerUsertRadioButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;standardPerUserRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;standardPerUsertRadioButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;standardPerUserRadioButton.Parent" xml:space="preserve">
     <value>editionLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;standardPerUsertRadioButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;standardPerUserRadioButton.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="xenDesktopPlatimuntRadioButton.AutoSize" type="System.Boolean, mscorlib">
+  <data name="xenDesktopPlatinumRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="xenDesktopPlatimuntRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="xenDesktopPlatinumRadioButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="xenDesktopPlatimuntRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="xenDesktopPlatinumRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="xenDesktopPlatimuntRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="xenDesktopPlatinumRadioButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 248</value>
   </data>
-  <data name="xenDesktopPlatimuntRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="xenDesktopPlatinumRadioButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 19</value>
   </data>
-  <data name="xenDesktopPlatimuntRadioButton.TabIndex" type="System.Int32, mscorlib">
+  <data name="xenDesktopPlatinumRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="xenDesktopPlatimuntRadioButton.Text" xml:space="preserve">
+  <data name="xenDesktopPlatinumRadioButton.Text" xml:space="preserve">
     <value>&amp;XenDesktop Platinum</value>
   </data>
-  <data name="&gt;&gt;xenDesktopPlatimuntRadioButton.Name" xml:space="preserve">
-    <value>xenDesktopPlatimuntRadioButton</value>
+  <data name="&gt;&gt;xenDesktopPlatinumRadioButton.Name" xml:space="preserve">
+    <value>xenDesktopPlatinumRadioButton</value>
   </data>
-  <data name="&gt;&gt;xenDesktopPlatimuntRadioButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;xenDesktopPlatinumRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;xenDesktopPlatimuntRadioButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;xenDesktopPlatinumRadioButton.Parent" xml:space="preserve">
     <value>editionLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;xenDesktopPlatimuntRadioButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;xenDesktopPlatinumRadioButton.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="editionLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -875,6 +797,132 @@
   </data>
   <data name="mainLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="licenseServerLayoutPanel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="mainLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="editionsGroupBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="buttonsLayoutPanel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="licenseServerNameLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="licenseServerNameLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="licenseServerNameLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="licenseServerNameLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="licenseServerNameLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 8</value>
+  </data>
+  <data name="licenseServerNameLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 29</value>
+  </data>
+  <data name="licenseServerNameLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="licenseServerNameLabel.Text" xml:space="preserve">
+    <value>&amp;License Server:</value>
+  </data>
+  <data name="licenseServerNameLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;licenseServerNameLabel.Name" xml:space="preserve">
+    <value>licenseServerNameLabel</value>
+  </data>
+  <data name="&gt;&gt;licenseServerNameLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;licenseServerNameLabel.Parent" xml:space="preserve">
+    <value>licenseServerLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;licenseServerNameLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="licenseServerNameTextBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="licenseServerNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>101, 11</value>
+  </data>
+  <data name="licenseServerNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>304, 23</value>
+  </data>
+  <data name="licenseServerNameTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;licenseServerNameTextBox.Name" xml:space="preserve">
+    <value>licenseServerNameTextBox</value>
+  </data>
+  <data name="&gt;&gt;licenseServerNameTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;licenseServerNameTextBox.Parent" xml:space="preserve">
+    <value>licenseServerLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;licenseServerNameTextBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="licenseServerPortTextBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="licenseServerPortTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>427, 11</value>
+  </data>
+  <data name="licenseServerPortTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 23</value>
+  </data>
+  <data name="licenseServerPortTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="licenseServerPortTextBox.Text" xml:space="preserve">
+    <value>27000</value>
+  </data>
+  <data name="&gt;&gt;licenseServerPortTextBox.Name" xml:space="preserve">
+    <value>licenseServerPortTextBox</value>
+  </data>
+  <data name="&gt;&gt;licenseServerPortTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;licenseServerPortTextBox.Parent" xml:space="preserve">
+    <value>licenseServerLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;licenseServerPortTextBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="colonLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="colonLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="colonLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="colonLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="colonLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>411, 15</value>
+  </data>
+  <data name="colonLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 15</value>
+  </data>
+  <data name="colonLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="colonLabel.Text" xml:space="preserve">
+    <value>:</value>
+  </data>
+  <data name="&gt;&gt;colonLabel.Name" xml:space="preserve">
+    <value>colonLabel</value>
+  </data>
+  <data name="&gt;&gt;colonLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colonLabel.Parent" xml:space="preserve">
+    <value>licenseServerLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;colonLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

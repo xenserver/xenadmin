@@ -356,6 +356,11 @@ namespace XenAdmin.Dialogs
             }
         }
 
+        public Host.Edition LicenseEdition
+        {
+            get { return licenseStatus.LicenseEdition; }
+        }
+
         private string LicenseStatus
         {
             get
