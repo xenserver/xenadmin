@@ -12269,4 +12269,10 @@ Enterprise features enabled</value>
     <value>Eligible for support 
 Standard features only</value>
   </data>
+  <data name="LICENSE_SERVER_WEB_CONSOLE_FORMAT" xml:space="preserve">
+    <value>http://{0}:{1}</value>
+  </data>
+  <data name="LICENSE_SERVER_WEB_CONSOLE_GOTO" xml:space="preserve">
+    <value>Go to...</value>
+  </data>
 </root>

@@ -17998,6 +17998,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://{0}:{1}.
+        /// </summary>
+        public static string LICENSE_SERVER_WEB_CONSOLE_FORMAT {
+            get {
+                return ResourceManager.GetString("LICENSE_SERVER_WEB_CONSOLE_FORMAT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to....
+        /// </summary>
+        public static string LICENSE_SERVER_WEB_CONSOLE_GOTO {
+            get {
+                return ResourceManager.GetString("LICENSE_SERVER_WEB_CONSOLE_GOTO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status.
         /// </summary>
         public static string LICENSE_STATUS {

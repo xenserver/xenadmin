@@ -43,7 +43,7 @@ namespace XenAdmin.Controls.SummaryPanel
         {
             InitializeComponent();
             helperLink.LinkClicked += helperLink_LinkClicked;
-            
+            information.LinkClicked += information_LinkClicked;
         }
 
         public string Title
@@ -101,6 +101,14 @@ namespace XenAdmin.Controls.SummaryPanel
             Controller.UrlClicked();
         }
 
+        private string summaryLink;
+
+        private void information_LinkClicked(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(summaryLink))
+                Program.OpenURL(summaryLink);
+        }
+        
         #region ISummaryPanelView Members
         [EditorBrowsable(EditorBrowsableState.Never)]
         public string DrawTitle
@@ -147,7 +155,23 @@ namespace XenAdmin.Controls.SummaryPanel
         [EditorBrowsable(EditorBrowsableState.Never)]
         public string DrawSummaryText
         {
-            set { information.Text = value; }
+            set
+            {
+                information.Text = value;
+                information.LinkArea = new LinkArea(0, 0);
+            }
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public string DrawSummaryLink
+        {
+            set { summaryLink = value; }
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public LinkArea DrawSummaryLinkArea
+        {
+            set { information.LinkArea = value; }
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]

@@ -972,8 +972,8 @@ namespace XenAdmin.TabPages
                     s.AddEntry(FriendlyName(String.Format("host.license_server-address")), host.license_server["address"]);
                 else
                 {
-                    var openUrl = new ToolStripMenuItem(Messages.HISTORYPAGE_GOTO);
-                    openUrl.Click += (sender, args) => Program.OpenURL(string.Format("http://{0}:{1}", licenseServerAddress, "8082"));
+                    var openUrl = new ToolStripMenuItem(Messages.LICENSE_SERVER_WEB_CONSOLE_GOTO);
+                    openUrl.Click += (sender, args) => Program.OpenURL(string.Format(Messages.LICENSE_SERVER_WEB_CONSOLE_FORMAT, licenseServerAddress, Host.LicenseServerWebConsolePort));
                     s.AddEntryLink(FriendlyName(String.Format("host.license_server-address")),
                                    host.license_server["address"],
                                    new[] {openUrl},

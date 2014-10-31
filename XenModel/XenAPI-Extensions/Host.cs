@@ -61,6 +61,8 @@ namespace XenAPI
             StandardPerUser        // Added in Creedence (standard-per-user)
         }
 
+        public static string LicenseServerWebConsolePort = "8082";
+
         public override string Name
         {
             get

@@ -84,7 +84,12 @@ namespace XenAdmin.Controls.SummaryPanel
         
         public SummaryTextComponent TextSummary
         {
-            set { View.DrawSummaryText = value.BuildSummary().ToString(); }
+            set
+            {
+                View.DrawSummaryText = value.BuildSummary().ToString();
+                View.DrawSummaryLinkArea = value.GetLinkArea();
+                View.DrawSummaryLink = value.GetLink();
+            }
         }
 
         public Action RunOnUrlClick { private get; set; }
