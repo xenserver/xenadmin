@@ -296,7 +296,7 @@
     <value>True</value>
   </metadata>
   <data name="columnMessage.HeaderText" xml:space="preserve">
-    <value>Message</value>
+    <value>メッセージ</value>
   </data>
   <data name="columnMessage.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>
