@@ -151,7 +151,7 @@
     <value>10, 40</value>
   </data>
   <data name="labelVCPUs.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+    <value>10, 0, 0, 0</value>
   </data>
   <data name="labelVCPUs.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 25</value>
