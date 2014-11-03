@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>An activation key can only be applied when the edition is set to 'free'.</value>
@@ -520,7 +520,7 @@
     <value>The device name {0} is invalid</value>
   </data>
   <data name="INVALID_EDITION" xml:space="preserve">
-    <value>The edition you supplied is invalid. Valid editions are 'free', 'enterprise' and 'platinum'.</value>
+    <value>The edition you supplied is invalid.</value>
   </data>
   <data name="INVALID_FEATURE_STRING" xml:space="preserve">
     <value>The given feature string is not valid.</value>
@@ -751,7 +751,7 @@
     <value>PIF has no network configuration</value>
   </data>
   <data name="PIF_HAS_NO_V6_NETWORK_CONFIGURATION" xml:space="preserve">
-    <value>PIF has no IPv6 configuration (mode currently set to 'none')</value>
+    <value>PIF has no IPv6 configuration (mode curently set to 'none')</value>
   </data>
   <data name="PIF_INCOMPATIBLE_PRIMARY_ADDRESS_TYPE" xml:space="preserve">
     <value>The primary address types are not compatible</value>
@@ -1244,6 +1244,9 @@ Authorized Roles: {1}</value>
   <data name="SR_BACKEND_FAILURE_448" xml:space="preserve">
     <value>Unsupported kernel: neither 2.6 nor 3.x.</value>
   </data>
+  <data name="SR_BACKEND_FAILURE_449" xml:space="preserve">
+    <value>tapdisk experienced an error</value>
+  </data>
   <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
     <value>The VDI is not available</value>
   </data>
@@ -1426,6 +1429,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="SR_IS_CACHE_SR" xml:space="preserve">
     <value>The SR is currently being used as a local cache SR.</value>
+  </data>
+  <data name="SR_NOT_ATTACHED" xml:space="preserve">
+    <value>The SR is not attached.</value>
   </data>
   <data name="SR_NOT_EMPTY" xml:space="preserve">
     <value>The SR operation cannot be performed because the SR is not empty.</value>
@@ -1666,6 +1672,15 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VM_IS_TEMPLATE" xml:space="preserve">
     <value>The operation attempted is not valid for templates</value>
+  </data>
+  <data name="VM_LACKS_FEATURE_SHUTDOWN" xml:space="preserve">
+    <value>You attempted an operation which needs the cooperative shutdown feature on a VM which lacks it.</value>
+  </data>
+  <data name="VM_LACKS_FEATURE_SUSPEND" xml:space="preserve">
+    <value>You attempted an operation which needs the VM cooperative suspend feature on a VM which lacks it.</value>
+  </data>
+  <data name="VM_LACKS_FEATURE_VCPU_HOTPLUG" xml:space="preserve">
+    <value>You attempted an operation which needs the VM hotplug-vcpu feature on a VM which lacks it.</value>
   </data>
   <data name="VM_MEMORY_SIZE_TOO_LOW" xml:space="preserve">
     <value>The specified VM has too little memory to be started.</value>
