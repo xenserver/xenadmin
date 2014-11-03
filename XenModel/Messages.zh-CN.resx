@@ -3091,7 +3091,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>当前位置</value>
   </data>
   <data name="CURRENT_MEMORY_USAGE" xml:space="preserve">
-    <value>当前内存使用率: {0}</value>
+    <value>当前内存使用: {0}</value>
   </data>
   <data name="CURRENT_MEMORY_USAGE_MULTIPLE" xml:space="preserve">
     <value>当前内存使用率: 每个 VM {0}</value>
