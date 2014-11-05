@@ -274,7 +274,7 @@
     <value>0, 3, 0, 0</value>
   </data>
   <data name="labelStartDelay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 20</value>
+    <value>133, 25</value>
   </data>
   <data name="labelStartDelay.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
