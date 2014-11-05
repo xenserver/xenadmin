@@ -1233,7 +1233,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>正在使用者中添加/删除角色</value>
   </data>
   <data name="AD_ADDING_REMOVING_ROLES_ON" xml:space="preserve">
-    <value>正在使用者“{0}”中添加/删除角色</value>
+    <value>正在为使用者“{0}”添加/删除角色</value>
   </data>
   <data name="AD_ALWAYS_GRANTED_ACCESS" xml:space="preserve">
     <value>(始终授予访问权限)</value>
@@ -3091,7 +3091,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>当前位置</value>
   </data>
   <data name="CURRENT_MEMORY_USAGE" xml:space="preserve">
-    <value>当前内存使用率: {0}</value>
+    <value>当前内存使用: {0}</value>
   </data>
   <data name="CURRENT_MEMORY_USAGE_MULTIPLE" xml:space="preserve">
     <value>当前内存使用率: 每个 VM {0}</value>
@@ -7645,7 +7645,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>vCPU 数</value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN" xml:space="preserve">
-    <value>为新 VM 指定的 vCPU 数超过池中任何服务器上的物理 CPU 数
+    <value>为新 VM 指定的 vCPU 数超过池中任何服务器上的物理 CPU 数。
 
 服务器“{0}”有 {1} 个物理 CPU。
 

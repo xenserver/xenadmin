@@ -274,13 +274,13 @@
     <value>61, 23</value>
   </data>
   <data name="toolStripButtonExportAll.Text" xml:space="preserve">
-    <value>全部导出(&amp;E)</value>
+    <value>全部导出(&amp;X)</value>
   </data>
   <data name="tsmiDismissAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 22</value>
+    <value>170, 22</value>
   </data>
   <data name="tsmiDismissAll.Text" xml:space="preserve">
-    <value>全部消除(&amp;A)</value>
+    <value>全部消除(&amp;D)</value>
   </data>
   <data name="tsmiDismissSelected.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 22</value>
@@ -484,7 +484,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="GridViewAlerts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 89</value>
+    <value>12, 89</value>
   </data>
   <data name="GridViewAlerts.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
