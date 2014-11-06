@@ -4791,16 +4791,16 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>通过 DHCP 自动获取</value>
   </data>
   <data name="FINISH_PAGE_TVM_GATEWAY" xml:space="preserve">
-    <value>转移 VM 的网关:</value>
+    <value>Transfer VM 的网关:</value>
   </data>
   <data name="FINISH_PAGE_TVM_IP" xml:space="preserve">
-    <value>转移 VM 的 IP 地址:</value>
+    <value>Transfer VM 的 IP 地址:</value>
   </data>
   <data name="FINISH_PAGE_TVM_MASK" xml:space="preserve">
-    <value>转移 VM 的子网掩码:</value>
+    <value>Transfer VM 的子网掩码:</value>
   </data>
   <data name="FINISH_PAGE_TVM_NETWORK" xml:space="preserve">
-    <value>转移 VM 的网络接口:</value>
+    <value>Transfer VM 的网络接口:</value>
   </data>
   <data name="FINISH_PAGE_VERIFY_MANIFEST" xml:space="preserve">
     <value>验证清单文件内容:</value>
@@ -10464,13 +10464,13 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>关闭高可用性功能</value>
   </data>
   <data name="TVM_PAGE_DESCRIPTION_EXPORT" xml:space="preserve">
-    <value>选择用于执行导出操作的临时 VM (转移 VM)运行时所在的网络。</value>
+    <value>选择用于执行导出操作的临时 VM (Transfer VM)运行时所在的网络。</value>
   </data>
   <data name="TVM_PAGE_DESCRIPTION_IMPORT" xml:space="preserve">
-    <value>选择用于执行导入操作的临时 VM (转移 VM)运行时所在的网络。</value>
+    <value>选择用于执行导入操作的临时 VM (Transfer VM)运行时所在的网络。</value>
   </data>
   <data name="TVM_PAGE_TEXT" xml:space="preserve">
-    <value>传输 VM 设置</value>
+    <value>Transfer VM 设置</value>
   </data>
   <data name="TVM_PAGE_TITLE" xml:space="preserve">
     <value>配置传输 VM 的网络连接选项</value>
