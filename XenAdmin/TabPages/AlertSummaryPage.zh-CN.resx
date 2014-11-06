@@ -484,13 +484,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="GridViewAlerts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 51</value>
+    <value>12, 51</value>
   </data>
   <data name="GridViewAlerts.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="GridViewAlerts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>721, 322</value>
+    <value>737, 322</value>
   </data>
   <data name="GridViewAlerts.TabIndex" type="System.Int32, mscorlib">
     <value>49</value>
