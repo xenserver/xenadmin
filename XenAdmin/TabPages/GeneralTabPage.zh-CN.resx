@@ -112,16 +112,16 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="panel2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="panel2.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -134,9 +134,12 @@
   <data name="pdSectionStorageLinkSystemCapabilities.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pdSectionStorageLinkSystemCapabilities.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 5</value>
+  </data>
+  <data name="pdSectionStorageLinkSystemCapabilities.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
   </data>
   <data name="pdSectionStorageLinkSystemCapabilities.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -181,7 +184,7 @@
     <value>panelStorageLinkSystemCapabilities</value>
   </data>
   <data name="&gt;&gt;panelStorageLinkSystemCapabilities.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panelStorageLinkSystemCapabilities.Parent" xml:space="preserve">
     <value>panel2</value>
@@ -200,6 +203,9 @@
   </data>
   <data name="pdSectionMultipathBoot.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 5</value>
+  </data>
+  <data name="pdSectionMultipathBoot.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
   </data>
   <data name="pdSectionMultipathBoot.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -244,7 +250,7 @@
     <value>panelMultipathBoot</value>
   </data>
   <data name="&gt;&gt;panelMultipathBoot.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panelMultipathBoot.Parent" xml:space="preserve">
     <value>panel2</value>
@@ -263,6 +269,9 @@
   </data>
   <data name="pdStorageLink.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 5</value>
+  </data>
+  <data name="pdStorageLink.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
   </data>
   <data name="pdStorageLink.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -307,7 +316,7 @@
     <value>panelStorageLink</value>
   </data>
   <data name="&gt;&gt;panelStorageLink.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panelStorageLink.Parent" xml:space="preserve">
     <value>panel2</value>
@@ -326,6 +335,9 @@
   </data>
   <data name="pdSectionUpdates.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 5</value>
+  </data>
+  <data name="pdSectionUpdates.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
   </data>
   <data name="pdSectionUpdates.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -370,7 +382,7 @@
     <value>panelUpdates</value>
   </data>
   <data name="&gt;&gt;panelUpdates.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panelUpdates.Parent" xml:space="preserve">
     <value>panel2</value>
@@ -384,34 +396,37 @@
   <data name="panelMemoryAndVCPUs.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <data name="pdSectionMemoryAndVCPUs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="pdSectionVCPUs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <data name="pdSectionMemoryAndVCPUs.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="pdSectionVCPUs.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 5</value>
   </data>
-  <data name="pdSectionMemoryAndVCPUs.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="pdSectionVCPUs.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
+  </data>
+  <data name="pdSectionVCPUs.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="pdSectionMemoryAndVCPUs.SectionTitle" xml:space="preserve">
-    <value>内存和 VCPU</value>
+  <data name="pdSectionVCPUs.SectionTitle" xml:space="preserve">
+    <value>CPU</value>
   </data>
-  <data name="pdSectionMemoryAndVCPUs.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="pdSectionVCPUs.Size" type="System.Drawing.Size, System.Drawing">
     <value>729, 34</value>
   </data>
-  <data name="pdSectionMemoryAndVCPUs.TabIndex" type="System.Int32, mscorlib">
+  <data name="pdSectionVCPUs.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;pdSectionMemoryAndVCPUs.Name" xml:space="preserve">
-    <value>pdSectionMemoryAndVCPUs</value>
+  <data name="&gt;&gt;pdSectionVCPUs.Name" xml:space="preserve">
+    <value>pdSectionVCPUs</value>
   </data>
-  <data name="&gt;&gt;pdSectionMemoryAndVCPUs.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionVCPUs.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;pdSectionMemoryAndVCPUs.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionVCPUs.Parent" xml:space="preserve">
     <value>panelMemoryAndVCPUs</value>
   </data>
-  <data name="&gt;&gt;pdSectionMemoryAndVCPUs.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionVCPUs.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelMemoryAndVCPUs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -433,7 +448,7 @@
     <value>panelMemoryAndVCPUs</value>
   </data>
   <data name="&gt;&gt;panelMemoryAndVCPUs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panelMemoryAndVCPUs.Parent" xml:space="preserve">
     <value>panel2</value>
@@ -452,6 +467,9 @@
   </data>
   <data name="pdSectionMultipathing.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 5</value>
+  </data>
+  <data name="pdSectionMultipathing.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
   </data>
   <data name="pdSectionMultipathing.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -496,7 +514,7 @@
     <value>panelMultipathing</value>
   </data>
   <data name="&gt;&gt;panelMultipathing.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panelMultipathing.Parent" xml:space="preserve">
     <value>panel2</value>
@@ -515,6 +533,9 @@
   </data>
   <data name="pdSectionStatus.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 5</value>
+  </data>
+  <data name="pdSectionStatus.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
   </data>
   <data name="pdSectionStatus.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -559,7 +580,7 @@
     <value>panelStatus</value>
   </data>
   <data name="&gt;&gt;panelStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panelStatus.Parent" xml:space="preserve">
     <value>panel2</value>
@@ -578,6 +599,9 @@
   </data>
   <data name="pdSectionHighAvailability.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 5</value>
+  </data>
+  <data name="pdSectionHighAvailability.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
   </data>
   <data name="pdSectionHighAvailability.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -622,7 +646,7 @@
     <value>panelHighAvailability</value>
   </data>
   <data name="&gt;&gt;panelHighAvailability.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panelHighAvailability.Parent" xml:space="preserve">
     <value>panel2</value>
@@ -641,6 +665,9 @@
   </data>
   <data name="pdSectionBootOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 5</value>
+  </data>
+  <data name="pdSectionBootOptions.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
   </data>
   <data name="pdSectionBootOptions.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -685,7 +712,7 @@
     <value>panelBootOptions</value>
   </data>
   <data name="&gt;&gt;panelBootOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panelBootOptions.Parent" xml:space="preserve">
     <value>panel2</value>
@@ -704,6 +731,9 @@
   </data>
   <data name="pdSectionCPU.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 5</value>
+  </data>
+  <data name="pdSectionCPU.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
   </data>
   <data name="pdSectionCPU.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -748,7 +778,7 @@
     <value>panelCPU</value>
   </data>
   <data name="&gt;&gt;panelCPU.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panelCPU.Parent" xml:space="preserve">
     <value>panel2</value>
@@ -767,6 +797,9 @@
   </data>
   <data name="pdSectionLicense.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 5</value>
+  </data>
+  <data name="pdSectionLicense.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
   </data>
   <data name="pdSectionLicense.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -811,7 +844,7 @@
     <value>panelLicense</value>
   </data>
   <data name="&gt;&gt;panelLicense.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panelLicense.Parent" xml:space="preserve">
     <value>panel2</value>
@@ -830,6 +863,9 @@
   </data>
   <data name="pdSectionVersion.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 5</value>
+  </data>
+  <data name="pdSectionVersion.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
   </data>
   <data name="pdSectionVersion.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -874,7 +910,7 @@
     <value>panelVersion</value>
   </data>
   <data name="&gt;&gt;panelVersion.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panelVersion.Parent" xml:space="preserve">
     <value>panel2</value>
@@ -893,6 +929,9 @@
   </data>
   <data name="pdSectionMemory.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 5</value>
+  </data>
+  <data name="pdSectionMemory.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
   </data>
   <data name="pdSectionMemory.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -937,7 +976,7 @@
     <value>panelMemory</value>
   </data>
   <data name="&gt;&gt;panelMemory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panelMemory.Parent" xml:space="preserve">
     <value>panel2</value>
@@ -956,6 +995,9 @@
   </data>
   <data name="pdSectionManagementInterfaces.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 5</value>
+  </data>
+  <data name="pdSectionManagementInterfaces.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
   </data>
   <data name="pdSectionManagementInterfaces.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1000,7 +1042,7 @@
     <value>panelManagementInterfaces</value>
   </data>
   <data name="&gt;&gt;panelManagementInterfaces.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panelManagementInterfaces.Parent" xml:space="preserve">
     <value>panel2</value>
@@ -1019,6 +1061,9 @@
   </data>
   <data name="pdSectionCustomFields.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 5</value>
+  </data>
+  <data name="pdSectionCustomFields.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
   </data>
   <data name="pdSectionCustomFields.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1063,7 +1108,7 @@
     <value>panelCustomFields</value>
   </data>
   <data name="&gt;&gt;panelCustomFields.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panelCustomFields.Parent" xml:space="preserve">
     <value>panel2</value>
@@ -1082,6 +1127,9 @@
   </data>
   <data name="pdSectionGeneral.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 5</value>
+  </data>
+  <data name="pdSectionGeneral.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
   </data>
   <data name="pdSectionGeneral.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1126,7 +1174,7 @@
     <value>panelGeneral</value>
   </data>
   <data name="&gt;&gt;panelGeneral.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panelGeneral.Parent" xml:space="preserve">
     <value>panel2</value>
@@ -1171,7 +1219,7 @@
     <value>buttonProperties</value>
   </data>
   <data name="&gt;&gt;buttonProperties.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonProperties.Parent" xml:space="preserve">
     <value>panel3</value>
@@ -1191,8 +1239,11 @@
   <data name="linkLabelExpand.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 2, 0</value>
   </data>
-  <data name="linkLabelExpand.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="linkLabelExpand.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>65, 28</value>
+  </data>
+  <data name="linkLabelExpand.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 17</value>
   </data>
   <data name="linkLabelExpand.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1207,7 +1258,7 @@
     <value>linkLabelExpand</value>
   </data>
   <data name="&gt;&gt;linkLabelExpand.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;linkLabelExpand.Parent" xml:space="preserve">
     <value>panel3</value>
@@ -1224,8 +1275,11 @@
   <data name="linkLabelCollapse.Location" type="System.Drawing.Point, System.Drawing">
     <value>651, 0</value>
   </data>
-  <data name="linkLabelCollapse.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="linkLabelCollapse.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>76, 28</value>
+  </data>
+  <data name="linkLabelCollapse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 17</value>
   </data>
   <data name="linkLabelCollapse.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1240,7 +1294,7 @@
     <value>linkLabelCollapse</value>
   </data>
   <data name="&gt;&gt;linkLabelCollapse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;linkLabelCollapse.Parent" xml:space="preserve">
     <value>panel3</value>
@@ -1254,6 +1308,9 @@
   <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="panel3.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>900, 28</value>
+  </data>
   <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
     <value>727, 28</value>
   </data>
@@ -1264,7 +1321,7 @@
     <value>panel3</value>
   </data>
   <data name="&gt;&gt;panel3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panel3.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -1291,13 +1348,16 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="pageContainerPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 78</value>
   </data>
   <data name="pageContainerPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>752, 792</value>
@@ -1309,7 +1369,7 @@
     <value>pageContainerPanel</value>
   </data>
   <data name="&gt;&gt;pageContainerPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pageContainerPanel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1317,7 +1377,7 @@
   <data name="&gt;&gt;pageContainerPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">

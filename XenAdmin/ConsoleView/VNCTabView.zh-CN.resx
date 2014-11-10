@@ -697,7 +697,7 @@
     <value>1</value>
   </data>
   <data name="dedicatedGpuWarning.Text" xml:space="preserve">
-    <value>此 VM 分配了专用 GPU。必须通过远程桌面连接此 VM。</value>
+    <value>此 VM 分配有直通 GPU。必须使用远程桌面进行连接。</value>
   </data>
   <data name="dedicatedGpuWarning.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>

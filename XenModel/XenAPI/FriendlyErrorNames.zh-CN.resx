@@ -162,11 +162,17 @@
   <data name="BOOTLOADER_FAILED" xml:space="preserve">
     <value>此 VM 的引导加载程序返回错误 -- 是否已成功安装 VM? {1}</value>
   </data>
+  <data name="BRIDGE_NOT_AVAILABLE" xml:space="preserve">
+    <value>找不到 VM 所需的桥接。</value>
+  </data>
   <data name="CANNOT_ADD_TUNNEL_TO_BOND_SLAVE" xml:space="preserve">
     <value>此 PIF 是绑定从属设备，不能带有隧道。</value>
   </data>
   <data name="CANNOT_ADD_VLAN_TO_BOND_SLAVE" xml:space="preserve">
     <value>此 PIF 是绑定从属设备，不能带有 VLAN。</value>
+  </data>
+  <data name="CANNOT_CHANGE_PIF_PROPERTIES" xml:space="preserve">
+    <value>无法更新此 PIF 的这一属性。只能更改非绑定物理 PIF 或绑定主 PIF 的属性。</value>
   </data>
   <data name="CANNOT_CONTACT_HOST" xml:space="preserve">
     <value>无法转发消息，因为无法与服务器联系。该服务器可能已关闭或者可能存在网络连接问题。</value>
@@ -282,6 +288,9 @@
   <data name="DOMAIN_EXISTS" xml:space="preserve">
     <value>无法执行该操作，因为指定的 VM 仍存在域。</value>
   </data>
+  <data name="DUPLICATE_MAC_SEED" xml:space="preserve">
+    <value>此 MAC 种子已被池中的 VM 使用</value>
+  </data>
   <data name="DUPLICATE_PIF_DEVICE_NAME" xml:space="preserve">
     <value>已存在具有此指定设备名称的 PIF。</value>
   </data>
@@ -309,11 +318,14 @@
   <data name="FIELD_TYPE_ERROR" xml:space="preserve">
     <value>您提供的某个字段使用了错误类型。</value>
   </data>
+  <data name="GPU_GROUP_CONTAINS_NO_PGPUS" xml:space="preserve">
+    <value>GPU 组不包含任何 pGPU。</value>
+  </data>
   <data name="GPU_GROUP_CONTAINS_PGPU" xml:space="preserve">
-    <value>GPU 组包含活动的 PGPU，无法删除。</value>
+    <value>GPU 组包含处于活动状态的 pGPU，无法删除。</value>
   </data>
   <data name="GPU_GROUP_CONTAINS_VGPU" xml:space="preserve">
-    <value>GPU 组包含活动的 VGPU，无法删除。</value>
+    <value>GPU 组包含处于活动状态的 vGPU，无法删除。</value>
   </data>
   <data name="HANDLE_INVALID" xml:space="preserve">
     <value>对象已删除。{0}:{1}</value>
@@ -495,6 +507,9 @@
   <data name="IMPORT_INCOMPATIBLE_VERSION" xml:space="preserve">
     <value>无法在此服务器上导入，因为它是在不兼容版本中保存的</value>
   </data>
+  <data name="INCOMPATIBLE_PIF_PROPERTIES" xml:space="preserve">
+    <value>无法绑定这些 PIF，因为其属性不同。</value>
+  </data>
   <data name="INTERFACE_HAS_NO_IP" xml:space="preserve">
     <value>无法使用指定的接口， 因为该接口没有 IP 地址</value>
   </data>
@@ -566,6 +581,9 @@
   </data>
   <data name="LICENSE_FILE_DEPRECATED" xml:space="preserve">
     <value>此类型的许可证文件适用于早期版本的 XenServer。请升级到新的许可系统。</value>
+  </data>
+  <data name="LICENSE_HOST_POOL_MISMATCH" xml:space="preserve">
+    <value>主机和池具有不兼容的许可证(版本)。</value>
   </data>
   <data name="LICENSE_PROCESSING_ERROR" xml:space="preserve">
     <value>处理许可证时出错。请与支持代表联系</value>
@@ -702,6 +720,15 @@
   <data name="PERMISSION_DENIED" xml:space="preserve">
     <value>不允许调用方执行此操作。</value>
   </data>
+  <data name="PGPU_INSUFFICIENT_CAPACITY_FOR_VGPU" xml:space="preserve">
+    <value>此 pGPU 上的容量不足，无法运行 vGPU。</value>
+  </data>
+  <data name="PGPU_IN_USE_BY_VM" xml:space="preserve">
+    <value>当前运行的 VM 正在使用此 pGPU。</value>
+  </data>
+  <data name="PGPU_NOT_COMPATIBLE_WITH_GPU_GROUP" xml:space="preserve">
+    <value>pGPU 类型与目标组不兼容。</value>
+  </data>
   <data name="PIF_ALREADY_BONDED" xml:space="preserve">
     <value>无法为已属于现有绑定的接口创建绑定。</value>
   </data>
@@ -740,6 +767,9 @@
   </data>
   <data name="PIF_TUNNEL_STILL_EXISTS" xml:space="preserve">
     <value>此接口上存在隧道时，无法继续执行操作。</value>
+  </data>
+  <data name="PIF_UNMANAGED" xml:space="preserve">
+    <value>无法执行请求的操作，因为指定的 PIF 不是由 xapi 进行管理。</value>
   </data>
   <data name="PIF_VLAN_EXISTS" xml:space="preserve">
     <value>VLAN 标记已在使用</value>
@@ -1214,6 +1244,9 @@
   <data name="SR_BACKEND_FAILURE_448" xml:space="preserve">
     <value>内核不受支持: 内核既不是 2.6，也不是 3.x。</value>
   </data>
+  <data name="SR_BACKEND_FAILURE_449" xml:space="preserve">
+    <value>LN_tapdisk experienced an error</value>
+  </data>
   <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
     <value>VDI 不可用</value>
   </data>
@@ -1394,6 +1427,12 @@
   <data name="SR_INDESTRUCTIBLE" xml:space="preserve">
     <value>无法销毁 SR，因为其中设置了“indestructible”标志。</value>
   </data>
+  <data name="SR_IS_CACHE_SR" xml:space="preserve">
+    <value>SR 当前正用作本地缓存 SR。</value>
+  </data>
+  <data name="SR_NOT_ATTACHED" xml:space="preserve">
+    <value>LN_The SR is not attached.</value>
+  </data>
   <data name="SR_NOT_EMPTY" xml:space="preserve">
     <value>无法执行该 SR 操作，因为 SR 不为空。</value>
   </data>
@@ -1444,6 +1483,9 @@
   </data>
   <data name="TRANSPORT_PIF_NOT_CONFIGURED" xml:space="preserve">
     <value>隧道传输 PIF 未设置 IP 配置。</value>
+  </data>
+  <data name="UNIMPLEMENTED_IN_SM_BACKEND" xml:space="preserve">
+    <value>您尝试执行的功能未实现</value>
   </data>
   <data name="UNKNOWN_BOOTLOADER" xml:space="preserve">
     <value>所请求的 VM {0} 引导加载程序 {1} 未知</value>
@@ -1526,8 +1568,23 @@
   <data name="VDI_NOT_MANAGED" xml:space="preserve">
     <value>无法执行该操作，因为系统未管理此 VDI</value>
   </data>
+  <data name="VDI_NOT_SPARSE" xml:space="preserve">
+    <value>VDI 未使用稀疏格式进行存储。可能无法仅对两个 VDI 之间已更改的块(或“块差异”/“磁盘增量”)进行排队和控制。请选择使用稀疏识别技术的 VDI (例如 VHD)。</value>
+  </data>
   <data name="VDI_READONLY" xml:space="preserve">
     <value>该操作需要进行写入访问，但 VDI {0} 为只读</value>
+  </data>
+  <data name="VDI_TOO_SMALL" xml:space="preserve">
+    <value>VDI 太小。请至少将其大小调整到最小大小。</value>
+  </data>
+  <data name="VGPU_TYPE_NOT_COMPATIBLE_WITH_RUNNING_TYPE" xml:space="preserve">
+    <value>VM 无法启动，因为所有 GPU 已被全部使用或者正在运行其他类型的 vGPU</value>
+  </data>
+  <data name="VGPU_TYPE_NOT_ENABLED" xml:space="preserve">
+    <value>vGPU 类型不是 pGPU 启用的其中一种类型。</value>
+  </data>
+  <data name="VGPU_TYPE_NOT_SUPPORTED" xml:space="preserve">
+    <value>vGPU 类型不是 pGPU 支持的其中一种类型。</value>
   </data>
   <data name="VIFS_MAX_ALLOWED" xml:space="preserve">
     <value>此虚拟机已达到允许使用的最大虚拟网络接口数。</value>
@@ -1592,6 +1649,9 @@
   <data name="VM_HAS_TOO_MANY_SNAPSHOTS" xml:space="preserve">
     <value>您尝试迁移的 VM 具有多个快照。</value>
   </data>
+  <data name="VM_HAS_VGPU" xml:space="preserve">
+    <value>无法执行此操作，因为 VM 具有一个或多个虚拟 GPU。</value>
+  </data>
   <data name="VM_HOST_INCOMPATIBLE_VERSION" xml:space="preserve">
     <value>在升级期间无法对旧版本的主机执行该 VM 操作。</value>
   </data>
@@ -1612,6 +1672,15 @@
   </data>
   <data name="VM_IS_TEMPLATE" xml:space="preserve">
     <value>尝试执行的操作对模板无效</value>
+  </data>
+  <data name="VM_LACKS_FEATURE_SHUTDOWN" xml:space="preserve">
+    <value>LN_You attempted an operation which needs the cooperative shutdown feature on a VM which lacks it.</value>
+  </data>
+  <data name="VM_LACKS_FEATURE_SUSPEND" xml:space="preserve">
+    <value>LN_You attempted an operation which needs the VM cooperative suspend feature on a VM which lacks it.</value>
+  </data>
+  <data name="VM_LACKS_FEATURE_VCPU_HOTPLUG" xml:space="preserve">
+    <value>LN_You attempted an operation which needs the VM hotplug-vcpu feature on a VM which lacks it.</value>
   </data>
   <data name="VM_MEMORY_SIZE_TOO_LOW" xml:space="preserve">
     <value>指定 VM 的内存过少，无法启动。</value>
@@ -1663,6 +1732,9 @@
   </data>
   <data name="VM_REQUIRES_VDI" xml:space="preserve">
     <value>无法启动 VM，因为无法连接 VM 所需要的 VDI</value>
+  </data>
+  <data name="VM_REQUIRES_VGPU" xml:space="preserve">
+    <value>VM 无法启动，因为没有可用的 GPU</value>
   </data>
   <data name="VM_REVERT_FAILED" xml:space="preserve">
     <value>将指定虚拟机还原到指定快照时出错</value>
