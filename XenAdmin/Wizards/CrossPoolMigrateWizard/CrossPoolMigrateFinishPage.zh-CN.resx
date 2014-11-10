@@ -178,9 +178,7 @@
     <value>8</value>
   </data>
   <data name="m_labelIntro.Text" xml:space="preserve">
-    <value>向导已准备就绪，可随时开始使用如下设置迁移所选 VM。如果需要返回做出任何更改，请检查以下设置并单击“上一步”，否则，请单击“完成”以迁移 VM 并关闭向导。
-
-要查看迁移的进度，请打开“日志”选项卡。</value>
+    <value>向导已准备好使用如下设置迁移所选 VM。请检查这些设置，如果需要返回做出任何更改，请单击“上一步”。否则，请单击“完成”以迁移 VM 并关闭向导。</value>
   </data>
   <data name="&gt;&gt;m_labelIntro.Name" xml:space="preserve">
     <value>m_labelIntro</value>

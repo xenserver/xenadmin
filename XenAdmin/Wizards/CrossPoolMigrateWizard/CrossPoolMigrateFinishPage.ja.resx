@@ -178,9 +178,7 @@
     <value>8</value>
   </data>
   <data name="m_labelIntro.Text" xml:space="preserve">
-    <value>選択した VM の移行準備ができました。設定内容を確認してください。設定を変更する場合は、[前へ] をクリックします。移行を実行するには、[完了] をクリックします。
-
-移行状況を確認するには、[ログ] タブを開きます。</value>
+    <value>選択した VM の移行準備ができました。設定内容を確認してください。設定を変更する場合は、[前へ] をクリックします。移行を実行するには、[完了] をクリックします。</value>
   </data>
   <data name="&gt;&gt;m_labelIntro.Name" xml:space="preserve">
     <value>m_labelIntro</value>

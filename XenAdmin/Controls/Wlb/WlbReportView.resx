@@ -304,7 +304,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelStartDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 7</value>
+    <value>7, 7</value>
   </data>
   <data name="labelStartDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 13</value>

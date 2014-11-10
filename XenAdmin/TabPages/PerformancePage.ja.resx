@@ -513,7 +513,7 @@
     <value>NoControl</value>
   </data>
   <data name="moveDownButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 1</value>
+    <value>84, 1</value>
   </data>
   <data name="moveDownButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>

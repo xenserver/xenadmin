@@ -147,6 +147,9 @@
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_3" xml:space="preserve">
     <value>XenServer 平台信息</value>
   </data>
+  <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_4" xml:space="preserve">
+    <value>vGPU 信息</value>
+  </data>
   <data name="POST_INSTALL_SECTION_INFO_1" xml:space="preserve">
     <value>仅限 XenServer 安装后操作(尝试修复 Linux 发行版。)</value>
   </data>

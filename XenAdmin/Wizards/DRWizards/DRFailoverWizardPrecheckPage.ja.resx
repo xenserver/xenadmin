@@ -330,9 +330,6 @@
   <data name="buttonResolveAll.Text" xml:space="preserve">
     <value>すべて解決(&amp;R)</value>
   </data>
-  <data name="buttonResolveAll.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="&gt;&gt;buttonResolveAll.Name" xml:space="preserve">
     <value>buttonResolveAll</value>
   </data>
