@@ -727,6 +727,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Citrix XenServer Desktop Edition.
+        /// </summary>
+        public static string Label_host_edition_desktop {
+            get {
+                return ResourceManager.GetString("Label-host.edition-desktop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Citrix XenServer Enterprise Edition.
         /// </summary>
         public static string Label_host_edition_enterprise {
@@ -804,15 +813,6 @@ namespace XenAdmin {
         public static string Label_host_edition_standard_per_socket {
             get {
                 return ResourceManager.GetString("Label-host.edition-standard-per-socket", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Citrix XenServer Standard Per User Edition.
-        /// </summary>
-        public static string Label_host_edition_standard_per_user {
-            get {
-                return ResourceManager.GetString("Label-host.edition-standard-per-user", resourceCulture);
             }
         }
         

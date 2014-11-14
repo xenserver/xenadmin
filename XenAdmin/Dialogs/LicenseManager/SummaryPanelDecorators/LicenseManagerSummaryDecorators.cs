@@ -66,7 +66,7 @@ namespace XenAdmin.Dialogs
             sb.AppendLine(Messages.LICENSE_MANAGER_SUMMARY_LICENSE_SERVER);
             linkArea.Start = sb.Length;
             sb.AppendLine(Row.LicenseServer);
-            linkArea.Length = Row.LicenseServerAddress.Length;
+            linkArea.Length = Row.LicenseServerAddress.ToLower() == "localhost" ? 0 : Row.LicenseServerAddress.Length;
             return sb.AppendLine();
         }
 
@@ -77,7 +77,7 @@ namespace XenAdmin.Dialogs
 
         public override string GetLink()
         {
-            if (String.IsNullOrEmpty(Row.LicenseServer))
+            if (string.IsNullOrEmpty(Row.LicenseServer) || Row.LicenseServerAddress.ToLower() == "localhost")
                 return string.Empty;
 
             return string.Format(Messages.LICENSE_SERVER_WEB_CONSOLE_FORMAT, Row.LicenseServerAddress, XenAPI.Host.LicenseServerWebConsolePort);

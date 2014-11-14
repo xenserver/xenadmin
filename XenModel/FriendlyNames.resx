@@ -1715,9 +1715,6 @@
   <data name="Label-host.edition-standard-per-socket" xml:space="preserve">
     <value>Citrix XenServer Standard Per Socket Edition</value>
   </data>
-  <data name="Label-host.edition-standard-per-user" xml:space="preserve">
-    <value>Citrix XenServer Standard Per User Edition</value>
-  </data>
   <data name="Label-host.edition-xendesktop-platinum" xml:space="preserve">
     <value>Citrix XenDesktop Platinum</value>
   </data>
@@ -1738,5 +1735,8 @@
   </data>
   <data name="Message.help-license_server_version_obsolete" xml:space="preserve">
     <value>Help on Licensing</value>
+  </data>
+  <data name="Label-host.edition-desktop" xml:space="preserve">
+    <value>Citrix XenServer Desktop Edition</value>
   </data>
 </root>
