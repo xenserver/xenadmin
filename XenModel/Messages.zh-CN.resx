@@ -11427,7 +11427,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>正在等待用户...</value>
   </data>
   <data name="WAKE_ON_LAN" xml:space="preserve">
-    <value>LAN 唤醒</value>
+    <value>局域网唤醒</value>
   </data>
   <data name="WARNING" xml:space="preserve">
     <value>警告</value>
