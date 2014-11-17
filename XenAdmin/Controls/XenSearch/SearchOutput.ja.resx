@@ -217,7 +217,7 @@
     <value>2</value>
   </data>
   <data name="buttonColumns.Text" xml:space="preserve">
-    <value>列の表示(&amp;H)</value>
+    <value>列の表示(&amp;O)</value>
   </data>
   <data name="&gt;&gt;buttonColumns.Name" xml:space="preserve">
     <value>buttonColumns</value>

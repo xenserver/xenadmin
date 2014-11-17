@@ -352,7 +352,7 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="GroupingControl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 150</value>
+    <value>40, 150</value>
   </data>
   <data name="GroupingControl.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>24, 3, 3, 3</value>
