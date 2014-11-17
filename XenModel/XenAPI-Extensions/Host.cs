@@ -1371,8 +1371,8 @@ namespace XenAPI
             get
             {
                 var hostEdition = GetEdition(edition);
-                return EligibleForSupport && hostEdition == Edition.EnterprisePerSocket || hostEdition == Edition.EnterprisePerUser
-                    || hostEdition == Edition.PerSocket;
+                return EligibleForSupport && (hostEdition == Edition.EnterprisePerSocket || hostEdition == Edition.EnterprisePerUser
+                    || hostEdition == Edition.PerSocket);
             }
         }
 
