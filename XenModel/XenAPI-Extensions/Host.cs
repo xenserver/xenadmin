@@ -417,8 +417,14 @@ namespace XenAPI
                     return BoolKeyPreferTrue(license_params, "restrict_export_resource_data");
                 }
                 // Pre-Creedence hosts:
-                // allowed on all non-expired editions except Free
-                return GetEdition(edition) == Edition.Free || LicenseExpiryUTC < DateTime.UtcNow - Connection.ServerTimeOffset;
+                // allowed on Per-Socket edition for Clearwater hosts and Advanced, Enterprise and Platinum editions for older hosts
+                var hostEdition = GetEdition(edition);
+                if (hostEdition == Edition.PerSocket || hostEdition == Edition.Advanced ||
+                    hostEdition == Edition.Enterprise || hostEdition == Edition.Platinum)
+                {
+                    return LicenseExpiryUTC < DateTime.UtcNow - Connection.ServerTimeOffset; // restrict if the license has expired
+                }
+                return true;
             }
         }
 
