@@ -8179,7 +8179,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>过期软件 - {0}</value>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>确定</value>
+    <value>正常</value>
   </data>
   <data name="OLDER_THAN_CURRENT_SERVER" xml:space="preserve">
     <value>早于当前服务器</value>
