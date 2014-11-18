@@ -2367,7 +2367,7 @@
     <value>ヘルプの目次(&amp;C)</value>
   </data>
   <data name="helpContextMenuItem.ShortcutKeyDisplayString" xml:space="preserve">
-    <value>F1 キー</value>
+    <value>F1</value>
   </data>
   <data name="helpContextMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>197, 22</value>

@@ -409,7 +409,7 @@
     <value>3, 3, 3, 0</value>
   </data>
   <data name="Dom0MemoryUsageGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>445, 78</value>
+    <value>420, 78</value>
   </data>
   <data name="Dom0MemoryUsageGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>

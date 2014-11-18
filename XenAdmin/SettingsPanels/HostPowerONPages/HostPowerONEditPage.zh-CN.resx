@@ -166,7 +166,7 @@
     <value>1</value>
   </data>
   <data name="radioButtonWakeonLAN.Text" xml:space="preserve">
-    <value>LAN 唤醒(WoL)(&amp;W)</value>
+    <value>局域网唤醒(&amp;W)</value>
   </data>
   <data name="&gt;&gt;radioButtonWakeonLAN.Name" xml:space="preserve">
     <value>radioButtonWakeonLAN</value>
