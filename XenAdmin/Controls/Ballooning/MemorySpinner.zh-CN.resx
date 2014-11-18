@@ -157,7 +157,7 @@
     <value>Right</value>
   </data>
   <data name="Spinner.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 2</value>
+    <value>125, 2</value>
   </data>
   <data name="Spinner.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
