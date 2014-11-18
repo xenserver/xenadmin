@@ -292,7 +292,7 @@
     <value>61, 23</value>
   </data>
   <data name="toolStripButtonExportAll.Text" xml:space="preserve">
-    <value>全部导出(&amp;E)</value>
+    <value>全部导出(&amp;X)</value>
   </data>
   <data name="toolStripLabelFiltersOnOff.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
