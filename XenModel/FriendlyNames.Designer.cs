@@ -3159,7 +3159,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A grace license was issued for {0}. This was either because the license server could not be reached or because the host has recently been upgraded..
+        ///   Looks up a localized string similar to A grace license was issued for {0}. This was because the license server could not be reached, it is an out-of-date version, or because the host has recently been upgraded..
         /// </summary>
         public static string Message_body_grace_license {
             get {
@@ -3362,6 +3362,15 @@ namespace XenAdmin {
         public static string Message_body_license_server_unreachable {
             get {
                 return ResourceManager.GetString("Message.body-license_server_unreachable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The license server for {0} is an out-of-date version..
+        /// </summary>
+        public static string Message_body_license_server_version_obsolete {
+            get {
+                return ResourceManager.GetString("Message.body-license_server_version_obsolete", resourceCulture);
             }
         }
         
@@ -3816,6 +3825,60 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Help on Licensing.
+        /// </summary>
+        public static string Message_help_license_expired {
+            get {
+                return ResourceManager.GetString("Message.help-license_expired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help on Licensing.
+        /// </summary>
+        public static string Message_help_license_not_available {
+            get {
+                return ResourceManager.GetString("Message.help-license_not_available", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help on Licensing.
+        /// </summary>
+        public static string Message_help_license_server_connected {
+            get {
+                return ResourceManager.GetString("Message.help-license_server_connected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help on Licensing.
+        /// </summary>
+        public static string Message_help_license_server_unavailable {
+            get {
+                return ResourceManager.GetString("Message.help-license_server_unavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help on Licensing.
+        /// </summary>
+        public static string Message_help_license_server_unreachable {
+            get {
+                return ResourceManager.GetString("Message.help-license_server_unreachable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help on Licensing.
+        /// </summary>
+        public static string Message_help_license_server_version_obsolete {
+            get {
+                return ResourceManager.GetString("Message.help-license_server_version_obsolete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Help on Broken Storage.
         /// </summary>
         public static string Message_help_pbd_plug_failed_on_server_start {
@@ -4082,6 +4145,15 @@ namespace XenAdmin {
         public static string Message_name_license_server_unreachable {
             get {
                 return ResourceManager.GetString("Message.name-license_server_unreachable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The license server is an out-of-date version..
+        /// </summary>
+        public static string Message_name_license_server_version_obsolete {
+            get {
+                return ResourceManager.GetString("Message.name-license_server_version_obsolete", resourceCulture);
             }
         }
         

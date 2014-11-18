@@ -135,6 +135,7 @@ namespace XenAdmin.Alerts
                     case XenAPI.Message.MessageType.METADATA_LUN_BROKEN:
                     case XenAPI.Message.MessageType.METADATA_LUN_HEALTHY:
                     case XenAPI.Message.MessageType.LICENSE_SERVER_UNREACHABLE:
+                    case XenAPI.Message.MessageType.LICENSE_SERVER_VERSION_OBSOLETE:
                     case XenAPI.Message.MessageType.GRACE_LICENSE:
                     case XenAPI.Message.MessageType.LICENSE_NOT_AVAILABLE:
                     case XenAPI.Message.MessageType.LICENSE_EXPIRED:

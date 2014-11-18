@@ -510,7 +510,7 @@
     <value>23</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>アクセス一覧のユーザーやグループに対するすべての変更は、そのユーザーの次回ログイン時に反映されます。 </value>
+    <value>アクセス一覧のユーザーやグループに対するすべての変更は、そのユーザーの次回ログイン時に反映されます。</value>
   </data>
   <data name="label2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>

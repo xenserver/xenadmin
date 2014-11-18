@@ -223,7 +223,7 @@
     <value>8</value>
   </data>
   <data name="btnLaterReport.Text" xml:space="preserve">
-    <value>前一段报告(&amp;P)</value>
+    <value>上一部分(&amp;P)</value>
   </data>
   <data name="&gt;&gt;btnLaterReport.Name" xml:space="preserve">
     <value>btnLaterReport</value>

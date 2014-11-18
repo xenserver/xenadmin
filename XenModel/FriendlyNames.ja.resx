@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AD.PropertyKey-subject-account-disabled" xml:space="preserve">
     <value>アカウント無効</value>
@@ -433,7 +433,7 @@
     <value>パブリック DNS エントリ</value>
   </data>
   <data name="Label-VM.VCPUWeight" xml:space="preserve">
-    <value>VCPU 優先度</value>
+    <value>vCPU 優先度</value>
   </data>
   <data name="Label-VM.VCPUWeight-0" xml:space="preserve">
     <value>最低</value>
@@ -862,25 +862,25 @@
     <value>NIC {0} 送信エラー</value>
   </data>
   <data name="Label-performance.runstate_blocked" xml:space="preserve">
-    <value>VCPU アイドル</value>
+    <value>vCPU アイドル</value>
   </data>
   <data name="Label-performance.runstate_concurrency_hazard" xml:space="preserve">
-    <value>VCPU 並列性のハザード</value>
+    <value>vCPU 並列性のハザード</value>
   </data>
   <data name="Label-performance.runstate_entry_time" xml:space="preserve">
-    <value>VCPU エントリ時間</value>
+    <value>vCPU エントリ時間</value>
   </data>
   <data name="Label-performance.runstate_full_contention" xml:space="preserve">
-    <value>VCPU 完全競合</value>
+    <value>vCPU 完全競合</value>
   </data>
   <data name="Label-performance.runstate_fullrun" xml:space="preserve">
-    <value>VCPU 完全実行</value>
+    <value>vCPU 完全実行</value>
   </data>
   <data name="Label-performance.runstate_partial_contention" xml:space="preserve">
-    <value>VCPU 部分競合</value>
+    <value>vCPU 部分競合</value>
   </data>
   <data name="Label-performance.runstate_partial_run" xml:space="preserve">
-    <value>VCPU 部分実行</value>
+    <value>vCPU 部分実行</value>
   </data>
   <data name="Label-performance.sr_cache_hits" xml:space="preserve">
     <value>IntelliCache キャッシュ成功</value>
@@ -1044,7 +1044,7 @@
 {1}</value>
   </data>
   <data name="Message.body-grace_license" xml:space="preserve">
-    <value>{0} に猶予ライセンスが発行されました。ライセンス サーバーに接続できないか、ホストがアップグレード直後である場合に猶予ランセンスが発行されます。</value>
+    <value>LN_A grace license was issued for {0}. This was because the license server could not be reached, it is an out-of-date version, or because the host has recently been upgraded.</value>
   </data>
   <data name="Message.body-ha_heartbeat_approaching_timeout" xml:space="preserve">
     <value>サーバー '{0}' で高可用性ネットワーク ハートビートへの応答に時間がかかっています。隔離される可能性があります。</value>
@@ -1365,7 +1365,7 @@
     <value>VM ディスク QoS の失敗</value>
   </data>
   <data name="Message.name-vcpu_qos_failed" xml:space="preserve">
-    <value>VM VCPU QoS の失敗</value>
+    <value>VM vCPU QoS の失敗</value>
   </data>
   <data name="Message.name-vif_qos_failed" xml:space="preserve">
     <value>VM ネットワーク インターフェイス QoS の失敗</value>
@@ -1657,5 +1657,71 @@
   </data>
   <data name="Label-performance.vbd_iowait" xml:space="preserve">
     <value>ディスク {0} IO 待機</value>
+  </data>
+  <data name="Label-performance.gpu_memory_free" xml:space="preserve">
+    <value>{0} {1} 空きメモリ</value>
+  </data>
+  <data name="Label-performance.gpu_memory_used" xml:space="preserve">
+    <value>{0} {1} 使用メモリ</value>
+  </data>
+  <data name="Label-performance.gpu_power_usage" xml:space="preserve">
+    <value>{0} {1} 使用電力</value>
+  </data>
+  <data name="Label-performance.gpu_temperature" xml:space="preserve">
+    <value>{0} {1} 温度</value>
+  </data>
+  <data name="Label-performance.gpu_utilisation_compute" xml:space="preserve">
+    <value>{0} {1} 使用率</value>
+  </data>
+  <data name="Label-performance.gpu_utilisation_memory_io" xml:space="preserve">
+    <value>{0} {1} メモリ使用率</value>
+  </data>
+  <data name="Label-host.edition-free/libre" xml:space="preserve">
+    <value>Citrix XenServer</value>
+  </data>
+  <data name="Message.name-SRUnavailable" xml:space="preserve">
+    <value>SR が既に使用中であるため空き領域を解放できません</value>
+  </data>
+  <data name="Message.name-UnknownTrimException" xml:space="preserve">
+    <value>空き領域を解放するときに不明なエラーが発生しました</value>
+  </data>
+  <data name="Message.name-UnsupportedSRForTrim" xml:space="preserve">
+    <value>この SR は空き領域の解放をサポートしていません</value>
+  </data>
+  <data name="Description-host.system_status-xcp-rrdd-plugins" xml:space="preserve">
+    <value>RRD デーモンのログ ファイル</value>
+  </data>
+  <data name="Label-host.system_status-xcp-rrdd-plugins" xml:space="preserve">
+    <value>RRD プラグインのログ</value>
+  </data>
+  <data name="Label-VM.Topology" xml:space="preserve">
+    <value>トポロジ</value>
+  </data>
+  <data name="Label-VM.MaxVCPUs" xml:space="preserve">
+    <value>vCPU の最大数</value>
+  </data>
+  <data name="Message.body-license_server_version_obsolete" xml:space="preserve">
+    <value>LN_The license server for {0} is an out-of-date version.</value>
+  </data>
+  <data name="Message.name-license_server_version_obsolete" xml:space="preserve">
+    <value>LN_The license server is an out-of-date version.</value>
+  </data>
+  <data name="Message.help-license_expired" xml:space="preserve">
+    <value>ライセンスのヘルプ</value>
+  </data>
+  <data name="Message.help-license_not_available" xml:space="preserve">
+    <value>ライセンスのヘルプ</value>
+  </data>
+  <data name="Message.help-license_server_connected" xml:space="preserve">
+    <value>ライセンスのヘルプ</value>
+  </data>
+  <data name="Message.help-license_server_unavailable" xml:space="preserve">
+    <value>ライセンスのヘルプ</value>
+  </data>
+  <data name="Message.help-license_server_unreachable" xml:space="preserve">
+    <value>ライセンスのヘルプ</value>
+  </data>
+  <data name="Message.help-license_server_version_obsolete" xml:space="preserve">
+    <value>ライセンスのヘルプ</value>
   </data>
 </root>

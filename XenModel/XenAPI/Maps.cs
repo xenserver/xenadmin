@@ -884,6 +884,53 @@ namespace XenAPI
             return result;
         }
 
+        internal static Dictionary<XenRef<VIF>, string>
+        convert_from_proxy_XenRefVIF_string(Object o)
+        {
+            Hashtable table = (Hashtable)o;
+            Dictionary<XenRef<VIF>, string> result = new Dictionary<XenRef<VIF>, string>();
+            if (table != null)
+            {
+                foreach (string key in table.Keys)
+                {
+                    try
+                    {
+                        XenRef<VIF> k = XenRef<VIF>.Create(key);
+                        string v = table[key] == null ? null : (string)table[key];
+                        result[k] = v;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            return result;
+        }
+
+        internal static Hashtable
+        convert_to_proxy_XenRefVIF_string(Dictionary<XenRef<VIF>, string> table)
+        {
+            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            if (table != null)
+            {
+                foreach (XenRef<VIF> key in table.Keys)
+                {
+                    try
+                    {
+                        string k = (key != null) ? key : "";
+                        string v = (table[key] != null) ? table[key] : "";
+                        result[k] = v;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            return result;
+        }
+
         internal static Dictionary<XenRef<VIF>, XenRef<Network>>
         convert_from_proxy_XenRefVIF_XenRefNetwork(Object o)
         {

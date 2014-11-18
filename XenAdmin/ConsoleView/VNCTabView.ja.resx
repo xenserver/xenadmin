@@ -697,7 +697,7 @@
     <value>1</value>
   </data>
   <data name="dedicatedGpuWarning.Text" xml:space="preserve">
-    <value>この VM には専用の GPU が割り当てられているため、リモート デスクトップで接続する必要があります。</value>
+    <value>この VM にはパススルー GPU が割り当てられているため、リモート デスクトップで接続する必要があります。</value>
   </data>
   <data name="dedicatedGpuWarning.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>

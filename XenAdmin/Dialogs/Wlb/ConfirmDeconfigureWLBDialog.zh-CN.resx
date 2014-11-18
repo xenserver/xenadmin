@@ -132,9 +132,9 @@
     <value>0</value>
   </data>
   <data name="labelMessage.Text" xml:space="preserve">
-    <value>如果现在取消该向导，Workload Balancing 仍将使用默认配置进行初始化，但不会启用。
+    <value>立即取消运行向导将保持 Workload Balancing 使用默认配置启动，但不会启用。
 
-是否彻底取消 Workload Balancing 的配置?</value>
+是否要完全取消配置 Workload Balancing?</value>
   </data>
   <data name="&gt;&gt;labelMessage.Name" xml:space="preserve">
     <value>labelMessage</value>

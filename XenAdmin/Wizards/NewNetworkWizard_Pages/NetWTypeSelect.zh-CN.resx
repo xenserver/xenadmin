@@ -163,7 +163,7 @@
     <value>NoControl</value>
   </data>
   <data name="rbtnInternalNetwork.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 75</value>
+    <value>17, 78</value>
   </data>
   <data name="rbtnInternalNetwork.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 17</value>
@@ -196,7 +196,7 @@
     <value>NoControl</value>
   </data>
   <data name="rbtnBondedNetwork.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 204</value>
+    <value>20, 219</value>
   </data>
   <data name="rbtnBondedNetwork.Size" type="System.Drawing.Size, System.Drawing">
     <value>117, 17</value>
@@ -226,7 +226,7 @@
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>37, 100</value>
+    <value>37, 103</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>359, 26</value>
@@ -257,7 +257,7 @@
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>38, 228</value>
+    <value>38, 243</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>320, 26</value>
@@ -291,18 +291,18 @@
     <value>NoControl</value>
   </data>
   <data name="labelCHIN.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 20</value>
+    <value>19, 23</value>
   </data>
   <data name="labelCHIN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 39</value>
+    <value>331, 25</value>
   </data>
   <data name="labelCHIN.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="labelCHIN.Text" xml:space="preserve">
-    <value>创建不离开 XenServer 池的网络。
-此网络可用作池中两个 VM 之间的专用连接。
-此类网络需要运行 vSwitch Controller。</value>
+    <value>创建不离开每个 XenServer 池的网络。
+此网络可用作池中的两个 VM 之间的专用连接。
+此类型的网络需要运行 vSwitch Controller。</value>
   </data>
   <data name="&gt;&gt;labelCHIN.Name" xml:space="preserve">
     <value>labelCHIN</value>
@@ -326,7 +326,7 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 20</value>
+    <value>19, 23</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>303, 13</value>
@@ -431,7 +431,7 @@
     <value>NoControl</value>
   </data>
   <data name="rbtnCHIN.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>0, 3</value>
   </data>
   <data name="rbtnCHIN.Size" type="System.Drawing.Size, System.Drawing">
     <value>193, 17</value>

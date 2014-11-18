@@ -39,6 +39,8 @@ namespace XenAdmin.Actions
 {
     public class CreatePoolAction : PoolAbstractAction
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly List<Host> _slaves, _hostsToRelicense, _hostsToCpuMask, _hostsToAdConfigure;
         private readonly string _name;
         private readonly string _description;
@@ -121,22 +123,16 @@ namespace XenAdmin.Actions
 
             foreach (Host slave in _slaves)
             {
+                log.InfoFormat("Adding member {0}", slave.Name);
                 int lo = (int)(i2 * p2);
                 int hi = (int)((i2 + 1) * p2);
                 // RBAC: We have forced identical AD configs, but this will fail unless both slave-to-be and master sessions have the correct role.
                 Session = NewSession(slave.Connection);
                 RelatedTask = XenAPI.Pool.async_join(Session, master_pool.Connection.Hostname, master_pool.Connection.Username, master_pool.Connection.Password);
                 PollToCompletion(lo, hi);
-                // No need to log out the Session, because the slaves are all going to reset their databases anyway.
                 i2++;
-            }
-            // Note that Session is now a useless slave Session, so we can't do any more actions on the master.
-            // Save the original Session if you need it.
 
-            Description = Messages.ACTION_POOL_WIZARD_CREATE_DESCRIPTION_DISCONNECTING;
-
-            foreach (Host slave in _slaves)
-            {
+                log.InfoFormat("Dropping connection to {0}", slave.Name);
                 slave.Connection.EndConnect();
                 // EndConnect will clear the cache itself, but on a background thread. To prevent a race between the event handlers 
                 // being removed with the connection, and the final cache clear events we explicitly call cache clear once more before

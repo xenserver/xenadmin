@@ -60,7 +60,8 @@ namespace XenAPI
             string bridge,
             Dictionary<string, XenRef<Blob>> blobs,
             string[] tags,
-            network_default_locking_mode default_locking_mode)
+            network_default_locking_mode default_locking_mode,
+            Dictionary<XenRef<VIF>, string> assigned_ips)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -75,6 +76,7 @@ namespace XenAPI
             this.blobs = blobs;
             this.tags = tags;
             this.default_locking_mode = default_locking_mode;
+            this.assigned_ips = assigned_ips;
         }
 
         /// <summary>
@@ -101,6 +103,7 @@ namespace XenAPI
             blobs = update.blobs;
             tags = update.tags;
             default_locking_mode = update.default_locking_mode;
+            assigned_ips = update.assigned_ips;
         }
 
         internal void UpdateFromProxy(Proxy_Network proxy)
@@ -118,6 +121,7 @@ namespace XenAPI
             blobs = proxy.blobs == null ? null : Maps.convert_from_proxy_string_XenRefBlob(proxy.blobs);
             tags = proxy.tags == null ? new string[] {} : (string [])proxy.tags;
             default_locking_mode = proxy.default_locking_mode == null ? (network_default_locking_mode) 0 : (network_default_locking_mode)Helper.EnumParseDefault(typeof(network_default_locking_mode), (string)proxy.default_locking_mode);
+            assigned_ips = proxy.assigned_ips == null ? null : Maps.convert_from_proxy_XenRefVIF_string(proxy.assigned_ips);
         }
 
         public Proxy_Network ToProxy()
@@ -136,6 +140,7 @@ namespace XenAPI
             result_.blobs = Maps.convert_to_proxy_string_XenRefBlob(blobs);
             result_.tags = tags;
             result_.default_locking_mode = network_default_locking_mode_helper.ToString(default_locking_mode);
+            result_.assigned_ips = Maps.convert_to_proxy_XenRefVIF_string(assigned_ips);
             return result_;
         }
 
@@ -158,6 +163,7 @@ namespace XenAPI
             blobs = Maps.convert_from_proxy_string_XenRefBlob(Marshalling.ParseHashTable(table, "blobs"));
             tags = Marshalling.ParseStringArray(table, "tags");
             default_locking_mode = (network_default_locking_mode)Helper.EnumParseDefault(typeof(network_default_locking_mode), Marshalling.ParseString(table, "default_locking_mode"));
+            assigned_ips = Maps.convert_from_proxy_XenRefVIF_string(Marshalling.ParseHashTable(table, "assigned_ips"));
         }
 
         public bool DeepEquals(Network other, bool ignoreCurrentOperations)
@@ -181,7 +187,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._bridge, other._bridge) &&
                 Helper.AreEqual2(this._blobs, other._blobs) &&
                 Helper.AreEqual2(this._tags, other._tags) &&
-                Helper.AreEqual2(this._default_locking_mode, other._default_locking_mode);
+                Helper.AreEqual2(this._default_locking_mode, other._default_locking_mode) &&
+                Helper.AreEqual2(this._assigned_ips, other._assigned_ips);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Network server)
@@ -435,6 +442,17 @@ namespace XenAPI
         public static network_default_locking_mode get_default_locking_mode(Session session, string _network)
         {
             return (network_default_locking_mode)Helper.EnumParseDefault(typeof(network_default_locking_mode), (string)session.proxy.network_get_default_locking_mode(session.uuid, (_network != null) ? _network : "").parse());
+        }
+
+        /// <summary>
+        /// Get the assigned_ips field of the given network.
+        /// First published in XenServer Creedence.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
+        public static Dictionary<XenRef<VIF>, string> get_assigned_ips(Session session, string _network)
+        {
+            return Maps.convert_from_proxy_XenRefVIF_string(session.proxy.network_get_assigned_ips(session.uuid, (_network != null) ? _network : "").parse());
         }
 
         /// <summary>
@@ -881,5 +899,24 @@ namespace XenAPI
             }
         }
         private network_default_locking_mode _default_locking_mode;
+
+        /// <summary>
+        /// The IP addresses assigned to VIFs on networks that have active xapi-managed DHCP
+        /// First published in XenServer Creedence.
+        /// </summary>
+        public virtual Dictionary<XenRef<VIF>, string> assigned_ips
+        {
+            get { return _assigned_ips; }
+            set
+            {
+                if (!Helper.AreEqual(value, _assigned_ips))
+                {
+                    _assigned_ips = value;
+                    Changed = true;
+                    NotifyPropertyChanged("assigned_ips");
+                }
+            }
+        }
+        private Dictionary<XenRef<VIF>, string> _assigned_ips;
     }
 }

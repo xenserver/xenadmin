@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AD.PropertyKey-subject-account-disabled" xml:space="preserve">
     <value>帐户已禁用</value>
@@ -433,7 +433,7 @@
     <value>公用 DNS 条目</value>
   </data>
   <data name="Label-VM.VCPUWeight" xml:space="preserve">
-    <value>VCPU 优先级</value>
+    <value>vCPU 优先级</value>
   </data>
   <data name="Label-VM.VCPUWeight-0" xml:space="preserve">
     <value>最低</value>
@@ -862,25 +862,25 @@
     <value>NIC {0} 发送错误</value>
   </data>
   <data name="Label-performance.runstate_blocked" xml:space="preserve">
-    <value>VCPU 空闲</value>
+    <value>vCPU 空闲</value>
   </data>
   <data name="Label-performance.runstate_concurrency_hazard" xml:space="preserve">
-    <value>VCPU 并发危险</value>
+    <value>vCPU 并发危险</value>
   </data>
   <data name="Label-performance.runstate_entry_time" xml:space="preserve">
-    <value>VCPU 进入时间</value>
+    <value>vCPU 进入时间</value>
   </data>
   <data name="Label-performance.runstate_full_contention" xml:space="preserve">
-    <value>VCPU 完全争用</value>
+    <value>vCPU 完全争用</value>
   </data>
   <data name="Label-performance.runstate_fullrun" xml:space="preserve">
-    <value>VCPU 完全运行</value>
+    <value>vCPU 完全运行</value>
   </data>
   <data name="Label-performance.runstate_partial_contention" xml:space="preserve">
-    <value>VCPU 部分争用</value>
+    <value>vCPU 部分争用</value>
   </data>
   <data name="Label-performance.runstate_partial_run" xml:space="preserve">
-    <value>VCPU 部分运行</value>
+    <value>vCPU 部分运行</value>
   </data>
   <data name="Label-performance.sr_cache_hits" xml:space="preserve">
     <value>IntelliCache 缓存命中数</value>
@@ -1044,7 +1044,7 @@
 {1}</value>
   </data>
   <data name="Message.body-grace_license" xml:space="preserve">
-    <value>已为 {0} 颁发宽限期许可证。这是因为许可证服务器无法访问或者最近对主机进行了升级。</value>
+    <value>LN_A grace license was issued for {0}. This was because the license server could not be reached, it is an out-of-date version, or because the host has recently been upgraded.</value>
   </data>
   <data name="Message.body-ha_heartbeat_approaching_timeout" xml:space="preserve">
     <value>服务器“{0}”响应高可用性网络连接检测信号的时间过长，可能要进行防护。</value>
@@ -1365,7 +1365,7 @@
     <value>VM 磁盘 QoS 失败</value>
   </data>
   <data name="Message.name-vcpu_qos_failed" xml:space="preserve">
-    <value>VM VCPU QoS 失败</value>
+    <value>VM vCPU QoS 失败</value>
   </data>
   <data name="Message.name-vif_qos_failed" xml:space="preserve">
     <value>VM 网络接口 QoS 失败</value>
@@ -1657,5 +1657,71 @@
   </data>
   <data name="Label-performance.vbd_iowait" xml:space="preserve">
     <value>磁盘 {0} IO 等待</value>
+  </data>
+  <data name="Label-performance.gpu_memory_free" xml:space="preserve">
+    <value>{0} {1} 可用内存</value>
+  </data>
+  <data name="Label-performance.gpu_memory_used" xml:space="preserve">
+    <value>{0} {1} 已用内存</value>
+  </data>
+  <data name="Label-performance.gpu_power_usage" xml:space="preserve">
+    <value>{0} {1} 电源使用率</value>
+  </data>
+  <data name="Label-performance.gpu_temperature" xml:space="preserve">
+    <value>{0} {1} 温度</value>
+  </data>
+  <data name="Label-performance.gpu_utilisation_compute" xml:space="preserve">
+    <value>{0} {1} 利用率</value>
+  </data>
+  <data name="Label-performance.gpu_utilisation_memory_io" xml:space="preserve">
+    <value>{0} {1} 内存利用率</value>
+  </data>
+  <data name="Label-host.edition-free/libre" xml:space="preserve">
+    <value>Citrix XenServer</value>
+  </data>
+  <data name="Message.name-SRUnavailable" xml:space="preserve">
+    <value>无法回收释放的空间，因为 SR 正忙</value>
+  </data>
+  <data name="Message.name-UnknownTrimException" xml:space="preserve">
+    <value>回收释放的空间时出现未知错误</value>
+  </data>
+  <data name="Message.name-UnsupportedSRForTrim" xml:space="preserve">
+    <value>不支持在此 SR 上回收释放的空间</value>
+  </data>
+  <data name="Description-host.system_status-xcp-rrdd-plugins" xml:space="preserve">
+    <value>来自 RRD 守护程序的日志文件</value>
+  </data>
+  <data name="Label-host.system_status-xcp-rrdd-plugins" xml:space="preserve">
+    <value>RRD 插件日志</value>
+  </data>
+  <data name="Label-VM.Topology" xml:space="preserve">
+    <value>拓扑</value>
+  </data>
+  <data name="Label-VM.MaxVCPUs" xml:space="preserve">
+    <value>vCPU 的最大数量</value>
+  </data>
+  <data name="Message.body-license_server_version_obsolete" xml:space="preserve">
+    <value>LN_The license server for {0} is an out-of-date version.</value>
+  </data>
+  <data name="Message.name-license_server_version_obsolete" xml:space="preserve">
+    <value>LN_The license server is an out-of-date version.</value>
+  </data>
+  <data name="Message.help-license_expired" xml:space="preserve">
+    <value>有关许可的帮助</value>
+  </data>
+  <data name="Message.help-license_not_available" xml:space="preserve">
+    <value>有关许可的帮助</value>
+  </data>
+  <data name="Message.help-license_server_connected" xml:space="preserve">
+    <value>有关许可的帮助</value>
+  </data>
+  <data name="Message.help-license_server_unavailable" xml:space="preserve">
+    <value>有关许可的帮助</value>
+  </data>
+  <data name="Message.help-license_server_unreachable" xml:space="preserve">
+    <value>有关许可的帮助</value>
+  </data>
+  <data name="Message.help-license_server_version_obsolete" xml:space="preserve">
+    <value>有关许可的帮助</value>
   </data>
 </root>

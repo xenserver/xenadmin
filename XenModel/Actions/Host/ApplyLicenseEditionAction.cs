@@ -160,6 +160,11 @@ namespace XenAdmin.Actions
                                         // couldn't check out license because couldn't contact license server
                                         alertText = string.Format(PropertyManager.GetFriendlyName("Message.body-license_server_unreachable"), xoClosure.Name);
                                     }
+                                    else if (alert.Title == PropertyManager.GetFriendlyName("Message.name-license_server_version_obsolete"))
+                                    {
+                                        // the license server is obsolete
+                                        alertText = string.Format(PropertyManager.GetFriendlyName("Message.body-license_server_version_obsolete"), xoClosure.Name);
+                                    }
                                     else if (alert.Title == PropertyManager.GetFriendlyName("Message.name-grace_license"))
                                     {
                                         alertText = string.Empty;

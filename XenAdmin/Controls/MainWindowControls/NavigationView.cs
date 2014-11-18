@@ -313,7 +313,7 @@ namespace XenAdmin.Controls.MainWindowControls
 
         public void RequestRefreshTreeView()
         {
-            Program.BeginInvoke(this, treeViewUpdateManager.RequestUpdate);
+            Program.BeginInvoke(Program.MainWindow, treeViewUpdateManager.RequestUpdate);
         }
 
         private void SuspendRefreshTreeView()
@@ -346,7 +346,7 @@ namespace XenAdmin.Controls.MainWindowControls
             if (Disposing || IsDisposed || Program.Exiting)
                 return;
 
-            Program.Invoke(this, () =>
+            Program.Invoke(Program.MainWindow, () =>
             {
                 if (ignoreRefreshTreeView > 0)
                 {
