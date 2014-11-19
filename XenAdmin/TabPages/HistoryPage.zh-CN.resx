@@ -428,7 +428,7 @@
     <value>Segoe UI, 8.25pt</value>
   </data>
   <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 3, 0, 0</value>
+    <value>12, 12, 12, 12</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>786, 336</value>
