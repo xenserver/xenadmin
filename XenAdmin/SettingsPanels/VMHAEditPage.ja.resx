@@ -487,7 +487,7 @@
     <value>140, 3</value>
   </data>
   <data name="m_comboBoxProtectionLevel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>249, 20</value>
+    <value>219, 20</value>
   </data>
   <data name="m_comboBoxProtectionLevel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -607,7 +607,7 @@
     <value>NoControl</value>
   </data>
   <data name="comboLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>395, 3</value>
+    <value>362, 3</value>
   </data>
   <data name="comboLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>226, 29</value>
