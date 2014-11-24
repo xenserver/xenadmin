@@ -88,19 +88,24 @@ namespace XenAdmin.Controls.CheckableDataGridView
                 }
                 cRow.CellDataUpdated += cRow_CellDataUpdated;
                 IXenObject xenObject = GetXenObject(cRow);
-                xenObject.PropertyChanged += XenObject_PropertyChanged;
+                if (xenObject != null && xenObject.Connection != null)
+                    xenObject.Connection.Cache.RegisterBatchCollectionChanged<Host>(HostBatchCollectionChanged);
+
                 View.DrawRow(cRow);
             }
 
             rows.ForEach(r=>r.BeginCellUpdate());
         }
 
-        void XenObject_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        void HostBatchCollectionChanged(object sender, EventArgs e)
         {
-            IXenObject xo = sender as IXenObject;
-            if(xo==null) return;
+            ChangeableDictionary<XenRef<Host>, Host> d = sender as ChangeableDictionary<XenRef<Host>, Host>;
+            if (d == null) return;
 
-            RedrawRow(storedRows.FirstOrDefault(r => GetXenObject(r) == xo));
+            foreach (var host in d.Values.Where(host => host.IsMaster()))
+            {
+                RedrawRow(storedRows.FirstOrDefault(r => GetXenObject(r) == host));
+            }
         }
 
         private void cRow_CellDataUpdated(object sender, EventArgs e)
@@ -387,8 +392,8 @@ namespace XenAdmin.Controls.CheckableDataGridView
                 {
                     row.CellDataUpdated -= cRow_CellDataUpdated;
                     IXenObject xenObject = GetXenObject(row);
-                    if(xenObject != null)
-                        xenObject.PropertyChanged -= XenObject_PropertyChanged;
+                    if (xenObject != null && xenObject.Connection != null)
+                        xenObject.Connection.Cache.DeregisterBatchCollectionChanged<Host>(HostBatchCollectionChanged);
                 }
 
                 if(disposing)
