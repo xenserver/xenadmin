@@ -181,7 +181,7 @@
     <value>9, 3, 3, 3</value>
   </data>
   <data name="editPlacementPolicyButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 22</value>
+    <value>130, 22</value>
   </data>
   <data name="editPlacementPolicyButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

@@ -292,7 +292,7 @@
     <value>61, 23</value>
   </data>
   <data name="toolStripButtonExportAll.Text" xml:space="preserve">
-    <value>すべてをエクスポート(&amp;E)</value>
+    <value>すべてをエクスポート(&amp;X)</value>
   </data>
   <data name="toolStripLabelFiltersOnOff.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>

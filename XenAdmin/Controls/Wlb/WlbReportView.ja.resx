@@ -133,7 +133,7 @@
     <value>2, 4</value>
   </data>
   <data name="labelHostCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 18</value>
+    <value>61, 18</value>
   </data>
   <data name="labelHostCombo.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -154,7 +154,7 @@
     <value>1</value>
   </data>
   <data name="hostComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>52, 0</value>
+    <value>62, 0</value>
   </data>
   <data name="hostComboBox.MaxDropDownItems" type="System.Int32, mscorlib">
     <value>20</value>
@@ -247,7 +247,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelEndDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 7</value>
+    <value>172, 7</value>
   </data>
   <data name="labelEndDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 18</value>
@@ -274,10 +274,10 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="EndDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>261, 4</value>
+    <value>238, 4</value>
   </data>
   <data name="EndDatePicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 20</value>
+    <value>92, 20</value>
   </data>
   <data name="EndDatePicker.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -331,10 +331,10 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="StartDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 3</value>
+    <value>75, 3</value>
   </data>
   <data name="StartDatePicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 20</value>
+    <value>92, 20</value>
   </data>
   <data name="StartDatePicker.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -676,10 +676,10 @@
     <value>NoControl</value>
   </data>
   <data name="labelObjects.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 4</value>
+    <value>1, 4</value>
   </data>
   <data name="labelObjects.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 18</value>
+    <value>35, 18</value>
   </data>
   <data name="labelObjects.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -700,13 +700,13 @@
     <value>0</value>
   </data>
   <data name="objectComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>50, 0</value>
+    <value>80, 0</value>
   </data>
   <data name="objectComboBox.MaxDropDownItems" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
   <data name="objectComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 21</value>
+    <value>95, 21</value>
   </data>
   <data name="objectComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -766,13 +766,13 @@
     <value>0</value>
   </data>
   <data name="userComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>42, 0</value>
+    <value>66, 0</value>
   </data>
   <data name="userComboBox.MaxDropDownItems" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
   <data name="userComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 21</value>
+    <value>100, 21</value>
   </data>
   <data name="userComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -799,7 +799,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelUsers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 4</value>
+    <value>-4, 4</value>
   </data>
   <data name="labelUsers.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 18</value>
