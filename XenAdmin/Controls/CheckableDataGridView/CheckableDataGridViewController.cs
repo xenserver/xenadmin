@@ -102,9 +102,11 @@ namespace XenAdmin.Controls.CheckableDataGridView
             ChangeableDictionary<XenRef<Host>, Host> d = sender as ChangeableDictionary<XenRef<Host>, Host>;
             if (d == null) return;
 
-            foreach (var host in d.Values.Where(host => host.IsMaster()))
+            foreach (var host in d.Values)
             {
-                RedrawRow(storedRows.FirstOrDefault(r => GetXenObject(r) == host));
+                var row = storedRows.FirstOrDefault(r => GetXenObject(r) == host);
+                if (row != null)
+                    RedrawRow(row);
             }
         }
 
