@@ -133,7 +133,7 @@
     <value>3, 6, 3, 6</value>
   </data>
   <data name="buttonNewSearch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 23</value>
+    <value>95, 23</value>
   </data>
   <data name="buttonNewSearch.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -154,7 +154,7 @@
     <value>0</value>
   </data>
   <data name="buttonEditSearch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>90, 6</value>
+    <value>104, 6</value>
   </data>
   <data name="buttonEditSearch.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 6, 3, 6</value>
@@ -193,7 +193,7 @@
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ddButtonSavedSearches.Location" type="System.Drawing.Point, System.Drawing">
-    <value>186, 6</value>
+    <value>200, 6</value>
   </data>
   <data name="ddButtonSavedSearches.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 6, 3, 6</value>
@@ -226,7 +226,7 @@
     <value>2</value>
   </data>
   <data name="buttonExport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 5</value>
+    <value>326, 5</value>
   </data>
   <data name="buttonExport.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 6, 3, 6</value>
@@ -238,7 +238,7 @@
     <value>3</value>
   </data>
   <data name="buttonExport.Text" xml:space="preserve">
-    <value>导出(&amp;E)...</value>
+    <value>导出(&amp;X)...</value>
   </data>
   <data name="&gt;&gt;buttonExport.Name" xml:space="preserve">
     <value>buttonExport</value>
@@ -253,7 +253,7 @@
     <value>3</value>
   </data>
   <data name="buttonImport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>393, 5</value>
+    <value>407, 5</value>
   </data>
   <data name="buttonImport.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 6, 3, 6</value>

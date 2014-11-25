@@ -12053,7 +12053,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>更新用于 WLB 通信的凭据</value>
   </data>
   <data name="WLB_SERVER_URL" xml:space="preserve">
-    <value>Workload Balancing 服务器名称</value>
+    <value>Workload Balancing 服务器名</value>
   </data>
   <data name="WLB_SEVERITY_CRITICAL" xml:space="preserve">
     <value>严重</value>
