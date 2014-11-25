@@ -1138,7 +1138,7 @@
     <value>全般</value>
   </data>
   <data name="pdSectionGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 34</value>
+    <value>729, 35</value>
   </data>
   <data name="pdSectionGeneral.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
