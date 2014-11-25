@@ -133,7 +133,7 @@
     <value>2, 4</value>
   </data>
   <data name="labelHostCombo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 18</value>
+    <value>61, 18</value>
   </data>
   <data name="labelHostCombo.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -154,7 +154,7 @@
     <value>1</value>
   </data>
   <data name="hostComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>52, 0</value>
+    <value>62, 0</value>
   </data>
   <data name="hostComboBox.MaxDropDownItems" type="System.Int32, mscorlib">
     <value>20</value>
@@ -207,6 +207,36 @@
   <data name="&gt;&gt;btnRunReport.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="btnLaterReport.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="btnLaterReport.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnLaterReport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="btnLaterReport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 23</value>
+  </data>
+  <data name="btnLaterReport.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="btnLaterReport.Text" xml:space="preserve">
+    <value>前のセクション(&amp;P)</value>
+  </data>
+  <data name="&gt;&gt;btnLaterReport.Name" xml:space="preserve">
+    <value>btnLaterReport</value>
+  </data>
+  <data name="&gt;&gt;btnLaterReport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnLaterReport.Parent" xml:space="preserve">
+    <value>flowLayoutPanelButtons</value>
+  </data>
+  <data name="&gt;&gt;btnLaterReport.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="labelEndDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -217,7 +247,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelEndDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 7</value>
+    <value>172, 7</value>
   </data>
   <data name="labelEndDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 18</value>
@@ -244,10 +274,10 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="EndDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>261, 4</value>
+    <value>238, 4</value>
   </data>
   <data name="EndDatePicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 20</value>
+    <value>92, 20</value>
   </data>
   <data name="EndDatePicker.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -301,10 +331,10 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="StartDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 3</value>
+    <value>75, 3</value>
   </data>
   <data name="StartDatePicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 20</value>
+    <value>92, 20</value>
   </data>
   <data name="StartDatePicker.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -597,6 +627,201 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>233, 17</value>
   </metadata>
+  <data name="flowLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="flowLayoutPanel2.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="panelUsers.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panelUsers.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="panelUsers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="panelUsers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 24</value>
+  </data>
+  <data name="panelUsers.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;panelUsers.Name" xml:space="preserve">
+    <value>panelUsers</value>
+  </data>
+  <data name="&gt;&gt;panelUsers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelUsers.Parent" xml:space="preserve">
+    <value>flowLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;panelUsers.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelObjects.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panelObjects.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="labelObjects.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelObjects.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <data name="labelObjects.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelObjects.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 4</value>
+  </data>
+  <data name="labelObjects.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 18</value>
+  </data>
+  <data name="labelObjects.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="labelObjects.Text" xml:space="preserve">
+    <value>オブジェクト(&amp;J):</value>
+  </data>
+  <data name="&gt;&gt;labelObjects.Name" xml:space="preserve">
+    <value>labelObjects</value>
+  </data>
+  <data name="&gt;&gt;labelObjects.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelObjects.Parent" xml:space="preserve">
+    <value>panelObjects</value>
+  </data>
+  <data name="&gt;&gt;labelObjects.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="objectComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 0</value>
+  </data>
+  <data name="objectComboBox.MaxDropDownItems" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="objectComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 21</value>
+  </data>
+  <data name="objectComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;objectComboBox.Name" xml:space="preserve">
+    <value>objectComboBox</value>
+  </data>
+  <data name="&gt;&gt;objectComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;objectComboBox.Parent" xml:space="preserve">
+    <value>panelObjects</value>
+  </data>
+  <data name="&gt;&gt;objectComboBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="panelObjects.Location" type="System.Drawing.Point, System.Drawing">
+    <value>174, 3</value>
+  </data>
+  <data name="panelObjects.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 24</value>
+  </data>
+  <data name="panelObjects.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;panelObjects.Name" xml:space="preserve">
+    <value>panelObjects</value>
+  </data>
+  <data name="&gt;&gt;panelObjects.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelObjects.Parent" xml:space="preserve">
+    <value>flowLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;panelObjects.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="flowLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>359, 0</value>
+  </data>
+  <data name="flowLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>345, 30</value>
+  </data>
+  <data name="flowLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel2.Name" xml:space="preserve">
+    <value>flowLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="userComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>66, 0</value>
+  </data>
+  <data name="userComboBox.MaxDropDownItems" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="userComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <data name="userComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;userComboBox.Name" xml:space="preserve">
+    <value>userComboBox</value>
+  </data>
+  <data name="&gt;&gt;userComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;userComboBox.Parent" xml:space="preserve">
+    <value>panelUsers</value>
+  </data>
+  <data name="&gt;&gt;userComboBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="labelUsers.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelUsers.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <data name="labelUsers.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelUsers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-4, 4</value>
+  </data>
+  <data name="labelUsers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 18</value>
+  </data>
+  <data name="labelUsers.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="labelUsers.Text" xml:space="preserve">
+    <value>ユーザー(&amp;U):</value>
+  </data>
+  <data name="&gt;&gt;labelUsers.Name" xml:space="preserve">
+    <value>labelUsers</value>
+  </data>
+  <data name="&gt;&gt;labelUsers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelUsers.Parent" xml:space="preserve">
+    <value>panelUsers</value>
+  </data>
+  <data name="&gt;&gt;labelUsers.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

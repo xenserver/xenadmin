@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="linkShowAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>728, 5</value>
+    <value>690, 5</value>
   </data>
   <data name="linkShowAll.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -139,7 +139,7 @@
     <value>0</value>
   </data>
   <data name="linkShowAll.Text" xml:space="preserve">
-    <value>すべて表示</value>
+    <value>すべて表示する</value>
   </data>
   <data name="linkShowAll.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>

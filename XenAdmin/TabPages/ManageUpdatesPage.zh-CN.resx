@@ -112,367 +112,268 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="dataGridViewUpdates.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tableLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
   </data>
-  <metadata name="ColumnName.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnName.HeaderText" xml:space="preserve">
-    <value>名称</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ColumnName.MinimumWidth" type="System.Int32, mscorlib">
-    <value>70</value>
-  </data>
-  <data name="ColumnName.Width" type="System.Int32, mscorlib">
-    <value>125</value>
-  </data>
-  <metadata name="ColumnDescription.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnDescription.HeaderText" xml:space="preserve">
-    <value>说明</value>
-  </data>
-  <data name="ColumnDescription.MinimumWidth" type="System.Int32, mscorlib">
-    <value>100</value>
-  </data>
-  <data name="ColumnDescription.Width" type="System.Int32, mscorlib">
-    <value>306</value>
-  </data>
-  <metadata name="ColumnReleaseDate.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnReleaseDate.HeaderText" xml:space="preserve">
-    <value>已发布</value>
-  </data>
-  <data name="ColumnReleaseDate.MinimumWidth" type="System.Int32, mscorlib">
-    <value>80</value>
-  </data>
-  <data name="ColumnReleaseDate.Width" type="System.Int32, mscorlib">
-    <value>90</value>
-  </data>
-  <metadata name="ColumnWebPage.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnWebPage.HeaderText" xml:space="preserve">
-    <value>Web 页面</value>
-  </data>
-  <data name="ColumnWebPage.MinimumWidth" type="System.Int32, mscorlib">
-    <value>100</value>
-  </data>
-  <metadata name="ColumnAppliesTo.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnAppliesTo.HeaderText" xml:space="preserve">
-    <value>应用对象</value>
-  </data>
-  <data name="ColumnAppliesTo.MinimumWidth" type="System.Int32, mscorlib">
-    <value>95</value>
-  </data>
-  <data name="tableLayoutPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="tableLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="labelUpdates.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
-  </data>
-  <data name="labelUpdates.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="labelUpdates.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="labelUpdates.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelUpdates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>43, 0</value>
-  </data>
-  <data name="labelUpdates.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 3, 0, 6</value>
-  </data>
-  <data name="labelUpdates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 38</value>
-  </data>
-  <data name="labelUpdates.TabIndex" type="System.Int32, mscorlib">
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="labelUpdates.Text" xml:space="preserve">
-    <value>正在搜索更新...</value>
-  </data>
-  <data name="labelUpdates.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;labelUpdates.Name" xml:space="preserve">
-    <value>labelUpdates</value>
-  </data>
-  <data name="&gt;&gt;labelUpdates.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelUpdates.Parent" xml:space="preserve">
-    <value>tableLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;labelUpdates.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="pictureBox.Font" type="System.Drawing.Font, System.Drawing">
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="informationLabelIcon.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="pictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="informationLabelIcon.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="pictureBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="informationLabelIcon.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="pictureBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 32</value>
+  <data name="informationLabelIcon.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 16</value>
   </data>
-  <data name="pictureBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="informationLabelIcon.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;pictureBox.Name" xml:space="preserve">
-    <value>pictureBox</value>
+  <data name="&gt;&gt;informationLabelIcon.Name" xml:space="preserve">
+    <value>informationLabelIcon</value>
   </data>
-  <data name="&gt;&gt;pictureBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;informationLabelIcon.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanel</value>
+  <data name="&gt;&gt;informationLabelIcon.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;pictureBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;informationLabelIcon.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="helpButton.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="informationLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="informationLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="informationLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="helpButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        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
-</value>
-  </data>
-  <data name="helpButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="informationLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="helpButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>744, 0</value>
+  <data name="informationLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>29, 1</value>
   </data>
-  <data name="helpButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+  <data name="informationLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 21</value>
   </data>
-  <data name="helpButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 24</value>
+  <data name="informationLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="helpButton.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="informationLabel.Text" xml:space="preserve">
+    <value>informationLabel</value>
   </data>
-  <data name="&gt;&gt;helpButton.Name" xml:space="preserve">
-    <value>helpButton</value>
+  <data name="&gt;&gt;informationLabel.Name" xml:space="preserve">
+    <value>informationLabel</value>
   </data>
-  <data name="&gt;&gt;helpButton.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.HelpButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;informationLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;helpButton.Parent" xml:space="preserve">
-    <value>tableLayoutPanel</value>
+  <data name="&gt;&gt;informationLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;helpButton.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;informationLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="tableLayoutPanel.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="tableLayoutPanel1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="tableLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 10</value>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 382</value>
   </data>
-  <data name="tableLayoutPanel.RowCount" type="System.Int32, mscorlib">
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="tableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>770, 341</value>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>499, 23</value>
   </data>
-  <data name="tableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel.Name" xml:space="preserve">
-    <value>tableLayoutPanel</value>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="tableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelUpdates" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="pictureBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="helpButton" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="dataGridViewUpdates" Row="1" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,40,Percent,100,Absolute,26" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="informationLabelIcon" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="informationLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
+  <data name="tableLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel2.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1, 1</value>
   </metadata>
-  <data name="refreshToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+  <data name="toolStrip1.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="refreshToolStripMenuItem.Text" xml:space="preserve">
+  <data name="toolStrip1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="toolStrip1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="toolStripDropDownButtonServerFilter.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="toolStripDropDownButtonServerFilter.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripDropDownButtonServerFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 23</value>
+  </data>
+  <data name="toolStripDropDownButtonServerFilter.Text" xml:space="preserve">
+    <value>LN_Filter by S&amp;erver</value>
+  </data>
+  <data name="toolStripDropDownButtonDateFilter.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="toolStripDropDownButtonDateFilter.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripDropDownButtonDateFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 23</value>
+  </data>
+  <data name="toolStripDropDownButtonDateFilter.Text" xml:space="preserve">
+    <value>按日期过滤(&amp;A)</value>
+  </data>
+  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 26</value>
+  </data>
+  <data name="toolStripButtonRefresh.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="toolStripButtonRefresh.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButtonRefresh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 23</value>
+  </data>
+  <data name="toolStripButtonRefresh.Text" xml:space="preserve">
     <value>刷新(&amp;R)</value>
   </data>
-  <data name="separatorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 6</value>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 26</value>
   </data>
-  <data name="downloadAndInstallToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="downloadAndInstallToolStripMenuItem.Text" xml:space="preserve">
-    <value>下载并安装(&amp;D)...</value>
-  </data>
-  <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 54</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStrip.Name" xml:space="preserve">
-    <value>contextMenuStrip</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStrip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="dataGridViewUpdates.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="toolStripButtonExportAll.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="dataGridViewUpdates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 41</value>
+  <data name="toolStripButtonExportAll.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
-  <data name="dataGridViewUpdates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>764, 297</value>
+  <data name="toolStripButtonExportAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 23</value>
   </data>
-  <data name="dataGridViewUpdates.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="toolStripButtonExportAll.Text" xml:space="preserve">
+    <value>全部导出(&amp;X)</value>
   </data>
-  <data name="&gt;&gt;dataGridViewUpdates.Name" xml:space="preserve">
-    <value>dataGridViewUpdates</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewUpdates.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewUpdates.Parent" xml:space="preserve">
-    <value>tableLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewUpdates.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="closeButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="closeButton.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="toolStripLabelFiltersOnOff.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="closeButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>704, 357</value>
+  <data name="toolStripLabelFiltersOnOff.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 23</value>
   </data>
-  <data name="closeButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <data name="toolStripLabelFiltersOnOff.Text" xml:space="preserve">
+    <value>过滤器为开/关</value>
   </data>
-  <data name="closeButton.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 1</value>
   </data>
-  <data name="closeButton.Text" xml:space="preserve">
-    <value>关闭(&amp;C)</value>
+  <data name="toolStrip1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 0</value>
   </data>
-  <data name="&gt;&gt;closeButton.Name" xml:space="preserve">
-    <value>closeButton</value>
+  <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>774, 26</value>
   </data>
-  <data name="&gt;&gt;closeButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;closeButton.Parent" xml:space="preserve">
+  <data name="toolStrip1.Text" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Name" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.ToolStripEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanel2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="tableLayoutPanel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>776, 27</value>
+  </data>
+  <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;closeButton.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="toolStrip1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,27" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="panelProgress.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>None</value>
+  </data>
+  <data name="panelProgress.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panelProgress.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="labelProgress.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -499,7 +400,7 @@
     <value>labelProgress</value>
   </data>
   <data name="&gt;&gt;labelProgress.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelProgress.Parent" xml:space="preserve">
     <value>panelProgress</value>
@@ -526,7 +427,7 @@
     <value>pictureBoxProgress</value>
   </data>
   <data name="&gt;&gt;pictureBoxProgress.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBoxProgress.Parent" xml:space="preserve">
     <value>panelProgress</value>
@@ -561,139 +462,195 @@
   <data name="&gt;&gt;panelProgress.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="refreshButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+  <data name="dataGridViewUpdates.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="refreshButton.Font" type="System.Drawing.Font, System.Drawing">
+  <metadata name="ColumnExpand.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridViewCellStyle1.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
+        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///////////////////////////////////////////8bD
+        xgAAAAAAhIKE////////////////////////////////////////////xsPGAAAAAACEgoT/////////
+        ///////////////////////////////////Gw8YAAAAAAISChP//////////////////////////////
+        /////////////8bDxgAAAAAAhIKE////////////AAD/AAD/////////AAD/AAD/////////xsPGAAAA
+        AACEgoT///////////////8AAP8AAP8AAP8AAP/////////////Gw8YAAAAAAISChP//////////////
+        /////wAA/wAA/////////////////8bDxgAAAAAAhIKE////////////////AAD/AAD/AAD/AAD/////
+        ////////xsPGAAAAAACEgoT///////////8AAP8AAP////////8AAP8AAP/////////Gw8YAAAAAAISC
+        hP///////////////////////////////////////////8bDxgAAAAAAhIKE////////////////////
+        ////////////////////////xsPGAAAAAACEgoT/////////////////////////////////////////
+        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
+        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
+</value>
+  </data>
+  <data name="ColumnExpand.HeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ColumnExpand.MinimumWidth" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="ColumnExpand.Width" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <metadata name="ColumnMessage.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnMessage.HeaderText" xml:space="preserve">
+    <value>消息</value>
+  </data>
+  <data name="ColumnMessage.MinimumWidth" type="System.Int32, mscorlib">
+    <value>70</value>
+  </data>
+  <metadata name="ColumnLocation.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnLocation.HeaderText" xml:space="preserve">
+    <value>LN_Server / Pool</value>
+  </data>
+  <data name="ColumnLocation.MinimumWidth" type="System.Int32, mscorlib">
+    <value>95</value>
+  </data>
+  <metadata name="ColumnDate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnDate.HeaderText" xml:space="preserve">
+    <value>日期</value>
+  </data>
+  <data name="ColumnDate.MinimumWidth" type="System.Int32, mscorlib">
+    <value>80</value>
+  </data>
+  <metadata name="ColumnWebPage.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnWebPage.HeaderText" xml:space="preserve">
+    <value>操作</value>
+  </data>
+  <data name="ColumnWebPage.MinimumWidth" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="ColumnWebPage.Width" type="System.Int32, mscorlib">
+    <value>53</value>
+  </data>
+  <data name="dataGridViewUpdates.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="refreshButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>623, 357</value>
+  <data name="dataGridViewUpdates.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 51</value>
   </data>
-  <data name="refreshButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <data name="dataGridViewUpdates.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 12, 0, 12</value>
   </data>
-  <data name="refreshButton.TabIndex" type="System.Int32, mscorlib">
+  <data name="dataGridViewUpdates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>776, 316</value>
+  </data>
+  <data name="dataGridViewUpdates.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="refreshButton.Text" xml:space="preserve">
-    <value>刷新(&amp;R)</value>
+  <data name="&gt;&gt;dataGridViewUpdates.Name" xml:space="preserve">
+    <value>dataGridViewUpdates</value>
   </data>
-  <data name="&gt;&gt;refreshButton.Name" xml:space="preserve">
-    <value>refreshButton</value>
+  <data name="&gt;&gt;dataGridViewUpdates.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;refreshButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;refreshButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dataGridViewUpdates.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;refreshButton.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="downloadAndInstallButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="downloadAndInstallButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="downloadAndInstallButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>478, 357</value>
-  </data>
-  <data name="downloadAndInstallButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 23</value>
-  </data>
-  <data name="downloadAndInstallButton.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;dataGridViewUpdates.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="downloadAndInstallButton.Text" xml:space="preserve">
-    <value>下载并安装(&amp;D)...</value>
-  </data>
-  <data name="&gt;&gt;downloadAndInstallButton.Name" xml:space="preserve">
-    <value>downloadAndInstallButton</value>
-  </data>
-  <data name="&gt;&gt;downloadAndInstallButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;downloadAndInstallButton.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;downloadAndInstallButton.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>794, 392</value>
-  </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>41, 19, 41, 19</value>
+  <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>12, 12, 12, 12</value>
   </data>
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>800, 420</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>检查更新</value>
+  <data name="&gt;&gt;toolStripDropDownButtonServerFilter.Name" xml:space="preserve">
+    <value>toolStripDropDownButtonServerFilter</value>
   </data>
-  <data name="&gt;&gt;refreshToolStripMenuItem.Name" xml:space="preserve">
-    <value>refreshToolStripMenuItem</value>
+  <data name="&gt;&gt;toolStripDropDownButtonServerFilter.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.FilterLocationToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;refreshToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;toolStripDropDownButtonDateFilter.Name" xml:space="preserve">
+    <value>toolStripDropDownButtonDateFilter</value>
   </data>
-  <data name="&gt;&gt;separatorToolStripMenuItem.Name" xml:space="preserve">
-    <value>separatorToolStripMenuItem</value>
+  <data name="&gt;&gt;toolStripDropDownButtonDateFilter.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.FilterDatesToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;separatorToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
+    <value>toolStripSeparator3</value>
   </data>
-  <data name="&gt;&gt;downloadAndInstallToolStripMenuItem.Name" xml:space="preserve">
-    <value>downloadAndInstallToolStripMenuItem</value>
+  <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;downloadAndInstallToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;toolStripButtonRefresh.Name" xml:space="preserve">
+    <value>toolStripButtonRefresh</value>
   </data>
-  <data name="&gt;&gt;ColumnName.Name" xml:space="preserve">
-    <value>ColumnName</value>
+  <data name="&gt;&gt;toolStripButtonRefresh.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+    <value>toolStripSeparator1</value>
   </data>
-  <data name="&gt;&gt;ColumnDescription.Name" xml:space="preserve">
-    <value>ColumnDescription</value>
+  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnDescription.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;toolStripButtonExportAll.Name" xml:space="preserve">
+    <value>toolStripButtonExportAll</value>
   </data>
-  <data name="&gt;&gt;ColumnReleaseDate.Name" xml:space="preserve">
-    <value>ColumnReleaseDate</value>
+  <data name="&gt;&gt;toolStripButtonExportAll.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnReleaseDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;toolStripLabelFiltersOnOff.Name" xml:space="preserve">
+    <value>toolStripLabelFiltersOnOff</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabelFiltersOnOff.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnExpand.Name" xml:space="preserve">
+    <value>ColumnExpand</value>
+  </data>
+  <data name="&gt;&gt;ColumnExpand.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnMessage.Name" xml:space="preserve">
+    <value>ColumnMessage</value>
+  </data>
+  <data name="&gt;&gt;ColumnMessage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnLocation.Name" xml:space="preserve">
+    <value>ColumnLocation</value>
+  </data>
+  <data name="&gt;&gt;ColumnLocation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnDate.Name" xml:space="preserve">
+    <value>ColumnDate</value>
+  </data>
+  <data name="&gt;&gt;ColumnDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ColumnWebPage.Name" xml:space="preserve">
     <value>ColumnWebPage</value>
   </data>
   <data name="&gt;&gt;ColumnWebPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewLinkColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnAppliesTo.Name" xml:space="preserve">
-    <value>ColumnAppliesTo</value>
-  </data>
-  <data name="&gt;&gt;ColumnAppliesTo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ManageUpdatesPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

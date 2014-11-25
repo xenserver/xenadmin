@@ -209,7 +209,6 @@
   </data>
   <data name="richTextBox1.Text" xml:space="preserve">
     <value>VCPU 数大于主机服务器上的物理 CPU 数。这样将显著降低 VM 性能。
-
 要优化 VM 性能，应减少 VCPU 数，使其小于或等于物理 CPU 数。</value>
   </data>
   <data name="&gt;&gt;richTextBox1.Name" xml:space="preserve">

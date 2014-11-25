@@ -112,59 +112,35 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ButtonClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="pictureBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ButtonClose.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="ButtonClose.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="ButtonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>649, 456</value>
-  </data>
-  <data name="ButtonClose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 23</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ButtonClose.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="ButtonClose.Text" xml:space="preserve">
-    <value>閉じる(&amp;C)</value>
-  </data>
-  <data name="&gt;&gt;ButtonClose.Name" xml:space="preserve">
-    <value>ButtonClose</value>
-  </data>
-  <data name="&gt;&gt;ButtonClose.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ButtonClose.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ButtonClose.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBox1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
+  <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 15</value>
+    <value>0, 3</value>
+  </data>
+  <data name="pictureBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 3, 3</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 32</value>
+    <value>16, 16</value>
   </data>
   <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>AutoSize</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
@@ -172,133 +148,13 @@
     <value>pictureBox1</value>
   </data>
   <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="GridViewAlerts.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <metadata name="ColumnExpand.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnExpand.HeaderText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ColumnExpand.MinimumWidth" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="ColumnExpand.Width" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <metadata name="ColumnType.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnType.HeaderText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ColumnType.MinimumWidth" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="ColumnType.Width" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <metadata name="ColumnAppliesTo.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnAppliesTo.HeaderText" xml:space="preserve">
-    <value>適用先</value>
-  </data>
-  <data name="ColumnAppliesTo.MinimumWidth" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <metadata name="ColumnDetails.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnDetails.HeaderText" xml:space="preserve">
-    <value>詳細</value>
-  </data>
-  <data name="ColumnDetails.MinimumWidth" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <metadata name="ColumnDate.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnDate.HeaderText" xml:space="preserve">
-    <value>日付</value>
-  </data>
-  <data name="ColumnDate.MinimumWidth" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <metadata name="ContextMenuAlertGridView.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="ToolStripMenuItemFix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 22</value>
-  </data>
-  <data name="ToolStripMenuItemFix.Text" xml:space="preserve">
-    <value>解決</value>
-  </data>
-  <data name="ToolStripMenuItemHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 22</value>
-  </data>
-  <data name="ToolStripMenuItemHelp.Text" xml:space="preserve">
-    <value>ヘルプ</value>
-  </data>
-  <data name="ToolStripMenuItemDismiss.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 22</value>
-  </data>
-  <data name="ToolStripMenuItemDismiss.Text" xml:space="preserve">
-    <value>このアラートをクリア</value>
-  </data>
-  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 6</value>
-  </data>
-  <data name="copyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 22</value>
-  </data>
-  <data name="copyToolStripMenuItem.Text" xml:space="preserve">
-    <value>コピー(&amp;C)</value>
-  </data>
-  <data name="ContextMenuAlertGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 98</value>
-  </data>
-  <data name="&gt;&gt;ContextMenuAlertGridView.Name" xml:space="preserve">
-    <value>ContextMenuAlertGridView</value>
-  </data>
-  <data name="&gt;&gt;ContextMenuAlertGridView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="GridViewAlerts.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="GridViewAlerts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 89</value>
-  </data>
-  <data name="GridViewAlerts.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="GridViewAlerts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>721, 322</value>
-  </data>
-  <data name="GridViewAlerts.TabIndex" type="System.Int32, mscorlib">
-    <value>49</value>
-  </data>
-  <data name="&gt;&gt;GridViewAlerts.Name" xml:space="preserve">
-    <value>GridViewAlerts</value>
-  </data>
-  <data name="&gt;&gt;GridViewAlerts.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;GridViewAlerts.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;GridViewAlerts.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>0</value>
   </data>
   <data name="LabelCappingEntries.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -313,99 +169,39 @@
     <value>NoControl</value>
   </data>
   <data name="LabelCappingEntries.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 456</value>
+    <value>22, 0</value>
   </data>
   <data name="LabelCappingEntries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 21</value>
+    <value>146, 21</value>
   </data>
   <data name="LabelCappingEntries.TabIndex" type="System.Int32, mscorlib">
-    <value>61</value>
+    <value>0</value>
   </data>
   <data name="LabelCappingEntries.Text" xml:space="preserve">
     <value>最初の 1000 項目を表示しています</value>
-  </data>
-  <data name="LabelCappingEntries.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="&gt;&gt;LabelCappingEntries.Name" xml:space="preserve">
     <value>LabelCappingEntries</value>
   </data>
   <data name="&gt;&gt;LabelCappingEntries.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;LabelCappingEntries.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;LabelCappingEntries.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>1</value>
   </data>
-  <data name="LabelDialogBlurb.AutoSize" type="System.Boolean, mscorlib">
+  <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="LabelDialogBlurb.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="LabelDialogBlurb.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="LabelDialogBlurb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>663, 32</value>
-  </data>
-  <data name="LabelDialogBlurb.TabIndex" type="System.Int32, mscorlib">
-    <value>58</value>
-  </data>
-  <data name="LabelDialogBlurb.Text" xml:space="preserve">
-    <value>現在の接続先サーバーからのシステム アラートは以下のとおりです。フィルタを使用して表示できます。アラートごとに、クリア、解決、およびヘルプの参照が可能です。</value>
-  </data>
-  <data name="&gt;&gt;LabelDialogBlurb.Name" xml:space="preserve">
-    <value>LabelDialogBlurb</value>
-  </data>
-  <data name="&gt;&gt;LabelDialogBlurb.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LabelDialogBlurb.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;LabelDialogBlurb.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tableLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="tableLayoutPanel1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="tableLayoutPanel1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>53, 15</value>
-  </data>
-  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>683, 32</value>
-  </data>
-  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>62</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="LabelDialogBlurb" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50" /&gt;&lt;Rows Styles="Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1, 1</value>
   </metadata>
   <data name="toolStrip1.AutoSize" type="System.Boolean, mscorlib">
@@ -417,6 +213,15 @@
   <data name="toolStrip1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
+  <data name="toolStripDropDownSeveritiesFilter.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="toolStripDropDownSeveritiesFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 23</value>
+  </data>
+  <data name="toolStripDropDownSeveritiesFilter.Text" xml:space="preserve">
+    <value>重要度によるフィルタ(&amp;Y)</value>
+  </data>
   <data name="toolStripDropDownButtonServerFilter.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
@@ -424,46 +229,10 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripDropDownButtonServerFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 25</value>
+    <value>111, 23</value>
   </data>
   <data name="toolStripDropDownButtonServerFilter.Text" xml:space="preserve">
-    <value>サーバーでフィルタ(&amp;S)</value>
-  </data>
-  <data name="toolStripMenuItemShowAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 22</value>
-  </data>
-  <data name="toolStripMenuItemShowAll.Text" xml:space="preserve">
-    <value>フィルタしない(&amp;N)</value>
-  </data>
-  <data name="toolStripMenuItemLast24.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 22</value>
-  </data>
-  <data name="toolStripMenuItemLast24.Text" xml:space="preserve">
-    <value>過去 24 時間</value>
-  </data>
-  <data name="toolStripMenuItemLast3Days.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 22</value>
-  </data>
-  <data name="toolStripMenuItemLast3Days.Text" xml:space="preserve">
-    <value>過去 3 日間</value>
-  </data>
-  <data name="toolStripMenuItemLast7Days.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 22</value>
-  </data>
-  <data name="toolStripMenuItemLast7Days.Text" xml:space="preserve">
-    <value>過去 7 日間</value>
-  </data>
-  <data name="toolStripMenuItemLast30Days.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 22</value>
-  </data>
-  <data name="toolStripMenuItemLast30Days.Text" xml:space="preserve">
-    <value>過去 30 日間</value>
-  </data>
-  <data name="toolStripMenuItemCustomDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 22</value>
-  </data>
-  <data name="toolStripMenuItemCustomDate.Text" xml:space="preserve">
-    <value>カスタム...</value>
+    <value>LN_Filter by S&amp;erver</value>
   </data>
   <data name="toolStripDropDownButtonDateFilter.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -472,61 +241,13 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripDropDownButtonDateFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 25</value>
+    <value>89, 23</value>
   </data>
   <data name="toolStripDropDownButtonDateFilter.Text" xml:space="preserve">
-    <value>日数でフィルタ(&amp;F)</value>
-  </data>
-  <data name="dataLossImminentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="dataLossImminentToolStripMenuItem.Text" xml:space="preserve">
-    <value>データ損失の危険性</value>
-  </data>
-  <data name="serviceLossImminentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="serviceLossImminentToolStripMenuItem.Text" xml:space="preserve">
-    <value>サービス損失の危険性</value>
-  </data>
-  <data name="serviceDegradedToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="serviceDegradedToolStripMenuItem.Text" xml:space="preserve">
-    <value>サービスの低下</value>
-  </data>
-  <data name="serviceRecoveredToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="serviceRecoveredToolStripMenuItem.Text" xml:space="preserve">
-    <value>サービスの回復</value>
-  </data>
-  <data name="informationalToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="informationalToolStripMenuItem.Text" xml:space="preserve">
-    <value>情報</value>
-  </data>
-  <data name="unknownToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="unknownToolStripMenuItem.Text" xml:space="preserve">
-    <value>不明</value>
-  </data>
-  <data name="toolStripDropDownSeveritiesFilter.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="toolStripDropDownSeveritiesFilter.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="toolStripDropDownSeveritiesFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 25</value>
-  </data>
-  <data name="toolStripDropDownSeveritiesFilter.Text" xml:space="preserve">
-    <value>重要度でフィルタ(&amp;V)</value>
+    <value>日付によるフィルタ(&amp;A)</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 28</value>
+    <value>6, 26</value>
   </data>
   <data name="toolStripButtonRefresh.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -535,13 +256,13 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonRefresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 25</value>
+    <value>50, 23</value>
   </data>
   <data name="toolStripButtonRefresh.Text" xml:space="preserve">
     <value>更新(&amp;R)</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 28</value>
+    <value>6, 26</value>
   </data>
   <data name="toolStripButtonExportAll.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -550,31 +271,55 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonExportAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 25</value>
+    <value>61, 23</value>
   </data>
   <data name="toolStripButtonExportAll.Text" xml:space="preserve">
-    <value>すべてをエクスポート(&amp;E)</value>
+    <value>すべてをエクスポート(&amp;X)</value>
   </data>
-  <data name="toolStripButtonDismissAll.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="tsmiDismissAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 22</value>
+  </data>
+  <data name="tsmiDismissAll.Text" xml:space="preserve">
+    <value>すべてクリア(&amp;D)</value>
+  </data>
+  <data name="tsmiDismissSelected.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 22</value>
+  </data>
+  <data name="tsmiDismissSelected.Text" xml:space="preserve">
+    <value>選択をクリア(&amp;D)</value>
+  </data>
+  <data name="toolStripSplitButtonDismiss.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="toolStripButtonDismissAll.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="toolStripSplitButtonDismiss.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="toolStripButtonDismissAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 25</value>
+  <data name="toolStripSplitButtonDismiss.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 23</value>
   </data>
-  <data name="toolStripButtonDismissAll.Text" xml:space="preserve">
-    <value>すべてのアラートをクリア(&amp;A)</value>
+  <data name="toolStripSplitButtonDismiss.Text" xml:space="preserve">
+    <value>クリア(&amp;D)</value>
+  </data>
+  <data name="toolStripLabelFiltersOnOff.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="toolStripLabelFiltersOnOff.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 23</value>
+  </data>
+  <data name="toolStripLabelFiltersOnOff.Text" xml:space="preserve">
+    <value>フィルタが有効/無効です</value>
   </data>
   <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 1</value>
   </data>
+  <data name="toolStrip1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 0</value>
+  </data>
   <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>719, 28</value>
+    <value>731, 26</value>
   </data>
   <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>65</value>
+    <value>0</value>
   </data>
   <data name="toolStrip1.Text" xml:space="preserve">
     <value>toolStrip1</value>
@@ -583,399 +328,306 @@
     <value>toolStrip1</value>
   </data>
   <data name="&gt;&gt;toolStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.Controls.ToolStripEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStrip1.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
-  <data name="panel1.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="tableLayoutPanel1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 60</value>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
   </data>
-  <data name="panel1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
+  <data name="tableLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>721, 30</value>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>66</value>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>733, 27</value>
   </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="panel2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
-  </data>
-  <metadata name="toolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1, 1</value>
-  </metadata>
-  <data name="toolStrip2.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="toolStrip2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="toolStrip2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="toolStripLabel1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="toolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 25</value>
-  </data>
-  <data name="toolStripLabel1.Text" xml:space="preserve">
-    <value>アラート アクション:</value>
-  </data>
-  <data name="toolStripButtonFix.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="toolStripButtonFix.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAIISURBVDhPpZP7S1NxGMbPPxKaXVUkMEq8IpKUCoY/hGgI
-        ymqkDYYXcCjDZOANURSjCNGFQUTsl4GXVMxKk62YU4fXQpaIlygHQxBRH8/zwvyaIAYe+HLgnPN8nue9
-        HA3nvDTq63oW/jm13XOwvPTB3DYFY5MH+bXfcN8ygfTSMSSXfESicQDxBqdYHwH29g9w2tnZ3UcguIvN
-        rR3417exuBJE5N1n/wfwLgXEOc38Bc6xNRHb+/y4nm49G0Bnit2zf9H6bkliE/jKuYxrd6oVgDWfjB+K
-        TWeKMyrGEVfowITvD9re/9ABVQrAhh0HHK+ZselMMaN/mvwtDb+aVqkA7HYIwIj3ysfluPTorJnP6Ezx
-        oHsD1s5ZXEktUwCOioB5f1CEPR9+wTG6iuiserTo8dkwng7HT/R+XUPF8xlcTjErAOdMcW6NW8STiwG8
-        7vej8oUPN/PsEv3t8Ao0TZP3T1u8uJRkUgAuSYHtO97oLxmXd5t9Ho8aPTK+GzntqNfrLm2fFoihwYOI
-        xGIF4KjoGBLzY1OrF9k6OOFxnwDC4wxIMX1G0pMhgVyMNyoA13PAtS7OrJk1PrC69LUdQWxuF6IybHrX
-        LRI7JrtZdoDAo1XmbjMyD+tjSXxGcXRmnYg5ttD9QuxDhN0uUgDOmbvNTpPOJaGAo2K36cyaGZvOFIfd
-        KlSA8/zRh9ABIDUG+1JpAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="toolStripButtonFix.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="toolStripButtonFix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 25</value>
-  </data>
-  <data name="toolStripButtonFix.Text" xml:space="preserve">
-    <value>XenServer のオンライン購入(&amp;B)</value>
-  </data>
-  <data name="toolStripButtonHelp.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="toolStripButtonHelp.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="toolStripButtonHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 25</value>
-  </data>
-  <data name="toolStripButtonHelp.Text" xml:space="preserve">
-    <value>高可用性のヘルプ(&amp;H)</value>
-  </data>
-  <data name="toolStripButtonDismiss.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="toolStripButtonDismiss.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="toolStripButtonDismiss.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 25</value>
-  </data>
-  <data name="toolStripButtonDismiss.Text" xml:space="preserve">
-    <value>このアラートをクリア(&amp;D)</value>
-  </data>
-  <data name="toolStrip2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 1</value>
-  </data>
-  <data name="toolStrip2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>719, 28</value>
-  </data>
-  <data name="toolStrip2.TabIndex" type="System.Int32, mscorlib">
-    <value>65</value>
-  </data>
-  <data name="toolStrip2.Text" xml:space="preserve">
-    <value>toolStrip2</value>
-  </data>
-  <data name="&gt;&gt;toolStrip2.Name" xml:space="preserve">
-    <value>toolStrip2</value>
-  </data>
-  <data name="&gt;&gt;toolStrip2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStrip2.Parent" xml:space="preserve">
-    <value>panel2</value>
-  </data>
-  <data name="&gt;&gt;toolStrip2.ZOrder" xml:space="preserve">
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="panel2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
   </data>
-  <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 410</value>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="panel2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>721, 30</value>
-  </data>
-  <data name="panel2.TabIndex" type="System.Int32, mscorlib">
-    <value>67</value>
-  </data>
-  <data name="&gt;&gt;panel2.Name" xml:space="preserve">
-    <value>panel2</value>
-  </data>
-  <data name="&gt;&gt;panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="toolStrip1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,27" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="tableLayoutPanel3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="tableLayoutPanel3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel3.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 483</value>
+  </data>
+  <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 22</value>
+  </data>
+  <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="LabelCappingEntries" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="GridViewAlerts.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <metadata name="ColumnExpand.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnExpand.HeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ColumnExpand.MinimumWidth" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="ColumnExpand.Width" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <metadata name="ColumnSeverity.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnSeverity.HeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ColumnSeverity.MinimumWidth" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="ColumnSeverity.Width" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <metadata name="ColumnMessage.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnMessage.HeaderText" xml:space="preserve">
+    <value>メッセージ</value>
+  </data>
+  <data name="ColumnMessage.MinimumWidth" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <metadata name="ColumnLocation.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnLocation.HeaderText" xml:space="preserve">
+    <value>LN_Server / Pool</value>
+  </data>
+  <data name="ColumnLocation.MinimumWidth" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <metadata name="ColumnDate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnDate.HeaderText" xml:space="preserve">
+    <value>日付</value>
+  </data>
+  <data name="ColumnDate.MinimumWidth" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <metadata name="ColumnActions.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnActions.HeaderText" xml:space="preserve">
+    <value>アクション</value>
+  </data>
+  <data name="ColumnActions.MinimumWidth" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="ColumnActions.Width" type="System.Int32, mscorlib">
+    <value>53</value>
+  </data>
+  <data name="GridViewAlerts.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="GridViewAlerts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 51</value>
+  </data>
+  <data name="GridViewAlerts.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 12, 0, 12</value>
+  </data>
+  <data name="GridViewAlerts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>733, 417</value>
+  </data>
+  <data name="GridViewAlerts.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;GridViewAlerts.Name" xml:space="preserve">
+    <value>GridViewAlerts</value>
+  </data>
+  <data name="&gt;&gt;GridViewAlerts.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;GridViewAlerts.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;GridViewAlerts.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>751, 494</value>
-  </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
-  </data>
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>757, 520</value>
   </data>
   <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>12, 12, 12, 12</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>システム アラート</value>
-  </data>
-  <data name="&gt;&gt;ColumnExpand.Name" xml:space="preserve">
-    <value>ColumnExpand</value>
-  </data>
-  <data name="&gt;&gt;ColumnExpand.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnType.Name" xml:space="preserve">
-    <value>ColumnType</value>
-  </data>
-  <data name="&gt;&gt;ColumnType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnAppliesTo.Name" xml:space="preserve">
-    <value>ColumnAppliesTo</value>
-  </data>
-  <data name="&gt;&gt;ColumnAppliesTo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnDetails.Name" xml:space="preserve">
-    <value>ColumnDetails</value>
-  </data>
-  <data name="&gt;&gt;ColumnDetails.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnDate.Name" xml:space="preserve">
-    <value>ColumnDate</value>
-  </data>
-  <data name="&gt;&gt;ColumnDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItemFix.Name" xml:space="preserve">
-    <value>ToolStripMenuItemFix</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItemFix.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItemHelp.Name" xml:space="preserve">
-    <value>ToolStripMenuItemHelp</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItemHelp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItemDismiss.Name" xml:space="preserve">
-    <value>ToolStripMenuItemDismiss</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItemDismiss.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
-    <value>toolStripSeparator2</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;copyToolStripMenuItem.Name" xml:space="preserve">
-    <value>copyToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;copyToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripDropDownButtonServerFilter.Name" xml:space="preserve">
-    <value>toolStripDropDownButtonServerFilter</value>
-  </data>
-  <data name="&gt;&gt;toolStripDropDownButtonServerFilter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripDropDownButtonDateFilter.Name" xml:space="preserve">
-    <value>toolStripDropDownButtonDateFilter</value>
-  </data>
-  <data name="&gt;&gt;toolStripDropDownButtonDateFilter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemShowAll.Name" xml:space="preserve">
-    <value>toolStripMenuItemShowAll</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemShowAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemLast24.Name" xml:space="preserve">
-    <value>toolStripMenuItemLast24</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemLast24.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemLast3Days.Name" xml:space="preserve">
-    <value>toolStripMenuItemLast3Days</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemLast3Days.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemLast7Days.Name" xml:space="preserve">
-    <value>toolStripMenuItemLast7Days</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemLast7Days.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemLast30Days.Name" xml:space="preserve">
-    <value>toolStripMenuItemLast30Days</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemLast30Days.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemCustomDate.Name" xml:space="preserve">
-    <value>toolStripMenuItemCustomDate</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemCustomDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>757, 520</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownSeveritiesFilter.Name" xml:space="preserve">
     <value>toolStripDropDownSeveritiesFilter</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownSeveritiesFilter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.Controls.FilterSeveritiesToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dataLossImminentToolStripMenuItem.Name" xml:space="preserve">
-    <value>dataLossImminentToolStripMenuItem</value>
+  <data name="&gt;&gt;toolStripDropDownButtonServerFilter.Name" xml:space="preserve">
+    <value>toolStripDropDownButtonServerFilter</value>
   </data>
-  <data name="&gt;&gt;dataLossImminentToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;toolStripDropDownButtonServerFilter.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.FilterLocationToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;serviceLossImminentToolStripMenuItem.Name" xml:space="preserve">
-    <value>serviceLossImminentToolStripMenuItem</value>
+  <data name="&gt;&gt;toolStripDropDownButtonDateFilter.Name" xml:space="preserve">
+    <value>toolStripDropDownButtonDateFilter</value>
   </data>
-  <data name="&gt;&gt;serviceLossImminentToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;serviceDegradedToolStripMenuItem.Name" xml:space="preserve">
-    <value>serviceDegradedToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;serviceDegradedToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;serviceRecoveredToolStripMenuItem.Name" xml:space="preserve">
-    <value>serviceRecoveredToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;serviceRecoveredToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;informationalToolStripMenuItem.Name" xml:space="preserve">
-    <value>informationalToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;informationalToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;toolStripDropDownButtonDateFilter.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.FilterDatesToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
     <value>toolStripSeparator3</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButtonRefresh.Name" xml:space="preserve">
     <value>toolStripButtonRefresh</value>
   </data>
   <data name="&gt;&gt;toolStripButtonRefresh.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
     <value>toolStripSeparator1</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButtonExportAll.Name" xml:space="preserve">
     <value>toolStripButtonExportAll</value>
   </data>
   <data name="&gt;&gt;toolStripButtonExportAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripButtonDismissAll.Name" xml:space="preserve">
-    <value>toolStripButtonDismissAll</value>
+  <data name="&gt;&gt;toolStripSplitButtonDismiss.Name" xml:space="preserve">
+    <value>toolStripSplitButtonDismiss</value>
   </data>
-  <data name="&gt;&gt;toolStripButtonDismissAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;toolStripSplitButtonDismiss.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSplitButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripLabel1.Name" xml:space="preserve">
-    <value>toolStripLabel1</value>
+  <data name="&gt;&gt;tsmiDismissAll.Name" xml:space="preserve">
+    <value>tsmiDismissAll</value>
   </data>
-  <data name="&gt;&gt;toolStripLabel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tsmiDismissAll.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripButtonFix.Name" xml:space="preserve">
-    <value>toolStripButtonFix</value>
+  <data name="&gt;&gt;tsmiDismissSelected.Name" xml:space="preserve">
+    <value>tsmiDismissSelected</value>
   </data>
-  <data name="&gt;&gt;toolStripButtonFix.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tsmiDismissSelected.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripButtonHelp.Name" xml:space="preserve">
-    <value>toolStripButtonHelp</value>
+  <data name="&gt;&gt;toolStripLabelFiltersOnOff.Name" xml:space="preserve">
+    <value>toolStripLabelFiltersOnOff</value>
   </data>
-  <data name="&gt;&gt;toolStripButtonHelp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;toolStripLabelFiltersOnOff.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripButtonDismiss.Name" xml:space="preserve">
-    <value>toolStripButtonDismiss</value>
+  <data name="&gt;&gt;ColumnExpand.Name" xml:space="preserve">
+    <value>ColumnExpand</value>
   </data>
-  <data name="&gt;&gt;toolStripButtonDismiss.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;ColumnExpand.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;unknownToolStripMenuItem.Name" xml:space="preserve">
-    <value>unknownToolStripMenuItem</value>
+  <data name="&gt;&gt;ColumnSeverity.Name" xml:space="preserve">
+    <value>ColumnSeverity</value>
   </data>
-  <data name="&gt;&gt;unknownToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;ColumnSeverity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnMessage.Name" xml:space="preserve">
+    <value>ColumnMessage</value>
+  </data>
+  <data name="&gt;&gt;ColumnMessage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnLocation.Name" xml:space="preserve">
+    <value>ColumnLocation</value>
+  </data>
+  <data name="&gt;&gt;ColumnLocation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnDate.Name" xml:space="preserve">
+    <value>ColumnDate</value>
+  </data>
+  <data name="&gt;&gt;ColumnDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnActions.Name" xml:space="preserve">
+    <value>ColumnActions</value>
+  </data>
+  <data name="&gt;&gt;ColumnActions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AlertSummaryPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

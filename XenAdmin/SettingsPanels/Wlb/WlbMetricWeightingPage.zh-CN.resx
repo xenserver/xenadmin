@@ -222,9 +222,6 @@
   <data name="label11.Text" xml:space="preserve">
     <value>磁盘写入(&amp;W)</value>
   </data>
-  <data name="label11.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="&gt;&gt;label11.Name" xml:space="preserve">
     <value>label11</value>
   </data>
@@ -257,9 +254,6 @@
   </data>
   <data name="label10.Text" xml:space="preserve">
     <value>磁盘读取(&amp;D)</value>
-  </data>
-  <data name="label10.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="&gt;&gt;label10.Name" xml:space="preserve">
     <value>label10</value>
@@ -571,7 +565,7 @@
     <value>6, 46</value>
   </data>
   <data name="decentGroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>578, 266</value>
+    <value>578, 192</value>
   </data>
   <data name="decentGroupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>

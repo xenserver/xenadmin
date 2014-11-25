@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_FORM_URL" xml:space="preserve">
     <value>https://{0}/index.html?transactionID={1}</value>
@@ -163,10 +163,10 @@
     <value>http://www.citrix.com/xenserverenterprise</value>
   </data>
   <data name="PARTNEROFFERS_URL" xml:space="preserve">
-    <value>http://www.citrix.com/xenserver/partneroffers</value>
+    <value>http://www.citrix.com.cn/article/333/3453.aspx</value>
   </data>
   <data name="PLUGINS_URL" xml:space="preserve">
-    <value>http://community.citrix.com/xencenter/plugins</value>
+    <value>https://wiki.xenserver.org/XenCenter_Plugins</value>
   </data>
   <data name="PRIVACY" xml:space="preserve">
     <value>http://citrix.com/English/aboutCitrix/legal/privacyStatement.asp?ntref=hp_nav_US</value>
