@@ -748,7 +748,7 @@
     <value>0, 0</value>
   </data>
   <data name="TheTabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>761, 649</value>
+    <value>761, 618</value>
   </data>
   <data name="TheTabControl.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
