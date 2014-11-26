@@ -53,12 +53,10 @@ namespace XenAPI
             Platinum,
             EnterpriseXD,
             PerSocket,     //Added in Clearwater (PR-1589)
-            XenDesktop,    //Added in Clearwater (PR-1589) and is new form of "EnterpriseXD"
+            XenDesktop,    //Added in Clearwater (PR-1589) and is new form of "EnterpriseXD"; "Desktop Edition" in Creedence
             EnterprisePerSocket,   // Added in Creedence (enterprise-per-socket)
             EnterprisePerUser,     // Added in Creedence (enterprise-per-user)
-            XenDesktopPlatinum,    // Added in Creedence (xendesktop-platinum)
             StandardPerSocket,     // Added in Creedence (standard-per-socket)
-            StandardPerUser        // Added in Creedence (standard-per-user)
         }
 
         public static string LicenseServerWebConsolePort = "8082";
@@ -92,12 +90,8 @@ namespace XenAPI
                     return Edition.EnterprisePerSocket;
                 case "enterprise-per-user":
                     return Edition.EnterprisePerUser;
-                case "xendesktop-platinum":
-                    return Edition.XenDesktopPlatinum;
                 case "standard-per-socket":
                     return Edition.StandardPerSocket;
-                case "standard-per-user":
-                    return Edition.StandardPerUser;
                 default:
                     return Edition.Free;
             }
@@ -141,12 +135,8 @@ namespace XenAPI
                     return "enterprise-per-socket";
                 case Edition.EnterprisePerUser:
                     return "enterprise-per-user";
-                case Edition.XenDesktopPlatinum:
-                    return "xendesktop-platinum";
                 case Edition.StandardPerSocket:
                     return "standard-per-socket";
-                case Edition.StandardPerUser:
-                    return "standard-per-user";
                 default:
                     return "free";
             }
@@ -1381,7 +1371,16 @@ namespace XenAPI
             get
             {
                 var hostEdition = GetEdition(edition);
-                return hostEdition == Edition.EnterprisePerSocket || hostEdition == Edition.EnterprisePerUser;
+                return EligibleForSupport && (hostEdition == Edition.EnterprisePerSocket || hostEdition == Edition.EnterprisePerUser
+                    || hostEdition == Edition.PerSocket);
+            }
+        }
+
+        public bool DesktopFeaturesEnabled
+        {
+            get
+            {
+                return EligibleForSupport && GetEdition(edition) == Edition.XenDesktop;
             }
         }
 
@@ -1389,10 +1388,7 @@ namespace XenAPI
         {
             get
             {
-                var hostEdition = GetEdition(edition);
-                return hostEdition == Edition.EnterprisePerSocket || hostEdition == Edition.EnterprisePerUser ||
-                       hostEdition == Edition.XenDesktopPlatinum ||
-                       hostEdition == Edition.StandardPerSocket || hostEdition == Edition.StandardPerUser;
+                return (Helpers.CreedenceOrGreater(this) &&  GetEdition(edition) != Edition.Free);
             }
         }
 

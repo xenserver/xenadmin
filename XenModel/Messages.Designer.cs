@@ -18026,6 +18026,16 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Eligible for support 
+        ///Desktop features enabled.
+        /// </summary>
+        public static string LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED {
+            get {
+                return ResourceManager.GetString("LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Eligible for support 
         ///Enterprise features enabled.
         /// </summary>
         public static string LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED {
@@ -26884,7 +26894,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos;: XenServer 6.2 requires new licenses to be added to your license server..
+        ///   Looks up a localized string similar to &apos;{0}&apos;: New versions of XenServer require new licenses to be added to your license server..
         /// </summary>
         public static string RPU_WARNING_DESCRIPTION_CLEARWATER_OR_GREATER {
             get {

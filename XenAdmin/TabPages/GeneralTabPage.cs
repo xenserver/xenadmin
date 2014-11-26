@@ -950,7 +950,7 @@ namespace XenAdmin.TabPages
 
             if (!string.IsNullOrEmpty(host.edition))
             {
-                s.AddEntry(FriendlyName("host.edition"), FriendlyName(String.Format("host.edition-{0}", host.edition)) ?? String.Empty);
+                s.AddEntry(FriendlyName("host.edition"), Helpers.GetFriendlyLicenseName(host));
                 if (info.ContainsKey("sku_type"))
                 {
                     info.Remove("sku_type");
@@ -967,8 +967,8 @@ namespace XenAdmin.TabPages
 
             if (host.license_server.ContainsKey("address"))
             {
-                var licenseServerAddress = host.license_server["address"].Trim().ToLower();
-                if (licenseServerAddress == "" || licenseServerAddress == "localhost")
+                var licenseServerAddress = host.license_server["address"].Trim();
+                if (licenseServerAddress == "" || licenseServerAddress.ToLower() == "localhost")
                     s.AddEntry(FriendlyName(String.Format("host.license_server-address")), host.license_server["address"]);
                 else
                 {

@@ -854,7 +854,9 @@ namespace XenAdmin.Core
 				if (string.IsNullOrEmpty(host.edition))
 					return Messages.UNKNOWN;
 
-                string name = PropertyManager.GetFriendlyName("Label-host.edition-" + host.edition);
+                string name = CreedenceOrGreater(host) && host.edition == "xendesktop"
+                                  ? PropertyManager.GetFriendlyName("Label-host.edition-desktop")
+                                  : PropertyManager.GetFriendlyName("Label-host.edition-" + host.edition);
                 return name ?? Messages.UNKNOWN;
             }
             

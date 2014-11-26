@@ -198,7 +198,6 @@ namespace XenAdmin.Dialogs
                 new OpenLicenseFileDialog(View.Parent, RowsToHosts(validRows)[0], Messages.INSTALL_LICENSE_KEY, false).ShowDialogAndRunAction();
             }
 
-            licenseRows.ForEach(r => r.BeginCellUpdate());
             SummariseDisconnectedRows(rowsChecked);
             ResetButtonEnablement();
         }

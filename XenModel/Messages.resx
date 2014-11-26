@@ -9336,7 +9336,7 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
 Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if the VMs are shut down and using NetApp, Dell EqualLogic or SMI-S adapters.</value>
   </data>
   <data name="RPU_WARNING_DESCRIPTION_CLEARWATER_OR_GREATER" xml:space="preserve">
-    <value>'{0}': XenServer 6.2 requires new licenses to be added to your license server.</value>
+    <value>'{0}': New versions of XenServer require new licenses to be added to your license server.</value>
   </data>
   <data name="RPU_WIZARD_TAMPA_AND_OLDER_TITLE" xml:space="preserve">
     <value>Checking licensing status</value>
@@ -12274,5 +12274,9 @@ Standard features only</value>
   </data>
   <data name="LICENSE_SERVER_WEB_CONSOLE_GOTO" xml:space="preserve">
     <value>Go to...</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
+    <value>Eligible for support 
+Desktop features enabled</value>
   </data>
 </root>
