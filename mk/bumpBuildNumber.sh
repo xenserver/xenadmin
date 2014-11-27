@@ -30,13 +30,18 @@
 
 set -eu
 
-JENKINS_SERVER=http://tocco.uk.xensource.com:8080
-
-source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
-
 if [ $get_JOB_NAME = "devbuild" ] ; then
     echo Warning: devbuild detected so we will skip the build number increment. All dev builds will have build number 0.
     exit 0
+fi
+
+source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
+
+if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
+then
+    JENKINS_SERVER=http://tizon-1.xs.cbg.ccsi.eng.citrite.net:8080
+else
+    JENKINS_SERVER=http://tocco.uk.xensource.com:8080
 fi
 
 url="${JENKINS_SERVER}/job/${get_JOB_NAME}/"
@@ -47,24 +52,9 @@ else
   exit 1
 fi
 
-PSQL="ssh -q xenbuild@xenbuilder.uk.xensource.com PGPASSWORD=xenadmindb psql -q -A -t xenbuilder xenadmin"
+NEXT_BN=$(curl "http://hg.uk.xensource.com/cgi/next-xenadmin?job=$get_JOB_NAME&number=$get_BUILD_NUMBER&rev=$get_REVISION")
 
-QUERY="""INSERT INTO xenadmin_builds (build_number,job,revision) SELECT ${get_BUILD_NUMBER},'${get_JOB_NAME}','${get_REVISION}' WHERE NOT EXISTS ( SELECT 1 FROM xenadmin_builds WHERE build_number = ${get_BUILD_NUMBER});
-UPDATE xenadmin_builds SET job='${get_JOB_NAME}',revision='${get_REVISION}' WHERE build_number=${get_BUILD_NUMBER};
-SELECT MAX(build_number) FROM xenadmin_builds;"""
-
-echo "${QUERY}"
-
-MAX_BN=`${PSQL} << eof
-${QUERY}
-eof`
-
-echo MAX_BN=${MAX_BN}
-NEXT_BN=$(expr ${MAX_BN} + 1)
-
-echo NEXT_NB=${NEXT_BN}
-
-$PSQL -c "\"INSERT INTO xenadmin_builds (build_number,job,revision) VALUES (${NEXT_BN},'${get_JOB_NAME}','tba');\""
+echo NEXT_BN=${NEXT_BN}
 
 curl --data "nextBuildNumber=${NEXT_BN}" --header "Content-Type: application/x-www-form-urlencoded" ${JENKINS_SERVER}/job/${get_JOB_NAME}/nextbuildnumber/submit
 

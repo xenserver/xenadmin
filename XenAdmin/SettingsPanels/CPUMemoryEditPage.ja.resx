@@ -646,7 +646,7 @@
     <value>0, 2, 0, 0</value>
   </data>
   <data name="nudVCPUs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 19</value>
+    <value>130, 19</value>
   </data>
   <data name="nudVCPUs.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
