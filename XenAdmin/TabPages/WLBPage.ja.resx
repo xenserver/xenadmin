@@ -465,7 +465,7 @@
     <value>設定</value>
   </data>
   <data name="pdSectionConfiguration.Size" type="System.Drawing.Size, System.Drawing">
-    <value>693, 34</value>
+    <value>693, 35</value>
   </data>
   <data name="pdSectionConfiguration.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
