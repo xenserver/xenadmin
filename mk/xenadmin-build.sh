@@ -48,6 +48,12 @@ mkdir_clean ${OUTPUT_DIR}
 mkdir_clean ${BUILD_ARCHIVE}
 rm -rf ${TEST_DIR}/* ${XENCENTER_LOGDIR}/XenCenter.log || true
 
+if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
+then
+    git clone ${BUILD_TOOLS_REPO} ${BUILD_TOOLS}
+    chmod +x ${BUILD_TOOLS}/scripts/storefiles.py
+fi
+
 #the local revision numbers are the same as the local revision numbers on the remote repository;
 #also we know that xenadmin.git is not a patch queue style repository
 CSET_NUMBER=$(cd ${REPO} && git rev-list HEAD -1 && echo "")
@@ -415,7 +421,12 @@ cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep xencenter-ovf >> ${OUTPUT_DIR}/man
 cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep chroot-lenny >> ${OUTPUT_DIR}/manifest
 cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep branding >> ${OUTPUT_DIR}/manifest
 cat ${SCRATCH_DIR}/dotnet-packages-manifest >> ${OUTPUT_DIR}/manifest
-echo ${get_BUILD_URL} >> ${OUTPUT_DIR}/latest-successful-build
+if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
+then
+    echo ${get_BUILD_URL} >> ${OUTPUT_DIR}/latest-secure-build
+else
+    echo ${get_BUILD_URL} >> ${OUTPUT_DIR}/latest-successful-build
+fi
 
 echo "Build phase succeeded at "
 date

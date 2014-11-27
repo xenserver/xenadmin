@@ -41,7 +41,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         public PatchingWizard_FirstPage()
         {
             InitializeComponent();
-            pictureBox1.Image = SystemIcons.Information.ToBitmap();
         }
 
         public override string Text
