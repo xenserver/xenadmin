@@ -126,7 +126,12 @@ namespace XenAdmin.Dialogs.OptionsPages
 
             try
             {
-                uint.Parse(ProxyPortTextBox.Text);
+                if (!Util.IsValidPort(ProxyPortTextBox.Text))
+                {
+                    optionsDialog.okButton.Enabled = false;
+                    return;
+                }
+
                 if (r.Match(ProxyAddressTextBox.Text).Length != ProxyAddressTextBox.Text.Length || ProxyAddressTextBox.Text == "")
                     optionsDialog.okButton.Enabled = false;
                 else
