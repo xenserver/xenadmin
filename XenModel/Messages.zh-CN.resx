@@ -4857,7 +4857,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>星期五</value>
   </data>
   <data name="FRIDAY_SHORT" xml:space="preserve">
-    <value>星期五</value>
+    <value>五</value>
   </data>
   <data name="FULLY_APPLIED" xml:space="preserve">
     <value>已完全应用</value>
@@ -7071,7 +7071,7 @@ SCSI ID: {2}
     <value>星期一</value>
   </data>
   <data name="MONDAY_SHORT" xml:space="preserve">
-    <value>星期一</value>
+    <value>一</value>
   </data>
   <data name="MOREONE_VM_SELECTED" xml:space="preserve">
     <value>已选择 {0} 个 VM</value>
@@ -9371,7 +9371,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>星期六</value>
   </data>
   <data name="SATURDAY_SHORT" xml:space="preserve">
-    <value>星期六</value>
+    <value>六</value>
   </data>
   <data name="SAVE" xml:space="preserve">
     <value>保存</value>
@@ -10206,7 +10206,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>星期日</value>
   </data>
   <data name="SUNDAY_SHORT" xml:space="preserve">
-    <value>星期日</value>
+    <value>日</value>
   </data>
   <data name="SUPP_PACK_MISSING_ON" xml:space="preserve">
     <value>{0} (未在 {1} 上安装)</value>
@@ -10329,7 +10329,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>星期四</value>
   </data>
   <data name="THURSDAY_SHORT" xml:space="preserve">
-    <value>星期四</value>
+    <value>四</value>
   </data>
   <data name="TIMESTAMP" xml:space="preserve">
     <value>时间戳</value>
@@ -10458,7 +10458,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>星期二</value>
   </data>
   <data name="TUESDAY_SHORT" xml:space="preserve">
-    <value>星期二</value>
+    <value>二</value>
   </data>
   <data name="TURN_HA_OFF" xml:space="preserve">
     <value>关闭高可用性功能</value>
@@ -11463,7 +11463,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>星期三</value>
   </data>
   <data name="WEDNESDAY_SHORT" xml:space="preserve">
-    <value>星期三</value>
+    <value>三</value>
   </data>
   <data name="WEEKLY_SCHEDULE_FORMAT" xml:space="preserve">
     <value>每周；在每 {1} 的 {0}</value>
