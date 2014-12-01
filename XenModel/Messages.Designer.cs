@@ -22830,6 +22830,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CoreOS.
+        /// </summary>
+        public static string NEWVMWIZARD_TEMPLATEPAGE_COREOS {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_COREOS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom.
         /// </summary>
         public static string NEWVMWIZARD_TEMPLATEPAGE_CUSTOM {

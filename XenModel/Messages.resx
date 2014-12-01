@@ -12279,4 +12279,7 @@ Standard features only</value>
     <value>Eligible for support 
 Desktop features enabled</value>
   </data>
+  <data name="NEWVMWIZARD_TEMPLATEPAGE_COREOS" xml:space="preserve">
+    <value>CoreOS</value>
+  </data>
 </root>

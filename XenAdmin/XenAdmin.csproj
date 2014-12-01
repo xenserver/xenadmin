@@ -3951,6 +3951,7 @@
     <None Include="Images\close_16.png" />
     <Content Include="Images\commands_16.png" />
     <Content Include="Images\console_16.png" />
+    <None Include="Images\coreos-globe-icon.png" />
     <Content Include="Images\cross.png" />
     <None Include="Images\DateTime16.png" />
     <None Include="Images\sl_connecting_16.png" />
