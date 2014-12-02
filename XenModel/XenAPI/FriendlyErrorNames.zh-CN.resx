@@ -1245,7 +1245,7 @@
     <value>内核不受支持: 内核既不是 2.6，也不是 3.x。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_449" xml:space="preserve">
-    <value>LN_tapdisk experienced an error</value>
+    <value>tapdisk 遇到错误</value>
   </data>
   <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
     <value>VDI 不可用</value>
@@ -1431,7 +1431,7 @@
     <value>SR 当前正用作本地缓存 SR。</value>
   </data>
   <data name="SR_NOT_ATTACHED" xml:space="preserve">
-    <value>LN_The SR is not attached.</value>
+    <value>SR 未连接。</value>
   </data>
   <data name="SR_NOT_EMPTY" xml:space="preserve">
     <value>无法执行该 SR 操作，因为 SR 不为空。</value>
@@ -1674,13 +1674,13 @@
     <value>尝试执行的操作对模板无效</value>
   </data>
   <data name="VM_LACKS_FEATURE_SHUTDOWN" xml:space="preserve">
-    <value>LN_You attempted an operation which needs the cooperative shutdown feature on a VM which lacks it.</value>
+    <value>您尝试在缺少协作关闭功能的 VM 上执行需要使用该功能的操作。</value>
   </data>
   <data name="VM_LACKS_FEATURE_SUSPEND" xml:space="preserve">
-    <value>LN_You attempted an operation which needs the VM cooperative suspend feature on a VM which lacks it.</value>
+    <value>您尝试在缺少协作暂停功能的 VM 上执行需要使用该功能的操作。</value>
   </data>
   <data name="VM_LACKS_FEATURE_VCPU_HOTPLUG" xml:space="preserve">
-    <value>LN_You attempted an operation which needs the VM hotplug-vcpu feature on a VM which lacks it.</value>
+    <value>您尝试在缺少 VM hotplug-vcpu 功能的 VM 上执行需要使用该功能的操作。</value>
   </data>
   <data name="VM_MEMORY_SIZE_TOO_LOW" xml:space="preserve">
     <value>指定 VM 的内存过少，无法启动。</value>

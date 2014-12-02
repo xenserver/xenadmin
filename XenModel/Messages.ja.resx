@@ -8769,7 +8769,7 @@ XenServer では、CPU の一部の機能をマスタに合わせて無効にす
     <value>以下の StorageLink Gateway への接続時にエラーが発生しました。\n\n{0}\n\nこのホストの設定を確認して再接続してください。</value>
   </data>
   <data name="PROBLEM_UNSUPPORTED_STORAGELINK_SR" xml:space="preserve">
-    <value>LN_The use of StorageLink SRs was removed in XenServer 6.5. Remove StorageLink SRs before upgrading.</value>
+    <value>StorageLink SR を XenServer 6.5 で使用することはできません。StorageLink SR を削除してからアップグレードしてください。</value>
   </data>
   <data name="PROBLEM_VMAPPLIANCEPROBLEM_TITLE" xml:space="preserve">
     <value>vApp {0}</value>
@@ -9438,13 +9438,13 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
     <value>検索...</value>
   </data>
   <data name="SEARCH_TITLE_HOST" xml:space="preserve">
-    <value>LN_{0}: Overview</value>
+    <value>{0}: 概要</value>
   </data>
   <data name="SEARCH_TITLE_OVERVIEW" xml:space="preserve">
     <value>すべてのサーバー、VM、カスタム テンプレート、およびリモート SR</value>
   </data>
   <data name="SEARCH_TITLE_POOL" xml:space="preserve">
-    <value>LN_{0}: Overview</value>
+    <value>{0}: 概要</value>
   </data>
   <data name="SECRET_ACCESS_KEY_LABLE" xml:space="preserve">
     <value>シークレット アクセス キー(&amp;S):</value>

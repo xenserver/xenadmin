@@ -1044,7 +1044,7 @@
 {1}</value>
   </data>
   <data name="Message.body-grace_license" xml:space="preserve">
-    <value>LN_A grace license was issued for {0}. This was because the license server could not be reached, it is an out-of-date version, or because the host has recently been upgraded.</value>
+    <value>{0}に猶予ライセンスが発行されました。ライセンス サーバーに接続できないか、ライセンス サーバーのバージョンが古いか、ホストがアップグレード直後である場合に猶予ランセンスが発行されます。</value>
   </data>
   <data name="Message.body-ha_heartbeat_approaching_timeout" xml:space="preserve">
     <value>サーバー '{0}' で高可用性ネットワーク ハートビートへの応答に時間がかかっています。隔離される可能性があります。</value>
@@ -1701,10 +1701,10 @@
     <value>vCPU の最大数</value>
   </data>
   <data name="Message.body-license_server_version_obsolete" xml:space="preserve">
-    <value>LN_The license server for {0} is an out-of-date version.</value>
+    <value>{0}のライセンス サーバーのバージョンが古すぎます。</value>
   </data>
   <data name="Message.name-license_server_version_obsolete" xml:space="preserve">
-    <value>LN_The license server is an out-of-date version.</value>
+    <value>ライセンス サーバーのバージョンが古すぎます。</value>
   </data>
   <data name="Message.help-license_expired" xml:space="preserve">
     <value>ライセンスのヘルプ</value>

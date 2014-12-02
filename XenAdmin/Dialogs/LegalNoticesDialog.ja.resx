@@ -211,7 +211,7 @@
     <value>4</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>LN_This software includes the following third-party software:</value>
+    <value>このソフトウェアには、以下のサードバーティ製ソフトウェアが含まれています。</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>

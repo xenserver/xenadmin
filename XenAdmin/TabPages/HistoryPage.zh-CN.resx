@@ -145,7 +145,7 @@
     <value>111, 23</value>
   </data>
   <data name="toolStripDdbFilterLocation.Text" xml:space="preserve">
-    <value>LN_Filter by S&amp;erver</value>
+    <value>按服务器过滤(&amp;E)</value>
   </data>
   <data name="toolStripDdbFilterDates.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -290,7 +290,7 @@
     <value>True</value>
   </metadata>
   <data name="columnLocation.HeaderText" xml:space="preserve">
-    <value>LN_Server / Pool</value>
+    <value>服务器/池</value>
   </data>
   <data name="columnLocation.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>
