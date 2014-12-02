@@ -1044,4 +1044,22 @@
   <data name="FileSystemUsageMessageAlert" xml:space="preserve">
     <value>LN_9857</value>
   </data>
+  <data name="MessageAlert_LICENSE_EXPIRED" xml:space="preserve">
+    <value>7015</value>
+  </data>
+  <data name="MessageAlert_LICENSE_NOT_AVAILABLE" xml:space="preserve">
+    <value>7015</value>
+  </data>
+  <data name="MessageAlert_LICENSE_SERVER_CONNECTED" xml:space="preserve">
+    <value>7015</value>
+  </data>
+  <data name="MessageAlert_LICENSE_SERVER_UNAVAILABLE" xml:space="preserve">
+    <value>7015</value>
+  </data>
+  <data name="MessageAlert_LICENSE_SERVER_UNREACHABLE" xml:space="preserve">
+    <value>7015</value>
+  </data>
+  <data name="MessageAlert_LICENSE_SERVER_VERSION_OBSOLETE" xml:space="preserve">
+    <value>7015</value>
+  </data>
 </root>

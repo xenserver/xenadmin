@@ -8771,7 +8771,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>尝试连接到 StorageLink Gateway 时出错: \n\n{0}\n\n请检查此主机的设置并重新连接。</value>
   </data>
   <data name="PROBLEM_UNSUPPORTED_STORAGELINK_SR" xml:space="preserve">
-    <value>LN_The use of StorageLink SRs was removed in XenServer 6.5. Remove StorageLink SRs before upgrading.</value>
+    <value>XenServer 6.5 不再使用 StorageLink SR。请先删除 StorageLink SR，然后再升级。</value>
   </data>
   <data name="PROBLEM_VMAPPLIANCEPROBLEM_TITLE" xml:space="preserve">
     <value>vApp {0}</value>
@@ -9440,13 +9440,13 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>搜索...</value>
   </data>
   <data name="SEARCH_TITLE_HOST" xml:space="preserve">
-    <value>LN_{0}: Overview</value>
+    <value>{0}: 概览</value>
   </data>
   <data name="SEARCH_TITLE_OVERVIEW" xml:space="preserve">
     <value>所有服务器、VM、自定义模板和远程 SR</value>
   </data>
   <data name="SEARCH_TITLE_POOL" xml:space="preserve">
-    <value>LN_{0}: Overview</value>
+    <value>{0}: 概览</value>
   </data>
   <data name="SECRET_ACCESS_KEY_LABLE" xml:space="preserve">
     <value>访问密钥(&amp;S):</value>

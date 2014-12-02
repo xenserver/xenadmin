@@ -232,7 +232,7 @@
     <value>111, 23</value>
   </data>
   <data name="toolStripDropDownButtonServerFilter.Text" xml:space="preserve">
-    <value>LN_Filter by S&amp;erver</value>
+    <value>按服务器过滤(&amp;E)</value>
   </data>
   <data name="toolStripDropDownButtonDateFilter.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -454,7 +454,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnLocation.HeaderText" xml:space="preserve">
-    <value>LN_Server / Pool</value>
+    <value>服务器/池</value>
   </data>
   <data name="ColumnLocation.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>
