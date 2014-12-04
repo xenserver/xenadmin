@@ -12282,4 +12282,10 @@ Desktop features enabled</value>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_COREOS" xml:space="preserve">
     <value>CoreOS</value>
   </data>
+  <data name="NEWVMWIZARD_CLOUD_CONFIG_PARAMETERS_PAGE" xml:space="preserve">
+    <value>Cloud-Config Parameters</value>
+  </data>
+  <data name="NEWVMWIZARD_CLOUD_CONFIG_PARAMETERS_PAGE_TITLE" xml:space="preserve">
+    <value>Configure Cloud-Config Parameters</value>
+  </data>
 </root>

@@ -68,13 +68,22 @@ namespace XenAdmin.Actions
         {
             Description = string.Format(Messages.PLUGIN_CALLING, Plugin);
             Result = XenAPI.Host.call_plugin(Session, Host.opaque_ref, Plugin, Function, Args);
+
             if (Result == "True")
-                Description = string.Format(Messages.PLUGIN_SUCCEED, Plugin);
-            else
             {
-                log.WarnFormat("Plugin call {0}.{1}({2}) on {3} failed with {4}", Plugin, Function, ArgString(), Host.uuid, Result);
-                Exception = new Failed(Result);
+                Description = string.Format(Messages.PLUGIN_SUCCEED, Plugin);
+                return;
             }
+
+            if (Result.StartsWith("True"))
+            {
+                Description = string.Format(Messages.PLUGIN_SUCCEED, Plugin);
+                Result = Result.Remove(0, 4);
+                return;
+            }
+
+            log.WarnFormat("Plugin call {0}.{1}({2}) on {3} failed with {4}", Plugin, Function, ArgString(), Host.uuid, Result);
+            Exception = new Failed(Result);
         }
 
         private string ArgString()
