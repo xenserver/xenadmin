@@ -2597,7 +2597,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   </data>
   <data name="CONFIRM_TRIM_SR" xml:space="preserve">
     <value>回收空间的过程可能会在存储控制器上放置大量负载，暂时影响存储的性能。
-是否要同时执行该操作?</value>
+当前是否执行该操作?</value>
   </data>
   <data name="CONFIRM_TRIM_SR_TITLE" xml:space="preserve">
     <value>回收释放的空间</value>
