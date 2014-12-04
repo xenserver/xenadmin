@@ -535,7 +535,7 @@
     <value>地址</value>
   </data>
   <data name="Label-host.agentUptime" xml:space="preserve">
-    <value>工具堆栈运行时间</value>
+    <value>Toolstack 运行时间</value>
   </data>
   <data name="Label-host.edition" xml:space="preserve">
     <value>版本</value>
