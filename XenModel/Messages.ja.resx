@@ -4836,6 +4836,9 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="FORCE_CLOSE_PLUGIN_PROMPT" xml:space="preserve">
     <value>プラグイン {0} がキャンセル要求に応答していません。プロセスを強制終了するか、バックグラウンドでの続行を許可するかを選択してください。</value>
   </data>
+  <data name="FORCE_ENABLE_RDP" xml:space="preserve">
+    <value>Would you like to turn on Remote Desktop in this VM, and then connect to it over Remote Desktop?</value>
+  </data>
   <data name="FORCE_REBOOT" xml:space="preserve">
     <value>強制再起動</value>
   </data>
@@ -11402,6 +11405,9 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   </data>
   <data name="VNC_RDESKTOP" xml:space="preserve">
     <value>リモート デスクトップに切り替える(&amp;I)</value>
+  </data>
+  <data name="VNC_RDESKTOP_TRUN_ON" xml:space="preserve">
+    <value>Turn &amp;on Remote Desktop</value>
   </data>
   <data name="VNC_REDOCK" xml:space="preserve">
     <value>元に戻す(&amp;R)</value>

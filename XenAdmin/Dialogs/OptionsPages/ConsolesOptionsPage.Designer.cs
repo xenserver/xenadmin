@@ -88,7 +88,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             resources.ApplyResources(this.checkBoxDisableRDPPolling, "checkBoxDisableRDPPolling");
             this.checkBoxDisableRDPPolling.Name = "checkBoxDisableRDPPolling";
             this.checkBoxDisableRDPPolling.UseVisualStyleBackColor = true;
-            this.checkBoxDisableRDPPolling.CheckedChanged += new System.EventHandler(this.checkBoxDisableRDPPolling_CheckedChanged);
             // 
             // WindowsKeyCheckBox
             // 

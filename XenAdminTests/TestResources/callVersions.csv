@@ -262,6 +262,7 @@ vm_appliance_assert_can_be_recovered,boston
 async_vm_appliance_assert_can_be_recovered,boston
 vm_appliance_recover,boston
 async_vm_appliance_recover,boston
+vm_call_plugin,creedence
 dr_task_create,boston
 async_dr_task_create,boston
 dr_task_destroy,boston

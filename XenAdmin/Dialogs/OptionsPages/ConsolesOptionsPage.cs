@@ -75,11 +75,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             PreserveUndockedScaleCheckBox.Checked = Properties.Settings.Default.PreserveScaleWhenUndocked;
             PreserveVNCConsoleScalingCheckBox.Checked = Properties.Settings.Default.PreserveScaleWhenSwitchBackToVNC;
             checkBoxDisableRDPPolling.Checked = Properties.Settings.Default.EnableRDPPolling;
-            if (!checkBoxDisableRDPPolling.Checked)
-            {
-                AutoSwitchCheckBox.Checked = false;
-                AutoSwitchCheckBox.Enabled = false;
-            }
         }
 
         private void buildKeyCodeListBox()
@@ -203,17 +198,5 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         #endregion
 
-        private void checkBoxDisableRDPPolling_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxDisableRDPPolling.Checked)
-            {
-                AutoSwitchCheckBox.Enabled = true;
-            }
-            else
-            {
-                AutoSwitchCheckBox.Enabled = false;
-                AutoSwitchCheckBox.Checked = false;
-            }
-        }
     }
 }

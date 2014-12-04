@@ -2556,6 +2556,10 @@ namespace XenAPI
         Response<Object>
         vm_appliance_get_all_records(string session);
 
+        [XmlRpcMethod("VM.call_plugin")]
+        Response<string>
+        vm_call_plugin(string session, string _vm, string _plugin, string _fn, Object _args);
+
         [XmlRpcMethod("DR_task.get_record")]
         Response<Proxy_DR_task>
         dr_task_get_record(string session, string _dr_task);

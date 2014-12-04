@@ -4835,6 +4835,9 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   <data name="FORCE_CLOSE_PLUGIN_PROMPT" xml:space="preserve">
     <value>插件 {0} 尚未对您的取消请求作出响应。是强制关闭进程还是允许其继续在后台运行?</value>
   </data>
+  <data name="FORCE_ENABLE_RDP" xml:space="preserve">
+    <value>Would you like to turn on Remote Desktop in this VM, and then connect to it over Remote Desktop?</value>
+  </data>
   <data name="FORCE_REBOOT" xml:space="preserve">
     <value>强制重启</value>
   </data>
@@ -11404,6 +11407,9 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="VNC_RDESKTOP" xml:space="preserve">
     <value>切换到远程桌面(&amp;I)</value>
+  </data>
+  <data name="VNC_RDESKTOP_TRUN_ON" xml:space="preserve">
+    <value>启用远程桌面(&amp;o)</value>
   </data>
   <data name="VNC_REDOCK" xml:space="preserve">
     <value>重新停靠(&amp;R)</value>
