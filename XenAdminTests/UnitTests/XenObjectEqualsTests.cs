@@ -47,7 +47,7 @@ namespace XenAdminTests.UnitTests
         private readonly Random _random = new Random();
 
         /// <summary>
-        /// Gets all Types that derive from IXenObject except Folder.
+        /// Gets all Types that derive from IXenObject except Folder and DockerContainer
         /// </summary>
         public IEnumerable<Type> AllXenObjectTypesExceptFolder
         {
@@ -55,7 +55,7 @@ namespace XenAdminTests.UnitTests
             {
                 foreach (Type t in typeof(IXenObject).Assembly.GetTypes())
                 {
-                    if (!t.IsAbstract && typeof(IXenObject).IsAssignableFrom(t) && t.GetConstructor(new Type[0]) != null && !typeof(Folder).IsAssignableFrom(t))
+                    if (!t.IsAbstract && typeof(IXenObject).IsAssignableFrom(t) && t.GetConstructor(new Type[0]) != null && !typeof(Folder).IsAssignableFrom(t) && !typeof(DockerContainer).IsAssignableFrom(t))
                     {
                         yield return t;
                     }

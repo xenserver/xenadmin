@@ -198,7 +198,7 @@ namespace XenAdmin.Model
             DockerContainer other = obj as DockerContainer;
 
             return other != null &&
-                name_label.Equals(other.name_label);
+                uuid.Equals(other.uuid);
         }
 
 
@@ -215,7 +215,7 @@ namespace XenAdmin.Model
             if (other == null)
                 return 1;
 
-            return StringUtility.NaturalCompare(_name_label, other._name_label);
+            return StringUtility.NaturalCompare(_uuid, other.uuid);
         }
 
         #endregion
