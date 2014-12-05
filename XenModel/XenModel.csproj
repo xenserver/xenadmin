@@ -130,6 +130,7 @@
     <Compile Include="CustomFields\CustomFieldDefinition.cs" />
     <Compile Include="CustomFields\CustomFieldsCache.cs" />
     <Compile Include="CustomFields\CustomFieldsManager.cs" />
+    <Compile Include="DockerContainer.cs" />
     <Compile Include="Folders.cs" />
     <Compile Include="InvokeHelper.cs" />
     <Compile Include="Mappings\LiveMigrateOptionsVmMapping.cs" />

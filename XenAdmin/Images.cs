@@ -286,6 +286,10 @@ namespace XenAdmin
             if (storageLinkRepository != null)
                 return GetIconFor(storageLinkRepository);
 
+            DockerContainer dockerContainer = o as DockerContainer;
+            if (dockerContainer != null)
+                return GetIconFor(dockerContainer);
+
             System.Diagnostics.Trace.Assert(false,
                 "You asked for an icon for a type I don't recognise!");
 
@@ -561,6 +565,19 @@ namespace XenAdmin
         public static Icons GetIconFor(PIF pif)
         {
             return pif.IsPrimaryManagementInterface() ? Icons.PifPrimary : Icons.PifSecondary;
+        }
+
+        public static Icons GetIconFor(DockerContainer dockerContainer)
+        {
+            switch (dockerContainer.power_state)
+            {
+                case vm_power_state.Paused:
+                    return Icons.VmSuspended;
+                case vm_power_state.Running:
+                    return Icons.VmRunning;
+                default:
+                    return Icons.VmStopped;
+            }
         }
     }
 }

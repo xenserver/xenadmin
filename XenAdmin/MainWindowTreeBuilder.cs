@@ -444,7 +444,22 @@ namespace XenAdmin
             {
                 bool hidden = vm.IsHidden;
                 string name = hidden ? String.Format(Messages.X_HIDDEN, vm.Name) : vm.Name;
-                return AddNode(name, Images.GetIconFor(vm), hidden, vm);
+                //return AddNode(name, Images.GetIconFor(vm), hidden, vm);
+
+                var vmNode = AddNode(name, Images.GetIconFor(vm), hidden, vm);
+
+                var containers = vm.GetContainers();
+                foreach (var dockerContainer in containers)
+                {
+                    VirtualTreeNode containerNode = new VirtualTreeNode(dockerContainer.Name.Ellipsise(1000))
+                    {
+                        Tag = dockerContainer,
+                        ImageIndex = (int)Images.GetIconFor(dockerContainer),
+                        SelectedImageIndex = (int)Images.GetIconFor(dockerContainer)
+                    };
+                    vmNode.Nodes.Add(containerNode);
+                }
+                return vmNode;
             }
 
 			private VirtualTreeNode AddVmApplianceNode(VM_appliance appliance)
