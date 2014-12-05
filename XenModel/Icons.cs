@@ -107,6 +107,7 @@ namespace XenAdmin
         RHEL,
         SUSE,
         Windows,
+        CoreOS,
 
         #endregion
 

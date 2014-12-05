@@ -132,6 +132,7 @@ namespace XenAdmin
             ImageList16.Images.Add("redhat_16x.png", Properties.Resources.redhat_16x);
             ImageList16.Images.Add("suse_16x.png", Properties.Resources.suse_16x);
             ImageList16.Images.Add("windows_h32bit_16.png", Properties.Resources.windows_h32bit_16);
+            ImageList16.Images.Add("coreos-globe-icon.png", Properties.Resources.coreos_globe_icon);
 
             ImageList16.Images.Add("tools_uptodate_16x.png", Properties.Resources.tools_uptodate_16x);
             ImageList16.Images.Add("tools_notinstalled_16x.png", Properties.Resources.tools_notinstalled_16x);

@@ -1312,6 +1312,8 @@ namespace XenAdmin.XenSearch
                                 return Icons.SUSE;
                             else if (os.Contains("windows"))
                                 return Icons.Windows;
+                            else if (os.Contains("coreos"))
+                                return Icons.CoreOS;
 
                             return Icons.XenCenter;
                         };
