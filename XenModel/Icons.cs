@@ -156,6 +156,14 @@ namespace XenAdmin
         PifSecondary,
 
         Home,
-        Objects
+        Objects,
+
+        #region DockerContainer Icons
+
+        DCRunning,
+        DCStopped,
+        DCPaused
+
+        #endregion
     }
 }

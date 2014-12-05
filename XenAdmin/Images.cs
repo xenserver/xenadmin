@@ -172,6 +172,11 @@ namespace XenAdmin
             ImageList16.Images.Add("infra_view_16_textured.png", Properties.Resources.infra_view_16_textured);
             ImageList16.Images.Add("objects_16_textured.png", Properties.Resources.objects_16_textured);
 
+            ImageList16.Images.Add("RunningDC_16.png", Properties.Resources.RunningDC_16);
+            ImageList16.Images.Add("StoppedDC_16.png", Properties.Resources.StoppedDC_16);
+            ImageList16.Images.Add("PausedDC_16.png", Properties.Resources.PausedDC_16);
+
+
             System.Diagnostics.Trace.Assert(ImageList16.Images.Count == Enum.GetValues(typeof(Icons)).Length,
                 "Programmer error - you must add an entry to the image list when you add a new icon to the enum");
 
@@ -572,11 +577,11 @@ namespace XenAdmin
             switch (dockerContainer.power_state)
             {
                 case vm_power_state.Paused:
-                    return Icons.VmSuspended;
+                    return Icons.DCPaused;
                 case vm_power_state.Running:
-                    return Icons.VmRunning;
+                    return Icons.DCRunning;
                 default:
-                    return Icons.VmStopped;
+                    return Icons.DCStopped;
             }
         }
     }

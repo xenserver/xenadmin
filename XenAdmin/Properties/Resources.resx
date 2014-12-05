@@ -1084,4 +1084,13 @@
   <data name="coreos_globe_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\coreos-globe-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="RunningDC_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\RunningDC_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PausedDC_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\PausedDC_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StoppedDC_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\StoppedDC_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

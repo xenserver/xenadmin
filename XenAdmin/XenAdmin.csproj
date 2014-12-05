@@ -247,6 +247,11 @@
     <Compile Include="Dialogs\UpsellDialog.designer.cs">
       <DependentUpon>UpsellDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SettingsPanels\Wlb\WlbAdvancedSettingsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -278,11 +283,6 @@
       <DependentUpon>WlbThresholdsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugins\Features\ParentMenuItemFeature.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="SettingsUpdate.cs" />
     <Compile Include="TabPages\BaseTabPage.cs">
       <SubType>UserControl</SubType>
@@ -4003,10 +4003,12 @@
     <None Include="Images\pool_up_16.png" />
     <None Include="Images\pool_up_32.png" />
     <None Include="Images\objects_16_textured.png" />
+    <None Include="Images\PausedDC_16.png" />
     <Content Include="Images\Refresh16.png" />
     <None Include="Images\saved_searches_16.png" />
     <None Include="Images\server_up_16.png" />
     <None Include="Images\saved_searches_24.png" />
+    <None Include="Images\RunningDC_16.png" />
     <Content Include="Images\sl_luns_16.png" />
     <Content Include="Images\debian_16x.png" />
     <None Include="Images\desktop.jpg" />
@@ -4071,6 +4073,7 @@
     <None Include="Images\SpinningFrame5.png" />
     <None Include="Images\SpinningFrame6.png" />
     <None Include="Images\SpinningFrame7.png" />
+    <None Include="Images\StoppedDC_16.png" />
     <Content Include="Images\subscribe.png" />
     <None Include="Images\success_action_16.png" />
     <Content Include="Images\suse_16x.png" />
