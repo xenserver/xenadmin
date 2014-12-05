@@ -1303,9 +1303,6 @@ namespace XenAdmin.Commands
                 items.AddIfEnabled(new StopDockerContainerCommand(mainWindow, selection));
                 items.AddIfEnabled(new PauseDockerContainerCommand(mainWindow, selection));
                 items.AddIfEnabled(new ResumeDockerContainerCommand(mainWindow, selection));
-                items.AddSeparator();
-
-                items.AddIfEnabled(new PropertiesCommand(mainWindow, selection));
             }
 
             public override bool IsValid(SelectedItemCollection selection)

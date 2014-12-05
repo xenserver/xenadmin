@@ -1600,7 +1600,17 @@ namespace XenAPI
                     if (propertyNode != null)
                         container = propertyNode.InnerText;
 
-                    DockerContainer dockerContainer = new DockerContainer(this, id, name, "", status, container);
+                    string created = "";
+                    propertyNode = entry.ChildNodes.Cast<XmlNode>().FirstOrDefault(node => node.Name == "created");
+                    if (propertyNode != null)
+                        created = propertyNode.InnerText;
+
+                    string image = "";
+                    propertyNode = entry.ChildNodes.Cast<XmlNode>().FirstOrDefault(node => node.Name == "image");
+                    if (propertyNode != null)
+                        image = propertyNode.InnerText;
+
+                    DockerContainer dockerContainer = new DockerContainer(this, id, name, "", status, container, created, image);
                     containers.Add(dockerContainer);
                 }
             }

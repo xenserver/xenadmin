@@ -1280,12 +1280,13 @@ namespace XenAdmin
             bool isHostLive = SelectionManager.Selection.FirstIsLiveHost;
             bool isStorageLinkSelected = SelectionManager.Selection.FirstIsStorageLink;
             bool isStorageLinkSRSelected = SelectionManager.Selection.First is StorageLinkRepository && ((StorageLinkRepository)SelectionManager.Selection.First).SR(ConnectionsManager.XenConnectionsCopy) != null;
+            bool isDockerContainerSelected = SelectionManager.Selection.First is DockerContainer;
 
             bool selectedTemplateHasProvisionXML = SelectionManager.Selection.FirstIsTemplate && ((VM)SelectionManager.Selection[0].XenObject).HasProvisionXML;
 
             NewTabCount = 0;
             ShowTab(TabPageHome, !SearchMode && show_home);
-            ShowTab(TabPageGeneral, !multi && !SearchMode && (isVMSelected || (isHostSelected && (isHostLive || !is_connected)) || isPoolSelected || isSRSelected || isStorageLinkSelected));
+            ShowTab(TabPageGeneral, !multi && !SearchMode && (isVMSelected || (isHostSelected && (isHostLive || !is_connected)) || isPoolSelected || isSRSelected || isStorageLinkSelected || isDockerContainerSelected));
             ShowTab(dmc_upsell ? TabPageBallooningUpsell : TabPageBallooning, !multi && !SearchMode && mr_or_greater && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
             ShowTab(TabPageStorage, !multi && !SearchMode && (isRealVMSelected || (isTemplateSelected && !selectedTemplateHasProvisionXML)));
             ShowTab(TabPageSR, !multi && !SearchMode && (isSRSelected || isStorageLinkSRSelected));

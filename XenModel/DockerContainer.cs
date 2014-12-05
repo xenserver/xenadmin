@@ -41,7 +41,8 @@ namespace XenAdmin.Model
         {
         }
 
-        public DockerContainer(VM parent, string uuid, string name, string description, string status, string container)
+        public DockerContainer(VM parent, string uuid, string name, string description, string status, string container,
+            string created, string image)
             : this()
         {
             this.parent = parent;
@@ -51,6 +52,8 @@ namespace XenAdmin.Model
             this.name_description = description;
             this.status = status;
             this.container = container;
+            this.created = created;
+            this.image = image;
         }
 
         public VM Parent
@@ -148,6 +151,42 @@ namespace XenAdmin.Model
             }
         }
         private string _container;
+        
+        /// <summary>
+        /// a notes field containing creation time
+        /// </summary>
+        public virtual string created
+        {
+            get { return _created; }
+            set
+            {
+                if (!Helper.AreEqual(value, _created))
+                {
+                    _created = value;
+                    Changed = true;
+                    NotifyPropertyChanged("created");
+                }
+            }
+        }
+        private string _created;
+        
+        /// <summary>
+        /// a notes field containing image information
+        /// </summary>
+        public virtual string image
+        {
+            get { return _image; }
+            set
+            {
+                if (!Helper.AreEqual(value, _image))
+                {
+                    _image = value;
+                    Changed = true;
+                    NotifyPropertyChanged("image");
+                }
+            }
+        }
+        private string _image;
 
         public override string ToString()
         {
