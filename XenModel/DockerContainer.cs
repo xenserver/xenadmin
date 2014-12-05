@@ -201,9 +201,9 @@ namespace XenAdmin.Model
         public vm_power_state power_state
         {
             get {
-                return status.StartsWith("Up")
-                           ? (status.EndsWith("(paused)") ? vm_power_state.Paused : vm_power_state.Running)
-                           : vm_power_state.Halted;
+                return status.Contains("Paused") 
+                    ? vm_power_state.Paused
+                    : status.StartsWith("Up") ? vm_power_state.Running : vm_power_state.Halted;
             }
         }
     }
