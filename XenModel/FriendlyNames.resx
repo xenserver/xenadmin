@@ -1739,4 +1739,7 @@
   <data name="Label-host.edition-desktop" xml:space="preserve">
     <value>Citrix XenServer Desktop Edition</value>
   </data>
+  <data name="Label-host.edition-desktop-plus" xml:space="preserve">
+    <value>Citrix XenServer Desktop Plus Edition</value>
+  </data>
 </root>

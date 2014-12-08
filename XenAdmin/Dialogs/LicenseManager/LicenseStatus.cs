@@ -329,6 +329,8 @@ namespace XenAdmin.Dialogs
                 {
                     if (XenObject.Connection.Cache.Hosts.All(h => h.EnterpriseFeaturesEnabled))
                         return Messages.LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED;
+                    if (XenObject.Connection.Cache.Hosts.All(h => h.DesktopPlusFeaturesEnabled))
+                        return Messages.LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED;
                     if (XenObject.Connection.Cache.Hosts.All(h => h.DesktopFeaturesEnabled))
                         return Messages.LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED;
                     if (XenObject.Connection.Cache.Hosts.All(h => h.EligibleForSupport))

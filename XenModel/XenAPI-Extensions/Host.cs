@@ -53,10 +53,12 @@ namespace XenAPI
             Platinum,
             EnterpriseXD,
             PerSocket,     //Added in Clearwater (PR-1589)
-            XenDesktop,    //Added in Clearwater (PR-1589) and is new form of "EnterpriseXD"; "Desktop Edition" in Creedence
+            XenDesktop,    //Added in Clearwater (PR-1589) and is new form of "EnterpriseXD"
             EnterprisePerSocket,   // Added in Creedence (enterprise-per-socket)
             EnterprisePerUser,     // Added in Creedence (enterprise-per-user)
             StandardPerSocket,     // Added in Creedence (standard-per-socket)
+            Desktop,               // Added in Creedence (desktop)
+            DesktopPlus            // Added in Creedence (desktop-plus)
         }
 
         public static string LicenseServerWebConsolePort = "8082";
@@ -92,6 +94,10 @@ namespace XenAPI
                     return Edition.EnterprisePerUser;
                 case "standard-per-socket":
                     return Edition.StandardPerSocket;
+                case "desktop":
+                    return Edition.Desktop;
+                case "desktop-plus":
+                    return Edition.DesktopPlus;
                 default:
                     return Edition.Free;
             }
@@ -137,6 +143,10 @@ namespace XenAPI
                     return "enterprise-per-user";
                 case Edition.StandardPerSocket:
                     return "standard-per-socket";
+                case Edition.Desktop:
+                    return "desktop";
+                case Edition.DesktopPlus:
+                    return "desktop-plus";
                 default:
                     return "free";
             }
@@ -1376,11 +1386,19 @@ namespace XenAPI
             }
         }
 
+        public bool DesktopPlusFeaturesEnabled
+        {
+            get
+            {
+                return GetEdition(edition) == Edition.DesktopPlus;
+            }
+        }
+
         public bool DesktopFeaturesEnabled
         {
             get
             {
-                return EligibleForSupport && GetEdition(edition) == Edition.XenDesktop;
+                return GetEdition(edition) == Edition.Desktop;
             }
         }
 

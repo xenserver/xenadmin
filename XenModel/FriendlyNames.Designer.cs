@@ -736,6 +736,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Citrix XenServer Desktop Plus Edition.
+        /// </summary>
+        public static string Label_host_edition_desktop_plus {
+            get {
+                return ResourceManager.GetString("Label-host.edition-desktop-plus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Citrix XenServer Enterprise Edition.
         /// </summary>
         public static string Label_host_edition_enterprise {
