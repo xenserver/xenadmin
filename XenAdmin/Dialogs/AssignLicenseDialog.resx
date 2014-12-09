@@ -658,7 +658,7 @@
     <value>10</value>
   </data>
   <data name="desktopPlusRadioButton.Text" xml:space="preserve">
-    <value>XenServer Desktop &amp;Plus</value>
+    <value>XenServer Deskto&amp;p+</value>
   </data>
   <data name="&gt;&gt;desktopPlusRadioButton.Name" xml:space="preserve">
     <value>desktopPlusRadioButton</value>

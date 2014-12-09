@@ -736,7 +736,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Citrix XenServer Desktop Plus Edition.
+        ///   Looks up a localized string similar to Citrix XenServer Desktop+ Edition.
         /// </summary>
         public static string Label_host_edition_desktop_plus {
             get {
