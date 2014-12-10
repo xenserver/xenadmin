@@ -838,7 +838,7 @@
     <value>12, 12, 12, 12</value>
   </data>
   <data name="eventsPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>761, 649</value>
+    <value>761, 618</value>
   </data>
   <data name="eventsPage.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -2544,7 +2544,7 @@
     <value>1008, 731</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>800, 600</value>
+    <value>950, 750</value>
   </data>
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
