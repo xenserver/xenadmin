@@ -43,7 +43,7 @@ namespace XenAdmin.Controls.SummaryPanel
         public SummaryPanelController(ISummaryPanelView view)
         {
             View = view;
-            View.DrawInformationIcon = SystemIcons.Information.ToBitmap();
+            View.DrawInformationIcon = XenAdmin.Properties.Resources._000_Info3_h32bit_16;
             View.DrawInformationVisible = false;
         }
 
@@ -84,7 +84,12 @@ namespace XenAdmin.Controls.SummaryPanel
         
         public SummaryTextComponent TextSummary
         {
-            set { View.DrawSummaryText = value.BuildSummary().ToString(); }
+            set
+            {
+                View.DrawSummaryText = value.BuildSummary().ToString();
+                View.DrawSummaryLinkArea = value.GetLinkArea();
+                View.DrawSummaryLink = value.GetLink();
+            }
         }
 
         public Action RunOnUrlClick { private get; set; }

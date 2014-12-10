@@ -100,12 +100,14 @@ namespace XenAdmin.TabPages
 
             GeneralTabLicenseStatusStringifier ss = new GeneralTabLicenseStatusStringifier(licenseStatus);
             Program.Invoke(Program.MainWindow, () => pdSectionLicense.UpdateEntryValueWithKey(
-                                                       FriendlyName("host.license_params-expiry"),
-                                                       ss.ExpiryDate));
+                                            FriendlyName("host.license_params-expiry"),
+                                            ss.ExpiryDate, 
+                                            ss.ShowExpiryDate));
 
             Program.Invoke(Program.MainWindow, () => pdSectionLicense.UpdateEntryValueWithKey(
                                            Messages.LICENSE_STATUS,
-                                           ss.ExpiryStatus));
+                                           ss.ExpiryStatus,
+                                           true));
         }
 
         void s_contentReceivedFocus(PDSection s)
@@ -942,13 +944,13 @@ namespace XenAdmin.TabPages
 
                 GeneralTabLicenseStatusStringifier ss = new GeneralTabLicenseStatusStringifier(licenseStatus);
                 s.AddEntry(Messages.LICENSE_STATUS, ss.ExpiryStatus, editItem);
-                s.AddEntry(FriendlyName("host.license_params-expiry"), ss.ExpiryDate, editItem);
+                s.AddEntry(FriendlyName("host.license_params-expiry"), ss.ExpiryDate, editItem, ss.ShowExpiryDate);
                 info.Remove("expiry");
             }
 
             if (!string.IsNullOrEmpty(host.edition))
             {
-                s.AddEntry(FriendlyName("host.edition"), FriendlyName(String.Format("host.edition-{0}", host.edition)) ?? String.Empty);
+                s.AddEntry(FriendlyName("host.edition"), Helpers.GetFriendlyLicenseName(host));
                 if (info.ContainsKey("sku_type"))
                 {
                     info.Remove("sku_type");
@@ -965,7 +967,18 @@ namespace XenAdmin.TabPages
 
             if (host.license_server.ContainsKey("address"))
             {
-                s.AddEntry(FriendlyName(String.Format("host.license_server-address")), host.license_server["address"]);
+                var licenseServerAddress = host.license_server["address"].Trim();
+                if (licenseServerAddress == "" || licenseServerAddress.ToLower() == "localhost")
+                    s.AddEntry(FriendlyName(String.Format("host.license_server-address")), host.license_server["address"]);
+                else
+                {
+                    var openUrl = new ToolStripMenuItem(Messages.LICENSE_SERVER_WEB_CONSOLE_GOTO);
+                    openUrl.Click += (sender, args) => Program.OpenURL(string.Format(Messages.LICENSE_SERVER_WEB_CONSOLE_FORMAT, licenseServerAddress, Host.LicenseServerWebConsolePort));
+                    s.AddEntryLink(FriendlyName(String.Format("host.license_server-address")),
+                                   host.license_server["address"],
+                                   new[] {openUrl},
+                                   openUrl.PerformClick);
+                }
             }
             if (host.license_server.ContainsKey("port"))
             {

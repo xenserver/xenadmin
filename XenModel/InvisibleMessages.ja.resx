@@ -145,7 +145,7 @@
     <value>http://www.citrix.com/xenserverenterprise</value>
   </data>
   <data name="LICENSE_SERVER_DOWNLOAD_LINK" xml:space="preserve">
-    <value>http://www.citrix.com/xenserver/lsvirtualappliance</value>
+    <value>http://www.citrix.com/downloads/licensing/license-server</value>
   </data>
   <data name="LOCALE" xml:space="preserve">
     <value>ja-JP</value>

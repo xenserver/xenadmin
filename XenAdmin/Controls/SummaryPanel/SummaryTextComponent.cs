@@ -33,11 +33,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace XenAdmin.Controls.SummaryPanel
 {
     public abstract class SummaryTextComponent
     {
         public abstract StringBuilder BuildSummary();
+
+        public virtual LinkArea GetLinkArea()
+        {
+            return new LinkArea(0,0);
+        }
+
+        public virtual string GetLink()
+        {
+            return string.Empty;
+        }
     }
 }

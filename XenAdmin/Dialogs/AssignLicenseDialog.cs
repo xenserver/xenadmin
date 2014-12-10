@@ -42,15 +42,17 @@ namespace XenAdmin.Dialogs
     public partial class AssignLicenseDialog : XenDialogBase
     {
         private readonly List<IXenObject> xos;
+        private readonly Host.Edition currentEdition;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AssignLicenseDialog"/> class.
         /// </summary>
         /// <param name="hosts">The hosts for which the licensing is to be applied.</param>
-        public AssignLicenseDialog(IEnumerable<IXenObject> xos, String firstHost, String firstPort)
+        public AssignLicenseDialog(IEnumerable<IXenObject> xos, String firstHost, String firstPort, Host.Edition firstEdition)
         {
             Util.ThrowIfEnumerableParameterNullOrEmpty(xos, "XenObjects");
             this.xos = new List<IXenObject>(xos);
+            this.currentEdition = firstEdition;
             InitializeComponent();
             licenseServerNameTextBox.TextChanged += licenseServerPortTextBox_TextChanged;
             licenseServerPortTextBox.TextChanged += licenseServerNameTextBox_TextChanged;
@@ -104,18 +106,85 @@ namespace XenAdmin.Dialogs
         /// </summary>
         private void SetOptionsForClearwaterAndNewer()
         {
-            if(xos.TrueForAll(x=> Helpers.ClearwaterOrGreater(x.Connection)))
+            if (xos.TrueForAll(x => Helpers.CreedenceOrGreater(x.Connection)))
             {
                 platinumRadioButton.Visible = false;
                 enterpriseRadioButton.Visible = false;
                 advancedRadioButton.Visible = false;
+                perSocketRadioButton.Visible = false;
+                xenDesktopEnterpriseRadioButton.Visible = false;
+                enterprisePerSocketRadioButton.Checked = true;
+                enterprisePerSocketRadioButton.Text = String.Format(Messages.ENTERPRISE_PERSOCKET_LICENSES_X_REQUIRED,
+                                                          xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets)));
+                standardPerSocketRadioButton.Text = String.Format(Messages.STANDARD_PERSOCKET_LICENSES_X_REQUIRED,
+                                                          xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets)));
+            } else if(xos.TrueForAll(x=> Helpers.ClearwaterOrGreater(x.Connection)))
+            {
+                platinumRadioButton.Visible = false;
+                enterpriseRadioButton.Visible = false;
+                advancedRadioButton.Visible = false;
+                enterprisePerSocketRadioButton.Visible = false;
+                enterprisePerUserRadioButton.Visible = false;
+                standardPerSocketRadioButton.Visible = false;
+                desktopPlusRadioButton.Visible = false;
+                desktopRadioButton.Visible = false;
+                perSocketRadioButton.Checked = true;
                 perSocketRadioButton.Text = String.Format(Messages.PERSOCKET_LICENSES_X_REQUIRED,
                                                           xos.Sum(x => x.Connection.Cache.Hosts.Sum(h=>h.CpuSockets)));
             }
             else
             {
                 perSocketRadioButton.Visible = false;
+                enterprisePerSocketRadioButton.Visible = false;
+                enterprisePerUserRadioButton.Visible = false;
+                standardPerSocketRadioButton.Visible = false;
+                desktopPlusRadioButton.Visible = false;
+                desktopRadioButton.Visible = false;
                 advancedRadioButton.Checked = true;
+            }
+        }
+
+        private static void CheckRadioButtonIfVisible(RadioButton radioButton)
+        {
+            if (radioButton.Visible)
+                radioButton.Checked = true;
+        }
+
+        private void CheckCurrentEdition(Host.Edition currentEdition)
+        {
+            switch (currentEdition)
+            {
+                case Host.Edition.XenDesktop:
+                case Host.Edition.EnterpriseXD:
+                    CheckRadioButtonIfVisible(xenDesktopEnterpriseRadioButton);
+                    break;
+                case Host.Edition.Platinum:
+                    CheckRadioButtonIfVisible(platinumRadioButton);
+                    break;
+                case Host.Edition.Enterprise:
+                    CheckRadioButtonIfVisible(enterpriseRadioButton);
+                    break;
+                case  Host.Edition.Advanced:
+                    CheckRadioButtonIfVisible(advancedRadioButton);
+                    break;
+                case Host.Edition.PerSocket:
+                    CheckRadioButtonIfVisible(perSocketRadioButton);
+                    break;
+                case Host.Edition.EnterprisePerSocket:
+                    CheckRadioButtonIfVisible(enterprisePerSocketRadioButton);
+                    break;
+                case Host.Edition.EnterprisePerUser:
+                    CheckRadioButtonIfVisible(enterprisePerUserRadioButton);
+                    break;
+                case Host.Edition.StandardPerSocket:
+                    CheckRadioButtonIfVisible(standardPerSocketRadioButton);
+                    break;
+                case Host.Edition.Desktop:
+                    CheckRadioButtonIfVisible(desktopRadioButton);
+                    break;
+                case Host.Edition.DesktopPlus:
+                    CheckRadioButtonIfVisible(desktopPlusRadioButton);
+                    break;
             }
         }
 
@@ -133,7 +202,22 @@ namespace XenAdmin.Dialogs
             if(advancedRadioButton.Checked)
                 return Host.Edition.Advanced;
 
-            return Host.Edition.PerSocket;
+            if (perSocketRadioButton.Checked)
+                return Host.Edition.PerSocket;
+
+            if (enterprisePerSocketRadioButton.Checked)
+                return Host.Edition.EnterprisePerSocket;
+
+            if (enterprisePerUserRadioButton.Checked)
+                return Host.Edition.EnterprisePerUser;
+
+            if (desktopRadioButton.Checked)
+                return Host.Edition.Desktop;
+
+            if (desktopPlusRadioButton.Checked)
+                return Host.Edition.DesktopPlus;
+
+            return Host.Edition.StandardPerSocket;
         }
 
         private void okButton_Click(object sender, EventArgs e)
@@ -165,6 +249,11 @@ namespace XenAdmin.Dialogs
         private void UpdateButtonEnablement()
         {
             okButton.Enabled = licenseServerPortTextBox.Text.Length > 0 && licenseServerNameTextBox.Text.Length > 0 && Util.IsValidPort(licenseServerPortTextBox.Text);
+        }
+
+        private void AssignLicenseDialog_Shown(object sender, EventArgs e)
+        {
+            CheckCurrentEdition(currentEdition);
         }
     }
 }

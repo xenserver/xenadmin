@@ -727,11 +727,47 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Citrix XenServer Desktop Edition.
+        /// </summary>
+        public static string Label_host_edition_desktop {
+            get {
+                return ResourceManager.GetString("Label-host.edition-desktop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Citrix XenServer Desktop+ Edition.
+        /// </summary>
+        public static string Label_host_edition_desktop_plus {
+            get {
+                return ResourceManager.GetString("Label-host.edition-desktop-plus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Citrix XenServer Enterprise Edition.
         /// </summary>
         public static string Label_host_edition_enterprise {
             get {
                 return ResourceManager.GetString("Label-host.edition-enterprise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Citrix XenServer Enterprise Per Socket Edition.
+        /// </summary>
+        public static string Label_host_edition_enterprise_per_socket {
+            get {
+                return ResourceManager.GetString("Label-host.edition-enterprise-per-socket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Citrix XenServer Enterprise Per User Edition.
+        /// </summary>
+        public static string Label_host_edition_enterprise_per_user {
+            get {
+                return ResourceManager.GetString("Label-host.edition-enterprise-per-user", resourceCulture);
             }
         }
         
@@ -781,11 +817,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Citrix XenServer Standard Per Socket Edition.
+        /// </summary>
+        public static string Label_host_edition_standard_per_socket {
+            get {
+                return ResourceManager.GetString("Label-host.edition-standard-per-socket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Citrix XenServer for XenDesktop.
         /// </summary>
         public static string Label_host_edition_xendesktop {
             get {
                 return ResourceManager.GetString("Label-host.edition-xendesktop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Citrix XenDesktop Platinum.
+        /// </summary>
+        public static string Label_host_edition_xendesktop_platinum {
+            get {
+                return ResourceManager.GetString("Label-host.edition-xendesktop-platinum", resourceCulture);
             }
         }
         
@@ -3330,7 +3384,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The license-server did not issue a license for {0} because there were no license of the specified type available..
+        ///   Looks up a localized string similar to The license server did not issue a license for {0} because there were no licenses of the specified type available..
         /// </summary>
         public static string Message_body_license_not_available {
             get {

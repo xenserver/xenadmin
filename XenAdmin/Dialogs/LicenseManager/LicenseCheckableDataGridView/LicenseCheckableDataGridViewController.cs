@@ -145,12 +145,9 @@ namespace XenAdmin.Controls
 
         protected override KeyValuePair<bool, string> DisableOtherRowsInContext(CheckableDataGridViewRow checkedRow, CheckableDataGridViewRow otherRow)
         {
-            if(Helpers.ClearwaterOrGreater(checkedRow.XenObject.Connection))
-            {
-                return new KeyValuePair<bool, string>(!Helpers.ClearwaterOrGreater(otherRow.XenObject.Connection), Messages.SELECTION_CANNOT_BE_MIXED_WITH_CLEARWATER);
-            }
-
-            return new KeyValuePair<bool, string>(Helpers.ClearwaterOrGreater(otherRow.XenObject.Connection), Messages.SELECTION_CANNOT_BE_MIXED_WITH_CLEARWATER);
+            return new KeyValuePair<bool, string>(
+                    LicenseStatus.GetLicensingModel(checkedRow.XenObject.Connection) != LicenseStatus.GetLicensingModel(otherRow.XenObject.Connection),
+                    Messages.SELECTION_CANNOT_BE_MIXED_FOR_LICENSING);
         }
     }
 }

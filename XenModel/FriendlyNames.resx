@@ -1101,7 +1101,7 @@
     <value>The license on host '{0}' will expire at {1}.</value>
   </data>
   <data name="Message.body-license_not_available" xml:space="preserve">
-    <value>The license-server did not issue a license for {0} because there were no license of the specified type available.</value>
+    <value>The license server did not issue a license for {0} because there were no licenses of the specified type available.</value>
   </data>
   <data name="Message.body-license_server_connected" xml:space="preserve">
     <value>The server {0} has successfully connected to the license server.</value>
@@ -1706,6 +1706,18 @@
   <data name="Message.name-license_server_version_obsolete" xml:space="preserve">
     <value>The license server is an out-of-date version.</value>
   </data>
+  <data name="Label-host.edition-enterprise-per-socket" xml:space="preserve">
+    <value>Citrix XenServer Enterprise Per Socket Edition</value>
+  </data>
+  <data name="Label-host.edition-enterprise-per-user" xml:space="preserve">
+    <value>Citrix XenServer Enterprise Per User Edition</value>
+  </data>
+  <data name="Label-host.edition-standard-per-socket" xml:space="preserve">
+    <value>Citrix XenServer Standard Per Socket Edition</value>
+  </data>
+  <data name="Label-host.edition-xendesktop-platinum" xml:space="preserve">
+    <value>Citrix XenDesktop Platinum</value>
+  </data>
   <data name="Message.help-license_expired" xml:space="preserve">
     <value>Help on Licensing</value>
   </data>
@@ -1723,5 +1735,11 @@
   </data>
   <data name="Message.help-license_server_version_obsolete" xml:space="preserve">
     <value>Help on Licensing</value>
+  </data>
+  <data name="Label-host.edition-desktop" xml:space="preserve">
+    <value>Citrix XenServer Desktop Edition</value>
+  </data>
+  <data name="Label-host.edition-desktop-plus" xml:space="preserve">
+    <value>Citrix XenServer Desktop+ Edition</value>
   </data>
 </root>

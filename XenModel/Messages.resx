@@ -9336,7 +9336,7 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
 Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if the VMs are shut down and using NetApp, Dell EqualLogic or SMI-S adapters.</value>
   </data>
   <data name="RPU_WARNING_DESCRIPTION_CLEARWATER_OR_GREATER" xml:space="preserve">
-    <value>'{0}': XenServer 6.2 requires new licenses to be added to your license server.</value>
+    <value>'{0}': New versions of XenServer require new licenses to be added to your license server.</value>
   </data>
   <data name="RPU_WIZARD_TAMPA_AND_OLDER_TITLE" xml:space="preserve">
     <value>Checking licensing status</value>
@@ -9467,8 +9467,8 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   <data name="SELECTED_HOST_POOL_NOT_CONNECTED" xml:space="preserve">
     <value>The hosts or pools selected are not connected</value>
   </data>
-  <data name="SELECTION_CANNOT_BE_MIXED_WITH_CLEARWATER" xml:space="preserve">
-    <value>Pre-6.2 and post-6.2 XenServers must be licensed separately</value>
+  <data name="SELECTION_CANNOT_BE_MIXED_FOR_LICENSING" xml:space="preserve">
+    <value>Different versions of XenServer must be licensed separately</value>
   </data>
   <data name="SELECT_A_FILTER" xml:space="preserve">
     <value>Select a filter...</value>
@@ -12251,5 +12251,36 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
+  </data>
+  <data name="ENTERPRISE_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
+    <value>XenServer &amp;Enterprise Per-Socket ({0} required)</value>
+  </data>
+  <data name="STANDARD_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
+    <value>XenServer &amp;Standard Per-Socket ({0} required)</value>
+  </data>
+  <data name="LICENSE_NOT_ELIGIBLE_FOR_SUPPORT" xml:space="preserve">
+    <value>Not eligible for support</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED" xml:space="preserve">
+    <value>Eligible for support 
+Enterprise features enabled</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED" xml:space="preserve">
+    <value>Eligible for support 
+Standard features only</value>
+  </data>
+  <data name="LICENSE_SERVER_WEB_CONSOLE_FORMAT" xml:space="preserve">
+    <value>http://{0}:{1}</value>
+  </data>
+  <data name="LICENSE_SERVER_WEB_CONSOLE_GOTO" xml:space="preserve">
+    <value>Go to...</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
+    <value>Eligible for support 
+Desktop features enabled</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED" xml:space="preserve">
+    <value>Eligible for support 
+Desktop+ features enabled</value>
   </data>
 </root>

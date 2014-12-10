@@ -112,7 +112,7 @@ namespace XenAdminTests.LicensingTests
         }
 
         [Test]
-        public void TestExpiredClearwater()
+        public void TestFreeClearwater()
         {
             Mock<SummaryTextComponent> baseComponent = new Mock<SummaryTextComponent>();
             StringBuilder sb = new StringBuilder();
@@ -121,7 +121,7 @@ namespace XenAdminTests.LicensingTests
             Mock<Host> host = ObjectFactory.BuiltObject<Host>(ObjectBuilderType.ClearwaterHost, id);
             ObjectManager.MockConnectionFor(id).Setup(c => c.IsConnected).Returns(true);
             Mock<ILicenseStatus> ls = new Mock<ILicenseStatus>();
-            ls.Setup(l => l.CurrentState).Returns(LicenseStatus.HostState.Expired);
+            ls.Setup(l => l.CurrentState).Returns(LicenseStatus.HostState.Free);
 
             CheckableDataGridViewRow row = new LicenseDataGridViewRow(host.Object, ls.Object);
 
