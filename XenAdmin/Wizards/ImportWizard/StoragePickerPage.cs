@@ -224,6 +224,9 @@ namespace XenAdmin.Wizards.ImportWizard
 
 			// We need to wait for the task to make the object creation phase as complete
 
+            if (m_importTask == null || m_importTask.other_config == null)
+                return;
+
 			if (!m_importTask.other_config.ContainsKey("object_creation"))
 				return;
 
