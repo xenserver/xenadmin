@@ -101,8 +101,9 @@ mkdir_clean ${DOTNETZIP_DIR} && wget ${WGET_OPT} ${WEB_DOTNET}/Ionic.Zip.dll -P 
 mkdir_clean ${DISCUTILS_DIR} && wget ${WGET_OPT} ${WEB_DOTNET}/DiscUtils.dll -P ${DISCUTILS_DIR}
 mkdir_clean ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR} && wget ${WGET_OPT} ${WEB_DOTNET}/dotNetFx40_Full_setup.exe -P ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}
 
-
-wget ${WGET_OPT} ${WEB_DOTNET}/sign.bat -P ${REPO} && chmod a+x ${REPO}/sign.bat
+#temporarily disabling signing
+#wget ${WGET_OPT} ${WEB_DOTNET}/sign.bat -P ${REPO} && chmod a+x ${REPO}/sign.bat
+echo @echo signing disabled > ${REPO}/sign.bat && chmod a+x ${REPO}/sign.bat
 
 #bring in stuff from xencenter-ovf latest xe-phase-1
 wget ${WGET_OPT} ${WEB_XE_PHASE_1}/XenCenterOVF.zip -P ${SCRATCH_DIR}
