@@ -161,7 +161,7 @@ WEB_XE_PHASE_2=${WEB_LATEST_BUILD}/xe-phase-2
 # at the time. This is not the time to persuade the GUI group to
 # change their ways, but I include this note as a public service for
 # when it all breaks. --Peter, 2014-12-16.
-DOTNET_BASE=${SECURE_BUILD_ARCHIVE_UNC}/carbon_creedence_dotnet-packages
+DOTNET_BASE=${SECURE_BUILD_ARCHIVE_UNC}/carbon_creedence-ln_dotnet-packages
 DOTNET_LOC=$DOTNET_BASE/$(ls $DOTNET_BASE | /usr/bin/sort -n | tail -n 1)
 
 # used to copy results out of the secure build enclave
