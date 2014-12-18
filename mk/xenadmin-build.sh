@@ -113,7 +113,7 @@ ${UNZIP} -d ${REPO}/XenOvfApi ${SCRATCH_DIR}/XenCenterOVF.zip
 wget ${WGET_OPT} ${WEB_XE_PHASE_1}/manifest -O ${SCRATCH_DIR}/xe-phase-1-manifest
 
 #bring XenServer.NET from latest xe-phase-2
-wget ${WGET_VERBOSE_OPT} ${WEB_XE_PHASE_2}/XenServer-SDK.zip -P ${REPO} && ${UNZIP} -j ${REPO}/XenServer-SDK.zip XenServer-SDK/XenServer.NET/bin/XenServer.dll XenServer-SDK/XenServer.NET/bin/CookComputing.XmlRpcV2.dll -d ${REPO}/XenServer.NET
+wget ${WGET_VERBOSE_OPT} ${WEB_XE_PHASE_2}/XenServer-SDK-6.5.0.zip -P ${REPO} && ${UNZIP} -j ${REPO}/XenServer-SDK-6.5.0.zip XenServer-SDK/XenServer.NET/bin/XenServer.dll XenServer-SDK/XenServer.NET/bin/CookComputing.XmlRpcV2.dll -d ${REPO}/XenServer.NET
 
 #bring in some more libraries
 mkdir_clean ${REPO}/NUnit && wget ${WEB_LIB}/{nunit.framework.dll,Moq_dotnet4.dll} -P ${REPO}/NUnit
