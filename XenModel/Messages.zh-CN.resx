@@ -1233,7 +1233,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>正在使用者中添加/删除角色</value>
   </data>
   <data name="AD_ADDING_REMOVING_ROLES_ON" xml:space="preserve">
-    <value>正在为使用者“{0}”添加/删除角色</value>
+    <value>正在使用者“{0}”中添加/删除角色</value>
   </data>
   <data name="AD_ALWAYS_GRANTED_ACCESS" xml:space="preserve">
     <value>(始终授予访问权限)</value>
@@ -3091,7 +3091,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>当前位置</value>
   </data>
   <data name="CURRENT_MEMORY_USAGE" xml:space="preserve">
-    <value>当前内存使用: {0}</value>
+    <value>当前内存使用率: {0}</value>
   </data>
   <data name="CURRENT_MEMORY_USAGE_MULTIPLE" xml:space="preserve">
     <value>当前内存使用率: 每个 VM {0}</value>
@@ -4430,10 +4430,10 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>进入维护模式 - {0}</value>
   </data>
   <data name="EVACUATE_HOST_EJECT_CD_PROMPT" xml:space="preserve">
-    <value>{0} 弹出 CD</value>
+    <value>{0}弹出 CD</value>
   </data>
   <data name="EVACUATE_HOST_INSTALL_TOOLS_PROMPT" xml:space="preserve">
-    <value>{0} 安装 XenServer Tools</value>
+    <value>{0}安装 XenServer Tools</value>
   </data>
   <data name="EVACUATE_HOST_LOCAL_CD" xml:space="preserve">
     <value>此 VM 使用本地 CD。</value>
@@ -4454,7 +4454,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>没有可用服务器</value>
   </data>
   <data name="EVACUATE_HOST_SUSPEND_VM_PROMPT" xml:space="preserve">
-    <value>{0} 暂停 VM</value>
+    <value>{0}暂停 VM</value>
   </data>
   <data name="EVACUATE_SOLUTION_IN_PROGRESS" xml:space="preserve">
     <value>正在执行操作...</value>
@@ -4611,7 +4611,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>将系统警报导出到 {0}</value>
   </data>
   <data name="EXPORT_UPDATES" xml:space="preserve">
-    <value>已将更新导出到 {0}</value>
+    <value>将更新导出到 {0}</value>
   </data>
   <data name="EXPORT_VM_VERIFY_POST_INSTALL" xml:space="preserve">
     <value>完成时验证导出(&amp;V)</value>
@@ -4791,16 +4791,16 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>通过 DHCP 自动获取</value>
   </data>
   <data name="FINISH_PAGE_TVM_GATEWAY" xml:space="preserve">
-    <value>Transfer VM 的网关:</value>
+    <value>转移 VM 的网关:</value>
   </data>
   <data name="FINISH_PAGE_TVM_IP" xml:space="preserve">
-    <value>Transfer VM 的 IP 地址:</value>
+    <value>转移 VM 的 IP 地址:</value>
   </data>
   <data name="FINISH_PAGE_TVM_MASK" xml:space="preserve">
-    <value>Transfer VM 的子网掩码:</value>
+    <value>转移 VM 的子网掩码:</value>
   </data>
   <data name="FINISH_PAGE_TVM_NETWORK" xml:space="preserve">
-    <value>Transfer VM 的网络接口:</value>
+    <value>转移 VM 的网络接口:</value>
   </data>
   <data name="FINISH_PAGE_VERIFY_MANIFEST" xml:space="preserve">
     <value>验证清单文件内容:</value>
@@ -7645,7 +7645,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>vCPU 数</value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN" xml:space="preserve">
-    <value>为新 VM 指定的 vCPU 数超过池中任何服务器上的物理 CPU 数。
+    <value>为新 VM 指定的 vCPU 数超过池中任何服务器上的物理 CPU 数
 
 服务器“{0}”有 {1} 个物理 CPU。
 
@@ -8179,7 +8179,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>过期软件 - {0}</value>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>正常</value>
+    <value>确定</value>
   </data>
   <data name="OLDER_THAN_CURRENT_SERVER" xml:space="preserve">
     <value>早于当前服务器</value>
@@ -9335,7 +9335,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
 如果这些 VM 处于关闭状态，并且使用 NetApp、Dell EqualLogic 或 SMI-S 适配器，则仅支持使用 StorageLink Gateway 将 VM 升级到 XenServer 6.0。</value>
   </data>
   <data name="RPU_WARNING_DESCRIPTION_CLEARWATER_OR_GREATER" xml:space="preserve">
-    <value>{0}: XenServer 6.2 需要向您的许可证服务器中添加新许可证。</value>
+    <value>{0}: 新版本的 XenServer 需要将新许可证添加到您的许可证服务器。</value>
   </data>
   <data name="RPU_WIZARD_TAMPA_AND_OLDER_TITLE" xml:space="preserve">
     <value>正在检查许可状态</value>
@@ -9350,7 +9350,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>正在存档</value>
   </data>
   <data name="RUNNING_ON" xml:space="preserve">
-    <value>正在此对象上运行</value>
+    <value>正在此服务器上运行:</value>
   </data>
   <data name="RUNNING_SNAPSHOTS" xml:space="preserve">
     <value>正在生成快照</value>
@@ -9466,8 +9466,8 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="SELECTED_HOST_POOL_NOT_CONNECTED" xml:space="preserve">
     <value>所选主机或池未连接</value>
   </data>
-  <data name="SELECTION_CANNOT_BE_MIXED_WITH_CLEARWATER" xml:space="preserve">
-    <value>6.2 版以外的 XenServer 版本必须单独进行许可</value>
+  <data name="SELECTION_CANNOT_BE_MIXED_FOR_LICENSING" xml:space="preserve">
+    <value>必须分别对不同版本的 XenServer 进行许可</value>
   </data>
   <data name="SELECT_A_FILTER" xml:space="preserve">
     <value>选择过滤器...</value>
@@ -10464,13 +10464,13 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>关闭高可用性功能</value>
   </data>
   <data name="TVM_PAGE_DESCRIPTION_EXPORT" xml:space="preserve">
-    <value>选择用于执行导出操作的临时 VM (Transfer VM)运行时所在的网络。</value>
+    <value>选择用于执行导出操作的临时 VM (转移 VM)运行时所在的网络。</value>
   </data>
   <data name="TVM_PAGE_DESCRIPTION_IMPORT" xml:space="preserve">
-    <value>选择用于执行导入操作的临时 VM (Transfer VM)运行时所在的网络。</value>
+    <value>选择用于执行导入操作的临时 VM (转移 VM)运行时所在的网络。</value>
   </data>
   <data name="TVM_PAGE_TEXT" xml:space="preserve">
-    <value>Transfer VM 设置</value>
+    <value>传输 VM 设置</value>
   </data>
   <data name="TVM_PAGE_TITLE" xml:space="preserve">
     <value>配置传输 VM 的网络连接选项</value>
@@ -11139,7 +11139,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>XenCenter 版本 {0} (build {1}.{2}) {3} 位</value>
   </data>
   <data name="VGPU_DESCRIPTION" xml:space="preserve">
-    <value>{0} vGPU (每个 GPU {1} 个，{2}，{3} 个显示屏)</value>
+    <value>{0} vGPU (每个 GPU {1} 个，{2}，{3} 个显示器)</value>
   </data>
   <data name="VGPU_PASSTHRU_TOSTRING" xml:space="preserve">
     <value>在整个 GPU 中直通</value>
@@ -11427,7 +11427,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>正在等待用户...</value>
   </data>
   <data name="WAKE_ON_LAN" xml:space="preserve">
-    <value>局域网唤醒</value>
+    <value>LAN 唤醒</value>
   </data>
   <data name="WARNING" xml:space="preserve">
     <value>警告</value>
@@ -12053,7 +12053,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>更新用于 WLB 通信的凭据</value>
   </data>
   <data name="WLB_SERVER_URL" xml:space="preserve">
-    <value>Workload Balancing 服务器名</value>
+    <value>Workload Balancing 服务器名称</value>
   </data>
   <data name="WLB_SEVERITY_CRITICAL" xml:space="preserve">
     <value>严重</value>
@@ -12250,5 +12250,36 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>您在此处</value>
+  </data>
+  <data name="ENTERPRISE_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
+    <value>XenServer Enterprise Per-Socket (需要 {0})(&amp;E)</value>
+  </data>
+  <data name="STANDARD_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
+    <value>XenServer Standard Per-Socket (需要 {0})(&amp;S)</value>
+  </data>
+  <data name="LICENSE_NOT_ELIGIBLE_FOR_SUPPORT" xml:space="preserve">
+    <value>不符合支持条件</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED" xml:space="preserve">
+    <value>符合支持条件 
+启用了 Enterprise 功能</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED" xml:space="preserve">
+    <value>符合支持条件 
+仅限 Standard 功能</value>
+  </data>
+  <data name="LICENSE_SERVER_WEB_CONSOLE_FORMAT" xml:space="preserve">
+    <value>http://{0}:{1}</value>
+  </data>
+  <data name="LICENSE_SERVER_WEB_CONSOLE_GOTO" xml:space="preserve">
+    <value>转至...</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
+    <value>符合支持条件 
+启用了 Desktop 功能</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED" xml:space="preserve">
+    <value>符合支持条件 
+启用了 Desktop+ 功能</value>
   </data>
 </root>

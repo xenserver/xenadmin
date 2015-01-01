@@ -520,7 +520,7 @@
     <value>设备名称 {0} 无效</value>
   </data>
   <data name="INVALID_EDITION" xml:space="preserve">
-    <value>所提供的版本无效。有效版本为“免费”、“Enterprise”和“Platinum”。</value>
+    <value>提供的版本无效。</value>
   </data>
   <data name="INVALID_FEATURE_STRING" xml:space="preserve">
     <value>给定的功能字符串无效。</value>

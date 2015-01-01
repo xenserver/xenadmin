@@ -244,9 +244,7 @@
     <value>5</value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>everRun is a registered trademark of Stratus Technologies Bermuda Limited.
-
-XML-RPC.NET: Copyright © 2001-2006 Charles Cook.
+    <value>XML-RPC.NET: Copyright © 2001-2006 Charles Cook.
 
 Log4Net: Developed by The Apache Software Foundation (http://www.apache.org/) as part of the Apache Logging Services project (http://logging.apache.org/log4net/), and released under the Apache software license.
 To learn more about the Apache software license, please visit http://www.apache.org/licenses/LICENSE-2.0. 
