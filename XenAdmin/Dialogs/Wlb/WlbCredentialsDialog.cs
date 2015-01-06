@@ -34,6 +34,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Windows.Forms;
 
@@ -165,7 +167,11 @@ namespace XenAdmin.Dialogs.Wlb
         private bool InitializeWLB()
         {
             //combine url and port 
-            string wlbUrl = textboxWlbUrl.Text + ":" + textboxWLBPort.Text;
+            string wlbHost = textboxWlbUrl.Text;
+            string wlbPort = textboxWLBPort.Text;
+            IPAddress address;
+            string wlbUrl = (IPAddress.TryParse(wlbHost, out address) && address.AddressFamily == AddressFamily.InterNetworkV6) ?
+                ("[" + wlbHost + "]:" + wlbPort) : (wlbHost + ":" + wlbPort);
 
             //handle the wlb creds
             string wlbUserName = textboxWlbUserName.Text;
@@ -194,7 +200,7 @@ namespace XenAdmin.Dialogs.Wlb
         {
             int dummy;
             return (textboxWlbUrl.Text.Length > 0) &&
-                   (IsValidUri(textboxWlbUrl.Text)) &&
+                   (IsValidServerAddress(textboxWlbUrl.Text)) &&
                    (textboxWLBPort.Text.Length > 0) &&
                    (int.TryParse(textboxWLBPort.Text, out dummy)) &&
                    (textboxWlbUserName.Text.Length > 0) &&
@@ -203,16 +209,28 @@ namespace XenAdmin.Dialogs.Wlb
                    (textboxXSPassword.Text.Length>0);
         }
 
-        private bool IsValidUri(string uri)
+        private bool IsValidServerAddress(string addr)
         {
-            bool result = false;
-            try
+            // A valid server address should be an IPv4 / IPv6 address or a valid domain name
+
+            IPAddress address;
+            if (IPAddress.TryParse(addr, out address))
             {
-                UriBuilder ub = new UriBuilder(uri);
-                result = true;
+                return address.AddressFamily == AddressFamily.InterNetwork || address.AddressFamily == AddressFamily.InterNetworkV6;
             }
-            catch { }
-            return result;
+            else
+            {
+                try
+                {
+                    // adopt UriBuilder as a quick validator
+                    UriBuilder ub = new UriBuilder(string.Format("http://user:password@{0}:80/", addr));
+                    return ub.Host == addr;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
         }
 
         private void textboxWLBPort_TextChanged(object sender, EventArgs e)
