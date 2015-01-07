@@ -241,7 +241,6 @@
             <FindRelatedProducts Before="LaunchConditions" />
             <LaunchConditions Sequence="100" />
             <ValidateProductID Sequence="700" />
-            <RemoveExistingProducts Sequence="750" />
             <CostInitialize Sequence="800" />
             <FileCost Sequence="900" />
             <CostFinalize Sequence="1000" />
