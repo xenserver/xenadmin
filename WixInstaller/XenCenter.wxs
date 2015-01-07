@@ -234,6 +234,8 @@
         <Property Id="PERMACHINEINSTALL">
             <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\Citrix\XenCenter" Name="InstallDir" />
         </Property>
+		<Property Id="REINSTALLMODE" Value="amus" />
+        <Property Id="REINSTALL" Value="ALL" /> 
         <CustomAction Id="ClearAllUsers" Property="ALLUSERS" Value="" />
         <CustomAction Id="SetAllUsers" Property="ALLUSERS" Value="1" />
         <InstallExecuteSequence>
