@@ -12261,4 +12261,16 @@ You will need to navigate to the Console on each of the selected VMs to complete
   <data name="UPLOADING_PATCH_PROGRESS" xml:space="preserve">
     <value>Uploading - {0}%</value>
   </data>
+  <data name="UPLOAD_PATCH_ALREADY_UPLOADED" xml:space="preserve">
+    <value>Already uploaded to selected server(s)</value>
+  </data>
+  <data name="UPLOAD_PATCH_DESCRIPTION" xml:space="preserve">
+    <value>Update succesfully uploaded to selected server(s)</value>
+  </data>
+  <data name="UPLOAD_PATCH_END_DESCRIPTION" xml:space="preserve">
+    <value>Uploading...</value>
+  </data>
+  <data name="UPLOAD_PATCH_TITLE" xml:space="preserve">
+    <value>Upload</value>
+  </data>
 </root>

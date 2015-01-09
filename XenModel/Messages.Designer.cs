@@ -31578,6 +31578,42 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Already uploaded to selected server(s).
+        /// </summary>
+        public static string UPLOAD_PATCH_ALREADY_UPLOADED {
+            get {
+                return ResourceManager.GetString("UPLOAD_PATCH_ALREADY_UPLOADED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update succesfully uploaded to selected server(s).
+        /// </summary>
+        public static string UPLOAD_PATCH_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("UPLOAD_PATCH_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uploading....
+        /// </summary>
+        public static string UPLOAD_PATCH_END_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("UPLOAD_PATCH_END_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload.
+        /// </summary>
+        public static string UPLOAD_PATCH_TITLE {
+            get {
+                return ResourceManager.GetString("UPLOAD_PATCH_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Uploading Update....
         /// </summary>
         public static string UPLOADING_PATCH {

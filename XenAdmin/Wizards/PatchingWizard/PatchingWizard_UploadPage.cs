@@ -121,7 +121,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             flickerFreeListBox1.Refresh();
             OnPageUpdated();
 
-            RunMultipleActions("Upload", "Uploading", "Update succesfully uploaded to selected server(s)", uploadActions);
+            RunMultipleActions(Messages.UPLOAD_PATCH_TITLE, Messages.UPLOAD_PATCH_DESCRIPTION, Messages.UPLOAD_PATCH_END_DESCRIPTION, uploadActions);
         }
 
         private void RunMultipleActions(string title, string startDescription, string endDescription,
@@ -213,7 +213,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             AsyncAction action = flickerFreeListBox1.Items[e.Index] as AsyncAction;
             if (action == null)
             {
-                Drawing.DrawText(e.Graphics, "Already uploaded to selected server(s)", flickerFreeListBox1.Font, new Rectangle(e.Bounds.Left, e.Bounds.Top, e.Bounds.Width, e.Bounds.Height), Color.Green, flickerFreeListBox1.BackColor);
+                Drawing.DrawText(e.Graphics, Messages.UPLOAD_PATCH_ALREADY_UPLOADED, flickerFreeListBox1.Font, new Rectangle(e.Bounds.Left, e.Bounds.Top, e.Bounds.Width, e.Bounds.Height), Color.Green, flickerFreeListBox1.BackColor);
                 return;
             }
             Host host = action.Host;
