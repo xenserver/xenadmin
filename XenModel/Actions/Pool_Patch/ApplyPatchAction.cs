@@ -93,6 +93,7 @@ namespace XenAdmin.Actions
                 {
                     Connection = null;
                     Session = null;
+                    Description = String.Format(Messages.PATCH_UPLOADED, host.Name);
                 }
             }
             finally

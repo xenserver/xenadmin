@@ -1062,4 +1062,7 @@
   <data name="MessageAlert_LICENSE_SERVER_VERSION_OBSOLETE" xml:space="preserve">
     <value>7015</value>
   </data>
+  <data name="PatchingWizard_UploadPatchPane" xml:space="preserve">
+    <value>6315</value>
+  </data>
 </root>

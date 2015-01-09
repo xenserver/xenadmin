@@ -31,8 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Net;
 using System.IO;
 using XenAdmin.Network;
 using XenAdmin.Core;
@@ -59,7 +57,11 @@ namespace XenAdmin.Actions
         /// <param name="connection"></param>
         /// <param name="path"></param>
         public UploadPatchAction(IXenConnection connection, string path)
-            : base(connection, null, Messages.UPLOADING_PATCH)
+            : this(connection, path, false)
+        {}
+
+        public UploadPatchAction(IXenConnection connection, string path, bool suppressHistory)
+            : base(connection, null, Messages.UPLOADING_PATCH, suppressHistory)
         {
             Host master = Helpers.GetMaster(connection);
             if (master == null)

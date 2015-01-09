@@ -734,6 +734,12 @@
       <DependentUpon>HAPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Alerts\Types\XenCenterUpdateAlert.cs" />
+    <Compile Include="Wizards\PatchingWizard\PatchingWizard_UploadPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\PatchingWizard\PatchingWizard_UploadPage.Designer.cs">
+      <DependentUpon>PatchingWizard_UploadPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="XenSearch\TreeNodeGroupAcceptor.cs">
     </Compile>
     <Compile Include="Dialogs\FolderChangeDialog.cs">
@@ -2066,6 +2072,9 @@
     <EmbeddedResource Include="Controls\ConsolePanel.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ConsolePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_UploadPage.resx">
+      <DependentUpon>PatchingWizard_UploadPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\WizardProgress.resx">
       <DependentUpon>WizardProgress.cs</DependentUpon>
