@@ -160,6 +160,5 @@
     <call name="secret_set_value" />
     <call name="secret_get_all" />
     <call name="secret_get_all_records" />
-    <call name="vm_call_plugin" />
   </version>
 </ApiVersionTool>

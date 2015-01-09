@@ -404,10 +404,6 @@ namespace XenAPI
         Response<string []>
         task_get_subtasks(string session, string _task);
 
-        [XmlRpcMethod("task.get_backtrace")]
-        Response<string>
-        task_get_backtrace(string session, string _task);
-
         [XmlRpcMethod("task.set_other_config")]
         Response<string>
         task_set_other_config(string session, string _task, Object _other_config);
@@ -2059,14 +2055,6 @@ namespace XenAPI
         [XmlRpcMethod("Async.VM.query_services")]
         Response<string>
         async_vm_query_services(string session, string _vm);
-
-        [XmlRpcMethod("VM.call_plugin")]
-        Response<string>
-        vm_call_plugin(string session, string _vm, string _plugin, string _fn, Object _args);
-
-        [XmlRpcMethod("Async.VM.call_plugin")]
-        Response<string>
-        async_vm_call_plugin(string session, string _vm, string _plugin, string _fn, Object _args);
 
         [XmlRpcMethod("VM.get_all")]
         Response<string []>
@@ -6599,7 +6587,6 @@ namespace XenAPI
         public Object other_config;
         public string subtask_of;
         public string [] subtasks;
-        public string backtrace;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]

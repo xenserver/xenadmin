@@ -686,28 +686,31 @@ namespace XenAdmin.ConsoleView
         private void startPolling()
         {
             //Disable the button first, but only if in text/default console (to allow user to return to the text console - ref. CA-70314)
-            if (Helpers.CreedenceOrGreater(Source.Connection))
+            if (Helpers.CreamOrGreater(Source.Connection))
             {
                 parentVNCTabView.EnableToggleVNCButton();
             }
-            else if (InDefaultConsole())
+            else 
             {
-                parentVNCTabView.DisableToggleVNCButton();
-            }
+                if (InDefaultConsole())
+                {
+                    parentVNCTabView.DisableToggleVNCButton();
+                }
             
 
-            //Start the polling again
-            if (Source != null && !Source.is_control_domain)
-            {
-                if (!Source.IsHVM)
+                //Start the polling again
+                if (Source != null && !Source.is_control_domain)
                 {
-                    connectionPoller = new Timer(PollVNCPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
+                    if (!Source.IsHVM)
+                    {
+                        connectionPoller = new Timer(PollVNCPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
+                    }
+                    else if (hasRDP)
+                    {
+                        connectionPoller = new Timer(PollRDPPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
+                    }
                 }
-                else if (hasRDP)
-                {
-                    connectionPoller = new Timer(PollRDPPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
                 }
-            }
         }
 
         private void VM_PropertyChanged(object sender, PropertyChangedEventArgs e)

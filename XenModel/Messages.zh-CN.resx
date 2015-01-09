@@ -11408,7 +11408,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="VNC_RDESKTOP" xml:space="preserve">
     <value>切换到远程桌面(&amp;I)</value>
   </data>
-  <data name="VNC_RDESKTOP_TRUN_ON" xml:space="preserve">
+  <data name="VNC_RDESKTOP_TURN_ON" xml:space="preserve">
     <value>启用远程桌面(&amp;o)</value>
   </data>
   <data name="VNC_REDOCK" xml:space="preserve">

@@ -32972,9 +32972,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Turn &amp;on Remote Desktop.
         /// </summary>
-        public static string VNC_RDESKTOP_TRUN_ON {
+        public static string VNC_RDESKTOP_TURN_ON {
             get {
-                return ResourceManager.GetString("VNC_RDESKTOP_TRUN_ON", resourceCulture);
+                return ResourceManager.GetString("VNC_RDESKTOP_TURN_ON", resourceCulture);
             }
         }
         

@@ -11406,7 +11406,7 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
   <data name="VNC_RDESKTOP" xml:space="preserve">
     <value>リモート デスクトップに切り替える(&amp;I)</value>
   </data>
-  <data name="VNC_RDESKTOP_TRUN_ON" xml:space="preserve">
+  <data name="VNC_RDESKTOP_TURN_ON" xml:space="preserve">
     <value>Turn &amp;on Remote Desktop</value>
   </data>
   <data name="VNC_REDOCK" xml:space="preserve">
