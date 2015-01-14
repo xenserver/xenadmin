@@ -40,7 +40,7 @@ namespace XenAdminTests.WizardTests.updatesState_xml
     public class UpdatesAutomaticModeWizardTest : WizardTest<PatchingWizard>
     {
         public UpdatesAutomaticModeWizardTest()
-            : base(new[] { "Before You Start", "Select Update", "Select Servers", "Prechecks", "Update Mode", "Install Update" }
+            : base(new[] { "Before You Start", "Select Update", "Select Servers", "Upload", "Prechecks", "Update Mode", "Install Update" }
             , true, false)
         { }
 
