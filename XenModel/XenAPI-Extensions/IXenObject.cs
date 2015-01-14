@@ -65,5 +65,6 @@ namespace XenAPI
         string SaveChanges(Session session, IXenObject beforeObject);
 
         string Description { get; }
+        string NameWithLocation { get; }
     }
 }

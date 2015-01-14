@@ -16950,6 +16950,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to in &apos;{0}&apos;.
+        /// </summary>
+        public static string IN_POOL {
+            get {
+                return ResourceManager.GetString("IN_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to In progress.
         /// </summary>
         public static string IN_PROGRESS {
@@ -20487,6 +20496,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} {1}.
+        /// </summary>
+        public static string NAME_WITH_LOCATION {
+            get {
+                return ResourceManager.GetString("NAME_WITH_LOCATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select the SR to reattach or create a new SR.
         /// </summary>
         public static string NETAPP_EQUAL_PAGE_TITLE {
@@ -23403,6 +23421,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} in &apos;{1}&apos;.
+        /// </summary>
+        public static string OBJECT_IN_POOL {
+            get {
+                return ResourceManager.GetString("OBJECT_IN_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} on &apos;{1}&apos;.
+        /// </summary>
+        public static string OBJECT_ON_SERVER {
+            get {
+                return ResourceManager.GetString("OBJECT_ON_SERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Objects with tag &apos;{0}&apos;.
         /// </summary>
         public static string OBJECTS_WITH_TAG {
@@ -23490,6 +23526,15 @@ namespace XenAdmin {
         public static string OLDER_THAN_CURRENT_SERVER {
             get {
                 return ResourceManager.GetString("OLDER_THAN_CURRENT_SERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to on &apos;{0}&apos;.
+        /// </summary>
+        public static string ON_SERVER {
+            get {
+                return ResourceManager.GetString("ON_SERVER", resourceCulture);
             }
         }
         
@@ -28053,6 +28098,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} (snapshot of &apos;{1}&apos; {2}).
+        /// </summary>
+        public static string SNAPSHOT_OF_TITLE {
+            get {
+                return ResourceManager.GetString("SNAPSHOT_OF_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Snapshots require XenServer 5.5 or later.
         /// </summary>
         public static string SNAPSHOT_REQUIRE_GEORGE {
@@ -32106,6 +32160,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} on &apos;{1}&apos; {2}.
+        /// </summary>
+        public static string VDI_ON_SR_TITLE {
+            get {
+                return ResourceManager.GetString("VDI_ON_SR_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vendor.
         /// </summary>
         public static string VENDOR_NAME {
@@ -32520,15 +32583,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} in &apos;{1}&apos;.
-        /// </summary>
-        public static string VM_IN_POOL {
-            get {
-                return ResourceManager.GetString("VM_IN_POOL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Memory and/or VCPU changes will take effect when you restart the VM..
         /// </summary>
         public static string VM_LIVE_CHANGES_NOT_SUPPORTED_MESSAGE {
@@ -32624,15 +32678,6 @@ namespace XenAdmin {
         public static string VM_NOT_SUSPENDED {
             get {
                 return ResourceManager.GetString("VM_NOT_SUSPENDED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} on &apos;{1}&apos;.
-        /// </summary>
-        public static string VM_ON_SERVER {
-            get {
-                return ResourceManager.GetString("VM_ON_SERVER", resourceCulture);
             }
         }
         

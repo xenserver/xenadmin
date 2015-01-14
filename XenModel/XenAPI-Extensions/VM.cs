@@ -1086,6 +1086,51 @@ namespace XenAPI
             }
         }
 
+        public override string NameWithLocation
+        {
+            get
+            {
+                if (this.Connection != null)
+                {
+                    if (this.is_a_real_vm)
+                    {
+                        return base.NameWithLocation;
+                    }
+                    else if (this.is_a_snapshot)
+                    {
+                        var snapshotOf = this.Connection.Resolve(this.snapshot_of);
+                        return string.Format(Messages.SNAPSHOT_OF_TITLE, Name, snapshotOf.Name, LocationString);
+                    }
+                    else if (this.is_a_template)
+                    {
+                        if (Helpers.IsPool(Connection))
+                            return string.Format(Messages.OBJECT_IN_POOL, Name, Connection.Name);
+
+                        return string.Format(Messages.OBJECT_ON_SERVER, Name, Connection.Name);
+                    }
+                }
+
+                return NameWithLocation;
+            }
+        }
+
+        internal override string LocationString
+        {
+            get 
+            {
+                Host server = this.Home();
+                if (server != null)
+                    return string.Format(Messages.ON_SERVER, server);
+
+                Pool pool = Helpers.GetPool(this.Connection);
+                if (pool != null)
+                    return string.Format(Messages.IN_POOL, pool);
+
+                return string.Empty;
+            }
+        }
+
+
         public static List<HA_Restart_Priority> GetAvailableRestartPriorities(IXenConnection connection)
         {
             var restartPriorities = new List<HA_Restart_Priority>();
