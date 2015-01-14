@@ -395,32 +395,40 @@ namespace XenAdmin.TabPages
 
             var action = new DownloadAndUnzipXenServerPatchAction(patchAlert.Description, address, tempFile);
             ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Continuous, false) { ShowCancel = true };
-            dialog.ShowDialog(this);
 
-            if (action.Succeeded)
+            action.Completed += s =>
             {
-                var wizard = new PatchingWizard();
-                wizard.Show();
-                wizard.NextStep();
-                wizard.AddFile(action.PatchPath);
-                wizard.NextStep();
-
-                var hosts = patchAlert.DistinctHosts;
-                if (hosts.Count > 0)
+                if (action.Succeeded)
                 {
-                    wizard.SelectServers(hosts);
-                }
-                else
-                {
-                    string disconnectedServerNames = clickedRow.Cells[ColumnLocation.Index].Value.ToString();
+                    Program.Invoke(Program.MainWindow, () =>
+                    {
+                        var wizard = new PatchingWizard();
+                        wizard.Show();
+                        wizard.NextStep();
+                        wizard.AddFile(action.PatchPath);
+                        wizard.NextStep();
 
-                    new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Warning,
-                                                      string.Format(Messages.UPDATES_WIZARD_DISCONNECTED_SERVER,
-                                                                    disconnectedServerNames),
-                                                      Messages.UPDATES_WIZARD)).ShowDialog(this);
+                        var hosts = patchAlert.DistinctHosts;
+                        if (hosts.Count > 0)
+                        {
+                            wizard.SelectServers(hosts);
+                        }
+                        else
+                        {
+                            string disconnectedServerNames =
+                                clickedRow.Cells[ColumnLocation.Index].Value.ToString();
+
+                            new ThreeButtonDialog(
+                                new ThreeButtonDialog.Details(SystemIcons.Warning,
+                                                              string.Format(Messages.UPDATES_WIZARD_DISCONNECTED_SERVER, 
+                                                                            disconnectedServerNames),
+                                                              Messages.UPDATES_WIZARD)).ShowDialog(this);
+                        }
+                    });
                 }
-            }
+            };
+
+            dialog.Show(this);
         }
 
         private void ToolStripMenuItemCopy_Click(object sender, EventArgs e)

@@ -41,17 +41,28 @@ namespace XenAdmin.Actions
     {
         private readonly Pool_patch _patchToCopy;
         private readonly Host _hostDestiny;
+        private XenRef<Pool_patch> _newPatchRef;
+        public XenRef<Pool_patch> NewPatchRef
+        {
+            get
+            {
+                return _newPatchRef;
+            }
+        }
+
         public CopyPatchFromHostToOther(IXenConnection connection, Host hostDestiny, Pool_patch patchToCopy)
             : base(connection, Messages.UPLOADING_PATCH, true)
         {
             _hostDestiny = hostDestiny;
             _patchToCopy = patchToCopy;
+            Host = _hostDestiny;
         }
 
         protected override void Run()
         {
             SafeToExit = false;
-            Result = BringPatchToPoolForHost(_hostDestiny, _patchToCopy);
+            _newPatchRef = BringPatchToPoolForHost(_hostDestiny, _patchToCopy);
+            Result = _newPatchRef;
         }
     }
 }

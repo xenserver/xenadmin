@@ -48,6 +48,7 @@ namespace XenAdmin.Actions
         public bool ShowSubActionsDetails { get; private set; }
         public string SubActionTitle { get; private set; }
         public string SubActionDescription { get; private set; }
+        public bool StopOnFirstException { get; private set; }
 
         public MultipleAction(IXenConnection connection, string title, string startDescription, string endDescription, List<AsyncAction> subActions, bool suppressHistory)
             : base(connection, title, startDescription, suppressHistory)
@@ -63,11 +64,18 @@ namespace XenAdmin.Actions
 
         public MultipleAction(IXenConnection connection, string title, string startDescription, string endDescription,
             List<AsyncAction> subActions, bool suppressHistory, bool showSubActionsDetails)
-            : this(connection, title, startDescription, endDescription, subActions)
+            : this(connection, title, startDescription, endDescription, subActions, suppressHistory)
         {
             ShowSubActionsDetails = showSubActionsDetails;
             if (showSubActionsDetails)
                 RegisterEvents();
+        }
+
+        public MultipleAction(IXenConnection connection, string title, string startDescription, string endDescription,
+            List<AsyncAction> subActions, bool suppressHistory, bool showSubActionsDetails, bool stopOnFirstException)
+            : this(connection, title, startDescription, endDescription, subActions, suppressHistory, showSubActionsDetails)
+        {
+            StopOnFirstException = stopOnFirstException;
         }
 
         // The multiple action gets its ApiMethodsToRoleCheck by accumulating the lists from each of the subactions
@@ -143,6 +151,8 @@ namespace XenAdmin.Actions
                     // Record the first exception we come to. Though later if there are more than one we will replace this with non specific one.
                     if (Exception == null)
                         Exception = e;
+                    if (StopOnFirstException)
+                        break;
                 }
                 i++;
                 PercentComplete = 100 * i / subActions.Count;

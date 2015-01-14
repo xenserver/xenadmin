@@ -33,7 +33,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using XenAdmin.Actions;
 using XenAdmin.Controls;
 using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Core;
@@ -88,9 +87,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             base.PageLoaded(direction);
             try
             {
-                if (SelectedUpdateType == UpdateType.Existing)
-                    _patch = SelectedExistingPatch;
-
                 // catch selected servers, in order to restore selection after the dataGrid is reloaded
                 List<Host> selectedServers = SelectedServers;
 
@@ -198,47 +194,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                             return;
                         }
                     }
-
-                    switch (SelectedUpdateType)
-                    {
-                        case UpdateType.NewRetail:
-                            foreach (Host selectedServer in masters)
-                            {
-                                Host master = Helpers.GetMaster(selectedServer.Connection);
-                                UploadPatchAction action = new UploadPatchAction(master.Connection, SelectedNewPatch);
-                                new ActionProgressDialog(action, ProgressBarStyle.Blocks).ShowDialog();
-                                if (action.Succeeded)
-                                {
-                                    _patch = action.PatchRefs[master];
-                                    NewUploadedPatches.Add(_patch);
-                                }
-                                else
-                                {
-                                    cancel = true;
-                                    break;
-                                }
-                            }
-                            break;
-
-                        case UpdateType.Existing:
-                            foreach (Host selectedServer in masters)
-                            {
-                                List<Pool_patch> poolPatches = new List<Pool_patch>(selectedServer.Connection.Cache.Pool_patches);
-
-                                if (poolPatches.Find(patch => patch.uuid == SelectedExistingPatch.uuid) == null)
-                                {
-                                    //Download patch from server Upload in the selected server
-                                    var actionCopyPatch = new CopyPatchFromHostToOther(SelectedExistingPatch.Connection, selectedServer, SelectedExistingPatch);
-                                    new ActionProgressDialog(actionCopyPatch, ProgressBarStyle.Blocks).ShowDialog();
-                                    if (!actionCopyPatch.Succeeded)
-                                    {
-                                        cancel = true;
-                                        break;
-                                    }
-                                }
-                            }
-                            break;
-                    }
                 }
                 base.PageLeave(direction, ref cancel);
             }
@@ -302,13 +257,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         #region Accessors
 
-        public readonly List<Pool_patch> NewUploadedPatches = new List<Pool_patch>();
-
-        private Pool_patch _patch = null;
-        public Pool_patch Patch
-        {
-            get { return _patch; }
-        }
+        public Pool_patch Patch { private get; set; }
 
         public List<Host> SelectedMasters
         {
@@ -370,10 +319,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         }
 
         public UpdateType SelectedUpdateType { private get; set; }
-
-        public string SelectedNewPatch { private get; set; }
-
-        public Pool_patch SelectedExistingPatch { private get; set; }
 
         public void SelectServers(List<Host> selectedServers)
         {
