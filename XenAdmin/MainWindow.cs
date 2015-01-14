@@ -2622,7 +2622,7 @@ namespace XenAdmin
             else if (!SearchMode && SelectionManager.Selection.ContainsOneItemOfType<IXenObject>())
             {
                 IXenObject xenObject = SelectionManager.Selection[0].XenObject;
-                TitleLabel.Text = GetTitleLabel(xenObject);
+                TitleLabel.Text = xenObject.NameWithLocation;
                 TitleIcon.Image = Images.GetImage16For(xenObject);
                 // When in folder view only show the logged in label if it is clear to which connection the object belongs (most likely pools and hosts)
 
@@ -2675,22 +2675,6 @@ namespace XenAdmin
             }
 
             pluginMenuItemStartIndexes[viewToolStripMenuItem] = viewToolStripMenuItem.DropDownItems.IndexOf(toolStripSeparator24) + 1;
-        }
-
-        string GetTitleLabel(IXenObject xenObject)
-        {
-            string name = Helpers.GetName(xenObject);
-            VM vm = xenObject as VM;
-            if (vm != null && vm.is_a_real_vm)
-            {
-                Host server = vm.Home();
-                if (server != null)
-                    return string.Format(Messages.VM_ON_SERVER, name, server);
-                Pool pool = Helpers.GetPool(vm.Connection);
-                if (pool != null)
-                    return string.Format(Messages.VM_IN_POOL, name, pool);
-            }
-            return name;
         }
 
         void navigationPane_DragDropCommandActivated(string cmdText)

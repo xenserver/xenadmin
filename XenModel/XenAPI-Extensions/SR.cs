@@ -760,6 +760,28 @@ namespace XenAPI
             }
         }
 
+        public override string NameWithLocation
+        {
+            get
+            {
+                //return only the Name for local SRs
+                if (Connection != null && !shared)
+                {
+                    return Name;
+                }
+
+                return base.NameWithLocation;
+            }
+        }
+
+        internal override string  LocationString
+        {
+	        get
+	        { 
+		         return Home != null ? Home.LocationString : base.LocationString;
+	        }
+        }
+
         private bool CheckMultipathString(String status)
         {
             int current;

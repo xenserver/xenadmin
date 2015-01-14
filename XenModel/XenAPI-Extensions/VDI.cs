@@ -201,7 +201,21 @@ namespace XenAPI
                     return Util.DiskSizeString(virtual_size);
             }
         }
-               
+
+        public override string NameWithLocation
+        {
+            get
+            {
+                if (Connection != null)
+                {
+                    var srOfVdi = Connection.Resolve(SR);
+                    return string.Format(Messages.VDI_ON_SR_TITLE, Name, srOfVdi.Name, srOfVdi.LocationString);
+                }
+
+                return base.NameWithLocation;
+            }
+        }
+
         #region IEquatable<VDI> Members
 
         /// <summary>

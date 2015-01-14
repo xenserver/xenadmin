@@ -69,6 +69,14 @@ namespace XenAPI
             }
         }
 
+        internal override string LocationString
+        {
+            get
+            {
+                return string.Empty;
+            }
+        }
+
         public List<SR> GetHAHeartbeatSRs()
         {
             List<SR> result = new List<SR>();

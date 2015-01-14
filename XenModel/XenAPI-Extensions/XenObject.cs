@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using XenAdmin.Core;
 using XenAdmin.Network;
+using XenAdmin;
 
 namespace XenAPI
 {
@@ -266,6 +267,28 @@ namespace XenAPI
         public virtual string Name
         {
             get { return ""; }
+        }
+
+        public virtual string NameWithLocation
+        {
+            get 
+            { 
+                return string.Format(Messages.NAME_WITH_LOCATION, Name, LocationString);
+            }
+        }
+
+        internal virtual string LocationString
+        {
+            get
+            {
+                if (Connection == null)
+                    return string.Empty;
+
+                if (Helpers.IsPool(Connection))
+                    return string.Format(Messages.IN_POOL, Connection.Name);
+
+                return string.Format(Messages.ON_SERVER, Connection.Name);
+            }
         }
     }
 }

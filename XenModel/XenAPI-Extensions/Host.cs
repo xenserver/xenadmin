@@ -1324,6 +1324,15 @@ namespace XenAPI
             get { return license_params.ContainsKey("grace"); }
         }
 
+        internal override string LocationString
+        {
+            get
+            {
+                //for standalone hosts we do not show redundant location info
+                return Helpers.GetPool(Connection) == null ? string.Empty : base.LocationString;
+            }
+        }
+
         #region Supplemental Packs
 
         // From http://scale.uk.xensource.com/confluence/display/engp/Supplemental+Pack+product+design+notes#SupplementalPackproductdesignnotes-XenAPI:
