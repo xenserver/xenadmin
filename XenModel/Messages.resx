@@ -8456,7 +8456,7 @@ Size: {3} MB</value>
 File not found</value>
   </data>
   <data name="PATCH_UPLOADED" xml:space="preserve">
-    <value>Update Uploaded to Server '{0}' </value>
+    <value>Update uploaded to server '{0}' </value>
   </data>
   <data name="PATHPICKER_FILETYPE" xml:space="preserve">
     <value>XVA (*.xva)|*.xva|XVA Version 1 (ova.xml)|ova.xml</value>
@@ -12264,10 +12264,10 @@ You will need to navigate to the Console on each of the selected VMs to complete
   <data name="UPLOAD_PATCH_ALREADY_UPLOADED" xml:space="preserve">
     <value>Already uploaded to selected server(s)</value>
   </data>
-  <data name="UPLOAD_PATCH_DESCRIPTION" xml:space="preserve">
+  <data name="UPLOAD_PATCH_END_DESCRIPTION" xml:space="preserve">
     <value>Update succesfully uploaded to selected server(s)</value>
   </data>
-  <data name="UPLOAD_PATCH_END_DESCRIPTION" xml:space="preserve">
+  <data name="UPLOAD_PATCH_DESCRIPTION" xml:space="preserve">
     <value>Uploading...</value>
   </data>
   <data name="UPLOAD_PATCH_TITLE" xml:space="preserve">

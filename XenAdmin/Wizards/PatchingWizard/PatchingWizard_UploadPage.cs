@@ -202,8 +202,13 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (action == null)
                 return;
 
-            labelProgress.Text = GetActionDescription(action);
             action.Completed -= multipleAction_Completed;
+
+            Program.Invoke(this, () =>
+            {
+                labelProgress.Text = GetActionDescription(action);
+            });
+            
         }
 
         private void flickerFreeListBox1_DrawItem(object sender, DrawItemEventArgs e)
@@ -224,12 +229,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                 e.Graphics.FillRectangle(backBrush, e.Bounds);
             }
 
-            e.Graphics.DrawImage(Images.GetImage16For(action.Host), e.Bounds.Left, e.Bounds.Top);
+            var pool = Helpers.GetPool(host.Connection);
+            e.Graphics.DrawImage(pool != null ? Images.GetImage16For(pool) : Images.GetImage16For(host),
+                e.Bounds.Left, e.Bounds.Top);
 
             string text = GetActionDescription(action);
             int width = Drawing.MeasureText(text, flickerFreeListBox1.Font).Width;
 
-            Drawing.DrawText(e.Graphics, host.ToString(), flickerFreeListBox1.Font, new Rectangle(e.Bounds.Left + Properties.Resources._000_Server_h32bit_16.Width, e.Bounds.Top, e.Bounds.Right - (width + Properties.Resources._000_Server_h32bit_16.Width), e.Bounds.Height), flickerFreeListBox1.ForeColor, TextFormatFlags.Left | TextFormatFlags.EndEllipsis);
+            Drawing.DrawText(e.Graphics, pool != null ? pool.Name : host.Name, flickerFreeListBox1.Font, new Rectangle(e.Bounds.Left + Properties.Resources._000_Server_h32bit_16.Width, e.Bounds.Top, e.Bounds.Right - (width + Properties.Resources._000_Server_h32bit_16.Width), e.Bounds.Height), flickerFreeListBox1.ForeColor, TextFormatFlags.Left | TextFormatFlags.EndEllipsis);
             
             Color textColor;
             if (!action.StartedRunning) // not started yet

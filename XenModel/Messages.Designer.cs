@@ -23867,7 +23867,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update Uploaded to Server &apos;{0}&apos; .
+        ///   Looks up a localized string similar to Update uploaded to server &apos;{0}&apos; .
         /// </summary>
         public static string PATCH_UPLOADED {
             get {
@@ -31587,7 +31587,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update succesfully uploaded to selected server(s).
+        ///   Looks up a localized string similar to Uploading....
         /// </summary>
         public static string UPLOAD_PATCH_DESCRIPTION {
             get {
@@ -31596,7 +31596,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Uploading....
+        ///   Looks up a localized string similar to Update succesfully uploaded to selected server(s).
         /// </summary>
         public static string UPLOAD_PATCH_END_DESCRIPTION {
             get {
