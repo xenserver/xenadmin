@@ -50,6 +50,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private readonly PatchingWizard_SelectPatchPage PatchingWizard_SelectPatchPage;
         private readonly PatchingWizard_ModePage PatchingWizard_ModePage;
         private readonly PatchingWizard_SelectServers PatchingWizard_SelectServers;
+        private readonly PatchingWizard_UploadPage PatchingWizard_UploadPage;
         private readonly PatchingWizard_PrecheckPage PatchingWizard_PrecheckPage;
         private readonly PatchingWizard_FirstPage PatchingWizard_FirstPage;
 
@@ -61,12 +62,14 @@ namespace XenAdmin.Wizards.PatchingWizard
             PatchingWizard_SelectPatchPage = new PatchingWizard_SelectPatchPage();
             PatchingWizard_ModePage = new PatchingWizard_ModePage();
             PatchingWizard_SelectServers = new PatchingWizard_SelectServers();
+            PatchingWizard_UploadPage = new PatchingWizard_UploadPage();
             PatchingWizard_PrecheckPage = new PatchingWizard_PrecheckPage();
             PatchingWizard_FirstPage = new PatchingWizard_FirstPage();
 
             AddPage(PatchingWizard_FirstPage);
             AddPage(PatchingWizard_SelectPatchPage);
             AddPage(PatchingWizard_SelectServers);
+            AddPage(PatchingWizard_UploadPage);
             // This gets enabled/disabled in the select patch step depending on if it is an OEM patch or not
             AddPage(PatchingWizard_PrecheckPage);
             AddPage(PatchingWizard_ModePage);
@@ -97,8 +100,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                 DisablePage(PatchingWizard_PrecheckPage, updateType == UpdateType.NewOem);
 
                 PatchingWizard_SelectServers.SelectedUpdateType = updateType;
-                PatchingWizard_SelectServers.SelectedExistingPatch = existPatch;
-                PatchingWizard_SelectServers.SelectedNewPatch = newPatch;
+                PatchingWizard_SelectServers.Patch = existPatch;
+
+                PatchingWizard_UploadPage.SelectedUpdateType = updateType;
+                PatchingWizard_UploadPage.SelectedExistingPatch = existPatch;
+                PatchingWizard_UploadPage.SelectedNewPatch = newPatch;
 
                 if (updateType == UpdateType.Existing)
                 {
@@ -118,31 +124,34 @@ namespace XenAdmin.Wizards.PatchingWizard
             else if (prevPageType == typeof(PatchingWizard_SelectServers))
             {
                 var selectedServers = PatchingWizard_SelectServers.SelectedServers;
-
-                if (PatchingWizard_SelectPatchPage.SelectedUpdateType == UpdateType.NewRetail)
-                {
-                    PatchingWizard_SelectPatchPage.SelectedUpdateType = UpdateType.Existing;
-                    PatchingWizard_SelectPatchPage.SelectedExistingPatch = PatchingWizard_SelectServers.Patch;
-
-                    PatchingWizard_SelectServers.SelectedUpdateType = UpdateType.Existing;
-                    PatchingWizard_SelectServers.SelectedExistingPatch = PatchingWizard_SelectServers.Patch;
-                    PatchingWizard_SelectServers.SelectedNewPatch = null;
-
-                    PatchingWizard_PrecheckPage.Patch = PatchingWizard_SelectServers.Patch;
-
-                    PatchingWizard_ModePage.Patch = PatchingWizard_SelectServers.Patch;
-
-                    PatchingWizard_PatchingPage.Patch = PatchingWizard_SelectServers.Patch;
-                }
                 
                 PatchingWizard_PrecheckPage.SelectedServers = selectedServers;
-                PatchingWizard_PrecheckPage.NewUploadedPatches = PatchingWizard_SelectServers.NewUploadedPatches;
+                //PatchingWizard_PrecheckPage.NewUploadedPatches = PatchingWizard_SelectServers.NewUploadedPatches;
 
                 PatchingWizard_ModePage.SelectedServers = selectedServers;
 
                 PatchingWizard_PatchingPage.SelectedMasters = PatchingWizard_SelectServers.SelectedMasters;
                 PatchingWizard_PatchingPage.SelectedServers = selectedServers;
                 PatchingWizard_PatchingPage.SelectedPools = PatchingWizard_SelectServers.SelectedPools;
+
+                PatchingWizard_UploadPage.SelectedMasters = PatchingWizard_SelectServers.SelectedMasters;
+            }
+            else if (prevPageType == typeof(PatchingWizard_UploadPage))
+            {
+                if (PatchingWizard_SelectPatchPage.SelectedUpdateType == UpdateType.NewRetail)
+                {
+                    PatchingWizard_SelectPatchPage.SelectedUpdateType = UpdateType.Existing;
+                    PatchingWizard_SelectPatchPage.SelectedExistingPatch = PatchingWizard_UploadPage.Patch;
+
+                    PatchingWizard_SelectServers.SelectedUpdateType = UpdateType.Existing;
+                    PatchingWizard_SelectServers.Patch = PatchingWizard_UploadPage.Patch;
+
+                    PatchingWizard_PrecheckPage.Patch = PatchingWizard_UploadPage.Patch;
+
+                    PatchingWizard_ModePage.Patch = PatchingWizard_UploadPage.Patch;
+
+                    PatchingWizard_PatchingPage.Patch = PatchingWizard_UploadPage.Patch;
+                }
             }
             else if (prevPageType == typeof(PatchingWizard_ModePage))
             {
@@ -197,7 +206,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private List<AsyncAction> GetRemovePatchActions()
         {
-            return GetRemovePatchActions(PatchingWizard_SelectServers.NewUploadedPatches);
+            return GetRemovePatchActions(PatchingWizard_UploadPage.NewUploadedPatches);
         }
 
         private void RunMultipleActions(string title, string startDescription, string endDescription,
@@ -231,11 +240,11 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override void FinishWizard()
         {
-            if (PatchingWizard_SelectServers.NewUploadedPatches != null)
+            if (PatchingWizard_UploadPage.NewUploadedPatches != null)
             {
                 List<Pool_patch> patchesToRemove =
-                    PatchingWizard_SelectServers.NewUploadedPatches.Where(
-                        patch => patch.uuid != PatchingWizard_SelectServers.Patch.uuid).ToList();
+                    PatchingWizard_UploadPage.NewUploadedPatches.Where(
+                        patch => patch.uuid != PatchingWizard_UploadPage.Patch.uuid).ToList();
 
                 RemoveUnwantedPatches(patchesToRemove);
             }

@@ -8456,7 +8456,7 @@ Size: {3} MB</value>
 File not found</value>
   </data>
   <data name="PATCH_UPLOADED" xml:space="preserve">
-    <value>Update Uploaded to Server '{0}' </value>
+    <value>Update uploaded to server '{0}' </value>
   </data>
   <data name="PATHPICKER_FILETYPE" xml:space="preserve">
     <value>XVA (*.xva)|*.xva|XVA Version 1 (ova.xml)|ova.xml</value>
@@ -10927,7 +10927,7 @@ Do you want to continue?</value>
     <value>Uploading Update...</value>
   </data>
   <data name="UPLOADING_PATCH_TO" xml:space="preserve">
-    <value>Uploading Update to Server '{0}'...</value>
+    <value>Uploading to server '{0}'...</value>
   </data>
   <data name="UPSELL_BLURB_ALERTS" xml:space="preserve">
     <value>Upgrade your XenServer license to enable Alerting and Reporting capabilities. Email based performance and error alerting will proactively notify administrators of error conditions or performance problems before they affect critical services.
@@ -12266,5 +12266,26 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="VDI_ON_SR_TITLE" xml:space="preserve">
     <value>{0} on '{1}' {2}</value>
+  </data>
+  <data name="PATCHINGWIZARD_UPLOADPAGE_TEXT" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="PATCHINGWIZARD_UPLOADPAGE_TITLE" xml:space="preserve">
+    <value>Uploading selected file to your servers</value>
+  </data>
+  <data name="UPLOADING_PATCH_PROGRESS" xml:space="preserve">
+    <value>Uploading - {0}%</value>
+  </data>
+  <data name="UPLOAD_PATCH_ALREADY_UPLOADED" xml:space="preserve">
+    <value>Already uploaded to selected server(s)</value>
+  </data>
+  <data name="UPLOAD_PATCH_END_DESCRIPTION" xml:space="preserve">
+    <value>Update succesfully uploaded to selected server(s)</value>
+  </data>
+  <data name="UPLOAD_PATCH_DESCRIPTION" xml:space="preserve">
+    <value>Uploading...</value>
+  </data>
+  <data name="UPLOAD_PATCH_TITLE" xml:space="preserve">
+    <value>Upload</value>
   </data>
 </root>
