@@ -993,9 +993,9 @@ namespace XenAPI
                 os_name = os_name.Substring(0, index);
 
             // CA-9631: conform to MS trademark guidelines
-            if (os_name.StartsWith("Microsoft®"))
+            if (os_name.StartsWith("MicrosoftÂ®"))
             {
-                if (os_name != "Microsoft®")
+                if (os_name != "MicrosoftÂ®")
                     os_name = os_name.Substring(10).Trim();
             }
             else if (os_name.StartsWith("Microsoft"))
@@ -1099,7 +1099,7 @@ namespace XenAPI
                     else if (this.is_a_snapshot)
                     {
                         var snapshotOf = this.Connection.Resolve(this.snapshot_of);
-                        if (snapshot_of == null)
+                        if (snapshotOf == null)
                             return base.NameWithLocation;
 
                         return string.Format(Messages.SNAPSHOT_OF_TITLE, Name, snapshotOf.Name, LocationString);
