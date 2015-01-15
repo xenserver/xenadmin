@@ -2073,7 +2073,13 @@
       <SubType>Designer</SubType>
       <DependentUpon>ConsolePanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_UploadPage.ja.resx">
+      <DependentUpon>PatchingWizard_UploadPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_UploadPage.resx">
+      <DependentUpon>PatchingWizard_UploadPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_UploadPage.zh-CN.resx">
       <DependentUpon>PatchingWizard_UploadPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\WizardProgress.resx">
