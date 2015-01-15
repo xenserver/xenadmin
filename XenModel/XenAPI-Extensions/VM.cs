@@ -1099,6 +1099,9 @@ namespace XenAPI
                     else if (this.is_a_snapshot)
                     {
                         var snapshotOf = this.Connection.Resolve(this.snapshot_of);
+                        if (snapshot_of == null)
+                            return base.NameWithLocation;
+
                         return string.Format(Messages.SNAPSHOT_OF_TITLE, Name, snapshotOf.Name, LocationString);
                     }
                     else if (this.is_a_template)
@@ -1110,7 +1113,7 @@ namespace XenAPI
                     }
                 }
 
-                return NameWithLocation;
+                return base.NameWithLocation;
             }
         }
 

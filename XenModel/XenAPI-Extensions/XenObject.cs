@@ -281,12 +281,12 @@ namespace XenAPI
         {
             get
             {
-                if (Connection == null)
+                if (Connection == null || string.IsNullOrEmpty(Connection.Name))
                     return string.Empty;
 
                 if (Helpers.IsPool(Connection))
                     return string.Format(Messages.IN_POOL, Connection.Name);
-
+                
                 return string.Format(Messages.ON_SERVER, Connection.Name);
             }
         }
