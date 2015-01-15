@@ -209,6 +209,9 @@ namespace XenAPI
                 if (Connection != null)
                 {
                     var srOfVdi = Connection.Resolve(SR);
+                    if (srOfVdi == null)
+                        return base.NameWithLocation;
+
                     return string.Format(Messages.VDI_ON_SR_TITLE, Name, srOfVdi.Name, srOfVdi.LocationString);
                 }
 
