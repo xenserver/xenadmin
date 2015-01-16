@@ -261,6 +261,9 @@
   <data name="&gt;&gt;label10.Name" xml:space="preserve">
     <value>label10</value>
   </data>
+  <data name="label10.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;label10.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -568,7 +571,7 @@
     <value>6, 46</value>
   </data>
   <data name="decentGroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>578, 266</value>
+    <value>578, 196</value>
   </data>
   <data name="decentGroupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
