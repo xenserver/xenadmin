@@ -1294,11 +1294,11 @@ namespace XenAdmin
             ShowTab(TabPageNICs, !multi && !SearchMode && ((isHostSelected && isHostLive)));
 
             bool isPoolOrLiveStandaloneHost = isPoolSelected || (isHostSelected && isHostLive && selectionPool == null);
-            bool showGpu = SelectionManager.Selection.All(s => Helpers.ClearwaterOrGreater(s.Connection)) &&
-                           !Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictVgpu) &&
-                           Helpers.VgpuCapability(selectionConnection);
 
-            ShowTab(TabPageGPU, !multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolOrLiveStandaloneHost) && showGpu);
+            if (!multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolOrLiveStandaloneHost))
+            {
+                ShowTab(TabPageGPU, Helpers.ClearwaterSp1OrGreater(selectionConnection) && Helpers.GpuCapability(selectionConnection));
+            }
 
             pluginManager.SetSelectedXenObject(SelectionManager.Selection.FirstAsXenObject);
 

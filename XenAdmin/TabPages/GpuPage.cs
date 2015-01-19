@@ -36,6 +36,7 @@ using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Controls.GPU;
+using XenAdmin.Core;
 using XenAPI;
 
 namespace XenAdmin.TabPages
@@ -125,7 +126,8 @@ namespace XenAdmin.TabPages
             int initScroll = pageContainerPanel.VerticalScroll.Value;
             int top = pageContainerPanel.Padding.Top - initScroll;
 
-            AddRowToPanel(CreateGpuPlacementPolicyPanel(), ref top);
+            if (Helpers.VGpuCapability(xenObject.Connection))
+                AddRowToPanel(CreateGpuPlacementPolicyPanel(), ref top);
 
             foreach (GpuSettings settings in listSettings)
             {

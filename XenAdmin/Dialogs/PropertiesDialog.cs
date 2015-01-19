@@ -207,10 +207,8 @@ namespace XenAdmin.Dialogs
 
                 if (is_pool_or_standalone)
                 {
-                    if (Helpers.ClearwaterOrGreater(xenObject.Connection)
-                        && !Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictVgpu)
-                        && Helpers.VgpuCapability(xenObjectCopy.Connection)) 
-                    ShowTab(PoolGpuEditPage = new PoolGpuEditPage());
+                    if (Helpers.VGpuCapability(xenObjectCopy.Connection)) 
+                        ShowTab(PoolGpuEditPage = new PoolGpuEditPage());
                 }
 
                 if (is_network)
@@ -219,7 +217,7 @@ namespace XenAdmin.Dialogs
                 if (is_vm && !wlb_enabled)
                     ShowTab(HomeServerPage = new HomeServerEditPage());
 
-                if (is_hvm)
+                if (is_vm && ((VM)xenObjectCopy).CanHaveGpu)
                 {
                     if (Helpers.BostonOrGreater(xenObject.Connection))
                     {
@@ -234,7 +232,10 @@ namespace XenAdmin.Dialogs
                             ShowTab(GpuEditPage = new GpuEditPage());
                         }
                     }
+                }
 
+                if (is_hvm)
+                {
                     ShowTab(VMAdvancedEditPage = new VMAdvancedEditPage());
                 }
 

@@ -63,7 +63,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private Host m_affinity;
         private bool BlockAffinitySelection = false;
-        private bool vgpuCapability;
+        private bool gpuCapability;
 
         public AsyncAction Action;
 
@@ -86,8 +86,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             page_6b_LunPerVdi = new LunPerVdiNewVMMappingPage { Connection = xenConnection };
             pageVgpu = new GpuEditPage();
 
-            if (!Helpers.FeatureForbidden(connection, Host.RestrictVgpu))
-                vgpuCapability = Helpers.VgpuCapability(connection);
+            gpuCapability = Helpers.GpuCapability(connection);
 
             #region RBAC Warning Page Checks
             if (connection.Session.IsLocalSuperuser || Helpers.GetMaster(connection).external_auth_type == Auth.AUTH_TYPE_NONE)
@@ -124,7 +123,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
                 page_RbacWarning.AddPermissionChecks(xenConnection, createCheck, affinityCheck, memCheck);
 
-                if (vgpuCapability)
+                if (gpuCapability)
                 {
                     var vgpuCheck = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_VM_WIZARD_GPU);
                     vgpuCheck.ApiCallsToCheck.Add("vgpu.create");
@@ -180,8 +179,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                                         page_8_Finish.StartImmediately,
                                         VMOperationCommand.WarningDialogHAInvalidConfig,
                                         VMOperationCommand.StartDiagnosisForm,
-                                        vgpuCapability ? pageVgpu.GpuGroup : null,
-                                        vgpuCapability ? pageVgpu.VgpuType : null,
+                                        gpuCapability ? pageVgpu.GpuGroup : null,
+                                        gpuCapability ? pageVgpu.VgpuType : null,
                                         page_5_CpuMem.SelectedCoresPerSocket);
             Action.RunAsync();
 
@@ -206,7 +205,9 @@ namespace XenAdmin.Wizards.NewVMWizard
                 page_7_Networking.SelectedTemplate = selectedTemplate;
 
                 RemovePage(pageVgpu);
-                if (vgpuCapability && selectedTemplate.CanHaveVGpu)
+                // update gpuCapability to include "CanHaveGpu"
+                gpuCapability = Helpers.GpuCapability(xenConnection) && selectedTemplate.CanHaveGpu;
+                if (gpuCapability)
                     AddAfterPage(page_5_CpuMem, pageVgpu);
 
                 RemovePage(page_1b_BiosLocking);

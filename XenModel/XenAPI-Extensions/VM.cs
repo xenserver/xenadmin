@@ -436,7 +436,7 @@ namespace XenAPI
         ///   2a) the allow-gpu-passthrough restriction is absent or
         ///   2b) the allow-gpu-passthrough restriction is non-zero
         ///</summary>
-        public bool CanHaveVGpu
+        public bool CanHaveGpu
         {
             get
             {

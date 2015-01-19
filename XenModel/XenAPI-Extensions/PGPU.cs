@@ -29,6 +29,8 @@
  * SUCH DAMAGE.
  */
 
+using System.Linq;
+
 namespace XenAPI
 {
     partial class PGPU
@@ -39,6 +41,17 @@ namespace XenAPI
             {
                 PCI pci = Connection.Resolve(PCI);
                 return pci != null ? pci.device_name : uuid;
+            }
+        }
+        /// <summary>
+        /// Has at least one supported_VGPU_type that is not passthrough
+        /// </summary>
+        public bool HasVGpu
+        {
+            get
+            {
+                var supportedTypes = Connection.ResolveAll(supported_VGPU_types);
+                return supportedTypes.Any(supportedType => supportedType.max_heads != 0);
             }
         }
     }
