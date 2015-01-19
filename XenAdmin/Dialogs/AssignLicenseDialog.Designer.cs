@@ -47,7 +47,12 @@ namespace XenAdmin.Dialogs
             this.enterpriseRadioButton = new System.Windows.Forms.RadioButton();
             this.platinumRadioButton = new System.Windows.Forms.RadioButton();
             this.xenDesktopEnterpriseRadioButton = new System.Windows.Forms.RadioButton();
+            this.enterprisePerSocketRadioButton = new System.Windows.Forms.RadioButton();
+            this.enterprisePerUserRadioButton = new System.Windows.Forms.RadioButton();
+            this.desktopRadioButton = new System.Windows.Forms.RadioButton();
+            this.standardPerSocketRadioButton = new System.Windows.Forms.RadioButton();
             this.buttonsLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.desktopPlusRadioButton = new System.Windows.Forms.RadioButton();
             this.mainLayoutPanel.SuspendLayout();
             this.licenseServerLayoutPanel.SuspendLayout();
             this.editionsGroupBox.SuspendLayout();
@@ -127,6 +132,11 @@ namespace XenAdmin.Dialogs
             this.editionLayoutPanel.Controls.Add(this.enterpriseRadioButton);
             this.editionLayoutPanel.Controls.Add(this.platinumRadioButton);
             this.editionLayoutPanel.Controls.Add(this.xenDesktopEnterpriseRadioButton);
+            this.editionLayoutPanel.Controls.Add(this.enterprisePerSocketRadioButton);
+            this.editionLayoutPanel.Controls.Add(this.enterprisePerUserRadioButton);
+            this.editionLayoutPanel.Controls.Add(this.desktopPlusRadioButton);
+            this.editionLayoutPanel.Controls.Add(this.desktopRadioButton);
+            this.editionLayoutPanel.Controls.Add(this.standardPerSocketRadioButton);
             this.editionLayoutPanel.Name = "editionLayoutPanel";
             // 
             // perSocketRadioButton
@@ -161,12 +171,42 @@ namespace XenAdmin.Dialogs
             this.xenDesktopEnterpriseRadioButton.Name = "xenDesktopEnterpriseRadioButton";
             this.xenDesktopEnterpriseRadioButton.UseVisualStyleBackColor = true;
             // 
+            // enterprisePerSocketRadioButton
+            // 
+            resources.ApplyResources(this.enterprisePerSocketRadioButton, "enterprisePerSocketRadioButton");
+            this.enterprisePerSocketRadioButton.Name = "enterprisePerSocketRadioButton";
+            this.enterprisePerSocketRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // enterprisePerUserRadioButton
+            // 
+            resources.ApplyResources(this.enterprisePerUserRadioButton, "enterprisePerUserRadioButton");
+            this.enterprisePerUserRadioButton.Name = "enterprisePerUserRadioButton";
+            this.enterprisePerUserRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // desktopRadioButton
+            // 
+            resources.ApplyResources(this.desktopRadioButton, "desktopRadioButton");
+            this.desktopRadioButton.Name = "desktopRadioButton";
+            this.desktopRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // standardPerSocketRadioButton
+            // 
+            resources.ApplyResources(this.standardPerSocketRadioButton, "standardPerSocketRadioButton");
+            this.standardPerSocketRadioButton.Name = "standardPerSocketRadioButton";
+            this.standardPerSocketRadioButton.UseVisualStyleBackColor = true;
+            // 
             // buttonsLayoutPanel
             // 
             resources.ApplyResources(this.buttonsLayoutPanel, "buttonsLayoutPanel");
             this.buttonsLayoutPanel.Controls.Add(this.okButton);
             this.buttonsLayoutPanel.Controls.Add(this.cancelButton);
             this.buttonsLayoutPanel.Name = "buttonsLayoutPanel";
+            // 
+            // desktopPlusRadioButton
+            // 
+            resources.ApplyResources(this.desktopPlusRadioButton, "desktopPlusRadioButton");
+            this.desktopPlusRadioButton.Name = "desktopPlusRadioButton";
+            this.desktopPlusRadioButton.UseVisualStyleBackColor = true;
             // 
             // AssignLicenseDialog
             // 
@@ -176,6 +216,7 @@ namespace XenAdmin.Dialogs
             this.CancelButton = this.cancelButton;
             this.Controls.Add(this.mainLayoutPanel);
             this.Name = "AssignLicenseDialog";
+            this.Shown += new System.EventHandler(this.AssignLicenseDialog_Shown);
             this.mainLayoutPanel.ResumeLayout(false);
             this.mainLayoutPanel.PerformLayout();
             this.licenseServerLayoutPanel.ResumeLayout(false);
@@ -209,5 +250,10 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.RadioButton enterpriseRadioButton;
         private System.Windows.Forms.RadioButton platinumRadioButton;
         private System.Windows.Forms.RadioButton xenDesktopEnterpriseRadioButton;
+        private System.Windows.Forms.RadioButton enterprisePerSocketRadioButton;
+        private System.Windows.Forms.RadioButton enterprisePerUserRadioButton;
+        private System.Windows.Forms.RadioButton desktopRadioButton;
+        private System.Windows.Forms.RadioButton standardPerSocketRadioButton;
+        private System.Windows.Forms.RadioButton desktopPlusRadioButton;
     }
 }

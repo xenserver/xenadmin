@@ -535,7 +535,7 @@
     <value>地址</value>
   </data>
   <data name="Label-host.agentUptime" xml:space="preserve">
-    <value>工具堆栈运行时间</value>
+    <value>Toolstack 运行时间</value>
   </data>
   <data name="Label-host.edition" xml:space="preserve">
     <value>版本</value>
@@ -1044,7 +1044,7 @@
 {1}</value>
   </data>
   <data name="Message.body-grace_license" xml:space="preserve">
-    <value>LN_A grace license was issued for {0}. This was because the license server could not be reached, it is an out-of-date version, or because the host has recently been upgraded.</value>
+    <value>已为 {0} 颁发宽限期许可证。这是因为许可证服务器无法访问、版本已过时或者最近升级了主机。</value>
   </data>
   <data name="Message.body-ha_heartbeat_approaching_timeout" xml:space="preserve">
     <value>服务器“{0}”响应高可用性网络连接检测信号的时间过长，可能要进行防护。</value>
@@ -1701,10 +1701,22 @@
     <value>vCPU 的最大数量</value>
   </data>
   <data name="Message.body-license_server_version_obsolete" xml:space="preserve">
-    <value>LN_The license server for {0} is an out-of-date version.</value>
+    <value>{0} 的许可证服务器版本已过时。</value>
   </data>
   <data name="Message.name-license_server_version_obsolete" xml:space="preserve">
-    <value>LN_The license server is an out-of-date version.</value>
+    <value>许可证服务器版本已过时。</value>
+  </data>
+  <data name="Label-host.edition-enterprise-per-socket" xml:space="preserve">
+    <value>Citrix XenServer Enterprise Per Socket Edition</value>
+  </data>
+  <data name="Label-host.edition-enterprise-per-user" xml:space="preserve">
+    <value>Citrix XenServer Enterprise Per User Edition</value>
+  </data>
+  <data name="Label-host.edition-standard-per-socket" xml:space="preserve">
+    <value>Citrix XenServer Standard Per Socket Edition</value>
+  </data>
+  <data name="Label-host.edition-xendesktop-platinum" xml:space="preserve">
+    <value>Citrix XenDesktop Platinum</value>
   </data>
   <data name="Message.help-license_expired" xml:space="preserve">
     <value>有关许可的帮助</value>
@@ -1723,5 +1735,11 @@
   </data>
   <data name="Message.help-license_server_version_obsolete" xml:space="preserve">
     <value>有关许可的帮助</value>
+  </data>
+  <data name="Label-host.edition-desktop" xml:space="preserve">
+    <value>Citrix XenServer Desktop Edition</value>
+  </data>
+  <data name="Label-host.edition-desktop-plus" xml:space="preserve">
+    <value>Citrix XenServer Desktop+ Edition</value>
   </data>
 </root>

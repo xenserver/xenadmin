@@ -34,7 +34,10 @@ set -eu
 
 source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
 
-WGET_OPT="-q -N"
+WGET_OPT="-q -N --no-check-certificate --secure-protocol=SSLv2"
+WGET_VERBOSE_OPT="-N --no-check-certificate --secure-protocol=SSLv2"
+WGET_OPT="-q ${WGET_VERBOSE_OPT}"
+
 UNZIP="unzip -q -o"
 
 mkdir_clean()
@@ -93,17 +96,22 @@ SHARPZIPLIB_DIR=${REPO}/sharpziplib/bin
 DISCUTILS_DIR=${REPO}/DiscUtils/src/bin/Release
 MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR=${REPO}/dotNetFx40_Full_setup
 
-wget ${WGET_OPT} ${WEB_DOTNET}/manifest -O ${SCRATCH_DIR}/dotnet-packages-manifest
-mkdir_clean ${XMLRPC_DIR} && wget ${WGET_OPT} ${WEB_DOTNET}/CookComputing.XmlRpcV2.dll -P ${XMLRPC_DIR}
-mkdir_clean ${LOG4NET_DIR} && wget ${WGET_OPT} ${WEB_DOTNET}/log4net.dll -P ${LOG4NET_DIR}
-mkdir_clean ${SHARPZIPLIB_DIR} && wget ${WGET_OPT} ${WEB_DOTNET}/ICSharpCode.SharpZipLib.dll -P ${SHARPZIPLIB_DIR}
-mkdir_clean ${DOTNETZIP_DIR} && wget ${WGET_OPT} ${WEB_DOTNET}/Ionic.Zip.dll -P ${DOTNETZIP_DIR}
-mkdir_clean ${DISCUTILS_DIR} && wget ${WGET_OPT} ${WEB_DOTNET}/DiscUtils.dll -P ${DISCUTILS_DIR}
-mkdir_clean ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR} && wget ${WGET_OPT} ${WEB_DOTNET}/dotNetFx40_Full_setup.exe -P ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}
+cp ${DOTNET_LOC}/manifest ${SCRATCH_DIR}/dotnet-packages-manifest
+mkdir_clean ${XMLRPC_DIR} && cp ${DOTNET_LOC}/CookComputing.XmlRpcV2.dll ${XMLRPC_DIR}
+mkdir_clean ${LOG4NET_DIR} && cp ${DOTNET_LOC}/log4net.dll ${LOG4NET_DIR}
+mkdir_clean ${SHARPZIPLIB_DIR} && cp ${DOTNET_LOC}/ICSharpCode.SharpZipLib.dll ${SHARPZIPLIB_DIR}
+mkdir_clean ${DOTNETZIP_DIR} && cp ${DOTNET_LOC}/Ionic.Zip.dll ${DOTNETZIP_DIR}
+mkdir_clean ${DISCUTILS_DIR} && cp ${DOTNET_LOC}/DiscUtils.dll ${DISCUTILS_DIR}
+mkdir_clean ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR} && cp ${DOTNET_LOC}/dotNetFx40_Full_setup.exe ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}
 
+#<<<<<<< HEAD
 #temporarily disabling signing
 #wget ${WGET_OPT} ${WEB_DOTNET}/sign.bat -P ${REPO} && chmod a+x ${REPO}/sign.bat
-echo @echo signing disabled > ${REPO}/sign.bat && chmod a+x ${REPO}/sign.bat
+#echo @echo signing disabled > ${REPO}/sign.bat && chmod a+x ${REPO}/sign.bat
+#=======
+#
+cp ${DOTNET_LOC}/sign.bat ${REPO} && chmod a+x ${REPO}/sign.bat
+#>>>>>>> master
 
 #bring in stuff from xencenter-ovf latest xe-phase-1
 wget ${WGET_OPT} ${WEB_XE_PHASE_1}/XenCenterOVF.zip -P ${SCRATCH_DIR}
@@ -113,7 +121,7 @@ ${UNZIP} -d ${REPO}/XenOvfApi ${SCRATCH_DIR}/XenCenterOVF.zip
 wget ${WGET_OPT} ${WEB_XE_PHASE_1}/manifest -O ${SCRATCH_DIR}/xe-phase-1-manifest
 
 #bring XenServer.NET from latest xe-phase-2
-wget ${WGET_OPT} ${WEB_XE_PHASE_2}/XenServer-SDK.zip -P ${REPO} && ${UNZIP} -j ${REPO}/XenServer-SDK.zip XenServer-SDK/XenServer.NET/bin/XenServer.dll XenServer-SDK/XenServer.NET/bin/CookComputing.XmlRpcV2.dll -d ${REPO}/XenServer.NET
+wget ${WGET_VERBOSE_OPT} ${WEB_XE_PHASE_2}/XenServer-SDK.zip -P ${REPO} && ${UNZIP} -j ${REPO}/XenServer-SDK.zip XenServer-SDK/XenServer.NET/bin/XenServer.dll XenServer-SDK/XenServer.NET/bin/CookComputing.XmlRpcV2.dll -d ${REPO}/XenServer.NET
 
 #bring in some more libraries
 mkdir_clean ${REPO}/NUnit && wget ${WEB_LIB}/{nunit.framework.dll,Moq_dotnet4.dll} -P ${REPO}/NUnit
@@ -412,7 +420,7 @@ rm -rf ${OUTPUT_DIR}/PACKAGES.main/opt
 #bring in the pdbs from dotnet-packages latest build
 for pdb in CookComputing.XmlRpcV2.pdb DiscUtils.pdb ICSharpCode.SharpZipLib.pdb Ionic.Zip.pdb log4net.pdb
 do
-  wget ${WGET_OPT} ${WEB_DOTNET}/${pdb} -P ${OUTPUT_DIR}
+  cp ${DOTNET_LOC}/${pdb} ${OUTPUT_DIR}
 done
 
 #create manifest
@@ -422,12 +430,7 @@ cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep xencenter-ovf >> ${OUTPUT_DIR}/man
 cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep chroot-lenny >> ${OUTPUT_DIR}/manifest
 cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep branding >> ${OUTPUT_DIR}/manifest
 cat ${SCRATCH_DIR}/dotnet-packages-manifest >> ${OUTPUT_DIR}/manifest
-if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
-then
-    echo ${get_BUILD_URL} >> ${OUTPUT_DIR}/latest-secure-build
-else
-    echo ${get_BUILD_URL} >> ${OUTPUT_DIR}/latest-successful-build
-fi
+echo /usr/groups/xen/carbon/windowsbuilds/WindowsBuilds/${get_JOB_NAME}/${BUILD_NUMBER} >> ${OUTPUT_DIR}/latest-successful-build
 
 echo "Build phase succeeded at "
 date

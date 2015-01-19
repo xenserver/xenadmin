@@ -145,7 +145,7 @@
     <value>111, 23</value>
   </data>
   <data name="toolStripDdbFilterLocation.Text" xml:space="preserve">
-    <value>LN_Filter by S&amp;erver</value>
+    <value>按服务器过滤(&amp;E)</value>
   </data>
   <data name="toolStripDdbFilterDates.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -160,7 +160,7 @@
     <value>161, 22</value>
   </data>
   <data name="tsmiDismissAll.Text" xml:space="preserve">
-    <value>全部消除(&amp;A)</value>
+    <value>全部消除(&amp;D)</value>
   </data>
   <data name="tsmiDismissSelected.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 22</value>
@@ -290,7 +290,7 @@
     <value>True</value>
   </metadata>
   <data name="columnLocation.HeaderText" xml:space="preserve">
-    <value>LN_Server / Pool</value>
+    <value>服务器/池</value>
   </data>
   <data name="columnLocation.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>
@@ -428,10 +428,10 @@
     <value>Segoe UI, 8.25pt</value>
   </data>
   <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>12, 12, 12, 12</value>
+    <value>0, 3, 0, 0</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>786, 336</value>
+    <value>786, 487</value>
   </data>
   <data name="&gt;&gt;toolStripDdbFilterStatus.Name" xml:space="preserve">
     <value>toolStripDdbFilterStatus</value>

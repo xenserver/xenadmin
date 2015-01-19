@@ -135,7 +135,7 @@ SCRATCH_DIR=${ROOT}/scratch
 OUTPUT_DIR=${ROOT}/output
 TEST_DIR=/cygdrive/c/cygwin/tmp
 BUILD_ARCHIVE=${ROOT}/../builds/${get_BUILD_ID}/archive
-SECURE_BUILD_ARCHIVE_UNC=//10.80.13.10/distfiles/distfiles/windowsbuilds/WindowsBuilds/$get_JOB_NAME/$BUILD_NUMBER/
+SECURE_BUILD_ARCHIVE_UNC=//10.80.13.10/distfiles/distfiles/WindowsBuilds
 #XENCENTER_LOGDIR="/cygdrive/c/Users/Administrator/AppData/Roaming/Citrix/XenCenter/logs"
 XENCENTER_LOGDIR="/cygdrive/c/Citrix/XenCenter/logs"
 
@@ -154,8 +154,15 @@ fi
 WEB_XE_PHASE_1=${WEB_LATEST_BUILD}/xe-phase-1
 WEB_XE_PHASE_2=${WEB_LATEST_BUILD}/xe-phase-2
 
-#this is where the build will find stuff from the latest dotnet-packages build
-WEB_DOTNET="http://localhost:8080/job/carbon_${XS_BRANCH}_dotnet-packages/lastSuccessfulBuild/artifact"
+# This is where the build will find stuff from the latest
+# dotnet-packages build. Taking the latest build will mean that
+# rebuilding old versions of xenadmin will break in surprising ways,
+# because they will originally have been build with the latest version
+# at the time. This is not the time to persuade the GUI group to
+# change their ways, but I include this note as a public service for
+# when it all breaks. --Peter, 2014-12-16.
+DOTNET_BASE=${SECURE_BUILD_ARCHIVE_UNC}/carbon_creedence_dotnet-packages
+DOTNET_LOC=$DOTNET_BASE/$(ls $DOTNET_BASE | /usr/bin/sort -n | tail -n 1)
 
 # used to copy results out of the secure build enclave
 BUILD_TOOLS_REPO=git://admin/git/closed/windows/buildtools.git

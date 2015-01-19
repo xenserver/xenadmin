@@ -250,7 +250,7 @@
     <value>111, 23</value>
   </data>
   <data name="toolStripDropDownButtonServerFilter.Text" xml:space="preserve">
-    <value>LN_Filter by S&amp;erver</value>
+    <value>サーバーによるフィルタ(&amp;E)</value>
   </data>
   <data name="toolStripDropDownButtonDateFilter.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -507,7 +507,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnLocation.HeaderText" xml:space="preserve">
-    <value>LN_Server / Pool</value>
+    <value>サーバー/プール</value>
   </data>
   <data name="ColumnLocation.MinimumWidth" type="System.Int32, mscorlib">
     <value>95</value>
@@ -530,7 +530,7 @@
   <data name="ColumnWebPage.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="downloadAndInstallButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="ColumnWebPage.Width" type="System.Int32, mscorlib">
     <value>53</value>
   </data>
   <data name="dataGridViewUpdates.Font" type="System.Drawing.Font, System.Drawing">

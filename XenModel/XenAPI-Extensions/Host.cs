@@ -53,8 +53,15 @@ namespace XenAPI
             Platinum,
             EnterpriseXD,
             PerSocket,     //Added in Clearwater (PR-1589)
-            XenDesktop     //Added in Clearwater (PR-1589) and is new form of "EnterpriseXD"
+            XenDesktop,    //Added in Clearwater (PR-1589) and is new form of "EnterpriseXD"
+            EnterprisePerSocket,   // Added in Creedence (enterprise-per-socket)
+            EnterprisePerUser,     // Added in Creedence (enterprise-per-user)
+            StandardPerSocket,     // Added in Creedence (standard-per-socket)
+            Desktop,               // Added in Creedence (desktop)
+            DesktopPlus            // Added in Creedence (desktop-plus)
         }
+
+        public static string LicenseServerWebConsolePort = "8082";
 
         public override string Name
         {
@@ -81,6 +88,16 @@ namespace XenAPI
                     return Edition.XenDesktop;
                 case "per-socket":
                     return Edition.PerSocket;
+                case "enterprise-per-socket":
+                    return Edition.EnterprisePerSocket;
+                case "enterprise-per-user":
+                    return Edition.EnterprisePerUser;
+                case "standard-per-socket":
+                    return Edition.StandardPerSocket;
+                case "desktop":
+                    return Edition.Desktop;
+                case "desktop-plus":
+                    return Edition.DesktopPlus;
                 default:
                     return Edition.Free;
             }
@@ -120,6 +137,16 @@ namespace XenAPI
                     return "xendesktop";
                 case Edition.PerSocket:
                     return "per-socket";
+                case Edition.EnterprisePerSocket:
+                    return "enterprise-per-socket";
+                case Edition.EnterprisePerUser:
+                    return "enterprise-per-user";
+                case Edition.StandardPerSocket:
+                    return "standard-per-socket";
+                case Edition.Desktop:
+                    return "desktop";
+                case Edition.DesktopPlus:
+                    return "desktop-plus";
                 default:
                     return "free";
             }
@@ -389,6 +416,31 @@ namespace XenAPI
         public static bool RestrictVgpu(Host h)
         {
             return h._RestrictVgpu;
+        }
+
+        private bool _RestrictExportResourceData
+        {
+            get
+            {
+                if (Helpers.CreedenceOrGreater(Connection)) 
+                {
+                    return BoolKeyPreferTrue(license_params, "restrict_export_resource_data");
+                }
+                // Pre-Creedence hosts:
+                // allowed on Per-Socket edition for Clearwater hosts and Advanced, Enterprise and Platinum editions for older hosts
+                var hostEdition = GetEdition(edition);
+                if (hostEdition == Edition.PerSocket || hostEdition == Edition.Advanced ||
+                    hostEdition == Edition.Enterprise || hostEdition == Edition.Platinum)
+                {
+                    return LicenseExpiryUTC < DateTime.UtcNow - Connection.ServerTimeOffset; // restrict if the license has expired
+                }
+                return true;
+            }
+        }
+
+        public static bool RestrictExportResourceData(Host h)
+        {
+            return h._RestrictExportResourceData;
         }
 
         public bool HasPBDTo(SR sr)
@@ -1330,6 +1382,40 @@ namespace XenAPI
             {
                 //for standalone hosts we do not show redundant location info
                 return Helpers.GetPool(Connection) == null ? string.Empty : base.LocationString;
+			}
+		}
+
+        public bool EnterpriseFeaturesEnabled
+        {
+            get
+            {
+                var hostEdition = GetEdition(edition);
+                return EligibleForSupport && (hostEdition == Edition.EnterprisePerSocket || hostEdition == Edition.EnterprisePerUser
+                    || hostEdition == Edition.PerSocket);
+            }
+        }
+
+        public bool DesktopPlusFeaturesEnabled
+        {
+            get
+            {
+                return GetEdition(edition) == Edition.DesktopPlus;
+            }
+        }
+
+        public bool DesktopFeaturesEnabled
+        {
+            get
+            {
+                return GetEdition(edition) == Edition.Desktop;
+            }
+        }
+
+        public bool EligibleForSupport
+        {
+            get
+            {
+                return (Helpers.CreedenceOrGreater(this) &&  GetEdition(edition) != Edition.Free);
             }
         }
 

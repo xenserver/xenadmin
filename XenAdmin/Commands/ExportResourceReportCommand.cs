@@ -36,6 +36,7 @@ using System.Windows.Forms;
 using System.IO;
 using XenAdmin.Core;
 using XenAdmin;
+using XenAPI;
 
 namespace XenAdmin.Commands
 {
@@ -82,15 +83,12 @@ namespace XenAdmin.Commands
 
         private static bool CanExecute(SelectedItem selection)
         {
-            if(selection.Connection != null && selection.Connection.IsConnected && selection.PoolAncestor != null)
-            {
-                if (Helpers.ClearwaterOrGreater(selection.Connection))
-                    return !Helpers.FeatureForbidden(selection.Connection, XenAPI.Host.RestrictHotfixApply);
-                else
-                    return !Helpers.FeatureForbidden(selection.Connection, XenAPI.Host.RestrictWLB);
-            }
-            else
-                return false;
+            bool isPoolOrStandalone = selection.XenObject is Pool 
+                || (selection.XenObject is Host && Helpers.GetPool(selection.Connection) == null);
+
+            if (selection.Connection != null && selection.Connection.IsConnected && isPoolOrStandalone)
+                return !Helpers.FeatureForbidden(selection.Connection, Host.RestrictExportResourceData);
+            return false;
         }
 
         public override string MenuText

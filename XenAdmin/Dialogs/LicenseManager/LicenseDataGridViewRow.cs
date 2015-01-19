@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using XenAdmin.Controls;
 using XenAdmin.Controls.CheckableDataGridView;
 using XenAdmin.Core;
@@ -166,11 +167,15 @@ namespace XenAdmin.Dialogs
                 if (CurrentLicenseState == Dialogs.LicenseStatus.HostState.Unknown)
                     return false;
 
+                if (licenseStatus.PoolLicensingModel == Dialogs.LicenseStatus.LicensingModel.Creedence)
+                    return true;
+
                 Pool pool = Helpers.GetPool(XenObjectHost.Connection);
 
                 if (CurrentLicenseState == Dialogs.LicenseStatus.HostState.Free)
-                    return Dialogs.LicenseStatus.PoolIsMixedFreeAndExpiring(pool);
-
+                    return Dialogs.LicenseStatus.PoolIsMixedFreeAndExpiring(pool)
+                           || licenseStatus.PoolLicensingModel == Dialogs.LicenseStatus.LicensingModel.Clearwater;
+                
                 if (CurrentLicenseState == Dialogs.LicenseStatus.HostState.Licensed)
                     return Dialogs.LicenseStatus.PoolIsPartiallyLicensed(pool)
                            || Dialogs.LicenseStatus.PoolHasMixedLicenses(pool);
@@ -190,7 +195,7 @@ namespace XenAdmin.Dialogs
                             Pool pool = Helpers.GetPool(XenObjectHost.Connection);
                             if (Dialogs.LicenseStatus.PoolIsMixedFreeAndExpiring(pool))
                                 return Messages.POOL_IS_PARTIALLY_LICENSED;
-                            return Messages.UNKNOWN;
+                            return licenseStatus.LicenseEntitlements;
                         }
                     case Dialogs.LicenseStatus.HostState.PartiallyLicensed:
                         return Messages.POOL_IS_PARTIALLY_LICENSED;
@@ -203,16 +208,16 @@ namespace XenAdmin.Dialogs
                             if (Dialogs.LicenseStatus.PoolIsPartiallyLicensed(pool))
                                 return Messages.POOL_IS_PARTIALLY_LICENSED;
 
-                            return Messages.UNKNOWN;
+                            return licenseStatus.LicenseEntitlements;
                         }
                     case Dialogs.LicenseStatus.HostState.Unavailable:
                         return Messages.LICENSE_EXPIRED_NO_LICENSES_AVAILABLE;
                     case Dialogs.LicenseStatus.HostState.Expired:
-                        return Helpers.ClearwaterOrGreater(XenObject.Connection) ? Messages.LICENSE_SA_EXPIRED : Messages.LICENSE_YOUR_LICENCE_HAS_EXPIRED;
+                        return licenseStatus.PoolLicensingModel == Dialogs.LicenseStatus.LicensingModel.Clearwater ? Messages.LICENSE_SA_EXPIRED : Messages.LICENSE_YOUR_LICENCE_HAS_EXPIRED;
                     case Dialogs.LicenseStatus.HostState.RegularGrace:
                     case Dialogs.LicenseStatus.HostState.UpgradeGrace:
                     case Dialogs.LicenseStatus.HostState.ExpiresSoon:
-                        if(Helpers.ClearwaterOrGreater(XenObject.Connection))
+                        if (licenseStatus.PoolLicensingModel == Dialogs.LicenseStatus.LicensingModel.Clearwater)
                             return string.Format(Messages.LICENSE_SA_EXPIRES_IN, licenseStatus.LicenseExpiresIn.FuzzyTime());
                         return string.Format(Messages.LICENSE_YOUR_LICENCE_EXPIRES_IN, licenseStatus.LicenseExpiresIn.FuzzyTime());
                     default:
@@ -236,7 +241,7 @@ namespace XenAdmin.Dialogs
                     case Dialogs.LicenseStatus.HostState.Expired:
                         return Status.Warning;
                     case Dialogs.LicenseStatus.HostState.Free:
-                        return Status.Ok;
+                        return licenseStatus.PoolLicensingModel == Dialogs.LicenseStatus.LicensingModel.PreClearwater ? Status.Ok : Status.Warning;
                     case Dialogs.LicenseStatus.HostState.Licensed:
                         return Status.Ok;
                     case Dialogs.LicenseStatus.HostState.PartiallyLicensed:
@@ -351,6 +356,11 @@ namespace XenAdmin.Dialogs
             }
         }
 
+        public Host.Edition LicenseEdition
+        {
+            get { return licenseStatus.LicenseEdition; }
+        }
+
         private string LicenseStatus
         {
             get
@@ -361,11 +371,19 @@ namespace XenAdmin.Dialogs
                         return Messages.PARTIALLY_LICENSED;
                     case Dialogs.LicenseStatus.HostState.Unavailable:
                     case Dialogs.LicenseStatus.HostState.Expired:
-                        if (Helpers.ClearwaterOrGreater(XenObject.Connection))
+                        if (licenseStatus.PoolLicensingModel == Dialogs.LicenseStatus.LicensingModel.Clearwater)
                             return Messages.LICENSE_UNSUPPORTED;
                         return Messages.LICENSE_EXPIRED;
                     case Dialogs.LicenseStatus.HostState.Free:
-                        return Messages.LICENSE_FREE;
+                        switch (licenseStatus.PoolLicensingModel)
+                        {
+                            case Dialogs.LicenseStatus.LicensingModel.Clearwater:
+                                return Messages.LICENSE_UNSUPPORTED;
+                            case Dialogs.LicenseStatus.LicensingModel.Creedence:
+                                return Messages.LICENSE_EXPIRED;
+                            default:
+                                return Messages.LICENSE_FREE;
+                        }
                     case Dialogs.LicenseStatus.HostState.Licensed:
                         return Messages.LICENSE_LICENSED;
                     case Dialogs.LicenseStatus.HostState.RegularGrace:

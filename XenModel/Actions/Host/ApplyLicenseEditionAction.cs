@@ -202,8 +202,6 @@ namespace XenAdmin.Actions
                         else
                         {
                             Pool.apply_edition(xo.Connection.Session, pool.opaque_ref, Host.GetEditionText(_edition));
-                            //TODO: Look into why this is required. Event.Next returning late? XAPI returning before updated?
-                            Thread.Sleep(200);
                         }
                             
 
