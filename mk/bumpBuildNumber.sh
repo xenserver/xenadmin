@@ -37,8 +37,15 @@ fi
 
 source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
 
-url="${JENKINS_URL}/job/${get_JOB_NAME}/"
-if wget --no-check-certificate --secure-protocol=SSLv2 -nv --method=head "${url}"; then
+if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
+then
+    JENKINS_SERVER=http://tizon-1.xs.cbg.ccsi.eng.citrite.net:8080
+else
+    JENKINS_SERVER=http://tocco.uk.xensource.com:8080
+fi
+
+url="${JENKINS_SERVER}/job/${get_JOB_NAME}/"
+if curl -s --head --fail "${url}"; then
   echo "URL exists: ${url}"
 else
   echo "URL does not exist: ${url}"
@@ -49,8 +56,6 @@ NEXT_BN=$(curl "http://hg.uk.xensource.com/cgi/next-xenadmin?job=$get_JOB_NAME&n
 
 echo NEXT_BN=${NEXT_BN}
 
-set +x
-wget --auth-no-challenge --http-user=user --http-password=$(cat ~/api.token) --no-check-certificate --secure-protocol=SSLv2 --post-data "nextBuildNumber=${NEXT_BN}" --header "Content-Type: application/x-www-form-urlencoded" ${JENKINS_URL}/job/${get_JOB_NAME}/nextbuildnumber/submit
+curl --data "nextBuildNumber=${NEXT_BN}" --header "Content-Type: application/x-www-form-urlencoded" ${JENKINS_SERVER}/job/${get_JOB_NAME}/nextbuildnumber/submit
 
 set +u
-set -x
