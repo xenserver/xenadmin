@@ -32,6 +32,7 @@
 using System;
 using System.Diagnostics;
 using System.Text;
+using System.Windows.Forms;
 using XenAdmin.Controls.CheckableDataGridView;
 using XenAdmin.Controls.SummaryPanel;
 using XenAdmin.Core;
@@ -53,6 +54,8 @@ namespace XenAdmin.Dialogs
     {
         public LicenseManagerSummaryLicenseServerDecorator(SummaryTextComponent component, CheckableDataGridViewRow row) : base(component, row) { }
 
+        private LinkArea linkArea = new LinkArea(0, 0);
+
         public override StringBuilder BuildSummary()
         {
             StringBuilder sb = base.BuildSummary();
@@ -61,8 +64,23 @@ namespace XenAdmin.Dialogs
                 return sb;
 
             sb.AppendLine(Messages.LICENSE_MANAGER_SUMMARY_LICENSE_SERVER);
+            linkArea.Start = sb.Length;
             sb.AppendLine(Row.LicenseServer);
+            linkArea.Length = Row.LicenseServerAddress.ToLower() == "localhost" ? 0 : Row.LicenseServerAddress.Length;
             return sb.AppendLine();
+        }
+
+        public override LinkArea GetLinkArea()
+        {
+            return linkArea;
+        }
+
+        public override string GetLink()
+        {
+            if (string.IsNullOrEmpty(Row.LicenseServer) || Row.LicenseServerAddress.ToLower() == "localhost")
+                return string.Empty;
+
+            return string.Format(Messages.LICENSE_SERVER_WEB_CONSOLE_FORMAT, Row.LicenseServerAddress, XenAPI.Host.LicenseServerWebConsolePort);
         }
     }
 
@@ -102,7 +120,7 @@ namespace XenAdmin.Dialogs
         {
             StringBuilder sb = base.BuildSummary();
 
-            if(Helpers.ClearwaterOrGreater(Row.XenObject.Connection) && Row.CurrentLicenseState == LicenseStatus.HostState.Expired)
+            if(Helpers.ClearwaterOrGreater(Row.XenObject.Connection) && Row.CurrentLicenseState == LicenseStatus.HostState.Free)
                 return sb;
 
             sb.AppendLine(Messages.LICENSE_MANAGER_SUMMARY_LICENSE_EXPIRES);

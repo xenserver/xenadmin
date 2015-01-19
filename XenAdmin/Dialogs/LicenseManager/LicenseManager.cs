@@ -210,9 +210,18 @@ namespace XenAdmin.Dialogs
                                          summaryPanel.WarningVisible = lRow.WarningRequired;
                                          summaryPanel.WarningText = lRow.WarningText;
                                          summaryPanel.SummaryText = summaryComponent;
-                                         summaryPanel.WarningIcon = lRow.RowStatus == LicenseDataGridViewRow.Status.Warning ?
-                                                                                     SystemIcons.Error.ToBitmap() : 
-                                                                                     Resources._000_WarningAlert_h32bit_32;
+                                         switch (lRow.RowStatus)
+                                         {
+                                             case LicenseDataGridViewRow.Status.Information:
+                                                 summaryPanel.WarningIcon = Resources._000_Alert2_h32bit_16;
+                                                 break;
+                                             case LicenseDataGridViewRow.Status.Warning:
+                                                 summaryPanel.WarningIcon = Resources._000_error_h32bit_16;
+                                                 break;
+                                             default:
+                                                 summaryPanel.WarningIcon = Resources._000_Tick_h32bit_16;
+                                                 break;
+                                         }
                                          summaryPanel.InformationVisible = false;
                                          summaryPanel.RunOnUrlClick = runOnUrlClick;
                                      });

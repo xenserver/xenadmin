@@ -436,7 +436,7 @@
     <value>NoControl</value>
   </data>
   <data name="memoryMinutesLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>272, 58</value>
+    <value>372, 58</value>
   </data>
   <data name="memoryMinutesLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 13</value>
@@ -460,7 +460,7 @@
     <value>0</value>
   </data>
   <data name="nudMemoryDurationThreshold.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 56</value>
+    <value>290, 56</value>
   </data>
   <data name="nudMemoryDurationThreshold.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
@@ -490,7 +490,7 @@
     <value>NoControl</value>
   </data>
   <data name="memoryUnitsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>272, 32</value>
+    <value>372, 32</value>
   </data>
   <data name="memoryUnitsLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 13</value>
@@ -514,7 +514,7 @@
     <value>2</value>
   </data>
   <data name="nudMemoryUsage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 30</value>
+    <value>290, 30</value>
   </data>
   <data name="nudMemoryUsage.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 20</value>
@@ -667,7 +667,7 @@
     <value>NoControl</value>
   </data>
   <data name="srMinutesLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>337, 58</value>
+    <value>372, 58</value>
   </data>
   <data name="srMinutesLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 13</value>
@@ -691,7 +691,7 @@
     <value>0</value>
   </data>
   <data name="nudSrMinutes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 56</value>
+    <value>290, 56</value>
   </data>
   <data name="nudSrMinutes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
@@ -721,7 +721,7 @@
     <value>NoControl</value>
   </data>
   <data name="srUnitsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>337, 32</value>
+    <value>372, 32</value>
   </data>
   <data name="srUnitsLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>31, 13</value>
@@ -745,7 +745,7 @@
     <value>2</value>
   </data>
   <data name="nudSrUsage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 30</value>
+    <value>290, 30</value>
   </data>
   <data name="nudSrUsage.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 20</value>
@@ -898,7 +898,7 @@
     <value>NoControl</value>
   </data>
   <data name="DiskMinutesLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>272, 58</value>
+    <value>372, 58</value>
   </data>
   <data name="DiskMinutesLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 13</value>
@@ -922,7 +922,7 @@
     <value>0</value>
   </data>
   <data name="nudDiskDurationThreshold.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 56</value>
+    <value>290, 56</value>
   </data>
   <data name="nudDiskDurationThreshold.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
@@ -952,7 +952,7 @@
     <value>NoControl</value>
   </data>
   <data name="DiskPercentLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>272, 32</value>
+    <value>372, 32</value>
   </data>
   <data name="DiskPercentLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 17</value>
@@ -976,7 +976,7 @@
     <value>2</value>
   </data>
   <data name="nudDiskUsagePercent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 30</value>
+    <value>290, 30</value>
   </data>
   <data name="nudDiskUsagePercent.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 19</value>
@@ -1129,7 +1129,7 @@
     <value>NoControl</value>
   </data>
   <data name="NetPercentLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>271, 30</value>
+    <value>372, 30</value>
   </data>
   <data name="NetPercentLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 17</value>
@@ -1153,7 +1153,7 @@
     <value>0</value>
   </data>
   <data name="nudNetUsagePercent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 28</value>
+    <value>290, 28</value>
   </data>
   <data name="nudNetUsagePercent.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 19</value>
@@ -1180,7 +1180,7 @@
     <value>NoControl</value>
   </data>
   <data name="NetMinutesLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>269, 56</value>
+    <value>372, 56</value>
   </data>
   <data name="NetMinutesLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>17, 17</value>
@@ -1204,7 +1204,7 @@
     <value>2</value>
   </data>
   <data name="nudNetDurationThreshold.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 54</value>
+    <value>290, 54</value>
   </data>
   <data name="nudNetDurationThreshold.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
@@ -1357,7 +1357,7 @@
     <value>NoControl</value>
   </data>
   <data name="cpuPercentLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>272, 24</value>
+    <value>372, 24</value>
   </data>
   <data name="cpuPercentLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>11, 17</value>
@@ -1381,7 +1381,7 @@
     <value>0</value>
   </data>
   <data name="nudCPUUsagePercent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 22</value>
+    <value>290, 22</value>
   </data>
   <data name="nudCPUUsagePercent.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 19</value>
@@ -1408,7 +1408,7 @@
     <value>NoControl</value>
   </data>
   <data name="cpuMinutesLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>271, 55</value>
+    <value>370, 55</value>
   </data>
   <data name="cpuMinutesLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>17, 17</value>
@@ -1432,7 +1432,7 @@
     <value>2</value>
   </data>
   <data name="nudCPUDurationThreshold.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 53</value>
+    <value>290, 53</value>
   </data>
   <data name="nudCPUDurationThreshold.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>

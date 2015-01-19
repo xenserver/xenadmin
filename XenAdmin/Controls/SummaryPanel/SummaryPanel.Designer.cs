@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SummaryPanel));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.titleLabel = new System.Windows.Forms.Label();
-            this.information = new System.Windows.Forms.Label();
+            this.information = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.warningIcon = new System.Windows.Forms.PictureBox();
             this.warningText = new System.Windows.Forms.Label();
@@ -53,7 +53,7 @@
             this.tableLayoutPanel1.Controls.Add(this.information, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.informationLayoutPanel, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.helperLink, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.helperLink, 0, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // titleLabel
@@ -137,7 +137,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.LinkLabel helperLink;
         private System.Windows.Forms.Label titleLabel;
-        private System.Windows.Forms.Label information;
+        private System.Windows.Forms.LinkLabel information;
         private System.Windows.Forms.TableLayoutPanel informationLayoutPanel;
         private System.Windows.Forms.PictureBox informationImage;
         private System.Windows.Forms.Label informationMessage;
