@@ -112,14 +112,18 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="okButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="okButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="okButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
@@ -127,7 +131,7 @@
   <data name="okButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 27</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="okButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -138,7 +142,7 @@
     <value>okButton</value>
   </data>
   <data name="&gt;&gt;okButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;okButton.Parent" xml:space="preserve">
     <value>buttonsLayoutPanel</value>
@@ -148,6 +152,9 @@
   </data>
   <data name="cancelButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="cancelButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 3</value>
@@ -165,7 +172,7 @@
     <value>cancelButton</value>
   </data>
   <data name="&gt;&gt;cancelButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cancelButton.Parent" xml:space="preserve">
     <value>buttonsLayoutPanel</value>
@@ -176,7 +183,6 @@
   <data name="mainLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="mainLayoutPanel.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
@@ -223,7 +229,7 @@
     <value>licenseServerNameLabel</value>
   </data>
   <data name="&gt;&gt;licenseServerNameLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;licenseServerNameLabel.Parent" xml:space="preserve">
     <value>licenseServerLayoutPanel</value>
@@ -247,7 +253,7 @@
     <value>licenseServerNameTextBox</value>
   </data>
   <data name="&gt;&gt;licenseServerNameTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;licenseServerNameTextBox.Parent" xml:space="preserve">
     <value>licenseServerLayoutPanel</value>
@@ -274,7 +280,7 @@
     <value>licenseServerPortTextBox</value>
   </data>
   <data name="&gt;&gt;licenseServerPortTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;licenseServerPortTextBox.Parent" xml:space="preserve">
     <value>licenseServerLayoutPanel</value>
@@ -310,7 +316,7 @@
     <value>colonLabel</value>
   </data>
   <data name="&gt;&gt;colonLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;colonLabel.Parent" xml:space="preserve">
     <value>licenseServerLayoutPanel</value>
@@ -343,7 +349,7 @@
     <value>licenseServerLayoutPanel</value>
   </data>
   <data name="&gt;&gt;licenseServerLayoutPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;licenseServerLayoutPanel.Parent" xml:space="preserve">
     <value>mainLayoutPanel</value>
@@ -359,6 +365,9 @@
   </data>
   <data name="mainLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="mainLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="mainLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 8</value>
@@ -376,7 +385,7 @@
     <value>mainLabel</value>
   </data>
   <data name="&gt;&gt;mainLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mainLabel.Parent" xml:space="preserve">
     <value>mainLayoutPanel</value>
@@ -421,7 +430,7 @@
     <value>perSocketRadioButton</value>
   </data>
   <data name="&gt;&gt;perSocketRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;perSocketRadioButton.Parent" xml:space="preserve">
     <value>editionLayoutPanel</value>
@@ -454,7 +463,7 @@
     <value>advancedRadioButton</value>
   </data>
   <data name="&gt;&gt;advancedRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;advancedRadioButton.Parent" xml:space="preserve">
     <value>editionLayoutPanel</value>
@@ -487,7 +496,7 @@
     <value>enterpriseRadioButton</value>
   </data>
   <data name="&gt;&gt;enterpriseRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;enterpriseRadioButton.Parent" xml:space="preserve">
     <value>editionLayoutPanel</value>
@@ -520,7 +529,7 @@
     <value>platinumRadioButton</value>
   </data>
   <data name="&gt;&gt;platinumRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;platinumRadioButton.Parent" xml:space="preserve">
     <value>editionLayoutPanel</value>
@@ -553,13 +562,181 @@
     <value>xenDesktopEnterpriseRadioButton</value>
   </data>
   <data name="&gt;&gt;xenDesktopEnterpriseRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;xenDesktopEnterpriseRadioButton.Parent" xml:space="preserve">
     <value>editionLayoutPanel</value>
   </data>
   <data name="&gt;&gt;xenDesktopEnterpriseRadioButton.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="enterprisePerSocketRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="enterprisePerSocketRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="enterprisePerSocketRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="enterprisePerSocketRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 143</value>
+  </data>
+  <data name="enterprisePerSocketRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>197, 22</value>
+  </data>
+  <data name="enterprisePerSocketRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="enterprisePerSocketRadioButton.Text" xml:space="preserve">
+    <value>XenServer Enterprise Per-Socket(&amp;N)</value>
+  </data>
+  <data name="&gt;&gt;enterprisePerSocketRadioButton.Name" xml:space="preserve">
+    <value>enterprisePerSocketRadioButton</value>
+  </data>
+  <data name="&gt;&gt;enterprisePerSocketRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;enterprisePerSocketRadioButton.Parent" xml:space="preserve">
+    <value>editionLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;enterprisePerSocketRadioButton.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="enterprisePerUserRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="enterprisePerUserRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="enterprisePerUserRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="enterprisePerUserRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 171</value>
+  </data>
+  <data name="enterprisePerUserRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 22</value>
+  </data>
+  <data name="enterprisePerUserRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="enterprisePerUserRadioButton.Text" xml:space="preserve">
+    <value>XenServer Enterprise Per-User(&amp;E)</value>
+  </data>
+  <data name="enterprisePerUserRadioButton.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;enterprisePerUserRadioButton.Name" xml:space="preserve">
+    <value>enterprisePerUserRadioButton</value>
+  </data>
+  <data name="&gt;&gt;enterprisePerUserRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;enterprisePerUserRadioButton.Parent" xml:space="preserve">
+    <value>editionLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;enterprisePerUserRadioButton.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="desktopPlusRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="desktopPlusRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="desktopPlusRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="desktopPlusRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 199</value>
+  </data>
+  <data name="desktopPlusRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 22</value>
+  </data>
+  <data name="desktopPlusRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="desktopPlusRadioButton.Text" xml:space="preserve">
+    <value>XenServer Desktop+(&amp;P)</value>
+  </data>
+  <data name="&gt;&gt;desktopPlusRadioButton.Name" xml:space="preserve">
+    <value>desktopPlusRadioButton</value>
+  </data>
+  <data name="&gt;&gt;desktopPlusRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;desktopPlusRadioButton.Parent" xml:space="preserve">
+    <value>editionLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;desktopPlusRadioButton.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="desktopRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="desktopRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="desktopRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="desktopRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 227</value>
+  </data>
+  <data name="desktopRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 22</value>
+  </data>
+  <data name="desktopRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="desktopRadioButton.Text" xml:space="preserve">
+    <value>XenServer Desktop(&amp;D)</value>
+  </data>
+  <data name="&gt;&gt;desktopRadioButton.Name" xml:space="preserve">
+    <value>desktopRadioButton</value>
+  </data>
+  <data name="&gt;&gt;desktopRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;desktopRadioButton.Parent" xml:space="preserve">
+    <value>editionLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;desktopRadioButton.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="standardPerSocketRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="standardPerSocketRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="standardPerSocketRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="standardPerSocketRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 255</value>
+  </data>
+  <data name="standardPerSocketRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 22</value>
+  </data>
+  <data name="standardPerSocketRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="standardPerSocketRadioButton.Text" xml:space="preserve">
+    <value>XenServer Standard Per-Socket(&amp;S)</value>
+  </data>
+  <data name="&gt;&gt;standardPerSocketRadioButton.Name" xml:space="preserve">
+    <value>standardPerSocketRadioButton</value>
+  </data>
+  <data name="&gt;&gt;standardPerSocketRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;standardPerSocketRadioButton.Parent" xml:space="preserve">
+    <value>editionLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;standardPerSocketRadioButton.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="editionLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -573,6 +750,9 @@
   <data name="editionLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 19</value>
   </data>
+  <data name="editionLayoutPanel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 4</value>
+  </data>
   <data name="editionLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>495, 125</value>
   </data>
@@ -583,7 +763,7 @@
     <value>editionLayoutPanel</value>
   </data>
   <data name="&gt;&gt;editionLayoutPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;editionLayoutPanel.Parent" xml:space="preserve">
     <value>editionsGroupBox</value>
@@ -613,7 +793,7 @@
     <value>editionsGroupBox</value>
   </data>
   <data name="&gt;&gt;editionsGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;editionsGroupBox.Parent" xml:space="preserve">
     <value>mainLayoutPanel</value>
@@ -649,7 +829,7 @@
     <value>buttonsLayoutPanel</value>
   </data>
   <data name="&gt;&gt;buttonsLayoutPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonsLayoutPanel.Parent" xml:space="preserve">
     <value>mainLayoutPanel</value>
@@ -682,7 +862,7 @@
     <value>mainLayoutPanel</value>
   </data>
   <data name="&gt;&gt;mainLayoutPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mainLayoutPanel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -693,9 +873,9 @@
   <data name="mainLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="licenseServerLayoutPanel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="mainLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="editionsGroupBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="buttonsLayoutPanel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
   </data>

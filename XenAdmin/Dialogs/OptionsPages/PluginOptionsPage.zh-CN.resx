@@ -295,13 +295,13 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="refreshButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 23</value>
+    <value>145, 26</value>
   </data>
   <data name="refreshButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="refreshButton.Text" xml:space="preserve">
-    <value>扫描插件文件夹(&amp;S)</value>
+    <value>扫描 Plugins 文件夹(&amp;S)</value>
   </data>
   <data name="&gt;&gt;refreshButton.Name" xml:space="preserve">
     <value>refreshButton</value>
@@ -364,7 +364,7 @@
     <value>1</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>正在扫描插件文件夹... 请稍候。</value>
+    <value>正在扫描 Plugins 文件夹... 请稍候。</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>

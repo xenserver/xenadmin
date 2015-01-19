@@ -408,7 +408,7 @@
     <value>MiddleRight</value>
   </data>
   <data name="resourceSelectButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 1</value>
+    <value>175, 1</value>
   </data>
   <data name="resourceSelectButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>

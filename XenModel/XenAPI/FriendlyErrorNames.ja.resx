@@ -520,7 +520,7 @@
     <value>デバイス名 {0} が無効です。</value>
   </data>
   <data name="INVALID_EDITION" xml:space="preserve">
-    <value>エディションの指定が無効です。free、enterprise、または platinum である必要があります。</value>
+    <value>エディションの指定が無効です。</value>
   </data>
   <data name="INVALID_FEATURE_STRING" xml:space="preserve">
     <value>機能文字列の指定が無効です。</value>
@@ -1245,7 +1245,7 @@
     <value>サポートされないカーネル: 2.6 でも 3.x でもありません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_449" xml:space="preserve">
-    <value>LN_tapdisk experienced an error</value>
+    <value>tapdisk でエラーが発生しました</value>
   </data>
   <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
     <value>VDI が使用できません。</value>
@@ -1431,7 +1431,7 @@
     <value>この SR はローカル キャッシュ SR として使用されています。</value>
   </data>
   <data name="SR_NOT_ATTACHED" xml:space="preserve">
-    <value>LN_The SR is not attached.</value>
+    <value>SR が接続されていません。</value>
   </data>
   <data name="SR_NOT_EMPTY" xml:space="preserve">
     <value>SR が空でないため、SR 処理を実行できません。</value>
@@ -1674,13 +1674,13 @@
     <value>この処理はテンプレートには無効です。</value>
   </data>
   <data name="VM_LACKS_FEATURE_SHUTDOWN" xml:space="preserve">
-    <value>LN_You attempted an operation which needs the cooperative shutdown feature on a VM which lacks it.</value>
+    <value>協調的なシャットダウン機能が必要な操作を選択しましたが、VM がこの機能をサポートしません。</value>
   </data>
   <data name="VM_LACKS_FEATURE_SUSPEND" xml:space="preserve">
-    <value>LN_You attempted an operation which needs the VM cooperative suspend feature on a VM which lacks it.</value>
+    <value>協調的な一時停止機能が必要な操作を選択しましたが、VM がこの機能をサポートしません。</value>
   </data>
   <data name="VM_LACKS_FEATURE_VCPU_HOTPLUG" xml:space="preserve">
-    <value>LN_You attempted an operation which needs the VM hotplug-vcpu feature on a VM which lacks it.</value>
+    <value>vCPU のホットプラグ機能が必要な操作を選択しましたが、VM がこの機能をサポートしません。</value>
   </data>
   <data name="VM_MEMORY_SIZE_TOO_LOW" xml:space="preserve">
     <value>指定した VM は、メモリが足りないため起動できません。</value>

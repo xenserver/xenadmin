@@ -199,7 +199,7 @@
     <value>1</value>
   </data>
   <data name="nudDom0MemUsage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>290, 22</value>
+    <value>190, 22</value>
   </data>
   <data name="nudDom0MemUsage.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 20</value>
@@ -226,7 +226,7 @@
     <value>NoControl</value>
   </data>
   <data name="Dom0MemoryDurationThresholdLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>372, 50</value>
+    <value>272, 50</value>
   </data>
   <data name="Dom0MemoryDurationThresholdLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 17</value>
@@ -250,7 +250,7 @@
     <value>1</value>
   </data>
   <data name="nudDom0MemoryDurationThreshold.Location" type="System.Drawing.Point, System.Drawing">
-    <value>290, 48</value>
+    <value>190, 48</value>
   </data>
   <data name="nudDom0MemoryDurationThreshold.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
@@ -280,7 +280,7 @@
     <value>NoControl</value>
   </data>
   <data name="Dom0MemoryUsagePercentLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>372, 24</value>
+    <value>272, 24</value>
   </data>
   <data name="Dom0MemoryUsagePercentLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>14, 17</value>
@@ -667,7 +667,7 @@
     <value>NoControl</value>
   </data>
   <data name="srMinutesLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>337, 58</value>
+    <value>272, 58</value>
   </data>
   <data name="srMinutesLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 13</value>
@@ -691,7 +691,7 @@
     <value>0</value>
   </data>
   <data name="nudSrMinutes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 56</value>
+    <value>190, 56</value>
   </data>
   <data name="nudSrMinutes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
@@ -721,7 +721,7 @@
     <value>NoControl</value>
   </data>
   <data name="srUnitsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>337, 32</value>
+    <value>272, 32</value>
   </data>
   <data name="srUnitsLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>31, 13</value>
@@ -745,7 +745,7 @@
     <value>2</value>
   </data>
   <data name="nudSrUsage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 30</value>
+    <value>190, 30</value>
   </data>
   <data name="nudSrUsage.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 20</value>
