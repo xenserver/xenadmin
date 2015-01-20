@@ -26,6 +26,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         #region Accessors
         public List<Host> SelectedMasters { private get; set; }
+        public List<Host> SelectedServers { private get; set; }
         public UpdateType SelectedUpdateType { private get; set; }
         public string SelectedNewPatch { private get; set; }
         public Pool_patch SelectedExistingPatch { private get; set; }
@@ -106,6 +107,22 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                             uploadActions.Add(action);
                         }
+                    }
+                    break;
+
+                case UpdateType.NewSuppPack:
+                    foreach (Host selectedServer in masters)
+                    {
+                        UploadSupplementalPackAction action = new UploadSupplementalPackAction(
+                            selectedServer.Connection, 
+                            SelectedServers.Where(s => s.Connection == selectedServer.Connection).ToList(), 
+                            SelectedNewPatch,
+                            true);
+
+                        action.Changed += singleAction_Changed;
+                        action.Completed += singleAction_Completed;
+
+                        uploadActions.Add(action);
                     }
                     break;
             }

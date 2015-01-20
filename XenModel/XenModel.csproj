@@ -83,6 +83,7 @@
     <Compile Include="Actions\Pool\CreatePoolAction.cs" />
     <Compile Include="Actions\Pool\PoolAction.cs" />
     <Compile Include="Actions\Pool\SetGpuPlacementPolicyAction.cs" />
+    <Compile Include="Actions\Pool\UploadSupplementalPackAction.cs" />
     <Compile Include="Actions\Pool_Patch\ApplyPatchAction.cs" />
     <Compile Include="Actions\Pool_Patch\CopyPatchFromHostToOther.cs" />
     <Compile Include="Actions\Pool_Patch\UploadPatchAction.cs" />
