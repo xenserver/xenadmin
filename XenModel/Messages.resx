@@ -8423,6 +8423,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE" xml:space="preserve">
     <value>Update prechecks are performed to verify that the update "{0}" can be applied to the servers.</value>
   </data>
+  <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME" xml:space="preserve">
+    <value>Update prechecks are performed to verify that the selected update can be applied to the servers.</value>
+  </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_RESOLVE" xml:space="preserve">
     <value>Resolve</value>
   </data>
@@ -8442,7 +8445,10 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>Choose an existing update to install or upload a new one</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
-    <value>XenServer Updates|*.xsupdate;*.xsoem</value>
+    <value>XenServer Updates|*.xsupdate;*.xsoem|Supplemental Packs (*.iso)|*.iso</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS" xml:space="preserve">
+    <value>Cannot install supplemental packs on this XenServer version</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>Subscription Advantage required</value>
@@ -8498,7 +8504,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>{0} 
 Date modified: {1}
 Date created: {2}
-Size: {3} MB</value>
+Size: {3}</value>
   </data>
   <data name="PATCH_FOR_XENSERVER_VERSION" xml:space="preserve">
     <value>This patch is for XenServer {0}.</value>
@@ -10273,6 +10279,18 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="SUPP_PACK_MISSING_ON" xml:space="preserve">
     <value>{0} (not installed on {1})</value>
   </data>
+  <data name="SUPP_PACK_TEMP_VDI_DESCRIPTION" xml:space="preserve">
+    <value>Temporary virtual disk used for the installation of Supplemental Packs</value>
+  </data>
+  <data name="SUPP_PACK_UPLOADED" xml:space="preserve">
+    <value>File uploaded to '{0}'</value>
+  </data>
+  <data name="SUPP_PACK_UPLOADING" xml:space="preserve">
+    <value>Uploading file</value>
+  </data>
+  <data name="SUPP_PACK_UPLOADING_TO" xml:space="preserve">
+    <value>Uploading to '{0}'</value>
+  </data>
   <data name="SUPP_PACK_VERSIONS_DIFFER" xml:space="preserve">
     <value>{0} (not the same version on all hosts)</value>
   </data>
@@ -10770,7 +10788,7 @@ Check your settings and try again.</value>
     <value>{0}: The VM '{1}' uses local storage and cannot be migrated.</value>
   </data>
   <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
-    <value>The selected file does not have a valid extension. Valid extensions are: *.xsoem and *.xsupdate</value>
+    <value>The selected file does not have a valid extension. Valid extensions are: *.xsoem, *.xsupdate and *.iso</value>
   </data>
   <data name="UPDATES_WIZARD_NOT_ENOUGH_SPACE" xml:space="preserve">
     <value>This storage repository does not have enough space to suspend the required VMs.</value>

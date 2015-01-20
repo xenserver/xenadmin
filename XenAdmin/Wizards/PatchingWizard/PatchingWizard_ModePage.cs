@@ -85,7 +85,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 case UpdateType.NewRetail:
                 case UpdateType.Existing:
-                    textBoxLog.Text = new PatchingWizardModeGuidanceBuilder().ModeRetailPatch(SelectedServers, Patch);
+                    textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeRetailPatch(SelectedServers, Patch);
                     if (Helpers.MidnightRideOrGreater(SelectedServers[0].Connection))
                     {
                         AutomaticRadioButton.Enabled = true;
@@ -100,36 +100,15 @@ namespace XenAdmin.Wizards.PatchingWizard
                 case UpdateType.NewOem:
                     ManualRadioButton.Checked = true;
                     AutomaticRadioButton.Enabled = false;
-                    textBoxLog.Text = ModeNewOem(SelectedServers);
+                    textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeNewOem(SelectedServers);
+                    break;
+                case UpdateType.NewSuppPack:
+                    AutomaticRadioButton.Enabled = true;
+                    AutomaticRadioButton.Checked = true;
+                    textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeSuppPack(SelectedServers);
                     break;
             }
         }
-
-        private static string ModeNewOem(List<Host> hosts)
-        {
-            StringBuilder sbLog = new StringBuilder();
-
-            sbLog.AppendLine(Messages.PATCHING_EJECT_CDS);
-
-            //Add master
-            Host master = Helpers.GetMaster(hosts[0].Connection);
-            Pool pool = Helpers.GetPool(master.Connection);
-            if (pool != null && pool.ha_enabled)
-            {
-                sbLog.AppendLine(Messages.PATCHING_WARNING_HA);
-            }
-            sbLog.AppendLine(Messages.PATCHINGWIZARD_MODEPAGE_RESTARTSERVERS);
-            sbLog.AppendFormat("\t{0}\r\n", master.Name);
-            hosts.Remove(master);
-            //Add slaves
-            foreach (Host host in hosts)
-            {
-                sbLog.AppendFormat("\t{0}\r\n", host.Name);
-            }
-            return sbLog.ToString();
-        }
-
-
 
         public override bool EnableNext()
         {

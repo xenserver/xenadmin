@@ -38,11 +38,46 @@ namespace XenAdmin.Wizards.PatchingWizard
 {
     public class PatchingWizardModeGuidanceBuilder
     {
-        public string ModeRetailPatch(List<Host> servers, Pool_patch patch)
+        public static string ModeRetailPatch(List<Host> servers, Pool_patch patch)
+        {
+            return Build(servers, patch.after_apply_guidance);
+        }
+
+        public static string ModeSuppPack(List<Host> servers)
+        {
+            List<after_apply_guidance> guidance = new List<after_apply_guidance> { after_apply_guidance.restartHost };
+            return Build(servers, guidance);
+        }
+
+        public static string ModeNewOem(List<Host> hosts)
         {
             StringBuilder sbLog = new StringBuilder();
 
-            foreach (after_apply_guidance guide in patch.after_apply_guidance)
+            sbLog.AppendLine(Messages.PATCHING_EJECT_CDS);
+
+            //Add master
+            Host master = Helpers.GetMaster(hosts[0].Connection);
+            Pool pool = Helpers.GetPool(master.Connection);
+            if (pool != null && pool.ha_enabled)
+            {
+                sbLog.AppendLine(Messages.PATCHING_WARNING_HA);
+            }
+            sbLog.AppendLine(Messages.PATCHINGWIZARD_MODEPAGE_RESTARTSERVERS);
+            sbLog.AppendFormat("\t{0}\r\n", master.Name);
+            hosts.Remove(master);
+            //Add slaves
+            foreach (Host host in hosts)
+            {
+                sbLog.AppendFormat("\t{0}\r\n", host.Name);
+            }
+            return sbLog.ToString();
+        }
+
+        private static string Build(List<Host> servers, List<after_apply_guidance> guidance)
+        {
+            StringBuilder sbLog = new StringBuilder();
+
+            foreach (after_apply_guidance guide in guidance)
             {
                 sbLog.AppendLine(GetGuideMessage(guide));
 
@@ -78,13 +113,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
             }
 
-            if (patch.after_apply_guidance.Count == 0)
+            if (guidance.Count == 0)
                 sbLog.Append(Messages.PATCHINGWIZARD_MODEPAGE_NOACTION);
 
             return sbLog.ToString();
         }
 
-        private string GetGuideMessage(after_apply_guidance guidance)
+        private static string GetGuideMessage(after_apply_guidance guidance)
         {
             switch (guidance)
             {

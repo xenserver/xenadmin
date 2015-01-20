@@ -44,6 +44,8 @@ namespace XenAPI
 
         public delegate void put_ss(HTTP.UpdateProgressDelegate progressDelegate, HTTP.FuncBool cancellingDelegate, int timeout_ms,
             string hostname, IWebProxy proxy, string path, string arg1, string arg2);
+        public delegate void put_sss(HTTP.UpdateProgressDelegate progressDelegate, HTTP.FuncBool cancellingDelegate, int timeout_ms,
+            string hostname, IWebProxy proxy, string path, string arg1, string arg2, string arg3);
         public delegate void put_ssbbs(HTTP.UpdateProgressDelegate progressDelegate, HTTP.FuncBool cancellingDelegate, int timeout_ms,
             string hostname, IWebProxy proxy, string path, string arg1, string arg2, bool arg3, bool arg4, string arg5);
     }
