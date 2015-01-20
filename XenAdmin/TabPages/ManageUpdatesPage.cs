@@ -314,7 +314,7 @@ namespace XenAdmin.TabPages
             }
 
             appliesCell.Value = alert.AppliesTo;
-            dateCell.Value = HelpersGUI.DateTimeToString(alert.Timestamp.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true);
+            dateCell.Value = HelpersGUI.DateTimeToString(alert.Timestamp.ToLocalTime(), Messages.DATEFORMAT_DMY, true);
             newRow.Cells.AddRange(expanderCell, detailCell, appliesCell, dateCell, actionCell);
 
             return newRow;
