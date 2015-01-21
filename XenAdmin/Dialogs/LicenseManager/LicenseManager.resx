@@ -146,7 +146,7 @@
     <value>True</value>
   </metadata>
   <data name="productVersionColumn.HeaderText" xml:space="preserve">
-    <value>Product Version</value>
+    <value>License</value>
   </data>
   <data name="productVersionColumn.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>

@@ -538,7 +538,7 @@
     <value>Toolstack uptime</value>
   </data>
   <data name="Label-host.edition" xml:space="preserve">
-    <value>Edition</value>
+    <value>License</value>
   </data>
   <data name="Label-host.edition-advanced" xml:space="preserve">
     <value>Citrix XenServer Advanced Edition</value>
@@ -1629,7 +1629,7 @@
     <value>Potential Reclaimed Memory</value>
   </data>
   <data name="Label-host.edition-per-socket" xml:space="preserve">
-    <value>Citrix XenServer Per-Socket Edition</value>
+    <value>Citrix XenServer Per-Socket</value>
   </data>
   <data name="Label-host.edition-xendesktop" xml:space="preserve">
     <value>Citrix XenServer for XenDesktop</value>
@@ -1707,13 +1707,13 @@
     <value>The license server is an out-of-date version.</value>
   </data>
   <data name="Label-host.edition-enterprise-per-socket" xml:space="preserve">
-    <value>Citrix XenServer Enterprise Per Socket Edition</value>
+    <value>Citrix XenServer Enterprise Per Socket</value>
   </data>
   <data name="Label-host.edition-enterprise-per-user" xml:space="preserve">
-    <value>Citrix XenServer Enterprise Per User Edition</value>
+    <value>Citrix XenServer Enterprise Per User</value>
   </data>
   <data name="Label-host.edition-standard-per-socket" xml:space="preserve">
-    <value>Citrix XenServer Standard Per Socket Edition</value>
+    <value>Citrix XenServer Standard Per Socket</value>
   </data>
   <data name="Label-host.edition-xendesktop-platinum" xml:space="preserve">
     <value>Citrix XenDesktop Platinum</value>
@@ -1737,9 +1737,9 @@
     <value>Help on Licensing</value>
   </data>
   <data name="Label-host.edition-desktop" xml:space="preserve">
-    <value>Citrix XenServer Desktop Edition</value>
+    <value>Citrix XenApp/XenDesktop</value>
   </data>
   <data name="Label-host.edition-desktop-plus" xml:space="preserve">
-    <value>Citrix XenServer Desktop+ Edition</value>
+    <value>Citrix XenApp/XenDesktop Platinum</value>
   </data>
 </root>

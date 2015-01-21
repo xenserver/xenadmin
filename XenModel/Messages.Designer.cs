@@ -18044,7 +18044,7 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Eligible for support 
-        ///Desktop features enabled.
+        ///XenApp/XenDesktop features enabled.
         /// </summary>
         public static string LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED {
             get {
@@ -18054,7 +18054,7 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Eligible for support 
-        ///Desktop+ features enabled.
+        ///XenApp/XenDesktop Platinum features enabled.
         /// </summary>
         public static string LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED {
             get {
@@ -31744,7 +31744,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update succesfully uploaded to selected server(s).
+        ///   Looks up a localized string similar to Update successfully uploaded to selected server(s).
         /// </summary>
         public static string UPLOAD_PATCH_END_DESCRIPTION {
             get {

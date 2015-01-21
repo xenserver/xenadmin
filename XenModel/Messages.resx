@@ -12319,11 +12319,10 @@ Standard features only</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
-Desktop features enabled</value>
+XenApp/XenDesktop features enabled</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
-Desktop+ features enabled</value>
+XenApp/XenDesktop Platinum features enabled</value>
   </data>
 </root>
-
