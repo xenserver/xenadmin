@@ -121,7 +121,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
                 page_RbacWarning.AddPermissionChecks(xenConnection, createCheck, affinityCheck, memCheck);
 
-                if (Helpers.GpuCapability(connection))
+                if (Helpers.ClearwaterSp1OrGreater(xenConnection) && Helpers.GpuCapability(xenConnection))
                 {
                     var vgpuCheck = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_VM_WIZARD_GPU);
                     vgpuCheck.ApiCallsToCheck.Add("vgpu.create");
@@ -203,7 +203,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 page_7_Networking.SelectedTemplate = selectedTemplate;
 
                 RemovePage(pageVgpu);
-                gpuCapability = Helpers.GpuCapability(xenConnection) && selectedTemplate.CanHaveGpu;
+                gpuCapability = Helpers.ClearwaterSp1OrGreater(xenConnection) && Helpers.GpuCapability(xenConnection) && selectedTemplate.CanHaveGpu;
                 if (gpuCapability)
                     AddAfterPage(page_5_CpuMem, pageVgpu);
 

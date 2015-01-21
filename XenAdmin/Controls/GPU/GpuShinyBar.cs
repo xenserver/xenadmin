@@ -76,7 +76,8 @@ namespace XenAdmin.Controls.GPU
             Rectangle barArea = barRect;
 
             // Grid
-            DrawGrid(g, barArea, barArea.Width);
+            if (maxCapacity > 1)
+                DrawGrid(g, barArea, barArea.Width);
 
             double left = barArea.Left;
 
