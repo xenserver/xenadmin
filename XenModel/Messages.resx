@@ -4836,6 +4836,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="FORCE_CLOSE_PLUGIN_PROMPT" xml:space="preserve">
     <value>Plugin {0} has not yet responded to your cancel request. Would you like to force close the process or allow it to continue to run in the background?</value>
   </data>
+  <data name="FORCE_ENABLE_RDP" xml:space="preserve">
+    <value>Would you like to turn on Remote Desktop in this VM, and then connect to it over Remote Desktop?</value>
+  </data>
   <data name="FORCE_REBOOT" xml:space="preserve">
     <value>Force Reboot</value>
   </data>
@@ -11405,6 +11408,9 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   </data>
   <data name="VNC_RDESKTOP" xml:space="preserve">
     <value>Sw&amp;itch to Remote Desktop</value>
+  </data>
+  <data name="VNC_RDESKTOP_TURN_ON" xml:space="preserve">
+    <value>Turn &amp;on Remote Desktop</value>
   </data>
   <data name="VNC_REDOCK" xml:space="preserve">
     <value>&amp;Redock</value>

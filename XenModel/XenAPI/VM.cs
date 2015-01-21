@@ -3581,7 +3581,7 @@ namespace XenAPI
 
         /// <summary>
         /// List all the SR's that are required for the VM to be recovered
-        /// First published in XenServer Creedence.
+        /// First published in .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -3593,7 +3593,7 @@ namespace XenAPI
 
         /// <summary>
         /// List all the SR's that are required for the VM to be recovered
-        /// First published in XenServer Creedence.
+        /// First published in .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -3703,6 +3703,34 @@ namespace XenAPI
         public static XenRef<Task> async_query_services(Session session, string _vm)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_query_services(session.uuid, (_vm != null) ? _vm : "").parse());
+        }
+
+        /// <summary>
+        /// Call a XenAPI plugin on this vm
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_plugin">The name of the plugin</param>
+        /// <param name="_fn">The name of the function within the plugin</param>
+        /// <param name="_args">Arguments for the function</param>
+        public static string call_plugin(Session session, string _vm, string _plugin, string _fn, Dictionary<string, string> _args)
+        {
+            return (string)session.proxy.vm_call_plugin(session.uuid, (_vm != null) ? _vm : "", (_plugin != null) ? _plugin : "", (_fn != null) ? _fn : "", Maps.convert_to_proxy_string_string(_args)).parse();
+        }
+
+        /// <summary>
+        /// Call a XenAPI plugin on this vm
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_plugin">The name of the plugin</param>
+        /// <param name="_fn">The name of the function within the plugin</param>
+        /// <param name="_args">Arguments for the function</param>
+        public static XenRef<Task> async_call_plugin(Session session, string _vm, string _plugin, string _fn, Dictionary<string, string> _args)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vm_call_plugin(session.uuid, (_vm != null) ? _vm : "", (_plugin != null) ? _plugin : "", (_fn != null) ? _fn : "", Maps.convert_to_proxy_string_string(_args)).parse());
         }
 
         /// <summary>

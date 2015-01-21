@@ -190,7 +190,7 @@
     <value>4</value>
   </data>
   <data name="checkBoxDisableRDPPolling.Text" xml:space="preserve">
-    <value>E&amp;nable Remote Desktop console scanning</value>
+    <value>E&amp;nable Remote Desktop console scanning (XenServer 6.5 and earlier)</value>
   </data>
   <data name="&gt;&gt;checkBoxDisableRDPPolling.Name" xml:space="preserve">
     <value>checkBoxDisableRDPPolling</value>

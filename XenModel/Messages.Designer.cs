@@ -13799,6 +13799,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Would you like to turn on Remote Desktop in this VM, and then connect to it over Remote Desktop?.
+        /// </summary>
+        public static string FORCE_ENABLE_RDP {
+            get {
+                return ResourceManager.GetString("FORCE_ENABLE_RDP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Force Reboot.
         /// </summary>
         public static string FORCE_REBOOT {
@@ -33150,6 +33159,15 @@ namespace XenAdmin {
         public static string VNC_RDESKTOP {
             get {
                 return ResourceManager.GetString("VNC_RDESKTOP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turn &amp;on Remote Desktop.
+        /// </summary>
+        public static string VNC_RDESKTOP_TURN_ON {
+            get {
+                return ResourceManager.GetString("VNC_RDESKTOP_TURN_ON", resourceCulture);
             }
         }
         

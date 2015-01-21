@@ -438,6 +438,25 @@ namespace XenAdmin.Core
                 HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
         }
 
+        /// Creedence is ver. 2.0.0
+        /// <param name="host">May be null, in which case true is returned.</param>
+        public static bool CreamOrGreater(Host host)
+        {
+            if (host == null)
+                return true;
+
+            string platform_version = HostPlatformVersion(host);
+            return
+                platform_version != null && productVersionCompare(platform_version, "1.9.90") > 0 ||
+                HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+        }
+
+        /// <param name="conn">May be null, in which case true is returned.</param>
+        public static bool CreamOrGreater(IXenConnection conn)
+        {
+            return conn == null ? true : CreamOrGreater(Helpers.GetMaster(conn));
+        }
+
         /// Clearwater is ver. 1.7.0
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool IsClearwater(IXenConnection conn)
