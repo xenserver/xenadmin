@@ -464,6 +464,11 @@ namespace XenAPI
             }
         }
 
+        public bool CanHaveVGpu
+        {
+            get { return CanHaveGpu; }
+        }
+
         void set_other_config(string key, string value)
         {
             Dictionary<string, string> new_other_config =

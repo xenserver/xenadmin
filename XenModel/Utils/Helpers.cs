@@ -1901,27 +1901,21 @@ namespace XenAdmin.Core
 
        public static bool GpuCapability(IXenConnection connection)
        {
-           if (!FeatureForbidden(connection, Host.RestrictGpu))
-           {
-               var pool = GetPoolOfOne(connection);
-               if (pool != null)
-                   return pool.HasGpu;
-           }
-           return false;
+           if (FeatureForbidden(connection, Host.RestrictGpu))
+               return false;
+           var pool = GetPoolOfOne(connection);
+           return pool != null && pool.HasGpu;
        }
 
-       public static bool VGpuCapability(IXenConnection connection)
-       {
-           if (!FeatureForbidden(connection, Host.RestrictVgpu))
-           {
-               var pool = GetPoolOfOne(connection);
-               if (pool != null)
-                   return pool.HasVGpu;
-           }
-           return false;
-       }
+        public static bool VGpuCapability(IXenConnection connection)
+        {
+            if (FeatureForbidden(connection, Host.RestrictVgpu))
+                return false;
+            var pool = GetPoolOfOne(connection);
+            return pool != null && pool.HasVGpu;
+        }
 
-       /// <summary>
+        /// <summary>
        /// Whether creation of VLAN 0 is allowed.
        /// </summary>
        public static bool VLAN0Allowed(IXenConnection connection)

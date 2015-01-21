@@ -53,7 +53,7 @@ namespace XenAdmin.Controls.GPU
             this.xenObject = xenObject;
             pGpuLabel.Text = pGpuList[0].Name;
             RepopulateAllowedTypes(pGpuList[0]);
-            vGpuCapability = !Helpers.FeatureForbidden(xenObject, Host.RestrictVgpu) && pGpuList.Any(pgpu => pgpu.HasVGpu);
+            vGpuCapability = !Helpers.FeatureForbidden(xenObject, Host.RestrictVgpu) && pGpuList[0].HasVGpu;
             Rebuild(pGpuList);
             SetupPage();
         }

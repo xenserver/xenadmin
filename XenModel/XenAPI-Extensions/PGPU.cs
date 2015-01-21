@@ -51,7 +51,7 @@ namespace XenAPI
             get
             {
                 var supportedTypes = Connection.ResolveAll(supported_VGPU_types);
-                return supportedTypes.Any(supportedType => supportedType.max_heads != 0);
+                return supportedTypes.Any(supportedType => !supportedType.IsPassthrough);
             }
         }
     }

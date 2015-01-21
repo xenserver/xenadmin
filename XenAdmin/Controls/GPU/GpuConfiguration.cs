@@ -198,7 +198,7 @@ namespace XenAdmin.Controls.GPU
 
         private void SetCells()
         {
-            bool isPassThru = VGpuType.max_heads == 0;
+            bool isPassThru = VGpuType.IsPassthrough;
 
             nameColumn.Value = isPassThru ? Messages.VGPU_PASSTHRU_TOSTRING : VGpuType.model_name;
 
