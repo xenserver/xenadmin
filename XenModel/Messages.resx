@@ -12319,5 +12319,7 @@ Desktop features enabled</value>
     <value>Eligible for support 
 Desktop+ features enabled</value>
   </data>
+  <data name="NO_GPU_ON_SERVER" xml:space="preserve">
+    <value>There are no GPUs on this server.</value>
+  </data>
 </root>
-

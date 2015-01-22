@@ -23119,6 +23119,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are no GPUs on this server..
+        /// </summary>
+        public static string NO_GPU_ON_SERVER {
+            get {
+                return ResourceManager.GetString("NO_GPU_ON_SERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There are no halted or suspended VMs to export.
         /// </summary>
         public static string NO_HALTED_VMS {
@@ -31735,7 +31744,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update succesfully uploaded to selected server(s).
+        ///   Looks up a localized string similar to Update successfully uploaded to selected server(s).
         /// </summary>
         public static string UPLOAD_PATCH_END_DESCRIPTION {
             get {
