@@ -1190,7 +1190,7 @@ namespace XenAdmin.ConsoleView
                         }
                     }
 
-                    if (vncScreen.rdpIP == null && vncScreen.UseVNC && Properties.Settings.Default.EnableRDPPolling)
+                    if (vncScreen.rdpIP == null && vncScreen.UseVNC && Properties.Settings.Default.EnableRDPPolling && (!Helpers.CreamOrGreater(source.Connection) || tryToConnectRDP))
                     {
                         toggleConsoleButton.Enabled = false;
                     }
