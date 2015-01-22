@@ -33,6 +33,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Controls.Ballooning;
+using XenAdmin.Core;
 using XenAPI;
 
 namespace XenAdmin.Controls.GPU
@@ -49,6 +50,7 @@ namespace XenAdmin.Controls.GPU
         private List<VGPU> vGPUs;
         private Dictionary<VGPU, VM> vms;
         private long capacity;
+        private long maxCapacity;
 
         public void Initialize(PGPU pGPU)
         {
@@ -60,8 +62,9 @@ namespace XenAdmin.Controls.GPU
             foreach (VGPU vgpu in vGPUs)
                 vms[vgpu] = vgpu.Connection.Resolve(vgpu.VM);
 
-            capacity = vGPUs.Count > 0 && pGPU.supported_VGPU_max_capacities.ContainsKey(vGPUs[0].type) 
-                ? pGPU.supported_VGPU_max_capacities[vGPUs[0].type] : 8;
+            maxCapacity = !Helpers.FeatureForbidden(pGPU, Host.RestrictVgpu) && pGPU.HasVGpu ? 8 : 1;
+            capacity = vGPUs.Count > 0 && pGPU.supported_VGPU_max_capacities.ContainsKey(vGPUs[0].type)
+                ? pGPU.supported_VGPU_max_capacities[vGPUs[0].type] : maxCapacity;
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -73,7 +76,8 @@ namespace XenAdmin.Controls.GPU
             Rectangle barArea = barRect;
 
             // Grid
-            DrawGrid(g, barArea, barArea.Width);
+            if (maxCapacity > 1)
+                DrawGrid(g, barArea, barArea.Width);
 
             double left = barArea.Left;
 
@@ -81,7 +85,7 @@ namespace XenAdmin.Controls.GPU
             int i = 0;
             vGPUs.Sort();
 
-            long segmentLength = barArea.Width / (capacity > 0 ? capacity : 8);
+            long segmentLength = barArea.Width / (capacity > 0 ? capacity : maxCapacity);
             foreach (VGPU vgpu in vGPUs)
             {
                 VM vm = vms[vgpu];
@@ -107,7 +111,7 @@ namespace XenAdmin.Controls.GPU
             int line_bottom = barArea.Top + barArea.Height / 2;
             int line_top = barArea.Top - line_height;
 
-            long incr = max / (capacity > 0 ? capacity : 8);
+            long incr = max / (capacity > 0 ? capacity : maxCapacity);
 
             // Draw the grid
             using (Pen pen = new Pen(GpuShinyBarColors.Grid))

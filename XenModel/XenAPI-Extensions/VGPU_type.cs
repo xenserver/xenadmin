@@ -40,7 +40,7 @@ namespace XenAPI
         {
             get
             {
-                if (max_heads == 0)
+                if (IsPassthrough)
                     return Messages.VGPU_PASSTHRU_TOSTRING;
 
                 return string.Format(Messages.VGPU_TOSTRING, model_name, Capacity);
@@ -52,7 +52,7 @@ namespace XenAPI
         {
             get
             {
-                if (max_heads == 0)
+                if (IsPassthrough)
                     return Messages.VGPU_PASSTHRU_TOSTRING;
 
                 var videoRam = framebuffer_size != 0 ? Util.SuperiorSizeString(framebuffer_size, 0): string.Empty;
@@ -104,6 +104,10 @@ namespace XenAPI
                 return capacity;
             }
         }
-        
+
+        public bool IsPassthrough
+        {
+            get { return max_heads == 0; }
+        }
     }
 }

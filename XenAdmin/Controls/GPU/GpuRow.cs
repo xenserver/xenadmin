@@ -34,7 +34,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Controls.DataGridViewEx;
-using XenAdmin.Network;
+using XenAdmin.Core;
 using XenAdmin.Properties;
 using XenAPI;
 
@@ -53,6 +53,7 @@ namespace XenAdmin.Controls.GPU
             this.xenObject = xenObject;
             pGpuLabel.Text = pGpuList[0].Name;
             RepopulateAllowedTypes(pGpuList[0]);
+            vGpuCapability = !Helpers.FeatureForbidden(xenObject, Host.RestrictVgpu) && pGpuList[0].HasVGpu;
             Rebuild(pGpuList);
             SetupPage();
         }
@@ -60,6 +61,8 @@ namespace XenAdmin.Controls.GPU
         private readonly IXenObject xenObject;
 
         private Dictionary<PGPU, CheckBox> pGpus = new Dictionary<PGPU, CheckBox>();
+
+        private readonly bool vGpuCapability;
 
         private void Rebuild(List<PGPU> pGpuList)
         {
@@ -91,7 +94,7 @@ namespace XenAdmin.Controls.GPU
 
                 // add pGPU shiny bar
                 var gpuShinyBar = new GpuShinyBar();
-                var checkBox = pGpuList.Count > 1 ? new CheckBox() : null; 
+                var checkBox = (pGpuList.Count > 1 && vGpuCapability) ? new CheckBox() : null; 
                 AddShinyBar(gpuShinyBar, checkBox, ref index);
                 gpuShinyBar.Initialize(pgpu);
 
@@ -141,8 +144,9 @@ namespace XenAdmin.Controls.GPU
 
         private void SetupPage()
         {
-            multipleSelectionPanel.Visible = (pGpus.Count > 1);
+            multipleSelectionPanel.Visible = (pGpus.Count > 1) && vGpuCapability;
             editButton.Text = (pGpus.Count > 1) ? Messages.GPU_EDIT_ALLOWED_TYPES_MULTIPLE : Messages.GPU_EDIT_ALLOWED_TYPES_SINGLE;
+            editButton.Visible = vGpuCapability;
         }
 
         private GpuShinyBar FindGpuShinyBar(PGPU pGpu)

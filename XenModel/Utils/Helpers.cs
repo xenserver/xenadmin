@@ -487,6 +487,16 @@ namespace XenAdmin.Core
                 HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
         }
 
+        /// <summary>
+        /// Clearwater SP1 has API version 2.1
+        /// </summary>
+        /// <param name="conn">May be null, in which case true is returned.</param>
+        /// <returns></returns>
+        public static bool ClearwaterSp1OrGreater(IXenConnection conn)
+        {
+            return conn == null || conn.Session == null || conn.Session.APIVersion >= API_Version.API_2_1;
+        }
+
         // CP-3435: Disable Check for Updates in Common Criteria Certification project
         public static bool CommonCriteriaCertificationRelease
         {
@@ -1908,12 +1918,23 @@ namespace XenAdmin.Core
            return connection.Cache.Hosts.Any(h => h.enabled);
        }
 
-       public static bool VgpuCapability(IXenConnection connection)
+       public static bool GpuCapability(IXenConnection connection)
        {
-           return connection != null && connection.Cache.GPU_groups.Any(g => g.PGPUs.Count > 0 && g.supported_VGPU_types.Count > 0);
+           if (FeatureForbidden(connection, Host.RestrictGpu))
+               return false;
+           var pool = GetPoolOfOne(connection);
+           return pool != null && pool.HasGpu;
        }
 
-       /// <summary>
+        public static bool VGpuCapability(IXenConnection connection)
+        {
+            if (FeatureForbidden(connection, Host.RestrictVgpu))
+                return false;
+            var pool = GetPoolOfOne(connection);
+            return pool != null && pool.HasVGpu;
+        }
+
+        /// <summary>
        /// Whether creation of VLAN 0 is allowed.
        /// </summary>
        public static bool VLAN0Allowed(IXenConnection connection)

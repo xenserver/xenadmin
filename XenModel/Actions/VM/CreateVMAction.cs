@@ -147,8 +147,7 @@ namespace XenAdmin.Actions.VMActions
                 AppliesTo.Add(HomeServer != null ? HomeServer.opaque_ref : pool_of_one.opaque_ref);
 
             assignOrRemoveVgpu = (GpuGroup != null && VgpuType != null)
-                             || (!Helpers.FeatureForbidden(Connection, Host.RestrictVgpu)
-                                 && Helpers.VgpuCapability(Connection));
+                             || Helpers.GpuCapability(Connection);
 
             #region RBAC Dependencies
 

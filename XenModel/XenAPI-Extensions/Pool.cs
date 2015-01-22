@@ -389,6 +389,16 @@ namespace XenAPI
         {
             get { return Connection.Cache.Hosts.Sum(h => h.CpuSockets); }
         }
+        
+        public bool HasGpu
+        {
+            get { return Connection.Cache.PGPUs.Length > 0; }
+        }
+
+        public bool HasVGpu
+        {
+            get { return HasGpu && Connection.Cache.PGPUs.Any(pGpu => pGpu.HasVGpu); }
+        }
 
         #region IEquatable<Pool> Members
 

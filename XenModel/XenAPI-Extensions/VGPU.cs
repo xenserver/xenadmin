@@ -38,7 +38,7 @@ namespace XenAPI
             get
             {
                 var vGPUType = Connection.Resolve(type);
-                return vGPUType == null || vGPUType.max_heads == 0;
+                return vGPUType == null || vGPUType.IsPassthrough;
             }
         }
     }

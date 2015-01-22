@@ -35,7 +35,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Controls;
+using XenAdmin.Controls.Common;
 using XenAdmin.Controls.GPU;
+using XenAdmin.Core;
 using XenAPI;
 
 namespace XenAdmin.TabPages
@@ -125,12 +127,16 @@ namespace XenAdmin.TabPages
             int initScroll = pageContainerPanel.VerticalScroll.Value;
             int top = pageContainerPanel.Padding.Top - initScroll;
 
-            AddRowToPanel(CreateGpuPlacementPolicyPanel(), ref top);
+            if (Helpers.VGpuCapability(xenObject.Connection))
+                AddRowToPanel(CreateGpuPlacementPolicyPanel(), ref top);
 
             foreach (GpuSettings settings in listSettings)
             {
                 AddRowToPanel(new GpuRow(xenObject, settingsToPGPUs[settings]), ref top);
             }
+
+            if (listSettings.Count == 0)
+                AddRowToPanel(CreateNoGpuPanel(), ref top);
 
             // Remove old controls
             foreach (Control c in oldControls)
@@ -157,6 +163,15 @@ namespace XenAdmin.TabPages
                        };
         }
 
+        private AutoHeightLabel CreateNoGpuPanel()
+        {
+            return new AutoHeightLabel
+            {
+                Name = "noGpuPanel1",
+                Text = Messages.NO_GPU_ON_SERVER
+            };
+        }
+
         private void ReLayout()
         {
             Program.AssertOnEventThread();
@@ -172,7 +187,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void AddRowToPanel(UserControl row, ref int top)
+        private void AddRowToPanel(Control row, ref int top)
         {
             row.Top = top;
             row.Left = pageContainerPanel.Padding.Left - pageContainerPanel.HorizontalScroll.Value;
