@@ -754,7 +754,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Citrix XenServer Enterprise Per Socket.
+        ///   Looks up a localized string similar to Citrix XenServer Enterprise Per-Socket.
         /// </summary>
         public static string Label_host_edition_enterprise_per_socket {
             get {
@@ -763,7 +763,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Citrix XenServer Enterprise Per User.
+        ///   Looks up a localized string similar to Citrix XenServer Enterprise Per-User.
         /// </summary>
         public static string Label_host_edition_enterprise_per_user {
             get {
@@ -817,7 +817,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Citrix XenServer Standard Per Socket.
+        ///   Looks up a localized string similar to Citrix XenServer Standard Per-Socket.
         /// </summary>
         public static string Label_host_edition_standard_per_socket {
             get {
