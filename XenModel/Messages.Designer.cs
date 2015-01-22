@@ -23960,7 +23960,7 @@ namespace XenAdmin {
         ///   Looks up a localized string similar to {0} 
         ///Date modified: {1}
         ///Date created: {2}
-        ///Size: {3} MB.
+        ///Size: {3}.
         /// </summary>
         public static string PATCH_EXPANDED_DESCRIPTION {
             get {
@@ -24323,6 +24323,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update prechecks are performed to verify that the selected update can be applied to the servers..
+        /// </summary>
+        public static string PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Resolve.
         /// </summary>
         public static string PATCHINGWIZARD_PRECHECKPAGE_RESOLVE {
@@ -24377,11 +24386,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Updates|*.xsupdate;*.xsoem.
+        ///   Looks up a localized string similar to XenServer Updates|*.xsupdate;*.xsoem|Supplemental Packs (*.iso)|*.iso.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot install supplemental packs on this XenServer version.
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS", resourceCulture);
             }
         }
         
@@ -29623,6 +29641,42 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Temporary virtual disk used for the installation of Supplemental Packs.
+        /// </summary>
+        public static string SUPP_PACK_TEMP_VDI_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("SUPP_PACK_TEMP_VDI_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File uploaded to &apos;{0}&apos;.
+        /// </summary>
+        public static string SUPP_PACK_UPLOADED {
+            get {
+                return ResourceManager.GetString("SUPP_PACK_UPLOADED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uploading file.
+        /// </summary>
+        public static string SUPP_PACK_UPLOADING {
+            get {
+                return ResourceManager.GetString("SUPP_PACK_UPLOADING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uploading to &apos;{0}&apos;.
+        /// </summary>
+        public static string SUPP_PACK_UPLOADING_TO {
+            get {
+                return ResourceManager.GetString("SUPP_PACK_UPLOADING_TO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} (not the same version on all hosts).
         /// </summary>
         public static string SUPP_PACK_VERSIONS_DIFFER {
@@ -31223,7 +31277,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The selected file does not have a valid extension. Valid extensions are: *.xsoem and *.xsupdate.
+        ///   Looks up a localized string similar to The selected file does not have a valid extension. Valid extensions are: *.xsoem, *.xsupdate and *.iso.
         /// </summary>
         public static string UPDATES_WIZARD_NOTVALID_EXTENSION {
             get {
@@ -31744,7 +31798,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update succesfully uploaded to selected server(s).
+        ///   Looks up a localized string similar to Update successfully uploaded to selected server(s).
         /// </summary>
         public static string UPLOAD_PATCH_END_DESCRIPTION {
             get {

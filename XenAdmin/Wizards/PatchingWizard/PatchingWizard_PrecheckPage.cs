@@ -45,7 +45,6 @@ using XenAdmin.Diagnostics.Problems.HostProblem;
 using XenAdmin.Dialogs;
 using XenAdmin.Properties;
 using XenAPI;
-using XenAdmin.Diagnostics.Problems.VMProblem;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -128,7 +127,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (direction == PageLoadedDirection.Back)
                     return;
 
-                labelPrechecksFirstLine.Text = string.Format(Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE, Patch.Name);
+                labelPrechecksFirstLine.Text = Patch != null 
+                    ? string.Format(Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE, Patch.Name) 
+                    : Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME;
                 RefreshRechecks();
             }
             catch (Exception e)
@@ -333,13 +334,16 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             //Checking other things
-            checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SERVER_SIDE_STATUS, new List<Check>()));
-            checkGroup = checks[checks.Count - 1].Value;
-            foreach (Host host in SelectedServers)
+            if (patch != null)
             {
-                List<Pool_patch> poolPatches = new List<Pool_patch>(host.Connection.Cache.Pool_patches);
-                Pool_patch poolPatchFromHost = poolPatches.Find(otherPatch => otherPatch.uuid == patch.uuid);
-                checkGroup.Add(new PatchPrecheckCheck(host, poolPatchFromHost));
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SERVER_SIDE_STATUS, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+                foreach (Host host in SelectedServers)
+                {
+                    List<Pool_patch> poolPatches = new List<Pool_patch>(host.Connection.Cache.Pool_patches);
+                    Pool_patch poolPatchFromHost = poolPatches.Find(otherPatch => otherPatch.uuid == patch.uuid);
+                    checkGroup.Add(new PatchPrecheckCheck(host, poolPatchFromHost));
+                }
             }
             return checks;
         }
