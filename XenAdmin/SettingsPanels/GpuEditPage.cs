@@ -200,7 +200,7 @@ namespace XenAdmin.SettingsPanels
                 {
                     var vgpuGroup = Connection.Resolve(vgpu.GPU_group);
 
-                    if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu))
+                    if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu) || !vm.CanHaveVGpu)
                         currentGpuTuple = new GpuTuple(vgpuGroup, null, null);
                     else
                     {
@@ -243,7 +243,7 @@ namespace XenAdmin.SettingsPanels
             Array.Sort(gpu_groups);
             foreach (GPU_group gpu_group in gpu_groups)
             {
-                if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu))
+                if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu) || !vm.CanHaveVGpu)
                 {
                     comboBoxGpus.Items.Add(new GpuTuple(gpu_group, null, null));  //GPU pass-through item
                 }
