@@ -4208,6 +4208,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ENDS_WITH" xml:space="preserve">
     <value>ends with</value>
   </data>
+  <data name="ENTERPRISE_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
+    <value>XenServer &amp;Enterprise Per-Socket ({0} required)</value>
+  </data>
   <data name="ENTER_MAINTENANCE_MODE" xml:space="preserve">
     <value>Enter &amp;Maintenance Mode...</value>
   </data>
@@ -6041,6 +6044,9 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="IN_ANY_APPLIANCE" xml:space="preserve">
     <value>Is in a vApp</value>
   </data>
+  <data name="IN_POOL" xml:space="preserve">
+    <value>in '{0}'</value>
+  </data>
   <data name="IN_PROGRESS" xml:space="preserve">
     <value>In progress</value>
   </data>
@@ -6235,6 +6241,9 @@ Size: {3}</value>
   <data name="LICENSE_NEVER" xml:space="preserve">
     <value>Never</value>
   </data>
+  <data name="LICENSE_NOT_ELIGIBLE_FOR_SUPPORT" xml:space="preserve">
+    <value>Not eligible for support</value>
+  </data>
   <data name="LICENSE_NO_HA" xml:space="preserve">
     <value>The license for a host cannot be changed when HA is on</value>
   </data>
@@ -6277,8 +6286,30 @@ Size: {3}</value>
   <data name="LICENSE_SERVER_PORT_FORMAT" xml:space="preserve">
     <value>{0}:{1}</value>
   </data>
+  <data name="LICENSE_SERVER_WEB_CONSOLE_FORMAT" xml:space="preserve">
+    <value>http://{0}:{1}</value>
+  </data>
+  <data name="LICENSE_SERVER_WEB_CONSOLE_GOTO" xml:space="preserve">
+    <value>Go to...</value>
+  </data>
   <data name="LICENSE_STATUS" xml:space="preserve">
     <value>Status</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
+    <value>Eligible for support 
+XenApp/XenDesktop features enabled</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED" xml:space="preserve">
+    <value>Eligible for support 
+XenApp/XenDesktop Platinum features enabled</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED" xml:space="preserve">
+    <value>Eligible for support 
+Enterprise features enabled</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED" xml:space="preserve">
+    <value>Eligible for support 
+Standard features only</value>
   </data>
   <data name="LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION" xml:space="preserve">
     <value>Activation keys can only be applied to one Free XenServer product at a time.</value>
@@ -7139,6 +7170,9 @@ To learn more about the XenServer Live VDI Migration feature or to start a XenSe
   </data>
   <data name="NAME_DESCRIPTION_TAGS" xml:space="preserve">
     <value>General</value>
+  </data>
+  <data name="NAME_WITH_LOCATION" xml:space="preserve">
+    <value>{0} {1}</value>
   </data>
   <data name="NETAPP_EQUAL_PAGE_TITLE" xml:space="preserve">
     <value>Select the SR to reattach or create a new SR</value>
@@ -8118,6 +8152,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NO_ELIGIBLE_MASTER" xml:space="preserve">
     <value>There is no server eligible to become the master of your new pool</value>
   </data>
+  <data name="NO_GPU_ON_SERVER" xml:space="preserve">
+    <value>There are no GPUs on this server.</value>
+  </data>
   <data name="NO_HALTED_VMS" xml:space="preserve">
     <value>There are no halted or suspended VMs to export</value>
   </data>
@@ -8163,6 +8200,12 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="OBJECTS_WITH_TAG" xml:space="preserve">
     <value>Objects with tag '{0}'</value>
   </data>
+  <data name="OBJECT_IN_POOL" xml:space="preserve">
+    <value>{0} in '{1}'</value>
+  </data>
+  <data name="OBJECT_ON_SERVER" xml:space="preserve">
+    <value>{0} on '{1}'</value>
+  </data>
   <data name="OEM" xml:space="preserve">
     <value>OEM</value>
   </data>
@@ -8202,6 +8245,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   </data>
   <data name="ONLY_VMS_USING_STORAGELINK_SMIS" xml:space="preserve">
     <value>Only VMs using StorageLink Gateway NetApp, Dell EqualLogic or SMI-S adapters can be upgraded</value>
+  </data>
+  <data name="ON_SERVER" xml:space="preserve">
+    <value>on '{0}'</value>
   </data>
   <data name="OPERATING_SYSTEM" xml:space="preserve">
     <value>Operating System</value>
@@ -8409,6 +8455,12 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TITLE" xml:space="preserve">
     <value>Select the servers you wish to update</value>
+  </data>
+  <data name="PATCHINGWIZARD_UPLOADPAGE_TEXT" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="PATCHINGWIZARD_UPLOADPAGE_TITLE" xml:space="preserve">
+    <value>Uploading selected file to your servers</value>
   </data>
   <data name="PATCHING_EJECT_CDS" xml:space="preserve">
     <value>Eject any virtual CDs from your VMs</value>
@@ -9686,11 +9738,11 @@ Upgrading VMs using StorageLink Gateway to XenServer 6.0 is only supported if th
   <data name="SHUTTING_DOWN_VM_OUT_OF" xml:space="preserve">
     <value>Shutting down VM {0} out of {1}</value>
   </data>
-  <data name="SINGLE_SERVER_PRIVATE_NETWORK" xml:space="preserve">
-    <value>Single-server private network</value>
-  </data>
   <data name="SIGNING_APPLIANCE" xml:space="preserve">
     <value>Applying digital signature to appliance...</value>
+  </data>
+  <data name="SINGLE_SERVER_PRIVATE_NETWORK" xml:space="preserve">
+    <value>Single-server private network</value>
   </data>
   <data name="SIZE" xml:space="preserve">
     <value>Size</value>
@@ -9770,6 +9822,9 @@ Do you want to connect to the pool master '{1}'?</value>
   </data>
   <data name="SNAPSHOT_OF" xml:space="preserve">
     <value>Snapshot of</value>
+  </data>
+  <data name="SNAPSHOT_OF_TITLE" xml:space="preserve">
+    <value>{0} (snapshot of '{1}' {2})</value>
   </data>
   <data name="SNAPSHOT_REQUIRE_GEORGE" xml:space="preserve">
     <value>Snapshots require XenServer 5.5 or later</value>
@@ -9941,6 +9996,9 @@ Do you want to connect to the pool master '{1}'?</value>
   </data>
   <data name="SR_X_ON_Y" xml:space="preserve">
     <value>SR {0} on {1}</value>
+  </data>
+  <data name="STANDARD_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
+    <value>XenServer &amp;Standard Per-Socket ({0} required)</value>
   </data>
   <data name="STARTED" xml:space="preserve">
     <value>Started</value>
@@ -10929,8 +10987,23 @@ Do you want to continue?</value>
   <data name="UPLOADING_PATCH" xml:space="preserve">
     <value>Uploading Update...</value>
   </data>
+  <data name="UPLOADING_PATCH_PROGRESS" xml:space="preserve">
+    <value>Uploading - {0}%</value>
+  </data>
   <data name="UPLOADING_PATCH_TO" xml:space="preserve">
     <value>Uploading to server '{0}'...</value>
+  </data>
+  <data name="UPLOAD_PATCH_ALREADY_UPLOADED" xml:space="preserve">
+    <value>Already uploaded to selected server(s)</value>
+  </data>
+  <data name="UPLOAD_PATCH_DESCRIPTION" xml:space="preserve">
+    <value>Uploading...</value>
+  </data>
+  <data name="UPLOAD_PATCH_END_DESCRIPTION" xml:space="preserve">
+    <value>Update successfully uploaded to selected server(s)</value>
+  </data>
+  <data name="UPLOAD_PATCH_TITLE" xml:space="preserve">
+    <value>Upload</value>
   </data>
   <data name="UPSELL_BLURB_ALERTS" xml:space="preserve">
     <value>Upgrade your XenServer license to enable Alerting and Reporting capabilities. Email based performance and error alerting will proactively notify administrators of error conditions or performance problems before they affect critical services.
@@ -11124,6 +11197,9 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="VDI_COPYING" xml:space="preserve">
     <value>Copying disk '{0}' from SR '{1}' to SR '{2}'</value>
   </data>
+  <data name="VDI_ON_SR_TITLE" xml:space="preserve">
+    <value>{0} on '{1}' {2}</value>
+  </data>
   <data name="VENDOR_NAME" xml:space="preserve">
     <value>Vendor</value>
   </data>
@@ -11274,9 +11350,6 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="VM_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>VM General Properties</value>
   </data>
-  <data name="IN_POOL" xml:space="preserve">
-    <value>in '{0}'</value>
-  </data>
   <data name="VM_LIVE_CHANGES_NOT_SUPPORTED_MESSAGE" xml:space="preserve">
     <value>Memory and/or VCPU changes will take effect when you restart the VM.</value>
   </data>
@@ -11309,9 +11382,6 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   </data>
   <data name="VM_NOT_SUSPENDED" xml:space="preserve">
     <value>This VM is not suspended.</value>
-  </data>
-  <data name="ON_SERVER" xml:space="preserve">
-    <value>on '{0}'</value>
   </data>
   <data name="VM_PAUSED" xml:space="preserve">
     <value>This VM is paused.</value>
@@ -12257,75 +12327,5 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
-  </data>
-  <data name="SNAPSHOT_OF_TITLE" xml:space="preserve">
-    <value>{0} (snapshot of '{1}' {2})</value>
-  </data>
-  <data name="NAME_WITH_LOCATION" xml:space="preserve">
-    <value>{0} {1}</value>
-  </data>
-  <data name="OBJECT_IN_POOL" xml:space="preserve">
-    <value>{0} in '{1}'</value>
-  </data>
-  <data name="OBJECT_ON_SERVER" xml:space="preserve">
-    <value>{0} on '{1}'</value>
-  </data>
-  <data name="VDI_ON_SR_TITLE" xml:space="preserve">
-    <value>{0} on '{1}' {2}</value>
-  </data>
-  <data name="PATCHINGWIZARD_UPLOADPAGE_TEXT" xml:space="preserve">
-    <value>Upload</value>
-  </data>
-  <data name="PATCHINGWIZARD_UPLOADPAGE_TITLE" xml:space="preserve">
-    <value>Uploading selected file to your servers</value>
-  </data>
-  <data name="UPLOADING_PATCH_PROGRESS" xml:space="preserve">
-    <value>Uploading - {0}%</value>
-  </data>
-  <data name="UPLOAD_PATCH_ALREADY_UPLOADED" xml:space="preserve">
-    <value>Already uploaded to selected server(s)</value>
-  </data>
-  <data name="UPLOAD_PATCH_END_DESCRIPTION" xml:space="preserve">
-    <value>Update successfully uploaded to selected server(s)</value>
-  </data>
-  <data name="UPLOAD_PATCH_DESCRIPTION" xml:space="preserve">
-    <value>Uploading...</value>
-  </data>
-  <data name="UPLOAD_PATCH_TITLE" xml:space="preserve">
-    <value>Upload</value>
-  </data>
-  <data name="ENTERPRISE_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>XenServer &amp;Enterprise Per-Socket ({0} required)</value>
-  </data>
-  <data name="STANDARD_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>XenServer &amp;Standard Per-Socket ({0} required)</value>
-  </data>
-  <data name="LICENSE_NOT_ELIGIBLE_FOR_SUPPORT" xml:space="preserve">
-    <value>Not eligible for support</value>
-  </data>
-  <data name="LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED" xml:space="preserve">
-    <value>Eligible for support 
-Enterprise features enabled</value>
-  </data>
-  <data name="LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED" xml:space="preserve">
-    <value>Eligible for support 
-Standard features only</value>
-  </data>
-  <data name="LICENSE_SERVER_WEB_CONSOLE_FORMAT" xml:space="preserve">
-    <value>http://{0}:{1}</value>
-  </data>
-  <data name="LICENSE_SERVER_WEB_CONSOLE_GOTO" xml:space="preserve">
-    <value>Go to...</value>
-  </data>
-  <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
-    <value>Eligible for support 
-XenApp/XenDesktop features enabled</value>
-  </data>
-  <data name="LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED" xml:space="preserve">
-    <value>Eligible for support 
-XenApp/XenDesktop Platinum features enabled</value>
-  </data>
-  <data name="NO_GPU_ON_SERVER" xml:space="preserve">
-    <value>There are no GPUs on this server.</value>
   </data>
 </root>
