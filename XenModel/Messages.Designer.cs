@@ -3462,7 +3462,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a pool that has had its license upgraded.
+        ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a licensed pool.
         ///
         ///Do you want to apply the licensing from the pool to this server?.
         /// </summary>
@@ -3473,7 +3473,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are attempting to add the following servers to a pool that has had its license upgraded.
+        ///   Looks up a localized string similar to You are attempting to add the following servers to a licensed pool.
         ///
         ///{0}
         ///

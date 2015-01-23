@@ -1150,12 +1150,12 @@ Do you want to do this?</value>
     <value>Unable to move selected servers into the pool '{0}': the pool is no longer connected.</value>
   </data>
   <data name="ADD_HOST_TO_POOL_LICENSE_MESSAGE" xml:space="preserve">
-    <value>You are attempting to add the server '{0}' to a pool that has had its license upgraded.
+    <value>You are attempting to add the server '{0}' to a licensed pool.
 
 Do you want to apply the licensing from the pool to this server?</value>
   </data>
   <data name="ADD_HOST_TO_POOL_LICENSE_MESSAGE_MULTIPLE" xml:space="preserve">
-    <value>You are attempting to add the following servers to a pool that has had its license upgraded.
+    <value>You are attempting to add the following servers to a licensed pool.
 
 {0}
 
