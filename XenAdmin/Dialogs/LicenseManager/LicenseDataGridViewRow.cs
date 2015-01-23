@@ -105,7 +105,7 @@ namespace XenAdmin.Dialogs
 
                 Queue<object> cellDetails = new Queue<object>();
                 cellDetails.Enqueue(XenObject.Name);
-                cellDetails.Enqueue(String.Format(Messages.STRING_SPACE_STRING, LicenseName, LicenseProductVersion));
+                cellDetails.Enqueue(LicenseName);
                 cellDetails.Enqueue(new Bitmap(1,1));
                 cellDetails.Enqueue(LicenseStatus);
                 return cellDetails;
