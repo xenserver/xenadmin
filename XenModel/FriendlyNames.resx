@@ -541,19 +541,19 @@
     <value>License</value>
   </data>
   <data name="Label-host.edition-advanced" xml:space="preserve">
-    <value>Citrix XenServer Advanced Edition</value>
+    <value>XenServer Advanced Edition</value>
   </data>
   <data name="Label-host.edition-enterprise" xml:space="preserve">
-    <value>Citrix XenServer Enterprise Edition</value>
+    <value>XenServer Enterprise Edition</value>
   </data>
   <data name="Label-host.edition-enterprise-xd" xml:space="preserve">
-    <value>Citrix XenServer for XenDesktop</value>
+    <value>XenServer for XenDesktop</value>
   </data>
   <data name="Label-host.edition-free" xml:space="preserve">
-    <value>Citrix XenServer</value>
+    <value>XenServer</value>
   </data>
   <data name="Label-host.edition-platinum" xml:space="preserve">
-    <value>Citrix XenServer Platinum Edition</value>
+    <value>XenServer Platinum Edition</value>
   </data>
   <data name="Label-host.enabled" xml:space="preserve">
     <value>Enabled</value>
@@ -1629,10 +1629,10 @@
     <value>Potential Reclaimed Memory</value>
   </data>
   <data name="Label-host.edition-per-socket" xml:space="preserve">
-    <value>Citrix XenServer Per-Socket</value>
+    <value>XenServer Per-Socket</value>
   </data>
   <data name="Label-host.edition-xendesktop" xml:space="preserve">
-    <value>Citrix XenServer for XenDesktop</value>
+    <value>XenServer for XenDesktop</value>
   </data>
   <data name="Message.help-extauth_init_in_host_failed" xml:space="preserve">
     <value>Help on AD</value>
@@ -1677,7 +1677,7 @@
     <value>{0} {1} Memory Utilization</value>
   </data>
   <data name="Label-host.edition-free/libre" xml:space="preserve">
-    <value>Citrix XenServer</value>
+    <value>XenServer</value>
   </data>
   <data name="Message.name-SRUnavailable" xml:space="preserve">
     <value>Cannot reclaim freed space because the SR is already busy</value>
@@ -1707,16 +1707,16 @@
     <value>The license server is an out-of-date version.</value>
   </data>
   <data name="Label-host.edition-enterprise-per-socket" xml:space="preserve">
-    <value>Citrix XenServer Enterprise Per-Socket</value>
+    <value>XenServer Enterprise Per-Socket</value>
   </data>
   <data name="Label-host.edition-enterprise-per-user" xml:space="preserve">
-    <value>Citrix XenServer Enterprise Per-User</value>
+    <value>XenServer Enterprise Per-User</value>
   </data>
   <data name="Label-host.edition-standard-per-socket" xml:space="preserve">
-    <value>Citrix XenServer Standard Per-Socket</value>
+    <value>XenServer Standard Per-Socket</value>
   </data>
   <data name="Label-host.edition-xendesktop-platinum" xml:space="preserve">
-    <value>Citrix XenDesktop Platinum</value>
+    <value>XenDesktop Platinum</value>
   </data>
   <data name="Message.help-license_expired" xml:space="preserve">
     <value>Help on Licensing</value>
@@ -1737,9 +1737,9 @@
     <value>Help on Licensing</value>
   </data>
   <data name="Label-host.edition-desktop" xml:space="preserve">
-    <value>Citrix XenApp/XenDesktop</value>
+    <value>XenApp/XenDesktop</value>
   </data>
   <data name="Label-host.edition-desktop-plus" xml:space="preserve">
-    <value>Citrix XenApp/XenDesktop Platinum</value>
+    <value>XenApp/XenDesktop Platinum</value>
   </data>
 </root>

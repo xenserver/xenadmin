@@ -1267,7 +1267,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The edition you supplied is invalid..
+        ///   Looks up a localized string similar to The license type you supplied is invalid..
         /// </summary>
         public static string INVALID_EDITION {
             get {
@@ -1411,7 +1411,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The license for the edition you requested is not available..
+        ///   Looks up a localized string similar to The license type you requested is not available..
         /// </summary>
         public static string LICENSE_CHECKOUT_ERROR {
             get {
@@ -1456,7 +1456,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Host and pool have incompatible licenses (editions)..
+        ///   Looks up a localized string similar to Host and pool have incompatible licenses..
         /// </summary>
         public static string LICENSE_HOST_POOL_MISMATCH {
             get {

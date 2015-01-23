@@ -7345,7 +7345,7 @@ You should only proceed if you have verified that these settings are correct.</v
     <value>You cannot add a licensed server to an unlicensed pool</value>
   </data>
   <data name="NEWPOOL_LICENSEMISMATCH" xml:space="preserve">
-    <value>This server does not have the same XenServer license edition as the pool master</value>
+    <value>This server does not have the same license as the pool master</value>
   </data>
   <data name="NEWPOOL_LINUXPACK" xml:space="preserve">
     <value>This server's linux pack installation state differs from that of the master</value>
@@ -7915,12 +7915,12 @@ XenServer can continue by rebooting the servers and reducing their CPUs to the l
 Do you want to do this?</value>
   </data>
   <data name="NEW_POOL_LICENSE_MESSAGE" xml:space="preserve">
-    <value>You are attempting to add the server '{0}' to a pool that has had its license upgraded.
+    <value>You are attempting to add the server '{0}' to a licensed pool.
 
 Do you want to apply the licensing from the master to this server?</value>
   </data>
   <data name="NEW_POOL_LICENSE_MESSAGE_MULTIPLE" xml:space="preserve">
-    <value>You are attempting to add the following servers to a pool that has had its license upgraded.
+    <value>You are attempting to add the following servers to a licensed pool.
 
 {0}
 
