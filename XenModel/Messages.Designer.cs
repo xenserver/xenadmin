@@ -3462,7 +3462,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a pool that has had its license upgraded.
+        ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a licensed pool.
         ///
         ///Do you want to apply the licensing from the pool to this server?.
         /// </summary>
@@ -3473,7 +3473,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are attempting to add the following servers to a pool that has had its license upgraded.
+        ///   Looks up a localized string similar to You are attempting to add the following servers to a licensed pool.
         ///
         ///{0}
         ///
@@ -18044,7 +18044,7 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Eligible for support 
-        ///Desktop features enabled.
+        ///XenApp/XenDesktop features enabled.
         /// </summary>
         public static string LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED {
             get {
@@ -18054,7 +18054,7 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Eligible for support 
-        ///Desktop+ features enabled.
+        ///XenApp/XenDesktop Platinum features enabled.
         /// </summary>
         public static string LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED {
             get {
@@ -21234,7 +21234,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a pool that has had its license upgraded.
+        ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a licensed pool.
         ///
         ///Do you want to apply the licensing from the master to this server?.
         /// </summary>
@@ -21245,7 +21245,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are attempting to add the following servers to a pool that has had its license upgraded.
+        ///   Looks up a localized string similar to You are attempting to add the following servers to a licensed pool.
         ///
         ///{0}
         ///
@@ -21573,7 +21573,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server does not have the same XenServer license edition as the pool master.
+        ///   Looks up a localized string similar to This server does not have the same license as the pool master.
         /// </summary>
         public static string NEWPOOL_LICENSEMISMATCH {
             get {
