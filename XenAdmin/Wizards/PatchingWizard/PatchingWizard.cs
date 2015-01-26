@@ -106,13 +106,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                 PatchingWizard_UploadPage.SelectedExistingPatch = existPatch;
                 PatchingWizard_UploadPage.SelectedNewPatch = newPatch;
 
-                if (updateType == UpdateType.Existing)
-                {
-                    PatchingWizard_ModePage.Patch = existPatch;
+                PatchingWizard_ModePage.Patch = existPatch;
 
-                    PatchingWizard_PrecheckPage.Patch = existPatch;
-                    PatchingWizard_PatchingPage.Patch = existPatch;
-                }
+                PatchingWizard_PrecheckPage.Patch = existPatch;
+                PatchingWizard_PatchingPage.Patch = existPatch;
 
                 PatchingWizard_PrecheckPage.SelectedUpdateType = updateType;
                 
