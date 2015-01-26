@@ -211,6 +211,23 @@ namespace XenAdmin.Wizards.PatchingWizard
             return GetRemovePatchActions(PatchingWizard_UploadPage.NewUploadedPatches);
         }
 
+        private List<AsyncAction> GetRemoveVdiActions(List<VDI> vdisToRemove)
+        {
+            if (vdisToRemove == null)
+                return null;
+
+            var list = (from vdi in vdisToRemove
+                        where vdi.Connection != null && vdi.Connection.IsConnected
+                        select new DestroyDiskAction(vdi));
+
+            return list.OfType<AsyncAction>().ToList();
+        }
+
+        private List<AsyncAction> GetRemoveVdiActions()
+        {
+            return GetRemoveVdiActions(PatchingWizard_UploadPage.AllCreatedSuppPackVdis); ;
+        }
+
         private void RunMultipleActions(string title, string startDescription, string endDescription,
             List<AsyncAction> subActions)
         {
@@ -227,7 +244,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override void OnCancel()
         {
-            List<AsyncAction> subActions = BuildSubActions(GetUnwindChangesActions, GetRemovePatchActions);
+            List<AsyncAction> subActions = BuildSubActions(GetUnwindChangesActions, GetRemovePatchActions, GetRemoveVdiActions);
             RunMultipleActions(Messages.REVERT_WIZARD_CHANGES, Messages.REVERTING_WIZARD_CHANGES,
                                Messages.REVERTED_WIZARD_CHANGES, subActions);
 
@@ -237,6 +254,12 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void RemoveUnwantedPatches(List<Pool_patch> patchesToRemove)
         {
             List<AsyncAction> subActions = GetRemovePatchActions(patchesToRemove);
+            RunMultipleActions(Messages.REMOVE_UPDATES, Messages.REMOVING_UPDATES, Messages.REMOVED_UPDATES, subActions);
+        }
+
+        private void RemoveTemporaryVdis()
+        {
+            List<AsyncAction> subActions = GetRemoveVdiActions();
             RunMultipleActions(Messages.REMOVE_UPDATES, Messages.REMOVING_UPDATES, Messages.REMOVED_UPDATES, subActions);
         }
 
@@ -250,6 +273,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 RemoveUnwantedPatches(patchesToRemove);
             }
+
+            if (PatchingWizard_UploadPage.AllCreatedSuppPackVdis != null)
+                RemoveTemporaryVdis();
 
             base.FinishWizard();
         }
