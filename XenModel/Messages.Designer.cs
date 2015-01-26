@@ -4404,6 +4404,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Applying update to {0} server(s).
+        /// </summary>
+        public static string APPLYING_UPDATE {
+            get {
+                return ResourceManager.GetString("APPLYING_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Applying {0} update(s) to {1} server(s).
         /// </summary>
         public static string APPLYING_UPDATES {

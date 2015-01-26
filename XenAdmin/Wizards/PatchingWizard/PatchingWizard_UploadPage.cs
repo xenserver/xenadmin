@@ -37,6 +37,10 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             get { return _patch; }
         }
+
+        public readonly List<VDI> AllCreatedSuppPackVdis = new List<VDI>();
+        public Dictionary<Host, VDI> SuppPackVdis = new Dictionary<Host, VDI>();
+
         #endregion
 
         public override void PageLoaded(PageLoadedDirection direction)
@@ -111,6 +115,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     break;
 
                 case UpdateType.NewSuppPack:
+                    SuppPackVdis.Clear();
                     foreach (Host selectedServer in masters)
                     {
                         UploadSupplementalPackAction action = new UploadSupplementalPackAction(
@@ -209,6 +214,13 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     if (_patch != null && !NewUploadedPatches.Contains(_patch))
                         NewUploadedPatches.Add(_patch);
+
+                    if (action is UploadSupplementalPackAction)
+                    {
+                        foreach (var vdiRef in (action as UploadSupplementalPackAction).VdiRefs)
+                            SuppPackVdis[vdiRef.Key] = action.Connection.Resolve(vdiRef.Value);
+                        AllCreatedSuppPackVdis.AddRange(SuppPackVdis.Values.Where(vdi => !AllCreatedSuppPackVdis.Contains(vdi)));
+                    }
                 }
             });
         }

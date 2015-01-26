@@ -153,6 +153,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     PatchingWizard_PatchingPage.Patch = PatchingWizard_UploadPage.Patch;
                 }
+                PatchingWizard_PatchingPage.SuppPackVdis = PatchingWizard_UploadPage.SuppPackVdis;
             }
             else if (prevPageType == typeof(PatchingWizard_ModePage))
             {

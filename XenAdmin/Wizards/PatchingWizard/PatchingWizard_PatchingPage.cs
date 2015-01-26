@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Reflection;
 using System.Threading;
 using log4net;
@@ -67,6 +68,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public bool IsAutomaticMode { private get; set; }
         public string SelectedNewPatch { private get; set; }
         public List<Problem> ProblemsResolvedPreCheck { private get; set; }
+        public Dictionary<Host, VDI> SuppPackVdis { private get; set; }
         #endregion
 
         public override string Text
@@ -125,11 +127,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return;
             }
 
-            //if we reach here it's either UpdateType.NewRetail or UpdateType.Existing
+            //if we reach here it's either UpdateType.NewRetail, UpdateType.Existing or UpdateType.NewSuppPack
 
             if (!IsAutomaticMode)
             {
-                actionManualMode = new ApplyPatchAction(new List<Pool_patch> { Patch }, SelectedServers);
+                if (SelectedUpdateType != UpdateType.NewSuppPack)
+                    actionManualMode = new ApplyPatchAction(new List<Pool_patch> { Patch }, SelectedServers);
+                else
+                    actionManualMode = new InstallSupplementalPackAction(SuppPackVdis, false);
                 actionManualMode.Changed += action_Changed;
                 actionManualMode.Completed += action_Completed;
                 textBoxLog.Text = ManualTextInstructions;
@@ -144,13 +149,17 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             foreach (Pool pool in SelectedPools)
             {
-                List<Pool_patch> poolPatches = new List<Pool_patch>(pool.Connection.Cache.Pool_patches);
-                Pool_patch poolPatch = poolPatches.Find(delegate(Pool_patch otherPatch)
-                                                                     {
-                                                                         if (Patch != null)
-                                                                             return otherPatch.uuid == Patch.uuid;
-                                                                         return false;
-                                                                     });
+                Pool_patch poolPatch = null;
+                if (SelectedUpdateType != UpdateType.NewSuppPack)
+                {
+                    List<Pool_patch> poolPatches = new List<Pool_patch>(pool.Connection.Cache.Pool_patches);
+                    poolPatch = poolPatches.Find(delegate(Pool_patch otherPatch)
+                                                     {
+                                                         if (Patch != null)
+                                                             return otherPatch.uuid == Patch.uuid;
+                                                         return false;
+                                                     });
+                }
 
                 List<Host> poolHosts = new List<Host>(pool.Connection.Cache.Hosts);
                 Host master = SelectedServers.Find(host => host.IsMaster() && poolHosts.Contains(host));
@@ -163,7 +172,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         if (!server.IsMaster())
                         {   
                             // check patch isn't already applied here
-                            if (poolPatch.AppliedOn(server) == DateTime.MaxValue)
+                            if (poolPatch == null || poolPatch.AppliedOn(server) == DateTime.MaxValue)
                                 planActions.AddRange(CompileActionList(server, poolPatch));
                         }
                     }
@@ -290,7 +299,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             
             try
             {
-                Program.Invoke(Program.MainWindow, FinishedSuccessfully);
+                if (sender.Exception != null)
+                {
+                    Program.Invoke(Program.MainWindow, () => FinishedWithErrors(new Exception(sender.Title)));
+                }
+                else
+                    Program.Invoke(Program.MainWindow, FinishedSuccessfully);
             }
             catch (Exception except)
             {
@@ -381,7 +395,13 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private List<PlanAction> CompileActionList(Host host, Pool_patch patch)
         {
+            if (SelectedUpdateType == UpdateType.NewSuppPack)
+                return CompileSuppPackActionList(host);
+
             List<PlanAction> actions = new List<PlanAction>();
+
+            if (patch == null)
+                return actions;
 
             List<XenRef<VM>> runningVMs = RunningVMs(host, patch);
 
@@ -450,11 +470,43 @@ namespace XenAdmin.Wizards.PatchingWizard
             return vms;
         }
 
+        private static List<XenRef<VM>> RunningVMs(Host host)
+        {
+            List<XenRef<VM>> vms = new List<XenRef<VM>>();
+            foreach (VM vm in host.Connection.ResolveAll(host.resident_VMs))
+            {
+                if (!vm.is_a_real_vm)
+                    continue;
+
+                vms.Add(new XenRef<VM>(vm.opaque_ref));
+            }
+            return vms;
+        }
+
+        private List<PlanAction> CompileSuppPackActionList(Host host)
+        {
+            List<PlanAction> actions = new List<PlanAction>();
+            
+            if (SelectedUpdateType != UpdateType.NewSuppPack || SuppPackVdis == null || !SuppPackVdis.ContainsKey(host))
+                return actions;
+            
+            List<XenRef<VM>> runningVMs = RunningVMs(host);
+
+            actions.Add(new InstallSupplementalPackPlanAction(host, SuppPackVdis[host]));
+
+            // after_apply_guidance is restartHost
+            actions.Add(new EvacuateHostPlanAction(host));
+            actions.Add(new RebootHostPlanAction(host));
+            actions.Add(new BringBabiesBackAction(runningVMs, host, false));
+
+            return actions;
+        }
+
         #endregion
 
         private void FinishedWithErrors(Exception exception)
         {
-            labelTitle.Text = string.Format(Messages.UPDATE_WAS_NOT_COMPLETED, Patch.Name);
+            labelTitle.Text = string.Format(Messages.UPDATE_WAS_NOT_COMPLETED, GetUpdateName());
             string errorMessage = string.Format(Messages.PATCHING_WIZARD_ERROR, exception.Message);
             labelError.Text = errorMessage;
             pictureBox1.Image = SystemIcons.Error.ToBitmap();
@@ -463,9 +515,23 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void FinishedSuccessfully()
         {
-            labelTitle.Text = string.Format(Messages.UPDATE_WAS_SUCCESSFULLY_INSTALLED, Patch.Name);
+            labelTitle.Text = string.Format(Messages.UPDATE_WAS_SUCCESSFULLY_INSTALLED, GetUpdateName());
             pictureBox1.Image = null;
             labelError.Text = Messages.CLOSE_WIZARD_CLICK_FINISH;
+        }
+
+        private string GetUpdateName()
+        {
+            if (Patch == null)
+                try
+                {
+                    return new FileInfo(SelectedNewPatch).Name;
+                }
+                catch (Exception)
+                {
+                    return SelectedNewPatch;
+                }
+            return Patch.Name;
         }
     }
 }

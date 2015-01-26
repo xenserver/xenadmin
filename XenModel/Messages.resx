@@ -1604,6 +1604,9 @@ Warning: you must ensure that the SR is not in use by any server not connected t
   <data name="APPLYING_PATCH" xml:space="preserve">
     <value>Applying Update '{0}' to Server '{1}'...</value>
   </data>
+  <data name="APPLYING_UPDATE" xml:space="preserve">
+    <value>Applying update to {0} server(s)</value>
+  </data>
   <data name="APPLYING_UPDATES" xml:space="preserve">
     <value>Applying {0} update(s) to {1} server(s)</value>
   </data>
