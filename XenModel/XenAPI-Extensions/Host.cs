@@ -1519,7 +1519,7 @@ namespace XenAPI
         {
             get
             {
-                return Helpers.CreamOrGreater(Connection);  // TODO: Replace with CreamOrGreater
+                return Helpers.CreamOrGreater(Connection);
             }
         }
         #endregion
