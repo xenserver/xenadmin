@@ -82,6 +82,8 @@ namespace XenAdmin.ConsoleView
 
         private bool RDPEnabled { get { return source != null ? source.RDPEnabled : false; } }
 
+        private bool RDPControlEnabled { get { return source != null ? source.RDPControlEnabled : false; } }
+
         public VNCTabView(VNCView parent, VM source, string elevatedUsername, string elevatedPassword)
         {
             Program.AssertOnEventThread();
@@ -766,9 +768,9 @@ namespace XenAdmin.ConsoleView
                 vncScreen.Unpause();
         }
 
-        private bool RDPDisabledOnCreamOrGreater(IXenConnection conn)
+        private bool CanEnableRDPOnCreamOrGreater(IXenConnection conn)
         {
-            return (!RDPEnabled && Helpers.CreamOrGreater(conn));
+            return (RDPControlEnabled && !RDPEnabled && Helpers.CreamOrGreater(conn));
         }
 
         // Make the 'enable RDP' button show something sensible if we can...
@@ -798,7 +800,7 @@ namespace XenAdmin.ConsoleView
                     if (osString != null)
                     {
                         if (osString.Contains("Microsoft"))
-                            label = (RDPDisabledOnCreamOrGreater(source.Connection)) ? enableRDP : UseRDP;
+                            label = (CanEnableRDPOnCreamOrGreater(source.Connection)) ? enableRDP : UseRDP;
                         else
                             label = UseXVNC;
                     }
@@ -1112,7 +1114,7 @@ namespace XenAdmin.ConsoleView
                 log.DebugFormat("RDP detected for VM '{0}'", source == null ? "unknown/null" : source.name_label);
                 this.toggleToXVNCorRDP = RDP;
                 if (vncScreen.UseVNC)
-                    if (RDPDisabledOnCreamOrGreater(source.Connection))
+                    if (CanEnableRDPOnCreamOrGreater(source.Connection))
                         this.toggleConsoleButton.Text = enableRDP;
                     else
                         this.toggleConsoleButton.Text = UseRDP;
@@ -1174,7 +1176,7 @@ namespace XenAdmin.ConsoleView
                     vncScreen.UseVNC = !vncScreen.UseVNC;
                     vncScreen.UserWantsToSwitchProtocol = true;
 
-                    if (RDPDisabledOnCreamOrGreater(source.Connection))
+                    if (CanEnableRDPOnCreamOrGreater(source.Connection))
                     {
                         ThreeButtonDialog d = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(System.Drawing.SystemIcons.Question, Messages.FORCE_ENABLE_RDP),
@@ -1225,7 +1227,7 @@ namespace XenAdmin.ConsoleView
         {
             bool rdp = (toggleToXVNCorRDP == RDP);
             if (rdp)
-                toggleConsoleButton.Text = vncScreen.UseVNC ? (RDPDisabledOnCreamOrGreater(source.Connection) ? enableRDP : UseRDP) : UseStandardDesktop;
+                toggleConsoleButton.Text = vncScreen.UseVNC ? (CanEnableRDPOnCreamOrGreater(source.Connection) ? enableRDP : UseRDP) : UseStandardDesktop;
             else
                 toggleConsoleButton.Text = vncScreen.UseSource ? UseXVNC : UseVNC;
             scaleCheckBox.Visible = !rdp || vncScreen.UseVNC;

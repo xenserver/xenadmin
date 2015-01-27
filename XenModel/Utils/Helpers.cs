@@ -438,17 +438,15 @@ namespace XenAdmin.Core
                 HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
         }
 
-        /// Creedence is ver. 2.0.0
+        /// Cream platform version is same with Creedence but XAPI version is 2.4
         /// <param name="host">May be null, in which case true is returned.</param>
         public static bool CreamOrGreater(Host host)
         {
             if (host == null)
                 return true;
 
-            string platform_version = HostPlatformVersion(host);
-            return
-                platform_version != null && productVersionCompare(platform_version, "1.9.90") > 0 ||
-                HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+            API_Version APIVersion = Helper.GetAPIVersion(host.API_version_major, host.API_version_minor);
+            return (CreedenceOrGreater(host) && APIVersion >= API_Version.API_2_4) || HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
