@@ -63,6 +63,7 @@ namespace XenAdmin.Actions
 
             ApiMethodsToRoleCheck.Add("VDI.create");
             ApiMethodsToRoleCheck.Add("VDI.destroy");
+            ApiMethodsToRoleCheck.Add("VDI.set_other_config");
             ApiMethodsToRoleCheck.Add("http/put_import_raw_vdi");
             
             Host = master;
@@ -148,6 +149,15 @@ namespace XenAdmin.Actions
                 if (vdiRef != null)
                     RemoveVDI(Session, vdiRef);
                 throw;
+            }
+
+            // mark the vdi as being a temporary supp pack iso
+            vdi = Connection.Resolve(vdiRef);
+            if (vdi != null)
+            {
+                var otherConfig = new Dictionary<string, string>(vdi.other_config);
+                otherConfig["supp_pack_iso"] = "true";
+                VDI.set_other_config(Session, vdiRef, otherConfig);
             }
 
             if (localStorageHost != null)
