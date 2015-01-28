@@ -522,16 +522,16 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private string GetUpdateName()
         {
-            if (Patch == null)
-                try
-                {
-                    return new FileInfo(SelectedNewPatch).Name;
-                }
-                catch (Exception)
-                {
-                    return SelectedNewPatch;
-                }
-            return Patch.Name;
+            if (Patch != null)
+                return Patch.Name;
+            try
+            {
+                return new FileInfo(SelectedNewPatch).Name;
+            }
+            catch (Exception)
+            {
+                return SelectedNewPatch;
+            }
         }
     }
 }

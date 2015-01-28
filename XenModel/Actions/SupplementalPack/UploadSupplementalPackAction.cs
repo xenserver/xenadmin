@@ -43,7 +43,6 @@ namespace XenAdmin.Actions
     public class UploadSupplementalPackAction : AsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private const int HTTP_PUT_TIMEOUT = 30 * 60 * 1000; // 30 minutes
 
         private List<SR> srList = new List<SR>();
 
@@ -89,6 +88,7 @@ namespace XenAdmin.Actions
             if (srList.Count == 0)
                 throw new Failure(Failure.OUT_OF_SPACE);
 
+            totalCount = srList.Count;
             foreach (var sr in srList)
             {
                 Result = UploadSupplementalPack(sr);
@@ -99,6 +99,9 @@ namespace XenAdmin.Actions
         {
             CanCancel = !Cancelling;
         }
+
+        private long totalCount;
+        private long totalUploaded;
 
         private string UploadSupplementalPack(SR sr)
         {
@@ -139,9 +142,18 @@ namespace XenAdmin.Actions
 
             try
             {
-                result = HTTPHelper.Put(this, HTTP_PUT_TIMEOUT, suppPackFilePath, hostUrl,
-                                        (HTTP_actions.put_sss) HTTP_actions.put_import_raw_vdi,
-                                        Session.uuid, vdiRef.opaque_ref);
+                HTTP.UpdateProgressDelegate progressDelegate = delegate(int percent)
+                {
+                    var actionPercent = (int)(((totalUploaded * 100) + percent) / totalCount);
+                    Tick(actionPercent, Description);
+                };
+
+                Session session = NewSession();
+                RelatedTask = Task.create(Session, "uploadTask", hostUrl);
+
+                result = HTTPHelper.Put(progressDelegate, GetCancelling, true, Connection, RelatedTask, ref session,  suppPackFilePath, hostUrl,
+                                        (HTTP_actions.put_sss)HTTP_actions.put_import_raw_vdi, 
+                                        session.uuid, vdiRef.opaque_ref);
             }
             catch (Exception ex)
             {
@@ -150,14 +162,10 @@ namespace XenAdmin.Actions
                     RemoveVDI(Session, vdiRef);
                 throw;
             }
-
-            // mark the vdi as being a temporary supp pack iso
-            vdi = Connection.Resolve(vdiRef);
-            if (vdi != null)
+            finally
             {
-                var otherConfig = new Dictionary<string, string>(vdi.other_config);
-                otherConfig["supp_pack_iso"] = "true";
-                VDI.set_other_config(Session, vdiRef, otherConfig);
+                Task.destroy(Session, RelatedTask);
+                RelatedTask = null;
             }
 
             if (localStorageHost != null)
@@ -166,6 +174,7 @@ namespace XenAdmin.Actions
                 foreach (var server in servers)
                     VdiRefs.Add(server, vdiRef);
 
+            totalUploaded++;
             Description = String.Format(Messages.SUPP_PACK_UPLOADED, sr.Name);
             return result;
         }
@@ -182,6 +191,8 @@ namespace XenAdmin.Actions
             vdi.sharable = false;
             vdi.type = vdi_type.user;
             vdi.VMHint = "";
+            //mark the vdi as being a temporary supp pack iso
+            vdi.other_config = new Dictionary<string, string> {{"supp_pack_iso", "true"}};
             return vdi;
         }
 
@@ -195,7 +206,7 @@ namespace XenAdmin.Actions
             catch (Exception ex)
             {
                 log.ErrorFormat("{0}, {1}", "Failed to remove a vdi", ex.Message);
-                throw new Exception("Failed to remove a vdi", ex);
+                throw;
             }
             return;
         }
