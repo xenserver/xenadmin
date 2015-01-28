@@ -84,6 +84,8 @@ namespace XenAdmin.ConsoleView
 
         private bool RDPControlEnabled { get { return source != null ? source.RDPControlEnabled : false; } }
 
+        public bool IsRDPControlEnabled() { return RDPControlEnabled; }
+
         public VNCTabView(VNCView parent, VM source, string elevatedUsername, string elevatedPassword)
         {
             Program.AssertOnEventThread();
@@ -543,7 +545,7 @@ namespace XenAdmin.ConsoleView
                 {
                     log.DebugFormat("'{0}' console: Starting RDP polling. (RDP polling is enabled in settings.)", source);
                     toggleConsoleButton.Visible = true;
-                    if(Helpers.CreamOrGreater(source.Connection))
+                    if(Helpers.CreamOrGreater(source.Connection) && RDPControlEnabled)
                         toggleConsoleButton.Enabled = true;
                     else
                         toggleConsoleButton.Enabled = false;
@@ -1192,7 +1194,7 @@ namespace XenAdmin.ConsoleView
                         }
                     }
 
-                    if (vncScreen.rdpIP == null && vncScreen.UseVNC && Properties.Settings.Default.EnableRDPPolling && (!Helpers.CreamOrGreater(source.Connection) || tryToConnectRDP))
+                    if (vncScreen.rdpIP == null && vncScreen.UseVNC && Properties.Settings.Default.EnableRDPPolling && (!(Helpers.CreamOrGreater(source.Connection) && RDPControlEnabled) || tryToConnectRDP))
                     {
                         toggleConsoleButton.Enabled = false;
                     }

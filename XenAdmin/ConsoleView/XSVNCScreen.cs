@@ -686,7 +686,7 @@ namespace XenAdmin.ConsoleView
         private void startPolling()
         {
             //Disable the button first, but only if in text/default console (to allow user to return to the text console - ref. CA-70314)
-            if (Helpers.CreamOrGreater(Source.Connection))
+            if (Helpers.CreamOrGreater(Source.Connection) && parentVNCTabView.IsRDPControlEnabled())
             {
                 parentVNCTabView.EnableToggleVNCButton();
             }
