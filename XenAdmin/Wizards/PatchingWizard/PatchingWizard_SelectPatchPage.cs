@@ -114,6 +114,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                     SelectedUpdateType = UpdateType.NewOem;
                 else if (dataGridViewPatches.SelectedRows.Count > 0 && dataGridViewPatches.SelectedRows[0].Cells[ColumnUpdate.Index].Value.ToString().EndsWith(".xsupdate"))
                     SelectedUpdateType = UpdateType.NewRetail;
+                else if (dataGridViewPatches.SelectedRows.Count > 0 && dataGridViewPatches.SelectedRows[0].Cells[ColumnUpdate.Index].Value.ToString().EndsWith(".iso"))
+                    SelectedUpdateType = UpdateType.NewSuppPack;
                 else
                     SelectedUpdateType = UpdateType.Existing;
 
@@ -214,7 +216,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public void AddFile(string fileName)
         {
-            if (fileName.EndsWith(".xsoem") || fileName.EndsWith(".xsupdate"))
+            if (fileName.EndsWith(".xsoem") || fileName.EndsWith(".xsupdate") || fileName.EndsWith(".iso"))
             {
                 PatchGridViewRow row = new PatchGridViewRow(fileName);
                 int index = dataGridViewPatches.Rows.IndexOf(row);
@@ -239,7 +241,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             get
             {
-                return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.NewOem
+                return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.NewOem || SelectedUpdateType == UpdateType.NewSuppPack
                            ? ((PatchGridViewRow)dataGridViewPatches.SelectedRows[0]).PathPatch
                            : null;
             }
@@ -335,7 +337,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                                              ? fileInfo.Exists
                                                    ? String.Format(Messages.PATCH_EXPANDED_DESCRIPTION
                                                                    , _patchPath, fileInfo.CreationTime,
-                                                                   fileInfo.LastWriteTime, fileInfo.Length / 1024 / 1024)
+                                                                   fileInfo.LastWriteTime, Util.DiskSizeString(fileInfo.Length))
                                                    : String.Format(Messages.PATCH_NOT_FOUND_EXPANDED_DESCRIPTION,
                                                                    _patchPath)
                                              : _patchPath;
@@ -428,5 +430,5 @@ namespace XenAdmin.Wizards.PatchingWizard
         }
     }
 
-    public enum UpdateType { NewRetail, NewOem, Existing }
+    public enum UpdateType { NewRetail, NewOem, Existing, NewSuppPack}
 }

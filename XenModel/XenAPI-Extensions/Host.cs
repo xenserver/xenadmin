@@ -1382,8 +1382,8 @@ namespace XenAPI
             {
                 //for standalone hosts we do not show redundant location info
                 return Helpers.GetPool(Connection) == null ? string.Empty : base.LocationString;
-			}
-		}
+            }
+        }
 
         public bool EnterpriseFeaturesEnabled
         {
@@ -1512,6 +1512,14 @@ namespace XenAPI
                         packs.Add(pack);
                 }
                 return packs;
+            }
+        }
+
+        public bool CanInstallSuppPack
+        {
+            get
+            {
+                return Helpers.CreamOrGreater(Connection);
             }
         }
         #endregion

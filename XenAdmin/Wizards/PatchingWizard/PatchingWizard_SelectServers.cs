@@ -130,7 +130,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             var row = (PatchingHostsDataGridViewRow)dataGridViewHosts.Rows[index];
 
-            if(!host.CanApplyHotfixes)
+            if(type != UpdateType.NewSuppPack && !host.CanApplyHotfixes)
             {
                 row.Enabled = false;
                 row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED;
@@ -154,6 +154,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                     {
                         row.Enabled = false;
                         row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED;
+                    }
+                    break;
+                case UpdateType.NewSuppPack:
+                    if (!host.CanInstallSuppPack)
+                    {
+                        row.Enabled = false;
+                        row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS;
                     }
                     break;
             }
