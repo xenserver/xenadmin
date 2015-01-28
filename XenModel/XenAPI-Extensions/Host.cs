@@ -1448,6 +1448,8 @@ namespace XenAPI
             private bool parsed = false;
             public bool IsValid { get { return parsed; } }
 
+            public string LongDescription { get { return string.Format(Messages.SUPP_PACK_DESCTIPTION, description, version); } }
+
             /// <summary>
             /// Try to parse the supp pack information from one key of software_version
             /// </summary>
@@ -1505,6 +1507,8 @@ namespace XenAPI
             get
             {
                 List<SuppPack> packs = new List<SuppPack>();
+                if (software_version == null)
+                    return packs;
                 foreach (string key in software_version.Keys)
                 {
                     SuppPack pack = new SuppPack(key, software_version[key]);

@@ -10279,6 +10279,9 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="SUNDAY_SHORT" xml:space="preserve">
     <value>Sun</value>
   </data>
+  <data name="SUPP_PACK_DESCTIPTION" xml:space="preserve">
+    <value>{0} (version {1})</value>
+  </data>
   <data name="SUPP_PACK_MISSING_ON" xml:space="preserve">
     <value>{0} (not installed on {1})</value>
   </data>

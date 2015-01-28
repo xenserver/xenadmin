@@ -2653,6 +2653,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Installed supplemental packs.
+        /// </summary>
+        public static string Label_Supplemental_packs_installed {
+            get {
+                return ResourceManager.GetString("Label-Supplemental_packs.installed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home Server.
         /// </summary>
         public static string Label_VM_affinity {

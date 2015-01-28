@@ -649,6 +649,13 @@ namespace XenAdmin.TabPages
                 var menuItems = new[] { applypatch };
                 s.AddEntry(FriendlyName("Pool_patch.not_applied"), hostUnappliedPatches(host), menuItems, Color.Red);
             }
+
+            // add supplemental packs
+            var suppPacks = hostInstalledSuppPacks(host);
+            if (!string.IsNullOrEmpty(suppPacks))
+            {
+                s.AddEntry(FriendlyName("Supplemental_packs.installed"), suppPacks);
+            }
         }
 
         private void generateHABox()
@@ -1514,6 +1521,13 @@ namespace XenAdmin.TabPages
                     result.Add(patch.Name);
             }
 
+            result.Sort(StringUtility.NaturalCompare);
+            return string.Join("\n", result.ToArray());
+        }
+
+        private string hostInstalledSuppPacks(Host host)
+        {
+            var result = host.SuppPacks.Select(suppPack => suppPack.LongDescription).ToList();
             result.Sort(StringUtility.NaturalCompare);
             return string.Join("\n", result.ToArray());
         }
