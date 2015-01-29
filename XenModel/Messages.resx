@@ -4843,7 +4843,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>Plugin {0} has not yet responded to your cancel request. Would you like to force close the process or allow it to continue to run in the background?</value>
   </data>
   <data name="FORCE_ENABLE_RDP" xml:space="preserve">
-    <value>Would you like to turn on Remote Desktop in this VM, and then connect to it over Remote Desktop?</value>
+    <value>Would you like to configure this VM to accept Remote Desktop connections, and then connect to it over Remote Desktop?</value>
   </data>
   <data name="FORCE_REBOOT" xml:space="preserve">
     <value>Force Reboot</value>
