@@ -13808,7 +13808,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Would you like to turn on Remote Desktop in this VM, and then connect to it over Remote Desktop?.
+        ///   Looks up a localized string similar to Would you like to configure this VM to accept Remote Desktop connections, and then connect to it over Remote Desktop?.
         /// </summary>
         public static string FORCE_ENABLE_RDP {
             get {

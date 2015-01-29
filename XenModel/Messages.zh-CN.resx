@@ -4836,7 +4836,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>插件 {0} 尚未对您的取消请求作出响应。是强制关闭进程还是允许其继续在后台运行?</value>
   </data>
   <data name="FORCE_ENABLE_RDP" xml:space="preserve">
-    <value>Would you like to turn on Remote Desktop in this VM, and then connect to it over Remote Desktop?</value>
+    <value>Would you like to configure this VM to accept Remote Desktop connections, and then connect to it over Remote Desktop?</value>
   </data>
   <data name="FORCE_REBOOT" xml:space="preserve">
     <value>强制重启</value>

@@ -4837,7 +4837,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>プラグイン {0} がキャンセル要求に応答していません。プロセスを強制終了するか、バックグラウンドでの続行を許可するかを選択してください。</value>
   </data>
   <data name="FORCE_ENABLE_RDP" xml:space="preserve">
-    <value>Would you like to turn on Remote Desktop in this VM, and then connect to it over Remote Desktop?</value>
+    <value>Would you like to configure this VM to accept Remote Desktop connections, and then connect to it over Remote Desktop?</value>
   </data>
   <data name="FORCE_REBOOT" xml:space="preserve">
     <value>強制再起動</value>
