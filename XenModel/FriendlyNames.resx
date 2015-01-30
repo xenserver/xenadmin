@@ -1742,4 +1742,7 @@
   <data name="Label-host.edition-desktop-plus" xml:space="preserve">
     <value>XenApp/XenDesktop Platinum</value>
   </data>
+  <data name="Label-Supplemental_packs.installed" xml:space="preserve">
+    <value>Installed supplemental packs</value>
+  </data>
 </root>
