@@ -38,6 +38,7 @@ using System.Xml;
 using Citrix.XenCenter;
 using XenAdmin;
 using XenAdmin.Core;
+using XenAdmin.Model;
 using XenAdmin.Network;
 
 
@@ -870,17 +871,18 @@ namespace XenAPI
             Custom = 1,
             Windows = 2,
             Centos = 3,
-            Debian = 4,
-            Oracle = 5,
-            RedHat = 6,
-            Suse = 7,
-            Ubuntu = 8,
-            Citrix = 9,
-            Solaris = 10,
-            Misc = 11,
-            Snapshot = 12,
-            SnapshotFromVmpp = 13,
-            Count = 14//bump this if values are added
+            CoreOS = 4,
+            Debian = 5,
+            Oracle = 6,
+            RedHat = 7,
+            Suse = 8,
+            Ubuntu = 9,
+            Citrix = 10,
+            Solaris = 11,
+            Misc = 12,
+            Snapshot = 13,
+            SnapshotFromVmpp = 14,
+            Count = 15//bump this if values are added
         }
 
         public VmTemplateType TemplateType
@@ -927,6 +929,9 @@ namespace XenAPI
 
                 if (os.Contains("solaris"))
                     return VmTemplateType.Solaris;
+
+                if (os.Contains("coreos"))
+                    return VmTemplateType.CoreOS;
 
                 return VmTemplateType.Misc;
             }
@@ -1641,6 +1646,7 @@ namespace XenAPI
                 return string.Format(Messages.CPU_TOPOLOGY_STRING_N_SOCKET_1_CORE, sockets);
             return string.Format(Messages.CPU_TOPOLOGY_STRING_N_SOCKET_N_CORE, sockets, cores);
         }
+
     }
 
     public struct VMStartupOptions

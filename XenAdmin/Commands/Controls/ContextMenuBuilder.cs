@@ -1290,5 +1290,53 @@ namespace XenAdmin.Commands
         }
 
         #endregion
+
+        #region SingleDockerContainer class
+
+        private class SingleDockerContainer : Builder
+        {
+            public override void Build(IMainWindow mainWindow, SelectedItemCollection selection, ContextMenuItemCollection items)
+            {
+                DockerContainer vm = (DockerContainer)selection[0].XenObject;
+
+                items.AddIfEnabled(new StartDockerContainerCommand(mainWindow, selection));
+                items.AddIfEnabled(new StopDockerContainerCommand(mainWindow, selection));
+                items.AddIfEnabled(new PauseDockerContainerCommand(mainWindow, selection));
+                items.AddIfEnabled(new ResumeDockerContainerCommand(mainWindow, selection));
+            }
+
+            public override bool IsValid(SelectedItemCollection selection)
+            {
+                if (selection.Count == 1)
+                {
+                    DockerContainer dockerContainer = selection[0].XenObject as DockerContainer;
+
+                    return dockerContainer != null;
+                }
+                return false;
+            }
+        }
+
+        #endregion
+
+        #region MultipleDockerContainers class
+
+        private abstract class MultipleDockerContainers : Builder
+        {
+            public override void Build(IMainWindow mainWindow, SelectedItemCollection selection, ContextMenuItemCollection items)
+            {
+                items.AddIfEnabled(new StartDockerContainerCommand(mainWindow, selection));
+                items.AddIfEnabled(new StopDockerContainerCommand(mainWindow, selection));
+                items.AddIfEnabled(new PauseDockerContainerCommand(mainWindow, selection));
+                items.AddIfEnabled(new ResumeDockerContainerCommand(mainWindow, selection));
+            }
+
+            public override bool IsValid(SelectedItemCollection selection)
+            {
+                return selection.AllItemsAre<DockerContainer>();
+            }
+        }
+
+        #endregion
     }
 }

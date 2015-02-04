@@ -42,6 +42,7 @@ using XenAdmin.Wizards.GenericPages;
 using XenAdmin.Core;
 
 using XenAdmin.Actions;
+using System.Windows.Forms;
 
 namespace XenAdmin.Wizards.NewVMWizard
 {
@@ -59,6 +60,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         private readonly RBACWarningPage page_RbacWarning;
         private readonly LunPerVdiNewVMMappingPage page_6b_LunPerVdi;
         private readonly GpuEditPage pageVgpu;
+        private readonly Page_CloudConfigParameters page_CloudConfigParameters;
 
         private Host m_affinity;
         private bool BlockAffinitySelection = false;
@@ -83,6 +85,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             page_RbacWarning = new RBACWarningPage();
             page_6b_LunPerVdi = new LunPerVdiNewVMMappingPage { Connection = xenConnection };
             pageVgpu = new GpuEditPage();
+            page_CloudConfigParameters = new Page_CloudConfigParameters();
 
             #region RBAC Warning Page Checks
             if (connection.Session.IsLocalSuperuser || Helpers.GetMaster(connection).external_auth_type == Auth.AUTH_TYPE_NONE)
@@ -177,12 +180,21 @@ namespace XenAdmin.Wizards.NewVMWizard
                                         VMOperationCommand.StartDiagnosisForm,
                                         gpuCapability ? pageVgpu.GpuGroup : null,
                                         gpuCapability ? pageVgpu.VgpuType : null,
-                                        page_5_CpuMem.SelectedCoresPerSocket);
+                                        page_5_CpuMem.SelectedCoresPerSocket,
+                                        page_CloudConfigParameters.ConfigDriveTemplateText);
+
             Action.RunAsync();
 
             base.FinishWizard();
         }
 
+        protected override void OnKeyPress(System.Windows.Forms.KeyPressEventArgs e)
+        {
+            if (page_CloudConfigParameters != null && page_CloudConfigParameters.ActiveControl is TextBox && e.KeyChar == (char)Keys.Enter)
+                return;
+
+            base.OnKeyPress(e);
+        }
         protected override void UpdateWizardContent(XenTabPage senderPage)
         {
             var prevPageType = senderPage.GetType();
@@ -199,6 +211,9 @@ namespace XenAdmin.Wizards.NewVMWizard
                 pageVgpu.vm = selectedTemplate;
                 page_6_Storage.SelectedTemplate = selectedTemplate;
                 page_7_Networking.SelectedTemplate = selectedTemplate;
+                page_CloudConfigParameters.Affinity = m_affinity;
+                page_CloudConfigParameters.SelectedTemplate = selectedTemplate;
+
 
                 RemovePage(pageVgpu);
                 gpuCapability = Helpers.ClearwaterSp1OrGreater(xenConnection) && Helpers.GpuCapability(xenConnection) && selectedTemplate.CanHaveGpu;
@@ -232,6 +247,12 @@ namespace XenAdmin.Wizards.NewVMWizard
                 // The user cannot set their own affinity, use the one off the template
                 if (BlockAffinitySelection)
                     m_affinity = xenConnection.Resolve(selectedTemplate.affinity);
+
+                RemovePage(page_CloudConfigParameters);
+                if (selectedTemplate.TemplateType == VM.VmTemplateType.CoreOS)
+                {
+                    AddAfterPage(page_6_Storage, page_CloudConfigParameters);
+                }
             }
             else if (prevPageType == typeof(Page_CopyBiosStrings))
             {
