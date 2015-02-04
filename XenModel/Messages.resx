@@ -7650,6 +7650,12 @@ When you configure an NFS storage repository, you simply provide the hostname or
   <data name="NEWVMWIZARD_CDMEDIAPAGE_TITLE" xml:space="preserve">
     <value>Locate the operating system installation media</value>
   </data>
+  <data name="NEWVMWIZARD_CLOUD_CONFIG_PARAMETERS_PAGE" xml:space="preserve">
+    <value>Cloud-Config Parameters</value>
+  </data>
+  <data name="NEWVMWIZARD_CLOUD_CONFIG_PARAMETERS_PAGE_TITLE" xml:space="preserve">
+    <value>Configure Cloud-Config Parameters</value>
+  </data>
   <data name="NEWVMWIZARD_COPY_BIOS_STRINGS_PAGE_HOST" xml:space="preserve">
     <value>Copy BIOS Strings from</value>
   </data>
@@ -7819,6 +7825,9 @@ Review these settings, then click Previous if you need to change anything. Other
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_CITRIX" xml:space="preserve">
     <value>Citrix</value>
+  </data>
+  <data name="NEWVMWIZARD_TEMPLATEPAGE_COREOS" xml:space="preserve">
+    <value>CoreOS</value>
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_CUSTOM" xml:space="preserve">
     <value>Custom</value>
