@@ -196,7 +196,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/xenserver/partneroffers.
+        ///   Looks up a localized string similar to http://www.citrix.com/buy/partnerlocator.html.
         /// </summary>
         public static string PARTNEROFFERS_URL {
             get {

@@ -498,13 +498,17 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FriendlyNames.zh-CN.resx" />
-    <EmbeddedResource Include="InvisibleMessages.ja.resx" />
+    <EmbeddedResource Include="InvisibleMessages.ja.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="InvisibleMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>InvisibleMessages.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="InvisibleMessages.zh-CN.resx" />
+    <EmbeddedResource Include="InvisibleMessages.zh-CN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Messages.ja.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
