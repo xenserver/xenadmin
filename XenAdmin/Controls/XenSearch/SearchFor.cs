@@ -89,6 +89,7 @@ namespace XenAdmin.Controls.XenSearch
             typeNames[ObjectTypes.Server | ObjectTypes.DisconnectedServer | ObjectTypes.VM | ObjectTypes.UserTemplate | ObjectTypes.RemoteSR | ObjectTypes.LocalSR] = Messages.SERVERS_AND_VMS_AND_CUSTOM_TEMPLATES_AND_ALL_SRS;
             typeNames[ObjectTypes.AllExcFolders] = Messages.ALL_TYPES;
             typeNames[ObjectTypes.AllIncFolders] = Messages.ALL_TYPES_AND_FOLDERS;
+            //typeNames[ObjectTypes.DockerContainer] = "Docker containers";
         }
 
         private void AddItemToSearchFor(ObjectTypes type)
@@ -130,6 +131,7 @@ namespace XenAdmin.Controls.XenSearch
             AddItemToSearchFor(ObjectTypes.VDI);
             AddItemToSearchFor(ObjectTypes.Network);
             AddItemToSearchFor(ObjectTypes.Folder);
+            //AddItemToSearchFor(ObjectTypes.DockerContainer);
             AddSeparator();
             AddItemToSearchFor(ObjectTypes.Server | ObjectTypes.DisconnectedServer | ObjectTypes.VM);
             AddItemToSearchFor(ObjectTypes.Server | ObjectTypes.DisconnectedServer | ObjectTypes.VM | ObjectTypes.UserTemplate | ObjectTypes.RemoteSR);

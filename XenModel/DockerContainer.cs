@@ -48,6 +48,7 @@ namespace XenAdmin.Model
             this.parent = parent;
             this.Connection = parent.Connection;
             this.uuid = uuid;
+            this.opaque_ref = uuid; //using uuid, because opaque_ref does not exist at server side
             this.name_label = name;
             this.name_description = description;
             this.status = status;

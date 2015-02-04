@@ -81,6 +81,7 @@ namespace XenAdmin.Controls.XenSearch
             AddItemToSearchFor(ObjectTypes.VDI, initialState);
             AddItemToSearchFor(ObjectTypes.Network, initialState);
             AddItemToSearchFor(ObjectTypes.Folder, initialState);
+            //AddItemToSearchFor(ObjectTypes.DockerContainer, initialState);
 
             // The item check change event only fires before the check state changes
             // so to reuse the logic we have to pretend that something has changed as the enablement code expects to deal with a new value from the args

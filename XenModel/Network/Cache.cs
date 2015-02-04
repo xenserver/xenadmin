@@ -37,6 +37,7 @@ using System.Reflection;
 using XenAPI;
 using XenAdmin.Core;
 using XenAdmin.Model;
+using System.Linq;
 
 namespace XenAdmin.Network
 {
@@ -48,6 +49,8 @@ namespace XenAdmin.Network
         private readonly ChangeableDictionary<XenRef<Blob>, Blob> _blob = new ChangeableDictionary<XenRef<Blob>, Blob>();
         private readonly ChangeableDictionary<XenRef<XenAPI.Console>, XenAPI.Console> _console = new ChangeableDictionary<XenRef<XenAPI.Console>, XenAPI.Console>();
         private readonly ChangeableDictionary<XenRef<Folder>, Folder> _folders = new ChangeableDictionary<XenRef<Folder>, Folder>();
+        private readonly ChangeableDictionary<XenRef<DockerContainer>, DockerContainer> _dockerContainers = new ChangeableDictionary<XenRef<DockerContainer>, DockerContainer>();
+
         private readonly ChangeableDictionary<XenRef<GPU_group>, GPU_group> _gpu_groups = new ChangeableDictionary<XenRef<GPU_group>, GPU_group>();
         private readonly ChangeableDictionary<XenRef<Host>, Host> _host = new ChangeableDictionary<XenRef<Host>, Host>();
         private readonly ChangeableDictionary<XenRef<Host_cpu>, Host_cpu> _host_cpu = new ChangeableDictionary<XenRef<Host_cpu>, Host_cpu>();
@@ -119,6 +122,11 @@ namespace XenAdmin.Network
         public Folder[] Folders
         {
             get { return contents(_folders); }
+        }
+
+        public DockerContainer[] DockerContainers
+        {
+            get { return contents(_dockerContainers); }
         }
 
         public GPU_group[] GPU_groups
@@ -546,6 +554,39 @@ namespace XenAdmin.Network
             }
         }
 
+        public void CheckDockerContainersBatchChange()
+        {
+            if (dockerContainersChanged)
+            {
+                dockerContainersChanged = false;
+                _dockerContainers.OnBatchCollectionChanged();
+            }
+        }
+
+        private bool dockerContainersChanged = false;
+        public void UpdateDockerContainersForVM(IEnumerable<DockerContainer> containers, VM vm)
+        {
+            dockerContainersChanged = true;
+         
+            //updating existing, adding new containers
+            foreach (var c in containers)
+            {
+                _dockerContainers[new XenRef<DockerContainer>(c)] = c;
+            }
+
+            IEnumerable<KeyValuePair<XenRef<DockerContainer>, DockerContainer>> containersGoneFromThisVM = null;
+            //removing the ones that are not there anymore on this VM
+            lock (_dockerContainers)
+            {
+                containersGoneFromThisVM = _dockerContainers.Where(c => c.Value != null && c.Value.Parent.uuid == vm.uuid && !containers.Any(cont => cont.uuid == c.Value.uuid)).ToList();
+
+                foreach (var c in containersGoneFromThisVM)
+                {
+                    _dockerContainers.Remove(new XenRef<DockerContainer>(c.Value));
+                }
+            }
+        }
+
         public IEnumerable<IXenObject> XenSearchableObjects
         {
             get
@@ -569,6 +610,9 @@ namespace XenAdmin.Network
                     yield return o;
 
                 foreach (IXenObject o in Folders)
+                    yield return o;
+
+                foreach (IXenObject o in DockerContainers)
                     yield return o;
 
                 foreach (Pool pool in Pools)

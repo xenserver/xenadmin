@@ -1570,52 +1570,6 @@ namespace XenAPI
             return string.Format(Messages.CPU_TOPOLOGY_STRING_N_SOCKET_N_CORE, sockets, cores);
         }
 
-        public List<DockerContainer> GetContainers()
-        {
-            var containers = new List<DockerContainer>();
-            if (other_config.ContainsKey("docker_ps"))
-            {
-                XmlDocument doc = new XmlDocument();
-                doc.LoadXml(other_config["docker_ps"]);
-
-                foreach (XmlNode entry in doc.GetElementsByTagName("entry"))
-                {
-                    string id = "";
-                    var propertyNode = entry.ChildNodes.Cast<XmlNode>().FirstOrDefault(node => node.Name == "id");
-                    if (propertyNode != null)
-                        id = propertyNode.InnerText;
-
-                    string name = "";
-                    propertyNode = entry.ChildNodes.Cast<XmlNode>().FirstOrDefault(node => node.Name == "names");
-                    if (propertyNode != null)
-                        name = propertyNode.InnerText;
-
-                    string status = "";
-                    propertyNode = entry.ChildNodes.Cast<XmlNode>().FirstOrDefault(node => node.Name == "status");
-                    if (propertyNode != null)
-                        status = propertyNode.InnerText;
-
-                    string container = "";
-                    propertyNode = entry.ChildNodes.Cast<XmlNode>().FirstOrDefault(node => node.Name == "container");
-                    if (propertyNode != null)
-                        container = propertyNode.InnerText;
-
-                    string created = "";
-                    propertyNode = entry.ChildNodes.Cast<XmlNode>().FirstOrDefault(node => node.Name == "created");
-                    if (propertyNode != null)
-                        created = propertyNode.InnerText;
-
-                    string image = "";
-                    propertyNode = entry.ChildNodes.Cast<XmlNode>().FirstOrDefault(node => node.Name == "image");
-                    if (propertyNode != null)
-                        image = propertyNode.InnerText;
-
-                    DockerContainer dockerContainer = new DockerContainer(this, id, name, "", status, container, created, image);
-                    containers.Add(dockerContainer);
-                }
-            }
-            return containers;
-        }
     }
 
     public struct VMStartupOptions

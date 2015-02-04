@@ -201,6 +201,7 @@ namespace XenAdmin
             FormFontFixer.Fix(this);
 
             Folders.InitFolders();
+            DockerContainers.InitDockerContainers();
             OtherConfigAndTagsWatcher.InitEventHandlers();
 
             // Fix colour of text on gradient panels
