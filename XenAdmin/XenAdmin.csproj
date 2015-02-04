@@ -3390,12 +3390,6 @@
     <Compile Include="Wizards\NewVMWizard\LunPerVdiNewVMMappingPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Wizards\NewVMWizard\Page_Cloud.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizards\NewVMWizard\Page_Cloud.designer.cs">
-      <DependentUpon>Page_Cloud.cs</DependentUpon>
-    </Compile>
     <Compile Include="Wizards\ImportWizard\ImportWizard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -6211,15 +6205,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewVMWizard\NewVMWizard.zh-CN.resx">
       <DependentUpon>NewVMWizard.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewVMWizard\Page_Cloud.ja.resx">
-      <DependentUpon>Page_Cloud.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewVMWizard\Page_Cloud.resx">
-      <DependentUpon>Page_Cloud.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewVMWizard\Page_Cloud.zh-CN.resx">
-      <DependentUpon>Page_Cloud.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewVMWizard\Page_CopyBiosStrings.ja.resx">
       <DependentUpon>Page_CopyBiosStrings.cs</DependentUpon>

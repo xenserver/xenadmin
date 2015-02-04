@@ -57,7 +57,6 @@ namespace XenAdmin.Wizards.NewVMWizard
         private readonly Page_Networking page_7_Networking;
         private readonly Page_Finish page_8_Finish;
         private readonly RBACWarningPage page_RbacWarning;
-        private readonly Page_Cloud page_Cloud;
         private readonly LunPerVdiNewVMMappingPage page_6b_LunPerVdi;
         private readonly GpuEditPage pageVgpu;
 
@@ -82,7 +81,6 @@ namespace XenAdmin.Wizards.NewVMWizard
             page_7_Networking = new Page_Networking();
             page_8_Finish = new Page_Finish();
             page_RbacWarning = new RBACWarningPage();
-            page_Cloud = new Page_Cloud();
             page_6b_LunPerVdi = new LunPerVdiNewVMMappingPage { Connection = xenConnection };
             pageVgpu = new GpuEditPage();
 
