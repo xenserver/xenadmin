@@ -77,9 +77,10 @@ namespace XenAdmin.XenSearch
         //StorageLinkVolume = 1 << 14,
         //StorageLinkRepository = 1 << 15,
         Folder = 1 << 11,
-        AllIncFolders = (1 << 12) - 1,
+        AllIncFolders = ((1 << 14) - 1) & ~ObjectTypes.Appliance,
         AllExcFolders = AllIncFolders & ~ObjectTypes.Folder,
 		Appliance = 1 << 13,
+        DockerContainer = 1 << 14,
     }
 
     public enum PropertyNames
@@ -132,6 +133,8 @@ namespace XenAdmin.XenSearch
         shared,
         [HelpString("Comma-separated list of VM names")]
         vm,
+        [HelpString("List of Docker host-VM names.")]
+        dockervm,
         [HelpString("The immediate parent folder of the selected object")]
         folder,
         [HelpString("Comma-separated list of all the ancestor folders of the selected object")]
@@ -276,6 +279,7 @@ namespace XenAdmin.XenSearch
             PropertyNames_i18n[PropertyNames.isNotFullyUpgraded] = Messages.POOL_VERSIONS_LINK_TEXT_SHORT;
             PropertyNames_i18n[PropertyNames.ip_address] = Messages.ADDRESS;
             PropertyNames_i18n[PropertyNames.vm] = Messages.VM;
+            PropertyNames_i18n[PropertyNames.dockervm] = "Docker VM";
             PropertyNames_i18n[PropertyNames.memory] = Messages.MEMORY;
             PropertyNames_i18n[PropertyNames.sr_type] = Messages.STORAGE_TYPE;
             PropertyNames_i18n[PropertyNames.folder] = Messages.PARENT_FOLDER;
@@ -433,6 +437,7 @@ namespace XenAdmin.XenSearch
 
             properties[PropertyNames.host] = HostProperty;
             properties[PropertyNames.vm] = VMProperty;
+            properties[PropertyNames.dockervm] = DockerVMProperty;
             properties[PropertyNames.networks] = NetworksProperty;
             properties[PropertyNames.storage] = StorageProperty;
             properties[PropertyNames.disks] = DisksProperty;
@@ -929,6 +934,10 @@ namespace XenAdmin.XenSearch
             //{
             //    return ObjectTypes.StorageLinkRepository;
             //}
+            else if (o is DockerContainer)
+            {
+                return (IComparable)ObjectTypes.DockerContainer;
+            }
 
             return null;
         }
@@ -1028,12 +1037,27 @@ namespace XenAdmin.XenSearch
                 else
                     vms.Add(vm);
             }
-
+            else if (o as DockerContainer != null)
+            {
+                vms.Add(((DockerContainer)o).Parent);
+            }
             vms.RemoveAll(new Predicate<VM>(delegate(VM vm)
                 {
                     return vm.not_a_real_vm;
                 }
                               ));
+            return vms;
+        }
+
+        private static ComparableList<VM> DockerVMProperty(IXenObject o)
+        {
+            ComparableList<VM> vms = new ComparableList<VM>();
+
+            if (o as DockerContainer != null)
+            {
+                vms.Add(((DockerContainer)o).Parent);
+            }
+
             return vms;
         }
 
@@ -1312,6 +1336,8 @@ namespace XenAdmin.XenSearch
                                 return Icons.SUSE;
                             else if (os.Contains("windows"))
                                 return Icons.Windows;
+                            else if (os.Contains("coreos"))
+                                return Icons.CoreOS;
 
                             return Icons.XenCenter;
                         };

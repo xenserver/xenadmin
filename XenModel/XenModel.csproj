@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Actions\Action.cs" />
     <Compile Include="Actions\CancellingAction.cs" />
+    <Compile Include="Actions\DockerContainer\DockerContainerLifetimeAction.cs" />
     <Compile Include="Actions\DR\GetMetadataVDIsAction.cs" />
     <Compile Include="Actions\DR\DrTaskCreateAction.cs" />
     <Compile Include="Actions\DR\DrRecoverAction.cs" />
@@ -124,10 +125,12 @@
     <Compile Include="Actions\VM\VMStartAction.cs" />
     <Compile Include="Actions\ZipStatusReportAction.cs" />
     <Compile Include="Alerts\Types\Alert.cs" />
+    <Compile Include="DockerContainers.cs" />
     <Compile Include="CustomFields\CustomField.cs" />
     <Compile Include="CustomFields\CustomFieldDefinition.cs" />
     <Compile Include="CustomFields\CustomFieldsCache.cs" />
     <Compile Include="CustomFields\CustomFieldsManager.cs" />
+    <Compile Include="DockerContainer.cs" />
     <Compile Include="Folders.cs" />
     <Compile Include="InvokeHelper.cs" />
     <Compile Include="Mappings\LiveMigrateOptionsVmMapping.cs" />

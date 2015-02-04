@@ -108,6 +108,10 @@
     <Compile Include="Alerts\Types\MessageAlert.cs" />
     <Compile Include="Alerts\Types\XenServerPatchAlert.cs" />
     <Compile Include="Alerts\Types\XenServerVersionAlert.cs" />
+    <Compile Include="Commands\ResumeDockerContainerCommand.cs" />
+    <Compile Include="Commands\PauseDockerContainerCommand.cs" />
+    <Compile Include="Commands\StopDockerContainerCommand.cs" />
+    <Compile Include="Commands\StartDockerContainerCommand.cs" />
     <Compile Include="Commands\Controls\EditPropertiesToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -230,6 +234,11 @@
     <Compile Include="Dialogs\UpsellDialog.designer.cs">
       <DependentUpon>UpsellDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SettingsPanels\Wlb\WlbAdvancedSettingsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -261,11 +270,6 @@
       <DependentUpon>WlbThresholdsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugins\Features\ParentMenuItemFeature.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="SettingsUpdate.cs" />
     <Compile Include="TabPages\BaseTabPage.cs">
       <SubType>UserControl</SubType>
@@ -546,6 +550,12 @@
     </Compile>
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CSLG.Designer.cs">
       <DependentUpon>CSLG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\NewVMWizard\Page_CloudConfigParameters.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\NewVMWizard\Page_CloudConfigParameters.Designer.cs">
+      <DependentUpon>Page_CloudConfigParameters.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\NewVMWizard\NewVMWizard.cs">
       <SubType>Form</SubType>
@@ -1653,6 +1663,16 @@
     <EmbeddedResource Include="Wizards\GenericPages\RBACWarningPage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>RBACWarningPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewVMWizard\Page_CloudConfigParameters.ja.resx">
+      <DependentUpon>Page_CloudConfigParameters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewVMWizard\Page_CloudConfigParameters.resx">
+      <DependentUpon>Page_CloudConfigParameters.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewVMWizard\Page_CloudConfigParameters.zh-CN.resx">
+      <DependentUpon>Page_CloudConfigParameters.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewVMWizard\NewVMWizard.resx">
       <SubType>Designer</SubType>
@@ -3954,6 +3974,7 @@
     <None Include="Images\close_16.png" />
     <Content Include="Images\commands_16.png" />
     <Content Include="Images\console_16.png" />
+    <None Include="Images\coreos-globe-icon.png" />
     <Content Include="Images\cross.png" />
     <None Include="Images\DateTime16.png" />
     <None Include="Images\sl_connecting_16.png" />
@@ -3985,10 +4006,12 @@
     <None Include="Images\pool_up_16.png" />
     <None Include="Images\pool_up_32.png" />
     <None Include="Images\objects_16_textured.png" />
+    <None Include="Images\PausedDC_16.png" />
     <Content Include="Images\Refresh16.png" />
     <None Include="Images\saved_searches_16.png" />
     <None Include="Images\server_up_16.png" />
     <None Include="Images\saved_searches_24.png" />
+    <None Include="Images\RunningDC_16.png" />
     <Content Include="Images\sl_luns_16.png" />
     <Content Include="Images\debian_16x.png" />
     <None Include="Images\desktop.jpg" />
@@ -4053,6 +4076,7 @@
     <None Include="Images\SpinningFrame5.png" />
     <None Include="Images\SpinningFrame6.png" />
     <None Include="Images\SpinningFrame7.png" />
+    <None Include="Images\StoppedDC_16.png" />
     <Content Include="Images\subscribe.png" />
     <None Include="Images\success_action_16.png" />
     <Content Include="Images\suse_16x.png" />

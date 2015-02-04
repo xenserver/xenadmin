@@ -132,6 +132,7 @@ namespace XenAdmin
             ImageList16.Images.Add("redhat_16x.png", Properties.Resources.redhat_16x);
             ImageList16.Images.Add("suse_16x.png", Properties.Resources.suse_16x);
             ImageList16.Images.Add("windows_h32bit_16.png", Properties.Resources.windows_h32bit_16);
+            ImageList16.Images.Add("coreos-globe-icon.png", Properties.Resources.coreos_globe_icon);
 
             ImageList16.Images.Add("tools_uptodate_16x.png", Properties.Resources.tools_uptodate_16x);
             ImageList16.Images.Add("tools_notinstalled_16x.png", Properties.Resources.tools_notinstalled_16x);
@@ -170,6 +171,11 @@ namespace XenAdmin
             ImageList16.Images.Add("000_TCP_IPGroup_h32bit_16.png", Properties.Resources._000_TCP_IPGroup_h32bit_16);
             ImageList16.Images.Add("infra_view_16_textured.png", Properties.Resources.infra_view_16_textured);
             ImageList16.Images.Add("objects_16_textured.png", Properties.Resources.objects_16_textured);
+
+            ImageList16.Images.Add("RunningDC_16.png", Properties.Resources.RunningDC_16);
+            ImageList16.Images.Add("StoppedDC_16.png", Properties.Resources.StoppedDC_16);
+            ImageList16.Images.Add("PausedDC_16.png", Properties.Resources.PausedDC_16);
+
 
             System.Diagnostics.Trace.Assert(ImageList16.Images.Count == Enum.GetValues(typeof(Icons)).Length,
                 "Programmer error - you must add an entry to the image list when you add a new icon to the enum");
@@ -284,6 +290,10 @@ namespace XenAdmin
             StorageLinkRepository storageLinkRepository = o as StorageLinkRepository;
             if (storageLinkRepository != null)
                 return GetIconFor(storageLinkRepository);
+
+            DockerContainer dockerContainer = o as DockerContainer;
+            if (dockerContainer != null)
+                return GetIconFor(dockerContainer);
 
             System.Diagnostics.Trace.Assert(false,
                 "You asked for an icon for a type I don't recognise!");
@@ -560,6 +570,19 @@ namespace XenAdmin
         public static Icons GetIconFor(PIF pif)
         {
             return pif.IsPrimaryManagementInterface() ? Icons.PifPrimary : Icons.PifSecondary;
+        }
+
+        public static Icons GetIconFor(DockerContainer dockerContainer)
+        {
+            switch (dockerContainer.power_state)
+            {
+                case vm_power_state.Paused:
+                    return Icons.DCPaused;
+                case vm_power_state.Running:
+                    return Icons.DCRunning;
+                default:
+                    return Icons.DCStopped;
+            }
         }
     }
 }

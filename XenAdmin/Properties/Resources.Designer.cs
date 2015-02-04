@@ -1963,6 +1963,16 @@ namespace XenAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap coreos_globe_icon {
+            get {
+                object obj = ResourceManager.GetObject("coreos_globe_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cross {
             get {
                 object obj = ResourceManager.GetObject("cross", resourceCulture);
@@ -2613,6 +2623,16 @@ namespace XenAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap PausedDC_16 {
+            get {
+                object obj = ResourceManager.GetObject("PausedDC_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap PDChevronDown {
             get {
                 object obj = ResourceManager.GetObject("PDChevronDown", resourceCulture);
@@ -2696,6 +2716,16 @@ namespace XenAdmin.Properties {
         internal static System.Drawing.Bitmap Refresh16 {
             get {
                 object obj = ResourceManager.GetObject("Refresh16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RunningDC_16 {
+            get {
+                object obj = ResourceManager.GetObject("RunningDC_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2926,6 +2956,16 @@ namespace XenAdmin.Properties {
         internal static System.Drawing.Bitmap SpinningFrame7 {
             get {
                 object obj = ResourceManager.GetObject("SpinningFrame7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap StoppedDC_16 {
+            get {
+                object obj = ResourceManager.GetObject("StoppedDC_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -67,6 +67,8 @@ namespace XenAdmin.Actions.VMActions
         private readonly GPU_group GpuGroup;
         private readonly VGPU_type VgpuType;
         private readonly long CoresPerSocket;
+        private readonly string cloudConfigDriveTemplateText;
+        private SR firstSR = null;
 
         private Action<VMStartAbstractAction, Failure> _startDiagnosisForm;
         private Action<VM, bool> _warningDialogHAInvalidConfig;
@@ -115,7 +117,7 @@ namespace XenAdmin.Actions.VMActions
             List<DiskDescription> disks, SR fullCopySR, List<VIF> vifs, bool startAfter,
             Action<VM, bool> warningDialogHAInvalidConfig,
             Action<VMStartAbstractAction, Failure> startDiagnosisForm,
-            GPU_group gpuGroup, VGPU_type vgpuType, long coresPerSocket)
+            GPU_group gpuGroup, VGPU_type vgpuType, long coresPerSocket, string cloudConfigDriveTemplateText)
             : base(connection, string.Format(Messages.CREATE_VM, name),
             string.Format(Messages.CREATE_VM_FROM_TEMPLATE, name, Helpers.GetName(template)))
         {
@@ -141,6 +143,7 @@ namespace XenAdmin.Actions.VMActions
             GpuGroup = gpuGroup;
             VgpuType = vgpuType;
             CoresPerSocket = coresPerSocket;
+            this.cloudConfigDriveTemplateText = cloudConfigDriveTemplateText;
 
             Pool pool_of_one = Helpers.GetPoolOfOne(Connection);
             if (HomeServer != null || pool_of_one != null) // otherwise we have no where to put the action
@@ -207,6 +210,8 @@ namespace XenAdmin.Actions.VMActions
             XenAdminConfigManager.Provider.ShowObject(VM.opaque_ref);
             PointOfNoReturn = true;
 
+            CloudCreateConfigDrive();
+           
             AssignVgpu();
 
             if (StartAfter)
@@ -217,6 +222,28 @@ namespace XenAdmin.Actions.VMActions
             }
 
             Description = Messages.VM_SUCCESSFULLY_CREATED;
+        }
+
+        private void CloudCreateConfigDrive()
+        {
+            if (Template.TemplateType == XenAPI.VM.VmTemplateType.CoreOS && !string.IsNullOrEmpty(cloudConfigDriveTemplateText))
+            {
+                Description = "Creating Cloud Config Drive";//Messages.SETTING_VM_PROPERTIES;
+
+                var parameters = new Dictionary<string, string>();
+                parameters.Add("vmuuid", VM.uuid);
+                parameters.Add("sruuid", firstSR.uuid);
+                parameters.Add("configuration", cloudConfigDriveTemplateText.Replace("\r\n", "\n"));
+
+                var action = new ExecutePluginAction(Connection, HomeServer,
+                            "xscontainer",//plugin
+                            "create_config_drive",//function
+                            parameters,
+                            true); //hidefromlogs
+
+                action.RunExternal(Connection.Session);
+                var result = action.Result.Replace("\n", Environment.NewLine);
+            }
         }
 
         private void AssignVgpu()
@@ -470,6 +497,7 @@ namespace XenAdmin.Actions.VMActions
                 {
                     //use the first disk to set the VM.suspend_SR
                     SR vdiSR = Connection.Resolve(vdi.SR);
+                    this.firstSR = vdiSR;
                     if(vdiSR != null && !vdiSR.HBALunPerVDI)
                         suspendSr = vdi.SR;
                     firstDisk = false;

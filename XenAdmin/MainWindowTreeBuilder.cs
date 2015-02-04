@@ -328,6 +328,10 @@ namespace XenAdmin
                 {
                     node = AddVMNode((VM)group);
                 }
+                else if (group is DockerContainer)
+                {
+                    node = AddDockerContainerNode((DockerContainer)group);
+                }
                 else if (group is VM_appliance)
                 {
                     node = AddVmApplianceNode((VM_appliance)group);
@@ -444,7 +448,13 @@ namespace XenAdmin
             {
                 bool hidden = vm.IsHidden;
                 string name = hidden ? String.Format(Messages.X_HIDDEN, vm.Name) : vm.Name;
+
                 return AddNode(name, Images.GetIconFor(vm), hidden, vm);
+            }
+
+            private VirtualTreeNode AddDockerContainerNode(DockerContainer cont)
+            {
+                return AddNode(cont.Name.Ellipsise(1000), Images.GetIconFor(cont), cont.IsHidden, cont);
             }
 
 			private VirtualTreeNode AddVmApplianceNode(VM_appliance appliance)

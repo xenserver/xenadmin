@@ -441,6 +441,10 @@ namespace XenAdmin.TabPages
             {
                 generateDisconnectedHostBox();
             }
+            else if (xenObject is DockerContainer)
+            {
+                generateDockerContainerGeneralBox();
+            }
             else
             {
                 generateGeneralBox();
@@ -1340,6 +1344,20 @@ namespace XenAdmin.TabPages
             }
 
             s.AddEntry(FriendlyName("host.uuid"), GetUUID(xenObject));
+        }
+
+        private void generateDockerContainerGeneralBox()
+        {
+            if (xenObject is DockerContainer)
+            {
+                PDSection s = pdSectionGeneral;
+                DockerContainer dockerContainer = (DockerContainer)xenObject;
+                s.AddEntry(FriendlyName("host.name_label"), Helpers.GetName(dockerContainer));
+                s.AddEntry(Messages.STATUS, dockerContainer.status);
+                s.AddEntry("Created", dockerContainer.created);
+                s.AddEntry("Image", dockerContainer.image);
+                s.AddEntry("Container", dockerContainer.container);
+            }
         }
 
         private void generateStorageLinkBox()

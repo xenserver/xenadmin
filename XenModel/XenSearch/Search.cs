@@ -483,7 +483,10 @@ namespace XenAdmin.XenSearch
         /// <returns></returns>
         public static Search SearchFor(IXenObject value)
         {
-            return SearchFor(value, GetOverviewScope());
+            var scope = GetOverviewScopeExcludingGivenTypes(ObjectTypes.DockerContainer);
+            var search = SearchFor(value, scope);
+            
+            return search;
         }
 
         /// <summary>
@@ -528,7 +531,8 @@ namespace XenAdmin.XenSearch
                 //Grouping storageLinkPoolGrouping = new XenModelObjectPropertyGrouping<StorageLinkPool>(PropertyNames.storageLinkPool, (Grouping)null);
                 //Grouping storageLinkSystemGrouping = new XenModelObjectPropertyGrouping<StorageLinkSystem>(PropertyNames.storageLinkSystem, storageLinkPoolGrouping);
                 //Grouping storageLinkServerGrouping = new XenModelObjectPropertyGrouping<StorageLinkServer>(PropertyNames.storageLinkServer, storageLinkSystemGrouping);
-                Grouping hostGrouping = new XenModelObjectPropertyGrouping<Host>(PropertyNames.host, null);
+                Grouping dockervmGrouping = new XenModelObjectPropertyGrouping<VM>(PropertyNames.dockervm, null);
+                Grouping hostGrouping = new XenModelObjectPropertyGrouping<Host>(PropertyNames.host, dockervmGrouping);
                 Grouping poolGrouping = new XenModelObjectPropertyGrouping<Pool>(PropertyNames.pool, hostGrouping);
 
                 return new Search(new Query(scope, null),
@@ -539,7 +543,7 @@ namespace XenAdmin.XenSearch
         public static ObjectTypes DefaultObjectTypes()
         {
             ObjectTypes types = ObjectTypes.DisconnectedServer | ObjectTypes.Server | ObjectTypes.VM |
-                                ObjectTypes.RemoteSR;
+                                ObjectTypes.RemoteSR | ObjectTypes.DockerContainer;
             //| ObjectTypes.StorageLinkServer | ObjectTypes.StorageLinkSystem | ObjectTypes.StorageLinkPool | ObjectTypes.StorageLinkVolume | ObjectTypes.StorageLinkRepository;
 
             return types;
@@ -554,6 +558,13 @@ namespace XenAdmin.XenSearch
             types |= ObjectTypes.UserTemplate;
 
             return new QueryScope(types);
+        }
+
+        internal static QueryScope GetOverviewScopeExcludingGivenTypes(ObjectTypes excludedTypes)
+        {
+            ObjectTypes types = DefaultObjectTypes();
+            
+            return new QueryScope(types & ~excludedTypes);
         }
 
         public static QueryFilter FullQueryFor(String p)
@@ -869,6 +880,21 @@ namespace XenAdmin.XenSearch
                 true);
 
             searches["dead-beef-1234-snapshotsbyvm"] = SnapshotsByVM;
+
+            /*
+            //Docker containers by VM
+            Search dockerContainersByVM = new Search(
+                new Query(new QueryScope(ObjectTypes.DockerContainer | ObjectTypes.VM), null),
+                new XenModelObjectPropertyGrouping<Pool>(PropertyNames.pool,
+                    new XenModelObjectPropertyGrouping<Host>(PropertyNames.host,
+                        new XenModelObjectPropertyGrouping<VM>(PropertyNames.vm, null))),
+                false,
+                "Default search docker containers by vm",
+                "dead-beef-1234-dockerbyvm",
+                true);
+
+            searches["dead-beef-1234-dockerbyvm"] = dockerContainersByVM;
+            */
         }
     }
 }

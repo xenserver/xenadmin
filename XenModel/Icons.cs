@@ -107,6 +107,7 @@ namespace XenAdmin
         RHEL,
         SUSE,
         Windows,
+        CoreOS,
 
         #endregion
 
@@ -155,6 +156,14 @@ namespace XenAdmin
         PifSecondary,
 
         Home,
-        Objects
+        Objects,
+
+        #region DockerContainer Icons
+
+        DCRunning,
+        DCStopped,
+        DCPaused
+
+        #endregion
     }
 }

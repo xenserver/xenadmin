@@ -321,6 +321,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                 case VM.VmTemplateType.Solaris:
                 case VM.VmTemplateType.Misc:
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_MISC;
+                case VM.VmTemplateType.CoreOS:
+                    return Messages.NEWVMWIZARD_TEMPLATEPAGE_COREOS;
                 case VM.VmTemplateType.Snapshot:
                 case VM.VmTemplateType.SnapshotFromVmpp:
                 default:
@@ -353,6 +355,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                 case VM.VmTemplateType.Solaris:
                 case VM.VmTemplateType.Misc:
                     return Resources._000_VMTemplate_h32bit_16;
+                case VM.VmTemplateType.CoreOS:
+                    return Resources.coreos_globe_icon;
                 case VM.VmTemplateType.Snapshot:
                 case VM.VmTemplateType.SnapshotFromVmpp:
                 default:
