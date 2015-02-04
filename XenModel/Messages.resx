@@ -6796,7 +6796,7 @@ This will permanently delete and reinitialize all local storage on the servers. 
     <value>&amp;Memory:</value>
   </data>
   <data name="MEMORY_XEN" xml:space="preserve">
-    <value>Xen</value>
+    <value>XenServer</value>
   </data>
   <data name="MEM_NOT_WHEN_SUSPENDED" xml:space="preserve">
     <value>The memory cannot be changed when the VM is suspended</value>
