@@ -163,7 +163,7 @@
     <value>http://www.citrix.com/xenserverenterprise</value>
   </data>
   <data name="PARTNEROFFERS_URL" xml:space="preserve">
-    <value>http://www.citrix.co.jp/products/xenserver/xenser.html</value>
+    <value>http://www.citrix.co.jp/partners/</value>
   </data>
   <data name="PLUGINS_URL" xml:space="preserve">
     <value>https://wiki.xenserver.org/XenCenter_Plugins</value>
