@@ -32659,7 +32659,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unknown.
+        ///   Looks up a localized string similar to Unknown (please wait).
         /// </summary>
         public static string VIRTUALIZATION_UNKNOWN {
             get {

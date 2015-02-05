@@ -11297,7 +11297,7 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
     <value>Tools out of date (version {0} installed)</value>
   </data>
   <data name="VIRTUALIZATION_UNKNOWN" xml:space="preserve">
-    <value>Unknown</value>
+    <value>Unknown (please wait)</value>
   </data>
   <data name="VIRTUAL_DISK" xml:space="preserve">
     <value>Virtual Disk</value>
