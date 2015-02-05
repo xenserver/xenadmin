@@ -77,7 +77,7 @@ namespace XenAdmin.XenSearch
         //StorageLinkVolume = 1 << 14,
         //StorageLinkRepository = 1 << 15,
         Folder = 1 << 11,
-        AllIncFolders = ((1 << 14) - 1) & ~ObjectTypes.Appliance,
+        AllIncFolders = (1 << 12) - 1,
         AllExcFolders = AllIncFolders & ~ObjectTypes.Folder,
 		Appliance = 1 << 13,
         DockerContainer = 1 << 14,
