@@ -1112,6 +1112,13 @@ namespace XenAdmin.XenSearch
 
                 hosts.Add(sr.Home);
             }
+            else if (o is DockerContainer)
+            {
+                VM vm = (o as DockerContainer).Parent;
+                Host host = vm.Home();
+                if (host != null)
+                    hosts.Add(host);
+            }
 
             return hosts;
         }
