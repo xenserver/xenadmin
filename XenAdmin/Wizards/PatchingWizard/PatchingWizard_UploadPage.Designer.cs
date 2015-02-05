@@ -34,6 +34,7 @@
             this.labelProgress = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.flickerFreeListBox1 = new XenAdmin.Controls.FlickerFreeListBox();
+            this.diskSpaceErrorLinkLabel = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,10 +45,12 @@
             this.tableLayoutPanel1.Controls.Add(this.labelProgress, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.progressBar1, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.flickerFreeListBox1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.diskSpaceErrorLinkLabel, 1, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // label2
             // 
+            this.tableLayoutPanel1.SetColumnSpan(this.label2, 2);
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
             // 
@@ -58,18 +61,25 @@
             // 
             // progressBar1
             // 
+            this.tableLayoutPanel1.SetColumnSpan(this.progressBar1, 2);
             resources.ApplyResources(this.progressBar1, "progressBar1");
             this.progressBar1.Name = "progressBar1";
             // 
             // flickerFreeListBox1
             // 
+            this.tableLayoutPanel1.SetColumnSpan(this.flickerFreeListBox1, 2);
             resources.ApplyResources(this.flickerFreeListBox1, "flickerFreeListBox1");
             this.flickerFreeListBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.flickerFreeListBox1.FormattingEnabled = true;
-            this.flickerFreeListBox1.Items.AddRange(new object[] {
-            resources.GetString("flickerFreeListBox1.Items")});
             this.flickerFreeListBox1.Name = "flickerFreeListBox1";
             this.flickerFreeListBox1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.flickerFreeListBox1_DrawItem);
+            // 
+            // diskSpaceErrorLinkLabel
+            // 
+            resources.ApplyResources(this.diskSpaceErrorLinkLabel, "diskSpaceErrorLinkLabel");
+            this.diskSpaceErrorLinkLabel.Name = "diskSpaceErrorLinkLabel";
+            this.diskSpaceErrorLinkLabel.TabStop = true;
+            this.diskSpaceErrorLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.diskspaceErrorLinkLabel_LinkClicked);
             // 
             // PatchingWizard_UploadPage
             // 
@@ -78,7 +88,6 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "PatchingWizard_UploadPage";
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -90,5 +99,6 @@
         private System.Windows.Forms.Label labelProgress;
         private System.Windows.Forms.ProgressBar progressBar1;
         private Controls.FlickerFreeListBox flickerFreeListBox1;
+        private System.Windows.Forms.LinkLabel diskSpaceErrorLinkLabel;
     }
 }

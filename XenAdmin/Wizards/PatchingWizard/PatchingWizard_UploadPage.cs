@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Controls;
 using XenAdmin.Core;
+using XenAdmin.Dialogs;
 using XenAPI;
 
 namespace XenAdmin.Wizards.PatchingWizard
@@ -49,12 +50,15 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (SelectedUpdateType == UpdateType.Existing)
                 _patch = SelectedExistingPatch;
             if (direction == PageLoadedDirection.Forward)
-                StartUploading();
+            {
+                PrepareUploadActions();
+                TryUploading();
+            }
         }
 
         public override void PageCancelled()
         {
-            foreach (var action in uploadActions.Where(action => !action.IsCompleted))
+            foreach (var action in uploadActions.Values.Where(action => action != null && !action.IsCompleted))
             {
                 CancelAction(action);
             }
@@ -62,101 +66,181 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public override bool EnableNext()
         {
-            return uploadActions.Count == 0 || uploadActions.All(action => action.Succeeded);
+            return uploadActions.Values.All(action => action == null || action.Succeeded);
         }
 
         public override bool EnablePrevious()
         {
-            return uploadActions.Count == 0 || uploadActions.All(action => action.IsCompleted);
+            return !canUpload || uploadActions.Values.All(action => action == null || action.IsCompleted);
         }
 
-        private List<AsyncAction> uploadActions = new List<AsyncAction>();
+        private Dictionary<Host, AsyncAction> uploadActions = new Dictionary<Host, AsyncAction>();
 
-        private void StartUploading()
+        private static bool PatchExistsOnPool(Pool_patch patch, Host poolMaster)
+        {
+            var poolPatches = new List<Pool_patch>(poolMaster.Connection.Cache.Pool_patches);
+
+            return (poolPatches.Exists(p => p.uuid == patch.uuid));
+        }
+
+        private void PrepareUploadActions()
         {
             OnPageUpdated();
+            SuppPackVdis.Clear();
             uploadActions.Clear();
 
             //Upload the patches to the masters if it is necessary
             List<Host> masters = SelectedMasters;
 
-            switch (SelectedUpdateType)
+            foreach (Host selectedServer in masters)
             {
-                case UpdateType.NewRetail:
-                    foreach (Host selectedServer in masters)
-                    {
-                        Host master = Helpers.GetMaster(selectedServer.Connection);
-                        UploadPatchAction action = new UploadPatchAction(master.Connection, SelectedNewPatch, true);
-
-                        action.Changed += singleAction_Changed;
-                        action.Completed += singleAction_Completed;
-
-                        uploadActions.Add(action);
-                    }
-                    break;
-
-                case UpdateType.Existing:
-                    foreach (Host selectedServer in masters)
-                    {
-                        List<Pool_patch> poolPatches = new List<Pool_patch>(selectedServer.Connection.Cache.Pool_patches);
-
-                        if (poolPatches.Find(patch => patch.uuid == SelectedExistingPatch.uuid) == null)
+                AsyncAction action = null;
+                switch (SelectedUpdateType)
+                {
+                    case UpdateType.NewRetail:
+                        action = new UploadPatchAction(selectedServer.Connection, SelectedNewPatch, true);
+                        break;
+                    case UpdateType.Existing:
+                        if (!PatchExistsOnPool(SelectedExistingPatch, selectedServer))
                         {
                             //Download patch from server Upload in the selected server
-                            var action = new CopyPatchFromHostToOther(SelectedExistingPatch.Connection,
-                                                                               selectedServer, SelectedExistingPatch);
-
-                            action.Changed += singleAction_Changed;
-                            action.Completed += singleAction_Completed;
-
-                            uploadActions.Add(action);
+                            action = new CopyPatchFromHostToOther(SelectedExistingPatch.Connection, selectedServer,
+                                                                  SelectedExistingPatch);
                         }
-                    }
-                    break;
-
-                case UpdateType.NewSuppPack:
-                    SuppPackVdis.Clear();
-                    foreach (Host selectedServer in masters)
-                    {
-                        UploadSupplementalPackAction action = new UploadSupplementalPackAction(
-                            selectedServer.Connection, 
-                            SelectedServers.Where(s => s.Connection == selectedServer.Connection).ToList(), 
+                        break;
+                    case UpdateType.NewSuppPack:
+                        action = new UploadSupplementalPackAction(
+                            selectedServer.Connection,
+                            SelectedServers.Where(s => s.Connection == selectedServer.Connection).ToList(),
                             SelectedNewPatch,
                             true);
-
-                        action.Changed += singleAction_Changed;
-                        action.Completed += singleAction_Completed;
-
-                        uploadActions.Add(action);
-                    }
-                    break;
+                        break;
+                }
+                if (action != null)
+                {
+                    action.Changed += singleAction_Changed;
+                    action.Completed += singleAction_Completed;
+                }
+                uploadActions.Add(selectedServer, action);
             }
 
-            if (uploadActions.Count > 0)
+            flickerFreeListBox1.Items.Clear();
+            foreach (KeyValuePair<Host, AsyncAction> uploadAction in uploadActions)
             {
-                flickerFreeListBox1.Items.Clear();
-                labelProgress.Text = "";
-                progressBar1.Value = 0;
-                flickerFreeListBox1.Items.AddRange(uploadActions.ToArray());
+                flickerFreeListBox1.Items.Add(uploadAction);
             }
 
             flickerFreeListBox1.Refresh();
             OnPageUpdated();
-
-            RunMultipleActions(Messages.UPLOAD_PATCH_TITLE, Messages.UPLOAD_PATCH_DESCRIPTION, Messages.UPLOAD_PATCH_END_DESCRIPTION, uploadActions);
         }
 
-        private void RunMultipleActions(string title, string startDescription, string endDescription,
-            List<AsyncAction> subActions)
+        private bool canUpload = true;
+        private DiskSpaceRequirements diskSpaceRequirements;
+
+        private void TryUploading()
         {
-            if (subActions.Count > 0)
+            // reset progress bar and action progress description
+            UpdateActionProgress(null);
+
+            // Check if we can upload the patches to the masters if it is necessary.
+            // This check is only available for Cream or greater hosts.
+            // If we can upload (i.e. there is enough disk space) then start the upload.
+            // Otherwise display error.
+            canUpload = true;
+            diskSpaceRequirements = null;
+            var diskSpaceActions = new List<AsyncAction>();
+            foreach (Host master in SelectedMasters.Where(master => Helpers.CreamOrGreater(master.Connection)))
             {
-                using (var multipleAction = new MultipleAction(Connection, title, startDescription,
-                                                                          endDescription, subActions, true, true, true))
+                AsyncAction action = null;
+                switch (SelectedUpdateType)
                 {
-                    multipleAction.Completed += multipleAction_Completed;
-                    multipleAction.RunAsync();
+                    case UpdateType.NewRetail:
+                        action = new CheckDiskSpaceForPatchUploadAction(master, SelectedNewPatch, true);
+                        break;
+                    case UpdateType.Existing:
+                        if (SelectedExistingPatch != null && !PatchExistsOnPool(SelectedExistingPatch, master))
+                            action = new CheckDiskSpaceForPatchUploadAction(master, SelectedExistingPatch, true);
+                        break;
                 }
+
+                if (action != null)
+                {
+                    action.Changed += delegate
+                    {
+                        Program.Invoke(Program.MainWindow, () => UpdateActionProgress(action));
+                    };
+                    diskSpaceActions.Add(action);
+                }
+            }
+
+            if (diskSpaceActions.Count == 0)
+            {
+                StartUploading(); 
+                return;
+            }
+
+            using (var multipleAction = new MultipleAction(Connection, "", "", "", diskSpaceActions, true, true, true))
+            {
+                multipleAction.Completed += delegate
+                {
+                    Program.Invoke(Program.MainWindow, () =>
+                    {
+                        if (multipleAction.Exception is NotEnoughSpaceException)
+                        {
+                            canUpload = false;
+                            diskSpaceRequirements = (multipleAction.Exception as NotEnoughSpaceException).DiskSpaceRequirements;
+                        }
+                        UpdateButtons();
+                        OnPageUpdated();
+                        if (canUpload)
+                            StartUploading();
+                    });
+                };
+                multipleAction.RunAsync();
+            }
+        }
+
+        private void StartUploading()
+        {
+            // reset progress bar and action progress description
+            UpdateActionProgress(null);
+
+            // start the upload
+            var actions = uploadActions.Values.Where(a => a != null).ToList();
+            if (actions.Count == 0) 
+                return;
+
+            using (var multipleAction = new MultipleAction(Connection, Messages.UPLOAD_PATCH_TITLE, Messages.UPLOAD_PATCH_DESCRIPTION, Messages.UPLOAD_PATCH_END_DESCRIPTION, actions, true, true, true))
+            {
+                multipleAction.Completed += multipleAction_Completed;
+                multipleAction.RunAsync();
+            }
+        }
+
+        private void UpdateButtons()
+        {
+            if (!canUpload && diskSpaceRequirements != null)
+            {
+                diskSpaceErrorLinkLabel.Visible = true;
+                diskSpaceErrorLinkLabel.Text = diskSpaceRequirements.CanCleanup ? Messages.PATCHINGWIZARD_CLEANUP : Messages.PATCHINGWIZARD_MORE_INFO;
+            }
+            else
+                diskSpaceErrorLinkLabel.Visible = false;
+        }
+
+        private void UpdateActionProgress(AsyncAction action)
+        {
+            if (action == null) // reset progress
+            {
+                progressBar1.Value = 0;
+                labelProgress.Text = "";
+                labelProgress.ForeColor = Color.Black;
+            }
+            else if (action.StartedRunning) // update progress and description for started actions
+            {
+                progressBar1.Value = action.PercentComplete;
+                labelProgress.Text = GetActionDescription(action);
+                labelProgress.ForeColor = !action.IsCompleted || action.Succeeded ? Color.Black : Color.Red;
             }
         }
 
@@ -185,8 +269,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             Program.Invoke(this, () =>
             {
-                progressBar1.Value = action.PercentComplete;
-                labelProgress.Text = GetActionDescription(action);
+                UpdateActionProgress(action);
                 flickerFreeListBox1.Refresh();
                 OnPageUpdated();
             });
@@ -244,37 +327,72 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (e.Index < 0)
                 return;
-            AsyncAction action = flickerFreeListBox1.Items[e.Index] as AsyncAction;
-            if (action == null)
-            {
-                Drawing.DrawText(e.Graphics, Messages.UPLOAD_PATCH_ALREADY_UPLOADED, flickerFreeListBox1.Font, new Rectangle(e.Bounds.Left, e.Bounds.Top, e.Bounds.Width, e.Bounds.Height), Color.Green, flickerFreeListBox1.BackColor);
-                return;
-            }
-            Host host = action.Host;
+            var hostAndAction = (KeyValuePair<Host, AsyncAction>)flickerFreeListBox1.Items[e.Index];
+            Host host = hostAndAction.Key;
             if (host == null)
                 return;
+            AsyncAction action = hostAndAction.Value;
+            
             using (SolidBrush backBrush = new SolidBrush(flickerFreeListBox1.BackColor))
             {
                 e.Graphics.FillRectangle(backBrush, e.Bounds);
             }
 
-            var pool = Helpers.GetPool(host.Connection);
-            e.Graphics.DrawImage(pool != null ? Images.GetImage16For(pool) : Images.GetImage16For(host),
-                e.Bounds.Left, e.Bounds.Top);
+            var poolOrHost = Helpers.GetPool(host.Connection) ?? (IXenObject)host;
 
-            string text = GetActionDescription(action);
+            string text = action == null ? Messages.UPLOAD_PATCH_ALREADY_UPLOADED : GetActionDescription(action);
             int width = Drawing.MeasureText(text, flickerFreeListBox1.Font).Width;
+            Color textColor = GetTextColor(action);
 
-            Drawing.DrawText(e.Graphics, pool != null ? pool.Name : host.Name, flickerFreeListBox1.Font, new Rectangle(e.Bounds.Left + Properties.Resources._000_Server_h32bit_16.Width, e.Bounds.Top, e.Bounds.Right - (width + Properties.Resources._000_Server_h32bit_16.Width), e.Bounds.Height), flickerFreeListBox1.ForeColor, TextFormatFlags.Left | TextFormatFlags.EndEllipsis);
-            
+            e.Graphics.DrawImage(Images.GetImage16For(poolOrHost), e.Bounds.Left, e.Bounds.Top);
+            Drawing.DrawText(e.Graphics, poolOrHost.Name, flickerFreeListBox1.Font, new Rectangle(e.Bounds.Left + Properties.Resources._000_Server_h32bit_16.Width, e.Bounds.Top, e.Bounds.Right - (width + Properties.Resources._000_Server_h32bit_16.Width), e.Bounds.Height), flickerFreeListBox1.ForeColor, TextFormatFlags.Left | TextFormatFlags.EndEllipsis);
+            Drawing.DrawText(e.Graphics, text, flickerFreeListBox1.Font, new Rectangle(e.Bounds.Right - width, e.Bounds.Top, width, e.Bounds.Height), textColor, flickerFreeListBox1.BackColor);
+        }
+
+        private Color GetTextColor(AsyncAction action)
+        {
             Color textColor;
-            if (!action.StartedRunning) // not started yet
+            if (action == null || !action.StartedRunning) // not started yet
                 textColor = flickerFreeListBox1.ForeColor;
             else if (!action.IsCompleted) // in progress
                 textColor = Color.Blue;
             else textColor = action.Succeeded ? Color.Green : Color.Red; // completed
+            return textColor;
+        }
 
-            Drawing.DrawText(e.Graphics, text, flickerFreeListBox1.Font, new Rectangle(e.Bounds.Right - width, e.Bounds.Top, width, e.Bounds.Height), textColor, flickerFreeListBox1.BackColor);
+        private void diskspaceErrorLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (diskSpaceRequirements == null)
+                return;
+
+            if (diskSpaceRequirements.CanCleanup)
+            {
+                ThreeButtonDialog d = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, diskSpaceRequirements.GetSpaceRequirementsMessage()),
+                    new ThreeButtonDialog.TBDButton(Messages.OK, DialogResult.OK),
+                    new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.Cancel));
+
+                if (d.ShowDialog(this) == DialogResult.OK)
+                {
+                    // do the cleanup and retry uploading
+                    CleanupDiskSpaceAction action = new CleanupDiskSpaceAction(diskSpaceRequirements.Host, null, true);
+
+                    action.Completed += delegate
+                                        {
+                                            if (action.Succeeded)
+                                            {
+                                                Program.Invoke(Program.MainWindow, TryUploading);
+                                            }
+                                        };
+                    action.RunAsync();
+                }
+            }
+            else
+            {
+                new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, diskSpaceRequirements.GetSpaceRequirementsMessage()))
+                    .ShowDialog(this);
+            }
         }
     }
 }
