@@ -99,6 +99,7 @@ namespace XenAdmin
         internal readonly VMStoragePage VMStoragePage = new VMStoragePage();
         internal readonly AdPage AdPage = new AdPage();
         internal readonly GpuPage GpuPage = new GpuPage();
+        internal readonly DockerProcessPage DockerProcessPage = new DockerProcessPage();
 
         private ActionBase statusBarAction = null;
         public ActionBase StatusBarAction { get { return statusBarAction; } }
@@ -151,6 +152,7 @@ namespace XenAdmin
             components.Add(AdPage);
             components.Add(GpuPage);
             components.Add(SearchPage);
+            components.Add(DockerProcessPage);
 
             AddTabContents(VMStoragePage, TabPageStorage);
             AddTabContents(SrStoragePage, TabPageSR);
@@ -170,6 +172,7 @@ namespace XenAdmin
             AddTabContents(AdPage, TabPageAD);
             AddTabContents(GpuPage, TabPageGPU);
             AddTabContents(SearchPage, TabPageSearch);
+            AddTabContents(DockerProcessPage, TabPageDockerProcess);
 
             #endregion
 
@@ -1294,6 +1297,7 @@ namespace XenAdmin
             ShowTab(TabPagePhysicalStorage, !multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolSelected));
             ShowTab(TabPageNetwork, !multi && !SearchMode && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
             ShowTab(TabPageNICs, !multi && !SearchMode && ((isHostSelected && isHostLive)));
+            ShowTab(TabPageDockerProcess, !multi && !SearchMode && isDockerContainerSelected);
 
             bool isPoolOrLiveStandaloneHost = isPoolSelected || (isHostSelected && isHostLive && selectionPool == null);
 
@@ -1832,6 +1836,10 @@ namespace XenAdmin
                 {
                     GpuPage.XenObject = SelectionManager.Selection.FirstAsXenObject;
                 }
+                else if (t == TabPageDockerProcess)
+                {
+                    DockerProcessPage.DockerContainer = SelectionManager.Selection.First as DockerContainer;
+                }
             }
 
             if (t == TabPagePeformance)
@@ -1863,7 +1871,7 @@ namespace XenAdmin
         /// </summary>
         public enum Tab
         {
-            Overview, Home, Settings, Storage, Network, Console, Performance, NICs, SR
+            Overview, Home, Settings, Storage, Network, Console, Performance, NICs, SR, DockerProcess
         }
 
         public void SwitchToTab(Tab tab)
@@ -1896,6 +1904,9 @@ namespace XenAdmin
                     break;
                 case Tab.SR:
                     TheTabControl.SelectedTab = TabPageSR;
+                    break;
+                case Tab.DockerProcess:
+                    TheTabControl.SelectedTab = TabPageDockerProcess;
                     break;
                 default:
                     throw new NotImplementedException();
@@ -2274,6 +2285,8 @@ namespace XenAdmin
                 return "TabPageWLBUpsell";
             if (TheTabControl.SelectedTab == TabPageGPU)
                 return "TabPageGPU" + modelObj;
+            if (TheTabControl.SelectedTab == TabPageDockerProcess)
+                return "TabPageDockerProcess" + modelObj;
             return "TabPageUnknown";
         }
 

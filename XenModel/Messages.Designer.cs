@@ -10185,6 +10185,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Docker Processes Properties.
+        /// </summary>
+        public static string DOCKER_PROCESS_TAB_TITLE {
+            get {
+                return ResourceManager.GetString("DOCKER_PROCESS_TAB_TITLE", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to does not use.
         /// </summary>
         public static string DOES_NOT_USE {
@@ -17618,7 +17627,34 @@ namespace XenAdmin {
                 return ResourceManager.GetString("LABEL_SYNC", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to the informaiton is not valid.
+        /// </summary>
+        public static string LAST_REFRESH_FAIL {
+            get {
+                return ResourceManager.GetString("LAST_REFRESH_FAIL", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to loading the information.
+        /// </summary>
+        public static string LAST_REFRESH_IN_PROGRESS {
+            get {
+                return ResourceManager.GetString("LAST_REFRESH_IN_PROGRESS", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to last refresh.
+        /// </summary>
+        public static string LAST_REFRESH_SUCCESS {
+            get {
+                return ResourceManager.GetString("LAST_REFRESH_SUCCESS", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to was last week.
         /// </summary>

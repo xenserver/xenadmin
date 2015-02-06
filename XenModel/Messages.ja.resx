@@ -3625,6 +3625,9 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   <data name="DOES_NOT_USE" xml:space="preserve">
     <value>以下を使用しない</value>
   </data>
+  <data name="DOCKER_PROCESS_TAB_TITLE" xml:space="preserve">
+    <value>Docker Processes</value>
+  </data>
   <data name="DONE" xml:space="preserve">
     <value>完了しました。</value>
   </data>
@@ -6144,6 +6147,15 @@ SCSI ID: {2}
   </data>
   <data name="LABEL_SYNC" xml:space="preserve">
     <value>{0} と同期しています...</value>
+  </data>
+  <data name="LAST_REFRESH_FAIL" xml:space="preserve">
+    <value>The information is not available.</value>
+  </data>
+  <data name="LAST_REFRESH_IN_PROGRESS" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="LAST_REFRESH_SUCCESS" xml:space="preserve">
+    <value>Last refresh: {0}</value>
   </data>
   <data name="LAST_WEEK" xml:space="preserve">
     <value>先週</value>

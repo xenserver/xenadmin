@@ -1185,6 +1185,12 @@
     <Compile Include="TabPages\NICPage.Designer.cs">
       <DependentUpon>NICPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="TabPages\DockerProcessPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\DockerProcessPage.Designer.cs">
+      <DependentUpon>DockerProcessPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="TabPages\SrStoragePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -2066,6 +2072,10 @@
       <DependentUpon>NICPage.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\DockerProcessPage.resx">
+      <DependentUpon>DockerProcessPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>    
     <EmbeddedResource Include="TabPages\SrStoragePage.resx">
       <DependentUpon>SrStoragePage.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -5608,6 +5618,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\NICPage.zh-CN.resx">
       <DependentUpon>NICPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\DockerProcessPage.ja.resx">
+      <DependentUpon>DockerProcessPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\DockerProcessPage.zh-CN.resx">
+      <DependentUpon>DockerProcessPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\PerformancePage.ja.resx">
       <DependentUpon>PerformancePage.cs</DependentUpon>
