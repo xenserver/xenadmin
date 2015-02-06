@@ -98,6 +98,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var existPatch = PatchingWizard_SelectPatchPage.SelectedExistingPatch;
 
                 DisablePage(PatchingWizard_PrecheckPage, updateType == UpdateType.NewOem);
+                DisablePage(PatchingWizard_UploadPage, updateType == UpdateType.NewOem);
 
                 PatchingWizard_SelectServers.SelectedUpdateType = updateType;
                 PatchingWizard_SelectServers.Patch = existPatch;

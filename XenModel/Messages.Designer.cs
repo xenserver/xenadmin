@@ -349,6 +349,51 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking disk space on {0}.
+        /// </summary>
+        public static string ACTION_CHECK_DISK_SPACE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_CHECK_DISK_SPACE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check disk space.
+        /// </summary>
+        public static string ACTION_CHECK_DISK_SPACE_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_CHECK_DISK_SPACE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cleaning up disk space on {0}.
+        /// </summary>
+        public static string ACTION_CLEANUP_DISK_SPACE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_CLEANUP_DISK_SPACE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully cleaned up disk space on {0}.
+        /// </summary>
+        public static string ACTION_CLEANUP_DISK_SPACE_SUCCESS {
+            get {
+                return ResourceManager.GetString("ACTION_CLEANUP_DISK_SPACE_SUCCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clean up disk space.
+        /// </summary>
+        public static string ACTION_CLEANUP_DISK_SPACE_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_CLEANUP_DISK_SPACE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Creating {0} ....
         /// </summary>
         public static string ACTION_CREATE_BOND_DESCRIPTION {
@@ -894,6 +939,24 @@ namespace XenAdmin {
         public static string ACTION_GET_DATASOURCES {
             get {
                 return ResourceManager.GetString("ACTION_GET_DATASOURCES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Getting space requirements on {0}.
+        /// </summary>
+        public static string ACTION_GET_DISK_SPACE_REQUIREMENTS_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_GET_DISK_SPACE_REQUIREMENTS_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get space requirements.
+        /// </summary>
+        public static string ACTION_GET_DISK_SPACE_REQUIREMENTS_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_GET_DISK_SPACE_REQUIREMENTS_TITLE", resourceCulture);
             }
         }
         
@@ -23380,6 +23443,51 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is not enough space on &apos;{0}&apos; to upload update &apos;{1}&apos;..
+        /// </summary>
+        public static string NOT_ENOUGH_SPACE_MESSAGE {
+            get {
+                return ResourceManager.GetString("NOT_ENOUGH_SPACE_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Space available: {0}.
+        /// </summary>
+        public static string NOT_ENOUGH_SPACE_MESSAGE_AVAILABLE_SPACE {
+            get {
+                return ResourceManager.GetString("NOT_ENOUGH_SPACE_MESSAGE_AVAILABLE_SPACE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XenCenter can free up {0} by removing residual update files. Do you wish to proceed with the cleanup?.
+        /// </summary>
+        public static string NOT_ENOUGH_SPACE_MESSAGE_CLEANUP {
+            get {
+                return ResourceManager.GetString("NOT_ENOUGH_SPACE_MESSAGE_CLEANUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to manually free up more space and try again..
+        /// </summary>
+        public static string NOT_ENOUGH_SPACE_MESSAGE_NOCLEANUP {
+            get {
+                return ResourceManager.GetString("NOT_ENOUGH_SPACE_MESSAGE_NOCLEANUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Space required: {0}.
+        /// </summary>
+        public static string NOT_ENOUGH_SPACE_MESSAGE_REQUIRED_SPACE {
+            get {
+                return ResourceManager.GetString("NOT_ENOUGH_SPACE_MESSAGE_REQUIRED_SPACE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not in any folder.
         /// </summary>
         public static string NOT_IN_A_FOLDER {
@@ -24134,6 +24242,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Clean up....
+        /// </summary>
+        public static string PATCHINGWIZARD_CLEANUP {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_CLEANUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No action required.
         /// </summary>
         public static string PATCHINGWIZARD_MODEPAGE_NOACTION {
@@ -24193,6 +24310,15 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_MODEPAGE_UNKNOWNACTION {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_MODEPAGE_UNKNOWNACTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;More info....
+        /// </summary>
+        public static string PATCHINGWIZARD_MORE_INFO {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_MORE_INFO", resourceCulture);
             }
         }
         
@@ -31834,7 +31960,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Already uploaded to selected server(s).
+        ///   Looks up a localized string similar to Already uploaded.
         /// </summary>
         public static string UPLOAD_PATCH_ALREADY_UPLOADED {
             get {

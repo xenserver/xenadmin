@@ -213,6 +213,21 @@
   <data name="ACTION_CHANGING_SHADOW_MULTIPLIER_FOR" xml:space="preserve">
     <value>Changing shadow multiplier for '{0}'...</value>
   </data>
+  <data name="ACTION_CHECK_DISK_SPACE_DESCRIPTION" xml:space="preserve">
+    <value>Checking disk space on {0}</value>
+  </data>
+  <data name="ACTION_CHECK_DISK_SPACE_TITLE" xml:space="preserve">
+    <value>Check disk space</value>
+  </data>
+  <data name="ACTION_CLEANUP_DISK_SPACE_DESCRIPTION" xml:space="preserve">
+    <value>Cleaning up disk space on {0}</value>
+  </data>
+  <data name="ACTION_CLEANUP_DISK_SPACE_SUCCESS" xml:space="preserve">
+    <value>Successfully cleaned up disk space on {0}</value>
+  </data>
+  <data name="ACTION_CLEANUP_DISK_SPACE_TITLE" xml:space="preserve">
+    <value>Clean up disk space</value>
+  </data>
   <data name="ACTION_CREATE_BOND_DESCRIPTION" xml:space="preserve">
     <value>Creating {0} ...</value>
   </data>
@@ -398,6 +413,12 @@
   </data>
   <data name="ACTION_GET_DATASOURCES" xml:space="preserve">
     <value>Fetch data sources</value>
+  </data>
+  <data name="ACTION_GET_DISK_SPACE_REQUIREMENTS_DESCRIPTION" xml:space="preserve">
+    <value>Getting space requirements on {0}</value>
+  </data>
+  <data name="ACTION_GET_DISK_SPACE_REQUIREMENTS_TITLE" xml:space="preserve">
+    <value>Get space requirements</value>
   </data>
   <data name="ACTION_GET_METADATA_VDIS_DONE" xml:space="preserve">
     <value>Action completed. {0} VDIs found.</value>
@@ -8137,6 +8158,21 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NOT_CONTAINS" xml:space="preserve">
     <value>does not contain</value>
   </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE" xml:space="preserve">
+    <value>There is not enough space on '{0}' to upload update '{1}'.</value>
+  </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_AVAILABLE_SPACE" xml:space="preserve">
+    <value>Space available: {0}</value>
+  </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_CLEANUP" xml:space="preserve">
+    <value>XenCenter can free up {0} by removing residual update files. Do you wish to proceed with the cleanup?</value>
+  </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_NOCLEANUP" xml:space="preserve">
+    <value>You need to manually free up more space and try again.</value>
+  </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_REQUIRED_SPACE" xml:space="preserve">
+    <value>Space required: {0}</value>
+  </data>
   <data name="NOT_IN_A_FOLDER" xml:space="preserve">
     <value>Not in any folder</value>
   </data>
@@ -8357,6 +8393,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="PASTE" xml:space="preserve">
     <value>Paste</value>
   </data>
+  <data name="PATCHINGWIZARD_CLEANUP" xml:space="preserve">
+    <value>&amp;Clean up...</value>
+  </data>
   <data name="PATCHINGWIZARD_MODEPAGE_NOACTION" xml:space="preserve">
     <value>No action required</value>
   </data>
@@ -8377,6 +8416,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_UNKNOWNACTION" xml:space="preserve">
     <value>Unknown</value>
+  </data>
+  <data name="PATCHINGWIZARD_MORE_INFO" xml:space="preserve">
+    <value>&amp;More info...</value>
   </data>
   <data name="PATCHINGWIZARD_PATCHINGPAGE_POOL_RESOLVE" xml:space="preserve">
     <value>Resolve pool problems</value>
@@ -11027,7 +11069,7 @@ Do you want to continue?</value>
     <value>Uploading to server '{0}'...</value>
   </data>
   <data name="UPLOAD_PATCH_ALREADY_UPLOADED" xml:space="preserve">
-    <value>Already uploaded to selected server(s)</value>
+    <value>Already uploaded</value>
   </data>
   <data name="UPLOAD_PATCH_DESCRIPTION" xml:space="preserve">
     <value>Uploading...</value>
