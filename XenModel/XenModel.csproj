@@ -57,6 +57,7 @@
     <Compile Include="Actions\Action.cs" />
     <Compile Include="Actions\CancellingAction.cs" />
     <Compile Include="Actions\DockerContainer\DockerContainerLifetimeAction.cs" />
+    <Compile Include="Actions\DockerContainer\VMEnlightenmentAction.cs" />
     <Compile Include="Actions\DR\GetMetadataVDIsAction.cs" />
     <Compile Include="Actions\DR\DrTaskCreateAction.cs" />
     <Compile Include="Actions\DR\DrRecoverAction.cs" />

@@ -249,6 +249,12 @@
   <data name="ACTION_DETATCHING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>Detaching Multiple Storage Items</value>
   </data>
+  <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
+    <value>Disabling VM enlightenment</value>
+  </data>
+  <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
+    <value>Disable VM enlightenment</value>
+  </data>
   <data name="ACTION_DISK_ACTIVATED" xml:space="preserve">
     <value>Activated disk...</value>
   </data>
@@ -344,6 +350,12 @@
   </data>
   <data name="ACTION_DR_TASK_DESTROY_TITLE" xml:space="preserve">
     <value>DR cleanup ({0})</value>
+  </data>
+  <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
+    <value>Enabling VM enlightenment</value>
+  </data>
+  <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
+    <value>Enable VM enlightenment</value>
   </data>
   <data name="ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED" xml:space="preserve">
     <value>Export failed due to a block checksum mismatch.  Please retry the export.</value>
@@ -11379,6 +11391,9 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   </data>
   <data name="VM_APPLIANCE_SUMMARY" xml:space="preserve">
     <value>vApp name:\r\n    {0}\r\n\r\nSelected VMs:\r\n    {1}</value>
+  </data>
+  <data name="VM_ENLIGHTENMENT" xml:space="preserve">
+    <value>Enlightenment</value>
   </data>
   <data name="VM_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>VM General Properties</value>

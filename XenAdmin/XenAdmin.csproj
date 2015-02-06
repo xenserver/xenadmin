@@ -239,6 +239,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SettingsPanels\VMEnlightenmentEditPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingsPanels\VMEnlightenmentEditPage.Designer.cs">
+      <DependentUpon>VMEnlightenmentEditPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="SettingsPanels\Wlb\WlbAdvancedSettingsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1591,6 +1597,15 @@
     <EmbeddedResource Include="SettingsPanels\HostMultipathPage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>HostMultipathPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\VMEnlightenmentEditPage.ja.resx">
+      <DependentUpon>VMEnlightenmentEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\VMEnlightenmentEditPage.resx">
+      <DependentUpon>VMEnlightenmentEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\VMEnlightenmentEditPage.zh-CN.resx">
+      <DependentUpon>VMEnlightenmentEditPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\Wlb\WlbAdvancedSettingsPage.resx">
       <SubType>Designer</SubType>
@@ -3975,6 +3990,7 @@
     <None Include="Images\gripper.png" />
     <None Include="Images\sl_add_storage_system_small_16.png" />
     <None Include="Images\detach_24.png" />
+    <None Include="Images\DC_16.png" />
     <Content Include="Images\export_32.png" />
     <None Include="Images\failed_action_16.png" />
     <Content Include="Images\help_16_hover.png" />

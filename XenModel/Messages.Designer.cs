@@ -457,6 +457,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disabling VM enlightenment.
+        /// </summary>
+        public static string ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable VM enlightenment.
+        /// </summary>
+        public static string ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Activated disk....
         /// </summary>
         public static string ACTION_DISK_ACTIVATED {
@@ -741,6 +759,24 @@ namespace XenAdmin {
         public static string ACTION_DR_TASK_DESTROY_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_DR_TASK_DESTROY_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling VM enlightenment.
+        /// </summary>
+        public static string ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable VM enlightenment.
+        /// </summary>
+        public static string ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE", resourceCulture);
             }
         }
         
@@ -32835,6 +32871,15 @@ namespace XenAdmin {
         public static string VM_APPLIANCES_TITLE {
             get {
                 return ResourceManager.GetString("VM_APPLIANCES_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enlightenment.
+        /// </summary>
+        public static string VM_ENLIGHTENMENT {
+            get {
+                return ResourceManager.GetString("VM_ENLIGHTENMENT", resourceCulture);
             }
         }
         

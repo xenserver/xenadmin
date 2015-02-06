@@ -1647,6 +1647,19 @@ namespace XenAPI
             return string.Format(Messages.CPU_TOPOLOGY_STRING_N_SOCKET_N_CORE, sockets, cores);
         }
 
+        public bool CanBeEnlightened
+        {
+            get { return other_config.ContainsKey("xscontainer-monitor"); }
+        }
+
+        public bool IsEnlightened
+        {
+            get
+            {
+                var v = Get(other_config, "xscontainer-monitor");
+                return v == null ? false : v.ToLower() == "true";
+            }
+        }
     }
 
     public struct VMStartupOptions
