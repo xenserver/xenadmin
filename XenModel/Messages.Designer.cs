@@ -24003,6 +24003,16 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to {0} 
+        ///Installation size: {1}.
+        /// </summary>
+        public static string PATCH_DESCRIPTION_AND_INSTALLATION_SIZE {
+            get {
+                return ResourceManager.GetString("PATCH_DESCRIPTION_AND_INSTALLATION_SIZE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} 
         ///Date modified: {1}
         ///Date created: {2}
         ///Size: {3}.

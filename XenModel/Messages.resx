@@ -8512,6 +8512,10 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="PATCH_APPLIED" xml:space="preserve">
     <value>Update '{0}' Applied to Server '{1}'</value>
   </data>
+  <data name="PATCH_DESCRIPTION_AND_INSTALLATION_SIZE" xml:space="preserve">
+    <value>{0} 
+Installation size: {1}</value>
+  </data>
   <data name="PATCH_EXPANDED_DESCRIPTION" xml:space="preserve">
     <value>{0} 
 Date modified: {1}

@@ -112,7 +112,12 @@ namespace XenAdmin.Alerts
 
         public override string Description
         {
-            get { return Patch.Description; }
+            get
+            {
+                if (Patch.InstallationSize != 0)
+                    return string.Format(Messages.PATCH_DESCRIPTION_AND_INSTALLATION_SIZE, Patch.Description, Util.DiskSizeString(Patch.InstallationSize));
+                return Patch.Description;
+            }
         }
 
         public override string Name
