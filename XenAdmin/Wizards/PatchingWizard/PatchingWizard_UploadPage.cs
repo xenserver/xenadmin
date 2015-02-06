@@ -167,7 +167,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     action.Changed += delegate
                     {
-                        Program.Invoke(Program.MainWindow, () => UpdateActionProgress(action));
+                        Program.Invoke(Program.MainWindow, () => UpdateActionDescription(action));
                     };
                     diskSpaceActions.Add(action);
                 }
@@ -230,17 +230,21 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void UpdateActionProgress(AsyncAction action)
         {
-            if (action == null) // reset progress
+            UpdateActionDescription(action);
+            progressBar1.Value = action == null ? 0 : action.PercentComplete;
+        }
+
+        private void UpdateActionDescription(AsyncAction action)
+        {
+            if (action == null) // reset action description
             {
-                progressBar1.Value = 0;
                 labelProgress.Text = "";
-                labelProgress.ForeColor = Color.Black;
+                labelProgress.ForeColor = SystemColors.ControlText;
             }
-            else if (action.StartedRunning) // update progress and description for started actions
+            else if (action.StartedRunning) // update description for started actions
             {
-                progressBar1.Value = action.PercentComplete;
                 labelProgress.Text = GetActionDescription(action);
-                labelProgress.ForeColor = !action.IsCompleted || action.Succeeded ? Color.Black : Color.Red;
+                labelProgress.ForeColor = !action.IsCompleted || action.Succeeded ? SystemColors.ControlText : Color.Red;
             }
         }
 
@@ -325,13 +329,11 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void flickerFreeListBox1_DrawItem(object sender, DrawItemEventArgs e)
         {
-            if (e.Index < 0)
+            if (e.Index < 0 || !(flickerFreeListBox1.Items[e.Index] is KeyValuePair<Host, AsyncAction>))
                 return;
             var hostAndAction = (KeyValuePair<Host, AsyncAction>)flickerFreeListBox1.Items[e.Index];
-            Host host = hostAndAction.Key;
-            if (host == null)
-                return;
-            AsyncAction action = hostAndAction.Value;
+            var host = hostAndAction.Key;
+            var action = hostAndAction.Value;
             
             using (SolidBrush backBrush = new SolidBrush(flickerFreeListBox1.BackColor))
             {

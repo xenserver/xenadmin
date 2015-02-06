@@ -46,7 +46,7 @@ namespace XenAdmin.Actions
             : base(host.Connection, Messages.ACTION_CLEANUP_DISK_SPACE_TITLE, "", suppressHistory)
         {
             if (host == null)
-                throw new NullReferenceException();
+                throw new ArgumentNullException("host");
             Host = host;
             this.excludedPatch = excludedPatch;
         }

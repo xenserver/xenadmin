@@ -71,7 +71,7 @@ namespace XenAdmin.Actions
             : base(host.Connection, Messages.ACTION_GET_DISK_SPACE_REQUIREMENTS_TITLE, suppressHistory)
         {
             if (host == null)
-                throw new NullReferenceException();
+                throw new ArgumentNullException("host");
             Host = host;
             this.updateName = updateName;
             updateSize = size; 
