@@ -45,6 +45,7 @@ namespace XenAdmin.Core
         public readonly string PatchUrl;
         public readonly DateTime TimeStamp;
         public readonly int Priority;
+        public readonly long InstallationSize; // installation size, in btyes
 
         public readonly List<string> ConflictingPatches;
         public readonly List<string> RequiredPatches;
@@ -52,7 +53,7 @@ namespace XenAdmin.Core
         private const int DEFAULT_PRIORITY = 2;
 
         public XenServerPatch(string uuid, string name, string description, string guidance, string version, string url,
-            string patchUrl, string timestamp, string priority)
+            string patchUrl, string timestamp, string priority, string installationSize)
         {
             _uuid = uuid.ToLowerInvariant();
             Name = name;
@@ -66,11 +67,13 @@ namespace XenAdmin.Core
             DateTime.TryParse(timestamp, out TimeStamp);
             if (!Int32.TryParse(priority, out Priority))
                 Priority = DEFAULT_PRIORITY;
+            if (!Int64.TryParse(installationSize, out InstallationSize))
+                InstallationSize = 0;
         }
 
         public XenServerPatch(string uuid, string name, string description, string guidance, string version, string url,
-            string patchUrl, string timestamp, string priority, List<string> conflictingPatches, List<string> requiredPatches)
-            :this(uuid, name, description, guidance, version, url, patchUrl, timestamp, priority)
+            string patchUrl, string timestamp, string priority, string installationSize, List<string> conflictingPatches, List<string> requiredPatches)
+            : this(uuid, name, description, guidance, version, url, patchUrl, timestamp, priority, installationSize)
         {
             ConflictingPatches = conflictingPatches;
             RequiredPatches = requiredPatches;
