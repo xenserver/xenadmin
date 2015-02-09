@@ -58,9 +58,9 @@ namespace XenAdmin.Actions
     {
         public StartDockerContainerAction(DockerContainer dockerContainer)
             : base(dockerContainer,
-                    "Start Docker Container",
-                    string.Format("Starting '{0}'", dockerContainer.Name),
-                    string.Format("Start '{0}' completed", dockerContainer.Name),
+                    string.Format(Messages.ACTION_START_CONTAINER_TITLE, dockerContainer.Name),
+                    Messages.ACTION_START_CONTAINER_DESCRIPTION, 
+                    Messages.ACTION_START_CONTAINER_END_DESCRIPTION, 
                     "start")
         { }
     }
@@ -72,9 +72,9 @@ namespace XenAdmin.Actions
     {
         public StopDockerContainerAction(DockerContainer dockerContainer)
             : base(dockerContainer,
-                    "Stop Docker Container",
-                    string.Format("Stopping '{0}'", dockerContainer.Name),
-                    string.Format("Stop '{0}' completed", dockerContainer.Name),
+                    string.Format(Messages.ACTION_STOP_CONTAINER_TITLE, dockerContainer.Name),
+                    Messages.ACTION_STOP_CONTAINER_DESCRIPTION,
+                    Messages.ACTION_STOP_CONTAINER_END_DESCRIPTION,
                     "stop")
         { }
     }
@@ -86,9 +86,9 @@ namespace XenAdmin.Actions
     {
         public PauseDockerContainerAction(DockerContainer dockerContainer)
             : base(dockerContainer,
-                    "Pause Docker Container",
-                    string.Format("Pausing '{0}'", dockerContainer.Name),
-                    string.Format("Pause '{0}' completed", dockerContainer.Name),
+                    string.Format(Messages.ACTION_PAUSE_CONTAINER_TITLE, dockerContainer.Name),
+                    Messages.ACTION_PAUSE_CONTAINER_DESCRIPTION,
+                    Messages.ACTION_PAUSE_CONTAINER_END_DESCRIPTION,
                     "pause")
         { }
     }
@@ -100,9 +100,9 @@ namespace XenAdmin.Actions
     {
         public ResumeDockerContainerAction(DockerContainer dockerContainer)
             : base(dockerContainer,
-                    "Resume Docker Container",
-                    string.Format("Resuming '{0}'", dockerContainer.Name),
-                    string.Format("Resuming '{0}' completed", dockerContainer.Name),
+                    string.Format(Messages.ACTION_RESUME_CONTAINER_TITLE, dockerContainer.Name),
+                    Messages.ACTION_RESUME_CONTAINER_DESCRIPTION,
+                    Messages.ACTION_RESUME_CONTAINER_END_DESCRIPTION,
                     "unpause")
         { }
     }
