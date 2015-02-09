@@ -61,7 +61,7 @@ namespace XenAdmin.Model
         {
             get { return parent; }
         }
-        private readonly VM parent;
+        private VM parent;
 
         /// <summary>
         /// Unique identifier/object reference
@@ -223,6 +223,16 @@ namespace XenAdmin.Model
 
         public override void UpdateFrom(DockerContainer update)
         {
+            parent = update.parent;
+            Connection = update.parent.Connection;
+            uuid = update.uuid;
+            opaque_ref = update.uuid; //using uuid, because opaque_ref does not exist at server side
+            name_label = update.name_label;
+            name_description = update.name_description;
+            status = update.status;
+            container = update.container;
+            created = update.created;
+            image = update.image;
         }
 
         public override string SaveChanges(Session session, string _serverOpaqueRef, DockerContainer serverObject)

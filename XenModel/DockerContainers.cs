@@ -223,7 +223,16 @@ namespace XenAdmin.Model
                         image = propertyNode.InnerText;
 
                     DockerContainer dockerContainer = new DockerContainer(vm, id, name, string.Empty, status, container, created, image);
-                    containers.Add(dockerContainer);
+                    
+                    // update existing container or add a new one
+                    DockerContainer existingContainer = vm.Connection.Resolve(new XenRef<DockerContainer>(id));
+                    if (existingContainer != null)
+                    {
+                        existingContainer.UpdateFrom(dockerContainer);
+                        containers.Add(existingContainer);
+                    }
+                    else
+                        containers.Add(dockerContainer);
                 }
             }
             return containers;
