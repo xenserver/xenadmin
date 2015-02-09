@@ -684,6 +684,36 @@
   <data name="&gt;&gt;TabPageAD.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
+  <data name="TabPageDockerDetails.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="TabPageDockerDetails.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPageDockerDetails.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="TabPageDockerDetails.Size" type="System.Drawing.Size, System.Drawing">
+    <value>753, 592</value>
+  </data>
+  <data name="TabPageDockerDetails.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="TabPageDockerDetails.Text" xml:space="preserve">
+    <value>Detail</value>
+  </data>
+  <data name="&gt;&gt;TabPageDockerDetails.Name" xml:space="preserve">
+    <value>TabPageDockerDetails</value>
+  </data>
+  <data name="&gt;&gt;TabPageDockerDetails.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPageDockerDetails.Parent" xml:space="preserve">
+    <value>TheTabControl</value>
+  </data>
+  <data name="&gt;&gt;TabPageDockerDetails.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
   <data name="TabPageGPU.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>

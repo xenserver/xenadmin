@@ -10473,6 +10473,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Docker Detail.
+        /// </summary>
+        public static string DOCKER_DETAIL_TAB_TITLE {
+            get {
+                return ResourceManager.GetString("DOCKER_DETAIL_TAB_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Docker Processes.
         /// </summary>
         public static string DOCKER_PROCESS_TAB_TITLE {
