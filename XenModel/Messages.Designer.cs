@@ -457,7 +457,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disabling VM enlightenment.
+        ///   Looks up a localized string similar to Disabling .
         /// </summary>
         public static string ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION {
             get {
@@ -466,7 +466,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable VM enlightenment.
+        ///   Looks up a localized string similar to Disable container enlightenment on VM &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE {
             get {
@@ -763,7 +763,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enabling VM enlightenment.
+        ///   Looks up a localized string similar to Enabling.
         /// </summary>
         public static string ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION {
             get {
@@ -772,7 +772,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable VM enlightenment.
+        ///   Looks up a localized string similar to Enable container enlightenment on VM &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE {
             get {
@@ -33001,7 +33001,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enlightenment.
+        ///   Looks up a localized string similar to Container Enlightenment.
         /// </summary>
         public static string VM_ENLIGHTENMENT {
             get {

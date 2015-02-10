@@ -69,14 +69,16 @@ namespace XenAdmin.Actions
     public class EnableVMEnlightenmentAction : VMEnlightenmentAction
     {
         public EnableVMEnlightenmentAction(VM vm, bool suppressHistory)
-            : base(vm, "register", Messages.ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE, Messages.ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION, suppressHistory)
+            : base(vm, "register", String.Format(Messages.ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE, vm.Name), 
+                Messages.ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION, suppressHistory)
         { }
     }
 
     public class DisableVMEnlightenmentAction : VMEnlightenmentAction
     {
         public DisableVMEnlightenmentAction(VM vm, bool suppressHistory)
-            : base(vm, "deregister", Messages.ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE, Messages.ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION, suppressHistory)
+            : base(vm, "deregister", String.Format(Messages.ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE, vm.Name), 
+                Messages.ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION, suppressHistory)
         { }
     }
 }

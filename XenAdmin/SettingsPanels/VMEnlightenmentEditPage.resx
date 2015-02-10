@@ -169,13 +169,13 @@
     <value>3, 55</value>
   </data>
   <data name="enlightenCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 17</value>
+    <value>228, 17</value>
   </data>
   <data name="enlightenCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="enlightenCheckBox.Text" xml:space="preserve">
-    <value>&amp;Enable enlightenment for this VM</value>
+    <value>&amp;Enable container enlightenment for this VM</value>
   </data>
   <data name="&gt;&gt;enlightenCheckBox.Name" xml:space="preserve">
     <value>enlightenCheckBox</value>
