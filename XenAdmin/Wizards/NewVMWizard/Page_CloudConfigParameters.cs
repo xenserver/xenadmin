@@ -119,7 +119,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             var parameters = new Dictionary<string, string>();
             parameters.Add("templateuuid", Template.uuid);
 
-            var action = new ExecutePluginAction(Connection, Affinity,
+            var action = new ExecutePluginAction(Connection, Affinity ?? Helpers.GetMaster(Connection),
                         "xscontainer",//plugin
                         "get_config_drive_default",//function
                         parameters,

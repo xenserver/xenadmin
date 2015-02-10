@@ -282,6 +282,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 {
                     m_affinity = page_4_HomeServer.SelectedHomeServer;
                     page_6_Storage.Affinity = m_affinity;
+                    page_CloudConfigParameters.Affinity = m_affinity;
                 }
             }
             else if (prevPageType == typeof(Page_Storage))
