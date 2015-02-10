@@ -222,7 +222,17 @@ namespace XenAdmin.Model
                     if (propertyNode != null)
                         image = propertyNode.InnerText;
 
-                    DockerContainer dockerContainer = new DockerContainer(vm, id, name, string.Empty, status, container, created, image);
+                    string command = "";
+                    propertyNode = entry.ChildNodes.Cast<XmlNode>().FirstOrDefault(node => node.Name == "command");
+                    if (propertyNode != null)
+                        command = propertyNode.InnerText;
+
+                    string ports = "";
+                    propertyNode = entry.ChildNodes.Cast<XmlNode>().FirstOrDefault(node => node.Name == "ports");
+                    if (propertyNode != null)
+                        ports = propertyNode.InnerText;
+
+                    DockerContainer dockerContainer = new DockerContainer(vm, id, name, string.Empty, status, container, created, image, command, ports);
                     
                     // update existing container or add a new one
                     DockerContainer existingContainer = vm.Connection.Resolve(new XenRef<DockerContainer>(id));
