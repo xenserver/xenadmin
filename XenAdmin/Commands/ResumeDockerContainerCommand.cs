@@ -48,9 +48,7 @@ namespace XenAdmin.Commands
             : base(mainWindow, selection)
         { }
 
-        public override string MenuText { get { return "Resume Docker Container"; } }
-
-        public override string ContextMenuText { get { return "Resume"; } }
+        public override string MenuText { get { return Messages.MAINWINDOW_RESUME; } }
         
         public override Image MenuImage { get { return Resources._000_Resumed_h32bit_16; } }
 

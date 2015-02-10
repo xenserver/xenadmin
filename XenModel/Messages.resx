@@ -264,6 +264,12 @@
   <data name="ACTION_DETATCHING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>Detaching Multiple Storage Items</value>
   </data>
+  <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
+    <value>Disabling </value>
+  </data>
+  <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
+    <value>Disable container enlightenment on VM '{0}'</value>
+  </data>
   <data name="ACTION_DISK_ACTIVATED" xml:space="preserve">
     <value>Activated disk...</value>
   </data>
@@ -359,6 +365,12 @@
   </data>
   <data name="ACTION_DR_TASK_DESTROY_TITLE" xml:space="preserve">
     <value>DR cleanup ({0})</value>
+  </data>
+  <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
+    <value>Enabling</value>
+  </data>
+  <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
+    <value>Enable container enlightenment on VM '{0}'</value>
   </data>
   <data name="ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED" xml:space="preserve">
     <value>Export failed due to a block checksum mismatch.  Please retry the export.</value>
@@ -507,6 +519,15 @@
   <data name="ACTION_MULTIPLE_DR_TASK_CREATE_TITLE" xml:space="preserve">
     <value>Prepare Storage Repositories</value>
   </data>
+  <data name="ACTION_PAUSE_CONTAINER_DESCRIPTION" xml:space="preserve">
+    <value>Pausing</value>
+  </data>
+  <data name="ACTION_PAUSE_CONTAINER_END_DESCRIPTION" xml:space="preserve">
+    <value>Paused</value>
+  </data>
+  <data name="ACTION_PAUSE_CONTAINER_TITLE" xml:space="preserve">
+    <value>Pausing Docker Container '{0}'</value>
+  </data>
   <data name="ACTION_PIF_SCAN_START_DESC" xml:space="preserve">
     <value>Scanning...</value>
   </data>
@@ -563,6 +584,15 @@
   </data>
   <data name="ACTION_RESUMEANDSTARTVMS_STARTINGN" xml:space="preserve">
     <value>Starting VM {0} of {1}</value>
+  </data>
+  <data name="ACTION_RESUME_CONTAINER_DESCRIPTION" xml:space="preserve">
+    <value>Resuming</value>
+  </data>
+  <data name="ACTION_RESUME_CONTAINER_END_DESCRIPTION" xml:space="preserve">
+    <value>Resumed</value>
+  </data>
+  <data name="ACTION_RESUME_CONTAINER_TITLE" xml:space="preserve">
+    <value>Resuming Docker Container '{0}'</value>
   </data>
   <data name="ACTION_SAVE_ALERTS" xml:space="preserve">
     <value>Save alerts</value>
@@ -735,6 +765,15 @@
   <data name="ACTION_SR_UPGRADING" xml:space="preserve">
     <value>Upgrading SR</value>
   </data>
+  <data name="ACTION_START_CONTAINER_DESCRIPTION" xml:space="preserve">
+    <value>Starting</value>
+  </data>
+  <data name="ACTION_START_CONTAINER_END_DESCRIPTION" xml:space="preserve">
+    <value>Started</value>
+  </data>
+  <data name="ACTION_START_CONTAINER_TITLE" xml:space="preserve">
+    <value>Starting Docker Container '{0}'</value>
+  </data>
   <data name="ACTION_START_VMS_AND_APPLIANCES_NONE_SELECTED" xml:space="preserve">
     <value>There are no VMs or vApps to start</value>
   </data>
@@ -752,6 +791,15 @@
   </data>
   <data name="ACTION_STATUS_SUCCEEDED" xml:space="preserve">
     <value>Succeeded</value>
+  </data>
+  <data name="ACTION_STOP_CONTAINER_DESCRIPTION" xml:space="preserve">
+    <value>Stopping</value>
+  </data>
+  <data name="ACTION_STOP_CONTAINER_END_DESCRIPTION" xml:space="preserve">
+    <value>Stopped</value>
+  </data>
+  <data name="ACTION_STOP_CONTAINER_TITLE" xml:space="preserve">
+    <value>Stopping Docker Container '{0}'</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_CANCELLED" xml:space="preserve">
     <value>Getting system status canceled</value>
@@ -6657,6 +6705,9 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MAINWINDOW_NEW_VM_FROM_TEMPLATE" xml:space="preserve">
     <value>&amp;New VM wizard...</value>
   </data>
+  <data name="MAINWINDOW_PAUSE" xml:space="preserve">
+    <value>&amp;Pause</value>
+  </data>
   <data name="MAINWINDOW_POWER_ON" xml:space="preserve">
     <value>Power O&amp;n</value>
   </data>
@@ -6737,6 +6788,9 @@ This will permanently delete and reinitialize all local storage on the servers. 
   </data>
   <data name="MAINWINDOW_START_ON_HOST" xml:space="preserve">
     <value>Start on Ser&amp;ver</value>
+  </data>
+  <data name="MAINWINDOW_STOP" xml:space="preserve">
+    <value>S&amp;top</value>
   </data>
   <data name="MAINWINDOW_SUSPEND" xml:space="preserve">
     <value>S&amp;uspend</value>
@@ -11443,6 +11497,9 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   </data>
   <data name="VM_APPLIANCE_SUMMARY" xml:space="preserve">
     <value>vApp name:\r\n    {0}\r\n\r\nSelected VMs:\r\n    {1}</value>
+  </data>
+  <data name="VM_ENLIGHTENMENT" xml:space="preserve">
+    <value>Container Enlightenment</value>
   </data>
   <data name="VM_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>VM General Properties</value>

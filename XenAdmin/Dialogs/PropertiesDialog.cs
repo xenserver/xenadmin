@@ -77,6 +77,7 @@ namespace XenAdmin.Dialogs
         private UpsellPage GpuUpsellEditPage;
         private GpuEditPage GpuEditPage;
         private PoolGpuEditPage PoolGpuEditPage;
+        private VMEnlightenmentEditPage VMEnlightenmentEditPage;
         #endregion
 
         private IXenObject xenObject, xenObjectBefore, xenObjectCopy;
@@ -238,6 +239,9 @@ namespace XenAdmin.Dialogs
                 {
                     ShowTab(VMAdvancedEditPage = new VMAdvancedEditPage());
                 }
+
+                if (is_vm && Helpers.CreamOrGreater(xenObject.Connection) && ((VM)xenObjectCopy).CanBeEnlightened)
+                    ShowTab(VMEnlightenmentEditPage = new VMEnlightenmentEditPage());
 
                 if (is_VMPP)
                 {

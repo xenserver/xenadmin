@@ -502,6 +502,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disabling .
+        /// </summary>
+        public static string ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable container enlightenment on VM &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Activated disk....
         /// </summary>
         public static string ACTION_DISK_ACTIVATED {
@@ -786,6 +804,24 @@ namespace XenAdmin {
         public static string ACTION_DR_TASK_DESTROY_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_DR_TASK_DESTROY_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling.
+        /// </summary>
+        public static string ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable container enlightenment on VM &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE", resourceCulture);
             }
         }
         
@@ -1231,6 +1267,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pausing.
+        /// </summary>
+        public static string ACTION_PAUSE_CONTAINER_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_PAUSE_CONTAINER_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paused.
+        /// </summary>
+        public static string ACTION_PAUSE_CONTAINER_END_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_PAUSE_CONTAINER_END_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pausing Docker Container &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_PAUSE_CONTAINER_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_PAUSE_CONTAINER_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scanning....
         /// </summary>
         public static string ACTION_PIF_SCAN_START_DESC {
@@ -1371,6 +1434,33 @@ namespace XenAdmin {
         public static string ACTION_REMOVE_ALERTS_PROGRESS_DESCRIPTION {
             get {
                 return ResourceManager.GetString("ACTION_REMOVE_ALERTS_PROGRESS_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resuming.
+        /// </summary>
+        public static string ACTION_RESUME_CONTAINER_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_RESUME_CONTAINER_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resumed.
+        /// </summary>
+        public static string ACTION_RESUME_CONTAINER_END_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_RESUME_CONTAINER_END_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resuming Docker Container &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_RESUME_CONTAINER_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_RESUME_CONTAINER_TITLE", resourceCulture);
             }
         }
         
@@ -1915,6 +2005,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Starting.
+        /// </summary>
+        public static string ACTION_START_CONTAINER_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_START_CONTAINER_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Started.
+        /// </summary>
+        public static string ACTION_START_CONTAINER_END_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_START_CONTAINER_END_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starting Docker Container &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_START_CONTAINER_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_START_CONTAINER_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There are no VMs or vApps to start.
         /// </summary>
         public static string ACTION_START_VMS_AND_APPLIANCES_NONE_SELECTED {
@@ -1965,6 +2082,33 @@ namespace XenAdmin {
         public static string ACTION_STATUS_SUCCEEDED {
             get {
                 return ResourceManager.GetString("ACTION_STATUS_SUCCEEDED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopping.
+        /// </summary>
+        public static string ACTION_STOP_CONTAINER_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_STOP_CONTAINER_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopped.
+        /// </summary>
+        public static string ACTION_STOP_CONTAINER_END_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_STOP_CONTAINER_END_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopping Docker Container &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_STOP_CONTAINER_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_STOP_CONTAINER_TITLE", resourceCulture);
             }
         }
         
@@ -19107,6 +19251,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Pause.
+        /// </summary>
+        public static string MAINWINDOW_PAUSE {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_PAUSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Power O&amp;n.
         /// </summary>
         public static string MAINWINDOW_POWER_ON {
@@ -19346,6 +19499,15 @@ namespace XenAdmin {
         public static string MAINWINDOW_START_ON_HOST {
             get {
                 return ResourceManager.GetString("MAINWINDOW_START_ON_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to S&amp;top.
+        /// </summary>
+        public static string MAINWINDOW_STOP {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_STOP", resourceCulture);
             }
         }
         
@@ -33025,6 +33187,15 @@ namespace XenAdmin {
         public static string VM_APPLIANCES_TITLE {
             get {
                 return ResourceManager.GetString("VM_APPLIANCES_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Container Enlightenment.
+        /// </summary>
+        public static string VM_ENLIGHTENMENT {
+            get {
+                return ResourceManager.GetString("VM_ENLIGHTENMENT", resourceCulture);
             }
         }
         

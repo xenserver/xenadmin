@@ -48,10 +48,8 @@ namespace XenAdmin.Commands
             : base(mainWindow, selection)
         { }
 
-        public override string MenuText { get { return "Stop Docker Container"; } }
-
-        public override string ContextMenuText { get { return "Stop"; } }
-
+        public override string MenuText { get { return Messages.MAINWINDOW_STOP; } }
+        
         public override Image MenuImage { get { return Resources._001_ShutDown_h32bit_16; } }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)

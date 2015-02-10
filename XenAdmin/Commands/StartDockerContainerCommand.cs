@@ -48,10 +48,8 @@ namespace XenAdmin.Commands
             : base(mainWindow, selection)
         { }
 
-        public override string MenuText { get { return "Start Docker Container"; } }
-
-        public override string ContextMenuText { get { return "Start"; } }
-
+        public override string MenuText { get { return Messages.MAINWINDOW_START; } }
+        
         public override Image MenuImage { get { return Resources._001_PowerOn_h32bit_16; } }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
