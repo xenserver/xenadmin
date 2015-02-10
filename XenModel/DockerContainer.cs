@@ -42,7 +42,7 @@ namespace XenAdmin.Model
         }
 
         public DockerContainer(VM parent, string uuid, string name, string description, string status, string container,
-            string created, string image)
+            string created, string image, string command, string ports)
             : this()
         {
             this.parent = parent;
@@ -55,6 +55,8 @@ namespace XenAdmin.Model
             this.container = container;
             this.created = created;
             this.image = image;
+            this.command = command;
+            this.ports = ports;
         }
 
         public VM Parent
@@ -189,6 +191,36 @@ namespace XenAdmin.Model
         }
         private string _image;
 
+        public virtual string command
+        {
+            get { return _command; }
+            set
+            {
+                if (!Helper.AreEqual(value, _command))
+                {
+                    _command = value;
+                    Changed = true;
+                    NotifyPropertyChanged("command");
+                }
+            }
+        }
+        private string _command;
+
+        public virtual string ports
+        {
+            get { return _ports; }
+            set
+            {
+                if (!Helper.AreEqual(value, _ports))
+                {
+                    _ports = value;
+                    Changed = true;
+                    NotifyPropertyChanged("ports");
+                }
+            }
+        }
+        private string _ports;
+
         public override string ToString()
         {
             return _name_label;
@@ -233,6 +265,8 @@ namespace XenAdmin.Model
             container = update.container;
             created = update.created;
             image = update.image;
+            command = update.command;
+            ports = update.ports;
         }
 
         public override string SaveChanges(Session session, string _serverOpaqueRef, DockerContainer serverObject)

@@ -2747,6 +2747,24 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   <data name="CONTAINED_IN" xml:space="preserve">
     <value>包含于</value>
   </data>
+  <data name="CONTAINER" xml:space="preserve">
+    <value>Container</value>
+  </data>
+  <data name="CONTAINER_COMMAND" xml:space="preserve">
+    <value>Command</value>
+  </data>
+  <data name="CONTAINER_CREATED" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="CONTAINER_GENERAL_TAB_TITLE" xml:space="preserve">
+    <value>Container General Properties</value>
+  </data>
+  <data name="CONTAINER_PORTS" xml:space="preserve">
+    <value>Ports</value>
+  </data>
+  <data name="CONTAINER_IMAGE" xml:space="preserve">
+    <value>Image</value>
+  </data>
   <data name="CONTAINS" xml:space="preserve">
     <value>包含</value>
   </data>
