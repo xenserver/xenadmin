@@ -1243,12 +1243,22 @@ namespace XenAdmin
             ToolStrip.Enabled = ToolbarsEnabled;
             ShowToolbarMenuItem.Checked = toolbarToolStripMenuItem.Checked = ToolbarsEnabled;
 
+            bool containerButtonsAvailable = startContainerToolStripButton.Enabled || stopContainerToolStripButton.Enabled || 
+                resumeContainerToolStripButton.Enabled || pauseContainerToolStripButton.Enabled || restartContainerToolStripButton.Enabled;
+
+            startContainerToolStripButton.Available = containerButtonsAvailable && startContainerToolStripButton.Enabled;
+            stopContainerToolStripButton.Available = containerButtonsAvailable && (stopContainerToolStripButton.Enabled || !startContainerToolStripButton.Available);
+            resumeContainerToolStripButton.Available = containerButtonsAvailable && resumeContainerToolStripButton.Enabled;
+            pauseContainerToolStripButton.Available = containerButtonsAvailable && (pauseContainerToolStripButton.Enabled || !resumeContainerToolStripButton.Available);
+            restartContainerToolStripButton.Available = containerButtonsAvailable;
+
             powerOnHostToolStripButton.Available = powerOnHostToolStripButton.Enabled;
             startVMToolStripButton.Available = startVMToolStripButton.Enabled;
-            shutDownToolStripButton.Available = shutDownToolStripButton.Enabled || (!startVMToolStripButton.Available && !powerOnHostToolStripButton.Available);
+            shutDownToolStripButton.Available = shutDownToolStripButton.Enabled || (!startVMToolStripButton.Available && !powerOnHostToolStripButton.Available && !containerButtonsAvailable);
+            RebootToolbarButton.Available = RebootToolbarButton.Enabled || !containerButtonsAvailable;
 
             resumeToolStripButton.Available = resumeToolStripButton.Enabled;
-            SuspendToolbarButton.Available = SuspendToolbarButton.Enabled || !resumeToolStripButton.Available;
+            SuspendToolbarButton.Available = SuspendToolbarButton.Enabled || (!resumeToolStripButton.Available && !containerButtonsAvailable);
 
             ForceRebootToolbarButton.Available = ((ForceVMRebootCommand)ForceRebootToolbarButton.Command).ShowOnMainToolBar;
             ForceShutdownToolbarButton.Available = ((ForceVMShutDownCommand)ForceShutdownToolbarButton.Command).ShowOnMainToolBar;

@@ -1503,6 +1503,111 @@
   <data name="ForceRebootToolbarButton.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="stopContainerToolStripButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt</value>
+  </data>
+  <data name="stopContainerToolStripButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="stopContainerToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="stopContainerToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 17</value>
+  </data>
+  <data name="stopContainerToolStripButton.Text" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="stopContainerToolStripButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="stopContainerToolStripButton.ToolTipText" xml:space="preserve">
+    <value>Stop Docker Container</value>
+  </data>
+  <data name="startContainerToolStripButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt</value>
+  </data>
+  <data name="startContainerToolStripButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="startContainerToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="startContainerToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 28</value>
+  </data>
+  <data name="startContainerToolStripButton.Text" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="startContainerToolStripButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="startContainerToolStripButton.ToolTipText" xml:space="preserve">
+    <value>Start Docker Container</value>
+  </data>
+  <data name="restartContainerToolStripButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt</value>
+  </data>
+  <data name="restartContainerToolStripButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="restartContainerToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="restartContainerToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 28</value>
+  </data>
+  <data name="restartContainerToolStripButton.Text" xml:space="preserve">
+    <value>Restart</value>
+  </data>
+  <data name="restartContainerToolStripButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="restartContainerToolStripButton.ToolTipText" xml:space="preserve">
+    <value>Restart Docker Container</value>
+  </data>
+  <data name="resumeContainerToolStripButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt</value>
+  </data>
+  <data name="resumeContainerToolStripButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="resumeContainerToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="resumeContainerToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 28</value>
+  </data>
+  <data name="resumeContainerToolStripButton.Text" xml:space="preserve">
+    <value>Resume</value>
+  </data>
+  <data name="resumeContainerToolStripButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="resumeContainerToolStripButton.ToolTipText" xml:space="preserve">
+    <value>Resume Docker Container</value>
+  </data>
+  <data name="pauseContainerToolStripButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt</value>
+  </data>
+  <data name="pauseContainerToolStripButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="pauseContainerToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="pauseContainerToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 28</value>
+  </data>
+  <data name="pauseContainerToolStripButton.Text" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="pauseContainerToolStripButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="pauseContainerToolStripButton.ToolTipText" xml:space="preserve">
+    <value>Pause Docker Container</value>
+  </data>
   <data name="ToolStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 24</value>
   </data>
@@ -2652,6 +2757,36 @@
     <value>ForceRebootToolbarButton</value>
   </data>
   <data name="&gt;&gt;ForceRebootToolbarButton.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;stopContainerToolStripButton.Name" xml:space="preserve">
+    <value>stopContainerToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;stopContainerToolStripButton.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;startContainerToolStripButton.Name" xml:space="preserve">
+    <value>startContainerToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;startContainerToolStripButton.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;restartContainerToolStripButton.Name" xml:space="preserve">
+    <value>restartContainerToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;restartContainerToolStripButton.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;resumeContainerToolStripButton.Name" xml:space="preserve">
+    <value>resumeContainerToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;resumeContainerToolStripButton.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;pauseContainerToolStripButton.Name" xml:space="preserve">
+    <value>pauseContainerToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;pauseContainerToolStripButton.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;statusToolTip.Name" xml:space="preserve">

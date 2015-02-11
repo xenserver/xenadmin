@@ -114,6 +114,11 @@ namespace XenAdmin
             this.SuspendToolbarButton = new XenAdmin.Commands.CommandToolStripButton();
             this.ForceShutdownToolbarButton = new XenAdmin.Commands.CommandToolStripButton();
             this.ForceRebootToolbarButton = new XenAdmin.Commands.CommandToolStripButton();
+            this.stopContainerToolStripButton = new XenAdmin.Commands.CommandToolStripButton();
+            this.startContainerToolStripButton = new XenAdmin.Commands.CommandToolStripButton();
+            this.restartContainerToolStripButton = new XenAdmin.Commands.CommandToolStripButton();
+            this.resumeContainerToolStripButton = new XenAdmin.Commands.CommandToolStripButton();
+            this.pauseContainerToolStripButton = new XenAdmin.Commands.CommandToolStripButton();
             this.statusToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.ToolBarContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ShowToolbarMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -559,7 +564,12 @@ namespace XenAdmin
             this.resumeToolStripButton,
             this.SuspendToolbarButton,
             this.ForceShutdownToolbarButton,
-            this.ForceRebootToolbarButton});
+            this.ForceRebootToolbarButton,
+            this.stopContainerToolStripButton,
+            this.startContainerToolStripButton,
+            this.restartContainerToolStripButton,
+            this.resumeContainerToolStripButton,
+            this.pauseContainerToolStripButton});
             this.ToolStrip.Name = "ToolStrip";
             this.ToolStrip.Stretch = true;
             this.ToolStrip.TabStop = true;
@@ -687,6 +697,41 @@ namespace XenAdmin
             resources.ApplyResources(this.ForceRebootToolbarButton, "ForceRebootToolbarButton");
             this.ForceRebootToolbarButton.Image = global::XenAdmin.Properties.Resources._001_ForceReboot_h32bit_24;
             this.ForceRebootToolbarButton.Name = "ForceRebootToolbarButton";
+            // 
+            // stopContainerToolStripButton
+            // 
+            this.stopContainerToolStripButton.Command = new XenAdmin.Commands.StopDockerContainerCommand();
+            resources.ApplyResources(this.stopContainerToolStripButton, "stopContainerToolStripButton");
+            this.stopContainerToolStripButton.Image = global::XenAdmin.Properties.Resources._001_ShutDown_h32bit_24;
+            this.stopContainerToolStripButton.Name = "stopContainerToolStripButton";
+            // 
+            // startContainerToolStripButton
+            // 
+            this.startContainerToolStripButton.Command = new XenAdmin.Commands.StartDockerContainerCommand();
+            resources.ApplyResources(this.startContainerToolStripButton, "startContainerToolStripButton");
+            this.startContainerToolStripButton.Image = global::XenAdmin.Properties.Resources._001_PowerOn_h32bit_24;
+            this.startContainerToolStripButton.Name = "startContainerToolStripButton";
+            // 
+            // restartContainerToolStripButton
+            // 
+            this.restartContainerToolStripButton.Command = new XenAdmin.Commands.RestartDockerContainerCommand();
+            resources.ApplyResources(this.restartContainerToolStripButton, "restartContainerToolStripButton");
+            this.restartContainerToolStripButton.Image = global::XenAdmin.Properties.Resources._001_Reboot_h32bit_24;
+            this.restartContainerToolStripButton.Name = "restartContainerToolStripButton";
+            // 
+            // resumeContainerToolStripButton
+            // 
+            this.resumeContainerToolStripButton.Command = new XenAdmin.Commands.ResumeDockerContainerCommand();
+            resources.ApplyResources(this.resumeContainerToolStripButton, "resumeContainerToolStripButton");
+            this.resumeContainerToolStripButton.Image = global::XenAdmin.Properties.Resources._000_Resumed_h32bit_24;
+            this.resumeContainerToolStripButton.Name = "resumeContainerToolStripButton";
+            // 
+            // pauseContainerToolStripButton
+            // 
+            this.pauseContainerToolStripButton.Command = new XenAdmin.Commands.PauseDockerContainerCommand();
+            resources.ApplyResources(this.pauseContainerToolStripButton, "pauseContainerToolStripButton");
+            this.pauseContainerToolStripButton.Image = global::XenAdmin.Properties.Resources._000_Paused_h32bit_24;
+            this.pauseContainerToolStripButton.Name = "pauseContainerToolStripButton";
             // 
             // ToolBarContextMenu
             // 
@@ -2040,6 +2085,11 @@ namespace XenAdmin
         private ToolStripStatusLabel statusLabel;
         private ToolStripProgressBar statusProgressBar;
         private CommandToolStripMenuItem reclaimFreedSpacetripMenuItem;
+        private CommandToolStripButton startContainerToolStripButton;
+        private CommandToolStripButton stopContainerToolStripButton;
+        private CommandToolStripButton pauseContainerToolStripButton;
+        private CommandToolStripButton resumeContainerToolStripButton;
+        private CommandToolStripButton restartContainerToolStripButton;
     }
 
 }
