@@ -48,7 +48,9 @@ namespace XenAdmin.Model
             this.parent = parent;
             this.Connection = parent.Connection;
             this.uuid = uuid;
-            this.opaque_ref = uuid; //using uuid, because opaque_ref does not exist at server side
+            // Containers don't have opaque_ref at server side; 
+            // We want to have an opaque_ref that is unique per connection, so we use parent.opaque_ref + uuid (container's id is only unique per VM)
+            this.opaque_ref = parent.opaque_ref + uuid;
             this.name_label = name;
             this.name_description = description;
             this.status = status;
@@ -258,7 +260,7 @@ namespace XenAdmin.Model
             parent = update.parent;
             Connection = update.parent.Connection;
             uuid = update.uuid;
-            opaque_ref = update.uuid; //using uuid, because opaque_ref does not exist at server side
+            opaque_ref = parent.opaque_ref + uuid; //using parent.opaque_ref + uuid, because opaque_ref does not exist at server side
             name_label = update.name_label;
             name_description = update.name_description;
             status = update.status;
