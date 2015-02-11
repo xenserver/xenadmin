@@ -1303,6 +1303,7 @@ namespace XenAdmin.Commands
                 items.AddIfEnabled(new StopDockerContainerCommand(mainWindow, selection));
                 items.AddIfEnabled(new PauseDockerContainerCommand(mainWindow, selection));
                 items.AddIfEnabled(new ResumeDockerContainerCommand(mainWindow, selection));
+                items.AddIfEnabled(new RestartDockerContainerCommand(mainWindow, selection));
             }
 
             public override bool IsValid(SelectedItemCollection selection)
@@ -1329,6 +1330,7 @@ namespace XenAdmin.Commands
                 items.AddIfEnabled(new StopDockerContainerCommand(mainWindow, selection));
                 items.AddIfEnabled(new PauseDockerContainerCommand(mainWindow, selection));
                 items.AddIfEnabled(new ResumeDockerContainerCommand(mainWindow, selection));
+                items.AddIfEnabled(new RestartDockerContainerCommand(mainWindow, selection));
             }
 
             public override bool IsValid(SelectedItemCollection selection)

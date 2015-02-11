@@ -106,4 +106,18 @@ namespace XenAdmin.Actions
                     "unpause")
         { }
     }
+
+    /// <summary>
+    /// Restart the Docker container
+    /// </summary>
+    public class RestartDockerContainerAction : DockerContainerLifetimeAction
+    {
+        public RestartDockerContainerAction(DockerContainer dockerContainer)
+            : base(dockerContainer,
+                    string.Format(Messages.ACTION_RESTART_CONTAINER_TITLE, dockerContainer.Name),
+                    Messages.ACTION_RESTART_CONTAINER_DESCRIPTION,
+                    Messages.ACTION_RESTART_CONTAINER_END_DESCRIPTION,
+                    "restart")
+        { }
+    }
 }

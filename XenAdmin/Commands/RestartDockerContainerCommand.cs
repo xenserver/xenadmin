@@ -39,20 +39,20 @@ using XenAPI;
 
 namespace XenAdmin.Commands
 {
-    internal class StopDockerContainerCommand : Command
+    internal class RestartDockerContainerCommand : Command
     {
-        public StopDockerContainerCommand()
+        public RestartDockerContainerCommand()
         { }
 
-        public StopDockerContainerCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection)
+        public RestartDockerContainerCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection)
             : base(mainWindow, selection)
         { }
 
-        public override string MenuText { get { return Messages.MAINWINDOW_STOP; } }
+        public override string MenuText { get { return Messages.MAINWINDOW_RESTART; } }
 
-        public override Image MenuImage { get { return Resources._001_ShutDown_h32bit_16; } }
+        public override Image MenuImage { get { return Resources._001_Reboot_h32bit_16; } }
 
-        public override Image ToolBarImage { get { return Resources._001_ShutDown_h32bit_24; } }
+        public override Image ToolBarImage { get { return Resources._001_Reboot_h32bit_24; } }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
@@ -73,13 +73,13 @@ namespace XenAdmin.Commands
             if (selection.AllItemsAre<DockerContainer>())
             {
                 dockerContainers = (from IXenObject obj in selection.AsXenObjects()
-                                           let container = (DockerContainer)obj
-                                           where CanExecute(container)
-                                           select container).ToList();
+                                    let container = (DockerContainer)obj
+                                    where CanExecute(container)
+                                    select container).ToList();
             }
 
             foreach (var container in dockerContainers)
-                (new StopDockerContainerAction(container)).RunAsync();
+                (new RestartDockerContainerAction(container)).RunAsync();
         }
     }
 }
