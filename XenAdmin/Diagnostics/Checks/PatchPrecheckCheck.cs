@@ -169,8 +169,6 @@ namespace XenAdmin.Diagnostics.Checks
                     var diskSpaceReq = new XenAdmin.Actions.DiskSpaceRequirements(operation, host, Patch.Name, required, found, reclaimableDiskSpace);
                     
                     return new HostOutOfSpaceProblem(this, host, Patch, diskSpaceReq);
-                    break;
-
                 case "":
                     return null;
                 default:
