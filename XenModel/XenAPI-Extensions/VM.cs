@@ -489,9 +489,37 @@ namespace XenAPI
             }
         }
 
+        /// <summary>Returns true if
+        /// 1) the guest is HVM and
+        ///   2a) the allow-vgpu restriction is absent or
+        ///   2b) the allow-vgpu restriction is non-zero
+        ///</summary>
         public bool CanHaveVGpu
         {
-            get { return CanHaveGpu; }
+            get
+            {
+                if (!IsHVM || !CanHaveGpu)
+                    return false;
+
+                XmlDocument xd = GetRecommendations();
+
+                if (xd == null)
+                    return true;
+
+                try
+                {
+                    XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='allow-vgpu']");
+                    if (xn == null || xn.Attributes == null)
+                        return true;
+
+                    return
+                        Convert.ToInt32(xn.Attributes["value"].Value) != 0;
+                }
+                catch
+                {
+                    return true;
+                }
+            }
         }
 
         void set_other_config(string key, string value)
