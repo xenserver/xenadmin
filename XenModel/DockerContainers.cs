@@ -176,7 +176,7 @@ namespace XenAdmin.Model
             
             IXenConnection connection = ixmo.Connection;
 
-            var dockerVMs = GetDockerVMs(ixmo);
+            var dockerVMs = GetDockerContainersOnVM(ixmo);
             connection.Cache.UpdateDockerContainersForVM(dockerVMs, (VM)ixmo);
         }
 
@@ -232,26 +232,26 @@ namespace XenAdmin.Model
                     if (propertyNode != null)
                         ports = propertyNode.InnerText;
 
-                    DockerContainer newContainer = new DockerContainer(vm, id, name, string.Empty, status, container, created, image, command, ports);
+                    DockerContainer dockerContainer = new DockerContainer(vm, id, name, string.Empty, status, container, created, image, command, ports);
                     
                     // update existing container or add a new one
-                    DockerContainer existingContainer = vm.Connection.Resolve(new XenRef<DockerContainer>(newContainer));
+                    DockerContainer existingContainer = vm.Connection.Resolve(new XenRef<DockerContainer>(id));
                     if (existingContainer != null)
                     {
-                        existingContainer.UpdateFrom(newContainer);
+                        existingContainer.UpdateFrom(dockerContainer);
                         containers.Add(existingContainer);
                     }
                     else
-                        containers.Add(newContainer);
+                        containers.Add(dockerContainer);
                 }
             }
             return containers;
         }
 
-        public static ComparableList<DockerContainer> GetDockerVMs(IXenObject o)
+        public static ComparableList<DockerContainer> GetDockerContainersOnVM(IXenObject o)
         {
             var vm = o as VM;
-            if (vm != null)
+            if (vm != null && vm.is_a_real_vm)
             {
                 return new ComparableList<DockerContainer>(DockerContainers.GetContainersFromOtherConfig(vm));
             }
