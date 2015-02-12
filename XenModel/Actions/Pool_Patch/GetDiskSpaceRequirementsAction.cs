@@ -123,7 +123,9 @@ namespace XenAdmin.Actions
                 log.WarnFormat("Plugin call disk-space.get_reclaimable_disk_space on {0} failed with {1}", Host.Name, failure.Message);
             }
 
-            DiskSpaceRequirements = new DiskSpaceRequirements(Host, updateName, requiredDiskSpace, availableDiskSpace, reclaimableDiskSpace);
+            var operation = Actions.DiskSpaceRequirements.OperationTypes.upload;
+
+            DiskSpaceRequirements = new DiskSpaceRequirements(operation, Host, updateName, requiredDiskSpace, availableDiskSpace, reclaimableDiskSpace);
 
             log.WarnFormat("Cleanup message: \r\n{0}", DiskSpaceRequirements.GetSpaceRequirementsMessage());
         }
@@ -132,14 +134,18 @@ namespace XenAdmin.Actions
 
     public class DiskSpaceRequirements
     {
+        public readonly OperationTypes Operation;
         public readonly Host Host;
         public readonly string UpdateName;
         public readonly long RequiredDiskSpace;
         public readonly long AvailableDiskSpace;
         public readonly long ReclaimableDiskSpace;
 
-        public DiskSpaceRequirements(Host host, string updateName, long requiredDiskSpace, long availableDiskSpace, long reclaimableDiskSpace)
+        public enum OperationTypes { install, upload }
+      
+        public DiskSpaceRequirements(OperationTypes operation, Host host, string updateName, long requiredDiskSpace, long availableDiskSpace, long reclaimableDiskSpace)
         {
+            Operation = operation;
             Host = host;
             UpdateName = updateName;
             RequiredDiskSpace = requiredDiskSpace;
@@ -149,14 +155,26 @@ namespace XenAdmin.Actions
 
         public bool CanCleanup
         {
-            get { return RequiredDiskSpace < ReclaimableDiskSpace; }
+            get { return ReclaimableDiskSpace + AvailableDiskSpace > RequiredDiskSpace && RequiredDiskSpace > 0; }
         }
 
         public string GetSpaceRequirementsMessage()
         {
+            string operation = string.Empty;
+
+            switch (Operation)
+            {
+                case OperationTypes.install :
+                    operation = Messages.NOT_ENOUGH_SPACE_MESSAGE_INSTALL;
+                    break;
+                case OperationTypes.upload :
+                    operation = Messages.NOT_ENOUGH_SPACE_MESSAGE_UPLOAD;
+                    break;
+            }
+
             StringBuilder sbMessage = new StringBuilder();
 
-            sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE, Host.Name, UpdateName);
+            sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE, Host.Name, operation, UpdateName);
             sbMessage.AppendLine();
             sbMessage.AppendLine();
             sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_REQUIRED_SPACE, Util.DiskSizeString(RequiredDiskSpace));
@@ -169,6 +187,11 @@ namespace XenAdmin.Actions
             else
                 sbMessage.AppendLine(Messages.NOT_ENOUGH_SPACE_MESSAGE_NOCLEANUP);
             return sbMessage.ToString();
+        }
+
+        public string GetMessageForActionLink()
+        {
+            return CanCleanup ? Messages.PATCHINGWIZARD_CLEANUP : Messages.PATCHINGWIZARD_MORE_INFO;
         }
     }
 }

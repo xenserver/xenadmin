@@ -194,6 +194,7 @@
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateCheck.cs" />
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostHasUnsupportedStorageLinkSRCheck.cs" />
+    <Compile Include="Diagnostics\Problems\HostProblem\HostOutOfSpaceProblem.cs" />
     <Compile Include="Diagnostics\Problems\ProblemWithInformationUrl.cs" />
     <Compile Include="Diagnostics\Problems\SRProblem\UnsupportedStorageLinkSrIsPresentProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\InvalidVCPUConfiguration.cs" />

@@ -37,6 +37,7 @@ using System.IO;
 using XenAdmin.Diagnostics.Problems.HostProblem;
 using System.Text.RegularExpressions;
 using System.Xml;
+using System.Collections.Generic;
 
 
 namespace XenAdmin.Diagnostics.Checks
@@ -132,6 +133,44 @@ namespace XenAdmin.Diagnostics.Checks
                         }
                     }
                     break;
+                case "PATCH_PRECHECK_FAILED_OUT_OF_SPACE":
+                    long required = 0;
+                    long found = 0;
+                    foreach (XmlNode node in errorNode.ChildNodes)
+                    {
+                        if (node.Name == "found")
+                        {
+                            long.TryParse(node.InnerText, out found);
+                        }
+
+                        if (node.Name == "required")
+                        {
+                            long.TryParse(node.InnerText, out required);
+                        }
+                    }
+
+                    // get reclaimable disk space (excluding current patch)
+                    long reclaimableDiskSpace = 0;
+                    try
+                    {
+                        var args = new Dictionary<string, string>();
+                        if (Patch != null)
+                            args.Add("exclude", Patch.uuid);
+                        var resultReclaimable = Host.call_plugin(host.Connection.Session, host.opaque_ref, "disk-space", "get_reclaimable_disk_space", args);
+                        reclaimableDiskSpace = Convert.ToInt64(resultReclaimable);                        
+                    }
+                    catch (Failure failure)
+                    {
+                        log.WarnFormat("Plugin call disk-space.get_reclaimable_disk_space on {0} failed with {1}", Host.Name, failure.Message);
+                    }
+
+                    var operation = XenAdmin.Actions.DiskSpaceRequirements.OperationTypes.install;
+
+                    var diskSpaceReq = new XenAdmin.Actions.DiskSpaceRequirements(operation, host, Patch.Name, required, found, reclaimableDiskSpace);
+                    
+                    return new HostOutOfSpaceProblem(this, host, Patch, diskSpaceReq);
+                    break;
+
                 case "":
                     return null;
                 default:
