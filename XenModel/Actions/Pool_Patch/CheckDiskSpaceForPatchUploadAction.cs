@@ -147,7 +147,7 @@ namespace XenAdmin.Actions
 
         public override string Message
         {
-            get { return String.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE, host, fileName); }
+            get { return String.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_UPLOAD, host, fileName); }
         }
     }
 }

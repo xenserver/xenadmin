@@ -8242,8 +8242,8 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NOT_CONTAINS" xml:space="preserve">
     <value>does not contain</value>
   </data>
-  <data name="NOT_ENOUGH_SPACE_MESSAGE" xml:space="preserve">
-    <value>There is not enough space on '{0}' to upload update '{1}'.</value>
+  <data name="NOT_ENOUGH_SPACE_DESCRIPTION" xml:space="preserve">
+    <value>This host does not have enough disk space to install this update</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_AVAILABLE_SPACE" xml:space="preserve">
     <value>Space available: {0}</value>
@@ -8251,11 +8251,17 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NOT_ENOUGH_SPACE_MESSAGE_CLEANUP" xml:space="preserve">
     <value>XenCenter can free up {0} by removing residual update files. Do you wish to proceed with the cleanup?</value>
   </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_INSTALL" xml:space="preserve">
+    <value>There is not enough space on '{0}' to install update '{1}'.</value>
+  </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_NOCLEANUP" xml:space="preserve">
     <value>You need to manually free up more space and try again.</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_REQUIRED_SPACE" xml:space="preserve">
     <value>Space required: {0}</value>
+  </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_UPLOAD" xml:space="preserve">
+    <value>There is not enough space on '{0}' to upload update '{1}'.</value>
   </data>
   <data name="NOT_IN_A_FOLDER" xml:space="preserve">
     <value>Not in any folder</value>

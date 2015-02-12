@@ -222,7 +222,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (!canUpload && diskSpaceRequirements != null)
             {
                 diskSpaceErrorLinkLabel.Visible = true;
-                diskSpaceErrorLinkLabel.Text = diskSpaceRequirements.CanCleanup ? Messages.PATCHINGWIZARD_CLEANUP : Messages.PATCHINGWIZARD_MORE_INFO;
+                diskSpaceErrorLinkLabel.Text = diskSpaceRequirements.GetMessageForActionLink();
             }
             else
                 diskSpaceErrorLinkLabel.Visible = false;
