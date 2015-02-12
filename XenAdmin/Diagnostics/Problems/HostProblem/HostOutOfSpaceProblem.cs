@@ -58,7 +58,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
         public override string Description
         {
-            get { return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE, Server.Name, Messages.NOT_ENOUGH_SPACE_MESSAGE_INSTALL, patch.Name); }
+            get { return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_INSTALL, Server.Name, patch.Name); }
         }
 
         protected override AsyncAction CreateAction(out bool cancelled)
@@ -107,7 +107,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
         {
             get
             {
-                return base.IsFixable;
+                return false;
             }
         }
 

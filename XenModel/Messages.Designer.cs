@@ -10473,14 +10473,14 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Docker Processes Properties.
+        ///   Looks up a localized string similar to Docker Processes.
         /// </summary>
         public static string DOCKER_PROCESS_TAB_TITLE {
             get {
                 return ResourceManager.GetString("DOCKER_PROCESS_TAB_TITLE", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to does not use.
         /// </summary>
@@ -17915,34 +17915,34 @@ namespace XenAdmin {
                 return ResourceManager.GetString("LABEL_SYNC", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to the informaiton is not valid.
+        ///   Looks up a localized string similar to The information is not available..
         /// </summary>
         public static string LAST_REFRESH_FAIL {
             get {
                 return ResourceManager.GetString("LAST_REFRESH_FAIL", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to loading the information.
+        ///   Looks up a localized string similar to Loading....
         /// </summary>
         public static string LAST_REFRESH_IN_PROGRESS {
             get {
                 return ResourceManager.GetString("LAST_REFRESH_IN_PROGRESS", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to last refresh.
+        ///   Looks up a localized string similar to Last refresh: {0}.
         /// </summary>
         public static string LAST_REFRESH_SUCCESS {
             get {
                 return ResourceManager.GetString("LAST_REFRESH_SUCCESS", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to was last week.
         /// </summary>
@@ -23740,15 +23740,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is not enough space on &apos;{0}&apos; to {1} &apos;{2}&apos;..
-        /// </summary>
-        public static string NOT_ENOUGH_SPACE_MESSAGE {
-            get {
-                return ResourceManager.GetString("NOT_ENOUGH_SPACE_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Space available: {0}.
         /// </summary>
         public static string NOT_ENOUGH_SPACE_MESSAGE_AVAILABLE_SPACE {
@@ -23767,7 +23758,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to install.
+        ///   Looks up a localized string similar to There is not enough space on &apos;{0}&apos; to install update &apos;{1}&apos;..
         /// </summary>
         public static string NOT_ENOUGH_SPACE_MESSAGE_INSTALL {
             get {
@@ -23794,7 +23785,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to upload.
+        ///   Looks up a localized string similar to There is not enough space on &apos;{0}&apos; to upload update &apos;{1}&apos;..
         /// </summary>
         public static string NOT_ENOUGH_SPACE_MESSAGE_UPLOAD {
             get {

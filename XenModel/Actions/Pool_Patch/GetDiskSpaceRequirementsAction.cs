@@ -160,21 +160,18 @@ namespace XenAdmin.Actions
 
         public string GetSpaceRequirementsMessage()
         {
-            string operation = string.Empty;
+            StringBuilder sbMessage = new StringBuilder();
 
             switch (Operation)
             {
                 case OperationTypes.install :
-                    operation = Messages.NOT_ENOUGH_SPACE_MESSAGE_INSTALL;
+                    sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_INSTALL, Host.Name, UpdateName);
                     break;
                 case OperationTypes.upload :
-                    operation = Messages.NOT_ENOUGH_SPACE_MESSAGE_UPLOAD;
+                    sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_UPLOAD, Host.Name, UpdateName);
                     break;
             }
 
-            StringBuilder sbMessage = new StringBuilder();
-
-            sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE, Host.Name, operation, UpdateName);
             sbMessage.AppendLine();
             sbMessage.AppendLine();
             sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_REQUIRED_SPACE, Util.DiskSizeString(RequiredDiskSpace));
