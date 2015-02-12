@@ -383,6 +383,7 @@ namespace XenAdmin.TabPages
         public void EnableDisableEdit()
         {
             buttonProperties.Enabled = xenObject != null && !xenObject.Locked && xenObject.Connection != null && xenObject.Connection.IsConnected;
+            buttonProperties.Visible = !(xenObject is DockerContainer);
         }
 
         public void BuildList()
@@ -428,10 +429,7 @@ namespace XenAdmin.TabPages
             else if (xenObject is StorageLinkRepository)
                 base.Text = Messages.SR_GENERAL_TAB_TITLE;
             else if (xenObject is DockerContainer)
-            {
-                buttonProperties.Visible = false;
                 base.Text = Messages.CONTAINER_GENERAL_TAB_TITLE;
-            }
 
             panel2.SuspendLayout();
             // Clear all the data from the sections (visible and non visible)
