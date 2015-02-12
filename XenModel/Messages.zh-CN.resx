@@ -3642,6 +3642,9 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   <data name="DOES_NOT_USE" xml:space="preserve">
     <value>不使用</value>
   </data>
+  <data name="DOCKER_PROCESS_TAB_TITLE" xml:space="preserve">
+    <value>Docker进程</value>
+  </data>
   <data name="DONE" xml:space="preserve">
     <value>已完成。</value>
   </data>
@@ -6160,6 +6163,15 @@ SCSI ID: {2}
   </data>
   <data name="LABEL_SYNC" xml:space="preserve">
     <value>正在与 {0} 同步...</value>
+  </data>
+  <data name="LAST_REFRESH_FAIL" xml:space="preserve">
+    <value>该信息暂时无法获取。</value>
+  </data>
+  <data name="LAST_REFRESH_IN_PROGRESS" xml:space="preserve">
+    <value>正在获取信息...</value>
+  </data>
+  <data name="LAST_REFRESH_SUCCESS" xml:space="preserve">
+    <value>最近更新于: {0}</value>
   </data>
   <data name="LAST_WEEK" xml:space="preserve">
     <value>为上周</value>

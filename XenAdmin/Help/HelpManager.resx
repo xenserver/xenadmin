@@ -1041,6 +1041,9 @@
   <data name="TabPageGPU" xml:space="preserve">
     <value>9901</value>
   </data>
+  <data name="TabPageDockerProcess" xml:space="preserve">
+    <value>9902</value>
+  </data>
   <data name="FileSystemUsageMessageAlert" xml:space="preserve">
     <value>9857</value>
   </data>

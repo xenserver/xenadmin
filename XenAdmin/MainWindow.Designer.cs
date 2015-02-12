@@ -87,6 +87,7 @@ namespace XenAdmin
             this.TabPageAD = new System.Windows.Forms.TabPage();
             this.TabPageGPU = new System.Windows.Forms.TabPage();
             this.TabPageSearch = new System.Windows.Forms.TabPage();
+            this.TabPageDockerProcess = new System.Windows.Forms.TabPage();
             this.alertPage = new XenAdmin.TabPages.AlertSummaryPage();
             this.updatesPage = new XenAdmin.TabPages.ManageUpdatesPage();
             this.eventsPage = new XenAdmin.TabPages.HistoryPage();
@@ -356,6 +357,7 @@ namespace XenAdmin
             this.TheTabControl.Controls.Add(this.TabPageAD);
             this.TheTabControl.Controls.Add(this.TabPageGPU);
             this.TheTabControl.Controls.Add(this.TabPageSearch);
+            this.TheTabControl.Controls.Add(this.TabPageDockerProcess);
             this.TheTabControl.Name = "TheTabControl";
             this.TheTabControl.SelectedIndex = 4;
             // 
@@ -479,6 +481,12 @@ namespace XenAdmin
             resources.ApplyResources(this.TabPageSearch, "TabPageSearch");
             this.TabPageSearch.Name = "TabPageSearch";
             this.TabPageSearch.UseVisualStyleBackColor = true;
+            // 
+            // TabPageDockerProcess
+            // 
+            resources.ApplyResources(this.TabPageDockerProcess, "TabPageDockerProcess");
+            this.TabPageDockerProcess.Name = "TabPageDockerProcess";
+            this.TabPageDockerProcess.UseVisualStyleBackColor = true;
             // 
             // alertPage
             // 
@@ -2001,6 +2009,7 @@ namespace XenAdmin
         internal System.Windows.Forms.TabPage TabPageWLB;
         private System.Windows.Forms.TabPage TabPageWLBUpsell;
         private System.Windows.Forms.TabPage TabPageSnapshots;
+        private System.Windows.Forms.TabPage TabPageDockerProcess;
         private XenAdmin.TabPages.SnapshotsPage snapshotPage;
         private System.Windows.Forms.ToolStripMenuItem connectDisconnectToolStripMenuItem;
         private CommandToolStripMenuItem connectAllToolStripMenuItem;
