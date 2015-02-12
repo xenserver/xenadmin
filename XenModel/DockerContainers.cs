@@ -176,7 +176,7 @@ namespace XenAdmin.Model
             
             IXenConnection connection = ixmo.Connection;
 
-            var dockerVMs = GetDockerVMs(ixmo);
+            var dockerVMs = GetDockerContainersOnVM(ixmo);
             connection.Cache.UpdateDockerContainersForVM(dockerVMs, (VM)ixmo);
         }
 
@@ -248,10 +248,10 @@ namespace XenAdmin.Model
             return containers;
         }
 
-        public static ComparableList<DockerContainer> GetDockerVMs(IXenObject o)
+        public static ComparableList<DockerContainer> GetDockerContainersOnVM(IXenObject o)
         {
             var vm = o as VM;
-            if (vm != null)
+            if (vm != null && vm.is_a_real_vm)
             {
                 return new ComparableList<DockerContainer>(DockerContainers.GetContainersFromOtherConfig(vm));
             }
