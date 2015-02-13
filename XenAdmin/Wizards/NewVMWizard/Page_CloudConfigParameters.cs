@@ -35,13 +35,16 @@ using XenAdmin.Core;
 using XenAPI;
 using XenAdmin.Controls;
 using XenAdmin.Actions;
+using XenAdmin.SettingsPanels;
+using System.Drawing;
 
 
 namespace XenAdmin.Wizards.NewVMWizard
 {
-    public partial class Page_CloudConfigParameters : XenTabPage
+    public partial class Page_CloudConfigParameters : XenTabPage, IEditPage
     {
-        private VM Template;
+        private VM vmOrTemplate;
+        private string existingConfig;
 
         public Host Affinity { get; set; }
 
@@ -50,7 +53,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             InitializeComponent();
         }
 
-        void NameTextBox_TextChanged(object sender, EventArgs e)
+        void ConfigDriveTemplateTextBox_TextChanged(object sender, EventArgs e)
         {
             OnPageUpdated();
         }
@@ -58,6 +61,16 @@ namespace XenAdmin.Wizards.NewVMWizard
         public override string Text
         {
             get { return Messages.NEWVMWIZARD_CLOUD_CONFIG_PARAMETERS_PAGE; }
+        }
+
+        public string SubText
+        {
+            get { return IncludeConfigDriveCheckBox.Checked ? "Config drive included" : "Config drive not included"; }
+        }
+
+        public Image Image
+        {
+            get { return Properties.Resources.coreos_globe_icon; }
         }
 
         public override string PageTitle
@@ -79,12 +92,13 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             base.PageLoaded(direction);
 
-            if (SelectedTemplate == Template)
+            if (SelectedTemplate == vmOrTemplate)
                 return;
 
-            Template = SelectedTemplate;
+            vmOrTemplate = SelectedTemplate;
 
-            GetDefaultParameters();
+            GetCloudConfigParameters();
+            ShowHideButtonsAndWarnings(true);
         }
 
         public VM SelectedTemplate { private get; set; }
@@ -94,8 +108,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             get
             {
-                return 
-                    IncludeConfigDriveCheckBox.Checked ? ConfigDriveTemplateTextBox.Text.Trim() : string.Empty;
+                return IncludeConfigDriveCheckBox.Checked ? ConfigDriveTemplateTextBox.Text.Trim() : string.Empty;
             }
         }
 
@@ -104,7 +117,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             get
             {
                 List<KeyValuePair<string, string>> sum = new List<KeyValuePair<string, string>>();
-                sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_CLOUD_CONFIG_PARAMETERS_PAGE, IncludeConfigDriveCheckBox.Checked ? "Config drive included" : "Config drive not included"));
+                sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_CLOUD_CONFIG_PARAMETERS_PAGE, SubText));
                 return sum;
             }
         }
@@ -113,15 +126,25 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             ConfigDriveTemplateTextBox.Enabled = IncludeConfigDriveCheckBox.Checked;
         }
-
-        private void GetDefaultParameters()
+        
+        private void GetCloudConfigParameters()
         {
+            var configDrive = vmOrTemplate.CloudConfigDrive;
+            GetCloudConfigParameters(configDrive);
+        }
+        
+        private void GetCloudConfigParameters(VDI configDrive)
+        {
+            var defaultConfig = configDrive == null;
             var parameters = new Dictionary<string, string>();
-            parameters.Add("templateuuid", Template.uuid);
-
+            if (defaultConfig)
+                parameters.Add("templateuuid", vmOrTemplate.uuid);
+            else
+                parameters.Add("vdiuuid", configDrive.uuid);
+            
             var action = new ExecutePluginAction(Connection, Affinity ?? Helpers.GetMaster(Connection),
                         "xscontainer",//plugin
-                        "get_config_drive_default",//function
+                        defaultConfig ? "get_config_drive_default" : "get_config_drive_configuration",//function
                         parameters,
                         true); //hidefromlogs
 
@@ -129,11 +152,85 @@ namespace XenAdmin.Wizards.NewVMWizard
             var result = action.Result.Replace("\n", Environment.NewLine);
 
             ConfigDriveTemplateTextBox.Text = result;
+            existingConfig = result;
+        }
+
+        private void GetDefaultParameters()
+        {
+            GetCloudConfigParameters(null);
+        }
+
+        public void ShowHideButtonsAndWarnings(bool inNewVmWizard)
+        {
+            // IncludeConfigDriveCheckBox and reloadDefaults only visible in the New VM Wizard
+            IncludeConfigDriveCheckBox.Visible = reloadDefaults.Visible = inNewVmWizard;
+
+            // the cloud config cannot be edited on non-halted VMs
+            bool canEdit = inNewVmWizard || vmOrTemplate.is_a_template ||
+                           vmOrTemplate.power_state == vm_power_state.Halted;
+
+            ConfigDriveTemplateLabel.Enabled = ConfigDriveTemplateTextBox.Enabled = canEdit;
+            warningsTable.Visible = !canEdit;
         }
 
         private void reloadDefaults_Click(object sender, EventArgs e)
         {
             GetDefaultParameters();
         }
+
+        #region Implementation of IEditPage
+
+        public AsyncAction SaveSettings()
+        {
+            var configDrive = vmOrTemplate.CloudConfigDrive;
+            if (configDrive == null || string.IsNullOrEmpty(ConfigDriveTemplateText))
+                return null;
+            
+            SR sr = vmOrTemplate.Connection.Resolve(configDrive.SR);
+            if (sr == null)
+                return null;
+
+            var parameters = new Dictionary<string, string>();
+            parameters.Add("vmuuid", vmOrTemplate.uuid);
+            parameters.Add("sruuid", sr.uuid);
+            parameters.Add("configuration", ConfigDriveTemplateText.Replace("\r\n", "\n"));
+
+            return new ExecutePluginAction(Connection, vmOrTemplate.Home() ?? Helpers.GetMaster(Connection),
+                                           "xscontainer", //plugin
+                                           "create_config_drive", //function
+                                           parameters,
+                                           true); //hidefromlogs
+        }
+
+        public void SetXenObjects(IXenObject orig, IXenObject clone)
+        {
+            vmOrTemplate = (VM)clone;
+
+            if (Connection == null) // on the PropertiesDialog
+                Connection = vmOrTemplate.Connection;
+
+            GetCloudConfigParameters();
+            ShowHideButtonsAndWarnings(false);
+        }
+
+        public bool ValidToSave
+        {
+            get { return true; }
+        }
+
+        public void ShowLocalValidationMessages()
+        {
+        }
+
+        public void Cleanup()
+        {
+        }
+
+        public bool HasChanged
+        {
+            get { return existingConfig != ConfigDriveTemplateText; }
+        }
+
+        #endregion
     }
 }

@@ -319,5 +319,10 @@ namespace XenAPI
                 return name_label.Contains(wssName);
             }
         }
+
+        public bool IsCloudConfigDrive
+        {
+            get { return other_config.ContainsKey("config-drive") && other_config["config-drive"].ToLower() == "true"; }
+        }
     }
 }
