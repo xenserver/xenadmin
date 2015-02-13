@@ -426,6 +426,9 @@
   <data name="TabPageCPUMemory" xml:space="preserve">
     <value>1040</value>
   </data>
+  <data name="TabPageDockerDetails" xml:space="preserve">
+    <value>9903</value>
+  </data>
   <data name="TabPageHA" xml:space="preserve">
     <value>1095</value>
   </data>

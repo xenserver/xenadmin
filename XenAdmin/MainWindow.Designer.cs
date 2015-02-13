@@ -88,6 +88,7 @@ namespace XenAdmin
             this.TabPageGPU = new System.Windows.Forms.TabPage();
             this.TabPageSearch = new System.Windows.Forms.TabPage();
             this.TabPageDockerProcess = new System.Windows.Forms.TabPage();
+            this.TabPageDockerDetails = new System.Windows.Forms.TabPage();
             this.alertPage = new XenAdmin.TabPages.AlertSummaryPage();
             this.updatesPage = new XenAdmin.TabPages.ManageUpdatesPage();
             this.eventsPage = new XenAdmin.TabPages.HistoryPage();
@@ -358,6 +359,7 @@ namespace XenAdmin
             this.TheTabControl.Controls.Add(this.TabPageGPU);
             this.TheTabControl.Controls.Add(this.TabPageSearch);
             this.TheTabControl.Controls.Add(this.TabPageDockerProcess);
+            this.TheTabControl.Controls.Add(this.TabPageDockerDetails);
             this.TheTabControl.Name = "TheTabControl";
             this.TheTabControl.SelectedIndex = 4;
             // 
@@ -487,6 +489,12 @@ namespace XenAdmin
             resources.ApplyResources(this.TabPageDockerProcess, "TabPageDockerProcess");
             this.TabPageDockerProcess.Name = "TabPageDockerProcess";
             this.TabPageDockerProcess.UseVisualStyleBackColor = true;
+            //
+            // TabPageDockerDetails
+            // 
+            resources.ApplyResources(this.TabPageDockerDetails, "TabPageDockerDetails");
+            this.TabPageDockerDetails.Name = "TabPageDockerDetails";
+            this.TabPageDockerDetails.UseVisualStyleBackColor = true;
             // 
             // alertPage
             // 
@@ -2010,6 +2018,7 @@ namespace XenAdmin
         private System.Windows.Forms.TabPage TabPageWLBUpsell;
         private System.Windows.Forms.TabPage TabPageSnapshots;
         private System.Windows.Forms.TabPage TabPageDockerProcess;
+        internal System.Windows.Forms.TabPage TabPageDockerDetails;
         private XenAdmin.TabPages.SnapshotsPage snapshotPage;
         private System.Windows.Forms.ToolStripMenuItem connectDisconnectToolStripMenuItem;
         private CommandToolStripMenuItem connectAllToolStripMenuItem;

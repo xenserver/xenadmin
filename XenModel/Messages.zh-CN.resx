@@ -3642,6 +3642,9 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   <data name="DOES_NOT_USE" xml:space="preserve">
     <value>不使用</value>
   </data>
+  <data name="DOCKER_DETAIL_TAB_TITLE" xml:space="preserve">
+    <value>Docker详细信息</value>
+  </data>
   <data name="DOCKER_PROCESS_TAB_TITLE" xml:space="preserve">
     <value>Docker进程</value>
   </data>

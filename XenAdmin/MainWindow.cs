@@ -100,6 +100,7 @@ namespace XenAdmin
         internal readonly AdPage AdPage = new AdPage();
         internal readonly GpuPage GpuPage = new GpuPage();
         internal readonly DockerProcessPage DockerProcessPage = new DockerProcessPage();
+        internal readonly DockerDetailsPage DockerDetailsPage = new DockerDetailsPage();
 
         private ActionBase statusBarAction = null;
         public ActionBase StatusBarAction { get { return statusBarAction; } }
@@ -153,6 +154,7 @@ namespace XenAdmin
             components.Add(GpuPage);
             components.Add(SearchPage);
             components.Add(DockerProcessPage);
+            components.Add(DockerDetailsPage);
 
             AddTabContents(VMStoragePage, TabPageStorage);
             AddTabContents(SrStoragePage, TabPageSR);
@@ -173,6 +175,7 @@ namespace XenAdmin
             AddTabContents(GpuPage, TabPageGPU);
             AddTabContents(SearchPage, TabPageSearch);
             AddTabContents(DockerProcessPage, TabPageDockerProcess);
+            AddTabContents(DockerDetailsPage, TabPageDockerDetails);
 
             #endregion
 
@@ -1338,6 +1341,7 @@ namespace XenAdmin
 
             ShowTab(TabPageSearch, true);
 
+            ShowTab(TabPageDockerDetails, !multi && !SearchMode && isDockerContainerSelected);
             // N.B. Change NewTabs definition if you add more tabs here.
 
             // Save and restore focus on treeView, since selecting tabs in ChangeToNewTabs() has the
@@ -1850,6 +1854,10 @@ namespace XenAdmin
                 {
                     DockerProcessPage.DockerContainer = SelectionManager.Selection.First as DockerContainer;
                 }
+                else if (t == TabPageDockerDetails)
+                {
+                    DockerDetailsPage.XenObject = SelectionManager.Selection.FirstAsXenObject;
+                }
             }
 
             if (t == TabPagePeformance)
@@ -1861,6 +1869,11 @@ namespace XenAdmin
                 SearchPage.PanelShown();
             else
                 SearchPage.PanelHidden();
+
+            if (t == TabPageDockerDetails)
+                DockerDetailsPage.ResumeRefresh();
+            else
+                DockerDetailsPage.PauseRefresh();
 
             if (t != null)
                 SetLastSelectedPage(SelectionManager.Selection.First, t);
@@ -1881,7 +1894,7 @@ namespace XenAdmin
         /// </summary>
         public enum Tab
         {
-            Overview, Home, Settings, Storage, Network, Console, Performance, NICs, SR, DockerProcess
+            Overview, Home, Settings, Storage, Network, Console, Performance, NICs, SR, DockerProcess, DockerDetails
         }
 
         public void SwitchToTab(Tab tab)
@@ -1917,6 +1930,9 @@ namespace XenAdmin
                     break;
                 case Tab.DockerProcess:
                     TheTabControl.SelectedTab = TabPageDockerProcess;
+                    break;
+                case Tab.DockerDetails:
+                    TheTabControl.SelectedTab = TabPageDockerDetails;
                     break;
                 default:
                     throw new NotImplementedException();
@@ -2297,6 +2313,8 @@ namespace XenAdmin
                 return "TabPageGPU" + modelObj;
             if (TheTabControl.SelectedTab == TabPageDockerProcess)
                 return "TabPageDockerProcess" + modelObj;
+            if (TheTabControl.SelectedTab == TabPageDockerDetails)
+                return "TabPageDockerDetails" + modelObj;
             return "TabPageUnknown";
         }
 

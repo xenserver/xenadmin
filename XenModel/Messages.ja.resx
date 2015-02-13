@@ -3643,6 +3643,9 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   <data name="DOES_NOT_USE" xml:space="preserve">
     <value>以下を使用しない</value>
   </data>
+  <data name="DOCKER_DETAIL_TAB_TITLE" xml:space="preserve">
+    <value>Docker Detail</value>
+  </data>
   <data name="DOCKER_PROCESS_TAB_TITLE" xml:space="preserve">
     <value>Docker Processes</value>
   </data>
