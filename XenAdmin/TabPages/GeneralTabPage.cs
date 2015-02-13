@@ -1357,7 +1357,15 @@ namespace XenAdmin.TabPages
                 DockerContainer dockerContainer = (DockerContainer)xenObject;
                 s.AddEntry(Messages.NAME, dockerContainer.Name.Length != 0 ? dockerContainer.Name : Messages.NONE);
                 s.AddEntry(Messages.STATUS, dockerContainer.status.Length != 0 ? dockerContainer.status : Messages.NONE);
-                s.AddEntry(Messages.CONTAINER_CREATED, dockerContainer.created.Length != 0 ? dockerContainer.created : Messages.NONE);
+                try
+                {
+                    DateTime created = Util.FromUnixTime(double.Parse(dockerContainer.created)).ToLocalTime();
+                    s.AddEntry(Messages.CONTAINER_CREATED, HelpersGUI.DateTimeToString(created, Messages.DATEFORMAT_DMY_HMS, true));
+                }
+                catch
+                {
+                    s.AddEntry(Messages.CONTAINER_CREATED, dockerContainer.created.Length != 0 ? dockerContainer.created : Messages.NONE);
+                }
                 s.AddEntry(Messages.CONTAINER_IMAGE, dockerContainer.image.Length != 0 ? dockerContainer.image : Messages.NONE);
                 s.AddEntry(Messages.CONTAINER, dockerContainer.container.Length != 0 ? dockerContainer.container : Messages.NONE);
                 s.AddEntry(Messages.CONTAINER_COMMAND, dockerContainer.command.Length != 0 ? dockerContainer.command : Messages.NONE);
