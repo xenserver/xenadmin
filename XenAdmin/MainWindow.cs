@@ -1870,6 +1870,11 @@ namespace XenAdmin
             else
                 SearchPage.PanelHidden();
 
+            if (t == TabPageDockerProcess)
+                DockerProcessPage.ResumeRefresh();
+            else
+                DockerProcessPage.PauseRefresh();
+
             if (t == TabPageDockerDetails)
                 DockerDetailsPage.ResumeRefresh();
             else

@@ -78,10 +78,6 @@ namespace XenAdmin.TabPages
                     args["object"] = docker.name_label;
                     listView1.Items.Clear();
                     labelRefresh.Text = Messages.LAST_REFRESH_IN_PROGRESS;
-                    // Set timer to 10ms to make the empty form shown promptly and
-                    // then fill the form with the contents retrieved from XenServer.
-                    timer1.Interval = 10;
-                    timer1.Enabled = true;
                 }
             }
         }
@@ -169,10 +165,8 @@ namespace XenAdmin.TabPages
             listView1.Items.Clear();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void RefreshTimer_Tick(object sender, EventArgs e)
         {
-            // Set timer to 20s as the interval to refresh the processes' info.
-            timer1.Interval = 1000 * 20;
             updateList();
         }
 
@@ -201,5 +195,18 @@ namespace XenAdmin.TabPages
 
             listView1.Sort();
         }
+
+        public void PauseRefresh()
+        {
+            RefreshTimer.Enabled = false;
+        }
+
+        public void ResumeRefresh()
+        {
+            // Update on resume either to get initial content or to refresh outdated content
+            updateList();
+            RefreshTimer.Enabled = true;
+        }
+
     }
 }
