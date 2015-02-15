@@ -10473,6 +10473,204 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Api Version.
+        /// </summary>
+        public static string DOCKER_INFO_API_VERSION {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_API_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arch.
+        /// </summary>
+        public static string DOCKER_INFO_ARCH {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_ARCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Debug.
+        /// </summary>
+        public static string DOCKER_INFO_DEBUG {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_DEBUG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Driver.
+        /// </summary>
+        public static string DOCKER_INFO_DRIVER {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_DRIVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Driver Status.
+        /// </summary>
+        public static string DOCKER_INFO_DRIVER_STATUS {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_DRIVER_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Execution Driver.
+        /// </summary>
+        public static string DOCKER_INFO_EXECUTION_DRIVER {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_EXECUTION_DRIVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Git Commit.
+        /// </summary>
+        public static string DOCKER_INFO_GIT_COMMIT {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_GIT_COMMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go Version.
+        /// </summary>
+        public static string DOCKER_INFO_GO_VERSION {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_GO_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Index Server Address.
+        /// </summary>
+        public static string DOCKER_INFO_INDEX_SERVER_ADDRESS {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_INDEX_SERVER_ADDRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Initiate Path.
+        /// </summary>
+        public static string DOCKER_INFO_INITIATE_PATH {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_INITIATE_PATH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Initiate Sha1.
+        /// </summary>
+        public static string DOCKER_INFO_INITIATE_SHA1 {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_INITIATE_SHA1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IPv4 Forwarding.
+        /// </summary>
+        public static string DOCKER_INFO_IPV4_FORWARDING {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_IPV4_FORWARDING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kernel Version.
+        /// </summary>
+        public static string DOCKER_INFO_KERNEL_VERSION {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_KERNEL_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Labels.
+        /// </summary>
+        public static string DOCKER_INFO_LABELS {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_LABELS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Memory Limit.
+        /// </summary>
+        public static string DOCKER_INFO_MEMORY_LIMIT {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_MEMORY_LIMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NCPU.
+        /// </summary>
+        public static string DOCKER_INFO_NCPU {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_NCPU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NEvents Listener.
+        /// </summary>
+        public static string DOCKER_INFO_NEVENT_LISTENER {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_NEVENT_LISTENER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NFd.
+        /// </summary>
+        public static string DOCKER_INFO_NFD {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_NFD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NGoroutines.
+        /// </summary>
+        public static string DOCKER_INFO_NGOROUTINES {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_NGOROUTINES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Root Directory.
+        /// </summary>
+        public static string DOCKER_INFO_ROOT_DIR {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_ROOT_DIR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Swap Limit.
+        /// </summary>
+        public static string DOCKER_INFO_SWAP_LIMIT {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_SWAP_LIMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        public static string DOCKER_INFO_VERSION {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Docker Processes.
         /// </summary>
         public static string DOCKER_PROCESS_TAB_TITLE {

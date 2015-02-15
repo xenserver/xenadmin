@@ -3645,6 +3645,72 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   <data name="DOCKER_PROCESS_TAB_TITLE" xml:space="preserve">
     <value>Docker进程</value>
   </data>
+  <data name="DOCKER_INFO_API_VERSION" xml:space="preserve">
+    <value>Api Version</value>
+  </data>
+  <data name="DOCKER_INFO_ARCH" xml:space="preserve">
+    <value>Arch</value>
+  </data>
+  <data name="DOCKER_INFO_DEBUG" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="DOCKER_INFO_DRIVER" xml:space="preserve">
+    <value>Driver</value>
+  </data>
+  <data name="DOCKER_INFO_DRIVER_STATUS" xml:space="preserve">
+    <value>Driver Status</value>
+  </data>
+  <data name="DOCKER_INFO_EXECUTION_DRIVER" xml:space="preserve">
+    <value>Execution Driver</value>
+  </data>
+  <data name="DOCKER_INFO_GIT_COMMIT" xml:space="preserve">
+    <value>Git Commit</value>
+  </data>
+  <data name="DOCKER_INFO_GO_VERSION" xml:space="preserve">
+    <value>Go Version</value>
+  </data>
+  <data name="DOCKER_INFO_INDEX_SERVER_ADDRESS" xml:space="preserve">
+    <value>Index Server Address</value>
+  </data>
+  <data name="DOCKER_INFO_INITIATE_PATH" xml:space="preserve">
+    <value>Initiate Path</value>
+  </data>
+  <data name="DOCKER_INFO_INITIATE_SHA1" xml:space="preserve">
+    <value>Initiate Sha1</value>
+  </data>
+  <data name="DOCKER_INFO_IPV4_FORWARDING" xml:space="preserve">
+    <value>IPv4 Forwarding</value>
+  </data>
+  <data name="DOCKER_INFO_KERNEL_VERSION" xml:space="preserve">
+    <value>Kernel Version</value>
+  </data>
+  <data name="DOCKER_INFO_LABELS" xml:space="preserve">
+    <value>Labels</value>
+  </data>
+  <data name="DOCKER_INFO_MEMORY_LIMIT" xml:space="preserve">
+    <value>Memory Limit</value>
+  </data>
+  <data name="DOCKER_INFO_NCPU" xml:space="preserve">
+    <value>NCPU</value>
+  </data>
+  <data name="DOCKER_INFO_NEVENT_LISTENER" xml:space="preserve">
+    <value>NEvents Listener</value>
+  </data>
+  <data name="DOCKER_INFO_NFD" xml:space="preserve">
+    <value>NFd</value>
+  </data>
+  <data name="DOCKER_INFO_NGOROUTINES" xml:space="preserve">
+    <value>NGoroutines</value>
+  </data>
+  <data name="DOCKER_INFO_ROOT_DIR" xml:space="preserve">
+    <value>Root Directory</value>
+  </data>
+  <data name="DOCKER_INFO_SWAP_LIMIT" xml:space="preserve">
+    <value>Swap Limit</value>
+  </data>
+  <data name="DOCKER_INFO_VERSION" xml:space="preserve">
+    <value>Version</value>
+  </data>
   <data name="DONE" xml:space="preserve">
     <value>已完成。</value>
   </data>

@@ -467,6 +467,8 @@ namespace XenAdmin.TabPages
                 generateStorageLinkSystemCapabilitiesBox();
                 generateMultipathBootBox();
                 generateVCPUsBox();
+                generateDockerInfoBox();
+                generateDockerVersionBox();
             }
 
             // hide all the sections which haven't been populated, those that have make sure are visible
@@ -1505,6 +1507,67 @@ namespace XenAdmin.TabPages
             s.AddEntry(FriendlyName("host.VMMemory"), host.ResidentVMMemoryUsageString);
             s.AddEntry(FriendlyName("host.XenMemory"), host.XenMemoryString);
             
+        }
+
+        private void addStringEntry(PDSection s, string key, string value)
+        {
+            s.AddEntry(key, value.Length != 0 ? value : Messages.NONE);
+        }
+
+        private void generateDockerInfoBox()
+        {
+            VM vm = xenObject as VM;
+            if (vm == null)
+                return;
+
+            VM_Docker_Info info = vm.DockerInfo;
+            if (info == null)
+                return;
+
+            PDSection s = pdSectionDockerInfo;
+            addStringEntry(s, Messages.DOCKER_INFO_NGOROUTINES, info.NGoroutines);
+            addStringEntry(s, Messages.DOCKER_INFO_ROOT_DIR, info.DockerRootDir);
+            addStringEntry(s, Messages.DOCKER_INFO_DRIVER_STATUS, info.DriverStatus);
+            addStringEntry(s, Messages.OPERATING_SYSTEM, info.OperatingSystem); ;
+            addStringEntry(s, Messages.CONTAINER, info.Containers);
+            addStringEntry(s, Messages.MEMORY, Util.MemorySizeString(Convert.ToDouble(info.MemTotal)));
+            addStringEntry(s, Messages.DOCKER_INFO_DRIVER, info.Driver);
+            addStringEntry(s, Messages.DOCKER_INFO_INDEX_SERVER_ADDRESS, info.IndexServerAddress);
+            addStringEntry(s, Messages.DOCKER_INFO_INITIATE_PATH, info.InitPath);
+            addStringEntry(s, Messages.DOCKER_INFO_EXECUTION_DRIVER, info.ExecutionDriver);
+            addStringEntry(s, Messages.NAME, info.Name);
+            addStringEntry(s, Messages.DOCKER_INFO_NCPU, info.NCPU);
+            addStringEntry(s, Messages.DOCKER_INFO_DEBUG, info.Debug);
+            addStringEntry(s, Messages.ID, info.ID);
+            addStringEntry(s, Messages.DOCKER_INFO_IPV4_FORWARDING, info.IPv4Forwarding);
+            addStringEntry(s, Messages.DOCKER_INFO_KERNEL_VERSION, info.KernelVersion);
+            addStringEntry(s, Messages.DOCKER_INFO_NFD, info.NFd);
+            addStringEntry(s, Messages.DOCKER_INFO_INITIATE_SHA1, info.InitSha1);
+            addStringEntry(s, Messages.DOCKER_INFO_LABELS, info.Labels);
+            addStringEntry(s, Messages.DOCKER_INFO_MEMORY_LIMIT, Util.MemorySizeString(Convert.ToDouble(info.MemoryLimit)));
+            addStringEntry(s, Messages.DOCKER_INFO_SWAP_LIMIT, info.SwapLimit);
+            addStringEntry(s, Messages.CONTAINER_IMAGE, info.Images);
+            addStringEntry(s, Messages.DOCKER_INFO_NEVENT_LISTENER, info.NEventsListener);
+        }
+
+        private void generateDockerVersionBox()
+        {
+            VM vm = xenObject as VM;
+            if (vm == null)
+                return;
+
+            VM_Docker_Version version = vm.DockerVersion;
+            if (version == null)
+                return;
+
+            PDSection s = pdSectionDockerVersion;
+            addStringEntry(s, Messages.DOCKER_INFO_KERNEL_VERSION, version.KernelVersion);
+            addStringEntry(s, Messages.DOCKER_INFO_ARCH, version.Arch);
+            addStringEntry(s, Messages.DOCKER_INFO_API_VERSION, version.ApiVersion);
+            addStringEntry(s, Messages.DOCKER_INFO_VERSION, version.Version);
+            addStringEntry(s, Messages.DOCKER_INFO_GIT_COMMIT, version.GitCommit);
+            addStringEntry(s, Messages.OPERATING_SYSTEM, version.Os);
+            addStringEntry(s, Messages.DOCKER_INFO_GO_VERSION, version.GoVersion);
         }
 
         private bool CPUsIdentical(IEnumerable<Host_cpu> cpus)
