@@ -195,6 +195,8 @@ namespace XenAdmin.ConsoleView
 
             UpdateParentMinimumSize();
 
+            UpdateButtons();
+
             toggleConsoleButton.EnabledChanged += toggleConsoleButton_EnabledChanged;
         }
 
@@ -526,7 +528,7 @@ namespace XenAdmin.ConsoleView
                     }
                 }
                 else
-                EnableRDPIfCapable();
+                    EnableRDPIfCapable();
                 UpdateButtons();
             }
         }
@@ -1232,6 +1234,13 @@ namespace XenAdmin.ConsoleView
                 toggleConsoleButton.Text = vncScreen.UseVNC ? (CanEnableRDPOnCreamOrGreater(source.Connection) ? enableRDP : UseRDP) : UseStandardDesktop;
             else
                 toggleConsoleButton.Text = vncScreen.UseSource ? UseXVNC : UseVNC;
+            
+            if (Helpers.CreamOrGreater(source.Connection))
+            {
+                if (RDPEnabled || RDPControlEnabled)
+                    tip.SetToolTip(this.toggleConsoleButton, null);
+            }
+
             scaleCheckBox.Visible = !rdp || vncScreen.UseVNC;
             sendCAD.Enabled = !rdp || vncScreen.UseVNC;
             FocusVNC();
