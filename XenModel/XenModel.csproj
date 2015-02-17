@@ -308,11 +308,13 @@
     <Compile Include="WLB\WlbHostConfiguration.cs" />
     <Compile Include="WLB\WlbServerState.cs" />
     <Compile Include="XenAPI-Extensions\Blob.cs" />
+    <Compile Include="XenAPI-Extensions\VM_Docker_Info.cs" />
     <Compile Include="XenAPI-Extensions\GPU_group.cs" />
     <Compile Include="XenAPI-Extensions\PGPU.cs" />
     <Compile Include="XenAPI-Extensions\VGPU.cs" />
     <Compile Include="XenAPI-Extensions\VGPU_type.cs" />
     <Compile Include="XenAPI-Extensions\VM_appliance.cs" />
+    <Compile Include="XenAPI-Extensions\VM_Docker_Version.cs" />
     <Compile Include="XenAPI-Extensions\vm_power_state.cs" />
     <Compile Include="XenAPI\allocation_algorithm.cs" />
     <Compile Include="XenAPI\bond_mode.cs" />

@@ -36,6 +36,8 @@ namespace XenAdmin.TabPages
             this.linkLabelExpand = new System.Windows.Forms.LinkLabel();
             this.linkLabelCollapse = new System.Windows.Forms.LinkLabel();
             this.panel2 = new XenAdmin.Controls.PanelNoFocusScroll();
+            this.panelDockerInfo = new System.Windows.Forms.Panel();
+            this.pdSectionDockerInfo = new XenAdmin.Controls.PDSection();
             this.panelStorageLinkSystemCapabilities = new System.Windows.Forms.Panel();
             this.pdSectionStorageLinkSystemCapabilities = new XenAdmin.Controls.PDSection();
             this.panelMultipathBoot = new System.Windows.Forms.Panel();
@@ -68,10 +70,13 @@ namespace XenAdmin.TabPages
             this.pdSectionCustomFields = new XenAdmin.Controls.PDSection();
             this.panelGeneral = new System.Windows.Forms.Panel();
             this.pdSectionGeneral = new XenAdmin.Controls.PDSection();
+            this.panelDockerVersion = new System.Windows.Forms.Panel();
+            this.pdSectionDockerVersion = new XenAdmin.Controls.PDSection();
             this.pageContainerPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panelDockerInfo.SuspendLayout();
             this.panelStorageLinkSystemCapabilities.SuspendLayout();
             this.panelMultipathBoot.SuspendLayout();
             this.panelStorageLink.SuspendLayout();
@@ -88,6 +93,7 @@ namespace XenAdmin.TabPages
             this.panelManagementInterfaces.SuspendLayout();
             this.panelCustomFields.SuspendLayout();
             this.panelGeneral.SuspendLayout();
+            this.panelDockerVersion.SuspendLayout();
             this.SuspendLayout();
             // 
             // pageContainerPanel
@@ -134,6 +140,8 @@ namespace XenAdmin.TabPages
             // panel2
             // 
             resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Controls.Add(this.panelDockerInfo);
+            this.panel2.Controls.Add(this.panelDockerVersion);
             this.panel2.Controls.Add(this.panelStorageLinkSystemCapabilities);
             this.panel2.Controls.Add(this.panelMultipathBoot);
             this.panel2.Controls.Add(this.panelStorageLink);
@@ -151,6 +159,19 @@ namespace XenAdmin.TabPages
             this.panel2.Controls.Add(this.panelCustomFields);
             this.panel2.Controls.Add(this.panelGeneral);
             this.panel2.Name = "panel2";
+            // 
+            // panelDockerInfo
+            // 
+            resources.ApplyResources(this.panelDockerInfo, "panelDockerInfo");
+            this.panelDockerInfo.Controls.Add(this.pdSectionDockerInfo);
+            this.panelDockerInfo.Name = "panelDockerInfo";
+            // 
+            // pdSectionDockerInfo
+            // 
+            this.pdSectionDockerInfo.BackColor = System.Drawing.Color.Gainsboro;
+            resources.ApplyResources(this.pdSectionDockerInfo, "pdSectionDockerInfo");
+            this.pdSectionDockerInfo.Name = "pdSectionDockerInfo";
+            this.pdSectionDockerInfo.ShowCellToolTips = false;
             // 
             // panelStorageLinkSystemCapabilities
             // 
@@ -374,6 +395,19 @@ namespace XenAdmin.TabPages
             this.pdSectionGeneral.ShowCellToolTips = false;
             this.pdSectionGeneral.ExpandedChanged += new System.Action<XenAdmin.Controls.PDSection>(this.s_ExpandedEventHandler);
             // 
+            // panelDockerVersion
+            // 
+            resources.ApplyResources(this.panelDockerVersion, "panelDockerVersion");
+            this.panelDockerVersion.Controls.Add(this.pdSectionDockerVersion);
+            this.panelDockerVersion.Name = "panelDockerVersion";
+            // 
+            // pdSectionDockerVersion
+            // 
+            this.pdSectionDockerVersion.BackColor = System.Drawing.Color.Gainsboro;
+            resources.ApplyResources(this.pdSectionDockerVersion, "pdSectionDockerVersion");
+            this.pdSectionDockerVersion.Name = "pdSectionDockerVersion";
+            this.pdSectionDockerVersion.ShowCellToolTips = false;
+            // 
             // GeneralTabPage
             // 
             resources.ApplyResources(this, "$this");
@@ -386,6 +420,7 @@ namespace XenAdmin.TabPages
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panelDockerInfo.ResumeLayout(false);
             this.panelStorageLinkSystemCapabilities.ResumeLayout(false);
             this.panelMultipathBoot.ResumeLayout(false);
             this.panelStorageLink.ResumeLayout(false);
@@ -402,6 +437,7 @@ namespace XenAdmin.TabPages
             this.panelManagementInterfaces.ResumeLayout(false);
             this.panelCustomFields.ResumeLayout(false);
             this.panelGeneral.ResumeLayout(false);
+            this.panelDockerVersion.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -447,5 +483,9 @@ namespace XenAdmin.TabPages
         private XenAdmin.Controls.PDSection pdSectionMultipathBoot;
         private System.Windows.Forms.Panel panelStorageLinkSystemCapabilities;
         private XenAdmin.Controls.PDSection pdSectionStorageLinkSystemCapabilities;
+        private System.Windows.Forms.Panel panelDockerInfo;
+        private System.Windows.Forms.Panel panelDockerVersion;
+        private Controls.PDSection pdSectionDockerVersion;
+        private Controls.PDSection pdSectionDockerInfo;
     }
 }

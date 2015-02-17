@@ -1688,6 +1688,30 @@ namespace XenAPI
                 return v == null ? false : v.ToLower() == "true";
             }
         }
+
+        public VM_Docker_Info DockerInfo
+        {
+            get
+            {
+                string xml = Get(other_config, "docker_info");
+                if (string.IsNullOrEmpty(xml))
+                    return null;
+                VM_Docker_Info info = new VM_Docker_Info(xml);
+                return info;
+            }
+        }
+
+        public VM_Docker_Version DockerVersion
+        {
+            get
+            {
+                string xml = Get(other_config, "docker_version");
+                if (string.IsNullOrEmpty(xml))
+                    return null;
+                VM_Docker_Version info = new VM_Docker_Version(xml);
+                return info;
+            }
+        }
     }
 
     public struct VMStartupOptions
@@ -1709,4 +1733,5 @@ namespace XenAPI
             HaRestartPriority = haRestartPriority;
         }
     }
+
 }
