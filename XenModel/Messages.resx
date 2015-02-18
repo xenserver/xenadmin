@@ -8553,7 +8553,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>Paste</value>
   </data>
   <data name="PATCHINGWIZARD_CLEANUP" xml:space="preserve">
-    <value>&amp;Clean up...</value>
+    <value>Clean up...</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_NOACTION" xml:space="preserve">
     <value>No action required</value>
@@ -8577,7 +8577,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>Unknown</value>
   </data>
   <data name="PATCHINGWIZARD_MORE_INFO" xml:space="preserve">
-    <value>&amp;More info...</value>
+    <value>More info...</value>
   </data>
   <data name="PATCHINGWIZARD_PATCHINGPAGE_POOL_RESOLVE" xml:space="preserve">
     <value>Resolve pool problems</value>
