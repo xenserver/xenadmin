@@ -1311,6 +1311,7 @@ namespace XenAdmin
             ShowTab(TabPageNetwork, !multi && !SearchMode && (isVMSelected || (isHostSelected && isHostLive) || isPoolSelected));
             ShowTab(TabPageNICs, !multi && !SearchMode && ((isHostSelected && isHostLive)));
             ShowTab(TabPageDockerProcess, !multi && !SearchMode && isDockerContainerSelected);
+            ShowTab(TabPageDockerDetails, !multi && !SearchMode && isDockerContainerSelected);
 
             bool isPoolOrLiveStandaloneHost = isPoolSelected || (isHostSelected && isHostLive && selectionPool == null);
 
@@ -1341,7 +1342,6 @@ namespace XenAdmin
 
             ShowTab(TabPageSearch, true);
 
-            ShowTab(TabPageDockerDetails, !multi && !SearchMode && isDockerContainerSelected);
             // N.B. Change NewTabs definition if you add more tabs here.
 
             // Save and restore focus on treeView, since selecting tabs in ChangeToNewTabs() has the
@@ -1852,7 +1852,7 @@ namespace XenAdmin
                 }
                 else if (t == TabPageDockerProcess)
                 {
-                    DockerProcessPage.DockerContainer = SelectionManager.Selection.First as DockerContainer;
+                    DockerProcessPage.XenObject = SelectionManager.Selection.FirstAsXenObject;
                 }
                 else if (t == TabPageDockerDetails)
                 {
@@ -1874,6 +1874,11 @@ namespace XenAdmin
                 DockerDetailsPage.ResumeRefresh();
             else
                 DockerDetailsPage.PauseRefresh();
+
+            if (t == TabPageDockerProcess)
+                DockerProcessPage.ResumeRefresh();
+            else
+                DockerProcessPage.PauseRefresh();
 
             if (t != null)
                 SetLastSelectedPage(SelectionManager.Selection.First, t);

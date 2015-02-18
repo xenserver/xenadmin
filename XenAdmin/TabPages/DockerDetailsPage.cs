@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using XenAdmin.Actions;
 using XenAPI;
 using XenAdmin.Model;
 using System.Xml;
@@ -41,11 +42,9 @@ namespace XenAdmin.TabPages
 {
     public partial class DockerDetailsPage : BaseTabPage
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private const int REFRESH_INTERVAL = 20000;
 
         private IXenObject _xenObject;
-        private DockerContainer _container;
         private VM _vmResideOn;
         private Host _hostResideOn;
         private string _resultCache;
@@ -69,17 +68,43 @@ namespace XenAdmin.TabPages
                     _xenObject = value;
                     if (_xenObject is DockerContainer)
                     {
-                        _container = _xenObject as DockerContainer;
+                        var container = _xenObject as DockerContainer;
 
-                        _vmResideOn = _container.Parent;
+                        _vmResideOn = container.Parent;
                         if (_vmResideOn.resident_on == null || string.IsNullOrEmpty(_vmResideOn.resident_on.opaque_ref) || (_vmResideOn.resident_on.opaque_ref.ToLower().Contains("null")))
                             return;
 
-                        _hostResideOn = _container.Connection.Resolve(_vmResideOn.resident_on);
-                        Rebuild();
+                        _hostResideOn = container.Connection.Resolve(_vmResideOn.resident_on);
+                        RefreshTime.Text = Messages.LAST_REFRESH_IN_PROGRESS;
+                        StartUpdating();
                     }
                 }
             }
+        }
+
+        private void StartUpdating()
+        {
+            var args = new Dictionary<string, string>();
+            args["vmuuid"] = _vmResideOn.uuid;
+            args["object"] = ((DockerContainer)_xenObject).uuid;
+
+            var action = new ExecutePluginAction(_xenObject.Connection, _hostResideOn,
+                        "xscontainer", "get_inspect", args, true);
+
+            action.Completed += action_Completed;
+            action.RunAsync();
+        }
+
+        private void action_Completed(ActionBase sender)
+        {
+            var action = (AsyncAction)sender;
+            Program.Invoke(Program.MainWindow, () =>
+            {
+                if (action.Succeeded)
+                    Rebuild(action.Result);
+                else
+                    ShowInvalidInfo();
+            });
         }
 
         private void CreateTree(XmlNode node, TreeNode rootNode)
@@ -90,8 +115,10 @@ namespace XenAdmin.TabPages
                 rootNode.Text = node.Value;
             else
             {
-                if (node.Name == "SPECIAL_XS_ENCODED_ELEMENT")
+                if (node.Name == "SPECIAL_XS_ENCODED_ELEMENT" && node.Attributes != null)
+                {
                     rootNode.Text = node.Attributes["name"].Value;
+                }
                 else
                     rootNode.Text = node.Name;
             }
@@ -105,55 +132,35 @@ namespace XenAdmin.TabPages
             }
         }
 
-        public void Rebuild()
+        public void Rebuild(string currentResult)
         {
             Program.AssertOnEventThread();
-            if (_xenObject is DockerContainer)
+            RefreshTime.Text = String.Format(Messages.LAST_REFRESH_SUCCESS, DateTime.Now.ToString("HH:mm:ss"));
+            try
             {
-                RefreshTime.Text = String.Format(Messages.LAST_REFRESH_SUCCESS, DateTime.Now.ToString("HH:mm:ss"));
-                try
+                if (_resultCache == currentResult)
+                    return;
+                _resultCache = currentResult;
+                DetailtreeView.Nodes.Clear();
+
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(currentResult);
+                IEnumerator ienum = doc.GetEnumerator();
+                XmlNode docker_inspect;
+                while (ienum.MoveNext())
                 {
-                    string expectResult = "True";
-                    var args = new Dictionary<string, string>{};
-                    args["vmuuid"] = _vmResideOn.uuid;
-                    args["object"] = _container.uuid;
-                    Session session = _container.Connection.DuplicateSession();
-                    string CurrentResult = XenAPI.Host.call_plugin(session, _hostResideOn.opaque_ref, "xscontainer", "get_inspect", args);
-                    if (_resultCache == CurrentResult)
-                        return;
-                    else
-                        _resultCache = CurrentResult;
-                    DetailtreeView.Nodes.Clear();
-                    if (CurrentResult.StartsWith(expectResult))
+                    docker_inspect = (XmlNode) ienum.Current;
+                    if (docker_inspect.NodeType != XmlNodeType.XmlDeclaration)
                     {
-                        CurrentResult = CurrentResult.Substring(expectResult.Length);
-                        XmlDocument doc = new XmlDocument();
-                        doc.LoadXml(CurrentResult);
-                        IEnumerator ienum = doc.GetEnumerator();
-                        XmlNode docker_inspect;
-                        while (ienum.MoveNext())
-                        {
-                            docker_inspect = (XmlNode)ienum.Current;
-                            if (docker_inspect.NodeType != XmlNodeType.XmlDeclaration)
-                            {
-                                TreeNode rootNode = new TreeNode();
-                                CreateTree(docker_inspect, rootNode);
-                                DetailtreeView.Nodes.Add(rootNode);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        RefreshTime.Text = Messages.LAST_REFRESH_FAIL;
+                        TreeNode rootNode = new TreeNode();
+                        CreateTree(docker_inspect, rootNode);
+                        DetailtreeView.Nodes.Add(rootNode);
                     }
                 }
-                catch (Failure failure)
-                {
-                    RefreshTime.Text = Messages.LAST_REFRESH_FAIL;
-                    log.WarnFormat("Plugin call xscontainer.get_inspect({0}) on {1} failed with {2}", _container.uuid, _hostResideOn.Name,
-                        failure.Message);
-                    throw;
-                }
+            }
+            catch (Failure)
+            {
+                ShowInvalidInfo();
             }
         }
 
@@ -164,9 +171,15 @@ namespace XenAdmin.TabPages
             RefreshTimer.Interval = REFRESH_INTERVAL;
         }
 
+        private void ShowInvalidInfo()
+        {
+            RefreshTime.Text = Messages.LAST_REFRESH_FAIL;
+            DetailtreeView.Nodes.Clear();
+        }
+
         private void RefreshButton_Click(object sender, EventArgs e)
         {
-            Rebuild();
+            StartUpdating();
         }
 
         public void PauseRefresh()
@@ -178,6 +191,5 @@ namespace XenAdmin.TabPages
         {
             RefreshTimer.Enabled = true;
         }
-        
     }
 }

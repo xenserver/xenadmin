@@ -33,7 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 using System.Windows.Forms;
-
+using XenAdmin.Actions;
 using XenAdmin.Model;
 using XenAdmin.Controls;
 using XenAPI;
@@ -43,11 +43,12 @@ namespace XenAdmin.TabPages
 {
     internal partial class DockerProcessPage : BaseTabPage
     {
+        private const int REFRESH_INTERVAL = 20000;
 
-        private DockerContainer docker = null;
-        private Session session = null;
-        private Dictionary<string, string> args = new Dictionary<string, string>();
-        private string host = null;
+        private IXenObject xenObject;
+        private VM parentVM;
+        private Host host;
+        
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
 
         public DockerProcessPage()
@@ -55,125 +56,132 @@ namespace XenAdmin.TabPages
             InitializeComponent();
             listView1.ListViewItemSorter = lvwColumnSorter;
             base.Text = Messages.DOCKER_PROCESS_TAB_TITLE;
+            RefreshTimer.Interval = REFRESH_INTERVAL;
         }
 
-        public DockerContainer DockerContainer
+        public IXenObject XenObject
         {
             get
             {
-                return docker;
+                Program.AssertOnEventThread();
+                return xenObject;
             }
             set
             {
+                Program.AssertOnEventThread();
                 if (value == null) return;
 
-                if (docker == null || !docker.Equals(value))
+                if (xenObject == null || !xenObject.Equals(value))
                 {
-                    docker = value;
-                    if (docker.Connection == null || docker.Connection.Session == null)
+                    xenObject = value;
+                    if (xenObject.Connection == null || xenObject.Connection.Session == null || !(xenObject is DockerContainer))
                         return;
-                    session = docker.Connection.Session;
-                    host = XenAPI.Session.get_this_host(session, session.uuid);
-                    args["vmuuid"] = docker.Parent.uuid;
-                    args["object"] = docker.name_label;
+
+                    parentVM = ((DockerContainer) xenObject).Parent;
+
+                    if (parentVM == null)
+                        return;
+
+                    host = xenObject.Connection.Resolve(parentVM.resident_on);
+
                     listView1.Items.Clear();
                     labelRefresh.Text = Messages.LAST_REFRESH_IN_PROGRESS;
-                    // Set timer to 10ms to make the empty form shown promptly and
-                    // then fill the form with the contents retrieved from XenServer.
-                    timer1.Interval = 10;
-                    timer1.Enabled = true;
+                    StartUpdating();
                 }
             }
         }
 
-        private void updateList()
+        private void StartUpdating()
         {
-            bool getResult = false;
-            string value = "";
+            var args = new Dictionary<string, string>();
+            args["vmuuid"] = parentVM.uuid;
+            args["object"] = xenObject.Name;
+
+            var action = new ExecutePluginAction(xenObject.Connection, host,
+                        "xscontainer", "get_top", args, true); 
+
+            action.Completed += action_Completed;
+            action.RunAsync();
+        }
+
+        private void action_Completed(ActionBase sender)
+        {
+            var action = (AsyncAction)sender;
+            Program.Invoke(Program.MainWindow, () =>
+            {
+                if (action.Succeeded)
+                    UpdateList(action.Result);
+                else
+                    ShowInvalidInfo();
+            });
+        }
+
+        private void UpdateList(string xmlResult)
+        {
+            // Parse the XML result
+            XmlDocument xmlDoc = new XmlDocument();
             try
             {
-                // call plugin "xscontainer" with fn "get_top"
-                value = Host.call_plugin(session, host, "xscontainer", "get_top", args);
-                getResult = value.ToLower().StartsWith("true");
+                xmlDoc.LoadXml(xmlResult);
             }
-            catch (Failure)
+            catch (Exception)
             {
-                // Could not retrieve process info.
-                showInvalidInfo();
+                ShowInvalidInfo();
                 return;
             }
 
-            if (getResult)
+            string pid = "";
+            string command = "";
+            string cpuTime = "";
+            string[] row = { "", "", "" };
+            try
             {
-                // Parse the XML result
-                XmlDocument xmlDoc = new System.Xml.XmlDocument();
-                try
+                listView1.SuspendLayout();
+                listView1.Items.Clear();
+                XmlNodeList processList = xmlDoc.GetElementsByTagName("Process");
+                foreach (XmlNode process in processList)
                 {
-                    xmlDoc.LoadXml(value.Substring(4));
-                }
-                catch (Exception)
-                {
-                    showInvalidInfo();
-                    return;
-                }
-
-                string pid = "";
-                string command = "";
-                string cpuTime = "";
-                string[] row = { "", "", "" };
-                try
-                {
-                    listView1.SuspendLayout();
-                    listView1.Items.Clear();
-                    XmlNodeList processList = xmlDoc.GetElementsByTagName("Process");
-                    foreach (XmlNode process in processList)
+                    if (process.HasChildNodes)
                     {
-                        if (process.HasChildNodes)
+                        foreach (XmlNode child in process.ChildNodes)
                         {
-                            foreach (XmlNode child in process.ChildNodes)
-                            {
-                                XmlNode v = child.FirstChild;
-                                if (child.Name.Equals("PID"))
-                                    pid = v.Value;
-                                else if (child.Name.Equals("CMD"))
-                                    command = v.Value;
-                                else if (child.Name.Equals("TIME"))
-                                    cpuTime = v.Value;
-                            }
-
-                            row[0] = pid;
-                            row[1] = command;
-                            row[2] = cpuTime;
+                            XmlNode v = child.FirstChild;
+                            if (child.Name.Equals("PID"))
+                                pid = v.Value;
+                            else if (child.Name.Equals("CMD"))
+                                command = v.Value;
+                            else if (child.Name.Equals("TIME"))
+                                cpuTime = v.Value;
                         }
-                        listView1.Items.Add(new ListViewItem(row));
+
+                        row[0] = pid;
+                        row[1] = command;
+                        row[2] = cpuTime;
                     }
+                    listView1.Items.Add(new ListViewItem(row));
                 }
-                finally
-                {
-                    listView1.ResumeLayout();
-                    labelRefresh.Text = string.Format(Messages.LAST_REFRESH_SUCCESS, DateTime.Now.ToString("HH:mm:ss"));
-                }
-
             }
-
+            finally
+            {
+                listView1.ResumeLayout();
+                labelRefresh.Text = string.Format(Messages.LAST_REFRESH_SUCCESS, DateTime.Now.ToString("HH:mm:ss"));
+            }
         }
 
         private void RefreshButton_Click(object sender, EventArgs e)
         {
-            updateList();
+            StartUpdating();
         }
 
-        private void showInvalidInfo()
+        private void ShowInvalidInfo()
         {
             labelRefresh.Text = Messages.LAST_REFRESH_FAIL;
             listView1.Items.Clear();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void RefreshTimer_Tick(object sender, EventArgs e)
         {
-            // Set timer to 20s as the interval to refresh the processes' info.
-            timer1.Interval = 1000 * 20;
-            updateList();
+            StartUpdating();
         }
 
         // Sort by column. Refer to the implementation of PhysicalStoragePage.
@@ -200,6 +208,16 @@ namespace XenAdmin.TabPages
             }
 
             listView1.Sort();
+        }
+
+        public void PauseRefresh()
+        {
+            RefreshTimer.Enabled = false;
+        }
+
+        public void ResumeRefresh()
+        {
+            RefreshTimer.Enabled = true;
         }
     }
 }
