@@ -228,7 +228,7 @@ namespace XenAdmin.Actions.VMActions
         {
             if (Template.CanHaveCloudConfigDrive && !string.IsNullOrEmpty(cloudConfigDriveTemplateText))
             {
-                Description = "Creating Cloud Config Drive";//Messages.SETTING_VM_PROPERTIES;
+                Description = Messages.CREATING_CLOUD_CONFIG_DRIVE; 
 
                 var parameters = new Dictionary<string, string>();
                 parameters.Add("vmuuid", VM.uuid);

@@ -65,7 +65,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         public string SubText
         {
-            get { return IncludeConfigDriveCheckBox.Checked ? "Config drive included" : "Config drive not included"; }
+            get { return IncludeConfigDriveCheckBox.Checked ? Messages.VM_CLOUD_CONFIG_DRIVE_INCLUDED : Messages.VM_CLOUD_CONFIG_DRIVE_NOT_INCLUDED; }
         }
 
         public Image Image
@@ -80,7 +80,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         public override string HelpID
         {
-            get { return "CloudConfigParameters"; } //TODO Usha?
+            get { return "CloudConfigParameters"; } 
         }
 
         public override bool EnableNext()
