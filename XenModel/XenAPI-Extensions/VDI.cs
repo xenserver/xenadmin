@@ -319,5 +319,26 @@ namespace XenAPI
                 return name_label.Contains(wssName);
             }
         }
+
+        /// <summary>
+        /// Whether the read caching is enabled on this disk
+        /// </summary>
+        public bool ReadCachingEnabled
+        {
+            get { return BoolKey(sm_config, "read-caching-enabled"); }
+        }
+
+        /// <summary>
+        /// Whether the read caching is supported on this disk
+        /// </summary>
+        public bool ReadCachingSupported
+        {
+            get
+            {
+                var sr = Connection.Resolve(SR);
+                var srType = sr != null ? sr.GetSRType(false) : XenAPI.SR.SRTypes.unknown;
+                return srType == XenAPI.SR.SRTypes.ext || srType == XenAPI.SR.SRTypes.nfs;
+            }
+        }
     }
 }

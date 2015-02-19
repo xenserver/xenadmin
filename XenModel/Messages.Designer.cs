@@ -33659,6 +33659,51 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This VM is not using Read Caching.
+        /// </summary>
+        public static string VM_READ_CACHING_DISABLED {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not licensed for Read Caching.
+        /// </summary>
+        public static string VM_READ_CACHING_DISABLED_REASON_LICENSE {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_DISABLED_REASON_LICENSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read Caching is not supported on any of the Storage Repositories used by this VM.
+        /// </summary>
+        public static string VM_READ_CACHING_DISABLED_REASON_SR_TYPE {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_DISABLED_REASON_SR_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read Caching is disabled on all supported Storage Repositories used by this VM.
+        /// </summary>
+        public static string VM_READ_CACHING_DISABLED_REASON_TURNED_OFF {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_DISABLED_REASON_TURNED_OFF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This VM has Read Caching enabled.
+        /// </summary>
+        public static string VM_READ_CACHING_ENABLED {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VM reverted to &apos;{0}&apos;.
         /// </summary>
         public static string VM_REVERTED {
