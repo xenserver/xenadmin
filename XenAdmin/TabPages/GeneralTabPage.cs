@@ -469,6 +469,7 @@ namespace XenAdmin.TabPages
                 generateVCPUsBox();
                 generateDockerInfoBox();
                 generateDockerVersionBox();
+                generateReadCachingBox();
             }
 
             // hide all the sections which haven't been populated, those that have make sure are visible
@@ -1373,6 +1374,27 @@ namespace XenAdmin.TabPages
                 s.AddEntry(Messages.CONTAINER_COMMAND, dockerContainer.command.Length != 0 ? dockerContainer.command : Messages.NONE);
                 s.AddEntry(Messages.CONTAINER_PORTS, dockerContainer.ports.Length != 0 ? dockerContainer.ports : Messages.NONE);
                 s.AddEntry(Messages.UUID, dockerContainer.uuid.Length != 0 ? dockerContainer.uuid : Messages.NONE);
+            }
+        }
+
+        private void generateReadCachingBox()
+        {
+            VM vm = xenObject as VM;
+            if (vm == null || !vm.IsRunning || !Helpers.CreamOrGreater(vm.Connection))
+                return;
+
+            PDSection s = pdSectionReadCaching;
+
+            if (vm.ReadCachingEnabled)
+            {
+                s.AddEntry(FriendlyName("VM.read_caching_status"), Messages.VM_READ_CACHING_ENABLED);
+                var vdiList = vm.ReadCachingVDIs.Select(vdi => vdi.NameWithLocation).ToArray();
+                s.AddEntry(FriendlyName("VM.read_caching_disks"), string.Join("\n", vdiList));
+            }
+            else
+            {
+                s.AddEntry(FriendlyName("VM.read_caching_status"), Messages.VM_READ_CACHING_DISABLED);
+                s.AddEntry(FriendlyName("VM.read_caching_reason"), vm.ReadCachingDisabledReason);
             }
         }
 

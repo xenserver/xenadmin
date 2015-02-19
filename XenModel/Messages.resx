@@ -576,6 +576,15 @@
   <data name="ACTION_REMOVE_ALERTS_PROGRESS_DESCRIPTION" xml:space="preserve">
     <value>Removing alert {0} of {1}...</value>
   </data>
+  <data name="ACTION_RESTART_CONTAINER_DESCRIPTION" xml:space="preserve">
+    <value>Restarting</value>
+  </data>
+  <data name="ACTION_RESTART_CONTAINER_END_DESCRIPTION" xml:space="preserve">
+    <value>Restarted</value>
+  </data>
+  <data name="ACTION_RESTART_CONTAINER_TITLE" xml:space="preserve">
+    <value>Restarting Docker Container '{0}'</value>
+  </data>
   <data name="ACTION_RESUMEANDSTARTVMS_PREPARING" xml:space="preserve">
     <value>Preparing to resume and start VMs...</value>
   </data>
@@ -6834,6 +6843,9 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MAINWINDOW_REPAIR_SR_CONTEXT_MENU" xml:space="preserve">
     <value>Re&amp;pair...</value>
   </data>
+  <data name="MAINWINDOW_RESTART" xml:space="preserve">
+    <value>Re&amp;start</value>
+  </data>
   <data name="MAINWINDOW_RESTART_TOOLSTACK" xml:space="preserve">
     <value>Restart Toolstac&amp;k</value>
   </data>
@@ -11642,6 +11654,21 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="VM_PROTECTION_POLICY_SUCCEEDED" xml:space="preserve">
     <value>Succeeded</value>
   </data>
+  <data name="VM_READ_CACHING_ENABLED" xml:space="preserve">
+    <value>This VM has Read Caching enabled</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED" xml:space="preserve">
+    <value>This VM is not using Read Caching</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_LICENSE" xml:space="preserve">
+    <value>Not licensed for Read Caching</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_SR_TYPE" xml:space="preserve">
+    <value>Read Caching is not supported on any of the Storage Repositories used by this VM</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_TURNED_OFF" xml:space="preserve">
+    <value>Read Caching is disabled on all supported Storage Repositories used by this VM</value>
+  </data>
   <data name="VM_REVERTED" xml:space="preserve">
     <value>VM reverted to '{0}'</value>
   </data>
@@ -12568,17 +12595,5 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
-  </data>
-  <data name="ACTION_RESTART_CONTAINER_DESCRIPTION" xml:space="preserve">
-    <value>Restarting</value>
-  </data>
-  <data name="ACTION_RESTART_CONTAINER_END_DESCRIPTION" xml:space="preserve">
-    <value>Restarted</value>
-  </data>
-  <data name="ACTION_RESTART_CONTAINER_TITLE" xml:space="preserve">
-    <value>Restarting Docker Container '{0}'</value>
-  </data>
-  <data name="MAINWINDOW_RESTART" xml:space="preserve">
-    <value>Re&amp;start</value>
   </data>
 </root>
