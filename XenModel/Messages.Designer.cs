@@ -23974,7 +23974,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You need to manually free up more space and try again..
+        ///   Looks up a localized string similar to Free up some space and try again..
         /// </summary>
         public static string NOT_ENOUGH_SPACE_MESSAGE_NOCLEANUP {
             get {

@@ -8324,7 +8324,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>There is not enough space on '{0}' to install update '{1}'.</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_NOCLEANUP" xml:space="preserve">
-    <value>You need to manually free up more space and try again.</value>
+    <value>Free up some space and try again.</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_REQUIRED_SPACE" xml:space="preserve">
     <value>Space required: {0}</value>
