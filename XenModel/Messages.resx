@@ -12581,4 +12581,14 @@ You will need to navigate to the Console on each of the selected VMs to complete
   <data name="MAINWINDOW_RESTART" xml:space="preserve">
     <value>Re&amp;start</value>
   </data>
+  <data name="PATCH_DOWNLOAD_FAILED" xml:space="preserve">
+    <value>Failed to download {0} from '{1}'</value>
+  </data>
+  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO" xml:space="preserve">
+    <value>Failed to download the update {0} from '{1}'.
+
+The update is installed on '{1}', but the update installation file may have since been deleted.
+
+Upload the update from an .xsupdate file instead.</value>
+  </data>
 </root>

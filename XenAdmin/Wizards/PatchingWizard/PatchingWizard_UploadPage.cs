@@ -135,6 +135,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         }
 
         private bool canUpload = true;
+        private bool canDownload = true;
         private DiskSpaceRequirements diskSpaceRequirements;
 
         private void TryUploading()
@@ -223,6 +224,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 diskSpaceErrorLinkLabel.Visible = true;
                 diskSpaceErrorLinkLabel.Text = diskSpaceRequirements.GetMessageForActionLink();
+            }
+            else if (!canDownload)
+            {
+                diskSpaceErrorLinkLabel.Visible = true;
+                diskSpaceErrorLinkLabel.Text = Messages.PATCHINGWIZARD_MORE_INFO;
             }
             else
                 diskSpaceErrorLinkLabel.Visible = false;
@@ -320,9 +326,12 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             action.Completed -= multipleAction_Completed;
 
+            canDownload = !(action.Exception is PatchDownloadFailedException);
+
             Program.Invoke(this, () =>
             {
                 labelProgress.Text = GetActionDescription(action);
+                UpdateButtons();
             });
             
         }
@@ -364,6 +373,14 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void diskspaceErrorLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            if (!canDownload)
+            {
+                var msg = string.Format(Messages.PATCH_DOWNLOAD_FAILED_MORE_INFO, SelectedExistingPatch.name_label, SelectedExistingPatch.Connection.Name);
+                new ThreeButtonDialog(
+                   new ThreeButtonDialog.Details(SystemIcons.Error, msg))
+                   .ShowDialog(this);
+            }
+
             if (diskSpaceRequirements == null)
                 return;
 

@@ -69,6 +69,10 @@ namespace XenAdmin.Actions
                         (HTTP_actions.get_sss)HTTP_actions.get_pool_patch_download,
                         Session.uuid, patch.uuid);
                 }
+                catch (Exception e)
+                {
+                    throw new PatchDownloadFailedException(string.Format(Messages.PATCH_DOWNLOAD_FAILED, patch.name_label, patch.Connection.Name), e);
+                }
                 finally
                 {
                     Connection = null;
@@ -168,5 +172,11 @@ namespace XenAdmin.Actions
         }
 
         
+    }
+
+    public class PatchDownloadFailedException : ApplicationException
+    {
+        public PatchDownloadFailedException(string message, Exception innerException) :
+            base(message, innerException) { }
     }
 }
