@@ -222,16 +222,16 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (!canUpload && diskSpaceRequirements != null)
             {
-                diskSpaceErrorLinkLabel.Visible = true;
-                diskSpaceErrorLinkLabel.Text = diskSpaceRequirements.GetMessageForActionLink();
+                errorLinkLabel.Visible = true;
+                errorLinkLabel.Text = diskSpaceRequirements.GetMessageForActionLink();
             }
             else if (!canDownload)
             {
-                diskSpaceErrorLinkLabel.Visible = true;
-                diskSpaceErrorLinkLabel.Text = Messages.PATCHINGWIZARD_MORE_INFO;
+                errorLinkLabel.Visible = true;
+                errorLinkLabel.Text = Messages.PATCHINGWIZARD_MORE_INFO;
             }
             else
-                diskSpaceErrorLinkLabel.Visible = false;
+                errorLinkLabel.Visible = false;
         }
 
         private void UpdateActionProgress(AsyncAction action)
@@ -371,7 +371,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             return textColor;
         }
 
-        private void diskspaceErrorLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void errorLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (!canDownload)
             {

@@ -34,7 +34,7 @@
             this.labelProgress = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.flickerFreeListBox1 = new XenAdmin.Controls.FlickerFreeListBox();
-            this.diskSpaceErrorLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.errorLinkLabel = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,7 +45,7 @@
             this.tableLayoutPanel1.Controls.Add(this.labelProgress, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.progressBar1, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.flickerFreeListBox1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.diskSpaceErrorLinkLabel, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.errorLinkLabel, 1, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // label2
@@ -74,12 +74,12 @@
             this.flickerFreeListBox1.Name = "flickerFreeListBox1";
             this.flickerFreeListBox1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.flickerFreeListBox1_DrawItem);
             // 
-            // diskSpaceErrorLinkLabel
+            // errorLinkLabel
             // 
-            resources.ApplyResources(this.diskSpaceErrorLinkLabel, "diskSpaceErrorLinkLabel");
-            this.diskSpaceErrorLinkLabel.Name = "diskSpaceErrorLinkLabel";
-            this.diskSpaceErrorLinkLabel.TabStop = true;
-            this.diskSpaceErrorLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.diskspaceErrorLinkLabel_LinkClicked);
+            resources.ApplyResources(this.errorLinkLabel, "errorLinkLabel");
+            this.errorLinkLabel.Name = "errorLinkLabel";
+            this.errorLinkLabel.TabStop = true;
+            this.errorLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.errorLinkLabel_LinkClicked);
             // 
             // PatchingWizard_UploadPage
             // 
@@ -99,6 +99,6 @@
         private System.Windows.Forms.Label labelProgress;
         private System.Windows.Forms.ProgressBar progressBar1;
         private Controls.FlickerFreeListBox flickerFreeListBox1;
-        private System.Windows.Forms.LinkLabel diskSpaceErrorLinkLabel;
+        private System.Windows.Forms.LinkLabel errorLinkLabel;
     }
 }
