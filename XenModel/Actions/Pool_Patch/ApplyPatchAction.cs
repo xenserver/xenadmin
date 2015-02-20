@@ -52,7 +52,7 @@ namespace XenAdmin.Actions
             if (patch_ref != null)
                 return patch_ref;
 
-            Description = String.Format(Messages.DOWNLOADING_PATCH_FROM, patch.Connection.Hostname);
+            Description = String.Format(Messages.DOWNLOADING_PATCH_FROM, patch.Connection.Name);
 
             // 1st download patch from the pool that has it (the connection on the xenobject)
 

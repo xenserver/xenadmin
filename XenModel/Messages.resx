@@ -3797,7 +3797,7 @@ This will also delete its subfolders.</value>
     <value>{0} is now available</value>
   </data>
   <data name="DOWNLOADING_PATCH_FROM" xml:space="preserve">
-    <value>Downloading Update from Server {0}...</value>
+    <value>Downloading update from '{0}'...</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DESC" xml:space="preserve">
     <value>Downloading {0}</value>

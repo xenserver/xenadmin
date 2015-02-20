@@ -10806,7 +10806,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Downloading Update from Server {0}....
+        ///   Looks up a localized string similar to Downloading update from &apos;{0}&apos;....
         /// </summary>
         public static string DOWNLOADING_PATCH_FROM {
             get {
