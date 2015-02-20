@@ -47,8 +47,14 @@ namespace XenAdmin.Wizards.PatchingWizard
         public override void PageLoaded(PageLoadedDirection direction)
         {
             base.PageLoaded(direction);
+
+            canUpload = true;
+            canDownload = true;
+            UpdateButtons();
+
             if (SelectedUpdateType == UpdateType.Existing)
                 _patch = SelectedExistingPatch;
+
             if (direction == PageLoadedDirection.Forward)
             {
                 PrepareUploadActions();
