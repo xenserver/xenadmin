@@ -80,7 +80,7 @@ namespace XenAdmin.SettingsPanels
         public void SetXenObjects(IXenObject orig, IXenObject clone)
         {
             Trace.Assert(clone is VM);  // only VMs should show this page
-            Trace.Assert(Helpers.CreamOrGreater(clone.Connection));  // If not Cream or greater, we shouldn't see this page
+            Trace.Assert(Helpers.ContainerCapability(clone.Connection));  // If no container capability, we shouldn't see this page
 
             vm = (VM)clone;
 

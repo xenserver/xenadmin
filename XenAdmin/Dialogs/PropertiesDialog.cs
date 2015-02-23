@@ -242,10 +242,10 @@ namespace XenAdmin.Dialogs
                     ShowTab(VMAdvancedEditPage = new VMAdvancedEditPage());
                 }
 
-                if (is_vm && Helpers.CreamOrGreater(xenObject.Connection) && ((VM)xenObjectCopy).CanBeEnlightened)
+                if (is_vm && Helpers.ContainerCapability(xenObject.Connection) && ((VM)xenObjectCopy).CanBeEnlightened)
                     ShowTab(VMEnlightenmentEditPage = new VMEnlightenmentEditPage());
 
-                if (is_vm && Helpers.CreamOrGreater(xenObject.Connection) && ((VM) xenObjectCopy).CanHaveCloudConfigDrive)
+                if (is_vm && Helpers.ContainerCapability(xenObject.Connection) && ((VM)xenObjectCopy).CanHaveCloudConfigDrive)
                     ShowTab(CloudConfigParametersPage = new Page_CloudConfigParameters());
 
                 if (is_VMPP)
