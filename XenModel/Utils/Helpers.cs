@@ -1938,7 +1938,7 @@ namespace XenAdmin.Core
        public static bool ContainerCapability(IXenConnection connection)
        {
            var master = GetMaster(connection);
-           return master != null && master.SuppPacks.Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 
+           return CreamOrGreater(connection) && master != null && master.SuppPacks.Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 
        }
     }
 }
