@@ -320,6 +320,12 @@ namespace XenAPI
             }
         }
 
+        public bool IsCloudConfigDrive
+        {
+            get { return other_config.ContainsKey("config-drive") && other_config["config-drive"].ToLower() == "true"; }
+
+        }
+        
         /// <summary>
         /// Whether the read caching is enabled on this disk
         /// </summary>

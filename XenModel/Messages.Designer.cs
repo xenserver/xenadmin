@@ -8675,6 +8675,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Creating cloud config drive.
+        /// </summary>
+        public static string CREATING_CLOUD_CONFIG_DRIVE {
+            get {
+                return ResourceManager.GetString("CREATING_CLOUD_CONFIG_DRIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Creating disks.
         /// </summary>
         public static string CREATING_DISKS {
@@ -33506,6 +33515,24 @@ namespace XenAdmin {
         public static string VM_APPLIANCES_TITLE {
             get {
                 return ResourceManager.GetString("VM_APPLIANCES_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Config drive included.
+        /// </summary>
+        public static string VM_CLOUD_CONFIG_DRIVE_INCLUDED {
+            get {
+                return ResourceManager.GetString("VM_CLOUD_CONFIG_DRIVE_INCLUDED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Config drive not included.
+        /// </summary>
+        public static string VM_CLOUD_CONFIG_DRIVE_NOT_INCLUDED {
+            get {
+                return ResourceManager.GetString("VM_CLOUD_CONFIG_DRIVE_NOT_INCLUDED", resourceCulture);
             }
         }
         

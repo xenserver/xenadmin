@@ -3117,6 +3117,9 @@ Please reconnect the host and try again.</value>
   <data name="CREATE_VM_FROM_TEMPLATE" xml:space="preserve">
     <value>Creating VM '{0}' from template '{1}'</value>
   </data>
+  <data name="CREATING_CLOUD_CONFIG_DRIVE" xml:space="preserve">
+    <value>Creating cloud config drive</value>
+  </data>
   <data name="CREATING_DISKS" xml:space="preserve">
     <value>Creating disks</value>
   </data>
@@ -11606,6 +11609,12 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   </data>
   <data name="VM_APPLIANCE_SUMMARY" xml:space="preserve">
     <value>vApp name:\r\n    {0}\r\n\r\nSelected VMs:\r\n    {1}</value>
+  </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_INCLUDED" xml:space="preserve">
+    <value>Config drive included</value>
+  </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_NOT_INCLUDED" xml:space="preserve">
+    <value>Config drive not included</value>
   </data>
   <data name="VM_ENLIGHTENMENT" xml:space="preserve">
     <value>Container Enlightenment</value>

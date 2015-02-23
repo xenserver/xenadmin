@@ -1688,6 +1688,26 @@ namespace XenAPI
                 return v == null ? false : v.ToLower() == "true";
             }
         }
+        
+        public VDI CloudConfigDrive
+        {
+            get
+            {
+                var vbds = Connection.ResolveAll(VBDs);
+                return vbds.Select(vbd => Connection.Resolve(vbd.VDI)).FirstOrDefault(vdi => vdi != null && vdi.IsCloudConfigDrive);
+            }
+        }
+
+        public bool CanHaveCloudConfigDrive
+        {
+            get
+            {
+                if (is_a_template && TemplateType == VmTemplateType.CoreOS)
+                    return true;
+                //otherwise check if it has a config drive
+                return CloudConfigDrive != null;
+            }
+        }
 
         public VM_Docker_Info DockerInfo
         {
