@@ -125,6 +125,205 @@
   <data name="panel2.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="panelReadCaching.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panelReadCaching.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="pdSectionReadCaching.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pdSectionReadCaching.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 5</value>
+  </data>
+  <data name="pdSectionReadCaching.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
+  </data>
+  <data name="pdSectionReadCaching.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="pdSectionReadCaching.SectionTitle" xml:space="preserve">
+    <value>Read Caching</value>
+  </data>
+  <data name="pdSectionReadCaching.Size" type="System.Drawing.Size, System.Drawing">
+    <value>712, 34</value>
+  </data>
+  <data name="pdSectionReadCaching.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pdSectionReadCaching.Name" xml:space="preserve">
+    <value>pdSectionReadCaching</value>
+  </data>
+  <data name="&gt;&gt;pdSectionReadCaching.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;pdSectionReadCaching.Parent" xml:space="preserve">
+    <value>panelReadCaching</value>
+  </data>
+  <data name="&gt;&gt;pdSectionReadCaching.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelReadCaching.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panelReadCaching.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 792</value>
+  </data>
+  <data name="panelReadCaching.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 0, 5</value>
+  </data>
+  <data name="panelReadCaching.Size" type="System.Drawing.Size, System.Drawing">
+    <value>712, 44</value>
+  </data>
+  <data name="panelReadCaching.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;panelReadCaching.Name" xml:space="preserve">
+    <value>panelReadCaching</value>
+  </data>
+  <data name="&gt;&gt;panelReadCaching.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelReadCaching.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;panelReadCaching.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelDockerInfo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panelDockerInfo.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="pdSectionDockerInfo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="pdSectionDockerInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 5</value>
+  </data>
+  <data name="pdSectionDockerInfo.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
+  </data>
+  <data name="pdSectionDockerInfo.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="pdSectionDockerInfo.SectionTitle" xml:space="preserve">
+    <value>Docker Information</value>
+  </data>
+  <data name="pdSectionDockerInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>712, 34</value>
+  </data>
+  <data name="pdSectionDockerInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerInfo.Name" xml:space="preserve">
+    <value>pdSectionDockerInfo</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerInfo.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerInfo.Parent" xml:space="preserve">
+    <value>panelDockerInfo</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerInfo.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelDockerInfo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panelDockerInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 748</value>
+  </data>
+  <data name="panelDockerInfo.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 0, 5</value>
+  </data>
+  <data name="panelDockerInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>712, 44</value>
+  </data>
+  <data name="panelDockerInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;panelDockerInfo.Name" xml:space="preserve">
+    <value>panelDockerInfo</value>
+  </data>
+  <data name="&gt;&gt;panelDockerInfo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelDockerInfo.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;panelDockerInfo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="panelDockerVersion.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panelDockerVersion.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="pdSectionDockerVersion.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="pdSectionDockerVersion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 5</value>
+  </data>
+  <data name="pdSectionDockerVersion.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
+  </data>
+  <data name="pdSectionDockerVersion.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="pdSectionDockerVersion.SectionTitle" xml:space="preserve">
+    <value>Docker Version</value>
+  </data>
+  <data name="pdSectionDockerVersion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>712, 34</value>
+  </data>
+  <data name="pdSectionDockerVersion.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerVersion.Name" xml:space="preserve">
+    <value>pdSectionDockerVersion</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerVersion.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerVersion.Parent" xml:space="preserve">
+    <value>panelDockerVersion</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerVersion.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelDockerVersion.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panelDockerVersion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 704</value>
+  </data>
+  <data name="panelDockerVersion.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 0, 5</value>
+  </data>
+  <data name="panelDockerVersion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>712, 44</value>
+  </data>
+  <data name="panelDockerVersion.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;panelDockerVersion.Name" xml:space="preserve">
+    <value>panelDockerVersion</value>
+  </data>
+  <data name="&gt;&gt;panelDockerVersion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelDockerVersion.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;panelDockerVersion.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="panelStorageLinkSystemCapabilities.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -134,7 +333,6 @@
   <data name="pdSectionStorageLinkSystemCapabilities.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pdSectionStorageLinkSystemCapabilities.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 5</value>
   </data>
@@ -148,7 +346,7 @@
     <value>Capabilities</value>
   </data>
   <data name="pdSectionStorageLinkSystemCapabilities.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 34</value>
+    <value>712, 34</value>
   </data>
   <data name="pdSectionStorageLinkSystemCapabilities.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -175,7 +373,7 @@
     <value>0, 5, 0, 5</value>
   </data>
   <data name="panelStorageLinkSystemCapabilities.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 44</value>
+    <value>712, 44</value>
   </data>
   <data name="panelStorageLinkSystemCapabilities.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -190,7 +388,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;panelStorageLinkSystemCapabilities.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="panelMultipathBoot.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -214,7 +412,7 @@
     <value>Root Disk Multipathing</value>
   </data>
   <data name="pdSectionMultipathBoot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 34</value>
+    <value>712, 34</value>
   </data>
   <data name="pdSectionMultipathBoot.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -241,7 +439,7 @@
     <value>0, 5, 0, 5</value>
   </data>
   <data name="panelMultipathBoot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 44</value>
+    <value>712, 44</value>
   </data>
   <data name="panelMultipathBoot.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -256,7 +454,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;panelMultipathBoot.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="panelStorageLink.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -280,7 +478,7 @@
     <value>StorageLink</value>
   </data>
   <data name="pdStorageLink.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 34</value>
+    <value>712, 34</value>
   </data>
   <data name="pdStorageLink.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -307,7 +505,7 @@
     <value>0, 5, 0, 5</value>
   </data>
   <data name="panelStorageLink.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 44</value>
+    <value>712, 44</value>
   </data>
   <data name="panelStorageLink.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -322,7 +520,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;panelStorageLink.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="panelUpdates.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -346,7 +544,7 @@
     <value>Updates</value>
   </data>
   <data name="pdSectionUpdates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 34</value>
+    <value>712, 34</value>
   </data>
   <data name="pdSectionUpdates.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -373,7 +571,7 @@
     <value>0, 5, 0, 5</value>
   </data>
   <data name="panelUpdates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 44</value>
+    <value>712, 44</value>
   </data>
   <data name="panelUpdates.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -388,7 +586,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;panelUpdates.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="panelMemoryAndVCPUs.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -412,7 +610,7 @@
     <value>CPUs</value>
   </data>
   <data name="pdSectionVCPUs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 34</value>
+    <value>712, 34</value>
   </data>
   <data name="pdSectionVCPUs.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -439,7 +637,7 @@
     <value>0, 5, 0, 5</value>
   </data>
   <data name="panelMemoryAndVCPUs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 44</value>
+    <value>712, 44</value>
   </data>
   <data name="panelMemoryAndVCPUs.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -454,7 +652,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;panelMemoryAndVCPUs.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="panelMultipathing.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -478,7 +676,7 @@
     <value>Multipathing</value>
   </data>
   <data name="pdSectionMultipathing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 34</value>
+    <value>712, 34</value>
   </data>
   <data name="pdSectionMultipathing.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -505,7 +703,7 @@
     <value>0, 5, 0, 5</value>
   </data>
   <data name="panelMultipathing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 44</value>
+    <value>712, 44</value>
   </data>
   <data name="panelMultipathing.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -520,7 +718,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;panelMultipathing.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="panelStatus.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -544,7 +742,7 @@
     <value>Status</value>
   </data>
   <data name="pdSectionStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 34</value>
+    <value>712, 34</value>
   </data>
   <data name="pdSectionStatus.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -571,7 +769,7 @@
     <value>0, 5, 0, 5</value>
   </data>
   <data name="panelStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 44</value>
+    <value>712, 44</value>
   </data>
   <data name="panelStatus.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -586,7 +784,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;panelStatus.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>9</value>
   </data>
   <data name="panelHighAvailability.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -610,7 +808,7 @@
     <value>High Availability</value>
   </data>
   <data name="pdSectionHighAvailability.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 34</value>
+    <value>712, 34</value>
   </data>
   <data name="pdSectionHighAvailability.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -637,7 +835,7 @@
     <value>0, 5, 0, 5</value>
   </data>
   <data name="panelHighAvailability.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 44</value>
+    <value>712, 44</value>
   </data>
   <data name="panelHighAvailability.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -652,7 +850,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;panelHighAvailability.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>10</value>
   </data>
   <data name="panelBootOptions.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -676,7 +874,7 @@
     <value>Boot Options</value>
   </data>
   <data name="pdSectionBootOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 34</value>
+    <value>712, 34</value>
   </data>
   <data name="pdSectionBootOptions.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -703,7 +901,7 @@
     <value>0, 5, 0, 5</value>
   </data>
   <data name="panelBootOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 44</value>
+    <value>712, 44</value>
   </data>
   <data name="panelBootOptions.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -718,7 +916,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;panelBootOptions.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>11</value>
   </data>
   <data name="panelCPU.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -742,7 +940,7 @@
     <value>CPUs</value>
   </data>
   <data name="pdSectionCPU.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 34</value>
+    <value>712, 34</value>
   </data>
   <data name="pdSectionCPU.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -769,7 +967,7 @@
     <value>0, 5, 0, 5</value>
   </data>
   <data name="panelCPU.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 44</value>
+    <value>712, 44</value>
   </data>
   <data name="panelCPU.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -784,7 +982,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;panelCPU.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>12</value>
   </data>
   <data name="panelLicense.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -808,7 +1006,7 @@
     <value>License Details</value>
   </data>
   <data name="pdSectionLicense.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 34</value>
+    <value>712, 34</value>
   </data>
   <data name="pdSectionLicense.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -835,7 +1033,7 @@
     <value>0, 5, 0, 5</value>
   </data>
   <data name="panelLicense.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 44</value>
+    <value>712, 44</value>
   </data>
   <data name="panelLicense.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -850,7 +1048,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;panelLicense.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>13</value>
   </data>
   <data name="panelVersion.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -874,7 +1072,7 @@
     <value>Version Details</value>
   </data>
   <data name="pdSectionVersion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 34</value>
+    <value>712, 34</value>
   </data>
   <data name="pdSectionVersion.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -901,7 +1099,7 @@
     <value>0, 5, 0, 5</value>
   </data>
   <data name="panelVersion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 44</value>
+    <value>712, 44</value>
   </data>
   <data name="panelVersion.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -916,7 +1114,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;panelVersion.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>14</value>
   </data>
   <data name="panelMemory.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -940,7 +1138,7 @@
     <value>Memory</value>
   </data>
   <data name="pdSectionMemory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 34</value>
+    <value>712, 34</value>
   </data>
   <data name="pdSectionMemory.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -967,7 +1165,7 @@
     <value>0, 5, 0, 5</value>
   </data>
   <data name="panelMemory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 44</value>
+    <value>712, 44</value>
   </data>
   <data name="panelMemory.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -982,7 +1180,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;panelMemory.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>15</value>
   </data>
   <data name="panelManagementInterfaces.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1006,7 +1204,7 @@
     <value>Management Interfaces</value>
   </data>
   <data name="pdSectionManagementInterfaces.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 34</value>
+    <value>712, 34</value>
   </data>
   <data name="pdSectionManagementInterfaces.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1033,7 +1231,7 @@
     <value>0, 5, 0, 5</value>
   </data>
   <data name="panelManagementInterfaces.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 44</value>
+    <value>712, 44</value>
   </data>
   <data name="panelManagementInterfaces.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1048,7 +1246,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;panelManagementInterfaces.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>16</value>
   </data>
   <data name="panelCustomFields.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1072,7 +1270,7 @@
     <value>Custom Fields</value>
   </data>
   <data name="pdSectionCustomFields.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 34</value>
+    <value>712, 34</value>
   </data>
   <data name="pdSectionCustomFields.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1099,7 +1297,7 @@
     <value>0, 5, 0, 5</value>
   </data>
   <data name="panelCustomFields.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 44</value>
+    <value>712, 44</value>
   </data>
   <data name="panelCustomFields.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1114,7 +1312,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;panelCustomFields.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>17</value>
   </data>
   <data name="panelGeneral.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1138,7 +1336,7 @@
     <value>General</value>
   </data>
   <data name="pdSectionGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 34</value>
+    <value>712, 34</value>
   </data>
   <data name="pdSectionGeneral.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1165,7 +1363,7 @@
     <value>0, 5, 0, 5</value>
   </data>
   <data name="panelGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 44</value>
+    <value>712, 44</value>
   </data>
   <data name="panelGeneral.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1180,7 +1378,7 @@
     <value>panel2</value>
   </data>
   <data name="&gt;&gt;panelGeneral.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>18</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 39</value>

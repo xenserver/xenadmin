@@ -1377,6 +1377,139 @@
   <data name="&gt;&gt;pageContainerPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="panelDockerVersion.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panelDockerVersion.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="pdSectionDockerVersion.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="pdSectionDockerVersion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 5</value>
+  </data>
+  <data name="pdSectionDockerVersion.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
+  </data>
+  <data name="pdSectionDockerVersion.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="pdSectionDockerVersion.SectionTitle" xml:space="preserve">
+    <value>Docker Version</value>
+  </data>
+  <data name="pdSectionDockerVersion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>729, 34</value>
+  </data>
+  <data name="pdSectionDockerVersion.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerVersion.Name" xml:space="preserve">
+    <value>pdSectionDockerVersion</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerVersion.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerVersion.Parent" xml:space="preserve">
+    <value>panelDockerVersion</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerVersion.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelDockerVersion.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panelDockerVersion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 39</value>
+  </data>
+  <data name="panelDockerVersion.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 0, 5</value>
+  </data>
+  <data name="panelDockerVersion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>729, 44</value>
+  </data>
+  <data name="panelDockerVersion.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;panelDockerVersion.Name" xml:space="preserve">
+    <value>panelDockerVersion</value>
+  </data>
+  <data name="&gt;&gt;panelDockerVersion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelDockerVersion.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;panelDockerVersion.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="panelDockerInfo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panelDockerInfo.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="pdSectionDockerInfo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pdSectionDockerInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 5</value>
+  </data>
+  <data name="pdSectionDockerInfo.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
+  </data>
+  <data name="pdSectionDockerInfo.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="pdSectionDockerInfo.SectionTitle" xml:space="preserve">
+    <value>Docker Information</value>
+  </data>
+  <data name="pdSectionDockerInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>729, 34</value>
+  </data>
+  <data name="pdSectionDockerInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerInfo.Name" xml:space="preserve">
+    <value>pdSectionDockerInfo</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerInfo.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerInfo.Parent" xml:space="preserve">
+    <value>panelDockerInfo</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerInfo.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelDockerInfo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panelDockerInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 704</value>
+  </data>
+  <data name="panelDockerInfo.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 0, 5</value>
+  </data>
+  <data name="panelDockerInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>729, 44</value>
+  </data>
+  <data name="panelDockerInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;panelDockerInfo.Name" xml:space="preserve">
+    <value>panelDockerInfo</value>
+  </data>
+  <data name="&gt;&gt;panelDockerInfo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelDockerInfo.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;panelDockerInfo.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

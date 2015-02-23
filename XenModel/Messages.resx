@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -575,6 +575,15 @@
   </data>
   <data name="ACTION_REMOVE_ALERTS_PROGRESS_DESCRIPTION" xml:space="preserve">
     <value>Removing alert {0} of {1}...</value>
+  </data>
+  <data name="ACTION_RESTART_CONTAINER_DESCRIPTION" xml:space="preserve">
+    <value>Restarting</value>
+  </data>
+  <data name="ACTION_RESTART_CONTAINER_END_DESCRIPTION" xml:space="preserve">
+    <value>Restarted</value>
+  </data>
+  <data name="ACTION_RESTART_CONTAINER_TITLE" xml:space="preserve">
+    <value>Restarting Docker Container '{0}'</value>
   </data>
   <data name="ACTION_RESUMEANDSTARTVMS_PREPARING" xml:space="preserve">
     <value>Preparing to resume and start VMs...</value>
@@ -3724,6 +3733,72 @@ This will also delete its subfolders.</value>
   <data name="DOCKER_PROCESS_TAB_TITLE" xml:space="preserve">
     <value>Docker Processes</value>
   </data>
+  <data name="DOCKER_INFO_API_VERSION" xml:space="preserve">
+    <value>Api Version</value>
+  </data>
+  <data name="DOCKER_INFO_ARCH" xml:space="preserve">
+    <value>Arch</value>
+  </data>
+  <data name="DOCKER_INFO_DEBUG" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="DOCKER_INFO_DRIVER" xml:space="preserve">
+    <value>Driver</value>
+  </data>
+  <data name="DOCKER_INFO_DRIVER_STATUS" xml:space="preserve">
+    <value>Driver Status</value>
+  </data>
+  <data name="DOCKER_INFO_EXECUTION_DRIVER" xml:space="preserve">
+    <value>Execution Driver</value>
+  </data>
+  <data name="DOCKER_INFO_GIT_COMMIT" xml:space="preserve">
+    <value>Git Commit</value>
+  </data>
+  <data name="DOCKER_INFO_GO_VERSION" xml:space="preserve">
+    <value>Go Version</value>
+  </data>
+  <data name="DOCKER_INFO_INDEX_SERVER_ADDRESS" xml:space="preserve">
+    <value>Index Server Address</value>
+  </data>
+  <data name="DOCKER_INFO_INITIATE_PATH" xml:space="preserve">
+    <value>Initiate Path</value>
+  </data>
+  <data name="DOCKER_INFO_INITIATE_SHA1" xml:space="preserve">
+    <value>Initiate Sha1</value>
+  </data>
+  <data name="DOCKER_INFO_IPV4_FORWARDING" xml:space="preserve">
+    <value>IPv4 Forwarding</value>
+  </data>
+  <data name="DOCKER_INFO_KERNEL_VERSION" xml:space="preserve">
+    <value>Kernel Version</value>
+  </data>
+  <data name="DOCKER_INFO_LABELS" xml:space="preserve">
+    <value>Labels</value>
+  </data>
+  <data name="DOCKER_INFO_MEMORY_LIMIT" xml:space="preserve">
+    <value>Memory Limit</value>
+  </data>
+  <data name="DOCKER_INFO_NCPU" xml:space="preserve">
+    <value>NCPU</value>
+  </data>
+  <data name="DOCKER_INFO_NEVENT_LISTENER" xml:space="preserve">
+    <value>NEvents Listener</value>
+  </data>
+  <data name="DOCKER_INFO_NFD" xml:space="preserve">
+    <value>NFd</value>
+  </data>
+  <data name="DOCKER_INFO_NGOROUTINES" xml:space="preserve">
+    <value>NGoroutines</value>
+  </data>
+  <data name="DOCKER_INFO_ROOT_DIR" xml:space="preserve">
+    <value>Root Directory</value>
+  </data>
+  <data name="DOCKER_INFO_SWAP_LIMIT" xml:space="preserve">
+    <value>Swap Limit</value>
+  </data>
+  <data name="DOCKER_INFO_VERSION" xml:space="preserve">
+    <value>Version</value>
+  </data>
   <data name="DONE" xml:space="preserve">
     <value>done.</value>
   </data>
@@ -3734,7 +3809,7 @@ This will also delete its subfolders.</value>
     <value>{0} is now available</value>
   </data>
   <data name="DOWNLOADING_PATCH_FROM" xml:space="preserve">
-    <value>Downloading Update from Server {0}...</value>
+    <value>Downloading update from '{0}'...</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DESC" xml:space="preserve">
     <value>Downloading {0}</value>
@@ -6771,6 +6846,9 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MAINWINDOW_REPAIR_SR_CONTEXT_MENU" xml:space="preserve">
     <value>Re&amp;pair...</value>
   </data>
+  <data name="MAINWINDOW_RESTART" xml:space="preserve">
+    <value>Re&amp;start</value>
+  </data>
   <data name="MAINWINDOW_RESTART_TOOLSTACK" xml:space="preserve">
     <value>Restart Toolstac&amp;k</value>
   </data>
@@ -8261,7 +8339,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>There is not enough space on '{0}' to install update '{1}'.</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_NOCLEANUP" xml:space="preserve">
-    <value>You need to manually free up more space and try again.</value>
+    <value>Free up some space and try again.</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_REQUIRED_SPACE" xml:space="preserve">
     <value>Space required: {0}</value>
@@ -8490,7 +8568,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>Paste</value>
   </data>
   <data name="PATCHINGWIZARD_CLEANUP" xml:space="preserve">
-    <value>&amp;Clean up...</value>
+    <value>Clean up...</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_NOACTION" xml:space="preserve">
     <value>No action required</value>
@@ -8514,7 +8592,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>Unknown</value>
   </data>
   <data name="PATCHINGWIZARD_MORE_INFO" xml:space="preserve">
-    <value>&amp;More info...</value>
+    <value>More info...</value>
   </data>
   <data name="PATCHINGWIZARD_PATCHINGPAGE_POOL_RESOLVE" xml:space="preserve">
     <value>Resolve pool problems</value>
@@ -8653,6 +8731,16 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="PATCH_DESCRIPTION_AND_INSTALLATION_SIZE" xml:space="preserve">
     <value>{0} 
 Installation size: {1}</value>
+  </data>
+  <data name="PATCH_DOWNLOAD_FAILED" xml:space="preserve">
+    <value>Failed to download {0} from '{1}'</value>
+  </data>
+  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO" xml:space="preserve">
+    <value>Failed to download the update {0} from '{1}'.
+
+The update is installed on '{1}', but the update installation file may have since been deleted.
+
+Upload the update from an .xsupdate file instead.</value>
   </data>
   <data name="PATCH_EXPANDED_DESCRIPTION" xml:space="preserve">
     <value>{0} 
@@ -11585,6 +11673,21 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="VM_PROTECTION_POLICY_SUCCEEDED" xml:space="preserve">
     <value>Succeeded</value>
   </data>
+  <data name="VM_READ_CACHING_ENABLED" xml:space="preserve">
+    <value>This VM has Read Caching enabled</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED" xml:space="preserve">
+    <value>This VM is not using Read Caching</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_LICENSE" xml:space="preserve">
+    <value>Not licensed for Read Caching</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_SR_TYPE" xml:space="preserve">
+    <value>Read Caching is not supported on any of the Storage Repositories used by this VM</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_TURNED_OFF" xml:space="preserve">
+    <value>Read Caching is disabled on all supported Storage Repositories used by this VM</value>
+  </data>
   <data name="VM_REVERTED" xml:space="preserve">
     <value>VM reverted to '{0}'</value>
   </data>
@@ -12511,17 +12614,5 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
-  </data>
-  <data name="ACTION_RESTART_CONTAINER_DESCRIPTION" xml:space="preserve">
-    <value>Restarting</value>
-  </data>
-  <data name="ACTION_RESTART_CONTAINER_END_DESCRIPTION" xml:space="preserve">
-    <value>Restarted</value>
-  </data>
-  <data name="ACTION_RESTART_CONTAINER_TITLE" xml:space="preserve">
-    <value>Restarting Docker Container '{0}'</value>
-  </data>
-  <data name="MAINWINDOW_RESTART" xml:space="preserve">
-    <value>Re&amp;start</value>
   </data>
 </root>

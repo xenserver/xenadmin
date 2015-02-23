@@ -10491,6 +10491,204 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Api Version.
+        /// </summary>
+        public static string DOCKER_INFO_API_VERSION {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_API_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arch.
+        /// </summary>
+        public static string DOCKER_INFO_ARCH {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_ARCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Debug.
+        /// </summary>
+        public static string DOCKER_INFO_DEBUG {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_DEBUG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Driver.
+        /// </summary>
+        public static string DOCKER_INFO_DRIVER {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_DRIVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Driver Status.
+        /// </summary>
+        public static string DOCKER_INFO_DRIVER_STATUS {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_DRIVER_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Execution Driver.
+        /// </summary>
+        public static string DOCKER_INFO_EXECUTION_DRIVER {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_EXECUTION_DRIVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Git Commit.
+        /// </summary>
+        public static string DOCKER_INFO_GIT_COMMIT {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_GIT_COMMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go Version.
+        /// </summary>
+        public static string DOCKER_INFO_GO_VERSION {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_GO_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Index Server Address.
+        /// </summary>
+        public static string DOCKER_INFO_INDEX_SERVER_ADDRESS {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_INDEX_SERVER_ADDRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Initiate Path.
+        /// </summary>
+        public static string DOCKER_INFO_INITIATE_PATH {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_INITIATE_PATH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Initiate Sha1.
+        /// </summary>
+        public static string DOCKER_INFO_INITIATE_SHA1 {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_INITIATE_SHA1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IPv4 Forwarding.
+        /// </summary>
+        public static string DOCKER_INFO_IPV4_FORWARDING {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_IPV4_FORWARDING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kernel Version.
+        /// </summary>
+        public static string DOCKER_INFO_KERNEL_VERSION {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_KERNEL_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Labels.
+        /// </summary>
+        public static string DOCKER_INFO_LABELS {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_LABELS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Memory Limit.
+        /// </summary>
+        public static string DOCKER_INFO_MEMORY_LIMIT {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_MEMORY_LIMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NCPU.
+        /// </summary>
+        public static string DOCKER_INFO_NCPU {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_NCPU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NEvents Listener.
+        /// </summary>
+        public static string DOCKER_INFO_NEVENT_LISTENER {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_NEVENT_LISTENER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NFd.
+        /// </summary>
+        public static string DOCKER_INFO_NFD {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_NFD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NGoroutines.
+        /// </summary>
+        public static string DOCKER_INFO_NGOROUTINES {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_NGOROUTINES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Root Directory.
+        /// </summary>
+        public static string DOCKER_INFO_ROOT_DIR {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_ROOT_DIR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Swap Limit.
+        /// </summary>
+        public static string DOCKER_INFO_SWAP_LIMIT {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_SWAP_LIMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        public static string DOCKER_INFO_VERSION {
+            get {
+                return ResourceManager.GetString("DOCKER_INFO_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Docker Processes.
         /// </summary>
         public static string DOCKER_PROCESS_TAB_TITLE {
@@ -10617,7 +10815,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Downloading Update from Server {0}....
+        ///   Looks up a localized string similar to Downloading update from &apos;{0}&apos;....
         /// </summary>
         public static string DOWNLOADING_PATCH_FROM {
             get {
@@ -23785,7 +23983,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You need to manually free up more space and try again..
+        ///   Looks up a localized string similar to Free up some space and try again..
         /// </summary>
         public static string NOT_ENOUGH_SPACE_MESSAGE_NOCLEANUP {
             get {
@@ -24444,6 +24642,28 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to download {0} from &apos;{1}&apos;.
+        /// </summary>
+        public static string PATCH_DOWNLOAD_FAILED {
+            get {
+                return ResourceManager.GetString("PATCH_DOWNLOAD_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to download the update {0} from &apos;{1}&apos;.
+        ///
+        ///The update is installed on &apos;{1}&apos;, but the update installation file may have since been deleted.
+        ///
+        ///Upload the update from an .xsupdate file instead..
+        /// </summary>
+        public static string PATCH_DOWNLOAD_FAILED_MORE_INFO {
+            get {
+                return ResourceManager.GetString("PATCH_DOWNLOAD_FAILED_MORE_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} 
         ///Date modified: {1}
         ///Date created: {2}
@@ -24576,7 +24796,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Clean up....
+        ///   Looks up a localized string similar to Clean up....
         /// </summary>
         public static string PATCHINGWIZARD_CLEANUP {
             get {
@@ -24648,7 +24868,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;More info....
+        ///   Looks up a localized string similar to More info....
         /// </summary>
         public static string PATCHINGWIZARD_MORE_INFO {
             get {
@@ -33484,6 +33704,51 @@ namespace XenAdmin {
         public static string VM_PROTECTION_POLICY_SUCCEEDED {
             get {
                 return ResourceManager.GetString("VM_PROTECTION_POLICY_SUCCEEDED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This VM is not using Read Caching.
+        /// </summary>
+        public static string VM_READ_CACHING_DISABLED {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not licensed for Read Caching.
+        /// </summary>
+        public static string VM_READ_CACHING_DISABLED_REASON_LICENSE {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_DISABLED_REASON_LICENSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read Caching is not supported on any of the Storage Repositories used by this VM.
+        /// </summary>
+        public static string VM_READ_CACHING_DISABLED_REASON_SR_TYPE {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_DISABLED_REASON_SR_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read Caching is disabled on all supported Storage Repositories used by this VM.
+        /// </summary>
+        public static string VM_READ_CACHING_DISABLED_REASON_TURNED_OFF {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_DISABLED_REASON_TURNED_OFF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This VM has Read Caching enabled.
+        /// </summary>
+        public static string VM_READ_CACHING_ENABLED {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_ENABLED", resourceCulture);
             }
         }
         

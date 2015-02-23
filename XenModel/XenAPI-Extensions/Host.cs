@@ -443,6 +443,16 @@ namespace XenAPI
             return h._RestrictExportResourceData;
         }
 
+        private bool _RestrictReadCaching
+        {
+            get { return BoolKeyPreferTrue(license_params, "restrict_read_caching"); }
+        }
+
+        public static bool RestrictReadCaching(Host h)
+        {
+            return h._RestrictReadCaching;
+        }
+
         public bool HasPBDTo(SR sr)
         {
             foreach (XenRef<PBD> pbd in PBDs)

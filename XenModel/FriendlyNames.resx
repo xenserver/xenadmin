@@ -1745,4 +1745,13 @@
   <data name="Label-Supplemental_packs.installed" xml:space="preserve">
     <value>Installed supplemental packs</value>
   </data>
+  <data name="Label-VM.read_caching_status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Label-VM.read_caching_disks" xml:space="preserve">
+    <value>Disks</value>
+  </data>
+  <data name="Label-VM.read_caching_reason" xml:space="preserve">
+    <value>Reason</value>
+  </data>
 </root>

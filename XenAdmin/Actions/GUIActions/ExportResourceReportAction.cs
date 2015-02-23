@@ -769,7 +769,7 @@ namespace XenAdmin.Actions
             VMs.Sort();
             foreach (XenAPI.VM vm in VMs)
             {
-                string OSinfo = Messages.HYPHEN;
+                string OSinfo = vm.GetOSName();
                 string srInfo = "";
                 string MacInfo = "";
                 string running_on = Messages.HYPHEN;
@@ -782,12 +782,11 @@ namespace XenAdmin.Actions
                     PercentComplete = Convert.ToInt32((++itemIndex) * baseIndex / itemCount);
                     continue;
                 }
-                
+
                 ComparableList<ComparableAddress> addresses = new ComparableList<ComparableAddress>();
                 if (vm.guest_metrics != null && !string.IsNullOrEmpty(vm.guest_metrics.opaque_ref) && !(vm.guest_metrics.opaque_ref.ToLower().Contains("null")))
                 {
                     VM_guest_metrics metrics = vm.Connection.Resolve(vm.guest_metrics);
-                    OSinfo = metrics.os_version["name"];
 
                     List<VIF> vifs = vm.Connection.ResolveAll(vm.VIFs);
                     foreach (VIF vif in vifs)
