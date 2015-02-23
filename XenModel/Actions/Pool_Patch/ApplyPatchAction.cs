@@ -52,7 +52,7 @@ namespace XenAdmin.Actions
             if (patch_ref != null)
                 return patch_ref;
 
-            Description = String.Format(Messages.DOWNLOADING_PATCH_FROM, patch.Connection.Hostname);
+            Description = String.Format(Messages.DOWNLOADING_PATCH_FROM, patch.Connection.Name);
 
             // 1st download patch from the pool that has it (the connection on the xenobject)
 
@@ -68,6 +68,10 @@ namespace XenAdmin.Actions
                     HTTPHelper.Get(this, true, filename, patch.Connection.Hostname,
                         (HTTP_actions.get_sss)HTTP_actions.get_pool_patch_download,
                         Session.uuid, patch.uuid);
+                }
+                catch (Exception e)
+                {
+                    throw new PatchDownloadFailedException(string.Format(Messages.PATCH_DOWNLOAD_FAILED, patch.name_label, patch.Connection.Name), e);
                 }
                 finally
                 {
@@ -168,5 +172,11 @@ namespace XenAdmin.Actions
         }
 
         
+    }
+
+    public class PatchDownloadFailedException : ApplicationException
+    {
+        public PatchDownloadFailedException(string message, Exception innerException) :
+            base(message, innerException) { }
     }
 }

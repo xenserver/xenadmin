@@ -10806,7 +10806,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Downloading Update from Server {0}....
+        ///   Looks up a localized string similar to Downloading update from &apos;{0}&apos;....
         /// </summary>
         public static string DOWNLOADING_PATCH_FROM {
             get {
@@ -23974,7 +23974,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You need to manually free up more space and try again..
+        ///   Looks up a localized string similar to Free up some space and try again..
         /// </summary>
         public static string NOT_ENOUGH_SPACE_MESSAGE_NOCLEANUP {
             get {
@@ -24629,6 +24629,28 @@ namespace XenAdmin {
         public static string PATCH_DESCRIPTION_AND_INSTALLATION_SIZE {
             get {
                 return ResourceManager.GetString("PATCH_DESCRIPTION_AND_INSTALLATION_SIZE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to download {0} from &apos;{1}&apos;.
+        /// </summary>
+        public static string PATCH_DOWNLOAD_FAILED {
+            get {
+                return ResourceManager.GetString("PATCH_DOWNLOAD_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to download the update {0} from &apos;{1}&apos;.
+        ///
+        ///The update is installed on &apos;{1}&apos;, but the update installation file may have since been deleted.
+        ///
+        ///Upload the update from an .xsupdate file instead..
+        /// </summary>
+        public static string PATCH_DOWNLOAD_FAILED_MORE_INFO {
+            get {
+                return ResourceManager.GetString("PATCH_DOWNLOAD_FAILED_MORE_INFO", resourceCulture);
             }
         }
         
