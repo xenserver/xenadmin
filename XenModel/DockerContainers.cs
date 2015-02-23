@@ -106,20 +106,20 @@ namespace XenAdmin.Model
         {
             InvokeHelper.AssertOnEventThread();
 
-            IXenObject ixmo = e.Element as IXenObject;
-            if (ixmo == null)
+            VM vm = e.Element as VM;
+            if (vm == null)
                 return;
 
             switch (e.Action)
             {
                 case CollectionChangeAction.Add:
-                    ixmo.PropertyChanged += ServerXenObject_PropertyChanged;
-                    UpdateDockerContainer(ixmo);
+                    vm.PropertyChanged += ServerXenObject_PropertyChanged;
+                    UpdateDockerContainer(vm);
                     break;
 
                 case CollectionChangeAction.Remove:
-                    ixmo.PropertyChanged -= ServerXenObject_PropertyChanged;
-                    RemoveObject(ixmo);
+                    vm.PropertyChanged -= ServerXenObject_PropertyChanged;
+                    RemoveObject(vm);
                     break;
 
                 default:
@@ -140,9 +140,15 @@ namespace XenAdmin.Model
         private static void ServerXenObject_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             IXenObject xenObject = (IXenObject) sender;
+
+            VM vm = xenObject as VM;
+
+            if (vm == null)
+                return;
+
             if (e.PropertyName == "other_config")
             {
-                UpdateDockerContainer(xenObject);
+                UpdateDockerContainer(vm);
             }
         }
 
@@ -157,27 +163,27 @@ namespace XenAdmin.Model
             connection.Cache.UpdateDockerContainersForVM(new List<DockerContainer>(), (VM)ixmo);
         }
 
-        private static void UpdateAll(IXenObject[] ixmos)
+        private static void UpdateAll(VM[] vms)
         {
-            foreach (IXenObject ixmo in ixmos)
+            foreach (VM vm in vms)
             {
-                ixmo.PropertyChanged -= ServerXenObject_PropertyChanged;
-                ixmo.PropertyChanged += ServerXenObject_PropertyChanged;
-                UpdateDockerContainer(ixmo);
+                vm.PropertyChanged -= ServerXenObject_PropertyChanged;
+                vm.PropertyChanged += ServerXenObject_PropertyChanged;
+                UpdateDockerContainer(vm);
             }
         }
 
-        private static void UpdateDockerContainer(IXenObject ixmo)
+        private static void UpdateDockerContainer(VM vm)
         {
             InvokeHelper.AssertOnEventThread();
             
-            if (ixmo as VM == null)
+            if (vm == null)
                 return;
             
-            IXenConnection connection = ixmo.Connection;
+            IXenConnection connection = vm.Connection;
 
-            var dockerVMs = GetDockerVMs(ixmo);
-            connection.Cache.UpdateDockerContainersForVM(dockerVMs, (VM)ixmo);
+            var dockerVMs = GetDockerVMs(vm);
+            connection.Cache.UpdateDockerContainersForVM(dockerVMs, vm);
         }
 
         public static List<DockerContainer> GetContainersFromOtherConfig(VM vm)
