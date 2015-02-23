@@ -700,7 +700,7 @@
     <value>0</value>
   </data>
   <data name="TabPageDockerDetails.Text" xml:space="preserve">
-    <value>Detail</value>
+    <value>Details</value>
   </data>
   <data name="&gt;&gt;TabPageDockerDetails.Name" xml:space="preserve">
     <value>TabPageDockerDetails</value>
