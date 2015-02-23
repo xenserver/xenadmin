@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -575,6 +575,15 @@
   </data>
   <data name="ACTION_REMOVE_ALERTS_PROGRESS_DESCRIPTION" xml:space="preserve">
     <value>Removing alert {0} of {1}...</value>
+  </data>
+  <data name="ACTION_RESTART_CONTAINER_DESCRIPTION" xml:space="preserve">
+    <value>Restarting</value>
+  </data>
+  <data name="ACTION_RESTART_CONTAINER_END_DESCRIPTION" xml:space="preserve">
+    <value>Restarted</value>
+  </data>
+  <data name="ACTION_RESTART_CONTAINER_TITLE" xml:space="preserve">
+    <value>Restarting Docker Container '{0}'</value>
   </data>
   <data name="ACTION_RESUMEANDSTARTVMS_PREPARING" xml:space="preserve">
     <value>Preparing to resume and start VMs...</value>
@@ -6834,6 +6843,9 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MAINWINDOW_REPAIR_SR_CONTEXT_MENU" xml:space="preserve">
     <value>Re&amp;pair...</value>
   </data>
+  <data name="MAINWINDOW_RESTART" xml:space="preserve">
+    <value>Re&amp;start</value>
+  </data>
   <data name="MAINWINDOW_RESTART_TOOLSTACK" xml:space="preserve">
     <value>Restart Toolstac&amp;k</value>
   </data>
@@ -8553,7 +8565,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>Paste</value>
   </data>
   <data name="PATCHINGWIZARD_CLEANUP" xml:space="preserve">
-    <value>&amp;Clean up...</value>
+    <value>Clean up...</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_NOACTION" xml:space="preserve">
     <value>No action required</value>
@@ -8577,7 +8589,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>Unknown</value>
   </data>
   <data name="PATCHINGWIZARD_MORE_INFO" xml:space="preserve">
-    <value>&amp;More info...</value>
+    <value>More info...</value>
   </data>
   <data name="PATCHINGWIZARD_PATCHINGPAGE_POOL_RESOLVE" xml:space="preserve">
     <value>Resolve pool problems</value>
@@ -8716,6 +8728,16 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="PATCH_DESCRIPTION_AND_INSTALLATION_SIZE" xml:space="preserve">
     <value>{0} 
 Installation size: {1}</value>
+  </data>
+  <data name="PATCH_DOWNLOAD_FAILED" xml:space="preserve">
+    <value>Failed to download {0} from '{1}'</value>
+  </data>
+  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO" xml:space="preserve">
+    <value>Failed to download the update {0} from '{1}'.
+
+The update is installed on '{1}', but the update installation file may have since been deleted.
+
+Upload the update from an .xsupdate file instead.</value>
   </data>
   <data name="PATCH_EXPANDED_DESCRIPTION" xml:space="preserve">
     <value>{0} 
@@ -11642,6 +11664,21 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="VM_PROTECTION_POLICY_SUCCEEDED" xml:space="preserve">
     <value>Succeeded</value>
   </data>
+  <data name="VM_READ_CACHING_ENABLED" xml:space="preserve">
+    <value>This VM has Read Caching enabled</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED" xml:space="preserve">
+    <value>This VM is not using Read Caching</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_LICENSE" xml:space="preserve">
+    <value>Not licensed for Read Caching</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_SR_TYPE" xml:space="preserve">
+    <value>Read Caching is not supported on any of the Storage Repositories used by this VM</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_TURNED_OFF" xml:space="preserve">
+    <value>Read Caching is disabled on all supported Storage Repositories used by this VM</value>
+  </data>
   <data name="VM_REVERTED" xml:space="preserve">
     <value>VM reverted to '{0}'</value>
   </data>
@@ -12568,27 +12605,5 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
-  </data>
-  <data name="ACTION_RESTART_CONTAINER_DESCRIPTION" xml:space="preserve">
-    <value>Restarting</value>
-  </data>
-  <data name="ACTION_RESTART_CONTAINER_END_DESCRIPTION" xml:space="preserve">
-    <value>Restarted</value>
-  </data>
-  <data name="ACTION_RESTART_CONTAINER_TITLE" xml:space="preserve">
-    <value>Restarting Docker Container '{0}'</value>
-  </data>
-  <data name="MAINWINDOW_RESTART" xml:space="preserve">
-    <value>Re&amp;start</value>
-  </data>
-  <data name="PATCH_DOWNLOAD_FAILED" xml:space="preserve">
-    <value>Failed to download {0} from '{1}'</value>
-  </data>
-  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO" xml:space="preserve">
-    <value>Failed to download the update {0} from '{1}'.
-
-The update is installed on '{1}', but the update installation file may have since been deleted.
-
-Upload the update from an .xsupdate file instead.</value>
   </data>
 </root>

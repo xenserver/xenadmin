@@ -93,8 +93,19 @@ namespace XenAdmin.Actions
         {
             Description = String.Format(Messages.ACTION_GET_DISK_SPACE_REQUIREMENTS_DESCRIPTION, Host.Name);
 
-            long requiredDiskSpace = updateSize;
             string result;
+
+            // get required disk space
+            long requiredDiskSpace = updateSize;
+            try
+            {
+                result = Host.call_plugin(Session, Host.opaque_ref, "disk-space", "get_required_space", new Dictionary<string, string>());
+                requiredDiskSpace = Convert.ToInt64(result);
+            }
+            catch (Failure failure)
+            {
+                log.WarnFormat("Plugin call disk-space.get_required_space on {0} failed with {1}", Host.Name, failure.Message);
+            }
 
             // get available disk space
             long availableDiskSpace = 0;
@@ -155,7 +166,7 @@ namespace XenAdmin.Actions
 
         public bool CanCleanup
         {
-            get { return ReclaimableDiskSpace + AvailableDiskSpace > RequiredDiskSpace && RequiredDiskSpace > 0; }
+            get { return ReclaimableDiskSpace + AvailableDiskSpace > RequiredDiskSpace && RequiredDiskSpace > 0 && ReclaimableDiskSpace > 0; }
         }
 
         public string GetSpaceRequirementsMessage()

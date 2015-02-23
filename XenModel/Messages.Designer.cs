@@ -24787,7 +24787,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Clean up....
+        ///   Looks up a localized string similar to Clean up....
         /// </summary>
         public static string PATCHINGWIZARD_CLEANUP {
             get {
@@ -24859,7 +24859,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;More info....
+        ///   Looks up a localized string similar to More info....
         /// </summary>
         public static string PATCHINGWIZARD_MORE_INFO {
             get {
@@ -33677,6 +33677,51 @@ namespace XenAdmin {
         public static string VM_PROTECTION_POLICY_SUCCEEDED {
             get {
                 return ResourceManager.GetString("VM_PROTECTION_POLICY_SUCCEEDED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This VM is not using Read Caching.
+        /// </summary>
+        public static string VM_READ_CACHING_DISABLED {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not licensed for Read Caching.
+        /// </summary>
+        public static string VM_READ_CACHING_DISABLED_REASON_LICENSE {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_DISABLED_REASON_LICENSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read Caching is not supported on any of the Storage Repositories used by this VM.
+        /// </summary>
+        public static string VM_READ_CACHING_DISABLED_REASON_SR_TYPE {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_DISABLED_REASON_SR_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read Caching is disabled on all supported Storage Repositories used by this VM.
+        /// </summary>
+        public static string VM_READ_CACHING_DISABLED_REASON_TURNED_OFF {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_DISABLED_REASON_TURNED_OFF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This VM has Read Caching enabled.
+        /// </summary>
+        public static string VM_READ_CACHING_ENABLED {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_ENABLED", resourceCulture);
             }
         }
         
