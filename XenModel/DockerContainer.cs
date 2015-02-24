@@ -292,5 +292,15 @@ namespace XenAdmin.Model
                     : status.StartsWith("Up") ? vm_power_state.Running : vm_power_state.Halted;
             }
         }
+
+        public override string NameWithLocation
+        {
+            get
+            {
+                if (parent == null)
+                    return base.NameWithLocation;
+                return string.Format(Messages.CONTAINER_ON_VM_TITLE, Name, parent.Name, parent.LocationString);
+            }
+        }
     }
 }
