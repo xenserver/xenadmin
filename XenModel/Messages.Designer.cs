@@ -24673,6 +24673,19 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to download the update {0} from &apos;{1}&apos;.
+        ///
+        ///The update has previously been uploaded to &apos;{1}&apos;, but the update installation file may have since been deleted.
+        ///
+        ///Upload the update from an .xsupdate file instead..
+        /// </summary>
+        public static string PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED {
+            get {
+                return ResourceManager.GetString("PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} 
         ///Date modified: {1}
         ///Date created: {2}
