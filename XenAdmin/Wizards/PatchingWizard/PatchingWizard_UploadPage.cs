@@ -381,7 +381,8 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (!canDownload)
             {
-                var msg = string.Format(Messages.PATCH_DOWNLOAD_FAILED_MORE_INFO, SelectedExistingPatch.name_label, SelectedExistingPatch.Connection.Name);
+                var msgtemplate = SelectedExistingPatch.host_patches.Count > 0 ? Messages.PATCH_DOWNLOAD_FAILED_MORE_INFO : Messages.PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED;
+                var msg = string.Format(msgtemplate, SelectedExistingPatch.name_label, SelectedExistingPatch.Connection.Name);
                 new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(SystemIcons.Error, msg))
                    .ShowDialog(this);
