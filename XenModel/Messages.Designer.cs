@@ -7861,6 +7861,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} on &apos;{1}&apos; {2}.
+        /// </summary>
+        public static string CONTAINER_ON_VM_TITLE {
+            get {
+                return ResourceManager.GetString("CONTAINER_ON_VM_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ports.
         /// </summary>
         public static string CONTAINER_PORTS {
