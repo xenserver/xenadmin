@@ -38,6 +38,7 @@ using XenAPI;
 using XenAdmin.Core;
 using XenAdmin.Model;
 using System.Linq;
+using System.Diagnostics;
 
 namespace XenAdmin.Network
 {
@@ -566,6 +567,8 @@ namespace XenAdmin.Network
         private bool dockerContainersChanged = false;
         public void UpdateDockerContainersForVM(IList<DockerContainer> containers, VM vm)
         {
+            Trace.Assert(vm != null);
+
             //updating existing, adding new containers
             dockerContainersChanged = dockerContainersChanged || containers.Count > 0;
             foreach (var c in containers)

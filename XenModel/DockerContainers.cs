@@ -106,9 +106,9 @@ namespace XenAdmin.Model
         {
             InvokeHelper.AssertOnEventThread();
 
-            VM vm = e.Element as VM;
-            if (vm == null)
-                return;
+            Trace.Assert(e.Element is VM);
+
+            var vm = e.Element as VM;
 
             switch (e.Action)
             {
@@ -139,12 +139,9 @@ namespace XenAdmin.Model
 
         private static void ServerXenObject_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            IXenObject xenObject = (IXenObject) sender;
+            Trace.Assert(sender is VM);
 
-            VM vm = xenObject as VM;
-
-            if (vm == null)
-                return;
+            VM vm = sender as VM;
 
             if (e.PropertyName == "other_config")
             {
@@ -152,15 +149,12 @@ namespace XenAdmin.Model
             }
         }
 
-        private static void RemoveObject(IXenObject ixmo)
+        private static void RemoveObject(VM vm)
         {
             InvokeHelper.AssertOnEventThread();
 
-            if (ixmo as VM == null)
-                return;
-
-            IXenConnection connection = ixmo.Connection;
-            connection.Cache.UpdateDockerContainersForVM(new List<DockerContainer>(), (VM)ixmo);
+            IXenConnection connection = vm.Connection;
+            connection.Cache.UpdateDockerContainersForVM(new List<DockerContainer>(), vm);
         }
 
         private static void UpdateAll(VM[] vms)
