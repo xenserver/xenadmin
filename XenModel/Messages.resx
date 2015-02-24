@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -268,7 +268,7 @@
     <value>Disabling </value>
   </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
-    <value>Disable container enlightenment on VM '{0}'</value>
+    <value>Disable container management on VM '{0}'</value>
   </data>
   <data name="ACTION_DISK_ACTIVATED" xml:space="preserve">
     <value>Activated disk...</value>
@@ -370,7 +370,7 @@
     <value>Enabling</value>
   </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
-    <value>Enable container enlightenment on VM '{0}'</value>
+    <value>Enable container management on VM '{0}'</value>
   </data>
   <data name="ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED" xml:space="preserve">
     <value>Export failed due to a block checksum mismatch.  Please retry the export.</value>
@@ -11620,7 +11620,7 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
     <value>Config drive not included</value>
   </data>
   <data name="VM_ENLIGHTENMENT" xml:space="preserve">
-    <value>Container Enlightenment</value>
+    <value>Container Management</value>
   </data>
   <data name="VM_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>VM General Properties</value>
@@ -12617,5 +12617,12 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
+  </data>
+  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED" xml:space="preserve">
+    <value>Failed to download the update {0} from '{1}'.
+
+The update has previously been uploaded to '{1}', but the update installation file may have since been deleted.
+
+Upload the update from an .xsupdate file instead.</value>
   </data>
 </root>

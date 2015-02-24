@@ -136,13 +136,13 @@
     <value>0, 3, 0, 10</value>
   </data>
   <data name="labelRubric.Size" type="System.Drawing.Size, System.Drawing">
-    <value>412, 52</value>
+    <value>412, 39</value>
   </data>
   <data name="labelRubric.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="labelRubric.Text" xml:space="preserve">
-    <value>This VM can be specifically configured (enlightened), so it can be accessed by XenServer to monitor and control Docker containers. Choose if this feature should be enabled on this VM. </value>
+    <value>This VM can be configured to allow XenServer to monitor and control containers. Choose if this feature should be enabled on this VM. </value>
   </data>
   <data name="&gt;&gt;labelRubric.Name" xml:space="preserve">
     <value>labelRubric</value>
@@ -166,16 +166,16 @@
     <value>NoControl</value>
   </data>
   <data name="enlightenCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 55</value>
+    <value>3, 42</value>
   </data>
   <data name="enlightenCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 17</value>
+    <value>223, 17</value>
   </data>
   <data name="enlightenCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="enlightenCheckBox.Text" xml:space="preserve">
-    <value>&amp;Enable container enlightenment for this VM</value>
+    <value>&amp;Enable container management for this VM</value>
   </data>
   <data name="&gt;&gt;enlightenCheckBox.Name" xml:space="preserve">
     <value>enlightenCheckBox</value>
