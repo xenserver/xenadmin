@@ -70,7 +70,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         public Image Image
         {
-            get { return Properties.Resources.coreos_globe_icon; }
+            get { return Properties.Resources.coreos_16; }
         }
 
         public override string PageTitle
