@@ -2311,6 +2311,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Updating integrated GPU passthrough on &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Virtual disk created.
         /// </summary>
         public static string ACTION_VDI_CREATED {
@@ -17783,6 +17792,42 @@ namespace XenAdmin {
         public static string INSTANT_VM_CREATE_TITLE {
             get {
                 return ResourceManager.GetString("INSTANT_VM_CREATE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This server is currently not using the integrated GPU..
+        /// </summary>
+        public static string INTEGRATED_GPU_PASSTHROUGH_DISABLED {
+            get {
+                return ResourceManager.GetString("INTEGRATED_GPU_PASSTHROUGH_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not using the integrated GPU.
+        /// </summary>
+        public static string INTEGRATED_GPU_PASSTHROUGH_DISABLED_SHORT {
+            get {
+                return ResourceManager.GetString("INTEGRATED_GPU_PASSTHROUGH_DISABLED_SHORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This server is currently using the integrated GPU..
+        /// </summary>
+        public static string INTEGRATED_GPU_PASSTHROUGH_ENABLED {
+            get {
+                return ResourceManager.GetString("INTEGRATED_GPU_PASSTHROUGH_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Using the integrated GPU.
+        /// </summary>
+        public static string INTEGRATED_GPU_PASSTHROUGH_ENABLED_SHORT {
+            get {
+                return ResourceManager.GetString("INTEGRATED_GPU_PASSTHROUGH_ENABLED_SHORT", resourceCulture);
             }
         }
         

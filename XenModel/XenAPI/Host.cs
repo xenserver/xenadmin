@@ -95,7 +95,8 @@ namespace XenAPI
             Dictionary<string, string> chipset_info,
             List<XenRef<PCI>> PCIs,
             List<XenRef<PGPU>> PGPUs,
-            Dictionary<string, string> guest_VCPUs_params)
+            Dictionary<string, string> guest_VCPUs_params,
+            host_display display)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -145,6 +146,7 @@ namespace XenAPI
             this.PCIs = PCIs;
             this.PGPUs = PGPUs;
             this.guest_VCPUs_params = guest_VCPUs_params;
+            this.display = display;
         }
 
         /// <summary>
@@ -206,6 +208,7 @@ namespace XenAPI
             PCIs = update.PCIs;
             PGPUs = update.PGPUs;
             guest_VCPUs_params = update.guest_VCPUs_params;
+            display = update.display;
         }
 
         internal void UpdateFromProxy(Proxy_Host proxy)
@@ -258,6 +261,7 @@ namespace XenAPI
             PCIs = proxy.PCIs == null ? null : XenRef<PCI>.Create(proxy.PCIs);
             PGPUs = proxy.PGPUs == null ? null : XenRef<PGPU>.Create(proxy.PGPUs);
             guest_VCPUs_params = proxy.guest_VCPUs_params == null ? null : Maps.convert_from_proxy_string_string(proxy.guest_VCPUs_params);
+            display = proxy.display == null ? (host_display) 0 : (host_display)Helper.EnumParseDefault(typeof(host_display), (string)proxy.display);
         }
 
         public Proxy_Host ToProxy()
@@ -311,6 +315,7 @@ namespace XenAPI
             result_.PCIs = (PCIs != null) ? Helper.RefListToStringArray(PCIs) : new string[] {};
             result_.PGPUs = (PGPUs != null) ? Helper.RefListToStringArray(PGPUs) : new string[] {};
             result_.guest_VCPUs_params = Maps.convert_to_proxy_string_string(guest_VCPUs_params);
+            result_.display = host_display_helper.ToString(display);
             return result_;
         }
 
@@ -368,6 +373,7 @@ namespace XenAPI
             PCIs = Marshalling.ParseSetRef<PCI>(table, "PCIs");
             PGPUs = Marshalling.ParseSetRef<PGPU>(table, "PGPUs");
             guest_VCPUs_params = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "guest_VCPUs_params"));
+            display = (host_display)Helper.EnumParseDefault(typeof(host_display), Marshalling.ParseString(table, "display"));
         }
 
         public bool DeepEquals(Host other, bool ignoreCurrentOperations)
@@ -426,7 +432,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._chipset_info, other._chipset_info) &&
                 Helper.AreEqual2(this._PCIs, other._PCIs) &&
                 Helper.AreEqual2(this._PGPUs, other._PGPUs) &&
-                Helper.AreEqual2(this._guest_VCPUs_params, other._guest_VCPUs_params);
+                Helper.AreEqual2(this._guest_VCPUs_params, other._guest_VCPUs_params) &&
+                Helper.AreEqual2(this._display, other._display);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Host server)
@@ -481,6 +488,10 @@ namespace XenAPI
                 if (!Helper.AreEqual2(_guest_VCPUs_params, server._guest_VCPUs_params))
                 {
                     Host.set_guest_VCPUs_params(session, opaqueRef, _guest_VCPUs_params);
+                }
+                if (!Helper.AreEqual2(_display, server._display))
+                {
+                    Host.set_display(session, opaqueRef, _display);
                 }
 
                 return null;
@@ -1048,6 +1059,17 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Get the display field of the given host.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static host_display get_display(Session session, string _host)
+        {
+            return (host_display)Helper.EnumParseDefault(typeof(host_display), (string)session.proxy.host_get_display(session.uuid, (_host != null) ? _host : "").parse());
+        }
+
+        /// <summary>
         /// Set the name/label field of the given host.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -1301,6 +1323,18 @@ namespace XenAPI
         public static void remove_from_guest_VCPUs_params(Session session, string _host, string _key)
         {
             session.proxy.host_remove_from_guest_vcpus_params(session.uuid, (_host != null) ? _host : "", (_key != null) ? _key : "").parse();
+        }
+
+        /// <summary>
+        /// Set the display field of the given host.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_display">New value to set</param>
+        public static void set_display(Session session, string _host, host_display _display)
+        {
+            session.proxy.host_set_display(session.uuid, (_host != null) ? _host : "", host_display_helper.ToString(_display)).parse();
         }
 
         /// <summary>
@@ -2281,6 +2315,50 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Enable console output to the physical display device next time this host boots
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static host_display enable_display(Session session, string _host)
+        {
+            return (host_display)Helper.EnumParseDefault(typeof(host_display), (string)session.proxy.host_enable_display(session.uuid, (_host != null) ? _host : "").parse());
+        }
+
+        /// <summary>
+        /// Enable console output to the physical display device next time this host boots
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static XenRef<Task> async_enable_display(Session session, string _host)
+        {
+            return XenRef<Task>.Create(session.proxy.async_host_enable_display(session.uuid, (_host != null) ? _host : "").parse());
+        }
+
+        /// <summary>
+        /// Disable console output to the physical display device next time this host boots
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static host_display disable_display(Session session, string _host)
+        {
+            return (host_display)Helper.EnumParseDefault(typeof(host_display), (string)session.proxy.host_disable_display(session.uuid, (_host != null) ? _host : "").parse());
+        }
+
+        /// <summary>
+        /// Disable console output to the physical display device next time this host boots
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static XenRef<Task> async_disable_display(Session session, string _host)
+        {
+            return XenRef<Task>.Create(session.proxy.async_host_disable_display(session.uuid, (_host != null) ? _host : "").parse());
+        }
+
+        /// <summary>
         /// Return a list of all the hosts known to the system.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -3181,5 +3259,24 @@ namespace XenAPI
             }
         }
         private Dictionary<string, string> _guest_VCPUs_params;
+
+        /// <summary>
+        /// indicates whether the host is configured to output its console to a physical display device
+        /// First published in .
+        /// </summary>
+        public virtual host_display display
+        {
+            get { return _display; }
+            set
+            {
+                if (!Helper.AreEqual(value, _display))
+                {
+                    _display = value;
+                    Changed = true;
+                    NotifyPropertyChanged("display");
+                }
+            }
+        }
+        private host_display _display;
     }
 }

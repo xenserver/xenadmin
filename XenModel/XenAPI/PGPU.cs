@@ -56,7 +56,9 @@ namespace XenAPI
             List<XenRef<VGPU_type>> supported_VGPU_types,
             List<XenRef<VGPU_type>> enabled_VGPU_types,
             List<XenRef<VGPU>> resident_VGPUs,
-            Dictionary<XenRef<VGPU_type>, long> supported_VGPU_max_capacities)
+            Dictionary<XenRef<VGPU_type>, long> supported_VGPU_max_capacities,
+            pgpu_dom0_access dom0_access,
+            bool is_system_display_device)
         {
             this.uuid = uuid;
             this.PCI = PCI;
@@ -67,6 +69,8 @@ namespace XenAPI
             this.enabled_VGPU_types = enabled_VGPU_types;
             this.resident_VGPUs = resident_VGPUs;
             this.supported_VGPU_max_capacities = supported_VGPU_max_capacities;
+            this.dom0_access = dom0_access;
+            this.is_system_display_device = is_system_display_device;
         }
 
         /// <summary>
@@ -89,6 +93,8 @@ namespace XenAPI
             enabled_VGPU_types = update.enabled_VGPU_types;
             resident_VGPUs = update.resident_VGPUs;
             supported_VGPU_max_capacities = update.supported_VGPU_max_capacities;
+            dom0_access = update.dom0_access;
+            is_system_display_device = update.is_system_display_device;
         }
 
         internal void UpdateFromProxy(Proxy_PGPU proxy)
@@ -102,6 +108,8 @@ namespace XenAPI
             enabled_VGPU_types = proxy.enabled_VGPU_types == null ? null : XenRef<VGPU_type>.Create(proxy.enabled_VGPU_types);
             resident_VGPUs = proxy.resident_VGPUs == null ? null : XenRef<VGPU>.Create(proxy.resident_VGPUs);
             supported_VGPU_max_capacities = proxy.supported_VGPU_max_capacities == null ? null : Maps.convert_from_proxy_XenRefVGPU_type_long(proxy.supported_VGPU_max_capacities);
+            dom0_access = proxy.dom0_access == null ? (pgpu_dom0_access) 0 : (pgpu_dom0_access)Helper.EnumParseDefault(typeof(pgpu_dom0_access), (string)proxy.dom0_access);
+            is_system_display_device = (bool)proxy.is_system_display_device;
         }
 
         public Proxy_PGPU ToProxy()
@@ -116,6 +124,8 @@ namespace XenAPI
             result_.enabled_VGPU_types = (enabled_VGPU_types != null) ? Helper.RefListToStringArray(enabled_VGPU_types) : new string[] {};
             result_.resident_VGPUs = (resident_VGPUs != null) ? Helper.RefListToStringArray(resident_VGPUs) : new string[] {};
             result_.supported_VGPU_max_capacities = Maps.convert_to_proxy_XenRefVGPU_type_long(supported_VGPU_max_capacities);
+            result_.dom0_access = pgpu_dom0_access_helper.ToString(dom0_access);
+            result_.is_system_display_device = is_system_display_device;
             return result_;
         }
 
@@ -134,6 +144,8 @@ namespace XenAPI
             enabled_VGPU_types = Marshalling.ParseSetRef<VGPU_type>(table, "enabled_VGPU_types");
             resident_VGPUs = Marshalling.ParseSetRef<VGPU>(table, "resident_VGPUs");
             supported_VGPU_max_capacities = Maps.convert_from_proxy_XenRefVGPU_type_long(Marshalling.ParseHashTable(table, "supported_VGPU_max_capacities"));
+            dom0_access = (pgpu_dom0_access)Helper.EnumParseDefault(typeof(pgpu_dom0_access), Marshalling.ParseString(table, "dom0_access"));
+            is_system_display_device = Marshalling.ParseBool(table, "is_system_display_device");
         }
 
         public bool DeepEquals(PGPU other)
@@ -151,7 +163,9 @@ namespace XenAPI
                 Helper.AreEqual2(this._supported_VGPU_types, other._supported_VGPU_types) &&
                 Helper.AreEqual2(this._enabled_VGPU_types, other._enabled_VGPU_types) &&
                 Helper.AreEqual2(this._resident_VGPUs, other._resident_VGPUs) &&
-                Helper.AreEqual2(this._supported_VGPU_max_capacities, other._supported_VGPU_max_capacities);
+                Helper.AreEqual2(this._supported_VGPU_max_capacities, other._supported_VGPU_max_capacities) &&
+                Helper.AreEqual2(this._dom0_access, other._dom0_access) &&
+                Helper.AreEqual2(this._is_system_display_device, other._is_system_display_device);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, PGPU server)
@@ -294,6 +308,28 @@ namespace XenAPI
         public static Dictionary<XenRef<VGPU_type>, long> get_supported_VGPU_max_capacities(Session session, string _pgpu)
         {
             return Maps.convert_from_proxy_XenRefVGPU_type_long(session.proxy.pgpu_get_supported_vgpu_max_capacities(session.uuid, (_pgpu != null) ? _pgpu : "").parse());
+        }
+
+        /// <summary>
+        /// Get the dom0_access field of the given PGPU.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
+        public static pgpu_dom0_access get_dom0_access(Session session, string _pgpu)
+        {
+            return (pgpu_dom0_access)Helper.EnumParseDefault(typeof(pgpu_dom0_access), (string)session.proxy.pgpu_get_dom0_access(session.uuid, (_pgpu != null) ? _pgpu : "").parse());
+        }
+
+        /// <summary>
+        /// Get the is_system_display_device field of the given PGPU.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
+        public static bool get_is_system_display_device(Session session, string _pgpu)
+        {
+            return (bool)session.proxy.pgpu_get_is_system_display_device(session.uuid, (_pgpu != null) ? _pgpu : "").parse();
         }
 
         /// <summary>
@@ -451,6 +487,50 @@ namespace XenAPI
         public static XenRef<Task> async_get_remaining_capacity(Session session, string _pgpu, string _vgpu_type)
         {
             return XenRef<Task>.Create(session.proxy.async_pgpu_get_remaining_capacity(session.uuid, (_pgpu != null) ? _pgpu : "", (_vgpu_type != null) ? _vgpu_type : "").parse());
+        }
+
+        /// <summary>
+        /// 
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
+        public static pgpu_dom0_access enable_dom0_access(Session session, string _pgpu)
+        {
+            return (pgpu_dom0_access)Helper.EnumParseDefault(typeof(pgpu_dom0_access), (string)session.proxy.pgpu_enable_dom0_access(session.uuid, (_pgpu != null) ? _pgpu : "").parse());
+        }
+
+        /// <summary>
+        /// 
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
+        public static XenRef<Task> async_enable_dom0_access(Session session, string _pgpu)
+        {
+            return XenRef<Task>.Create(session.proxy.async_pgpu_enable_dom0_access(session.uuid, (_pgpu != null) ? _pgpu : "").parse());
+        }
+
+        /// <summary>
+        /// 
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
+        public static pgpu_dom0_access disable_dom0_access(Session session, string _pgpu)
+        {
+            return (pgpu_dom0_access)Helper.EnumParseDefault(typeof(pgpu_dom0_access), (string)session.proxy.pgpu_disable_dom0_access(session.uuid, (_pgpu != null) ? _pgpu : "").parse());
+        }
+
+        /// <summary>
+        /// 
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
+        public static XenRef<Task> async_disable_dom0_access(Session session, string _pgpu)
+        {
+            return XenRef<Task>.Create(session.proxy.async_pgpu_disable_dom0_access(session.uuid, (_pgpu != null) ? _pgpu : "").parse());
         }
 
         /// <summary>
@@ -638,5 +718,43 @@ namespace XenAPI
             }
         }
         private Dictionary<XenRef<VGPU_type>, long> _supported_VGPU_max_capacities;
+
+        /// <summary>
+        /// The accessibility of this device from dom0
+        /// First published in .
+        /// </summary>
+        public virtual pgpu_dom0_access dom0_access
+        {
+            get { return _dom0_access; }
+            set
+            {
+                if (!Helper.AreEqual(value, _dom0_access))
+                {
+                    _dom0_access = value;
+                    Changed = true;
+                    NotifyPropertyChanged("dom0_access");
+                }
+            }
+        }
+        private pgpu_dom0_access _dom0_access;
+
+        /// <summary>
+        /// Is this device the system display device
+        /// First published in .
+        /// </summary>
+        public virtual bool is_system_display_device
+        {
+            get { return _is_system_display_device; }
+            set
+            {
+                if (!Helper.AreEqual(value, _is_system_display_device))
+                {
+                    _is_system_display_device = value;
+                    Changed = true;
+                    NotifyPropertyChanged("is_system_display_device");
+                }
+            }
+        }
+        private bool _is_system_display_device;
     }
 }
