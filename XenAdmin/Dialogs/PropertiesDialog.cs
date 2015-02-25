@@ -206,10 +206,10 @@ namespace XenAdmin.Dialogs
                 if (is_pool && Helpers.MidnightRideOrGreater(xenObject.Connection))
                     ShowTab(PoolPowerONEditPage = new PoolPowerONEditPage());
 
-                if (is_pool_or_standalone)
+                if ((is_pool_or_standalone && Helpers.VGpuCapability(xenObjectCopy.Connection))
+                    || (is_host && ((Host)xenObjectCopy).CanEnableDisableIntegratedGpu))
                 {
-                    if (Helpers.VGpuCapability(xenObjectCopy.Connection)) 
-                        ShowTab(PoolGpuEditPage = new PoolGpuEditPage());
+                    ShowTab(PoolGpuEditPage = new PoolGpuEditPage());
                 }
 
                 if (is_network)
