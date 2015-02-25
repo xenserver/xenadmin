@@ -268,7 +268,7 @@
     <value>Disabling </value>
   </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
-    <value>Disable container enlightenment on VM '{0}'</value>
+    <value>Disable container management on VM '{0}'</value>
   </data>
   <data name="ACTION_DISK_ACTIVATED" xml:space="preserve">
     <value>Activated disk...</value>
@@ -370,7 +370,7 @@
     <value>Enabling</value>
   </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
-    <value>Enable container enlightenment on VM '{0}'</value>
+    <value>Enable container management on VM '{0}'</value>
   </data>
   <data name="ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED" xml:space="preserve">
     <value>Export failed due to a block checksum mismatch.  Please retry the export.</value>
@@ -575,6 +575,15 @@
   </data>
   <data name="ACTION_REMOVE_ALERTS_PROGRESS_DESCRIPTION" xml:space="preserve">
     <value>Removing alert {0} of {1}...</value>
+  </data>
+  <data name="ACTION_RESTART_CONTAINER_DESCRIPTION" xml:space="preserve">
+    <value>Restarting</value>
+  </data>
+  <data name="ACTION_RESTART_CONTAINER_END_DESCRIPTION" xml:space="preserve">
+    <value>Restarted</value>
+  </data>
+  <data name="ACTION_RESTART_CONTAINER_TITLE" xml:space="preserve">
+    <value>Restarting Docker Container '{0}'</value>
   </data>
   <data name="ACTION_RESUMEANDSTARTVMS_PREPARING" xml:space="preserve">
     <value>Preparing to resume and start VMs...</value>
@@ -2834,6 +2843,9 @@ You can only connect to a single Citrix XenServer Express Edition server at a ti
   <data name="CONTAINER_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>Container General Properties</value>
   </data>
+  <data name="CONTAINER_ON_VM_TITLE" xml:space="preserve">
+    <value>{0} on '{1}' {2}</value>
+  </data>
   <data name="CONTAINER_PORTS" xml:space="preserve">
     <value>Ports</value>
   </data>
@@ -3110,6 +3122,9 @@ Please reconnect the host and try again.</value>
   </data>
   <data name="CREATE_VM_FROM_TEMPLATE" xml:space="preserve">
     <value>Creating VM '{0}' from template '{1}'</value>
+  </data>
+  <data name="CREATING_CLOUD_CONFIG_DRIVE" xml:space="preserve">
+    <value>Creating cloud config drive</value>
   </data>
   <data name="CREATING_DISKS" xml:space="preserve">
     <value>Creating disks</value>
@@ -3800,7 +3815,7 @@ This will also delete its subfolders.</value>
     <value>{0} is now available</value>
   </data>
   <data name="DOWNLOADING_PATCH_FROM" xml:space="preserve">
-    <value>Downloading Update from Server {0}...</value>
+    <value>Downloading update from '{0}'...</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DESC" xml:space="preserve">
     <value>Downloading {0}</value>
@@ -6849,6 +6864,9 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MAINWINDOW_REPAIR_SR_CONTEXT_MENU" xml:space="preserve">
     <value>Re&amp;pair...</value>
   </data>
+  <data name="MAINWINDOW_RESTART" xml:space="preserve">
+    <value>Re&amp;start</value>
+  </data>
   <data name="MAINWINDOW_RESTART_TOOLSTACK" xml:space="preserve">
     <value>Restart Toolstac&amp;k</value>
   </data>
@@ -8339,7 +8357,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>There is not enough space on '{0}' to install update '{1}'.</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_NOCLEANUP" xml:space="preserve">
-    <value>You need to manually free up more space and try again.</value>
+    <value>Free up some space and try again.</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_REQUIRED_SPACE" xml:space="preserve">
     <value>Space required: {0}</value>
@@ -8568,7 +8586,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>Paste</value>
   </data>
   <data name="PATCHINGWIZARD_CLEANUP" xml:space="preserve">
-    <value>&amp;Clean up...</value>
+    <value>Clean up...</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_NOACTION" xml:space="preserve">
     <value>No action required</value>
@@ -8592,7 +8610,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>Unknown</value>
   </data>
   <data name="PATCHINGWIZARD_MORE_INFO" xml:space="preserve">
-    <value>&amp;More info...</value>
+    <value>More info...</value>
   </data>
   <data name="PATCHINGWIZARD_PATCHINGPAGE_POOL_RESOLVE" xml:space="preserve">
     <value>Resolve pool problems</value>
@@ -8731,6 +8749,16 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="PATCH_DESCRIPTION_AND_INSTALLATION_SIZE" xml:space="preserve">
     <value>{0} 
 Installation size: {1}</value>
+  </data>
+  <data name="PATCH_DOWNLOAD_FAILED" xml:space="preserve">
+    <value>Failed to download {0} from '{1}'</value>
+  </data>
+  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO" xml:space="preserve">
+    <value>Failed to download the update {0} from '{1}'.
+
+The update is installed on '{1}', but the update installation file may have since been deleted.
+
+Upload the update from an .xsupdate file instead.</value>
   </data>
   <data name="PATCH_EXPANDED_DESCRIPTION" xml:space="preserve">
     <value>{0} 
@@ -11600,8 +11628,14 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="VM_APPLIANCE_SUMMARY" xml:space="preserve">
     <value>vApp name:\r\n    {0}\r\n\r\nSelected VMs:\r\n    {1}</value>
   </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_INCLUDED" xml:space="preserve">
+    <value>Config drive included</value>
+  </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_NOT_INCLUDED" xml:space="preserve">
+    <value>Config drive not included</value>
+  </data>
   <data name="VM_ENLIGHTENMENT" xml:space="preserve">
-    <value>Container Enlightenment</value>
+    <value>Container Management</value>
   </data>
   <data name="VM_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>VM General Properties</value>
@@ -11656,6 +11690,21 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   </data>
   <data name="VM_PROTECTION_POLICY_SUCCEEDED" xml:space="preserve">
     <value>Succeeded</value>
+  </data>
+  <data name="VM_READ_CACHING_ENABLED" xml:space="preserve">
+    <value>This VM has Read Caching enabled</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED" xml:space="preserve">
+    <value>This VM is not using Read Caching</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_LICENSE" xml:space="preserve">
+    <value>Not licensed for Read Caching</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_SR_TYPE" xml:space="preserve">
+    <value>Read Caching is not supported on any of the Storage Repositories used by this VM</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_TURNED_OFF" xml:space="preserve">
+    <value>Read Caching is disabled on all supported Storage Repositories used by this VM</value>
   </data>
   <data name="VM_REVERTED" xml:space="preserve">
     <value>VM reverted to '{0}'</value>
@@ -12584,16 +12633,11 @@ You will need to navigate to the Console on each of the selected VMs to complete
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
   </data>
-  <data name="ACTION_RESTART_CONTAINER_DESCRIPTION" xml:space="preserve">
-    <value>Restarting</value>
-  </data>
-  <data name="ACTION_RESTART_CONTAINER_END_DESCRIPTION" xml:space="preserve">
-    <value>Restarted</value>
-  </data>
-  <data name="ACTION_RESTART_CONTAINER_TITLE" xml:space="preserve">
-    <value>Restarting Docker Container '{0}'</value>
-  </data>
-  <data name="MAINWINDOW_RESTART" xml:space="preserve">
-    <value>Re&amp;start</value>
+  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED" xml:space="preserve">
+    <value>Failed to download the update {0} from '{1}'.
+
+The update has previously been uploaded to '{1}', but the update installation file may have since been deleted.
+
+Upload the update from an .xsupdate file instead.</value>
   </data>
 </root>

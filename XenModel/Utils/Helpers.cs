@@ -1934,5 +1934,11 @@ namespace XenAdmin.Core
            // For Creedence or later on the vSwitch backend, we allow creation of VLAN 0
            return master != null && CreedenceOrGreater(master) && master.vSwitchNetworkBackend;
        }
+
+       public static bool ContainerCapability(IXenConnection connection)
+       {
+           var master = GetMaster(connection);
+           return CreamOrGreater(connection) && master != null && master.SuppPacks.Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 
+       }
     }
 }

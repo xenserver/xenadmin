@@ -2143,6 +2143,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_UploadPage.resx">
       <DependentUpon>PatchingWizard_UploadPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\PatchingWizard\PatchingWizard_UploadPage.zh-CN.resx">
       <DependentUpon>PatchingWizard_UploadPage.cs</DependentUpon>
@@ -4013,6 +4014,7 @@
     <Content Include="Images\commands_16.png" />
     <Content Include="Images\console_16.png" />
     <None Include="Images\coreos-globe-icon.png" />
+    <None Include="Images\coreos-16.png" />
     <Content Include="Images\cross.png" />
     <None Include="Images\DateTime16.png" />
     <None Include="Images\sl_connecting_16.png" />

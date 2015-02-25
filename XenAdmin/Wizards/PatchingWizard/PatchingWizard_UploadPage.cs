@@ -47,8 +47,14 @@ namespace XenAdmin.Wizards.PatchingWizard
         public override void PageLoaded(PageLoadedDirection direction)
         {
             base.PageLoaded(direction);
+
+            canUpload = true;
+            canDownload = true;
+            UpdateButtons();
+
             if (SelectedUpdateType == UpdateType.Existing)
                 _patch = SelectedExistingPatch;
+
             if (direction == PageLoadedDirection.Forward)
             {
                 PrepareUploadActions();
@@ -135,6 +141,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         }
 
         private bool canUpload = true;
+        private bool canDownload = true;
         private DiskSpaceRequirements diskSpaceRequirements;
 
         private void TryUploading()
@@ -221,11 +228,16 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (!canUpload && diskSpaceRequirements != null)
             {
-                diskSpaceErrorLinkLabel.Visible = true;
-                diskSpaceErrorLinkLabel.Text = diskSpaceRequirements.GetMessageForActionLink();
+                errorLinkLabel.Visible = true;
+                errorLinkLabel.Text = diskSpaceRequirements.GetMessageForActionLink();
+            }
+            else if (!canDownload)
+            {
+                errorLinkLabel.Visible = true;
+                errorLinkLabel.Text = Messages.PATCHINGWIZARD_MORE_INFO;
             }
             else
-                diskSpaceErrorLinkLabel.Visible = false;
+                errorLinkLabel.Visible = false;
         }
 
         private void UpdateActionProgress(AsyncAction action)
@@ -320,9 +332,12 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             action.Completed -= multipleAction_Completed;
 
+            canDownload = !(action.Exception is PatchDownloadFailedException);
+
             Program.Invoke(this, () =>
             {
                 labelProgress.Text = GetActionDescription(action);
+                UpdateButtons();
             });
             
         }
@@ -362,8 +377,17 @@ namespace XenAdmin.Wizards.PatchingWizard
             return textColor;
         }
 
-        private void diskspaceErrorLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void errorLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            if (!canDownload)
+            {
+                var msgtemplate = SelectedExistingPatch.host_patches.Count > 0 ? Messages.PATCH_DOWNLOAD_FAILED_MORE_INFO : Messages.PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED;
+                var msg = string.Format(msgtemplate, SelectedExistingPatch.name_label, SelectedExistingPatch.Connection.Name);
+                new ThreeButtonDialog(
+                   new ThreeButtonDialog.Details(SystemIcons.Error, msg))
+                   .ShowDialog(this);
+            }
+
             if (diskSpaceRequirements == null)
                 return;
 

@@ -1688,6 +1688,26 @@ namespace XenAPI
                 return v == null ? false : v.ToLower() == "true";
             }
         }
+        
+        public VDI CloudConfigDrive
+        {
+            get
+            {
+                var vbds = Connection.ResolveAll(VBDs);
+                return vbds.Select(vbd => Connection.Resolve(vbd.VDI)).FirstOrDefault(vdi => vdi != null && vdi.IsCloudConfigDrive);
+            }
+        }
+
+        public bool CanHaveCloudConfigDrive
+        {
+            get
+            {
+                if (is_a_template && TemplateType == VmTemplateType.CoreOS)
+                    return true;
+                //otherwise check if it has a config drive
+                return CloudConfigDrive != null;
+            }
+        }
 
         public VM_Docker_Info DockerInfo
         {
@@ -1710,6 +1730,61 @@ namespace XenAPI
                     return null;
                 VM_Docker_Version info = new VM_Docker_Version(xml);
                 return info;
+            }
+        }
+
+        public bool ReadCachingEnabled
+        {
+            get
+            {
+                return ReadCachingVDIs.Count > 0;
+            }
+        }
+
+        /// <summary>
+        /// Return the list of VDIs that have Read Caching enabled
+        /// </summary>
+        public List<VDI> ReadCachingVDIs
+        {
+            get
+            {
+                var readCachingVdis = new List<VDI>();
+                foreach (var vbd in Connection.ResolveAll(VBDs).Where(vbd => vbd != null && vbd.currently_attached))
+                {
+                    var vdi = Connection.Resolve(vbd.VDI);
+                    if (vdi != null && vdi.ReadCachingEnabled)
+                        readCachingVdis.Add(vdi);
+                }
+                return readCachingVdis;
+            }
+        }
+
+        /// <summary>
+        /// Whether the Read Caching is supported on any of the VDIs
+        /// </summary>
+        public bool ReadCachingSupported
+        {
+            get
+            {
+                foreach (var vbd in Connection.ResolveAll(VBDs).Where(vbd => vbd != null && vbd.currently_attached))
+                {
+                    var vdi = Connection.Resolve(vbd.VDI);
+                    if (vdi != null && vdi.ReadCachingSupported)
+                        return true;
+                }
+                return false;
+            }
+        }
+        
+        public string ReadCachingDisabledReason
+        {
+            get 
+            { 
+                if (Helpers.FeatureForbidden(Connection, Host.RestrictReadCaching))
+                    return Messages.VM_READ_CACHING_DISABLED_REASON_LICENSE;
+                if (!ReadCachingSupported)
+                    return Messages.VM_READ_CACHING_DISABLED_REASON_SR_TYPE;
+                return Messages.VM_READ_CACHING_DISABLED_REASON_TURNED_OFF;
             }
         }
     }

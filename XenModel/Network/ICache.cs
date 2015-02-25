@@ -82,7 +82,7 @@ namespace XenAdmin.Network
         VM[] VMs { get; }
         IEnumerable<IXenObject> XenSearchableObjects { get; }
         DockerContainer[] DockerContainers { get; }
-        void UpdateDockerContainersForVM(IEnumerable<DockerContainer> d, VM v);
+        void UpdateDockerContainersForVM(IList<DockerContainer> d, VM v);
         void CheckDockerContainersBatchChange();
     }
 }

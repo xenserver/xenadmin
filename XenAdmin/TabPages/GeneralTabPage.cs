@@ -469,6 +469,7 @@ namespace XenAdmin.TabPages
                 generateVCPUsBox();
                 generateDockerInfoBox();
                 generateDockerVersionBox();
+                generateReadCachingBox();
             }
 
             // hide all the sections which haven't been populated, those that have make sure are visible
@@ -1376,6 +1377,27 @@ namespace XenAdmin.TabPages
             }
         }
 
+        private void generateReadCachingBox()
+        {
+            VM vm = xenObject as VM;
+            if (vm == null || !vm.IsRunning || !Helpers.CreamOrGreater(vm.Connection))
+                return;
+
+            PDSection s = pdSectionReadCaching;
+
+            if (vm.ReadCachingEnabled)
+            {
+                s.AddEntry(FriendlyName("VM.read_caching_status"), Messages.VM_READ_CACHING_ENABLED);
+                var vdiList = vm.ReadCachingVDIs.Select(vdi => vdi.NameWithLocation).ToArray();
+                s.AddEntry(FriendlyName("VM.read_caching_disks"), string.Join("\n", vdiList));
+            }
+            else
+            {
+                s.AddEntry(FriendlyName("VM.read_caching_status"), Messages.VM_READ_CACHING_DISABLED);
+                s.AddEntry(FriendlyName("VM.read_caching_reason"), vm.ReadCachingDisabledReason);
+            }
+        }
+
         private void generateStorageLinkBox()
         {
             SR sr = xenObject as SR;
@@ -1519,7 +1541,7 @@ namespace XenAdmin.TabPages
 
         private void addStringEntry(PDSection s, string key, string value)
         {
-            s.AddEntry(key, value.Length != 0 ? value : Messages.NONE);
+            s.AddEntry(key, string.IsNullOrEmpty(value) ? Messages.NONE : value);
         }
 
         private void generateDockerInfoBox()

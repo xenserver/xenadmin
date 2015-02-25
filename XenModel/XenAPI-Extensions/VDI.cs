@@ -319,5 +319,32 @@ namespace XenAPI
                 return name_label.Contains(wssName);
             }
         }
+
+        public bool IsCloudConfigDrive
+        {
+            get { return other_config.ContainsKey("config-drive") && other_config["config-drive"].ToLower() == "true"; }
+
+        }
+        
+        /// <summary>
+        /// Whether the read caching is enabled on this disk
+        /// </summary>
+        public bool ReadCachingEnabled
+        {
+            get { return BoolKey(sm_config, "read-caching-enabled"); }
+        }
+
+        /// <summary>
+        /// Whether the read caching is supported on this disk
+        /// </summary>
+        public bool ReadCachingSupported
+        {
+            get
+            {
+                var sr = Connection.Resolve(SR);
+                var srType = sr != null ? sr.GetSRType(false) : XenAPI.SR.SRTypes.unknown;
+                return srType == XenAPI.SR.SRTypes.ext || srType == XenAPI.SR.SRTypes.nfs;
+            }
+        }
     }
 }

@@ -511,7 +511,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable container enlightenment on VM &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Disable container management on VM &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE {
             get {
@@ -817,7 +817,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable container enlightenment on VM &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Enable container management on VM &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE {
             get {
@@ -7870,6 +7870,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} on &apos;{1}&apos; {2}.
+        /// </summary>
+        public static string CONTAINER_ON_VM_TITLE {
+            get {
+                return ResourceManager.GetString("CONTAINER_ON_VM_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ports.
         /// </summary>
         public static string CONTAINER_PORTS {
@@ -8680,6 +8689,15 @@ namespace XenAdmin {
         public static string CREATEVM_PROVISIONING {
             get {
                 return ResourceManager.GetString("CREATEVM_PROVISIONING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creating cloud config drive.
+        /// </summary>
+        public static string CREATING_CLOUD_CONFIG_DRIVE {
+            get {
+                return ResourceManager.GetString("CREATING_CLOUD_CONFIG_DRIVE", resourceCulture);
             }
         }
         
@@ -10815,7 +10833,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Downloading Update from Server {0}....
+        ///   Looks up a localized string similar to Downloading update from &apos;{0}&apos;....
         /// </summary>
         public static string DOWNLOADING_PATCH_FROM {
             get {
@@ -24019,7 +24037,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You need to manually free up more space and try again..
+        ///   Looks up a localized string similar to Free up some space and try again..
         /// </summary>
         public static string NOT_ENOUGH_SPACE_MESSAGE_NOCLEANUP {
             get {
@@ -24678,6 +24696,41 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to download {0} from &apos;{1}&apos;.
+        /// </summary>
+        public static string PATCH_DOWNLOAD_FAILED {
+            get {
+                return ResourceManager.GetString("PATCH_DOWNLOAD_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to download the update {0} from &apos;{1}&apos;.
+        ///
+        ///The update is installed on &apos;{1}&apos;, but the update installation file may have since been deleted.
+        ///
+        ///Upload the update from an .xsupdate file instead..
+        /// </summary>
+        public static string PATCH_DOWNLOAD_FAILED_MORE_INFO {
+            get {
+                return ResourceManager.GetString("PATCH_DOWNLOAD_FAILED_MORE_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to download the update {0} from &apos;{1}&apos;.
+        ///
+        ///The update has previously been uploaded to &apos;{1}&apos;, but the update installation file may have since been deleted.
+        ///
+        ///Upload the update from an .xsupdate file instead..
+        /// </summary>
+        public static string PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED {
+            get {
+                return ResourceManager.GetString("PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} 
         ///Date modified: {1}
         ///Date created: {2}
@@ -24810,7 +24863,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Clean up....
+        ///   Looks up a localized string similar to Clean up....
         /// </summary>
         public static string PATCHINGWIZARD_CLEANUP {
             get {
@@ -24882,7 +24935,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;More info....
+        ///   Looks up a localized string similar to More info....
         /// </summary>
         public static string PATCHINGWIZARD_MORE_INFO {
             get {
@@ -33533,7 +33586,25 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Container Enlightenment.
+        ///   Looks up a localized string similar to Config drive included.
+        /// </summary>
+        public static string VM_CLOUD_CONFIG_DRIVE_INCLUDED {
+            get {
+                return ResourceManager.GetString("VM_CLOUD_CONFIG_DRIVE_INCLUDED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Config drive not included.
+        /// </summary>
+        public static string VM_CLOUD_CONFIG_DRIVE_NOT_INCLUDED {
+            get {
+                return ResourceManager.GetString("VM_CLOUD_CONFIG_DRIVE_NOT_INCLUDED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Container Management.
         /// </summary>
         public static string VM_ENLIGHTENMENT {
             get {
@@ -33700,6 +33771,51 @@ namespace XenAdmin {
         public static string VM_PROTECTION_POLICY_SUCCEEDED {
             get {
                 return ResourceManager.GetString("VM_PROTECTION_POLICY_SUCCEEDED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This VM is not using Read Caching.
+        /// </summary>
+        public static string VM_READ_CACHING_DISABLED {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not licensed for Read Caching.
+        /// </summary>
+        public static string VM_READ_CACHING_DISABLED_REASON_LICENSE {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_DISABLED_REASON_LICENSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read Caching is not supported on any of the Storage Repositories used by this VM.
+        /// </summary>
+        public static string VM_READ_CACHING_DISABLED_REASON_SR_TYPE {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_DISABLED_REASON_SR_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read Caching is disabled on all supported Storage Repositories used by this VM.
+        /// </summary>
+        public static string VM_READ_CACHING_DISABLED_REASON_TURNED_OFF {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_DISABLED_REASON_TURNED_OFF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This VM has Read Caching enabled.
+        /// </summary>
+        public static string VM_READ_CACHING_ENABLED {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_ENABLED", resourceCulture);
             }
         }
         

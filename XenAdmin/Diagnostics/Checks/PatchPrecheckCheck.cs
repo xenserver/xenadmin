@@ -38,6 +38,7 @@ using XenAdmin.Diagnostics.Problems.HostProblem;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Collections.Generic;
+using XenAdmin.Actions;
 
 
 namespace XenAdmin.Diagnostics.Checks
@@ -78,7 +79,7 @@ namespace XenAdmin.Diagnostics.Checks
 
             try
             {
-                return FindProblem(Pool_patch.precheck(session, Patch.opaque_ref, Host.opaque_ref), Host);
+                return FindProblem(Pool_patch.precheck(session, Patch.opaque_ref, Host.opaque_ref));
 
             }
             catch (Failure f)
@@ -90,7 +91,11 @@ namespace XenAdmin.Diagnostics.Checks
                     log.Error(f.ErrorDescription[1]);
                 if (f.ErrorDescription.Count > 2)
                     log.Error(f.ErrorDescription[2]);
-                return new PrecheckFailed(this,Host, f);
+                if (f.ErrorDescription.Count > 3)
+                    log.Error(f.ErrorDescription[3]);
+                // try and find problem from the xapi failure
+                Problem problem = FindProblem(f);
+                return problem ?? new PrecheckFailed(this, Host, f);
             }
         }
 
@@ -105,8 +110,19 @@ namespace XenAdmin.Diagnostics.Checks
         }
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-       
-        private Problem FindProblem(string result, Host host)
+
+        /// <summary>
+        /// Find problem from xml result
+        /// </summary>
+        /// <param name="result">xml result, as returned by Pool_patch.precheck() call.
+        ///     E.g.:
+        ///     <error errorcode="PATCH_PRECHECK_FAILED_OUT_OF_SPACE">
+        ///         <found>2049859584</found>
+        ///         <required>10000000000</required>
+        ///     </error> 
+        /// </param>
+        /// <returns>Problem or null, if no problem found</returns>
+        private Problem FindProblem(string result)
         {
             if (!PrecheckErrorRegex.IsMatch(result.Replace("\n", "")))
                 return null;
@@ -118,61 +134,102 @@ namespace XenAdmin.Diagnostics.Checks
             log.Error(m.ToString());
             XmlNode errorNode = doc.FirstChild;
 
-            string errorcode = errorNode.Attributes["errorcode"] != null
+            string errorcode = errorNode.Attributes != null && errorNode.Attributes["errorcode"] != null
                                    ? errorNode.Attributes["errorcode"].Value
                                    : string.Empty;
 
+            if (errorcode == "")
+                return null;
+
+            var found = "";
+            var required = "";
+
+            foreach (XmlNode node in errorNode.ChildNodes)
+            {
+                if (node.Name == "found")
+                    found = node.InnerXml;
+                else if (node.Name == "required")
+                    required = node.InnerXml;
+            }
+            var problem = FindProblem(errorcode, found, required);
+            return problem ?? new PrecheckFailed(this, Host, new Failure(errorcode));
+        }
+
+        /// <summary>
+        /// Find problem from xapi Failure
+        /// </summary>
+        /// <param name="failure">Xapi failure, thrown by Pool_patch.precheck() call.
+        ///     E.g.: failure.ErrorDescription.Count = 4
+        ///         ErrorDescription[0] = "PATCH_PRECHECK_FAILED_WRONG_SERVER_VERSION"
+        ///         ErrorDescription[1] = "OpaqueRef:612b5eee-03dc-bbf5-3385-6905fdc9b079"
+        ///         ErrorDescription[2] = "6.5.0"
+        ///         ErrorDescription[3] = "^6\\.2\\.0$"
+        ///     E.g.: failure.ErrorDescription.Count = 2
+        ///         ErrorDescription[0] = "OUT_OF_SPACE"
+        ///         ErrorDescription[1] = "/var/patch"
+        /// </param>
+        /// <returns>Problem or null, if no problem found</returns>
+        private Problem FindProblem(Failure failure)
+        {
+            if (failure.ErrorDescription.Count == 0)
+                return null;
+
+            var errorcode = failure.ErrorDescription[0];
+            var found = "";
+            var required = "";
+
+            if (failure.ErrorDescription.Count > 2)
+                found = failure.ErrorDescription[2];
+            if (failure.ErrorDescription.Count > 3)
+                required = failure.ErrorDescription[3];
+
+            return FindProblem(errorcode, found, required);  
+        }
+
+        private Problem FindProblem(string errorcode, string found, string required)
+        {
             switch (errorcode)
             {
                 case "PATCH_PRECHECK_FAILED_WRONG_SERVER_VERSION":
-                    foreach (XmlNode node in errorNode.ChildNodes)
-                    {
-                        if (node.Name == "required")
-                        {
-                            return new WrongServerVersion(this, node.InnerXml,host);
-                        }
-                    }
-                    break;
+                    return new WrongServerVersion(this, required, Host);
                 case "PATCH_PRECHECK_FAILED_OUT_OF_SPACE":
-                    long required = 0;
-                    long found = 0;
-                    foreach (XmlNode node in errorNode.ChildNodes)
-                    {
-                        if (node.Name == "found")
-                        {
-                            long.TryParse(node.InnerText, out found);
-                        }
-
-                        if (node.Name == "required")
-                        {
-                            long.TryParse(node.InnerText, out required);
-                        }
-                    }
-
+                    System.Diagnostics.Trace.Assert(Helpers.CreamOrGreater(Host.Connection));  // If not Cream or greater, we shouldn't get this error
+                    long requiredSpace = 0;
+                    long foundSpace = 0;
+                    long.TryParse(found, out foundSpace);
+                    long.TryParse(required, out requiredSpace);
                     // get reclaimable disk space (excluding current patch)
                     long reclaimableDiskSpace = 0;
                     try
                     {
-                        var args = new Dictionary<string, string>();
-                        if (Patch != null)
-                            args.Add("exclude", Patch.uuid);
-                        var resultReclaimable = Host.call_plugin(host.Connection.Session, host.opaque_ref, "disk-space", "get_reclaimable_disk_space", args);
-                        reclaimableDiskSpace = Convert.ToInt64(resultReclaimable);                        
+                        var args = new Dictionary<string, string> { { "exclude", Patch.uuid } };
+                        var resultReclaimable = Host.call_plugin(Host.Connection.Session, Host.opaque_ref, "disk-space", "get_reclaimable_disk_space", args);
+                        reclaimableDiskSpace = Convert.ToInt64(resultReclaimable);
                     }
                     catch (Failure failure)
                     {
                         log.WarnFormat("Plugin call disk-space.get_reclaimable_disk_space on {0} failed with {1}", Host.Name, failure.Message);
                     }
 
-                    var operation = XenAdmin.Actions.DiskSpaceRequirements.OperationTypes.install;
+                    var diskSpaceReq = new DiskSpaceRequirements(DiskSpaceRequirements.OperationTypes.install, Host, Patch.Name, requiredSpace, foundSpace, reclaimableDiskSpace);
 
-                    var diskSpaceReq = new XenAdmin.Actions.DiskSpaceRequirements(operation, host, Patch.Name, required, found, reclaimableDiskSpace);
-                    
-                    return new HostOutOfSpaceProblem(this, host, Patch, diskSpaceReq);
-                case "":
-                    return null;
-                default:
-                    return new PrecheckFailed(this, host,new Failure(errorcode));
+                    return new HostOutOfSpaceProblem(this, Host, Patch, diskSpaceReq);
+                case "OUT_OF_SPACE":
+                    if (Helpers.CreamOrGreater(Host.Connection))
+                    {
+                        var action = new GetDiskSpaceRequirementsAction(Host, Patch, true);
+                        try
+                        {
+                            action.RunExternal(action.Session);
+                        }
+                        catch
+                        {
+                            log.WarnFormat("Could not get disk space requirements");
+                        }
+                        if (action.Succeeded)
+                            return new HostOutOfSpaceProblem(this, Host, Patch, action.DiskSpaceRequirements);
+                    }
+                    break;
             }
             return null;
         }

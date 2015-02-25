@@ -1071,4 +1071,7 @@
   <data name="PatchingWizard_UploadPatchPane" xml:space="preserve">
     <value>6315</value>
   </data>
+  <data name="NewVMWizard_CloudConfigParametersPane" xml:space="preserve">
+    <value>2055</value>
+  </data>
 </root>

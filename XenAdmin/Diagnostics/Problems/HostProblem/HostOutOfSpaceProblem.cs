@@ -58,7 +58,12 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
         public override string Description
         {
-            get { return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_INSTALL, Server.Name, patch.Name); }
+            get
+            {
+                return string.Format(diskSpaceReq.Operation == DiskSpaceRequirements.OperationTypes.install 
+                    ? Messages.NOT_ENOUGH_SPACE_MESSAGE_INSTALL 
+                    : Messages.NOT_ENOUGH_SPACE_MESSAGE_UPLOAD, Server.Name, patch.Name);
+            }
         }
 
         protected override AsyncAction CreateAction(out bool cancelled)
@@ -75,7 +80,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
                            diskSpaceReq.GetSpaceRequirementsMessage()),
                         new ThreeButtonDialog.TBDButton(Messages.YES, DialogResult.Yes, ThreeButtonDialog.ButtonType.ACCEPT, true),
                         ThreeButtonDialog.ButtonNo
-                        ).ShowDialog(Program.MainWindow);
+                        ).ShowDialog();
 
 
                     if (r == DialogResult.Yes)
@@ -110,6 +115,5 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
                 return false;
             }
         }
-
     }
 }

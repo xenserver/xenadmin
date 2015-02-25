@@ -2923,6 +2923,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disks.
+        /// </summary>
+        public static string Label_VM_read_caching_disks {
+            get {
+                return ResourceManager.GetString("Label-VM.read_caching_disks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reason.
+        /// </summary>
+        public static string Label_VM_read_caching_reason {
+            get {
+                return ResourceManager.GetString("Label-VM.read_caching_reason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string Label_VM_read_caching_status {
+            get {
+                return ResourceManager.GetString("Label-VM.read_caching_status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Topology.
         /// </summary>
         public static string Label_VM_Topology {
