@@ -44,17 +44,17 @@ namespace XenAdmin.TabPages
     {
         private const int REFRESH_INTERVAL = 20000;
 
-        private IXenObject _xenObject;
-        private VM _vmResideOn;
-        private Host _hostResideOn;
-        private string _resultCache;
+        private IXenObject xenObject;
+        private VM parentVM;
+        private Host host;
+        private string cachedResult;
 
         public IXenObject XenObject
         {
             get
             {
                 Program.AssertOnEventThread();
-                return _xenObject;
+                return xenObject;
             }
             set
             {
@@ -63,18 +63,16 @@ namespace XenAdmin.TabPages
                 if (value == null)
                     return;
 
-                if (_xenObject != value)
+                if (xenObject != value)
                 {
-                    _xenObject = value;
-                    if (_xenObject is DockerContainer)
+                    xenObject = value;
+                    if (xenObject is DockerContainer)
                     {
-                        var container = _xenObject as DockerContainer;
-
-                        _vmResideOn = container.Parent;
-                        if (_vmResideOn.resident_on == null || string.IsNullOrEmpty(_vmResideOn.resident_on.opaque_ref) || (_vmResideOn.resident_on.opaque_ref.ToLower().Contains("null")))
+                        parentVM = (xenObject as DockerContainer).Parent;
+                        if (parentVM.resident_on == null || string.IsNullOrEmpty(parentVM.resident_on.opaque_ref) || (parentVM.resident_on.opaque_ref.ToLower().Contains("null")))
                             return;
 
-                        _hostResideOn = container.Connection.Resolve(_vmResideOn.resident_on);
+                        host = xenObject.Connection.Resolve(parentVM.resident_on);
                         RefreshTime.Text = Messages.LAST_REFRESH_IN_PROGRESS;
                         StartUpdating();
                     }
@@ -85,10 +83,10 @@ namespace XenAdmin.TabPages
         private void StartUpdating()
         {
             var args = new Dictionary<string, string>();
-            args["vmuuid"] = _vmResideOn.uuid;
-            args["object"] = ((DockerContainer)_xenObject).uuid;
+            args["vmuuid"] = parentVM.uuid;
+            args["object"] = ((DockerContainer)xenObject).uuid;
 
-            var action = new ExecutePluginAction(_xenObject.Connection, _hostResideOn,
+            var action = new ExecutePluginAction(xenObject.Connection, host,
                         "xscontainer", "get_inspect", args, true);
 
             action.Completed += action_Completed;
@@ -138,9 +136,9 @@ namespace XenAdmin.TabPages
             RefreshTime.Text = String.Format(Messages.LAST_REFRESH_SUCCESS, DateTime.Now.ToString("HH:mm:ss"));
             try
             {
-                if (_resultCache == currentResult)
+                if (cachedResult == currentResult)
                     return;
-                _resultCache = currentResult;
+                cachedResult = currentResult;
                 DetailtreeView.Nodes.Clear();
 
                 XmlDocument doc = new XmlDocument();
