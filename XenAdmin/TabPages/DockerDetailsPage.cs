@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using XenAdmin.Actions;
+using XenAdmin.Core;
 using XenAPI;
 using XenAdmin.Model;
 using System.Xml;
@@ -59,6 +60,7 @@ namespace XenAdmin.TabPages
             set
             {
                 Program.AssertOnEventThread();
+                RefreshButton.Enabled = true;
 
                 if (value == null)
                     return;
@@ -73,6 +75,9 @@ namespace XenAdmin.TabPages
                             return;
 
                         host = xenObject.Connection.Resolve(parentVM.resident_on);
+
+                        DetailtreeView.Nodes.Clear();
+
                         RefreshTime.Text = Messages.LAST_REFRESH_IN_PROGRESS;
                         StartUpdating();
                     }
@@ -86,7 +91,7 @@ namespace XenAdmin.TabPages
             args["vmuuid"] = parentVM.uuid;
             args["object"] = ((DockerContainer)xenObject).uuid;
 
-            var action = new ExecutePluginAction(xenObject.Connection, host,
+            var action = new ExecuteContainerPluginAction((DockerContainer)xenObject, host,
                         "xscontainer", "get_inspect", args, true);
 
             action.Completed += action_Completed;
@@ -95,13 +100,16 @@ namespace XenAdmin.TabPages
 
         private void action_Completed(ActionBase sender)
         {
-            var action = (AsyncAction)sender;
+            var action = sender as ExecuteContainerPluginAction;
+            if (action == null || action.Container != xenObject)
+                return;
             Program.Invoke(Program.MainWindow, () =>
             {
                 if (action.Succeeded)
                     Rebuild(action.Result);
                 else
                     ShowInvalidInfo();
+                RefreshButton.Enabled = true;
             });
         }
 
@@ -133,7 +141,8 @@ namespace XenAdmin.TabPages
         public void Rebuild(string currentResult)
         {
             Program.AssertOnEventThread();
-            RefreshTime.Text = String.Format(Messages.LAST_REFRESH_SUCCESS, DateTime.Now.ToString("HH:mm:ss"));
+            RefreshTime.Text = string.Format(Messages.LAST_REFRESH_SUCCESS,
+                                             HelpersGUI.DateTimeToString(DateTime.Now, Messages.DATEFORMAT_HMS, true));
             try
             {
                 if (cachedResult == currentResult)
@@ -176,6 +185,13 @@ namespace XenAdmin.TabPages
         }
 
         private void RefreshButton_Click(object sender, EventArgs e)
+        {
+            RefreshTime.Text = Messages.LAST_REFRESH_IN_PROGRESS;
+            RefreshButton.Enabled = false;
+            StartUpdating();
+        }
+
+        private void RefreshTimer_Tick(object sender, EventArgs e)
         {
             StartUpdating();
         }

@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Windows.Forms;
 using XenAdmin.Actions;
+using XenAdmin.Core;
 using XenAdmin.Model;
 using XenAdmin.Controls;
 using XenAPI;
@@ -69,6 +70,8 @@ namespace XenAdmin.TabPages
             set
             {
                 Program.AssertOnEventThread();
+                RefreshButton.Enabled = true;
+
                 if (value == null) return;
 
                 if (xenObject == null || !xenObject.Equals(value))
@@ -97,7 +100,7 @@ namespace XenAdmin.TabPages
             args["vmuuid"] = parentVM.uuid;
             args["object"] = xenObject.Name;
 
-            var action = new ExecutePluginAction(xenObject.Connection, host,
+            var action = new ExecuteContainerPluginAction((DockerContainer)xenObject, host,
                         "xscontainer", "get_top", args, true); 
 
             action.Completed += action_Completed;
@@ -106,13 +109,16 @@ namespace XenAdmin.TabPages
 
         private void action_Completed(ActionBase sender)
         {
-            var action = (AsyncAction)sender;
+            var action = sender as ExecuteContainerPluginAction;
+            if (action == null || action.Container != xenObject)
+                return;
             Program.Invoke(Program.MainWindow, () =>
             {
                 if (action.Succeeded)
                     UpdateList(action.Result);
                 else
                     ShowInvalidInfo();
+                RefreshButton.Enabled = true;
             });
         }
 
@@ -123,19 +129,12 @@ namespace XenAdmin.TabPages
             try
             {
                 xmlDoc.LoadXml(xmlResult);
-            }
-            catch (Exception)
-            {
-                ShowInvalidInfo();
-                return;
-            }
 
-            string pid = "";
-            string command = "";
-            string cpuTime = "";
-            string[] row = { "", "", "" };
-            try
-            {
+                string pid = "";
+                string command = "";
+                string cpuTime = "";
+                string[] row = {"", "", ""};
+
                 listView1.SuspendLayout();
                 listView1.Items.Clear();
                 XmlNodeList processList = xmlDoc.GetElementsByTagName("Process");
@@ -160,16 +159,23 @@ namespace XenAdmin.TabPages
                     }
                     listView1.Items.Add(new ListViewItem(row));
                 }
+                labelRefresh.Text = string.Format(Messages.LAST_REFRESH_SUCCESS,
+                                                  HelpersGUI.DateTimeToString(DateTime.Now, Messages.DATEFORMAT_HMS, true));
+            }
+            catch (Exception)
+            {
+                ShowInvalidInfo();
             }
             finally
             {
                 listView1.ResumeLayout();
-                labelRefresh.Text = string.Format(Messages.LAST_REFRESH_SUCCESS, DateTime.Now.ToString("HH:mm:ss"));
             }
         }
 
         private void RefreshButton_Click(object sender, EventArgs e)
         {
+            labelRefresh.Text = Messages.LAST_REFRESH_IN_PROGRESS;
+            RefreshButton.Enabled = false; 
             StartUpdating();
         }
 
