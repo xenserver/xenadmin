@@ -46,7 +46,7 @@ namespace XenAdmin.TabPages
     {
         private const int REFRESH_INTERVAL = 20000;
 
-        private IXenObject xenObject;
+        private DockerContainer container;
         private VM parentVM;
         private Host host;
         
@@ -60,12 +60,12 @@ namespace XenAdmin.TabPages
             RefreshTimer.Interval = REFRESH_INTERVAL;
         }
 
-        public IXenObject XenObject
+        public DockerContainer Container
         {
             get
             {
                 Program.AssertOnEventThread();
-                return xenObject;
+                return container;
             }
             set
             {
@@ -74,18 +74,18 @@ namespace XenAdmin.TabPages
 
                 if (value == null) return;
 
-                if (xenObject == null || !xenObject.Equals(value))
+                if (container == null || !container.Equals(value))
                 {
-                    xenObject = value;
-                    if (xenObject.Connection == null || xenObject.Connection.Session == null || !(xenObject is DockerContainer))
+                    container = value;
+                    if (container.Connection == null || container.Connection.Session == null)
                         return;
 
-                    parentVM = ((DockerContainer) xenObject).Parent;
+                    parentVM = container.Parent;
 
                     if (parentVM == null)
                         return;
 
-                    host = xenObject.Connection.Resolve(parentVM.resident_on);
+                    host = container.Connection.Resolve(parentVM.resident_on);
 
                     listView1.Items.Clear();
                     labelRefresh.Text = Messages.LAST_REFRESH_IN_PROGRESS;
@@ -98,9 +98,9 @@ namespace XenAdmin.TabPages
         {
             var args = new Dictionary<string, string>();
             args["vmuuid"] = parentVM.uuid;
-            args["object"] = xenObject.Name;
+            args["object"] = container.Name;
 
-            var action = new ExecuteContainerPluginAction((DockerContainer)xenObject, host,
+            var action = new ExecuteContainerPluginAction(container, host,
                         "xscontainer", "get_top", args, true); 
 
             action.Completed += action_Completed;
@@ -110,7 +110,7 @@ namespace XenAdmin.TabPages
         private void action_Completed(ActionBase sender)
         {
             var action = sender as ExecuteContainerPluginAction;
-            if (action == null || action.Container != xenObject)
+            if (action == null || action.Container != container)
                 return;
             Program.Invoke(Program.MainWindow, () =>
             {

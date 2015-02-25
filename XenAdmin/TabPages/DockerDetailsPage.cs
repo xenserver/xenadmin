@@ -45,17 +45,17 @@ namespace XenAdmin.TabPages
     {
         private const int REFRESH_INTERVAL = 20000;
 
-        private IXenObject xenObject;
+        private DockerContainer container;
         private VM parentVM;
         private Host host;
         private string cachedResult;
 
-        public IXenObject XenObject
+        public DockerContainer Container
         {
             get
             {
                 Program.AssertOnEventThread();
-                return xenObject;
+                return container;
             }
             set
             {
@@ -65,22 +65,20 @@ namespace XenAdmin.TabPages
                 if (value == null)
                     return;
 
-                if (xenObject != value)
+                if (container != value)
                 {
-                    xenObject = value;
-                    if (xenObject is DockerContainer)
-                    {
-                        parentVM = (xenObject as DockerContainer).Parent;
-                        if (parentVM.resident_on == null || string.IsNullOrEmpty(parentVM.resident_on.opaque_ref) || (parentVM.resident_on.opaque_ref.ToLower().Contains("null")))
-                            return;
+                    container = value;
+                    parentVM = container.Parent;
+                    if (parentVM.resident_on == null || string.IsNullOrEmpty(parentVM.resident_on.opaque_ref) ||
+                        (parentVM.resident_on.opaque_ref.ToLower().Contains("null")))
+                        return;
 
-                        host = xenObject.Connection.Resolve(parentVM.resident_on);
+                    host = container.Connection.Resolve(parentVM.resident_on);
 
-                        DetailtreeView.Nodes.Clear();
+                    DetailtreeView.Nodes.Clear();
 
-                        RefreshTime.Text = Messages.LAST_REFRESH_IN_PROGRESS;
-                        StartUpdating();
-                    }
+                    RefreshTime.Text = Messages.LAST_REFRESH_IN_PROGRESS;
+                    StartUpdating();
                 }
             }
         }
@@ -89,9 +87,9 @@ namespace XenAdmin.TabPages
         {
             var args = new Dictionary<string, string>();
             args["vmuuid"] = parentVM.uuid;
-            args["object"] = ((DockerContainer)xenObject).uuid;
+            args["object"] = container.uuid;
 
-            var action = new ExecuteContainerPluginAction((DockerContainer)xenObject, host,
+            var action = new ExecuteContainerPluginAction(container, host,
                         "xscontainer", "get_inspect", args, true);
 
             action.Completed += action_Completed;
@@ -101,7 +99,7 @@ namespace XenAdmin.TabPages
         private void action_Completed(ActionBase sender)
         {
             var action = sender as ExecuteContainerPluginAction;
-            if (action == null || action.Container != xenObject)
+            if (action == null || action.Container != container)
                 return;
             Program.Invoke(Program.MainWindow, () =>
             {
