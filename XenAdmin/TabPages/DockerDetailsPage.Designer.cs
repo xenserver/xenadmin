@@ -79,7 +79,7 @@ namespace XenAdmin.TabPages
             // 
             // RefreshTimer
             // 
-            this.RefreshTimer.Tick += new System.EventHandler(this.RefreshButton_Click);
+            this.RefreshTimer.Tick += new System.EventHandler(this.RefreshTimer_Tick);
             // 
             // DockerDetailsPage
             // 
