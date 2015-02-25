@@ -51,7 +51,7 @@ namespace XenAdmin.SettingsPanels
 
         private Host host;
         private bool integratedGpuCurrentlyEnabled;
-        private bool integratedGpuCurrentlyEnableOnNextReboot;
+        private bool integratedGpuCurrentlyEnabledOnNextReboot;
 
         public PoolGpuEditPage()
         {
@@ -192,7 +192,7 @@ namespace XenAdmin.SettingsPanels
                 if (!showIntegratedGpu)
                     return false;
 
-                return EnableIntegratedGpuOnNextReboot != integratedGpuCurrentlyEnableOnNextReboot;
+                return EnableIntegratedGpuOnNextReboot != integratedGpuCurrentlyEnabledOnNextReboot;
             }
         }
 
@@ -238,31 +238,21 @@ namespace XenAdmin.SettingsPanels
             var systemDisplayDeviceGpu = host.SystemDisplayDevice;
             var currentPgpuDom0Access = systemDisplayDeviceGpu != null ? systemDisplayDeviceGpu.dom0_access : pgpu_dom0_access.unknown;
 
-            bool hostCurrentlyEnabled = true;
-            bool hostEnableOnNextReboot = true;
-            
-            if (currentHostDisplay == host_display.disabled || currentHostDisplay == host_display.enable_on_reboot)
-                hostCurrentlyEnabled = false;
-            if (currentHostDisplay == host_display.disabled || currentHostDisplay == host_display.disable_on_reboot)
-                hostEnableOnNextReboot = false;
+            bool hostCurrentlyEnabled = currentHostDisplay == host_display.enabled || currentHostDisplay == host_display.disable_on_reboot;
+            bool hostEnabledOnNextReboot = currentHostDisplay == host_display.enabled || currentHostDisplay == host_display.enable_on_reboot;
 
-            bool gpuCurrentlyEnabled = true;
-            bool gpuEnableOnNextReboot = true;
-
-            if (currentPgpuDom0Access == pgpu_dom0_access.disabled || currentPgpuDom0Access == pgpu_dom0_access.enable_on_reboot)
-                gpuCurrentlyEnabled = false;
-            if (currentPgpuDom0Access == pgpu_dom0_access.disabled || currentPgpuDom0Access == pgpu_dom0_access.disable_on_reboot)
-                gpuEnableOnNextReboot = false;
+            bool gpuCurrentlyEnabled = currentPgpuDom0Access == pgpu_dom0_access.enabled || currentPgpuDom0Access == pgpu_dom0_access.disable_on_reboot;
+            bool gpuEnabledOnNextReboot = currentPgpuDom0Access == pgpu_dom0_access.enabled || currentPgpuDom0Access == pgpu_dom0_access.enable_on_reboot;
 
             integratedGpuCurrentlyEnabled = hostCurrentlyEnabled && gpuCurrentlyEnabled;
-            integratedGpuCurrentlyEnableOnNextReboot = hostEnableOnNextReboot && gpuEnableOnNextReboot;
+            integratedGpuCurrentlyEnabledOnNextReboot = hostEnabledOnNextReboot && gpuEnabledOnNextReboot;
 
             labelCurrentState.Text = (integratedGpuCurrentlyEnabled)
                                          ? Messages.INTEGRATED_GPU_PASSTHROUGH_ENABLED
                                          : Messages.INTEGRATED_GPU_PASSTHROUGH_DISABLED;
 
-            radioButtonEnable.Checked = integratedGpuCurrentlyEnableOnNextReboot;
-            radioButtonDisable.Checked = !integratedGpuCurrentlyEnableOnNextReboot;
+            radioButtonEnable.Checked = integratedGpuCurrentlyEnabledOnNextReboot;
+            radioButtonDisable.Checked = !integratedGpuCurrentlyEnabledOnNextReboot;
         }
     }
 }
