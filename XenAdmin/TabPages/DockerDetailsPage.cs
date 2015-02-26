@@ -50,7 +50,7 @@ namespace XenAdmin.TabPages
         private Host host;
         private string cachedResult;
 
-        public DockerContainer Container
+        public DockerContainer DockerContainer
         {
             get
             {

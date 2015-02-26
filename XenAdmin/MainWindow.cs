@@ -1852,11 +1852,11 @@ namespace XenAdmin
                 }
                 else if (t == TabPageDockerProcess)
                 {
-                    DockerProcessPage.Container = SelectionManager.Selection.First as DockerContainer;
+                    DockerProcessPage.DockerContainer = SelectionManager.Selection.First as DockerContainer;
                 }
                 else if (t == TabPageDockerDetails)
                 {
-                    DockerDetailsPage.Container = SelectionManager.Selection.First as DockerContainer;
+                    DockerDetailsPage.DockerContainer = SelectionManager.Selection.First as DockerContainer;
                 }
             }
 
