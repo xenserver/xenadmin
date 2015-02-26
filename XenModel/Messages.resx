@@ -11628,11 +11628,20 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="VM_APPLIANCE_SUMMARY" xml:space="preserve">
     <value>vApp name:\r\n    {0}\r\n\r\nSelected VMs:\r\n    {1}</value>
   </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_CANNOT_RETRIEVE_DEFAULT" xml:space="preserve">
+    <value>Unable to retrieve the default cloud-config parameters.</value>
+  </data>
   <data name="VM_CLOUD_CONFIG_DRIVE_INCLUDED" xml:space="preserve">
     <value>Config drive included</value>
   </data>
   <data name="VM_CLOUD_CONFIG_DRIVE_NOT_INCLUDED" xml:space="preserve">
     <value>Config drive not included</value>
+  </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_READONLY" xml:space="preserve">
+    <value>The cloud-config parameters can only be changed when the VM is shut down.</value>
+  </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_UNAVAILABLE" xml:space="preserve">
+    <value>The cloud-config parameters could not be retrieved.</value>
   </data>
   <data name="VM_ENLIGHTENMENT" xml:space="preserve">
     <value>Container Management</value>
