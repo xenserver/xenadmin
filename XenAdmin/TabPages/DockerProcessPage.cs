@@ -60,7 +60,7 @@ namespace XenAdmin.TabPages
             RefreshTimer.Interval = REFRESH_INTERVAL;
         }
 
-        public DockerContainer Container
+        public DockerContainer DockerContainer
         {
             get
             {
