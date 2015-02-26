@@ -8760,6 +8760,13 @@ The update is installed on '{1}', but the update installation file may have sinc
 
 Upload the update from an .xsupdate file instead.</value>
   </data>
+  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED" xml:space="preserve">
+    <value>Failed to download the update {0} from '{1}'.
+
+The update has previously been uploaded to '{1}', but the update installation file may have since been deleted.
+
+Upload the update from an .xsupdate file instead.</value>
+  </data>
   <data name="PATCH_EXPANDED_DESCRIPTION" xml:space="preserve">
     <value>{0} 
 Date modified: {1}
@@ -12641,12 +12648,5 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
-  </data>
-  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED" xml:space="preserve">
-    <value>Failed to download the update {0} from '{1}'.
-
-The update has previously been uploaded to '{1}', but the update installation file may have since been deleted.
-
-Upload the update from an .xsupdate file instead.</value>
   </data>
 </root>
