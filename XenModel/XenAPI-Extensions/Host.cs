@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 using Citrix.XenCenter;
 using XenAdmin;
@@ -416,6 +417,16 @@ namespace XenAPI
         public static bool RestrictVgpu(Host h)
         {
             return h._RestrictVgpu;
+        }
+
+        private bool _RestrictIntegratedGpuPassthrough
+        {
+            get { return BoolKeyPreferTrue(license_params, "restrict_integrated_gpu_passthrough"); }
+        }
+
+        public static bool RestrictIntegratedGpuPassthrough(Host h)
+        {
+            return h._RestrictIntegratedGpuPassthrough;
         }
 
         private bool _RestrictExportResourceData
@@ -1537,6 +1548,31 @@ namespace XenAPI
             }
         }
         #endregion
+
+        /// <summary>
+        /// The PGPU that is the system display device or null
+        /// </summary>
+        public PGPU SystemDisplayDevice
+        {
+            get
+            {
+                var pGpus = Connection.ResolveAll(PGPUs);
+                return pGpus.FirstOrDefault(pGpu => pGpu.is_system_display_device);
+            }
+        }
+
+        /// <summary>
+        /// Is the host allowed to enable/disable integrated GPU passthrough or is the feature unavailable/restricted?
+        /// </summary>
+        public bool CanEnableDisableIntegratedGpu
+        {
+            get
+            {
+                return Helpers.CreamOrGreater(Connection)
+                    && Helpers.GpuCapability(Connection)
+                    && !Helpers.FeatureForbidden(Connection, RestrictIntegratedGpuPassthrough);
+            }
+        }
 
         #region IEquatable<Host> Members
 

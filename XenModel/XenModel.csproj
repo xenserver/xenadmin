@@ -57,6 +57,7 @@
     <Compile Include="Actions\Action.cs" />
     <Compile Include="Actions\CancellingAction.cs" />
     <Compile Include="Actions\DockerContainer\DockerContainerLifetimeAction.cs" />
+    <Compile Include="Actions\DockerContainer\ExecuteContainerPluginAction.cs" />
     <Compile Include="Actions\DockerContainer\VMEnlightenmentAction.cs" />
     <Compile Include="Actions\DR\GetMetadataVDIsAction.cs" />
     <Compile Include="Actions\DR\DrTaskCreateAction.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Actions\Host\ShutdownHostAction.cs" />
     <Compile Include="Actions\Host\SystemStatusAction.cs" />
     <Compile Include="Actions\Host\TestLocationInstallerAction.cs" />
+    <Compile Include="Actions\Host\UpdateIntegratedGpuPassthroughAction.cs" />
     <Compile Include="Actions\Message\DestroyMessageAction.cs" />
     <Compile Include="Actions\Host\HostBackupRestoreAction.cs" />
     <Compile Include="Actions\Host\SingleHostStatusAction.cs" />
@@ -320,10 +322,12 @@
     <Compile Include="XenAPI\bond_mode.cs" />
     <Compile Include="XenAPI\DR_task.cs" />
     <Compile Include="XenAPI\GPU_group.cs" />
+    <Compile Include="XenAPI\host_display.cs" />
     <Compile Include="XenAPI\ipv6_configuration_mode.cs" />
     <Compile Include="XenAPI\network_default_locking_mode.cs" />
     <Compile Include="XenAPI\PCI.cs" />
     <Compile Include="XenAPI\PGPU.cs" />
+    <Compile Include="XenAPI\pgpu_dom0_access.cs" />
     <Compile Include="XenAPI\primary_address_type.cs" />
     <Compile Include="XenAPI\VGPU.cs" />
     <Compile Include="XenAPI\VGPU_type.cs" />

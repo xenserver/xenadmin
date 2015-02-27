@@ -169,7 +169,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             bool canEdit = inNewVmWizard || vmOrTemplate.is_a_template ||
                            vmOrTemplate.power_state == vm_power_state.Halted;
 
-            ConfigDriveTemplateLabel.Enabled = ConfigDriveTemplateTextBox.Enabled = canEdit;
+            ConfigDriveTemplateTextBox.ReadOnly = !canEdit;
             warningsTable.Visible = !canEdit;
         }
 

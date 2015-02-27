@@ -13,9 +13,6 @@ namespace XenAdmin.TabPages
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            // Deregister listeners.
-            DockerContainer = null;
-
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -48,7 +45,7 @@ namespace XenAdmin.TabPages
             this.ColumnPID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnCommand = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnCPUTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.RefreshTimer = new System.Windows.Forms.Timer(this.components);
             this.pageContainerPanel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -123,8 +120,8 @@ namespace XenAdmin.TabPages
             this.panel1.Name = "panel1";
             // 
             // listView1
-            //
-            this.listView1.AllowColumnReorder = true; 
+            // 
+            this.listView1.AllowColumnReorder = true;
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ColumnPID,
             this.ColumnCommand,
@@ -147,10 +144,10 @@ namespace XenAdmin.TabPages
             // 
             resources.ApplyResources(this.ColumnCPUTime, "ColumnCPUTime");
             // 
-            // timer1
+            // RefreshTimer
             // 
-            this.timer1.Interval = 20000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.RefreshTimer.Interval = 20000;
+            this.RefreshTimer.Tick += new System.EventHandler(this.RefreshTimer_Tick);
             // 
             // DockerProcessPage
             // 
@@ -182,7 +179,7 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label labelRefresh;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer RefreshTimer;
         private XenAdmin.Controls.ListViewEx listView1;
         private System.Windows.Forms.ColumnHeader ColumnPID;
         private System.Windows.Forms.ColumnHeader ColumnCommand;
