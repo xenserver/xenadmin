@@ -33605,6 +33605,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to retrieve the default cloud-config parameters..
+        /// </summary>
+        public static string VM_CLOUD_CONFIG_DRIVE_CANNOT_RETRIEVE_DEFAULT {
+            get {
+                return ResourceManager.GetString("VM_CLOUD_CONFIG_DRIVE_CANNOT_RETRIEVE_DEFAULT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Config drive included.
         /// </summary>
         public static string VM_CLOUD_CONFIG_DRIVE_INCLUDED {
@@ -33619,6 +33628,24 @@ namespace XenAdmin {
         public static string VM_CLOUD_CONFIG_DRIVE_NOT_INCLUDED {
             get {
                 return ResourceManager.GetString("VM_CLOUD_CONFIG_DRIVE_NOT_INCLUDED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The cloud-config parameters can only be changed when the VM is shut down..
+        /// </summary>
+        public static string VM_CLOUD_CONFIG_DRIVE_READONLY {
+            get {
+                return ResourceManager.GetString("VM_CLOUD_CONFIG_DRIVE_READONLY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The cloud-config parameters could not be retrieved..
+        /// </summary>
+        public static string VM_CLOUD_CONFIG_DRIVE_UNAVAILABLE {
+            get {
+                return ResourceManager.GetString("VM_CLOUD_CONFIG_DRIVE_UNAVAILABLE", resourceCulture);
             }
         }
         

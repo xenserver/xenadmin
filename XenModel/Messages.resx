@@ -8756,6 +8756,13 @@ The update is installed on '{1}', but the update installation file may have sinc
 
 Upload the update from an .xsupdate file instead.</value>
   </data>
+  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED" xml:space="preserve">
+    <value>Failed to download the update {0} from '{1}'.
+
+The update has previously been uploaded to '{1}', but the update installation file may have since been deleted.
+
+Upload the update from an .xsupdate file instead.</value>
+  </data>
   <data name="PATCH_EXPANDED_DESCRIPTION" xml:space="preserve">
     <value>{0} 
 Date modified: {1}
@@ -11635,11 +11642,20 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="VM_APPLIANCE_SUMMARY" xml:space="preserve">
     <value>vApp name:\r\n    {0}\r\n\r\nSelected VMs:\r\n    {1}</value>
   </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_CANNOT_RETRIEVE_DEFAULT" xml:space="preserve">
+    <value>Unable to retrieve the default cloud-config parameters.</value>
+  </data>
   <data name="VM_CLOUD_CONFIG_DRIVE_INCLUDED" xml:space="preserve">
     <value>Config drive included</value>
   </data>
   <data name="VM_CLOUD_CONFIG_DRIVE_NOT_INCLUDED" xml:space="preserve">
     <value>Config drive not included</value>
+  </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_READONLY" xml:space="preserve">
+    <value>The cloud-config parameters can only be changed when the VM is shut down.</value>
+  </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_UNAVAILABLE" xml:space="preserve">
+    <value>The cloud-config parameters could not be retrieved.</value>
   </data>
   <data name="VM_ENLIGHTENMENT" xml:space="preserve">
     <value>Container Management</value>
@@ -12639,12 +12655,5 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
-  </data>
-  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED" xml:space="preserve">
-    <value>Failed to download the update {0} from '{1}'.
-
-The update has previously been uploaded to '{1}', but the update installation file may have since been deleted.
-
-Upload the update from an .xsupdate file instead.</value>
   </data>
 </root>
