@@ -243,6 +243,16 @@ namespace XenAPI
             return h._RestrictCheckpoint;
         }
 
+        public static bool RestrictCifs(Host h)
+        {
+            return h._RestrictCifs;
+        }
+
+        private bool _RestrictCifs
+        {
+            get { return BoolKeyPreferTrue(license_params, "restrict_cifs"); }
+        }
+
         private bool _RestrictWLB
         {
             get { return BoolKeyPreferTrue(license_params, "restrict_wlb"); }

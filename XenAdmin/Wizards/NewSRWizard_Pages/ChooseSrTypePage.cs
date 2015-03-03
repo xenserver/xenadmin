@@ -61,6 +61,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             radioButtonNfsIso.Tag = new SrWizardType_NfsIso();
             radioButtonCifsIso.Tag = new SrWizardType_CifsIso();
             radioButtonCslg.Tag = new SrWizardType_Cslg();
+            radioButtonCifs.Tag = new SrWizardType_Cifs();
         }
 
         private void SetupDeprecationBanner(bool visible)
@@ -88,6 +89,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public override void PopulatePage()
         {
             radioButtonCslg.Visible = !Helpers.CreedenceOrGreater(Connection); //Hide iSL radio button for Creedence or higher (StorageLink is not supported)
+
+            radioButtonCifs.Enabled = Connection != null && Helpers.GetMaster(Connection) != null && !Host.RestrictCifs(Helpers.GetMaster(Connection));
 
             foreach (var radioButton in RadioButtons)
             {
@@ -214,7 +217,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
         private RadioButton[] RadioButtons
         {
-            get { return new[] { radioButtonNfs, radioButtonIscsi, radioButtonFibreChannel, radioButtonCslg, radioButtonNfsIso, radioButtonCifsIso }; }
+            get { return new[] { radioButtonNfs, radioButtonIscsi, radioButtonFibreChannel, radioButtonCslg, radioButtonNfsIso, radioButtonCifsIso, radioButtonCifs }; }
         }
 
         public void PreselectNewSrWizardType(Type type)

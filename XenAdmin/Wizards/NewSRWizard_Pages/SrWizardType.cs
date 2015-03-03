@@ -265,6 +265,27 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         }
     }
 
+    public class SrWizardType_Cifs : SrWizardType
+    {
+        public override IEnumerable<string> Errors
+        {
+            get { return new[] { Failure.SR_BACKEND_FAILURE_72, Failure.SR_BACKEND_FAILURE_140, Failure.SR_BACKEND_FAILURE_222 }; }
+        }
+
+        public override bool IsEnhancedSR { get { return false; } }
+        public override string FrontendBlurb { get { return Messages.NEWSR_CIFS_BLURB; } }
+        public override SR.SRTypes Type { get { return SR.SRTypes.cifs; } }
+        public override string ContentType { get { return ""; } }
+        public override bool ShowIntroducePrompt { get { return false; } }
+        public override bool ShowReattachWarning { get { return false; } }
+        public override bool AllowToCreateNewSr { get { return true; } set { } }
+
+        public override void ResetSrName(IXenConnection connection)
+        {
+            SrName = SrWizardHelpers.DefaultSRName(Messages.SRWIZARD_CIFS_STORAGE, connection);
+        }
+    }
+
     public class SrWizardType_Cslg : SrWizardType
     {
         public override bool IsEnhancedSR { get { return true; } }
