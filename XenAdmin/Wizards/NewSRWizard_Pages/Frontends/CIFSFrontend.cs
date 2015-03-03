@@ -92,7 +92,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             OnPageUpdated();
         }
 
-        private void CifsServerPathTextBox_TextChanged(object sender, EventArgs e)
+        private void AnyCifsParameters_TextChanged(object sender, EventArgs e)
         {
             CifsScanButton.Enabled = SrWizardHelpers.ValidateCifsSharename(CifsServerPathTextBox.Text);
 
@@ -122,36 +122,35 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         private void buttonCifsScan_Click(object sender, EventArgs e)
         {
-            CifsScanButton.Enabled = false;
-
-            // Perform an SR.probe to see if there is already an SR present
-            Dictionary<String, String> dconf = new Dictionary<String, String>();
-            string[] fullpath = CifsServerPathTextBox.Text.Split(new char[] { ':' });
-            dconf[SERVER] = fullpath[0];
-            if (fullpath.Length > 1)
-            {
-                dconf[SERVERPATH] = fullpath[1];
-            }
-
-            if (userNameTextBox.Text.Trim().Length > 0 || passwordTextBox.Text.Trim().Length > 0)
-            {
-                dconf["username"] = userNameTextBox.Text;
-                dconf["password"] = passwordTextBox.Text;
-            }
-
-            Host master = Helpers.GetMaster(Connection);
-            if (master == null)
-                return;
-
-            // Start probe
-            SrProbeAction action = new SrProbeAction(Connection, master, SR.SRTypes.cifs, dconf);
-            ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
-            dialog.ShowCancel = true;
-            dialog.ShowDialog(this);
-
             try
             {
-                CifsScanButton.Enabled = true;
+                CifsScanButton.Enabled = false;
+
+                // Perform an SR.probe to see if there is already an SR present
+                Dictionary<String, String> dconf = new Dictionary<String, String>();
+                string[] fullpath = CifsServerPathTextBox.Text.Split(new char[] { ':' });
+                dconf[SERVER] = fullpath[0];
+                if (fullpath.Length > 1)
+                {
+                    dconf[SERVERPATH] = fullpath[1];
+                }
+
+                if (userNameTextBox.Text.Trim().Length > 0 || passwordTextBox.Text.Trim().Length > 0)
+                {
+                    dconf["username"] = userNameTextBox.Text;
+                    dconf["password"] = passwordTextBox.Text;
+                }
+
+                Host master = Helpers.GetMaster(Connection);
+                if (master == null)
+                    return;
+
+                // Start probe
+                SrProbeAction action = new SrProbeAction(Connection, master, SR.SRTypes.cifs, dconf);
+                ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
+                dialog.ShowCancel = true;
+                dialog.ShowDialog(this);
+
                 if (radioButtonCifsNew.Enabled)
                     radioButtonCifsNew.Checked = true;
 

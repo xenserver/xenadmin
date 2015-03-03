@@ -90,7 +90,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         {
             radioButtonCslg.Visible = !Helpers.CreedenceOrGreater(Connection); //Hide iSL radio button for Creedence or higher (StorageLink is not supported)
 
-            radioButtonCifs.Enabled = Connection != null && Helpers.GetMaster(Connection) != null && !Host.RestrictCifs(Helpers.GetMaster(Connection));
+            radioButtonCifs.Enabled = !Helpers.FeatureForbidden(Connection, Host.RestrictCifs);
 
             foreach (var radioButton in RadioButtons)
             {

@@ -101,7 +101,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             // 
             resources.ApplyResources(this.CifsServerPathTextBox, "CifsServerPathTextBox");
             this.CifsServerPathTextBox.Name = "CifsServerPathTextBox";
-            this.CifsServerPathTextBox.TextChanged += new System.EventHandler(this.CifsServerPathTextBox_TextChanged);
+            this.CifsServerPathTextBox.TextChanged += new System.EventHandler(this.AnyCifsParameters_TextChanged);
             // 
             // tableLayoutPanel1
             // 
@@ -125,6 +125,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             resources.ApplyResources(this.passwordTextBox, "passwordTextBox");
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.UseSystemPasswordChar = true;
+            this.passwordTextBox.TextChanged += new System.EventHandler(this.AnyCifsParameters_TextChanged);
             // 
             // label4
             // 
@@ -142,6 +143,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             // 
             resources.ApplyResources(this.userNameTextBox, "userNameTextBox");
             this.userNameTextBox.Name = "userNameTextBox";
+            this.userNameTextBox.TextChanged += new System.EventHandler(this.AnyCifsParameters_TextChanged);
             // 
             // CifsFrontend
             // 
