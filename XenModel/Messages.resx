@@ -7615,6 +7615,9 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NEWSR_ACTION" xml:space="preserve">
     <value>NFS SR [{0}]</value>
   </data>
+  <data name="NEWSR_CIFS_BLURB" xml:space="preserve">
+    <value>Select this option if you have a Windows (CIFS) share that you wish to attach to your host or pool.</value>
+  </data>
   <data name="NEWSR_CIFS_ISO_BLURB" xml:space="preserve">
     <value>Select this option if you have a library of VM installation ISO images available as a Windows (CIFS) share that you wish to attach to your host or pool.</value>
   </data>
@@ -7781,7 +7784,7 @@ VM cloning uses the snapshot and clone capabilities of the filer to provide high
   <data name="NEWSR_NFS_ISO_BLURB" xml:space="preserve">
     <value>Select this option if you have a library of VM installation ISO images available as a NFS share that you wish to attach to your host or pool.</value>
   </data>
-  <data name="NEWSR_NFS_NO_SRS_FOUND" xml:space="preserve">
+  <data name="NEWSR_NO_SRS_FOUND" xml:space="preserve">
     <value>&lt;No SRs were found&gt;</value>
   </data>
   <data name="NEWSR_NOWHERE_TO_CREATE" xml:space="preserve">
@@ -7792,6 +7795,9 @@ VM cloning uses the snapshot and clone capabilities of the filer to provide high
   </data>
   <data name="NEWSR_NO_LUNS_FOUND" xml:space="preserve">
     <value>No LUNs were found on {0}.</value>
+  </data>
+  <data name="NEWSR_PATH_CIFS" xml:space="preserve">
+    <value>Enter a path for your CIFS storage</value>
   </data>
   <data name="NEWSR_PATH_ISCSI" xml:space="preserve">
     <value>Enter a path for your iSCSI storage</value>
@@ -10184,6 +10190,9 @@ Do you want to connect to the pool master '{1}'?</value>
   </data>
   <data name="SRWIZARD_CIFS_LIBRARY" xml:space="preserve">
     <value>CIFS ISO library</value>
+  </data>
+  <data name="SRWIZARD_CIFS_STORAGE" xml:space="preserve">
+    <value>CIFS virtual storage</value>
   </data>
   <data name="SRWIZARD_ISCSI_STORAGE" xml:space="preserve">
     <value>iSCSI virtual disk storage</value>

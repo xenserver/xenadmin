@@ -113,7 +113,7 @@ namespace XenAdmin.Actions
             log.DebugFormat("is shared='{0}'", _srIsShared);
 
             string secretuuid = null;
-            if (Helpers.MidnightRideOrGreater(Connection))
+            if (Helpers.MidnightRideOrGreater(Connection) && _srType != XenAPI.SR.SRTypes.cifs) //TEMPORARY: cifs SRs will not use XAPI Secret until development work has been finished. For CP-11364 revert this line. 
             {
                 string value;
                 if (_dconf.TryGetValue("cifspassword", out value))
@@ -128,6 +128,14 @@ namespace XenAdmin.Actions
                 {
                     secretuuid = CreateSecret("chappassword", value);
                 }
+            }
+
+            if (Helpers.MidnightRideOrGreater(Connection))
+            {
+                string tempvalue;
+                System.Diagnostics.Debug.Assert(!_dconf.TryGetValue("password", out tempvalue), "The device config contains 'password', but it should have already been removed!");
+                System.Diagnostics.Debug.Assert(!_dconf.TryGetValue("cifspassword", out tempvalue), "The device config contains 'cifspassword', but it should have already been removed!");
+                System.Diagnostics.Debug.Assert(!_dconf.TryGetValue("chappassword", out tempvalue), "The device config contains 'chappassword', but it should have already been removed!");
             }
 
             if (_srType == SR.SRTypes.cslg && !Helpers.BostonOrGreater(Connection))

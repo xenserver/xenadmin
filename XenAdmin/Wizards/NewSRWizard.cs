@@ -52,6 +52,7 @@ namespace XenAdmin.Wizards
         #region Wizard pages
         private readonly NewSrWizardNamePage xenTabPageSrName;
         private readonly CIFS_ISO xenTabPageCifsIso;
+        private readonly CifsFrontend xenTabPageCifs;
         private readonly CSLG xenTabPageCslg;
         private readonly VHDoNFS xenTabPageVhdoNFS;
         private readonly NFS_ISO xenTabPageNfsIso;
@@ -103,6 +104,7 @@ namespace XenAdmin.Wizards
 
             xenTabPageSrName = new NewSrWizardNamePage();
             xenTabPageCifsIso = new CIFS_ISO();
+            xenTabPageCifs = new CifsFrontend();
             xenTabPageCslg = new CSLG();
             xenTabPageVhdoNFS = new VHDoNFS();
             xenTabPageNfsIso = new NFS_ISO();
@@ -305,6 +307,8 @@ namespace XenAdmin.Wizards
                 }
                 else if (m_srWizardType is SrWizardType_CifsIso)
                     AddPage(xenTabPageCifsIso);
+                else if (m_srWizardType is SrWizardType_Cifs)
+                    AddPage(xenTabPageCifs);
                 else if (m_srWizardType is SrWizardType_NfsIso)
                     AddPage(xenTabPageNfsIso);
 
@@ -333,12 +337,19 @@ namespace XenAdmin.Wizards
                     xenTabPageCifsIso.SrWizardType = m_srWizardType;
                 else if (m_srWizardType is SrWizardType_NfsIso)
                     xenTabPageNfsIso.SrWizardType = m_srWizardType;
+                else if (m_srWizardType is SrWizardType_Cifs)
+                    xenTabPageCifs.SrWizardType = m_srWizardType;
                 #endregion
             }
             else if (senderPagetype == typeof(CIFS_ISO))
             {
                 m_srWizardType.DeviceConfig = xenTabPageCifsIso.DeviceConfig;
                 SetCustomDescription(m_srWizardType, xenTabPageCifsIso.SrDescription);
+            }
+            else if (senderPagetype == typeof(CifsFrontend))
+            {
+                m_srWizardType.DeviceConfig = xenTabPageCifs.DeviceConfig;
+                SetCustomDescription(m_srWizardType, xenTabPageCifs.SrDescription);
             }
             else if (senderPagetype == typeof(LVMoISCSI))
             {
