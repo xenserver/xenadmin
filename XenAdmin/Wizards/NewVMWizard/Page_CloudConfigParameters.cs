@@ -178,14 +178,12 @@ namespace XenAdmin.Wizards.NewVMWizard
             // IncludeConfigDriveCheckBox and reloadDefaults only visible in the New VM Wizard
             IncludeConfigDriveCheckBox.Visible = reloadDefaults.Visible = inNewVmWizard;
 
-            // the cloud config cannot be edited on non-halted VMs
-            bool canEdit = inNewVmWizard || vmOrTemplate.is_a_template ||
-                           vmOrTemplate.power_state == vm_power_state.Halted;
-
-            canEdit = canEdit && !errorRetrievingConfigParameters;
+            // for existing VMs, the cloud config cannot be edited on non-halted VMs or when we failed to retrive the existing cloud config parameters
+            bool canEdit = inNewVmWizard ||
+                           !errorRetrievingConfigParameters && (vmOrTemplate.is_a_template || vmOrTemplate.power_state == vm_power_state.Halted);
 
             ConfigDriveTemplateTextBox.ReadOnly = !canEdit;
-            warningsTable.Visible = !canEdit;
+            warningsTable.Visible = errorRetrievingConfigParameters || !canEdit;
             labelWarning.Text = errorRetrievingConfigParameters ? Messages.VM_CLOUD_CONFIG_DRIVE_UNAVAILABLE : Messages.VM_CLOUD_CONFIG_DRIVE_READONLY;
         }
 
