@@ -78,8 +78,8 @@ namespace XenAdmin.Actions
             }
             catch (Failure failure)
             {
-                log.WarnFormat("Plugin call install-supp-pack.install({0}) on {1} failed with {2}", vdi.uuid, host.Name, failure.Message);
-                log.WarnFormat("Supplemental pack installation error description: {0}", string.Join(";", failure.ErrorDescription));
+                log.ErrorFormat("Plugin call install-supp-pack.install({0}) on {1} failed with {2}", vdi.uuid, host.Name, failure.Message);
+                log.ErrorFormat("Supplemental pack installation error description: {0}", string.Join(";", failure.ErrorDescription));
                 throw new SupplementalPackInstallFailedException(string.Format(Messages.SUPP_PACK_INSTALL_FAILED, vdi.Name, host.Name), failure);
             }
             finally

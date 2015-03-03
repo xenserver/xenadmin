@@ -31715,7 +31715,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Installing update {0} to {1} ... .
+        ///   Looks up a localized string similar to Installing update {0} to {1}... .
         /// </summary>
         public static string UPDATES_WIZARD_APPLYING_UPDATE {
             get {
@@ -31724,7 +31724,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Installing update to {0} servers.
+        ///   Looks up a localized string similar to Installing update to {0} servers....
         /// </summary>
         public static string UPDATES_WIZARD_APPLYING_UPDATE_MULTIPLE_HOSTS {
             get {
