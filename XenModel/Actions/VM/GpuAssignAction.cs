@@ -66,9 +66,9 @@ namespace XenAdmin.Actions
             string device = "0";  // fixed at the moment, see PR-1060
             Dictionary<string, string> other_config = new Dictionary<string,string>();
 
-            if (Helpers.FeatureForbidden(vm, Host.RestrictVgpu))
+            if (Helpers.FeatureForbidden(vm, Host.RestrictVgpu) || vgpuType == null)
                 VGPU.async_create(Session, vm.opaque_ref, gpu_group.opaque_ref, device, other_config);
-            else if (vgpuType != null)
+            else
                 VGPU.async_create(Session, vm.opaque_ref, gpu_group.opaque_ref, device,
                                   other_config, vgpuType.opaque_ref);
         }
