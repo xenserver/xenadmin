@@ -458,7 +458,7 @@ namespace XenAPI
         private bool _PV_drivers_up_to_date;
 
         /// <summary>
-        /// free/used/total memory
+        /// This field exists but has no data. Use the memory and memory_internal_free RRD data-sources instead.
         /// </summary>
         public virtual Dictionary<string, string> memory
         {
@@ -476,7 +476,7 @@ namespace XenAPI
         private Dictionary<string, string> _memory;
 
         /// <summary>
-        /// disk configuration/free space
+        /// This field exists but has no data.
         /// </summary>
         public virtual Dictionary<string, string> disks
         {

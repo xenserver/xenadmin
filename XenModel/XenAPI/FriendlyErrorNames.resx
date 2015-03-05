@@ -543,6 +543,9 @@
   <data name="JOINING_HOST_CANNOT_BE_MASTER_OF_OTHER_HOSTS" xml:space="preserve">
     <value>The server joining the pool cannot already be a master of another pool.</value>
   </data>
+  <data name="JOINING_HOST_CANNOT_CONTAIN_NETWORK_BOND" xml:space="preserve">
+    <value>The host joining the pool cannot contain any network bond.</value>
+  </data>
   <data name="JOINING_HOST_CANNOT_CONTAIN_SHARED_SRS" xml:space="preserve">
     <value>The server joining the pool cannot contain any shared storage.</value>
   </data>
@@ -699,6 +702,9 @@
   <data name="PATCH_PRECHECK_FAILED_ISO_MOUNTED" xml:space="preserve">
     <value>XenServer Tools ISO must be ejected from all running VMs.</value>
   </data>
+  <data name="PATCH_PRECHECK_FAILED_OUT_OF_SPACE" xml:space="preserve">
+    <value>The patch precheck stage failed: the server does not have enough space.</value>
+  </data>
   <data name="PATCH_PRECHECK_FAILED_PREREQUISITE_MISSING" xml:space="preserve">
     <value>The update precheck stage failed: prerequisite updates are missing.</value>
   </data>
@@ -751,7 +757,7 @@
     <value>PIF has no network configuration</value>
   </data>
   <data name="PIF_HAS_NO_V6_NETWORK_CONFIGURATION" xml:space="preserve">
-    <value>PIF has no IPv6 configuration (mode curently set to 'none')</value>
+    <value>PIF has no IPv6 configuration (mode currently set to 'none')</value>
   </data>
   <data name="PIF_INCOMPATIBLE_PRIMARY_ADDRESS_TYPE" xml:space="preserve">
     <value>The primary address types are not compatible</value>
@@ -916,6 +922,18 @@ Authorized Roles: {1}</value>
   </data>
   <data name="SR_BACKEND_FAILURE_110" xml:space="preserve">
     <value>VDI resize failed</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_111" xml:space="preserve">
+    <value>CIFS mount error</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_112" xml:space="preserve">
+    <value>CIFS unmount error</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_113" xml:space="preserve">
+    <value>CIFS mount point already attached</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_114" xml:space="preserve">
+    <value>Failed to remove CIFS mount point</value>
   </data>
   <data name="SR_BACKEND_FAILURE_120" xml:space="preserve">
     <value>Netapp Target parameter missing in Dconf string</value>
@@ -1245,7 +1263,22 @@ Authorized Roles: {1}</value>
     <value>Unsupported kernel: neither 2.6 nor 3.x.</value>
   </data>
   <data name="SR_BACKEND_FAILURE_449" xml:space="preserve">
+    <value>Only 1 LUN may be used with shared OCFS</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_450" xml:space="preserve">
+    <value>OCFS mount error</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_451" xml:space="preserve">
+    <value>OCFS unmount error</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_452" xml:space="preserve">
+    <value>OCFS filesystem creation error</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_453" xml:space="preserve">
     <value>tapdisk experienced an error</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_454" xml:space="preserve">
+    <value>CIFS SR is not licensed on this host</value>
   </data>
   <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
     <value>The VDI is not available</value>
@@ -1497,7 +1530,7 @@ Authorized Roles: {1}</value>
     <value>The uuid you supplied was invalid.</value>
   </data>
   <data name="V6D_FAILURE" xml:space="preserve">
-    <value>There was a problem with the license daemon (v6d). Is it running?</value>
+    <value>There was a problem with the license daemon (v6d).</value>
   </data>
   <data name="VALUE_NOT_SUPPORTED" xml:space="preserve">
     <value>You attempted to set value {1} for field {0} that is not supported. {2}</value>
@@ -1570,6 +1603,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VDI_NOT_SPARSE" xml:space="preserve">
     <value>The VDI is not stored using a sparse format. It is not possible to query and manipulate only the changed blocks (or 'block differences' or 'disk deltas') between two VDIs. Please select a VDI which uses a sparse-aware technology such as VHD.</value>
+  </data>
+  <data name="VDI_ON_BOOT_MODE_INCOMPATIBLE_WITH_OPERATION" xml:space="preserve">
+    <value>This operation is not permitted on VMs containing VDIs in the 'on-boot=reset' mode</value>
   </data>
   <data name="VDI_READONLY" xml:space="preserve">
     <value>The operation required write access but VDI {0} is read-only</value>
