@@ -145,21 +145,34 @@ namespace XenAdmin.TabPages
             {
                 if (cachedResult == currentResult)
                     return;
+
                 cachedResult = currentResult;
                 DetailtreeView.Nodes.Clear();
 
                 XmlDocument doc = new XmlDocument();
                 doc.LoadXml(currentResult);
-                IEnumerator ienum = doc.GetEnumerator();
-                XmlNode docker_inspect;
-                while (ienum.MoveNext())
+                
+                IEnumerator firstEnum = doc.GetEnumerator();
+                XmlNode node;
+                while (firstEnum.MoveNext())
                 {
-                    docker_inspect = (XmlNode) ienum.Current;
-                    if (docker_inspect.NodeType != XmlNodeType.XmlDeclaration)
+                    node = (XmlNode)firstEnum.Current;
+
+                    if (node.NodeType != XmlNodeType.XmlDeclaration)
                     {
-                        TreeNode rootNode = new TreeNode();
-                        CreateTree(docker_inspect, rootNode);
-                        DetailtreeView.Nodes.Add(rootNode);
+                        //we are on the root element now (docker_inspect)
+                        //using the following enumerator to iterate through the children nodes and to build related sub-trees
+                        //note that we are intentionally not adding the root node to the tree (UX decision)
+                        var secondEnum = node.GetEnumerator();
+                        while (secondEnum.MoveNext())
+                        {
+                            //recursively building the tree
+                            TreeNode rootNode = new TreeNode();
+                            CreateTree((XmlNode)secondEnum.Current, rootNode);
+
+                            //adding the current sub-tree to the TreeView
+                            DetailtreeView.Nodes.Add(rootNode);
+                        }
                     }
                 }
             }

@@ -3731,10 +3731,10 @@ This will also delete its subfolders.</value>
     <value>does not use</value>
   </data>
   <data name="DOCKER_DETAIL_TAB_TITLE" xml:space="preserve">
-    <value>Docker Detail</value>
+    <value>Container Details</value>
   </data>
   <data name="DOCKER_PROCESS_TAB_TITLE" xml:space="preserve">
-    <value>Docker Processes</value>
+    <value>Container Processes</value>
   </data>
   <data name="DOCKER_INFO_API_VERSION" xml:space="preserve">
     <value>Api Version</value>

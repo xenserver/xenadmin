@@ -10491,7 +10491,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Docker Detail.
+        ///   Looks up a localized string similar to Container Details.
         /// </summary>
         public static string DOCKER_DETAIL_TAB_TITLE {
             get {
@@ -10698,7 +10698,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Docker Processes.
+        ///   Looks up a localized string similar to Container Processes.
         /// </summary>
         public static string DOCKER_PROCESS_TAB_TITLE {
             get {

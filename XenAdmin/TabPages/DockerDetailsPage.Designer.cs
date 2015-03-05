@@ -34,11 +34,14 @@ namespace XenAdmin.TabPages
             this.ButtonPanel = new System.Windows.Forms.Panel();
             this.RefreshTime = new System.Windows.Forms.Label();
             this.TreePanel = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.DetailtreeView = new System.Windows.Forms.TreeView();
+            this.label1 = new System.Windows.Forms.Label();
             this.RefreshTimer = new System.Windows.Forms.Timer(this.components);
             this.pageContainerPanel.SuspendLayout();
             this.ButtonPanel.SuspendLayout();
             this.TreePanel.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // pageContainerPanel
@@ -68,14 +71,26 @@ namespace XenAdmin.TabPages
             // TreePanel
             // 
             resources.ApplyResources(this.TreePanel, "TreePanel");
-            this.TreePanel.Controls.Add(this.DetailtreeView);
+            this.TreePanel.Controls.Add(this.tableLayoutPanel2);
             this.TreePanel.Controls.Add(this.ButtonPanel);
             this.TreePanel.Name = "TreePanel";
+            // 
+            // tableLayoutPanel2
+            // 
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.Controls.Add(this.DetailtreeView, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
             // DetailtreeView
             // 
             resources.ApplyResources(this.DetailtreeView, "DetailtreeView");
             this.DetailtreeView.Name = "DetailtreeView";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
             // 
             // RefreshTimer
             // 
@@ -91,6 +106,8 @@ namespace XenAdmin.TabPages
             this.ButtonPanel.ResumeLayout(false);
             this.ButtonPanel.PerformLayout();
             this.TreePanel.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -101,8 +118,10 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.Panel TreePanel;
         private System.Windows.Forms.Panel ButtonPanel;
         private System.Windows.Forms.Label RefreshTime;
-        private System.Windows.Forms.TreeView DetailtreeView;
         private System.Windows.Forms.Timer RefreshTimer;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TreeView DetailtreeView;
+        private System.Windows.Forms.Label label1;
 
     }
 }
