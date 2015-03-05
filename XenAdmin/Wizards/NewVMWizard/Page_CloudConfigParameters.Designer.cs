@@ -30,11 +30,11 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Page_CloudConfigParameters));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.ConfigDriveTemplateTextBox = new System.Windows.Forms.TextBox();
-            this.topLabel = new System.Windows.Forms.Label();
             this.warningsTable = new System.Windows.Forms.TableLayoutPanel();
             this.imgStopVM = new System.Windows.Forms.PictureBox();
-            this.labelStopVM = new System.Windows.Forms.Label();
+            this.labelWarning = new System.Windows.Forms.Label();
+            this.topLabel = new System.Windows.Forms.Label();
+            this.ConfigDriveTemplateTextBox = new System.Windows.Forms.TextBox();
             this.ConfigDriveTemplateLabel = new System.Windows.Forms.Label();
             this.IncludeConfigDriveCheckBox = new System.Windows.Forms.CheckBox();
             this.reloadDefaults = new System.Windows.Forms.Button();
@@ -54,26 +54,12 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.tableLayoutPanel1.Controls.Add(this.reloadDefaults, 0, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
-            // ConfigDriveTemplateTextBox
-            // 
-            this.ConfigDriveTemplateTextBox.AcceptsReturn = true;
-            resources.ApplyResources(this.ConfigDriveTemplateTextBox, "ConfigDriveTemplateTextBox");
-            this.ConfigDriveTemplateTextBox.Name = "ConfigDriveTemplateTextBox";
-            this.tableLayoutPanel1.SetRowSpan(this.ConfigDriveTemplateTextBox, 2);
-            this.ConfigDriveTemplateTextBox.TextChanged += new System.EventHandler(this.ConfigDriveTemplateTextBox_TextChanged);
-            // 
-            // topLabel
-            // 
-            resources.ApplyResources(this.topLabel, "topLabel");
-            this.tableLayoutPanel1.SetColumnSpan(this.topLabel, 2);
-            this.topLabel.Name = "topLabel";
-            // 
             // warningsTable
             // 
             resources.ApplyResources(this.warningsTable, "warningsTable");
             this.tableLayoutPanel1.SetColumnSpan(this.warningsTable, 2);
             this.warningsTable.Controls.Add(this.imgStopVM, 0, 0);
-            this.warningsTable.Controls.Add(this.labelStopVM, 1, 0);
+            this.warningsTable.Controls.Add(this.labelWarning, 1, 0);
             this.warningsTable.Name = "warningsTable";
             // 
             // imgStopVM
@@ -83,10 +69,24 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.imgStopVM.Name = "imgStopVM";
             this.imgStopVM.TabStop = false;
             // 
-            // labelStopVM
+            // labelWarning
             // 
-            resources.ApplyResources(this.labelStopVM, "labelStopVM");
-            this.labelStopVM.Name = "labelStopVM";
+            resources.ApplyResources(this.labelWarning, "labelWarning");
+            this.labelWarning.Name = "labelWarning";
+            // 
+            // topLabel
+            // 
+            resources.ApplyResources(this.topLabel, "topLabel");
+            this.tableLayoutPanel1.SetColumnSpan(this.topLabel, 2);
+            this.topLabel.Name = "topLabel";
+            // 
+            // ConfigDriveTemplateTextBox
+            // 
+            this.ConfigDriveTemplateTextBox.AcceptsReturn = true;
+            resources.ApplyResources(this.ConfigDriveTemplateTextBox, "ConfigDriveTemplateTextBox");
+            this.ConfigDriveTemplateTextBox.Name = "ConfigDriveTemplateTextBox";
+            this.tableLayoutPanel1.SetRowSpan(this.ConfigDriveTemplateTextBox, 2);
+            this.ConfigDriveTemplateTextBox.TextChanged += new System.EventHandler(this.ConfigDriveTemplateTextBox_TextChanged);
             // 
             // ConfigDriveTemplateLabel
             // 
@@ -135,6 +135,6 @@ namespace XenAdmin.Wizards.NewVMWizard
         private System.Windows.Forms.Button reloadDefaults;
         private System.Windows.Forms.TableLayoutPanel warningsTable;
         private System.Windows.Forms.PictureBox imgStopVM;
-        private System.Windows.Forms.Label labelStopVM;
+        private System.Windows.Forms.Label labelWarning;
     }
 }

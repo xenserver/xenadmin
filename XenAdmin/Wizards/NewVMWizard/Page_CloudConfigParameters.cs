@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using XenAdmin.Core;
+using XenAdmin.Dialogs;
 using XenAPI;
 using XenAdmin.Controls;
 using XenAdmin.Actions;
@@ -43,6 +44,8 @@ namespace XenAdmin.Wizards.NewVMWizard
 {
     public partial class Page_CloudConfigParameters : XenTabPage, IEditPage
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private VM vmOrTemplate;
         private string existingConfig;
 
@@ -132,7 +135,9 @@ namespace XenAdmin.Wizards.NewVMWizard
             var configDrive = vmOrTemplate.CloudConfigDrive;
             GetCloudConfigParameters(configDrive);
         }
-        
+
+        private bool errorRetrievingConfigParameters;
+
         private void GetCloudConfigParameters(VDI configDrive)
         {
             var defaultConfig = configDrive == null;
@@ -148,11 +153,19 @@ namespace XenAdmin.Wizards.NewVMWizard
                         parameters,
                         true); //hidefromlogs
 
-            action.RunExternal(Connection.Session);
-            var result = action.Result.Replace("\n", Environment.NewLine);
-
-            ConfigDriveTemplateTextBox.Text = result;
-            existingConfig = result;
+            try
+            {
+                action.RunExternal(Connection.Session);
+                var result = action.Result.Replace("\n", Environment.NewLine);
+                ConfigDriveTemplateTextBox.Text = result;
+                existingConfig = result;
+                errorRetrievingConfigParameters = false;
+            }
+            catch (Exception)
+            {
+                log.Warn("Could not get the config drive parameters");
+                errorRetrievingConfigParameters = true;
+            }
         }
 
         private void GetDefaultParameters()
@@ -165,17 +178,20 @@ namespace XenAdmin.Wizards.NewVMWizard
             // IncludeConfigDriveCheckBox and reloadDefaults only visible in the New VM Wizard
             IncludeConfigDriveCheckBox.Visible = reloadDefaults.Visible = inNewVmWizard;
 
-            // the cloud config cannot be edited on non-halted VMs
-            bool canEdit = inNewVmWizard || vmOrTemplate.is_a_template ||
-                           vmOrTemplate.power_state == vm_power_state.Halted;
+            // for existing VMs, the cloud config cannot be edited on non-halted VMs or when we failed to retrive the existing cloud config parameters
+            bool canEdit = inNewVmWizard ||
+                           !errorRetrievingConfigParameters && (vmOrTemplate.is_a_template || vmOrTemplate.power_state == vm_power_state.Halted);
 
             ConfigDriveTemplateTextBox.ReadOnly = !canEdit;
-            warningsTable.Visible = !canEdit;
+            warningsTable.Visible = errorRetrievingConfigParameters || !canEdit;
+            labelWarning.Text = errorRetrievingConfigParameters ? Messages.VM_CLOUD_CONFIG_DRIVE_UNAVAILABLE : Messages.VM_CLOUD_CONFIG_DRIVE_READONLY;
         }
 
         private void reloadDefaults_Click(object sender, EventArgs e)
         {
             GetDefaultParameters();
+            if (errorRetrievingConfigParameters)
+                new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, Messages.VM_CLOUD_CONFIG_DRIVE_CANNOT_RETRIEVE_DEFAULT)).ShowDialog(this);
         }
 
         #region Implementation of IEditPage

@@ -4647,15 +4647,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Applying update to {0} server(s).
-        /// </summary>
-        public static string APPLYING_UPDATE {
-            get {
-                return ResourceManager.GetString("APPLYING_UPDATE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Applying {0} update(s) to {1} server(s).
         /// </summary>
         public static string APPLYING_UPDATES {
@@ -24816,8 +24807,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        ///{0} error..
+        ///   Looks up a localized string similar to {0} error..
         /// </summary>
         public static string PATCHING_WIZARD_ERROR {
             get {
@@ -30433,6 +30423,26 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to install supplemental pack &apos;{0}&apos; on &apos;{1}&apos;..
+        /// </summary>
+        public static string SUPP_PACK_INSTALL_FAILED {
+            get {
+                return ResourceManager.GetString("SUPP_PACK_INSTALL_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}
+        ///
+        ///Refer to the &quot;XenServer Administrator&apos;s Guide&quot; for instructions on how to manually install a supplemental pack on a XenServer host..
+        /// </summary>
+        public static string SUPP_PACK_INSTALL_FAILED_MORE_INFO {
+            get {
+                return ResourceManager.GetString("SUPP_PACK_INSTALL_FAILED_MORE_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} (not installed on {1}).
         /// </summary>
         public static string SUPP_PACK_MISSING_ON {
@@ -31705,11 +31715,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Installing update {0} to {1} ... .
+        ///   Looks up a localized string similar to Installing update {0} to {1}... .
         /// </summary>
         public static string UPDATES_WIZARD_APPLYING_UPDATE {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_APPLYING_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installing update to {0} servers....
+        /// </summary>
+        public static string UPDATES_WIZARD_APPLYING_UPDATE_MULTIPLE_HOSTS {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_APPLYING_UPDATE_MULTIPLE_HOSTS", resourceCulture);
             }
         }
         
@@ -33586,6 +33605,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to retrieve the default cloud-config parameters..
+        /// </summary>
+        public static string VM_CLOUD_CONFIG_DRIVE_CANNOT_RETRIEVE_DEFAULT {
+            get {
+                return ResourceManager.GetString("VM_CLOUD_CONFIG_DRIVE_CANNOT_RETRIEVE_DEFAULT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Config drive included.
         /// </summary>
         public static string VM_CLOUD_CONFIG_DRIVE_INCLUDED {
@@ -33600,6 +33628,24 @@ namespace XenAdmin {
         public static string VM_CLOUD_CONFIG_DRIVE_NOT_INCLUDED {
             get {
                 return ResourceManager.GetString("VM_CLOUD_CONFIG_DRIVE_NOT_INCLUDED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The cloud-config parameters can only be changed when the VM is shut down..
+        /// </summary>
+        public static string VM_CLOUD_CONFIG_DRIVE_READONLY {
+            get {
+                return ResourceManager.GetString("VM_CLOUD_CONFIG_DRIVE_READONLY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The cloud-config parameters could not be retrieved..
+        /// </summary>
+        public static string VM_CLOUD_CONFIG_DRIVE_UNAVAILABLE {
+            get {
+                return ResourceManager.GetString("VM_CLOUD_CONFIG_DRIVE_UNAVAILABLE", resourceCulture);
             }
         }
         
