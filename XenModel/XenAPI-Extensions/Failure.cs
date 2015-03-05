@@ -63,9 +63,14 @@ namespace XenAPI
         public const string SR_BACKEND_FAILURE_72 = "SR_BACKEND_FAILURE_72";
         public const string SR_BACKEND_FAILURE_73 = "SR_BACKEND_FAILURE_73";
         public const string SR_BACKEND_FAILURE_107 = "SR_BACKEND_FAILURE_107";
+        public const string SR_BACKEND_FAILURE_111 = "SR_BACKEND_FAILURE_111";
+        public const string SR_BACKEND_FAILURE_112 = "SR_BACKEND_FAILURE_112";
+        public const string SR_BACKEND_FAILURE_113 = "SR_BACKEND_FAILURE_113";
+        public const string SR_BACKEND_FAILURE_114 = "SR_BACKEND_FAILURE_114";
         public const string SR_BACKEND_FAILURE_140 = "SR_BACKEND_FAILURE_140";
         public const string SR_BACKEND_FAILURE_222 = "SR_BACKEND_FAILURE_222";
         public const string SR_BACKEND_FAILURE_225 = "SR_BACKEND_FAILURE_225";
+        public const string SR_BACKEND_FAILURE_454 = "SR_BACKEND_FAILURE_454";
         public const string SUBJECT_CANNOT_BE_RESOLVED = "SUBJECT_CANNOT_BE_RESOLVED";
         public const string OBJECT_NO_LONGER_EXISTS = "OBJECT_NOLONGER_EXISTS";
         public const string PERMISSION_DENIED = "PERMISSION_DENIED";

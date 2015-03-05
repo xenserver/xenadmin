@@ -269,7 +269,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
     {
         public override IEnumerable<string> Errors
         {
-            get { return new string[] { /* Failure.SR_BACKEND_FAILURE_111, Failure.SR_BACKEND_FAILURE_112, Failure.SR_BACKEND_FAILURE_113, Failure.SR_BACKEND_FAILURE_114, Failure.SR_BACKEND_FAILURE_454 */ }; }
+            get { return new[] { Failure.SR_BACKEND_FAILURE_111, Failure.SR_BACKEND_FAILURE_112, Failure.SR_BACKEND_FAILURE_113, Failure.SR_BACKEND_FAILURE_114, Failure.SR_BACKEND_FAILURE_454 }; }
         }
 
         public override bool IsEnhancedSR { get { return false; } }
