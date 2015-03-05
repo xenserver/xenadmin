@@ -1685,9 +1685,6 @@ Warning: you must ensure that the SR is not in use by any server not connected t
   <data name="APPLYING_PATCH" xml:space="preserve">
     <value>Applying Update '{0}' to Server '{1}'...</value>
   </data>
-  <data name="APPLYING_UPDATE" xml:space="preserve">
-    <value>Applying update to {0} server(s)</value>
-  </data>
   <data name="APPLYING_UPDATES" xml:space="preserve">
     <value>Applying {0} update(s) to {1} server(s)</value>
   </data>
@@ -8727,8 +8724,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>{0,4}{1}</value>
   </data>
   <data name="PATCHING_WIZARD_ERROR" xml:space="preserve">
-    <value>
-{0} error.</value>
+    <value>{0} error.</value>
   </data>
   <data name="PATCHING_WIZARD_HOST_CHECK_OK" xml:space="preserve">
     <value>{0}: {1} ok.</value>
@@ -8757,6 +8753,13 @@ Installation size: {1}</value>
     <value>Failed to download the update {0} from '{1}'.
 
 The update is installed on '{1}', but the update installation file may have since been deleted.
+
+Upload the update from an .xsupdate file instead.</value>
+  </data>
+  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED" xml:space="preserve">
+    <value>Failed to download the update {0} from '{1}'.
+
+The update has previously been uploaded to '{1}', but the update installation file may have since been deleted.
 
 Upload the update from an .xsupdate file instead.</value>
   </data>
@@ -10539,6 +10542,14 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="SUPP_PACK_DESCTIPTION" xml:space="preserve">
     <value>{0} (version {1})</value>
   </data>
+  <data name="SUPP_PACK_INSTALL_FAILED" xml:space="preserve">
+    <value>Failed to install supplemental pack '{0}' on '{1}'.</value>
+  </data>
+  <data name="SUPP_PACK_INSTALL_FAILED_MORE_INFO" xml:space="preserve">
+    <value>{0}
+
+Refer to the "XenServer Administrator's Guide" for instructions on how to manually install a supplemental pack on a XenServer host.</value>
+  </data>
   <data name="SUPP_PACK_MISSING_ON" xml:space="preserve">
     <value>{0} (not installed on {1})</value>
   </data>
@@ -10942,7 +10953,10 @@ Verify that the file is a valid xensearch export.</value>
     <value>Installed update</value>
   </data>
   <data name="UPDATES_WIZARD_APPLYING_UPDATE" xml:space="preserve">
-    <value>Installing update {0} to {1} ... </value>
+    <value>Installing update {0} to {1}... </value>
+  </data>
+  <data name="UPDATES_WIZARD_APPLYING_UPDATE_MULTIPLE_HOSTS" xml:space="preserve">
+    <value>Installing update to {0} servers...</value>
   </data>
   <data name="UPDATES_WIZARD_APPLY_FAILED" xml:space="preserve">
     <value>The update failed to apply.  Would you like to view the output?</value>
@@ -11628,11 +11642,20 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="VM_APPLIANCE_SUMMARY" xml:space="preserve">
     <value>vApp name:\r\n    {0}\r\n\r\nSelected VMs:\r\n    {1}</value>
   </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_CANNOT_RETRIEVE_DEFAULT" xml:space="preserve">
+    <value>Unable to retrieve the default cloud-config parameters.</value>
+  </data>
   <data name="VM_CLOUD_CONFIG_DRIVE_INCLUDED" xml:space="preserve">
     <value>Config drive included</value>
   </data>
   <data name="VM_CLOUD_CONFIG_DRIVE_NOT_INCLUDED" xml:space="preserve">
     <value>Config drive not included</value>
+  </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_READONLY" xml:space="preserve">
+    <value>The cloud-config parameters can only be changed when the VM is shut down.</value>
+  </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_UNAVAILABLE" xml:space="preserve">
+    <value>The cloud-config parameters could not be retrieved.</value>
   </data>
   <data name="VM_ENLIGHTENMENT" xml:space="preserve">
     <value>Container Management</value>
@@ -12632,12 +12655,5 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
-  </data>
-  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED" xml:space="preserve">
-    <value>Failed to download the update {0} from '{1}'.
-
-The update has previously been uploaded to '{1}', but the update installation file may have since been deleted.
-
-Upload the update from an .xsupdate file instead.</value>
   </data>
 </root>
