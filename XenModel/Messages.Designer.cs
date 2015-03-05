@@ -25186,7 +25186,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Updates and Supplemental Packs (*.xsupdate, *.iso)|*.xsupdate;*.iso|XenServer Updates (*.xsupdate)|*.xsupdate|Supplemental Packs (*.iso)|*.iso.
+        ///   Looks up a localized string similar to XenServer Updates and Supplemental Packs (*.xsupdate, *.iso)|*.xsupdate;*.iso.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT {
             get {
@@ -32124,7 +32124,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The selected file does not have a valid extension. Valid extensions are: *.xsoem, *.xsupdate and *.iso.
+        ///   Looks up a localized string similar to The selected file does not have a valid extension. Valid extensions are: *.xsupdate and *.iso.
         /// </summary>
         public static string UPDATES_WIZARD_NOTVALID_EXTENSION {
             get {
