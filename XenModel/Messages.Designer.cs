@@ -25186,7 +25186,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer Updates|*.xsupdate;*.xsoem|Supplemental Packs (*.iso)|*.iso.
+        ///   Looks up a localized string similar to XenServer Updates and Supplemental Packs (*.xsupdate, *.iso)|*.xsupdate;*.iso|XenServer Updates (*.xsupdate)|*.xsupdate|Supplemental Packs (*.iso)|*.iso.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT {
             get {
