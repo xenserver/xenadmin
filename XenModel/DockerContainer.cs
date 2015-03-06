@@ -30,6 +30,8 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Xml;
 using XenAPI;
 using XenAdmin.Core;
 
@@ -302,5 +304,71 @@ namespace XenAdmin.Model
                 return string.Format(Messages.CONTAINER_ON_VM_TITLE, Name, parent.Name, parent.LocationString);
             }
         }
+
+        public List<DockerContainerPort> PortList
+        {
+            get
+            {
+                var portList = new List<DockerContainerPort>();
+                if (string.IsNullOrEmpty(ports))
+                    return portList;
+
+                var xmlDoc = new XmlDocument();
+                try
+                {
+                    xmlDoc.LoadXml("<items>" + ports + "</items>"); // wrap the ports into a root node
+                    var items = xmlDoc.GetElementsByTagName("item");
+
+                    foreach (XmlNode node in items)
+                    {
+                        var item = new DockerContainerPort();
+                        foreach (XmlNode child in node.ChildNodes)
+                        {
+                            switch (child.Name)
+                            {
+                                case "IP":
+                                    item.Address = child.InnerText;
+                                    break;
+                                case "PublicPort":
+                                    item.PublicPort = child.InnerText;
+                                    break;
+                                case "PrivatePort":
+                                    item.PrivatePort = child.InnerText;
+                                    break;
+                                case "Type":
+                                    item.Protocol = child.InnerText;
+                                    break;
+                            }
+                        }
+                        portList.Add(item);
+                    }
+                }
+                catch { }
+                return portList;
+            }
+        }
+
+        public struct DockerContainerPort
+        {
+            public string Address, PublicPort, PrivatePort, Protocol;
+
+            public string Description
+            {
+                get
+                {
+                    var list = new List<string>();
+                    if (!string.IsNullOrEmpty(Address))
+                        list.Add(string.Format(Messages.CONTAINER_PORTS_ADDRESS, Address));
+                    if (!string.IsNullOrEmpty(PublicPort))
+                        list.Add(string.Format(Messages.CONTAINER_PORTS_PUBLIC_PORT, PublicPort));
+                    if (!string.IsNullOrEmpty(PrivatePort))
+                        list.Add(string.Format(Messages.CONTAINER_PORTS_PRIVATE_PORT, PrivatePort));
+                    if (!string.IsNullOrEmpty(Protocol))
+                        list.Add(string.Format(Messages.CONTAINER_PORTS_PROTOCOL, Protocol));
+                    return string.Join("; ", list);
+                }
+            }
+        }
+
     }
 }
