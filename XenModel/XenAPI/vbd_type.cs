@@ -37,7 +37,7 @@ namespace XenAPI
 {
     public enum vbd_type
     {
-        CD, Disk, unknown
+        CD, Disk, Floppy, unknown
     }
 
     public static class vbd_type_helper
@@ -50,6 +50,8 @@ namespace XenAPI
                     return "CD";
                 case vbd_type.Disk:
                     return "Disk";
+                case vbd_type.Floppy:
+                    return "Floppy";
                 default:
                     return "unknown";
             }

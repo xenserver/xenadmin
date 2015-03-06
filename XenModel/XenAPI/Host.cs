@@ -1060,7 +1060,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the display field of the given host.
-        /// First published in .
+        /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -1327,7 +1327,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the display field of the given host.
-        /// First published in .
+        /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -2316,7 +2316,7 @@ namespace XenAPI
 
         /// <summary>
         /// Enable console output to the physical display device next time this host boots
-        /// First published in .
+        /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -2327,7 +2327,7 @@ namespace XenAPI
 
         /// <summary>
         /// Enable console output to the physical display device next time this host boots
-        /// First published in .
+        /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -2338,7 +2338,7 @@ namespace XenAPI
 
         /// <summary>
         /// Disable console output to the physical display device next time this host boots
-        /// First published in .
+        /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -2349,7 +2349,7 @@ namespace XenAPI
 
         /// <summary>
         /// Disable console output to the physical display device next time this host boots
-        /// First published in .
+        /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -3262,7 +3262,7 @@ namespace XenAPI
 
         /// <summary>
         /// indicates whether the host is configured to output its console to a physical display device
-        /// First published in .
+        /// First published in Unreleased.
         /// </summary>
         public virtual host_display display
         {

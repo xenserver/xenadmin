@@ -3581,7 +3581,7 @@ namespace XenAPI
 
         /// <summary>
         /// List all the SR's that are required for the VM to be recovered
-        /// First published in .
+        /// First published in XenServer Creedence.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -3593,7 +3593,7 @@ namespace XenAPI
 
         /// <summary>
         /// List all the SR's that are required for the VM to be recovered
-        /// First published in .
+        /// First published in XenServer Creedence.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
