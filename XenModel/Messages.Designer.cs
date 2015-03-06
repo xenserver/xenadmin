@@ -7879,6 +7879,42 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Address: {0}.
+        /// </summary>
+        public static string CONTAINER_PORTS_ADDRESS {
+            get {
+                return ResourceManager.GetString("CONTAINER_PORTS_ADDRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Private port: {0}.
+        /// </summary>
+        public static string CONTAINER_PORTS_PRIVATE_PORT {
+            get {
+                return ResourceManager.GetString("CONTAINER_PORTS_PRIVATE_PORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Protocol: {0}.
+        /// </summary>
+        public static string CONTAINER_PORTS_PROTOCOL {
+            get {
+                return ResourceManager.GetString("CONTAINER_PORTS_PROTOCOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Public port: {0}.
+        /// </summary>
+        public static string CONTAINER_PORTS_PUBLIC_PORT {
+            get {
+                return ResourceManager.GetString("CONTAINER_PORTS_PUBLIC_PORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to contains.
         /// </summary>
         public static string CONTAINS {

@@ -1372,7 +1372,8 @@ namespace XenAdmin.TabPages
                 s.AddEntry(Messages.CONTAINER_IMAGE, dockerContainer.image.Length != 0 ? dockerContainer.image : Messages.NONE);
                 s.AddEntry(Messages.CONTAINER, dockerContainer.container.Length != 0 ? dockerContainer.container : Messages.NONE);
                 s.AddEntry(Messages.CONTAINER_COMMAND, dockerContainer.command.Length != 0 ? dockerContainer.command : Messages.NONE);
-                s.AddEntry(Messages.CONTAINER_PORTS, dockerContainer.ports.Length != 0 ? dockerContainer.ports : Messages.NONE);
+                var ports = dockerContainer.PortList.Select(p => p.Description);
+                s.AddEntry(Messages.CONTAINER_PORTS, ports.Count() != 0 ? string.Join("\n", ports) : Messages.NONE);
                 s.AddEntry(Messages.UUID, dockerContainer.uuid.Length != 0 ? dockerContainer.uuid : Messages.NONE);
             }
         }
