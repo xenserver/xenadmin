@@ -230,7 +230,7 @@ namespace XenAdmin.Model
                     string ports = "";
                     propertyNode = entry.ChildNodes.Cast<XmlNode>().FirstOrDefault(node => node.Name == "ports");
                     if (propertyNode != null)
-                        ports = propertyNode.InnerText;
+                        ports = propertyNode.InnerXml;
 
                     DockerContainer newContainer = new DockerContainer(vm, id, name, string.Empty, status, container, created, image, command, ports);
                     
