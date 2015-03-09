@@ -384,7 +384,7 @@ namespace XenAdmin.TabPages
         {
             buttonProperties.Enabled = xenObject != null && !xenObject.Locked && xenObject.Connection != null && xenObject.Connection.IsConnected;
 
-            //keeping it seperate
+            //keeping it separate
             if (xenObject is DockerContainer)
                 buttonProperties.Enabled = false;
         }
