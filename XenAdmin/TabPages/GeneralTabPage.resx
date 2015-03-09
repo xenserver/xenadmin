@@ -211,7 +211,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="pdSectionDockerInfo.SectionTitle" xml:space="preserve">
-    <value>Docker Information</value>
+    <value>Container Management - Docker Status</value>
   </data>
   <data name="pdSectionDockerInfo.Size" type="System.Drawing.Size, System.Drawing">
     <value>712, 34</value>
