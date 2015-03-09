@@ -2840,14 +2840,26 @@ You can only connect to a single Citrix XenServer Express Edition server at a ti
   <data name="CONTAINER_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>Container General Properties</value>
   </data>
+  <data name="CONTAINER_IMAGE" xml:space="preserve">
+    <value>Image</value>
+  </data>
   <data name="CONTAINER_ON_VM_TITLE" xml:space="preserve">
     <value>{0} on '{1}' {2}</value>
   </data>
   <data name="CONTAINER_PORTS" xml:space="preserve">
     <value>Ports</value>
   </data>
-  <data name="CONTAINER_IMAGE" xml:space="preserve">
-    <value>Image</value>
+  <data name="CONTAINER_PORTS_ADDRESS" xml:space="preserve">
+    <value>Address: {0}</value>
+  </data>
+  <data name="CONTAINER_PORTS_PRIVATE_PORT" xml:space="preserve">
+    <value>Private port: {0}</value>
+  </data>
+  <data name="CONTAINER_PORTS_PROTOCOL" xml:space="preserve">
+    <value>Protocol: {0}</value>
+  </data>
+  <data name="CONTAINER_PORTS_PUBLIC_PORT" xml:space="preserve">
+    <value>Public port: {0}</value>
   </data>
   <data name="CONTAINS" xml:space="preserve">
     <value>contains</value>
