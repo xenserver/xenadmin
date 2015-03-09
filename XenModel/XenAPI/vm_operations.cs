@@ -37,7 +37,7 @@ namespace XenAPI
 {
     public enum vm_operations
     {
-        snapshot, clone, copy, create_template, revert, checkpoint, snapshot_with_quiesce, provision, start, start_on, pause, unpause, clean_shutdown, clean_reboot, hard_shutdown, power_state_reset, hard_reboot, suspend, csvm, resume, resume_on, pool_migrate, migrate_send, get_boot_record, send_sysrq, send_trigger, query_services, shutdown, changing_memory_live, awaiting_memory_live, changing_dynamic_range, changing_static_range, changing_memory_limits, changing_shadow_memory, changing_shadow_memory_live, changing_VCPUs, changing_VCPUs_live, assert_operation_valid, data_source_op, update_allowed_operations, make_into_template, import, export, metadata_export, reverting, destroy, unknown
+        snapshot, clone, copy, create_template, revert, checkpoint, snapshot_with_quiesce, provision, start, start_on, pause, unpause, clean_shutdown, clean_reboot, hard_shutdown, power_state_reset, hard_reboot, suspend, csvm, resume, resume_on, pool_migrate, migrate_send, get_boot_record, send_sysrq, send_trigger, query_services, shutdown, call_plugin, changing_memory_live, awaiting_memory_live, changing_dynamic_range, changing_static_range, changing_memory_limits, changing_shadow_memory, changing_shadow_memory_live, changing_VCPUs, changing_VCPUs_live, assert_operation_valid, data_source_op, update_allowed_operations, make_into_template, import, export, metadata_export, reverting, destroy, unknown
     }
 
     public static class vm_operations_helper
@@ -102,6 +102,8 @@ namespace XenAPI
                     return "query_services";
                 case vm_operations.shutdown:
                     return "shutdown";
+                case vm_operations.call_plugin:
+                    return "call_plugin";
                 case vm_operations.changing_memory_live:
                     return "changing_memory_live";
                 case vm_operations.awaiting_memory_live:

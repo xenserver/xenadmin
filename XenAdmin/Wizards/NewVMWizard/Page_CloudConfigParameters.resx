@@ -159,43 +159,43 @@
   <data name="&gt;&gt;imgStopVM.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="labelStopVM.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="labelWarning.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="labelStopVM.AutoSize" type="System.Boolean, mscorlib">
+  <data name="labelWarning.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelStopVM.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="labelWarning.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="labelStopVM.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="labelWarning.Location" type="System.Drawing.Point, System.Drawing">
     <value>25, 3</value>
   </data>
-  <data name="labelStopVM.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="labelWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
   </data>
-  <data name="labelStopVM.MaximumSize" type="System.Drawing.Size, System.Drawing">
+  <data name="labelWarning.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>584, 999</value>
   </data>
-  <data name="labelStopVM.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="labelWarning.Size" type="System.Drawing.Size, System.Drawing">
     <value>521, 13</value>
   </data>
-  <data name="labelStopVM.TabIndex" type="System.Int32, mscorlib">
+  <data name="labelWarning.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="labelStopVM.Text" xml:space="preserve">
+  <data name="labelWarning.Text" xml:space="preserve">
     <value>The cloud-config parameters can only be changed when the VM is shut down.</value>
   </data>
-  <data name="&gt;&gt;labelStopVM.Name" xml:space="preserve">
-    <value>labelStopVM</value>
+  <data name="&gt;&gt;labelWarning.Name" xml:space="preserve">
+    <value>labelWarning</value>
   </data>
-  <data name="&gt;&gt;labelStopVM.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelWarning.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelStopVM.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelWarning.Parent" xml:space="preserve">
     <value>warningsTable</value>
   </data>
-  <data name="&gt;&gt;labelStopVM.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelWarning.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="warningsTable.Location" type="System.Drawing.Point, System.Drawing">
@@ -223,7 +223,7 @@
     <value>0</value>
   </data>
   <data name="warningsTable.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="imgStopVM" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelStopVM" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,100,Absolute,100,Absolute,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="imgStopVM" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelWarning" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,100,Absolute,100,Absolute,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="topLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>

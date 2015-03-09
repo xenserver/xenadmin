@@ -867,6 +867,9 @@
   <data name="ACTION_TOOLSTACK_RESTART_ON" xml:space="preserve">
     <value>Restart toolstack on '{0}'</value>
   </data>
+  <data name="ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE" xml:space="preserve">
+    <value>Updating integrated GPU passthrough on '{0}'</value>
+  </data>
   <data name="ACTION_VDI_CREATED" xml:space="preserve">
     <value>Virtual disk created</value>
   </data>
@@ -1681,9 +1684,6 @@ Warning: you must ensure that the SR is not in use by any server not connected t
   </data>
   <data name="APPLYING_PATCH" xml:space="preserve">
     <value>Applying Update '{0}' to Server '{1}'...</value>
-  </data>
-  <data name="APPLYING_UPDATE" xml:space="preserve">
-    <value>Applying update to {0} server(s)</value>
   </data>
   <data name="APPLYING_UPDATES" xml:space="preserve">
     <value>Applying {0} update(s) to {1} server(s)</value>
@@ -2840,14 +2840,14 @@ You can only connect to a single Citrix XenServer Express Edition server at a ti
   <data name="CONTAINER_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>Container General Properties</value>
   </data>
+  <data name="CONTAINER_IMAGE" xml:space="preserve">
+    <value>Image</value>
+  </data>
   <data name="CONTAINER_ON_VM_TITLE" xml:space="preserve">
     <value>{0} on '{1}' {2}</value>
   </data>
   <data name="CONTAINER_PORTS" xml:space="preserve">
     <value>Ports</value>
-  </data>
-  <data name="CONTAINER_IMAGE" xml:space="preserve">
-    <value>Image</value>
   </data>
   <data name="CONTAINS" xml:space="preserve">
     <value>contains</value>
@@ -3727,14 +3727,8 @@ This will also delete its subfolders.</value>
   <data name="DMC_UNAVAILABLE_VMS" xml:space="preserve">
     <value>A memory range cannot be set for these VMs.</value>
   </data>
-  <data name="DOES_NOT_USE" xml:space="preserve">
-    <value>does not use</value>
-  </data>
   <data name="DOCKER_DETAIL_TAB_TITLE" xml:space="preserve">
     <value>Docker Detail</value>
-  </data>
-  <data name="DOCKER_PROCESS_TAB_TITLE" xml:space="preserve">
-    <value>Docker Processes</value>
   </data>
   <data name="DOCKER_INFO_API_VERSION" xml:space="preserve">
     <value>Api Version</value>
@@ -3801,6 +3795,12 @@ This will also delete its subfolders.</value>
   </data>
   <data name="DOCKER_INFO_VERSION" xml:space="preserve">
     <value>Version</value>
+  </data>
+  <data name="DOCKER_PROCESS_TAB_TITLE" xml:space="preserve">
+    <value>Docker Processes</value>
+  </data>
+  <data name="DOES_NOT_USE" xml:space="preserve">
+    <value>does not use</value>
   </data>
   <data name="DONE" xml:space="preserve">
     <value>done.</value>
@@ -6194,6 +6194,18 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="INSTANT_VM_CREATE_TITLE" xml:space="preserve">
     <value>Instant VM create</value>
   </data>
+  <data name="INTEGRATED_GPU_PASSTHROUGH_DISABLED" xml:space="preserve">
+    <value>This server is currently not using the integrated GPU.</value>
+  </data>
+  <data name="INTEGRATED_GPU_PASSTHROUGH_DISABLED_SHORT" xml:space="preserve">
+    <value>Not using the integrated GPU</value>
+  </data>
+  <data name="INTEGRATED_GPU_PASSTHROUGH_ENABLED" xml:space="preserve">
+    <value>This server is currently using the integrated GPU.</value>
+  </data>
+  <data name="INTEGRATED_GPU_PASSTHROUGH_ENABLED_SHORT" xml:space="preserve">
+    <value>Using the integrated GPU</value>
+  </data>
   <data name="INTERFACES_COUNT" xml:space="preserve">
     <value>Interfaces: {0}</value>
   </data>
@@ -7603,6 +7615,9 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NEWSR_ACTION" xml:space="preserve">
     <value>NFS SR [{0}]</value>
   </data>
+  <data name="NEWSR_CIFS_BLURB" xml:space="preserve">
+    <value>Select this option if you have a Windows (CIFS) share that you wish to attach to your host or pool.</value>
+  </data>
   <data name="NEWSR_CIFS_ISO_BLURB" xml:space="preserve">
     <value>Select this option if you have a library of VM installation ISO images available as a Windows (CIFS) share that you wish to attach to your host or pool.</value>
   </data>
@@ -7769,9 +7784,6 @@ VM cloning uses the snapshot and clone capabilities of the filer to provide high
   <data name="NEWSR_NFS_ISO_BLURB" xml:space="preserve">
     <value>Select this option if you have a library of VM installation ISO images available as a NFS share that you wish to attach to your host or pool.</value>
   </data>
-  <data name="NEWSR_NFS_NO_SRS_FOUND" xml:space="preserve">
-    <value>&lt;No SRs were found&gt;</value>
-  </data>
   <data name="NEWSR_NOWHERE_TO_CREATE" xml:space="preserve">
     <value>The given filer has no existing SRs and nowhere to create a new SR.</value>
   </data>
@@ -7780,6 +7792,12 @@ VM cloning uses the snapshot and clone capabilities of the filer to provide high
   </data>
   <data name="NEWSR_NO_LUNS_FOUND" xml:space="preserve">
     <value>No LUNs were found on {0}.</value>
+  </data>
+  <data name="NEWSR_NO_SRS_FOUND" xml:space="preserve">
+    <value>&lt;No SRs were found&gt;</value>
+  </data>
+  <data name="NEWSR_PATH_CIFS" xml:space="preserve">
+    <value>Enter a path for your CIFS storage</value>
   </data>
   <data name="NEWSR_PATH_ISCSI" xml:space="preserve">
     <value>Enter a path for your iSCSI storage</value>
@@ -8676,7 +8694,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>Choose an existing update to install or upload a new one</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
-    <value>XenServer Updates|*.xsupdate;*.xsoem|Supplemental Packs (*.iso)|*.iso</value>
+    <value>XenServer Updates and Supplemental Packs (*.xsupdate, *.iso)|*.xsupdate;*.iso</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS" xml:space="preserve">
     <value>Cannot install supplemental packs on this XenServer version</value>
@@ -8712,8 +8730,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>{0,4}{1}</value>
   </data>
   <data name="PATCHING_WIZARD_ERROR" xml:space="preserve">
-    <value>
-{0} error.</value>
+    <value>{0} error.</value>
   </data>
   <data name="PATCHING_WIZARD_HOST_CHECK_OK" xml:space="preserve">
     <value>{0}: {1} ok.</value>
@@ -8742,6 +8759,20 @@ Installation size: {1}</value>
     <value>Failed to download the update {0} from '{1}'.
 
 The update is installed on '{1}', but the update installation file may have since been deleted.
+
+Upload the update from an .xsupdate file instead.</value>
+  </data>
+  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED" xml:space="preserve">
+    <value>Failed to download the update {0} from '{1}'.
+
+The update has previously been uploaded to '{1}', but the update installation file may have since been deleted.
+
+Upload the update from an .xsupdate file instead.</value>
+  </data>
+  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED" xml:space="preserve">
+    <value>Failed to download the update {0} from '{1}'.
+
+The update has previously been uploaded to '{1}', but the update installation file may have since been deleted.
 
 Upload the update from an .xsupdate file instead.</value>
   </data>
@@ -10167,6 +10198,9 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="SRWIZARD_CIFS_LIBRARY" xml:space="preserve">
     <value>CIFS ISO library</value>
   </data>
+  <data name="SRWIZARD_CIFS_STORAGE" xml:space="preserve">
+    <value>CIFS virtual storage</value>
+  </data>
   <data name="SRWIZARD_ISCSI_STORAGE" xml:space="preserve">
     <value>iSCSI virtual disk storage</value>
   </data>
@@ -10523,6 +10557,14 @@ Do you want to connect to the pool master '{1}'?</value>
   </data>
   <data name="SUPP_PACK_DESCTIPTION" xml:space="preserve">
     <value>{0} (version {1})</value>
+  </data>
+  <data name="SUPP_PACK_INSTALL_FAILED" xml:space="preserve">
+    <value>Failed to install supplemental pack '{0}' on '{1}'.</value>
+  </data>
+  <data name="SUPP_PACK_INSTALL_FAILED_MORE_INFO" xml:space="preserve">
+    <value>{0}
+
+Refer to the "XenServer Administrator's Guide" for instructions on how to manually install a supplemental pack on a XenServer host.</value>
   </data>
   <data name="SUPP_PACK_MISSING_ON" xml:space="preserve">
     <value>{0} (not installed on {1})</value>
@@ -10927,7 +10969,10 @@ Verify that the file is a valid xensearch export.</value>
     <value>Installed update</value>
   </data>
   <data name="UPDATES_WIZARD_APPLYING_UPDATE" xml:space="preserve">
-    <value>Installing update {0} to {1} ... </value>
+    <value>Installing update {0} to {1}... </value>
+  </data>
+  <data name="UPDATES_WIZARD_APPLYING_UPDATE_MULTIPLE_HOSTS" xml:space="preserve">
+    <value>Installing update to {0} servers...</value>
   </data>
   <data name="UPDATES_WIZARD_APPLY_FAILED" xml:space="preserve">
     <value>The update failed to apply.  Would you like to view the output?</value>
@@ -11036,7 +11081,7 @@ Check your settings and try again.</value>
     <value>{0}: The VM '{1}' uses local storage and cannot be migrated.</value>
   </data>
   <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
-    <value>The selected file does not have a valid extension. Valid extensions are: *.xsoem, *.xsupdate and *.iso</value>
+    <value>The selected file does not have a valid extension. Valid extensions are: *.xsupdate and *.iso</value>
   </data>
   <data name="UPDATES_WIZARD_NOT_ENOUGH_SPACE" xml:space="preserve">
     <value>This storage repository does not have enough space to suspend the required VMs.</value>
@@ -11613,11 +11658,20 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="VM_APPLIANCE_SUMMARY" xml:space="preserve">
     <value>vApp name:\r\n    {0}\r\n\r\nSelected VMs:\r\n    {1}</value>
   </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_CANNOT_RETRIEVE_DEFAULT" xml:space="preserve">
+    <value>Unable to retrieve the default cloud-config parameters.</value>
+  </data>
   <data name="VM_CLOUD_CONFIG_DRIVE_INCLUDED" xml:space="preserve">
     <value>Config drive included</value>
   </data>
   <data name="VM_CLOUD_CONFIG_DRIVE_NOT_INCLUDED" xml:space="preserve">
     <value>Config drive not included</value>
+  </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_READONLY" xml:space="preserve">
+    <value>The cloud-config parameters can only be changed when the VM is shut down.</value>
+  </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_UNAVAILABLE" xml:space="preserve">
+    <value>The cloud-config parameters could not be retrieved.</value>
   </data>
   <data name="VM_ENLIGHTENMENT" xml:space="preserve">
     <value>Container Management</value>
@@ -11676,9 +11730,6 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="VM_PROTECTION_POLICY_SUCCEEDED" xml:space="preserve">
     <value>Succeeded</value>
   </data>
-  <data name="VM_READ_CACHING_ENABLED" xml:space="preserve">
-    <value>This VM has Read Caching enabled</value>
-  </data>
   <data name="VM_READ_CACHING_DISABLED" xml:space="preserve">
     <value>This VM is not using Read Caching</value>
   </data>
@@ -11690,6 +11741,12 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   </data>
   <data name="VM_READ_CACHING_DISABLED_REASON_TURNED_OFF" xml:space="preserve">
     <value>Read Caching is disabled on all supported Storage Repositories used by this VM</value>
+  </data>
+  <data name="VM_READ_CACHING_ENABLED" xml:space="preserve">
+    <value>This VM has Read Caching enabled</value>
+  </data>
+  <data name="VM_READ_CACHING_ENABLED_SEARCH" xml:space="preserve">
+    <value>Using read caching</value>
   </data>
   <data name="VM_REVERTED" xml:space="preserve">
     <value>VM reverted to '{0}'</value>
@@ -12617,15 +12674,5 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
-  </data>
-  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED" xml:space="preserve">
-    <value>Failed to download the update {0} from '{1}'.
-
-The update has previously been uploaded to '{1}', but the update installation file may have since been deleted.
-
-Upload the update from an .xsupdate file instead.</value>
-  </data>
-  <data name="VM_READ_CACHING_ENABLED_SEARCH" xml:space="preserve">
-    <value>Using read caching</value>
   </data>
 </root>

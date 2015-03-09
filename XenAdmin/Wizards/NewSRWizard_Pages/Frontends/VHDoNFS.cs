@@ -160,7 +160,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 {
                     // Disable box
                     ToggleReattachControlsEnabledState(false);
-                    listBoxNfsSRs.Items.Add(Messages.NEWSR_NFS_NO_SRS_FOUND);
+                    listBoxNfsSRs.Items.Add(Messages.NEWSR_NO_SRS_FOUND);
                     return;
                 }
 

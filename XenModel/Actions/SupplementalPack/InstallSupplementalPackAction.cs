@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using XenAPI;
 
 
@@ -43,7 +44,11 @@ namespace XenAdmin.Actions
         private Dictionary<Host, VDI> suppPackVdis;
 
         public InstallSupplementalPackAction(Dictionary<Host, VDI> suppPackVdis, bool suppressHistory)
-            : base(null, string.Format(Messages.APPLYING_UPDATE, suppPackVdis.Count), suppressHistory)
+            : base(null, 
+            suppPackVdis.Count > 1
+                ? string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE_MULTIPLE_HOSTS, suppPackVdis.Count) 
+                : string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, suppPackVdis.First().Value, suppPackVdis.First().Key), 
+            suppressHistory)
         {
             this.suppPackVdis = suppPackVdis;
         }
@@ -73,15 +78,20 @@ namespace XenAdmin.Actions
             }
             catch (Failure failure)
             {
-                log.WarnFormat("Plugin call install-supp-pack.install({0}) on {1} failed with {2}", vdi.uuid, host.Name,
-                               failure.Message);
-                throw;
+                log.ErrorFormat("Plugin call install-supp-pack.install({0}) on {1} failed with {2}", vdi.uuid, host.Name, failure.Message);
+                log.ErrorFormat("Supplemental pack installation error description: {0}", string.Join(";", failure.ErrorDescription));
+                throw new SupplementalPackInstallFailedException(string.Format(Messages.SUPP_PACK_INSTALL_FAILED, vdi.Name, host.Name), failure);
             }
             finally
             {
                 Connection = null;
             }
         }
+    }
 
+    public class SupplementalPackInstallFailedException : ApplicationException
+    {
+        public SupplementalPackInstallFailedException(string message, Exception innerException) :
+            base(message, innerException) { }
     }
 }

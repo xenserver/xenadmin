@@ -175,13 +175,13 @@
     <value>3, 0, 3, 0</value>
   </data>
   <data name="RefreshButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 23</value>
+    <value>74, 23</value>
   </data>
   <data name="RefreshButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="RefreshButton.Text" xml:space="preserve">
-    <value>&amp;Refresh...</value>
+    <value>&amp;Refresh</value>
   </data>
   <data name="&gt;&gt;RefreshButton.Name" xml:space="preserve">
     <value>RefreshButton</value>
@@ -205,7 +205,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelRefresh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 10</value>
+    <value>83, 10</value>
   </data>
   <data name="labelRefresh.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 13</value>
@@ -459,7 +459,7 @@
   <data name="&gt;&gt;TitleLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="RefreshTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -495,10 +495,10 @@
   <data name="&gt;&gt;ColumnCPUTime.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;timer1.Name" xml:space="preserve">
-    <value>timer1</value>
+  <data name="&gt;&gt;RefreshTimer.Name" xml:space="preserve">
+    <value>RefreshTimer</value>
   </data>
-  <data name="&gt;&gt;timer1.Type" xml:space="preserve">
+  <data name="&gt;&gt;RefreshTimer.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

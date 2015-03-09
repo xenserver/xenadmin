@@ -39,6 +39,7 @@ using System.Threading;
 using log4net;
 using XenAdmin.Controls;
 using XenAdmin.Diagnostics.Problems;
+using XenAdmin.Dialogs;
 using XenAdmin.Wizards.PatchingWizard.PlanActions;
 using XenAPI;
 using XenAdmin.Actions;
@@ -301,7 +302,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (sender.Exception != null)
                 {
-                    Program.Invoke(Program.MainWindow, () => FinishedWithErrors(new Exception(sender.Title)));
+                    Program.Invoke(Program.MainWindow, () => FinishedWithErrors(new Exception(sender.Title, sender.Exception)));
                 }
                 else
                     Program.Invoke(Program.MainWindow, FinishedSuccessfully);
@@ -363,7 +364,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     log.Error("Failed to carry out plan.", e);
                     log.Debug(actionList);
-                    doWorkEventArgs.Result = new Exception(action.Title);
+                    doWorkEventArgs.Result = new Exception(action.Title, e);
                     break;
                 }
             }
@@ -510,6 +511,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             string errorMessage = string.Format(Messages.PATCHING_WIZARD_ERROR, exception.Message);
             labelError.Text = errorMessage;
             pictureBox1.Image = SystemIcons.Error.ToBitmap();
+            if (exception.InnerException is SupplementalPackInstallFailedException)
+            {
+                errorLinkLabel.Visible = true;
+                errorLinkLabel.Tag = exception.InnerException;
+            }
             panel1.Visible = true;
         }
 
@@ -532,6 +538,22 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 return SelectedNewPatch;
             }
+        }
+
+        private void errorLinkLabel_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
+        {
+            if (errorLinkLabel.Tag is Exception)
+                ShowMoreInfo(errorLinkLabel.Tag as Exception);
+        }
+
+        private void ShowMoreInfo(Exception exception)
+        {
+            if (!(exception is SupplementalPackInstallFailedException)) 
+                return;
+            var msg = string.Format(Messages.SUPP_PACK_INSTALL_FAILED_MORE_INFO, exception.Message);
+            new ThreeButtonDialog(
+                new ThreeButtonDialog.Details(SystemIcons.Error, msg))
+                .ShowDialog(this);
         }
     }
 }

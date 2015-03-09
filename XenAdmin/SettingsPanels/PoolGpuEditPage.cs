@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
@@ -45,6 +46,13 @@ namespace XenAdmin.SettingsPanels
         private GPU_group[] gpu_groups;
         private allocation_algorithm currentAllocationAlgorithm;
 
+        private bool showIntegratedGpu;
+        private bool showPlacementPolicy;
+
+        private Host host;
+        private bool integratedGpuCurrentlyEnabled;
+        private bool integratedGpuCurrentlyEnabledOnNextReboot;
+
         public PoolGpuEditPage()
         {
             InitializeComponent();
@@ -60,6 +68,14 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
+        public bool EnableIntegratedGpuOnNextReboot
+        {
+            get
+            {
+                return radioButtonEnable.Checked;
+            }
+        }
+
         #region Implementation of VerticalTab
 
         public override string Text
@@ -69,10 +85,26 @@ namespace XenAdmin.SettingsPanels
 
         public string SubText
         {
-            get 
-            { 
-                return radioButtonDepth.Checked ? Messages.GPU_PLACEMENT_POLICY_MAX_DENSITY : 
-                    radioButtonBreadth.Checked ? Messages.GPU_PLACEMENT_POLICY_MAX_PERFORMANCE : Messages.GPU_PLACEMENT_POLICY_MIXED; }
+            get
+            {
+                var text = "";
+                if (showPlacementPolicy)
+                {
+                    text = radioButtonDepth.Checked
+                               ? Messages.GPU_PLACEMENT_POLICY_MAX_DENSITY
+                               : radioButtonBreadth.Checked
+                                     ? Messages.GPU_PLACEMENT_POLICY_MAX_PERFORMANCE
+                                     : Messages.GPU_PLACEMENT_POLICY_MIXED;
+                }
+                if (showIntegratedGpu)
+                {
+                    var integratedGpuText = integratedGpuCurrentlyEnabled
+                                                   ? Messages.INTEGRATED_GPU_PASSTHROUGH_ENABLED_SHORT
+                                                   : Messages.INTEGRATED_GPU_PASSTHROUGH_DISABLED_SHORT;
+                    text = showPlacementPolicy ? string.Join("; ", text, integratedGpuText) : integratedGpuText;
+                }
+                return text;
+            }
         }
 
         public Image Image
@@ -86,7 +118,18 @@ namespace XenAdmin.SettingsPanels
 
         public AsyncAction SaveSettings()
         {
-            return new SetGpuPlacementPolicyAction(pool, AllocationAlgorithm);
+            List<AsyncAction> actions = new List<AsyncAction>();
+
+            if (HasPlacementPolicyChanged)
+                actions.Add(new SetGpuPlacementPolicyAction(pool, AllocationAlgorithm));
+
+            if (HasIntegratedGpuChanged && host != null)
+                actions.Add(new UpdateIntegratedGpuPassthroughAction(host, EnableIntegratedGpuOnNextReboot, true));
+
+            if (actions.Count == 0)
+                return null;
+
+            return actions.Count == 1 ? actions[0] : new MultipleAction(pool.Connection, "", "", "", actions, true);
         }
 
         public void SetXenObjects(IXenObject orig, IXenObject clone)
@@ -95,6 +138,13 @@ namespace XenAdmin.SettingsPanels
 
             pool = Helpers.GetPoolOfOne(clone.Connection);
             gpu_groups = pool.Connection.Cache.GPU_groups;
+
+            bool isPoolOrStandaloneHost = clone is Pool || Helpers.GetPool(clone.Connection) == null;
+            showPlacementPolicy = isPoolOrStandaloneHost && Helpers.VGpuCapability(clone.Connection);
+
+            host = clone as Host; // can be null, if we are on a Pool
+            showIntegratedGpu = host != null && host.CanEnableDisableIntegratedGpu;
+
             PopulatePage();
         }
 
@@ -115,8 +165,18 @@ namespace XenAdmin.SettingsPanels
 
         public bool HasChanged
         {
+            get { return HasPlacementPolicyChanged || HasIntegratedGpuChanged; }
+        }
+
+        #endregion
+
+        private bool HasPlacementPolicyChanged
+        {
             get
             {
+                if (!showPlacementPolicy)
+                    return false;
+
                 var allocationAlgorithm = radioButtonDepth.Checked ? 
                     allocation_algorithm.depth_first : 
                     radioButtonBreadth.Checked ? allocation_algorithm.breadth_first : allocation_algorithm.unknown;
@@ -125,9 +185,29 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
-        #endregion
+        private bool HasIntegratedGpuChanged
+        {
+            get
+            {
+                if (!showIntegratedGpu)
+                    return false;
+
+                return EnableIntegratedGpuOnNextReboot != integratedGpuCurrentlyEnabledOnNextReboot;
+            }
+        }
+
 
         private void PopulatePage()
+        {
+            groupBoxPlacementPolicy.Visible = showPlacementPolicy;
+            groupBoxIntedratedGpu.Visible = showIntegratedGpu;
+            if (showPlacementPolicy)
+                PopulatePlacementPolicyPanel();
+            if (showIntegratedGpu)
+                PopulateIntegratedGpuPanel();
+        }
+
+        private void PopulatePlacementPolicyPanel()
         {
             currentAllocationAlgorithm = allocation_algorithm.unknown;
 
@@ -148,6 +228,31 @@ namespace XenAdmin.SettingsPanels
             radioButtonMixture.Checked = currentAllocationAlgorithm == allocation_algorithm.unknown;
             radioButtonMixture.Visible = currentAllocationAlgorithm == allocation_algorithm.unknown;
             radioButtonMixture.Enabled = currentAllocationAlgorithm == allocation_algorithm.unknown;
+        }
+
+        private void PopulateIntegratedGpuPanel()
+        {
+            if (host == null)
+                return;
+            var currentHostDisplay = host.display;
+            var systemDisplayDeviceGpu = host.SystemDisplayDevice;
+            var currentPgpuDom0Access = systemDisplayDeviceGpu != null ? systemDisplayDeviceGpu.dom0_access : pgpu_dom0_access.unknown;
+
+            bool hostCurrentlyEnabled = currentHostDisplay == host_display.enabled || currentHostDisplay == host_display.disable_on_reboot;
+            bool hostEnabledOnNextReboot = currentHostDisplay == host_display.enabled || currentHostDisplay == host_display.enable_on_reboot;
+
+            bool gpuCurrentlyEnabled = currentPgpuDom0Access == pgpu_dom0_access.enabled || currentPgpuDom0Access == pgpu_dom0_access.disable_on_reboot;
+            bool gpuEnabledOnNextReboot = currentPgpuDom0Access == pgpu_dom0_access.enabled || currentPgpuDom0Access == pgpu_dom0_access.enable_on_reboot;
+
+            integratedGpuCurrentlyEnabled = hostCurrentlyEnabled && gpuCurrentlyEnabled;
+            integratedGpuCurrentlyEnabledOnNextReboot = hostEnabledOnNextReboot && gpuEnabledOnNextReboot;
+
+            labelCurrentState.Text = (integratedGpuCurrentlyEnabled)
+                                         ? Messages.INTEGRATED_GPU_PASSTHROUGH_ENABLED
+                                         : Messages.INTEGRATED_GPU_PASSTHROUGH_DISABLED;
+
+            radioButtonEnable.Checked = integratedGpuCurrentlyEnabledOnNextReboot;
+            radioButtonDisable.Checked = !integratedGpuCurrentlyEnabledOnNextReboot;
         }
     }
 }

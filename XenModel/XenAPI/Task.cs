@@ -63,7 +63,8 @@ namespace XenAPI
             string[] error_info,
             Dictionary<string, string> other_config,
             XenRef<Task> subtask_of,
-            List<XenRef<Task>> subtasks)
+            List<XenRef<Task>> subtasks,
+            string backtrace)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -81,6 +82,7 @@ namespace XenAPI
             this.other_config = other_config;
             this.subtask_of = subtask_of;
             this.subtasks = subtasks;
+            this.backtrace = backtrace;
         }
 
         /// <summary>
@@ -110,6 +112,7 @@ namespace XenAPI
             other_config = update.other_config;
             subtask_of = update.subtask_of;
             subtasks = update.subtasks;
+            backtrace = update.backtrace;
         }
 
         internal void UpdateFromProxy(Proxy_Task proxy)
@@ -130,6 +133,7 @@ namespace XenAPI
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
             subtask_of = proxy.subtask_of == null ? null : XenRef<Task>.Create(proxy.subtask_of);
             subtasks = proxy.subtasks == null ? null : XenRef<Task>.Create(proxy.subtasks);
+            backtrace = proxy.backtrace == null ? null : (string)proxy.backtrace;
         }
 
         public Proxy_Task ToProxy()
@@ -151,6 +155,7 @@ namespace XenAPI
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
             result_.subtask_of = (subtask_of != null) ? subtask_of : "";
             result_.subtasks = (subtasks != null) ? Helper.RefListToStringArray(subtasks) : new string[] {};
+            result_.backtrace = (backtrace != null) ? backtrace : "";
             return result_;
         }
 
@@ -176,6 +181,7 @@ namespace XenAPI
             other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
             subtask_of = Marshalling.ParseRef<Task>(table, "subtask_of");
             subtasks = Marshalling.ParseSetRef<Task>(table, "subtasks");
+            backtrace = Marshalling.ParseString(table, "backtrace");
         }
 
         public bool DeepEquals(Task other, bool ignoreCurrentOperations)
@@ -202,7 +208,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._error_info, other._error_info) &&
                 Helper.AreEqual2(this._other_config, other._other_config) &&
                 Helper.AreEqual2(this._subtask_of, other._subtask_of) &&
-                Helper.AreEqual2(this._subtasks, other._subtasks);
+                Helper.AreEqual2(this._subtasks, other._subtasks) &&
+                Helper.AreEqual2(this._backtrace, other._backtrace);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Task server)
@@ -429,6 +436,17 @@ namespace XenAPI
         public static List<XenRef<Task>> get_subtasks(Session session, string _task)
         {
             return XenRef<Task>.Create(session.proxy.task_get_subtasks(session.uuid, (_task != null) ? _task : "").parse());
+        }
+
+        /// <summary>
+        /// Get the backtrace field of the given task.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_task">The opaque_ref of the given task</param>
+        public static string get_backtrace(Session session, string _task)
+        {
+            return (string)session.proxy.task_get_backtrace(session.uuid, (_task != null) ? _task : "").parse();
         }
 
         /// <summary>
@@ -823,5 +841,24 @@ namespace XenAPI
             }
         }
         private List<XenRef<Task>> _subtasks;
+
+        /// <summary>
+        /// Function call trace for debugging.
+        /// First published in Unreleased.
+        /// </summary>
+        public virtual string backtrace
+        {
+            get { return _backtrace; }
+            set
+            {
+                if (!Helper.AreEqual(value, _backtrace))
+                {
+                    _backtrace = value;
+                    Changed = true;
+                    NotifyPropertyChanged("backtrace");
+                }
+            }
+        }
+        private string _backtrace;
     }
 }

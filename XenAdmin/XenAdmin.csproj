@@ -559,6 +559,12 @@
     <Compile Include="Wizards\BallooningWizard_Pages\MemorySettings.Designer.cs">
       <DependentUpon>MemorySettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.Designer.cs">
+      <DependentUpon>CIFSFrontend.cs</DependentUpon>
+    </Compile>
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CSLG.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1703,6 +1709,16 @@
     <EmbeddedResource Include="Wizards\GenericPages\RBACWarningPage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>RBACWarningPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.ja.resx">
+      <DependentUpon>CIFSFrontend.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.resx">
+      <DependentUpon>CIFSFrontend.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.zh-CN.resx">
+      <DependentUpon>CIFSFrontend.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewVMWizard\Page_CloudConfigParameters.ja.resx">
       <DependentUpon>Page_CloudConfigParameters.cs</DependentUpon>

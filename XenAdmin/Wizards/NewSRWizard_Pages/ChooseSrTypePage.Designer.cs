@@ -40,6 +40,7 @@
             this.upsellPage1 = new XenAdmin.Controls.UpsellPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.radioButtonCifs = new System.Windows.Forms.RadioButton();
             this.verticalDividerLine = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.SRBlurb = new XenAdmin.Controls.Common.AutoHeightLabel();
@@ -131,6 +132,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.radioButtonCifs);
             this.panel1.Controls.Add(this.verticalDividerLine);
             this.panel1.Controls.Add(this.labelVirtualDiskStorage);
             this.panel1.Controls.Add(this.labelISOlibrary);
@@ -142,6 +144,15 @@
             this.panel1.Controls.Add(this.radioButtonNfsIso);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
+            // 
+            // radioButtonCifs
+            // 
+            resources.ApplyResources(this.radioButtonCifs, "radioButtonCifs");
+            this.radioButtonCifs.BackColor = System.Drawing.Color.Transparent;
+            this.radioButtonCifs.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.radioButtonCifs.Name = "radioButtonCifs";
+            this.radioButtonCifs.UseVisualStyleBackColor = false;
+            this.radioButtonCifs.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
             // 
             // verticalDividerLine
             // 
@@ -208,5 +219,6 @@
         private XenAdmin.Controls.DeprecationBanner deprecationBanner;
         private System.Windows.Forms.Label verticalDividerLine;
         private System.Windows.Forms.Label selectedStoreTypeLabel;
+        private System.Windows.Forms.RadioButton radioButtonCifs;
     }
 }

@@ -1541,7 +1541,7 @@ namespace XenAdmin.TabPages
 
         private void addStringEntry(PDSection s, string key, string value)
         {
-            s.AddEntry(key, value.Length != 0 ? value : Messages.NONE);
+            s.AddEntry(key, string.IsNullOrEmpty(value) ? Messages.NONE : value);
         }
 
         private void generateDockerInfoBox()

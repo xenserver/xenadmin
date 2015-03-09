@@ -51,47 +51,13 @@ namespace XenAPI
         {
             Dictionary<Type, Relation[]> relations = new Dictionary<Type, Relation[]>();
 
-            relations.Add(typeof(Proxy_Role), new Relation[] {
-                new Relation("subroles", "role", "subroles"),
+            relations.Add(typeof(Proxy_Pool), new Relation[] {
+                new Relation("metadata_VDIs", "VDI", "metadata_of_pool"),
             });
 
-            relations.Add(typeof(Proxy_Network), new Relation[] {
-                new Relation("PIFs", "PIF", "network"),
-                new Relation("VIFs", "VIF", "network"),
-            });
-
-            relations.Add(typeof(Proxy_VMPP), new Relation[] {
-                new Relation("VMs", "VM", "protection_policy"),
-            });
-
-            relations.Add(typeof(Proxy_VDI), new Relation[] {
-                new Relation("crash_dumps", "crashdump", "VDI"),
-                new Relation("VBDs", "VBD", "VDI"),
-                new Relation("snapshots", "VDI", "snapshot_of"),
-            });
-
-            relations.Add(typeof(Proxy_VM), new Relation[] {
-                new Relation("attached_PCIs", "PCI", "attached_VMs"),
-                new Relation("VGPUs", "VGPU", "VM"),
-                new Relation("consoles", "console", "VM"),
-                new Relation("VTPMs", "VTPM", "VM"),
-                new Relation("VIFs", "VIF", "VM"),
-                new Relation("crash_dumps", "crashdump", "VM"),
-                new Relation("VBDs", "VBD", "VM"),
-                new Relation("children", "VM", "parent"),
-                new Relation("snapshots", "VM", "snapshot_of"),
-            });
-
-            relations.Add(typeof(Proxy_DR_task), new Relation[] {
-                new Relation("introduced_SRs", "SR", "introduced_by"),
-            });
-
-            relations.Add(typeof(Proxy_VM_appliance), new Relation[] {
-                new Relation("VMs", "VM", "appliance"),
-            });
-
-            relations.Add(typeof(Proxy_Task), new Relation[] {
-                new Relation("subtasks", "task", "subtask_of"),
+            relations.Add(typeof(Proxy_SR), new Relation[] {
+                new Relation("VDIs", "VDI", "SR"),
+                new Relation("PBDs", "PBD", "SR"),
             });
 
             relations.Add(typeof(Proxy_GPU_group), new Relation[] {
@@ -99,12 +65,48 @@ namespace XenAPI
                 new Relation("PGPUs", "PGPU", "GPU_group"),
             });
 
+            relations.Add(typeof(Proxy_Session), new Relation[] {
+                new Relation("tasks", "task", "session"),
+            });
+
+            relations.Add(typeof(Proxy_Subject), new Relation[] {
+                new Relation("roles", "subject", "roles"),
+            });
+
             relations.Add(typeof(Proxy_Bond), new Relation[] {
                 new Relation("slaves", "PIF", "bond_slave_of"),
             });
 
-            relations.Add(typeof(Proxy_Pool), new Relation[] {
-                new Relation("metadata_VDIs", "VDI", "metadata_of_pool"),
+            relations.Add(typeof(Proxy_Role), new Relation[] {
+                new Relation("subroles", "role", "subroles"),
+            });
+
+            relations.Add(typeof(Proxy_Pool_patch), new Relation[] {
+                new Relation("host_patches", "host_patch", "pool_patch"),
+            });
+
+            relations.Add(typeof(Proxy_VM_appliance), new Relation[] {
+                new Relation("VMs", "VM", "appliance"),
+            });
+
+            relations.Add(typeof(Proxy_PIF), new Relation[] {
+                new Relation("tunnel_transport_PIF_of", "tunnel", "transport_PIF"),
+                new Relation("tunnel_access_PIF_of", "tunnel", "access_PIF"),
+                new Relation("VLAN_slave_of", "VLAN", "tagged_PIF"),
+                new Relation("bond_master_of", "Bond", "master"),
+            });
+
+            relations.Add(typeof(Proxy_DR_task), new Relation[] {
+                new Relation("introduced_SRs", "SR", "introduced_by"),
+            });
+
+            relations.Add(typeof(Proxy_Network), new Relation[] {
+                new Relation("PIFs", "PIF", "network"),
+                new Relation("VIFs", "VIF", "network"),
+            });
+
+            relations.Add(typeof(Proxy_Task), new Relation[] {
+                new Relation("subtasks", "task", "subtask_of"),
             });
 
             relations.Add(typeof(Proxy_PGPU), new Relation[] {
@@ -119,15 +121,26 @@ namespace XenAPI
                 new Relation("VGPUs", "VGPU", "type"),
             });
 
-            relations.Add(typeof(Proxy_PIF), new Relation[] {
-                new Relation("tunnel_transport_PIF_of", "tunnel", "transport_PIF"),
-                new Relation("tunnel_access_PIF_of", "tunnel", "access_PIF"),
-                new Relation("VLAN_slave_of", "VLAN", "tagged_PIF"),
-                new Relation("bond_master_of", "Bond", "master"),
+            relations.Add(typeof(Proxy_VDI), new Relation[] {
+                new Relation("crash_dumps", "crashdump", "VDI"),
+                new Relation("VBDs", "VBD", "VDI"),
+                new Relation("snapshots", "VDI", "snapshot_of"),
             });
 
-            relations.Add(typeof(Proxy_Subject), new Relation[] {
-                new Relation("roles", "subject", "roles"),
+            relations.Add(typeof(Proxy_VMPP), new Relation[] {
+                new Relation("VMs", "VM", "protection_policy"),
+            });
+
+            relations.Add(typeof(Proxy_VM), new Relation[] {
+                new Relation("attached_PCIs", "PCI", "attached_VMs"),
+                new Relation("VGPUs", "VGPU", "VM"),
+                new Relation("consoles", "console", "VM"),
+                new Relation("VTPMs", "VTPM", "VM"),
+                new Relation("VIFs", "VIF", "VM"),
+                new Relation("crash_dumps", "crashdump", "VM"),
+                new Relation("VBDs", "VBD", "VM"),
+                new Relation("children", "VM", "parent"),
+                new Relation("snapshots", "VM", "snapshot_of"),
             });
 
             relations.Add(typeof(Proxy_Host), new Relation[] {
@@ -139,19 +152,6 @@ namespace XenAPI
                 new Relation("resident_VMs", "VM", "resident_on"),
                 new Relation("PIFs", "PIF", "host"),
                 new Relation("PBDs", "PBD", "host"),
-            });
-
-            relations.Add(typeof(Proxy_Session), new Relation[] {
-                new Relation("tasks", "task", "session"),
-            });
-
-            relations.Add(typeof(Proxy_Pool_patch), new Relation[] {
-                new Relation("host_patches", "host_patch", "pool_patch"),
-            });
-
-            relations.Add(typeof(Proxy_SR), new Relation[] {
-                new Relation("VDIs", "VDI", "SR"),
-                new Relation("PBDs", "PBD", "SR"),
             });
 
 

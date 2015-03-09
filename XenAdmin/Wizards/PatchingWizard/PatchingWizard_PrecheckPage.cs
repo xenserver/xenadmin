@@ -315,7 +315,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             //Checking can evacuate host
             //CA-97061 - evacuate host -> suspended VMs. This is only needed for restartHost
-            if (patch != null && patch.after_apply_guidance.Contains(after_apply_guidance.restartHost))
+            //Also include this check for the supplemental packs (patch == null), as their guidance is restartHost
+            if (patch == null || patch.after_apply_guidance.Contains(after_apply_guidance.restartHost))
             {
                 checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_CANEVACUATE_STATUS, new List<Check>()));
                 checkGroup = checks[checks.Count - 1].Value;

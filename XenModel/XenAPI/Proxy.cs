@@ -2812,6 +2812,10 @@ namespace XenAPI
         Response<Object>
         host_get_guest_vcpus_params(string session, string _host);
 
+        [XmlRpcMethod("host.get_display")]
+        Response<string>
+        host_get_display(string session, string _host);
+
         [XmlRpcMethod("host.set_name_label")]
         Response<string>
         host_set_name_label(string session, string _host, string _label);
@@ -2895,6 +2899,10 @@ namespace XenAPI
         [XmlRpcMethod("host.remove_from_guest_VCPUs_params")]
         Response<string>
         host_remove_from_guest_vcpus_params(string session, string _host, string _key);
+
+        [XmlRpcMethod("host.set_display")]
+        Response<string>
+        host_set_display(string session, string _host, string _display);
 
         [XmlRpcMethod("host.disable")]
         Response<string>
@@ -3235,6 +3243,22 @@ namespace XenAPI
         [XmlRpcMethod("Async.host.declare_dead")]
         Response<string>
         async_host_declare_dead(string session, string _host);
+
+        [XmlRpcMethod("host.enable_display")]
+        Response<string>
+        host_enable_display(string session, string _host);
+
+        [XmlRpcMethod("Async.host.enable_display")]
+        Response<string>
+        async_host_enable_display(string session, string _host);
+
+        [XmlRpcMethod("host.disable_display")]
+        Response<string>
+        host_disable_display(string session, string _host);
+
+        [XmlRpcMethod("Async.host.disable_display")]
+        Response<string>
+        async_host_disable_display(string session, string _host);
 
         [XmlRpcMethod("host.get_all")]
         Response<string []>
@@ -6220,6 +6244,14 @@ namespace XenAPI
         Response<Object>
         pgpu_get_supported_vgpu_max_capacities(string session, string _pgpu);
 
+        [XmlRpcMethod("PGPU.get_dom0_access")]
+        Response<string>
+        pgpu_get_dom0_access(string session, string _pgpu);
+
+        [XmlRpcMethod("PGPU.get_is_system_display_device")]
+        Response<bool>
+        pgpu_get_is_system_display_device(string session, string _pgpu);
+
         [XmlRpcMethod("PGPU.set_other_config")]
         Response<string>
         pgpu_set_other_config(string session, string _pgpu, Object _other_config);
@@ -6271,6 +6303,22 @@ namespace XenAPI
         [XmlRpcMethod("Async.PGPU.get_remaining_capacity")]
         Response<string>
         async_pgpu_get_remaining_capacity(string session, string _pgpu, string _vgpu_type);
+
+        [XmlRpcMethod("PGPU.enable_dom0_access")]
+        Response<string>
+        pgpu_enable_dom0_access(string session, string _pgpu);
+
+        [XmlRpcMethod("Async.PGPU.enable_dom0_access")]
+        Response<string>
+        async_pgpu_enable_dom0_access(string session, string _pgpu);
+
+        [XmlRpcMethod("PGPU.disable_dom0_access")]
+        Response<string>
+        pgpu_disable_dom0_access(string session, string _pgpu);
+
+        [XmlRpcMethod("Async.PGPU.disable_dom0_access")]
+        Response<string>
+        async_pgpu_disable_dom0_access(string session, string _pgpu);
 
         [XmlRpcMethod("PGPU.get_all")]
         Response<string []>
@@ -6855,6 +6903,7 @@ namespace XenAPI
         public string [] PCIs;
         public string [] PGPUs;
         public Object guest_VCPUs_params;
+        public string display;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -7285,6 +7334,8 @@ namespace XenAPI
         public string [] enabled_VGPU_types;
         public string [] resident_VGPUs;
         public Object supported_VGPU_max_capacities;
+        public string dom0_access;
+        public bool is_system_display_device;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
