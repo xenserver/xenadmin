@@ -33775,6 +33775,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Using read caching.
+        /// </summary>
+        public static string VM_READ_CACHING_ENABLED_SEARCH {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_ENABLED_SEARCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VM reverted to &apos;{0}&apos;.
         /// </summary>
         public static string VM_REVERTED {

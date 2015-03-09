@@ -12625,4 +12625,7 @@ The update has previously been uploaded to '{1}', but the update installation fi
 
 Upload the update from an .xsupdate file instead.</value>
   </data>
+  <data name="VM_READ_CACHING_ENABLED_SEARCH" xml:space="preserve">
+    <value>Using read caching</value>
+  </data>
 </root>
