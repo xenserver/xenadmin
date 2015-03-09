@@ -529,7 +529,7 @@
     <value>VMs</value>
   </data>
   <data name="Label-host.XenMemory" xml:space="preserve">
-    <value>Xen</value>
+    <value>XenServer</value>
   </data>
   <data name="Label-host.address" xml:space="preserve">
     <value>Address</value>
