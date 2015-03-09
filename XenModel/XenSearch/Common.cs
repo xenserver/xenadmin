@@ -135,6 +135,8 @@ namespace XenAdmin.XenSearch
         vm,
         [HelpString("List of Docker host-VM names.")]
         dockervm,
+        [HelpString("Whether a VM is using read caching")]
+        read_caching_enabled,
         [HelpString("The immediate parent folder of the selected object")]
         folder,
         [HelpString("Comma-separated list of all the ancestor folders of the selected object")]
@@ -280,6 +282,7 @@ namespace XenAdmin.XenSearch
             PropertyNames_i18n[PropertyNames.ip_address] = Messages.ADDRESS;
             PropertyNames_i18n[PropertyNames.vm] = Messages.VM;
             PropertyNames_i18n[PropertyNames.dockervm] = "Docker VM";
+            PropertyNames_i18n[PropertyNames.read_caching_enabled] = Messages.VM_READ_CACHING_ENABLED_SEARCH;
             PropertyNames_i18n[PropertyNames.memory] = Messages.MEMORY;
             PropertyNames_i18n[PropertyNames.sr_type] = Messages.STORAGE_TYPE;
             PropertyNames_i18n[PropertyNames.folder] = Messages.PARENT_FOLDER;
@@ -327,6 +330,7 @@ namespace XenAdmin.XenSearch
             property_types.Add(PropertyNames.networks, typeof(XenAPI.Network));
             property_types.Add(PropertyNames.storage, typeof(SR));
             property_types.Add(PropertyNames.ha_restart_priority, typeof(VM.HA_Restart_Priority));
+            property_types.Add(PropertyNames.read_caching_enabled, typeof(bool));
 			property_types.Add(PropertyNames.appliance, typeof(VM_appliance));
             property_types.Add(PropertyNames.tags, typeof(string));
             property_types.Add(PropertyNames.has_custom_fields, typeof(bool));
@@ -505,6 +509,14 @@ namespace XenAdmin.XenSearch
 					return appl != null;
 				});
 			};
+
+            properties[PropertyNames.read_caching_enabled] = delegate(IXenObject o)
+            {
+                return GetForRealVM(o, delegate(VM vm, IXenConnection conn)
+                    {
+                        return Helpers.CreamOrGreater(conn) ? (bool?)vm.ReadCachingEnabled : null;
+                    });
+            };
 
             properties[PropertyNames.connection_hostname] = ConnectionHostnameProperty;
             properties[PropertyNames.cpuText] = CPUTextProperty;
@@ -1384,6 +1396,12 @@ namespace XenAdmin.XenSearch
                     return (ImageDelegate<VM.HA_Restart_Priority>)delegate(VM.HA_Restart_Priority _)
                         {
                             return Icons.HA;
+                        };
+
+                case PropertyNames.read_caching_enabled:
+                    return (ImageDelegate<bool>)delegate(bool _)
+                        {
+                            return Icons.VDI;
                         };
 
                 default:
