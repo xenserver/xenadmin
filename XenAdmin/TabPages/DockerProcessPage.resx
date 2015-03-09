@@ -448,7 +448,7 @@
     <value>27</value>
   </data>
   <data name="TitleLabel.Text" xml:space="preserve">
-    <value>Docker Processes</value>
+    <value>Container Processes</value>
   </data>
   <data name="TitleLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>

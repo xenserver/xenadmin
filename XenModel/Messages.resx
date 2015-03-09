@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -2849,6 +2849,18 @@ You can only connect to a single Citrix XenServer Express Edition server at a ti
   <data name="CONTAINER_PORTS" xml:space="preserve">
     <value>Ports</value>
   </data>
+  <data name="CONTAINER_PORTS_ADDRESS" xml:space="preserve">
+    <value>Address: {0}</value>
+  </data>
+  <data name="CONTAINER_PORTS_PRIVATE_PORT" xml:space="preserve">
+    <value>Private port: {0}</value>
+  </data>
+  <data name="CONTAINER_PORTS_PROTOCOL" xml:space="preserve">
+    <value>Protocol: {0}</value>
+  </data>
+  <data name="CONTAINER_PORTS_PUBLIC_PORT" xml:space="preserve">
+    <value>Public port: {0}</value>
+  </data>
   <data name="CONTAINS" xml:space="preserve">
     <value>contains</value>
   </data>
@@ -3728,7 +3740,7 @@ This will also delete its subfolders.</value>
     <value>A memory range cannot be set for these VMs.</value>
   </data>
   <data name="DOCKER_DETAIL_TAB_TITLE" xml:space="preserve">
-    <value>Docker Detail</value>
+    <value>Container Details</value>
   </data>
   <data name="DOCKER_INFO_API_VERSION" xml:space="preserve">
     <value>Api Version</value>
@@ -3797,7 +3809,7 @@ This will also delete its subfolders.</value>
     <value>Version</value>
   </data>
   <data name="DOCKER_PROCESS_TAB_TITLE" xml:space="preserve">
-    <value>Docker Processes</value>
+    <value>Container Processes</value>
   </data>
   <data name="DOES_NOT_USE" xml:space="preserve">
     <value>does not use</value>
