@@ -580,6 +580,38 @@ namespace XenAPI
             return results;
         }
 
+        public static List<string> ParseSupportedVersionsListXML(string xml)
+        {
+            var supportedVersionsResult = new List<string>();
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xml);
+
+            // If we've got this from an async task result, then it will be wrapped
+            // in a <value> element.  Parse the contents instead.
+            foreach (XmlNode node in doc.GetElementsByTagName("value"))
+            {
+                xml = node.InnerXml;
+                doc = new XmlDocument();
+                doc.LoadXml(xml);
+                break;
+            }
+
+
+            foreach (XmlNode node in doc.GetElementsByTagName("SupportedVersions"))
+            {
+                foreach (XmlNode info in node.ChildNodes)
+                {
+                    if (info.Name.ToLowerInvariant() == "version")
+                    {
+                        supportedVersionsResult.Add(info.InnerText.Trim());
+                    }
+                }
+            }
+
+            return supportedVersionsResult;
+        }
+
         public String GetScsiID()
         {
             foreach (PBD pbd in Connection.ResolveAll(PBDs))

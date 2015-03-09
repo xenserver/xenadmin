@@ -29,7 +29,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VHDoNFS));
-            this.NfsScanButton = new System.Windows.Forms.Button();
             this.listBoxNfsSRs = new XenAdmin.Controls.SRListBox();
             this.radioButtonNfsReattach = new System.Windows.Forms.RadioButton();
             this.radioButtonNfsNew = new System.Windows.Forms.RadioButton();
@@ -39,16 +38,15 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.label3 = new System.Windows.Forms.Label();
             this.NfsServerPathTextBox = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.nfsVersionLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.NfsScanButton = new System.Windows.Forms.Button();
+            this.nfsVersionSelectorTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.nfsVersion3RadioButton = new System.Windows.Forms.RadioButton();
+            this.nfsVersion4RadioButton = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
+            this.nfsVersionSelectorTableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // NfsScanButton
-            // 
-            resources.ApplyResources(this.NfsScanButton, "NfsScanButton");
-            this.NfsScanButton.Name = "NfsScanButton";
-            this.NfsScanButton.UseVisualStyleBackColor = true;
-            this.NfsScanButton.Click += new System.EventHandler(this.buttonNfsScan_Click);
             // 
             // listBoxNfsSRs
             // 
@@ -80,6 +78,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
+            this.tableLayoutPanel1.SetColumnSpan(this.label2, 2);
             this.label2.ForeColor = System.Drawing.SystemColors.WindowText;
             this.label2.Name = "label2";
             // 
@@ -109,23 +108,59 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.nfsVersionLabel, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.NfsServerPathTextBox, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.NfsScanButton, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.labelAdvancedOptions, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.serverOptionsTextBox, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.radioButtonNfsNew, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.radioButtonNfsReattach, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.listBoxNfsSRs, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.radioButtonNfsNew, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.radioButtonNfsReattach, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.listBoxNfsSRs, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.NfsScanButton, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.nfsVersionSelectorTableLayoutPanel, 1, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // nfsVersionLabel
+            // 
+            resources.ApplyResources(this.nfsVersionLabel, "nfsVersionLabel");
+            this.nfsVersionLabel.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.nfsVersionLabel.Name = "nfsVersionLabel";
             // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
             this.tableLayoutPanel1.SetColumnSpan(this.label1, 3);
             this.label1.Name = "label1";
+            // 
+            // NfsScanButton
+            // 
+            resources.ApplyResources(this.NfsScanButton, "NfsScanButton");
+            this.NfsScanButton.Name = "NfsScanButton";
+            this.NfsScanButton.UseVisualStyleBackColor = true;
+            this.NfsScanButton.Click += new System.EventHandler(this.buttonNfsScan_Click);
+            // 
+            // nfsVersionSelectorTableLayoutPanel
+            // 
+            resources.ApplyResources(this.nfsVersionSelectorTableLayoutPanel, "nfsVersionSelectorTableLayoutPanel");
+            this.nfsVersionSelectorTableLayoutPanel.Controls.Add(this.nfsVersion3RadioButton, 0, 0);
+            this.nfsVersionSelectorTableLayoutPanel.Controls.Add(this.nfsVersion4RadioButton, 1, 0);
+            this.nfsVersionSelectorTableLayoutPanel.Name = "nfsVersionSelectorTableLayoutPanel";
+            // 
+            // nfsVersion3RadioButton
+            // 
+            resources.ApplyResources(this.nfsVersion3RadioButton, "nfsVersion3RadioButton");
+            this.nfsVersion3RadioButton.Checked = true;
+            this.nfsVersion3RadioButton.Name = "nfsVersion3RadioButton";
+            this.nfsVersion3RadioButton.TabStop = true;
+            this.nfsVersion3RadioButton.UseVisualStyleBackColor = true;
+            // 
+            // nfsVersion4RadioButton
+            // 
+            resources.ApplyResources(this.nfsVersion4RadioButton, "nfsVersion4RadioButton");
+            this.nfsVersion4RadioButton.Name = "nfsVersion4RadioButton";
+            this.nfsVersion4RadioButton.UseVisualStyleBackColor = true;
             // 
             // VHDoNFS
             // 
@@ -135,16 +170,17 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.Name = "VHDoNFS";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.nfsVersionSelectorTableLayoutPanel.ResumeLayout(false);
+            this.nfsVersionSelectorTableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button NfsScanButton;
         private System.Windows.Forms.RadioButton radioButtonNfsReattach;
         private XenAdmin.Controls.SRListBox listBoxNfsSRs;
-        private System.Windows.Forms.RadioButton radioButtonNfsNew;
+       private System.Windows.Forms.RadioButton radioButtonNfsNew;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox serverOptionsTextBox;
         private System.Windows.Forms.Label labelAdvancedOptions;
@@ -152,5 +188,10 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         private System.Windows.Forms.TextBox NfsServerPathTextBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label nfsVersionLabel;
+        private System.Windows.Forms.TableLayoutPanel nfsVersionSelectorTableLayoutPanel;
+        private System.Windows.Forms.RadioButton nfsVersion3RadioButton;
+        private System.Windows.Forms.RadioButton nfsVersion4RadioButton;
+        private System.Windows.Forms.Button NfsScanButton;
     }
 }

@@ -41,6 +41,7 @@ using XenAPI;
 using System.Globalization;
 using System.Reflection;
 using System.Xml;
+using System.Diagnostics;
 
 
 namespace XenAdmin.Core
@@ -399,7 +400,7 @@ namespace XenAdmin.Core
         {
             if (host == null)
                 return true;
-
+            
             string platform_version = Helpers.HostPlatformVersion(host);
             return
                 platform_version != null && Helpers.productVersionCompare(platform_version, "1.5.50") >= 0 ||
@@ -435,6 +436,25 @@ namespace XenAdmin.Core
             string platform_version = HostPlatformVersion(host);
             return
                 platform_version != null && productVersionCompare(platform_version, "1.8.90") >= 0 ||
+                HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+        }
+
+        /// <param name="conn">May be null, in which case true is returned.</param>
+        public static bool DundeeOrGreater(IXenConnection conn)
+        {
+            return conn == null ? true : DundeeOrGreater(Helpers.GetMaster(conn));
+        }
+
+        /// Dundee is ver. 2.0.0
+        /// <param name="host">May be null, in which case true is returned.</param>
+        public static bool DundeeOrGreater(Host host)
+        {
+            if (host == null)
+                return true;
+
+            string platform_version = HostPlatformVersion(host);
+            return
+                platform_version != null && productVersionCompare(platform_version, "2.0.0") >= 0 ||
                 HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
         }
 
