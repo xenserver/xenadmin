@@ -77,6 +77,7 @@ namespace XenAdmin.Controls.XenSearch
             queryTypes.Add(new EnumPropertyQueryType<VM.VirtualisationStatus>(3, ObjectTypes.VM, PropertyNames.virtualisation_status));
             queryTypes.Add(new ValuePropertyQueryType(3, ObjectTypes.VM, PropertyNames.os_name));
             queryTypes.Add(new EnumPropertyQueryType<VM.HA_Restart_Priority>(3, ObjectTypes.VM, PropertyNames.ha_restart_priority));
+            queryTypes.Add(new BooleanQueryType(3, ObjectTypes.VM, PropertyNames.read_caching_enabled));
             queryTypes.Add(new EnumPropertyQueryType<SR.SRTypes>(3, /*ObjectTypes.LocalSR | ObjectTypes.RemoteSR*/ ObjectTypes.None, PropertyNames.sr_type));
 
             queryTypes.Add(new LongQueryType(4, ObjectTypes.VDI, Messages.SIZE, PropertyNames.size, Util.BINARY_GIGA, Messages.VAL_GIGB));
