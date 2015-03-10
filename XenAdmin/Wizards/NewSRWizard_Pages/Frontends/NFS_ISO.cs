@@ -44,6 +44,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         private const string LOCATION = "location";
         private const string TYPE = "type";
         private const string NFS = "nfs_iso";
+        private const string NFSVERSION = "nfsversion";
 
         private SR _srToReattach;
         private bool _disasterRecoveryTask;
@@ -100,6 +101,9 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             // Remove all SRs that the current pool can see
             add_srs.RemoveAll(s => my_srs.Contains(s));
             this.NfsServerPathComboBox.Items.AddRange(add_srs.ToArray());
+
+            //Setting up visibility of the NFS Version controls
+            nfsVersionLabel.Visible = nfsVersionTableLayoutPanel.Visible = Helpers.DundeeOrGreater(Connection);
         }
 
         public override void PageLoaded(PageLoadedDirection direction)
@@ -147,6 +151,9 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 var dconf = new Dictionary<string, string>();
                 dconf[LOCATION] = NfsServerPathComboBox.Text;
                 dconf[TYPE] = NFS;
+
+                if (nfsVersion4RadioButton.Checked)
+                    dconf[NFSVERSION] = "4";
 
                 return dconf;
             }

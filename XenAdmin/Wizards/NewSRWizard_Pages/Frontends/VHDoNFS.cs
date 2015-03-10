@@ -46,6 +46,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         private const string SERVER = "server";
         private const string SERVERPATH = "serverpath";
         private const string OPTIONS = "options";
+        private const string NFSVERSION = "nfsversion";
+        private const string PROBEVERSION = "probeversion";
 
         public VHDoNFS()
         {
@@ -82,6 +84,9 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             if (SrWizardType.UUID != null)
                 listBoxNfsSRs.SetMustSelectUUID(SrWizardType.UUID);
+
+            //Setting visibility of NFS Version controls
+            nfsVersionLabel.Visible = nfsVersionSelectorTableLayoutPanel.Visible = Helpers.DundeeOrGreater(Connection);
         }
 
         #endregion
@@ -101,6 +106,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             if(radioButtonNfsNew.Enabled)
                 radioButtonNfsNew.Checked = true;
+
+            nfsVersion3RadioButton.Enabled = nfsVersion4RadioButton.Enabled = true;
 
             UpdateButtons();
         }
@@ -138,6 +145,9 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             if (master == null)
                 return;
 
+            if (Helpers.DundeeOrGreater(Connection))
+                dconf[PROBEVERSION] = string.Empty; //this needs to be passed to the API in order to get back the NFS versions supported
+
             // Start probe
             SrProbeAction action = new SrProbeAction(Connection, master, SR.SRTypes.nfs, dconf);
             ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
@@ -170,11 +180,39 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
                 listBoxNfsSRs.TryAndSelectUUID();
 
+                GetSupportedNfsVersionsAndSetUI(action.Result);
+                
                 ToggleReattachControlsEnabledState(true);
             }
             finally
             {
                 UpdateButtons();
+            }
+        }
+
+        private void GetSupportedNfsVersionsAndSetUI(string xml)
+        {
+            var supportedVersions = SR.ParseSupportedVersionsListXML(xml);
+
+            if (supportedVersions.Count == 0)
+            {
+                //supported NFS version are not known: either we have not got a result back (older host) or neither version is supported (not likely)
+
+                nfsVersion4RadioButton.Enabled = nfsVersion3RadioButton.Enabled = true;
+            }
+            else
+            {
+                //supported NFS versions are known
+
+                nfsVersion3RadioButton.Enabled = supportedVersions.Contains("3");
+                nfsVersion4RadioButton.Enabled = supportedVersions.Contains("4");
+
+                //when only one version is supported, check/select the one that is
+                if (!(nfsVersion3RadioButton.Enabled && nfsVersion4RadioButton.Enabled))
+                {
+                    nfsVersion3RadioButton.Checked = nfsVersion3RadioButton.Enabled;
+                    nfsVersion4RadioButton.Checked = nfsVersion4RadioButton.Enabled;
+                }
             }
         }
 
@@ -221,6 +259,9 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 {
                     dconf[SERVERPATH] = fullpath[1];
                 }
+
+                if (nfsVersion4RadioButton.Checked)
+                    dconf[NFSVERSION] = "4";
 
                 return dconf;
             }

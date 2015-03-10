@@ -32,10 +32,15 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.nfsVersionTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.nfsVersion3RadioButton = new System.Windows.Forms.RadioButton();
+            this.nfsVersion4RadioButton = new System.Windows.Forms.RadioButton();
             this.NfsServerPathComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.passwordFailure1 = new XenAdmin.Controls.Common.PasswordFailure();
+            this.nfsVersionLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
+            this.nfsVersionTableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // label3
@@ -53,12 +58,35 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.nfsVersionTableLayoutPanel, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.NfsServerPathComboBox, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.passwordFailure1, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.passwordFailure1, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.nfsVersionLabel, 0, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // nfsVersionTableLayoutPanel
+            // 
+            resources.ApplyResources(this.nfsVersionTableLayoutPanel, "nfsVersionTableLayoutPanel");
+            this.nfsVersionTableLayoutPanel.Controls.Add(this.nfsVersion3RadioButton, 0, 0);
+            this.nfsVersionTableLayoutPanel.Controls.Add(this.nfsVersion4RadioButton, 1, 0);
+            this.nfsVersionTableLayoutPanel.Name = "nfsVersionTableLayoutPanel";
+            // 
+            // nfsVersion3RadioButton
+            // 
+            resources.ApplyResources(this.nfsVersion3RadioButton, "nfsVersion3RadioButton");
+            this.nfsVersion3RadioButton.Checked = true;
+            this.nfsVersion3RadioButton.Name = "nfsVersion3RadioButton";
+            this.nfsVersion3RadioButton.TabStop = true;
+            this.nfsVersion3RadioButton.UseVisualStyleBackColor = true;
+            // 
+            // nfsVersion4RadioButton
+            // 
+            resources.ApplyResources(this.nfsVersion4RadioButton, "nfsVersion4RadioButton");
+            this.nfsVersion4RadioButton.Name = "nfsVersion4RadioButton";
+            this.nfsVersion4RadioButton.UseVisualStyleBackColor = true;
             // 
             // NfsServerPathComboBox
             // 
@@ -79,6 +107,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.passwordFailure1.Name = "passwordFailure1";
             this.passwordFailure1.TabStop = false;
             // 
+            // nfsVersionLabel
+            // 
+            resources.ApplyResources(this.nfsVersionLabel, "nfsVersionLabel");
+            this.nfsVersionLabel.Name = "nfsVersionLabel";
+            // 
             // NFS_ISO
             // 
             resources.ApplyResources(this, "$this");
@@ -87,6 +120,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.Name = "NFS_ISO";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.nfsVersionTableLayoutPanel.ResumeLayout(false);
+            this.nfsVersionTableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -100,5 +135,9 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         private System.Windows.Forms.ComboBox NfsServerPathComboBox;
         private XenAdmin.Controls.Common.PasswordFailure passwordFailure1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label nfsVersionLabel;
+        private System.Windows.Forms.TableLayoutPanel nfsVersionTableLayoutPanel;
+        private System.Windows.Forms.RadioButton nfsVersion3RadioButton;
+        private System.Windows.Forms.RadioButton nfsVersion4RadioButton;
     }
 }

@@ -112,49 +112,52 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="NfsScanButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="NfsScanButton.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="NfsScanButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="NfsScanButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>427, 49</value>
-  </data>
-  <data name="NfsScanButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 23</value>
-  </data>
-  <data name="NfsScanButton.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="NfsScanButton.Text" xml:space="preserve">
-    <value>&amp;Scan</value>
-  </data>
-  <data name="&gt;&gt;NfsScanButton.Name" xml:space="preserve">
-    <value>NfsScanButton</value>
-  </data>
-  <data name="&gt;&gt;NfsScanButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;NfsScanButton.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;NfsScanButton.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>3</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="nfsVersionLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="nfsVersionLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="nfsVersionLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="nfsVersionLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 137</value>
+  </data>
+  <data name="nfsVersionLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 13</value>
+  </data>
+  <data name="nfsVersionLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="nfsVersionLabel.Text" xml:space="preserve">
+    <value>NFS &amp;Version:</value>
+  </data>
+  <data name="nfsVersionLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;nfsVersionLabel.Name" xml:space="preserve">
+    <value>nfsVersionLabel</value>
+  </data>
+  <data name="&gt;&gt;nfsVersionLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nfsVersionLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;nfsVersionLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -181,13 +184,13 @@
     <value>label1</value>
   </data>
   <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
@@ -217,13 +220,13 @@
     <value>label3</value>
   </data>
   <data name="&gt;&gt;label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label3.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="NfsServerPathTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left, Right</value>
@@ -241,13 +244,13 @@
     <value>NfsServerPathTextBox</value>
   </data>
   <data name="&gt;&gt;NfsServerPathTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;NfsServerPathTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;NfsServerPathTextBox.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -277,7 +280,7 @@
     <value>label2</value>
   </data>
   <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -313,7 +316,7 @@
     <value>labelAdvancedOptions</value>
   </data>
   <data name="&gt;&gt;labelAdvancedOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelAdvancedOptions.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -337,7 +340,7 @@
     <value>serverOptionsTextBox</value>
   </data>
   <data name="&gt;&gt;serverOptionsTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;serverOptionsTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -352,7 +355,7 @@
     <value>NoControl</value>
   </data>
   <data name="radioButtonNfsNew.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 154</value>
+    <value>3, 183</value>
   </data>
   <data name="radioButtonNfsNew.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 25, 3, 3</value>
@@ -370,7 +373,7 @@
     <value>radioButtonNfsNew</value>
   </data>
   <data name="&gt;&gt;radioButtonNfsNew.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;radioButtonNfsNew.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -385,7 +388,7 @@
     <value>NoControl</value>
   </data>
   <data name="radioButtonNfsReattach.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 177</value>
+    <value>3, 206</value>
   </data>
   <data name="radioButtonNfsReattach.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 17</value>
@@ -400,13 +403,151 @@
     <value>radioButtonNfsReattach</value>
   </data>
   <data name="&gt;&gt;radioButtonNfsReattach.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;radioButtonNfsReattach.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;radioButtonNfsReattach.ZOrder" xml:space="preserve">
     <value>8</value>
+  </data>
+  <data name="NfsScanButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="NfsScanButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="NfsScanButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="NfsScanButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>427, 49</value>
+  </data>
+  <data name="NfsScanButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 23</value>
+  </data>
+  <data name="NfsScanButton.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="NfsScanButton.Text" xml:space="preserve">
+    <value>&amp;Scan</value>
+  </data>
+  <data name="&gt;&gt;NfsScanButton.Name" xml:space="preserve">
+    <value>NfsScanButton</value>
+  </data>
+  <data name="&gt;&gt;NfsScanButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NfsScanButton.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;NfsScanButton.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="nfsVersionSelectorTableLayoutPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
+  <data name="nfsVersionSelectorTableLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="nfsVersionSelectorTableLayoutPanel.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="nfsVersionSelectorTableLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="nfsVersion3RadioButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="nfsVersion3RadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="nfsVersion3RadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="nfsVersion3RadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="nfsVersion3RadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 17</value>
+  </data>
+  <data name="nfsVersion3RadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="nfsVersion3RadioButton.Text" xml:space="preserve">
+    <value>NFSv&amp;3</value>
+  </data>
+  <data name="&gt;&gt;nfsVersion3RadioButton.Name" xml:space="preserve">
+    <value>nfsVersion3RadioButton</value>
+  </data>
+  <data name="&gt;&gt;nfsVersion3RadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nfsVersion3RadioButton.Parent" xml:space="preserve">
+    <value>nfsVersionSelectorTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;nfsVersion3RadioButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="nfsVersion4RadioButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="nfsVersion4RadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="nfsVersion4RadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="nfsVersion4RadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>67, 3</value>
+  </data>
+  <data name="nfsVersion4RadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 17</value>
+  </data>
+  <data name="nfsVersion4RadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="nfsVersion4RadioButton.Text" xml:space="preserve">
+    <value>NFSv&amp;4</value>
+  </data>
+  <data name="&gt;&gt;nfsVersion4RadioButton.Name" xml:space="preserve">
+    <value>nfsVersion4RadioButton</value>
+  </data>
+  <data name="&gt;&gt;nfsVersion4RadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nfsVersion4RadioButton.Parent" xml:space="preserve">
+    <value>nfsVersionSelectorTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;nfsVersion4RadioButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="nfsVersionSelectorTableLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>107, 132</value>
+  </data>
+  <data name="nfsVersionSelectorTableLayoutPanel.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="nfsVersionSelectorTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 23</value>
+  </data>
+  <data name="nfsVersionSelectorTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;nfsVersionSelectorTableLayoutPanel.Name" xml:space="preserve">
+    <value>nfsVersionSelectorTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;nfsVersionSelectorTableLayoutPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nfsVersionSelectorTableLayoutPanel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;nfsVersionSelectorTableLayoutPanel.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="nfsVersionSelectorTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="nfsVersion3RadioButton" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="nfsVersion4RadioButton" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -415,7 +556,7 @@
     <value>0, 0</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>500, 461</value>
@@ -427,7 +568,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -436,7 +577,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="label3" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="NfsServerPathTextBox" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="NfsScanButton" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelAdvancedOptions" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="serverOptionsTextBox" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonNfsNew" Row="4" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="radioButtonNfsReattach" Row="5" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="listBoxNfsSRs" Row="6" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="nfsVersionLabel" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="label3" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="NfsServerPathTextBox" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="2" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="labelAdvancedOptions" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="serverOptionsTextBox" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonNfsNew" Row="5" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="radioButtonNfsReattach" Row="6" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="listBoxNfsSRs" Row="7" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="NfsScanButton" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="nfsVersionSelectorTableLayoutPanel" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="listBoxNfsSRs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -448,10 +589,10 @@
     <value>14</value>
   </data>
   <data name="listBoxNfsSRs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 200</value>
+    <value>3, 229</value>
   </data>
   <data name="listBoxNfsSRs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>494, 258</value>
+    <value>494, 229</value>
   </data>
   <data name="listBoxNfsSRs.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -468,7 +609,7 @@
   <data name="&gt;&gt;listBoxNfsSRs.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
