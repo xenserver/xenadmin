@@ -3739,14 +3739,8 @@ This will also delete its subfolders.</value>
   <data name="DMC_UNAVAILABLE_VMS" xml:space="preserve">
     <value>A memory range cannot be set for these VMs.</value>
   </data>
-  <data name="DOES_NOT_USE" xml:space="preserve">
-    <value>does not use</value>
-  </data>
   <data name="DOCKER_DETAIL_TAB_TITLE" xml:space="preserve">
     <value>Docker Detail</value>
-  </data>
-  <data name="DOCKER_PROCESS_TAB_TITLE" xml:space="preserve">
-    <value>Docker Processes</value>
   </data>
   <data name="DOCKER_INFO_API_VERSION" xml:space="preserve">
     <value>Api Version</value>
@@ -3813,6 +3807,12 @@ This will also delete its subfolders.</value>
   </data>
   <data name="DOCKER_INFO_VERSION" xml:space="preserve">
     <value>Version</value>
+  </data>
+  <data name="DOCKER_PROCESS_TAB_TITLE" xml:space="preserve">
+    <value>Docker Processes</value>
+  </data>
+  <data name="DOES_NOT_USE" xml:space="preserve">
+    <value>does not use</value>
   </data>
   <data name="DONE" xml:space="preserve">
     <value>done.</value>
@@ -11726,9 +11726,6 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   <data name="VM_PROTECTION_POLICY_SUCCEEDED" xml:space="preserve">
     <value>Succeeded</value>
   </data>
-  <data name="VM_READ_CACHING_ENABLED" xml:space="preserve">
-    <value>This VM has Read Caching enabled</value>
-  </data>
   <data name="VM_READ_CACHING_DISABLED" xml:space="preserve">
     <value>This VM is not using Read Caching</value>
   </data>
@@ -11740,6 +11737,12 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
   </data>
   <data name="VM_READ_CACHING_DISABLED_REASON_TURNED_OFF" xml:space="preserve">
     <value>Read Caching is disabled on all supported Storage Repositories used by this VM</value>
+  </data>
+  <data name="VM_READ_CACHING_ENABLED" xml:space="preserve">
+    <value>This VM has Read Caching enabled</value>
+  </data>
+  <data name="VM_READ_CACHING_ENABLED_SEARCH" xml:space="preserve">
+    <value>Using read caching</value>
   </data>
   <data name="VM_REVERTED" xml:space="preserve">
     <value>VM reverted to '{0}'</value>

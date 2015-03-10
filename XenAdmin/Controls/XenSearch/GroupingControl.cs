@@ -78,6 +78,7 @@ namespace XenAdmin.Controls.XenSearch
             potentialGroups.Add(srGroup);
             potentialGroups.Add(new XenModelObjectPropertyGroupingType<VDI>(ObjectTypes.VM, PropertyNames.disks, srGroup));
             potentialGroups.Add(new PropertyGroupingType<VM.HA_Restart_Priority>(ObjectTypes.VM, PropertyNames.ha_restart_priority));
+            potentialGroups.Add(new PropertyGroupingType<bool>(ObjectTypes.VM, PropertyNames.read_caching_enabled));
 			potentialGroups.Add(applianceGroup);
             potentialGroups.Add(new PropertyGroupingType<String>(ObjectTypes.AllExcFolders, PropertyNames.tags));
             potentialGroups.Add(new XenModelObjectPropertyGroupingType<VM>(
