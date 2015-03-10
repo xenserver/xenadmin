@@ -591,7 +591,7 @@ namespace XenAPI
             // in a <value> element.  Parse the contents instead.
             foreach (XmlNode node in doc.GetElementsByTagName("value"))
             {
-                xml = node.InnerXml;
+                xml = node.InnerText;
                 doc = new XmlDocument();
                 doc.LoadXml(xml);
                 break;

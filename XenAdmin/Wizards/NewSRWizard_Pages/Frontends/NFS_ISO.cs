@@ -103,8 +103,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.NfsServerPathComboBox.Items.AddRange(add_srs.ToArray());
 
             //Setting up visibility of the NFS Version controls
-            Host master = Helpers.GetMaster(Connection);
-            nfsVersionLabel.Visible = nfsVersionTableLayoutPanel.Visible = Helpers.DundeeOrGreater(master);
+            nfsVersionLabel.Visible = nfsVersionTableLayoutPanel.Visible = Helpers.DundeeOrGreater(Connection);
         }
 
         public override void PageLoaded(PageLoadedDirection direction)

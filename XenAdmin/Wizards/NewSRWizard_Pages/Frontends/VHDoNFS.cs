@@ -86,8 +86,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 listBoxNfsSRs.SetMustSelectUUID(SrWizardType.UUID);
 
             //Setting visibility of NFS Version controls
-            Host master = Helpers.GetMaster(Connection);
-            nfsVersionLabel.Visible = nfsVersionSelectorTableLayoutPanel.Visible = Helpers.DundeeOrGreater(master);
+            nfsVersionLabel.Visible = nfsVersionSelectorTableLayoutPanel.Visible = Helpers.DundeeOrGreater(Connection);
         }
 
         #endregion
@@ -142,12 +141,12 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             }
             dconf[OPTIONS] = serverOptionsTextBox.Text;
 
-            if (Helpers.DundeeOrGreater(Helpers.GetMaster(Connection)))
-                dconf[PROBEVERSION] = string.Empty; //this needs to be passed to the API in order to get back the NFS versions supported
-
             Host master = Helpers.GetMaster(Connection);
             if (master == null)
                 return;
+
+            if (Helpers.DundeeOrGreater(Connection))
+                dconf[PROBEVERSION] = string.Empty; //this needs to be passed to the API in order to get back the NFS versions supported
 
             // Start probe
             SrProbeAction action = new SrProbeAction(Connection, master, SR.SRTypes.nfs, dconf);
