@@ -3740,7 +3740,7 @@ This will also delete its subfolders.</value>
     <value>A memory range cannot be set for these VMs.</value>
   </data>
   <data name="DOCKER_DETAIL_TAB_TITLE" xml:space="preserve">
-    <value>Docker Detail</value>
+    <value>Container Details</value>
   </data>
   <data name="DOCKER_INFO_API_VERSION" xml:space="preserve">
     <value>Api Version</value>
@@ -3809,7 +3809,7 @@ This will also delete its subfolders.</value>
     <value>Version</value>
   </data>
   <data name="DOCKER_PROCESS_TAB_TITLE" xml:space="preserve">
-    <value>Docker Processes</value>
+    <value>Container Processes</value>
   </data>
   <data name="DOES_NOT_USE" xml:space="preserve">
     <value>does not use</value>
@@ -8700,7 +8700,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>Choose an existing update to install or upload a new one</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
-    <value>XenServer Updates|*.xsupdate;*.xsoem|Supplemental Packs (*.iso)|*.iso</value>
+    <value>XenServer Updates and Supplemental Packs (*.xsupdate, *.iso)|*.xsupdate;*.iso</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS" xml:space="preserve">
     <value>Cannot install supplemental packs on this XenServer version</value>
@@ -11077,7 +11077,7 @@ Check your settings and try again.</value>
     <value>{0}: The VM '{1}' uses local storage and cannot be migrated.</value>
   </data>
   <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
-    <value>The selected file does not have a valid extension. Valid extensions are: *.xsoem, *.xsupdate and *.iso</value>
+    <value>The selected file does not have a valid extension. Valid extensions are: *.xsupdate and *.iso</value>
   </data>
   <data name="UPDATES_WIZARD_NOT_ENOUGH_SPACE" xml:space="preserve">
     <value>This storage repository does not have enough space to suspend the required VMs.</value>

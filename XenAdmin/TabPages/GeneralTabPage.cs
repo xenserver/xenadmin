@@ -383,7 +383,10 @@ namespace XenAdmin.TabPages
         public void EnableDisableEdit()
         {
             buttonProperties.Enabled = xenObject != null && !xenObject.Locked && xenObject.Connection != null && xenObject.Connection.IsConnected;
-            buttonProperties.Visible = !(xenObject is DockerContainer);
+
+            //keeping it separate
+            if (xenObject is DockerContainer)
+                buttonProperties.Enabled = false;
         }
 
         public void BuildList()
@@ -468,7 +471,6 @@ namespace XenAdmin.TabPages
                 generateMultipathBootBox();
                 generateVCPUsBox();
                 generateDockerInfoBox();
-                generateDockerVersionBox();
                 generateReadCachingBox();
             }
 
@@ -1558,50 +1560,19 @@ namespace XenAdmin.TabPages
             if (info == null)
                 return;
 
-            PDSection s = pdSectionDockerInfo;
-            addStringEntry(s, Messages.DOCKER_INFO_NGOROUTINES, info.NGoroutines);
-            addStringEntry(s, Messages.DOCKER_INFO_ROOT_DIR, info.DockerRootDir);
-            addStringEntry(s, Messages.DOCKER_INFO_DRIVER_STATUS, info.DriverStatus);
-            addStringEntry(s, Messages.OPERATING_SYSTEM, info.OperatingSystem); ;
-            addStringEntry(s, Messages.CONTAINER, info.Containers);
-            addStringEntry(s, Messages.MEMORY, Util.MemorySizeString(Convert.ToDouble(info.MemTotal)));
-            addStringEntry(s, Messages.DOCKER_INFO_DRIVER, info.Driver);
-            addStringEntry(s, Messages.DOCKER_INFO_INDEX_SERVER_ADDRESS, info.IndexServerAddress);
-            addStringEntry(s, Messages.DOCKER_INFO_INITIATE_PATH, info.InitPath);
-            addStringEntry(s, Messages.DOCKER_INFO_EXECUTION_DRIVER, info.ExecutionDriver);
-            addStringEntry(s, Messages.NAME, info.Name);
-            addStringEntry(s, Messages.DOCKER_INFO_NCPU, info.NCPU);
-            addStringEntry(s, Messages.DOCKER_INFO_DEBUG, info.Debug);
-            addStringEntry(s, Messages.ID, info.ID);
-            addStringEntry(s, Messages.DOCKER_INFO_IPV4_FORWARDING, info.IPv4Forwarding);
-            addStringEntry(s, Messages.DOCKER_INFO_KERNEL_VERSION, info.KernelVersion);
-            addStringEntry(s, Messages.DOCKER_INFO_NFD, info.NFd);
-            addStringEntry(s, Messages.DOCKER_INFO_INITIATE_SHA1, info.InitSha1);
-            addStringEntry(s, Messages.DOCKER_INFO_LABELS, info.Labels);
-            addStringEntry(s, Messages.DOCKER_INFO_MEMORY_LIMIT, Util.MemorySizeString(Convert.ToDouble(info.MemoryLimit)));
-            addStringEntry(s, Messages.DOCKER_INFO_SWAP_LIMIT, info.SwapLimit);
-            addStringEntry(s, Messages.CONTAINER_IMAGE, info.Images);
-            addStringEntry(s, Messages.DOCKER_INFO_NEVENT_LISTENER, info.NEventsListener);
-        }
-
-        private void generateDockerVersionBox()
-        {
-            VM vm = xenObject as VM;
-            if (vm == null)
-                return;
-
             VM_Docker_Version version = vm.DockerVersion;
             if (version == null)
                 return;
 
-            PDSection s = pdSectionDockerVersion;
-            addStringEntry(s, Messages.DOCKER_INFO_KERNEL_VERSION, version.KernelVersion);
-            addStringEntry(s, Messages.DOCKER_INFO_ARCH, version.Arch);
+            PDSection s = pdSectionDockerInfo;
+
             addStringEntry(s, Messages.DOCKER_INFO_API_VERSION, version.ApiVersion);
             addStringEntry(s, Messages.DOCKER_INFO_VERSION, version.Version);
             addStringEntry(s, Messages.DOCKER_INFO_GIT_COMMIT, version.GitCommit);
-            addStringEntry(s, Messages.OPERATING_SYSTEM, version.Os);
-            addStringEntry(s, Messages.DOCKER_INFO_GO_VERSION, version.GoVersion);
+            addStringEntry(s, Messages.DOCKER_INFO_DRIVER, info.Driver);
+            addStringEntry(s, Messages.DOCKER_INFO_INDEX_SERVER_ADDRESS, info.IndexServerAddress);
+            addStringEntry(s, Messages.DOCKER_INFO_EXECUTION_DRIVER, info.ExecutionDriver);
+            addStringEntry(s, Messages.DOCKER_INFO_IPV4_FORWARDING, info.IPv4Forwarding);
         }
 
         private bool CPUsIdentical(IEnumerable<Host_cpu> cpus)
