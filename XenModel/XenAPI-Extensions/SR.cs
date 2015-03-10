@@ -529,7 +529,7 @@ namespace XenAPI
             // in a <value> element.  Parse the contents instead.
             foreach (XmlNode node in doc.GetElementsByTagName("value"))
             {
-                xml = node.InnerText;
+                xml = node.InnerXml;
                 doc = new XmlDocument();
                 doc.LoadXml(xml);
                 break;
