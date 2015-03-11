@@ -99,12 +99,16 @@ namespace XenAdmin.Actions
             long requiredDiskSpace = updateSize;
             try
             {
-                result = Host.call_plugin(Session, Host.opaque_ref, "disk-space", "get_required_space", new Dictionary<string, string>());
+                var args = new Dictionary<string, string>();
+                args.Add("size", updateSize.ToString());
+
+                result = Host.call_plugin(Session, Host.opaque_ref, "disk-space", "get_required_space", args);
                 requiredDiskSpace = Convert.ToInt64(result);
             }
             catch (Failure failure)
             {
                 log.WarnFormat("Plugin call disk-space.get_required_space on {0} failed with {1}", Host.Name, failure.Message);
+                requiredDiskSpace = 0;
             }
 
             // get available disk space
@@ -185,8 +189,11 @@ namespace XenAdmin.Actions
 
             sbMessage.AppendLine();
             sbMessage.AppendLine();
-            sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_REQUIRED_SPACE, Util.DiskSizeString(RequiredDiskSpace));
-            sbMessage.AppendLine();
+            if (RequiredDiskSpace > 0)
+            {
+                sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_REQUIRED_SPACE, Util.DiskSizeString(RequiredDiskSpace));
+                sbMessage.AppendLine();
+            }
             sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_AVAILABLE_SPACE, Util.DiskSizeString(AvailableDiskSpace));
             sbMessage.AppendLine();
             sbMessage.AppendLine();
