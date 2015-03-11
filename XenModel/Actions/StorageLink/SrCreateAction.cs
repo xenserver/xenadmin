@@ -113,7 +113,7 @@ namespace XenAdmin.Actions
             log.DebugFormat("is shared='{0}'", _srIsShared);
 
             string secretuuid = null;
-            if (Helpers.MidnightRideOrGreater(Connection) && _srType != XenAPI.SR.SRTypes.cifs) //TEMPORARY: cifs SRs will not use XAPI Secret until development work has been finished. For CP-11364 revert this line. 
+            if (Helpers.MidnightRideOrGreater(Connection))
             {
                 string value;
                 if (_dconf.TryGetValue("cifspassword", out value))
