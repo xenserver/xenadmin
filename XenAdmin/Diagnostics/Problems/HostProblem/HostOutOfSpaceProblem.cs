@@ -123,5 +123,10 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
                 return false;
             return diskSpaceReq.Equals(other.diskSpaceReq);
         }
+
+        public override int GetHashCode()
+        {
+            return diskSpaceReq != null ? diskSpaceReq.GetHashCode() : 0;
+        }
     }
 }
