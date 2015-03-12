@@ -115,5 +115,18 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
                 return false;
             }
         }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as HostOutOfSpaceProblem;
+            if (other == null || diskSpaceReq == null || other.diskSpaceReq == null)
+                return false;
+            return diskSpaceReq.Equals(other.diskSpaceReq);
+        }
+
+        public override int GetHashCode()
+        {
+            return diskSpaceReq != null ? diskSpaceReq.GetHashCode() : 0;
+        }
     }
 }
