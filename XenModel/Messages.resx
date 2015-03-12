@@ -7627,8 +7627,15 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NEWSR_ACTION" xml:space="preserve">
     <value>NFS SR [{0}]</value>
   </data>
+  <data name="NEWSR_CIFS_ACTION" xml:space="preserve">
+    <value>CIFS SR [{0}]</value>
+  </data>
   <data name="NEWSR_CIFS_BLURB" xml:space="preserve">
-    <value>Select this option if you have a Windows (CIFS) share that you wish to attach to your host or pool.</value>
+    <value>CIFS servers are a common form of Windows shared filesystem infrastructure, and can be used as a storage repository substrate for virtual disks.
+
+As CIFS storage repositories are shared, the virtual disks stored in them allow VMs to be started on any server in a resource pool and to be migrated between them using XenMotion.
+
+When you configure a CIFS storage repository, you simply provide the hostname or IP address of the CIFS server, the username, the password and the path to a directory that will be used to contain the storage repository. The CIFS server must be configured to export the specified path to all servers in the pool.</value>
   </data>
   <data name="NEWSR_CIFS_ISO_BLURB" xml:space="preserve">
     <value>Select this option if you have a library of VM installation ISO images available as a Windows (CIFS) share that you wish to attach to your host or pool.</value>

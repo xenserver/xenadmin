@@ -336,6 +336,9 @@
   <data name="Label-Pool_patch.partially_applied" xml:space="preserve">
     <value>Partially applied</value>
   </data>
+  <data name="Label-SR.SRTypes-cifs" xml:space="preserve">
+    <value>CIFS</value>
+  </data>
   <data name="Label-SR.SRTypes-cslg" xml:space="preserve">
     <value>StorageLink</value>
   </data>

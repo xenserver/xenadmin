@@ -241,7 +241,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             {
                 return string.IsNullOrEmpty(CifsServerPathTextBox.Text)
                            ? null
-                           : string.Format(Messages.NEWSR_ACTION, CifsServerPathTextBox.Text);
+                           : string.Format(Messages.NEWSR_CIFS_ACTION, CifsServerPathTextBox.Text);
             }
         }
 
