@@ -56,7 +56,10 @@ namespace XenAdmin.Actions
             Description = String.Format(Messages.ACTION_CLEANUP_DISK_SPACE_DESCRIPTION, Host.Name);
             try
             {
-                var args = new Dictionary<string, string> {{"exclude", excludedPatch.uuid}};
+                var args = new Dictionary<string, string>();
+                if (excludedPatch != null)
+                    args.Add("exclude", excludedPatch.uuid);
+
                 Result = Host.call_plugin(Session, Host.opaque_ref, "disk-space", "cleanup_disk_space", args);
                 if (Result.ToLower() == "true")
                     Description = String.Format(Messages.ACTION_CLEANUP_DISK_SPACE_SUCCESS, Host.Name);
