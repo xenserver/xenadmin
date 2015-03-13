@@ -1752,7 +1752,8 @@ namespace XenAPI
                 foreach (var vbd in Connection.ResolveAll(VBDs).Where(vbd => vbd != null && vbd.currently_attached))
                 {
                     var vdi = Connection.Resolve(vbd.VDI);
-                    if (vdi != null && vdi.ReadCachingEnabled)
+                    var resident_host = Connection.Resolve(resident_on);
+                    if (vdi != null && resident_host != null && vdi.ReadCachingEnabled(resident_host))
                         readCachingVdis.Add(vdi);
                 }
                 return readCachingVdis;

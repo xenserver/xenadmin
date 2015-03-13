@@ -327,15 +327,15 @@ namespace XenAPI
         }
         
         /// <summary>
-        /// Whether the read caching is enabled on this disk
+        /// Whether read caching is enabled on this disk on a specific host
         /// </summary>
-        public bool ReadCachingEnabled
+        public bool ReadCachingEnabled(Host host)
         {
-            get { return BoolKey(sm_config, "read-caching-enabled"); }
+            return BoolKey(sm_config, "read-caching-enabled-on-" + host.uuid);
         }
 
         /// <summary>
-        /// Whether the read caching is supported on this disk
+        /// Whether read caching is supported on this disk
         /// </summary>
         public bool ReadCachingSupported
         {
