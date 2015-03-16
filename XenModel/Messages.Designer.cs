@@ -33857,7 +33857,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This VM is not using Read Caching.
+        ///   Looks up a localized string similar to This VM is not using read caching.
         /// </summary>
         public static string VM_READ_CACHING_DISABLED {
             get {
@@ -33866,7 +33866,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not licensed for Read Caching.
+        ///   Looks up a localized string similar to This pool is not licensed for read caching.
         /// </summary>
         public static string VM_READ_CACHING_DISABLED_REASON_LICENSE {
             get {
@@ -33875,7 +33875,25 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Read Caching is not supported on any of the Storage Repositories used by this VM.
+        ///   Looks up a localized string similar to This VM does not have any read-only disks or disks with a read-only parent.
+        /// </summary>
+        public static string VM_READ_CACHING_DISABLED_REASON_NO_RO_IMAGE {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_DISABLED_REASON_NO_RO_IMAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This pool was not licensed for read caching when the VM was started.
+        /// </summary>
+        public static string VM_READ_CACHING_DISABLED_REASON_PREV_LICENSE {
+            get {
+                return ResourceManager.GetString("VM_READ_CACHING_DISABLED_REASON_PREV_LICENSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read caching is not supported on the type of Storage Repository used by this VM.
         /// </summary>
         public static string VM_READ_CACHING_DISABLED_REASON_SR_TYPE {
             get {
@@ -33884,7 +33902,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Read Caching is disabled on all supported Storage Repositories used by this VM.
+        ///   Looks up a localized string similar to Read caching has been disabled on the Storage Repository used by this VM.
         /// </summary>
         public static string VM_READ_CACHING_DISABLED_REASON_TURNED_OFF {
             get {
@@ -33893,7 +33911,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This VM has Read Caching enabled.
+        ///   Looks up a localized string similar to This VM is using read caching.
         /// </summary>
         public static string VM_READ_CACHING_ENABLED {
             get {

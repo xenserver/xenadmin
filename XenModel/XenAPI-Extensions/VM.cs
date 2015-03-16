@@ -1760,32 +1760,45 @@ namespace XenAPI
             }
         }
 
-        /// <summary>
-        /// Whether the Read Caching is supported on any of the VDIs
-        /// </summary>
-        public bool ReadCachingSupported
+        public string ReadCachingDisabledReason
         {
-            get
+            // The code in VDI.ReadCachingDisabledReason returns the first matching reason from the list
+            // (LICENSE_RESTRICTION, SR_NOT_SUPPORTED, NO_RO_IMAGE, SR_OVERRIDE). In the case that there
+            // are several VDIs with different reasons, this function returns the last matching reason,
+            // because that is the VDI that is nearest to being read-cachable in some sense. As the reasons
+            // are stored in an enum, we can just use greater-than to find the last reason 
+            get 
             {
+                var ans = VDI.ReadCachingDisabledReasonCode.UNKNOWN;
                 foreach (var vbd in Connection.ResolveAll(VBDs).Where(vbd => vbd != null && vbd.currently_attached))
                 {
                     var vdi = Connection.Resolve(vbd.VDI);
-                    if (vdi != null && vdi.ReadCachingSupported)
-                        return true;
+                    var resident_host = Connection.Resolve(resident_on);
+                    if (vdi != null && resident_host != null && !vdi.ReadCachingEnabled(resident_host))
+                    {
+                        var reason = vdi.ReadCachingDisabledReason(resident_host);
+                        if (reason > ans)
+                            ans = reason;
+                    }
                 }
-                return false;
-            }
-        }
-        
-        public string ReadCachingDisabledReason
-        {
-            get 
-            { 
-                if (Helpers.FeatureForbidden(Connection, Host.RestrictReadCaching))
-                    return Messages.VM_READ_CACHING_DISABLED_REASON_LICENSE;
-                if (!ReadCachingSupported)
-                    return Messages.VM_READ_CACHING_DISABLED_REASON_SR_TYPE;
-                return Messages.VM_READ_CACHING_DISABLED_REASON_TURNED_OFF;
+
+                switch (ans)
+                {
+                    case VDI.ReadCachingDisabledReasonCode.LICENSE_RESTRICTION:
+                        if (Helpers.FeatureForbidden(Connection, Host.RestrictReadCaching))
+                            return Messages.VM_READ_CACHING_DISABLED_REASON_LICENSE;
+                        else
+                            return Messages.VM_READ_CACHING_DISABLED_REASON_PREV_LICENSE;
+                    case VDI.ReadCachingDisabledReasonCode.SR_NOT_SUPPORTED:
+                        return Messages.VM_READ_CACHING_DISABLED_REASON_SR_TYPE;
+                    case VDI.ReadCachingDisabledReasonCode.NO_RO_IMAGE:
+                        return Messages.VM_READ_CACHING_DISABLED_REASON_NO_RO_IMAGE;
+                    case VDI.ReadCachingDisabledReasonCode.SR_OVERRIDE:
+                        return Messages.VM_READ_CACHING_DISABLED_REASON_TURNED_OFF;
+                    default:
+                        // should only happen transiently
+                        return null;
+                }
             }
         }
     }
