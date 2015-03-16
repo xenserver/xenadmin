@@ -94,6 +94,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         private void UpdateButtons()
         {
             NfsScanButton.Enabled = SrWizardHelpers.ValidateNfsSharename(NfsServerPathTextBox.Text);
+            nfsVersionSelectorTableLayoutPanel.Enabled = radioButtonNfsNew.Checked;
+
             OnPageUpdated();
         }
 
