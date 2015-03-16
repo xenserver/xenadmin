@@ -145,7 +145,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             // 
             resources.ApplyResources(this.nfsVersionSelectorTableLayoutPanel, "nfsVersionSelectorTableLayoutPanel");
             this.nfsVersionSelectorTableLayoutPanel.Controls.Add(this.nfsVersion3RadioButton, 0, 0);
-            this.nfsVersionSelectorTableLayoutPanel.Controls.Add(this.nfsVersion4RadioButton, 1, 0);
+            this.nfsVersionSelectorTableLayoutPanel.Controls.Add(this.nfsVersion4RadioButton, 0, 1);
             this.nfsVersionSelectorTableLayoutPanel.Name = "nfsVersionSelectorTableLayoutPanel";
             // 
             // nfsVersion3RadioButton
