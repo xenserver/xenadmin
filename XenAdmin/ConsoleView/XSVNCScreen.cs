@@ -489,6 +489,10 @@ namespace XenAdmin.ConsoleView
         {
             Program.AssertOnEventThread();
 
+            //When switch to RDP from VNC, if RDP IP is empty, do not try to switch.
+            if (String.IsNullOrEmpty(rdpIP) && !UseVNC && RemoteConsole != null)
+                return;
+
             bool wasFocused = false;
             this.Controls.Clear();
 
