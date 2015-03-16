@@ -1400,7 +1400,9 @@ namespace XenAdmin.TabPages
             else
             {
                 s.AddEntry(FriendlyName("VM.read_caching_status"), Messages.VM_READ_CACHING_DISABLED);
-                s.AddEntry(FriendlyName("VM.read_caching_reason"), vm.ReadCachingDisabledReason);
+                var reason = vm.ReadCachingDisabledReason;
+                if (reason != null)
+                    s.AddEntry(FriendlyName("VM.read_caching_reason"), reason);
             }
         }
 

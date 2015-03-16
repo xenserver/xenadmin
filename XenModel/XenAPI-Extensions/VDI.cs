@@ -335,16 +335,31 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Whether read caching is supported on this disk
+        /// ... and if not, why not
         /// </summary>
-        public bool ReadCachingSupported
+        public ReadCachingDisabledReasonCode ReadCachingDisabledReason(Host host)
         {
-            get
+            string reasonstr;
+            if (sm_config.TryGetValue("read-caching-reason-" + host.uuid, out reasonstr))
             {
-                var sr = Connection.Resolve(SR);
-                var srType = sr != null ? sr.GetSRType(false) : XenAPI.SR.SRTypes.unknown;
-                return srType == XenAPI.SR.SRTypes.ext || srType == XenAPI.SR.SRTypes.nfs;
+                ReadCachingDisabledReasonCode reason;
+                if (Enum.TryParse(reasonstr, out reason))
+                    return reason;
             }
+            return ReadCachingDisabledReasonCode.UNKNOWN;
+        }
+
+        /// <summary>
+        /// Possible reasons for read caching being disabled
+        /// If there are multiple reasons, the topmost reason will be returned
+        /// </summary>
+        public enum ReadCachingDisabledReasonCode
+        {
+            UNKNOWN,  // catch-all, shouldn't occur if read caching is disabled
+            LICENSE_RESTRICTION,  // self-explanatory
+            SR_NOT_SUPPORTED,  // the SR is not NFS or EXT
+            NO_RO_IMAGE,  // no part of the VDI is read-only => nothing to cache
+            SR_OVERRIDE,  // the feature has been explicitly disabled for the VDI's SR
         }
     }
 }
