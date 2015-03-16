@@ -135,7 +135,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             // Perform an SR.probe to see if there is already an SR present
             Dictionary<String, String> dconf = new Dictionary<String, String>();
-            string[] fullpath = NfsServerPathTextBox.Text.Split(new char[] { ':' });
+            string[] fullpath = NfsServerPathTextBox.Text.Trim().Split(new char[] { ':' });
             dconf[SERVER] = fullpath[0];
             if (fullpath.Length > 1)
             {
@@ -252,7 +252,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             {
                 var dconf = new Dictionary<string, string>();
 
-                string[] fullpath = NfsServerPathTextBox.Text.Split(new char[] { ':' });
+                string[] fullpath = NfsServerPathTextBox.Text.Trim().Split(new char[] { ':' });
 
                 dconf[OPTIONS] = serverOptionsTextBox.Text;
                 dconf[SERVER] = fullpath[0];
