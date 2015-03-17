@@ -58,7 +58,7 @@ namespace XenAdmin.Network
             return host == null ? null : GetManagementPIF(host);
         }
 
-        private static PIF GetManagementPIF(Host host)
+        public static PIF GetManagementPIF(Host host)
         {
             foreach (PIF pif in host.Connection.ResolveAll(host.PIFs))
             {

@@ -67,26 +67,23 @@ namespace XenAdmin.Commands
         {
             VM vm = (VM)selection[0].XenObject;
 
-            MainWindowCommandInterface.ShowPerXenModelObjectWizard(vm, new MoveVMDialog(vm));
+            var cmd = new CrossPoolMoveVMCommand(MainWindowCommandInterface, selection);
+            if (cmd.CanExecute())
+                cmd.Execute();
+            else
+                MainWindowCommandInterface.ShowPerXenModelObjectWizard(vm, new MoveVMDialog(vm));
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
+            if (new CrossPoolMoveVMCommand(MainWindowCommandInterface, selection).CanExecute())
+                return true;
             return selection.ContainsOneItemOfType<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanExecute);
         }
 
         private static bool CanExecute(VM vm)
         {
-
-            if (vm != null && vm.SRs.Any(sr => sr != null && sr.HBALunPerVDI))
-                return false;
-
-            if (!vm.is_a_template && !vm.Locked && vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.export) && vm.power_state != vm_power_state.Suspended)
-            {
-                return vm.Connection.ResolveAll(vm.VBDs).Find(v => v.IsOwner) != null;
-            }
-
-            return false;
+            return vm != null && vm.CanBeMoved;
         }
 
         public override string MenuText
