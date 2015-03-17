@@ -262,7 +262,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     dconf[SERVERPATH] = fullpath[1];
                 }
 
-                if (nfsVersion4RadioButton.Checked)
+                if (nfsVersion4RadioButton.Enabled && nfsVersion4RadioButton.Checked)
                     dconf[NFSVERSION] = "4";
 
                 return dconf;

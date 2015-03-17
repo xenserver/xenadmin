@@ -352,13 +352,13 @@
     <value>NoControl</value>
   </data>
   <data name="radioButtonNfsReattach.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 230</value>
+    <value>3, 222</value>
   </data>
   <data name="radioButtonNfsReattach.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 17</value>
   </data>
   <data name="radioButtonNfsReattach.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="radioButtonNfsReattach.Text" xml:space="preserve">
     <value>&amp;Reattach an existing SR:</value>
@@ -427,10 +427,10 @@
     <value>NoControl</value>
   </data>
   <data name="nfsVersionLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 8</value>
+    <value>19, 6</value>
   </data>
   <data name="nfsVersionLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>19, 8, 3, 6</value>
+    <value>19, 6, 3, 6</value>
   </data>
   <data name="nfsVersionLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 13</value>
@@ -466,7 +466,7 @@
     <value>NoControl</value>
   </data>
   <data name="nfsVersion3RadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 5</value>
+    <value>94, 4</value>
   </data>
   <data name="nfsVersion3RadioButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 17</value>
@@ -499,7 +499,10 @@
     <value>NoControl</value>
   </data>
   <data name="nfsVersion4RadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 30</value>
+    <value>94, 25</value>
+  </data>
+  <data name="nfsVersion4RadioButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 3</value>
   </data>
   <data name="nfsVersion4RadioButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 17</value>
@@ -523,19 +526,19 @@
     <value>2</value>
   </data>
   <data name="nfsVersionSelectorTableLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 177</value>
+    <value>0, 174</value>
   </data>
   <data name="nfsVersionSelectorTableLayoutPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 3, 0, 0</value>
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="nfsVersionSelectorTableLayoutPanel.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="nfsVersionSelectorTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 50</value>
+    <value>155, 45</value>
   </data>
   <data name="nfsVersionSelectorTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;nfsVersionSelectorTableLayoutPanel.Name" xml:space="preserve">
     <value>nfsVersionSelectorTableLayoutPanel</value>
@@ -592,13 +595,13 @@
     <value>14</value>
   </data>
   <data name="listBoxNfsSRs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 253</value>
+    <value>3, 245</value>
   </data>
   <data name="listBoxNfsSRs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>494, 205</value>
+    <value>494, 213</value>
   </data>
   <data name="listBoxNfsSRs.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;listBoxNfsSRs.Name" xml:space="preserve">
     <value>listBoxNfsSRs</value>
