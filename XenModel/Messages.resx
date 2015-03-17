@@ -11727,19 +11727,25 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
     <value>Succeeded</value>
   </data>
   <data name="VM_READ_CACHING_DISABLED" xml:space="preserve">
-    <value>This VM is not using Read Caching</value>
+    <value>This VM is not using read caching</value>
   </data>
   <data name="VM_READ_CACHING_DISABLED_REASON_LICENSE" xml:space="preserve">
-    <value>Not licensed for Read Caching</value>
+    <value>This pool is not licensed for read caching</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_NO_RO_IMAGE" xml:space="preserve">
+    <value>This VM does not have any read-only disks or disks with a read-only parent</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_PREV_LICENSE" xml:space="preserve">
+    <value>This pool was not licensed for read caching when the VM was started</value>
   </data>
   <data name="VM_READ_CACHING_DISABLED_REASON_SR_TYPE" xml:space="preserve">
-    <value>Read Caching is not supported on any of the Storage Repositories used by this VM</value>
+    <value>Read caching is not supported on the type of Storage Repository used by this VM</value>
   </data>
   <data name="VM_READ_CACHING_DISABLED_REASON_TURNED_OFF" xml:space="preserve">
-    <value>Read Caching is disabled on all supported Storage Repositories used by this VM</value>
+    <value>Read caching has been disabled on the Storage Repository used by this VM</value>
   </data>
   <data name="VM_READ_CACHING_ENABLED" xml:space="preserve">
-    <value>This VM has Read Caching enabled</value>
+    <value>This VM is using read caching</value>
   </data>
   <data name="VM_READ_CACHING_ENABLED_SEARCH" xml:space="preserve">
     <value>Using read caching</value>
