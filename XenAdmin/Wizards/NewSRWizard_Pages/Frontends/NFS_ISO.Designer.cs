@@ -71,7 +71,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             // 
             resources.ApplyResources(this.nfsVersionTableLayoutPanel, "nfsVersionTableLayoutPanel");
             this.nfsVersionTableLayoutPanel.Controls.Add(this.nfsVersion3RadioButton, 0, 0);
-            this.nfsVersionTableLayoutPanel.Controls.Add(this.nfsVersion4RadioButton, 1, 0);
+            this.nfsVersionTableLayoutPanel.Controls.Add(this.nfsVersion4RadioButton, 0, 1);
             this.nfsVersionTableLayoutPanel.Name = "nfsVersionTableLayoutPanel";
             // 
             // nfsVersion3RadioButton
