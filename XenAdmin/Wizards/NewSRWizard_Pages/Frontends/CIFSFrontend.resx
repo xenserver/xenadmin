@@ -136,7 +136,7 @@
     <value>70, 23</value>
   </data>
   <data name="CifsScanButton.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>15</value>
   </data>
   <data name="CifsScanButton.Text" xml:space="preserve">
     <value>&amp;Scan</value>
@@ -385,7 +385,7 @@
     <value>106, 17</value>
   </data>
   <data name="radioButtonCifsNew.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>12</value>
   </data>
   <data name="radioButtonCifsNew.Text" xml:space="preserve">
     <value>&amp;Create a new SR</value>
@@ -415,7 +415,7 @@
     <value>143, 17</value>
   </data>
   <data name="radioButtonCifsReattach.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>13</value>
   </data>
   <data name="radioButtonCifsReattach.Text" xml:space="preserve">
     <value>&amp;Reattach an existing SR:</value>
@@ -448,7 +448,7 @@
     <value>3, 0, 3, 15</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 13</value>
+    <value>118, 13</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
