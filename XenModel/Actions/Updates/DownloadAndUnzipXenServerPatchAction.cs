@@ -182,15 +182,21 @@ namespace XenAdmin.Actions
 
         void archiveIterator_CurrentFileExtractProgressChanged(object sender, ExtractProgressChangedEventArgs e)
         {
-            PercentComplete = 95 + (int)(5.0 * e.BytesTransferred / e.TotalBytesToTransfer);
+            int pc = 95 + (int)(5.0 * e.BytesTransferred / e.TotalBytesToTransfer);
+            if (pc != PercentComplete)
+                PercentComplete = pc;
         }
 
         void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            PercentComplete = (int)(95.0 * e.BytesReceived / e.TotalBytesToReceive);
-            Description = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DETAILS_DESC, updateName,
-                                        Util.DiskSizeString(e.BytesReceived),
-                                        Util.DiskSizeString(e.TotalBytesToReceive));
+            int pc = (int)(95.0 * e.BytesReceived / e.TotalBytesToReceive);
+            if (pc != PercentComplete)
+            {
+                PercentComplete = pc;
+                Description = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DETAILS_DESC, updateName,
+                                            Util.DiskSizeString(e.BytesReceived),
+                                            Util.DiskSizeString(e.TotalBytesToReceive));
+            }
         }
 
         void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
