@@ -1124,9 +1124,9 @@ namespace XenAdmin
 
         private static void gc()
         {
-            log_gc("Before");
+            //log_gc("Before");  // Don't log this, CA-159791
             GC.Collect();
-            log_gc("After");
+            //log_gc("After");
         }
 
         private static void log_gc(string when)
