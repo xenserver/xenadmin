@@ -229,7 +229,7 @@ namespace XenAdmin.SettingsPanels
                 string newMode, ip, user, password;
                 Dictionary<string, string> customConfig;
                 GetConfig(out newMode, out ip, out user, out password, out customConfig);
-                if (HostPowerOnMode != NewPowerOnMode)
+                if (_host.power_on_mode != newMode)
                     return true;
                 if (!Helper.AreEqual(_host.power_on_config, customConfig))
                     return true;
