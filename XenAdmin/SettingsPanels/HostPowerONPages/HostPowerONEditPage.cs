@@ -75,7 +75,7 @@ namespace XenAdmin.SettingsPanels
                 if (_host == null)
                     return "";
 
-                return HostPowerOnMode == PowerOnMode.Disabled ? Messages.NONE : _host.power_on_mode;
+                return PoolPowerONEditPage.GetFullNameMode(_host.power_on_mode);
             }
         }
 
