@@ -67,9 +67,15 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecute(VM vm)
         {
-            if (vm == null || vm.is_a_template || vm.Locked)
+            return CanExecute(vm, preSelectedHost);
+        }
+
+        public new static bool CanExecute(VM vm, Host preSelectedHost)
+        {
+            if (vm == null || vm.is_a_template || vm.Locked || vm.power_state == vm_power_state.Running)
                 return false;
-            return base.CanExecute(vm);
+
+            return CrossPoolMigrateCommand.CanExecute(vm, preSelectedHost);
         }
     }
 }

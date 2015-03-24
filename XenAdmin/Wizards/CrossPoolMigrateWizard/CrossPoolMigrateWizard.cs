@@ -101,7 +101,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                     return true;
             }
 
-            Host host = xenConnection.Resolve(vm.resident_on);
+            Host host = xenConnection.Resolve(vm.resident_on) ?? Helpers.GetMaster(xenConnection);
             if (mapping.Value.XenRef is XenRef<Host>)
             {
                 Host targetHost = TargetConnection.Resolve(mapping.Value.XenRef as XenRef<Host>);
@@ -140,10 +140,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             m_pageFinish = new CrossPoolMigrateFinishPage {SummaryRetreiver = GetVMMappingSummary};
             m_pageTargetRbac = new RBACWarningPage();
 
-            if (wizardMode == WizardMode.Migrate)
-                AddPages(m_pageDestination, m_pageStorage, m_pageTransferNetwork, m_pageFinish);
-            else
-                AddPages(m_pageDestination, m_pageStorage, m_pageFinish);
+            AddPages(m_pageDestination, m_pageStorage, m_pageFinish);
         }
 
         public override sealed string Text
@@ -183,13 +180,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
                 if(target == null)
                     throw new ApplicationException("Cannot resolve the target host");
-
-                if (SelectedTransferNetwork == null)
-                {
-                    // select management interface
-                    var managementPif = NetworkingHelper.GetManagementPIF(target);
-                    SelectedTransferNetwork = TargetConnection.Resolve(managementPif.network);
-                }
 
                 if (wizardMode == WizardMode.Move && IsIntraPoolMigration(pair) && vm.CanBeMoved)
                 {
@@ -249,14 +239,19 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             if (type == typeof(CrossPoolMigrateDestinationPage))
             {
                 RemovePage(m_pageNetwork);
+                RemovePage(m_pageTransferNetwork);
                 RemovePage(m_pageTargetRbac);
                 m_vmMappings = m_pageDestination.VmMappings;
                 TargetConnection = m_pageDestination.Connection;
                 m_pageStorage.TargetConnection = TargetConnection;
                 m_pageNetwork.TargetConnection = TargetConnection;
-                m_pageTransferNetwork.Connection = TargetConnection;
                 ConfigureRbacPage();
                 AddHostNameToWindowTitle();
+
+                // add Transfer network page for all migration cases and for all other cross-pool operations (move, copy)
+                if (wizardMode == WizardMode.Migrate || !IsIntraPoolMigration())
+                    AddAfterPage(m_pageStorage, m_pageTransferNetwork);
+                m_pageTransferNetwork.Connection = TargetConnection;
 
                 if(!IsIntraPoolMigration())
                 {
