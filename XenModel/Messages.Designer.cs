@@ -8086,6 +8086,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy VM.
+        /// </summary>
+        public static string COPY_VM_WIZARD_TITLE {
+            get {
+                return ResourceManager.GetString("COPY_VM_WIZARD_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy VM to {0}.
+        /// </summary>
+        public static string COPY_VM_WIZARD_TITLE_AND_LOCATION {
+            get {
+                return ResourceManager.GetString("COPY_VM_WIZARD_TITLE_AND_LOCATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copyright © {0} All rights reserved..
         /// </summary>
         public static string COPYRIGHT {
@@ -21090,6 +21108,24 @@ namespace XenAdmin {
         public static string MOVE_VDI_CONTEXT_MENU {
             get {
                 return ResourceManager.GetString("MOVE_VDI_CONTEXT_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move VM.
+        /// </summary>
+        public static string MOVE_VM_WIZARD_TITLE {
+            get {
+                return ResourceManager.GetString("MOVE_VM_WIZARD_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move VM to {0}.
+        /// </summary>
+        public static string MOVE_VM_WIZARD_TITLE_AND_LOCATION {
+            get {
+                return ResourceManager.GetString("MOVE_VM_WIZARD_TITLE_AND_LOCATION", resourceCulture);
             }
         }
         
