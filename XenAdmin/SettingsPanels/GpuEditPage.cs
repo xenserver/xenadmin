@@ -307,7 +307,8 @@ namespace XenAdmin.SettingsPanels
                 return;
             }
 
-            if (VM.HaPriorityIsRestart(Connection, SelectedPriority))
+            Pool pool = Helpers.GetPool(Connection);
+            if (pool != null && pool.ha_enabled && VM.HaPriorityIsRestart(Connection, SelectedPriority))
             {
                 imgRDP.Visible = labelRDP.Visible =
                 imgNeedDriver.Visible = labelNeedDriver.Visible =
