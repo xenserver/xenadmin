@@ -3940,6 +3940,8 @@
     <None Include="Images\000_NewVirtualAppliance_h32bit_32.png" />
     <None Include="Images\000_ManagementInterface_h32bit_16.png" />
     <Content Include="Images\000_FilterSeverity_h32bit_16.png" />
+    <None Include="Images\000_MigrateStoppedVM_h32bit_16.png" />
+    <None Include="Images\000_MigrateSuspendedVM_h32bit_16.png" />
     <Content Include="Images\000_MigrateVM_h32bit_16.png" />
     <Content Include="Images\000_MigrateVM_h32bit_32.png" />
     <Content Include="Images\000_Patch_h32bit_32.png" />
