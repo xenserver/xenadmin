@@ -52,8 +52,16 @@ namespace XenAdmin.Actions
         protected override void Run()
         {
             Description = Messages.ACTION_SR_TRIM_DESCRIPTION;
-            
-            var host = Helpers.GetMaster(Connection);
+
+            var host = SR.GetFirstAttachedStorageHost();
+
+            if (host == null)
+            {
+                log.WarnFormat("Plugin call trim.do_trim({0}) is not possible. Reason: {1}", SR.uuid, Messages.SR_TRIM_NO_STORAGE_HOST_ERROR);
+                Exception = new Exception(Messages.SR_TRIM_NO_STORAGE_HOST_ERROR);
+                return;
+            }
+
             var result = false;
             try
             {
