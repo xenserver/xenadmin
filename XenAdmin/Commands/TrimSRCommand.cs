@@ -75,7 +75,7 @@ namespace XenAdmin.Commands
 
         private static bool CanExecute(SR sr)
         {
-            return sr != null && sr.SupportsTrim;
+            return sr != null && sr.SupportsTrim && sr.GetFirstAttachedStorageHost() != null;
         }
 
         public override string MenuText
