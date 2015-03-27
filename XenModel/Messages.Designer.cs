@@ -23614,6 +23614,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scientific Linux.
+        /// </summary>
+        public static string NEWVMWIZARD_TEMPLATEPAGE_SCILINUX {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_SCILINUX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Snapshots.
         /// </summary>
         public static string NEWVMWIZARD_TEMPLATEPAGE_SNAPSHOTS {

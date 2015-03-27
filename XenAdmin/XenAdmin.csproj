@@ -4053,6 +4053,7 @@
     <None Include="Images\server_up_16.png" />
     <None Include="Images\saved_searches_24.png" />
     <None Include="Images\RunningDC_16.png" />
+    <Content Include="Images\scilinux_16x.png" />
     <Content Include="Images\sl_luns_16.png" />
     <Content Include="Images\debian_16x.png" />
     <None Include="Images\desktop.jpg" />
