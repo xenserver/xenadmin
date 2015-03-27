@@ -312,6 +312,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_ORACLE;
                 case VM.VmTemplateType.RedHat:
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_REDHAT;
+                case VM.VmTemplateType.SciLinux:
+                    return Messages.NEWVMWIZARD_TEMPLATEPAGE_SCILINUX;
                 case VM.VmTemplateType.Suse:
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_SUSE;
                 case VM.VmTemplateType.Ubuntu:
@@ -346,6 +348,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                     return Resources.oracle_16x;
                 case VM.VmTemplateType.RedHat:
                     return Resources.redhat_16x;
+                case VM.VmTemplateType.SciLinux:
+                    return Resources.scilinux_16x;
                 case VM.VmTemplateType.Suse:
                     return Resources.suse_16x;
                 case VM.VmTemplateType.Ubuntu:
@@ -361,6 +365,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 case VM.VmTemplateType.SnapshotFromVmpp:
                 default:
                     return Resources._000_VMSession_h32bit_16;
+                // Also modify PropertyNames.os_name in XenServer/Common.cs
             }
         }
     }

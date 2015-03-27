@@ -106,6 +106,8 @@ namespace XenAdmin
         Oracle,
         RHEL,
         SUSE,
+        Ubuntu,
+        SciLinux,
         Windows,
         CoreOS,
 

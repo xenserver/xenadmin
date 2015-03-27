@@ -903,14 +903,15 @@ namespace XenAPI
             Debian = 5,
             Oracle = 6,
             RedHat = 7,
-            Suse = 8,
-            Ubuntu = 9,
-            Citrix = 10,
-            Solaris = 11,
-            Misc = 12,
-            Snapshot = 13,
-            SnapshotFromVmpp = 14,
-            Count = 15//bump this if values are added
+            SciLinux = 8,
+            Suse = 9,
+            Ubuntu = 10,
+            Citrix = 11,
+            Solaris = 12,
+            Misc = 13,
+            Snapshot = 14,
+            SnapshotFromVmpp = 15,
+            Count = 16  //bump this if values are added
         }
 
         public VmTemplateType TemplateType
@@ -948,6 +949,9 @@ namespace XenAPI
 
                 if (os.Contains("suse"))
                     return VmTemplateType.Suse;
+
+                if (os.Contains("scientific"))
+                    return VmTemplateType.SciLinux;
 
                 if (os.Contains("windows"))
                     return VmTemplateType.Windows;
