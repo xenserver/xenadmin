@@ -10272,6 +10272,9 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="SR_SIZE_USED" xml:space="preserve">
     <value>{0} used of {1} total ({2} allocated)</value>
   </data>
+  <data name="SR_TRIM_NO_STORAGE_HOST_ERROR" xml:space="preserve">
+    <value>Cannot reclaim freed space, because the SR is detached.</value>
+  </data>
   <data name="SR_UNABLE_TO_CONNECT_TO_SCSI_TARGET" xml:space="preserve">
     <value>Unable to connect to iSCSI target</value>
   </data>

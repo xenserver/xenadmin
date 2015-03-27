@@ -228,6 +228,24 @@ namespace XenAPI
             return pbd == null ? null : Connection.Resolve(pbd.host);
         }
 
+        /// <summary>
+        /// Iterating through the PBDs, this will return the storage host of the first PBD that is currently_attached.
+        /// This will return null if there are no PBDs or none of them is currently_attached
+        /// </summary>
+        /// <returns></returns>
+        public Host GetFirstAttachedStorageHost()
+        {
+            if (PBDs.Count == 0)
+                return null;
+
+            var currentlyAttachedPBDs = PBDs.Select(pbdref => Connection.Resolve(pbdref)).Where(p => p != null && p.currently_attached);
+
+            if (currentlyAttachedPBDs.FirstOrDefault() != null)
+                return currentlyAttachedPBDs.Select(p => Connection.Resolve(p.host)).Where(h => h != null).FirstOrDefault();
+
+            return null;
+        }
+
         public bool IsDetachable()
         {
             return !IsDetached && !HasRunningVMs() && CanCreateWithXenCenter;
