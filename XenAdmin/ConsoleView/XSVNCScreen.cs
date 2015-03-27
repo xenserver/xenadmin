@@ -359,7 +359,7 @@ namespace XenAdmin.ConsoleView
                     XenAPI.Network network = vif.Connection.Resolve(vif.network);
                     XenAPI.Host host = vm.Connection.Resolve(vm.resident_on);
                     XenAPI.PIF pif = Helpers.FindPIF(network, host);
-                    if (pif.LinkStatus == PIF.LinkState.Connected)
+                    if (pif != null && pif.LinkStatus == PIF.LinkState.Connected)
                     {
                         foreach (var networkInfo in networks.Where(n => n.Key.StartsWith(String.Format("{0}/ip", vif.device))))
                         {
