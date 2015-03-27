@@ -103,7 +103,7 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
-        private string GetFullNameMode(string power_on_mode)
+        public static string GetFullNameMode(string power_on_mode)
         {
             switch (power_on_mode)
             {

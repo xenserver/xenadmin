@@ -643,6 +643,26 @@ namespace XenAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _000_MigrateStoppedVM_h32bit_16 {
+            get {
+                object obj = ResourceManager.GetObject("_000_MigrateStoppedVM_h32bit_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _000_MigrateSuspendedVM_h32bit_16 {
+            get {
+                object obj = ResourceManager.GetObject("_000_MigrateSuspendedVM_h32bit_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _000_MigrateVM_h32bit_16 {
             get {
                 object obj = ResourceManager.GetObject("_000_MigrateVM_h32bit_16", resourceCulture);

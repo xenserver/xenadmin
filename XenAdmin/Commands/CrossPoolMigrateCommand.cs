@@ -52,7 +52,7 @@ namespace XenAdmin.Commands
             : base(mainWindow, selection)
         { }
 
-        private Host preSelectedHost = null;
+        protected Host preSelectedHost = null;
         public CrossPoolMigrateCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection, Host preSelectedHost)
             : base(mainWindow, selection)
         {
@@ -80,7 +80,8 @@ namespace XenAdmin.Commands
             }
             else
             {
-                MainWindowCommandInterface.ShowPerConnectionWizard(con, new CrossPoolMigrateWizard(con, selection, preSelectedHost));
+                MainWindowCommandInterface.ShowPerConnectionWizard(con, 
+                    new CrossPoolMigrateWizard(con, selection, preSelectedHost, WizardMode.Migrate));
             }
 
         }
@@ -98,11 +99,16 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecute(VM vm)
         {
+            return CanExecute(vm, preSelectedHost);
+        }
+
+        public static bool CanExecute(VM vm, Host preselectedHost)
+        {
             bool failureFound = false;
 
-            if(preSelectedHost != null)
+            if (preselectedHost != null)
             {
-                failureFound = new CrossPoolMigrateCanMigrateFilter(preSelectedHost, new List<VM> { vm }).FailureFound;
+                failureFound = new CrossPoolMigrateCanMigrateFilter(preselectedHost, new List<VM> { vm }).FailureFound;
             }
 
             return !failureFound &&
@@ -110,7 +116,7 @@ namespace XenAdmin.Commands
                    vm.allowed_operations.Contains(vm_operations.migrate_send) &&
                    !Helpers.WlbEnabledAndConfigured(vm.Connection) &&
                    vm.SRs.ToList().All(sr=> sr != null && !sr.HBALunPerVDI) &&
-                   vm.Connection.Resolve(vm.resident_on) != preSelectedHost; //Not the same as the pre-selected host
+                   (preselectedHost == null || vm.Connection.Resolve(vm.resident_on) != preselectedHost); //Not the same as the pre-selected host
         }
     }
 }

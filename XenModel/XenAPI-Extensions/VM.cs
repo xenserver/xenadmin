@@ -1805,6 +1805,22 @@ namespace XenAPI
                 }
             }
         }
+
+        public bool CanBeMoved
+        {
+            get
+            {
+                if (SRs.Any(sr => sr != null && sr.HBALunPerVDI))
+                    return false;
+
+                if (!is_a_template && !Locked && allowed_operations != null && allowed_operations.Contains(vm_operations.export) && power_state != vm_power_state.Suspended)
+                {
+                    return Connection.ResolveAll(VBDs).Find(v => v.IsOwner) != null;
+                }
+
+                return false;
+            }
+        }
     }
 
     public struct VMStartupOptions

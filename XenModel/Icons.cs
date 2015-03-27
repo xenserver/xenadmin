@@ -153,6 +153,8 @@ namespace XenAdmin
         VmAppliance,
 
         VmCrossPoolMigrate,
+        VmCrossPoolMigrateStopped,
+        VmCrossPoolMigrateSuspended,
 
         PifPrimary,
         PifSecondary,

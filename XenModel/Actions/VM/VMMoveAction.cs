@@ -30,31 +30,59 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Core;
 using XenAPI;
-using System.Text.RegularExpressions;
 
 
 namespace XenAdmin.Actions.VMActions
 {
-    public class VMMoveAction:AsyncAction
+    public class VMMoveAction : AsyncAction
     {
+        public Dictionary<string, SR> StorageMapping;
 
-        private string _nameLabel;
-        private string _description;
-        public VMMoveAction(VM vm, SR sr, Host host, string namelabel,string description)
+        public VMMoveAction(VM vm, Dictionary<string, SR> storageMapping, Host host)
+            : base(vm.Connection, Messages.ACTION_VM_MOVING)
+        {
+            this.Description = Messages.ACTION_PREPARING;
+            this.VM = vm;
+            this.Host = host;
+            this.Pool = Helpers.GetPool(vm.Connection);
+            if (vm.is_a_template)
+                this.Template = vm;
+
+            StorageMapping = storageMapping;
+            SR = StorageMapping.Values.FirstOrDefault();
+
+            PopulateApiMethodsToRoleCheck();
+        }
+
+        public VMMoveAction(VM vm, SR sr, Host host, string namelabel)
             : base(vm.Connection, string.Format(Messages.ACTION_VM_MOVING_TITLE, vm.Name, namelabel, sr.NameWithoutHost))
         {
             this.Description = Messages.ACTION_PREPARING;
             this.VM = vm;
             this.Host = host;
-            this.Pool = Core.Helpers.GetPool(vm.Connection);
+            this.Pool = Helpers.GetPool(vm.Connection);
             this.SR = sr;
-            _nameLabel = namelabel;
             if (vm.is_a_template)
                 this.Template = vm;
-            _description = description;
 
+            // create a storage map where all VDIs are mapped to the same SR
+            StorageMapping = new Dictionary<string, SR>();
+            var vbds = vm.Connection.ResolveAll(vm.VBDs);
+            foreach (var vbd in vbds)
+            {
+                StorageMapping.Add(vbd.VDI.opaque_ref, sr);
+            }
+
+            PopulateApiMethodsToRoleCheck();
+        }
+
+        #region RBAC Dependencies
+        private void PopulateApiMethodsToRoleCheck()
+        {
             ApiMethodsToRoleCheck.AddRange(Role.CommonSessionApiList);
             ApiMethodsToRoleCheck.AddRange(Role.CommonTaskApiList);
             ApiMethodsToRoleCheck.Add("vm.copy");
@@ -63,6 +91,7 @@ namespace XenAdmin.Actions.VMActions
             ApiMethodsToRoleCheck.Add("vm.destroy");
             ApiMethodsToRoleCheck.Add("vdi.destroy");
         }
+        #endregion
 
         protected override void Run()
         {
@@ -80,11 +109,13 @@ namespace XenAdmin.Actions.VMActions
                     if (!oldVBD.IsOwner)
                         continue;
 
+                    SR sr = StorageMapping != null ? StorageMapping[oldVBD.VDI.opaque_ref] : null;
+
                     var curVdi = Connection.Resolve(oldVBD.VDI);
-                    if (curVdi == null || curVdi.SR.opaque_ref == this.SR.opaque_ref)
+                    if (curVdi == null || sr == null || curVdi.SR.opaque_ref == sr.opaque_ref)
                         continue;
 
-                    RelatedTask = XenAPI.VDI.async_copy(Session, oldVBD.VDI.opaque_ref, this.SR.opaque_ref);
+                    RelatedTask = XenAPI.VDI.async_copy(Session, oldVBD.VDI.opaque_ref, sr.opaque_ref);
                     PollToCompletion(PercentComplete, PercentComplete + halfstep);
                     var newVDI = Connection.WaitForCache(new XenRef<VDI>(Result));
  
@@ -108,7 +139,7 @@ namespace XenAdmin.Actions.VMActions
                     PercentComplete += halfstep;
                 }
 
-                if (Helpers.BostonOrGreater(Connection))
+                if (Helpers.BostonOrGreater(Connection) && SR != null)
                     VM.set_suspend_SR(Session, VM.opaque_ref, SR.opaque_ref);
 
                 if (exn != null)

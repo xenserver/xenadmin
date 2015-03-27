@@ -39,16 +39,15 @@
             this.labelVirtualDiskStorage = new System.Windows.Forms.Label();
             this.upsellPage1 = new XenAdmin.Controls.UpsellPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.radioButtonCifs = new System.Windows.Forms.RadioButton();
-            this.verticalDividerLine = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.SRBlurb = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.deprecationBanner = new XenAdmin.Controls.DeprecationBanner();
             this.selectedStoreTypeLabel = new System.Windows.Forms.Label();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.radioButtonCifs = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // radioButtonNfs
@@ -126,39 +125,9 @@
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.radioButtonCifs);
-            this.panel1.Controls.Add(this.verticalDividerLine);
-            this.panel1.Controls.Add(this.labelVirtualDiskStorage);
-            this.panel1.Controls.Add(this.labelISOlibrary);
-            this.panel1.Controls.Add(this.radioButtonNfs);
-            this.panel1.Controls.Add(this.radioButtonIscsi);
-            this.panel1.Controls.Add(this.radioButtonFibreChannel);
-            this.panel1.Controls.Add(this.radioButtonCslg);
-            this.panel1.Controls.Add(this.radioButtonCifsIso);
-            this.panel1.Controls.Add(this.radioButtonNfsIso);
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Name = "panel1";
-            // 
-            // radioButtonCifs
-            // 
-            resources.ApplyResources(this.radioButtonCifs, "radioButtonCifs");
-            this.radioButtonCifs.BackColor = System.Drawing.Color.Transparent;
-            this.radioButtonCifs.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.radioButtonCifs.Name = "radioButtonCifs";
-            this.radioButtonCifs.UseVisualStyleBackColor = false;
-            this.radioButtonCifs.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
-            // 
-            // verticalDividerLine
-            // 
-            this.verticalDividerLine.BackColor = System.Drawing.SystemColors.ControlDark;
-            resources.ApplyResources(this.verticalDividerLine, "verticalDividerLine");
-            this.verticalDividerLine.Name = "verticalDividerLine";
             // 
             // tableLayoutPanel2
             // 
@@ -186,6 +155,29 @@
             resources.ApplyResources(this.selectedStoreTypeLabel, "selectedStoreTypeLabel");
             this.selectedStoreTypeLabel.Name = "selectedStoreTypeLabel";
             // 
+            // tableLayoutPanel3
+            // 
+            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
+            this.tableLayoutPanel3.Controls.Add(this.radioButtonCifs, 0, 4);
+            this.tableLayoutPanel3.Controls.Add(this.radioButtonCslg, 0, 5);
+            this.tableLayoutPanel3.Controls.Add(this.labelVirtualDiskStorage, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.radioButtonNfs, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.radioButtonFibreChannel, 0, 3);
+            this.tableLayoutPanel3.Controls.Add(this.radioButtonIscsi, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.labelISOlibrary, 0, 7);
+            this.tableLayoutPanel3.Controls.Add(this.radioButtonCifsIso, 0, 8);
+            this.tableLayoutPanel3.Controls.Add(this.radioButtonNfsIso, 0, 9);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            // 
+            // radioButtonCifs
+            // 
+            resources.ApplyResources(this.radioButtonCifs, "radioButtonCifs");
+            this.radioButtonCifs.BackColor = System.Drawing.Color.Transparent;
+            this.radioButtonCifs.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.radioButtonCifs.Name = "radioButtonCifs";
+            this.radioButtonCifs.UseVisualStyleBackColor = false;
+            this.radioButtonCifs.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
+            // 
             // ChooseSrTypePage
             // 
             resources.ApplyResources(this, "$this");
@@ -193,10 +185,10 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ChooseSrTypePage";
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -213,12 +205,11 @@
         private System.Windows.Forms.Label labelVirtualDiskStorage;
         private XenAdmin.Controls.UpsellPage upsellPage1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private XenAdmin.Controls.Common.AutoHeightLabel SRBlurb;
         private XenAdmin.Controls.DeprecationBanner deprecationBanner;
-        private System.Windows.Forms.Label verticalDividerLine;
         private System.Windows.Forms.Label selectedStoreTypeLabel;
         private System.Windows.Forms.RadioButton radioButtonCifs;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
     }
 }

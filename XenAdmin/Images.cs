@@ -168,6 +168,8 @@ namespace XenAdmin
             ImageList16.Images.Add("virtualappliance_16.png", Properties.Resources._000_VirtualAppliance_h32bit_16);
 
             ImageList16.Images.Add("000_MigrateVM_h32bit_16.png", Properties.Resources._000_MigrateVM_h32bit_16);
+            ImageList16.Images.Add("000_MigrateStoppedVM_h32bit_16.png", Properties.Resources._000_MigrateStoppedVM_h32bit_16);
+            ImageList16.Images.Add("000_MigrateSuspendedVM_h32bit_16.png", Properties.Resources._000_MigrateSuspendedVM_h32bit_16);
 
             ImageList16.Images.Add("_000_ManagementInterface_h32bit_16.png", Properties.Resources._000_ManagementInterface_h32bit_16);
             ImageList16.Images.Add("000_TCP_IPGroup_h32bit_16.png", Properties.Resources._000_TCP_IPGroup_h32bit_16);
@@ -406,7 +408,18 @@ namespace XenAdmin
                 return disabled ? Icons.VmStoppedDisabled : Icons.VmStopped;
 
             if (vm.current_operations.ContainsValue(vm_operations.migrate_send))
-                return Icons.VmCrossPoolMigrate; 
+            {
+                switch (vm.power_state)
+                {
+                    case vm_power_state.Halted:
+                        return Icons.VmCrossPoolMigrateStopped;
+                    case vm_power_state.Suspended:
+                    case vm_power_state.Paused:
+                        return Icons.VmCrossPoolMigrateSuspended;
+                    default:
+                        return Icons.VmCrossPoolMigrate;
+                }
+            }
 
             // If a VM lifecycle operation is in progress, show the orange "starting" icon
             foreach (vm_operations op in vm.current_operations.Values)

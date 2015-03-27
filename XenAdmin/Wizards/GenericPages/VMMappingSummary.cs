@@ -295,7 +295,8 @@ namespace XenAdmin.Wizards.GenericPages
             get
             {
                 List<SummaryDetails> decoratedSummary = summary.Details;
-                decoratedSummary.Add(new SummaryDetails(Messages.CPM_SUMMARY_KEY_TRANSFER_NETWORK, networkName));
+                if (!string.IsNullOrEmpty(networkName))
+                    decoratedSummary.Add(new SummaryDetails(Messages.CPM_SUMMARY_KEY_TRANSFER_NETWORK, networkName));
                 return decoratedSummary;
             }
         }

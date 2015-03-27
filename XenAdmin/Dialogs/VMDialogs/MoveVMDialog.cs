@@ -75,7 +75,7 @@ namespace XenAdmin.Dialogs.VMDialogs
 
         private void buttonMove_Click(object sender, EventArgs e)
         {
-            var action = new VMMoveAction(vm, srPicker1.SR, vm.GetStorageHost(false), vm.Name, vm.Description);
+            var action = new VMMoveAction(vm, srPicker1.SR, vm.GetStorageHost(false), vm.Name);
             action.RunAsync();
             Close();
         }

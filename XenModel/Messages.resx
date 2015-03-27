@@ -2921,6 +2921,12 @@ You can only connect to a single Citrix XenServer Express Edition server at a ti
   <data name="COPY_VM_SLOW_CLONE_DESCRIPTION" xml:space="preserve">
     <value>Clone the existing template</value>
   </data>
+  <data name="COPY_VM_WIZARD_TITLE" xml:space="preserve">
+    <value>Copy VM</value>
+  </data>
+  <data name="COPY_VM_WIZARD_TITLE_AND_LOCATION" xml:space="preserve">
+    <value>Copy VM to {0}</value>
+  </data>
   <data name="COULD_NOT_OPEN_URL" xml:space="preserve">
     <value>Could not open URL '{0}'</value>
   </data>
@@ -7345,6 +7351,12 @@ To learn more about the XenServer Live VDI Migration feature or to start a XenSe
   <data name="MOVE_VDI_CONTEXT_MENU" xml:space="preserve">
     <value>&amp;Move Virtual Disk...</value>
   </data>
+  <data name="MOVE_VM_WIZARD_TITLE" xml:space="preserve">
+    <value>Move VM</value>
+  </data>
+  <data name="MOVE_VM_WIZARD_TITLE_AND_LOCATION" xml:space="preserve">
+    <value>Move VM to {0}</value>
+  </data>
   <data name="MOVING" xml:space="preserve">
     <value>Moving...</value>
   </data>
@@ -8798,7 +8810,7 @@ Date created: {2}
 Size: {3}</value>
   </data>
   <data name="PATCH_FOR_XENSERVER_VERSION" xml:space="preserve">
-    <value>This patch is for XenServer {0}.</value>
+    <value>This patch is for XenServers with version matching the regular expression '{0}'.</value>
   </data>
   <data name="PATCH_NOT_FOUND" xml:space="preserve">
     <value>Not found</value>

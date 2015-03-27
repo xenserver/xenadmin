@@ -1339,6 +1339,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The host joining the pool cannot contain any network bond..
+        /// </summary>
+        public static string JOINING_HOST_CANNOT_CONTAIN_NETWORK_BOND {
+            get {
+                return ResourceManager.GetString("JOINING_HOST_CANNOT_CONTAIN_NETWORK_BOND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The server joining the pool cannot contain any shared storage..
         /// </summary>
         public static string JOINING_HOST_CANNOT_CONTAIN_SHARED_SRS {
@@ -1807,6 +1816,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The patch precheck stage failed: the server does not have enough space..
+        /// </summary>
+        public static string PATCH_PRECHECK_FAILED_OUT_OF_SPACE {
+            get {
+                return ResourceManager.GetString("PATCH_PRECHECK_FAILED_OUT_OF_SPACE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The update precheck stage failed: prerequisite updates are missing..
         /// </summary>
         public static string PATCH_PRECHECK_FAILED_PREREQUISITE_MISSING {
@@ -1843,7 +1861,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer version number ({1}) is incompatible with the update version number ({2})..
+        ///   Looks up a localized string similar to XenServer version number ({1}) is incompatible with the update version number regular expression ({2})..
         /// </summary>
         public static string PATCH_PRECHECK_FAILED_WRONG_SERVER_VERSION {
             get {
@@ -1960,7 +1978,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PIF has no IPv6 configuration (mode curently set to &apos;none&apos;).
+        ///   Looks up a localized string similar to PIF has no IPv6 configuration (mode currently set to &apos;none&apos;).
         /// </summary>
         public static string PIF_HAS_NO_V6_NETWORK_CONFIGURATION {
             get {
@@ -2447,6 +2465,42 @@ namespace XenAPI {
         public static string SR_BACKEND_FAILURE_110 {
             get {
                 return ResourceManager.GetString("SR_BACKEND_FAILURE_110", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CIFS mount error.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_111 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_111", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CIFS unmount error.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_112 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_112", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CIFS mount point already attached.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_113 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_113", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to remove CIFS mount point.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_114 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_114", resourceCulture);
             }
         }
         
@@ -3432,11 +3486,56 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to tapdisk experienced an error.
+        ///   Looks up a localized string similar to Only 1 LUN may be used with shared OCFS.
         /// </summary>
         public static string SR_BACKEND_FAILURE_449 {
             get {
                 return ResourceManager.GetString("SR_BACKEND_FAILURE_449", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OCFS mount error.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_450 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_450", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OCFS unmount error.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_451 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_451", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OCFS filesystem creation error.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_452 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_452", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tapdisk experienced an error.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_453 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_453", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CIFS SR is not licensed on this host.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_454 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_454", resourceCulture);
             }
         }
         
@@ -4188,7 +4287,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There was a problem with the license daemon (v6d). Is it running?.
+        ///   Looks up a localized string similar to There was a problem with the license daemon (v6d)..
         /// </summary>
         public static string V6D_FAILURE {
             get {
@@ -4409,6 +4508,15 @@ namespace XenAPI {
         public static string VDI_NOT_SPARSE {
             get {
                 return ResourceManager.GetString("VDI_NOT_SPARSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation is not permitted on VMs containing VDIs in the &apos;on-boot=reset&apos; mode.
+        /// </summary>
+        public static string VDI_ON_BOOT_MODE_INCOMPATIBLE_WITH_OPERATION {
+            get {
+                return ResourceManager.GetString("VDI_ON_BOOT_MODE_INCOMPATIBLE_WITH_OPERATION", resourceCulture);
             }
         }
         
