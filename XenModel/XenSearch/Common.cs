@@ -1345,17 +1345,21 @@ namespace XenAdmin.XenSearch
 
                             if (os.Contains("debian"))
                                 return Icons.Debian;
-                            else if (os.Contains("red"))
+                            if (os.Contains("red"))
                                 return Icons.RHEL;
-                            else if (os.Contains("cent"))
+                            if (os.Contains("cent"))
                                 return Icons.CentOS;
-                            else if (os.Contains("oracle"))
+                            if (os.Contains("oracle"))
                                 return Icons.Oracle;
-                            else if (os.Contains("suse"))
+                            if (os.Contains("suse"))
                                 return Icons.SUSE;
-                            else if (os.Contains("windows"))
+                            if (os.Contains("ubuntu"))
+                                return Icons.Ubuntu;
+                            if (os.Contains("scientific"))
+                                return Icons.SciLinux;
+                            if (os.Contains("windows"))
                                 return Icons.Windows;
-                            else if (os.Contains("coreos"))
+                            if (os.Contains("coreos"))
                                 return Icons.CoreOS;
 
                             return Icons.XenCenter;

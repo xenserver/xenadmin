@@ -8066,6 +8066,9 @@ Review these settings, then click Previous if you need to change anything. Other
   <data name="NEWVMWIZARD_TEMPLATEPAGE_REDHAT" xml:space="preserve">
     <value>Red Hat</value>
   </data>
+  <data name="NEWVMWIZARD_TEMPLATEPAGE_SCILINUX" xml:space="preserve">
+    <value>Scientific Linux</value>
+  </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_SNAPSHOTS" xml:space="preserve">
     <value>Snapshots</value>
   </data>
