@@ -354,18 +354,28 @@ namespace XenAdmin.ConsoleView
                 List<string> ipAddresses = new List<string>(); 
                 List<string> ipv6Addresses = new List<string>();
 
-                foreach (String key in networks.Keys)
+                foreach (VIF vif in vm.Connection.ResolveAll(vm.VIFs))
                 {
-                    if (key.EndsWith("ip")) // IPv4 address
-                        ipAddresses.Add(networks[key]);
-                    else
+                    XenAPI.Network network = vif.Connection.Resolve(vif.network);
+                    XenAPI.Host host = vm.Connection.Resolve(vm.resident_on);
+                    XenAPI.PIF pif = Helpers.FindPIF(network, host);
+                    if (pif != null && pif.LinkStatus == PIF.LinkState.Connected)
                     {
-                        if (key.Contains("ipv6")) // IPv6 address, enclose in square brackets
-                            ipv6Addresses.Add(String.Format("[{0}]", networks[key]));
-                        else
-                            continue;
+                        foreach (var networkInfo in networks.Where(n => n.Key.StartsWith(String.Format("{0}/ip", vif.device))))
+                        {
+                            if (networkInfo.Key.EndsWith("ip")) // IPv4 address
+                                ipAddresses.Add(networkInfo.Value);
+                            else
+                            {
+                                if (networkInfo.Key.Contains("ipv6")) // IPv6 address, enclose in square brackets
+                                    ipv6Addresses.Add(String.Format("[{0}]", networkInfo.Value));
+                                else
+                                    continue;
+                            }
+                        }
                     }
                 }
+
                 ipAddresses.AddRange(ipv6Addresses); // make sure IPv4 addresses are scanned first (CA-102755)
 
                 foreach (String ipAddress in ipAddresses)
