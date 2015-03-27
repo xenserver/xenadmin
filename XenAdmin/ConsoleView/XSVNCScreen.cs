@@ -285,6 +285,9 @@ namespace XenAdmin.ConsoleView
         public MethodInvoker OnDetectVNC = null;
         public String rdpIP = null;
         public String vncIP = null;
+        public Dictionary<string, bool> VMIPAddresses = new Dictionary<string, bool>();
+        AutoResetEvent ConnectionNotEstablished = new AutoResetEvent(true);
+        AutoResetEvent ConnectionCanEstablished = new AutoResetEvent(false);
 
         private void PollRDPPort(Object Sender)
         {
@@ -326,6 +329,53 @@ namespace XenAdmin.ConsoleView
             }
         }
 
+        class ConnectionInfo
+        {
+            public ConnectionInfo(string ipAddress, int port, bool vnc) {
+                m_ipAddress = ipAddress;
+                m_port = port;
+                m_vnc = vnc;
+            }
+            private string m_ipAddress;
+            public string IP { get { return m_ipAddress; } }
+
+            private int m_port;
+            public int Port { get { return m_port; } }
+            
+            private bool m_vnc;
+            public bool VNC { get { return m_vnc; } }
+        }
+
+        private void TryToConnectGuest(object ipInfo)
+        {
+            if (Source == null)
+                return;
+
+            VM vm = Source;
+            try
+            {
+                ConnectionInfo info = (ConnectionInfo)ipInfo;
+                Log.DebugFormat("Poll port {0}:{1}", info.IP, info.Port);
+                Stream s = connectGuest(info.IP, info.Port, vm.Connection);
+                
+                if (info.VNC && ConnectionNotEstablished.WaitOne(0))
+                {
+                    VMIPAddresses[info.IP] = true;
+                    Log.DebugFormat("Connected. Set Pending Vnc connection {0}:{1}", info.IP, info.Port);
+                    SetPendingVNCConnection(s);
+                    ConnectionCanEstablished.Set();
+                }
+                else
+                {
+                    s.Close();
+                }
+            }
+            catch (Exception exn)
+            {
+                Log.Debug(exn);
+            }
+        }
+
         /// <summary>
         /// scan each ip address (from the guest agent) for an open port
         /// </summary>
@@ -351,43 +401,39 @@ namespace XenAdmin.ConsoleView
                 if (networks == null)
                     return null;
 
-                List<string> ipAddresses = new List<string>(); 
-                List<string> ipv6Addresses = new List<string>();
-
+                VMIPAddresses.Clear();
+                ConnectionNotEstablished.Set();
                 foreach (String key in networks.Keys)
                 {
                     if (key.EndsWith("ip")) // IPv4 address
-                        ipAddresses.Add(networks[key]);
+                        VMIPAddresses.Add(networks[key], false);
                     else
                     {
                         if (key.Contains("ipv6")) // IPv6 address, enclose in square brackets
-                            ipv6Addresses.Add(String.Format("[{0}]", networks[key]));
+                            VMIPAddresses.Add(String.Format("[{0}]", networks[key]), false);
                         else
                             continue;
                     }
                 }
-                ipAddresses.AddRange(ipv6Addresses); // make sure IPv4 addresses are scanned first (CA-102755)
 
-                foreach (String ipAddress in ipAddresses)
+                foreach (String ipAddress in VMIPAddresses.Keys)
                 {
                     try
                     {
-                        Log.DebugFormat("Poll port {0}:{1}", ipAddress, port);
-                        Stream s = connectGuest(ipAddress, port, vm.Connection);
-                        if (vnc)
-                        {
-                            Log.DebugFormat("Connected. Set Pending Vnc connection {0}:{1}", ipAddress, port);
-                            SetPendingVNCConnection(s);
-                        }
-                        else
-                        {
-                            s.Close();
-                        }
-                        return ipAddress;
+                        ConnectionInfo info = new ConnectionInfo(ipAddress, port ,vnc);
+                        ThreadPool.QueueUserWorkItem(TryToConnectGuest, info);
                     }
                     catch (Exception exn)
                     {
                         Log.Debug(exn);
+                    }
+                }
+                if (VMIPAddresses.Count() != 0 && ConnectionCanEstablished.WaitOne(60000)) // To avoid deadlock here, we just wait for 60 seconds
+                {
+                    foreach (String ipAddress in VMIPAddresses.Keys)
+                    {
+                        if (VMIPAddresses[ipAddress])
+                            return ipAddress;
                     }
                 }
             }
@@ -714,7 +760,7 @@ namespace XenAdmin.ConsoleView
                         connectionPoller = new Timer(PollRDPPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
                     }
                 }
-                }
+            }
         }
 
         private void VM_PropertyChanged(object sender, PropertyChangedEventArgs e)
