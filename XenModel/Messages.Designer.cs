@@ -2419,7 +2419,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to vGPU configuration saved.
+        ///   Looks up a localized string similar to Virtual GPU configuration saved.
         /// </summary>
         public static string ACTION_VGPU_CONFIGURATION_SAVED {
             get {
@@ -2428,7 +2428,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Saving vGPU configuration.
+        ///   Looks up a localized string similar to Saving virtual GPU configuration.
         /// </summary>
         public static string ACTION_VGPU_CONFIGURATION_SAVING {
             get {
@@ -14915,7 +14915,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select which vGPU types are allowed on these GPUs:.
+        ///   Looks up a localized string similar to Select which virtual GPU types are allowed on these GPUs:.
         /// </summary>
         public static string GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_MULTIPLE {
             get {
@@ -14924,7 +14924,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select which vGPU types are allowed on this GPU:.
+        ///   Looks up a localized string similar to Select which virtual GPU types are allowed on this GPU:.
         /// </summary>
         public static string GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_ONE {
             get {
@@ -17328,7 +17328,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Some or all of the VMs you are importing have vGPUs assigned to them. The selected location does not have the right type of GPU for all of them. If you continue with the import, their vGPU settings will be lost..
+        ///   Looks up a localized string similar to Some or all of the VMs you are importing have virtual GPUs assigned to them. The selected location does not have the right type of GPU for all of them. If you continue with the import, their virtual GPU settings will be lost..
         /// </summary>
         public static string IMPORT_VM_WITH_VGPU_WARNING_MANY {
             get {
@@ -17337,7 +17337,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The VM you are importing has a vGPU assigned to it. The selected location does not have the right type of GPU. If you continue with the import, the vGPU settings will be lost..
+        ///   Looks up a localized string similar to The VM you are importing has a virtual GPU assigned to it. The selected location does not have the right type of GPU. If you continue with the import, the virtual GPU settings will be lost..
         /// </summary>
         public static string IMPORT_VM_WITH_VGPU_WARNING_ONE {
             get {
@@ -33384,7 +33384,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} vGPU ({1} per GPU, {2}, {3} displays).
+        ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU, {2}, {3} displays).
         /// </summary>
         public static string VGPU_DESCRIPTION {
             get {
@@ -33402,7 +33402,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} vGPU ({1} per GPU).
+        ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU).
         /// </summary>
         public static string VGPU_TOSTRING {
             get {

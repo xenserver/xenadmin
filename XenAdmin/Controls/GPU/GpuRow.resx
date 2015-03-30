@@ -210,7 +210,7 @@
     <value>22</value>
   </data>
   <data name="allowedTypesLabel.Text" xml:space="preserve">
-    <value>vGPU types:</value>
+    <value>Virtual GPU types:</value>
   </data>
   <data name="allowedTypesLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
