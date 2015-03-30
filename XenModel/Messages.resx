@@ -10273,9 +10273,6 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="SR_HAS_RUNNING_VMS" xml:space="preserve">
     <value>This SR contains running VMs.</value>
   </data>
-  <data name="SR_ISCSI_LOGIN_FAILED" xml:space="preserve">
-    <value>ISCSI login failed, verify CHAP credentials</value>
-  </data>
   <data name="SR_IS_BROKEN" xml:space="preserve">
     <value>This storage repository is broken</value>
   </data>

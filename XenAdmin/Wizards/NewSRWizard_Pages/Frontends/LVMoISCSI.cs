@@ -566,7 +566,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 else if (failure != null && failure.ErrorDescription[0] == "SR_BACKEND_FAILURE_68")
                 {
                     errorIconAtHostOrIP.Visible = true;
-                    errorLabelAtHostname.Text = Messages.SR_ISCSI_LOGIN_FAILED;
+                    errorLabelAtHostname.Text = Messages.LOGGING_IN_TO_THE_ISCSI_TARGET_FAILED;
                     errorLabelAtHostname.Visible = true;
                     textBoxIscsiHost.Focus();
                 }

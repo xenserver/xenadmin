@@ -29518,15 +29518,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ISCSI login failed, verify CHAP credentials.
-        /// </summary>
-        public static string SR_ISCSI_LOGIN_FAILED {
-            get {
-                return ResourceManager.GetString("SR_ISCSI_LOGIN_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0} required when only {1} available.
         /// </summary>
         public static string SR_PICKER_INSUFFICIENT_SPACE {
