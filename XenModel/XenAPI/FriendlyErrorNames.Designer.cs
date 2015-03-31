@@ -664,7 +664,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The GPU group does not contain any pGPUs..
+        ///   Looks up a localized string similar to The GPU group does not contain any GPUs..
         /// </summary>
         public static string GPU_GROUP_CONTAINS_NO_PGPUS {
             get {
@@ -673,7 +673,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The GPU group contains active pGPUs and cannot be deleted..
+        ///   Looks up a localized string similar to The GPU group contains active GPUs and cannot be deleted..
         /// </summary>
         public static string GPU_GROUP_CONTAINS_PGPU {
             get {
@@ -1888,7 +1888,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This pGPU is currently in use by running VMs..
+        ///   Looks up a localized string similar to This GPU is currently in use by running VMs..
         /// </summary>
         public static string PGPU_IN_USE_BY_VM {
             get {
@@ -1897,7 +1897,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is insufficient capacity on this pGPU to run the virtual GPU..
+        ///   Looks up a localized string similar to There is insufficient capacity on this GPU to run the virtual GPU..
         /// </summary>
         public static string PGPU_INSUFFICIENT_CAPACITY_FOR_VGPU {
             get {
@@ -1906,7 +1906,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to pGPU type not compatible with destination group..
+        ///   Looks up a localized string similar to GPU type not compatible with destination group..
         /// </summary>
         public static string PGPU_NOT_COMPATIBLE_WITH_GPU_GROUP {
             get {
@@ -4548,7 +4548,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Virtual GPU type is not one of the pGPU&apos;s enabled types..
+        ///   Looks up a localized string similar to Virtual GPU type is not one of the GPU&apos;s enabled types..
         /// </summary>
         public static string VGPU_TYPE_NOT_ENABLED {
             get {
@@ -4557,7 +4557,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Virtual GPU type is not one of the pGPU&apos;s supported types..
+        ///   Looks up a localized string similar to Virtual GPU type is not one of the GPU&apos;s supported types..
         /// </summary>
         public static string VGPU_TYPE_NOT_SUPPORTED {
             get {
@@ -4908,7 +4908,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You attempted to run a VM on a host which doesn&apos;t have a pGPU available in the GPU group needed by the VM. The VM has a virtual GPU attached to this GPU group..
+        ///   Looks up a localized string similar to You attempted to run a VM on a host which doesn&apos;t have a GPU available in the GPU group needed by the VM. The VM has a virtual GPU attached to this GPU group..
         /// </summary>
         public static string VM_REQUIRES_GPU {
             get {
