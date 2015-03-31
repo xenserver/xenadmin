@@ -136,7 +136,7 @@
     <value>0</value>
   </data>
   <data name="labelRubric.Text" xml:space="preserve">
-    <value>You can improve graphics performance by assigning a virtual graphics processing unit (vGPU) to this VM.</value>
+    <value>You can improve graphics performance by assigning a virtual graphics processing unit to this VM.</value>
   </data>
   <data name="&gt;&gt;labelRubric.Name" xml:space="preserve">
     <value>labelRubric</value>
@@ -331,7 +331,7 @@
     <value>2</value>
   </data>
   <data name="labelNeedGpu.Text" xml:space="preserve">
-    <value>If there is no available vGPU of the correct type when the VM is next booted, it will not be able to start.</value>
+    <value>If there is no available virtual GPU of the correct type when the VM is next booted, it will not be able to start.</value>
   </data>
   <data name="labelNeedGpu.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -397,7 +397,7 @@
     <value>3</value>
   </data>
   <data name="labelStopVM.Text" xml:space="preserve">
-    <value>The vGPU can only be changed when the VM is shut down.</value>
+    <value>The virtual GPU can only be changed when the VM is shut down.</value>
   </data>
   <data name="labelStopVM.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -463,7 +463,7 @@
     <value>4</value>
   </data>
   <data name="labelHA.Text" xml:space="preserve">
-    <value>The vGPU cannot be changed because the VM is currently protected by HA.</value>
+    <value>The virtual GPU cannot be changed because the VM is currently protected by HA.</value>
   </data>
   <data name="labelHA.Visible" type="System.Boolean, mscorlib">
     <value>False</value>

@@ -258,7 +258,7 @@
     <value>True</value>
   </metadata>
   <data name="VGPUsPerGPUColumn.HeaderText" xml:space="preserve">
-    <value>vGPUs per GPU</value>
+    <value>Virtual GPUs per GPU</value>
   </data>
   <data name="VGPUsPerGPUColumn.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>

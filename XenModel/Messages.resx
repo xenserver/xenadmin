@@ -904,10 +904,10 @@
     <value>Open metadata database from SR '{0}'</value>
   </data>
   <data name="ACTION_VGPU_CONFIGURATION_SAVED" xml:space="preserve">
-    <value>vGPU configuration saved</value>
+    <value>Virtual GPU configuration saved</value>
   </data>
   <data name="ACTION_VGPU_CONFIGURATION_SAVING" xml:space="preserve">
-    <value>Saving vGPU configuration</value>
+    <value>Saving virtual GPU configuration</value>
   </data>
   <data name="ACTION_VIF_CREATED" xml:space="preserve">
     <value>Virtual network interface created</value>
@@ -5212,10 +5212,10 @@ Would you like to eject these ISOs before continuing?</value>
     <value>You can improve graphics performance by assigning a dedicated graphics processing unit (GPU) to a VM. However, no GPUs have been detected in this server, so this option is not currently available.</value>
   </data>
   <data name="GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_MULTIPLE" xml:space="preserve">
-    <value>Select which vGPU types are allowed on these GPUs:</value>
+    <value>Select which virtual GPU types are allowed on these GPUs:</value>
   </data>
   <data name="GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_ONE" xml:space="preserve">
-    <value>Select which vGPU types are allowed on this GPU:</value>
+    <value>Select which virtual GPU types are allowed on this GPU:</value>
   </data>
   <data name="GPU_UNAVAILABLE" xml:space="preserve">
     <value>Not available</value>
@@ -6090,10 +6090,10 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Configure virtual network interfaces for the new VM</value>
   </data>
   <data name="IMPORT_VM_WITH_VGPU_WARNING_MANY" xml:space="preserve">
-    <value>Some or all of the VMs you are importing have vGPUs assigned to them. The selected location does not have the right type of GPU for all of them. If you continue with the import, their vGPU settings will be lost.</value>
+    <value>Some or all of the VMs you are importing have virtual GPUs assigned to them. The selected location does not have the right type of GPU for all of them. If you continue with the import, their virtual GPU settings will be lost.</value>
   </data>
   <data name="IMPORT_VM_WITH_VGPU_WARNING_ONE" xml:space="preserve">
-    <value>The VM you are importing has a vGPU assigned to it. The selected location does not have the right type of GPU. If you continue with the import, the vGPU settings will be lost.</value>
+    <value>The VM you are importing has a virtual GPU assigned to it. The selected location does not have the right type of GPU. If you continue with the import, the virtual GPU settings will be lost.</value>
   </data>
   <data name="IMPORT_WIZARD_ALL_ON_SAME_SR_RADIO" xml:space="preserve">
     <value>Place &amp;all imported virtual disks on this target SR:</value>
@@ -11560,13 +11560,13 @@ To learn more about the XenServer Dynamic Workload Balancing feature or to start
     <value>XenCenter version {0} (build {1}.{2}) {3}-bit</value>
   </data>
   <data name="VGPU_DESCRIPTION" xml:space="preserve">
-    <value>{0} vGPU ({1} per GPU, {2}, {3} displays)</value>
+    <value>{0} virtual GPU ({1} per GPU, {2}, {3} displays)</value>
   </data>
   <data name="VGPU_PASSTHRU_TOSTRING" xml:space="preserve">
     <value>Pass-through whole GPU</value>
   </data>
   <data name="VGPU_TOSTRING" xml:space="preserve">
-    <value>{0} vGPU ({1} per GPU)</value>
+    <value>{0} virtual GPU ({1} per GPU)</value>
   </data>
   <data name="VIEW_FOLDER_MENU_OPTION" xml:space="preserve">
     <value>View folder...</value>
