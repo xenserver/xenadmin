@@ -563,6 +563,13 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     errorLabelAtHostname.Visible = true;
                     textBoxIscsiHost.Focus();                    
                 }
+                else if (failure != null && failure.ErrorDescription[0] == "SR_BACKEND_FAILURE_68")
+                {
+                    errorIconAtHostOrIP.Visible = true;
+                    errorLabelAtHostname.Text = Messages.LOGGING_IN_TO_THE_ISCSI_TARGET_FAILED;
+                    errorLabelAtHostname.Visible = true;
+                    textBoxIscsiHost.Focus();
+                }
                 else
                 {
                     errorIconAtHostOrIP.Visible = true;
