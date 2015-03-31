@@ -2983,6 +2983,12 @@ You can only connect to a single Citrix XenServer Express Edition server at a ti
   <data name="CPM_WIZARD_ALL_ON_SAME_SR_RADIO" xml:space="preserve">
     <value>Pl&amp;ace all migrated virtual disks on the same SR:</value>
   </data>
+  <data name="CPM_WIZARD_COPY_MODE_TAB_TITLE" xml:space="preserve">
+    <value>Copy mode</value>
+  </data>
+  <data name="CPM_WIZARD_COPY_MODE_TITLE" xml:space="preserve">
+    <value>Copy mode</value>
+  </data>
   <data name="CPM_WIZARD_DESTINATION_DESTINATION" xml:space="preserve">
     <value>&amp;Destination:</value>
   </data>

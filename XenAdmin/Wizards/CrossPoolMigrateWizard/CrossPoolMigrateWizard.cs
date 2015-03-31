@@ -56,6 +56,10 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         private CrossPoolMigrateTransferNetworkPage m_pageTransferNetwork;
         private RBACWarningPage m_pageTargetRbac;
 
+        private CrossPoolMigrateCopyModePage m_pageCopyMode;
+        private IntraPoolCopyPage m_pageIntraPoolCopy;
+
+
         private IXenConnection TargetConnection { get; set; }
 
 		private Dictionary<string, VmMapping> m_vmMappings = new Dictionary<string, VmMapping>();
@@ -151,7 +155,13 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             m_pageFinish = new CrossPoolMigrateFinishPage {SummaryRetreiver = GetVMMappingSummary};
             m_pageTargetRbac = new RBACWarningPage();
 
-            AddPages(m_pageDestination, m_pageStorage, m_pageFinish);
+            m_pageCopyMode = new CrossPoolMigrateCopyModePage(VmsFromSelection(selection));
+            m_pageIntraPoolCopy = new IntraPoolCopyPage(VmsFromSelection(selection));
+
+            if (wizardMode == WizardMode.Copy)
+                AddPages(m_pageCopyMode, m_pageDestination,  m_pageStorage, m_pageFinish);
+            else
+                AddPages(m_pageDestination, m_pageStorage, m_pageFinish);
         }
 
         public override sealed string Text
@@ -164,6 +174,15 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         {
             if (!AllVMsAvailable(m_vmMappings, xenConnection))
             {
+                base.FinishWizard();
+                return;
+            }
+
+            if (wizardMode == WizardMode.Copy && m_pageCopyMode.IntraPoolCopySelected)
+            {
+                var copyAction = m_pageIntraPoolCopy.GetCopyAction();
+                if (copyAction != null)
+                    copyAction.RunAsync();
                 base.FinishWizard();
                 return;
             }
@@ -288,6 +307,19 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 AddHostNameToWindowTitle();
                 string netRef = m_pageTransferNetwork.NetworkUuid.Key;
                 SelectedTransferNetwork = TargetConnection.Cache.Networks.FirstOrDefault(n => n.uuid == netRef);
+            }
+            else if (type == typeof(CrossPoolMigrateCopyModePage))
+            {
+                if (m_pageCopyMode.IntraPoolCopySelected)
+                {
+                    RemovePagesFrom(1);
+                    AddAfterPage(m_pageCopyMode, m_pageIntraPoolCopy, m_pageFinish);
+                }
+                else
+                {
+                    RemovePagesFrom(1);
+                    AddAfterPage(m_pageCopyMode, m_pageDestination, m_pageStorage, m_pageFinish);
+                }
             }
 
             if (type != typeof(CrossPoolMigrateFinishPage))

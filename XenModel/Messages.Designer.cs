@@ -8277,6 +8277,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy mode.
+        /// </summary>
+        public static string CPM_WIZARD_COPY_MODE_TAB_TITLE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_COPY_MODE_TAB_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy mode.
+        /// </summary>
+        public static string CPM_WIZARD_COPY_MODE_TITLE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_COPY_MODE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Destination:.
         /// </summary>
         public static string CPM_WIZARD_DESTINATION_DESTINATION {
