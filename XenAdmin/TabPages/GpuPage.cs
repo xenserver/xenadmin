@@ -168,7 +168,7 @@ namespace XenAdmin.TabPages
             return new AutoHeightLabel
             {
                 Name = "noGpuPanel1",
-                Text = Messages.NO_GPU_ON_SERVER
+                Text = xenObject is Pool ? Messages.NO_GPU_IN_POOL : Messages.NO_GPU_ON_HOST
             };
         }
 

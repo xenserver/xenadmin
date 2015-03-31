@@ -23888,11 +23888,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are no GPUs on this server..
+        ///   Looks up a localized string similar to GPU configuration and monitoring is disabled, because there are no GPUs available in this pool..
         /// </summary>
-        public static string NO_GPU_ON_SERVER {
+        public static string NO_GPU_IN_POOL {
             get {
-                return ResourceManager.GetString("NO_GPU_ON_SERVER", resourceCulture);
+                return ResourceManager.GetString("NO_GPU_IN_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GPU configuration and monitoring is disabled, because there are no GPUs available on this host..
+        /// </summary>
+        public static string NO_GPU_ON_HOST {
+            get {
+                return ResourceManager.GetString("NO_GPU_ON_HOST", resourceCulture);
             }
         }
         

@@ -8429,8 +8429,11 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NO_ELIGIBLE_MASTER" xml:space="preserve">
     <value>There is no server eligible to become the master of your new pool</value>
   </data>
-  <data name="NO_GPU_ON_SERVER" xml:space="preserve">
-    <value>There are no GPUs on this server.</value>
+  <data name="NO_GPU_IN_POOL" xml:space="preserve">
+    <value>GPU configuration and monitoring is disabled, because there are no GPUs available in this pool.</value>
+  </data>
+  <data name="NO_GPU_ON_HOST" xml:space="preserve">
+    <value>GPU configuration and monitoring is disabled, because there are no GPUs available on this host.</value>
   </data>
   <data name="NO_HALTED_VMS" xml:space="preserve">
     <value>There are no halted or suspended VMs to export</value>
