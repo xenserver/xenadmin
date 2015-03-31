@@ -31,7 +31,6 @@
 
 using System.Collections.Generic;
 using XenAdmin.Core;
-using System.Linq;
 using XenAdmin.Mappings;
 using XenAPI;
 
@@ -41,9 +40,10 @@ namespace XenAdmin.Actions.VMActions
     {
         private readonly VmMapping mapping;
         private readonly XenAPI.Network transferNetwork;
+        private readonly bool copy;
 
-        public VMCrossPoolMigrateAction(VM vm, Host destinationHost, XenAPI.Network transferNetwork, VmMapping mapping)
-            : base(vm.Connection, GetTitle(vm, destinationHost))
+        public VMCrossPoolMigrateAction(VM vm, Host destinationHost, XenAPI.Network transferNetwork, VmMapping mapping, bool copy)
+            : base(vm.Connection, GetTitle(vm, destinationHost, copy))
         {
             Session = vm.Connection.Session;
             Description = Messages.ACTION_PREPARING;
@@ -52,7 +52,12 @@ namespace XenAdmin.Actions.VMActions
             Pool = Helpers.GetPool(vm.Connection);
             this.mapping = mapping;
             this.transferNetwork = transferNetwork;
-            
+            this.copy = copy;
+        }
+
+        public VMCrossPoolMigrateAction(VM vm, Host destinationHost, XenAPI.Network transferNetwork, VmMapping mapping)
+            : this(vm, destinationHost, transferNetwork, mapping, false)
+        {
         }
 
         public static RbacMethodList StaticRBACDependencies
@@ -69,8 +74,11 @@ namespace XenAdmin.Actions.VMActions
         }
             
 
-        private static string GetTitle(VM vm, Host toHost)
+        private static string GetTitle(VM vm, Host toHost, bool copy)
         {
+            if (copy)
+                return string.Format(Messages.ACTION_VM_CROSS_POOL_COPY_TITLE, vm.Name, toHost.Name);
+
             Host residentOn = vm.Connection.Resolve(vm.resident_on);
             if (residentOn == null)
             {
@@ -83,7 +91,7 @@ namespace XenAdmin.Actions.VMActions
 
         protected override void Run()
         {
-            Description = Messages.ACTION_VM_MIGRATING;
+            Description = copy ? Messages.ACTION_VM_COPYING: Messages.ACTION_VM_MIGRATING;
             try
             {
                 PercentComplete = 0;
@@ -92,16 +100,19 @@ namespace XenAdmin.Actions.VMActions
                                                                            transferNetwork.opaque_ref, new Dictionary<string, string>());
                 PercentComplete = 5;
                 LiveMigrateOptionsVmMapping options = new LiveMigrateOptionsVmMapping(mapping, VM);
-
+                var _options = new Dictionary<string, string>(options.Options);
+                if (copy)
+                    _options.Add("copy", "true");
                 RelatedTask = VM.async_migrate_send(Session, VM.opaque_ref, sendData, 
                                                     options.Live, options.VdiMap,
-                                                    options.VifMap, options.Options);
+                                                    options.VifMap, _options);
 
                 PollToCompletion(PercentComplete, 100);
             }
             catch (CancelledException)
             {
-                Description = string.Format(Messages.ACTION_VM_MIGRATE_CANCELLED, VM.Name);
+                Description = string.Format(copy ? Messages.ACTION_VM_CROSS_POOL_COPY_CANCELLED : Messages.ACTION_VM_MIGRATE_CANCELLED, 
+                                            VM.Name);
                 throw;
             }
             catch (Failure ex)
@@ -110,8 +121,7 @@ namespace XenAdmin.Actions.VMActions
                 List<string> errors = ex.ErrorDescription;
                 throw;
             }
-            
-            Description = Messages.ACTION_VM_MIGRATED;
+            Description = copy ? Messages.ACTION_VM_COPIED: Messages.ACTION_VM_MIGRATED;
         }
     }
 }

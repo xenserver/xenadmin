@@ -123,6 +123,17 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             return false;
         }
 
+        private bool IsIntraPoolMove()
+        {
+            return wizardMode == WizardMode.Move && m_vmMappings.All(IsIntraPoolMove);
+        }
+
+        private bool IsIntraPoolMove(KeyValuePair<string, VmMapping> mapping)
+        {
+            VM vm = xenConnection.Resolve(new XenRef<VM>(mapping.Key));
+            return vm.CanBeMoved && IsIntraPoolMigration(mapping);
+        }
+
         protected void InitialiseWizard(IEnumerable<SelectedItem> selection)
         {
             Text = wizardMode == WizardMode.Migrate
@@ -181,12 +192,10 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 if(target == null)
                     throw new ApplicationException("Cannot resolve the target host");
 
-                if (wizardMode == WizardMode.Move && IsIntraPoolMigration(pair) && vm.CanBeMoved)
-                {
+                if (wizardMode == WizardMode.Move && IsIntraPoolMove(pair))
                     new VMMoveAction(vm, pair.Value.Storage, target).RunAsync();
-                }
-                else
-                    new VMCrossPoolMigrateAction(vm, target, SelectedTransferNetwork, pair.Value).RunAsync();
+                else 
+                    new VMCrossPoolMigrateAction(vm, target, SelectedTransferNetwork, pair.Value, wizardMode == WizardMode.Copy).RunAsync();
             }
             
             base.FinishWizard();
@@ -249,7 +258,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 AddHostNameToWindowTitle();
 
                 // add Transfer network page for all migration cases and for all other cross-pool operations (move, copy)
-                if (wizardMode == WizardMode.Migrate || !IsIntraPoolMigration())
+                if (wizardMode == WizardMode.Migrate || !IsIntraPoolMove())
                     AddAfterPage(m_pageStorage, m_pageTransferNetwork);
                 m_pageTransferNetwork.Connection = TargetConnection;
 
