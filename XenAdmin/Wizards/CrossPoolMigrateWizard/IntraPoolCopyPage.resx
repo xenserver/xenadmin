@@ -415,7 +415,7 @@
     <value>14</value>
   </data>
   <data name="labelRubric.Text" xml:space="preserve">
-    <value>Select where would you like to copy your VM. Depending on your selection, more settings will be required in the next steps.</value>
+    <value>Provide a name and a description (optional) for the new VM and then select a copy mode. Depending on your choice, you might need to select a storage repository for the new VM.</value>
   </data>
   <data name="&gt;&gt;labelRubric.Name" xml:space="preserve">
     <value>labelRubric</value>

@@ -8023,6 +8023,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Provide a name and a description (optional) for the new template and then select a copy mode. Depending on your choice, you might need to select a storage repository for the template..
+        /// </summary>
+        public static string COPY_TEMPLATE_INTRA_POOL_RUBRIC {
+            get {
+                return ResourceManager.GetString("COPY_TEMPLATE_INTRA_POOL_RUBRIC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete original template after copy.
         /// </summary>
         public static string COPY_TEMPLATE_REMOVE {
@@ -8037,6 +8046,24 @@ namespace XenAdmin {
         public static string COPY_TEMPLATE_SELECT_SR {
             get {
                 return ResourceManager.GetString("COPY_TEMPLATE_SELECT_SR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy Template.
+        /// </summary>
+        public static string COPY_TEMPLATE_WIZARD_TITLE {
+            get {
+                return ResourceManager.GetString("COPY_TEMPLATE_WIZARD_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy Template to {0}.
+        /// </summary>
+        public static string COPY_TEMPLATE_WIZARD_TITLE_AND_LOCATION {
+            get {
+                return ResourceManager.GetString("COPY_TEMPLATE_WIZARD_TITLE_AND_LOCATION", resourceCulture);
             }
         }
         
@@ -8073,6 +8100,15 @@ namespace XenAdmin {
         public static string COPY_VM_FAST_CLONE_DESCRIPTION {
             get {
                 return ResourceManager.GetString("COPY_VM_FAST_CLONE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provide a name and a description (optional) for the new VM and then select a copy mode. Depending on your choice, you might need to select a storage repository for the VM..
+        /// </summary>
+        public static string COPY_VM_INTRA_POOL_RUBRIC {
+            get {
+                return ResourceManager.GetString("COPY_VM_INTRA_POOL_RUBRIC", resourceCulture);
             }
         }
         
@@ -8356,6 +8392,24 @@ namespace XenAdmin {
         public static string CPM_WIZARD_FINISH_PAGE_TITLE {
             get {
                 return ResourceManager.GetString("CPM_WIZARD_FINISH_PAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name and storage.
+        /// </summary>
+        public static string CPM_WIZARD_INTRA_POOL_COPY_TAB_TITLE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_INTRA_POOL_COPY_TAB_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name and storage.
+        /// </summary>
+        public static string CPM_WIZARD_INTRA_POOL_COPY_TITLE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_INTRA_POOL_COPY_TITLE", resourceCulture);
             }
         }
         

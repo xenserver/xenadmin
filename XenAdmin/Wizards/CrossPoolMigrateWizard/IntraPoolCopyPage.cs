@@ -59,12 +59,12 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         /// <summary>
         /// Gets the page's title (headline)
         /// </summary>
-        public override string PageTitle { get { return Messages.CPM_WIZARD_DESTINATION_TITLE; } }
+        public override string PageTitle { get { return Messages.CPM_WIZARD_INTRA_POOL_COPY_TITLE; } }
 
         /// <summary>
         /// Gets the page's label in the (left hand side) wizard progress panel
         /// </summary>
-        public override string Text { get { return Messages.CPM_WIZARD_DESTINATION_TAB_TITLE; } }
+        public override string Text { get { return Messages.CPM_WIZARD_INTRA_POOL_COPY_TAB_TITLE; } }
 
         /// <summary>
         /// Gets the value by which the help files section for this page is identified
@@ -129,6 +129,10 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             srPicker1.selectDefaultSROrAny();
 
             srPicker1.Enabled = CopyRadioButton.Enabled && CopyRadioButton.Checked;
+
+            labelRubric.Text = TheVM.is_a_template
+                                   ? Messages.COPY_TEMPLATE_INTRA_POOL_RUBRIC
+                                   : Messages.COPY_VM_INTRA_POOL_RUBRIC;
             base.PopulatePage();
         }
 

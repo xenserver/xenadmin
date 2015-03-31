@@ -138,12 +138,22 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             return vm.CanBeMoved && IsIntraPoolMigration(mapping);
         }
 
+        private bool IsCopyTemplate()
+        {
+            return wizardMode == WizardMode.Copy && m_vmMappings.Any(IsTemplate);
+        }
+
+        private bool IsTemplate(KeyValuePair<string, VmMapping> mapping)
+        {
+            VM vm = xenConnection.Resolve(new XenRef<VM>(mapping.Key));
+            return vm.is_a_template;
+        }
+
+
         protected void InitialiseWizard(IEnumerable<SelectedItem> selection)
         {
-            Text = wizardMode == WizardMode.Migrate
-                    ? Messages.CPM_WIZARD_TITLE
-                    : wizardMode == WizardMode.Move ? Messages.MOVE_VM_WIZARD_TITLE : Messages.COPY_VM_WIZARD_TITLE;
             CreateMappingsFromSelection(selection);
+            UpdateWindowTitle();
             m_pageDestination = new CrossPoolMigrateDestinationPage(hostPreSelection, VmsFromSelection(selection) )
                                     {
                                         VmMappings = m_vmMappings,
@@ -243,20 +253,23 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             return selection.Select(item => item.XenObject).OfType<VM>().ToList();
         }
 
-        private void AddHostNameToWindowTitle()
+        private void UpdateWindowTitle()
         {
-            if(m_vmMappings != null &&  m_vmMappings.Count > 0 )
+            if(m_vmMappings != null &&  m_vmMappings.Count > 0 && !string.IsNullOrEmpty(m_vmMappings.First().Value.TargetName))
             {
                 var messageText = wizardMode == WizardMode.Migrate
                     ? Messages.CPM_WIZARD_TITLE_AND_LOCATION
-                    : wizardMode == WizardMode.Move ? Messages.MOVE_VM_WIZARD_TITLE_AND_LOCATION : Messages.COPY_VM_WIZARD_TITLE_AND_LOCATION;
+                    : wizardMode == WizardMode.Move 
+                        ? Messages.MOVE_VM_WIZARD_TITLE_AND_LOCATION
+                        : IsCopyTemplate() ? Messages.COPY_TEMPLATE_WIZARD_TITLE_AND_LOCATION : Messages.COPY_VM_WIZARD_TITLE_AND_LOCATION;
                 Text = String.Format(messageText, m_vmMappings.First().Value.TargetName);
             }
-                
             else
                 Text = wizardMode == WizardMode.Migrate
                     ? Messages.CPM_WIZARD_TITLE 
-                    : wizardMode == WizardMode.Move ? Messages.MOVE_VM_WIZARD_TITLE : Messages.COPY_VM_WIZARD_TITLE;
+                    : wizardMode == WizardMode.Move 
+                        ? Messages.MOVE_VM_WIZARD_TITLE 
+                        : IsCopyTemplate() ? Messages.COPY_TEMPLATE_WIZARD_TITLE : Messages.COPY_VM_WIZARD_TITLE;
         }
 
         protected override void UpdateWizardContent(XenTabPage page)
@@ -274,7 +287,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 m_pageStorage.TargetConnection = TargetConnection;
                 m_pageNetwork.TargetConnection = TargetConnection;
                 ConfigureRbacPage();
-                AddHostNameToWindowTitle();
+                UpdateWindowTitle();
 
                 // add Transfer network page for all migration cases and for all other cross-pool operations (move, copy)
                 if (wizardMode == WizardMode.Migrate || !IsIntraPoolMove())
@@ -293,18 +306,18 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             }
             else if (type == typeof(CrossPoolMigrateStoragePage))
             {
-                AddHostNameToWindowTitle();
+                UpdateWindowTitle();
                 m_vmMappings = m_pageStorage.VmMappings;
                 m_pageNetwork.VmMappings = m_vmMappings;
             }
             else if (type == typeof(CrossPoolMigrateNetworkingPage))
             {
-                AddHostNameToWindowTitle();
+                UpdateWindowTitle();
                 m_vmMappings = m_pageNetwork.VmMappings;
             }
             else if (type == typeof(CrossPoolMigrateTransferNetworkPage))
             {
-                AddHostNameToWindowTitle();
+                UpdateWindowTitle();
                 string netRef = m_pageTransferNetwork.NetworkUuid.Key;
                 SelectedTransferNetwork = TargetConnection.Cache.Networks.FirstOrDefault(n => n.uuid == netRef);
             }

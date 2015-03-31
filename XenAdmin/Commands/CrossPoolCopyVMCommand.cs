@@ -30,7 +30,6 @@
  */
 
 using System.Collections.Generic;
-using XenAdmin.Wizards.CrossPoolMigrateWizard.Filters;
 using XenAPI;
 using XenAdmin.Core;
 using XenAdmin.Wizards.CrossPoolMigrateWizard;
@@ -73,6 +72,27 @@ namespace XenAdmin.Commands
         public new static bool CanExecute(VM vm, Host preSelectedHost)
         {
             if (vm == null || vm.is_a_template || vm.Locked || vm.power_state != vm_power_state.Halted)
+                return false;
+
+            return CrossPoolMigrateCommand.CanExecute(vm, preSelectedHost);
+        }
+    }
+
+    internal class CrossPoolCopyTemplateCommand : CrossPoolCopyVMCommand
+    {
+        public CrossPoolCopyTemplateCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection)
+            : this(mainWindow, selection, null)
+        { }
+
+        public CrossPoolCopyTemplateCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection, Host preSelectedHost)
+            : base(mainWindow, selection, preSelectedHost)
+        {
+            MenuText = Messages.MAINWINDOW_COPY_TEMPLATE;
+        }
+
+        public new static bool CanExecute(VM vm, Host preSelectedHost)
+        {
+            if (vm == null || !vm.is_a_template || vm.Locked)
                 return false;
 
             return CrossPoolMigrateCommand.CanExecute(vm, preSelectedHost);
