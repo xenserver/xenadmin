@@ -198,12 +198,12 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
         private void _action_Completed(ActionBase sender)
         {
-            Program.Invoke(this, finish);
+            Program.Invoke(Program.MainWindow, finish);
         }
 
         private void _action_Changed(object sender)
         {
-            Program.Invoke(this, actionchanged);
+            Program.Invoke(Program.MainWindow, actionchanged);
         }
 
         private void flickerFreeListBox1_DrawItem(object sender, DrawItemEventArgs e)

@@ -235,7 +235,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                         {
                             if (!action.Succeeded)
                             {
-                                Program.Invoke(dialog, dialog.Close);
+                                Program.Invoke(Program.MainWindow, dialog.Close);
                             }
                         };
 
@@ -258,7 +258,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                                                     {
                                                         if (!scanAction.Succeeded)
                                                         {
-                                                            Program.Invoke(dialog, dialog.Close);
+                                                            Program.Invoke(Program.MainWindow, dialog.Close);
                                                         }
                                                     };
 

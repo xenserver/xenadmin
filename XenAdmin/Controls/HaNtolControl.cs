@@ -178,7 +178,7 @@ namespace XenAdmin.Controls
 
             while (!exitNtolUpdateThread)
             {
-                Program.Invoke(this, () =>
+                Program.Invoke(Program.MainWindow, () =>
                     {
                         // Don't do GUI stuff if we've been told to exit
                         if (!exitNtolUpdateThread)
@@ -213,7 +213,7 @@ namespace XenAdmin.Controls
                                         ? (Pool.get_ha_host_failures_to_tolerate(dupSess, p.opaque_ref))
                                         : ntolMax;
 
-                    Program.Invoke(this, () =>
+                    Program.Invoke(Program.MainWindow, () =>
                         {
                             // Don't do GUI stuff if we've been told to exit
                             if (!exitNtolUpdateThread)
@@ -228,7 +228,7 @@ namespace XenAdmin.Controls
                 {
                     log.Warn(e, e);
                     ntol = -1;
-                    Program.Invoke(this, () =>
+                    Program.Invoke(Program.MainWindow, () =>
                         {
                             // Don't do GUI stuff if we've been told to exit
                             if (!exitNtolUpdateThread)
@@ -302,7 +302,7 @@ namespace XenAdmin.Controls
                 || e.PropertyName.StartsWith("memory"))
             {
                 // Trigger ntol update
-                Program.Invoke(this, () => waitingNtolUpdate.Set());
+                Program.Invoke(Program.MainWindow, () => waitingNtolUpdate.Set());
             }
         }
 

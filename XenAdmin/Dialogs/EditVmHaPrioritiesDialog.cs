@@ -155,7 +155,7 @@ namespace XenAdmin.Dialogs
             {
                 if (!pool.ha_enabled)
                 {
-                    Program.Invoke(this, delegate()
+                    Program.Invoke(Program.MainWindow, delegate()
                     {
                         new ThreeButtonDialog(
                            new ThreeButtonDialog.Details(

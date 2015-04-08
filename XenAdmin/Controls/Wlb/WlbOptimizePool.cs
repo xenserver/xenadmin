@@ -253,7 +253,7 @@ namespace XenAdmin.Controls.Wlb
         /// <param name="e">PropertyChangedEventArgs</param>
         private void Pool_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Program.Invoke(this, delegate
+            Program.Invoke(Program.MainWindow, delegate
             {
                 if (_xenObject != null && Program.MainWindow.TheTabControl.SelectedTab == Program.MainWindow.TabPageWLB)
                 {
@@ -321,7 +321,7 @@ namespace XenAdmin.Controls.Wlb
                 if ((e.PropertyName == "resident_VMs" && IsHostOnListView(((Host)sender), true)) 
                     || (e.PropertyName == "enabled" && !((Host)sender).enabled))
                 {
-                    Program.Invoke(this, delegate()
+                    Program.Invoke(Program.MainWindow, delegate()
                      {
                          BuildRecList();
                      });
@@ -643,7 +643,7 @@ namespace XenAdmin.Controls.Wlb
                     _recommendations = thisAction.WLBOptPoolRecommendations;
                     if (_recommendations != null && IsGoodRecommendation(_recommendations) && _xenObject.Connection == action.Connection)
                     {
-                        Program.Invoke(this, delegate()
+                        Program.Invoke(Program.MainWindow, delegate()
                         {
                             PopulateData(_recommendations);
 
@@ -659,7 +659,7 @@ namespace XenAdmin.Controls.Wlb
                     }
                     else
                     {
-                        Program.Invoke(this, delegate()
+                        Program.Invoke(Program.MainWindow, delegate()
                         {
                             statusLabel.Text = Messages.WLB_OPT_POOL_NO_RECOMMENDATION;
                             EnableControls(true, false);

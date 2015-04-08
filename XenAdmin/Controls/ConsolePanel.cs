@@ -261,7 +261,7 @@ namespace XenAdmin.Controls
 
             if (!vncViews.ContainsKey(vm))
             {
-                Program.Invoke(this, delegate
+                Program.Invoke(Program.MainWindow, delegate
                 {
                     // use elevated credentials, if provided, to create a vncView (CA-91132)
                     useElevatedCredentials = !String.IsNullOrEmpty(elevatedUsername) && !String.IsNullOrEmpty(elevatedPassword);
@@ -291,7 +291,7 @@ namespace XenAdmin.Controls
             if (useElevatedCredentials)
             {
                 //used the elevated credentials for snapshot, need to close vnc when finished
-                Program.Invoke(this, () => view.Dispose());
+                Program.Invoke(Program.MainWindow, () => view.Dispose());
             }
 
             return snapshot;

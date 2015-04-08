@@ -264,7 +264,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             UpgradeManualHostPlanAction action = upgradeHostPlanAction;
 
-            Program.Invoke(this, () =>
+            Program.Invoke(Program.MainWindow, () =>
             {
                 using (Dialog = new NotModalThreeButtonDialog(SystemIcons.Information, msg, Messages.REBOOT, Messages.SKIP_SERVER))
                 {
@@ -300,7 +300,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                             string.Format(Messages.ROLLING_UPGRADE_REBOOT_AGAIN_MESSAGE, hostName)
                             , Messages.REBOOT_AGAIN_BUTTON_LABEL, Messages.SKIP_SERVER))
                         {
-                            Program.Invoke(this, () => dialog.ShowDialog(this));
+                            Program.Invoke(Program.MainWindow, () => dialog.ShowDialog(this));
                             if (dialog.DialogResult != DialogResult.OK) // Cancel or Unknown
                                 throw new Exception(Messages.HOST_REBOOTED_SAME_VERSION);
                             else
@@ -319,7 +319,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         private void upgradeHostPlanAction_Timeout(object sender, EventArgs e)
         {
             var dialog = new NotModalThreeButtonDialog(SystemIcons.Exclamation, Messages.ROLLING_UPGRADE_TIMEOUT.Replace("\\n", "\n"), Messages.KEEP_WAITING_BUTTON_LABEL.Replace("\\n", "\n"), Messages.CANCEL);
-            Program.Invoke(this, () => dialog.ShowDialog(this));
+            Program.Invoke(Program.MainWindow, () => dialog.ShowDialog(this));
             if (dialog.DialogResult != DialogResult.OK) // Cancel or Unknown
             {
                 UpgradeHostPlanAction action = (UpgradeHostPlanAction)sender;
@@ -329,7 +329,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         private void ReportException(Exception exception, PlanAction planAction, Host host)
         {
-            Program.Invoke(this, () =>
+            Program.Invoke(Program.MainWindow, () =>
                                      {
                                          if (host != null && !host.enabled)
                                              new EnableHostAction(host, false,

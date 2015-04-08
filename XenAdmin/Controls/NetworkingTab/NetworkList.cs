@@ -249,7 +249,7 @@ namespace XenAdmin.Controls.NetworkingTab
 
         void VM_guest_metrics_BatchCollectionChanged(object sender, EventArgs e)
         {
-            Program.Invoke(this, BuildList);
+            Program.Invoke(Program.MainWindow, BuildList);
         }
 
         void Default_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -639,22 +639,22 @@ namespace XenAdmin.Controls.NetworkingTab
 
         void NetworkCollectionChanged(object sender, EventArgs e)
         {
-            Program.Invoke(this, BuildList);
+            Program.Invoke(Program.MainWindow, BuildList);
         }
 
         void PIFCollectionChanged(object sender, EventArgs e)
         {
-            Program.Invoke(this, BuildList);
+            Program.Invoke(Program.MainWindow, BuildList);
         }
 
         void CollectionChanged(object sender, EventArgs e)
         {
-            Program.Invoke(this, BuildList);
+            Program.Invoke(Program.MainWindow, BuildList);
         }
 
         void action_Completed(ActionBase sender)
         {
-            Program.Invoke(this, BuildList);
+            Program.Invoke(Program.MainWindow, BuildList);
         }
 
         void Server_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -665,7 +665,7 @@ namespace XenAdmin.Controls.NetworkingTab
             // does not digress with this fix.
             if (shouldRefreshBuildList(e))
             {
-                Program.Invoke(this, RefreshAllItems);
+                Program.Invoke(Program.MainWindow, RefreshAllItems);
             }
         }
 
@@ -732,7 +732,7 @@ namespace XenAdmin.Controls.NetworkingTab
             Proxy_VIF proxyVIF = d.GetNewSettings();
             UpdateVIFCommand command = new UpdateVIFCommand(Program.MainWindow, vm, vif, proxyVIF);
             InBuildList = true;
-            command.Completed += new EventHandler((s, f) => Program.Invoke(this, () =>
+            command.Completed += new EventHandler((s, f) => Program.Invoke(Program.MainWindow, () =>
                                                                                      {
                                                                                          InBuildList = false;
                                                                                          BuildList();

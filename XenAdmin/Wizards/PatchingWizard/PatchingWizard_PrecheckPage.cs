@@ -246,7 +246,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             lock (_lock)
             {
-                Program.Invoke(this, () =>
+                Program.Invoke(Program.MainWindow, () =>
                                          {
                                              dataGridView1.Rows.Clear();
                                              progressBar1.Value = 0;

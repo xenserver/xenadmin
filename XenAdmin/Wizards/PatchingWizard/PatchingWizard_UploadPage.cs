@@ -283,7 +283,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (action == null)
                 return;
 
-            Program.Invoke(this, () =>
+            Program.Invoke(Program.MainWindow, () =>
             {
                 UpdateActionProgress(action);
                 flickerFreeListBox1.Refresh();
@@ -300,7 +300,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             action.Changed -= singleAction_Changed;
             action.Completed -= singleAction_Completed;
 
-            Program.Invoke(this, () =>
+            Program.Invoke(Program.MainWindow, () =>
             {
                 if (action.Succeeded)
                 {
@@ -334,7 +334,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             canDownload = !(action.Exception is PatchDownloadFailedException);
 
-            Program.Invoke(this, () =>
+            Program.Invoke(Program.MainWindow, () =>
             {
                 labelProgress.Text = GetActionDescription(action);
                 UpdateButtons();

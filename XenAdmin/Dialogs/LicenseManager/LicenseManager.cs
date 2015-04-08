@@ -164,7 +164,7 @@ namespace XenAdmin.Dialogs
 
         void checkableDataGridView_RefreshAll(object sender, EventArgs eventArgs)
         {
-            Program.Invoke(this, Controller.Repopulate);
+            Program.Invoke(Program.MainWindow, Controller.Repopulate);
         }
 
         #region ISummaryPanelView Members
@@ -198,7 +198,7 @@ namespace XenAdmin.Dialogs
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void DrawSummaryForHighlightedRow(CheckableDataGridViewRow row, SummaryTextComponent summaryComponent, Action runOnUrlClick)
         {
-            Program.Invoke(this, delegate
+            Program.Invoke(Program.MainWindow, delegate
                                      {
                                          LicenseDataGridViewRow lRow = row as LicenseDataGridViewRow;
                                          if(lRow == null || lRow.XenObject == null)

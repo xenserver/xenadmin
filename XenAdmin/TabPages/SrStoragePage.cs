@@ -277,7 +277,7 @@ namespace XenAdmin.TabPages
         {
             if (e.PropertyName != "ShowHiddenVMs")
                 return;
-            Program.Invoke(this, () => BuildList(false));
+            Program.Invoke(Program.MainWindow, () => BuildList(false));
         }
         #endregion
 
@@ -689,18 +689,18 @@ namespace XenAdmin.TabPages
                     return;
 
                 if (refreshRequest.Reset)
-                    Program.Invoke(owner, page.dataGridViewVDIs.Rows.Clear);
+                    Program.Invoke(Program.MainWindow, page.dataGridViewVDIs.Rows.Clear);
 
-                Program.Invoke(owner, page.RefreshButtons);
+                Program.Invoke(Program.MainWindow, page.RefreshButtons);
 
                 IEnumerable<VDIRow> currentVDIRows = Enumerable.Empty<VDIRow>();
-                Program.Invoke(owner, () => currentVDIRows = page.GetCurrentVDIRows());
+                Program.Invoke(Program.MainWindow, () => currentVDIRows = page.GetCurrentVDIRows());
                 VDIsData data = GetCurrentData(refreshRequest.SR, currentVDIRows);
 
                 if (worker.CancellationPending)
                     return;
 
-                Program.Invoke(owner, () => ((SrStoragePage)owner).RefreshDataGridView(data));
+                Program.Invoke(Program.MainWindow, () => ((SrStoragePage)owner).RefreshDataGridView(data));
             }
 
             public void AddRequest(RefreshGridRequest refreshGridRequest)
