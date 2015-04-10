@@ -28,6 +28,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NetWTypeSelect));
             this.lblNetTypeSel = new System.Windows.Forms.Label();
             this.rbtnInternalNetwork = new System.Windows.Forms.RadioButton();
@@ -35,17 +36,20 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.labelCHIN = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.toolTipContainerCHIN = new XenAdmin.Controls.ToolTipContainer();
-            this.panelCHIN = new System.Windows.Forms.Panel();
+            this.labelExternalNetwork = new System.Windows.Forms.Label();
             this.rbtnCHIN = new System.Windows.Forms.RadioButton();
-            this.toolTipContainerExternal = new XenAdmin.Controls.ToolTipContainer();
-            this.panelExternal = new System.Windows.Forms.Panel();
             this.rbtnExternalNetwork = new System.Windows.Forms.RadioButton();
-            this.toolTipContainerCHIN.SuspendLayout();
-            this.panelCHIN.SuspendLayout();
-            this.toolTipContainerExternal.SuspendLayout();
-            this.panelExternal.SuspendLayout();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.warningsTable = new System.Windows.Forms.TableLayoutPanel();
+            this.iconWarningChinOption = new System.Windows.Forms.PictureBox();
+            this.iconWarningExternalOption = new System.Windows.Forms.PictureBox();
+            this.labelWarningExternalOption = new System.Windows.Forms.Label();
+            this.labelWarningChinOption = new System.Windows.Forms.Label();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.flowLayoutPanel1.SuspendLayout();
+            this.warningsTable.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconWarningChinOption)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconWarningExternalOption)).BeginInit();
             this.SuspendLayout();
             // 
             // lblNetTypeSel
@@ -80,42 +84,16 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             resources.ApplyResources(this.labelCHIN, "labelCHIN");
             this.labelCHIN.Name = "labelCHIN";
             // 
-            // label2
+            // labelExternalNetwork
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
-            // 
-            // toolTipContainerCHIN
-            // 
-            resources.ApplyResources(this.toolTipContainerCHIN, "toolTipContainerCHIN");
-            this.toolTipContainerCHIN.Controls.Add(this.panelCHIN);
-            this.toolTipContainerCHIN.Name = "toolTipContainerCHIN";
-            // 
-            // panelCHIN
-            // 
-            this.panelCHIN.Controls.Add(this.rbtnCHIN);
-            this.panelCHIN.Controls.Add(this.labelCHIN);
-            resources.ApplyResources(this.panelCHIN, "panelCHIN");
-            this.panelCHIN.Name = "panelCHIN";
+            resources.ApplyResources(this.labelExternalNetwork, "labelExternalNetwork");
+            this.labelExternalNetwork.Name = "labelExternalNetwork";
             // 
             // rbtnCHIN
             // 
             resources.ApplyResources(this.rbtnCHIN, "rbtnCHIN");
             this.rbtnCHIN.Name = "rbtnCHIN";
             this.rbtnCHIN.UseVisualStyleBackColor = true;
-            // 
-            // toolTipContainerExternal
-            // 
-            resources.ApplyResources(this.toolTipContainerExternal, "toolTipContainerExternal");
-            this.toolTipContainerExternal.Controls.Add(this.panelExternal);
-            this.toolTipContainerExternal.Name = "toolTipContainerExternal";
-            // 
-            // panelExternal
-            // 
-            this.panelExternal.Controls.Add(this.rbtnExternalNetwork);
-            this.panelExternal.Controls.Add(this.label2);
-            resources.ApplyResources(this.panelExternal, "panelExternal");
-            this.panelExternal.Name = "panelExternal";
             // 
             // rbtnExternalNetwork
             // 
@@ -125,24 +103,70 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.rbtnExternalNetwork.TabStop = true;
             this.rbtnExternalNetwork.UseVisualStyleBackColor = true;
             // 
+            // flowLayoutPanel1
+            // 
+            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
+            this.flowLayoutPanel1.Controls.Add(this.lblNetTypeSel);
+            this.flowLayoutPanel1.Controls.Add(this.rbtnExternalNetwork);
+            this.flowLayoutPanel1.Controls.Add(this.labelExternalNetwork);
+            this.flowLayoutPanel1.Controls.Add(this.rbtnInternalNetwork);
+            this.flowLayoutPanel1.Controls.Add(this.label1);
+            this.flowLayoutPanel1.Controls.Add(this.rbtnCHIN);
+            this.flowLayoutPanel1.Controls.Add(this.labelCHIN);
+            this.flowLayoutPanel1.Controls.Add(this.rbtnBondedNetwork);
+            this.flowLayoutPanel1.Controls.Add(this.label3);
+            this.flowLayoutPanel1.Controls.Add(this.warningsTable);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            // 
+            // warningsTable
+            // 
+            resources.ApplyResources(this.warningsTable, "warningsTable");
+            this.warningsTable.Controls.Add(this.iconWarningChinOption, 0, 1);
+            this.warningsTable.Controls.Add(this.iconWarningExternalOption, 0, 0);
+            this.warningsTable.Controls.Add(this.labelWarningExternalOption, 1, 0);
+            this.warningsTable.Controls.Add(this.labelWarningChinOption, 1, 1);
+            this.warningsTable.Name = "warningsTable";
+            // 
+            // iconWarningChinOption
+            // 
+            resources.ApplyResources(this.iconWarningChinOption, "iconWarningChinOption");
+            this.iconWarningChinOption.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
+            this.iconWarningChinOption.Name = "iconWarningChinOption";
+            this.iconWarningChinOption.TabStop = false;
+            // 
+            // iconWarningExternalOption
+            // 
+            resources.ApplyResources(this.iconWarningExternalOption, "iconWarningExternalOption");
+            this.iconWarningExternalOption.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
+            this.iconWarningExternalOption.Name = "iconWarningExternalOption";
+            this.iconWarningExternalOption.TabStop = false;
+            // 
+            // labelWarningExternalOption
+            // 
+            resources.ApplyResources(this.labelWarningExternalOption, "labelWarningExternalOption");
+            this.labelWarningExternalOption.Name = "labelWarningExternalOption";
+            // 
+            // labelWarningChinOption
+            // 
+            resources.ApplyResources(this.labelWarningChinOption, "labelWarningChinOption");
+            this.labelWarningChinOption.Name = "labelWarningChinOption";
+            // 
+            // toolTip
+            // 
+            this.toolTip.ShowAlways = true;
+            // 
             // NetWTypeSelect
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.toolTipContainerCHIN);
-            this.Controls.Add(this.toolTipContainerExternal);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.rbtnBondedNetwork);
-            this.Controls.Add(this.lblNetTypeSel);
-            this.Controls.Add(this.rbtnInternalNetwork);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "NetWTypeSelect";
-            this.toolTipContainerCHIN.ResumeLayout(false);
-            this.panelCHIN.ResumeLayout(false);
-            this.panelCHIN.PerformLayout();
-            this.toolTipContainerExternal.ResumeLayout(false);
-            this.panelExternal.ResumeLayout(false);
-            this.panelExternal.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
+            this.warningsTable.ResumeLayout(false);
+            this.warningsTable.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconWarningChinOption)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconWarningExternalOption)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -155,14 +179,17 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
         private System.Windows.Forms.RadioButton rbtnExternalNetwork;
         private System.Windows.Forms.RadioButton rbtnInternalNetwork;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelExternalNetwork;
         private System.Windows.Forms.Label label3;
-        private XenAdmin.Controls.ToolTipContainer toolTipContainerExternal;
         private System.Windows.Forms.Label labelCHIN;
         private System.Windows.Forms.RadioButton rbtnCHIN;
-        private XenAdmin.Controls.ToolTipContainer toolTipContainerCHIN;
-        private System.Windows.Forms.Panel panelExternal;
-        private System.Windows.Forms.Panel panelCHIN;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.TableLayoutPanel warningsTable;
+        private System.Windows.Forms.PictureBox iconWarningExternalOption;
+        private System.Windows.Forms.PictureBox iconWarningChinOption;
+        private System.Windows.Forms.Label labelWarningExternalOption;
+        private System.Windows.Forms.Label labelWarningChinOption;
 
     }
 }
