@@ -169,14 +169,22 @@ namespace XenAdmin.Wizards
         protected override void OnPaint(PaintEventArgs e)
         {
             Bitmap bg = Properties.Resources.wizard_background;
-            int bg_h = bg.Height;
+            int bg_h = (int)(bg.Height * (Width / (float)bg.Width)); //The assumption made is that Width/bg.Width ratio always matches the system's dpi setting. Normally (at 100% dpi setting) this equals to 1.
             int bg_top = Height - bg_h;
             if (bg_top > 0)
             {
                 using (SolidBrush bgBrush = new SolidBrush(bgBrushColor))
                     e.Graphics.FillRectangle(bgBrush, new Rectangle(0, 0, Width, bg_top));
             }
-            e.Graphics.DrawImage(bg, new Rectangle(0, bg_top, bg.Width, bg_h));
+
+            int bg_w = Width;
+
+            //This makes sure we compensate for rounding should it happened whilst calculating bg_h. (to avoid gap on the right) 
+            //Switch to 125% dpi to see why this is needed...
+            if (Width / (float)bg.Width != 1f)
+                bg_w++;
+
+            e.Graphics.DrawImage(bg, new Rectangle(0, bg_top, bg_w, bg_h ));
 
             using (LinearGradientBrush highlight = new LinearGradientBrush(Point.Empty, new Point(Width, 0), HighlightColorEdge, HighlightColorMiddle))
             {
