@@ -201,6 +201,7 @@
             this.buttonNotifySmall.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             this.buttonNotifySmall.PairedItem = null;
             this.buttonNotifySmall.UnreadEntries = 0;
+            this.buttonNotifySmall.Image = global::XenAdmin.Properties.Resources.notif_none_16;
             // 
             // buttonSearchesSmall
             // 

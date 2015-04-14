@@ -109,7 +109,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
                     string.Format(Messages.FEATURE_NOT_AVAILABLE_NEED_COWLEY_ENTERPRISE_OR_PLATINUM_PLURAL, Messages.CHINS) :
                     Messages.CHINS_NEED_VSWITCHCONTROLLER;
 
-                iconWarningChinOption.Enabled = labelWarningChinOption.Enabled = true;
+                iconWarningChinOption.Visible = labelWarningChinOption.Visible = true;
 
                 if (master.RestrictVLAN)
                     rbtnInternalNetwork.Checked = true;

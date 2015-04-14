@@ -408,15 +408,6 @@
   <data name="toolStripSmall.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
   </data>
-  <data name="buttonNotifySmall.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAACrSURBVDhPzZLRCcMgFEUzQkbpKN0iQsinICFikIgoGaYj
-        ZISM0BG6wa3CC0VqMH4UeuDw4L77/LI5w3u/r+uKOCkqE8o3a+3TOYeMr7inah5jzCM8gDPjnqp5lmVB
-        Sarm0VqjJFW/UUq1QVywpZOUaZruUkqUjD06SRnHcQvighudfBBC7EFUmP4NzjlqpdN/ZhiGOYg4Kaqj
-        73scUlRH13UzYwxxUvQLmuYNlyD+ZSeMMhsAAAAASUVORK5CYII=
-</value>
-  </data>
   <data name="buttonNotifySmall.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
   </data>
