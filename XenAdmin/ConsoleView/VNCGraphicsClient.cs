@@ -239,10 +239,10 @@ namespace XenAdmin.ConsoleView
             Program.AssertOffEventThread();
 
             // Set the remote clipboard based on the current contents.
-            Program.Invoke(this, (EventHandler)ClipboardChanged, null, null);
+            Program.Invoke(Program.MainWindow, (EventHandler)ClipboardChanged, null, null);
 
             if (ConnectionSuccess != null)
-                Program.Invoke(this, ConnectionSuccess, sender, e);
+                Program.Invoke(Program.MainWindow, ConnectionSuccess, sender, e);
         }
 
         private void OnError(object sender, Exception e)
@@ -481,7 +481,7 @@ namespace XenAdmin.ConsoleView
                 RemoteCursor.Dispose();
             RemoteCursor = new CustomCursor(image, x, y);
 
-            Program.Invoke(this, delegate()
+            Program.Invoke(Program.MainWindow, delegate()
             {
                 if (cursorOver)
                     this.Cursor = RemoteCursor.Cursor;
@@ -581,7 +581,7 @@ namespace XenAdmin.ConsoleView
             }
             else
             {
-                Program.Invoke(this, delegate()
+                Program.Invoke(Program.MainWindow, delegate()
                 {
                     if (Clipboard.ContainsText() && Clipboard.GetText() == text)
                         return;
@@ -604,7 +604,7 @@ namespace XenAdmin.ConsoleView
             // Cannot do an invoke with a locked back buffer, as it may event thread
             // (onPaint) tried to lock back buffer as well - therefore deadlock.
 
-            Program.Invoke(this, delegate()
+            Program.Invoke(Program.MainWindow, delegate()
             {
                 Bitmap old_back_buffer;
                 lock (backBuffer)

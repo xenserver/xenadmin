@@ -405,7 +405,7 @@ namespace XenAdmin.Dialogs
 
         private void IscsiPopulateIqnsAction_Completed(ActionBase sender)
         {
-            Program.Invoke(this, (System.Threading.WaitCallback)IscsiPopulateIqnsAction_Completed_, sender);
+            Program.Invoke(Program.MainWindow, (System.Threading.WaitCallback)IscsiPopulateIqnsAction_Completed_, sender);
         }
 
         private void IscsiPopulateIqnsAction_Completed_(object o)
@@ -480,7 +480,7 @@ namespace XenAdmin.Dialogs
 
         private void IscsiPopulateLunsAction_Completed(ActionBase sender)
         {
-            Program.Invoke(this, (WaitCallback)IscsiPopulateLunsAction_Completed_, sender);
+            Program.Invoke(Program.MainWindow, (WaitCallback)IscsiPopulateLunsAction_Completed_, sender);
         }
 
         private void IscsiPopulateLunsAction_Completed_(object o)

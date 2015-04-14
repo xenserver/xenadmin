@@ -362,7 +362,7 @@ namespace XenAdmin.Controls
                 sr.PropertyChanged += sr_PropertyChanged;
             }
 
-            Program.Invoke(this, refreshAll);
+            Program.Invoke(Program.MainWindow, refreshAll);
         }
 
         public virtual void refreshAll()

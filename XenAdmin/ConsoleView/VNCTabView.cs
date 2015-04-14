@@ -310,7 +310,7 @@ namespace XenAdmin.ConsoleView
         /// </summary>
         private void Default_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Program.Invoke(this, delegate
+            Program.Invoke(Program.MainWindow, delegate
             {
                 deregisterShortCutKeys();
                 registerShortCutKeys();
@@ -490,7 +490,7 @@ namespace XenAdmin.ConsoleView
             else if (e.PropertyName == "VBDs")
             {
                 //The CD device may have changed
-                Program.Invoke(this, setupCD);
+                Program.Invoke(Program.MainWindow, setupCD);
             }
             else if (e.PropertyName == "guest_metrics")
             {
@@ -609,11 +609,11 @@ namespace XenAdmin.ConsoleView
 
                 if (hostMetrics.live)
                 {
-                    Program.Invoke(this, showTopBarContents);
+                    Program.Invoke(Program.MainWindow, showTopBarContents);
                 }
                 else
                 {
-                    Program.Invoke(this, hideTopBarContents);
+                    Program.Invoke(Program.MainWindow, hideTopBarContents);
                 }
             }
             else
@@ -623,11 +623,11 @@ namespace XenAdmin.ConsoleView
                     case vm_power_state.Halted:
                     case vm_power_state.Paused:
                     case vm_power_state.Suspended:
-                        Program.Invoke(this, hideTopBarContents);
+                        Program.Invoke(Program.MainWindow, hideTopBarContents);
                         break;
                     case vm_power_state.Running:
-                        Program.Invoke(this, showTopBarContents);
-                        Program.Invoke(this, maybeEnableButton);
+                        Program.Invoke(Program.MainWindow, showTopBarContents);
+                        Program.Invoke(Program.MainWindow, maybeEnableButton);
                         break;
                 }
             }
@@ -966,7 +966,7 @@ namespace XenAdmin.ConsoleView
         {
             Program.AssertOffEventThread();
 
-            Program.Invoke(this, delegate()
+            Program.Invoke(Program.MainWindow, delegate()
             {
                 lock (this.insKeyTimer)
                 {
@@ -1092,7 +1092,7 @@ namespace XenAdmin.ConsoleView
   }
         void Connection_BeforeConnectionEnd(object sender, EventArgs e)
         {
-            Program.Invoke(this, toggleFullscreen);
+            Program.Invoke(Program.MainWindow, toggleFullscreen);
         }
 
         private const bool RDP = true;
@@ -1113,7 +1113,7 @@ namespace XenAdmin.ConsoleView
 
         private void OnDetectRDP()
         {
-            Program.Invoke(this, OnDetectRDP_);
+            Program.Invoke(Program.MainWindow, OnDetectRDP_);
         }
 
         private void OnDetectRDP_()
@@ -1145,7 +1145,7 @@ namespace XenAdmin.ConsoleView
 
         private void OnDetectVNC()
         {
-            Program.Invoke(this, OnDetectVNC_);
+            Program.Invoke(Program.MainWindow, OnDetectVNC_);
         }
 
         private void OnDetectVNC_()
@@ -1263,7 +1263,7 @@ namespace XenAdmin.ConsoleView
         {
             bool hasToReconnect = vncScreen.rdpIP == null;
             vncScreen.rdpIP = vncScreen.PollPort(XSVNCScreen.RDP_PORT, true);
-            Program.Invoke(this, (MethodInvoker)(() =>
+            Program.Invoke(Program.MainWindow, (MethodInvoker)(() =>
             {
                 if (hasToReconnect)
                 {

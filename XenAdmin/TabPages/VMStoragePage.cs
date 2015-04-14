@@ -201,7 +201,7 @@ namespace XenAdmin.TabPages
             if (e.PropertyName == "VBDs")
                 BuildList();
             else if (e.PropertyName == "power_state" || e.PropertyName == "Locked")
-                Program.Invoke(this, UpdateButtons);
+                Program.Invoke(Program.MainWindow, UpdateButtons);
         }
 
         private void BuildList()

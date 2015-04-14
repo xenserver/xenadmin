@@ -252,7 +252,7 @@ namespace XenAdmin.SettingsPanels
             }
             finally
             {
-                Program.Invoke(this, delegate()
+                Program.Invoke(Program.MainWindow, delegate()
                 {
                     if (verticalTabs != null)
                         verticalTabs.Refresh();

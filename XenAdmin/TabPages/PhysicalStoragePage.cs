@@ -182,7 +182,7 @@ namespace XenAdmin.TabPages
             }
             else
             {
-                Program.Invoke(this, () => RefreshRowForSr((SR)sender));
+                Program.Invoke(Program.MainWindow, () => RefreshRowForSr((SR)sender));
             }
         }
 

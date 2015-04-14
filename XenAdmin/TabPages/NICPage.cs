@@ -116,7 +116,7 @@ namespace XenAdmin.TabPages
                 PIF pif = e.Element as PIF;
                 UnregisterPIFEventHandlers(pif);
             }
-            Program.Invoke(this, updateList);
+            Program.Invoke(Program.MainWindow, updateList);
         }
 
         private void RegisterPIFEventHandlers(PIF pif)

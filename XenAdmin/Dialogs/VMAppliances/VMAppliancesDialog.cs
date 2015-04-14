@@ -206,7 +206,7 @@ namespace XenAdmin.Dialogs.VMAppliances
 
         private void vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Program.Invoke(this, () =>
+            Program.Invoke(Program.MainWindow, () =>
             {
                 // Find row for VM
                 ListViewItem item = FindItemFromVM((VM)sender);
@@ -241,7 +241,7 @@ namespace XenAdmin.Dialogs.VMAppliances
                     break;
             }
 
-            Program.Invoke(this, () =>
+            Program.Invoke(Program.MainWindow, () =>
             {
                 // Find row for VM
                 ListViewItem item = FindItemFromVM(vm);

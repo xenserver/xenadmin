@@ -115,17 +115,17 @@ namespace XenAdmin.Dialogs
 
         private void PBD_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
-            Program.Invoke(this, Build);
+            Program.Invoke(Program.MainWindow, Build);
         }
 
         private void Host_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
-            Program.Invoke(this, Build);
+            Program.Invoke(Program.MainWindow, Build);
         }
 
         private void Server_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Program.Invoke(this, Build);
+            Program.Invoke(Program.MainWindow, Build);
         }
 
         private void hostsTreeView_BeforeSelect(object sender, TreeViewCancelEventArgs e)
@@ -287,7 +287,7 @@ namespace XenAdmin.Dialogs
 
         private void action_Changed(ActionBase action)
         {
-            Program.Invoke(this, () => UpdateProgressControls(action));
+            Program.Invoke(Program.MainWindow, () => UpdateProgressControls(action));
         }
 
         private void action_Completed(ActionBase sender)
@@ -298,7 +298,7 @@ namespace XenAdmin.Dialogs
                 SucceededWithWarningDescription = Messages.REPAIR_SR_WARNING_MULTIPATHS_DOWN;
             }
 
-            Program.Invoke(this, () =>
+            Program.Invoke(Program.MainWindow, () =>
                 {
                     if (sender is MultipleAction)
                         Build();

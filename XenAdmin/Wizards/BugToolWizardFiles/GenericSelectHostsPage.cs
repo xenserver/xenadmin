@@ -313,7 +313,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
         private void connection_CachePopulated(object sender, EventArgs e)
         {
-            Program.Invoke(this, buildList);
+            Program.Invoke(Program.MainWindow, buildList);
         }
 
         private void Host_CollectionChanged(object sender, CollectionChangeEventArgs e)
@@ -325,7 +325,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         {
             if (e.PropertyName == "name_label" || e.PropertyName == "master")
             {
-                Program.Invoke(this, buildList);
+                Program.Invoke(Program.MainWindow, buildList);
             }
         }
 
@@ -333,7 +333,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         {
             if (e.PropertyName == "live")
             {
-                Program.Invoke(this, buildList);
+                Program.Invoke(Program.MainWindow, buildList);
             }
         }
 
@@ -341,13 +341,13 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         {
             if (e.PropertyName == "name_label" || e.PropertyName == "enabled" || e.PropertyName == "patches" || e.PropertyName == "metrics")
             {
-                Program.Invoke(this, buildList);
+                Program.Invoke(Program.MainWindow, buildList);
             }
         }
 
         private void connection_ConnectionStateChanged(object sender, EventArgs e)
         {
-            Program.Invoke(this, (CollectionChangeEventHandler)XenConnections_CollectionChanged, this, null);
+            Program.Invoke(Program.MainWindow, (CollectionChangeEventHandler)XenConnections_CollectionChanged, this, null);
         }
 
         private void XenConnections_CollectionChanged(object sender, CollectionChangeEventArgs e)

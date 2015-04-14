@@ -327,13 +327,13 @@ namespace XenAdmin.Controls.CheckableDataGridView
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void SuspendDrawing()
         {
-            Program.Invoke(this, () => HelpersGUI.SuspendDrawing(this) );
+            Program.Invoke(Program.MainWindow, () => HelpersGUI.SuspendDrawing(this) );
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void ResumeDrawing()
         {
-            Program.Invoke(this, () =>
+            Program.Invoke(Program.MainWindow, () =>
                                      {
                                          HelpersGUI.ResumeDrawing(this);
                                          Refresh();
@@ -351,7 +351,7 @@ namespace XenAdmin.Controls.CheckableDataGridView
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void DrawUpdatedRow(Queue<object> textToUse, bool cellDataLoaded, bool rowDisabled, int rowIndex)
         {
-            Program.Invoke(this, delegate
+            Program.Invoke(Program.MainWindow, delegate
                                      {
                                          try{
                                             

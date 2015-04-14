@@ -351,7 +351,7 @@ namespace XenAdmin.TabPages
                 return;
             }
 
-            Program.Invoke(this, delegate
+            Program.Invoke(Program.MainWindow, delegate
             {
                 if (e.PropertyName == "PBDs")
                 {

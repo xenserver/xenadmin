@@ -273,7 +273,7 @@ namespace XenAdmin.TabPages
 
         void CollectionChanged(object sender, EventArgs e)
         {
-            Program.Invoke(this, RepopulateManagementInterfaces);
+            Program.Invoke(Program.MainWindow, RepopulateManagementInterfaces);
         }
         #endregion
     }

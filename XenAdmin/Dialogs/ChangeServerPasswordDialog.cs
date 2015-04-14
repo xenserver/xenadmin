@@ -72,7 +72,7 @@ namespace XenAdmin.Dialogs
         {
             if (e.PropertyName == "name_label")
             {
-                Program.Invoke(this, UpdateText);
+                Program.Invoke(Program.MainWindow, UpdateText);
             }
         }
 

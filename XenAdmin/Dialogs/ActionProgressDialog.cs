@@ -109,7 +109,7 @@ namespace XenAdmin.Dialogs
                 return;
 
             action.RecomputeCanCancel();
-            Program.Invoke(this, action_Changed_);
+            Program.Invoke(Program.MainWindow, action_Changed_);
         }
 
         private void action_Changed_()
@@ -146,7 +146,7 @@ namespace XenAdmin.Dialogs
             if (Disposing || IsDisposed || Program.Exiting)
                 return;
 
-            Program.Invoke(this, action_Completed_);
+            Program.Invoke(Program.MainWindow, action_Completed_);
         }
 
         private void action_Completed_()

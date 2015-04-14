@@ -494,7 +494,7 @@ namespace XenAdmin.Wizards.GenericPages
 		private void PropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
 			if (e.PropertyName == "name_label" || e.PropertyName == "metrics" || e.PropertyName == "enabled" || e.PropertyName == "live" || e.PropertyName == "patches")
-				Program.Invoke(this, PopulateComboBox);
+				Program.Invoke(Program.MainWindow, PopulateComboBox);
             
 		}
 
@@ -505,12 +505,12 @@ namespace XenAdmin.Wizards.GenericPages
 
 		private void xenConnection_CachePopulated(object sender, EventArgs e)
         {
-			Program.Invoke(this, PopulateComboBox);
+			Program.Invoke(Program.MainWindow, PopulateComboBox);
         }
 
 		private void xenConnection_ConnectionStateChanged(object sender, EventArgs e)
 		{
-			Program.Invoke(this, PopulateComboBox);
+			Program.Invoke(Program.MainWindow, PopulateComboBox);
 		}
 
 		#endregion

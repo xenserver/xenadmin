@@ -161,7 +161,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
         private void Common_action_Completed(ActionBase sender)
         {
-            Program.Invoke(this, delegate()
+            Program.Invoke(Program.MainWindow, delegate()
             {
                 if (cancelled)
                     return;
