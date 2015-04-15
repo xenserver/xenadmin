@@ -135,7 +135,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         private bool IsIntraPoolMove(KeyValuePair<string, VmMapping> mapping)
         {
             VM vm = xenConnection.Resolve(new XenRef<VM>(mapping.Key));
-            return vm.CanBeMoved && IsIntraPoolMigration(mapping);
+            return vm != null && vm.CanBeMoved && IsIntraPoolMigration(mapping);
         }
 
         private bool IsCopyTemplate()
@@ -146,7 +146,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         private bool IsTemplate(KeyValuePair<string, VmMapping> mapping)
         {
             VM vm = xenConnection.Resolve(new XenRef<VM>(mapping.Key));
-            return vm.is_a_template;
+            return vm != null && vm.is_a_template;
         }
 
 
@@ -289,8 +289,8 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 ConfigureRbacPage();
                 UpdateWindowTitle();
 
-                // add Transfer network page for all migration cases and for all other cross-pool operations (move, copy)
-                if (wizardMode == WizardMode.Migrate || !IsIntraPoolMove())
+                // add Transfer network page for all cases except intra-pool move (which is performed via VMMoveAction) 
+                if (!IsIntraPoolMove())
                     AddAfterPage(m_pageStorage, m_pageTransferNetwork);
                 m_pageTransferNetwork.Connection = TargetConnection;
 

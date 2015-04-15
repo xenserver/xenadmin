@@ -42,6 +42,14 @@ namespace XenAdmin.Actions.VMActions
         private readonly XenAPI.Network transferNetwork;
         private readonly bool copy;
 
+        /// <summary>
+        /// Cross pool migration action. Can also be used to copy a VM across pools, by setting the "copy" parameter to true
+        /// </summary>
+        /// <param name="vm">the VM to be migrated</param>
+        /// <param name="destinationHost">the destination host</param>
+        /// <param name="transferNetwork">the network used for the VM migration</param>
+        /// <param name="mapping">the storage and networking mappings</param>
+        /// <param name="copy">weather this should be a cross-pool copy (true) or migrate (false) operation</param>
         public VMCrossPoolMigrateAction(VM vm, Host destinationHost, XenAPI.Network transferNetwork, VmMapping mapping, bool copy)
             : base(vm.Connection, GetTitle(vm, destinationHost, copy))
         {
