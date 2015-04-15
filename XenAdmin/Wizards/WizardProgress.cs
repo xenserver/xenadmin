@@ -179,7 +179,7 @@ namespace XenAdmin.Wizards
 
             int bg_w = Width;
 
-            //This makes sure we compensate for rounding should it happened whilst calculating bg_h. (to avoid gap on the right) 
+            //This makes sure we compensate for rounding if it happened while bg_h was calculated. (to avoid gap on the right) 
             //Switch to 125% dpi to see why this is needed...
             if (Width / (float)bg.Width != 1f)
                 bg_w++;
