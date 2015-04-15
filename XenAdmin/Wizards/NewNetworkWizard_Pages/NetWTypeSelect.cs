@@ -84,15 +84,17 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             if (master.RestrictVLAN)
             {
                 rbtnExternalNetwork.Checked = false;
-                panelExternal.Enabled = false;
+                rbtnExternalNetwork.Enabled = labelExternalNetwork.Enabled = false;
 
-                toolTipContainerExternal.SetToolTip(Messages.EXTERNAL_NETWORKS_REQUIRE_STANDARD);
+                labelWarningExternalOption.Text = Messages.EXTERNAL_NETWORKS_REQUIRE_STANDARD;
+                iconWarningExternalOption.Visible = labelWarningExternalOption.Visible = true;
 
                 rbtnInternalNetwork.Checked = true;
             }
             else
             {
-                RemoveFromToolTip(toolTipContainerExternal, panelExternal);
+                rbtnExternalNetwork.Enabled = labelExternalNetwork.Enabled = true;
+                iconWarningExternalOption.Visible = labelWarningExternalOption.Visible = false;
             }
 
             Pool pool = Helpers.GetPoolOfOne(connection);
@@ -100,12 +102,14 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             if (!pool.vSwitchController)
             {
                 rbtnCHIN.Checked = false;
-                panelCHIN.Enabled = false;
+                rbtnCHIN.Enabled = labelCHIN.Enabled = false;
 
-                toolTipContainerCHIN.SetToolTip(
+                labelWarningChinOption.Text = 
                     !Helpers.CowleyOrGreater(connection) || Helpers.FeatureForbidden(connection, Host.RestrictVSwitchController) ?
                     string.Format(Messages.FEATURE_NOT_AVAILABLE_NEED_COWLEY_ENTERPRISE_OR_PLATINUM_PLURAL, Messages.CHINS) :
-                    Messages.CHINS_NEED_VSWITCHCONTROLLER);
+                    Messages.CHINS_NEED_VSWITCHCONTROLLER;
+
+                iconWarningChinOption.Visible = labelWarningChinOption.Visible = true;
 
                 if (master.RestrictVLAN)
                     rbtnInternalNetwork.Checked = true;
@@ -114,32 +118,9 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             }
             else
             {
-                RemoveFromToolTip(toolTipContainerCHIN, panelCHIN);
+                rbtnCHIN.Enabled = labelCHIN.Enabled = true;
+                iconWarningChinOption.Visible = labelWarningChinOption.Visible = false;
             }
-        }
-
-        private void RemoveFromToolTip(ToolTipContainer container, Panel panel)
-        {
-            // We have to remove the controls from the panel (rather than just
-            // the panel from the container) in order to make all the radio buttons
-            // on the page into one group.
-            List<Control> controls = new List<Control>();  // need to make a copy because we're about to mess with it
-            foreach (Control control in panel.Controls)
-                controls.Add(control);
-            foreach (Control control in controls)
-            {
-                Point location = container.Location;
-                location.Offset(control.Location);
-
-                panel.Controls.Remove(control);
-                control.Visible = true;
-                control.Dock = DockStyle.None;
-
-                Controls.Add(control);
-                control.Location = location;
-            }
-
-            Controls.Remove(container);
         }
     }
 }
