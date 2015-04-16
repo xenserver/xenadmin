@@ -4652,6 +4652,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EVACUATE_HOST_NO_OTHER_HOSTS_TITLE" xml:space="preserve">
     <value>No servers available</value>
   </data>
+  <data name="EVACUATE_HOST_SHUTDOWN_VM_PROMPT" xml:space="preserve">
+    <value>{0} Shut down the VM</value>
+  </data>
   <data name="EVACUATE_HOST_SUSPEND_VM_PROMPT" xml:space="preserve">
     <value>{0} Suspend the VM</value>
   </data>
