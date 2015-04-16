@@ -387,7 +387,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
 
         private void vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Program.Invoke(Program.MainWindow, () =>
+            Program.Invoke(this, () =>
                 {
                     VM vm = (VM)sender;
                     if (vm == null)

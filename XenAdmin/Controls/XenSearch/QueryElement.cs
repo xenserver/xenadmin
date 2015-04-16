@@ -319,7 +319,7 @@ namespace XenAdmin.Controls.XenSearch
 
         void queryType_SomeThingChanged(object sender, EventArgs e)
         {
-            Program.Invoke(Program.MainWindow, Setup);
+            Program.Invoke(this, Setup);
         }
 
         private void RefreshSubQueryElements()

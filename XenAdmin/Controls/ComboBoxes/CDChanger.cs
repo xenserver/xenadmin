@@ -155,7 +155,7 @@ namespace XenAdmin.Controls
 
             action.Completed += delegate
                 {
-                    Program.Invoke(Program.MainWindow, delegate()
+                    Program.Invoke(this, delegate()
                         {
                             changing = false;
                             SelectCD();

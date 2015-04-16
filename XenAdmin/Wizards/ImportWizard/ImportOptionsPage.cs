@@ -242,7 +242,7 @@ namespace XenAdmin.Wizards.ImportWizard
             if (existingItems.Count() == 1)
 			{
                 if (selectable)
-                    Program.Invoke(Program.MainWindow, () =>
+                    Program.Invoke(this, () =>
                                              {
                                                  var wrapper = existingItems.First();
                                                  m_comboBoxISOLibraries.SuspendLayout();
@@ -260,11 +260,11 @@ namespace XenAdmin.Wizards.ImportWizard
                                                  }
                                              });
                 else
-                    Program.Invoke(Program.MainWindow, PopulateComboBox);
+                    Program.Invoke(this, PopulateComboBox);
 			}
 			else if (selectable)
 			{
-				Program.Invoke(Program.MainWindow, PopulateComboBox);
+				Program.Invoke(this, PopulateComboBox);
 			}
 		}
 

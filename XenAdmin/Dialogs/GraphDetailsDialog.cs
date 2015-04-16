@@ -85,7 +85,7 @@ namespace XenAdmin.Dialogs
 
         void getDataSorucesAction_Completed(ActionBase sender)
         {
-            Program.Invoke(Program.MainWindow, delegate
+            Program.Invoke(this, delegate
             {
                 GetDataSourcesAction action = sender as GetDataSourcesAction;
                 if (action != null)

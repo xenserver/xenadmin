@@ -310,25 +310,25 @@ namespace XenAdmin.Controls
             if (e.Action == CollectionChangeAction.Add)
                 HostCheckStates[((Host)e.Element).uuid] = true;
 
-            Program.Invoke(Program.MainWindow, RefreshLists);
+            Program.Invoke(Parent, RefreshLists);
         }
 
         private void pool_PropertyChanged(object obj, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "other_config" || e.PropertyName == "name_label")
-                Program.Invoke(Program.MainWindow, RefreshLists);
+                Program.Invoke(Parent, RefreshLists);
         }
 
         private void hostMetrics_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "live")
-                Program.Invoke(Program.MainWindow, RefreshLists);
+                Program.Invoke(Parent, RefreshLists);
         }
 
         private void host_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "name_label" || e.PropertyName == "metrics")
-                Program.Invoke(Program.MainWindow, RefreshLists);
+                Program.Invoke(Parent, RefreshLists);
         }
 
         protected override void OnDropDownItemClicked(ToolStripItemClickedEventArgs e)

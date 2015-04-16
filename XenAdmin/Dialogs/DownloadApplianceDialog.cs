@@ -114,14 +114,14 @@ namespace XenAdmin.Dialogs
 
 		private void webclient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
 		{
-			Program.Invoke(Program.MainWindow, () => m_progressBar.Value = e.ProgressPercentage);
+			Program.Invoke(this, () => m_progressBar.Value = e.ProgressPercentage);
 		}
 
 		private void webclient_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
 		{
 			if (e.Error != null) //failure
 			{
-				Program.Invoke(Program.MainWindow, () =>
+				Program.Invoke(this, () =>
 				                     	{
 				                     		DownloadedPath = null;
 				                     		m_tlpProgress.Visible = false;
@@ -131,7 +131,7 @@ namespace XenAdmin.Dialogs
 			}
 			else if (e.Cancelled) //user cancelled
 			{
-				Program.Invoke(Program.MainWindow, () =>
+				Program.Invoke(this, () =>
 				                     	{
 				                     		DownloadedPath = null;
 				                     		DialogResult = DialogResult.Cancel;
@@ -139,7 +139,7 @@ namespace XenAdmin.Dialogs
 			}
 			else //success
 			{
-				Program.Invoke(Program.MainWindow, () =>
+				Program.Invoke(this, () =>
 				                     	{
 				                     		var appfile = (ApplianceFile)e.UserState;
 											

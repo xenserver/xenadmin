@@ -155,7 +155,7 @@ namespace XenAdmin.Dialogs
 
                     while (ClientSize.Height < expectedHeight)
                     {
-                        Program.Invoke(Program.MainWindow, delegate()
+                        Program.Invoke(this, delegate()
                         {
                             ClientSize = new Size(ClientSize.Width, (int) (((2.0 * ClientSize.Height) / 3.0) + (expectedHeight / 3.0) + 1.0));
                         });
@@ -165,7 +165,7 @@ namespace XenAdmin.Dialogs
 
                 worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(delegate(object o, RunWorkerCompletedEventArgs e)
                 {
-                    Program.Invoke(Program.MainWindow, delegate()
+                    Program.Invoke(this, delegate()
                     {
                         MinimumSize = new Size(MinimumSize.Width, MinimumSize.Height + dx);
 

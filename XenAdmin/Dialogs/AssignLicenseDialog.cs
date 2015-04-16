@@ -227,7 +227,7 @@ namespace XenAdmin.Dialogs
 
             command.Succedded += delegate
                                      {
-                                         Program.Invoke(Program.MainWindow, () =>
+                                         Program.Invoke(this, () =>
                                             {
                                                 DialogResult = DialogResult.OK;
                                                 Close();

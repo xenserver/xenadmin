@@ -74,7 +74,7 @@ namespace XenAdmin.Controls
         void PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if(e.PropertyName == "name_label" || e.PropertyName == "metrics" || e.PropertyName == "enabled" || e.PropertyName == "live" || e.PropertyName == "patches")
-                Program.Invoke(Program.MainWindow, buildList);
+                Program.Invoke(this, buildList);
         }
 
         public void buildList()
@@ -188,12 +188,12 @@ namespace XenAdmin.Controls
 
         void xc_CachePopulated(object sender, EventArgs e)
         {
-            Program.Invoke(Program.MainWindow, buildList);
+            Program.Invoke(this, buildList);
         }
 
         void xc_ConnectionStateChanged(object sender, EventArgs e)
         {
-            Program.Invoke(Program.MainWindow, buildList);
+            Program.Invoke(this, buildList);
         }
 
         private CustomTreeNode lastSelected;

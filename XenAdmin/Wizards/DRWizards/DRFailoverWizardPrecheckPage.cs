@@ -241,7 +241,7 @@ namespace XenAdmin.Wizards.DRWizards
         {
             lock (_lock)
             {
-                Program.Invoke(Program.MainWindow, () =>
+                Program.Invoke(this, () =>
                                          {
                                              dataGridView1.Rows.Clear();
                                              progressBar1.Value = 0;

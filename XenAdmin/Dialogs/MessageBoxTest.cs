@@ -74,7 +74,7 @@ namespace XenAdmin.Dialogs
         private void refreshTick(object state)
         {
             timer.Change(System.Threading.Timeout.Infinite, System.Threading.Timeout.Infinite);
-            Program.Invoke(Program.MainWindow, refreshTick_);
+            Program.Invoke(this, refreshTick_);
         }
 
         private void refreshTick_()

@@ -209,7 +209,7 @@ namespace XenAdmin.TabPages
             action.Completed -= action_Completed;
 
             if (_xenObject != null && _xenObject.Connection == action.Connection)
-                Program.Invoke(Program.MainWindow, checkAdType);
+                Program.Invoke(this, checkAdType);
         }
 
         void Session_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -227,7 +227,7 @@ namespace XenAdmin.TabPages
         {
             if (e.PropertyName == "external_auth_type" || e.PropertyName == "name_label")
             {
-                Program.Invoke(Program.MainWindow, checkAdType);
+                Program.Invoke(this, checkAdType);
             }
         }
 
@@ -241,14 +241,14 @@ namespace XenAdmin.TabPages
         {
             if (e.PropertyName == "name_label")
             {
-                Program.Invoke(Program.MainWindow, checkAdType);
+                Program.Invoke(this, checkAdType);
             }
             else if (e.PropertyName == "master")
             {
                 if (master != null)
                     master.PropertyChanged -= new PropertyChangedEventHandler(master_PropertyChanged);
 
-                Program.Invoke(Program.MainWindow, RefreshMaster);
+                Program.Invoke(this, RefreshMaster);
             }
         }
 
@@ -522,7 +522,7 @@ namespace XenAdmin.TabPages
                 {
 
                     bool showing = false;
-                    Program.Invoke(Program.MainWindow, delegate
+                    Program.Invoke(this, delegate
                     {
                         showing = Program.MainWindow.TheTabControl.SelectedTab == Program.MainWindow.TabPageAD;
 
@@ -536,7 +536,7 @@ namespace XenAdmin.TabPages
                         Dictionary<string, bool> loggedSids = new Dictionary<string, bool>();
                         foreach (string s in loggedInSids)
                             loggedSids.Add(s, true);
-                        Program.Invoke(Program.MainWindow, delegate
+                        Program.Invoke(this, delegate
                         {
                             foreach (AdSubjectRow r in GridViewSubjectList.Rows)
                             {
@@ -566,7 +566,7 @@ namespace XenAdmin.TabPages
 
         private void showLoggedInStatusError()
         {
-            Program.Invoke(Program.MainWindow, delegate
+            Program.Invoke(this, delegate
             {
                 foreach (AdSubjectRow r in GridViewSubjectList.Rows)
                 {

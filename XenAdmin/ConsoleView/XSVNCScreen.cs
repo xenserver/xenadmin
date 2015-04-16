@@ -173,7 +173,7 @@ namespace XenAdmin.ConsoleView
         void Default_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "EnableRDPPolling")
-                Program.Invoke(Program.MainWindow, startPolling);
+                Program.Invoke(this, startPolling);
         }
 
         private void UnregisterEventListeners()
@@ -205,7 +205,7 @@ namespace XenAdmin.ConsoleView
 
                     cachedNetworks = newNetworks;
 
-                    Program.Invoke(Program.MainWindow, startPolling);
+                    Program.Invoke(this, startPolling);
                 }
             }
         }
@@ -293,7 +293,7 @@ namespace XenAdmin.ConsoleView
                 if (connectionPoller != null)
                     connectionPoller.Change(Timeout.Infinite, Timeout.Infinite);
                 if (OnDetectRDP != null)
-                    Program.Invoke(Program.MainWindow, OnDetectRDP);
+                    Program.Invoke(this, OnDetectRDP);
             }
             else
             {
@@ -306,7 +306,7 @@ namespace XenAdmin.ConsoleView
                     if (connectionPoller != null)
                         connectionPoller.Change(Timeout.Infinite, Timeout.Infinite);
                     if (OnDetectRDP != null)
-                        Program.Invoke(Program.MainWindow, OnDetectRDP);
+                        Program.Invoke(this, OnDetectRDP);
                 }
             }
         }
@@ -322,7 +322,7 @@ namespace XenAdmin.ConsoleView
                 if (connectionPoller != null)
                     connectionPoller.Change(Timeout.Infinite, Timeout.Infinite);
                 if (OnDetectVNC != null)
-                    Program.Invoke(Program.MainWindow, OnDetectVNC);
+                    Program.Invoke(this, OnDetectVNC);
             }
         }
 
@@ -766,7 +766,7 @@ namespace XenAdmin.ConsoleView
             else if (e.PropertyName == "domid")
             {
                 // Reboot / start / shutdown
-                Program.Invoke(Program.MainWindow, startPolling);
+                Program.Invoke(this, startPolling);
             }
 
             if (e.PropertyName == "power_state" || e.PropertyName == "VGPUs")
@@ -907,7 +907,7 @@ namespace XenAdmin.ConsoleView
                         bool lifecycleOperationInProgress = sourceVM.current_operations.Values.Any(VM.is_lifecycle_operation);
                         if (haveTriedLoginWithoutPassword && !lifecycleOperationInProgress)
                         {
-                            Program.Invoke(Program.MainWindow, delegate
+                            Program.Invoke(this, delegate
                             {
                                 promptForPassword(ignoreNextError ? null : error);
                             });
@@ -978,7 +978,7 @@ namespace XenAdmin.ConsoleView
 
         private void OnUserCancelledAuth()
         {
-            Program.Invoke(Program.MainWindow, delegate
+            Program.Invoke(this, delegate
             {
                 Log.Debug("User cancelled during VNC authentication");
                 if (UserCancelledAuth != null)
@@ -1021,7 +1021,7 @@ namespace XenAdmin.ConsoleView
 
         private void InvokeConnection(VNCGraphicsClient v, Stream stream, Console console)
         {
-            Program.Invoke(Program.MainWindow, delegate()
+            Program.Invoke(this, delegate()
             {
                 // This is the last chance that we have to make sure that we've not already
                 // connected this VNCGraphicsClient.  Now that we are back on the event thread,
@@ -1069,7 +1069,7 @@ namespace XenAdmin.ConsoleView
             if (this.Disposing || this.IsDisposed)
                 return;
 
-            Program.Invoke(Program.MainWindow, delegate()
+            Program.Invoke(this, delegate()
             {
                 VNCGraphicsClient v = (VNCGraphicsClient)sender;
 

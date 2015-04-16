@@ -73,7 +73,7 @@ namespace XenAdmin.Dialogs
 
         void SR_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
-            Program.Invoke(Program.MainWindow, BuildList);
+            Program.Invoke(this, BuildList);
         }
 
         private bool skipSelectedIndexChanged;
@@ -192,7 +192,7 @@ namespace XenAdmin.Dialogs
         {
             if (e.PropertyName == "name_label" || e.PropertyName == "VDIs" || e.PropertyName == "VBDs" || e.PropertyName == "default_SR")
             {
-                Program.Invoke(Program.MainWindow, BuildList);
+                Program.Invoke(this, BuildList);
             }
         }
 

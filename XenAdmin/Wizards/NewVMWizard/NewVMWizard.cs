@@ -117,7 +117,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 {
                     page_4_HomeServer.DisableStep = true;
                     BlockAffinitySelection = true;
-                    Program.Invoke(Program.MainWindow, RefreshProgress);
+                    Program.Invoke(this, RefreshProgress);
                 });
 
                 page_RbacWarning.AddPermissionChecks(xenConnection, createCheck, affinityCheck, memCheck);
@@ -129,7 +129,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                     vgpuCheck.WarningAction = new RBACWarningPage.PermissionCheckActionDelegate(() =>
                     {
                         pageVgpu.DisableStep = true;
-                        Program.Invoke(Program.MainWindow, RefreshProgress);
+                        Program.Invoke(this, RefreshProgress);
                     });
 
                     page_RbacWarning.AddPermissionChecks(xenConnection, vgpuCheck);

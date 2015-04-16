@@ -222,14 +222,14 @@ namespace XenAdmin.Dialogs
         void solveActionCompleted(ActionBase sender)
         {
             // this should rescan the vm errors and update the dialog.
-            Program.Invoke(Program.MainWindow, update);
+            Program.Invoke(this, update);
         }
 
         private void hostUpdate(object o, PropertyChangedEventArgs args)
         {
             if (args == null || args.PropertyName == "name_label" || args.PropertyName == "resident_VMs")
             {
-                Program.Invoke(Program.MainWindow, update);
+                Program.Invoke(this, update);
             }
         }
 
@@ -276,7 +276,7 @@ namespace XenAdmin.Dialogs
                         reasons = Host.get_vms_which_prevent_evacuation(session, host.opaque_ref);
 
                     // take care of errors
-                    Program.Invoke(Program.MainWindow, delegate()
+                    Program.Invoke(this, delegate()
                     {
                         foreach (KeyValuePair<XenRef<VM>, String[]> kvp in reasons)
                         {
@@ -328,11 +328,11 @@ namespace XenAdmin.Dialogs
         {
             if (args.PropertyName == "resident_on" || args.PropertyName == "allowed_operations")
             {
-                Program.Invoke(Program.MainWindow, dataGridViewVms.Refresh);
+                Program.Invoke(this, dataGridViewVms.Refresh);
             }
             else if (args.PropertyName == "virtualisation_status")
             {
-                Program.Invoke(Program.MainWindow, update);
+                Program.Invoke(this, update);
             }
             else if (args.PropertyName == "guest_metrics")
             {
@@ -349,13 +349,13 @@ namespace XenAdmin.Dialogs
         void gm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "PV_drivers_version")
-                Program.Invoke(Program.MainWindow, update);
+                Program.Invoke(this, update);
         }
 
         private void host_PropertyChanged(object sender, PropertyChangedEventArgs args)
         {
             populateHosts();
-            Program.Invoke(Program.MainWindow, NewMasterComboBox.Refresh);
+            Program.Invoke(this, NewMasterComboBox.Refresh);
         }
 
         private void populateVMs()
@@ -638,12 +638,12 @@ namespace XenAdmin.Dialogs
 
         private void action_Changed(ActionBase action)
         {
-            Program.Invoke(Program.MainWindow, () => UpdateProgressControls(action));
+            Program.Invoke(this, () => UpdateProgressControls(action));
         }
 
         private void action_Completed(ActionBase sender)
         {
-            Program.Invoke(Program.MainWindow, delegate()
+            Program.Invoke(this, delegate()
             {
                 if (sender == null)
                     return;
@@ -679,7 +679,7 @@ namespace XenAdmin.Dialogs
                 ProcessError(null, failure.ErrorDescription.ToArray());
             });
 
-            Program.Invoke(Program.MainWindow, () => FinalizeProgressControls(sender));
+            Program.Invoke(this, () => FinalizeProgressControls(sender));
         }
 
         private void ProcessError(String vmRef, String[] ErrorDescription)
@@ -778,7 +778,7 @@ namespace XenAdmin.Dialogs
 
             row.UpdateError(message, solution);
 
-            Program.Invoke(Program.MainWindow, dataGridViewVms.Refresh);
+            Program.Invoke(this, dataGridViewVms.Refresh);
         }
 
         private void CloseButton_Click(object sender, EventArgs e)

@@ -97,7 +97,7 @@ namespace XenAdmin.Wizards.GenericPages
         void Connection_ConnectionResult(object sender, ConnectionResultEventArgs e)
         {
             if (e.Connected)
-                Program.Invoke(Program.MainWindow, RefreshPage);
+                Program.Invoke(this, RefreshPage);
         }
 
         public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
@@ -238,7 +238,7 @@ namespace XenAdmin.Wizards.GenericPages
                 AddDetailsRow(description, PermissionCheckResult.Failed);
             }
 
-            Program.Invoke(Program.MainWindow, () => blockProgress = true);
+            Program.Invoke(this, () => blockProgress = true);
         }
 
         private void FinishedUpdating()
@@ -251,7 +251,7 @@ namespace XenAdmin.Wizards.GenericPages
                 return;
             }
             finished = true;
-            Program.Invoke(Program.MainWindow, delegate
+            Program.Invoke(this, delegate
             {
                 labelClickNext.Visible = !blockProgress;
                 OnPageUpdated();
@@ -283,7 +283,7 @@ namespace XenAdmin.Wizards.GenericPages
         {
             Program.AssertOffEventThread();
 
-            Program.Invoke(Program.MainWindow, delegate
+            Program.Invoke(this, delegate
             {
                 blockProgress = false;
                 finished = false;
@@ -300,7 +300,7 @@ namespace XenAdmin.Wizards.GenericPages
             string text = string.Format(Messages.RBAC_WARNING_PAGE_HEADER_ROW_DESC, connection.Session.UserFriendlyName,
                                         connection.Session.FriendlyRoleDescription, connection.FriendlyName);
             PermissionCheckHeaderRow headerRow = new PermissionCheckHeaderRow(text);
-            Program.Invoke(Program.MainWindow, delegate
+            Program.Invoke(this, delegate
                                      {
                                          headerRow.SetPermissionCheckInProgress(true);
                                          dataGridViewEx1.Rows.Add(headerRow);
@@ -311,7 +311,7 @@ namespace XenAdmin.Wizards.GenericPages
         private void UpdateHeaderRow(PermissionCheckHeaderRow headerRow, PermissionCheckResult checkResult)
         {
             Program.AssertOffEventThread();
-            Program.Invoke(Program.MainWindow, delegate
+            Program.Invoke(this, delegate
                                      {
                                          headerRow.SetPermissionCheckInProgress(false);
                                          headerRow.UpdateDescription(checkResult);
@@ -321,7 +321,7 @@ namespace XenAdmin.Wizards.GenericPages
         private void AddDetailsRow(string desc, PermissionCheckResult checkResult)
         {
             Program.AssertOffEventThread();
-            Program.Invoke(Program.MainWindow, delegate
+            Program.Invoke(this, delegate
                                      {
                                          PermissionCheckDetailsRow detailsRow =
                                              new PermissionCheckDetailsRow(desc, checkResult);

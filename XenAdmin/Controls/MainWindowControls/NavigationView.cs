@@ -152,7 +152,7 @@ namespace XenAdmin.Controls.MainWindowControls
         {
             try
             {
-                Program.Invoke(Program.MainWindow, () =>
+                Program.Invoke(this, () =>
                 {
                     if (!e.Background)
                     {
@@ -174,7 +174,7 @@ namespace XenAdmin.Controls.MainWindowControls
         {
             try
             {
-                Program.Invoke(Program.MainWindow, () =>
+                Program.Invoke(this, () =>
                 {
                     ResumeRefreshTreeView();
 
@@ -577,7 +577,7 @@ namespace XenAdmin.Controls.MainWindowControls
 
             EventHandler<RenameCompletedEventArgs> completed = delegate(object s, RenameCompletedEventArgs ee)
             {
-                Program.Invoke(Program.MainWindow, delegate
+                Program.Invoke(this, delegate
                 {
                     ResumeRefreshTreeView();
 

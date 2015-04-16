@@ -264,12 +264,12 @@ namespace XenAdmin.Controls
         private void Server_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "name_label" || e.PropertyName == "PBDs" || e.PropertyName == "physical_utilisation" || e.PropertyName == "currently_attached" || e.PropertyName == "default_SR")
-                Program.Invoke(Program.MainWindow, refresh);
+                Program.Invoke(this, refresh);
         }
 
         void SR_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
-            Program.Invoke(Program.MainWindow, refresh);
+            Program.Invoke(this, refresh);
         }
 
         /// <summary>

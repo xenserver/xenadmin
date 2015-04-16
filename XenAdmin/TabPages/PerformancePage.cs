@@ -261,7 +261,7 @@ namespace XenAdmin.TabPages
         private void pool_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "gui_config")
-                Program.Invoke(Program.MainWindow, () => GraphList.LoadGraphs(XenObject));
+                Program.Invoke(this, () => GraphList.LoadGraphs(XenObject));
         }
 
         private void DeregEvents()
@@ -293,7 +293,7 @@ namespace XenAdmin.TabPages
 
         private void ArchiveMaintainer_ArchivesUpdated(object sender, EventArgs args)
         {
-            Program.Invoke(Program.MainWindow, RefreshAll);
+            Program.Invoke(this, RefreshAll);
         }
 
         private void RefreshAll()

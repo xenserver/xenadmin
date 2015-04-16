@@ -701,7 +701,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
 		private void m_pageXvaStorage_ImportVmCompleted()
 		{
-			Program.Invoke(Program.MainWindow, () =>
+			Program.Invoke(this, () =>
 			                     	{
 			                     		if (CurrentStepTabPage.GetType() == typeof(StoragePickerPage))
 			                     		{

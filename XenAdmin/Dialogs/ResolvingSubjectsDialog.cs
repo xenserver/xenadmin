@@ -115,7 +115,7 @@ namespace XenAdmin.Dialogs
 
         void resolveAction_NameResolveComplete(object sender, string enteredName, string resolvedName, string sid, Exception exception)
         {
-            Program.Invoke(Program.MainWindow, delegate
+            Program.Invoke(this, delegate
             {
                 foreach (ListViewItemSubjectWrapper i in entryListView.Items)
                 {
@@ -134,7 +134,7 @@ namespace XenAdmin.Dialogs
 
         void resolveAction_AllResolveComplete()
         {
-            Program.Invoke(Program.MainWindow, delegate
+            Program.Invoke(this, delegate
            {
                LabelStatus.Text = Messages.ADDING_RESOLVED_TO_ACCESS_LIST;
            });
@@ -142,7 +142,7 @@ namespace XenAdmin.Dialogs
 
         void resolveAction_SubjectAddComplete(object sender, Subject subject, Exception exception)
         {
-            Program.Invoke(Program.MainWindow, delegate
+            Program.Invoke(this, delegate
             {
                 foreach (ListViewItemSubjectWrapper i in entryListView.Items)
                 {
@@ -160,7 +160,7 @@ namespace XenAdmin.Dialogs
 
         private void addAction_Completed(ActionBase sender)
         {
-            Program.Invoke(Program.MainWindow, delegate
+            Program.Invoke(this, delegate
             {
                 if (resolveAction.Cancelled)
                 {

@@ -215,7 +215,7 @@ namespace XenAdmin.Wizards.ImportWizard
             // Once the object creation is complete, we look for the vm; When we found the vm we unregister this event handler;
             m_targetConnection.XenObjectsUpdated += targetConnection_XenObjectsUpdated;
 
-			Program.Invoke(Program.MainWindow, CheckTask);
+			Program.Invoke(this, CheckTask);
 		}
 
 		private void CheckTask()
@@ -284,7 +284,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
         private void m_importXvaAction_Completed(ActionBase sender)
 		{
-			Program.Invoke(Program.MainWindow, () =>
+			Program.Invoke(this, () =>
 			{
 				Program.AssertOnEventThread();
 

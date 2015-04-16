@@ -225,12 +225,12 @@ namespace XenAdmin.Dialogs.WarningDialogs
             if (!action.IsCompleted)
                 return;
 
-            Program.Invoke(Program.MainWindow, () => RemoveActionRow(action));
+            Program.Invoke(this, () => RemoveActionRow(action));
         }
 
         private void action_Completed(ActionBase action)
         {
-            Program.Invoke(Program.MainWindow, () => RemoveActionRow(action));
+            Program.Invoke(this, () => RemoveActionRow(action));
         }
 
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)

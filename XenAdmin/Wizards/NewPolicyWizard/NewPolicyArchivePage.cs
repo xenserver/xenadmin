@@ -358,7 +358,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         {
             AsyncAction action = (AsyncAction)sender;
 
-            Program.Invoke(Program.MainWindow, () =>
+            Program.Invoke(this, () =>
                                      {
                                          if (action.Result != "True" || action.Result == null)
                                          {

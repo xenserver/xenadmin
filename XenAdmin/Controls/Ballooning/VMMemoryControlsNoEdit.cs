@@ -105,7 +105,7 @@ namespace XenAdmin.Controls.Ballooning
         void vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "power_state" || e.PropertyName == "virtualisation_status" || e.PropertyName == "name_label")
-                Program.Invoke(Program.MainWindow,Refresh);
+                Program.Invoke(this,Refresh);
         }
 
         void vm_metrics_PropertyChanged(object sender, PropertyChangedEventArgs e)

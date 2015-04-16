@@ -128,14 +128,14 @@ namespace XenAdmin.Dialogs
 
 		private void m_worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
 		{
-		    Program.Invoke(Program.MainWindow, () => m_progressBar.Value = e.ProgressPercentage);
+		    Program.Invoke(this, () => m_progressBar.Value = e.ProgressPercentage);
 		}
 
 		private void m_worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
 			if (e.Error != null)//failure
 			{
-				Program.Invoke(Program.MainWindow, () =>
+				Program.Invoke(this, () =>
 				                     	{
 											m_tlpProgress.Visible = false;
 				                     		ShowError(e.Error.Message);
@@ -147,7 +147,7 @@ namespace XenAdmin.Dialogs
 			}
 			else if (e.Cancelled)//user cancelled
 			{
-				Program.Invoke(Program.MainWindow, () =>
+				Program.Invoke(this, () =>
 				                     	{
 											File.Delete(m_decompressedFile);
 				                     		DialogResult = DialogResult.Cancel;
@@ -155,7 +155,7 @@ namespace XenAdmin.Dialogs
 			}
 			else//success
 			{
-				Program.Invoke(Program.MainWindow, () =>
+				Program.Invoke(this, () =>
 				                     	{
 											m_progressBar.Value = 100;
 											File.Delete(m_compressedFile);
