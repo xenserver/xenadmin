@@ -72,8 +72,8 @@
             // 
             // navigationView
             // 
-            resources.ApplyResources(this.navigationView, "navigationView");
             this.navigationView.CurrentSearch = null;
+            resources.ApplyResources(this.navigationView, "navigationView");
             this.navigationView.InSearchMode = false;
             this.navigationView.Name = "navigationView";
             this.navigationView.NavigationMode = XenAdmin.Controls.MainWindowControls.NavigationPane.NavigationMode.Infrastructure;
@@ -196,6 +196,7 @@
             // 
             this.buttonNotifySmall.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.buttonNotifySmall.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonNotifySmall.Image = global::XenAdmin.Properties.Resources.notif_none_16;
             resources.ApplyResources(this.buttonNotifySmall, "buttonNotifySmall");
             this.buttonNotifySmall.Name = "buttonNotifySmall";
             this.buttonNotifySmall.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
@@ -251,7 +252,6 @@
             this.Controls.Add(this.toolStripSmall);
             this.Name = "NavigationPane";
             this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);

@@ -41,8 +41,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NavigationView));
             this.TreeContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
-            this.treeView = new XenAdmin.Controls.FlickerFreeTreeView();
             this.searchTextBox = new XenAdmin.Controls.SearchTextBox();
+            this.treeView = new XenAdmin.Controls.FlickerFreeTreeView();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,6 +57,12 @@
             this.panel1.Controls.Add(this.treeView);
             this.panel1.Name = "panel1";
             // 
+            // searchTextBox
+            // 
+            resources.ApplyResources(this.searchTextBox, "searchTextBox");
+            this.searchTextBox.Name = "searchTextBox";
+            this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
+            // 
             // treeView
             // 
             this.treeView.AllowDrop = true;
@@ -68,23 +74,17 @@
             this.treeView.SelectionMode = XenAdmin.Controls.TreeViewSelectionMode.MultiSelect;
             this.treeView.ShowLines = false;
             this.treeView.ShowNodeToolTips = true;
-            this.treeView.BeforeSelect += new System.EventHandler<XenAdmin.Controls.VirtualTreeViewCancelEventArgs>(this.treeView_BeforeSelect);
-            this.treeView.NodeMouseClick += new System.EventHandler<XenAdmin.Controls.VirtualTreeNodeMouseClickEventArgs>(this.treeView_NodeMouseClick);
             this.treeView.NodeMouseDoubleClick += new System.EventHandler<XenAdmin.Controls.VirtualTreeNodeMouseClickEventArgs>(this.treeView_NodeMouseDoubleClick);
-            this.treeView.AfterLabelEdit += new System.EventHandler<XenAdmin.Controls.VirtualNodeLabelEditEventArgs>(this.treeView_AfterLabelEdit);
-            this.treeView.ItemDrag += new System.EventHandler<XenAdmin.Controls.VirtualTreeViewItemDragEventArgs>(this.treeView_ItemDrag);
-            this.treeView.SelectionsChanged += new System.EventHandler(this.treeView_SelectionsChanged);
-            this.treeView.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeView_DragDrop);
-            this.treeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeView_DragEnter);
-            this.treeView.DragOver += new System.Windows.Forms.DragEventHandler(this.treeView_DragOver);
             this.treeView.DragLeave += new System.EventHandler(this.treeView_DragLeave);
+            this.treeView.AfterLabelEdit += new System.EventHandler<XenAdmin.Controls.VirtualNodeLabelEditEventArgs>(this.treeView_AfterLabelEdit);
+            this.treeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeView_DragEnter);
             this.treeView.KeyUp += new System.Windows.Forms.KeyEventHandler(this.treeView_KeyUp);
-            // 
-            // searchTextBox
-            // 
-            resources.ApplyResources(this.searchTextBox, "searchTextBox");
-            this.searchTextBox.Name = "searchTextBox";
-            this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
+            this.treeView.NodeMouseClick += new System.EventHandler<XenAdmin.Controls.VirtualTreeNodeMouseClickEventArgs>(this.treeView_NodeMouseClick);
+            this.treeView.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeView_DragDrop);
+            this.treeView.BeforeSelect += new System.EventHandler<XenAdmin.Controls.VirtualTreeViewCancelEventArgs>(this.treeView_BeforeSelect);
+            this.treeView.ItemDrag += new System.EventHandler<XenAdmin.Controls.VirtualTreeViewItemDragEventArgs>(this.treeView_ItemDrag);
+            this.treeView.DragOver += new System.Windows.Forms.DragEventHandler(this.treeView_DragOver);
+            this.treeView.SelectionsChanged += new System.EventHandler(this.treeView_SelectionsChanged);
             // 
             // NavigationView
             // 

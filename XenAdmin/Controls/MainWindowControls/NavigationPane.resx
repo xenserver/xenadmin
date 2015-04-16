@@ -125,15 +125,8 @@
   <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="splitContainer1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
   <data name="splitContainer1.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
     <value>Horizontal</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="navigationView.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="navigationView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -141,12 +134,10 @@
   <data name="navigationView.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="navigationView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
-  </data>
   <data name="navigationView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 288</value>
+    <value>215, 228</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="navigationView.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -174,11 +165,8 @@
   <data name="notificationsView.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="notificationsView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
   <data name="notificationsView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 288</value>
+    <value>215, 228</value>
   </data>
   <data name="notificationsView.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -226,7 +214,7 @@
     <value>Magenta</value>
   </data>
   <data name="buttonInfraBig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 28</value>
+    <value>213, 28</value>
   </data>
   <data name="buttonInfraBig.Text" xml:space="preserve">
     <value>Infrastructure</value>
@@ -244,7 +232,7 @@
     <value>Magenta</value>
   </data>
   <data name="buttonObjectsBig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 28</value>
+    <value>213, 28</value>
   </data>
   <data name="buttonObjectsBig.Text" xml:space="preserve">
     <value>Objects</value>
@@ -253,25 +241,25 @@
     <value>MiddleLeft</value>
   </data>
   <data name="toolStripMenuItemTags.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 24</value>
+    <value>203, 22</value>
   </data>
   <data name="toolStripMenuItemTags.Text" xml:space="preserve">
     <value>Objects by Tag</value>
   </data>
   <data name="toolStripMenuItemFolders.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 24</value>
+    <value>203, 22</value>
   </data>
   <data name="toolStripMenuItemFolders.Text" xml:space="preserve">
     <value>Objects by Folder</value>
   </data>
   <data name="toolStripMenuItemFields.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 24</value>
+    <value>203, 22</value>
   </data>
   <data name="toolStripMenuItemFields.Text" xml:space="preserve">
     <value>Objects by Custom Field</value>
   </data>
   <data name="toolStripMenuItemVapps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 24</value>
+    <value>203, 22</value>
   </data>
   <data name="toolStripMenuItemVapps.Text" xml:space="preserve">
     <value>vApps</value>
@@ -286,7 +274,7 @@
     <value>Magenta</value>
   </data>
   <data name="buttonOrganizationBig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 28</value>
+    <value>213, 28</value>
   </data>
   <data name="buttonOrganizationBig.Text" xml:space="preserve">
     <value>Organization Views</value>
@@ -304,7 +292,7 @@
     <value>Magenta</value>
   </data>
   <data name="buttonSearchesBig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 28</value>
+    <value>213, 28</value>
   </data>
   <data name="buttonSearchesBig.Text" xml:space="preserve">
     <value>Saved Searches</value>
@@ -322,7 +310,7 @@
     <value>Magenta</value>
   </data>
   <data name="buttonNotifyBig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 28</value>
+    <value>213, 28</value>
   </data>
   <data name="buttonNotifyBig.Text" xml:space="preserve">
     <value>Notifications</value>
@@ -337,13 +325,13 @@
     <value>0, 0</value>
   </data>
   <data name="toolStripBig.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 196</value>
+    <value>0, 157</value>
   </data>
   <data name="toolStripBig.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>269, 0</value>
+    <value>215, 0</value>
   </data>
   <data name="toolStripBig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 196</value>
+    <value>215, 157</value>
   </data>
   <data name="toolStripBig.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -379,13 +367,10 @@
     <value>0</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 506</value>
+    <value>215, 400</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>288</value>
-  </data>
-  <data name="splitContainer1.SplitterWidth" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>228</value>
   </data>
   <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -472,10 +457,10 @@
     <value>Infrastructure</value>
   </data>
   <data name="toolStripSmall.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 506</value>
+    <value>0, 400</value>
   </data>
   <data name="toolStripSmall.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 25</value>
+    <value>215, 25</value>
   </data>
   <data name="toolStripSmall.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -499,13 +484,10 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>120, 120</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>96, 96</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 531</value>
+    <value>215, 425</value>
   </data>
   <data name="&gt;&gt;buttonInfraBig.Name" xml:space="preserve">
     <value>buttonInfraBig</value>
