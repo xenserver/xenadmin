@@ -81,7 +81,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                                 if (planAction is UpgradeHostPlanAction)
                                 {
                                     Host hostAfterReboot = host.Connection.Resolve(new XenRef<Host>(host.opaque_ref));
-                                    if (Helpers.SameServerVersion(hostAfterReboot, hostVersion))
+                                    if (hostAfterReboot != null && Helpers.SameServerVersion(hostAfterReboot, hostVersion))
                                     {
                                         log.ErrorFormat("Host '{0}' rebooted with the same version '{1}'", hostAfterReboot.Name, hostAfterReboot.LongProductVersion);
                                         OnReportException(new Exception(Messages.REBOOT_WITH_SAME_VERSION),
@@ -90,7 +90,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                                         if (hostAfterReboot.IsMaster())
                                             _cancel = true;
                                     }
-                                    log.InfoFormat("Host '{0}' upgraded with version '{1}'", hostAfterReboot.Name, hostAfterReboot.LongProductVersion);
+                                    if (hostAfterReboot != null)
+                                        log.InfoFormat("Host '{0}' upgraded with version '{1}'", hostAfterReboot.Name, hostAfterReboot.LongProductVersion);
+                                    else
+                                        log.InfoFormat("Cannot check host's version after reboot because the host '{0}' cannot be resolved", host.Name);
+                                   
                                 }
                             }
                             catch (Exception e)

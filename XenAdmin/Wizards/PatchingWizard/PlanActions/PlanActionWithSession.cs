@@ -69,7 +69,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 timeout = timeout - 1;
             }
 
-            throw new Failure(new List<String>(new [] { Failure.HANDLE_INVALID, t.opaque_ref }));
+            if (typeof(T) == typeof(Host))
+                throw new Failure(Failure.HOST_OFFLINE);
+            throw new Failure(Failure.HANDLE_INVALID, typeof(T).Name, t.opaque_ref);
         }
 
         protected abstract void RunWithSession(ref Session session);
