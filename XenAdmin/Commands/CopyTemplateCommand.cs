@@ -66,7 +66,10 @@ namespace XenAdmin.Commands
         {
             VM template = (VM)selection[0].XenObject;
 
-            MainWindowCommandInterface.ShowPerXenModelObjectWizard(template, new CopyVMDialog(template));
+            if (CrossPoolCopyTemplateCommand.CanExecute(template, null))
+                new CrossPoolCopyTemplateCommand(MainWindowCommandInterface, selection).Execute();
+            else
+                MainWindowCommandInterface.ShowPerXenModelObjectWizard(template, new CopyVMDialog(template));
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
@@ -78,10 +81,10 @@ namespace XenAdmin.Commands
         {
             if (vm != null && vm.is_a_template && !vm.is_a_snapshot && !vm.Locked && vm.allowed_operations != null && !vm.InternalTemplate)
             {
-                if (vm.allowed_operations.Contains(vm_operations.clone) || vm.allowed_operations.Contains(vm_operations.copy))
-                {
+                if (CrossPoolCopyTemplateCommand.CanExecute(vm, null))
                     return true;
-                }
+                if (vm.allowed_operations.Contains(vm_operations.clone) || vm.allowed_operations.Contains(vm_operations.copy))
+                    return true;
             }
             return false;
         }

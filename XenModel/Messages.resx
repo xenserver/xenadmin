@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -977,6 +977,12 @@
   </data>
   <data name="ACTION_VM_COPYING_TITLE_MEDDLING" xml:space="preserve">
     <value>Copying VM '{0}'</value>
+  </data>
+  <data name="ACTION_VM_CROSS_POOL_COPY_CANCELLED" xml:space="preserve">
+    <value>Copying {0} canceled</value>
+  </data>
+  <data name="ACTION_VM_CROSS_POOL_COPY_TITLE" xml:space="preserve">
+    <value>Copying VM '{0}' to '{1}'</value>
   </data>
   <data name="ACTION_VM_DELETE_SNAPSHOTS_TITLE" xml:space="preserve">
     <value>Deleting snapshots</value>
@@ -2894,11 +2900,20 @@ You can only connect to a single Citrix XenServer Express Edition server at a ti
   <data name="COPY_TEMPLATE_FAST_CLONE_DESCRIPTION" xml:space="preserve">
     <value>Clone the existing template, using a storage-level fast disk clone operation</value>
   </data>
+  <data name="COPY_TEMPLATE_INTRA_POOL_RUBRIC" xml:space="preserve">
+    <value>Provide a name and a description (optional) for the new template and then select a copy mode. Depending on your choice, you might need to select a storage repository for the template.</value>
+  </data>
   <data name="COPY_TEMPLATE_REMOVE" xml:space="preserve">
     <value>Delete original template after copy</value>
   </data>
   <data name="COPY_TEMPLATE_SELECT_SR" xml:space="preserve">
     <value>Create a full copy of the existing template on this storage repository:</value>
+  </data>
+  <data name="COPY_TEMPLATE_WIZARD_TITLE" xml:space="preserve">
+    <value>Copy Template</value>
+  </data>
+  <data name="COPY_TEMPLATE_WIZARD_TITLE_AND_LOCATION" xml:space="preserve">
+    <value>Copy Template to {0}</value>
   </data>
   <data name="COPY_TO_SHARED_CANCELLED" xml:space="preserve">
     <value>Copying {0} canceled.</value>
@@ -2911,6 +2926,9 @@ You can only connect to a single Citrix XenServer Express Edition server at a ti
   </data>
   <data name="COPY_VM_FAST_CLONE_DESCRIPTION" xml:space="preserve">
     <value>Clone the existing VM, using a storage-level fast disk clone operation</value>
+  </data>
+  <data name="COPY_VM_INTRA_POOL_RUBRIC" xml:space="preserve">
+    <value>Provide a name and a description (optional) for the new VM and then select a copy mode. Depending on your choice, you might need to select a storage repository for the VM.</value>
   </data>
   <data name="COPY_VM_REMOVE" xml:space="preserve">
     <value>Delete original VM after copy</value>
@@ -2977,6 +2995,12 @@ You can only connect to a single Citrix XenServer Express Edition server at a ti
   <data name="CPM_WIZARD_ALL_ON_SAME_SR_RADIO" xml:space="preserve">
     <value>Pl&amp;ace all migrated virtual disks on the same SR:</value>
   </data>
+  <data name="CPM_WIZARD_COPY_MODE_TAB_TITLE" xml:space="preserve">
+    <value>Copy mode</value>
+  </data>
+  <data name="CPM_WIZARD_COPY_MODE_TITLE" xml:space="preserve">
+    <value>Copy mode</value>
+  </data>
   <data name="CPM_WIZARD_DESTINATION_DESTINATION" xml:space="preserve">
     <value>&amp;Destination:</value>
   </data>
@@ -2999,6 +3023,12 @@ Please reconnect the host and try again.</value>
   </data>
   <data name="CPM_WIZARD_FINISH_PAGE_TITLE" xml:space="preserve">
     <value>Review settings and begin live migration</value>
+  </data>
+  <data name="CPM_WIZARD_INTRA_POOL_COPY_TAB_TITLE" xml:space="preserve">
+    <value>Name and storage</value>
+  </data>
+  <data name="CPM_WIZARD_INTRA_POOL_COPY_TITLE" xml:space="preserve">
+    <value>Name and storage</value>
   </data>
   <data name="CPM_WIZARD_NETWORKING_INTRO" xml:space="preserve">
     <value>Map the virtual network interfaces in the VM(s) you are migrating to networks in the destination pool or standalone server.</value>

@@ -56,6 +56,10 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         private CrossPoolMigrateTransferNetworkPage m_pageTransferNetwork;
         private RBACWarningPage m_pageTargetRbac;
 
+        private CrossPoolMigrateCopyModePage m_pageCopyMode;
+        private IntraPoolCopyPage m_pageIntraPoolCopy;
+
+
         private IXenConnection TargetConnection { get; set; }
 
 		private Dictionary<string, VmMapping> m_vmMappings = new Dictionary<string, VmMapping>();
@@ -123,12 +127,33 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             return false;
         }
 
+        private bool IsIntraPoolMove()
+        {
+            return wizardMode == WizardMode.Move && m_vmMappings.All(IsIntraPoolMove);
+        }
+
+        private bool IsIntraPoolMove(KeyValuePair<string, VmMapping> mapping)
+        {
+            VM vm = xenConnection.Resolve(new XenRef<VM>(mapping.Key));
+            return vm != null && vm.CanBeMoved && IsIntraPoolMigration(mapping);
+        }
+
+        private bool IsCopyTemplate()
+        {
+            return wizardMode == WizardMode.Copy && m_vmMappings.Any(IsTemplate);
+        }
+
+        private bool IsTemplate(KeyValuePair<string, VmMapping> mapping)
+        {
+            VM vm = xenConnection.Resolve(new XenRef<VM>(mapping.Key));
+            return vm != null && vm.is_a_template;
+        }
+
+
         protected void InitialiseWizard(IEnumerable<SelectedItem> selection)
         {
-            Text = wizardMode == WizardMode.Migrate
-                    ? Messages.CPM_WIZARD_TITLE
-                    : wizardMode == WizardMode.Move ? Messages.MOVE_VM_WIZARD_TITLE : Messages.COPY_VM_WIZARD_TITLE;
             CreateMappingsFromSelection(selection);
+            UpdateWindowTitle();
             m_pageDestination = new CrossPoolMigrateDestinationPage(hostPreSelection, VmsFromSelection(selection) )
                                     {
                                         VmMappings = m_vmMappings,
@@ -140,7 +165,13 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             m_pageFinish = new CrossPoolMigrateFinishPage {SummaryRetreiver = GetVMMappingSummary};
             m_pageTargetRbac = new RBACWarningPage();
 
-            AddPages(m_pageDestination, m_pageStorage, m_pageFinish);
+            m_pageCopyMode = new CrossPoolMigrateCopyModePage(VmsFromSelection(selection));
+            m_pageIntraPoolCopy = new IntraPoolCopyPage(VmsFromSelection(selection));
+
+            if (wizardMode == WizardMode.Copy)
+                AddPages(m_pageCopyMode, m_pageDestination,  m_pageStorage, m_pageFinish);
+            else
+                AddPages(m_pageDestination, m_pageStorage, m_pageFinish);
         }
 
         public override sealed string Text
@@ -153,6 +184,15 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         {
             if (!AllVMsAvailable(m_vmMappings, xenConnection))
             {
+                base.FinishWizard();
+                return;
+            }
+
+            if (wizardMode == WizardMode.Copy && m_pageCopyMode.IntraPoolCopySelected)
+            {
+                var copyAction = m_pageIntraPoolCopy.GetCopyAction();
+                if (copyAction != null)
+                    copyAction.RunAsync();
                 base.FinishWizard();
                 return;
             }
@@ -181,12 +221,10 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 if(target == null)
                     throw new ApplicationException("Cannot resolve the target host");
 
-                if (wizardMode == WizardMode.Move && IsIntraPoolMigration(pair) && vm.CanBeMoved)
-                {
+                if (wizardMode == WizardMode.Move && IsIntraPoolMove(pair))
                     new VMMoveAction(vm, pair.Value.Storage, target).RunAsync();
-                }
-                else
-                    new VMCrossPoolMigrateAction(vm, target, SelectedTransferNetwork, pair.Value).RunAsync();
+                else 
+                    new VMCrossPoolMigrateAction(vm, target, SelectedTransferNetwork, pair.Value, wizardMode == WizardMode.Copy).RunAsync();
             }
             
             base.FinishWizard();
@@ -215,20 +253,23 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             return selection.Select(item => item.XenObject).OfType<VM>().ToList();
         }
 
-        private void AddHostNameToWindowTitle()
+        private void UpdateWindowTitle()
         {
-            if(m_vmMappings != null &&  m_vmMappings.Count > 0 )
+            if(m_vmMappings != null &&  m_vmMappings.Count > 0 && !string.IsNullOrEmpty(m_vmMappings.First().Value.TargetName))
             {
                 var messageText = wizardMode == WizardMode.Migrate
                     ? Messages.CPM_WIZARD_TITLE_AND_LOCATION
-                    : wizardMode == WizardMode.Move ? Messages.MOVE_VM_WIZARD_TITLE_AND_LOCATION : Messages.COPY_VM_WIZARD_TITLE_AND_LOCATION;
+                    : wizardMode == WizardMode.Move 
+                        ? Messages.MOVE_VM_WIZARD_TITLE_AND_LOCATION
+                        : IsCopyTemplate() ? Messages.COPY_TEMPLATE_WIZARD_TITLE_AND_LOCATION : Messages.COPY_VM_WIZARD_TITLE_AND_LOCATION;
                 Text = String.Format(messageText, m_vmMappings.First().Value.TargetName);
             }
-                
             else
                 Text = wizardMode == WizardMode.Migrate
                     ? Messages.CPM_WIZARD_TITLE 
-                    : wizardMode == WizardMode.Move ? Messages.MOVE_VM_WIZARD_TITLE : Messages.COPY_VM_WIZARD_TITLE;
+                    : wizardMode == WizardMode.Move 
+                        ? Messages.MOVE_VM_WIZARD_TITLE 
+                        : IsCopyTemplate() ? Messages.COPY_TEMPLATE_WIZARD_TITLE : Messages.COPY_VM_WIZARD_TITLE;
         }
 
         protected override void UpdateWizardContent(XenTabPage page)
@@ -246,10 +287,10 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 m_pageStorage.TargetConnection = TargetConnection;
                 m_pageNetwork.TargetConnection = TargetConnection;
                 ConfigureRbacPage();
-                AddHostNameToWindowTitle();
+                UpdateWindowTitle();
 
-                // add Transfer network page for all migration cases and for all other cross-pool operations (move, copy)
-                if (wizardMode == WizardMode.Migrate || !IsIntraPoolMigration())
+                // add Transfer network page for all cases except intra-pool move (which is performed via VMMoveAction) 
+                if (!IsIntraPoolMove())
                     AddAfterPage(m_pageStorage, m_pageTransferNetwork);
                 m_pageTransferNetwork.Connection = TargetConnection;
 
@@ -265,20 +306,33 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             }
             else if (type == typeof(CrossPoolMigrateStoragePage))
             {
-                AddHostNameToWindowTitle();
+                UpdateWindowTitle();
                 m_vmMappings = m_pageStorage.VmMappings;
                 m_pageNetwork.VmMappings = m_vmMappings;
             }
             else if (type == typeof(CrossPoolMigrateNetworkingPage))
             {
-                AddHostNameToWindowTitle();
+                UpdateWindowTitle();
                 m_vmMappings = m_pageNetwork.VmMappings;
             }
             else if (type == typeof(CrossPoolMigrateTransferNetworkPage))
             {
-                AddHostNameToWindowTitle();
+                UpdateWindowTitle();
                 string netRef = m_pageTransferNetwork.NetworkUuid.Key;
                 SelectedTransferNetwork = TargetConnection.Cache.Networks.FirstOrDefault(n => n.uuid == netRef);
+            }
+            else if (type == typeof(CrossPoolMigrateCopyModePage))
+            {
+                if (m_pageCopyMode.IntraPoolCopySelected)
+                {
+                    RemovePagesFrom(1);
+                    AddAfterPage(m_pageCopyMode, m_pageIntraPoolCopy, m_pageFinish);
+                }
+                else
+                {
+                    RemovePagesFrom(1);
+                    AddAfterPage(m_pageCopyMode, m_pageDestination, m_pageStorage, m_pageFinish);
+                }
             }
 
             if (type != typeof(CrossPoolMigrateFinishPage))

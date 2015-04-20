@@ -108,6 +108,7 @@
     <Compile Include="Alerts\Types\MessageAlert.cs" />
     <Compile Include="Alerts\Types\XenServerPatchAlert.cs" />
     <Compile Include="Alerts\Types\XenServerVersionAlert.cs" />
+    <Compile Include="Commands\CrossPoolCopyVMCommand.cs" />
     <Compile Include="Commands\CrossPoolMoveVMCommand.cs" />
     <Compile Include="Commands\RestartDockerContainerCommand.cs" />
     <Compile Include="Commands\ResumeDockerContainerCommand.cs" />
@@ -559,6 +560,24 @@
     </Compile>
     <Compile Include="Wizards\BallooningWizard_Pages\MemorySettings.Designer.cs">
       <DependentUpon>MemorySettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateCopyModePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateCopyModePage.Designer.cs">
+      <DependentUpon>CrossPoolMigrateCopyModePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateTransferNetworkPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateTransferNetworkPage.Designer.cs">
+      <DependentUpon>CrossPoolMigrateTransferNetworkPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\CrossPoolMigrateWizard\IntraPoolCopyPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\CrossPoolMigrateWizard\IntraPoolCopyPage.Designer.cs">
+      <DependentUpon>IntraPoolCopyPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.cs">
       <SubType>UserControl</SubType>
@@ -1706,6 +1725,33 @@
     <EmbeddedResource Include="Wizards\BallooningWizard_Pages\MemorySettings.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MemorySettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateCopyModePage.ja.resx">
+      <DependentUpon>CrossPoolMigrateCopyModePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateCopyModePage.resx">
+      <DependentUpon>CrossPoolMigrateCopyModePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateCopyModePage.zh-CN.resx">
+      <DependentUpon>CrossPoolMigrateCopyModePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateTransferNetworkPage.ja.resx">
+      <DependentUpon>CrossPoolMigrateTransferNetworkPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateTransferNetworkPage.resx">
+      <DependentUpon>CrossPoolMigrateTransferNetworkPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateTransferNetworkPage.zh-CN.resx">
+      <DependentUpon>CrossPoolMigrateTransferNetworkPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\CrossPoolMigrateWizard\IntraPoolCopyPage.ja.resx">
+      <DependentUpon>IntraPoolCopyPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\CrossPoolMigrateWizard\IntraPoolCopyPage.resx">
+      <DependentUpon>IntraPoolCopyPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\CrossPoolMigrateWizard\IntraPoolCopyPage.zh-CN.resx">
+      <DependentUpon>IntraPoolCopyPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\GenericPages\RBACWarningPage.resx">
       <SubType>Designer</SubType>
@@ -3203,12 +3249,6 @@
     </Compile>
     <Compile Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateStoragePage.cs">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateTransferNetworkPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateTransferNetworkPage.Designer.cs">
-      <DependentUpon>CrossPoolMigrateTransferNetworkPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateWizard.cs">
       <SubType>Form</SubType>
@@ -5787,15 +5827,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateFinishPage.zh-CN.resx">
       <DependentUpon>CrossPoolMigrateFinishPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateTransferNetworkPage.ja.resx">
-      <DependentUpon>CrossPoolMigrateTransferNetworkPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateTransferNetworkPage.resx">
-      <DependentUpon>CrossPoolMigrateTransferNetworkPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateTransferNetworkPage.zh-CN.resx">
-      <DependentUpon>CrossPoolMigrateTransferNetworkPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateWizard.ja.resx">
       <DependentUpon>CrossPoolMigrateWizard.cs</DependentUpon>

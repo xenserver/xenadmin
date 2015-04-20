@@ -1806,6 +1806,9 @@ namespace XenAPI
             }
         }
 
+        /// <summary>
+        /// Whether the VM can be moved inside the pool (vdi copy + destroy) 
+        /// </summary>
         public bool CanBeMoved
         {
             get
@@ -1817,7 +1820,21 @@ namespace XenAPI
                 {
                     return Connection.ResolveAll(VBDs).Find(v => v.IsOwner) != null;
                 }
+                return false;
+            }
+        }
 
+        /// <summary>
+        /// Whether the VM can be copied inside the pool (vm.copy)
+        /// </summary>
+        public bool CanBeCopied
+        {
+            get
+            {
+                if (!is_a_template && !Locked && allowed_operations != null && allowed_operations.Contains(vm_operations.export) && power_state != vm_power_state.Suspended)
+                {
+                    return true;
+                }
                 return false;
             }
         }
