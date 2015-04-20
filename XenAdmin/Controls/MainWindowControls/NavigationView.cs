@@ -441,6 +441,7 @@ namespace XenAdmin.Controls.MainWindowControls
             commands.Add(new DragDropAddHostToPoolCommand(Program.MainWindow, targetNode, dragData));
             commands.Add(new DragDropMigrateVMCommand(Program.MainWindow, targetNode, dragData));
             commands.Add(new DragDropRemoveHostFromPoolCommand(Program.MainWindow, targetNode, dragData));
+            commands.Add(new DragDropCrossPoolMoveHaltedVMCommand(Program.MainWindow, targetNode, dragData));
 
             if (NavigationMode == NavigationPane.NavigationMode.Tags
                 || NavigationMode == NavigationPane.NavigationMode.Folders
