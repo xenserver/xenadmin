@@ -2901,7 +2901,7 @@ You can only connect to a single Citrix XenServer Express Edition server at a ti
     <value>Clone the existing template, using a storage-level fast disk clone operation</value>
   </data>
   <data name="COPY_TEMPLATE_INTRA_POOL_RUBRIC" xml:space="preserve">
-    <value>Provide a name and a description (optional) for the new template and then select a copy mode. Depending on your choice, you might need to select a storage repository for the template.</value>
+    <value>Provide a name and a description (optional) for the new template and then select a copy mode.</value>
   </data>
   <data name="COPY_TEMPLATE_REMOVE" xml:space="preserve">
     <value>Delete original template after copy</value>
@@ -2928,7 +2928,7 @@ You can only connect to a single Citrix XenServer Express Edition server at a ti
     <value>Clone the existing VM, using a storage-level fast disk clone operation</value>
   </data>
   <data name="COPY_VM_INTRA_POOL_RUBRIC" xml:space="preserve">
-    <value>Provide a name and a description (optional) for the new VM and then select a copy mode. Depending on your choice, you might need to select a storage repository for the VM.</value>
+    <value>Provide a name and a description (optional) for the new VM and then select a copy mode.</value>
   </data>
   <data name="COPY_VM_REMOVE" xml:space="preserve">
     <value>Delete original VM after copy</value>
@@ -2975,7 +2975,7 @@ You can only connect to a single Citrix XenServer Express Edition server at a ti
     <value>Home Server:</value>
   </data>
   <data name="CPM_SUMMARY_KEY_MIGRATE_VM" xml:space="preserve">
-    <value>Migrate VM:</value>
+    <value>VM:</value>
   </data>
   <data name="CPM_SUMMARY_KEY_NETWORK" xml:space="preserve">
     <value>Networking:</value>
@@ -2993,25 +2993,34 @@ You can only connect to a single Citrix XenServer Express Edition server at a ti
     <value>Unset</value>
   </data>
   <data name="CPM_WIZARD_ALL_ON_SAME_SR_RADIO" xml:space="preserve">
-    <value>Pl&amp;ace all migrated virtual disks on the same SR:</value>
+    <value>Pl&amp;ace all virtual disks on the same SR:</value>
   </data>
   <data name="CPM_WIZARD_COPY_MODE_TAB_TITLE" xml:space="preserve">
-    <value>Copy mode</value>
+    <value>Destination</value>
   </data>
   <data name="CPM_WIZARD_COPY_MODE_TITLE" xml:space="preserve">
-    <value>Copy mode</value>
+    <value>Destination</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_DESTINATION" xml:space="preserve">
     <value>&amp;Destination:</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS" xml:space="preserve">
-    <value>Select the pool or standalone server where you want to migrate the selected VM(s).</value>
+    <value>Select the pool or standalone server where you want to migrate the selected VMs to.</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY" xml:space="preserve">
+    <value>Select the pool or standalone server where you want to copy the selected VMs to.</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE" xml:space="preserve">
+    <value>Select the pool or standalone server where you want to copy the selected VM to.</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_SINGLE" xml:space="preserve">
+    <value>Select the pool or standalone server where you want to migrate the selected VM to.</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO" xml:space="preserve">
     <value>Specify a &amp;home server in the destination pool (optional):</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TAB_TITLE" xml:space="preserve">
-    <value>Destination</value>
+    <value>Destination Pool</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TITLE" xml:space="preserve">
     <value>Select the destination pool or standalone server</value>
@@ -3021,29 +3030,44 @@ You can only connect to a single Citrix XenServer Express Edition server at a ti
 
 Please reconnect the host and try again.</value>
   </data>
+  <data name="CPM_WIZARD_FINISH_PAGE_INTRO" xml:space="preserve">
+    <value>The wizard is ready to begin migrating the selected VMs using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to migrate the VMs and close the wizard.</value>
+  </data>
+  <data name="CPM_WIZARD_FINISH_PAGE_INTRO_COPY" xml:space="preserve">
+    <value>The wizard is ready to begin copying the selected VMs using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to copy the VMs and close the wizard.</value>
+  </data>
+  <data name="CPM_WIZARD_FINISH_PAGE_INTRO_COPY_SINGLE" xml:space="preserve">
+    <value>The wizard is ready to begin copying the selected VM using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to copy the VM and close the wizard.</value>
+  </data>
+  <data name="CPM_WIZARD_FINISH_PAGE_INTRO_SINGLE" xml:space="preserve">
+    <value>The wizard is ready to begin migrating the selected VM using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to migrate the VM and close the wizard.</value>
+  </data>
   <data name="CPM_WIZARD_FINISH_PAGE_TITLE" xml:space="preserve">
-    <value>Review settings and begin live migration</value>
+    <value>Review settings</value>
   </data>
   <data name="CPM_WIZARD_INTRA_POOL_COPY_TAB_TITLE" xml:space="preserve">
-    <value>Name and storage</value>
+    <value>Name and Storage</value>
   </data>
   <data name="CPM_WIZARD_INTRA_POOL_COPY_TITLE" xml:space="preserve">
-    <value>Name and storage</value>
+    <value>Name and Storage</value>
   </data>
   <data name="CPM_WIZARD_NETWORKING_INTRO" xml:space="preserve">
-    <value>Map the virtual network interfaces in the VM(s) you are migrating to networks in the destination pool or standalone server.</value>
+    <value>Map the virtual network interfaces in the selected VMs to networks in the destination pool or standalone server.</value>
+  </data>
+  <data name="CPM_WIZARD_NETWORKING_INTRO_SINGLE" xml:space="preserve">
+    <value>Map the VM's virtual network interfaces to networks in the destination pool or standalone server.</value>
   </data>
   <data name="CPM_WIZARD_SELECT_NETWORK_PAGE_TEXT" xml:space="preserve">
     <value>Networking</value>
   </data>
   <data name="CPM_WIZARD_SELECT_NETWORK_PAGE_TITLE" xml:space="preserve">
-    <value>Configure networking for the migrated VM(s)</value>
+    <value>Configure networking</value>
   </data>
   <data name="CPM_WIZARD_SELECT_STORAGE_PAGE_TEXT" xml:space="preserve">
     <value>Storage</value>
   </data>
   <data name="CPM_WIZARD_SELECT_STORAGE_PAGE_TITLE" xml:space="preserve">
-    <value>Configure storage for the migrated VM(s)</value>
+    <value>Configure storage</value>
   </data>
   <data name="CPM_WIZARD_SELECT_TRANSFER_NETWORK_PAGE_TEXT" xml:space="preserve">
     <value>Live Migration Network</value>
@@ -3052,7 +3076,7 @@ Please reconnect the host and try again.</value>
     <value>Configure storage live migration settings</value>
   </data>
   <data name="CPM_WIZARD_SPECIFIC_SR_RADIO" xml:space="preserve">
-    <value>Pla&amp;ce migrated virtual disks onto specified SRs:</value>
+    <value>Pla&amp;ce virtual disks onto specified SRs:</value>
   </data>
   <data name="CPM_WIZARD_STORAGE_INSTRUCTIONS" xml:space="preserve">
     <value>Select one or more storage repositories (SR) in the destination pool or standalone server.</value>
@@ -3067,7 +3091,7 @@ Please reconnect the host and try again.</value>
     <value>The selected VMs are no longer available for migration. Please verify your selection is valid and relaunch the wizard.</value>
   </data>
   <data name="CPM_WIZARD_VM_SELECTION_INTRODUCTION" xml:space="preserve">
-    <value>&amp;Virtual network interfaces in migrated VMs:</value>
+    <value>&amp;Virtual network interfaces:</value>
   </data>
   <data name="CPM_WLB_ENABLED_ON_HOST_FAILURE_REASON" xml:space="preserve">
     <value>WLB is enabled on the host</value>

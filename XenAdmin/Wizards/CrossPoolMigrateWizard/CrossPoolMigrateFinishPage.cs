@@ -40,10 +40,15 @@ using XenAdmin.Wizards.GenericPages;
 namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 {
     public partial class CrossPoolMigrateFinishPage : XenTabPage
-	{
-        public CrossPoolMigrateFinishPage()
+    {
+        private int selectionCount;
+        private WizardMode wizardMode;
+
+        public CrossPoolMigrateFinishPage(int selectionCount, WizardMode wizardMode)
 		{
-			InitializeComponent();
+            InitializeComponent();
+            this.selectionCount = selectionCount;
+            this.wizardMode = wizardMode;
 		}
 
 		/// <summary>
@@ -56,14 +61,19 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         public override string HelpID { get { return "MigrationSummary"; } }
 
-		/// <summary>
-		/// Gets the page's title (headline)
-		/// </summary>
+        /// <summary>
+        /// Gets the page's title (headline)
+        /// </summary>
         public override string PageTitle { get { return Messages.CPM_WIZARD_FINISH_PAGE_TITLE; } }
 
 		public override void PopulatePage()
 		{
-			if (SummaryRetreiver == null)
+            if (selectionCount > 1)
+                m_labelIntro.Text = wizardMode == WizardMode.Copy ? Messages.CPM_WIZARD_FINISH_PAGE_INTRO_COPY : Messages.CPM_WIZARD_FINISH_PAGE_INTRO;
+            else
+                m_labelIntro.Text = wizardMode == WizardMode.Copy ? Messages.CPM_WIZARD_FINISH_PAGE_INTRO_COPY_SINGLE : Messages.CPM_WIZARD_FINISH_PAGE_INTRO_SINGLE;
+
+            if (SummaryRetreiver == null)
 				return;
 
 			var entries = SummaryRetreiver.Invoke();

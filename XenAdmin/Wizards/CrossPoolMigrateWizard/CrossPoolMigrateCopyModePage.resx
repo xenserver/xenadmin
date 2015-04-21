@@ -145,7 +145,7 @@
     <value>0</value>
   </data>
   <data name="labelRubric.Text" xml:space="preserve">
-    <value>Select where would you like to copy your VM. Depending on your selection, more settings will be required in the next steps.</value>
+    <value>Select where would you like to copy your VM.</value>
   </data>
   <data name="&gt;&gt;labelRubric.Name" xml:space="preserve">
     <value>labelRubric</value>
@@ -162,18 +162,20 @@
   <data name="intraPoolRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="intraPoolRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="intraPoolRadioButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 36</value>
   </data>
   <data name="intraPoolRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 17</value>
+    <value>78, 17</value>
   </data>
   <data name="intraPoolRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="intraPoolRadioButton.Text" xml:space="preserve">
-    <value>Inside pool: Make a copy of the VM within the same pool
-</value>
+    <value>&amp;Within pool</value>
   </data>
   <data name="&gt;&gt;intraPoolRadioButton.Name" xml:space="preserve">
     <value>intraPoolRadioButton</value>
@@ -190,17 +192,23 @@
   <data name="crossPoolRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="crossPoolRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="crossPoolRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 59</value>
+    <value>3, 79</value>
+  </data>
+  <data name="crossPoolRadioButton.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 6, 0, 0</value>
   </data>
   <data name="crossPoolRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 17</value>
+    <value>74, 23</value>
   </data>
   <data name="crossPoolRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="crossPoolRadioButton.Text" xml:space="preserve">
-    <value>Across pools: Make a copy of the VM in a different pool</value>
+    <value>&amp;Cross-pool</value>
   </data>
   <data name="&gt;&gt;crossPoolRadioButton.Name" xml:space="preserve">
     <value>crossPoolRadioButton</value>
@@ -214,6 +222,78 @@
   <data name="&gt;&gt;crossPoolRadioButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="intraPoolDescriptionLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="intraPoolDescriptionLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="intraPoolDescriptionLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="intraPoolDescriptionLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 56</value>
+  </data>
+  <data name="intraPoolDescriptionLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>16, 0, 3, 0</value>
+  </data>
+  <data name="intraPoolDescriptionLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>608, 20</value>
+  </data>
+  <data name="intraPoolDescriptionLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="intraPoolDescriptionLabel.Text" xml:space="preserve">
+    <value>Make a copy of the VM within the same pool</value>
+  </data>
+  <data name="&gt;&gt;intraPoolDescriptionLabel.Name" xml:space="preserve">
+    <value>intraPoolDescriptionLabel</value>
+  </data>
+  <data name="&gt;&gt;intraPoolDescriptionLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;intraPoolDescriptionLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;intraPoolDescriptionLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="crossPoolDescriptionLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="crossPoolDescriptionLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="crossPoolDescriptionLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="crossPoolDescriptionLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 105</value>
+  </data>
+  <data name="crossPoolDescriptionLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>16, 0, 3, 0</value>
+  </data>
+  <data name="crossPoolDescriptionLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>608, 20</value>
+  </data>
+  <data name="crossPoolDescriptionLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="crossPoolDescriptionLabel.Text" xml:space="preserve">
+    <value>Make a copy of the VM in a different pool</value>
+  </data>
+  <data name="&gt;&gt;crossPoolDescriptionLabel.Name" xml:space="preserve">
+    <value>crossPoolDescriptionLabel</value>
+  </data>
+  <data name="&gt;&gt;crossPoolDescriptionLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;crossPoolDescriptionLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;crossPoolDescriptionLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -221,7 +301,7 @@
     <value>0, 0</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 332</value>
@@ -242,7 +322,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelRubric" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="intraPoolRadioButton" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="crossPoolRadioButton" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,33.33333,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelRubric" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="intraPoolRadioButton" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="crossPoolRadioButton" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="intraPoolDescriptionLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="crossPoolDescriptionLabel" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,100,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

@@ -127,13 +127,13 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="DescriptionTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>131, 75</value>
+    <value>131, 62</value>
   </data>
   <data name="DescriptionTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>342, 20</value>
   </data>
   <data name="DescriptionTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;DescriptionTextBox.Name" xml:space="preserve">
     <value>DescriptionTextBox</value>
@@ -151,13 +151,13 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="NameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>131, 49</value>
+    <value>131, 36</value>
   </data>
   <data name="NameTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>342, 20</value>
   </data>
   <data name="NameTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;NameTextBox.Name" xml:space="preserve">
     <value>NameTextBox</value>
@@ -199,7 +199,7 @@
     <value>4</value>
   </data>
   <data name="CloneRadioButton.Text" xml:space="preserve">
-    <value>&amp;Fast clone</value>
+    <value>F&amp;ast clone</value>
   </data>
   <data name="&gt;&gt;CloneRadioButton.Name" xml:space="preserve">
     <value>CloneRadioButton</value>
@@ -280,7 +280,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="toolTipContainer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 19</value>
+    <value>9, 24</value>
   </data>
   <data name="toolTipContainer1.Size" type="System.Drawing.Size, System.Drawing">
     <value>455, 52</value>
@@ -346,7 +346,7 @@
     <value>3, 0, 3, 3</value>
   </data>
   <data name="srPicker1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>439, 151</value>
+    <value>439, 154</value>
   </data>
   <data name="srPicker1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -367,16 +367,16 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 108</value>
+    <value>3, 95</value>
   </data>
   <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 10, 3, 10</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>470, 254</value>
+    <value>470, 267</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+    <value>5</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Copy mode</value>
@@ -409,13 +409,13 @@
     <value>0, 0, 0, 20</value>
   </data>
   <data name="labelRubric.Size" type="System.Drawing.Size, System.Drawing">
-    <value>470, 46</value>
+    <value>470, 33</value>
   </data>
   <data name="labelRubric.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
   <data name="labelRubric.Text" xml:space="preserve">
-    <value>Provide a name and a description (optional) for the new VM and then select a copy mode. Depending on your choice, you might need to select a storage repository for the new VM.</value>
+    <value>Provide a name and a description (optional) for the new VM and then select a copy mode. </value>
   </data>
   <data name="&gt;&gt;labelRubric.Name" xml:space="preserve">
     <value>labelRubric</value>
@@ -442,13 +442,13 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 46</value>
+    <value>3, 33</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>122, 26</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>1</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Na&amp;me:</value>
@@ -481,13 +481,13 @@
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 72</value>
+    <value>3, 59</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>122, 26</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>3</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>&amp;Description:</value>
