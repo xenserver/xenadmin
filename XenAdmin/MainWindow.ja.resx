@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -117,11 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="splitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
   <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 24</value>
   </data>
@@ -137,7 +137,7 @@
   <data name="navigationPane.Size" type="System.Drawing.Size, System.Drawing">
     <value>813, 679</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="navigationPane.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -700,7 +700,7 @@
     <value>0</value>
   </data>
   <data name="TabPageDockerDetails.Text" xml:space="preserve">
-    <value>Detail</value>
+    <value>詳細</value>
   </data>
   <data name="&gt;&gt;TabPageDockerDetails.Name" xml:space="preserve">
     <value>TabPageDockerDetails</value>
@@ -767,6 +767,39 @@
   </data>
   <data name="&gt;&gt;TabPageSearch.ZOrder" xml:space="preserve">
     <value>18</value>
+  <data name="TabPageDockerProcess.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="TabPageDockerProcess.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPageDockerProcess.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="TabPageDockerProcess.Size" type="System.Drawing.Size, System.Drawing">
+    <value>753, 592</value>
+  </data>
+  <data name="TabPageDockerProcess.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="TabPageDockerProcess.Text" xml:space="preserve">
+    <value>プロセス</value>
+  </data>
+  <data name="TabPageDockerProcess.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;TabPageDockerProcess.Name" xml:space="preserve">
+    <value>TabPageDockerProcess</value>
+  </data>
+  <data name="&gt;&gt;TabPageDockerProcess.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPageDockerProcess.Parent" xml:space="preserve">
+    <value>TheTabControl</value>
+  </data>
+  <data name="&gt;&gt;TabPageDockerProcess.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
   </data>
   <data name="TheTabControl.Font" type="System.Drawing.Font, System.Drawing">
     <value>Verdana, 8.25pt</value>
@@ -1039,7 +1072,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="toolTipContainer1" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="TitleLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="toolTipContainer1" Row="0" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="TitleLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100,AutoSize,0" />&lt;Rows Styles="Percent,100" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="TitleBackPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 3</value>
@@ -1224,8 +1257,38 @@
   <data name="shutDownToolStripButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8.25pt</value>
   </data>
-  <data name="shutDownToolStripButton.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="shutDownToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing">
+    <value>
+        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
+        AElFTkSuQmCC
+</value>
   </data>
   <data name="shutDownToolStripButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -1248,8 +1311,40 @@
   <data name="powerOnHostToolStripButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8.25pt</value>
   </data>
-  <data name="powerOnHostToolStripButton.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="powerOnHostToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing">
+    <value>
+        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
+        Cf2EDCTeVLEAAAAASUVORK5CYII=
+</value>
   </data>
   <data name="powerOnHostToolStripButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -1272,8 +1367,40 @@
   <data name="startVMToolStripButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8.25pt</value>
   </data>
-  <data name="startVMToolStripButton.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="startVMToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing">
+    <value>
+        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
+        Cf2EDCTeVLEAAAAASUVORK5CYII=
+</value>
   </data>
   <data name="startVMToolStripButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -1296,8 +1423,40 @@
   <data name="RebootToolbarButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8.25pt</value>
   </data>
-  <data name="RebootToolbarButton.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="RebootToolbarButton.Image" type="System.Drawing.Bitmap, System.Drawing">
+    <value>
+        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
+</value>
   </data>
   <data name="RebootToolbarButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -1406,6 +1565,111 @@
   </data>
   <data name="ForceRebootToolbarButton.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="stopContainerToolStripButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt</value>
+  </data>
+  <data name="stopContainerToolStripButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="stopContainerToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="stopContainerToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 17</value>
+  </data>
+  <data name="stopContainerToolStripButton.Text" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="stopContainerToolStripButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="stopContainerToolStripButton.ToolTipText" xml:space="preserve">
+    <value>Docker コンテナの停止</value>
+  </data>
+  <data name="startContainerToolStripButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt</value>
+  </data>
+  <data name="startContainerToolStripButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="startContainerToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="startContainerToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 28</value>
+  </data>
+  <data name="startContainerToolStripButton.Text" xml:space="preserve">
+    <value>開始</value>
+  </data>
+  <data name="startContainerToolStripButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="startContainerToolStripButton.ToolTipText" xml:space="preserve">
+    <value>Docker コンテナの起動</value>
+  </data>
+  <data name="restartContainerToolStripButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt</value>
+  </data>
+  <data name="restartContainerToolStripButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="restartContainerToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="restartContainerToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 28</value>
+  </data>
+  <data name="restartContainerToolStripButton.Text" xml:space="preserve">
+    <value>再開</value>
+  </data>
+  <data name="restartContainerToolStripButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="restartContainerToolStripButton.ToolTipText" xml:space="preserve">
+    <value>Docker コンテナの再起動</value>
+  </data>
+  <data name="resumeContainerToolStripButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt</value>
+  </data>
+  <data name="resumeContainerToolStripButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="resumeContainerToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="resumeContainerToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 28</value>
+  </data>
+  <data name="resumeContainerToolStripButton.Text" xml:space="preserve">
+    <value>再開</value>
+  </data>
+  <data name="resumeContainerToolStripButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="resumeContainerToolStripButton.ToolTipText" xml:space="preserve">
+    <value>Docker コンテナの再開</value>
+  </data>
+  <data name="pauseContainerToolStripButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt</value>
+  </data>
+  <data name="pauseContainerToolStripButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="pauseContainerToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="pauseContainerToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 28</value>
+  </data>
+  <data name="pauseContainerToolStripButton.Text" xml:space="preserve">
+    <value>一時停止</value>
+  </data>
+  <data name="pauseContainerToolStripButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="pauseContainerToolStripButton.ToolTipText" xml:space="preserve">
+    <value>Docker コンテナの一時停止</value>
   </data>
   <data name="ToolStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 24</value>
@@ -1606,7 +1870,7 @@
     <value>214, 22</value>
   </data>
   <data name="drConfigureToolStripMenuItem.Text" xml:space="preserve">
-    <value>設定(&amp;C)...</value>
+    <value>構成(&amp;C)...</value>
   </data>
   <data name="DrWizardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>214, 22</value>
@@ -1692,8 +1956,26 @@
   <data name="RebootHostToolStripMenuItem.Text" xml:space="preserve">
     <value>再起動(&amp;O)</value>
   </data>
-  <data name="powerOnToolStripMenuItem.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="powerOnToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAK8gAA
+        CvIBPVL3EQAAAzRJREFUOE9tk21Mk1cYht9/BeGPYguzfsTFTzrnKAjO+bmZzLC5kCnQAHZKRVZGhcpa
+        EKGroWNStg4N1q0aSIYISjMx1BXCyhSDCmPpn20uuswumfHHEteK8SuGy/O+iwld9uM+yck59/PkPPd1
+        JCBOw8PD6sHBQUcgELja39//zO/3P+vp6bna1dXl6OjoUP/3ftxGmG3fDV3EN+Ll01EHNVfMfHTZxIFg
+        BY3+Ory+47S3t9tmemaavX2hs7jGDmEbs1D6fSFVo/swXzKSG9jMjuDb7Ox/h8YT9bjdbm9cAWF2nxk5
+        Tf21aiou72HnYC7bL77Fg6dTTAlln1uB7sxC1vals86/GkubGafT6VYKCLM2MDRA/ZiVvSPFlP1Qwm/3
+        fiFfFJl6el/RpvN6wn9PsubsSlZ2LuCNzgzsjTbsdrtWEgNzHQt5sIyaRNc3uXHvZ6XrlvNZ3PjjV0Xp
+        3VpiT2L8ePc6aW1J5JxcRX5zHlar1SWJaYdrQ1W8L97YMFZDLBbj49EKlp1OFaYo0cdRNCcSMQ0UKWcf
+        9BWyuEXDZvfrVFZWhiUR1ZPSkIGN32bgnTjK75FbLO3SML8zWTHLUrcloGlN4tbtmxwJNpHqSCbnyGuU
+        l5dHJZFztCSYR9a55bRPePjzToR5HclovkpEfSwB9RcJzP1MFGiaReSvCK3BZtS2JLKbXsVkMk1JApJw
+        yYUd6HuXiMh2Mz09TdnQLqXr3NYEUpqFnCpMvcXKWek3xSy0q1lfn43RaAxLgjDX/p4PlXhe+jqZn+5O
+        EH0UxTxQSkqTijkOFWW9RqIP/2EyMk6KJZFMh45tlVspKipySQJP7VFfGxu6M1nu06L3rWDyzoTSbaYm
+        b4+zumEZL1fPI6tuFYUlBRQUFGgVkASe7gPHq5R40r9chMY5i93dBjwhN57hFoynDMwxJ7LUOh99bTrb
+        Tbmy+V+Q5EWWjGd1i4VNnhyyPn+FxQ1pzK5SMbtCxaLqVPQHdaytyeC9Pe/K5niUX0jgaatrqCXfkccW
+        xzoyP9GReUjH+ppstpm3Yig2yOb//0wvJPBME4QdFpCMi5zlqORpj4uBHRbmtPj7SM8BGG2BcDWQi8oA
+        AAAASUVORK5CYII=
+</value>
   </data>
   <data name="powerOnToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
@@ -1704,8 +1986,25 @@
   <data name="powerOnToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>電源投入</value>
   </data>
-  <data name="ShutdownHostToolStripMenuItem.Image" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="ShutdownHostToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAK8gAA
+        CvIBPVL3EQAAAvVJREFUOE9tU1tIk2EY/kW9VcRTsgvTi6TEC01E0As1ETQUCZ06dCBTJjoJL6YiJAvF
+        cEwUnWJkUlqZMkg8lGkWUcxTOtM5T/N0Y1fhpiEdlk/P/4fgoovnP7zv83zv973v8wkA3DA1NRU4MTFR
+        PzY2Zh4eHnaZTCbXwMCAub+/v763tzfwX77bD8XayfFxLHR0wFZXhz2VCjtFRbCUluKNVouezk4YjUbt
+        Rc1FcdeH589hr6nBflkZ7NnZ2Csuxk5BAWzx8dhMSsJSWhoe1dZCr9d3uS1Asd7c14eDigrsFhZi48YN
+        rCcm4vfJCVzHx1i5fBnLQUFYCQ/HakQEetRq6HQ6vbQAxbKp0VHsVlbCnpMDu1yOU6sVm6mpktjldMIa
+        GYlv8/NYDgvDTGAg3l+7Bh2PVF1dLRPYsMYFgwF7POt6QgJOV1cloTUqCgc2Gw7W1rDs7w+XwwGn2YxJ
+        T09MX7mC7sxMVFVVNQrstmWtvBwbycnYvX0bTla0s2lLvr74dXQk4SNPasnNlXLmW7dgYq4/NhYajcYi
+        cFQ/thi0clvbLS042N7Gko8PPrGSKP5JvOYCo/zf39rCrE6Hx97eeEK+Wq12CJyzYz0jAyuhodjR6/Fl
+        fx8LJItVp4mXxAtiiLFD5mYaGtDt5YWHV69CpVKdCDSJZTErC59lMuwoFDg7O4MtLw+TFI0RJuIZ8Y4x
+        MfeK704eoTU6Gkql0iLQYY2TJSXSeMys4pidlba9yKYOUdgnirnwd8a+MGcgp5tNrGPPFApFo0B7ynrb
+        2jDLUb0LCMBbjuoriWK1izhkrJu5FnJauX0lxy2Xy2WSkWhP/SONRhrPSEgInrLKW3piqakJC8QIv+8x
+        ZggORhs55enpovivkcSHCNGe7XTiYEwMBkl64OeHVg8PNBMGfrcz1kxvlN28KYrdrXwO2lN7h3fBwKYa
+        4+JwnyIj0XT9OrQpKSjMzxfF/79M56A9L9Fhd2mSOc5ZHJXY7Tk27C7Fl9z5EP4AZymF8JGogOsAAAAA
+        SUVORK5CYII=
+</value>
   </data>
   <data name="ShutdownHostToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
@@ -2521,6 +2820,36 @@
     <value>ForceRebootToolbarButton</value>
   </data>
   <data name="&gt;&gt;ForceRebootToolbarButton.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;stopContainerToolStripButton.Name" xml:space="preserve">
+    <value>stopContainerToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;stopContainerToolStripButton.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;startContainerToolStripButton.Name" xml:space="preserve">
+    <value>startContainerToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;startContainerToolStripButton.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;restartContainerToolStripButton.Name" xml:space="preserve">
+    <value>restartContainerToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;restartContainerToolStripButton.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;resumeContainerToolStripButton.Name" xml:space="preserve">
+    <value>resumeContainerToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;resumeContainerToolStripButton.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;pauseContainerToolStripButton.Name" xml:space="preserve">
+    <value>pauseContainerToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;pauseContainerToolStripButton.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;statusToolTip.Name" xml:space="preserve">

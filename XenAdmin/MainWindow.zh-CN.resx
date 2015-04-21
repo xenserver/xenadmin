@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -117,11 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="splitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
   <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 24</value>
   </data>
@@ -137,7 +137,7 @@
   <data name="navigationPane.Size" type="System.Drawing.Size, System.Drawing">
     <value>813, 679</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="navigationPane.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -700,7 +700,7 @@
     <value>0</value>
   </data>
   <data name="TabPageDockerDetails.Text" xml:space="preserve">
-    <value>Detail</value>
+    <value>详细信息</value>
   </data>
   <data name="&gt;&gt;TabPageDockerDetails.Name" xml:space="preserve">
     <value>TabPageDockerDetails</value>
@@ -767,6 +767,39 @@
   </data>
   <data name="&gt;&gt;TabPageSearch.ZOrder" xml:space="preserve">
     <value>18</value>
+  <data name="TabPageDockerProcess.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="TabPageDockerProcess.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPageDockerProcess.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="TabPageDockerProcess.Size" type="System.Drawing.Size, System.Drawing">
+    <value>753, 592</value>
+  </data>
+  <data name="TabPageDockerProcess.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="TabPageDockerProcess.Text" xml:space="preserve">
+    <value>进程</value>
+  </data>
+  <data name="TabPageDockerProcess.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;TabPageDockerProcess.Name" xml:space="preserve">
+    <value>TabPageDockerProcess</value>
+  </data>
+  <data name="&gt;&gt;TabPageDockerProcess.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPageDockerProcess.Parent" xml:space="preserve">
+    <value>TheTabControl</value>
+  </data>
+  <data name="&gt;&gt;TabPageDockerProcess.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
   </data>
   <data name="TheTabControl.Font" type="System.Drawing.Font, System.Drawing">
     <value>Verdana, 8.25pt</value>
@@ -1039,7 +1072,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="toolTipContainer1" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="TitleLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="toolTipContainer1" Row="0" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="TitleLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100,AutoSize,0" />&lt;Rows Styles="Percent,100" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="TitleBackPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 3</value>
@@ -1224,10 +1257,10 @@
   <data name="shutDownToolStripButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8.25pt</value>
   </data>
-  <data name="shutDownToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="shutDownToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAYuSURBVEhLjVV3TJNbHK1xxIGauPdK3Bo1bo3GbdyigIAg
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAYuSURBVEhLjVV3TJNbHK1xxIGauPdK3Bo1bo3GbdyigIAg
         DoJClKhE5YkDFIUnS0XBKkrQ2soqw1LaIm0BFdAKPgSRorQsRZ/vPXfw+eS885Xyhwkx3uQX4HK/c849
         v3FFP1s6nc5GqVTaKRSKxLS0NINcLv+SlJQEmUxmkEgkmTdu3Nh/9erV3tbjv74SEhLaqtXqAI1KBUN2
         NkwaDeoI/PraNby5dAnmuDhUJicjXy6HJDYWYrE4LDo6eqD1858vAttq1GqU6PV4nZiIhrAw1Pn5oXrP
@@ -1278,10 +1311,10 @@
   <data name="powerOnHostToolStripButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8.25pt</value>
   </data>
-  <data name="powerOnHostToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="powerOnHostToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAaxSURBVEhLlZZ5UNN3Gsbzl6AdCxKODrUubl3W0i1atVzd
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAaxSURBVEhLlZZ5UNN3Gsbzl6AdCxKODrUubl3W0i1atVzd
         Ciy0llJblKvITVCOCBSqkoIawCOIRwKKNAQihwRQCuVsIIgWcLdSFRHdqqUzrscMe3TXGY8R6/jZbyLW
         cabj7D4z7z+/5Pe8z/d5j+9P8jwYjUa7np6etK6urnaB062trQ9bWloeNjY2nm5oaGivq6tL0+l0dtN/
         /99hMplsent7VUaTkW/OHGfgexMdf23FcKWG+u+rOHLeQOe5NtoGWtHX6qmoqFBptVqb6defD0Gc0Gfq
@@ -1334,10 +1367,10 @@
   <data name="startVMToolStripButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8.25pt</value>
   </data>
-  <data name="startVMToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="startVMToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAaxSURBVEhLlZZ5UNN3Gsbzl6AdCxKODrUubl3W0i1atVzd
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAaxSURBVEhLlZZ5UNN3Gsbzl6AdCxKODrUubl3W0i1atVzd
         Ciy0llJblKvITVCOCBSqkoIawCOIRwKKNAQihwRQCuVsIIgWcLdSFRHdqqUzrscMe3TXGY8R6/jZbyLW
         cabj7D4z7z+/5Pe8z/d5j+9P8jwYjUa7np6etK6urnaB062trQ9bWloeNjY2nm5oaGivq6tL0+l0dtN/
         /99hMplsent7VUaTkW/OHGfgexMdf23FcKWG+u+rOHLeQOe5NtoGWtHX6qmoqFBptVqb6defD0Gc0Gfq
@@ -1390,10 +1423,10 @@
   <data name="RebootToolbarButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8.25pt</value>
   </data>
-  <data name="RebootToolbarButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="RebootToolbarButton.Image" type="System.Drawing.Bitmap, System.Drawing">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAa8SURBVEhLlZZpUFRXGob5BUjrIPvIEIeYKROEEKMhNIrS
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAa8SURBVEhLlZZpUFRXGob5BUjrIPvIEIeYKROEEKMhNIrS
         KBiXWGAEFGUVFGRTGBWUsKhREJVuwKZtWlbZJRgMVDXNohFnEo1RcQOREVGj6MSEccofU5XymdNXMimr
         MtbMW/X9uref8933fOc9bfI66fV6646OjqT29vY2oYutra0/t7S0/NzQ0HCxrq6uraamJkmn01lPvP6/
         q6ury7KzszNP36Xnq+/O0DNg4NTNVuqHqjg+cIzmq/V8eeUkX5xupaK6Ao1Gk6fVai0nfv56CXCUocvA
@@ -1532,6 +1565,111 @@
   </data>
   <data name="ForceRebootToolbarButton.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="stopContainerToolStripButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt</value>
+  </data>
+  <data name="stopContainerToolStripButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="stopContainerToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="stopContainerToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 17</value>
+  </data>
+  <data name="stopContainerToolStripButton.Text" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="stopContainerToolStripButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="stopContainerToolStripButton.ToolTipText" xml:space="preserve">
+    <value>停止 Docker 容器</value>
+  </data>
+  <data name="startContainerToolStripButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt</value>
+  </data>
+  <data name="startContainerToolStripButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="startContainerToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="startContainerToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 28</value>
+  </data>
+  <data name="startContainerToolStripButton.Text" xml:space="preserve">
+    <value>启动</value>
+  </data>
+  <data name="startContainerToolStripButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="startContainerToolStripButton.ToolTipText" xml:space="preserve">
+    <value>启动 Docker 容器</value>
+  </data>
+  <data name="restartContainerToolStripButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt</value>
+  </data>
+  <data name="restartContainerToolStripButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="restartContainerToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="restartContainerToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 28</value>
+  </data>
+  <data name="restartContainerToolStripButton.Text" xml:space="preserve">
+    <value>重新启动</value>
+  </data>
+  <data name="restartContainerToolStripButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="restartContainerToolStripButton.ToolTipText" xml:space="preserve">
+    <value>重新启动 Docker 容器</value>
+  </data>
+  <data name="resumeContainerToolStripButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt</value>
+  </data>
+  <data name="resumeContainerToolStripButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="resumeContainerToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="resumeContainerToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 28</value>
+  </data>
+  <data name="resumeContainerToolStripButton.Text" xml:space="preserve">
+    <value>恢复</value>
+  </data>
+  <data name="resumeContainerToolStripButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="resumeContainerToolStripButton.ToolTipText" xml:space="preserve">
+    <value>恢复 Docker 容器</value>
+  </data>
+  <data name="pauseContainerToolStripButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt</value>
+  </data>
+  <data name="pauseContainerToolStripButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="pauseContainerToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="pauseContainerToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 28</value>
+  </data>
+  <data name="pauseContainerToolStripButton.Text" xml:space="preserve">
+    <value>暂停</value>
+  </data>
+  <data name="pauseContainerToolStripButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="pauseContainerToolStripButton.ToolTipText" xml:space="preserve">
+    <value>暂停 Docker 容器</value>
   </data>
   <data name="ToolStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 24</value>
@@ -1818,7 +1956,7 @@
   <data name="RebootHostToolStripMenuItem.Text" xml:space="preserve">
     <value>重新启动(&amp;O)</value>
   </data>
-  <data name="powerOnToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="powerOnToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAK8gAA
@@ -1848,7 +1986,7 @@
   <data name="powerOnToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>开机</value>
   </data>
-  <data name="ShutdownHostToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="ShutdownHostToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAK8gAA
@@ -2682,6 +2820,36 @@
     <value>ForceRebootToolbarButton</value>
   </data>
   <data name="&gt;&gt;ForceRebootToolbarButton.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;stopContainerToolStripButton.Name" xml:space="preserve">
+    <value>stopContainerToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;stopContainerToolStripButton.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;startContainerToolStripButton.Name" xml:space="preserve">
+    <value>startContainerToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;startContainerToolStripButton.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;restartContainerToolStripButton.Name" xml:space="preserve">
+    <value>restartContainerToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;restartContainerToolStripButton.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;resumeContainerToolStripButton.Name" xml:space="preserve">
+    <value>resumeContainerToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;resumeContainerToolStripButton.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;pauseContainerToolStripButton.Name" xml:space="preserve">
+    <value>pauseContainerToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;pauseContainerToolStripButton.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;statusToolTip.Name" xml:space="preserve">

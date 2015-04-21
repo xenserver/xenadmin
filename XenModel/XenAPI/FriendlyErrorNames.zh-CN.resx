@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -520,7 +520,7 @@
     <value>设备名称 {0} 无效</value>
   </data>
   <data name="INVALID_EDITION" xml:space="preserve">
-    <value>提供的版本无效。</value>
+    <value>提供的许可证类型无效。</value>
   </data>
   <data name="INVALID_FEATURE_STRING" xml:space="preserve">
     <value>给定的功能字符串无效。</value>
@@ -568,7 +568,7 @@
     <value>不能将池中的许可证降级。请首先解散池，然后分别在服务器上将许可证降级。</value>
   </data>
   <data name="LICENSE_CHECKOUT_ERROR" xml:space="preserve">
-    <value>所请求版本的许可证不可用。</value>
+    <value>请求的许可证类型不可用。</value>
   </data>
   <data name="LICENSE_DOES_NOT_SUPPORT_POOLING" xml:space="preserve">
     <value>此服务器无法加入池中，因为其许可证不支持池</value>
@@ -583,7 +583,7 @@
     <value>此类型的许可证文件适用于早期版本的 XenServer。请升级到新的许可系统。</value>
   </data>
   <data name="LICENSE_HOST_POOL_MISMATCH" xml:space="preserve">
-    <value>主机和池具有不兼容的许可证(版本)。</value>
+    <value>主机和池的许可证不兼容。</value>
   </data>
   <data name="LICENSE_PROCESSING_ERROR" xml:space="preserve">
     <value>处理许可证时出错。请与支持代表联系</value>
@@ -760,7 +760,7 @@
     <value>PIF 为管理接口。</value>
   </data>
   <data name="PIF_IS_PHYSICAL" xml:space="preserve">
-    <value>您尝试销毁 PIF {0}，但其表示某一方面的物理服务器配置，因此无法破坏。</value>
+    <value>您尝试销毁 PIF {0}，但其表示某一方面的物理服务器配置，因此无法破坏。 </value>
   </data>
   <data name="PIF_IS_VLAN" xml:space="preserve">
     <value>您尝试在另一个 VLAN 之上创建 VLAN - 请改用基础物理 PIF/绑定</value>
@@ -781,7 +781,7 @@
     <value>已为该池中至少一个服务器启用外部身份验证。</value>
   </data>
   <data name="POOL_AUTH_DISABLE_FAILED" xml:space="preserve">
-    <value>已禁用外部身份验证，出现以下错误: 未在 AD 服务器上成功禁用某些 AD 计算机帐户。</value>
+    <value>已禁用外部身份验证，出现以下错误: 未在 AD 服务器上成功禁用某些 AD 计算机帐户。 </value>
   </data>
   <data name="POOL_AUTH_DISABLE_FAILED_PERMISSION_DENIED" xml:space="preserve">
     <value>已禁用外部身份验证，出现以下错误: 由于权限遭拒绝，未在 AD 服务器上禁用某些 AD 计算机帐户。</value>
@@ -918,7 +918,7 @@
     <value>VDI 大小调整失败</value>
   </data>
   <data name="SR_BACKEND_FAILURE_120" xml:space="preserve">
-    <value>Dconf 字符串中缺少 Netapp 目标参数 </value>
+    <value>Dconf 字符串中缺少 Netapp 目标参数</value>
   </data>
   <data name="SR_BACKEND_FAILURE_121" xml:space="preserve">
     <value>Dconf 字符串中缺少 Netapp 用户名参数</value>

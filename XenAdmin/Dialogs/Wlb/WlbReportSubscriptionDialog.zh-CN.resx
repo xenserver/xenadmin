@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -117,11 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="tableLayoutPanelSubscriptionName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="tableLayoutPanelSubscriptionName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -131,7 +131,7 @@
   <data name="subNameTextBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
   <data name="subNameTextBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
@@ -295,7 +295,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanelSubscriptionName.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="subNameTextBox" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelSubscriptionName" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="labelSubNameAsterisk" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,Absolute,20" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="subNameTextBox" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelSubscriptionName" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="labelSubNameAsterisk" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,Absolute,20" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings></value>
   </data>
   <data name="labelDataRange.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -316,7 +316,7 @@
     <value>0</value>
   </data>
   <data name="labelDataRange.Text" xml:space="preserve">
-    <value>数据范围(&amp;R):</value>
+    <value>数据范围(&amp;R): </value>
   </data>
   <data name="labelDataRange.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -868,7 +868,7 @@
     <value>16</value>
   </data>
   <data name="emailCommentRichTextBox.Text" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="&gt;&gt;emailCommentRichTextBox.Name" xml:space="preserve">
     <value>emailCommentRichTextBox</value>
@@ -913,7 +913,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanelDeliveryOptions.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelEmailAddressFormat" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="labelEmailTo" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="emailToTextBox" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelToAsterisk" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelEmailCc" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="emailCcTextBox" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelEmailBcc" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="emailBccTextBox" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelEmailReplyTo" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="emailReplyTextBox" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelReplyToAsterisk" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelEmailSubject" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="emailSubjectTextBox" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelReportRenderFormat" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="rpRenderComboBox" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelEmailComment" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="emailCommentRichTextBox" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelEmailAddressFormat" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="labelEmailTo" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="emailToTextBox" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelToAsterisk" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelEmailCc" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="emailCcTextBox" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelEmailBcc" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="emailBccTextBox" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelEmailReplyTo" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="emailReplyTextBox" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelReplyToAsterisk" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelEmailSubject" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="emailSubjectTextBox" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelReportRenderFormat" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="rpRenderComboBox" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelEmailComment" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="emailCommentRichTextBox" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings></value>
   </data>
   <data name="labelEmailAddressFormat.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1084,7 +1084,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanelRpParams.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="rpParamComboBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelDataRange" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="rpParamComboBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelDataRange" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings></value>
   </data>
   <data name="groupReportParameters.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -1456,7 +1456,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanelSchOptions.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="dateTimePickerSubscriptionRunTime" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelRunAt" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelStarting" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="dateTimePickerSchedStart" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="schedDeliverComboBox" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="labelDeliverOn" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="dateTimePickerSchedEnd" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="labelEnd" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Absolute,20,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="dateTimePickerSubscriptionRunTime" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelRunAt" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelStarting" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="dateTimePickerSchedStart" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="schedDeliverComboBox" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="labelDeliverOn" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="dateTimePickerSchedEnd" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="labelEnd" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Absolute,20,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings></value>
   </data>
   <data name="groupScheduleOptions.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>

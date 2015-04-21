@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -172,7 +172,7 @@
     <value>この PIF ボンディング スレーブなので VLAN を作成できません。</value>
   </data>
   <data name="CANNOT_CHANGE_PIF_PROPERTIES" xml:space="preserve">
-    <value>この PIF プロパティは変更できません。変更できるのは、ボンディングされていない物理 PIF またはボンド マスタのプロパティのみです。</value>
+    <value>この PIF プロパティは変更できません。変更できるのは、ボンディングされていない物理 PIF またはボンド マスターのプロパティのみです。</value>
   </data>
   <data name="CANNOT_CONTACT_HOST" xml:space="preserve">
     <value>サーバーと通信できないため、メッセージを転送できません。サーバーの電源が切れているか、ネットワーク接続に問題がある可能性があります。</value>
@@ -193,13 +193,13 @@
     <value>このサーバーは退避できません。</value>
   </data>
   <data name="CANNOT_FETCH_PATCH" xml:space="preserve">
-    <value>要求されたアップデートをマスタから取得できません。</value>
+    <value>要求されたアップデートをマスターから取得できません。</value>
   </data>
   <data name="CANNOT_FIND_OEM_BACKUP_PARTITION" xml:space="preserve">
     <value>アップデートをストリームするためのバックアップ パーティションが見つかりません。</value>
   </data>
   <data name="CANNOT_FIND_PATCH" xml:space="preserve">
-    <value>要求されたアップデートが見つかりません。この問題は、新しいマスタを指名した場合に発生することがあります。もう一度アップロードしてください。</value>
+    <value>要求されたアップデートが見つかりません。この問題は、新しいマスターを指名した場合に発生することがあります。もう一度アップロードしてください。</value>
   </data>
   <data name="CANNOT_FIND_STATE_PARTITION" xml:space="preserve">
     <value>ステート パーティションが見つからないため、復元を実行できませんでした。</value>
@@ -298,7 +298,7 @@
     <value>重複が生じるため、この VM は復元できません。</value>
   </data>
   <data name="EVACUATE_NO_OTHER_HOSTS_FOR_MASTER" xml:space="preserve">
-    <value>使用可能なサーバーがないため、マスタを選出できません。サーバーを追加するか有効にしてください。</value>
+    <value>使用可能なサーバーがないため、マスターを選出できません。サーバーを追加するか有効にしてください。</value>
   </data>
   <data name="EVENTS_LOST" xml:space="preserve">
     <value>いくつかのイベントがキューから失われたため、取得できません。</value>
@@ -331,7 +331,7 @@
     <value>オブジェクトが削除されました。{0}:{1}</value>
   </data>
   <data name="HA_ABORT_NEW_MASTER" xml:space="preserve">
-    <value>現在このサーバーは、指定された新規マスタ設定を受け入れることはできません。</value>
+    <value>現在このサーバーは、指定された新規マスター設定を受け入れることはできません。</value>
   </data>
   <data name="HA_CANNOT_CHANGE_BOND_STATUS_OF_MGMT_IFACE" xml:space="preserve">
     <value>高可用性が有効なときに管理インターフェイスのボンディングを作成したり削除したりできないため、この処理は実行できません。高可用性を無効にしてからボンディングを作成または削除し、その後で再度高可用性を有効にしてください。</value>
@@ -373,16 +373,16 @@
     <value>使用可能なほかのサーバーがないため、VM の配置を計画できません。</value>
   </data>
   <data name="HA_OPERATION_WOULD_BREAK_FAILOVER_PLAN" xml:space="preserve">
-    <value>このプールの高可用性が保証されていないため、この処理は実行できません。この処理を実行するには、高可用性を無効にするか再設定してください。</value>
+    <value>このプールの高可用性が保証されていないため、この処理は実行できません。この処理を実行するには、高可用性を無効にするか再構成してください。</value>
   </data>
   <data name="HA_POOL_IS_ENABLED_BUT_HOST_IS_DISABLED" xml:space="preserve">
     <value>高可用性がプールで有効になっており、このサーバーで無効になっています。このため、このサーバーをプールに追加することはできません。</value>
   </data>
   <data name="HA_SHOULD_BE_FENCED" xml:space="preserve">
-    <value>サーバーが隔離されている (つまりマスタのパーティション内に含まれていない) ため、プールに追加できません。</value>
+    <value>サーバーが隔離されている (つまりマスターのパーティション内に含まれていない) ため、プールに追加できません。</value>
   </data>
   <data name="HA_TOO_FEW_HOSTS" xml:space="preserve">
-    <value>高可用性は、複数のサーバーに対して有効にできます。ただし、これらのサーバーには事前にクォーラム タイブレイク スクリプトを設定しておく必要があります。</value>
+    <value>高可用性は、複数のサーバーに対して有効にできます。ただし、これらのサーバーには事前にクォーラム タイブレイク スクリプトを構成しておく必要があります。</value>
   </data>
   <data name="HOSTS_NOT_COMPATIBLE" xml:space="preserve">
     <value>このプール内のホストは互換性がありません。</value>
@@ -421,7 +421,7 @@
     <value>このホストを退避しています。</value>
   </data>
   <data name="HOST_HAS_NO_MANAGEMENT_IP" xml:space="preserve">
-    <value>このサーバーの管理インターフェイスの IP アドレスを取得できないため、マスタと通信できません。</value>
+    <value>このサーバーの管理インターフェイスの IP アドレスを取得できないため、マスターと通信できません。</value>
   </data>
   <data name="HOST_HAS_RESIDENT_VMS" xml:space="preserve">
     <value>動作中のユーザー VM があるため、このサーバーとの接続を消去できません。</value>
@@ -445,7 +445,7 @@
     <value>このホストはこれ自身のスレーブになっています。pool-emergency-transition-to-master または pool-emergency-reset-master を使用してください。</value>
   </data>
   <data name="HOST_MASTER_CANNOT_TALK_BACK" xml:space="preserve">
-    <value>マスタは、指定された管理 IP アドレスのスレーブと通信できません。</value>
+    <value>マスターは、指定された管理 IP アドレスのスレーブと通信できません。</value>
   </data>
   <data name="HOST_NAME_INVALID" xml:space="preserve">
     <value>サーバー名が無効です。</value>
@@ -478,7 +478,7 @@
     <value>サーバーがまだ起動中です。</value>
   </data>
   <data name="HOST_UNKNOWN_TO_MASTER" xml:space="preserve">
-    <value>マスタがサーバーを識別できません。マスタのデータベースからこのサーバーが削除されている可能性があります。</value>
+    <value>マスターがサーバーを識別できません。マスターのデータベースからこのサーバーが削除されている可能性があります。</value>
   </data>
   <data name="ILLEGAL_VBD_DEVICE" xml:space="preserve">
     <value>指定した VBD デバイスが認識されません。正の整数を指定してください。</value>
@@ -520,13 +520,13 @@
     <value>デバイス名 {0} が無効です。</value>
   </data>
   <data name="INVALID_EDITION" xml:space="preserve">
-    <value>エディションの指定が無効です。</value>
+    <value>指定したライセンスの種類が無効です。</value>
   </data>
   <data name="INVALID_FEATURE_STRING" xml:space="preserve">
     <value>機能文字列の指定が無効です。</value>
   </data>
   <data name="INVALID_IP_ADDRESS_SPECIFIED" xml:space="preserve">
-    <value>必須パラメータに無効な IP アドレスが含まれています。</value>
+    <value>必須パラメーターに無効な IP アドレスが含まれています。</value>
   </data>
   <data name="INVALID_PATCH" xml:space="preserve">
     <value>アップロードされたアップデート ファイルが無効です。</value>
@@ -541,7 +541,7 @@
     <value>トンネル アクセス PIF 上に VLAN またはトンネルを作成しようとしました。代わりにトランスポート PIF を使用してください。</value>
   </data>
   <data name="JOINING_HOST_CANNOT_BE_MASTER_OF_OTHER_HOSTS" xml:space="preserve">
-    <value>ほかのプールのマスタとして動作するサーバーを別のプールに追加することはできません。</value>
+    <value>ほかのプールのマスターとして動作するサーバーを別のプールに追加することはできません。</value>
   </data>
   <data name="JOINING_HOST_CANNOT_CONTAIN_SHARED_SRS" xml:space="preserve">
     <value>共有ストレージを持つサーバーをこのプールに追加することはできません。</value>
@@ -568,7 +568,7 @@
     <value>プール内にあるライセンスをダウングレードすることはできません。プールを解放してから、サーバーのライセンスを個別にダウングレードしてください。</value>
   </data>
   <data name="LICENSE_CHECKOUT_ERROR" xml:space="preserve">
-    <value>要求したエディション用のライセンスがありません。</value>
+    <value>要求したライセンスの種類が利用できません。</value>
   </data>
   <data name="LICENSE_DOES_NOT_SUPPORT_POOLING" xml:space="preserve">
     <value>ライセンスがプールをサポートしていないため、このサーバーはプールに追加できません。</value>
@@ -583,7 +583,7 @@
     <value>この種類のライセンス ファイルは以前のバージョンの XenServer 用です。新しいライセンス システムにアップグレードしてください。</value>
   </data>
   <data name="LICENSE_HOST_POOL_MISMATCH" xml:space="preserve">
-    <value>ホストとプールのライセンス (エディション) に互換性がありません。</value>
+    <value>ホストとプールのライセンスに互換性がありません。</value>
   </data>
   <data name="LICENSE_PROCESSING_ERROR" xml:space="preserve">
     <value>ライセンスの処理中にエラーが発生しました。サポート担当者に連絡してください。</value>
@@ -619,7 +619,7 @@
     <value>存在しないメソッドを呼び出そうとしました。使用したメソッド名は {0} です。</value>
   </data>
   <data name="MESSAGE_PARAMETER_COUNT_MISMATCH" xml:space="preserve">
-    <value>メソッド {0} を不正なパラメータ数 {2} で呼び出そうとしました。このメソッドには {1} 個のパラメータを指定できます。</value>
+    <value>メソッド {0} を不正なパラメーター数 {2} で呼び出そうとしました。このメソッドには {1} 個のパラメーターを指定できます。</value>
   </data>
   <data name="MESSAGE_REMOVED" xml:space="preserve">
     <value>この機能は使用できなくなりました。</value>
@@ -739,7 +739,7 @@
     <value>異なるサーバーのインターフェイスをボンディングすることはできません。</value>
   </data>
   <data name="PIF_CONFIGURATION_ERROR" xml:space="preserve">
-    <value>インターフェイスの設定時に不明なエラーが発生しました。</value>
+    <value>インターフェイスの構成時に不明なエラーが発生しました。</value>
   </data>
   <data name="PIF_DEVICE_NOT_FOUND" xml:space="preserve">
     <value>指定したデバイスが見つかりません。</value>
@@ -748,7 +748,7 @@
     <value>この PIF でアンプラグが許可されないため、要求された処理を実行できません。</value>
   </data>
   <data name="PIF_HAS_NO_NETWORK_CONFIGURATION" xml:space="preserve">
-    <value>PIF のネットワークが設定されていません。</value>
+    <value>PIF のネットワークが構成されていません。</value>
   </data>
   <data name="PIF_HAS_NO_V6_NETWORK_CONFIGURATION" xml:space="preserve">
     <value>PIF が IPv6 用に構成されていません (現在の設定モードが「なし」です)</value>
@@ -811,13 +811,13 @@
     <value>外部認証を有効にできません。資格情報の指定が無効です。</value>
   </data>
   <data name="POOL_JOINING_EXTERNAL_AUTH_MISMATCH" xml:space="preserve">
-    <value>プールに追加するサーバーの外部認証の設定は、追加先プールの設定と同じである必要があります。</value>
+    <value>プールに追加するサーバーの外部認証の構成は、追加先プールの設定と同じである必要があります。</value>
   </data>
   <data name="POOL_JOINING_HOST_MUST_HAVE_PHYSICAL_MANAGEMENT_NIC" xml:space="preserve">
     <value>プールに追加するサーバーには、物理管理 NIC (つまり VLAN またはボンディングした PIF 以外の NIC) がある必要があります。</value>
   </data>
   <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_PRODUCT_VERSION" xml:space="preserve">
-    <value>プールに追加するサーバーの製品バージョンは、プール マスタのものと同じである必要があります。</value>
+    <value>プールに追加するサーバーの製品バージョンは、プール マスターのものと同じである必要があります。</value>
   </data>
   <data name="PROVISION_FAILED_OUT_OF_SPACE" xml:space="preserve">
     <value>空き容量不足により、プロビジョン コールに失敗しました。</value>
@@ -888,10 +888,10 @@
     <value>ボリュームが見つかりません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_101" xml:space="preserve">
-    <value>要求にサーバー パス パラメータがありません。</value>
+    <value>要求にサーバー パス パラメーターがありません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_102" xml:space="preserve">
-    <value>要求にサーバー パラメータがありません。</value>
+    <value>要求にサーバー パラメーターがありません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_103" xml:space="preserve">
     <value>サーバー パス引数が無効です。</value>
@@ -906,7 +906,7 @@
     <value>IQN の形式が無効です。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_107" xml:space="preserve">
-    <value>SCSIid パラメータが見つからないか不正です。</value>
+    <value>SCSIid パラメーターが見つからないか不正です。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_108" xml:space="preserve">
     <value>このターゲットで NFS サービスを検出できません。</value>
@@ -918,16 +918,16 @@
     <value>VDI のサイズ変更に失敗しました。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_120" xml:space="preserve">
-    <value>Dconf 文字列に NetApp target パラメータがありません。</value>
+    <value>Dconf 文字列に NetApp target パラメーターがありません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_121" xml:space="preserve">
-    <value>Dconf 文字列に NetApp username パラメータがありません。</value>
+    <value>Dconf 文字列に NetApp username パラメーターがありません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_122" xml:space="preserve">
-    <value>Dconf 文字列に NetApp password パラメータがありません。</value>
+    <value>Dconf 文字列に NetApp password パラメーターがありません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_123" xml:space="preserve">
-    <value>Dconf 文字列に NetApp aggregate パラメータがありません。</value>
+    <value>Dconf 文字列に NetApp aggregate パラメーターがありません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_124" xml:space="preserve">
     <value>NetApp ターゲットへの接続に失敗しました。</value>
@@ -960,7 +960,7 @@
     <value>この SR の A-SIS を有効にできません。有効なライセンスがファイラに必要です。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_134" xml:space="preserve">
-    <value>ファイラはこのアグリゲート上の A-SIS をサポートしません。ライセンスは有効ですが、一部のファイラでは、A-SIS は小規模アグリゲートに限られます。たとえば、FAS3020 でサポートされるアグリゲートは最大 1TB です。詳しくは、使用するファイラのドキュメントを参照してください。A-SIS サポートを無効にするか、アグリゲートをサポートされるサイズに再設定する必要があります。</value>
+    <value>ファイラはこのアグリゲート上の A-SIS をサポートしません。ライセンスは有効ですが、一部のファイラでは、A-SIS は小規模アグリゲートに限られます。たとえば、FAS3020 でサポートされるアグリゲートは最大 1TB です。詳しくは、使用するファイラのドキュメントを参照してください。A-SIS サポートを無効にするか、アグリゲートをサポートされるサイズに再構成する必要があります。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_135" xml:space="preserve">
     <value>この LUN の排他ロックの取得に失敗しました。</value>
@@ -996,16 +996,16 @@
     <value>指定したストレージ リポジトリは現在使用中です。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_160" xml:space="preserve">
-    <value>Dconf 文字列に EqualLogic target パラメータがありません。</value>
+    <value>Dconf 文字列に EqualLogic target パラメーターがありません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_161" xml:space="preserve">
-    <value>Dconf 文字列に EqualLogic username パラメータがありません。</value>
+    <value>Dconf 文字列に EqualLogic username パラメーターがありません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_162" xml:space="preserve">
-    <value>Dconf 文字列に EqualLogic password パラメータがありません。</value>
+    <value>Dconf 文字列に EqualLogic password パラメーターがありません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_163" xml:space="preserve">
-    <value>Dconf 文字列に EqualLogic storagepool パラメータがありません。</value>
+    <value>Dconf 文字列に EqualLogic storagepool パラメーターがありません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_164" xml:space="preserve">
     <value>EqualLogic アレイへの接続に失敗しました。SSH CLI セッションの最大数に達しました。</value>
@@ -1032,10 +1032,10 @@
     <value>アレイにログインできません IP 設定を確認してください。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_172" xml:space="preserve">
-    <value>Dconf 文字列に指定されている EqualLogic storagepool パラメータが無効です。</value>
+    <value>Dconf 文字列に指定されている EqualLogic storagepool パラメーターが無効です。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_173" xml:space="preserve">
-    <value>Dconf 文字列に指定されている EqualLogic target パラメータが無効です。正しいグループ IP アドレスを指定してください。</value>
+    <value>Dconf 文字列に指定されている EqualLogic target パラメーターが無効です。正しいグループ IP アドレスを指定してください。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_174" xml:space="preserve">
     <value>CLI コマンドで無効な SNMP 応答が受信されました。</value>
@@ -1074,16 +1074,16 @@
     <value>アクティブな FIST ポイントに達したため、プロセスが異常終了しました。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_220" xml:space="preserve">
-    <value>デバイス設定要求に Location パラメータがありません。</value>
+    <value>デバイス構成要求に Location パラメーターがありません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_221" xml:space="preserve">
     <value>ISO 名には拡張子 .iso を指定してください。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_222" xml:space="preserve">
-    <value>デバイス設定要求で指定されているディレクトリをマウントできません。</value>
+    <value>デバイス構成要求で指定されているディレクトリをマウントできません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_223" xml:space="preserve">
-    <value>デバイス設定要求で指定されているディレクトリをアンマウントできません。</value>
+    <value>デバイス構成要求で指定されているディレクトリをマウント解除できません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_224" xml:space="preserve">
     <value>ターゲット上の ISO 共有名が見つかりません。または、アクセス許可が不正です。</value>
@@ -1125,7 +1125,7 @@
     <value>CSLG サーバーの gssi 処理に失敗しました。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_411" xml:space="preserve">
-    <value>SR ロード処理に失敗しました。</value>
+    <value>SR 読み込み処理に失敗しました。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_412" xml:space="preserve">
     <value>不正なストレージ プロトコルが指定されました。</value>
@@ -1284,7 +1284,7 @@
     <value>指定された論理ボリュームのファイルシステムの作成中にエラーが発生しました。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_58" xml:space="preserve">
-    <value>論理ボリュームから要求を送信しようとしてエラーが発生しました。リクエストはマスタから送信されなければなりません。</value>
+    <value>論理ボリュームから要求を送信しようとしてエラーが発生しました。リクエストはマスターから送信されなければなりません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_59" xml:space="preserve">
     <value>論理ボリュームのサイズ変更に失敗しました。</value>
@@ -1305,7 +1305,7 @@
     <value>VDI の削除に失敗しました。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_65" xml:space="preserve">
-    <value>VDI のロードに失敗しました。</value>
+    <value>VDI の読み込みに失敗しました。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_66" xml:space="preserve">
     <value>VDI の種類が無効です。</value>
@@ -1332,7 +1332,7 @@
     <value>NFS 共有のマウント中にエラーが発生しました。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_74" xml:space="preserve">
-    <value>NFS 共有のアンマウント中にエラーが発生しました。</value>
+    <value>NFS 共有のマウント解除中にエラーが発生しました。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_75" xml:space="preserve">
     <value>この NFS 共有は追加済みです。</value>
@@ -1377,10 +1377,10 @@
     <value>NFS ストレージ リポジトリの作成中にエラーが発生しました。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_89" xml:space="preserve">
-    <value>要求に LUNid パラメータがありません。</value>
+    <value>要求に LUNid パラメーターがありません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_90" xml:space="preserve">
-    <value>要求にデバイス パラメータがありません。</value>
+    <value>要求にデバイス パラメーターがありません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_91" xml:space="preserve">
     <value>デバイスのパスが無効です。</value>
@@ -1392,16 +1392,16 @@
     <value>pvs ユーティリティからエラーが返されました。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_94" xml:space="preserve">
-    <value>要求に場所パラメータがありません。</value>
+    <value>要求に場所パラメーターがありません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_95" xml:space="preserve">
-    <value>要求にターゲット パラメータがありません。</value>
+    <value>要求にターゲット パラメーターがありません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_96" xml:space="preserve">
-    <value>要求にターゲット IQN パラメータがありません。</value>
+    <value>要求にターゲット IQN パラメーターがありません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_97" xml:space="preserve">
-    <value>要求にサーバー設定 iSCSI IQN パラメータがありません。</value>
+    <value>要求にサーバー構成 iSCSI IQN パラメーターがありません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_98" xml:space="preserve">
     <value>要求に LUN シリアル番号がありません。</value>
@@ -1446,7 +1446,7 @@
     <value>この処理は、SR をアップグレードするまで実行できません。</value>
   </data>
   <data name="SR_UNKNOWN_DRIVER" xml:space="preserve">
-    <value>ドライバ {0} が認識されないため、SR を接続できませんでした。</value>
+    <value>ドライバー {0} が認識されないため、SR を接続できませんでした。</value>
   </data>
   <data name="SR_UUID_EXISTS" xml:space="preserve">
     <value>この UUID を持つ SR は既に存在しています。</value>
@@ -1689,7 +1689,7 @@
     <value>VM の移行に失敗しました。{3}</value>
   </data>
   <data name="VM_MISSING_PV_DRIVERS" xml:space="preserve">
-    <value>VM で処理を実行しようとしましたが、必須の PV ドライバが検出されませんでした。</value>
+    <value>VM で処理を実行しようとしましたが、必須の PV ドライバーが検出されませんでした。</value>
   </data>
   <data name="VM_NOT_RESIDENT_HERE" xml:space="preserve">
     <value>現在、この VM は指定したサーバー上に配置されていません。</value>
@@ -1704,7 +1704,7 @@
     <value>VM を起動するには、少なくとも 1 つの VCPU が必要です</value>
   </data>
   <data name="VM_OLD_PV_DRIVERS" xml:space="preserve">
-    <value>VM で処理を実行しようとしましたが、最新バージョンの PV ドライバが必要です。PV ドライバをアップグレードしてください。</value>
+    <value>VM で処理を実行しようとしましたが、最新バージョンの PV ドライバーが必要です。PV ドライバーをアップグレードしてください。</value>
   </data>
   <data name="VM_REBOOTED" xml:space="preserve">
     <value>VM が予期せず再起動しました</value>
@@ -1764,7 +1764,7 @@
     <value>VM {0} に対して実行しようとした処理が、サーバーにより安全ではないと判断されました。この問題は、VM で必要な機能と、その VM が動作する CPU の機能フラグが潜在的に非互換である場合に発生します。この警告を無視するには、「force」オプションを指定してください。</value>
   </data>
   <data name="WLB_AUTHENTICATION_FAILED" xml:space="preserve">
-    <value>WLB サーバーにより認証が拒否されました。</value>
+    <value>WLB サーバーにより構成済みの認証が拒否されました。</value>
   </data>
   <data name="WLB_CONNECTION_REFUSED" xml:space="preserve">
     <value>WLB サーバーにより XenServer への接続が拒否されました。</value>
@@ -1785,19 +1785,19 @@
     <value>WLB サーバーによる報告: XenServer 側で予期していない、または理解できない要求を送信しました。</value>
   </data>
   <data name="WLB_NOT_INITIALIZED" xml:space="preserve">
-    <value>WLB 接続が設定されていません。</value>
+    <value>WLB 接続が構成されていません。</value>
   </data>
   <data name="WLB_TIMEOUT" xml:space="preserve">
     <value>WLB サーバーとの通信でタイムアウトが発生しました。</value>
   </data>
   <data name="WLB_UNKNOWN_HOST" xml:space="preserve">
-    <value>設定されている WLB サーバー名を DNS で解決できません。</value>
+    <value>構成されている WLB サーバー名を DNS で解決できません。</value>
   </data>
   <data name="WLB_URL_INVALID" xml:space="preserve">
-    <value>WLB サーバーの URL が無効です。「&lt;IP アドレス&gt;:&lt;ポート&gt;」形式で指定してください。設定されている URL は返されました。</value>
+    <value>WLB サーバーの URL が無効です。「&lt;IP アドレス&gt;:&lt;ポート&gt;」形式で指定してください。構成されている URL は返されました。</value>
   </data>
   <data name="WLB_XENSERVER_AUTHENTICATION_FAILED" xml:space="preserve">
-    <value>WLB サーバーによる報告: 認証情報が XenServer により拒否されました。</value>
+    <value>WLB サーバーによる報告: 構成済みの認証情報が XenServer により拒否されました。</value>
   </data>
   <data name="WLB_XENSERVER_CONNECTION_REFUSED" xml:space="preserve">
     <value>WLB サーバーによる報告: ワークロード バランス サーバーからの接続が XenServer により拒否されました (逆方向の接続には問題ありません)。</value>
@@ -1809,7 +1809,7 @@
     <value>WLB サーバーによる報告: XenServer との通信でタイムアウトが発生しました。</value>
   </data>
   <data name="WLB_XENSERVER_UNKNOWN_HOST" xml:space="preserve">
-    <value>WLB サーバーによる報告: この XenServer インスタンス用に設定されている WLB サーバー名を DNS で解決できません。</value>
+    <value>WLB サーバーによる報告: この XenServer インスタンス用に設定されている構成済みサーバー名を DNS で解決できません。</value>
   </data>
   <data name="XAPI_HOOK_FAILED" xml:space="preserve">
     <value>サード パーティの xapi フックが失敗しました。</value>
@@ -1839,7 +1839,7 @@
     <value>スナップショットの VSS ライタの準備に失敗しました。</value>
   </data>
   <data name="XEN_VSS_REQ_ERROR_PROV_NOT_LOADED" xml:space="preserve">
-    <value>Citrix XenServer Vss Provider がロードされていません。</value>
+    <value>Citrix XenServer Vss Provider が読み込まれていません。</value>
   </data>
   <data name="XEN_VSS_REQ_ERROR_START_SNAPSHOT_SET_FAILED" xml:space="preserve">
     <value>新規 VSS スナップショットの開始に失敗しました。</value>

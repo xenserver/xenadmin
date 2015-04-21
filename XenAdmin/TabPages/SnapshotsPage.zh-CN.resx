@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="GeneralTableLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
@@ -130,7 +130,7 @@
   <data name="linkLabelVMPPInfo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
   <data name="linkLabelVMPPInfo.Location" type="System.Drawing.Point, System.Drawing">
     <value>30, 44</value>
   </data>
@@ -155,7 +155,7 @@
   <data name="&gt;&gt;linkLabelVMPPInfo.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="labelVMPPInfo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -766,7 +766,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanelSimpleSelection.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="folderLabel" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="sizeLabel" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="tagsLabel" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="descriptionLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sizeTitleLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="folderTitleLabel" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tagsTitleLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="customFieldTitle1" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="customFieldContent1" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="customFieldTitle2" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="customFieldContent2" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelModeTitle" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelMode" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,0,AutoSize,0,AutoSize,0,Absolute,30,Absolute,30" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="folderLabel" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="sizeLabel" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="tagsLabel" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="descriptionLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="sizeTitleLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="folderTitleLabel" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tagsTitleLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="customFieldTitle1" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="customFieldContent1" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="customFieldTitle2" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="customFieldContent2" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelModeTitle" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelMode" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,0,AutoSize,0,AutoSize,0,Absolute,30,Absolute,30" /&gt;&lt;/TableLayoutSettings></value>
   </data>
   <data name="propertiesButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Right</value>
@@ -925,7 +925,7 @@
     <value>0</value>
   </data>
   <data name="propertiesTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tableLayoutPanelSimpleSelection" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="propertiesButton" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="nameLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="shadowPanel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,217" /&gt;&lt;Rows Styles="Absolute,94,Absolute,40,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tableLayoutPanelSimpleSelection" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="propertiesButton" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="nameLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="shadowPanel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,217" /&gt;&lt;Rows Styles="Absolute,94,Absolute,40,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings></value>
   </data>
   <data name="propertiesGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -996,7 +996,7 @@
   <data name="snapshotTreeView.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
-  <data name="snapshotTreeView.Items" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1013,7 +1013,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items1" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items1">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1030,7 +1030,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items2" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items2">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1047,7 +1047,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items3" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items3">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1064,7 +1064,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items4" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items4">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1081,7 +1081,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items5" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items5">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1098,7 +1098,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items6" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items6">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1115,7 +1115,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items7" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items7">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1132,7 +1132,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items8" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items8">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1149,7 +1149,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items9" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items9">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1166,7 +1166,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items10" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items10">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1183,7 +1183,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items11" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items11">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1200,7 +1200,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items12" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items12">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1217,7 +1217,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items13" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items13">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1234,7 +1234,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items14" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items14">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1251,7 +1251,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items15" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items15">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1268,7 +1268,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items16" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items16">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1285,7 +1285,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items17" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items17">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1302,7 +1302,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items18" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items18">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1319,7 +1319,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items19" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items19">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1336,7 +1336,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items20" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items20">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1353,7 +1353,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items21" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items21">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1370,7 +1370,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items22" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items22">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1387,7 +1387,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items23" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items23">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1404,7 +1404,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items24" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items24">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1421,7 +1421,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items25" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items25">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1438,7 +1438,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items26" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items26">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1455,7 +1455,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items27" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items27">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1472,7 +1472,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items28" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items28">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1489,7 +1489,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items29" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items29">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1506,7 +1506,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items30" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items30">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1523,7 +1523,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items31" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items31">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1540,7 +1540,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items32" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items32">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1557,7 +1557,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items33" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items33">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1574,7 +1574,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items34" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items34">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1591,7 +1591,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items35" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items35">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1608,7 +1608,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items36" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items36">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1625,7 +1625,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items37" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items37">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1642,7 +1642,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items38" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items38">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1659,7 +1659,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items39" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items39">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1676,7 +1676,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items40" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items40">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1693,7 +1693,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items41" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items41">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1710,7 +1710,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items42" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items42">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1727,7 +1727,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items43" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items43">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1744,7 +1744,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items44" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items44">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1761,7 +1761,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items45" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items45">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1778,7 +1778,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items46" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items46">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1795,7 +1795,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items47" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items47">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1812,7 +1812,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items48" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items48">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1829,7 +1829,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items49" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items49">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1846,7 +1846,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items50" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items50">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1863,7 +1863,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items51" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items51">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1880,7 +1880,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items52" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items52">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1897,7 +1897,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items53" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items53">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1914,7 +1914,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items54" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items54">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1931,7 +1931,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items55" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items55">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1948,7 +1948,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items56" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items56">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1965,7 +1965,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items57" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items57">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1982,7 +1982,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items58" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items58">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -1999,7 +1999,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items59" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items59">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -2016,7 +2016,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items60" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items60">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -2033,7 +2033,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items61" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items61">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -2050,7 +2050,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items62" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items62">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -2067,7 +2067,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items63" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items63">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -2084,7 +2084,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items64" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -2101,7 +2101,7 @@
         AQAAAAX2////G1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAEAAAAHdmFsdWVfXwAIAwAAAAMAAAAL
 </value>
   </data>
-  <data name="snapshotTreeView.Items65" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data mimetype="application/x-microsoft.net.object.binary.base64" name="snapshotTreeView.Items65">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
@@ -2194,7 +2194,7 @@
     <value>0</value>
   </data>
   <data name="contentTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panelPropertiesColumn" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="viewPanel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,233" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panelPropertiesColumn" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="viewPanel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,233" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings></value>
   </data>
   <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2470,13 +2470,13 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="chevronButton1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="panel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,233,Absolute,20" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="chevronButton1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="panel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,233,Absolute,20" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings></value>
   </data>
   <data name="GeneralTableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="GeneralTableLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>10, 10</value>
   </data>
   <data name="GeneralTableLayoutPanel.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2500,7 +2500,7 @@
     <value>0</value>
   </data>
   <data name="GeneralTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="contentTableLayoutPanel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel2" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,25,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="contentTableLayoutPanel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel2" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,25,Percent,100" /&gt;&lt;/TableLayoutSettings></value>
   </data>
   <data name="pageContainerPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 78</value>
@@ -2869,7 +2869,7 @@
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tableLayoutPanelMultipleSelection.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="multipleSelectionTags" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="multipleSelectionTotalSize" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label6" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label7" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="Absolute,0,Absolute,30" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="multipleSelectionTags" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="multipleSelectionTotalSize" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label6" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label7" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="Absolute,0,Absolute,30" /&gt;&lt;/TableLayoutSettings></value>
   </data>
   <metadata name="saveMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>254, 0</value>

@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -117,11 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
   <data name="line2Learn.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 11.25pt</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="line2Learn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -134,7 +134,7 @@
   <data name="line2Learn.Size" type="System.Drawing.Size, System.Drawing">
     <value>134, 20</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="line2Learn.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
@@ -697,13 +697,13 @@
     <value>5</value>
   </data>
   <data name="iconCommunity.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="iconCommunity.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="iconCommunity.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="iconCommunity.Location" type="System.Drawing.Point, System.Drawing">
     <value>181, 338</value>
@@ -727,13 +727,13 @@
     <value>6</value>
   </data>
   <data name="iconLearn.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="iconLearn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="iconLearn.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="iconLearn.Location" type="System.Drawing.Point, System.Drawing">
     <value>27, 82</value>
@@ -757,13 +757,13 @@
     <value>12</value>
   </data>
   <data name="iconAdd.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="iconAdd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="iconAdd.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="iconAdd.Location" type="System.Drawing.Point, System.Drawing">
     <value>214, 82</value>
@@ -787,13 +787,13 @@
     <value>16</value>
   </data>
   <data name="iconGet.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="iconGet.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="iconGet.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="iconGet.Location" type="System.Drawing.Point, System.Drawing">
     <value>401, 82</value>
@@ -817,13 +817,13 @@
     <value>19</value>
   </data>
   <data name="iconTry.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="iconTry.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="iconTry.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="iconTry.Location" type="System.Drawing.Point, System.Drawing">
     <value>597, 82</value>
@@ -847,13 +847,13 @@
     <value>22</value>
   </data>
   <data name="horizDiv.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="horizDiv.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="horizDiv.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="horizDiv.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 278</value>
@@ -877,13 +877,13 @@
     <value>28</value>
   </data>
   <data name="vertDiv3.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="vertDiv3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="vertDiv3.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="vertDiv3.Location" type="System.Drawing.Point, System.Drawing">
     <value>542, 62</value>
@@ -907,13 +907,13 @@
     <value>29</value>
   </data>
   <data name="vertDiv2.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="vertDiv2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="vertDiv2.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="vertDiv2.Location" type="System.Drawing.Point, System.Drawing">
     <value>354, 62</value>
@@ -937,13 +937,13 @@
     <value>30</value>
   </data>
   <data name="vertDiv1.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="vertDiv1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="vertDiv1.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="vertDiv1.Location" type="System.Drawing.Point, System.Drawing">
     <value>166, 62</value>
@@ -967,10 +967,10 @@
     <value>31</value>
   </data>
   <data name="bulletNetwork.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="bulletNetwork.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="bulletNetwork.Location" type="System.Drawing.Point, System.Drawing">
     <value>286, 361</value>
@@ -994,13 +994,13 @@
     <value>4</value>
   </data>
   <data name="bulletSupport.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="bulletSupport.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="bulletSupport.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="bulletSupport.Location" type="System.Drawing.Point, System.Drawing">
     <value>286, 385</value>
@@ -1024,13 +1024,13 @@
     <value>3</value>
   </data>
   <data name="bulletPartners.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="bulletPartners.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="bulletPartners.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value/>
   </data>
   <data name="bulletPartners.Location" type="System.Drawing.Point, System.Drawing">
     <value>286, 409</value>

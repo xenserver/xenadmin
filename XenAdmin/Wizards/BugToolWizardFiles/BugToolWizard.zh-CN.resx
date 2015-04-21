@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -117,11 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
   <data name="pictureBoxWizard.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="pictureBoxWizard.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>13, 12, 3, 3</value>
   </data>
@@ -140,38 +140,38 @@
   <data name="XSHelpButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
   </data>
-  <data name="XSHelpButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="XSHelpButton.Image" type="System.Drawing.Bitmap, System.Drawing">
     <value>
         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
-        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
+        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
 </value>
   </data>
   <data name="XSHelpButton.Location" type="System.Drawing.Point, System.Drawing">

@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -117,18 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="m_textBoxOsParams.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
   <data name="m_textBoxOsParams.Location" type="System.Drawing.Point, System.Drawing">
     <value>107, 49</value>
   </data>
   <data name="m_textBoxOsParams.Size" type="System.Drawing.Size, System.Drawing">
     <value>199, 19</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="m_textBoxOsParams.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
@@ -163,7 +163,7 @@
     <value>3</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>OS 起動パラメータ(&amp;O):</value>
+    <value>OS 起動パラメーター(&amp;O):</value>
   </data>
   <data name="label3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -208,7 +208,7 @@
     <value>1</value>
   </data>
   <data name="m_autoHeightLabelHvm.Text" xml:space="preserve">
-    <value>VM のオペレーティング システムの起動デバイスを選択し、起動順序を設定します。一覧の上位のデバイスから起動が試行され、起動可能なメディアが見つからない場合は次のデバイスが試行されます。</value>
+    <value>VM のオペレーティング システムの起動デバイスを選択し、起動順序を構成します。一覧の上位のデバイスから起動が試行され、起動可能なメディアが見つからない場合は次のデバイスが試行されます。</value>
   </data>
   <data name="&gt;&gt;m_autoHeightLabelHvm.Name" xml:space="preserve">
     <value>m_autoHeightLabelHvm</value>
@@ -241,7 +241,7 @@
     <value>2</value>
   </data>
   <data name="m_autoHeightLabelNonHvm.Text" xml:space="preserve">
-    <value>VM のオペレーティング システムの起動デバイスを選択し、必要な起動パラメータを指定します。</value>
+    <value>VM のオペレーティング システムの起動デバイスを選択し、必要な起動パラメーターを指定します。</value>
   </data>
   <data name="&gt;&gt;m_autoHeightLabelNonHvm.Name" xml:space="preserve">
     <value>m_autoHeightLabelNonHvm</value>
@@ -403,7 +403,7 @@
     <value>2</value>
   </data>
   <data name="m_tlpHvm.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="m_buttonUp" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="m_buttonDown" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="m_checkedListBox" Row="0" RowSpan="3" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Absolute,150,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,50,Percent,100,Absolute,20,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="m_buttonUp" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="m_buttonDown" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="m_checkedListBox" Row="0" RowSpan="3" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Absolute,150,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,50,Percent,100,Absolute,20,Absolute,20" /&gt;&lt;/TableLayoutSettings></value>
   </data>
   <data name="m_tlpNonHvm.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -502,7 +502,7 @@
     <value>3</value>
   </data>
   <data name="m_tlpNonHvm.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label3" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="m_textBoxOsParams" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="m_comboBoxBootDevice" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,65,Percent,35" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,20,AutoSize,0,Percent,100,Absolute,20,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label3" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="m_textBoxOsParams" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="m_comboBoxBootDevice" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,65,Percent,35" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,20,AutoSize,0,Percent,100,Absolute,20,Absolute,20" /&gt;&lt;/TableLayoutSettings></value>
   </data>
   <data name="m_checkBoxAutoBoot.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -538,7 +538,7 @@
     <value>Fill</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
+    <value>0, 0</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>7</value>
@@ -547,7 +547,7 @@
     <value>426, 402</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -562,7 +562,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="m_autoHeightLabelHvm" Row="0" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="m_autoHeightLabelNonHvm" Row="1" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="m_tlpHvm" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="m_tlpNonHvm" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="m_checkBoxAutoBoot" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,20,AutoSize,0,Absolute,20,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="m_autoHeightLabelHvm" Row="0" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="m_autoHeightLabelNonHvm" Row="1" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="m_tlpHvm" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="m_tlpNonHvm" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="m_checkBoxAutoBoot" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,20,AutoSize,0,Absolute,20,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings></value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
