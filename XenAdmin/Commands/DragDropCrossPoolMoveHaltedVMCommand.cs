@@ -94,13 +94,6 @@ namespace XenAdmin.Commands
                    !Helpers.FeatureForbidden(draggedVM.Connection, Host.RestrictCrossPoolMigrate);
         }
 
-        private bool IsAnIntraPoolMigrate(Host targetHost, VM draggedVM)
-        {
-            List<SR> draggedSRs = new List<SR>(draggedVM.SRs);
-            bool allStorageShared = draggedSRs.TrueForAll(sr => sr.shared);
-            return !IsACrossPoolMigrate(targetHost, draggedVM) && !allStorageShared;
-        }
-
         private bool IsACrossPoolMigrate(Host targetHost, VM draggedVM )
         {
             Pool draggedVMPool = Helpers.GetPool(draggedVM.Connection);
@@ -120,20 +113,17 @@ namespace XenAdmin.Commands
                 {
                     foreach (VM draggedVM in draggedVMs)
                     {
+                        if (draggedVM == null || draggedVM.is_a_template || draggedVM.Locked || !(draggedVM.power_state == vm_power_state.Halted || draggedVM.power_state == vm_power_state.Suspended))
+                            return false;
+
                         var draggedVMHome = draggedVM.Home();
-                        if (draggedVMHome == null || draggedVMHome == targetHost)
+                        if (draggedVMHome != null && draggedVMHome == targetHost)
                             return false;
 
                         if (!targetHost.Connection.IsConnected)
                             return false;
 
-                        if (draggedVM == null || draggedVM.is_a_template || draggedVM.Locked || !(draggedVM.power_state == vm_power_state.Halted || draggedVM.power_state == vm_power_state.Suspended))
-                            return false;
-
                         if (draggedVM.allowed_operations == null || !draggedVM.allowed_operations.Contains(vm_operations.migrate_send))
-                            return false;
-
-                        if (draggedVM.Connection.Resolve(draggedVM.resident_on) == targetHost)
                             return false;
                     }
 
@@ -173,15 +163,11 @@ namespace XenAdmin.Commands
 
             if (draggedVMs.TrueForAll(vm => LiveMigrateAllowedInVersion(targetHost, vm)))
             {
-               if (draggedVMs.Any(vm => IsACrossPoolMigrate(targetHost, vm)) ||
-                   draggedVMs.Any(vm => IsAnIntraPoolMigrate(targetHost, vm)))
-                {
-                    List<SelectedItem> selectedItems = new List<SelectedItem>();
-                    draggedVMs.ForEach(vm => selectedItems.Add(new SelectedItem(vm)));
+                List<SelectedItem> selectedItems = new List<SelectedItem>();
+                draggedVMs.ForEach(vm => selectedItems.Add(new SelectedItem(vm)));
                     
-                    new CrossPoolMoveVMCommand(MainWindowCommandInterface, selectedItems, targetHost)
-                        .Execute();
-                } 
+                new CrossPoolMoveVMCommand(MainWindowCommandInterface, selectedItems, targetHost)
+                    .Execute();
             }
         }
 
