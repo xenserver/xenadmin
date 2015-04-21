@@ -120,13 +120,14 @@ namespace XenAdmin.Commands
                 {
                     foreach (VM draggedVM in draggedVMs)
                     {
+                        var draggedVMHome = draggedVM.Home();
+                        if (draggedVMHome == null || draggedVMHome == targetHost)
+                            return false;
+
                         if (!targetHost.Connection.IsConnected)
                             return false;
 
-                        if (draggedVM == null || draggedVM.is_a_template || draggedVM.Locked || draggedVM.power_state != vm_power_state.Halted)
-                            return false;
-
-                        if (!draggedVM.CanBeMoved)
+                        if (draggedVM == null || draggedVM.is_a_template || draggedVM.Locked || !(draggedVM.power_state == vm_power_state.Halted || draggedVM.power_state == vm_power_state.Suspended))
                             return false;
 
                         if (draggedVM.allowed_operations == null || !draggedVM.allowed_operations.Contains(vm_operations.migrate_send))
