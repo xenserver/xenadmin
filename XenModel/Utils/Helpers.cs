@@ -1918,7 +1918,7 @@ namespace XenAdmin.Core
 
        public static bool SameServerVersion(Host host, string longProductVersion)
        {
-           return host.LongProductVersion == longProductVersion;
+           return host != null && host.LongProductVersion == longProductVersion;
        }
 
        public static bool EnabledTargetExists(Host host, IXenConnection connection)

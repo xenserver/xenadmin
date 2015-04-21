@@ -331,7 +331,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         {
             Program.Invoke(this, () =>
                                      {
-                                         if (host != null && !host.enabled)
+                                         if (host != null && !host.enabled && host.Connection != null && host.Connection.Session != null)
                                              new EnableHostAction(host, false,
                                                                   AddHostToPoolCommand.EnableNtolDialog).RunExternal(host.Connection.Session);
                                      });
