@@ -13330,6 +13330,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} Shut down the VM.
+        /// </summary>
+        public static string EVACUATE_HOST_SHUTDOWN_VM_PROMPT {
+            get {
+                return ResourceManager.GetString("EVACUATE_HOST_SHUTDOWN_VM_PROMPT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} Suspend the VM.
         /// </summary>
         public static string EVACUATE_HOST_SUSPEND_VM_PROMPT {

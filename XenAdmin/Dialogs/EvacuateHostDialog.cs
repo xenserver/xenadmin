@@ -534,6 +534,10 @@ namespace XenAdmin.Dialogs
                         error = String.Format(Messages.EVACUATE_HOST_SUSPEND_VM_PROMPT, message);
                         break;
 
+                    case Solution.Shutdown:
+                        error = String.Format(Messages.EVACUATE_HOST_SHUTDOWN_VM_PROMPT, message);
+                        break;
+
                     case Solution.InstallPVDrivers:
                         error = String.Format(Messages.EVACUATE_HOST_INSTALL_TOOLS_PROMPT, message);
                         break;
@@ -563,6 +567,12 @@ namespace XenAdmin.Dialogs
 
                     case Solution.Suspend:
                         a = new VMSuspendAction(vm);
+                        dialog.SetSession(a);
+                        dialog.DoAction(a);
+                        break;
+
+                    case Solution.Shutdown:
+                        a = new VMHardShutdown(vm);
                         dialog.SetSession(a);
                         dialog.DoAction(a);
                         break;
@@ -682,6 +692,12 @@ namespace XenAdmin.Dialogs
             Program.Invoke(this, () => FinalizeProgressControls(sender));
         }
 
+        private bool CanSuspendVm(String vmRef)
+        {
+            VM vm = connection.Resolve(new XenRef<VM>(vmRef));
+            return vm != null && vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.suspend);
+        }
+
         private void ProcessError(String vmRef, String[] ErrorDescription)
         {
             try
@@ -703,7 +719,7 @@ namespace XenAdmin.Dialogs
                         }
                         else
                         {
-                            UpdateVMWithError(vmRef, Messages.EVACUATE_HOST_LOCAL_STORAGE, Solution.Suspend);
+                            UpdateVMWithError(vmRef, Messages.EVACUATE_HOST_LOCAL_STORAGE, CanSuspendVm(vmRef) ? Solution.Suspend : Solution.Shutdown);
                         }
 
                         break;
@@ -728,7 +744,7 @@ namespace XenAdmin.Dialogs
                                    Messages.EVACUATE_HOST_NOT_ENOUGH_MEMORY_TITLE)).ShowDialog(this);
 
                         vmRef = ErrorDescription[1];
-                        UpdateVMWithError(vmRef, String.Empty, Solution.Suspend);
+                        UpdateVMWithError(vmRef, String.Empty, CanSuspendVm(vmRef) ? Solution.Suspend : Solution.Shutdown);
 
                         break;
 
@@ -736,7 +752,7 @@ namespace XenAdmin.Dialogs
 
                         foreach (string _vmRef in vms.Keys)
                         {
-                            UpdateVMWithError(_vmRef, String.Empty, Solution.Suspend);
+                            UpdateVMWithError(_vmRef, String.Empty, CanSuspendVm(vmRef) ? Solution.Suspend : Solution.Shutdown);
                         }
 
                         if (vmRef == null)
@@ -767,10 +783,10 @@ namespace XenAdmin.Dialogs
             if (vmRef == null)
                 return;
 
-            UpdateVMWithError(vmRef, String.Empty, Solution.Suspend);
+            UpdateVMWithError(vmRef, String.Empty, CanSuspendVm(vmRef) ? Solution.Suspend : Solution.Shutdown);
         }
 
-        enum Solution { None, EjectCD, Suspend, InstallPVDrivers, InstallPVDriversNoSolution };
+        enum Solution { None, EjectCD, Suspend, InstallPVDrivers, InstallPVDriversNoSolution, Shutdown };
 
         void UpdateVMWithError(string opaqueRef, string message, Solution solution)
         {
