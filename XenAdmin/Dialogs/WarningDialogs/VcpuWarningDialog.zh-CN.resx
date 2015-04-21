@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -117,45 +117,45 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+  <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing">
     <value>
         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
-        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
+        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
+        WdXfrwAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
@@ -164,7 +164,7 @@
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 32</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>AutoSize</value>
   </data>
@@ -344,7 +344,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="checkBox1" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="btnOK" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,Absolute,20" /&gt;&lt;Rows Styles="Percent,100,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="checkBox1" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="btnOK" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,Absolute,20" /&gt;&lt;Rows Styles="Percent,100,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings></value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

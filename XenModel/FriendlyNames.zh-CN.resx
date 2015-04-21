@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -529,7 +529,7 @@
     <value>VM</value>
   </data>
   <data name="Label-host.XenMemory" xml:space="preserve">
-    <value>Xen</value>
+    <value>XenServer</value>
   </data>
   <data name="Label-host.address" xml:space="preserve">
     <value>地址</value>
@@ -538,22 +538,22 @@
     <value>Toolstack 运行时间</value>
   </data>
   <data name="Label-host.edition" xml:space="preserve">
-    <value>版本</value>
+    <value>许可证</value>
   </data>
   <data name="Label-host.edition-advanced" xml:space="preserve">
-    <value>Citrix XenServer Advanced Edition</value>
+    <value>XenServer Advanced Edition</value>
   </data>
   <data name="Label-host.edition-enterprise" xml:space="preserve">
-    <value>Citrix XenServer Enterprise Edition</value>
+    <value>XenServer Enterprise Edition</value>
   </data>
   <data name="Label-host.edition-enterprise-xd" xml:space="preserve">
-    <value>Citrix XenServer for XenDesktop</value>
+    <value>XenServer for XenDesktop</value>
   </data>
   <data name="Label-host.edition-free" xml:space="preserve">
-    <value>Citrix XenServer</value>
+    <value>XenServer</value>
   </data>
   <data name="Label-host.edition-platinum" xml:space="preserve">
-    <value>Citrix XenServer Platinum Edition</value>
+    <value>XenServer Platinum Edition</value>
   </data>
   <data name="Label-host.enabled" xml:space="preserve">
     <value>已启用</value>
@@ -1068,7 +1068,7 @@
     <value>池“{0}”的故障转移容错量已下降。现在只能在 {1} 个主机故障的情况下提供高可用性保证。</value>
   </data>
   <data name="Message.body-ha_pool_overcommitted" xml:space="preserve">
-    <value>池“{0}”中可容许的最大服务器故障数小于所请求的值。</value>
+    <value>池“{0}”中可容许的最大服务器故障数小于所请求的值。 </value>
   </data>
   <data name="Message.body-ha_protected_vm_restart_failed" xml:space="preserve">
     <value>受高可用性保护的虚拟机“{0}”无法启动。</value>
@@ -1572,7 +1572,7 @@
     <value>如果未列出您要使用的操作系统，或许可以通过选择此模板来进行安装。建议仅由高级用户尝试使用此模板，并且请注意，我们的产品仅在运行标准随附模板所涵盖的受支持发行版和特定版本的情况下经过测试。</value>
   </data>
   <data name="VM.TemplateDescription-Xen API SDK" xml:space="preserve">
-    <value>此模板可用于安装 XenServer 软件开发工具包(SDK) API VM。</value>
+    <value>此模板可用于安装 XenServer 软件开发工具包(SDK) API VM。 </value>
   </data>
   <data name="SR.name_description-local-hotplug-disk" xml:space="preserve">
     <value>可移动物理存储</value>
@@ -1629,10 +1629,10 @@
     <value>潜在回收的内存</value>
   </data>
   <data name="Label-host.edition-per-socket" xml:space="preserve">
-    <value>Citrix XenServer Per-Socket Edition</value>
+    <value>XenServer Per-Socket</value>
   </data>
   <data name="Label-host.edition-xendesktop" xml:space="preserve">
-    <value>Citrix XenServer for XenDesktop</value>
+    <value>XenServer for XenDesktop</value>
   </data>
   <data name="Message.help-extauth_init_in_host_failed" xml:space="preserve">
     <value>有关 AD 的帮助</value>
@@ -1677,7 +1677,7 @@
     <value>{0} {1} 内存利用率</value>
   </data>
   <data name="Label-host.edition-free/libre" xml:space="preserve">
-    <value>Citrix XenServer</value>
+    <value>XenServer</value>
   </data>
   <data name="Message.name-SRUnavailable" xml:space="preserve">
     <value>无法回收释放的空间，因为 SR 正忙</value>
@@ -1707,16 +1707,16 @@
     <value>许可证服务器版本已过时。</value>
   </data>
   <data name="Label-host.edition-enterprise-per-socket" xml:space="preserve">
-    <value>Citrix XenServer Enterprise Per Socket Edition</value>
+    <value>XenServer Enterprise Per-Socket</value>
   </data>
   <data name="Label-host.edition-enterprise-per-user" xml:space="preserve">
-    <value>Citrix XenServer Enterprise Per User Edition</value>
+    <value>XenServer Enterprise Per-User</value>
   </data>
   <data name="Label-host.edition-standard-per-socket" xml:space="preserve">
-    <value>Citrix XenServer Standard Per Socket Edition</value>
+    <value>XenServer Standard Per-Socket</value>
   </data>
   <data name="Label-host.edition-xendesktop-platinum" xml:space="preserve">
-    <value>Citrix XenDesktop Platinum</value>
+    <value>XenDesktop Platinum</value>
   </data>
   <data name="Message.help-license_expired" xml:space="preserve">
     <value>有关许可的帮助</value>
@@ -1737,9 +1737,21 @@
     <value>有关许可的帮助</value>
   </data>
   <data name="Label-host.edition-desktop" xml:space="preserve">
-    <value>Citrix XenServer Desktop Edition</value>
+    <value>XenApp/XenDesktop</value>
   </data>
   <data name="Label-host.edition-desktop-plus" xml:space="preserve">
-    <value>Citrix XenServer Desktop+ Edition</value>
+    <value>XenApp/XenDesktop Platinum</value>
+  </data>
+  <data name="Label-Supplemental_packs.installed" xml:space="preserve">
+    <value>已安装补充包</value>
+  </data>
+  <data name="Label-VM.read_caching_status" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="Label-VM.read_caching_disks" xml:space="preserve">
+    <value>磁盘</value>
+  </data>
+  <data name="Label-VM.read_caching_reason" xml:space="preserve">
+    <value>原因</value>
   </data>
 </root>

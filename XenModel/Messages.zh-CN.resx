@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -213,6 +213,21 @@
   <data name="ACTION_CHANGING_SHADOW_MULTIPLIER_FOR" xml:space="preserve">
     <value>正在更改“{0}”的重影系数...</value>
   </data>
+  <data name="ACTION_CHECK_DISK_SPACE_DESCRIPTION" xml:space="preserve">
+    <value>正在检查 {0} 上的磁盘空间</value>
+  </data>
+  <data name="ACTION_CHECK_DISK_SPACE_TITLE" xml:space="preserve">
+    <value>检查磁盘空间</value>
+  </data>
+  <data name="ACTION_CLEANUP_DISK_SPACE_DESCRIPTION" xml:space="preserve">
+    <value>正在清理 {0} 上的磁盘空间</value>
+  </data>
+  <data name="ACTION_CLEANUP_DISK_SPACE_SUCCESS" xml:space="preserve">
+    <value>已成功清理 {0} 上的磁盘空间</value>
+  </data>
+  <data name="ACTION_CLEANUP_DISK_SPACE_TITLE" xml:space="preserve">
+    <value>清理磁盘空间</value>
+  </data>
   <data name="ACTION_CREATE_BOND_DESCRIPTION" xml:space="preserve">
     <value>正在创建 {0} ...</value>
   </data>
@@ -248,6 +263,12 @@
   </data>
   <data name="ACTION_DETATCHING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>正在分离多个存储项</value>
+  </data>
+  <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
+    <value>正在禁用 </value>
+  </data>
+  <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
+    <value>在 VM“{0}”上禁用容器管理</value>
   </data>
   <data name="ACTION_DISK_ACTIVATED" xml:space="preserve">
     <value>已激活磁盘...</value>
@@ -345,6 +366,12 @@
   <data name="ACTION_DR_TASK_DESTROY_TITLE" xml:space="preserve">
     <value>DR 清理 ({0})</value>
   </data>
+  <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
+    <value>正在启用</value>
+  </data>
+  <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
+    <value>在 VM“{0}”上启用容器管理</value>
+  </data>
   <data name="ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED" xml:space="preserve">
     <value>导出操作因块校验和不匹配而失败。请重新尝试导出。</value>
   </data>
@@ -398,6 +425,12 @@
   </data>
   <data name="ACTION_GET_DATASOURCES" xml:space="preserve">
     <value>提取数据源</value>
+  </data>
+  <data name="ACTION_GET_DISK_SPACE_REQUIREMENTS_DESCRIPTION" xml:space="preserve">
+    <value>正在获取 {0} 上的空间要求</value>
+  </data>
+  <data name="ACTION_GET_DISK_SPACE_REQUIREMENTS_TITLE" xml:space="preserve">
+    <value>获取空间要求</value>
   </data>
   <data name="ACTION_GET_METADATA_VDIS_DONE" xml:space="preserve">
     <value>操作已完成。找到 {0} 个 VDI。</value>
@@ -486,6 +519,15 @@
   <data name="ACTION_MULTIPLE_DR_TASK_CREATE_TITLE" xml:space="preserve">
     <value>准备存储库</value>
   </data>
+  <data name="ACTION_PAUSE_CONTAINER_DESCRIPTION" xml:space="preserve">
+    <value>正在暂停</value>
+  </data>
+  <data name="ACTION_PAUSE_CONTAINER_END_DESCRIPTION" xml:space="preserve">
+    <value>已暂停</value>
+  </data>
+  <data name="ACTION_PAUSE_CONTAINER_TITLE" xml:space="preserve">
+    <value>正在暂停 Docker 容器“{0}”</value>
+  </data>
   <data name="ACTION_PIF_SCAN_START_DESC" xml:space="preserve">
     <value>正在扫描...</value>
   </data>
@@ -534,6 +576,15 @@
   <data name="ACTION_REMOVE_ALERTS_PROGRESS_DESCRIPTION" xml:space="preserve">
     <value>正在删除 {1} 条警报中的第 {0} 条...</value>
   </data>
+  <data name="ACTION_RESTART_CONTAINER_DESCRIPTION" xml:space="preserve">
+    <value>正在重新启动</value>
+  </data>
+  <data name="ACTION_RESTART_CONTAINER_END_DESCRIPTION" xml:space="preserve">
+    <value>已重新启动</value>
+  </data>
+  <data name="ACTION_RESTART_CONTAINER_TITLE" xml:space="preserve">
+    <value>正在重新启动 Docker 容器“{0}”</value>
+  </data>
   <data name="ACTION_RESUMEANDSTARTVMS_PREPARING" xml:space="preserve">
     <value>正在准备恢复并启动 VM...</value>
   </data>
@@ -542,6 +593,15 @@
   </data>
   <data name="ACTION_RESUMEANDSTARTVMS_STARTINGN" xml:space="preserve">
     <value>正在启动第 {0} 个 VM，共 {1} 个</value>
+  </data>
+  <data name="ACTION_RESUME_CONTAINER_DESCRIPTION" xml:space="preserve">
+    <value>正在恢复</value>
+  </data>
+  <data name="ACTION_RESUME_CONTAINER_END_DESCRIPTION" xml:space="preserve">
+    <value>已恢复</value>
+  </data>
+  <data name="ACTION_RESUME_CONTAINER_TITLE" xml:space="preserve">
+    <value>正在恢复 Docker 容器“{0}”</value>
   </data>
   <data name="ACTION_SAVE_ALERTS" xml:space="preserve">
     <value>保存警报</value>
@@ -634,7 +694,7 @@
     <value>正在创建 SR</value>
   </data>
   <data name="ACTION_SR_CREATING_TITLE" xml:space="preserve">
-    <value>正在“{2}”上创建 {0} SR“{1}” </value>
+    <value>正在“{2}”上创建 {0} SR“{1}”</value>
   </data>
   <data name="ACTION_SR_DESTROYING" xml:space="preserve">
     <value>正在销毁“{1}”上的“{0}”...</value>
@@ -643,7 +703,7 @@
     <value>已销毁 SR</value>
   </data>
   <data name="ACTION_SR_DETACHING" xml:space="preserve">
-    <value>正在将 SR“{0}”从“{1}”分离 </value>
+    <value>正在将 SR“{0}”从“{1}”分离</value>
   </data>
   <data name="ACTION_SR_DETACH_SUCCESSFUL" xml:space="preserve">
     <value>已分离 SR {0}</value>
@@ -714,6 +774,15 @@
   <data name="ACTION_SR_UPGRADING" xml:space="preserve">
     <value>正在升级 SR</value>
   </data>
+  <data name="ACTION_START_CONTAINER_DESCRIPTION" xml:space="preserve">
+    <value>正在启动</value>
+  </data>
+  <data name="ACTION_START_CONTAINER_END_DESCRIPTION" xml:space="preserve">
+    <value>已启动</value>
+  </data>
+  <data name="ACTION_START_CONTAINER_TITLE" xml:space="preserve">
+    <value>正在启动 Docker 容器“{0}”</value>
+  </data>
   <data name="ACTION_START_VMS_AND_APPLIANCES_NONE_SELECTED" xml:space="preserve">
     <value>没有要启动的 VM 或 vApp</value>
   </data>
@@ -732,6 +801,15 @@
   <data name="ACTION_STATUS_SUCCEEDED" xml:space="preserve">
     <value>成功</value>
   </data>
+  <data name="ACTION_STOP_CONTAINER_DESCRIPTION" xml:space="preserve">
+    <value>正在停止</value>
+  </data>
+  <data name="ACTION_STOP_CONTAINER_END_DESCRIPTION" xml:space="preserve">
+    <value>已停止</value>
+  </data>
+  <data name="ACTION_STOP_CONTAINER_TITLE" xml:space="preserve">
+    <value>正在停止 Docker 容器“{0}”</value>
+  </data>
   <data name="ACTION_SYSTEM_STATUS_CANCELLED" xml:space="preserve">
     <value>已取消获取系统状态</value>
   </data>
@@ -745,7 +823,7 @@
     <value>获取系统状态失败: 磁盘已满</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_FAILED" xml:space="preserve">
-    <value>无法编译状态报告</value>
+    <value>无法编译状态报告 </value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_NONE_SUCCEEDED" xml:space="preserve">
     <value>未编译数据</value>
@@ -788,6 +866,9 @@
   </data>
   <data name="ACTION_TOOLSTACK_RESTART_ON" xml:space="preserve">
     <value>在“{0}”上重新启动 Toolstack</value>
+  </data>
+  <data name="ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE" xml:space="preserve">
+    <value>正在更新“{0}”上的集成 GPU 直通</value>
   </data>
   <data name="ACTION_VDI_CREATED" xml:space="preserve">
     <value>已创建虚拟磁盘</value>
@@ -1150,16 +1231,16 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>无法将所选服务器移至池“{0}”: 此池不再处于连接状态。</value>
   </data>
   <data name="ADD_HOST_TO_POOL_LICENSE_MESSAGE" xml:space="preserve">
-    <value>您正在尝试将服务器“{0}”添加到许可证已升级的池中。
+    <value>您正在尝试将服务器“{0}”添加到已获授权的池。
 
-是否将池的许可应用到该服务器?</value>
+是否要将来自池的许可应用到此服务器?</value>
   </data>
   <data name="ADD_HOST_TO_POOL_LICENSE_MESSAGE_MULTIPLE" xml:space="preserve">
-    <value>您正在尝试将以下服务器添加到许可证已升级的池中。
+    <value>您正在尝试将以下服务器添加到已获授权的池。
 
 {0}
 
-是否将池的许可应用到这些服务器?</value>
+是否要将来自池的许可应用到这些服务器?</value>
   </data>
   <data name="ADD_HOST_TO_POOL_SUPP_PACK" xml:space="preserve">
     <value>池中所有服务器上都应安装以下补充软件包，但目前尚未安装:
@@ -1388,10 +1469,10 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>VM 超级管理员</value>
   </data>
   <data name="AD_SELECT_ROLE_GROUP" xml:space="preserve">
-    <value>选择要分配给组“{0}”的角色。每个角色将继承列表中其下面从属角色的所有权限。 </value>
+    <value>选择要分配给组“{0}”的角色。每个角色将继承列表中其下面从属角色的所有权限。</value>
   </data>
   <data name="AD_SELECT_ROLE_MIXED" xml:space="preserve">
-    <value>选择要分配给这些用户和组的角色。每个角色将继承列表中其下面从属角色的所有权限。 </value>
+    <value>选择要分配给这些用户和组的角色。每个角色将继承列表中其下面从属角色的所有权限。</value>
   </data>
   <data name="AD_SELECT_ROLE_USER" xml:space="preserve">
     <value>选择要分配给用户“{0}”的角色。每个角色将继承列表中其下面从属角色的所有权限。</value>
@@ -2142,7 +2223,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>该虚拟磁盘必须先分离，然后才能移动。</value>
   </data>
   <data name="CANNOT_PARSE_NODE_PARAM" xml:space="preserve">
-    <value>无法解析 XML 节点“{0}”上的必需参数“{1}” </value>
+    <value>无法解析 XML 节点“{0}”上的必需参数“{1}”</value>
   </data>
   <data name="CANNOT_REMOVE_SL_SERVER" xml:space="preserve">
     <value>无法删除该 StorageLink 服务器，因为该服务器当前正在使用。</value>
@@ -2319,7 +2400,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>配置高可用性(&amp;C)...</value>
   </data>
   <data name="CONFIGURING_WLB" xml:space="preserve">
-    <value>正在配置 Workload Balancing</value>
+    <value>正在配置 Workload Balancing </value>
   </data>
   <data name="CONFIGURING_WLB_ON" xml:space="preserve">
     <value>正在池“{0}”上配置 Workload Balancing</value>
@@ -2748,22 +2829,37 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>包含于</value>
   </data>
   <data name="CONTAINER" xml:space="preserve">
-    <value>Container</value>
+    <value>容器</value>
   </data>
   <data name="CONTAINER_COMMAND" xml:space="preserve">
-    <value>Command</value>
+    <value>命令</value>
   </data>
   <data name="CONTAINER_CREATED" xml:space="preserve">
-    <value>Created</value>
+    <value>已创建</value>
   </data>
   <data name="CONTAINER_GENERAL_TAB_TITLE" xml:space="preserve">
-    <value>Container General Properties</value>
-  </data>
-  <data name="CONTAINER_PORTS" xml:space="preserve">
-    <value>Ports</value>
+    <value>容器的常规属性</value>
   </data>
   <data name="CONTAINER_IMAGE" xml:space="preserve">
-    <value>Image</value>
+    <value>图片</value>
+  </data>
+  <data name="CONTAINER_ON_VM_TITLE" xml:space="preserve">
+    <value>“{1}”{2} 上的 {0}</value>
+  </data>
+  <data name="CONTAINER_PORTS" xml:space="preserve">
+    <value>端口</value>
+  </data>
+  <data name="CONTAINER_PORTS_ADDRESS" xml:space="preserve">
+    <value>地址: {0}</value>
+  </data>
+  <data name="CONTAINER_PORTS_PRIVATE_PORT" xml:space="preserve">
+    <value>专用端口: {0}</value>
+  </data>
+  <data name="CONTAINER_PORTS_PROTOCOL" xml:space="preserve">
+    <value>协议: {0}</value>
+  </data>
+  <data name="CONTAINER_PORTS_PUBLIC_PORT" xml:space="preserve">
+    <value>公用端口: {0}</value>
   </data>
   <data name="CONTAINS" xml:space="preserve">
     <value>包含</value>
@@ -3035,6 +3131,9 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   </data>
   <data name="CREATE_VM_FROM_TEMPLATE" xml:space="preserve">
     <value>正在从模板“{1}”创建 VM“{0}”</value>
+  </data>
+  <data name="CREATING_CLOUD_CONFIG_DRIVE" xml:space="preserve">
+    <value>正在创建云配置驱动器</value>
   </data>
   <data name="CREATING_DISKS" xml:space="preserve">
     <value>正在创建磁盘</value>
@@ -3639,65 +3738,59 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   <data name="DMC_UNAVAILABLE_VMS" xml:space="preserve">
     <value>无法为这些 VM 设置内存范围。</value>
   </data>
-  <data name="DOES_NOT_USE" xml:space="preserve">
-    <value>不使用</value>
-  </data>
   <data name="DOCKER_DETAIL_TAB_TITLE" xml:space="preserve">
-    <value>Docker详细信息</value>
-  </data>
-  <data name="DOCKER_PROCESS_TAB_TITLE" xml:space="preserve">
-    <value>Docker进程</value>
+    <value>容器详细信息</value>
   </data>
   <data name="DOCKER_INFO_API_VERSION" xml:space="preserve">
-    <value>Api Version</value>
+    <value>Api 版本</value>
   </data>
   <data name="DOCKER_INFO_ARCH" xml:space="preserve">
     <value>Arch</value>
   </data>
   <data name="DOCKER_INFO_DEBUG" xml:space="preserve">
-    <value>Debug</value>
+    <value>调试</value>
   </data>
   <data name="DOCKER_INFO_DRIVER" xml:space="preserve">
-    <value>Driver</value>
+    <value>驱动程序</value>
   </data>
   <data name="DOCKER_INFO_DRIVER_STATUS" xml:space="preserve">
-    <value>Driver Status</value>
+    <value>驱动程序状态</value>
   </data>
   <data name="DOCKER_INFO_EXECUTION_DRIVER" xml:space="preserve">
-    <value>Execution Driver</value>
+    <value>执行驱动程序</value>
   </data>
   <data name="DOCKER_INFO_GIT_COMMIT" xml:space="preserve">
     <value>Git Commit</value>
   </data>
   <data name="DOCKER_INFO_GO_VERSION" xml:space="preserve">
-    <value>Go Version</value>
+    <value>Go 版本</value>
   </data>
   <data name="DOCKER_INFO_INDEX_SERVER_ADDRESS" xml:space="preserve">
-    <value>Index Server Address</value>
+    <value>Index Server 地址</value>
   </data>
   <data name="DOCKER_INFO_INITIATE_PATH" xml:space="preserve">
-    <value>Initiate Path</value>
+    <value>启动路径</value>
   </data>
   <data name="DOCKER_INFO_INITIATE_SHA1" xml:space="preserve">
-    <value>Initiate Sha1</value>
+    <value>启动 Sha1</value>
   </data>
   <data name="DOCKER_INFO_IPV4_FORWARDING" xml:space="preserve">
-    <value>IPv4 Forwarding</value>
+    <value>IPv4 转发</value>
   </data>
   <data name="DOCKER_INFO_KERNEL_VERSION" xml:space="preserve">
-    <value>Kernel Version</value>
+    <value>内核版本</value>
   </data>
   <data name="DOCKER_INFO_LABELS" xml:space="preserve">
-    <value>Labels</value>
+    <value>标签</value>
   </data>
   <data name="DOCKER_INFO_MEMORY_LIMIT" xml:space="preserve">
-    <value>Memory Limit</value>
+    <value>内存限制</value>
   </data>
   <data name="DOCKER_INFO_NCPU" xml:space="preserve">
     <value>NCPU</value>
   </data>
   <data name="DOCKER_INFO_NEVENT_LISTENER" xml:space="preserve">
-    <value>NEvents Listener</value>
+    <value>NEvents 侦听器</value>
   </data>
   <data name="DOCKER_INFO_NFD" xml:space="preserve">
     <value>NFd</value>
@@ -3706,13 +3799,19 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>NGoroutines</value>
   </data>
   <data name="DOCKER_INFO_ROOT_DIR" xml:space="preserve">
-    <value>Root Directory</value>
+    <value>根目录</value>
   </data>
   <data name="DOCKER_INFO_SWAP_LIMIT" xml:space="preserve">
-    <value>Swap Limit</value>
+    <value>交换限制</value>
   </data>
   <data name="DOCKER_INFO_VERSION" xml:space="preserve">
-    <value>Version</value>
+    <value>版本</value>
+  </data>
+  <data name="DOCKER_PROCESS_TAB_TITLE" xml:space="preserve">
+    <value>容器进程</value>
+  </data>
+  <data name="DOES_NOT_USE" xml:space="preserve">
+    <value>不使用</value>
   </data>
   <data name="DONE" xml:space="preserve">
     <value>已完成。</value>
@@ -3724,7 +3823,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>{0} 当前可用</value>
   </data>
   <data name="DOWNLOADING_PATCH_FROM" xml:space="preserve">
-    <value>正在从服务器 {0} 下载更新...</value>
+    <value>正在从 {0} 下载更新...</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DESC" xml:space="preserve">
     <value>正在下载 {0}</value>
@@ -4133,7 +4232,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>恢复后的电源状态: {0}</value>
   </data>
   <data name="DR_WIZARD_REPORT_SELECTED_SRS" xml:space="preserve">
-    <value>所选 SR:</value>
+    <value>所选 SR: </value>
   </data>
   <data name="DR_WIZARD_STORAGEPAGE_DESCRIPTION_FAILBACK" xml:space="preserve">
     <value>选择包含要执行故障恢复的 VM 和 vApp 的配置数据的存储库(SR)。如果您知道哪些 SR 包含 VM 的磁盘，则可以立即将其包含在内。</value>
@@ -4296,6 +4395,9 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   </data>
   <data name="ENDS_WITH" xml:space="preserve">
     <value>结尾</value>
+  </data>
+  <data name="ENTERPRISE_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
+    <value>XenServer Enterprise Per-Socket (需要 {0})(&amp;E)</value>
   </data>
   <data name="ENTER_MAINTENANCE_MODE" xml:space="preserve">
     <value>进入维护模式(&amp;M)...</value>
@@ -4926,7 +5028,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>插件 {0} 尚未对您的取消请求作出响应。是强制关闭进程还是允许其继续在后台运行?</value>
   </data>
   <data name="FORCE_ENABLE_RDP" xml:space="preserve">
-    <value>Would you like to configure this VM to accept Remote Desktop connections, and then connect to it over Remote Desktop?</value>
+    <value>是否要将此 VM 配置为接受远程桌面连接，然后再通过远程桌面进行连接?</value>
   </data>
   <data name="FORCE_REBOOT" xml:space="preserve">
     <value>强制重启</value>
@@ -6103,6 +6205,18 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   <data name="INSTANT_VM_CREATE_TITLE" xml:space="preserve">
     <value>即时创建 VM</value>
   </data>
+  <data name="INTEGRATED_GPU_PASSTHROUGH_DISABLED" xml:space="preserve">
+    <value>此服务器当前不使用集成 GPU。</value>
+  </data>
+  <data name="INTEGRATED_GPU_PASSTHROUGH_DISABLED_SHORT" xml:space="preserve">
+    <value>不使用集成 GPU</value>
+  </data>
+  <data name="INTEGRATED_GPU_PASSTHROUGH_ENABLED" xml:space="preserve">
+    <value>此服务器当前使用集成 GPU。</value>
+  </data>
+  <data name="INTEGRATED_GPU_PASSTHROUGH_ENABLED_SHORT" xml:space="preserve">
+    <value>使用集成 GPU</value>
+  </data>
   <data name="INTERFACES_COUNT" xml:space="preserve">
     <value>接口: {0}</value>
   </data>
@@ -6129,6 +6243,9 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
   </data>
   <data name="IN_ANY_APPLIANCE" xml:space="preserve">
     <value>在 vApp 中</value>
+  </data>
+  <data name="IN_POOL" xml:space="preserve">
+    <value>在“{0}”中</value>
   </data>
   <data name="IN_PROGRESS" xml:space="preserve">
     <value>进行中</value>
@@ -6189,7 +6306,7 @@ SCSI ID: {2}
     <value>StorageLink 技术</value>
   </data>
   <data name="ISOCOMBOBOX_CD_DRIVE" xml:space="preserve">
-    <value>{1} 上的 DVD 驱动器 {0} </value>
+    <value>{1} 上的 DVD 驱动器 {0}</value>
   </data>
   <data name="ISO_LOADED" xml:space="preserve">
     <value>已将 ISO“{0}”加载到 VM {1} 上的 DVD 驱动器中</value>
@@ -6210,7 +6327,7 @@ SCSI ID: {2}
     <value>在池中</value>
   </data>
   <data name="IS_IN_STORAGELINK_SR" xml:space="preserve">
-    <value>VM 在 StorageLink Gateway SR 上 </value>
+    <value>VM 在 StorageLink Gateway SR 上</value>
   </data>
   <data name="IS_NOT" xml:space="preserve">
     <value>不是</value>
@@ -6234,13 +6351,13 @@ SCSI ID: {2}
     <value>正在与 {0} 同步...</value>
   </data>
   <data name="LAST_REFRESH_FAIL" xml:space="preserve">
-    <value>该信息暂时无法获取。</value>
+    <value>信息不可用。</value>
   </data>
   <data name="LAST_REFRESH_IN_PROGRESS" xml:space="preserve">
-    <value>正在获取信息...</value>
+    <value>正在加载...</value>
   </data>
   <data name="LAST_REFRESH_SUCCESS" xml:space="preserve">
-    <value>最近更新于: {0}</value>
+    <value>上次刷新时间: {0}</value>
   </data>
   <data name="LAST_WEEK" xml:space="preserve">
     <value>为上周</value>
@@ -6333,6 +6450,9 @@ SCSI ID: {2}
   <data name="LICENSE_NEVER" xml:space="preserve">
     <value>从不</value>
   </data>
+  <data name="LICENSE_NOT_ELIGIBLE_FOR_SUPPORT" xml:space="preserve">
+    <value>不符合支持条件</value>
+  </data>
   <data name="LICENSE_NO_HA" xml:space="preserve">
     <value>高可用性处于启用状态时无法更改主机的许可证</value>
   </data>
@@ -6375,8 +6495,30 @@ SCSI ID: {2}
   <data name="LICENSE_SERVER_PORT_FORMAT" xml:space="preserve">
     <value>{0}:{1}</value>
   </data>
+  <data name="LICENSE_SERVER_WEB_CONSOLE_FORMAT" xml:space="preserve">
+    <value>http://{0}:{1}</value>
+  </data>
+  <data name="LICENSE_SERVER_WEB_CONSOLE_GOTO" xml:space="preserve">
+    <value>转至...</value>
+  </data>
   <data name="LICENSE_STATUS" xml:space="preserve">
     <value>状态</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
+    <value>满足支持条件 
+XenApp/XenDesktop 功能已启用</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED" xml:space="preserve">
+    <value>满足支持条件 
+XenApp/XenDesktop Platinum 功能已启用</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED" xml:space="preserve">
+    <value>符合支持条件 
+启用了 Enterprise 功能</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED" xml:space="preserve">
+    <value>符合支持条件 
+仅限 Standard 功能</value>
   </data>
   <data name="LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION" xml:space="preserve">
     <value>激活密钥一次只能应用到一款免费 XenServer 产品。</value>
@@ -6682,6 +6824,9 @@ SCSI ID: {2}
   <data name="MAINWINDOW_NEW_VM_FROM_TEMPLATE" xml:space="preserve">
     <value>新建 VM 向导(&amp;N)...</value>
   </data>
+  <data name="MAINWINDOW_PAUSE" xml:space="preserve">
+    <value>暂停(&amp;P)</value>
+  </data>
   <data name="MAINWINDOW_POWER_ON" xml:space="preserve">
     <value>开机(&amp;N)</value>
   </data>
@@ -6727,6 +6872,9 @@ SCSI ID: {2}
   <data name="MAINWINDOW_REPAIR_SR_CONTEXT_MENU" xml:space="preserve">
     <value>修复(&amp;P)...</value>
   </data>
+  <data name="MAINWINDOW_RESTART" xml:space="preserve">
+    <value>重新启动(&amp;S)</value>
+  </data>
   <data name="MAINWINDOW_RESTART_TOOLSTACK" xml:space="preserve">
     <value>重新启动 Toolstack(&amp;K)</value>
   </data>
@@ -6762,6 +6910,9 @@ SCSI ID: {2}
   </data>
   <data name="MAINWINDOW_START_ON_HOST" xml:space="preserve">
     <value>在服务器上启动(&amp;V)</value>
+  </data>
+  <data name="MAINWINDOW_STOP" xml:space="preserve">
+    <value>停止(&amp;T)</value>
   </data>
   <data name="MAINWINDOW_SUSPEND" xml:space="preserve">
     <value>挂起(&amp;U)</value>
@@ -6860,7 +7011,7 @@ SCSI ID: {2}
     <value>内存(&amp;M):</value>
   </data>
   <data name="MEMORY_XEN" xml:space="preserve">
-    <value>Xen</value>
+    <value>XenServer</value>
   </data>
   <data name="MEM_NOT_WHEN_SUSPENDED" xml:space="preserve">
     <value>VM 挂起时无法更改内存</value>
@@ -7238,6 +7389,9 @@ SCSI ID: {2}
   <data name="NAME_DESCRIPTION_TAGS" xml:space="preserve">
     <value>常规</value>
   </data>
+  <data name="NAME_WITH_LOCATION" xml:space="preserve">
+    <value>{0} {1}</value>
+  </data>
   <data name="NETAPP_EQUAL_PAGE_TITLE" xml:space="preserve">
     <value>选择要重新连接的 SR 或创建一个新 SR</value>
   </data>
@@ -7344,7 +7498,7 @@ SCSI ID: {2}
     <value>正在更新网络</value>
   </data>
   <data name="NETWORK_ACTION_UPDATING_NETWORK_TITLE" xml:space="preserve">
-    <value>正在更新“{1}”上的网络“{0}” </value>
+    <value>正在更新“{1}”上的网络“{0}”</value>
   </data>
   <data name="NETWORK_IN_USE_BY" xml:space="preserve">
     <value>{0} (正由 {1} 使用)</value>
@@ -7443,7 +7597,7 @@ SCSI ID: {2}
     <value>无法将已获得许可的服务器添加到未获得许可的池</value>
   </data>
   <data name="NEWPOOL_LICENSEMISMATCH" xml:space="preserve">
-    <value>此服务器使用的 XenServer 许可证版本与池主服务器不同</value>
+    <value>此服务器的许可证与池主服务器的许可证不同</value>
   </data>
   <data name="NEWPOOL_LINUXPACK" xml:space="preserve">
     <value>此服务器的 Linux 软件包安装状态与主服务器不同</value>
@@ -7587,7 +7741,7 @@ SCSI ID: {2}
     <value>新存储库创建摘要</value>
   </data>
   <data name="NEWSR_LVMOHBA_SUMMARY_SUCCESS_MULTIPLE" xml:space="preserve">
-    <value>已成功创建 {0} 个 SR </value>
+    <value>已成功创建 {0} 个 SR</value>
   </data>
   <data name="NEWSR_LVMOHBA_SUMMARY_SUCCESS_SINGLE" xml:space="preserve">
     <value>SR 已成功创建</value>
@@ -7710,6 +7864,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="NEWVMWIZARD_CDMEDIAPAGE_TITLE" xml:space="preserve">
     <value>查找操作系统安装介质</value>
+  </data>
+  <data name="NEWVMWIZARD_CLOUD_CONFIG_PARAMETERS_PAGE" xml:space="preserve">
+    <value>云配置参数</value>
+  </data>
+  <data name="NEWVMWIZARD_CLOUD_CONFIG_PARAMETERS_PAGE_TITLE" xml:space="preserve">
+    <value>配置云配置参数</value>
   </data>
   <data name="NEWVMWIZARD_COPY_BIOS_STRINGS_PAGE_HOST" xml:space="preserve">
     <value>复制 BIOS 字符串自</value>
@@ -7881,6 +8041,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NEWVMWIZARD_TEMPLATEPAGE_CITRIX" xml:space="preserve">
     <value>Citrix</value>
   </data>
+  <data name="NEWVMWIZARD_TEMPLATEPAGE_COREOS" xml:space="preserve">
+    <value>CoreOS</value>
+  </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_CUSTOM" xml:space="preserve">
     <value>自定义</value>
   </data>
@@ -7901,6 +8064,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_REDHAT" xml:space="preserve">
     <value>Red Hat</value>
+  </data>
+  <data name="NEWVMWIZARD_TEMPLATEPAGE_SCILINUX" xml:space="preserve">
+    <value>Scientific Linux</value>
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_SNAPSHOTS" xml:space="preserve">
     <value>快照</value>
@@ -8013,16 +8179,16 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
 是否执行此操作?</value>
   </data>
   <data name="NEW_POOL_LICENSE_MESSAGE" xml:space="preserve">
-    <value>您正在尝试将服务器“{0}”添加到许可证已升级的池中。
+    <value>您正在尝试将服务器“{0}”添加到已获授权的池。
 
-是否将主服务器的许可应用到该服务器?</value>
+是否要将来自主服务器的许可应用到此服务器?</value>
   </data>
   <data name="NEW_POOL_LICENSE_MESSAGE_MULTIPLE" xml:space="preserve">
-    <value>您正在尝试将以下服务器添加到许可证已升级的池中。
+    <value>您正在尝试将以下服务器添加到已获授权的池。
 
 {0}
 
-是否将主服务器的许可应用到这些服务器?</value>
+是否要将来自主服务器的许可应用到这些服务器?</value>
   </data>
   <data name="NEW_POOL_SUPP_PACK" xml:space="preserve">
     <value>池中所有服务器上都应安装以下补充软件包，但目前尚未安装:
@@ -8189,6 +8355,27 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="NOT_CONTAINS" xml:space="preserve">
     <value>不包含</value>
   </data>
+  <data name="NOT_ENOUGH_SPACE_DESCRIPTION" xml:space="preserve">
+    <value>此主机的磁盘空间不足，无法安装此更新</value>
+  </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_AVAILABLE_SPACE" xml:space="preserve">
+    <value>可用空间: {0}</value>
+  </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_CLEANUP" xml:space="preserve">
+    <value>XenCenter 可以通过删除其余的更新文件释放 {0}。是否要继续清理?</value>
+  </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_INSTALL" xml:space="preserve">
+    <value>“{0}”上的空间不足，无法安装更新“{1}”。</value>
+  </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_NOCLEANUP" xml:space="preserve">
+    <value>释放部分空间并重试。</value>
+  </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_REQUIRED_SPACE" xml:space="preserve">
+    <value>所需空间: {0}</value>
+  </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_UPLOAD" xml:space="preserve">
+    <value>“{0}”上的空间不足，无法上载更新“{1}”。</value>
+  </data>
   <data name="NOT_IN_A_FOLDER" xml:space="preserve">
     <value>不在任何文件夹中</value>
   </data>
@@ -8215,6 +8402,9 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="NO_ELIGIBLE_MASTER" xml:space="preserve">
     <value>没有服务器符合成为新池主服务器的条件</value>
+  </data>
+  <data name="NO_GPU_ON_SERVER" xml:space="preserve">
+    <value>此服务器上无 GPU。</value>
   </data>
   <data name="NO_HALTED_VMS" xml:space="preserve">
     <value>没有要导出的已停止或已挂起的 VM</value>
@@ -8261,6 +8451,12 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="OBJECTS_WITH_TAG" xml:space="preserve">
     <value>带标记“{0}”的对象</value>
   </data>
+  <data name="OBJECT_IN_POOL" xml:space="preserve">
+    <value>“{1}”中的 {0}</value>
+  </data>
+  <data name="OBJECT_ON_SERVER" xml:space="preserve">
+    <value>“{1}”上的 {0}</value>
+  </data>
   <data name="OEM" xml:space="preserve">
     <value>OEM</value>
   </data>
@@ -8300,6 +8496,9 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="ONLY_VMS_USING_STORAGELINK_SMIS" xml:space="preserve">
     <value>仅能升级使用 StorageLink Gateway NetApp、Dell EqualLogic 或 SMI-SOnly 适配器的 VM</value>
+  </data>
+  <data name="ON_SERVER" xml:space="preserve">
+    <value>在“{0}”上</value>
   </data>
   <data name="OPERATING_SYSTEM" xml:space="preserve">
     <value>操作系统</value>
@@ -8397,6 +8596,9 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="PASTE" xml:space="preserve">
     <value>粘贴</value>
   </data>
+  <data name="PATCHINGWIZARD_CLEANUP" xml:space="preserve">
+    <value>清理...</value>
+  </data>
   <data name="PATCHINGWIZARD_MODEPAGE_NOACTION" xml:space="preserve">
     <value>不需要操作</value>
   </data>
@@ -8417,6 +8619,9 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_UNKNOWNACTION" xml:space="preserve">
     <value>未知</value>
+  </data>
+  <data name="PATCHINGWIZARD_MORE_INFO" xml:space="preserve">
+    <value>更多信息...</value>
   </data>
   <data name="PATCHINGWIZARD_PATCHINGPAGE_POOL_RESOLVE" xml:space="preserve">
     <value>解决池问题</value>
@@ -8475,6 +8680,9 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE" xml:space="preserve">
     <value>执行更新预检查是为了确认更新 {0} 能够在服务器上应用。</value>
   </data>
+  <data name="PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_NO_PATCH_NAME" xml:space="preserve">
+    <value>执行更新预检查以验证是否能够将所选更新应用到服务器。</value>
+  </data>
   <data name="PATCHINGWIZARD_PRECHECKPAGE_RESOLVE" xml:space="preserve">
     <value>解决</value>
   </data>
@@ -8494,7 +8702,10 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>选择现有更新进行安装，或上载新更新</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
-    <value>XenServer 更新|*.xsupdate;*.xsoem</value>
+    <value>XenServer 更新和补充包(*.xsupdate、*.iso)|*.xsupdate;*.iso</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS" xml:space="preserve">
+    <value>无法在此版本的 XenServer 上安装补充包</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>需要专享升级服务</value>
@@ -8507,6 +8718,12 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TITLE" xml:space="preserve">
     <value>选择要更新的服务器</value>
+  </data>
+  <data name="PATCHINGWIZARD_UPLOADPAGE_TEXT" xml:space="preserve">
+    <value>上载</value>
+  </data>
+  <data name="PATCHINGWIZARD_UPLOADPAGE_TITLE" xml:space="preserve">
+    <value>正在将所选文件上载到您的服务器</value>
   </data>
   <data name="PATCHING_EJECT_CDS" xml:space="preserve">
     <value>从 VM 中弹出任何虚拟 CD</value>
@@ -8521,8 +8738,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>{0,4}{1}</value>
   </data>
   <data name="PATCHING_WIZARD_ERROR" xml:space="preserve">
-    <value>
-{0} 错误。</value>
+    <value>{0} 错误。</value>
   </data>
   <data name="PATCHING_WIZARD_HOST_CHECK_OK" xml:space="preserve">
     <value>{0}: {1} 正常。</value>
@@ -8540,11 +8756,32 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="PATCH_APPLIED" xml:space="preserve">
     <value>更新“{0}”已应用到服务器“{1}”</value>
   </data>
+  <data name="PATCH_DESCRIPTION_AND_INSTALLATION_SIZE" xml:space="preserve">
+    <value>{0} 
+安装大小: {1}</value>
+  </data>
+  <data name="PATCH_DOWNLOAD_FAILED" xml:space="preserve">
+    <value>从 {1} 下载 {0} 失败</value>
+  </data>
+  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO" xml:space="preserve">
+    <value>从 {1} 下载更新 {0} 失败。
+
+该更新安装在“{1}”上，但更新安装文件可能已被删除。
+
+请改为从 .xsupdate 文件上载更新。</value>
+  </data>
+  <data name="PATCH_DOWNLOAD_FAILED_MORE_INFO_NOT_APPLIED" xml:space="preserve">
+    <value>从 {1} 下载更新 {0} 失败。
+
+该更新以前已上载到“{1}”，但更新安装文件可能已被删除。
+
+请改为从 .xsupdate 文件上载更新。</value>
+  </data>
   <data name="PATCH_EXPANDED_DESCRIPTION" xml:space="preserve">
     <value>{0} 
 修改日期: {1}
 创建日期: {2}
-大小: {3} MB</value>
+大小: {3}</value>
   </data>
   <data name="PATCH_FOR_XENSERVER_VERSION" xml:space="preserve">
     <value>该修补程序适用于 XenServer {0}。</value>
@@ -8557,7 +8794,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
 未找到文件</value>
   </data>
   <data name="PATCH_UPLOADED" xml:space="preserve">
-    <value>更新已上载到服务器“{0}”</value>
+    <value>更新已上载到服务器“{0}” </value>
   </data>
   <data name="PATHPICKER_FILETYPE" xml:space="preserve">
     <value>XVA (*.xva)|*.xva|XVA 版本 1 (ova.xml)|ova.xml</value>
@@ -9134,7 +9371,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>已删除更新</value>
   </data>
   <data name="REMOVED_VMS_FROM_APPLIANCE" xml:space="preserve">
-    <value>已从 vApp 删除</value>
+    <value>已从 vApp 删除 </value>
   </data>
   <data name="REMOVED_VMS_FROM_POLICY" xml:space="preserve">
     <value>已从 VM 保护策略中删除</value>
@@ -9784,11 +10021,11 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="SHUTTING_DOWN_VM_OUT_OF" xml:space="preserve">
     <value>正在关闭 {1} 个 VM 中的第 {0} 个</value>
   </data>
-  <data name="SINGLE_SERVER_PRIVATE_NETWORK" xml:space="preserve">
-    <value>单服务器专用网络</value>
-  </data>
   <data name="SIGNING_APPLIANCE" xml:space="preserve">
     <value>正在将数字签名应用到设备...</value>
+  </data>
+  <data name="SINGLE_SERVER_PRIVATE_NETWORK" xml:space="preserve">
+    <value>单服务器专用网络</value>
   </data>
   <data name="SIZE" xml:space="preserve">
     <value>大小</value>
@@ -9869,6 +10106,9 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="SNAPSHOT_OF" xml:space="preserve">
     <value>快照属于</value>
   </data>
+  <data name="SNAPSHOT_OF_TITLE" xml:space="preserve">
+    <value>{0} (“{1}”{2} 的快照)</value>
+  </data>
   <data name="SNAPSHOT_REQUIRE_GEORGE" xml:space="preserve">
     <value>快照需要使用 XenServer 5.5 或更高版本</value>
   </data>
@@ -9924,7 +10164,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>使用权限更大的用户帐户重试。</value>
   </data>
   <data name="SOLUTION_UNKNOWN" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="SOME_ERRORS_ENCOUNTERED" xml:space="preserve">
     <value>遇到一些错误。有关详细信息，请参阅 XenCenter 日志。</value>
@@ -10034,11 +10274,17 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="SR_SIZE_USED" xml:space="preserve">
     <value>{0} 已用空间，总计 {1} (已分配 {2})</value>
   </data>
+  <data name="SR_TRIM_NO_STORAGE_HOST_ERROR" xml:space="preserve">
+    <value>由于 SR 已分离，因此无法回收释放的空间。</value>
+  </data>
   <data name="SR_UNABLE_TO_CONNECT_TO_SCSI_TARGET" xml:space="preserve">
     <value>无法连接到 iSCSI 目标</value>
   </data>
   <data name="SR_X_ON_Y" xml:space="preserve">
     <value>{1} 上的 SR {0}</value>
+  </data>
+  <data name="STANDARD_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
+    <value>XenServer Standard Per-Socket (需要 {0})(&amp;S)</value>
   </data>
   <data name="STARTED" xml:space="preserve">
     <value>已启动</value>
@@ -10251,7 +10497,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>设备位置</value>
   </data>
   <data name="STORAGE_DISK" xml:space="preserve">
-    <value>磁盘</value>
+    <value>磁盘 </value>
   </data>
   <data name="STORAGE_IN_USE" xml:space="preserve">
     <value>SR“{0}”正在“{1}”上使用，无法引入。必须先从“{1}”将其分离，然后才能再次使用。</value>
@@ -10296,7 +10542,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>, </value>
   </data>
   <data name="STRINGIFY_LIST_LASTSEP" xml:space="preserve">
-    <value> 和</value>
+    <value> 和 </value>
   </data>
   <data name="STRING_SPACE_STRING" xml:space="preserve">
     <value>{0} {1}</value>
@@ -10310,8 +10556,31 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="SUNDAY_SHORT" xml:space="preserve">
     <value>日</value>
   </data>
+  <data name="SUPP_PACK_DESCTIPTION" xml:space="preserve">
+    <value>{0} (版本: {1})</value>
+  </data>
+  <data name="SUPP_PACK_INSTALL_FAILED" xml:space="preserve">
+    <value>在“{1}”上安装补充包“{0}”失败。</value>
+  </data>
+  <data name="SUPP_PACK_INSTALL_FAILED_MORE_INFO" xml:space="preserve">
+    <value>{0}
+
+有关如何在 XenServer 主机上手动安装补充包的说明，请参阅《XenServer 管理员指南》。</value>
+  </data>
   <data name="SUPP_PACK_MISSING_ON" xml:space="preserve">
     <value>{0} (未在 {1} 上安装)</value>
+  </data>
+  <data name="SUPP_PACK_TEMP_VDI_DESCRIPTION" xml:space="preserve">
+    <value>用于安装补充包的临时虚拟磁盘</value>
+  </data>
+  <data name="SUPP_PACK_UPLOADED" xml:space="preserve">
+    <value>文件已上载到“{0}”</value>
+  </data>
+  <data name="SUPP_PACK_UPLOADING" xml:space="preserve">
+    <value>正在上载文件</value>
+  </data>
+  <data name="SUPP_PACK_UPLOADING_TO" xml:space="preserve">
+    <value>正在上载到“{0}”</value>
   </data>
   <data name="SUPP_PACK_VERSIONS_DIFFER" xml:space="preserve">
     <value>{0} (并非所有主机上版本都相同)</value>
@@ -10326,7 +10595,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>正在挂起指定的 VM</value>
   </data>
   <data name="SUSPENDING_VM_OUT_OF" xml:space="preserve">
-    <value>正在挂起第 {0} 个 VM，共 {1} 个 </value>
+    <value>正在挂起第 {0} 个 VM，共 {1} 个</value>
   </data>
   <data name="SUSPEND_SHUTDOWN_VMS_ACTION_DESC" xml:space="preserve">
     <value>正在准备挂起并关闭 VM...</value>
@@ -10587,7 +10856,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>从 OVF 或 OVA 包导入设备。</value>
   </data>
   <data name="TYPE_PAGE_DESCRIPTION_HEADER_VHD" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="TYPE_PAGE_DESCRIPTION_HEADER_XVA" xml:space="preserve">
     <value>将本地存储的 VM、模板或快照作为新 VM 导入。</value>
@@ -10701,7 +10970,10 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>已安装更新</value>
   </data>
   <data name="UPDATES_WIZARD_APPLYING_UPDATE" xml:space="preserve">
-    <value>正在将更新 {0} 安装到 {1} ... </value>
+    <value>正在将更新 {0} 安装到 {1}... </value>
+  </data>
+  <data name="UPDATES_WIZARD_APPLYING_UPDATE_MULTIPLE_HOSTS" xml:space="preserve">
+    <value>正在将更新安装到 {0} 台服务器...</value>
   </data>
   <data name="UPDATES_WIZARD_APPLY_FAILED" xml:space="preserve">
     <value>更新无法应用。是否要查看输出?</value>
@@ -10810,7 +11082,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>{0}: VM {1} 使用本地存储，无法迁移。</value>
   </data>
   <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
-    <value>所选文件的扩展名无效。有效扩展名为: *.xsoem 和 *.xsupdate</value>
+    <value>所选文件的扩展名无效。有效扩展名为 *.xsupdate 和 *.iso</value>
   </data>
   <data name="UPDATES_WIZARD_NOT_ENOUGH_SPACE" xml:space="preserve">
     <value>此存储库空间不足，无法挂起所需的 VM。</value>
@@ -11027,8 +11299,23 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="UPLOADING_PATCH" xml:space="preserve">
     <value>正在上载更新...</value>
   </data>
+  <data name="UPLOADING_PATCH_PROGRESS" xml:space="preserve">
+    <value>正在上载 - {0}%</value>
+  </data>
   <data name="UPLOADING_PATCH_TO" xml:space="preserve">
-    <value>正在将更新上载到服务器“{0}”...</value>
+    <value>正在上载到服务器“{0}”...</value>
+  </data>
+  <data name="UPLOAD_PATCH_ALREADY_UPLOADED" xml:space="preserve">
+    <value>已上载</value>
+  </data>
+  <data name="UPLOAD_PATCH_DESCRIPTION" xml:space="preserve">
+    <value>正在上载...</value>
+  </data>
+  <data name="UPLOAD_PATCH_END_DESCRIPTION" xml:space="preserve">
+    <value>更新已成功上载到所选服务器</value>
+  </data>
+  <data name="UPLOAD_PATCH_TITLE" xml:space="preserve">
+    <value>上载</value>
   </data>
   <data name="UPSELL_BLURB_ALERTS" xml:space="preserve">
     <value>升级 XenServer 许可证以启用警报和报告功能。基于电子邮件的性能和错误警报将在错误情况或性能问题对关键服务产生影响之前，抢先将这些情况或问题通知给管理员。
@@ -11222,6 +11509,9 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="VDI_COPYING" xml:space="preserve">
     <value>正在将磁盘“{0}”从 SR“{1}”复制到 SR“{2}”</value>
   </data>
+  <data name="VDI_ON_SR_TITLE" xml:space="preserve">
+    <value>“{1}”{2} 上的 {0}</value>
+  </data>
   <data name="VENDOR_NAME" xml:space="preserve">
     <value>供应商</value>
   </data>
@@ -11286,7 +11576,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>工具已过期(已安装 {0} 版本)</value>
   </data>
   <data name="VIRTUALIZATION_UNKNOWN" xml:space="preserve">
-    <value>未知</value>
+    <value>未知(请稍候)</value>
   </data>
   <data name="VIRTUAL_DISK" xml:space="preserve">
     <value>虚拟磁盘</value>
@@ -11328,7 +11618,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>在池“{0}”中定义的 vApp: </value>
   </data>
   <data name="VM_APPLIANCES_DEFINED_FOR_SERVER" xml:space="preserve">
-    <value>在服务器 {0} 中定义的 vApp:</value>
+    <value>在服务器 {0} 中定义的 vApp: </value>
   </data>
   <data name="VM_APPLIANCES_MENU" xml:space="preserve">
     <value>管理 vApp(&amp;V)...</value>
@@ -11369,11 +11659,26 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="VM_APPLIANCE_SUMMARY" xml:space="preserve">
     <value>vApp 名称:\r\n    {0}\r\n\r\n所选 VM:\r\n    {1}</value>
   </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_CANNOT_RETRIEVE_DEFAULT" xml:space="preserve">
+    <value>无法获取默认云配置参数。</value>
+  </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_INCLUDED" xml:space="preserve">
+    <value>包括配置驱动器</value>
+  </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_NOT_INCLUDED" xml:space="preserve">
+    <value>不包括配置驱动器</value>
+  </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_READONLY" xml:space="preserve">
+    <value>仅当 VM 处于关闭状态时才能更改云配置参数。</value>
+  </data>
+  <data name="VM_CLOUD_CONFIG_DRIVE_UNAVAILABLE" xml:space="preserve">
+    <value>无法获取云配置参数。</value>
+  </data>
+  <data name="VM_ENLIGHTENMENT" xml:space="preserve">
+    <value>容器管理</value>
+  </data>
   <data name="VM_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>VM 常规属性</value>
-  </data>
-  <data name="VM_IN_POOL" xml:space="preserve">
-    <value>{1} 中的 {0}</value>
   </data>
   <data name="VM_LIVE_CHANGES_NOT_SUPPORTED_MESSAGE" xml:space="preserve">
     <value>内存和/或 VCPU 更改将在重新启动 VM 时生效。</value>
@@ -11408,9 +11713,6 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   <data name="VM_NOT_SUSPENDED" xml:space="preserve">
     <value>此 VM 未挂起。</value>
   </data>
-  <data name="VM_ON_SERVER" xml:space="preserve">
-    <value>“{1}”上的 {0}</value>
-  </data>
   <data name="VM_PAUSED" xml:space="preserve">
     <value>此 VM 已暂停。</value>
   </data>
@@ -11428,6 +11730,30 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="VM_PROTECTION_POLICY_SUCCEEDED" xml:space="preserve">
     <value>成功</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED" xml:space="preserve">
+    <value>此 VM 不使用读缓存</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_LICENSE" xml:space="preserve">
+    <value>未许可此池使用读缓存</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_NO_RO_IMAGE" xml:space="preserve">
+    <value>此 VM 没有任何只读磁盘或父磁盘为只读的磁盘</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_PREV_LICENSE" xml:space="preserve">
+    <value>未许可此池在启动 VM 时使用读缓存</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_SR_TYPE" xml:space="preserve">
+    <value>不支持在此 VM 使用的存储库类型上使用读缓存</value>
+  </data>
+  <data name="VM_READ_CACHING_DISABLED_REASON_TURNED_OFF" xml:space="preserve">
+    <value>读缓存在此 VM 使用的存储库上已禁用</value>
+  </data>
+  <data name="VM_READ_CACHING_ENABLED" xml:space="preserve">
+    <value>此 VM 使用读缓存</value>
+  </data>
+  <data name="VM_READ_CACHING_ENABLED_SEARCH" xml:space="preserve">
+    <value>使用读缓存</value>
   </data>
   <data name="VM_REVERTED" xml:space="preserve">
     <value>VM 已还原为“{0}”</value>
@@ -11508,7 +11834,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>切换到远程桌面(&amp;I)</value>
   </data>
   <data name="VNC_RDESKTOP_TURN_ON" xml:space="preserve">
-    <value>启用远程桌面(&amp;o)</value>
+    <value>打开远程桌面(&amp;O)</value>
   </data>
   <data name="VNC_REDOCK" xml:space="preserve">
     <value>重新停靠(&amp;R)</value>
@@ -11637,7 +11963,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>高级</value>
   </data>
   <data name="WLB_ADVANCED_CONFIGURATION_SUBTEXT" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="WLB_AUDIT_LOG_MAXIMUM" xml:space="preserve">
     <value>最大值</value>
@@ -11759,7 +12085,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>WLB 没有当前指标。</value>
   </data>
   <data name="WLB_ERROR_4017" xml:space="preserve">
-    <value>WLB 找不到带有所需存储库的主机来放置 VM。</value>
+    <value>WLB 找不到带有所需存储库的主机来放置 VM。 </value>
   </data>
   <data name="WLB_ERROR_4018" xml:space="preserve">
     <value>WLB 找不到所需的可用 CPU 来放置 VM。</value>
@@ -11826,7 +12152,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>未针对池“{0}”进行配置</value>
   </data>
   <data name="WLB_NO_PERMISSION_BLURB" xml:space="preserve">
-    <value>权限为“{0}”的用户无法更改 Workload Balancing 设置。</value>
+    <value>权限为“{0}”的用户无法更改 Workload Balancing 设置。 </value>
   </data>
   <data name="WLB_OPTIMIZATION_MODE" xml:space="preserve">
     <value>优化模式</value>
@@ -11862,7 +12188,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>指定在该池中放置 VM 时使用的优化模式。</value>
   </data>
   <data name="WLB_OPT_MODE_DENSITY_BLURB" xml:space="preserve">
-    <value>在每个服务器上放置尽可能多的 VM</value>
+    <value>在每个服务器上放置尽可能多的 VM </value>
   </data>
   <data name="WLB_OPT_MODE_MAXIMIZEDENSITY" xml:space="preserve">
     <value>最大化密度</value>
@@ -11871,7 +12197,7 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
     <value>最大化性能</value>
   </data>
   <data name="WLB_OPT_MODE_PERF_BLURB" xml:space="preserve">
-    <value>保证所放置 VM 的性能指标</value>
+    <value>保证所放置 VM 的性能指标 </value>
   </data>
   <data name="WLB_OPT_OK_NOTICE_TEXT" xml:space="preserve">
     <value>已成功优化。</value>
@@ -12355,36 +12681,5 @@ XenServer 可以重新启动服务器并将其 CPU 降至主服务器的级别�
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>您在此处</value>
-  </data>
-  <data name="ENTERPRISE_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>XenServer Enterprise Per-Socket (需要 {0})(&amp;E)</value>
-  </data>
-  <data name="STANDARD_PERSOCKET_LICENSES_X_REQUIRED" xml:space="preserve">
-    <value>XenServer Standard Per-Socket (需要 {0})(&amp;S)</value>
-  </data>
-  <data name="LICENSE_NOT_ELIGIBLE_FOR_SUPPORT" xml:space="preserve">
-    <value>不符合支持条件</value>
-  </data>
-  <data name="LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED" xml:space="preserve">
-    <value>符合支持条件 
-启用了 Enterprise 功能</value>
-  </data>
-  <data name="LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED" xml:space="preserve">
-    <value>符合支持条件 
-仅限 Standard 功能</value>
-  </data>
-  <data name="LICENSE_SERVER_WEB_CONSOLE_FORMAT" xml:space="preserve">
-    <value>http://{0}:{1}</value>
-  </data>
-  <data name="LICENSE_SERVER_WEB_CONSOLE_GOTO" xml:space="preserve">
-    <value>转至...</value>
-  </data>
-  <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
-    <value>符合支持条件 
-启用了 Desktop 功能</value>
-  </data>
-  <data name="LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED" xml:space="preserve">
-    <value>符合支持条件 
-启用了 Desktop+ 功能</value>
   </data>
 </root>

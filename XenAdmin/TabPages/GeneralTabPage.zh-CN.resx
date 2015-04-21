@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -117,13 +117,212 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="panel2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="panel2.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="panelReadCaching.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panelReadCaching.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="pdSectionReadCaching.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+  <data name="pdSectionReadCaching.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 5</value>
+  </data>
+  <data name="pdSectionReadCaching.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
+  </data>
+  <data name="pdSectionReadCaching.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="pdSectionReadCaching.SectionTitle" xml:space="preserve">
+    <value>读缓存</value>
+  </data>
+  <data name="pdSectionReadCaching.Size" type="System.Drawing.Size, System.Drawing">
+    <value>712, 34</value>
+  </data>
+  <data name="pdSectionReadCaching.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pdSectionReadCaching.Name" xml:space="preserve">
+    <value>pdSectionReadCaching</value>
+  </data>
+  <data name="&gt;&gt;pdSectionReadCaching.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;pdSectionReadCaching.Parent" xml:space="preserve">
+    <value>panelReadCaching</value>
+  </data>
+  <data name="&gt;&gt;pdSectionReadCaching.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelReadCaching.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panelReadCaching.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 792</value>
+  </data>
+  <data name="panelReadCaching.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 0, 5</value>
+  </data>
+  <data name="panelReadCaching.Size" type="System.Drawing.Size, System.Drawing">
+    <value>712, 44</value>
+  </data>
+  <data name="panelReadCaching.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;panelReadCaching.Name" xml:space="preserve">
+    <value>panelReadCaching</value>
+  </data>
+  <data name="&gt;&gt;panelReadCaching.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelReadCaching.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;panelReadCaching.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelDockerInfo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panelDockerInfo.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="pdSectionDockerInfo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="pdSectionDockerInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 5</value>
+  </data>
+  <data name="pdSectionDockerInfo.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
+  </data>
+  <data name="pdSectionDockerInfo.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="pdSectionDockerInfo.SectionTitle" xml:space="preserve">
+    <value>Docker 信息</value>
+  </data>
+  <data name="pdSectionDockerInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>712, 34</value>
+  </data>
+  <data name="pdSectionDockerInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerInfo.Name" xml:space="preserve">
+    <value>pdSectionDockerInfo</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerInfo.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerInfo.Parent" xml:space="preserve">
+    <value>panelDockerInfo</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerInfo.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelDockerInfo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panelDockerInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 748</value>
+  </data>
+  <data name="panelDockerInfo.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 0, 5</value>
+  </data>
+  <data name="panelDockerInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>712, 44</value>
+  </data>
+  <data name="panelDockerInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;panelDockerInfo.Name" xml:space="preserve">
+    <value>panelDockerInfo</value>
+  </data>
+  <data name="&gt;&gt;panelDockerInfo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelDockerInfo.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;panelDockerInfo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="panelDockerVersion.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panelDockerVersion.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="pdSectionDockerVersion.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="pdSectionDockerVersion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 5</value>
+  </data>
+  <data name="pdSectionDockerVersion.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 34</value>
+  </data>
+  <data name="pdSectionDockerVersion.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="pdSectionDockerVersion.SectionTitle" xml:space="preserve">
+    <value>Docker 版本</value>
+  </data>
+  <data name="pdSectionDockerVersion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>712, 34</value>
+  </data>
+  <data name="pdSectionDockerVersion.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerVersion.Name" xml:space="preserve">
+    <value>pdSectionDockerVersion</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerVersion.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerVersion.Parent" xml:space="preserve">
+    <value>panelDockerVersion</value>
+  </data>
+  <data name="&gt;&gt;pdSectionDockerVersion.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelDockerVersion.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panelDockerVersion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 704</value>
+  </data>
+  <data name="panelDockerVersion.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 0, 5</value>
+  </data>
+  <data name="panelDockerVersion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>712, 44</value>
+  </data>
+  <data name="panelDockerVersion.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;panelDockerVersion.Name" xml:space="preserve">
+    <value>panelDockerVersion</value>
+  </data>
+  <data name="&gt;&gt;panelDockerVersion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelDockerVersion.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;panelDockerVersion.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="panelStorageLinkSystemCapabilities.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -134,7 +333,6 @@
   <data name="pdSectionStorageLinkSystemCapabilities.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pdSectionStorageLinkSystemCapabilities.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 5</value>
   </data>
@@ -1376,139 +1574,6 @@
   </data>
   <data name="&gt;&gt;pageContainerPanel.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="panelDockerVersion.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="panelDockerVersion.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="pdSectionDockerVersion.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="pdSectionDockerVersion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 5</value>
-  </data>
-  <data name="pdSectionDockerVersion.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 34</value>
-  </data>
-  <data name="pdSectionDockerVersion.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="pdSectionDockerVersion.SectionTitle" xml:space="preserve">
-    <value>Docker Version</value>
-  </data>
-  <data name="pdSectionDockerVersion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 34</value>
-  </data>
-  <data name="pdSectionDockerVersion.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pdSectionDockerVersion.Name" xml:space="preserve">
-    <value>pdSectionDockerVersion</value>
-  </data>
-  <data name="&gt;&gt;pdSectionDockerVersion.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;pdSectionDockerVersion.Parent" xml:space="preserve">
-    <value>panelDockerVersion</value>
-  </data>
-  <data name="&gt;&gt;pdSectionDockerVersion.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="panelDockerVersion.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="panelDockerVersion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 39</value>
-  </data>
-  <data name="panelDockerVersion.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 5, 0, 5</value>
-  </data>
-  <data name="panelDockerVersion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 44</value>
-  </data>
-  <data name="panelDockerVersion.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="&gt;&gt;panelDockerVersion.Name" xml:space="preserve">
-    <value>panelDockerVersion</value>
-  </data>
-  <data name="&gt;&gt;panelDockerVersion.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelDockerVersion.Parent" xml:space="preserve">
-    <value>panel2</value>
-  </data>
-  <data name="&gt;&gt;panelDockerVersion.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="panelDockerInfo.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="panelDockerInfo.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="pdSectionDockerInfo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="pdSectionDockerInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 5</value>
-  </data>
-  <data name="pdSectionDockerInfo.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 34</value>
-  </data>
-  <data name="pdSectionDockerInfo.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="pdSectionDockerInfo.SectionTitle" xml:space="preserve">
-    <value>Docker Information</value>
-  </data>
-  <data name="pdSectionDockerInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 34</value>
-  </data>
-  <data name="pdSectionDockerInfo.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pdSectionDockerInfo.Name" xml:space="preserve">
-    <value>pdSectionDockerInfo</value>
-  </data>
-  <data name="&gt;&gt;pdSectionDockerInfo.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;pdSectionDockerInfo.Parent" xml:space="preserve">
-    <value>panelDockerInfo</value>
-  </data>
-  <data name="&gt;&gt;pdSectionDockerInfo.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="panelDockerInfo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="panelDockerInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 704</value>
-  </data>
-  <data name="panelDockerInfo.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 5, 0, 5</value>
-  </data>
-  <data name="panelDockerInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 44</value>
-  </data>
-  <data name="panelDockerInfo.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;panelDockerInfo.Name" xml:space="preserve">
-    <value>panelDockerInfo</value>
-  </data>
-  <data name="&gt;&gt;panelDockerInfo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelDockerInfo.Parent" xml:space="preserve">
-    <value>panel2</value>
-  </data>
-  <data name="&gt;&gt;panelDockerInfo.ZOrder" xml:space="preserve">
-    <value>17</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

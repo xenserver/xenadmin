@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -205,16 +205,16 @@
     <value>请在导出前关闭或挂起虚拟机 {0}。</value>
   </data>
   <data name="EXPORT_PROMPT" xml:space="preserve">
-    <value>导出:</value>
+    <value>导出: </value>
   </data>
   <data name="FAILURE_PROMPT" xml:space="preserve">
     <value>故障</value>
   </data>
   <data name="FILES_TRANSPORT_CLEANUP" xml:space="preserve">
-    <value>正在与虚拟磁盘 {0} 断开连接...</value>
+    <value>正在与虚拟磁盘 {0} 断开连接... </value>
   </data>
   <data name="FILES_TRANSPORT_SETUP" xml:space="preserve">
-    <value>正在连接虚拟磁盘 {0}...</value>
+    <value>正在连接虚拟磁盘 {0}... </value>
   </data>
   <data name="FILE_MISSING" xml:space="preserve">
     <value>找不到 {0}。</value>
@@ -223,7 +223,7 @@
     <value>无法导入虚拟磁盘文件。</value>
   </data>
   <data name="IMPORT_PROMPT" xml:space="preserve">
-    <value>导入:</value>
+    <value>导入: </value>
   </data>
   <data name="ISCSI_COPY_CANCELLED" xml:space="preserve">
     <value>已取消虚拟磁盘 {0} 的传输。</value>
@@ -232,7 +232,7 @@
     <value>无法传输虚拟磁盘 {0}。</value>
   </data>
   <data name="ISCSI_COPY_PROGRESS" xml:space="preserve">
-    <value>正在传输虚拟磁盘 {0}...</value>
+    <value>正在传输虚拟磁盘 {0}... </value>
   </data>
   <data name="ISCSI_ERROR" xml:space="preserve">
     <value>无法通过 iSCSI 连接虚拟磁盘。</value>
@@ -259,10 +259,10 @@
     <value>导出的虚拟磁盘与源磁盘不匹配。</value>
   </data>
   <data name="ISCSI_VERIFY_PROGRESS" xml:space="preserve">
-    <value>正在验证磁盘 {0}...</value>
+    <value>正在验证磁盘 {0}... </value>
   </data>
   <data name="ISCSI_WIM_PROGRESS_FORMAT" xml:space="preserve">
-    <value>正在从 WIM 传输 {1} 个文件中的第 {0} 个文件 {2} ...</value>
+    <value>正在从 WIM 传输 {1} 个文件中的第 {0} 个文件 {2} ... </value>
   </data>
   <data name="ISO" xml:space="preserve">
     <value>ISO</value>
@@ -271,13 +271,13 @@
     <value>存储库 {0} 的可用空间不足 {1} 字节，无法导入虚拟磁盘 {2}。</value>
   </data>
   <data name="START_FILE_DECRYPTION" xml:space="preserve">
-    <value>正在解密 {0}...</value>
+    <value>正在解密 {0}... </value>
   </data>
   <data name="START_FILE_EXPANSION" xml:space="preserve">
-    <value>正在展开 {0}...</value>
+    <value>正在展开 {0}... </value>
   </data>
   <data name="START_POST_INSTALL_INSTRUCTIONS" xml:space="preserve">
-    <value>正在配置 XenServer 的虚拟机...</value>
+    <value>正在配置 XenServer 的虚拟机... </value>
   </data>
   <data name="UNDEFINED_NAME_LABEL" xml:space="preserve">
     <value>已导入。</value>

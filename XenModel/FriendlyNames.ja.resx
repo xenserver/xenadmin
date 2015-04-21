@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -151,7 +151,7 @@
     <value>VM の再起動を常に試行します</value>
   </data>
   <data name="Description-host.system_status-CVSM" xml:space="preserve">
-    <value>Citrix StorageLink の構成</value>
+    <value>Citrix StorageLink の構成設定</value>
   </data>
   <data name="Description-host.system_status-X11" xml:space="preserve">
     <value>X サーバーのログ ファイル</value>
@@ -172,7 +172,7 @@
     <value>デバイス エミュレーション ログ</value>
   </data>
   <data name="Description-host.system_status-disk-info" xml:space="preserve">
-    <value>パーティションテーブル、空き容量、iSCSI と LVM の設定</value>
+    <value>パーティションテーブル、空き容量、iSCSI と LVM の構成</value>
   </data>
   <data name="Description-host.system_status-filesystem_summarise" xml:space="preserve">
     <value>Dom 0 で変更されたファイルの一覧</value>
@@ -196,16 +196,16 @@
     <value>サーバー クラッシュ時のログ ファイル</value>
   </data>
   <data name="Description-host.system_status-kernel-info" xml:space="preserve">
-    <value>カーネル モジュール、ファイルシステム デバイス、およびカーネル設定の詳細</value>
+    <value>カーネル モジュール、ファイルシステム デバイス、およびカーネル構成の詳細</value>
   </data>
   <data name="Description-host.system_status-loopback-devices" xml:space="preserve">
     <value>ループバック デバイスの詳細</value>
   </data>
   <data name="Description-host.system_status-multipath" xml:space="preserve">
-    <value>サーバーのストレージのマルチパス設定を取得します</value>
+    <value>サーバーのストレージのマルチパス構成を取得します</value>
   </data>
   <data name="Description-host.system_status-network-config" xml:space="preserve">
-    <value>ネットワーク インターフェイスの表示に使用される設定ファイル。名前解決の機能を提供し、ファイアウォールを有効にします</value>
+    <value>ネットワーク インターフェイスの表示に使用される構成ファイル。名前解決の機能を提供し、ファイアウォールを有効にします</value>
   </data>
   <data name="Description-host.system_status-network-status" xml:space="preserve">
     <value>ネットワーク インターフェイス、ルーティング テーブル、ファイアウォールの現在の状態</value>
@@ -214,7 +214,7 @@
     <value>OEM プロバイダ固有のデータを収集します。</value>
   </data>
   <data name="Description-host.system_status-pam" xml:space="preserve">
-    <value>XenServer の PAM (Pluggable Authentication Modules) により使用される設定ファイルです。</value>
+    <value>XenServer の PAM (Pluggable Authentication Modules) により使用される構成ファイルです。</value>
   </data>
   <data name="Description-host.system_status-persistent-stats" xml:space="preserve">
     <value>永続的なパフォーマンス統計値</value>
@@ -223,13 +223,13 @@
     <value>実行中のすべてのプロセスをツリー形式で一覧表示します</value>
   </data>
   <data name="Description-host.system_status-system-info" xml:space="preserve">
-    <value>システム設定</value>
+    <value>システム構成</value>
   </data>
   <data name="Description-host.system_status-system-logs" xml:space="preserve">
     <value>さまざまなシステム プロセスのアクティビティを記録したログ ファイル</value>
   </data>
   <data name="Description-host.system_status-system-services" xml:space="preserve">
-    <value>設定されているシステム サービスの一覧</value>
+    <value>構成されているシステム サービスの一覧</value>
   </data>
   <data name="Description-host.system_status-tapdisk-logs" xml:space="preserve">
     <value>ストレージ サブシステム ログ</value>
@@ -256,7 +256,7 @@
     <value>VM 内部診断</value>
   </data>
   <data name="Description-host.system_status-xenserver-config" xml:space="preserve">
-    <value>XenServer のバージョンとビルドの情報、プライマリ ハード ディスクの場所、プール設定などの詳細</value>
+    <value>XenServer のバージョンとビルドの情報、プライマリ ハード ディスクの場所、プール構成などの詳細</value>
   </data>
   <data name="Description-host.system_status-xenserver-databases" xml:space="preserve">
     <value>XenServer の状態に関する情報を格納するデータベース</value>
@@ -292,7 +292,7 @@
     <value>XML ノード '{0}' を認識できませんでした。</value>
   </data>
   <data name="Exception-PowerShellExecutionPolicyRestricted" xml:space="preserve">
-    <value>PowerShell の 'ExecutionPolicy' が 'Restricted' の場合、XenServerPSSnapIn をロードできません。</value>
+    <value>PowerShell の 'ExecutionPolicy' が 'Restricted' の場合、XenServerPSSnapIn を読み込めません。</value>
   </data>
   <data name="Exception-PowerShellNotPresent" xml:space="preserve">
     <value>PowerShell プラグインを使用するには、PowerShell をインストールしておく必要があります。PowerShell は、Microsoft 社の Web サイトからダウンロードできます。</value>
@@ -424,7 +424,7 @@
     <value>P2V ソース マシン</value>
   </data>
   <data name="Label-VM.PV_args" xml:space="preserve">
-    <value>OS 起動パラメータ</value>
+    <value>OS 起動パラメーター</value>
   </data>
   <data name="Label-VM.PrivateDnsName" xml:space="preserve">
     <value>プライベート DNS エントリ</value>
@@ -529,7 +529,7 @@
     <value>VM</value>
   </data>
   <data name="Label-host.XenMemory" xml:space="preserve">
-    <value>Xen</value>
+    <value>XenServer</value>
   </data>
   <data name="Label-host.address" xml:space="preserve">
     <value>アドレス</value>
@@ -538,22 +538,22 @@
     <value>Toolstack アップタイム</value>
   </data>
   <data name="Label-host.edition" xml:space="preserve">
-    <value>エディション</value>
+    <value>ライセンス</value>
   </data>
   <data name="Label-host.edition-advanced" xml:space="preserve">
-    <value>Citrix XenServer Advanced Edition</value>
+    <value>XenServer Advanced Edition</value>
   </data>
   <data name="Label-host.edition-enterprise" xml:space="preserve">
-    <value>Citrix XenServer Enterprise Edition</value>
+    <value>XenServer Enterprise Edition</value>
   </data>
   <data name="Label-host.edition-enterprise-xd" xml:space="preserve">
-    <value>Citrix XenServer for XenDesktop</value>
+    <value>XenServer for XenDesktop</value>
   </data>
   <data name="Label-host.edition-free" xml:space="preserve">
-    <value>Citrix XenServer</value>
+    <value>XenServer</value>
   </data>
   <data name="Label-host.edition-platinum" xml:space="preserve">
-    <value>Citrix XenServer Platinum Edition</value>
+    <value>XenServer Platinum Edition</value>
   </data>
   <data name="Label-host.enabled" xml:space="preserve">
     <value>有効</value>
@@ -595,7 +595,7 @@
     <value>名前</value>
   </data>
   <data name="Label-host.pool_members" xml:space="preserve">
-    <value>プール メンバ</value>
+    <value>プール メンバー</value>
   </data>
   <data name="Label-host.sku_type-FG-dell_xe_enterprise" xml:space="preserve">
     <value>Citrix Essentials for XenServer, Dell Enterprise Edition</value>
@@ -661,7 +661,7 @@
     <value>XenServer バージョン</value>
   </data>
   <data name="Label-host.system_status-CVSM" xml:space="preserve">
-    <value>Citrix StorageLink 設定</value>
+    <value>Citrix StorageLink 構成</value>
   </data>
   <data name="Label-host.system_status-X11" xml:space="preserve">
     <value>X サーバー ログ</value>
@@ -673,7 +673,7 @@
     <value>ユーザー作成のバイナリ オブジェクト</value>
   </data>
   <data name="Label-host.system_status-boot-loader" xml:space="preserve">
-    <value>ブート ローダー設定</value>
+    <value>ブート ローダー構成</value>
   </data>
   <data name="Label-host.system_status-client-logs" xml:space="preserve">
     <value>XenCenter ログ</value>
@@ -712,7 +712,7 @@
     <value>ループバック デバイス</value>
   </data>
   <data name="Label-host.system_status-multipath" xml:space="preserve">
-    <value>マルチパス設定</value>
+    <value>マルチパス構成</value>
   </data>
   <data name="Label-host.system_status-network-config" xml:space="preserve">
     <value>ネットワーク スクリプト</value>
@@ -724,7 +724,7 @@
     <value>OEM 固有のログ</value>
   </data>
   <data name="Label-host.system_status-pam" xml:space="preserve">
-    <value>認証モジュール設定</value>
+    <value>認証モジュール構成</value>
   </data>
   <data name="Label-host.system_status-persistent-stats" xml:space="preserve">
     <value>永続的統計値</value>
@@ -733,7 +733,7 @@
     <value>プロセス一覧</value>
   </data>
   <data name="Label-host.system_status-system-info" xml:space="preserve">
-    <value>システム設定</value>
+    <value>システム構成</value>
   </data>
   <data name="Label-host.system_status-system-logs" xml:space="preserve">
     <value>システム ログ</value>
@@ -760,13 +760,13 @@
     <value>XenServer デーモン サブプロセス</value>
   </data>
   <data name="Label-host.system_status-xen-info" xml:space="preserve">
-    <value>ハイパーバイザー設定</value>
+    <value>ハイパーバイザー構成</value>
   </data>
   <data name="Label-host.system_status-xenopsd" xml:space="preserve">
     <value>VM 内部診断</value>
   </data>
   <data name="Label-host.system_status-xenserver-config" xml:space="preserve">
-    <value>XenServer 設定</value>
+    <value>XenServer 構成</value>
   </data>
   <data name="Label-host.system_status-xenserver-databases" xml:space="preserve">
     <value>XenServer データベース</value>
@@ -1134,7 +1134,7 @@
     <value>サーバー '{0}' の起動時にストレージ リポジトリを接続できませんでした。[ストレージ] メニューの [修復] でこの問題を解決できる場合があります。</value>
   </data>
   <data name="Message.body-pool_master_transition" xml:space="preserve">
-    <value>現在、サーバー '{0}' がプール '{1}' のマスタとして動作しています。</value>
+    <value>現在、サーバー '{0}' がプール '{1}' のマスターとして動作しています。</value>
   </data>
   <data name="Message.body-vbd_qos_failed" xml:space="preserve">
     <value>仮想マシン '{1}' のディスク '{0}' の QoS (サービス品質) 設定を適用できません。</value>
@@ -1182,10 +1182,10 @@
     <value>スケジュールされているスナップショットが正しくアーカイブされました。</value>
   </data>
   <data name="Message.body-vmpp_archive_target_mount_failed" xml:space="preserve">
-    <value>この保護ポリシーのアーカイブ先として指定されているリモートの CIFS または NFS 共有をマウントできません。VMPR のアーカイブ先の設定を確認してください。</value>
+    <value>この保護ポリシーのアーカイブ先として指定されているリモートの CIFS または NFS 共有をマウントできません。VMPR のアーカイブ先の構成を確認してください。</value>
   </data>
   <data name="Message.body-vmpp_archive_target_unmount_failed" xml:space="preserve">
-    <value>この保護ポリシーのアーカイブ先として指定されているリモートの CIFS または NFS 共有をアンマウントできません。ローカル ディレクトリが正しくマウントされており、ハンドルが開いていないことを確認してください。</value>
+    <value>この保護ポリシーのアーカイブ先として指定されているリモートの CIFS または NFS 共有をマウント解除できません。ローカル ディレクトリが正しくマウントされており、ハンドルが開いていないことを確認してください。</value>
   </data>
   <data name="Message.body-vmpp_backup_succeeded" xml:space="preserve">
     <value>バックアップ成功</value>
@@ -1323,7 +1323,7 @@
     <value>XenServer 統計値の同期の失敗</value>
   </data>
   <data name="Message.name-ip_configured_pif_can_unplug" xml:space="preserve">
-    <value>ネットワーク設定の問題</value>
+    <value>ネットワーク構成の問題</value>
   </data>
   <data name="Message.name-license_does_not_support_pooling" xml:space="preserve">
     <value>プール機能をサポートしないライセンス</value>
@@ -1359,7 +1359,7 @@
     <value>サーバー起動時のストレージ接続の失敗</value>
   </data>
   <data name="Message.name-pool_master_transition" xml:space="preserve">
-    <value>プール マスタの変更</value>
+    <value>プール マスターの変更</value>
   </data>
   <data name="Message.name-vbd_qos_failed" xml:space="preserve">
     <value>VM ディスク QoS の失敗</value>
@@ -1410,7 +1410,7 @@
     <value>VMPR アーカイブ処理に失敗しました</value>
   </data>
   <data name="Message.name-vmpp_archive_target_unmount_failed" xml:space="preserve">
-    <value>VMPR のアーカイブ先をアンマウントできません</value>
+    <value>VMPR のアーカイブ先をマウント解除できません</value>
   </data>
   <data name="Message.name-vmpp_backup_succeeded" xml:space="preserve">
     <value>バックアップ成功</value>
@@ -1465,14 +1465,14 @@
     <value>プール管理者</value>
   </data>
   <data name="Role.pool-operator.Description" xml:space="preserve">
-    <value>プール オペレータはプール全体のリソースを管理し、ストレージのセットアップ、パッチ管理、およびリソース プール作成などを行います。
+    <value>プール オペレーターはプール全体のリソースを管理し、ストレージのセットアップ、パッチ管理、およびリソース プール作成などを行います。
  
-- プール リソースの設定
+- プール リソースの構成
 - 高可用性機能 (HA)、ワークロード バランス (WLB)、およびパッチ管理機能への完全なアクセス
 - 役割管理は不可</value>
   </data>
   <data name="Role.pool-operator.NameLabel" xml:space="preserve">
-    <value>プール オペレータ</value>
+    <value>プール オペレーター</value>
   </data>
   <data name="Role.read-only.Description" xml:space="preserve">
     <value>読み取り専用の役割では、基本的な読み取りアクセスが付与されます。この役割のユーザーは、サーバーに接続して内容を表示できますが、コマンドを実行したり設定を変更したりすることはできません。
@@ -1494,14 +1494,14 @@
     <value>VM 管理者</value>
   </data>
   <data name="Role.vm-operator.Description" xml:space="preserve">
-    <value>VM オペレータは、特定のリソース プールの VM にアクセスできます。VM のコンソールを使用でき、サーバーのリソースが許す限り VM の起動や停止を実行できます。
+    <value>VM オペレーターは、特定のリソース プールの VM にアクセスできます。VM のコンソールを使用でき、サーバーのリソースが許す限り VM の起動や停止を実行できます。
  
 - VM コンソールへの完全なアクセス
 - 基本的な VM ライフサイクル制御
 - VM プロパティやサーバー リソースの変更は不可</value>
   </data>
   <data name="Role.vm-operator.NameLabel" xml:space="preserve">
-    <value>VM オペレータ</value>
+    <value>VM オペレーター</value>
   </data>
   <data name="Role.vm-power-admin.Description" xml:space="preserve">
     <value>VM パワー管理者には、VM およびテンプレートに対する完全な管理権限が付与されます。VM の実行サーバーを選択したり、動的メモリ制御 (DMC) やホーム サーバーを設定したりできます。
@@ -1629,10 +1629,10 @@
     <value>解放されるメモリ (概算値)</value>
   </data>
   <data name="Label-host.edition-per-socket" xml:space="preserve">
-    <value>Citrix XenServer Per-Socket Edition</value>
+    <value>XenServer Per-Socket</value>
   </data>
   <data name="Label-host.edition-xendesktop" xml:space="preserve">
-    <value>Citrix XenServer for XenDesktop</value>
+    <value>XenServer for XenDesktop</value>
   </data>
   <data name="Message.help-extauth_init_in_host_failed" xml:space="preserve">
     <value>AD のヘルプ</value>
@@ -1677,7 +1677,7 @@
     <value>{0} {1} メモリ使用率</value>
   </data>
   <data name="Label-host.edition-free/libre" xml:space="preserve">
-    <value>Citrix XenServer</value>
+    <value>XenServer</value>
   </data>
   <data name="Message.name-SRUnavailable" xml:space="preserve">
     <value>SR が既に使用中であるため空き領域を解放できません</value>
@@ -1707,16 +1707,16 @@
     <value>ライセンス サーバーのバージョンが古すぎます。</value>
   </data>
   <data name="Label-host.edition-enterprise-per-socket" xml:space="preserve">
-    <value>Citrix XenServer Enterprise Per Socket Edition</value>
+    <value>XenServer Enterprise Per-Socket</value>
   </data>
   <data name="Label-host.edition-enterprise-per-user" xml:space="preserve">
-    <value>Citrix XenServer Enterprise Per User Edition</value>
+    <value>XenServer Enterprise Per-User</value>
   </data>
   <data name="Label-host.edition-standard-per-socket" xml:space="preserve">
-    <value>Citrix XenServer Standard Per Socket Edition</value>
+    <value>XenServer Standard Per-Socket</value>
   </data>
   <data name="Label-host.edition-xendesktop-platinum" xml:space="preserve">
-    <value>Citrix XenDesktop Platinum</value>
+    <value>XenDesktop Platinum</value>
   </data>
   <data name="Message.help-license_expired" xml:space="preserve">
     <value>ライセンスのヘルプ</value>
@@ -1737,9 +1737,21 @@
     <value>ライセンスのヘルプ</value>
   </data>
   <data name="Label-host.edition-desktop" xml:space="preserve">
-    <value>Citrix XenServer Desktop Edition</value>
+    <value>XenApp/XenDesktop</value>
   </data>
   <data name="Label-host.edition-desktop-plus" xml:space="preserve">
-    <value>Citrix XenServer Desktop+ Edition</value>
+    <value>XenApp/XenDesktop Platinum</value>
+  </data>
+  <data name="Label-Supplemental_packs.installed" xml:space="preserve">
+    <value>インストールされたサプリメンタル パック</value>
+  </data>
+  <data name="Label-VM.read_caching_status" xml:space="preserve">
+    <value>状態</value>
+  </data>
+  <data name="Label-VM.read_caching_disks" xml:space="preserve">
+    <value>ディスク</value>
+  </data>
+  <data name="Label-VM.read_caching_reason" xml:space="preserve">
+    <value>理由</value>
   </data>
 </root>
