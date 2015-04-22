@@ -581,6 +581,8 @@ namespace XenAdmin.ConsoleView
             }
             else
             {
+                if (!RedirectingClipboard())
+                    return;
                 Program.Invoke(this, delegate()
                 {
                     if (Clipboard.ContainsText() && Clipboard.GetText() == text)
