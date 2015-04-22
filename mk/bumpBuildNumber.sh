@@ -45,7 +45,7 @@ else
 fi
 
 url="${JENKINS_SERVER}/job/${get_JOB_NAME}/"
-if curl -s --head --fail "${url}"; then
+if curl --insecure -s --head --fail "${url}"; then
   echo "URL exists: ${url}"
 else
   echo "URL does not exist: ${url}"
