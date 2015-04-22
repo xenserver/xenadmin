@@ -44,7 +44,7 @@ namespace XenAdminTests.WizardTests.tampa_cpm_one_and_two_host_pools
     internal class CrossPoolMigrateWizardTest : CrossPoolMigrateWizardTestBase
     {
         public CrossPoolMigrateWizardTest()
-            : base(new[] { "Destination", "Storage", "Networking", "Live Migration Network", "Finish" }, true, true)
+            : base(new[] { "Destination Pool", "Storage", "Networking", "Migration Network", "Finish" }, true, true)
         {
             TargetPool = "PoolOfOne";
             SourcePool = "16And23";
@@ -56,7 +56,7 @@ namespace XenAdminTests.WizardTests.tampa_cpm_one_and_two_host_pools
     internal class CrossPoolMigrateWizardIntraPoolTest : CrossPoolMigrateWizardTestBase
     {
         public CrossPoolMigrateWizardIntraPoolTest()
-            : base(new[] { "Destination", "Storage", "Live Migration Network", "Finish" }, true, true)
+            : base(new[] { "Destination Pool", "Storage", "Migration Network", "Finish" }, true, true)
         {
             TargetPool = SourcePool = "16And23";
             Vm = "16local";
@@ -84,7 +84,7 @@ namespace XenAdminTests.WizardTests.tampa_cpm_one_and_two_host_pools
 
         protected override void TestPage(string pageName)
         {
-            if (pageName == "Destination")
+            if (pageName == "Destination Pool")
                 MW(()=>
                        {
                            Thread.Sleep(1000); //Allow the destination combo box to populate

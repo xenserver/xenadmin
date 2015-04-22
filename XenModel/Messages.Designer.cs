@@ -8277,7 +8277,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Live Migration Network:.
+        ///   Looks up a localized string similar to Migration Network:.
         /// </summary>
         public static string CPM_SUMMARY_KEY_TRANSFER_NETWORK {
             get {
@@ -8414,7 +8414,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The wizard is ready to begin migrating the selected VMs using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to migrate the VMs and close the wizard..
+        ///   Looks up a localized string similar to The wizard is ready to begin migrating the selected VMs using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to migrate the VMs..
         /// </summary>
         public static string CPM_WIZARD_FINISH_PAGE_INTRO {
             get {
@@ -8423,7 +8423,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The wizard is ready to begin copying the selected VMs using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to copy the VMs and close the wizard..
+        ///   Looks up a localized string similar to The wizard is ready to begin copying the selected VMs using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to copy the VMs..
         /// </summary>
         public static string CPM_WIZARD_FINISH_PAGE_INTRO_COPY {
             get {
@@ -8432,7 +8432,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The wizard is ready to begin copying the selected VM using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to copy the VM and close the wizard..
+        ///   Looks up a localized string similar to The wizard is ready to begin copying the selected VM using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to copy the VM..
         /// </summary>
         public static string CPM_WIZARD_FINISH_PAGE_INTRO_COPY_SINGLE {
             get {
@@ -8441,7 +8441,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The wizard is ready to begin migrating the selected VM using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to migrate the VM and close the wizard..
+        ///   Looks up a localized string similar to The wizard is ready to begin migrating the selected VM using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to migrate the VM..
         /// </summary>
         public static string CPM_WIZARD_FINISH_PAGE_INTRO_SINGLE {
             get {
@@ -8486,7 +8486,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Map the VM&apos;s virtual network interfaces to networks in the destination pool or standalone server..
+        ///   Looks up a localized string similar to Map the virtual network interfaces in the selected VM to networks in the destination pool or standalone server..
         /// </summary>
         public static string CPM_WIZARD_NETWORKING_INTRO_SINGLE {
             get {
@@ -8531,7 +8531,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Live Migration Network.
+        ///   Looks up a localized string similar to Migration Network.
         /// </summary>
         public static string CPM_WIZARD_SELECT_TRANSFER_NETWORK_PAGE_TEXT {
             get {
@@ -8540,7 +8540,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configure storage live migration settings.
+        ///   Looks up a localized string similar to Configure storage migration settings.
         /// </summary>
         public static string CPM_WIZARD_SELECT_TRANSFER_NETWORK_TITLE {
             get {
