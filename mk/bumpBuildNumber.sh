@@ -39,7 +39,7 @@ source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
 
 if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
 then
-    JENKINS_SERVER=http://tizon-1.xs.cbg.ccsi.eng.citrite.net:8080
+    JENKINS_SERVER=https://jenkins-dev.xs.cbg.ccsi.eng.citrite.net
 else
     JENKINS_SERVER=http://tocco.uk.xensource.com:8080
 fi
