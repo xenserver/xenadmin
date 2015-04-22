@@ -208,7 +208,11 @@ namespace XenAdmin.Wizards.GenericPages
 
 				return m_vmMappings;
 			}
-			set { m_vmMappings = value; }
+			set
+			{
+			    m_vmMappings = value;
+                InitializeText();
+			}
 		}
 
         protected void SetButtonNextEnabled(bool enabled)

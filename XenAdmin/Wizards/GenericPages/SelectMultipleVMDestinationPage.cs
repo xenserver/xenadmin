@@ -96,7 +96,7 @@ namespace XenAdmin.Wizards.GenericPages
             base.PageLeave(direction, ref cancel);
         }
 
-	    private void InitializeText()
+	    protected void InitializeText()
 	    {
 	        m_labelIntro.Text = InstructionText;
 	        label1.Text = HomeServerText;

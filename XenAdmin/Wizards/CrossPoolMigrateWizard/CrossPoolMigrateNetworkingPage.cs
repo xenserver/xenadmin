@@ -50,7 +50,10 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         /// </summary>
         public override string Text { get { return Messages.CPM_WIZARD_SELECT_NETWORK_PAGE_TEXT; } }
 
-        public override string IntroductionText { get { return Messages.CPM_WIZARD_NETWORKING_INTRO; } }
+        public override string IntroductionText
+        {
+            get { return VmMappings != null && VmMappings.Count > 1 ? Messages.CPM_WIZARD_NETWORKING_INTRO : Messages.CPM_WIZARD_NETWORKING_INTRO_SINGLE; }
+        }
 
         public override string TableIntroductionText { get { return Messages.CPM_WIZARD_VM_SELECTION_INTRODUCTION; } }
 

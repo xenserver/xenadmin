@@ -30,8 +30,6 @@
  */
 
 using System.Collections.Generic;
-using System.Drawing;
-using XenAdmin.Dialogs;
 using XenAdmin.Wizards.CrossPoolMigrateWizard.Filters;
 using XenAdmin.Wizards.GenericPages;
 using XenAPI;
@@ -42,15 +40,19 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
     {
         private Host preSelectedHost;
         private List<VM> selectedVMs;
-        public CrossPoolMigrateDestinationPage(): this(null, null)
+        private WizardMode wizardMode;
+        
+        public CrossPoolMigrateDestinationPage(): this(null, null, WizardMode.Migrate)
         {
         }
 
-        public CrossPoolMigrateDestinationPage(Host preSelectedHost, List<VM> selectedVMs)
+        public CrossPoolMigrateDestinationPage(Host preSelectedHost, List<VM> selectedVMs, WizardMode wizardMode)
         {
             this.preSelectedHost = preSelectedHost;
             SetDefaultTarget(preSelectedHost);
             this.selectedVMs = selectedVMs;
+            this.wizardMode = wizardMode;
+            InitializeText();
         }
 
         public override bool EnableNext()
@@ -78,7 +80,15 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         /// </summary>
         public override string Text { get { return Messages.CPM_WIZARD_DESTINATION_TAB_TITLE; } }
 
-        protected override string InstructionText { get { return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS; } }
+        protected override string InstructionText 
+        {
+            get
+            {
+                if (selectedVMs != null && selectedVMs.Count > 1)
+                    return wizardMode == WizardMode.Copy ? Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY : Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS;
+                return wizardMode == WizardMode.Copy ? Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE : Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_SINGLE;
+            }
+        }
 
         protected override string HomeServerText { get { return Messages.CPM_WIZARD_DESTINATION_DESTINATION; } }
 

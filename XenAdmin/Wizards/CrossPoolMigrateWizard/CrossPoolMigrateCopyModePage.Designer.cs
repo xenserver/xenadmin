@@ -33,6 +33,8 @@
             this.labelRubric = new System.Windows.Forms.Label();
             this.intraPoolRadioButton = new System.Windows.Forms.RadioButton();
             this.crossPoolRadioButton = new System.Windows.Forms.RadioButton();
+            this.intraPoolDescriptionLabel = new System.Windows.Forms.Label();
+            this.crossPoolDescriptionLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,7 +43,9 @@
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.labelRubric, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.intraPoolRadioButton, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.crossPoolRadioButton, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.crossPoolRadioButton, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.intraPoolDescriptionLabel, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.crossPoolDescriptionLabel, 0, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // labelRubric
@@ -63,6 +67,18 @@
             this.crossPoolRadioButton.TabStop = true;
             this.crossPoolRadioButton.UseVisualStyleBackColor = true;
             // 
+            // intraPoolDescriptionLabel
+            // 
+            this.intraPoolDescriptionLabel.AutoEllipsis = true;
+            resources.ApplyResources(this.intraPoolDescriptionLabel, "intraPoolDescriptionLabel");
+            this.intraPoolDescriptionLabel.Name = "intraPoolDescriptionLabel";
+            // 
+            // crossPoolDescriptionLabel
+            // 
+            this.crossPoolDescriptionLabel.AutoEllipsis = true;
+            resources.ApplyResources(this.crossPoolDescriptionLabel, "crossPoolDescriptionLabel");
+            this.crossPoolDescriptionLabel.Name = "crossPoolDescriptionLabel";
+            // 
             // CrossPoolMigrateCopyModePage
             // 
             resources.ApplyResources(this, "$this");
@@ -81,6 +97,8 @@
         private System.Windows.Forms.Label labelRubric;
         private System.Windows.Forms.RadioButton intraPoolRadioButton;
         private System.Windows.Forms.RadioButton crossPoolRadioButton;
+        private System.Windows.Forms.Label intraPoolDescriptionLabel;
+        private System.Windows.Forms.Label crossPoolDescriptionLabel;
 
 
 

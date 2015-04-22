@@ -8023,7 +8023,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Provide a name and a description (optional) for the new template and then select a copy mode. Depending on your choice, you might need to select a storage repository for the template..
+        ///   Looks up a localized string similar to Provide a name and a description (optional) for the new template and then select a copy mode..
         /// </summary>
         public static string COPY_TEMPLATE_INTRA_POOL_RUBRIC {
             get {
@@ -8104,7 +8104,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Provide a name and a description (optional) for the new VM and then select a copy mode. Depending on your choice, you might need to select a storage repository for the VM..
+        ///   Looks up a localized string similar to Provide a name and a description (optional) for the new VM and then select a copy mode..
         /// </summary>
         public static string COPY_VM_INTRA_POOL_RUBRIC {
             get {
@@ -8250,7 +8250,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Migrate VM:.
+        ///   Looks up a localized string similar to VM:.
         /// </summary>
         public static string CPM_SUMMARY_KEY_MIGRATE_VM {
             get {
@@ -8277,7 +8277,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Live Migration Network:.
+        ///   Looks up a localized string similar to Migration Network:.
         /// </summary>
         public static string CPM_SUMMARY_KEY_TRANSFER_NETWORK {
             get {
@@ -8304,7 +8304,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pl&amp;ace all migrated virtual disks on the same SR:.
+        ///   Looks up a localized string similar to Pl&amp;ace all virtual disks on the same SR:.
         /// </summary>
         public static string CPM_WIZARD_ALL_ON_SAME_SR_RADIO {
             get {
@@ -8313,7 +8313,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copy mode.
+        ///   Looks up a localized string similar to Destination.
         /// </summary>
         public static string CPM_WIZARD_COPY_MODE_TAB_TITLE {
             get {
@@ -8322,7 +8322,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copy mode.
+        ///   Looks up a localized string similar to Destination.
         /// </summary>
         public static string CPM_WIZARD_COPY_MODE_TITLE {
             get {
@@ -8340,7 +8340,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select the pool or standalone server where you want to migrate the selected VM(s)..
+        ///   Looks up a localized string similar to Select the pool or standalone server where you want to migrate the selected VMs to..
         /// </summary>
         public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS {
             get {
@@ -8349,7 +8349,34 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Destination.
+        ///   Looks up a localized string similar to Select the pool or standalone server where you want to copy the selected VMs to..
+        /// </summary>
+        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the pool or standalone server where you want to copy the selected VM to..
+        /// </summary>
+        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the pool or standalone server where you want to migrate the selected VM to..
+        /// </summary>
+        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_SINGLE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_SINGLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Destination Pool.
         /// </summary>
         public static string CPM_WIZARD_DESTINATION_TAB_TITLE {
             get {
@@ -8387,7 +8414,43 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Review settings and begin live migration.
+        ///   Looks up a localized string similar to The wizard is ready to begin migrating the selected VMs using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to migrate the VMs..
+        /// </summary>
+        public static string CPM_WIZARD_FINISH_PAGE_INTRO {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_FINISH_PAGE_INTRO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The wizard is ready to begin copying the selected VMs using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to copy the VMs..
+        /// </summary>
+        public static string CPM_WIZARD_FINISH_PAGE_INTRO_COPY {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_FINISH_PAGE_INTRO_COPY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The wizard is ready to begin copying the selected VM using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to copy the VM..
+        /// </summary>
+        public static string CPM_WIZARD_FINISH_PAGE_INTRO_COPY_SINGLE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_FINISH_PAGE_INTRO_COPY_SINGLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The wizard is ready to begin migrating the selected VM using the settings shown below. Please review these settings and click Previous if you need to go back and make any changes, otherwise click Finish to migrate the VM..
+        /// </summary>
+        public static string CPM_WIZARD_FINISH_PAGE_INTRO_SINGLE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_FINISH_PAGE_INTRO_SINGLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review settings.
         /// </summary>
         public static string CPM_WIZARD_FINISH_PAGE_TITLE {
             get {
@@ -8396,7 +8459,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name and storage.
+        ///   Looks up a localized string similar to Name and Storage.
         /// </summary>
         public static string CPM_WIZARD_INTRA_POOL_COPY_TAB_TITLE {
             get {
@@ -8405,7 +8468,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name and storage.
+        ///   Looks up a localized string similar to Name and Storage.
         /// </summary>
         public static string CPM_WIZARD_INTRA_POOL_COPY_TITLE {
             get {
@@ -8414,11 +8477,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Map the virtual network interfaces in the VM(s) you are migrating to networks in the destination pool or standalone server..
+        ///   Looks up a localized string similar to Map the virtual network interfaces in the selected VMs to networks in the destination pool or standalone server..
         /// </summary>
         public static string CPM_WIZARD_NETWORKING_INTRO {
             get {
                 return ResourceManager.GetString("CPM_WIZARD_NETWORKING_INTRO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Map the virtual network interfaces in the selected VM to networks in the destination pool or standalone server..
+        /// </summary>
+        public static string CPM_WIZARD_NETWORKING_INTRO_SINGLE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_NETWORKING_INTRO_SINGLE", resourceCulture);
             }
         }
         
@@ -8432,7 +8504,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configure networking for the migrated VM(s).
+        ///   Looks up a localized string similar to Configure networking.
         /// </summary>
         public static string CPM_WIZARD_SELECT_NETWORK_PAGE_TITLE {
             get {
@@ -8450,7 +8522,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configure storage for the migrated VM(s).
+        ///   Looks up a localized string similar to Configure storage.
         /// </summary>
         public static string CPM_WIZARD_SELECT_STORAGE_PAGE_TITLE {
             get {
@@ -8459,7 +8531,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Live Migration Network.
+        ///   Looks up a localized string similar to Migration Network.
         /// </summary>
         public static string CPM_WIZARD_SELECT_TRANSFER_NETWORK_PAGE_TEXT {
             get {
@@ -8468,7 +8540,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configure storage live migration settings.
+        ///   Looks up a localized string similar to Configure storage migration settings.
         /// </summary>
         public static string CPM_WIZARD_SELECT_TRANSFER_NETWORK_TITLE {
             get {
@@ -8477,7 +8549,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pla&amp;ce migrated virtual disks onto specified SRs:.
+        ///   Looks up a localized string similar to Pla&amp;ce virtual disks onto specified SRs:.
         /// </summary>
         public static string CPM_WIZARD_SPECIFIC_SR_RADIO {
             get {
@@ -8522,7 +8594,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Virtual network interfaces in migrated VMs:.
+        ///   Looks up a localized string similar to &amp;Virtual network interfaces:.
         /// </summary>
         public static string CPM_WIZARD_VM_SELECTION_INTRODUCTION {
             get {

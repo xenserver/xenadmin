@@ -154,7 +154,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         {
             CreateMappingsFromSelection(selection);
             UpdateWindowTitle();
-            m_pageDestination = new CrossPoolMigrateDestinationPage(hostPreSelection, VmsFromSelection(selection) )
+            m_pageDestination = new CrossPoolMigrateDestinationPage(hostPreSelection, VmsFromSelection(selection), wizardMode)
                                     {
                                         VmMappings = m_vmMappings,
                                     };
@@ -162,14 +162,14 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             m_pageStorage = new CrossPoolMigrateStoragePage();
             m_pageNetwork = new CrossPoolMigrateNetworkingPage();
             m_pageTransferNetwork = new CrossPoolMigrateTransferNetworkPage(VmsFromSelection(selection));
-            m_pageFinish = new CrossPoolMigrateFinishPage {SummaryRetreiver = GetVMMappingSummary};
+            m_pageFinish = new CrossPoolMigrateFinishPage(selection.Count(), wizardMode) { SummaryRetreiver = GetVMMappingSummary };
             m_pageTargetRbac = new RBACWarningPage();
 
             m_pageCopyMode = new CrossPoolMigrateCopyModePage(VmsFromSelection(selection));
             m_pageIntraPoolCopy = new IntraPoolCopyPage(VmsFromSelection(selection));
 
             if (wizardMode == WizardMode.Copy)
-                AddPages(m_pageCopyMode, m_pageDestination,  m_pageStorage, m_pageFinish);
+                AddPages(m_pageCopyMode, m_pageIntraPoolCopy);
             else
                 AddPages(m_pageDestination, m_pageStorage, m_pageFinish);
         }
@@ -326,7 +326,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 if (m_pageCopyMode.IntraPoolCopySelected)
                 {
                     RemovePagesFrom(1);
-                    AddAfterPage(m_pageCopyMode, m_pageIntraPoolCopy, m_pageFinish);
+                    AddAfterPage(m_pageCopyMode, m_pageIntraPoolCopy);
                 }
                 else
                 {
