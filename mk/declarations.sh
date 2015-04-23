@@ -155,7 +155,7 @@ WEB_XE_PHASE_1=${WEB_LATEST_BUILD}/xe-phase-1
 WEB_XE_PHASE_2=${WEB_LATEST_BUILD}/xe-phase-2
 
 #this is where the build will find stuff from the latest dotnet-packages build
-WEB_DOTNET="http://jenkins-dev.xs.cbg.ccsi.eng.citrite.net/job/carbon_${XS_BRANCH}_dotnet-packages/lastSuccessfulBuild/artifact"
+WEB_DOTNET="https://jenkins-dev.xs.cbg.ccsi.eng.citrite.net/job/carbon_${XS_BRANCH}_dotnet-packages/lastSuccessfulBuild/artifact"
 
 # used to copy results out of the secure build enclave
 BUILD_TOOLS_REPO=git://admin/git/closed/windows/buildtools.git
