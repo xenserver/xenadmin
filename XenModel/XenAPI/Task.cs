@@ -440,7 +440,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the backtrace field of the given task.
-        /// First published in Unreleased.
+        /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_task">The opaque_ref of the given task</param>
@@ -844,7 +844,7 @@ namespace XenAPI
 
         /// <summary>
         /// Function call trace for debugging.
-        /// First published in Unreleased.
+        /// First published in XenServer Dundee.
         /// </summary>
         public virtual string backtrace
         {

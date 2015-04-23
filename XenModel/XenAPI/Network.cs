@@ -446,7 +446,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the assigned_ips field of the given network.
-        /// First published in XenServer Creedence.
+        /// First published in XenServer 6.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_network">The opaque_ref of the given network</param>
@@ -902,7 +902,7 @@ namespace XenAPI
 
         /// <summary>
         /// The IP addresses assigned to VIFs on networks that have active xapi-managed DHCP
-        /// First published in XenServer Creedence.
+        /// First published in XenServer 6.5.
         /// </summary>
         public virtual Dictionary<XenRef<VIF>, string> assigned_ips
         {

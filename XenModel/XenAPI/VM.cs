@@ -122,7 +122,8 @@ namespace XenAPI
             List<XenRef<PCI>> attached_PCIs,
             XenRef<SR> suspend_SR,
             long version,
-            string generation_id)
+            string generation_id,
+            long hardware_platform_version)
         {
             this.uuid = uuid;
             this.allowed_operations = allowed_operations;
@@ -199,6 +200,7 @@ namespace XenAPI
             this.suspend_SR = suspend_SR;
             this.version = version;
             this.generation_id = generation_id;
+            this.hardware_platform_version = hardware_platform_version;
         }
 
         /// <summary>
@@ -287,6 +289,7 @@ namespace XenAPI
             suspend_SR = update.suspend_SR;
             version = update.version;
             generation_id = update.generation_id;
+            hardware_platform_version = update.hardware_platform_version;
         }
 
         internal void UpdateFromProxy(Proxy_VM proxy)
@@ -366,6 +369,7 @@ namespace XenAPI
             suspend_SR = proxy.suspend_SR == null ? null : XenRef<SR>.Create(proxy.suspend_SR);
             version = proxy.version == null ? 0 : long.Parse((string)proxy.version);
             generation_id = proxy.generation_id == null ? null : (string)proxy.generation_id;
+            hardware_platform_version = proxy.hardware_platform_version == null ? 0 : long.Parse((string)proxy.hardware_platform_version);
         }
 
         public Proxy_VM ToProxy()
@@ -446,6 +450,7 @@ namespace XenAPI
             result_.suspend_SR = (suspend_SR != null) ? suspend_SR : "";
             result_.version = version.ToString();
             result_.generation_id = (generation_id != null) ? generation_id : "";
+            result_.hardware_platform_version = hardware_platform_version.ToString();
             return result_;
         }
 
@@ -530,6 +535,7 @@ namespace XenAPI
             suspend_SR = Marshalling.ParseRef<SR>(table, "suspend_SR");
             version = Marshalling.ParseLong(table, "version");
             generation_id = Marshalling.ParseString(table, "generation_id");
+            hardware_platform_version = Marshalling.ParseLong(table, "hardware_platform_version");
         }
 
         public bool DeepEquals(VM other, bool ignoreCurrentOperations)
@@ -615,7 +621,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._attached_PCIs, other._attached_PCIs) &&
                 Helper.AreEqual2(this._suspend_SR, other._suspend_SR) &&
                 Helper.AreEqual2(this._version, other._version) &&
-                Helper.AreEqual2(this._generation_id, other._generation_id);
+                Helper.AreEqual2(this._generation_id, other._generation_id) &&
+                Helper.AreEqual2(this._hardware_platform_version, other._hardware_platform_version);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VM server)
@@ -726,6 +733,10 @@ namespace XenAPI
                 if (!Helper.AreEqual2(_suspend_SR, server._suspend_SR))
                 {
                     VM.set_suspend_SR(session, opaqueRef, _suspend_SR);
+                }
+                if (!Helper.AreEqual2(_hardware_platform_version, server._hardware_platform_version))
+                {
+                    VM.set_hardware_platform_version(session, opaqueRef, _hardware_platform_version);
                 }
                 if (!Helper.AreEqual2(_memory_static_max, server._memory_static_max))
                 {
@@ -1690,6 +1701,17 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Get the hardware_platform_version field of the given VM.
+        /// First published in XenServer 6.5 SP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static long get_hardware_platform_version(Session session, string _vm)
+        {
+            return long.Parse((string)session.proxy.vm_get_hardware_platform_version(session.uuid, (_vm != null) ? _vm : "").parse());
+        }
+
+        /// <summary>
         /// Set the name/label field of the given VM.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -2161,6 +2183,18 @@ namespace XenAPI
         public static void set_suspend_SR(Session session, string _vm, string _suspend_sr)
         {
             session.proxy.vm_set_suspend_sr(session.uuid, (_vm != null) ? _vm : "", (_suspend_sr != null) ? _suspend_sr : "").parse();
+        }
+
+        /// <summary>
+        /// Set the hardware_platform_version field of the given VM.
+        /// First published in XenServer 6.5 SP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_hardware_platform_version">New value to set</param>
+        public static void set_hardware_platform_version(Session session, string _vm, long _hardware_platform_version)
+        {
+            session.proxy.vm_set_hardware_platform_version(session.uuid, (_vm != null) ? _vm : "", _hardware_platform_version.ToString()).parse();
         }
 
         /// <summary>
@@ -3581,7 +3615,7 @@ namespace XenAPI
 
         /// <summary>
         /// List all the SR's that are required for the VM to be recovered
-        /// First published in XenServer Creedence.
+        /// First published in XenServer 6.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -3593,7 +3627,7 @@ namespace XenAPI
 
         /// <summary>
         /// List all the SR's that are required for the VM to be recovered
-        /// First published in XenServer Creedence.
+        /// First published in XenServer 6.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -3707,7 +3741,7 @@ namespace XenAPI
 
         /// <summary>
         /// Call a XenAPI plugin on this vm
-        /// First published in Unreleased.
+        /// First published in XenServer 6.5 SP1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -3721,7 +3755,7 @@ namespace XenAPI
 
         /// <summary>
         /// Call a XenAPI plugin on this vm
-        /// First published in Unreleased.
+        /// First published in XenServer 6.5 SP1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -5130,5 +5164,24 @@ namespace XenAPI
             }
         }
         private string _generation_id;
+
+        /// <summary>
+        /// The host virtual hardware platform version the VM can run on
+        /// First published in XenServer 6.5 SP1.
+        /// </summary>
+        public virtual long hardware_platform_version
+        {
+            get { return _hardware_platform_version; }
+            set
+            {
+                if (!Helper.AreEqual(value, _hardware_platform_version))
+                {
+                    _hardware_platform_version = value;
+                    Changed = true;
+                    NotifyPropertyChanged("hardware_platform_version");
+                }
+            }
+        }
+        private long _hardware_platform_version;
     }
 }

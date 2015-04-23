@@ -439,7 +439,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the list of SRs required by the VM appliance to recover.
-        /// First published in XenServer Creedence.
+        /// First published in XenServer 6.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm_appliance">The opaque_ref of the given vm_appliance</param>
@@ -451,7 +451,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the list of SRs required by the VM appliance to recover.
-        /// First published in XenServer Creedence.
+        /// First published in XenServer 6.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm_appliance">The opaque_ref of the given vm_appliance</param>

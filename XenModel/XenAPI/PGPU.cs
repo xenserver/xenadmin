@@ -312,7 +312,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the dom0_access field of the given PGPU.
-        /// First published in Unreleased.
+        /// First published in XenServer 6.5 SP1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
@@ -323,7 +323,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the is_system_display_device field of the given PGPU.
-        /// First published in Unreleased.
+        /// First published in XenServer 6.5 SP1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
@@ -491,7 +491,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in Unreleased.
+        /// First published in XenServer 6.5 SP1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
@@ -502,7 +502,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in Unreleased.
+        /// First published in XenServer 6.5 SP1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
@@ -513,7 +513,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in Unreleased.
+        /// First published in XenServer 6.5 SP1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
@@ -524,7 +524,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in Unreleased.
+        /// First published in XenServer 6.5 SP1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
@@ -721,7 +721,7 @@ namespace XenAPI
 
         /// <summary>
         /// The accessibility of this device from dom0
-        /// First published in Unreleased.
+        /// First published in XenServer 6.5 SP1.
         /// </summary>
         public virtual pgpu_dom0_access dom0_access
         {
@@ -740,7 +740,7 @@ namespace XenAPI
 
         /// <summary>
         /// Is this device the system display device
-        /// First published in Unreleased.
+        /// First published in XenServer 6.5 SP1.
         /// </summary>
         public virtual bool is_system_display_device
         {
