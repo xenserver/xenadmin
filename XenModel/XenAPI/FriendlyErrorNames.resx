@@ -935,6 +935,12 @@ Authorized Roles: {1}</value>
   <data name="SR_BACKEND_FAILURE_114" xml:space="preserve">
     <value>Failed to remove CIFS mount point</value>
   </data>
+  <data name="SR_BACKEND_FAILURE_115" xml:space="preserve">
+    <value>Not all required parameters specified.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_116" xml:space="preserve">
+    <value>Failed to create CIFS SR.</value>
+  </data>
   <data name="SR_BACKEND_FAILURE_120" xml:space="preserve">
     <value>Netapp Target parameter missing in Dconf string</value>
   </data>
@@ -1279,6 +1285,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="SR_BACKEND_FAILURE_454" xml:space="preserve">
     <value>CIFS SR is not licensed on this host</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_455" xml:space="preserve">
+    <value>Unable to attach empty optical drive to VM.</value>
   </data>
   <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
     <value>The VDI is not available</value>
@@ -1690,6 +1699,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VERSION" xml:space="preserve">
     <value>This VM operation cannot be performed on an older-versioned host during an upgrade.</value>
+  </data>
+  <data name="VM_HOST_INCOMPATIBLE_VIRTUAL_HARDWARE_PLATFORM_VERSION" xml:space="preserve">
+    <value>You attempted to run a VM on a host that cannot provide the VM's required Virtual Hardware Platform version.</value>
   </data>
   <data name="VM_HVM_REQUIRED" xml:space="preserve">
     <value>HVM is required for this operation</value>

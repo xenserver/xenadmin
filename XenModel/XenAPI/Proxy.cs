@@ -1396,6 +1396,10 @@ namespace XenAPI
         Response<string>
         vm_get_generation_id(string session, string _vm);
 
+        [XmlRpcMethod("VM.get_hardware_platform_version")]
+        Response<string>
+        vm_get_hardware_platform_version(string session, string _vm);
+
         [XmlRpcMethod("VM.set_name_label")]
         Response<string>
         vm_set_name_label(string session, string _vm, string _label);
@@ -1551,6 +1555,10 @@ namespace XenAPI
         [XmlRpcMethod("VM.set_suspend_SR")]
         Response<string>
         vm_set_suspend_sr(string session, string _vm, string _suspend_sr);
+
+        [XmlRpcMethod("VM.set_hardware_platform_version")]
+        Response<string>
+        vm_set_hardware_platform_version(string session, string _vm, string _hardware_platform_version);
 
         [XmlRpcMethod("VM.snapshot")]
         Response<string>
@@ -2815,6 +2823,10 @@ namespace XenAPI
         [XmlRpcMethod("host.get_display")]
         Response<string>
         host_get_display(string session, string _host);
+
+        [XmlRpcMethod("host.get_virtual_hardware_platform_versions")]
+        Response<string []>
+        host_get_virtual_hardware_platform_versions(string session, string _host);
 
         [XmlRpcMethod("host.set_name_label")]
         Response<string>
@@ -6774,6 +6786,7 @@ namespace XenAPI
         public string suspend_SR;
         public string version;
         public string generation_id;
+        public string hardware_platform_version;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -6904,6 +6917,7 @@ namespace XenAPI
         public string [] PGPUs;
         public Object guest_VCPUs_params;
         public string display;
+        public string [] virtual_hardware_platform_versions;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]

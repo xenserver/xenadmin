@@ -96,7 +96,8 @@ namespace XenAPI
             List<XenRef<PCI>> PCIs,
             List<XenRef<PGPU>> PGPUs,
             Dictionary<string, string> guest_VCPUs_params,
-            host_display display)
+            host_display display,
+            long[] virtual_hardware_platform_versions)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -147,6 +148,7 @@ namespace XenAPI
             this.PGPUs = PGPUs;
             this.guest_VCPUs_params = guest_VCPUs_params;
             this.display = display;
+            this.virtual_hardware_platform_versions = virtual_hardware_platform_versions;
         }
 
         /// <summary>
@@ -209,6 +211,7 @@ namespace XenAPI
             PGPUs = update.PGPUs;
             guest_VCPUs_params = update.guest_VCPUs_params;
             display = update.display;
+            virtual_hardware_platform_versions = update.virtual_hardware_platform_versions;
         }
 
         internal void UpdateFromProxy(Proxy_Host proxy)
@@ -262,6 +265,7 @@ namespace XenAPI
             PGPUs = proxy.PGPUs == null ? null : XenRef<PGPU>.Create(proxy.PGPUs);
             guest_VCPUs_params = proxy.guest_VCPUs_params == null ? null : Maps.convert_from_proxy_string_string(proxy.guest_VCPUs_params);
             display = proxy.display == null ? (host_display) 0 : (host_display)Helper.EnumParseDefault(typeof(host_display), (string)proxy.display);
+            virtual_hardware_platform_versions = proxy.virtual_hardware_platform_versions == null ? null : Helper.StringArrayToLongArray(proxy.virtual_hardware_platform_versions);
         }
 
         public Proxy_Host ToProxy()
@@ -316,6 +320,7 @@ namespace XenAPI
             result_.PGPUs = (PGPUs != null) ? Helper.RefListToStringArray(PGPUs) : new string[] {};
             result_.guest_VCPUs_params = Maps.convert_to_proxy_string_string(guest_VCPUs_params);
             result_.display = host_display_helper.ToString(display);
+            result_.virtual_hardware_platform_versions = (virtual_hardware_platform_versions != null) ? Helper.LongArrayToStringArray(virtual_hardware_platform_versions) : new string[] {};
             return result_;
         }
 
@@ -374,6 +379,7 @@ namespace XenAPI
             PGPUs = Marshalling.ParseSetRef<PGPU>(table, "PGPUs");
             guest_VCPUs_params = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "guest_VCPUs_params"));
             display = (host_display)Helper.EnumParseDefault(typeof(host_display), Marshalling.ParseString(table, "display"));
+            virtual_hardware_platform_versions = Marshalling.ParseLongArray(table, "virtual_hardware_platform_versions");
         }
 
         public bool DeepEquals(Host other, bool ignoreCurrentOperations)
@@ -433,7 +439,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._PCIs, other._PCIs) &&
                 Helper.AreEqual2(this._PGPUs, other._PGPUs) &&
                 Helper.AreEqual2(this._guest_VCPUs_params, other._guest_VCPUs_params) &&
-                Helper.AreEqual2(this._display, other._display);
+                Helper.AreEqual2(this._display, other._display) &&
+                Helper.AreEqual2(this._virtual_hardware_platform_versions, other._virtual_hardware_platform_versions);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Host server)
@@ -1060,13 +1067,24 @@ namespace XenAPI
 
         /// <summary>
         /// Get the display field of the given host.
-        /// First published in Unreleased.
+        /// First published in XenServer 6.5 SP1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
         public static host_display get_display(Session session, string _host)
         {
             return (host_display)Helper.EnumParseDefault(typeof(host_display), (string)session.proxy.host_get_display(session.uuid, (_host != null) ? _host : "").parse());
+        }
+
+        /// <summary>
+        /// Get the virtual_hardware_platform_versions field of the given host.
+        /// First published in XenServer 6.5 SP1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static long[] get_virtual_hardware_platform_versions(Session session, string _host)
+        {
+            return Helper.StringArrayToLongArray(session.proxy.host_get_virtual_hardware_platform_versions(session.uuid, (_host != null) ? _host : "").parse());
         }
 
         /// <summary>
@@ -1327,7 +1345,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the display field of the given host.
-        /// First published in Unreleased.
+        /// First published in XenServer 6.5 SP1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -2316,7 +2334,7 @@ namespace XenAPI
 
         /// <summary>
         /// Enable console output to the physical display device next time this host boots
-        /// First published in Unreleased.
+        /// First published in XenServer 6.5 SP1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -2327,7 +2345,7 @@ namespace XenAPI
 
         /// <summary>
         /// Enable console output to the physical display device next time this host boots
-        /// First published in Unreleased.
+        /// First published in XenServer 6.5 SP1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -2338,7 +2356,7 @@ namespace XenAPI
 
         /// <summary>
         /// Disable console output to the physical display device next time this host boots
-        /// First published in Unreleased.
+        /// First published in XenServer 6.5 SP1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -2349,7 +2367,7 @@ namespace XenAPI
 
         /// <summary>
         /// Disable console output to the physical display device next time this host boots
-        /// First published in Unreleased.
+        /// First published in XenServer 6.5 SP1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -3262,7 +3280,7 @@ namespace XenAPI
 
         /// <summary>
         /// indicates whether the host is configured to output its console to a physical display device
-        /// First published in Unreleased.
+        /// First published in XenServer 6.5 SP1.
         /// </summary>
         public virtual host_display display
         {
@@ -3278,5 +3296,24 @@ namespace XenAPI
             }
         }
         private host_display _display;
+
+        /// <summary>
+        /// The set of versions of the virtual hardware platform that the host can offer to its guests
+        /// First published in XenServer 6.5 SP1.
+        /// </summary>
+        public virtual long[] virtual_hardware_platform_versions
+        {
+            get { return _virtual_hardware_platform_versions; }
+            set
+            {
+                if (!Helper.AreEqual(value, _virtual_hardware_platform_versions))
+                {
+                    _virtual_hardware_platform_versions = value;
+                    Changed = true;
+                    NotifyPropertyChanged("virtual_hardware_platform_versions");
+                }
+            }
+        }
+        private long[] _virtual_hardware_platform_versions;
     }
 }

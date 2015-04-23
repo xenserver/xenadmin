@@ -665,7 +665,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the properties field of the given PIF.
-        /// First published in XenServer Creedence.
+        /// First published in XenServer 6.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pif">The opaque_ref of the given pif</param>
@@ -1208,7 +1208,7 @@ namespace XenAPI
         /// <param name="_ipv6_gateway"> First published in XenServer 6.0.</param>
         /// <param name="_primary_address_type"> First published in XenServer 6.0.</param>
         /// <param name="_managed"> First published in XenServer 6.2 SP1.</param>
-        /// <param name="_properties"> First published in XenServer Creedence.</param>
+        /// <param name="_properties"> First published in XenServer 6.5.</param>
         public static XenRef<PIF> db_introduce(Session session, string _device, string _network, string _host, string _mac, long _mtu, long _vlan, bool _physical, ip_configuration_mode _ip_configuration_mode, string _ip, string _netmask, string _gateway, string _dns, string _bond_slave_of, string _vlan_master_of, bool _management, Dictionary<string, string> _other_config, bool _disallow_unplug, ipv6_configuration_mode _ipv6_configuration_mode, string[] _ipv6, string _ipv6_gateway, primary_address_type _primary_address_type, bool _managed, Dictionary<string, string> _properties)
         {
             return XenRef<PIF>.Create(session.proxy.pif_db_introduce(session.uuid, (_device != null) ? _device : "", (_network != null) ? _network : "", (_host != null) ? _host : "", (_mac != null) ? _mac : "", _mtu.ToString(), _vlan.ToString(), _physical, ip_configuration_mode_helper.ToString(_ip_configuration_mode), (_ip != null) ? _ip : "", (_netmask != null) ? _netmask : "", (_gateway != null) ? _gateway : "", (_dns != null) ? _dns : "", (_bond_slave_of != null) ? _bond_slave_of : "", (_vlan_master_of != null) ? _vlan_master_of : "", _management, Maps.convert_to_proxy_string_string(_other_config), _disallow_unplug, ipv6_configuration_mode_helper.ToString(_ipv6_configuration_mode), _ipv6, (_ipv6_gateway != null) ? _ipv6_gateway : "", primary_address_type_helper.ToString(_primary_address_type), _managed, Maps.convert_to_proxy_string_string(_properties)).parse());
@@ -1241,7 +1241,7 @@ namespace XenAPI
         /// <param name="_ipv6_gateway"> First published in XenServer 6.0.</param>
         /// <param name="_primary_address_type"> First published in XenServer 6.0.</param>
         /// <param name="_managed"> First published in XenServer 6.2 SP1.</param>
-        /// <param name="_properties"> First published in XenServer Creedence.</param>
+        /// <param name="_properties"> First published in XenServer 6.5.</param>
         public static XenRef<Task> async_db_introduce(Session session, string _device, string _network, string _host, string _mac, long _mtu, long _vlan, bool _physical, ip_configuration_mode _ip_configuration_mode, string _ip, string _netmask, string _gateway, string _dns, string _bond_slave_of, string _vlan_master_of, bool _management, Dictionary<string, string> _other_config, bool _disallow_unplug, ipv6_configuration_mode _ipv6_configuration_mode, string[] _ipv6, string _ipv6_gateway, primary_address_type _primary_address_type, bool _managed, Dictionary<string, string> _properties)
         {
             return XenRef<Task>.Create(session.proxy.async_pif_db_introduce(session.uuid, (_device != null) ? _device : "", (_network != null) ? _network : "", (_host != null) ? _host : "", (_mac != null) ? _mac : "", _mtu.ToString(), _vlan.ToString(), _physical, ip_configuration_mode_helper.ToString(_ip_configuration_mode), (_ip != null) ? _ip : "", (_netmask != null) ? _netmask : "", (_gateway != null) ? _gateway : "", (_dns != null) ? _dns : "", (_bond_slave_of != null) ? _bond_slave_of : "", (_vlan_master_of != null) ? _vlan_master_of : "", _management, Maps.convert_to_proxy_string_string(_other_config), _disallow_unplug, ipv6_configuration_mode_helper.ToString(_ipv6_configuration_mode), _ipv6, (_ipv6_gateway != null) ? _ipv6_gateway : "", primary_address_type_helper.ToString(_primary_address_type), _managed, Maps.convert_to_proxy_string_string(_properties)).parse());
@@ -1271,7 +1271,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the value of a property of the PIF
-        /// First published in XenServer Creedence.
+        /// First published in XenServer 6.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pif">The opaque_ref of the given pif</param>
@@ -1284,7 +1284,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the value of a property of the PIF
-        /// First published in XenServer Creedence.
+        /// First published in XenServer 6.5.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pif">The opaque_ref of the given pif</param>
@@ -1860,7 +1860,7 @@ namespace XenAPI
 
         /// <summary>
         /// Additional configuration properties for the interface.
-        /// First published in XenServer Creedence.
+        /// First published in XenServer 6.5.
         /// </summary>
         public virtual Dictionary<string, string> properties
         {
