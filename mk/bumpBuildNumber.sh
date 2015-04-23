@@ -56,6 +56,6 @@ NEXT_BN=$(curl "http://hg.uk.xensource.com/cgi/next-xenadmin?job=$get_JOB_NAME&n
 
 echo NEXT_BN=${NEXT_BN}
 
-curl --data "nextBuildNumber=${NEXT_BN}" --header "Content-Type: application/x-www-form-urlencoded" ${JENKINS_SERVER}/job/${get_JOB_NAME}/nextbuildnumber/submit
+curl --insecure --data "nextBuildNumber=${NEXT_BN}" --header "Content-Type: application/x-www-form-urlencoded" ${JENKINS_SERVER}/job/${get_JOB_NAME}/nextbuildnumber/submit
 
 set +u
