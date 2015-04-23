@@ -2149,6 +2149,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disk {0} Total IO Throughput.
+        /// </summary>
+        public static string Label_performance_vbd_io_throughput_total {
+            get {
+                return ResourceManager.GetString("Label-performance.vbd_io_throughput_total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disk {0} Read IOPS.
         /// </summary>
         public static string Label_performance_vbd_iops_read {
