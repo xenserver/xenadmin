@@ -2149,11 +2149,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disk {0} Total IO Throughput.
+        ///   Looks up a localized string similar to Disk {0} IO Read Throughput.
+        /// </summary>
+        public static string Label_performance_vbd_io_throughput_read {
+            get {
+                return ResourceManager.GetString("Label-performance.vbd_io_throughput_read", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disk {0} IO Total Throughput.
         /// </summary>
         public static string Label_performance_vbd_io_throughput_total {
             get {
                 return ResourceManager.GetString("Label-performance.vbd_io_throughput_total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disk {0} IO Write Throughput.
+        /// </summary>
+        public static string Label_performance_vbd_io_throughput_write {
+            get {
+                return ResourceManager.GetString("Label-performance.vbd_io_throughput_write", resourceCulture);
             }
         }
         

@@ -1758,6 +1758,12 @@
     <value>Reason</value>
   </data>
   <data name="Label-performance.vbd_io_throughput_total" xml:space="preserve">
-    <value>Disk {0} Total IO Throughput</value>
+    <value>Disk {0} IO Total Throughput</value>
+  </data>
+  <data name="Label-performance.vbd_io_throughput_read" xml:space="preserve">
+    <value>Disk {0} IO Read Throughput</value>
+  </data>
+  <data name="Label-performance.vbd_io_throughput_write" xml:space="preserve">
+    <value>Disk {0} IO Write Throughput</value>
   </data>
 </root>
