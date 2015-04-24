@@ -1035,6 +1035,7 @@ namespace XenAdmin.Core
         static Regex PifBondRegex = new Regex("^pif_(bond[0-9]+)_(tx|rx)((_errors)?)$");
         static Regex DiskRegex = new Regex("^vbd_((xvd|hd)[a-z]+)_(read|write)((_latency)?)$");
         static Regex DiskIopsRegex = new Regex("^vbd_((xvd|hd)[a-z]+)_iops_(read|write|total)$");
+        static Regex DiskThroughputRegex = new Regex("^vbd_((xvd|hd)[a-z]+)_io_throughput_(read|write|total)$");
         static Regex DiskOtherRegex = new Regex("^vbd_((xvd|hd)[a-z]+)_(avgqu_sz|inflight|iowait)$");
         static Regex NetworkLatencyRegex = new Regex("^network/latency$");
         static Regex XapiLatencyRegex = new Regex("^xapi_healthcheck/latency$");
@@ -1134,6 +1135,16 @@ namespace XenAdmin.Core
                 return vbd == null
                            ? null
                            : FormatFriendly(string.Format("Label-performance.vbd_iops_{0}", m.Groups[3].Value),
+                               vbd.userdevice);
+            }
+
+            m = DiskThroughputRegex.Match(name);
+            if (m.Success)
+            {
+                VBD vbd = FindVBD(iXenObject, m.Groups[1].Value);
+                return vbd == null
+                           ? null
+                           : FormatFriendly(string.Format("Label-performance.vbd_io_throughput_{0}", m.Groups[3].Value),
                                vbd.userdevice);
             }
 
