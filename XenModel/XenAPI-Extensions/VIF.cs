@@ -70,6 +70,29 @@ namespace XenAPI
 
         }
 
+        public List<string> IPAddresses
+        {
+            get
+            {
+                VM vm = Connection.Resolve(this.VM);
+                if (vm != null && !vm.is_a_template)
+                {
+                    VM_guest_metrics vmGuestMetrics = Connection.Resolve(vm.guest_metrics);
+
+                    if (vmGuestMetrics != null)
+                    {
+                        return
+                            (from network in vmGuestMetrics.networks
+                             where network.Key.StartsWith(string.Format("{0}/ip", this.device))
+                             orderby network.Key
+                             select network.Value).ToList();
+                    }
+                }
+
+                return new List<string>();
+            }
+        }
+
         public string NetworkName()
         {
             if (Connection == null) throw new NullReferenceException("NetworkName the VIF does not have connection");
