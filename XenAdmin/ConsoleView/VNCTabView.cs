@@ -163,6 +163,7 @@ namespace XenAdmin.ConsoleView
                 this.vncScreen.OnDetectRDP = this.OnDetectRDP;
                 this.vncScreen.OnDetectVNC = this.OnDetectVNC;
                 this.vncScreen.UserCancelledAuth += this.OnUserCancelledAuth;
+                this.vncScreen.VncConnectionAttemptCancelled += this.OnVncConnectionAttemptCancelled;
             }
 
             LastDesktopSize = vncScreen.DesktopSize;
@@ -1281,6 +1282,15 @@ namespace XenAdmin.ConsoleView
         /// Called when the user cancelled VNC authentication.
         /// </summary>
         private void OnUserCancelledAuth(object sender, EventArgs e)
+        {
+            // Switch back to the text console
+            toggleConsoleButton_Click(null, null);
+        }
+
+        /// <summary>
+        /// Called when the a connection attempt to VNC is cancelled.
+        /// </summary>
+        private void OnVncConnectionAttemptCancelled(object sender, EventArgs e)
         {
             // Switch back to the text console
             toggleConsoleButton_Click(null, null);

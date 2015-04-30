@@ -113,6 +113,7 @@ namespace XenAdmin.ConsoleView
         internal EventHandler ResizeHandler;
 
         public event EventHandler UserCancelledAuth;
+        public event EventHandler VncConnectionAttemptCancelled;
 
         internal readonly VNCTabView parentVNCTabView;
 
@@ -901,6 +902,12 @@ namespace XenAdmin.ConsoleView
                 }
                 else
                 {
+                    if (vncIP == null)
+                    {
+                        Log.DebugFormat("vncIP is null. Abort VNC connection attempt");
+                        OnVncConnectionAttemptCancelled();
+                        return;
+                    }
                     this.vncPassword = Settings.GetVNCPassword(sourceVM.uuid);
                     if (this.vncPassword == null)
                     {
@@ -942,6 +949,10 @@ namespace XenAdmin.ConsoleView
                         Log.DebugFormat("Connected to vncIP={0}, port={1}", this.vncIP, VNC_PORT);
                     }
                     InvokeConnection(v, s, null);
+
+                    // store the empty vnc password after a successful passwordless login
+                    if (haveTriedLoginWithoutPassword && this.vncPassword.Length == 0)
+                        Program.Invoke(this, () => Settings.SetVNCPassword(sourceVM.uuid, this.vncPassword)); 
                 }
             }
             catch (Exception exn)
@@ -983,6 +994,16 @@ namespace XenAdmin.ConsoleView
                 Log.Debug("User cancelled during VNC authentication");
                 if (UserCancelledAuth != null)
                     UserCancelledAuth(this, null);
+            });
+        }
+
+        private void OnVncConnectionAttemptCancelled()
+        {
+            Program.Invoke(this, delegate
+            {
+                Log.Debug("Cancelled VNC connection attempt");
+                if (VncConnectionAttemptCancelled != null)
+                    VncConnectionAttemptCancelled(this, null);
             });
         }
 
