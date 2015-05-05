@@ -150,16 +150,16 @@
   <data name="labelScanning.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>labelScanning.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelScanning.Name" xml:space="preserve">
     <value>labelScanning</value>
   </data>
-  <data name=">>labelScanning.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelScanning.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelScanning.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelScanning.Parent" xml:space="preserve">
     <value>m_tlpScanning</value>
   </data>
-  <data name=">>labelScanning.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelScanning.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelRestartPriority.AutoSize" type="System.Boolean, mscorlib">
@@ -180,10 +180,10 @@
   <data name="labelRestartPriority.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>labelRestartPriority.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelRestartPriority.Name" xml:space="preserve">
     <value>labelRestartPriority</value>
   </data>
-  <data name=">>labelRestartPriority.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelRestartPriority.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="groupBoxStartupOptions.AutoSize" type="System.Boolean, mscorlib">
@@ -210,16 +210,16 @@
   <data name="nudOrder.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>nudOrder.Name" xml:space="preserve">
+  <data name="&gt;&gt;nudOrder.Name" xml:space="preserve">
     <value>nudOrder</value>
   </data>
-  <data name=">>nudOrder.Type" xml:space="preserve">
+  <data name="&gt;&gt;nudOrder.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>nudOrder.Parent" xml:space="preserve">
+  <data name="&gt;&gt;nudOrder.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>nudOrder.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;nudOrder.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelStartOrder.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -246,16 +246,16 @@
   <data name="labelStartOrder.Text" xml:space="preserve">
     <value>&amp;Start order:</value>
   </data>
-  <data name=">>labelStartOrder.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelStartOrder.Name" xml:space="preserve">
     <value>labelStartOrder</value>
   </data>
-  <data name=">>labelStartOrder.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelStartOrder.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelStartOrder.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelStartOrder.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>labelStartOrder.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelStartOrder.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelStartDelay.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -282,16 +282,16 @@
   <data name="labelStartDelay.Text" xml:space="preserve">
     <value>&amp;Attempt to start next VM after:</value>
   </data>
-  <data name=">>labelStartDelay.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelStartDelay.Name" xml:space="preserve">
     <value>labelStartDelay</value>
   </data>
-  <data name=">>labelStartDelay.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelStartDelay.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelStartDelay.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelStartDelay.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>labelStartDelay.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelStartDelay.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="autoHeightLabel1.AutoSize" type="System.Boolean, mscorlib">
@@ -318,16 +318,16 @@
   <data name="autoHeightLabel1.Text" xml:space="preserve">
     <value>These options specify the preferred startup sequence and timing for VMs when they are automatically started with a vApp or during an HA operation. VMs with a start order of 0 (zero) will be started first. You can also configure a delay interval which specifies how long after starting the VM to wait before starting up the next group of VMs in the startup sequence.</value>
   </data>
-  <data name=">>autoHeightLabel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;autoHeightLabel1.Name" xml:space="preserve">
     <value>autoHeightLabel1</value>
   </data>
-  <data name=">>autoHeightLabel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;autoHeightLabel1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>autoHeightLabel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;autoHeightLabel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>autoHeightLabel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;autoHeightLabel1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="nudStartDelay.Location" type="System.Drawing.Point, System.Drawing">
@@ -339,16 +339,16 @@
   <data name="nudStartDelay.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name=">>nudStartDelay.Name" xml:space="preserve">
+  <data name="&gt;&gt;nudStartDelay.Name" xml:space="preserve">
     <value>nudStartDelay</value>
   </data>
-  <data name=">>nudStartDelay.Type" xml:space="preserve">
+  <data name="&gt;&gt;nudStartDelay.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>nudStartDelay.Parent" xml:space="preserve">
+  <data name="&gt;&gt;nudStartDelay.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>nudStartDelay.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;nudStartDelay.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="labelStartDelayUnits.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -375,16 +375,16 @@
   <data name="labelStartDelayUnits.Text" xml:space="preserve">
     <value>seconds</value>
   </data>
-  <data name=">>labelStartDelayUnits.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelStartDelayUnits.Name" xml:space="preserve">
     <value>labelStartDelayUnits</value>
   </data>
-  <data name=">>labelStartDelayUnits.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelStartDelayUnits.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelStartDelayUnits.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelStartDelayUnits.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>labelStartDelayUnits.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelStartDelayUnits.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -402,16 +402,16 @@
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableLayoutPanel2.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>tableLayoutPanel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
     <value>groupBoxStartupOptions</value>
   </data>
-  <data name=">>tableLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -432,16 +432,16 @@
   <data name="groupBoxStartupOptions.Text" xml:space="preserve">
     <value>Startup sequence</value>
   </data>
-  <data name=">>groupBoxStartupOptions.Name" xml:space="preserve">
+  <data name="&gt;&gt;groupBoxStartupOptions.Name" xml:space="preserve">
     <value>groupBoxStartupOptions</value>
   </data>
-  <data name=">>groupBoxStartupOptions.Type" xml:space="preserve">
+  <data name="&gt;&gt;groupBoxStartupOptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>groupBoxStartupOptions.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupBoxStartupOptions.Parent" xml:space="preserve">
     <value>m_tlpMain</value>
   </data>
-  <data name=">>groupBoxStartupOptions.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;groupBoxStartupOptions.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelProtectionLevel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -468,16 +468,16 @@
   <data name="labelProtectionLevel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>labelProtectionLevel.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelProtectionLevel.Name" xml:space="preserve">
     <value>labelProtectionLevel</value>
   </data>
-  <data name=">>labelProtectionLevel.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelProtectionLevel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelProtectionLevel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelProtectionLevel.Parent" xml:space="preserve">
     <value>m_tlpPriority</value>
   </data>
-  <data name=">>labelProtectionLevel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelProtectionLevel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="m_comboBoxProtectionLevel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -492,16 +492,16 @@
   <data name="m_comboBoxProtectionLevel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>m_comboBoxProtectionLevel.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_comboBoxProtectionLevel.Name" xml:space="preserve">
     <value>m_comboBoxProtectionLevel</value>
   </data>
-  <data name=">>m_comboBoxProtectionLevel.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_comboBoxProtectionLevel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>m_comboBoxProtectionLevel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_comboBoxProtectionLevel.Parent" xml:space="preserve">
     <value>m_tlpPriority</value>
   </data>
-  <data name=">>m_comboBoxProtectionLevel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_comboBoxProtectionLevel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="m_tlpMain.ColumnCount" type="System.Int32, mscorlib">
@@ -531,16 +531,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name=">>pictureBox1.Name" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name=">>pictureBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pictureBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
     <value>m_tlpScanning</value>
   </data>
-  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="m_tlpScanning.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -558,16 +558,16 @@
   <data name="m_tlpScanning.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>m_tlpScanning.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_tlpScanning.Name" xml:space="preserve">
     <value>m_tlpScanning</value>
   </data>
-  <data name=">>m_tlpScanning.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_tlpScanning.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>m_tlpScanning.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_tlpScanning.Parent" xml:space="preserve">
     <value>m_tlpMain</value>
   </data>
-  <data name=">>m_tlpScanning.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_tlpScanning.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="m_tlpScanning.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -621,16 +621,16 @@
   <data name="comboLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>comboLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;comboLabel.Name" xml:space="preserve">
     <value>comboLabel</value>
   </data>
-  <data name=">>comboLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;comboLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>comboLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;comboLabel.Parent" xml:space="preserve">
     <value>m_tlpPriority</value>
   </data>
-  <data name=">>comboLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;comboLabel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="m_tlpPriority.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -648,16 +648,16 @@
   <data name="m_tlpPriority.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>m_tlpPriority.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_tlpPriority.Name" xml:space="preserve">
     <value>m_tlpPriority</value>
   </data>
-  <data name=">>m_tlpPriority.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_tlpPriority.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>m_tlpPriority.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_tlpPriority.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name=">>m_tlpPriority.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_tlpPriority.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="m_tlpPriority.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -678,16 +678,16 @@
   <data name="pictureBox2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pictureBox2.Name" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox2.Name" xml:space="preserve">
     <value>pictureBox2</value>
   </data>
-  <data name=">>pictureBox2.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pictureBox2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox2.Parent" xml:space="preserve">
     <value>m_tlpHaConfig</value>
   </data>
-  <data name=">>pictureBox2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="m_labelHaStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -711,16 +711,16 @@
   <data name="m_labelHaStatus.Text" xml:space="preserve">
     <value>m_labelHaStatus</value>
   </data>
-  <data name=">>m_labelHaStatus.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_labelHaStatus.Name" xml:space="preserve">
     <value>m_labelHaStatus</value>
   </data>
-  <data name=">>m_labelHaStatus.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_labelHaStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>m_labelHaStatus.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_labelHaStatus.Parent" xml:space="preserve">
     <value>m_tlpHaConfig</value>
   </data>
-  <data name=">>m_labelHaStatus.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_labelHaStatus.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="haNtolIndicator.AutoSize" type="System.Boolean, mscorlib">
@@ -741,16 +741,16 @@
   <data name="haNtolIndicator.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>haNtolIndicator.Name" xml:space="preserve">
+  <data name="&gt;&gt;haNtolIndicator.Name" xml:space="preserve">
     <value>haNtolIndicator</value>
   </data>
-  <data name=">>haNtolIndicator.Type" xml:space="preserve">
+  <data name="&gt;&gt;haNtolIndicator.Type" xml:space="preserve">
     <value>XenAdmin.Controls.HaNtolIndicatorSimple, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>haNtolIndicator.Parent" xml:space="preserve">
+  <data name="&gt;&gt;haNtolIndicator.Parent" xml:space="preserve">
     <value>m_tlpHaConfig</value>
   </data>
-  <data name=">>haNtolIndicator.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;haNtolIndicator.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="m_linkLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -774,16 +774,16 @@
   <data name="m_linkLabel.Text" xml:space="preserve">
     <value>here</value>
   </data>
-  <data name=">>m_linkLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_linkLabel.Name" xml:space="preserve">
     <value>m_linkLabel</value>
   </data>
-  <data name=">>m_linkLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_linkLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>m_linkLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_linkLabel.Parent" xml:space="preserve">
     <value>m_tlpHaConfig</value>
   </data>
-  <data name=">>m_linkLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_linkLabel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="m_tlpHaConfig.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -801,16 +801,16 @@
   <data name="m_tlpHaConfig.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>m_tlpHaConfig.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_tlpHaConfig.Name" xml:space="preserve">
     <value>m_tlpHaConfig</value>
   </data>
-  <data name=">>m_tlpHaConfig.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_tlpHaConfig.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>m_tlpHaConfig.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_tlpHaConfig.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name=">>m_tlpHaConfig.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_tlpHaConfig.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="m_tlpHaConfig.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -831,16 +831,16 @@
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableLayoutPanel3.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name=">>tableLayoutPanel3.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
     <value>groupBoxHA</value>
   </data>
-  <data name=">>tableLayoutPanel3.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -861,16 +861,16 @@
   <data name="groupBoxHA.Text" xml:space="preserve">
     <value>HA restart priority</value>
   </data>
-  <data name=">>groupBoxHA.Name" xml:space="preserve">
+  <data name="&gt;&gt;groupBoxHA.Name" xml:space="preserve">
     <value>groupBoxHA</value>
   </data>
-  <data name=">>groupBoxHA.Type" xml:space="preserve">
+  <data name="&gt;&gt;groupBoxHA.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>groupBoxHA.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupBoxHA.Parent" xml:space="preserve">
     <value>m_tlpMain</value>
   </data>
-  <data name=">>groupBoxHA.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;groupBoxHA.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="m_tlpMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -888,16 +888,16 @@
   <data name="m_tlpMain.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>m_tlpMain.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_tlpMain.Name" xml:space="preserve">
     <value>m_tlpMain</value>
   </data>
-  <data name=">>m_tlpMain.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_tlpMain.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>m_tlpMain.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_tlpMain.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>m_tlpMain.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_tlpMain.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="m_tlpMain.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -912,10 +912,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>642, 443</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>VMHAEditPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

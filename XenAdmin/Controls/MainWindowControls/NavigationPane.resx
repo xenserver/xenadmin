@@ -141,16 +141,16 @@
   <data name="navigationView.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>navigationView.Name" xml:space="preserve">
+  <data name="&gt;&gt;navigationView.Name" xml:space="preserve">
     <value>navigationView</value>
   </data>
-  <data name=">>navigationView.Type" xml:space="preserve">
+  <data name="&gt;&gt;navigationView.Type" xml:space="preserve">
     <value>XenAdmin.Controls.MainWindowControls.NavigationView, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>navigationView.Parent" xml:space="preserve">
+  <data name="&gt;&gt;navigationView.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name=">>navigationView.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;navigationView.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="notificationsView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -171,28 +171,28 @@
   <data name="notificationsView.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>notificationsView.Name" xml:space="preserve">
+  <data name="&gt;&gt;notificationsView.Name" xml:space="preserve">
     <value>notificationsView</value>
   </data>
-  <data name=">>notificationsView.Type" xml:space="preserve">
+  <data name="&gt;&gt;notificationsView.Type" xml:space="preserve">
     <value>XenAdmin.Controls.MainWindowControls.NotificationsView, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>notificationsView.Parent" xml:space="preserve">
+  <data name="&gt;&gt;notificationsView.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name=">>notificationsView.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;notificationsView.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name=">>splitContainer1.Panel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel1.Name" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name=">>splitContainer1.Panel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>splitContainer1.Panel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel1.Parent" xml:space="preserve">
     <value>splitContainer1</value>
   </data>
-  <data name=">>splitContainer1.Panel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="toolStripBig.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -339,28 +339,28 @@
   <data name="toolStripBig.Text" xml:space="preserve">
     <value>toolStrip1</value>
   </data>
-  <data name=">>toolStripBig.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripBig.Name" xml:space="preserve">
     <value>toolStripBig</value>
   </data>
-  <data name=">>toolStripBig.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripBig.Type" xml:space="preserve">
     <value>XenAdmin.Controls.MainWindowControls.NavigationToolStripBig, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripBig.Parent" xml:space="preserve">
+  <data name="&gt;&gt;toolStripBig.Parent" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
   </data>
-  <data name=">>toolStripBig.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;toolStripBig.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name=">>splitContainer1.Panel2.Name" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel2.Name" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
   </data>
-  <data name=">>splitContainer1.Panel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>splitContainer1.Panel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel2.Parent" xml:space="preserve">
     <value>splitContainer1</value>
   </data>
-  <data name=">>splitContainer1.Panel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="splitContainer1.Panel2MinSize" type="System.Int32, mscorlib">
@@ -375,16 +375,16 @@
   <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>splitContainer1.Name" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Name" xml:space="preserve">
     <value>splitContainer1</value>
   </data>
-  <data name=">>splitContainer1.Type" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.SmoothSplitContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>splitContainer1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>splitContainer1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="toolStripSmall.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -468,16 +468,16 @@
   <data name="toolStripSmall.Text" xml:space="preserve">
     <value>toolStrip1</value>
   </data>
-  <data name=">>toolStripSmall.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSmall.Name" xml:space="preserve">
     <value>toolStripSmall</value>
   </data>
-  <data name=">>toolStripSmall.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSmall.Type" xml:space="preserve">
     <value>XenAdmin.Controls.MainWindowControls.NavigationToolStripSmall, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSmall.Parent" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSmall.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>toolStripSmall.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSmall.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -489,94 +489,94 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>215, 425</value>
   </data>
-  <data name=">>buttonInfraBig.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonInfraBig.Name" xml:space="preserve">
     <value>buttonInfraBig</value>
   </data>
-  <data name=">>buttonInfraBig.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonInfraBig.Type" xml:space="preserve">
     <value>XenAdmin.Controls.MainWindowControls.NavigationButtonBig, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>buttonObjectsBig.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonObjectsBig.Name" xml:space="preserve">
     <value>buttonObjectsBig</value>
   </data>
-  <data name=">>buttonObjectsBig.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonObjectsBig.Type" xml:space="preserve">
     <value>XenAdmin.Controls.MainWindowControls.NavigationButtonBig, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>buttonOrganizationBig.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonOrganizationBig.Name" xml:space="preserve">
     <value>buttonOrganizationBig</value>
   </data>
-  <data name=">>buttonOrganizationBig.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonOrganizationBig.Type" xml:space="preserve">
     <value>XenAdmin.Controls.MainWindowControls.NavigationDropDownButtonBig, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripMenuItemTags.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItemTags.Name" xml:space="preserve">
     <value>toolStripMenuItemTags</value>
   </data>
-  <data name=">>toolStripMenuItemTags.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItemTags.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>toolStripMenuItemFolders.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItemFolders.Name" xml:space="preserve">
     <value>toolStripMenuItemFolders</value>
   </data>
-  <data name=">>toolStripMenuItemFolders.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItemFolders.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>toolStripMenuItemFields.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItemFields.Name" xml:space="preserve">
     <value>toolStripMenuItemFields</value>
   </data>
-  <data name=">>toolStripMenuItemFields.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItemFields.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>toolStripMenuItemVapps.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItemVapps.Name" xml:space="preserve">
     <value>toolStripMenuItemVapps</value>
   </data>
-  <data name=">>toolStripMenuItemVapps.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItemVapps.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonSearchesBig.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonSearchesBig.Name" xml:space="preserve">
     <value>buttonSearchesBig</value>
   </data>
-  <data name=">>buttonSearchesBig.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonSearchesBig.Type" xml:space="preserve">
     <value>XenAdmin.Controls.MainWindowControls.NavigationDropDownButtonBig, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>buttonNotifyBig.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonNotifyBig.Name" xml:space="preserve">
     <value>buttonNotifyBig</value>
   </data>
-  <data name=">>buttonNotifyBig.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonNotifyBig.Type" xml:space="preserve">
     <value>XenAdmin.Controls.MainWindowControls.NotificationButtonBig, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>buttonNotifySmall.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonNotifySmall.Name" xml:space="preserve">
     <value>buttonNotifySmall</value>
   </data>
-  <data name=">>buttonNotifySmall.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonNotifySmall.Type" xml:space="preserve">
     <value>XenAdmin.Controls.MainWindowControls.NotificationButtonSmall, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>buttonSearchesSmall.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonSearchesSmall.Name" xml:space="preserve">
     <value>buttonSearchesSmall</value>
   </data>
-  <data name=">>buttonSearchesSmall.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonSearchesSmall.Type" xml:space="preserve">
     <value>XenAdmin.Controls.MainWindowControls.NavigationDropDownButtonSmall, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>buttonOrganizationSmall.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonOrganizationSmall.Name" xml:space="preserve">
     <value>buttonOrganizationSmall</value>
   </data>
-  <data name=">>buttonOrganizationSmall.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonOrganizationSmall.Type" xml:space="preserve">
     <value>XenAdmin.Controls.MainWindowControls.NavigationDropDownButtonSmall, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>buttonObjectsSmall.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonObjectsSmall.Name" xml:space="preserve">
     <value>buttonObjectsSmall</value>
   </data>
-  <data name=">>buttonObjectsSmall.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonObjectsSmall.Type" xml:space="preserve">
     <value>XenAdmin.Controls.MainWindowControls.NavigationButtonSmall, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>buttonInfraSmall.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonInfraSmall.Name" xml:space="preserve">
     <value>buttonInfraSmall</value>
   </data>
-  <data name=">>buttonInfraSmall.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonInfraSmall.Type" xml:space="preserve">
     <value>XenAdmin.Controls.MainWindowControls.NavigationButtonSmall, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>NavigationPane</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

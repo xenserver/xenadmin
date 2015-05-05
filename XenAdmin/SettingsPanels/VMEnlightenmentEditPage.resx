@@ -144,16 +144,16 @@
   <data name="labelRubric.Text" xml:space="preserve">
     <value>This VM can be configured to allow XenServer to monitor and control containers. Choose whether this feature should be enabled on this VM. </value>
   </data>
-  <data name=">>labelRubric.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelRubric.Name" xml:space="preserve">
     <value>labelRubric</value>
   </data>
-  <data name=">>labelRubric.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelRubric.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelRubric.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelRubric.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>labelRubric.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelRubric.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
@@ -177,16 +177,16 @@
   <data name="enlightenCheckBox.Text" xml:space="preserve">
     <value>&amp;Enable container management for this VM</value>
   </data>
-  <data name=">>enlightenCheckBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;enlightenCheckBox.Name" xml:space="preserve">
     <value>enlightenCheckBox</value>
   </data>
-  <data name=">>enlightenCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;enlightenCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>enlightenCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;enlightenCheckBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>enlightenCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;enlightenCheckBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -204,16 +204,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -228,10 +228,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 289</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>VMEnlightenmentEditPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

@@ -135,16 +135,16 @@
   <data name="picker.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>picker.Name" xml:space="preserve">
+  <data name="&gt;&gt;picker.Name" xml:space="preserve">
     <value>picker</value>
   </data>
-  <data name=">>picker.Type" xml:space="preserve">
+  <data name="&gt;&gt;picker.Type" xml:space="preserve">
     <value>XenAdmin.Controls.AffinityPicker, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>picker.Parent" xml:space="preserve">
+  <data name="&gt;&gt;picker.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>picker.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;picker.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -156,10 +156,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>372, 251</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>HomeServerEditPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

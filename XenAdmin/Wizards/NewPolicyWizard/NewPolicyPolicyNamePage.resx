@@ -144,16 +144,16 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Policy na&amp;me:</value>
   </data>
-  <data name=">>label2.Name" xml:space="preserve">
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name=">>label2.Type" xml:space="preserve">
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>label2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="textBoxName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -171,16 +171,16 @@
   <data name="textBoxName.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>textBoxName.Name" xml:space="preserve">
+  <data name="&gt;&gt;textBoxName.Name" xml:space="preserve">
     <value>textBoxName</value>
   </data>
-  <data name=">>textBoxName.Type" xml:space="preserve">
+  <data name="&gt;&gt;textBoxName.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>textBoxName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;textBoxName.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>textBoxName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;textBoxName.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
@@ -204,16 +204,16 @@
   <data name="label3.Text" xml:space="preserve">
     <value>&amp;Description:</value>
   </data>
-  <data name=">>label3.Name" xml:space="preserve">
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
   </data>
-  <data name=">>label3.Type" xml:space="preserve">
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>label3.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="textBoxDescription.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -231,16 +231,16 @@
   <data name="textBoxDescription.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name=">>textBoxDescription.Name" xml:space="preserve">
+  <data name="&gt;&gt;textBoxDescription.Name" xml:space="preserve">
     <value>textBoxDescription</value>
   </data>
-  <data name=">>textBoxDescription.Type" xml:space="preserve">
+  <data name="&gt;&gt;textBoxDescription.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>textBoxDescription.Parent" xml:space="preserve">
+  <data name="&gt;&gt;textBoxDescription.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>textBoxDescription.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;textBoxDescription.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="autoHeightLabel1.AutoSize" type="System.Boolean, mscorlib">
@@ -264,16 +264,16 @@
   <data name="autoHeightLabel1.Text" xml:space="preserve">
     <value>To begin, enter a name for the policy and a description (optional), then click Next.</value>
   </data>
-  <data name=">>autoHeightLabel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;autoHeightLabel1.Name" xml:space="preserve">
     <value>autoHeightLabel1</value>
   </data>
-  <data name=">>autoHeightLabel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;autoHeightLabel1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>autoHeightLabel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;autoHeightLabel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>autoHeightLabel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;autoHeightLabel1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="labelwizard.AutoSize" type="System.Boolean, mscorlib">
@@ -297,16 +297,16 @@
   <data name="labelwizard.Text" xml:space="preserve">
     <value>Use this wizard to define a VM protection policy that will ensure your critical VMs are protected via automatic scheduled snapshot jobs.</value>
   </data>
-  <data name=">>labelwizard.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelwizard.Name" xml:space="preserve">
     <value>labelwizard</value>
   </data>
-  <data name=">>labelwizard.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelwizard.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>labelwizard.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelwizard.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>labelwizard.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelwizard.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -324,16 +324,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -351,10 +351,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>545, 342</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>NewPolicyPolicyNamePage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -138,10 +138,10 @@
   <data name="errorLabel.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>errorLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;errorLabel.Name" xml:space="preserve">
     <value>errorLabel</value>
   </data>
-  <data name=">>errorLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;errorLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
@@ -162,16 +162,16 @@
   <data name="pictureBox2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>pictureBox2.Name" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox2.Name" xml:space="preserve">
     <value>pictureBox2</value>
   </data>
-  <data name=">>pictureBox2.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pictureBox2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox2.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name=">>pictureBox2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="lableRbacWarning.AutoSize" type="System.Boolean, mscorlib">
@@ -195,16 +195,16 @@
   <data name="lableRbacWarning.Text" xml:space="preserve">
     <value>Permission warning error</value>
   </data>
-  <data name=">>lableRbacWarning.Name" xml:space="preserve">
+  <data name="&gt;&gt;lableRbacWarning.Name" xml:space="preserve">
     <value>lableRbacWarning</value>
   </data>
-  <data name=">>lableRbacWarning.Type" xml:space="preserve">
+  <data name="&gt;&gt;lableRbacWarning.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>lableRbacWarning.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lableRbacWarning.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name=">>lableRbacWarning.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lableRbacWarning.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -225,16 +225,16 @@
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>tableLayoutPanel3.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name=">>tableLayoutPanel3.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
     <value>RbacWarningPanel</value>
   </data>
-  <data name=">>tableLayoutPanel3.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -252,16 +252,16 @@
   <data name="RbacWarningPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>RbacWarningPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;RbacWarningPanel.Name" xml:space="preserve">
     <value>RbacWarningPanel</value>
   </data>
-  <data name=">>RbacWarningPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;RbacWarningPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>RbacWarningPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;RbacWarningPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>RbacWarningPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;RbacWarningPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -270,10 +270,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>624, 430</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ConsolePanel</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

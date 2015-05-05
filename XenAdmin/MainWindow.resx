@@ -141,31 +141,31 @@
   <data name="navigationPane.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>navigationPane.Name" xml:space="preserve">
+  <data name="&gt;&gt;navigationPane.Name" xml:space="preserve">
     <value>navigationPane</value>
   </data>
-  <data name=">>navigationPane.Type" xml:space="preserve">
+  <data name="&gt;&gt;navigationPane.Type" xml:space="preserve">
     <value>XenAdmin.Controls.MainWindowControls.NavigationPane, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>navigationPane.Parent" xml:space="preserve">
+  <data name="&gt;&gt;navigationPane.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name=">>navigationPane.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;navigationPane.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="splitContainer1.Panel1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
   </data>
-  <data name=">>splitContainer1.Panel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel1.Name" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
-  <data name=">>splitContainer1.Panel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>splitContainer1.Panel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel1.Parent" xml:space="preserve">
     <value>splitContainer1</value>
   </data>
-  <data name=">>splitContainer1.Panel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="splitContainer1.Panel1MinSize" type="System.Int32, mscorlib">
@@ -195,16 +195,16 @@
   <data name="TabPageHome.Text" xml:space="preserve">
     <value>Home</value>
   </data>
-  <data name=">>TabPageHome.Name" xml:space="preserve">
+  <data name="&gt;&gt;TabPageHome.Name" xml:space="preserve">
     <value>TabPageHome</value>
   </data>
-  <data name=">>TabPageHome.Type" xml:space="preserve">
+  <data name="&gt;&gt;TabPageHome.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TabPageHome.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPageHome.Parent" xml:space="preserve">
     <value>TheTabControl</value>
   </data>
-  <data name=">>TabPageHome.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TabPageHome.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="TabPageGeneral.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -228,16 +228,16 @@
   <data name="TabPageGeneral.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>TabPageGeneral.Name" xml:space="preserve">
+  <data name="&gt;&gt;TabPageGeneral.Name" xml:space="preserve">
     <value>TabPageGeneral</value>
   </data>
-  <data name=">>TabPageGeneral.Type" xml:space="preserve">
+  <data name="&gt;&gt;TabPageGeneral.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TabPageGeneral.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPageGeneral.Parent" xml:space="preserve">
     <value>TheTabControl</value>
   </data>
-  <data name=">>TabPageGeneral.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TabPageGeneral.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="TabPageBallooning.Location" type="System.Drawing.Point, System.Drawing">
@@ -252,16 +252,16 @@
   <data name="TabPageBallooning.Text" xml:space="preserve">
     <value>Memory</value>
   </data>
-  <data name=">>TabPageBallooning.Name" xml:space="preserve">
+  <data name="&gt;&gt;TabPageBallooning.Name" xml:space="preserve">
     <value>TabPageBallooning</value>
   </data>
-  <data name=">>TabPageBallooning.Type" xml:space="preserve">
+  <data name="&gt;&gt;TabPageBallooning.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TabPageBallooning.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPageBallooning.Parent" xml:space="preserve">
     <value>TheTabControl</value>
   </data>
-  <data name=">>TabPageBallooning.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TabPageBallooning.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="TabPageBallooningUpsell.Location" type="System.Drawing.Point, System.Drawing">
@@ -276,16 +276,16 @@
   <data name="TabPageBallooningUpsell.Text" xml:space="preserve">
     <value>Memory</value>
   </data>
-  <data name=">>TabPageBallooningUpsell.Name" xml:space="preserve">
+  <data name="&gt;&gt;TabPageBallooningUpsell.Name" xml:space="preserve">
     <value>TabPageBallooningUpsell</value>
   </data>
-  <data name=">>TabPageBallooningUpsell.Type" xml:space="preserve">
+  <data name="&gt;&gt;TabPageBallooningUpsell.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TabPageBallooningUpsell.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPageBallooningUpsell.Parent" xml:space="preserve">
     <value>TheTabControl</value>
   </data>
-  <data name=">>TabPageBallooningUpsell.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TabPageBallooningUpsell.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="TabPageConsole.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -306,16 +306,16 @@
   <data name="TabPageConsole.Text" xml:space="preserve">
     <value>Console</value>
   </data>
-  <data name=">>TabPageConsole.Name" xml:space="preserve">
+  <data name="&gt;&gt;TabPageConsole.Name" xml:space="preserve">
     <value>TabPageConsole</value>
   </data>
-  <data name=">>TabPageConsole.Type" xml:space="preserve">
+  <data name="&gt;&gt;TabPageConsole.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TabPageConsole.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPageConsole.Parent" xml:space="preserve">
     <value>TheTabControl</value>
   </data>
-  <data name=">>TabPageConsole.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TabPageConsole.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="TabPageStorage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -339,16 +339,16 @@
   <data name="TabPageStorage.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>TabPageStorage.Name" xml:space="preserve">
+  <data name="&gt;&gt;TabPageStorage.Name" xml:space="preserve">
     <value>TabPageStorage</value>
   </data>
-  <data name=">>TabPageStorage.Type" xml:space="preserve">
+  <data name="&gt;&gt;TabPageStorage.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TabPageStorage.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPageStorage.Parent" xml:space="preserve">
     <value>TheTabControl</value>
   </data>
-  <data name=">>TabPageStorage.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TabPageStorage.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="TabPagePhysicalStorage.Location" type="System.Drawing.Point, System.Drawing">
@@ -366,16 +366,16 @@
   <data name="TabPagePhysicalStorage.Text" xml:space="preserve">
     <value>Storage</value>
   </data>
-  <data name=">>TabPagePhysicalStorage.Name" xml:space="preserve">
+  <data name="&gt;&gt;TabPagePhysicalStorage.Name" xml:space="preserve">
     <value>TabPagePhysicalStorage</value>
   </data>
-  <data name=">>TabPagePhysicalStorage.Type" xml:space="preserve">
+  <data name="&gt;&gt;TabPagePhysicalStorage.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TabPagePhysicalStorage.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPagePhysicalStorage.Parent" xml:space="preserve">
     <value>TheTabControl</value>
   </data>
-  <data name=">>TabPagePhysicalStorage.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TabPagePhysicalStorage.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="TabPageSR.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -396,16 +396,16 @@
   <data name="TabPageSR.Text" xml:space="preserve">
     <value>Storage</value>
   </data>
-  <data name=">>TabPageSR.Name" xml:space="preserve">
+  <data name="&gt;&gt;TabPageSR.Name" xml:space="preserve">
     <value>TabPageSR</value>
   </data>
-  <data name=">>TabPageSR.Type" xml:space="preserve">
+  <data name="&gt;&gt;TabPageSR.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TabPageSR.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPageSR.Parent" xml:space="preserve">
     <value>TheTabControl</value>
   </data>
-  <data name=">>TabPageSR.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TabPageSR.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="TabPageNetwork.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -426,16 +426,16 @@
   <data name="TabPageNetwork.Text" xml:space="preserve">
     <value>Networking</value>
   </data>
-  <data name=">>TabPageNetwork.Name" xml:space="preserve">
+  <data name="&gt;&gt;TabPageNetwork.Name" xml:space="preserve">
     <value>TabPageNetwork</value>
   </data>
-  <data name=">>TabPageNetwork.Type" xml:space="preserve">
+  <data name="&gt;&gt;TabPageNetwork.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TabPageNetwork.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPageNetwork.Parent" xml:space="preserve">
     <value>TheTabControl</value>
   </data>
-  <data name=">>TabPageNetwork.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TabPageNetwork.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="TabPageNICs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -459,16 +459,16 @@
   <data name="TabPageNICs.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>TabPageNICs.Name" xml:space="preserve">
+  <data name="&gt;&gt;TabPageNICs.Name" xml:space="preserve">
     <value>TabPageNICs</value>
   </data>
-  <data name=">>TabPageNICs.Type" xml:space="preserve">
+  <data name="&gt;&gt;TabPageNICs.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TabPageNICs.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPageNICs.Parent" xml:space="preserve">
     <value>TheTabControl</value>
   </data>
-  <data name=">>TabPageNICs.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TabPageNICs.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="TabPagePeformance.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -489,16 +489,16 @@
   <data name="TabPagePeformance.Text" xml:space="preserve">
     <value>Performance</value>
   </data>
-  <data name=">>TabPagePeformance.Name" xml:space="preserve">
+  <data name="&gt;&gt;TabPagePeformance.Name" xml:space="preserve">
     <value>TabPagePeformance</value>
   </data>
-  <data name=">>TabPagePeformance.Type" xml:space="preserve">
+  <data name="&gt;&gt;TabPagePeformance.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TabPagePeformance.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPagePeformance.Parent" xml:space="preserve">
     <value>TheTabControl</value>
   </data>
-  <data name=">>TabPagePeformance.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TabPagePeformance.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="TabPageHA.Location" type="System.Drawing.Point, System.Drawing">
@@ -516,16 +516,16 @@
   <data name="TabPageHA.Text" xml:space="preserve">
     <value>HA</value>
   </data>
-  <data name=">>TabPageHA.Name" xml:space="preserve">
+  <data name="&gt;&gt;TabPageHA.Name" xml:space="preserve">
     <value>TabPageHA</value>
   </data>
-  <data name=">>TabPageHA.Type" xml:space="preserve">
+  <data name="&gt;&gt;TabPageHA.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TabPageHA.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPageHA.Parent" xml:space="preserve">
     <value>TheTabControl</value>
   </data>
-  <data name=">>TabPageHA.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TabPageHA.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="TabPageHAUpsell.Location" type="System.Drawing.Point, System.Drawing">
@@ -543,16 +543,16 @@
   <data name="TabPageHAUpsell.Text" xml:space="preserve">
     <value>HA</value>
   </data>
-  <data name=">>TabPageHAUpsell.Name" xml:space="preserve">
+  <data name="&gt;&gt;TabPageHAUpsell.Name" xml:space="preserve">
     <value>TabPageHAUpsell</value>
   </data>
-  <data name=">>TabPageHAUpsell.Type" xml:space="preserve">
+  <data name="&gt;&gt;TabPageHAUpsell.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TabPageHAUpsell.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPageHAUpsell.Parent" xml:space="preserve">
     <value>TheTabControl</value>
   </data>
-  <data name=">>TabPageHAUpsell.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TabPageHAUpsell.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
   <data name="snapshotPage.AutoScroll" type="System.Boolean, mscorlib">
@@ -573,16 +573,16 @@
   <data name="snapshotPage.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>snapshotPage.Name" xml:space="preserve">
+  <data name="&gt;&gt;snapshotPage.Name" xml:space="preserve">
     <value>snapshotPage</value>
   </data>
-  <data name=">>snapshotPage.Type" xml:space="preserve">
+  <data name="&gt;&gt;snapshotPage.Type" xml:space="preserve">
     <value>XenAdmin.TabPages.SnapshotsPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>snapshotPage.Parent" xml:space="preserve">
+  <data name="&gt;&gt;snapshotPage.Parent" xml:space="preserve">
     <value>TabPageSnapshots</value>
   </data>
-  <data name=">>snapshotPage.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;snapshotPage.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="TabPageSnapshots.Location" type="System.Drawing.Point, System.Drawing">
@@ -600,16 +600,16 @@
   <data name="TabPageSnapshots.Text" xml:space="preserve">
     <value>Snapshots</value>
   </data>
-  <data name=">>TabPageSnapshots.Name" xml:space="preserve">
+  <data name="&gt;&gt;TabPageSnapshots.Name" xml:space="preserve">
     <value>TabPageSnapshots</value>
   </data>
-  <data name=">>TabPageSnapshots.Type" xml:space="preserve">
+  <data name="&gt;&gt;TabPageSnapshots.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TabPageSnapshots.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPageSnapshots.Parent" xml:space="preserve">
     <value>TheTabControl</value>
   </data>
-  <data name=">>TabPageSnapshots.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TabPageSnapshots.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
   <data name="TabPageWLB.Location" type="System.Drawing.Point, System.Drawing">
@@ -624,16 +624,16 @@
   <data name="TabPageWLB.Text" xml:space="preserve">
     <value>WLB</value>
   </data>
-  <data name=">>TabPageWLB.Name" xml:space="preserve">
+  <data name="&gt;&gt;TabPageWLB.Name" xml:space="preserve">
     <value>TabPageWLB</value>
   </data>
-  <data name=">>TabPageWLB.Type" xml:space="preserve">
+  <data name="&gt;&gt;TabPageWLB.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TabPageWLB.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPageWLB.Parent" xml:space="preserve">
     <value>TheTabControl</value>
   </data>
-  <data name=">>TabPageWLB.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TabPageWLB.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
   <data name="TabPageWLBUpsell.Location" type="System.Drawing.Point, System.Drawing">
@@ -648,16 +648,16 @@
   <data name="TabPageWLBUpsell.Text" xml:space="preserve">
     <value>WLB</value>
   </data>
-  <data name=">>TabPageWLBUpsell.Name" xml:space="preserve">
+  <data name="&gt;&gt;TabPageWLBUpsell.Name" xml:space="preserve">
     <value>TabPageWLBUpsell</value>
   </data>
-  <data name=">>TabPageWLBUpsell.Type" xml:space="preserve">
+  <data name="&gt;&gt;TabPageWLBUpsell.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TabPageWLBUpsell.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPageWLBUpsell.Parent" xml:space="preserve">
     <value>TheTabControl</value>
   </data>
-  <data name=">>TabPageWLBUpsell.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TabPageWLBUpsell.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
   <data name="TabPageAD.Location" type="System.Drawing.Point, System.Drawing">
@@ -672,16 +672,16 @@
   <data name="TabPageAD.Text" xml:space="preserve">
     <value>Users</value>
   </data>
-  <data name=">>TabPageAD.Name" xml:space="preserve">
+  <data name="&gt;&gt;TabPageAD.Name" xml:space="preserve">
     <value>TabPageAD</value>
   </data>
-  <data name=">>TabPageAD.Type" xml:space="preserve">
+  <data name="&gt;&gt;TabPageAD.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TabPageAD.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPageAD.Parent" xml:space="preserve">
     <value>TheTabControl</value>
   </data>
-  <data name=">>TabPageAD.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TabPageAD.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
   <data name="TabPageDockerDetails.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -702,16 +702,16 @@
   <data name="TabPageDockerDetails.Text" xml:space="preserve">
     <value>Details</value>
   </data>
-  <data name=">>TabPageDockerDetails.Name" xml:space="preserve">
+  <data name="&gt;&gt;TabPageDockerDetails.Name" xml:space="preserve">
     <value>TabPageDockerDetails</value>
   </data>
-  <data name=">>TabPageDockerDetails.Type" xml:space="preserve">
+  <data name="&gt;&gt;TabPageDockerDetails.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TabPageDockerDetails.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPageDockerDetails.Parent" xml:space="preserve">
     <value>TheTabControl</value>
   </data>
-  <data name=">>TabPageDockerDetails.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TabPageDockerDetails.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
   <data name="TabPageGPU.Location" type="System.Drawing.Point, System.Drawing">
@@ -726,16 +726,16 @@
   <data name="TabPageGPU.Text" xml:space="preserve">
     <value>GPU</value>
   </data>
-  <data name=">>TabPageGPU.Name" xml:space="preserve">
+  <data name="&gt;&gt;TabPageGPU.Name" xml:space="preserve">
     <value>TabPageGPU</value>
   </data>
-  <data name=">>TabPageGPU.Type" xml:space="preserve">
+  <data name="&gt;&gt;TabPageGPU.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TabPageGPU.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPageGPU.Parent" xml:space="preserve">
     <value>TheTabControl</value>
   </data>
-  <data name=">>TabPageGPU.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TabPageGPU.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
   <data name="TabPageSearch.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -756,16 +756,16 @@
   <data name="TabPageSearch.Text" xml:space="preserve">
     <value>Search</value>
   </data>
-  <data name=">>TabPageSearch.Name" xml:space="preserve">
+  <data name="&gt;&gt;TabPageSearch.Name" xml:space="preserve">
     <value>TabPageSearch</value>
   </data>
-  <data name=">>TabPageSearch.Type" xml:space="preserve">
+  <data name="&gt;&gt;TabPageSearch.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TabPageSearch.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPageSearch.Parent" xml:space="preserve">
     <value>TheTabControl</value>
   </data>
-  <data name=">>TabPageSearch.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TabPageSearch.ZOrder" xml:space="preserve">
     <value>18</value>
   <data name="TabPageDockerProcess.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -788,16 +788,16 @@
   <data name="TabPageDockerProcess.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>TabPageDockerProcess.Name" xml:space="preserve">
+  <data name="&gt;&gt;TabPageDockerProcess.Name" xml:space="preserve">
     <value>TabPageDockerProcess</value>
   </data>
-  <data name=">>TabPageDockerProcess.Type" xml:space="preserve">
+  <data name="&gt;&gt;TabPageDockerProcess.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TabPageDockerProcess.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPageDockerProcess.Parent" xml:space="preserve">
     <value>TheTabControl</value>
   </data>
-  <data name=">>TabPageDockerProcess.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TabPageDockerProcess.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
   </data>
@@ -816,16 +816,16 @@
   <data name="TheTabControl.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>TheTabControl.Name" xml:space="preserve">
+  <data name="&gt;&gt;TheTabControl.Name" xml:space="preserve">
     <value>TheTabControl</value>
   </data>
-  <data name=">>TheTabControl.Type" xml:space="preserve">
+  <data name="&gt;&gt;TheTabControl.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TheTabControl.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TheTabControl.Parent" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
   </data>
-  <data name=">>TheTabControl.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TheTabControl.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="alertPage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -846,16 +846,16 @@
   <data name="alertPage.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>alertPage.Name" xml:space="preserve">
+  <data name="&gt;&gt;alertPage.Name" xml:space="preserve">
     <value>alertPage</value>
   </data>
-  <data name=">>alertPage.Type" xml:space="preserve">
+  <data name="&gt;&gt;alertPage.Type" xml:space="preserve">
     <value>XenAdmin.TabPages.AlertSummaryPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>alertPage.Parent" xml:space="preserve">
+  <data name="&gt;&gt;alertPage.Parent" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
   </data>
-  <data name=">>alertPage.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;alertPage.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="updatesPage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -876,16 +876,16 @@
   <data name="updatesPage.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>updatesPage.Name" xml:space="preserve">
+  <data name="&gt;&gt;updatesPage.Name" xml:space="preserve">
     <value>updatesPage</value>
   </data>
-  <data name=">>updatesPage.Type" xml:space="preserve">
+  <data name="&gt;&gt;updatesPage.Type" xml:space="preserve">
     <value>XenAdmin.TabPages.ManageUpdatesPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>updatesPage.Parent" xml:space="preserve">
+  <data name="&gt;&gt;updatesPage.Parent" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
   </data>
-  <data name=">>updatesPage.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;updatesPage.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="eventsPage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -906,16 +906,16 @@
   <data name="eventsPage.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name=">>eventsPage.Name" xml:space="preserve">
+  <data name="&gt;&gt;eventsPage.Name" xml:space="preserve">
     <value>eventsPage</value>
   </data>
-  <data name=">>eventsPage.Type" xml:space="preserve">
+  <data name="&gt;&gt;eventsPage.Type" xml:space="preserve">
     <value>XenAdmin.TabPages.HistoryPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>eventsPage.Parent" xml:space="preserve">
+  <data name="&gt;&gt;eventsPage.Parent" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
   </data>
-  <data name=">>eventsPage.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;eventsPage.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="TitleBackPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -936,16 +936,16 @@
   <data name="TitleIcon.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>TitleIcon.Name" xml:space="preserve">
+  <data name="&gt;&gt;TitleIcon.Name" xml:space="preserve">
     <value>TitleIcon</value>
   </data>
-  <data name=">>TitleIcon.Type" xml:space="preserve">
+  <data name="&gt;&gt;TitleIcon.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TitleIcon.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TitleIcon.Parent" xml:space="preserve">
     <value>TitleBackPanel</value>
   </data>
-  <data name=">>TitleIcon.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TitleIcon.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -981,16 +981,16 @@
   <data name="loggedInLabel1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>loggedInLabel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;loggedInLabel1.Name" xml:space="preserve">
     <value>loggedInLabel1</value>
   </data>
-  <data name=">>loggedInLabel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;loggedInLabel1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.LoggedInLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>loggedInLabel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;loggedInLabel1.Parent" xml:space="preserve">
     <value>toolTipContainer1</value>
   </data>
-  <data name=">>loggedInLabel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;loggedInLabel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="toolTipContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -1008,16 +1008,16 @@
   <data name="toolTipContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>toolTipContainer1.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolTipContainer1.Name" xml:space="preserve">
     <value>toolTipContainer1</value>
   </data>
-  <data name=">>toolTipContainer1.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolTipContainer1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolTipContainer1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;toolTipContainer1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>toolTipContainer1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;toolTipContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="TitleLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -1035,16 +1035,16 @@
   <data name="TitleLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>TitleLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;TitleLabel.Name" xml:space="preserve">
     <value>TitleLabel</value>
   </data>
-  <data name=">>TitleLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;TitleLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>TitleLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TitleLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>TitleLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TitleLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
@@ -1059,16 +1059,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>TitleBackPanel</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -1083,31 +1083,31 @@
   <data name="TitleBackPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>TitleBackPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;TitleBackPanel.Name" xml:space="preserve">
     <value>TitleBackPanel</value>
   </data>
-  <data name=">>TitleBackPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;TitleBackPanel.Type" xml:space="preserve">
     <value>XenAdmin.Controls.GradientPanel.GradientPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>TitleBackPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TitleBackPanel.Parent" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
   </data>
-  <data name=">>TitleBackPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TitleBackPanel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="splitContainer1.Panel2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
   </data>
-  <data name=">>splitContainer1.Panel2.Name" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel2.Name" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
   </data>
-  <data name=">>splitContainer1.Panel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>splitContainer1.Panel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel2.Parent" xml:space="preserve">
     <value>splitContainer1</value>
   </data>
-  <data name=">>splitContainer1.Panel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="splitContainer1.Panel2MinSize" type="System.Int32, mscorlib">
@@ -1122,16 +1122,16 @@
   <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>splitContainer1.Name" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Name" xml:space="preserve">
     <value>splitContainer1</value>
   </data>
-  <data name=">>splitContainer1.Type" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>splitContainer1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>splitContainer1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="ToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -1683,16 +1683,16 @@
   <data name="ToolStrip.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>ToolStrip.Name" xml:space="preserve">
+  <data name="&gt;&gt;ToolStrip.Name" xml:space="preserve">
     <value>ToolStrip</value>
   </data>
-  <data name=">>ToolStrip.Type" xml:space="preserve">
+  <data name="&gt;&gt;ToolStrip.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ToolStripEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>ToolStrip.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ToolStrip.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>ToolStrip.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ToolStrip.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <metadata name="statusToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -1710,10 +1710,10 @@
   <data name="ToolBarContextMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 26</value>
   </data>
-  <data name=">>ToolBarContextMenu.Name" xml:space="preserve">
+  <data name="&gt;&gt;ToolBarContextMenu.Name" xml:space="preserve">
     <value>ToolBarContextMenu</value>
   </data>
-  <data name=">>ToolBarContextMenu.Type" xml:space="preserve">
+  <data name="&gt;&gt;ToolBarContextMenu.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="FileImportVMToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -2612,16 +2612,16 @@
   <data name="MainMenuBar.Text" xml:space="preserve">
     <value>MenuStrip</value>
   </data>
-  <data name=">>MainMenuBar.Name" xml:space="preserve">
+  <data name="&gt;&gt;MainMenuBar.Name" xml:space="preserve">
     <value>MainMenuBar</value>
   </data>
-  <data name=">>MainMenuBar.Type" xml:space="preserve">
+  <data name="&gt;&gt;MainMenuBar.Type" xml:space="preserve">
     <value>XenAdmin.Controls.MenuStripEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>MainMenuBar.Parent" xml:space="preserve">
+  <data name="&gt;&gt;MainMenuBar.Parent" xml:space="preserve">
     <value>MenuPanel</value>
   </data>
-  <data name=">>MainMenuBar.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;MainMenuBar.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="securityGroupsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -2642,16 +2642,16 @@
   <data name="MenuPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>MenuPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;MenuPanel.Name" xml:space="preserve">
     <value>MenuPanel</value>
   </data>
-  <data name=">>MenuPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;MenuPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>MenuPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;MenuPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>MenuPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;MenuPanel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <metadata name="StatusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -2687,16 +2687,16 @@
   <data name="StatusStrip.Text" xml:space="preserve">
     <value>statusStrip1</value>
   </data>
-  <data name=">>StatusStrip.Name" xml:space="preserve">
+  <data name="&gt;&gt;StatusStrip.Name" xml:space="preserve">
     <value>StatusStrip</value>
   </data>
-  <data name=">>StatusStrip.Type" xml:space="preserve">
+  <data name="&gt;&gt;StatusStrip.Type" xml:space="preserve">
     <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>StatusStrip.Parent" xml:space="preserve">
+  <data name="&gt;&gt;StatusStrip.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>StatusStrip.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;StatusStrip.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -2720,1093 +2720,1093 @@
   <data name="$this.Text" xml:space="preserve">
     <value>XenCenter</value>
   </data>
-  <data name=">>backButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;backButton.Name" xml:space="preserve">
     <value>backButton</value>
   </data>
-  <data name=">>backButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;backButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSplitButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>forwardButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;forwardButton.Name" xml:space="preserve">
     <value>forwardButton</value>
   </data>
-  <data name=">>forwardButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;forwardButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSplitButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>toolStripSeparator17.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator17.Name" xml:space="preserve">
     <value>toolStripSeparator17</value>
   </data>
-  <data name=">>toolStripSeparator17.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator17.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>AddServerToolbarButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;AddServerToolbarButton.Name" xml:space="preserve">
     <value>AddServerToolbarButton</value>
   </data>
-  <data name=">>AddServerToolbarButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;AddServerToolbarButton.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator11.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator11.Name" xml:space="preserve">
     <value>toolStripSeparator11</value>
   </data>
-  <data name=">>toolStripSeparator11.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator11.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>AddPoolToolbarButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;AddPoolToolbarButton.Name" xml:space="preserve">
     <value>AddPoolToolbarButton</value>
   </data>
-  <data name=">>AddPoolToolbarButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;AddPoolToolbarButton.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>newStorageToolbarButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;newStorageToolbarButton.Name" xml:space="preserve">
     <value>newStorageToolbarButton</value>
   </data>
-  <data name=">>newStorageToolbarButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;newStorageToolbarButton.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>NewVmToolbarButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;NewVmToolbarButton.Name" xml:space="preserve">
     <value>NewVmToolbarButton</value>
   </data>
-  <data name=">>NewVmToolbarButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;NewVmToolbarButton.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator12.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator12.Name" xml:space="preserve">
     <value>toolStripSeparator12</value>
   </data>
-  <data name=">>toolStripSeparator12.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator12.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>shutDownToolStripButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;shutDownToolStripButton.Name" xml:space="preserve">
     <value>shutDownToolStripButton</value>
   </data>
-  <data name=">>shutDownToolStripButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;shutDownToolStripButton.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>powerOnHostToolStripButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;powerOnHostToolStripButton.Name" xml:space="preserve">
     <value>powerOnHostToolStripButton</value>
   </data>
-  <data name=">>powerOnHostToolStripButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;powerOnHostToolStripButton.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>startVMToolStripButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;startVMToolStripButton.Name" xml:space="preserve">
     <value>startVMToolStripButton</value>
   </data>
-  <data name=">>startVMToolStripButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;startVMToolStripButton.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>RebootToolbarButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;RebootToolbarButton.Name" xml:space="preserve">
     <value>RebootToolbarButton</value>
   </data>
-  <data name=">>RebootToolbarButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;RebootToolbarButton.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>resumeToolStripButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;resumeToolStripButton.Name" xml:space="preserve">
     <value>resumeToolStripButton</value>
   </data>
-  <data name=">>resumeToolStripButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;resumeToolStripButton.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>SuspendToolbarButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;SuspendToolbarButton.Name" xml:space="preserve">
     <value>SuspendToolbarButton</value>
   </data>
-  <data name=">>SuspendToolbarButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;SuspendToolbarButton.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>ForceShutdownToolbarButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;ForceShutdownToolbarButton.Name" xml:space="preserve">
     <value>ForceShutdownToolbarButton</value>
   </data>
-  <data name=">>ForceShutdownToolbarButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;ForceShutdownToolbarButton.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>ForceRebootToolbarButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;ForceRebootToolbarButton.Name" xml:space="preserve">
     <value>ForceRebootToolbarButton</value>
   </data>
-  <data name=">>ForceRebootToolbarButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;ForceRebootToolbarButton.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>stopContainerToolStripButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;stopContainerToolStripButton.Name" xml:space="preserve">
     <value>stopContainerToolStripButton</value>
   </data>
-  <data name=">>stopContainerToolStripButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;stopContainerToolStripButton.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>startContainerToolStripButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;startContainerToolStripButton.Name" xml:space="preserve">
     <value>startContainerToolStripButton</value>
   </data>
-  <data name=">>startContainerToolStripButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;startContainerToolStripButton.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>restartContainerToolStripButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;restartContainerToolStripButton.Name" xml:space="preserve">
     <value>restartContainerToolStripButton</value>
   </data>
-  <data name=">>restartContainerToolStripButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;restartContainerToolStripButton.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>resumeContainerToolStripButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;resumeContainerToolStripButton.Name" xml:space="preserve">
     <value>resumeContainerToolStripButton</value>
   </data>
-  <data name=">>resumeContainerToolStripButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;resumeContainerToolStripButton.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pauseContainerToolStripButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;pauseContainerToolStripButton.Name" xml:space="preserve">
     <value>pauseContainerToolStripButton</value>
   </data>
-  <data name=">>pauseContainerToolStripButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;pauseContainerToolStripButton.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>statusToolTip.Name" xml:space="preserve">
+  <data name="&gt;&gt;statusToolTip.Name" xml:space="preserve">
     <value>statusToolTip</value>
   </data>
-  <data name=">>statusToolTip.Type" xml:space="preserve">
+  <data name="&gt;&gt;statusToolTip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ShowToolbarMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;ShowToolbarMenuItem.Name" xml:space="preserve">
     <value>ShowToolbarMenuItem</value>
   </data>
-  <data name=">>ShowToolbarMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;ShowToolbarMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>fileToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;fileToolStripMenuItem.Name" xml:space="preserve">
     <value>fileToolStripMenuItem</value>
   </data>
-  <data name=">>fileToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;fileToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>FileImportVMToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;FileImportVMToolStripMenuItem.Name" xml:space="preserve">
     <value>FileImportVMToolStripMenuItem</value>
   </data>
-  <data name=">>FileImportVMToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;FileImportVMToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>importSearchToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;importSearchToolStripMenuItem.Name" xml:space="preserve">
     <value>importSearchToolStripMenuItem</value>
   </data>
-  <data name=">>importSearchToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;importSearchToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator21.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator21.Name" xml:space="preserve">
     <value>toolStripSeparator21</value>
   </data>
-  <data name=">>toolStripSeparator21.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator21.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>importSettingsToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;importSettingsToolStripMenuItem.Name" xml:space="preserve">
     <value>importSettingsToolStripMenuItem</value>
   </data>
-  <data name=">>importSettingsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;importSettingsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>exportSettingsToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;exportSettingsToolStripMenuItem.Name" xml:space="preserve">
     <value>exportSettingsToolStripMenuItem</value>
   </data>
-  <data name=">>exportSettingsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;exportSettingsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>toolStripSeparator31.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator31.Name" xml:space="preserve">
     <value>toolStripSeparator31</value>
   </data>
-  <data name=">>toolStripSeparator31.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator31.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pluginItemsPlaceHolderToolStripMenuItem1.Name" xml:space="preserve">
+  <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem1.Name" xml:space="preserve">
     <value>pluginItemsPlaceHolderToolStripMenuItem1</value>
   </data>
-  <data name=">>pluginItemsPlaceHolderToolStripMenuItem1.Type" xml:space="preserve">
+  <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>exitToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;exitToolStripMenuItem.Name" xml:space="preserve">
     <value>exitToolStripMenuItem</value>
   </data>
-  <data name=">>exitToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;exitToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>viewToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;viewToolStripMenuItem.Name" xml:space="preserve">
     <value>viewToolStripMenuItem</value>
   </data>
-  <data name=">>viewToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;viewToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>customTemplatesToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;customTemplatesToolStripMenuItem.Name" xml:space="preserve">
     <value>customTemplatesToolStripMenuItem</value>
   </data>
-  <data name=">>customTemplatesToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;customTemplatesToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>templatesToolStripMenuItem1.Name" xml:space="preserve">
+  <data name="&gt;&gt;templatesToolStripMenuItem1.Name" xml:space="preserve">
     <value>templatesToolStripMenuItem1</value>
   </data>
-  <data name=">>templatesToolStripMenuItem1.Type" xml:space="preserve">
+  <data name="&gt;&gt;templatesToolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>localStorageToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;localStorageToolStripMenuItem.Name" xml:space="preserve">
     <value>localStorageToolStripMenuItem</value>
   </data>
-  <data name=">>localStorageToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;localStorageToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ShowHiddenObjectsToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;ShowHiddenObjectsToolStripMenuItem.Name" xml:space="preserve">
     <value>ShowHiddenObjectsToolStripMenuItem</value>
   </data>
-  <data name=">>ShowHiddenObjectsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;ShowHiddenObjectsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>toolStripSeparator24.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator24.Name" xml:space="preserve">
     <value>toolStripSeparator24</value>
   </data>
-  <data name=">>toolStripSeparator24.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator24.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pluginItemsPlaceHolderToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem.Name" xml:space="preserve">
     <value>pluginItemsPlaceHolderToolStripMenuItem</value>
   </data>
-  <data name=">>pluginItemsPlaceHolderToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>toolbarToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolbarToolStripMenuItem.Name" xml:space="preserve">
     <value>toolbarToolStripMenuItem</value>
   </data>
-  <data name=">>toolbarToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolbarToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>poolToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;poolToolStripMenuItem.Name" xml:space="preserve">
     <value>poolToolStripMenuItem</value>
   </data>
-  <data name=">>poolToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;poolToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>AddPoolToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;AddPoolToolStripMenuItem.Name" xml:space="preserve">
     <value>AddPoolToolStripMenuItem</value>
   </data>
-  <data name=">>AddPoolToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;AddPoolToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator8.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator8.Name" xml:space="preserve">
     <value>toolStripSeparator8</value>
   </data>
-  <data name=">>toolStripSeparator8.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator8.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>addServerToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;addServerToolStripMenuItem.Name" xml:space="preserve">
     <value>addServerToolStripMenuItem</value>
   </data>
-  <data name=">>addServerToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;addServerToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.AddHostToSelectedPoolToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>removeServerToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;removeServerToolStripMenuItem.Name" xml:space="preserve">
     <value>removeServerToolStripMenuItem</value>
   </data>
-  <data name=">>removeServerToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;removeServerToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>poolReconnectAsToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;poolReconnectAsToolStripMenuItem.Name" xml:space="preserve">
     <value>poolReconnectAsToolStripMenuItem</value>
   </data>
-  <data name=">>poolReconnectAsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;poolReconnectAsToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>disconnectPoolToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;disconnectPoolToolStripMenuItem.Name" xml:space="preserve">
     <value>disconnectPoolToolStripMenuItem</value>
   </data>
-  <data name=">>disconnectPoolToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;disconnectPoolToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator27.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator27.Name" xml:space="preserve">
     <value>toolStripSeparator27</value>
   </data>
-  <data name=">>toolStripSeparator27.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator27.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>virtualAppliancesToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;virtualAppliancesToolStripMenuItem.Name" xml:space="preserve">
     <value>virtualAppliancesToolStripMenuItem</value>
   </data>
-  <data name=">>virtualAppliancesToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;virtualAppliancesToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator30.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator30.Name" xml:space="preserve">
     <value>toolStripSeparator30</value>
   </data>
-  <data name=">>toolStripSeparator30.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator30.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>highAvailabilityToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;highAvailabilityToolStripMenuItem.Name" xml:space="preserve">
     <value>highAvailabilityToolStripMenuItem</value>
   </data>
-  <data name=">>highAvailabilityToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;highAvailabilityToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>disasterRecoveryToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;disasterRecoveryToolStripMenuItem.Name" xml:space="preserve">
     <value>disasterRecoveryToolStripMenuItem</value>
   </data>
-  <data name=">>disasterRecoveryToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;disasterRecoveryToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>drConfigureToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;drConfigureToolStripMenuItem.Name" xml:space="preserve">
     <value>drConfigureToolStripMenuItem</value>
   </data>
-  <data name=">>drConfigureToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;drConfigureToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>DrWizardToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;DrWizardToolStripMenuItem.Name" xml:space="preserve">
     <value>DrWizardToolStripMenuItem</value>
   </data>
-  <data name=">>DrWizardToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;DrWizardToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>vMProtectionAndRecoveryToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;vMProtectionAndRecoveryToolStripMenuItem.Name" xml:space="preserve">
     <value>vMProtectionAndRecoveryToolStripMenuItem</value>
   </data>
-  <data name=">>vMProtectionAndRecoveryToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;vMProtectionAndRecoveryToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>wlbReportsToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;wlbReportsToolStripMenuItem.Name" xml:space="preserve">
     <value>wlbReportsToolStripMenuItem</value>
   </data>
-  <data name=">>wlbReportsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;wlbReportsToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>wlbDisconnectToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;wlbDisconnectToolStripMenuItem.Name" xml:space="preserve">
     <value>wlbDisconnectToolStripMenuItem</value>
   </data>
-  <data name=">>wlbDisconnectToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;wlbDisconnectToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator9.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator9.Name" xml:space="preserve">
     <value>toolStripSeparator9</value>
   </data>
-  <data name=">>toolStripSeparator9.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator9.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>changePoolPasswordToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;changePoolPasswordToolStripMenuItem.Name" xml:space="preserve">
     <value>changePoolPasswordToolStripMenuItem</value>
   </data>
-  <data name=">>changePoolPasswordToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;changePoolPasswordToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripMenuItem1.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
     <value>toolStripMenuItem1</value>
   </data>
-  <data name=">>toolStripMenuItem1.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>deleteToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;deleteToolStripMenuItem.Name" xml:space="preserve">
     <value>deleteToolStripMenuItem</value>
   </data>
-  <data name=">>deleteToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;deleteToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator26.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator26.Name" xml:space="preserve">
     <value>toolStripSeparator26</value>
   </data>
-  <data name=">>toolStripSeparator26.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator26.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pluginItemsPlaceHolderToolStripMenuItem2.Name" xml:space="preserve">
+  <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem2.Name" xml:space="preserve">
     <value>pluginItemsPlaceHolderToolStripMenuItem2</value>
   </data>
-  <data name=">>pluginItemsPlaceHolderToolStripMenuItem2.Type" xml:space="preserve">
+  <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>PoolPropertiesToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;PoolPropertiesToolStripMenuItem.Name" xml:space="preserve">
     <value>PoolPropertiesToolStripMenuItem</value>
   </data>
-  <data name=">>PoolPropertiesToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;PoolPropertiesToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>HostMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;HostMenuItem.Name" xml:space="preserve">
     <value>HostMenuItem</value>
   </data>
-  <data name=">>HostMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;HostMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>AddHostToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;AddHostToolStripMenuItem.Name" xml:space="preserve">
     <value>AddHostToolStripMenuItem</value>
   </data>
-  <data name=">>AddHostToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;AddHostToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripMenuItem11.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItem11.Name" xml:space="preserve">
     <value>toolStripMenuItem11</value>
   </data>
-  <data name=">>toolStripMenuItem11.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItem11.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>RebootHostToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;RebootHostToolStripMenuItem.Name" xml:space="preserve">
     <value>RebootHostToolStripMenuItem</value>
   </data>
-  <data name=">>RebootHostToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;RebootHostToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>powerOnToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;powerOnToolStripMenuItem.Name" xml:space="preserve">
     <value>powerOnToolStripMenuItem</value>
   </data>
-  <data name=">>powerOnToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;powerOnToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>ShutdownHostToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;ShutdownHostToolStripMenuItem.Name" xml:space="preserve">
     <value>ShutdownHostToolStripMenuItem</value>
   </data>
-  <data name=">>ShutdownHostToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;ShutdownHostToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>restartToolstackToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;restartToolstackToolStripMenuItem.Name" xml:space="preserve">
     <value>restartToolstackToolStripMenuItem</value>
   </data>
-  <data name=">>restartToolstackToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;restartToolstackToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator1.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
     <value>toolStripSeparator1</value>
   </data>
-  <data name=">>toolStripSeparator1.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>connectDisconnectToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;connectDisconnectToolStripMenuItem.Name" xml:space="preserve">
     <value>connectDisconnectToolStripMenuItem</value>
   </data>
-  <data name=">>connectDisconnectToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;connectDisconnectToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ReconnectToolStripMenuItem1.Name" xml:space="preserve">
+  <data name="&gt;&gt;ReconnectToolStripMenuItem1.Name" xml:space="preserve">
     <value>ReconnectToolStripMenuItem1</value>
   </data>
-  <data name=">>ReconnectToolStripMenuItem1.Type" xml:space="preserve">
+  <data name="&gt;&gt;ReconnectToolStripMenuItem1.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>DisconnectToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;DisconnectToolStripMenuItem.Name" xml:space="preserve">
     <value>DisconnectToolStripMenuItem</value>
   </data>
-  <data name=">>DisconnectToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;DisconnectToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>reconnectAsToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;reconnectAsToolStripMenuItem.Name" xml:space="preserve">
     <value>reconnectAsToolStripMenuItem</value>
   </data>
-  <data name=">>reconnectAsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;reconnectAsToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator4.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator4.Name" xml:space="preserve">
     <value>toolStripSeparator4</value>
   </data>
-  <data name=">>toolStripSeparator4.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>connectAllToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;connectAllToolStripMenuItem.Name" xml:space="preserve">
     <value>connectAllToolStripMenuItem</value>
   </data>
-  <data name=">>connectAllToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;connectAllToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>disconnectAllToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;disconnectAllToolStripMenuItem.Name" xml:space="preserve">
     <value>disconnectAllToolStripMenuItem</value>
   </data>
-  <data name=">>disconnectAllToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;disconnectAllToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>addServerToPoolMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;addServerToPoolMenuItem.Name" xml:space="preserve">
     <value>addServerToPoolMenuItem</value>
   </data>
-  <data name=">>addServerToPoolMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;addServerToPoolMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.AddSelectedHostToPoolToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator3.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
     <value>toolStripSeparator3</value>
   </data>
-  <data name=">>toolStripSeparator3.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>backupToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;backupToolStripMenuItem.Name" xml:space="preserve">
     <value>backupToolStripMenuItem</value>
   </data>
-  <data name=">>backupToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;backupToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>restoreFromBackupToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;restoreFromBackupToolStripMenuItem.Name" xml:space="preserve">
     <value>restoreFromBackupToolStripMenuItem</value>
   </data>
-  <data name=">>restoreFromBackupToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;restoreFromBackupToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator23.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator23.Name" xml:space="preserve">
     <value>toolStripSeparator23</value>
   </data>
-  <data name=">>toolStripSeparator23.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator23.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>maintenanceModeToolStripMenuItem1.Name" xml:space="preserve">
+  <data name="&gt;&gt;maintenanceModeToolStripMenuItem1.Name" xml:space="preserve">
     <value>maintenanceModeToolStripMenuItem1</value>
   </data>
-  <data name=">>maintenanceModeToolStripMenuItem1.Type" xml:space="preserve">
+  <data name="&gt;&gt;maintenanceModeToolStripMenuItem1.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>RemoveCrashdumpsToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;RemoveCrashdumpsToolStripMenuItem.Name" xml:space="preserve">
     <value>RemoveCrashdumpsToolStripMenuItem</value>
   </data>
-  <data name=">>RemoveCrashdumpsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;RemoveCrashdumpsToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>HostPasswordToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;HostPasswordToolStripMenuItem.Name" xml:space="preserve">
     <value>HostPasswordToolStripMenuItem</value>
   </data>
-  <data name=">>HostPasswordToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;HostPasswordToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>ChangeRootPasswordToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;ChangeRootPasswordToolStripMenuItem.Name" xml:space="preserve">
     <value>ChangeRootPasswordToolStripMenuItem</value>
   </data>
-  <data name=">>ChangeRootPasswordToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;ChangeRootPasswordToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>forgetSavedPasswordToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;forgetSavedPasswordToolStripMenuItem.Name" xml:space="preserve">
     <value>forgetSavedPasswordToolStripMenuItem</value>
   </data>
-  <data name=">>forgetSavedPasswordToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;forgetSavedPasswordToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator25.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator25.Name" xml:space="preserve">
     <value>toolStripSeparator25</value>
   </data>
-  <data name=">>toolStripSeparator25.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator25.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>destroyServerToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;destroyServerToolStripMenuItem.Name" xml:space="preserve">
     <value>destroyServerToolStripMenuItem</value>
   </data>
-  <data name=">>destroyServerToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;destroyServerToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>removeHostToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;removeHostToolStripMenuItem.Name" xml:space="preserve">
     <value>removeHostToolStripMenuItem</value>
   </data>
-  <data name=">>removeHostToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;removeHostToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator15.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator15.Name" xml:space="preserve">
     <value>toolStripSeparator15</value>
   </data>
-  <data name=">>toolStripSeparator15.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator15.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pluginItemsPlaceHolderToolStripMenuItem3.Name" xml:space="preserve">
+  <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem3.Name" xml:space="preserve">
     <value>pluginItemsPlaceHolderToolStripMenuItem3</value>
   </data>
-  <data name=">>pluginItemsPlaceHolderToolStripMenuItem3.Type" xml:space="preserve">
+  <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ServerPropertiesToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;ServerPropertiesToolStripMenuItem.Name" xml:space="preserve">
     <value>ServerPropertiesToolStripMenuItem</value>
   </data>
-  <data name=">>ServerPropertiesToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;ServerPropertiesToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>VMToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;VMToolStripMenuItem.Name" xml:space="preserve">
     <value>VMToolStripMenuItem</value>
   </data>
-  <data name=">>VMToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;VMToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>NewVmToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;NewVmToolStripMenuItem.Name" xml:space="preserve">
     <value>NewVmToolStripMenuItem</value>
   </data>
-  <data name=">>NewVmToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;NewVmToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>startShutdownToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;startShutdownToolStripMenuItem.Name" xml:space="preserve">
     <value>startShutdownToolStripMenuItem</value>
   </data>
-  <data name=">>startShutdownToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;startShutdownToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.VMLifeCycleToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>resumeOnToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;resumeOnToolStripMenuItem.Name" xml:space="preserve">
     <value>resumeOnToolStripMenuItem</value>
   </data>
-  <data name=">>resumeOnToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;resumeOnToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.ResumeVMOnHostToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>relocateToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;relocateToolStripMenuItem.Name" xml:space="preserve">
     <value>relocateToolStripMenuItem</value>
   </data>
-  <data name=">>relocateToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;relocateToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.MigrateVMToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>startOnHostToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;startOnHostToolStripMenuItem.Name" xml:space="preserve">
     <value>startOnHostToolStripMenuItem</value>
   </data>
-  <data name=">>startOnHostToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;startOnHostToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.StartVMOnHostToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator20.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator20.Name" xml:space="preserve">
     <value>toolStripSeparator20</value>
   </data>
-  <data name=">>toolStripSeparator20.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator20.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>assignPolicyToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;assignPolicyToolStripMenuItem.Name" xml:space="preserve">
     <value>assignPolicyToolStripMenuItem</value>
   </data>
-  <data name=">>assignPolicyToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;assignPolicyToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.AssignGroupToolStripMenuItemVMPP, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>assignToVirtualApplianceToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;assignToVirtualApplianceToolStripMenuItem.Name" xml:space="preserve">
     <value>assignToVirtualApplianceToolStripMenuItem</value>
   </data>
-  <data name=">>assignToVirtualApplianceToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;assignToVirtualApplianceToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.AssignGroupToolStripMenuItemVM_appliance, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripMenuItem9.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItem9.Name" xml:space="preserve">
     <value>toolStripMenuItem9</value>
   </data>
-  <data name=">>toolStripMenuItem9.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItem9.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>copyVMtoSharedStorageMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;copyVMtoSharedStorageMenuItem.Name" xml:space="preserve">
     <value>copyVMtoSharedStorageMenuItem</value>
   </data>
-  <data name=">>copyVMtoSharedStorageMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;copyVMtoSharedStorageMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>MoveVMToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;MoveVMToolStripMenuItem.Name" xml:space="preserve">
     <value>MoveVMToolStripMenuItem</value>
   </data>
-  <data name=">>MoveVMToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;MoveVMToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>snapshotToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;snapshotToolStripMenuItem.Name" xml:space="preserve">
     <value>snapshotToolStripMenuItem</value>
   </data>
-  <data name=">>snapshotToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;snapshotToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>convertToTemplateToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;convertToTemplateToolStripMenuItem.Name" xml:space="preserve">
     <value>convertToTemplateToolStripMenuItem</value>
   </data>
-  <data name=">>convertToTemplateToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;convertToTemplateToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>exportToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;exportToolStripMenuItem.Name" xml:space="preserve">
     <value>exportToolStripMenuItem</value>
   </data>
-  <data name=">>exportToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;exportToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripMenuItem12.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItem12.Name" xml:space="preserve">
     <value>toolStripMenuItem12</value>
   </data>
-  <data name=">>toolStripMenuItem12.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItem12.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>installToolsToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;installToolsToolStripMenuItem.Name" xml:space="preserve">
     <value>installToolsToolStripMenuItem</value>
   </data>
-  <data name=">>installToolsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;installToolsToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>sendCtrlAltDelToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;sendCtrlAltDelToolStripMenuItem.Name" xml:space="preserve">
     <value>sendCtrlAltDelToolStripMenuItem</value>
   </data>
-  <data name=">>sendCtrlAltDelToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;sendCtrlAltDelToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>toolStripSeparator5.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator5.Name" xml:space="preserve">
     <value>toolStripSeparator5</value>
   </data>
-  <data name=">>toolStripSeparator5.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator5.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>uninstallToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;uninstallToolStripMenuItem.Name" xml:space="preserve">
     <value>uninstallToolStripMenuItem</value>
   </data>
-  <data name=">>uninstallToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;uninstallToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator10.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator10.Name" xml:space="preserve">
     <value>toolStripSeparator10</value>
   </data>
-  <data name=">>toolStripSeparator10.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator10.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pluginItemsPlaceHolderToolStripMenuItem4.Name" xml:space="preserve">
+  <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem4.Name" xml:space="preserve">
     <value>pluginItemsPlaceHolderToolStripMenuItem4</value>
   </data>
-  <data name=">>pluginItemsPlaceHolderToolStripMenuItem4.Type" xml:space="preserve">
+  <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>VMPropertiesToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;VMPropertiesToolStripMenuItem.Name" xml:space="preserve">
     <value>VMPropertiesToolStripMenuItem</value>
   </data>
-  <data name=">>VMPropertiesToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;VMPropertiesToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripMenuItem8.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItem8.Name" xml:space="preserve">
     <value>toolStripMenuItem8</value>
   </data>
-  <data name=">>toolStripMenuItem8.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItem8.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>StorageToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;StorageToolStripMenuItem.Name" xml:space="preserve">
     <value>StorageToolStripMenuItem</value>
   </data>
-  <data name=">>StorageToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;StorageToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>AddStorageToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;AddStorageToolStripMenuItem.Name" xml:space="preserve">
     <value>AddStorageToolStripMenuItem</value>
   </data>
-  <data name=">>AddStorageToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;AddStorageToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator22.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator22.Name" xml:space="preserve">
     <value>toolStripSeparator22</value>
   </data>
-  <data name=">>toolStripSeparator22.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator22.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>RepairStorageToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;RepairStorageToolStripMenuItem.Name" xml:space="preserve">
     <value>RepairStorageToolStripMenuItem</value>
   </data>
-  <data name=">>RepairStorageToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;RepairStorageToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>DefaultSRToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;DefaultSRToolStripMenuItem.Name" xml:space="preserve">
     <value>DefaultSRToolStripMenuItem</value>
   </data>
-  <data name=">>DefaultSRToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;DefaultSRToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>shareStorageRepositoryToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;shareStorageRepositoryToolStripMenuItem.Name" xml:space="preserve">
     <value>shareStorageRepositoryToolStripMenuItem</value>
   </data>
-  <data name=">>shareStorageRepositoryToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;shareStorageRepositoryToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>upgradeStorageRepositoryToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;upgradeStorageRepositoryToolStripMenuItem.Name" xml:space="preserve">
     <value>upgradeStorageRepositoryToolStripMenuItem</value>
   </data>
-  <data name=">>upgradeStorageRepositoryToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;upgradeStorageRepositoryToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator2.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
     <value>toolStripSeparator2</value>
   </data>
-  <data name=">>toolStripSeparator2.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>virtualDisksToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;virtualDisksToolStripMenuItem.Name" xml:space="preserve">
     <value>virtualDisksToolStripMenuItem</value>
   </data>
-  <data name=">>virtualDisksToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;virtualDisksToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>addVirtualDiskToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;addVirtualDiskToolStripMenuItem.Name" xml:space="preserve">
     <value>addVirtualDiskToolStripMenuItem</value>
   </data>
-  <data name=">>addVirtualDiskToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;addVirtualDiskToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>attachVirtualDiskToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;attachVirtualDiskToolStripMenuItem.Name" xml:space="preserve">
     <value>attachVirtualDiskToolStripMenuItem</value>
   </data>
-  <data name=">>attachVirtualDiskToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;attachVirtualDiskToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>storageLinkToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;storageLinkToolStripMenuItem.Name" xml:space="preserve">
     <value>storageLinkToolStripMenuItem</value>
   </data>
-  <data name=">>storageLinkToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;storageLinkToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.StorageLinkToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>reclaimFreedSpacetripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;reclaimFreedSpacetripMenuItem.Name" xml:space="preserve">
     <value>reclaimFreedSpacetripMenuItem</value>
   </data>
-  <data name=">>reclaimFreedSpacetripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;reclaimFreedSpacetripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator19.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator19.Name" xml:space="preserve">
     <value>toolStripSeparator19</value>
   </data>
-  <data name=">>toolStripSeparator19.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator19.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>DetachStorageToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;DetachStorageToolStripMenuItem.Name" xml:space="preserve">
     <value>DetachStorageToolStripMenuItem</value>
   </data>
-  <data name=">>DetachStorageToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;DetachStorageToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>ReattachStorageRepositoryToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;ReattachStorageRepositoryToolStripMenuItem.Name" xml:space="preserve">
     <value>ReattachStorageRepositoryToolStripMenuItem</value>
   </data>
-  <data name=">>ReattachStorageRepositoryToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;ReattachStorageRepositoryToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>ForgetStorageRepositoryToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;ForgetStorageRepositoryToolStripMenuItem.Name" xml:space="preserve">
     <value>ForgetStorageRepositoryToolStripMenuItem</value>
   </data>
-  <data name=">>ForgetStorageRepositoryToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;ForgetStorageRepositoryToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>DestroyStorageRepositoryToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;DestroyStorageRepositoryToolStripMenuItem.Name" xml:space="preserve">
     <value>DestroyStorageRepositoryToolStripMenuItem</value>
   </data>
-  <data name=">>DestroyStorageRepositoryToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;DestroyStorageRepositoryToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator18.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator18.Name" xml:space="preserve">
     <value>toolStripSeparator18</value>
   </data>
-  <data name=">>toolStripSeparator18.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator18.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pluginItemsPlaceHolderToolStripMenuItem5.Name" xml:space="preserve">
+  <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem5.Name" xml:space="preserve">
     <value>pluginItemsPlaceHolderToolStripMenuItem5</value>
   </data>
-  <data name=">>pluginItemsPlaceHolderToolStripMenuItem5.Type" xml:space="preserve">
+  <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem5.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>SRPropertiesToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;SRPropertiesToolStripMenuItem.Name" xml:space="preserve">
     <value>SRPropertiesToolStripMenuItem</value>
   </data>
-  <data name=">>SRPropertiesToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;SRPropertiesToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>templatesToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;templatesToolStripMenuItem.Name" xml:space="preserve">
     <value>templatesToolStripMenuItem</value>
   </data>
-  <data name=">>templatesToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;templatesToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>CreateVmFromTemplateToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;CreateVmFromTemplateToolStripMenuItem.Name" xml:space="preserve">
     <value>CreateVmFromTemplateToolStripMenuItem</value>
   </data>
-  <data name=">>CreateVmFromTemplateToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;CreateVmFromTemplateToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>newVMFromTemplateToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;newVMFromTemplateToolStripMenuItem.Name" xml:space="preserve">
     <value>newVMFromTemplateToolStripMenuItem</value>
   </data>
-  <data name=">>newVMFromTemplateToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;newVMFromTemplateToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>InstantVmToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;InstantVmToolStripMenuItem.Name" xml:space="preserve">
     <value>InstantVmToolStripMenuItem</value>
   </data>
-  <data name=">>InstantVmToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;InstantVmToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator29.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator29.Name" xml:space="preserve">
     <value>toolStripSeparator29</value>
   </data>
-  <data name=">>toolStripSeparator29.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator29.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>exportTemplateToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;exportTemplateToolStripMenuItem.Name" xml:space="preserve">
     <value>exportTemplateToolStripMenuItem</value>
   </data>
-  <data name=">>exportTemplateToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;exportTemplateToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>duplicateTemplateToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;duplicateTemplateToolStripMenuItem.Name" xml:space="preserve">
     <value>duplicateTemplateToolStripMenuItem</value>
   </data>
-  <data name=">>duplicateTemplateToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;duplicateTemplateToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator16.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator16.Name" xml:space="preserve">
     <value>toolStripSeparator16</value>
   </data>
-  <data name=">>toolStripSeparator16.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator16.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>uninstallTemplateToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;uninstallTemplateToolStripMenuItem.Name" xml:space="preserve">
     <value>uninstallTemplateToolStripMenuItem</value>
   </data>
-  <data name=">>uninstallTemplateToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;uninstallTemplateToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator28.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator28.Name" xml:space="preserve">
     <value>toolStripSeparator28</value>
   </data>
-  <data name=">>toolStripSeparator28.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator28.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pluginItemsPlaceHolderToolStripMenuItem6.Name" xml:space="preserve">
+  <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem6.Name" xml:space="preserve">
     <value>pluginItemsPlaceHolderToolStripMenuItem6</value>
   </data>
-  <data name=">>pluginItemsPlaceHolderToolStripMenuItem6.Type" xml:space="preserve">
+  <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem6.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>templatePropertiesToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;templatePropertiesToolStripMenuItem.Name" xml:space="preserve">
     <value>templatePropertiesToolStripMenuItem</value>
   </data>
-  <data name=">>templatePropertiesToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;templatePropertiesToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolsToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolsToolStripMenuItem.Name" xml:space="preserve">
     <value>toolsToolStripMenuItem</value>
   </data>
-  <data name=">>toolsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>bugToolToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;bugToolToolStripMenuItem.Name" xml:space="preserve">
     <value>bugToolToolStripMenuItem</value>
   </data>
-  <data name=">>bugToolToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;bugToolToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator14.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator14.Name" xml:space="preserve">
     <value>toolStripSeparator14</value>
   </data>
-  <data name=">>toolStripSeparator14.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator14.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>LicenseManagerMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;LicenseManagerMenuItem.Name" xml:space="preserve">
     <value>LicenseManagerMenuItem</value>
   </data>
-  <data name=">>LicenseManagerMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;LicenseManagerMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>toolStripSeparator13.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator13.Name" xml:space="preserve">
     <value>toolStripSeparator13</value>
   </data>
-  <data name=">>toolStripSeparator13.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator13.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>installNewUpdateToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;installNewUpdateToolStripMenuItem.Name" xml:space="preserve">
     <value>installNewUpdateToolStripMenuItem</value>
   </data>
-  <data name=">>installNewUpdateToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;installNewUpdateToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>rollingUpgradeToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;rollingUpgradeToolStripMenuItem.Name" xml:space="preserve">
     <value>rollingUpgradeToolStripMenuItem</value>
   </data>
-  <data name=">>rollingUpgradeToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;rollingUpgradeToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>toolStripSeparator6.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator6.Name" xml:space="preserve">
     <value>toolStripSeparator6</value>
   </data>
-  <data name=">>toolStripSeparator6.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator6.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pluginItemsPlaceHolderToolStripMenuItem7.Name" xml:space="preserve">
+  <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem7.Name" xml:space="preserve">
     <value>pluginItemsPlaceHolderToolStripMenuItem7</value>
   </data>
-  <data name=">>pluginItemsPlaceHolderToolStripMenuItem7.Type" xml:space="preserve">
+  <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem7.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>preferencesToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;preferencesToolStripMenuItem.Name" xml:space="preserve">
     <value>preferencesToolStripMenuItem</value>
   </data>
-  <data name=">>preferencesToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;preferencesToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>windowToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;windowToolStripMenuItem.Name" xml:space="preserve">
     <value>windowToolStripMenuItem</value>
   </data>
-  <data name=">>windowToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;windowToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pluginItemsPlaceHolderToolStripMenuItem9.Name" xml:space="preserve">
+  <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem9.Name" xml:space="preserve">
     <value>pluginItemsPlaceHolderToolStripMenuItem9</value>
   </data>
-  <data name=">>pluginItemsPlaceHolderToolStripMenuItem9.Type" xml:space="preserve">
+  <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem9.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>helpToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;helpToolStripMenuItem.Name" xml:space="preserve">
     <value>helpToolStripMenuItem</value>
   </data>
-  <data name=">>helpToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;helpToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>helpTopicsToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;helpTopicsToolStripMenuItem.Name" xml:space="preserve">
     <value>helpTopicsToolStripMenuItem</value>
   </data>
-  <data name=">>helpTopicsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;helpTopicsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>helpContextMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;helpContextMenuItem.Name" xml:space="preserve">
     <value>helpContextMenuItem</value>
   </data>
-  <data name=">>helpContextMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;helpContextMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>toolStripMenuItem15.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItem15.Name" xml:space="preserve">
     <value>toolStripMenuItem15</value>
   </data>
-  <data name=">>toolStripMenuItem15.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItem15.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>viewApplicationLogToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;viewApplicationLogToolStripMenuItem.Name" xml:space="preserve">
     <value>viewApplicationLogToolStripMenuItem</value>
   </data>
-  <data name=">>viewApplicationLogToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;viewApplicationLogToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>toolStripMenuItem17.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItem17.Name" xml:space="preserve">
     <value>toolStripMenuItem17</value>
   </data>
-  <data name=">>toolStripMenuItem17.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItem17.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>xenSourceOnTheWebToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;xenSourceOnTheWebToolStripMenuItem.Name" xml:space="preserve">
     <value>xenSourceOnTheWebToolStripMenuItem</value>
   </data>
-  <data name=">>xenSourceOnTheWebToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;xenSourceOnTheWebToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>toolStripSeparator7.Name" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator7.Name" xml:space="preserve">
     <value>toolStripSeparator7</value>
   </data>
-  <data name=">>toolStripSeparator7.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator7.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pluginItemsPlaceHolderToolStripMenuItem8.Name" xml:space="preserve">
+  <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem8.Name" xml:space="preserve">
     <value>pluginItemsPlaceHolderToolStripMenuItem8</value>
   </data>
-  <data name=">>pluginItemsPlaceHolderToolStripMenuItem8.Type" xml:space="preserve">
+  <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem8.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>aboutXenSourceAdminToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;aboutXenSourceAdminToolStripMenuItem.Name" xml:space="preserve">
     <value>aboutXenSourceAdminToolStripMenuItem</value>
   </data>
-  <data name=">>aboutXenSourceAdminToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;aboutXenSourceAdminToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>xenCenterPluginsOnlineToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;xenCenterPluginsOnlineToolStripMenuItem.Name" xml:space="preserve">
     <value>xenCenterPluginsOnlineToolStripMenuItem</value>
   </data>
-  <data name=">>xenCenterPluginsOnlineToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;xenCenterPluginsOnlineToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>securityGroupsToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;securityGroupsToolStripMenuItem.Name" xml:space="preserve">
     <value>securityGroupsToolStripMenuItem</value>
   </data>
-  <data name=">>securityGroupsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;securityGroupsToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>statusLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;statusLabel.Name" xml:space="preserve">
     <value>statusLabel</value>
   </data>
-  <data name=">>statusLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;statusLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>statusProgressBar.Name" xml:space="preserve">
+  <data name="&gt;&gt;statusProgressBar.Name" xml:space="preserve">
     <value>statusProgressBar</value>
   </data>
-  <data name=">>statusProgressBar.Type" xml:space="preserve">
+  <data name="&gt;&gt;statusProgressBar.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainWindow</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="exportResourceReportPoolToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>277, 22</value>
   </data>
-  <data name=">>exportResourceReportPoolToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;exportResourceReportPoolToolStripMenuItem.Name" xml:space="preserve">
     <value>exportResourceReportPoolToolStripMenuItem</value>
   </data>
-  <data name=">>exportResourceReportPoolToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;exportResourceReportPoolToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

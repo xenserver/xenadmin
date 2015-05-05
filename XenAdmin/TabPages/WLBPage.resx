@@ -150,16 +150,16 @@
   <data name="pictureBoxWarningTriangle.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>pictureBoxWarningTriangle.Name" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWarningTriangle.Name" xml:space="preserve">
     <value>pictureBoxWarningTriangle</value>
   </data>
-  <data name=">>pictureBoxWarningTriangle.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWarningTriangle.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pictureBoxWarningTriangle.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWarningTriangle.Parent" xml:space="preserve">
     <value>tableLayoutPanelStatus</value>
   </data>
-  <data name=">>pictureBoxWarningTriangle.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWarningTriangle.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelStatus.AutoSize" type="System.Boolean, mscorlib">
@@ -179,16 +179,16 @@
 
 {1}</value>
   </data>
-  <data name=">>labelStatus.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelStatus.Name" xml:space="preserve">
     <value>labelStatus</value>
   </data>
-  <data name=">>labelStatus.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelStatus.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelStatus.Parent" xml:space="preserve">
     <value>tableLayoutPanelStatus</value>
   </data>
-  <data name=">>labelStatus.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelStatus.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanelStatus.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -206,16 +206,16 @@
   <data name="tableLayoutPanelStatus.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableLayoutPanelStatus.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelStatus.Name" xml:space="preserve">
     <value>tableLayoutPanelStatus</value>
   </data>
-  <data name=">>tableLayoutPanelStatus.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanelStatus.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelStatus.Parent" xml:space="preserve">
     <value>tableLayoutPanelMain</value>
   </data>
-  <data name=">>tableLayoutPanelStatus.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelStatus.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanelStatus.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -245,16 +245,16 @@
   <data name="buttonConnect.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
   </data>
-  <data name=">>buttonConnect.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonConnect.Name" xml:space="preserve">
     <value>buttonConnect</value>
   </data>
-  <data name=">>buttonConnect.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonConnect.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonConnect.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonConnect.Parent" xml:space="preserve">
     <value>flowLayoutPanelLeftButtons</value>
   </data>
-  <data name=">>buttonConnect.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonConnect.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="buttonConfigure.AutoSize" type="System.Boolean, mscorlib">
@@ -278,16 +278,16 @@
   <data name="buttonConfigure.Text" xml:space="preserve">
     <value>S&amp;ettings...</value>
   </data>
-  <data name=">>buttonConfigure.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonConfigure.Name" xml:space="preserve">
     <value>buttonConfigure</value>
   </data>
-  <data name=">>buttonConfigure.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonConfigure.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonConfigure.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonConfigure.Parent" xml:space="preserve">
     <value>flowLayoutPanelLeftButtons</value>
   </data>
-  <data name=">>buttonConfigure.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonConfigure.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="buttonEnableDisableWlb.AutoSize" type="System.Boolean, mscorlib">
@@ -317,16 +317,16 @@
   <data name="buttonEnableDisableWlb.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
   </data>
-  <data name=">>buttonEnableDisableWlb.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonEnableDisableWlb.Name" xml:space="preserve">
     <value>buttonEnableDisableWlb</value>
   </data>
-  <data name=">>buttonEnableDisableWlb.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonEnableDisableWlb.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonEnableDisableWlb.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonEnableDisableWlb.Parent" xml:space="preserve">
     <value>flowLayoutPanelLeftButtons</value>
   </data>
-  <data name=">>buttonEnableDisableWlb.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonEnableDisableWlb.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="flowLayoutPanelLeftButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -341,16 +341,16 @@
   <data name="flowLayoutPanelLeftButtons.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
   </data>
-  <data name=">>flowLayoutPanelLeftButtons.Name" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanelLeftButtons.Name" xml:space="preserve">
     <value>flowLayoutPanelLeftButtons</value>
   </data>
-  <data name=">>flowLayoutPanelLeftButtons.Type" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanelLeftButtons.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>flowLayoutPanelLeftButtons.Parent" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanelLeftButtons.Parent" xml:space="preserve">
     <value>panelButtons</value>
   </data>
-  <data name=">>flowLayoutPanelLeftButtons.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanelLeftButtons.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="flowLayoutPanelRightButtons.AutoSize" type="System.Boolean, mscorlib">
@@ -377,16 +377,16 @@
   <data name="buttonReports.Text" xml:space="preserve">
     <value>&amp;Reports...</value>
   </data>
-  <data name=">>buttonReports.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonReports.Name" xml:space="preserve">
     <value>buttonReports</value>
   </data>
-  <data name=">>buttonReports.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonReports.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonReports.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonReports.Parent" xml:space="preserve">
     <value>flowLayoutPanelRightButtons</value>
   </data>
-  <data name=">>buttonReports.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonReports.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="flowLayoutPanelRightButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -404,16 +404,16 @@
   <data name="flowLayoutPanelRightButtons.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
   </data>
-  <data name=">>flowLayoutPanelRightButtons.Name" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanelRightButtons.Name" xml:space="preserve">
     <value>flowLayoutPanelRightButtons</value>
   </data>
-  <data name=">>flowLayoutPanelRightButtons.Type" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanelRightButtons.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>flowLayoutPanelRightButtons.Parent" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanelRightButtons.Parent" xml:space="preserve">
     <value>panelButtons</value>
   </data>
-  <data name=">>flowLayoutPanelRightButtons.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanelRightButtons.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panelButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -434,16 +434,16 @@
   <data name="panelButtons.TabIndex" type="System.Int32, mscorlib">
     <value>40</value>
   </data>
-  <data name=">>panelButtons.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelButtons.Name" xml:space="preserve">
     <value>panelButtons</value>
   </data>
-  <data name=">>panelButtons.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelButtons.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelButtons.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelButtons.Parent" xml:space="preserve">
     <value>tableLayoutPanelMain</value>
   </data>
-  <data name=">>panelButtons.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelButtons.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panelConfiguration.AutoSize" type="System.Boolean, mscorlib">
@@ -470,16 +470,16 @@
   <data name="pdSectionConfiguration.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pdSectionConfiguration.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionConfiguration.Name" xml:space="preserve">
     <value>pdSectionConfiguration</value>
   </data>
-  <data name=">>pdSectionConfiguration.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionConfiguration.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionConfiguration.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionConfiguration.Parent" xml:space="preserve">
     <value>panelConfiguration</value>
   </data>
-  <data name=">>pdSectionConfiguration.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionConfiguration.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelConfiguration.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -497,16 +497,16 @@
   <data name="panelConfiguration.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>panelConfiguration.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelConfiguration.Name" xml:space="preserve">
     <value>panelConfiguration</value>
   </data>
-  <data name=">>panelConfiguration.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelConfiguration.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelConfiguration.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelConfiguration.Parent" xml:space="preserve">
     <value>tableLayoutPanelMain</value>
   </data>
-  <data name=">>panelConfiguration.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelConfiguration.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="panelOptimize.AutoSize" type="System.Boolean, mscorlib">
@@ -527,16 +527,16 @@
   <data name="wlbOptimizePool.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name=">>wlbOptimizePool.Name" xml:space="preserve">
+  <data name="&gt;&gt;wlbOptimizePool.Name" xml:space="preserve">
     <value>wlbOptimizePool</value>
   </data>
-  <data name=">>wlbOptimizePool.Type" xml:space="preserve">
+  <data name="&gt;&gt;wlbOptimizePool.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Wlb.WlbOptimizePool, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>wlbOptimizePool.Parent" xml:space="preserve">
+  <data name="&gt;&gt;wlbOptimizePool.Parent" xml:space="preserve">
     <value>panelOptimize</value>
   </data>
-  <data name=">>wlbOptimizePool.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;wlbOptimizePool.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelOptimize.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -554,16 +554,16 @@
   <data name="panelOptimize.TabIndex" type="System.Int32, mscorlib">
     <value>41</value>
   </data>
-  <data name=">>panelOptimize.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelOptimize.Name" xml:space="preserve">
     <value>panelOptimize</value>
   </data>
-  <data name=">>panelOptimize.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelOptimize.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelOptimize.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelOptimize.Parent" xml:space="preserve">
     <value>tableLayoutPanelMain</value>
   </data>
-  <data name=">>panelOptimize.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelOptimize.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="tableLayoutPanelMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -581,16 +581,16 @@
   <data name="tableLayoutPanelMain.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableLayoutPanelMain.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelMain.Name" xml:space="preserve">
     <value>tableLayoutPanelMain</value>
   </data>
-  <data name=">>tableLayoutPanelMain.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelMain.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanelMain.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelMain.Parent" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name=">>tableLayoutPanelMain.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelMain.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanelMain.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -599,16 +599,16 @@
   <data name="pageContainerPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>719, 375</value>
   </data>
-  <data name=">>pageContainerPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.Name" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name=">>pageContainerPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pageContainerPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>pageContainerPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -623,10 +623,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>719, 412</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>WlbPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.TabPages.BaseTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

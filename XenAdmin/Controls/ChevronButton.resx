@@ -141,16 +141,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>label</value>
   </data>
-  <data name=">>label1.Name" xml:space="preserve">
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name=">>label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="pictureBoxButton.Location" type="System.Drawing.Point, System.Drawing">
@@ -165,16 +165,16 @@
   <data name="pictureBoxButton.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>pictureBoxButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxButton.Name" xml:space="preserve">
     <value>pictureBoxButton</value>
   </data>
-  <data name=">>pictureBoxButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pictureBoxButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>pictureBoxButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -192,10 +192,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 28</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ChevronButton</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

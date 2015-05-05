@@ -150,16 +150,16 @@
   <data name="ClipboardCheckBox.Text" xml:space="preserve">
     <value>&amp;Share clipboard contents with remote console</value>
   </data>
-  <data name=">>ClipboardCheckBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;ClipboardCheckBox.Name" xml:space="preserve">
     <value>ClipboardCheckBox</value>
   </data>
-  <data name=">>ClipboardCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;ClipboardCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ClipboardCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ClipboardCheckBox.Parent" xml:space="preserve">
     <value>ConsoleTabTableLayoutPanel</value>
   </data>
-  <data name=">>ClipboardCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ClipboardCheckBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="RDPGroupBox.AutoSize" type="System.Boolean, mscorlib">
@@ -192,16 +192,16 @@
   <data name="checkBoxDisableRDPPolling.Text" xml:space="preserve">
     <value>E&amp;nable Remote Desktop console scanning (XenServer 6.5 and earlier)</value>
   </data>
-  <data name=">>checkBoxDisableRDPPolling.Name" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxDisableRDPPolling.Name" xml:space="preserve">
     <value>checkBoxDisableRDPPolling</value>
   </data>
-  <data name=">>checkBoxDisableRDPPolling.Type" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxDisableRDPPolling.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>checkBoxDisableRDPPolling.Parent" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxDisableRDPPolling.Parent" xml:space="preserve">
     <value>RDPGroupBox</value>
   </data>
-  <data name=">>checkBoxDisableRDPPolling.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxDisableRDPPolling.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="WindowsKeyCheckBox.AutoSize" type="System.Boolean, mscorlib">
@@ -225,16 +225,16 @@
   <data name="WindowsKeyCheckBox.Text" xml:space="preserve">
     <value>Send Windows &amp;Key combinations to the Remote Desktop console</value>
   </data>
-  <data name=">>WindowsKeyCheckBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;WindowsKeyCheckBox.Name" xml:space="preserve">
     <value>WindowsKeyCheckBox</value>
   </data>
-  <data name=">>WindowsKeyCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;WindowsKeyCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>WindowsKeyCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;WindowsKeyCheckBox.Parent" xml:space="preserve">
     <value>RDPGroupBox</value>
   </data>
-  <data name=">>WindowsKeyCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;WindowsKeyCheckBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="ConnectToServerConsoleCheckBox.AutoSize" type="System.Boolean, mscorlib">
@@ -261,16 +261,16 @@
   <data name="ConnectToServerConsoleCheckBox.Text" xml:space="preserve">
     <value>&amp;Connect directly to the server's console session</value>
   </data>
-  <data name=">>ConnectToServerConsoleCheckBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;ConnectToServerConsoleCheckBox.Name" xml:space="preserve">
     <value>ConnectToServerConsoleCheckBox</value>
   </data>
-  <data name=">>ConnectToServerConsoleCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;ConnectToServerConsoleCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ConnectToServerConsoleCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ConnectToServerConsoleCheckBox.Parent" xml:space="preserve">
     <value>RDPGroupBox</value>
   </data>
-  <data name=">>ConnectToServerConsoleCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ConnectToServerConsoleCheckBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="SoundCheckBox.AutoSize" type="System.Boolean, mscorlib">
@@ -294,16 +294,16 @@
   <data name="SoundCheckBox.Text" xml:space="preserve">
     <value>&amp;Receive sound from the Remote Desktop console</value>
   </data>
-  <data name=">>SoundCheckBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;SoundCheckBox.Name" xml:space="preserve">
     <value>SoundCheckBox</value>
   </data>
-  <data name=">>SoundCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;SoundCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>SoundCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;SoundCheckBox.Parent" xml:space="preserve">
     <value>RDPGroupBox</value>
   </data>
-  <data name=">>SoundCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;SoundCheckBox.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="AutoSwitchCheckBox.AutoSize" type="System.Boolean, mscorlib">
@@ -327,16 +327,16 @@
   <data name="AutoSwitchCheckBox.Text" xml:space="preserve">
     <value>&amp;Automatically switch to the Remote Desktop console when it becomes available</value>
   </data>
-  <data name=">>AutoSwitchCheckBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;AutoSwitchCheckBox.Name" xml:space="preserve">
     <value>AutoSwitchCheckBox</value>
   </data>
-  <data name=">>AutoSwitchCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;AutoSwitchCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>AutoSwitchCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;AutoSwitchCheckBox.Parent" xml:space="preserve">
     <value>RDPGroupBox</value>
   </data>
-  <data name=">>AutoSwitchCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;AutoSwitchCheckBox.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="RDPGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -360,16 +360,16 @@
   <data name="RDPGroupBox.Text" xml:space="preserve">
     <value>Windows Remote Desktop console options</value>
   </data>
-  <data name=">>RDPGroupBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;RDPGroupBox.Name" xml:space="preserve">
     <value>RDPGroupBox</value>
   </data>
-  <data name=">>RDPGroupBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;RDPGroupBox.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>RDPGroupBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;RDPGroupBox.Parent" xml:space="preserve">
     <value>ConsoleTabTableLayoutPanel</value>
   </data>
-  <data name=">>RDPGroupBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;RDPGroupBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="ConsoleGroupBox.AutoSize" type="System.Boolean, mscorlib">
@@ -402,16 +402,16 @@
   <data name="PreserveVNCConsoleScalingCheckBox.Text" xml:space="preserve">
     <value>Preserve current scale setting when switching &amp;back to the default console</value>
   </data>
-  <data name=">>PreserveVNCConsoleScalingCheckBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;PreserveVNCConsoleScalingCheckBox.Name" xml:space="preserve">
     <value>PreserveVNCConsoleScalingCheckBox</value>
   </data>
-  <data name=">>PreserveVNCConsoleScalingCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;PreserveVNCConsoleScalingCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>PreserveVNCConsoleScalingCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;PreserveVNCConsoleScalingCheckBox.Parent" xml:space="preserve">
     <value>ConsoleGroupBox</value>
   </data>
-  <data name=">>PreserveVNCConsoleScalingCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;PreserveVNCConsoleScalingCheckBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="PreserveUndockedScaleCheckBox.AutoSize" type="System.Boolean, mscorlib">
@@ -435,16 +435,16 @@
   <data name="PreserveUndockedScaleCheckBox.Text" xml:space="preserve">
     <value>&amp;Preserve current scale setting when console is undocked</value>
   </data>
-  <data name=">>PreserveUndockedScaleCheckBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;PreserveUndockedScaleCheckBox.Name" xml:space="preserve">
     <value>PreserveUndockedScaleCheckBox</value>
   </data>
-  <data name=">>PreserveUndockedScaleCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;PreserveUndockedScaleCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>PreserveUndockedScaleCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;PreserveUndockedScaleCheckBox.Parent" xml:space="preserve">
     <value>ConsoleGroupBox</value>
   </data>
-  <data name=">>PreserveUndockedScaleCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;PreserveUndockedScaleCheckBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="ConsoleGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -468,16 +468,16 @@
   <data name="ConsoleGroupBox.Text" xml:space="preserve">
     <value>Console scaling options</value>
   </data>
-  <data name=">>ConsoleGroupBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;ConsoleGroupBox.Name" xml:space="preserve">
     <value>ConsoleGroupBox</value>
   </data>
-  <data name=">>ConsoleGroupBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;ConsoleGroupBox.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>ConsoleGroupBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ConsoleGroupBox.Parent" xml:space="preserve">
     <value>ConsoleTabTableLayoutPanel</value>
   </data>
-  <data name=">>ConsoleGroupBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ConsoleGroupBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="ShortcutsGroupBox.AutoSize" type="System.Boolean, mscorlib">
@@ -510,16 +510,16 @@
   <data name="UncaptureKeyComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name=">>UncaptureKeyComboBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;UncaptureKeyComboBox.Name" xml:space="preserve">
     <value>UncaptureKeyComboBox</value>
   </data>
-  <data name=">>UncaptureKeyComboBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;UncaptureKeyComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>UncaptureKeyComboBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;UncaptureKeyComboBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>UncaptureKeyComboBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;UncaptureKeyComboBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="UncaptureLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -552,16 +552,16 @@
   <data name="UncaptureLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>UncaptureLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;UncaptureLabel.Name" xml:space="preserve">
     <value>UncaptureLabel</value>
   </data>
-  <data name=">>UncaptureLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;UncaptureLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>UncaptureLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;UncaptureLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>UncaptureLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;UncaptureLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="FullscreenHeader.AutoSize" type="System.Boolean, mscorlib">
@@ -594,16 +594,16 @@
   <data name="FullscreenHeader.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>FullscreenHeader.Name" xml:space="preserve">
+  <data name="&gt;&gt;FullscreenHeader.Name" xml:space="preserve">
     <value>FullscreenHeader</value>
   </data>
-  <data name=">>FullscreenHeader.Type" xml:space="preserve">
+  <data name="&gt;&gt;FullscreenHeader.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>FullscreenHeader.Parent" xml:space="preserve">
+  <data name="&gt;&gt;FullscreenHeader.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>FullscreenHeader.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;FullscreenHeader.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="DockKeyComboBox.Font" type="System.Drawing.Font, System.Drawing">
@@ -621,16 +621,16 @@
   <data name="DockKeyComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>DockKeyComboBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;DockKeyComboBox.Name" xml:space="preserve">
     <value>DockKeyComboBox</value>
   </data>
-  <data name=">>DockKeyComboBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;DockKeyComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>DockKeyComboBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;DockKeyComboBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>DockKeyComboBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;DockKeyComboBox.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="DockUndockabel.AutoSize" type="System.Boolean, mscorlib">
@@ -663,16 +663,16 @@
   <data name="DockUndockabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>DockUndockabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;DockUndockabel.Name" xml:space="preserve">
     <value>DockUndockabel</value>
   </data>
-  <data name=">>DockUndockabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;DockUndockabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>DockUndockabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;DockUndockabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>DockUndockabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;DockUndockabel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="KeyComboListBox.Font" type="System.Drawing.Font, System.Drawing">
@@ -690,16 +690,16 @@
   <data name="KeyComboListBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>KeyComboListBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;KeyComboListBox.Name" xml:space="preserve">
     <value>KeyComboListBox</value>
   </data>
-  <data name=">>KeyComboListBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;KeyComboListBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>KeyComboListBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;KeyComboListBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>KeyComboListBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;KeyComboListBox.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
@@ -714,16 +714,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>ShortcutsGroupBox</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -750,16 +750,16 @@
   <data name="ShortcutsGroupBox.Text" xml:space="preserve">
     <value>Keyboard shortcuts</value>
   </data>
-  <data name=">>ShortcutsGroupBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;ShortcutsGroupBox.Name" xml:space="preserve">
     <value>ShortcutsGroupBox</value>
   </data>
-  <data name=">>ShortcutsGroupBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;ShortcutsGroupBox.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>ShortcutsGroupBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ShortcutsGroupBox.Parent" xml:space="preserve">
     <value>ConsoleTabTableLayoutPanel</value>
   </data>
-  <data name=">>ShortcutsGroupBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ShortcutsGroupBox.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
@@ -783,16 +783,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>The server and VM consoles in XenCenter can be configured with a variety of keyboard shortcuts and clipboard options, with specific options available for those VMs which support a Remote Desktop connection.</value>
   </data>
-  <data name=">>label1.Name" xml:space="preserve">
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name=">>label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>ConsoleTabTableLayoutPanel</value>
   </data>
-  <data name=">>label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="ConsoleTabTableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -813,16 +813,16 @@
   <data name="ConsoleTabTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>ConsoleTabTableLayoutPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;ConsoleTabTableLayoutPanel.Name" xml:space="preserve">
     <value>ConsoleTabTableLayoutPanel</value>
   </data>
-  <data name=">>ConsoleTabTableLayoutPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;ConsoleTabTableLayoutPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ConsoleTabTableLayoutPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ConsoleTabTableLayoutPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>ConsoleTabTableLayoutPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ConsoleTabTableLayoutPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="ConsoleTabTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -840,10 +840,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>1015, 407</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ConsolesOptionsPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

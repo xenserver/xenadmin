@@ -138,16 +138,16 @@
   <data name="vmMemoryControls.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>vmMemoryControls.Name" xml:space="preserve">
+  <data name="&gt;&gt;vmMemoryControls.Name" xml:space="preserve">
     <value>vmMemoryControls</value>
   </data>
-  <data name=">>vmMemoryControls.Type" xml:space="preserve">
+  <data name="&gt;&gt;vmMemoryControls.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Ballooning.VMMemoryControlsNoEdit, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>vmMemoryControls.Parent" xml:space="preserve">
+  <data name="&gt;&gt;vmMemoryControls.Parent" xml:space="preserve">
     <value>panelControls</value>
   </data>
-  <data name=">>vmMemoryControls.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;vmMemoryControls.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelControls.Location" type="System.Drawing.Point, System.Drawing">
@@ -162,16 +162,16 @@
   <data name="panelControls.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>panelControls.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelControls.Name" xml:space="preserve">
     <value>panelControls</value>
   </data>
-  <data name=">>panelControls.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelControls.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PanelWithBorder, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>panelControls.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelControls.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>panelControls.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelControls.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -195,16 +195,16 @@
   <data name="memoryRowLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>memoryRowLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;memoryRowLabel.Name" xml:space="preserve">
     <value>memoryRowLabel</value>
   </data>
-  <data name=">>memoryRowLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;memoryRowLabel.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Ballooning.MemoryRowLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>memoryRowLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;memoryRowLabel.Parent" xml:space="preserve">
     <value>panelLabel</value>
   </data>
-  <data name=">>memoryRowLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;memoryRowLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelLabel.Location" type="System.Drawing.Point, System.Drawing">
@@ -219,16 +219,16 @@
   <data name="panelLabel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>panelLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelLabel.Name" xml:space="preserve">
     <value>panelLabel</value>
   </data>
-  <data name=">>panelLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelLabel.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PanelWithBorder, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>panelLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>panelLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -243,10 +243,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>788, 119</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>VMMemoryRow</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

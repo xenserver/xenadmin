@@ -159,16 +159,16 @@
   <data name="saveStateCheckBox.Text" xml:space="preserve">
     <value>&amp;Save and restore server connection state on startup</value>
   </data>
-  <data name=">>saveStateCheckBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;saveStateCheckBox.Name" xml:space="preserve">
     <value>saveStateCheckBox</value>
   </data>
-  <data name=">>saveStateCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;saveStateCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>saveStateCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;saveStateCheckBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>saveStateCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;saveStateCheckBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="saveStateLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -195,16 +195,16 @@
   <data name="saveStateLabel.Text" xml:space="preserve">
     <value>XenCenter can remember login credentials for your managed servers and use them to automatically restore the connection state of your servers when you start a session.</value>
   </data>
-  <data name=">>saveStateLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;saveStateLabel.Name" xml:space="preserve">
     <value>saveStateLabel</value>
   </data>
-  <data name=">>saveStateLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;saveStateLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>saveStateLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;saveStateLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>saveStateLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;saveStateLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="masterPasswordGroupBox.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
@@ -244,16 +244,16 @@
     <value>When set, the master password protects all your server login credentials. You will need to enter this password at the beginning of each session.
 </value>
   </data>
-  <data name=">>masterPasswordLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;masterPasswordLabel.Name" xml:space="preserve">
     <value>masterPasswordLabel</value>
   </data>
-  <data name=">>masterPasswordLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;masterPasswordLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>masterPasswordLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;masterPasswordLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>masterPasswordLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;masterPasswordLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="changeMasterPasswordButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -283,16 +283,16 @@
   <data name="changeMasterPasswordButton.Text" xml:space="preserve">
     <value>&amp;Change Master Password...</value>
   </data>
-  <data name=">>changeMasterPasswordButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;changeMasterPasswordButton.Name" xml:space="preserve">
     <value>changeMasterPasswordButton</value>
   </data>
-  <data name=">>changeMasterPasswordButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;changeMasterPasswordButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>changeMasterPasswordButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;changeMasterPasswordButton.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>changeMasterPasswordButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;changeMasterPasswordButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="requireMasterPasswordCheckBox.AutoSize" type="System.Boolean, mscorlib">
@@ -319,16 +319,16 @@
   <data name="requireMasterPasswordCheckBox.Text" xml:space="preserve">
     <value>&amp;Require a master password</value>
   </data>
-  <data name=">>requireMasterPasswordCheckBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;requireMasterPasswordCheckBox.Name" xml:space="preserve">
     <value>requireMasterPasswordCheckBox</value>
   </data>
-  <data name=">>requireMasterPasswordCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;requireMasterPasswordCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>requireMasterPasswordCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;requireMasterPasswordCheckBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>requireMasterPasswordCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;requireMasterPasswordCheckBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -349,16 +349,16 @@
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>tableLayoutPanel2.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>tableLayoutPanel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
     <value>masterPasswordGroupBox</value>
   </data>
-  <data name=">>tableLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -388,16 +388,16 @@
   <data name="masterPasswordGroupBox.Text" xml:space="preserve">
     <value>Master password</value>
   </data>
-  <data name=">>masterPasswordGroupBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;masterPasswordGroupBox.Name" xml:space="preserve">
     <value>masterPasswordGroupBox</value>
   </data>
-  <data name=">>masterPasswordGroupBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;masterPasswordGroupBox.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>masterPasswordGroupBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;masterPasswordGroupBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>masterPasswordGroupBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;masterPasswordGroupBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -418,16 +418,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -442,10 +442,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>466, 288</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>SaveAndRestoreOptionsPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

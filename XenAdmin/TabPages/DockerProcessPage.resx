@@ -153,16 +153,16 @@
   <data name="listView1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name=">>listView1.Name" xml:space="preserve">
+  <data name="&gt;&gt;listView1.Name" xml:space="preserve">
     <value>listView1</value>
   </data>
-  <data name=">>listView1.Type" xml:space="preserve">
+  <data name="&gt;&gt;listView1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ListViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>listView1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;listView1.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>listView1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;listView1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="RefreshButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -183,16 +183,16 @@
   <data name="RefreshButton.Text" xml:space="preserve">
     <value>&amp;Refresh</value>
   </data>
-  <data name=">>RefreshButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;RefreshButton.Name" xml:space="preserve">
     <value>RefreshButton</value>
   </data>
-  <data name=">>RefreshButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;RefreshButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>RefreshButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;RefreshButton.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>RefreshButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;RefreshButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelRefresh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -216,16 +216,16 @@
   <data name="labelRefresh.Text" xml:space="preserve">
     <value>Last refresh: </value>
   </data>
-  <data name=">>labelRefresh.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelRefresh.Name" xml:space="preserve">
     <value>labelRefresh</value>
   </data>
-  <data name=">>labelRefresh.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelRefresh.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelRefresh.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelRefresh.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>labelRefresh.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelRefresh.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -246,16 +246,16 @@
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name=">>flowLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>flowLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>flowLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>flowLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
@@ -270,16 +270,16 @@
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name=">>panel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>panel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name=">>panel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
@@ -303,16 +303,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Processes</value>
   </data>
-  <data name=">>label1.Name" xml:space="preserve">
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name=">>label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name=">>label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="pageContainerPanel.Location" type="System.Drawing.Point, System.Drawing">
@@ -321,16 +321,16 @@
   <data name="pageContainerPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>920, 356</value>
   </data>
-  <data name=">>pageContainerPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.Name" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name=">>pageContainerPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pageContainerPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>pageContainerPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="label6.AutoSize" type="System.Boolean, mscorlib">
@@ -348,10 +348,10 @@
   <data name="label6.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name=">>label6.Name" xml:space="preserve">
+  <data name="&gt;&gt;label6.Name" xml:space="preserve">
     <value>label6</value>
   </data>
-  <data name=">>label6.Type" xml:space="preserve">
+  <data name="&gt;&gt;label6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -366,10 +366,10 @@
   <data name="label10.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>label10.Name" xml:space="preserve">
+  <data name="&gt;&gt;label10.Name" xml:space="preserve">
     <value>label10</value>
   </data>
-  <data name=">>label10.Type" xml:space="preserve">
+  <data name="&gt;&gt;label10.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -384,10 +384,10 @@
   <data name="label9.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>label9.Name" xml:space="preserve">
+  <data name="&gt;&gt;label9.Name" xml:space="preserve">
     <value>label9</value>
   </data>
-  <data name=">>label9.Type" xml:space="preserve">
+  <data name="&gt;&gt;label9.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -402,10 +402,10 @@
   <data name="label8.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>label8.Name" xml:space="preserve">
+  <data name="&gt;&gt;label8.Name" xml:space="preserve">
     <value>label8</value>
   </data>
-  <data name=">>label8.Type" xml:space="preserve">
+  <data name="&gt;&gt;label8.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -420,10 +420,10 @@
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>label7.Name" xml:space="preserve">
+  <data name="&gt;&gt;label7.Name" xml:space="preserve">
     <value>label7</value>
   </data>
-  <data name=">>label7.Type" xml:space="preserve">
+  <data name="&gt;&gt;label7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TitleLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -453,10 +453,10 @@
   <data name="TitleLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>TitleLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;TitleLabel.Name" xml:space="preserve">
     <value>TitleLabel</value>
   </data>
-  <data name=">>TitleLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;TitleLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="RefreshTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -477,34 +477,34 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>920, 434</value>
   </data>
-  <data name=">>ColumnPID.Name" xml:space="preserve">
+  <data name="&gt;&gt;ColumnPID.Name" xml:space="preserve">
     <value>ColumnPID</value>
   </data>
-  <data name=">>ColumnPID.Type" xml:space="preserve">
+  <data name="&gt;&gt;ColumnPID.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ColumnCommand.Name" xml:space="preserve">
+  <data name="&gt;&gt;ColumnCommand.Name" xml:space="preserve">
     <value>ColumnCommand</value>
   </data>
-  <data name=">>ColumnCommand.Type" xml:space="preserve">
+  <data name="&gt;&gt;ColumnCommand.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ColumnCPUTime.Name" xml:space="preserve">
+  <data name="&gt;&gt;ColumnCPUTime.Name" xml:space="preserve">
     <value>ColumnCPUTime</value>
   </data>
-  <data name=">>ColumnCPUTime.Type" xml:space="preserve">
+  <data name="&gt;&gt;ColumnCPUTime.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>RefreshTimer.Name" xml:space="preserve">
+  <data name="&gt;&gt;RefreshTimer.Name" xml:space="preserve">
     <value>RefreshTimer</value>
   </data>
-  <data name=">>RefreshTimer.Type" xml:space="preserve">
+  <data name="&gt;&gt;RefreshTimer.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>DockerProcessPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.TabPages.BaseTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

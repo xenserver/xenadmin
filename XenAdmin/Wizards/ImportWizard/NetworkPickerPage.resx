@@ -152,16 +152,16 @@
 
 When you have finished, click "Next" to continue to the next page.</value>
   </data>
-  <data name=">>label2.Name" xml:space="preserve">
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name=">>label2.Type" xml:space="preserve">
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>label2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>label2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="m_srLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -182,16 +182,16 @@ When you have finished, click "Next" to continue to the next page.</value>
   <data name="m_srLabel.Text" xml:space="preserve">
     <value>Virtual network interfaces installed on the new virtual machines:</value>
   </data>
-  <data name=">>m_srLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_srLabel.Name" xml:space="preserve">
     <value>m_srLabel</value>
   </data>
-  <data name=">>m_srLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_srLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>m_srLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_srLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>m_srLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_srLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="NameNetworkColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -239,16 +239,16 @@ When you have finished, click "Next" to continue to the next page.</value>
   <data name="m_networkGridView.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>m_networkGridView.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_networkGridView.Name" xml:space="preserve">
     <value>m_networkGridView</value>
   </data>
-  <data name=">>m_networkGridView.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_networkGridView.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>m_networkGridView.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_networkGridView.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>m_networkGridView.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_networkGridView.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
@@ -278,16 +278,16 @@ When you have finished, click "Next" to continue to the next page.</value>
   <data name="m_buttonAddNetwork.Text" xml:space="preserve">
     <value>&amp;Add</value>
   </data>
-  <data name=">>m_buttonAddNetwork.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_buttonAddNetwork.Name" xml:space="preserve">
     <value>m_buttonAddNetwork</value>
   </data>
-  <data name=">>m_buttonAddNetwork.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_buttonAddNetwork.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>m_buttonAddNetwork.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_buttonAddNetwork.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>m_buttonAddNetwork.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_buttonAddNetwork.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="m_buttonDeleteNetwork.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -308,16 +308,16 @@ When you have finished, click "Next" to continue to the next page.</value>
   <data name="m_buttonDeleteNetwork.Text" xml:space="preserve">
     <value>Dele&amp;te</value>
   </data>
-  <data name=">>m_buttonDeleteNetwork.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_buttonDeleteNetwork.Name" xml:space="preserve">
     <value>m_buttonDeleteNetwork</value>
   </data>
-  <data name=">>m_buttonDeleteNetwork.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_buttonDeleteNetwork.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>m_buttonDeleteNetwork.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_buttonDeleteNetwork.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>m_buttonDeleteNetwork.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_buttonDeleteNetwork.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="m_invalidMacLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -347,16 +347,16 @@ When you have finished, click "Next" to continue to the next page.</value>
   <data name="m_invalidMacLabel.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name=">>m_invalidMacLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_invalidMacLabel.Name" xml:space="preserve">
     <value>m_invalidMacLabel</value>
   </data>
-  <data name=">>m_invalidMacLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_invalidMacLabel.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.PasswordFailure, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>m_invalidMacLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_invalidMacLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>m_invalidMacLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_invalidMacLabel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -374,16 +374,16 @@ When you have finished, click "Next" to continue to the next page.</value>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name=">>tableLayoutPanel2.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name=">>tableLayoutPanel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -404,16 +404,16 @@ When you have finished, click "Next" to continue to the next page.</value>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -428,28 +428,28 @@ When you have finished, click "Next" to continue to the next page.</value>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>586, 338</value>
   </data>
-  <data name=">>NameNetworkColumn.Name" xml:space="preserve">
+  <data name="&gt;&gt;NameNetworkColumn.Name" xml:space="preserve">
     <value>NameNetworkColumn</value>
   </data>
-  <data name=">>NameNetworkColumn.Type" xml:space="preserve">
+  <data name="&gt;&gt;NameNetworkColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>MACAddressNetworkColumn.Name" xml:space="preserve">
+  <data name="&gt;&gt;MACAddressNetworkColumn.Name" xml:space="preserve">
     <value>MACAddressNetworkColumn</value>
   </data>
-  <data name=">>MACAddressNetworkColumn.Type" xml:space="preserve">
+  <data name="&gt;&gt;MACAddressNetworkColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>NetworkNetworkColumn.Name" xml:space="preserve">
+  <data name="&gt;&gt;NetworkNetworkColumn.Name" xml:space="preserve">
     <value>NetworkNetworkColumn</value>
   </data>
-  <data name=">>NetworkNetworkColumn.Type" xml:space="preserve">
+  <data name="&gt;&gt;NetworkNetworkColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>NetworkPickerPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

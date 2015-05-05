@@ -138,16 +138,16 @@
   <data name="LearnMoreButton.Text" xml:space="preserve">
     <value>&amp;Learn More</value>
   </data>
-  <data name=">>LearnMoreButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;LearnMoreButton.Name" xml:space="preserve">
     <value>LearnMoreButton</value>
   </data>
-  <data name=">>LearnMoreButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;LearnMoreButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>LearnMoreButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;LearnMoreButton.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>LearnMoreButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;LearnMoreButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
@@ -180,16 +180,16 @@
   <data name="Blurb.Text" xml:space="preserve">
     <value>autoHeightLabel1</value>
   </data>
-  <data name=">>Blurb.Name" xml:space="preserve">
+  <data name="&gt;&gt;Blurb.Name" xml:space="preserve">
     <value>Blurb</value>
   </data>
-  <data name=">>Blurb.Type" xml:space="preserve">
+  <data name="&gt;&gt;Blurb.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>Blurb.Parent" xml:space="preserve">
+  <data name="&gt;&gt;Blurb.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>Blurb.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;Blurb.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="OKButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -213,16 +213,16 @@
   <data name="OKButton.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>OKButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;OKButton.Name" xml:space="preserve">
     <value>OKButton</value>
   </data>
-  <data name=">>OKButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;OKButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>OKButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;OKButton.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>OKButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;OKButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -243,16 +243,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -270,10 +270,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>335, 110</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>UpsellPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

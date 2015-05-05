@@ -153,16 +153,16 @@
   <data name="pdSectionReadCaching.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pdSectionReadCaching.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionReadCaching.Name" xml:space="preserve">
     <value>pdSectionReadCaching</value>
   </data>
-  <data name=">>pdSectionReadCaching.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionReadCaching.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionReadCaching.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionReadCaching.Parent" xml:space="preserve">
     <value>panelReadCaching</value>
   </data>
-  <data name=">>pdSectionReadCaching.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionReadCaching.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelReadCaching.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -180,16 +180,16 @@
   <data name="panelReadCaching.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
-  <data name=">>panelReadCaching.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelReadCaching.Name" xml:space="preserve">
     <value>panelReadCaching</value>
   </data>
-  <data name=">>panelReadCaching.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelReadCaching.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelReadCaching.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelReadCaching.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>panelReadCaching.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelReadCaching.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelDockerInfo.AutoSize" type="System.Boolean, mscorlib">
@@ -219,16 +219,16 @@
   <data name="pdSectionDockerInfo.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pdSectionDockerInfo.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionDockerInfo.Name" xml:space="preserve">
     <value>pdSectionDockerInfo</value>
   </data>
-  <data name=">>pdSectionDockerInfo.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionDockerInfo.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionDockerInfo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionDockerInfo.Parent" xml:space="preserve">
     <value>panelDockerInfo</value>
   </data>
-  <data name=">>pdSectionDockerInfo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionDockerInfo.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelDockerInfo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -246,16 +246,16 @@
   <data name="panelDockerInfo.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
-  <data name=">>panelDockerInfo.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelDockerInfo.Name" xml:space="preserve">
     <value>panelDockerInfo</value>
   </data>
-  <data name=">>panelDockerInfo.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelDockerInfo.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelDockerInfo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelDockerInfo.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>panelDockerInfo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelDockerInfo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panelDockerVersion.AutoSize" type="System.Boolean, mscorlib">
@@ -285,16 +285,16 @@
   <data name="pdSectionDockerVersion.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pdSectionDockerVersion.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionDockerVersion.Name" xml:space="preserve">
     <value>pdSectionDockerVersion</value>
   </data>
-  <data name=">>pdSectionDockerVersion.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionDockerVersion.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionDockerVersion.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionDockerVersion.Parent" xml:space="preserve">
     <value>panelDockerVersion</value>
   </data>
-  <data name=">>pdSectionDockerVersion.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionDockerVersion.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelDockerVersion.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -312,16 +312,16 @@
   <data name="panelDockerVersion.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
-  <data name=">>panelDockerVersion.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelDockerVersion.Name" xml:space="preserve">
     <value>panelDockerVersion</value>
   </data>
-  <data name=">>panelDockerVersion.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelDockerVersion.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelDockerVersion.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelDockerVersion.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>panelDockerVersion.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelDockerVersion.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="panelStorageLinkSystemCapabilities.AutoSize" type="System.Boolean, mscorlib">
@@ -351,16 +351,16 @@
   <data name="pdSectionStorageLinkSystemCapabilities.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pdSectionStorageLinkSystemCapabilities.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionStorageLinkSystemCapabilities.Name" xml:space="preserve">
     <value>pdSectionStorageLinkSystemCapabilities</value>
   </data>
-  <data name=">>pdSectionStorageLinkSystemCapabilities.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionStorageLinkSystemCapabilities.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionStorageLinkSystemCapabilities.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionStorageLinkSystemCapabilities.Parent" xml:space="preserve">
     <value>panelStorageLinkSystemCapabilities</value>
   </data>
-  <data name=">>pdSectionStorageLinkSystemCapabilities.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionStorageLinkSystemCapabilities.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelStorageLinkSystemCapabilities.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -378,16 +378,16 @@
   <data name="panelStorageLinkSystemCapabilities.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
-  <data name=">>panelStorageLinkSystemCapabilities.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelStorageLinkSystemCapabilities.Name" xml:space="preserve">
     <value>panelStorageLinkSystemCapabilities</value>
   </data>
-  <data name=">>panelStorageLinkSystemCapabilities.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelStorageLinkSystemCapabilities.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelStorageLinkSystemCapabilities.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelStorageLinkSystemCapabilities.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>panelStorageLinkSystemCapabilities.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelStorageLinkSystemCapabilities.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="panelMultipathBoot.AutoSize" type="System.Boolean, mscorlib">
@@ -417,16 +417,16 @@
   <data name="pdSectionMultipathBoot.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name=">>pdSectionMultipathBoot.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionMultipathBoot.Name" xml:space="preserve">
     <value>pdSectionMultipathBoot</value>
   </data>
-  <data name=">>pdSectionMultipathBoot.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionMultipathBoot.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionMultipathBoot.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionMultipathBoot.Parent" xml:space="preserve">
     <value>panelMultipathBoot</value>
   </data>
-  <data name=">>pdSectionMultipathBoot.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionMultipathBoot.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelMultipathBoot.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -444,16 +444,16 @@
   <data name="panelMultipathBoot.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name=">>panelMultipathBoot.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelMultipathBoot.Name" xml:space="preserve">
     <value>panelMultipathBoot</value>
   </data>
-  <data name=">>panelMultipathBoot.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelMultipathBoot.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelMultipathBoot.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelMultipathBoot.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>panelMultipathBoot.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelMultipathBoot.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="panelStorageLink.AutoSize" type="System.Boolean, mscorlib">
@@ -483,16 +483,16 @@
   <data name="pdStorageLink.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pdStorageLink.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdStorageLink.Name" xml:space="preserve">
     <value>pdStorageLink</value>
   </data>
-  <data name=">>pdStorageLink.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdStorageLink.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdStorageLink.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdStorageLink.Parent" xml:space="preserve">
     <value>panelStorageLink</value>
   </data>
-  <data name=">>pdStorageLink.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdStorageLink.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelStorageLink.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -510,16 +510,16 @@
   <data name="panelStorageLink.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name=">>panelStorageLink.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelStorageLink.Name" xml:space="preserve">
     <value>panelStorageLink</value>
   </data>
-  <data name=">>panelStorageLink.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelStorageLink.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelStorageLink.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelStorageLink.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>panelStorageLink.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelStorageLink.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="panelUpdates.AutoSize" type="System.Boolean, mscorlib">
@@ -549,16 +549,16 @@
   <data name="pdSectionUpdates.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pdSectionUpdates.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionUpdates.Name" xml:space="preserve">
     <value>pdSectionUpdates</value>
   </data>
-  <data name=">>pdSectionUpdates.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionUpdates.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionUpdates.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionUpdates.Parent" xml:space="preserve">
     <value>panelUpdates</value>
   </data>
-  <data name=">>pdSectionUpdates.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionUpdates.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelUpdates.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -576,16 +576,16 @@
   <data name="panelUpdates.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name=">>panelUpdates.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelUpdates.Name" xml:space="preserve">
     <value>panelUpdates</value>
   </data>
-  <data name=">>panelUpdates.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelUpdates.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelUpdates.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelUpdates.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>panelUpdates.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelUpdates.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="panelMemoryAndVCPUs.AutoSize" type="System.Boolean, mscorlib">
@@ -615,16 +615,16 @@
   <data name="pdSectionVCPUs.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pdSectionVCPUs.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionVCPUs.Name" xml:space="preserve">
     <value>pdSectionVCPUs</value>
   </data>
-  <data name=">>pdSectionVCPUs.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionVCPUs.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionVCPUs.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionVCPUs.Parent" xml:space="preserve">
     <value>panelMemoryAndVCPUs</value>
   </data>
-  <data name=">>pdSectionVCPUs.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionVCPUs.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelMemoryAndVCPUs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -642,16 +642,16 @@
   <data name="panelMemoryAndVCPUs.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name=">>panelMemoryAndVCPUs.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelMemoryAndVCPUs.Name" xml:space="preserve">
     <value>panelMemoryAndVCPUs</value>
   </data>
-  <data name=">>panelMemoryAndVCPUs.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelMemoryAndVCPUs.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelMemoryAndVCPUs.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelMemoryAndVCPUs.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>panelMemoryAndVCPUs.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelMemoryAndVCPUs.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="panelMultipathing.AutoSize" type="System.Boolean, mscorlib">
@@ -681,16 +681,16 @@
   <data name="pdSectionMultipathing.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pdSectionMultipathing.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionMultipathing.Name" xml:space="preserve">
     <value>pdSectionMultipathing</value>
   </data>
-  <data name=">>pdSectionMultipathing.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionMultipathing.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionMultipathing.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionMultipathing.Parent" xml:space="preserve">
     <value>panelMultipathing</value>
   </data>
-  <data name=">>pdSectionMultipathing.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionMultipathing.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelMultipathing.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -708,16 +708,16 @@
   <data name="panelMultipathing.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name=">>panelMultipathing.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelMultipathing.Name" xml:space="preserve">
     <value>panelMultipathing</value>
   </data>
-  <data name=">>panelMultipathing.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelMultipathing.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelMultipathing.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelMultipathing.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>panelMultipathing.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelMultipathing.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="panelStatus.AutoSize" type="System.Boolean, mscorlib">
@@ -747,16 +747,16 @@
   <data name="pdSectionStatus.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pdSectionStatus.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionStatus.Name" xml:space="preserve">
     <value>pdSectionStatus</value>
   </data>
-  <data name=">>pdSectionStatus.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionStatus.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionStatus.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionStatus.Parent" xml:space="preserve">
     <value>panelStatus</value>
   </data>
-  <data name=">>pdSectionStatus.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionStatus.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelStatus.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -774,16 +774,16 @@
   <data name="panelStatus.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name=">>panelStatus.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelStatus.Name" xml:space="preserve">
     <value>panelStatus</value>
   </data>
-  <data name=">>panelStatus.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelStatus.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelStatus.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>panelStatus.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelStatus.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="panelHighAvailability.AutoSize" type="System.Boolean, mscorlib">
@@ -813,16 +813,16 @@
   <data name="pdSectionHighAvailability.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pdSectionHighAvailability.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionHighAvailability.Name" xml:space="preserve">
     <value>pdSectionHighAvailability</value>
   </data>
-  <data name=">>pdSectionHighAvailability.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionHighAvailability.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionHighAvailability.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionHighAvailability.Parent" xml:space="preserve">
     <value>panelHighAvailability</value>
   </data>
-  <data name=">>pdSectionHighAvailability.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionHighAvailability.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelHighAvailability.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -840,16 +840,16 @@
   <data name="panelHighAvailability.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name=">>panelHighAvailability.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelHighAvailability.Name" xml:space="preserve">
     <value>panelHighAvailability</value>
   </data>
-  <data name=">>panelHighAvailability.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelHighAvailability.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelHighAvailability.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelHighAvailability.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>panelHighAvailability.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelHighAvailability.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="panelBootOptions.AutoSize" type="System.Boolean, mscorlib">
@@ -879,16 +879,16 @@
   <data name="pdSectionBootOptions.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pdSectionBootOptions.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionBootOptions.Name" xml:space="preserve">
     <value>pdSectionBootOptions</value>
   </data>
-  <data name=">>pdSectionBootOptions.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionBootOptions.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionBootOptions.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionBootOptions.Parent" xml:space="preserve">
     <value>panelBootOptions</value>
   </data>
-  <data name=">>pdSectionBootOptions.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionBootOptions.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelBootOptions.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -906,16 +906,16 @@
   <data name="panelBootOptions.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name=">>panelBootOptions.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelBootOptions.Name" xml:space="preserve">
     <value>panelBootOptions</value>
   </data>
-  <data name=">>panelBootOptions.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelBootOptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelBootOptions.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelBootOptions.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>panelBootOptions.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelBootOptions.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="panelCPU.AutoSize" type="System.Boolean, mscorlib">
@@ -945,16 +945,16 @@
   <data name="pdSectionCPU.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pdSectionCPU.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionCPU.Name" xml:space="preserve">
     <value>pdSectionCPU</value>
   </data>
-  <data name=">>pdSectionCPU.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionCPU.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionCPU.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionCPU.Parent" xml:space="preserve">
     <value>panelCPU</value>
   </data>
-  <data name=">>pdSectionCPU.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionCPU.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelCPU.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -972,16 +972,16 @@
   <data name="panelCPU.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name=">>panelCPU.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelCPU.Name" xml:space="preserve">
     <value>panelCPU</value>
   </data>
-  <data name=">>panelCPU.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelCPU.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelCPU.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelCPU.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>panelCPU.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelCPU.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
   <data name="panelLicense.AutoSize" type="System.Boolean, mscorlib">
@@ -1011,16 +1011,16 @@
   <data name="pdSectionLicense.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pdSectionLicense.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionLicense.Name" xml:space="preserve">
     <value>pdSectionLicense</value>
   </data>
-  <data name=">>pdSectionLicense.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionLicense.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionLicense.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionLicense.Parent" xml:space="preserve">
     <value>panelLicense</value>
   </data>
-  <data name=">>pdSectionLicense.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionLicense.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelLicense.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -1038,16 +1038,16 @@
   <data name="panelLicense.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name=">>panelLicense.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelLicense.Name" xml:space="preserve">
     <value>panelLicense</value>
   </data>
-  <data name=">>panelLicense.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelLicense.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelLicense.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelLicense.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>panelLicense.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelLicense.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
   <data name="panelVersion.AutoSize" type="System.Boolean, mscorlib">
@@ -1077,16 +1077,16 @@
   <data name="pdSectionVersion.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pdSectionVersion.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionVersion.Name" xml:space="preserve">
     <value>pdSectionVersion</value>
   </data>
-  <data name=">>pdSectionVersion.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionVersion.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionVersion.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionVersion.Parent" xml:space="preserve">
     <value>panelVersion</value>
   </data>
-  <data name=">>pdSectionVersion.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionVersion.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelVersion.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -1104,16 +1104,16 @@
   <data name="panelVersion.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name=">>panelVersion.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelVersion.Name" xml:space="preserve">
     <value>panelVersion</value>
   </data>
-  <data name=">>panelVersion.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelVersion.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelVersion.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelVersion.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>panelVersion.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelVersion.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
   <data name="panelMemory.AutoSize" type="System.Boolean, mscorlib">
@@ -1143,16 +1143,16 @@
   <data name="pdSectionMemory.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pdSectionMemory.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionMemory.Name" xml:space="preserve">
     <value>pdSectionMemory</value>
   </data>
-  <data name=">>pdSectionMemory.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionMemory.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionMemory.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionMemory.Parent" xml:space="preserve">
     <value>panelMemory</value>
   </data>
-  <data name=">>pdSectionMemory.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionMemory.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelMemory.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -1170,16 +1170,16 @@
   <data name="panelMemory.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>panelMemory.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelMemory.Name" xml:space="preserve">
     <value>panelMemory</value>
   </data>
-  <data name=">>panelMemory.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelMemory.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelMemory.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelMemory.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>panelMemory.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelMemory.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
   <data name="panelManagementInterfaces.AutoSize" type="System.Boolean, mscorlib">
@@ -1209,16 +1209,16 @@
   <data name="pdSectionManagementInterfaces.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pdSectionManagementInterfaces.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionManagementInterfaces.Name" xml:space="preserve">
     <value>pdSectionManagementInterfaces</value>
   </data>
-  <data name=">>pdSectionManagementInterfaces.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionManagementInterfaces.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionManagementInterfaces.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionManagementInterfaces.Parent" xml:space="preserve">
     <value>panelManagementInterfaces</value>
   </data>
-  <data name=">>pdSectionManagementInterfaces.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionManagementInterfaces.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelManagementInterfaces.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -1236,16 +1236,16 @@
   <data name="panelManagementInterfaces.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>panelManagementInterfaces.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelManagementInterfaces.Name" xml:space="preserve">
     <value>panelManagementInterfaces</value>
   </data>
-  <data name=">>panelManagementInterfaces.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelManagementInterfaces.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelManagementInterfaces.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelManagementInterfaces.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>panelManagementInterfaces.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelManagementInterfaces.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
   <data name="panelCustomFields.AutoSize" type="System.Boolean, mscorlib">
@@ -1275,16 +1275,16 @@
   <data name="pdSectionCustomFields.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pdSectionCustomFields.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionCustomFields.Name" xml:space="preserve">
     <value>pdSectionCustomFields</value>
   </data>
-  <data name=">>pdSectionCustomFields.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionCustomFields.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionCustomFields.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionCustomFields.Parent" xml:space="preserve">
     <value>panelCustomFields</value>
   </data>
-  <data name=">>pdSectionCustomFields.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionCustomFields.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelCustomFields.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -1302,16 +1302,16 @@
   <data name="panelCustomFields.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>panelCustomFields.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelCustomFields.Name" xml:space="preserve">
     <value>panelCustomFields</value>
   </data>
-  <data name=">>panelCustomFields.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelCustomFields.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelCustomFields.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelCustomFields.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>panelCustomFields.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelCustomFields.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
   <data name="panelGeneral.AutoSize" type="System.Boolean, mscorlib">
@@ -1341,16 +1341,16 @@
   <data name="pdSectionGeneral.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pdSectionGeneral.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionGeneral.Name" xml:space="preserve">
     <value>pdSectionGeneral</value>
   </data>
-  <data name=">>pdSectionGeneral.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionGeneral.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionGeneral.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionGeneral.Parent" xml:space="preserve">
     <value>panelGeneral</value>
   </data>
-  <data name=">>pdSectionGeneral.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionGeneral.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelGeneral.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -1368,16 +1368,16 @@
   <data name="panelGeneral.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>panelGeneral.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelGeneral.Name" xml:space="preserve">
     <value>panelGeneral</value>
   </data>
-  <data name=">>panelGeneral.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelGeneral.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelGeneral.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelGeneral.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>panelGeneral.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelGeneral.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
@@ -1389,16 +1389,16 @@
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name=">>panel2.Name" xml:space="preserve">
+  <data name="&gt;&gt;panel2.Name" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>panel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;panel2.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PanelNoFocusScroll, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>panel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panel2.Parent" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name=">>panel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="buttonProperties.Location" type="System.Drawing.Point, System.Drawing">
@@ -1413,16 +1413,16 @@
   <data name="buttonProperties.Text" xml:space="preserve">
     <value>P&amp;roperties</value>
   </data>
-  <data name=">>buttonProperties.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonProperties.Name" xml:space="preserve">
     <value>buttonProperties</value>
   </data>
-  <data name=">>buttonProperties.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonProperties.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonProperties.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonProperties.Parent" xml:space="preserve">
     <value>panel3</value>
   </data>
-  <data name=">>buttonProperties.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonProperties.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="linkLabelExpand.AutoSize" type="System.Boolean, mscorlib">
@@ -1452,16 +1452,16 @@
   <data name="linkLabelExpand.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name=">>linkLabelExpand.Name" xml:space="preserve">
+  <data name="&gt;&gt;linkLabelExpand.Name" xml:space="preserve">
     <value>linkLabelExpand</value>
   </data>
-  <data name=">>linkLabelExpand.Type" xml:space="preserve">
+  <data name="&gt;&gt;linkLabelExpand.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>linkLabelExpand.Parent" xml:space="preserve">
+  <data name="&gt;&gt;linkLabelExpand.Parent" xml:space="preserve">
     <value>panel3</value>
   </data>
-  <data name=">>linkLabelExpand.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;linkLabelExpand.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="linkLabelCollapse.AutoSize" type="System.Boolean, mscorlib">
@@ -1488,16 +1488,16 @@
   <data name="linkLabelCollapse.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name=">>linkLabelCollapse.Name" xml:space="preserve">
+  <data name="&gt;&gt;linkLabelCollapse.Name" xml:space="preserve">
     <value>linkLabelCollapse</value>
   </data>
-  <data name=">>linkLabelCollapse.Type" xml:space="preserve">
+  <data name="&gt;&gt;linkLabelCollapse.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>linkLabelCollapse.Parent" xml:space="preserve">
+  <data name="&gt;&gt;linkLabelCollapse.Parent" xml:space="preserve">
     <value>panel3</value>
   </data>
-  <data name=">>linkLabelCollapse.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;linkLabelCollapse.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="panel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -1515,16 +1515,16 @@
   <data name="panel3.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name=">>panel3.Name" xml:space="preserve">
+  <data name="&gt;&gt;panel3.Name" xml:space="preserve">
     <value>panel3</value>
   </data>
-  <data name=">>panel3.Type" xml:space="preserve">
+  <data name="&gt;&gt;panel3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panel3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panel3.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>panel3.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -1542,16 +1542,16 @@
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>panel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>panel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name=">>panel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="pageContainerPanel.Location" type="System.Drawing.Point, System.Drawing">
@@ -1563,16 +1563,16 @@
   <data name="pageContainerPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pageContainerPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.Name" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name=">>pageContainerPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pageContainerPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>pageContainerPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -1584,10 +1584,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>752, 870</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>GeneralTabPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.TabPages.BaseTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -134,16 +134,16 @@
   <data name="labelTitle.Text" xml:space="preserve">
     <value>Installing updates:</value>
   </data>
-  <data name=">>labelTitle.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelTitle.Name" xml:space="preserve">
     <value>labelTitle</value>
   </data>
-  <data name=">>labelTitle.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelTitle.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelTitle.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelTitle.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>labelTitle.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelTitle.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
@@ -165,16 +165,16 @@
   <data name="textBoxLog.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>textBoxLog.Name" xml:space="preserve">
+  <data name="&gt;&gt;textBoxLog.Name" xml:space="preserve">
     <value>textBoxLog</value>
   </data>
-  <data name=">>textBoxLog.Type" xml:space="preserve">
+  <data name="&gt;&gt;textBoxLog.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>textBoxLog.Parent" xml:space="preserve">
+  <data name="&gt;&gt;textBoxLog.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>textBoxLog.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;textBoxLog.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="progressBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -192,16 +192,16 @@
   <data name="progressBar.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>progressBar.Name" xml:space="preserve">
+  <data name="&gt;&gt;progressBar.Name" xml:space="preserve">
     <value>progressBar</value>
   </data>
-  <data name=">>progressBar.Type" xml:space="preserve">
+  <data name="&gt;&gt;progressBar.Type" xml:space="preserve">
     <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>progressBar.Parent" xml:space="preserve">
+  <data name="&gt;&gt;progressBar.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>progressBar.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;progressBar.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelError.AutoSize" type="System.Boolean, mscorlib">
@@ -228,16 +228,16 @@
   <data name="labelError.Text" xml:space="preserve">
     <value>Error</value>
   </data>
-  <data name=">>labelError.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelError.Name" xml:space="preserve">
     <value>labelError</value>
   </data>
-  <data name=">>labelError.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelError.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelError.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelError.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>labelError.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelError.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -255,16 +255,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>pictureBox1.Name" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name=">>pictureBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pictureBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panel1.ColumnCount" type="System.Int32, mscorlib">
@@ -294,16 +294,16 @@
   <data name="errorLinkLabel.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>errorLinkLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;errorLinkLabel.Name" xml:space="preserve">
     <value>errorLinkLabel</value>
   </data>
-  <data name=">>errorLinkLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;errorLinkLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>errorLinkLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;errorLinkLabel.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>errorLinkLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;errorLinkLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -324,16 +324,16 @@
   <data name="panel1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>panel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>panel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>panel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -348,10 +348,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>511, 335</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>PatchingWizard_PatchingPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

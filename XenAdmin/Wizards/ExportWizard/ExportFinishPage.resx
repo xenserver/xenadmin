@@ -147,16 +147,16 @@
   <data name="m_checkBoxVerify.Text" xml:space="preserve">
     <value>&amp;Verify export on completion</value>
   </data>
-  <data name=">>m_checkBoxVerify.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_checkBoxVerify.Name" xml:space="preserve">
     <value>m_checkBoxVerify</value>
   </data>
-  <data name=">>m_checkBoxVerify.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_checkBoxVerify.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>m_checkBoxVerify.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_checkBoxVerify.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>m_checkBoxVerify.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_checkBoxVerify.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="m_labelIntro.AutoSize" type="System.Boolean, mscorlib">
@@ -179,16 +179,16 @@
 
 Please review these settings and click Previous if you need to go back and make any changes. Otherwise, click Finish to export the selected VM(s) and close this wizard. Export may take several minutes.</value>
   </data>
-  <data name=">>m_labelIntro.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_labelIntro.Name" xml:space="preserve">
     <value>m_labelIntro</value>
   </data>
-  <data name=">>m_labelIntro.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_labelIntro.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>m_labelIntro.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_labelIntro.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>m_labelIntro.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_labelIntro.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -218,16 +218,16 @@ Please review these settings and click Previous if you need to go back and make 
   <data name="m_dataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name=">>m_dataGridView.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_dataGridView.Name" xml:space="preserve">
     <value>m_dataGridView</value>
   </data>
-  <data name=">>m_dataGridView.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_dataGridView.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>m_dataGridView.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_dataGridView.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>m_dataGridView.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_dataGridView.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -245,16 +245,16 @@ Please review these settings and click Previous if you need to go back and make 
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -269,22 +269,22 @@ Please review these settings and click Previous if you need to go back and make 
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 332</value>
   </data>
-  <data name=">>Column1.Name" xml:space="preserve">
+  <data name="&gt;&gt;Column1.Name" xml:space="preserve">
     <value>Column1</value>
   </data>
-  <data name=">>Column1.Type" xml:space="preserve">
+  <data name="&gt;&gt;Column1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>Column2.Name" xml:space="preserve">
+  <data name="&gt;&gt;Column2.Name" xml:space="preserve">
     <value>Column2</value>
   </data>
-  <data name=">>Column2.Type" xml:space="preserve">
+  <data name="&gt;&gt;Column2.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ExportFinishPage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Wizards.GenericPages.ImExPortPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

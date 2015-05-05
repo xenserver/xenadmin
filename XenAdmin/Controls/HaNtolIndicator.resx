@@ -165,16 +165,16 @@
   <data name="pictureBoxStatus.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name=">>pictureBoxStatus.Name" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxStatus.Name" xml:space="preserve">
     <value>pictureBoxStatus</value>
   </data>
-  <data name=">>pictureBoxStatus.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pictureBoxStatus.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxStatus.Parent" xml:space="preserve">
     <value>tableStatus</value>
   </data>
-  <data name=">>pictureBoxStatus.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxStatus.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelStatus.AutoSize" type="System.Boolean, mscorlib">
@@ -198,16 +198,16 @@
   <data name="labelStatus.Text" xml:space="preserve">
     <value>This number may not exceed the pool’s maximum failure capacity.</value>
   </data>
-  <data name=">>labelStatus.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelStatus.Name" xml:space="preserve">
     <value>labelStatus</value>
   </data>
-  <data name=">>labelStatus.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelStatus.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>labelStatus.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelStatus.Parent" xml:space="preserve">
     <value>tableStatus</value>
   </data>
-  <data name=">>labelStatus.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelStatus.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableStatus.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -228,16 +228,16 @@
   <data name="tableStatus.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>tableStatus.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableStatus.Name" xml:space="preserve">
     <value>tableStatus</value>
   </data>
-  <data name=">>tableStatus.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableStatus.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableStatus.Parent" xml:space="preserve">
     <value>tableServerFailureLimit</value>
   </data>
-  <data name=">>tableStatus.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableStatus.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableStatus.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -270,16 +270,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>You can specify the number of server failures you need to be able to tolerate in the pool.</value>
   </data>
-  <data name=">>label1.Name" xml:space="preserve">
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name=">>label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>tableServerFailureLimit</value>
   </data>
-  <data name=">>label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelMax.AutoSize" type="System.Boolean, mscorlib">
@@ -303,16 +303,16 @@
   <data name="labelMax.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>labelMax.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelMax.Name" xml:space="preserve">
     <value>labelMax</value>
   </data>
-  <data name=">>labelMax.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelMax.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelMax.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelMax.Parent" xml:space="preserve">
     <value>tableServerFailureLimit</value>
   </data>
-  <data name=">>labelMax.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelMax.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="spinner.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -333,16 +333,16 @@
   <data name="spinner.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>spinner.Name" xml:space="preserve">
+  <data name="&gt;&gt;spinner.Name" xml:space="preserve">
     <value>spinner</value>
   </data>
-  <data name=">>spinner.Type" xml:space="preserve">
+  <data name="&gt;&gt;spinner.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>spinner.Parent" xml:space="preserve">
+  <data name="&gt;&gt;spinner.Parent" xml:space="preserve">
     <value>tableServerFailureLimit</value>
   </data>
-  <data name=">>spinner.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;spinner.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="numericUpDownCapacity.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -360,16 +360,16 @@
   <data name="numericUpDownCapacity.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name=">>numericUpDownCapacity.Name" xml:space="preserve">
+  <data name="&gt;&gt;numericUpDownCapacity.Name" xml:space="preserve">
     <value>numericUpDownCapacity</value>
   </data>
-  <data name=">>numericUpDownCapacity.Type" xml:space="preserve">
+  <data name="&gt;&gt;numericUpDownCapacity.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>numericUpDownCapacity.Parent" xml:space="preserve">
+  <data name="&gt;&gt;numericUpDownCapacity.Parent" xml:space="preserve">
     <value>tableServerFailureLimit</value>
   </data>
-  <data name=">>numericUpDownCapacity.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;numericUpDownCapacity.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="labelNumberOfServers.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -393,16 +393,16 @@
   <data name="labelNumberOfServers.Text" xml:space="preserve">
     <value>&amp;Failures tolerated:</value>
   </data>
-  <data name=">>labelNumberOfServers.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelNumberOfServers.Name" xml:space="preserve">
     <value>labelNumberOfServers</value>
   </data>
-  <data name=">>labelNumberOfServers.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelNumberOfServers.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelNumberOfServers.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelNumberOfServers.Parent" xml:space="preserve">
     <value>tableServerFailureLimit</value>
   </data>
-  <data name=">>labelNumberOfServers.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelNumberOfServers.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="tableServerFailureLimit.Location" type="System.Drawing.Point, System.Drawing">
@@ -420,16 +420,16 @@
   <data name="tableServerFailureLimit.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>tableServerFailureLimit.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableServerFailureLimit.Name" xml:space="preserve">
     <value>tableServerFailureLimit</value>
   </data>
-  <data name=">>tableServerFailureLimit.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableServerFailureLimit.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tableServerFailureLimit.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableServerFailureLimit.Parent" xml:space="preserve">
     <value>groupBoxControls</value>
   </data>
-  <data name=">>tableServerFailureLimit.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableServerFailureLimit.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableServerFailureLimit.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -456,16 +456,16 @@
   <data name="groupBoxControls.Text" xml:space="preserve">
     <value>Server failure limit</value>
   </data>
-  <data name=">>groupBoxControls.Name" xml:space="preserve">
+  <data name="&gt;&gt;groupBoxControls.Name" xml:space="preserve">
     <value>groupBoxControls</value>
   </data>
-  <data name=">>groupBoxControls.Type" xml:space="preserve">
+  <data name="&gt;&gt;groupBoxControls.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>groupBoxControls.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupBoxControls.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>groupBoxControls.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;groupBoxControls.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -480,10 +480,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>364, 122</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>HaNtolIndicator</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.HaNtolControl, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

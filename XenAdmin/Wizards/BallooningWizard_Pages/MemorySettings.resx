@@ -135,16 +135,16 @@
   <data name="memoryControlsBasic.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>memoryControlsBasic.Name" xml:space="preserve">
+  <data name="&gt;&gt;memoryControlsBasic.Name" xml:space="preserve">
     <value>memoryControlsBasic</value>
   </data>
-  <data name=">>memoryControlsBasic.Type" xml:space="preserve">
+  <data name="&gt;&gt;memoryControlsBasic.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Ballooning.VMMemoryControlsBasic, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>memoryControlsBasic.Parent" xml:space="preserve">
+  <data name="&gt;&gt;memoryControlsBasic.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>memoryControlsBasic.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;memoryControlsBasic.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="memoryControlsAdvanced.Location" type="System.Drawing.Point, System.Drawing">
@@ -159,16 +159,16 @@
   <data name="memoryControlsAdvanced.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>memoryControlsAdvanced.Name" xml:space="preserve">
+  <data name="&gt;&gt;memoryControlsAdvanced.Name" xml:space="preserve">
     <value>memoryControlsAdvanced</value>
   </data>
-  <data name=">>memoryControlsAdvanced.Type" xml:space="preserve">
+  <data name="&gt;&gt;memoryControlsAdvanced.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Ballooning.VMMemoryControlsAdvanced, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>memoryControlsAdvanced.Parent" xml:space="preserve">
+  <data name="&gt;&gt;memoryControlsAdvanced.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>memoryControlsAdvanced.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;memoryControlsAdvanced.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -192,16 +192,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Assign the VMs a fixed memory or indicate the range you wish them to use. When ready, press Finish to apply the configuration.</value>
   </data>
-  <data name=">>label1.Name" xml:space="preserve">
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name=">>label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -222,10 +222,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Adjust memory settings</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MemorySettings</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -138,16 +138,16 @@
   <data name="btnDelete.Text" xml:space="preserve">
     <value>&amp;Delete</value>
   </data>
-  <data name=">>btnDelete.Name" xml:space="preserve">
+  <data name="&gt;&gt;btnDelete.Name" xml:space="preserve">
     <value>btnDelete</value>
   </data>
-  <data name=">>btnDelete.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnDelete.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>btnDelete.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnDelete.Parent" xml:space="preserve">
     <value>flowLayoutPanelTopButtons</value>
   </data>
-  <data name=">>btnDelete.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnDelete.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="btnChange.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -168,16 +168,16 @@
   <data name="btnChange.Text" xml:space="preserve">
     <value>&amp;Edit</value>
   </data>
-  <data name=">>btnChange.Name" xml:space="preserve">
+  <data name="&gt;&gt;btnChange.Name" xml:space="preserve">
     <value>btnChange</value>
   </data>
-  <data name=">>btnChange.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnChange.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>btnChange.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnChange.Parent" xml:space="preserve">
     <value>flowLayoutPanelTopButtons</value>
   </data>
-  <data name=">>btnChange.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnChange.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelSubscription.AutoSize" type="System.Boolean, mscorlib">
@@ -201,16 +201,16 @@
   <data name="labelSubscription.Text" xml:space="preserve">
     <value>Subscription Details</value>
   </data>
-  <data name=">>labelSubscription.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelSubscription.Name" xml:space="preserve">
     <value>labelSubscription</value>
   </data>
-  <data name=">>labelSubscription.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelSubscription.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelSubscription.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelSubscription.Parent" xml:space="preserve">
     <value>panelTopControls</value>
   </data>
-  <data name=">>labelSubscription.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelSubscription.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="btnClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -231,16 +231,16 @@
   <data name="btnClose.Text" xml:space="preserve">
     <value>&amp;Close</value>
   </data>
-  <data name=">>btnClose.Name" xml:space="preserve">
+  <data name="&gt;&gt;btnClose.Name" xml:space="preserve">
     <value>btnClose</value>
   </data>
-  <data name=">>btnClose.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnClose.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>btnClose.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnClose.Parent" xml:space="preserve">
     <value>flowLayoutPanelLowerButtons</value>
   </data>
-  <data name=">>btnClose.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnClose.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanelSubscriptionDetails.AutoScroll" type="System.Boolean, mscorlib">
@@ -264,16 +264,16 @@
   <data name="pdSectionParameters.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
-  <data name=">>pdSectionParameters.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionParameters.Name" xml:space="preserve">
     <value>pdSectionParameters</value>
   </data>
-  <data name=">>pdSectionParameters.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionParameters.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionParameters.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionParameters.Parent" xml:space="preserve">
     <value>tableLayoutPanelSubscriptionDetails</value>
   </data>
-  <data name=">>pdSectionParameters.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionParameters.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="pdSectionGeneral.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -294,16 +294,16 @@
   <data name="pdSectionGeneral.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
-  <data name=">>pdSectionGeneral.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionGeneral.Name" xml:space="preserve">
     <value>pdSectionGeneral</value>
   </data>
-  <data name=">>pdSectionGeneral.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionGeneral.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionGeneral.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionGeneral.Parent" xml:space="preserve">
     <value>tableLayoutPanelSubscriptionDetails</value>
   </data>
-  <data name=">>pdSectionGeneral.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionGeneral.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="pdSectionDelivery.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -324,16 +324,16 @@
   <data name="pdSectionDelivery.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
   </data>
-  <data name=">>pdSectionDelivery.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionDelivery.Name" xml:space="preserve">
     <value>pdSectionDelivery</value>
   </data>
-  <data name=">>pdSectionDelivery.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionDelivery.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionDelivery.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionDelivery.Parent" xml:space="preserve">
     <value>tableLayoutPanelSubscriptionDetails</value>
   </data>
-  <data name=">>pdSectionDelivery.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionDelivery.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="pdSectionSchedule.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -354,16 +354,16 @@
   <data name="pdSectionSchedule.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
   </data>
-  <data name=">>pdSectionSchedule.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionSchedule.Name" xml:space="preserve">
     <value>pdSectionSchedule</value>
   </data>
-  <data name=">>pdSectionSchedule.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionSchedule.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionSchedule.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionSchedule.Parent" xml:space="preserve">
     <value>tableLayoutPanelSubscriptionDetails</value>
   </data>
-  <data name=">>pdSectionSchedule.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionSchedule.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="pdSectionHistory.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -384,16 +384,16 @@
   <data name="pdSectionHistory.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
   </data>
-  <data name=">>pdSectionHistory.Name" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionHistory.Name" xml:space="preserve">
     <value>pdSectionHistory</value>
   </data>
-  <data name=">>pdSectionHistory.Type" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionHistory.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PDSection, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>pdSectionHistory.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionHistory.Parent" xml:space="preserve">
     <value>tableLayoutPanelSubscriptionDetails</value>
   </data>
-  <data name=">>pdSectionHistory.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pdSectionHistory.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="tableLayoutPanelSubscriptionDetails.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -411,16 +411,16 @@
   <data name="tableLayoutPanelSubscriptionDetails.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
   </data>
-  <data name=">>tableLayoutPanelSubscriptionDetails.Name" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelSubscriptionDetails.Name" xml:space="preserve">
     <value>tableLayoutPanelSubscriptionDetails</value>
   </data>
-  <data name=">>tableLayoutPanelSubscriptionDetails.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelSubscriptionDetails.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DecentTableLayoutPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>tableLayoutPanelSubscriptionDetails.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelSubscriptionDetails.Parent" xml:space="preserve">
     <value>panelCenter</value>
   </data>
-  <data name=">>tableLayoutPanelSubscriptionDetails.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelSubscriptionDetails.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanelSubscriptionDetails.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -450,16 +450,16 @@
   <data name="flowLayoutPanelTopButtons.TabIndex" type="System.Int32, mscorlib">
     <value>47</value>
   </data>
-  <data name=">>flowLayoutPanelTopButtons.Name" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanelTopButtons.Name" xml:space="preserve">
     <value>flowLayoutPanelTopButtons</value>
   </data>
-  <data name=">>flowLayoutPanelTopButtons.Type" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanelTopButtons.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>flowLayoutPanelTopButtons.Parent" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanelTopButtons.Parent" xml:space="preserve">
     <value>panelTopControls</value>
   </data>
-  <data name=">>flowLayoutPanelTopButtons.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanelTopButtons.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="flowLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
@@ -480,16 +480,16 @@
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>46</value>
   </data>
-  <data name=">>flowLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>flowLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>flowLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
     <value>panelTopControls</value>
   </data>
-  <data name=">>flowLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panelTopControls.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -504,16 +504,16 @@
   <data name="panelTopControls.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>panelTopControls.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelTopControls.Name" xml:space="preserve">
     <value>panelTopControls</value>
   </data>
-  <data name=">>panelTopControls.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelTopControls.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelTopControls.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelTopControls.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>panelTopControls.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelTopControls.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="flowLayoutPanelLowerButtons.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -537,16 +537,16 @@
   <data name="flowLayoutPanelLowerButtons.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
   </data>
-  <data name=">>flowLayoutPanelLowerButtons.Name" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanelLowerButtons.Name" xml:space="preserve">
     <value>flowLayoutPanelLowerButtons</value>
   </data>
-  <data name=">>flowLayoutPanelLowerButtons.Type" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanelLowerButtons.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>flowLayoutPanelLowerButtons.Parent" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanelLowerButtons.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>flowLayoutPanelLowerButtons.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanelLowerButtons.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelCenter.AutoSize" type="System.Boolean, mscorlib">
@@ -567,16 +567,16 @@
   <data name="panelCenter.TabIndex" type="System.Int32, mscorlib">
     <value>46</value>
   </data>
-  <data name=">>panelCenter.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelCenter.Name" xml:space="preserve">
     <value>panelCenter</value>
   </data>
-  <data name=">>panelCenter.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelCenter.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelCenter.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelCenter.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>panelCenter.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelCenter.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -591,16 +591,16 @@
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
-  <data name=">>panel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name=">>panel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>panel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -615,10 +615,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>689, 388</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>WlbReportSubscriptionView</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

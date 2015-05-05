@@ -135,16 +135,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Choose how the servers in the selected pools will be upgraded. Note that in both modes, the wizard will perform a range of checks to ensure that it is possible to apply the upgrade all of the servers in the pool before the upgrade process begins.</value>
   </data>
-  <data name=">>label1.Name" xml:space="preserve">
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name=">>label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="radioButtonManual.AutoSize" type="System.Boolean, mscorlib">
@@ -165,16 +165,16 @@
   <data name="radioButtonManual.Text" xml:space="preserve">
     <value>&amp;Manual Mode – manual upgrade from CD-ROM or PXE</value>
   </data>
-  <data name=">>radioButtonManual.Name" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonManual.Name" xml:space="preserve">
     <value>radioButtonManual</value>
   </data>
-  <data name=">>radioButtonManual.Type" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonManual.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>radioButtonManual.Parent" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonManual.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>radioButtonManual.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonManual.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="radioButtonAutomatic.AutoSize" type="System.Boolean, mscorlib">
@@ -195,16 +195,16 @@
   <data name="radioButtonAutomatic.Text" xml:space="preserve">
     <value>&amp;Automatic Mode – automated upgrade from network install files</value>
   </data>
-  <data name=">>radioButtonAutomatic.Name" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonAutomatic.Name" xml:space="preserve">
     <value>radioButtonAutomatic</value>
   </data>
-  <data name=">>radioButtonAutomatic.Type" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonAutomatic.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>radioButtonAutomatic.Parent" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonAutomatic.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>radioButtonAutomatic.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonAutomatic.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -225,16 +225,16 @@
   <data name="label3.Text" xml:space="preserve">
     <value>In Manual Mode, you must apply the upgrade manually to each server in turn by running the XenServer installer from CD-ROM or PXE network boot and following the installer’s on-screen instructions in the server console. This process must be repeated for each server in the pool.</value>
   </data>
-  <data name=">>label3.Name" xml:space="preserve">
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
   </data>
-  <data name=">>label3.Type" xml:space="preserve">
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>label3.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -255,16 +255,16 @@
   <data name="label4.Text" xml:space="preserve">
     <value>In Automatic Mode, the upgrade is applied automatically to all servers in the pool from install files stored on an HTTP, NFS or FTP server.</value>
   </data>
-  <data name=">>label4.Name" xml:space="preserve">
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
   </data>
-  <data name=">>label4.Type" xml:space="preserve">
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label4.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>label4.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="label2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -282,16 +282,16 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Click Run Prechecks to begin running the upgrade prechecks.</value>
   </data>
-  <data name=">>label2.Name" xml:space="preserve">
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name=">>label2.Type" xml:space="preserve">
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>label2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>label2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -306,10 +306,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>562, 378</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>RollingUpgradeWizardUpgradeModePage</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

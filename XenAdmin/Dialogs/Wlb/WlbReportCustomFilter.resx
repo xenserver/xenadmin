@@ -150,40 +150,40 @@
   <data name="labelNoFilters.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>labelNoFilters.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelNoFilters.Name" xml:space="preserve">
     <value>labelNoFilters</value>
   </data>
-  <data name=">>labelNoFilters.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelNoFilters.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelNoFilters.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelNoFilters.Parent" xml:space="preserve">
     <value>panelListView</value>
   </data>
-  <data name=">>labelNoFilters.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelNoFilters.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name=">>buttonOK.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
     <value>buttonOK</value>
   </data>
-  <data name=">>buttonOK.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonOK.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
     <value>panelButtons</value>
   </data>
-  <data name=">>buttonOK.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name=">>buttonCancel.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
     <value>buttonCancel</value>
   </data>
-  <data name=">>buttonCancel.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonCancel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
     <value>panelButtons</value>
   </data>
-  <data name=">>buttonCancel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panelButtons.Font" type="System.Drawing.Font, System.Drawing">
@@ -198,16 +198,16 @@
   <data name="panelButtons.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name=">>panelButtons.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelButtons.Name" xml:space="preserve">
     <value>panelButtons</value>
   </data>
-  <data name=">>panelButtons.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelButtons.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelButtons.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelButtons.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>panelButtons.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelButtons.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="buttonOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -231,16 +231,16 @@
   <data name="buttonOK.Text" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name=">>buttonOK.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
     <value>buttonOK</value>
   </data>
-  <data name=">>buttonOK.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonOK.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
     <value>panelButtons</value>
   </data>
-  <data name=">>buttonOK.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -264,16 +264,16 @@
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name=">>buttonCancel.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
     <value>buttonCancel</value>
   </data>
-  <data name=">>buttonCancel.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonCancel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
     <value>panelButtons</value>
   </data>
-  <data name=">>buttonCancel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="flowLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
@@ -309,16 +309,16 @@
   <data name="comboFilterType.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name=">>comboFilterType.Name" xml:space="preserve">
+  <data name="&gt;&gt;comboFilterType.Name" xml:space="preserve">
     <value>comboFilterType</value>
   </data>
-  <data name=">>comboFilterType.Type" xml:space="preserve">
+  <data name="&gt;&gt;comboFilterType.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>comboFilterType.Parent" xml:space="preserve">
+  <data name="&gt;&gt;comboFilterType.Parent" xml:space="preserve">
     <value>panelFilterType</value>
   </data>
-  <data name=">>comboFilterType.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;comboFilterType.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelFilter.Font" type="System.Drawing.Font, System.Drawing">
@@ -339,16 +339,16 @@
   <data name="labelFilter.Text" xml:space="preserve">
     <value>Filter Type:</value>
   </data>
-  <data name=">>labelFilter.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelFilter.Name" xml:space="preserve">
     <value>labelFilter</value>
   </data>
-  <data name=">>labelFilter.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelFilter.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelFilter.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelFilter.Parent" xml:space="preserve">
     <value>panelFilterType</value>
   </data>
-  <data name=">>labelFilter.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelFilter.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panelFilterType.Font" type="System.Drawing.Font, System.Drawing">
@@ -366,16 +366,16 @@
   <data name="panelFilterType.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
-  <data name=">>panelFilterType.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelFilterType.Name" xml:space="preserve">
     <value>panelFilterType</value>
   </data>
-  <data name=">>panelFilterType.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelFilterType.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelFilterType.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelFilterType.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>panelFilterType.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelFilterType.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelTags.AutoSize" type="System.Boolean, mscorlib">
@@ -384,40 +384,40 @@
   <data name="panelTags.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <data name=">>labelHost.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelHost.Name" xml:space="preserve">
     <value>labelHost</value>
   </data>
-  <data name=">>labelHost.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelHost.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelHost.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelHost.Parent" xml:space="preserve">
     <value>panelTags</value>
   </data>
-  <data name=">>labelHost.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelHost.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name=">>labelTags.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelTags.Name" xml:space="preserve">
     <value>labelTags</value>
   </data>
-  <data name=">>labelTags.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelTags.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelTags.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelTags.Parent" xml:space="preserve">
     <value>panelTags</value>
   </data>
-  <data name=">>labelTags.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelTags.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name=">>comboBoxTags.Name" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxTags.Name" xml:space="preserve">
     <value>comboBoxTags</value>
   </data>
-  <data name=">>comboBoxTags.Type" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxTags.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>comboBoxTags.Parent" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxTags.Parent" xml:space="preserve">
     <value>panelTags</value>
   </data>
-  <data name=">>comboBoxTags.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxTags.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="panelTags.Font" type="System.Drawing.Font, System.Drawing">
@@ -435,40 +435,40 @@
   <data name="panelTags.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
-  <data name=">>panelTags.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelTags.Name" xml:space="preserve">
     <value>panelTags</value>
   </data>
-  <data name=">>panelTags.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelTags.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelTags.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelTags.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>panelTags.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelTags.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name=">>listViewFilterItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;listViewFilterItem.Name" xml:space="preserve">
     <value>listViewFilterItem</value>
   </data>
-  <data name=">>listViewFilterItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;listViewFilterItem.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ListViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>listViewFilterItem.Parent" xml:space="preserve">
+  <data name="&gt;&gt;listViewFilterItem.Parent" xml:space="preserve">
     <value>panelListView</value>
   </data>
-  <data name=">>listViewFilterItem.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;listViewFilterItem.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name=">>checkBoxCheckAll.Name" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxCheckAll.Name" xml:space="preserve">
     <value>checkBoxCheckAll</value>
   </data>
-  <data name=">>checkBoxCheckAll.Type" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxCheckAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>checkBoxCheckAll.Parent" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxCheckAll.Parent" xml:space="preserve">
     <value>panelListView</value>
   </data>
-  <data name=">>checkBoxCheckAll.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxCheckAll.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="panelListView.Font" type="System.Drawing.Font, System.Drawing">
@@ -486,16 +486,16 @@
   <data name="panelListView.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
-  <data name=">>panelListView.Name" xml:space="preserve">
+  <data name="&gt;&gt;panelListView.Name" xml:space="preserve">
     <value>panelListView</value>
   </data>
-  <data name=">>panelListView.Type" xml:space="preserve">
+  <data name="&gt;&gt;panelListView.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panelListView.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panelListView.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>panelListView.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panelListView.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -516,16 +516,16 @@
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name=">>flowLayoutPanel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name=">>flowLayoutPanel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>flowLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>flowLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelHost.AutoSize" type="System.Boolean, mscorlib">
@@ -549,16 +549,16 @@
   <data name="labelHost.Text" xml:space="preserve">
     <value>Hosts:</value>
   </data>
-  <data name=">>labelHost.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelHost.Name" xml:space="preserve">
     <value>labelHost</value>
   </data>
-  <data name=">>labelHost.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelHost.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelHost.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelHost.Parent" xml:space="preserve">
     <value>panelTags</value>
   </data>
-  <data name=">>labelHost.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelHost.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelTags.AutoSize" type="System.Boolean, mscorlib">
@@ -582,16 +582,16 @@
   <data name="labelTags.Text" xml:space="preserve">
     <value>Tags:</value>
   </data>
-  <data name=">>labelTags.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelTags.Name" xml:space="preserve">
     <value>labelTags</value>
   </data>
-  <data name=">>labelTags.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelTags.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelTags.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelTags.Parent" xml:space="preserve">
     <value>panelTags</value>
   </data>
-  <data name=">>labelTags.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelTags.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="comboBoxTags.Font" type="System.Drawing.Font, System.Drawing">
@@ -606,16 +606,16 @@
   <data name="comboBoxTags.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name=">>comboBoxTags.Name" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxTags.Name" xml:space="preserve">
     <value>comboBoxTags</value>
   </data>
-  <data name=">>comboBoxTags.Type" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxTags.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>comboBoxTags.Parent" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxTags.Parent" xml:space="preserve">
     <value>panelTags</value>
   </data>
-  <data name=">>comboBoxTags.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxTags.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="listViewFilterItem.Font" type="System.Drawing.Font, System.Drawing">
@@ -630,16 +630,16 @@
   <data name="listViewFilterItem.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name=">>listViewFilterItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;listViewFilterItem.Name" xml:space="preserve">
     <value>listViewFilterItem</value>
   </data>
-  <data name=">>listViewFilterItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;listViewFilterItem.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ListViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>listViewFilterItem.Parent" xml:space="preserve">
+  <data name="&gt;&gt;listViewFilterItem.Parent" xml:space="preserve">
     <value>panelListView</value>
   </data>
-  <data name=">>listViewFilterItem.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;listViewFilterItem.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="columnHeader1.Text" xml:space="preserve">
@@ -675,16 +675,16 @@
   <data name="checkBoxCheckAll.Text" xml:space="preserve">
     <value>Check All</value>
   </data>
-  <data name=">>checkBoxCheckAll.Name" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxCheckAll.Name" xml:space="preserve">
     <value>checkBoxCheckAll</value>
   </data>
-  <data name=">>checkBoxCheckAll.Type" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxCheckAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>checkBoxCheckAll.Parent" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxCheckAll.Parent" xml:space="preserve">
     <value>panelListView</value>
   </data>
-  <data name=">>checkBoxCheckAll.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;checkBoxCheckAll.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -708,22 +708,22 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Report Custom View Filter</value>
   </data>
-  <data name=">>columnHeader1.Name" xml:space="preserve">
+  <data name="&gt;&gt;columnHeader1.Name" xml:space="preserve">
     <value>columnHeader1</value>
   </data>
-  <data name=">>columnHeader1.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnHeader1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>columnHeader2.Name" xml:space="preserve">
+  <data name="&gt;&gt;columnHeader2.Name" xml:space="preserve">
     <value>columnHeader2</value>
   </data>
-  <data name=">>columnHeader2.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnHeader2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>WlbReportCustomFilter</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

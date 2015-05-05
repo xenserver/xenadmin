@@ -137,16 +137,16 @@
   <data name="NewTagLabel.Text" xml:space="preserve">
     <value>&amp;New Tag:</value>
   </data>
-  <data name=">>NewTagLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;NewTagLabel.Name" xml:space="preserve">
     <value>NewTagLabel</value>
   </data>
-  <data name=">>NewTagLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;NewTagLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>NewTagLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;NewTagLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>NewTagLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;NewTagLabel.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
@@ -168,16 +168,16 @@
   <data name="textBox1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name=">>textBox1.Name" xml:space="preserve">
+  <data name="&gt;&gt;textBox1.Name" xml:space="preserve">
     <value>textBox1</value>
   </data>
-  <data name=">>textBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;textBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>textBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;textBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>textBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;textBox1.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="addButton.Enabled" type="System.Boolean, mscorlib">
@@ -198,16 +198,16 @@
   <data name="addButton.Text" xml:space="preserve">
     <value>C&amp;reate</value>
   </data>
-  <data name=">>addButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;addButton.Name" xml:space="preserve">
     <value>addButton</value>
   </data>
-  <data name=">>addButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;addButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>addButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;addButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>addButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;addButton.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="cancelButton.Font" type="System.Drawing.Font, System.Drawing">
@@ -225,16 +225,16 @@
   <data name="cancelButton.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name=">>cancelButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.Name" xml:space="preserve">
     <value>cancelButton</value>
   </data>
-  <data name=">>cancelButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>cancelButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>cancelButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="okButton.Font" type="System.Drawing.Font, System.Drawing">
@@ -252,16 +252,16 @@
   <data name="okButton.Text" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name=">>okButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;okButton.Name" xml:space="preserve">
     <value>okButton</value>
   </data>
-  <data name=">>okButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;okButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>okButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;okButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>okButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;okButton.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="columnHeader.Text" xml:space="preserve">
@@ -291,16 +291,16 @@
   <data name="tagsListView.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>tagsListView.Name" xml:space="preserve">
+  <data name="&gt;&gt;tagsListView.Name" xml:space="preserve">
     <value>tagsListView</value>
   </data>
-  <data name=">>tagsListView.Type" xml:space="preserve">
+  <data name="&gt;&gt;tagsListView.Type" xml:space="preserve">
     <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>tagsListView.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tagsListView.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>tagsListView.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tagsListView.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="renameButton.Enabled" type="System.Boolean, mscorlib">
@@ -327,16 +327,16 @@
   <data name="renameButton.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>renameButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;renameButton.Name" xml:space="preserve">
     <value>renameButton</value>
   </data>
-  <data name=">>renameButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;renameButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>renameButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;renameButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>renameButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;renameButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="deleteButton.Enabled" type="System.Boolean, mscorlib">
@@ -363,16 +363,16 @@
   <data name="deleteButton.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>deleteButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;deleteButton.Name" xml:space="preserve">
     <value>deleteButton</value>
   </data>
-  <data name=">>deleteButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;deleteButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>deleteButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;deleteButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>deleteButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;deleteButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -399,22 +399,22 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Edit Tags</value>
   </data>
-  <data name=">>columnHeader.Name" xml:space="preserve">
+  <data name="&gt;&gt;columnHeader.Name" xml:space="preserve">
     <value>columnHeader</value>
   </data>
-  <data name=">>columnHeader.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnHeader.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>stateImageList.Name" xml:space="preserve">
+  <data name="&gt;&gt;stateImageList.Name" xml:space="preserve">
     <value>stateImageList</value>
   </data>
-  <data name=">>stateImageList.Type" xml:space="preserve">
+  <data name="&gt;&gt;stateImageList.Type" xml:space="preserve">
     <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>NewTagDialog</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

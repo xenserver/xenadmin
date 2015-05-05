@@ -132,16 +132,16 @@
   <data name="ActionStatusLabel.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name=">>ActionStatusLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;ActionStatusLabel.Name" xml:space="preserve">
     <value>ActionStatusLabel</value>
   </data>
-  <data name=">>ActionStatusLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;ActionStatusLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ActionStatusLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ActionStatusLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>ActionStatusLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ActionStatusLabel.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="ProgressSeparator.Font" type="System.Drawing.Font, System.Drawing">
@@ -153,16 +153,16 @@
   <data name="ProgressSeparator.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name=">>ProgressSeparator.Name" xml:space="preserve">
+  <data name="&gt;&gt;ProgressSeparator.Name" xml:space="preserve">
     <value>ProgressSeparator</value>
   </data>
-  <data name=">>ProgressSeparator.Type" xml:space="preserve">
+  <data name="&gt;&gt;ProgressSeparator.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ProgressSeparator.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ProgressSeparator.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>ProgressSeparator.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ProgressSeparator.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="ActionProgressBar.Font" type="System.Drawing.Font, System.Drawing">
@@ -174,16 +174,16 @@
   <data name="ActionProgressBar.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name=">>ActionProgressBar.Name" xml:space="preserve">
+  <data name="&gt;&gt;ActionProgressBar.Name" xml:space="preserve">
     <value>ActionProgressBar</value>
   </data>
-  <data name=">>ActionProgressBar.Type" xml:space="preserve">
+  <data name="&gt;&gt;ActionProgressBar.Type" xml:space="preserve">
     <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ActionProgressBar.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ActionProgressBar.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>ActionProgressBar.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ActionProgressBar.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="vmListLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -210,16 +210,16 @@
   <data name="vmListLabel.Text" xml:space="preserve">
     <value>Virtual machines on this server:</value>
   </data>
-  <data name=">>vmListLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;vmListLabel.Name" xml:space="preserve">
     <value>vmListLabel</value>
   </data>
-  <data name=">>vmListLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;vmListLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>vmListLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;vmListLabel.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>vmListLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;vmListLabel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="CloseButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -243,16 +243,16 @@
   <data name="CloseButton.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name=">>CloseButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;CloseButton.Name" xml:space="preserve">
     <value>CloseButton</value>
   </data>
-  <data name=">>CloseButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;CloseButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>CloseButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;CloseButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>CloseButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;CloseButton.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="EvacuateButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -276,16 +276,16 @@
   <data name="EvacuateButton.Text" xml:space="preserve">
     <value>&amp;Enter Maintenance Mode</value>
   </data>
-  <data name=">>EvacuateButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;EvacuateButton.Name" xml:space="preserve">
     <value>EvacuateButton</value>
   </data>
-  <data name=">>EvacuateButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;EvacuateButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>EvacuateButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;EvacuateButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>EvacuateButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;EvacuateButton.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="labelBlurb.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -306,16 +306,16 @@
   <data name="labelBlurb.Text" xml:space="preserve">
     <value>This operation will migrate or suspend all VMs running on this server and transition it into maintenance mode.</value>
   </data>
-  <data name=">>labelBlurb.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelBlurb.Name" xml:space="preserve">
     <value>labelBlurb</value>
   </data>
-  <data name=">>labelBlurb.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelBlurb.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelBlurb.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelBlurb.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>labelBlurb.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelBlurb.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="pictureBox1.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
@@ -336,16 +336,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name=">>pictureBox1.Name" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name=">>pictureBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pictureBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="NewMasterComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -363,16 +363,16 @@
   <data name="NewMasterComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>NewMasterComboBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;NewMasterComboBox.Name" xml:space="preserve">
     <value>NewMasterComboBox</value>
   </data>
-  <data name=">>NewMasterComboBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;NewMasterComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>NewMasterComboBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;NewMasterComboBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>NewMasterComboBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;NewMasterComboBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="NewMasterLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -393,16 +393,16 @@
   <data name="NewMasterLabel.Text" xml:space="preserve">
     <value>&amp;New master:</value>
   </data>
-  <data name=">>NewMasterLabel.Name" xml:space="preserve">
+  <data name="&gt;&gt;NewMasterLabel.Name" xml:space="preserve">
     <value>NewMasterLabel</value>
   </data>
-  <data name=">>NewMasterLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;NewMasterLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>NewMasterLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;NewMasterLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>NewMasterLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;NewMasterLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelMasterBlurb.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -423,16 +423,16 @@
   <data name="labelMasterBlurb.Text" xml:space="preserve">
     <value>This server is the pool master. Entering maintenance mode will nominate a new master for the pool. XenCenter will temporarily lose its connection to the pool.</value>
   </data>
-  <data name=">>labelMasterBlurb.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelMasterBlurb.Name" xml:space="preserve">
     <value>labelMasterBlurb</value>
   </data>
-  <data name=">>labelMasterBlurb.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelMasterBlurb.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelMasterBlurb.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelMasterBlurb.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>labelMasterBlurb.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelMasterBlurb.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="panel2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -483,16 +483,16 @@
   <data name="dataGridViewVms.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>dataGridViewVms.Name" xml:space="preserve">
+  <data name="&gt;&gt;dataGridViewVms.Name" xml:space="preserve">
     <value>dataGridViewVms</value>
   </data>
-  <data name=">>dataGridViewVms.Type" xml:space="preserve">
+  <data name="&gt;&gt;dataGridViewVms.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>dataGridViewVms.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dataGridViewVms.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>dataGridViewVms.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dataGridViewVms.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="lableWLBEnabled.AutoSize" type="System.Boolean, mscorlib">
@@ -522,16 +522,16 @@
   <data name="lableWLBEnabled.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name=">>lableWLBEnabled.Name" xml:space="preserve">
+  <data name="&gt;&gt;lableWLBEnabled.Name" xml:space="preserve">
     <value>lableWLBEnabled</value>
   </data>
-  <data name=">>lableWLBEnabled.Type" xml:space="preserve">
+  <data name="&gt;&gt;lableWLBEnabled.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>lableWLBEnabled.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lableWLBEnabled.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>lableWLBEnabled.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lableWLBEnabled.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panel2.Font" type="System.Drawing.Font, System.Drawing">
@@ -546,16 +546,16 @@
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name=">>panel2.Name" xml:space="preserve">
+  <data name="&gt;&gt;panel2.Name" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name=">>panel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>panel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;panel2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>panel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -579,28 +579,28 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Enter Maintenance Mode</value>
   </data>
-  <data name=">>columnImage.Name" xml:space="preserve">
+  <data name="&gt;&gt;columnImage.Name" xml:space="preserve">
     <value>columnImage</value>
   </data>
-  <data name=">>columnImage.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnImage.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>columnVm.Name" xml:space="preserve">
+  <data name="&gt;&gt;columnVm.Name" xml:space="preserve">
     <value>columnVm</value>
   </data>
-  <data name=">>columnVm.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnVm.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>columnAction.Name" xml:space="preserve">
+  <data name="&gt;&gt;columnAction.Name" xml:space="preserve">
     <value>columnAction</value>
   </data>
-  <data name=">>columnAction.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnAction.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EvacuateHostDialog</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.DialogWithProgress, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

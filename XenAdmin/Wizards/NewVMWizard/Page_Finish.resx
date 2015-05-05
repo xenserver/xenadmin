@@ -135,16 +135,16 @@
   <data name="richTextBox1.Text" xml:space="preserve">
     <value />
   </data>
-  <data name=">>richTextBox1.Name" xml:space="preserve">
+  <data name="&gt;&gt;richTextBox1.Name" xml:space="preserve">
     <value>richTextBox1</value>
   </data>
-  <data name=">>richTextBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;richTextBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>richTextBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;richTextBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>richTextBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;richTextBox1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="AutoStartCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -165,16 +165,16 @@
   <data name="AutoStartCheckBox.Text" xml:space="preserve">
     <value>&amp;Start the new VM automatically</value>
   </data>
-  <data name=">>AutoStartCheckBox.Name" xml:space="preserve">
+  <data name="&gt;&gt;AutoStartCheckBox.Name" xml:space="preserve">
     <value>AutoStartCheckBox</value>
   </data>
-  <data name=">>AutoStartCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;AutoStartCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>AutoStartCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;AutoStartCheckBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>AutoStartCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;AutoStartCheckBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="SummaryGridView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -204,16 +204,16 @@
   <data name="SummaryGridView.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name=">>SummaryGridView.Name" xml:space="preserve">
+  <data name="&gt;&gt;SummaryGridView.Name" xml:space="preserve">
     <value>SummaryGridView</value>
   </data>
-  <data name=">>SummaryGridView.Type" xml:space="preserve">
+  <data name="&gt;&gt;SummaryGridView.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>SummaryGridView.Parent" xml:space="preserve">
+  <data name="&gt;&gt;SummaryGridView.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>SummaryGridView.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;SummaryGridView.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -225,22 +225,22 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>515, 308</value>
   </data>
-  <data name=">>PropertyColumn.Name" xml:space="preserve">
+  <data name="&gt;&gt;PropertyColumn.Name" xml:space="preserve">
     <value>PropertyColumn</value>
   </data>
-  <data name=">>PropertyColumn.Type" xml:space="preserve">
+  <data name="&gt;&gt;PropertyColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>ValueColumn.Name" xml:space="preserve">
+  <data name="&gt;&gt;ValueColumn.Name" xml:space="preserve">
     <value>ValueColumn</value>
   </data>
-  <data name=">>ValueColumn.Type" xml:space="preserve">
+  <data name="&gt;&gt;ValueColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Page_Finish</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

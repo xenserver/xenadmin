@@ -147,16 +147,16 @@
   <data name="assignPriorities.Text" xml:space="preserve">
     <value>HA Plan</value>
   </data>
-  <data name=">>assignPriorities.Name" xml:space="preserve">
+  <data name="&gt;&gt;assignPriorities.Name" xml:space="preserve">
     <value>assignPriorities</value>
   </data>
-  <data name=">>assignPriorities.Type" xml:space="preserve">
+  <data name="&gt;&gt;assignPriorities.Type" xml:space="preserve">
     <value>XenAdmin.Wizards.HAWizard_Pages.AssignPriorities, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>assignPriorities.Parent" xml:space="preserve">
+  <data name="&gt;&gt;assignPriorities.Parent" xml:space="preserve">
     <value>m_panelMiddle</value>
   </data>
-  <data name=">>assignPriorities.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;assignPriorities.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelBlurb.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -183,16 +183,16 @@
   <data name="labelBlurb.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name=">>labelBlurb.Name" xml:space="preserve">
+  <data name="&gt;&gt;labelBlurb.Name" xml:space="preserve">
     <value>labelBlurb</value>
   </data>
-  <data name=">>labelBlurb.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelBlurb.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>labelBlurb.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelBlurb.Parent" xml:space="preserve">
     <value>m_panelTop</value>
   </data>
-  <data name=">>labelBlurb.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelBlurb.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="pictureBoxWarningIcon.Font" type="System.Drawing.Font, System.Drawing">
@@ -213,16 +213,16 @@
   <data name="pictureBoxWarningIcon.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name=">>pictureBoxWarningIcon.Name" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWarningIcon.Name" xml:space="preserve">
     <value>pictureBoxWarningIcon</value>
   </data>
-  <data name=">>pictureBoxWarningIcon.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWarningIcon.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>pictureBoxWarningIcon.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWarningIcon.Parent" xml:space="preserve">
     <value>m_panelTopLeft</value>
   </data>
-  <data name=">>pictureBoxWarningIcon.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxWarningIcon.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="buttonOk.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -243,16 +243,16 @@
   <data name="buttonOk.Text" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name=">>buttonOk.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonOk.Name" xml:space="preserve">
     <value>buttonOk</value>
   </data>
-  <data name=">>buttonOk.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonOk.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonOk.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonOk.Parent" xml:space="preserve">
     <value>m_panelBottom</value>
   </data>
-  <data name=">>buttonOk.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonOk.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -276,16 +276,16 @@
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name=">>buttonCancel.Name" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
     <value>buttonCancel</value>
   </data>
-  <data name=">>buttonCancel.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>buttonCancel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
     <value>m_panelBottom</value>
   </data>
-  <data name=">>buttonCancel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="m_panelBottom.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -303,16 +303,16 @@
   <data name="m_panelBottom.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name=">>m_panelBottom.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_panelBottom.Name" xml:space="preserve">
     <value>m_panelBottom</value>
   </data>
-  <data name=">>m_panelBottom.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_panelBottom.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>m_panelBottom.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_panelBottom.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>m_panelBottom.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_panelBottom.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="m_panelTopLeft.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -330,16 +330,16 @@
   <data name="m_panelTopLeft.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name=">>m_panelTopLeft.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_panelTopLeft.Name" xml:space="preserve">
     <value>m_panelTopLeft</value>
   </data>
-  <data name=">>m_panelTopLeft.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_panelTopLeft.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>m_panelTopLeft.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_panelTopLeft.Parent" xml:space="preserve">
     <value>m_panelTop</value>
   </data>
-  <data name=">>m_panelTopLeft.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_panelTopLeft.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="m_panelTop.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -357,16 +357,16 @@
   <data name="m_panelTop.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name=">>m_panelTop.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_panelTop.Name" xml:space="preserve">
     <value>m_panelTop</value>
   </data>
-  <data name=">>m_panelTop.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_panelTop.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>m_panelTop.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_panelTop.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>m_panelTop.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_panelTop.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="m_panelMiddle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -384,16 +384,16 @@
   <data name="m_panelMiddle.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name=">>m_panelMiddle.Name" xml:space="preserve">
+  <data name="&gt;&gt;m_panelMiddle.Name" xml:space="preserve">
     <value>m_panelMiddle</value>
   </data>
-  <data name=">>m_panelMiddle.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_panelMiddle.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>m_panelMiddle.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_panelMiddle.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>m_panelMiddle.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_panelMiddle.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -420,10 +420,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Configure HA</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EditVmHaPrioritiesDialog</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

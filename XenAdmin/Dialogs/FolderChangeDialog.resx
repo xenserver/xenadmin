@@ -138,16 +138,16 @@
   <data name="cancelButton.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name=">>cancelButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.Name" xml:space="preserve">
     <value>cancelButton</value>
   </data>
-  <data name=">>cancelButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>cancelButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>cancelButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="okButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -168,16 +168,16 @@
   <data name="okButton.Text" xml:space="preserve">
     <value>&amp;Move</value>
   </data>
-  <data name=">>okButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;okButton.Name" xml:space="preserve">
     <value>okButton</value>
   </data>
-  <data name=">>okButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;okButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>okButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;okButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>okButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;okButton.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="treeView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -192,16 +192,16 @@
   <data name="treeView.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name=">>treeView.Name" xml:space="preserve">
+  <data name="&gt;&gt;treeView.Name" xml:space="preserve">
     <value>treeView</value>
   </data>
-  <data name=">>treeView.Type" xml:space="preserve">
+  <data name="&gt;&gt;treeView.Type" xml:space="preserve">
     <value>XenAdmin.Controls.TreeViewWithNodes, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name=">>treeView.Parent" xml:space="preserve">
+  <data name="&gt;&gt;treeView.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>treeView.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;treeView.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="radioButtonNone.AutoSize" type="System.Boolean, mscorlib">
@@ -219,16 +219,16 @@
   <data name="radioButtonNone.Text" xml:space="preserve">
     <value>N&amp;ot in any folder</value>
   </data>
-  <data name=">>radioButtonNone.Name" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonNone.Name" xml:space="preserve">
     <value>radioButtonNone</value>
   </data>
-  <data name=">>radioButtonNone.Type" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonNone.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>radioButtonNone.Parent" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonNone.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>radioButtonNone.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonNone.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="radioButtonChoose.AutoSize" type="System.Boolean, mscorlib">
@@ -246,16 +246,16 @@
   <data name="radioButtonChoose.Text" xml:space="preserve">
     <value>&amp;In this folder:</value>
   </data>
-  <data name=">>radioButtonChoose.Name" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonChoose.Name" xml:space="preserve">
     <value>radioButtonChoose</value>
   </data>
-  <data name=">>radioButtonChoose.Type" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonChoose.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>radioButtonChoose.Parent" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonChoose.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>radioButtonChoose.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;radioButtonChoose.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="newButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -273,16 +273,16 @@
   <data name="newButton.Text" xml:space="preserve">
     <value>&amp;New Folder...</value>
   </data>
-  <data name=">>newButton.Name" xml:space="preserve">
+  <data name="&gt;&gt;newButton.Name" xml:space="preserve">
     <value>newButton</value>
   </data>
-  <data name=">>newButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;newButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name=">>newButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;newButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name=">>newButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;newButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -306,10 +306,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Change Folder</value>
   </data>
-  <data name=">>$this.Name" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FolderChangeDialog</value>
   </data>
-  <data name=">>$this.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
