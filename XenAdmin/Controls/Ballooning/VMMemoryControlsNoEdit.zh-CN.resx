@@ -508,7 +508,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="editButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 22</value>
+    <value>66, 24</value>
   </data>
   <data name="editButton.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
