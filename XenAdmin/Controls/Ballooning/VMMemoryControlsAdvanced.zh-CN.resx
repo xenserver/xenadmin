@@ -135,16 +135,16 @@
   <data name="memorySpinnerDynMin.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;memorySpinnerDynMin.Name" xml:space="preserve">
+  <data name=">>memorySpinnerDynMin.Name" xml:space="preserve">
     <value>memorySpinnerDynMin</value>
   </data>
-  <data name="&gt;&gt;memorySpinnerDynMin.Type" xml:space="preserve">
+  <data name=">>memorySpinnerDynMin.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Ballooning.MemorySpinner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;memorySpinnerDynMin.Parent" xml:space="preserve">
+  <data name=">>memorySpinnerDynMin.Parent" xml:space="preserve">
     <value>spinnerPanel</value>
   </data>
-  <data name="&gt;&gt;memorySpinnerDynMin.ZOrder" xml:space="preserve">
+  <data name=">>memorySpinnerDynMin.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="memorySpinnerStatMax.Location" type="System.Drawing.Point, System.Drawing">
@@ -159,16 +159,16 @@
   <data name="memorySpinnerStatMax.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;memorySpinnerStatMax.Name" xml:space="preserve">
+  <data name=">>memorySpinnerStatMax.Name" xml:space="preserve">
     <value>memorySpinnerStatMax</value>
   </data>
-  <data name="&gt;&gt;memorySpinnerStatMax.Type" xml:space="preserve">
+  <data name=">>memorySpinnerStatMax.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Ballooning.MemorySpinner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;memorySpinnerStatMax.Parent" xml:space="preserve">
+  <data name=">>memorySpinnerStatMax.Parent" xml:space="preserve">
     <value>spinnerPanel</value>
   </data>
-  <data name="&gt;&gt;memorySpinnerStatMax.ZOrder" xml:space="preserve">
+  <data name=">>memorySpinnerStatMax.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="memorySpinnerDynMax.Location" type="System.Drawing.Point, System.Drawing">
@@ -183,16 +183,16 @@
   <data name="memorySpinnerDynMax.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;memorySpinnerDynMax.Name" xml:space="preserve">
+  <data name=">>memorySpinnerDynMax.Name" xml:space="preserve">
     <value>memorySpinnerDynMax</value>
   </data>
-  <data name="&gt;&gt;memorySpinnerDynMax.Type" xml:space="preserve">
+  <data name=">>memorySpinnerDynMax.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Ballooning.MemorySpinner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;memorySpinnerDynMax.Parent" xml:space="preserve">
+  <data name=">>memorySpinnerDynMax.Parent" xml:space="preserve">
     <value>spinnerPanel</value>
   </data>
-  <data name="&gt;&gt;memorySpinnerDynMax.ZOrder" xml:space="preserve">
+  <data name=">>memorySpinnerDynMax.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="spinnerPanel.Location" type="System.Drawing.Point, System.Drawing">
@@ -210,16 +210,16 @@
   <data name="spinnerPanel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;spinnerPanel.Name" xml:space="preserve">
+  <data name=">>spinnerPanel.Name" xml:space="preserve">
     <value>spinnerPanel</value>
   </data>
-  <data name="&gt;&gt;spinnerPanel.Type" xml:space="preserve">
+  <data name=">>spinnerPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;spinnerPanel.Parent" xml:space="preserve">
+  <data name=">>spinnerPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;spinnerPanel.ZOrder" xml:space="preserve">
+  <data name=">>spinnerPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="spinnerPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -237,10 +237,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>220, 75</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>VMMemoryControlsAdvanced</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Ballooning.VMMemoryControlsEdit, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -138,16 +138,16 @@
   <data name="FormatBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;FormatBox.Name" xml:space="preserve">
+  <data name=">>FormatBox.Name" xml:space="preserve">
     <value>FormatBox</value>
   </data>
-  <data name="&gt;&gt;FormatBox.Type" xml:space="preserve">
+  <data name=">>FormatBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;FormatBox.Parent" xml:space="preserve">
+  <data name=">>FormatBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;FormatBox.ZOrder" xml:space="preserve">
+  <data name=">>FormatBox.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
@@ -168,16 +168,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Message format:</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
   <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -201,16 +201,16 @@
   <data name="label2.Text" xml:space="preserve">
     <value>For example: Your {0} has been {1}.</value>
   </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+  <data name=">>label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+  <data name=">>label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+  <data name=">>label2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+  <data name=">>label2.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
   <data name="Parameter1Box.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -228,16 +228,16 @@
   <data name="Parameter1Box.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;Parameter1Box.Name" xml:space="preserve">
+  <data name=">>Parameter1Box.Name" xml:space="preserve">
     <value>Parameter1Box</value>
   </data>
-  <data name="&gt;&gt;Parameter1Box.Type" xml:space="preserve">
+  <data name=">>Parameter1Box.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Parameter1Box.Parent" xml:space="preserve">
+  <data name=">>Parameter1Box.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Parameter1Box.ZOrder" xml:space="preserve">
+  <data name=">>Parameter1Box.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
   <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -261,16 +261,16 @@
   <data name="label3.Text" xml:space="preserve">
     <value>Parameter 1:</value>
   </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+  <data name=">>label3.Name" xml:space="preserve">
     <value>label3</value>
   </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+  <data name=">>label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+  <data name=">>label3.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+  <data name=">>label3.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
   <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -294,16 +294,16 @@
   <data name="label4.Text" xml:space="preserve">
     <value>Parameter 3:</value>
   </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+  <data name=">>label4.Name" xml:space="preserve">
     <value>label4</value>
   </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+  <data name=">>label4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+  <data name=">>label4.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+  <data name=">>label4.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="Parameter3Box.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -321,16 +321,16 @@
   <data name="Parameter3Box.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;Parameter3Box.Name" xml:space="preserve">
+  <data name=">>Parameter3Box.Name" xml:space="preserve">
     <value>Parameter3Box</value>
   </data>
-  <data name="&gt;&gt;Parameter3Box.Type" xml:space="preserve">
+  <data name=">>Parameter3Box.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Parameter3Box.Parent" xml:space="preserve">
+  <data name=">>Parameter3Box.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Parameter3Box.ZOrder" xml:space="preserve">
+  <data name=">>Parameter3Box.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
   <data name="label5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -354,16 +354,16 @@
   <data name="label5.Text" xml:space="preserve">
     <value>Parameter 2:</value>
   </data>
-  <data name="&gt;&gt;label5.Name" xml:space="preserve">
+  <data name=">>label5.Name" xml:space="preserve">
     <value>label5</value>
   </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+  <data name=">>label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
+  <data name=">>label5.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+  <data name=">>label5.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="Parameter2Box.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -381,16 +381,16 @@
   <data name="Parameter2Box.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;Parameter2Box.Name" xml:space="preserve">
+  <data name=">>Parameter2Box.Name" xml:space="preserve">
     <value>Parameter2Box</value>
   </data>
-  <data name="&gt;&gt;Parameter2Box.Type" xml:space="preserve">
+  <data name=">>Parameter2Box.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Parameter2Box.Parent" xml:space="preserve">
+  <data name=">>Parameter2Box.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Parameter2Box.ZOrder" xml:space="preserve">
+  <data name=">>Parameter2Box.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="label6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -414,16 +414,16 @@
   <data name="label6.Text" xml:space="preserve">
     <value>For example: noun</value>
   </data>
-  <data name="&gt;&gt;label6.Name" xml:space="preserve">
+  <data name=">>label6.Name" xml:space="preserve">
     <value>label6</value>
   </data>
-  <data name="&gt;&gt;label6.Type" xml:space="preserve">
+  <data name=">>label6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
+  <data name=">>label6.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
+  <data name=">>label6.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="label7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -447,16 +447,16 @@
   <data name="label7.Text" xml:space="preserve">
     <value>For example: verbalized</value>
   </data>
-  <data name="&gt;&gt;label7.Name" xml:space="preserve">
+  <data name=">>label7.Name" xml:space="preserve">
     <value>label7</value>
   </data>
-  <data name="&gt;&gt;label7.Type" xml:space="preserve">
+  <data name=">>label7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
+  <data name=">>label7.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
+  <data name=">>label7.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="CloseButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -477,16 +477,16 @@
   <data name="CloseButton.Text" xml:space="preserve">
     <value>关闭</value>
   </data>
-  <data name="&gt;&gt;CloseButton.Name" xml:space="preserve">
+  <data name=">>CloseButton.Name" xml:space="preserve">
     <value>CloseButton</value>
   </data>
-  <data name="&gt;&gt;CloseButton.Type" xml:space="preserve">
+  <data name=">>CloseButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CloseButton.Parent" xml:space="preserve">
+  <data name=">>CloseButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;CloseButton.ZOrder" xml:space="preserve">
+  <data name=">>CloseButton.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="label8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -510,16 +510,16 @@
   <data name="label8.Text" xml:space="preserve">
     <value>Button 1:</value>
   </data>
-  <data name="&gt;&gt;label8.Name" xml:space="preserve">
+  <data name=">>label8.Name" xml:space="preserve">
     <value>label8</value>
   </data>
-  <data name="&gt;&gt;label8.Type" xml:space="preserve">
+  <data name=">>label8.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
+  <data name=">>label8.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
+  <data name=">>label8.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="Button1Box.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -537,16 +537,16 @@
   <data name="Button1Box.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;Button1Box.Name" xml:space="preserve">
+  <data name=">>Button1Box.Name" xml:space="preserve">
     <value>Button1Box</value>
   </data>
-  <data name="&gt;&gt;Button1Box.Type" xml:space="preserve">
+  <data name=">>Button1Box.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button1Box.Parent" xml:space="preserve">
+  <data name=">>Button1Box.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Button1Box.ZOrder" xml:space="preserve">
+  <data name=">>Button1Box.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="Button2Box.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -564,16 +564,16 @@
   <data name="Button2Box.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="&gt;&gt;Button2Box.Name" xml:space="preserve">
+  <data name=">>Button2Box.Name" xml:space="preserve">
     <value>Button2Box</value>
   </data>
-  <data name="&gt;&gt;Button2Box.Type" xml:space="preserve">
+  <data name=">>Button2Box.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button2Box.Parent" xml:space="preserve">
+  <data name=">>Button2Box.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Button2Box.ZOrder" xml:space="preserve">
+  <data name=">>Button2Box.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="Button3Box.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -591,16 +591,16 @@
   <data name="Button3Box.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="&gt;&gt;Button3Box.Name" xml:space="preserve">
+  <data name=">>Button3Box.Name" xml:space="preserve">
     <value>Button3Box</value>
   </data>
-  <data name="&gt;&gt;Button3Box.Type" xml:space="preserve">
+  <data name=">>Button3Box.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button3Box.Parent" xml:space="preserve">
+  <data name=">>Button3Box.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Button3Box.ZOrder" xml:space="preserve">
+  <data name=">>Button3Box.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="label9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -624,16 +624,16 @@
   <data name="label9.Text" xml:space="preserve">
     <value>Button 2:</value>
   </data>
-  <data name="&gt;&gt;label9.Name" xml:space="preserve">
+  <data name=">>label9.Name" xml:space="preserve">
     <value>label9</value>
   </data>
-  <data name="&gt;&gt;label9.Type" xml:space="preserve">
+  <data name=">>label9.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label9.Parent" xml:space="preserve">
+  <data name=">>label9.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
+  <data name=">>label9.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="label10.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -657,16 +657,16 @@
   <data name="label10.Text" xml:space="preserve">
     <value>Button 3:</value>
   </data>
-  <data name="&gt;&gt;label10.Name" xml:space="preserve">
+  <data name=">>label10.Name" xml:space="preserve">
     <value>label10</value>
   </data>
-  <data name="&gt;&gt;label10.Type" xml:space="preserve">
+  <data name=">>label10.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label10.Parent" xml:space="preserve">
+  <data name=">>label10.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
+  <data name=">>label10.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -693,10 +693,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Message Box Test</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>MessageBoxTest</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -150,16 +150,16 @@
   <data name="AddGroupButton.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
   </data>
-  <data name="&gt;&gt;AddGroupButton.Name" xml:space="preserve">
+  <data name=">>AddGroupButton.Name" xml:space="preserve">
     <value>AddGroupButton</value>
   </data>
-  <data name="&gt;&gt;AddGroupButton.Type" xml:space="preserve">
+  <data name=">>AddGroupButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;AddGroupButton.Parent" xml:space="preserve">
+  <data name=">>AddGroupButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;AddGroupButton.ZOrder" xml:space="preserve">
+  <data name=">>AddGroupButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -171,10 +171,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>483, 29</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>GroupingControl</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

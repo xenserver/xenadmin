@@ -135,16 +135,16 @@
   <data name="label13.Text" xml:space="preserve">
     <value>检查下面的新 VM 保护策略，如果需要更改任何设置，请单击“上一步”，或者单击“完成”以创建新策略。</value>
   </data>
-  <data name="&gt;&gt;label13.Name" xml:space="preserve">
+  <data name=">>label13.Name" xml:space="preserve">
     <value>label13</value>
   </data>
-  <data name="&gt;&gt;label13.Type" xml:space="preserve">
+  <data name=">>label13.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label13.Parent" xml:space="preserve">
+  <data name=">>label13.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
+  <data name=">>label13.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="textBoxSummary.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -162,16 +162,16 @@
   <data name="textBoxSummary.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;textBoxSummary.Name" xml:space="preserve">
+  <data name=">>textBoxSummary.Name" xml:space="preserve">
     <value>textBoxSummary</value>
   </data>
-  <data name="&gt;&gt;textBoxSummary.Type" xml:space="preserve">
+  <data name=">>textBoxSummary.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBoxSummary.Parent" xml:space="preserve">
+  <data name=">>textBoxSummary.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;textBoxSummary.ZOrder" xml:space="preserve">
+  <data name=">>textBoxSummary.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="checkBox1.AutoSize" type="System.Boolean, mscorlib">
@@ -192,16 +192,16 @@
   <data name="checkBox1.Text" xml:space="preserve">
     <value>单击“完成”时运行新的 VM 保护作业(&amp;R)</value>
   </data>
-  <data name="&gt;&gt;checkBox1.Name" xml:space="preserve">
+  <data name=">>checkBox1.Name" xml:space="preserve">
     <value>checkBox1</value>
   </data>
-  <data name="&gt;&gt;checkBox1.Type" xml:space="preserve">
+  <data name=">>checkBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkBox1.Parent" xml:space="preserve">
+  <data name=">>checkBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;checkBox1.ZOrder" xml:space="preserve">
+  <data name=">>checkBox1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -213,10 +213,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>481, 307</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>NewPolicyFinishPage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

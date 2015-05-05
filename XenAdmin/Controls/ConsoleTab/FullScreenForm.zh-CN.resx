@@ -141,16 +141,16 @@
   <data name="connectionBar1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;connectionBar1.Name" xml:space="preserve">
+  <data name=">>connectionBar1.Name" xml:space="preserve">
     <value>connectionBar1</value>
   </data>
-  <data name="&gt;&gt;connectionBar1.Type" xml:space="preserve">
+  <data name=">>connectionBar1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ConsoleTab.ConnectionBar, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;connectionBar1.Parent" xml:space="preserve">
+  <data name=">>connectionBar1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;connectionBar1.ZOrder" xml:space="preserve">
+  <data name=">>connectionBar1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="contentPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -168,16 +168,16 @@
   <data name="contentPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;contentPanel.Name" xml:space="preserve">
+  <data name=">>contentPanel.Name" xml:space="preserve">
     <value>contentPanel</value>
   </data>
-  <data name="&gt;&gt;contentPanel.Type" xml:space="preserve">
+  <data name=">>contentPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;contentPanel.Parent" xml:space="preserve">
+  <data name=">>contentPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;contentPanel.ZOrder" xml:space="preserve">
+  <data name=">>contentPanel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -192,10 +192,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>FullScreenForm</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>FullScreenForm</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

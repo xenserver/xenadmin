@@ -156,16 +156,16 @@
   <data name="m_label.Text" xml:space="preserve">
     <value>要在导入进程完成后立即启动新 VM，请选中此复选框。</value>
   </data>
-  <data name="&gt;&gt;m_label.Name" xml:space="preserve">
+  <data name=">>m_label.Name" xml:space="preserve">
     <value>m_label</value>
   </data>
-  <data name="&gt;&gt;m_label.Type" xml:space="preserve">
+  <data name=">>m_label.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;m_label.Parent" xml:space="preserve">
+  <data name=">>m_label.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;m_label.ZOrder" xml:space="preserve">
+  <data name=">>m_label.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="m_checkBoxStartVms.AutoSize" type="System.Boolean, mscorlib">
@@ -192,16 +192,16 @@
   <data name="m_checkBoxStartVms.Text" xml:space="preserve">
     <value>导入后启动 VM(&amp;S)</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxStartVms.Name" xml:space="preserve">
+  <data name=">>m_checkBoxStartVms.Name" xml:space="preserve">
     <value>m_checkBoxStartVms</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxStartVms.Type" xml:space="preserve">
+  <data name=">>m_checkBoxStartVms.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxStartVms.Parent" xml:space="preserve">
+  <data name=">>m_checkBoxStartVms.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxStartVms.ZOrder" xml:space="preserve">
+  <data name=">>m_checkBoxStartVms.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -219,16 +219,16 @@
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Parent" xml:space="preserve">
     <value>m_groupBox</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -252,16 +252,16 @@
   <data name="m_groupBox.Text" xml:space="preserve">
     <value>自动启动新 VM</value>
   </data>
-  <data name="&gt;&gt;m_groupBox.Name" xml:space="preserve">
+  <data name=">>m_groupBox.Name" xml:space="preserve">
     <value>m_groupBox</value>
   </data>
-  <data name="&gt;&gt;m_groupBox.Type" xml:space="preserve">
+  <data name=">>m_groupBox.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;m_groupBox.Parent" xml:space="preserve">
+  <data name=">>m_groupBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;m_groupBox.ZOrder" xml:space="preserve">
+  <data name=">>m_groupBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="m_labelIntro.AutoSize" type="System.Boolean, mscorlib">
@@ -284,16 +284,16 @@
 
 请检查这些设置，如果需要返回做出任何更改，请单击“上一步”。否则，请单击“完成”进行导入并关闭此向导。导入过程可能需要几分钟时间。</value>
   </data>
-  <data name="&gt;&gt;m_labelIntro.Name" xml:space="preserve">
+  <data name=">>m_labelIntro.Name" xml:space="preserve">
     <value>m_labelIntro</value>
   </data>
-  <data name="&gt;&gt;m_labelIntro.Type" xml:space="preserve">
+  <data name=">>m_labelIntro.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;m_labelIntro.Parent" xml:space="preserve">
+  <data name=">>m_labelIntro.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;m_labelIntro.ZOrder" xml:space="preserve">
+  <data name=">>m_labelIntro.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -323,16 +323,16 @@
   <data name="m_dataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;m_dataGridView.Name" xml:space="preserve">
+  <data name=">>m_dataGridView.Name" xml:space="preserve">
     <value>m_dataGridView</value>
   </data>
-  <data name="&gt;&gt;m_dataGridView.Type" xml:space="preserve">
+  <data name=">>m_dataGridView.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_dataGridView.Parent" xml:space="preserve">
+  <data name=">>m_dataGridView.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;m_dataGridView.ZOrder" xml:space="preserve">
+  <data name=">>m_dataGridView.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -350,16 +350,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -374,22 +374,22 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 332</value>
   </data>
-  <data name="&gt;&gt;Column1.Name" xml:space="preserve">
+  <data name=">>Column1.Name" xml:space="preserve">
     <value>Column1</value>
   </data>
-  <data name="&gt;&gt;Column1.Type" xml:space="preserve">
+  <data name=">>Column1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Column2.Name" xml:space="preserve">
+  <data name=">>Column2.Name" xml:space="preserve">
     <value>Column2</value>
   </data>
-  <data name="&gt;&gt;Column2.Type" xml:space="preserve">
+  <data name=">>Column2.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>ImportFinishPage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Wizards.GenericPages.ImExPortPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

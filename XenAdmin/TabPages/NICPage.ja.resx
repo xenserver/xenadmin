@@ -210,16 +210,16 @@
   <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Name" xml:space="preserve">
+  <data name=">>dataGridView1.Name" xml:space="preserve">
     <value>dataGridView1</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Type" xml:space="preserve">
+  <data name=">>dataGridView1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Parent" xml:space="preserve">
+  <data name=">>dataGridView1.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.ZOrder" xml:space="preserve">
+  <data name=">>dataGridView1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="CreateBondButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -243,16 +243,16 @@
   <data name="CreateBondButton.Text" xml:space="preserve">
     <value>ボンディングの作成(&amp;C)...</value>
   </data>
-  <data name="&gt;&gt;CreateBondButton.Name" xml:space="preserve">
+  <data name=">>CreateBondButton.Name" xml:space="preserve">
     <value>CreateBondButton</value>
   </data>
-  <data name="&gt;&gt;CreateBondButton.Type" xml:space="preserve">
+  <data name=">>CreateBondButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CreateBondButton.Parent" xml:space="preserve">
+  <data name=">>CreateBondButton.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;CreateBondButton.ZOrder" xml:space="preserve">
+  <data name=">>CreateBondButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="DeleteBondButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -276,16 +276,16 @@
   <data name="DeleteBondButton.Text" xml:space="preserve">
     <value>ボンディングの削除(&amp;D)</value>
   </data>
-  <data name="&gt;&gt;DeleteBondButton.Name" xml:space="preserve">
+  <data name=">>DeleteBondButton.Name" xml:space="preserve">
     <value>DeleteBondButton</value>
   </data>
-  <data name="&gt;&gt;DeleteBondButton.Type" xml:space="preserve">
+  <data name=">>DeleteBondButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DeleteBondButton.Parent" xml:space="preserve">
+  <data name=">>DeleteBondButton.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;DeleteBondButton.ZOrder" xml:space="preserve">
+  <data name=">>DeleteBondButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="buttonRescan.Location" type="System.Drawing.Point, System.Drawing">
@@ -303,16 +303,16 @@
   <data name="buttonRescan.Text" xml:space="preserve">
     <value>再スキャン(&amp;R)</value>
   </data>
-  <data name="&gt;&gt;buttonRescan.Name" xml:space="preserve">
+  <data name=">>buttonRescan.Name" xml:space="preserve">
     <value>buttonRescan</value>
   </data>
-  <data name="&gt;&gt;buttonRescan.Type" xml:space="preserve">
+  <data name=">>buttonRescan.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonRescan.Parent" xml:space="preserve">
+  <data name=">>buttonRescan.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;buttonRescan.ZOrder" xml:space="preserve">
+  <data name=">>buttonRescan.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -333,16 +333,16 @@
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Name" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
@@ -354,16 +354,16 @@
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+  <data name=">>panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+  <data name=">>panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+  <data name=">>panel1.Parent" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+  <data name=">>panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
@@ -387,31 +387,31 @@
   <data name="label1.Text" xml:space="preserve">
     <value>インターフェイス</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="pageContainerPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>920, 397</value>
   </data>
-  <data name="&gt;&gt;pageContainerPanel.Name" xml:space="preserve">
+  <data name=">>pageContainerPanel.Name" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name="&gt;&gt;pageContainerPanel.Type" xml:space="preserve">
+  <data name=">>pageContainerPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pageContainerPanel.Parent" xml:space="preserve">
+  <data name=">>pageContainerPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;pageContainerPanel.ZOrder" xml:space="preserve">
+  <data name=">>pageContainerPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="label6.AutoSize" type="System.Boolean, mscorlib">
@@ -429,10 +429,10 @@
   <data name="label6.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;label6.Name" xml:space="preserve">
+  <data name=">>label6.Name" xml:space="preserve">
     <value>label6</value>
   </data>
-  <data name="&gt;&gt;label6.Type" xml:space="preserve">
+  <data name=">>label6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -447,10 +447,10 @@
   <data name="label10.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;label10.Name" xml:space="preserve">
+  <data name=">>label10.Name" xml:space="preserve">
     <value>label10</value>
   </data>
-  <data name="&gt;&gt;label10.Type" xml:space="preserve">
+  <data name=">>label10.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -465,10 +465,10 @@
   <data name="label9.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;label9.Name" xml:space="preserve">
+  <data name=">>label9.Name" xml:space="preserve">
     <value>label9</value>
   </data>
-  <data name="&gt;&gt;label9.Type" xml:space="preserve">
+  <data name=">>label9.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -483,10 +483,10 @@
   <data name="label8.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;label8.Name" xml:space="preserve">
+  <data name=">>label8.Name" xml:space="preserve">
     <value>label8</value>
   </data>
-  <data name="&gt;&gt;label8.Type" xml:space="preserve">
+  <data name=">>label8.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -501,10 +501,10 @@
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;label7.Name" xml:space="preserve">
+  <data name=">>label7.Name" xml:space="preserve">
     <value>label7</value>
   </data>
-  <data name="&gt;&gt;label7.Type" xml:space="preserve">
+  <data name=">>label7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TitleLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -534,10 +534,10 @@
   <data name="TitleLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;TitleLabel.Name" xml:space="preserve">
+  <data name=">>TitleLabel.Name" xml:space="preserve">
     <value>TitleLabel</value>
   </data>
-  <data name="&gt;&gt;TitleLabel.Type" xml:space="preserve">
+  <data name=">>TitleLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -546,10 +546,10 @@
   <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 4</value>
   </data>
-  <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
+  <data name=">>contextMenuStrip1.Name" xml:space="preserve">
     <value>contextMenuStrip1</value>
   </data>
-  <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
+  <data name=">>contextMenuStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -567,58 +567,58 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>920, 434</value>
   </data>
-  <data name="&gt;&gt;ColumnNIC.Name" xml:space="preserve">
+  <data name=">>ColumnNIC.Name" xml:space="preserve">
     <value>ColumnNIC</value>
   </data>
-  <data name="&gt;&gt;ColumnNIC.Type" xml:space="preserve">
+  <data name=">>ColumnNIC.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnMAC.Name" xml:space="preserve">
+  <data name=">>ColumnMAC.Name" xml:space="preserve">
     <value>ColumnMAC</value>
   </data>
-  <data name="&gt;&gt;ColumnMAC.Type" xml:space="preserve">
+  <data name=">>ColumnMAC.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnLinkStatus.Name" xml:space="preserve">
+  <data name=">>ColumnLinkStatus.Name" xml:space="preserve">
     <value>ColumnLinkStatus</value>
   </data>
-  <data name="&gt;&gt;ColumnLinkStatus.Type" xml:space="preserve">
+  <data name=">>ColumnLinkStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnSpeed.Name" xml:space="preserve">
+  <data name=">>ColumnSpeed.Name" xml:space="preserve">
     <value>ColumnSpeed</value>
   </data>
-  <data name="&gt;&gt;ColumnSpeed.Type" xml:space="preserve">
+  <data name=">>ColumnSpeed.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnDuplex.Name" xml:space="preserve">
+  <data name=">>ColumnDuplex.Name" xml:space="preserve">
     <value>ColumnDuplex</value>
   </data>
-  <data name="&gt;&gt;ColumnDuplex.Type" xml:space="preserve">
+  <data name=">>ColumnDuplex.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnVendorName.Name" xml:space="preserve">
+  <data name=">>ColumnVendorName.Name" xml:space="preserve">
     <value>ColumnVendorName</value>
   </data>
-  <data name="&gt;&gt;ColumnVendorName.Type" xml:space="preserve">
+  <data name=">>ColumnVendorName.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnDeviceName.Name" xml:space="preserve">
+  <data name=">>ColumnDeviceName.Name" xml:space="preserve">
     <value>ColumnDeviceName</value>
   </data>
-  <data name="&gt;&gt;ColumnDeviceName.Type" xml:space="preserve">
+  <data name=">>ColumnDeviceName.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnBusPath.Name" xml:space="preserve">
+  <data name=">>ColumnBusPath.Name" xml:space="preserve">
     <value>ColumnBusPath</value>
   </data>
-  <data name="&gt;&gt;ColumnBusPath.Type" xml:space="preserve">
+  <data name=">>ColumnBusPath.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>NICPage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.TabPages.BaseTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

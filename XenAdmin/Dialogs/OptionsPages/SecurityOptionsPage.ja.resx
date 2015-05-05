@@ -162,16 +162,16 @@
   <data name="CertificateChangedCheckBox.Text" xml:space="preserve">
     <value>SSL 証明書が変更されたら警告する(&amp;A)</value>
   </data>
-  <data name="&gt;&gt;CertificateChangedCheckBox.Name" xml:space="preserve">
+  <data name=">>CertificateChangedCheckBox.Name" xml:space="preserve">
     <value>CertificateChangedCheckBox</value>
   </data>
-  <data name="&gt;&gt;CertificateChangedCheckBox.Type" xml:space="preserve">
+  <data name=">>CertificateChangedCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CertificateChangedCheckBox.Parent" xml:space="preserve">
+  <data name=">>CertificateChangedCheckBox.Parent" xml:space="preserve">
     <value>SSLTableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;CertificateChangedCheckBox.ZOrder" xml:space="preserve">
+  <data name=">>CertificateChangedCheckBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="CertificateFoundCheckBox.AutoSize" type="System.Boolean, mscorlib">
@@ -195,16 +195,16 @@
   <data name="CertificateFoundCheckBox.Text" xml:space="preserve">
     <value>新しい SSL 証明書が検出されたら警告する(&amp;N)</value>
   </data>
-  <data name="&gt;&gt;CertificateFoundCheckBox.Name" xml:space="preserve">
+  <data name=">>CertificateFoundCheckBox.Name" xml:space="preserve">
     <value>CertificateFoundCheckBox</value>
   </data>
-  <data name="&gt;&gt;CertificateFoundCheckBox.Type" xml:space="preserve">
+  <data name=">>CertificateFoundCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CertificateFoundCheckBox.Parent" xml:space="preserve">
+  <data name=">>CertificateFoundCheckBox.Parent" xml:space="preserve">
     <value>SSLTableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;CertificateFoundCheckBox.ZOrder" xml:space="preserve">
+  <data name=">>CertificateFoundCheckBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="SSLTableLayoutPanel.Font" type="System.Drawing.Font, System.Drawing">
@@ -225,16 +225,16 @@
   <data name="SSLTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;SSLTableLayoutPanel.Name" xml:space="preserve">
+  <data name=">>SSLTableLayoutPanel.Name" xml:space="preserve">
     <value>SSLTableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;SSLTableLayoutPanel.Type" xml:space="preserve">
+  <data name=">>SSLTableLayoutPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SSLTableLayoutPanel.Parent" xml:space="preserve">
+  <data name=">>SSLTableLayoutPanel.Parent" xml:space="preserve">
     <value>SecurityTableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;SSLTableLayoutPanel.ZOrder" xml:space="preserve">
+  <data name=">>SSLTableLayoutPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="SSLTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -264,16 +264,16 @@
   <data name="SSLLabel.Text" xml:space="preserve">
     <value>管理対象サーバーで新規または変更された SSL 証明書が検出された場合には警告を表示するように XenCenter を構成できます。</value>
   </data>
-  <data name="&gt;&gt;SSLLabel.Name" xml:space="preserve">
+  <data name=">>SSLLabel.Name" xml:space="preserve">
     <value>SSLLabel</value>
   </data>
-  <data name="&gt;&gt;SSLLabel.Type" xml:space="preserve">
+  <data name=">>SSLLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SSLLabel.Parent" xml:space="preserve">
+  <data name=">>SSLLabel.Parent" xml:space="preserve">
     <value>SecurityTableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;SSLLabel.ZOrder" xml:space="preserve">
+  <data name=">>SSLLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="SecurityTableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -294,16 +294,16 @@
   <data name="SecurityTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;SecurityTableLayoutPanel.Name" xml:space="preserve">
+  <data name=">>SecurityTableLayoutPanel.Name" xml:space="preserve">
     <value>SecurityTableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;SecurityTableLayoutPanel.Type" xml:space="preserve">
+  <data name=">>SecurityTableLayoutPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SecurityTableLayoutPanel.Parent" xml:space="preserve">
+  <data name=">>SecurityTableLayoutPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;SecurityTableLayoutPanel.ZOrder" xml:space="preserve">
+  <data name=">>SecurityTableLayoutPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="SecurityTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -318,10 +318,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>511, 251</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>SecurityOptionsPage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

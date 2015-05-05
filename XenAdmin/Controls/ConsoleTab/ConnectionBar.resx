@@ -164,16 +164,16 @@
   <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
   </data>
-  <data name="&gt;&gt;toolStrip1.Name" xml:space="preserve">
+  <data name=">>toolStrip1.Name" xml:space="preserve">
     <value>toolStrip1</value>
   </data>
-  <data name="&gt;&gt;toolStrip1.Type" xml:space="preserve">
+  <data name=">>toolStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStrip1.Parent" xml:space="preserve">
+  <data name=">>toolStrip1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
+  <data name=">>toolStrip1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -195,28 +195,28 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>434, 25</value>
   </data>
-  <data name="&gt;&gt;labelConnection.Name" xml:space="preserve">
+  <data name=">>labelConnection.Name" xml:space="preserve">
     <value>labelConnection</value>
   </data>
-  <data name="&gt;&gt;labelConnection.Type" xml:space="preserve">
+  <data name=">>labelConnection.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonPin.Name" xml:space="preserve">
+  <data name=">>buttonPin.Name" xml:space="preserve">
     <value>buttonPin</value>
   </data>
-  <data name="&gt;&gt;buttonPin.Type" xml:space="preserve">
+  <data name=">>buttonPin.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonExitFullScreen.Name" xml:space="preserve">
+  <data name=">>buttonExitFullScreen.Name" xml:space="preserve">
     <value>buttonExitFullScreen</value>
   </data>
-  <data name="&gt;&gt;buttonExitFullScreen.Type" xml:space="preserve">
+  <data name=">>buttonExitFullScreen.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>ConnectionBar</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

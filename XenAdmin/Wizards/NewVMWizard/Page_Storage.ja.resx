@@ -139,16 +139,16 @@
 
 新規仮想マシンのディスクを構成したら、[次へ] をクリックして次のページに進みます。</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="DisksRadioButton.AutoSize" type="System.Boolean, mscorlib">
@@ -166,16 +166,16 @@
   <data name="DisksRadioButton.Text" xml:space="preserve">
     <value>以下の仮想ディスクを使用する(&amp;V):</value>
   </data>
-  <data name="&gt;&gt;DisksRadioButton.Name" xml:space="preserve">
+  <data name=">>DisksRadioButton.Name" xml:space="preserve">
     <value>DisksRadioButton</value>
   </data>
-  <data name="&gt;&gt;DisksRadioButton.Type" xml:space="preserve">
+  <data name=">>DisksRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DisksRadioButton.Parent" xml:space="preserve">
+  <data name=">>DisksRadioButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;DisksRadioButton.ZOrder" xml:space="preserve">
+  <data name=">>DisksRadioButton.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="DisklessVMRadioButton.AutoSize" type="System.Boolean, mscorlib">
@@ -193,16 +193,16 @@
   <data name="DisklessVMRadioButton.Text" xml:space="preserve">
     <value>ネットワークから起動するディスクレス VM を作成する(&amp;S)</value>
   </data>
-  <data name="&gt;&gt;DisklessVMRadioButton.Name" xml:space="preserve">
+  <data name=">>DisklessVMRadioButton.Name" xml:space="preserve">
     <value>DisklessVMRadioButton</value>
   </data>
-  <data name="&gt;&gt;DisklessVMRadioButton.Type" xml:space="preserve">
+  <data name=">>DisklessVMRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DisklessVMRadioButton.Parent" xml:space="preserve">
+  <data name=">>DisklessVMRadioButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;DisklessVMRadioButton.ZOrder" xml:space="preserve">
+  <data name=">>DisklessVMRadioButton.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="AddButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -220,16 +220,16 @@
   <data name="AddButton.Text" xml:space="preserve">
     <value>追加(&amp;A)...</value>
   </data>
-  <data name="&gt;&gt;AddButton.Name" xml:space="preserve">
+  <data name=">>AddButton.Name" xml:space="preserve">
     <value>AddButton</value>
   </data>
-  <data name="&gt;&gt;AddButton.Type" xml:space="preserve">
+  <data name=">>AddButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;AddButton.Parent" xml:space="preserve">
+  <data name=">>AddButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;AddButton.ZOrder" xml:space="preserve">
+  <data name=">>AddButton.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="PropertiesButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -247,16 +247,16 @@
   <data name="PropertiesButton.Text" xml:space="preserve">
     <value>プロパティ(&amp;R)</value>
   </data>
-  <data name="&gt;&gt;PropertiesButton.Name" xml:space="preserve">
+  <data name=">>PropertiesButton.Name" xml:space="preserve">
     <value>PropertiesButton</value>
   </data>
-  <data name="&gt;&gt;PropertiesButton.Type" xml:space="preserve">
+  <data name=">>PropertiesButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;PropertiesButton.Parent" xml:space="preserve">
+  <data name=">>PropertiesButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;PropertiesButton.ZOrder" xml:space="preserve">
+  <data name=">>PropertiesButton.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="DeleteButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -274,16 +274,16 @@
   <data name="DeleteButton.Text" xml:space="preserve">
     <value>削除(&amp;D)</value>
   </data>
-  <data name="&gt;&gt;DeleteButton.Name" xml:space="preserve">
+  <data name=">>DeleteButton.Name" xml:space="preserve">
     <value>DeleteButton</value>
   </data>
-  <data name="&gt;&gt;DeleteButton.Type" xml:space="preserve">
+  <data name=">>DeleteButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DeleteButton.Parent" xml:space="preserve">
+  <data name=">>DeleteButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;DeleteButton.ZOrder" xml:space="preserve">
+  <data name=">>DeleteButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="DisksGridView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -328,16 +328,16 @@
   <data name="DisksGridView.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;DisksGridView.Name" xml:space="preserve">
+  <data name=">>DisksGridView.Name" xml:space="preserve">
     <value>DisksGridView</value>
   </data>
-  <data name="&gt;&gt;DisksGridView.Type" xml:space="preserve">
+  <data name=">>DisksGridView.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;DisksGridView.Parent" xml:space="preserve">
+  <data name=">>DisksGridView.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;DisksGridView.ZOrder" xml:space="preserve">
+  <data name=">>DisksGridView.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="CloneCheckBox.AutoSize" type="System.Boolean, mscorlib">
@@ -355,16 +355,16 @@
   <data name="CloneCheckBox.Text" xml:space="preserve">
     <value>ストレージ レベルの高速ディスク クローンを使用する(&amp;F)</value>
   </data>
-  <data name="&gt;&gt;CloneCheckBox.Name" xml:space="preserve">
+  <data name=">>CloneCheckBox.Name" xml:space="preserve">
     <value>CloneCheckBox</value>
   </data>
-  <data name="&gt;&gt;CloneCheckBox.Type" xml:space="preserve">
+  <data name=">>CloneCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CloneCheckBox.Parent" xml:space="preserve">
+  <data name=">>CloneCheckBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;CloneCheckBox.ZOrder" xml:space="preserve">
+  <data name=">>CloneCheckBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -376,34 +376,34 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>506, 336</value>
   </data>
-  <data name="&gt;&gt;ImageColumn.Name" xml:space="preserve">
+  <data name=">>ImageColumn.Name" xml:space="preserve">
     <value>ImageColumn</value>
   </data>
-  <data name="&gt;&gt;ImageColumn.Type" xml:space="preserve">
+  <data name=">>ImageColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SrColumn.Name" xml:space="preserve">
+  <data name=">>SrColumn.Name" xml:space="preserve">
     <value>SrColumn</value>
   </data>
-  <data name="&gt;&gt;SrColumn.Type" xml:space="preserve">
+  <data name=">>SrColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SizeColumn.Name" xml:space="preserve">
+  <data name=">>SizeColumn.Name" xml:space="preserve">
     <value>SizeColumn</value>
   </data>
-  <data name="&gt;&gt;SizeColumn.Type" xml:space="preserve">
+  <data name=">>SizeColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SharedColumn.Name" xml:space="preserve">
+  <data name=">>SharedColumn.Name" xml:space="preserve">
     <value>SharedColumn</value>
   </data>
-  <data name="&gt;&gt;SharedColumn.Type" xml:space="preserve">
+  <data name=">>SharedColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>Page_Storage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

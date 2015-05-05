@@ -168,16 +168,16 @@
   <data name="dataGridViewVDIs.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;dataGridViewVDIs.Name" xml:space="preserve">
+  <data name=">>dataGridViewVDIs.Name" xml:space="preserve">
     <value>dataGridViewVDIs</value>
   </data>
-  <data name="&gt;&gt;dataGridViewVDIs.Type" xml:space="preserve">
+  <data name=">>dataGridViewVDIs.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dataGridViewVDIs.Parent" xml:space="preserve">
+  <data name=">>dataGridViewVDIs.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;dataGridViewVDIs.ZOrder" xml:space="preserve">
+  <data name=">>dataGridViewVDIs.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="buttonRefresh.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -198,16 +198,16 @@
   <data name="buttonRefresh.Text" xml:space="preserve">
     <value>再スキャン(&amp;C)</value>
   </data>
-  <data name="&gt;&gt;buttonRefresh.Name" xml:space="preserve">
+  <data name=">>buttonRefresh.Name" xml:space="preserve">
     <value>buttonRefresh</value>
   </data>
-  <data name="&gt;&gt;buttonRefresh.Type" xml:space="preserve">
+  <data name=">>buttonRefresh.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonRefresh.Parent" xml:space="preserve">
+  <data name=">>buttonRefresh.Parent" xml:space="preserve">
     <value>toolTipContainerRescan</value>
   </data>
-  <data name="&gt;&gt;buttonRefresh.ZOrder" xml:space="preserve">
+  <data name=">>buttonRefresh.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="toolTipContainerRescan.Location" type="System.Drawing.Point, System.Drawing">
@@ -222,16 +222,16 @@
   <data name="toolTipContainerRescan.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerRescan.Name" xml:space="preserve">
+  <data name=">>toolTipContainerRescan.Name" xml:space="preserve">
     <value>toolTipContainerRescan</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerRescan.Type" xml:space="preserve">
+  <data name=">>toolTipContainerRescan.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerRescan.Parent" xml:space="preserve">
+  <data name=">>toolTipContainerRescan.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerRescan.ZOrder" xml:space="preserve">
+  <data name=">>toolTipContainerRescan.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="addVirtualDiskButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -255,16 +255,16 @@
   <data name="addVirtualDiskButton.Text" xml:space="preserve">
     <value>追加(&amp;A)...</value>
   </data>
-  <data name="&gt;&gt;addVirtualDiskButton.Name" xml:space="preserve">
+  <data name=">>addVirtualDiskButton.Name" xml:space="preserve">
     <value>addVirtualDiskButton</value>
   </data>
-  <data name="&gt;&gt;addVirtualDiskButton.Type" xml:space="preserve">
+  <data name=">>addVirtualDiskButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;addVirtualDiskButton.Parent" xml:space="preserve">
+  <data name=">>addVirtualDiskButton.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;addVirtualDiskButton.ZOrder" xml:space="preserve">
+  <data name=">>addVirtualDiskButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="addDropDownButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -276,10 +276,10 @@
   <data name="addContextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 4</value>
   </data>
-  <data name="&gt;&gt;addContextMenuStrip.Name" xml:space="preserve">
+  <data name=">>addContextMenuStrip.Name" xml:space="preserve">
     <value>addContextMenuStrip</value>
   </data>
-  <data name="&gt;&gt;addContextMenuStrip.Type" xml:space="preserve">
+  <data name=">>addContextMenuStrip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="addDropDownButton.Location" type="System.Drawing.Point, System.Drawing">
@@ -300,16 +300,16 @@
   <data name="addDropDownButton.Text" xml:space="preserve">
     <value>追加(&amp;A)</value>
   </data>
-  <data name="&gt;&gt;addDropDownButton.Name" xml:space="preserve">
+  <data name=">>addDropDownButton.Name" xml:space="preserve">
     <value>addDropDownButton</value>
   </data>
-  <data name="&gt;&gt;addDropDownButton.Type" xml:space="preserve">
+  <data name=">>addDropDownButton.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;addDropDownButton.Parent" xml:space="preserve">
+  <data name=">>addDropDownButton.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;addDropDownButton.ZOrder" xml:space="preserve">
+  <data name=">>addDropDownButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
@@ -324,16 +324,16 @@
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+  <data name=">>groupBox1.Name" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+  <data name=">>groupBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+  <data name=">>groupBox1.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+  <data name=">>groupBox1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="EditButtonContainer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -357,16 +357,16 @@
   <data name="EditButton.Text" xml:space="preserve">
     <value>プロパティ(&amp;R)</value>
   </data>
-  <data name="&gt;&gt;EditButton.Name" xml:space="preserve">
+  <data name=">>EditButton.Name" xml:space="preserve">
     <value>EditButton</value>
   </data>
-  <data name="&gt;&gt;EditButton.Type" xml:space="preserve">
+  <data name=">>EditButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;EditButton.Parent" xml:space="preserve">
+  <data name=">>EditButton.Parent" xml:space="preserve">
     <value>EditButtonContainer</value>
   </data>
-  <data name="&gt;&gt;EditButton.ZOrder" xml:space="preserve">
+  <data name=">>EditButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="EditButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
@@ -381,16 +381,16 @@
   <data name="EditButtonContainer.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;EditButtonContainer.Name" xml:space="preserve">
+  <data name=">>EditButtonContainer.Name" xml:space="preserve">
     <value>EditButtonContainer</value>
   </data>
-  <data name="&gt;&gt;EditButtonContainer.Type" xml:space="preserve">
+  <data name=">>EditButtonContainer.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;EditButtonContainer.Parent" xml:space="preserve">
+  <data name=">>EditButtonContainer.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;EditButtonContainer.ZOrder" xml:space="preserve">
+  <data name=">>EditButtonContainer.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="buttonMove.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -408,16 +408,16 @@
   <data name="buttonMove.Text" xml:space="preserve">
     <value>移動(&amp;E)...</value>
   </data>
-  <data name="&gt;&gt;buttonMove.Name" xml:space="preserve">
+  <data name=">>buttonMove.Name" xml:space="preserve">
     <value>buttonMove</value>
   </data>
-  <data name="&gt;&gt;buttonMove.Type" xml:space="preserve">
+  <data name=">>buttonMove.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonMove.Parent" xml:space="preserve">
+  <data name=">>buttonMove.Parent" xml:space="preserve">
     <value>toolTipContainerMove</value>
   </data>
-  <data name="&gt;&gt;buttonMove.ZOrder" xml:space="preserve">
+  <data name=">>buttonMove.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="toolTipContainerMove.Location" type="System.Drawing.Point, System.Drawing">
@@ -432,16 +432,16 @@
   <data name="toolTipContainerMove.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerMove.Name" xml:space="preserve">
+  <data name=">>toolTipContainerMove.Name" xml:space="preserve">
     <value>toolTipContainerMove</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerMove.Type" xml:space="preserve">
+  <data name=">>toolTipContainerMove.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerMove.Parent" xml:space="preserve">
+  <data name=">>toolTipContainerMove.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerMove.ZOrder" xml:space="preserve">
+  <data name=">>toolTipContainerMove.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="RemoveButtonContainer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -465,16 +465,16 @@
   <data name="RemoveButton.Text" xml:space="preserve">
     <value>削除(&amp;D)</value>
   </data>
-  <data name="&gt;&gt;RemoveButton.Name" xml:space="preserve">
+  <data name=">>RemoveButton.Name" xml:space="preserve">
     <value>RemoveButton</value>
   </data>
-  <data name="&gt;&gt;RemoveButton.Type" xml:space="preserve">
+  <data name=">>RemoveButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;RemoveButton.Parent" xml:space="preserve">
+  <data name=">>RemoveButton.Parent" xml:space="preserve">
     <value>RemoveButtonContainer</value>
   </data>
-  <data name="&gt;&gt;RemoveButton.ZOrder" xml:space="preserve">
+  <data name=">>RemoveButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="RemoveButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
@@ -489,16 +489,16 @@
   <data name="RemoveButtonContainer.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;RemoveButtonContainer.Name" xml:space="preserve">
+  <data name=">>RemoveButtonContainer.Name" xml:space="preserve">
     <value>RemoveButtonContainer</value>
   </data>
-  <data name="&gt;&gt;RemoveButtonContainer.Type" xml:space="preserve">
+  <data name=">>RemoveButtonContainer.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;RemoveButtonContainer.Parent" xml:space="preserve">
+  <data name=">>RemoveButtonContainer.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;RemoveButtonContainer.ZOrder" xml:space="preserve">
+  <data name=">>RemoveButtonContainer.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <metadata name="removeContextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -507,10 +507,10 @@
   <data name="removeContextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 4</value>
   </data>
-  <data name="&gt;&gt;removeContextMenuStrip.Name" xml:space="preserve">
+  <data name=">>removeContextMenuStrip.Name" xml:space="preserve">
     <value>removeContextMenuStrip</value>
   </data>
-  <data name="&gt;&gt;removeContextMenuStrip.Type" xml:space="preserve">
+  <data name=">>removeContextMenuStrip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="removeDropDownButton.Location" type="System.Drawing.Point, System.Drawing">
@@ -531,16 +531,16 @@
   <data name="removeDropDownButton.Text" xml:space="preserve">
     <value>削除(&amp;D)</value>
   </data>
-  <data name="&gt;&gt;removeDropDownButton.Name" xml:space="preserve">
+  <data name=">>removeDropDownButton.Name" xml:space="preserve">
     <value>removeDropDownButton</value>
   </data>
-  <data name="&gt;&gt;removeDropDownButton.Type" xml:space="preserve">
+  <data name=">>removeDropDownButton.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;removeDropDownButton.Parent" xml:space="preserve">
+  <data name=">>removeDropDownButton.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;removeDropDownButton.ZOrder" xml:space="preserve">
+  <data name=">>removeDropDownButton.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -561,16 +561,16 @@
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Name" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
@@ -582,16 +582,16 @@
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+  <data name=">>panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+  <data name=">>panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+  <data name=">>panel1.Parent" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+  <data name=">>panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
@@ -612,31 +612,31 @@
   <data name="label1.Text" xml:space="preserve">
     <value>ディスク</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="pageContainerPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>920, 413</value>
   </data>
-  <data name="&gt;&gt;pageContainerPanel.Name" xml:space="preserve">
+  <data name=">>pageContainerPanel.Name" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name="&gt;&gt;pageContainerPanel.Type" xml:space="preserve">
+  <data name=">>pageContainerPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pageContainerPanel.Parent" xml:space="preserve">
+  <data name=">>pageContainerPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;pageContainerPanel.ZOrder" xml:space="preserve">
+  <data name=">>pageContainerPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -666,10 +666,10 @@
   <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>174, 76</value>
   </data>
-  <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
+  <data name=">>contextMenuStrip1.Name" xml:space="preserve">
     <value>contextMenuStrip1</value>
   </data>
-  <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
+  <data name=">>contextMenuStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TitleLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -699,10 +699,10 @@
   <data name="TitleLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;TitleLabel.Name" xml:space="preserve">
+  <data name=">>TitleLabel.Name" xml:space="preserve">
     <value>TitleLabel</value>
   </data>
-  <data name="&gt;&gt;TitleLabel.Type" xml:space="preserve">
+  <data name=">>TitleLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -720,64 +720,64 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>920, 450</value>
   </data>
-  <data name="&gt;&gt;moveVirtualDiskToolStripMenuItem.Name" xml:space="preserve">
+  <data name=">>moveVirtualDiskToolStripMenuItem.Name" xml:space="preserve">
     <value>moveVirtualDiskToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;moveVirtualDiskToolStripMenuItem.Type" xml:space="preserve">
+  <data name=">>moveVirtualDiskToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;deleteVirtualDiskToolStripMenuItem.Name" xml:space="preserve">
+  <data name=">>deleteVirtualDiskToolStripMenuItem.Name" xml:space="preserve">
     <value>deleteVirtualDiskToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;deleteVirtualDiskToolStripMenuItem.Type" xml:space="preserve">
+  <data name=">>deleteVirtualDiskToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+  <data name=">>toolStripSeparator1.Name" xml:space="preserve">
     <value>toolStripSeparator1</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
+  <data name=">>toolStripSeparator1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;editVirtualDiskToolStripMenuItem.Name" xml:space="preserve">
+  <data name=">>editVirtualDiskToolStripMenuItem.Name" xml:space="preserve">
     <value>editVirtualDiskToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;editVirtualDiskToolStripMenuItem.Type" xml:space="preserve">
+  <data name=">>editVirtualDiskToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnName.Name" xml:space="preserve">
+  <data name=">>ColumnName.Name" xml:space="preserve">
     <value>ColumnName</value>
   </data>
-  <data name="&gt;&gt;ColumnName.Type" xml:space="preserve">
+  <data name=">>ColumnName.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnVolume.Name" xml:space="preserve">
+  <data name=">>ColumnVolume.Name" xml:space="preserve">
     <value>ColumnVolume</value>
   </data>
-  <data name="&gt;&gt;ColumnVolume.Type" xml:space="preserve">
+  <data name=">>ColumnVolume.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnDesc.Name" xml:space="preserve">
+  <data name=">>ColumnDesc.Name" xml:space="preserve">
     <value>ColumnDesc</value>
   </data>
-  <data name="&gt;&gt;ColumnDesc.Type" xml:space="preserve">
+  <data name=">>ColumnDesc.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnSize.Name" xml:space="preserve">
+  <data name=">>ColumnSize.Name" xml:space="preserve">
     <value>ColumnSize</value>
   </data>
-  <data name="&gt;&gt;ColumnSize.Type" xml:space="preserve">
+  <data name=">>ColumnSize.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnVM.Name" xml:space="preserve">
+  <data name=">>ColumnVM.Name" xml:space="preserve">
     <value>ColumnVM</value>
   </data>
-  <data name="&gt;&gt;ColumnVM.Type" xml:space="preserve">
+  <data name=">>ColumnVM.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>SrStoragePage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.TabPages.BaseTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

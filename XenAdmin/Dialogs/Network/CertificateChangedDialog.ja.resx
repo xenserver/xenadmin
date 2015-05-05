@@ -138,16 +138,16 @@
   <data name="Cancelbutton.Text" xml:space="preserve">
     <value>キャンセル(&amp;E)</value>
   </data>
-  <data name="&gt;&gt;Cancelbutton.Name" xml:space="preserve">
+  <data name=">>Cancelbutton.Name" xml:space="preserve">
     <value>Cancelbutton</value>
   </data>
-  <data name="&gt;&gt;Cancelbutton.Type" xml:space="preserve">
+  <data name=">>Cancelbutton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Cancelbutton.Parent" xml:space="preserve">
+  <data name=">>Cancelbutton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Cancelbutton.ZOrder" xml:space="preserve">
+  <data name=">>Cancelbutton.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="Okbutton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -168,16 +168,16 @@
   <data name="Okbutton.Text" xml:space="preserve">
     <value>受け入れる(&amp;C)</value>
   </data>
-  <data name="&gt;&gt;Okbutton.Name" xml:space="preserve">
+  <data name=">>Okbutton.Name" xml:space="preserve">
     <value>Okbutton</value>
   </data>
-  <data name="&gt;&gt;Okbutton.Type" xml:space="preserve">
+  <data name=">>Okbutton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Okbutton.Parent" xml:space="preserve">
+  <data name=">>Okbutton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Okbutton.ZOrder" xml:space="preserve">
+  <data name=">>Okbutton.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="pictureBox1.Font" type="System.Drawing.Font, System.Drawing">
@@ -195,16 +195,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+  <data name=">>pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+  <data name=">>pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+  <data name=">>pictureBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="BlurbLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -228,16 +228,16 @@
   <data name="BlurbLabel.Text" xml:space="preserve">
     <value>'{0}' の SSL セキュリティ証明書は、前回接続時のものから変更されています。</value>
   </data>
-  <data name="&gt;&gt;BlurbLabel.Name" xml:space="preserve">
+  <data name=">>BlurbLabel.Name" xml:space="preserve">
     <value>BlurbLabel</value>
   </data>
-  <data name="&gt;&gt;BlurbLabel.Type" xml:space="preserve">
+  <data name=">>BlurbLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BlurbLabel.Parent" xml:space="preserve">
+  <data name=">>BlurbLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;BlurbLabel.ZOrder" xml:space="preserve">
+  <data name=">>BlurbLabel.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="AlwaysIgnoreCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -261,16 +261,16 @@
   <data name="AlwaysIgnoreCheckBox.Text" xml:space="preserve">
     <value>この警告を常に無視する(&amp;A)</value>
   </data>
-  <data name="&gt;&gt;AlwaysIgnoreCheckBox.Name" xml:space="preserve">
+  <data name=">>AlwaysIgnoreCheckBox.Name" xml:space="preserve">
     <value>AlwaysIgnoreCheckBox</value>
   </data>
-  <data name="&gt;&gt;AlwaysIgnoreCheckBox.Type" xml:space="preserve">
+  <data name=">>AlwaysIgnoreCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;AlwaysIgnoreCheckBox.Parent" xml:space="preserve">
+  <data name=">>AlwaysIgnoreCheckBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;AlwaysIgnoreCheckBox.ZOrder" xml:space="preserve">
+  <data name=">>AlwaysIgnoreCheckBox.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="ViewCertificateButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -294,16 +294,16 @@
   <data name="ViewCertificateButton.Text" xml:space="preserve">
     <value>証明書の表示(&amp;V)...</value>
   </data>
-  <data name="&gt;&gt;ViewCertificateButton.Name" xml:space="preserve">
+  <data name=">>ViewCertificateButton.Name" xml:space="preserve">
     <value>ViewCertificateButton</value>
   </data>
-  <data name="&gt;&gt;ViewCertificateButton.Type" xml:space="preserve">
+  <data name=">>ViewCertificateButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ViewCertificateButton.Parent" xml:space="preserve">
+  <data name=">>ViewCertificateButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ViewCertificateButton.ZOrder" xml:space="preserve">
+  <data name=">>ViewCertificateButton.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="Blurb2Label.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -328,16 +328,16 @@
     <value>予期せず証明書が変更されている場合は、'{0}' を不正に偽装しているサーバーに接続されている可能性があります。 
 機密情報の漏えいを防ぐため、'{0}' のものであることが確実な証明書だけを受け入れてください。</value>
   </data>
-  <data name="&gt;&gt;Blurb2Label.Name" xml:space="preserve">
+  <data name=">>Blurb2Label.Name" xml:space="preserve">
     <value>Blurb2Label</value>
   </data>
-  <data name="&gt;&gt;Blurb2Label.Type" xml:space="preserve">
+  <data name=">>Blurb2Label.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Blurb2Label.Parent" xml:space="preserve">
+  <data name=">>Blurb2Label.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Blurb2Label.ZOrder" xml:space="preserve">
+  <data name=">>Blurb2Label.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="Blurb3Label.Font" type="System.Drawing.Font, System.Drawing">
@@ -355,16 +355,16 @@
   <data name="Blurb3Label.Text" xml:space="preserve">
     <value>セキュリティ証明書は、サーバーを再インストールすると変更されます。この場合は、新しい証明書がサーバーのコンソールに対して正しいことを確認してください。</value>
   </data>
-  <data name="&gt;&gt;Blurb3Label.Name" xml:space="preserve">
+  <data name=">>Blurb3Label.Name" xml:space="preserve">
     <value>Blurb3Label</value>
   </data>
-  <data name="&gt;&gt;Blurb3Label.Type" xml:space="preserve">
+  <data name=">>Blurb3Label.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Blurb3Label.Parent" xml:space="preserve">
+  <data name=">>Blurb3Label.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Blurb3Label.ZOrder" xml:space="preserve">
+  <data name=">>Blurb3Label.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelTrusted.Font" type="System.Drawing.Font, System.Drawing">
@@ -385,16 +385,16 @@
   <data name="labelTrusted.Text" xml:space="preserve">
     <value>サーバー '{0}' 上の証明書は {1} です。</value>
   </data>
-  <data name="&gt;&gt;labelTrusted.Name" xml:space="preserve">
+  <data name=">>labelTrusted.Name" xml:space="preserve">
     <value>labelTrusted</value>
   </data>
-  <data name="&gt;&gt;labelTrusted.Type" xml:space="preserve">
+  <data name=">>labelTrusted.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelTrusted.Parent" xml:space="preserve">
+  <data name=">>labelTrusted.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelTrusted.ZOrder" xml:space="preserve">
+  <data name=">>labelTrusted.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -418,10 +418,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>セキュリティ証明書の変更</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>CertificateChangedDialog</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

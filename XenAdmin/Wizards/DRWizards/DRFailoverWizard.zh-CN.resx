@@ -121,31 +121,31 @@
   <data name="pictureBoxWizard.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="&gt;&gt;pictureBoxWizard.Name" xml:space="preserve">
+  <data name=">>pictureBoxWizard.Name" xml:space="preserve">
     <value>pictureBoxWizard</value>
   </data>
-  <data name="&gt;&gt;pictureBoxWizard.Type" xml:space="preserve">
+  <data name=">>pictureBoxWizard.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBoxWizard.Parent" xml:space="preserve">
+  <data name=">>pictureBoxWizard.Parent" xml:space="preserve">
     <value>panelTop</value>
   </data>
-  <data name="&gt;&gt;pictureBoxWizard.ZOrder" xml:space="preserve">
+  <data name=">>pictureBoxWizard.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="XSHelpButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="&gt;&gt;XSHelpButton.Name" xml:space="preserve">
+  <data name=">>XSHelpButton.Name" xml:space="preserve">
     <value>XSHelpButton</value>
   </data>
-  <data name="&gt;&gt;XSHelpButton.Type" xml:space="preserve">
+  <data name=">>XSHelpButton.Type" xml:space="preserve">
     <value>XenAdmin.Controls.HelpButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;XSHelpButton.Parent" xml:space="preserve">
+  <data name=">>XSHelpButton.Parent" xml:space="preserve">
     <value>panelTop</value>
   </data>
-  <data name="&gt;&gt;XSHelpButton.ZOrder" xml:space="preserve">
+  <data name=">>XSHelpButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -163,10 +163,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>灾难恢复</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>DRFailoverWizard</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Wizards.XenWizardBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -138,16 +138,16 @@
   <data name="pictureBox3.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;pictureBox3.Name" xml:space="preserve">
+  <data name=">>pictureBox3.Name" xml:space="preserve">
     <value>pictureBox3</value>
   </data>
-  <data name="&gt;&gt;pictureBox3.Type" xml:space="preserve">
+  <data name=">>pictureBox3.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox3.Parent" xml:space="preserve">
+  <data name=">>pictureBox3.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;pictureBox3.ZOrder" xml:space="preserve">
+  <data name=">>pictureBox3.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="pictureBox2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -162,16 +162,16 @@
   <data name="pictureBox2.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;pictureBox2.Name" xml:space="preserve">
+  <data name=">>pictureBox2.Name" xml:space="preserve">
     <value>pictureBox2</value>
   </data>
-  <data name="&gt;&gt;pictureBox2.Type" xml:space="preserve">
+  <data name=">>pictureBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox2.Parent" xml:space="preserve">
+  <data name=">>pictureBox2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
+  <data name=">>pictureBox2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelDryrunDescription.AutoSize" type="System.Boolean, mscorlib">
@@ -192,16 +192,16 @@
   <data name="labelDryrunDescription.Text" xml:space="preserve">
     <value>In a test failover, vApps and VMs are recovered to pool '{0}' on the DR site but will not be started up, enabling you to validate your failover and recovery procedures while maintaining regular business operations at your primary data site.</value>
   </data>
-  <data name="&gt;&gt;labelDryrunDescription.Name" xml:space="preserve">
+  <data name=">>labelDryrunDescription.Name" xml:space="preserve">
     <value>labelDryrunDescription</value>
   </data>
-  <data name="&gt;&gt;labelDryrunDescription.Type" xml:space="preserve">
+  <data name=">>labelDryrunDescription.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelDryrunDescription.Parent" xml:space="preserve">
+  <data name=">>labelDryrunDescription.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelDryrunDescription.ZOrder" xml:space="preserve">
+  <data name=">>labelDryrunDescription.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="labelFailobackDescription.AutoSize" type="System.Boolean, mscorlib">
@@ -222,16 +222,16 @@
   <data name="labelFailobackDescription.Text" xml:space="preserve">
     <value>Fail back vApps and virtual machines to your primary data site.</value>
   </data>
-  <data name="&gt;&gt;labelFailobackDescription.Name" xml:space="preserve">
+  <data name=">>labelFailobackDescription.Name" xml:space="preserve">
     <value>labelFailobackDescription</value>
   </data>
-  <data name="&gt;&gt;labelFailobackDescription.Type" xml:space="preserve">
+  <data name=">>labelFailobackDescription.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelFailobackDescription.Parent" xml:space="preserve">
+  <data name=">>labelFailobackDescription.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelFailobackDescription.ZOrder" xml:space="preserve">
+  <data name=">>labelFailobackDescription.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="radioButtonFailback.AutoSize" type="System.Boolean, mscorlib">
@@ -255,16 +255,16 @@
   <data name="radioButtonFailback.Text" xml:space="preserve">
     <value>F&amp;ailback</value>
   </data>
-  <data name="&gt;&gt;radioButtonFailback.Name" xml:space="preserve">
+  <data name=">>radioButtonFailback.Name" xml:space="preserve">
     <value>radioButtonFailback</value>
   </data>
-  <data name="&gt;&gt;radioButtonFailback.Type" xml:space="preserve">
+  <data name=">>radioButtonFailback.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButtonFailback.Parent" xml:space="preserve">
+  <data name=">>radioButtonFailback.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;radioButtonFailback.ZOrder" xml:space="preserve">
+  <data name=">>radioButtonFailback.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
@@ -288,16 +288,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Welcome to the Disaster Recovery wizard. What do you want to do? </value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="radioButtonFailover.AutoSize" type="System.Boolean, mscorlib">
@@ -321,16 +321,16 @@
   <data name="radioButtonFailover.Text" xml:space="preserve">
     <value>&amp;Failover</value>
   </data>
-  <data name="&gt;&gt;radioButtonFailover.Name" xml:space="preserve">
+  <data name=">>radioButtonFailover.Name" xml:space="preserve">
     <value>radioButtonFailover</value>
   </data>
-  <data name="&gt;&gt;radioButtonFailover.Type" xml:space="preserve">
+  <data name=">>radioButtonFailover.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButtonFailover.Parent" xml:space="preserve">
+  <data name=">>radioButtonFailover.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;radioButtonFailover.ZOrder" xml:space="preserve">
+  <data name=">>radioButtonFailover.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="labelFailoverDescription.AutoSize" type="System.Boolean, mscorlib">
@@ -351,16 +351,16 @@
   <data name="labelFailoverDescription.Text" xml:space="preserve">
     <value>Fail over critical vApps and virtual machines to pool '{0}' on your disaster recovery (DR) site. </value>
   </data>
-  <data name="&gt;&gt;labelFailoverDescription.Name" xml:space="preserve">
+  <data name=">>labelFailoverDescription.Name" xml:space="preserve">
     <value>labelFailoverDescription</value>
   </data>
-  <data name="&gt;&gt;labelFailoverDescription.Type" xml:space="preserve">
+  <data name=">>labelFailoverDescription.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelFailoverDescription.Parent" xml:space="preserve">
+  <data name=">>labelFailoverDescription.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelFailoverDescription.ZOrder" xml:space="preserve">
+  <data name=">>labelFailoverDescription.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="radioButtonDryrun.AutoSize" type="System.Boolean, mscorlib">
@@ -384,16 +384,16 @@
   <data name="radioButtonDryrun.Text" xml:space="preserve">
     <value>&amp;Test Failover</value>
   </data>
-  <data name="&gt;&gt;radioButtonDryrun.Name" xml:space="preserve">
+  <data name=">>radioButtonDryrun.Name" xml:space="preserve">
     <value>radioButtonDryrun</value>
   </data>
-  <data name="&gt;&gt;radioButtonDryrun.Type" xml:space="preserve">
+  <data name=">>radioButtonDryrun.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButtonDryrun.Parent" xml:space="preserve">
+  <data name=">>radioButtonDryrun.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;radioButtonDryrun.ZOrder" xml:space="preserve">
+  <data name=">>radioButtonDryrun.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
@@ -405,16 +405,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+  <data name=">>pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+  <data name=">>pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+  <data name=">>pictureBox1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -432,16 +432,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -456,10 +456,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>497, 272</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>DRFailoverWizardWelcomePage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -144,16 +144,16 @@
   <data name="labelTotal.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelTotal.Name" xml:space="preserve">
+  <data name=">>labelTotal.Name" xml:space="preserve">
     <value>labelTotal</value>
   </data>
-  <data name="&gt;&gt;labelTotal.Type" xml:space="preserve">
+  <data name=">>labelTotal.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelTotal.Parent" xml:space="preserve">
+  <data name=">>labelTotal.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelTotal.ZOrder" xml:space="preserve">
+  <data name=">>labelTotal.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
   <data name="labelUsed.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -180,16 +180,16 @@
   <data name="labelUsed.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelUsed.Name" xml:space="preserve">
+  <data name=">>labelUsed.Name" xml:space="preserve">
     <value>labelUsed</value>
   </data>
-  <data name="&gt;&gt;labelUsed.Type" xml:space="preserve">
+  <data name=">>labelUsed.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelUsed.Parent" xml:space="preserve">
+  <data name=">>labelUsed.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelUsed.ZOrder" xml:space="preserve">
+  <data name=">>labelUsed.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="labelAvail.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -216,16 +216,16 @@
   <data name="labelAvail.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelAvail.Name" xml:space="preserve">
+  <data name=">>labelAvail.Name" xml:space="preserve">
     <value>labelAvail</value>
   </data>
-  <data name="&gt;&gt;labelAvail.Type" xml:space="preserve">
+  <data name=">>labelAvail.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelAvail.Parent" xml:space="preserve">
+  <data name=">>labelAvail.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelAvail.ZOrder" xml:space="preserve">
+  <data name=">>labelAvail.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="labelTotDynMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -252,16 +252,16 @@
   <data name="labelTotDynMax.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelTotDynMax.Name" xml:space="preserve">
+  <data name=">>labelTotDynMax.Name" xml:space="preserve">
     <value>labelTotDynMax</value>
   </data>
-  <data name="&gt;&gt;labelTotDynMax.Type" xml:space="preserve">
+  <data name=">>labelTotDynMax.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelTotDynMax.Parent" xml:space="preserve">
+  <data name=">>labelTotDynMax.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelTotDynMax.ZOrder" xml:space="preserve">
+  <data name=">>labelTotDynMax.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="valueTotal.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -285,16 +285,16 @@
   <data name="valueTotal.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;valueTotal.Name" xml:space="preserve">
+  <data name=">>valueTotal.Name" xml:space="preserve">
     <value>valueTotal</value>
   </data>
-  <data name="&gt;&gt;valueTotal.Type" xml:space="preserve">
+  <data name=">>valueTotal.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;valueTotal.Parent" xml:space="preserve">
+  <data name=">>valueTotal.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;valueTotal.ZOrder" xml:space="preserve">
+  <data name=">>valueTotal.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="valueUsed.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -318,16 +318,16 @@
   <data name="valueUsed.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;valueUsed.Name" xml:space="preserve">
+  <data name=">>valueUsed.Name" xml:space="preserve">
     <value>valueUsed</value>
   </data>
-  <data name="&gt;&gt;valueUsed.Type" xml:space="preserve">
+  <data name=">>valueUsed.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;valueUsed.Parent" xml:space="preserve">
+  <data name=">>valueUsed.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;valueUsed.ZOrder" xml:space="preserve">
+  <data name=">>valueUsed.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="valueAvail.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -351,16 +351,16 @@
   <data name="valueAvail.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;valueAvail.Name" xml:space="preserve">
+  <data name=">>valueAvail.Name" xml:space="preserve">
     <value>valueAvail</value>
   </data>
-  <data name="&gt;&gt;valueAvail.Type" xml:space="preserve">
+  <data name=">>valueAvail.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;valueAvail.Parent" xml:space="preserve">
+  <data name=">>valueAvail.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;valueAvail.ZOrder" xml:space="preserve">
+  <data name=">>valueAvail.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="valueTotDynMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -384,16 +384,16 @@
   <data name="valueTotDynMax.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;valueTotDynMax.Name" xml:space="preserve">
+  <data name=">>valueTotDynMax.Name" xml:space="preserve">
     <value>valueTotDynMax</value>
   </data>
-  <data name="&gt;&gt;valueTotDynMax.Type" xml:space="preserve">
+  <data name=">>valueTotDynMax.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;valueTotDynMax.Parent" xml:space="preserve">
+  <data name=">>valueTotDynMax.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;valueTotDynMax.ZOrder" xml:space="preserve">
+  <data name=">>valueTotDynMax.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="unitsTotal.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -420,16 +420,16 @@
   <data name="unitsTotal.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;unitsTotal.Name" xml:space="preserve">
+  <data name=">>unitsTotal.Name" xml:space="preserve">
     <value>unitsTotal</value>
   </data>
-  <data name="&gt;&gt;unitsTotal.Type" xml:space="preserve">
+  <data name=">>unitsTotal.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;unitsTotal.Parent" xml:space="preserve">
+  <data name=">>unitsTotal.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;unitsTotal.ZOrder" xml:space="preserve">
+  <data name=">>unitsTotal.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="unitsUsed.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -456,16 +456,16 @@
   <data name="unitsUsed.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;unitsUsed.Name" xml:space="preserve">
+  <data name=">>unitsUsed.Name" xml:space="preserve">
     <value>unitsUsed</value>
   </data>
-  <data name="&gt;&gt;unitsUsed.Type" xml:space="preserve">
+  <data name=">>unitsUsed.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;unitsUsed.Parent" xml:space="preserve">
+  <data name=">>unitsUsed.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;unitsUsed.ZOrder" xml:space="preserve">
+  <data name=">>unitsUsed.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="unitsAvail.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -492,16 +492,16 @@
   <data name="unitsAvail.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;unitsAvail.Name" xml:space="preserve">
+  <data name=">>unitsAvail.Name" xml:space="preserve">
     <value>unitsAvail</value>
   </data>
-  <data name="&gt;&gt;unitsAvail.Type" xml:space="preserve">
+  <data name=">>unitsAvail.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;unitsAvail.Parent" xml:space="preserve">
+  <data name=">>unitsAvail.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;unitsAvail.ZOrder" xml:space="preserve">
+  <data name=">>unitsAvail.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="unitsTotDynMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -528,16 +528,16 @@
   <data name="unitsTotDynMax.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;unitsTotDynMax.Name" xml:space="preserve">
+  <data name=">>unitsTotDynMax.Name" xml:space="preserve">
     <value>unitsTotDynMax</value>
   </data>
-  <data name="&gt;&gt;unitsTotDynMax.Type" xml:space="preserve">
+  <data name=">>unitsTotDynMax.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;unitsTotDynMax.Parent" xml:space="preserve">
+  <data name=">>unitsTotDynMax.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;unitsTotDynMax.ZOrder" xml:space="preserve">
+  <data name=">>unitsTotDynMax.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelOvercommit.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -561,16 +561,16 @@
   <data name="labelOvercommit.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;labelOvercommit.Name" xml:space="preserve">
+  <data name=">>labelOvercommit.Name" xml:space="preserve">
     <value>labelOvercommit</value>
   </data>
-  <data name="&gt;&gt;labelOvercommit.Type" xml:space="preserve">
+  <data name=">>labelOvercommit.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelOvercommit.Parent" xml:space="preserve">
+  <data name=">>labelOvercommit.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelOvercommit.ZOrder" xml:space="preserve">
+  <data name=">>labelOvercommit.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="hostShinyBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -588,16 +588,16 @@
   <data name="hostShinyBar.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;hostShinyBar.Name" xml:space="preserve">
+  <data name=">>hostShinyBar.Name" xml:space="preserve">
     <value>hostShinyBar</value>
   </data>
-  <data name="&gt;&gt;hostShinyBar.Type" xml:space="preserve">
+  <data name=">>hostShinyBar.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Ballooning.HostShinyBar, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;hostShinyBar.Parent" xml:space="preserve">
+  <data name=">>hostShinyBar.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;hostShinyBar.ZOrder" xml:space="preserve">
+  <data name=">>hostShinyBar.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -612,10 +612,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>700, 90</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>HostMemoryControls</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

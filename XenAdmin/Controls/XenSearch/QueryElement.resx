@@ -132,16 +132,16 @@
   <data name="textBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;textBox.Name" xml:space="preserve">
+  <data name=">>textBox.Name" xml:space="preserve">
     <value>textBox</value>
   </data>
-  <data name="&gt;&gt;textBox.Type" xml:space="preserve">
+  <data name=">>textBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBox.Parent" xml:space="preserve">
+  <data name=">>textBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;textBox.ZOrder" xml:space="preserve">
+  <data name=">>textBox.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="removeButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -159,16 +159,16 @@
   <data name="removeButton.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;removeButton.Name" xml:space="preserve">
+  <data name=">>removeButton.Name" xml:space="preserve">
     <value>removeButton</value>
   </data>
-  <data name="&gt;&gt;removeButton.Type" xml:space="preserve">
+  <data name=">>removeButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;removeButton.Parent" xml:space="preserve">
+  <data name=">>removeButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;removeButton.ZOrder" xml:space="preserve">
+  <data name=">>removeButton.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="dateTimePicker.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -183,16 +183,16 @@
   <data name="dateTimePicker.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;dateTimePicker.Name" xml:space="preserve">
+  <data name=">>dateTimePicker.Name" xml:space="preserve">
     <value>dateTimePicker</value>
   </data>
-  <data name="&gt;&gt;dateTimePicker.Type" xml:space="preserve">
+  <data name=">>dateTimePicker.Type" xml:space="preserve">
     <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dateTimePicker.Parent" xml:space="preserve">
+  <data name=">>dateTimePicker.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;dateTimePicker.ZOrder" xml:space="preserve">
+  <data name=">>dateTimePicker.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="numericUpDown.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -207,16 +207,16 @@
   <data name="numericUpDown.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;numericUpDown.Name" xml:space="preserve">
+  <data name=">>numericUpDown.Name" xml:space="preserve">
     <value>numericUpDown</value>
   </data>
-  <data name="&gt;&gt;numericUpDown.Type" xml:space="preserve">
+  <data name=">>numericUpDown.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;numericUpDown.Parent" xml:space="preserve">
+  <data name=">>numericUpDown.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;numericUpDown.ZOrder" xml:space="preserve">
+  <data name=">>numericUpDown.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="unitsLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -237,16 +237,16 @@
   <data name="unitsLabel.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;unitsLabel.Name" xml:space="preserve">
+  <data name=">>unitsLabel.Name" xml:space="preserve">
     <value>unitsLabel</value>
   </data>
-  <data name="&gt;&gt;unitsLabel.Type" xml:space="preserve">
+  <data name=">>unitsLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;unitsLabel.Parent" xml:space="preserve">
+  <data name=">>unitsLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;unitsLabel.ZOrder" xml:space="preserve">
+  <data name=">>unitsLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="ComboButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -287,16 +287,16 @@
   <data name="ComboButton.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>TextBeforeImage</value>
   </data>
-  <data name="&gt;&gt;ComboButton.Name" xml:space="preserve">
+  <data name=">>ComboButton.Name" xml:space="preserve">
     <value>ComboButton</value>
   </data>
-  <data name="&gt;&gt;ComboButton.Type" xml:space="preserve">
+  <data name=">>ComboButton.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenSearch.DropDownComboButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ComboButton.Parent" xml:space="preserve">
+  <data name=">>ComboButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ComboButton.ZOrder" xml:space="preserve">
+  <data name=">>ComboButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="matchTypeComboButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -334,16 +334,16 @@
   <data name="matchTypeComboButton.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>TextBeforeImage</value>
   </data>
-  <data name="&gt;&gt;matchTypeComboButton.Name" xml:space="preserve">
+  <data name=">>matchTypeComboButton.Name" xml:space="preserve">
     <value>matchTypeComboButton</value>
   </data>
-  <data name="&gt;&gt;matchTypeComboButton.Type" xml:space="preserve">
+  <data name=">>matchTypeComboButton.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenSearch.DropDownComboButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;matchTypeComboButton.Parent" xml:space="preserve">
+  <data name=">>matchTypeComboButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;matchTypeComboButton.ZOrder" xml:space="preserve">
+  <data name=">>matchTypeComboButton.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="queryTypeComboButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -381,16 +381,16 @@
   <data name="queryTypeComboButton.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>TextBeforeImage</value>
   </data>
-  <data name="&gt;&gt;queryTypeComboButton.Name" xml:space="preserve">
+  <data name=">>queryTypeComboButton.Name" xml:space="preserve">
     <value>queryTypeComboButton</value>
   </data>
-  <data name="&gt;&gt;queryTypeComboButton.Type" xml:space="preserve">
+  <data name=">>queryTypeComboButton.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenSearch.DropDownComboButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;queryTypeComboButton.Parent" xml:space="preserve">
+  <data name=">>queryTypeComboButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;queryTypeComboButton.ZOrder" xml:space="preserve">
+  <data name=">>queryTypeComboButton.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="resourceSelectButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -428,16 +428,16 @@
   <data name="resourceSelectButton.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>TextBeforeImage</value>
   </data>
-  <data name="&gt;&gt;resourceSelectButton.Name" xml:space="preserve">
+  <data name=">>resourceSelectButton.Name" xml:space="preserve">
     <value>resourceSelectButton</value>
   </data>
-  <data name="&gt;&gt;resourceSelectButton.Type" xml:space="preserve">
+  <data name=">>resourceSelectButton.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenSearch.ResourceSelectButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;resourceSelectButton.Parent" xml:space="preserve">
+  <data name=">>resourceSelectButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;resourceSelectButton.ZOrder" xml:space="preserve">
+  <data name=">>resourceSelectButton.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -452,10 +452,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>559, 25</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>QueryElement</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

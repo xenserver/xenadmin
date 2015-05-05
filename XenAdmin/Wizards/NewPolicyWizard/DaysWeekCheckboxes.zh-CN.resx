@@ -147,16 +147,16 @@
   <data name="checkBoxSaturday.Text" xml:space="preserve">
     <value>星期六(&amp;A)</value>
   </data>
-  <data name="&gt;&gt;checkBoxSaturday.Name" xml:space="preserve">
+  <data name=">>checkBoxSaturday.Name" xml:space="preserve">
     <value>checkBoxSaturday</value>
   </data>
-  <data name="&gt;&gt;checkBoxSaturday.Type" xml:space="preserve">
+  <data name=">>checkBoxSaturday.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkBoxSaturday.Parent" xml:space="preserve">
+  <data name=">>checkBoxSaturday.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;checkBoxSaturday.ZOrder" xml:space="preserve">
+  <data name=">>checkBoxSaturday.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="checkBoxFriday.AutoSize" type="System.Boolean, mscorlib">
@@ -177,16 +177,16 @@
   <data name="checkBoxFriday.Text" xml:space="preserve">
     <value>星期五(&amp;Y)</value>
   </data>
-  <data name="&gt;&gt;checkBoxFriday.Name" xml:space="preserve">
+  <data name=">>checkBoxFriday.Name" xml:space="preserve">
     <value>checkBoxFriday</value>
   </data>
-  <data name="&gt;&gt;checkBoxFriday.Type" xml:space="preserve">
+  <data name=">>checkBoxFriday.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkBoxFriday.Parent" xml:space="preserve">
+  <data name=">>checkBoxFriday.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;checkBoxFriday.ZOrder" xml:space="preserve">
+  <data name=">>checkBoxFriday.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="checkBoxThursday.AutoSize" type="System.Boolean, mscorlib">
@@ -207,16 +207,16 @@
   <data name="checkBoxThursday.Text" xml:space="preserve">
     <value>星期四(&amp;H)</value>
   </data>
-  <data name="&gt;&gt;checkBoxThursday.Name" xml:space="preserve">
+  <data name=">>checkBoxThursday.Name" xml:space="preserve">
     <value>checkBoxThursday</value>
   </data>
-  <data name="&gt;&gt;checkBoxThursday.Type" xml:space="preserve">
+  <data name=">>checkBoxThursday.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkBoxThursday.Parent" xml:space="preserve">
+  <data name=">>checkBoxThursday.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;checkBoxThursday.ZOrder" xml:space="preserve">
+  <data name=">>checkBoxThursday.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="checkBoxSunday.AutoSize" type="System.Boolean, mscorlib">
@@ -237,16 +237,16 @@
   <data name="checkBoxSunday.Text" xml:space="preserve">
     <value>星期日(&amp;S)</value>
   </data>
-  <data name="&gt;&gt;checkBoxSunday.Name" xml:space="preserve">
+  <data name=">>checkBoxSunday.Name" xml:space="preserve">
     <value>checkBoxSunday</value>
   </data>
-  <data name="&gt;&gt;checkBoxSunday.Type" xml:space="preserve">
+  <data name=">>checkBoxSunday.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkBoxSunday.Parent" xml:space="preserve">
+  <data name=">>checkBoxSunday.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;checkBoxSunday.ZOrder" xml:space="preserve">
+  <data name=">>checkBoxSunday.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="checkBoxMonday.AutoSize" type="System.Boolean, mscorlib">
@@ -267,16 +267,16 @@
   <data name="checkBoxMonday.Text" xml:space="preserve">
     <value>星期一(&amp;M)</value>
   </data>
-  <data name="&gt;&gt;checkBoxMonday.Name" xml:space="preserve">
+  <data name=">>checkBoxMonday.Name" xml:space="preserve">
     <value>checkBoxMonday</value>
   </data>
-  <data name="&gt;&gt;checkBoxMonday.Type" xml:space="preserve">
+  <data name=">>checkBoxMonday.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkBoxMonday.Parent" xml:space="preserve">
+  <data name=">>checkBoxMonday.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;checkBoxMonday.ZOrder" xml:space="preserve">
+  <data name=">>checkBoxMonday.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="checkBoxTuesday.AutoSize" type="System.Boolean, mscorlib">
@@ -297,16 +297,16 @@
   <data name="checkBoxTuesday.Text" xml:space="preserve">
     <value>星期二(&amp;T)</value>
   </data>
-  <data name="&gt;&gt;checkBoxTuesday.Name" xml:space="preserve">
+  <data name=">>checkBoxTuesday.Name" xml:space="preserve">
     <value>checkBoxTuesday</value>
   </data>
-  <data name="&gt;&gt;checkBoxTuesday.Type" xml:space="preserve">
+  <data name=">>checkBoxTuesday.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkBoxTuesday.Parent" xml:space="preserve">
+  <data name=">>checkBoxTuesday.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;checkBoxTuesday.ZOrder" xml:space="preserve">
+  <data name=">>checkBoxTuesday.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="checkBoxWednesday.AutoSize" type="System.Boolean, mscorlib">
@@ -327,16 +327,16 @@
   <data name="checkBoxWednesday.Text" xml:space="preserve">
     <value>星期三(&amp;W)</value>
   </data>
-  <data name="&gt;&gt;checkBoxWednesday.Name" xml:space="preserve">
+  <data name=">>checkBoxWednesday.Name" xml:space="preserve">
     <value>checkBoxWednesday</value>
   </data>
-  <data name="&gt;&gt;checkBoxWednesday.Type" xml:space="preserve">
+  <data name=">>checkBoxWednesday.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkBoxWednesday.Parent" xml:space="preserve">
+  <data name=">>checkBoxWednesday.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;checkBoxWednesday.ZOrder" xml:space="preserve">
+  <data name=">>checkBoxWednesday.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -354,16 +354,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -384,10 +384,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>238, 69</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>DaysWeekCheckboxes</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

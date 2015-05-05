@@ -147,16 +147,16 @@
   <data name="DontExitButton.Text" xml:space="preserve">
     <value>&amp;Don't Exit</value>
   </data>
-  <data name="&gt;&gt;DontExitButton.Name" xml:space="preserve">
+  <data name=">>DontExitButton.Name" xml:space="preserve">
     <value>DontExitButton</value>
   </data>
-  <data name="&gt;&gt;DontExitButton.Type" xml:space="preserve">
+  <data name=">>DontExitButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DontExitButton.Parent" xml:space="preserve">
+  <data name=">>DontExitButton.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;DontExitButton.ZOrder" xml:space="preserve">
+  <data name=">>DontExitButton.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="ExitButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -186,16 +186,16 @@
   <data name="ExitButton.Text" xml:space="preserve">
     <value>E&amp;xit XenCenter anyway</value>
   </data>
-  <data name="&gt;&gt;ExitButton.Name" xml:space="preserve">
+  <data name=">>ExitButton.Name" xml:space="preserve">
     <value>ExitButton</value>
   </data>
-  <data name="&gt;&gt;ExitButton.Type" xml:space="preserve">
+  <data name=">>ExitButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ExitButton.Parent" xml:space="preserve">
+  <data name=">>ExitButton.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;ExitButton.ZOrder" xml:space="preserve">
+  <data name=">>ExitButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
@@ -225,16 +225,16 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Unfinished tasks may not complete successfully if you exit XenCenter before they finish.</value>
   </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+  <data name=">>label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+  <data name=">>label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+  <data name=">>label2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+  <data name=">>label2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <metadata name="columnExpander.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -337,16 +337,16 @@
   <data name="dataGridViewActions.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;dataGridViewActions.Name" xml:space="preserve">
+  <data name=">>dataGridViewActions.Name" xml:space="preserve">
     <value>dataGridViewActions</value>
   </data>
-  <data name="&gt;&gt;dataGridViewActions.Type" xml:space="preserve">
+  <data name=">>dataGridViewActions.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dataGridViewActions.Parent" xml:space="preserve">
+  <data name=">>dataGridViewActions.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;dataGridViewActions.ZOrder" xml:space="preserve">
+  <data name=">>dataGridViewActions.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -367,16 +367,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -397,16 +397,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>XenCenter is still performing the following tasks:</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -430,40 +430,40 @@
   <data name="$this.Text" xml:space="preserve">
     <value>XenCenter</value>
   </data>
-  <data name="&gt;&gt;columnExpander.Name" xml:space="preserve">
+  <data name=">>columnExpander.Name" xml:space="preserve">
     <value>columnExpander</value>
   </data>
-  <data name="&gt;&gt;columnExpander.Type" xml:space="preserve">
+  <data name=">>columnExpander.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnStatus.Name" xml:space="preserve">
+  <data name=">>columnStatus.Name" xml:space="preserve">
     <value>columnStatus</value>
   </data>
-  <data name="&gt;&gt;columnStatus.Type" xml:space="preserve">
+  <data name=">>columnStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnMessage.Name" xml:space="preserve">
+  <data name=">>columnMessage.Name" xml:space="preserve">
     <value>columnMessage</value>
   </data>
-  <data name="&gt;&gt;columnMessage.Type" xml:space="preserve">
+  <data name=">>columnMessage.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnLocation.Name" xml:space="preserve">
+  <data name=">>columnLocation.Name" xml:space="preserve">
     <value>columnLocation</value>
   </data>
-  <data name="&gt;&gt;columnLocation.Type" xml:space="preserve">
+  <data name=">>columnLocation.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnDate.Name" xml:space="preserve">
+  <data name=">>columnDate.Name" xml:space="preserve">
     <value>columnDate</value>
   </data>
-  <data name="&gt;&gt;columnDate.Type" xml:space="preserve">
+  <data name=">>columnDate.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>CloseXenCenterWarningDialog</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

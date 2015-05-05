@@ -144,16 +144,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+  <data name=">>pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+  <data name=">>pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+  <data name=">>pictureBox1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelCurrentAction.AutoSize" type="System.Boolean, mscorlib">
@@ -183,16 +183,16 @@
   <data name="labelCurrentAction.Text" xml:space="preserve">
     <value>当前操作:</value>
   </data>
-  <data name="&gt;&gt;labelCurrentAction.Name" xml:space="preserve">
+  <data name=">>labelCurrentAction.Name" xml:space="preserve">
     <value>labelCurrentAction</value>
   </data>
-  <data name="&gt;&gt;labelCurrentAction.Type" xml:space="preserve">
+  <data name=">>labelCurrentAction.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelCurrentAction.Parent" xml:space="preserve">
+  <data name=">>labelCurrentAction.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelCurrentAction.ZOrder" xml:space="preserve">
+  <data name=">>labelCurrentAction.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="labelCurrentActionValue.AutoSize" type="System.Boolean, mscorlib">
@@ -222,16 +222,16 @@
   <data name="labelCurrentActionValue.Text" xml:space="preserve">
     <value>&lt;无&gt;</value>
   </data>
-  <data name="&gt;&gt;labelCurrentActionValue.Name" xml:space="preserve">
+  <data name=">>labelCurrentActionValue.Name" xml:space="preserve">
     <value>labelCurrentActionValue</value>
   </data>
-  <data name="&gt;&gt;labelCurrentActionValue.Type" xml:space="preserve">
+  <data name=">>labelCurrentActionValue.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelCurrentActionValue.Parent" xml:space="preserve">
+  <data name=">>labelCurrentActionValue.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelCurrentActionValue.ZOrder" xml:space="preserve">
+  <data name=">>labelCurrentActionValue.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="labelServer.AutoSize" type="System.Boolean, mscorlib">
@@ -255,16 +255,16 @@
   <data name="labelServer.Text" xml:space="preserve">
     <value>服务器:</value>
   </data>
-  <data name="&gt;&gt;labelServer.Name" xml:space="preserve">
+  <data name=">>labelServer.Name" xml:space="preserve">
     <value>labelServer</value>
   </data>
-  <data name="&gt;&gt;labelServer.Type" xml:space="preserve">
+  <data name=">>labelServer.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelServer.Parent" xml:space="preserve">
+  <data name=">>labelServer.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelServer.ZOrder" xml:space="preserve">
+  <data name=">>labelServer.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="labelServerValue.AutoSize" type="System.Boolean, mscorlib">
@@ -288,16 +288,16 @@
   <data name="labelServerValue.Text" xml:space="preserve">
     <value>&lt;无&gt;</value>
   </data>
-  <data name="&gt;&gt;labelServerValue.Name" xml:space="preserve">
+  <data name=">>labelServerValue.Name" xml:space="preserve">
     <value>labelServerValue</value>
   </data>
-  <data name="&gt;&gt;labelServerValue.Type" xml:space="preserve">
+  <data name=">>labelServerValue.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelServerValue.Parent" xml:space="preserve">
+  <data name=">>labelServerValue.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelServerValue.ZOrder" xml:space="preserve">
+  <data name=">>labelServerValue.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="labelCurrentUser.AutoSize" type="System.Boolean, mscorlib">
@@ -327,16 +327,16 @@
   <data name="labelCurrentUser.Text" xml:space="preserve">
     <value>当前用户:</value>
   </data>
-  <data name="&gt;&gt;labelCurrentUser.Name" xml:space="preserve">
+  <data name=">>labelCurrentUser.Name" xml:space="preserve">
     <value>labelCurrentUser</value>
   </data>
-  <data name="&gt;&gt;labelCurrentUser.Type" xml:space="preserve">
+  <data name=">>labelCurrentUser.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelCurrentUser.Parent" xml:space="preserve">
+  <data name=">>labelCurrentUser.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelCurrentUser.ZOrder" xml:space="preserve">
+  <data name=">>labelCurrentUser.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="labelCurrentUserValue.AutoSize" type="System.Boolean, mscorlib">
@@ -366,16 +366,16 @@
   <data name="labelCurrentUserValue.Text" xml:space="preserve">
     <value>&lt;无&gt;</value>
   </data>
-  <data name="&gt;&gt;labelCurrentUserValue.Name" xml:space="preserve">
+  <data name=">>labelCurrentUserValue.Name" xml:space="preserve">
     <value>labelCurrentUserValue</value>
   </data>
-  <data name="&gt;&gt;labelCurrentUserValue.Type" xml:space="preserve">
+  <data name=">>labelCurrentUserValue.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelCurrentUserValue.Parent" xml:space="preserve">
+  <data name=">>labelCurrentUserValue.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelCurrentUserValue.ZOrder" xml:space="preserve">
+  <data name=">>labelCurrentUserValue.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="labelCurrentRole.AutoSize" type="System.Boolean, mscorlib">
@@ -405,16 +405,16 @@
   <data name="labelCurrentRole.Text" xml:space="preserve">
     <value>当前角色:</value>
   </data>
-  <data name="&gt;&gt;labelCurrentRole.Name" xml:space="preserve">
+  <data name=">>labelCurrentRole.Name" xml:space="preserve">
     <value>labelCurrentRole</value>
   </data>
-  <data name="&gt;&gt;labelCurrentRole.Type" xml:space="preserve">
+  <data name=">>labelCurrentRole.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelCurrentRole.Parent" xml:space="preserve">
+  <data name=">>labelCurrentRole.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelCurrentRole.ZOrder" xml:space="preserve">
+  <data name=">>labelCurrentRole.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="labelCurrentRoleValue.AutoSize" type="System.Boolean, mscorlib">
@@ -444,16 +444,16 @@
   <data name="labelCurrentRoleValue.Text" xml:space="preserve">
     <value>&lt;无&gt;</value>
   </data>
-  <data name="&gt;&gt;labelCurrentRoleValue.Name" xml:space="preserve">
+  <data name=">>labelCurrentRoleValue.Name" xml:space="preserve">
     <value>labelCurrentRoleValue</value>
   </data>
-  <data name="&gt;&gt;labelCurrentRoleValue.Type" xml:space="preserve">
+  <data name=">>labelCurrentRoleValue.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelCurrentRoleValue.Parent" xml:space="preserve">
+  <data name=">>labelCurrentRoleValue.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelCurrentRoleValue.ZOrder" xml:space="preserve">
+  <data name=">>labelCurrentRoleValue.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="divider.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -474,16 +474,16 @@
   <data name="divider.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;divider.Name" xml:space="preserve">
+  <data name=">>divider.Name" xml:space="preserve">
     <value>divider</value>
   </data>
-  <data name="&gt;&gt;divider.Type" xml:space="preserve">
+  <data name=">>divider.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;divider.Parent" xml:space="preserve">
+  <data name=">>divider.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;divider.ZOrder" xml:space="preserve">
+  <data name=">>divider.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="labelBlurb2.AutoSize" type="System.Boolean, mscorlib">
@@ -513,16 +513,16 @@
   <data name="labelBlurb2.Text" xml:space="preserve">
     <value>输入特权用户的凭据以授予执行此任务的权限。</value>
   </data>
-  <data name="&gt;&gt;labelBlurb2.Name" xml:space="preserve">
+  <data name=">>labelBlurb2.Name" xml:space="preserve">
     <value>labelBlurb2</value>
   </data>
-  <data name="&gt;&gt;labelBlurb2.Type" xml:space="preserve">
+  <data name=">>labelBlurb2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelBlurb2.Parent" xml:space="preserve">
+  <data name=">>labelBlurb2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelBlurb2.ZOrder" xml:space="preserve">
+  <data name=">>labelBlurb2.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="labelRequiredRole.AutoSize" type="System.Boolean, mscorlib">
@@ -552,16 +552,16 @@
   <data name="labelRequiredRole.Text" xml:space="preserve">
     <value>授权角色:</value>
   </data>
-  <data name="&gt;&gt;labelRequiredRole.Name" xml:space="preserve">
+  <data name=">>labelRequiredRole.Name" xml:space="preserve">
     <value>labelRequiredRole</value>
   </data>
-  <data name="&gt;&gt;labelRequiredRole.Type" xml:space="preserve">
+  <data name=">>labelRequiredRole.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelRequiredRole.Parent" xml:space="preserve">
+  <data name=">>labelRequiredRole.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelRequiredRole.ZOrder" xml:space="preserve">
+  <data name=">>labelRequiredRole.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
   <data name="labelRequiredRoleValue.AutoSize" type="System.Boolean, mscorlib">
@@ -591,16 +591,16 @@
   <data name="labelRequiredRoleValue.Text" xml:space="preserve">
     <value>&lt;无&gt;</value>
   </data>
-  <data name="&gt;&gt;labelRequiredRoleValue.Name" xml:space="preserve">
+  <data name=">>labelRequiredRoleValue.Name" xml:space="preserve">
     <value>labelRequiredRoleValue</value>
   </data>
-  <data name="&gt;&gt;labelRequiredRoleValue.Type" xml:space="preserve">
+  <data name=">>labelRequiredRoleValue.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelRequiredRoleValue.Parent" xml:space="preserve">
+  <data name=">>labelRequiredRoleValue.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelRequiredRoleValue.ZOrder" xml:space="preserve">
+  <data name=">>labelRequiredRoleValue.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
   <data name="labelUserName.AutoSize" type="System.Boolean, mscorlib">
@@ -633,16 +633,16 @@
   <data name="labelUserName.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelUserName.Name" xml:space="preserve">
+  <data name=">>labelUserName.Name" xml:space="preserve">
     <value>labelUserName</value>
   </data>
-  <data name="&gt;&gt;labelUserName.Type" xml:space="preserve">
+  <data name=">>labelUserName.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelUserName.Parent" xml:space="preserve">
+  <data name=">>labelUserName.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelUserName.ZOrder" xml:space="preserve">
+  <data name=">>labelUserName.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
   <data name="TextBoxUsername.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -663,16 +663,16 @@
   <data name="TextBoxUsername.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="&gt;&gt;TextBoxUsername.Name" xml:space="preserve">
+  <data name=">>TextBoxUsername.Name" xml:space="preserve">
     <value>TextBoxUsername</value>
   </data>
-  <data name="&gt;&gt;TextBoxUsername.Type" xml:space="preserve">
+  <data name=">>TextBoxUsername.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TextBoxUsername.Parent" xml:space="preserve">
+  <data name=">>TextBoxUsername.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;TextBoxUsername.ZOrder" xml:space="preserve">
+  <data name=">>TextBoxUsername.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
   <data name="labelPassword.AutoSize" type="System.Boolean, mscorlib">
@@ -705,16 +705,16 @@
   <data name="labelPassword.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelPassword.Name" xml:space="preserve">
+  <data name=">>labelPassword.Name" xml:space="preserve">
     <value>labelPassword</value>
   </data>
-  <data name="&gt;&gt;labelPassword.Type" xml:space="preserve">
+  <data name=">>labelPassword.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelPassword.Parent" xml:space="preserve">
+  <data name=">>labelPassword.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelPassword.ZOrder" xml:space="preserve">
+  <data name=">>labelPassword.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
   <data name="TextBoxPassword.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -735,16 +735,16 @@
   <data name="TextBoxPassword.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
-  <data name="&gt;&gt;TextBoxPassword.Name" xml:space="preserve">
+  <data name=">>TextBoxPassword.Name" xml:space="preserve">
     <value>TextBoxPassword</value>
   </data>
-  <data name="&gt;&gt;TextBoxPassword.Type" xml:space="preserve">
+  <data name=">>TextBoxPassword.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TextBoxPassword.Parent" xml:space="preserve">
+  <data name=">>TextBoxPassword.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;TextBoxPassword.ZOrder" xml:space="preserve">
+  <data name=">>TextBoxPassword.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
   <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -771,16 +771,16 @@
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>取消</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
+  <data name=">>buttonCancel.Name" xml:space="preserve">
     <value>buttonCancel</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
+  <data name=">>buttonCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
+  <data name=">>buttonCancel.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
+  <data name=">>buttonCancel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="buttonAuthorize.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -804,16 +804,16 @@
   <data name="buttonAuthorize.Text" xml:space="preserve">
     <value>授权(&amp;A)</value>
   </data>
-  <data name="&gt;&gt;buttonAuthorize.Name" xml:space="preserve">
+  <data name=">>buttonAuthorize.Name" xml:space="preserve">
     <value>buttonAuthorize</value>
   </data>
-  <data name="&gt;&gt;buttonAuthorize.Type" xml:space="preserve">
+  <data name=">>buttonAuthorize.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonAuthorize.Parent" xml:space="preserve">
+  <data name=">>buttonAuthorize.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;buttonAuthorize.ZOrder" xml:space="preserve">
+  <data name=">>buttonAuthorize.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panel1.Font" type="System.Drawing.Font, System.Drawing">
@@ -828,16 +828,16 @@
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+  <data name=">>panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+  <data name=">>panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+  <data name=">>panel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+  <data name=">>panel1.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -858,16 +858,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -894,16 +894,16 @@
   <data name="labelBlurb.Text" xml:space="preserve">
     <value>当前的角色无权执行此操作。</value>
   </data>
-  <data name="&gt;&gt;labelBlurb.Name" xml:space="preserve">
+  <data name=">>labelBlurb.Name" xml:space="preserve">
     <value>labelBlurb</value>
   </data>
-  <data name="&gt;&gt;labelBlurb.Type" xml:space="preserve">
+  <data name=">>labelBlurb.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelBlurb.Parent" xml:space="preserve">
+  <data name=">>labelBlurb.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelBlurb.ZOrder" xml:space="preserve">
+  <data name=">>labelBlurb.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -933,10 +933,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>XenCenter</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>RoleElevationDialog</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

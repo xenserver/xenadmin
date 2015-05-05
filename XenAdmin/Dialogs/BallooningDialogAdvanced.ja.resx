@@ -135,16 +135,16 @@
   <data name="rubric.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;rubric.Name" xml:space="preserve">
+  <data name=">>rubric.Name" xml:space="preserve">
     <value>rubric</value>
   </data>
-  <data name="&gt;&gt;rubric.Type" xml:space="preserve">
+  <data name=">>rubric.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rubric.Parent" xml:space="preserve">
+  <data name=">>rubric.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;rubric.ZOrder" xml:space="preserve">
+  <data name=">>rubric.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="memoryControlsAdvanced.Font" type="System.Drawing.Font, System.Drawing">
@@ -162,16 +162,16 @@
   <data name="memoryControlsAdvanced.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;memoryControlsAdvanced.Name" xml:space="preserve">
+  <data name=">>memoryControlsAdvanced.Name" xml:space="preserve">
     <value>memoryControlsAdvanced</value>
   </data>
-  <data name="&gt;&gt;memoryControlsAdvanced.Type" xml:space="preserve">
+  <data name=">>memoryControlsAdvanced.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Ballooning.VMMemoryControlsAdvanced, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;memoryControlsAdvanced.Parent" xml:space="preserve">
+  <data name=">>memoryControlsAdvanced.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="&gt;&gt;memoryControlsAdvanced.ZOrder" xml:space="preserve">
+  <data name=">>memoryControlsAdvanced.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="buttonOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -192,16 +192,16 @@
   <data name="buttonOK.Text" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
+  <data name=">>buttonOK.Name" xml:space="preserve">
     <value>buttonOK</value>
   </data>
-  <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
+  <data name=">>buttonOK.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
+  <data name=">>buttonOK.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
+  <data name=">>buttonOK.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -222,16 +222,16 @@
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>キャンセル</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
+  <data name=">>buttonCancel.Name" xml:space="preserve">
     <value>buttonCancel</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
+  <data name=">>buttonCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
+  <data name=">>buttonCancel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
+  <data name=">>buttonCancel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -249,16 +249,16 @@
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+  <data name=">>groupBox1.Name" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+  <data name=">>groupBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+  <data name=">>groupBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+  <data name=">>groupBox1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -276,10 +276,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>メモリの詳細設定</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>BallooningDialogAdvanced</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.BallooningDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

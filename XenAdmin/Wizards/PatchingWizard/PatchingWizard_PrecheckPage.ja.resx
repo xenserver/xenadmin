@@ -135,16 +135,16 @@
   <data name="labelPrechecksFirstLine.Text" xml:space="preserve">
     <value>サーバーにアップデート "{0}" を適用できるかどうかを事前にチェックします。</value>
   </data>
-  <data name="&gt;&gt;labelPrechecksFirstLine.Name" xml:space="preserve">
+  <data name=">>labelPrechecksFirstLine.Name" xml:space="preserve">
     <value>labelPrechecksFirstLine</value>
   </data>
-  <data name="&gt;&gt;labelPrechecksFirstLine.Type" xml:space="preserve">
+  <data name=">>labelPrechecksFirstLine.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelPrechecksFirstLine.Parent" xml:space="preserve">
+  <data name=">>labelPrechecksFirstLine.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelPrechecksFirstLine.ZOrder" xml:space="preserve">
+  <data name=">>labelPrechecksFirstLine.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="dataGridView1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -189,16 +189,16 @@
   <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Name" xml:space="preserve">
+  <data name=">>dataGridView1.Name" xml:space="preserve">
     <value>dataGridView1</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Type" xml:space="preserve">
+  <data name=">>dataGridView1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Parent" xml:space="preserve">
+  <data name=">>dataGridView1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.ZOrder" xml:space="preserve">
+  <data name=">>dataGridView1.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="buttonReCheckProblems.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -216,16 +216,16 @@
   <data name="buttonReCheckProblems.Text" xml:space="preserve">
     <value>再チェック(&amp;C)</value>
   </data>
-  <data name="&gt;&gt;buttonReCheckProblems.Name" xml:space="preserve">
+  <data name=">>buttonReCheckProblems.Name" xml:space="preserve">
     <value>buttonReCheckProblems</value>
   </data>
-  <data name="&gt;&gt;buttonReCheckProblems.Type" xml:space="preserve">
+  <data name=">>buttonReCheckProblems.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonReCheckProblems.Parent" xml:space="preserve">
+  <data name=">>buttonReCheckProblems.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;buttonReCheckProblems.ZOrder" xml:space="preserve">
+  <data name=">>buttonReCheckProblems.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="buttonResolveAll.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -243,16 +243,16 @@
   <data name="buttonResolveAll.Text" xml:space="preserve">
     <value>すべて解決(&amp;R)</value>
   </data>
-  <data name="&gt;&gt;buttonResolveAll.Name" xml:space="preserve">
+  <data name=">>buttonResolveAll.Name" xml:space="preserve">
     <value>buttonResolveAll</value>
   </data>
-  <data name="&gt;&gt;buttonResolveAll.Type" xml:space="preserve">
+  <data name=">>buttonResolveAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonResolveAll.Parent" xml:space="preserve">
+  <data name=">>buttonResolveAll.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;buttonResolveAll.ZOrder" xml:space="preserve">
+  <data name=">>buttonResolveAll.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="progressBar1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -267,16 +267,16 @@
   <data name="progressBar1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;progressBar1.Name" xml:space="preserve">
+  <data name=">>progressBar1.Name" xml:space="preserve">
     <value>progressBar1</value>
   </data>
-  <data name="&gt;&gt;progressBar1.Type" xml:space="preserve">
+  <data name=">>progressBar1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;progressBar1.Parent" xml:space="preserve">
+  <data name=">>progressBar1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;progressBar1.ZOrder" xml:space="preserve">
+  <data name=">>progressBar1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="panelErrorsFound.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -300,16 +300,16 @@
   <data name="label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>panelErrorsFound</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="pictureBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -327,16 +327,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+  <data name=">>pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+  <data name=">>pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+  <data name=">>pictureBox1.Parent" xml:space="preserve">
     <value>panelErrorsFound</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panelErrorsFound.Location" type="System.Drawing.Point, System.Drawing">
@@ -351,16 +351,16 @@
   <data name="panelErrorsFound.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;panelErrorsFound.Name" xml:space="preserve">
+  <data name=">>panelErrorsFound.Name" xml:space="preserve">
     <value>panelErrorsFound</value>
   </data>
-  <data name="&gt;&gt;panelErrorsFound.Type" xml:space="preserve">
+  <data name=">>panelErrorsFound.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panelErrorsFound.Parent" xml:space="preserve">
+  <data name=">>panelErrorsFound.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;panelErrorsFound.ZOrder" xml:space="preserve">
+  <data name=">>panelErrorsFound.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="checkBoxViewPrecheckFailuresOnly.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -381,16 +381,16 @@
   <data name="checkBoxViewPrecheckFailuresOnly.Text" xml:space="preserve">
     <value>合格した事前チェック項目を非表示にする(&amp;H)</value>
   </data>
-  <data name="&gt;&gt;checkBoxViewPrecheckFailuresOnly.Name" xml:space="preserve">
+  <data name=">>checkBoxViewPrecheckFailuresOnly.Name" xml:space="preserve">
     <value>checkBoxViewPrecheckFailuresOnly</value>
   </data>
-  <data name="&gt;&gt;checkBoxViewPrecheckFailuresOnly.Type" xml:space="preserve">
+  <data name=">>checkBoxViewPrecheckFailuresOnly.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkBoxViewPrecheckFailuresOnly.Parent" xml:space="preserve">
+  <data name=">>checkBoxViewPrecheckFailuresOnly.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;checkBoxViewPrecheckFailuresOnly.ZOrder" xml:space="preserve">
+  <data name=">>checkBoxViewPrecheckFailuresOnly.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -402,28 +402,28 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>561, 384</value>
   </data>
-  <data name="&gt;&gt;ColumnState.Name" xml:space="preserve">
+  <data name=">>ColumnState.Name" xml:space="preserve">
     <value>ColumnState</value>
   </data>
-  <data name="&gt;&gt;ColumnState.Type" xml:space="preserve">
+  <data name=">>ColumnState.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnDescription.Name" xml:space="preserve">
+  <data name=">>ColumnDescription.Name" xml:space="preserve">
     <value>ColumnDescription</value>
   </data>
-  <data name="&gt;&gt;ColumnDescription.Type" xml:space="preserve">
+  <data name=">>ColumnDescription.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnSolution.Name" xml:space="preserve">
+  <data name=">>ColumnSolution.Name" xml:space="preserve">
     <value>ColumnSolution</value>
   </data>
-  <data name="&gt;&gt;ColumnSolution.Type" xml:space="preserve">
+  <data name=">>ColumnSolution.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>PatchingWizard_PrecheckPage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

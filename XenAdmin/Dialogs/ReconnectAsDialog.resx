@@ -147,16 +147,16 @@
   <data name="pictureBoxAdPicture.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;pictureBoxAdPicture.Name" xml:space="preserve">
+  <data name=">>pictureBoxAdPicture.Name" xml:space="preserve">
     <value>pictureBoxAdPicture</value>
   </data>
-  <data name="&gt;&gt;pictureBoxAdPicture.Type" xml:space="preserve">
+  <data name=">>pictureBoxAdPicture.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBoxAdPicture.Parent" xml:space="preserve">
+  <data name=">>pictureBoxAdPicture.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;pictureBoxAdPicture.ZOrder" xml:space="preserve">
+  <data name=">>pictureBoxAdPicture.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelUsername.AutoSize" type="System.Boolean, mscorlib">
@@ -183,16 +183,16 @@
   <data name="labelUsername.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelUsername.Name" xml:space="preserve">
+  <data name=">>labelUsername.Name" xml:space="preserve">
     <value>labelUsername</value>
   </data>
-  <data name="&gt;&gt;labelUsername.Type" xml:space="preserve">
+  <data name=">>labelUsername.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelUsername.Parent" xml:space="preserve">
+  <data name=">>labelUsername.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelUsername.ZOrder" xml:space="preserve">
+  <data name=">>labelUsername.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="textBoxUsername.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -213,16 +213,16 @@
   <data name="textBoxUsername.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;textBoxUsername.Name" xml:space="preserve">
+  <data name=">>textBoxUsername.Name" xml:space="preserve">
     <value>textBoxUsername</value>
   </data>
-  <data name="&gt;&gt;textBoxUsername.Type" xml:space="preserve">
+  <data name=">>textBoxUsername.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBoxUsername.Parent" xml:space="preserve">
+  <data name=">>textBoxUsername.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;textBoxUsername.ZOrder" xml:space="preserve">
+  <data name=">>textBoxUsername.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="labelPassword.AutoSize" type="System.Boolean, mscorlib">
@@ -249,16 +249,16 @@
   <data name="labelPassword.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelPassword.Name" xml:space="preserve">
+  <data name=">>labelPassword.Name" xml:space="preserve">
     <value>labelPassword</value>
   </data>
-  <data name="&gt;&gt;labelPassword.Type" xml:space="preserve">
+  <data name=">>labelPassword.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelPassword.Parent" xml:space="preserve">
+  <data name=">>labelPassword.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelPassword.ZOrder" xml:space="preserve">
+  <data name=">>labelPassword.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="textBoxPassword.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -279,16 +279,16 @@
   <data name="textBoxPassword.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;textBoxPassword.Name" xml:space="preserve">
+  <data name=">>textBoxPassword.Name" xml:space="preserve">
     <value>textBoxPassword</value>
   </data>
-  <data name="&gt;&gt;textBoxPassword.Type" xml:space="preserve">
+  <data name=">>textBoxPassword.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBoxPassword.Parent" xml:space="preserve">
+  <data name=">>textBoxPassword.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;textBoxPassword.ZOrder" xml:space="preserve">
+  <data name=">>textBoxPassword.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="buttonCancel.Font" type="System.Drawing.Font, System.Drawing">
@@ -306,16 +306,16 @@
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
+  <data name=">>buttonCancel.Name" xml:space="preserve">
     <value>buttonCancel</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
+  <data name=">>buttonCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
+  <data name=">>buttonCancel.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
+  <data name=">>buttonCancel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="buttonOK.Enabled" type="System.Boolean, mscorlib">
@@ -336,16 +336,16 @@
   <data name="buttonOK.Text" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
+  <data name=">>buttonOK.Name" xml:space="preserve">
     <value>buttonOK</value>
   </data>
-  <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
+  <data name=">>buttonOK.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
+  <data name=">>buttonOK.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
+  <data name=">>buttonOK.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -369,16 +369,16 @@
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Name" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -402,16 +402,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -440,16 +440,16 @@
 
 To log out of this server and log in again using a different user account, enter the account credentials below and click OK.</value>
   </data>
-  <data name="&gt;&gt;labelBlurb.Name" xml:space="preserve">
+  <data name=">>labelBlurb.Name" xml:space="preserve">
     <value>labelBlurb</value>
   </data>
-  <data name="&gt;&gt;labelBlurb.Type" xml:space="preserve">
+  <data name=">>labelBlurb.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelBlurb.Parent" xml:space="preserve">
+  <data name=">>labelBlurb.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelBlurb.ZOrder" xml:space="preserve">
+  <data name=">>labelBlurb.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -470,10 +470,10 @@ To log out of this server and log in again using a different user account, enter
   <data name="$this.Text" xml:space="preserve">
     <value>Reconnect As Different User</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>ReconnectAsDialog</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

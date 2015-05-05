@@ -141,16 +141,16 @@
   <data name="labelStoragePool.Text" xml:space="preserve">
     <value>存储池(&amp;O):</value>
   </data>
-  <data name="&gt;&gt;labelStoragePool.Name" xml:space="preserve">
+  <data name=">>labelStoragePool.Name" xml:space="preserve">
     <value>labelStoragePool</value>
   </data>
-  <data name="&gt;&gt;labelStoragePool.Type" xml:space="preserve">
+  <data name=">>labelStoragePool.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelStoragePool.Parent" xml:space="preserve">
+  <data name=">>labelStoragePool.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelStoragePool.ZOrder" xml:space="preserve">
+  <data name=">>labelStoragePool.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelRaidType.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -174,16 +174,16 @@
   <data name="labelRaidType.Text" xml:space="preserve">
     <value>RAID 类型(&amp;A):</value>
   </data>
-  <data name="&gt;&gt;labelRaidType.Name" xml:space="preserve">
+  <data name=">>labelRaidType.Name" xml:space="preserve">
     <value>labelRaidType</value>
   </data>
-  <data name="&gt;&gt;labelRaidType.Type" xml:space="preserve">
+  <data name=">>labelRaidType.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelRaidType.Parent" xml:space="preserve">
+  <data name=">>labelRaidType.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelRaidType.ZOrder" xml:space="preserve">
+  <data name=">>labelRaidType.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="labelProvisioningType.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -207,16 +207,16 @@
   <data name="labelProvisioningType.Text" xml:space="preserve">
     <value>置备类型(&amp;T):</value>
   </data>
-  <data name="&gt;&gt;labelProvisioningType.Name" xml:space="preserve">
+  <data name=">>labelProvisioningType.Name" xml:space="preserve">
     <value>labelProvisioningType</value>
   </data>
-  <data name="&gt;&gt;labelProvisioningType.Type" xml:space="preserve">
+  <data name=">>labelProvisioningType.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelProvisioningType.Parent" xml:space="preserve">
+  <data name=">>labelProvisioningType.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelProvisioningType.ZOrder" xml:space="preserve">
+  <data name=">>labelProvisioningType.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="labelProvisioningOptions.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -240,16 +240,16 @@
   <data name="labelProvisioningOptions.Text" xml:space="preserve">
     <value>置备选项(&amp;I):</value>
   </data>
-  <data name="&gt;&gt;labelProvisioningOptions.Name" xml:space="preserve">
+  <data name=">>labelProvisioningOptions.Name" xml:space="preserve">
     <value>labelProvisioningOptions</value>
   </data>
-  <data name="&gt;&gt;labelProvisioningOptions.Type" xml:space="preserve">
+  <data name=">>labelProvisioningOptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelProvisioningOptions.Parent" xml:space="preserve">
+  <data name=">>labelProvisioningOptions.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelProvisioningOptions.ZOrder" xml:space="preserve">
+  <data name=">>labelProvisioningOptions.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="labelProtocol.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -273,16 +273,16 @@
   <data name="labelProtocol.Text" xml:space="preserve">
     <value>协议(&amp;R):</value>
   </data>
-  <data name="&gt;&gt;labelProtocol.Name" xml:space="preserve">
+  <data name=">>labelProtocol.Name" xml:space="preserve">
     <value>labelProtocol</value>
   </data>
-  <data name="&gt;&gt;labelProtocol.Type" xml:space="preserve">
+  <data name=">>labelProtocol.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelProtocol.Parent" xml:space="preserve">
+  <data name=">>labelProtocol.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelProtocol.ZOrder" xml:space="preserve">
+  <data name=">>labelProtocol.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
   <data name="comboBoxStoragePool.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -303,16 +303,16 @@
   <data name="comboBoxStoragePool.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;comboBoxStoragePool.Name" xml:space="preserve">
+  <data name=">>comboBoxStoragePool.Name" xml:space="preserve">
     <value>comboBoxStoragePool</value>
   </data>
-  <data name="&gt;&gt;comboBoxStoragePool.Type" xml:space="preserve">
+  <data name=">>comboBoxStoragePool.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;comboBoxStoragePool.Parent" xml:space="preserve">
+  <data name=">>comboBoxStoragePool.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;comboBoxStoragePool.ZOrder" xml:space="preserve">
+  <data name=">>comboBoxStoragePool.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="comboBoxRaidType.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -327,16 +327,16 @@
   <data name="comboBoxRaidType.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;comboBoxRaidType.Name" xml:space="preserve">
+  <data name=">>comboBoxRaidType.Name" xml:space="preserve">
     <value>comboBoxRaidType</value>
   </data>
-  <data name="&gt;&gt;comboBoxRaidType.Type" xml:space="preserve">
+  <data name=">>comboBoxRaidType.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;comboBoxRaidType.Parent" xml:space="preserve">
+  <data name=">>comboBoxRaidType.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;comboBoxRaidType.ZOrder" xml:space="preserve">
+  <data name=">>comboBoxRaidType.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="comboBoxProvisioningType.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -351,16 +351,16 @@
   <data name="comboBoxProvisioningType.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;comboBoxProvisioningType.Name" xml:space="preserve">
+  <data name=">>comboBoxProvisioningType.Name" xml:space="preserve">
     <value>comboBoxProvisioningType</value>
   </data>
-  <data name="&gt;&gt;comboBoxProvisioningType.Type" xml:space="preserve">
+  <data name=">>comboBoxProvisioningType.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;comboBoxProvisioningType.Parent" xml:space="preserve">
+  <data name=">>comboBoxProvisioningType.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;comboBoxProvisioningType.ZOrder" xml:space="preserve">
+  <data name=">>comboBoxProvisioningType.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="comboBoxProvisionOptions.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -375,16 +375,16 @@
   <data name="comboBoxProvisionOptions.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;comboBoxProvisionOptions.Name" xml:space="preserve">
+  <data name=">>comboBoxProvisionOptions.Name" xml:space="preserve">
     <value>comboBoxProvisionOptions</value>
   </data>
-  <data name="&gt;&gt;comboBoxProvisionOptions.Type" xml:space="preserve">
+  <data name=">>comboBoxProvisionOptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;comboBoxProvisionOptions.Parent" xml:space="preserve">
+  <data name=">>comboBoxProvisionOptions.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;comboBoxProvisionOptions.ZOrder" xml:space="preserve">
+  <data name=">>comboBoxProvisionOptions.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
   <data name="comboBoxProtocol.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -399,16 +399,16 @@
   <data name="comboBoxProtocol.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="&gt;&gt;comboBoxProtocol.Name" xml:space="preserve">
+  <data name=">>comboBoxProtocol.Name" xml:space="preserve">
     <value>comboBoxProtocol</value>
   </data>
-  <data name="&gt;&gt;comboBoxProtocol.Type" xml:space="preserve">
+  <data name=">>comboBoxProtocol.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;comboBoxProtocol.Parent" xml:space="preserve">
+  <data name=">>comboBoxProtocol.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;comboBoxProtocol.ZOrder" xml:space="preserve">
+  <data name=">>comboBoxProtocol.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
   <data name="checkBoxShowAll.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -432,16 +432,16 @@
   <data name="checkBoxShowAll.Text" xml:space="preserve">
     <value>全部显示(&amp;H)</value>
   </data>
-  <data name="&gt;&gt;checkBoxShowAll.Name" xml:space="preserve">
+  <data name=">>checkBoxShowAll.Name" xml:space="preserve">
     <value>checkBoxShowAll</value>
   </data>
-  <data name="&gt;&gt;checkBoxShowAll.Type" xml:space="preserve">
+  <data name=">>checkBoxShowAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkBoxShowAll.Parent" xml:space="preserve">
+  <data name=">>checkBoxShowAll.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;checkBoxShowAll.ZOrder" xml:space="preserve">
+  <data name=">>checkBoxShowAll.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="checkBoxUseChap.AutoSize" type="System.Boolean, mscorlib">
@@ -468,16 +468,16 @@
   <data name="checkBoxUseChap.Text" xml:space="preserve">
     <value>使用 CHAP 身份验证(&amp;C)</value>
   </data>
-  <data name="&gt;&gt;checkBoxUseChap.Name" xml:space="preserve">
+  <data name=">>checkBoxUseChap.Name" xml:space="preserve">
     <value>checkBoxUseChap</value>
   </data>
-  <data name="&gt;&gt;checkBoxUseChap.Type" xml:space="preserve">
+  <data name=">>checkBoxUseChap.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkBoxUseChap.Parent" xml:space="preserve">
+  <data name=">>checkBoxUseChap.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;checkBoxUseChap.ZOrder" xml:space="preserve">
+  <data name=">>checkBoxUseChap.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
   <data name="simpleProgressBar1.Location" type="System.Drawing.Point, System.Drawing">
@@ -495,16 +495,16 @@
   <data name="simpleProgressBar1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;simpleProgressBar1.Name" xml:space="preserve">
+  <data name=">>simpleProgressBar1.Name" xml:space="preserve">
     <value>simpleProgressBar1</value>
   </data>
-  <data name="&gt;&gt;simpleProgressBar1.Type" xml:space="preserve">
+  <data name=">>simpleProgressBar1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.SimpleProgressBar, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;simpleProgressBar1.Parent" xml:space="preserve">
+  <data name=">>simpleProgressBar1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;simpleProgressBar1.ZOrder" xml:space="preserve">
+  <data name=">>simpleProgressBar1.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="textBoxChapUser.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -525,16 +525,16 @@
   <data name="textBoxChapUser.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
-  <data name="&gt;&gt;textBoxChapUser.Name" xml:space="preserve">
+  <data name=">>textBoxChapUser.Name" xml:space="preserve">
     <value>textBoxChapUser</value>
   </data>
-  <data name="&gt;&gt;textBoxChapUser.Type" xml:space="preserve">
+  <data name=">>textBoxChapUser.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBoxChapUser.Parent" xml:space="preserve">
+  <data name=">>textBoxChapUser.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;textBoxChapUser.ZOrder" xml:space="preserve">
+  <data name=">>textBoxChapUser.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
   <data name="labelChapUser.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -567,16 +567,16 @@
   <data name="labelChapUser.Text" xml:space="preserve">
     <value>CHAP 用户(&amp;E):</value>
   </data>
-  <data name="&gt;&gt;labelChapUser.Name" xml:space="preserve">
+  <data name=">>labelChapUser.Name" xml:space="preserve">
     <value>labelChapUser</value>
   </data>
-  <data name="&gt;&gt;labelChapUser.Type" xml:space="preserve">
+  <data name=">>labelChapUser.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelChapUser.Parent" xml:space="preserve">
+  <data name=">>labelChapUser.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelChapUser.ZOrder" xml:space="preserve">
+  <data name=">>labelChapUser.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
   <data name="textBoxChapSecret.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -597,16 +597,16 @@
   <data name="textBoxChapSecret.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
-  <data name="&gt;&gt;textBoxChapSecret.Name" xml:space="preserve">
+  <data name=">>textBoxChapSecret.Name" xml:space="preserve">
     <value>textBoxChapSecret</value>
   </data>
-  <data name="&gt;&gt;textBoxChapSecret.Type" xml:space="preserve">
+  <data name=">>textBoxChapSecret.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBoxChapSecret.Parent" xml:space="preserve">
+  <data name=">>textBoxChapSecret.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;textBoxChapSecret.ZOrder" xml:space="preserve">
+  <data name=">>textBoxChapSecret.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
@@ -633,16 +633,16 @@
   <data name="autoHeightLabel1.Text" xml:space="preserve">
     <value>使用此页面可选择在为新存储库置备新存储卷时所用的设置。</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel1.Name" xml:space="preserve">
+  <data name=">>autoHeightLabel1.Name" xml:space="preserve">
     <value>autoHeightLabel1</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel1.Type" xml:space="preserve">
+  <data name=">>autoHeightLabel1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel1.Parent" xml:space="preserve">
+  <data name=">>autoHeightLabel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel1.ZOrder" xml:space="preserve">
+  <data name=">>autoHeightLabel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelProgress.AutoSize" type="System.Boolean, mscorlib">
@@ -663,16 +663,16 @@
   <data name="labelProgress.Text" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;labelProgress.Name" xml:space="preserve">
+  <data name=">>labelProgress.Name" xml:space="preserve">
     <value>labelProgress</value>
   </data>
-  <data name="&gt;&gt;labelProgress.Type" xml:space="preserve">
+  <data name=">>labelProgress.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelProgress.Parent" xml:space="preserve">
+  <data name=">>labelProgress.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelProgress.ZOrder" xml:space="preserve">
+  <data name=">>labelProgress.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="labelChapSecret.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -705,16 +705,16 @@
   <data name="labelChapSecret.Text" xml:space="preserve">
     <value>CHAP 密码(&amp;S):</value>
   </data>
-  <data name="&gt;&gt;labelChapSecret.Name" xml:space="preserve">
+  <data name=">>labelChapSecret.Name" xml:space="preserve">
     <value>labelChapSecret</value>
   </data>
-  <data name="&gt;&gt;labelChapSecret.Type" xml:space="preserve">
+  <data name=">>labelChapSecret.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelChapSecret.Parent" xml:space="preserve">
+  <data name=">>labelChapSecret.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelChapSecret.ZOrder" xml:space="preserve">
+  <data name=">>labelChapSecret.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -732,16 +732,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -768,16 +768,16 @@
   <data name="labelTopDivider.Text" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;labelTopDivider.Name" xml:space="preserve">
+  <data name=">>labelTopDivider.Name" xml:space="preserve">
     <value>labelTopDivider</value>
   </data>
-  <data name="&gt;&gt;labelTopDivider.Type" xml:space="preserve">
+  <data name=">>labelTopDivider.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelTopDivider.Parent" xml:space="preserve">
+  <data name=">>labelTopDivider.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelTopDivider.ZOrder" xml:space="preserve">
+  <data name=">>labelTopDivider.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -789,10 +789,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>535, 342</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>CslgSettings</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

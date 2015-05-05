@@ -141,16 +141,16 @@
   <data name="labelHostCombo.Text" xml:space="preserve">
     <value>ホスト(&amp;H):</value>
   </data>
-  <data name="&gt;&gt;labelHostCombo.Name" xml:space="preserve">
+  <data name=">>labelHostCombo.Name" xml:space="preserve">
     <value>labelHostCombo</value>
   </data>
-  <data name="&gt;&gt;labelHostCombo.Type" xml:space="preserve">
+  <data name=">>labelHostCombo.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelHostCombo.Parent" xml:space="preserve">
+  <data name=">>labelHostCombo.Parent" xml:space="preserve">
     <value>panelHosts</value>
   </data>
-  <data name="&gt;&gt;labelHostCombo.ZOrder" xml:space="preserve">
+  <data name=">>labelHostCombo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="hostComboBox.Location" type="System.Drawing.Point, System.Drawing">
@@ -165,16 +165,16 @@
   <data name="hostComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;hostComboBox.Name" xml:space="preserve">
+  <data name=">>hostComboBox.Name" xml:space="preserve">
     <value>hostComboBox</value>
   </data>
-  <data name="&gt;&gt;hostComboBox.Type" xml:space="preserve">
+  <data name=">>hostComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;hostComboBox.Parent" xml:space="preserve">
+  <data name=">>hostComboBox.Parent" xml:space="preserve">
     <value>panelHosts</value>
   </data>
-  <data name="&gt;&gt;hostComboBox.ZOrder" xml:space="preserve">
+  <data name=">>hostComboBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="btnRunReport.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -195,16 +195,16 @@
   <data name="btnRunReport.Text" xml:space="preserve">
     <value>レポートの実行(&amp;R)</value>
   </data>
-  <data name="&gt;&gt;btnRunReport.Name" xml:space="preserve">
+  <data name=">>btnRunReport.Name" xml:space="preserve">
     <value>btnRunReport</value>
   </data>
-  <data name="&gt;&gt;btnRunReport.Type" xml:space="preserve">
+  <data name=">>btnRunReport.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnRunReport.Parent" xml:space="preserve">
+  <data name=">>btnRunReport.Parent" xml:space="preserve">
     <value>flowLayoutPanelButtons</value>
   </data>
-  <data name="&gt;&gt;btnRunReport.ZOrder" xml:space="preserve">
+  <data name=">>btnRunReport.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="btnLaterReport.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -225,16 +225,16 @@
   <data name="btnLaterReport.Text" xml:space="preserve">
     <value>前のセクション(&amp;P)</value>
   </data>
-  <data name="&gt;&gt;btnLaterReport.Name" xml:space="preserve">
+  <data name=">>btnLaterReport.Name" xml:space="preserve">
     <value>btnLaterReport</value>
   </data>
-  <data name="&gt;&gt;btnLaterReport.Type" xml:space="preserve">
+  <data name=">>btnLaterReport.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnLaterReport.Parent" xml:space="preserve">
+  <data name=">>btnLaterReport.Parent" xml:space="preserve">
     <value>flowLayoutPanelButtons</value>
   </data>
-  <data name="&gt;&gt;btnLaterReport.ZOrder" xml:space="preserve">
+  <data name=">>btnLaterReport.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="labelEndDate.AutoSize" type="System.Boolean, mscorlib">
@@ -258,16 +258,16 @@
   <data name="labelEndDate.Text" xml:space="preserve">
     <value>終了日(&amp;E):</value>
   </data>
-  <data name="&gt;&gt;labelEndDate.Name" xml:space="preserve">
+  <data name=">>labelEndDate.Name" xml:space="preserve">
     <value>labelEndDate</value>
   </data>
-  <data name="&gt;&gt;labelEndDate.Type" xml:space="preserve">
+  <data name=">>labelEndDate.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelEndDate.Parent" xml:space="preserve">
+  <data name=">>labelEndDate.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelEndDate.ZOrder" xml:space="preserve">
+  <data name=">>labelEndDate.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="EndDatePicker.Font" type="System.Drawing.Font, System.Drawing">
@@ -282,16 +282,16 @@
   <data name="EndDatePicker.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;EndDatePicker.Name" xml:space="preserve">
+  <data name=">>EndDatePicker.Name" xml:space="preserve">
     <value>EndDatePicker</value>
   </data>
-  <data name="&gt;&gt;EndDatePicker.Type" xml:space="preserve">
+  <data name=">>EndDatePicker.Type" xml:space="preserve">
     <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;EndDatePicker.Parent" xml:space="preserve">
+  <data name=">>EndDatePicker.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;EndDatePicker.ZOrder" xml:space="preserve">
+  <data name=">>EndDatePicker.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="labelStartDate.AutoSize" type="System.Boolean, mscorlib">
@@ -315,16 +315,16 @@
   <data name="labelStartDate.Text" xml:space="preserve">
     <value>開始日(&amp;T):</value>
   </data>
-  <data name="&gt;&gt;labelStartDate.Name" xml:space="preserve">
+  <data name=">>labelStartDate.Name" xml:space="preserve">
     <value>labelStartDate</value>
   </data>
-  <data name="&gt;&gt;labelStartDate.Type" xml:space="preserve">
+  <data name=">>labelStartDate.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelStartDate.Parent" xml:space="preserve">
+  <data name=">>labelStartDate.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelStartDate.ZOrder" xml:space="preserve">
+  <data name=">>labelStartDate.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="StartDatePicker.Font" type="System.Drawing.Font, System.Drawing">
@@ -339,16 +339,16 @@
   <data name="StartDatePicker.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;StartDatePicker.Name" xml:space="preserve">
+  <data name=">>StartDatePicker.Name" xml:space="preserve">
     <value>StartDatePicker</value>
   </data>
-  <data name="&gt;&gt;StartDatePicker.Type" xml:space="preserve">
+  <data name=">>StartDatePicker.Type" xml:space="preserve">
     <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;StartDatePicker.Parent" xml:space="preserve">
+  <data name=">>StartDatePicker.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;StartDatePicker.ZOrder" xml:space="preserve">
+  <data name=">>StartDatePicker.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="reportViewer1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -369,16 +369,16 @@
   <data name="reportViewer1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;reportViewer1.Name" xml:space="preserve">
+  <data name=">>reportViewer1.Name" xml:space="preserve">
     <value>reportViewer1</value>
   </data>
-  <data name="&gt;&gt;reportViewer1.Type" xml:space="preserve">
+  <data name=">>reportViewer1.Type" xml:space="preserve">
     <value>Microsoft.Reporting.WinForms.ReportViewer, Microsoft.ReportViewer.WinForms, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="&gt;&gt;reportViewer1.Parent" xml:space="preserve">
+  <data name=">>reportViewer1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;reportViewer1.ZOrder" xml:space="preserve">
+  <data name=">>reportViewer1.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="btnSubscribe.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -399,16 +399,16 @@
   <data name="btnSubscribe.Text" xml:space="preserve">
     <value>サブスクライブ(&amp;S)</value>
   </data>
-  <data name="&gt;&gt;btnSubscribe.Name" xml:space="preserve">
+  <data name=">>btnSubscribe.Name" xml:space="preserve">
     <value>btnSubscribe</value>
   </data>
-  <data name="&gt;&gt;btnSubscribe.Type" xml:space="preserve">
+  <data name=">>btnSubscribe.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnSubscribe.Parent" xml:space="preserve">
+  <data name=">>btnSubscribe.Parent" xml:space="preserve">
     <value>flowLayoutPanelButtons</value>
   </data>
-  <data name="&gt;&gt;btnSubscribe.ZOrder" xml:space="preserve">
+  <data name=">>btnSubscribe.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="btnClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -426,16 +426,16 @@
   <data name="btnClose.Text" xml:space="preserve">
     <value>閉じる(&amp;C)</value>
   </data>
-  <data name="&gt;&gt;btnClose.Name" xml:space="preserve">
+  <data name=">>btnClose.Name" xml:space="preserve">
     <value>btnClose</value>
   </data>
-  <data name="&gt;&gt;btnClose.Type" xml:space="preserve">
+  <data name=">>btnClose.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnClose.Parent" xml:space="preserve">
+  <data name=">>btnClose.Parent" xml:space="preserve">
     <value>flowLayoutPanelButtons</value>
   </data>
-  <data name="&gt;&gt;btnClose.ZOrder" xml:space="preserve">
+  <data name=">>btnClose.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="comboBoxView.Location" type="System.Drawing.Point, System.Drawing">
@@ -447,16 +447,16 @@
   <data name="comboBoxView.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;comboBoxView.Name" xml:space="preserve">
+  <data name=">>comboBoxView.Name" xml:space="preserve">
     <value>comboBoxView</value>
   </data>
-  <data name="&gt;&gt;comboBoxView.Type" xml:space="preserve">
+  <data name=">>comboBoxView.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;comboBoxView.Parent" xml:space="preserve">
+  <data name=">>comboBoxView.Parent" xml:space="preserve">
     <value>panelShow</value>
   </data>
-  <data name="&gt;&gt;comboBoxView.ZOrder" xml:space="preserve">
+  <data name=">>comboBoxView.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelShow.Location" type="System.Drawing.Point, System.Drawing">
@@ -471,16 +471,16 @@
   <data name="labelShow.Text" xml:space="preserve">
     <value>表示(&amp;O):</value>
   </data>
-  <data name="&gt;&gt;labelShow.Name" xml:space="preserve">
+  <data name=">>labelShow.Name" xml:space="preserve">
     <value>labelShow</value>
   </data>
-  <data name="&gt;&gt;labelShow.Type" xml:space="preserve">
+  <data name=">>labelShow.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelShow.Parent" xml:space="preserve">
+  <data name=">>labelShow.Parent" xml:space="preserve">
     <value>panelShow</value>
   </data>
-  <data name="&gt;&gt;labelShow.ZOrder" xml:space="preserve">
+  <data name=">>labelShow.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelHosts.AutoSize" type="System.Boolean, mscorlib">
@@ -498,16 +498,16 @@
   <data name="panelHosts.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;panelHosts.Name" xml:space="preserve">
+  <data name=">>panelHosts.Name" xml:space="preserve">
     <value>panelHosts</value>
   </data>
-  <data name="&gt;&gt;panelHosts.Type" xml:space="preserve">
+  <data name=">>panelHosts.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panelHosts.Parent" xml:space="preserve">
+  <data name=">>panelHosts.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;panelHosts.ZOrder" xml:space="preserve">
+  <data name=">>panelHosts.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelShow.AutoSize" type="System.Boolean, mscorlib">
@@ -525,16 +525,16 @@
   <data name="panelShow.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="&gt;&gt;panelShow.Name" xml:space="preserve">
+  <data name=">>panelShow.Name" xml:space="preserve">
     <value>panelShow</value>
   </data>
-  <data name="&gt;&gt;panelShow.Type" xml:space="preserve">
+  <data name=">>panelShow.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panelShow.Parent" xml:space="preserve">
+  <data name=">>panelShow.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;panelShow.ZOrder" xml:space="preserve">
+  <data name=">>panelShow.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="flowLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
@@ -552,16 +552,16 @@
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Name" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -579,16 +579,16 @@
   <data name="lblExported.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="&gt;&gt;lblExported.Name" xml:space="preserve">
+  <data name=">>lblExported.Name" xml:space="preserve">
     <value>lblExported</value>
   </data>
-  <data name="&gt;&gt;lblExported.Type" xml:space="preserve">
+  <data name=">>lblExported.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblExported.Parent" xml:space="preserve">
+  <data name=">>lblExported.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblExported.ZOrder" xml:space="preserve">
+  <data name=">>lblExported.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="flowLayoutPanelButtons.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -612,16 +612,16 @@
   <data name="flowLayoutPanelButtons.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanelButtons.Name" xml:space="preserve">
+  <data name=">>flowLayoutPanelButtons.Name" xml:space="preserve">
     <value>flowLayoutPanelButtons</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanelButtons.Type" xml:space="preserve">
+  <data name=">>flowLayoutPanelButtons.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanelButtons.Parent" xml:space="preserve">
+  <data name=">>flowLayoutPanelButtons.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanelButtons.ZOrder" xml:space="preserve">
+  <data name=">>flowLayoutPanelButtons.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -648,16 +648,16 @@
   <data name="panelUsers.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;panelUsers.Name" xml:space="preserve">
+  <data name=">>panelUsers.Name" xml:space="preserve">
     <value>panelUsers</value>
   </data>
-  <data name="&gt;&gt;panelUsers.Type" xml:space="preserve">
+  <data name=">>panelUsers.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panelUsers.Parent" xml:space="preserve">
+  <data name=">>panelUsers.Parent" xml:space="preserve">
     <value>flowLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;panelUsers.ZOrder" xml:space="preserve">
+  <data name=">>panelUsers.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelObjects.AutoSize" type="System.Boolean, mscorlib">
@@ -687,16 +687,16 @@
   <data name="labelObjects.Text" xml:space="preserve">
     <value>オブジェクト(&amp;J):</value>
   </data>
-  <data name="&gt;&gt;labelObjects.Name" xml:space="preserve">
+  <data name=">>labelObjects.Name" xml:space="preserve">
     <value>labelObjects</value>
   </data>
-  <data name="&gt;&gt;labelObjects.Type" xml:space="preserve">
+  <data name=">>labelObjects.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelObjects.Parent" xml:space="preserve">
+  <data name=">>labelObjects.Parent" xml:space="preserve">
     <value>panelObjects</value>
   </data>
-  <data name="&gt;&gt;labelObjects.ZOrder" xml:space="preserve">
+  <data name=">>labelObjects.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="objectComboBox.Location" type="System.Drawing.Point, System.Drawing">
@@ -711,16 +711,16 @@
   <data name="objectComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;objectComboBox.Name" xml:space="preserve">
+  <data name=">>objectComboBox.Name" xml:space="preserve">
     <value>objectComboBox</value>
   </data>
-  <data name="&gt;&gt;objectComboBox.Type" xml:space="preserve">
+  <data name=">>objectComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;objectComboBox.Parent" xml:space="preserve">
+  <data name=">>objectComboBox.Parent" xml:space="preserve">
     <value>panelObjects</value>
   </data>
-  <data name="&gt;&gt;objectComboBox.ZOrder" xml:space="preserve">
+  <data name=">>objectComboBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panelObjects.Location" type="System.Drawing.Point, System.Drawing">
@@ -732,16 +732,16 @@
   <data name="panelObjects.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="&gt;&gt;panelObjects.Name" xml:space="preserve">
+  <data name=">>panelObjects.Name" xml:space="preserve">
     <value>panelObjects</value>
   </data>
-  <data name="&gt;&gt;panelObjects.Type" xml:space="preserve">
+  <data name=">>panelObjects.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panelObjects.Parent" xml:space="preserve">
+  <data name=">>panelObjects.Parent" xml:space="preserve">
     <value>flowLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;panelObjects.ZOrder" xml:space="preserve">
+  <data name=">>panelObjects.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="flowLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
@@ -753,16 +753,16 @@
   <data name="flowLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel2.Name" xml:space="preserve">
+  <data name=">>flowLayoutPanel2.Name" xml:space="preserve">
     <value>flowLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel2.Type" xml:space="preserve">
+  <data name=">>flowLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel2.Parent" xml:space="preserve">
+  <data name=">>flowLayoutPanel2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name=">>flowLayoutPanel2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="userComboBox.Location" type="System.Drawing.Point, System.Drawing">
@@ -777,16 +777,16 @@
   <data name="userComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;userComboBox.Name" xml:space="preserve">
+  <data name=">>userComboBox.Name" xml:space="preserve">
     <value>userComboBox</value>
   </data>
-  <data name="&gt;&gt;userComboBox.Type" xml:space="preserve">
+  <data name=">>userComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;userComboBox.Parent" xml:space="preserve">
+  <data name=">>userComboBox.Parent" xml:space="preserve">
     <value>panelUsers</value>
   </data>
-  <data name="&gt;&gt;userComboBox.ZOrder" xml:space="preserve">
+  <data name=">>userComboBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelUsers.AutoSize" type="System.Boolean, mscorlib">
@@ -810,16 +810,16 @@
   <data name="labelUsers.Text" xml:space="preserve">
     <value>ユーザー(&amp;U):</value>
   </data>
-  <data name="&gt;&gt;labelUsers.Name" xml:space="preserve">
+  <data name=">>labelUsers.Name" xml:space="preserve">
     <value>labelUsers</value>
   </data>
-  <data name="&gt;&gt;labelUsers.Type" xml:space="preserve">
+  <data name=">>labelUsers.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelUsers.Parent" xml:space="preserve">
+  <data name=">>labelUsers.Parent" xml:space="preserve">
     <value>panelUsers</value>
   </data>
-  <data name="&gt;&gt;labelUsers.ZOrder" xml:space="preserve">
+  <data name=">>labelUsers.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -834,22 +834,22 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>844, 628</value>
   </data>
-  <data name="&gt;&gt;timer1.Name" xml:space="preserve">
+  <data name=">>timer1.Name" xml:space="preserve">
     <value>timer1</value>
   </data>
-  <data name="&gt;&gt;timer1.Type" xml:space="preserve">
+  <data name=">>timer1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
+  <data name=">>toolTip1.Name" xml:space="preserve">
     <value>toolTip1</value>
   </data>
-  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
+  <data name=">>toolTip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>WlbReportView</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

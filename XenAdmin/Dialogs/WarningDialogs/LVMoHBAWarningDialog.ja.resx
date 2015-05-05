@@ -138,16 +138,16 @@
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>キャンセル</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
+  <data name=">>buttonCancel.Name" xml:space="preserve">
     <value>buttonCancel</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
+  <data name=">>buttonCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
+  <data name=">>buttonCancel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
+  <data name=">>buttonCancel.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="checkBoxRepeat.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -177,16 +177,16 @@
   <data name="checkBoxRepeat.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopLeft</value>
   </data>
-  <data name="&gt;&gt;checkBoxRepeat.Name" xml:space="preserve">
+  <data name=">>checkBoxRepeat.Name" xml:space="preserve">
     <value>checkBoxRepeat</value>
   </data>
-  <data name="&gt;&gt;checkBoxRepeat.Type" xml:space="preserve">
+  <data name=">>checkBoxRepeat.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkBoxRepeat.Parent" xml:space="preserve">
+  <data name=">>checkBoxRepeat.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;checkBoxRepeat.ZOrder" xml:space="preserve">
+  <data name=">>checkBoxRepeat.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="labelHeader.AutoSize" type="System.Boolean, mscorlib">
@@ -207,16 +207,16 @@
   <data name="labelHeader.Text" xml:space="preserve">
     <value>選択した LUN に既存の SR があります。</value>
   </data>
-  <data name="&gt;&gt;labelHeader.Name" xml:space="preserve">
+  <data name=">>labelHeader.Name" xml:space="preserve">
     <value>labelHeader</value>
   </data>
-  <data name="&gt;&gt;labelHeader.Type" xml:space="preserve">
+  <data name=">>labelHeader.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelHeader.Parent" xml:space="preserve">
+  <data name=">>labelHeader.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelHeader.ZOrder" xml:space="preserve">
+  <data name=">>labelHeader.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="labelSelectOption.AutoSize" type="System.Boolean, mscorlib">
@@ -237,16 +237,16 @@
   <data name="labelSelectOption.Text" xml:space="preserve">
     <value>以下のオプションをクリックして SR を追加します</value>
   </data>
-  <data name="&gt;&gt;labelSelectOption.Name" xml:space="preserve">
+  <data name=">>labelSelectOption.Name" xml:space="preserve">
     <value>labelSelectOption</value>
   </data>
-  <data name="&gt;&gt;labelSelectOption.Type" xml:space="preserve">
+  <data name=">>labelSelectOption.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelSelectOption.Parent" xml:space="preserve">
+  <data name=">>labelSelectOption.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelSelectOption.ZOrder" xml:space="preserve">
+  <data name=">>labelSelectOption.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="panelReattach.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -270,16 +270,16 @@
   <data name="pictureBoxArrowReattach.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="&gt;&gt;pictureBoxArrowReattach.Name" xml:space="preserve">
+  <data name=">>pictureBoxArrowReattach.Name" xml:space="preserve">
     <value>pictureBoxArrowReattach</value>
   </data>
-  <data name="&gt;&gt;pictureBoxArrowReattach.Type" xml:space="preserve">
+  <data name=">>pictureBoxArrowReattach.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBoxArrowReattach.Parent" xml:space="preserve">
+  <data name=">>pictureBoxArrowReattach.Parent" xml:space="preserve">
     <value>panelReattach</value>
   </data>
-  <data name="&gt;&gt;pictureBoxArrowReattach.ZOrder" xml:space="preserve">
+  <data name=">>pictureBoxArrowReattach.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="buttonReattach.AutoSize" type="System.Boolean, mscorlib">
@@ -306,16 +306,16 @@
   <data name="buttonReattach.Text" xml:space="preserve">
     <value>再接続(&amp;R)</value>
   </data>
-  <data name="&gt;&gt;buttonReattach.Name" xml:space="preserve">
+  <data name=">>buttonReattach.Name" xml:space="preserve">
     <value>buttonReattach</value>
   </data>
-  <data name="&gt;&gt;buttonReattach.Type" xml:space="preserve">
+  <data name=">>buttonReattach.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonReattach.Parent" xml:space="preserve">
+  <data name=">>buttonReattach.Parent" xml:space="preserve">
     <value>panelReattach</value>
   </data>
-  <data name="&gt;&gt;buttonReattach.ZOrder" xml:space="preserve">
+  <data name=">>buttonReattach.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelReattachInfo.AutoSize" type="System.Boolean, mscorlib">
@@ -336,16 +336,16 @@
   <data name="labelReattachInfo.Text" xml:space="preserve">
     <value>既存の SR を使用する</value>
   </data>
-  <data name="&gt;&gt;labelReattachInfo.Name" xml:space="preserve">
+  <data name=">>labelReattachInfo.Name" xml:space="preserve">
     <value>labelReattachInfo</value>
   </data>
-  <data name="&gt;&gt;labelReattachInfo.Type" xml:space="preserve">
+  <data name=">>labelReattachInfo.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelReattachInfo.Parent" xml:space="preserve">
+  <data name=">>labelReattachInfo.Parent" xml:space="preserve">
     <value>panelReattach</value>
   </data>
-  <data name="&gt;&gt;labelReattachInfo.ZOrder" xml:space="preserve">
+  <data name=">>labelReattachInfo.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="panelReattach.Font" type="System.Drawing.Font, System.Drawing">
@@ -360,16 +360,16 @@
   <data name="panelReattach.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;panelReattach.Name" xml:space="preserve">
+  <data name=">>panelReattach.Name" xml:space="preserve">
     <value>panelReattach</value>
   </data>
-  <data name="&gt;&gt;panelReattach.Type" xml:space="preserve">
+  <data name=">>panelReattach.Type" xml:space="preserve">
     <value>XenAdmin.Controls.FlickerFreePanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;panelReattach.Parent" xml:space="preserve">
+  <data name=">>panelReattach.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;panelReattach.ZOrder" xml:space="preserve">
+  <data name=">>panelReattach.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="panelFormat.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -393,16 +393,16 @@
   <data name="pictureBoxArrowFormat.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="&gt;&gt;pictureBoxArrowFormat.Name" xml:space="preserve">
+  <data name=">>pictureBoxArrowFormat.Name" xml:space="preserve">
     <value>pictureBoxArrowFormat</value>
   </data>
-  <data name="&gt;&gt;pictureBoxArrowFormat.Type" xml:space="preserve">
+  <data name=">>pictureBoxArrowFormat.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBoxArrowFormat.Parent" xml:space="preserve">
+  <data name=">>pictureBoxArrowFormat.Parent" xml:space="preserve">
     <value>panelFormat</value>
   </data>
-  <data name="&gt;&gt;pictureBoxArrowFormat.ZOrder" xml:space="preserve">
+  <data name=">>pictureBoxArrowFormat.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="buttonFormat.AutoSize" type="System.Boolean, mscorlib">
@@ -432,16 +432,16 @@
   <data name="buttonFormat.Text" xml:space="preserve">
     <value>フォーマット(&amp;F)</value>
   </data>
-  <data name="&gt;&gt;buttonFormat.Name" xml:space="preserve">
+  <data name=">>buttonFormat.Name" xml:space="preserve">
     <value>buttonFormat</value>
   </data>
-  <data name="&gt;&gt;buttonFormat.Type" xml:space="preserve">
+  <data name=">>buttonFormat.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonFormat.Parent" xml:space="preserve">
+  <data name=">>buttonFormat.Parent" xml:space="preserve">
     <value>panelFormat</value>
   </data>
-  <data name="&gt;&gt;buttonFormat.ZOrder" xml:space="preserve">
+  <data name=">>buttonFormat.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelFormatInfo.AutoSize" type="System.Boolean, mscorlib">
@@ -462,16 +462,16 @@
   <data name="labelFormatInfo.Text" xml:space="preserve">
     <value>このディスク上のすべてのデータを消去して新しい SR を作成する</value>
   </data>
-  <data name="&gt;&gt;labelFormatInfo.Name" xml:space="preserve">
+  <data name=">>labelFormatInfo.Name" xml:space="preserve">
     <value>labelFormatInfo</value>
   </data>
-  <data name="&gt;&gt;labelFormatInfo.Type" xml:space="preserve">
+  <data name=">>labelFormatInfo.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelFormatInfo.Parent" xml:space="preserve">
+  <data name=">>labelFormatInfo.Parent" xml:space="preserve">
     <value>panelFormat</value>
   </data>
-  <data name="&gt;&gt;labelFormatInfo.ZOrder" xml:space="preserve">
+  <data name=">>labelFormatInfo.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="panelFormat.Font" type="System.Drawing.Font, System.Drawing">
@@ -486,16 +486,16 @@
   <data name="panelFormat.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;panelFormat.Name" xml:space="preserve">
+  <data name=">>panelFormat.Name" xml:space="preserve">
     <value>panelFormat</value>
   </data>
-  <data name="&gt;&gt;panelFormat.Type" xml:space="preserve">
+  <data name=">>panelFormat.Type" xml:space="preserve">
     <value>XenAdmin.Controls.FlickerFreePanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;panelFormat.Parent" xml:space="preserve">
+  <data name=">>panelFormat.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;panelFormat.ZOrder" xml:space="preserve">
+  <data name=">>panelFormat.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="pictureBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -555,16 +555,16 @@
   <data name="pictureBox2.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;pictureBox2.Name" xml:space="preserve">
+  <data name=">>pictureBox2.Name" xml:space="preserve">
     <value>pictureBox2</value>
   </data>
-  <data name="&gt;&gt;pictureBox2.Type" xml:space="preserve">
+  <data name=">>pictureBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox2.Parent" xml:space="preserve">
+  <data name=">>pictureBox2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
+  <data name=">>pictureBox2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="labelWarning.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -585,16 +585,16 @@
   <data name="labelWarning.Text" xml:space="preserve">
     <value>データの損失を防ぐため、XenCenter で接続していない XenServer ホストを含め、ほかのシステムがこの LUN を使用していないことを確認してください。</value>
   </data>
-  <data name="&gt;&gt;labelWarning.Name" xml:space="preserve">
+  <data name=">>labelWarning.Name" xml:space="preserve">
     <value>labelWarning</value>
   </data>
-  <data name="&gt;&gt;labelWarning.Type" xml:space="preserve">
+  <data name=">>labelWarning.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelWarning.Parent" xml:space="preserve">
+  <data name=">>labelWarning.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelWarning.ZOrder" xml:space="preserve">
+  <data name=">>labelWarning.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelLUNDetails.AutoSize" type="System.Boolean, mscorlib">
@@ -619,16 +619,16 @@ SCSI ID:
 サイズ:
 </value>
   </data>
-  <data name="&gt;&gt;labelLUNDetails.Name" xml:space="preserve">
+  <data name=">>labelLUNDetails.Name" xml:space="preserve">
     <value>labelLUNDetails</value>
   </data>
-  <data name="&gt;&gt;labelLUNDetails.Type" xml:space="preserve">
+  <data name=">>labelLUNDetails.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelLUNDetails.Parent" xml:space="preserve">
+  <data name=">>labelLUNDetails.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelLUNDetails.ZOrder" xml:space="preserve">
+  <data name=">>labelLUNDetails.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -646,10 +646,10 @@ SCSI ID:
   <data name="$this.Text" xml:space="preserve">
     <value>新規ストレージ リポジトリ</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>LVMoHBAWarningDialog</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -138,16 +138,16 @@
   <data name="Cancelbutton.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="&gt;&gt;Cancelbutton.Name" xml:space="preserve">
+  <data name=">>Cancelbutton.Name" xml:space="preserve">
     <value>Cancelbutton</value>
   </data>
-  <data name="&gt;&gt;Cancelbutton.Type" xml:space="preserve">
+  <data name=">>Cancelbutton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Cancelbutton.Parent" xml:space="preserve">
+  <data name=">>Cancelbutton.Parent" xml:space="preserve">
     <value>panelButtons</value>
   </data>
-  <data name="&gt;&gt;Cancelbutton.ZOrder" xml:space="preserve">
+  <data name=">>Cancelbutton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="buttonOk.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -168,16 +168,16 @@
   <data name="buttonOk.Text" xml:space="preserve">
     <value>&amp;Add</value>
   </data>
-  <data name="&gt;&gt;buttonOk.Name" xml:space="preserve">
+  <data name=">>buttonOk.Name" xml:space="preserve">
     <value>buttonOk</value>
   </data>
-  <data name="&gt;&gt;buttonOk.Type" xml:space="preserve">
+  <data name=">>buttonOk.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonOk.Parent" xml:space="preserve">
+  <data name=">>buttonOk.Parent" xml:space="preserve">
     <value>toolTipContainerOkButton</value>
   </data>
-  <data name="&gt;&gt;buttonOk.ZOrder" xml:space="preserve">
+  <data name=">>buttonOk.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelNetwork.AutoSize" type="System.Boolean, mscorlib">
@@ -207,16 +207,16 @@
   <data name="labelNetwork.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelNetwork.Name" xml:space="preserve">
+  <data name=">>labelNetwork.Name" xml:space="preserve">
     <value>labelNetwork</value>
   </data>
-  <data name="&gt;&gt;labelNetwork.Type" xml:space="preserve">
+  <data name=">>labelNetwork.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelNetwork.Parent" xml:space="preserve">
+  <data name=">>labelNetwork.Parent" xml:space="preserve">
     <value>tableLayoutpanelButtons</value>
   </data>
-  <data name="&gt;&gt;labelNetwork.ZOrder" xml:space="preserve">
+  <data name=">>labelNetwork.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="comboBoxNetwork.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -237,16 +237,16 @@
   <data name="comboBoxNetwork.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;comboBoxNetwork.Name" xml:space="preserve">
+  <data name=">>comboBoxNetwork.Name" xml:space="preserve">
     <value>comboBoxNetwork</value>
   </data>
-  <data name="&gt;&gt;comboBoxNetwork.Type" xml:space="preserve">
+  <data name=">>comboBoxNetwork.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;comboBoxNetwork.Parent" xml:space="preserve">
+  <data name=">>comboBoxNetwork.Parent" xml:space="preserve">
     <value>tableLayoutpanelButtons</value>
   </data>
-  <data name="&gt;&gt;comboBoxNetwork.ZOrder" xml:space="preserve">
+  <data name=">>comboBoxNetwork.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="promptTextBoxMac.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -267,16 +267,16 @@
   <data name="promptTextBoxMac.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;promptTextBoxMac.Name" xml:space="preserve">
+  <data name=">>promptTextBoxMac.Name" xml:space="preserve">
     <value>promptTextBoxMac</value>
   </data>
-  <data name="&gt;&gt;promptTextBoxMac.Type" xml:space="preserve">
+  <data name=">>promptTextBoxMac.Type" xml:space="preserve">
     <value>XenAdmin.Controls.WatermarkTextBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;promptTextBoxMac.Parent" xml:space="preserve">
+  <data name=">>promptTextBoxMac.Parent" xml:space="preserve">
     <value>tableLayoutPanelMAC</value>
   </data>
-  <data name="&gt;&gt;promptTextBoxMac.ZOrder" xml:space="preserve">
+  <data name=">>promptTextBoxMac.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanelMAC.AutoSize" type="System.Boolean, mscorlib">
@@ -306,16 +306,16 @@
   <data name="radioButtonMac.Text" xml:space="preserve">
     <value>&amp;Use this MAC address:</value>
   </data>
-  <data name="&gt;&gt;radioButtonMac.Name" xml:space="preserve">
+  <data name=">>radioButtonMac.Name" xml:space="preserve">
     <value>radioButtonMac</value>
   </data>
-  <data name="&gt;&gt;radioButtonMac.Type" xml:space="preserve">
+  <data name=">>radioButtonMac.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButtonMac.Parent" xml:space="preserve">
+  <data name=">>radioButtonMac.Parent" xml:space="preserve">
     <value>tableLayoutPanelMAC</value>
   </data>
-  <data name="&gt;&gt;radioButtonMac.ZOrder" xml:space="preserve">
+  <data name=">>radioButtonMac.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanelMAC.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -339,16 +339,16 @@
   <data name="tableLayoutPanelMAC.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanelMAC.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanelMAC.Name" xml:space="preserve">
     <value>tableLayoutPanelMAC</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanelMAC.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanelMAC.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanelMAC.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanelMAC.Parent" xml:space="preserve">
     <value>tableLayoutPanelBody</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanelMAC.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanelMAC.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanelMAC.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -372,16 +372,16 @@
   <data name="radioButtonAutogenerate.Text" xml:space="preserve">
     <value>Auto-&amp;generate a MAC address</value>
   </data>
-  <data name="&gt;&gt;radioButtonAutogenerate.Name" xml:space="preserve">
+  <data name=">>radioButtonAutogenerate.Name" xml:space="preserve">
     <value>radioButtonAutogenerate</value>
   </data>
-  <data name="&gt;&gt;radioButtonAutogenerate.Type" xml:space="preserve">
+  <data name=">>radioButtonAutogenerate.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButtonAutogenerate.Parent" xml:space="preserve">
+  <data name=">>radioButtonAutogenerate.Parent" xml:space="preserve">
     <value>tableLayoutPanelMAC</value>
   </data>
-  <data name="&gt;&gt;radioButtonAutogenerate.ZOrder" xml:space="preserve">
+  <data name=">>radioButtonAutogenerate.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanelBody.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
@@ -417,16 +417,16 @@
   <data name="tableLayoutpanelButtons.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutpanelButtons.Name" xml:space="preserve">
+  <data name=">>tableLayoutpanelButtons.Name" xml:space="preserve">
     <value>tableLayoutpanelButtons</value>
   </data>
-  <data name="&gt;&gt;tableLayoutpanelButtons.Type" xml:space="preserve">
+  <data name=">>tableLayoutpanelButtons.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutpanelButtons.Parent" xml:space="preserve">
+  <data name=">>tableLayoutpanelButtons.Parent" xml:space="preserve">
     <value>tableLayoutPanelBody</value>
   </data>
-  <data name="&gt;&gt;tableLayoutpanelButtons.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutpanelButtons.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutpanelButtons.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -456,16 +456,16 @@
   <data name="labelBlurb.Text" xml:space="preserve">
     <value>Select your network and MAC address for this virtual interface. You can also optionally define a QoS limit.</value>
   </data>
-  <data name="&gt;&gt;labelBlurb.Name" xml:space="preserve">
+  <data name=">>labelBlurb.Name" xml:space="preserve">
     <value>labelBlurb</value>
   </data>
-  <data name="&gt;&gt;labelBlurb.Type" xml:space="preserve">
+  <data name=">>labelBlurb.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelBlurb.Parent" xml:space="preserve">
+  <data name=">>labelBlurb.Parent" xml:space="preserve">
     <value>tableLayoutPanelBody</value>
   </data>
-  <data name="&gt;&gt;labelBlurb.ZOrder" xml:space="preserve">
+  <data name=">>labelBlurb.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="panelButtons.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
@@ -486,16 +486,16 @@
   <data name="toolTipContainerOkButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerOkButton.Name" xml:space="preserve">
+  <data name=">>toolTipContainerOkButton.Name" xml:space="preserve">
     <value>toolTipContainerOkButton</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerOkButton.Type" xml:space="preserve">
+  <data name=">>toolTipContainerOkButton.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerOkButton.Parent" xml:space="preserve">
+  <data name=">>toolTipContainerOkButton.Parent" xml:space="preserve">
     <value>panelButtons</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerOkButton.ZOrder" xml:space="preserve">
+  <data name=">>toolTipContainerOkButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -516,16 +516,16 @@
   <data name="panelButtons.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;panelButtons.Name" xml:space="preserve">
+  <data name=">>panelButtons.Name" xml:space="preserve">
     <value>panelButtons</value>
   </data>
-  <data name="&gt;&gt;panelButtons.Type" xml:space="preserve">
+  <data name=">>panelButtons.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panelButtons.Parent" xml:space="preserve">
+  <data name=">>panelButtons.Parent" xml:space="preserve">
     <value>tableLayoutPanelBody</value>
   </data>
-  <data name="&gt;&gt;panelButtons.ZOrder" xml:space="preserve">
+  <data name=">>panelButtons.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="labelMAC.AutoSize" type="System.Boolean, mscorlib">
@@ -555,16 +555,16 @@
   <data name="labelMAC.Text" xml:space="preserve">
     <value>MAC address:</value>
   </data>
-  <data name="&gt;&gt;labelMAC.Name" xml:space="preserve">
+  <data name=">>labelMAC.Name" xml:space="preserve">
     <value>labelMAC</value>
   </data>
-  <data name="&gt;&gt;labelMAC.Type" xml:space="preserve">
+  <data name=">>labelMAC.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelMAC.Parent" xml:space="preserve">
+  <data name=">>labelMAC.Parent" xml:space="preserve">
     <value>tableLayoutPanelBody</value>
   </data>
-  <data name="&gt;&gt;labelMAC.ZOrder" xml:space="preserve">
+  <data name=">>labelMAC.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="labelQoS.AutoSize" type="System.Boolean, mscorlib">
@@ -594,16 +594,16 @@
   <data name="labelQoS.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelQoS.Name" xml:space="preserve">
+  <data name=">>labelQoS.Name" xml:space="preserve">
     <value>labelQoS</value>
   </data>
-  <data name="&gt;&gt;labelQoS.Type" xml:space="preserve">
+  <data name=">>labelQoS.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelQoS.Parent" xml:space="preserve">
+  <data name=">>labelQoS.Parent" xml:space="preserve">
     <value>tableLayoutPanelBody</value>
   </data>
-  <data name="&gt;&gt;labelQoS.ZOrder" xml:space="preserve">
+  <data name=">>labelQoS.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="flowLayoutPanelQoS.AutoSize" type="System.Boolean, mscorlib">
@@ -636,16 +636,16 @@
   <data name="checkboxQoS.Text" xml:space="preserve">
     <value>Enable a &amp;QoS limit of:</value>
   </data>
-  <data name="&gt;&gt;checkboxQoS.Name" xml:space="preserve">
+  <data name=">>checkboxQoS.Name" xml:space="preserve">
     <value>checkboxQoS</value>
   </data>
-  <data name="&gt;&gt;checkboxQoS.Type" xml:space="preserve">
+  <data name=">>checkboxQoS.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkboxQoS.Parent" xml:space="preserve">
+  <data name=">>checkboxQoS.Parent" xml:space="preserve">
     <value>flowLayoutPanelQoS</value>
   </data>
-  <data name="&gt;&gt;checkboxQoS.ZOrder" xml:space="preserve">
+  <data name=">>checkboxQoS.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="promptTextBoxQoS.Font" type="System.Drawing.Font, System.Drawing">
@@ -663,16 +663,16 @@
   <data name="promptTextBoxQoS.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;promptTextBoxQoS.Name" xml:space="preserve">
+  <data name=">>promptTextBoxQoS.Name" xml:space="preserve">
     <value>promptTextBoxQoS</value>
   </data>
-  <data name="&gt;&gt;promptTextBoxQoS.Type" xml:space="preserve">
+  <data name=">>promptTextBoxQoS.Type" xml:space="preserve">
     <value>XenAdmin.Controls.WatermarkTextBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;promptTextBoxQoS.Parent" xml:space="preserve">
+  <data name=">>promptTextBoxQoS.Parent" xml:space="preserve">
     <value>flowLayoutPanelQoS</value>
   </data>
-  <data name="&gt;&gt;promptTextBoxQoS.ZOrder" xml:space="preserve">
+  <data name=">>promptTextBoxQoS.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelQoSUnits.AutoSize" type="System.Boolean, mscorlib">
@@ -705,16 +705,16 @@
   <data name="labelQoSUnits.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelQoSUnits.Name" xml:space="preserve">
+  <data name=">>labelQoSUnits.Name" xml:space="preserve">
     <value>labelQoSUnits</value>
   </data>
-  <data name="&gt;&gt;labelQoSUnits.Type" xml:space="preserve">
+  <data name=">>labelQoSUnits.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelQoSUnits.Parent" xml:space="preserve">
+  <data name=">>labelQoSUnits.Parent" xml:space="preserve">
     <value>flowLayoutPanelQoS</value>
   </data>
-  <data name="&gt;&gt;labelQoSUnits.ZOrder" xml:space="preserve">
+  <data name=">>labelQoSUnits.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="flowLayoutPanelQoS.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -735,16 +735,16 @@
   <data name="flowLayoutPanelQoS.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanelQoS.Name" xml:space="preserve">
+  <data name=">>flowLayoutPanelQoS.Name" xml:space="preserve">
     <value>flowLayoutPanelQoS</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanelQoS.Type" xml:space="preserve">
+  <data name=">>flowLayoutPanelQoS.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanelQoS.Parent" xml:space="preserve">
+  <data name=">>flowLayoutPanelQoS.Parent" xml:space="preserve">
     <value>tableLayoutPanelBody</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanelQoS.ZOrder" xml:space="preserve">
+  <data name=">>flowLayoutPanelQoS.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="label1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -765,16 +765,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Upgrade your license to enable QoS settings</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>panelLicenseRestriction</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="pictureBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -795,16 +795,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+  <data name=">>pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+  <data name=">>pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+  <data name=">>pictureBox1.Parent" xml:space="preserve">
     <value>panelLicenseRestriction</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panelLicenseRestriction.Font" type="System.Drawing.Font, System.Drawing">
@@ -825,16 +825,16 @@
   <data name="panelLicenseRestriction.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;panelLicenseRestriction.Name" xml:space="preserve">
+  <data name=">>panelLicenseRestriction.Name" xml:space="preserve">
     <value>panelLicenseRestriction</value>
   </data>
-  <data name="&gt;&gt;panelLicenseRestriction.Type" xml:space="preserve">
+  <data name=">>panelLicenseRestriction.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panelLicenseRestriction.Parent" xml:space="preserve">
+  <data name=">>panelLicenseRestriction.Parent" xml:space="preserve">
     <value>tableLayoutPanelBody</value>
   </data>
-  <data name="&gt;&gt;panelLicenseRestriction.ZOrder" xml:space="preserve">
+  <data name=">>panelLicenseRestriction.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="tableLayoutPanelBody.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -855,16 +855,16 @@
   <data name="tableLayoutPanelBody.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanelBody.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanelBody.Name" xml:space="preserve">
     <value>tableLayoutPanelBody</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanelBody.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanelBody.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanelBody.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanelBody.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanelBody.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanelBody.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanelBody.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -894,10 +894,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Add Virtual Interface</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>VIFDialog</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -141,16 +141,16 @@
   <data name="pictureBoxStatus.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;pictureBoxStatus.Name" xml:space="preserve">
+  <data name=">>pictureBoxStatus.Name" xml:space="preserve">
     <value>pictureBoxStatus</value>
   </data>
-  <data name="&gt;&gt;pictureBoxStatus.Type" xml:space="preserve">
+  <data name=">>pictureBoxStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBoxStatus.Parent" xml:space="preserve">
+  <data name=">>pictureBoxStatus.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;pictureBoxStatus.ZOrder" xml:space="preserve">
+  <data name=">>pictureBoxStatus.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelHaStatus.AutoSize" type="System.Boolean, mscorlib">
@@ -177,16 +177,16 @@
   <data name="labelHaStatus.Text" xml:space="preserve">
     <value>可保证高可用性。高可用性可实施保护的最大服务器故障数为 {0}</value>
   </data>
-  <data name="&gt;&gt;labelHaStatus.Name" xml:space="preserve">
+  <data name=">>labelHaStatus.Name" xml:space="preserve">
     <value>labelHaStatus</value>
   </data>
-  <data name="&gt;&gt;labelHaStatus.Type" xml:space="preserve">
+  <data name=">>labelHaStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelHaStatus.Parent" xml:space="preserve">
+  <data name=">>labelHaStatus.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelHaStatus.ZOrder" xml:space="preserve">
+  <data name=">>labelHaStatus.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelProtectionLevel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -216,16 +216,16 @@
   <data name="labelProtectionLevel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelProtectionLevel.Name" xml:space="preserve">
+  <data name=">>labelProtectionLevel.Name" xml:space="preserve">
     <value>labelProtectionLevel</value>
   </data>
-  <data name="&gt;&gt;labelProtectionLevel.Type" xml:space="preserve">
+  <data name=">>labelProtectionLevel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelProtectionLevel.Parent" xml:space="preserve">
+  <data name=">>labelProtectionLevel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelProtectionLevel.ZOrder" xml:space="preserve">
+  <data name=">>labelProtectionLevel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -234,10 +234,10 @@
   <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 4</value>
   </data>
-  <data name="&gt;&gt;contextMenuStrip.Name" xml:space="preserve">
+  <data name=">>contextMenuStrip.Name" xml:space="preserve">
     <value>contextMenuStrip</value>
   </data>
-  <data name="&gt;&gt;contextMenuStrip.Type" xml:space="preserve">
+  <data name=">>contextMenuStrip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="m_dropDownButtonRestartPriority.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -261,16 +261,16 @@
   <data name="m_dropDownButtonRestartPriority.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;m_dropDownButtonRestartPriority.Name" xml:space="preserve">
+  <data name=">>m_dropDownButtonRestartPriority.Name" xml:space="preserve">
     <value>m_dropDownButtonRestartPriority</value>
   </data>
-  <data name="&gt;&gt;m_dropDownButtonRestartPriority.Type" xml:space="preserve">
+  <data name=">>m_dropDownButtonRestartPriority.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;m_dropDownButtonRestartPriority.Parent" xml:space="preserve">
+  <data name=">>m_dropDownButtonRestartPriority.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;m_dropDownButtonRestartPriority.ZOrder" xml:space="preserve">
+  <data name=">>m_dropDownButtonRestartPriority.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="labelStartOrder.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -297,16 +297,16 @@
   <data name="labelStartOrder.Text" xml:space="preserve">
     <value>启动顺序(&amp;S):</value>
   </data>
-  <data name="&gt;&gt;labelStartOrder.Name" xml:space="preserve">
+  <data name=">>labelStartOrder.Name" xml:space="preserve">
     <value>labelStartOrder</value>
   </data>
-  <data name="&gt;&gt;labelStartOrder.Type" xml:space="preserve">
+  <data name=">>labelStartOrder.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelStartOrder.Parent" xml:space="preserve">
+  <data name=">>labelStartOrder.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelStartOrder.ZOrder" xml:space="preserve">
+  <data name=">>labelStartOrder.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="nudOrder.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -324,16 +324,16 @@
   <data name="nudOrder.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="&gt;&gt;nudOrder.Name" xml:space="preserve">
+  <data name=">>nudOrder.Name" xml:space="preserve">
     <value>nudOrder</value>
   </data>
-  <data name="&gt;&gt;nudOrder.Type" xml:space="preserve">
+  <data name=">>nudOrder.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;nudOrder.Parent" xml:space="preserve">
+  <data name=">>nudOrder.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;nudOrder.ZOrder" xml:space="preserve">
+  <data name=">>nudOrder.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="labelStartDelay.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -360,16 +360,16 @@
   <data name="labelStartDelay.Text" xml:space="preserve">
     <value>尝试在以下时间后启动下一个 VM(&amp;A):</value>
   </data>
-  <data name="&gt;&gt;labelStartDelay.Name" xml:space="preserve">
+  <data name=">>labelStartDelay.Name" xml:space="preserve">
     <value>labelStartDelay</value>
   </data>
-  <data name="&gt;&gt;labelStartDelay.Type" xml:space="preserve">
+  <data name=">>labelStartDelay.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelStartDelay.Parent" xml:space="preserve">
+  <data name=">>labelStartDelay.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelStartDelay.ZOrder" xml:space="preserve">
+  <data name=">>labelStartDelay.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="nudStartDelay.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -387,16 +387,16 @@
   <data name="nudStartDelay.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="&gt;&gt;nudStartDelay.Name" xml:space="preserve">
+  <data name=">>nudStartDelay.Name" xml:space="preserve">
     <value>nudStartDelay</value>
   </data>
-  <data name="&gt;&gt;nudStartDelay.Type" xml:space="preserve">
+  <data name=">>nudStartDelay.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;nudStartDelay.Parent" xml:space="preserve">
+  <data name=">>nudStartDelay.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;nudStartDelay.ZOrder" xml:space="preserve">
+  <data name=">>nudStartDelay.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="labelStartDelayUnits.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -423,16 +423,16 @@
   <data name="labelStartDelayUnits.Text" xml:space="preserve">
     <value>秒</value>
   </data>
-  <data name="&gt;&gt;labelStartDelayUnits.Name" xml:space="preserve">
+  <data name=">>labelStartDelayUnits.Name" xml:space="preserve">
     <value>labelStartDelayUnits</value>
   </data>
-  <data name="&gt;&gt;labelStartDelayUnits.Type" xml:space="preserve">
+  <data name=">>labelStartDelayUnits.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelStartDelayUnits.Parent" xml:space="preserve">
+  <data name=">>labelStartDelayUnits.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelStartDelayUnits.ZOrder" xml:space="preserve">
+  <data name=">>labelStartDelayUnits.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="linkLabelTellMeMore.AutoSize" type="System.Boolean, mscorlib">
@@ -459,16 +459,16 @@
   <data name="linkLabelTellMeMore.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;linkLabelTellMeMore.Name" xml:space="preserve">
+  <data name=">>linkLabelTellMeMore.Name" xml:space="preserve">
     <value>linkLabelTellMeMore</value>
   </data>
-  <data name="&gt;&gt;linkLabelTellMeMore.Type" xml:space="preserve">
+  <data name=">>linkLabelTellMeMore.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;linkLabelTellMeMore.Parent" xml:space="preserve">
+  <data name=">>linkLabelTellMeMore.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;linkLabelTellMeMore.ZOrder" xml:space="preserve">
+  <data name=">>linkLabelTellMeMore.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="haNtolIndicator.AutoSize" type="System.Boolean, mscorlib">
@@ -492,16 +492,16 @@
   <data name="haNtolIndicator.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;haNtolIndicator.Name" xml:space="preserve">
+  <data name=">>haNtolIndicator.Name" xml:space="preserve">
     <value>haNtolIndicator</value>
   </data>
-  <data name="&gt;&gt;haNtolIndicator.Type" xml:space="preserve">
+  <data name=">>haNtolIndicator.Type" xml:space="preserve">
     <value>XenAdmin.Controls.HaNtolIndicator, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;haNtolIndicator.Parent" xml:space="preserve">
+  <data name=">>haNtolIndicator.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;haNtolIndicator.ZOrder" xml:space="preserve">
+  <data name=">>haNtolIndicator.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <metadata name="colImage.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -573,16 +573,16 @@
   <data name="dataGridViewVms.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="&gt;&gt;dataGridViewVms.Name" xml:space="preserve">
+  <data name=">>dataGridViewVms.Name" xml:space="preserve">
     <value>dataGridViewVms</value>
   </data>
-  <data name="&gt;&gt;dataGridViewVms.Type" xml:space="preserve">
+  <data name=">>dataGridViewVms.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dataGridViewVms.Parent" xml:space="preserve">
+  <data name=">>dataGridViewVms.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;dataGridViewVms.ZOrder" xml:space="preserve">
+  <data name=">>dataGridViewVms.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -603,16 +603,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -633,10 +633,10 @@
   <data name="button1.Text" xml:space="preserve">
     <value>button1</value>
   </data>
-  <data name="&gt;&gt;button1.Name" xml:space="preserve">
+  <data name=">>button1.Name" xml:space="preserve">
     <value>button1</value>
   </data>
-  <data name="&gt;&gt;button1.Type" xml:space="preserve">
+  <data name=">>button1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -657,46 +657,46 @@
   <data name="$this.Text" xml:space="preserve">
     <value>高可用性重启优先级</value>
   </data>
-  <data name="&gt;&gt;colImage.Name" xml:space="preserve">
+  <data name=">>colImage.Name" xml:space="preserve">
     <value>colImage</value>
   </data>
-  <data name="&gt;&gt;colImage.Type" xml:space="preserve">
+  <data name=">>colImage.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;colVm.Name" xml:space="preserve">
+  <data name=">>colVm.Name" xml:space="preserve">
     <value>colVm</value>
   </data>
-  <data name="&gt;&gt;colVm.Type" xml:space="preserve">
+  <data name=">>colVm.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;colRestartPriority.Name" xml:space="preserve">
+  <data name=">>colRestartPriority.Name" xml:space="preserve">
     <value>colRestartPriority</value>
   </data>
-  <data name="&gt;&gt;colRestartPriority.Type" xml:space="preserve">
+  <data name=">>colRestartPriority.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;colStartOrder.Name" xml:space="preserve">
+  <data name=">>colStartOrder.Name" xml:space="preserve">
     <value>colStartOrder</value>
   </data>
-  <data name="&gt;&gt;colStartOrder.Type" xml:space="preserve">
+  <data name=">>colStartOrder.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;colDelay.Name" xml:space="preserve">
+  <data name=">>colDelay.Name" xml:space="preserve">
     <value>colDelay</value>
   </data>
-  <data name="&gt;&gt;colDelay.Type" xml:space="preserve">
+  <data name=">>colDelay.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;colAgile.Name" xml:space="preserve">
+  <data name=">>colAgile.Name" xml:space="preserve">
     <value>colAgile</value>
   </data>
-  <data name="&gt;&gt;colAgile.Type" xml:space="preserve">
+  <data name=">>colAgile.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>AssignPriorities</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

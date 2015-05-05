@@ -147,16 +147,16 @@
   <data name="m_labelPwd.Text" xml:space="preserve">
     <value>P&amp;assword:</value>
   </data>
-  <data name="&gt;&gt;m_labelPwd.Name" xml:space="preserve">
+  <data name=">>m_labelPwd.Name" xml:space="preserve">
     <value>m_labelPwd</value>
   </data>
-  <data name="&gt;&gt;m_labelPwd.Type" xml:space="preserve">
+  <data name=">>m_labelPwd.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_labelPwd.Parent" xml:space="preserve">
+  <data name=">>m_labelPwd.Parent" xml:space="preserve">
     <value>m_tableLayoutPanelEncryption</value>
   </data>
-  <data name="&gt;&gt;m_labelPwd.ZOrder" xml:space="preserve">
+  <data name=">>m_labelPwd.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="m_textBoxPwd.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -171,16 +171,16 @@
   <data name="m_textBoxPwd.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
   </data>
-  <data name="&gt;&gt;m_textBoxPwd.Name" xml:space="preserve">
+  <data name=">>m_textBoxPwd.Name" xml:space="preserve">
     <value>m_textBoxPwd</value>
   </data>
-  <data name="&gt;&gt;m_textBoxPwd.Type" xml:space="preserve">
+  <data name=">>m_textBoxPwd.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_textBoxPwd.Parent" xml:space="preserve">
+  <data name=">>m_textBoxPwd.Parent" xml:space="preserve">
     <value>m_tableLayoutPanelEncryption</value>
   </data>
-  <data name="&gt;&gt;m_textBoxPwd.ZOrder" xml:space="preserve">
+  <data name=">>m_textBoxPwd.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="m_textBoxReEnterPwd.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -195,16 +195,16 @@
   <data name="m_textBoxReEnterPwd.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
   </data>
-  <data name="&gt;&gt;m_textBoxReEnterPwd.Name" xml:space="preserve">
+  <data name=">>m_textBoxReEnterPwd.Name" xml:space="preserve">
     <value>m_textBoxReEnterPwd</value>
   </data>
-  <data name="&gt;&gt;m_textBoxReEnterPwd.Type" xml:space="preserve">
+  <data name=">>m_textBoxReEnterPwd.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_textBoxReEnterPwd.Parent" xml:space="preserve">
+  <data name=">>m_textBoxReEnterPwd.Parent" xml:space="preserve">
     <value>m_tableLayoutPanelEncryption</value>
   </data>
-  <data name="&gt;&gt;m_textBoxReEnterPwd.ZOrder" xml:space="preserve">
+  <data name=">>m_textBoxReEnterPwd.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="m_labelReEnterPwd.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -225,16 +225,16 @@
   <data name="m_labelReEnterPwd.Text" xml:space="preserve">
     <value>&amp;Re-enter password:</value>
   </data>
-  <data name="&gt;&gt;m_labelReEnterPwd.Name" xml:space="preserve">
+  <data name=">>m_labelReEnterPwd.Name" xml:space="preserve">
     <value>m_labelReEnterPwd</value>
   </data>
-  <data name="&gt;&gt;m_labelReEnterPwd.Type" xml:space="preserve">
+  <data name=">>m_labelReEnterPwd.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_labelReEnterPwd.Parent" xml:space="preserve">
+  <data name=">>m_labelReEnterPwd.Parent" xml:space="preserve">
     <value>m_tableLayoutPanelEncryption</value>
   </data>
-  <data name="&gt;&gt;m_labelReEnterPwd.ZOrder" xml:space="preserve">
+  <data name=">>m_labelReEnterPwd.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="m_pictureBoxTick.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -249,16 +249,16 @@
   <data name="m_pictureBoxTick.TabIndex" type="System.Int32, mscorlib">
     <value>55</value>
   </data>
-  <data name="&gt;&gt;m_pictureBoxTick.Name" xml:space="preserve">
+  <data name=">>m_pictureBoxTick.Name" xml:space="preserve">
     <value>m_pictureBoxTick</value>
   </data>
-  <data name="&gt;&gt;m_pictureBoxTick.Type" xml:space="preserve">
+  <data name=">>m_pictureBoxTick.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_pictureBoxTick.Parent" xml:space="preserve">
+  <data name=">>m_pictureBoxTick.Parent" xml:space="preserve">
     <value>m_tableLayoutPanelEncryption</value>
   </data>
-  <data name="&gt;&gt;m_pictureBoxTick.ZOrder" xml:space="preserve">
+  <data name=">>m_pictureBoxTick.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="m_labelStrength.AutoSize" type="System.Boolean, mscorlib">
@@ -282,16 +282,16 @@
   <data name="m_labelStrength.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;m_labelStrength.Name" xml:space="preserve">
+  <data name=">>m_labelStrength.Name" xml:space="preserve">
     <value>m_labelStrength</value>
   </data>
-  <data name="&gt;&gt;m_labelStrength.Type" xml:space="preserve">
+  <data name=">>m_labelStrength.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_labelStrength.Parent" xml:space="preserve">
+  <data name=">>m_labelStrength.Parent" xml:space="preserve">
     <value>m_tableLayoutPanelEncryption</value>
   </data>
-  <data name="&gt;&gt;m_labelStrength.ZOrder" xml:space="preserve">
+  <data name=">>m_labelStrength.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="m_tableLayoutPanelEncryption.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -309,16 +309,16 @@
   <data name="m_tableLayoutPanelEncryption.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;m_tableLayoutPanelEncryption.Name" xml:space="preserve">
+  <data name=">>m_tableLayoutPanelEncryption.Name" xml:space="preserve">
     <value>m_tableLayoutPanelEncryption</value>
   </data>
-  <data name="&gt;&gt;m_tableLayoutPanelEncryption.Type" xml:space="preserve">
+  <data name=">>m_tableLayoutPanelEncryption.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_tableLayoutPanelEncryption.Parent" xml:space="preserve">
+  <data name=">>m_tableLayoutPanelEncryption.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;m_tableLayoutPanelEncryption.ZOrder" xml:space="preserve">
+  <data name=">>m_tableLayoutPanelEncryption.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="m_tableLayoutPanelEncryption.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -336,16 +336,16 @@
   <data name="m_checkBoxEncrypt.Text" xml:space="preserve">
     <value>&amp;Encrypt the exported file(s)</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxEncrypt.Name" xml:space="preserve">
+  <data name=">>m_checkBoxEncrypt.Name" xml:space="preserve">
     <value>m_checkBoxEncrypt</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxEncrypt.Type" xml:space="preserve">
+  <data name=">>m_checkBoxEncrypt.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxEncrypt.Parent" xml:space="preserve">
+  <data name=">>m_checkBoxEncrypt.Parent" xml:space="preserve">
     <value>m_tableLayoutPanelEncryption</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxEncrypt.ZOrder" xml:space="preserve">
+  <data name=">>m_checkBoxEncrypt.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="m_checkBoxManifest.AutoSize" type="System.Boolean, mscorlib">
@@ -363,16 +363,16 @@
   <data name="m_checkBoxManifest.Text" xml:space="preserve">
     <value>Create a &amp;manifest</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxManifest.Name" xml:space="preserve">
+  <data name=">>m_checkBoxManifest.Name" xml:space="preserve">
     <value>m_checkBoxManifest</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxManifest.Type" xml:space="preserve">
+  <data name=">>m_checkBoxManifest.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxManifest.Parent" xml:space="preserve">
+  <data name=">>m_checkBoxManifest.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxManifest.ZOrder" xml:space="preserve">
+  <data name=">>m_checkBoxManifest.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
@@ -399,16 +399,16 @@
   <data name="m_checkBoxCompressFiles.Text" xml:space="preserve">
     <value>C&amp;ompress OVF files</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxCompressFiles.Name" xml:space="preserve">
+  <data name=">>m_checkBoxCompressFiles.Name" xml:space="preserve">
     <value>m_checkBoxCompressFiles</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxCompressFiles.Type" xml:space="preserve">
+  <data name=">>m_checkBoxCompressFiles.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxCompressFiles.Parent" xml:space="preserve">
+  <data name=">>m_checkBoxCompressFiles.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxCompressFiles.ZOrder" xml:space="preserve">
+  <data name=">>m_checkBoxCompressFiles.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="m_checkBoxCreateOVA.AutoSize" type="System.Boolean, mscorlib">
@@ -432,16 +432,16 @@
   <data name="m_checkBoxCreateOVA.Text" xml:space="preserve">
     <value>Create OVA pac&amp;kage (single OVA export file)</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxCreateOVA.Name" xml:space="preserve">
+  <data name=">>m_checkBoxCreateOVA.Name" xml:space="preserve">
     <value>m_checkBoxCreateOVA</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxCreateOVA.Type" xml:space="preserve">
+  <data name=">>m_checkBoxCreateOVA.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxCreateOVA.Parent" xml:space="preserve">
+  <data name=">>m_checkBoxCreateOVA.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxCreateOVA.ZOrder" xml:space="preserve">
+  <data name=">>m_checkBoxCreateOVA.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="sectionHeaderLabel3.AutoSize" type="System.Boolean, mscorlib">
@@ -471,16 +471,16 @@
   <data name="sectionHeaderLabel3.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;sectionHeaderLabel3.Name" xml:space="preserve">
+  <data name=">>sectionHeaderLabel3.Name" xml:space="preserve">
     <value>sectionHeaderLabel3</value>
   </data>
-  <data name="&gt;&gt;sectionHeaderLabel3.Type" xml:space="preserve">
+  <data name=">>sectionHeaderLabel3.Type" xml:space="preserve">
     <value>XenAdmin.Controls.SectionHeaderLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;sectionHeaderLabel3.Parent" xml:space="preserve">
+  <data name=">>sectionHeaderLabel3.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;sectionHeaderLabel3.ZOrder" xml:space="preserve">
+  <data name=">>sectionHeaderLabel3.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="sectionHeaderLabel2.AutoSize" type="System.Boolean, mscorlib">
@@ -510,16 +510,16 @@
   <data name="sectionHeaderLabel2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;sectionHeaderLabel2.Name" xml:space="preserve">
+  <data name=">>sectionHeaderLabel2.Name" xml:space="preserve">
     <value>sectionHeaderLabel2</value>
   </data>
-  <data name="&gt;&gt;sectionHeaderLabel2.Type" xml:space="preserve">
+  <data name=">>sectionHeaderLabel2.Type" xml:space="preserve">
     <value>XenAdmin.Controls.SectionHeaderLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;sectionHeaderLabel2.Parent" xml:space="preserve">
+  <data name=">>sectionHeaderLabel2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;sectionHeaderLabel2.ZOrder" xml:space="preserve">
+  <data name=">>sectionHeaderLabel2.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="sectionHeaderLabel1.AutoSize" type="System.Boolean, mscorlib">
@@ -549,16 +549,16 @@
   <data name="sectionHeaderLabel1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;sectionHeaderLabel1.Name" xml:space="preserve">
+  <data name=">>sectionHeaderLabel1.Name" xml:space="preserve">
     <value>sectionHeaderLabel1</value>
   </data>
-  <data name="&gt;&gt;sectionHeaderLabel1.Type" xml:space="preserve">
+  <data name=">>sectionHeaderLabel1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.SectionHeaderLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;sectionHeaderLabel1.Parent" xml:space="preserve">
+  <data name=">>sectionHeaderLabel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;sectionHeaderLabel1.ZOrder" xml:space="preserve">
+  <data name=">>sectionHeaderLabel1.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="tableLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
@@ -597,16 +597,16 @@
   <data name="m_labelCertificate.Text" xml:space="preserve">
     <value>&amp;Certificate path:</value>
   </data>
-  <data name="&gt;&gt;m_labelCertificate.Name" xml:space="preserve">
+  <data name=">>m_labelCertificate.Name" xml:space="preserve">
     <value>m_labelCertificate</value>
   </data>
-  <data name="&gt;&gt;m_labelCertificate.Type" xml:space="preserve">
+  <data name=">>m_labelCertificate.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_labelCertificate.Parent" xml:space="preserve">
+  <data name=">>m_labelCertificate.Parent" xml:space="preserve">
     <value>m_tableLayoutPanelManifest</value>
   </data>
-  <data name="&gt;&gt;m_labelCertificate.ZOrder" xml:space="preserve">
+  <data name=">>m_labelCertificate.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="m_labelPrivateKeyPwd.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -630,16 +630,16 @@
   <data name="m_labelPrivateKeyPwd.Text" xml:space="preserve">
     <value>Private key pass&amp;word:</value>
   </data>
-  <data name="&gt;&gt;m_labelPrivateKeyPwd.Name" xml:space="preserve">
+  <data name=">>m_labelPrivateKeyPwd.Name" xml:space="preserve">
     <value>m_labelPrivateKeyPwd</value>
   </data>
-  <data name="&gt;&gt;m_labelPrivateKeyPwd.Type" xml:space="preserve">
+  <data name=">>m_labelPrivateKeyPwd.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_labelPrivateKeyPwd.Parent" xml:space="preserve">
+  <data name=">>m_labelPrivateKeyPwd.Parent" xml:space="preserve">
     <value>m_tableLayoutPanelManifest</value>
   </data>
-  <data name="&gt;&gt;m_labelPrivateKeyPwd.ZOrder" xml:space="preserve">
+  <data name=">>m_labelPrivateKeyPwd.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="m_checkBoxSign.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -663,16 +663,16 @@
   <data name="m_checkBoxSign.Text" xml:space="preserve">
     <value>&amp;Sign the OVF package</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxSign.Name" xml:space="preserve">
+  <data name=">>m_checkBoxSign.Name" xml:space="preserve">
     <value>m_checkBoxSign</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxSign.Type" xml:space="preserve">
+  <data name=">>m_checkBoxSign.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxSign.Parent" xml:space="preserve">
+  <data name=">>m_checkBoxSign.Parent" xml:space="preserve">
     <value>m_tableLayoutPanelManifest</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxSign.ZOrder" xml:space="preserve">
+  <data name=">>m_checkBoxSign.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="m_buttonBrowseCert.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -690,16 +690,16 @@
   <data name="m_buttonBrowseCert.Text" xml:space="preserve">
     <value>&amp;Browse...</value>
   </data>
-  <data name="&gt;&gt;m_buttonBrowseCert.Name" xml:space="preserve">
+  <data name=">>m_buttonBrowseCert.Name" xml:space="preserve">
     <value>m_buttonBrowseCert</value>
   </data>
-  <data name="&gt;&gt;m_buttonBrowseCert.Type" xml:space="preserve">
+  <data name=">>m_buttonBrowseCert.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_buttonBrowseCert.Parent" xml:space="preserve">
+  <data name=">>m_buttonBrowseCert.Parent" xml:space="preserve">
     <value>m_tableLayoutPanelManifest</value>
   </data>
-  <data name="&gt;&gt;m_buttonBrowseCert.ZOrder" xml:space="preserve">
+  <data name=">>m_buttonBrowseCert.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="m_textBoxPrivateKeyPwd.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -714,16 +714,16 @@
   <data name="m_textBoxPrivateKeyPwd.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
   </data>
-  <data name="&gt;&gt;m_textBoxPrivateKeyPwd.Name" xml:space="preserve">
+  <data name=">>m_textBoxPrivateKeyPwd.Name" xml:space="preserve">
     <value>m_textBoxPrivateKeyPwd</value>
   </data>
-  <data name="&gt;&gt;m_textBoxPrivateKeyPwd.Type" xml:space="preserve">
+  <data name=">>m_textBoxPrivateKeyPwd.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_textBoxPrivateKeyPwd.Parent" xml:space="preserve">
+  <data name=">>m_textBoxPrivateKeyPwd.Parent" xml:space="preserve">
     <value>m_tableLayoutPanelManifest</value>
   </data>
-  <data name="&gt;&gt;m_textBoxPrivateKeyPwd.ZOrder" xml:space="preserve">
+  <data name=">>m_textBoxPrivateKeyPwd.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="m_textBoxCertificate.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -738,16 +738,16 @@
   <data name="m_textBoxCertificate.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
   </data>
-  <data name="&gt;&gt;m_textBoxCertificate.Name" xml:space="preserve">
+  <data name=">>m_textBoxCertificate.Name" xml:space="preserve">
     <value>m_textBoxCertificate</value>
   </data>
-  <data name="&gt;&gt;m_textBoxCertificate.Type" xml:space="preserve">
+  <data name=">>m_textBoxCertificate.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_textBoxCertificate.Parent" xml:space="preserve">
+  <data name=">>m_textBoxCertificate.Parent" xml:space="preserve">
     <value>m_tableLayoutPanelManifest</value>
   </data>
-  <data name="&gt;&gt;m_textBoxCertificate.ZOrder" xml:space="preserve">
+  <data name=">>m_textBoxCertificate.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="m_ctrlErrorCert.AutoSize" type="System.Boolean, mscorlib">
@@ -774,16 +774,16 @@
   <data name="m_ctrlErrorCert.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
   </data>
-  <data name="&gt;&gt;m_ctrlErrorCert.Name" xml:space="preserve">
+  <data name=">>m_ctrlErrorCert.Name" xml:space="preserve">
     <value>m_ctrlErrorCert</value>
   </data>
-  <data name="&gt;&gt;m_ctrlErrorCert.Type" xml:space="preserve">
+  <data name=">>m_ctrlErrorCert.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.PasswordFailure, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;m_ctrlErrorCert.Parent" xml:space="preserve">
+  <data name=">>m_ctrlErrorCert.Parent" xml:space="preserve">
     <value>m_tableLayoutPanelManifest</value>
   </data>
-  <data name="&gt;&gt;m_ctrlErrorCert.ZOrder" xml:space="preserve">
+  <data name=">>m_ctrlErrorCert.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="m_buttonValidate.Location" type="System.Drawing.Point, System.Drawing">
@@ -798,16 +798,16 @@
   <data name="m_buttonValidate.Text" xml:space="preserve">
     <value>&amp;Validate</value>
   </data>
-  <data name="&gt;&gt;m_buttonValidate.Name" xml:space="preserve">
+  <data name=">>m_buttonValidate.Name" xml:space="preserve">
     <value>m_buttonValidate</value>
   </data>
-  <data name="&gt;&gt;m_buttonValidate.Type" xml:space="preserve">
+  <data name=">>m_buttonValidate.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_buttonValidate.Parent" xml:space="preserve">
+  <data name=">>m_buttonValidate.Parent" xml:space="preserve">
     <value>m_tableLayoutPanelManifest</value>
   </data>
-  <data name="&gt;&gt;m_buttonValidate.ZOrder" xml:space="preserve">
+  <data name=">>m_buttonValidate.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="m_pictureBoxTickValidate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -822,16 +822,16 @@
   <data name="m_pictureBoxTickValidate.TabIndex" type="System.Int32, mscorlib">
     <value>62</value>
   </data>
-  <data name="&gt;&gt;m_pictureBoxTickValidate.Name" xml:space="preserve">
+  <data name=">>m_pictureBoxTickValidate.Name" xml:space="preserve">
     <value>m_pictureBoxTickValidate</value>
   </data>
-  <data name="&gt;&gt;m_pictureBoxTickValidate.Type" xml:space="preserve">
+  <data name=">>m_pictureBoxTickValidate.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_pictureBoxTickValidate.Parent" xml:space="preserve">
+  <data name=">>m_pictureBoxTickValidate.Parent" xml:space="preserve">
     <value>m_tableLayoutPanelManifest</value>
   </data>
-  <data name="&gt;&gt;m_pictureBoxTickValidate.ZOrder" xml:space="preserve">
+  <data name=">>m_pictureBoxTickValidate.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="m_tableLayoutPanelManifest.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -849,16 +849,16 @@
   <data name="m_tableLayoutPanelManifest.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;m_tableLayoutPanelManifest.Name" xml:space="preserve">
+  <data name=">>m_tableLayoutPanelManifest.Name" xml:space="preserve">
     <value>m_tableLayoutPanelManifest</value>
   </data>
-  <data name="&gt;&gt;m_tableLayoutPanelManifest.Type" xml:space="preserve">
+  <data name=">>m_tableLayoutPanelManifest.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_tableLayoutPanelManifest.Parent" xml:space="preserve">
+  <data name=">>m_tableLayoutPanelManifest.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;m_tableLayoutPanelManifest.ZOrder" xml:space="preserve">
+  <data name=">>m_tableLayoutPanelManifest.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="m_tableLayoutPanelManifest.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -879,16 +879,16 @@
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -909,16 +909,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -936,10 +936,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>594, 370</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>ExportOptionsPage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Wizards.GenericPages.ImExPortPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

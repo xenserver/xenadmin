@@ -138,16 +138,16 @@
   <data name="labelRubric.Text" xml:space="preserve">
     <value>この VM に仮想 GPU (vGPU) を割り当てて、グラフィック パフォーマンスを向上させることができます。</value>
   </data>
-  <data name="&gt;&gt;labelRubric.Name" xml:space="preserve">
+  <data name=">>labelRubric.Name" xml:space="preserve">
     <value>labelRubric</value>
   </data>
-  <data name="&gt;&gt;labelRubric.Type" xml:space="preserve">
+  <data name=">>labelRubric.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelRubric.Parent" xml:space="preserve">
+  <data name=">>labelRubric.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelRubric.ZOrder" xml:space="preserve">
+  <data name=">>labelRubric.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="warningsTable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -171,16 +171,16 @@
   <data name="imgRDP.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;imgRDP.Name" xml:space="preserve">
+  <data name=">>imgRDP.Name" xml:space="preserve">
     <value>imgRDP</value>
   </data>
-  <data name="&gt;&gt;imgRDP.Type" xml:space="preserve">
+  <data name=">>imgRDP.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;imgRDP.Parent" xml:space="preserve">
+  <data name=">>imgRDP.Parent" xml:space="preserve">
     <value>warningsTable</value>
   </data>
-  <data name="&gt;&gt;imgRDP.ZOrder" xml:space="preserve">
+  <data name=">>imgRDP.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelRDP.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -210,16 +210,16 @@
   <data name="labelRDP.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;labelRDP.Name" xml:space="preserve">
+  <data name=">>labelRDP.Name" xml:space="preserve">
     <value>labelRDP</value>
   </data>
-  <data name="&gt;&gt;labelRDP.Type" xml:space="preserve">
+  <data name=">>labelRDP.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelRDP.Parent" xml:space="preserve">
+  <data name=">>labelRDP.Parent" xml:space="preserve">
     <value>warningsTable</value>
   </data>
-  <data name="&gt;&gt;labelRDP.ZOrder" xml:space="preserve">
+  <data name=">>labelRDP.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="imgNeedDriver.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -234,16 +234,16 @@
   <data name="imgNeedDriver.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;imgNeedDriver.Name" xml:space="preserve">
+  <data name=">>imgNeedDriver.Name" xml:space="preserve">
     <value>imgNeedDriver</value>
   </data>
-  <data name="&gt;&gt;imgNeedDriver.Type" xml:space="preserve">
+  <data name=">>imgNeedDriver.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;imgNeedDriver.Parent" xml:space="preserve">
+  <data name=">>imgNeedDriver.Parent" xml:space="preserve">
     <value>warningsTable</value>
   </data>
-  <data name="&gt;&gt;imgNeedDriver.ZOrder" xml:space="preserve">
+  <data name=">>imgNeedDriver.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="labelNeedDriver.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -270,16 +270,16 @@
   <data name="labelNeedDriver.Text" xml:space="preserve">
     <value>この VM に、適切なグラフィック カード ドライバーをインストールしておく必要があります。</value>
   </data>
-  <data name="&gt;&gt;labelNeedDriver.Name" xml:space="preserve">
+  <data name=">>labelNeedDriver.Name" xml:space="preserve">
     <value>labelNeedDriver</value>
   </data>
-  <data name="&gt;&gt;labelNeedDriver.Type" xml:space="preserve">
+  <data name=">>labelNeedDriver.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelNeedDriver.Parent" xml:space="preserve">
+  <data name=">>labelNeedDriver.Parent" xml:space="preserve">
     <value>warningsTable</value>
   </data>
-  <data name="&gt;&gt;labelNeedDriver.ZOrder" xml:space="preserve">
+  <data name=">>labelNeedDriver.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="imgNeedGpu.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -297,16 +297,16 @@
   <data name="imgNeedGpu.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;imgNeedGpu.Name" xml:space="preserve">
+  <data name=">>imgNeedGpu.Name" xml:space="preserve">
     <value>imgNeedGpu</value>
   </data>
-  <data name="&gt;&gt;imgNeedGpu.Type" xml:space="preserve">
+  <data name=">>imgNeedGpu.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;imgNeedGpu.Parent" xml:space="preserve">
+  <data name=">>imgNeedGpu.Parent" xml:space="preserve">
     <value>warningsTable</value>
   </data>
-  <data name="&gt;&gt;imgNeedGpu.ZOrder" xml:space="preserve">
+  <data name=">>imgNeedGpu.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="labelNeedGpu.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -336,16 +336,16 @@
   <data name="labelNeedGpu.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;labelNeedGpu.Name" xml:space="preserve">
+  <data name=">>labelNeedGpu.Name" xml:space="preserve">
     <value>labelNeedGpu</value>
   </data>
-  <data name="&gt;&gt;labelNeedGpu.Type" xml:space="preserve">
+  <data name=">>labelNeedGpu.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelNeedGpu.Parent" xml:space="preserve">
+  <data name=">>labelNeedGpu.Parent" xml:space="preserve">
     <value>warningsTable</value>
   </data>
-  <data name="&gt;&gt;labelNeedGpu.ZOrder" xml:space="preserve">
+  <data name=">>labelNeedGpu.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="imgStopVM.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -363,16 +363,16 @@
   <data name="imgStopVM.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;imgStopVM.Name" xml:space="preserve">
+  <data name=">>imgStopVM.Name" xml:space="preserve">
     <value>imgStopVM</value>
   </data>
-  <data name="&gt;&gt;imgStopVM.Type" xml:space="preserve">
+  <data name=">>imgStopVM.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;imgStopVM.Parent" xml:space="preserve">
+  <data name=">>imgStopVM.Parent" xml:space="preserve">
     <value>warningsTable</value>
   </data>
-  <data name="&gt;&gt;imgStopVM.ZOrder" xml:space="preserve">
+  <data name=">>imgStopVM.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="labelStopVM.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -402,16 +402,16 @@
   <data name="labelStopVM.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;labelStopVM.Name" xml:space="preserve">
+  <data name=">>labelStopVM.Name" xml:space="preserve">
     <value>labelStopVM</value>
   </data>
-  <data name="&gt;&gt;labelStopVM.Type" xml:space="preserve">
+  <data name=">>labelStopVM.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelStopVM.Parent" xml:space="preserve">
+  <data name=">>labelStopVM.Parent" xml:space="preserve">
     <value>warningsTable</value>
   </data>
-  <data name="&gt;&gt;labelStopVM.ZOrder" xml:space="preserve">
+  <data name=">>labelStopVM.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="imgHA.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -429,16 +429,16 @@
   <data name="imgHA.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;imgHA.Name" xml:space="preserve">
+  <data name=">>imgHA.Name" xml:space="preserve">
     <value>imgHA</value>
   </data>
-  <data name="&gt;&gt;imgHA.Type" xml:space="preserve">
+  <data name=">>imgHA.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;imgHA.Parent" xml:space="preserve">
+  <data name=">>imgHA.Parent" xml:space="preserve">
     <value>warningsTable</value>
   </data>
-  <data name="&gt;&gt;imgHA.ZOrder" xml:space="preserve">
+  <data name=">>imgHA.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="labelHA.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -468,16 +468,16 @@
   <data name="labelHA.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;labelHA.Name" xml:space="preserve">
+  <data name=">>labelHA.Name" xml:space="preserve">
     <value>labelHA</value>
   </data>
-  <data name="&gt;&gt;labelHA.Type" xml:space="preserve">
+  <data name=">>labelHA.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelHA.Parent" xml:space="preserve">
+  <data name=">>labelHA.Parent" xml:space="preserve">
     <value>warningsTable</value>
   </data>
-  <data name="&gt;&gt;labelHA.ZOrder" xml:space="preserve">
+  <data name=">>labelHA.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="warningsTable.Location" type="System.Drawing.Point, System.Drawing">
@@ -492,16 +492,16 @@
   <data name="warningsTable.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;warningsTable.Name" xml:space="preserve">
+  <data name=">>warningsTable.Name" xml:space="preserve">
     <value>warningsTable</value>
   </data>
-  <data name="&gt;&gt;warningsTable.Type" xml:space="preserve">
+  <data name=">>warningsTable.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;warningsTable.Parent" xml:space="preserve">
+  <data name=">>warningsTable.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;warningsTable.ZOrder" xml:space="preserve">
+  <data name=">>warningsTable.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="warningsTable.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -537,16 +537,16 @@
   <data name="labelGpuType.Text" xml:space="preserve">
     <value>GPU の種類(&amp;G):</value>
   </data>
-  <data name="&gt;&gt;labelGpuType.Name" xml:space="preserve">
+  <data name=">>labelGpuType.Name" xml:space="preserve">
     <value>labelGpuType</value>
   </data>
-  <data name="&gt;&gt;labelGpuType.Type" xml:space="preserve">
+  <data name=">>labelGpuType.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelGpuType.Parent" xml:space="preserve">
+  <data name=">>labelGpuType.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelGpuType.ZOrder" xml:space="preserve">
+  <data name=">>labelGpuType.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="comboBoxGpus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -564,16 +564,16 @@
   <data name="comboBoxGpus.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;comboBoxGpus.Name" xml:space="preserve">
+  <data name=">>comboBoxGpus.Name" xml:space="preserve">
     <value>comboBoxGpus</value>
   </data>
-  <data name="&gt;&gt;comboBoxGpus.Type" xml:space="preserve">
+  <data name=">>comboBoxGpus.Type" xml:space="preserve">
     <value>XenAdmin.Controls.VgpuComboBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;comboBoxGpus.Parent" xml:space="preserve">
+  <data name=">>comboBoxGpus.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;comboBoxGpus.ZOrder" xml:space="preserve">
+  <data name=">>comboBoxGpus.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
@@ -588,16 +588,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -612,10 +612,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>631, 450</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>GpuEditPage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

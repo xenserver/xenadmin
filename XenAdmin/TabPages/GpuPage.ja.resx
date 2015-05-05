@@ -128,16 +128,16 @@
   <data name="pageContainerPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>608, 194</value>
   </data>
-  <data name="&gt;&gt;pageContainerPanel.Name" xml:space="preserve">
+  <data name=">>pageContainerPanel.Name" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name="&gt;&gt;pageContainerPanel.Type" xml:space="preserve">
+  <data name=">>pageContainerPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pageContainerPanel.Parent" xml:space="preserve">
+  <data name=">>pageContainerPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;pageContainerPanel.ZOrder" xml:space="preserve">
+  <data name=">>pageContainerPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="gpuPlacementPolicyPanel1.AutoScroll" type="System.Boolean, mscorlib">
@@ -168,16 +168,16 @@
   <data name="gpuPlacementPolicyPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;gpuPlacementPolicyPanel1.Name" xml:space="preserve">
+  <data name=">>gpuPlacementPolicyPanel1.Name" xml:space="preserve">
     <value>gpuPlacementPolicyPanel1</value>
   </data>
-  <data name="&gt;&gt;gpuPlacementPolicyPanel1.Type" xml:space="preserve">
+  <data name=">>gpuPlacementPolicyPanel1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.GpuPlacementPolicyPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;gpuPlacementPolicyPanel1.Parent" xml:space="preserve">
+  <data name=">>gpuPlacementPolicyPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;gpuPlacementPolicyPanel1.ZOrder" xml:space="preserve">
+  <data name=">>gpuPlacementPolicyPanel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -189,10 +189,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>608, 339</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>GpuPage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.TabPages.BaseTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

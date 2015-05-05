@@ -138,16 +138,16 @@
   <data name="findConsoleButton.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;findConsoleButton.Name" xml:space="preserve">
+  <data name=">>findConsoleButton.Name" xml:space="preserve">
     <value>findConsoleButton</value>
   </data>
-  <data name="&gt;&gt;findConsoleButton.Type" xml:space="preserve">
+  <data name=">>findConsoleButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;findConsoleButton.Parent" xml:space="preserve">
+  <data name=">>findConsoleButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;findConsoleButton.ZOrder" xml:space="preserve">
+  <data name=">>findConsoleButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="reattachConsoleButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -168,16 +168,16 @@
   <data name="reattachConsoleButton.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;reattachConsoleButton.Name" xml:space="preserve">
+  <data name=">>reattachConsoleButton.Name" xml:space="preserve">
     <value>reattachConsoleButton</value>
   </data>
-  <data name="&gt;&gt;reattachConsoleButton.Type" xml:space="preserve">
+  <data name=">>reattachConsoleButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;reattachConsoleButton.Parent" xml:space="preserve">
+  <data name=">>reattachConsoleButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;reattachConsoleButton.ZOrder" xml:space="preserve">
+  <data name=">>reattachConsoleButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -189,10 +189,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 59</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>VNCView</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

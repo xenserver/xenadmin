@@ -159,16 +159,16 @@
   <data name="m_linkCertificate.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;m_linkCertificate.Name" xml:space="preserve">
+  <data name=">>m_linkCertificate.Name" xml:space="preserve">
     <value>m_linkCertificate</value>
   </data>
-  <data name="&gt;&gt;m_linkCertificate.Type" xml:space="preserve">
+  <data name=">>m_linkCertificate.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_linkCertificate.Parent" xml:space="preserve">
+  <data name=">>m_linkCertificate.Parent" xml:space="preserve">
     <value>m_tlpManifest</value>
   </data>
-  <data name="&gt;&gt;m_linkCertificate.ZOrder" xml:space="preserve">
+  <data name=">>m_linkCertificate.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="m_checkBoxVerify.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -192,16 +192,16 @@
   <data name="m_checkBoxVerify.Text" xml:space="preserve">
     <value>checkBoxVerify</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxVerify.Name" xml:space="preserve">
+  <data name=">>m_checkBoxVerify.Name" xml:space="preserve">
     <value>m_checkBoxVerify</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxVerify.Type" xml:space="preserve">
+  <data name=">>m_checkBoxVerify.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxVerify.Parent" xml:space="preserve">
+  <data name=">>m_checkBoxVerify.Parent" xml:space="preserve">
     <value>m_tlpManifest</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxVerify.ZOrder" xml:space="preserve">
+  <data name=">>m_checkBoxVerify.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="m_tlpManifest.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -219,16 +219,16 @@
   <data name="m_tlpManifest.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;m_tlpManifest.Name" xml:space="preserve">
+  <data name=">>m_tlpManifest.Name" xml:space="preserve">
     <value>m_tlpManifest</value>
   </data>
-  <data name="&gt;&gt;m_tlpManifest.Type" xml:space="preserve">
+  <data name=">>m_tlpManifest.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_tlpManifest.Parent" xml:space="preserve">
+  <data name=">>m_tlpManifest.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;m_tlpManifest.ZOrder" xml:space="preserve">
+  <data name=">>m_tlpManifest.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="m_tlpManifest.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -252,16 +252,16 @@
   <data name="m_labelVerify.Text" xml:space="preserve">
     <value>labelVerify</value>
   </data>
-  <data name="&gt;&gt;m_labelVerify.Name" xml:space="preserve">
+  <data name=">>m_labelVerify.Name" xml:space="preserve">
     <value>m_labelVerify</value>
   </data>
-  <data name="&gt;&gt;m_labelVerify.Type" xml:space="preserve">
+  <data name=">>m_labelVerify.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;m_labelVerify.Parent" xml:space="preserve">
+  <data name=">>m_labelVerify.Parent" xml:space="preserve">
     <value>m_tlpManifest</value>
   </data>
-  <data name="&gt;&gt;m_labelVerify.ZOrder" xml:space="preserve">
+  <data name=">>m_labelVerify.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="lblSecurityIntro.AutoSize" type="System.Boolean, mscorlib">
@@ -282,16 +282,16 @@
   <data name="lblSecurityIntro.Text" xml:space="preserve">
     <value>インポートする OVF/OVA パッケージを検証するためのセキュリティ設定です。</value>
   </data>
-  <data name="&gt;&gt;lblSecurityIntro.Name" xml:space="preserve">
+  <data name=">>lblSecurityIntro.Name" xml:space="preserve">
     <value>lblSecurityIntro</value>
   </data>
-  <data name="&gt;&gt;lblSecurityIntro.Type" xml:space="preserve">
+  <data name=">>lblSecurityIntro.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblSecurityIntro.Parent" xml:space="preserve">
+  <data name=">>lblSecurityIntro.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;lblSecurityIntro.ZOrder" xml:space="preserve">
+  <data name=">>lblSecurityIntro.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
@@ -321,16 +321,16 @@
   <data name="m_ctrlError.TabIndex" type="System.Int32, mscorlib">
     <value>66</value>
   </data>
-  <data name="&gt;&gt;m_ctrlError.Name" xml:space="preserve">
+  <data name=">>m_ctrlError.Name" xml:space="preserve">
     <value>m_ctrlError</value>
   </data>
-  <data name="&gt;&gt;m_ctrlError.Type" xml:space="preserve">
+  <data name=">>m_ctrlError.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.PasswordFailure, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;m_ctrlError.Parent" xml:space="preserve">
+  <data name=">>m_ctrlError.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;m_ctrlError.ZOrder" xml:space="preserve">
+  <data name=">>m_ctrlError.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -348,16 +348,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>66</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -372,10 +372,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>515, 286</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>ImportSecurityPage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Wizards.GenericPages.ImExPortPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

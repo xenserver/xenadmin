@@ -141,16 +141,16 @@
   <data name="MB.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;MB.Name" xml:space="preserve">
+  <data name=">>MB.Name" xml:space="preserve">
     <value>MB</value>
   </data>
-  <data name="&gt;&gt;MB.Type" xml:space="preserve">
+  <data name=">>MB.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;MB.Parent" xml:space="preserve">
+  <data name=">>MB.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;MB.ZOrder" xml:space="preserve">
+  <data name=">>MB.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="Spinner.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -171,16 +171,16 @@
   <data name="Spinner.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="&gt;&gt;Spinner.Name" xml:space="preserve">
+  <data name=">>Spinner.Name" xml:space="preserve">
     <value>Spinner</value>
   </data>
-  <data name="&gt;&gt;Spinner.Type" xml:space="preserve">
+  <data name=">>Spinner.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Spinner.Parent" xml:space="preserve">
+  <data name=">>Spinner.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Spinner.ZOrder" xml:space="preserve">
+  <data name=">>Spinner.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="NameLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -201,16 +201,16 @@
   <data name="NameLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;NameLabel.Name" xml:space="preserve">
+  <data name=">>NameLabel.Name" xml:space="preserve">
     <value>NameLabel</value>
   </data>
-  <data name="&gt;&gt;NameLabel.Type" xml:space="preserve">
+  <data name=">>NameLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;NameLabel.Parent" xml:space="preserve">
+  <data name=">>NameLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;NameLabel.ZOrder" xml:space="preserve">
+  <data name=">>NameLabel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="iconBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -228,16 +228,16 @@
   <data name="iconBox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;iconBox.Name" xml:space="preserve">
+  <data name=">>iconBox.Name" xml:space="preserve">
     <value>iconBox</value>
   </data>
-  <data name="&gt;&gt;iconBox.Type" xml:space="preserve">
+  <data name=">>iconBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;iconBox.Parent" xml:space="preserve">
+  <data name=">>iconBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;iconBox.ZOrder" xml:space="preserve">
+  <data name=">>iconBox.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -252,10 +252,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>220, 25</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>MemorySpinner</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

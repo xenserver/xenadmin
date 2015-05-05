@@ -144,16 +144,16 @@
   <data name="titleLabel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;titleLabel.Name" xml:space="preserve">
+  <data name=">>titleLabel.Name" xml:space="preserve">
     <value>titleLabel</value>
   </data>
-  <data name="&gt;&gt;titleLabel.Type" xml:space="preserve">
+  <data name=">>titleLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;titleLabel.Parent" xml:space="preserve">
+  <data name=">>titleLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;titleLabel.ZOrder" xml:space="preserve">
+  <data name=">>titleLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="information.AutoSize" type="System.Boolean, mscorlib">
@@ -171,16 +171,16 @@
   <data name="information.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;information.Name" xml:space="preserve">
+  <data name=">>information.Name" xml:space="preserve">
     <value>information</value>
   </data>
-  <data name="&gt;&gt;information.Type" xml:space="preserve">
+  <data name=">>information.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;information.Parent" xml:space="preserve">
+  <data name=">>information.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;information.ZOrder" xml:space="preserve">
+  <data name=">>information.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
@@ -201,16 +201,16 @@
   <data name="warningIcon.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;warningIcon.Name" xml:space="preserve">
+  <data name=">>warningIcon.Name" xml:space="preserve">
     <value>warningIcon</value>
   </data>
-  <data name="&gt;&gt;warningIcon.Type" xml:space="preserve">
+  <data name=">>warningIcon.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;warningIcon.Parent" xml:space="preserve">
+  <data name=">>warningIcon.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;warningIcon.ZOrder" xml:space="preserve">
+  <data name=">>warningIcon.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="warningText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -231,16 +231,16 @@
   <data name="warningText.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;warningText.Name" xml:space="preserve">
+  <data name=">>warningText.Name" xml:space="preserve">
     <value>warningText</value>
   </data>
-  <data name="&gt;&gt;warningText.Type" xml:space="preserve">
+  <data name=">>warningText.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;warningText.Parent" xml:space="preserve">
+  <data name=">>warningText.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;warningText.ZOrder" xml:space="preserve">
+  <data name=">>warningText.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -261,16 +261,16 @@
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -294,16 +294,16 @@
   <data name="informationImage.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;informationImage.Name" xml:space="preserve">
+  <data name=">>informationImage.Name" xml:space="preserve">
     <value>informationImage</value>
   </data>
-  <data name="&gt;&gt;informationImage.Type" xml:space="preserve">
+  <data name=">>informationImage.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;informationImage.Parent" xml:space="preserve">
+  <data name=">>informationImage.Parent" xml:space="preserve">
     <value>informationLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;informationImage.ZOrder" xml:space="preserve">
+  <data name=">>informationImage.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="informationMessage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -321,16 +321,16 @@
   <data name="informationMessage.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;informationMessage.Name" xml:space="preserve">
+  <data name=">>informationMessage.Name" xml:space="preserve">
     <value>informationMessage</value>
   </data>
-  <data name="&gt;&gt;informationMessage.Type" xml:space="preserve">
+  <data name=">>informationMessage.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;informationMessage.Parent" xml:space="preserve">
+  <data name=">>informationMessage.Parent" xml:space="preserve">
     <value>informationLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;informationMessage.ZOrder" xml:space="preserve">
+  <data name=">>informationMessage.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="informationLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
@@ -345,16 +345,16 @@
   <data name="informationLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;informationLayoutPanel.Name" xml:space="preserve">
+  <data name=">>informationLayoutPanel.Name" xml:space="preserve">
     <value>informationLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;informationLayoutPanel.Type" xml:space="preserve">
+  <data name=">>informationLayoutPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;informationLayoutPanel.Parent" xml:space="preserve">
+  <data name=">>informationLayoutPanel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;informationLayoutPanel.ZOrder" xml:space="preserve">
+  <data name=">>informationLayoutPanel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="informationLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -375,16 +375,16 @@
   <data name="helperLink.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;helperLink.Name" xml:space="preserve">
+  <data name=">>helperLink.Name" xml:space="preserve">
     <value>helperLink</value>
   </data>
-  <data name="&gt;&gt;helperLink.Type" xml:space="preserve">
+  <data name=">>helperLink.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;helperLink.Parent" xml:space="preserve">
+  <data name=">>helperLink.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;helperLink.ZOrder" xml:space="preserve">
+  <data name=">>helperLink.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -402,16 +402,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -426,10 +426,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>235, 295</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>SummaryPanel</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

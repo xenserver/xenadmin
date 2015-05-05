@@ -135,16 +135,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>选择所选池中各服务器的升级方式。请注意，在这两种模式下，向导都将在升级过程开始前执行一系列检查，以确保可以对池中的所有服务器应用升级。</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="radioButtonManual.AutoSize" type="System.Boolean, mscorlib">
@@ -165,16 +165,16 @@
   <data name="radioButtonManual.Text" xml:space="preserve">
     <value>手动模式 – 通过 CD-ROM 或 PXE 手动升级(&amp;M)</value>
   </data>
-  <data name="&gt;&gt;radioButtonManual.Name" xml:space="preserve">
+  <data name=">>radioButtonManual.Name" xml:space="preserve">
     <value>radioButtonManual</value>
   </data>
-  <data name="&gt;&gt;radioButtonManual.Type" xml:space="preserve">
+  <data name=">>radioButtonManual.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButtonManual.Parent" xml:space="preserve">
+  <data name=">>radioButtonManual.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;radioButtonManual.ZOrder" xml:space="preserve">
+  <data name=">>radioButtonManual.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="radioButtonAutomatic.AutoSize" type="System.Boolean, mscorlib">
@@ -195,16 +195,16 @@
   <data name="radioButtonAutomatic.Text" xml:space="preserve">
     <value>自动模式 – 通过网络安装文件自动升级(&amp;A)</value>
   </data>
-  <data name="&gt;&gt;radioButtonAutomatic.Name" xml:space="preserve">
+  <data name=">>radioButtonAutomatic.Name" xml:space="preserve">
     <value>radioButtonAutomatic</value>
   </data>
-  <data name="&gt;&gt;radioButtonAutomatic.Type" xml:space="preserve">
+  <data name=">>radioButtonAutomatic.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButtonAutomatic.Parent" xml:space="preserve">
+  <data name=">>radioButtonAutomatic.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;radioButtonAutomatic.ZOrder" xml:space="preserve">
+  <data name=">>radioButtonAutomatic.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -225,16 +225,16 @@
   <data name="label3.Text" xml:space="preserve">
     <value>在手动模式下，必须从 CD-ROM 或 PXE 网络启动运行 XenServer 安装程序并按照服务器控制台中的安装程序屏幕说明进行操作，从而依次对每个服务器手动应用升级。</value>
   </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+  <data name=">>label3.Name" xml:space="preserve">
     <value>label3</value>
   </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+  <data name=">>label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+  <data name=">>label3.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+  <data name=">>label3.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -255,16 +255,16 @@
   <data name="label4.Text" xml:space="preserve">
     <value>在自动模式下，升级将通过 HTTP、NFS 或 FTP 服务器上存储的安装文件自动应用到池中的所有服务器。</value>
   </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+  <data name=">>label4.Name" xml:space="preserve">
     <value>label4</value>
   </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+  <data name=">>label4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+  <data name=">>label4.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+  <data name=">>label4.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="label2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -282,16 +282,16 @@
   <data name="label2.Text" xml:space="preserve">
     <value>单击“运行预检查”以开始运行升级预检查。</value>
   </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+  <data name=">>label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+  <data name=">>label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+  <data name=">>label2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+  <data name=">>label2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -306,10 +306,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>562, 378</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>RollingUpgradeWizardUpgradeModePage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

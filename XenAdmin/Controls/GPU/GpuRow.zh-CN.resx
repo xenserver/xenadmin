@@ -212,16 +212,16 @@
   <data name="allowedTypesLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;allowedTypesLabel.Name" xml:space="preserve">
+  <data name=">>allowedTypesLabel.Name" xml:space="preserve">
     <value>allowedTypesLabel</value>
   </data>
-  <data name="&gt;&gt;allowedTypesLabel.Type" xml:space="preserve">
+  <data name=">>allowedTypesLabel.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;allowedTypesLabel.Parent" xml:space="preserve">
+  <data name=">>allowedTypesLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;allowedTypesLabel.ZOrder" xml:space="preserve">
+  <data name=">>allowedTypesLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="pGpuLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -245,16 +245,16 @@
   <data name="pGpuLabel.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="&gt;&gt;pGpuLabel.Name" xml:space="preserve">
+  <data name=">>pGpuLabel.Name" xml:space="preserve">
     <value>pGpuLabel</value>
   </data>
-  <data name="&gt;&gt;pGpuLabel.Type" xml:space="preserve">
+  <data name=">>pGpuLabel.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;pGpuLabel.Parent" xml:space="preserve">
+  <data name=">>pGpuLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;pGpuLabel.ZOrder" xml:space="preserve">
+  <data name=">>pGpuLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="pGpuPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -275,16 +275,16 @@
   <data name="pGpuPictureBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;pGpuPictureBox.Name" xml:space="preserve">
+  <data name=">>pGpuPictureBox.Name" xml:space="preserve">
     <value>pGpuPictureBox</value>
   </data>
-  <data name="&gt;&gt;pGpuPictureBox.Type" xml:space="preserve">
+  <data name=">>pGpuPictureBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pGpuPictureBox.Parent" xml:space="preserve">
+  <data name=">>pGpuPictureBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;pGpuPictureBox.ZOrder" xml:space="preserve">
+  <data name=">>pGpuPictureBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <metadata name="ImageColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -317,16 +317,16 @@
   <data name="allowedTypesGrid.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
-  <data name="&gt;&gt;allowedTypesGrid.Name" xml:space="preserve">
+  <data name=">>allowedTypesGrid.Name" xml:space="preserve">
     <value>allowedTypesGrid</value>
   </data>
-  <data name="&gt;&gt;allowedTypesGrid.Type" xml:space="preserve">
+  <data name=">>allowedTypesGrid.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;allowedTypesGrid.Parent" xml:space="preserve">
+  <data name=">>allowedTypesGrid.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;allowedTypesGrid.ZOrder" xml:space="preserve">
+  <data name=">>allowedTypesGrid.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="shinyBarsContainerPanel.AutoSize" type="System.Boolean, mscorlib">
@@ -359,16 +359,16 @@
   <data name="shinyBarsContainerPanel.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
   </data>
-  <data name="&gt;&gt;shinyBarsContainerPanel.Name" xml:space="preserve">
+  <data name=">>shinyBarsContainerPanel.Name" xml:space="preserve">
     <value>shinyBarsContainerPanel</value>
   </data>
-  <data name="&gt;&gt;shinyBarsContainerPanel.Type" xml:space="preserve">
+  <data name=">>shinyBarsContainerPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;shinyBarsContainerPanel.Parent" xml:space="preserve">
+  <data name=">>shinyBarsContainerPanel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;shinyBarsContainerPanel.ZOrder" xml:space="preserve">
+  <data name=">>shinyBarsContainerPanel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="shinyBarsContainerPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -395,16 +395,16 @@
   <data name="editButton.Text" xml:space="preserve">
     <value>编辑(&amp;E)...</value>
   </data>
-  <data name="&gt;&gt;editButton.Name" xml:space="preserve">
+  <data name=">>editButton.Name" xml:space="preserve">
     <value>editButton</value>
   </data>
-  <data name="&gt;&gt;editButton.Type" xml:space="preserve">
+  <data name=">>editButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;editButton.Parent" xml:space="preserve">
+  <data name=">>editButton.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;editButton.ZOrder" xml:space="preserve">
+  <data name=">>editButton.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -422,16 +422,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>panelWithBorder</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -452,16 +452,16 @@
   <data name="clearAllButton.Text" xml:space="preserve">
     <value>全部清除(&amp;C)</value>
   </data>
-  <data name="&gt;&gt;clearAllButton.Name" xml:space="preserve">
+  <data name=">>clearAllButton.Name" xml:space="preserve">
     <value>clearAllButton</value>
   </data>
-  <data name="&gt;&gt;clearAllButton.Type" xml:space="preserve">
+  <data name=">>clearAllButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;clearAllButton.Parent" xml:space="preserve">
+  <data name=">>clearAllButton.Parent" xml:space="preserve">
     <value>multipleSelectionPanel</value>
   </data>
-  <data name="&gt;&gt;clearAllButton.ZOrder" xml:space="preserve">
+  <data name=">>clearAllButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="selectAllButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -479,16 +479,16 @@
   <data name="selectAllButton.Text" xml:space="preserve">
     <value>全选(&amp;S)</value>
   </data>
-  <data name="&gt;&gt;selectAllButton.Name" xml:space="preserve">
+  <data name=">>selectAllButton.Name" xml:space="preserve">
     <value>selectAllButton</value>
   </data>
-  <data name="&gt;&gt;selectAllButton.Type" xml:space="preserve">
+  <data name=">>selectAllButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;selectAllButton.Parent" xml:space="preserve">
+  <data name=">>selectAllButton.Parent" xml:space="preserve">
     <value>multipleSelectionPanel</value>
   </data>
-  <data name="&gt;&gt;selectAllButton.ZOrder" xml:space="preserve">
+  <data name=">>selectAllButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="multipleSelectionPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -503,16 +503,16 @@
   <data name="multipleSelectionPanel.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
   </data>
-  <data name="&gt;&gt;multipleSelectionPanel.Name" xml:space="preserve">
+  <data name=">>multipleSelectionPanel.Name" xml:space="preserve">
     <value>multipleSelectionPanel</value>
   </data>
-  <data name="&gt;&gt;multipleSelectionPanel.Type" xml:space="preserve">
+  <data name=">>multipleSelectionPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;multipleSelectionPanel.Parent" xml:space="preserve">
+  <data name=">>multipleSelectionPanel.Parent" xml:space="preserve">
     <value>panelWithBorder</value>
   </data>
-  <data name="&gt;&gt;multipleSelectionPanel.ZOrder" xml:space="preserve">
+  <data name=">>multipleSelectionPanel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panelWithBorder.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -533,16 +533,16 @@
   <data name="panelWithBorder.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;panelWithBorder.Name" xml:space="preserve">
+  <data name=">>panelWithBorder.Name" xml:space="preserve">
     <value>panelWithBorder</value>
   </data>
-  <data name="&gt;&gt;panelWithBorder.Type" xml:space="preserve">
+  <data name=">>panelWithBorder.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PanelWithBorder, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;panelWithBorder.Parent" xml:space="preserve">
+  <data name=">>panelWithBorder.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;panelWithBorder.ZOrder" xml:space="preserve">
+  <data name=">>panelWithBorder.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -560,28 +560,28 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>689, 155</value>
   </data>
-  <data name="&gt;&gt;allowedTypesImageList.Name" xml:space="preserve">
+  <data name=">>allowedTypesImageList.Name" xml:space="preserve">
     <value>allowedTypesImageList</value>
   </data>
-  <data name="&gt;&gt;allowedTypesImageList.Type" xml:space="preserve">
+  <data name=">>allowedTypesImageList.Type" xml:space="preserve">
     <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ImageColumn.Name" xml:space="preserve">
+  <data name=">>ImageColumn.Name" xml:space="preserve">
     <value>ImageColumn</value>
   </data>
-  <data name="&gt;&gt;ImageColumn.Type" xml:space="preserve">
+  <data name=">>ImageColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TextColumn.Name" xml:space="preserve">
+  <data name=">>TextColumn.Name" xml:space="preserve">
     <value>TextColumn</value>
   </data>
-  <data name="&gt;&gt;TextColumn.Type" xml:space="preserve">
+  <data name=">>TextColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>GpuRow</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

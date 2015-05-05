@@ -117,44 +117,44 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;ActionStatusLabel.Name" xml:space="preserve">
+  <data name=">>ActionStatusLabel.Name" xml:space="preserve">
     <value>ActionStatusLabel</value>
   </data>
-  <data name="&gt;&gt;ActionStatusLabel.Type" xml:space="preserve">
+  <data name=">>ActionStatusLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ActionStatusLabel.Parent" xml:space="preserve">
+  <data name=">>ActionStatusLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ActionStatusLabel.ZOrder" xml:space="preserve">
+  <data name=">>ActionStatusLabel.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;ProgressSeparator.Name" xml:space="preserve">
+  <data name=">>ProgressSeparator.Name" xml:space="preserve">
     <value>ProgressSeparator</value>
   </data>
-  <data name="&gt;&gt;ProgressSeparator.Type" xml:space="preserve">
+  <data name=">>ProgressSeparator.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ProgressSeparator.Parent" xml:space="preserve">
+  <data name=">>ProgressSeparator.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ProgressSeparator.ZOrder" xml:space="preserve">
+  <data name=">>ProgressSeparator.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ActionProgressBar.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="&gt;&gt;ActionProgressBar.Name" xml:space="preserve">
+  <data name=">>ActionProgressBar.Name" xml:space="preserve">
     <value>ActionProgressBar</value>
   </data>
-  <data name="&gt;&gt;ActionProgressBar.Type" xml:space="preserve">
+  <data name=">>ActionProgressBar.Type" xml:space="preserve">
     <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ActionProgressBar.Parent" xml:space="preserve">
+  <data name=">>ActionProgressBar.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ActionProgressBar.ZOrder" xml:space="preserve">
+  <data name=">>ActionProgressBar.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
@@ -180,16 +180,16 @@
   <data name="CloseButton.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="&gt;&gt;CloseButton.Name" xml:space="preserve">
+  <data name=">>CloseButton.Name" xml:space="preserve">
     <value>CloseButton</value>
   </data>
-  <data name="&gt;&gt;CloseButton.Type" xml:space="preserve">
+  <data name=">>CloseButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CloseButton.Parent" xml:space="preserve">
+  <data name=">>CloseButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;CloseButton.ZOrder" xml:space="preserve">
+  <data name=">>CloseButton.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="RepairButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -213,16 +213,16 @@
   <data name="RepairButton.Text" xml:space="preserve">
     <value>&amp;Repair</value>
   </data>
-  <data name="&gt;&gt;RepairButton.Name" xml:space="preserve">
+  <data name=">>RepairButton.Name" xml:space="preserve">
     <value>RepairButton</value>
   </data>
-  <data name="&gt;&gt;RepairButton.Type" xml:space="preserve">
+  <data name=">>RepairButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;RepairButton.Parent" xml:space="preserve">
+  <data name=">>RepairButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;RepairButton.ZOrder" xml:space="preserve">
+  <data name=">>RepairButton.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
@@ -252,16 +252,16 @@
   <data name="label2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+  <data name=">>label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+  <data name=">>label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+  <data name=">>label2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+  <data name=">>label2.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="pictureBox1.Font" type="System.Drawing.Font, System.Drawing">
@@ -279,16 +279,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+  <data name=">>pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+  <data name=">>pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+  <data name=">>pictureBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -309,16 +309,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Click Repair to have XenCenter attempt to diagnose and resolve the connection problems with this storage repository. If the problem cannot be resolved, look at the XenCenter logs for more detailed error messages.</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="treeView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -348,16 +348,16 @@
   <data name="treeView.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;treeView.Name" xml:space="preserve">
+  <data name=">>treeView.Name" xml:space="preserve">
     <value>treeView</value>
   </data>
-  <data name="&gt;&gt;treeView.Type" xml:space="preserve">
+  <data name=">>treeView.Type" xml:space="preserve">
     <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;treeView.Parent" xml:space="preserve">
+  <data name=">>treeView.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;treeView.ZOrder" xml:space="preserve">
+  <data name=">>treeView.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -375,16 +375,16 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Repair Storage Repository</value>
   </data>
-  <data name="&gt;&gt;imageList.Name" xml:space="preserve">
+  <data name=">>imageList.Name" xml:space="preserve">
     <value>imageList</value>
   </data>
-  <data name="&gt;&gt;imageList.Type" xml:space="preserve">
+  <data name=">>imageList.Type" xml:space="preserve">
     <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>RepairSRDialog</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.DialogWithProgress, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

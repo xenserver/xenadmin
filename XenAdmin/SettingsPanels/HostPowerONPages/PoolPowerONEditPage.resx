@@ -117,76 +117,76 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;radioButtonWakeonLAN.Name" xml:space="preserve">
+  <data name=">>radioButtonWakeonLAN.Name" xml:space="preserve">
     <value>radioButtonWakeonLAN</value>
   </data>
-  <data name="&gt;&gt;radioButtonWakeonLAN.Type" xml:space="preserve">
+  <data name=">>radioButtonWakeonLAN.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButtonWakeonLAN.Parent" xml:space="preserve">
+  <data name=">>radioButtonWakeonLAN.Parent" xml:space="preserve">
     <value>groupBoxMode</value>
   </data>
-  <data name="&gt;&gt;radioButtonWakeonLAN.ZOrder" xml:space="preserve">
+  <data name=">>radioButtonWakeonLAN.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;radioButtonILO.Name" xml:space="preserve">
+  <data name=">>radioButtonILO.Name" xml:space="preserve">
     <value>radioButtonILO</value>
   </data>
-  <data name="&gt;&gt;radioButtonILO.Type" xml:space="preserve">
+  <data name=">>radioButtonILO.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButtonILO.Parent" xml:space="preserve">
+  <data name=">>radioButtonILO.Parent" xml:space="preserve">
     <value>groupBoxMode</value>
   </data>
-  <data name="&gt;&gt;radioButtonILO.ZOrder" xml:space="preserve">
+  <data name=">>radioButtonILO.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;radioButtonDisabled.Name" xml:space="preserve">
+  <data name=">>radioButtonDisabled.Name" xml:space="preserve">
     <value>radioButtonDisabled</value>
   </data>
-  <data name="&gt;&gt;radioButtonDisabled.Type" xml:space="preserve">
+  <data name=">>radioButtonDisabled.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButtonDisabled.Parent" xml:space="preserve">
+  <data name=">>radioButtonDisabled.Parent" xml:space="preserve">
     <value>groupBoxMode</value>
   </data>
-  <data name="&gt;&gt;radioButtonDisabled.ZOrder" xml:space="preserve">
+  <data name=">>radioButtonDisabled.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;textBoxCustom.Name" xml:space="preserve">
+  <data name=">>textBoxCustom.Name" xml:space="preserve">
     <value>textBoxCustom</value>
   </data>
-  <data name="&gt;&gt;textBoxCustom.Type" xml:space="preserve">
+  <data name=">>textBoxCustom.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBoxCustom.Parent" xml:space="preserve">
+  <data name=">>textBoxCustom.Parent" xml:space="preserve">
     <value>groupBoxMode</value>
   </data>
-  <data name="&gt;&gt;textBoxCustom.ZOrder" xml:space="preserve">
+  <data name=">>textBoxCustom.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;radioButtonCustom.Name" xml:space="preserve">
+  <data name=">>radioButtonCustom.Name" xml:space="preserve">
     <value>radioButtonCustom</value>
   </data>
-  <data name="&gt;&gt;radioButtonCustom.Type" xml:space="preserve">
+  <data name=">>radioButtonCustom.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButtonCustom.Parent" xml:space="preserve">
+  <data name=">>radioButtonCustom.Parent" xml:space="preserve">
     <value>groupBoxMode</value>
   </data>
-  <data name="&gt;&gt;radioButtonCustom.ZOrder" xml:space="preserve">
+  <data name=">>radioButtonCustom.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;radioButtonDRAC.Name" xml:space="preserve">
+  <data name=">>radioButtonDRAC.Name" xml:space="preserve">
     <value>radioButtonDRAC</value>
   </data>
-  <data name="&gt;&gt;radioButtonDRAC.Type" xml:space="preserve">
+  <data name=">>radioButtonDRAC.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButtonDRAC.Parent" xml:space="preserve">
+  <data name=">>radioButtonDRAC.Parent" xml:space="preserve">
     <value>groupBoxMode</value>
   </data>
-  <data name="&gt;&gt;radioButtonDRAC.ZOrder" xml:space="preserve">
+  <data name=">>radioButtonDRAC.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
@@ -196,16 +196,16 @@
   <data name="groupBoxCredentials.Size" type="System.Drawing.Size, System.Drawing">
     <value>436, 100</value>
   </data>
-  <data name="&gt;&gt;groupBoxCredentials.Name" xml:space="preserve">
+  <data name=">>groupBoxCredentials.Name" xml:space="preserve">
     <value>groupBoxCredentials</value>
   </data>
-  <data name="&gt;&gt;groupBoxCredentials.Type" xml:space="preserve">
+  <data name=">>groupBoxCredentials.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBoxCredentials.Parent" xml:space="preserve">
+  <data name=">>groupBoxCredentials.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;groupBoxCredentials.ZOrder" xml:space="preserve">
+  <data name=">>groupBoxCredentials.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="groupBoxMode.Location" type="System.Drawing.Point, System.Drawing">
@@ -214,16 +214,16 @@
   <data name="groupBoxMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>436, 154</value>
   </data>
-  <data name="&gt;&gt;groupBoxMode.Name" xml:space="preserve">
+  <data name=">>groupBoxMode.Name" xml:space="preserve">
     <value>groupBoxMode</value>
   </data>
-  <data name="&gt;&gt;groupBoxMode.Type" xml:space="preserve">
+  <data name=">>groupBoxMode.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBoxMode.Parent" xml:space="preserve">
+  <data name=">>groupBoxMode.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;groupBoxMode.ZOrder" xml:space="preserve">
+  <data name=">>groupBoxMode.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
@@ -236,16 +236,16 @@
   <data name="label4.Text" xml:space="preserve">
     <value>To enable remote startup on all the servers of the pool, select a power management mode and enter any configuration details for the selected mode.</value>
   </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+  <data name=">>label4.Name" xml:space="preserve">
     <value>label4</value>
   </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+  <data name=">>label4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+  <data name=">>label4.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+  <data name=">>label4.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="_columnHostName.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -270,16 +270,16 @@
   <data name="dataGridView2.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;dataGridView2.Name" xml:space="preserve">
+  <data name=">>dataGridView2.Name" xml:space="preserve">
     <value>dataGridView2</value>
   </data>
-  <data name="&gt;&gt;dataGridView2.Type" xml:space="preserve">
+  <data name=">>dataGridView2.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dataGridView2.Parent" xml:space="preserve">
+  <data name=">>dataGridView2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;dataGridView2.ZOrder" xml:space="preserve">
+  <data name=">>dataGridView2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
@@ -294,16 +294,16 @@
   <data name="button1.Text" xml:space="preserve">
     <value>&amp;Select All</value>
   </data>
-  <data name="&gt;&gt;button1.Name" xml:space="preserve">
+  <data name=">>button1.Name" xml:space="preserve">
     <value>button1</value>
   </data>
-  <data name="&gt;&gt;button1.Type" xml:space="preserve">
+  <data name=">>button1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
+  <data name=">>button1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
+  <data name=">>button1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -315,34 +315,34 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>693, 570</value>
   </data>
-  <data name="&gt;&gt;ColumnKey.Name" xml:space="preserve">
+  <data name=">>ColumnKey.Name" xml:space="preserve">
     <value>ColumnKey</value>
   </data>
-  <data name="&gt;&gt;ColumnKey.Type" xml:space="preserve">
+  <data name=">>ColumnKey.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnValue.Name" xml:space="preserve">
+  <data name=">>ColumnValue.Name" xml:space="preserve">
     <value>ColumnValue</value>
   </data>
-  <data name="&gt;&gt;ColumnValue.Type" xml:space="preserve">
+  <data name=">>ColumnValue.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_columnHostName.Name" xml:space="preserve">
+  <data name=">>_columnHostName.Name" xml:space="preserve">
     <value>_columnHostName</value>
   </data>
-  <data name="&gt;&gt;_columnHostName.Type" xml:space="preserve">
+  <data name=">>_columnHostName.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_columnPowerOnMode.Name" xml:space="preserve">
+  <data name=">>_columnPowerOnMode.Name" xml:space="preserve">
     <value>_columnPowerOnMode</value>
   </data>
-  <data name="&gt;&gt;_columnPowerOnMode.Type" xml:space="preserve">
+  <data name=">>_columnPowerOnMode.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>PoolPowerONEditPage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.SettingsPanels.HostPowerONEditPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

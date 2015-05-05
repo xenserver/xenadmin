@@ -144,16 +144,16 @@
   <data name="labelRubric.Text" xml:space="preserve">
     <value>Set a placement policy for assigning VMs to GPUs to achieve either maximum density or maximum performance.</value>
   </data>
-  <data name="&gt;&gt;labelRubric.Name" xml:space="preserve">
+  <data name=">>labelRubric.Name" xml:space="preserve">
     <value>labelRubric</value>
   </data>
-  <data name="&gt;&gt;labelRubric.Type" xml:space="preserve">
+  <data name=">>labelRubric.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;labelRubric.Parent" xml:space="preserve">
+  <data name=">>labelRubric.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelRubric.ZOrder" xml:space="preserve">
+  <data name=">>labelRubric.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
@@ -186,16 +186,16 @@
   <data name="radioButtonMixture.Text" xml:space="preserve">
     <value>Mixed: different settings for different GPU groups</value>
   </data>
-  <data name="&gt;&gt;radioButtonMixture.Name" xml:space="preserve">
+  <data name=">>radioButtonMixture.Name" xml:space="preserve">
     <value>radioButtonMixture</value>
   </data>
-  <data name="&gt;&gt;radioButtonMixture.Type" xml:space="preserve">
+  <data name=">>radioButtonMixture.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButtonMixture.Parent" xml:space="preserve">
+  <data name=">>radioButtonMixture.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;radioButtonMixture.ZOrder" xml:space="preserve">
+  <data name=">>radioButtonMixture.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="radioButtonDepth.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -216,16 +216,16 @@
   <data name="radioButtonDepth.Text" xml:space="preserve">
     <value>Maximum density: put as many VMs as possible on the same GPU</value>
   </data>
-  <data name="&gt;&gt;radioButtonDepth.Name" xml:space="preserve">
+  <data name=">>radioButtonDepth.Name" xml:space="preserve">
     <value>radioButtonDepth</value>
   </data>
-  <data name="&gt;&gt;radioButtonDepth.Type" xml:space="preserve">
+  <data name=">>radioButtonDepth.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButtonDepth.Parent" xml:space="preserve">
+  <data name=">>radioButtonDepth.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;radioButtonDepth.ZOrder" xml:space="preserve">
+  <data name=">>radioButtonDepth.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="radioButtonBreadth.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -246,16 +246,16 @@
   <data name="radioButtonBreadth.Text" xml:space="preserve">
     <value>Maximum performance: put VMs on as many GPUs as possible</value>
   </data>
-  <data name="&gt;&gt;radioButtonBreadth.Name" xml:space="preserve">
+  <data name=">>radioButtonBreadth.Name" xml:space="preserve">
     <value>radioButtonBreadth</value>
   </data>
-  <data name="&gt;&gt;radioButtonBreadth.Type" xml:space="preserve">
+  <data name=">>radioButtonBreadth.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButtonBreadth.Parent" xml:space="preserve">
+  <data name=">>radioButtonBreadth.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;radioButtonBreadth.ZOrder" xml:space="preserve">
+  <data name=">>radioButtonBreadth.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -276,16 +276,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>groupBoxPlacementPolicy</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -318,16 +318,16 @@
   <data name="groupBoxPlacementPolicy.Text" xml:space="preserve">
     <value>Placement policy</value>
   </data>
-  <data name="&gt;&gt;groupBoxPlacementPolicy.Name" xml:space="preserve">
+  <data name=">>groupBoxPlacementPolicy.Name" xml:space="preserve">
     <value>groupBoxPlacementPolicy</value>
   </data>
-  <data name="&gt;&gt;groupBoxPlacementPolicy.Type" xml:space="preserve">
+  <data name=">>groupBoxPlacementPolicy.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBoxPlacementPolicy.Parent" xml:space="preserve">
+  <data name=">>groupBoxPlacementPolicy.Parent" xml:space="preserve">
     <value>tableLayoutPanelMain</value>
   </data>
-  <data name="&gt;&gt;groupBoxPlacementPolicy.ZOrder" xml:space="preserve">
+  <data name=">>groupBoxPlacementPolicy.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="groupBoxIntedratedGpu.AutoSize" type="System.Boolean, mscorlib">
@@ -369,16 +369,16 @@
   <data name="radioButtonEnable.Text" xml:space="preserve">
     <value>This server will use the integrated GPU</value>
   </data>
-  <data name="&gt;&gt;radioButtonEnable.Name" xml:space="preserve">
+  <data name=">>radioButtonEnable.Name" xml:space="preserve">
     <value>radioButtonEnable</value>
   </data>
-  <data name="&gt;&gt;radioButtonEnable.Type" xml:space="preserve">
+  <data name=">>radioButtonEnable.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButtonEnable.Parent" xml:space="preserve">
+  <data name=">>radioButtonEnable.Parent" xml:space="preserve">
     <value>optionsLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;radioButtonEnable.ZOrder" xml:space="preserve">
+  <data name=">>radioButtonEnable.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="radioButtonDisable.AutoSize" type="System.Boolean, mscorlib">
@@ -399,16 +399,16 @@
   <data name="radioButtonDisable.Text" xml:space="preserve">
     <value>This server will not use the integrated GPU</value>
   </data>
-  <data name="&gt;&gt;radioButtonDisable.Name" xml:space="preserve">
+  <data name=">>radioButtonDisable.Name" xml:space="preserve">
     <value>radioButtonDisable</value>
   </data>
-  <data name="&gt;&gt;radioButtonDisable.Type" xml:space="preserve">
+  <data name=">>radioButtonDisable.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButtonDisable.Parent" xml:space="preserve">
+  <data name=">>radioButtonDisable.Parent" xml:space="preserve">
     <value>optionsLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;radioButtonDisable.ZOrder" xml:space="preserve">
+  <data name=">>radioButtonDisable.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="optionsLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -429,16 +429,16 @@
   <data name="optionsLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;optionsLayoutPanel.Name" xml:space="preserve">
+  <data name=">>optionsLayoutPanel.Name" xml:space="preserve">
     <value>optionsLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;optionsLayoutPanel.Type" xml:space="preserve">
+  <data name=">>optionsLayoutPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;optionsLayoutPanel.Parent" xml:space="preserve">
+  <data name=">>optionsLayoutPanel.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;optionsLayoutPanel.ZOrder" xml:space="preserve">
+  <data name=">>optionsLayoutPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="autoHeightLabel3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -465,16 +465,16 @@
   <data name="autoHeightLabel3.Text" xml:space="preserve">
     <value>After next reboot:</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel3.Name" xml:space="preserve">
+  <data name=">>autoHeightLabel3.Name" xml:space="preserve">
     <value>autoHeightLabel3</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel3.Type" xml:space="preserve">
+  <data name=">>autoHeightLabel3.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel3.Parent" xml:space="preserve">
+  <data name=">>autoHeightLabel3.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel3.ZOrder" xml:space="preserve">
+  <data name=">>autoHeightLabel3.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelCurrentState.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -501,16 +501,16 @@
   <data name="labelCurrentState.Text" xml:space="preserve">
     <value>This server is currently using the integrated GPU.</value>
   </data>
-  <data name="&gt;&gt;labelCurrentState.Name" xml:space="preserve">
+  <data name=">>labelCurrentState.Name" xml:space="preserve">
     <value>labelCurrentState</value>
   </data>
-  <data name="&gt;&gt;labelCurrentState.Type" xml:space="preserve">
+  <data name=">>labelCurrentState.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;labelCurrentState.Parent" xml:space="preserve">
+  <data name=">>labelCurrentState.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;labelCurrentState.ZOrder" xml:space="preserve">
+  <data name=">>labelCurrentState.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="autoHeightLabel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -537,16 +537,16 @@
   <data name="autoHeightLabel1.Text" xml:space="preserve">
     <value>Choose whether to enable this server to use the integrated GPU. When a server is using the integrated GPU, that GPU cannot be passed through to a VM.</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel1.Name" xml:space="preserve">
+  <data name=">>autoHeightLabel1.Name" xml:space="preserve">
     <value>autoHeightLabel1</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel1.Type" xml:space="preserve">
+  <data name=">>autoHeightLabel1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel1.Parent" xml:space="preserve">
+  <data name=">>autoHeightLabel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel1.ZOrder" xml:space="preserve">
+  <data name=">>autoHeightLabel1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -567,16 +567,16 @@
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Parent" xml:space="preserve">
     <value>groupBoxIntedratedGpu</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -600,16 +600,16 @@
   <data name="groupBoxIntedratedGpu.Text" xml:space="preserve">
     <value>Integrated GPU passthrough</value>
   </data>
-  <data name="&gt;&gt;groupBoxIntedratedGpu.Name" xml:space="preserve">
+  <data name=">>groupBoxIntedratedGpu.Name" xml:space="preserve">
     <value>groupBoxIntedratedGpu</value>
   </data>
-  <data name="&gt;&gt;groupBoxIntedratedGpu.Type" xml:space="preserve">
+  <data name=">>groupBoxIntedratedGpu.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBoxIntedratedGpu.Parent" xml:space="preserve">
+  <data name=">>groupBoxIntedratedGpu.Parent" xml:space="preserve">
     <value>tableLayoutPanelMain</value>
   </data>
-  <data name="&gt;&gt;groupBoxIntedratedGpu.ZOrder" xml:space="preserve">
+  <data name=">>groupBoxIntedratedGpu.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanelMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -627,16 +627,16 @@
   <data name="tableLayoutPanelMain.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanelMain.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanelMain.Name" xml:space="preserve">
     <value>tableLayoutPanelMain</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanelMain.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanelMain.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanelMain.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanelMain.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanelMain.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanelMain.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanelMain.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -651,10 +651,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>546, 382</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>PoolGpuEditPage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

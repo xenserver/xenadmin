@@ -156,16 +156,16 @@
   <data name="dataGridViewSummary.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;dataGridViewSummary.Name" xml:space="preserve">
+  <data name=">>dataGridViewSummary.Name" xml:space="preserve">
     <value>dataGridViewSummary</value>
   </data>
-  <data name="&gt;&gt;dataGridViewSummary.Type" xml:space="preserve">
+  <data name=">>dataGridViewSummary.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dataGridViewSummary.Parent" xml:space="preserve">
+  <data name=">>dataGridViewSummary.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;dataGridViewSummary.ZOrder" xml:space="preserve">
+  <data name=">>dataGridViewSummary.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -177,22 +177,22 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>711, 455</value>
   </data>
-  <data name="&gt;&gt;ColumnArrow.Name" xml:space="preserve">
+  <data name=">>ColumnArrow.Name" xml:space="preserve">
     <value>ColumnArrow</value>
   </data>
-  <data name="&gt;&gt;ColumnArrow.Type" xml:space="preserve">
+  <data name=">>ColumnArrow.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnDetails.Name" xml:space="preserve">
+  <data name=">>ColumnDetails.Name" xml:space="preserve">
     <value>ColumnDetails</value>
   </data>
-  <data name="&gt;&gt;ColumnDetails.Type" xml:space="preserve">
+  <data name=">>ColumnDetails.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>LVMoHBASummary</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

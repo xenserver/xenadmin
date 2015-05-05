@@ -147,16 +147,16 @@
   <data name="labelSingleDvd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
-  <data name="&gt;&gt;labelSingleDvd.Name" xml:space="preserve">
+  <data name=">>labelSingleDvd.Name" xml:space="preserve">
     <value>labelSingleDvd</value>
   </data>
-  <data name="&gt;&gt;labelSingleDvd.Type" xml:space="preserve">
+  <data name=">>labelSingleDvd.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelSingleDvd.Parent" xml:space="preserve">
+  <data name=">>labelSingleDvd.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelSingleDvd.ZOrder" xml:space="preserve">
+  <data name=">>labelSingleDvd.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="newCDLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -192,16 +192,16 @@
   <data name="newCDLabel.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;newCDLabel.Name" xml:space="preserve">
+  <data name=">>newCDLabel.Name" xml:space="preserve">
     <value>newCDLabel</value>
   </data>
-  <data name="&gt;&gt;newCDLabel.Type" xml:space="preserve">
+  <data name=">>newCDLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;newCDLabel.Parent" xml:space="preserve">
+  <data name=">>newCDLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;newCDLabel.ZOrder" xml:space="preserve">
+  <data name=">>newCDLabel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="comboBoxDrive.Location" type="System.Drawing.Point, System.Drawing">
@@ -219,16 +219,16 @@
   <data name="comboBoxDrive.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;comboBoxDrive.Name" xml:space="preserve">
+  <data name=">>comboBoxDrive.Name" xml:space="preserve">
     <value>comboBoxDrive</value>
   </data>
-  <data name="&gt;&gt;comboBoxDrive.Type" xml:space="preserve">
+  <data name=">>comboBoxDrive.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;comboBoxDrive.Parent" xml:space="preserve">
+  <data name=">>comboBoxDrive.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;comboBoxDrive.ZOrder" xml:space="preserve">
+  <data name=">>comboBoxDrive.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
@@ -258,16 +258,16 @@
   <data name="cdChanger1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;cdChanger1.Name" xml:space="preserve">
+  <data name=">>cdChanger1.Name" xml:space="preserve">
     <value>cdChanger1</value>
   </data>
-  <data name="&gt;&gt;cdChanger1.Type" xml:space="preserve">
+  <data name=">>cdChanger1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.CDChanger, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;cdChanger1.Parent" xml:space="preserve">
+  <data name=">>cdChanger1.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;cdChanger1.ZOrder" xml:space="preserve">
+  <data name=">>cdChanger1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="linkLabel1.AutoSize" type="System.Boolean, mscorlib">
@@ -297,16 +297,16 @@
   <data name="linkLabel1.Text" xml:space="preserve">
     <value>弹出</value>
   </data>
-  <data name="&gt;&gt;linkLabel1.Name" xml:space="preserve">
+  <data name=">>linkLabel1.Name" xml:space="preserve">
     <value>linkLabel1</value>
   </data>
-  <data name="&gt;&gt;linkLabel1.Type" xml:space="preserve">
+  <data name=">>linkLabel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;linkLabel1.Parent" xml:space="preserve">
+  <data name=">>linkLabel1.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;linkLabel1.ZOrder" xml:space="preserve">
+  <data name=">>linkLabel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -327,16 +327,16 @@
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>40</value>
   </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+  <data name=">>panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+  <data name=">>panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+  <data name=">>panel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+  <data name=">>panel1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -354,16 +354,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>40</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -378,10 +378,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>1117, 77</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>MultipleDvdIsoList</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

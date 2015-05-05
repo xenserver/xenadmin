@@ -141,16 +141,16 @@
   <data name="poolHostPicker1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;poolHostPicker1.Name" xml:space="preserve">
+  <data name=">>poolHostPicker1.Name" xml:space="preserve">
     <value>poolHostPicker1</value>
   </data>
-  <data name="&gt;&gt;poolHostPicker1.Type" xml:space="preserve">
+  <data name=">>poolHostPicker1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.PoolHostPicker, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;poolHostPicker1.Parent" xml:space="preserve">
+  <data name=">>poolHostPicker1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;poolHostPicker1.ZOrder" xml:space="preserve">
+  <data name=">>poolHostPicker1.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="connectbutton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -174,16 +174,16 @@
   <data name="connectbutton.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
   </data>
-  <data name="&gt;&gt;connectbutton.Name" xml:space="preserve">
+  <data name=">>connectbutton.Name" xml:space="preserve">
     <value>connectbutton</value>
   </data>
-  <data name="&gt;&gt;connectbutton.Type" xml:space="preserve">
+  <data name=">>connectbutton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;connectbutton.Parent" xml:space="preserve">
+  <data name=">>connectbutton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;connectbutton.ZOrder" xml:space="preserve">
+  <data name=">>connectbutton.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="cancelbutton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -204,16 +204,16 @@
   <data name="cancelbutton.Text" xml:space="preserve">
     <value>取消</value>
   </data>
-  <data name="&gt;&gt;cancelbutton.Name" xml:space="preserve">
+  <data name=">>cancelbutton.Name" xml:space="preserve">
     <value>cancelbutton</value>
   </data>
-  <data name="&gt;&gt;cancelbutton.Type" xml:space="preserve">
+  <data name=">>cancelbutton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cancelbutton.Parent" xml:space="preserve">
+  <data name=">>cancelbutton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;cancelbutton.ZOrder" xml:space="preserve">
+  <data name=">>cancelbutton.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="okbutton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -234,16 +234,16 @@
   <data name="okbutton.Text" xml:space="preserve">
     <value>应用</value>
   </data>
-  <data name="&gt;&gt;okbutton.Name" xml:space="preserve">
+  <data name=">>okbutton.Name" xml:space="preserve">
     <value>okbutton</value>
   </data>
-  <data name="&gt;&gt;okbutton.Type" xml:space="preserve">
+  <data name=">>okbutton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;okbutton.Parent" xml:space="preserve">
+  <data name=">>okbutton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;okbutton.ZOrder" xml:space="preserve">
+  <data name=">>okbutton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -270,16 +270,16 @@
   <data name="label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="pictureBox1.Font" type="System.Drawing.Font, System.Drawing">
@@ -297,16 +297,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+  <data name=">>pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+  <data name=">>pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+  <data name=">>pictureBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -330,10 +330,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>应用激活密钥</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>SelectHostDialog</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

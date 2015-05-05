@@ -135,16 +135,16 @@
   <data name="folderNavigator.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;folderNavigator.Name" xml:space="preserve">
+  <data name=">>folderNavigator.Name" xml:space="preserve">
     <value>folderNavigator</value>
   </data>
-  <data name="&gt;&gt;folderNavigator.Type" xml:space="preserve">
+  <data name=">>folderNavigator.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenSearch.FolderNavigator, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;folderNavigator.Parent" xml:space="preserve">
+  <data name=">>folderNavigator.Parent" xml:space="preserve">
     <value>tableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;folderNavigator.ZOrder" xml:space="preserve">
+  <data name=">>folderNavigator.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="queryPanel.AutoScroll" type="System.Boolean, mscorlib">
@@ -171,16 +171,16 @@
   <data name="queryPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;queryPanel.Name" xml:space="preserve">
+  <data name=">>queryPanel.Name" xml:space="preserve">
     <value>queryPanel</value>
   </data>
-  <data name="&gt;&gt;queryPanel.Type" xml:space="preserve">
+  <data name=">>queryPanel.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenSearch.QueryPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;queryPanel.Parent" xml:space="preserve">
+  <data name=">>queryPanel.Parent" xml:space="preserve">
     <value>tableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;queryPanel.ZOrder" xml:space="preserve">
+  <data name=">>queryPanel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="buttonColumns.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -192,10 +192,10 @@
   <data name="contextMenuStripColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 26</value>
   </data>
-  <data name="&gt;&gt;contextMenuStripColumns.Name" xml:space="preserve">
+  <data name=">>contextMenuStripColumns.Name" xml:space="preserve">
     <value>contextMenuStripColumns</value>
   </data>
-  <data name="&gt;&gt;contextMenuStripColumns.Type" xml:space="preserve">
+  <data name=">>contextMenuStripColumns.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="buttonColumns.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -219,16 +219,16 @@
   <data name="buttonColumns.Text" xml:space="preserve">
     <value>Sh&amp;ow Columns</value>
   </data>
-  <data name="&gt;&gt;buttonColumns.Name" xml:space="preserve">
+  <data name=">>buttonColumns.Name" xml:space="preserve">
     <value>buttonColumns</value>
   </data>
-  <data name="&gt;&gt;buttonColumns.Type" xml:space="preserve">
+  <data name=">>buttonColumns.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;buttonColumns.Parent" xml:space="preserve">
+  <data name=">>buttonColumns.Parent" xml:space="preserve">
     <value>tableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;buttonColumns.ZOrder" xml:space="preserve">
+  <data name=">>buttonColumns.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -249,16 +249,16 @@
   <data name="tableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel.Name" xml:space="preserve">
     <value>tableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -276,10 +276,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>612, 289</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>SearchOutput</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

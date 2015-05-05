@@ -149,16 +149,16 @@
 
 The server must be in Maintenance Mode before you can change its multipathing setting. This ensures that any running virtual machines with virtual disks in the affected storage repository are migrated before the changes are made.</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="maintenanceWarningImage.Location" type="System.Drawing.Point, System.Drawing">
@@ -170,16 +170,16 @@ The server must be in Maintenance Mode before you can change its multipathing se
   <data name="maintenanceWarningImage.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;maintenanceWarningImage.Name" xml:space="preserve">
+  <data name=">>maintenanceWarningImage.Name" xml:space="preserve">
     <value>maintenanceWarningImage</value>
   </data>
-  <data name="&gt;&gt;maintenanceWarningImage.Type" xml:space="preserve">
+  <data name=">>maintenanceWarningImage.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;maintenanceWarningImage.Parent" xml:space="preserve">
+  <data name=">>maintenanceWarningImage.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;maintenanceWarningImage.ZOrder" xml:space="preserve">
+  <data name=">>maintenanceWarningImage.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="maintenanceWarningLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -206,16 +206,16 @@ The server must be in Maintenance Mode before you can change its multipathing se
   <data name="maintenanceWarningLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;maintenanceWarningLabel.Name" xml:space="preserve">
+  <data name=">>maintenanceWarningLabel.Name" xml:space="preserve">
     <value>maintenanceWarningLabel</value>
   </data>
-  <data name="&gt;&gt;maintenanceWarningLabel.Type" xml:space="preserve">
+  <data name=">>maintenanceWarningLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;maintenanceWarningLabel.Parent" xml:space="preserve">
+  <data name=">>maintenanceWarningLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;maintenanceWarningLabel.ZOrder" xml:space="preserve">
+  <data name=">>maintenanceWarningLabel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -233,16 +233,16 @@ The server must be in Maintenance Mode before you can change its multipathing se
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -263,16 +263,16 @@ The server must be in Maintenance Mode before you can change its multipathing se
   <data name="multipathCheckBox.Text" xml:space="preserve">
     <value>&amp;Enable multipathing on this server</value>
   </data>
-  <data name="&gt;&gt;multipathCheckBox.Name" xml:space="preserve">
+  <data name=">>multipathCheckBox.Name" xml:space="preserve">
     <value>multipathCheckBox</value>
   </data>
-  <data name="&gt;&gt;multipathCheckBox.Type" xml:space="preserve">
+  <data name=">>multipathCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;multipathCheckBox.Parent" xml:space="preserve">
+  <data name=">>multipathCheckBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;multipathCheckBox.ZOrder" xml:space="preserve">
+  <data name=">>multipathCheckBox.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -284,10 +284,10 @@ The server must be in Maintenance Mode before you can change its multipathing se
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>431, 232</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>HostMultipathPage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

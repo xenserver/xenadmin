@@ -153,16 +153,16 @@
   <data name="m_buttonOK.Text" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name="&gt;&gt;m_buttonOK.Name" xml:space="preserve">
+  <data name=">>m_buttonOK.Name" xml:space="preserve">
     <value>m_buttonOK</value>
   </data>
-  <data name="&gt;&gt;m_buttonOK.Type" xml:space="preserve">
+  <data name=">>m_buttonOK.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_buttonOK.Parent" xml:space="preserve">
+  <data name=">>m_buttonOK.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;m_buttonOK.ZOrder" xml:space="preserve">
+  <data name=">>m_buttonOK.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="m_buttonCancel.Font" type="System.Drawing.Font, System.Drawing">
@@ -180,16 +180,16 @@
   <data name="m_buttonCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="&gt;&gt;m_buttonCancel.Name" xml:space="preserve">
+  <data name=">>m_buttonCancel.Name" xml:space="preserve">
     <value>m_buttonCancel</value>
   </data>
-  <data name="&gt;&gt;m_buttonCancel.Type" xml:space="preserve">
+  <data name=">>m_buttonCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_buttonCancel.Parent" xml:space="preserve">
+  <data name=">>m_buttonCancel.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;m_buttonCancel.ZOrder" xml:space="preserve">
+  <data name=">>m_buttonCancel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -210,16 +210,16 @@
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -249,16 +249,16 @@
   <data name="autoHeightLabel1.Text" xml:space="preserve">
     <value>The configuration data needed to recover VMs and vApps in the event of a disaster must be stored on one or more SRs in this pool. </value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel1.Name" xml:space="preserve">
+  <data name=">>autoHeightLabel1.Name" xml:space="preserve">
     <value>autoHeightLabel1</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel1.Type" xml:space="preserve">
+  <data name=">>autoHeightLabel1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel1.Parent" xml:space="preserve">
+  <data name=">>autoHeightLabel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel1.ZOrder" xml:space="preserve">
+  <data name=">>autoHeightLabel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="autoHeightLabel2.AutoSize" type="System.Boolean, mscorlib">
@@ -285,16 +285,16 @@
   <data name="autoHeightLabel2.Text" xml:space="preserve">
     <value>Select the SRs where the VM configuration data will be stored: </value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel2.Name" xml:space="preserve">
+  <data name=">>autoHeightLabel2.Name" xml:space="preserve">
     <value>autoHeightLabel2</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel2.Type" xml:space="preserve">
+  <data name=">>autoHeightLabel2.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel2.Parent" xml:space="preserve">
+  <data name=">>autoHeightLabel2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel2.ZOrder" xml:space="preserve">
+  <data name=">>autoHeightLabel2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <metadata name="columnTick.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -366,16 +366,16 @@
   <data name="m_dataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;m_dataGridView.Name" xml:space="preserve">
+  <data name=">>m_dataGridView.Name" xml:space="preserve">
     <value>m_dataGridView</value>
   </data>
-  <data name="&gt;&gt;m_dataGridView.Type" xml:space="preserve">
+  <data name=">>m_dataGridView.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;m_dataGridView.Parent" xml:space="preserve">
+  <data name=">>m_dataGridView.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;m_dataGridView.ZOrder" xml:space="preserve">
+  <data name=">>m_dataGridView.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="m_tableLpWarning.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -414,16 +414,16 @@
   <data name="m_labelDisable2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;m_labelDisable2.Name" xml:space="preserve">
+  <data name=">>m_labelDisable2.Name" xml:space="preserve">
     <value>m_labelDisable2</value>
   </data>
-  <data name="&gt;&gt;m_labelDisable2.Type" xml:space="preserve">
+  <data name=">>m_labelDisable2.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;m_labelDisable2.Parent" xml:space="preserve">
+  <data name=">>m_labelDisable2.Parent" xml:space="preserve">
     <value>m_tableLpWarning</value>
   </data>
-  <data name="&gt;&gt;m_labelDisable2.ZOrder" xml:space="preserve">
+  <data name=">>m_labelDisable2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="pictureBoxWarning.Font" type="System.Drawing.Font, System.Drawing">
@@ -438,16 +438,16 @@
   <data name="pictureBoxWarning.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;pictureBoxWarning.Name" xml:space="preserve">
+  <data name=">>pictureBoxWarning.Name" xml:space="preserve">
     <value>pictureBoxWarning</value>
   </data>
-  <data name="&gt;&gt;pictureBoxWarning.Type" xml:space="preserve">
+  <data name=">>pictureBoxWarning.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBoxWarning.Parent" xml:space="preserve">
+  <data name=">>pictureBoxWarning.Parent" xml:space="preserve">
     <value>m_tableLpWarning</value>
   </data>
-  <data name="&gt;&gt;pictureBoxWarning.ZOrder" xml:space="preserve">
+  <data name=">>pictureBoxWarning.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="m_labelDisable1.AutoSize" type="System.Boolean, mscorlib">
@@ -471,16 +471,16 @@
   <data name="m_labelDisable1.Text" xml:space="preserve">
     <value>You have not selected any SRs </value>
   </data>
-  <data name="&gt;&gt;m_labelDisable1.Name" xml:space="preserve">
+  <data name=">>m_labelDisable1.Name" xml:space="preserve">
     <value>m_labelDisable1</value>
   </data>
-  <data name="&gt;&gt;m_labelDisable1.Type" xml:space="preserve">
+  <data name=">>m_labelDisable1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;m_labelDisable1.Parent" xml:space="preserve">
+  <data name=">>m_labelDisable1.Parent" xml:space="preserve">
     <value>m_tableLpWarning</value>
   </data>
-  <data name="&gt;&gt;m_labelDisable1.ZOrder" xml:space="preserve">
+  <data name=">>m_labelDisable1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="m_tableLpWarning.Font" type="System.Drawing.Font, System.Drawing">
@@ -498,16 +498,16 @@
   <data name="m_tableLpWarning.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;m_tableLpWarning.Name" xml:space="preserve">
+  <data name=">>m_tableLpWarning.Name" xml:space="preserve">
     <value>m_tableLpWarning</value>
   </data>
-  <data name="&gt;&gt;m_tableLpWarning.Type" xml:space="preserve">
+  <data name=">>m_tableLpWarning.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_tableLpWarning.Parent" xml:space="preserve">
+  <data name=">>m_tableLpWarning.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;m_tableLpWarning.ZOrder" xml:space="preserve">
+  <data name=">>m_tableLpWarning.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="m_tableLpWarning.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -549,16 +549,16 @@
   <data name="m_labelEnable.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;m_labelEnable.Name" xml:space="preserve">
+  <data name=">>m_labelEnable.Name" xml:space="preserve">
     <value>m_labelEnable</value>
   </data>
-  <data name="&gt;&gt;m_labelEnable.Type" xml:space="preserve">
+  <data name=">>m_labelEnable.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;m_labelEnable.Parent" xml:space="preserve">
+  <data name=">>m_labelEnable.Parent" xml:space="preserve">
     <value>m_tableLpInfo</value>
   </data>
-  <data name="&gt;&gt;m_labelEnable.ZOrder" xml:space="preserve">
+  <data name=">>m_labelEnable.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="pictureBoxInfo.Font" type="System.Drawing.Font, System.Drawing">
@@ -576,16 +576,16 @@
   <data name="pictureBoxInfo.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;pictureBoxInfo.Name" xml:space="preserve">
+  <data name=">>pictureBoxInfo.Name" xml:space="preserve">
     <value>pictureBoxInfo</value>
   </data>
-  <data name="&gt;&gt;pictureBoxInfo.Type" xml:space="preserve">
+  <data name=">>pictureBoxInfo.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBoxInfo.Parent" xml:space="preserve">
+  <data name=">>pictureBoxInfo.Parent" xml:space="preserve">
     <value>m_tableLpInfo</value>
   </data>
-  <data name="&gt;&gt;pictureBoxInfo.ZOrder" xml:space="preserve">
+  <data name=">>pictureBoxInfo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="m_tableLpInfo.Font" type="System.Drawing.Font, System.Drawing">
@@ -603,16 +603,16 @@
   <data name="m_tableLpInfo.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;m_tableLpInfo.Name" xml:space="preserve">
+  <data name=">>m_tableLpInfo.Name" xml:space="preserve">
     <value>m_tableLpInfo</value>
   </data>
-  <data name="&gt;&gt;m_tableLpInfo.Type" xml:space="preserve">
+  <data name=">>m_tableLpInfo.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_tableLpInfo.Parent" xml:space="preserve">
+  <data name=">>m_tableLpInfo.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;m_tableLpInfo.ZOrder" xml:space="preserve">
+  <data name=">>m_tableLpInfo.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="m_tableLpInfo.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -636,16 +636,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -684,16 +684,16 @@
   <data name="autoHeightLabel4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel4.Name" xml:space="preserve">
+  <data name=">>autoHeightLabel4.Name" xml:space="preserve">
     <value>autoHeightLabel4</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel4.Type" xml:space="preserve">
+  <data name=">>autoHeightLabel4.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel4.Parent" xml:space="preserve">
+  <data name=">>autoHeightLabel4.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel4.ZOrder" xml:space="preserve">
+  <data name=">>autoHeightLabel4.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="pictureBox1.Font" type="System.Drawing.Font, System.Drawing">
@@ -711,16 +711,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+  <data name=">>pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+  <data name=">>pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+  <data name=">>pictureBox1.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="pictureBox2.Font" type="System.Drawing.Font, System.Drawing">
@@ -738,16 +738,16 @@
   <data name="pictureBox2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;pictureBox2.Name" xml:space="preserve">
+  <data name=">>pictureBox2.Name" xml:space="preserve">
     <value>pictureBox2</value>
   </data>
-  <data name="&gt;&gt;pictureBox2.Type" xml:space="preserve">
+  <data name=">>pictureBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox2.Parent" xml:space="preserve">
+  <data name=">>pictureBox2.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
+  <data name=">>pictureBox2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="autoHeightLabel5.AutoSize" type="System.Boolean, mscorlib">
@@ -774,16 +774,16 @@
   <data name="autoHeightLabel5.Text" xml:space="preserve">
     <value>You have not selected any SRs </value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel5.Name" xml:space="preserve">
+  <data name=">>autoHeightLabel5.Name" xml:space="preserve">
     <value>autoHeightLabel5</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel5.Type" xml:space="preserve">
+  <data name=">>autoHeightLabel5.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel5.Parent" xml:space="preserve">
+  <data name=">>autoHeightLabel5.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel5.ZOrder" xml:space="preserve">
+  <data name=">>autoHeightLabel5.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
@@ -798,10 +798,10 @@
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel3.Name" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel3.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -834,10 +834,10 @@
   <data name="autoHeightLabel6.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel6.Name" xml:space="preserve">
+  <data name=">>autoHeightLabel6.Name" xml:space="preserve">
     <value>autoHeightLabel6</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel6.Type" xml:space="preserve">
+  <data name=">>autoHeightLabel6.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -861,40 +861,40 @@
   <data name="$this.Text" xml:space="preserve">
     <value>DRConfigureDialog</value>
   </data>
-  <data name="&gt;&gt;columnTick.Name" xml:space="preserve">
+  <data name=">>columnTick.Name" xml:space="preserve">
     <value>columnTick</value>
   </data>
-  <data name="&gt;&gt;columnTick.Type" xml:space="preserve">
+  <data name=">>columnTick.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnName.Name" xml:space="preserve">
+  <data name=">>columnName.Name" xml:space="preserve">
     <value>columnName</value>
   </data>
-  <data name="&gt;&gt;columnName.Type" xml:space="preserve">
+  <data name=">>columnName.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnDesc.Name" xml:space="preserve">
+  <data name=">>columnDesc.Name" xml:space="preserve">
     <value>columnDesc</value>
   </data>
-  <data name="&gt;&gt;columnDesc.Type" xml:space="preserve">
+  <data name=">>columnDesc.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnType.Name" xml:space="preserve">
+  <data name=">>columnType.Name" xml:space="preserve">
     <value>columnType</value>
   </data>
-  <data name="&gt;&gt;columnType.Type" xml:space="preserve">
+  <data name=">>columnType.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnSpace.Name" xml:space="preserve">
+  <data name=">>columnSpace.Name" xml:space="preserve">
     <value>columnSpace</value>
   </data>
-  <data name="&gt;&gt;columnSpace.Type" xml:space="preserve">
+  <data name=">>columnSpace.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>DRConfigureDialog</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

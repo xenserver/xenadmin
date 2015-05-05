@@ -140,16 +140,16 @@
   <data name="pictureBoxWarningTriangle.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
   </data>
-  <data name="&gt;&gt;pictureBoxWarningTriangle.Name" xml:space="preserve">
+  <data name=">>pictureBoxWarningTriangle.Name" xml:space="preserve">
     <value>pictureBoxWarningTriangle</value>
   </data>
-  <data name="&gt;&gt;pictureBoxWarningTriangle.Type" xml:space="preserve">
+  <data name=">>pictureBoxWarningTriangle.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBoxWarningTriangle.Parent" xml:space="preserve">
+  <data name=">>pictureBoxWarningTriangle.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;pictureBoxWarningTriangle.ZOrder" xml:space="preserve">
+  <data name=">>pictureBoxWarningTriangle.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelStatus.AutoSize" type="System.Boolean, mscorlib">
@@ -173,16 +173,16 @@
 
 [高可用性の構成] をクリックすると、このプールの高可用性が有効になります。これにより、サーバーで予期しない障害が発生した場合に、VM が自動的に再起動します。</value>
   </data>
-  <data name="&gt;&gt;labelStatus.Name" xml:space="preserve">
+  <data name=">>labelStatus.Name" xml:space="preserve">
     <value>labelStatus</value>
   </data>
-  <data name="&gt;&gt;labelStatus.Type" xml:space="preserve">
+  <data name=">>labelStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelStatus.Parent" xml:space="preserve">
+  <data name=">>labelStatus.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;labelStatus.ZOrder" xml:space="preserve">
+  <data name=">>labelStatus.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
@@ -197,16 +197,16 @@
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -236,16 +236,16 @@
   <data name="buttonConfigure.Text" xml:space="preserve">
     <value>高可用性の構成(&amp;C)...</value>
   </data>
-  <data name="&gt;&gt;buttonConfigure.Name" xml:space="preserve">
+  <data name=">>buttonConfigure.Name" xml:space="preserve">
     <value>buttonConfigure</value>
   </data>
-  <data name="&gt;&gt;buttonConfigure.Type" xml:space="preserve">
+  <data name=">>buttonConfigure.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonConfigure.Parent" xml:space="preserve">
+  <data name=">>buttonConfigure.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;buttonConfigure.ZOrder" xml:space="preserve">
+  <data name=">>buttonConfigure.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="buttonEnableDisableHa.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -269,16 +269,16 @@
   <data name="buttonEnableDisableHa.Text" xml:space="preserve">
     <value>高可用性の有効化(&amp;E)...</value>
   </data>
-  <data name="&gt;&gt;buttonEnableDisableHa.Name" xml:space="preserve">
+  <data name=">>buttonEnableDisableHa.Name" xml:space="preserve">
     <value>buttonEnableDisableHa</value>
   </data>
-  <data name="&gt;&gt;buttonEnableDisableHa.Type" xml:space="preserve">
+  <data name=">>buttonEnableDisableHa.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonEnableDisableHa.Parent" xml:space="preserve">
+  <data name=">>buttonEnableDisableHa.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;buttonEnableDisableHa.ZOrder" xml:space="preserve">
+  <data name=">>buttonEnableDisableHa.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -296,16 +296,16 @@
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Name" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLatencies.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -329,16 +329,16 @@
   <data name="tableLatencies.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;tableLatencies.Name" xml:space="preserve">
+  <data name=">>tableLatencies.Name" xml:space="preserve">
     <value>tableLatencies</value>
   </data>
-  <data name="&gt;&gt;tableLatencies.Type" xml:space="preserve">
+  <data name=">>tableLatencies.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLatencies.Parent" xml:space="preserve">
+  <data name=">>tableLatencies.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLatencies.ZOrder" xml:space="preserve">
+  <data name=">>tableLatencies.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLatencies.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -359,16 +359,16 @@
   <data name="customListPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;customListPanel.Name" xml:space="preserve">
+  <data name=">>customListPanel.Name" xml:space="preserve">
     <value>customListPanel</value>
   </data>
-  <data name="&gt;&gt;customListPanel.Type" xml:space="preserve">
+  <data name=">>customListPanel.Type" xml:space="preserve">
     <value>XenAdmin.Controls.CustomListPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;customListPanel.Parent" xml:space="preserve">
+  <data name=">>customListPanel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;customListPanel.ZOrder" xml:space="preserve">
+  <data name=">>customListPanel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -389,16 +389,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -407,16 +407,16 @@
   <data name="pageContainerPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>920, 549</value>
   </data>
-  <data name="&gt;&gt;pageContainerPanel.Name" xml:space="preserve">
+  <data name=">>pageContainerPanel.Name" xml:space="preserve">
     <value>pageContainerPanel</value>
   </data>
-  <data name="&gt;&gt;pageContainerPanel.Type" xml:space="preserve">
+  <data name=">>pageContainerPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pageContainerPanel.Parent" xml:space="preserve">
+  <data name=">>pageContainerPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;pageContainerPanel.ZOrder" xml:space="preserve">
+  <data name=">>pageContainerPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="label6.AutoSize" type="System.Boolean, mscorlib">
@@ -434,10 +434,10 @@
   <data name="label6.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;label6.Name" xml:space="preserve">
+  <data name=">>label6.Name" xml:space="preserve">
     <value>label6</value>
   </data>
-  <data name="&gt;&gt;label6.Type" xml:space="preserve">
+  <data name=">>label6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -452,10 +452,10 @@
   <data name="label10.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;label10.Name" xml:space="preserve">
+  <data name=">>label10.Name" xml:space="preserve">
     <value>label10</value>
   </data>
-  <data name="&gt;&gt;label10.Type" xml:space="preserve">
+  <data name=">>label10.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -470,10 +470,10 @@
   <data name="label9.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;label9.Name" xml:space="preserve">
+  <data name=">>label9.Name" xml:space="preserve">
     <value>label9</value>
   </data>
-  <data name="&gt;&gt;label9.Type" xml:space="preserve">
+  <data name=">>label9.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -488,10 +488,10 @@
   <data name="label8.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;label8.Name" xml:space="preserve">
+  <data name=">>label8.Name" xml:space="preserve">
     <value>label8</value>
   </data>
-  <data name="&gt;&gt;label8.Type" xml:space="preserve">
+  <data name=">>label8.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -506,10 +506,10 @@
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;label7.Name" xml:space="preserve">
+  <data name=">>label7.Name" xml:space="preserve">
     <value>label7</value>
   </data>
-  <data name="&gt;&gt;label7.Type" xml:space="preserve">
+  <data name=">>label7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TitleLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -539,10 +539,10 @@
   <data name="TitleLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;TitleLabel.Name" xml:space="preserve">
+  <data name=">>TitleLabel.Name" xml:space="preserve">
     <value>TitleLabel</value>
   </data>
-  <data name="&gt;&gt;TitleLabel.Type" xml:space="preserve">
+  <data name=">>TitleLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -560,10 +560,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>920, 586</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>HAPage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.TabPages.BaseTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

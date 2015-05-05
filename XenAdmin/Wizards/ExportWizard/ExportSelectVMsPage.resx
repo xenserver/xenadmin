@@ -144,16 +144,16 @@
   <data name="m_ctrlError.TabIndex" type="System.Int32, mscorlib">
     <value>100</value>
   </data>
-  <data name="&gt;&gt;m_ctrlError.Name" xml:space="preserve">
+  <data name=">>m_ctrlError.Name" xml:space="preserve">
     <value>m_ctrlError</value>
   </data>
-  <data name="&gt;&gt;m_ctrlError.Type" xml:space="preserve">
+  <data name=">>m_ctrlError.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.PasswordFailure, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;m_ctrlError.Parent" xml:space="preserve">
+  <data name=">>m_ctrlError.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;m_ctrlError.ZOrder" xml:space="preserve">
+  <data name=">>m_ctrlError.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="m_labelIntro.AutoSize" type="System.Boolean, mscorlib">
@@ -178,16 +178,16 @@
     <value>Select the VM(s) you want to export from the list of available VMs and then click Next.
 Note that only VMs that are currently shut down or suspended are listed here.</value>
   </data>
-  <data name="&gt;&gt;m_labelIntro.Name" xml:space="preserve">
+  <data name=">>m_labelIntro.Name" xml:space="preserve">
     <value>m_labelIntro</value>
   </data>
-  <data name="&gt;&gt;m_labelIntro.Type" xml:space="preserve">
+  <data name=">>m_labelIntro.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;m_labelIntro.Parent" xml:space="preserve">
+  <data name=">>m_labelIntro.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;m_labelIntro.ZOrder" xml:space="preserve">
+  <data name=">>m_labelIntro.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="m_buttonSelectAll.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -205,16 +205,16 @@ Note that only VMs that are currently shut down or suspended are listed here.</v
   <data name="m_buttonSelectAll.Text" xml:space="preserve">
     <value>&amp;Select All</value>
   </data>
-  <data name="&gt;&gt;m_buttonSelectAll.Name" xml:space="preserve">
+  <data name=">>m_buttonSelectAll.Name" xml:space="preserve">
     <value>m_buttonSelectAll</value>
   </data>
-  <data name="&gt;&gt;m_buttonSelectAll.Type" xml:space="preserve">
+  <data name=">>m_buttonSelectAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_buttonSelectAll.Parent" xml:space="preserve">
+  <data name=">>m_buttonSelectAll.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;m_buttonSelectAll.ZOrder" xml:space="preserve">
+  <data name=">>m_buttonSelectAll.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="m_buttonClearAll.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -232,16 +232,16 @@ Note that only VMs that are currently shut down or suspended are listed here.</v
   <data name="m_buttonClearAll.Text" xml:space="preserve">
     <value>&amp;Clear All</value>
   </data>
-  <data name="&gt;&gt;m_buttonClearAll.Name" xml:space="preserve">
+  <data name=">>m_buttonClearAll.Name" xml:space="preserve">
     <value>m_buttonClearAll</value>
   </data>
-  <data name="&gt;&gt;m_buttonClearAll.Type" xml:space="preserve">
+  <data name=">>m_buttonClearAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_buttonClearAll.Parent" xml:space="preserve">
+  <data name=">>m_buttonClearAll.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;m_buttonClearAll.ZOrder" xml:space="preserve">
+  <data name=">>m_buttonClearAll.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
@@ -271,16 +271,16 @@ Note that only VMs that are currently shut down or suspended are listed here.</v
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+  <data name=">>pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+  <data name=">>pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+  <data name=">>pictureBox1.Parent" xml:space="preserve">
     <value>m_tlpWarning</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="autoHeightLabel1.AutoSize" type="System.Boolean, mscorlib">
@@ -304,16 +304,16 @@ Note that only VMs that are currently shut down or suspended are listed here.</v
   <data name="autoHeightLabel1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel1.Name" xml:space="preserve">
+  <data name=">>autoHeightLabel1.Name" xml:space="preserve">
     <value>autoHeightLabel1</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel1.Type" xml:space="preserve">
+  <data name=">>autoHeightLabel1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel1.Parent" xml:space="preserve">
+  <data name=">>autoHeightLabel1.Parent" xml:space="preserve">
     <value>m_tlpWarning</value>
   </data>
-  <data name="&gt;&gt;autoHeightLabel1.ZOrder" xml:space="preserve">
+  <data name=">>autoHeightLabel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="m_tlpWarning.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -331,16 +331,16 @@ Note that only VMs that are currently shut down or suspended are listed here.</v
   <data name="m_tlpWarning.TabIndex" type="System.Int32, mscorlib">
     <value>101</value>
   </data>
-  <data name="&gt;&gt;m_tlpWarning.Name" xml:space="preserve">
+  <data name=">>m_tlpWarning.Name" xml:space="preserve">
     <value>m_tlpWarning</value>
   </data>
-  <data name="&gt;&gt;m_tlpWarning.Type" xml:space="preserve">
+  <data name=">>m_tlpWarning.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_tlpWarning.Parent" xml:space="preserve">
+  <data name=">>m_tlpWarning.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;m_tlpWarning.ZOrder" xml:space="preserve">
+  <data name=">>m_tlpWarning.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="m_tlpWarning.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -394,16 +394,16 @@ Note that only VMs that are currently shut down or suspended are listed here.</v
   <data name="m_dataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>102</value>
   </data>
-  <data name="&gt;&gt;m_dataGridView.Name" xml:space="preserve">
+  <data name=">>m_dataGridView.Name" xml:space="preserve">
     <value>m_dataGridView</value>
   </data>
-  <data name="&gt;&gt;m_dataGridView.Type" xml:space="preserve">
+  <data name=">>m_dataGridView.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_dataGridView.Parent" xml:space="preserve">
+  <data name=">>m_dataGridView.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;m_dataGridView.ZOrder" xml:space="preserve">
+  <data name=">>m_dataGridView.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="tableLayoutPanel3.AutoSize" type="System.Boolean, mscorlib">
@@ -433,16 +433,16 @@ Note that only VMs that are currently shut down or suspended are listed here.</v
   <data name="m_labelCounter.Text" xml:space="preserve">
     <value>{0} VMs selected</value>
   </data>
-  <data name="&gt;&gt;m_labelCounter.Name" xml:space="preserve">
+  <data name=">>m_labelCounter.Name" xml:space="preserve">
     <value>m_labelCounter</value>
   </data>
-  <data name="&gt;&gt;m_labelCounter.Type" xml:space="preserve">
+  <data name=">>m_labelCounter.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_labelCounter.Parent" xml:space="preserve">
+  <data name=">>m_labelCounter.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;m_labelCounter.ZOrder" xml:space="preserve">
+  <data name=">>m_labelCounter.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -460,16 +460,16 @@ Note that only VMs that are currently shut down or suspended are listed here.</v
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>103</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel3.Name" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel3.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel3.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel3.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -493,16 +493,16 @@ Note that only VMs that are currently shut down or suspended are listed here.</v
   <data name="m_searchTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;m_searchTextBox.Name" xml:space="preserve">
+  <data name=">>m_searchTextBox.Name" xml:space="preserve">
     <value>m_searchTextBox</value>
   </data>
-  <data name="&gt;&gt;m_searchTextBox.Type" xml:space="preserve">
+  <data name=">>m_searchTextBox.Type" xml:space="preserve">
     <value>XenAdmin.Controls.SearchTextBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;m_searchTextBox.Parent" xml:space="preserve">
+  <data name=">>m_searchTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel4</value>
   </data>
-  <data name="&gt;&gt;m_searchTextBox.ZOrder" xml:space="preserve">
+  <data name=">>m_searchTextBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -523,16 +523,16 @@ Note that only VMs that are currently shut down or suspended are listed here.</v
   <data name="label2.Text" xml:space="preserve">
     <value>&amp;VMs in pool {0}</value>
   </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+  <data name=">>label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+  <data name=">>label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+  <data name=">>label2.Parent" xml:space="preserve">
     <value>tableLayoutPanel4</value>
   </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+  <data name=">>label2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -550,16 +550,16 @@ Note that only VMs that are currently shut down or suspended are listed here.</v
   <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
     <value>104</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel4.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel4.Name" xml:space="preserve">
     <value>tableLayoutPanel4</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel4.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel4.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel4.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel4.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel4.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel4.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="tableLayoutPanel4.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -580,16 +580,16 @@ Note that only VMs that are currently shut down or suspended are listed here.</v
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -604,40 +604,40 @@ Note that only VMs that are currently shut down or suspended are listed here.</v
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>579, 344</value>
   </data>
-  <data name="&gt;&gt;columnTick.Name" xml:space="preserve">
+  <data name=">>columnTick.Name" xml:space="preserve">
     <value>columnTick</value>
   </data>
-  <data name="&gt;&gt;columnTick.Type" xml:space="preserve">
+  <data name=">>columnTick.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnVM.Name" xml:space="preserve">
+  <data name=">>columnVM.Name" xml:space="preserve">
     <value>columnVM</value>
   </data>
-  <data name="&gt;&gt;columnVM.Type" xml:space="preserve">
+  <data name=">>columnVM.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnDesc.Name" xml:space="preserve">
+  <data name=">>columnDesc.Name" xml:space="preserve">
     <value>columnDesc</value>
   </data>
-  <data name="&gt;&gt;columnDesc.Type" xml:space="preserve">
+  <data name=">>columnDesc.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnSize.Name" xml:space="preserve">
+  <data name=">>columnSize.Name" xml:space="preserve">
     <value>columnSize</value>
   </data>
-  <data name="&gt;&gt;columnSize.Type" xml:space="preserve">
+  <data name=">>columnSize.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnVapp.Name" xml:space="preserve">
+  <data name=">>columnVapp.Name" xml:space="preserve">
     <value>columnVapp</value>
   </data>
-  <data name="&gt;&gt;columnVapp.Type" xml:space="preserve">
+  <data name=">>columnVapp.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>ExportSelectVMsPage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Wizards.GenericPages.ImExPortPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

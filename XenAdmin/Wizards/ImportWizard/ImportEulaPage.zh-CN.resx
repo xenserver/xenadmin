@@ -135,16 +135,16 @@
   <data name="m_tabControlEULA.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;m_tabControlEULA.Name" xml:space="preserve">
+  <data name=">>m_tabControlEULA.Name" xml:space="preserve">
     <value>m_tabControlEULA</value>
   </data>
-  <data name="&gt;&gt;m_tabControlEULA.Type" xml:space="preserve">
+  <data name=">>m_tabControlEULA.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_tabControlEULA.Parent" xml:space="preserve">
+  <data name=">>m_tabControlEULA.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;m_tabControlEULA.ZOrder" xml:space="preserve">
+  <data name=">>m_tabControlEULA.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="m_labelIntro.AutoSize" type="System.Boolean, mscorlib">
@@ -165,16 +165,16 @@
   <data name="m_labelIntro.Text" xml:space="preserve">
     <value>阅读并接受 EULA 以继续操作，或者按“取消”退出向导。</value>
   </data>
-  <data name="&gt;&gt;m_labelIntro.Name" xml:space="preserve">
+  <data name=">>m_labelIntro.Name" xml:space="preserve">
     <value>m_labelIntro</value>
   </data>
-  <data name="&gt;&gt;m_labelIntro.Type" xml:space="preserve">
+  <data name=">>m_labelIntro.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;m_labelIntro.Parent" xml:space="preserve">
+  <data name=">>m_labelIntro.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;m_labelIntro.ZOrder" xml:space="preserve">
+  <data name=">>m_labelIntro.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="m_checkBoxAccept.AutoSize" type="System.Boolean, mscorlib">
@@ -192,16 +192,16 @@
   <data name="m_checkBoxAccept.Text" xml:space="preserve">
     <value>我接受最终用户许可协议(&amp;A)。</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxAccept.Name" xml:space="preserve">
+  <data name=">>m_checkBoxAccept.Name" xml:space="preserve">
     <value>m_checkBoxAccept</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxAccept.Type" xml:space="preserve">
+  <data name=">>m_checkBoxAccept.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxAccept.Parent" xml:space="preserve">
+  <data name=">>m_checkBoxAccept.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxAccept.ZOrder" xml:space="preserve">
+  <data name=">>m_checkBoxAccept.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="m_ctrlError.AutoSize" type="System.Boolean, mscorlib">
@@ -228,16 +228,16 @@
   <data name="m_ctrlError.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;m_ctrlError.Name" xml:space="preserve">
+  <data name=">>m_ctrlError.Name" xml:space="preserve">
     <value>m_ctrlError</value>
   </data>
-  <data name="&gt;&gt;m_ctrlError.Type" xml:space="preserve">
+  <data name=">>m_ctrlError.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.PasswordFailure, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;m_ctrlError.Parent" xml:space="preserve">
+  <data name=">>m_ctrlError.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;m_ctrlError.ZOrder" xml:space="preserve">
+  <data name=">>m_ctrlError.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -255,16 +255,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -279,10 +279,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>615, 371</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>ImportEulaPage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Wizards.GenericPages.ImExPortPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -138,16 +138,16 @@
   <data name="iconBoxDynMin.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;iconBoxDynMin.Name" xml:space="preserve">
+  <data name=">>iconBoxDynMin.Name" xml:space="preserve">
     <value>iconBoxDynMin</value>
   </data>
-  <data name="&gt;&gt;iconBoxDynMin.Type" xml:space="preserve">
+  <data name=">>iconBoxDynMin.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;iconBoxDynMin.Parent" xml:space="preserve">
+  <data name=">>iconBoxDynMin.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;iconBoxDynMin.ZOrder" xml:space="preserve">
+  <data name=">>iconBoxDynMin.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="iconBoxDynMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -165,16 +165,16 @@
   <data name="iconBoxDynMax.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;iconBoxDynMax.Name" xml:space="preserve">
+  <data name=">>iconBoxDynMax.Name" xml:space="preserve">
     <value>iconBoxDynMax</value>
   </data>
-  <data name="&gt;&gt;iconBoxDynMax.Type" xml:space="preserve">
+  <data name=">>iconBoxDynMax.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;iconBoxDynMax.Parent" xml:space="preserve">
+  <data name=">>iconBoxDynMax.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;iconBoxDynMax.ZOrder" xml:space="preserve">
+  <data name=">>iconBoxDynMax.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="labelDynMin.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -204,16 +204,16 @@
   <data name="labelDynMin.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelDynMin.Name" xml:space="preserve">
+  <data name=">>labelDynMin.Name" xml:space="preserve">
     <value>labelDynMin</value>
   </data>
-  <data name="&gt;&gt;labelDynMin.Type" xml:space="preserve">
+  <data name=">>labelDynMin.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelDynMin.Parent" xml:space="preserve">
+  <data name=">>labelDynMin.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelDynMin.ZOrder" xml:space="preserve">
+  <data name=">>labelDynMin.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="labelDynMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -240,16 +240,16 @@
   <data name="labelDynMax.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelDynMax.Name" xml:space="preserve">
+  <data name=">>labelDynMax.Name" xml:space="preserve">
     <value>labelDynMax</value>
   </data>
-  <data name="&gt;&gt;labelDynMax.Type" xml:space="preserve">
+  <data name=">>labelDynMax.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelDynMax.Parent" xml:space="preserve">
+  <data name=">>labelDynMax.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelDynMax.ZOrder" xml:space="preserve">
+  <data name=">>labelDynMax.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="labelStatMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -276,16 +276,16 @@
   <data name="labelStatMax.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelStatMax.Name" xml:space="preserve">
+  <data name=">>labelStatMax.Name" xml:space="preserve">
     <value>labelStatMax</value>
   </data>
-  <data name="&gt;&gt;labelStatMax.Type" xml:space="preserve">
+  <data name=">>labelStatMax.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelStatMax.Parent" xml:space="preserve">
+  <data name=">>labelStatMax.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelStatMax.ZOrder" xml:space="preserve">
+  <data name=">>labelStatMax.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="valueDynMin.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -309,16 +309,16 @@
   <data name="valueDynMin.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;valueDynMin.Name" xml:space="preserve">
+  <data name=">>valueDynMin.Name" xml:space="preserve">
     <value>valueDynMin</value>
   </data>
-  <data name="&gt;&gt;valueDynMin.Type" xml:space="preserve">
+  <data name=">>valueDynMin.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;valueDynMin.Parent" xml:space="preserve">
+  <data name=">>valueDynMin.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;valueDynMin.ZOrder" xml:space="preserve">
+  <data name=">>valueDynMin.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="valueDynMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -342,16 +342,16 @@
   <data name="valueDynMax.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;valueDynMax.Name" xml:space="preserve">
+  <data name=">>valueDynMax.Name" xml:space="preserve">
     <value>valueDynMax</value>
   </data>
-  <data name="&gt;&gt;valueDynMax.Type" xml:space="preserve">
+  <data name=">>valueDynMax.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;valueDynMax.Parent" xml:space="preserve">
+  <data name=">>valueDynMax.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;valueDynMax.ZOrder" xml:space="preserve">
+  <data name=">>valueDynMax.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="valueStatMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -375,16 +375,16 @@
   <data name="valueStatMax.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;valueStatMax.Name" xml:space="preserve">
+  <data name=">>valueStatMax.Name" xml:space="preserve">
     <value>valueStatMax</value>
   </data>
-  <data name="&gt;&gt;valueStatMax.Type" xml:space="preserve">
+  <data name=">>valueStatMax.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;valueStatMax.Parent" xml:space="preserve">
+  <data name=">>valueStatMax.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;valueStatMax.ZOrder" xml:space="preserve">
+  <data name=">>valueStatMax.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="unitsDynMin.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -411,16 +411,16 @@
   <data name="unitsDynMin.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;unitsDynMin.Name" xml:space="preserve">
+  <data name=">>unitsDynMin.Name" xml:space="preserve">
     <value>unitsDynMin</value>
   </data>
-  <data name="&gt;&gt;unitsDynMin.Type" xml:space="preserve">
+  <data name=">>unitsDynMin.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;unitsDynMin.Parent" xml:space="preserve">
+  <data name=">>unitsDynMin.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;unitsDynMin.ZOrder" xml:space="preserve">
+  <data name=">>unitsDynMin.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="unitsDynMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -447,16 +447,16 @@
   <data name="unitsDynMax.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;unitsDynMax.Name" xml:space="preserve">
+  <data name=">>unitsDynMax.Name" xml:space="preserve">
     <value>unitsDynMax</value>
   </data>
-  <data name="&gt;&gt;unitsDynMax.Type" xml:space="preserve">
+  <data name=">>unitsDynMax.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;unitsDynMax.Parent" xml:space="preserve">
+  <data name=">>unitsDynMax.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;unitsDynMax.ZOrder" xml:space="preserve">
+  <data name=">>unitsDynMax.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="unitsStatMax.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -483,16 +483,16 @@
   <data name="unitsStatMax.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;unitsStatMax.Name" xml:space="preserve">
+  <data name=">>unitsStatMax.Name" xml:space="preserve">
     <value>unitsStatMax</value>
   </data>
-  <data name="&gt;&gt;unitsStatMax.Type" xml:space="preserve">
+  <data name=">>unitsStatMax.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;unitsStatMax.Parent" xml:space="preserve">
+  <data name=">>unitsStatMax.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;unitsStatMax.ZOrder" xml:space="preserve">
+  <data name=">>unitsStatMax.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="editButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -516,16 +516,16 @@
   <data name="editButton.Text" xml:space="preserve">
     <value>编辑(&amp;E)...</value>
   </data>
-  <data name="&gt;&gt;editButton.Name" xml:space="preserve">
+  <data name=">>editButton.Name" xml:space="preserve">
     <value>editButton</value>
   </data>
-  <data name="&gt;&gt;editButton.Type" xml:space="preserve">
+  <data name=">>editButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;editButton.Parent" xml:space="preserve">
+  <data name=">>editButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;editButton.ZOrder" xml:space="preserve">
+  <data name=">>editButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="vmShinyBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -543,16 +543,16 @@
   <data name="vmShinyBar.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;vmShinyBar.Name" xml:space="preserve">
+  <data name=">>vmShinyBar.Name" xml:space="preserve">
     <value>vmShinyBar</value>
   </data>
-  <data name="&gt;&gt;vmShinyBar.Type" xml:space="preserve">
+  <data name=">>vmShinyBar.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Ballooning.VMShinyBar, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;vmShinyBar.Parent" xml:space="preserve">
+  <data name=">>vmShinyBar.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;vmShinyBar.ZOrder" xml:space="preserve">
+  <data name=">>vmShinyBar.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -567,10 +567,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>700, 90</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>VMMemoryControlsNoEdit</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Ballooning.VMMemoryControlsBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -174,16 +174,16 @@
   <data name="ConnectionTimeoutLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;ConnectionTimeoutLabel.Name" xml:space="preserve">
+  <data name=">>ConnectionTimeoutLabel.Name" xml:space="preserve">
     <value>ConnectionTimeoutLabel</value>
   </data>
-  <data name="&gt;&gt;ConnectionTimeoutLabel.Type" xml:space="preserve">
+  <data name=">>ConnectionTimeoutLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ConnectionTimeoutLabel.Parent" xml:space="preserve">
+  <data name=">>ConnectionTimeoutLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;ConnectionTimeoutLabel.ZOrder" xml:space="preserve">
+  <data name=">>ConnectionTimeoutLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="ConnectionTimeoutNud.Font" type="System.Drawing.Font, System.Drawing">
@@ -201,16 +201,16 @@
   <data name="ConnectionTimeoutNud.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;ConnectionTimeoutNud.Name" xml:space="preserve">
+  <data name=">>ConnectionTimeoutNud.Name" xml:space="preserve">
     <value>ConnectionTimeoutNud</value>
   </data>
-  <data name="&gt;&gt;ConnectionTimeoutNud.Type" xml:space="preserve">
+  <data name=">>ConnectionTimeoutNud.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ConnectionTimeoutNud.Parent" xml:space="preserve">
+  <data name=">>ConnectionTimeoutNud.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;ConnectionTimeoutNud.ZOrder" xml:space="preserve">
+  <data name=">>ConnectionTimeoutNud.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="SecondsLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -240,16 +240,16 @@
   <data name="SecondsLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;SecondsLabel.Name" xml:space="preserve">
+  <data name=">>SecondsLabel.Name" xml:space="preserve">
     <value>SecondsLabel</value>
   </data>
-  <data name="&gt;&gt;SecondsLabel.Type" xml:space="preserve">
+  <data name=">>SecondsLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SecondsLabel.Parent" xml:space="preserve">
+  <data name=">>SecondsLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;SecondsLabel.ZOrder" xml:space="preserve">
+  <data name=">>SecondsLabel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
@@ -264,16 +264,16 @@
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Parent" xml:space="preserve">
     <value>TimeoutGroupBox</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -300,16 +300,16 @@
   <data name="TimeOutLabel.Text" xml:space="preserve">
     <value>指定在与托管服务器的连接中断时的等待时间</value>
   </data>
-  <data name="&gt;&gt;TimeOutLabel.Name" xml:space="preserve">
+  <data name=">>TimeOutLabel.Name" xml:space="preserve">
     <value>TimeOutLabel</value>
   </data>
-  <data name="&gt;&gt;TimeOutLabel.Type" xml:space="preserve">
+  <data name=">>TimeOutLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TimeOutLabel.Parent" xml:space="preserve">
+  <data name=">>TimeOutLabel.Parent" xml:space="preserve">
     <value>TimeoutGroupBox</value>
   </data>
-  <data name="&gt;&gt;TimeOutLabel.ZOrder" xml:space="preserve">
+  <data name=">>TimeOutLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="TimeoutGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -333,16 +333,16 @@
   <data name="TimeoutGroupBox.Text" xml:space="preserve">
     <value>连接超时</value>
   </data>
-  <data name="&gt;&gt;TimeoutGroupBox.Name" xml:space="preserve">
+  <data name=">>TimeoutGroupBox.Name" xml:space="preserve">
     <value>TimeoutGroupBox</value>
   </data>
-  <data name="&gt;&gt;TimeoutGroupBox.Type" xml:space="preserve">
+  <data name=">>TimeoutGroupBox.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;TimeoutGroupBox.Parent" xml:space="preserve">
+  <data name=">>TimeoutGroupBox.Parent" xml:space="preserve">
     <value>ConnectionTableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;TimeoutGroupBox.ZOrder" xml:space="preserve">
+  <data name=">>TimeoutGroupBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="ProxyGroupBox.AutoSize" type="System.Boolean, mscorlib">
@@ -390,16 +390,16 @@
   <data name="ProxyAddressLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;ProxyAddressLabel.Name" xml:space="preserve">
+  <data name=">>ProxyAddressLabel.Name" xml:space="preserve">
     <value>ProxyAddressLabel</value>
   </data>
-  <data name="&gt;&gt;ProxyAddressLabel.Type" xml:space="preserve">
+  <data name=">>ProxyAddressLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ProxyAddressLabel.Parent" xml:space="preserve">
+  <data name=">>ProxyAddressLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;ProxyAddressLabel.ZOrder" xml:space="preserve">
+  <data name=">>ProxyAddressLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="UseProxyRadioButton.AutoSize" type="System.Boolean, mscorlib">
@@ -423,16 +423,16 @@
   <data name="UseProxyRadioButton.Text" xml:space="preserve">
     <value>使用此代理服务器(&amp;T):</value>
   </data>
-  <data name="&gt;&gt;UseProxyRadioButton.Name" xml:space="preserve">
+  <data name=">>UseProxyRadioButton.Name" xml:space="preserve">
     <value>UseProxyRadioButton</value>
   </data>
-  <data name="&gt;&gt;UseProxyRadioButton.Type" xml:space="preserve">
+  <data name=">>UseProxyRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;UseProxyRadioButton.Parent" xml:space="preserve">
+  <data name=">>UseProxyRadioButton.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;UseProxyRadioButton.ZOrder" xml:space="preserve">
+  <data name=">>UseProxyRadioButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="DirectConnectionRadioButton.AutoSize" type="System.Boolean, mscorlib">
@@ -456,16 +456,16 @@
   <data name="DirectConnectionRadioButton.Text" xml:space="preserve">
     <value>不使用代理服务器(&amp;D)</value>
   </data>
-  <data name="&gt;&gt;DirectConnectionRadioButton.Name" xml:space="preserve">
+  <data name=">>DirectConnectionRadioButton.Name" xml:space="preserve">
     <value>DirectConnectionRadioButton</value>
   </data>
-  <data name="&gt;&gt;DirectConnectionRadioButton.Type" xml:space="preserve">
+  <data name=">>DirectConnectionRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DirectConnectionRadioButton.Parent" xml:space="preserve">
+  <data name=">>DirectConnectionRadioButton.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;DirectConnectionRadioButton.ZOrder" xml:space="preserve">
+  <data name=">>DirectConnectionRadioButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="UseIERadioButton.AutoSize" type="System.Boolean, mscorlib">
@@ -489,16 +489,16 @@
   <data name="UseIERadioButton.Text" xml:space="preserve">
     <value>使用 Internet Explorer 的代理服务器设置(&amp;E)</value>
   </data>
-  <data name="&gt;&gt;UseIERadioButton.Name" xml:space="preserve">
+  <data name=">>UseIERadioButton.Name" xml:space="preserve">
     <value>UseIERadioButton</value>
   </data>
-  <data name="&gt;&gt;UseIERadioButton.Type" xml:space="preserve">
+  <data name=">>UseIERadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;UseIERadioButton.Parent" xml:space="preserve">
+  <data name=">>UseIERadioButton.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;UseIERadioButton.ZOrder" xml:space="preserve">
+  <data name=">>UseIERadioButton.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="BypassLocalCheckBox.AutoSize" type="System.Boolean, mscorlib">
@@ -525,16 +525,16 @@
   <data name="BypassLocalCheckBox.Text" xml:space="preserve">
     <value>为本地地址绕过代理服务器(&amp;B)</value>
   </data>
-  <data name="&gt;&gt;BypassLocalCheckBox.Name" xml:space="preserve">
+  <data name=">>BypassLocalCheckBox.Name" xml:space="preserve">
     <value>BypassLocalCheckBox</value>
   </data>
-  <data name="&gt;&gt;BypassLocalCheckBox.Type" xml:space="preserve">
+  <data name=">>BypassLocalCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BypassLocalCheckBox.Parent" xml:space="preserve">
+  <data name=">>BypassLocalCheckBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;BypassLocalCheckBox.ZOrder" xml:space="preserve">
+  <data name=">>BypassLocalCheckBox.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="ProxyAddressTextBox.Font" type="System.Drawing.Font, System.Drawing">
@@ -552,16 +552,16 @@
   <data name="ProxyAddressTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;ProxyAddressTextBox.Name" xml:space="preserve">
+  <data name=">>ProxyAddressTextBox.Name" xml:space="preserve">
     <value>ProxyAddressTextBox</value>
   </data>
-  <data name="&gt;&gt;ProxyAddressTextBox.Type" xml:space="preserve">
+  <data name=">>ProxyAddressTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ProxyAddressTextBox.Parent" xml:space="preserve">
+  <data name=">>ProxyAddressTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;ProxyAddressTextBox.ZOrder" xml:space="preserve">
+  <data name=">>ProxyAddressTextBox.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="ProxyPortLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -594,16 +594,16 @@
   <data name="ProxyPortLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;ProxyPortLabel.Name" xml:space="preserve">
+  <data name=">>ProxyPortLabel.Name" xml:space="preserve">
     <value>ProxyPortLabel</value>
   </data>
-  <data name="&gt;&gt;ProxyPortLabel.Type" xml:space="preserve">
+  <data name=">>ProxyPortLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ProxyPortLabel.Parent" xml:space="preserve">
+  <data name=">>ProxyPortLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;ProxyPortLabel.ZOrder" xml:space="preserve">
+  <data name=">>ProxyPortLabel.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="ProxyPortTextBox.Font" type="System.Drawing.Font, System.Drawing">
@@ -624,16 +624,16 @@
   <data name="ProxyPortTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;ProxyPortTextBox.Name" xml:space="preserve">
+  <data name=">>ProxyPortTextBox.Name" xml:space="preserve">
     <value>ProxyPortTextBox</value>
   </data>
-  <data name="&gt;&gt;ProxyPortTextBox.Type" xml:space="preserve">
+  <data name=">>ProxyPortTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ProxyPortTextBox.Parent" xml:space="preserve">
+  <data name=">>ProxyPortTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;ProxyPortTextBox.ZOrder" xml:space="preserve">
+  <data name=">>ProxyPortTextBox.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
@@ -648,16 +648,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>ProxyGroupBox</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -684,16 +684,16 @@
   <data name="ProxyGroupBox.Text" xml:space="preserve">
     <value>代理服务器</value>
   </data>
-  <data name="&gt;&gt;ProxyGroupBox.Name" xml:space="preserve">
+  <data name=">>ProxyGroupBox.Name" xml:space="preserve">
     <value>ProxyGroupBox</value>
   </data>
-  <data name="&gt;&gt;ProxyGroupBox.Type" xml:space="preserve">
+  <data name=">>ProxyGroupBox.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ProxyGroupBox.Parent" xml:space="preserve">
+  <data name=">>ProxyGroupBox.Parent" xml:space="preserve">
     <value>ConnectionTableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;ProxyGroupBox.ZOrder" xml:space="preserve">
+  <data name=">>ProxyGroupBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
@@ -720,16 +720,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>通过这些设置，可以配置代理服务器或自定义 XenServer 连接，以实现高延迟环境。</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>ConnectionTableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="ConnectionTableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -753,16 +753,16 @@
   <data name="ConnectionTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;ConnectionTableLayoutPanel.Name" xml:space="preserve">
+  <data name=">>ConnectionTableLayoutPanel.Name" xml:space="preserve">
     <value>ConnectionTableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;ConnectionTableLayoutPanel.Type" xml:space="preserve">
+  <data name=">>ConnectionTableLayoutPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ConnectionTableLayoutPanel.Parent" xml:space="preserve">
+  <data name=">>ConnectionTableLayoutPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ConnectionTableLayoutPanel.ZOrder" xml:space="preserve">
+  <data name=">>ConnectionTableLayoutPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="ConnectionTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -777,10 +777,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>590, 348</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>ConnectionOptionsPage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

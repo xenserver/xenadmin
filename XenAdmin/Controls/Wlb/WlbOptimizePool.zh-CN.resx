@@ -141,16 +141,16 @@
   <data name="applyButton.Text" xml:space="preserve">
     <value>应用建议</value>
   </data>
-  <data name="&gt;&gt;applyButton.Name" xml:space="preserve">
+  <data name=">>applyButton.Name" xml:space="preserve">
     <value>applyButton</value>
   </data>
-  <data name="&gt;&gt;applyButton.Type" xml:space="preserve">
+  <data name=">>applyButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;applyButton.Parent" xml:space="preserve">
+  <data name=">>applyButton.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;applyButton.ZOrder" xml:space="preserve">
+  <data name=">>applyButton.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="statusLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -177,16 +177,16 @@
   <data name="statusLabel.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;statusLabel.Name" xml:space="preserve">
+  <data name=">>statusLabel.Name" xml:space="preserve">
     <value>statusLabel</value>
   </data>
-  <data name="&gt;&gt;statusLabel.Type" xml:space="preserve">
+  <data name=">>statusLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;statusLabel.Parent" xml:space="preserve">
+  <data name=">>statusLabel.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;statusLabel.ZOrder" xml:space="preserve">
+  <data name=">>statusLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="TitleLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -210,16 +210,16 @@
   <data name="TitleLabel.Text" xml:space="preserve">
     <value>优化建议</value>
   </data>
-  <data name="&gt;&gt;TitleLabel.Name" xml:space="preserve">
+  <data name=">>TitleLabel.Name" xml:space="preserve">
     <value>TitleLabel</value>
   </data>
-  <data name="&gt;&gt;TitleLabel.Type" xml:space="preserve">
+  <data name=">>TitleLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TitleLabel.Parent" xml:space="preserve">
+  <data name=">>TitleLabel.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;TitleLabel.ZOrder" xml:space="preserve">
+  <data name=">>TitleLabel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="linkLabelReportHistory.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -246,16 +246,16 @@
   <data name="linkLabelReportHistory.Text" xml:space="preserve">
     <value>查看历史记录...</value>
   </data>
-  <data name="&gt;&gt;linkLabelReportHistory.Name" xml:space="preserve">
+  <data name=">>linkLabelReportHistory.Name" xml:space="preserve">
     <value>linkLabelReportHistory</value>
   </data>
-  <data name="&gt;&gt;linkLabelReportHistory.Type" xml:space="preserve">
+  <data name=">>linkLabelReportHistory.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;linkLabelReportHistory.Parent" xml:space="preserve">
+  <data name=">>linkLabelReportHistory.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;linkLabelReportHistory.ZOrder" xml:space="preserve">
+  <data name=">>linkLabelReportHistory.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -312,16 +312,16 @@
   <data name="optimizePoolListView.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;optimizePoolListView.Name" xml:space="preserve">
+  <data name=">>optimizePoolListView.Name" xml:space="preserve">
     <value>optimizePoolListView</value>
   </data>
-  <data name="&gt;&gt;optimizePoolListView.Type" xml:space="preserve">
+  <data name=">>optimizePoolListView.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DoubleBufferedListView, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;optimizePoolListView.Parent" xml:space="preserve">
+  <data name=">>optimizePoolListView.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;optimizePoolListView.ZOrder" xml:space="preserve">
+  <data name=">>optimizePoolListView.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panel1.Font" type="System.Drawing.Font, System.Drawing">
@@ -339,16 +339,16 @@
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+  <data name=">>panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+  <data name=">>panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+  <data name=">>panel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+  <data name=">>panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="customListPanel.AutoSize" type="System.Boolean, mscorlib">
@@ -366,16 +366,16 @@
   <data name="customListPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;customListPanel.Name" xml:space="preserve">
+  <data name=">>customListPanel.Name" xml:space="preserve">
     <value>customListPanel</value>
   </data>
-  <data name="&gt;&gt;customListPanel.Type" xml:space="preserve">
+  <data name=">>customListPanel.Type" xml:space="preserve">
     <value>XenAdmin.Controls.CustomListPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;customListPanel.Parent" xml:space="preserve">
+  <data name=">>customListPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;customListPanel.ZOrder" xml:space="preserve">
+  <data name=">>customListPanel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -387,34 +387,34 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>796, 318</value>
   </data>
-  <data name="&gt;&gt;columnHeader0.Name" xml:space="preserve">
+  <data name=">>columnHeader0.Name" xml:space="preserve">
     <value>columnHeader0</value>
   </data>
-  <data name="&gt;&gt;columnHeader0.Type" xml:space="preserve">
+  <data name=">>columnHeader0.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnHeader1.Name" xml:space="preserve">
+  <data name=">>columnHeader1.Name" xml:space="preserve">
     <value>columnHeader1</value>
   </data>
-  <data name="&gt;&gt;columnHeader1.Type" xml:space="preserve">
+  <data name=">>columnHeader1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnHeader2.Name" xml:space="preserve">
+  <data name=">>columnHeader2.Name" xml:space="preserve">
     <value>columnHeader2</value>
   </data>
-  <data name="&gt;&gt;columnHeader2.Type" xml:space="preserve">
+  <data name=">>columnHeader2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnHeader3.Name" xml:space="preserve">
+  <data name=">>columnHeader3.Name" xml:space="preserve">
     <value>columnHeader3</value>
   </data>
-  <data name="&gt;&gt;columnHeader3.Type" xml:space="preserve">
+  <data name=">>columnHeader3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>WlbOptimizePool</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

@@ -148,16 +148,16 @@
     <value>这些选项用于指定在通过 vApp 自动启动 VM 或执行高可用性操作期间 VM 的首选启动顺序和时间。启动顺序为 0 (零)的 VM 将首先启动。也可以配置延迟间隔，以指定从 VM 启动到再按启动顺序启动下一组 VM 之间的等待时间。
 </value>
   </data>
-  <data name="&gt;&gt;labelwizard.Name" xml:space="preserve">
+  <data name=">>labelwizard.Name" xml:space="preserve">
     <value>labelwizard</value>
   </data>
-  <data name="&gt;&gt;labelwizard.Type" xml:space="preserve">
+  <data name=">>labelwizard.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelwizard.Parent" xml:space="preserve">
+  <data name=">>labelwizard.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelwizard.ZOrder" xml:space="preserve">
+  <data name=">>labelwizard.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
@@ -211,16 +211,16 @@
   <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Name" xml:space="preserve">
+  <data name=">>dataGridView1.Name" xml:space="preserve">
     <value>dataGridView1</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Type" xml:space="preserve">
+  <data name=">>dataGridView1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Parent" xml:space="preserve">
+  <data name=">>dataGridView1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.ZOrder" xml:space="preserve">
+  <data name=">>dataGridView1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="startupSequenceGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -259,16 +259,16 @@
   <data name="labelStartOrder.Text" xml:space="preserve">
     <value>启动顺序(&amp;S):</value>
   </data>
-  <data name="&gt;&gt;labelStartOrder.Name" xml:space="preserve">
+  <data name=">>labelStartOrder.Name" xml:space="preserve">
     <value>labelStartOrder</value>
   </data>
-  <data name="&gt;&gt;labelStartOrder.Type" xml:space="preserve">
+  <data name=">>labelStartOrder.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelStartOrder.Parent" xml:space="preserve">
+  <data name=">>labelStartOrder.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;labelStartOrder.ZOrder" xml:space="preserve">
+  <data name=">>labelStartOrder.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelStartDelayUnits.AutoSize" type="System.Boolean, mscorlib">
@@ -295,16 +295,16 @@
   <data name="labelStartDelayUnits.Text" xml:space="preserve">
     <value>秒</value>
   </data>
-  <data name="&gt;&gt;labelStartDelayUnits.Name" xml:space="preserve">
+  <data name=">>labelStartDelayUnits.Name" xml:space="preserve">
     <value>labelStartDelayUnits</value>
   </data>
-  <data name="&gt;&gt;labelStartDelayUnits.Type" xml:space="preserve">
+  <data name=">>labelStartDelayUnits.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelStartDelayUnits.Parent" xml:space="preserve">
+  <data name=">>labelStartDelayUnits.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;labelStartDelayUnits.ZOrder" xml:space="preserve">
+  <data name=">>labelStartDelayUnits.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="nudStartDelay.Location" type="System.Drawing.Point, System.Drawing">
@@ -316,16 +316,16 @@
   <data name="nudStartDelay.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;nudStartDelay.Name" xml:space="preserve">
+  <data name=">>nudStartDelay.Name" xml:space="preserve">
     <value>nudStartDelay</value>
   </data>
-  <data name="&gt;&gt;nudStartDelay.Type" xml:space="preserve">
+  <data name=">>nudStartDelay.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;nudStartDelay.Parent" xml:space="preserve">
+  <data name=">>nudStartDelay.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;nudStartDelay.ZOrder" xml:space="preserve">
+  <data name=">>nudStartDelay.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="labelStartDelay.AutoSize" type="System.Boolean, mscorlib">
@@ -352,16 +352,16 @@
   <data name="labelStartDelay.Text" xml:space="preserve">
     <value>尝试在以下时间后启动下一个 VM(&amp;A):</value>
   </data>
-  <data name="&gt;&gt;labelStartDelay.Name" xml:space="preserve">
+  <data name=">>labelStartDelay.Name" xml:space="preserve">
     <value>labelStartDelay</value>
   </data>
-  <data name="&gt;&gt;labelStartDelay.Type" xml:space="preserve">
+  <data name=">>labelStartDelay.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelStartDelay.Parent" xml:space="preserve">
+  <data name=">>labelStartDelay.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;labelStartDelay.ZOrder" xml:space="preserve">
+  <data name=">>labelStartDelay.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="nudOrder.Location" type="System.Drawing.Point, System.Drawing">
@@ -373,16 +373,16 @@
   <data name="nudOrder.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;nudOrder.Name" xml:space="preserve">
+  <data name=">>nudOrder.Name" xml:space="preserve">
     <value>nudOrder</value>
   </data>
-  <data name="&gt;&gt;nudOrder.Type" xml:space="preserve">
+  <data name=">>nudOrder.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;nudOrder.Parent" xml:space="preserve">
+  <data name=">>nudOrder.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;nudOrder.ZOrder" xml:space="preserve">
+  <data name=">>nudOrder.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
@@ -397,16 +397,16 @@
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Parent" xml:space="preserve">
     <value>startupSequenceGroupBox</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -424,16 +424,16 @@
   <data name="startupSequenceGroupBox.Text" xml:space="preserve">
     <value>启动顺序</value>
   </data>
-  <data name="&gt;&gt;startupSequenceGroupBox.Name" xml:space="preserve">
+  <data name=">>startupSequenceGroupBox.Name" xml:space="preserve">
     <value>startupSequenceGroupBox</value>
   </data>
-  <data name="&gt;&gt;startupSequenceGroupBox.Type" xml:space="preserve">
+  <data name=">>startupSequenceGroupBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;startupSequenceGroupBox.Parent" xml:space="preserve">
+  <data name=">>startupSequenceGroupBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;startupSequenceGroupBox.ZOrder" xml:space="preserve">
+  <data name=">>startupSequenceGroupBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -451,16 +451,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -475,34 +475,34 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>555, 362</value>
   </data>
-  <data name="&gt;&gt;ColumnName.Name" xml:space="preserve">
+  <data name=">>ColumnName.Name" xml:space="preserve">
     <value>ColumnName</value>
   </data>
-  <data name="&gt;&gt;ColumnName.Type" xml:space="preserve">
+  <data name=">>ColumnName.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnDescription.Name" xml:space="preserve">
+  <data name=">>ColumnDescription.Name" xml:space="preserve">
     <value>ColumnDescription</value>
   </data>
-  <data name="&gt;&gt;ColumnDescription.Type" xml:space="preserve">
+  <data name=">>ColumnDescription.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnOrder.Name" xml:space="preserve">
+  <data name=">>ColumnOrder.Name" xml:space="preserve">
     <value>ColumnOrder</value>
   </data>
-  <data name="&gt;&gt;ColumnOrder.Type" xml:space="preserve">
+  <data name=">>ColumnOrder.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnStartDelay.Name" xml:space="preserve">
+  <data name=">>ColumnStartDelay.Name" xml:space="preserve">
     <value>ColumnStartDelay</value>
   </data>
-  <data name="&gt;&gt;ColumnStartDelay.Type" xml:space="preserve">
+  <data name=">>ColumnStartDelay.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>NewVMApplianceVMOrderAndDelaysPage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

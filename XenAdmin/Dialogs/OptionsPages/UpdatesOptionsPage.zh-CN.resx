@@ -159,16 +159,16 @@
   <data name="AllowXenCenterUpdatesCheckBox.Text" xml:space="preserve">
     <value>检查新 XenCenter 版本(&amp;N)</value>
   </data>
-  <data name="&gt;&gt;AllowXenCenterUpdatesCheckBox.Name" xml:space="preserve">
+  <data name=">>AllowXenCenterUpdatesCheckBox.Name" xml:space="preserve">
     <value>AllowXenCenterUpdatesCheckBox</value>
   </data>
-  <data name="&gt;&gt;AllowXenCenterUpdatesCheckBox.Type" xml:space="preserve">
+  <data name=">>AllowXenCenterUpdatesCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;AllowXenCenterUpdatesCheckBox.Parent" xml:space="preserve">
+  <data name=">>AllowXenCenterUpdatesCheckBox.Parent" xml:space="preserve">
     <value>XenCenterGroupBox</value>
   </data>
-  <data name="&gt;&gt;AllowXenCenterUpdatesCheckBox.ZOrder" xml:space="preserve">
+  <data name=">>AllowXenCenterUpdatesCheckBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="XenCenterGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -192,16 +192,16 @@
   <data name="XenCenterGroupBox.Text" xml:space="preserve">
     <value>自动检查 XenCenter 更新</value>
   </data>
-  <data name="&gt;&gt;XenCenterGroupBox.Name" xml:space="preserve">
+  <data name=">>XenCenterGroupBox.Name" xml:space="preserve">
     <value>XenCenterGroupBox</value>
   </data>
-  <data name="&gt;&gt;XenCenterGroupBox.Type" xml:space="preserve">
+  <data name=">>XenCenterGroupBox.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;XenCenterGroupBox.Parent" xml:space="preserve">
+  <data name=">>XenCenterGroupBox.Parent" xml:space="preserve">
     <value>UpdatesTableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;XenCenterGroupBox.ZOrder" xml:space="preserve">
+  <data name=">>XenCenterGroupBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="XenServerGroupBox.AutoSize" type="System.Boolean, mscorlib">
@@ -234,16 +234,16 @@
   <data name="AllowXenServerUpdatesCheckBox.Text" xml:space="preserve">
     <value>检查新版本 XenServer(&amp;S)</value>
   </data>
-  <data name="&gt;&gt;AllowXenServerUpdatesCheckBox.Name" xml:space="preserve">
+  <data name=">>AllowXenServerUpdatesCheckBox.Name" xml:space="preserve">
     <value>AllowXenServerUpdatesCheckBox</value>
   </data>
-  <data name="&gt;&gt;AllowXenServerUpdatesCheckBox.Type" xml:space="preserve">
+  <data name=">>AllowXenServerUpdatesCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;AllowXenServerUpdatesCheckBox.Parent" xml:space="preserve">
+  <data name=">>AllowXenServerUpdatesCheckBox.Parent" xml:space="preserve">
     <value>XenServerGroupBox</value>
   </data>
-  <data name="&gt;&gt;AllowXenServerUpdatesCheckBox.ZOrder" xml:space="preserve">
+  <data name=">>AllowXenServerUpdatesCheckBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="AllowXenServerPatchesCheckBox.AutoSize" type="System.Boolean, mscorlib">
@@ -270,16 +270,16 @@
   <data name="AllowXenServerPatchesCheckBox.Text" xml:space="preserve">
     <value>检查 XenServer 更新(&amp;U)</value>
   </data>
-  <data name="&gt;&gt;AllowXenServerPatchesCheckBox.Name" xml:space="preserve">
+  <data name=">>AllowXenServerPatchesCheckBox.Name" xml:space="preserve">
     <value>AllowXenServerPatchesCheckBox</value>
   </data>
-  <data name="&gt;&gt;AllowXenServerPatchesCheckBox.Type" xml:space="preserve">
+  <data name=">>AllowXenServerPatchesCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;AllowXenServerPatchesCheckBox.Parent" xml:space="preserve">
+  <data name=">>AllowXenServerPatchesCheckBox.Parent" xml:space="preserve">
     <value>XenServerGroupBox</value>
   </data>
-  <data name="&gt;&gt;AllowXenServerPatchesCheckBox.ZOrder" xml:space="preserve">
+  <data name=">>AllowXenServerPatchesCheckBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="XenServerGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -303,16 +303,16 @@
   <data name="XenServerGroupBox.Text" xml:space="preserve">
     <value>自动检查 XenServer 更新和新版本</value>
   </data>
-  <data name="&gt;&gt;XenServerGroupBox.Name" xml:space="preserve">
+  <data name=">>XenServerGroupBox.Name" xml:space="preserve">
     <value>XenServerGroupBox</value>
   </data>
-  <data name="&gt;&gt;XenServerGroupBox.Type" xml:space="preserve">
+  <data name=">>XenServerGroupBox.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;XenServerGroupBox.Parent" xml:space="preserve">
+  <data name=">>XenServerGroupBox.Parent" xml:space="preserve">
     <value>UpdatesTableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;XenServerGroupBox.ZOrder" xml:space="preserve">
+  <data name=">>XenServerGroupBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="UpdatesBlurb.AutoSize" type="System.Boolean, mscorlib">
@@ -339,16 +339,16 @@
   <data name="UpdatesBlurb.Text" xml:space="preserve">
     <value>可以将 XenCenter 配置为定期检查可用更新，并在找到可供下载的更新或新 XenServer 版本时提示您。</value>
   </data>
-  <data name="&gt;&gt;UpdatesBlurb.Name" xml:space="preserve">
+  <data name=">>UpdatesBlurb.Name" xml:space="preserve">
     <value>UpdatesBlurb</value>
   </data>
-  <data name="&gt;&gt;UpdatesBlurb.Type" xml:space="preserve">
+  <data name=">>UpdatesBlurb.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;UpdatesBlurb.Parent" xml:space="preserve">
+  <data name=">>UpdatesBlurb.Parent" xml:space="preserve">
     <value>UpdatesTableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;UpdatesBlurb.ZOrder" xml:space="preserve">
+  <data name=">>UpdatesBlurb.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="UpdatesTableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -369,16 +369,16 @@
   <data name="UpdatesTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;UpdatesTableLayoutPanel.Name" xml:space="preserve">
+  <data name=">>UpdatesTableLayoutPanel.Name" xml:space="preserve">
     <value>UpdatesTableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;UpdatesTableLayoutPanel.Type" xml:space="preserve">
+  <data name=">>UpdatesTableLayoutPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;UpdatesTableLayoutPanel.Parent" xml:space="preserve">
+  <data name=">>UpdatesTableLayoutPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;UpdatesTableLayoutPanel.ZOrder" xml:space="preserve">
+  <data name=">>UpdatesTableLayoutPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="UpdatesTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -393,10 +393,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>447, 225</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>UpdatesOptionsPage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

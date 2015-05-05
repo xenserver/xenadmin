@@ -138,16 +138,16 @@
   <data name="AddButton.Text" xml:space="preserve">
     <value>&amp;Add...</value>
   </data>
-  <data name="&gt;&gt;AddButton.Name" xml:space="preserve">
+  <data name=">>AddButton.Name" xml:space="preserve">
     <value>AddButton</value>
   </data>
-  <data name="&gt;&gt;AddButton.Type" xml:space="preserve">
+  <data name=">>AddButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;AddButton.Parent" xml:space="preserve">
+  <data name=">>AddButton.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;AddButton.ZOrder" xml:space="preserve">
+  <data name=">>AddButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="EditButton.Enabled" type="System.Boolean, mscorlib">
@@ -168,16 +168,16 @@
   <data name="EditButton.Text" xml:space="preserve">
     <value>P&amp;roperties</value>
   </data>
-  <data name="&gt;&gt;EditButton.Name" xml:space="preserve">
+  <data name=">>EditButton.Name" xml:space="preserve">
     <value>EditButton</value>
   </data>
-  <data name="&gt;&gt;EditButton.Type" xml:space="preserve">
+  <data name=">>EditButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;EditButton.Parent" xml:space="preserve">
+  <data name=">>EditButton.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;EditButton.ZOrder" xml:space="preserve">
+  <data name=">>EditButton.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="AttachButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -195,16 +195,16 @@
   <data name="AttachButton.Text" xml:space="preserve">
     <value>Attach Dis&amp;k...</value>
   </data>
-  <data name="&gt;&gt;AttachButton.Name" xml:space="preserve">
+  <data name=">>AttachButton.Name" xml:space="preserve">
     <value>AttachButton</value>
   </data>
-  <data name="&gt;&gt;AttachButton.Type" xml:space="preserve">
+  <data name=">>AttachButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;AttachButton.Parent" xml:space="preserve">
+  <data name=">>AttachButton.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;AttachButton.ZOrder" xml:space="preserve">
+  <data name=">>AttachButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="RightButtonSeparator.Location" type="System.Drawing.Point, System.Drawing">
@@ -219,16 +219,16 @@
   <data name="RightButtonSeparator.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
   </data>
-  <data name="&gt;&gt;RightButtonSeparator.Name" xml:space="preserve">
+  <data name=">>RightButtonSeparator.Name" xml:space="preserve">
     <value>RightButtonSeparator</value>
   </data>
-  <data name="&gt;&gt;RightButtonSeparator.Type" xml:space="preserve">
+  <data name=">>RightButtonSeparator.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;RightButtonSeparator.Parent" xml:space="preserve">
+  <data name=">>RightButtonSeparator.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;RightButtonSeparator.ZOrder" xml:space="preserve">
+  <data name=">>RightButtonSeparator.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="LeftButtonSeparator.Location" type="System.Drawing.Point, System.Drawing">
@@ -243,16 +243,16 @@
   <data name="LeftButtonSeparator.TabIndex" type="System.Int32, mscorlib">
     <value>46</value>
   </data>
-  <data name="&gt;&gt;LeftButtonSeparator.Name" xml:space="preserve">
+  <data name=">>LeftButtonSeparator.Name" xml:space="preserve">
     <value>LeftButtonSeparator</value>
   </data>
-  <data name="&gt;&gt;LeftButtonSeparator.Type" xml:space="preserve">
+  <data name=">>LeftButtonSeparator.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;LeftButtonSeparator.Parent" xml:space="preserve">
+  <data name=">>LeftButtonSeparator.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;LeftButtonSeparator.ZOrder" xml:space="preserve">
+  <data name=">>LeftButtonSeparator.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="panel2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -357,16 +357,16 @@
   <data name="dataGridViewStorage.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;dataGridViewStorage.Name" xml:space="preserve">
+  <data name=">>dataGridViewStorage.Name" xml:space="preserve">
     <value>dataGridViewStorage</value>
   </data>
-  <data name="&gt;&gt;dataGridViewStorage.Type" xml:space="preserve">
+  <data name=">>dataGridViewStorage.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dataGridViewStorage.Parent" xml:space="preserve">
+  <data name=">>dataGridViewStorage.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name="&gt;&gt;dataGridViewStorage.ZOrder" xml:space="preserve">
+  <data name=">>dataGridViewStorage.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="DeactivateButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -390,16 +390,16 @@
   <data name="DeactivateButton.Text" xml:space="preserve">
     <value>Dea&amp;ctivate</value>
   </data>
-  <data name="&gt;&gt;DeactivateButton.Name" xml:space="preserve">
+  <data name=">>DeactivateButton.Name" xml:space="preserve">
     <value>DeactivateButton</value>
   </data>
-  <data name="&gt;&gt;DeactivateButton.Type" xml:space="preserve">
+  <data name=">>DeactivateButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DeactivateButton.Parent" xml:space="preserve">
+  <data name=">>DeactivateButton.Parent" xml:space="preserve">
     <value>DeactivateButtonContainer</value>
   </data>
-  <data name="&gt;&gt;DeactivateButton.ZOrder" xml:space="preserve">
+  <data name=">>DeactivateButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="DeactivateButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
@@ -411,16 +411,16 @@
   <data name="DeactivateButtonContainer.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;DeactivateButtonContainer.Name" xml:space="preserve">
+  <data name=">>DeactivateButtonContainer.Name" xml:space="preserve">
     <value>DeactivateButtonContainer</value>
   </data>
-  <data name="&gt;&gt;DeactivateButtonContainer.Type" xml:space="preserve">
+  <data name=">>DeactivateButtonContainer.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;DeactivateButtonContainer.Parent" xml:space="preserve">
+  <data name=">>DeactivateButtonContainer.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;DeactivateButtonContainer.ZOrder" xml:space="preserve">
+  <data name=">>DeactivateButtonContainer.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="MoveButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -444,16 +444,16 @@
   <data name="MoveButton.Text" xml:space="preserve">
     <value>&amp;Move...</value>
   </data>
-  <data name="&gt;&gt;MoveButton.Name" xml:space="preserve">
+  <data name=">>MoveButton.Name" xml:space="preserve">
     <value>MoveButton</value>
   </data>
-  <data name="&gt;&gt;MoveButton.Type" xml:space="preserve">
+  <data name=">>MoveButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;MoveButton.Parent" xml:space="preserve">
+  <data name=">>MoveButton.Parent" xml:space="preserve">
     <value>MoveButtonContainer</value>
   </data>
-  <data name="&gt;&gt;MoveButton.ZOrder" xml:space="preserve">
+  <data name=">>MoveButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="MoveButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
@@ -465,16 +465,16 @@
   <data name="MoveButtonContainer.TabIndex" type="System.Int32, mscorlib">
     <value>47</value>
   </data>
-  <data name="&gt;&gt;MoveButtonContainer.Name" xml:space="preserve">
+  <data name=">>MoveButtonContainer.Name" xml:space="preserve">
     <value>MoveButtonContainer</value>
   </data>
-  <data name="&gt;&gt;MoveButtonContainer.Type" xml:space="preserve">
+  <data name=">>MoveButtonContainer.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;MoveButtonContainer.Parent" xml:space="preserve">
+  <data name=">>MoveButtonContainer.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;MoveButtonContainer.ZOrder" xml:space="preserve">
+  <data name=">>MoveButtonContainer.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="DeleteDriveButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -498,16 +498,16 @@
   <data name="DeleteDriveButton.Text" xml:space="preserve">
     <value>&amp;Delete</value>
   </data>
-  <data name="&gt;&gt;DeleteDriveButton.Name" xml:space="preserve">
+  <data name=">>DeleteDriveButton.Name" xml:space="preserve">
     <value>DeleteDriveButton</value>
   </data>
-  <data name="&gt;&gt;DeleteDriveButton.Type" xml:space="preserve">
+  <data name=">>DeleteDriveButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DeleteDriveButton.Parent" xml:space="preserve">
+  <data name=">>DeleteDriveButton.Parent" xml:space="preserve">
     <value>DeleteButtonContainer</value>
   </data>
-  <data name="&gt;&gt;DeleteDriveButton.ZOrder" xml:space="preserve">
+  <data name=">>DeleteDriveButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="DeleteButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
@@ -519,16 +519,16 @@
   <data name="DeleteButtonContainer.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;DeleteButtonContainer.Name" xml:space="preserve">
+  <data name=">>DeleteButtonContainer.Name" xml:space="preserve">
     <value>DeleteButtonContainer</value>
   </data>
-  <data name="&gt;&gt;DeleteButtonContainer.Type" xml:space="preserve">
+  <data name=">>DeleteButtonContainer.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;DeleteButtonContainer.Parent" xml:space="preserve">
+  <data name=">>DeleteButtonContainer.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;DeleteButtonContainer.ZOrder" xml:space="preserve">
+  <data name=">>DeleteButtonContainer.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="DetachDriveButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -552,16 +552,16 @@
   <data name="DetachDriveButton.Text" xml:space="preserve">
     <value>D&amp;etach</value>
   </data>
-  <data name="&gt;&gt;DetachDriveButton.Name" xml:space="preserve">
+  <data name=">>DetachDriveButton.Name" xml:space="preserve">
     <value>DetachDriveButton</value>
   </data>
-  <data name="&gt;&gt;DetachDriveButton.Type" xml:space="preserve">
+  <data name=">>DetachDriveButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DetachDriveButton.Parent" xml:space="preserve">
+  <data name=">>DetachDriveButton.Parent" xml:space="preserve">
     <value>DetachButtonContainer</value>
   </data>
-  <data name="&gt;&gt;DetachDriveButton.ZOrder" xml:space="preserve">
+  <data name=">>DetachDriveButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="DetachButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
@@ -573,16 +573,16 @@
   <data name="DetachButtonContainer.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;DetachButtonContainer.Name" xml:space="preserve">
+  <data name=">>DetachButtonContainer.Name" xml:space="preserve">
     <value>DetachButtonContainer</value>
   </data>
-  <data name="&gt;&gt;DetachButtonContainer.Type" xml:space="preserve">
+  <data name=">>DetachButtonContainer.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;DetachButtonContainer.Parent" xml:space="preserve">
+  <data name=">>DetachButtonContainer.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;DetachButtonContainer.ZOrder" xml:space="preserve">
+  <data name=">>DetachButtonContainer.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -600,16 +600,16 @@
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Name" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
@@ -621,16 +621,16 @@
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;panel2.Name" xml:space="preserve">
+  <data name=">>panel2.Name" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name="&gt;&gt;panel2.Type" xml:space="preserve">
+  <data name=">>panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panel2.Parent" xml:space="preserve">
+  <data name=">>panel2.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
+  <data name=">>panel2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="multipleDvdIsoList1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -645,16 +645,16 @@
   <data name="multipleDvdIsoList1.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;multipleDvdIsoList1.Name" xml:space="preserve">
+  <data name=">>multipleDvdIsoList1.Name" xml:space="preserve">
     <value>multipleDvdIsoList1</value>
   </data>
-  <data name="&gt;&gt;multipleDvdIsoList1.Type" xml:space="preserve">
+  <data name=">>multipleDvdIsoList1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.MultipleDvdIsoList, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;multipleDvdIsoList1.Parent" xml:space="preserve">
+  <data name=">>multipleDvdIsoList1.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;multipleDvdIsoList1.ZOrder" xml:space="preserve">
+  <data name=">>multipleDvdIsoList1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -672,16 +672,16 @@
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>48</value>
   </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+  <data name=">>panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+  <data name=">>panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+  <data name=">>panel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+  <data name=">>panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="dataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
@@ -744,16 +744,16 @@
   <data name="TitleLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;TitleLabel.Name" xml:space="preserve">
+  <data name=">>TitleLabel.Name" xml:space="preserve">
     <value>TitleLabel</value>
   </data>
-  <data name="&gt;&gt;TitleLabel.Type" xml:space="preserve">
+  <data name=">>TitleLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TitleLabel.Parent" xml:space="preserve">
+  <data name=">>TitleLabel.Parent" xml:space="preserve">
     <value>gradientPanel1</value>
   </data>
-  <data name="&gt;&gt;TitleLabel.ZOrder" xml:space="preserve">
+  <data name=">>TitleLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="gradientPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -768,16 +768,16 @@
   <data name="gradientPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>47</value>
   </data>
-  <data name="&gt;&gt;gradientPanel1.Name" xml:space="preserve">
+  <data name=">>gradientPanel1.Name" xml:space="preserve">
     <value>gradientPanel1</value>
   </data>
-  <data name="&gt;&gt;gradientPanel1.Type" xml:space="preserve">
+  <data name=">>gradientPanel1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.GradientPanel.GradientPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;gradientPanel1.Parent" xml:space="preserve">
+  <data name=">>gradientPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;gradientPanel1.ZOrder" xml:space="preserve">
+  <data name=">>gradientPanel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -798,130 +798,130 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>820, 416</value>
   </data>
-  <data name="&gt;&gt;ColumnDevicePosition.Name" xml:space="preserve">
+  <data name=">>ColumnDevicePosition.Name" xml:space="preserve">
     <value>ColumnDevicePosition</value>
   </data>
-  <data name="&gt;&gt;ColumnDevicePosition.Type" xml:space="preserve">
+  <data name=">>ColumnDevicePosition.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnName.Name" xml:space="preserve">
+  <data name=">>ColumnName.Name" xml:space="preserve">
     <value>ColumnName</value>
   </data>
-  <data name="&gt;&gt;ColumnName.Type" xml:space="preserve">
+  <data name=">>ColumnName.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnDesc.Name" xml:space="preserve">
+  <data name=">>ColumnDesc.Name" xml:space="preserve">
     <value>ColumnDesc</value>
   </data>
-  <data name="&gt;&gt;ColumnDesc.Type" xml:space="preserve">
+  <data name=">>ColumnDesc.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnSR.Name" xml:space="preserve">
+  <data name=">>ColumnSR.Name" xml:space="preserve">
     <value>ColumnSR</value>
   </data>
-  <data name="&gt;&gt;ColumnSR.Type" xml:space="preserve">
+  <data name=">>ColumnSR.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnSRVolume.Name" xml:space="preserve">
+  <data name=">>ColumnSRVolume.Name" xml:space="preserve">
     <value>ColumnSRVolume</value>
   </data>
-  <data name="&gt;&gt;ColumnSRVolume.Type" xml:space="preserve">
+  <data name=">>ColumnSRVolume.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnSize.Name" xml:space="preserve">
+  <data name=">>ColumnSize.Name" xml:space="preserve">
     <value>ColumnSize</value>
   </data>
-  <data name="&gt;&gt;ColumnSize.Type" xml:space="preserve">
+  <data name=">>ColumnSize.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnReadOnly.Name" xml:space="preserve">
+  <data name=">>ColumnReadOnly.Name" xml:space="preserve">
     <value>ColumnReadOnly</value>
   </data>
-  <data name="&gt;&gt;ColumnReadOnly.Type" xml:space="preserve">
+  <data name=">>ColumnReadOnly.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnPriority.Name" xml:space="preserve">
+  <data name=">>ColumnPriority.Name" xml:space="preserve">
     <value>ColumnPriority</value>
   </data>
-  <data name="&gt;&gt;ColumnPriority.Type" xml:space="preserve">
+  <data name=">>ColumnPriority.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnActive.Name" xml:space="preserve">
+  <data name=">>ColumnActive.Name" xml:space="preserve">
     <value>ColumnActive</value>
   </data>
-  <data name="&gt;&gt;ColumnActive.Type" xml:space="preserve">
+  <data name=">>ColumnActive.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnDevicePath.Name" xml:space="preserve">
+  <data name=">>ColumnDevicePath.Name" xml:space="preserve">
     <value>ColumnDevicePath</value>
   </data>
-  <data name="&gt;&gt;ColumnDevicePath.Type" xml:space="preserve">
+  <data name=">>ColumnDevicePath.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Name" xml:space="preserve">
+  <data name=">>dataGridViewTextBoxColumn1.Name" xml:space="preserve">
     <value>dataGridViewTextBoxColumn1</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Type" xml:space="preserve">
+  <data name=">>dataGridViewTextBoxColumn1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Name" xml:space="preserve">
+  <data name=">>dataGridViewTextBoxColumn2.Name" xml:space="preserve">
     <value>dataGridViewTextBoxColumn2</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Type" xml:space="preserve">
+  <data name=">>dataGridViewTextBoxColumn2.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Name" xml:space="preserve">
+  <data name=">>dataGridViewTextBoxColumn3.Name" xml:space="preserve">
     <value>dataGridViewTextBoxColumn3</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Type" xml:space="preserve">
+  <data name=">>dataGridViewTextBoxColumn3.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn4.Name" xml:space="preserve">
+  <data name=">>dataGridViewTextBoxColumn4.Name" xml:space="preserve">
     <value>dataGridViewTextBoxColumn4</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn4.Type" xml:space="preserve">
+  <data name=">>dataGridViewTextBoxColumn4.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn5.Name" xml:space="preserve">
+  <data name=">>dataGridViewTextBoxColumn5.Name" xml:space="preserve">
     <value>dataGridViewTextBoxColumn5</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn5.Type" xml:space="preserve">
+  <data name=">>dataGridViewTextBoxColumn5.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn6.Name" xml:space="preserve">
+  <data name=">>dataGridViewTextBoxColumn6.Name" xml:space="preserve">
     <value>dataGridViewTextBoxColumn6</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn6.Type" xml:space="preserve">
+  <data name=">>dataGridViewTextBoxColumn6.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn7.Name" xml:space="preserve">
+  <data name=">>dataGridViewTextBoxColumn7.Name" xml:space="preserve">
     <value>dataGridViewTextBoxColumn7</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn7.Type" xml:space="preserve">
+  <data name=">>dataGridViewTextBoxColumn7.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn8.Name" xml:space="preserve">
+  <data name=">>dataGridViewTextBoxColumn8.Name" xml:space="preserve">
     <value>dataGridViewTextBoxColumn8</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn8.Type" xml:space="preserve">
+  <data name=">>dataGridViewTextBoxColumn8.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn9.Name" xml:space="preserve">
+  <data name=">>dataGridViewTextBoxColumn9.Name" xml:space="preserve">
     <value>dataGridViewTextBoxColumn9</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn9.Type" xml:space="preserve">
+  <data name=">>dataGridViewTextBoxColumn9.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn10.Name" xml:space="preserve">
+  <data name=">>dataGridViewTextBoxColumn10.Name" xml:space="preserve">
     <value>dataGridViewTextBoxColumn10</value>
   </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn10.Type" xml:space="preserve">
+  <data name=">>dataGridViewTextBoxColumn10.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>VMStoragePage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

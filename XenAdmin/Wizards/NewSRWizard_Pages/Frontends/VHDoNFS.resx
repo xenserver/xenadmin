@@ -141,16 +141,16 @@
   <data name="NfsScanButton.Text" xml:space="preserve">
     <value>&amp;Scan</value>
   </data>
-  <data name="&gt;&gt;NfsScanButton.Name" xml:space="preserve">
+  <data name=">>NfsScanButton.Name" xml:space="preserve">
     <value>NfsScanButton</value>
   </data>
-  <data name="&gt;&gt;NfsScanButton.Type" xml:space="preserve">
+  <data name=">>NfsScanButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;NfsScanButton.Parent" xml:space="preserve">
+  <data name=">>NfsScanButton.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;NfsScanButton.ZOrder" xml:space="preserve">
+  <data name=">>NfsScanButton.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
@@ -177,16 +177,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Provide the name of the share where your SR is located, optionally specifying advanced options. Indicate whether you wish to create a new SR or reattach an existing SR before proceeding.</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -213,16 +213,16 @@
   <data name="label3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+  <data name=">>label3.Name" xml:space="preserve">
     <value>label3</value>
   </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+  <data name=">>label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+  <data name=">>label3.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+  <data name=">>label3.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="NfsServerPathTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -237,16 +237,16 @@
   <data name="NfsServerPathTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;NfsServerPathTextBox.Name" xml:space="preserve">
+  <data name=">>NfsServerPathTextBox.Name" xml:space="preserve">
     <value>NfsServerPathTextBox</value>
   </data>
-  <data name="&gt;&gt;NfsServerPathTextBox.Type" xml:space="preserve">
+  <data name=">>NfsServerPathTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;NfsServerPathTextBox.Parent" xml:space="preserve">
+  <data name=">>NfsServerPathTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;NfsServerPathTextBox.ZOrder" xml:space="preserve">
+  <data name=">>NfsServerPathTextBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
@@ -273,16 +273,16 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Example: server:/path</value>
   </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+  <data name=">>label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+  <data name=">>label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+  <data name=">>label2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+  <data name=">>label2.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="labelAdvancedOptions.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -309,16 +309,16 @@
   <data name="labelAdvancedOptions.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelAdvancedOptions.Name" xml:space="preserve">
+  <data name=">>labelAdvancedOptions.Name" xml:space="preserve">
     <value>labelAdvancedOptions</value>
   </data>
-  <data name="&gt;&gt;labelAdvancedOptions.Type" xml:space="preserve">
+  <data name=">>labelAdvancedOptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelAdvancedOptions.Parent" xml:space="preserve">
+  <data name=">>labelAdvancedOptions.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelAdvancedOptions.ZOrder" xml:space="preserve">
+  <data name=">>labelAdvancedOptions.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="serverOptionsTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -333,16 +333,16 @@
   <data name="serverOptionsTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;serverOptionsTextBox.Name" xml:space="preserve">
+  <data name=">>serverOptionsTextBox.Name" xml:space="preserve">
     <value>serverOptionsTextBox</value>
   </data>
-  <data name="&gt;&gt;serverOptionsTextBox.Type" xml:space="preserve">
+  <data name=">>serverOptionsTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;serverOptionsTextBox.Parent" xml:space="preserve">
+  <data name=">>serverOptionsTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;serverOptionsTextBox.ZOrder" xml:space="preserve">
+  <data name=">>serverOptionsTextBox.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="radioButtonNfsNew.AutoSize" type="System.Boolean, mscorlib">
@@ -366,16 +366,16 @@
   <data name="radioButtonNfsNew.Text" xml:space="preserve">
     <value>&amp;Create a new SR</value>
   </data>
-  <data name="&gt;&gt;radioButtonNfsNew.Name" xml:space="preserve">
+  <data name=">>radioButtonNfsNew.Name" xml:space="preserve">
     <value>radioButtonNfsNew</value>
   </data>
-  <data name="&gt;&gt;radioButtonNfsNew.Type" xml:space="preserve">
+  <data name=">>radioButtonNfsNew.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButtonNfsNew.Parent" xml:space="preserve">
+  <data name=">>radioButtonNfsNew.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;radioButtonNfsNew.ZOrder" xml:space="preserve">
+  <data name=">>radioButtonNfsNew.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="radioButtonNfsReattach.AutoSize" type="System.Boolean, mscorlib">
@@ -396,16 +396,16 @@
   <data name="radioButtonNfsReattach.Text" xml:space="preserve">
     <value>&amp;Reattach an existing SR:</value>
   </data>
-  <data name="&gt;&gt;radioButtonNfsReattach.Name" xml:space="preserve">
+  <data name=">>radioButtonNfsReattach.Name" xml:space="preserve">
     <value>radioButtonNfsReattach</value>
   </data>
-  <data name="&gt;&gt;radioButtonNfsReattach.Type" xml:space="preserve">
+  <data name=">>radioButtonNfsReattach.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButtonNfsReattach.Parent" xml:space="preserve">
+  <data name=">>radioButtonNfsReattach.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;radioButtonNfsReattach.ZOrder" xml:space="preserve">
+  <data name=">>radioButtonNfsReattach.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -423,16 +423,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -456,16 +456,16 @@
   <data name="listBoxNfsSRs.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;listBoxNfsSRs.Name" xml:space="preserve">
+  <data name=">>listBoxNfsSRs.Name" xml:space="preserve">
     <value>listBoxNfsSRs</value>
   </data>
-  <data name="&gt;&gt;listBoxNfsSRs.Type" xml:space="preserve">
+  <data name=">>listBoxNfsSRs.Type" xml:space="preserve">
     <value>XenAdmin.Controls.SRListBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;listBoxNfsSRs.Parent" xml:space="preserve">
+  <data name=">>listBoxNfsSRs.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;listBoxNfsSRs.ZOrder" xml:space="preserve">
+  <data name=">>listBoxNfsSRs.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -477,10 +477,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>500, 461</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>VHDoNFS</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

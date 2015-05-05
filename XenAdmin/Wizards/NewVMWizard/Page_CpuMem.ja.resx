@@ -135,16 +135,16 @@
   <data name="VcpuSpinner.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="&gt;&gt;VcpuSpinner.Name" xml:space="preserve">
+  <data name=">>VcpuSpinner.Name" xml:space="preserve">
     <value>VcpuSpinner</value>
   </data>
-  <data name="&gt;&gt;VcpuSpinner.Type" xml:space="preserve">
+  <data name=">>VcpuSpinner.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;VcpuSpinner.Parent" xml:space="preserve">
+  <data name=">>VcpuSpinner.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;VcpuSpinner.ZOrder" xml:space="preserve">
+  <data name=">>VcpuSpinner.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="labelVCPUs.Location" type="System.Drawing.Point, System.Drawing">
@@ -165,16 +165,16 @@
   <data name="labelVCPUs.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelVCPUs.Name" xml:space="preserve">
+  <data name=">>labelVCPUs.Name" xml:space="preserve">
     <value>labelVCPUs</value>
   </data>
-  <data name="&gt;&gt;labelVCPUs.Type" xml:space="preserve">
+  <data name=">>labelVCPUs.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelVCPUs.Parent" xml:space="preserve">
+  <data name=">>labelVCPUs.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelVCPUs.ZOrder" xml:space="preserve">
+  <data name=">>labelVCPUs.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
@@ -207,16 +207,16 @@
   <data name="labelInvalidVCPUWarning.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;labelInvalidVCPUWarning.Name" xml:space="preserve">
+  <data name=">>labelInvalidVCPUWarning.Name" xml:space="preserve">
     <value>labelInvalidVCPUWarning</value>
   </data>
-  <data name="&gt;&gt;labelInvalidVCPUWarning.Type" xml:space="preserve">
+  <data name=">>labelInvalidVCPUWarning.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelInvalidVCPUWarning.Parent" xml:space="preserve">
+  <data name=">>labelInvalidVCPUWarning.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelInvalidVCPUWarning.ZOrder" xml:space="preserve">
+  <data name=">>labelInvalidVCPUWarning.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="comboBoxTopology.Font" type="System.Drawing.Font, System.Drawing">
@@ -234,16 +234,16 @@
   <data name="comboBoxTopology.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;comboBoxTopology.Name" xml:space="preserve">
+  <data name=">>comboBoxTopology.Name" xml:space="preserve">
     <value>comboBoxTopology</value>
   </data>
-  <data name="&gt;&gt;comboBoxTopology.Type" xml:space="preserve">
+  <data name=">>comboBoxTopology.Type" xml:space="preserve">
     <value>XenAdmin.Controls.CPUTopologyComboBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;comboBoxTopology.Parent" xml:space="preserve">
+  <data name=">>comboBoxTopology.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;comboBoxTopology.ZOrder" xml:space="preserve">
+  <data name=">>comboBoxTopology.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelTopology.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -267,16 +267,16 @@
   <data name="labelTopology.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelTopology.Name" xml:space="preserve">
+  <data name=">>labelTopology.Name" xml:space="preserve">
     <value>labelTopology</value>
   </data>
-  <data name="&gt;&gt;labelTopology.Type" xml:space="preserve">
+  <data name=">>labelTopology.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelTopology.Parent" xml:space="preserve">
+  <data name=">>labelTopology.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelTopology.ZOrder" xml:space="preserve">
+  <data name=">>labelTopology.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="spinnerStatMax.Location" type="System.Drawing.Point, System.Drawing">
@@ -291,16 +291,16 @@
   <data name="spinnerStatMax.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;spinnerStatMax.Name" xml:space="preserve">
+  <data name=">>spinnerStatMax.Name" xml:space="preserve">
     <value>spinnerStatMax</value>
   </data>
-  <data name="&gt;&gt;spinnerStatMax.Type" xml:space="preserve">
+  <data name=">>spinnerStatMax.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Ballooning.MemorySpinner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;spinnerStatMax.Parent" xml:space="preserve">
+  <data name=">>spinnerStatMax.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;spinnerStatMax.ZOrder" xml:space="preserve">
+  <data name=">>spinnerStatMax.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="spinnerDynMax.Location" type="System.Drawing.Point, System.Drawing">
@@ -315,16 +315,16 @@
   <data name="spinnerDynMax.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;spinnerDynMax.Name" xml:space="preserve">
+  <data name=">>spinnerDynMax.Name" xml:space="preserve">
     <value>spinnerDynMax</value>
   </data>
-  <data name="&gt;&gt;spinnerDynMax.Type" xml:space="preserve">
+  <data name=">>spinnerDynMax.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Ballooning.MemorySpinner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;spinnerDynMax.Parent" xml:space="preserve">
+  <data name=">>spinnerDynMax.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;spinnerDynMax.ZOrder" xml:space="preserve">
+  <data name=">>spinnerDynMax.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="spinnerDynMin.Location" type="System.Drawing.Point, System.Drawing">
@@ -339,16 +339,16 @@
   <data name="spinnerDynMin.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;spinnerDynMin.Name" xml:space="preserve">
+  <data name=">>spinnerDynMin.Name" xml:space="preserve">
     <value>spinnerDynMin</value>
   </data>
-  <data name="&gt;&gt;spinnerDynMin.Type" xml:space="preserve">
+  <data name=">>spinnerDynMin.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Ballooning.MemorySpinner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;spinnerDynMin.Parent" xml:space="preserve">
+  <data name=">>spinnerDynMin.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;spinnerDynMin.ZOrder" xml:space="preserve">
+  <data name=">>spinnerDynMin.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -366,16 +366,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -396,16 +396,16 @@
   <data name="label5.Text" xml:space="preserve">
     <value>新規仮想マシンに割り当てる仮想 CPU の数、トポロジ、およびメモリの量を指定します。</value>
   </data>
-  <data name="&gt;&gt;label5.Name" xml:space="preserve">
+  <data name=">>label5.Name" xml:space="preserve">
     <value>label5</value>
   </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+  <data name=">>label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
+  <data name=">>label5.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+  <data name=">>label5.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -423,16 +423,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+  <data name=">>pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+  <data name=">>pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+  <data name=">>pictureBox1.Parent" xml:space="preserve">
     <value>ErrorPanel</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="ErrorLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -450,16 +450,16 @@
   <data name="ErrorLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;ErrorLabel.Name" xml:space="preserve">
+  <data name=">>ErrorLabel.Name" xml:space="preserve">
     <value>ErrorLabel</value>
   </data>
-  <data name="&gt;&gt;ErrorLabel.Type" xml:space="preserve">
+  <data name=">>ErrorLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ErrorLabel.Parent" xml:space="preserve">
+  <data name=">>ErrorLabel.Parent" xml:space="preserve">
     <value>ErrorPanel</value>
   </data>
-  <data name="&gt;&gt;ErrorLabel.ZOrder" xml:space="preserve">
+  <data name=">>ErrorLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="ErrorPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -477,16 +477,16 @@
   <data name="ErrorPanel.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;ErrorPanel.Name" xml:space="preserve">
+  <data name=">>ErrorPanel.Name" xml:space="preserve">
     <value>ErrorPanel</value>
   </data>
-  <data name="&gt;&gt;ErrorPanel.Type" xml:space="preserve">
+  <data name=">>ErrorPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ErrorPanel.Parent" xml:space="preserve">
+  <data name=">>ErrorPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ErrorPanel.ZOrder" xml:space="preserve">
+  <data name=">>ErrorPanel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -498,10 +498,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>466, 269</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>Page_CpuMem</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

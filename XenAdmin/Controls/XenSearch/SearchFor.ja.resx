@@ -158,16 +158,16 @@
   <data name="searchForComboButton.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>TextBeforeImage</value>
   </data>
-  <data name="&gt;&gt;searchForComboButton.Name" xml:space="preserve">
+  <data name=">>searchForComboButton.Name" xml:space="preserve">
     <value>searchForComboButton</value>
   </data>
-  <data name="&gt;&gt;searchForComboButton.Type" xml:space="preserve">
+  <data name=">>searchForComboButton.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenSearch.DropDownComboButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;searchForComboButton.Parent" xml:space="preserve">
+  <data name=">>searchForComboButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;searchForComboButton.ZOrder" xml:space="preserve">
+  <data name=">>searchForComboButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -185,10 +185,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>465, 31</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>SearchFor</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

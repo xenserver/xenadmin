@@ -141,16 +141,16 @@
   <data name="lblIntro.Text" xml:space="preserve">
     <value>输入有助于以后识别虚拟机的名称，并指定最初分配给新虚拟机的虚拟 CPU 数和内存量。</value>
   </data>
-  <data name="&gt;&gt;lblIntro.Name" xml:space="preserve">
+  <data name=">>lblIntro.Name" xml:space="preserve">
     <value>lblIntro</value>
   </data>
-  <data name="&gt;&gt;lblIntro.Type" xml:space="preserve">
+  <data name=">>lblIntro.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblIntro.Parent" xml:space="preserve">
+  <data name=">>lblIntro.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;lblIntro.ZOrder" xml:space="preserve">
+  <data name=">>lblIntro.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -171,16 +171,16 @@
   <data name="label3.Text" xml:space="preserve">
     <value>VM 名称(&amp;V)</value>
   </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+  <data name=">>label3.Name" xml:space="preserve">
     <value>label3</value>
   </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+  <data name=">>label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+  <data name=">>label3.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+  <data name=">>label3.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="m_textBoxVMName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -195,16 +195,16 @@
   <data name="m_textBoxVMName.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;m_textBoxVMName.Name" xml:space="preserve">
+  <data name=">>m_textBoxVMName.Name" xml:space="preserve">
     <value>m_textBoxVMName</value>
   </data>
-  <data name="&gt;&gt;m_textBoxVMName.Type" xml:space="preserve">
+  <data name=">>m_textBoxVMName.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_textBoxVMName.Parent" xml:space="preserve">
+  <data name=">>m_textBoxVMName.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;m_textBoxVMName.ZOrder" xml:space="preserve">
+  <data name=">>m_textBoxVMName.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="lblCPUs.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -225,16 +225,16 @@
   <data name="lblCPUs.Text" xml:space="preserve">
     <value>CPU 数(&amp;C)</value>
   </data>
-  <data name="&gt;&gt;lblCPUs.Name" xml:space="preserve">
+  <data name=">>lblCPUs.Name" xml:space="preserve">
     <value>lblCPUs</value>
   </data>
-  <data name="&gt;&gt;lblCPUs.Type" xml:space="preserve">
+  <data name=">>lblCPUs.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblCPUs.Parent" xml:space="preserve">
+  <data name=">>lblCPUs.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;lblCPUs.ZOrder" xml:space="preserve">
+  <data name=">>lblCPUs.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="m_upDownCpuCount.Location" type="System.Drawing.Point, System.Drawing">
@@ -249,16 +249,16 @@
   <data name="m_upDownCpuCount.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="&gt;&gt;m_upDownCpuCount.Name" xml:space="preserve">
+  <data name=">>m_upDownCpuCount.Name" xml:space="preserve">
     <value>m_upDownCpuCount</value>
   </data>
-  <data name="&gt;&gt;m_upDownCpuCount.Type" xml:space="preserve">
+  <data name=">>m_upDownCpuCount.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_upDownCpuCount.Parent" xml:space="preserve">
+  <data name=">>m_upDownCpuCount.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;m_upDownCpuCount.ZOrder" xml:space="preserve">
+  <data name=">>m_upDownCpuCount.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="lblMemory.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -282,16 +282,16 @@
   <data name="lblMemory.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;lblMemory.Name" xml:space="preserve">
+  <data name=">>lblMemory.Name" xml:space="preserve">
     <value>lblMemory</value>
   </data>
-  <data name="&gt;&gt;lblMemory.Type" xml:space="preserve">
+  <data name=">>lblMemory.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblMemory.Parent" xml:space="preserve">
+  <data name=">>lblMemory.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;lblMemory.ZOrder" xml:space="preserve">
+  <data name=">>lblMemory.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="m_upDownMemory.Location" type="System.Drawing.Point, System.Drawing">
@@ -306,16 +306,16 @@
   <data name="m_upDownMemory.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="&gt;&gt;m_upDownMemory.Name" xml:space="preserve">
+  <data name=">>m_upDownMemory.Name" xml:space="preserve">
     <value>m_upDownMemory</value>
   </data>
-  <data name="&gt;&gt;m_upDownMemory.Type" xml:space="preserve">
+  <data name=">>m_upDownMemory.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_upDownMemory.Parent" xml:space="preserve">
+  <data name=">>m_upDownMemory.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;m_upDownMemory.ZOrder" xml:space="preserve">
+  <data name=">>m_upDownMemory.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -336,16 +336,16 @@
   <data name="label4.Text" xml:space="preserve">
     <value>MB</value>
   </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+  <data name=">>label4.Name" xml:space="preserve">
     <value>label4</value>
   </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+  <data name=">>label4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+  <data name=">>label4.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+  <data name=">>label4.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="m_groupBoxAddSpace.AutoSize" type="System.Boolean, mscorlib">
@@ -381,16 +381,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>额外空间(&amp;A)</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="m_upDownAddSpace.Location" type="System.Drawing.Point, System.Drawing">
@@ -405,16 +405,16 @@
   <data name="m_upDownAddSpace.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="&gt;&gt;m_upDownAddSpace.Name" xml:space="preserve">
+  <data name=">>m_upDownAddSpace.Name" xml:space="preserve">
     <value>m_upDownAddSpace</value>
   </data>
-  <data name="&gt;&gt;m_upDownAddSpace.Type" xml:space="preserve">
+  <data name=">>m_upDownAddSpace.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_upDownAddSpace.Parent" xml:space="preserve">
+  <data name=">>m_upDownAddSpace.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;m_upDownAddSpace.ZOrder" xml:space="preserve">
+  <data name=">>m_upDownAddSpace.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="label5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -435,16 +435,16 @@
   <data name="label5.Text" xml:space="preserve">
     <value>GB</value>
   </data>
-  <data name="&gt;&gt;label5.Name" xml:space="preserve">
+  <data name=">>label5.Name" xml:space="preserve">
     <value>label5</value>
   </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+  <data name=">>label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
+  <data name=">>label5.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+  <data name=">>label5.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -462,16 +462,16 @@
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.Parent" xml:space="preserve">
     <value>m_groupBoxAddSpace</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -492,16 +492,16 @@
   <data name="m_groupBoxAddSpace.Text" xml:space="preserve">
     <value>.wim 文件占用的额外空间</value>
   </data>
-  <data name="&gt;&gt;m_groupBoxAddSpace.Name" xml:space="preserve">
+  <data name=">>m_groupBoxAddSpace.Name" xml:space="preserve">
     <value>m_groupBoxAddSpace</value>
   </data>
-  <data name="&gt;&gt;m_groupBoxAddSpace.Type" xml:space="preserve">
+  <data name=">>m_groupBoxAddSpace.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_groupBoxAddSpace.Parent" xml:space="preserve">
+  <data name=">>m_groupBoxAddSpace.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;m_groupBoxAddSpace.ZOrder" xml:space="preserve">
+  <data name=">>m_groupBoxAddSpace.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="m_ctrlError.AutoSize" type="System.Boolean, mscorlib">
@@ -528,16 +528,16 @@
   <data name="m_ctrlError.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;m_ctrlError.Name" xml:space="preserve">
+  <data name=">>m_ctrlError.Name" xml:space="preserve">
     <value>m_ctrlError</value>
   </data>
-  <data name="&gt;&gt;m_ctrlError.Type" xml:space="preserve">
+  <data name=">>m_ctrlError.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Common.PasswordFailure, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;m_ctrlError.Parent" xml:space="preserve">
+  <data name=">>m_ctrlError.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;m_ctrlError.ZOrder" xml:space="preserve">
+  <data name=">>m_ctrlError.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -555,16 +555,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -588,10 +588,10 @@
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel3.Name" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel3.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -612,10 +612,10 @@
   <data name="label2.Text" xml:space="preserve">
     <value>CPU 数</value>
   </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+  <data name=">>label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+  <data name=">>label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -630,10 +630,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>578, 337</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>ImageVMConfigPage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Wizards.GenericPages.ImExPortPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

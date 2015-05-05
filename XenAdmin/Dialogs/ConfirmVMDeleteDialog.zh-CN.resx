@@ -138,16 +138,16 @@
   <data name="btnYes.Text" xml:space="preserve">
     <value>删除(&amp;D)</value>
   </data>
-  <data name="&gt;&gt;btnYes.Name" xml:space="preserve">
+  <data name=">>btnYes.Name" xml:space="preserve">
     <value>btnYes</value>
   </data>
-  <data name="&gt;&gt;btnYes.Type" xml:space="preserve">
+  <data name=">>btnYes.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnYes.Parent" xml:space="preserve">
+  <data name=">>btnYes.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;btnYes.ZOrder" xml:space="preserve">
+  <data name=">>btnYes.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="btnNo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -168,16 +168,16 @@
   <data name="btnNo.Text" xml:space="preserve">
     <value>取消</value>
   </data>
-  <data name="&gt;&gt;btnNo.Name" xml:space="preserve">
+  <data name=">>btnNo.Name" xml:space="preserve">
     <value>btnNo</value>
   </data>
-  <data name="&gt;&gt;btnNo.Type" xml:space="preserve">
+  <data name=">>btnNo.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnNo.Parent" xml:space="preserve">
+  <data name=">>btnNo.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;btnNo.ZOrder" xml:space="preserve">
+  <data name=">>btnNo.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="pictureBox1.Font" type="System.Drawing.Font, System.Drawing">
@@ -192,16 +192,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+  <data name=">>pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+  <data name=">>pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+  <data name=">>pictureBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="AlertLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -225,16 +225,16 @@
   <data name="AlertLabel.Text" xml:space="preserve">
     <value>已删除的 VM 和模板无法恢复。</value>
   </data>
-  <data name="&gt;&gt;AlertLabel.Name" xml:space="preserve">
+  <data name=">>AlertLabel.Name" xml:space="preserve">
     <value>AlertLabel</value>
   </data>
-  <data name="&gt;&gt;AlertLabel.Type" xml:space="preserve">
+  <data name=">>AlertLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;AlertLabel.Parent" xml:space="preserve">
+  <data name=">>AlertLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;AlertLabel.ZOrder" xml:space="preserve">
+  <data name=">>AlertLabel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="listView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -285,16 +285,16 @@
   <data name="listView.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;listView.Name" xml:space="preserve">
+  <data name=">>listView.Name" xml:space="preserve">
     <value>listView</value>
   </data>
-  <data name="&gt;&gt;listView.Type" xml:space="preserve">
+  <data name=">>listView.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.ConfirmVMDeleteDialog+ListViewDeleteDialog, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;listView.Parent" xml:space="preserve">
+  <data name=">>listView.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;listView.ZOrder" xml:space="preserve">
+  <data name=">>listView.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="buttonSelectAll.Font" type="System.Drawing.Font, System.Drawing">
@@ -312,16 +312,16 @@
   <data name="buttonSelectAll.Text" xml:space="preserve">
     <value>全选(&amp;S)</value>
   </data>
-  <data name="&gt;&gt;buttonSelectAll.Name" xml:space="preserve">
+  <data name=">>buttonSelectAll.Name" xml:space="preserve">
     <value>buttonSelectAll</value>
   </data>
-  <data name="&gt;&gt;buttonSelectAll.Type" xml:space="preserve">
+  <data name=">>buttonSelectAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonSelectAll.Parent" xml:space="preserve">
+  <data name=">>buttonSelectAll.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;buttonSelectAll.ZOrder" xml:space="preserve">
+  <data name=">>buttonSelectAll.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="buttonClear.Font" type="System.Drawing.Font, System.Drawing">
@@ -339,16 +339,16 @@
   <data name="buttonClear.Text" xml:space="preserve">
     <value>全部清除(&amp;C)</value>
   </data>
-  <data name="&gt;&gt;buttonClear.Name" xml:space="preserve">
+  <data name=">>buttonClear.Name" xml:space="preserve">
     <value>buttonClear</value>
   </data>
-  <data name="&gt;&gt;buttonClear.Type" xml:space="preserve">
+  <data name=">>buttonClear.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonClear.Parent" xml:space="preserve">
+  <data name=">>buttonClear.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;buttonClear.ZOrder" xml:space="preserve">
+  <data name=">>buttonClear.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
@@ -371,16 +371,16 @@
 
 </value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -404,22 +404,22 @@
   <data name="$this.Text" xml:space="preserve">
     <value>删除多个项目</value>
   </data>
-  <data name="&gt;&gt;columnHeaderName.Name" xml:space="preserve">
+  <data name=">>columnHeaderName.Name" xml:space="preserve">
     <value>columnHeaderName</value>
   </data>
-  <data name="&gt;&gt;columnHeaderName.Type" xml:space="preserve">
+  <data name=">>columnHeaderName.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnHeaderVM.Name" xml:space="preserve">
+  <data name=">>columnHeaderVM.Name" xml:space="preserve">
     <value>columnHeaderVM</value>
   </data>
-  <data name="&gt;&gt;columnHeaderVM.Type" xml:space="preserve">
+  <data name=">>columnHeaderVM.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>ConfirmVMDeleteDialog</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

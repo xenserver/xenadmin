@@ -138,16 +138,16 @@
   <data name="CancelBtn.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="&gt;&gt;CancelBtn.Name" xml:space="preserve">
+  <data name=">>CancelBtn.Name" xml:space="preserve">
     <value>CancelBtn</value>
   </data>
-  <data name="&gt;&gt;CancelBtn.Type" xml:space="preserve">
+  <data name=">>CancelBtn.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CancelBtn.Parent" xml:space="preserve">
+  <data name=">>CancelBtn.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;CancelBtn.ZOrder" xml:space="preserve">
+  <data name=">>CancelBtn.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="AcceptBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -168,16 +168,16 @@
   <data name="AcceptBtn.Text" xml:space="preserve">
     <value>C&amp;reate</value>
   </data>
-  <data name="&gt;&gt;AcceptBtn.Name" xml:space="preserve">
+  <data name=">>AcceptBtn.Name" xml:space="preserve">
     <value>AcceptBtn</value>
   </data>
-  <data name="&gt;&gt;AcceptBtn.Type" xml:space="preserve">
+  <data name=">>AcceptBtn.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;AcceptBtn.Parent" xml:space="preserve">
+  <data name=">>AcceptBtn.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;AcceptBtn.ZOrder" xml:space="preserve">
+  <data name=">>AcceptBtn.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="Details.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -195,16 +195,16 @@
   <data name="Details.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;Details.Name" xml:space="preserve">
+  <data name=">>Details.Name" xml:space="preserve">
     <value>Details</value>
   </data>
-  <data name="&gt;&gt;Details.Type" xml:space="preserve">
+  <data name=">>Details.Type" xml:space="preserve">
     <value>XenAdmin.Controls.BondDetails, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;Details.Parent" xml:space="preserve">
+  <data name=">>Details.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Details.ZOrder" xml:space="preserve">
+  <data name=">>Details.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -222,10 +222,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Create Bond</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>BondProperties</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

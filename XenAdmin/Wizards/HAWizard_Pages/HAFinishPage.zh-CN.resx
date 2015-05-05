@@ -166,16 +166,16 @@
 在可能时重新启动的 VM 数:        {3}
 不重新启动的 VM 数:        {4}</value>
   </data>
-  <data name="&gt;&gt;labelSummary.Name" xml:space="preserve">
+  <data name=">>labelSummary.Name" xml:space="preserve">
     <value>labelSummary</value>
   </data>
-  <data name="&gt;&gt;labelSummary.Type" xml:space="preserve">
+  <data name=">>labelSummary.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelSummary.Parent" xml:space="preserve">
+  <data name=">>labelSummary.Parent" xml:space="preserve">
     <value>StartVMGroupBox</value>
   </data>
-  <data name="&gt;&gt;labelSummary.ZOrder" xml:space="preserve">
+  <data name=">>labelSummary.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="StartVMGroupBox.Font" type="System.Drawing.Font, System.Drawing">
@@ -196,16 +196,16 @@
   <data name="StartVMGroupBox.Text" xml:space="preserve">
     <value>配置摘要</value>
   </data>
-  <data name="&gt;&gt;StartVMGroupBox.Name" xml:space="preserve">
+  <data name=">>StartVMGroupBox.Name" xml:space="preserve">
     <value>StartVMGroupBox</value>
   </data>
-  <data name="&gt;&gt;StartVMGroupBox.Type" xml:space="preserve">
+  <data name=">>StartVMGroupBox.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;StartVMGroupBox.Parent" xml:space="preserve">
+  <data name=">>StartVMGroupBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;StartVMGroupBox.ZOrder" xml:space="preserve">
+  <data name=">>StartVMGroupBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelNoVmsProtected.AutoSize" type="System.Boolean, mscorlib">
@@ -235,16 +235,16 @@
   <data name="labelNoVmsProtected.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;labelNoVmsProtected.Name" xml:space="preserve">
+  <data name=">>labelNoVmsProtected.Name" xml:space="preserve">
     <value>labelNoVmsProtected</value>
   </data>
-  <data name="&gt;&gt;labelNoVmsProtected.Type" xml:space="preserve">
+  <data name=">>labelNoVmsProtected.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelNoVmsProtected.Parent" xml:space="preserve">
+  <data name=">>labelNoVmsProtected.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelNoVmsProtected.ZOrder" xml:space="preserve">
+  <data name=">>labelNoVmsProtected.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
@@ -256,16 +256,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+  <data name=">>pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+  <data name=">>pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+  <data name=">>pictureBox1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="labelNoHaGuaranteed.AutoSize" type="System.Boolean, mscorlib">
@@ -289,16 +289,16 @@
   <data name="labelNoHaGuaranteed.Text" xml:space="preserve">
     <value>在此配置下，池的故障转移容错能力将为 0 (零)，在服务器出现故障时可能无法重新启动虚拟机。</value>
   </data>
-  <data name="&gt;&gt;labelNoHaGuaranteed.Name" xml:space="preserve">
+  <data name=">>labelNoHaGuaranteed.Name" xml:space="preserve">
     <value>labelNoHaGuaranteed</value>
   </data>
-  <data name="&gt;&gt;labelNoHaGuaranteed.Type" xml:space="preserve">
+  <data name=">>labelNoHaGuaranteed.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelNoHaGuaranteed.Parent" xml:space="preserve">
+  <data name=">>labelNoHaGuaranteed.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelNoHaGuaranteed.ZOrder" xml:space="preserve">
+  <data name=">>labelNoHaGuaranteed.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -319,16 +319,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -358,16 +358,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>检查以下最终的高可用性配置。可以按“完成”按钮启用此配置中的高可用性，或者使用“上一步”按钮更改配置。</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -379,10 +379,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>598, 361</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>HAFinishPage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

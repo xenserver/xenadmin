@@ -150,16 +150,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>To grant access to a user, enter their AD name or group, separating mutliple entries by commas:</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>tableLayoutPanelAddUsers</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanelAddUsers.Location" type="System.Drawing.Point, System.Drawing">
@@ -177,10 +177,10 @@
   <data name="tableLayoutPanelAddUsers.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanelAddUsers.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanelAddUsers.Name" xml:space="preserve">
     <value>tableLayoutPanelAddUsers</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanelAddUsers.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanelAddUsers.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tableLayoutPanelAddUsers.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -201,10 +201,10 @@
   <data name="textBoxNames.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;textBoxNames.Name" xml:space="preserve">
+  <data name=">>textBoxNames.Name" xml:space="preserve">
     <value>textBoxNames</value>
   </data>
-  <data name="&gt;&gt;textBoxNames.Type" xml:space="preserve">
+  <data name=">>textBoxNames.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="flowLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
@@ -240,16 +240,16 @@
   <data name="textBoxUserNames.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;textBoxUserNames.Name" xml:space="preserve">
+  <data name=">>textBoxUserNames.Name" xml:space="preserve">
     <value>textBoxUserNames</value>
   </data>
-  <data name="&gt;&gt;textBoxUserNames.Type" xml:space="preserve">
+  <data name=">>textBoxUserNames.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBoxUserNames.Parent" xml:space="preserve">
+  <data name=">>textBoxUserNames.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;textBoxUserNames.ZOrder" xml:space="preserve">
+  <data name=">>textBoxUserNames.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelTopBlurb.AutoSize" type="System.Boolean, mscorlib">
@@ -279,16 +279,16 @@
   <data name="labelTopBlurb.Text" xml:space="preserve">
     <value>Adding users or groups to the access list of {0} lets them connect to the server using their AD credentials. To grant access to users, enter their AD name or group name, separating mutliple entries by commas or semicolons.</value>
   </data>
-  <data name="&gt;&gt;labelTopBlurb.Name" xml:space="preserve">
+  <data name=">>labelTopBlurb.Name" xml:space="preserve">
     <value>labelTopBlurb</value>
   </data>
-  <data name="&gt;&gt;labelTopBlurb.Type" xml:space="preserve">
+  <data name=">>labelTopBlurb.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelTopBlurb.Parent" xml:space="preserve">
+  <data name=">>labelTopBlurb.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelTopBlurb.ZOrder" xml:space="preserve">
+  <data name=">>labelTopBlurb.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="LabelStatus.AutoSize" type="System.Boolean, mscorlib">
@@ -321,16 +321,16 @@
   <data name="LabelStatus.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;LabelStatus.Name" xml:space="preserve">
+  <data name=">>LabelStatus.Name" xml:space="preserve">
     <value>LabelStatus</value>
   </data>
-  <data name="&gt;&gt;LabelStatus.Type" xml:space="preserve">
+  <data name=">>LabelStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;LabelStatus.Parent" xml:space="preserve">
+  <data name=">>LabelStatus.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;LabelStatus.ZOrder" xml:space="preserve">
+  <data name=">>LabelStatus.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="progressBar1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -354,16 +354,16 @@
   <data name="progressBar1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;progressBar1.Name" xml:space="preserve">
+  <data name=">>progressBar1.Name" xml:space="preserve">
     <value>progressBar1</value>
   </data>
-  <data name="&gt;&gt;progressBar1.Type" xml:space="preserve">
+  <data name=">>progressBar1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;progressBar1.Parent" xml:space="preserve">
+  <data name=">>progressBar1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;progressBar1.ZOrder" xml:space="preserve">
+  <data name=">>progressBar1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="ColumnName.Text" xml:space="preserve">
@@ -402,16 +402,16 @@
   <data name="entryListView.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;entryListView.Name" xml:space="preserve">
+  <data name=">>entryListView.Name" xml:space="preserve">
     <value>entryListView</value>
   </data>
-  <data name="&gt;&gt;entryListView.Type" xml:space="preserve">
+  <data name=">>entryListView.Type" xml:space="preserve">
     <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;entryListView.Parent" xml:space="preserve">
+  <data name=">>entryListView.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;entryListView.ZOrder" xml:space="preserve">
+  <data name=">>entryListView.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
@@ -438,16 +438,16 @@
   <data name="label2.Text" xml:space="preserve">
     <value>&amp;Names:</value>
   </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+  <data name=">>label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+  <data name=">>label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+  <data name=">>label2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+  <data name=">>label2.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -471,16 +471,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -501,16 +501,16 @@
   <data name="ButtonCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="&gt;&gt;ButtonCancel.Name" xml:space="preserve">
+  <data name=">>ButtonCancel.Name" xml:space="preserve">
     <value>ButtonCancel</value>
   </data>
-  <data name="&gt;&gt;ButtonCancel.Type" xml:space="preserve">
+  <data name=">>ButtonCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ButtonCancel.Parent" xml:space="preserve">
+  <data name=">>ButtonCancel.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;ButtonCancel.ZOrder" xml:space="preserve">
+  <data name=">>ButtonCancel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="buttonGrantAccess.Enabled" type="System.Boolean, mscorlib">
@@ -531,16 +531,16 @@
   <data name="buttonGrantAccess.Text" xml:space="preserve">
     <value>&amp;Grant Access</value>
   </data>
-  <data name="&gt;&gt;buttonGrantAccess.Name" xml:space="preserve">
+  <data name=">>buttonGrantAccess.Name" xml:space="preserve">
     <value>buttonGrantAccess</value>
   </data>
-  <data name="&gt;&gt;buttonGrantAccess.Type" xml:space="preserve">
+  <data name=">>buttonGrantAccess.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonGrantAccess.Parent" xml:space="preserve">
+  <data name=">>buttonGrantAccess.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;buttonGrantAccess.ZOrder" xml:space="preserve">
+  <data name=">>buttonGrantAccess.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -561,16 +561,16 @@
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Name" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -597,28 +597,28 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Add Users</value>
   </data>
-  <data name="&gt;&gt;ColumnName.Name" xml:space="preserve">
+  <data name=">>ColumnName.Name" xml:space="preserve">
     <value>ColumnName</value>
   </data>
-  <data name="&gt;&gt;ColumnName.Type" xml:space="preserve">
+  <data name=">>ColumnName.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnResolveStatus.Name" xml:space="preserve">
+  <data name=">>ColumnResolveStatus.Name" xml:space="preserve">
     <value>ColumnResolveStatus</value>
   </data>
-  <data name="&gt;&gt;ColumnResolveStatus.Type" xml:space="preserve">
+  <data name=">>ColumnResolveStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnGrantAccess.Name" xml:space="preserve">
+  <data name=">>ColumnGrantAccess.Name" xml:space="preserve">
     <value>ColumnGrantAccess</value>
   </data>
-  <data name="&gt;&gt;ColumnGrantAccess.Type" xml:space="preserve">
+  <data name=">>ColumnGrantAccess.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>ResolvingSubjectsDialog</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

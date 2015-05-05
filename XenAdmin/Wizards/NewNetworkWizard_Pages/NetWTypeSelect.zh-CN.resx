@@ -141,16 +141,16 @@
   <data name="lblNetTypeSel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;lblNetTypeSel.Name" xml:space="preserve">
+  <data name=">>lblNetTypeSel.Name" xml:space="preserve">
     <value>lblNetTypeSel</value>
   </data>
-  <data name="&gt;&gt;lblNetTypeSel.Type" xml:space="preserve">
+  <data name=">>lblNetTypeSel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblNetTypeSel.Parent" xml:space="preserve">
+  <data name=">>lblNetTypeSel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblNetTypeSel.ZOrder" xml:space="preserve">
+  <data name=">>lblNetTypeSel.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="rbtnInternalNetwork.AutoSize" type="System.Boolean, mscorlib">
@@ -174,16 +174,16 @@
   <data name="rbtnInternalNetwork.Text" xml:space="preserve">
     <value>单服务器专用网络(&amp;S)</value>
   </data>
-  <data name="&gt;&gt;rbtnInternalNetwork.Name" xml:space="preserve">
+  <data name=">>rbtnInternalNetwork.Name" xml:space="preserve">
     <value>rbtnInternalNetwork</value>
   </data>
-  <data name="&gt;&gt;rbtnInternalNetwork.Type" xml:space="preserve">
+  <data name=">>rbtnInternalNetwork.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rbtnInternalNetwork.Parent" xml:space="preserve">
+  <data name=">>rbtnInternalNetwork.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;rbtnInternalNetwork.ZOrder" xml:space="preserve">
+  <data name=">>rbtnInternalNetwork.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="rbtnBondedNetwork.AutoSize" type="System.Boolean, mscorlib">
@@ -207,16 +207,16 @@
   <data name="rbtnBondedNetwork.Text" xml:space="preserve">
     <value>绑定网络(&amp;B)</value>
   </data>
-  <data name="&gt;&gt;rbtnBondedNetwork.Name" xml:space="preserve">
+  <data name=">>rbtnBondedNetwork.Name" xml:space="preserve">
     <value>rbtnBondedNetwork</value>
   </data>
-  <data name="&gt;&gt;rbtnBondedNetwork.Type" xml:space="preserve">
+  <data name=">>rbtnBondedNetwork.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rbtnBondedNetwork.Parent" xml:space="preserve">
+  <data name=">>rbtnBondedNetwork.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;rbtnBondedNetwork.ZOrder" xml:space="preserve">
+  <data name=">>rbtnBondedNetwork.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
@@ -238,16 +238,16 @@
     <value>创建不离开每个 XenServer 主机的网络。
 此网络可用作同一主机上两个 VM 之间的专用连接。</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
@@ -269,16 +269,16 @@
     <value>创建将两个或多个 NIC 绑定在一起的网络。
 此操作将创建一个性能更高的通道。</value>
   </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+  <data name=">>label3.Name" xml:space="preserve">
     <value>label3</value>
   </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+  <data name=">>label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+  <data name=">>label3.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+  <data name=">>label3.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="labelCHIN.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -304,16 +304,16 @@
 此网络可用作池中的两个 VM 之间的专用连接。
 此类型的网络需要运行 vSwitch Controller。</value>
   </data>
-  <data name="&gt;&gt;labelCHIN.Name" xml:space="preserve">
+  <data name=">>labelCHIN.Name" xml:space="preserve">
     <value>labelCHIN</value>
   </data>
-  <data name="&gt;&gt;labelCHIN.Type" xml:space="preserve">
+  <data name=">>labelCHIN.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelCHIN.Parent" xml:space="preserve">
+  <data name=">>labelCHIN.Parent" xml:space="preserve">
     <value>panelCHIN</value>
   </data>
-  <data name="&gt;&gt;labelCHIN.ZOrder" xml:space="preserve">
+  <data name=">>labelCHIN.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -337,31 +337,31 @@
   <data name="label2.Text" xml:space="preserve">
     <value>创建通过其中一个 VLAN 传递流量的网络。</value>
   </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+  <data name=">>label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+  <data name=">>label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+  <data name=">>label2.Parent" xml:space="preserve">
     <value>panelExternal</value>
   </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+  <data name=">>label2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="toolTipContainerCHIN.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;panelCHIN.Name" xml:space="preserve">
+  <data name=">>panelCHIN.Name" xml:space="preserve">
     <value>panelCHIN</value>
   </data>
-  <data name="&gt;&gt;panelCHIN.Type" xml:space="preserve">
+  <data name=">>panelCHIN.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panelCHIN.Parent" xml:space="preserve">
+  <data name=">>panelCHIN.Parent" xml:space="preserve">
     <value>toolTipContainerCHIN</value>
   </data>
-  <data name="&gt;&gt;panelCHIN.ZOrder" xml:space="preserve">
+  <data name=">>panelCHIN.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="toolTipContainerCHIN.Location" type="System.Drawing.Point, System.Drawing">
@@ -373,28 +373,28 @@
   <data name="toolTipContainerCHIN.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerCHIN.Name" xml:space="preserve">
+  <data name=">>toolTipContainerCHIN.Name" xml:space="preserve">
     <value>toolTipContainerCHIN</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerCHIN.Type" xml:space="preserve">
+  <data name=">>toolTipContainerCHIN.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerCHIN.Parent" xml:space="preserve">
+  <data name=">>toolTipContainerCHIN.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerCHIN.ZOrder" xml:space="preserve">
+  <data name=">>toolTipContainerCHIN.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;rbtnCHIN.Name" xml:space="preserve">
+  <data name=">>rbtnCHIN.Name" xml:space="preserve">
     <value>rbtnCHIN</value>
   </data>
-  <data name="&gt;&gt;rbtnCHIN.Type" xml:space="preserve">
+  <data name=">>rbtnCHIN.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rbtnCHIN.Parent" xml:space="preserve">
+  <data name=">>rbtnCHIN.Parent" xml:space="preserve">
     <value>panelCHIN</value>
   </data>
-  <data name="&gt;&gt;rbtnCHIN.ZOrder" xml:space="preserve">
+  <data name=">>rbtnCHIN.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelCHIN.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -409,16 +409,16 @@
   <data name="panelCHIN.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;panelCHIN.Name" xml:space="preserve">
+  <data name=">>panelCHIN.Name" xml:space="preserve">
     <value>panelCHIN</value>
   </data>
-  <data name="&gt;&gt;panelCHIN.Type" xml:space="preserve">
+  <data name=">>panelCHIN.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panelCHIN.Parent" xml:space="preserve">
+  <data name=">>panelCHIN.Parent" xml:space="preserve">
     <value>toolTipContainerCHIN</value>
   </data>
-  <data name="&gt;&gt;panelCHIN.ZOrder" xml:space="preserve">
+  <data name=">>panelCHIN.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="rbtnCHIN.AutoSize" type="System.Boolean, mscorlib">
@@ -442,31 +442,31 @@
   <data name="rbtnCHIN.Text" xml:space="preserve">
     <value>跨服务器专用网络(&amp;C)</value>
   </data>
-  <data name="&gt;&gt;rbtnCHIN.Name" xml:space="preserve">
+  <data name=">>rbtnCHIN.Name" xml:space="preserve">
     <value>rbtnCHIN</value>
   </data>
-  <data name="&gt;&gt;rbtnCHIN.Type" xml:space="preserve">
+  <data name=">>rbtnCHIN.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rbtnCHIN.Parent" xml:space="preserve">
+  <data name=">>rbtnCHIN.Parent" xml:space="preserve">
     <value>panelCHIN</value>
   </data>
-  <data name="&gt;&gt;rbtnCHIN.ZOrder" xml:space="preserve">
+  <data name=">>rbtnCHIN.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="toolTipContainerExternal.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;panelExternal.Name" xml:space="preserve">
+  <data name=">>panelExternal.Name" xml:space="preserve">
     <value>panelExternal</value>
   </data>
-  <data name="&gt;&gt;panelExternal.Type" xml:space="preserve">
+  <data name=">>panelExternal.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panelExternal.Parent" xml:space="preserve">
+  <data name=">>panelExternal.Parent" xml:space="preserve">
     <value>toolTipContainerExternal</value>
   </data>
-  <data name="&gt;&gt;panelExternal.ZOrder" xml:space="preserve">
+  <data name=">>panelExternal.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="toolTipContainerExternal.Location" type="System.Drawing.Point, System.Drawing">
@@ -478,28 +478,28 @@
   <data name="toolTipContainerExternal.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerExternal.Name" xml:space="preserve">
+  <data name=">>toolTipContainerExternal.Name" xml:space="preserve">
     <value>toolTipContainerExternal</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerExternal.Type" xml:space="preserve">
+  <data name=">>toolTipContainerExternal.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerExternal.Parent" xml:space="preserve">
+  <data name=">>toolTipContainerExternal.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;toolTipContainerExternal.ZOrder" xml:space="preserve">
+  <data name=">>toolTipContainerExternal.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;rbtnExternalNetwork.Name" xml:space="preserve">
+  <data name=">>rbtnExternalNetwork.Name" xml:space="preserve">
     <value>rbtnExternalNetwork</value>
   </data>
-  <data name="&gt;&gt;rbtnExternalNetwork.Type" xml:space="preserve">
+  <data name=">>rbtnExternalNetwork.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rbtnExternalNetwork.Parent" xml:space="preserve">
+  <data name=">>rbtnExternalNetwork.Parent" xml:space="preserve">
     <value>panelExternal</value>
   </data>
-  <data name="&gt;&gt;rbtnExternalNetwork.ZOrder" xml:space="preserve">
+  <data name=">>rbtnExternalNetwork.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panelExternal.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -514,16 +514,16 @@
   <data name="panelExternal.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;panelExternal.Name" xml:space="preserve">
+  <data name=">>panelExternal.Name" xml:space="preserve">
     <value>panelExternal</value>
   </data>
-  <data name="&gt;&gt;panelExternal.Type" xml:space="preserve">
+  <data name=">>panelExternal.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panelExternal.Parent" xml:space="preserve">
+  <data name=">>panelExternal.Parent" xml:space="preserve">
     <value>toolTipContainerExternal</value>
   </data>
-  <data name="&gt;&gt;panelExternal.ZOrder" xml:space="preserve">
+  <data name=">>panelExternal.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="rbtnExternalNetwork.AutoSize" type="System.Boolean, mscorlib">
@@ -547,16 +547,16 @@
   <data name="rbtnExternalNetwork.Text" xml:space="preserve">
     <value>外部网络(&amp;E)</value>
   </data>
-  <data name="&gt;&gt;rbtnExternalNetwork.Name" xml:space="preserve">
+  <data name=">>rbtnExternalNetwork.Name" xml:space="preserve">
     <value>rbtnExternalNetwork</value>
   </data>
-  <data name="&gt;&gt;rbtnExternalNetwork.Type" xml:space="preserve">
+  <data name=">>rbtnExternalNetwork.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rbtnExternalNetwork.Parent" xml:space="preserve">
+  <data name=">>rbtnExternalNetwork.Parent" xml:space="preserve">
     <value>panelExternal</value>
   </data>
-  <data name="&gt;&gt;rbtnExternalNetwork.ZOrder" xml:space="preserve">
+  <data name=">>rbtnExternalNetwork.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -577,10 +577,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>选择类型</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>NetWTypeSelect</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -156,16 +156,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>ストレージのアドレスを指定して、アクセスするための資格情報を入力します。</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelHostAddress.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -195,16 +195,16 @@
   <data name="labelHostAddress.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelHostAddress.Name" xml:space="preserve">
+  <data name=">>labelHostAddress.Name" xml:space="preserve">
     <value>labelHostAddress</value>
   </data>
-  <data name="&gt;&gt;labelHostAddress.Type" xml:space="preserve">
+  <data name=">>labelHostAddress.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelHostAddress.Parent" xml:space="preserve">
+  <data name=">>labelHostAddress.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelHostAddress.ZOrder" xml:space="preserve">
+  <data name=">>labelHostAddress.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="textBoxNetappHostAddress.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -219,16 +219,16 @@
   <data name="textBoxNetappHostAddress.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;textBoxNetappHostAddress.Name" xml:space="preserve">
+  <data name=">>textBoxNetappHostAddress.Name" xml:space="preserve">
     <value>textBoxNetappHostAddress</value>
   </data>
-  <data name="&gt;&gt;textBoxNetappHostAddress.Type" xml:space="preserve">
+  <data name=">>textBoxNetappHostAddress.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBoxNetappHostAddress.Parent" xml:space="preserve">
+  <data name=">>textBoxNetappHostAddress.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;textBoxNetappHostAddress.ZOrder" xml:space="preserve">
+  <data name=">>textBoxNetappHostAddress.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="labelInvalidHost.AutoSize" type="System.Boolean, mscorlib">
@@ -258,16 +258,16 @@
   <data name="labelInvalidHost.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;labelInvalidHost.Name" xml:space="preserve">
+  <data name=">>labelInvalidHost.Name" xml:space="preserve">
     <value>labelInvalidHost</value>
   </data>
-  <data name="&gt;&gt;labelInvalidHost.Type" xml:space="preserve">
+  <data name=">>labelInvalidHost.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelInvalidHost.Parent" xml:space="preserve">
+  <data name=">>labelInvalidHost.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelInvalidHost.ZOrder" xml:space="preserve">
+  <data name=">>labelInvalidHost.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="labelUsername.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -297,16 +297,16 @@
   <data name="labelUsername.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelUsername.Name" xml:space="preserve">
+  <data name=">>labelUsername.Name" xml:space="preserve">
     <value>labelUsername</value>
   </data>
-  <data name="&gt;&gt;labelUsername.Type" xml:space="preserve">
+  <data name=">>labelUsername.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelUsername.Parent" xml:space="preserve">
+  <data name=">>labelUsername.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelUsername.ZOrder" xml:space="preserve">
+  <data name=">>labelUsername.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="textBoxNetappUsername.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -321,16 +321,16 @@
   <data name="textBoxNetappUsername.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;textBoxNetappUsername.Name" xml:space="preserve">
+  <data name=">>textBoxNetappUsername.Name" xml:space="preserve">
     <value>textBoxNetappUsername</value>
   </data>
-  <data name="&gt;&gt;textBoxNetappUsername.Type" xml:space="preserve">
+  <data name=">>textBoxNetappUsername.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBoxNetappUsername.Parent" xml:space="preserve">
+  <data name=">>textBoxNetappUsername.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;textBoxNetappUsername.ZOrder" xml:space="preserve">
+  <data name=">>textBoxNetappUsername.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="labelPassword.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -360,16 +360,16 @@
   <data name="labelPassword.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelPassword.Name" xml:space="preserve">
+  <data name=">>labelPassword.Name" xml:space="preserve">
     <value>labelPassword</value>
   </data>
-  <data name="&gt;&gt;labelPassword.Type" xml:space="preserve">
+  <data name=">>labelPassword.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelPassword.Parent" xml:space="preserve">
+  <data name=">>labelPassword.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelPassword.ZOrder" xml:space="preserve">
+  <data name=">>labelPassword.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="textBoxNetappPassword.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -384,16 +384,16 @@
   <data name="textBoxNetappPassword.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;textBoxNetappPassword.Name" xml:space="preserve">
+  <data name=">>textBoxNetappPassword.Name" xml:space="preserve">
     <value>textBoxNetappPassword</value>
   </data>
-  <data name="&gt;&gt;textBoxNetappPassword.Type" xml:space="preserve">
+  <data name=">>textBoxNetappPassword.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBoxNetappPassword.Parent" xml:space="preserve">
+  <data name=">>textBoxNetappPassword.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;textBoxNetappPassword.ZOrder" xml:space="preserve">
+  <data name=">>textBoxNetappPassword.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="labelNetappChapUser.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -423,16 +423,16 @@
   <data name="labelNetappChapUser.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelNetappChapUser.Name" xml:space="preserve">
+  <data name=">>labelNetappChapUser.Name" xml:space="preserve">
     <value>labelNetappChapUser</value>
   </data>
-  <data name="&gt;&gt;labelNetappChapUser.Type" xml:space="preserve">
+  <data name=">>labelNetappChapUser.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelNetappChapUser.Parent" xml:space="preserve">
+  <data name=">>labelNetappChapUser.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelNetappChapUser.ZOrder" xml:space="preserve">
+  <data name=">>labelNetappChapUser.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="textBoxNetappChapUser.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -447,16 +447,16 @@
   <data name="textBoxNetappChapUser.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;textBoxNetappChapUser.Name" xml:space="preserve">
+  <data name=">>textBoxNetappChapUser.Name" xml:space="preserve">
     <value>textBoxNetappChapUser</value>
   </data>
-  <data name="&gt;&gt;textBoxNetappChapUser.Type" xml:space="preserve">
+  <data name=">>textBoxNetappChapUser.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBoxNetappChapUser.Parent" xml:space="preserve">
+  <data name=">>textBoxNetappChapUser.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;textBoxNetappChapUser.ZOrder" xml:space="preserve">
+  <data name=">>textBoxNetappChapUser.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="labelNetappChapSecret.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -486,16 +486,16 @@
   <data name="labelNetappChapSecret.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelNetappChapSecret.Name" xml:space="preserve">
+  <data name=">>labelNetappChapSecret.Name" xml:space="preserve">
     <value>labelNetappChapSecret</value>
   </data>
-  <data name="&gt;&gt;labelNetappChapSecret.Type" xml:space="preserve">
+  <data name=">>labelNetappChapSecret.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelNetappChapSecret.Parent" xml:space="preserve">
+  <data name=">>labelNetappChapSecret.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelNetappChapSecret.ZOrder" xml:space="preserve">
+  <data name=">>labelNetappChapSecret.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="textBoxNetappChapSecret.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -510,16 +510,16 @@
   <data name="textBoxNetappChapSecret.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;textBoxNetappChapSecret.Name" xml:space="preserve">
+  <data name=">>textBoxNetappChapSecret.Name" xml:space="preserve">
     <value>textBoxNetappChapSecret</value>
   </data>
-  <data name="&gt;&gt;textBoxNetappChapSecret.Type" xml:space="preserve">
+  <data name=">>textBoxNetappChapSecret.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBoxNetappChapSecret.Parent" xml:space="preserve">
+  <data name=">>textBoxNetappChapSecret.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;textBoxNetappChapSecret.ZOrder" xml:space="preserve">
+  <data name=">>textBoxNetappChapSecret.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -537,16 +537,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -570,16 +570,16 @@
   <data name="checkBoxNetappUseChap.Text" xml:space="preserve">
     <value>CHAP 認証を使用する(&amp;C)</value>
   </data>
-  <data name="&gt;&gt;checkBoxNetappUseChap.Name" xml:space="preserve">
+  <data name=">>checkBoxNetappUseChap.Name" xml:space="preserve">
     <value>checkBoxNetappUseChap</value>
   </data>
-  <data name="&gt;&gt;checkBoxNetappUseChap.Type" xml:space="preserve">
+  <data name=">>checkBoxNetappUseChap.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkBoxNetappUseChap.Parent" xml:space="preserve">
+  <data name=">>checkBoxNetappUseChap.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;checkBoxNetappUseChap.ZOrder" xml:space="preserve">
+  <data name=">>checkBoxNetappUseChap.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -594,10 +594,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>498, 299</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>FilerDetails</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

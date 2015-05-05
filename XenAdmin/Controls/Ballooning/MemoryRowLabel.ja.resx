@@ -144,16 +144,16 @@
   <data name="linkShowAll.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
-  <data name="&gt;&gt;linkShowAll.Name" xml:space="preserve">
+  <data name=">>linkShowAll.Name" xml:space="preserve">
     <value>linkShowAll</value>
   </data>
-  <data name="&gt;&gt;linkShowAll.Type" xml:space="preserve">
+  <data name=">>linkShowAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;linkShowAll.Parent" xml:space="preserve">
+  <data name=">>linkShowAll.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;linkShowAll.ZOrder" xml:space="preserve">
+  <data name=">>linkShowAll.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="linkHide.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -180,16 +180,16 @@
   <data name="linkHide.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
-  <data name="&gt;&gt;linkHide.Name" xml:space="preserve">
+  <data name=">>linkHide.Name" xml:space="preserve">
     <value>linkHide</value>
   </data>
-  <data name="&gt;&gt;linkHide.Type" xml:space="preserve">
+  <data name=">>linkHide.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;linkHide.Parent" xml:space="preserve">
+  <data name=">>linkHide.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;linkHide.ZOrder" xml:space="preserve">
+  <data name=">>linkHide.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -207,10 +207,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>786, 26</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>MemoryRowLabel</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

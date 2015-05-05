@@ -135,16 +135,16 @@
   <data name="textBoxSummary.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;textBoxSummary.Name" xml:space="preserve">
+  <data name=">>textBoxSummary.Name" xml:space="preserve">
     <value>textBoxSummary</value>
   </data>
-  <data name="&gt;&gt;textBoxSummary.Type" xml:space="preserve">
+  <data name=">>textBoxSummary.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBoxSummary.Parent" xml:space="preserve">
+  <data name=">>textBoxSummary.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;textBoxSummary.ZOrder" xml:space="preserve">
+  <data name=">>textBoxSummary.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="label13.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -165,16 +165,16 @@
   <data name="label13.Text" xml:space="preserve">
     <value>Review the new vApp below and click Previous if you want to change any settings or Finish to create the new vApp.</value>
   </data>
-  <data name="&gt;&gt;label13.Name" xml:space="preserve">
+  <data name=">>label13.Name" xml:space="preserve">
     <value>label13</value>
   </data>
-  <data name="&gt;&gt;label13.Type" xml:space="preserve">
+  <data name=">>label13.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label13.Parent" xml:space="preserve">
+  <data name=">>label13.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
+  <data name=">>label13.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -186,10 +186,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>481, 307</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>NewVMApplianceFinishPage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

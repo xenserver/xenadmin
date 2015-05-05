@@ -144,16 +144,16 @@
   <data name="btnCancel.Text" xml:space="preserve">
     <value>取消</value>
   </data>
-  <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
+  <data name=">>btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
   </data>
-  <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+  <data name=">>btnCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+  <data name=">>btnCancel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+  <data name=">>btnCancel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="okButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -180,16 +180,16 @@
   <data name="okButton.Text" xml:space="preserve">
     <value>确定</value>
   </data>
-  <data name="&gt;&gt;okButton.Name" xml:space="preserve">
+  <data name=">>okButton.Name" xml:space="preserve">
     <value>okButton</value>
   </data>
-  <data name="&gt;&gt;okButton.Type" xml:space="preserve">
+  <data name=">>okButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;okButton.Parent" xml:space="preserve">
+  <data name=">>okButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;okButton.ZOrder" xml:space="preserve">
+  <data name=">>okButton.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="NameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -207,16 +207,16 @@
   <data name="NameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;NameTextBox.Name" xml:space="preserve">
+  <data name=">>NameTextBox.Name" xml:space="preserve">
     <value>NameTextBox</value>
   </data>
-  <data name="&gt;&gt;NameTextBox.Type" xml:space="preserve">
+  <data name=">>NameTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;NameTextBox.Parent" xml:space="preserve">
+  <data name=">>NameTextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;NameTextBox.ZOrder" xml:space="preserve">
+  <data name=">>NameTextBox.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
@@ -237,16 +237,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>名称(&amp;N):</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
@@ -267,16 +267,16 @@
   <data name="label2.Text" xml:space="preserve">
     <value>类型(&amp;T):</value>
   </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+  <data name=">>label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+  <data name=">>label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+  <data name=">>label2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+  <data name=">>label2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="TypeComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -300,16 +300,16 @@
   <data name="TypeComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;TypeComboBox.Name" xml:space="preserve">
+  <data name=">>TypeComboBox.Name" xml:space="preserve">
     <value>TypeComboBox</value>
   </data>
-  <data name="&gt;&gt;TypeComboBox.Type" xml:space="preserve">
+  <data name=">>TypeComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TypeComboBox.Parent" xml:space="preserve">
+  <data name=">>TypeComboBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;TypeComboBox.ZOrder" xml:space="preserve">
+  <data name=">>TypeComboBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="DuplicateWarning.AutoSize" type="System.Boolean, mscorlib">
@@ -333,16 +333,16 @@
   <data name="DuplicateWarning.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;DuplicateWarning.Name" xml:space="preserve">
+  <data name=">>DuplicateWarning.Name" xml:space="preserve">
     <value>DuplicateWarning</value>
   </data>
-  <data name="&gt;&gt;DuplicateWarning.Type" xml:space="preserve">
+  <data name=">>DuplicateWarning.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DuplicateWarning.Parent" xml:space="preserve">
+  <data name=">>DuplicateWarning.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;DuplicateWarning.ZOrder" xml:space="preserve">
+  <data name=">>DuplicateWarning.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -363,10 +363,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>新建自定义字段</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>NewCustomFieldDialog</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

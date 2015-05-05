@@ -144,16 +144,16 @@
   <data name="labelwizard.Text" xml:space="preserve">
     <value>提供 SR 的名称和说明(可选)。</value>
   </data>
-  <data name="&gt;&gt;labelwizard.Name" xml:space="preserve">
+  <data name=">>labelwizard.Name" xml:space="preserve">
     <value>labelwizard</value>
   </data>
-  <data name="&gt;&gt;labelwizard.Type" xml:space="preserve">
+  <data name=">>labelwizard.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelwizard.Parent" xml:space="preserve">
+  <data name=">>labelwizard.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelwizard.ZOrder" xml:space="preserve">
+  <data name=">>labelwizard.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
@@ -180,16 +180,16 @@
   <data name="label2.Text" xml:space="preserve">
     <value>名称(&amp;M):</value>
   </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+  <data name=">>label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+  <data name=">>label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+  <data name=">>label2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+  <data name=">>label2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="textBoxName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -207,16 +207,16 @@
   <data name="textBoxName.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;textBoxName.Name" xml:space="preserve">
+  <data name=">>textBoxName.Name" xml:space="preserve">
     <value>textBoxName</value>
   </data>
-  <data name="&gt;&gt;textBoxName.Type" xml:space="preserve">
+  <data name=">>textBoxName.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBoxName.Parent" xml:space="preserve">
+  <data name=">>textBoxName.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;textBoxName.ZOrder" xml:space="preserve">
+  <data name=">>textBoxName.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="textBoxDescription.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -237,16 +237,16 @@
   <data name="textBoxDescription.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;textBoxDescription.Name" xml:space="preserve">
+  <data name=">>textBoxDescription.Name" xml:space="preserve">
     <value>textBoxDescription</value>
   </data>
-  <data name="&gt;&gt;textBoxDescription.Type" xml:space="preserve">
+  <data name=">>textBoxDescription.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBoxDescription.Parent" xml:space="preserve">
+  <data name=">>textBoxDescription.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;textBoxDescription.ZOrder" xml:space="preserve">
+  <data name=">>textBoxDescription.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="labelDescription.AutoSize" type="System.Boolean, mscorlib">
@@ -276,16 +276,16 @@
   <data name="labelDescription.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelDescription.Name" xml:space="preserve">
+  <data name=">>labelDescription.Name" xml:space="preserve">
     <value>labelDescription</value>
   </data>
-  <data name="&gt;&gt;labelDescription.Type" xml:space="preserve">
+  <data name=">>labelDescription.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelDescription.Parent" xml:space="preserve">
+  <data name=">>labelDescription.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelDescription.ZOrder" xml:space="preserve">
+  <data name=">>labelDescription.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="checkBoxAutoDescription.AutoSize" type="System.Boolean, mscorlib">
@@ -303,16 +303,16 @@
   <data name="checkBoxAutoDescription.Text" xml:space="preserve">
     <value>自动基于 SR 设置(例如，IP 地址、LUN 等)生成说明(&amp;A)</value>
   </data>
-  <data name="&gt;&gt;checkBoxAutoDescription.Name" xml:space="preserve">
+  <data name=">>checkBoxAutoDescription.Name" xml:space="preserve">
     <value>checkBoxAutoDescription</value>
   </data>
-  <data name="&gt;&gt;checkBoxAutoDescription.Type" xml:space="preserve">
+  <data name=">>checkBoxAutoDescription.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkBoxAutoDescription.Parent" xml:space="preserve">
+  <data name=">>checkBoxAutoDescription.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;checkBoxAutoDescription.ZOrder" xml:space="preserve">
+  <data name=">>checkBoxAutoDescription.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="labelInvalidName.AutoSize" type="System.Boolean, mscorlib">
@@ -342,16 +342,16 @@
   <data name="labelInvalidName.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;labelInvalidName.Name" xml:space="preserve">
+  <data name=">>labelInvalidName.Name" xml:space="preserve">
     <value>labelInvalidName</value>
   </data>
-  <data name="&gt;&gt;labelInvalidName.Type" xml:space="preserve">
+  <data name=">>labelInvalidName.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelInvalidName.Parent" xml:space="preserve">
+  <data name=">>labelInvalidName.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelInvalidName.ZOrder" xml:space="preserve">
+  <data name=">>labelInvalidName.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -369,16 +369,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -393,10 +393,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>500, 283</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>NewSrWizardNamePage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

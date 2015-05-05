@@ -207,16 +207,16 @@
   <data name="buttonProperties.Text" xml:space="preserve">
     <value>&amp;Properties</value>
   </data>
-  <data name="&gt;&gt;buttonProperties.Name" xml:space="preserve">
+  <data name=">>buttonProperties.Name" xml:space="preserve">
     <value>buttonProperties</value>
   </data>
-  <data name="&gt;&gt;buttonProperties.Type" xml:space="preserve">
+  <data name=">>buttonProperties.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonProperties.Parent" xml:space="preserve">
+  <data name=">>buttonProperties.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;buttonProperties.ZOrder" xml:space="preserve">
+  <data name=">>buttonProperties.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelPolicyTitle.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -243,16 +243,16 @@
   <data name="labelPolicyTitle.Text" xml:space="preserve">
     <value>Scheduled snapshot jobs defined for pool '{0}':</value>
   </data>
-  <data name="&gt;&gt;labelPolicyTitle.Name" xml:space="preserve">
+  <data name=">>labelPolicyTitle.Name" xml:space="preserve">
     <value>labelPolicyTitle</value>
   </data>
-  <data name="&gt;&gt;labelPolicyTitle.Type" xml:space="preserve">
+  <data name=">>labelPolicyTitle.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelPolicyTitle.Parent" xml:space="preserve">
+  <data name=">>labelPolicyTitle.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;labelPolicyTitle.ZOrder" xml:space="preserve">
+  <data name=">>labelPolicyTitle.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="localServerTime1.AutoSize" type="System.Boolean, mscorlib">
@@ -273,16 +273,16 @@
   <data name="localServerTime1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;localServerTime1.Name" xml:space="preserve">
+  <data name=">>localServerTime1.Name" xml:space="preserve">
     <value>localServerTime1</value>
   </data>
-  <data name="&gt;&gt;localServerTime1.Type" xml:space="preserve">
+  <data name=">>localServerTime1.Type" xml:space="preserve">
     <value>XenAdmin.Wizards.NewPolicyWizard.LocalServerTime, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;localServerTime1.Parent" xml:space="preserve">
+  <data name=">>localServerTime1.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;localServerTime1.ZOrder" xml:space="preserve">
+  <data name=">>localServerTime1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="buttonEnable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -303,16 +303,16 @@
   <data name="buttonEnable.Text" xml:space="preserve">
     <value>&amp;Enable</value>
   </data>
-  <data name="&gt;&gt;buttonEnable.Name" xml:space="preserve">
+  <data name=">>buttonEnable.Name" xml:space="preserve">
     <value>buttonEnable</value>
   </data>
-  <data name="&gt;&gt;buttonEnable.Type" xml:space="preserve">
+  <data name=">>buttonEnable.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonEnable.Parent" xml:space="preserve">
+  <data name=">>buttonEnable.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;buttonEnable.ZOrder" xml:space="preserve">
+  <data name=">>buttonEnable.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="buttonRunNow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -336,16 +336,16 @@
   <data name="buttonRunNow.Text" xml:space="preserve">
     <value>&amp;Run Now</value>
   </data>
-  <data name="&gt;&gt;buttonRunNow.Name" xml:space="preserve">
+  <data name=">>buttonRunNow.Name" xml:space="preserve">
     <value>buttonRunNow</value>
   </data>
-  <data name="&gt;&gt;buttonRunNow.Type" xml:space="preserve">
+  <data name=">>buttonRunNow.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonRunNow.Parent" xml:space="preserve">
+  <data name=">>buttonRunNow.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;buttonRunNow.ZOrder" xml:space="preserve">
+  <data name=">>buttonRunNow.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="buttonDelete.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -366,16 +366,16 @@
   <data name="buttonDelete.Text" xml:space="preserve">
     <value>&amp;Delete</value>
   </data>
-  <data name="&gt;&gt;buttonDelete.Name" xml:space="preserve">
+  <data name=">>buttonDelete.Name" xml:space="preserve">
     <value>buttonDelete</value>
   </data>
-  <data name="&gt;&gt;buttonDelete.Type" xml:space="preserve">
+  <data name=">>buttonDelete.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonDelete.Parent" xml:space="preserve">
+  <data name=">>buttonDelete.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;buttonDelete.ZOrder" xml:space="preserve">
+  <data name=">>buttonDelete.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="buttonNew.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -396,16 +396,16 @@
   <data name="buttonNew.Text" xml:space="preserve">
     <value>&amp;New...</value>
   </data>
-  <data name="&gt;&gt;buttonNew.Name" xml:space="preserve">
+  <data name=">>buttonNew.Name" xml:space="preserve">
     <value>buttonNew</value>
   </data>
-  <data name="&gt;&gt;buttonNew.Type" xml:space="preserve">
+  <data name=">>buttonNew.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonNew.Parent" xml:space="preserve">
+  <data name=">>buttonNew.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;buttonNew.ZOrder" xml:space="preserve">
+  <data name=">>buttonNew.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="tableLayoutPanel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -426,16 +426,16 @@
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel3.Name" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel3.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel3.Parent" xml:space="preserve">
     <value>tableLayoutPanel5</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel3.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -447,16 +447,16 @@
   <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Name" xml:space="preserve">
+  <data name=">>dataGridView1.Name" xml:space="preserve">
     <value>dataGridView1</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Type" xml:space="preserve">
+  <data name=">>dataGridView1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Parent" xml:space="preserve">
+  <data name=">>dataGridView1.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.ZOrder" xml:space="preserve">
+  <data name=">>dataGridView1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -477,16 +477,16 @@
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Close</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
+  <data name=">>buttonCancel.Name" xml:space="preserve">
     <value>buttonCancel</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
+  <data name=">>buttonCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
+  <data name=">>buttonCancel.Parent" xml:space="preserve">
     <value>tableLayoutPanel4</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
+  <data name=">>buttonCancel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="policyHistory1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
@@ -510,16 +510,16 @@
   <data name="policyHistory1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;policyHistory1.Name" xml:space="preserve">
+  <data name=">>policyHistory1.Name" xml:space="preserve">
     <value>policyHistory1</value>
   </data>
-  <data name="&gt;&gt;policyHistory1.Type" xml:space="preserve">
+  <data name=">>policyHistory1.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.VMProtectionRecovery.PolicyHistory, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;policyHistory1.Parent" xml:space="preserve">
+  <data name=">>policyHistory1.Parent" xml:space="preserve">
     <value>tableLayoutPanel5</value>
   </data>
-  <data name="&gt;&gt;policyHistory1.ZOrder" xml:space="preserve">
+  <data name=">>policyHistory1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -546,16 +546,16 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Protect your critical VMs with a protection policy that takes regular scheduled snapshots and, optionally, archives the snapshots to a CIFS or NFS share.</value>
   </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+  <data name=">>label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+  <data name=">>label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+  <data name=">>label2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+  <data name=">>label2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="chevronButton1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -585,16 +585,16 @@
   <data name="chevronButton1.Text" xml:space="preserve">
     <value>Show Run History</value>
   </data>
-  <data name="&gt;&gt;chevronButton1.Name" xml:space="preserve">
+  <data name=">>chevronButton1.Name" xml:space="preserve">
     <value>chevronButton1</value>
   </data>
-  <data name="&gt;&gt;chevronButton1.Type" xml:space="preserve">
+  <data name=">>chevronButton1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ChevronButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;chevronButton1.Parent" xml:space="preserve">
+  <data name=">>chevronButton1.Parent" xml:space="preserve">
     <value>tableLayoutPanel4</value>
   </data>
-  <data name="&gt;&gt;chevronButton1.ZOrder" xml:space="preserve">
+  <data name=">>chevronButton1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
@@ -636,16 +636,16 @@
   <data name="deprecationBanner.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;deprecationBanner.Name" xml:space="preserve">
+  <data name=">>deprecationBanner.Name" xml:space="preserve">
     <value>deprecationBanner</value>
   </data>
-  <data name="&gt;&gt;deprecationBanner.Type" xml:space="preserve">
+  <data name=">>deprecationBanner.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DeprecationBanner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;deprecationBanner.Parent" xml:space="preserve">
+  <data name=">>deprecationBanner.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;deprecationBanner.ZOrder" xml:space="preserve">
+  <data name=">>deprecationBanner.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -666,16 +666,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel5</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -708,16 +708,16 @@
   <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel4.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel4.Name" xml:space="preserve">
     <value>tableLayoutPanel4</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel4.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel4.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel4.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel4.Parent" xml:space="preserve">
     <value>tableLayoutPanel5</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel4.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel4.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="tableLayoutPanel4.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -750,16 +750,16 @@
   <data name="tableLayoutPanel5.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel5.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel5.Name" xml:space="preserve">
     <value>tableLayoutPanel5</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel5.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel5.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel5.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel5.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel5.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel5.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel5.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -792,46 +792,46 @@
   <data name="$this.Text" xml:space="preserve">
     <value>VM Protection Policies</value>
   </data>
-  <data name="&gt;&gt;NameColum.Name" xml:space="preserve">
+  <data name=">>NameColum.Name" xml:space="preserve">
     <value>NameColum</value>
   </data>
-  <data name="&gt;&gt;NameColum.Type" xml:space="preserve">
+  <data name=">>NameColum.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;EnabledColumn.Name" xml:space="preserve">
+  <data name=">>EnabledColumn.Name" xml:space="preserve">
     <value>EnabledColumn</value>
   </data>
-  <data name="&gt;&gt;EnabledColumn.Type" xml:space="preserve">
+  <data name=">>EnabledColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnVMs.Name" xml:space="preserve">
+  <data name=">>ColumnVMs.Name" xml:space="preserve">
     <value>ColumnVMs</value>
   </data>
-  <data name="&gt;&gt;ColumnVMs.Type" xml:space="preserve">
+  <data name=">>ColumnVMs.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DescriptionColum.Name" xml:space="preserve">
+  <data name=">>DescriptionColum.Name" xml:space="preserve">
     <value>DescriptionColum</value>
   </data>
-  <data name="&gt;&gt;DescriptionColum.Type" xml:space="preserve">
+  <data name=">>DescriptionColum.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnNextArchive.Name" xml:space="preserve">
+  <data name=">>ColumnNextArchive.Name" xml:space="preserve">
     <value>ColumnNextArchive</value>
   </data>
-  <data name="&gt;&gt;ColumnNextArchive.Type" xml:space="preserve">
+  <data name=">>ColumnNextArchive.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnLastResult.Name" xml:space="preserve">
+  <data name=">>ColumnLastResult.Name" xml:space="preserve">
     <value>ColumnLastResult</value>
   </data>
-  <data name="&gt;&gt;ColumnLastResult.Type" xml:space="preserve">
+  <data name=">>ColumnLastResult.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>VMProtectionPoliciesDialog</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

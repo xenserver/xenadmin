@@ -144,16 +144,16 @@
   <data name="labelName.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelName.Name" xml:space="preserve">
+  <data name=">>labelName.Name" xml:space="preserve">
     <value>labelName</value>
   </data>
-  <data name="&gt;&gt;labelName.Type" xml:space="preserve">
+  <data name=">>labelName.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelName.Parent" xml:space="preserve">
+  <data name=">>labelName.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelName.ZOrder" xml:space="preserve">
+  <data name=">>labelName.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="textBoxName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -174,16 +174,16 @@
   <data name="textBoxName.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;textBoxName.Name" xml:space="preserve">
+  <data name=">>textBoxName.Name" xml:space="preserve">
     <value>textBoxName</value>
   </data>
-  <data name="&gt;&gt;textBoxName.Type" xml:space="preserve">
+  <data name=">>textBoxName.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBoxName.Parent" xml:space="preserve">
+  <data name=">>textBoxName.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;textBoxName.ZOrder" xml:space="preserve">
+  <data name=">>textBoxName.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -204,16 +204,16 @@
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>キャンセル</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
+  <data name=">>buttonCancel.Name" xml:space="preserve">
     <value>buttonCancel</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
+  <data name=">>buttonCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
+  <data name=">>buttonCancel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
+  <data name=">>buttonCancel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="buttonOk.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -237,16 +237,16 @@
   <data name="buttonOk.Text" xml:space="preserve">
     <value>スナップショットの作成(&amp;T)</value>
   </data>
-  <data name="&gt;&gt;buttonOk.Name" xml:space="preserve">
+  <data name=">>buttonOk.Name" xml:space="preserve">
     <value>buttonOk</value>
   </data>
-  <data name="&gt;&gt;buttonOk.Type" xml:space="preserve">
+  <data name=">>buttonOk.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonOk.Parent" xml:space="preserve">
+  <data name=">>buttonOk.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;buttonOk.ZOrder" xml:space="preserve">
+  <data name=">>buttonOk.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
@@ -273,16 +273,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>説明(&amp;D):</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="textBoxDescription.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -306,31 +306,31 @@
   <data name="textBoxDescription.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;textBoxDescription.Name" xml:space="preserve">
+  <data name=">>textBoxDescription.Name" xml:space="preserve">
     <value>textBoxDescription</value>
   </data>
-  <data name="&gt;&gt;textBoxDescription.Type" xml:space="preserve">
+  <data name=">>textBoxDescription.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBoxDescription.Parent" xml:space="preserve">
+  <data name=">>textBoxDescription.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;textBoxDescription.ZOrder" xml:space="preserve">
+  <data name=">>textBoxDescription.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+  <data name=">>groupBox1.Name" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+  <data name=">>groupBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+  <data name=">>groupBox1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+  <data name=">>groupBox1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -354,55 +354,55 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelName" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBoxName" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBoxDescription" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="groupBox1" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,110,Percent,100" /&gt;&lt;Rows Styles="Absolute,28,Absolute,50,AutoSize,0" /&gt;&lt;/TableLayoutSettings></value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel3.Name" xml:space="preserve">
+  <data name=">>flowLayoutPanel3.Name" xml:space="preserve">
     <value>flowLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel3.Type" xml:space="preserve">
+  <data name=">>flowLayoutPanel3.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel3.Parent" xml:space="preserve">
+  <data name=">>flowLayoutPanel3.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel3.ZOrder" xml:space="preserve">
+  <data name=">>flowLayoutPanel3.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel2.Name" xml:space="preserve">
+  <data name=">>flowLayoutPanel2.Name" xml:space="preserve">
     <value>flowLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel2.Type" xml:space="preserve">
+  <data name=">>flowLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel2.Parent" xml:space="preserve">
+  <data name=">>flowLayoutPanel2.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name=">>flowLayoutPanel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Name" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="groupBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -429,43 +429,43 @@
   <data name="groupBox1.Text" xml:space="preserve">
     <value>スナップショット モード</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+  <data name=">>groupBox1.Name" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+  <data name=">>groupBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+  <data name=">>groupBox1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+  <data name=">>groupBox1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="flowLayoutPanel3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;memoryRadioButton.Name" xml:space="preserve">
+  <data name=">>memoryRadioButton.Name" xml:space="preserve">
     <value>memoryRadioButton</value>
   </data>
-  <data name="&gt;&gt;memoryRadioButton.Type" xml:space="preserve">
+  <data name=">>memoryRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;memoryRadioButton.Parent" xml:space="preserve">
+  <data name=">>memoryRadioButton.Parent" xml:space="preserve">
     <value>flowLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;memoryRadioButton.ZOrder" xml:space="preserve">
+  <data name=">>memoryRadioButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;CheckpointInfoPictureBox.Name" xml:space="preserve">
+  <data name=">>CheckpointInfoPictureBox.Name" xml:space="preserve">
     <value>CheckpointInfoPictureBox</value>
   </data>
-  <data name="&gt;&gt;CheckpointInfoPictureBox.Type" xml:space="preserve">
+  <data name=">>CheckpointInfoPictureBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CheckpointInfoPictureBox.Parent" xml:space="preserve">
+  <data name=">>CheckpointInfoPictureBox.Parent" xml:space="preserve">
     <value>flowLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;CheckpointInfoPictureBox.ZOrder" xml:space="preserve">
+  <data name=">>CheckpointInfoPictureBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="flowLayoutPanel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -483,16 +483,16 @@
   <data name="flowLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel3.Name" xml:space="preserve">
+  <data name=">>flowLayoutPanel3.Name" xml:space="preserve">
     <value>flowLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel3.Type" xml:space="preserve">
+  <data name=">>flowLayoutPanel3.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel3.Parent" xml:space="preserve">
+  <data name=">>flowLayoutPanel3.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel3.ZOrder" xml:space="preserve">
+  <data name=">>flowLayoutPanel3.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="memoryRadioButton.AutoSize" type="System.Boolean, mscorlib">
@@ -519,16 +519,16 @@
   <data name="memoryRadioButton.Text" xml:space="preserve">
     <value>仮想マシンのディスクとメモリのスナップショット(&amp;A)</value>
   </data>
-  <data name="&gt;&gt;memoryRadioButton.Name" xml:space="preserve">
+  <data name=">>memoryRadioButton.Name" xml:space="preserve">
     <value>memoryRadioButton</value>
   </data>
-  <data name="&gt;&gt;memoryRadioButton.Type" xml:space="preserve">
+  <data name=">>memoryRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;memoryRadioButton.Parent" xml:space="preserve">
+  <data name=">>memoryRadioButton.Parent" xml:space="preserve">
     <value>flowLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;memoryRadioButton.ZOrder" xml:space="preserve">
+  <data name=">>memoryRadioButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="CheckpointInfoPictureBox.Font" type="System.Drawing.Font, System.Drawing">
@@ -546,43 +546,43 @@
   <data name="CheckpointInfoPictureBox.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;CheckpointInfoPictureBox.Name" xml:space="preserve">
+  <data name=">>CheckpointInfoPictureBox.Name" xml:space="preserve">
     <value>CheckpointInfoPictureBox</value>
   </data>
-  <data name="&gt;&gt;CheckpointInfoPictureBox.Type" xml:space="preserve">
+  <data name=">>CheckpointInfoPictureBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CheckpointInfoPictureBox.Parent" xml:space="preserve">
+  <data name=">>CheckpointInfoPictureBox.Parent" xml:space="preserve">
     <value>flowLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;CheckpointInfoPictureBox.ZOrder" xml:space="preserve">
+  <data name=">>CheckpointInfoPictureBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="flowLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;quiesceCheckBox.Name" xml:space="preserve">
+  <data name=">>quiesceCheckBox.Name" xml:space="preserve">
     <value>quiesceCheckBox</value>
   </data>
-  <data name="&gt;&gt;quiesceCheckBox.Type" xml:space="preserve">
+  <data name=">>quiesceCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;quiesceCheckBox.Parent" xml:space="preserve">
+  <data name=">>quiesceCheckBox.Parent" xml:space="preserve">
     <value>flowLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;quiesceCheckBox.ZOrder" xml:space="preserve">
+  <data name=">>quiesceCheckBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;pictureBoxQuiesceInfo.Name" xml:space="preserve">
+  <data name=">>pictureBoxQuiesceInfo.Name" xml:space="preserve">
     <value>pictureBoxQuiesceInfo</value>
   </data>
-  <data name="&gt;&gt;pictureBoxQuiesceInfo.Type" xml:space="preserve">
+  <data name=">>pictureBoxQuiesceInfo.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBoxQuiesceInfo.Parent" xml:space="preserve">
+  <data name=">>pictureBoxQuiesceInfo.Parent" xml:space="preserve">
     <value>flowLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;pictureBoxQuiesceInfo.ZOrder" xml:space="preserve">
+  <data name=">>pictureBoxQuiesceInfo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="flowLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -606,16 +606,16 @@
   <data name="flowLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel2.Name" xml:space="preserve">
+  <data name=">>flowLayoutPanel2.Name" xml:space="preserve">
     <value>flowLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel2.Type" xml:space="preserve">
+  <data name=">>flowLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel2.Parent" xml:space="preserve">
+  <data name=">>flowLayoutPanel2.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name=">>flowLayoutPanel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="quiesceCheckBox.AutoSize" type="System.Boolean, mscorlib">
@@ -642,16 +642,16 @@
   <data name="quiesceCheckBox.Text" xml:space="preserve">
     <value>VM を休止してからスナップショットを作成する (Windows のみ)(&amp;Q)</value>
   </data>
-  <data name="&gt;&gt;quiesceCheckBox.Name" xml:space="preserve">
+  <data name=">>quiesceCheckBox.Name" xml:space="preserve">
     <value>quiesceCheckBox</value>
   </data>
-  <data name="&gt;&gt;quiesceCheckBox.Type" xml:space="preserve">
+  <data name=">>quiesceCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;quiesceCheckBox.Parent" xml:space="preserve">
+  <data name=">>quiesceCheckBox.Parent" xml:space="preserve">
     <value>flowLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;quiesceCheckBox.ZOrder" xml:space="preserve">
+  <data name=">>quiesceCheckBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="pictureBoxQuiesceInfo.Font" type="System.Drawing.Font, System.Drawing">
@@ -669,43 +669,43 @@
   <data name="pictureBoxQuiesceInfo.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;pictureBoxQuiesceInfo.Name" xml:space="preserve">
+  <data name=">>pictureBoxQuiesceInfo.Name" xml:space="preserve">
     <value>pictureBoxQuiesceInfo</value>
   </data>
-  <data name="&gt;&gt;pictureBoxQuiesceInfo.Type" xml:space="preserve">
+  <data name=">>pictureBoxQuiesceInfo.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBoxQuiesceInfo.Parent" xml:space="preserve">
+  <data name=">>pictureBoxQuiesceInfo.Parent" xml:space="preserve">
     <value>flowLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;pictureBoxQuiesceInfo.ZOrder" xml:space="preserve">
+  <data name=">>pictureBoxQuiesceInfo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="flowLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;diskRadioButton.Name" xml:space="preserve">
+  <data name=">>diskRadioButton.Name" xml:space="preserve">
     <value>diskRadioButton</value>
   </data>
-  <data name="&gt;&gt;diskRadioButton.Type" xml:space="preserve">
+  <data name=">>diskRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;diskRadioButton.Parent" xml:space="preserve">
+  <data name=">>diskRadioButton.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;diskRadioButton.ZOrder" xml:space="preserve">
+  <data name=">>diskRadioButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;pictureBoxSnapshotsInfo.Name" xml:space="preserve">
+  <data name=">>pictureBoxSnapshotsInfo.Name" xml:space="preserve">
     <value>pictureBoxSnapshotsInfo</value>
   </data>
-  <data name="&gt;&gt;pictureBoxSnapshotsInfo.Type" xml:space="preserve">
+  <data name=">>pictureBoxSnapshotsInfo.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBoxSnapshotsInfo.Parent" xml:space="preserve">
+  <data name=">>pictureBoxSnapshotsInfo.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;pictureBoxSnapshotsInfo.ZOrder" xml:space="preserve">
+  <data name=">>pictureBoxSnapshotsInfo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -723,16 +723,16 @@
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Name" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="diskRadioButton.AutoSize" type="System.Boolean, mscorlib">
@@ -759,16 +759,16 @@
   <data name="diskRadioButton.Text" xml:space="preserve">
     <value>仮想マシンのディスクのスナップショット(&amp;S)</value>
   </data>
-  <data name="&gt;&gt;diskRadioButton.Name" xml:space="preserve">
+  <data name=">>diskRadioButton.Name" xml:space="preserve">
     <value>diskRadioButton</value>
   </data>
-  <data name="&gt;&gt;diskRadioButton.Type" xml:space="preserve">
+  <data name=">>diskRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;diskRadioButton.Parent" xml:space="preserve">
+  <data name=">>diskRadioButton.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;diskRadioButton.ZOrder" xml:space="preserve">
+  <data name=">>diskRadioButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="pictureBoxSnapshotsInfo.Font" type="System.Drawing.Font, System.Drawing">
@@ -786,16 +786,16 @@
   <data name="pictureBoxSnapshotsInfo.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;pictureBoxSnapshotsInfo.Name" xml:space="preserve">
+  <data name=">>pictureBoxSnapshotsInfo.Name" xml:space="preserve">
     <value>pictureBoxSnapshotsInfo</value>
   </data>
-  <data name="&gt;&gt;pictureBoxSnapshotsInfo.Type" xml:space="preserve">
+  <data name=">>pictureBoxSnapshotsInfo.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBoxSnapshotsInfo.Parent" xml:space="preserve">
+  <data name=">>pictureBoxSnapshotsInfo.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;pictureBoxSnapshotsInfo.ZOrder" xml:space="preserve">
+  <data name=">>pictureBoxSnapshotsInfo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -819,16 +819,16 @@
   <data name="$this.Text" xml:space="preserve">
     <value>スナップショットの作成</value>
   </data>
-  <data name="&gt;&gt;toolTip.Name" xml:space="preserve">
+  <data name=">>toolTip.Name" xml:space="preserve">
     <value>toolTip</value>
   </data>
-  <data name="&gt;&gt;toolTip.Type" xml:space="preserve">
+  <data name=">>toolTip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>VmSnapshotDialog</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

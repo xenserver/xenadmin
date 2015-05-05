@@ -141,16 +141,16 @@
   <data name="checkBoxViewPrecheckFailuresOnly.Text" xml:space="preserve">
     <value>&amp;View only precheck failures/issues</value>
   </data>
-  <data name="&gt;&gt;checkBoxViewPrecheckFailuresOnly.Name" xml:space="preserve">
+  <data name=">>checkBoxViewPrecheckFailuresOnly.Name" xml:space="preserve">
     <value>checkBoxViewPrecheckFailuresOnly</value>
   </data>
-  <data name="&gt;&gt;checkBoxViewPrecheckFailuresOnly.Type" xml:space="preserve">
+  <data name=">>checkBoxViewPrecheckFailuresOnly.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkBoxViewPrecheckFailuresOnly.Parent" xml:space="preserve">
+  <data name=">>checkBoxViewPrecheckFailuresOnly.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;checkBoxViewPrecheckFailuresOnly.ZOrder" xml:space="preserve">
+  <data name=">>checkBoxViewPrecheckFailuresOnly.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="panelErrorsFound.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -183,16 +183,16 @@
   <data name="labelContinue.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelContinue.Name" xml:space="preserve">
+  <data name=">>labelContinue.Name" xml:space="preserve">
     <value>labelContinue</value>
   </data>
-  <data name="&gt;&gt;labelContinue.Type" xml:space="preserve">
+  <data name=">>labelContinue.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelContinue.Parent" xml:space="preserve">
+  <data name=">>labelContinue.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelContinue.ZOrder" xml:space="preserve">
+  <data name=">>labelContinue.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelPrecheckStatus.AutoSize" type="System.Boolean, mscorlib">
@@ -219,16 +219,16 @@
   <data name="labelPrecheckStatus.Text" xml:space="preserve">
     <value>Failover prechecks completed: {0} issues found</value>
   </data>
-  <data name="&gt;&gt;labelPrecheckStatus.Name" xml:space="preserve">
+  <data name=">>labelPrecheckStatus.Name" xml:space="preserve">
     <value>labelPrecheckStatus</value>
   </data>
-  <data name="&gt;&gt;labelPrecheckStatus.Type" xml:space="preserve">
+  <data name=">>labelPrecheckStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelPrecheckStatus.Parent" xml:space="preserve">
+  <data name=">>labelPrecheckStatus.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelPrecheckStatus.ZOrder" xml:space="preserve">
+  <data name=">>labelPrecheckStatus.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="progressBar1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -246,16 +246,16 @@
   <data name="progressBar1.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="&gt;&gt;progressBar1.Name" xml:space="preserve">
+  <data name=">>progressBar1.Name" xml:space="preserve">
     <value>progressBar1</value>
   </data>
-  <data name="&gt;&gt;progressBar1.Type" xml:space="preserve">
+  <data name=">>progressBar1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;progressBar1.Parent" xml:space="preserve">
+  <data name=">>progressBar1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;progressBar1.ZOrder" xml:space="preserve">
+  <data name=">>progressBar1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <metadata name="ColumnState.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -303,16 +303,16 @@
   <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Name" xml:space="preserve">
+  <data name=">>dataGridView1.Name" xml:space="preserve">
     <value>dataGridView1</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Type" xml:space="preserve">
+  <data name=">>dataGridView1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Parent" xml:space="preserve">
+  <data name=">>dataGridView1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.ZOrder" xml:space="preserve">
+  <data name=">>dataGridView1.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="buttonResolveAll.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -330,16 +330,16 @@
   <data name="buttonResolveAll.Text" xml:space="preserve">
     <value>&amp;Resolve All</value>
   </data>
-  <data name="&gt;&gt;buttonResolveAll.Name" xml:space="preserve">
+  <data name=">>buttonResolveAll.Name" xml:space="preserve">
     <value>buttonResolveAll</value>
   </data>
-  <data name="&gt;&gt;buttonResolveAll.Type" xml:space="preserve">
+  <data name=">>buttonResolveAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonResolveAll.Parent" xml:space="preserve">
+  <data name=">>buttonResolveAll.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;buttonResolveAll.ZOrder" xml:space="preserve">
+  <data name=">>buttonResolveAll.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="buttonReCheckProblems.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -357,16 +357,16 @@
   <data name="buttonReCheckProblems.Text" xml:space="preserve">
     <value>&amp;Check again</value>
   </data>
-  <data name="&gt;&gt;buttonReCheckProblems.Name" xml:space="preserve">
+  <data name=">>buttonReCheckProblems.Name" xml:space="preserve">
     <value>buttonReCheckProblems</value>
   </data>
-  <data name="&gt;&gt;buttonReCheckProblems.Type" xml:space="preserve">
+  <data name=">>buttonReCheckProblems.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonReCheckProblems.Parent" xml:space="preserve">
+  <data name=">>buttonReCheckProblems.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;buttonReCheckProblems.ZOrder" xml:space="preserve">
+  <data name=">>buttonReCheckProblems.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="labelPrechecksFirstLine.AutoSize" type="System.Boolean, mscorlib">
@@ -393,16 +393,16 @@
   <data name="labelPrechecksFirstLine.Text" xml:space="preserve">
     <value>Failover prechecks are performed to ensure that the selected vApps and VMs can be failed over. Please take appropriate action to resolve any issues. </value>
   </data>
-  <data name="&gt;&gt;labelPrechecksFirstLine.Name" xml:space="preserve">
+  <data name=">>labelPrechecksFirstLine.Name" xml:space="preserve">
     <value>labelPrechecksFirstLine</value>
   </data>
-  <data name="&gt;&gt;labelPrechecksFirstLine.Type" xml:space="preserve">
+  <data name=">>labelPrechecksFirstLine.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelPrechecksFirstLine.Parent" xml:space="preserve">
+  <data name=">>labelPrechecksFirstLine.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelPrechecksFirstLine.ZOrder" xml:space="preserve">
+  <data name=">>labelPrechecksFirstLine.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -420,16 +420,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -456,16 +456,16 @@
   <data name="label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>panelErrorsFound</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="pictureBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -486,16 +486,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+  <data name=">>pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+  <data name=">>pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+  <data name=">>pictureBox1.Parent" xml:space="preserve">
     <value>panelErrorsFound</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panelErrorsFound.Location" type="System.Drawing.Point, System.Drawing">
@@ -510,16 +510,16 @@
   <data name="panelErrorsFound.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;panelErrorsFound.Name" xml:space="preserve">
+  <data name=">>panelErrorsFound.Name" xml:space="preserve">
     <value>panelErrorsFound</value>
   </data>
-  <data name="&gt;&gt;panelErrorsFound.Type" xml:space="preserve">
+  <data name=">>panelErrorsFound.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panelErrorsFound.Parent" xml:space="preserve">
+  <data name=">>panelErrorsFound.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;panelErrorsFound.ZOrder" xml:space="preserve">
+  <data name=">>panelErrorsFound.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -531,28 +531,28 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>546, 404</value>
   </data>
-  <data name="&gt;&gt;ColumnState.Name" xml:space="preserve">
+  <data name=">>ColumnState.Name" xml:space="preserve">
     <value>ColumnState</value>
   </data>
-  <data name="&gt;&gt;ColumnState.Type" xml:space="preserve">
+  <data name=">>ColumnState.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnDescription.Name" xml:space="preserve">
+  <data name=">>ColumnDescription.Name" xml:space="preserve">
     <value>ColumnDescription</value>
   </data>
-  <data name="&gt;&gt;ColumnDescription.Type" xml:space="preserve">
+  <data name=">>ColumnDescription.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnSolution.Name" xml:space="preserve">
+  <data name=">>ColumnSolution.Name" xml:space="preserve">
     <value>ColumnSolution</value>
   </data>
-  <data name="&gt;&gt;ColumnSolution.Type" xml:space="preserve">
+  <data name=">>ColumnSolution.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>DRFailoverWizardPrecheckPage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

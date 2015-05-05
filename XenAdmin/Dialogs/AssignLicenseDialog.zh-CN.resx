@@ -138,16 +138,16 @@
   <data name="okButton.Text" xml:space="preserve">
     <value>确定</value>
   </data>
-  <data name="&gt;&gt;okButton.Name" xml:space="preserve">
+  <data name=">>okButton.Name" xml:space="preserve">
     <value>okButton</value>
   </data>
-  <data name="&gt;&gt;okButton.Type" xml:space="preserve">
+  <data name=">>okButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;okButton.Parent" xml:space="preserve">
+  <data name=">>okButton.Parent" xml:space="preserve">
     <value>buttonsLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;okButton.ZOrder" xml:space="preserve">
+  <data name=">>okButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="cancelButton.Font" type="System.Drawing.Font, System.Drawing">
@@ -168,16 +168,16 @@
   <data name="cancelButton.Text" xml:space="preserve">
     <value>取消</value>
   </data>
-  <data name="&gt;&gt;cancelButton.Name" xml:space="preserve">
+  <data name=">>cancelButton.Name" xml:space="preserve">
     <value>cancelButton</value>
   </data>
-  <data name="&gt;&gt;cancelButton.Type" xml:space="preserve">
+  <data name=">>cancelButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cancelButton.Parent" xml:space="preserve">
+  <data name=">>cancelButton.Parent" xml:space="preserve">
     <value>buttonsLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;cancelButton.ZOrder" xml:space="preserve">
+  <data name=">>cancelButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="mainLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
@@ -225,16 +225,16 @@
   <data name="licenseServerNameLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;licenseServerNameLabel.Name" xml:space="preserve">
+  <data name=">>licenseServerNameLabel.Name" xml:space="preserve">
     <value>licenseServerNameLabel</value>
   </data>
-  <data name="&gt;&gt;licenseServerNameLabel.Type" xml:space="preserve">
+  <data name=">>licenseServerNameLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;licenseServerNameLabel.Parent" xml:space="preserve">
+  <data name=">>licenseServerNameLabel.Parent" xml:space="preserve">
     <value>licenseServerLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;licenseServerNameLabel.ZOrder" xml:space="preserve">
+  <data name=">>licenseServerNameLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="licenseServerNameTextBox.Font" type="System.Drawing.Font, System.Drawing">
@@ -249,16 +249,16 @@
   <data name="licenseServerNameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;licenseServerNameTextBox.Name" xml:space="preserve">
+  <data name=">>licenseServerNameTextBox.Name" xml:space="preserve">
     <value>licenseServerNameTextBox</value>
   </data>
-  <data name="&gt;&gt;licenseServerNameTextBox.Type" xml:space="preserve">
+  <data name=">>licenseServerNameTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;licenseServerNameTextBox.Parent" xml:space="preserve">
+  <data name=">>licenseServerNameTextBox.Parent" xml:space="preserve">
     <value>licenseServerLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;licenseServerNameTextBox.ZOrder" xml:space="preserve">
+  <data name=">>licenseServerNameTextBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="licenseServerPortTextBox.Font" type="System.Drawing.Font, System.Drawing">
@@ -276,16 +276,16 @@
   <data name="licenseServerPortTextBox.Text" xml:space="preserve">
     <value>27000</value>
   </data>
-  <data name="&gt;&gt;licenseServerPortTextBox.Name" xml:space="preserve">
+  <data name=">>licenseServerPortTextBox.Name" xml:space="preserve">
     <value>licenseServerPortTextBox</value>
   </data>
-  <data name="&gt;&gt;licenseServerPortTextBox.Type" xml:space="preserve">
+  <data name=">>licenseServerPortTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;licenseServerPortTextBox.Parent" xml:space="preserve">
+  <data name=">>licenseServerPortTextBox.Parent" xml:space="preserve">
     <value>licenseServerLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;licenseServerPortTextBox.ZOrder" xml:space="preserve">
+  <data name=">>licenseServerPortTextBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="colonLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -312,16 +312,16 @@
   <data name="colonLabel.Text" xml:space="preserve">
     <value>:</value>
   </data>
-  <data name="&gt;&gt;colonLabel.Name" xml:space="preserve">
+  <data name=">>colonLabel.Name" xml:space="preserve">
     <value>colonLabel</value>
   </data>
-  <data name="&gt;&gt;colonLabel.Type" xml:space="preserve">
+  <data name=">>colonLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;colonLabel.Parent" xml:space="preserve">
+  <data name=">>colonLabel.Parent" xml:space="preserve">
     <value>licenseServerLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;colonLabel.ZOrder" xml:space="preserve">
+  <data name=">>colonLabel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="licenseServerLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -345,16 +345,16 @@
   <data name="licenseServerLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;licenseServerLayoutPanel.Name" xml:space="preserve">
+  <data name=">>licenseServerLayoutPanel.Name" xml:space="preserve">
     <value>licenseServerLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;licenseServerLayoutPanel.Type" xml:space="preserve">
+  <data name=">>licenseServerLayoutPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;licenseServerLayoutPanel.Parent" xml:space="preserve">
+  <data name=">>licenseServerLayoutPanel.Parent" xml:space="preserve">
     <value>mainLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;licenseServerLayoutPanel.ZOrder" xml:space="preserve">
+  <data name=">>licenseServerLayoutPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="licenseServerLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -381,16 +381,16 @@
   <data name="mainLabel.Text" xml:space="preserve">
     <value>要将新许可证分配给选定服务器，请输入详细信息，然后单击“确定”</value>
   </data>
-  <data name="&gt;&gt;mainLabel.Name" xml:space="preserve">
+  <data name=">>mainLabel.Name" xml:space="preserve">
     <value>mainLabel</value>
   </data>
-  <data name="&gt;&gt;mainLabel.Type" xml:space="preserve">
+  <data name=">>mainLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mainLabel.Parent" xml:space="preserve">
+  <data name=">>mainLabel.Parent" xml:space="preserve">
     <value>mainLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;mainLabel.ZOrder" xml:space="preserve">
+  <data name=">>mainLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="editionsGroupBox.AutoSize" type="System.Boolean, mscorlib">
@@ -426,16 +426,16 @@
   <data name="perSocketRadioButton.Text" xml:space="preserve">
     <value>XenServer Per-Socket(&amp;S)</value>
   </data>
-  <data name="&gt;&gt;perSocketRadioButton.Name" xml:space="preserve">
+  <data name=">>perSocketRadioButton.Name" xml:space="preserve">
     <value>perSocketRadioButton</value>
   </data>
-  <data name="&gt;&gt;perSocketRadioButton.Type" xml:space="preserve">
+  <data name=">>perSocketRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;perSocketRadioButton.Parent" xml:space="preserve">
+  <data name=">>perSocketRadioButton.Parent" xml:space="preserve">
     <value>editionLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;perSocketRadioButton.ZOrder" xml:space="preserve">
+  <data name=">>perSocketRadioButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="advancedRadioButton.AutoSize" type="System.Boolean, mscorlib">
@@ -459,16 +459,16 @@
   <data name="advancedRadioButton.Text" xml:space="preserve">
     <value>XenServer Advanced Edition(&amp;A)</value>
   </data>
-  <data name="&gt;&gt;advancedRadioButton.Name" xml:space="preserve">
+  <data name=">>advancedRadioButton.Name" xml:space="preserve">
     <value>advancedRadioButton</value>
   </data>
-  <data name="&gt;&gt;advancedRadioButton.Type" xml:space="preserve">
+  <data name=">>advancedRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;advancedRadioButton.Parent" xml:space="preserve">
+  <data name=">>advancedRadioButton.Parent" xml:space="preserve">
     <value>editionLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;advancedRadioButton.ZOrder" xml:space="preserve">
+  <data name=">>advancedRadioButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="enterpriseRadioButton.AutoSize" type="System.Boolean, mscorlib">
@@ -492,16 +492,16 @@
   <data name="enterpriseRadioButton.Text" xml:space="preserve">
     <value>XenServer Enterprise Edition(&amp;E)</value>
   </data>
-  <data name="&gt;&gt;enterpriseRadioButton.Name" xml:space="preserve">
+  <data name=">>enterpriseRadioButton.Name" xml:space="preserve">
     <value>enterpriseRadioButton</value>
   </data>
-  <data name="&gt;&gt;enterpriseRadioButton.Type" xml:space="preserve">
+  <data name=">>enterpriseRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;enterpriseRadioButton.Parent" xml:space="preserve">
+  <data name=">>enterpriseRadioButton.Parent" xml:space="preserve">
     <value>editionLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;enterpriseRadioButton.ZOrder" xml:space="preserve">
+  <data name=">>enterpriseRadioButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="platinumRadioButton.AutoSize" type="System.Boolean, mscorlib">
@@ -525,16 +525,16 @@
   <data name="platinumRadioButton.Text" xml:space="preserve">
     <value>XenServer Platinum Edition(&amp;P)</value>
   </data>
-  <data name="&gt;&gt;platinumRadioButton.Name" xml:space="preserve">
+  <data name=">>platinumRadioButton.Name" xml:space="preserve">
     <value>platinumRadioButton</value>
   </data>
-  <data name="&gt;&gt;platinumRadioButton.Type" xml:space="preserve">
+  <data name=">>platinumRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;platinumRadioButton.Parent" xml:space="preserve">
+  <data name=">>platinumRadioButton.Parent" xml:space="preserve">
     <value>editionLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;platinumRadioButton.ZOrder" xml:space="preserve">
+  <data name=">>platinumRadioButton.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="xenDesktopEnterpriseRadioButton.AutoSize" type="System.Boolean, mscorlib">
@@ -558,16 +558,16 @@
   <data name="xenDesktopEnterpriseRadioButton.Text" xml:space="preserve">
     <value>XenServer for XenDesktop(&amp;X)</value>
   </data>
-  <data name="&gt;&gt;xenDesktopEnterpriseRadioButton.Name" xml:space="preserve">
+  <data name=">>xenDesktopEnterpriseRadioButton.Name" xml:space="preserve">
     <value>xenDesktopEnterpriseRadioButton</value>
   </data>
-  <data name="&gt;&gt;xenDesktopEnterpriseRadioButton.Type" xml:space="preserve">
+  <data name=">>xenDesktopEnterpriseRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;xenDesktopEnterpriseRadioButton.Parent" xml:space="preserve">
+  <data name=">>xenDesktopEnterpriseRadioButton.Parent" xml:space="preserve">
     <value>editionLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;xenDesktopEnterpriseRadioButton.ZOrder" xml:space="preserve">
+  <data name=">>xenDesktopEnterpriseRadioButton.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="enterprisePerSocketRadioButton.AutoSize" type="System.Boolean, mscorlib">
@@ -591,16 +591,16 @@
   <data name="enterprisePerSocketRadioButton.Text" xml:space="preserve">
     <value>XenServer Enterprise Per-Socket(&amp;N)</value>
   </data>
-  <data name="&gt;&gt;enterprisePerSocketRadioButton.Name" xml:space="preserve">
+  <data name=">>enterprisePerSocketRadioButton.Name" xml:space="preserve">
     <value>enterprisePerSocketRadioButton</value>
   </data>
-  <data name="&gt;&gt;enterprisePerSocketRadioButton.Type" xml:space="preserve">
+  <data name=">>enterprisePerSocketRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;enterprisePerSocketRadioButton.Parent" xml:space="preserve">
+  <data name=">>enterprisePerSocketRadioButton.Parent" xml:space="preserve">
     <value>editionLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;enterprisePerSocketRadioButton.ZOrder" xml:space="preserve">
+  <data name=">>enterprisePerSocketRadioButton.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="enterprisePerUserRadioButton.AutoSize" type="System.Boolean, mscorlib">
@@ -627,16 +627,16 @@
   <data name="enterprisePerUserRadioButton.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;enterprisePerUserRadioButton.Name" xml:space="preserve">
+  <data name=">>enterprisePerUserRadioButton.Name" xml:space="preserve">
     <value>enterprisePerUserRadioButton</value>
   </data>
-  <data name="&gt;&gt;enterprisePerUserRadioButton.Type" xml:space="preserve">
+  <data name=">>enterprisePerUserRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;enterprisePerUserRadioButton.Parent" xml:space="preserve">
+  <data name=">>enterprisePerUserRadioButton.Parent" xml:space="preserve">
     <value>editionLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;enterprisePerUserRadioButton.ZOrder" xml:space="preserve">
+  <data name=">>enterprisePerUserRadioButton.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="desktopPlusRadioButton.AutoSize" type="System.Boolean, mscorlib">
@@ -660,16 +660,16 @@
   <data name="desktopPlusRadioButton.Text" xml:space="preserve">
     <value>XenApp/XenDesktop Platinum(&amp;P)</value>
   </data>
-  <data name="&gt;&gt;desktopPlusRadioButton.Name" xml:space="preserve">
+  <data name=">>desktopPlusRadioButton.Name" xml:space="preserve">
     <value>desktopPlusRadioButton</value>
   </data>
-  <data name="&gt;&gt;desktopPlusRadioButton.Type" xml:space="preserve">
+  <data name=">>desktopPlusRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;desktopPlusRadioButton.Parent" xml:space="preserve">
+  <data name=">>desktopPlusRadioButton.Parent" xml:space="preserve">
     <value>editionLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;desktopPlusRadioButton.ZOrder" xml:space="preserve">
+  <data name=">>desktopPlusRadioButton.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="desktopRadioButton.AutoSize" type="System.Boolean, mscorlib">
@@ -693,16 +693,16 @@
   <data name="desktopRadioButton.Text" xml:space="preserve">
     <value>XenApp/XenDesktop(&amp;D)</value>
   </data>
-  <data name="&gt;&gt;desktopRadioButton.Name" xml:space="preserve">
+  <data name=">>desktopRadioButton.Name" xml:space="preserve">
     <value>desktopRadioButton</value>
   </data>
-  <data name="&gt;&gt;desktopRadioButton.Type" xml:space="preserve">
+  <data name=">>desktopRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;desktopRadioButton.Parent" xml:space="preserve">
+  <data name=">>desktopRadioButton.Parent" xml:space="preserve">
     <value>editionLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;desktopRadioButton.ZOrder" xml:space="preserve">
+  <data name=">>desktopRadioButton.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="standardPerSocketRadioButton.AutoSize" type="System.Boolean, mscorlib">
@@ -726,16 +726,16 @@
   <data name="standardPerSocketRadioButton.Text" xml:space="preserve">
     <value>XenServer Standard Per-Socket(&amp;S)</value>
   </data>
-  <data name="&gt;&gt;standardPerSocketRadioButton.Name" xml:space="preserve">
+  <data name=">>standardPerSocketRadioButton.Name" xml:space="preserve">
     <value>standardPerSocketRadioButton</value>
   </data>
-  <data name="&gt;&gt;standardPerSocketRadioButton.Type" xml:space="preserve">
+  <data name=">>standardPerSocketRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;standardPerSocketRadioButton.Parent" xml:space="preserve">
+  <data name=">>standardPerSocketRadioButton.Parent" xml:space="preserve">
     <value>editionLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;standardPerSocketRadioButton.ZOrder" xml:space="preserve">
+  <data name=">>standardPerSocketRadioButton.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="editionLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -759,16 +759,16 @@
   <data name="editionLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;editionLayoutPanel.Name" xml:space="preserve">
+  <data name=">>editionLayoutPanel.Name" xml:space="preserve">
     <value>editionLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;editionLayoutPanel.Type" xml:space="preserve">
+  <data name=">>editionLayoutPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;editionLayoutPanel.Parent" xml:space="preserve">
+  <data name=">>editionLayoutPanel.Parent" xml:space="preserve">
     <value>editionsGroupBox</value>
   </data>
-  <data name="&gt;&gt;editionLayoutPanel.ZOrder" xml:space="preserve">
+  <data name=">>editionLayoutPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="editionsGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -789,16 +789,16 @@
   <data name="editionsGroupBox.Text" xml:space="preserve">
     <value>许可证</value>
   </data>
-  <data name="&gt;&gt;editionsGroupBox.Name" xml:space="preserve">
+  <data name=">>editionsGroupBox.Name" xml:space="preserve">
     <value>editionsGroupBox</value>
   </data>
-  <data name="&gt;&gt;editionsGroupBox.Type" xml:space="preserve">
+  <data name=">>editionsGroupBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;editionsGroupBox.Parent" xml:space="preserve">
+  <data name=">>editionsGroupBox.Parent" xml:space="preserve">
     <value>mainLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;editionsGroupBox.ZOrder" xml:space="preserve">
+  <data name=">>editionsGroupBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="buttonsLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
@@ -825,16 +825,16 @@
   <data name="buttonsLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;buttonsLayoutPanel.Name" xml:space="preserve">
+  <data name=">>buttonsLayoutPanel.Name" xml:space="preserve">
     <value>buttonsLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;buttonsLayoutPanel.Type" xml:space="preserve">
+  <data name=">>buttonsLayoutPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonsLayoutPanel.Parent" xml:space="preserve">
+  <data name=">>buttonsLayoutPanel.Parent" xml:space="preserve">
     <value>mainLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;buttonsLayoutPanel.ZOrder" xml:space="preserve">
+  <data name=">>buttonsLayoutPanel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="mainLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -858,16 +858,16 @@
   <data name="mainLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;mainLayoutPanel.Name" xml:space="preserve">
+  <data name=">>mainLayoutPanel.Name" xml:space="preserve">
     <value>mainLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;mainLayoutPanel.Type" xml:space="preserve">
+  <data name=">>mainLayoutPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mainLayoutPanel.Parent" xml:space="preserve">
+  <data name=">>mainLayoutPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;mainLayoutPanel.ZOrder" xml:space="preserve">
+  <data name=">>mainLayoutPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="mainLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -894,10 +894,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>应用许可证</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>AssignLicenseDialog</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

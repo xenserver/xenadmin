@@ -147,16 +147,16 @@
   <data name="imgStopVM.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;imgStopVM.Name" xml:space="preserve">
+  <data name=">>imgStopVM.Name" xml:space="preserve">
     <value>imgStopVM</value>
   </data>
-  <data name="&gt;&gt;imgStopVM.Type" xml:space="preserve">
+  <data name=">>imgStopVM.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;imgStopVM.Parent" xml:space="preserve">
+  <data name=">>imgStopVM.Parent" xml:space="preserve">
     <value>warningsTable</value>
   </data>
-  <data name="&gt;&gt;imgStopVM.ZOrder" xml:space="preserve">
+  <data name=">>imgStopVM.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelWarning.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -186,16 +186,16 @@
   <data name="labelWarning.Text" xml:space="preserve">
     <value>The cloud-config parameters can only be changed when the VM is shut down.</value>
   </data>
-  <data name="&gt;&gt;labelWarning.Name" xml:space="preserve">
+  <data name=">>labelWarning.Name" xml:space="preserve">
     <value>labelWarning</value>
   </data>
-  <data name="&gt;&gt;labelWarning.Type" xml:space="preserve">
+  <data name=">>labelWarning.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelWarning.Parent" xml:space="preserve">
+  <data name=">>labelWarning.Parent" xml:space="preserve">
     <value>warningsTable</value>
   </data>
-  <data name="&gt;&gt;labelWarning.ZOrder" xml:space="preserve">
+  <data name=">>labelWarning.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="warningsTable.Location" type="System.Drawing.Point, System.Drawing">
@@ -210,16 +210,16 @@
   <data name="warningsTable.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;warningsTable.Name" xml:space="preserve">
+  <data name=">>warningsTable.Name" xml:space="preserve">
     <value>warningsTable</value>
   </data>
-  <data name="&gt;&gt;warningsTable.Type" xml:space="preserve">
+  <data name=">>warningsTable.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;warningsTable.Parent" xml:space="preserve">
+  <data name=">>warningsTable.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;warningsTable.ZOrder" xml:space="preserve">
+  <data name=">>warningsTable.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="warningsTable.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -249,16 +249,16 @@
   <data name="topLabel.Text" xml:space="preserve">
     <value>Specify the cloud-config parameters for your CoreOS VM</value>
   </data>
-  <data name="&gt;&gt;topLabel.Name" xml:space="preserve">
+  <data name=">>topLabel.Name" xml:space="preserve">
     <value>topLabel</value>
   </data>
-  <data name="&gt;&gt;topLabel.Type" xml:space="preserve">
+  <data name=">>topLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;topLabel.Parent" xml:space="preserve">
+  <data name=">>topLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;topLabel.ZOrder" xml:space="preserve">
+  <data name=">>topLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="ConfigDriveTemplateTextBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -285,16 +285,16 @@
   <data name="ConfigDriveTemplateTextBox.WordWrap" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;ConfigDriveTemplateTextBox.Name" xml:space="preserve">
+  <data name=">>ConfigDriveTemplateTextBox.Name" xml:space="preserve">
     <value>ConfigDriveTemplateTextBox</value>
   </data>
-  <data name="&gt;&gt;ConfigDriveTemplateTextBox.Type" xml:space="preserve">
+  <data name=">>ConfigDriveTemplateTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ConfigDriveTemplateTextBox.Parent" xml:space="preserve">
+  <data name=">>ConfigDriveTemplateTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;ConfigDriveTemplateTextBox.ZOrder" xml:space="preserve">
+  <data name=">>ConfigDriveTemplateTextBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="ConfigDriveTemplateLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -321,16 +321,16 @@
   <data name="ConfigDriveTemplateLabel.Text" xml:space="preserve">
     <value>Config drive template:</value>
   </data>
-  <data name="&gt;&gt;ConfigDriveTemplateLabel.Name" xml:space="preserve">
+  <data name=">>ConfigDriveTemplateLabel.Name" xml:space="preserve">
     <value>ConfigDriveTemplateLabel</value>
   </data>
-  <data name="&gt;&gt;ConfigDriveTemplateLabel.Type" xml:space="preserve">
+  <data name=">>ConfigDriveTemplateLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ConfigDriveTemplateLabel.Parent" xml:space="preserve">
+  <data name=">>ConfigDriveTemplateLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;ConfigDriveTemplateLabel.ZOrder" xml:space="preserve">
+  <data name=">>ConfigDriveTemplateLabel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="IncludeConfigDriveCheckBox.AutoSize" type="System.Boolean, mscorlib">
@@ -351,16 +351,16 @@
   <data name="IncludeConfigDriveCheckBox.Text" xml:space="preserve">
     <value>Include config drive</value>
   </data>
-  <data name="&gt;&gt;IncludeConfigDriveCheckBox.Name" xml:space="preserve">
+  <data name=">>IncludeConfigDriveCheckBox.Name" xml:space="preserve">
     <value>IncludeConfigDriveCheckBox</value>
   </data>
-  <data name="&gt;&gt;IncludeConfigDriveCheckBox.Type" xml:space="preserve">
+  <data name=">>IncludeConfigDriveCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;IncludeConfigDriveCheckBox.Parent" xml:space="preserve">
+  <data name=">>IncludeConfigDriveCheckBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;IncludeConfigDriveCheckBox.ZOrder" xml:space="preserve">
+  <data name=">>IncludeConfigDriveCheckBox.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="reloadDefaults.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -378,16 +378,16 @@
   <data name="reloadDefaults.Text" xml:space="preserve">
     <value>Reset to default</value>
   </data>
-  <data name="&gt;&gt;reloadDefaults.Name" xml:space="preserve">
+  <data name=">>reloadDefaults.Name" xml:space="preserve">
     <value>reloadDefaults</value>
   </data>
-  <data name="&gt;&gt;reloadDefaults.Type" xml:space="preserve">
+  <data name=">>reloadDefaults.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;reloadDefaults.Parent" xml:space="preserve">
+  <data name=">>reloadDefaults.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;reloadDefaults.ZOrder" xml:space="preserve">
+  <data name=">>reloadDefaults.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -405,16 +405,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -429,10 +429,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>555, 276</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>Page_CloudConfigParameters</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

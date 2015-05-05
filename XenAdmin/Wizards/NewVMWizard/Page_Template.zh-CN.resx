@@ -156,16 +156,16 @@
   <data name="TemplatesGridView.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;TemplatesGridView.Name" xml:space="preserve">
+  <data name=">>TemplatesGridView.Name" xml:space="preserve">
     <value>TemplatesGridView</value>
   </data>
-  <data name="&gt;&gt;TemplatesGridView.Type" xml:space="preserve">
+  <data name=">>TemplatesGridView.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;TemplatesGridView.Parent" xml:space="preserve">
+  <data name=">>TemplatesGridView.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;TemplatesGridView.ZOrder" xml:space="preserve">
+  <data name=">>TemplatesGridView.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="panel1.AutoScroll" type="System.Boolean, mscorlib">
@@ -189,16 +189,16 @@
   <data name="DescriptionLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;DescriptionLabel.Name" xml:space="preserve">
+  <data name=">>DescriptionLabel.Name" xml:space="preserve">
     <value>DescriptionLabel</value>
   </data>
-  <data name="&gt;&gt;DescriptionLabel.Type" xml:space="preserve">
+  <data name=">>DescriptionLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DescriptionLabel.Parent" xml:space="preserve">
+  <data name=">>DescriptionLabel.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;DescriptionLabel.ZOrder" xml:space="preserve">
+  <data name=">>DescriptionLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -213,16 +213,16 @@
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+  <data name=">>panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+  <data name=">>panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+  <data name=">>panel1.Parent" xml:space="preserve">
     <value>DescriptionBox</value>
   </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+  <data name=">>panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="DescriptionBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -240,16 +240,16 @@
   <data name="DescriptionBox.Text" xml:space="preserve">
     <value>模板详细信息</value>
   </data>
-  <data name="&gt;&gt;DescriptionBox.Name" xml:space="preserve">
+  <data name=">>DescriptionBox.Name" xml:space="preserve">
     <value>DescriptionBox</value>
   </data>
-  <data name="&gt;&gt;DescriptionBox.Type" xml:space="preserve">
+  <data name=">>DescriptionBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DescriptionBox.Parent" xml:space="preserve">
+  <data name=">>DescriptionBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;DescriptionBox.ZOrder" xml:space="preserve">
+  <data name=">>DescriptionBox.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="checkBoxCopyBiosStrings.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -270,16 +270,16 @@
   <data name="checkBoxCopyBiosStrings.Text" xml:space="preserve">
     <value>将主机 BIOS 字符串复制到 VM(&amp;C)</value>
   </data>
-  <data name="&gt;&gt;checkBoxCopyBiosStrings.Name" xml:space="preserve">
+  <data name=">>checkBoxCopyBiosStrings.Name" xml:space="preserve">
     <value>checkBoxCopyBiosStrings</value>
   </data>
-  <data name="&gt;&gt;checkBoxCopyBiosStrings.Type" xml:space="preserve">
+  <data name=">>checkBoxCopyBiosStrings.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkBoxCopyBiosStrings.Parent" xml:space="preserve">
+  <data name=">>checkBoxCopyBiosStrings.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;checkBoxCopyBiosStrings.ZOrder" xml:space="preserve">
+  <data name=">>checkBoxCopyBiosStrings.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="searchTextBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -294,16 +294,16 @@
   <data name="searchTextBox1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;searchTextBox1.Name" xml:space="preserve">
+  <data name=">>searchTextBox1.Name" xml:space="preserve">
     <value>searchTextBox1</value>
   </data>
-  <data name="&gt;&gt;searchTextBox1.Type" xml:space="preserve">
+  <data name=">>searchTextBox1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.SearchTextBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;searchTextBox1.Parent" xml:space="preserve">
+  <data name=">>searchTextBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;searchTextBox1.ZOrder" xml:space="preserve">
+  <data name=">>searchTextBox1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -315,28 +315,28 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>497, 306</value>
   </data>
-  <data name="&gt;&gt;ImageColumn.Name" xml:space="preserve">
+  <data name=">>ImageColumn.Name" xml:space="preserve">
     <value>ImageColumn</value>
   </data>
-  <data name="&gt;&gt;ImageColumn.Type" xml:space="preserve">
+  <data name=">>ImageColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;NameColumn.Name" xml:space="preserve">
+  <data name=">>NameColumn.Name" xml:space="preserve">
     <value>NameColumn</value>
   </data>
-  <data name="&gt;&gt;NameColumn.Type" xml:space="preserve">
+  <data name=">>NameColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TypeColumn.Name" xml:space="preserve">
+  <data name=">>TypeColumn.Name" xml:space="preserve">
     <value>TypeColumn</value>
   </data>
-  <data name="&gt;&gt;TypeColumn.Type" xml:space="preserve">
+  <data name=">>TypeColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>Page_Template</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

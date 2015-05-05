@@ -141,16 +141,16 @@
   <data name="nameLabel.Text" xml:space="preserve">
     <value>名前(&amp;N):</value>
   </data>
-  <data name="&gt;&gt;nameLabel.Name" xml:space="preserve">
+  <data name=">>nameLabel.Name" xml:space="preserve">
     <value>nameLabel</value>
   </data>
-  <data name="&gt;&gt;nameLabel.Type" xml:space="preserve">
+  <data name=">>nameLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;nameLabel.Parent" xml:space="preserve">
+  <data name=">>nameLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;nameLabel.ZOrder" xml:space="preserve">
+  <data name=">>nameLabel.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="okButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -174,16 +174,16 @@
   <data name="okButton.Text" xml:space="preserve">
     <value>保存(&amp;S)</value>
   </data>
-  <data name="&gt;&gt;okButton.Name" xml:space="preserve">
+  <data name=">>okButton.Name" xml:space="preserve">
     <value>okButton</value>
   </data>
-  <data name="&gt;&gt;okButton.Type" xml:space="preserve">
+  <data name=">>okButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;okButton.Parent" xml:space="preserve">
+  <data name=">>okButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;okButton.ZOrder" xml:space="preserve">
+  <data name=">>okButton.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="cancelButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -204,16 +204,16 @@
   <data name="cancelButton.Text" xml:space="preserve">
     <value>キャンセル</value>
   </data>
-  <data name="&gt;&gt;cancelButton.Name" xml:space="preserve">
+  <data name=">>cancelButton.Name" xml:space="preserve">
     <value>cancelButton</value>
   </data>
-  <data name="&gt;&gt;cancelButton.Type" xml:space="preserve">
+  <data name=">>cancelButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cancelButton.Parent" xml:space="preserve">
+  <data name=">>cancelButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;cancelButton.ZOrder" xml:space="preserve">
+  <data name=">>cancelButton.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="textBox.Font" type="System.Drawing.Font, System.Drawing">
@@ -228,16 +228,16 @@
   <data name="textBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;textBox.Name" xml:space="preserve">
+  <data name=">>textBox.Name" xml:space="preserve">
     <value>textBox</value>
   </data>
-  <data name="&gt;&gt;textBox.Type" xml:space="preserve">
+  <data name=">>textBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBox.Parent" xml:space="preserve">
+  <data name=">>textBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;textBox.ZOrder" xml:space="preserve">
+  <data name=">>textBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="comboBox.Font" type="System.Drawing.Font, System.Drawing">
@@ -258,16 +258,16 @@
   <data name="comboBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;comboBox.Name" xml:space="preserve">
+  <data name=">>comboBox.Name" xml:space="preserve">
     <value>comboBox</value>
   </data>
-  <data name="&gt;&gt;comboBox.Type" xml:space="preserve">
+  <data name=">>comboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;comboBox.Parent" xml:space="preserve">
+  <data name=">>comboBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;comboBox.ZOrder" xml:space="preserve">
+  <data name=">>comboBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="locationLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -288,16 +288,16 @@
   <data name="locationLabel.Text" xml:space="preserve">
     <value>場所(&amp;L):</value>
   </data>
-  <data name="&gt;&gt;locationLabel.Name" xml:space="preserve">
+  <data name=">>locationLabel.Name" xml:space="preserve">
     <value>locationLabel</value>
   </data>
-  <data name="&gt;&gt;locationLabel.Type" xml:space="preserve">
+  <data name=">>locationLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;locationLabel.Parent" xml:space="preserve">
+  <data name=">>locationLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;locationLabel.ZOrder" xml:space="preserve">
+  <data name=">>locationLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -318,10 +318,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>検索の保存</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>NameAndConnectionPrompt</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

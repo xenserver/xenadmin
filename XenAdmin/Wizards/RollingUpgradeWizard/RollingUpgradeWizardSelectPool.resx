@@ -200,16 +200,16 @@
   <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Name" xml:space="preserve">
+  <data name=">>dataGridView1.Name" xml:space="preserve">
     <value>dataGridView1</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Type" xml:space="preserve">
+  <data name=">>dataGridView1.Type" xml:space="preserve">
     <value>XenAdmin.Wizards.RollingUpgradeWizard.RollingUpgradeWizardSelectPool+UpgradeDataGridView, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Parent" xml:space="preserve">
+  <data name=">>dataGridView1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.ZOrder" xml:space="preserve">
+  <data name=">>dataGridView1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="label1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -232,16 +232,16 @@
 
 Note: it is not possible to upgrade pools or servers running XenServer version 5.5 or earlier using this wizard.</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="buttonSelectAll.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -262,16 +262,16 @@ Note: it is not possible to upgrade pools or servers running XenServer version 5
   <data name="buttonSelectAll.Text" xml:space="preserve">
     <value>&amp;Select All</value>
   </data>
-  <data name="&gt;&gt;buttonSelectAll.Name" xml:space="preserve">
+  <data name=">>buttonSelectAll.Name" xml:space="preserve">
     <value>buttonSelectAll</value>
   </data>
-  <data name="&gt;&gt;buttonSelectAll.Type" xml:space="preserve">
+  <data name=">>buttonSelectAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonSelectAll.Parent" xml:space="preserve">
+  <data name=">>buttonSelectAll.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;buttonSelectAll.ZOrder" xml:space="preserve">
+  <data name=">>buttonSelectAll.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="buttonClearAll.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -292,16 +292,16 @@ Note: it is not possible to upgrade pools or servers running XenServer version 5
   <data name="buttonClearAll.Text" xml:space="preserve">
     <value>&amp;Clear All</value>
   </data>
-  <data name="&gt;&gt;buttonClearAll.Name" xml:space="preserve">
+  <data name=">>buttonClearAll.Name" xml:space="preserve">
     <value>buttonClearAll</value>
   </data>
-  <data name="&gt;&gt;buttonClearAll.Type" xml:space="preserve">
+  <data name=">>buttonClearAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonClearAll.Parent" xml:space="preserve">
+  <data name=">>buttonClearAll.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;buttonClearAll.ZOrder" xml:space="preserve">
+  <data name=">>buttonClearAll.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -310,40 +310,40 @@ Note: it is not possible to upgrade pools or servers running XenServer version 5
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>520, 376</value>
   </data>
-  <data name="&gt;&gt;expansionColumn.Name" xml:space="preserve">
+  <data name=">>expansionColumn.Name" xml:space="preserve">
     <value>expansionColumn</value>
   </data>
-  <data name="&gt;&gt;expansionColumn.Type" xml:space="preserve">
+  <data name=">>expansionColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkBoxColumn.Name" xml:space="preserve">
+  <data name=">>checkBoxColumn.Name" xml:space="preserve">
     <value>checkBoxColumn</value>
   </data>
-  <data name="&gt;&gt;checkBoxColumn.Type" xml:space="preserve">
+  <data name=">>checkBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;NameColumn.Name" xml:space="preserve">
+  <data name=">>NameColumn.Name" xml:space="preserve">
     <value>NameColumn</value>
   </data>
-  <data name="&gt;&gt;NameColumn.Type" xml:space="preserve">
+  <data name=">>NameColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Description.Name" xml:space="preserve">
+  <data name=">>Description.Name" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="&gt;&gt;Description.Type" xml:space="preserve">
+  <data name=">>Description.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnVersion.Name" xml:space="preserve">
+  <data name=">>ColumnVersion.Name" xml:space="preserve">
     <value>ColumnVersion</value>
   </data>
-  <data name="&gt;&gt;ColumnVersion.Type" xml:space="preserve">
+  <data name=">>ColumnVersion.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>RollingUpgradeWizardSelectPool</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

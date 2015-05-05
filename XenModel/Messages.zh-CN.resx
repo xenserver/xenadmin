@@ -3766,7 +3766,7 @@ XenServer 可以重新启动服务器并将服务器的 CPU 级别降至池中�
     <value>Go 版本</value>
   </data>
   <data name="DOCKER_INFO_INDEX_SERVER_ADDRESS" xml:space="preserve">
-    <value>Index Server 地址</value>
+    <value>索引服务器地址</value>
   </data>
   <data name="DOCKER_INFO_INITIATE_PATH" xml:space="preserve">
     <value>启动路径</value>

@@ -138,16 +138,16 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Reverting to this snapshot will revert the VM back to the point in time that the snapshot was created, and the current state of the VM will be lost.</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="questionLabel.Font" type="System.Drawing.Font, System.Drawing">
@@ -165,16 +165,16 @@
   <data name="questionLabel.Text" xml:space="preserve">
     <value>Are you sure you want to revert to '{0}'?</value>
   </data>
-  <data name="&gt;&gt;questionLabel.Name" xml:space="preserve">
+  <data name=">>questionLabel.Name" xml:space="preserve">
     <value>questionLabel</value>
   </data>
-  <data name="&gt;&gt;questionLabel.Type" xml:space="preserve">
+  <data name=">>questionLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;questionLabel.Parent" xml:space="preserve">
+  <data name=">>questionLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;questionLabel.ZOrder" xml:space="preserve">
+  <data name=">>questionLabel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="takeSnapshotBeforeCheckBox.AutoSize" type="System.Boolean, mscorlib">
@@ -195,16 +195,16 @@
   <data name="takeSnapshotBeforeCheckBox.Text" xml:space="preserve">
     <value>&amp;Take a snapshot of the VM's current state and then revert</value>
   </data>
-  <data name="&gt;&gt;takeSnapshotBeforeCheckBox.Name" xml:space="preserve">
+  <data name=">>takeSnapshotBeforeCheckBox.Name" xml:space="preserve">
     <value>takeSnapshotBeforeCheckBox</value>
   </data>
-  <data name="&gt;&gt;takeSnapshotBeforeCheckBox.Type" xml:space="preserve">
+  <data name=">>takeSnapshotBeforeCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;takeSnapshotBeforeCheckBox.Parent" xml:space="preserve">
+  <data name=">>takeSnapshotBeforeCheckBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;takeSnapshotBeforeCheckBox.ZOrder" xml:space="preserve">
+  <data name=">>takeSnapshotBeforeCheckBox.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="yesButton.Font" type="System.Drawing.Font, System.Drawing">
@@ -222,16 +222,16 @@
   <data name="yesButton.Text" xml:space="preserve">
     <value>&amp;Yes</value>
   </data>
-  <data name="&gt;&gt;yesButton.Name" xml:space="preserve">
+  <data name=">>yesButton.Name" xml:space="preserve">
     <value>yesButton</value>
   </data>
-  <data name="&gt;&gt;yesButton.Type" xml:space="preserve">
+  <data name=">>yesButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;yesButton.Parent" xml:space="preserve">
+  <data name=">>yesButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;yesButton.ZOrder" xml:space="preserve">
+  <data name=">>yesButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="noButton.Font" type="System.Drawing.Font, System.Drawing">
@@ -249,16 +249,16 @@
   <data name="noButton.Text" xml:space="preserve">
     <value>&amp;No</value>
   </data>
-  <data name="&gt;&gt;noButton.Name" xml:space="preserve">
+  <data name=">>noButton.Name" xml:space="preserve">
     <value>noButton</value>
   </data>
-  <data name="&gt;&gt;noButton.Type" xml:space="preserve">
+  <data name=">>noButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;noButton.Parent" xml:space="preserve">
+  <data name=">>noButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;noButton.ZOrder" xml:space="preserve">
+  <data name=">>noButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="pictureBox1.Font" type="System.Drawing.Font, System.Drawing">
@@ -276,16 +276,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+  <data name=">>pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+  <data name=">>pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+  <data name=">>pictureBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -309,10 +309,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Revert To Snapshot</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>RevertDialog</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

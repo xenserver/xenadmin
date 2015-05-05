@@ -154,16 +154,16 @@
   <data name="lblNicHelp.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;lblNicHelp.Name" xml:space="preserve">
+  <data name=">>lblNicHelp.Name" xml:space="preserve">
     <value>lblNicHelp</value>
   </data>
-  <data name="&gt;&gt;lblNicHelp.Type" xml:space="preserve">
+  <data name=">>lblNicHelp.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblNicHelp.Parent" xml:space="preserve">
+  <data name=">>lblNicHelp.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;lblNicHelp.ZOrder" xml:space="preserve">
+  <data name=">>lblNicHelp.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="comboInterfaces.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -181,16 +181,16 @@
   <data name="comboInterfaces.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;comboInterfaces.Name" xml:space="preserve">
+  <data name=">>comboInterfaces.Name" xml:space="preserve">
     <value>comboInterfaces</value>
   </data>
-  <data name="&gt;&gt;comboInterfaces.Type" xml:space="preserve">
+  <data name=">>comboInterfaces.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;comboInterfaces.Parent" xml:space="preserve">
+  <data name=">>comboInterfaces.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;comboInterfaces.ZOrder" xml:space="preserve">
+  <data name=">>comboInterfaces.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
@@ -217,16 +217,16 @@
   <data name="label2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+  <data name=">>label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+  <data name=">>label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+  <data name=">>label2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+  <data name=">>label2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanelMTUWarning.AutoSize" type="System.Boolean, mscorlib">
@@ -250,16 +250,16 @@
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+  <data name=">>pictureBox1.Name" xml:space="preserve">
     <value>pictureBox1</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+  <data name=">>pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+  <data name=">>pictureBox1.Parent" xml:space="preserve">
     <value>tableLayoutPanelMTUWarning</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+  <data name=">>pictureBox1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelMTUWarning.AutoSize" type="System.Boolean, mscorlib">
@@ -286,16 +286,16 @@
   <data name="labelMTUWarning.Text" xml:space="preserve">
     <value>このウィザードを完了したときに、管理ネットワーク インターフェイス上の MTU がこの値に基づいて変更されます。</value>
   </data>
-  <data name="&gt;&gt;labelMTUWarning.Name" xml:space="preserve">
+  <data name=">>labelMTUWarning.Name" xml:space="preserve">
     <value>labelMTUWarning</value>
   </data>
-  <data name="&gt;&gt;labelMTUWarning.Type" xml:space="preserve">
+  <data name=">>labelMTUWarning.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelMTUWarning.Parent" xml:space="preserve">
+  <data name=">>labelMTUWarning.Parent" xml:space="preserve">
     <value>tableLayoutPanelMTUWarning</value>
   </data>
-  <data name="&gt;&gt;labelMTUWarning.ZOrder" xml:space="preserve">
+  <data name=">>labelMTUWarning.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanelMTUWarning.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -319,16 +319,16 @@
   <data name="tableLayoutPanelMTUWarning.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanelMTUWarning.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanelMTUWarning.Name" xml:space="preserve">
     <value>tableLayoutPanelMTUWarning</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanelMTUWarning.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanelMTUWarning.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanelMTUWarning.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanelMTUWarning.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanelMTUWarning.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanelMTUWarning.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="tableLayoutPanelMTUWarning.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -358,16 +358,16 @@
   <data name="labelMTU.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelMTU.Name" xml:space="preserve">
+  <data name=">>labelMTU.Name" xml:space="preserve">
     <value>labelMTU</value>
   </data>
-  <data name="&gt;&gt;labelMTU.Type" xml:space="preserve">
+  <data name=">>labelMTU.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelMTU.Parent" xml:space="preserve">
+  <data name=">>labelMTU.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelMTU.ZOrder" xml:space="preserve">
+  <data name=">>labelMTU.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="numericUpDownMTU.Location" type="System.Drawing.Point, System.Drawing">
@@ -382,16 +382,16 @@
   <data name="numericUpDownMTU.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;numericUpDownMTU.Name" xml:space="preserve">
+  <data name=">>numericUpDownMTU.Name" xml:space="preserve">
     <value>numericUpDownMTU</value>
   </data>
-  <data name="&gt;&gt;numericUpDownMTU.Type" xml:space="preserve">
+  <data name=">>numericUpDownMTU.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;numericUpDownMTU.Parent" xml:space="preserve">
+  <data name=">>numericUpDownMTU.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;numericUpDownMTU.ZOrder" xml:space="preserve">
+  <data name=">>numericUpDownMTU.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -409,16 +409,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -445,16 +445,16 @@
   <data name="cbxAutomatic.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopLeft</value>
   </data>
-  <data name="&gt;&gt;cbxAutomatic.Name" xml:space="preserve">
+  <data name=">>cbxAutomatic.Name" xml:space="preserve">
     <value>cbxAutomatic</value>
   </data>
-  <data name="&gt;&gt;cbxAutomatic.Type" xml:space="preserve">
+  <data name=">>cbxAutomatic.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cbxAutomatic.Parent" xml:space="preserve">
+  <data name=">>cbxAutomatic.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;cbxAutomatic.ZOrder" xml:space="preserve">
+  <data name=">>cbxAutomatic.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -469,10 +469,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>インターフェイス</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>NetWChinDetails</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

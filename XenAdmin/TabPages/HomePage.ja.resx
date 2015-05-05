@@ -144,16 +144,16 @@
   <data name="line2Learn.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
   </data>
-  <data name="&gt;&gt;line2Learn.Name" xml:space="preserve">
+  <data name=">>line2Learn.Name" xml:space="preserve">
     <value>line2Learn</value>
   </data>
-  <data name="&gt;&gt;line2Learn.Type" xml:space="preserve">
+  <data name=">>line2Learn.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;line2Learn.Parent" xml:space="preserve">
+  <data name=">>line2Learn.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;line2Learn.ZOrder" xml:space="preserve">
+  <data name=">>line2Learn.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
   <data name="line1Learn.Font" type="System.Drawing.Font, System.Drawing">
@@ -180,16 +180,16 @@
   <data name="line1Learn.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
   </data>
-  <data name="&gt;&gt;line1Learn.Name" xml:space="preserve">
+  <data name=">>line1Learn.Name" xml:space="preserve">
     <value>line1Learn</value>
   </data>
-  <data name="&gt;&gt;line1Learn.Type" xml:space="preserve">
+  <data name=">>line1Learn.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;line1Learn.Parent" xml:space="preserve">
+  <data name=">>line1Learn.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;line1Learn.ZOrder" xml:space="preserve">
+  <data name=">>line1Learn.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
   <data name="titleLearn.Font" type="System.Drawing.Font, System.Drawing">
@@ -216,16 +216,16 @@
   <data name="titleLearn.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
   </data>
-  <data name="&gt;&gt;titleLearn.Name" xml:space="preserve">
+  <data name=">>titleLearn.Name" xml:space="preserve">
     <value>titleLearn</value>
   </data>
-  <data name="&gt;&gt;titleLearn.Type" xml:space="preserve">
+  <data name=">>titleLearn.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;titleLearn.Parent" xml:space="preserve">
+  <data name=">>titleLearn.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;titleLearn.ZOrder" xml:space="preserve">
+  <data name=">>titleLearn.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
   <data name="line1Add.Font" type="System.Drawing.Font, System.Drawing">
@@ -252,16 +252,16 @@
   <data name="line1Add.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
   </data>
-  <data name="&gt;&gt;line1Add.Name" xml:space="preserve">
+  <data name=">>line1Add.Name" xml:space="preserve">
     <value>line1Add</value>
   </data>
-  <data name="&gt;&gt;line1Add.Type" xml:space="preserve">
+  <data name=">>line1Add.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;line1Add.Parent" xml:space="preserve">
+  <data name=">>line1Add.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;line1Add.ZOrder" xml:space="preserve">
+  <data name=">>line1Add.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
   <data name="titleAdd.Font" type="System.Drawing.Font, System.Drawing">
@@ -288,16 +288,16 @@
   <data name="titleAdd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
   </data>
-  <data name="&gt;&gt;titleAdd.Name" xml:space="preserve">
+  <data name=">>titleAdd.Name" xml:space="preserve">
     <value>titleAdd</value>
   </data>
-  <data name="&gt;&gt;titleAdd.Type" xml:space="preserve">
+  <data name=">>titleAdd.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;titleAdd.Parent" xml:space="preserve">
+  <data name=">>titleAdd.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;titleAdd.ZOrder" xml:space="preserve">
+  <data name=">>titleAdd.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
   <data name="line1Upgrade.Font" type="System.Drawing.Font, System.Drawing">
@@ -324,16 +324,16 @@
   <data name="line1Upgrade.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
   </data>
-  <data name="&gt;&gt;line1Upgrade.Name" xml:space="preserve">
+  <data name=">>line1Upgrade.Name" xml:space="preserve">
     <value>line1Upgrade</value>
   </data>
-  <data name="&gt;&gt;line1Upgrade.Type" xml:space="preserve">
+  <data name=">>line1Upgrade.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;line1Upgrade.Parent" xml:space="preserve">
+  <data name=">>line1Upgrade.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;line1Upgrade.ZOrder" xml:space="preserve">
+  <data name=">>line1Upgrade.ZOrder" xml:space="preserve">
     <value>21</value>
   </data>
   <data name="titleUpgrade.Font" type="System.Drawing.Font, System.Drawing">
@@ -360,16 +360,16 @@
   <data name="titleUpgrade.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
   </data>
-  <data name="&gt;&gt;titleUpgrade.Name" xml:space="preserve">
+  <data name=">>titleUpgrade.Name" xml:space="preserve">
     <value>titleUpgrade</value>
   </data>
-  <data name="&gt;&gt;titleUpgrade.Type" xml:space="preserve">
+  <data name=">>titleUpgrade.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;titleUpgrade.Parent" xml:space="preserve">
+  <data name=">>titleUpgrade.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;titleUpgrade.ZOrder" xml:space="preserve">
+  <data name=">>titleUpgrade.ZOrder" xml:space="preserve">
     <value>20</value>
   </data>
   <data name="line2Try.Font" type="System.Drawing.Font, System.Drawing">
@@ -396,16 +396,16 @@
   <data name="line2Try.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
   </data>
-  <data name="&gt;&gt;line2Try.Name" xml:space="preserve">
+  <data name=">>line2Try.Name" xml:space="preserve">
     <value>line2Try</value>
   </data>
-  <data name="&gt;&gt;line2Try.Type" xml:space="preserve">
+  <data name=">>line2Try.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;line2Try.Parent" xml:space="preserve">
+  <data name=">>line2Try.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;line2Try.ZOrder" xml:space="preserve">
+  <data name=">>line2Try.ZOrder" xml:space="preserve">
     <value>25</value>
   </data>
   <data name="line1Try.Font" type="System.Drawing.Font, System.Drawing">
@@ -432,16 +432,16 @@
   <data name="line1Try.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
   </data>
-  <data name="&gt;&gt;line1Try.Name" xml:space="preserve">
+  <data name=">>line1Try.Name" xml:space="preserve">
     <value>line1Try</value>
   </data>
-  <data name="&gt;&gt;line1Try.Type" xml:space="preserve">
+  <data name=">>line1Try.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;line1Try.Parent" xml:space="preserve">
+  <data name=">>line1Try.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;line1Try.ZOrder" xml:space="preserve">
+  <data name=">>line1Try.ZOrder" xml:space="preserve">
     <value>24</value>
   </data>
   <data name="titleTry.Font" type="System.Drawing.Font, System.Drawing">
@@ -468,16 +468,16 @@
   <data name="titleTry.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
   </data>
-  <data name="&gt;&gt;titleTry.Name" xml:space="preserve">
+  <data name=">>titleTry.Name" xml:space="preserve">
     <value>titleTry</value>
   </data>
-  <data name="&gt;&gt;titleTry.Type" xml:space="preserve">
+  <data name=">>titleTry.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;titleTry.Parent" xml:space="preserve">
+  <data name=">>titleTry.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;titleTry.ZOrder" xml:space="preserve">
+  <data name=">>titleTry.ZOrder" xml:space="preserve">
     <value>23</value>
   </data>
   <data name="heading.Font" type="System.Drawing.Font, System.Drawing">
@@ -501,16 +501,16 @@
   <data name="heading.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
   </data>
-  <data name="&gt;&gt;heading.Name" xml:space="preserve">
+  <data name=">>heading.Name" xml:space="preserve">
     <value>heading</value>
   </data>
-  <data name="&gt;&gt;heading.Type" xml:space="preserve">
+  <data name=">>heading.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;heading.Parent" xml:space="preserve">
+  <data name=">>heading.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;heading.ZOrder" xml:space="preserve">
+  <data name=">>heading.ZOrder" xml:space="preserve">
     <value>27</value>
   </data>
   <data name="subHeading.Font" type="System.Drawing.Font, System.Drawing">
@@ -534,16 +534,16 @@
   <data name="subHeading.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
   </data>
-  <data name="&gt;&gt;subHeading.Name" xml:space="preserve">
+  <data name=">>subHeading.Name" xml:space="preserve">
     <value>subHeading</value>
   </data>
-  <data name="&gt;&gt;subHeading.Type" xml:space="preserve">
+  <data name=">>subHeading.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;subHeading.Parent" xml:space="preserve">
+  <data name=">>subHeading.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;subHeading.ZOrder" xml:space="preserve">
+  <data name=">>subHeading.ZOrder" xml:space="preserve">
     <value>26</value>
   </data>
   <data name="panelLearn.Location" type="System.Drawing.Point, System.Drawing">
@@ -555,16 +555,16 @@
   <data name="panelLearn.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;panelLearn.Name" xml:space="preserve">
+  <data name=">>panelLearn.Name" xml:space="preserve">
     <value>panelLearn</value>
   </data>
-  <data name="&gt;&gt;panelLearn.Type" xml:space="preserve">
+  <data name=">>panelLearn.Type" xml:space="preserve">
     <value>XenAdmin.Controls.TransparentPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;panelLearn.Parent" xml:space="preserve">
+  <data name=">>panelLearn.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;panelLearn.ZOrder" xml:space="preserve">
+  <data name=">>panelLearn.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="panelAdd.Location" type="System.Drawing.Point, System.Drawing">
@@ -576,16 +576,16 @@
   <data name="panelAdd.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;panelAdd.Name" xml:space="preserve">
+  <data name=">>panelAdd.Name" xml:space="preserve">
     <value>panelAdd</value>
   </data>
-  <data name="&gt;&gt;panelAdd.Type" xml:space="preserve">
+  <data name=">>panelAdd.Type" xml:space="preserve">
     <value>XenAdmin.Controls.TransparentPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;panelAdd.Parent" xml:space="preserve">
+  <data name=">>panelAdd.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;panelAdd.ZOrder" xml:space="preserve">
+  <data name=">>panelAdd.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="panelGet.Location" type="System.Drawing.Point, System.Drawing">
@@ -597,16 +597,16 @@
   <data name="panelGet.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;panelGet.Name" xml:space="preserve">
+  <data name=">>panelGet.Name" xml:space="preserve">
     <value>panelGet</value>
   </data>
-  <data name="&gt;&gt;panelGet.Type" xml:space="preserve">
+  <data name=">>panelGet.Type" xml:space="preserve">
     <value>XenAdmin.Controls.TransparentPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;panelGet.Parent" xml:space="preserve">
+  <data name=">>panelGet.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;panelGet.ZOrder" xml:space="preserve">
+  <data name=">>panelGet.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="panelTry.Location" type="System.Drawing.Point, System.Drawing">
@@ -618,16 +618,16 @@
   <data name="panelTry.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;panelTry.Name" xml:space="preserve">
+  <data name=">>panelTry.Name" xml:space="preserve">
     <value>panelTry</value>
   </data>
-  <data name="&gt;&gt;panelTry.Type" xml:space="preserve">
+  <data name=">>panelTry.Type" xml:space="preserve">
     <value>XenAdmin.Controls.TransparentPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;panelTry.Parent" xml:space="preserve">
+  <data name=">>panelTry.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;panelTry.ZOrder" xml:space="preserve">
+  <data name=">>panelTry.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="titleCommunity.Font" type="System.Drawing.Font, System.Drawing">
@@ -651,16 +651,16 @@
   <data name="titleCommunity.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
   </data>
-  <data name="&gt;&gt;titleCommunity.Name" xml:space="preserve">
+  <data name=">>titleCommunity.Name" xml:space="preserve">
     <value>titleCommunity</value>
   </data>
-  <data name="&gt;&gt;titleCommunity.Type" xml:space="preserve">
+  <data name=">>titleCommunity.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;titleCommunity.Parent" xml:space="preserve">
+  <data name=">>titleCommunity.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;titleCommunity.ZOrder" xml:space="preserve">
+  <data name=">>titleCommunity.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="labelNetwork.AutoSize" type="System.Boolean, mscorlib">
@@ -684,16 +684,16 @@
   <data name="labelNetwork.Text" xml:space="preserve">
     <value>XenServer ユーザー ネットワーク</value>
   </data>
-  <data name="&gt;&gt;labelNetwork.Name" xml:space="preserve">
+  <data name=">>labelNetwork.Name" xml:space="preserve">
     <value>labelNetwork</value>
   </data>
-  <data name="&gt;&gt;labelNetwork.Type" xml:space="preserve">
+  <data name=">>labelNetwork.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelNetwork.Parent" xml:space="preserve">
+  <data name=">>labelNetwork.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;labelNetwork.ZOrder" xml:space="preserve">
+  <data name=">>labelNetwork.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="iconCommunity.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
@@ -714,16 +714,16 @@
   <data name="iconCommunity.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;iconCommunity.Name" xml:space="preserve">
+  <data name=">>iconCommunity.Name" xml:space="preserve">
     <value>iconCommunity</value>
   </data>
-  <data name="&gt;&gt;iconCommunity.Type" xml:space="preserve">
+  <data name=">>iconCommunity.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;iconCommunity.Parent" xml:space="preserve">
+  <data name=">>iconCommunity.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;iconCommunity.ZOrder" xml:space="preserve">
+  <data name=">>iconCommunity.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="iconLearn.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
@@ -744,16 +744,16 @@
   <data name="iconLearn.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;iconLearn.Name" xml:space="preserve">
+  <data name=">>iconLearn.Name" xml:space="preserve">
     <value>iconLearn</value>
   </data>
-  <data name="&gt;&gt;iconLearn.Type" xml:space="preserve">
+  <data name=">>iconLearn.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;iconLearn.Parent" xml:space="preserve">
+  <data name=">>iconLearn.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;iconLearn.ZOrder" xml:space="preserve">
+  <data name=">>iconLearn.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
   <data name="iconAdd.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
@@ -774,16 +774,16 @@
   <data name="iconAdd.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;iconAdd.Name" xml:space="preserve">
+  <data name=">>iconAdd.Name" xml:space="preserve">
     <value>iconAdd</value>
   </data>
-  <data name="&gt;&gt;iconAdd.Type" xml:space="preserve">
+  <data name=">>iconAdd.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;iconAdd.Parent" xml:space="preserve">
+  <data name=">>iconAdd.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;iconAdd.ZOrder" xml:space="preserve">
+  <data name=">>iconAdd.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
   <data name="iconGet.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
@@ -804,16 +804,16 @@
   <data name="iconGet.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;iconGet.Name" xml:space="preserve">
+  <data name=">>iconGet.Name" xml:space="preserve">
     <value>iconGet</value>
   </data>
-  <data name="&gt;&gt;iconGet.Type" xml:space="preserve">
+  <data name=">>iconGet.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;iconGet.Parent" xml:space="preserve">
+  <data name=">>iconGet.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;iconGet.ZOrder" xml:space="preserve">
+  <data name=">>iconGet.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
   <data name="iconTry.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
@@ -834,16 +834,16 @@
   <data name="iconTry.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;iconTry.Name" xml:space="preserve">
+  <data name=">>iconTry.Name" xml:space="preserve">
     <value>iconTry</value>
   </data>
-  <data name="&gt;&gt;iconTry.Type" xml:space="preserve">
+  <data name=">>iconTry.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;iconTry.Parent" xml:space="preserve">
+  <data name=">>iconTry.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;iconTry.ZOrder" xml:space="preserve">
+  <data name=">>iconTry.ZOrder" xml:space="preserve">
     <value>22</value>
   </data>
   <data name="horizDiv.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
@@ -864,16 +864,16 @@
   <data name="horizDiv.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;horizDiv.Name" xml:space="preserve">
+  <data name=">>horizDiv.Name" xml:space="preserve">
     <value>horizDiv</value>
   </data>
-  <data name="&gt;&gt;horizDiv.Type" xml:space="preserve">
+  <data name=">>horizDiv.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;horizDiv.Parent" xml:space="preserve">
+  <data name=">>horizDiv.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;horizDiv.ZOrder" xml:space="preserve">
+  <data name=">>horizDiv.ZOrder" xml:space="preserve">
     <value>28</value>
   </data>
   <data name="vertDiv3.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
@@ -894,16 +894,16 @@
   <data name="vertDiv3.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;vertDiv3.Name" xml:space="preserve">
+  <data name=">>vertDiv3.Name" xml:space="preserve">
     <value>vertDiv3</value>
   </data>
-  <data name="&gt;&gt;vertDiv3.Type" xml:space="preserve">
+  <data name=">>vertDiv3.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;vertDiv3.Parent" xml:space="preserve">
+  <data name=">>vertDiv3.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;vertDiv3.ZOrder" xml:space="preserve">
+  <data name=">>vertDiv3.ZOrder" xml:space="preserve">
     <value>29</value>
   </data>
   <data name="vertDiv2.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
@@ -924,16 +924,16 @@
   <data name="vertDiv2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;vertDiv2.Name" xml:space="preserve">
+  <data name=">>vertDiv2.Name" xml:space="preserve">
     <value>vertDiv2</value>
   </data>
-  <data name="&gt;&gt;vertDiv2.Type" xml:space="preserve">
+  <data name=">>vertDiv2.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;vertDiv2.Parent" xml:space="preserve">
+  <data name=">>vertDiv2.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;vertDiv2.ZOrder" xml:space="preserve">
+  <data name=">>vertDiv2.ZOrder" xml:space="preserve">
     <value>30</value>
   </data>
   <data name="vertDiv1.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
@@ -954,16 +954,16 @@
   <data name="vertDiv1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;vertDiv1.Name" xml:space="preserve">
+  <data name=">>vertDiv1.Name" xml:space="preserve">
     <value>vertDiv1</value>
   </data>
-  <data name="&gt;&gt;vertDiv1.Type" xml:space="preserve">
+  <data name=">>vertDiv1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;vertDiv1.Parent" xml:space="preserve">
+  <data name=">>vertDiv1.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;vertDiv1.ZOrder" xml:space="preserve">
+  <data name=">>vertDiv1.ZOrder" xml:space="preserve">
     <value>31</value>
   </data>
   <data name="bulletNetwork.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
@@ -981,16 +981,16 @@
   <data name="bulletNetwork.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="&gt;&gt;bulletNetwork.Name" xml:space="preserve">
+  <data name=">>bulletNetwork.Name" xml:space="preserve">
     <value>bulletNetwork</value>
   </data>
-  <data name="&gt;&gt;bulletNetwork.Type" xml:space="preserve">
+  <data name=">>bulletNetwork.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;bulletNetwork.Parent" xml:space="preserve">
+  <data name=">>bulletNetwork.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;bulletNetwork.ZOrder" xml:space="preserve">
+  <data name=">>bulletNetwork.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="bulletSupport.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
@@ -1011,16 +1011,16 @@
   <data name="bulletSupport.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="&gt;&gt;bulletSupport.Name" xml:space="preserve">
+  <data name=">>bulletSupport.Name" xml:space="preserve">
     <value>bulletSupport</value>
   </data>
-  <data name="&gt;&gt;bulletSupport.Type" xml:space="preserve">
+  <data name=">>bulletSupport.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;bulletSupport.Parent" xml:space="preserve">
+  <data name=">>bulletSupport.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;bulletSupport.ZOrder" xml:space="preserve">
+  <data name=">>bulletSupport.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="bulletPartners.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
@@ -1041,16 +1041,16 @@
   <data name="bulletPartners.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="&gt;&gt;bulletPartners.Name" xml:space="preserve">
+  <data name=">>bulletPartners.Name" xml:space="preserve">
     <value>bulletPartners</value>
   </data>
-  <data name="&gt;&gt;bulletPartners.Type" xml:space="preserve">
+  <data name=">>bulletPartners.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;bulletPartners.Parent" xml:space="preserve">
+  <data name=">>bulletPartners.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;bulletPartners.ZOrder" xml:space="preserve">
+  <data name=">>bulletPartners.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="labelSupport.AutoSize" type="System.Boolean, mscorlib">
@@ -1074,16 +1074,16 @@
   <data name="labelSupport.Text" xml:space="preserve">
     <value>Citrix Knowledge Center の参照</value>
   </data>
-  <data name="&gt;&gt;labelSupport.Name" xml:space="preserve">
+  <data name=">>labelSupport.Name" xml:space="preserve">
     <value>labelSupport</value>
   </data>
-  <data name="&gt;&gt;labelSupport.Type" xml:space="preserve">
+  <data name=">>labelSupport.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelSupport.Parent" xml:space="preserve">
+  <data name=">>labelSupport.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;labelSupport.ZOrder" xml:space="preserve">
+  <data name=">>labelSupport.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelPartners.AutoSize" type="System.Boolean, mscorlib">
@@ -1107,16 +1107,16 @@
   <data name="labelPartners.Text" xml:space="preserve">
     <value>XenServer 製品情報</value>
   </data>
-  <data name="&gt;&gt;labelPartners.Name" xml:space="preserve">
+  <data name=">>labelPartners.Name" xml:space="preserve">
     <value>labelPartners</value>
   </data>
-  <data name="&gt;&gt;labelPartners.Type" xml:space="preserve">
+  <data name=">>labelPartners.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelPartners.Parent" xml:space="preserve">
+  <data name=">>labelPartners.Parent" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;labelPartners.ZOrder" xml:space="preserve">
+  <data name=">>labelPartners.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="mainPanel.Location" type="System.Drawing.Point, System.Drawing">
@@ -1134,16 +1134,16 @@
   <data name="mainPanel.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
-  <data name="&gt;&gt;mainPanel.Name" xml:space="preserve">
+  <data name=">>mainPanel.Name" xml:space="preserve">
     <value>mainPanel</value>
   </data>
-  <data name="&gt;&gt;mainPanel.Type" xml:space="preserve">
+  <data name=">>mainPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mainPanel.Parent" xml:space="preserve">
+  <data name=">>mainPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;mainPanel.ZOrder" xml:space="preserve">
+  <data name=">>mainPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -1158,10 +1158,10 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>707, 452</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>HomePage</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DoubleBufferedPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

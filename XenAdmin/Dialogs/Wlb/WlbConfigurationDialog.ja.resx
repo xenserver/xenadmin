@@ -141,16 +141,16 @@
   <data name="wlbOptimizationModePage.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;wlbOptimizationModePage.Name" xml:space="preserve">
+  <data name=">>wlbOptimizationModePage.Name" xml:space="preserve">
     <value>wlbOptimizationModePage</value>
   </data>
-  <data name="&gt;&gt;wlbOptimizationModePage.Type" xml:space="preserve">
+  <data name=">>wlbOptimizationModePage.Type" xml:space="preserve">
     <value>XenAdmin.SettingsPanels.WlbOptimizationModePage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;wlbOptimizationModePage.Parent" xml:space="preserve">
+  <data name=">>wlbOptimizationModePage.Parent" xml:space="preserve">
     <value>ContentPanel</value>
   </data>
-  <data name="&gt;&gt;wlbOptimizationModePage.ZOrder" xml:space="preserve">
+  <data name=">>wlbOptimizationModePage.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="wlbAutomationPage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -168,16 +168,16 @@
   <data name="wlbAutomationPage.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;wlbAutomationPage.Name" xml:space="preserve">
+  <data name=">>wlbAutomationPage.Name" xml:space="preserve">
     <value>wlbAutomationPage</value>
   </data>
-  <data name="&gt;&gt;wlbAutomationPage.Type" xml:space="preserve">
+  <data name=">>wlbAutomationPage.Type" xml:space="preserve">
     <value>XenAdmin.SettingsPanels.WlbAutomationPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;wlbAutomationPage.Parent" xml:space="preserve">
+  <data name=">>wlbAutomationPage.Parent" xml:space="preserve">
     <value>ContentPanel</value>
   </data>
-  <data name="&gt;&gt;wlbAutomationPage.ZOrder" xml:space="preserve">
+  <data name=">>wlbAutomationPage.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="wlbThresholdsPage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -195,16 +195,16 @@
   <data name="wlbThresholdsPage.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;wlbThresholdsPage.Name" xml:space="preserve">
+  <data name=">>wlbThresholdsPage.Name" xml:space="preserve">
     <value>wlbThresholdsPage</value>
   </data>
-  <data name="&gt;&gt;wlbThresholdsPage.Type" xml:space="preserve">
+  <data name=">>wlbThresholdsPage.Type" xml:space="preserve">
     <value>XenAdmin.SettingsPanels.WlbThresholdsPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;wlbThresholdsPage.Parent" xml:space="preserve">
+  <data name=">>wlbThresholdsPage.Parent" xml:space="preserve">
     <value>ContentPanel</value>
   </data>
-  <data name="&gt;&gt;wlbThresholdsPage.ZOrder" xml:space="preserve">
+  <data name=">>wlbThresholdsPage.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="wlbMetricWeightingPage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -222,16 +222,16 @@
   <data name="wlbMetricWeightingPage.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;wlbMetricWeightingPage.Name" xml:space="preserve">
+  <data name=">>wlbMetricWeightingPage.Name" xml:space="preserve">
     <value>wlbMetricWeightingPage</value>
   </data>
-  <data name="&gt;&gt;wlbMetricWeightingPage.Type" xml:space="preserve">
+  <data name=">>wlbMetricWeightingPage.Type" xml:space="preserve">
     <value>XenAdmin.SettingsPanels.WlbMetricWeightingPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;wlbMetricWeightingPage.Parent" xml:space="preserve">
+  <data name=">>wlbMetricWeightingPage.Parent" xml:space="preserve">
     <value>ContentPanel</value>
   </data>
-  <data name="&gt;&gt;wlbMetricWeightingPage.ZOrder" xml:space="preserve">
+  <data name=">>wlbMetricWeightingPage.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="wlbHostExclusionPage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -249,16 +249,16 @@
   <data name="wlbHostExclusionPage.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;wlbHostExclusionPage.Name" xml:space="preserve">
+  <data name=">>wlbHostExclusionPage.Name" xml:space="preserve">
     <value>wlbHostExclusionPage</value>
   </data>
-  <data name="&gt;&gt;wlbHostExclusionPage.Type" xml:space="preserve">
+  <data name=">>wlbHostExclusionPage.Type" xml:space="preserve">
     <value>XenAdmin.SettingsPanels.WlbHostExclusionPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;wlbHostExclusionPage.Parent" xml:space="preserve">
+  <data name=">>wlbHostExclusionPage.Parent" xml:space="preserve">
     <value>ContentPanel</value>
   </data>
-  <data name="&gt;&gt;wlbHostExclusionPage.ZOrder" xml:space="preserve">
+  <data name=">>wlbHostExclusionPage.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="wlbAdvancedSettingsPage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -276,16 +276,16 @@
   <data name="wlbAdvancedSettingsPage.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;wlbAdvancedSettingsPage.Name" xml:space="preserve">
+  <data name=">>wlbAdvancedSettingsPage.Name" xml:space="preserve">
     <value>wlbAdvancedSettingsPage</value>
   </data>
-  <data name="&gt;&gt;wlbAdvancedSettingsPage.Type" xml:space="preserve">
+  <data name=">>wlbAdvancedSettingsPage.Type" xml:space="preserve">
     <value>XenAdmin.SettingsPanels.WlbAdvancedSettingsPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;wlbAdvancedSettingsPage.Parent" xml:space="preserve">
+  <data name=">>wlbAdvancedSettingsPage.Parent" xml:space="preserve">
     <value>ContentPanel</value>
   </data>
-  <data name="&gt;&gt;wlbAdvancedSettingsPage.ZOrder" xml:space="preserve">
+  <data name=">>wlbAdvancedSettingsPage.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="ContentPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -300,16 +300,16 @@
   <data name="ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>572, 672</value>
   </data>
-  <data name="&gt;&gt;ContentPanel.Name" xml:space="preserve">
+  <data name=">>ContentPanel.Name" xml:space="preserve">
     <value>ContentPanel</value>
   </data>
-  <data name="&gt;&gt;ContentPanel.Type" xml:space="preserve">
+  <data name=">>ContentPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ContentPanel.Parent" xml:space="preserve">
+  <data name=">>ContentPanel.Parent" xml:space="preserve">
     <value>blueBorder</value>
   </data>
-  <data name="&gt;&gt;ContentPanel.ZOrder" xml:space="preserve">
+  <data name=">>ContentPanel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="verticalTabs.Location" type="System.Drawing.Point, System.Drawing">
@@ -318,16 +318,16 @@
   <data name="verticalTabs.Size" type="System.Drawing.Size, System.Drawing">
     <value>216, 674</value>
   </data>
-  <data name="&gt;&gt;verticalTabs.Name" xml:space="preserve">
+  <data name=">>verticalTabs.Name" xml:space="preserve">
     <value>verticalTabs</value>
   </data>
-  <data name="&gt;&gt;verticalTabs.Type" xml:space="preserve">
+  <data name=">>verticalTabs.Type" xml:space="preserve">
     <value>XenAdmin.Controls.VerticalTabs, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;verticalTabs.Parent" xml:space="preserve">
+  <data name=">>verticalTabs.Parent" xml:space="preserve">
     <value>splitContainer.Panel1</value>
   </data>
-  <data name="&gt;&gt;verticalTabs.ZOrder" xml:space="preserve">
+  <data name=">>verticalTabs.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="cancelButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -336,16 +336,16 @@
   <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>720, 725</value>
   </data>
-  <data name="&gt;&gt;cancelButton.Name" xml:space="preserve">
+  <data name=">>cancelButton.Name" xml:space="preserve">
     <value>cancelButton</value>
   </data>
-  <data name="&gt;&gt;cancelButton.Type" xml:space="preserve">
+  <data name=">>cancelButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cancelButton.Parent" xml:space="preserve">
+  <data name=">>cancelButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;cancelButton.ZOrder" xml:space="preserve">
+  <data name=">>cancelButton.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="okButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -354,16 +354,16 @@
   <data name="okButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>629, 725</value>
   </data>
-  <data name="&gt;&gt;okButton.Name" xml:space="preserve">
+  <data name=">>okButton.Name" xml:space="preserve">
     <value>okButton</value>
   </data>
-  <data name="&gt;&gt;okButton.Type" xml:space="preserve">
+  <data name=">>okButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;okButton.Parent" xml:space="preserve">
+  <data name=">>okButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;okButton.ZOrder" xml:space="preserve">
+  <data name=">>okButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="splitContainer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -381,31 +381,31 @@
   <data name="splitContainer.Panel1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>20, 0, 0, 0</value>
   </data>
-  <data name="&gt;&gt;splitContainer.Panel1.Name" xml:space="preserve">
+  <data name=">>splitContainer.Panel1.Name" xml:space="preserve">
     <value>splitContainer.Panel1</value>
   </data>
-  <data name="&gt;&gt;splitContainer.Panel1.Type" xml:space="preserve">
+  <data name=">>splitContainer.Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;splitContainer.Panel1.Parent" xml:space="preserve">
+  <data name=">>splitContainer.Panel1.Parent" xml:space="preserve">
     <value>splitContainer</value>
   </data>
-  <data name="&gt;&gt;splitContainer.Panel1.ZOrder" xml:space="preserve">
+  <data name=">>splitContainer.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="splitContainer.Panel2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 20, 0</value>
   </data>
-  <data name="&gt;&gt;splitContainer.Panel2.Name" xml:space="preserve">
+  <data name=">>splitContainer.Panel2.Name" xml:space="preserve">
     <value>splitContainer.Panel2</value>
   </data>
-  <data name="&gt;&gt;splitContainer.Panel2.Type" xml:space="preserve">
+  <data name=">>splitContainer.Panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;splitContainer.Panel2.Parent" xml:space="preserve">
+  <data name=">>splitContainer.Panel2.Parent" xml:space="preserve">
     <value>splitContainer</value>
   </data>
-  <data name="&gt;&gt;splitContainer.Panel2.ZOrder" xml:space="preserve">
+  <data name=">>splitContainer.Panel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="splitContainer.Panel2MinSize" type="System.Int32, mscorlib">
@@ -417,31 +417,31 @@
   <data name="splitContainer.SplitterDistance" type="System.Int32, mscorlib">
     <value>236</value>
   </data>
-  <data name="&gt;&gt;splitContainer.Name" xml:space="preserve">
+  <data name=">>splitContainer.Name" xml:space="preserve">
     <value>splitContainer</value>
   </data>
-  <data name="&gt;&gt;splitContainer.Type" xml:space="preserve">
+  <data name=">>splitContainer.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;splitContainer.Parent" xml:space="preserve">
+  <data name=">>splitContainer.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;splitContainer.ZOrder" xml:space="preserve">
+  <data name=">>splitContainer.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="blueBorder.Size" type="System.Drawing.Size, System.Drawing">
     <value>574, 674</value>
   </data>
-  <data name="&gt;&gt;blueBorder.Name" xml:space="preserve">
+  <data name=">>blueBorder.Name" xml:space="preserve">
     <value>blueBorder</value>
   </data>
-  <data name="&gt;&gt;blueBorder.Type" xml:space="preserve">
+  <data name=">>blueBorder.Type" xml:space="preserve">
     <value>XenAdmin.Controls.BlueBorderPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;blueBorder.Parent" xml:space="preserve">
+  <data name=">>blueBorder.Parent" xml:space="preserve">
     <value>splitContainer.Panel2</value>
   </data>
-  <data name="&gt;&gt;blueBorder.ZOrder" xml:space="preserve">
+  <data name=">>blueBorder.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
@@ -480,16 +480,16 @@
   <data name="deprecationBanner.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;deprecationBanner.Name" xml:space="preserve">
+  <data name=">>deprecationBanner.Name" xml:space="preserve">
     <value>deprecationBanner</value>
   </data>
-  <data name="&gt;&gt;deprecationBanner.Type" xml:space="preserve">
+  <data name=">>deprecationBanner.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DeprecationBanner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;deprecationBanner.Parent" xml:space="preserve">
+  <data name=">>deprecationBanner.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;deprecationBanner.ZOrder" xml:space="preserve">
+  <data name=">>deprecationBanner.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -513,16 +513,16 @@
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
@@ -543,10 +543,10 @@
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>850, 750</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>WlbConfigurationDialog</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.VerticallyTabbedDialog, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

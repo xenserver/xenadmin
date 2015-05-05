@@ -135,16 +135,16 @@
   <data name="weekView1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;weekView1.Name" xml:space="preserve">
+  <data name=">>weekView1.Name" xml:space="preserve">
     <value>weekView1</value>
   </data>
-  <data name="&gt;&gt;weekView1.Type" xml:space="preserve">
+  <data name=">>weekView1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.Wlb.WeekView, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;weekView1.Parent" xml:space="preserve">
+  <data name=">>weekView1.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;weekView1.ZOrder" xml:space="preserve">
+  <data name=">>weekView1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="lvTaskList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -177,16 +177,16 @@
   <data name="lvTaskList.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;lvTaskList.Name" xml:space="preserve">
+  <data name=">>lvTaskList.Name" xml:space="preserve">
     <value>lvTaskList</value>
   </data>
-  <data name="&gt;&gt;lvTaskList.Type" xml:space="preserve">
+  <data name=">>lvTaskList.Type" xml:space="preserve">
     <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lvTaskList.Parent" xml:space="preserve">
+  <data name=">>lvTaskList.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;lvTaskList.ZOrder" xml:space="preserve">
+  <data name=">>lvTaskList.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -204,16 +204,16 @@
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+  <data name=">>panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+  <data name=">>panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+  <data name=">>panel1.Parent" xml:space="preserve">
     <value>panelScheduleList</value>
   </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+  <data name=">>panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="flowLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
@@ -237,16 +237,16 @@
   <data name="lableScheduledTaskBlurb.Text" xml:space="preserve">
     <value>Specify the times when you want Workload Balancing to change the Optimization Mode automatically.</value>
   </data>
-  <data name="&gt;&gt;lableScheduledTaskBlurb.Name" xml:space="preserve">
+  <data name=">>lableScheduledTaskBlurb.Name" xml:space="preserve">
     <value>lableScheduledTaskBlurb</value>
   </data>
-  <data name="&gt;&gt;lableScheduledTaskBlurb.Type" xml:space="preserve">
+  <data name=">>lableScheduledTaskBlurb.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lableScheduledTaskBlurb.Parent" xml:space="preserve">
+  <data name=">>lableScheduledTaskBlurb.Parent" xml:space="preserve">
     <value>flowLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;lableScheduledTaskBlurb.ZOrder" xml:space="preserve">
+  <data name=">>lableScheduledTaskBlurb.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="flowLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -264,16 +264,16 @@
   <data name="flowLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel2.Name" xml:space="preserve">
+  <data name=">>flowLayoutPanel2.Name" xml:space="preserve">
     <value>flowLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel2.Type" xml:space="preserve">
+  <data name=">>flowLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel2.Parent" xml:space="preserve">
+  <data name=">>flowLayoutPanel2.Parent" xml:space="preserve">
     <value>panelScheduleList</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name=">>flowLayoutPanel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="buttonDelete.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -300,16 +300,16 @@
   <data name="buttonDelete.Text" xml:space="preserve">
     <value>&amp;Delete</value>
   </data>
-  <data name="&gt;&gt;buttonDelete.Name" xml:space="preserve">
+  <data name=">>buttonDelete.Name" xml:space="preserve">
     <value>buttonDelete</value>
   </data>
-  <data name="&gt;&gt;buttonDelete.Type" xml:space="preserve">
+  <data name=">>buttonDelete.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonDelete.Parent" xml:space="preserve">
+  <data name=">>buttonDelete.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;buttonDelete.ZOrder" xml:space="preserve">
+  <data name=">>buttonDelete.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="buttonEdit.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -336,16 +336,16 @@
   <data name="buttonEdit.Text" xml:space="preserve">
     <value>&amp;Edit...</value>
   </data>
-  <data name="&gt;&gt;buttonEdit.Name" xml:space="preserve">
+  <data name=">>buttonEdit.Name" xml:space="preserve">
     <value>buttonEdit</value>
   </data>
-  <data name="&gt;&gt;buttonEdit.Type" xml:space="preserve">
+  <data name=">>buttonEdit.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonEdit.Parent" xml:space="preserve">
+  <data name=">>buttonEdit.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;buttonEdit.ZOrder" xml:space="preserve">
+  <data name=">>buttonEdit.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="buttonAddNew.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -372,16 +372,16 @@
   <data name="buttonAddNew.Text" xml:space="preserve">
     <value>&amp;Add New...</value>
   </data>
-  <data name="&gt;&gt;buttonAddNew.Name" xml:space="preserve">
+  <data name=">>buttonAddNew.Name" xml:space="preserve">
     <value>buttonAddNew</value>
   </data>
-  <data name="&gt;&gt;buttonAddNew.Type" xml:space="preserve">
+  <data name=">>buttonAddNew.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonAddNew.Parent" xml:space="preserve">
+  <data name=">>buttonAddNew.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;buttonAddNew.ZOrder" xml:space="preserve">
+  <data name=">>buttonAddNew.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -402,16 +402,16 @@
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Name" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.Parent" xml:space="preserve">
     <value>panelScheduleList</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
+  <data name=">>flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="panelScheduleList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -429,16 +429,16 @@
   <data name="panelScheduleList.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;panelScheduleList.Name" xml:space="preserve">
+  <data name=">>panelScheduleList.Name" xml:space="preserve">
     <value>panelScheduleList</value>
   </data>
-  <data name="&gt;&gt;panelScheduleList.Type" xml:space="preserve">
+  <data name=">>panelScheduleList.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panelScheduleList.Parent" xml:space="preserve">
+  <data name=">>panelScheduleList.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;panelScheduleList.ZOrder" xml:space="preserve">
+  <data name=">>panelScheduleList.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -450,40 +450,40 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>710, 344</value>
   </data>
-  <data name="&gt;&gt;columnHeaderHidden.Name" xml:space="preserve">
+  <data name=">>columnHeaderHidden.Name" xml:space="preserve">
     <value>columnHeaderHidden</value>
   </data>
-  <data name="&gt;&gt;columnHeaderHidden.Type" xml:space="preserve">
+  <data name=">>columnHeaderHidden.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnHeaderMode.Name" xml:space="preserve">
+  <data name=">>columnHeaderMode.Name" xml:space="preserve">
     <value>columnHeaderMode</value>
   </data>
-  <data name="&gt;&gt;columnHeaderMode.Type" xml:space="preserve">
+  <data name=">>columnHeaderMode.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnHeaderDay.Name" xml:space="preserve">
+  <data name=">>columnHeaderDay.Name" xml:space="preserve">
     <value>columnHeaderDay</value>
   </data>
-  <data name="&gt;&gt;columnHeaderDay.Type" xml:space="preserve">
+  <data name=">>columnHeaderDay.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnHeaderTime.Name" xml:space="preserve">
+  <data name=">>columnHeaderTime.Name" xml:space="preserve">
     <value>columnHeaderTime</value>
   </data>
-  <data name="&gt;&gt;columnHeaderTime.Type" xml:space="preserve">
+  <data name=">>columnHeaderTime.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnHeaderEnabled.Name" xml:space="preserve">
+  <data name=">>columnHeaderEnabled.Name" xml:space="preserve">
     <value>columnHeaderEnabled</value>
   </data>
-  <data name="&gt;&gt;columnHeaderEnabled.Type" xml:space="preserve">
+  <data name=">>columnHeaderEnabled.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>WlbOptModeScheduler</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

@@ -136,16 +136,16 @@
     <value>从可用服务器列表中选择一个或多个服务器。
 无法应用所选更新的服务器在此列表中显示为已禁用。</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+  <data name=">>label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name=">>label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name=">>label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name=">>label1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="buttonSelectAll.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -163,16 +163,16 @@
   <data name="buttonSelectAll.Text" xml:space="preserve">
     <value>全选(&amp;S)</value>
   </data>
-  <data name="&gt;&gt;buttonSelectAll.Name" xml:space="preserve">
+  <data name=">>buttonSelectAll.Name" xml:space="preserve">
     <value>buttonSelectAll</value>
   </data>
-  <data name="&gt;&gt;buttonSelectAll.Type" xml:space="preserve">
+  <data name=">>buttonSelectAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonSelectAll.Parent" xml:space="preserve">
+  <data name=">>buttonSelectAll.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;buttonSelectAll.ZOrder" xml:space="preserve">
+  <data name=">>buttonSelectAll.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="buttonClearAll.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -190,16 +190,16 @@
   <data name="buttonClearAll.Text" xml:space="preserve">
     <value>全部清除(&amp;C)</value>
   </data>
-  <data name="&gt;&gt;buttonClearAll.Name" xml:space="preserve">
+  <data name=">>buttonClearAll.Name" xml:space="preserve">
     <value>buttonClearAll</value>
   </data>
-  <data name="&gt;&gt;buttonClearAll.Type" xml:space="preserve">
+  <data name=">>buttonClearAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonClearAll.Parent" xml:space="preserve">
+  <data name=">>buttonClearAll.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;buttonClearAll.ZOrder" xml:space="preserve">
+  <data name=">>buttonClearAll.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="dataGridViewHosts.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -265,16 +265,16 @@
   <data name="dataGridViewHosts.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;dataGridViewHosts.Name" xml:space="preserve">
+  <data name=">>dataGridViewHosts.Name" xml:space="preserve">
     <value>dataGridViewHosts</value>
   </data>
-  <data name="&gt;&gt;dataGridViewHosts.Type" xml:space="preserve">
+  <data name=">>dataGridViewHosts.Type" xml:space="preserve">
     <value>XenAdmin.Wizards.PatchingWizard.PatchingWizard_SelectServers+PatchingHostsDataGridView, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dataGridViewHosts.Parent" xml:space="preserve">
+  <data name=">>dataGridViewHosts.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;dataGridViewHosts.ZOrder" xml:space="preserve">
+  <data name=">>dataGridViewHosts.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -286,40 +286,40 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>608, 405</value>
   </data>
-  <data name="&gt;&gt;ColumnPoolCheckBox.Name" xml:space="preserve">
+  <data name=">>ColumnPoolCheckBox.Name" xml:space="preserve">
     <value>ColumnPoolCheckBox</value>
   </data>
-  <data name="&gt;&gt;ColumnPoolCheckBox.Type" xml:space="preserve">
+  <data name=">>ColumnPoolCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnExpander.Name" xml:space="preserve">
+  <data name=">>ColumnExpander.Name" xml:space="preserve">
     <value>ColumnExpander</value>
   </data>
-  <data name="&gt;&gt;ColumnExpander.Type" xml:space="preserve">
+  <data name=">>ColumnExpander.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnPoolIconHostCheck.Name" xml:space="preserve">
+  <data name=">>ColumnPoolIconHostCheck.Name" xml:space="preserve">
     <value>ColumnPoolIconHostCheck</value>
   </data>
-  <data name="&gt;&gt;ColumnPoolIconHostCheck.Type" xml:space="preserve">
+  <data name=">>ColumnPoolIconHostCheck.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnName.Name" xml:space="preserve">
+  <data name=">>ColumnName.Name" xml:space="preserve">
     <value>ColumnName</value>
   </data>
-  <data name="&gt;&gt;ColumnName.Type" xml:space="preserve">
+  <data name=">>ColumnName.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnVersion.Name" xml:space="preserve">
+  <data name=">>ColumnVersion.Name" xml:space="preserve">
     <value>ColumnVersion</value>
   </data>
-  <data name="&gt;&gt;ColumnVersion.Type" xml:space="preserve">
+  <data name=">>ColumnVersion.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+  <data name=">>$this.Name" xml:space="preserve">
     <value>PatchingWizard_SelectServers</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+  <data name=">>$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
