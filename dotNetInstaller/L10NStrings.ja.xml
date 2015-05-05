@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<text>
-	<component allow_continue_on_error="偽" command=""#CABPATH\dotNetFx40_Full_setup.exe" /norestart" command_basic=""#CABPATH\dotNetFx40_Full_setup.exe" /norestart" command_silent=""#CABPATH\dotNetFx40_Full_setup.exe" /passive /norestart" default_continue_on_error="偽" disable_wow64_fs_redirection="偽" display_name="Microsoft .NET Framework 4.0" execution_method="CreateProcess" failed_exec_command_continue="前提条件の %s をダウンロードまたはインストール中にエラーが発生しました。 &#13;
-&#13;
-インターネットを利用できるか確認するか、または Microsoft .Net Framework 4 を手動でインストールしてください。" hide_window="偽" id="Microsoft .NET Framework 4.0 - Full" installcompletemessage="" must_reboot_required="偽" mustreboot="偽" note="English - WebSetup - .NET Framework 4.0 - Windows XP SP3 以降のすべてのオペレーティング システムに完全対応 (インストールチェック)" os_filter="" os_filter_lcid="1041" os_filter_max="" os_filter_min="winXPsp3" processor_architecture_filter="" reboot_required="" required_install="真" required_uninstall="偽" returncodes_reboot="3010" returncodes_success="0" selected_install="真" selected_uninstall="偽" show_cab_dialog="偽" show_progress_dialog="真" status_installed="" status_notinstalled="" supports_install="真" supports_uninstall="偽" type="cmd" uninstall_command="" uninstall_command_basic="" uninstall_command_silent="" uninstall_display_name="" uninstallcompletemessage="">
-		<installedcheck comparison="match" defaultvalue="偽" description="インストール状況のチェック" fieldname="インストール" fieldtype="REG_DWORD" fieldvalue="1" path="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full" rootkey="HKEY_LOCAL_MACHINE" type="check_registry_value" wowoption="なし"/>
-		<embedfile sourcefilepath="dotNetFx40_Full_setup.exe" targetfilepath=""/>
-	</component>
-</text>

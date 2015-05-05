@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<text>
-	<component allow_continue_on_error="False" command=""#CABPATH\dotNetFx40_Full_setup.exe" /norestart" command_basic=""#CABPATH\dotNetFx40_Full_setup.exe" /norestart" command_silent=""#CABPATH\dotNetFx40_Full_setup.exe" /passive /norestart" default_continue_on_error="False" disable_wow64_fs_redirection="False" display_name="Microsoft .NET Framework 4.0" execution_method="CreateProcess" failed_exec_command_continue="下载或安装必备项 %s 时出错。&#13;
-&#13;
-请确保 Internet 可用，或者手动安装 Microsoft .Net Framework 4。" hide_window="False" id="Microsoft .NET Framework 4.0 - Full" installcompletemessage="" must_reboot_required="False" mustreboot="False" note="English - WebSetup - .NET Framework 4.0 - Full，适用于 Windows XP SP3 及更高版本的所有操作系统(安装检查)" os_filter="" os_filter_lcid="1041" os_filter_max="" os_filter_min="winXPsp3" processor_architecture_filter="" reboot_required="" required_install="True" required_uninstall="False" returncodes_reboot="3010" returncodes_success="0" selected_install="True" selected_uninstall="False" show_cab_dialog="False" show_progress_dialog="True" status_installed="" status_notinstalled="" supports_install="True" supports_uninstall="False" type="cmd" uninstall_command="" uninstall_command_basic="" uninstall_command_silent="" uninstall_display_name="" uninstallcompletemessage="">
-		<installedcheck comparison="match" defaultvalue="False" description="安装检查" fieldname="安装" fieldtype="REG_DWORD" fieldvalue="1" path="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full" rootkey="HKEY_LOCAL_MACHINE" type="check_registry_value" wowoption="无"/>
-		<embedfile sourcefilepath="dotNetFx40_Full_setup.exe" targetfilepath=""/>
-	</component>
-</text>
