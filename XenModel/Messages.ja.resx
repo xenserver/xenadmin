@@ -2844,7 +2844,7 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>イメージ</value>
   </data>
   <data name="CONTAINER_ON_VM_TITLE" xml:space="preserve">
-    <value>'{1}'  の {0} {2}</value>
+    <value>'{1}' {2} の {0}</value>
   </data>
   <data name="CONTAINER_PORTS" xml:space="preserve">
     <value>ポート</value>
@@ -3743,7 +3743,7 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>コンテナ詳細</value>
   </data>
   <data name="DOCKER_INFO_API_VERSION" xml:space="preserve">
-    <value>Api バージョン</value>
+    <value>Api Version</value>
   </data>
   <data name="DOCKER_INFO_ARCH" xml:space="preserve">
     <value>Arch</value>
@@ -3806,7 +3806,7 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>スワップ制限</value>
   </data>
   <data name="DOCKER_INFO_VERSION" xml:space="preserve">
-    <value>バージョン</value>
+    <value>Version</value>
   </data>
   <data name="DOCKER_PROCESS_TAB_TITLE" xml:space="preserve">
     <value>コンテナ プロセス</value>
@@ -8938,7 +8938,7 @@ XenServer では、CPU の一部の機能をマスターに合わせて無効に
     <value>プラグイン '{0}' のコール</value>
   </data>
   <data name="PLUGIN_VERSION" xml:space="preserve">
-    <value>バージョン</value>
+    <value>Version</value>
   </data>
   <data name="PM_MODE_CUSTOM" xml:space="preserve">
     <value>カスタム</value>
@@ -10135,7 +10135,7 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
     <value>XenServer ビルド日</value>
   </data>
   <data name="SOFTWARE_VERSION_PRODUCT_VERSION" xml:space="preserve">
-    <value>XenServer バージョン</value>
+    <value>XenServer version</value>
   </data>
   <data name="SOFTWARE_VERSION_XCP_BUILD_NUMBER" xml:space="preserve">
     <value>XCP ビルド番号</value>
@@ -10144,7 +10144,7 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
     <value>XCP ビルド日</value>
   </data>
   <data name="SOFTWARE_VERSION_XCP_PLATFORM_VERSION" xml:space="preserve">
-    <value>XCP バージョン</value>
+    <value>XCP version</value>
   </data>
   <data name="SOLUTION_AUTHENTICATION" xml:space="preserve">
     <value>正しいユーザー名とパスワードを使用して再試行してください。</value>
@@ -10555,7 +10555,7 @@ StorageLink Gateway を使用する VM の XenServer 6.0 へのアップグレ�
     <value>日</value>
   </data>
   <data name="SUPP_PACK_DESCTIPTION" xml:space="preserve">
-    <value>{0} (バージョン {1})</value>
+    <value>{0} (Version {1})</value>
   </data>
   <data name="SUPP_PACK_INSTALL_FAILED" xml:space="preserve">
     <value>'{1}' 上にサプリメンタル パック '{0}' をインストールできませんでした。</value>
@@ -11508,7 +11508,7 @@ XenServer ホストにサプリメンタル パックを手動でインストー
     <value>SR '{1}' から SR '{2}' へのディスク '{0}' のコピー</value>
   </data>
   <data name="VDI_ON_SR_TITLE" xml:space="preserve">
-    <value>'{1}'  の {0} {2}</value>
+    <value>'{1}' {2} の {0}</value>
   </data>
   <data name="VENDOR_NAME" xml:space="preserve">
     <value>ベンダ</value>
